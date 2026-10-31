@@ -1,0 +1,1093 @@
+{
+  "bench": "vb-1.1",
+  "final": {
+    "addback": {
+      "decisions": {
+        "face.gend_clip_l14": "rejected",
+        "img.commfor384": "rejected"
+      },
+      "end_set_changes": false,
+      "order_dependent": [],
+      "source": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-addback-admissions.json",
+        "sha256": "7ad9e7cbe75572bc93660b077dd4874db3221e9012c3acd4e3669308c07f3551"
+      }
+    },
+    "blocked": [],
+    "detectors": "img.dda,img.dfdc_b7,img.hf.ateeqq,img.hf.dima806",
+    "end_set": [
+      {
+        "detector_id": "img.dda",
+        "gate": []
+      },
+      {
+        "detector_id": "img.dfdc_b7",
+        "gate": [
+          "has_face"
+        ]
+      },
+      {
+        "detector_id": "img.hf.ateeqq",
+        "gate": [
+          "!has_face"
+        ]
+      },
+      {
+        "detector_id": "img.hf.dima806",
+        "gate": []
+      }
+    ],
+    "gates": "img.dfdc_b7=has_face;img.hf.ateeqq=!has_face",
+    "joint_check": {
+      "A3a": {
+        "ci95_lo": 0.1071055768633693,
+        "lgo_macro_delta": 0.14277735059036883,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "pass": true,
+        "qualifying": [
+          "family flux2",
+          "family gpt-4o-image-1",
+          "family imagen3",
+          "family imagen4",
+          "family modern-t2i-faces",
+          "family nano-banana"
+        ]
+      },
+      "A4": {
+        "blocking_strata": [],
+        "pass": true,
+        "pooled_ci95_hi": 0.01088434596500547,
+        "pooled_ci95_lo": -0.008685917378151206,
+        "pooled_delta": 0.0014443584394877723
+      },
+      "checks": {
+        "A3": true,
+        "A4": true,
+        "served_rule_fpr": true
+      },
+      "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.dda,img.dfdc_b7,img.hf.ateeqq,img.hf.dima806 GATES='img.dfdc_b7=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet REFERENCE=img.commfor384,img.dda,img.dfdc_b7 REFERENCE_GATES='img.dfdc_b7=has_face' REFERENCE_LABEL=fuser-image-2.1.0 ABLATE_BOOTSTRAP=2000",
+      "lgo_macro_ci95": {
+        "B": 2000,
+        "hi": 0.1782736611625248,
+        "lo": 0.1071055768633693,
+        "valid": 2000
+      },
+      "lgo_macro_delta": 0.14277735059036883,
+      "passed": true,
+      "rule": "A3 (A3a or A3b) and A4 pass, and S_end's served-rule weighted out-of-fold FPR ≤ 6.0 % (D-53)",
+      "served_rule_weighted_fpr": {
+        "with": 0.049585385879333754,
+        "without": 0.052702734364677005
+      },
+      "source": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-joint/comparison-fuser-image-2.1.0.json",
+        "sha256": "88220514db08e03e65766eba498bbb63aea38d136cbc4e76812b5a762a61961a"
+      }
+    },
+    "records": {
+      "path": "docs/v2/bench/admissions/v2.1.1-admissions.json",
+      "sha256": "c729828cc0f29dd4df3d15e0d33232abebcca9d587431d5ad77286487d3c681f"
+    }
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "pool": {
+    "excluded": {
+      "img.forensic.copymove": "own lane (partial_edit); A2 not established",
+      "img.forensic.ela": "own lane (partial_edit); A2 fails",
+      "img.forensic.jpeg_dq": "own lane (partial_edit); A2 fails",
+      "img.forensic.noise": "own lane (partial_edit); A2 fails",
+      "img.forensic.spectrum": "A2 fails",
+      "img.hf.haywoodsloan": "A1 fails (licence class unknown is not commercial (D-04))",
+      "img.meta.consistency": "own lane (provenance); A2 not established; A6 not established",
+      "img.meta.exif": "own lane (provenance); A2 not established; A6 not established",
+      "img.meta.generator": "own lane (provenance); A2 not established; A6 not established",
+      "img.meta.qtables": "own lane (provenance); A2 not established; A6 not established",
+      "img.veritas_probe.pe_core_l14": "A1 not established (parity not established)",
+      "img.watermark.dwtdct": "refused under D-50; own lane (provenance); A2 not established; A6 not established",
+      "pe.copymove.pairs": "own lane (partial_edit); A2 fails",
+      "pe.jpeg_dq.support": "own lane (partial_edit); A2 fails",
+      "pe.mesorch.integrity": "own lane (partial_edit); A1 not established (parity not established); A2 fails",
+      "pe.mesorch.region_area": "own lane (partial_edit); A1 not established (parity not established); A2 fails"
+    },
+    "members": [
+      {
+        "detector_id": "face.gend_clip_l14",
+        "gate": [
+          "has_face"
+        ]
+      },
+      {
+        "detector_id": "img.commfor384",
+        "gate": []
+      },
+      {
+        "detector_id": "img.dda",
+        "gate": []
+      },
+      {
+        "detector_id": "img.dfdc_b7",
+        "gate": [
+          "has_face"
+        ]
+      },
+      {
+        "detector_id": "img.hf.ateeqq",
+        "gate": []
+      },
+      {
+        "detector_id": "img.hf.dima806",
+        "gate": []
+      }
+    ],
+    "source": {
+      "path": "docs/v2/bench/admissions/v2.1.1c-pass1-admissions.json",
+      "sha256": "6f21857929c6fb3f6b263697c32f7853a7eaca777335cf7feb528eef29765aa3"
+    }
+  },
+  "rule": "D-53",
+  "schema": "veritas.elimination/1",
+  "status": "final: J-5 fits the end set",
+  "steps": [
+    {
+      "base": [
+        {
+          "detector_id": "face.gend_clip_l14",
+          "gate": [
+            "has_face"
+          ]
+        },
+        {
+          "detector_id": "img.commfor384",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dda",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dfdc_b7",
+          "gate": [
+            "has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.ateeqq",
+          "gate": []
+        },
+        {
+          "detector_id": "img.hf.dima806",
+          "gate": []
+        }
+      ],
+      "base_words": "{face.gend_clip_l14 has_face, img.commfor384, img.dda, img.dfdc_b7 has_face, img.hf.ateeqq, img.hf.dima806}",
+      "change": {
+        "a3a_lower": -0.021664540013013947,
+        "action": "remove",
+        "blocking_first": false,
+        "blocking_strata": [],
+        "clause": "(c)",
+        "detector_id": "face.gend_clip_l14",
+        "next_base": [
+          {
+            "detector_id": "img.commfor384",
+            "gate": []
+          },
+          {
+            "detector_id": "img.dda",
+            "gate": []
+          },
+          {
+            "detector_id": "img.dfdc_b7",
+            "gate": [
+              "has_face"
+            ]
+          },
+          {
+            "detector_id": "img.hf.ateeqq",
+            "gate": []
+          },
+          {
+            "detector_id": "img.hf.dima806",
+            "gate": []
+          }
+        ],
+        "not_admitted": [
+          "face.gend_clip_l14",
+          "img.hf.dima806"
+        ],
+        "reason": "face.gend_clip_l14 has the lowest A3a lower bound among the not-admitted members",
+        "tie_break": "none"
+      },
+      "jobs": [
+        {
+          "ended_at": "2026-09-17T08:55:55Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step1",
+          "started_at": "2026-09-17T08:53:07Z",
+          "state": "exited"
+        }
+      ],
+      "members": {
+        "face.gend_clip_l14": {
+          "a3a_delta": -0.012153383365924975,
+          "a3a_lower": -0.021664540013013947,
+          "blocking_strata": [],
+          "decision": "rejected",
+          "gate": [
+            "has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.010934786620527177,
+              "lo": -0.011071417338668307,
+              "valid": 2000
+            },
+            "delta": -0.0018203014106285276,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.04985775045888476
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.04964613654121038
+          }
+        },
+        "img.commfor384": {
+          "a3a_delta": 0.014420422256953114,
+          "a3a_lower": -0.00843479132708485,
+          "blocking_strata": [],
+          "decision": "admitted",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.006716456750969414,
+              "lo": -0.008221374400201096,
+              "valid": 2000
+            },
+            "delta": -0.0006711995041029858,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.04870864855235922
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.049623510822288414
+          }
+        },
+        "img.dda": {
+          "a3a_delta": 0.14531935334291712,
+          "a3a_lower": 0.11660908084868848,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.007397257687593396,
+              "lo": -0.006044005641980487,
+              "valid": 2000
+            },
+            "delta": 0.0007729692160695217,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.047264479832186714
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.04968476587536377
+          }
+        },
+        "img.dfdc_b7": {
+          "a3a_delta": 0.02919330493994965,
+          "a3a_lower": 0.015769374440020925,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.006896417832321956,
+              "lo": -0.008682705620157572,
+              "valid": 2000
+            },
+            "delta": -0.0008208273801693297,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.048858276428425565
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.04954623378561496
+          }
+        },
+        "img.hf.ateeqq": {
+          "a3a_delta": 0.026800958097768557,
+          "a3a_lower": 0.006753996367310112,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.007225197329258245,
+              "lo": -0.0069121432213616486,
+              "valid": 2000
+            },
+            "delta": 0.00024151863532605178,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.04779593041293018
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.049455743065371385
+          }
+        },
+        "img.hf.dima806": {
+          "a3a_delta": -0.005649371323437236,
+          "a3a_lower": -0.020180067405567405,
+          "blocking_strata": [],
+          "decision": "rejected",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5062197413315273,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.004624685735985926,
+              "lo": -0.0034376005997913657,
+              "valid": 2000
+            },
+            "delta": 0.0004988152939308099,
+            "n": 2694,
+            "with": 0.048037449048256235,
+            "without": 0.047538633754325425
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049583242626112856,
+            "without": 0.04980808159883467
+          }
+        }
+      },
+      "record": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-step1-admissions.json",
+        "sha256": "3ba19e561be1ee1b3e933a9295ccf9d320a961ac4f83f357ab1527830038b33d"
+      },
+      "step": 1,
+      "tables": [
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-face.gend_clip_l14.json",
+          "sha256": "b764c9b79611c688c96b442c41254895d7bcf0f39a235aff66a199fec0afa487"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-img.commfor384.json",
+          "sha256": "76fcf9851c572379f0db0d26da91d548ad3dab22498429c87277aca98b451a23"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-img.dda.json",
+          "sha256": "f4856450f9e68e7282953f2f8f098ea9a3df27531e3d54722db74df5bb151ea4"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-img.dfdc_b7.json",
+          "sha256": "525391dadef3408637f3892b93b31e6716f6de16b43dcb763cbbf691fba99325"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-img.hf.ateeqq.json",
+          "sha256": "4e714d499c0ce59148b27caae5f9d96cd087edb3959e261507fbba08e2863a26"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step1/ablation-img.hf.dima806.json",
+          "sha256": "22a172efd7281c8a0f10f778169ea839d9dbca016b3c4a94d175ed31b1757e1d"
+        }
+      ]
+    },
+    {
+      "base": [
+        {
+          "detector_id": "img.commfor384",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dda",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dfdc_b7",
+          "gate": [
+            "has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.ateeqq",
+          "gate": []
+        },
+        {
+          "detector_id": "img.hf.dima806",
+          "gate": []
+        }
+      ],
+      "base_words": "{img.commfor384, img.dda, img.dfdc_b7 has_face, img.hf.ateeqq, img.hf.dima806}",
+      "change": {
+        "action": "gate",
+        "admitted_retries": [
+          "img.dda",
+          "img.hf.ateeqq"
+        ],
+        "clause": "(b)",
+        "detector_id": "img.hf.ateeqq",
+        "gate": [
+          "!has_face"
+        ],
+        "gated_a3a_lower": 0.04576312011169171,
+        "next_base": [
+          {
+            "detector_id": "img.commfor384",
+            "gate": []
+          },
+          {
+            "detector_id": "img.dda",
+            "gate": []
+          },
+          {
+            "detector_id": "img.dfdc_b7",
+            "gate": [
+              "has_face"
+            ]
+          },
+          {
+            "detector_id": "img.hf.ateeqq",
+            "gate": [
+              "!has_face"
+            ]
+          },
+          {
+            "detector_id": "img.hf.dima806",
+            "gate": []
+          }
+        ],
+        "not_admitted": [
+          "img.dda",
+          "img.hf.ateeqq",
+          "img.hf.dima806"
+        ],
+        "reason": "gated retry admits img.hf.ateeqq=!has_face with the highest gated A3a lower bound",
+        "tie_break": "none"
+      },
+      "jobs": [
+        {
+          "ended_at": "2026-09-17T08:58:45Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step2",
+          "started_at": "2026-09-17T08:56:32Z",
+          "state": "exited"
+        },
+        {
+          "ended_at": "2026-09-17T09:00:22Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step2-gated-ateeqq",
+          "started_at": "2026-09-17T08:59:54Z",
+          "state": "exited"
+        },
+        {
+          "ended_at": "2026-09-17T08:59:50Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step2-gated-dda",
+          "started_at": "2026-09-17T08:59:24Z",
+          "state": "exited"
+        }
+      ],
+      "members": {
+        "img.commfor384": {
+          "a3a_delta": 0.026245411427100407,
+          "a3a_lower": 0.00158644755481433,
+          "blocking_strata": [],
+          "decision": "admitted",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5183731246974522,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.006065521164390643,
+              "lo": -0.0066722841980997784,
+              "valid": 2000
+            },
+            "delta": 5.176584241228105e-05,
+            "n": 2694,
+            "with": 0.04985775045888476,
+            "without": 0.04980598461647248
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04964613654121038,
+            "without": 0.04966921531926083
+          }
+        },
+        "img.dda": {
+          "a3a_delta": 0.14040003405353418,
+          "a3a_lower": 0.11065760935647295,
+          "blocking_strata": [
+            "R5"
+          ],
+          "decision": "admitted_context_gated",
+          "gate": [],
+          "gated_a3a_lower": 0.04187750618385741,
+          "lgo_macro_base": 0.5183731246974522,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.0102087817279406,
+              "lo": -0.006739873728313232,
+              "valid": 2000
+            },
+            "delta": 0.0015410162608927164,
+            "n": 2694,
+            "with": 0.04985775045888476,
+            "without": 0.048316734197992046
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04964613654121038,
+            "without": 0.04976270301617529
+          }
+        },
+        "img.dfdc_b7": {
+          "a3a_delta": 0.0631420340621508,
+          "a3a_lower": 0.0438861792268666,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5183731246974522,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.00745551372301896,
+              "lo": -0.009322885526519486,
+              "valid": 2000
+            },
+            "delta": -0.00045306272659097896,
+            "n": 2694,
+            "with": 0.04985775045888476,
+            "without": 0.05031081318547574
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04964613654121038,
+            "without": 0.049537825478058344
+          }
+        },
+        "img.hf.ateeqq": {
+          "a3a_delta": 0.037324086581204285,
+          "a3a_lower": 0.016394397537325415,
+          "blocking_strata": [
+            "R5"
+          ],
+          "decision": "admitted_context_gated",
+          "gate": [],
+          "gated_a3a_lower": 0.04576312011169171,
+          "lgo_macro_base": 0.5183731246974522,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.010660121990885814,
+              "lo": -0.008358197272183631,
+              "valid": 2000
+            },
+            "delta": 0.0007745045707134302,
+            "n": 2694,
+            "with": 0.04985775045888476,
+            "without": 0.04908324588817133
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04964613654121038,
+            "without": 0.04968123403147488
+          }
+        },
+        "img.hf.dima806": {
+          "a3a_delta": 0.018156538671775135,
+          "a3a_lower": 0.004198191264005166,
+          "blocking_strata": [],
+          "decision": "rejected",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5183731246974522,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.004208871930489445,
+              "lo": -0.004001198491590216,
+              "valid": 2000
+            },
+            "delta": 0.00017129705960738234,
+            "n": 2694,
+            "with": 0.04985775045888476,
+            "without": 0.04968645339927738
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04964613654121038,
+            "without": 0.04942177630434243
+          }
+        }
+      },
+      "record": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-step2-admissions.json",
+        "sha256": "e7f28b0a4f0201e9befa2ae085d083066c1bd464701d3e28c60ecebbd503a018"
+      },
+      "step": 2,
+      "tables": [
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2/ablation-img.commfor384.json",
+          "sha256": "6d0a1e62933cc7ee49ea1e81d536267bb12cc34ec03eef39e2b0135639c7d1db"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2/ablation-img.dda.json",
+          "sha256": "e630fbd7c57f3b2b70e646599bad01b958c4b5f3f12dca38eb1b92e76bf3cbea"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2/ablation-img.dfdc_b7.json",
+          "sha256": "5c074a320355c8a495616f029e45accaee2179349876b8a4f1ee005b8dc016a7"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2/ablation-img.hf.ateeqq.json",
+          "sha256": "80770028cdc6e2278ff47d0cd52de15734e91c8b734ce1fbb2e19b987ca42ed9"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2/ablation-img.hf.dima806.json",
+          "sha256": "412a4eabf09fb98acf7ac368cff971d89f36ae873701cf6b4314d2e6d69b50c9"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2-gated/ablation-img.dda.json",
+          "sha256": "aeb27ad5406b3af97eeb5ea2a332a904a0c39e69c7ac2dc10768ac8ce28ee140"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step2-gated/ablation-img.hf.ateeqq.json",
+          "sha256": "d82fa49907e35d7a2737a3b576b781094113f64e8c5766977097b7d20534bd95"
+        }
+      ]
+    },
+    {
+      "base": [
+        {
+          "detector_id": "img.commfor384",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dda",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dfdc_b7",
+          "gate": [
+            "has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.ateeqq",
+          "gate": [
+            "!has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.dima806",
+          "gate": []
+        }
+      ],
+      "base_words": "{img.commfor384, img.dda, img.dfdc_b7 has_face, img.hf.ateeqq !has_face, img.hf.dima806}",
+      "change": {
+        "a3a_lower": -0.0645466993787303,
+        "action": "remove",
+        "blocking_first": false,
+        "blocking_strata": [],
+        "clause": "(c)",
+        "detector_id": "img.commfor384",
+        "next_base": [
+          {
+            "detector_id": "img.dda",
+            "gate": []
+          },
+          {
+            "detector_id": "img.dfdc_b7",
+            "gate": [
+              "has_face"
+            ]
+          },
+          {
+            "detector_id": "img.hf.ateeqq",
+            "gate": [
+              "!has_face"
+            ]
+          },
+          {
+            "detector_id": "img.hf.dima806",
+            "gate": []
+          }
+        ],
+        "not_admitted": [
+          "img.commfor384",
+          "img.hf.dima806"
+        ],
+        "reason": "img.commfor384 has the lowest A3a lower bound among the not-admitted members",
+        "tie_break": "none"
+      },
+      "jobs": [
+        {
+          "ended_at": "2026-09-17T09:03:15Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step3",
+          "started_at": "2026-09-17T09:00:53Z",
+          "state": "exited"
+        }
+      ],
+      "members": {
+        "img.commfor384": {
+          "a3a_delta": -0.03612842238539837,
+          "a3a_lower": -0.0645466993787303,
+          "blocking_strata": [],
+          "decision": "rejected",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5481270021628005,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.006239574412695813,
+              "lo": -0.007795280339833376,
+              "valid": 2000
+            },
+            "delta": -0.0007579918900515945,
+            "n": 2694,
+            "with": 0.04950444880117967,
+            "without": 0.050262440691231265
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04962658062472257,
+            "without": 0.049585385879333754
+          }
+        },
+        "img.dda": {
+          "a3a_delta": 0.16409522552618128,
+          "a3a_lower": 0.13158424117501685,
+          "blocking_strata": [],
+          "decision": "admitted",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5481270021628005,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.00849326794515682,
+              "lo": -0.007039205120394846,
+              "valid": 2000
+            },
+            "delta": 0.000809256671484182,
+            "n": 2694,
+            "with": 0.04950444880117967,
+            "without": 0.04869519212969549
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04962658062472257,
+            "without": 0.04975347392749177
+          }
+        },
+        "img.dfdc_b7": {
+          "a3a_delta": 0.03498472647436768,
+          "a3a_lower": 0.02121860293452004,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5481270021628005,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.005349059227375746,
+              "lo": -0.007908823277743761,
+              "valid": 2000
+            },
+            "delta": -0.0007271589762045116,
+            "n": 2694,
+            "with": 0.04950444880117967,
+            "without": 0.05023160777738418
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04962658062472257,
+            "without": 0.05623748658289793
+          }
+        },
+        "img.hf.ateeqq": {
+          "a3a_delta": 0.06707796404655259,
+          "a3a_lower": 0.04576312011169171,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "!has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5481270021628005,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.008991293633180263,
+              "lo": -0.008025895828573253,
+              "valid": 2000
+            },
+            "delta": 0.00042120291300833806,
+            "n": 2694,
+            "with": 0.04950444880117967,
+            "without": 0.04908324588817133
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04962658062472257,
+            "without": 0.04968123403147488
+          }
+        },
+        "img.hf.dima806": {
+          "a3a_delta": 0.008408370277009691,
+          "a3a_lower": -0.0021573712662450104,
+          "blocking_strata": [],
+          "decision": "rejected",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5481270021628005,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.00397930283344704,
+              "lo": -0.004399810534536002,
+              "valid": 2000
+            },
+            "delta": -0.0002896266369171521,
+            "n": 2694,
+            "with": 0.04950444880117967,
+            "without": 0.04979407543809682
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.04962658062472257,
+            "without": 0.04977215711955159
+          }
+        }
+      },
+      "record": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-step3-admissions.json",
+        "sha256": "e2d5c90c735fb767e1dcee5b4753ab829feeaa65fa04b19eefd3450ae599e6f1"
+      },
+      "step": 3,
+      "tables": [
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step3/ablation-img.commfor384.json",
+          "sha256": "775e289371fb0791f6d827957f243f0c21f6ff4c300f88793feecb3449c27285"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step3/ablation-img.dda.json",
+          "sha256": "3c47bfad12122f030c639eb01a99ccc956577363d1f870db9ba13179aa47b80b"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step3/ablation-img.dfdc_b7.json",
+          "sha256": "fd212b1e1bc366887a6752b02eb53efb57e15a48d691d199c807d83530eaf525"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step3/ablation-img.hf.ateeqq.json",
+          "sha256": "829b3b7484c735131e850d6f8f2d60b52af7326a00cd66165fcccf4f9f6de90f"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step3/ablation-img.hf.dima806.json",
+          "sha256": "efbea4229f2f68bdc2567187091d7280584a0ea76af1f4eba1cc71162d37359d"
+        }
+      ]
+    },
+    {
+      "base": [
+        {
+          "detector_id": "img.dda",
+          "gate": []
+        },
+        {
+          "detector_id": "img.dfdc_b7",
+          "gate": [
+            "has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.ateeqq",
+          "gate": [
+            "!has_face"
+          ]
+        },
+        {
+          "detector_id": "img.hf.dima806",
+          "gate": []
+        }
+      ],
+      "base_words": "{img.dda, img.dfdc_b7 has_face, img.hf.ateeqq !has_face, img.hf.dima806}",
+      "change": {
+        "action": "stop",
+        "clause": "(a)",
+        "not_admitted": [],
+        "reason": "every member is admitted as it stands"
+      },
+      "jobs": [
+        {
+          "ended_at": "2026-09-17T09:05:28Z",
+          "exit_code": "0",
+          "failed_lines": [],
+          "name": "j3c1-step4",
+          "started_at": "2026-09-17T09:03:52Z",
+          "state": "exited"
+        }
+      ],
+      "members": {
+        "img.dda": {
+          "a3a_delta": 0.2876962837491664,
+          "a3a_lower": 0.24252422632620244,
+          "blocking_strata": [],
+          "decision": "admitted",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5842554245481989,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.011673810072718024,
+              "lo": -0.01481854102579517,
+              "valid": 2000
+            },
+            "delta": -0.00025684754491117623,
+            "n": 2694,
+            "with": 0.050262440691231265,
+            "without": 0.05051928823614244
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049585385879333754,
+            "without": 0.04979398576203513
+          }
+        },
+        "img.dfdc_b7": {
+          "a3a_delta": 0.07640457520538169,
+          "a3a_lower": 0.05457512531073289,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5842554245481989,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.004604803635700206,
+              "lo": -0.0046393119160332156,
+              "valid": 2000
+            },
+            "delta": 0.0002923331192293474,
+            "n": 2694,
+            "with": 0.050262440691231265,
+            "without": 0.04997010757200192
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049585385879333754,
+            "without": 0.067161948448421
+          }
+        },
+        "img.hf.ateeqq": {
+          "a3a_delta": 0.11291106992564476,
+          "a3a_lower": 0.0858671533464662,
+          "blocking_strata": [],
+          "decision": "admitted_context_gated",
+          "gate": [
+            "!has_face"
+          ],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5842554245481989,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.01074026468552917,
+              "lo": -0.011295421247180453,
+              "valid": 2000
+            },
+            "delta": -0.0005532153844116719,
+            "n": 2694,
+            "with": 0.050262440691231265,
+            "without": 0.05081565607564294
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049585385879333754,
+            "without": 0.04941059993612052
+          }
+        },
+        "img.hf.dima806": {
+          "a3a_delta": 0.01905173258773829,
+          "a3a_lower": 0.0002707298891667347,
+          "blocking_strata": [],
+          "decision": "admitted",
+          "gate": [],
+          "gated_a3a_lower": null,
+          "lgo_macro_base": 0.5842554245481989,
+          "pooled_fpr": {
+            "ci95": {
+              "B": 2000,
+              "hi": 0.004689118473468794,
+              "lo": -0.004855084780967274,
+              "valid": 2000
+            },
+            "delta": 5.0173974288227063e-05,
+            "n": 2694,
+            "with": 0.050262440691231265,
+            "without": 0.05021226671694304
+          },
+          "served_rule_weighted_fpr": {
+            "with": 0.049585385879333754,
+            "without": 0.04960499837366092
+          }
+        }
+      },
+      "record": {
+        "path": "docs/v2/bench/admissions/v2.1.1c1-step4-admissions.json",
+        "sha256": "a3d6c739bac699dfcf2b5866107b86e95bbf810d316968341daec356d562dc54"
+      },
+      "step": 4,
+      "tables": [
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step4/ablation-img.dda.json",
+          "sha256": "72cbe9328d6c003838263d9fc40b728e61ed880b9901ce9bf26f9cefdab3a200"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step4/ablation-img.dfdc_b7.json",
+          "sha256": "cf9d5009546d4ae639657e5827aedba967c0a6dd982fa0a2bc1a1a9522a3c6be"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step4/ablation-img.hf.ateeqq.json",
+          "sha256": "dc589a0221d056ce9f3e769b4d8944281d88951546046f390652667486c836fc"
+        },
+        {
+          "path": "docs/v2/bench/admissions/v2.1.1c1-step4/ablation-img.hf.dima806.json",
+          "sha256": "6d70a8b0b10ae7f015ab56559086e5d667c6af296b890be5f82446719a44dec1"
+        }
+      ]
+    }
+  ]
+}

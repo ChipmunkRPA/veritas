@@ -1,0 +1,186 @@
+{
+  "baseline_detectors": [
+    "aud.gustking_xlsr"
+  ],
+  "bench": {
+    "excluded_folds": [],
+    "excluded_items": {
+      "split:test": 151
+    },
+    "manifest_sha256": "d0224343a5c0ad38605ade2b5225deba3cb607ace950e2ae3a127ba9dab26d25",
+    "version": "vb-1.0-core"
+  },
+  "candidate": "aud.mo_thecreator_w2v2",
+  "command": "make calibrate MODALITY=audio SEED=7 BENCH=vb-1.0-core DETECTORS=aud.gustking_xlsr,aud.mo_thecreator_w2v2 ABLATE=aud.mo_thecreator_w2v2 ABLATE_BOOTSTRAP=2000",
+  "contamination_card": true,
+  "criteria": {
+    "A3": {
+      "pass": null,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": null,
+      "lgo_macro_delta": null,
+      "pass": null,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": null,
+      "pass": null,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "failing_strata": [
+        "A-bonafide"
+      ],
+      "pass": false,
+      "rule": "ΔFPR at τ_0.05 ≤ 0.5 pt in every real stratum and paired-bootstrap upper bound ≤ 1.0 pt"
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.7821621621621622,
+      "without": 0.7903603603603604
+    },
+    "fpr_per_stratum": {
+      "A-bonafide": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.04225352112676056,
+          "lo": -0.04055442428730098,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 75,
+        "with": 0.04,
+        "without": 0.04
+      }
+    },
+    "recall_per_family": {
+      "asvspoof2021-df": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.10526315789473684,
+          "lo": -0.3157894736842105,
+          "valid": 2000
+        },
+        "delta": -0.10526315789473684,
+        "n": 19,
+        "with": 0.15789473684210525,
+        "without": 0.2631578947368421
+      },
+      "asvspoof5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.47368421052631576,
+          "valid": 2000
+        },
+        "delta": -0.21052631578947367,
+        "n": 19,
+        "with": 0.3157894736842105,
+        "without": 0.5263157894736842
+      },
+      "in-the-wild-audio": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 18,
+        "with": 0.05555555555555555,
+        "without": 0.05555555555555555
+      },
+      "mlaad": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 18,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "recall_per_threat": {
+      "tts": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.16666666666666669,
+          "valid": 2000
+        },
+        "delta": -0.08108108108108109,
+        "n": 74,
+        "with": 0.13513513513513514,
+        "without": 0.21621621621621623
+      }
+    },
+    "tau": {
+      "with": 0.8476304153337205,
+      "without": 0.8684082914976627
+    },
+    "tpr": {
+      "with": 0.13513513513513514,
+      "without": 0.21621621621621623
+    }
+  },
+  "detector_meta": {
+    "aud.gustking_xlsr": {
+      "score_key": "aud.gustking_xlsr@fe21cdef274f",
+      "transform": "logit_clip8",
+      "weights_sha12": "fe21cdef274f"
+    },
+    "aud.mo_thecreator_w2v2": {
+      "score_key": "aud.mo_thecreator_w2v2@c67f07de2cb8",
+      "transform": "logit_clip8",
+      "weights_sha12": "c67f07de2cb8"
+    }
+  },
+  "git_commit": "01ce3155e17f8102f81ddaa7ff8eb78b8189f4e2",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 149,
+    "n_fake": 74,
+    "n_real": 75
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {},
+    "macro": {
+      "ci95": null,
+      "delta": null,
+      "with": null,
+      "without": null
+    },
+    "macro_over": [],
+    "missing": [],
+    "required": []
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "seed": 7,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "audio",
+  "schema": "veritas.ablation/1"
+}

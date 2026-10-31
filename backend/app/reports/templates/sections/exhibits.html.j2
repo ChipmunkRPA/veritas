@@ -1,0 +1,87 @@
+<section class="chapter-cont" id="section-exhibits">
+<h2 class="chapter-title"><span class="n">{{ v.number.exhibits }}</span>Exhibits</h2>
+{% for e in v.exhibits %}
+<div class="exhibit{{ ' exhibit-table' if e.kind == 'table' and e.table and (e.table.rows | length) > 12 else '' }}" id="{{ e.anchor }}">
+<h3 class="exhibit-title">{% if e.label %}<span class="mono">{{ e.label }}</span> {% endif %}{{ e.title | symbols }}</h3>
+{% if e.caption %}
+<p class="caption exhibit-caption">{{ e.caption | symbols }}</p>
+{% endif %}
+{% if e.plates %}
+{% set shown = e.plates | selectattr("uri") | list %}
+{% if shown %}
+<div class="plates">
+{% for p in shown %}
+<figure class="plate">{% if p.get('marks') %}<div class="plate-stack"><img src="{{ p.uri }}" alt="{{ p.title }}">{{ p.marks }}</div>{% else %}<img src="{{ p.uri }}" alt="{{ p.title }}">{% endif %}<figcaption>{{ p.title }}</figcaption></figure>
+{% endfor %}
+</div>
+{% endif %}
+{% for p in e.plates if not p.uri %}
+<p class="caption plate-unavailable">{{ p.title }}: {{ p.get('unavailable', 'verified image data unavailable for this report') | lower_first }}</p>
+{% endfor %}
+{% endif %}
+{% if e.picture %}
+{% if e.picture.uri %}
+<div class="series-strip picture-strip">
+<div class="series-row"><div class="y-ticks">{% for y in e.picture.y_ticks %}<span>{{ y }}</span>{% endfor %}</div><div class="series-figure"><img src="{{ e.picture.uri }}" alt="{{ e.picture.alt }}"></div></div>
+{% if e.picture.x_ticks %}
+<div class="series-row"><div class="y-ticks"></div><p class="axis-labels x-ticks">{% for x in e.picture.x_ticks %}<span>{{ x }}</span>{% endfor %}</p></div>
+<p class="caption">x: {{ e.picture.x_label }}</p>
+{% endif %}
+</div>
+{% else %}
+<p class="caption plate-unavailable">{{ e.picture.alt }}: verified image data unavailable for this report</p>
+{% endif %}
+{% endif %}
+{% if e.contact %}
+<div class="contact-sheet">
+{% for c in e.contact %}
+<figure>{% if c.uri %}<img src="{{ c.uri }}" alt="{{ c.alt }}">{% else %}<div class="contact-missing"></div>{% endif %}<figcaption class="mono">{{ c.label }}{% if c.sha256 %}<br>{{ c.sha256 | short_hash }}{% endif %}</figcaption></figure>
+{% endfor %}
+</div>
+{% endif %}
+{% if e.legend %}
+<div class="heat-legend-row">{{ e.colour_bar }}<p class="scale-labels"><span>{{ e.scale_labels[0] }}</span><span>{{ e.scale_labels[1] }}</span><span>{{ e.scale_labels[2] }}</span></p></div>
+<p class="caption">Reading the map: {{ e.legend }} {{ e.reading }}</p>
+{% endif %}
+{% if e.table %}
+<table class="grid">
+<thead><tr>{% for c in e.table.columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+<tbody>
+{% for r in e.table.rows %}
+<tr>{% for c in r %}<td{{ c | word_cell(e.table.columns | length) }}>{{ c | unbroken(loop.index0 in e.table.names) }}</td>{% endfor %}</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if e.table.more %}
+<p class="caption">{{ e.table.more }} more rows are in the result document.</p>
+{% endif %}
+{% endif %}
+{% if e.series %}
+{% for st in e.series.strips %}
+<div class="series-strip">
+<p class="series-name">{{ st.label | symbols }}</p>
+<div class="series-row"><div class="y-ticks">{% for y in st.y_ticks %}<span>{{ y }}</span>{% endfor %}</div><div class="series-figure">{{ st.svg }}</div></div>
+</div>
+{% endfor %}
+{% if e.series.strips %}
+<div class="series-row"><div class="y-ticks"></div><p class="axis-labels x-ticks">{% for x in e.series.x_ticks %}<span>{{ x }}</span>{% endfor %}</p></div>
+<p class="caption">x: {{ e.series.x_label }}{% if e.series.caption %} · {{ e.series.caption }}{% endif %}{% if e.series.stored %} · {{ e.series.stored }} series stored separately{% endif %}</p>
+{% elif e.series.stored %}
+<p class="caption">{{ e.series.stored }} series stored separately.</p>
+{% endif %}
+{% endif %}
+{% if e.track %}
+<p>{{ e.track.label }} · {{ e.track.frames }} frames · {{ e.track.range }}</p>
+{% endif %}
+{% if e.stills %}
+<div class="stills">{% for u in e.stills %}<img src="{{ u }}" alt="Face-track still">{% endfor %}</div>
+{% endif %}
+{% if e.note %}
+<p class="caption">{{ e.note }}</p>
+{% endif %}
+<p class="caption provenance-line">From {{ e.creator or e.created_by }}{% if e.sources %} · signals {{ e.sources | join(', ') }}{% endif %}{% if e.findings %} · cited by {{ e.findings | join(', ') }}{% endif %}{% if e.sha256 %} · payload SHA-256 {{ e.sha256 | short_hash }}{% endif %}</p>
+</div>
+{% else %}
+<p class="muted">No exhibits were recorded for this analysis.</p>
+{% endfor %}
+</section>

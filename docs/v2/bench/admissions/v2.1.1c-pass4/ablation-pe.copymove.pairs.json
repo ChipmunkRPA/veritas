@@ -1,0 +1,969 @@
+{
+  "baseline_detectors": [
+    "img.hf.ateeqq"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "detector_not_run": 2,
+      "outside_scope": 1015,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+    "version": "vb-1.1"
+  },
+  "candidate": "pe.copymove.pairs",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.hf.ateeqq,pe.copymove.pairs GATES='img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.copymove.pairs ABLATE_BOOTSTRAP=2000",
+  "contamination_card": false,
+  "criteria": {
+    "A3": {
+      "pass": false,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.0,
+      "lgo_macro_delta": 0.0,
+      "pass": false,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.0,
+      "pass": false,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_detail": {},
+      "blocking_strata": [],
+      "interaction_strata": [],
+      "interaction_terms": {},
+      "not_established_strata": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "pass": true,
+      "pooled_ci95_hi": 0.001867380830717569,
+      "pooled_delta": 0.0007421150278293168,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+      "small_point_strata": [],
+      "small_strata": [
+        "R6"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.7143114821686251,
+      "without": 0.7161357677540713
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.005025547907605251,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0023584905660377353,
+        "n": 424,
+        "with": 0.049528301886792456,
+        "without": 0.04716981132075472
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 611,
+        "with": 0.0425531914893617,
+        "without": 0.0425531914893617
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.006484039754535045,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0017006802721088454,
+        "n": 588,
+        "with": 0.11224489795918367,
+        "without": 0.11054421768707483
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 495,
+        "with": 0.03838383838383838,
+        "without": 0.03838383838383838
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 549,
+        "with": 0.012750455373406194,
+        "without": 0.012750455373406194
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 28,
+        "with": 0.03571428571428571,
+        "without": 0.03571428571428571
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.001867380830717569,
+        "lo": 0.0,
+        "valid": 2000
+      },
+      "delta": 0.0007421150278293168,
+      "n": 2695,
+      "with": 0.05194805194805195,
+      "without": 0.051205936920222635
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 272,
+        "with": 0.003676470588235294,
+        "without": 0.003676470588235294
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 85,
+        "with": 0.5764705882352941,
+        "without": 0.5764705882352941
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 70,
+        "with": 0.42857142857142855,
+        "without": 0.42857142857142855
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 153,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 41,
+        "with": 0.3902439024390244,
+        "without": 0.3902439024390244
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 57,
+        "with": 0.42105263157894735,
+        "without": 0.42105263157894735
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 50,
+        "with": 0.6,
+        "without": 0.6
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 24,
+        "with": 0.625,
+        "without": 0.625
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 47,
+        "with": 0.2978723404255319,
+        "without": 0.2978723404255319
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 53,
+        "with": 0.20754716981132076,
+        "without": 0.20754716981132076
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 106,
+        "with": 0.3113207547169811,
+        "without": 0.3113207547169811
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 148,
+        "with": 0.32432432432432434,
+        "without": 0.32432432432432434
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 186,
+        "with": 0.40860215053763443,
+        "without": 0.40860215053763443
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 153,
+        "with": 0.35294117647058826,
+        "without": 0.35294117647058826
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.02608695652173913,
+        "without": 0.02608695652173913
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 118,
+        "with": 0.4830508474576271,
+        "without": 0.4830508474576271
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 161,
+        "with": 0.18012422360248448,
+        "without": 0.18012422360248448
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.09565217391304348,
+        "without": 0.09565217391304348
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.04807692307692307,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.018867924528301883,
+        "n": 106,
+        "with": 0.3490566037735849,
+        "without": 0.330188679245283
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05769230769230771,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.01851851851851849,
+        "n": 54,
+        "with": 0.2962962962962963,
+        "without": 0.2777777777777778
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 75,
+        "with": 0.29333333333333333,
+        "without": 0.29333333333333333
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 35,
+        "with": 0.2857142857142857,
+        "without": 0.2857142857142857
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 80,
+        "with": 0.4125,
+        "without": 0.4125
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 161,
+        "with": 0.18012422360248448,
+        "without": 0.18012422360248448
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 272,
+        "with": 0.003676470588235294,
+        "without": 0.003676470588235294
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 153,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.09565217391304348,
+        "without": 0.09565217391304348
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.004294544434276016,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0018714909544604308,
+        "n": 1603,
+        "with": 0.3605739238927012,
+        "without": 0.3587024329382408
+      }
+    },
+    "tau": {
+      "with": 0.8580926673872924,
+      "without": 0.8586885497536675
+    },
+    "threshold_strata": {
+      "R6": "R3"
+    },
+    "tpr": {
+      "with": 0.2686631944444444,
+      "without": 0.2673611111111111
+    }
+  },
+  "detector_meta": {
+    "img.hf.ateeqq": {
+      "score_key": "img.hf.ateeqq@eb0d229dd61f",
+      "transform": "logit_clip8",
+      "weights_sha12": "eb0d229dd61f"
+    },
+    "pe.copymove.pairs": {
+      "score_key": "pe.copymove.pairs@noweights",
+      "transform": "logit_clip8",
+      "weights_sha12": "noweights"
+    }
+  },
+  "git_commit": "1807e6c8a2a5167f99c02ac4ec7904a43897cc31",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 4999,
+    "n_fake": 2304,
+    "n_real": 2695
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 153,
+        "n_train": 4846,
+        "tau": {
+          "with": 0.8602358712647163,
+          "without": 0.8608981497606325
+        },
+        "tpr": {
+          "with": 0.35947712418300654,
+          "without": 0.35947712418300654
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 70,
+        "n_train": 4929,
+        "tau": {
+          "with": 0.8538834116475789,
+          "without": 0.8531493847065607
+        },
+        "tpr": {
+          "with": 0.42857142857142855,
+          "without": 0.42857142857142855
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 57,
+        "n_train": 4942,
+        "tau": {
+          "with": 0.858862850230442,
+          "without": 0.8594913019083125
+        },
+        "tpr": {
+          "with": 0.40350877192982454,
+          "without": 0.40350877192982454
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 118,
+        "n_train": 4881,
+        "tau": {
+          "with": 0.8588526078111409,
+          "without": 0.8593002093524162
+        },
+        "tpr": {
+          "with": 0.4915254237288136,
+          "without": 0.4915254237288136
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 80,
+        "n_train": 4919,
+        "tau": {
+          "with": 0.8589513488368494,
+          "without": 0.8595775688936461
+        },
+        "tpr": {
+          "with": 0.4,
+          "without": 0.4
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 106,
+        "n_train": 4893,
+        "tau": {
+          "with": 0.8534913249814718,
+          "without": 0.8541078096615271
+        },
+        "tpr": {
+          "with": 0.3490566037735849,
+          "without": 0.3490566037735849
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 106,
+        "n_train": 4893,
+        "tau": {
+          "with": 0.8524895307048209,
+          "without": 0.8518913967537493
+        },
+        "tpr": {
+          "with": 0.32075471698113206,
+          "without": 0.32075471698113206
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.0,
+        "lo": 0.0,
+        "valid": 2000
+      },
+      "delta": 0.0,
+      "with": 0.3932705813096843,
+      "without": 0.3932705813096843
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "img.hf.ateeqq": [
+        "!has_face"
+      ]
+    },
+    "seed": 7,
+    "size_policy": {
+      "additive_size_face_terms": false,
+      "global_intercept": true,
+      "neutral_size_missing": true,
+      "resolution_balance": true
+    },
+    "splits": [
+      "fit",
+      "cal"
+    ],
+    "term_support": {
+      "face_px:120-256": {
+        "cal": {
+          "fake": {
+            "off": 652,
+            "on": 194
+          },
+          "real": {
+            "off": 703,
+            "on": 147
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1129,
+            "on": 329
+          },
+          "real": {
+            "off": 1585,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "face_px>=256": {
+        "cal": {
+          "fake": {
+            "off": 701,
+            "on": 145
+          },
+          "real": {
+            "off": 759,
+            "on": 91
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1203,
+            "on": 255
+          },
+          "real": {
+            "off": 1585,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "has_camera_exif": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "has_face": {
+        "cal": {
+          "fake": {
+            "off": 438,
+            "on": 408
+          },
+          "real": {
+            "off": 568,
+            "on": 282
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 767,
+            "on": 691
+          },
+          "real": {
+            "off": 1238,
+            "on": 607
+          }
+        },
+        "group": true
+      },
+      "jpeg_q:70-89": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "jpeg_q<70": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "jpeg_q>=90": {
+        "cal": {
+          "fake": {
+            "off": 0,
+            "on": 846
+          },
+          "real": {
+            "off": 0,
+            "on": 850
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 0,
+            "on": 1458
+          },
+          "real": {
+            "off": 0,
+            "on": 1845
+          }
+        },
+        "group": false
+      },
+      "min_side<512": {
+        "cal": {
+          "fake": {
+            "off": 712,
+            "on": 134
+          },
+          "real": {
+            "off": 557,
+            "on": 293
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1243,
+            "on": 215
+          },
+          "real": {
+            "off": 1315,
+            "on": 530
+          }
+        },
+        "group": false
+      },
+      "min_side>1024": {
+        "cal": {
+          "fake": {
+            "off": 801,
+            "on": 45
+          },
+          "real": {
+            "off": 487,
+            "on": 363
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1403,
+            "on": 55
+          },
+          "real": {
+            "off": 867,
+            "on": 978
+          }
+        },
+        "group": false
+      },
+      "screenshot_like": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "upscaled": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "video_frame": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1845,
+            "on": 0
+          }
+        },
+        "group": true
+      }
+    }
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

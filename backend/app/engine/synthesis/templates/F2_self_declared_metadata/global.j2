@@ -1,0 +1,34 @@
+{# F2 self-declared metadata (IF §6.1; UX §4.3; D-15, D-33): strong at most, never decisive. #}
+{% import "_macros.j2" as m %}
+{% if w.variant == "self_declared" %}
+{# N-19h: `marker_carries` and `marker_why` are the words of the marker's kind (unsigned metadata; Content Credentials by their signer). #}
+{# N-19n (Q4-01): a file whose marker is the IPTC source type names no generator: its first sentence is the source type's,
+   with the file's own value. Where a structured field names a generator as well, that sentence is added. #}
+{# N-19n (D3-07, 5): what the check found and where, from the field of its result: the place in the check's words, a name
+   of Veritas for a tool as Veritas's, and no repeat of the title. A signal stored without the field keeps the old sentence. #}
+{% if w.marker_found %}
+{% for sentence in w.marker_found %}
+{{ cite(w.s.id) }}{{ sentence }}
+{% endfor %}
+{% elif w.marker_named %}
+{{ cite(w.s.id) }}{{ w.marker_carries }}: “{{ w.s.observed }}”.
+{% endif %}
+{% if w.marker_source_type %}
+{{ cite(w.s.id) }}{{ w.marker_source_type }}
+{% endif %}
+{# N-19n (D3-07, 9): the phrase in a field that software writes, or generation parameters without a tool. #}
+{% if w.marker_holds %}
+{{ cite(w.s.id) }}{{ w.marker_holds }}
+{% endif %}
+{# N-19n (D3-07): where the marker is applied, the clause says what Veritas does for self-declared evidence, after a colon. #}
+{{ cite(w.s.id, "decision") }}{{ w.marker_why }}{{ "; " if w.unapplied else ": " }}{{ w.floor_clause }}.
+{% else %}
+{# N-19n (Q4-01): a hit in free text (a caption, a description, a comment) is a mention, not a marker: no floor, no
+   self-declared evidence. `mention` is the check's label for the pattern it found, not the file's words: no quotation marks.
+   UX §7.2 (D-16) bans "match" in a finding, so the sentences say "found" and "looks for"; "found there" keeps the word
+   to the text field ("found" alone can be read as what an examination found: the design reviewer's read, check 35). #}
+{# N-19o (Q5-05, tpl-2.17): the field is named where the check's result names it, and the example is the phrase pattern's #}
+{{ cite(w.s.id) }}The file’s metadata mentions AI in {{ w.mention_where }}. Veritas found there: {{ w.mention }}.
+{{ cite(w.s.id, "decision") }}Anyone can write such a field, and Veritas looks for words, not their meaning{% if w.mention_phrase %}: “Not AI-generated” is found the same way{% endif %}. It is no marker of a generator: it stands outside the fields that Veritas reads as one, and it sets no number in this result.
+{% endif %}
+{{ m.dissent(w) }}

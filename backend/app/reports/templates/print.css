@@ -1,0 +1,414 @@
+/* Print stylesheet (UX §6.1 common page system, §6.2 executive summary; D-25 review status line). WeasyPrint, light tokens from
+   tokens.css. Margin boxes take literal values (custom properties are not resolved in page context); running elements use tokens. */
+
+@page {
+  size: A4;
+  margin: 16mm 18mm 20mm 18mm;
+  @top-center { content: element(page-header); width: 100%; vertical-align: bottom; padding-bottom: 2mm; }
+  @bottom-center { content: element(page-footer); width: 100%; vertical-align: top; padding-top: 3mm; }
+}
+
+html { color: var(--color-text); background: #FFFFFF; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 9pt;
+  line-height: 13pt;
+  font-variant-numeric: lining-nums;
+}
+p { margin: 0; }
+.mono { font-family: var(--font-mono); font-size: 7.4pt; line-height: 9.4pt; word-break: break-all; }
+.eyebrow {
+  margin: 0 0 1.5mm;
+  font: 500 7.2pt/10pt var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.muted { color: var(--color-text-muted); }
+.caption { font-size: 7.2pt; line-height: 10pt; color: var(--color-text-muted); }
+
+/* running header and footer */
+.page-header {
+  position: running(page-header);
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid var(--color-border-strong);
+  font: 500 7.2pt/10pt var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.page-header .ph-centre, .page-header .ph-right { letter-spacing: 0; text-transform: none; font-weight: 400; }
+/* N-19j: the centre of a report that is not issued says why ("… · Draft · second review: does not concur") and may take two
+   lines; the profile's name on the left and the report's id with the page on the right keep one line each */
+.page-header .ph-left, .page-header .ph-right { flex: none; white-space: nowrap; }
+.page-header .ph-centre { padding: 0 3mm; text-align: center; }
+.page-number::after { content: counter(page); }
+.page-count::after { content: counter(pages); }
+.page-footer {
+  position: running(page-footer);
+  border-top: 0.5pt solid var(--color-border);
+  padding-top: 1.5mm;
+  font-size: 7.2pt;
+  line-height: 10pt;
+  color: var(--color-text-muted);
+}
+.page-footer .pf-status { color: var(--color-text); font-weight: 500; }
+
+/* review status mark (drawn, so it needs no glyph outside the bundled subsets) */
+.status-mark {
+  display: inline-block;
+  width: 1.9mm;
+  height: 1.9mm;
+  margin-right: 1.4mm;
+  border: 0.6pt solid var(--color-text);
+  border-radius: 50%;
+  vertical-align: -0.1mm;
+}
+.status-mark.is-reviewed { background: var(--color-text); }
+
+/* blocks */
+main section { margin-top: 4.5mm; }
+main section:first-child { margin-top: 1mm; }
+.rule-double { border: 0; border-top: 2.2pt double var(--color-text); margin: 3.5mm 0 0; }
+.title {
+  margin: 0 0 1mm;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22pt;
+  line-height: 26pt;
+  overflow-wrap: break-word;
+}
+.identity .meta { color: var(--color-text-muted); }
+.identity .hash { margin-top: 0.8mm; }
+.identity .caption { margin-top: 0.6mm; }
+/* N-19d: the examined picture beside the identity block of a one-page report, at most 40 × 30 mm */
+.identity .exhibit-thumb { float: right; margin: 0 0 1.5mm 5mm; text-align: right; }
+.identity .exhibit-thumb img { display: block; max-width: 40mm; max-height: 30mm; margin-left: auto; border: 0.5pt solid var(--color-border); }
+.identity .rule-double { clear: both; }
+.headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17pt;
+  line-height: 21pt;
+  color: var(--verdict-ink, var(--color-text));
+}
+.assessment .estimate { margin-top: 1mm; }
+/* N-19 (D-69): the examiner's opinion of a signed record, under the machine headline at its size, in the text colour (the
+   verdict ink is the machine's) */
+.headline.examiner-opinion { margin-top: 1mm; color: var(--color-text); }
+.examiner-justification { margin-top: 1mm; overflow-wrap: anywhere; white-space: pre-line; }
+/* N-19j (Q2-02): the refusal of a second review, directly under the examiner's opinion */
+.examiner-refusal { margin-top: 1mm; font-weight: 600; color: var(--color-text); break-before: avoid; }
+.examiner-justification + .estimate { margin-top: 2mm; }
+.assessment .step-note { margin-top: 1.5mm; color: var(--color-text); }
+.cover-assessment { margin-top: 6mm; }
+.cover-assessment .headline { margin-top: 1mm; }
+.verdict-1 { --verdict-ink: var(--color-verdict-1); }
+.verdict-2 { --verdict-ink: var(--color-verdict-2); }
+.verdict-3 { --verdict-ink: var(--color-verdict-3); }
+.verdict-4 { --verdict-ink: var(--color-verdict-4); }
+.verdict-5 { --verdict-ink: var(--color-verdict-5); }
+.scale-figure { margin-top: 2.5mm; }
+.scale-figure svg { display: block; width: 100%; height: 6.3mm; }
+.scale-labels { display: flex; justify-content: space-between; margin-top: 1mm; font-size: 7.2pt; line-height: 10pt; color: var(--color-text-muted); }
+.scale-note { margin-top: 1mm; font-size: 7.2pt; line-height: 10pt; color: var(--color-text-muted); }
+
+.guidance { display: flex; gap: 8mm; }
+.guidance .col { flex: 1 1 0; }
+.guidance .col p + p { margin-top: 1mm; }
+.reasons { margin: 1mm 0 0; padding-left: 4mm; }
+
+.arrays { display: flex; gap: 8mm; }
+.array { flex: 1 1 0; display: flex; gap: 3mm; align-items: flex-start; }
+.array svg { flex: none; width: 22mm; height: 22mm; }
+.testing .caption { margin-top: 1.5mm; }
+
+.findings ol { margin: 0; padding: 0; list-style: none; }
+.findings li { display: flex; gap: 3mm; align-items: flex-start; padding: 1.8mm 0; border-top: 0.5pt solid var(--color-border); break-inside: avoid; }
+.findings li:first-child { border-top: 0; }
+.findings .thumb { flex: none; width: 30mm; height: 22mm; object-fit: contain; background: var(--color-heat-ground); image-rendering: pixelated; }
+.findings .fid { flex: 0 0 6mm; font-weight: 600; }
+.findings .strength { flex: 0 0 8mm; display: flex; gap: 1.6mm; align-items: center; white-space: nowrap; color: var(--color-text-muted); }
+.findings .meter { display: inline-flex; gap: 0.5mm; align-items: flex-end; }
+.findings .meter i { display: inline-block; width: 1.3mm; height: 2.6mm; border-radius: 0.25mm; }
+.findings .meter i.on { background: var(--color-strength-on); }
+.findings .meter i.off { background: var(--color-strength-off); }
+.findings .seal { width: 2.6mm; height: 2.6mm; margin-right: 3.4mm; }
+.findings .body { flex: 1 1 auto; }
+.findings .body strong { font-weight: 600; }
+.findings .thumbnail-caption { display: block; margin-top: 1mm; }
+
+/* N-19k (browser QA Q2-05): a one-page report that runs over its page is set again, one step tighter at a time, until it
+   fits (`engine.render_pdf`; the classes add up). The first step takes space between the blocks, the second the size of the
+   two display lines and of the pictures, the third the body type. Nothing is left out. */
+.fit-1 main section { margin-top: 3.2mm; }
+.fit-1 .rule-double { margin-top: 2.5mm; }
+.fit-1 .findings li { padding: 1.2mm 0; }
+.fit-1 .scale-figure { margin-top: 1.8mm; }
+.fit-2 main section { margin-top: 2.6mm; }
+.fit-2 .title { font-size: 19pt; line-height: 23pt; }
+.fit-2 .headline { font-size: 15pt; line-height: 18.5pt; }
+.fit-2 .findings .thumb { width: 24mm; height: 17.6mm; }
+.fit-2 .array svg { width: 18mm; height: 18mm; }
+.fit-2 .identity .exhibit-thumb img { max-width: 32mm; max-height: 24mm; }
+body.fit-3 { font-size: 8.4pt; line-height: 12pt; }
+.fit-3 main section { margin-top: 2.2mm; }
+.fit-3 .headline { font-size: 14pt; line-height: 17pt; }
+
+/* --- standard and forensic profiles (UX §6.3 R1–R12, §8.4) --------------------------------------------------------------- */
+
+.profile-forensic main section, .profile-standard main section { margin-top: 0; }
+/* N-19c (design review DS-18): a chapter follows the one before it on the page (`.chapter-cont`). Only the contents start a
+   page (`.chapter`): a forced break before every chapter left pages a third full. */
+.chapter { break-before: page; }
+.chapter-cont { margin-top: 8mm !important; }
+.chapter-title {
+  margin: 0 0 3mm;
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid var(--color-border-strong);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17pt;
+  line-height: 21pt;
+  break-after: avoid;
+}
+.chapter-title .n { display: inline-block; min-width: 9mm; font-family: var(--font-mono); font-size: 11pt; color: var(--color-text-muted); }
+.chapter h3.eyebrow, .chapter-cont h3.eyebrow { margin-top: 4.5mm; break-after: avoid; }
+.intro { margin-bottom: 2mm; }
+.reader { font-family: var(--font-display); font-size: 10.5pt; line-height: 15pt; }
+.reader + .reader { margin-top: 1.5mm; }
+.rule { border: 0; border-top: 0.5pt solid var(--color-border); margin: 4mm 0 0; }
+
+/* cover */
+.cover { padding-top: 18mm; }
+.cover-title { font-size: 22pt; line-height: 26pt; max-width: 150mm; }
+.facts { display: grid; grid-template-columns: 34mm 1fr; column-gap: 4mm; row-gap: 1.2mm; margin: 3mm 0 0; }
+.facts dt { font: 500 7.2pt/10pt var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); padding-top: 0.6mm; }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts dd p + p { margin-top: 0.8mm; }
+.facts.compact { grid-template-columns: 30mm 1fr; row-gap: 0.6mm; }
+.facts.wide { grid-template-columns: 42mm 1fr; }
+/* N-19c: a list of facts is not split over two pages (a grid that breaks between a term and its value prints the value over
+   the page header). The manifest of Appendix A is long enough to run on, so it is a table of rows (`.facts.rows`): it breaks
+   between rows only. */
+.facts { break-inside: avoid; }
+.facts.rows { display: table; table-layout: fixed; width: 100%; break-inside: auto; }
+.facts.rows > div { display: table-row; break-inside: avoid; }
+.facts.rows dt { display: table-cell; width: 42mm; padding: 0.6mm 4mm 0.6mm 0; vertical-align: top; }
+.facts.rows dd { display: table-cell; padding: 0.6mm 0; vertical-align: top; }
+.cover-facts { margin-top: 5mm; row-gap: 2mm; }
+.scope-statement { margin-top: 8mm; padding-top: 3mm; border-top: 0.5pt solid var(--color-border-strong); font-family: var(--font-display); font-size: 10.5pt; line-height: 15pt; }
+
+/* contents */
+.contents { margin: 0; padding: 0; list-style: none; }
+.contents li { border-bottom: 0.5pt solid var(--color-border); }
+.contents a { display: block; padding: 0.9mm 0; color: var(--color-text); text-decoration: none; }
+.contents .n { display: inline-block; width: 8mm; font-family: var(--font-mono); color: var(--color-text-muted); }
+.contents a::after { content: target-counter(attr(href), page); float: right; font-family: var(--font-mono); color: var(--color-text-muted); }
+
+/* lay summary */
+.lay-summary .lay { margin-bottom: 1.5mm; }
+/* N-19c (DS-18): in the full reports the two answers stand one under the other and may run on to the next page, so "What this
+   means" begins on the page of the headline (as two columns of one row the block moved to the next page whole) */
+.lay-summary .guidance { display: block; margin-top: 4mm; }
+.lay-summary .guidance .col + .col { margin-top: 3mm; }
+.lay-summary .headline, .lay-summary .estimate, .lay-summary .scale-figure, .lay-summary .examiner-justification { break-after: avoid; }
+.lay-summary .guidance .eyebrow.sub { margin-top: 3mm; }
+.reasons li + li { margin-top: 1mm; }
+
+/* tables */
+table.grid { width: 100%; border-collapse: collapse; margin-top: 1.5mm; font-size: 7.6pt; line-height: 9.6pt; }
+table.grid th { text-align: left; vertical-align: bottom; padding: 1mm 2mm 1mm 0; border-bottom: 0.8pt solid var(--color-border-strong);
+  font: 500 6.8pt/9pt var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted); }
+table.grid td { vertical-align: top; padding: 1.1mm 2mm 1.1mm 0; border-bottom: 0.5pt solid var(--color-border); overflow-wrap: anywhere; }
+table.grid tr { break-inside: avoid; }
+/* N-19c (DS-18): a table of fewer than six rows is not split over two pages (the rows after the first of a body whose first
+   row is among its last five) */
+table.grid tbody tr:first-child:nth-last-child(-n+5) ~ tr { break-before: avoid; }
+table.grid .mono, .waterfall .mono { font-size: 7pt; line-height: 9.4pt; word-break: normal; overflow-wrap: anywhere; }
+th.num, td.num { text-align: right; }
+/* N-19k (browser QA "PDF rendering": the custody sequence "111 / 8"; "2026-09-1 / 2", "Claim_Generator_InfoNa / me"): a
+   number, a date and a tag name stay on one line where the cell around them may break a long value anywhere */
+td.num, .nb { white-space: nowrap; }
+.w-question { width: 55%; }
+.w-factor { width: 36%; }
+.w-id { width: 12mm; }
+.hash-cell { word-break: break-all; }
+/* L-4 (design P1-7): strength and direction words wrap between words, never mid-word ("documenta / ry") */
+table.grid th.w-words { width: 24mm; }
+table.grid th.w-observed { width: 28mm; }
+.ledger td:not(.mono) { overflow-wrap: break-word; }  /* prose cells break between words; min-content is the longest word */
+table.grid td.words { overflow-wrap: normal; word-break: normal; hyphens: manual; }
+/* N-19c (browser QA "PDF rendering"): a cell of short words keeps each word whole ("Dispute / d", "ExifToolVer / sion",
+   "sentenc / e"): its column is at least as wide as its longest word (`formatting.word_cell`) */
+.plain-list { margin: 1mm 0 0; padding-left: 4mm; }
+.plain-list li + li { margin-top: 0.8mm; }
+.stages { margin: 1mm 0 0; padding-left: 5mm; }
+.formula { margin-top: 2mm; padding: 2mm; background: var(--color-surface-2); }
+.headline-rule { margin: 1mm 0 0; }
+
+/* cross-references with page numbers */
+a.xref { color: var(--color-text); text-decoration: none; font-family: var(--font-mono); font-size: 7.4pt; }
+a.xref::after { content: " (p. " target-counter(attr(href), page) ")"; font-family: var(--font-sans); color: var(--color-text-muted); }
+
+/* key findings */
+.finding-list { margin: 0; padding: 0; list-style: none; }
+.finding-list li { display: table; table-layout: fixed; width: 100%; padding: 2.5mm 0; border-top: 0.5pt solid var(--color-border); break-inside: avoid; }
+.finding-list li:first-child { border-top: 0; }
+.f-thumb { display: table-cell; width: 30mm; padding-right: 4mm; vertical-align: top; }
+.f-thumb img { width: 30mm; height: 22mm; object-fit: contain; background: var(--color-heat-ground); image-rendering: pixelated; }
+.f-body { display: table-cell; vertical-align: top; }
+.f-body p + p { margin-top: 0.8mm; }
+.f-head { display: flex; gap: 3mm; align-items: center; }
+.f-head .fid { font-weight: 600; }
+.f-head .strength { display: flex; gap: 1.6mm; align-items: center; white-space: nowrap; color: var(--color-text-muted); }
+.f-head .meter { display: inline-flex; gap: 0.5mm; align-items: flex-end; }
+.f-head .meter i { display: inline-block; width: 1.3mm; height: 2.6mm; border-radius: 0.25mm; }
+.f-head .meter i.on { background: var(--color-strength-on); }
+.f-head .meter i.off { background: var(--color-strength-off); }
+.f-head .seal { width: 2.6mm; height: 2.6mm; }
+.f-title { font-weight: 600; }
+.refs { break-inside: avoid; color: var(--color-text-muted); }
+.examiner { margin-top: 1mm; padding-left: 2mm; border-left: 1.5pt solid var(--color-annotation); }
+.ex-label { font: 500 6.8pt/9pt var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-annotation); }
+.examiner-layer { padding-left: 2mm; border-left: 1.5pt solid var(--color-annotation); }
+/* D-69 (N-19): the examiner's status of a finding, beside the finding wherever it is listed */
+.ex-chip { display: inline-block; padding: 0 1.2mm; border: 0.5pt solid var(--color-annotation); border-radius: 0.8mm; font: 500 6.8pt/9.5pt var(--font-sans); color: var(--color-annotation); white-space: nowrap; vertical-align: 0.2mm; }
+
+/* estimate figures */
+/* Match agreement_svg viewBox padding: expand 8/1000 on each side without moving the axis or its labels. */
+.agreement-figure { position: relative; }
+.agreement-figure svg { display: block; width: 101.6%; margin-left: -0.8%; height: 12mm; }
+/* DS-17: the S-id beside its dot (`forensic.agreement`: left or right offset and the dot's row) */
+.agreement-figure .dot-id { position: absolute; margin: 0 1.4mm; font: 5.5pt/2.2mm var(--font-mono); color: var(--color-text-muted); white-space: nowrap; }
+.axis-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 7pt; line-height: 9pt; color: var(--color-text-muted); }
+table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 1.5mm; break-inside: avoid; font-size: 7.6pt; line-height: 9.6pt; }
+.waterfall th { padding: 0 0 1mm; font: 500 6.8pt/9pt var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); text-align: left; }
+.waterfall td { padding: 0.6mm 0; vertical-align: middle; }
+.waterfall .wf-label { width: 64mm; padding-right: 3mm; overflow-wrap: anywhere; }
+.waterfall .num { width: 17mm; white-space: nowrap; }
+.waterfall th.num { white-space: normal; vertical-align: bottom; text-align: right; }
+.waterfall .wf-chart { padding-right: 5mm; }
+.waterfall .ticks { position: relative; height: 9pt; font-family: var(--font-mono); font-size: 6.6pt; text-transform: none; letter-spacing: 0; }
+.waterfall .ticks span { position: absolute; top: 0; transform: translateX(-50%); }
+.wf-axis { display: block; width: 100%; height: 2.5mm; }
+.wf-row { display: block; width: 100%; height: 5mm; }
+.wf-start td, .wf-estimate td { font-weight: 600; }
+.wf-group td.wf-label { color: var(--color-text-muted); }
+
+/* exhibits */
+.exhibit { margin-top: 5mm; break-inside: avoid-page; }
+/* Long evidence tables flow row by row; repeating headers preserve their context. */
+.exhibit-table { break-inside: auto; }
+.exhibit-caption { break-after: avoid; }
+.exhibit:first-of-type { margin-top: 0; }
+.exhibit-title { break-after: avoid; margin: 0 0 1.5mm; font: 600 9pt/13pt var(--font-sans); }
+.plates { display: flex; flex-wrap: wrap; gap: 6mm; margin-top: 2mm; }
+.plate { margin: 0; width: 84mm; }
+.plate img, .plate-missing { display: block; width: 84mm; height: 63mm; object-fit: contain; background: var(--color-heat-ground); image-rendering: pixelated; }
+.plate-missing { box-sizing: border-box; padding-top: 29mm; text-align: center; background: var(--color-surface-2); border: 0.6pt dashed var(--color-border-strong); color: var(--color-text-muted); font-size: 7.2pt; }
+.plate-stack { position: relative; width: 84mm; height: 63mm; }
+.plate-stack svg.marks { position: absolute; left: 0; top: 0; width: 84mm; height: 63mm; }
+.plate figcaption { margin-top: 1mm; font-size: 7.2pt; line-height: 10pt; color: var(--color-text-muted); }
+.heat-legend-row { margin-top: 2mm; width: 60mm; }
+.heat-legend-row svg { display: block; width: 60mm; height: 2.5mm; }
+.series-figure svg { display: block; width: 100%; height: 22mm; margin-top: 1mm; }
+.series-strip { margin-top: 2mm; break-inside: avoid; }
+.picture-strip .series-figure img { display: block; width: 100%; height: 30mm; margin-top: 1mm; background: var(--color-heat-ground); }
+.series-name { margin: 0; font-size: 7.6pt; line-height: 9.6pt; color: var(--color-text); }
+.series-row { display: flex; align-items: stretch; gap: 1.5mm; }
+.series-row .series-figure { flex: 1; min-width: 0; }
+.y-ticks { width: 9mm; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; font-family: var(--font-mono); font-size: 6.6pt; line-height: 8pt; color: var(--color-text-muted); padding: 1mm 0 0; }
+.x-ticks { flex: 1; margin: 0.6mm 0 0; }
+.stills { display: flex; flex-wrap: wrap; gap: 3mm; margin-top: 2mm; }
+.stills img { width: 40mm; height: 30mm; object-fit: contain; background: var(--color-heat-ground); }
+.provenance-line { margin-top: 1.5mm; break-before: avoid-page; }
+
+/* temporal lanes */
+table.lanes { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.lanes th { padding: 0 0 1mm; text-align: left; font: 500 6.8pt/9pt var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); }
+.lanes td { padding: 0.8mm 0; vertical-align: middle; }
+.lanes .lane-label { width: 42mm; padding-right: 3mm; }
+.lane { display: block; width: 100%; height: 7mm; }
+
+/* detectors */
+.detector { margin-top: 3mm; padding-top: 2mm; border-top: 0.5pt solid var(--color-border); break-inside: avoid; }
+.d-head { font-weight: 600; }
+
+.ledger th:nth-child(2), .ledger td:nth-child(2) { width: 42mm; min-width: 42mm; }  /* DR P1-8: Signal ≥ 42 mm */
+/* N-19c (design review, P2 "PDFs"): fixed columns, so that Reference has the room an empty Contribution column took (it ran
+   to five and more lines of one word each): #, Signal, Observed, Reference (the rest, 23 mm), Direction, Strength,
+   Contribution, P(AI). The widths are of the content; each cell adds 2 mm of padding. */
+table.grid.ledger { table-layout: fixed; }
+/* N-19d: the model registry has fixed columns too. The device is printed in words ("Apple GPU · 16-bit floats"), and under
+   the automatic layout that column took its room from the detector's id, which then broke inside a word
+   ("specimen.classifi / er_a"): Detector, Version, Weights (the rest), Licence, Coverage, Device. */
+table.grid.registry { table-layout: fixed; }
+table.grid.registry th:nth-child(1) { width: 36mm; }
+table.grid.registry th:nth-child(2) { width: 12mm; }
+table.grid.registry th:nth-child(4) { width: 17mm; }
+table.grid.registry th:nth-child(5) { width: 15mm; }
+table.grid.registry th:nth-child(6) { width: 34mm; }
+table.grid.ledger th { letter-spacing: 0.02em; }
+table.grid.ledger th:nth-child(1) { width: 6mm; }
+table.grid.ledger th.w-observed { width: 25mm; }
+table.grid.ledger th:nth-child(5) { width: 17mm; }
+table.grid.ledger th.w-words { width: 16mm; }
+table.grid.ledger th:nth-child(7) { width: 20mm; }
+table.grid.ledger th:nth-child(8) { width: 9mm; }
+.ledger td:first-child, .revisions td:first-child, .custody td:nth-child(2), .signoffs td:first-child { white-space: nowrap; }
+.revisions td:first-child .caption { font-family: var(--font-mono); }
+
+/* glossary */
+/* N-19c: a table of rows, so that it breaks between two terms and never between a term and its definition */
+.glossary { display: table; table-layout: fixed; width: 100%; margin: 0; }
+.glossary > div { display: table-row; break-inside: avoid; }
+.glossary dt { display: table-cell; width: 42mm; padding: 0.3mm 4mm 0.3mm 0; font-weight: 600; vertical-align: top; }
+.glossary dd { display: table-cell; margin: 0; padding: 0.3mm 0; vertical-align: top; }
+
+/* sign-off */
+.machine { font-family: var(--font-display); font-size: 12pt; line-height: 16pt; }
+.declaration { margin-top: 1mm; }
+.signature-lines { display: flex; gap: 20mm; margin-top: 16mm; break-inside: avoid; }
+/* N-19j (D2-01): a signer's statement and his line share a page; the second signer's block stands clear of the first's line */
+.signer { break-inside: avoid; }
+.signer + .signer { margin-top: 10mm; }
+.signer .eyebrow + .declaration + .signature-lines { margin-top: 12mm; }
+.signature-lines .line { display: block; width: 70mm; height: 8mm; border-bottom: 0.6pt solid var(--color-text); }
+.closing-note { margin-top: 6mm; padding-top: 2mm; border-top: 0.5pt solid var(--color-border-strong); }
+
+.closing {
+  margin-top: 5mm;
+  padding-top: 2mm;
+  border-top: 0.5pt solid var(--color-border-strong);
+  font-size: 7.2pt;
+  line-height: 10pt;
+  color: var(--color-text-muted);
+}
+
+/* Frozen historical benchmark calibration, separate from the analysed file's estimate. */
+.historical-calibration { break-inside: avoid-page; margin: 4mm 0; }
+.calibration-layout { display: table; table-layout: fixed; width: 100%; }
+.calibration-chart { display: table-cell; width: 82mm; vertical-align: top; padding-right: 5mm; }
+.calibration-chart svg { display: block; width: 82mm; height: 77.2mm; }
+.calibration-chart .calibration-support { height: 26.5mm; margin-top: 2mm; }
+.calibration-counts { width: 100%; margin: 2mm 0; font-size: 8pt; line-height: 10pt; }
+.calibration-counts caption { text-align: left; font-size: 8pt; margin-bottom: 1mm; }
+.calibration-counts th, .calibration-counts td { padding: 0.7mm 2mm; }
+.calibration-counts tbody th { font-weight: 400; }
+.calibration-description { display: table-cell; vertical-align: top; font-size: 8pt; line-height: 11pt; }
+.calibration-description p + p { margin-top: 2mm; }
+.calibration-provenance { margin-top: 2mm; font-size: 7.2pt; line-height: 10pt; overflow-wrap: anywhere; }
+
+/* L-4: sampled video frames on one contact sheet; unavailable plates as a one-line note, never an empty plate */
+.contact-sheet { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin-top: 2mm; }
+.contact-sheet figure { margin: 0; break-inside: avoid; }
+.contact-sheet img { display: block; width: 100%; height: auto; }
+.contact-sheet figcaption { font-size: 6.6pt; line-height: 8.4pt; color: var(--color-text-muted); margin-top: 0.6mm; }
+/* a cell whose frame is unavailable (`.contact-missing`) has no box of its own: it prints its timecode, frame number and
+   hash alone. No plate is drawn for it, as above. */
+.plate-unavailable { margin-top: 1mm; }

@@ -1,0 +1,164 @@
+{
+  "schema": "veritas.vbench-smoke-run/1",
+  "run_id": "20260920T110337Z-44e2dded",
+  "contract": {
+    "admission_binding": "supplied admission record: manifest, bench, final members/gates and recorded pass; no direct artefact or scope hash",
+    "admission_sha256": "c729828cc0f29dd4df3d15e0d33232abebcca9d587431d5ad77286487d3c681f",
+    "layout": {
+      "context_source": "scored",
+      "context_terms": [],
+      "detectors": [
+        {
+          "id": "img.dda",
+          "missing": "size",
+          "score_key": "img.dda@d1f98d194fd1",
+          "transform": "logit_clip8",
+          "weights_sha12": "d1f98d194fd1"
+        },
+        {
+          "id": "img.dfdc_b7",
+          "missing": "face",
+          "score_key": "img.dfdc_b7@651bc0cae350",
+          "transform": "logit_clip8",
+          "weights_sha12": "651bc0cae350"
+        },
+        {
+          "id": "img.hf.ateeqq",
+          "missing": null,
+          "score_key": "img.hf.ateeqq@eb0d229dd61f",
+          "transform": "logit_clip8",
+          "weights_sha12": "eb0d229dd61f"
+        },
+        {
+          "id": "img.hf.dima806",
+          "missing": null,
+          "score_key": "img.hf.dima806@504818193248",
+          "transform": "logit_clip8",
+          "weights_sha12": "504818193248"
+        }
+      ],
+      "features": [
+        "z+:img.dda",
+        "z-:img.dda",
+        "v+:img.dda|has_face",
+        "v-:img.dda|has_face",
+        "miss:img.dda",
+        "z+:img.dfdc_b7",
+        "z-:img.dfdc_b7",
+        "v+:img.dfdc_b7|has_face",
+        "v-:img.dfdc_b7|has_face",
+        "miss:img.dfdc_b7",
+        "z+:img.hf.ateeqq",
+        "z-:img.hf.ateeqq",
+        "v+:img.hf.ateeqq|has_face",
+        "v-:img.hf.ateeqq|has_face",
+        "miss:img.hf.ateeqq",
+        "z+:img.hf.dima806",
+        "z-:img.hf.dima806",
+        "v+:img.hf.dima806|has_face",
+        "v-:img.hf.dima806|has_face",
+        "miss:img.hf.dima806"
+      ],
+      "fixed_missing": [
+        "img.dda"
+      ],
+      "gates": {
+        "img.dfdc_b7": [
+          "has_face"
+        ],
+        "img.hf.ateeqq": [
+          "!has_face"
+        ]
+      },
+      "groups": [
+        "has_face"
+      ],
+      "policy": {
+        "additive_size_face_terms": false,
+        "global_intercept": true,
+        "neutral_size_missing": true,
+        "resolution_balance": true
+      }
+    },
+    "profile": "full",
+    "purpose": "reused fit/cal reproducibility smoke; no independent validation or new admission",
+    "removed_context_terms": {
+      "face_px:120-256": "size_face",
+      "face_px>=256": "size_face",
+      "has_face": "size_face",
+      "jpeg_q>=90": "constant_on_fit",
+      "min_side<512": "size_face",
+      "min_side>1024": "size_face"
+    },
+    "reviewed_by": "ralph-loop (automated; pending human review)",
+    "schema": "veritas.vbench-smoke-contract/1",
+    "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+    "serving_artefact_sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+    "serving_version": "2.1.1",
+    "source_manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3"
+  },
+  "purpose": "reused fit/cal in-sample reproducibility; no new model admission or independent quality claim",
+  "skip_score": true,
+  "work_dir": "/Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20260920T110337Z-44e2dded",
+  "report_dir": "/Users/rsang/dev/veritas/docs/v2/bench/smoke-v2/20260920T110337Z-44e2dded",
+  "fits": [
+    {
+      "sha256": "1fc72c0b9347000ed466699c7b2a83a9782229374d7dec9999f97f11e0a6b825",
+      "contract_valid": true,
+      "serving_artefact_sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+      "path": "/Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20260920T110337Z-44e2dded/fusion/run1/fuser-image-0.0.0-smoke.json",
+      "bootstrap_sha256": "d7ccdfe33048d5e7d5913cd002ac800a4219064e89e53d6514399efd8d46091b",
+      "bench": {
+        "cal_n": 102,
+        "context_source": "scored",
+        "excluded_folds": [],
+        "excluded_items": {
+          "detector_not_run": 6
+        },
+        "fit_n": 192,
+        "manifest_sha256": "3e2e117b50c6e75476db84a3dca948ce93e98511e7ade985ab0591acd2d0b461",
+        "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+        "version": "vb-mini"
+      }
+    },
+    {
+      "sha256": "35dd772890e7cfc3d4c0d836d045921627adde7c74ba4ae4f11d14cf568837ac",
+      "contract_valid": true,
+      "serving_artefact_sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+      "path": "/Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20260920T110337Z-44e2dded/fusion/run2/fuser-image-0.0.0-smoke.json",
+      "bootstrap_sha256": "d7ccdfe33048d5e7d5913cd002ac800a4219064e89e53d6514399efd8d46091b",
+      "bench": {
+        "cal_n": 102,
+        "context_source": "scored",
+        "excluded_folds": [],
+        "excluded_items": {
+          "detector_not_run": 6
+        },
+        "fit_n": 192,
+        "manifest_sha256": "3e2e117b50c6e75476db84a3dca948ce93e98511e7ade985ab0591acd2d0b461",
+        "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+        "version": "vb-mini"
+      }
+    }
+  ],
+  "report": {
+    "sha256": "c4bbf9fbe88fbbba16d5675b68dc604ad046a95eb334441a55a01af89748eeab",
+    "reproducibility": {
+      "detail": "fuser-image-0.0.0-smoke.json vs fuser-image-0.0.0-smoke.json",
+      "differing_keys": [],
+      "identical_except_created_at": true
+    },
+    "invariants": {
+      "additivity_max_abs": 8.881784197001252e-16,
+      "monotonicity_trials": 102,
+      "monotonicity_violations": 0,
+      "n_items": 102,
+      "seed": 7
+    }
+  },
+  "status": "passed",
+  "phase": "complete",
+  "inputs_unchanged": true,
+  "bootstrap_bytes_identical": true,
+  "json_identical_except_created_at": true
+}

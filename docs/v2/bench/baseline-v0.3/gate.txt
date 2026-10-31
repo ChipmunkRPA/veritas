@@ -1,0 +1,61 @@
+goal   part                                      value  op     target  status   detail
+--------------------------------------------------------------------------------------
+G1a    macro                                    0.3620  >=     0.7500  FAIL     
+G1b    min_family                               0.2000  >=     0.5000  FAIL     
+G2     image/test/t2i                           0.0551  >=     0.5500  FAIL     21/381, Wilson 0.036–0.083
+G3     R1                                       0.1746  <=     0.0500  FAIL     11/63, Wilson 0.100–0.286; Wilson upper ≤ 0.075
+G3     R2                                       0.0000  <=     0.0500  FAIL     0/26, Wilson 0.000–0.129; Wilson upper ≤ 0.075
+G3     R3                                       0.1316  <=     0.0500  FAIL     10/76, Wilson 0.073–0.226; Wilson upper ≤ 0.075
+G3     R4                                       0.0000  <=     0.0500  PASS     0/88, Wilson 0.000–0.042; Wilson upper ≤ 0.075
+G3     R5                                       0.0690  <=     0.0500  FAIL     6/87, Wilson 0.032–0.142; Wilson upper ≤ 0.075
+G3     R6                                       0.2500  <=     0.0500  FAIL     1/4, Wilson 0.046–0.699; Wilson upper ≤ 0.075
+G3     screenshot                               0.1034  <=     0.0500  FAIL     6/58, Wilson 0.048–0.208; Wilson upper ≤ 0.075
+G4a    image/test                               0.1072  <=     0.0500  FAIL     
+G4b    macro                                    0.1413  <=     0.0800  FAIL     
+G4c    image/test                               0.1909  <=     0.1200  FAIL     
+G5a    jpeg95                                   0.0308  <=     0.1000  PASS     
+G5a    jpeg75                                   0.0308  <=     0.1000  PASS     
+G5a    webp80                                   0.0846  <=     0.1000  PASS     
+G5a    resize0.5                                0.1769  <=     0.1000  FAIL     
+G5a    crop70                                   0.1077  <=     0.1000  FAIL     
+G5b    jpeg50                                   0.0538  <=     0.2000  PASS     
+G5b    social_ig                                0.0308  <=     0.2000  PASS     
+G5b    social_x                                 0.0462  <=     0.2000  PASS     
+G5b    screenshot_jpeg                         -0.0385  <=     0.2000  PASS     
+G5b    noise3                                  -0.0923  <=     0.2000  PASS     
+G5b    upscale2x                               -0.0692  <=     0.2000  PASS     
+G5c    jpeg95                                   0.0000  <=     0.0200  PASS     
+G5c    jpeg75                                  -0.0068  <=     0.0200  PASS     
+G5c    jpeg50                                  -0.0203  <=     0.0200  PASS     
+G5c    webp80                                   0.0000  <=     0.0200  PASS     
+G5c    resize0.5                               -0.0270  <=     0.0200  PASS     
+G5c    crop70                                  -0.0473  <=     0.0200  PASS     
+G5c    screenshot                               0.0405  <=     0.0200  FAIL     
+G5c    screenshot_jpeg                          0.0405  <=     0.0200  FAIL     
+G5c    social_ig                               -0.0338  <=     0.0200  PASS     
+G5c    social_x                                -0.0068  <=     0.0200  PASS     
+G5c    launder                                 -0.0676  <=     0.0200  PASS     
+G5c    noise3                                  -0.0068  <=     0.0200  PASS     
+G5c    upscale2x                                0.0072  <=     0.0200  PASS     
+G5c    rephoto_proxy                           -0.0213  <=     0.0200  PASS     
+G5c    exif_forge                                    –  <=     0.0200  MISSING  metric not in results
+G6a    real                                          –  >=     0.9400  MISSING  metric not in results
+G6a    ai                                            –  >=     0.9400  MISSING  metric not in results
+G6b    image/test                                    –  <=     0.2000  MISSING  metric not in results
+G6c    image/robustness/social_ig                    –  <=     0.4000  MISSING  metric not in results
+G7a    image/test/faceswap_vs_R5                0.8067  >=     0.9000  FAIL     
+G7b    image/test/faceswap_vs_R5                0.3833  >=     0.7000  FAIL     23/60, Wilson 0.271–0.510
+G7c    image/test/gan_face_vs_R5                0.2222  >=     0.8500  FAIL     8/36, Wilson 0.117–0.381
+G8     image/test/edit                          0.1500  >=     0.5000  FAIL     6/40, Wilson 0.071–0.291
+G9a    macro                                    0.0000  >=     0.8000  FAIL     
+G9b    video/test/real                          0.0000  <=     0.0500  PASS     0/38, Wilson 0.000–0.092
+G10a   audio/test/asvspoof5                     0.2353  <=     0.1000  FAIL     
+G10b   audio/test/in_the_wild                   0.0270  <=     0.1000  PASS     1/37, Wilson 0.005–0.138
+G11    exif_forge                                    –  <=     0.0300  MISSING  metric not in results
+G12    calibrate_x2                                  –  ==       true  MISSING  metric not in results
+G13a   image_256px_face, image_800px                 –  <=         25  MISSING  metric not in results
+G13b   video_9s_1080p                                –  <=        120  MISSING  metric not in results
+G14    image/test/legacy                        0.9359  >=     0.9500  FAIL     
+G15a   image/test                                    –  <=  1.000e-09  MISSING  metric not in results
+G15b   image/test                                    –  ==          0  MISSING  metric not in results
+24 PASS, 23 FAIL, 11 MISSING of 58 checks → FAIL

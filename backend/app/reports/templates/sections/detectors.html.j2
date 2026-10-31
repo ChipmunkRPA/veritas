@@ -1,0 +1,48 @@
+{% set d = v.detectors %}
+<section class="chapter-cont" id="section-detectors">
+<h2 class="chapter-title"><span class="n">{{ v.number.detectors }}</span>Detector results and error rates</h2>
+<h3 class="eyebrow">Evidence ledger</h3>
+{% if d.ledger %}
+<table class="grid ledger">
+<thead><tr><th>#</th><th>Signal</th><th class="w-observed">Observed</th><th>Reference</th><th>Direction</th><th class="w-words">Strength</th><th class="num">Contribution</th><th class="num">P(AI)</th></tr></thead>
+<tbody>
+{% for r in d.ledger %}
+<tr id="{{ r.anchor }}"><td class="mono">{{ r.id }}</td><td>{{ r.name }}<br><span class="caption">{{ r.family }}</span>{% if r.disposition %}<br><span class="examiner"><span class="ex-label">Examiner</span> {{ r.disposition.status }}</span>{% endif %}</td><td class="mono">{{ r.observed | symbols | unbroken }}</td><td>{{ r.reference | symbols | unbroken }}</td><td class="words">{{ r.direction }}</td><td class="words">{{ r.strength }}</td><td class="num mono">{{ r.contribution }}</td><td class="num mono">{{ r.p }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% if d.p_note %}<p class="caption">{{ d.p_note }}</p>{% endif %}
+{% if d.p_calibrated_note %}<p class="caption">{{ d.p_calibrated_note }}</p>{% endif %}
+{% else %}
+<p class="muted">No check produced a signal.</p>
+{% endif %}
+{% if d.not_run %}
+<h3 class="eyebrow">Not run ({{ d.not_run | length }})</h3>
+<table class="grid">
+<thead><tr><th>Check</th><th>Status</th><th>Reason</th></tr></thead>
+<tbody>
+{% for r in d.not_run %}
+<tr id="{{ r.anchor }}"><td>{{ r.name }}</td><td>{{ r.status }}</td><td class="muted">{{ r.reason }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+<h3 class="eyebrow">Detectors, models and known error rates</h3>
+{% for x in d.detectors %}
+<div class="detector" id="{{ x.anchor }}">
+<p class="d-head"><span class="mono">{{ x.id }}</span> {{ x.name }} · version {{ x.version }}</p>
+<dl class="facts compact">
+<dt>Weights</dt><dd class="mono">{{ x.weights }}</dd>
+<dt>Licence</dt><dd>{{ x.licence }}</dd>
+<dt>Device</dt><dd>{{ x.device }}</dd>
+<dt>Admission</dt><dd>{{ x.admission }}</dd>
+<dt>Publication</dt><dd>{{ x.citation }}</dd>
+<dt>In testing</dt><dd>{% for line in x.testing %}<p>{{ line }}</p>{% endfor %}</dd>
+<dt>Known false alarms</dt><dd>{{ x.false_alarms }}</dd>
+<dt>Signals</dt><dd class="mono">{{ x.signals }}</dd>
+</dl>
+</div>
+{% else %}
+<p class="muted">The reproducibility manifest names no detectors.</p>
+{% endfor %}
+</section>

@@ -1,0 +1,68 @@
+# Quantitative goals for Veritas v2 (docs/v2/research/ml-evaluation-and-fusion.md §8), read by `make vbench-gate`.
+# Targets are copied verbatim from §8; `goal` quotes the §8 row (metric | set | target). Goals apply to the fused
+# production path, `norm` variant, operational thresholds from `cal`, bench vb-1.0 (D-13: goals are only evaluated on
+# vb-1.0). The gate exits non-zero on any FAIL or missing metric and refuses results from another manifest.
+bench: vb-1.1
+manifest_sha256: 8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3  # vb-1.1 split 2026-09-14 (H-1, D-40); history copy data/vbench/history/vb-1.1/
+# vb-1.0-core (d0224343a5c0…, drawn from vb-1.0 fc17fe098b69…) is history (D-39 superseded by D-40); vb-1.1 is the full bench, no core subset
+goals:
+  - {id: G1a, metric: tpr_at_fpr, fpr: 0.05, set: image/lgo, agg: macro, op: ">=", target: 0.75,
+     goal: "G1 | TPR@5%FPR, macro over LGO F1–F7; also min per family | image LGO | macro ≥ 0.75; each family ≥ 0.50"}
+  - {id: G1b, metric: tpr_at_fpr, fpr: 0.05, set: image/lgo, agg: min_family, op: ">=", target: 0.50,
+     goal: "G1 | TPR@5%FPR, macro over LGO F1–F7; also min per family | image LGO | macro ≥ 0.75; each family ≥ 0.50"}
+  - {id: G2, metric: tpr_at_fpr, fpr: 0.01, set: image/test/t2i, op: ">=", target: 0.55,
+     goal: "G2 | TPR@1%FPR | image test, synthetic t2i | ≥ 0.55"}
+  - {id: G3, metric: fpr_at_tau, tau: 0.05, set: image/test/real, agg: each_stratum,
+     strata: [R1, R2, R3, R4, R5, R6, screenshot], op: "<=", target: 0.05, wilson_upper: 0.075,
+     goal: "G3 | FPR at τ_0.05, each real stratum R1–R6 + screenshot; Wilson upper 95 % bound | image test reals | point ≤ 5 %, upper bound ≤ 7.5 %"}
+  - {id: G4a, metric: ece, bins: 15, balance: true, set: image/test, op: "<=", target: 0.05,
+     goal: "G4 | ECE (15 equal-mass bins, class-balanced) / Brier | image test; image LGO | test ECE ≤ 0.05, LGO ECE ≤ 0.08; test Brier ≤ 0.12"}
+  - {id: G4b, metric: ece, bins: 15, balance: true, set: image/lgo, agg: macro, op: "<=", target: 0.08,
+     goal: "G4 | ECE (15 equal-mass bins, class-balanced) / Brier | image test; image LGO | test ECE ≤ 0.05, LGO ECE ≤ 0.08; test Brier ≤ 0.12"}
+  - {id: G4c, metric: brier, balance: true, set: image/test, op: "<=", target: 0.12,
+     goal: "G4 | ECE (15 equal-mass bins, class-balanced) / Brier | image test; image LGO | test ECE ≤ 0.05, LGO ECE ≤ 0.08; test Brier ≤ 0.12"}
+  - {id: G5a, metric: delta_tpr_fixed, fpr: 0.05, set: image/robustness, transforms: [jpeg95, jpeg75, webp80, resize0.5, crop70],
+     agg: each, op: "<=", target: 0.10,
+     goal: "G5a | Fixed-threshold ΔTPR@5%FPR | robustness: jpeg95, jpeg75, webp80, resize0.5, crop70 | ≤ 10 pts each"}
+  - {id: G5b, metric: delta_tpr_fixed, fpr: 0.05, set: image/robustness,
+     transforms: [jpeg50, social_ig, social_x, screenshot_jpeg, noise3, upscale2x], agg: each, op: "<=", target: 0.20,
+     goal: "G5b | same | jpeg50, social_ig, social_x, screenshot_jpeg, noise3, upscale2x | ≤ 20 pts each"}
+  - {id: G5c, metric: delta_fpr_fixed, tau: 0.05, set: image/robustness, transforms: all, agg: each, op: "<=", target: 0.02,
+     goal: "G5c | ΔFPR at τ_0.05 | all image transforms | ≤ +2 pts each"}
+  - {id: G6a, metric: conformal_coverage, alpha: 0.05, set: image/test, agg: each_class, op: ">=", target: 0.94,
+     goal: "G6 | Class-conditional conformal coverage at α = 0.05; inconclusive rate | image test; robustness social_ig | coverage ≥ 0.94 per class; inconclusive ≤ 20 % clean, ≤ 40 % social_ig"}
+  - {id: G6b, metric: inconclusive_rate, set: image/test, op: "<=", target: 0.20,
+     goal: "G6 | Class-conditional conformal coverage at α = 0.05; inconclusive rate | image test; robustness social_ig | coverage ≥ 0.94 per class; inconclusive ≤ 20 % clean, ≤ 40 % social_ig"}
+  - {id: G6c, metric: inconclusive_rate, set: image/robustness/social_ig, op: "<=", target: 0.40,
+     goal: "G6 | Class-conditional conformal coverage at α = 0.05; inconclusive rate | image test; robustness social_ig | coverage ≥ 0.94 per class; inconclusive ≤ 20 % clean, ≤ 40 % social_ig"}
+  - {id: G7a, metric: auc, set: image/test/faceswap_vs_R5, op: ">=", target: 0.90,
+     goal: "G7 | Face-swap stills: AUC / TPR@5%FPR; GAN faces TPR@5%FPR | image test face-swap, GAN strata vs R5 | AUC ≥ 0.90, TPR ≥ 0.70; GAN TPR ≥ 0.85"}
+  - {id: G7b, metric: tpr_at_fpr, fpr: 0.05, set: image/test/faceswap_vs_R5, op: ">=", target: 0.70,
+     goal: "G7 | Face-swap stills: AUC / TPR@5%FPR; GAN faces TPR@5%FPR | image test face-swap, GAN strata vs R5 | AUC ≥ 0.90, TPR ≥ 0.70; GAN TPR ≥ 0.85"}
+  - {id: G7c, metric: tpr_at_fpr, fpr: 0.05, set: image/test/gan_face_vs_R5, op: ">=", target: 0.85,
+     goal: "G7 | Face-swap stills: AUC / TPR@5%FPR; GAN faces TPR@5%FPR | image test face-swap, GAN strata vs R5 | AUC ≥ 0.90, TPR ≥ 0.70; GAN TPR ≥ 0.85"}
+  - {id: G8, metric: tpr_at_fpr, fpr: 0.05, set: image/test/edit, op: ">=", target: 0.50,
+     goal: "G8 | Partial edits: TPR@5%FPR | So-Fake TAMPERED + OpenSDI + Semi-Truths | ≥ 0.50"}
+  - {id: G9a, metric: tpr_at_fpr, fpr: 0.05, set: video/lgo, agg: macro, op: ">=", target: 0.80,
+     goal: "G9 | Video T2V: TPR@5%FPR (vendor-LGO macro); real-video FPR | video | TPR ≥ 0.80; FPR ≤ 5 %"}
+  - {id: G9b, metric: fpr_at_tau, tau: 0.05, set: video/test/real, op: "<=", target: 0.05,
+     goal: "G9 | Video T2V: TPR@5%FPR (vendor-LGO macro); real-video FPR | video | TPR ≥ 0.80; FPR ≤ 5 %"}
+  - {id: G10a, metric: eer, set: audio/test/asvspoof5, op: "<=", target: 0.10,
+     goal: "G10 | Audio EER; in-the-wild bona fide FPR at τ_0.05 | audio test | EER ≤ 10 % (ASVspoof5); FPR ≤ 10 % (in the wild)"}
+  - {id: G10b, metric: fpr_at_tau, tau: 0.05, set: audio/test/in_the_wild, op: "<=", target: 0.10,
+     goal: "G10 | Audio EER; in-the-wild bona fide FPR at τ_0.05 | audio test | EER ≤ 10 % (ASVspoof5); FPR ≤ 10 % (in the wild)"}
+  - {id: G11, metric: delta_tpr_fixed, fpr: 0.05, set: image/robustness, transforms: [exif_forge], variant: native, agg: each,
+     op: "<=", target: 0.03,
+     goal: "G11 | ΔTPR@5%FPR under exif_forge (native variant) | robustness fakes | ≤ 3 pts"}
+  - {id: G12, metric: reproducibility, set: calibrate_x2, op: "==", target: true,
+     goal: "G12 | Reproducibility | make calibrate ×2 | artefacts identical except created_at; tests/test_fusion_artifact.py passes"}
+  - {id: G13a, metric: latency_p95_s, set: image, labels: [image_256px_face, image_800px], agg: max, op: "<=", target: 25,
+     goal: "G13 | Latency | make bench, all admitted detectors, warm, idle host | image p95 ≤ 25 s; video (≤ 60 s clip) p95 ≤ 120 s"}
+  - {id: G13b, metric: latency_p95_s, set: video, labels: [video_9s_1080p], agg: max, op: "<=", target: 120,
+     goal: "G13 | Latency | make bench, all admitted detectors, warm, idle host | image p95 ≤ 25 s; video (≤ 60 s clip) p95 ≤ 120 s"}
+  - {id: G14, metric: auc, set: image/test/legacy, op: ">=", target: 0.95,
+     goal: "G14 | Legacy regression AUC | ELSA_D3 + COCO/Flickr (legacy stratum) | ≥ 0.95"}
+  - {id: G15a, metric: additivity_max_abs, set: image/test, op: "<=", target: 1.0e-9,
+     goal: "G15 | Additivity and monotonicity invariants | 1,000 random test items | |Σφ' + b' − logit s| ≤ 1e-9; random +Δz never lowers s"}
+  - {id: G15b, metric: monotonicity_violations, set: image/test, op: "==", target: 0,
+     goal: "G15 | Additivity and monotonicity invariants | 1,000 random test items | |Σφ' + b' − logit s| ≤ 1e-9; random +Δz never lowers s"}

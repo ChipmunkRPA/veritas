@@ -1,0 +1,21 @@
+<section class="chapter-cont" id="section-limitations">
+<h2 class="chapter-title"><span class="n">{{ v.number.limitations }}</span>Limitations</h2>
+<h3 class="eyebrow">Applied to this exhibit</h3>
+{% if v.limitations %}
+<table class="grid limitations">
+<tbody>
+{% for l in v.limitations %}
+<tr><td class="mono w-id">{{ l.id }}</td><td>{{ l.text }}{% if l.acknowledged %} <span class="caption">· acknowledged by the examiner</span>{% endif %}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No limitation specific to this exhibit fired. The general limitations below still apply.</p>
+{% endif %}
+<h3 class="eyebrow">General limitations</h3>
+<ul class="plain-list">
+{% for l in v.general_limitations %}
+<li>{{ l }}</li>
+{% endfor %}
+</ul>
+</section>

@@ -1,0 +1,470 @@
+{
+  "baseline_detectors": [
+    "aud.gustking_xlsr",
+    "vid.codec.ffprobe",
+    "vid.frames.dfdc_b7",
+    "vid.frames.hf.ateeqq",
+    "vid.frames.hf.dima806",
+    "vid.lipsync.landmark_xcorr"
+  ],
+  "bench": {
+    "excluded_folds": [],
+    "excluded_items": {
+      "split:test": 70
+    },
+    "manifest_sha256": "d0224343a5c0ad38605ade2b5225deba3cb607ace950e2ae3a127ba9dab26d25",
+    "version": "vb-1.0-core"
+  },
+  "candidate": "vid.frames.univfd",
+  "command": "make calibrate MODALITY=video SEED=7 BENCH=vb-1.0-core DETECTORS=vid.frames.univfd,vid.frames.hf.ateeqq,vid.frames.hf.dima806,vid.frames.dfdc_b7,vid.codec.ffprobe,vid.lipsync.landmark_xcorr,aud.gustking_xlsr ABLATE=vid.frames.univfd ABLATE_BOOTSTRAP=2000",
+  "contamination_card": true,
+  "criteria": {
+    "A3": {
+      "pass": false,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.0,
+      "lgo_macro_delta": 0.0,
+      "pass": false,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.0,
+      "pass": false,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "failing_strata": [],
+      "pass": true,
+      "rule": "ΔFPR at τ_0.05 ≤ 0.5 pt in every real stratum and paired-bootstrap upper bound ≤ 1.0 pt"
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.7592708988057826,
+      "without": 0.7743557510999372
+    },
+    "fpr_per_stratum": {
+      "V-general": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 30,
+        "with": 0.03333333333333333,
+        "without": 0.03333333333333333
+      },
+      "V-talking-head": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 7,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "recall_per_family": {
+      "ai-talking-humans": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "animatediff": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "cogvideox": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.3333333333333333,
+        "without": 0.3333333333333333
+      },
+      "kling": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "luma-ray": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.3333333333333333,
+        "without": 0.3333333333333333
+      },
+      "marey": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "mochi": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "pika": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.3333333333333333,
+        "without": 0.3333333333333333
+      },
+      "runway": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "seedance": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "sora": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 3,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "stable-video": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "talking-head-animation": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "veo": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "videopoet": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      },
+      "wan-hunyuan": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "recall_per_threat": {
+      "t2v": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 41,
+        "with": 0.07317073170731707,
+        "without": 0.07317073170731707
+      },
+      "talking_head": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 2,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "tau": {
+      "with": 0.818130845028162,
+      "without": 0.8181308240332008
+    },
+    "tpr": {
+      "with": 0.06976744186046512,
+      "without": 0.06976744186046512
+    }
+  },
+  "detector_meta": {
+    "aud.gustking_xlsr": {
+      "score_key": "aud.gustking_xlsr@fe21cdef274f",
+      "transform": "logit_clip8",
+      "weights_sha12": "fe21cdef274f"
+    },
+    "vid.codec.ffprobe": {
+      "score_key": "vid.codec.ffprobe@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "vid.frames.dfdc_b7": {
+      "score_key": "vid.frames.dfdc_b7@651bc0cae350",
+      "transform": "logit_clip8",
+      "weights_sha12": "651bc0cae350"
+    },
+    "vid.frames.hf.ateeqq": {
+      "score_key": "vid.frames.hf.ateeqq@eb0d229dd61f",
+      "transform": "logit_clip8",
+      "weights_sha12": "eb0d229dd61f"
+    },
+    "vid.frames.hf.dima806": {
+      "score_key": "vid.frames.hf.dima806@504818193248",
+      "transform": "logit_clip8",
+      "weights_sha12": "504818193248"
+    },
+    "vid.frames.univfd": {
+      "score_key": "vid.frames.univfd@0202f255e4e1",
+      "transform": "logit_clip8",
+      "weights_sha12": "0202f255e4e1"
+    },
+    "vid.lipsync.landmark_xcorr": {
+      "score_key": "vid.lipsync.landmark_xcorr@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    }
+  },
+  "git_commit": "ecc512b7777ba3c59a98dbffdb79d110bc726a8b",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 80,
+    "n_fake": 43,
+    "n_real": 37
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "V-Kling": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 3,
+        "n_train": 77,
+        "tau": {
+          "with": null,
+          "without": null
+        },
+        "tpr": {
+          "with": 0.0,
+          "without": 0.0
+        }
+      },
+      "V-Seedance": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 3,
+        "n_train": 77,
+        "tau": {
+          "with": null,
+          "without": null
+        },
+        "tpr": {
+          "with": 0.0,
+          "without": 0.0
+        }
+      },
+      "V-Sora": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 3,
+        "n_train": 77,
+        "tau": {
+          "with": null,
+          "without": null
+        },
+        "tpr": {
+          "with": 0.0,
+          "without": 0.0
+        }
+      },
+      "V-Veo": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 2,
+        "n_train": 78,
+        "tau": {
+          "with": null,
+          "without": null
+        },
+        "tpr": {
+          "with": 0.0,
+          "without": 0.0
+        }
+      },
+      "V-WanHunyuan": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 2,
+        "n_train": 78,
+        "tau": {
+          "with": null,
+          "without": null
+        },
+        "tpr": {
+          "with": 0.0,
+          "without": 0.0
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.0,
+        "lo": 0.0,
+        "valid": 1369
+      },
+      "delta": 0.0,
+      "with": 0.0,
+      "without": 0.0
+    },
+    "macro_over": [
+      "V-Kling",
+      "V-Seedance",
+      "V-Sora",
+      "V-Veo",
+      "V-WanHunyuan"
+    ],
+    "missing": [],
+    "required": [
+      "V-Veo",
+      "V-Sora",
+      "V-Kling",
+      "V-Seedance",
+      "V-WanHunyuan"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "seed": 7,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "video",
+  "schema": "veritas.ablation/1"
+}

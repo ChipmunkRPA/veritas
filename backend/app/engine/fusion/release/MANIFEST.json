@@ -1,0 +1,53 @@
+{
+  "schema": "veritas.fuser-release/1",
+  "files": [
+    {
+      "file": "fuser-image-2.1.1.json",
+      "bytes": 41041,
+      "sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+      "modality": "image",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    },
+    {
+      "file": "fuser-image-2.1.1.boot.npy",
+      "bytes": 26528,
+      "sha256": "935ecb9b930f5937107323696612fe27c795bd05ed9fa50b9cfc4e5e08839d96",
+      "modality": "image",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    },
+    {
+      "file": "fuser-video-2.1.1.json",
+      "bytes": 23397,
+      "sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45",
+      "modality": "video",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    },
+    {
+      "file": "fuser-video-2.1.1.boot.npy",
+      "bytes": 38528,
+      "sha256": "b0dac3e3e650572c3ca884ad0f8821042579c11f199374a13bdd2e198b3ba092",
+      "modality": "video",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    },
+    {
+      "file": "fuser-audio-2.1.1.json",
+      "bytes": 10269,
+      "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3",
+      "modality": "audio",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    },
+    {
+      "file": "fuser-audio-2.1.1.boot.npy",
+      "bytes": 12928,
+      "sha256": "d864af8a9ae8a1235cf436625ccf42cfca59bc2b3e8ebfaa6e7ea41a585e068b",
+      "modality": "audio",
+      "version": "2.1.1",
+      "bench": "vb-1.1"
+    }
+  ]
+}

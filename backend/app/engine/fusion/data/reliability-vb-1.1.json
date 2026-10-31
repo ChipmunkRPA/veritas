@@ -1,0 +1,503 @@
+{
+  "records": [
+    {
+      "bench_version": "vb-1.1",
+      "binning": "equal_mass",
+      "bins": [
+        {
+          "bin": 0,
+          "mean_s": 2.9917727046488882e-05,
+          "mean_y": 0.0,
+          "n": 128,
+          "s_max": 0.0001114759388312523,
+          "s_min": 1.131903517593929e-07,
+          "weight": 0.06680584551148223
+        },
+        {
+          "bin": 1,
+          "mean_s": 0.007364075294876417,
+          "mean_y": 0.03660260573873839,
+          "n": 127,
+          "s_max": 0.026798305882359735,
+          "s_min": 0.0001219958862464461,
+          "weight": 0.0666352665614339
+        },
+        {
+          "bin": 2,
+          "mean_s": 0.04958714873007887,
+          "mean_y": 0.1005169881149965,
+          "n": 126,
+          "s_max": 0.0693578086634341,
+          "s_min": 0.027685171027101153,
+          "weight": 0.06672819389989307
+        },
+        {
+          "bin": 3,
+          "mean_s": 0.0911322695565583,
+          "mean_y": 0.21013981345489927,
+          "n": 124,
+          "s_max": 0.12044988972169988,
+          "s_min": 0.06936051709892745,
+          "weight": 0.0667383777178064
+        },
+        {
+          "bin": 4,
+          "mean_s": 0.16395873318021756,
+          "mean_y": 0.1745124733945658,
+          "n": 124,
+          "s_max": 0.2119426953719073,
+          "s_min": 0.12146502465447058,
+          "weight": 0.06638703599979633
+        },
+        {
+          "bin": 5,
+          "mean_s": 0.289479360636507,
+          "mean_y": 0.27371428571428574,
+          "n": 123,
+          "s_max": 0.368959874959713,
+          "s_min": 0.2131339253420662,
+          "weight": 0.0668313050562656
+        },
+        {
+          "bin": 6,
+          "mean_s": 0.45200575071004456,
+          "mean_y": 0.38314161651557865,
+          "n": 121,
+          "s_max": 0.5042188730973065,
+          "s_min": 0.36978421610333256,
+          "weight": 0.06684148887417893
+        },
+        {
+          "bin": 7,
+          "mean_s": 0.540549638060181,
+          "mean_y": 0.37746256895193075,
+          "n": 120,
+          "s_max": 0.569902649036621,
+          "s_min": 0.5053703679276895,
+          "weight": 0.06623173277661795
+        },
+        {
+          "bin": 8,
+          "mean_s": 0.6361697039436195,
+          "mean_y": 0.5472201066260473,
+          "n": 118,
+          "s_max": 0.7052951145117671,
+          "s_min": 0.5725670108072247,
+          "weight": 0.06685676460104893
+        },
+        {
+          "bin": 9,
+          "mean_s": 0.7896078247949625,
+          "mean_y": 0.7414435590208106,
+          "n": 114,
+          "s_max": 0.8565830794288614,
+          "s_min": 0.7060750921935129,
+          "weight": 0.06661362594836805
+        },
+        {
+          "bin": 10,
+          "mean_s": 0.9073229924997273,
+          "mean_y": 0.8043967787489028,
+          "n": 113,
+          "s_max": 0.9419247195411338,
+          "s_min": 0.8567134662365274,
+          "weight": 0.06670655328682723
+        },
+        {
+          "bin": 11,
+          "mean_s": 0.9662017051908044,
+          "mean_y": 0.9297784882393244,
+          "n": 111,
+          "s_max": 0.9874879484243297,
+          "s_min": 0.9420255656313826,
+          "weight": 0.0668924079637456
+        },
+        {
+          "bin": 12,
+          "mean_s": 0.9949035393905216,
+          "mean_y": 0.9529420766699828,
+          "n": 110,
+          "s_max": 0.998472292387425,
+          "s_min": 0.9875408915569952,
+          "weight": 0.06654615815469217
+        },
+        {
+          "bin": 13,
+          "mean_s": 0.9993198134307844,
+          "mean_y": 0.9921368570442257,
+          "n": 109,
+          "s_max": 0.9997621563653105,
+          "s_min": 0.9985478747681183,
+          "weight": 0.0663755792046438
+        },
+        {
+          "bin": 14,
+          "mean_s": 0.9999454291200787,
+          "mean_y": 0.9765638397195285,
+          "n": 110,
+          "s_max": 0.9999999998882634,
+          "s_min": 0.9997635250308989,
+          "weight": 0.06680966444319975
+        }
+      ],
+      "ece": 0.05373872655634812,
+      "ece_bootstrap_replicates": 2000,
+      "ece_bootstrap_valid": 2000,
+      "ece_ci95": [
+        0.043203998321408914,
+        0.07242332998342131
+      ],
+      "ece_interval_method": "grouped_bootstrap_percentile",
+      "evaluated_artefact_sha256": "c4303453c7bba3e491bf2498497510d365c8fa2aebe64a9c02475e157bfdb82f",
+      "limitation": "Historical benchmark, not independent source validation or current end-to-end accuracy. The evaluated-to-published artefact relationship is documented metrics publication; earlier artefact bytes were not independently reconstructed. Scores are unclamped statistical fuser estimates before documentary overrides and publication caps. ECE has a grouped-bootstrap interval; per-bin intervals are not recorded. Persisted numeric fields may be rounded to six decimal places; the pinned source report and bundle preserve full precision.",
+      "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+      "n_fake": 820,
+      "n_real": 958,
+      "population": "image/test",
+      "publication_binding": "documented_metrics_publication",
+      "publication_record_sha256": "626b0fa193b5251d016c60ddf62165b5ff8b30a3523532a21282154dd8d061f4",
+      "published_artefact_sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+      "report_generated_at": "2026-09-17T11:54:54Z",
+      "report_sha256": "2c702c6c61aa89966bcbe82929386be94144c6e7fa02e4fa22ac78d15accd2bd",
+      "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+      "score_semantics": "unclamped_fuser",
+      "variant": "norm",
+      "version": "veritas.reliability-diagram/1",
+      "view": "size_matched",
+      "weighting": "class_balanced"
+    },
+    {
+      "bench_version": "vb-1.1",
+      "binning": "equal_mass",
+      "bins": [
+        {
+          "bin": 0,
+          "mean_s": 0.21149972825093075,
+          "mean_y": 0.0,
+          "n": 35,
+          "s_max": 0.21814447942612947,
+          "s_min": 0.19425144823909973,
+          "weight": 0.06679389312977098
+        },
+        {
+          "bin": 1,
+          "mean_s": 0.22364967878125375,
+          "mean_y": 0.05091333074232415,
+          "n": 36,
+          "s_max": 0.23111458561068146,
+          "s_min": 0.21816945874429744,
+          "weight": 0.06635547761501957
+        },
+        {
+          "bin": 2,
+          "mean_s": 0.23933160461573094,
+          "mean_y": 0.13596263622210694,
+          "n": 38,
+          "s_max": 0.24935397168265996,
+          "s_min": 0.23122328878708315,
+          "weight": 0.06626091740595555
+        },
+        {
+          "bin": 3,
+          "mean_s": 0.25921357882428614,
+          "mean_y": 0.1690758905524007,
+          "n": 39,
+          "s_max": 0.27296959515438957,
+          "s_min": 0.2501298758083559,
+          "weight": 0.06660477271164292
+        },
+        {
+          "bin": 4,
+          "mean_s": 0.29554419773096713,
+          "mean_y": 0.2663955261820031,
+          "n": 42,
+          "s_max": 0.32423258104914193,
+          "s_min": 0.2740132779754562,
+          "weight": 0.06763633862870504
+        },
+        {
+          "bin": 5,
+          "mean_s": 0.35556196786178357,
+          "mean_y": 0.3925732899022802,
+          "n": 44,
+          "s_max": 0.387524056985766,
+          "s_min": 0.32431138828366735,
+          "weight": 0.06597723677876349
+        },
+        {
+          "bin": 6,
+          "mean_s": 0.4203545111487269,
+          "mean_y": 0.5183152520740268,
+          "n": 48,
+          "s_max": 0.45105809019975523,
+          "s_min": 0.38821672482918884,
+          "weight": 0.06735265800151297
+        },
+        {
+          "bin": 7,
+          "mean_s": 0.4869919775100228,
+          "mean_y": 0.5101246105919004,
+          "n": 47,
+          "s_max": 0.5215529850892405,
+          "s_min": 0.4528806871091411,
+          "weight": 0.06622653187538682
+        },
+        {
+          "bin": 8,
+          "mean_s": 0.5690184155818666,
+          "mean_y": 0.6330111902339777,
+          "n": 51,
+          "s_max": 0.6165265100840177,
+          "s_min": 0.5225134066705037,
+          "weight": 0.06760195309813628
+        },
+        {
+          "bin": 9,
+          "mean_s": 0.6713172994597814,
+          "mean_y": 0.6203630623520127,
+          "n": 49,
+          "s_max": 0.7152408001425441,
+          "s_min": 0.6180108493300305,
+          "weight": 0.06534970084588405
+        },
+        {
+          "bin": 10,
+          "mean_s": 0.7442346080002578,
+          "mean_y": 0.7723660599846196,
+          "n": 54,
+          "s_max": 0.767805590191169,
+          "s_min": 0.7156486528684098,
+          "weight": 0.06706897737432087
+        },
+        {
+          "bin": 11,
+          "mean_s": 0.7822165669059079,
+          "mean_y": 0.7723660599846196,
+          "n": 54,
+          "s_max": 0.7924597482664884,
+          "s_min": 0.7684258379836597,
+          "weight": 0.06706897737432087
+        },
+        {
+          "bin": 12,
+          "mean_s": 0.7986244855629965,
+          "mean_y": 0.8846753246753246,
+          "n": 56,
+          "s_max": 0.8022623098823426,
+          "s_min": 0.7924724961583937,
+          "weight": 0.0661921463448181
+        },
+        {
+          "bin": 13,
+          "mean_s": 0.8041487687748272,
+          "mean_y": 0.8575279168271079,
+          "n": 56,
+          "s_max": 0.8056306944638034,
+          "s_min": 0.8023521360183853,
+          "weight": 0.06697441716525687
+        },
+        {
+          "bin": 14,
+          "mean_s": 0.8084626309303532,
+          "mean_y": 0.9139534883720932,
+          "n": 57,
+          "s_max": 0.8183346839272774,
+          "s_min": 0.8057540941035019,
+          "weight": 0.06653600165050545
+        }
+      ],
+      "ece": 0.0774782993340389,
+      "ece_bootstrap_replicates": 2000,
+      "ece_bootstrap_valid": 2000,
+      "ece_ci95": [
+        0.07017278224301104,
+        0.12598551524475174
+      ],
+      "ece_interval_method": "grouped_bootstrap_percentile",
+      "evaluated_artefact_sha256": "35fb3e96d21506a5ec258476703b31925edc69908232bd0cf08e97e550f9e6cb",
+      "limitation": "Historical benchmark, not independent source validation or current end-to-end accuracy. The evaluated-to-published artefact relationship is documented metrics publication; earlier artefact bytes were not independently reconstructed. Scores are unclamped statistical fuser estimates before documentary overrides and publication caps. ECE has a grouped-bootstrap interval; per-bin intervals are not recorded. Persisted numeric fields may be rounded to six decimal places; the pinned source report and bundle preserve full precision.",
+      "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+      "n_fake": 444,
+      "n_real": 262,
+      "population": "audio/test",
+      "publication_binding": "documented_metrics_publication",
+      "publication_record_sha256": "626b0fa193b5251d016c60ddf62165b5ff8b30a3523532a21282154dd8d061f4",
+      "published_artefact_sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3",
+      "report_generated_at": "2026-09-17T11:54:54Z",
+      "report_sha256": "2c702c6c61aa89966bcbe82929386be94144c6e7fa02e4fa22ac78d15accd2bd",
+      "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+      "score_semantics": "unclamped_fuser",
+      "variant": "native",
+      "version": "veritas.reliability-diagram/1",
+      "view": "full",
+      "weighting": "class_balanced"
+    },
+    {
+      "bench_version": "vb-1.1",
+      "binning": "equal_mass",
+      "bins": [
+        {
+          "bin": 0,
+          "mean_s": 0.006767684739618589,
+          "mean_y": 0.0,
+          "n": 22,
+          "s_max": 0.011419024249657402,
+          "s_min": 0.0018852195024006838,
+          "weight": 0.06790123456790124
+        },
+        {
+          "bin": 1,
+          "mean_s": 0.01936275556933745,
+          "mean_y": 0.05660377358490566,
+          "n": 21,
+          "s_max": 0.027141928120956994,
+          "s_min": 0.011687666737936898,
+          "weight": 0.0654320987654321
+        },
+        {
+          "bin": 2,
+          "mean_s": 0.039515427530624536,
+          "mean_y": 0.05660377358490566,
+          "n": 21,
+          "s_max": 0.05610960091092543,
+          "s_min": 0.027661914322493902,
+          "weight": 0.0654320987654321
+        },
+        {
+          "bin": 3,
+          "mean_s": 0.08056555740789365,
+          "mean_y": 0.05405405405405404,
+          "n": 22,
+          "s_max": 0.1077648058439238,
+          "s_min": 0.056177671737805995,
+          "weight": 0.06851851851851853
+        },
+        {
+          "bin": 4,
+          "mean_s": 0.13458496010193183,
+          "mean_y": 0.05660377358490566,
+          "n": 21,
+          "s_max": 0.17924007603605482,
+          "s_min": 0.1084484186412467,
+          "weight": 0.0654320987654321
+        },
+        {
+          "bin": 5,
+          "mean_s": 0.22489703813933085,
+          "mean_y": 0.16666666666666666,
+          "n": 21,
+          "s_max": 0.2767450846827193,
+          "s_min": 0.17930524274691817,
+          "weight": 0.06666666666666668
+        },
+        {
+          "bin": 6,
+          "mean_s": 0.3715574555517305,
+          "mean_y": 0.16666666666666669,
+          "n": 21,
+          "s_max": 0.4806645213701164,
+          "s_min": 0.2834037886982256,
+          "weight": 0.06666666666666667
+        },
+        {
+          "bin": 7,
+          "mean_s": 0.5568843165998725,
+          "mean_y": 0.3925233644859813,
+          "n": 20,
+          "s_max": 0.6364089336448547,
+          "s_min": 0.4819094261387513,
+          "weight": 0.06604938271604939
+        },
+        {
+          "bin": 8,
+          "mean_s": 0.7107644650046734,
+          "mean_y": 0.6902654867256636,
+          "n": 20,
+          "s_max": 0.7731292073880999,
+          "s_min": 0.6452408244635868,
+          "weight": 0.0697530864197531
+        },
+        {
+          "bin": 9,
+          "mean_s": 0.8547720456051969,
+          "mean_y": 0.857142857142857,
+          "n": 18,
+          "s_max": 0.9061533857349926,
+          "s_min": 0.7740486699828464,
+          "weight": 0.06481481481481483
+        },
+        {
+          "bin": 10,
+          "mean_s": 0.9328218440788357,
+          "mean_y": 0.9999999999999998,
+          "n": 18,
+          "s_max": 0.947395880733678,
+          "s_min": 0.9066476373266023,
+          "weight": 0.06666666666666668
+        },
+        {
+          "bin": 11,
+          "mean_s": 0.962433365058987,
+          "mean_y": 0.9999999999999998,
+          "n": 18,
+          "s_max": 0.9715151753265651,
+          "s_min": 0.9474825985750713,
+          "weight": 0.06666666666666668
+        },
+        {
+          "bin": 12,
+          "mean_s": 0.9825309882585137,
+          "mean_y": 0.9999999999999998,
+          "n": 18,
+          "s_max": 0.9892304811174538,
+          "s_min": 0.9730996032600222,
+          "weight": 0.06666666666666668
+        },
+        {
+          "bin": 13,
+          "mean_s": 0.9944464188761253,
+          "mean_y": 0.9999999999999998,
+          "n": 18,
+          "s_max": 0.997803527620066,
+          "s_min": 0.9892572804233337,
+          "weight": 0.06666666666666668
+        },
+        {
+          "bin": 14,
+          "mean_s": 0.9983106102539018,
+          "mean_y": 0.9999999999999998,
+          "n": 18,
+          "s_max": 0.9991896654907025,
+          "s_min": 0.9979362887826212,
+          "weight": 0.06666666666666668
+        }
+      ],
+      "ece": 0.04954475249555497,
+      "ece_bootstrap_replicates": 2000,
+      "ece_bootstrap_valid": 2000,
+      "ece_ci95": [
+        0.04414924390135746,
+        0.08807620909866366
+      ],
+      "ece_interval_method": "grouped_bootstrap_percentile",
+      "evaluated_artefact_sha256": "1b15680fa87a7cb8a4a86e81e3bd2f758ec1a5b60fe5fe397d15b6016f3c5107",
+      "limitation": "Historical benchmark, not independent source validation or current end-to-end accuracy. The evaluated-to-published artefact relationship is documented metrics publication; earlier artefact bytes were not independently reconstructed. Scores are unclamped statistical fuser estimates before documentary overrides and publication caps. ECE has a grouped-bootstrap interval; per-bin intervals are not recorded. Persisted numeric fields may be rounded to six decimal places; the pinned source report and bundle preserve full precision.",
+      "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+      "n_fake": 135,
+      "n_real": 162,
+      "population": "video/test",
+      "publication_binding": "documented_metrics_publication",
+      "publication_record_sha256": "626b0fa193b5251d016c60ddf62165b5ff8b30a3523532a21282154dd8d061f4",
+      "published_artefact_sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45",
+      "report_generated_at": "2026-09-17T11:54:54Z",
+      "report_sha256": "2c702c6c61aa89966bcbe82929386be94144c6e7fa02e4fa22ac78d15accd2bd",
+      "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+      "score_semantics": "unclamped_fuser",
+      "variant": "native",
+      "version": "veritas.reliability-diagram/1",
+      "view": "full",
+      "weighting": "class_balanced"
+    }
+  ],
+  "version": "veritas.calibration-evidence/1"
+}

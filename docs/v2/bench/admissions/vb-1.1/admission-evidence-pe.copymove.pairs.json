@@ -1,0 +1,115 @@
+{
+  "A2": {
+    "auc": 0.49554730983302414,
+    "ci95": {
+      "B": 2000,
+      "hi": 0.49783809440389526,
+      "level": 0.95,
+      "lo": 0.49294161246460516,
+      "valid": 2000
+    },
+    "coverage": {
+      "fake": {
+        "scored": 161,
+        "subset": 245
+      },
+      "real": {
+        "scored": 2695,
+        "subset": 2697
+      }
+    },
+    "min_auc": 0.7,
+    "pass": false,
+    "threats": [
+      "edit"
+    ]
+  },
+  "A5": {
+    "alpha": 0.05,
+    "consequence": null,
+    "max_drop": 0.15,
+    "pass": null,
+    "tau": 0.5,
+    "transforms": {
+      "jpeg75": {
+        "delta_tpr": 0.0,
+        "n": 3,
+        "pass": null,
+        "reason": "fewer than 30 paired fakes",
+        "tpr_clean": {
+          "k": 3,
+          "n": 3,
+          "rule_of_three": null,
+          "value": 1.0,
+          "wilson95": [
+            0.43850296436068037,
+            1.0
+          ]
+        },
+        "tpr_t": {
+          "k": 3,
+          "n": 3,
+          "rule_of_three": null,
+          "value": 1.0,
+          "wilson95": [
+            0.43850296436068037,
+            1.0
+          ]
+        }
+      },
+      "social_ig": {
+        "delta_tpr": 0.0,
+        "n": 3,
+        "pass": null,
+        "reason": "fewer than 30 paired fakes",
+        "tpr_clean": {
+          "k": 3,
+          "n": 3,
+          "rule_of_three": null,
+          "value": 1.0,
+          "wilson95": [
+            0.43850296436068037,
+            1.0
+          ]
+        },
+        "tpr_t": {
+          "k": 3,
+          "n": 3,
+          "rule_of_three": null,
+          "value": 1.0,
+          "wilson95": [
+            0.43850296436068037,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "A6": {
+    "analysis_p95_s": null,
+    "max_ms": 2716.0,
+    "max_p95_ms": 3000.0,
+    "n": 10307,
+    "p50_ms": 84.0,
+    "p95_ms": 493.0,
+    "pass": true
+  },
+  "bootstrap_B": 2000,
+  "card_threats": [
+    "partial_edit"
+  ],
+  "detector_id": "pe.copymove.pairs",
+  "items": {
+    "n": 2942,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "runtime_source": "img.forensic.copymove",
+  "schema": "veritas.admission-evidence/1",
+  "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+  "seed": 7,
+  "threats_source": "cli"
+}

@@ -1,0 +1,417 @@
+{
+  "bench": "vb-1.1",
+  "generated": "2026-09-17T09:07:57+00:00",
+  "inputs": "docs/v2/bench/admissions/vb-1.1-inputs.yaml",
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "records": [
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "commfor.vit_s16_384 notes: A1 parity in float32 (I-6, 2026-09-14), CPU vs MPS on 50 vb items max |Δp| 3.60e-06",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.8591418836931128,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8863686364111988,
+          "level": 0.95,
+          "lo": 0.8317385713942782,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 1893,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2202,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": -0.0645466993787303,
+        "lgo_macro_delta": -0.03612842238539837,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": -0.03612842238539837,
+        "pass": false,
+        "qualifying": [
+          "family faceswap-stills",
+          "family gan-faces",
+          "family seedream4",
+          "threat faceswap",
+          "threat gan_face"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.006239574412695813,
+        "pooled_ci95_lo": -0.007795280339833376,
+        "pooled_delta": -0.0007579918900515945,
+        "pooled_harm_established": false,
+        "rule": "pooled reals of fit ∪ cal: the paired ΔFPR at τ_0.05 and its interval are reported; pooled reals block with a paired lower bound above +1.0 pt (D-53); a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51, D-53)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "context_gated",
+        "max_drop": 0.15,
+        "pass": false,
+        "tau": 0.4717461304556911,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.14529914529914534,
+            "n": 117,
+            "pass": true,
+            "tpr_clean": {
+              "k": 69,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5897435897435898,
+              "wilson95": [
+                0.4991443544550582,
+                0.674637062902941
+              ]
+            },
+            "tpr_t": {
+              "k": 52,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.4444444444444444,
+              "wilson95": [
+                0.35759722132916544,
+                0.5348238060206445
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.15384615384615385,
+            "n": 117,
+            "pass": false,
+            "tpr_clean": {
+              "k": 69,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5897435897435898,
+              "wilson95": [
+                0.4991443544550582,
+                0.674637062902941
+              ]
+            },
+            "tpr_t": {
+              "k": 51,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.4358974358974359,
+              "wilson95": [
+                0.34949970825635257,
+                0.5263707079165052
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1288.0,
+        "max_p95_ms": 3000.0,
+        "n": 8781,
+        "p50_ms": 49.0,
+        "p95_ms": 136.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.ateeqq,img.hf.dima806 GATES='img.dfdc_b7=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.commfor384 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.dda",
+        "img.dfdc_b7",
+        "img.hf.ateeqq",
+        "img.hf.dima806"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.05217391304347826,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "carried_gate": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.commfor384",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "OwensLab/CommunityForensics-Eval"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": false,
+        "A4": true,
+        "A5": false,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "gend.clip_l14 notes: A1 parity in float32 (I-9, 2026-09-12), CPU vs MPS on 50 face items max |Δp| 1.28e-05",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.875140607424072,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.9156367714485417,
+          "level": 0.95,
+          "lo": 0.8228378068890305,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 286,
+            "subset": 385
+          },
+          "real": {
+            "scored": 889,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "faceswap",
+          "talking_head"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": -0.045638476518303286,
+        "lgo_macro_delta": -0.027017152498037156,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": -0.027017152498037156,
+        "pass": false,
+        "qualifying": [
+          "family faceswap-stills",
+          "threat faceswap"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.004986162602976058,
+        "pooled_ci95_lo": -0.0063986050092322225,
+        "pooled_delta": -0.0009009032195107583,
+        "pooled_harm_established": false,
+        "rule": "pooled reals of fit ∪ cal: the paired ΔFPR at τ_0.05 and its interval are reported; pooled reals block with a paired lower bound above +1.0 pt (D-53); a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51, D-53)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.9321199290466481,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 6134.0,
+        "max_p95_ms": 3000.0,
+        "n": 4279,
+        "p50_ms": 46.0,
+        "p95_ms": 142.0999999999999,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=face.gend_clip_l14,img.dda,img.dfdc_b7,img.hf.ateeqq,img.hf.dima806 GATES='face.gend_clip_l14=has_face;img.dfdc_b7=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=face.gend_clip_l14 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.dda",
+        "img.dfdc_b7",
+        "img.hf.ateeqq",
+        "img.hf.dima806"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": 0.11442786069651742,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 201,
+        "triggered": false
+      },
+      "carried_gate": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "face.gend_clip_l14",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": "context_gate",
+      "h3_features": [
+        "has_face"
+      ],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "Celeb-DF v3",
+          "DeepSpeak v1.1",
+          "DeepSpeak v2",
+          "FFIW",
+          "FaceForensics++"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A3 fails",
+        "H-3 context_gate on has_face without the D-41 trigger"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    }
+  ],
+  "schema": "veritas.admission-records/1"
+}

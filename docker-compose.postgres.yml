@@ -1,0 +1,68 @@
+# Postgres for the Compose stack (N-14; SEC-17, PG-13; docs/runbook.md "Postgres: two roles"). SQLite on the data volume is
+# the default; this file adds a database server and connects the service to it with two roles.
+#   VERITAS_PG_PASSWORD=… VERITAS_PG_APP_PASSWORD=… VERITAS_API_KEY=… \
+#     docker compose -f docker-compose.yml -f docker-compose.postgres.yml up --build -d
+# - `veritas` owns the database and its tables and migrates them (VERITAS_PG_PASSWORD). No service connects as it.
+# - `veritas_app` is the role `api` and `worker` connect as (VERITAS_PG_APP_PASSWORD). It owns nothing, so it cannot drop
+#   or disable the triggers that keep the custody log append-only, and it has SELECT and INSERT alone on that log.
+# - `db-setup` is the owner's step. It runs at every `up`, before the API starts: it migrates to the head, sets the
+#   database's default time zone to UTC, creates `veritas_app` (or sets its password again) and renews its grants, which
+#   are per table. An upgrade is therefore `docker compose … up --build -d` and nothing else.
+# Both passwords are required: Compose refuses to render this file without them. They are given to libpq as PGPASSWORD,
+# not written into a URL, so they need no escaping and are not part of VERITAS_DATABASE_URL.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    logging: *logging
+    environment:
+      POSTGRES_DB: veritas
+      POSTGRES_USER: veritas
+      POSTGRES_PASSWORD: ${VERITAS_PG_PASSWORD:?set VERITAS_PG_PASSWORD, the password of the role that owns the database (migrations only)}
+    # Over TCP on purpose: while the image initialises a new volume it runs a server on its socket alone and stops it
+    # again, and a check over the socket would answer "ready" before the real server is up.
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-h", "127.0.0.1", "-U", "veritas", "-d", "veritas"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    mem_limit: ${VERITAS_PG_MEM_LIMIT:-2g}
+    volumes:
+      - veritas-pg:/var/lib/postgresql/data
+
+  # One-shot, as the owner: migrate, set the zone, make the application role, renew its grants. The backend image with
+  # the confinement of `models-init`, and none of its volumes.
+  db-setup:
+    extends:
+      file: docker-compose.yml
+      service: models-init
+    command: ["python", "-m", "app.cli", "db", "setup", "--app-role", "veritas_app", "--password-env", "VERITAS_PG_APP_PASSWORD"]
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      VERITAS_OFFLINE: "true"  # models-init is the only service that downloads
+      VERITAS_DATABASE_URL: postgresql+psycopg://veritas@postgres:5432/veritas
+      PGPASSWORD: ${VERITAS_PG_PASSWORD:?set VERITAS_PG_PASSWORD, the password of the role that owns the database (migrations only)}
+      VERITAS_PG_APP_PASSWORD: ${VERITAS_PG_APP_PASSWORD:?set VERITAS_PG_APP_PASSWORD, the password of the role the service connects as}
+    volumes: !reset []
+    mem_limit: ${VERITAS_DB_SETUP_MEM_LIMIT:-1g}
+
+  api:
+    depends_on:
+      db-setup: { condition: service_completed_successfully }  # the schema is at the head and the grants are current
+    environment: &app-database
+      VERITAS_DATABASE_URL: postgresql+psycopg://veritas_app@postgres:5432/veritas
+      PGPASSWORD: ${VERITAS_PG_APP_PASSWORD:?set VERITAS_PG_APP_PASSWORD, the password of the role the service connects as}
+
+  worker:
+    environment: *app-database
+
+volumes:
+  veritas-pg:

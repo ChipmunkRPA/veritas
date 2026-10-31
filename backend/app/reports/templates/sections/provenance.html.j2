@@ -1,0 +1,39 @@
+{% set p = v.provenance %}
+<section class="chapter-cont" id="section-provenance">
+<h2 class="chapter-title"><span class="n">{{ v.number.provenance }}</span>Provenance and metadata</h2>
+<h3 class="eyebrow">Content Credentials</h3>
+<p>{{ p.credentials }}</p>
+{% for w in p.watermarks %}
+<p>Watermark record: {{ w }}</p>
+{% endfor %}
+<h3 class="eyebrow">Metadata and provenance findings</h3>
+{% if p.findings %}
+<table class="grid">
+<thead><tr><th>Finding</th><th class="w-words">Strength</th><th>Statement</th></tr></thead>
+<tbody>
+{% for f in p.findings %}
+<tr><td><a class="xref" href="{{ f.href }}">{{ f.id }}</a></td><td class="words">{{ f.words }}</td><td><strong>{{ f.title }}</strong><br>{{ f.statement }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="muted">{{ p.findings_none }}</p>
+{% endif %}
+<h3 class="eyebrow">Metadata and provenance signals</h3>
+{% if p.metadata %}
+<table class="grid">
+<thead><tr><th>Signal</th><th>Check</th><th>Observed</th><th>Reference</th></tr></thead>
+<tbody>
+{% for r in p.metadata %}
+<tr><td><a class="xref" href="{{ r.href }}">{{ r.id }}</a></td><td>{{ r.name }}</td><td class="mono">{{ r.observed | unbroken }}</td><td>{{ r.reference | unbroken }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="muted">No metadata or provenance check produced a signal.</p>
+{% endif %}
+<h3 class="eyebrow">Compression history</h3>
+{% for c in p.compression %}
+<p>{{ c }}</p>
+{% endfor %}
+</section>

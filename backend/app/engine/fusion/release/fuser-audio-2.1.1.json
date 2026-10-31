@@ -1,0 +1,419 @@
+{
+  "bench": {
+    "cal_n": 313,
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "detector_no_row": 6,
+      "detector_not_run": 5,
+      "split:test": 715
+    },
+    "fit_n": 561,
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+    "version": "vb-1.1"
+  },
+  "bootstrap": {
+    "B": 200,
+    "columns": [
+      "bias",
+      "z+:aud.gustking_xlsr",
+      "z-:aud.gustking_xlsr",
+      "miss:aud.gustking_xlsr",
+      "platt:global:a",
+      "platt:global:b",
+      "platt:photo_noface:a",
+      "platt:photo_noface:b",
+      "platt:photo_face:a",
+      "platt:photo_face:b",
+      "platt:lowq:a",
+      "platt:lowq:b",
+      "platt:video:a",
+      "platt:video:b",
+      "platt:audio:a",
+      "platt:audio:b"
+    ],
+    "file": "fuser-audio-2.1.1.boot.npy",
+    "grouped_by": "group_key",
+    "seed": 7,
+    "sha256": "d864af8a9ae8a1235cf436625ccf42cfca59bc2b3e8ebfaa6e7ea41a585e068b"
+  },
+  "calibration": {
+    "centre": -0.2670488594054468,
+    "global": {
+      "a": 0.735922948273921,
+      "b": 0.17247423037344792,
+      "n0": 113,
+      "n1": 200
+    },
+    "method": "platt",
+    "min_class_n": 100,
+    "per_context": {
+      "audio": {
+        "a": 0.7359229482739209,
+        "a_hat": 0.735922948273921,
+        "b": 0.1724742303734479,
+        "b_hat": 0.17247423037344792,
+        "n0": 113,
+        "n1": 200,
+        "source": "shrunk"
+      }
+    },
+    "shrinkage_n0": 200
+  },
+  "coef": {
+    "bias": -0.2670488594054468,
+    "miss:aud.gustking_xlsr": 0.0,
+    "z+:aud.gustking_xlsr": 0.8210125117926593,
+    "z-:aud.gustking_xlsr": 0.6664470754016519
+  },
+  "command": "make calibrate MODALITY=audio SEED=7 VERSION=2.1.1 BOOTSTRAP=200 BENCH=vb-1.1 DETECTORS=aud.gustking_xlsr CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet",
+  "conformal": {
+    "alphas": [
+      "0.05",
+      "0.01"
+    ],
+    "min_class_n": 100,
+    "n_ai": {
+      "audio": 200,
+      "global": 200
+    },
+    "n_real": {
+      "audio": 113,
+      "global": 113
+    },
+    "q_ai": {
+      "audio": {
+        "0.01": 0.778243534039099,
+        "0.05": 0.7519329395781525
+      },
+      "global": {
+        "0.01": 0.778243534039099,
+        "0.05": 0.7519329395781525
+      }
+    },
+    "q_real": {
+      "audio": {
+        "0.01": 0.8084880151150154,
+        "0.05": 0.8038179120366072
+      },
+      "global": {
+        "0.01": 0.8084880151150154,
+        "0.05": 0.8038179120366072
+      }
+    }
+  },
+  "context_terms": [],
+  "created_at": "2026-09-17T11:22:42Z",
+  "detectors": [
+    {
+      "id": "aud.gustking_xlsr",
+      "score_key": "aud.gustking_xlsr@fe21cdef274f",
+      "transform": "logit_clip8",
+      "weights_sha12": "fe21cdef274f"
+    }
+  ],
+  "disagreement": {
+    "d95": null,
+    "n_defined": 0,
+    "weights": "|effective weight| = a_k × context-effective coefficient"
+  },
+  "env": {
+    "numpy": "2.2.6",
+    "python": "3.12",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.0"
+  },
+  "features": [
+    "z+:aud.gustking_xlsr",
+    "z-:aud.gustking_xlsr",
+    "miss:aud.gustking_xlsr"
+  ],
+  "fit": {
+    "converged": true,
+    "cv": "StratifiedGroupKFold(5, shuffle=True, seed=7)",
+    "cv_logloss": 0.5046008505039247,
+    "cv_table": [
+      {
+        "cv_logloss": 0.5058448338850267,
+        "l2": 0.01
+      },
+      {
+        "cv_logloss": 0.5058308920501716,
+        "l2": 0.03
+      },
+      {
+        "cv_logloss": 0.5057828264764809,
+        "l2": 0.1
+      },
+      {
+        "cv_logloss": 0.505651633584093,
+        "l2": 0.3
+      },
+      {
+        "cv_logloss": 0.5052588607427876,
+        "l2": 1.0
+      },
+      {
+        "cv_logloss": 0.5046008505039247,
+        "l2": 3.0
+      }
+    ],
+    "l2": 3.0,
+    "l2_grid": [
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0,
+      3.0
+    ],
+    "n_iter": 11,
+    "objective": 281.140978827585,
+    "parameterisation": "w = t + Σ_g r_g, v_g = u_g − r_g; t, r, u ≥ 0",
+    "seed": 7,
+    "solver": "scipy L-BFGS-B",
+    "weights": "class- and stratum-balanced, Σω = n"
+  },
+  "gates": {},
+  "git_commit": "ac9ca5c45f272e7fc47fcb762544ca234ec12122",
+  "groups": [],
+  "metrics": {
+    "cal": {
+      "auc": 0.7942477876106194,
+      "brier_balanced": 0.19138815686426747,
+      "coverage_0.01": {
+        "ai": 0.995,
+        "real": 1.0
+      },
+      "coverage_0.05": {
+        "ai": 0.955,
+        "real": 0.9646017699115044
+      },
+      "inconclusive_rate": 0.7060702875399361,
+      "logloss_balanced": 0.5670236027164806,
+      "n0": 113,
+      "n1": 200,
+      "note": "in-sample: Platt parameters and conformal thresholds were fitted on these items"
+    },
+    "lgo": {},
+    "test": {
+      "auc": 0.8474099099099099,
+      "bench_version": "vb-1.1",
+      "brier": 0.16615984372819576,
+      "ece": 0.0774782993340389,
+      "fpr_at_tau": {
+        "0.01": 0.011450381679389313,
+        "0.05": 0.022900763358778626
+      },
+      "generated_at": "2026-09-17T11:54:54Z",
+      "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+      "n0": 262,
+      "n1": 444,
+      "slices": {
+        "audio/dur4-60s": {
+          "auc": 0.7840121212121212,
+          "measured_at": "audio/dur4-60s",
+          "n_fake": 275,
+          "n_real": 150,
+          "note": null
+        },
+        "audio/dur<4s": {
+          "auc": 0.9233410819949281,
+          "measured_at": "audio/dur<4s",
+          "n_fake": 169,
+          "n_real": 112,
+          "note": null
+        }
+      },
+      "thresholds": {
+        "0.01": 0.8084880151150154,
+        "0.05": 0.8038179120366072
+      },
+      "tpr_at_fpr": {
+        "0.01": 0.036036036036036036,
+        "0.05": 0.1891891891891892
+      }
+    }
+  },
+  "modality": "audio",
+  "reviewed_by": "ralph-loop (automated; pending human review)",
+  "schema": "veritas.fuser/1",
+  "signal_calibration": {
+    "aud.gustking_xlsr": {
+      "a": 0.5559252115661872,
+      "b": 0.07519749869705021,
+      "method": "platt",
+      "n0": 113,
+      "n1": 200
+    }
+  },
+  "size_policy": {
+    "additive_size_face_terms": true,
+    "fixed_missing": [],
+    "global_intercept": false,
+    "neutral_size_missing": false,
+    "removed_context_terms": {},
+    "resolution_balance": false
+  },
+  "skipped_detectors": [],
+  "sub_fusers": {
+    "h1_synthesis": {
+      "skipped": "fewer than 10 items of a class in fit or cal",
+      "threats": [
+        "t2i",
+        "personalised",
+        "gan_face",
+        "t2v"
+      ]
+    },
+    "h2_face_swap": {
+      "skipped": "fewer than 10 items of a class in fit or cal",
+      "threats": [
+        "faceswap",
+        "talking_head"
+      ]
+    },
+    "h2_partial_edit": {
+      "skipped": "fewer than 10 items of a class in fit or cal",
+      "threats": [
+        "edit"
+      ]
+    },
+    "voice": {
+      "calibration": {
+        "centre": -0.2670488594054468,
+        "global": {
+          "a": 0.735922948273921,
+          "b": 0.17247423037344792,
+          "n0": 113,
+          "n1": 200
+        },
+        "method": "platt",
+        "min_class_n": 100,
+        "per_context": {
+          "audio": {
+            "a": 0.7359229482739209,
+            "a_hat": 0.735922948273921,
+            "b": 0.1724742303734479,
+            "b_hat": 0.17247423037344792,
+            "n0": 113,
+            "n1": 200,
+            "source": "shrunk"
+          }
+        },
+        "shrinkage_n0": 200
+      },
+      "coef": {
+        "bias": -0.2670488594054468,
+        "miss:aud.gustking_xlsr": 0.0,
+        "z+:aud.gustking_xlsr": 0.8210125117926593,
+        "z-:aud.gustking_xlsr": 0.6664470754016519
+      },
+      "conformal": {
+        "alphas": [
+          "0.05",
+          "0.01"
+        ],
+        "min_class_n": 100,
+        "n_ai": {
+          "audio": 200,
+          "global": 200
+        },
+        "n_real": {
+          "audio": 113,
+          "global": 113
+        },
+        "q_ai": {
+          "audio": {
+            "0.01": 0.778243534039099,
+            "0.05": 0.7519329395781525
+          },
+          "global": {
+            "0.01": 0.778243534039099,
+            "0.05": 0.7519329395781525
+          }
+        },
+        "q_real": {
+          "audio": {
+            "0.01": 0.8084880151150154,
+            "0.05": 0.8038179120366072
+          },
+          "global": {
+            "0.01": 0.8084880151150154,
+            "0.05": 0.8038179120366072
+          }
+        }
+      },
+      "fit": {
+        "converged": true,
+        "cv": "StratifiedGroupKFold(5, shuffle=True, seed=7)",
+        "cv_logloss": 0.5046008505039247,
+        "cv_table": [
+          {
+            "cv_logloss": 0.5058448338850267,
+            "l2": 0.01
+          },
+          {
+            "cv_logloss": 0.5058308920501716,
+            "l2": 0.03
+          },
+          {
+            "cv_logloss": 0.5057828264764809,
+            "l2": 0.1
+          },
+          {
+            "cv_logloss": 0.505651633584093,
+            "l2": 0.3
+          },
+          {
+            "cv_logloss": 0.5052588607427876,
+            "l2": 1.0
+          },
+          {
+            "cv_logloss": 0.5046008505039247,
+            "l2": 3.0
+          }
+        ],
+        "l2": 3.0,
+        "l2_grid": [
+          0.01,
+          0.03,
+          0.1,
+          0.3,
+          1.0,
+          3.0
+        ],
+        "n_iter": 11,
+        "objective": 281.140978827585,
+        "parameterisation": "w = t + Σ_g r_g, v_g = u_g − r_g; t, r, u ≥ 0",
+        "seed": 7,
+        "solver": "scipy L-BFGS-B",
+        "weights": "class- and stratum-balanced, Σω = n"
+      },
+      "metrics": {
+        "cal": {
+          "auc": 0.7942477876106194,
+          "brier_balanced": 0.19138815686426747,
+          "coverage_0.01": {
+            "ai": 0.995,
+            "real": 1.0
+          },
+          "coverage_0.05": {
+            "ai": 0.955,
+            "real": 0.9646017699115044
+          },
+          "inconclusive_rate": 0.7060702875399361,
+          "logloss_balanced": 0.5670236027164806,
+          "n0": 113,
+          "n1": 200,
+          "note": "in-sample: Platt parameters and conformal thresholds were fitted on these items"
+        }
+      },
+      "threats": [
+        "tts"
+      ]
+    }
+  },
+  "version": "2.1.1"
+}

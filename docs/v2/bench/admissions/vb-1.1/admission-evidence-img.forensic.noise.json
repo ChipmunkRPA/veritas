@@ -1,0 +1,120 @@
+{
+  "A2": {
+    "auc": 0.6288068077825557,
+    "ci95": {
+      "B": 2000,
+      "hi": 0.651989948951435,
+      "level": 0.95,
+      "lo": 0.6049408468492624,
+      "valid": 2000
+    },
+    "coverage": {
+      "fake": {
+        "scored": 2527,
+        "subset": 3319
+      },
+      "real": {
+        "scored": 2694,
+        "subset": 2697
+      }
+    },
+    "min_auc": 0.7,
+    "pass": false,
+    "threats": [
+      "faceswap",
+      "talking_head",
+      "edit",
+      "t2i",
+      "personalised",
+      "gan_face",
+      "t2v"
+    ]
+  },
+  "A5": {
+    "alpha": 0.05,
+    "consequence": "ungated",
+    "max_drop": 0.15,
+    "pass": true,
+    "tau": 0.671295,
+    "transforms": {
+      "jpeg75": {
+        "delta_tpr": -0.046153846153846156,
+        "n": 130,
+        "pass": true,
+        "tpr_clean": {
+          "k": 8,
+          "n": 130,
+          "rule_of_three": null,
+          "value": 0.06153846153846154,
+          "wilson95": [
+            0.03150928499520798,
+            0.11673669982249635
+          ]
+        },
+        "tpr_t": {
+          "k": 14,
+          "n": 130,
+          "rule_of_three": null,
+          "value": 0.1076923076923077,
+          "wilson95": [
+            0.06524133935938287,
+            0.17266296284593152
+          ]
+        }
+      },
+      "social_ig": {
+        "delta_tpr": -0.05384615384615385,
+        "n": 130,
+        "pass": true,
+        "tpr_clean": {
+          "k": 8,
+          "n": 130,
+          "rule_of_three": null,
+          "value": 0.06153846153846154,
+          "wilson95": [
+            0.03150928499520798,
+            0.11673669982249635
+          ]
+        },
+        "tpr_t": {
+          "k": 15,
+          "n": 130,
+          "rule_of_three": null,
+          "value": 0.11538461538461539,
+          "wilson95": [
+            0.07118367247445512,
+            0.1816636826287943
+          ]
+        }
+      }
+    }
+  },
+  "A6": {
+    "analysis_p95_s": null,
+    "max_ms": 1664.0,
+    "max_p95_ms": 3000.0,
+    "n": 10346,
+    "p50_ms": 88.0,
+    "p95_ms": 516.0,
+    "pass": true
+  },
+  "bootstrap_B": 2000,
+  "card_threats": [
+    "face_swap",
+    "partial_edit",
+    "full_synthesis"
+  ],
+  "detector_id": "img.forensic.noise",
+  "items": {
+    "n": 6016,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "schema": "veritas.admission-evidence/1",
+  "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+  "seed": 7,
+  "threats_source": "card"
+}

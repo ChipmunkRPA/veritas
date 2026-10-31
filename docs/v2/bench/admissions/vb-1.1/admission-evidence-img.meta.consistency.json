@@ -1,0 +1,63 @@
+{
+  "A2": {
+    "auc": null,
+    "ci95": null,
+    "coverage": {
+      "fake": {
+        "scored": 0,
+        "subset": 245
+      },
+      "real": {
+        "scored": 0,
+        "subset": 2697
+      }
+    },
+    "min_auc": 0.7,
+    "pass": null,
+    "threats": [
+      "edit"
+    ]
+  },
+  "A5": {
+    "alpha": 0.05,
+    "consequence": null,
+    "max_drop": 0.15,
+    "pass": null,
+    "tau": null,
+    "transforms": {
+      "jpeg75": {
+        "delta_tpr": null,
+        "n": 0,
+        "pass": null
+      },
+      "social_ig": {
+        "delta_tpr": null,
+        "n": 0,
+        "pass": null
+      }
+    }
+  },
+  "A6": {
+    "analysis_p95_s": null,
+    "max_p95_ms": 3000.0,
+    "n": 0,
+    "pass": null
+  },
+  "bootstrap_B": 2000,
+  "card_threats": [
+    "partial_edit"
+  ],
+  "detector_id": "img.meta.consistency",
+  "items": {
+    "n": 2942,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "schema": "veritas.admission-evidence/1",
+  "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+  "seed": 7,
+  "threats_source": "card"
+}

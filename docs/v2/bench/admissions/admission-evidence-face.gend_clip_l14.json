@@ -1,0 +1,112 @@
+{
+  "A2": {
+    "auc": 0.8728632478632479,
+    "ci95": {
+      "B": 2000,
+      "hi": 0.9394678973263555,
+      "level": 0.95,
+      "lo": 0.7934934193431561,
+      "valid": 2000
+    },
+    "coverage": {
+      "fake": {
+        "scored": 60,
+        "subset": 61
+      },
+      "real": {
+        "scored": 156,
+        "subset": 379
+      }
+    },
+    "min_auc": 0.7,
+    "pass": true,
+    "threats": [
+      "faceswap",
+      "talking_head"
+    ]
+  },
+  "A5": {
+    "alpha": 0.05,
+    "max_drop": 0.15,
+    "pass": null,
+    "tau": 0.9182337934674716,
+    "transforms": {
+      "jpeg75": {
+        "delta_tpr": 0.0,
+        "n": 4,
+        "pass": null,
+        "reason": "fewer than 30 paired fakes",
+        "tpr_clean": {
+          "k": 3,
+          "n": 4,
+          "rule_of_three": null,
+          "value": 0.75,
+          "wilson95": [
+            0.3006418400969081,
+            0.954412739704631
+          ]
+        },
+        "tpr_t": {
+          "k": 3,
+          "n": 4,
+          "rule_of_three": null,
+          "value": 0.75,
+          "wilson95": [
+            0.3006418400969081,
+            0.954412739704631
+          ]
+        }
+      },
+      "social_ig": {
+        "delta_tpr": 0.0,
+        "n": 4,
+        "pass": null,
+        "reason": "fewer than 30 paired fakes",
+        "tpr_clean": {
+          "k": 3,
+          "n": 4,
+          "rule_of_three": null,
+          "value": 0.75,
+          "wilson95": [
+            0.3006418400969081,
+            0.954412739704631
+          ]
+        },
+        "tpr_t": {
+          "k": 3,
+          "n": 4,
+          "rule_of_three": null,
+          "value": 0.75,
+          "wilson95": [
+            0.3006418400969081,
+            0.954412739704631
+          ]
+        }
+      }
+    }
+  },
+  "A6": {
+    "analysis_p95_s": null,
+    "max_ms": 5189.0,
+    "max_p95_ms": 3000.0,
+    "n": 905,
+    "p50_ms": 42.0,
+    "p95_ms": 131.39999999999986,
+    "pass": true
+  },
+  "bootstrap_B": 2000,
+  "card_threats": [
+    "face_swap"
+  ],
+  "detector_id": "face.gend_clip_l14",
+  "items": {
+    "n": 440,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "manifest_sha256": "d0224343a5c0ad38605ade2b5225deba3cb607ace950e2ae3a127ba9dab26d25",
+  "schema": "veritas.admission-evidence/1",
+  "seed": 7
+}

@@ -1,0 +1,6136 @@
+{
+ "bench": {
+  "eval_split": "cal",
+  "lockbox": false,
+  "manifest_sha256": "3e2e117b50c6e75476db84a3dca948ce93e98511e7ade985ab0591acd2d0b461",
+  "note": "evaluated on `cal`, not `test`: τ_α, ECE and coverage are in-sample",
+  "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+  "variant": "norm",
+  "version": "vb-mini",
+  "view": {
+   "buckets": [
+    "<384",
+    "384-767",
+    "768-1024",
+    "1025-1536",
+    ">1536"
+   ],
+   "primary": "size_matched",
+   "salt": "vb-size:",
+   "secondary": "image/cal/full",
+   "sets": {
+    "all": {
+     "buckets": {
+      "1025-1536": {
+       "kept_fake": 3,
+       "kept_real": 3,
+       "n_fake": 3,
+       "n_real": 8
+      },
+      "384-767": {
+       "kept_fake": 9,
+       "kept_real": 9,
+       "n_fake": 9,
+       "n_real": 13
+      },
+      "768-1024": {
+       "kept_fake": 5,
+       "kept_real": 5,
+       "n_fake": 30,
+       "n_real": 5
+      },
+      "<384": {
+       "kept_fake": 8,
+       "kept_real": 8,
+       "n_fake": 8,
+       "n_real": 9
+      },
+      ">1536": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 17
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.9615384615384616
+    },
+    "edit": {
+     "buckets": {
+      "1025-1536": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 8
+      },
+      "384-767": {
+       "kept_fake": 1,
+       "kept_real": 13,
+       "n_fake": 2,
+       "n_real": 13
+      },
+      "768-1024": {
+       "kept_fake": 0,
+       "kept_real": 5,
+       "n_fake": 1,
+       "n_real": 5
+      },
+      "<384": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 9
+      },
+      ">1536": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 17
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.057692307692307696
+    },
+    "faceswap_vs_R5": {
+     "buckets": {
+      "384-767": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 3
+      },
+      "768-1024": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 3
+      },
+      "<384": {
+       "kept_fake": 2,
+       "kept_real": 6,
+       "n_fake": 5,
+       "n_real": 6
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.4166666666666667
+    },
+    "gan_face_vs_R5": {
+     "buckets": {
+      "384-767": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 3
+      },
+      "768-1024": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 3
+      },
+      "<384": {
+       "kept_fake": 2,
+       "kept_real": 6,
+       "n_fake": 3,
+       "n_real": 6
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.25
+    },
+    "legacy": {
+     "buckets": {
+      "384-767": {
+       "kept_fake": 1,
+       "kept_real": 3,
+       "n_fake": 2,
+       "n_real": 3
+      },
+      "<384": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 2
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.4
+    },
+    "personalised": {
+     "buckets": {
+      "1025-1536": {
+       "kept_fake": 0,
+       "kept_real": 8,
+       "n_fake": 2,
+       "n_real": 8
+      },
+      "384-767": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 13
+      },
+      "768-1024": {
+       "kept_fake": 0,
+       "kept_real": 5,
+       "n_fake": 1,
+       "n_real": 5
+      },
+      "<384": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 9
+      },
+      ">1536": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 17
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.057692307692307696
+    },
+    "t2i": {
+     "buckets": {
+      "1025-1536": {
+       "kept_fake": 1,
+       "kept_real": 1,
+       "n_fake": 1,
+       "n_real": 8
+      },
+      "384-767": {
+       "kept_fake": 7,
+       "kept_real": 10,
+       "n_fake": 7,
+       "n_real": 13
+      },
+      "768-1024": {
+       "kept_fake": 3,
+       "kept_real": 5,
+       "n_fake": 28,
+       "n_real": 5
+      },
+      "<384": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 9
+      },
+      ">1536": {
+       "kept_fake": 0,
+       "kept_real": 0,
+       "n_fake": 0,
+       "n_real": 17
+      }
+     },
+     "matched": true,
+     "pooled_fake_per_real": 0.6923076923076923
+    }
+   }
+  }
+ },
+ "checks": {
+  "reproducibility": {
+   "detail": "fuser-image-0.0.0-smoke.json vs fuser-image-0.0.0-smoke.json",
+   "differing_keys": [],
+   "identical_except_created_at": true
+  }
+ },
+ "command": "vbench_report.py --manifest /Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20261004T192701Z-f82a607d/manifest.parquet --scores /Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20261004T192701Z-f82a607d/scores --artefact /Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20261004T192701Z-f82a607d/fusion/run1/fuser-image-0.0.0-smoke.json --scope /Users/rsang/dev/veritas/backend/data/vbench/scope/vb-1.1.parquet --eval-split cal --bench vb-mini --out /Users/rsang/dev/veritas/docs/v2/bench/smoke-v2/20261004T192701Z-f82a607d --bootstrap 2000 --repro /Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20261004T192701Z-f82a607d/fusion/run1/fuser-image-0.0.0-smoke.json /Users/rsang/dev/veritas/backend/data/vbench/smoke-v2/20261004T192701Z-f82a607d/fusion/run2/fuser-image-0.0.0-smoke.json",
+ "counts": {
+  "cal_reals_not_run": 0,
+  "cal_reals_not_scored": 0,
+  "cal_reals_scored": 52,
+  "eval_not_run": 1,
+  "eval_not_scored": 0,
+  "eval_scored": {
+   "n_fake": 50,
+   "n_real": 52
+  },
+  "excluded": {}
+ },
+ "families": {
+  "faceswap-stills": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 5,
+   "n_real": 0,
+   "threat": "faceswap",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    },
+    "0.05": {
+     "k": 5,
+     "n": 5,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.5655175313406071,
+      1.0
+     ]
+    }
+   }
+  },
+  "flux1": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.09453120463920084,
+      0.9054687953607992
+     ]
+    }
+   }
+  },
+  "flux2": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F2",
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.09453120463920084,
+      0.9054687953607992
+     ]
+    }
+   }
+  },
+  "gan-faces": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 3,
+   "n_real": 0,
+   "threat": "gan_face",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.06149194402093078,
+      0.7923404011921757
+     ]
+    }
+   }
+  },
+  "gpt-4o-image-1": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    }
+   }
+  },
+  "gpt-image-1.5-2": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F3",
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    }
+   }
+  },
+  "hidream": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "hunyuanimage": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "ideogram": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "imagen3": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    }
+   }
+  },
+  "imagen4": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F7",
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.09453120463920084,
+      0.9054687953607992
+     ]
+    }
+   }
+  },
+  "legacy": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.3423802239546494,
+      1.0
+     ]
+    }
+   }
+  },
+  "long-tail": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 4,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 4,
+     "rule_of_three": 0.75,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.4898908403969213
+     ]
+    },
+    "0.05": {
+     "k": 3,
+     "n": 4,
+     "rule_of_three": null,
+     "value": 0.75,
+     "wilson95": [
+      0.3006418400969081,
+      0.954412739704631
+     ]
+    }
+   }
+  },
+  "midjourney": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F1",
+   "n_fake": 4,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 4,
+     "rule_of_three": 0.75,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.4898908403969213
+     ]
+    },
+    "0.05": {
+     "k": 4,
+     "n": 4,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.5101091596030786,
+      0.9999999999999999
+     ]
+    }
+   }
+  },
+  "modern-t2i-faces": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.09453120463920084,
+      0.9054687953607992
+     ]
+    }
+   }
+  },
+  "nano-banana": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F4",
+   "n_fake": 3,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    }
+   }
+  },
+  "partial-edits": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 3,
+   "n_real": 0,
+   "threat": "edit",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 3,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.43850296436068037,
+      1.0
+     ]
+    }
+   }
+  },
+  "personalised": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 3,
+   "n_real": 0,
+   "threat": "personalised",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.06149194402093078,
+      0.7923404011921757
+     ]
+    }
+   }
+  },
+  "qwen-image": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F6",
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.3423802239546494,
+      1.0
+     ]
+    }
+   }
+  },
+  "recraft": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "sd3": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.3423802239546494,
+      1.0
+     ]
+    }
+   }
+  },
+  "seedream3": {
+   "fpr_at_tau": {},
+   "lgo_fold": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   }
+  },
+  "seedream4": {
+   "fpr_at_tau": {},
+   "lgo_fold": "F5",
+   "n_fake": 2,
+   "n_real": 0,
+   "threat": "t2i",
+   "tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   }
+  }
+ },
+ "field_conditions": {
+  "face": {
+   "auc": null,
+   "label": "face present",
+   "measured_at": null,
+   "n_fake": 25,
+   "n_real": 14,
+   "note": "fewer than 100 items of a class in face and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "jpeg_q70-89": {
+   "auc": null,
+   "label": "JPEG q 70–89",
+   "measured_at": null,
+   "n_fake": 8,
+   "n_real": 22,
+   "note": "fewer than 100 items of a class in jpeg_q70-89 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "jpeg_q>=90_1mp_noface": {
+   "auc": null,
+   "label": "JPEG q ≥ 90, ≥ 1 MP, no face",
+   "measured_at": null,
+   "n_fake": 8,
+   "n_real": 14,
+   "note": "fewer than 100 items of a class in jpeg_q>=90_1mp_noface and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "lossless": {
+   "auc": null,
+   "label": "PNG / lossless (no JPEG quantisation tables)",
+   "measured_at": null,
+   "n_fake": 29,
+   "n_real": 8,
+   "note": "fewer than 100 items of a class in lossless and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "screenshot": {
+   "auc": null,
+   "label": "screenshot (screenshot, screenshot_jpeg)",
+   "measured_at": null,
+   "n_fake": 0,
+   "n_real": 0,
+   "note": "fewer than 100 items of a class in screenshot and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null,
+   "transforms": []
+  },
+  "social": {
+   "auc": null,
+   "label": "social recompressed (social_ig, social_x)",
+   "measured_at": null,
+   "n_fake": 0,
+   "n_real": 0,
+   "note": "fewer than 100 items of a class in social and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null,
+   "transforms": []
+  }
+ },
+ "generated_at": "2026-10-04T19:27:11Z",
+ "git_commit": "46a02850fd2ddee88e36cab1dfab1706c500b922",
+ "invariants": {
+  "additivity_max_abs": 8.881784197001252e-16,
+  "monotonicity_trials": 102,
+  "monotonicity_violations": 0,
+  "n_items": 102,
+  "seed": 7
+ },
+ "latency": null,
+ "lgo": {
+  "complete": false,
+  "folds": {},
+  "macro": {
+   "ece": null,
+   "tpr_at_fpr": {
+    "0.05": null
+   }
+  },
+  "min_family": {
+   "tpr_at_fpr": {
+    "0.05": null
+   }
+  },
+  "missing": [
+   "F1: no refit artefact without F1",
+   "F2: no refit artefact without F2",
+   "F3: no refit artefact without F3",
+   "F4: no refit artefact without F4",
+   "F5: no refit artefact without F5",
+   "F6: no refit artefact without F6",
+   "F7: no refit artefact without F7"
+  ],
+  "note": "fold F = all F items (fit, cal, test) + eval-split reals; artefact systems use a refit without F",
+  "required": [
+   "F1",
+   "F2",
+   "F3",
+   "F4",
+   "F5",
+   "F6",
+   "F7"
+  ],
+  "spread_present_folds": {
+   "tpr_at_fpr_0.05": null
+  }
+ },
+ "lgo_by_modality": {},
+ "modalities": {},
+ "not_measured": [
+  "video (no video system: `--video-score-key`)",
+  "audio (no audio system: `--audio-score-key`)"
+ ],
+ "real_strata": {
+  "R1": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 4,
+     "rule_of_three": 0.75,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.4898908403969213
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 4,
+     "rule_of_three": 0.75,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.4898908403969213
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 4,
+   "tpr_at_fpr": {}
+  },
+  "R2": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 10,
+     "rule_of_three": 0.3,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2775328030260577
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 10,
+     "rule_of_three": 0.3,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2775328030260577
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 10,
+   "tpr_at_fpr": {}
+  },
+  "R3": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 13,
+     "rule_of_three": 0.23076923076923078,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.22809537513180025
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 13,
+     "rule_of_three": 0.23076923076923078,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.22809537513180025
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 13,
+   "tpr_at_fpr": {}
+  },
+  "R4": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 11,
+     "rule_of_three": 0.2727272727272727,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 11,
+     "rule_of_three": 0.2727272727272727,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 11,
+   "tpr_at_fpr": {}
+  },
+  "R5": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 12,
+     "rule_of_three": 0.25,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2424940095530979
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 12,
+     "rule_of_three": null,
+     "value": 0.16666666666666666,
+     "wilson95": [
+      0.04696514175692082,
+      0.4480308646118111
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 12,
+   "tpr_at_fpr": {}
+  },
+  "R6": {
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 2,
+   "tpr_at_fpr": {}
+  }
+ },
+ "real_strata_by_size": {
+  "R1": {
+   "384-767": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   },
+   ">1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 1,
+      "rule_of_three": 3.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.7934506882081973
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 1,
+      "rule_of_three": 3.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.7934506882081973
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 1,
+    "tpr_at_fpr": {}
+   }
+  },
+  "R2": {
+   ">1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 10,
+      "rule_of_three": 0.3,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.2775328030260577
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 10,
+      "rule_of_three": 0.3,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.2775328030260577
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 10,
+    "tpr_at_fpr": {}
+   }
+  },
+  "R3": {
+   "1025-1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   },
+   "384-767": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 4,
+      "rule_of_three": 0.75,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.4898908403969213
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 4,
+      "rule_of_three": 0.75,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.4898908403969213
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 4,
+    "tpr_at_fpr": {}
+   },
+   "768-1024": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 2,
+      "rule_of_three": 1.5,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.6576197760453506
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 2,
+      "rule_of_three": 1.5,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.6576197760453506
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 2,
+    "tpr_at_fpr": {}
+   },
+   ">1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 4,
+      "rule_of_three": 0.75,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.4898908403969213
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 4,
+      "rule_of_three": 0.75,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.4898908403969213
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 4,
+    "tpr_at_fpr": {}
+   }
+  },
+  "R4": {
+   "1025-1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 5,
+      "rule_of_three": 0.6,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.43448246865939283
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 5,
+      "rule_of_three": 0.6,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.43448246865939283
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 5,
+    "tpr_at_fpr": {}
+   },
+   "384-767": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   },
+   "<384": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   }
+  },
+  "R5": {
+   "384-767": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   },
+   "768-1024": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 3,
+      "rule_of_three": 1.0,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.5614970356393196
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 3,
+    "tpr_at_fpr": {}
+   },
+   "<384": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 6,
+      "rule_of_three": 0.5,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.39033429165637346
+      ]
+     },
+     "0.05": {
+      "k": 2,
+      "n": 6,
+      "rule_of_three": null,
+      "value": 0.3333333333333333,
+      "wilson95": [
+       0.09677141021353453,
+       0.7000066870052566
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 6,
+    "tpr_at_fpr": {}
+   }
+  },
+  "R6": {
+   ">1536": {
+    "fpr_at_tau": {
+     "0.01": {
+      "k": 0,
+      "n": 2,
+      "rule_of_three": 1.5,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.6576197760453506
+      ]
+     },
+     "0.05": {
+      "k": 0,
+      "n": 2,
+      "rule_of_three": 1.5,
+      "value": 0.0,
+      "wilson95": [
+       0.0,
+       0.6576197760453506
+      ]
+     }
+    },
+    "n_fake": 0,
+    "n_real": 2,
+    "tpr_at_fpr": {}
+   }
+  }
+ },
+ "robustness": {
+  "metadata_inputs": [],
+  "not_scored": [
+   "jpeg95",
+   "jpeg75",
+   "jpeg50",
+   "webp80",
+   "resize0.5",
+   "crop70",
+   "screenshot",
+   "screenshot_jpeg",
+   "social_ig",
+   "social_x",
+   "launder",
+   "noise3",
+   "upscale2x",
+   "rephoto_proxy",
+   "exif_forge"
+  ],
+  "not_scored_reasons": {},
+  "reference": {
+   "transform": "none",
+   "variant": "native"
+  },
+  "reference_scored": 0,
+  "subset_items": 0,
+  "subset_other_splits": {},
+  "subset_split": "cal",
+  "transforms": {}
+ },
+ "schema": "veritas.bench-results/1",
+ "sets": {
+  "image/cal": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 0.9852273076411008,
+     "level": 0.95,
+     "lo": 0.8648885757521434,
+     "valid": 2000
+    },
+    "value": 0.936
+   },
+   "balanced_accuracy": {
+    "0.05": 0.8
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.16739442023304824,
+     "level": 0.95,
+     "lo": 0.06534884549852366,
+     "valid": 2000
+    },
+    "value": 0.11372140300811534
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 25,
+      "n": 25,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.866807747239609,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 23,
+      "n": 25,
+      "rule_of_three": null,
+      "value": 0.92,
+      "wilson95": [
+       0.7503389087653979,
+       0.9777795989158738
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 12,
+     "n_fake": 8,
+     "n_real": 4
+    },
+    "n_scored": 50,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 8,
+     "n_capped": 0,
+     "n_fake": 6,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.2452916711296252,
+     "level": 0.95,
+     "lo": 0.10353505487481188,
+     "valid": 2000
+    },
+    "mce": 0.41401312101392956,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.02669252498338211,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.038737440228807006,
+      "s_min": 0.003548155496039034,
+      "weight": 0.06
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.04810717145162752,
+      "mean_y": 0.0,
+      "n": 4,
+      "s_max": 0.051158173155416584,
+      "s_min": 0.04503929567003973,
+      "weight": 0.08
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.09883537556146187,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.10472102692040923,
+      "s_min": 0.09267175305743358,
+      "weight": 0.06
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.12018157711100763,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.12521736787319365,
+      "s_min": 0.11457230115583424,
+      "weight": 0.06
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.17026760310401692,
+      "mean_y": 0.0,
+      "n": 4,
+      "s_max": 0.18362049026230734,
+      "s_min": 0.15256137283341617,
+      "weight": 0.08
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.25265354565273707,
+      "mean_y": 0.6666666666666666,
+      "n": 3,
+      "s_max": 0.33478548126361807,
+      "s_min": 0.19020521218937345,
+      "weight": 0.06
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.4125897258934373,
+      "mean_y": 0.3333333333333333,
+      "n": 3,
+      "s_max": 0.46957317266535414,
+      "s_min": 0.36028953303030953,
+      "weight": 0.06
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.5875828225262905,
+      "mean_y": 0.75,
+      "n": 4,
+      "s_max": 0.7007349323017554,
+      "s_min": 0.5181773155302661,
+      "weight": 0.08
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.7301565290944807,
+      "mean_y": 0.3333333333333333,
+      "n": 3,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.7286447630355757,
+      "weight": 0.06
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7461150725573781,
+      "mean_y": 0.3333333333333333,
+      "n": 3,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.7331243499132657,
+      "weight": 0.06
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 4,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.08
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7695409478569596,
+      "mean_y": 1.0,
+      "n": 3,
+      "s_max": 0.7735512563625093,
+      "s_min": 0.7675357936041847,
+      "weight": 0.06
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.9365980626053699,
+      "mean_y": 1.0,
+      "n": 3,
+      "s_max": 0.969377329036445,
+      "s_min": 0.8910320602864681,
+      "weight": 0.06
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.9919436007156353,
+      "mean_y": 1.0,
+      "n": 4,
+      "s_max": 0.9958614238183782,
+      "s_min": 0.9879171351537276,
+      "weight": 0.08
+     },
+     {
+      "bin": 14,
+      "mean_s": 0.9985695344009309,
+      "mean_y": 1.0,
+      "n": 3,
+      "s_max": 0.9993968889030224,
+      "s_min": 0.997333617966511,
+      "weight": 0.06
+     }
+    ],
+    "value": 0.16033752749787172
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 25,
+     "rule_of_three": 0.12,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.13319225276039096
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 25,
+     "rule_of_three": null,
+     "value": 0.08,
+     "wilson95": [
+      0.022220401084126262,
+      0.24966109123460217
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.34686593908797453
+   },
+   "n_fake": 25,
+   "n_real": 25,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 25,
+     "rule_of_three": 0.12,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.13319225276039096
+     ]
+    },
+    "0.05": {
+     "k": 17,
+     "n": 25,
+     "rule_of_three": null,
+     "value": 0.68,
+     "wilson95": [
+      0.4841026912048403,
+      0.8279480978014191
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 51,
+     "n": 51,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.9299533790738349,
+      0.9999999999999999
+     ]
+    },
+    "n": 51,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 14,
+     "n": 51,
+     "rule_of_three": null,
+     "value": 0.27450980392156865,
+     "wilson95": [
+      0.1711427516887183,
+      0.40946650872896384
+     ]
+    },
+    "n": 51,
+    "selective_risk": {
+     "k": 2,
+     "n": 37,
+     "rule_of_three": null,
+     "value": 0.05405405405405406,
+     "wilson95": [
+      0.014950976698341792,
+      0.1770465448418871
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 2000
+     },
+     "k": 0,
+     "n": 25,
+     "rule_of_three": 0.12,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.13319225276039096
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.8666666666666667,
+      "level": 0.95,
+      "lo": 0.5,
+      "valid": 2000
+     },
+     "k": 17,
+     "n": 25,
+     "rule_of_three": null,
+     "value": 0.68,
+     "wilson95": [
+      0.4841026912048403,
+      0.8279480978014191
+     ]
+    }
+   }
+  },
+  "image/cal/edit": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1297
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 1.0
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.05977444971342529,
+     "level": 0.95,
+     "lo": 0.03533196647559718,
+     "valid": 1297
+    },
+    "value": 0.045842793928988386
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 1,
+      "n": 1,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.2065493117918027,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 18,
+      "n": 18,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.8241207740667156,
+       1.0
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "n_scored": 19,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.22490031662943605,
+     "level": 0.95,
+     "lo": 0.17081295875259686,
+     "valid": 1297
+    },
+    "mce": 0.4079064719846482,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.03826470972705365,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.038737440228807006,
+      "s_min": 0.0377919792253003,
+      "weight": 0.05555555555555556
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.05063513753473886,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.0556741956231628,
+      "s_min": 0.04788872564292981,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.0986963899889214,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.10472102692040923,
+      "s_min": 0.09267175305743358,
+      "weight": 0.05555555555555556
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.13078368062081466,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.15256137283341617,
+      "s_min": 0.11457230115583424,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.17059911624010027,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.16432418266368243,
+      "weight": 0.05555555555555556
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.18691285122584042,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.19020521218937345,
+      "s_min": 0.18362049026230734,
+      "weight": 0.05555555555555556
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.33536056542415116,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.4007488964839579,
+      "s_min": 0.24504326675818627,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.4079064719846482,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.4079064719846482,
+      "s_min": 0.4079064719846482,
+      "weight": 0.02777777777777778
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7735512563625093,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7735512563625093,
+      "s_min": 0.7735512563625093,
+      "weight": 0.5
+     }
+    ],
+    "value": 0.19509078173784516
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 18,
+     "rule_of_three": 0.16666666666666666,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.17587922593328437
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 18,
+     "rule_of_three": 0.16666666666666666,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.17587922593328437
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.2232378522813294
+   },
+   "n_fake": 1,
+   "n_real": 18,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 19,
+     "n": 19,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.8318207737404363,
+      0.9999999999999999
+     ]
+    },
+    "n": 19,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 4,
+     "n": 19,
+     "rule_of_three": null,
+     "value": 0.21052631578947367,
+     "wilson95": [
+      0.08507676573617337,
+      0.43334278630883716
+     ]
+    },
+    "n": 19,
+    "selective_risk": {
+     "k": 0,
+     "n": 15,
+     "rule_of_three": 0.2,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.20388330359648707
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1297
+     },
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1297
+     },
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/faceswap_vs_R5": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1801
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 0.8333333333333334
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.3065234332440165,
+     "level": 0.95,
+     "lo": 0.16170647621325396,
+     "valid": 1801
+    },
+    "value": 0.255757431829252
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 2,
+      "n": 2,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.3423802239546494,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 4,
+      "n": 6,
+      "rule_of_three": null,
+      "value": 0.6666666666666666,
+      "wilson95": [
+       0.29999331299474324,
+       0.9032285897864654
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 7,
+     "n_fake": 2,
+     "n_real": 5
+    },
+    "n_scored": 8,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 4,
+     "n_capped": 0,
+     "n_fake": 2,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.4900317111019982,
+     "level": 0.95,
+     "lo": 0.3120738131739428,
+     "valid": 1801
+    },
+    "mce": 0.7563560381664137,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.051158173155416584,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.051158173155416584,
+      "s_min": 0.051158173155416584,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.7296161574991425,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7296161574991425,
+      "s_min": 0.7296161574991425,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.7322086667487239,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.7322086667487239,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.735453684008667,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.735453684008667,
+      "s_min": 0.735453684008667,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.7488648295924547,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7488648295924547,
+      "s_min": 0.7488648295924547,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.7563560381664137,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.7563560381664137,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.25
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.25
+     }
+    ],
+    "value": 0.42903689896214253
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 6,
+     "rule_of_three": 0.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.39033429165637346
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 6,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.09677141021353453,
+      0.7000066870052566
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.6990786863416603
+   },
+   "n_fake": 2,
+   "n_real": 6,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 8,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.6755924316585924,
+      1.0
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 3,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 0.375,
+     "wilson95": [
+      0.13684428473912286,
+      0.694257607346229
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 2,
+     "n": 5,
+     "rule_of_three": null,
+     "value": 0.4,
+     "wilson95": [
+      0.11762077314099711,
+      0.7692757205908813
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1801
+     },
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1801
+     },
+     "k": 2,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.3423802239546494,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/full": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 0.9677487069688253,
+     "level": 0.95,
+     "lo": 0.8699763593380615,
+     "valid": 2000
+    },
+    "value": 0.9246153846153846
+   },
+   "balanced_accuracy": {
+    "0.05": 0.7907692307692308
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.1510174080863222,
+     "level": 0.95,
+     "lo": 0.08212097410052265,
+     "valid": 2000
+    },
+    "value": 0.11561081209773559
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 49,
+      "n": 50,
+      "rule_of_three": null,
+      "value": 0.98,
+      "wilson95": [
+       0.8950455630610349,
+       0.9964607407674954
+      ]
+     },
+     "real": {
+      "k": 50,
+      "n": 52,
+      "rule_of_three": null,
+      "value": 0.9615384615384616,
+      "wilson95": [
+       0.8701881073969999,
+       0.9893882890942729
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 13,
+     "n_fake": 8,
+     "n_real": 5
+    },
+    "n_scored": 102,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 8,
+     "n_capped": 0,
+     "n_fake": 6,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.18759386974836537,
+     "level": 0.95,
+     "lo": 0.08773422654458404,
+     "valid": 2000
+    },
+    "mce": 0.27652365423548697,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.03715684943134845,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.04788872564292981,
+      "s_min": 0.003548155496039034,
+      "weight": 0.06730769230769233
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.06211113826355725,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.08498577409517982,
+      "s_min": 0.04834249133812397,
+      "weight": 0.06730769230769233
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.10148126791793438,
+      "mean_y": 0.14772727272727273,
+      "n": 7,
+      "s_max": 0.11457230115583424,
+      "s_min": 0.08738965334161082,
+      "weight": 0.06769230769230772
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.14438678849033612,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.16801449950382602,
+      "s_min": 0.12075506230399502,
+      "weight": 0.06730769230769233
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.19881456103249615,
+      "mean_y": 0.14772727272727273,
+      "n": 7,
+      "s_max": 0.23296994350521977,
+      "s_min": 0.17687404981651814,
+      "weight": 0.06769230769230772
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.2561903486465658,
+      "mean_y": 0.17218543046357618,
+      "n": 6,
+      "s_max": 0.26937179757326046,
+      "s_min": 0.2351225319400616,
+      "weight": 0.0580769230769231
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.32545550967761716,
+      "mean_y": 0.5810055865921787,
+      "n": 7,
+      "s_max": 0.36028953303030953,
+      "s_min": 0.3040309614664266,
+      "weight": 0.06884615384615388
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.42895014508909624,
+      "mean_y": 0.2937853107344633,
+      "n": 7,
+      "s_max": 0.46194149339529617,
+      "s_min": 0.4007488964839579,
+      "weight": 0.0680769230769231
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.5853547988031872,
+      "mean_y": 0.8618784530386742,
+      "n": 7,
+      "s_max": 0.7007349323017554,
+      "s_min": 0.46957317266535414,
+      "weight": 0.06961538461538463
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7243456346351708,
+      "mean_y": 0.5810055865921787,
+      "n": 7,
+      "s_max": 0.735453684008667,
+      "s_min": 0.7046644741894537,
+      "weight": 0.06884615384615388
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.7602734342572826,
+      "mean_y": 0.6753246753246753,
+      "n": 6,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7488648295924547,
+      "weight": 0.05923076923076926
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7966847812422861,
+      "mean_y": 1.0000000000000002,
+      "n": 7,
+      "s_max": 0.8598964772095976,
+      "s_min": 0.7675357936041847,
+      "weight": 0.07000000000000002
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.9441647629544454,
+      "mean_y": 1.0000000000000002,
+      "n": 7,
+      "s_max": 0.9879171351537276,
+      "s_min": 0.8633462402514857,
+      "weight": 0.07000000000000002
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.9950175936702358,
+      "mean_y": 1.0000000000000002,
+      "n": 6,
+      "s_max": 0.9972956122208644,
+      "s_min": 0.9918078645754509,
+      "weight": 0.06000000000000002
+     },
+     {
+      "bin": 14,
+      "mean_s": 0.9987232310541044,
+      "mean_y": 1.0000000000000002,
+      "n": 7,
+      "s_max": 0.9994124360060236,
+      "s_min": 0.997333617966511,
+      "weight": 0.07000000000000002
+     }
+    ],
+    "value": 0.10734169103785374
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 52,
+     "rule_of_three": 0.057692307692307696,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.06879223713445441
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 52,
+     "rule_of_three": null,
+     "value": 0.038461538461538464,
+     "wilson95": [
+      0.010611710905727038,
+      0.12981189260300013
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.35873142906359534
+   },
+   "n_fake": 50,
+   "n_real": 52,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 50,
+     "rule_of_three": 0.06,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.07134760017861413
+     ]
+    },
+    "0.05": {
+     "k": 31,
+     "n": 50,
+     "rule_of_three": null,
+     "value": 0.62,
+     "wilson95": [
+      0.4815044682285895,
+      0.741372107728543
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 103,
+     "n": 103,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.9640452412245328,
+      1.0
+     ]
+    },
+    "n": 103,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 36,
+     "n": 103,
+     "rule_of_three": null,
+     "value": 0.34951456310679613,
+     "wilson95": [
+      0.26435074011689796,
+      0.4454997212621262
+     ]
+    },
+    "n": 103,
+    "selective_risk": {
+     "k": 3,
+     "n": 67,
+     "rule_of_three": null,
+     "value": 0.04477611940298507,
+     "wilson95": [
+      0.01534397500262448,
+      0.12357833174696735
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 2000
+     },
+     "k": 0,
+     "n": 50,
+     "rule_of_three": 0.06,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.07134760017861413
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.7547169811320755,
+      "level": 0.95,
+      "lo": 0.48,
+      "valid": 2000
+     },
+     "k": 31,
+     "n": 50,
+     "rule_of_three": null,
+     "value": 0.62,
+     "wilson95": [
+      0.4815044682285895,
+      0.741372107728543
+     ]
+    }
+   }
+  },
+  "image/cal/full/edit": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1910
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 0.9807692307692307
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.08751608145014482,
+     "level": 0.95,
+     "lo": 0.033724074148715234,
+     "valid": 1910
+    },
+    "value": 0.05945044327579518
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 3,
+      "n": 3,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.43850296436068037,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 50,
+      "n": 52,
+      "rule_of_three": null,
+      "value": 0.9615384615384616,
+      "wilson95": [
+       0.8701881073969999,
+       0.9893882890942729
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 5,
+     "n_fake": 0,
+     "n_real": 5
+    },
+    "n_scored": 55,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 2,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.24010482103938563,
+     "level": 0.95,
+     "lo": 0.10294597743018885,
+     "valid": 1910
+    },
+    "mce": 0.746891517255845,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.037156849431348456,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.04788872564292981,
+      "s_min": 0.003548155496039034,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.062111138263557256,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.08498577409517982,
+      "s_min": 0.04834249133812397,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.10632827842442544,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.12075506230399502,
+      "s_min": 0.09267175305743358,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.15240378670641083,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.12521736787319365,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.20866535961501062,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.24504326675818627,
+      "s_min": 0.18362049026230734,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.31311281647512523,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.4007488964839579,
+      "s_min": 0.25098430968229324,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.5568526043110981,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.4079064719846482,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.746891517255845,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.735453684008667,
+      "weight": 0.02884615384615385
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.7735512563625093,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7735512563625093,
+      "s_min": 0.7735512563625093,
+      "weight": 0.16666666666666669
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.9760606773351013,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9760606773351012,
+      "s_min": 0.9760606773351012,
+      "weight": 0.16666666666666669
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.9993968889030224,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9993968889030224,
+      "s_min": 0.9993968889030224,
+      "weight": 0.16666666666666669
+     }
+    ],
+    "value": 0.1600731165956288
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 52,
+     "rule_of_three": 0.057692307692307696,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.06879223713445441
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 52,
+     "rule_of_three": null,
+     "value": 0.038461538461538464,
+     "wilson95": [
+      0.010611710905727038,
+      0.12981189260300013
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.21217408241837124
+   },
+   "n_fake": 3,
+   "n_real": 52,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 3,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.43850296436068037,
+      1.0
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 55,
+     "n": 55,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.9347150979202339,
+      1.0
+     ]
+    },
+    "n": 55,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 17,
+     "n": 55,
+     "rule_of_three": null,
+     "value": 0.3090909090909091,
+     "wilson95": [
+      0.20282287814990574,
+      0.4402859026441869
+     ]
+    },
+    "n": 55,
+    "selective_risk": {
+     "k": 2,
+     "n": 38,
+     "rule_of_three": null,
+     "value": 0.05263157894736842,
+     "wilson95": [
+      0.014554208016066841,
+      0.17285462262586127
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1910
+     },
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1910
+     },
+     "k": 3,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.43850296436068037,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/full/faceswap_vs_R5": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1991
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 0.9166666666666666
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.22487404403310274,
+     "level": 0.95,
+     "lo": 0.07622751227644367,
+     "valid": 1991
+    },
+    "value": 0.15057209091596646
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 5,
+      "n": 5,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.5655175313406071,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 10,
+      "n": 12,
+      "rule_of_three": null,
+      "value": 0.8333333333333334,
+      "wilson95": [
+       0.5519691353881888,
+       0.9530348582430792
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 10,
+     "n_fake": 5,
+     "n_real": 5
+    },
+    "n_scored": 17,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 7,
+     "n_capped": 0,
+     "n_fake": 5,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.3983105027992853,
+     "level": 0.95,
+     "lo": 0.22071709874067422,
+     "valid": 1991
+    },
+    "mce": 0.7563560381664137,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.04494780669211179,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.051158173155416584,
+      "s_min": 0.038737440228807006,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.10472102692040923,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.10472102692040923,
+      "s_min": 0.10472102692040923,
+      "weight": 0.04166666666666667
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.1457231754861762,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.11457230115583424,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.18362049026230734,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.18362049026230734,
+      "s_min": 0.18362049026230734,
+      "weight": 0.04166666666666667
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.5449528452647261,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.7296161574991425,
+      "s_min": 0.36028953303030953,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.7338311753786952,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.735453684008667,
+      "s_min": 0.7322086667487239,
+      "weight": 0.08333333333333334
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.7488648295924547,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7488648295924547,
+      "s_min": 0.7488648295924547,
+      "weight": 0.04166666666666667
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.7563560381664137,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.7563560381664137,
+      "weight": 0.04166666666666667
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 14,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.09999999999999999
+     }
+    ],
+    "value": 0.31341845280561625
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 12,
+     "rule_of_three": 0.25,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2424940095530979
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 12,
+     "rule_of_three": null,
+     "value": 0.16666666666666666,
+     "wilson95": [
+      0.04696514175692082,
+      0.4480308646118111
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.46218495391881237
+   },
+   "n_fake": 5,
+   "n_real": 12,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 17,
+     "n": 17,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.8156818626193445,
+      1.0
+     ]
+    },
+    "n": 17,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 4,
+     "n": 17,
+     "rule_of_three": null,
+     "value": 0.23529411764705882,
+     "wilson95": [
+      0.09555044255436917,
+      0.4726179831177426
+     ]
+    },
+    "n": 17,
+    "selective_risk": {
+     "k": 2,
+     "n": 13,
+     "rule_of_three": null,
+     "value": 0.15384615384615385,
+     "wilson95": [
+      0.04325817796522907,
+      0.4223463125106327
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1991
+     },
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1991
+     },
+     "k": 5,
+     "n": 5,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.5655175313406071,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/full/gan_face_vs_R5": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 0.46153846153846156,
+     "valid": 1933
+    },
+    "value": 0.7777777777777778
+   },
+   "balanced_accuracy": {
+    "0.05": 0.5833333333333333
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.2299294249726797,
+     "level": 0.95,
+     "lo": 0.08921730542135926,
+     "valid": 1933
+    },
+    "value": 0.15670160137042702
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 3,
+      "n": 3,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.43850296436068037,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 10,
+      "n": 12,
+      "rule_of_three": null,
+      "value": 0.8333333333333334,
+      "wilson95": [
+       0.5519691353881888,
+       0.9530348582430792
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 8,
+     "n_fake": 3,
+     "n_real": 5
+    },
+    "n_scored": 15,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 3,
+     "n_capped": 0,
+     "n_fake": 1,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.41220576913796464,
+     "level": 0.95,
+     "lo": 0.24369594146125734,
+     "valid": 1933
+    },
+    "mce": 0.7563560381664137,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.0449478066921118,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.051158173155416584,
+      "s_min": 0.038737440228807006,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.10472102692040923,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.10472102692040923,
+      "s_min": 0.10472102692040923,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.14572317548617617,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.11457230115583424,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.18362049026230734,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.18362049026230734,
+      "s_min": 0.18362049026230734,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.36028953303030953,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.36028953303030953,
+      "s_min": 0.36028953303030953,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.7286447630355757,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7286447630355757,
+      "s_min": 0.7286447630355757,
+      "weight": 0.16666666666666666
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.7309124121239332,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.7296161574991425,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7331243499132657,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7331243499132657,
+      "s_min": 0.7331243499132657,
+      "weight": 0.16666666666666666
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.735453684008667,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.735453684008667,
+      "s_min": 0.735453684008667,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7488648295924547,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7488648295924547,
+      "s_min": 0.7488648295924547,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.7563560381664137,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.7563560381664137,
+      "weight": 0.041666666666666664
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.16666666666666666
+     }
+    ],
+    "value": 0.3256355318488708
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 12,
+     "rule_of_three": 0.25,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2424940095530979
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 12,
+     "rule_of_three": null,
+     "value": 0.16666666666666666,
+     "wilson95": [
+      0.04696514175692082,
+      0.4480308646118111
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.4784963835140377
+   },
+   "n_fake": 3,
+   "n_real": 12,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 15,
+     "n": 15,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.7961166964035129,
+      1.0
+     ]
+    },
+    "n": 15,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 6,
+     "n": 15,
+     "rule_of_three": null,
+     "value": 0.4,
+     "wilson95": [
+      0.19824496026274246,
+      0.6425317004565552
+     ]
+    },
+    "n": 15,
+    "selective_risk": {
+     "k": 2,
+     "n": 9,
+     "rule_of_three": null,
+     "value": 0.2222222222222222,
+     "wilson95": [
+      0.06322510654056959,
+      0.5474110333077882
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1933
+     },
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1933
+     },
+     "k": 1,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.06149194402093078,
+      0.7923404011921757
+     ]
+    }
+   }
+  },
+  "image/cal/full/legacy": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1808
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 1.0
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.022100225419775563,
+     "level": 0.95,
+     "lo": 0.002132815200407835,
+     "valid": 1808
+    },
+    "value": 0.010738701618483894
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 2,
+      "n": 2,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.3423802239546494,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 5,
+      "n": 5,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.5655175313406071,
+       1.0
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "n_scored": 7,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.1028721280629979,
+     "level": 0.95,
+     "lo": 0.027349816874260413,
+     "valid": 1808
+    },
+    "mce": 0.24504326675818625,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.003548155496039034,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.003548155496039034,
+      "s_min": 0.003548155496039034,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.0556741956231628,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.0556741956231628,
+      "s_min": 0.0556741956231628,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.12521736787319365,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.12521736787319365,
+      "s_min": 0.12521736787319365,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.16801449950382602,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.16801449950382602,
+      "s_min": 0.16801449950382602,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.24504326675818625,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.24504326675818627,
+      "s_min": 0.24504326675818627,
+      "weight": 0.09999999999999999
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.9918078645754509,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9918078645754509,
+      "s_min": 0.9918078645754509,
+      "weight": 0.25
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.992187979314984,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.992187979314984,
+      "s_min": 0.992187979314984,
+      "weight": 0.25
+     }
+    ],
+    "value": 0.06375078755283203
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 5,
+     "rule_of_three": 0.6,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.06998248779392549
+   },
+   "n_fake": 2,
+   "n_real": 5,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 8,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.6755924316585924,
+      1.0
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 2,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 0.25,
+     "wilson95": [
+      0.07147921209795555,
+      0.5907245720727483
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 0,
+     "n": 6,
+     "rule_of_three": 0.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.39033429165637346
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1809
+     },
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1809
+     },
+     "k": 2,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.3423802239546494,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/full/personalised": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 0.8113207547169812,
+     "valid": 1917
+    },
+    "value": 0.9230769230769231
+   },
+   "balanced_accuracy": {
+    "0.05": 0.6474358974358974
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.17275164579067734,
+     "level": 0.95,
+     "lo": 0.04538304544961838,
+     "valid": 1917
+    },
+    "value": 0.10920523279738123
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 3,
+      "n": 3,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.43850296436068037,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 50,
+      "n": 52,
+      "rule_of_three": null,
+      "value": 0.9615384615384616,
+      "wilson95": [
+       0.8701881073969999,
+       0.9893882890942729
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 5,
+     "n_fake": 0,
+     "n_real": 5
+    },
+    "n_scored": 55,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 2,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.3670347721101706,
+     "level": 0.95,
+     "lo": 0.11311441292507586,
+     "valid": 1917
+    },
+    "mce": 0.746891517255845,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.037156849431348456,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.04788872564292981,
+      "s_min": 0.003548155496039034,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.062111138263557256,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.08498577409517982,
+      "s_min": 0.04834249133812397,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.10632827842442544,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.12075506230399502,
+      "s_min": 0.09267175305743358,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.15240378670641083,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.12521736787319365,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.20866535961501062,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.24504326675818627,
+      "s_min": 0.18362049026230734,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.31311281647512523,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.4007488964839579,
+      "s_min": 0.25098430968229324,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.4338521184070162,
+      "mean_y": 0.0,
+      "n": 4,
+      "s_max": 0.46194149339529617,
+      "s_min": 0.4079064719846482,
+      "weight": 0.038461538461538464
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.5181773155302661,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.5181773155302661,
+      "s_min": 0.5181773155302661,
+      "weight": 0.16666666666666669
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.6561671675444671,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.6561671675444671,
+      "s_min": 0.6561671675444671,
+      "weight": 0.16666666666666669
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.7208532521832072,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.7007349323017554,
+      "weight": 0.02884615384615385
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.746891517255845,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.735453684008667,
+      "weight": 0.02884615384615385
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.997333617966511,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.997333617966511,
+      "s_min": 0.997333617966511,
+      "weight": 0.16666666666666669
+     }
+    ],
+    "value": 0.25629490352219364
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 52,
+     "rule_of_three": 0.057692307692307696,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.06879223713445441
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 52,
+     "rule_of_three": null,
+     "value": 0.038461538461538464,
+     "wilson95": [
+      0.010611710905727038,
+      0.12981189260300013
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.3454824591855699
+   },
+   "n_fake": 3,
+   "n_real": 52,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 1,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.06149194402093078,
+      0.7923404011921757
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 55,
+     "n": 55,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.9347150979202339,
+      1.0
+     ]
+    },
+    "n": 55,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 19,
+     "n": 55,
+     "rule_of_three": null,
+     "value": 0.34545454545454546,
+     "wilson95": [
+      0.23362709466463594,
+      0.477460965978201
+     ]
+    },
+    "n": 55,
+    "selective_risk": {
+     "k": 2,
+     "n": 36,
+     "rule_of_three": null,
+     "value": 0.05555555555555555,
+     "wilson95": [
+      0.015369986525553617,
+      0.18144657344678355
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1917
+     },
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1917
+     },
+     "k": 1,
+     "n": 3,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.06149194402093078,
+      0.7923404011921757
+     ]
+    }
+   }
+  },
+  "image/cal/full/t2i": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 0.961216542343133,
+     "level": 0.95,
+     "lo": 0.8346148648648649,
+     "valid": 2000
+    },
+    "value": 0.905982905982906
+   },
+   "balanced_accuracy": {
+    "0.05": 0.7724358974358975
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.17582525803153462,
+     "level": 0.95,
+     "lo": 0.0879503376230804,
+     "valid": 2000
+    },
+    "value": 0.12870999225796542
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 35,
+      "n": 36,
+      "rule_of_three": null,
+      "value": 0.9722222222222222,
+      "wilson95": [
+       0.8583028121147521,
+       0.9950795929146393
+      ]
+     },
+     "real": {
+      "k": 50,
+      "n": 52,
+      "rule_of_three": null,
+      "value": 0.9615384615384616,
+      "wilson95": [
+       0.8701881073969999,
+       0.9893882890942729
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 5,
+     "n_fake": 0,
+     "n_real": 5
+    },
+    "n_scored": 88,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 2,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.2118113802550557,
+     "level": 0.95,
+     "lo": 0.08698391802462194,
+     "valid": 2000
+    },
+    "mce": 0.3391964499175706,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.037156849431348456,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.04788872564292981,
+      "s_min": 0.003548155496039034,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.06211113826355725,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.08498577409517982,
+      "s_min": 0.04834249133812397,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.09856553039726342,
+      "mean_y": 0.22413793103448276,
+      "n": 6,
+      "s_max": 0.1111525489891615,
+      "s_min": 0.08738965334161082,
+      "weight": 0.06196581196581197
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.1367521887263373,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.16432418266368243,
+      "s_min": 0.11457230115583424,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.1893400382753101,
+      "mean_y": 0.0,
+      "n": 7,
+      "s_max": 0.2087292023783191,
+      "s_min": 0.16801449950382602,
+      "weight": 0.0673076923076923
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.25017362477823474,
+      "mean_y": 0.41935483870967744,
+      "n": 6,
+      "s_max": 0.26922920231173764,
+      "s_min": 0.23296994350521977,
+      "weight": 0.06623931623931624
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.30976429929074784,
+      "mean_y": 0.5909090909090909,
+      "n": 6,
+      "s_max": 0.32696386178418624,
+      "s_min": 0.26937179757326046,
+      "weight": 0.07051282051282051
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.3884003198759319,
+      "mean_y": 0.41935483870967744,
+      "n": 6,
+      "s_max": 0.41925789490479615,
+      "s_min": 0.33478548126361807,
+      "weight": 0.06623931623931624
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.4741210307398571,
+      "mean_y": 0.6842105263157895,
+      "n": 5,
+      "s_max": 0.5323779416259439,
+      "s_min": 0.4469052369401833,
+      "weight": 0.0608974358974359
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.6736670594096051,
+      "mean_y": 0.742857142857143,
+      "n": 6,
+      "s_max": 0.7296161574991425,
+      "s_min": 0.5990411006471966,
+      "weight": 0.07478632478632478
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.7585512886272481,
+      "mean_y": 0.4193548387096775,
+      "n": 6,
+      "s_max": 0.8063333298447184,
+      "s_min": 0.7322086667487239,
+      "weight": 0.06623931623931624
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.8796129201414741,
+      "mean_y": 1.0,
+      "n": 5,
+      "s_max": 0.9493847984931967,
+      "s_min": 0.8344050244666222,
+      "weight": 0.06944444444444445
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.9802843572225789,
+      "mean_y": 1.0,
+      "n": 4,
+      "s_max": 0.9918078645754509,
+      "s_min": 0.969377329036445,
+      "weight": 0.05555555555555556
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.9956595394891927,
+      "mean_y": 1.0,
+      "n": 5,
+      "s_max": 0.9972956122208644,
+      "s_min": 0.992187979314984,
+      "weight": 0.06944444444444445
+     },
+     {
+      "bin": 14,
+      "mean_s": 0.9988664221018392,
+      "mean_y": 1.0,
+      "n": 5,
+      "s_max": 0.9994124360060236,
+      "s_min": 0.9981805067490208,
+      "weight": 0.06944444444444445
+     }
+    ],
+    "value": 0.11976457001811118
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 52,
+     "rule_of_three": 0.057692307692307696,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.06879223713445441
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 52,
+     "rule_of_three": null,
+     "value": 0.038461538461538464,
+     "wilson95": [
+      0.010611710905727038,
+      0.12981189260300013
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.3842904752597915
+   },
+   "n_fake": 36,
+   "n_real": 52,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 36,
+     "rule_of_three": 0.08333333333333333,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.09641862996887933
+     ]
+    },
+    "0.05": {
+     "k": 21,
+     "n": 36,
+     "rule_of_three": null,
+     "value": 0.5833333333333334,
+     "wilson95": [
+      0.422002514538589,
+      0.7285943804665977
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 89,
+     "n": 89,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.9586234541380101,
+      1.0
+     ]
+    },
+    "n": 89,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 32,
+     "n": 89,
+     "rule_of_three": null,
+     "value": 0.3595505617977528,
+     "wilson95": [
+      0.26757786638564957,
+      0.463145882451988
+     ]
+    },
+    "n": 89,
+    "selective_risk": {
+     "k": 3,
+     "n": 57,
+     "rule_of_three": null,
+     "value": 0.05263157894736842,
+     "wilson95": [
+      0.01806029549306183,
+      0.14369550494717842
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 2000
+     },
+     "k": 0,
+     "n": 36,
+     "rule_of_three": 0.08333333333333333,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.09641862996887933
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.75,
+      "level": 0.95,
+      "lo": 0.4117647058823529,
+      "valid": 2000
+     },
+     "k": 21,
+     "n": 36,
+     "rule_of_three": null,
+     "value": 0.5833333333333334,
+     "wilson95": [
+      0.422002514538589,
+      0.7285943804665977
+     ]
+    }
+   }
+  },
+  "image/cal/gan_face_vs_R5": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 0.2857142857142857,
+     "valid": 1811
+    },
+    "value": 0.75
+   },
+   "balanced_accuracy": {
+    "0.05": 0.5833333333333334
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.31205975385146967,
+     "level": 0.95,
+     "lo": 0.16609342710942224,
+     "valid": 1811
+    },
+    "value": 0.26005318316774717
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 2,
+      "n": 2,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.3423802239546494,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 4,
+      "n": 6,
+      "rule_of_three": null,
+      "value": 0.6666666666666666,
+      "wilson95": [
+       0.29999331299474324,
+       0.9032285897864654
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 7,
+     "n_fake": 2,
+     "n_real": 5
+    },
+    "n_scored": 8,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 3,
+     "n_capped": 0,
+     "n_fake": 1,
+     "n_real": 2
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.5043908438450072,
+     "level": 0.95,
+     "lo": 0.3205736317838484,
+     "valid": 1811
+    },
+    "mce": 0.7563560381664137,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.051158173155416584,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.051158173155416584,
+      "s_min": 0.051158173155416584,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.7296161574991425,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7296161574991425,
+      "s_min": 0.7296161574991425,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.7322086667487239,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7322086667487239,
+      "s_min": 0.7322086667487239,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.7331243499132657,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7331243499132657,
+      "s_min": 0.7331243499132657,
+      "weight": 0.25
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.735453684008667,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.735453684008667,
+      "s_min": 0.735453684008667,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.7488648295924547,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7488648295924547,
+      "s_min": 0.7488648295924547,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.7563560381664137,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.7563560381664137,
+      "s_min": 0.7563560381664137,
+      "weight": 0.08333333333333333
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.7675357936041847,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.7675357936041847,
+      "s_min": 0.7675357936041847,
+      "weight": 0.25
+     }
+    ],
+    "value": 0.43763975988487225
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 6,
+     "rule_of_three": 0.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.39033429165637346
+     ]
+    },
+    "0.05": {
+     "k": 2,
+     "n": 6,
+     "rule_of_three": null,
+     "value": 0.3333333333333333,
+     "wilson95": [
+      0.09677141021353453,
+      0.7000066870052566
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.7105461319212117
+   },
+   "n_fake": 2,
+   "n_real": 6,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 8,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.6755924316585924,
+      1.0
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 4,
+     "n": 8,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.21521606069626764,
+      0.7847839393037324
+     ]
+    },
+    "n": 8,
+    "selective_risk": {
+     "k": 2,
+     "n": 4,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.15003898774401986,
+      0.8499610122559802
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1811
+     },
+     "k": 0,
+     "n": 2,
+     "rule_of_three": 1.5,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1811
+     },
+     "k": 1,
+     "n": 2,
+     "rule_of_three": null,
+     "value": 0.5,
+     "wilson95": [
+      0.09453120463920084,
+      0.9054687953607992
+     ]
+    }
+   }
+  },
+  "image/cal/legacy": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 1.0,
+     "valid": 1383
+    },
+    "value": 1.0
+   },
+   "balanced_accuracy": {
+    "0.05": 1.0
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.030056656833168896,
+     "level": 0.95,
+     "lo": 0.0015833635705501763,
+     "valid": 1383
+    },
+    "value": 0.013171090184557165
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 1,
+      "n": 1,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.2065493117918027,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 3,
+      "n": 3,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.43850296436068037,
+       1.0
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "n_scored": 4,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.1266177010913677,
+     "level": 0.95,
+     "lo": 0.03193316552385596,
+     "valid": 1383
+    },
+    "mce": 0.24504326675818627,
+    "table": [
+     {
+      "bin": 1,
+      "mean_s": 0.0556741956231628,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.0556741956231628,
+      "s_min": 0.0556741956231628,
+      "weight": 0.16666666666666666
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.12521736787319365,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.12521736787319365,
+      "s_min": 0.12521736787319365,
+      "weight": 0.16666666666666666
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.24504326675818627,
+      "mean_y": 0.0,
+      "n": 1,
+      "s_max": 0.24504326675818627,
+      "s_min": 0.24504326675818627,
+      "weight": 0.16666666666666666
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.9918078645754509,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9918078645754509,
+      "s_min": 0.9918078645754509,
+      "weight": 0.5
+     }
+    ],
+    "value": 0.07508520608803168
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.08280605815985605
+   },
+   "n_fake": 1,
+   "n_real": 3,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 5,
+     "n": 5,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.5655175313406071,
+      1.0
+     ]
+    },
+    "n": 5,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 2,
+     "n": 5,
+     "rule_of_three": null,
+     "value": 0.4,
+     "wilson95": [
+      0.11762077314099711,
+      0.7692757205908813
+     ]
+    },
+    "n": 5,
+    "selective_risk": {
+     "k": 0,
+     "n": 3,
+     "rule_of_three": 1.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.5614970356393196
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 1389
+     },
+     "k": 0,
+     "n": 1,
+     "rule_of_three": 3.0,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 1.0,
+      "level": 0.95,
+      "lo": 1.0,
+      "valid": 1389
+     },
+     "k": 1,
+     "n": 1,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.2065493117918027,
+      1.0
+     ]
+    }
+   }
+  },
+  "image/cal/personalised": {
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 0,
+      "n": 0,
+      "rule_of_three": null,
+      "value": null,
+      "wilson95": null
+     },
+     "real": {
+      "k": 13,
+      "n": 13,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.7719046248681998,
+       1.0
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "n_scored": 13,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 13,
+     "rule_of_three": 0.23076923076923078,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.22809537513180025
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 13,
+     "rule_of_three": 0.23076923076923078,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.22809537513180025
+     ]
+    }
+   },
+   "n_fake": 0,
+   "n_real": 13,
+   "selective": {
+    "inconclusive": {
+     "k": 13,
+     "n": 13,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.7719046248681998,
+      1.0
+     ]
+    },
+    "n": 13,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 3,
+     "n": 13,
+     "rule_of_three": null,
+     "value": 0.23076923076923078,
+     "wilson95": [
+      0.08179528654269594,
+      0.5025637616051964
+     ]
+    },
+    "n": 13,
+    "selective_risk": {
+     "k": 0,
+     "n": 10,
+     "rule_of_three": 0.3,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.2775328030260577
+     ]
+    }
+   },
+   "tpr_at_fpr": {}
+  },
+  "image/cal/t2i": {
+   "auc": {
+    "ci95": {
+     "B": 2000,
+     "hi": 1.0,
+     "level": 0.95,
+     "lo": 0.8977272727272727,
+     "valid": 2000
+    },
+    "value": 0.9715909090909091
+   },
+   "balanced_accuracy": {
+    "0.05": 0.8181818181818181
+   },
+   "brier": {
+    "balanced": true,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.15325887203508992,
+     "level": 0.95,
+     "lo": 0.03107946490287231,
+     "valid": 2000
+    },
+    "value": 0.08752191091627165
+   },
+   "coverage": {
+    "0.05": {
+     "ai": {
+      "k": 11,
+      "n": 11,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.7411670300055737,
+       1.0
+      ]
+     },
+     "real": {
+      "k": 16,
+      "n": 16,
+      "rule_of_three": null,
+      "value": 1.0,
+      "wilson95": [
+       0.8063923170025951,
+       1.0
+      ]
+     }
+    }
+   },
+   "decision_rules": {
+    "content": null,
+    "fewer_than_two_checks": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "n_scored": 27,
+    "no_check_entered": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "no_supporting_check": {
+     "n": 0,
+     "n_capped": 0,
+     "n_fake": 0,
+     "n_real": 0
+    },
+    "strong_not_issued": {
+     "n": 0,
+     "n_fake": 0,
+     "n_real": 0
+    }
+   },
+   "ece": {
+    "balanced": true,
+    "bins": 15,
+    "ci95": {
+     "B": 2000,
+     "hi": 0.2725522692697374,
+     "level": 0.95,
+     "lo": 0.09221723989634469,
+     "valid": 2000
+    },
+    "mce": 0.7670300564947803,
+    "table": [
+     {
+      "bin": 0,
+      "mean_s": 0.038264709727053654,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.038737440228807006,
+      "s_min": 0.0377919792253003,
+      "weight": 0.0625
+     },
+     {
+      "bin": 1,
+      "mean_s": 0.04811560849052689,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.04834249133812397,
+      "s_min": 0.04788872564292981,
+      "weight": 0.0625
+     },
+     {
+      "bin": 2,
+      "mean_s": 0.0986963899889214,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.10472102692040923,
+      "s_min": 0.09267175305743358,
+      "weight": 0.0625
+     },
+     {
+      "bin": 3,
+      "mean_s": 0.12018157711100765,
+      "mean_y": 0.0,
+      "n": 3,
+      "s_max": 0.12521736787319365,
+      "s_min": 0.11457230115583424,
+      "weight": 0.09375
+     },
+     {
+      "bin": 4,
+      "mean_s": 0.16471771132496715,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.17687404981651814,
+      "s_min": 0.15256137283341617,
+      "weight": 0.0625
+     },
+     {
+      "bin": 5,
+      "mean_s": 0.18691285122584042,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.19020521218937345,
+      "s_min": 0.18362049026230734,
+      "weight": 0.0625
+     },
+     {
+      "bin": 6,
+      "mean_s": 0.23296994350521977,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.23296994350521977,
+      "s_min": 0.23296994350521977,
+      "weight": 0.045454545454545456
+     },
+     {
+      "bin": 7,
+      "mean_s": 0.29822383831696064,
+      "mean_y": 0.5925925925925926,
+      "n": 2,
+      "s_max": 0.33478548126361807,
+      "s_min": 0.24504326675818627,
+      "weight": 0.07670454545454547
+     },
+     {
+      "bin": 8,
+      "mean_s": 0.3840980025074789,
+      "mean_y": 0.0,
+      "n": 2,
+      "s_max": 0.4079064719846482,
+      "s_min": 0.36028953303030953,
+      "weight": 0.0625
+     },
+     {
+      "bin": 9,
+      "mean_s": 0.500975557145649,
+      "mean_y": 1.0,
+      "n": 2,
+      "s_max": 0.5323779416259439,
+      "s_min": 0.46957317266535414,
+      "weight": 0.09090909090909091
+     },
+     {
+      "bin": 10,
+      "mean_s": 0.8910320602864681,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.8910320602864681,
+      "s_min": 0.8910320602864681,
+      "weight": 0.045454545454545456
+     },
+     {
+      "bin": 11,
+      "mean_s": 0.9593810637648209,
+      "mean_y": 1.0,
+      "n": 2,
+      "s_max": 0.969377329036445,
+      "s_min": 0.9493847984931967,
+      "weight": 0.09090909090909091
+     },
+     {
+      "bin": 12,
+      "mean_s": 0.9879171351537276,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9879171351537276,
+      "s_min": 0.9879171351537276,
+      "weight": 0.045454545454545456
+     },
+     {
+      "bin": 13,
+      "mean_s": 0.9919979219452174,
+      "mean_y": 1.0,
+      "n": 2,
+      "s_max": 0.992187979314984,
+      "s_min": 0.9918078645754509,
+      "weight": 0.09090909090909091
+     },
+     {
+      "bin": 14,
+      "mean_s": 0.9958614238183782,
+      "mean_y": 1.0,
+      "n": 1,
+      "s_max": 0.9958614238183782,
+      "s_min": 0.9958614238183782,
+      "weight": 0.045454545454545456
+     }
+    ],
+    "value": 0.1817381535407045
+   },
+   "fpr_at_tau": {
+    "0.01": {
+     "k": 0,
+     "n": 16,
+     "rule_of_three": 0.1875,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.1936076829974049
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 16,
+     "rule_of_three": 0.1875,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.1936076829974049
+     ]
+    }
+   },
+   "log_loss": {
+    "balanced": true,
+    "value": 0.2767976885094244
+   },
+   "n_fake": 11,
+   "n_real": 16,
+   "oracle_tpr_at_fpr": {
+    "0.01": {
+     "k": 0,
+     "n": 11,
+     "rule_of_three": 0.2727272727272727,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    },
+    "0.05": {
+     "k": 0,
+     "n": 11,
+     "rule_of_three": 0.2727272727272727,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    }
+   },
+   "selective": {
+    "inconclusive": {
+     "k": 28,
+     "n": 28,
+     "rule_of_three": null,
+     "value": 1.0,
+     "wilson95": [
+      0.8793566935605293,
+      1.0
+     ]
+    },
+    "n": 28,
+    "selective_risk": {
+     "k": 0,
+     "n": 0,
+     "rule_of_three": null,
+     "value": null,
+     "wilson95": null
+    }
+   },
+   "selective_policy": "statistical decision after the loaded artefact envelope cap and, where the content rule is applied (decision_rules), the cap of content the bench does not hold; an item that no check supports (D-76) or in which no check entered is not decided; excludes documentary overrides",
+   "selective_raw_conformal": {
+    "inconclusive": {
+     "k": 8,
+     "n": 28,
+     "rule_of_three": null,
+     "value": 0.2857142857142857,
+     "wilson95": [
+      0.15253995979312637,
+      0.47059288582378966
+     ]
+    },
+    "n": 28,
+    "selective_risk": {
+     "k": 0,
+     "n": 20,
+     "rule_of_three": 0.15,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ]
+    }
+   },
+   "tpr_at_fpr": {
+    "0.01": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.0,
+      "level": 0.95,
+      "lo": 0.0,
+      "valid": 2000
+     },
+     "k": 0,
+     "n": 11,
+     "rule_of_three": 0.2727272727272727,
+     "value": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    },
+    "0.05": {
+     "ci95": {
+      "B": 2000,
+      "hi": 0.9,
+      "level": 0.95,
+      "lo": 0.3333333333333333,
+      "valid": 2000
+     },
+     "k": 7,
+     "n": 11,
+     "rule_of_three": null,
+     "value": 0.6363636363636364,
+     "wilson95": [
+      0.35380117262012434,
+      0.8483352901086686
+     ]
+    }
+   }
+  }
+ },
+ "slices": {
+  "image/q>=90/side512-1024/face120-256": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 2,
+   "n_real": 0,
+   "note": "fewer than 100 items of a class in image/q>=90/side512-1024/face120-256 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side512-1024/face<120": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 6,
+   "n_real": 1,
+   "note": "fewer than 100 items of a class in image/q>=90/side512-1024/face<120 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side512-1024/face>=256": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 8,
+   "n_real": 2,
+   "note": "fewer than 100 items of a class in image/q>=90/side512-1024/face>=256 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side512-1024/noface": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 22,
+   "n_real": 9,
+   "note": "fewer than 100 items of a class in image/q>=90/side512-1024/noface and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side<512/face120-256": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 8,
+   "n_real": 7,
+   "note": "fewer than 100 items of a class in image/q>=90/side<512/face120-256 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side<512/face<120": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 0,
+   "n_real": 1,
+   "note": "fewer than 100 items of a class in image/q>=90/side<512/face<120 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side<512/face>=256": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 0,
+   "n_real": 1,
+   "note": "fewer than 100 items of a class in image/q>=90/side<512/face>=256 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side<512/noface": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 1,
+   "n_real": 6,
+   "note": "fewer than 100 items of a class in image/q>=90/side<512/noface and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side>1024/face<120": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 0,
+   "n_real": 2,
+   "note": "fewer than 100 items of a class in image/q>=90/side>1024/face<120 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side>1024/face>=256": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 1,
+   "n_real": 0,
+   "note": "fewer than 100 items of a class in image/q>=90/side>1024/face>=256 and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  },
+  "image/q>=90/side>1024/noface": {
+   "auc": null,
+   "measured_at": null,
+   "n_fake": 2,
+   "n_real": 23,
+   "note": "fewer than 100 items of a class in image/q>=90/side>1024/noface and in every parent slice",
+   "support": "unsupported",
+   "support_n_fake": null,
+   "support_n_real": null
+  }
+ },
+ "system": {
+  "artefact": "fuser-image-0.0.0-smoke.json",
+  "bench_version": "vb-mini",
+  "context_source": "scored",
+  "decision_policy": {
+   "artefact_sha256": "3a730f273a32a402896c38bf19a2fac5046da2220fbde5748327c9057694769b",
+   "checks_not_run": "inconclusive without an estimate",
+   "conformal_alpha": 0.05,
+   "content_rule": {
+    "applied": false,
+    "conditions": [
+     "flat_blocks",
+     "screenshot_rule",
+     "greyscale"
+    ],
+    "decision": "D-65",
+    "flat_block_limit": null,
+    "limit_of_bench": null,
+    "limit_of_manifest_sha256": null,
+    "measured_on": null,
+    "state": "not applied: the artefact's bench has no limit in content_kinds.json"
+   },
+   "envelope": {
+    "sha256": null,
+    "slice_count": 0,
+    "status": "missing"
+   },
+   "envelope_source": "loaded_artefact.metrics.test.slices",
+   "excludes": [
+    "documentary provenance overrides",
+    "workspace policy overrides",
+    "configured prior changes",
+    "provenance contribution bound",
+    "confidence adjustments"
+   ],
+   "fallback_content_check": {
+    "decision": "D-64",
+    "effect": "none: no uncalibrated fallback decision is evaluated"
+   },
+   "min_slice_auc": 0.7,
+   "min_support_class_n": 100,
+   "no_check_entered": {
+    "decision": "D-64 as clarified (N-19f)",
+    "effect": "an item in which no check entered is not assessable and not decided; counted in decision_rules"
+   },
+   "policy": "default statistical conformal decision plus loaded envelope cap",
+   "prior_ai": 0.5,
+   "schema": "veritas.bench-decision-policy/3",
+   "strong_codes": {
+    "decision": "D-64",
+    "effect": "none on these metrics: the decisions are at α = 0.05, the level of the moderate codes; the items it weakens at the strong level are counted in decision_rules",
+    "min_scored_checks": 2
+   },
+   "supporting_check": {
+    "decision": "D-76",
+    "effect": "an item whose set at α = 0.05 holds one answer that no check supports is not decided; counted in decision_rules; selective_raw_conformal does not take the rule",
+    "min_row": "ln 2 toward the answer, one check that counts for D-64"
+   }
+  },
+  "detectors": [
+   "img.dda@d1f98d194fd1",
+   "img.dfdc_b7@651bc0cae350",
+   "img.hf.ateeqq@eb0d229dd61f",
+   "img.hf.dima806@504818193248"
+  ],
+  "excluded_folds": [],
+  "fit_manifest_sha256": "3e2e117b50c6e75476db84a3dca948ce93e98511e7ade985ab0591acd2d0b461",
+  "kind": "artefact",
+  "modality": "image",
+  "reviewed_by": "ralph-loop (automated; pending human review)",
+  "sha256": "3a730f273a32a402896c38bf19a2fac5046da2220fbde5748327c9057694769b",
+  "version": "0.0.0-smoke"
+ },
+ "thresholds": {
+  "0.01": {
+   "n_real": 52,
+   "rule": "⌈(n₀+1)(1−α)⌉-th smallest cal real s, equal stratum weights",
+   "strata": {
+    "R1": 4,
+    "R2": 10,
+    "R3": 13,
+    "R4": 11,
+    "R5": 12,
+    "R6": 2
+   },
+   "tau": null
+  },
+  "0.05": {
+   "n_real": 52,
+   "rule": "⌈(n₀+1)(1−α)⌉-th smallest cal real s, equal stratum weights",
+   "strata": {
+    "R1": 4,
+    "R2": 10,
+    "R3": 13,
+    "R4": 11,
+    "R5": 12,
+    "R6": 2
+   },
+   "tau": 0.7488648295924547
+  }
+ }
+}

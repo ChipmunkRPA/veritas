@@ -1,0 +1,691 @@
+{
+  "baseline_detectors": [
+    "img.commfor384",
+    "img.dda",
+    "img.dfdc_b7"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "outside_scope": 1015,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+    "version": "vb-1.1"
+  },
+  "candidate": "pe.mesorch.integrity",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.mesorch.integrity GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.mesorch.integrity ABLATE_BOOTSTRAP=2000",
+  "contamination_card": false,
+  "criteria": {
+    "A3": {
+      "pass": false,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": -0.0013737014238894977,
+      "lgo_macro_delta": 0.011717383080342425,
+      "pass": false,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.011717383080342425,
+      "pass": false,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_strata": [],
+      "interaction_strata": [],
+      "interaction_terms": {},
+      "not_established_strata": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "pass": true,
+      "pooled_ci95_hi": 0.004115332290752821,
+      "pooled_delta": 0.0,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term (D-44)",
+      "small_strata": [
+        "R6"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.9702329684732007,
+      "without": 0.9697776979565773
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.008604488078541351,
+          "lo": -0.009708737864077666,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 424,
+        "with": 0.09669811320754718,
+        "without": 0.09669811320754718
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.006772392061530289,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.001633986928104575,
+        "n": 612,
+        "with": 0.004901960784313725,
+        "without": 0.0032679738562091504
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.006956521739130445,
+          "lo": -0.013770552231130304,
+          "valid": 2000
+        },
+        "delta": -0.0033955857385399024,
+        "n": 589,
+        "with": 0.14431239388794567,
+        "without": 0.14770797962648557
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.00606060606060606,
+          "lo": -0.006060606060606061,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 495,
+        "with": 0.012121212121212121,
+        "without": 0.012121212121212121
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.012750455373406196,
+          "lo": -0.010928961748633878,
+          "valid": 2000
+        },
+        "delta": 0.0018214936247723107,
+        "n": 549,
+        "with": 0.03825136612021858,
+        "without": 0.03642987249544627
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 28,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.004115332290752821,
+        "lo": -0.0037133141945217807,
+        "valid": 2000
+      },
+      "delta": 0.0,
+      "n": 2697,
+      "with": 0.05784204671857619,
+      "without": 0.05784204671857619
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05905553340642546,
+          "lo": -0.0032894736842105114,
+          "valid": 2000
+        },
+        "delta": 0.02573529411764708,
+        "n": 272,
+        "with": 0.8455882352941176,
+        "without": 0.8198529411764706
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.05882352941176472,
+          "valid": 2000
+        },
+        "delta": -0.02352941176470591,
+        "n": 85,
+        "with": 0.8470588235294118,
+        "without": 0.8705882352941177
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 70,
+        "with": 0.6,
+        "without": 0.6
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.019607843137254943,
+          "lo": -0.0326797385620915,
+          "valid": 2000
+        },
+        "delta": -0.0065359477124183885,
+        "n": 153,
+        "with": 0.6405228758169934,
+        "without": 0.6470588235294118
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.12195121951219512,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.04878048780487798,
+        "n": 41,
+        "with": 0.8292682926829268,
+        "without": 0.7804878048780488
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05307017543859415,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.01754385964912275,
+        "n": 57,
+        "with": 0.5964912280701754,
+        "without": 0.5789473684210527
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 50,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 24,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.06818181818181823,
+          "valid": 2000
+        },
+        "delta": -0.02127659574468077,
+        "n": 47,
+        "with": 0.9574468085106383,
+        "without": 0.9787234042553191
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 53,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.04807692307692313,
+          "valid": 2000
+        },
+        "delta": -0.018867924528301883,
+        "n": 106,
+        "with": 0.9528301886792453,
+        "without": 0.9716981132075472
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 148,
+        "with": 0.8513513513513513,
+        "without": 0.8513513513513513
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.016218419506462918,
+          "lo": -0.015544041450777257,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 186,
+        "with": 0.8870967741935484,
+        "without": 0.8870967741935484
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 153,
+        "with": 0.9869281045751634,
+        "without": 0.9869281045751634
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.9478260869565217,
+        "without": 0.9478260869565217
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.02564102564102566,
+          "valid": 2000
+        },
+        "delta": -0.008474576271186418,
+        "n": 118,
+        "with": 0.8559322033898306,
+        "without": 0.864406779661017
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.04347826086956519,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.01863354037267073,
+        "n": 161,
+        "with": 0.8633540372670807,
+        "without": 0.84472049689441
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.9739130434782609,
+        "without": 0.9739130434782609
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.06422018348623859,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.028301886792452824,
+        "n": 106,
+        "with": 0.8867924528301887,
+        "without": 0.8584905660377359
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 54,
+        "with": 0.9814814814814815,
+        "without": 0.9814814814814815
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 75,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 35,
+        "with": 0.9714285714285714,
+        "without": 0.9714285714285714
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.03797468354430389,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.012500000000000067,
+        "n": 80,
+        "with": 0.8625,
+        "without": 0.85
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.04347826086956519,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.01863354037267073,
+        "n": 161,
+        "with": 0.8633540372670807,
+        "without": 0.84472049689441
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05905553340642546,
+          "lo": -0.0032894736842105114,
+          "valid": 2000
+        },
+        "delta": 0.02573529411764708,
+        "n": 272,
+        "with": 0.8455882352941176,
+        "without": 0.8198529411764706
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.019607843137254943,
+          "lo": -0.0326797385620915,
+          "valid": 2000
+        },
+        "delta": -0.0065359477124183885,
+        "n": 153,
+        "with": 0.6405228758169934,
+        "without": 0.6470588235294118
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.9739130434782609,
+        "without": 0.9739130434782609
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.005120902115786973,
+          "lo": -0.003853750530051142,
+          "valid": 2000
+        },
+        "delta": 0.0006238303181534954,
+        "n": 1603,
+        "with": 0.8933250155957579,
+        "without": 0.8927011852776044
+      }
+    },
+    "tau": {
+      "with": 0.5257528830124951,
+      "without": 0.5175191591323638
+    },
+    "tpr": {
+      "with": 0.8728298611111112,
+      "without": 0.8684895833333334
+    }
+  },
+  "detector_meta": {
+    "img.commfor384": {
+      "score_key": "img.commfor384@8ab53da046f4",
+      "transform": "logit_clip8",
+      "weights_sha12": "8ab53da046f4"
+    },
+    "img.dda": {
+      "score_key": "img.dda@d1f98d194fd1",
+      "transform": "logit_clip8",
+      "weights_sha12": "d1f98d194fd1"
+    },
+    "img.dfdc_b7": {
+      "score_key": "img.dfdc_b7@651bc0cae350",
+      "transform": "logit_clip8",
+      "weights_sha12": "651bc0cae350"
+    },
+    "pe.mesorch.integrity": {
+      "score_key": "pe.mesorch.integrity@c9c8c6fde826",
+      "transform": "logit_clip8",
+      "weights_sha12": "c9c8c6fde826"
+    }
+  },
+  "git_commit": "d1b4c038d08e91e0b02666b34391ff04f7f3e744",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 5001,
+    "n_fake": 2304,
+    "n_real": 2697
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 153,
+        "n_train": 4848,
+        "tau": {
+          "with": 0.5619362326646302,
+          "without": 0.5645329778445429
+        },
+        "tpr": {
+          "with": 0.9869281045751634,
+          "without": 0.9869281045751634
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 70,
+        "n_train": 4931,
+        "tau": {
+          "with": 0.5471168298272596,
+          "without": 0.5374447949425127
+        },
+        "tpr": {
+          "with": 0.5857142857142857,
+          "without": 0.5857142857142857
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.03508771929824561,
+        "n_fake": 57,
+        "n_train": 4944,
+        "tau": {
+          "with": 0.5331602808562275,
+          "without": 0.5421977160565185
+        },
+        "tpr": {
+          "with": 0.5614035087719298,
+          "without": 0.5263157894736842
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 118,
+        "n_train": 4883,
+        "tau": {
+          "with": 0.539474598233187,
+          "without": 0.5321269947247659
+        },
+        "tpr": {
+          "with": 0.8389830508474576,
+          "without": 0.8389830508474576
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.03749999999999998,
+        "n_fake": 80,
+        "n_train": 4921,
+        "tau": {
+          "with": 0.5609491136303386,
+          "without": 0.5612126360969475
+        },
+        "tpr": {
+          "with": 0.7875,
+          "without": 0.75
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.009433962264150941,
+        "n_fake": 106,
+        "n_train": 4895,
+        "tau": {
+          "with": 0.5527576833170522,
+          "without": 0.5579750200087135
+        },
+        "tpr": {
+          "with": 0.8584905660377359,
+          "without": 0.8490566037735849
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 106,
+        "n_train": 4895,
+        "tau": {
+          "with": 0.5528992614526361,
+          "without": 0.5571815205427001
+        },
+        "tpr": {
+          "with": 0.9433962264150944,
+          "without": 0.9433962264150944
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.025329967903224577,
+        "lo": -0.0013737014238894977,
+        "valid": 2000
+      },
+      "delta": 0.011717383080342425,
+      "with": 0.794630820337381,
+      "without": 0.7829134372570385
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "img.dfdc_b7": [
+        "has_face"
+      ]
+    },
+    "seed": 7,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

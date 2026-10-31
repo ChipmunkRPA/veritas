@@ -1,0 +1,66 @@
+# Not-validated families, strata, transforms and lanes of v2.1.1 (D-02, PRD Q6, BUILD_SPEC Q-5, H-7, H-8, H-10, J-5, K-1), read by scripts/check_shortfalls.py.
+#
+# Each entry:
+# - id: a stable name;
+# - goals: the goal ids of docs/v2/bench/goals.yaml whose FAIL or MISSING rows the entry covers (may be empty);
+# - cap: how a decision is kept from claiming validated performance:
+#   - not_fitted: the detectors are in no fitted fuser artefact, so they weigh 0 in every decision (checked);
+#   - envelope: outside a validated condition slice the decision is capped at inconclusive (app/engine/fusion/abstain.py);
+#   - tau_not_established: no decision threshold exists, so the conformal set holds both classes and the decision is inconclusive;
+#   - disclosure: the family or stratum cannot be identified from an input, so the cap is the statement in the report and in
+#     docs/limitations.md; validated numbers of another family are never borrowed;
+# - detectors: detector ids that must not appear in any loaded fuser artefact (checked; empty unless the cap needs it);
+# - limitations: a phrase that must appear in docs/limitations.md (markdown emphasis and line breaks ignored).
+schema_version: 1
+bench: vb-1.1
+entries:
+  - id: image.families
+    goals: [G1a, G1b]
+    cap: disclosure
+    detectors: []
+    limitations: "Generator families (not validated)."
+  - id: image.real_strata
+    goals: [G3]
+    cap: disclosure
+    detectors: []
+    limitations: "Real photo strata (not validated)."
+  - id: image.calibration
+    goals: [G4a, G4b, G4c, G6a, G6b]
+    cap: disclosure
+    detectors: []
+    limitations: "Calibration (not validated)."
+  - id: image.transforms
+    goals: [G5a, G5b, G5c, G11]
+    cap: envelope
+    detectors: []
+    limitations: "Transformed images (not validated)."
+  - id: image.faces
+    goals: [G7a, G7b, G7c]
+    cap: not_fitted
+    detectors: [face.gend_clip_l14]
+    limitations: "GAN faces (not validated)."
+  - id: image.localisers
+    goals: [G8]
+    cap: not_fitted
+    detectors: [loc.mesorch, loc.radar]
+    limitations: "Localisation maps (not validated)."
+  - id: image.unadmitted_detectors
+    goals: []
+    cap: not_fitted
+    detectors: [img.spai, img.univfd]
+    limitations: "The SPAI adapter is deferred (D-39): built, off."
+  - id: video.synthesis
+    goals: [G9a]
+    cap: disclosure
+    detectors: [vid.synth.d3_xclip, vid.frames.univfd]
+    limitations: "Video synthesis (not validated)."
+  - id: video.lanes
+    goals: []
+    cap: not_fitted
+    detectors: [vid.swap.gend_clip_l14, vid.lipsync.stable_syncnet, vid.lipsync.landmark_xcorr]
+    limitations: "lanes are shown with their segments but are not in the fitted set"
+  - id: audio.synthetic_voice
+    goals: [G10a]
+    cap: disclosure
+    detectors: [aud.mo_thecreator_w2v2]
+    limitations: "Synthetic voice (not validated)."

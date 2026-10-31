@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "bundles": {
+    "c2pa": {
+      "label": "C2PA Trust List (conformance program)",
+      "source": "https://github.com/c2pa-org/conformance-public/tree/99927caef670ca4ad9da5e5542dca39e42fad6f3/trust-list",
+      "revision": "99927caef670ca4ad9da5e5542dca39e42fad6f3",
+      "licence": "CC BY 4.0 (c2pa-org/conformance-public LICENSE)",
+      "list_issue_date": "2026-08-05T00:11:39Z",
+      "next_update": "2027-08-05T00:11:39Z",
+      "retrieved": "2026-09-12",
+      "anchors": "C2PA-TRUST-LIST.pem",
+      "tsa_anchors": "C2PA-TSA-TRUST-LIST.pem",
+      "files": [
+        {
+          "file": "c2pa/C2PA-TRUST-LIST.pem",
+          "sha256": "75cacc98b79ecac33713c7ecfb58d4a0ef383f3c1f886e7409f9e37e8664aea5",
+          "bytes": 37911
+        },
+        {
+          "file": "c2pa/C2PA-TSA-TRUST-LIST.pem",
+          "sha256": "c688d3555f4a2f1f8d663472bbd37888ff234abdd234c25934c0f9292e4eb5c9",
+          "bytes": 28863
+        }
+      ]
+    },
+    "cai-legacy": {
+      "label": "Legacy CAI interim trust list (frozen 2026-01-01)",
+      "source": "https://contentcredentials.org/trust/",
+      "revision": "not versioned (Last-Modified per retrieval)",
+      "licence": "not stated by the publisher (public certificates and hashes)",
+      "retrieved": "2026-09-12",
+      "anchors": "anchors.pem",
+      "allowed_list": "allowed.sha256.txt",
+      "trust_config": "store.cfg",
+      "files": [
+        {
+          "file": "cai-legacy/anchors.pem",
+          "sha256": "db57e50b9bd4e4c786cbb91f38fd85e2af6a9d5412438a8cddcc42688df07ae5",
+          "bytes": 44078
+        },
+        {
+          "file": "cai-legacy/allowed.sha256.txt",
+          "sha256": "3597b20c9c20a0daadc7fab0d8c63534bd333ec6a715ef7117c7a4588caa15bb",
+          "bytes": 8237
+        },
+        {
+          "file": "cai-legacy/store.cfg",
+          "sha256": "1044c30a906b0c9cbe28b4a4c0002ca56a718f0ae22b9af83238543a07d0e718",
+          "bytes": 258
+        }
+      ]
+    }
+  },
+  "iptc_digital_source_type": {
+    "file": "iptc_digital_source_type.json",
+    "sha256": "4debe7d10abc7e0eff8e17847f978c021fec398a1426a40c2de12244b93227e4"
+  }
+}

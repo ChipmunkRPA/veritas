@@ -1,0 +1,374 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader";        /* display serif, opsz + wght axes */
+@import "@fontsource-variable/inter";             /* UI sans */
+@import "@fontsource-variable/jetbrains-mono";    /* figures, hashes, code */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* ---------- font families ---------- */
+  --font-display: "Newsreader Variable", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---------- type scale (px / line-height) ---------- */
+  --text-display: 40px;   --text-display--line-height: 44px;  --text-display--letter-spacing: -0.01em;
+  --text-numeral: 72px;   --text-numeral--line-height: 72px;  --text-numeral--letter-spacing: -0.02em;
+  --text-h1: 28px;        --text-h1--line-height: 34px;       --text-h1--letter-spacing: -0.005em;
+  --text-h2: 22px;        --text-h2--line-height: 28px;
+  --text-h3: 17px;        --text-h3--line-height: 24px;
+  --text-body: 15px;      --text-body--line-height: 24px;
+  --text-reader: 17px;    --text-reader--line-height: 28px;   /* document reader, serif */
+  --text-small: 13px;     --text-small--line-height: 20px;
+  --text-caption: 12px;   --text-caption--line-height: 16px;
+  --text-eyebrow: 12px;   --text-eyebrow--line-height: 16px;  --text-eyebrow--letter-spacing: 0.08em;
+  --text-mono: 13px;      --text-mono--line-height: 20px;
+  --text-micro: 11px;     --text-micro--line-height: 14px;
+
+  /* ---------- colour: light ---------- */
+  --color-surface: #FCFBF9;          /* page */
+  --color-surface-2: #F4F2EC;        /* chrome, table head, code bg */
+  --color-surface-3: #EBE8E1;        /* hover / pressed / selected row */
+  --color-border: #E4E0D7;           /* hairline */
+  --color-border-strong: #BDB6A9;    /* inputs, secondary buttons */
+  --color-text: #1B1A17;
+  --color-text-muted: #625D54;
+  --color-text-faint: #857F73;       /* >= 18 px or non-text only */
+  --color-accent: #1F4D8F;           /* links, focus ring, active nav rule */
+  --color-accent-hover: #173D73;
+  --color-on-accent: #FFFFFF;
+  --color-danger: #9B2915;
+  --color-ok: #0B6B54;
+  --color-scrim: rgb(27 26 23 / 0.42);   /* demo walkthrough spotlight */
+
+  /* verdict scale, authentic -> AI (5 steps, colour-blind-safe: teal -> warm grey -> vermilion) */
+  --color-verdict-1: #0B6B54;  --color-verdict-1-tint: #E2F0EA;   /* very_likely_authentic */
+  --color-verdict-2: #2A7460;  --color-verdict-2-tint: #E8F2EE;   /* likely_authentic */
+  --color-verdict-3: #6E685D;  --color-verdict-3-tint: #EEEBE4;   /* uncertain */
+  --color-verdict-4: #AE4617;  --color-verdict-4-tint: #F9E4DA;   /* likely_ai */
+  --color-verdict-5: #9B2915;  --color-verdict-5-tint: #F7DCD7;   /* very_likely_ai */
+
+  /* sentence highlights (reader) */
+  --color-hl-ai: #F8DED3;        --color-hl-ai-rule: #AE4617;     --color-hl-ai-selected: #F1CBBB;
+  --color-hl-mixed: #EFE7D3;     --color-hl-mixed-rule: #857F73;  --color-hl-mixed-selected: #E5DAC0;
+  --color-hl-human: transparent; --color-hl-human-rule: transparent; --color-hl-human-selected: #EBE8E1;
+
+  /* chart series (video timeline) */
+  --color-series-fused: #1B1A17;
+  --color-series-face: #AE4617;
+  --color-series-general: #1F4D8F;
+  --color-series-threshold: #BDB6A9;
+
+  /* media stage. Light: paper chrome (surface-2, hairline) so the exhibit sits inside the editorial layout;
+     dark: the direction-C viewer (overridden below). Components only ever use the stage-* tokens. */
+  --color-stage: var(--color-surface-2);
+  --color-stage-2: var(--color-surface-3);
+  --color-stage-text: var(--color-text);
+  --color-stage-muted: var(--color-text-muted);
+  --color-stage-border: var(--color-border);
+  --color-stage-material: rgb(252 251 249 / 0.88);   /* surface at 88%: face-label chips over media */
+  --color-stage-shadow: rgb(252 251 249 / 0.7);      /* outer halo keeping ink face boxes legible on dark media */
+  --color-stage-series-face: var(--color-series-face);
+  --color-stage-series-general: var(--color-series-general);
+
+  /* ---------- radii ---------- */
+  --radius-xs: 2px;   /* highlights, chips */
+  --radius-sm: 4px;   /* buttons, inputs, code */
+  --radius-md: 6px;   /* images, plates, popovers, stage */
+
+  /* ---------- shadows (two, both rare) ---------- */
+  --shadow-popover: 0 1px 2px rgb(27 26 23 / .06), 0 8px 24px rgb(27 26 23 / .08);
+  --shadow-focus: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
+
+  /* Restrained workspace lighting, requested for intake/home. Static; evidence colours remain semantic. */
+  --color-workspace-tint: #EDF3FC;
+  --color-workspace-glow: rgb(69 120 202 / .12);
+  --shadow-workspace: 0 0 56px var(--color-workspace-glow), 0 1px 0 var(--color-border);
+  --shadow-workspace-action: 0 3px 18px var(--color-workspace-glow);
+
+  /* ---------- spacing rhythm (4 px base) ---------- */
+  --spacing: 4px;
+  --container-content: 1120px;
+  --container-reader: 68ch;
+  --container-sidebar: 232px;
+  --container-rail: 320px;
+
+  /* ---------- motion ---------- */
+  --ease-standard: cubic-bezier(.2, .7, .2, 1);
+  --ease-exit: cubic-bezier(.4, 0, 1, 1);
+  --duration-fast: 120ms;     /* hover, colour, opacity */
+  --duration-base: 200ms;     /* expand/collapse, reveal */
+  --duration-slow: 320ms;     /* side panel, route fade, numeral count-up */
+
+  /* ---------- animations ---------- */
+  --animate-pulse-dot: pulse-dot 1.2s ease-in-out infinite;
+  --animate-pulse-skeleton: pulse-skeleton 1.6s ease-in-out infinite;
+  --animate-indeterminate: indeterminate 1.4s var(--ease-standard) infinite;
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-standard) both;
+
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+  @keyframes pulse-skeleton { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+  @keyframes indeterminate { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  /* UX §8.9 motion 3: side-sheet enter, opacity + 8 px x-translate. */
+  --animate-sheet-in: sheet-in var(--duration-base) var(--ease-standard) both;
+  @keyframes sheet-in { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- v2 evidence tokens (UX §8.1–§8.4). `static`: canvas code reads them with getComputedStyle, and
+   `make report-tokens` exports the light values to backend/app/reports/templates/tokens.css. ---------- */
+@theme static {
+  /* evidence direction: hue + glyph + position, never hue alone (verdict-5 vs verdict-1 is 1.19:1 in grayscale) */
+  --color-dir-ai: var(--color-verdict-5);
+  --color-dir-authentic: var(--color-verdict-1);
+  --color-dir-neutral: var(--color-text-muted);
+
+  /* evidence strength: achromatic, count-encoded (0–4 bars); documentary = seal */
+  --color-strength-on: var(--color-text);
+  --color-strength-off: var(--color-border);
+
+  /* non-text graphics that carry meaning (WCAG 1.4.11 >= 3:1) */
+  --color-graphic: #8F887B;                 /* axes, connectors, interval ticks, lane frames · 3.40:1 on surface */
+  --color-interval: var(--color-graphic);   /* plausible-range bar inside the scale */
+
+  /* severity (metadata tree): glyph + word always · ○ ◐ ● ◆ */
+  --color-sev-info: var(--color-text-muted);
+  --color-sev-notable: var(--color-text);
+  --color-sev-anomaly: var(--color-verdict-4);
+  --color-sev-documentary: var(--color-verdict-5);
+
+  /* timeline lanes */
+  --color-lane: var(--color-surface-2);
+  --color-lane-frame: var(--color-graphic);
+  --color-lane-hatch: #A39C8F;              /* "not analysed" texture; always paired with a text label */
+  --color-lane-flag: var(--color-text);     /* 3 px top rule on segments at step >= 4 */
+  --color-lane-tolerance: var(--color-surface-3);
+  --lane-h: 28px;  --lane-h-expanded: 80px;  --lane-h-curve: 64px;  --lane-gutter: 160px;  --lane-gap: 4px;
+
+  /* analyst marks: the analyst's voice uses the accent; evidence never does */
+  --color-annotation: var(--color-accent);
+  --color-selection: var(--color-accent);
+
+  /* lenses over media: theme-independent, they sit on the media */
+  --color-lens-ink: #F3F3F1;
+  --color-lens-halo: rgb(0 0 0 / 0.55);
+  --color-lens-clone: #56B4E9;
+  --color-lens-hatch: rgb(243 243 241 / 0.55);
+  --lens-hatch-pitch: 6px;  --lens-hatch-width: 1px;
+
+  /* heat colormap: inferno, 11 stops, L* monotonic (lib/colormap.ts interpolates the 256-entry LUT) */
+  --heat-00: #000004; --heat-01: #160B39; --heat-02: #420A68; --heat-03: #6A176E; --heat-04: #932667;
+  --heat-05: #BC3754; --heat-06: #DD513A; --heat-07: #F37819; --heat-08: #FCA50A; --heat-09: #F6D746; --heat-10: #FCFFA4;
+  --color-heat-ground: #000000;             /* "map only" ground in both themes (§8.3, §8.6) */
+
+  /* data-visualisation specs (§8.4) */
+  --viz-scale-track: 6px;  --viz-interval-h: 2px;  --viz-interval-tick: 10px;  --viz-marker-w: 2px;  --viz-marker-h: 14px;
+  --viz-strength-bar-w: 6px;  --viz-strength-bar-h: 12px;
+  --viz-dot: 7px;  --viz-dot-ring: 1.5px;  --viz-dot-small: 3px;  --viz-strip-h: 64px;
+  --viz-row-h: 20px;  --viz-row-gap: 12px;  --viz-label-col: 280px;  --viz-value-col: 64px;
+  --viz-legend-w: 160px;  --viz-legend-h: 8px;
+  --viz-flag-rule: 3px;  --viz-min-segment: 2px;  --viz-rug-h: 6px;  --viz-playhead-tri: 6px;
+  --viz-ref-w: 320px;  --viz-ref-h: 44px;  --viz-calibration: 240px;
+  --viz-icon-dot: 6px;  --viz-icon-gap: 3px;
+}
+
+/* Tailwind v4 has no duration namespace; expose the three motion tokens as utilities. */
+@utility duration-fast { transition-duration: var(--duration-fast); }
+@utility duration-base { transition-duration: var(--duration-base); }
+@utility duration-slow { transition-duration: var(--duration-slow); }
+
+/* ---------- dark theme overrides (same token names) ---------- */
+[data-theme="dark"] {
+  --color-surface: #191815;
+  --color-surface-2: #201F1B;
+  --color-surface-3: #2A2823;
+  --color-border: #34322C;
+  --color-border-strong: #4C4941;
+  --color-text: #ECE9E2;
+  --color-text-muted: #A9A396;
+  --color-text-faint: #7C766B;
+  --color-accent: #8FB4E8;
+  --color-accent-hover: #A9C6EE;
+  --color-on-accent: #191815;
+  --color-danger: #EB6F5B;
+  --color-ok: #4DBF9F;
+  --color-scrim: rgb(0 0 0 / 0.55);
+  --color-verdict-1: #4DBF9F;  --color-verdict-1-tint: #16302A;
+  --color-verdict-2: #7FC9B2;  --color-verdict-2-tint: #1B2E29;
+  --color-verdict-3: #9E978A;  --color-verdict-3-tint: #2A2823;
+  --color-verdict-4: #E9875A;  --color-verdict-4-tint: #3A2419;
+  --color-verdict-5: #EB6F5B;  --color-verdict-5-tint: #3E1F1A;
+  --color-hl-ai: #4A261D;      --color-hl-ai-rule: #E9875A;    --color-hl-ai-selected: #5C3026;
+  --color-hl-mixed: #3B3526;   --color-hl-mixed-rule: #9E978A; --color-hl-mixed-selected: #4B4431;
+  --color-hl-human-selected: #2A2823;
+  --color-series-fused: #ECE9E2;
+  --color-series-face: #E9875A;
+  --color-series-general: #8FB4E8;
+  --color-series-threshold: #4C4941;
+  --shadow-popover: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .5);
+  --color-workspace-tint: #202A38;
+  --color-workspace-glow: rgb(104 158 240 / .13);
+  /* dark media stage (direction C §4.8) */
+  --color-stage: #0B0B0C;
+  --color-stage-2: #141416;
+  --color-stage-text: #F3F3F1;
+  --color-stage-muted: #A3A3A8;
+  --color-stage-border: #27272B;
+  --color-stage-material: rgb(20 20 22 / 0.78);
+  --color-stage-shadow: rgb(0 0 0 / 0.5);
+  --color-stage-series-face: #E9875A;
+  --color-stage-series-general: #8FB4E8;
+  /* v2 evidence tokens (§8.1): the rest re-theme through var() references */
+  --color-graphic: #736D62;
+  --color-interval: var(--color-graphic);
+  --color-lane-hatch: #5A554C;
+  --color-strength-off: var(--color-border-strong);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { color-scheme: dark; } }
+
+/* evidence viewer (UX §5.9, §8.6): the media stage is dark in both themes (a forensic viewing surface); chrome follows the theme */
+.viewer-stage {
+  --color-stage: #0B0B0C;
+  --color-stage-2: #141416;
+  --color-stage-text: #F3F3F1;
+  --color-stage-muted: #A3A3A8;
+  --color-stage-border: #27272B;
+  --color-stage-material: rgb(20 20 22 / 0.78);
+  --color-stage-shadow: rgb(0 0 0 / 0.5);
+  /* analyst marks sit on the dark stage in both themes: the dark-theme accent keeps them legible */
+  --color-annotation: #8FB4E8;
+  --color-selection: #8FB4E8;
+}
+dialog::backdrop { background: var(--color-scrim); }
+
+/* ---------- base ---------- */
+@layer base {
+:root {
+  color-scheme: light;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 24px;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+html, body, #root { min-height: 100%; }
+body { margin: 0; background: var(--color-surface); color: var(--color-text); }
+
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.display { font-family: var(--font-display); font-optical-sizing: auto; font-variant-numeric: lining-nums; }
+.eyebrow {
+  font: 500 var(--text-eyebrow) / var(--text-eyebrow--line-height) var(--font-sans);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+:focus-visible { outline: none; box-shadow: var(--shadow-focus); border-radius: var(--radius-sm); }
+.stage :focus-visible { box-shadow: 0 0 0 2px var(--color-stage), 0 0 0 4px var(--color-stage-text); }
+
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+button:disabled, button[aria-disabled="true"] { cursor: not-allowed; }
+a { color: inherit; text-decoration: none; }
+code, kbd, pre { font-family: var(--font-mono); }
+img, video { display: block; max-width: 100%; }
+}
+
+@layer components {
+
+/* ---------- sentence highlights (reader, §4.6) ---------- */
+.sent {
+  display: inline;
+  padding: 1px 0;
+  border-radius: var(--radius-xs);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard);
+}
+.sent-ai { background: var(--color-hl-ai); border-bottom: 2px solid var(--color-hl-ai-rule); }
+.sent-mixed { background: var(--color-hl-mixed); border-bottom: 1px dotted var(--color-hl-mixed-rule); }
+.sent-human { background: var(--color-hl-human); }
+.sent-unscored { text-decoration: underline dotted var(--color-border-strong); cursor: default; }
+.sent:hover { box-shadow: inset 0 -2px 0 var(--color-text); }
+.sent-selected { box-shadow: inset 0 -2px 0 var(--color-text); }
+.sent-selected.sent-ai { background: var(--color-hl-ai-selected); }
+.sent-selected.sent-mixed { background: var(--color-hl-mixed-selected); }
+.sent-selected.sent-human { background: var(--color-hl-human-selected); }
+.sent:focus-visible { outline: 1.5px solid var(--color-text); outline-offset: 1px; box-shadow: inset 0 -2px 0 var(--color-text); border-radius: var(--radius-xs); }
+.sent-dim { opacity: .35; }
+
+/* ---------- disclosure (grid-template-rows 0fr -> 1fr). Named `.disclosure`, not `.collapse`: Tailwind v4 ships a
+   `collapse` utility (`visibility: collapse`) in the utilities layer which would override a components-layer rule. ---------- */
+.disclosure { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-base) var(--ease-standard); }
+.disclosure[data-open="true"] { grid-template-rows: 1fr; }
+.disclosure > * { overflow: hidden; min-height: 0; }
+
+/* ---------- definition list columns; sideways scrollers; stacked tables (L-7). In this layer so a utility still wins. ---------- */
+.dl { grid-template-columns: var(--dl-key) minmax(0, 1fr); row-gap: var(--dl-gap); column-gap: 16px; }
+@media (max-width: 639px) {
+  /* L-7: a wide key column leaves too little for the value at 375 px, so the key sits above it */
+  .dl-stack { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+  .dl-stack > div + div > dt { margin-top: var(--dl-gap); }
+  /* L-7: a table as stacked rows. One DOM; the cells keep their roles through explicit ARIA on the markup. */
+  .stack-sm, .stack-sm tbody, .stack-sm tr, .stack-sm td { display: block; width: auto; max-width: none; }  /* a `hidden` utility on a cell still wins (utilities layer) */
+  .stack-sm thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .stack-sm tr { padding: 10px 0; }
+  .stack-sm td { padding: 1px 0 !important; }  /* over the cell's own padding utilities */
+  .stack-sm td[data-th]::before { content: attr(data-th) " "; color: var(--color-text-muted); font-family: var(--font-sans); font-size: var(--text-caption); font-weight: 400; }
+  .stack-sm td:empty { display: none; }
+}
+/* N-19b (design review, "Small"): a dialog is never taller than the window. Its content scrolls, and its action row stays at
+   the foot of what is visible (375 × 667: the buttons of the export, sign-off and case dialogs were below the fold). */
+dialog[open] { max-height: calc(100dvh - 32px); overflow-y: auto; }
+.dialog-actions { position: sticky; bottom: 0; background: var(--color-surface); }
+.dialog-actions-inset { margin: 0 -24px -24px; padding: 16px 24px 24px; }
+/* the home's review-state bar: a superseded revision is a hollow box, so that it shares its fill with no other state (N-19b) */
+.review-fill-superseded { background-color: var(--color-surface); box-shadow: inset 0 0 0 1px var(--color-graphic); }
+/* the section links of a result scroll sideways on a narrow screen without a scrollbar over their underline */
+.section-links { scrollbar-width: none; }
+.section-links::-webkit-scrollbar { display: none; }
+/* a sideways scroller contains its absolutely positioned descendants (screen-reader-only text, captions), so they cannot widen the page */
+.overflow-x-auto { position: relative; }
+
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
+
+/* Workspace surfaces. L-7: no hero card, glow or second primary-button style; one primary button (ink) across the product. */
+.workspace-toolbar { padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-2); }
+.workspace-toolbar button { min-height: 44px; }
+.workspace-table { border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.workspace-table tr:last-child { border-bottom: 0; }
+.workspace-shell-nav > a { min-height: 44px; border-radius: var(--radius-sm); }
+.workspace-shell-nav > a[aria-current="page"] { background: var(--color-workspace-tint); color: var(--color-accent); }
+.workspace-shell-nav > a:hover { background: var(--color-surface-3); }
+.intake-layout { display: grid; grid-template-columns: minmax(0, 1fr) 276px; gap: 32px; align-items: start; }
+.intake-form { min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); padding: 24px; }
+/* N-19b: a field has one height (36 px, the field style) in dialogs and on intake; the tabs and the drop zone keep their targets */
+.intake-tabs { gap: 0; justify-content: space-between; }
+.intake-tabs [role="tab"] { min-height: 48px; padding-left: 8px; padding-right: 8px; }
+.intake-dropzone { background: var(--color-surface-2); }
+.intake-dropzone label { display: inline-flex; min-height: 44px; align-items: center; }
+.intake-dropzone-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text-muted); }
+.skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 12px 20px; background: var(--color-accent); color: var(--color-on-accent); border-radius: var(--radius-sm); }
+.skip-link:focus { top: 12px; }
+@media (max-width: 1199px) { .intake-layout { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 639px) {
+  .intake-form { padding: 16px; }
+  .intake-tabs [role="tab"] { padding-left: 4px; padding-right: 4px; font-size: var(--text-small); }
+  .intake-form input, .intake-form textarea, .intake-form select { font-size: 16px; }
+}
+
+@media (max-width: 639px) {
+  .workspace-sidebar { display: grid; grid-template-columns: minmax(0, 1fr) auto; padding: 12px 0 4px; }
+  .workspace-brand { grid-column: 1; grid-row: 1; }
+  .workspace-engine { grid-column: 2; grid-row: 1; }
+  .workspace-shell-nav { grid-column: 1 / -1; grid-row: 2; padding-top: 12px; }
+  .workspace-demo { display: none; }
+}

@@ -1,0 +1,769 @@
+{
+  "baseline_detectors": [
+    "img.dfdc_b7",
+    "img.forensic.copymove",
+    "img.forensic.ela",
+    "img.forensic.jpeg_dq",
+    "img.forensic.noise",
+    "img.forensic.spectrum",
+    "img.hf.ateeqq",
+    "img.hf.dima806",
+    "img.meta.consistency",
+    "img.meta.exif",
+    "img.meta.generator",
+    "img.meta.qtables",
+    "img.watermark.dwtdct"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "no_scored_context": 795,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "version": "vb-1.1"
+  },
+  "candidate": "img.dda",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.hf.ateeqq,img.hf.dima806,img.dfdc_b7,img.forensic.spectrum,img.forensic.ela,img.forensic.noise,img.forensic.jpeg_dq,img.forensic.copymove,img.meta.generator,img.meta.exif,img.meta.consistency,img.meta.qtables,img.watermark.dwtdct,img.dda GATES='img.dfdc_b7=has_face' CONTEXT=scored ABLATE=img.dda ABLATE_BOOTSTRAP=2000",
+  "contamination_card": true,
+  "criteria": {
+    "A3": {
+      "pass": true,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.11718730431490593,
+      "lgo_macro_delta": 0.14996598505701053,
+      "pass": true,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.14996598505701053,
+      "pass": true,
+      "qualifying": [
+        "family faceswap-stills",
+        "family flux1",
+        "family gan-faces",
+        "family gpt-4o-image-1",
+        "family gpt-image-1.5-2",
+        "family hunyuanimage",
+        "family ideogram",
+        "family imagen3",
+        "family legacy",
+        "family long-tail",
+        "family midjourney",
+        "family nano-banana",
+        "family partial-edits",
+        "family personalised",
+        "family recraft",
+        "family sd3",
+        "family seedream3",
+        "family seedream4",
+        "threat edit",
+        "threat faceswap",
+        "threat gan_face",
+        "threat personalised",
+        "threat t2i"
+      ],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_strata": [
+        "R1",
+        "R4"
+      ],
+      "not_established_strata": [
+        "R6"
+      ],
+      "pass": false,
+      "pooled_ci95_hi": 0.007037559848109621,
+      "pooled_delta": -0.001113585746102444,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum with ≥ 150 reals blocks when its upper bound exceeds 2.0 pts; smaller strata are not established (D-41)",
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.9640301962267056,
+      "without": 0.9052685341298388
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.056497789240972734,
+          "lo": 0.0021485340279169215,
+          "valid": 2000
+        },
+        "delta": 0.018867924528301883,
+        "n": 424,
+        "with": 0.08254716981132075,
+        "without": 0.06367924528301887
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.005082753782036981,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0016366612111292963,
+        "n": 611,
+        "with": 0.0032733224222585926,
+        "without": 0.0016366612111292963
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.013746295934843944,
+          "lo": -0.030946871840952496,
+          "valid": 2000
+        },
+        "delta": -0.008517887563884163,
+        "n": 587,
+        "with": 0.1260647359454855,
+        "without": 0.13458262350936967
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.024242424242424242,
+          "lo": 0.00202020202020202,
+          "valid": 2000
+        },
+        "delta": 0.01212121212121212,
+        "n": 495,
+        "with": 0.01818181818181818,
+        "without": 0.006060606060606061
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.04553734061930784,
+          "valid": 2000
+        },
+        "delta": -0.023679417122040067,
+        "n": 549,
+        "with": 0.06739526411657559,
+        "without": 0.09107468123861566
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 28,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.007037559848109621,
+        "lo": -0.00941475049641239,
+        "valid": 2000
+      },
+      "delta": -0.001113585746102444,
+      "n": 2694,
+      "with": 0.058277654046028214,
+      "without": 0.05939123979213066
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.18211979659413427,
+          "lo": 0.0736842105263158,
+          "valid": 2000
+        },
+        "delta": 0.12292358803986714,
+        "n": 301,
+        "with": 0.8006644518272426,
+        "without": 0.6777408637873754
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.25263157894736843,
+          "lo": 0.101123595505618,
+          "valid": 2000
+        },
+        "delta": 0.17204301075268813,
+        "n": 93,
+        "with": 0.9247311827956989,
+        "without": 0.7526881720430108
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.11111111111111105,
+          "lo": -0.07894736842105254,
+          "valid": 2000
+        },
+        "delta": 0.012500000000000067,
+        "n": 80,
+        "with": 0.7125,
+        "without": 0.7
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3926380368098159,
+          "lo": 0.25153374233128833,
+          "valid": 2000
+        },
+        "delta": 0.3190184049079754,
+        "n": 163,
+        "with": 0.50920245398773,
+        "without": 0.1901840490797546
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.28260869565217395,
+          "lo": 0.06521739130434778,
+          "valid": 2000
+        },
+        "delta": 0.17391304347826086,
+        "n": 46,
+        "with": 0.8695652173913043,
+        "without": 0.6956521739130435
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.20967741935483875,
+          "lo": 0.016129032258064502,
+          "valid": 2000
+        },
+        "delta": 0.11290322580645157,
+        "n": 62,
+        "with": 0.5483870967741935,
+        "without": 0.43548387096774194
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.09999999999999998,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.038461538461538436,
+        "n": 52,
+        "with": 1.0,
+        "without": 0.9615384615384616
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.31034482758620685,
+          "lo": 0.06896551724137934,
+          "valid": 2000
+        },
+        "delta": 0.1724137931034483,
+        "n": 29,
+        "with": 1.0,
+        "without": 0.8275862068965517
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3207547169811321,
+          "lo": 0.10204081632653061,
+          "valid": 2000
+        },
+        "delta": 0.21153846153846145,
+        "n": 52,
+        "with": 0.9807692307692307,
+        "without": 0.7692307692307693
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.55,
+          "lo": 0.29999999999999993,
+          "valid": 2000
+        },
+        "delta": 0.41666666666666663,
+        "n": 60,
+        "with": 0.8833333333333333,
+        "without": 0.4666666666666667
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.11713036565977737,
+          "lo": 0.008403361344537893,
+          "valid": 2000
+        },
+        "delta": 0.05932203389830515,
+        "n": 118,
+        "with": 0.9067796610169492,
+        "without": 0.847457627118644
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5547966087537588,
+          "lo": 0.4181818181818182,
+          "valid": 2000
+        },
+        "delta": 0.48466257668711654,
+        "n": 163,
+        "with": 0.8466257668711656,
+        "without": 0.3619631901840491
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3157894736842105,
+          "lo": 0.1675379774585408,
+          "valid": 2000
+        },
+        "delta": 0.24137931034482762,
+        "n": 203,
+        "with": 0.8866995073891626,
+        "without": 0.645320197044335
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.36528058169375527,
+          "lo": 0.2075414173953061,
+          "valid": 2000
+        },
+        "delta": 0.2883435582822086,
+        "n": 163,
+        "with": 0.9447852760736196,
+        "without": 0.656441717791411
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.1166666666666667,
+          "lo": 0.008331611570248018,
+          "valid": 2000
+        },
+        "delta": 0.056451612903225756,
+        "n": 124,
+        "with": 0.9193548387096774,
+        "without": 0.8629032258064516
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.27692307692307694,
+          "lo": 0.11627906976744184,
+          "valid": 2000
+        },
+        "delta": 0.1923076923076923,
+        "n": 130,
+        "with": 0.823076923076923,
+        "without": 0.6307692307692307
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.4571428571428571,
+          "lo": 0.29714285714285715,
+          "valid": 2000
+        },
+        "delta": 0.3771428571428571,
+        "n": 175,
+        "with": 0.8685714285714285,
+        "without": 0.49142857142857144
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.75,
+          "lo": 0.5806451612903226,
+          "valid": 2000
+        },
+        "delta": 0.6693548387096775,
+        "n": 124,
+        "with": 0.9758064516129032,
+        "without": 0.3064516129032258
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.10716698841698835,
+          "lo": -0.05310919721871044,
+          "valid": 2000
+        },
+        "delta": 0.026548672566371723,
+        "n": 113,
+        "with": 0.7787610619469026,
+        "without": 0.7522123893805309
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.4727272727272727,
+          "lo": 0.21311475409836056,
+          "valid": 2000
+        },
+        "delta": 0.33333333333333326,
+        "n": 57,
+        "with": 0.9473684210526315,
+        "without": 0.6140350877192983
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6463414634146342,
+          "lo": 0.4204545454545454,
+          "valid": 2000
+        },
+        "delta": 0.5357142857142857,
+        "n": 84,
+        "with": 1.0,
+        "without": 0.4642857142857143
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6153846153846154,
+          "lo": 0.31707317073170727,
+          "valid": 2000
+        },
+        "delta": 0.46341463414634143,
+        "n": 41,
+        "with": 0.975609756097561,
+        "without": 0.5121951219512195
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.41666666666666663,
+          "lo": 0.21276595744680854,
+          "valid": 2000
+        },
+        "delta": 0.31914893617021284,
+        "n": 94,
+        "with": 0.6914893617021277,
+        "without": 0.3723404255319149
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.4571428571428571,
+          "lo": 0.29714285714285715,
+          "valid": 2000
+        },
+        "delta": 0.3771428571428571,
+        "n": 175,
+        "with": 0.8685714285714285,
+        "without": 0.49142857142857144
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.18211979659413427,
+          "lo": 0.0736842105263158,
+          "valid": 2000
+        },
+        "delta": 0.12292358803986714,
+        "n": 301,
+        "with": 0.8006644518272426,
+        "without": 0.6777408637873754
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3926380368098159,
+          "lo": 0.25153374233128833,
+          "valid": 2000
+        },
+        "delta": 0.3190184049079754,
+        "n": 163,
+        "with": 0.50920245398773,
+        "without": 0.1901840490797546
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.75,
+          "lo": 0.5806451612903226,
+          "valid": 2000
+        },
+        "delta": 0.6693548387096775,
+        "n": 124,
+        "with": 0.9758064516129032,
+        "without": 0.3064516129032258
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.2541888166120315,
+          "lo": 0.20502227371488557,
+          "valid": 2000
+        },
+        "delta": 0.22959183673469385,
+        "n": 1764,
+        "with": 0.8690476190476191,
+        "without": 0.6394557823129252
+      }
+    },
+    "tau": {
+      "with": 0.6025067291736572,
+      "without": 0.7133762838904043
+    },
+    "tpr": {
+      "with": 0.8428967154728928,
+      "without": 0.5884447962010289
+    }
+  },
+  "detector_meta": {
+    "img.dda": {
+      "score_key": "img.dda@d1f98d194fd1",
+      "transform": "logit_clip8",
+      "weights_sha12": "d1f98d194fd1"
+    },
+    "img.dfdc_b7": {
+      "score_key": "img.dfdc_b7@651bc0cae350",
+      "transform": "logit_clip8",
+      "weights_sha12": "651bc0cae350"
+    },
+    "img.forensic.copymove": {
+      "score_key": "img.forensic.copymove@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.forensic.ela": {
+      "score_key": "img.forensic.ela@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.forensic.jpeg_dq": {
+      "score_key": "img.forensic.jpeg_dq@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.forensic.noise": {
+      "score_key": "img.forensic.noise@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.forensic.spectrum": {
+      "score_key": "img.forensic.spectrum@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.hf.ateeqq": {
+      "score_key": "img.hf.ateeqq@eb0d229dd61f",
+      "transform": "logit_clip8",
+      "weights_sha12": "eb0d229dd61f"
+    },
+    "img.hf.dima806": {
+      "score_key": "img.hf.dima806@504818193248",
+      "transform": "logit_clip8",
+      "weights_sha12": "504818193248"
+    },
+    "img.meta.consistency": {
+      "score_key": "img.meta.consistency@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.meta.exif": {
+      "score_key": "img.meta.exif@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.meta.generator": {
+      "score_key": "img.meta.generator@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.meta.qtables": {
+      "score_key": "img.meta.qtables@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "img.watermark.dwtdct": {
+      "score_key": "img.watermark.dwtdct@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    }
+  },
+  "git_commit": "d5590e12fab8a4519792c093c0c8a0466d15f664",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [
+      "MSCOCO train2017"
+    ],
+    "n": 5221,
+    "n_fake": 2527,
+    "n_real": 2694
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.31288343558282206,
+        "n_fake": 163,
+        "n_train": 5058,
+        "tau": {
+          "with": 0.6370853255561615,
+          "without": 0.7408913779122949
+        },
+        "tpr": {
+          "with": 0.9386503067484663,
+          "without": 0.6257668711656442
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.012500000000000067,
+        "n_fake": 80,
+        "n_train": 5141,
+        "tau": {
+          "with": 0.6267555062364444,
+          "without": 0.740316116811225
+        },
+        "tpr": {
+          "with": 0.65,
+          "without": 0.6375
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.09677419354838707,
+        "n_fake": 62,
+        "n_train": 5159,
+        "tau": {
+          "with": 0.6245800737942785,
+          "without": 0.7392137714063463
+        },
+        "tpr": {
+          "with": 0.5161290322580645,
+          "without": 0.41935483870967744
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.17692307692307685,
+        "n_fake": 130,
+        "n_train": 5091,
+        "tau": {
+          "with": 0.6244512752180432,
+          "without": 0.738430143761882
+        },
+        "tpr": {
+          "with": 0.7923076923076923,
+          "without": 0.6153846153846154
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.3297872340425532,
+        "n_fake": 94,
+        "n_train": 5127,
+        "tau": {
+          "with": 0.6223464476885127,
+          "without": 0.7433231556571883
+        },
+        "tpr": {
+          "with": 0.6914893617021277,
+          "without": 0.3617021276595745
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.053097345132743334,
+        "n_fake": 113,
+        "n_train": 5108,
+        "tau": {
+          "with": 0.6179340665067641,
+          "without": 0.7394114176588112
+        },
+        "tpr": {
+          "with": 0.7876106194690266,
+          "without": 0.7345132743362832
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.06779661016949146,
+        "n_fake": 118,
+        "n_train": 5103,
+        "tau": {
+          "with": 0.6267272305205412,
+          "without": 0.7440633628063789
+        },
+        "tpr": {
+          "with": 0.8898305084745762,
+          "without": 0.8220338983050848
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.18260663290829832,
+        "lo": 0.11718730431490593,
+        "valid": 2000
+      },
+      "delta": 0.14996598505701053,
+      "with": 0.7522882172799934,
+      "without": 0.6023222322229829
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "img.dfdc_b7": [
+        "has_face"
+      ]
+    },
+    "seed": 7,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

@@ -1,0 +1,43 @@
+{
+  "by_manifest_sha256": {
+    "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3": {
+      "basis": "manifest images of the splits fit and cal, both classes; native files, full-size decode",
+      "bench": "vb-1.1",
+      "flat_blocks": {
+        "block_px": 8,
+        "floor": 0.25,
+        "limit": 0.5346,
+        "n_above_limit": 33,
+        "n_above_limit_by_class": {
+          "fake": 11,
+          "real": 22
+        },
+        "quantile": 0.995,
+        "quantiles": {
+          "0.5": 0.0004,
+          "0.9": 0.071,
+          "0.95": 0.1599,
+          "0.99": 0.4353,
+          "0.995": 0.5346,
+          "0.999": 0.7558
+        },
+        "rule": "a block counts when every pixel has one value in each of the three channels"
+      },
+      "greyscale": {
+        "n": 55,
+        "n_by_class": {
+          "fake": 5,
+          "real": 50
+        },
+        "rule": "a single-channel image, or one whose three channels are equal in every pixel"
+      },
+      "n_by_class": {
+        "fake": 3826,
+        "real": 2720
+      },
+      "n_images": 6546,
+      "n_not_measured": 0
+    }
+  },
+  "schema": "veritas.content-kinds/1"
+}

@@ -1,0 +1,1804 @@
+# Veritas detector and weight manifest (ARCHITECTURE §2.3). Schema and lint: app/engine/manifest.py.
+#
+# - Pins resolved on 2026-09-11. HF revisions are commit shas confirmed through the HF API; every per-file sha256 was
+#   hashed locally from the HF cache or backend/data/weights. Non-HF URLs are pinned to a commit or release, and their
+#   hashes equal `weights_sha256` in app/core/config.py.
+# - Licence classes come from the HF model-card metadata, the GitHub licence API or the model directory LICENSE.
+#   A repository without a declared licence is class `unknown` (D-04).
+# - Footprints are estimates derived from weight-file sizes (4 bytes per parameter for fp32 stores, 2 for bf16). The
+#   ModelManager (F-4) replaces them with measured values.
+# - Image detectors have v2 adapters (P-5), including the model-free forensic, metadata and C2PA detectors. Document
+#   detectors, the v0.3 video detectors and the voice classifiers have v2 adapters since P-6.
+# - `eval` and `validated_slices` are written by vbench_report.py, never by hand. Calibration artefact paths are relative
+#   to VERITAS_DATA_DIR.
+# - Organika/sdxl-detector was removed (detector survey: PR-AUC at chance on marketplace photos).
+schema_version: 1
+
+models:
+  # ---------------------------------------------------------------- image
+  - id: clip.vit_l14_openai
+    source:
+      type: hf
+      repo: timm/vit_large_patch14_clip_224.openai
+      revision: 18d0535469bb561bf468d76c1d73aa35156c922b
+      files:
+        - {path: open_clip_model.safetensors, sha256: 9ce2e8a8ebfff3793d7d375ad6d3c35cb9aebf3de7ace0fc7308accab7cd207e, bytes: 1710517724}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0 (timm); weights originate from openai/CLIP (MIT)"}
+    footprint: {params_m: 428, fp32_mb: 1631, activation_mb_per_item: 300, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_clip_vit_l14"}
+    notes:
+      - "v1 loads it with open_clip create_model_and_transforms('ViT-L-14-quickgelu', pretrained='openai')"
+      - "v2 loads the pinned safetensors file the same way (identical tensors); the P-5 parity test compares both paths"
+      - "B-4a: built as ViT-L-14-quickgelu, the activation the OpenAI weights were trained with. open_clip 3.3's ViT-L-14 uses standard GELU (max |Δ feature| 3.19 on a random 224 px input, measured 2026-09-12), which v0.3 and img.univfd 0.3.0 ran; tests/test_univfd_quickgelu_slow.py compares the features with openai/clip-vit-large-patch14 (transformers)"
+
+  - id: univfd.fc_probe
+    source:
+      type: url
+      url: https://github.com/WisconsinAIVision/UniversalFakeDetect/raw/763391eff3284f6950ffb323599c1a7a819f2ecd/pretrained_weights/fc_weights.pth
+      files:
+        - {path: univfd_fc_weights.pth, sha256: 477100745713bcc957beb2b40859536859b6483fd6301b3b9293151b194c7847, bytes: 4083}
+    depends_on: [clip.vit_l14_openai]
+    licence: {spdx: MIT, class: commercial, notice: "github.com/WisconsinAIVision/UniversalFakeDetect (GitHub licence API: MIT)"}
+    footprint: {params_m: 0.001, fp32_mb: 0.004, activation_mb_per_item: 1, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_univfd_probe", pickle: true}
+
+  - id: commfor.vit_s16_384
+    source:
+      type: hf
+      repo: OwensLab/commfor-model-384
+      revision: 6076002bf0d9dd37537f965ee2f06f826c333b61
+      files:
+        - {path: config.json, sha256: 877416e73aac0fdbc1be723f5ddf674e78a2350305865ad9031564b287b60147, bytes: 116}
+        - {path: model.safetensors, sha256: b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387, bytes: 87262324}
+    licence: {spdx: MIT, class: commercial, notice: "HF model-card licence mit; github.com/JeongsooP/Community-Forensics LICENSE (MIT, Jeongsoo Park 2025; GitHub licence API: MIT)"}
+    footprint: {params_m: 21.8, fp32_mb: 83, activation_mb_per_item: 120, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_commfor_vit"}
+    notes:
+      - "timm vit_small_patch16_384 with a 384 → 1 head; the safetensors keys carry the upstream `vit.` prefix (152 tensors, float32), loaded strictly"
+      - "kept in float32: 22 M parameters, and the slow test compares CPU and MPS in float32"
+      - "A1 parity in float32 (I-6, 2026-09-14): CPU vs MPS on 50 vb image items with a short side ≥ 384 px max |Δp| 3.60e-06, mean 3.71e-07 (tests/test_detector_parity.py -k commfor, 1 passed); fp16 not evaluated"
+
+  - id: dda.dinov2_vitl14_lora
+    source:
+      type: hf
+      repo: Junwei-Xi/Dual-Data-Alignment
+      revision: 4390d9023899196b437480bb6a441915ef5d816c
+      files:
+        - {path: DDA_ckpt.pth, sha256: b27a31d39374803ddeff02bfabb2be76e190b04300490cddfafb24f683f37e3e, bytes: 1255621296}
+    depends_on: [dinov2.vitl14]
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0; github.com/roy-ch/Dual-Data-Alignment LICENSE (GitHub licence API: Apache-2.0)"}
+    footprint: {params_m: 307.5, fp32_mb: 1173, fp16_mb: 587, activation_mb_per_item: 350, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_dda", pickle: true}
+    notes:
+      - "fp16 not safe (I-7 parity, 2026-09-12): CPU float32 vs MPS float16 on 50 vb image items max |Δp| 2.21e-02, mean 1.39e-03, above the A1 tolerance 1e-3; float32 on every device"
+      - "A1 parity in float32 (2026-09-12): CPU vs MPS on the same 50 items max |Δp| 1.22e-05, mean 1.27e-06"
+      - "torch pickle {model, optimizer, total_steps}, read with weights_only=True: 537 float32 tensors (307.5 M parameters) under base_model.model.* (DINOv2 ViT-L/14, LoRA r8 on attn.qkv, attn.proj, mlp.fc1, mlp.fc2) and base_model.fc.*, loaded strictly; the optimizer state is discarded"
+      - "the checkpoint carries every backbone tensor, so the DINOv2 pretrain checkpoint (dl.fbaipublicfiles.com, 1,217,586,395 bytes) is not fetched; dinov2.vitl14 supplies the architecture code only"
+
+  - id: dinov2.vitl14
+    source:
+      type: torch_hub
+      repo: facebookresearch/dinov2
+      ref: b8931f7bf91576930313be2c6d6af376033b35f0
+      entrypoint: dinov2_vitl14
+      files:
+        - {path: hub/facebookresearch_dinov2_b8931f7bf91576930313be2c6d6af376033b35f0.zip, sha256: 218d1e159ebd7d928aa76e5412ac04455c92aad9ecb3c48ab8542a98ccc1b357, bytes: 1834871}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"}
+    footprint: {params_m: 0, fp32_mb: 0, activation_mb_per_item: 0, estimated: true}
+    notes:
+      - "code only: torch.hub.load(<extracted archive>, 'dinov2_vitl14', source='local', pretrained=False) builds the architecture; the tensors come from dda.dinov2_vitl14_lora"
+      - "the same archive supplies the dinov2_vitb14_reg architecture for radar.fusion_15k (I-11); its tensors come from dinov2.vitb14_reg4"
+      - "GitHub archive of commit b8931f7b (2025-08-14), downloaded twice on 2026-09-12 with the same sha256. Pinned before commit cd6f305e (2025-12-17), whose hubconf.py imports Cell-DINO code headed 'CC-by-NC licence'; dinov2/layers equal main 7764ea0f, and vision_transformer.py differs only by the channel-adaptive option (off for 3-channel ViT-L/14)"
+
+  - id: spai.vitb16_mfm
+    source:
+      type: gdrive
+      file_id: 1vvXmZqs6TVJdj8iF1oJ4L_fcgdQrp_YI
+      files:
+        - {path: spai.pth, sha256: 24159f27d7c8c2cd0cb6c4019189eb89ad0874a0d9d15f8dc9afd39ca9648a55, bytes: 934865338}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "github.com/mever-team/spai LICENSE (Apache-2.0); README: 'The source code and model weights of this project are released under the Apache 2 License'"}
+    footprint: {params_m: 132.6, fp32_mb: 506, fp16_mb: 253, activation_mb_per_item: 2000, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_spai", pickle: true}
+    notes:
+      - "fp16 not safe (I-8 parity, 2026-09-12): CPU float32 vs MPS float16 on 50 vb image items max |Δp| 1.64e-01, mean 9.02e-03, above the A1 tolerance 1e-3; float32 on every device"
+      - "A1 parity in float32 (2026-09-12): CPU vs MPS on the same 50 items (1,368 patches) max |Δp| 4.32e-05, mean 4.04e-06"
+      - "latency, float32 (2026-09-12): fixture 1024×759 (12 patches) 1.3 s CPU, 304 ms warm MPS; synthetic 12 MP (221 patches) 5.4 s and 24 MP capped to 345 patches 8.4 s warm MPS, driver memory 2.5–3.5 GiB"
+      - "Google Drive file linked from the upstream README (commit 8ff7b3b6), fetched manually on 2026-09-12: 934,865,338 bytes, sha256 pinned here; Drive URLs are not stable, so the verified copy in data/weights/ is the mirror (ML §3.1)"
+      - "torch pickle {model, optimizer, lr_scheduler, max_accuracy, epoch 13, config (yacs CfgNode), amp}; weights_only=True refuses the CfgNode, so app.detectors.image.spai reads it with a restricted unpickler (tensor rebuild, OrderedDict, set, CfgNode as a plain dict; no other global). 324 tensors: 281 float32/int64 tensors (132.6 M parameters) load strictly; 43 MFM classification tensors inference never calls (cls_blocks, cls_pos_embed, actual_cls_token, fc_norm, intermediate_fc_norm, head) are dropped by name"
+      - "kept in float32 until the A1 parity run decides fp16"
+
+  - id: mesorch.full_98
+    source:
+      type: gdrive
+      file_id: 1PJxKteinMyaAYokKy0JhuzBnBc6bGsau
+      files:
+        - {path: mesorch-98.pth, sha256: 6d8fcd7ce7616d819bec6a9ed461b27187101e67247f8b2d2483fdc1f25f685a, bytes: 1023886070}
+    licence: {spdx: MIT, class: commercial, notice: "github.com/scu-zjz/Mesorch LICENSE (MIT, Copyright (c) 2024 K-Squad; GitHub licence API: MIT). The checkpoint is linked from the upstream README, which names no separate weights terms; the repository licence is taken to cover it. Training images (CASIAv2, FantasticReality, IMD2020, tampCOCO per upstream balanced_dataset.json) carry their own terms, not reviewed (IF §2)"}
+    footprint: {params_m: 85.8, fp32_mb: 327, fp16_mb: 164, activation_mb_per_item: 1500, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_mesorch", pickle: true}
+    notes:
+      - "Google Drive file linked from the upstream README (commit 33454cb6), fetched on 2026-09-12: 1,023,886,070 bytes, sha256 pinned here; Drive URLs are not stable, so the verified copy in data/weights/ is the mirror (ML §3.1). The pruned Mesorch-P checkpoint in the same folder (mesorch_p-118.pth, 812,736,608 bytes, sha256 efa61592f2c783698a8760c2d3e48dc58c1b4890c50dbcdc166b24425a197674) is not used"
+      - "torch pickle {model, optimizer, epoch 98, scaler, args (argparse.Namespace: training model name ConvSegDctMoE8Expert9Channels, image_size 512, if_resizing)}; weights_only=True refuses the Namespace, so app.detectors.image.mesorch reads it with a restricted unpickler (tensor rebuild, OrderedDict, Namespace as a plain dict; no other global). 804 float32 tensors (85,753,944 parameters) load strictly, including the unused ConvNeXt classification head"
+      - "upstream reproduced (I-10, 2026-09-12): upstream MesorchFull (github.com/scu-zjz/Mesorch @ 33454cb6) loaded strictly vs app.detectors.image.mesorch on the same CPU batches: max |Δmap| 3.3e-06 on tests/fixtures/metadata/P1000827.jpg and 6.3e-06 on a composite with a pasted face region; 1.9e-04 on a constant grey image (the DCT bands of a constant image are rounding noise scaled to [0, 1])"
+      - "latency, float32 (I-10 scratch probe on the upstream code, 2026-09-12): 1024×759 fixture resized to 512², warm 73 ms MPS and 1.6–3.0 s CPU; CPU vs MPS max |Δmap| 5.4e-06"
+      - "i10-slow (2026-09-12): upstream MesorchFull vs the adapter module on the fixture, a composite with a 200 × 160 px pasted face region and a rotation, CPU max |Δmap| 3.3e-06, 6.3e-06, 5.2e-06; through the adapter the composite's R1 (mean 0.965) overlaps the pasted box with bbox IoU 0.87; goldens |Δraw| 0 on CPU and MPS, MPS vs CPU 1.0e-06; golden run including loading 2.63 s CPU, 0.84 s MPS"
+      - "preprocessing (I-10 scratch check, 2026-09-12): upstream IMDLBenCo test transform (albumentations 1.4.24 Resize 512, Normalize, Crop, ToTensorV2) vs mesorch.to_batch on P1000827.jpg and kuriyama_2023.jpg, max |Δ| 4.8e-07"
+      - "kept in float32 until the A1 parity run decides fp16"
+
+  - id: radar.fusion_15k
+    source:
+      type: gdrive
+      file_id: 1oPuC8nHkZex2VQBAPtmNEtxdSF-xylWM
+      files:
+        - {path: fusion_block_multimodal_15k_10inp_120ep_4bs.pth, sha256: 70601e0d63edddbfe42da48674dc9053dc626176c5fcda273a2018b10b80bd10, bytes: 23646170}
+    depends_on: [radar.projector_15k, dinov2.vitb14_reg4, dinov2.vitl14, depthanything.v2_base]
+    licence: {spdx: Apache-2.0, class: commercial, notice: "github.com/alex-costanzino/RADAR-code LICENSE.txt (Apache-2.0, Copyright (c) 2025 BBC R&D, based on DINOv2); the README links the checkpoints with no separate terms. Training images: BBC-PAIR (github.com/bbc/PAIR, BBC terms, not reviewed). The assembled detector also needs depthanything.v2_base, which is CC-BY-NC-4.0"}
+    footprint: {params_m: 182.6, fp32_mb: 697, fp16_mb: 349, activation_mb_per_item: 2500, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_radar", pickle: true}
+    notes:
+      - "Google Drive folder 1VYbLoK3HM238AU1_xszBM4DYd2nai0jf linked from the upstream README (commit 06dba26e), fetched on 2026-09-12: 23,646,170 bytes, sha256 pinned here; Drive URLs are not stable, so the verified copy in data/weights/ is the mirror (ML §3.1). The authors' Space radar-ifdl/RADAR-demo @ 8d5e1a99 ships files of the same size"
+      - "plain state_dict pickle (DoubleCrossAttentionFusion, 16 float32 tensors, 5,909,760 parameters), read with weights_only=True and loaded strictly"
+      - "the model assembles four dependencies in app.detectors.image.adapters.loaders:load_radar: radar.projector_15k (localisation head), dinov2.vitb14_reg4 (semantic encoder weights), dinov2.vitl14 (the pinned DINOv2 torch.hub archive, entrypoint dinov2_vitb14_reg) and depthanything.v2_base (geometry encoder); the footprint covers the assembly (182,624,257 parameters, of which the Depth Anything V2 backbone 86,580,480)"
+      - "upstream reproduced (I-11 scratch parity, 2026-09-12): upstream C_infer_single-image.py modules (github.com/alex-costanzino/RADAR-code @ 06dba26e, torch.hub and from_pretrained redirected to the pinned copies) vs app.detectors.image.radar through load_radar on the same CPU inputs: max |Δinput| 0, |Δlogit| 0 and |Δmap| 0 on examples/example_tampered.png, tests/fixtures/metadata/P1000827.jpg and one OpenSDI SDXL edit; the upstream transformers 4.57.1 path gives the same map as transformers 5.15.1"
+      - "latency, float32 (I-11 scratch parity, 2026-09-12): screening pass warm 556–568 ms on MPS for 1024–2048 px images, CPU vs MPS max |Δmap| 4.1e-11 (maps near 0 at 896 px); two 896 px tiles in one batch 994 ms MPS, driver memory 1,866 MiB"
+      - "kept in float32 until an A1 parity run decides fp16"
+
+  - id: radar.projector_15k
+    source:
+      type: gdrive
+      file_id: 1OL-PTnNzYKK1JmLa67S6cRYl-R3Jt_43
+      files:
+        - {path: projector_multimodal_15k_10inp_120ep_4bs.pth, sha256: e5ec7007ebeae7f08054de2ab223899386bb1b977e028545175241efae8ce388, bytes: 14208328}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "github.com/alex-costanzino/RADAR-code LICENSE.txt (Apache-2.0, Copyright (c) 2025 BBC R&D)"}
+    footprint: {params_m: 3.55, fp32_mb: 14, activation_mb_per_item: 0, estimated: true}
+    load: {pickle: true}
+    notes:
+      - "same Drive folder and fetch as radar.fusion_15k: 14,208,328 bytes. Plain state_dict pickle (SiameseProjector, 14 float32 tensors, 3,550,465 parameters), read with weights_only=True and loaded strictly; the contrastive branch is loaded but never evaluated"
+
+  - id: dinov2.vitb14_reg4
+    source:
+      type: url
+      url: https://dl.fbaipublicfiles.com/dinov2/dinov2_vitb14/dinov2_vitb14_reg4_pretrain.pth
+      files:
+        - {path: dinov2_vitb14_reg4_pretrain.pth, sha256: 73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71, bytes: 346393545}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0); the README releases code and model weights under Apache-2.0"}
+    footprint: {params_m: 86.6, fp32_mb: 330, activation_mb_per_item: 0, estimated: true}
+    load: {pickle: true}
+    notes:
+      - "the URL torch.hub's dinov2_vitb14_reg(pretrained=True) downloads, fetched on 2026-09-12 (Last-Modified 2023-10-27): 346,393,545 bytes, sha256 pinned here. Plain state_dict pickle read with weights_only=True, loaded strictly into the dinov2_vitb14_reg architecture (86,583,552 parameters)"
+
+  - id: dinov2.small
+    source:
+      type: hf
+      repo: facebook/dinov2-small
+      revision: ed25f3a31f01632728cabb09d1542f84ab7b0056
+      files:
+        - {path: config.json, sha256: 1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d, bytes: 547}
+        - {path: preprocessor_config.json, sha256: 14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828, bytes: 436}
+        - {path: model.safetensors, sha256: ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1, bytes: 88249960}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0 (facebook/dinov2-small, not gated; checked 2026-09-13); github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"}
+    footprint: {params_m: 22.1, fp32_mb: 84, fp16_mb: 42, activation_mb_per_item: 60, estimated: true}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_dinov2_small"}
+    notes:
+      - "V-2 face-track appearance embedding, not a detector: transformers Dinov2Model, pooler_output (the layer-normed class token), 384-d, L2-normalised, of the face crop resized to 224 × 224 bicubic with ImageNet mean and std (preprocessor_config.json). A general-purpose image embedding, not a face-recognition model"
+
+  - id: xclip.base_p16
+    source:
+      type: hf
+      repo: microsoft/xclip-base-patch16
+      revision: d6184e3fd8780d04c85d0f1eabe5f94bf44d98f6
+      files:
+        - {path: config.json, sha256: 43d49d757dc8a3ef3dfd242d7ebe0c2effcfa0404f9343864e50c45245f99d3a, bytes: 8897}
+        - {path: preprocessor_config.json, sha256: 3376c13ec67e5505734b3d5b61d51b7f753cb1896d9661171c25ad35afcb69b6, bytes: 310}
+        - {path: model.safetensors, sha256: b5db836d57b7e22001cb2bab581719e910b4c571d926fe839b5d07bc0ba2d03e, bytes: 779789644}
+    licence: {spdx: MIT, class: commercial, notice: "HF model-card licence mit (microsoft/xclip-base-patch16, not gated; checked 2026-09-13); github.com/microsoft/VideoX LICENSE grants the MIT License, Copyright (c) Microsoft Corporation (the file opens with a project title, so the GitHub licence API reports NOASSERTION)"}
+    footprint: {params_m: 86, fp32_mb: 330, fp16_mb: 165, activation_mb_per_item: 60, estimated: true}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_xclip_vision"}
+    notes:
+      - "V-4 D3 frame encoder, not a detector: transformers XCLIPVisionModel (the ViT-B/16 vision tower of the full X-CLIP checkpoint, with message tokens across each group of num_frames 8 consecutive frames; the text tower, prompt generator and multi-frame integration transformer are not loaded), pooler_output (the post-layernormed class token), 768-d, not normalised, float32. Video-text pre-training on Kinetics-400 (Ni et al. 2022)"
+      - "loading: transformers 5.15 XCLIPVisionModel keeps no vision_model. prefix, so from_pretrained on this checkpoint leaves the tower randomly initialised (every weight reported MISSING); load_xclip_vision strips the prefix from the 343 vision_model.* tensors (position_ids excluded) and loads them with strict=True"
+
+  - id: syncnet.latentsync_stable
+    source:
+      type: hf
+      repo: ByteDance/LatentSync-1.5
+      revision: 32a20d29aead0498e3e885e90dbbe8027da1b61b
+      files:
+        - {path: stable_syncnet.pt, sha256: dccc464554b85ed939ae5cf63000e5803d4b21d8c7dae2260544a10aeb1ac483, bytes: 1605324224}
+    licence: {spdx: LicenseRef-OpenRAIL++-M, class: unknown, notice: "HF model-card licence openrail++ (ByteDance/LatentSync-1.5, not gated; checked 2026-09-13). CreativeML Open RAIL++-M Attachment A bans use for the administration of justice, law enforcement, immigration or asylum processes (#11) and fully automated decision making that adversely impacts an individual's legal rights (#6); Veritas has a litigation journey (PRD J2) and a forensic / court report profile (RP-03), so under D-04 (OpenRAIL counts as commercial only without field-of-use conflicts) the class is unknown and off by default pending a supervisor decision. Model code github.com/bytedance/LatentSync is Apache-2.0 (vendored in app/third_party/latentsync with its LICENSE and attribution)"}
+    footprint: {params_m: 401.3, fp32_mb: 1531, fp16_mb: 765, activation_mb_per_item: 120, estimated: true}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_stable_syncnet", pickle: true}
+    notes:
+      - "checked 2026-09-13: the checkpoint holds only state_dict, 266 float32 tensors (401,306,080 parameters), and loads into the vendored architecture with 0 missing and 0 unexpected keys"
+      - "V-5 lip-sync lane embedder, not a detector on its own: LatentSync StableSyncNet (configs/syncnet/syncnet_16_pixel_attn.yaml, the checkpoint's inference_ckpt_path): a visual encoder over 16 frames of the lower half of a 256 × 256 affine-aligned face in pixel space (48 × 128 × 256, [-1, 1]) and an audio encoder over 52 frames of an 80-bin mel spectrogram (Wav2Lip audio parameters: 16 kHz, n_fft 800, hop 200, fmin 55, fmax 7600, pre-emphasis 0.97, symmetric normalisation to ±4); L2-normalised 2048-d embeddings. LatentSync reports 94 % sync accuracy on VoxCeleb2 and HDTF (self-reported, not reproduced here)"
+      - "a pickle: read with torch.load(weights_only=True) after the pinned sha256 check; the checkpoint's state_dict is loaded with strict=True"
+
+  - id: depthanything.v2_base
+    source:
+      type: hf
+      repo: depth-anything/Depth-Anything-V2-Base-hf
+      revision: b1958afc87fb45a9e3746cb387596094de553ed8
+      files:
+        - {path: config.json, sha256: 1f616484953fbbddcc14da69ab81ef834fd58c11be04fa2f2eecf5696b2f7389, bytes: 953}
+        - {path: model.safetensors, sha256: 9996d15c334d264cfcc29f4318d7d3789a006ecc444782c2fb82f7eaa1acb8bf, bytes: 389916980}
+    licence: {spdx: CC-BY-NC-4.0, class: non_commercial, notice: "HF model-card licence cc-by-nc-4.0 (Depth Anything V2 Base, Small is Apache-2.0 but has another width: RADAR's fusion block was trained on the 768-dimensional Base features). Non-commercial: under the default commercial policy loc.radar runs only when allow-listed (D-04)"}
+    footprint: {params_m: 97.5, fp32_mb: 372, activation_mb_per_item: 0, estimated: true}
+    notes:
+      - "safetensors, float32; the HF LFS oid equals the local sha256. transformers DepthAnythingForDepthEstimation.from_pretrained on the snapshot; RADAR keeps only `backbone` (DINOv2-style ViT-B/14) and reads its last hidden state without the class token"
+
+  - id: gend.clip_l14
+    source:
+      type: hf
+      repo: yermandy/GenD_CLIP_L_14
+      revision: 891ce014a0308386c4d7d25b3dcf436a22db5504
+      files:
+        - {path: config.json, sha256: 7f2761e13678191774a152121f1630d19baa33a74216dd264d54445d96b16229, bytes: 193}
+        - {path: model.safetensors, sha256: d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833, bytes: 1215928160}
+    licence: {spdx: MIT, class: commercial, notice: "HF model-card licence mit; github.com/yermandy/GenD LICENSE (GitHub licence API: MIT); base encoder openai/clip-vit-large-patch14 from github.com/openai/CLIP (GitHub licence API: MIT)"}
+    footprint: {params_m: 303.2, fp32_mb: 1157, fp16_mb: 579, activation_mb_per_item: 300, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_gend"}
+    notes:
+      - "safetensors, float32, 394 tensors (303,968,258 parameters); the HF LFS oid equals the local sha256. feature_extractor.vision_model.* (CLIP ViT-L/14 vision tower) and model.linear.* (1024 → 2 head) load strictly into transformers CLIPVisionModel plus a linear head (393 tensors, 303.2 M parameters); feature_extractor.visual_projection.weight (768 × 1024), unused by the forward pass, is dropped by name"
+      - "upstream reproduced (I-9, 2026-09-12): upstream GenD built from the snapshot's modeling_gend.py with the pinned file loaded strictly vs the adapter on the 20 sample face crops of github.com/yermandy/GenD @ 387a4226, CPU max |Δlogit| 2.38e-07; preprocessing identical; alignment byte-equal to upstream align_face on 219 YuNet faces (the fixture and 400 vb images)"
+      - "A1 parity in float32 (I-9, 2026-09-12): CPU vs MPS on 50 vb image items with a scorable face (58 items without one skipped) max |Δp| 1.28e-05, mean 1.84e-06; fp16 not evaluated (the loader keeps float32)"
+      - "latency, float32 (I-9, 2026-09-12): fixture 543×724 with one face, warm median 166 ms CPU and 48 ms MPS, including YuNet on the CPU and the alignment"
+
+  - id: siglip2.so400m_p14_384
+    source:
+      type: hf
+      repo: google/siglip2-so400m-patch14-384
+      revision: e8e487298228002f3d8a82e0cd5c8ea9c567f57f
+      files:
+        - {path: config.json, sha256: 73477b47ae9a395f008f993ebd8fb5c16ce0b5e8419ffdf2f5b2183b260f9cff, bytes: 559}
+        - {path: preprocessor_config.json, sha256: fb2817d3523ca3b666c859f15320c7138416bc38ffc515e2963f78c868c51c90, bytes: 394}
+        - {path: model.safetensors, sha256: 9f4f4a49f908ef0c979bce8ff5a5c0e88882dc6c5dc4304387cbbd152558e2c2, bytes: 4544143072}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0 (google/siglip2-so400m-patch14-384, not gated; checked 2026-09-12)"}
+    footprint: {params_m: 428, fp32_mb: 1633, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_siglip_vision"}
+    notes:
+      - "I-13 probe backbone `siglip2_so400m` (not a detector): transformers SiglipVisionModel (model_type siglip, fixed 384 px), vision tower only; the text tower's tensors in the same file are not loaded"
+      - "feature = pooler_output (the MAP head), 1152-d, of the view resized to 384 × 384 bilinear, mean and std 0.5 (preprocessor_config.json)"
+      - "footprint params_m is the vision tower; the safetensors file holds both towers (1.14 B parameters, float32)"
+      - "fp16 on MPS: CPU float32 vs MPS float16 max |Δ feature| 1.678e-02, min cosine 0.999996 on two fixture views (tests/test_probe_backbones_slow.py, 2026-09-12), so probe_features.py --fp16 is allowed; the transform equals SiglipImageProcessor within 2/255"
+
+  - id: pe_core.large_p14_336
+    source:
+      type: hf
+      repo: timm/vit_pe_core_large_patch14_336.fb
+      revision: e63206c8e3a0e9b699e40f31080eebd78fd2258e
+      files:
+        - {path: config.json, sha256: 5743a679e5dc4cabf535e8b5e7d3992de41b3703f73e88a175f9781a5116ace1, bytes: 602}
+        - {path: model.safetensors, sha256: 35edcdb68eb43329192fc1530c246191e8a72f9a3dae01e2c7cccf05338d4cac, bytes: 1268638488}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0 (timm export, not gated; checked 2026-09-12); timm 1.0.28 pretrained_cfg licence apache-2.0; weights originate from facebook/PE-Core-L14-336 (apache-2.0). The export's config.json says 'custom'; the card and timm registry say apache-2.0"}
+    footprint: {params_m: 317, fp32_mb: 1210, activation_mb_per_item: 350, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_pe_core"}
+    notes:
+      - "I-13 probe backbone `pe_core_l14` (not a detector): timm vit_pe_core_large_patch14_336 (Eva, 2D RoPE, attention pooling) loaded from the pinned safetensors, strict"
+      - "feature = the projected 1024-d image embedding (fc_norm → head, the CLIP-aligned output, as for clip_l14) of the view resized to 336 px on the short side (bicubic), centre-cropped, mean and std 0.5 (timm pretrained_cfg)"
+      - "fp16 on MPS: CPU float32 vs MPS float16 max |Δ feature| 1.756e-02, min cosine 0.999991 on two fixture views (tests/test_probe_backbones_slow.py, 2026-09-12), so probe_features.py --fp16 is allowed; the transform equals timm create_transform within 2/255"
+      - "DINOv3 ViT-L/16 (facebook/dinov3-vitl16-pretrain-lvd1689m) is gated with a manual review and licensed dinov3-license (checked 2026-09-12): not added (BUILD_SPEC I-13)"
+
+  - id: yunet.2023mar
+    source:
+      type: url
+      url: https://github.com/opencv/opencv_zoo/raw/f12e12798e8314f7c074a6656816c048dcc95b7a/models/face_detection_yunet/face_detection_yunet_2023mar.onnx
+      files:
+        - {path: face_detection_yunet_2023mar.onnx, sha256: 8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4, bytes: 232589}
+    licence: {spdx: MIT, class: commercial, notice: "opencv_zoo models/face_detection_yunet/LICENSE (MIT, Shiqi Yu)"}
+    footprint: {params_m: 0.06, fp32_mb: 0.22, activation_mb_per_item: 20, estimated: true}
+    devices: {cpu: ok}
+    keep_warm: true
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_yunet"}
+
+  - id: dfdc.effnet_b7_555
+    source:
+      type: url
+      url: https://github.com/selimsef/dfdc_deepfake_challenge/releases/download/0.0.1/final_555_DeepFakeClassifier_tf_efficientnet_b7_ns_0_19
+      files:
+        - {path: final_555_DeepFakeClassifier_tf_efficientnet_b7_ns_0_19, sha256: e2f0066a8ff036add2f5b418d2eba1051c2d2788f84168f00a85207f3b666e04, bytes: 266910618}
+    licence: {spdx: MIT, class: commercial, notice: "github.com/selimsef/dfdc_deepfake_challenge (GitHub licence API: MIT)"}
+    footprint: {params_m: 66, fp32_mb: 255, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_dfdc_b7", pickle: true}
+    notes: ["torch.load needs weights_only=False (ARCHITECTURE §8.5); verify the hash before loading"]
+
+  - id: dfdc.effnet_b7_999
+    source:
+      type: url
+      url: https://github.com/selimsef/dfdc_deepfake_challenge/releases/download/0.0.1/final_999_DeepFakeClassifier_tf_efficientnet_b7_ns_0_23
+      files:
+        - {path: final_999_DeepFakeClassifier_tf_efficientnet_b7_ns_0_23, sha256: 849036dc211387420412feb68c7451e98a948072b94e213e1104e2f2bf7791ad, bytes: 266910615}
+    licence: {spdx: MIT, class: commercial, notice: "github.com/selimsef/dfdc_deepfake_challenge (GitHub licence API: MIT)"}
+    footprint: {params_m: 66, fp32_mb: 255, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_dfdc_b7", pickle: true}
+    notes: ["torch.load needs weights_only=False (ARCHITECTURE §8.5); verify the hash before loading"]
+
+  - id: hf.haywoodsloan.ai_image_detector_deploy
+    source:
+      type: hf
+      repo: haywoodsloan/ai-image-detector-deploy
+      revision: d6a3aca2287455efa16f82946e0c5169929c27de
+      files:
+        - {path: config.json, sha256: c589bc2ce35f5cda9e978939a3d6e77a0c1f5d83bcd69cf6006e74e8b84b971f, bytes: 1162}
+        - {path: preprocessor_config.json, sha256: e6454a33e41423972799327db81ca10509ac30daf664123591a1dbd8ddf9e470, bytes: 363}
+        - {path: model.safetensors, sha256: 3a4439d47a41dc62ef1b4ca5067f2954da0652e8c3ced36705820adc6c1abe31, bytes: 780886280}
+    licence: {spdx: NOASSERTION, class: unknown, notice: "no licence in the model-card metadata or README at the pinned revision (checked 2026-09-11)"}
+    footprint: {params_m: 195, fp32_mb: 745, activation_mb_per_item: 200, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_hf_image_classifier"}
+
+  - id: hf.ateeqq.ai_vs_human_image_detector
+    source:
+      type: hf
+      repo: Ateeqq/ai-vs-human-image-detector
+      revision: 60e82406916921b823616bee33397baab38af3f0
+      files:
+        - {path: config.json, sha256: 4ae0303aff5c84eaeabc3721ccc931a8b2968ed8e1d1a1285159242bf2a36da0, bytes: 1152}
+        - {path: preprocessor_config.json, sha256: 0540e59bcd8f44c3d097169b846c4745186805fce5a876036f3f8c6d9edfcc32, bytes: 418}
+        - {path: model.safetensors, sha256: ab0b8cad7462a047ff4e2888cb4f11b1abe568d73ce07a2649a3f1541f73675f, bytes: 371567992}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0"}
+    footprint: {params_m: 93, fp32_mb: 354, activation_mb_per_item: 150, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_hf_image_classifier"}
+
+  - id: hf.dima806.deepfake_vs_real_image_detection
+    source:
+      type: hf
+      repo: dima806/deepfake_vs_real_image_detection
+      revision: 29e4cf9efc543845610045f6ba7e88e5cf9d9301
+      files:
+        - {path: config.json, sha256: 11bf93504ca2fed8f285127f407b235739873a85d4ec182939a6f8faebb62d3d, bytes: 726}
+        - {path: preprocessor_config.json, sha256: a34861a24e781942424ad790b82bc99348404a2e64ea882de88c40905851698d, bytes: 325}
+        - {path: model.safetensors, sha256: b38e7d3de2be44b224cb4cffe881a0c4b75f7283c5d4a2017fbadd58bd41fdef, bytes: 343223968}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0 (base model google/vit-base-patch16-224-in21k)"}
+    footprint: {params_m: 86, fp32_mb: 327, activation_mb_per_item: 120, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_hf_image_classifier"}
+
+  - id: hf.wvolf.vit_deepfake_detection
+    source:
+      type: hf
+      repo: Wvolf/ViT_Deepfake_Detection
+      revision: f7f34ca885b39dfa712057fa3cc34c9372003003
+      files:
+        - {path: config.json, sha256: 3c944b0d7e81e320f2ee5da07fd6e5eb4cf8967aea8b2bba59e58fbbe9f6d0dc, bytes: 719}
+        - {path: preprocessor_config.json, sha256: a34861a24e781942424ad790b82bc99348404a2e64ea882de88c40905851698d, bytes: 325}
+        - {path: pytorch_model.bin, sha256: 7a653ae69f0c39545941da9b7d6ea309aa81c7d69946cdf06f4ea10b6a24eb0d, bytes: 343268717}
+    licence: {spdx: NOASSERTION, class: unknown, notice: "no licence in the model-card metadata or README at the pinned revision (checked 2026-09-11)"}
+    footprint: {params_m: 86, fp32_mb: 327, activation_mb_per_item: 120, estimated: true}
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_hf_image_classifier", pickle: true}
+    notes: ["pytorch_model.bin is byte-identical (sha256 7a653ae6…) to the root pytorch_model.bin of dima806/deepfake_vs_real_image_detection@29e4cf9; transformers loads dima806's model.safetensors, which is a different checkpoint"]
+
+  # ---------------------------------------------------------------- audio
+  - id: hf.gustking.wav2vec2_xlsr_deepfake
+    source:
+      type: hf
+      repo: Gustking/wav2vec2-large-xlsr-deepfake-audio-classification
+      revision: f7050b586236dc910d1157f430def2d0647b02b4
+      files:
+        - {path: config.json, sha256: bc86d455d78aa7c256844038e342e2beea9399bf0efc48e1748fdd918ddf3934, bytes: 2339}
+        - {path: preprocessor_config.json, sha256: a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335, bytes: 212}
+        - {path: model.safetensors, sha256: 8bff7244579a5c0f22f9994848c7eee2e038a07358bfebfbe75b38bd11d39b90, bytes: 1262859296}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0"}
+    footprint: {params_m: 316, fp32_mb: 1204, activation_mb_per_item: 300, estimated: true}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_audio_classifier"}
+
+  - id: hf.mo_thecreator.deepfake_audio_detection
+    source:
+      type: hf
+      repo: mo-thecreator/Deepfake-audio-detection
+      revision: e4d9874b493362149cec96ced85f00b00b1a04c0
+      files:
+        - {path: config.json, sha256: 137fdeaec6596cae32e126b1672657a49f5c3da45296584606807c1263a09b43, bytes: 2508}
+        - {path: preprocessor_config.json, sha256: 8cdfd65ff4115423185a1512bdae100e2e0cd744f5b322417429944aaafd0827, bytes: 215}
+        - {path: model.safetensors, sha256: 6eaf9d5638b6e32ffa93ba784523d664d37d4105021e83dedcdd5f99a2505f25, bytes: 378302360}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0"}
+    footprint: {params_m: 95, fp32_mb: 361, activation_mb_per_item: 150, estimated: true}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_audio_classifier"}
+
+  # ---------------------------------------------------------------- text
+  - id: hf.desklib.ai_text_detector_v1_01
+    source:
+      type: hf
+      repo: desklib/ai-text-detector-v1.01
+      revision: 5fdea974cd4287c61674951ec78803aa274e2fb7
+      files:
+        - {path: added_tokens.json, sha256: dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f, bytes: 23}
+        - {path: config.json, sha256: a9512ad54a256ca2e26bb16336cfcaa7c93d071a8667c659044003ef3973a9e2, bytes: 890}
+        - {path: model.safetensors, sha256: c024a1704c65f5a4bffeda58745c58fc0ed67d6ca07b158b068a257238815265, bytes: 1736100972}
+        - {path: special_tokens_map.json, sha256: 9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9, bytes: 286}
+        - {path: spm.model, sha256: c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd, bytes: 2464616}
+        - {path: tokenizer.json, sha256: 5124ef2ead1a10a717703bc436de7f353da76d6340e4587719b42b1693707964, bytes: 8656624}
+        - {path: tokenizer_config.json, sha256: e6c4c771911c211618a2d46488dc7e9e499f051773cd4ff4faeca6fe55fdf569, bytes: 1315}
+    licence: {spdx: MIT, class: commercial, notice: "HF model-card licence mit (base model microsoft/deberta-v3-large)"}
+    footprint: {params_m: 434, fp32_mb: 1656, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_desklib"}
+
+  - id: local.desklib_ft_v2
+    source:
+      type: local
+      path: weights/desklib-ft-v2
+      produced_by: scripts/finetune_text_detector.py
+      files:
+        - {path: added_tokens.json, sha256: dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f, bytes: 23}
+        - {path: config.json, sha256: 79ebad6550555a7dd5342faf8c5b1798af408a60674c296c60779f42fa3da3a4, bytes: 835}
+        - {path: model.safetensors, sha256: c4dbdd1ae9a6bc096dd048ac1ed6d0f00e0f952c0e906595fbd6e1d390d24a3e, bytes: 1736100972}
+        - {path: special_tokens_map.json, sha256: b2f1b2f15f29a6b6d9d6ea4eca1675d2c231a71477f151d48f79cc83a625ba21, bytes: 970}
+        - {path: spm.model, sha256: c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd, bytes: 2464616}
+        - {path: tokenizer.json, sha256: 4dc7e73e5ac62f6f8c12f4b31eb2f59ff4b982bea364cf317004fd844c7a093e, bytes: 8649117}
+        - {path: tokenizer_config.json, sha256: e6c4c771911c211618a2d46488dc7e9e499f051773cd4ff4faeca6fe55fdf569, bytes: 1315}
+    depends_on: [hf.desklib.ai_text_detector_v1_01]
+    licence: {spdx: NOASSERTION, class: unknown, notice: "Veritas fine-tune of desklib/ai-text-detector-v1.01 (MIT) on a corpus mixing Wikipedia, CNN/DailyMail, HC3 and model outputs including Claude-written paragraphs (docs/finetune_text.md); training-data terms not reviewed (D-12)"}
+    footprint: {params_m: 434, fp32_mb: 1656, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_desklib_finetune"}
+    notes: ["the loader reads the tokenizer from the verified base snapshot (hf.desklib.ai_text_detector_v1_01), as v0.3 does"]
+
+  - id: hf.hello_simpleai.chatgpt_detector_roberta
+    source:
+      type: hf
+      repo: Hello-SimpleAI/chatgpt-detector-roberta
+      revision: d2b342c61775d5dd0221808a79983ed3b86ffd86
+      files:
+        - {path: config.json, sha256: b741814a2ba813ebc8a2c0bcc884fd75ef1090b3f9579d00f6a626aa2db8d200, bytes: 858}
+        - {path: merges.txt, sha256: fe36cab26d4f4421ed725e10a2e9ddb7f799449c603a96e7f29b5a3c82a95862, bytes: 456356}
+        - {path: pytorch_model.bin, sha256: de2c7f8f590b0acd7866b18d5561b9d27e82d31a3dc24a8909658d2a8149ed94, bytes: 498657517}
+        - {path: special_tokens_map.json, sha256: 06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f, bytes: 280}
+        - {path: tokenizer.json, sha256: c0357d1e8e452c9889186ea0fb8556b467b27831f4fece84de608e17a42b0c2a, bytes: 2108689}
+        - {path: tokenizer_config.json, sha256: 3fa134526146aaf592251cf5efeef0d10f01e1dde948108ea576b37410d477db, bytes: 391}
+        - {path: vocab.json, sha256: ed19656ea1707df69134c4af35c8ceda2cc9860bf2c3495026153a133670ab5e, bytes: 798293}
+    licence: {spdx: NOASSERTION, class: unknown, notice: "no licence in the model-card metadata or README at the pinned revision (checked 2026-09-11)"}
+    footprint: {params_m: 125, fp32_mb: 476, activation_mb_per_item: 150, estimated: true}
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_sequence_classifier", pickle: true}
+
+  - id: hf.qwen.qwen2_5_1_5b
+    source:
+      type: hf
+      repo: Qwen/Qwen2.5-1.5B
+      revision: 8faed761d45a263340a0528343f099c05c9a4323
+      files:
+        - {path: config.json, sha256: 0e8c8aa86468aba09c9d32157ff4bc2301c7e6c50e4398960425b2ea71e66f77, bytes: 684}
+        - {path: generation_config.json, sha256: 8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8, bytes: 138}
+        - {path: merges.txt, sha256: 599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3, bytes: 1671839}
+        - {path: model.safetensors, sha256: a961db72e75d52b18e6b0c9d379e51a26973b233385e0e127fdda7d648aec796, bytes: 3087467144}
+        - {path: tokenizer.json, sha256: c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539, bytes: 7031645}
+        - {path: tokenizer_config.json, sha256: c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9, bytes: 7228}
+        - {path: vocab.json, sha256: ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910, bytes: 2776833}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0; LICENSE file in repository"}
+    footprint: {params_m: 1544, fp32_mb: 5888, fp16_mb: 2944, activation_mb_per_item: 600, estimated: true}
+    fp16_safe: true
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_causal_lm"}
+    notes: ["stored bf16; v1 runs the Binoculars pair in fp16 on accelerators (core/device.py) and v2 matches it (fp16_safe); v1↔v2 document parity: docs/v2/qa/p6_document_parity.md"]
+
+  - id: hf.qwen.qwen2_5_1_5b_instruct
+    source:
+      type: hf
+      repo: Qwen/Qwen2.5-1.5B-Instruct
+      revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+      files:
+        - {path: config.json, sha256: 98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670, bytes: 660}
+        - {path: generation_config.json, sha256: e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6, bytes: 242}
+        - {path: merges.txt, sha256: 599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3, bytes: 1671839}
+        - {path: model.safetensors, sha256: dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee, bytes: 3087467144}
+        - {path: tokenizer.json, sha256: c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539, bytes: 7031645}
+        - {path: tokenizer_config.json, sha256: 5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583, bytes: 7305}
+        - {path: vocab.json, sha256: ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910, bytes: 2776833}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF model-card licence apache-2.0; LICENSE file in repository"}
+    footprint: {params_m: 1544, fp32_mb: 5888, fp16_mb: 2944, activation_mb_per_item: 600, estimated: true}
+    fp16_safe: true
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_causal_lm"}
+    notes: ["stored bf16; v1 runs the Binoculars pair in fp16 on accelerators (core/device.py) and v2 matches it (fp16_safe); v1↔v2 document parity: docs/v2/qa/p6_document_parity.md"]
+
+detectors:
+  # ---------------------------------------------------------------- image
+  - id: img.univfd
+    adapter: app.detectors.image.adapters.learned:UnivFDDetector
+    version: 0.4.0
+    name: UnivFD (CLIP ViT-L/14 linear probe)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [clip.vit_l14_openai, univfd.fc_probe]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 1.1
+    known_limitations:
+      - "rejected on vb-1.0-core (I-14): A2 AUC 0.5065 [0.4382, 0.5875] on its declared threats, and the baseline fuser without it is 4.1 pts better on LGO macro TPR (docs/v2/bench/admissions/baseline-image.md); disabled by default and not in fuser-image-2.0.0-alpha"
+      - "weaker on FLUX and Midjourney v6 photoreal stills (v0.3 field test, docs/evaluation.md)"
+      - "0.4.0 builds CLIP with QuickGELU (B-4a); 0.3.0 and v0.3 ran standard GELU, so its scores differ from v0.3 (docs/v2/qa/b4a_univfd_quickgelu.md)"
+    source_url: https://github.com/WisconsinAIVision/UniversalFakeDetect
+    threat: [full_synthesis, gan_face]
+    training_data: "ProGAN real/fake images (CNNDetection training set); linear probe on frozen CLIP ViT-L/14 features"
+    coverage_date: "2018 (ProGAN training generator); no diffusion or 2025–26 generators in its training data"
+    input_constraints: ["224 px crops; v0.3 scores native-resolution crops plus a 1024 px copy for large images"]
+    contamination_sets: []
+    fp_modes: ["featureless native-resolution crops of large DSLR photos (v0.3 field test; mitigated by multi-scale crops)"]
+    citation: "Ojha, Li, Lee. Towards Universal Fake Image Detectors that Generalize Across Generative Models. CVPR 2023."
+    admission: {decision: rejected, date: "2026-09-14", evidence: "I-14 (docs/v2/bench/admissions/baseline-image.md and fuser-image-2.0.0-alpha.md, vb-1.0-core fit ∪ cal): A2 AUC 0.5065 on its declared threats (at chance), A3a -4.1 pts fail, A3b fail, A4 fail (R1, R3); decided on fit ∪ cal before the lockbox run; automated record pending human review"}
+
+  - id: img.commfor384
+    adapter: app.detectors.image.adapters.learned:CommFor384Detector
+    version: 0.4.0
+    name: Community Forensics (ViT-S/16, native 384 px crops)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [commfor.vit_s16_384]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.1", "slice": "image/test", "auc": 0.8834, "tpr_at_fpr01": 0.4036, "ece": 0.2198, "n": 3493, "date": "2026-09-15"}]
+    known_limitations:
+      - "rejected on vb-1.1 fit ∪ cal under D-53 (J-3c1, docs/v2/bench/admissions/v2.1.1-admissions.md): removed at elimination step 3 (A3a -3.6 pts, lower bound -6.5); the H-4 admission with a JPEG-quality term is superseded. Off by default since fuser-image-2.1.1 (J-5), which does not hold it; its native-frames twin vid.synth.frames.commfor384 feeds the video fusion model (H-8)"
+      - "scores native-resolution 384 px crops (centre and four corners, mean logit; ML N2); upstream evaluation resizes the short side to 440 px before a centre crop, so scores on large images differ from the paper's protocol"
+      - "images whose short side is below 384 px are not assessed (no upscaling)"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/JeongsooP/Community-Forensics
+    threat: [full_synthesis]
+    training_data: "real and generated images of the Community Forensics training data; the model card lists OwensLab/CommunityForensics (HF dataset card licence cc-by-4.0) and OwensLab/CommunityForensics-Small (cc-by-nc-sa-4.0); effect of the NC-SA set on the weights not established"
+    coverage_date: "not established (weights revision 6076002b, upstream code commit ee5b71d4 of 2025-10-18; the generator list in the dataset metadata was not reviewed)"
+    input_constraints: ["native-resolution 384 px RGB crops (short side at least 384 px), ImageNet mean and std, float32"]
+    contamination_sets: [OwensLab/CommunityForensics-Eval]
+    fp_modes: ["stand-alone at its τ_0.05, vb-1.1 fit ∪ cal R1 ∪ R2 reals: 5.2 % (54/1,035; Wilson 4.0–6.7 %); 8.5 % (50/585) at ≥ 8 MP against 0.9 % (4/450) below (H-3, docs/v2/bench/h3_real_fp_analysis.md)"]
+    citation: "Community Forensics (Jeongsoo Park and co-authors, OwensLab, CVPR 2025), arXiv 2411.04125, as linked from the model card"
+    admission: {decision: rejected, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): rejected; A1 pass (parity passed); A2 AUC 0.8591; A3a -3.6 pts; A3b fail; A4 pass; A5 fail: jpeg75 +14.5 pts (n 117), social_ig +15.4 pts (n 117); A6 pass; automated record pending human review"}
+
+  - id: img.dda
+    adapter: app.detectors.image.adapters.learned:DDADetector
+    version: 0.4.0
+    name: DDA (DINOv2 ViT-L/14 + LoRA, native 336 px crops)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [dda.dinov2_vitl14_lora]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.1", "slice": "image/test", "auc": 0.8879, "tpr_at_fpr01": 0.5037, "ece": 0.0951, "n": 3588, "date": "2026-09-17"}]
+    known_limitations:
+      - "admitted on vb-1.1 fit ∪ cal under D-53 (J-3c1, docs/v2/bench/admissions/v2.1.1-admissions.md): member of the end set without a gate (A3a +28.8 pts, lower bound +24.3 at elimination step 4); the H-4 JPEG-quality term is void (no fit ∪ cal item carries it). On by default in full and deep and fitted in fuser-image-2.1.1 (J-5); its native-frames twin vid.synth.frames.dda feeds the video fusion model (H-8)"
+      - "the upstream README's benchmark accuracies are self-reported and were not reproduced here"
+      - "scores native-resolution 336 px crops (centre and four corners, mean logit; ML N2); upstream inference scores one centre 336 px crop, so scores on large images differ from the paper's protocol"
+      - "images whose short side is below 336 px are not assessed (upstream CenterCrop pads them; Veritas neither pads nor upscales)"
+      - "trained on MSCOCO train2017 photographs: vb reals from coco-val come from another split of the same collection and may score lower than other photographs"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/roy-ch/Dual-Data-Alignment
+    threat: [full_synthesis]
+    training_data: "MSCOCO train2017 photographs against their VAE reconstructions, JPEG-compressed at the paired photograph's quality factor with probability 0.5 (upstream README and Training/); HF dataset Junwei-Xi/DDA-Training-Set (card licence apache-2.0; COCO image licences vary)"
+    coverage_date: "not established (weights revision 4390d902, released 2026-02 per the upstream README; trained on VAE reconstructions, not on named generators)"
+    input_constraints: ["native-resolution 336 px RGB crops (short side at least 336 px), CLIP mean and std"]
+    contamination_sets: [MSCOCO train2017]
+    fp_modes: ["stand-alone at its τ_0.05, vb-1.1 fit ∪ cal R1 ∪ R2 reals: 4.8 % (50/1,035; Wilson 3.7–6.3 %), concentrated on Commons smartphone photographs (43/272) (H-3, docs/v2/bench/h3_real_fp_analysis.md)"]
+    citation: "Ruoxin Chen, Junwei Xi, Zhiyuan Yan, Ke-Yue Zhang, Shuang Wu, Jingyi Xie, Xu Chen, Lei Xu, Isabel Guan, Taiping Yao, Shouhong Ding. Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable. NeurIPS 2025 (arXiv 2505.14359)"
+    admission: {decision: admitted, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): admitted; A1 pass (parity passed); A2 AUC 0.8838; A3a +28.8 pts; A3b pass; A4 pass; A5 fail: jpeg75 +21.4 pts (n 117), social_ig +21.4 pts (n 117); A6 pass; automated record pending human review"}
+
+  - id: img.spai
+    adapter: app.detectors.image.adapters.learned:SPAIDetector
+    version: 0.4.0
+    name: SPAI (ViT-B/16 MFM, spectral, native resolution)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [spai.vitb16_mfm]
+    profiles: [deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "deferred (D-39): built and off by default; no admission record was run, so it is in no fitted fuser"
+      - "deep profile only: warm MPS latency 5.4 s for a 12 MP image (221 patches) and 8.4 s for the capped 18 MP window (345 patches), above the A6 standard budget of 3 s (I-8 measurement on synthetic inputs, 2026-09-12)"
+      - "the upstream README's and paper's benchmark numbers are self-reported and were not reproduced here"
+      - "images whose short side is below 224 px are not assessed (upstream pads them; Veritas neither pads nor upscales)"
+      - "above 18 MP only a centred native window of at most 358 whole 224 px patches is scored; pixels beyond the last whole patch column and row are never scored (upstream patchify)"
+      - "trained on COCO and LSUN photographs: vb reals from coco-val come from another split of the same collection and may score lower than other photographs"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/mever-team/spai
+    threat: [full_synthesis]
+    training_data: "latent-diffusion training and validation images of the DMimageDetection data (grip-unina) against COCO and LSUN photographs, with the MFM ViT-B/16 pre-trained checkpoint as the starting point (upstream README, Training)"
+    coverage_date: "not established (weights from the upstream README's Drive link, checkpoint epoch 13; code commit 8ff7b3b6 of 2025-08-01; the paper evaluates 13 generators, self-reported)"
+    input_constraints: ["native-resolution non-overlapping 224 px RGB patches in [0, 1] (short side at least 224 px); five crops when fewer than four whole patches; at most 358 patches (18 MP), float32"]
+    contamination_sets: [MSCOCO, LSUN]
+    fp_modes: ["not established: vb-1.0 real-stratum false-positive rates pending (B-5, admission A4)"]
+    citation: "Dimitrios Karageorgiou, Symeon Papadopoulos, Ioannis Kompatsiaris, Efstratios Gavves. Any-Resolution AI-Generated Image Detection by Spectral Learning. CVPR 2025"
+    admission: {decision: pending, evidence: "docs/v2/bench/admissions/img.spai.md on vb-1.0 (ML §3.2), pending"}
+
+  - id: img.hf.haywoodsloan
+    adapter: app.detectors.image.adapters.learned:HaywoodsloanDetector
+    version: 0.3.0
+    name: haywoodsloan ai-image-detector-deploy (Swin-v2)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.haywoodsloan.ai_image_detector_deploy]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 1.0
+    known_limitations: ["no declared licence: disabled under the commercial licence policy (D-04)"]
+    source_url: https://huggingface.co/haywoodsloan/ai-image-detector-deploy
+    threat: [full_synthesis]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["resized by its HF image processor (preprocessor_config.json)"]
+    contamination_sets: []
+    fp_modes: ["not established (v0.3 measured false positives on real photos; docs/eval_image.md)"]
+    citation: "haywoodsloan/ai-image-detector-deploy, Hugging Face model card"
+    admission: {decision: rejected, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): rejected; A1 fail (licence class unknown is not commercial (D-04)); A2 AUC 0.8927; A3a +25.6 pts; A3b pass; A4 fail (blocking R5); A5 fail: jpeg75 +18.3 pts (n 120), social_ig +20.0 pts (n 120); A6 pass; automated record pending human review"}
+
+  - id: img.hf.ateeqq
+    adapter: app.detectors.image.adapters.learned:AteeqqDetector
+    version: 0.3.0
+    name: Ateeqq ai-vs-human-image-detector (SigLIP)
+    modality: image
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.ateeqq.ai_vs_human_image_detector]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.7
+    eval: [{"bench": "vb-1.1", "slice": "image/test", "auc": 0.7214, "tpr_at_fpr01": 0.1644, "ece": 0.3233, "n": 4853, "date": "2026-09-17"}]
+    known_limitations:
+      - "admitted on vb-1.1 fit ∪ cal under D-53 (J-3c1, docs/v2/bench/admissions/v2.1.1-admissions.md): member of the end set gated off where a face is detected (A3a +11.3 pts, lower bound +8.6); on by default in full and deep and fitted in fuser-image-2.1.1 (J-5) with that gate"
+      - "v1 applies a 0.3 weight multiplier on video frames (config.py video_weight_overrides)"
+    source_url: https://huggingface.co/Ateeqq/ai-vs-human-image-detector
+    threat: [full_synthesis]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["resized by its HF image processor (preprocessor_config.json)"]
+    contamination_sets: []
+    fp_modes: ["modern smartphone computational photography (v0.3 field test)", "compressed video frames (v0.3 field test)"]
+    citation: "Ateeqq/ai-vs-human-image-detector, Hugging Face model card"
+    admission: {decision: admitted, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): admitted; used only where no face is detected; A1 pass (parity passed); A2 AUC 0.7736; A3a +11.3 pts; A3b pass; A4 pass; A5 pass: jpeg75 -0.8 pts (n 120), social_ig +0.0 pts (n 120); A6 pass; automated record pending human review"}
+
+  - id: img.hf.dima806
+    adapter: app.detectors.image.adapters.learned:Dima806Detector
+    version: 0.3.0
+    name: dima806 deepfake_vs_real_image_detection (ViT-B/16)
+    modality: image
+    family: learned-face
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.dima806.deepfake_vs_real_image_detection]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 1.0
+    eval: [{"bench": "vb-1.1", "slice": "image/test", "auc": 0.5165, "tpr_at_fpr01": 0.0363, "ece": 0.322, "n": 4853, "date": "2026-09-17"}]
+    known_limitations:
+      - "admitted on vb-1.1 fit ∪ cal under D-53 (J-3c1, docs/v2/bench/admissions/v2.1.1-admissions.md): member of the end set without a gate, on A3b only (A3a +1.9 pts, lower bound +0.0); on by default in full and deep and fitted in fuser-image-2.1.1 (J-5)"
+      - "face-oriented GAN-portrait detector, not a face-swap detector (config.py)"
+      - "v1 applies a 0.25 weight multiplier on video frames"
+    source_url: https://huggingface.co/dima806/deepfake_vs_real_image_detection
+    threat: [gan_face]
+    training_data: "not established (fine-tuned from google/vit-base-patch16-224-in21k per the model card)"
+    coverage_date: "not established"
+    input_constraints: ["224 px ViT input; whole portraits preferred; upscaled face crops are down-weighted in v0.3"]
+    contamination_sets: []
+    fp_modes: ["upscaled or re-cropped face crops (docs/evaluation.md, lessons)"]
+    citation: "dima806/deepfake_vs_real_image_detection, Hugging Face model card"
+    admission: {decision: admitted, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): admitted; A1 pass (parity passed); A2 AUC 0.7660; A3a +1.9 pts; A3b pass; A4 pass; A5 not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3); A6 pass; automated record pending human review"}
+
+  - id: img.hf.wvolf
+    adapter: app.detectors.image.adapters.learned:WvolfDetector
+    version: 0.3.0
+    name: Wvolf ViT_Deepfake_Detection (ViT-B/16)
+    modality: image
+    family: learned-face
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.wvolf.vit_deepfake_detection]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.8
+    known_limitations:
+      - "no declared licence: disabled under the commercial licence policy (D-04)"
+      - "weights are byte-identical to dima806's root pytorch_model.bin, so its votes are not independent of that repository's checkpoints"
+    source_url: https://huggingface.co/Wvolf/ViT_Deepfake_Detection
+    threat: [gan_face]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["224 px ViT input; whole portraits preferred; upscaled face crops are down-weighted in v0.3"]
+    contamination_sets: []
+    fp_modes: ["upscaled or re-cropped face crops (docs/evaluation.md, lessons)"]
+    citation: "Wvolf/ViT_Deepfake_Detection, Hugging Face model card"
+    admission: {decision: retired, date: "2026-09-14", evidence: "I-9 face channel (docs/v2/bench/admissions/baseline-image.md, vb-1.0-core fit ∪ cal): A1 fail (no declared licence, D-04); added to the baseline it changes no out-of-fold decision (A3a 0.0 pts); automated record pending human review"}
+
+  - id: img.dfdc_b7
+    adapter: app.detectors.image.adapters.learned:DFDCB7Detector
+    version: 0.3.0
+    name: DFDC EfficientNet-B7 (selimsef, two-checkpoint ensemble)
+    modality: image
+    family: learned-face
+    hypotheses: [H2_localised_manipulation]
+    models: [dfdc.effnet_b7_555, dfdc.effnet_b7_999]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 2.0
+    eval: [{"bench": "vb-1.1", "slice": "image/test", "auc": 0.5289, "tpr_at_fpr01": 0.0357, "ece": 0.354, "n": 2155, "date": "2026-09-17"}]
+    known_limitations: ["missed a 1.4 s low-quality swap clip in v0.3 (docs/evaluation.md)"]
+    source_url: https://github.com/selimsef/dfdc_deepfake_challenge
+    threat: [face_swap]
+    lane: face_swap
+    training_data: "Deepfake Detection Challenge (DFDC) training set, face crops"
+    coverage_date: "2020 (DFDC face-swap methods)"
+    input_constraints: ["YuNet face crop; faces below 120 px are heavily upscaled and down-weighted in v0.3"]
+    contamination_sets: []
+    fp_modes: ["small, heavily compressed faces (v0.3 field test)", "stand-alone at its τ_0.05 on the R1 ∪ R2 fit ∪ cal reals it scored: 8.5 % (17/201; Wilson 5.3–13.1 %), including masked faces the face stage did not find, hence the has_face gate (H-3, docs/v2/bench/h3_real_fp_analysis.md)"]
+    citation: "Seferbekov, S. DFDC first-place solution, github.com/selimsef/dfdc_deepfake_challenge (2020)."
+    admission: {decision: admitted, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): admitted_context_gated with context terms has_face; A1 pass (parity passed); A2 AUC 0.7642; A3a +7.6 pts; A3b pass; A4 pass; A5 not established: jpeg75 +0.0 pts (n 7), social_ig -14.3 pts (n 7); A6 pass; automated record pending human review"}
+
+  - id: face.gend_clip_l14
+    adapter: app.detectors.image.adapters.learned:GenDDetector
+    version: 0.4.0
+    name: GenD (CLIP ViT-L/14, aligned face crops)
+    modality: image
+    family: learned-face
+    hypotheses: [H2_localised_manipulation]
+    models: [gend.clip_l14]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "rejected on vb-1.1 fit ∪ cal (H-4, D-44; docs/v2/bench/admissions/vb-1.1-admissions.md): off by default and in no fitted fuser"
+      - "crops are aligned from YuNet landmarks, while upstream trains and evaluates on RetinaFace (insightface det_10g) landmarks; the N5 check (face-subset AUC within 0.02 of RetinaFace crops on 200 faces) waits for vb-1.0"
+      - "scores at most six faces per image, largest first, and reports the maximum logit; faces without five landmarks are not scored"
+      - "an aligned crop below 224 px is upscaled by the CLIP preprocessing (flagged per face); the largest face below 120 px wide is flagged in the explanation"
+      - "images of at most 256 px are fed whole (ML N5 portrait rule), without alignment"
+      - "the paper's benchmark AUROCs are self-reported and were not reproduced here"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/yermandy/GenD
+    threat: [face_swap]
+    lane: face_swap
+    training_data: "not established for the released checkpoint (the HF model card names only 'the GenD (CLIP) model from Tab. 2 in the paper'). The paper experiments in upstream src/exp/wacv_rebuttal.py (commit 387a4226) train on the FaceForensics++ training split (Deepfakes, Face2Face, FaceSwap, NeuralTextures and real videos; 32 random frames per video, face crops at scale 1.3) and select checkpoints on the DeepSpeak v1.1 and v2, Celeb-DF v3 and FFIW validation splits"
+    coverage_date: "not established (weights revision 891ce014 of 2025-11-13; the paper protocol's training manipulations are the 2019 FaceForensics++ methods)"
+    input_constraints: ["five-landmark similarity alignment at scale 1.3 (upstream align_face) on the native image, then CLIP preprocessing (bicubic resize of the short side to 224 px, centre crop 224 px, CLIP mean and std), float32"]
+    contamination_sets: [FaceForensics++, DeepSpeak v1.1, DeepSpeak v2, Celeb-DF v3, FFIW]
+    fp_modes: ["not established: vb-1.0 real-stratum false-positive rates on faces pending (B-5, admission A4)"]
+    citation: "Andrii Yermakov, Jan Cech, Jiri Matas, Mario Fritz. Deepfake Detection that Generalizes Across Benchmarks. WACV 2026, pp. 773-783 (arXiv 2508.06248)"
+    admission: {decision: rejected, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): rejected; A1 pass (parity passed); A2 AUC 0.8751; A3a -1.2 pts; A3b fail; A4 pass; A5 not established: jpeg75 +0.0 pts (n 7), social_ig +0.0 pts (n 7); A6 pass; automated record pending human review"}
+
+  - id: loc.mesorch
+    adapter: app.detectors.image.adapters.localisers:MesorchDetector
+    version: 0.4.0
+    name: Mesorch (ConvNeXt-T + SegFormer MiT-B3, DCT bands)
+    modality: image
+    family: localiser
+    hypotheses: [H2_localised_manipulation]
+    models: [mesorch.full_98]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "backs the Localiser interface in place of SAFIRE, whose Drive weights refuse downloads (checked 2026-09-12; docs/v2/adr/0001-localiser-mesorch.md)"
+      - "disabled by default until admitted (I-14); the benchmark (docs/v2/bench/forensics.md) and the authentic false-positive record (docs/v2/qa/i10_localiser_fpr.md) exist"
+      - "benchmark, screening profile, MPS float32, per-image pixel F1@0.5 over forged images: CASIA v1 0.840 (920 forged; the paper's 0.840 reproduced; CASIAv2 training shares its sources), IMD2020 real-life 0.843 (2,010; in the training list), In-the-Wild 0.560 (201), CocoGlide 0.450 (512; TruFor's 0.523 is the IF G-loc reference, no Mesorch value published), OpenSDI_test partial edits 0.087 (500 SD1.5/SD2.1/SDXL/SD3/FLUX.1 edits), So-Fake-OOD v3 TAMPERED subset 0.029 (500 OpenAI and Ideogram edits; image AUC 0.398, regions on 36.0 % of 200 REAL photographs): diffusion and GPT-image local edits are mostly not localised (docs/v2/bench/forensics.md)"
+      - "regions also appear on authentic images of the benchmark sets: CASIA v1 44.5 % of 800, IMD2020 44.2 % of 414, CocoGlide 52.3 % of 512, OpenSDI 25.2 % of 500; integrity-score image AUC 0.942, 0.888, 0.743 and 0.620 (docs/v2/bench/forensics.md)"
+      - "screening resizes the whole image to 512 × 512 px without keeping the aspect ratio (upstream test protocol), which attenuates fine compression and noise traces; native 512 px tiles only in the deep profile"
+      - "marks areas of unedited photographs too: on the camera original tests/fixtures/metadata/P1000827.jpg, 5.8 % of the screening map reaches 0.5 before the conditions mask (I-10 scratch probe, upstream code)"
+      - "golden: on the same camera original the adapter reports 4 regions (means 0.66–0.75) after the conditions mask, integrity score 0.901 (tests/golden/loc.mesorch@0.4.0.cpu.json)"
+      - "the conditions mask covers a mean 32.6 % of pixels (p95 60.6 %) on 60 vb R1/R2 camera originals, mostly flat (26.0 %) and clipped (12.8 %) areas, and regions exclude those cells; its upscale rule catches strong interpolation only (×8 bicubic noise flagged, ×2 and ×4 not; 5.6 % of blocks of ×2 bilinear crops) (docs/v2/qa/i10_conditions_mask.md)"
+      - "trained on splicing, copy-move and removal edits; a fully generated image gives an empty or diffuse map, which is not evidence about generation (IF §6.4)"
+      - "the paper's pixel-F1 numbers are self-reported and were not reproduced here"
+      - "reports an uncalibrated integrity score, which the legacy fallback fuser does not average"
+    source_url: https://github.com/scu-zjz/Mesorch
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "CASIAv2, FantasticReality v1, IMD2020 (1024 px) and the tampCOCO splicing and copy-move lists (upstream balanced_dataset.json), resized to 512 px; checkpoint of epoch 98"
+    coverage_date: "not established (checkpoint linked from the README at commit 33454cb6 of 2026-09-04; the training manipulations are classical splicing, copy-move and removal edits, not diffusion inpainting)"
+    input_constraints: ["whole image resized to 512 × 512 px (OpenCV bilinear, aspect ratio not kept), ImageNet mean and std, float32; deep profile: native 512 px tiles with 64 px overlap when both sides reach 512 px"]
+    contamination_sets: [CASIAv2, FantasticReality, IMD2020, tampCOCO, MSCOCO]
+    fp_modes: ["on 427 vb R1/R2 camera originals (partial vb-1.0, screening profile, MPS) 119 (27.9 %, 95 % 23.8–32.3 %) get at least one region at map ≥ 0.5 outside the less reliable areas (commons-r1-camera 60 of 147, synthbuster-plus-test 39 of 200, commons-r2-smartphone 20 of 80); integrity score median 0.207, p95 0.951 (docs/v2/qa/i10_localiser_fpr.md)", "as shipped the integrity score is an uncalibrated score with no finding strength, so 0 of 427 originals get a moderate-or-stronger F4 finding; read as a probability it would give 30 of 427 (7.0 %, 95 % 5.0–9.9 %) moderate findings, above the IF G-FPR 5 %, so it must not be mapped to a probability without calibration"]
+    citation: "Xuekang Zhu, Xiaochen Ma, Lei Su, Zhuohang Jiang, Bo Du, Xiwen Wang, Zeyu Lei, Wentao Feng, Chi-Man Pun, Ji-Zhe Zhou. Mesoscopic Insights: Orchestrating Multi-scale & Hybrid Architecture for Image Manipulation Localization. AAAI 2025, 39(10), pp. 11022-11030 (arXiv 2412.13753)"
+    admission: {decision: pending, evidence: "docs/v2/bench/forensics.md (pixel F1@0.5, IoU, image AUC) and the T-6 authentic FPR record, pending"}
+
+  - id: loc.radar
+    adapter: app.detectors.image.adapters.localisers:RadarDetector
+    version: 0.4.0
+    name: RADAR (DINOv2 ViT-B/14 + Depth Anything V2 Base, diffusion inpainting)
+    modality: image
+    family: localiser
+    hypotheses: [H2_localised_manipulation]
+    models: [radar.fusion_15k]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "not admitted: off by default and in no fitted fuser; localisers show regions but do not move the decision (H-4, H-6)"
+      - "research-licensed component: the geometry encoder depthanything.v2_base is CC-BY-NC-4.0, so under the default commercial policy the detector runs only when allow-listed, and reports carry the non-commercial disclosure (D-04, D-34)"
+      - "benchmark, screening profile, MPS float32, per-image pixel F1@0.5 over forged images (docs/v2/bench/forensics-radar.md): So-Fake-OOD v3 TAMPERED subset 0.315 (500 edits, 497 OpenAI and 3 Ideogram; image AUC 0.907), CocoGlide 0.418 (512; AUC 0.704), OpenSDI_test partial edits 0.040 (500 SD1.5/SD2.1/SDXL/SD3/FLUX.1 edits; AUC 0.615, FLUX.1 0.008): Stable Diffusion and FLUX local edits are mostly not localised. Mesorch on the same subsets: 0.029, 0.450, 0.087"
+      - "regions also appear on authentic images of the benchmark sets: CocoGlide 52.0 % of 512, So-Fake-OOD REAL 13.0 % of 200, OpenSDI 2.8 % of 500 (docs/v2/bench/forensics-radar.md)"
+      - "screening pads the image to a square with its edge pixels and resizes it to 896 × 896 px (upstream single-image script and the authors' Space); native 896 px tiles only in the deep profile"
+      - "the upstream README example (examples/example_tampered.png, an inpainted motorcycle) is not localised at the upstream 896 px (map maximum 1.1e-06, upstream code on CPU, I-11 probe); at 518 px the motorcycle scores a mean logit +2.2 against −11.4 above it, but the camera original tests/fixtures/metadata/P1000827.jpg then gets 31 % of its map at ≥ 0.5 (0 % at 896 px). Veritas keeps the upstream 896 px"
+      - "trained on diffusion inpainting only: the paper reports image AUC 0.487–0.597 on COVERAGE, CASIA-v2, IMD2020, CMFD and DSO (self-reported, arXiv 2506.05466 Table 4), so splicing and copy-move are not its task"
+      - "a fully generated image gives an empty or diffuse map, which is not evidence about generation (IF §6.4)"
+      - "the paper's numbers are self-reported and were not reproduced here (BBC-PAIR needs registration, D-03)"
+      - "reports an uncalibrated integrity score, which the legacy fallback fuser does not average"
+    source_url: https://github.com/alex-costanzino/RADAR-code
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "BBC-PAIR in-distribution split (github.com/bbc/PAIR): authentic images inpainted by diffusion models with semantic and random masks; checkpoint label multimodal_15k_10inp, 120 epochs (upstream README and file names)"
+    coverage_date: "not established (checkpoint linked from the README at commit 06dba26e of 2025-10-28; the paper tests 28 inpainters released up to 2025)"
+    input_constraints: ["whole image edge-padded to a square and resized to 896 × 896 px (PIL bicubic), ImageNet mean and std, float32; map resized back to the padded square and centre-cropped; deep profile: native 896 px tiles with 64 px overlap when both sides reach 896 px"]
+    contamination_sets: [BBC-PAIR]
+    fp_modes: ["on 427 vb R1/R2 camera originals (partial vb-1.0, screening profile, MPS) 22 (5.2 %, 95 % 3.4–7.7 %) get at least one region at map ≥ 0.5 outside the less reliable areas (commons-r1-camera 6 of 147, synthbuster-plus-test 8 of 200, commons-r2-smartphone 8 of 80); integrity score median 0.000, p95 0.509 (docs/v2/qa/i11_localiser_fpr_radar.md)", "as shipped the integrity score is an uncalibrated score with no finding strength, so 0 of 427 originals get a moderate-or-stronger F4 finding; read as a probability it would give 13 of 427 (3.0 %, 95 % 1.8–5.1 %) moderate findings, within the IF G-FPR 5 % but on n < 500"]
+    citation: "Alex Costanzino, Woody Bayliss, Juil Sock, Marc Gorriz Blanch, Danijela Horak, Ivan Laptev, Philip Torr, Fabio Pizzati. Towards Reliable Identification of Diffusion-based Image Manipulations. NeurIPS 2025 (arXiv 2506.05466)"
+    admission: {decision: pending, evidence: "docs/v2/bench/forensics-radar.md (OpenSDI_test, So-Fake-OOD TAMPERED and CocoGlide subsets) and docs/v2/qa/i11_localiser_fpr_radar.md exist; I-14 decides (non-commercial dependency, ADR 0002)"}
+
+  - id: img.faces.yunet
+    adapter: app.detectors.image.adapters.face_detection:YuNetFaces
+    version: 0.3.0
+    name: YuNet face detector (OpenCV Zoo 2023mar)
+    modality: image
+    family: face-detection
+    hypotheses: []
+    models: [yunet.2023mar]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations: ["faces below 48 px are ignored (v0.3 face_min_size)", "produces no score: it selects the inputs of the face detectors"]
+    source_url: https://github.com/opencv/opencv_zoo/tree/f12e12798e8314f7c074a6656816c048dcc95b7a/models/face_detection_yunet
+    threat: [face_swap, gan_face]
+    training_data: "not established (not documented in this repository)"
+    coverage_date: "not applicable (face detector)"
+    input_constraints: ["analysis copy downscaled to at most 1280 px for detection; score threshold 0.7, NMS IoU 0.3, top 50"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Wu, Peng, Yu. YuNet: A Tiny Millisecond-level Face Detector. Machine Intelligence Research (2023)."
+    admission: {decision: pending, evidence: "utility detector for the faces stage; it produces no fused score"}
+
+  - id: img.forensic.spectrum
+    adapter: app.detectors.image.adapters.forensic:SpectrumDetector
+    version: 0.4.0
+    name: Frequency-domain spectrum analysis
+    modality: image
+    family: forensic
+    hypotheses: [H1_whole_content_synthesis]
+    models: []
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.45
+    eval: [{"bench": "vb-1.0-core", "slice": "image/test", "auc": 0.4967, "tpr_at_fpr01": 0.0018, "ece": 0.0757, "n": 888, "date": "2026-09-14"}]
+    known_limitations: ["hand-set logistic mapping of spectral peaks and slope, capped to [0.40, 0.75]; uncalibrated until M-3"]
+    source_url: "this repository: backend/app/detectors/image/forensics.py"
+    threat: [full_synthesis]
+    training_data: "none (model-free heuristic; no learned weights)"
+    coverage_date: "not applicable (model-free heuristic)"
+    input_constraints: ["native pixels (I-1, D13): mean |FFT| over up to 3 x 3 non-overlapping 512 px tiles (one tile of the shorter side below 512 px), Hann window, no resampling; not applicable below 64 px"]
+    contamination_sets: []
+    fp_modes: ["vb-mini reals (509 image reals, all strata; docs/v2/qa/i1_forensic_fpr.md, 2026-09-12): 0.4.0 flags 0 of 509 at p >= 2/3 (Wilson 0.0-0.7 %), max p 0.566; 0.3.0 also 0 of 509. Its discriminative value on fakes is not measured yet (M-3 / I-14)"]
+    citation: "Durall, Keuper, Keuper. Watch Your Up-Convolution. CVPR 2020; Frank et al. Leveraging Frequency Analysis for Deep Fake Image Recognition. ICML 2020."
+    admission: {decision: rejected, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): rejected; A1 pass (no model: CPU only, parity not applicable); A2 AUC 0.4550; A3a +0.0 pts; A3b fail; A4 pass; A5 pass: jpeg75 +0.8 pts (n 120), social_ig +0.8 pts (n 120); A6 pass; automated record pending human review"}
+
+  - id: img.forensic.ela
+    adapter: app.detectors.image.adapters.forensic:ELADetector
+    version: 0.4.0
+    name: Error Level Analysis (JPEG recompression)
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.35
+    eval: [{"bench": "vb-1.0-core", "slice": "image/test", "auc": 0.5433, "tpr_at_fpr01": 0.011, "ece": 0.0753, "n": 888, "date": "2026-09-14"}]
+    known_limitations: ["hand-set logistic mapping capped to [0.40, 0.75]; uncalibrated until M-3", "the face/background ratio uses the largest face only"]
+    source_url: "this repository: backend/app/detectors/image/forensics.py"
+    threat: [partial_edit, face_swap]
+    lane: partial_edit
+    training_data: "none (model-free heuristic; no learned weights)"
+    coverage_date: "not applicable (model-free heuristic)"
+    input_constraints: ["native pixels (I-1, D13) returned to the file's stored orientation and re-saved as JPEG quality 90 on the file's 8 x 8 grid, in 1,024-row bands with MCU-aligned margins; 16 px blocks; display map reduced to at most 4096 px"]
+    contamination_sets: []
+    fp_modes: ["vb-mini reals (509 image reals, all strata, whole-image branch; docs/v2/qa/i1_forensic_fpr.md, 2026-09-12): 0.4.0 flags 42 of 509 at p >= 2/3 (8.3 %, Wilson 6.2-11.0 %) vs 26 of 509 (5.1 %) for the 0.3.0 resampled measurement; the increase is in R1 DSLR originals (1 -> 8 of 80) and R3 social-recompressed (2 -> 9 of 89); CFE 10 of 30 in both", "edges, texture and saturated regions; re-saved or recompressed files"]
+    citation: "Krawetz, N. A Picture's Worth: Digital Image Analysis and Forensics. Black Hat USA 2007."
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 AUC 0.4317; A3a +2.5 pts; A3b fail; A4 pass; A5 not established: jpeg75 +0.0 pts (n 10), social_ig +0.0 pts (n 10); A6 pass; automated record pending human review"}
+
+  - id: img.forensic.noise
+    adapter: app.detectors.image.adapters.forensic:NoiseResidualDetector
+    version: 0.4.0
+    name: Noise-residual consistency
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation, H1_whole_content_synthesis]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.35
+    eval: [{"bench": "vb-1.0-core", "slice": "image/test", "auc": 0.6274, "tpr_at_fpr01": 0.0294, "ece": 0.0477, "n": 888, "date": "2026-09-14"}]
+    known_limitations: ["hand-set logistic mapping capped to [0.40, 0.75]; uncalibrated until M-3", "the face/background ratio uses the largest face only"]
+    source_url: "this repository: backend/app/detectors/image/forensics.py"
+    threat: [face_swap, partial_edit, full_synthesis]
+    lane: partial_edit
+    training_data: "none (model-free heuristic; no learned weights)"
+    coverage_date: "not applicable (model-free heuristic)"
+    input_constraints: ["native pixels (I-1, D13), grayscale; 3 px median-filter residual; 16 px local variance in 1,024-row bands with 16-row margins; display map reduced to at most 4096 px"]
+    contamination_sets: []
+    fp_modes: ["vb-mini reals (509 image reals, all strata, whole-image branch; docs/v2/qa/i1_forensic_fpr.md, 2026-09-12): 0.4.0 flags 54 of 509 at p >= 2/3 (10.6 %, Wilson 8.2-13.6 %) vs 24 of 509 (4.7 %) for the 0.3.0 resampled measurement; median flat fraction 0.479 at native resolution vs 0.357 after resampling; increases in R3 social-recompressed (3 -> 16 of 89), R1 (2 -> 8 of 80) and R6 (4 -> 9 of 50); CFE 11 of 30 in both", "denoised, HDR or multi-frame phone pipelines and strong JPEG flatten the residual"]
+    citation: "noise-residual consistency heuristic, Veritas v0.3 (backend/app/detectors/image/forensics.py)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 AUC 0.6288; A3a +1.0 pts; A3b fail; A4 pass; A5 pass: jpeg75 -4.6 pts (n 130), social_ig -5.4 pts (n 130); A6 pass; automated record pending human review"}
+
+  - id: prov.c2pa
+    adapter: app.detectors.image.adapters.provenance:C2PADetector
+    version: 0.4.3
+    name: C2PA Content Credentials
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.5
+    known_limitations:
+      - "Trusted means the signer chains to the bundled C2PA Trust List snapshot (app/provenance/trust/snapshot.json); every result names the snapshot revision"
+      - "revocation (OCSP) is not checked and remote manifests are not fetched (offline, D-15)"
+      - "the legacy CAI interim list is reported separately and never makes a manifest Trusted"
+      - "a Trusted signer can still sign content it did not capture (IF §4.4: Nikon Z6III suspension, 2025-09-05); no revoked-signer deny list is shipped yet"
+      - "CAWG identity assertions are not parsed yet"
+    source_url: https://github.com/contentauth/c2pa-python
+    threat: [full_synthesis, partial_edit]
+    training_data: "none (documentary validator: c2pa-python 0.37.7, c2pa-rs 0.90.14)"
+    coverage_date: "C2PA Trust List revision 99927caef670 (list issued 2026-08-05, retrieved 2026-09-12)"
+    input_constraints: ["original bitstream; JPEG, PNG, WebP, TIFF, GIF, HEIF/AVIF and the other containers c2pa-rs reads"]
+    contamination_sets: []
+    fp_modes: ["a valid manifest from an untrusted signer can make any claim (weak evidence only)",
+               "a Trusted signer's key misuse or compromise (Trusted is not infallible)"]
+    citation: "Coalition for Content Provenance and Authenticity (C2PA). C2PA Technical Specification."
+    admission: {decision: pending, evidence: "documentary detector; offline state classification on the I-2 fixtures in docs/v2/qa/i2_c2pa_states.md; vb-1.0 admission pending"}
+
+  - id: img.meta.generator
+    adapter: app.detectors.image.adapters.provenance:GeneratorMetadataDetector
+    version: 0.4.7
+    name: Generator markers in metadata (EXIF, XMP, PNG text)
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.5
+    known_limitations: ["markers can be added to or removed from any file, so structured markers are self-declared (D-15)", "free-text mentions are weak evidence only",
+                        "a PNG Comment is free text: a tool named there is a mention and no marker; a generator that writes its parameters there is known by its fingerprint (N-19n, D-15)",
+                        "the stealth pnginfo decoder follows the published alpha-channel layout; no NovelAI sample file was available to test it"]
+    source_url: "this repository: backend/app/detectors/image/metadata.py, backend/app/provenance/metadata_rules.py"
+    threat: [full_synthesis]
+    training_data: "none (rule-based markers)"
+    coverage_date: "generator names in backend/app/detectors/image/metadata.py GENERATOR_PATTERNS and the IF §4.3 M6 fingerprints (A1111 / Forge, ComfyUI, InvokeAI, Fooocus, NovelAI, FLUX reference CLI) in backend/app/provenance/metadata_rules.py; the IPTC digital source type (trainedAlgorithmicMedia, compositeWithTrainedAlgorithmicMedia) under any prefix of its namespace (N-19n)"
+    input_constraints: ["original bitstream: EXIF, the XMP packet (a PNG's chunk also where it is compressed) and PNG text chunks"]
+    contamination_sets: []
+    fp_modes: ["generator markers added to a genuine image (D-15)", "captions or comments that mention AI tools"]
+    citation: "rule-based generator markers, Veritas v0.3 (backend/app/detectors/image/metadata.py)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the provenance lane is admitted separately (Stage 0 documentary rules)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a +0.0 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 not established; automated record pending human review"}
+
+  - id: img.meta.exif
+    adapter: app.detectors.image.adapters.provenance:ExifDetector
+    version: 0.4.1
+    name: Capture-device metadata (EXIF)
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.9
+    known_limitations: ["EXIF is trivially forgeable and most platforms strip it", "the fallback weight is 0.9 for coherent camera EXIF, 0.5 otherwise and 0.3 for an editor tag alone"]
+    source_url: "this repository: backend/app/detectors/image/metadata.py"
+    threat: [full_synthesis]
+    training_data: "none (rule-based)"
+    coverage_date: "not applicable (rule-based)"
+    input_constraints: ["original bitstream: EXIF IFD0 and ExifIFD", "JPEG markers before the first scan (I-1): DQT luma and chroma tables (8/16-bit), SOF frame type and component sampling (backend/app/detectors/image/jpeg_bitstream.py); tables redefined between progressive scans are not read"]
+    contamination_sets: []
+    fp_modes: ["forged or copied camera EXIF on a synthetic image"]
+    citation: "capture-metadata rules, Veritas v0.3 (backend/app/detectors/image/metadata.py)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the provenance lane is admitted separately (Stage 0 documentary rules)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a +0.0 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 not established; automated record pending human review"}
+
+  - id: img.meta.consistency
+    adapter: app.detectors.image.adapters.provenance:MetadataConsistencyDetector
+    version: 0.4.5
+    name: Metadata consistency (ExifTool rules M1–M5, M7)
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations:
+      - "reads metadata with the ExifTool binary (Artistic or GPL, run as a subprocess, D-07); without it a Pillow fallback reads EXIF, GPS, the thumbnail and the XMP packet only, without maker-note parsing"
+      - "the anomaly score 0.75 is hand-set (IF §6.4 classical cap) and uncalibrated; the fallback weight is 0, so it informs findings, not the estimate"
+      - "thresholds are set a priori: date tolerance 2 s, GPS clock within 1 h of the capture time with its offset (15 h without), thumbnail SSIM below 0.5"
+      - "M4 covers maker notes and recorded dimensions; the quantisation-table half (make and model vs encoder) arrives with I-4"
+      - "the maker-note format is identified from the block's header, or for Canon from its headerless IFD; other headerless formats (some Samsung, Google and older Nikon notes) are unidentified and never produce a mismatch"
+    source_url: "this repository: backend/app/provenance/metadata_rules.py; ExifTool https://exiftool.org"
+    threat: [partial_edit]
+    training_data: "none (rule-based)"
+    coverage_date: "not applicable (rule-based; ExifTool 13.55 on the build host)"
+    input_constraints: ["original bitstream: EXIF, maker notes, GPS, XMP, IPTC and the embedded thumbnail"]
+    contamination_sets: []
+    fp_modes: ["camera clock never set, or travel without a timezone update (M1)", "exporters rewriting ModifyDate (M1, notable only)",
+               "editing is not deception and many apps omit history (M2, notable only)", "software that regenerates thumbnails; orientation mismatches (M3)",
+               "reference gaps and firmware variants (M4)", "indoor or stale GPS fixes; devices writing zeros without a fix (M5)"]
+    citation: "IF §4.3 metadata rules M1–M7; Kee & Farid 2010 (embedded thumbnail vs main image)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the provenance lane is admitted separately (Stage 0 documentary rules)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a +0.0 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 not established; automated record pending human review"}
+
+  - id: img.meta.qtables
+    adapter: app.detectors.image.adapters.provenance:QuantisationTableDetector
+    version: 0.4.0
+    name: Quantisation-table fingerprint (make and model vs encoder)
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations:
+      - "the reference set is 140 camera originals of 10 models (vb-mini R1/R2 Wikimedia Commons files); every other model is 'no reference' and uninformative"
+      - "phones compute per-image tables (3 to 6 fingerprints per phone model in the reference set), so tables outside a model's set are notable only, unless they are a software signature"
+      - "JPEGDigest names applications and some camera firmware; a name mentioning the first word of the claimed make counts as firmware, not software (makes whose first word differs from the digest's, such as Eastman Kodak, are missed); without ExifTool only standard libjpeg tables count as a software signature"
+      - "the anomaly score 0.75 is hand-set (IF §6.4 classical cap) and uncalibrated; the fallback weight is 0, so it informs findings, not the estimate"
+    source_url: "this repository: backend/app/provenance/qtables.py and qtable_db.json (built by backend/scripts/v2/build_qtable_db.py); ExifTool https://exiftool.org"
+    threat: [partial_edit]
+    training_data: "none (rule-based); reference tables from vb-mini R1/R2 camera originals (manifest ee0d16216a6b, Wikimedia Commons, per-file licences in the manifest)"
+    coverage_date: "not applicable (rule-based; reference set built 2026-09-12)"
+    input_constraints: ["original bitstream: DQT tables and SOF sampling (jpeg_bitstream), EXIF Make and Model, ExifTool JPEGDigest"]
+    contamination_sets: ["vb-mini R1/R2 reals are the reference set; their false-positive rate is measured leave-one-out"]
+    fp_modes:
+      - "anomaly (the scoring outcome) on 13 of 438 JPEG vb-mini reals (3.0 %, Wilson 1.7–5.0 %; all R1/R2, leave-one-out; docs/v2/qa/i4_jpeg_history_fpr.md): camera photographs exported by Lightroom, Photoshop, Camera Raw, GIMP or DxO with Make and Model kept, which were re-saved after capture, and phone firmware writing standard libjpeg tables (a Google HDR+ file at quality 90)"
+      - "notable on 33 of 438 (7.5 %): mostly R6 platform re-encodes (24 of 50) with an application's tables and no reference for the model"
+    citation: "IF §4.1 quantisation-table fingerprint and make/model vs table consistency; ExifTool JPEGDigest (Image::ExifTool::JPEGDigest)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the provenance lane is admitted separately (Stage 0 documentary rules)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a +0.0 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 not established; automated record pending human review"}
+
+  - id: img.forensic.jpeg_dq
+    adapter: app.detectors.image.adapters.forensic:JpegDoubleCompressionDetector
+    version: 0.4.0
+    name: Aligned double-JPEG map and grid origin
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.0-core", "slice": "image/test", "auc": 0.5, "tpr_at_fpr01": null, "ece": 0.5, "n": 16, "date": "2026-09-14"}]
+    known_limitations:
+      - "no trace when the earlier steps equal or divide the current ones (a finer earlier compression), after resizing or cropping between the saves (non-aligned double compression is not built), in smooth or saturated areas, or in a file compressed once; the absence of the trace is not evidence of authenticity"
+      - "the region score 0.75 is hand-set (IF §6.4 classical cap) and uncalibrated; the fallback weight is 0, so it informs findings, not the estimate"
+      - "thresholds (gain 0.05 nats per coefficient on at least 3 of 15 frequencies; grid margin over the runner-up offset 0.06, which misses grids of quality 95 and above) were set on fixtures from demo/real-photo.jpg and 27 vb-mini reals that are also in the FPR population"
+      - "DCT coefficients through jpeglib 1.0.2 (MPL-2.0, with its bundled libjpeg 6b; a dependency, not vendored); 8-bit Huffman-coded files only"
+    source_url: "this repository: backend/app/detectors/image/jpeg_dq.py; jpeglib https://github.com/martinbenes1996/jpeglib"
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "none (model-free statistical test; no learned weights)"
+    coverage_date: "not applicable (model-free)"
+    input_constraints: ["original bitstream: quantised luma DCT coefficients and the luma table (jpeglib); luma decoded from the original bytes for the calibration reference and the grid origin"]
+    contamination_sets: []
+    fp_modes:
+      - "localised region (the scoring outcome) on 7 of 438 readable 8-bit JPEG vb-mini reals (1.6 %, Wilson 0.8–3.3 %; docs/v2/qa/i4_jpeg_history_fpr.md, thresholds partly tuned on that population): re-exported Wikimedia Commons photographs (5, regions 0.5–6.9 % of the measurable blocks) and small images of 0.17–0.26 MP (2)"
+      - "double compression without a region on 9.4 % of those reals (41 of 438) and a crop after compression on 2.1 % (9 of 438): re-saving is common and recorded for review only"
+      - "no JPEG block grid in the pixels of any of the 71 non-JPEG reals (Wilson upper bound 5.1 %)"
+    citation: "clean-room implementation after Lin, He, Tang, Tang. Fast, automatic and fine-grained tampered JPEG image detection via DCT coefficient analysis. Pattern Recognition 2009; Bianchi, Piva. Image forgery localization via block-grained analysis of JPEG artifacts. IEEE TIFS 2012"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 AUC 0.5000; A3a -0.2 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 pass; automated record pending human review"}
+
+  - id: img.forensic.copymove
+    adapter: app.detectors.image.adapters.forensic:CopyMoveDetector
+    version: 0.4.0
+    name: SIFT copy-move (keypoint g2NN, RANSAC affine)
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.0-core", "slice": "image/test", "auc": 0.5, "tpr_at_fpr01": null, "ece": 0.5, "n": 4, "date": "2026-09-14"}]
+    known_limitations:
+      - "keypoint method: copies of smooth or flat areas, small copies (fewer than 12 related keypoints at the analysed size) and copies blurred, resampled or recompressed strongly leave too few keypoints; no pair is not evidence that nothing was copied"
+      - "a pair relates two areas and does not say which one was pasted"
+      - "analysed at a long side of at most 2048 px (IF §4.2 default pass) in both profiles; dense (block-based) copy-move for flat areas is not built"
+      - "the score 0.75 is hand-set (IF §6.4 classical cap) and uncalibrated; the fallback weight is 0, so it informs findings, not the estimate"
+      - "thresholds (12 inliers, 25 % of the areas' keypoints, the repeated-structure rules) were set on synthetic fixtures and the first 60 vb R1/R2 camera originals by item id, which are also in the false-positive population"
+    source_url: "this repository: backend/app/detectors/image/copy_move.py (OpenCV SIFT, brute-force matcher and estimateAffine2D; scipy connected components)"
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "none (model-free geometric test; no learned weights)"
+    coverage_date: "not applicable (model-free)"
+    input_constraints: ["native pixels (EXIF-oriented) to luma, area-reduced to a long side of at most 2048 px; images below 64 px are not assessed"]
+    contamination_sets: []
+    fp_modes:
+      - "repeated structure (tiles, lattices, windows, text, crowds) and symmetric objects form similar areas without editing; pairs marked as repeated structure do not score"
+      - "scoring pair on 3 of 427 vb R1/R2 camera originals (0.7 %, Wilson 0.2–2.0 %) and on 18 of 3,150 vb image reals across all strata (0.6 %, Wilson 0.4–0.9 %; docs/v2/qa/i12_copymove_fpr.md, thresholds partly tuned on that population): the same printed caption on two posters, repeated shelf labels, rubble texture in a rendered scene; largest pairs 12–97 inlier keypoints"
+      - "any pair, including those marked as repeated structure, on 63 of 3,150 reals (2.0 %); the repeated-structure warning on 556 (17.7 %)"
+    citation: "clean-room implementation after Amerini, Ballan, Caldelli, Del Bimbo, Serra. A SIFT-based forensic method for copy-move attack detection and transformation recovery. IEEE TIFS 2011"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a +1.7 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 pass; automated record pending human review"}
+
+  - id: img.watermark.dwtdct
+    adapter: app.detectors.image.adapters.provenance:OpenWatermarkDetector
+    version: 0.4.1
+    name: Public watermark messages (dwtDct, SDXL, FLUX reference, SD1)
+    modality: image
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations:
+      - "the messages are public and unkeyed: anyone can embed them in a genuine image, so a hit is self-declared (D-15) and never decisive"
+      - "covers only pipelines that embed these fixed messages (diffusers SDXL, the FLUX reference code, the SD1 reference script); hosted services and most other generators embed none, and the mark is easy to remove, so no hit is not evidence either way"
+      - "the mark does not survive resizing, cropping or JPEG chroma subsampling: with each message embedded into 60 vb-real crops, JPEG q90 at 4:2:0 kept SDXL in 0, FLUX in 0 and SD1 in 2 of 60, while q90 at 4:4:4 kept about as many as the clean images (docs/v2/qa/i5_watermark_fpr.md)"
+      - "images with little chroma detail cannot carry the mark: clean recall on the same 60 crops was SDXL 14, FLUX 16 and SD1 39 of 60; in 1 or 2 of 60 float-path embeddings the bits read inverted (OpenCV's float chroma offset), which the decoder does not count"
+      - "images below 256 × 256 pixels are not assessed (the codec's minimum)"
+    source_url: "this repository: backend/app/provenance/watermarks.py; codec vendored from invisible-watermark 0.2.0 https://github.com/ShieldMnt/invisible-watermark (MIT, backend/app/third_party/imwatermark/LICENSE)"
+    threat: [full_synthesis]
+    training_data: "none (fixed public messages)"
+    coverage_date: "messages checked 2026-09-12 against diffusers stable_diffusion_xl/watermark.py, black-forest-labs/flux src/flux/util.py and CompVis/stable-diffusion scripts/txt2img.py"
+    input_constraints: ["stored 8-bit RGB pixels of the original file, without EXIF orientation, at least 256 × 256 pixels"]
+    contamination_sets: []
+    fp_modes:
+      - "no hit at threshold on 3,109 image reals fetched for vb (0 %, Wilson upper bound 0.12 %; highest equal bits 34 of 48, 33 of 46 and 86 of 136; docs/v2/qa/i5_watermark_fpr.md)"
+      - "a public message embedded into a genuine image (D-15): indistinguishable from a generator's output by design"
+    citation: "IF §4.5 open watermark decoders; invisible-watermark dwtDct (ShieldMnt, MIT)"
+    admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the provenance lane is admitted separately (Stage 0 documentary rules)): not_established; A1 pass (no model: CPU only, parity not applicable); A2 not established; A3a not established; A3b not established; A4 not established; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 not established; automated record pending human review"}
+
+  # ---------------------------------------------------------------- video (v0.3 frame sampling, P-6)
+  - id: prov.c2pa.video
+    adapter: app.detectors.video.adapters.metadata:C2PAVideoDetector
+    version: 0.4.3
+    name: C2PA Content Credentials (video containers)
+    modality: video
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.5
+    known_limitations:
+      - "Trusted means the signer chains to the bundled C2PA Trust List snapshot (app/provenance/trust/snapshot.json); every result names the snapshot revision"
+      - "revocation (OCSP) is not checked and remote manifests are not fetched (offline, D-15)"
+      - "the legacy CAI interim list is reported separately and never makes a manifest Trusted"
+      - "fragmented MP4 (DASH/HLS segments) needs the init segment and every fragment; only single files are read"
+    source_url: https://github.com/contentauth/c2pa-python
+    threat: [face_swap, lip_sync, t2v]
+    training_data: "none (documentary validator: c2pa-python 0.37.7, c2pa-rs 0.90.14)"
+    coverage_date: "C2PA Trust List revision 99927caef670 (list issued 2026-08-05, retrieved 2026-09-12)"
+    input_constraints: ["original bitstream; MP4, MOV (ISO BMFF) and the other video containers c2pa-rs reads"]
+    contamination_sets: []
+    fp_modes: ["a valid manifest from an untrusted signer can make any claim (weak evidence only)",
+               "a Trusted signer's key misuse or compromise (Trusted is not infallible)"]
+    citation: "Coalition for Content Provenance and Authenticity (C2PA). C2PA Technical Specification."
+    admission: {decision: pending, evidence: "documentary detector; offline state classification on the I-2 fixtures in docs/v2/qa/i2_c2pa_states.md; vb-1.0 video admission (V-8) pending"}
+
+  - id: vid.meta.container
+    adapter: app.detectors.video.adapters.metadata:ContainerMetadataDetector
+    version: 0.3.1
+    name: Container / encoder and capture-device tags (ffprobe)
+    modality: video
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.4
+    known_limitations: ["container tags are forgeable and a re-encode drops them", "only QuickTime make/model and Android manufacturer/version tags count as capture-device tags"]
+    source_url: "this repository: backend/app/detectors/video/pipeline.py (metadata_signals)"
+    threat: [face_swap, t2v]
+    training_data: "not applicable (hand-set rule; no training data)"
+    coverage_date: "not applicable (container metadata rule)"
+    input_constraints: ["containers readable by ffprobe"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Veritas v0.3 container metadata rule (backend/app/detectors/video/pipeline.py)"
+    admission: {decision: pending, evidence: "documentary detector; vb-1.0 video admission (V-8) pending"}
+
+  - id: vid.faces.yunet
+    adapter: app.detectors.video.adapters.frames:FrameFacesDetector
+    version: 0.3.0
+    name: YuNet face detector on sampled frames (OpenCV Zoo 2023mar)
+    modality: video
+    family: face-detection
+    hypotheses: []
+    models: [yunet.2023mar]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations: ["faces below 48 px are ignored (v0.3 face_min_size)", "produces no score: it selects the inputs of the face detectors", "detects per frame without identities; the temporal detectors link only the largest face"]
+    source_url: https://github.com/opencv/opencv_zoo/tree/f12e12798e8314f7c074a6656816c048dcc95b7a/models/face_detection_yunet
+    threat: [face_swap]
+    training_data: "not established (not documented in this repository)"
+    coverage_date: "not applicable (face detector)"
+    input_constraints: ["each sampled frame downscaled to at most 1280 px for detection; score threshold 0.7, NMS IoU 0.3, top 50"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Wu, Peng, Yu. YuNet: A Tiny Millisecond-level Face Detector. Machine Intelligence Research (2023)."
+    admission: {decision: pending, evidence: "face detector; video face-strata admission due with V-2"}
+
+  - id: vid.tracks.yunet_dinov2
+    adapter: app.detectors.video.adapters.tracks:FaceTrackDetector
+    version: 0.4.0
+    name: "Face tracks: YuNet on every 2nd low-resolution frame, DINOv2-small appearance"
+    modality: video
+    family: face-tracking
+    hypotheses: []
+    models: [yunet.2023mar, dinov2.small]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations: ["produces no score: it selects the per-track inputs of the face detectors", "faces below 64 px (short side, original pixels) start no track", "detection and embedding at ≤ 640 px: a 64 px face in 1080p video is about 21 px when detected and embedded", "identity letters group tracks by DINOv2-small appearance similarity, not face recognition: look-alike people or strong lighting changes can merge or split identities", "tracks end at detected shot boundaries; a missed cut can join two shots' tracks when the boxes overlap"]
+    source_url: https://huggingface.co/facebook/dinov2-small/tree/ed25f3a31f01632728cabb09d1542f84ab7b0056
+    threat: [face_swap]
+    training_data: "YuNet: not established (not documented in this repository); DINOv2-small: LVD-142M, self-supervised (Oquab et al. 2024)"
+    coverage_date: "not applicable (face tracker)"
+    input_constraints: ["every 2nd frame of the ≤ 640 px stream; YuNet score threshold 0.7, NMS IoU 0.3, top 50; face crops with a 20 % margin resized to 224 px for the embedding"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Oquab et al. DINOv2: Learning Robust Visual Features without Supervision. TMLR (2024). Wu, Peng, Yu. YuNet: A Tiny Millisecond-level Face Detector. Machine Intelligence Research (2023)."
+    admission: {decision: pending, evidence: "face tracker without a score; fixture tests and identity distances in docs/v2/qa/v2_tracks.md (V-2)"}
+
+  - id: vid.swap.gend_clip_l14
+    adapter: app.detectors.video.adapters.swap:GenDTrackDetector
+    version: 0.4.0
+    name: "Face-swap lane: GenD (CLIP ViT-L/14) per face track"
+    modality: video
+    family: learned-face
+    hypotheses: [H2_localised_manipulation]
+    models: [gend.clip_l14]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "rejected on vb-1.0-core (V-8): on fit ∪ cal the video baseline's out-of-fold AUC moves from 0.7593 to 0.7838 and t2v recall at τ_0.05 by -7.3 pts; A3a fail, A3b fail, A4 fail on V-general (docs/v2/bench/admissions/ablation-vid.swap.gend_clip_l14.md); core video holds no face-swap fakes; disabled by default"
+      - "scores only faces the tracker followed (at least 64 px, at least 3 detections) and only crops with five landmarks; the landmarks come from YuNet on the ≤ 640 px stream, mapped to original pixels, while upstream aligns on RetinaFace landmarks"
+      - "crops at 2–4 fps from the plan's sparse sampler, at most 240 per track evenly spaced; landmarks interpolated between detections are used as they are; a track shorter than the sampler step is scored once, on its middle detected frame"
+      - "the track score is the mean of the top 30 % crop logits and is uncalibrated; the flagged fraction counts crops at logit ≥ 0"
+      - "a track whose median face is below 120 px is flagged small_face: its crops are upscaled into the 224 px input"
+      - "Grad-CAM on the top 3 crops per track (at most 12 maps per video) shows attribution on the aligned crop, warped back to the frame; it is not a localisation of manipulation"
+      - "the paper's benchmark AUROCs are self-reported and were not reproduced here; no open set of modern face-swap tools on video exists (VF §10.3), so DC-03 is not validated on modern swap tools (D-03)"
+      - "reports uncalibrated logits, which the legacy fallback fuser does not average"
+      - "V-3 record (pre-split, every listed vb item; docs/v2/qa/v3_swap_lane.md): face-swap stills as frames AUC 0.889 [0.862, 0.913] (675 fakes, 186 real stills; WFIR 0.668, WildDeepfake 0.995); TalkingHeadBench reenactment and animation video vs real vb video AUC 0.582 [0.532, 0.633] (290 vs 235), so the lane does not separate talking-head generators from real video"
+    source_url: https://github.com/yermandy/GenD
+    threat: [face_swap]
+    lane: face_swap
+    training_data: "not established for the released checkpoint (the HF model card names only 'the GenD (CLIP) model from Tab. 2 in the paper'). The paper experiments in upstream src/exp/wacv_rebuttal.py (commit 387a4226) train on the FaceForensics++ training split (Deepfakes, Face2Face, FaceSwap, NeuralTextures and real videos; 32 random frames per video, face crops at scale 1.3) and select checkpoints on the DeepSpeak v1.1 and v2, Celeb-DF v3 and FFIW validation splits"
+    coverage_date: "not established (weights revision 891ce014 of 2025-11-13; the paper protocol's training manipulations are the 2019 FaceForensics++ methods)"
+    input_constraints: ["face tracks from vid.tracks.yunet_dinov2; per crop five-landmark similarity alignment at scale 1.3 (upstream align_face) on the native decoded frame, then CLIP preprocessing (bicubic resize of the short side to 224 px, centre crop 224 px, CLIP mean and std), float32"]
+    contamination_sets: [FaceForensics++, DeepSpeak v1.1, DeepSpeak v2, Celeb-DF v3, FFIW]
+    fp_modes: ["core test real videos with a face track at logit ≥ 0: 56.7 % (17/30; Wilson 39.2–72.6 %), docs/v2/qa/v3_swap_lane_core.md"]
+    citation: "Andrii Yermakov, Jan Cech, Jiri Matas, Mario Fritz. Deepfake Detection that Generalizes Across Benchmarks. WACV 2026, pp. 773-783 (arXiv 2508.06248)"
+    admission: {decision: rejected, date: "2026-09-14", evidence: "V-8 video admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-vid.swap.gend_clip_l14.md): A3a fail (Δ 0.0 pts; vendor-LGO τ_0.05 not established from 15–16 cal reals), A3b fail (t2v -7.3 pts out of fold), A4 fail (V-general); automated record pending human review"}
+
+  - id: vid.synth.d3_xclip
+    adapter: app.detectors.video.adapters.synthesis:D3Detector
+    version: 0.4.2
+    name: "Synthesis lane: D3 second-order temporal statistic (X-CLIP B/16) per shot clip"
+    modality: video
+    family: synthetic-video
+    hypotheses: [H1_whole_content_synthesis]
+    models: [xclip.base_p16]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "rejected (H-8, docs/v2/bench/admissions/fuser-video-2.1.0.md): as the derived feature vd.d3.sigma it lowers the frames-channel fuser's t2v recall at τ_0.05 by 2.5 pts [-5.1, -0.6] and its LGO macro by 2.2 pts [-6.7, +0.0] on vb-1.1 fit ∪ cal; disabled by default"
+      - "training-free statistic (raw_kind score, which the fallback fuser does not average); the method reads a low σ as generated. H-8 threshold on compressed real video (docs/v2/bench/d3_recalibration.md, vb-1.1 fit ∪ cal, in-sample): σ_0.05 0.8706 over 834 real rows (218 items: native files and libx264 CRF 23, 28, 35 and CRF 28 at ≤ 720 px), FPR per encode 3.9–5.8 %; t2v recall at σ_0.05 7.2 % (41/568); stand-alone AUC 0.5815 (native reals vs fakes)"
+      - "clips use up to 16 target slots on an 8 fps grid on the pts time axis within one detected shot, up to 3 per shot; a complete grid with 8–15 distinct frames scores its first 8 and one with fewer is not scored; the video score is the median σ over the scored clips"
+      - "the entire check is inapplicable before model acquisition when any planned clip lacks target-count metadata or loses target slots to deduplication, even if fewer than 8 selected frames remain; only a complete known grid with fewer than 8 target slots is ignored as short; this conservative local boundary preserves genuine short 8-frame clips and adds no cadence tolerance. Upstream ffmpeg fps=8 can duplicate frames; local repeated-frame scoring is not implemented. Source-frame effective rate and min/max intervals accompany the nominal grid rate; slot completeness does not establish validity for all irregular VFR cadence (docs/v2/qa/video-d3-cadence-2026-09-18/README.md)"
+      - "frames come from the pts-accurate raw decode, while upstream scored JPEG frames extracted by ffmpeg; the upstream BGR channel order is kept"
+      - "the paper's GenVideo figures (mAP 98.46) are self-reported on generators up to 2024 and were not reproduced here"
+      - "V-4 record (pre-split vb, in-sample τ; docs/v2/qa/v4_d3_lane.md): AUC 0.5747 [0.5373, 0.6100] on 1030 text-to-video items vs 300 real videos; TPR 7.67 % at τ = σ 0.891 (about 5 % FPR); per-generator AUC 0.314 (pika2.2) to 0.687 (wan2), below 0.5 for 6 of 28 groups"
+    source_url: https://github.com/Zig-HS/D3
+    threat: [t2v]
+    training_data: "none (training-free); the frame encoder X-CLIP B/16 was pre-trained on Kinetics-400 video-text pairs"
+    coverage_date: "not applicable (training-free); the paper evaluates generators released up to 2024 (GenVideo, Sora)"
+    input_constraints: ["plan clips: 16 frames at 8 fps on the pts time axis within one detected shot, up to 3 per shot, at least 8 frames; per frame 10 % of the longer side cut from each end, 224 × 224 bilinear resize, ImageNet mean and std in BGR channel order (upstream), float32"]
+    contamination_sets: []
+    fp_modes: ["static or near-static shots (tripod footage, slideshows, screen recordings): inferred from the method, since an even feature trajectory gives a low σ; not measured", "compression: no material shift measured on 300 vb real videos (libx264 veryfast): FPR at τ = σ 0.891 native 4.67 %, CRF 23 5.00 %, CRF 28 5.67 %, CRF 35 4.33 %, CRF 28 at ≤ 720 px 5.33 % (in-sample τ; docs/v2/qa/v4_d3_lane.md)"]
+    citation: "Chende Zheng, Ruiqi Suo, Chenhao Lin, Zhengyu Zhao, Le Yang, Shuai Liu, Minghui Yang, Cong Wang, Chao Shen. D3: Training-Free AI-Generated Video Detection Using Second-Order Features. ICCV 2025 (arXiv 2508.00701)"
+    admission: {decision: rejected, date: "2026-09-15", evidence: "H-8 video ablation of vd.d3.sigma on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md): A3a fail (-2.2 pts [-6.7, +0.0]), A3b fail (t2v -2.5 pts [-5.1, -0.6]), out-of-fold AUC 0.9629 without it, 0.9634 with it; threshold record docs/v2/bench/d3_recalibration.md; automated record pending human review"}
+
+  - id: vid.lipsync.stable_syncnet
+    adapter: app.detectors.video.adapters.lipsync:StableSyncNetDetector
+    version: 0.4.0
+    name: "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track"
+    modality: video
+    family: av-sync
+    hypotheses: [H2_localised_manipulation]
+    models: [syncnet.latentsync_stable]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+      - "research-only (D-37, 2026-09-12): the licence class stays unknown because the CreativeML Open RAIL++-M Attachment A use restrictions (administration of justice, law enforcement, immigration or asylum processes #11; fully automated decisions that adversely affect legal rights #6) conflict with the litigation and fraud journeys (PRD J2, J4); default off and used only in offline research comparisons (D-04 research preset). The default lip-sync lane is vid.lipsync.landmark_xcorr"
+      - "one-directional by design (VF §4.2): generators optimise SyncNet agreement, so an in-sync track is informational and not evidence that the face is unmanipulated; only offset steps and confidence collapses are positive readings, reported uncalibrated as the fraction of a track's windows they cover (raw_kind score)"
+      - "voice activity is an in-house energy and spectral-flatness rule, and speaker attribution correlates mouth-patch motion with the speech level; neither is validated on multi-speaker footage"
+      - "faces are aligned to the LatentSync 256 × 256 template by a similarity transform from the YuNet eye centres and mouth corners, placed with ArcFace five-point proportions under the template's eyebrow line, while LatentSync aligns on InsightFace 106-point eyebrow and nose centres; the effect on confidence is not measured"
+      - "the collapse threshold is relative (half of the track's median confidence, at least 4 windows) until a calibrated real-footage p5 exists (VF §4.1); offsets are searched over ±15 frames at 25 fps in 1 s windows on a fixed grid, at most 30 windows per track and 4 tracks"
+      - "LatentSync's 94 % SyncNet accuracy on VoxCeleb2 and HDTF is self-reported and was not reproduced here"
+      - "V-5 record on 45 Commons videos with sound (docs/v2/qa/v5_lipsync_lane.md): 7 assessable; no track reads as in sync (median confidence 0.14, the one baseline offset at the −15-frame search edge); 0 of 6 inserted 300 ms steps detected, 0.0 % [0.0, 39.0]; no usable reading on this footage until the face alignment is reworked"
+    source_url: https://github.com/bytedance/LatentSync
+    threat: [lip_sync]
+    lane: lip_sync
+    training_data: "not established for the released checkpoint: the training file list of configs/syncnet/syncnet_16_pixel_attn.yaml (data_v10_core.txt) is not released; its validation directory is VoxCeleb2, and LatentSync reports SyncNet accuracy on VoxCeleb2 and HDTF"
+    coverage_date: "not applicable (an audio-visual sync expert, not a generator-specific detector); checkpoint LatentSync-1.5 revision 32a20d29"
+    input_constraints: ["speaking face tracks from vid.tracks.yunet_dinov2 with five landmarks; a 25 fps tick grid (nearest decoded frame per tick); per tick a 256 × 256 aligned face, lower half (128 × 256), RGB scaled to [-1, 1]; 16 ticks per visual window; audio 16 kHz mono, 80-bin mel (n_fft 800, hop 200, fmin 55, fmax 7600, pre-emphasis 0.97, symmetric normalisation to ±4), 52 mel frames per window starting at 80 × tick / 25"]
+    contamination_sets: [VoxCeleb2, HDTF]
+    fp_modes: ["dubbed or translated films, voice-over, narration and off-screen speakers (VF §4.3)", "multiple speakers where the wrong track is attributed (VF §4.3)", "container mux delay: a constant offset, reported as benign (VF §4.3)", "variable frame-rate phone video with timestamp jitter; frame drops in screen recordings or video calls (VF §4.3)", "profile or occluded mouth (hands, microphone), beards, masks; faces under 96 px; c40-level compression (VF §4.3)", "music or singing, whispering and non-speech vocalisations (VF §4.3)", "rates not established: vb-1.0 real video false-positive rates pending (V-8)"]
+    citation: "Chunyu Li, Chao Zhang, Weikai Xu, Jingyu Lin, Jinghui Xie, Weiguo Feng, Bingyue Peng, Cunjian Chen, Weiwei Xing. LatentSync: Taming Audio-Conditioned Latent Diffusion Models for Lip Sync with SyncNet Supervision (arXiv 2412.09262); J. S. Chung, A. Zisserman. Out of Time: Automated Lip Sync in the Wild. ACCV 2016 Workshops"
+    admission: {decision: pending, evidence: "V-5 lane tests tests/test_video_lipsync.py; record docs/v2/qa/v5_lipsync_lane.md (no usable reading on real footage); D-37: research-only, not admitted to service profiles"}
+
+  - id: vid.lipsync.landmark_xcorr
+    adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
+    version: 0.4.0
+    name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
+    modality: video
+    family: av-sync
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations:
+      - "lip-sync manipulation is checked only for audio–video misalignment; well-synchronised lip-sync deepfakes are not detected (D-37, D-02)"
+      - "explanatory only (D-37, VF §4.2): an offset step or a correlation collapse gives a hand-set, uncalibrated score (0.55 collapse, 0.65 step, 0.70 both, outcome weight 0.4); in sync, a constant offset and no stable offset are informational and not evidence that the face is unmanipulated"
+      - "the mouth signal is a proxy, not a landmark aperture: the darkness of the centre of a 32 × 24 grey patch placed by YuNet's two mouth corners (vid.tracks.yunet_dinov2, model yunet.2023mar, MIT); teeth, tongue, beards, lighting and head motion move it too. MediaPipe Face Landmarker is not used (ADR 0003): the Face Mesh V2 model card (model date 2022-09-15) states 'LICENSED UNDER Apache License, Version 2.0', but mediapipe 1.0.1 installs opencv-contrib-python 5.0.0.93 over the backend's opencv 5.0.0 (uv dry-run, 2026-09-13); the BlazeFace and Blendshape cards of the same bundle were not checked"
+      - "voice activity is the V-5 energy and spectral-flatness rule, and speaker attribution correlates mouth-patch motion with the speech level; neither is validated on multi-speaker footage"
+      - "thresholds set on synthetic fixtures, provisional until V-8: a peak correlation of 0.4 for a trusted offset, a collapse below half the track's median peak (at least 4 windows, 2 consecutive), steps of at least 3 frames, constant offsets of at least 2 frames benign; at most 240 windows per track and 4 tracks"
+      - "V-5a record (pre-split, every listed vb video item with sound; docs/v2/qa/v5a_lipsync_xcorr.md): assessable on 127 of 255 talking-head fakes and 7 of 45 real videos; lane score AUC 0.657 [0.491, 0.780] (audio-driven generators 0.671 [0.504, 0.803]); flags 67 of 127 fakes and 2 of 7 real videos (28.6 % [8.2, 64.1]); 0 of 7 inserted 300 ms steps found (segment IoU 0); baseline offsets spread over the whole ±15-frame search, so the proxy does not lock onto speech on this footage and DC-04 is not met"
+    source_url: "this repository: backend/app/detectors/video/xcorr.py and backend/app/detectors/video/adapters/lipsync_xcorr.py (the D-37 heuristic)"
+    threat: [lip_sync]
+    lane: lip_sync
+    training_data: "none (model-free rules; no learned weights). The mouth corners come from YuNet (yunet.2023mar, MIT, opencv_zoo) through the face tracker"
+    coverage_date: "not applicable (model-free)"
+    input_constraints: ["speaking face tracks from vid.tracks.yunet_dinov2 with five landmarks on every tick of a window; a 25 fps tick grid (nearest decoded frame per tick); per tick a 32 × 24 grey mouth patch around the two mouth corners; audio 16 kHz mono, RMS level per 40 ms; 1 s windows every 0.5 s with at least half the ticks speech; full and deep profiles"]
+    contamination_sets: []
+    fp_modes: ["dubbed or translated films, voice-over, narration and off-screen speakers (VF §4.3)", "multiple speakers where the wrong track is attributed (VF §4.3)", "container mux delay: a constant offset, reported as benign (VF §4.3)", "variable frame-rate phone video with timestamp jitter; frame drops in screen recordings or video calls (VF §4.3)", "profile or occluded mouth (hands, microphone), beards, masks; faces under 96 px; c40-level compression (VF §4.3)", "music or singing, whispering and non-speech vocalisations (VF §4.3)", "head motion, lighting changes or teeth and tongue inside the mouth patch, which move the opening proxy without speech (proxy-specific; not measured)", "rates not established: vb-1.0 real video false-positive rates pending (V-8)"]
+    citation: "D-37 (docs/v2/01-DECISIONS.md); VF §4.1–4.3 (docs/v2/research/video-forensics.md); offset protocol after J. S. Chung, A. Zisserman. Out of Time: Automated Lip Sync in the Wild. ACCV 2016 Workshops"
+    admission: {decision: pending, evidence: "model-free explanatory lane; V-5a tests tests/test_video_lipsync_xcorr.py; record docs/v2/qa/v5a_lipsync_xcorr.md; vb-1.0 video admission pending (V-8)"}
+
+  - id: vid.codec.ffprobe
+    adapter: app.detectors.video.adapters.codec:CodecDetector
+    version: 0.4.1
+    name: "Codec lane: GOP structure, timestamps, A/V alignment, edit lists and encoder strings (ffprobe)"
+    modality: video
+    family: codec
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.1", "slice": "video/test", "auc": 0.5, "tpr_at_fpr01": null, "ece": 0.3615, "n": 23, "date": "2026-09-17"}]
+    known_limitations:
+      - "explanatory only (VF §7): the score is hand-set (0.55 for one irregularity kind, +0.05 per further kind, at most 0.70, outcome weight 0.3) and uncalibrated; no irregularity gives no score, which is not evidence that the file is unedited, since a re-encode removes most codec traces"
+      - "an irregular key frame is judged against the shot cuts of the shot detector: scene changes it does not see (gradual transitions, flashes) look like extra key frames, and in encodes with a variable GOP (x264 scene-cut detection, keyint 250) the dominant GOP is often not established"
+      - "encoder identification strings are searched in the first 256 MB only, and only x264 and x265 write them; hardware encoders (phones, cameras) write none"
+      - "edit lists are read from ISO BMFF (MP4 / MOV) containers only; WebM / Matroska timing is taken from ffprobe stream start times"
+      - "the thresholds (GOP length differences, gaps above 1.5 × the median step in constant frame-rate streams, A/V differences above 0.5 s from VF §7) were set on synthetic fixtures; rates on camera footage are not established"
+    source_url: "this repository: backend/app/detectors/video/codec.py (ffprobe stream, frame and packet entries; ISO BMFF elst parsing; x264 / x265 SEI string scan)"
+    threat: [temporal]
+    training_data: "none (model-free rules; no learned weights)"
+    coverage_date: "not applicable (model-free)"
+    input_constraints: ["the original file with its persisted per-frame pts table (probe stage) and the detected shot cuts (shots stage); full and deep profiles"]
+    contamination_sets: []
+    fp_modes: ["scene-change key frames at cuts the shot detector misses (VF §7)", "stream-copy trims by editing tools and social platforms (discarded leading packets)", "platforms that join intros or outros encoded separately (several encoder strings)", "muxers that delay one stream, and recordings whose streams stop at different times (A/V start or duration differences)", "frames dropped during capture, screen recordings and video calls (timestamp gaps)", "rates not established: vb-1.0 real video false-positive rates pending (V-8)"]
+    citation: "VF §7 container and codec forensics (docs/v2/research/video-forensics.md)"
+    admission: {decision: pending, evidence: "model-free explanatory lane; V-6 tests tests/test_video_codec.py; vb-1.0 real video false-positive rates pending (V-8)"}
+
+  - id: vid.synth.frames.commfor384
+    adapter: app.detectors.video.adapters.synthesis_frames:FrameCommFor384Detector
+    version: 0.4.1
+    name: "Synthesis lane: Community Forensics (ViT-S/16) on native 384 px crops of clip frames"
+    modality: video
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [commfor.vit_s16_384]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.1", "slice": "video/test", "auc": 0.9256, "tpr_at_fpr01": null, "ece": 0.1682, "n": 319, "date": "2026-09-17"}]
+    known_limitations:
+      - "H-8 frames channel: on by default in full and deep (BUILD_SPEC H-8; img.commfor384 was admitted on images under H-4 and is rejected under D-53 (J-3c1); no video record is regenerated, so this channel stays in the video fusion model: J-5 refitted it as fuser-video-2.1.1 with the same channel and no size or face terms). Video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md): out-of-fold AUC of the frames-channel fuser 0.9302 without it, 0.9629 with it; t2v recall at τ_0.05 +14.6 pts [+8.8, +21.1]; A3a fail (Δ LGO macro +4.0 pts [-8.0, +16.8]); A4 fails on the pooled bound only (upper +3.7 pts at 188 reals)"
+      - "scores up to 8 frames per shot from the plan's clips (at most 48 per video), each on native-resolution 384 px crops (centre and four corners, mean logit); the video score is the mean frame logit, with the 90th percentile and the fraction of frames above 0 as quality (ML §4.3)"
+      - "videos whose short side is below 384 px are not assessed (no upscaling)"
+      - "trained on still images: video compression, motion blur and deinterlacing are outside its training conditions"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/JeongsooP/Community-Forensics
+    threat: [full_synthesis, t2v]
+    training_data: "real and generated images of the Community Forensics training data; the model card lists OwensLab/CommunityForensics (HF dataset card licence cc-by-4.0) and OwensLab/CommunityForensics-Small (cc-by-nc-sa-4.0); effect of the NC-SA set on the weights not established"
+    coverage_date: "not established (weights revision 6076002b, upstream code commit ee5b71d4 of 2025-10-18; no video generators in the reviewed training description)"
+    input_constraints: ["decoded video frames at native resolution (short side at least 384 px); 384 px RGB crops, ImageNet mean and std, float32"]
+    contamination_sets: [OwensLab/CommunityForensics-Eval]
+    fp_modes: ["core test real videos at logit ≥ 0: 2.9 % (1/35; Wilson 0.5–14.5 %), docs/v2/qa/v4_d3_lane_core.md; videos below 384 px on the short side are not assessed"]
+    citation: "Community Forensics (Jeongsoo Park and co-authors, OwensLab, CVPR 2025), arXiv 2411.04125, as linked from the model card"
+    admission: {decision: pending, evidence: "H-8 video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md; D-44, ADR 0007): A3a fail (+4.0 pts [-8.0, +16.8]), A3b pass (t2v +14.6 pts [+8.8, +21.1], talking_head +50.0 pts [+12.5, +87.5]), A4 fail on the pooled upper bound (+3.7 pts > +1.0 at 188 reals; V-general +0.5 pts [-2.7, +4.4], harm not established); on by default as the H-8 frames channel of img.commfor384, which was image-admitted at H-7 and rejected on vb-1.1 at J-3c1 (D-53 step 3), so this twin is fitted in fuser-video-2.1.1 while its own record fails A3a and A4; automated record pending human review"}
+
+  - id: vid.synth.frames.dda
+    adapter: app.detectors.video.adapters.synthesis_frames:FrameDDADetector
+    version: 0.4.1
+    name: "Synthesis lane: DDA (DINOv2 ViT-L/14 + LoRA) on native 336 px crops of clip frames"
+    modality: video
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [dda.dinov2_vitl14_lora]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    eval: [{"bench": "vb-1.1", "slice": "video/test", "auc": 0.9108, "tpr_at_fpr01": null, "ece": 0.1493, "n": 322, "date": "2026-09-17"}]
+    known_limitations:
+      - "H-8 frames channel: on by default in full and deep (BUILD_SPEC H-8; img.dda admitted on images under D-53 (J-3c1) without a gate; the H-4 JPEG-quality term is void). Video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md): out-of-fold AUC of the frames-channel fuser 0.9539 without it, 0.9629 with it; t2v recall at τ_0.05 +5.1 pts [+1.3, +9.1]; A3a fail (Δ LGO macro +0.0 pts [-6.7, +6.7]); A3b fail; A4 fails on the pooled bound only (upper +2.7 pts at 188 reals)"
+      - "scores up to 8 frames per shot from the plan's clips (at most 48 per video), each on native-resolution 336 px crops (centre and four corners, mean logit); the video score is the mean frame logit, with the 90th percentile and the fraction of frames above 0 as quality (ML §4.3)"
+      - "videos whose short side is below 336 px are not assessed (no padding, no upscaling)"
+      - "trained on still MSCOCO photographs and their VAE reconstructions: video compression, motion blur and deinterlacing are outside its training conditions"
+      - "reports an uncalibrated logit, which the legacy fallback fuser does not average"
+    source_url: https://github.com/roy-ch/Dual-Data-Alignment
+    threat: [full_synthesis, t2v]
+    training_data: "MSCOCO train2017 photographs against their VAE reconstructions, JPEG-compressed at the paired photograph's quality factor with probability 0.5 (upstream README and Training/); HF dataset Junwei-Xi/DDA-Training-Set (card licence apache-2.0; COCO image licences vary)"
+    coverage_date: "not established (weights revision 4390d902, released 2026-02 per the upstream README; trained on VAE reconstructions, not on named generators)"
+    input_constraints: ["decoded video frames at native resolution (short side at least 336 px); 336 px RGB crops, CLIP mean and std"]
+    contamination_sets: [MSCOCO train2017]
+    fp_modes: ["core test real videos at logit ≥ 0: 26.3 % (10/38; Wilson 15.0–42.0 %), docs/v2/qa/v4_d3_lane_core.md"]
+    citation: "Ruoxin Chen, Junwei Xi, Zhiyuan Yan, Ke-Yue Zhang, Shuang Wu, Jingyi Xie, Xu Chen, Lei Xu, Isabel Guan, Taiping Yao, Shouhong Ding. Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable. NeurIPS 2025 (arXiv 2505.14359)"
+    admission: {decision: pending, evidence: "H-8 video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md; D-44, ADR 0007): A3a fail (+0.0 pts [-6.7, +6.7]), A3b fail (t2v +5.1 pts [+1.3, +9.1]), A4 fail on the pooled upper bound (+2.7 pts > +1.0 at 188 reals; V-general +0.5 pts [-1.6, +2.7], harm not established); on by default as the H-8 frames channel of an image-admitted detector; automated record pending human review"}
+
+  - id: vid.frames.univfd
+    adapter: app.detectors.video.adapters.frames:FrameUnivFDDetector
+    version: 0.4.0
+    name: UnivFD per sampled frame (CLIP ViT-L/14 linear probe)
+    modality: video
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [clip.vit_l14_openai, univfd.fc_probe]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 1.1
+    known_limitations: ["rejected on vb-1.0-core (V-8): the video baseline without it has a higher out-of-fold AUC on fit ∪ cal (0.7744 vs 0.7593) and no family or threat gains 10 pts (docs/v2/bench/admissions/ablation-vid.frames.univfd.md); img.univfd is at chance on core images (I-14); disabled by default and not in fuser-video-2.0.0-alpha", "scores one native-resolution 224 px centre crop per frame (v0.3 predict_batch)", "0.4.0 builds CLIP with QuickGELU (B-4a); 0.3.0 and v0.3 ran standard GELU (see img.univfd)"]
+    source_url: https://github.com/WisconsinAIVision/UniversalFakeDetect
+    threat: [full_synthesis, t2v]
+    training_data: "ProGAN real/fake images (CNNDetection training set); linear probe on frozen CLIP ViT-L/14 features"
+    coverage_date: "2018 (ProGAN training generator); no diffusion or text-to-video generators in its training data"
+    input_constraints: ["sampled video frames; one 224 px centre crop each"]
+    contamination_sets: []
+    fp_modes: ["not established on video frames"]
+    citation: "Ojha, Li, Lee. Towards Universal Fake Image Detectors that Generalize Across Generative Models. CVPR 2023."
+    admission: {decision: rejected, date: "2026-09-14", evidence: "V-8 video admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-vid.frames.univfd.md): A3a fail (Δ 0.0 pts; vendor-LGO τ_0.05 not established from 15–16 cal reals), A3b fail, A4 pass; out-of-fold AUC of the video baseline 0.7744 without it vs 0.7593 with it; decided on fit ∪ cal before the lockbox run; automated record pending human review"}
+
+  - id: vid.frames.hf.haywoodsloan
+    adapter: app.detectors.video.adapters.frames:FrameHaywoodsloanDetector
+    version: 0.3.0
+    name: haywoodsloan ai-image-detector-deploy per sampled frame (Swin-v2)
+    modality: video
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.haywoodsloan.ai_image_detector_deploy]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 1.0
+    known_limitations: ["no declared licence: disabled under the commercial licence policy (D-04)"]
+    source_url: https://huggingface.co/haywoodsloan/ai-image-detector-deploy
+    threat: [full_synthesis, t2v]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["whole sampled frames, resized by its HF image processor"]
+    contamination_sets: []
+    fp_modes: ["not established on video frames"]
+    citation: "haywoodsloan/ai-image-detector-deploy, Hugging Face model card"
+    admission: {decision: pending, evidence: "vb-1.0 video admission (V-8) pending"}
+
+  - id: vid.frames.hf.ateeqq
+    adapter: app.detectors.video.adapters.frames:FrameAteeqqDetector
+    version: 0.3.0
+    name: Ateeqq ai-vs-human-image-detector per sampled frame (SigLIP)
+    modality: video
+    family: learned-whole-image
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.ateeqq.ai_vs_human_image_detector]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.7
+    eval: [{"bench": "vb-1.0-core", "slice": "video/test", "auc": 0.6069, "tpr_at_fpr01": null, "ece": 0.3591, "n": 70, "date": "2026-09-14"}]
+    known_limitations: ["v0.3 multiplies its weight by 0.3 on video frames (config.py video_weight_overrides)"]
+    source_url: https://huggingface.co/Ateeqq/ai-vs-human-image-detector
+    threat: [full_synthesis, t2v]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["whole sampled frames, resized by its HF image processor"]
+    contamination_sets: []
+    fp_modes: ["compressed video frames (v0.3 field test)"]
+    citation: "Ateeqq/ai-vs-human-image-detector, Hugging Face model card"
+    admission: {decision: rejected, date: "2026-09-15", evidence: "H-8 video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md): Δ LGO macro -3.9 pts [-10.3, +0.0], out-of-fold AUC 0.9629 without it, 0.9618 with it; A3a and A3b fail; img.hf.ateeqq was rejected on images at H-4 (A4) and admitted with a !has_face gate under D-53 (J-3c1); off by default; automated record pending human review"}
+
+  - id: vid.frames.hf.dima806
+    adapter: app.detectors.video.adapters.frames:FrameDima806Detector
+    version: 0.3.0
+    name: dima806 deepfake_vs_real_image_detection on face frames (ViT-B/16)
+    modality: video
+    family: learned-face
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.dima806.deepfake_vs_real_image_detection]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 1.0
+    eval: [{"bench": "vb-1.0-core", "slice": "video/test", "auc": 0.4718, "tpr_at_fpr01": null, "ece": 0.4138, "n": 47, "date": "2026-09-14"}]
+    known_limitations: ["face-oriented GAN-portrait detector, not a face-swap detector (config.py)", "v0.3 multiplies its weight by 0.25 on video frames, and by 0.4 when most face crops were upscaled"]
+    source_url: https://huggingface.co/dima806/deepfake_vs_real_image_detection
+    threat: [gan_face]
+    training_data: "not established (fine-tuned from google/vit-base-patch16-224-in21k per the model card)"
+    coverage_date: "not established"
+    input_constraints: ["largest face per face frame (v0.3 face_input: the whole frame for tight portraits, else a margin crop)"]
+    contamination_sets: []
+    fp_modes: ["upscaled or re-cropped face crops (docs/evaluation.md, lessons)"]
+    citation: "dima806/deepfake_vs_real_image_detection, Hugging Face model card"
+    admission: {decision: rejected, date: "2026-09-15", evidence: "H-8 video ablation on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/fuser-video-2.1.0.md): Δ LGO macro +2.7 pts [-3.6, +10.0], t2v recall -1.3 pts [-3.2, +0.0], talking_head -12.5 pts [-37.5, +0.0]; A3a and A3b fail; img.hf.dima806 was rejected on images at H-4 (A3) and admitted under D-53 (J-3c1); off by default; automated record pending human review"}
+
+  - id: vid.frames.hf.wvolf
+    adapter: app.detectors.video.adapters.frames:FrameWvolfDetector
+    version: 0.3.0
+    name: Wvolf ViT_Deepfake_Detection on face frames (ViT-B/16)
+    modality: video
+    family: learned-face
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.wvolf.vit_deepfake_detection]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.8
+    known_limitations: ["no declared licence: disabled under the commercial licence policy (D-04)", "weights are byte-identical to dima806's root pytorch_model.bin (see img.hf.wvolf)"]
+    source_url: https://huggingface.co/Wvolf/ViT_Deepfake_Detection
+    threat: [gan_face]
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["largest face per face frame (v0.3 face_input)"]
+    contamination_sets: []
+    fp_modes: ["upscaled or re-cropped face crops (docs/evaluation.md, lessons)"]
+    citation: "Wvolf/ViT_Deepfake_Detection, Hugging Face model card"
+    admission: {decision: pending, evidence: "video face-strata admission due with V-3"}
+
+  - id: vid.frames.dfdc_b7
+    adapter: app.detectors.video.adapters.frames:FrameDFDCB7Detector
+    version: 0.3.0
+    name: DFDC EfficientNet-B7 on face frames (selimsef, two-checkpoint ensemble)
+    modality: video
+    family: learned-face
+    hypotheses: [H2_localised_manipulation]
+    models: [dfdc.effnet_b7_555, dfdc.effnet_b7_999]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 2.0
+    eval: [{"bench": "vb-1.1", "slice": "video/test", "auc": 0.6204, "tpr_at_fpr01": null, "ece": 0.2404, "n": 199, "date": "2026-09-17"}]
+    known_limitations: ["missed a 1.4 s low-quality swap clip in v0.3 (docs/evaluation.md)", "v0.3 multiplies its weight by 0.4 when most face frames have a largest face below 120 px"]
+    source_url: https://github.com/selimsef/dfdc_deepfake_challenge
+    threat: [face_swap]
+    lane: face_swap
+    training_data: "Deepfake Detection Challenge (DFDC) training set, face crops"
+    coverage_date: "2020 (DFDC face-swap methods)"
+    input_constraints: ["largest face per face frame; 380 px crop"]
+    contamination_sets: []
+    fp_modes: ["small, heavily compressed faces (v0.3 field test)"]
+    citation: "Seferbekov, S. DFDC first-place solution, github.com/selimsef/dfdc_deepfake_challenge (2020)."
+    admission: {decision: pending, evidence: "video face-strata admission due with V-3"}
+
+  - id: vid.forensic.face_noise
+    adapter: app.detectors.video.adapters.temporal:FaceNoiseDetector
+    version: 0.3.0
+    name: Face/background noise-residual ratio per face frame
+    modality: video
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.25
+    known_limitations: ["hand-set v0.3 heuristic; needs the largest face and the ring around it in at least three frames for a signal"]
+    source_url: "this repository: backend/app/detectors/image/forensics.py (noise_map)"
+    threat: [face_swap]
+    lane: face_swap
+    training_data: "not applicable (hand-set heuristic; no training data)"
+    coverage_date: "not applicable (forensic heuristic)"
+    input_constraints: ["face frames; largest face and a 1.7× ring around it"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Veritas v0.3 noise-residual heuristic (backend/app/detectors/image/forensics.py)"
+    admission: {decision: pending, evidence: "vb-1.0 video admission (V-8) pending"}
+
+  - id: vid.temporal.landmark_jitter
+    adapter: app.detectors.video.adapters.temporal:LandmarkJitterDetector
+    version: 0.3.0
+    name: Facial-landmark temporal jitter (primary face track)
+    modality: video
+    family: temporal-face
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.25
+    known_limitations: ["hand-set v0.3 heuristic; follows only the largest face (greedy IoU linking)"]
+    source_url: "this repository: backend/app/detectors/video/temporal.py (landmark_jitter)"
+    threat: [face_swap, temporal]
+    lane: face_swap
+    training_data: "not applicable (hand-set heuristic; no training data)"
+    coverage_date: "not applicable (temporal heuristic)"
+    input_constraints: ["at least four consecutive face frames with YuNet landmarks"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Veritas v0.3 temporal heuristics (backend/app/detectors/video/temporal.py)"
+    admission: {decision: pending, evidence: "vb-1.0 video admission (V-8) pending"}
+
+  - id: vid.temporal.face_flicker
+    adapter: app.detectors.video.adapters.temporal:FaceFlickerDetector
+    version: 0.3.0
+    name: Face-region temporal flicker vs background (primary face track)
+    modality: video
+    family: temporal-face
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.25
+    known_limitations: ["hand-set v0.3 heuristic; follows only the largest face (greedy IoU linking)"]
+    source_url: "this repository: backend/app/detectors/video/temporal.py (face_flicker)"
+    threat: [face_swap, temporal]
+    lane: face_swap
+    training_data: "not applicable (hand-set heuristic; no training data)"
+    coverage_date: "not applicable (temporal heuristic)"
+    input_constraints: ["at least four consecutive face frames"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Veritas v0.3 temporal heuristics (backend/app/detectors/video/temporal.py)"
+    admission: {decision: pending, evidence: "vb-1.0 video admission (V-8) pending"}
+
+  # ---------------------------------------------------------------- audio
+  - id: aud.gustking_xlsr
+    adapter: app.detectors.video.adapters.audio:GustkingVoiceDetector
+    version: 0.4.0
+    name: Gustking wav2vec2-XLSR deepfake audio classifier
+    modality: audio
+    family: voice
+    hypotheses: [H2_localised_manipulation]
+    models: [hf.gustking.wav2vec2_xlsr_deepfake]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 1.0
+    eval: [{"bench": "vb-1.1", "slice": "video/test", "auc": 0.5211, "tpr_at_fpr01": null, "ece": 0.4518, "n": 29, "date": "2026-09-17"}, {"bench": "vb-1.1", "slice": "audio/test", "auc": 0.8478, "tpr_at_fpr01": 0.036, "ece": 0.0754, "n": 705, "date": "2026-09-17"}]
+    known_limitations: ["v1 scores video sound tracks only; the audio channel weight is 0.8 (config.py)"]
+    source_url: https://huggingface.co/Gustking/wav2vec2-large-xlsr-deepfake-audio-classification
+    threat: [voice]
+    lane: voice
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["16 kHz mono speech"]
+    contamination_sets: []
+    fp_modes: ["music, heavy compression, background noise and non-speech tracks (docs/limitations.md)"]
+    citation: "Gustking/wav2vec2-large-xlsr-deepfake-audio-classification, Hugging Face model card"
+    admission: {decision: pending, evidence: "v0.3 measurements in docs/eval_audio.md; sole detector of fuser-audio-2.0.0-alpha on vb-1.0-core (A-1, docs/v2/bench/admissions/fuser-audio-2.0.0-alpha.md); vb-1.0 admission pending"}
+
+  - id: aud.mo_thecreator_w2v2
+    adapter: app.detectors.video.adapters.audio:MoTheCreatorVoiceDetector
+    version: 0.4.0
+    name: mo-thecreator wav2vec2-base deepfake audio classifier
+    modality: audio
+    family: voice
+    hypotheses: [H2_localised_manipulation]
+    models: [hf.mo_thecreator.deepfake_audio_detection]
+    profiles: [deep]
+    default_enabled: false
+    legacy_weight: 0.5
+    known_limitations: ["rejected on vb-1.0-core (A-1): added to aud.gustking_xlsr it lowers the out-of-fold AUC on fit ∪ cal (0.7822 vs 0.7904) and tts recall at τ_0.05 by -8.1 pts (docs/v2/bench/admissions/ablation-aud.mo_thecreator_w2v2.md); disabled by default and not in fuser-audio-2.0.0-alpha", "corroborating signal only in v0.3"]
+    source_url: https://huggingface.co/mo-thecreator/Deepfake-audio-detection
+    threat: [voice]
+    lane: voice
+    training_data: "not established (the model card does not document training data)"
+    coverage_date: "not established"
+    input_constraints: ["16 kHz mono speech"]
+    contamination_sets: []
+    fp_modes: ["in-the-wild recordings (v0.3 audio evaluation, docs/eval_audio.md)", "music, heavy compression and background noise (docs/limitations.md)"]
+    citation: "mo-thecreator/Deepfake-audio-detection, Hugging Face model card"
+    admission: {decision: rejected, date: "2026-09-14", evidence: "A-1 audio admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-aud.mo_thecreator_w2v2.md): A3a / A3b not established (no audio LGO folds), A4 fail (A-bonafide, on its CI); out-of-fold AUC 0.7822 with vs 0.7904 without; decided before the lockbox run; automated record pending human review"}
+
+  # ---------------------------------------------------------------- text
+  - id: txt.desklib
+    adapter: app.detectors.text.adapters.learned:DesklibDetector
+    version: 0.4.0
+    name: desklib ai-text-detector v1.01 (DeBERTa-v3-large)
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.desklib.ai_text_detector_v1_01]
+    profiles: [quick, full, deep]
+    default_enabled: true
+    superseded_by: txt.desklib_ft_v2
+    legacy_weight: 2.0
+    known_limitations: ["disabled while txt.desklib_ft_v2 is enabled and installed (D-34), as v1 uses the local fine-tune instead of these weights when it is installed"]
+    source_url: https://huggingface.co/desklib/ai-text-detector-v1.01
+    threat: [ai_text]
+    training_data: "RAID (liamdugan/raid), per the model card"
+    coverage_date: "not established"
+    input_constraints: ["English; at least 15 words; windowed per-sentence scoring"]
+    contamination_sets: [liamdugan/raid]
+    fp_modes: ["formulaic or templated human writing", "non-native English", "memorised or famous passages", "text edited with grammar tools", "human business email (docs/evaluation.md)"]
+    citation: "desklib/ai-text-detector-v1.01, Hugging Face model card"
+    admission: {decision: pending, evidence: "v0.3 measurements in docs/evaluation.md; admission pending"}
+
+  - id: txt.desklib_ft_v2
+    adapter: app.detectors.text.adapters.learned:DesklibFinetuneDetector
+    version: 0.4.0
+    name: desklib-ft-v2 (Veritas fine-tune, DeBERTa-v3-large)
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: [local.desklib_ft_v2]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 2.0
+    known_limitations:
+      - "licence class unknown until the training-data terms are reviewed (D-12)"
+      - "the tokenizer comes from the base desklib snapshot (the fine-tune kept its vocabulary)"
+      - "held-out frontier-model paragraphs share an author with the training paragraphs (docs/evaluation.md)"
+    source_url: "this repository: backend/scripts/finetune_text_detector.py"
+    threat: [ai_text]
+    training_data: "98 Wikipedia intros, 200 CNN/DailyMail articles, 250 HC3 human and 250 HC3 ChatGPT answers, 151 Qwen2.5-3B-Instruct generations, 24 frontier-model paragraphs (docs/finetune_text.md)"
+    coverage_date: "2025–26 (one frontier model) plus Qwen2.5-3B and ChatGPT-2022 outputs"
+    input_constraints: ["English; at least 15 words; windowed per-sentence scoring"]
+    contamination_sets: [Hello-SimpleAI/HC3, liamdugan/raid]
+    fp_modes: ["formulaic or templated human writing", "non-native English", "memorised or famous passages", "text edited with grammar tools", "human business email (docs/evaluation.md)"]
+    citation: "Veritas v0.2 fine-tune (backend/scripts/finetune_text_detector.py) of desklib/ai-text-detector-v1.01"
+    admission: {decision: pending, evidence: "docs/finetune_text.md, docs/evaluation.md"}
+
+  - id: txt.hf.hello_simpleai
+    adapter: app.detectors.text.adapters.learned:HelloSimpleAIDetector
+    version: 0.4.0
+    name: Hello-SimpleAI chatgpt-detector-roberta
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.hello_simpleai.chatgpt_detector_roberta]
+    profiles: [deep]
+    default_enabled: false
+    legacy_weight: 0.3
+    known_limitations: ["no declared licence: disabled under the commercial licence policy (D-04)", "votes human on modern LLM text (docs/evaluation.md)"]
+    source_url: https://huggingface.co/Hello-SimpleAI/chatgpt-detector-roberta
+    threat: [ai_text]
+    training_data: "HC3 (Hello-SimpleAI/HC3)"
+    coverage_date: "2022–23 (ChatGPT answers in HC3)"
+    input_constraints: ["English"]
+    contamination_sets: [Hello-SimpleAI/HC3]
+    fp_modes: ["not established"]
+    citation: "Guo et al. How Close is ChatGPT to Human Experts? Comparison Corpus, Evaluation, and Detection. arXiv:2301.07597 (2023)."
+    admission: {decision: pending, evidence: "v0.3 measurements in docs/evaluation.md (optimistic: HC3 is its training set)"}
+
+  - id: txt.binoculars
+    adapter: app.detectors.text.adapters.learned:BinocularsDetector
+    version: 0.3.0
+    name: Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.qwen.qwen2_5_1_5b, hf.qwen.qwen2_5_1_5b_instruct]
+    profiles: [full, deep]
+    default_enabled: true
+    legacy_weight: 0.6
+    known_limitations: ["the 1.5B pair is weaker than the paper's 7B pair; a 3B pair did not help (docs/evaluation.md)"]
+    source_url: https://github.com/ahans30/Binoculars
+    threat: [ai_text]
+    training_data: "zero-shot (no detector training); threshold calibrated on HC3 with scripts/eval_text.py"
+    coverage_date: "not applicable (zero-shot); weak on 2025–26 frontier-model prose (docs/evaluation.md)"
+    input_constraints: ["English; needs enough tokens for a stable perplexity ratio"]
+    contamination_sets: [Hello-SimpleAI/HC3]
+    fp_modes: ["memorised or famous passages (low perplexity)", "formulaic encyclopedic human text (docs/evaluation.md)"]
+    citation: "Hans et al. Spotting LLMs With Binoculars: Zero-Shot Detection of Machine-Generated Text. ICML 2024."
+    admission: {decision: pending, evidence: "v0.3 measurements in docs/evaluation.md; admission pending"}
+
+  - id: txt.stylometry
+    adapter: app.detectors.text.adapters.stylometry:StylometryDetector
+    version: 0.3.0
+    name: Stylometric profile (v0.3 rules)
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.5
+    known_limitations:
+      - "hand-set lexicon and thresholds, not a trained model; English only"
+      - "by construction the document score lies in [0.2, 0.8] and a flagged sentence scores 0.54–0.85"
+    source_url: "this repository: backend/app/detectors/text/stylometry.py"
+    threat: [ai_text]
+    training_data: "not applicable (hand-set rules; no training data)"
+    coverage_date: "not established (lexicon of LLM-favoured phrases compiled for v0.3)"
+    input_constraints: ["English", "the sentence-rhythm rule needs at least 8 sentences; MATTR needs at least 50 words"]
+    contamination_sets: []
+    fp_modes: ["not established"]
+    citation: "Veritas v0.3 stylometry rules (backend/app/detectors/text/stylometry.py)"
+    admission: {decision: pending, evidence: "v0.3 measurements in docs/evaluation.md; admission pending"}

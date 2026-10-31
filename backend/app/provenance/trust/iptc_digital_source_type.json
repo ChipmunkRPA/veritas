@@ -1,0 +1,112 @@
+{
+  "source_url": "https://cv.iptc.org/newscodes/digitalsourcetype/?lang=en-GB&format=json",
+  "uri": "http://cv.iptc.org/newscodes/digitalsourcetype/",
+  "licence": "CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)",
+  "copyright": "IPTC, International Press Telecommunications Council - https://iptc.org",
+  "date_released": "2024-10-23T12:00:00+00:00",
+  "retrieved": "2026-09-12",
+  "sha256_of_source": "1caaa5bb729d5b40fdfef599bc650bf1288e7cca4fe52b9bb4d65701da4fb1d6",
+  "tiers_by": "IF §4.4",
+  "terms": {
+    "digitalCapture": {
+      "label": "Digital capture sampled from real life",
+      "retired": false,
+      "tier": "capture"
+    },
+    "computationalCapture": {
+      "label": "Multi-frame computational capture sampled from real life",
+      "retired": false,
+      "tier": "capture"
+    },
+    "negativeFilm": {
+      "label": "Digitised from a transparent negative",
+      "retired": false,
+      "tier": "capture"
+    },
+    "positiveFilm": {
+      "label": "Digitised from a transparent positive",
+      "retired": false,
+      "tier": "capture"
+    },
+    "print": {
+      "label": "Digitised from a non-transparent medium",
+      "retired": false,
+      "tier": "capture"
+    },
+    "minorHumanEdits": {
+      "label": "Original media with minor human edits",
+      "retired": true,
+      "tier": "edited"
+    },
+    "humanEdits": {
+      "label": "Human-edited media",
+      "retired": false,
+      "tier": "edited"
+    },
+    "compositeWithTrainedAlgorithmicMedia": {
+      "label": "Edited using Generative AI",
+      "retired": false,
+      "tier": "ai"
+    },
+    "algorithmicallyEnhanced": {
+      "label": "Algorithmically-altered media",
+      "retired": false,
+      "tier": "edited"
+    },
+    "softwareImage": {
+      "label": "Created by software",
+      "retired": true,
+      "tier": "other_creation"
+    },
+    "digitalArt": {
+      "label": "Digital art",
+      "retired": true,
+      "tier": "other_creation"
+    },
+    "digitalCreation": {
+      "label": "Digital creation",
+      "retired": false,
+      "tier": "other_creation"
+    },
+    "dataDrivenMedia": {
+      "label": "Data-driven media",
+      "retired": false,
+      "tier": "other_creation"
+    },
+    "trainedAlgorithmicMedia": {
+      "label": "Created using Generative AI",
+      "retired": false,
+      "tier": "ai"
+    },
+    "algorithmicMedia": {
+      "label": "Pure algorithmic media",
+      "retired": false,
+      "tier": "other_creation"
+    },
+    "screenCapture": {
+      "label": "Screen capture",
+      "retired": false,
+      "tier": "screen_capture"
+    },
+    "virtualRecording": {
+      "label": "Virtual event recording",
+      "retired": false,
+      "tier": "other_creation"
+    },
+    "composite": {
+      "label": "Composite of elements",
+      "retired": false,
+      "tier": "edited"
+    },
+    "compositeCapture": {
+      "label": "Composite of captured elements",
+      "retired": false,
+      "tier": "edited"
+    },
+    "compositeSynthetic": {
+      "label": "Composite including generative AI elements",
+      "retired": false,
+      "tier": "ai"
+    }
+  }
+}

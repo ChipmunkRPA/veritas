@@ -1,0 +1,30 @@
+{# Coverage (ARCHITECTURE §4.5 "multiple comparisons"; IF §6.2; ML §5.1; UX §7.3 rule 9): what ran, what did not, how
+   many checks flagged the file, the expected number of flags on genuine originals, and the known error-rate row. #}
+{# N-19k: never "0 of 0 checks produced a result" under a result that no check could be applied to #}
+{% if w.n_total == 0 %}
+{{ cite(w.detector_refs) }}No check was applied to this file.
+{% else %}
+{{ cite(w.detector_refs) }}{{ w.n_ran }} of {{ w.n_total }} {{ "check" if w.n_total == 1 else "checks" }} produced a result.
+{% endif %}
+{% if w.n_server %}
+{{ cite(w.server_refs) }}{{ w.n_server }} {{ "check" if w.n_server == 1 else "checks" }} could not run on this server.
+{% endif %}
+{# N-19q (finding 4): a Content Credentials check that read the file and found no manifest ran; it is no "Not run" #}
+{% for d in w.no_manifest or [] %}
+{{ cite(d.ref) }}{{ d.name }} ran and found no manifest in the file.
+{% endfor %}
+{% for d in w.not_run %}
+{{ cite(d.ref) }}Not run: {{ d.name }} ({{ d.status }}{{ (": “" ~ d.reason ~ "”") if d.reason else "" }}).
+{% endfor %}
+{% if w.n_not_run_more %}
+{{ cite(w.detector_refs) }}{{ w.n_not_run_more }} more {{ "check" if w.n_not_run_more == 1 else "checks" }} did not run; the detector-run list names {{ "it" if w.n_not_run_more == 1 else "them" }}.
+{% endif %}
+{% for step in w.failed_steps %}
+{{ cite("decision") }}{{ step }}
+{% endfor %}
+{% if w.n_scored %}
+{{ cite(w.flag_refs) }}{{ w.n_flagged }} of {{ w.n_scored }} scored {{ "check" if w.n_scored == 1 else "checks" }} flagged this file. How many flags the checks together would draw on genuine originals is not established: no false-positive rate is on record for their flags taken together.
+{% else %}
+{{ cite(w.detector_refs) }}No check produced a score, so no flags could be counted.
+{% endif %}
+{{ cite(w.rate_refs) }}{{ w.error_rate_sentence }}

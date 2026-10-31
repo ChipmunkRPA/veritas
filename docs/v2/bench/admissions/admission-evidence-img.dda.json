@@ -1,0 +1,112 @@
+{
+  "A2": {
+    "auc": 0.8720624546114742,
+    "ci95": {
+      "B": 2000,
+      "hi": 0.902849143779781,
+      "level": 0.95,
+      "lo": 0.8394736751359116,
+      "valid": 2000
+    },
+    "coverage": {
+      "fake": {
+        "scored": 425,
+        "subset": 452
+      },
+      "real": {
+        "scored": 324,
+        "subset": 379
+      }
+    },
+    "min_auc": 0.7,
+    "pass": true,
+    "threats": [
+      "t2i",
+      "personalised",
+      "gan_face",
+      "t2v"
+    ]
+  },
+  "A5": {
+    "alpha": 0.05,
+    "max_drop": 0.15,
+    "pass": false,
+    "tau": 0.7497307868212894,
+    "transforms": {
+      "jpeg75": {
+        "delta_tpr": 0.3333333333333333,
+        "n": 60,
+        "pass": false,
+        "tpr_clean": {
+          "k": 42,
+          "n": 60,
+          "rule_of_three": null,
+          "value": 0.7,
+          "wilson95": [
+            0.5749129195048435,
+            0.8010183392814656
+          ]
+        },
+        "tpr_t": {
+          "k": 22,
+          "n": 60,
+          "rule_of_three": null,
+          "value": 0.36666666666666664,
+          "wilson95": [
+            0.2562091661088542,
+            0.49316999470027295
+          ]
+        }
+      },
+      "social_ig": {
+        "delta_tpr": 0.3333333333333333,
+        "n": 60,
+        "pass": false,
+        "tpr_clean": {
+          "k": 42,
+          "n": 60,
+          "rule_of_three": null,
+          "value": 0.7,
+          "wilson95": [
+            0.5749129195048435,
+            0.8010183392814656
+          ]
+        },
+        "tpr_t": {
+          "k": 22,
+          "n": 60,
+          "rule_of_three": null,
+          "value": 0.36666666666666664,
+          "wilson95": [
+            0.2562091661088542,
+            0.49316999470027295
+          ]
+        }
+      }
+    }
+  },
+  "A6": {
+    "analysis_p95_s": null,
+    "max_ms": 3829.0,
+    "max_p95_ms": 3000.0,
+    "n": 1755,
+    "p50_ms": 396.0,
+    "p95_ms": 423.0,
+    "pass": true
+  },
+  "bootstrap_B": 2000,
+  "card_threats": [
+    "full_synthesis"
+  ],
+  "detector_id": "img.dda",
+  "items": {
+    "n": 831,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "manifest_sha256": "d0224343a5c0ad38605ade2b5225deba3cb607ace950e2ae3a127ba9dab26d25",
+  "schema": "veritas.admission-evidence/1",
+  "seed": 7
+}

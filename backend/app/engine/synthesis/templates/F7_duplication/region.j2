@@ -1,0 +1,13 @@
+{# F7 duplication with its top clone pair (IF §6.1, §6.3; D-26 C1/C1′). Moderate alone, strong when corroborated. #}
+{% import "_macros.j2" as m %}
+{{ m.observation(w) }}
+{% if w.region.partner %}
+{{ cite(w.s.id, w.region.exhibit_id) }}The check marks {{ w.region.pairs }} pair{{ "" if w.region.pairs == 1 else "s" }} of areas related by one geometric transform; in the first, {{ w.region.display_id }} lies at x {{ w.region.x0 }}–{{ w.region.x1 }}, y {{ w.region.y0 }}–{{ w.region.y1 }} and {{ w.region.partner.display_id }} at x {{ w.region.partner.x0 }}–{{ w.region.partner.x1 }}, y {{ w.region.partner.y0 }}–{{ w.region.partner.y1 }}{{ ", one of them overlapping a detected face" if w.region.on_face else "" }}.
+{% else %}
+{{ cite(w.s.id, w.region.exhibit_id) }}The check marks one area, {{ w.region.display_id }}, at x {{ w.region.x0 }}–{{ w.region.x1 }}, y {{ w.region.y0 }}–{{ w.region.y1 }}{{ ", overlapping a detected face" if w.region.on_face else "" }}.
+{% endif %}
+{{ cite(w.region.exhibit_id) }}Either area can be the copy, and repeated patterns, symmetric objects or text can form such pairs without editing.
+{{ m.strength_sentence(w) }}
+{{ m.conditions(w) }}
+{{ m.benchmark(w) }}
+{{ m.dissent(w) }}

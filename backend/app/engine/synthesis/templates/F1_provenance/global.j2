@@ -1,0 +1,38 @@
+{# F1 provenance (IF §4.4, §4.5, §6.1; UX §7.6; D-15). Variants: absent, decisive, trusted_capture, trusted_other, invalid, untrusted, self_declared_watermark, score. #}
+{% import "_macros.j2" as m %}
+{% if w.variant == "self_declared_watermark" %}
+{{ cite(w.s.id) }}The image carries a public watermark message that open-source AI image generation code embeds in its output: “{{ w.s.observed }}”.
+{{ cite(w.s.id, "decision") }}The message is public and unkeyed, so anyone can embed it in any image; this is self-declared evidence{{ "; " if w.unapplied else ": " }}{{ w.floor_clause }}.
+{{ cite(w.s.id) }}Most generators embed no such message, and resizing or cropping removes it.
+{% elif w.variant == "absent" %}
+{{ cite(w.detector_ref) }}No Content Credentials found. Most files carry none; this is not evidence either way.
+{% elif w.variant == "decisive" %}
+{{ cite(w.s.id) }}The file's Content Credentials, validated against the trust list, declare AI generation: “{{ w.s.observed }}”.
+{{ cite(w.s.id, "decision") }}Veritas treats this documentary record as deciding the result; {{ w.statistical_clause }}.
+{{ cite(w.s.id) }}Credentials record what the signing software declared; they do not describe the scene or who directed it.
+{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{% elif w.variant == "trusted_capture" %}
+{{ cite(w.s.id) }}The file's Content Credentials, validated against the trust list, record a capture of these bytes: “{{ w.s.observed }}”.
+{{ cite(w.s.id, "decision") }}This is strong support against AI generation of the signed content; the record describes what the capture device declared.
+{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{% elif w.variant == "trusted_other" %}
+{{ cite(w.s.id) }}The file's Content Credentials validate against the trust list but declare neither a capture of these bytes nor AI generation: “{{ w.s.observed }}”.
+{{ m.strength_sentence(w) }}
+{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{% elif w.variant == "invalid" %}
+{{ cite(w.s.id) }}Content Credentials are present but do not validate: the file or its record changed after signing.
+{{ cite(w.s.id) }}Disregard what the record says; this concerns modification after signing, not AI generation.
+{% elif w.variant == "untrusted" %}
+{{ cite(w.s.id) }}Credentials are intact, but the signer is not on the trust list, so its identity is unverified.
+{% if w.s.legacy_trusted %}
+{{ cite(w.s.id) }}The signer is on the legacy CAI interim list, which Veritas reports separately and does not treat as the trust list.
+{% endif %}
+{{ m.strength_sentence(w) }}
+{% else %}
+{{ m.observation(w) }}
+{{ m.strength_sentence(w) }}
+{{ m.benchmark(w) }}
+{% endif %}
+{% if w.variant != "absent" %}
+{{ m.dissent(w) }}
+{% endif %}

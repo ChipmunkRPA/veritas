@@ -1,0 +1,23 @@
+# TLS for the Compose stack (docs/runbook.md "TLS"; OPS-04, SEC-08). nginx ends TLS on 443 with a certificate and key the
+# operator provides, redirects plain HTTP, and sends HSTS. Browser sign-in needs this (or another HTTPS proxy): the session
+# cookies are `Secure`, and a browser drops them on plain HTTP from any host but localhost.
+#   VERITAS_TLS_CERT=/etc/veritas/tls/fullchain.pem VERITAS_TLS_KEY=/etc/veritas/tls/privkey.pem VERITAS_API_KEY=… \
+#     docker compose -f docker-compose.yml -f docker-compose.tls.yml up --build -d
+# The certificate file holds the server certificate followed by its intermediates (PEM). nginx reads both files at start:
+# after a renewal run `docker compose … exec web nginx -s reload`.
+# nginx runs as uid 101 from its first process (N-14; SEC-17): both files must be readable by that user, for example
+#   install -o 101 -g 101 -m 0400 privkey.pem /etc/veritas/tls/privkey.pem
+# A key that only root can read stops nginx at its start ("Permission denied" in `docker compose logs web`).
+services:
+  web:
+    ports: !override
+      - "${VERITAS_TLS_BIND:-0.0.0.0}:${VERITAS_TLS_PORT:-443}:8443"
+      - "${VERITAS_TLS_BIND:-0.0.0.0}:${VERITAS_HTTP_PORT:-80}:8080"  # redirects to https://<host>/ (port 443)
+    # The plain listener only redirects here, so the check asks the TLS listener (-k: the certificate names the host,
+    # not 127.0.0.1).
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsSk -o /dev/null https://127.0.0.1:8443/index.html && curl -fsSk -o /dev/null https://127.0.0.1:8443/api/health"]
+    volumes:
+      - ./frontend/nginx.tls.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${VERITAS_TLS_CERT:?set VERITAS_TLS_CERT to the certificate chain file (PEM)}:/etc/nginx/tls/fullchain.pem:ro
+      - ${VERITAS_TLS_KEY:?set VERITAS_TLS_KEY to the private key file (PEM)}:/etc/nginx/tls/privkey.pem:ro

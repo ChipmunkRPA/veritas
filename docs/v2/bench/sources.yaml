@@ -1,0 +1,1515 @@
+# Veritas-Bench vb-1.0 source spec (ML §2.2–2.5, §2.10; D-05, D-13). Read by backend/scripts/vbench_fetch.py.
+#
+# Every fetchable source declares one access mode, a pinned HF commit, per-source caps, the dataset licence,
+# commercial_ok, a group_key rule and quota buckets whose counts are the ML §2.2–2.5 targets split across sources.
+# Repo layouts, column names, generator strings and commits were probed on 2026-09-12 through the HF Hub API,
+# datasets-server and range reads of zip central directories (probe notes in PROGRESS.md). Values the probes could not
+# confirm are marked "U" in the notes; the fetch report records any resulting shortfall.
+#
+# Non-commercial or undeclared-licence datasets are evaluation and calibration only (D-05); their licence is copied
+# into every manifest row. Commons licences are recorded per file.
+#
+# vb-1.1 (D-40, H-1) is a superset of vb-1.0: VISION natives (R2) and their Facebook / WhatsApp copies (R3), a time-boxed
+# Commons R1 / R6 top-up at 1.5 s pacing, FFHQ face reals to 400 and OpenVid-1M reals to 350. The vb-1.0 manifest is kept
+# at backend/data/vbench/history/vb-1.0/manifest.parquet (sha256 fc17fe098b69…).
+
+schema_version: 1
+bench: vb-1.1
+seed: 7
+
+limits:
+  max_total_bytes: 55GB    # D-40 (was 40 GB, D-05): total cache (native + norm)
+  max_object_bytes: 5GB    # D-05: no object above 5 GB is downloaded whole
+  default_max_bytes: 1GB   # ML F3
+  min_free_disk_bytes: 100GB  # shared host: stop storing items below 100 GB free (D-40 assumed ≥ 250 GB; 166 GiB measured 2026-09-14)
+
+subsets:
+  mini:   # D-13 vb-mini: about 10 % of vb-1.0, same strata
+    fraction: 0.1
+    min_bytes: 256MB
+    max_bytes:   # B-2: sources whose scaled cap stopped before their quotas in the first vb-mini fetch (2026-09-12)
+      coco-val: 768MB                 # one row group is 403 MB
+      synthbuster-plus-test: 768MB    # 55 / 90 at 231 MB
+      sofake-ood-test: 768MB          # 214 / 220 at 563 MB
+      rapidata-bananamark: 512MB      # 17 / 21 at 253 MB
+      commons-r2-smartphone: 1.5GB    # 37 / 80 at 512 MB (about 14 MB per original)
+      commons-video-camera: 1.2GB     # commons-video-general (replaced in B-5): 11 / 20 at 499 MB
+      commons-video-speeches: 1GB     # 9 / 15 at 430 MB
+
+exclusions:
+  - dataset: bitmind/FaceForensicsC23
+    reason: re-upload that bypasses the FaceForensics++ access form (D-05)
+  - dataset: l8cv/GenBuster-200K
+    reason: bulk only (29 × 4.3 GB multi-part 7z, no member-level random access); GenBuster-200K-mini is allowed (D-05)
+  - dataset: faridlab/deepspeak_v2
+    reason: manual gating; the loop does not accept dataset terms (D-03)
+  - dataset: nuriachandra/Deepfake-Eval-2024
+    reason: manual gating (D-03)
+  - dataset: ControlNet/LAV-DF
+    reason: click-through gating (D-03)
+  - dataset: ControlNet/AV-Deepfake1M-PlusPlus
+    reason: manual gating (D-03)
+
+sources:
+  # =====================================================================================================
+  # Images: real strata (ML §2.2, 4,800)
+  # =====================================================================================================
+  - id: commons-r1-camera
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: image
+    api:
+      provider: commons
+      exif_make: [Canon, SONY, NIKON, OLYMPUS, OM Digital, Panasonic, FUJIFILM]
+      max_file_bytes: 40MB
+      queries:
+        - {category: "Category:Taken with Canon EOS R5", meta: {camera: canon-eos-r5}, max_candidates: 900, max_requests: 40}
+        - {category: "Category:Taken with Sony ILCE-7M4", meta: {camera: sony-ilce-7m4}, max_candidates: 900, max_requests: 40}
+        # D-40 top-up; category file counts probed 2026-09-14 (V): 22,438 / 5,873 / 5,808 / 6,764 / 6,959 / 2,364
+        - {category: "Category:Taken with Canon EOS 5D Mark IV", meta: {camera: canon-eos-5d4}, max_candidates: 1500, max_requests: 30}
+        - {category: "Category:Taken with Nikon D850", meta: {camera: nikon-d850}, max_candidates: 1500, max_requests: 30}
+        - {category: "Category:Taken with Nikon Z 6", meta: {camera: nikon-z6}, max_candidates: 1500, max_requests: 30}
+        - {category: "Category:Taken with Olympus E-M1 Mark II", meta: {camera: olympus-em1ii}, max_candidates: 1500, max_requests: 30}
+        - {category: "Category:Taken with Panasonic Lumix DC-G9", meta: {camera: lumix-g9}, max_candidates: 1500, max_requests: 30}
+        - {category: "Category:Taken with Fujifilm X-T3", meta: {camera: fujifilm-xt3}, max_candidates: 1500, max_requests: 30}
+    pace_s: 1.5  # D-40 top-up pacing (vb-1.0 used 5 s)
+    max_items: 649  # vb-1.0 frozen 2026-09-13 at 600 (D-38); D-40 top-up planned +700, time box reached 2026-09-14 at 649 (HTTP 429 throttling)
+    frozen: {date: '2026-09-14', decision: D-40, planned_items: 1300}
+    max_bytes: 15GB
+    avg_item_bytes: 10MB
+    max_per_group: 20  # D-40 top-up: vb-1.0 held photographer groups of 185, 126 and 95 items, which unbalanced the splits
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {camera: canon-eos-r5}, n: 300, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: sony-ilce-7m4}, n: 300, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: canon-eos-5d4}, n: 150, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: nikon-d850}, n: 125, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: nikon-z6}, n: 125, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: olympus-em1ii}, n: 100, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: lumix-g9}, n: 100, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: fujifilm-xt3}, n: 100, label: real, threat: real, real_stratum: R1}
+    notes: >-
+      Category sizes 38,623 / 6,235 files (V). Candidates are the first 900 listed files per category, shuffled; files
+      without a camera Make EXIF are dropped. Wikimedia throttled 1.1 s pacing during the probe, so requests are 5 s apart.
+
+  - id: synthbuster-plus-test
+    dataset: marco-willi/synthbuster-plus
+    mode: parquet_stream
+    revision: dbfb72f1ee96e953ee5cff80c58832fe89e1d2b5
+    licence: none declared (RAISE is research-use; U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/test-*.parquet"}
+    parquet:
+      columns: {generator: source, image_id: image_id}
+      media: [{column: image}]
+    max_items: 895
+    max_bytes: 3.5GB
+    avg_item_bytes: 1.3MB
+    group_key: {field: image_id}
+    quotas:
+      - {match: {generator: raise1k}, n: 200, label: real, threat: real, real_stratum: R1}
+      - {match: {generator: FLUX.1-dev}, n: 100, label: fake, threat: t2i, family: flux1}
+      - {match: {generator: FLUX.1-schnell}, n: 100, label: fake, threat: t2i, family: flux1}
+      - {match: {generator: imagen3}, n: 75, label: fake, threat: t2i, family: imagen3}
+      - {match: {generator: SD3-medium}, n: 150, label: fake, threat: t2i, family: sd3}
+      - {match: {generator: stable-diffusion-xl}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: stable-diffusion-1-3}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: stable-diffusion-1-4}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: stable-diffusion-2}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: dalle2}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: dalle3}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: firefly}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: midjourney-v5}, n: 30, label: fake, threat: t2i, family: legacy}
+      - {match: {generator: glide}, n: 30, label: fake, threat: t2i, family: legacy}
+    notes: >-
+      Test split 2,800 rows, 9 shards (3.7 GB); 14 sources × 200 rows; image_id repeats across the 14 sources, so it is
+      the group key (V).
+
+  - id: commons-r2-smartphone
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: image
+    api:
+      provider: commons
+      exif_make: [samsung, Google, Apple]
+      max_file_bytes: 40MB
+      queries:
+        - {category: "Category:Taken with Samsung Galaxy S24 Ultra", meta: {brand: samsung}, max_candidates: 600, max_requests: 30}
+        - {category: "Category:Taken with Google Pixel 9 Pro", meta: {brand: google-pixel9pro}, max_candidates: 600, max_requests: 30}
+        - {category: "Category:Taken with Google Pixel 8 Pro", meta: {brand: google-pixel8pro}, max_candidates: 301, max_requests: 20}
+        - {category: "Category:Taken with iPhone 15 Pro", meta: {brand: apple-15pro}, max_candidates: 500, max_requests: 30}
+        - {category: "Category:Taken with iPhone 15 Pro Max", meta: {brand: apple-15promax}, max_candidates: 500, max_requests: 30}
+        - {category: "Category:Taken with iPhone 16 Pro", meta: {brand: apple-16pro}, max_candidates: 500, max_requests: 30}
+    pace_s: 5.0
+    max_items: 324  # vb-1.0 frozen 2026-09-13 (D-38); planned 800
+    frozen: {date: '2026-09-13', decision: D-38, planned_items: 800}
+    max_bytes: 5GB
+    avg_item_bytes: 5MB
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {brand: samsung}, n: 250, label: real, threat: real, real_stratum: R2}
+      - {match: {brand: google-pixel9pro}, n: 150, label: real, threat: real, real_stratum: R2}
+      - {match: {brand: google-pixel8pro}, n: 100, label: real, threat: real, real_stratum: R2}
+      - {match: {brand: apple-15pro}, n: 100, label: real, threat: real, real_stratum: R2}
+      - {match: {brand: apple-15promax}, n: 100, label: real, threat: real, real_stratum: R2}
+      - {match: {brand: apple-16pro}, n: 100, label: real, threat: real, real_stratum: R2}
+    notes: >-
+      ≥ 150 per brand (Samsung 250, Google 250, Apple 300). The Apple categories are named "Taken with iPhone 15 Pro"
+      (763), "… 15 Pro Max" (1,336) and "… 16 Pro" (1,712) (V), so they replace ML's random + Make=Apple filter.
+
+  # D-40 (vb-1.1): VISION (Shullani et al. 2017), 35 devices of 11 brands. The index lists 7,565 natural-scene natives
+  # (`images/nat/`) and 22,695 platform copies (`natFBH`, `natFBL`, `natWA`: Facebook high / low quality and WhatsApp
+  # re-uploads of the same scenes) (V, index read 2026-09-14). Both sources group by device + scene index in the
+  # `vision` namespace and visit scenes in the same order, so a copy lands in the same split as its native.
+  - id: vision-natives
+    dataset: lesc.dinfo.unifi.it/VISION
+    mode: url_list
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    url_list:
+      index: https://lesc.dinfo.unifi.it/VISION/VISION_files.txt
+      index_sha256: 318ef924c8f5f2403dd4e0ff9708b51c22d53bcee5af81772472c03eb9eadb5e
+      base: https://lesc.dinfo.unifi.it/VISION/dataset/
+      interleave: device
+    path_regex: '^(?P<device>D\d{2})_(?P<model>[^/]+)/images/(?P<platform>nat)/D\d{2}_I_nat_(?P<index>\d{4})\.jpg$'
+    pace_s: 0.5
+    max_items: 700
+    max_bytes: 3GB
+    avg_item_bytes: 3MB
+    group_key: {field: path, regex: '^(D\d{2})_[^/]+/images/[^/]+/D\d{2}_I_[A-Za-z]+_(\d{4})\.jpg$', namespace: vision, normalise: none}
+    quotas:
+      - {n: 700, label: real, threat: real, real_stratum: R2}
+    notes: >-
+      Device-diverse sample: candidates alternate over the 35 devices (about 20 scenes each). Phones from 2012–2016
+      (Galaxy S3 … iPhone 6 Plus), so R2 now mixes these natives with the Commons 2023–2024 flagships. Natives are
+      2.6–4.6 MB (V, three HEAD requests). Licence CC BY-SA 4.0 (README).
+
+  - id: vision-social
+    dataset: lesc.dinfo.unifi.it/VISION
+    mode: url_list
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    url_list:
+      index: https://lesc.dinfo.unifi.it/VISION/VISION_files.txt
+      index_sha256: 318ef924c8f5f2403dd4e0ff9708b51c22d53bcee5af81772472c03eb9eadb5e
+      base: https://lesc.dinfo.unifi.it/VISION/dataset/
+      interleave: device
+    path_regex: '^(?P<device>D\d{2})_(?P<model>[^/]+)/images/(?P<platform>natFBH|natFBL|natWA)/D\d{2}_I_(?:natFBH|natFBL|natWA)_(?P<index>\d{4})\.jpg$'
+    pace_s: 0.5
+    max_items: 300
+    max_bytes: 512MB
+    avg_item_bytes: 300KB
+    group_key: {field: path, regex: '^(D\d{2})_[^/]+/images/[^/]+/D\d{2}_I_[A-Za-z]+_(\d{4})\.jpg$', namespace: vision, normalise: none}
+    quotas:
+      - {match: {platform: natFBH}, n: 100, label: real, threat: real, real_stratum: R3}
+      - {match: {platform: natFBL}, n: 100, label: real, threat: real, real_stratum: R3}
+      - {match: {platform: natWA}, n: 100, label: real, threat: real, real_stratum: R3}
+    notes: >-
+      Platform copies of the first scenes per device in the natives' order (about 3 scenes × 35 devices × 3 platforms),
+      so every copy shares a group key with a native in vision-natives. A WhatsApp copy is about 270 KB (V, one HEAD).
+
+  - id: sofake-ood-test
+    dataset: saberzl/So-Fake-OOD
+    mode: parquet_stream
+    revision: b4b34d16fda2020c2923a21d431d1ab3acbdbaff
+    licence: cc-by-nc-4.0
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/test_image-*.parquet", sample: 8}
+    parquet:
+      columns: {label: label, generator: generator, editor: editor, platform: source_platform, post_id: post_id, filename: filename}
+      media: [{column: image}]
+      row_key: id
+    max_items: 2200
+    max_bytes: 6GB
+    avg_item_bytes: 1.4MB
+    group_key: {field: post_id, fallback: filename}
+    quotas:
+      - {match: {label: REAL, platform: Reddit}, n: 500, label: real, threat: real, real_stratum: R3}
+      - {match: {label: REAL, platform: Tumblr}, n: 200, label: real, threat: real, real_stratum: R3}
+      - {match: {label: REAL, platform: Bluesky}, n: 200, label: real, threat: real, real_stratum: R3}
+      - {match: {label: FULL_SYNTHETIC, generator: FLUX_2}, n: 60, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+      - {match: {label: FULL_SYNTHETIC, generator: Flux.1_pro}, n: 100, label: fake, threat: t2i, family: flux1}
+      - {match: {label: FULL_SYNTHETIC, generator: GPT-image-1.5}, n: 60, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {label: FULL_SYNTHETIC, generator: GPT-image-2}, n: 60, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {label: FULL_SYNTHETIC, generator: GPT4o}, n: 100, label: fake, threat: t2i, family: gpt-4o-image-1}
+      - {match: {label: FULL_SYNTHETIC, generator: nano_banana}, n: 60, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+      - {match: {label: FULL_SYNTHETIC, generator: nano_banana_2}, n: 60, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+      - {match: {label: FULL_SYNTHETIC, generator: seedream4.5}, n: 70, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {label: FULL_SYNTHETIC, generator: Seedream3.0}, n: 75, label: fake, threat: t2i, family: seedream3}
+      - {match: {label: FULL_SYNTHETIC, generator: Imagen4}, n: 100, label: fake, threat: t2i, family: imagen4, lgo_fold: F7}
+      - {match: {label: FULL_SYNTHETIC, generator: imagen3}, n: 75, label: fake, threat: t2i, family: imagen3}
+      - {match: {label: FULL_SYNTHETIC, generator: Hidream}, n: 100, label: fake, threat: t2i, family: hidream}
+      - {match: {label: FULL_SYNTHETIC, generator: Ideogram3}, n: 60, label: fake, threat: t2i, family: ideogram}
+      - {match: {label: FULL_SYNTHETIC, generator: Ideogram2}, n: 40, label: fake, threat: t2i, family: ideogram}
+      - {match: {label: FULL_SYNTHETIC, generator: Recraftv3}, n: 80, label: fake, threat: t2i, family: recraft}
+      - {match: {label: TAMPERED, editor: openai}, n: 150, label: fake, threat: edit, family: partial-edits}
+      - {match: {label: TAMPERED, editor: ideogram}, n: 50, label: fake, threat: edit, family: partial-edits}
+    notes: >-
+      46 shards × about 2.7 GB (V); 8 shards sampled (ML F3 says 6) because Bluesky reals are 1,449 of 91,370 rows.
+      post_id was empty in the probe sample, so the group key falls back to the file name. X and Instagram reals are
+      link-only and never match. Masks of TAMPERED rows are not stored yet.
+
+  - id: coco-val
+    dataset: detection-datasets/coco
+    mode: parquet_stream
+    revision: cf0b22332314a937e9dc8a1957b21725430bb41d
+    licence: none declared (COCO image licences vary; U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/val-*.parquet"}
+    parquet:
+      columns: {image_id: image_id}
+      media: [{column: image}]
+      row_key: image_id
+    max_items: 300
+    max_bytes: 1GB
+    avg_item_bytes: 155KB
+    group_key: {field: image_id}
+    quotas:
+      - {n: 300, label: real, threat: real, real_stratum: R4}
+
+  - id: flickr30k
+    dataset: nlphuji/flickr30k
+    mode: zip_range
+    revision: 2b239befc81b6e3f035ce6bd52f5f4d60f5625f7
+    licence: none declared (Flickr image licences vary; U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "flickr30k-images.zip", members_per_archive: 400}
+    path_regex: '^flickr30k-images\.zip/(?:[^/]+/)*(?P<img>\d+)\.jpg$'
+    max_items: 200
+    max_bytes: 1GB
+    avg_item_bytes: 140KB
+    group_key: {field: img}
+    quotas:
+      - {n: 200, label: real, threat: real, real_stratum: R4}
+    notes: >-
+      The repo ships one 4.39 GB zip plus a CSV; the train/val/test split lives only in the CSV, so members are sampled
+      from the whole zip (all real Flickr photographs).
+
+  - id: openfake-core-test
+    dataset: ComplexDataLab/OpenFake
+    mode: parquet_stream
+    revision: 3fd1109dc3258874243fa31c5bda9ee24260163b
+    licence: cc-by-nc-4.0
+    commercial_ok: false
+    modality: image
+    files: {pattern: "core/test-*.parquet", sample: 4}
+    parquet:
+      columns: {label: label, generator: model, prompt: prompt, type: type}
+      media: [{column: image}]
+    max_items: 945
+    max_bytes: 6GB
+    avg_item_bytes: 690KB
+    group_key: {field: prompt}
+    quotas:
+      - {match: {label: real, generator: imagenet}, n: 200, label: real, threat: real, real_stratum: R4}
+      - {match: {label: real, generator: docci}, n: 200, label: real, threat: real, real_stratum: R4}
+      - {match: {label: fake, generator: midjourney-7}, n: 100, label: fake, threat: t2i, family: midjourney, lgo_fold: F1}
+      - {match: {label: fake, generator: flux.2-klein-9b}, n: 60, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+      - {match: {label: fake, generator: gpt-image-1.5}, n: 40, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {label: fake, generator: gpt-image-2}, n: 20, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {label: fake, generator: nano-banana-pro}, n: 20, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+      - {match: {label: fake, generator: seedream-v5.0}, n: 30, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {label: fake, generator: ideogram-2.0}, n: 20, label: fake, threat: t2i, family: ideogram}
+      - {match: {label: fake, generator: recraft-v3}, n: 40, label: fake, threat: t2i, family: recraft}
+      - {match: {label: fake, generator: z-image-turbo}, n: 50, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: illustrious}, n: 50, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: ernie-image-turbo}, n: 25, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: ernie-image}, n: 25, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: lumina-17-2-25}, n: 20, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: aurora-20-1-25}, n: 15, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: frames-23-1-25}, n: 15, label: fake, threat: t2i, family: long-tail}
+      - {match: {label: fake, generator: halfmoon-4-4-25}, n: 15, label: fake, threat: t2i, family: long-tail}
+    notes: >-
+      core/test: 13 shards × 4.7–5.0 GB (V); generator strings confirmed on 7,031 partial-statistics rows, so rare ones
+      (nano-banana-pro 19, ideogram-2.0 19, halfmoon 14 per 7,031) may fall short. sd-3.5 was not seen in the data (U),
+      so SD 3.5 is not requested here.
+
+  - id: ffhq-256
+    dataset: merkol/ffhq-256
+    mode: parquet_stream
+    revision: f23c0e21f6fe222b4429272a86be00e4583b0298
+    licence: none declared (FFHQ is CC BY-NC-SA 4.0; U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      media: [{column: image}]
+    max_items: 400  # D-40: HF face reals raised from 300 to 400
+    max_bytes: 1GB
+    avg_item_bytes: 100KB
+    group_key: {field: row}
+    quotas:
+      - {n: 400, label: real, threat: real, real_stratum: R5}
+
+  - id: deepfakeface
+    dataset: OpenRL/DeepFakeFace
+    mode: zip_range
+    revision: eb2a54fbf2567790bd3dc61d09fdaade6bb6c31c
+    licence: openrail
+    commercial_ok: false
+    modality: image
+    files: {pattern: ["wiki.zip", "insight.zip"], members_per_archive: 2000}
+    path_regex: '^(?P<archive>wiki|insight)\.zip/(?:[^/]+/)*(?P<person>\d+)_[^/]*\.jpg$'
+    max_items: 470
+    max_bytes: 1.5GB
+    avg_item_bytes: 40KB
+    group_key: {field: person}
+    quotas:
+      - {match: {archive: wiki}, n: 360, label: real, threat: real, real_stratum: R5}
+      - {match: {archive: insight}, n: 110, label: fake, threat: faceswap, family: faceswap-stills, generator: insightface-swap}
+    notes: >-
+      insight.zip: 30,101 entries, `insight/<dir>/<person>_<dob>_<year>.jpg` (V, central directory read by range).
+      The wiki.zip layout is assumed to match (U). The IMDB-WIKI person id groups swaps with their source identities
+      (ML P1). DFF's "openrail" card is not a clear commercial grant, so commercial_ok is false.
+
+  - id: commons-r6-hard-negatives
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: image
+    api:
+      provider: commons
+      max_file_bytes: 40MB
+      queries:
+        - {category: "Category:Tone-mapped HDR images", meta: {kind: hdr-tonemapped}, max_candidates: 500, max_requests: 20}
+        - {category: "Category:HDR images", meta: {kind: hdr}, max_candidates: 300, max_requests: 15}
+        - {category: "Category:Night photography", meta: {kind: night}, max_candidates: 500, max_requests: 20}
+        - {category: "Category:Light trails", meta: {kind: light-trails}, max_candidates: 296, max_requests: 10}
+        - {category: "Category:Long exposure photography", meta: {kind: long-exposure}, max_candidates: 224, max_requests: 10}
+        - {category: "Category:Selfies", meta: {kind: selfie}, max_candidates: 500, max_requests: 20}
+        - {category: "Category:Depth of field", meta: {kind: depth-of-field}, max_candidates: 300, max_requests: 15}
+        - {category: "Category:Photographs taken on film", meta: {kind: film}, max_candidates: 53, max_requests: 5}
+        - {category: "Category:Photographs taken on expired film", meta: {kind: expired-film}, max_candidates: 49, max_requests: 5}
+        - {category: "Category:Civil War Glass Negatives", meta: {kind: glass-negative}, max_candidates: 300, max_requests: 10}
+    pace_s: 1.5  # D-40 top-up pacing (vb-1.0 used 5 s)
+    max_items: 50  # vb-1.0 frozen 2026-09-13 at 50 (D-38); D-40 top-up planned 500, time box reached 2026-09-14 before this source started (R6 best effort)
+    frozen: {date: '2026-09-14', decision: D-40, planned_items: 500}
+    max_bytes: 4GB
+    avg_item_bytes: 5MB
+    max_per_group: 15  # D-40 top-up: bounds any one photographer's share of the stratum
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {kind: hdr-tonemapped}, n: 100, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: hdr}, n: 50, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: night}, n: 100, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: light-trails}, n: 25, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: long-exposure}, n: 25, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: selfie}, n: 70, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: depth-of-field}, n: 30, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: film}, n: 40, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: expired-film}, n: 30, label: real, threat: real, real_stratum: R6}
+      - {match: {kind: glass-negative}, n: 30, label: real, threat: real, real_stratum: R6}
+    notes: >-
+      Category names and file counts found by the probe (HDR 5,764 / 1,422; night 1,446; light trails 296; long exposure
+      224; selfies 1,259; depth of field 495; film 53 / 49; Civil War glass negatives 9,208). No "portrait mode",
+      "beauty filter" or "Night Sight" category exists. Only JPEGs count, so the small film categories may fall short.
+
+  # =====================================================================================================
+  # Images: synthetic strata (ML §2.3, 7,800)
+  # =====================================================================================================
+  - id: midjourney-v6-recap
+    dataset: Photoroom/midjourney-v6-recap
+    mode: parquet_stream
+    revision: 21c628db81401da88c5b33507230528cf3fe4a12
+    licence: mit (Midjourney terms of service U)
+    commercial_ok: true
+    modality: image
+    files: {pattern: "train_*.parquet", sample: 2}
+    constants: {generator: midjourney-v6}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image}]
+      row_key: id
+    max_items: 250
+    max_bytes: 1GB
+    avg_item_bytes: 145KB
+    group_key: {field: prompt}
+    quotas:
+      - {n: 250, label: fake, threat: t2i, family: midjourney, lgo_fold: F1}
+
+  - id: aigibench-test
+    dataset: HorizonTEL/AIGIBench
+    mode: zip_range
+    revision: e44ec40efe5117a5ccdaa6ff0e89ed934d03d310
+    licence: cc-by-nc-sa-4.0
+    commercial_ok: false
+    modality: image
+    files:
+      pattern: [test/BlendFace.zip, test/E4S.zip, test/FaceSwap.zip, test/InSwap.zip, test/SimSwap.zip, test/StyleSwim.zip,
+                test/WFIR.zip, test/StyleGAN3.zip, test/StyleGAN-XL.zip, test/R3GAN.zip, test/InstantID.zip,
+                test/PhotoMaker.zip, test/Infinite-ID.zip, test/IP-Adapter.zip, test/Midjourney.zip, test/CommunityAI.zip]
+      members_per_archive: 600
+    path_regex: '^test/(?P<generator>[^/]+)\.zip/(?:[^/]+/)*(?P<cls>0_real|1_fake)/(?P<name>[^/]+)\.(?i:jpe?g|png|webp)$'
+    max_items: 1450
+    max_bytes: 4GB
+    avg_item_bytes: 1MB
+    group_key: {field: path, normalise: none}
+    quotas:
+      - {match: {generator: BlendFace, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: E4S, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: FaceSwap, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: InSwap, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: SimSwap, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: StyleSwim, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: WFIR, cls: 1_fake}, n: 70, label: fake, threat: faceswap, family: faceswap-stills}
+      - {match: {generator: [BlendFace, E4S, FaceSwap, InSwap, SimSwap, StyleSwim, WFIR], cls: 0_real}, n: 210, label: real, threat: real, real_stratum: R5}
+      - {match: {generator: StyleGAN3, cls: 1_fake}, n: 90, label: fake, threat: gan_face, family: gan-faces}
+      - {match: {generator: StyleGAN-XL, cls: 1_fake}, n: 90, label: fake, threat: gan_face, family: gan-faces}
+      - {match: {generator: R3GAN, cls: 1_fake}, n: 90, label: fake, threat: gan_face, family: gan-faces}
+      - {match: {generator: [StyleGAN3, StyleGAN-XL, R3GAN], cls: 0_real}, n: 30, label: real, threat: real, real_stratum: R5}
+      - {match: {generator: InstantID, cls: 1_fake}, n: 75, label: fake, threat: personalised, family: personalised}
+      - {match: {generator: PhotoMaker, cls: 1_fake}, n: 75, label: fake, threat: personalised, family: personalised}
+      - {match: {generator: Infinite-ID, cls: 1_fake}, n: 75, label: fake, threat: personalised, family: personalised}
+      - {match: {generator: IP-Adapter, cls: 1_fake}, n: 75, label: fake, threat: personalised, family: personalised}
+      - {match: {generator: Midjourney, cls: 1_fake}, n: 50, label: fake, threat: t2i, family: midjourney, lgo_fold: F1}
+      - {match: {generator: CommunityAI, cls: 1_fake}, n: 100, label: fake, threat: t2i, family: wild}
+    notes: >-
+      25 test zips, 0.8–23.7 GB (V); members are `<Name>/0_real/*` and `<Name>/1_fake/*` (V on WFIR and SDXL central
+      directories). ≤ 100 items per zip (ML F3). max_items is 1,450, not ML's 1,400, because this source also carries
+      240 R5 reals. Candidates per archive are capped at 600 after shuffling.
+
+  - id: rapidata-flux2-pro
+    dataset: Rapidata/Flux-2-pro_t2i_human_preference
+    mode: parquet_stream
+    revision: ef2e83f43b41897a8e1a40dd8a5dac209d164c79
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 60
+    max_bytes: 600MB
+    avg_item_bytes: 322KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: flux-2-pro-25-11-25}, n: 60, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+
+  - id: rapidata-bananamark
+    dataset: Rapidata/bananamark-dataset
+    mode: parquet_stream
+    revision: cc951c4448660075b6d0491a1bf551799f4887bd
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet"}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 205
+    max_bytes: 1GB
+    avg_item_bytes: 444KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: [black-forest-labs/flux-2-flex, black-forest-labs/flux-2-pro, black-forest-labs/flux-2-dev]}, n: 60, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+      - {match: {generator: bytedance/seedream-4}, n: 50, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {generator: tencent/hunyuan-image-3}, n: 50, label: fake, threat: t2i, family: hunyuanimage}
+      - {match: {generator: ideogram-ai/ideogram-v3-quality}, n: 20, label: fake, threat: t2i, family: ideogram}
+      - {match: {generator: prunaai/wan-2.2-image}, n: 25, label: fake, threat: t2i, family: long-tail}
+
+  - id: qwen-image-bench
+    dataset: Qwen/Qwen-Image-Bench
+    mode: per_file
+    revision: d2493deb153b020cf169c7e3f57d15e4dd697038
+    licence: apache-2.0 (generator terms of service U)
+    commercial_ok: true
+    modality: image
+    files: {pattern: "images/*"}
+    path_regex: '^images/(?P<generator>[^/]+)/(?P<pid>\d+)_[0-9a-f]+\.(?:png|jpe?g)$'
+    pace_s: 0.7
+    max_items: 960
+    max_bytes: 2GB
+    group_key: {field: pid}
+    quotas:
+      - {match: {generator: FLUX.2-pro}, n: 30, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+      - {match: {generator: FLUX.2_max}, n: 30, label: fake, threat: t2i, family: flux2, lgo_fold: F2}
+      - {match: {generator: GPT-Image-1.5}, n: 30, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {generator: gpt-image-2}, n: 30, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3}
+      - {match: {generator: GPT-Image-1}, n: 100, label: fake, threat: t2i, family: gpt-4o-image-1}
+      - {match: {generator: nano-banana-pro}, n: 50, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+      - {match: {generator: nano-banana-2.0}, n: 50, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+      - {match: {generator: Seedream-4.0}, n: 50, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {generator: Seedream-4.5}, n: 50, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {generator: Seedream-5.0}, n: 50, label: fake, threat: t2i, family: seedream4, lgo_fold: F5}
+      - {match: {generator: Qwen-Image}, n: 80, label: fake, threat: t2i, family: qwen-image, lgo_fold: F6}
+      - {match: {generator: Qwen-Image-2512}, n: 80, label: fake, threat: t2i, family: qwen-image, lgo_fold: F6}
+      - {match: {generator: Qwen-Image-2.0-pro}, n: 80, label: fake, threat: t2i, family: qwen-image, lgo_fold: F6}
+      - {match: {generator: Imagen-4.0}, n: 50, label: fake, threat: t2i, family: imagen4, lgo_fold: F7}
+      - {match: {generator: Imagen-4.0-Ultra}, n: 50, label: fake, threat: t2i, family: imagen4, lgo_fold: F7}
+      - {match: {generator: HunyuanImage-3.0}, n: 50, label: fake, threat: t2i, family: hunyuanimage}
+      - {match: {generator: GLM-Image}, n: 50, label: fake, threat: t2i, family: long-tail}
+      - {match: {generator: kling_v2_1}, n: 50, label: fake, threat: t2i, family: long-tail}
+    notes: >-
+      18 model folders × 1,000 images, 18.6 GB (V). One prompt is rendered by every model, so the 6-digit prompt id is
+      the group key. Downloads are paced 0.7 s (HF API limit 500 requests per 5 min, probe).
+
+  - id: mllm-generated
+    dataset: zr-zhang/MLLM-Generated-Image-Detection-Dataset
+    mode: per_file
+    revision: 1498eead24292a9a2d134476b2c559193b68b9de
+    licence: apache-2.0 (generator terms of service U)
+    commercial_ok: true
+    modality: image
+    files: {pattern: "images/Raw/*"}
+    path_regex: '^images/Raw/(?P<subset>Hybrid|Structure|Texture) Images/(?P<generator>GPT-Image2-fake|Nano-Banana2-fake)/(?P<n>\d+)\.(?i:png|jpe?g)$'
+    pace_s: 0.7
+    max_items: 120
+    max_bytes: 1GB
+    group_key: {field: path, regex: 'images/Raw/([^/]+) Images/[^/]+/(\d+)\.', normalise: none}
+    quotas:
+      - {match: {generator: GPT-Image2-fake}, n: 60, label: fake, threat: t2i, family: gpt-image-1.5-2, lgo_fold: F3, generator: gpt-image-2}
+      - {match: {generator: Nano-Banana2-fake}, n: 60, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4, generator: nano-banana-2}
+    notes: >-
+      Fakes only: the real-image source is undocumented (ML). Raw variant only (Preprocessing holds resized copies). The same
+      index appears under each class folder, so (subset, index) groups the matched triplets (U).
+
+  - id: rapidata-openai-4o
+    dataset: Rapidata/OpenAI-4o_t2i_human_preference
+    mode: parquet_stream
+    revision: 9fafb39b4bb3bac6e2fbabd13503fa1199fde400
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 100
+    max_bytes: 600MB
+    avg_item_bytes: 200KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: 4o-26-3-25}, n: 100, label: fake, threat: t2i, family: gpt-4o-image-1}
+
+  - id: bitmind-nano-banana
+    dataset: bitmind/nano-banana
+    mode: parquet_stream
+    revision: 9ea8da32a5be03f4946e6cb10c2d2f8e90f0a0a4
+    licence: mit (Google terms of service U)
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    constants: {generator: gemini-2.5-flash-image}
+    parquet:
+      media: [{column: image}]
+      row_key: id
+    max_items: 100
+    max_bytes: 1GB
+    avg_item_bytes: 1.5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 100, label: fake, threat: t2i, family: nano-banana, lgo_fold: F4}
+
+  - id: rapidata-seedream3
+    dataset: Rapidata/Seedream-3_t2i_human_preference
+    mode: parquet_stream
+    revision: a9cd84d2a93e82954fe69bd3097b53c48f51a486
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 75
+    max_bytes: 500MB
+    avg_item_bytes: 222KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: seedream-3-24-7-25}, n: 75, label: fake, threat: t2i, family: seedream3}
+
+  - id: rapidata-face-generation
+    dataset: Rapidata/Face_Generation_Benchmark
+    mode: parquet_stream
+    revision: c6ed7eab14620db5daa77aec0feda5992091f5b3
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet"}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 360
+    max_bytes: 1GB
+    avg_item_bytes: 327KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: qwen/qwen-image}, n: 60, label: fake, threat: t2i, family: qwen-image, lgo_fold: F6}
+      - {match: {generator: google/imagen-4-fast}, n: 30, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: ideogram-ai/ideogram-v3-balanced}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: bytedance/seedream-3}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: luma/photon-flash}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: prunaai/wan-2.2-image}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: recraft-ai/recraft-v3}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: black-forest-labs/flux-1.1-pro}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: minimax/image-01}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: black-forest-labs/flux-schnell}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: luma/photon}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+      - {match: {generator: bria/image-3.2}, n: 27, label: fake, threat: t2i, family: modern-t2i-faces}
+    notes: 2,310 pairs, 12 generator strings (complete statistics, V); 4 shards, 1.5 GB.
+
+  - id: rapidata-imagen4-and-opponents
+    dataset: Rapidata/Imagen4_t2i_human_preference
+    mode: parquet_stream
+    revision: 1e6215e1a0394ee61d6059dd9ef0ae29531abd83
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 10}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 360
+    max_bytes: 1.5GB
+    avg_item_bytes: 282KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: imagen-4.0-ultra-generate-exp-05-20}, n: 50, label: fake, threat: t2i, family: imagen4, lgo_fold: F7}
+      - {match: {generator: flux-1.1-pro}, n: 100, label: fake, threat: t2i, family: flux1}
+      - {match: {generator: stable-diffusion-3}, n: 50, label: fake, threat: t2i, family: sd3}
+      - {match: {generator: janus-7b}, n: 40, label: fake, threat: t2i, family: long-tail}
+      - {match: {generator: lumina-17-2-25}, n: 30, label: fake, threat: t2i, family: long-tail}
+      - {match: {generator: aurora-20-1-25}, n: 30, label: fake, threat: t2i, family: long-tail}
+      - {match: {generator: frames-23-1-25}, n: 30, label: fake, threat: t2i, family: long-tail}
+      - {match: {generator: halfmoon-4-4-25}, n: 30, label: fake, threat: t2i, family: long-tail}
+    notes: >-
+      model2 is Imagen 4 Ultra (exp-05-20); model1 is one of 15 opponents (V, partial statistics), which supply the
+      FLUX.1.1-pro, SD 3 and long-tail buckets. 45 shards × 163 MB; 10 sampled (the cap is 1.5 GB because the source
+      serves four families).
+
+  - id: rapidata-imagen4-ultra
+    dataset: Rapidata/Imagen-4-ultra-24-7-25_t2i_human_preference
+    mode: parquet_stream
+    revision: 0946337d152e63845a7afeb29efcd7b93791aa5e
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 50
+    max_bytes: 500MB
+    avg_item_bytes: 232KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: imagen-4-ultra-24-7-25}, n: 50, label: fake, threat: t2i, family: imagen4, lgo_fold: F7}
+
+  - id: rapidata-hidream
+    dataset: Rapidata/Hidream_t2i_human_preference
+    mode: parquet_stream
+    revision: 49f0a03eaffcf4f2b6d9fabd24d0ef2435e7706a
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 100
+    max_bytes: 600MB
+    avg_item_bytes: 237KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: hidream-I1-full}, n: 100, label: fake, threat: t2i, family: hidream}
+
+  - id: rapidata-ideogram-v2
+    dataset: Rapidata/Ideogram-V2_t2i_human_preference
+    mode: parquet_stream
+    revision: 9d9bb0aa365e9fbc77e865731ec96655a10e0990
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 60
+    max_bytes: 500MB
+    avg_item_bytes: 266KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: ideogram}, n: 60, label: fake, threat: t2i, family: ideogram, generator: ideogram-v2}
+
+  - id: rapidata-recraft-v3
+    dataset: Rapidata/Recraft-v3-24-7-25_t2i_human_preference
+    mode: parquet_stream
+    revision: d7d47aab05cf8fcb5427e278d8817b9dbd65eafb
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 80
+    max_bytes: 500MB
+    avg_item_bytes: 233KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: recraft-v3-24-7-25}, n: 80, label: fake, threat: t2i, family: recraft}
+
+  - id: rapidata-hunyuanimage-2.1
+    dataset: Rapidata/HunyuanImage-2.1_t2i_human_preference
+    mode: parquet_stream
+    revision: c8a2675e752d9e4c0036f4be4e4d933e07f4c1c6
+    licence: CDLA-Permissive-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/train-*.parquet", sample: 1}
+    parquet:
+      columns: {prompt: prompt}
+      media: [{column: image1, meta: {generator: model1}}, {column: image2, meta: {generator: model2}}]
+    max_items: 100
+    max_bytes: 600MB
+    avg_item_bytes: 393KB
+    group_key: {field: prompt, namespace: rapidata-t2i-prompts}
+    quotas:
+      - {match: {generator: hunyuan-image-2.1}, n: 100, label: fake, threat: t2i, family: hunyuanimage}
+
+  - id: elsa-d3-validation
+    dataset: elsaEU/ELSA_D3
+    mode: parquet_stream
+    revision: d980a1702f9cfe0f5a367a83ccf377eb6d95a88f
+    licence: none declared (U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/validation-*.parquet", sample: 2}
+    parquet:
+      columns: {prompt: original_prompt}
+      media:
+        - {column: image_gen0, meta: {generator: model_gen0}}
+        - {column: image_gen1, meta: {generator: model_gen1}}
+        - {column: image_gen2, meta: {generator: model_gen2}}
+        - {column: image_gen3, meta: {generator: model_gen3}}
+      row_key: id
+    max_items: 130
+    max_bytes: 1GB
+    avg_item_bytes: 260KB
+    group_key: {field: prompt}
+    quotas:
+      - {n: 130, label: fake, threat: t2i, family: legacy}
+    notes: >-
+      One caption rendered by 4 generators per row (DeepFloyd IF, SD 1.4, SD 2.1, SDXL in the first rows; distinct values
+      U), so the caption is the group key.
+
+  - id: jamiewithofs-test
+    dataset: JamieWithofs/Deepfake-and-real-images
+    mode: parquet_stream
+    revision: 6a492449fba897ccf8460731d618dded5b5e9c4d
+    licence: none declared (U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "data/test-*.parquet"}
+    constants: {generator: unknown-gan-face}
+    parquet:
+      columns: {label: label}
+      media: [{column: image}]
+    max_items: 130
+    max_bytes: 500MB
+    avg_item_bytes: 10KB
+    group_key: {field: row}
+    quotas:
+      - {match: {label: "0"}, n: 130, label: fake, threat: gan_face, family: gan-faces}
+    notes: ClassLabel [Fake, Real], so Fake is 0 (V); 256 px; the generator is undocumented.
+
+  - id: wilddeepfake-test
+    dataset: xingjunm/WildDeepfake
+    mode: per_file
+    revision: f3835aaf281dd9f8d79b51c4e02f050d3f7af0b4
+    licence: apache-2.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "deepfake_in_the_wild/fake_test/*.tar.gz", sample: 6, members_per_archive: 25, extract: tar}
+    path_regex: '^deepfake_in_the_wild/fake_test/(?P<video>\d+)\.tar\.gz/(?:[^/]+/)*(?P<frame>[^/]+)\.png$'
+    pace_s: 0.7
+    max_items: 100
+    max_bytes: 1GB
+    avg_item_bytes: 2MB
+    group_key: {field: video}
+    quotas:
+      - {n: 100, label: fake, threat: faceswap, family: faceswap-stills, generator: in-the-wild-swap}
+    notes: >-
+      115 fake_test archives, median 45 MB (V); tar.gz has no random access, so small archives are downloaded whole and
+      at most 25 frames kept per archive. The archive (one video) is the group key.
+
+  - id: opensdi-flux
+    dataset: nebula/OpenSDI_test
+    mode: parquet_stream
+    revision: 7e233eaf98fcfee4c74c788f0e34d06feb7ad0df
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/flux-*.parquet", sample: 3}
+    constants: {generator: flux-inpaint}
+    parquet:
+      columns: {label: label, key: key}
+      media: [{column: image}]
+      row_key: key
+    max_items: 60
+    max_bytes: 300MB
+    avg_item_bytes: 170KB
+    group_key: {field: key, regex: '([^/]+)\.[A-Za-z]+$', normalise: none}
+    quotas:
+      - {match: {label: "1"}, n: 60, label: fake, threat: edit, family: partial-edits}
+    notes: >-
+      20,000 rows per split, real 10,000 / fake 10,000, masks on 5,000 (V). ClassLabel [real, fake] → fake is 1. The 7
+      flux shards are sorted by label (label counts per shard, 2026-09-12: 2858/0, 2142/715, 0/2857, 1429/1428, 2857/0,
+      714/2143, 0/2857 fake/real), so one sampled shard could hold no fakes (the first vb-mini fetch drew one); 3 shards
+      always include a fake shard.
+
+  - id: opensdi-sd15
+    dataset: nebula/OpenSDI_test
+    mode: parquet_stream
+    revision: 7e233eaf98fcfee4c74c788f0e34d06feb7ad0df
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/sd15-*.parquet", sample: 1}
+    constants: {generator: sd15-inpaint}
+    parquet:
+      columns: {label: label, key: key}
+      media: [{column: image}]
+      row_key: key
+    max_items: 60
+    max_bytes: 300MB
+    avg_item_bytes: 170KB
+    group_key: {field: key, regex: '([^/]+)\.[A-Za-z]+$', normalise: none}
+    quotas:
+      - {match: {label: "1"}, n: 60, label: fake, threat: edit, family: partial-edits}
+
+  - id: opensdi-sd2
+    dataset: nebula/OpenSDI_test
+    mode: parquet_stream
+    revision: 7e233eaf98fcfee4c74c788f0e34d06feb7ad0df
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/sd2-*.parquet", sample: 1}
+    constants: {generator: sd2-inpaint}
+    parquet:
+      columns: {label: label, key: key}
+      media: [{column: image}]
+      row_key: key
+    max_items: 60
+    max_bytes: 300MB
+    avg_item_bytes: 170KB
+    group_key: {field: key, regex: '([^/]+)\.[A-Za-z]+$', normalise: none}
+    quotas:
+      - {match: {label: "1"}, n: 60, label: fake, threat: edit, family: partial-edits}
+
+  - id: opensdi-sd3
+    dataset: nebula/OpenSDI_test
+    mode: parquet_stream
+    revision: 7e233eaf98fcfee4c74c788f0e34d06feb7ad0df
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/sd3-*.parquet", sample: 1}
+    constants: {generator: sd3-inpaint}
+    parquet:
+      columns: {label: label, key: key}
+      media: [{column: image}]
+      row_key: key
+    max_items: 60
+    max_bytes: 300MB
+    avg_item_bytes: 170KB
+    group_key: {field: key, regex: '([^/]+)\.[A-Za-z]+$', normalise: none}
+    quotas:
+      - {match: {label: "1"}, n: 60, label: fake, threat: edit, family: partial-edits}
+
+  - id: opensdi-sdxl
+    dataset: nebula/OpenSDI_test
+    mode: parquet_stream
+    revision: 7e233eaf98fcfee4c74c788f0e34d06feb7ad0df
+    licence: cc-by-sa-4.0
+    commercial_ok: true
+    modality: image
+    files: {pattern: "data/sdxl-*.parquet", sample: 1}
+    constants: {generator: sdxl-inpaint}
+    parquet:
+      columns: {label: label, key: key}
+      media: [{column: image}]
+      row_key: key
+    max_items: 60
+    max_bytes: 300MB
+    avg_item_bytes: 170KB
+    group_key: {field: key, regex: '([^/]+)\.[A-Za-z]+$', normalise: none}
+    quotas:
+      - {match: {label: "1"}, n: 60, label: fake, threat: edit, family: partial-edits}
+
+  - id: semi-truths-p2p
+    dataset: semi-truths/Semi-Truths-Evalset
+    mode: per_file
+    revision: 610748cddab90c48f2b27b17d77d701812a40138
+    licence: cc (variant undeclared; U)
+    commercial_ok: false
+    modality: image
+    files: {pattern: "p2p/*.tar.bz2", sample: 2, members_per_archive: 60, extract: tar}
+    path_regex: '^p2p/(?P<archive>[^/]+)\.tar\.bz2/(?:[^/]+/)*(?P<name>[^/]+)\.(?i:png|jpe?g)$'
+    pace_s: 0.7
+    max_items: 100
+    max_bytes: 500MB
+    avg_item_bytes: 2MB
+    group_key: {field: name, regex: 'instance_\d+_(.+?)_(?:ADE20K|CelebAHQ|CityScapes|HumanParsing|OpenImages|SUN_RGBD)', fallback: path}
+    quotas:
+      - {n: 100, label: fake, threat: edit, family: partial-edits, generator: prompt-to-prompt}
+    notes: >-
+      6 p2p archives, 596 MB in total (V); member naming is assumed to follow the inpainting keys (U), so the group key
+      falls back to the member path. Labels are in metadata.csv, which is not read; p2p members are edited images.
+
+  - id: openfake-reddit-test
+    dataset: ComplexDataLab/OpenFake
+    mode: parquet_stream
+    revision: 3fd1109dc3258874243fa31c5bda9ee24260163b
+    licence: cc-by-nc-4.0
+    commercial_ok: false
+    modality: image
+    files: {pattern: "reddit/test-*.parquet", sample: 2}
+    constants: {generator: reddit-unknown}
+    parquet:
+      columns: {label: label, type: type}
+      media: [{column: image}]
+    max_items: 200
+    max_bytes: 1.5GB
+    avg_item_bytes: 630KB
+    group_key: {field: row}
+    quotas:
+      - {match: {label: fake, type: image}, n: 200, label: fake, threat: t2i, family: wild}
+    notes: >-
+      reddit/test: 5 shards × 4.5–4.7 GB; partial statistics show fake 11,670 / real 2,826 and type video 10,926 / image
+      3,570 (V); only image rows are kept. Highest label-noise risk (ML P6): the agent audit decides admission (D-06).
+
+  - id: communityforensics-eval
+    dataset: OwensLab/CommunityForensics-Eval
+    mode: parquet_stream
+    revision: 7d4a74a88d2cac93b513c0853bf92c260eaceea0
+    licence: cc-by-nc-sa-4.0
+    commercial_ok: false
+    modality: image
+    role: diagnostic
+    files: {pattern: "data/CompEval-*.parquet", sample: 6}
+    parquet:
+      columns: {label: label, generator: model_name, architecture: architecture, image_name: image_name}
+      media: [{column: image_data}]
+    max_items: 600
+    max_bytes: 2GB
+    avg_item_bytes: 3.7MB
+    group_key: {field: image_name}
+    quotas:
+      - {match: {label: "1"}, n: 300, label: fake, threat: t2i, family: communityforensics-eval}
+      - {match: {label: "0"}, n: 300, label: real, threat: real, real_stratum: CFE}
+    notes: >-
+      Diagnostic and contamination check only (ML F3): in-distribution for the Community Forensics detector.
+      413 shards (median 69 MB); image_data is raw bytes (V); label 1 = fake per the card.
+
+  # =====================================================================================================
+  # Video (ML §2.4)
+  # =====================================================================================================
+  # B-5: replaces commons-video-general, whose CirrusSearch queries returned explainers, animations and text slides
+  # (vb-mini audit: 4 of 15 unusable). Its 15 cached clips keep the failed audit record and stay `excluded`.
+  - id: commons-video-camera
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: video
+    api:
+      provider: commons
+      mime: [video/webm, video/mp4]
+      max_file_bytes: 100MB
+      queries:  # files directly in "Videos of …" subject categories (camera footage); file counts probed 2026-09-12 (V)
+        - {category: "Category:Videos of trains", meta: {topic: trains}, max_candidates: 127, max_requests: 5}
+        - {category: "Category:Videos of animals", meta: {topic: animals}, max_candidates: 113, max_requests: 5}
+        - {category: "Category:Videos of road traffic", meta: {topic: traffic}, max_candidates: 99, max_requests: 5}
+        - {category: "Category:Videos of sports", meta: {topic: sports}, max_candidates: 90, max_requests: 5}
+        - {category: "Category:Videos of nature", meta: {topic: nature}, max_candidates: 89, max_requests: 5}
+        - {category: "Category:Videos of concerts", meta: {topic: concerts}, max_candidates: 81, max_requests: 5}
+        - {category: "Category:Videos of water", meta: {topic: water}, max_candidates: 76, max_requests: 5}
+        - {category: "Category:Dashcam videos", meta: {topic: dashcam}, max_candidates: 51, max_requests: 5}
+    pace_s: 5.0
+    max_items: 0  # vb-1.0 frozen 2026-09-13 (D-38); planned 200
+    frozen: {date: '2026-09-13', decision: D-38, planned_items: 200}
+    max_bytes: 5GB
+    avg_item_bytes: 20MB
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {topic: trains}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: animals}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: traffic}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: sports}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: nature}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: concerts}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: water}, n: 25, label: real, threat: real, real_stratum: V-general}
+      - {match: {topic: dashcam}, n: 25, label: real, threat: real, real_stratum: V-general}
+    notes: >-
+      Category file counts 127 / 113 / 99 / 90 / 89 / 81 / 76 / 51 (V, direct members); formats, sizes and yield after the
+      mime and 100 MB filters are U. The agent audit screens content (D-06).
+
+  - id: openvid-1m
+    dataset: nkp37/OpenVid-1M
+    mode: zip_range
+    revision: d8a63bd22989c80b5734ec2bb989f4e1b61a5807
+    licence: cc-by-4.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "OpenVid_part*.zip", sample: 2, members_per_archive: 500}
+    path_regex: '^OpenVid_part\d+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    max_items: 350  # D-40: video real top-up +150 (vb-1.0 200)
+    max_bytes: 3.5GB
+    avg_item_bytes: 7MB
+    group_key: {field: row}
+    quotas:
+      - {n: 350, label: real, threat: real, real_stratum: V-general}
+    notes: >-
+      170 whole zips of 19–50 GB (V), read by range only; split `_partaa/_partab` pieces never match. Member layout U.
+
+  - id: commons-video-speeches
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: video
+    api:
+      provider: commons
+      mime: [video/webm, video/mp4]
+      max_file_bytes: 150MB
+      queries:
+        - {category: "Category:Videos of speeches", meta: {set: speeches}, max_candidates: 120, max_requests: 5}
+        - {category: "Category:Videos of speeches in Slovenia", meta: {set: slovenia}, max_candidates: 129, max_requests: 5}
+        - {category: "Category:Videos of speeches in the United States", meta: {set: us}, max_candidates: 68, max_requests: 5}
+        - {category: "Category:White House videos of government speeches", meta: {set: white-house}, max_candidates: 52, max_requests: 5}
+    pace_s: 5.0
+    max_items: 15  # vb-1.0 frozen 2026-09-13 (D-38); planned 150
+    frozen: {date: '2026-09-13', decision: D-38, planned_items: 150}
+    max_bytes: 5GB
+    avg_item_bytes: 30MB
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {set: speeches}, n: 45, label: real, threat: real, real_stratum: V-talking-head}
+      - {match: {set: slovenia}, n: 45, label: real, threat: real, real_stratum: V-talking-head}
+      - {match: {set: us}, n: 30, label: real, threat: real, real_stratum: V-talking-head}
+      - {match: {set: white-house}, n: 30, label: real, threat: real, real_stratum: V-talking-head}
+    notes: >-
+      Real talking heads: ML's 100 plus 50 of TalkingHeadBench's 150 reals, because that repo holds no real clips (only
+      CelebV-HQ / FF++ references; V). Category sizes 120 / 129 / 68 / 52 files (V); formats U.
+
+  - id: rapidata-t2v-veo3
+    dataset: Rapidata/text-2-video-human-preferences-veo3
+    mode: per_file
+    revision: 22878d6d9c692e09a3183e81f0428cc4c03a3f98
+    licence: apache-2.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "videos/*.mp4"}
+    path_regex: '^videos/(?P<prompt>\d+)_(?P<generator>.+)_(?P<seed>\d+)\.mp4$'
+    pace_s: 0.7
+    max_items: 250
+    max_bytes: 1GB
+    group_key: {field: prompt, namespace: rapidata-t2v-prompts}
+    quotas:
+      - {match: {generator: veo3}, n: 50, label: fake, threat: t2v, family: veo, lgo_fold: V-Veo}
+      - {match: {generator: veo2}, n: 20, label: fake, threat: t2v, family: veo, lgo_fold: V-Veo}
+      - {match: {generator: sora}, n: 40, label: fake, threat: t2v, family: sora, lgo_fold: V-Sora}
+      - {match: {generator: hunyuan}, n: 30, label: fake, threat: t2v, family: wan-hunyuan, lgo_fold: V-WanHunyuan}
+      - {match: {generator: wan2.1}, n: 30, label: fake, threat: t2v, family: wan-hunyuan, lgo_fold: V-WanHunyuan}
+      - {match: {generator: ray2}, n: 30, label: fake, threat: t2v, family: luma-ray}
+      - {match: {generator: alpha}, n: 30, label: fake, threat: t2v, family: runway}
+      - {match: {generator: pika2.2}, n: 20, label: fake, threat: t2v, family: pika}
+    notes: >-
+      1,184 mp4 (3.5 GB) named `<prompt>_<generator>_<seed>.mp4` (V). The kling-v2.1-master, sora-2, luma-ray2 and
+      runway-alpha repos hold no video files (V), so those generators come from this repo, the marey repo and 34data.
+
+  - id: rapidata-t2v-veo3.1
+    dataset: Rapidata/text-2-video-human-preferences-veo3.1
+    mode: per_file
+    revision: 5d9fb3e419ba3e5c8b98130abcde9a44978fa189
+    licence: apache-2.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "videos/*.mp4"}
+    path_regex: '^videos/veo31_(?P<prompt>\d+)_(?P<seed>\d+)\.mp4$'
+    constants: {generator: veo3.1}
+    pace_s: 0.7
+    max_items: 50
+    max_bytes: 500MB
+    group_key: {field: prompt, namespace: rapidata-t2v-prompts}
+    quotas:
+      - {n: 50, label: fake, threat: t2v, family: veo, lgo_fold: V-Veo}
+
+  - id: rapidata-t2v-marey
+    dataset: Rapidata/text-2-video-human-preferences-moonvalley-marey
+    mode: per_file
+    revision: cdbf62f223abf5864d3d7cf9b6afeb3391fcc771
+    licence: apache-2.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "Videos/*.mp4"}
+    path_regex: '^Videos/(?P<generator>.+)_(?P<prompt>\d+)_(?P<seed>\d+)\.mp4$'
+    pace_s: 0.7
+    max_items: 110
+    max_bytes: 700MB
+    group_key: {field: prompt, namespace: rapidata-t2v-prompts}
+    quotas:
+      - {match: {generator: kling-v2.1-master-25-7-25}, n: 50, label: fake, threat: t2v, family: kling, lgo_fold: V-Kling}
+      - {match: {generator: marey-11-8-25}, n: 40, label: fake, threat: t2v, family: marey}
+      - {match: {generator: mochi-1-24-7-25}, n: 20, label: fake, threat: t2v, family: mochi}
+    notes: 1,413 mp4 (5.9 GB); generator tokens kling-v2.1-master-25-7-25 77, marey-11-8-25 78, mochi-1-24-7-25 79 (V).
+
+  - id: rapidata-i2v-seedance
+    dataset: Rapidata/image-to-video-human-preference-seedance-1-pro
+    mode: per_file
+    revision: 987399c7d471f15d556598f79108c4c4f8c0b74a
+    licence: apache-2.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "Videos/*"}
+    path_regex: '^Videos/(?P<generator>[^/]+)/[^/]+_(?P<category>[a-z-]+)_(?P<prompt>\d+)(?:_ui)?\.mp4$'
+    pace_s: 0.7
+    max_items: 40
+    max_bytes: 500MB
+    group_key: {field: prompt, namespace: rapidata-i2v-prompts}
+    quotas:
+      - {match: {generator: seedance-1-pro}, n: 40, label: fake, threat: t2v, family: seedance, lgo_fold: V-Seedance}
+    notes: 297 mp4 (2.7 GB); seedance-1-pro 100 clips (V).
+
+  - id: 34data-veo3
+    dataset: 34data/gen-videos-veo3
+    mode: zip_range
+    revision: dad55b648cf7da90584e69245b8eb22da0929ba4
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: veo3}
+    max_items: 50
+    max_bytes: 500MB
+    avg_item_bytes: 2.9MB
+    group_key: {field: row}
+    quotas:
+      - {n: 50, label: fake, threat: t2v, family: veo, lgo_fold: V-Veo}
+    notes: data_001.zip 903 MB, 314 flat `<sha1>.mp4` members (V).
+
+  - id: 34data-sora2
+    dataset: 34data/gen-videos-sora2
+    mode: zip_range
+    revision: 82a7b46ee58f417a233b7e89e705b5065039df3a
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: sora-2}
+    max_items: 50
+    max_bytes: 500MB
+    avg_item_bytes: 6.7MB
+    group_key: {field: row}
+    quotas:
+      - {n: 50, label: fake, threat: t2v, family: sora, lgo_fold: V-Sora}
+
+  - id: 34data-kling
+    dataset: 34data/gen-videos-kling
+    mode: zip_range
+    revision: 07d2e8ff55f94b745749bd94e9af80b6546d272a
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: kling}
+    max_items: 50
+    max_bytes: 500MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 50, label: fake, threat: t2v, family: kling, lgo_fold: V-Kling}
+
+  - id: 34data-wan2
+    dataset: 34data/gen-videos-wan2
+    mode: zip_range
+    revision: 660cd80d16ac7cc962d892461e6b1e506809a3c7
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: wan2}
+    max_items: 40
+    max_bytes: 500MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 40, label: fake, threat: t2v, family: wan-hunyuan, lgo_fold: V-WanHunyuan}
+
+  - id: 34data-hunyuanvideo
+    dataset: 34data/gen-videos-hunyuanvideo
+    mode: zip_range
+    revision: 063249f0fab03017fcbe012997afab36d53886ef
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: hunyuanvideo}
+    max_items: 30
+    max_bytes: 400MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 30, label: fake, threat: t2v, family: wan-hunyuan, lgo_fold: V-WanHunyuan}
+
+  - id: 34data-fastwan2
+    dataset: 34data/gen-videos-fastwan2
+    mode: zip_range
+    revision: 93f76b0892cfb2f61ef9585f4a37d775ee18c12b
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: fastwan2}
+    max_items: 30
+    max_bytes: 400MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 30, label: fake, threat: t2v, family: wan-hunyuan, lgo_fold: V-WanHunyuan}
+
+  - id: genvidbench-6.7m
+    dataset: jian-0/GenVidBench
+    mode: zip_range
+    revision: 701cafb6f999d7ea0cbf3c354df6177311a4d824
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: ["GenVidBench/6.7m/OpenAI_Sora.zip", "GenVidBench/6.7m/keling.zip"], members_per_archive: 400}
+    path_regex: '^GenVidBench/6\.7m/(?P<archive>OpenAI_Sora|keling)\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    max_items: 100
+    max_bytes: 1GB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {match: {archive: OpenAI_Sora}, n: 50, label: fake, threat: t2v, family: sora, lgo_fold: V-Sora, generator: sora-2024}
+      - {match: {archive: keling}, n: 50, label: fake, threat: t2v, family: kling, lgo_fold: V-Kling, generator: kling-1.x}
+    notes: >-
+      Regression set of older clips. ML named the Pair1/Pair2 archives, but they are rar and multi-part 7z, and
+      cogvideo_mora_svd_ms_fix.tar is 16.7 GB (above the 5 GB object cap), so the two zips under 6.7m/ are used instead
+      (0.49 GB and 1.38 GB, V). Members are assumed to be generated clips (U; audit).
+
+  - id: aigc-lipsync-benchmark
+    dataset: ZiqiaoPeng/AIGC_LipSync_Benchmark
+    mode: per_file
+    revision: 19f92a49ba3f29e34b8f1109f082555770da3fa0
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "videos/*.mp4"}
+    path_regex: '^videos/clip_(?P<n>\d+)\.mp4$'
+    constants: {generator: kling-jimeng-wan-hunyuan}
+    pace_s: 0.7
+    max_items: 100
+    max_bytes: 1GB
+    group_key: {field: row}
+    quotas:
+      - {n: 100, label: fake, threat: t2v, family: ai-talking-humans}
+    notes: 615 clips (4.39 GB); the card attributes them to Kling, JiMeng, Wan and Hunyuan, with no per-clip mapping (V).
+
+  - id: talkingheadbench
+    dataset: luchaoqi/TalkingHeadBench
+    mode: per_file
+    revision: cd5f4672a13c61efe0df6aa79c61bbc9602ff625
+    licence: mit
+    commercial_ok: true
+    modality: video
+    files: {pattern: "fake/*.mp4"}
+    path_regex: '^fake/(?:additional_dataset/)?(?P<generator>[^/]+)/(?:[^/]+/)*(?P<name>[^/]+)\.mp4$'
+    pace_s: 0.7
+    max_items: 290
+    max_bytes: 2GB
+    group_key: {field: name, regex: '^([^/]+?)--', fallback: path}
+    quotas:
+      - {match: {generator: LivePortrait}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: AniPortraitAudio}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: AniPortraitVideo}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: Hallo}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: Hallo2}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: EmoPortrait}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: MAGI-1}, n: 40, label: fake, threat: talking_head, family: talking-head-animation}
+      - {match: {generator: Hallo3}, n: 10, label: fake, threat: talking_head, family: talking-head-animation}
+    notes: >-
+      `fake/<gen>/<split>/<ffhq_img>--<driver>--<gen>.mp4`; Hallo3 has 10 files and MAGI-1 66 (V). The FFHQ identity
+      image is the group key. No real clips exist in the repo, so ML's 150 reals are not available here.
+
+  - id: deepaction-v1
+    dataset: faridlab/deepaction_v1
+    mode: per_file
+    revision: 476932c3369424ca59dc1f8fb758cb3c13fe63fe
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.mp4"}
+    path_regex: '^(?P<generator>BDAnimateDiffLightning|CogVideoX5B|RunwayML|StableDiffusion|Veo|VideoPoet|Pexels)/(?P<prompt>[^/]+)/(?P<take>[^/]+)\.mp4$'
+    pace_s: 0.7
+    max_items: 250
+    max_bytes: 2.5GB
+    group_key: {field: prompt}
+    quotas:
+      - {match: {generator: BDAnimateDiffLightning}, n: 30, label: fake, threat: t2v, family: animatediff}
+      - {match: {generator: CogVideoX5B}, n: 30, label: fake, threat: t2v, family: cogvideox}
+      - {match: {generator: RunwayML}, n: 30, label: fake, threat: t2v, family: runway}
+      - {match: {generator: StableDiffusion}, n: 30, label: fake, threat: t2v, family: stable-video}
+      - {match: {generator: Veo}, n: 30, label: fake, threat: t2v, family: veo, lgo_fold: V-Veo}
+      - {match: {generator: VideoPoet}, n: 30, label: fake, threat: t2v, family: videopoet}
+      - {match: {generator: Pexels}, n: 70, label: real, threat: real, real_stratum: V-general}
+    notes: >-
+      `<Generator>/<prompt_id>/<a..e>.mp4`, Pexels reals average 26 MB, so the cap is 2.5 GB (ML F3 says 2 GB) (V).
+
+  - id: faceforensics-c23
+    dataset: bitmind/FaceForensicsC23
+    mode: excluded_bulk
+    licence: FF++ terms (access form)
+    commercial_ok: false
+    modality: video
+    notes: excluded by D-05 (re-upload bypassing the FF++ access form); ML's 200 compressed face-swap clips are not fetched
+
+  - id: genbuster-200k
+    dataset: l8cv/GenBuster-200K
+    mode: excluded_bulk
+    licence: mit
+    commercial_ok: true
+    modality: video
+    notes: 29 × 4.3 GB multi-part 7z (113.66 GB) without member-level random access (ML F1, D-05)
+
+  # =====================================================================================================
+  # Audio (ML §2.5, 1,600)
+  # =====================================================================================================
+  - id: asvspoof5-test
+    dataset: SpeechAntiSpoofingBenchmarks/ASVspoof5
+    mode: parquet_stream
+    revision: 6aeb859f64c582dd1e54772e30483b0234819cfb
+    licence: odc-by
+    commercial_ok: true
+    modality: audio
+    files: {pattern: "data/test-*.parquet", sample: 2}
+    constants: {generator: asvspoof5-attack}
+    parquet:
+      columns: {label: label, notes: notes, path: path}
+      media: [{column: audio}]
+      row_key: path
+    max_items: 400
+    max_bytes: 500MB
+    avg_item_bytes: 123KB
+    group_key: {field: notes, regex: '"speaker_id":\s*"([^"]+)"', fallback: path}
+    quotas:
+      - {match: {label: "0"}, n: 200, label: real, threat: real, real_stratum: A-bonafide}
+      - {match: {label: "1"}, n: 200, label: fake, threat: tts, family: asvspoof5}
+    notes: >-
+      200 shards × about 420 MB (V); ClassLabel [bonafide, spoof]; notes is a JSON string holding speaker_id and attack_id
+      (V; exact formatting U, so the group key falls back to the path).
+
+  - id: asvspoof2021-df
+    dataset: SpeechAntiSpoofingBenchmarks/ASVspoof2021_DF
+    mode: parquet_stream
+    revision: 89e8ad0bd2819f09b65aee839c58885b1414c0f2
+    licence: other (ASVspoof 2021 terms; U)
+    commercial_ok: false
+    modality: audio
+    files: {pattern: "data/test-*.parquet", sample: 3}
+    constants: {generator: asvspoof2021-df-attack}
+    parquet:
+      columns: {label: label, path: path}
+      media: [{column: audio}]
+      row_key: path
+    max_items: 400
+    max_bytes: 1GB
+    avg_item_bytes: 56KB
+    group_key: {field: path, normalise: none}
+    quotas:
+      - {match: {label: "0"}, n: 200, label: real, threat: real, real_stratum: A-bonafide}
+      - {match: {label: "1"}, n: 200, label: fake, threat: tts, family: asvspoof2021-df}
+    notes: 80 shards × about 430 MB (V); bona fide rows are a small share of DF eval, hence 3 shards.
+
+  - id: in-the-wild-audio
+    dataset: garystafford/deepfake-audio-detection
+    mode: per_file
+    revision: fcf5344bb7f82b54b6b932291326d29750ef1e82
+    licence: cc-by-4.0
+    commercial_ok: true
+    modality: audio
+    files: {pattern: ["real/*.flac", "fake/*.flac"]}
+    path_regex: '^(?P<cls>real|fake)/(?P<name>[^/]+)\.flac$'
+    constants: {generator: in-the-wild-tts}
+    pace_s: 0.7
+    max_items: 400
+    max_bytes: 500MB
+    group_key: {field: name, regex: '^(.+?)_part_\d+$', fallback: path}
+    quotas:
+      - {match: {cls: real}, n: 200, label: real, threat: real, real_stratum: A-bonafide}
+      - {match: {cls: fake}, n: 200, label: fake, threat: tts, family: in-the-wild-audio}
+    notes: 933 real / 933 fake flac files, 2.5–12.5 s (V); parts of one clip share a group.
+
+  - id: mlaad-tiny
+    dataset: mueller91/MLAAD-tiny
+    mode: per_file
+    revision: 9143e5ea709575ebab6bec52840a1043aada7bb1
+    licence: cc-by-nc-4.0
+    commercial_ok: false
+    modality: audio
+    files: {pattern: "fake/*.wav"}
+    path_regex: '^fake/(?P<language>[^/]+)/(?P<generator>[^/]+)/(?P<name>[^/]+)\.wav$'
+    pace_s: 0.7
+    max_items: 400
+    max_bytes: 500MB
+    group_key: {field: path, normalise: none}
+    quotas:
+      - {n: 400, label: fake, threat: tts, family: mlaad}
+    notes: >-
+      7,900 TTS clips under `fake/<lang>/<model>/` (79 models × 100, V); paired with ASVspoof5 bona fide (ML §2.5).
+
+  # =====================================================================================================
+  # Listed for the plan only: bulk-only or non-seekable packaging (ML F1)
+  # =====================================================================================================
+  - id: synthbuster-zenodo
+    dataset: zenodo/10066460
+    mode: excluded_bulk
+    licence: cc-by-nc-sa-4.0
+    commercial_ok: false
+    modality: image
+    notes: single 12.37 GB zip on Zenodo; its content comes through marco-willi/synthbuster-plus (ML F1)
+
+  - id: co-spy-bench
+    dataset: ruojiruoli/Co-Spy-Bench
+    mode: excluded_bulk
+    licence: mit
+    commercial_ok: true
+    modality: image
+    notes: 110 non-seekable tar.gz files (SD 3 medium 7.6–8.7 GB each, above the object cap); SD 3 comes from synthbuster-plus and Rapidata
+
+  - id: communityforensics-full
+    dataset: OwensLab/CommunityForensics
+    mode: excluded_bulk
+    licence: cc-by-nc-sa-4.0
+    commercial_ok: false
+    modality: image
+    notes: 1.1 TB training set (ML F1); only the Eval set is sampled
+
+  - id: gpt-image-edit-1.5m
+    dataset: UCSC-VLAA/GPT-Image-Edit-1.5M
+    mode: excluded_bulk
+    licence: cc-by-4.0
+    commercial_ok: true
+    modality: image
+    notes: multi-part tar archives of about 20 GB per part (4.1 TB, V); partial edits come from So-Fake-OOD, OpenSDI and Semi-Truths

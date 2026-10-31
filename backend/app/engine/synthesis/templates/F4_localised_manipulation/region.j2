@@ -1,0 +1,9 @@
+{# F4 localised manipulation with its top region (IF §6.1–6.2; UX §7.7). Moderate alone, strong when corroborated. #}
+{% import "_macros.j2" as m %}
+{{ m.observation(w) }}
+{{ cite(w.s.id, w.region.exhibit_id) }}The map marks {{ w.region.count }} candidate region{{ "" if w.region.count == 1 else "s" }}; the highest-scoring, {{ w.region.display_id }}, covers {{ w.region.area_text }} of the image at x {{ w.region.x0 }}–{{ w.region.x1 }}, y {{ w.region.y0 }}–{{ w.region.y1 }}{{ ", overlapping a detected face" if w.region.on_face else "" }}.
+{{ cite(w.region.exhibit_id) }}Marked regions are candidates for editing, not confirmed edits.
+{{ m.strength_sentence(w) }}
+{{ m.conditions(w) }}
+{{ m.benchmark(w) }}
+{{ m.dissent(w) }}

@@ -1,0 +1,10 @@
+# Preserve the exact upstream bytes (including whitespace) used by the pinned reference test.
+backend/tests/fixtures/aegis/video_io.py.txt -whitespace
+
+# The served fuser artefacts are cited by SHA-256 (D-57): their bytes are never normalised.
+backend/app/engine/fusion/release/* -text
+
+# Captured QA output retains its original bytes for the recorded SHA256 values.
+docs/v2/qa/aegis-development-pilot-2026-09-18/*.status -whitespace
+docs/v2/qa/video-d3-cadence-2026-09-18/*.status -whitespace
+docs/v2/qa/video-lane-coverage-2026-09-18/*.log -whitespace

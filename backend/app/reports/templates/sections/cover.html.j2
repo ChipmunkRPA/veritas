@@ -1,0 +1,18 @@
+<section class="cover" id="section-cover">
+<h1 class="title cover-title">{{ v.cover_title }}</h1>
+<hr class="rule-double">
+<dl class="facts cover-facts">
+{% for r in v.cover %}
+<dt>{{ r.key }}</dt><dd class="{{ 'mono' if r.mono is defined and r.mono else '' }}{{ ' muted' if not r.established else '' }}">{{ r.value }}</dd>
+{% endfor %}
+</dl>
+{% if v.examiner %}
+<div class="cover-assessment verdict-{{ v.step }}">
+<p class="eyebrow">Machine assessment and examiner’s opinion</p>
+<p class="headline">{{ v.cover_headline }}</p>
+<p class="headline examiner-opinion">{{ v.examiner.line }}</p>
+{% if v.examiner.refusal %}<p class="examiner-refusal">{{ v.examiner.refusal }}</p>{% endif %}
+</div>
+{% endif %}
+<p class="scope-statement">{{ v.scope_statement }}</p>
+</section>

@@ -1,0 +1,44 @@
+# H-4 inputs for scripts/admission_record.py (BUILD_SPEC H-4, D-41, D-44). Automated record pending human review.
+# parity: the A1 CPU vs MPS verdict as recorded in the model notes of backend/app/models.yaml (null = not recorded).
+# h3_decision / h3_features: docs/v2/bench/h3_real_fp_analysis.md, "Decisions"; the features are the fuser gate literals
+# (`calibrate --gates`, `term` present / `!term` absent).
+bench: vb-1.1
+detectors:
+  img.commfor384:
+    parity: {pass: true, evidence: "commfor.vit_s16_384 notes: A1 parity in float32 (I-6, 2026-09-14), CPU vs MPS on 50 vb items max |Δp| 3.60e-06"}
+  img.dda:
+    parity: {pass: true, evidence: "dda.dinov2_vitl14_lora notes: A1 parity in float32 (2026-09-12), CPU vs MPS on 50 items max |Δp| 1.22e-05"}
+  face.gend_clip_l14:
+    parity: {pass: true, evidence: "gend.clip_l14 notes: A1 parity in float32 (I-9, 2026-09-12), CPU vs MPS on 50 face items max |Δp| 1.28e-05"}
+    h3_decision: context_gate
+    h3_features: [has_face]
+  img.hf.haywoodsloan:
+    parity: null
+  img.hf.ateeqq:
+    parity: {pass: true, evidence: "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 vb items max |Δp| 5.40e-05, mean 1.10e-06"}
+  img.hf.dima806:
+    parity: {pass: true, evidence: "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 vb items max |Δp| 5.00e-06, mean 4.40e-07"}
+  img.dfdc_b7:
+    parity: {pass: true, evidence: "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 face items (67 without a scorable face skipped) max |Δp| 2.00e-06, mean 1.40e-07"}
+    h3_decision: context_gate
+    h3_features: [has_face]
+  img.forensic.spectrum: {}
+  img.forensic.ela: {}
+  img.forensic.noise: {}
+  img.forensic.jpeg_dq: {}
+  img.forensic.copymove: {}
+  img.meta.generator: {}
+  img.meta.exif: {}
+  img.meta.consistency: {}
+  img.meta.qtables: {}
+  img.watermark.dwtdct: {}
+  # H-5: the Veritas probe head (no detector card; licence from its backbone model card). CPU vs MPS parity of the backbone
+  # is not recorded (I-13 measured fp16 vs fp32 parity only), so A1 stays not established.
+  img.veritas_probe.pe_core_l14:
+    models: [pe_core.large_p14_336]
+    parity: null
+  # H-6: derived partial-edit features (app/engine/fusion/derived.py); licence and lane from the source detector's card.
+  pe.mesorch.integrity: {}
+  pe.mesorch.region_area: {}
+  pe.jpeg_dq.support: {}
+  pe.copymove.pairs: {}

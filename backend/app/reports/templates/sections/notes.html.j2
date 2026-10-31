@@ -1,0 +1,33 @@
+{% set n = v.notes %}
+<section class="chapter-cont" id="section-appendix-c">
+<h2 class="chapter-title"><span class="n">{{ v.number['appendix-c'] }}</span>Appendix C · Notes and dispositions</h2>
+<h3 class="eyebrow">Dispositions</h3>
+{% if n.dispositions %}
+<table class="grid examiner-table">
+<thead><tr><th>Target</th><th>Status</th><th>Note</th><th>Examiner</th><th>When</th></tr></thead>
+<tbody>
+{% for d in n.dispositions %}
+<tr><td class="mono">{{ d.target }}</td><td{{ d.status | word_cell }}>{{ d.status }}</td><td>{{ d.note or '–' }}</td><td>{{ d.author }}</td><td>{{ d.at }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="muted">No examiner disposition is recorded.</p>
+{% endif %}
+<h3 class="eyebrow">Notes and annotations</h3>
+{% if n.rows %}
+<table class="grid examiner-table">
+<thead><tr><th>Note</th><th>Target</th><th>Where</th><th>Status</th><th>Text</th><th>Author</th><th>When</th></tr></thead>
+<tbody>
+{% for r in n.rows %}
+<tr><td class="mono">{{ r.id }}</td><td{{ r.target | word_cell }}>{{ r.target }}</td><td class="mono">{{ r.where }}</td><td{{ r.status | word_cell }}>{{ r.status }}</td><td>{{ r.body }}</td><td>{{ r.author }}</td><td>{{ r.at }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% if n.internal %}
+<p class="caption">{{ n.internal }} internal {{ 'note is listed without its text' if n.internal == 1 else 'notes are listed without their text' }}.</p>
+{% endif %}
+{% else %}
+<p class="muted">No notes or annotations are recorded.</p>
+{% endif %}
+</section>

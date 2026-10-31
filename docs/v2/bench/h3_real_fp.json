@@ -1,0 +1,2898 @@
+{
+  "bench": "vb-1.1",
+  "fused": {
+    "camera": {
+      "k": 44,
+      "n": 1036,
+      "value": 0.04247104247104247,
+      "wilson95": {
+        "hi": 0.056534349670413375,
+        "lo": 0.03178820959751849
+      }
+    },
+    "camera_by_source": {
+      "commons-r1-camera": {
+        "fake_median_s": null,
+        "fake_n": 0,
+        "flagged": 2,
+        "median_context_prior": 0.09017862523661435,
+        "median_s": 0.0852858328416275,
+        "n": 310
+      },
+      "commons-r2-smartphone": {
+        "fake_median_s": null,
+        "fake_n": 0,
+        "flagged": 0,
+        "median_context_prior": 0.09017862523661435,
+        "median_s": 0.04685652215955017,
+        "n": 272
+      },
+      "synthbuster-plus-test": {
+        "fake_median_s": 0.8325452217637257,
+        "fake_n": 386,
+        "flagged": 42,
+        "median_context_prior": 0.8859556241061692,
+        "median_s": 0.8134913181503163,
+        "n": 114
+      },
+      "vision-natives": {
+        "fake_median_s": null,
+        "fake_n": 0,
+        "flagged": 0,
+        "median_context_prior": 0.09017862523661435,
+        "median_s": 0.0445637460894176,
+        "n": 340
+      }
+    },
+    "contributions": {
+      "img.dfdc_b7": {
+        "largest_positive": 2,
+        "mean_pp": 0.008762559608847593
+      },
+      "img.forensic.copymove": {
+        "largest_positive": 0,
+        "mean_pp": 0.0
+      },
+      "img.forensic.ela": {
+        "largest_positive": 0,
+        "mean_pp": -0.0006028480388699746
+      },
+      "img.forensic.jpeg_dq": {
+        "largest_positive": 0,
+        "mean_pp": 0.0
+      },
+      "img.forensic.noise": {
+        "largest_positive": 24,
+        "mean_pp": 0.00013846782302267597
+      },
+      "img.forensic.spectrum": {
+        "largest_positive": 0,
+        "mean_pp": 0.0
+      },
+      "img.hf.ateeqq": {
+        "largest_positive": 12,
+        "mean_pp": 0.001055123655853388
+      },
+      "img.hf.dima806": {
+        "largest_positive": 4,
+        "mean_pp": 0.004337898052856824
+      }
+    },
+    "n_cal_real": 850,
+    "n_flagged_camera": 44,
+    "n_real": 2697,
+    "per_stratum": {
+      "R1": {
+        "k": 44,
+        "n": 424,
+        "value": 0.10377358490566038,
+        "wilson95": {
+          "hi": 0.1364467598981015,
+          "lo": 0.07821560386963539
+        }
+      },
+      "R2": {
+        "k": 0,
+        "n": 612,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.006237739966832023,
+          "lo": 0.0
+        }
+      },
+      "R3": {
+        "k": 15,
+        "n": 589,
+        "value": 0.025466893039049237,
+        "wilson95": {
+          "hi": 0.04159053964140646,
+          "lo": 0.015492949332450939
+        }
+      },
+      "R4": {
+        "k": 0,
+        "n": 495,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.007700761059256928,
+          "lo": 0.0
+        }
+      },
+      "R5": {
+        "k": 34,
+        "n": 549,
+        "value": 0.061930783242258654,
+        "wilson95": {
+          "hi": 0.08529579910403332,
+          "lo": 0.04465367868417563
+        }
+      },
+      "R6": {
+        "k": 0,
+        "n": 28,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.12064330643947074,
+          "lo": 0.0
+        }
+      }
+    },
+    "tau": 0.8252252293829636,
+    "worst": [
+      {
+        "flagged": true,
+        "item_id": "08c4d92ca878c6ae4bcd8f8f95e78ce5142bb1d5df3096cf1e98d9f4f775b4b6",
+        "s": 0.9745529927935835,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "7a4cc76be1300b2701f6e62af0d92c45ddd55b37f96e6013cf692bdfa32fd71e",
+        "s": 0.9473107747393722,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "186224e7f7c4d0271044f462671f4b6ec1ea4ab48a1aa4ad21a28afb19006600",
+        "s": 0.9459590769472631,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "0b88de624eccca25f63f99f247f98d3a02020000587383ea4ed15befce112b85",
+        "s": 0.9439860799081662,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "c25e0c4d16349b5f03c724f3508c486247c110f2a760c7f5b35cdca0d4916bcb",
+        "s": 0.9425851234959887,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "961513e9a917ba2b1200ffbc665955497828ebd6b71ef6aa12d9ca14611ea4a9",
+        "s": 0.9392401673784273,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "8ee03c2396fd0b45f61789753aa4edea78cd8d4e3d9559e4e0a2476c7bcfb80a",
+        "s": 0.9369490967926216,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "8e5b0c16e003ca20399c8a7f8181ba3b859866f447856ea388978e9c16ec500c",
+        "s": 0.9354250318976173,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "d858fcfc9f79d00c7f233e6ef0e17ade8f7a856892a271b874605ae23075d964",
+        "s": 0.9198442477175707,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "a6d94dec398efc4bcac98849a03b919df8449abb430425859fe5b5cd38ec77aa",
+        "s": 0.916457951836379,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "b5490f0e2db36991891ffa9e7535710f4ac6578695c74bebf7de61c3efff4eca",
+        "s": 0.911792703134188,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "1b2e7c1d197cd3ee46d9d5e145829e1c9e925176eedc75ebde7b1cd53c34f770",
+        "s": 0.8996875487693833,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "ce7c4ed70ece9eefbf9026ee1ccc922ea5541bbd411eb8d9e237529c09c61d18",
+        "s": 0.8939082081030496,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "b99ac38aa2ce8e6549eae1d533d38b3afae6364d2cb0ca1084bfdbea8a7db0a4",
+        "s": 0.8733963976266834,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "45d28a2a0a3e6b49dc5bad001669beaaf85bf82502c8d8297eea950bc25f67c6",
+        "s": 0.8728588668404857,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "848c03a587b40fac2cb494bb7200c2a0e0dd7cab7e41ea25f5e73836c49be95b",
+        "s": 0.8698180319056548,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "855da49a6099054d85c10a0eca1c30d1e55dcb37d107267ab263d587f1276bb1",
+        "s": 0.8644389761020447,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "bc35b6d88df457b1cf4c8efa2166a9f102f0b68f1dbdf2ddc1ce74771ef2f0e9",
+        "s": 0.8591553945895506,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "9adcbf61ce3434c47b0aef6ed649b00f2b1fe3342c3d40dac4371273308e2d54",
+        "s": 0.8528718888760674,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "6183cc5e7571d60d21f5359e73a8a13e4dc7749429cac1d205a5b2519682a2d3",
+        "s": 0.8450116793630583,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "86b9e3b069bbb2b1370846833ed1417707f8069bba17c1c2c300fe0cc806dbf8",
+        "s": 0.8434928599098228,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "8317b2550d60eb089789ca993c75806f8767b97108956f9c8380517909d28d1b",
+        "s": 0.842451127085215,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "dedd7de78c9700b760ab626dda659892c42a10cc2fea879533dbd6b19c82d2a3",
+        "s": 0.8389138828393445,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "dbac5c331a408178cdbf23d2066a555425a16f45041b2d5c48e55d01a8a50c3a",
+        "s": 0.838413617608013,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "e48198377fd0ed5da6372dfe0eadc7d8028982969fc1cc7be4744114c5cc61f1",
+        "s": 0.8359822093482603,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "7a252964d854681c40655689cfb51d81da94b92cb6c36864ec3b639018ae9b99",
+        "s": 0.8357989558582074,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "d28ceab39052cdc335e4ae656ca0e6881998a1894eac4db5b442372029991f2e",
+        "s": 0.8356730697738779,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "0db1f3250b12dcddaa94f5991a18bf27916fa671296fbdfb066051f89e3b3a19",
+        "s": 0.8356144853678049,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "b4c6af167fa93c6de3a543798b3ebc149c47d8c0c350caa4108788ae89577db2",
+        "s": 0.8334454515044943,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "4d8b7574b330afe880ba4adcac1a2e5344209a3ec223e6b81ffc8f5b1f891d29",
+        "s": 0.8324265094368448,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "2102569bb14896ff9cfea515359cdce95738e7a9e3edb561c53ea9c6493fe41a",
+        "s": 0.8317657505364043,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "afd0d39f20ae406ff09f1d69b1eae8c0fd664b43dcc54aea325a4996a04d03a4",
+        "s": 0.8316947571530288,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "9274a1ed1bca1445ca5f15b8086c24c04e5ecf397d8e4e522c282196c460cde7",
+        "s": 0.830807619010534,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "2b2bc10d969129115d3aeb48983962fff245f8fe6adfee16578a6ad0d52ef3da",
+        "s": 0.8296540498575534,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "147d32239a89c9246f5182f3cf71c718a65d12520d09d266a6f2240fc3306f82",
+        "s": 0.8294933835939955,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "7c41626a304c1c70b4887e082676670e4e9c84b3d4a380029114de98a7d00191",
+        "s": 0.8289163998333449,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "422f6bb896f03349e8426a6efed42a252e76d2b7bdff0466133582dbefa7e41a",
+        "s": 0.8279585329676477,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "60b2541d5cc6c8600be747aa2f3200775ac23ecbfce7b12ca92eb0462a26755c",
+        "s": 0.8278640338016973,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "5e7a421b8cbd5c40c8144fc3ab367819f74c5016caf6408d007715e3da390115",
+        "s": 0.8267482346390531,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "04b4a1ad2423aa8c8cf0cf35b1ccfd210aad6889c1a438a9a93014f244033b0e",
+        "s": 0.826738870244385,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "aa4cd70e5ddfe10e70c8eec8434576f8c525b55a8ef864d29cb0da0dc5f25d37",
+        "s": 0.8263889549163232,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "2006847227559e3a21e6162e87548c768e8ead5d21fa9d712ffc95ee1da24947",
+        "s": 0.8261901727483038,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "f46472aea8e0b75aed451f67f8515fdff75aadaa141b1a593c1c4091ac6782de",
+        "s": 0.825542999660693,
+        "stratum": "R1"
+      },
+      {
+        "flagged": true,
+        "item_id": "b6f4344fc5cad1b18d179ea8cbe1cbd7a7195dfbf239ca680c8061eea138343d",
+        "s": 0.8252252293829636,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "1e6696965d2a57fdb3ed009a11d6d6f73072830b723b2c9a146278dfe1e28f9d",
+        "s": 0.8246661662938175,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "b0f11f9ebecd0b73d2835731779d55fb36b4e59a32313dc6df15f62af6056ebd",
+        "s": 0.8246657943826302,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "eeb8f5d97589be664cfeba5f8106e05a6f164440564a81203d45cd9668027ad1",
+        "s": 0.8243968867141043,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "13130c0b26eabed334327c6e8a9fc23c7268ecfd50e492ac770885923d9f4d29",
+        "s": 0.8239485773519579,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "6de403a45fc9c947563d6ec3ec9006ef4e738aacc24fa4a4628163cfba37c915",
+        "s": 0.8237749316280901,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "da07bd50ad0dc854c9c7d170ddd70368cf4b66297fe2f45f596f2562d1d3d428",
+        "s": 0.8224193729019464,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "bbf2a50a25363bf686eec85170c0838c68fae9d06c841c7f2dbe110c8a0cf59d",
+        "s": 0.8189564245081284,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "b2668cea3045886e2488984f34f8ee1680a044c168c294a11cc81eaf1554b56a",
+        "s": 0.8186331012084406,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "dab6de4b563433ccdd50064cff750c567183d8b1c4cf9033f84802485bf34dbb",
+        "s": 0.8184370469550772,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "bed49c3ab257c1ea5d65d2d3d972b94627e27a5b03c6e93d9272547466927909",
+        "s": 0.8182199575734729,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "d293ecb88bfe5811be75da658d8e7a6629c096a25a85fae24a14c208b146ff88",
+        "s": 0.8181581719162324,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "9e22963803a39a199305b92c4c87552ccba09fff5cca8dd487e8444417c983d1",
+        "s": 0.8167712208061023,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "e9f424f6fbf1286dfc9d694a262d008620ad470bbe49f45d17f153971815500e",
+        "s": 0.8147525371874937,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "804497688118f0203ff54d6833d661ce7a68e1c4a6aa1d114307259b39f16542",
+        "s": 0.8143869827073446,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "272a04eb6e80a89ce2ad99b393afa76ab39ad996164180886b8e909d4bd5d044",
+        "s": 0.8138343179542381,
+        "stratum": "R1"
+      },
+      {
+        "flagged": false,
+        "item_id": "f29a177bcd3b4590f02938ff00d05654885140a50f770a3d9583e8f16804e332",
+        "s": 0.8131483183463946,
+        "stratum": "R1"
+      }
+    ]
+  },
+  "fuser": {
+    "id": "fuser-image-2.0.0-alpha",
+    "sha256": "3486cde0d4bf1134fe3616299cf27fc12fe07d4bc4c5a5b96d0999302e6a8f33"
+  },
+  "generated": "2026-09-14T19:52:35+00:00",
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "schema": "veritas.h3-real-fp/1",
+  "sheet": {
+    "path": "backend/data/vbench/audit/h3_camera_fp.png",
+    "sha256": "b5bbcfdd45017f58a0b2380622254d09748dd85f992f225a17d4b1feb96af5b8",
+    "undecodable": []
+  },
+  "standalone": {
+    "face.gend_clip_l14": {
+      "camera": {
+        "k": 23,
+        "n": 201,
+        "value": 0.11442786069651742,
+        "wilson95": {
+          "hi": 0.16584726104361713,
+          "lo": 0.07746998124461876
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 21,
+        "n": 143,
+        "value": 0.14685314685314685,
+        "wilson95": {
+          "hi": 0.2140825360966037,
+          "lo": 0.09810081614285762
+        }
+      },
+      "camera_all_reals": {
+        "k": 23,
+        "n": 1036,
+        "value": 0.0222007722007722,
+        "wilson95": {
+          "hi": 0.033093355547701236,
+          "lo": 0.014838431029569386
+        }
+      },
+      "camera_below_8mp": {
+        "k": 2,
+        "n": 58,
+        "value": 0.034482758620689655,
+        "wilson95": {
+          "hi": 0.11729145558444773,
+          "lo": 0.009507928245542342
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 22,
+          "n": 172
+        },
+        "commons-r2-smartphone": {
+          "k": 0,
+          "n": 16
+        },
+        "synthbuster-plus-test": {
+          "k": 0,
+          "n": 5
+        },
+        "vision-natives": {
+          "k": 1,
+          "n": 8
+        }
+      },
+      "check": {
+        "established": false,
+        "fpr": 0.11442786069651742,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 201,
+        "triggered": false
+      },
+      "n": 889,
+      "per_stratum": {
+        "R1": {
+          "k": 22,
+          "n": 177,
+          "value": 0.12429378531073447,
+          "wilson95": {
+            "hi": 0.18101666535524105,
+            "lo": 0.08353251035506468
+          }
+        },
+        "R2": {
+          "k": 1,
+          "n": 24,
+          "value": 0.041666666666666664,
+          "wilson95": {
+            "hi": 0.20241806658845338,
+            "lo": 0.007393456083597233
+          }
+        },
+        "R3": {
+          "k": 8,
+          "n": 152,
+          "value": 0.05263157894736842,
+          "wilson95": {
+            "hi": 0.10041073937103007,
+            "lo": 0.026907491757755662
+          }
+        },
+        "R4": {
+          "k": 3,
+          "n": 44,
+          "value": 0.06818181818181818,
+          "wilson95": {
+            "hi": 0.18225044489111314,
+            "lo": 0.02345939572462935
+          }
+        },
+        "R5": {
+          "k": 6,
+          "n": 485,
+          "value": 0.012371134020618556,
+          "wilson95": {
+            "hi": 0.02672432806858086,
+            "lo": 0.005681799917267281
+          }
+        },
+        "R6": {
+          "k": 0,
+          "n": 7,
+          "value": 0.0,
+          "wilson95": {
+            "hi": 0.35433043867586833,
+            "lo": 0.0
+          }
+        }
+      },
+      "tau": 0.9321199290466481,
+      "tau_is_max": false
+    },
+    "img.commfor384": {
+      "camera": {
+        "k": 54,
+        "n": 1035,
+        "value": 0.05217391304347826,
+        "wilson95": {
+          "hi": 0.06745364930914269,
+          "lo": 0.04020614605726041
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 50,
+        "n": 585,
+        "value": 0.08547008547008547,
+        "wilson95": {
+          "hi": 0.11091734134622801,
+          "lo": 0.0654314148683532
+        }
+      },
+      "camera_all_reals": {
+        "k": 54,
+        "n": 1036,
+        "value": 0.052123552123552123,
+        "wilson95": {
+          "hi": 0.06738913506564256,
+          "lo": 0.04016712548355656
+        }
+      },
+      "camera_below_8mp": {
+        "k": 4,
+        "n": 450,
+        "value": 0.008888888888888889,
+        "wilson95": {
+          "hi": 0.022629629612869847,
+          "lo": 0.0034619903781393443
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 23,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 20,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 0,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 11,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.05217391304347826,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2202,
+      "per_stratum": {
+        "R1": {
+          "k": 23,
+          "n": 424,
+          "value": 0.054245283018867926,
+          "wilson95": {
+            "hi": 0.08007989680109646,
+            "lo": 0.03641526243760752
+          }
+        },
+        "R2": {
+          "k": 31,
+          "n": 611,
+          "value": 0.05073649754500818,
+          "wilson95": {
+            "hi": 0.07111590882659792,
+            "lo": 0.03597097988304525
+          }
+        },
+        "R3": {
+          "k": 27,
+          "n": 580,
+          "value": 0.04655172413793104,
+          "wilson95": {
+            "hi": 0.06688274861944724,
+            "lo": 0.032187740468680476
+          }
+        },
+        "R4": {
+          "k": 11,
+          "n": 298,
+          "value": 0.03691275167785235,
+          "wilson95": {
+            "hi": 0.06487833397424102,
+            "lo": 0.02073435480970291
+          }
+        },
+        "R5": {
+          "k": 0,
+          "n": 262,
+          "value": 0.0,
+          "wilson95": {
+            "hi": 0.014450187331432359,
+            "lo": 0.0
+          }
+        },
+        "R6": {
+          "k": 3,
+          "n": 27,
+          "value": 0.1111111111111111,
+          "wilson95": {
+            "hi": 0.2805780098213858,
+            "lo": 0.03852034798244741
+          }
+        }
+      },
+      "tau": 0.4717461304556911,
+      "tau_is_max": false
+    },
+    "img.dda": {
+      "camera": {
+        "k": 50,
+        "n": 1035,
+        "value": 0.04830917874396135,
+        "wilson95": {
+          "hi": 0.06312475906249004,
+          "lo": 0.036834149964033044
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 46,
+        "n": 585,
+        "value": 0.07863247863247863,
+        "wilson95": {
+          "hi": 0.10329481793421805,
+          "lo": 0.059467938382871705
+        }
+      },
+      "camera_all_reals": {
+        "k": 50,
+        "n": 1036,
+        "value": 0.04826254826254826,
+        "wilson95": {
+          "hi": 0.0630643682897703,
+          "lo": 0.03679841174692193
+        }
+      },
+      "camera_below_8mp": {
+        "k": 4,
+        "n": 450,
+        "value": 0.008888888888888889,
+        "wilson95": {
+          "hi": 0.022629629612869847,
+          "lo": 0.0034619903781393443
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 3,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 43,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 3,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 1,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.04830917874396135,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2320,
+      "per_stratum": {
+        "R1": {
+          "k": 6,
+          "n": 424,
+          "value": 0.014150943396226415,
+          "wilson95": {
+            "hi": 0.03052525580162561,
+            "lo": 0.0065012140564327005
+          }
+        },
+        "R2": {
+          "k": 44,
+          "n": 611,
+          "value": 0.07201309328968904,
+          "wilson95": {
+            "hi": 0.0952948493590311,
+            "lo": 0.05407936338257796
+          }
+        },
+        "R3": {
+          "k": 23,
+          "n": 584,
+          "value": 0.039383561643835614,
+          "wilson95": {
+            "hi": 0.0584026947309681,
+            "lo": 0.02638455211641798
+          }
+        },
+        "R4": {
+          "k": 19,
+          "n": 401,
+          "value": 0.04738154613466334,
+          "wilson95": {
+            "hi": 0.07281250093999458,
+            "lo": 0.030540201614030076
+          }
+        },
+        "R5": {
+          "k": 4,
+          "n": 273,
+          "value": 0.014652014652014652,
+          "wilson95": {
+            "hi": 0.037061184281369765,
+            "lo": 0.00571224614753639
+          }
+        },
+        "R6": {
+          "k": 3,
+          "n": 27,
+          "value": 0.1111111111111111,
+          "wilson95": {
+            "hi": 0.2805780098213858,
+            "lo": 0.03852034798244741
+          }
+        }
+      },
+      "tau": 0.5554094887065884,
+      "tau_is_max": false
+    },
+    "img.dfdc_b7": {
+      "camera": {
+        "k": 17,
+        "n": 201,
+        "value": 0.0845771144278607,
+        "wilson95": {
+          "hi": 0.13126044083928343,
+          "lo": 0.053474910529332016
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 13,
+        "n": 143,
+        "value": 0.09090909090909091,
+        "wilson95": {
+          "hi": 0.14932452411548544,
+          "lo": 0.05389777501339545
+        }
+      },
+      "camera_all_reals": {
+        "k": 17,
+        "n": 1036,
+        "value": 0.016409266409266408,
+        "wilson95": {
+          "hi": 0.02612151481949833,
+          "lo": 0.010270050989011932
+        }
+      },
+      "camera_below_8mp": {
+        "k": 4,
+        "n": 58,
+        "value": 0.06896551724137931,
+        "wilson95": {
+          "hi": 0.16433666412474257,
+          "lo": 0.027144246828951904
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 14,
+          "n": 172
+        },
+        "commons-r2-smartphone": {
+          "k": 2,
+          "n": 16
+        },
+        "synthbuster-plus-test": {
+          "k": 0,
+          "n": 5
+        },
+        "vision-natives": {
+          "k": 1,
+          "n": 8
+        }
+      },
+      "check": {
+        "established": false,
+        "fpr": 0.0845771144278607,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 201,
+        "triggered": false
+      },
+      "n": 889,
+      "per_stratum": {
+        "R1": {
+          "k": 14,
+          "n": 177,
+          "value": 0.07909604519774012,
+          "wilson95": {
+            "hi": 0.12837568390149867,
+            "lo": 0.047698204676212254
+          }
+        },
+        "R2": {
+          "k": 3,
+          "n": 24,
+          "value": 0.125,
+          "wilson95": {
+            "hi": 0.3100388144515548,
+            "lo": 0.04344334046194118
+          }
+        },
+        "R3": {
+          "k": 12,
+          "n": 152,
+          "value": 0.07894736842105263,
+          "wilson95": {
+            "hi": 0.13291661704895807,
+            "lo": 0.04573583577813437
+          }
+        },
+        "R4": {
+          "k": 0,
+          "n": 44,
+          "value": 0.0,
+          "wilson95": {
+            "hi": 0.08029560492349135,
+            "lo": 0.0
+          }
+        },
+        "R5": {
+          "k": 4,
+          "n": 485,
+          "value": 0.008247422680412371,
+          "wilson95": {
+            "hi": 0.02101171423661091,
+            "lo": 0.003211801723747576
+          }
+        },
+        "R6": {
+          "k": 0,
+          "n": 7,
+          "value": 0.0,
+          "wilson95": {
+            "hi": 0.35433043867586833,
+            "lo": 0.0
+          }
+        }
+      },
+      "tau": 0.75262,
+      "tau_is_max": false
+    },
+    "img.faces.yunet": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "img.forensic.copymove": {
+      "camera": {
+        "k": 13,
+        "n": 13,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 1.0,
+          "lo": 0.7719046248681998
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 12,
+        "n": 12,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 1.0,
+          "lo": 0.7575059904469021
+        }
+      },
+      "camera_all_reals": {
+        "k": 13,
+        "n": 1036,
+        "value": 0.012548262548262547,
+        "wilson95": {
+          "hi": 0.021350315972922227,
+          "lo": 0.0073477693230811275
+        }
+      },
+      "camera_below_8mp": {
+        "k": 1,
+        "n": 1,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 1.0,
+          "lo": 0.2065493117918027
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 12,
+          "n": 12
+        },
+        "vision-natives": {
+          "k": 1,
+          "n": 1
+        }
+      },
+      "check": {
+        "established": false,
+        "fpr": 1.0,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 13,
+        "triggered": false
+      },
+      "n": 24,
+      "per_stratum": {
+        "R1": {
+          "k": 12,
+          "n": 12,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.7575059904469021
+          }
+        },
+        "R2": {
+          "k": 1,
+          "n": 1,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.2065493117918027
+          }
+        },
+        "R3": {
+          "k": 5,
+          "n": 5,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.5655175313406071
+          }
+        },
+        "R4": {
+          "k": 5,
+          "n": 5,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.5655175313406071
+          }
+        },
+        "R5": {
+          "k": 1,
+          "n": 1,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.2065493117918027
+          }
+        }
+      },
+      "tau": 0.75,
+      "tau_is_max": true
+    },
+    "img.forensic.ela": {
+      "camera": {
+        "k": 6,
+        "n": 1035,
+        "value": 0.005797101449275362,
+        "wilson95": {
+          "hi": 0.012589667782644073,
+          "lo": 0.0026594915051988436
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 4,
+        "n": 585,
+        "value": 0.006837606837606838,
+        "wilson95": {
+          "hi": 0.017447626677556706,
+          "lo": 0.002662130715872872
+        }
+      },
+      "camera_all_reals": {
+        "k": 6,
+        "n": 1036,
+        "value": 0.005791505791505791,
+        "wilson95": {
+          "hi": 0.012577572510504061,
+          "lo": 0.0026569218886122138
+        }
+      },
+      "camera_below_8mp": {
+        "k": 2,
+        "n": 450,
+        "value": 0.0044444444444444444,
+        "wilson95": {
+          "hi": 0.016058295190076406,
+          "lo": 0.0012196743031138635
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 4,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 0,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 2,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 0,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.005797101449275362,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 6,
+          "n": 424,
+          "value": 0.014150943396226415,
+          "wilson95": {
+            "hi": 0.03052525580162561,
+            "lo": 0.0065012140564327005
+          }
+        },
+        "R2": {
+          "k": 0,
+          "n": 611,
+          "value": 0.0,
+          "wilson95": {
+            "hi": 0.006247885248801429,
+            "lo": 4.336808689942018e-19
+          }
+        },
+        "R3": {
+          "k": 76,
+          "n": 587,
+          "value": 0.12947189097103917,
+          "wilson95": {
+            "hi": 0.1590581452138381,
+            "lo": 0.10470374308758112
+          }
+        },
+        "R4": {
+          "k": 15,
+          "n": 495,
+          "value": 0.030303030303030304,
+          "wilson95": {
+            "hi": 0.04939157192516191,
+            "lo": 0.018448536948685514
+          }
+        },
+        "R5": {
+          "k": 9,
+          "n": 549,
+          "value": 0.01639344262295082,
+          "wilson95": {
+            "hi": 0.03085948073803784,
+            "lo": 0.008648154824413194
+          }
+        },
+        "R6": {
+          "k": 3,
+          "n": 28,
+          "value": 0.10714285714285714,
+          "wilson95": {
+            "hi": 0.2719585170913687,
+            "lo": 0.037118366539643996
+          }
+        }
+      },
+      "tau": 0.68425,
+      "tau_is_max": false
+    },
+    "img.forensic.jpeg_dq": {
+      "camera": {
+        "k": 12,
+        "n": 12,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 1.0,
+          "lo": 0.7575059904469021
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 8,
+        "n": 8,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 1.0,
+          "lo": 0.6755924316585924
+        }
+      },
+      "camera_all_reals": {
+        "k": 12,
+        "n": 1036,
+        "value": 0.011583011583011582,
+        "wilson95": {
+          "hi": 0.02013649325046397,
+          "lo": 0.00663822191741266
+        }
+      },
+      "camera_below_8mp": {
+        "k": 4,
+        "n": 4,
+        "value": 1.0,
+        "wilson95": {
+          "hi": 0.9999999999999999,
+          "lo": 0.5101091596030786
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 8,
+          "n": 8
+        },
+        "commons-r2-smartphone": {
+          "k": 4,
+          "n": 4
+        }
+      },
+      "check": {
+        "established": false,
+        "fpr": 1.0,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 12,
+        "triggered": false
+      },
+      "n": 61,
+      "per_stratum": {
+        "R1": {
+          "k": 8,
+          "n": 8,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.6755924316585924
+          }
+        },
+        "R2": {
+          "k": 4,
+          "n": 4,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 0.9999999999999999,
+            "lo": 0.5101091596030786
+          }
+        },
+        "R3": {
+          "k": 15,
+          "n": 15,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.7961166964035129
+          }
+        },
+        "R4": {
+          "k": 4,
+          "n": 4,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 0.9999999999999999,
+            "lo": 0.5101091596030786
+          }
+        },
+        "R5": {
+          "k": 30,
+          "n": 30,
+          "value": 1.0,
+          "wilson95": {
+            "hi": 1.0,
+            "lo": 0.886486605238548
+          }
+        }
+      },
+      "tau": 0.75,
+      "tau_is_max": true
+    },
+    "img.forensic.noise": {
+      "camera": {
+        "k": 18,
+        "n": 1035,
+        "value": 0.017391304347826087,
+        "wilson95": {
+          "hi": 0.027323084196760335,
+          "lo": 0.01102873411072263
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 11,
+        "n": 585,
+        "value": 0.018803418803418803,
+        "wilson95": {
+          "hi": 0.03335389440113598,
+          "lo": 0.01053136281290362
+        }
+      },
+      "camera_all_reals": {
+        "k": 18,
+        "n": 1036,
+        "value": 0.017374517374517374,
+        "wilson95": {
+          "hi": 0.02729687394039407,
+          "lo": 0.01101806199624292
+        }
+      },
+      "camera_below_8mp": {
+        "k": 7,
+        "n": 450,
+        "value": 0.015555555555555555,
+        "wilson95": {
+          "hi": 0.03175700094631831,
+          "lo": 0.0075550947914192635
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 6,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 7,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 5,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 0,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.017391304347826087,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 11,
+          "n": 424,
+          "value": 0.025943396226415096,
+          "wilson95": {
+            "hi": 0.04585265740424887,
+            "lo": 0.014546956389293465
+          }
+        },
+        "R2": {
+          "k": 7,
+          "n": 611,
+          "value": 0.011456628477905073,
+          "wilson95": {
+            "hi": 0.02345754198094604,
+            "lo": 0.005560440823529328
+          }
+        },
+        "R3": {
+          "k": 72,
+          "n": 587,
+          "value": 0.12265758091993186,
+          "wilson95": {
+            "hi": 0.15167560884677078,
+            "lo": 0.09854626820501942
+          }
+        },
+        "R4": {
+          "k": 12,
+          "n": 495,
+          "value": 0.024242424242424242,
+          "wilson95": {
+            "hi": 0.041891186007524145,
+            "lo": 0.01392105330340518
+          }
+        },
+        "R5": {
+          "k": 4,
+          "n": 549,
+          "value": 0.007285974499089253,
+          "wilson95": {
+            "hi": 0.018582351924751384,
+            "lo": 0.00283691519254807
+          }
+        },
+        "R6": {
+          "k": 3,
+          "n": 28,
+          "value": 0.10714285714285714,
+          "wilson95": {
+            "hi": 0.2719585170913687,
+            "lo": 0.037118366539643996
+          }
+        }
+      },
+      "tau": 0.671295,
+      "tau_is_max": false
+    },
+    "img.forensic.spectrum": {
+      "camera": {
+        "k": 79,
+        "n": 1035,
+        "value": 0.07632850241545894,
+        "wilson95": {
+          "hi": 0.09411739124477783,
+          "lo": 0.06167294374587537
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 60,
+        "n": 585,
+        "value": 0.10256410256410256,
+        "wilson95": {
+          "hi": 0.12979830314910756,
+          "lo": 0.08051545280920223
+        }
+      },
+      "camera_all_reals": {
+        "k": 79,
+        "n": 1036,
+        "value": 0.07625482625482626,
+        "wilson95": {
+          "hi": 0.0940275179028397,
+          "lo": 0.06161299584952762
+        }
+      },
+      "camera_below_8mp": {
+        "k": 19,
+        "n": 450,
+        "value": 0.042222222222222223,
+        "wilson95": {
+          "hi": 0.06499955945739389,
+          "lo": 0.02719443926725722
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 31,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 26,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 3,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 19,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.07632850241545894,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 34,
+          "n": 424,
+          "value": 0.08018867924528301,
+          "wilson95": {
+            "hi": 0.10996693822030544,
+            "lo": 0.05794913767646341
+          }
+        },
+        "R2": {
+          "k": 45,
+          "n": 611,
+          "value": 0.07364975450081833,
+          "wilson95": {
+            "hi": 0.09713085824788173,
+            "lo": 0.05549622557310932
+          }
+        },
+        "R3": {
+          "k": 41,
+          "n": 587,
+          "value": 0.06984667802385008,
+          "wilson95": {
+            "hi": 0.09338521731594954,
+            "lo": 0.05190157255121534
+          }
+        },
+        "R4": {
+          "k": 12,
+          "n": 495,
+          "value": 0.024242424242424242,
+          "wilson95": {
+            "hi": 0.041891186007524145,
+            "lo": 0.01392105330340518
+          }
+        },
+        "R5": {
+          "k": 13,
+          "n": 549,
+          "value": 0.023679417122040074,
+          "wilson95": {
+            "hi": 0.04008864637360782,
+            "lo": 0.013889683944964488
+          }
+        },
+        "R6": {
+          "k": 1,
+          "n": 28,
+          "value": 0.03571428571428571,
+          "wilson95": {
+            "hi": 0.17712197905773489,
+            "lo": 0.0063325197789164955
+          }
+        }
+      },
+      "tau": 0.499456,
+      "tau_is_max": false
+    },
+    "img.hf.ateeqq": {
+      "camera": {
+        "k": 48,
+        "n": 1035,
+        "value": 0.0463768115942029,
+        "wilson95": {
+          "hi": 0.06095206115511259,
+          "lo": 0.035156404701470495
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 29,
+        "n": 585,
+        "value": 0.04957264957264957,
+        "wilson95": {
+          "hi": 0.07028759624305977,
+          "lo": 0.03473466050969133
+        }
+      },
+      "camera_all_reals": {
+        "k": 48,
+        "n": 1036,
+        "value": 0.04633204633204633,
+        "wilson95": {
+          "hi": 0.060893740685685475,
+          "lo": 0.03512229909475329
+        }
+      },
+      "camera_below_8mp": {
+        "k": 19,
+        "n": 450,
+        "value": 0.042222222222222223,
+        "wilson95": {
+          "hi": 0.06499955945739389,
+          "lo": 0.02719443926725722
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 44,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 1,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 1,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 2,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.0463768115942029,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 45,
+          "n": 424,
+          "value": 0.10613207547169812,
+          "wilson95": {
+            "hi": 0.13906743899611598,
+            "lo": 0.08026955355871775
+          }
+        },
+        "R2": {
+          "k": 3,
+          "n": 611,
+          "value": 0.004909983633387889,
+          "wilson95": {
+            "hi": 0.014335285472936768,
+            "lo": 0.0016712130140106394
+          }
+        },
+        "R3": {
+          "k": 47,
+          "n": 587,
+          "value": 0.08006814310051108,
+          "wilson95": {
+            "hi": 0.1048517408877688,
+            "lo": 0.0607450658538397
+          }
+        },
+        "R4": {
+          "k": 12,
+          "n": 495,
+          "value": 0.024242424242424242,
+          "wilson95": {
+            "hi": 0.041891186007524145,
+            "lo": 0.01392105330340518
+          }
+        },
+        "R5": {
+          "k": 25,
+          "n": 549,
+          "value": 0.04553734061930783,
+          "wilson95": {
+            "hi": 0.06635824003186849,
+            "lo": 0.031032174555067613
+          }
+        },
+        "R6": {
+          "k": 1,
+          "n": 28,
+          "value": 0.03571428571428571,
+          "wilson95": {
+            "hi": 0.17712197905773489,
+            "lo": 0.0063325197789164955
+          }
+        }
+      },
+      "tau": 0.999746,
+      "tau_is_max": false
+    },
+    "img.hf.dima806": {
+      "camera": {
+        "k": 21,
+        "n": 1035,
+        "value": 0.020289855072463767,
+        "wilson95": {
+          "hi": 0.030818899295082348,
+          "lo": 0.013308583767310627
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 13,
+        "n": 585,
+        "value": 0.022222222222222223,
+        "wilson95": {
+          "hi": 0.03764627631799244,
+          "lo": 0.013031980844792896
+        }
+      },
+      "camera_all_reals": {
+        "k": 21,
+        "n": 1036,
+        "value": 0.02027027027027027,
+        "wilson95": {
+          "hi": 0.030789344746043515,
+          "lo": 0.013295701574973654
+        }
+      },
+      "camera_below_8mp": {
+        "k": 8,
+        "n": 450,
+        "value": 0.017777777777777778,
+        "wilson95": {
+          "hi": 0.034683725506832914,
+          "lo": 0.009035195479814124
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 19,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 1,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 1,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 0,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.020289855072463767,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 20,
+          "n": 424,
+          "value": 0.04716981132075472,
+          "wilson95": {
+            "hi": 0.07173141313684855,
+            "lo": 0.030739859740565013
+          }
+        },
+        "R2": {
+          "k": 1,
+          "n": 611,
+          "value": 0.0016366612111292963,
+          "wilson95": {
+            "hi": 0.009211786993336676,
+            "lo": 0.00028896933484674585
+          }
+        },
+        "R3": {
+          "k": 27,
+          "n": 587,
+          "value": 0.04599659284497445,
+          "wilson95": {
+            "hi": 0.06609516478256225,
+            "lo": 0.0318015857109009
+          }
+        },
+        "R4": {
+          "k": 8,
+          "n": 495,
+          "value": 0.01616161616161616,
+          "wilson95": {
+            "hi": 0.031563490885163074,
+            "lo": 0.008211589008542117
+          }
+        },
+        "R5": {
+          "k": 83,
+          "n": 549,
+          "value": 0.151183970856102,
+          "wilson95": {
+            "hi": 0.1835671626314626,
+            "lo": 0.12364832591923187
+          }
+        },
+        "R6": {
+          "k": 1,
+          "n": 28,
+          "value": 0.03571428571428571,
+          "wilson95": {
+            "hi": 0.17712197905773489,
+            "lo": 0.0063325197789164955
+          }
+        }
+      },
+      "tau": 0.993524,
+      "tau_is_max": false
+    },
+    "img.hf.haywoodsloan": {
+      "camera": {
+        "k": 33,
+        "n": 1035,
+        "value": 0.03188405797101449,
+        "wilson95": {
+          "hi": 0.0444381499387128,
+          "lo": 0.022791992143320214
+        }
+      },
+      "camera_8mp_or_more": {
+        "k": 27,
+        "n": 585,
+        "value": 0.046153846153846156,
+        "wilson95": {
+          "hi": 0.06631828992517035,
+          "lo": 0.031910966878835045
+        }
+      },
+      "camera_all_reals": {
+        "k": 33,
+        "n": 1036,
+        "value": 0.03185328185328185,
+        "wilson95": {
+          "hi": 0.04439558128255845,
+          "lo": 0.02276990657597942
+        }
+      },
+      "camera_below_8mp": {
+        "k": 6,
+        "n": 450,
+        "value": 0.013333333333333334,
+        "wilson95": {
+          "hi": 0.028780541803800276,
+          "lo": 0.006124728685027836
+        }
+      },
+      "camera_by_source": {
+        "commons-r1-camera": {
+          "k": 18,
+          "n": 310
+        },
+        "commons-r2-smartphone": {
+          "k": 3,
+          "n": 272
+        },
+        "synthbuster-plus-test": {
+          "k": 0,
+          "n": 114
+        },
+        "vision-natives": {
+          "k": 12,
+          "n": 339
+        }
+      },
+      "check": {
+        "established": true,
+        "fpr": 0.03188405797101449,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "n": 2694,
+      "per_stratum": {
+        "R1": {
+          "k": 18,
+          "n": 424,
+          "value": 0.04245283018867924,
+          "wilson95": {
+            "hi": 0.06610241074068454,
+            "lo": 0.027019604562535413
+          }
+        },
+        "R2": {
+          "k": 15,
+          "n": 611,
+          "value": 0.024549918166939442,
+          "wilson95": {
+            "hi": 0.04010791758830954,
+            "lo": 0.014933033851221756
+          }
+        },
+        "R3": {
+          "k": 19,
+          "n": 587,
+          "value": 0.03236797274275979,
+          "wilson95": {
+            "hi": 0.04999871329630537,
+            "lo": 0.020818014697899637
+          }
+        },
+        "R4": {
+          "k": 8,
+          "n": 495,
+          "value": 0.01616161616161616,
+          "wilson95": {
+            "hi": 0.031563490885163074,
+            "lo": 0.008211589008542117
+          }
+        },
+        "R5": {
+          "k": 45,
+          "n": 549,
+          "value": 0.08196721311475409,
+          "wilson95": {
+            "hi": 0.10792205760961963,
+            "lo": 0.06182183075792279
+          }
+        },
+        "R6": {
+          "k": 3,
+          "n": 28,
+          "value": 0.10714285714285714,
+          "wilson95": {
+            "hi": 0.2719585170913687,
+            "lo": 0.037118366539643996
+          }
+        }
+      },
+      "tau": 0.979042,
+      "tau_is_max": false
+    },
+    "img.meta.consistency": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "img.meta.exif": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "img.meta.generator": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "img.meta.qtables": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "img.watermark.dwtdct": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "loc.mesorch": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    },
+    "prov.c2pa": {
+      "camera": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_8mp_or_more": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_all_reals": {
+        "k": 0,
+        "n": 1036,
+        "value": 0.0,
+        "wilson95": {
+          "hi": 0.0036942736303559186,
+          "lo": 0.0
+        }
+      },
+      "camera_below_8mp": {
+        "k": 0,
+        "n": 0,
+        "value": null,
+        "wilson95": null
+      },
+      "camera_by_source": {},
+      "check": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "n": 0,
+      "per_stratum": {},
+      "tau": null,
+      "tau_is_max": false
+    }
+  },
+  "worst": [
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "08c4d92ca878c6ae4bcd8f8f95e78ce5142bb1d5df3096cf1e98d9f4f775b4b6",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9745529927935835,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "7a4cc76be1300b2701f6e62af0d92c45ddd55b37f96e6013cf692bdfa32fd71e",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9473107747393722,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "186224e7f7c4d0271044f462671f4b6ec1ea4ab48a1aa4ad21a28afb19006600",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9459590769472631,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": true,
+      "item_id": "0b88de624eccca25f63f99f247f98d3a02020000587383ea4ed15befce112b85",
+      "jpeg_q_est": 94,
+      "megapixels": 1.2766,
+      "s": 0.9439860799081662,
+      "source_id": "commons-r1-camera",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "c25e0c4d16349b5f03c724f3508c486247c110f2a760c7f5b35cdca0d4916bcb",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9425851234959887,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "961513e9a917ba2b1200ffbc665955497828ebd6b71ef6aa12d9ca14611ea4a9",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9392401673784273,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "8ee03c2396fd0b45f61789753aa4edea78cd8d4e3d9559e4e0a2476c7bcfb80a",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9369490967926216,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "8e5b0c16e003ca20399c8a7f8181ba3b859866f447856ea388978e9c16ec500c",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.9354250318976173,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "d858fcfc9f79d00c7f233e6ef0e17ade8f7a856892a271b874605ae23075d964",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.9198442477175707,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "a6d94dec398efc4bcac98849a03b919df8449abb430425859fe5b5cd38ec77aa",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.916457951836379,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "b5490f0e2db36991891ffa9e7535710f4ac6578695c74bebf7de61c3efff4eca",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.911792703134188,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "1b2e7c1d197cd3ee46d9d5e145829e1c9e925176eedc75ebde7b1cd53c34f770",
+      "jpeg_q_est": null,
+      "megapixels": 0.697344,
+      "s": 0.8996875487693833,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": true,
+      "item_id": "ce7c4ed70ece9eefbf9026ee1ccc922ea5541bbd411eb8d9e237529c09c61d18",
+      "jpeg_q_est": 94,
+      "megapixels": 1.2025,
+      "s": 0.8939082081030496,
+      "source_id": "commons-r1-camera",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "b99ac38aa2ce8e6549eae1d533d38b3afae6364d2cb0ca1084bfdbea8a7db0a4",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8733963976266834,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "45d28a2a0a3e6b49dc5bad001669beaaf85bf82502c8d8297eea950bc25f67c6",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8728588668404857,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "848c03a587b40fac2cb494bb7200c2a0e0dd7cab7e41ea25f5e73836c49be95b",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8698180319056548,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "855da49a6099054d85c10a0eca1c30d1e55dcb37d107267ab263d587f1276bb1",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8644389761020447,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "bc35b6d88df457b1cf4c8efa2166a9f102f0b68f1dbdf2ddc1ce74771ef2f0e9",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8591553945895506,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "9adcbf61ce3434c47b0aef6ed649b00f2b1fe3342c3d40dac4371273308e2d54",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8528718888760674,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "6183cc5e7571d60d21f5359e73a8a13e4dc7749429cac1d205a5b2519682a2d3",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8450116793630583,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "86b9e3b069bbb2b1370846833ed1417707f8069bba17c1c2c300fe0cc806dbf8",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8434928599098228,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "8317b2550d60eb089789ca993c75806f8767b97108956f9c8380517909d28d1b",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.842451127085215,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "dedd7de78c9700b760ab626dda659892c42a10cc2fea879533dbd6b19c82d2a3",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8389138828393445,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "dbac5c331a408178cdbf23d2066a555425a16f45041b2d5c48e55d01a8a50c3a",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.838413617608013,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "e48198377fd0ed5da6372dfe0eadc7d8028982969fc1cc7be4744114c5cc61f1",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8359822093482603,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "7a252964d854681c40655689cfb51d81da94b92cb6c36864ec3b639018ae9b99",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8357989558582074,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "d28ceab39052cdc335e4ae656ca0e6881998a1894eac4db5b442372029991f2e",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8356730697738779,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "0db1f3250b12dcddaa94f5991a18bf27916fa671296fbdfb066051f89e3b3a19",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8356144853678049,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "b4c6af167fa93c6de3a543798b3ebc149c47d8c0c350caa4108788ae89577db2",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8334454515044943,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "4d8b7574b330afe880ba4adcac1a2e5344209a3ec223e6b81ffc8f5b1f891d29",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8324265094368448,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "2102569bb14896ff9cfea515359cdce95738e7a9e3edb561c53ea9c6493fe41a",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8317657505364043,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "afd0d39f20ae406ff09f1d69b1eae8c0fd664b43dcc54aea325a4996a04d03a4",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8316947571530288,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "9274a1ed1bca1445ca5f15b8086c24c04e5ecf397d8e4e522c282196c460cde7",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.830807619010534,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "2b2bc10d969129115d3aeb48983962fff245f8fe6adfee16578a6ad0d52ef3da",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8296540498575534,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "147d32239a89c9246f5182f3cf71c718a65d12520d09d266a6f2240fc3306f82",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8294933835939955,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "7c41626a304c1c70b4887e082676670e4e9c84b3d4a380029114de98a7d00191",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8289163998333449,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "422f6bb896f03349e8426a6efed42a252e76d2b7bdff0466133582dbefa7e41a",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8279585329676477,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "60b2541d5cc6c8600be747aa2f3200775ac23ecbfce7b12ca92eb0462a26755c",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8278640338016973,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "5e7a421b8cbd5c40c8144fc3ab367819f74c5016caf6408d007715e3da390115",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8267482346390531,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "04b4a1ad2423aa8c8cf0cf35b1ccfd210aad6889c1a438a9a93014f244033b0e",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.826738870244385,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "aa4cd70e5ddfe10e70c8eec8434576f8c525b55a8ef864d29cb0da0dc5f25d37",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8263889549163232,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "2006847227559e3a21e6162e87548c768e8ead5d21fa9d712ffc95ee1da24947",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8261901727483038,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "f46472aea8e0b75aed451f67f8515fdff75aadaa141b1a593c1c4091ac6782de",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.825542999660693,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": true,
+      "has_exif": false,
+      "item_id": "b6f4344fc5cad1b18d179ea8cbe1cbd7a7195dfbf239ca680c8061eea138343d",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8252252293829636,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "1e6696965d2a57fdb3ed009a11d6d6f73072830b723b2c9a146278dfe1e28f9d",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8246661662938175,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "b0f11f9ebecd0b73d2835731779d55fb36b4e59a32313dc6df15f62af6056ebd",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8246657943826302,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "eeb8f5d97589be664cfeba5f8106e05a6f164440564a81203d45cd9668027ad1",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8243968867141043,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "13130c0b26eabed334327c6e8a9fc23c7268ecfd50e492ac770885923d9f4d29",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8239485773519579,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "6de403a45fc9c947563d6ec3ec9006ef4e738aacc24fa4a4628163cfba37c915",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8237749316280901,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "da07bd50ad0dc854c9c7d170ddd70368cf4b66297fe2f45f596f2562d1d3d428",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8224193729019464,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "bbf2a50a25363bf686eec85170c0838c68fae9d06c841c7f2dbe110c8a0cf59d",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8189564245081284,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "b2668cea3045886e2488984f34f8ee1680a044c168c294a11cc81eaf1554b56a",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8186331012084406,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "dab6de4b563433ccdd50064cff750c567183d8b1c4cf9033f84802485bf34dbb",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8184370469550772,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "bed49c3ab257c1ea5d65d2d3d972b94627e27a5b03c6e93d9272547466927909",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8182199575734729,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "d293ecb88bfe5811be75da658d8e7a6629c096a25a85fae24a14c208b146ff88",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8181581719162324,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "9e22963803a39a199305b92c4c87552ccba09fff5cca8dd487e8444417c983d1",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8167712208061023,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "e9f424f6fbf1286dfc9d694a262d008620ad470bbe49f45d17f153971815500e",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8147525371874937,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "804497688118f0203ff54d6833d661ce7a68e1c4a6aa1d114307259b39f16542",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8143869827073446,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "272a04eb6e80a89ce2ad99b393afa76ab39ad996164180886b8e909d4bd5d044",
+      "jpeg_q_est": null,
+      "megapixels": 0.69632,
+      "s": 0.8138343179542381,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    },
+    {
+      "flagged": false,
+      "has_exif": false,
+      "item_id": "f29a177bcd3b4590f02938ff00d05654885140a50f770a3d9583e8f16804e332",
+      "jpeg_q_est": null,
+      "megapixels": 0.694272,
+      "s": 0.8131483183463946,
+      "source_id": "synthbuster-plus-test",
+      "stratum": "R1"
+    }
+  ]
+}

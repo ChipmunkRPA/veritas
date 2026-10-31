@@ -1,0 +1,182 @@
+# Veritas field test v2.1 source spec (BUILD_SPEC H-9, D-42). Read by `backend/scripts/field_test.py collect-v21`, which runs
+# `vbench_fetch.py` with this spec into backend/data/field/v21 and `--exclude-manifest` for the vb-1.0 and vb-1.1 manifests:
+# a candidate whose group key (prompt, prompt id, photographer, archive member) is already in the benchmark is skipped, and
+# bytes already in the benchmark are rejected as duplicates. Datasets, revisions, column layouts, group-key rules and licences
+# are the probed vb-1.1 ones (sources.yaml), so the group keys are comparable; only the seed, the quotas and the Commons
+# categories differ.
+#
+# Target (H-9): 2025–26 generator stills and clips plus fresh camera originals and real videos; 40 AI stills, 40 camera
+# originals, 16 AI clips, 16 real clips. Non-commercial datasets are evaluation only (D-05).
+
+schema_version: 1
+bench: field-v2.1
+seed: 11
+
+limits:
+  max_total_bytes: 4GB
+  max_object_bytes: 1GB
+  default_max_bytes: 512MB
+  min_free_disk_bytes: 100GB
+
+exclusions: []
+
+sources:
+  # ---- AI stills (40) --------------------------------------------------------------------------------------------------
+  - id: field-openfake-2025
+    dataset: ComplexDataLab/OpenFake
+    mode: parquet_stream
+    revision: 3fd1109dc3258874243fa31c5bda9ee24260163b
+    licence: cc-by-nc-4.0
+    commercial_ok: false
+    modality: image
+    files: {pattern: "core/test-*.parquet", sample: 4}
+    parquet:
+      columns: {label: label, generator: model, prompt: prompt, type: type}
+      media: [{column: image}]
+    max_items: 24
+    max_bytes: 2GB
+    avg_item_bytes: 690KB
+    group_key: {field: prompt}
+    quotas:
+      - {match: {label: fake, generator: midjourney-7}, n: 8, label: fake, threat: t2i, family: midjourney}
+      - {match: {label: fake, generator: flux.2-klein-9b}, n: 4, label: fake, threat: t2i, family: flux2}
+      - {match: {label: fake, generator: gpt-image-2}, n: 4, label: fake, threat: t2i, family: gpt-image-1.5-2}
+      - {match: {label: fake, generator: nano-banana-pro}, n: 4, label: fake, threat: t2i, family: nano-banana}
+      - {match: {label: fake, generator: seedream-v5.0}, n: 4, label: fake, threat: t2i, family: seedream4}
+    notes: Midjourney v7, FLUX.2 [klein], GPT-image-2, nano-banana-pro and Seedream 5.0 rows of OpenFake core test, held out by prompt.
+
+  - id: field-qwen-image-bench-2025
+    dataset: Qwen/Qwen-Image-Bench
+    mode: per_file
+    revision: d2493deb153b020cf169c7e3f57d15e4dd697038
+    licence: apache-2.0 (generator terms of service U)
+    commercial_ok: true
+    modality: image
+    files: {pattern: "images/*"}
+    path_regex: '^images/(?P<generator>[^/]+)/(?P<pid>\d+)_[0-9a-f]+\.(?:png|jpe?g)$'
+    pace_s: 0.7
+    max_items: 16
+    max_bytes: 512MB
+    group_key: {field: pid}
+    quotas:
+      - {match: {generator: FLUX.2-pro}, n: 4, label: fake, threat: t2i, family: flux2}
+      - {match: {generator: GPT-Image-1.5}, n: 4, label: fake, threat: t2i, family: gpt-image-1.5-2}
+      - {match: {generator: Seedream-4.5}, n: 4, label: fake, threat: t2i, family: seedream4}
+      - {match: {generator: Qwen-Image-2512}, n: 4, label: fake, threat: t2i, family: qwen-image}
+    notes: FLUX.2-pro, GPT-Image-1.5, Seedream 4.5 and Qwen-Image-2512, held out by prompt id.
+
+  # ---- Camera originals (40) -------------------------------------------------------------------------------------------
+  - id: field-commons-camera-2026
+    dataset: wikimedia/commons
+    mode: api
+    licence: per-file Commons licence
+    commercial_ok: true
+    modality: image
+    api:
+      provider: commons
+      exif_make: [Canon, SONY, NIKON, FUJIFILM]
+      max_file_bytes: 40MB
+      queries:  # camera categories not queried by vb-1.1 (file counts probed 2026-09-14, V: 334 / 753 / 298 / 2,114)
+        - {category: "Category:Taken with Canon EOS R6", meta: {camera: canon-eos-r6}, max_candidates: 334, max_requests: 8}
+        - {category: "Category:Taken with Sony ILCE-6400", meta: {camera: sony-ilce-6400}, max_candidates: 753, max_requests: 16}
+        - {category: "Category:Taken with Fujifilm X-T4", meta: {camera: fujifilm-xt4}, max_candidates: 298, max_requests: 8}
+        - {category: "Category:Taken with Nikon Z 7", meta: {camera: nikon-z7}, max_candidates: 1000, max_requests: 20}
+    pace_s: 5.0
+    max_items: 40
+    max_bytes: 1.5GB
+    avg_item_bytes: 8MB
+    max_per_group: 2
+    group_key: {field: artist, fallback: pageid}
+    quotas:
+      - {match: {camera: canon-eos-r6}, n: 10, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: sony-ilce-6400}, n: 10, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: fujifilm-xt4}, n: 10, label: real, threat: real, real_stratum: R1}
+      - {match: {camera: nikon-z7}, n: 10, label: real, threat: real, real_stratum: R1}
+    notes: At most two files per photographer, and no photographer already in vb-1.1 (group key held out).
+
+  # ---- AI clips (16) ---------------------------------------------------------------------------------------------------
+  - id: field-rapidata-veo3.1
+    dataset: Rapidata/text-2-video-human-preferences-veo3.1
+    mode: per_file
+    revision: 5d9fb3e419ba3e5c8b98130abcde9a44978fa189
+    licence: apache-2.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "videos/*.mp4"}
+    path_regex: '^videos/veo31_(?P<prompt>\d+)_(?P<seed>\d+)\.mp4$'
+    constants: {generator: veo3.1}
+    pace_s: 0.7
+    max_items: 4
+    max_bytes: 256MB
+    group_key: {field: prompt, namespace: rapidata-t2v-prompts}
+    quotas:
+      - {n: 4, label: fake, threat: t2v, family: veo}
+
+  - id: field-34data-sora2
+    dataset: 34data/gen-videos-sora2
+    mode: zip_range
+    revision: 82a7b46ee58f417a233b7e89e705b5065039df3a
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: sora-2}
+    max_items: 4
+    max_bytes: 256MB
+    avg_item_bytes: 6.7MB
+    group_key: {field: row}
+    quotas:
+      - {n: 4, label: fake, threat: t2v, family: sora}
+
+  - id: field-34data-kling
+    dataset: 34data/gen-videos-kling
+    mode: zip_range
+    revision: 07d2e8ff55f94b745749bd94e9af80b6546d272a
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: kling}
+    max_items: 4
+    max_bytes: 256MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 4, label: fake, threat: t2v, family: kling}
+
+  - id: field-34data-wan2
+    dataset: 34data/gen-videos-wan2
+    mode: zip_range
+    revision: 660cd80d16ac7cc962d892461e6b1e506809a3c7
+    licence: none declared (U)
+    commercial_ok: false
+    modality: video
+    files: {pattern: "*.zip", members_per_archive: 400}
+    path_regex: '^[^/]+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    constants: {generator: wan2}
+    max_items: 4
+    max_bytes: 256MB
+    avg_item_bytes: 5MB
+    group_key: {field: row}
+    quotas:
+      - {n: 4, label: fake, threat: t2v, family: wan-hunyuan}
+
+  # ---- Real clips (16) -------------------------------------------------------------------------------------------------
+  - id: field-openvid-real
+    dataset: nkp37/OpenVid-1M
+    mode: zip_range
+    revision: d8a63bd22989c80b5734ec2bb989f4e1b61a5807
+    licence: cc-by-4.0
+    commercial_ok: true
+    modality: video
+    files: {pattern: "OpenVid_part*.zip", sample: 1, members_per_archive: 200}
+    path_regex: '^OpenVid_part\d+\.zip/(?:[^/]+/)*(?P<clip>[^/]+)\.mp4$'
+    max_items: 16
+    max_bytes: 512MB
+    avg_item_bytes: 7MB
+    group_key: {field: row}
+    quotas:
+      - {n: 16, label: real, threat: real, real_stratum: V-general}
+    notes: One zip drawn with the field seed; members already in vb-1.1 are held out by archive member and bytes.

@@ -1,0 +1,1014 @@
+{
+  "baseline_detectors": [
+    "face.gend_clip_l14",
+    "img.dda",
+    "img.hf.ateeqq",
+    "img.hf.dima806"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "detector_not_run": 6,
+      "outside_scope": 1015,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+    "version": "vb-1.1"
+  },
+  "candidate": "img.veritas_probe.pe_core_l14",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.dda,img.hf.dima806,face.gend_clip_l14,img.hf.ateeqq,img.veritas_probe.pe_core_l14 GATES='face.gend_clip_l14=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.veritas_probe.pe_core_l14 ABLATE_BOOTSTRAP=2000",
+  "contamination_card": false,
+  "criteria": {
+    "A3": {
+      "pass": true,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.14889841195963616,
+      "lgo_macro_delta": 0.18351588269102725,
+      "pass": true,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.18351588269102725,
+      "pass": true,
+      "qualifying": [
+        "family flux1",
+        "family flux2",
+        "family gpt-4o-image-1",
+        "family gpt-image-1.5-2",
+        "family hidream",
+        "family ideogram",
+        "family imagen3",
+        "family imagen4",
+        "family long-tail",
+        "family midjourney",
+        "family modern-t2i-faces",
+        "family nano-banana",
+        "family qwen-image",
+        "family recraft",
+        "family seedream3",
+        "family seedream4",
+        "threat t2i"
+      ],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_detail": {},
+      "blocking_strata": [],
+      "interaction_strata": [
+        "R3"
+      ],
+      "interaction_terms": {
+        "R3": "jpeg_q<70"
+      },
+      "not_established_strata": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "pass": false,
+      "pooled_ci95_hi": 0.014752912034378961,
+      "pooled_delta": 0.0007423904974016363,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+      "small_point_strata": [],
+      "small_strata": [
+        "R6"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.9581105919862478,
+      "without": 0.8893405017088533
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.00529459972394753,
+          "lo": -0.04555425380973819,
+          "valid": 2000
+        },
+        "delta": -0.025943396226415092,
+        "n": 424,
+        "with": 0.018867924528301886,
+        "without": 0.04481132075471698
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.013368092691622108,
+          "lo": -0.05787498992098048,
+          "valid": 2000
+        },
+        "delta": -0.0392156862745098,
+        "n": 612,
+        "with": 0.0,
+        "without": 0.0392156862745098
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.06386554621848739,
+          "lo": 0.016747631669161118,
+          "valid": 2000
+        },
+        "delta": 0.04074702886247878,
+        "n": 589,
+        "with": 0.09847198641765705,
+        "without": 0.057724957555178265
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.04259634888438134,
+          "lo": -0.010141987829614604,
+          "valid": 2000
+        },
+        "delta": 0.016227180527383367,
+        "n": 493,
+        "with": 0.07505070993914807,
+        "without": 0.058823529411764705
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.040145985401459854,
+          "lo": -0.00182481751824818,
+          "valid": 2000
+        },
+        "delta": 0.018248175182481757,
+        "n": 548,
+        "with": 0.060218978102189784,
+        "without": 0.041970802919708027
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.0415865384615389,
+          "lo": -0.34615384615384615,
+          "valid": 2000
+        },
+        "delta": -0.17857142857142858,
+        "n": 28,
+        "with": 0.0,
+        "without": 0.17857142857142858
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.014752912034378961,
+        "lo": -0.011179271705871486,
+        "valid": 2000
+      },
+      "delta": 0.0007423904974016363,
+      "n": 2694,
+      "with": 0.050482553823311065,
+      "without": 0.04974016332590943
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.007722755978569913,
+          "lo": -0.09000563909774432,
+          "valid": 2000
+        },
+        "delta": -0.0404411764705882,
+        "n": 272,
+        "with": 0.6727941176470589,
+        "without": 0.7132352941176471
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.25,
+          "lo": 0.08333333333333337,
+          "valid": 2000
+        },
+        "delta": 0.16470588235294115,
+        "n": 85,
+        "with": 0.788235294117647,
+        "without": 0.6235294117647059
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.22857142857142854,
+          "lo": 0.05882352941176472,
+          "valid": 2000
+        },
+        "delta": 0.1428571428571428,
+        "n": 70,
+        "with": 0.5428571428571428,
+        "without": 0.4
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.0326797385620915,
+          "lo": -0.16993464052287577,
+          "valid": 2000
+        },
+        "delta": -0.0980392156862745,
+        "n": 153,
+        "with": 0.4444444444444444,
+        "without": 0.5424836601307189
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6341463414634145,
+          "lo": 0.31707317073170727,
+          "valid": 2000
+        },
+        "delta": 0.46341463414634143,
+        "n": 41,
+        "with": 0.8292682926829268,
+        "without": 0.36585365853658536
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.42105263157894735,
+          "lo": 0.17543859649122806,
+          "valid": 2000
+        },
+        "delta": 0.2982456140350877,
+        "n": 57,
+        "with": 0.47368421052631576,
+        "without": 0.17543859649122806
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.22916666666666663,
+          "lo": 0.021265514184397104,
+          "valid": 2000
+        },
+        "delta": 0.12,
+        "n": 50,
+        "with": 0.96,
+        "without": 0.84
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 24,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3137254901960784,
+          "lo": 0.08333333333333337,
+          "valid": 2000
+        },
+        "delta": 0.19148936170212771,
+        "n": 47,
+        "with": 0.9574468085106383,
+        "without": 0.7659574468085106
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.4716981132075472,
+          "lo": 0.16981132075471705,
+          "valid": 2000
+        },
+        "delta": 0.3207547169811321,
+        "n": 53,
+        "with": 0.8113207547169812,
+        "without": 0.49056603773584906
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3904761904761904,
+          "lo": 0.20000000000000007,
+          "valid": 2000
+        },
+        "delta": 0.2924528301886793,
+        "n": 106,
+        "with": 0.9150943396226415,
+        "without": 0.6226415094339622
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05161290322580647,
+          "lo": -0.03822268495835373,
+          "valid": 2000
+        },
+        "delta": 0.006896551724137834,
+        "n": 145,
+        "with": 0.9172413793103448,
+        "without": 0.9103448275862069
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.23152987670813507,
+          "lo": 0.11973944003884122,
+          "valid": 2000
+        },
+        "delta": 0.17204301075268813,
+        "n": 186,
+        "with": 0.8817204301075269,
+        "without": 0.7096774193548387
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.20915032679738566,
+          "lo": 0.0943301253640623,
+          "valid": 2000
+        },
+        "delta": 0.15032679738562094,
+        "n": 153,
+        "with": 0.954248366013072,
+        "without": 0.803921568627451
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.35966690374585103,
+          "lo": 0.19841105863833144,
+          "valid": 2000
+        },
+        "delta": 0.27826086956521745,
+        "n": 115,
+        "with": 0.9391304347826087,
+        "without": 0.6608695652173913
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.45299145299145305,
+          "lo": 0.2796022646346675,
+          "valid": 2000
+        },
+        "delta": 0.364406779661017,
+        "n": 118,
+        "with": 0.788135593220339,
+        "without": 0.423728813559322
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0993788819875776,
+          "lo": -0.012422360248447228,
+          "valid": 2000
+        },
+        "delta": 0.04347826086956519,
+        "n": 161,
+        "with": 0.6956521739130435,
+        "without": 0.6521739130434783
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0434782608695653,
+          "lo": -0.026086956521739202,
+          "valid": 2000
+        },
+        "delta": 0.008695652173913104,
+        "n": 115,
+        "with": 0.9739130434782609,
+        "without": 0.9652173913043478
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5092592592592592,
+          "lo": 0.3047619047619048,
+          "valid": 2000
+        },
+        "delta": 0.40566037735849053,
+        "n": 106,
+        "with": 0.7358490566037735,
+        "without": 0.330188679245283
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.20370370370370372,
+          "lo": 0.0357142857142857,
+          "valid": 2000
+        },
+        "delta": 0.11111111111111105,
+        "n": 54,
+        "with": 0.9444444444444444,
+        "without": 0.8333333333333334
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.02777777777777779,
+          "lo": -0.06329113924050633,
+          "valid": 2000
+        },
+        "delta": -0.013333333333333308,
+        "n": 75,
+        "with": 0.9733333333333334,
+        "without": 0.9866666666666667
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.3055555555555556,
+          "lo": 0.05882352941176472,
+          "valid": 2000
+        },
+        "delta": 0.17142857142857137,
+        "n": 35,
+        "with": 0.9714285714285714,
+        "without": 0.8
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.358974358974359,
+          "lo": 0.16049382716049376,
+          "valid": 2000
+        },
+        "delta": 0.26250000000000007,
+        "n": 80,
+        "with": 0.8375,
+        "without": 0.575
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0993788819875776,
+          "lo": -0.012422360248447228,
+          "valid": 2000
+        },
+        "delta": 0.04347826086956519,
+        "n": 161,
+        "with": 0.6956521739130435,
+        "without": 0.6521739130434783
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.007722755978569913,
+          "lo": -0.09000563909774432,
+          "valid": 2000
+        },
+        "delta": -0.0404411764705882,
+        "n": 272,
+        "with": 0.6727941176470589,
+        "without": 0.7132352941176471
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.0326797385620915,
+          "lo": -0.16993464052287577,
+          "valid": 2000
+        },
+        "delta": -0.0980392156862745,
+        "n": 153,
+        "with": 0.4444444444444444,
+        "without": 0.5424836601307189
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0434782608695653,
+          "lo": -0.026086956521739202,
+          "valid": 2000
+        },
+        "delta": 0.008695652173913104,
+        "n": 115,
+        "with": 0.9739130434782609,
+        "without": 0.9652173913043478
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.2279960123002237,
+          "lo": 0.18434086614750286,
+          "valid": 2000
+        },
+        "delta": 0.20562499999999995,
+        "n": 1600,
+        "with": 0.85625,
+        "without": 0.650625
+      }
+    },
+    "tau": {
+      "with": 0.7166102665032235,
+      "without": 0.8201059830344546
+    },
+    "threshold_strata": {
+      "R6": "R3"
+    },
+    "tpr": {
+      "with": 0.8018252933507171,
+      "without": 0.6666666666666666
+    }
+  },
+  "detector_meta": {
+    "face.gend_clip_l14": {
+      "missing": "face",
+      "score_key": "face.gend_clip_l14@27c9c717f219",
+      "transform": "logit_clip8",
+      "weights_sha12": "27c9c717f219"
+    },
+    "img.dda": {
+      "missing": "size",
+      "score_key": "img.dda@d1f98d194fd1",
+      "transform": "logit_clip8",
+      "weights_sha12": "d1f98d194fd1"
+    },
+    "img.hf.ateeqq": {
+      "score_key": "img.hf.ateeqq@eb0d229dd61f",
+      "transform": "logit_clip8",
+      "weights_sha12": "eb0d229dd61f"
+    },
+    "img.hf.dima806": {
+      "score_key": "img.hf.dima806@504818193248",
+      "transform": "logit_clip8",
+      "weights_sha12": "504818193248"
+    },
+    "img.veritas_probe.pe_core_l14": {
+      "score_key": "img.veritas_probe.pe_core_l14@0a7c2ea015d5",
+      "transform": "logit_clip8",
+      "weights_sha12": "0a7c2ea015d5"
+    }
+  },
+  "git_commit": "1807e6c8a2a5167f99c02ac4ec7904a43897cc31",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 4995,
+    "n_fake": 2301,
+    "n_real": 2694
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.11111111111111105,
+        "n_fake": 153,
+        "n_train": 4842,
+        "tau": {
+          "with": 0.7535437673102665,
+          "without": 0.7459651553730435
+        },
+        "tpr": {
+          "with": 0.9411764705882353,
+          "without": 0.8300653594771242
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.08571428571428574,
+        "n_fake": 70,
+        "n_train": 4925,
+        "tau": {
+          "with": 0.7301749635941381,
+          "without": 0.7326101586815794
+        },
+        "tpr": {
+          "with": 0.5285714285714286,
+          "without": 0.44285714285714284
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.19298245614035087,
+        "n_fake": 57,
+        "n_train": 4938,
+        "tau": {
+          "with": 0.7286952175900501,
+          "without": 0.7319926395382887
+        },
+        "tpr": {
+          "with": 0.40350877192982454,
+          "without": 0.21052631578947367
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.2542372881355932,
+        "n_fake": 118,
+        "n_train": 4877,
+        "tau": {
+          "with": 0.744924665023841,
+          "without": 0.7390301985545372
+        },
+        "tpr": {
+          "with": 0.7627118644067796,
+          "without": 0.5084745762711864
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.15000000000000002,
+        "n_fake": 80,
+        "n_train": 4915,
+        "tau": {
+          "with": 0.7431617267666074,
+          "without": 0.7353242041299475
+        },
+        "tpr": {
+          "with": 0.8375,
+          "without": 0.6875
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.31132075471698106,
+        "n_fake": 106,
+        "n_train": 4889,
+        "tau": {
+          "with": 0.7482646535179454,
+          "without": 0.7387503858028229
+        },
+        "tpr": {
+          "with": 0.7169811320754716,
+          "without": 0.4056603773584906
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.179245283018868,
+        "n_fake": 106,
+        "n_train": 4889,
+        "tau": {
+          "with": 0.7495424546720043,
+          "without": 0.741787363403268
+        },
+        "tpr": {
+          "with": 0.8584905660377359,
+          "without": 0.6792452830188679
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.2176510428438105,
+        "lo": 0.14889841195963616,
+        "valid": 2000
+      },
+      "delta": 0.18351588269102725,
+      "with": 0.7212771762299252,
+      "without": 0.5377612935388979
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "face.gend_clip_l14": [
+        "has_face"
+      ],
+      "img.hf.ateeqq": [
+        "!has_face"
+      ]
+    },
+    "seed": 7,
+    "size_policy": {
+      "additive_size_face_terms": false,
+      "global_intercept": true,
+      "neutral_size_missing": true,
+      "resolution_balance": true
+    },
+    "splits": [
+      "fit",
+      "cal"
+    ],
+    "term_support": {
+      "face_px:120-256": {
+        "cal": {
+          "fake": {
+            "off": 651,
+            "on": 194
+          },
+          "real": {
+            "off": 703,
+            "on": 147
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1127,
+            "on": 329
+          },
+          "real": {
+            "off": 1584,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "face_px>=256": {
+        "cal": {
+          "fake": {
+            "off": 700,
+            "on": 145
+          },
+          "real": {
+            "off": 759,
+            "on": 91
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1201,
+            "on": 255
+          },
+          "real": {
+            "off": 1584,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "has_camera_exif": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "has_face": {
+        "cal": {
+          "fake": {
+            "off": 437,
+            "on": 408
+          },
+          "real": {
+            "off": 568,
+            "on": 282
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 765,
+            "on": 691
+          },
+          "real": {
+            "off": 1237,
+            "on": 607
+          }
+        },
+        "group": true
+      },
+      "jpeg_q:70-89": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "jpeg_q<70": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "jpeg_q>=90": {
+        "cal": {
+          "fake": {
+            "off": 0,
+            "on": 845
+          },
+          "real": {
+            "off": 0,
+            "on": 850
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 0,
+            "on": 1456
+          },
+          "real": {
+            "off": 0,
+            "on": 1844
+          }
+        },
+        "group": false
+      },
+      "min_side<512": {
+        "cal": {
+          "fake": {
+            "off": 712,
+            "on": 133
+          },
+          "real": {
+            "off": 557,
+            "on": 293
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1243,
+            "on": 213
+          },
+          "real": {
+            "off": 1317,
+            "on": 527
+          }
+        },
+        "group": false
+      },
+      "min_side>1024": {
+        "cal": {
+          "fake": {
+            "off": 800,
+            "on": 45
+          },
+          "real": {
+            "off": 487,
+            "on": 363
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1401,
+            "on": 55
+          },
+          "real": {
+            "off": 865,
+            "on": 979
+          }
+        },
+        "group": false
+      },
+      "screenshot_like": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "upscaled": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "video_frame": {
+        "cal": {
+          "fake": {
+            "off": 845,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1456,
+            "on": 0
+          },
+          "real": {
+            "off": 1844,
+            "on": 0
+          }
+        },
+        "group": true
+      }
+    }
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

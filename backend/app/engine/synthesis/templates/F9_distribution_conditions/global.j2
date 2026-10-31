@@ -1,0 +1,14 @@
+{# F9 distribution conditions (IF §6.1): a reliability modifier that never votes; plus the validation envelope (EA-02). #}
+{% if w.conditions %}
+{{ cite("condition_profile") }}Conditions that lower the reliability of the checks: {{ w.conditions | join("; ") }}.
+{% endif %}
+{% for reason in w.envelope %}
+{{ cite("condition_profile") }}Validation: {{ reason }}.
+{% endfor %}
+{# N-19k (D2-02): whether a validation slice applies is said once. Where a reason above says that none applies, the input's
+   conditions are named as its conditions, and not at all where none was measured. #}
+{% if not w.get("no_slice") %}
+{{ cite("condition_profile") }}Validation slice for inputs like this: {{ w.slice_id }}.
+{% elif w.get("measured") %}
+{{ cite("condition_profile") }}Conditions of this input: {{ w.slice_id }}.
+{% endif %}

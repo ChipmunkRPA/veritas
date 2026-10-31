@@ -1,0 +1,20 @@
+# Copy to an ignored .tfvars file; replace every angle-bracket value before planning.
+# Build images first on an authorized connected Linux amd64 builder. Provision with runtime disabled,
+# push to the newly created registry, seed volumes/migrate, then enable the reviewed release.
+project_id    = "your-project-id"
+region        = "us-central1"
+zone          = "us-central1-a"
+name          = "veritas"
+boot_image    = "projects/ubuntu-os-cloud/global/images/<PINNED_UBUNTU_2404_AMD64_IMAGE>"
+build_commit  = "<FULL_40_CHARACTER_SOURCE_COMMIT>"
+backend_image = "us-central1-docker.pkg.dev/your-project-id/veritas/backend@sha256:<BACKEND_DIGEST>"
+web_image     = "us-central1-docker.pkg.dev/your-project-id/veritas/web@sha256:<WEB_DIGEST>"
+proxy_image   = "us-central1-docker.pkg.dev/your-project-id/veritas/sql-proxy@sha256:<REVIEWED_PROXY_V2_DIGEST>"
+runtime_enabled  = false
+secret_version   = "1"
+iap_members      = ["group:examiners@example.com"]
+operator_members = ["group:platform-operators@example.com"]
+# Optional GPU variant: one NVIDIA L4 / 24 GB VRAM, 16 vCPU / 64 GB RAM.
+# gpu_enabled       = true
+# gpu_backend_image = "us-central1-docker.pkg.dev/your-project-id/veritas/backend-cuda@sha256:<CUDA_DIGEST>"
+# boot_image        = "projects/<IMAGE_PROJECT>/global/images/<PINNED_UBUNTU_2404_WITH_REVIEWED_NVIDIA_DRIVER>"

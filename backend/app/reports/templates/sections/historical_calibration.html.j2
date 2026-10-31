@@ -1,0 +1,27 @@
+{% set d = e.reliability_diagram %}
+{% if d.status == 'recorded' %}
+<div class="historical-calibration">
+<h3 class="eyebrow">Historical calibration</h3>
+<div class="calibration-layout">
+<div class="calibration-chart">{{ d.svg }}{{ d.support_svg }}</div>
+<div class="calibration-description">
+<p><strong>{{ d.population }}</strong> · {{ d.view_label }} · {{ d.bench_version }}<br>{{ d.report_generated_at }} · {{ d.variant }} variant</p>
+<p>{{ d.n_real }} genuine · {{ d.n_fake }} AI-generated or manipulated test items.</p>
+<p>Each square is one of 15 equal-mass bins. Means and AI/manipulated fractions use class-balanced weights; the two classes each contribute half the total weight.</p>
+<p>The dashed diagonal marks equal score and AI/manipulated fraction. Per-bin intervals were not recorded; none are drawn.</p>
+<p>Expected calibration error (ECE): <strong>{{ d.ece_label }}</strong>.<br>Global 95% grouped-bootstrap interval: {{ d.ece_ci_label }} ({{ d.ece_bootstrap_valid }} valid / {{ d.ece_bootstrap_replicates }} replicates).</p>
+<p>These are unclamped, pre-decision-cap benchmark scores, not final decisions or a calibration estimate for this file.</p>
+</div>
+</div>
+<p class="caption">The lower chart shows unweighted sample counts in the 15 recorded groups, ordered by score. Equal-width bars do not represent equal score ranges or independent sources. Counts do not measure confidence.</p>
+<table class="calibration-counts">
+<caption>Recorded samples by score group (unweighted)</caption>
+<thead><tr><th scope="col">Group</th><th scope="col">Samples</th><th scope="col">Group</th><th scope="col">Samples</th><th scope="col">Group</th><th scope="col">Samples</th></tr></thead>
+<tbody>{% for row in range(5) %}<tr>{% for offset in (0, 5, 10) %}{% set b = d.bins[row + offset] %}<th scope="row">{{ b.bin + 1 }}</th><td class="mono">{{ b.n }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+</table>
+<p class="caption">{{ d.limitation }}</p>
+<p class="calibration-provenance">Frozen source report: <span class="mono">{{ d.report_sha256 | short_hash }}</span> · evaluated artefact <span class="mono">{{ d.evaluated_artefact_sha256 | short_hash }}</span> · published artefact <span class="mono">{{ d.published_artefact_sha256 | short_hash }}</span>.<br>Binding: documented metrics publication, record <span class="mono">{{ d.publication_record_sha256 | short_hash }}</span>. Full source pins and the recorded bin values are retained in the JSON evidence bundle.</p>
+</div>
+{% else %}
+<p class="caption">{{ d.note }}</p>
+{% endif %}

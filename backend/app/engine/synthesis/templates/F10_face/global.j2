@@ -1,0 +1,29 @@
+{# F10 face (IF §6.1): learned face checks, moderate at most; purpose and input scope are separate. #}
+{% import "_macros.j2" as m %}
+{{ m.observation(w) }}
+{{ m.strength_sentence(w) }}
+{% if w.face_purpose == "portrait" %}
+{{ cite(w.s.id) }}This face-oriented classifier checks for AI-generated portraits.
+{% elif w.face_purpose == "generation" %}
+{{ cite(w.s.id) }}This face-oriented classifier checks for AI-generated imagery.
+{% elif w.face_purpose == "swap" %}
+{{ cite(w.s.id) }}This classifier checks for signs of face replacement.
+{% elif w.face_purpose == "manipulation" %}
+{{ cite(w.s.id) }}This face-oriented classifier checks for signs of manipulation.
+{% else %}
+{{ cite(w.s.id) }}This is a face-oriented image classifier.
+{% endif %}
+{% if w.face_input_scope == "crop" %}
+{{ cite(w.s.id) }}This run assessed face crops and did not assess the rest of the {{ w.media }}.
+{% elif w.face_input_scope == "portrait" %}
+{{ cite(w.s.id) }}This run included the whole portrait image as at least one classifier input.
+{% elif w.face_input_scope == "whole" %}
+{{ cite(w.s.id) }}This run assessed the whole image as its classifier input.
+{% elif w.face_input_scope == "no_face" %}
+{{ cite(w.s.id) }}No face was detected; this run assessed the whole image outside the model's training distribution.
+{% else %}
+{{ cite(w.s.id) }}The input scope is unknown from the recorded result.
+{% endif %}
+{{ m.conditions(w) }}
+{{ m.benchmark(w) }}
+{{ m.dissent(w) }}

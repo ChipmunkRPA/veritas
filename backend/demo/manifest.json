@@ -1,0 +1,32 @@
+[
+ {
+  "file": "ai-portrait.jpg",
+  "kind": "image",
+  "title": "AI-generated portrait",
+  "blurb": "A diffusion-model portrait. Watch the face-swap and whole-image detectors disagree \u2014 and how the verdict explains which evidence wins."
+ },
+ {
+  "file": "real-photo.jpg",
+  "kind": "image",
+  "title": "Real camera photograph",
+  "blurb": "A Canon EOS original with intact EXIF. The capture metadata is shown to the examiner; it does not enter the fused estimate, because metadata is easy to edit."
+ },
+ {
+  "file": "deepfake-video.mp4",
+  "kind": "video",
+  "title": "Face-swap video",
+  "blurb": "A DFDC-style face swap. The sampled frames and the tracked face are examined, and the timeline says which lanes ran."
+ },
+ {
+  "file": "ai-article.txt",
+  "kind": "document",
+  "title": "ChatGPT-written answer",
+  "blurb": "Every sentence is scored and highlighted; click one to see the evidence behind it."
+ },
+ {
+  "file": "human-article.txt",
+  "kind": "document",
+  "title": "Human-written answer",
+  "blurb": "The same pipeline on a Reddit answer written by a person."
+ }
+]

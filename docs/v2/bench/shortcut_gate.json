@@ -1,0 +1,300 @@
+{
+  "artefacts": {
+    "audio": {
+      "file": "fuser-audio-2.1.1.json",
+      "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3"
+    },
+    "image": {
+      "file": "fuser-image-2.1.1.json",
+      "sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a"
+    },
+    "video": {
+      "file": "fuser-video-2.1.1.json",
+      "sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45"
+    }
+  },
+  "gates": {
+    "audio": {
+      "2b": {
+        "auc": 0.5,
+        "context_terms": [],
+        "limit": 0.55,
+        "n_fake": 200,
+        "n_real": 113,
+        "passed": true,
+        "separation": 0.5
+      },
+      "served": {
+        "gated_profiles": [
+          "full",
+          "deep"
+        ],
+        "passed": true,
+        "problems": [],
+        "selections": {
+          "deep": {
+            "file": "fuser-audio-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-audio-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3",
+            "version": "2.1.1"
+          },
+          "full": {
+            "file": "fuser-audio-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-audio-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3",
+            "version": "2.1.1"
+          },
+          "quick": {
+            "file": "fuser-audio-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-audio-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3",
+            "version": "2.1.1"
+          }
+        }
+      }
+    },
+    "image": {
+      "2a": {
+        "auc_unweighted": 0.9525825090733928,
+        "auc_weighted": 0.8582068152298393,
+        "disclosure": "| D-45 2a | `fuser-image-2.1.1` sha12 `746ada66f73d`: weighted AUC 0.8582, unweighted AUC 0.9526; feature groups (weighted): min_side 0.6467, megapixels 0.5217, aspect 0.7634, div64 0.6272, face_context 0.4761 | disclosed under D-52 on vb-1.1; container geometry (square and divisible-by-64 sides are far more common among fakes) may be part of every vb-1.1 detection figure; no geometry-matched field set exists to check it (vb-1.2 removes the imbalance) |",
+        "groups": {
+          "aspect": {
+            "auc_unweighted": 0.8300778332392843,
+            "auc_weighted": 0.7634488376774086
+          },
+          "div64": {
+            "auc_unweighted": 0.764362965393504,
+            "auc_weighted": 0.6272369818096949
+          },
+          "face_context": {
+            "auc_unweighted": 0.545269527112417,
+            "auc_weighted": 0.47612554359795156
+          },
+          "megapixels": {
+            "auc_unweighted": 0.8520089228820498,
+            "auc_weighted": 0.5216876203395692
+          },
+          "min_side": {
+            "auc_unweighted": 0.8920853461924014,
+            "auc_weighted": 0.6466678577482952
+          }
+        },
+        "limit": 0.6,
+        "n_fake": 2301,
+        "n_real": 2694,
+        "passed": false,
+        "per_threat": {
+          "edit": {
+            "auc_unweighted": 0.8688378130374839,
+            "auc_weighted": 0.8592076337706327,
+            "n_fake": 161
+          },
+          "faceswap": {
+            "auc_unweighted": 0.9195727706450064,
+            "auc_weighted": 0.8946765842028149,
+            "n_fake": 272
+          },
+          "gan_face": {
+            "auc_unweighted": 0.9061167154315327,
+            "auc_weighted": 0.8939951345032405,
+            "n_fake": 153
+          },
+          "personalised": {
+            "auc_unweighted": 0.9838949678835415,
+            "auc_weighted": 0.9786343258861483,
+            "n_fake": 115
+          },
+          "t2i": {
+            "auc_unweighted": 0.9688136831848553,
+            "auc_weighted": 0.8758844639563287,
+            "n_fake": 1600
+          }
+        },
+        "separation_unweighted": 0.9525825090733928,
+        "separation_weighted": 0.8582068152298393,
+        "status": "disclosed",
+        "unweighted_passed": false,
+        "variant": "norm"
+      },
+      "2a_native_diagnostic": {
+        "auc_unweighted": 0.9672128608748592,
+        "auc_weighted": 0.9082522428583355,
+        "groups": {
+          "aspect": {
+            "auc_unweighted": 0.8300778332392843,
+            "auc_weighted": 0.7634488376774086
+          },
+          "div64": {
+            "auc_unweighted": 0.764362965393504,
+            "auc_weighted": 0.6272369818096949
+          },
+          "face_context": {
+            "auc_unweighted": 0.545269527112417,
+            "auc_weighted": 0.47612554359795156
+          },
+          "megapixels": {
+            "auc_unweighted": 0.8520089228820498,
+            "auc_weighted": 0.5216876203395692
+          },
+          "min_side": {
+            "auc_unweighted": 0.8920853461924014,
+            "auc_weighted": 0.6466678577482952
+          }
+        },
+        "limit": 0.6,
+        "n_fake": 2301,
+        "n_real": 2694,
+        "passed": false,
+        "per_threat": {
+          "edit": {
+            "auc_unweighted": 0.8795990169089811,
+            "auc_weighted": 0.8666766207287161,
+            "n_fake": 161
+          },
+          "faceswap": {
+            "auc_unweighted": 0.9283968459321368,
+            "auc_weighted": 0.9019647017477337,
+            "n_fake": 272
+          },
+          "gan_face": {
+            "auc_unweighted": 0.9575503054475935,
+            "auc_weighted": 0.9555097052708126,
+            "n_fake": 153
+          },
+          "personalised": {
+            "auc_unweighted": 0.9842016074368161,
+            "auc_weighted": 0.9800770281811351,
+            "n_fake": 115
+          },
+          "t2i": {
+            "auc_unweighted": 0.9823306421677802,
+            "auc_weighted": 0.925614557526605,
+            "n_fake": 1600
+          }
+        },
+        "separation_unweighted": 0.9672128608748592,
+        "separation_weighted": 0.9082522428583355,
+        "unweighted_passed": false,
+        "variant": "native (diagnostic)"
+      },
+      "2b": {
+        "auc": 0.5,
+        "context_terms": [],
+        "limit": 0.55,
+        "n_fake": 845,
+        "n_real": 850,
+        "passed": true,
+        "separation": 0.5
+      },
+      "2c": {
+        "missing": [],
+        "note": "no remaining additive context term",
+        "passed": true,
+        "terms": {}
+      },
+      "served": {
+        "gated_profiles": [
+          "full",
+          "deep"
+        ],
+        "passed": true,
+        "problems": [],
+        "selections": {
+          "deep": {
+            "file": "fuser-image-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-image-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+            "version": "2.1.1"
+          },
+          "full": {
+            "file": "fuser-image-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-image-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a",
+            "version": "2.1.1"
+          },
+          "quick": {
+            "file": null,
+            "mode": "fallback",
+            "reason": "the release fuser artefact fuser-image-2.1.1.json is not usable: detector img.dda is not enabled (disabled, denied by the licence policy or not in this profile)",
+            "rejected": [
+              {
+                "file": "fuser-image-2.1.1.json",
+                "reason": "detector img.dda is not enabled (disabled, denied by the licence policy or not in this profile)"
+              }
+            ],
+            "sha256": null,
+            "version": null
+          }
+        }
+      },
+      "structure": {
+        "passed": true,
+        "problems": []
+      }
+    },
+    "video": {
+      "2b": {
+        "auc": 0.5,
+        "context_terms": [],
+        "limit": 0.55,
+        "n_fake": 65,
+        "n_real": 74,
+        "passed": true,
+        "separation": 0.5
+      },
+      "served": {
+        "gated_profiles": [
+          "full",
+          "deep"
+        ],
+        "passed": true,
+        "problems": [],
+        "selections": {
+          "deep": {
+            "file": "fuser-video-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-video-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45",
+            "version": "2.1.1"
+          },
+          "full": {
+            "file": "fuser-video-2.1.1.json",
+            "mode": "artefact",
+            "reason": "fuser-video-2.1.1.json matches the enabled detectors",
+            "rejected": [],
+            "sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45",
+            "version": "2.1.1"
+          },
+          "quick": {
+            "file": null,
+            "mode": "fallback",
+            "reason": "the release fuser artefact fuser-video-2.1.1.json is not usable: detector vid.codec.ffprobe is not enabled (disabled, denied by the licence policy or not in this profile)",
+            "rejected": [
+              {
+                "file": "fuser-video-2.1.1.json",
+                "reason": "detector vid.codec.ffprobe is not enabled (disabled, denied by the licence policy or not in this profile)"
+              }
+            ],
+            "sha256": null,
+            "version": null
+          }
+        }
+      }
+    }
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "passed": true,
+  "schema": "veritas.shortcut-gate/2"
+}

@@ -1,0 +1,80 @@
+<section class="chapter" id="section-contents">
+<h2 class="chapter-title">Contents</h2>
+<ol class="contents">
+{% for x in v.sections %}
+<li><a href="{{ x.href }}"><span class="n">{{ x.number }}</span><span class="t">{{ x.title }}</span></a></li>
+{% endfor %}
+</ol>
+</section>
+<section class="chapter-cont lay-summary verdict-{{ v.step }}" id="section-summary">
+<h2 class="chapter-title"><span class="n">{{ v.sections[0].number }}</span>Summary and scope</h2>
+<p class="lay">{{ v.summary.examined }}</p>
+<p class="headline">{{ v.summary.headline }}</p>
+{% if v.examiner %}
+<p class="headline examiner-opinion">{{ v.examiner.line }}</p>
+{% if v.examiner.refusal %}<p class="examiner-refusal">{{ v.examiner.refusal }}</p>{% endif %}
+<p class="examiner-justification"><span class="muted">{{ v.examiner.label }}:</span> {{ v.examiner.justification }}</p>
+{% if v.examiner.also %}<p class="examiner-justification"><span class="muted">{{ v.examiner.also.label }}:</span> {{ v.examiner.also.text }}</p>{% endif %}
+{% endif %}
+<p class="estimate">{{ v.summary.estimate }}</p>
+{% if v.scale %}
+<div class="scale-figure">
+{{ v.scale }}
+{% if v.scale_note %}
+<p class="scale-note">{{ v.scale_note }}</p>
+{% else %}
+<p class="scale-labels"><span>no indications</span><span>inconclusive</span><span>strong indications</span></p>
+{% endif %}
+</div>
+{% endif %}
+<div class="guidance">
+<div class="col">
+<h3 class="eyebrow">What this means</h3>
+{% for p in v.summary.means %}
+<p>{{ p }}</p>
+{% endfor %}
+{% if v.summary.insufficient %}
+<ul class="reasons">
+{% for r in v.summary.insufficient %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if v.summary.reasons %}
+<h3 class="eyebrow sub">Main reasons</h3>
+<ul class="reasons">
+{% for r in v.summary.reasons %}
+<li><strong>{{ r.id }}</strong> {{ r.title }}.{% if r.status %} <span class="ex-chip">Examiner: {{ r.status }}</span>{% endif %}{% if r.counter %} <span class="muted">Counter-evidence.</span>{% endif %} {{ r.text }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if v.summary.context %}
+<p class="muted">{{ v.summary.context }}</p>
+{% endif %}
+{% if v.summary.aside %}
+<p class="muted">{{ v.summary.aside }}</p>
+{% endif %}
+</div>
+<div class="col">
+<h3 class="eyebrow">What this does not mean</h3>
+{% for p in v.summary.does_not_mean %}
+<p>{{ p }}</p>
+{% endfor %}
+<p>{{ v.summary.limitation }}</p>
+</div>
+</div>
+<h3 class="eyebrow">In testing</h3>
+<p>{{ v.summary.testing }}</p>
+<h3 class="eyebrow">Next step</h3>
+<p>{{ v.summary.next_step }}</p>
+<h3 class="eyebrow" id="scope">Scope of examination</h3>
+<table class="grid">
+<thead><tr><th class="w-question">Question addressed</th><th>What ran</th></tr></thead>
+<tbody>
+{% for q in v.scope.questions %}
+<tr id="{{ q.anchor }}"><td><span class="mono">{{ q.id }}</span> {{ q.question }}</td><td{{ ' class="muted"' | safe if not q.addressed else '' }}>{{ q.how }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<p class="caption">Not addressed by any check: {{ v.scope.not_addressed | join(' ') }}</p>
+</section>

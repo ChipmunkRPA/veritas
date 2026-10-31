@@ -1,0 +1,42 @@
+{
+ "bench": "vb-1.1",
+ "by_slice": {
+  "image/q70-89/side512-1024/face120-256": {
+   "inside": 4,
+   "n": 4
+  },
+  "image/q70-89/side512-1024/noface": {
+   "inside": 7,
+   "n": 7
+  },
+  "image/q70-89/side>1024/noface": {
+   "inside": 2,
+   "n": 2
+  },
+  "image/q>=90/side512-1024/noface": {
+   "inside": 1,
+   "n": 1
+  },
+  "image/q>=90/side>1024/face120-256": {
+   "inside": 1,
+   "n": 1
+  },
+  "image/q>=90/side>1024/face<120": {
+   "inside": 1,
+   "n": 1
+  },
+  "image/q>=90/side>1024/face>=256": {
+   "inside": 1,
+   "n": 1
+  },
+  "image/q>=90/side>1024/noface": {
+   "inside": 6,
+   "n": 6
+  }
+ },
+ "fraction": 1.0,
+ "inside": 23,
+ "kind": "image",
+ "n": 23,
+ "with_slice_id": 23
+}

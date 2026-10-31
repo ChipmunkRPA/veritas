@@ -1,0 +1,66 @@
+{% set e = v.estimate %}
+<section class="chapter-cont" id="section-estimate">
+{% if e.none %}
+<h2 class="chapter-title"><span class="n">{{ v.number.estimate }}</span>How the result was reached</h2>
+<p class="reader">{{ e.none }}</p>
+</section>
+{% else %}
+<h2 class="chapter-title"><span class="n">{{ v.number.estimate }}</span>{{ e.title }}</h2>
+{% for p in e.narrative %}
+<p class="reader">{{ p }}</p>
+{% endfor %}
+{% if e.agreement_svg %}
+<h3 class="eyebrow">Detector estimates</h3>
+<div class="agreement-figure">
+{{ e.agreement_svg }}
+{% for d in e.dots %}<span class="dot-id" style="{{ d.at.side }}: {{ d.at.offset }}; top: {{ d.at.top }}">{{ d.display_id }}</span>{% endfor %}
+<p class="axis-labels"><span>0</span><span>50</span><span>100</span></p>
+</div>
+<p class="caption">Filled dot: toward indications · ring: toward no indications · small dot: little effect, or neutral for a check outside the estimate{% if e.marker %} · bar: the estimate{% endif %}.{% if e.number_text %} <span class="nb">{{ e.number_text }}.</span>{% endif %} {% for d in e.dots %}{{ d.display_id }} {{ d.p }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+{% endif %}
+<h3 class="eyebrow">Contributions</h3>
+{% if e.bars %}
+<table class="waterfall">
+<thead><tr><th class="wf-label">Check</th><th class="wf-chart"><div class="ticks">{% for t in e.ticks %}<span style="left: {{ t.left }}">{{ t.label }}</span>{% endfor %}</div>{{ e.axis }}</th><th class="num">Change in log-odds</th>{% if not e.flat %}<th class="num">Out of 100</th>{% endif %}</tr></thead>
+<tbody>
+{% for b in e.bars %}
+<tr class="wf-{{ b.kind }}"><td class="wf-label">{% if b.display_id %}<span class="mono">{{ b.display_id }}</span> {% endif %}{{ b.label }}</td><td class="wf-chart">{{ b.svg }}</td><td class="num mono">{{ '' if b.point else b.value }}</td>{% if not e.flat %}<td class="num mono">{{ b.value if b.point else '' }}</td>{% endif %}</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if e.flat %}
+<p class="caption">The axis is in log-odds. Each bar starts at zero. The rows are not added up: {{ 'no estimate is shown for this result' if e.number == "capped" else 'the estimate of the statistical checks is not shown' }}, because the input is outside what was validated.</p>
+{% else %}
+<p class="caption">The axis is labelled in probability at log-odds positions. Each bar starts at the running total; {% if e.record_last %}the last column gives the starting point and the value that the provenance record set as probabilities out of 100. The contributions add up to that value's log-odds{% elif e.number == "text" %}the last column gives the starting point as a probability out of 100 and, in the last row, the plausible range. The contributions add up to the estimate's log-odds{% else %}the last column gives the starting point and the estimate as probabilities out of 100. The contributions add up to the estimate's log-odds{% endif %}{% if e.integrity.clamped %}, which is clamped to 2–98{% endif %}.</p>
+{% endif %}
+{% elif e.fallback %}
+<p>{{ e.fallback }}</p>
+{% endif %}
+<h3 class="eyebrow">Calibration</h3>
+<p>{{ e.statement }}</p>
+{% if e.calibration %}
+<table class="grid">
+<thead><tr><th>Subject</th><th>Method</th><th>Test set</th><th class="num">ECE</th><th class="num">Brier</th><th class="num">Error-rate rows</th><th>Reviewed by</th></tr></thead>
+<tbody>
+{% for c in e.calibration %}
+<tr><td class="mono">{{ c.subject }}</td><td>{{ c.method }}</td><td>{{ c.bench }}</td><td class="num mono">{{ c.ece }}</td><td class="num mono">{{ c.brier }}</td><td class="num">{{ c.rows }}</td><td>{{ c.reviewed_by }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% include "sections/historical_calibration.html.j2" %}
+<h3 class="eyebrow">Fused error rates in testing</h3>
+{% if e.rates %}
+<table class="grid">
+<thead><tr><th>Context</th><th>Threshold</th><th>Scored above the threshold</th><th>FPR [95&nbsp;%&nbsp;CI]</th><th>TPR [95&nbsp;%&nbsp;CI]</th><th class="num">n genuine / AI</th><th>Test set</th></tr></thead>
+<tbody>
+{% for r in e.rates %}
+<tr><td>{{ r.context }}</td><td class="mono">{{ r.threshold }}</td><td>{{ r.false_alarms }}; {{ r.detections }}</td><td class="mono">{{ r.fpr }}</td><td class="mono">{{ r.tpr }}</td><td class="num">{{ r.n }}</td><td>{{ r.bench }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>Threshold error rates are not recorded for this result.</p>
+{% endif %}
+</section>
+{% endif %}

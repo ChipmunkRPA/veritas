@@ -1,0 +1,13 @@
+# NVIDIA override: VERITAS_VARIANT=cuda docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build -d
+# Needs the NVIDIA Container Toolkit on the host. Only the worker runs models, so only it reserves the GPU.
+services:
+  worker:
+    environment:
+      VERITAS_DEVICE: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

@@ -1,0 +1,700 @@
+{
+  "baseline_detectors": [
+    "img.commfor384",
+    "img.dda",
+    "img.dfdc_b7"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "detector_not_run": 6,
+      "outside_scope": 1015,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+    "version": "vb-1.1"
+  },
+  "candidate": "pe.mesorch.region_area",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.mesorch.region_area GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.mesorch.region_area ABLATE_BOOTSTRAP=2000",
+  "contamination_card": false,
+  "criteria": {
+    "A3": {
+      "pass": true,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.013376313417102088,
+      "lgo_macro_delta": 0.024100764779231232,
+      "pass": true,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.024100764779231232,
+      "pass": false,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_strata": [],
+      "interaction_strata": [],
+      "interaction_terms": {},
+      "not_established_strata": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "pass": true,
+      "pooled_ci95_hi": 0.007265768073222731,
+      "pooled_delta": 0.0025983667409057165,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term (D-44)",
+      "small_strata": [
+        "R6"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.8654785837602643,
+      "without": 0.8655860222807488
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0100510958152105,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.004716981132075474,
+        "n": 424,
+        "with": 0.02358490566037736,
+        "without": 0.018867924528301886
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.008264462809917356,
+          "lo": -0.005263854079643555,
+          "valid": 2000
+        },
+        "delta": 0.0032679738562091526,
+        "n": 612,
+        "with": 0.058823529411764705,
+        "without": 0.05555555555555555
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.010362694300518137,
+          "lo": -0.0033391778033182015,
+          "valid": 2000
+        },
+        "delta": 0.0033955857385398955,
+        "n": 589,
+        "with": 0.042444821731748725,
+        "without": 0.03904923599320883
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.02434077079107505,
+          "lo": -0.016227180527383367,
+          "valid": 2000
+        },
+        "delta": 0.004056795131845842,
+        "n": 493,
+        "with": 0.09330628803245436,
+        "without": 0.08924949290060852
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0072992700729927005,
+          "lo": -0.0072992700729927005,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 548,
+        "with": 0.012773722627737226,
+        "without": 0.012773722627737226
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.11562499999999958,
+          "valid": 2000
+        },
+        "delta": -0.03571428571428571,
+        "n": 28,
+        "with": 0.07142857142857142,
+        "without": 0.10714285714285714
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.007265768073222731,
+        "lo": -0.0026942636697817753,
+        "valid": 2000
+      },
+      "delta": 0.0025983667409057165,
+      "n": 2694,
+      "with": 0.0467706013363029,
+      "without": 0.04417223459539718
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.12360296311027148,
+          "lo": 0.05119263103948357,
+          "valid": 2000
+        },
+        "delta": 0.0845588235294118,
+        "n": 272,
+        "with": 0.6764705882352942,
+        "without": 0.5919117647058824
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.08333333333333337,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.03529411764705881,
+        "n": 85,
+        "with": 0.6470588235294118,
+        "without": 0.611764705882353
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 70,
+        "with": 0.2857142857142857,
+        "without": 0.2857142857142857
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0980392156862745,
+          "lo": 0.02614379084967322,
+          "valid": 2000
+        },
+        "delta": 0.05882352941176461,
+        "n": 153,
+        "with": 0.5751633986928104,
+        "without": 0.5163398692810458
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 41,
+        "with": 0.17073170731707318,
+        "without": 0.17073170731707318
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 57,
+        "with": 0.14035087719298245,
+        "without": 0.14035087719298245
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.06521739130434778,
+          "valid": 2000
+        },
+        "delta": -0.020000000000000018,
+        "n": 50,
+        "with": 0.78,
+        "without": 0.8
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 24,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 47,
+        "with": 0.7659574468085106,
+        "without": 0.7659574468085106
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05660377358490565,
+          "lo": -0.05660377358490565,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 53,
+        "with": 0.49056603773584906,
+        "without": 0.49056603773584906
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.019607843137254888,
+          "lo": -0.046739992946570254,
+          "valid": 2000
+        },
+        "delta": -0.009433962264150941,
+        "n": 106,
+        "with": 0.5188679245283019,
+        "without": 0.5283018867924528
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.05972922549415078,
+          "lo": -0.014285714285714346,
+          "valid": 2000
+        },
+        "delta": 0.020689655172413834,
+        "n": 145,
+        "with": 0.8896551724137931,
+        "without": 0.8689655172413793
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.011695906432748537,
+          "lo": -0.025012755102040814,
+          "valid": 2000
+        },
+        "delta": -0.005376344086021501,
+        "n": 186,
+        "with": 0.6451612903225806,
+        "without": 0.6505376344086021
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 153,
+        "with": 0.8235294117647058,
+        "without": 0.8235294117647058
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.028846153846153855,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.008695652173913104,
+        "n": 115,
+        "with": 0.5565217391304348,
+        "without": 0.5478260869565217
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.02564102564102566,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.008474576271186418,
+        "n": 118,
+        "with": 0.3813559322033898,
+        "without": 0.3728813559322034
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.03105590062111807,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.012422360248447228,
+        "n": 161,
+        "with": 0.6583850931677019,
+        "without": 0.6459627329192547
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.9652173913043478,
+        "without": 0.9652173913043478
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.02778426791277256,
+          "lo": -0.028301886792452824,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 106,
+        "with": 0.2830188679245283,
+        "without": 0.2830188679245283
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 54,
+        "with": 0.8703703703703703,
+        "without": 0.8703703703703703
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.03947368421052633,
+          "valid": 2000
+        },
+        "delta": -0.01333333333333342,
+        "n": 75,
+        "with": 0.96,
+        "without": 0.9733333333333334
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.08823529411764708,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.02857142857142858,
+        "n": 35,
+        "with": 0.8,
+        "without": 0.7714285714285715
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.06329113924050633,
+          "valid": 2000
+        },
+        "delta": -0.025000000000000022,
+        "n": 80,
+        "with": 0.725,
+        "without": 0.75
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.03105590062111807,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.012422360248447228,
+        "n": 161,
+        "with": 0.6583850931677019,
+        "without": 0.6459627329192547
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.12360296311027148,
+          "lo": 0.05119263103948357,
+          "valid": 2000
+        },
+        "delta": 0.0845588235294118,
+        "n": 272,
+        "with": 0.6764705882352942,
+        "without": 0.5919117647058824
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0980392156862745,
+          "lo": 0.02614379084967322,
+          "valid": 2000
+        },
+        "delta": 0.05882352941176461,
+        "n": 153,
+        "with": 0.5751633986928104,
+        "without": 0.5163398692810458
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 115,
+        "with": 0.9652173913043478,
+        "without": 0.9652173913043478
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0083109742413285,
+          "lo": -0.004378010551265434,
+          "valid": 2000
+        },
+        "delta": 0.001875000000000071,
+        "n": 1600,
+        "with": 0.618125,
+        "without": 0.61625
+      }
+    },
+    "tau": {
+      "with": 0.8268874431435584,
+      "without": 0.8441609951832091
+    },
+    "tpr": {
+      "with": 0.642329421990439,
+      "without": 0.6262494567579313
+    }
+  },
+  "detector_meta": {
+    "img.commfor384": {
+      "missing": "size",
+      "score_key": "img.commfor384@8ab53da046f4",
+      "transform": "logit_clip8",
+      "weights_sha12": "8ab53da046f4"
+    },
+    "img.dda": {
+      "missing": "size",
+      "score_key": "img.dda@d1f98d194fd1",
+      "transform": "logit_clip8",
+      "weights_sha12": "d1f98d194fd1"
+    },
+    "img.dfdc_b7": {
+      "score_key": "img.dfdc_b7@651bc0cae350",
+      "transform": "logit_clip8",
+      "weights_sha12": "651bc0cae350"
+    },
+    "pe.mesorch.region_area": {
+      "score_key": "pe.mesorch.region_area@c9c8c6fde826",
+      "transform": "logit_clip8",
+      "weights_sha12": "c9c8c6fde826"
+    }
+  },
+  "git_commit": "2a5fe2cc653f994ed745b7b351f985f0934b80b4",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 4995,
+    "n_fake": 2301,
+    "n_real": 2694
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.02614379084967322,
+        "n_fake": 153,
+        "n_train": 4842,
+        "tau": {
+          "with": 0.7652752093428989,
+          "without": 0.8397069171266612
+        },
+        "tpr": {
+          "with": 0.8496732026143791,
+          "without": 0.8235294117647058
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.02857142857142858,
+        "n_fake": 70,
+        "n_train": 4925,
+        "tau": {
+          "with": 0.7677473755095483,
+          "without": 0.8360820381593415
+        },
+        "tpr": {
+          "with": 0.3,
+          "without": 0.2714285714285714
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.017543859649122806,
+        "n_fake": 57,
+        "n_train": 4938,
+        "tau": {
+          "with": 0.7905212376044317,
+          "without": 0.8413950353443408
+        },
+        "tpr": {
+          "with": 0.15789473684210525,
+          "without": 0.14035087719298245
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.008474576271186474,
+        "n_fake": 118,
+        "n_train": 4877,
+        "tau": {
+          "with": 0.7585624974633494,
+          "without": 0.830762460246889
+        },
+        "tpr": {
+          "with": 0.3898305084745763,
+          "without": 0.3813559322033898
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.012499999999999956,
+        "n_fake": 80,
+        "n_train": 4915,
+        "tau": {
+          "with": 0.7735264142973773,
+          "without": 0.8444699184767943
+        },
+        "tpr": {
+          "with": 0.7625,
+          "without": 0.75
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.028301886792452824,
+        "n_fake": 106,
+        "n_train": 4889,
+        "tau": {
+          "with": 0.7601966900535232,
+          "without": 0.8352379238952179
+        },
+        "tpr": {
+          "with": 0.3113207547169811,
+          "without": 0.2830188679245283
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.047169811320754707,
+        "n_fake": 106,
+        "n_train": 4889,
+        "tau": {
+          "with": 0.7672911318214477,
+          "without": 0.8393648591160316
+        },
+        "tpr": {
+          "with": 0.5566037735849056,
+          "without": 0.5094339622641509
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.03708112160530373,
+        "lo": 0.013376313417102088,
+        "valid": 2000
+      },
+      "delta": 0.024100764779231232,
+      "with": 0.4754032823189925,
+      "without": 0.45130251753976125
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "img.dfdc_b7": [
+        "has_face"
+      ]
+    },
+    "seed": 7,
+    "size_policy": {
+      "additive_size_face_terms": false,
+      "global_intercept": true,
+      "neutral_size_missing": true,
+      "resolution_balance": true
+    },
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

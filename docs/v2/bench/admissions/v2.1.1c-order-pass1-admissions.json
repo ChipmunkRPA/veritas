@@ -1,0 +1,3939 @@
+{
+  "bench": "vb-1.1",
+  "generated": "2026-09-17T05:40:06+00:00",
+  "inputs": "docs/v2/bench/admissions/vb-1.1-inputs.yaml",
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "records": [
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "commfor.vit_s16_384 notes: A1 parity in float32 (I-6, 2026-09-14), CPU vs MPS on 50 vb items max |Δp| 3.60e-06",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.8591418836931128,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8863686364111988,
+          "level": 0.95,
+          "lo": 0.8317385713942782,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 1893,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2202,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": -0.047490644757921426,
+        "lgo_macro_delta": -0.017650388018357333,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": -0.017650388018357333,
+        "pass": false,
+        "qualifying": [
+          "family gan-faces",
+          "family seedream4",
+          "threat gan_face"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {
+          "R4": {
+            "delta": 0.06288032454361055,
+            "hi": 0.09330628803245436,
+            "lo": 0.032454361054766734,
+            "n": 493
+          }
+        },
+        "blocking_strata": [
+          "R4"
+        ],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R5",
+          "R6"
+        ],
+        "pass": false,
+        "pooled_ci95_hi": 0.009783171770089527,
+        "pooled_delta": -0.0037119524870081674,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "context_gated",
+        "max_drop": 0.15,
+        "pass": false,
+        "tau": 0.4717461304556911,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.14529914529914534,
+            "n": 117,
+            "pass": true,
+            "tpr_clean": {
+              "k": 69,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5897435897435898,
+              "wilson95": [
+                0.4991443544550582,
+                0.674637062902941
+              ]
+            },
+            "tpr_t": {
+              "k": 52,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.4444444444444444,
+              "wilson95": [
+                0.35759722132916544,
+                0.5348238060206445
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.15384615384615385,
+            "n": 117,
+            "pass": false,
+            "tpr_clean": {
+              "k": 69,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5897435897435898,
+              "wilson95": [
+                0.4991443544550582,
+                0.674637062902941
+              ]
+            },
+            "tpr_t": {
+              "k": 51,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.4358974358974359,
+              "wilson95": [
+                0.34949970825635257,
+                0.5263707079165052
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1288.0,
+        "max_p95_ms": 3000.0,
+        "n": 8781,
+        "p50_ms": 49.0,
+        "p95_ms": 136.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7 GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.commfor384 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.05217391304347826,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.commfor384",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [
+          "R4"
+        ],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "OwensLab/CommunityForensics-Eval"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A3 fails",
+        "A4 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": false,
+        "A4": false,
+        "A5": false,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "dda.dinov2_vitl14_lora notes: A1 parity in float32 (2026-09-12), CPU vs MPS on 50 items max |Δp| 1.22e-05",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.8838033121597096,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.9015957951506888,
+          "level": 0.95,
+          "lo": 0.8659107819079083,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 1900,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2320,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.11965613369528744,
+        "lgo_macro_delta": 0.14704690369238438,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.14704690369238438,
+        "pass": true,
+        "qualifying": [
+          "family faceswap-stills",
+          "family flux1",
+          "family flux2",
+          "family hidream",
+          "family ideogram",
+          "family imagen3",
+          "family imagen4",
+          "family legacy",
+          "family long-tail",
+          "family midjourney",
+          "family modern-t2i-faces",
+          "family nano-banana",
+          "family qwen-image",
+          "family recraft",
+          "family sd3",
+          "family seedream3",
+          "family seedream4",
+          "threat faceswap",
+          "threat t2i"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.004386005003367651,
+        "pooled_delta": -0.004454342984409797,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "context_gated",
+        "max_drop": 0.15,
+        "pass": false,
+        "tau": 0.5554094887065884,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.2136752136752137,
+            "n": 117,
+            "pass": false,
+            "tpr_clean": {
+              "k": 86,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.7350427350427351,
+              "wilson95": [
+                0.6485333169133087,
+                0.8066084904528799
+              ]
+            },
+            "tpr_t": {
+              "k": 61,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5213675213675214,
+              "wilson95": [
+                0.4316194204805912,
+                0.6097571074617896
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.2136752136752137,
+            "n": 117,
+            "pass": false,
+            "tpr_clean": {
+              "k": 86,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.7350427350427351,
+              "wilson95": [
+                0.6485333169133087,
+                0.8066084904528799
+              ]
+            },
+            "tpr_t": {
+              "k": 61,
+              "n": 117,
+              "rule_of_three": null,
+              "value": 0.5213675213675214,
+              "wilson95": [
+                0.4316194204805912,
+                0.6097571074617896
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 3829.0,
+        "max_p95_ms": 3000.0,
+        "n": 9001,
+        "p50_ms": 402.0,
+        "p95_ms": 486.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7 GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.dda ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.04830917874396135,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "admitted",
+      "detector_id": "img.dda",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "MSCOCO train2017"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A5 fails on jpeg75 → jpeg_q<70, social_ig → jpeg_q<70",
+        "term jpeg_q<70 not learnable on vb-1.1 (on: fit real 0 / fake 0, cal real 0 / fake 0): the detector runs ungated; the G3 test FPR decides"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": true,
+        "A4": true,
+        "A5": false,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "gend.clip_l14 notes: A1 parity in float32 (I-9, 2026-09-12), CPU vs MPS on 50 face items max |Δp| 1.28e-05",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.875140607424072,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.9156367714485417,
+          "level": 0.95,
+          "lo": 0.8228378068890305,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 286,
+            "subset": 385
+          },
+          "real": {
+            "scored": 889,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "faceswap",
+          "talking_head"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.004593217400093814,
+        "lgo_macro_delta": 0.012191889334350003,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.012191889334350003,
+        "pass": true,
+        "qualifying": [
+          "family faceswap-stills",
+          "family gan-faces",
+          "threat faceswap",
+          "threat gan_face"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [
+          "R1"
+        ],
+        "interaction_terms": {
+          "R1": null
+        },
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.008162549626123623,
+        "pooled_delta": -0.0033407572383073528,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.9321199290466481,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 6134.0,
+        "max_p95_ms": 3000.0,
+        "n": 4279,
+        "p50_ms": 46.0,
+        "p95_ms": 142.0999999999999,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,face.gend_clip_l14 GATES='img.dfdc_b7=has_face;face.gend_clip_l14=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=face.gend_clip_l14 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": 0.11442786069651742,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 201,
+        "triggered": false
+      },
+      "context_terms": [
+        "has_face"
+      ],
+      "decision": "admitted_context_gated",
+      "detector_id": "face.gend_clip_l14",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": "context_gate",
+      "h3_features": [
+        "has_face"
+      ],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "Celeb-DF v3",
+          "DeepSpeak v1.1",
+          "DeepSpeak v2",
+          "FFIW",
+          "FaceForensics++"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "H-3 context_gate on has_face without the D-41 trigger",
+        "A5 not established: no A5 interaction term",
+        "R1 point ΔFPR above +2.0 pts without established harm: no runtime context term; the G3 test FPR decides"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": true,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "unknown"
+        ],
+        "parity": null,
+        "pass": false,
+        "reason": "licence class unknown is not commercial (D-04)"
+      },
+      "A2": {
+        "auc": 0.8927363757263431,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.9061842321247366,
+          "level": 0.95,
+          "lo": 0.875995426836129,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 2689,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.22255117328836105,
+        "lgo_macro_delta": 0.2557150776198697,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.2557150776198697,
+        "pass": true,
+        "qualifying": [
+          "family flux1",
+          "family flux2",
+          "family gpt-4o-image-1",
+          "family gpt-image-1.5-2",
+          "family hidream",
+          "family imagen3",
+          "family imagen4",
+          "family long-tail",
+          "family midjourney",
+          "family modern-t2i-faces",
+          "family nano-banana",
+          "family qwen-image",
+          "family seedream3",
+          "threat t2i"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {
+          "R5": {
+            "delta": 0.05474452554744526,
+            "hi": 0.07846715328467153,
+            "lo": 0.032846715328467155,
+            "n": 548
+          }
+        },
+        "blocking_strata": [
+          "R5"
+        ],
+        "interaction_strata": [
+          "R1"
+        ],
+        "interaction_terms": {
+          "R1": null
+        },
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R6"
+        ],
+        "pass": false,
+        "pooled_ci95_hi": 0.01776720592559006,
+        "pooled_delta": -0.002969561989606538,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [
+          "R6"
+        ],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "context_gated",
+        "max_drop": 0.15,
+        "pass": false,
+        "tau": 0.979042,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.18333333333333335,
+            "n": 120,
+            "pass": false,
+            "tpr_clean": {
+              "k": 82,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.6833333333333333,
+              "wilson95": [
+                0.5955213176374913,
+                0.759771654501788
+              ]
+            },
+            "tpr_t": {
+              "k": 60,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.5,
+              "wilson95": [
+                0.411938704738014,
+                0.588061295261986
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.2,
+            "n": 120,
+            "pass": false,
+            "tpr_clean": {
+              "k": 82,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.6833333333333333,
+              "wilson95": [
+                0.5955213176374913,
+                0.759771654501788
+              ]
+            },
+            "tpr_t": {
+              "k": 58,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.48333333333333334,
+              "wilson95": [
+                0.39583644234571647,
+                0.5718641965507126
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 950.0,
+        "max_p95_ms": 3000.0,
+        "n": 10265,
+        "p50_ms": 60.0,
+        "p95_ms": 108.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.haywoodsloan GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.haywoodsloan ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.03188405797101449,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.hf.haywoodsloan",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [
+          "R5"
+        ],
+        "gate": [
+          "!has_face"
+        ],
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A1 fails",
+        "A4 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": false,
+        "A2": true,
+        "A3": true,
+        "A4": false,
+        "A5": false,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 vb items max |Δp| 5.40e-05, mean 1.10e-06",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.7736286689178575,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8025426877305234,
+          "level": 0.95,
+          "lo": 0.740799222345401,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 2689,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.037477707888224965,
+        "lgo_macro_delta": 0.058738512067847026,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.058738512067847026,
+        "pass": true,
+        "qualifying": [
+          "family flux2",
+          "family gpt-4o-image-1",
+          "family imagen3",
+          "family imagen4",
+          "family modern-t2i-faces",
+          "family nano-banana",
+          "family qwen-image"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {
+          "R5": {
+            "delta": 0.06021897810218979,
+            "hi": 0.0821167883211679,
+            "lo": 0.03832116788321168,
+            "n": 548
+          }
+        },
+        "blocking_strata": [
+          "R5"
+        ],
+        "interaction_strata": [
+          "R1"
+        ],
+        "interaction_terms": {
+          "R1": null
+        },
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R6"
+        ],
+        "pass": false,
+        "pooled_ci95_hi": 0.009178118619675244,
+        "pooled_delta": -0.002227171492204902,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [
+          "R6"
+        ],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "ungated",
+        "max_drop": 0.15,
+        "pass": true,
+        "tau": 0.999746,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": -0.00833333333333336,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 42,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.35,
+              "wilson95": [
+                0.2705189953289611,
+                0.4387867547389012
+              ]
+            },
+            "tpr_t": {
+              "k": 43,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.35833333333333334,
+              "wilson95": [
+                0.2781607899222678,
+                0.44729464069738
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 42,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.35,
+              "wilson95": [
+                0.2705189953289611,
+                0.4387867547389012
+              ]
+            },
+            "tpr_t": {
+              "k": 42,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.35,
+              "wilson95": [
+                0.2705189953289611,
+                0.4387867547389012
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 353.0,
+        "max_p95_ms": 3000.0,
+        "n": 10346,
+        "p50_ms": 37.0,
+        "p95_ms": 60.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.ateeqq GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.ateeqq ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.0463768115942029,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "admitted_context_gated",
+      "detector_id": "img.hf.ateeqq",
+      "gated_ablation": {
+        "A3": {
+          "pass": true,
+          "rule": "A3a or A3b"
+        },
+        "A4": {
+          "blocking_detail": {},
+          "blocking_strata": [],
+          "interaction_strata": [
+            "R1",
+            "R3"
+          ],
+          "interaction_terms": {
+            "R1": null,
+            "R3": "jpeg_q<70"
+          },
+          "not_established_strata": [
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R5",
+            "R6"
+          ],
+          "pass": true,
+          "pooled_ci95_hi": 0.008991304692673714,
+          "pooled_delta": -0.0018559762435040872,
+          "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+          "small_point_strata": [
+            "R6"
+          ],
+          "small_strata": [
+            "R6"
+          ],
+          "undecided_strata": []
+        },
+        "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.ateeqq GATES='img.dfdc_b7=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.ateeqq ABLATE_BOOTSTRAP=2000",
+        "gates": [
+          "!has_face"
+        ]
+      },
+      "gated_retry": {
+        "blocking_strata": [
+          "R5"
+        ],
+        "gate": [
+          "!has_face"
+        ],
+        "qualifies": true
+      },
+      "gates": {
+        "img.hf.ateeqq": [
+          "!has_face"
+        ]
+      },
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "established R5 harm ungated (+6.0 pts [+3.8, +8.2], n 548)",
+        "admitted gated !has_face (make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.ateeqq GATES='img.dfdc_b7=has_face;img.hf.ateeqq=!has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.ateeqq ABLATE_BOOTSTRAP=2000)",
+        "R1 point ΔFPR above +2.0 pts without established harm: no runtime context term; the G3 test FPR decides",
+        "R3 point ΔFPR above +2.0 pts without established harm: interaction term jpeg_q<70",
+        "term jpeg_q<70 not learnable on vb-1.1 (on: fit real 0 / fake 0, cal real 0 / fake 0): the detector runs ungated; the G3 test FPR decides",
+        "R6 point ΔFPR above +2.0 pts on fewer than 150 reals: not established; no term"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": true,
+        "A4": false,
+        "A5": true,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 vb items max |Δp| 5.00e-06, mean 4.40e-07",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.765994297091179,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8089482639638181,
+          "level": 0.95,
+          "lo": 0.720715441896911,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 220,
+            "subset": 220
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "gan_face"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.023869201432494748,
+        "lgo_macro_delta": 0.039570964158417876,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.039570964158417876,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.004061980118470978,
+        "pooled_delta": -0.0025983667409057165,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.993524,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 1,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 0.3333333333333333,
+              "wilson95": [
+                0.06149194402093078,
+                0.7923404011921757
+              ]
+            },
+            "tpr_t": {
+              "k": 1,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 0.3333333333333333,
+              "wilson95": [
+                0.06149194402093078,
+                0.7923404011921757
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 1,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 0.3333333333333333,
+              "wilson95": [
+                0.06149194402093078,
+                0.7923404011921757
+              ]
+            },
+            "tpr_t": {
+              "k": 1,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 0.3333333333333333,
+              "wilson95": [
+                0.06149194402093078,
+                0.7923404011921757
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 311.0,
+        "max_p95_ms": 3000.0,
+        "n": 10346,
+        "p50_ms": 19.0,
+        "p95_ms": 77.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.hf.dima806 GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.dima806 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.020289855072463767,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "admitted",
+      "detector_id": "img.hf.dima806",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A5 not established: no A5 interaction term"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": true,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial",
+          "commercial"
+        ],
+        "parity": {
+          "evidence": "h4-parity (2026-09-15, tests/test_detector_parity.py -m slow, tolerance 1e-3): CPU vs MPS on 50 face items (67 without a scorable face skipped) max |Δp| 2.00e-06, mean 1.40e-07",
+          "pass": true
+        },
+        "pass": true,
+        "reason": "parity passed"
+      },
+      "A2": {
+        "auc": 0.764206974128234,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8264540740980321,
+          "level": 0.95,
+          "lo": 0.6807275454295942,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 375,
+            "subset": 385
+          },
+          "real": {
+            "scored": 889,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "faceswap",
+          "talking_head"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": -0.02171054895820069,
+        "lgo_macro_delta": -0.011893775738629264,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": -0.011893775738629264,
+        "pass": false,
+        "qualifying": [
+          "family faceswap-stills",
+          "threat faceswap"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {
+          "R4": {
+            "delta": 0.07302231237322515,
+            "hi": 0.09736308316430022,
+            "lo": 0.0486815415821501,
+            "n": 493
+          }
+        },
+        "blocking_strata": [
+          "R4"
+        ],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R5",
+          "R6"
+        ],
+        "pass": false,
+        "pooled_ci95_hi": 0.003455093831305264,
+        "pooled_delta": -0.004083147735708982,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.75262,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 2,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.2857142857142857,
+              "wilson95": [
+                0.08221892324928332,
+                0.6410655504689458
+              ]
+            },
+            "tpr_t": {
+              "k": 2,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.2857142857142857,
+              "wilson95": [
+                0.08221892324928332,
+                0.6410655504689458
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": -0.14285714285714285,
+            "n": 7,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 2,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.2857142857142857,
+              "wilson95": [
+                0.08221892324928332,
+                0.6410655504689458
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 7,
+              "rule_of_three": null,
+              "value": 0.42857142857142855,
+              "wilson95": [
+                0.15821985399244537,
+                0.7495416372469643
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 2104.0,
+        "max_p95_ms": 3000.0,
+        "n": 4318,
+        "p50_ms": 66.0,
+        "p95_ms": 233.14999999999964,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7 GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.dfdc_b7 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": 0.0845771144278607,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 201,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.dfdc_b7",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [
+          "R4"
+        ],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": "context_gate",
+      "h3_features": [
+        "has_face"
+      ],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A3 fails",
+        "A4 fails",
+        "H-3 context_gate on has_face without the D-41 trigger"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": true,
+        "A3": false,
+        "A4": false,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.4550474590590282,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.48229012702435786,
+          "level": 0.95,
+          "lo": 0.42929363652740526,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 2051,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": -0.0004016023951284875,
+        "pooled_delta": -0.002969561989606538,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "ungated",
+        "max_drop": 0.15,
+        "pass": true,
+        "tau": 0.499456,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.008333333333333331,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 5,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.041666666666666664,
+              "wilson95": [
+                0.01792671676662358,
+                0.09384085288517821
+              ]
+            },
+            "tpr_t": {
+              "k": 4,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.03333333333333333,
+              "wilson95": [
+                0.01303755100780557,
+                0.0825803380922108
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.008333333333333331,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 5,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.041666666666666664,
+              "wilson95": [
+                0.01792671676662358,
+                0.09384085288517821
+              ]
+            },
+            "tpr_t": {
+              "k": 4,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.03333333333333333,
+              "wilson95": [
+                0.01303755100780557,
+                0.0825803380922108
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1616.0,
+        "max_p95_ms": 3000.0,
+        "n": 10346,
+        "p50_ms": 89.0,
+        "p95_ms": 144.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.forensic.spectrum GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.forensic.spectrum ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.07632850241545894,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.forensic.spectrum",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A2 fails",
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": true,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.43168837690978396,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.47635441213106067,
+          "level": 0.95,
+          "lo": 0.3827465169602439,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 476,
+            "subset": 630
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit",
+          "faceswap",
+          "talking_head"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.01433877838133322,
+        "lgo_macro_delta": 0.02530926011639173,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.02530926011639173,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.00203678056059563,
+        "pooled_delta": -0.0025983667409057165,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.68425,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 10,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 10,
+              "rule_of_three": 0.3,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.2775328030260577
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 10,
+              "rule_of_three": 0.3,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.2775328030260577
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 10,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 10,
+              "rule_of_three": 0.3,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.2775328030260577
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 10,
+              "rule_of_three": 0.3,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.2775328030260577
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1499.0,
+        "max_p95_ms": 3000.0,
+        "n": 10346,
+        "p50_ms": 83.0,
+        "p95_ms": 553.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.forensic.ela GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.forensic.ela ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.005797101449275362,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.forensic.ela",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": true,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.6288068077825557,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.651989948951435,
+          "level": 0.95,
+          "lo": 0.6049408468492624,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 2527,
+            "subset": 3319
+          },
+          "real": {
+            "scored": 2694,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "faceswap",
+          "talking_head",
+          "edit",
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.003628035628256961,
+        "lgo_macro_delta": 0.009956503654654447,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.009956503654654447,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0031009517617676227,
+        "pooled_delta": -0.0025983667409057165,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [
+          "R6"
+        ],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "ungated",
+        "max_drop": 0.15,
+        "pass": true,
+        "tau": 0.671295,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": -0.046153846153846156,
+            "n": 130,
+            "pass": true,
+            "tpr_clean": {
+              "k": 8,
+              "n": 130,
+              "rule_of_three": null,
+              "value": 0.06153846153846154,
+              "wilson95": [
+                0.03150928499520798,
+                0.11673669982249635
+              ]
+            },
+            "tpr_t": {
+              "k": 14,
+              "n": 130,
+              "rule_of_three": null,
+              "value": 0.1076923076923077,
+              "wilson95": [
+                0.06524133935938287,
+                0.17266296284593152
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": -0.05384615384615385,
+            "n": 130,
+            "pass": true,
+            "tpr_clean": {
+              "k": 8,
+              "n": 130,
+              "rule_of_three": null,
+              "value": 0.06153846153846154,
+              "wilson95": [
+                0.03150928499520798,
+                0.11673669982249635
+              ]
+            },
+            "tpr_t": {
+              "k": 15,
+              "n": 130,
+              "rule_of_three": null,
+              "value": 0.11538461538461539,
+              "wilson95": [
+                0.07118367247445512,
+                0.1816636826287943
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1664.0,
+        "max_p95_ms": 3000.0,
+        "n": 10346,
+        "p50_ms": 88.0,
+        "p95_ms": 516.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.forensic.noise GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.forensic.noise ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": true,
+        "fpr": 0.017391304347826087,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 1035,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.forensic.noise",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": true,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.5,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5,
+          "level": 0.95,
+          "lo": 0.5,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 8,
+            "subset": 245
+          },
+          "real": {
+            "scored": 61,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": -0.008881404726598825,
+        "lgo_macro_delta": -0.0018987661155497881,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": -0.0018987661155497881,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": -0.0025983667409057165,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.75,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1313.0,
+        "max_p95_ms": 3000.0,
+        "n": 226,
+        "p50_ms": 38.0,
+        "p95_ms": 275.75,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.forensic.jpeg_dq GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.forensic.jpeg_dq ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": 1.0,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 12,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.forensic.jpeg_dq",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 245
+          },
+          "real": {
+            "scored": 24,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.00813059000612134,
+        "lgo_macro_delta": 0.017034504346456536,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.017034504346456536,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0038994614358950352,
+        "pooled_delta": -0.0003714710252600284,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.75,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 612.0,
+        "max_p95_ms": 3000.0,
+        "n": 95,
+        "p50_ms": 104.0,
+        "p95_ms": 441.8999999999999,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.forensic.copymove GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.forensic.copymove ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": 1.0,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 13,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.forensic.copymove",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4993,
+        "n_fake": 2301,
+        "n_real": 2692
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A3 fails",
+        "A2 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 0,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": null,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_p95_ms": 3000.0,
+        "n": 0,
+        "pass": null
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.meta.generator GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.meta.generator ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.meta.generator",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "provenance",
+      "reasons": [
+        "A3 fails",
+        "A2 not established",
+        "A6 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": null
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 0,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": null,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_p95_ms": 3000.0,
+        "n": 0,
+        "pass": null
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.meta.exif GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.meta.exif ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.meta.exif",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "provenance",
+      "reasons": [
+        "A3 fails",
+        "A2 not established",
+        "A6 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": null
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 245
+          },
+          "real": {
+            "scored": 0,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": null,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_p95_ms": 3000.0,
+        "n": 0,
+        "pass": null
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.meta.consistency GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.meta.consistency ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.meta.consistency",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "provenance",
+      "reasons": [
+        "A3 fails",
+        "A2 not established",
+        "A6 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": null
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 245
+          },
+          "real": {
+            "scored": 0,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": null,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_p95_ms": 3000.0,
+        "n": 0,
+        "pass": null
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.meta.qtables GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.meta.qtables ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "img.meta.qtables",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [
+          "vb-mini R1/R2 reals are the reference set; their false-positive rate is measured leave-one-out"
+        ],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "provenance",
+      "reasons": [
+        "A3 fails",
+        "A2 not established",
+        "A6 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": null
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": null,
+        "ci95": null,
+        "coverage": {
+          "fake": {
+            "scored": 0,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 0,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": null,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "pass": null
+      },
+      "A3b": {
+        "pass": null
+      },
+      "A4": {
+        "pass": null
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": null,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          },
+          "social_ig": {
+            "delta_tpr": null,
+            "n": 0,
+            "pass": null
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_p95_ms": 3000.0,
+        "n": 0,
+        "pass": null
+      },
+      "ablation_command": null,
+      "baseline_detectors": null,
+      "camera_original": {
+        "established": false,
+        "fpr": null,
+        "max_fpr": 0.1,
+        "min_n": 300,
+        "n": 0,
+        "triggered": false
+      },
+      "context_terms": [],
+      "decision": "not_established",
+      "detector_id": "img.watermark.dwtdct",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": null,
+      "lane": "provenance",
+      "reasons": [
+        "A2 not established",
+        "A3 not established",
+        "A4 not established",
+        "A6 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": null,
+        "A3": null,
+        "A4": null,
+        "A5": null,
+        "A6": null
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": null,
+        "pass": null,
+        "reason": "parity not established"
+      },
+      "A2": {
+        "auc": 0.9215762629538492,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.935184239479607,
+          "level": 0.95,
+          "lo": 0.9061448583514732,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 1871,
+            "subset": 2689
+          },
+          "real": {
+            "scored": 2697,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": true,
+        "threats": [
+          "t2i",
+          "personalised",
+          "gan_face",
+          "t2v"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.2336941600679256,
+        "lgo_macro_delta": 0.26807867220295173,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.26807867220295173,
+        "pass": true,
+        "qualifying": [
+          "family flux1",
+          "family flux2",
+          "family gpt-4o-image-1",
+          "family gpt-image-1.5-2",
+          "family hidream",
+          "family ideogram",
+          "family imagen3",
+          "family imagen4",
+          "family long-tail",
+          "family midjourney",
+          "family modern-t2i-faces",
+          "family nano-banana",
+          "family qwen-image",
+          "family recraft",
+          "family seedream3",
+          "family seedream4",
+          "threat t2i"
+        ],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [
+          "R3",
+          "R5"
+        ],
+        "interaction_terms": {
+          "R3": "jpeg_q<70",
+          "R5": "has_face"
+        },
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.009812470963229004,
+        "pooled_delta": -0.002969561989606538,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": "ungated",
+        "max_drop": 0.15,
+        "pass": true,
+        "tau": 0.9951106211569775,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.01666666666666672,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 89,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.7416666666666667,
+              "wilson95": [
+                0.656714698705421,
+                0.8116260372963563
+              ]
+            },
+            "tpr_t": {
+              "k": 87,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.725,
+              "wilson95": [
+                0.6390703410093946,
+                0.7969710338888117
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 120,
+            "pass": true,
+            "tpr_clean": {
+              "k": 89,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.7416666666666667,
+              "wilson95": [
+                0.656714698705421,
+                0.8116260372963563
+              ]
+            },
+            "tpr_t": {
+              "k": 89,
+              "n": 120,
+              "rule_of_three": null,
+              "value": 0.7416666666666667,
+              "wilson95": [
+                0.656714698705421,
+                0.8116260372963563
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1367.411617131438,
+        "max_p95_ms": 3000.0,
+        "n": 9684,
+        "p50_ms": 104.35979681642493,
+        "p95_ms": 835.5263281919179,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,img.veritas_probe.pe_core_l14 GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.veritas_probe.pe_core_l14 ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": null,
+      "context_terms": [],
+      "decision": "not_established",
+      "detector_id": "img.veritas_probe.pe_core_l14",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": null,
+      "reasons": [
+        "A1 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": null,
+        "A2": true,
+        "A3": true,
+        "A4": true,
+        "A5": true,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": null,
+        "pass": null,
+        "reason": "parity not established"
+      },
+      "A2": {
+        "auc": 0.5333554420946209,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5837200412643858,
+          "level": 0.95,
+          "lo": 0.4848708232903782,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 161,
+            "subset": 245
+          },
+          "real": {
+            "scored": 2697,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.003759126076059687,
+        "lgo_macro_delta": 0.010670777745060256,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.010670777745060256,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.003519172021092912,
+        "pooled_delta": -0.0025983667409057165,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.9678940000000001,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 4603.0,
+        "max_p95_ms": 3000.0,
+        "n": 10270,
+        "p50_ms": 150.0,
+        "p95_ms": 1003.5499999999993,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.mesorch.integrity GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.mesorch.integrity ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "pe.mesorch.integrity",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A3 fails",
+        "A1 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": null,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [
+          "commercial"
+        ],
+        "parity": null,
+        "pass": null,
+        "reason": "parity not established"
+      },
+      "A2": {
+        "auc": 0.5421425232084418,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.586945333198318,
+          "level": 0.95,
+          "lo": 0.5004801575014142,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 161,
+            "subset": 245
+          },
+          "real": {
+            "scored": 2697,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.05571589734715815,
+        "lgo_macro_delta": 0.07436912017596836,
+        "pass": true,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.07436912017596836,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [
+          "R1"
+        ],
+        "interaction_terms": {
+          "R1": null
+        },
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.005926676702045072,
+        "pooled_delta": -0.002969561989606538,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.052399999999999995,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 4603.0,
+        "max_p95_ms": 3000.0,
+        "n": 10270,
+        "p50_ms": 150.0,
+        "p95_ms": 1003.5499999999993,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.mesorch.region_area GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.mesorch.region_area ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "pe.mesorch.region_area",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A1 not established"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": null,
+        "A2": false,
+        "A3": true,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.6475863450763097,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6950647320277905,
+          "level": 0.95,
+          "lo": 0.5974724395744422,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 161,
+            "subset": 245
+          },
+          "real": {
+            "scored": 2697,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.96875,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            },
+            "tpr_t": {
+              "k": 0,
+              "n": 3,
+              "rule_of_three": 1.0,
+              "value": 0.0,
+              "wilson95": [
+                0.0,
+                0.5614970356393196
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 1962.0,
+        "max_p95_ms": 3000.0,
+        "n": 10351,
+        "p50_ms": 47.0,
+        "p95_ms": 418.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.jpeg_dq.support GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.jpeg_dq.support ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "pe.jpeg_dq.support",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4995,
+        "n_fake": 2301,
+        "n_real": 2694
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    },
+    {
+      "A1": {
+        "licence_classes": [],
+        "parity": null,
+        "pass": true,
+        "reason": "no model: CPU only, parity not applicable"
+      },
+      "A2": {
+        "auc": 0.49554730983302414,
+        "ci95": {
+          "B": 2000,
+          "hi": 0.49783809440389526,
+          "level": 0.95,
+          "lo": 0.49294161246460516,
+          "valid": 2000
+        },
+        "coverage": {
+          "fake": {
+            "scored": 161,
+            "subset": 245
+          },
+          "real": {
+            "scored": 2695,
+            "subset": 2697
+          }
+        },
+        "min_auc": 0.7,
+        "pass": false,
+        "threats": [
+          "edit"
+        ]
+      },
+      "A3a": {
+        "ci95_lo": 0.0,
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+      },
+      "A3b": {
+        "lgo_macro_delta": 0.0,
+        "pass": false,
+        "qualifying": [],
+        "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+      },
+      "A4": {
+        "blocking_detail": {},
+        "blocking_strata": [],
+        "interaction_strata": [],
+        "interaction_terms": {},
+        "not_established_strata": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "pass": true,
+        "pooled_ci95_hi": 0.0,
+        "pooled_delta": 0.0,
+        "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+        "small_point_strata": [],
+        "small_strata": [
+          "R6"
+        ],
+        "undecided_strata": []
+      },
+      "A5": {
+        "alpha": 0.05,
+        "consequence": null,
+        "max_drop": 0.15,
+        "pass": null,
+        "tau": 0.5,
+        "transforms": {
+          "jpeg75": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 1.0,
+              "wilson95": [
+                0.43850296436068037,
+                1.0
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 1.0,
+              "wilson95": [
+                0.43850296436068037,
+                1.0
+              ]
+            }
+          },
+          "social_ig": {
+            "delta_tpr": 0.0,
+            "n": 3,
+            "pass": null,
+            "reason": "fewer than 30 paired fakes",
+            "tpr_clean": {
+              "k": 3,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 1.0,
+              "wilson95": [
+                0.43850296436068037,
+                1.0
+              ]
+            },
+            "tpr_t": {
+              "k": 3,
+              "n": 3,
+              "rule_of_three": null,
+              "value": 1.0,
+              "wilson95": [
+                0.43850296436068037,
+                1.0
+              ]
+            }
+          }
+        }
+      },
+      "A6": {
+        "analysis_p95_s": null,
+        "max_ms": 2716.0,
+        "max_p95_ms": 3000.0,
+        "n": 10307,
+        "p50_ms": 84.0,
+        "p95_ms": 493.0,
+        "pass": true
+      },
+      "ablation_command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=img.commfor384,img.dda,img.dfdc_b7,pe.copymove.pairs GATES='img.dfdc_b7=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=pe.copymove.pairs ABLATE_BOOTSTRAP=2000",
+      "baseline_detectors": [
+        "img.commfor384",
+        "img.dda",
+        "img.dfdc_b7"
+      ],
+      "camera_original": null,
+      "context_terms": [],
+      "decision": "rejected",
+      "detector_id": "pe.copymove.pairs",
+      "gated_ablation": null,
+      "gated_retry": {
+        "blocking_strata": [],
+        "gate": null,
+        "qualifies": false
+      },
+      "gates": {},
+      "h3_decision": null,
+      "h3_features": [],
+      "items": {
+        "contaminated_dropped": 0,
+        "contamination_sets": [],
+        "n": 4993,
+        "n_fake": 2301,
+        "n_real": 2692
+      },
+      "lane": "partial_edit",
+      "reasons": [
+        "A2 fails",
+        "A3 fails"
+      ],
+      "rule": "D-51",
+      "verdicts": {
+        "A1": true,
+        "A2": false,
+        "A3": false,
+        "A4": true,
+        "A5": null,
+        "A6": true
+      }
+    }
+  ],
+  "schema": "veritas.admission-records/1"
+}

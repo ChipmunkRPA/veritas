@@ -1,0 +1,168 @@
+{
+  "bench": "vb-1.1",
+  "collected": {
+    "agreement": {
+      "max_abs_diff": 4.446448748373706,
+      "median_abs_diff": 0.21056993038564586,
+      "median_sigma_cache": 1.882691,
+      "median_sigma_v4": 1.8681370974253453,
+      "n": 281
+    },
+    "missing": {
+      "fake": 152,
+      "real": 19
+    },
+    "native_sources": {
+      "cache": 353,
+      "v4_native": 441
+    }
+  },
+  "command": "scripts/d3_recalibrate.py --manifest data/vbench/manifest.parquet --scores data/vbench/scores --eval-dir data/vbench/eval/d3_lane --bench vb-1.1 --out ../docs/v2/bench --constants app/engine/fusion/d3_sigma.json",
+  "detector_id": "vid.synth.d3_xclip",
+  "eval_dir": "data/vbench/eval/d3_lane",
+  "eval_sha256": {
+    "crf": "f99e690731e89de620344d9471ea150f727114b4d8861826d226234097afccc5",
+    "native": "9bf9586e65dc5eab0dd39d88a87115faf6711b05cd20629f8d2b5bf8f481ea3d"
+  },
+  "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+  "result": {
+    "auc_native_reals_vs_fakes": 0.5815016564729868,
+    "fpr": {
+      "all": {
+        "k": 41,
+        "median_sigma": 1.9091183303121209,
+        "n": 834,
+        "rate": 0.049160671462829736,
+        "wilson95": [
+          0.036442918924915225,
+          0.06601257306746405
+        ]
+      },
+      "encode": {
+        "crf23": {
+          "k": 6,
+          "median_sigma": 1.9032363428808992,
+          "n": 154,
+          "rate": 0.03896103896103896,
+          "wilson95": [
+            0.01797644434299936,
+            0.08238666046845262
+          ]
+        },
+        "crf28": {
+          "k": 9,
+          "median_sigma": 1.9069069793812266,
+          "n": 154,
+          "rate": 0.05844155844155844,
+          "wilson95": [
+            0.031047680441884717,
+            0.10732825092682988
+          ]
+        },
+        "crf28-720p": {
+          "k": 8,
+          "median_sigma": 1.848658397615428,
+          "n": 154,
+          "rate": 0.05194805194805195,
+          "wilson95": [
+            0.026554932348448516,
+            0.09915005683451186
+          ]
+        },
+        "crf35": {
+          "k": 7,
+          "median_sigma": 1.9420425723311419,
+          "n": 154,
+          "rate": 0.045454545454545456,
+          "wilson95": [
+            0.022190033625157028,
+            0.09084401337204914
+          ]
+        },
+        "native": {
+          "k": 11,
+          "median_sigma": 1.92468,
+          "n": 218,
+          "rate": 0.05045871559633028,
+          "wilson95": [
+            0.028405807316472208,
+            0.08808034911077783
+          ]
+        }
+      },
+      "stratum": {
+        "V-general": {
+          "k": 11,
+          "median_sigma": 1.92468,
+          "n": 212,
+          "rate": 0.05188679245283019,
+          "wilson95": [
+            0.029216563395375445,
+            0.09050769632392043
+          ]
+        },
+        "V-talking-head": {
+          "k": 0,
+          "median_sigma": 1.851917,
+          "n": 6,
+          "rate": 0.0,
+          "wilson95": [
+            0.0,
+            0.39033429165637346
+          ]
+        }
+      }
+    },
+    "iqr": [
+      1.4726140034142057,
+      2.443555086276895
+    ],
+    "n_real_items": 218,
+    "n_real_rows": 834,
+    "scale": 0.7197487641680425,
+    "sigma_threshold": {
+      "0.01": 0.568481,
+      "0.05": 0.870586102716169
+    },
+    "tpr": {
+      "all": {
+        "k": 41,
+        "median_sigma": 1.729554233621844,
+        "n": 576,
+        "rate": 0.07118055555555555,
+        "wilson95": [
+          0.052900969226118796,
+          0.09514201315550026
+        ]
+      },
+      "threat": {
+        "t2v": {
+          "k": 41,
+          "median_sigma": 1.7153139820733099,
+          "n": 568,
+          "rate": 0.0721830985915493,
+          "wilson95": [
+            0.05365232464136184,
+            0.09646176301018623
+          ]
+        },
+        "talking_head": {
+          "k": 0,
+          "median_sigma": 2.4297174999999998,
+          "n": 8,
+          "rate": 0.0,
+          "wilson95": [
+            0.0,
+            0.3244075683414076
+          ]
+        }
+      }
+    }
+  },
+  "schema": "veritas.d3-sigma/1",
+  "score_key": "vid.synth.d3_xclip@252607e85631",
+  "splits": [
+    "fit",
+    "cal"
+  ]
+}

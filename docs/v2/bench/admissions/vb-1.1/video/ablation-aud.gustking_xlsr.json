@@ -1,0 +1,493 @@
+{
+  "baseline_detectors": [
+    "vid.codec.ffprobe",
+    "vid.frames.dfdc_b7",
+    "vid.lipsync.landmark_xcorr",
+    "vid.synth.frames.commfor384",
+    "vid.synth.frames.dda"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "outside_scope": 612,
+      "split:excluded": 15,
+      "split:test": 790
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "5059434a74cfacdca7c47ebc368a941f65d07e00b2cb2891c80b33a77f9851a4",
+    "version": "vb-1.1"
+  },
+  "candidate": "aud.gustking_xlsr",
+  "command": "make calibrate MODALITY=video SEED=7 BENCH=vb-1.1 DETECTORS=vid.synth.frames.commfor384,vid.synth.frames.dda,vid.frames.dfdc_b7,vid.codec.ffprobe,aud.gustking_xlsr,vid.lipsync.landmark_xcorr CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=aud.gustking_xlsr ABLATE_BOOTSTRAP=2000",
+  "contamination_card": true,
+  "criteria": {
+    "A3": {
+      "pass": false,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.0,
+      "lgo_macro_delta": 0.022222222222222143,
+      "pass": false,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.022222222222222143,
+      "pass": false,
+      "qualifying": [],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_strata": [],
+      "interaction_strata": [],
+      "interaction_terms": {},
+      "not_established_strata": [
+        "V-general",
+        "V-talking-head"
+      ],
+      "pass": false,
+      "pooled_ci95_hi": 0.015957446808510637,
+      "pooled_delta": 0.0,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term (D-44)",
+      "small_strata": [
+        "V-talking-head"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.9629271437782077,
+      "without": 0.9668278529980657
+    },
+    "fpr_per_stratum": {
+      "V-general": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.01648351648351648,
+          "lo": -0.01648351648351648,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 182,
+        "with": 0.04945054945054945,
+        "without": 0.04945054945054945
+      },
+      "V-talking-head": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 6,
+        "with": 0.0,
+        "without": 0.0
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.015957446808510637,
+        "lo": -0.015957446808510634,
+        "valid": 2000
+      },
+      "delta": 0.0,
+      "n": 188,
+      "with": 0.047872340425531915,
+      "without": 0.047872340425531915
+    },
+    "recall_per_family": {
+      "ai-talking-humans": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 12,
+        "with": 0.9166666666666666,
+        "without": 0.9166666666666666
+      },
+      "animatediff": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 10,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "cogvideox": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 11,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "kling": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 8,
+        "with": 0.875,
+        "without": 0.875
+      },
+      "luma-ray": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 12,
+        "with": 0.9166666666666666,
+        "without": 0.9166666666666666
+      },
+      "marey": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 11,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "mochi": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 10,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "pika": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 11,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "runway": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 10,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "seedance": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 11,
+        "with": 0.45454545454545453,
+        "without": 0.45454545454545453
+      },
+      "sora": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 12,
+        "with": 0.5,
+        "without": 0.5
+      },
+      "stable-video": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 11,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "talking-head-animation": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 8,
+        "with": 0.75,
+        "without": 0.75
+      },
+      "veo": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.5555555555555556,
+          "valid": 2000
+        },
+        "delta": -0.2222222222222222,
+        "n": 9,
+        "with": 0.6666666666666666,
+        "without": 0.8888888888888888
+      },
+      "videopoet": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 9,
+        "with": 1.0,
+        "without": 1.0
+      },
+      "wan-hunyuan": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 10,
+        "with": 1.0,
+        "without": 1.0
+      }
+    },
+    "recall_per_threat": {
+      "t2v": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.03289473684210531,
+          "valid": 2000
+        },
+        "delta": -0.01273885350318471,
+        "n": 157,
+        "with": 0.8853503184713376,
+        "without": 0.8980891719745223
+      },
+      "talking_head": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.0,
+        "n": 8,
+        "with": 0.75,
+        "without": 0.75
+      }
+    },
+    "tau": {
+      "with": 0.6142699252264711,
+      "without": 0.5481191502317703
+    },
+    "tpr": {
+      "with": 0.8787878787878788,
+      "without": 0.8909090909090909
+    }
+  },
+  "detector_meta": {
+    "aud.gustking_xlsr": {
+      "score_key": "aud.gustking_xlsr@fe21cdef274f",
+      "transform": "logit_clip8",
+      "weights_sha12": "fe21cdef274f"
+    },
+    "vid.codec.ffprobe": {
+      "score_key": "vid.codec.ffprobe@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "vid.frames.dfdc_b7": {
+      "score_key": "vid.frames.dfdc_b7@651bc0cae350",
+      "transform": "logit_clip8",
+      "weights_sha12": "651bc0cae350"
+    },
+    "vid.lipsync.landmark_xcorr": {
+      "score_key": "vid.lipsync.landmark_xcorr@noweights",
+      "transform": "heuristic_cap",
+      "weights_sha12": "noweights"
+    },
+    "vid.synth.frames.commfor384": {
+      "score_key": "vid.synth.frames.commfor384@8ab53da046f4",
+      "transform": "logit_clip8",
+      "weights_sha12": "8ab53da046f4"
+    },
+    "vid.synth.frames.dda": {
+      "score_key": "vid.synth.frames.dda@d1f98d194fd1",
+      "transform": "logit_clip8",
+      "weights_sha12": "d1f98d194fd1"
+    }
+  },
+  "git_commit": "6af1e933009f235875a23c5957cd31eb5a5039b8",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 353,
+    "n_fake": 165,
+    "n_real": 188
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "V-Kling": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 8,
+        "n_train": 345,
+        "tau": {
+          "with": 0.6516386584027611,
+          "without": 0.6546612734120842
+        },
+        "tpr": {
+          "with": 0.625,
+          "without": 0.625
+        }
+      },
+      "V-Seedance": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 11,
+        "n_train": 342,
+        "tau": {
+          "with": 0.5899151809278866,
+          "without": 0.5898903070959878
+        },
+        "tpr": {
+          "with": 0.36363636363636365,
+          "without": 0.36363636363636365
+        }
+      },
+      "V-Sora": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 12,
+        "n_train": 341,
+        "tau": {
+          "with": 0.6630894416261107,
+          "without": 0.6832369389763409
+        },
+        "tpr": {
+          "with": 0.4166666666666667,
+          "without": 0.4166666666666667
+        }
+      },
+      "V-Veo": {
+        "candidate_active": true,
+        "delta": 0.11111111111111105,
+        "n_fake": 9,
+        "n_train": 344,
+        "tau": {
+          "with": 0.7119983838768902,
+          "without": 0.7141066330883942
+        },
+        "tpr": {
+          "with": 0.6666666666666666,
+          "without": 0.5555555555555556
+        }
+      },
+      "V-WanHunyuan": {
+        "candidate_active": true,
+        "delta": 0.0,
+        "n_fake": 10,
+        "n_train": 343,
+        "tau": {
+          "with": 0.7221749317553562,
+          "without": 0.699266206551779
+        },
+        "tpr": {
+          "with": 1.0,
+          "without": 1.0
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.06666666666666676,
+        "lo": 0.0,
+        "valid": 2000
+      },
+      "delta": 0.022222222222222143,
+      "with": 0.6143939393939394,
+      "without": 0.5921717171717172
+    },
+    "macro_over": [
+      "V-Kling",
+      "V-Seedance",
+      "V-Sora",
+      "V-Veo",
+      "V-WanHunyuan"
+    ],
+    "missing": [],
+    "required": [
+      "V-Veo",
+      "V-Sora",
+      "V-Kling",
+      "V-Seedance",
+      "V-WanHunyuan"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {},
+    "seed": 7,
+    "splits": [
+      "fit",
+      "cal"
+    ]
+  },
+  "modality": "video",
+  "schema": "veritas.ablation/1"
+}

@@ -1,0 +1,180 @@
+# Veritas v2 stack (ARCHITECTURE §8.4; docs/runbook.md).
+#   VERITAS_API_KEY=… make up                                            api + worker + web, weights fetched once by models-init
+#     (`make up` is `VERITAS_BUILD_COMMIT=$(git rev-parse HEAD) docker compose up --build -d`: an image is built from a
+#     named commit, and its build fails without one; N-15)
+#   docker compose -f docker-compose.yml -f docker-compose.tls.yml up    HTTPS on 443 (VERITAS_TLS_CERT, VERITAS_TLS_KEY); runbook "TLS"
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up    NVIDIA worker (VERITAS_VARIANT=cuda)
+#   docker compose -f docker-compose.yml -f docker-compose.postgres.yml up   Postgres with two roles (VERITAS_PG_PASSWORD, VERITAS_PG_APP_PASSWORD)
+# Air-gapped hosts: build with VERITAS_BAKE_MODELS=full on a connected host, load the image, and models-init only verifies.
+# Memory (N-14; OPS-09): each service has a limit, VERITAS_API_MEM_LIMIT (8g), VERITAS_WORKER_MEM_LIMIT (28g),
+# VERITAS_FETCH_MEM_LIMIT (4g, models-init) and VERITAS_WEB_MEM_LIMIT (512m). The model memory budget follows the worker's
+# limit: `auto` is half of the smaller of the machine's memory and the limit on CPU; VERITAS_MODEL_MEMORY_BUDGET_MB sets it
+# (passed on from the host: docker-compose.settings.env).
+# Host (D-74): the reference CPU host has 32 GB of memory. On it these defaults run every check of the default profile
+# (`full`); a host with less memory says at its start which checks it drops (docs/runbook.md "Deploy", "Host").
+# Settings (N-14; OPS-10; docs/settings.md lists every one). `api` and `worker` get, in this order of precedence:
+#   1. what this file names: a fixed value, or a variable of the environment of `docker compose` with a default;
+#   2. the settings named in docker-compose.settings.env, when they are set in that environment (or in `.env` here);
+#   3. the lines of the optional file `veritas.env` beside this file (NAME=value; not in version control).
+# A setting of group 1 is not read from `veritas.env`. Never name a setting under `environment:` without a value: Compose
+# would then drop the line `veritas.env` has for it.
+# Container logs are rotated (N-14; OPS-09): five files of 10 MB per service, as the Google Cloud bundle keeps them.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+x-backend: &backend
+  platform: linux/amd64  # reviewed CPU/cu126 wheel locks target the Google Cloud VM architecture
+  restart: unless-stopped  # after a host reboot, a Docker restart or a kill for memory (models-init: "no")
+  logging: *logging
+  image: veritas-backend:${VERITAS_VARIANT:-cpu}
+  build:
+    context: ./backend
+    args:
+      VARIANT: ${VERITAS_VARIANT:-cpu}
+      BAKE_MODELS: ${VERITAS_BAKE_MODELS:-none}
+      # Set by `make up` (git rev-parse HEAD) and baked into the image: every result manifest, the probes and the metrics
+      # state it. The build fails without a full commit (scripts/runtime_contract.py). Never named under `environment:`,
+      # where an unset variable would replace the baked value with nothing
+      VERITAS_BUILD_COMMIT: ${VERITAS_BUILD_COMMIT:-}
+  # Confinement, as the Google Cloud bundle runs this image (N-14; SEC-17): the root filesystem is read-only, so a process
+  # writes the two volumes and /tmp only (the worker's health file and the caches of XDG_CACHE_HOME live there; it is memory,
+  # counted in the service's limit); it holds no capability and cannot gain one. The image's user is uid and gid 10001.
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  tmpfs: ["/tmp:size=1g,mode=1777"]
+  volumes:
+    - veritas-data:/data
+    - veritas-models:/models
+
+x-backend-env: &backend-env
+  # REQUIRED in prod: the API refuses to start without it, with fewer than 32 characters, or with a placeholder (D-59;
+  # VERITAS_ALLOW_ANONYMOUS=true only for a deliberately open instance). python3 -c 'import secrets; print(secrets.token_urlsafe(32))'
+  VERITAS_API_KEY: ${VERITAS_API_KEY:?set VERITAS_API_KEY to at least 32 random characters (clients send X-API-Key)}
+  VERITAS_DEVICE: ${VERITAS_DEVICE:-cpu}
+  VERITAS_LOG_LEVEL: ${VERITAS_LOG_LEVEL:-INFO}
+  # The two volumes, whatever `veritas.env` says: evidence and weights never land in the container's own layer.
+  VERITAS_DATA_DIR: /data
+  VERITAS_MODELS_DIR: /models
+  # Uploads, batch spools and report work files go to the data volume, not into the container (runbook "Sizing"). The
+  # process makes the directory at its start.
+  TMPDIR: /data/tmp
+  # VERITAS_OFFLINE is unset: prod defaults to offline (PL-01), so api and worker never touch the network
+
+services:
+  # One-shot: fetch and verify the pinned weights of the enabled detectors into the veritas-models volume, then exit.
+  # With every file installed it re-hashes and exits without downloading.
+  # The one service that reaches the network holds neither the API key nor the evidence (SEC-17): it mounts the models
+  # volume alone and gets its own environment. `--no-record`: the record of verified files is signed with a key in the
+  # data volume, so this container writes none, and `api` and `worker` hash a file themselves before they first load it.
+  models-init:
+    <<: *backend
+    command: ["python", "-m", "app.cli", "models", "fetch", "--profile", "${VERITAS_MODELS_PROFILE:-full}", "--no-record"]
+    environment:
+      VERITAS_OFFLINE: "false"  # the only service allowed to download
+      # As `api` and `worker` when set on the host: it fetches the weights of the detectors that policy enables. (No value
+      # is safe here: this service reads no env file.) A policy set in veritas.env alone does not reach this service.
+      VERITAS_LICENCE_POLICY:
+      VERITAS_ALLOW_ANONYMOUS: "true"  # it serves nothing: the settings check of prod wants a key or this
+      VERITAS_DATA_DIR: /tmp/veritas-fetch  # no data volume here; nothing is kept in it
+      VERITAS_LOG_LEVEL: INFO
+    volumes:
+      - veritas-models:/models
+    # The fetch of the two 3.1 GB files of the full profile was killed at 2 GiB (exit code 137). After a failure or a
+    # kill, `docker compose up` again goes on with the files that are missing; the first line of its log says so.
+    mem_limit: ${VERITAS_FETCH_MEM_LIMIT:-4g}
+    restart: "no"
+    healthcheck: { disable: true }
+
+  api:
+    <<: *backend
+    depends_on:
+      models-init: { condition: service_completed_successfully }
+    env_file: &settings-files  # the later file wins; models-init reads neither (it needs no secret)
+      - path: veritas.env  # optional: the operator's settings
+        required: false
+      - path: docker-compose.settings.env  # names passed on from the host when set there
+    environment:
+      <<: *backend-env
+      VERITAS_RUN_WORKER: "false"  # analyses run in `worker`
+      VERITAS_DB_APPLICATION_NAME: veritas-api  # the name of its sessions in pg_stat_activity (docker-compose.postgres.yml)
+      # `auto` resolves to `quick` on CPU, which cannot load the calibrated image and video fusers; `quick` stays selectable per request
+      VERITAS_DEFAULT_PROFILE: ${VERITAS_DEFAULT_PROFILE:-full}
+      VERITAS_CORS_ORIGINS: '${VERITAS_CORS_ORIGINS:-["http://localhost:8080"]}'  # a JSON list: the origins of the pages that call this API
+      VERITAS_TRUST_PROXY: "true"  # nginx appends the real client to X-Forwarded-For
+      VERITAS_TRUSTED_PROXY_HOPS: ${VERITAS_TRUSTED_PROXY_HOPS:-1}  # 2 with your own HTTPS proxy in front of nginx (runbook "TLS")
+    # The API is reached only through nginx on the compose network; do not publish 8160 on the host.
+    expose: ["8160"]
+    mem_limit: ${VERITAS_API_MEM_LIMIT:-8g}  # it loads no model (VERITAS_RUN_WORKER=false); the Google Cloud bundle's value
+    # On stop, open event streams end at their next poll and uvicorn closes what is left after 30 s
+    # (--timeout-graceful-shutdown in the image's command); Docker's default of 10 s would kill the API before that.
+    stop_grace_period: 40s
+    # Liveness: the process answers once its start, the migrations included, is over; `worker` and `web` wait for it. Never
+    # /api/ready here: that waits for the worker's heartbeat, and the worker waits for this check (runbook "Monitoring").
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:8160/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 120s
+
+  worker:
+    <<: *backend
+    command: ["python", "-m", "app.engine.worker", "--health-file", "/tmp/veritas-worker-health.json"]
+    depends_on:
+      models-init: { condition: service_completed_successfully }
+      api: { condition: service_healthy }  # the API has migrated the database (a worker that starts beside it would wait for the lock)
+    env_file: *settings-files
+    environment:
+      <<: *backend-env
+      # models load lazily per stage and are evicted under the memory budget (D-21); there is no warm-up
+      VERITAS_DB_APPLICATION_NAME: veritas-worker
+      VERITAS_DEFAULT_PROFILE: ${VERITAS_DEFAULT_PROFILE:-full}  # as the API: images and video are served by the calibrated fusers on CPU too
+    # No HTTP listener: the worker writes a health file every 2 s and the check reads it. Healthy: its threads live and each
+    # claimed from the queue or renewed a lease within 45 s, on the device it was configured for.
+    healthcheck:
+      test: ["CMD", "python", "-m", "app.engine.worker_health", "--file", "/tmp/veritas-worker-health.json", "--max-age", "45"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    # On stop the worker waits 30 s for its running job (--stop-timeout), then gives it back to the queue without
+    # counting the attempt; the next worker claims it at once.
+    stop_grace_period: 40s
+    # Above the model memory budget, always: on CPU `auto` is half of the smaller of this limit and the machine's memory
+    # (14,336 MB at 28g, which holds the 12,977 MB the `full` profile needs; D-74). A limit above the machine's memory is
+    # harmless: the budget then follows the machine. A budget set by hand (VERITAS_MODEL_MEMORY_BUDGET_MB) has to stay
+    # below the limit, or the kernel kills the worker where it should evict a model.
+    mem_limit: ${VERITAS_WORKER_MEM_LIMIT:-28g}
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VERITAS_BUILD_COMMIT: ${VERITAS_BUILD_COMMIT:-}  # the image's label org.opencontainers.image.revision
+    depends_on:
+      api: { condition: service_healthy }
+    restart: unless-stopped
+    logging: *logging
+    # nginx runs as uid 101 on port 8080 of the container (frontend/Dockerfile; SEC-17) and needs no capability.
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: ${VERITAS_WEB_MEM_LIMIT:-512m}
+    # UI + API behind nginx (SSE unbuffered, frontend/nginx.conf). Plain HTTP, so on this host only by default: browser sign-in
+    # from another host needs HTTPS (docker-compose.tls.yml, or your own proxy reaching VERITAS_WEB_BIND)
+    ports: ["${VERITAS_WEB_BIND:-127.0.0.1}:${VERITAS_WEB_PORT:-8080}:8080"]
+    # Healthy: nginx serves the shell and reaches the API. Liveness on both sides (never /api/ready: that is the
+    # instance's readiness, with the worker in it; runbook "Monitoring").
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS -o /dev/null http://127.0.0.1:8080/index.html && curl -fsS -o /dev/null http://127.0.0.1:8080/api/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  veritas-data:
+  veritas-models:

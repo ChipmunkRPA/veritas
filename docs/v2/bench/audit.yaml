@@ -1,0 +1,675 @@
+# Veritas-Bench label audit record (D-06; ML §2.1 P6). Written by the loop's agent audit; rendered to audit.md by
+# `make vbench-audit RENDER=1`. Sheets: backend/data/vbench/audit/<source>.png (gitignored).
+schema_version: 1
+bench: vb-1.1
+criterion: 'A source passes when mislabelled + unusable items are at most 10 % of the items viewed. Mislabelled: the item
+  contradicts its label, generator or stratum. Unusable: not decodable, or outside the source''s declared domain (for example
+  a CGI render among camera footage). Audio labels and small local edits cannot be verified by viewing; those sheets check
+  format and content type only (D-06, agent audit).'
+sources:
+- source_id: 34data-fastwan2
+  result: pass
+  audit_kind: agent
+  viewed: 30
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: b1a4954d57165a9755fc9a54eba6f9a40517b1f2bf7c9bcd8746597a7764e232
+  sample_sha256: 33572e2d2b03d7ccf48b453a523ca820c54a5435a763e591966c39e8dc0b62f3
+  date: '2026-09-13'
+  finding: '30 generated science-demonstration clips (laboratory objects, a globe, a tennis court); #23 shows garbled blackboard
+    text (generator output, kept); consistent with the label.'
+- source_id: 34data-hunyuanvideo
+  result: pass
+  audit_kind: agent
+  viewed: 30
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: cfedc9b1fab226191745f8809f7cca05d7976d3db5e120e3f926a1b54faa0c43
+  sample_sha256: aafe4fb33397ab1df24434c195cf73bc1d362e64f0e7ae79c338325a78e61bd6
+  date: '2026-09-13'
+  finding: '30 generated laboratory, cooking and nature clips; #4 a line graph, #9 an audio-spectrum screen and #30 a pencil
+    drawing are generator outputs (kept); consistent with the label.'
+- source_id: 34data-kling
+  result: pass
+  audit_kind: agent
+  viewed: 34
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: f7638f5752e34dff9ba222e1ef7b610781edfd2a66259818e6a6cd942ccc4dac
+  sample_sha256: c6f202b98b522ff389cbda6807763b4cea01af8d286035e69ce977957684f0d8
+  date: '2026-09-13'
+  finding: '34 generated laboratory and science clips and one swimmer; #4, #11, #14 and #32 are a spreadsheet screen, charts
+    and a diagram with garbled text (generator output, kept); consistent with the label.'
+- source_id: 34data-sora2
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 5208a7c02244a695cdb084c61cb68eb645487fc0cb7d5054b4483ee5efd2433b
+  sample_sha256: 221757cc23b384899e3cc15e0a747172aa795e789e0ddcfed1fa74927543ba51
+  date: '2026-09-13'
+  finding: '50 generated science and education clips; 7 are charts, diagrams or maps (#18, #21, #22, #31, #35, #46, #48; generator
+    output, kept); consistent with the label.'
+- source_id: 34data-veo3
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: f0aa6db4256abaa16b67be0d2c9877ed423020f38bc48b92553602b1c8474df5
+  sample_sha256: c0e05187f70cfa9761797489e8113a3437ea8381660afe3e8e652d5c9850147b
+  date: '2026-09-13'
+  finding: '50 generated clips (laboratory, sport, people, nature); #5 and #26 are screen interfaces and #21 and #46 diagrams
+    (generator output, kept); consistent with the label.'
+- source_id: 34data-wan2
+  result: pass
+  audit_kind: agent
+  viewed: 40
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 294518b5256e4476d489731500dc835746e223eb26730a51d7d88a9f78ff8e29
+  sample_sha256: d458145992a1669c52eab518fa8e3260ff7b464cfbf0b7923a8e284ffdc68b5a
+  date: '2026-09-13'
+  finding: '40 generated science clips; 8 are infographics, charts, a spreadsheet or a code screen (#6, #7, #11, #13, #14,
+    #20, #29, #38; generator output, kept); consistent with the label.'
+- source_id: aigc-lipsync-benchmark
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 15d0702be728cc5f791c5554a44c9c6df1528277285bbf79a85b86b1aac817ee
+  sample_sha256: 4a4044366ba2693a14abc7907496142059ca6e04262ae5fc59c4be5eaf9e52de
+  date: '2026-09-13'
+  finding: 50 stylised generated portrait clips (Kling, Jimeng, Wan, Hunyuan); many carry visible Kling AI or MiniMax Hailuo
+    watermarks, a text-overlay shortcut risk for detectors; consistent with the label.
+- source_id: aigibench-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: add1673378c9b68182f368b6ac0b2b56bb3409482f6b4ccddd2fd112e9e5410d
+  sample_sha256: d860784eedc1eb93902950f3001d92748c4cc72505c03e7beae7a42dbcf45a9c
+  date: '2026-09-13'
+  finding: '40 fakes (BlendFace, CommunityAI, E4S, FaceSwap, IP-Adapter, InSwap, Infinite-ID, InstantID, Midjourney, PhotoMaker,
+    R3GAN, SimSwap, StyleGAN-XL, StyleGAN3, StyleSwim, WFIR) and 10 R5 reals; real #44 shows a snowy path with no visible
+    face (unusable for the face stratum). CommunityAI renders interiors and food and StyleGAN3 painted portraits, so the fake
+    families are broader than human faces.'
+- source_id: asvspoof2021-df
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 4d0885dcb9c9269c1f6c3ddd4979909b2773fa0e3ffe569a0dd1501139423882
+  sample_sha256: 98e8c6035ee8345a510609797408199b63f588e72e5ffa8fbe54b9ffce4de3ff
+  date: '2026-09-13'
+  finding: '50 spectrograms (27 attack, 23 bona fide), all speech with codec artefacts in both classes. Viewing cannot verify
+    an audio label: format and content type only.'
+- source_id: asvspoof5-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 49e4804fda79cc5181f56cee61a424d6a65ff0692c52e30f196b24c18a965c76
+  sample_sha256: fe7326d9f0dc78c2619c581d664ba5dbbcacaec8225e7a5258e13ebcb29960e7
+  date: '2026-09-13'
+  finding: '50 spectrograms (24 attack, 26 bona fide), all speech; about a third are band-limited to 4 kHz in both classes.
+    Viewing cannot verify an audio label: format and content type only.'
+- source_id: bitmind-nano-banana
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: cb43db1c4e1e7407c670d20e5434e657d1e02ebd3be3d1f25503ac19555c42e2
+  sample_sha256: 256056239106e79ba0d78956c24c003383968af7eec4e85d9b449fbd58b42a8b
+  date: '2026-09-13'
+  finding: 50 photorealistic and stylised Gemini 2.5 Flash Image scenes; consistent with the label.
+- source_id: coco-val
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 71c939d53a6b036c7234e0ae13cc2a653c8e76df7ee618a9eac6f93f45ffcfd0
+  sample_sha256: adc03358571399096a3b38367266e782655dd498b2e4c54152d19d5c807d8784
+  date: '2026-09-13'
+  finding: 50 everyday COCO photographs (sport, animals, interiors, food, transport); consistent with the R4 real label.
+- source_id: commons-r1-camera
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 4e115f9fdd37cea9670a780a50fe6f748bf307eb337d321f5a3385afb873e900
+  sample_sha256: c7401acdf83eaa6e572b6e40be60f432f985f6d8baa04f641eb94c76d50ecb01
+  date: '2026-09-14'
+  finding: 'vb-1.1 re-audit (649 items): 50 camera originals: official government events and meetings (17), political rallies
+    and protests (9), endurance motorsport (9), military exercises (3), a diver, an Expo 2025 mascot; no generated or composited
+    content seen. Many items share a photographer (official press offices), which the artist group key keeps in one split.'
+- source_id: commons-r2-smartphone
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: e13f7002e0f14b313cb5bc1f89f7ee6abe1df14f3a41d0cc3f96d65a06827da0
+  sample_sha256: 7994093f1369cfc9e9e43ca65ed34191c5e7a9587fa10c4810139090af153e82
+  date: '2026-09-13'
+  finding: 50 smartphone photographs (streets, buildings, food, plants, interiors, memorial plaques, a grass close-up); consistent
+    with the R2 label. Frozen at 324 of 800 planned items (D-38).
+- source_id: commons-r6-hard-negatives
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: 9c6a3e14b8e7ea08d15dacaa1e6c83f7250d67ed400c8806d5db73ce588d92c5
+  sample_sha256: 0ca1f3875151d79da0008d470f9ee9ba4a99ff4d39f6720cf3c3e874d3970df8
+  date: '2026-09-12'
+  finding: 'HDR, night, light-trail, selfie, film and glass-negative photographs; #29 is a graphic pattern, not a photograph
+    (unusable).'
+- source_id: commons-video-general
+  result: fail
+  audit_kind: agent
+  viewed: 15
+  mislabelled: 0
+  unusable: 4
+  sheet_sha256: d5c1202f681eaedeecacc2d019b191c64170370bbfa1542776d0efae5a5a4257
+  sample_sha256: e0d48a5919bef6625bfc0161a83b4dd7d2a1a58a85f921aad556fdada13ef463
+  date: '2026-09-12'
+  finding: '11 camera clips (interviews, streets, landscapes, a laboratory, a TV press conference, archival film); #5 is an
+    illustrated explainer, #12 an animated anatomy diagram, #13 a fractal render and #15 a text slide, outside the camera-footage
+    domain (27 % unusable). Excluded; B-5 should restrict the Commons video query to camera footage.'
+- source_id: commons-video-speeches
+  result: pass
+  audit_kind: agent
+  viewed: 15
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: e9d8908955d766ba7522d326e73a816ee87856b4c4119d2fa5e3adc597909325
+  sample_sha256: b9630ff9746949f72b84cc89d033096b40652e1a57821a89a9db5bb59a4d408e
+  date: '2026-09-12'
+  finding: '15 speeches, press conferences and interviews, including archival film (#12) and two vertical platform re-edits
+    with caption overlays (#14, #15); consistent with the talking-head label.'
+- source_id: communityforensics-eval
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 2
+  sheet_sha256: 1f0467e9ad19ddf09fdde14104dc44a2d757ed713570ef232b47bcd2fdcc09c4
+  sample_sha256: c41d81e119e57756abf06d42836b43dcc4b1c45bb61913368b8b9eb4755aed14
+  date: '2026-09-13'
+  finding: '29 fakes (Firefly Image 3, GALIP, Hourglass faces, Imagen 3) and 21 web reals; real #32 is a logo and #44 a patterned
+    shower-curtain render, not photographs (unusable for a photographic stratum); the product shots on white (#37, #38, #46)
+    are photographs. Diagnostic role only.'
+- source_id: deepaction-v1
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: c7fd251e0d1dedd2db00ab2e2504e8bb9802c7d69167d6738caf1f9645b8d6b4
+  sample_sha256: 3d9475e1feaf107a01ecfc3c8e6f3ab0b36fb46f4584c2b28610d1b1736120db
+  date: '2026-09-13'
+  finding: '38 generated clips (AnimateDiff Lightning, CogVideoX-5B, Runway, Stable Diffusion, Veo, VideoPoet) and 12 Pexels
+    reals; fake #12 shows a blank frame at 40 % of its duration, so its content cannot be judged (counted unusable). The reals
+    are portrait-orientation stock clips, a possible resolution shortcut for video.'
+- source_id: deepfakeface
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: c757c64564ac08f0d6cc9f889c97aa33d7d5285c8570e1e94dcc9051c72ceb55
+  sample_sha256: 5cf31d45b0a8247f34c94393e58e6f5a513b549770d1c89b9e95a71758f9a5a3
+  date: '2026-09-13'
+  finding: '12 InsightFace swaps and 38 IMDB-WIKI reals; real #22 is a sculpted bench on grass, not a face photograph (unusable).'
+- source_id: elsa-d3-validation
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: a0d071b9c4331f867b58c6e689e7cb8cac0b3fe52caed144370f86785a9980c9
+  sample_sha256: feb442e72f1db9dbc426059b21b209a817eb86063a5d56677b36aefbb38cf9de
+  date: '2026-09-13'
+  finding: 50 SD 1.4, IF-II-L, SD 2 and SDXL renders (products, interiors, patterns, floor plans, posters with garbled text);
+    consistent with the label.
+- source_id: ffhq-256
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 31a6e04f3b8db39074456dab30a19881f4e9cbea55b6229befce48dc7f792044
+  sample_sha256: f966c7c147d7e1c1fc20495b5ba98c2293ca1c80dc4e7c8929edc6d5d481b03e
+  date: '2026-09-14'
+  finding: 'vb-1.1 re-audit (400 items): 50 aligned FFHQ face photographs of all ages; #42 cosplay with a pink wig and #47
+    heavy stage make-up are still photographs; no generated faces seen; consistent with the label.'
+- source_id: flickr30k
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 3c8b56bb613c9db64a5fa959882280955a1192e259a94a7900cb4dca08d1482b
+  sample_sha256: df6525017b901ec3183b8a108420c32d19dbcc599846228f5a7117d1e7d67cee
+  date: '2026-09-13'
+  finding: 50 Flickr photographs of people and scenes; consistent with the label.
+- source_id: genvidbench-6.7m
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: c01434a87de6e7c3d7bb63d576775840728671bc230a673f75b443c6b855f707
+  sample_sha256: 3aa09932b62f443c2198fd0b29bd6465e720124f6d7f271ec4f87dab5828b1a7
+  date: '2026-09-13'
+  finding: 26 Kling 1.x clips (visible Kling watermark) and 24 Sora 2024 clips; consistent with the label.
+- source_id: in-the-wild-audio
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 972e22a829d9739430bf29787893ea3f4ede8b0407fd150050bfd048efd0a66a
+  sample_sha256: 3947181f9cfeabb9186382241c085527dc5b871d8b54ab1974ff9d8efc501855
+  date: '2026-09-13'
+  finding: '50 spectrograms (27 TTS, 23 bona fide), all with speech; bona fide #29 and #48 are dominated by background noise.
+    Viewing cannot verify an audio label: format and content type only.'
+- source_id: jamiewithofs-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: 57b7509fa0b6ac32b66024558a44b514639ad1564cb352e1fbccb99f34e9dfa8
+  sample_sha256: bd1287826d967eae77d1cf83a83378929349fb577febbc38897fa345a1e35462
+  date: '2026-09-13'
+  finding: '50 low-resolution faces labelled fake; #1 is almost black with no visible face (unusable) and #5 carries coloured
+    block artefacts. At thumbnail size the rest cannot be told from photographs, so the label rests on the dataset (not verified
+    by viewing).'
+- source_id: midjourney-v6-recap
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 56f315134c110f71edf675f04777d788b33d41fecd4e5009db19a29fd2496ef8
+  sample_sha256: e82ca2798991a207142755ebcd2de45ebeccbe42fb4d73b2cbe3367b944ab444
+  date: '2026-09-13'
+  finding: 50 Midjourney v6 renders (painterly scenes, photographic street and animal scenes, still lifes); consistent with
+    the label. The pool of 252 includes 75 renders that share a dataset id with another render (B-4b replay fix).
+- source_id: mlaad-tiny
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 3bbf3eadbc7fa01d7adc97afaee3da5af0f7c1d4c37e7ae5fbeb8993a00ee003
+  sample_sha256: f3e64300607d9d8acc88bef4d6a4e2621737ffc597c535bf759e537476a9cb32
+  date: '2026-09-13'
+  finding: '50 spectrograms from about 40 TTS and voice-conversion systems, all speech-like; #47 (suno bark-small) is noise-dominated.
+    Viewing cannot verify an audio label: format and content type only.'
+- source_id: mllm-generated
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 2ebf92fa2b1ff01be1e50d7b9e4192dff6f930bada46114952f284c8fc6f0b54
+  sample_sha256: 6cb0a95a8734c86787211800407a23883fa9a414f4b16d5590bbb5d12a7c99c4
+  date: '2026-09-13'
+  finding: 50 GPT-image-2 and nano-banana-2 renders (receipts, shipping labels, social posts, news layouts, street signs,
+    flowers, a puppy); consistent with the label.
+- source_id: openfake-core-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 0da5e6069ebf18655c5167c81c3a1f8da1281ee650845ed7e903d4aa7a0de185
+  sample_sha256: 75a7b8d066e8571a42a07c9c4c6c9ca370aede525f996bcf5880086012c1144a
+  date: '2026-09-13'
+  finding: 30 fakes from 11 generators (ERNIE Image, Frames, GPT-Image-1.5, Halfmoon, Ideogram 2, Illustrious, Midjourney
+    7, nano-banana pro, Recraft v3, Seedream 5, Z-Image Turbo) and 20 R4 reals (wildlife and everyday photographs); consistent
+    with the label.
+- source_id: openfake-reddit-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 1
+  sheet_sha256: 26e722fe32a9f396a4c1b2f1f34723baf2fb992cb2eb0da0986c3da517f5010a
+  sample_sha256: 4ad9c795522722514ae33621376ddb7e50b513b0f221c17e91a8bf88f85c7a4e
+  date: '2026-09-13'
+  finding: '50 posts from AI-image communities (fantasy illustrations, portraits, comics, a book cover, a brand graphic);
+    #13 is a line of sheet music whose origin cannot be judged (unusable). `wild` split only.'
+- source_id: opensdi-flux
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 75c6c0005ca9f3c7308b68275ba31b7efcf5ac0dabaf2579ea48863d23d63f35
+  sample_sha256: 53d4aa55db7777778ee87bba8ca66bd0f2e89c20e8ac2ae4232bdb5e07bbd7cc
+  date: '2026-09-13'
+  finding: 50 photorealistic FLUX inpainting outputs (vehicles, food, animals, interiors, people); local edits cannot be verified
+    by viewing (D-06), so the sheet checks format and content type.
+- source_id: opensdi-sd15
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 26fa3b70676b81517a59951740b1de2fee27220d2ca40b2d099176de7bcb91eb
+  sample_sha256: d9d9c37a765c83c4087e860a15c8cb95cca4d483815b3869ee4ddbee9d93af52
+  date: '2026-09-13'
+  finding: '50 inpainted photographs (objects, animals, food, street scenes); edits visible on several (#32 a banana with
+    a face, #45 garbled sign text); consistent with the label.'
+- source_id: opensdi-sd2
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 3e7b7b0802c56cdfa22e940906675e61e578778d8b57153b908ebe0fc5b031b1
+  sample_sha256: ec3f6e72265a914ff8c596c65d08983a9818d8e2239da11df3d215274825d030
+  date: '2026-09-13'
+  finding: '50 inpainted photographs (events, people, streets; #5 an archival portrait, #31 a line drawing of a bus); the
+    edits are mostly not visible at thumbnail size, so the label rests on the dataset.'
+- source_id: opensdi-sd3
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 78b757aad5bb3c4503a5c6eed4c169cf249c554635363ebfe6cf4ee99491ffd7
+  sample_sha256: c74ce1e0c4640e2b434484484c82c25d195946a815c4725723112a2b65c4b9a1
+  date: '2026-09-13'
+  finding: '50 inpainted photographs (events, sport, people, vehicles; #49 a painting reproduction); the edits are mostly
+    not visible at thumbnail size, so the label rests on the dataset.'
+- source_id: opensdi-sdxl
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: e803a693a134b343e7b6cf3034cada128381572190bcb43e51a033c13a00406d
+  sample_sha256: f9b2223b69579118b12257822c42d3f84364a9d9fed2a4a8b0d58e3095474136
+  date: '2026-09-13'
+  finding: '50 SDXL inpainting outputs (people, food, animals, interiors), several fully stylised (#3 a monster, #11 and #38
+    cartoons, #43 an anime figure); consistent with the label.'
+- source_id: openvid-1m
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 2
+  sheet_sha256: e0f26ecf2a8a00085fd0d4473ef62d6629280f81d2c86265a7011f747b485898
+  sample_sha256: 9ad7231a3234cdd3fb0b7e61a70171a731de62afdd85988c68415a149710f349
+  date: '2026-09-14'
+  finding: 'vb-1.1 re-audit (350 items): 50 curated clips (news studios, interviews, vlogs, cooking, cars, sport, nature); #11
+    and #23 are animated films, not camera footage (unusable, 4 %). As in vb-1.0 about 4 % of OpenVid is animation; screen
+    it for animation and CGI before admissions rely on it.'
+- source_id: qwen-image-bench
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 62505c4d7d9c43ae12a65b60f7e243773fb99ab1de3d42c56f577332f4bf19bc
+  sample_sha256: 4404f0174f813f18a200a473228aca5b101d6451e67e476ba41d6201b352b7bc
+  date: '2026-09-13'
+  finding: '50 renders from about 20 models (FLUX.2 pro and max, GLM-Image, GPT-Image-1 and 1.5, HunyuanImage 3, Imagen 4
+    and Ultra, Qwen-Image variants, Seedream 4 to 5, nano-banana 2 and pro); #7 a line drawing, #34 an anime panel and #35
+    a botanical illustration are generator outputs (kept); consistent with the label.'
+- source_id: rapidata-bananamark
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 52ff9da35714b8a996eca71852de564706b8025835c414274f9eea18247183d9
+  sample_sha256: ee4087b306fb1795ad5eea2d3a8ee34b6ab25e9de2d979b0dd25b98f54ffbe5e
+  date: '2026-09-13'
+  finding: '50 banana-themed generated images (FLUX.2 dev, flex and pro, Seedream 4, Ideogram v3, Wan 2.2); #3 and #27 are
+    flat icons (generator output, kept); consistent with the label.'
+- source_id: rapidata-face-generation
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: c97c5aa7b749b15159b022796b0cde367966269ae57e5ef476472826838e6078
+  sample_sha256: abc07d17d9ddfe26a08ef063e05570908dccd962bfb5afc209d63df12472b286
+  date: '2026-09-13'
+  finding: 50 generated portraits from 14 generators (FLUX 1.1 pro and schnell, Bria 3.2, Seedream 3, Imagen 4 fast, Ideogram
+    v3, Luma Photon and flash, MiniMax image-01, Wan 2.2, Qwen-Image, Recraft v3); consistent with the label.
+- source_id: rapidata-flux2-pro
+  result: pass
+  audit_kind: agent
+  viewed: 16
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 718de9852aaa88ac5c32fb1c09b16fbe32b4d35396cc70b25e014d5522f51f8b
+  sample_sha256: 3db7de064f88cbc4bf7e81e4e7f7237d4f649ed8a7c9aab83acb5b23454c124e
+  date: '2026-09-13'
+  finding: 16 FLUX.2 pro renders from 5 prompts (cakes, a panda with a latte, clocks, a man and an airliner, tooth brushing);
+    consistent with the label.
+- source_id: rapidata-hidream
+  result: pass
+  audit_kind: agent
+  viewed: 40
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 51db1370dae24af1f208dd948db291c37cb9299e5e54f1b45da80346d23d6990
+  sample_sha256: b37962e4bc93066295130b9d1555e8c2fcef6d8844afe0b0d056f0836263fcd3
+  date: '2026-09-13'
+  finding: 40 HiDream I1 full renders from about 10 prompts (text signs, pizza, cars, scooters, a reader, a costumed dog);
+    consistent with the label.
+- source_id: rapidata-hunyuanimage-2.1
+  result: pass
+  audit_kind: agent
+  viewed: 13
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: cbb467b342c011dc56f18f04ff5875e94427e24b5c90dfd2d3e47871000b3efe
+  sample_sha256: 68c0cfa719fc45927bdc2a3ccd01440b330d888137368b350a64991b58da8e07
+  date: '2026-09-13'
+  finding: '13 HunyuanImage 2.1 renders from 4 prompts (bathrooms, baseball players, a dumpling); #11 is a blurred painterly
+    render (generator output, kept); consistent with the label.'
+- source_id: rapidata-i2v-seedance
+  result: pass
+  audit_kind: agent
+  viewed: 40
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: e49a74e1110ef58bff7b625ea12b15ed1f27236842f1bc97be00e3f7fb44377c
+  sample_sha256: 56c485759bececb18c00614d0ffabee79f7c34c99ee2ae092c517b4394ca63bf
+  date: '2026-09-13'
+  finding: 40 Seedance 1 pro image-to-video clips (cyclists, animals, landscapes, food, space); the frames at 40 % look photographic
+    at thumbnail size, so the label rests on the dataset.
+- source_id: rapidata-ideogram-v2
+  result: pass
+  audit_kind: agent
+  viewed: 18
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 938afbcbd07bccb2ddbaaad7aaa39f141dd57de8c83ec718881793e24428f19d
+  sample_sha256: 046aa1da73dae4e67f951c7ff8809b93cb2f741f13925022213033bce91bbd85
+  date: '2026-09-13'
+  finding: 18 Ideogram v2 renders from 6 prompts (dogs, lakes, parked cars, a tennis player, skateboarders); consistent with
+    the label.
+- source_id: rapidata-imagen4-and-opponents
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: fe873ee58e361c5a8d17b489f599546ac27dbad4e7eac8de034e4d958e50474d
+  sample_sha256: 955d22601977c7286ee6c7e07d5242601384aa0b3a3f39b082507b7e30b4910c
+  date: '2026-09-13'
+  finding: '50 renders from 9 generators (Aurora, FLUX 1.1 pro, Frames, Halfmoon, Imagen 4 Ultra, Janus-7B, Lumina, SD 3);
+    #42 to #44 are flat illustrations and #40 carries garbled text (generator output, kept); consistent with the label.'
+- source_id: rapidata-imagen4-ultra
+  result: pass
+  audit_kind: agent
+  viewed: 8
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 6e32113c3029f816451722b97870955cd36fe7ac4c18ce248c510e17e132deb1
+  sample_sha256: 7ecad0a9987a6619761411d48015fde555e4050b18cee37b997c1772df69e9a6
+  date: '2026-09-13'
+  finding: 8 Imagen 4 Ultra renders from 3 prompts (a market shopper, a skier, a portrait at night); consistent with the label.
+- source_id: rapidata-openai-4o
+  result: pass
+  audit_kind: agent
+  viewed: 44
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 33642d20721609f9ab4d7ab876cf267e0ff671f9603c4104821628d0cb9e192f
+  sample_sha256: 32c20e57cd281127644575f0510b1b512714618d307058e197d9d2592bf4de9e
+  date: '2026-09-13'
+  finding: 44 GPT-4o renders from about 12 prompts (pizza and suitcase, a panda pouring latte art, scooters, cakes under a
+    moon, a reader in an armchair); consistent with the label.
+- source_id: rapidata-recraft-v3
+  result: pass
+  audit_kind: agent
+  viewed: 10
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: a6999b59efcc0c592a3f66de82f1d4a4601a496ed2516241e741784c38d90a1d
+  sample_sha256: d980f4bf3fb7fb8924757d4e1b1ec8084c99b764795cfda8a14a055c57d97668
+  date: '2026-09-13'
+  finding: 10 Recraft v3 renders from 3 prompts (a cartoon panda, an elephant underwater, scissors); consistent with the label.
+- source_id: rapidata-seedream3
+  result: pass
+  audit_kind: agent
+  viewed: 13
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 80e6119ebd32a1d93ba7da23ff8610b025ddf2248b24eb723e2e5a91e0331385
+  sample_sha256: aeb040c2ef9af76fba8c2b26d4f7710e757e3886cada9bda9b2b0ed17def725d
+  date: '2026-09-13'
+  finding: 13 Seedream 3 renders from 4 prompts (a toilet seat, a monkey in goggles, a bear with a bluebird, a banana); consistent
+    with the label.
+- source_id: rapidata-t2v-marey
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 4e6e3242e0d79108f01a9f7dc400d6e4dc814251250fbaefe36e5fc807e756d2
+  sample_sha256: 63928feb935fd96f9e96b2bfdada03d2f32847dc01a26b2ae248cc412be19ce5
+  date: '2026-09-13'
+  finding: '50 generated clips (Kling 2.1 master, Marey, Mochi 1); several Mochi frames are heavily blurred or saturated at
+    40 % (#42, #44, #45; generator output, kept); consistent with the label.'
+- source_id: rapidata-t2v-veo3
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 1055e6ca2ae325cbdc8c31d3f12b4a77c8001c8fc5c6d473a8d2fff296d24af1
+  sample_sha256: 3d3271de92b13f33a225147690dfb0c38633a8bd47b1b9a5f1084f2ff7c43a7f
+  date: '2026-09-13'
+  finding: 50 generated clips (Runway alpha, Hunyuan, Pika 2.2, Ray2, Sora, Veo 2, Veo 3, Wan 2.1), including cartoons and
+    text titles (generator output, kept); consistent with the label.
+- source_id: rapidata-t2v-veo3.1
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 34c0f6f2845c136d0c653088600b6332e3f10bbd57825e556acfa3ce2352777d
+  sample_sha256: 5e07c05b5f43d67adb68bc0ee08811b8770e3ebe068546cc289350a3aaddb6ec
+  date: '2026-09-13'
+  finding: 50 Veo 3.1 clips (cityscapes, dancers, wildlife, cartoons, a firefighter); consistent with the label.
+- source_id: semi-truths-p2p
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 08775f26f20d751bc44acc7467265e3c03349d7478baafaa442ea689736e2846
+  sample_sha256: d10bcfa6b2157810ad4fe1e54d55a9f9fb7aabde83f4c24b65a1a537cd441b23
+  date: '2026-09-13'
+  finding: 50 prompt-to-prompt edited portraits and fashion photographs; the edits are mostly not visible at thumbnail size,
+    so the label rests on the dataset.
+- source_id: sofake-ood-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 6c500a87adff8b03a488028b51ea71b1e68a735d7a4148e2db55b707a53eafdb
+  sample_sha256: 84c7964626d7036041dae4b0dfa36c4fc5c330321070d2f2aaf54687b8ba4724
+  date: '2026-09-13'
+  finding: 36 fakes (FLUX.2, FLUX.1 pro, GPT-image-1.5 and 2, GPT-4o, HiDream, Ideogram 3, Imagen 3 and 4, Recraft v3, Seedream
+    3, nano-banana 2, partial edits) and 14 R3 social-media reals (landscapes, pets, interiors, an infrared landscape, a photograph
+    of a car screen, an archival print); consistent with the label.
+- source_id: synthbuster-plus-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 2eb18df7a423ed745f1b4aa9c98f003c6cb9270d65781ee1cf65c519f00c758d
+  sample_sha256: 1856f3f97c1acbd66182d6b9abc307a045b068be3779e58fdb446ee61aa68ffa
+  date: '2026-09-13'
+  finding: '35 fakes (FLUX.1 dev and schnell, SD3 medium, DALL-E 2 and 3, Firefly, Imagen 3, Midjourney v5, SD 1.3, 1.4, 2
+    and XL) and 15 RAISE camera originals; #32 and #33 (SD 2) are low-detail textures and #34 an ink painting, consistent
+    with their labels.'
+- source_id: talkingheadbench
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 01d7abfc76fad4e417c9e78b36867380c465ad671b2e881ec5dc76a000245013
+  sample_sha256: fb6100ad515dbb0f8b5802251ac523badee6945bc73f8dfd29813b74cf6eb409
+  date: '2026-09-13'
+  finding: 50 animated portrait frames from 8 generators (AniPortrait audio and video, EMOPortrait, Hallo, Hallo2, Hallo3,
+    LivePortrait, MAGI-1); consistent with the label.
+- source_id: vision-natives
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 173366686690d634e252cf7c92e1f44e0cd0bbc5e5e980251ca0d5e98f2b226b
+  sample_sha256: f73c8d7e1dce27aa8882c533baac2d8a5baaf15b547e5dea8eb9b019d8b380cf
+  date: '2026-09-14'
+  finding: '50 smartphone photographs (streets and buildings in Florence, a campus, interiors, plants, still lifes); #13 photographs
+    a framed painting and #15 a wall decal (still camera captures); several frames are shown sideways because the sheet ignores
+    the EXIF orientation; no generated content seen; consistent with R2.'
+- source_id: vision-social
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 782526683f765db1ab82755c1cb5d95778930d7dd356189ed4dab8ad7397df3d
+  sample_sha256: eb4f85f5dc5aa2eb899ed7de77b7e50e2e7d31f5bf413852b1455ceb94a63edb
+  date: '2026-09-14'
+  finding: '50 Facebook / WhatsApp copies of VISION smartphone scenes (square and downscaled crops, visible recompression); #9
+    photographs a book cover; the same scene recurs across devices and copies (#5 / #25, #14 / #30 / #33 / #41, #31 / #34 /
+    #38), which the device + scene group key keeps in one split; no generated content seen; consistent with R3.'
+- source_id: wilddeepfake-test
+  result: pass
+  audit_kind: agent
+  viewed: 50
+  mislabelled: 0
+  unusable: 0
+  sheet_sha256: 6414c1ed131614520ceebbed1177edd3ce299f83300903a9966a1c93e6329f8b
+  sample_sha256: 5593f2a28ce6661cf477d96f15720b748c3dd9237e22df6a55b91f858aeee828
+  date: '2026-09-13'
+  finding: 50 face-swap frames of about 5 identities (low diversity at this size, blurred swap boundaries); consistent with
+    the label.

@@ -1,0 +1,73 @@
+{% set m = v.methods %}
+<section class="chapter-cont" id="section-methods">
+<h2 class="chapter-title"><span class="n">{{ v.number.methods }}</span>Methods and validation</h2>
+<h3 class="eyebrow">Pipeline stages</h3>
+<ol class="stages">
+{% for x in m.stages %}
+<li>{{ x }}</li>
+{% endfor %}
+</ol>
+<h3 class="eyebrow">Method</h3>
+<dl class="facts">
+{% for r in m.method %}
+<dt>{{ r.key }}</dt><dd{{ ' class="muted"' | safe if not r.established else '' }}>{{ r.value }}</dd>
+{% endfor %}
+</dl>
+{% if m.formula %}<p class="formula mono">{{ m.formula }}</p>{% endif %}
+<h3 class="eyebrow">Headline rule</h3>
+{% for p in m.headline_rule.sentences %}
+<p class="headline-rule">{{ p }}</p>
+{% endfor %}
+{% if m.headline_rule.rates %}
+<table class="grid">
+<thead><tr><th>Level</th><th>Authentic test items above its threshold</th><th>AI test items above it</th><th>Note</th></tr></thead>
+<tbody>
+{% for r in m.headline_rule.rates %}
+<tr><td>{{ r.level }}</td><td>{{ r.false_alarms }}</td><td>{{ r.detections }}</td><td class="muted">{{ r.note }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<p class="caption">{{ m.headline_rule.scope }}</p>
+{% elif m.headline_rule.note %}
+<p class="caption">{{ m.headline_rule.note }}</p>
+{% endif %}
+<h3 class="eyebrow">Strength words</h3>
+<table class="grid">
+<thead><tr><th>Word</th><th>Rule</th></tr></thead>
+<tbody>
+{% for x in m.strengths %}
+<tr><td>{{ x.word }}</td><td>{{ x.rule }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% if m.strengths_note %}<p class="caption">{{ m.strengths_note }}</p>{% endif %}
+<h3 class="eyebrow">Validation</h3>
+<p class="envelope">{{ m.envelope }}</p>
+<dl class="facts">
+{% for r in m.slice %}
+<dt>{{ r.key }}</dt><dd{{ ' class="muted"' | safe if not r.established else '' }}>{{ r.value }}</dd>
+{% endfor %}
+</dl>
+<h3 class="eyebrow">Reliability factors</h3>
+<table class="grid">
+<thead><tr><th class="w-factor">Factor</th><th>Status</th></tr></thead>
+<tbody>
+{% for r in m.factors %}
+<tr><td>{{ r.key }}</td><td{{ ' class="muted"' | safe if not r.established else '' }}>{{ r.value }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<h3 class="eyebrow">Validation per detector</h3>
+{% if m.validation %}
+<table class="grid">
+<thead><tr><th>Detector</th><th>Version</th><th>Admission</th><th>Measured for this slice</th></tr></thead>
+<tbody>
+{% for r in m.validation %}
+<tr><td class="mono">{{ r.id }}</td><td class="mono">{{ r.version }}</td><td>{{ r.admission }}</td><td>{{ r.measured }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="muted">The reproducibility manifest names no detectors.</p>
+{% endif %}
+</section>

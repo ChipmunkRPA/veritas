@@ -1,0 +1,57 @@
+# Admission records on vb-1.1 fit ∪ cal (D-41, D-44)
+
+Generated 2026-09-15T06:53:45+00:00 by `backend/scripts/admission_record.py`; manifest sha256 `8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3`. Automated record pending human review. Criteria ML §3.2 A1–A6 with the D-44 A4 / A5 rules (amending D-41); per-detector ablation tables (criteria recomputed with D-44) are in `vb-1.1/ablation-<id>.md`, the stand-alone camera check in `../h3_real_fp_tables.md`.
+
+- Command: `scripts/admission_record.py --inputs ../docs/v2/bench/admissions/vb-1.1-inputs.yaml --manifest data/vbench/manifest.parquet --ablations ../docs/v2/bench/admissions/vb-1.1 --evidence ../docs/v2/bench/admissions/vb-1.1 --h3 ../docs/v2/bench/h3_real_fp.json --update-cards app/models.yaml`
+- Scope: union-fuser membership. Detectors with their own lane (`partial_edit`, `provenance` Stage 0) are admitted to it separately; the localisers (`loc.*`) are partial-edit lane members only, without a union-fuser ablation (H-6).
+- A4 (D-44): a stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts; a point ΔFPR above +2.0 pts without established harm asks for the stratum's runtime term (R1, R2, R6 `has_camera_exif`; R3 `jpeg_q<70`; R5 `has_face`; R4 none). A5 terms: JPEG and social recompression `jpeg_q<70`, screenshots `screenshot_like`.
+
+| Detector | Decision | Context terms | A1 | A2 AUC | A3a Δ LGO macro | A3b | A4 | A5 | A6 | Camera check (H-3) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `img.commfor384` | admitted_context_gated | jpeg_q<70 | pass: parity passed | pass: 0.8591 [0.8317, 0.8864] | pass: +19.3 pts (lower +15.8) | pass (22 slices) | pass: pooled -0.1 pts (upper +0.75) | **fail**: jpeg75 +14.5 pts (n 117), social_ig +15.4 pts (n 117) | pass: p95 136 ms (n 8781) | 5.2 % (n 1035) |
+| `img.dda` | admitted_context_gated | jpeg_q<70 | pass: parity passed | pass: 0.8838 [0.8659, 0.9016] | pass: +15.0 pts (lower +11.7) | pass (23 slices) | pass: pooled -0.1 pts (upper +0.70) | **fail**: jpeg75 +21.4 pts (n 117), social_ig +21.4 pts (n 117) | pass: p95 486 ms (n 9001) | 4.8 % (n 1035) |
+| `face.gend_clip_l14` | rejected | – | pass: parity passed | pass: 0.8751 [0.8228, 0.9156] | **fail**: -2.3 pts (lower -4.0) | **fail** (6 slices) | pass: pooled -0.0 pts (upper +0.47) | not established: jpeg75 +0.0 pts (n 7), social_ig +0.0 pts (n 7) | pass: p95 142 ms (n 4279) | 11.4 % (n 201); H-3 context_gate (has_face) |
+| `img.hf.haywoodsloan` | rejected | – | **fail**: licence class unknown is not commercial (D-04) | pass: 0.8927 [0.8760, 0.9062] | pass: +12.8 pts (lower +9.0) | pass (21 slices) | pass: pooled -0.1 pts (upper +0.75); point above +2.0 without established harm R4 | **fail**: jpeg75 +18.3 pts (n 120), social_ig +20.0 pts (n 120) | pass: p95 108 ms (n 10265) | 3.2 % (n 1035) |
+| `img.hf.ateeqq` | rejected | – | pass: parity passed | pass: 0.7736 [0.7408, 0.8025] | pass: +35.5 pts (lower +31.1) | pass (22 slices) | **fail**: pooled +0.2 pts (upper +1.14); point above +2.0 without established harm R5 | pass: jpeg75 -0.8 pts (n 120), social_ig +0.0 pts (n 120) | pass: p95 60 ms (n 10346) | 4.6 % (n 1035) |
+| `img.hf.dima806` | rejected | – | pass: parity passed | pass: 0.7660 [0.7207, 0.8089] | **fail**: -1.6 pts (lower -3.0) | **fail** | pass: pooled +0.0 pts (upper +0.53); point above +2.0 without established harm R5 | not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3) | pass: p95 77 ms (n 10346) | 2.0 % (n 1035) |
+| `img.dfdc_b7` | admitted_context_gated | has_face | pass: parity passed | pass: 0.7642 [0.6807, 0.8265] | pass: +3.1 pts (lower +1.8) | pass (2 slices) | pass: pooled +0.0 pts (upper +0.43) | not established: jpeg75 +0.0 pts (n 7), social_ig -14.3 pts (n 7) | pass: p95 233 ms (n 4318) | 8.5 % (n 201); H-3 context_gate (has_face) |
+| `img.forensic.spectrum` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.4550 [0.4293, 0.4823] | **fail**: +0.2 pts (lower -0.2) | **fail** | pass: pooled +0.0 pts (upper +0.11) | pass: jpeg75 +0.8 pts (n 120), social_ig +0.8 pts (n 120) | pass: p95 144 ms (n 10346) | 7.6 % (n 1035) |
+| `img.forensic.ela` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.4317 [0.3827, 0.4764] | **fail**: +0.1 pts (lower -0.3) | **fail** | pass: pooled +0.0 pts (upper +0.16) | not established: jpeg75 +0.0 pts (n 10), social_ig +0.0 pts (n 10) | pass: p95 553 ms (n 10346) | 0.6 % (n 1035) |
+| `img.forensic.noise` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.6288 [0.6049, 0.6520] | **fail**: -0.6 pts (lower -1.9) | **fail** | pass: pooled +0.0 pts (upper +0.41) | pass: jpeg75 -4.6 pts (n 130), social_ig -5.4 pts (n 130) | pass: p95 516 ms (n 10346) | 1.7 % (n 1035) |
+| `img.forensic.jpeg_dq` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.5000 [0.5000, 0.5000] | **fail**: -0.2 pts (lower -1.1) | **fail** | pass: pooled +0.0 pts (upper +0.22) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | pass: p95 276 ms (n 226) | 100.0 % (n 12) |
+| `img.forensic.copymove` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.2 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | pass: p95 442 ms (n 95) | 100.0 % (n 13) |
+| `img.meta.generator` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | not established | no score on reals |
+| `img.meta.exif` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | not established | no score on reals |
+| `img.meta.consistency` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | not established | no score on reals |
+| `img.meta.qtables` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | not established | no score on reals |
+| `img.watermark.dwtdct` | rejected | – | pass: no model: CPU only, parity not applicable | not established | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 – pts (n 0), social_ig – pts (n 0) | not established | no score on reals |
+| `img.veritas_probe.pe_core_l14` | rejected | – | not established: parity not established | pass: 0.9216 [0.9061, 0.9352] | pass: +8.1 pts (lower +5.5) | pass (3 slices) | **fail**: pooled -0.0 pts (upper +0.91); blocking R4; point above +2.0 without established harm R5 | pass: jpeg75 +1.7 pts (n 120), social_ig +0.0 pts (n 120) | pass: p95 836 ms (n 9684) | no score on reals |
+| `pe.mesorch.integrity` | rejected | – | not established: parity not established | **fail**: 0.5334 [0.4849, 0.5837] | **fail**: +1.2 pts (lower -0.1) | **fail** | pass: pooled +0.0 pts (upper +0.41) | not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3) | pass: p95 1004 ms (n 10270) | no score on reals |
+| `pe.mesorch.region_area` | rejected | – | not established: parity not established | **fail**: 0.5421 [0.5005, 0.5869] | **fail**: +0.8 pts (lower -0.1) | **fail** | pass: pooled +0.0 pts (upper +0.42) | not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3) | pass: p95 1004 ms (n 10270) | no score on reals |
+| `pe.jpeg_dq.support` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.6476 [0.5975, 0.6951] | **fail**: +0.0 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.00) | not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3) | pass: p95 418 ms (n 10351) | no score on reals |
+| `pe.copymove.pairs` | rejected | – | pass: no model: CPU only, parity not applicable | **fail**: 0.4955 [0.4929, 0.4978] | **fail**: +0.1 pts (lower +0.0) | **fail** | pass: pooled +0.0 pts (upper +0.11) | not established: jpeg75 +0.0 pts (n 3), social_ig +0.0 pts (n 3) | pass: p95 493 ms (n 10307) | no score on reals |
+
+## Reasons
+
+- `img.commfor384`: A5 fails on social_ig → jpeg_q<70: admitted with context interaction terms
+- `img.dda`: A5 fails on jpeg75 → jpeg_q<70, social_ig → jpeg_q<70: admitted with context interaction terms
+- `face.gend_clip_l14`: A3 fails; H-3 context_gate on has_face without the D-41 trigger
+- `img.hf.haywoodsloan`: A1 fails
+- `img.hf.ateeqq`: A4 fails
+- `img.hf.dima806`: A3 fails
+- `img.dfdc_b7`: H-3 context_gate on has_face without the D-41 trigger; A5 not established: no A5 interaction term
+- `img.forensic.spectrum`: A2 fails; A3 fails
+- `img.forensic.ela`: A2 fails; A3 fails; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `img.forensic.noise`: A2 fails; A3 fails; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `img.forensic.jpeg_dq`: A2 fails; A3 fails; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `img.forensic.copymove`: A3 fails; A2 not established; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `img.meta.generator`: A3 fails; A2 not established; A6 not established; union-fuser record only: the provenance lane is admitted separately (Stage 0 documentary rules)
+- `img.meta.exif`: A3 fails; A2 not established; A6 not established; union-fuser record only: the provenance lane is admitted separately (Stage 0 documentary rules)
+- `img.meta.consistency`: A3 fails; A2 not established; A6 not established; union-fuser record only: the provenance lane is admitted separately (Stage 0 documentary rules)
+- `img.meta.qtables`: A3 fails; A2 not established; A6 not established; union-fuser record only: the provenance lane is admitted separately (Stage 0 documentary rules)
+- `img.watermark.dwtdct`: A3 fails; A2 not established; A6 not established; union-fuser record only: the provenance lane is admitted separately (Stage 0 documentary rules)
+- `img.veritas_probe.pe_core_l14`: A4 fails; A1 not established
+- `pe.mesorch.integrity`: A2 fails; A3 fails; A1 not established; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `pe.mesorch.region_area`: A2 fails; A3 fails; A1 not established; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `pe.jpeg_dq.support`: A2 fails; A3 fails; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)
+- `pe.copymove.pairs`: A2 fails; A3 fails; union-fuser record only: the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)

@@ -1,0 +1,1004 @@
+{
+  "baseline_detectors": [
+    "face.gend_clip_l14"
+  ],
+  "bench": {
+    "context_source": "scored",
+    "excluded_folds": [],
+    "excluded_items": {
+      "c2pa_manifest": 530,
+      "outside_scope": 1015,
+      "split:diagnostic": 260,
+      "split:test": 5291,
+      "split:wild": 300
+    },
+    "manifest_sha256": "8314119e487a9df3dd7505e55010577c32819e7c8440b21c8ecf325e51c9c3c3",
+    "scope_sha256": "2041bf6787219d730658ecb64a19e49408b43a3a6e855fea61ec83cc785910dc",
+    "version": "vb-1.1"
+  },
+  "candidate": "img.hf.haywoodsloan",
+  "command": "make calibrate MODALITY=image SEED=7 BENCH=vb-1.1 DETECTORS=face.gend_clip_l14,img.hf.haywoodsloan GATES='face.gend_clip_l14=has_face' CONTEXT=scored SCOPE=data/vbench/scope/vb-1.1.parquet ABLATE=img.hf.haywoodsloan ABLATE_BOOTSTRAP=2000",
+  "contamination_card": true,
+  "criteria": {
+    "A3": {
+      "pass": true,
+      "rule": "A3a or A3b"
+    },
+    "A3a": {
+      "ci95_lo": 0.5010870993603244,
+      "lgo_macro_delta": 0.5429729933703967,
+      "pass": true,
+      "rule": "Δ LGO macro TPR@5%FPR ≥ 2.0 pts and paired-bootstrap 95 % CI lower bound > 0"
+    },
+    "A3b": {
+      "lgo_macro_delta": 0.5429729933703967,
+      "pass": true,
+      "qualifying": [
+        "family flux1",
+        "family flux2",
+        "family gpt-4o-image-1",
+        "family gpt-image-1.5-2",
+        "family hidream",
+        "family hunyuanimage",
+        "family ideogram",
+        "family imagen3",
+        "family imagen4",
+        "family legacy",
+        "family long-tail",
+        "family midjourney",
+        "family modern-t2i-faces",
+        "family nano-banana",
+        "family partial-edits",
+        "family personalised",
+        "family qwen-image",
+        "family recraft",
+        "family sd3",
+        "family seedream3",
+        "family seedream4",
+        "threat edit",
+        "threat personalised",
+        "threat t2i"
+      ],
+      "rule": "Δ recall ≥ 10 pts with CI lower bound > 0 on ≥ 1 family or threat, and Δ LGO macro ≥ 0"
+    },
+    "A4": {
+      "blocking_detail": {
+        "R2": {
+          "delta": 0.044117647058823525,
+          "hi": 0.08000228832951944,
+          "lo": 0.02696607578139649,
+          "n": 612
+        }
+      },
+      "blocking_strata": [
+        "R2"
+      ],
+      "interaction_strata": [],
+      "interaction_terms": {},
+      "not_established_strata": [
+        "R1",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "pass": false,
+      "pooled_ci95_hi": 0.01207328705718719,
+      "pooled_delta": 0.0022246941045606233,
+      "rule": "pooled reals of fit ∪ cal: paired-bootstrap upper bound of ΔFPR at τ_0.05 ≤ 1.0 pt; a real stratum blocks only with ≥ 150 reals and a paired lower bound above +2.0 pts (established harm); other strata are not established, and a point ΔFPR above +2.0 pts asks for the stratum's runtime context term only with ≥ 150 reals (D-44, D-51)",
+      "small_point_strata": [
+        "R6"
+      ],
+      "small_strata": [
+        "R6"
+      ],
+      "undecided_strata": []
+    },
+    "not_decided_here": [
+      "A1 (card + parity test)",
+      "A2 (vbench-report)",
+      "A5 (vbench-report)",
+      "A6 (latency)",
+      "A4 screenshot stratum (transform rows)"
+    ]
+  },
+  "cross_fit": {
+    "auc": {
+      "with": 0.8734775232511433,
+      "without": 0.5762167744252874
+    },
+    "fpr_per_stratum": {
+      "R1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0,
+          "lo": -0.06881129389433722,
+          "valid": 2000
+        },
+        "delta": -0.028301886792452838,
+        "n": 424,
+        "with": 0.09198113207547169,
+        "without": 0.12028301886792453
+      },
+      "R2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.08000228832951944,
+          "lo": 0.02696607578139649,
+          "valid": 2000
+        },
+        "delta": 0.044117647058823525,
+        "n": 612,
+        "with": 0.049019607843137254,
+        "without": 0.004901960784313725
+      },
+      "R3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.018488953760256197,
+          "lo": -0.028478104809763097,
+          "valid": 2000
+        },
+        "delta": -0.005093378607809847,
+        "n": 589,
+        "with": 0.04753820033955857,
+        "without": 0.05263157894736842
+      },
+      "R4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.02222222222222222,
+          "lo": -0.0101010101010101,
+          "valid": 2000
+        },
+        "delta": 0.0060606060606060615,
+        "n": 495,
+        "with": 0.022222222222222223,
+        "without": 0.01616161616161616
+      },
+      "R5": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.0018214936247723142,
+          "lo": -0.04371584699453551,
+          "valid": 2000
+        },
+        "delta": -0.020036429872495445,
+        "n": 549,
+        "with": 0.03460837887067395,
+        "without": 0.0546448087431694
+      },
+      "R6": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.19230769230769232,
+          "lo": 0.0,
+          "valid": 2000
+        },
+        "delta": 0.07142857142857142,
+        "n": 28,
+        "with": 0.10714285714285714,
+        "without": 0.03571428571428571
+      }
+    },
+    "fpr_pooled": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.01207328705718719,
+        "lo": -0.008320640606377067,
+        "valid": 2000
+      },
+      "delta": 0.0022246941045606233,
+      "n": 2697,
+      "with": 0.048201705598813496,
+      "without": 0.04597701149425287
+    },
+    "recall_per_family": {
+      "faceswap-stills": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.37579656862745103,
+          "lo": -0.5727594491744066,
+          "valid": 2000
+        },
+        "delta": -0.4742647058823529,
+        "n": 272,
+        "with": 0.3088235294117647,
+        "without": 0.7830882352941176
+      },
+      "flux1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6588235294117647,
+          "lo": 0.4457496653279786,
+          "valid": 2000
+        },
+        "delta": 0.5529411764705883,
+        "n": 85,
+        "with": 0.5647058823529412,
+        "without": 0.011764705882352941
+      },
+      "flux2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5148519339242538,
+          "lo": 0.25,
+          "valid": 2000
+        },
+        "delta": 0.3857142857142857,
+        "n": 70,
+        "with": 0.44285714285714284,
+        "without": 0.05714285714285714
+      },
+      "gan-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.16993464052287582,
+          "lo": -0.33986928104575165,
+          "valid": 2000
+        },
+        "delta": -0.2549019607843137,
+        "n": 153,
+        "with": 0.2875816993464052,
+        "without": 0.5424836601307189
+      },
+      "gpt-4o-image-1": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8048780487804879,
+          "lo": 0.5365853658536586,
+          "valid": 2000
+        },
+        "delta": 0.6829268292682926,
+        "n": 41,
+        "with": 0.7073170731707317,
+        "without": 0.024390243902439025
+      },
+      "gpt-image-1.5-2": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.42105263157894735,
+          "lo": 0.17543859649122806,
+          "valid": 2000
+        },
+        "delta": 0.2982456140350877,
+        "n": 57,
+        "with": 0.2982456140350877,
+        "without": 0.0
+      },
+      "hidream": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.82,
+          "lo": 0.5768617021276596,
+          "valid": 2000
+        },
+        "delta": 0.7,
+        "n": 50,
+        "with": 0.7,
+        "without": 0.0
+      },
+      "hunyuanimage": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.9166666666666666,
+          "lo": 0.5833333333333334,
+          "valid": 2000
+        },
+        "delta": 0.75,
+        "n": 24,
+        "with": 0.75,
+        "without": 0.0
+      },
+      "ideogram": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.8125,
+          "lo": 0.5434782608695653,
+          "valid": 2000
+        },
+        "delta": 0.6808510638297872,
+        "n": 47,
+        "with": 0.7021276595744681,
+        "without": 0.02127659574468085
+      },
+      "imagen3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.5660377358490566,
+          "lo": 0.3018867924528302,
+          "valid": 2000
+        },
+        "delta": 0.4339622641509434,
+        "n": 53,
+        "with": 0.4339622641509434,
+        "without": 0.0
+      },
+      "imagen4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6851851851851852,
+          "lo": 0.5,
+          "valid": 2000
+        },
+        "delta": 0.5943396226415094,
+        "n": 106,
+        "with": 0.6698113207547169,
+        "without": 0.07547169811320754
+      },
+      "legacy": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6137931034482759,
+          "lo": 0.418876409522105,
+          "valid": 2000
+        },
+        "delta": 0.5202702702702702,
+        "n": 148,
+        "with": 0.5472972972972973,
+        "without": 0.02702702702702703
+      },
+      "long-tail": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7185717753681825,
+          "lo": 0.5775345939687965,
+          "valid": 2000
+        },
+        "delta": 0.6505376344086022,
+        "n": 186,
+        "with": 0.7204301075268817,
+        "without": 0.06989247311827956
+      },
+      "midjourney": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7718205759918444,
+          "lo": 0.6242027529602873,
+          "valid": 2000
+        },
+        "delta": 0.6993464052287581,
+        "n": 153,
+        "with": 0.7581699346405228,
+        "without": 0.058823529411764705
+      },
+      "modern-t2i-faces": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7851387249114522,
+          "lo": 0.5683997155049787,
+          "valid": 2000
+        },
+        "delta": 0.6782608695652174,
+        "n": 115,
+        "with": 0.7478260869565218,
+        "without": 0.06956521739130435
+      },
+      "nano-banana": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6838276836158188,
+          "lo": 0.5042016806722689,
+          "valid": 2000
+        },
+        "delta": 0.5932203389830508,
+        "n": 118,
+        "with": 0.6016949152542372,
+        "without": 0.00847457627118644
+      },
+      "partial-edits": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.2919254658385093,
+          "lo": 0.13664596273291924,
+          "valid": 2000
+        },
+        "delta": 0.2111801242236025,
+        "n": 161,
+        "with": 0.32919254658385094,
+        "without": 0.11801242236024845
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.28695652173913044,
+          "lo": 0.08695652173913049,
+          "valid": 2000
+        },
+        "delta": 0.1913043478260869,
+        "n": 115,
+        "with": 0.6,
+        "without": 0.40869565217391307
+      },
+      "qwen-image": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7222619047619045,
+          "lo": 0.5436685159500694,
+          "valid": 2000
+        },
+        "delta": 0.6320754716981132,
+        "n": 106,
+        "with": 0.6415094339622641,
+        "without": 0.009433962264150943
+      },
+      "recraft": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7692307692307693,
+          "lo": 0.5185185185185185,
+          "valid": 2000
+        },
+        "delta": 0.6481481481481481,
+        "n": 54,
+        "with": 0.7407407407407407,
+        "without": 0.09259259259259259
+      },
+      "sd3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.52,
+          "lo": 0.27938849590469106,
+          "valid": 2000
+        },
+        "delta": 0.4,
+        "n": 75,
+        "with": 0.4266666666666667,
+        "without": 0.02666666666666667
+      },
+      "seedream3": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6,
+          "lo": 0.2571428571428572,
+          "valid": 2000
+        },
+        "delta": 0.42857142857142855,
+        "n": 35,
+        "with": 0.4857142857142857,
+        "without": 0.05714285714285714
+      },
+      "seedream4": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.7468354430379747,
+          "lo": 0.5256410256410257,
+          "valid": 2000
+        },
+        "delta": 0.6375000000000001,
+        "n": 80,
+        "with": 0.675,
+        "without": 0.0375
+      }
+    },
+    "recall_per_threat": {
+      "edit": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.2919254658385093,
+          "lo": 0.13664596273291924,
+          "valid": 2000
+        },
+        "delta": 0.2111801242236025,
+        "n": 161,
+        "with": 0.32919254658385094,
+        "without": 0.11801242236024845
+      },
+      "faceswap": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.37579656862745103,
+          "lo": -0.5727594491744066,
+          "valid": 2000
+        },
+        "delta": -0.4742647058823529,
+        "n": 272,
+        "with": 0.3088235294117647,
+        "without": 0.7830882352941176
+      },
+      "gan_face": {
+        "ci95": {
+          "B": 2000,
+          "hi": -0.16993464052287582,
+          "lo": -0.33986928104575165,
+          "valid": 2000
+        },
+        "delta": -0.2549019607843137,
+        "n": 153,
+        "with": 0.2875816993464052,
+        "without": 0.5424836601307189
+      },
+      "personalised": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.28695652173913044,
+          "lo": 0.08695652173913049,
+          "valid": 2000
+        },
+        "delta": 0.1913043478260869,
+        "n": 115,
+        "with": 0.6,
+        "without": 0.40869565217391307
+      },
+      "t2i": {
+        "ci95": {
+          "B": 2000,
+          "hi": 0.6144373021966703,
+          "lo": 0.5594675347894167,
+          "valid": 2000
+        },
+        "delta": 0.587024329382408,
+        "n": 1603,
+        "with": 0.6263256394260761,
+        "without": 0.039301310043668124
+      }
+    },
+    "tau": {
+      "with": 0.8102233472478793,
+      "without": 0.6165512553308484
+    },
+    "threshold_strata": {
+      "R6": "R3"
+    },
+    "tpr": {
+      "with": 0.5442708333333334,
+      "without": 0.18446180555555555
+    }
+  },
+  "detector_meta": {
+    "face.gend_clip_l14": {
+      "missing": "face",
+      "score_key": "face.gend_clip_l14@27c9c717f219",
+      "transform": "logit_clip8",
+      "weights_sha12": "27c9c717f219"
+    },
+    "img.hf.haywoodsloan": {
+      "score_key": "img.hf.haywoodsloan@11b10bd00956",
+      "transform": "logit_clip8",
+      "weights_sha12": "11b10bd00956"
+    }
+  },
+  "git_commit": "1807e6c8a2a5167f99c02ac4ec7904a43897cc31",
+  "items": {
+    "contaminated_dropped": 0,
+    "contamination_sets": [],
+    "n": 5001,
+    "n_fake": 2304,
+    "n_real": 2697
+  },
+  "lgo": {
+    "complete": true,
+    "folds": {
+      "F1": {
+        "candidate_active": true,
+        "delta": 0.7320261437908497,
+        "n_fake": 153,
+        "n_train": 4848,
+        "tau": {
+          "with": 0.8098965681694245,
+          "without": 0.6050958106314943
+        },
+        "tpr": {
+          "with": 0.7712418300653595,
+          "without": 0.0392156862745098
+        }
+      },
+      "F2": {
+        "candidate_active": true,
+        "delta": 0.3571428571428571,
+        "n_fake": 70,
+        "n_train": 4931,
+        "tau": {
+          "with": 0.8167458239029098,
+          "without": 0.6047710592215266
+        },
+        "tpr": {
+          "with": 0.42857142857142855,
+          "without": 0.07142857142857142
+        }
+      },
+      "F3": {
+        "candidate_active": true,
+        "delta": 0.2807017543859649,
+        "n_fake": 57,
+        "n_train": 4944,
+        "tau": {
+          "with": 0.8133536086243793,
+          "without": 0.6105477048104422
+        },
+        "tpr": {
+          "with": 0.2807017543859649,
+          "without": 0.0
+        }
+      },
+      "F4": {
+        "candidate_active": true,
+        "delta": 0.6016949152542374,
+        "n_fake": 118,
+        "n_train": 4883,
+        "tau": {
+          "with": 0.8094468239676169,
+          "without": 0.6094865427058282
+        },
+        "tpr": {
+          "with": 0.6101694915254238,
+          "without": 0.00847457627118644
+        }
+      },
+      "F5": {
+        "candidate_active": true,
+        "delta": 0.65,
+        "n_fake": 80,
+        "n_train": 4921,
+        "tau": {
+          "with": 0.8086916189856267,
+          "without": 0.6112525700142799
+        },
+        "tpr": {
+          "with": 0.6875,
+          "without": 0.0375
+        }
+      },
+      "F6": {
+        "candidate_active": true,
+        "delta": 0.5943396226415094,
+        "n_fake": 106,
+        "n_train": 4895,
+        "tau": {
+          "with": 0.8123801587571822,
+          "without": 0.6118357891136852
+        },
+        "tpr": {
+          "with": 0.6037735849056604,
+          "without": 0.009433962264150943
+        }
+      },
+      "F7": {
+        "candidate_active": true,
+        "delta": 0.5849056603773585,
+        "n_fake": 106,
+        "n_train": 4895,
+        "tau": {
+          "with": 0.8159253600061325,
+          "without": 0.6041296229975289
+        },
+        "tpr": {
+          "with": 0.6509433962264151,
+          "without": 0.0660377358490566
+        }
+      }
+    },
+    "macro": {
+      "ci95": {
+        "B": 2000,
+        "hi": 0.5829169112915056,
+        "lo": 0.5010870993603244,
+        "valid": 2000
+      },
+      "delta": 0.5429729933703967,
+      "with": 0.5761287836686074,
+      "without": 0.033155790298210745
+    },
+    "macro_over": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "missing": [],
+    "required": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ]
+  },
+  "method": {
+    "alpha": 0.05,
+    "bootstrap_B": 2000,
+    "cv_splits": 5,
+    "fuser_bootstrap_B": 1,
+    "gates": {
+      "face.gend_clip_l14": [
+        "has_face"
+      ]
+    },
+    "seed": 7,
+    "size_policy": {
+      "additive_size_face_terms": false,
+      "global_intercept": true,
+      "neutral_size_missing": true,
+      "resolution_balance": true
+    },
+    "splits": [
+      "fit",
+      "cal"
+    ],
+    "term_support": {
+      "face_px:120-256": {
+        "cal": {
+          "fake": {
+            "off": 652,
+            "on": 194
+          },
+          "real": {
+            "off": 703,
+            "on": 147
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1129,
+            "on": 329
+          },
+          "real": {
+            "off": 1587,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "face_px>=256": {
+        "cal": {
+          "fake": {
+            "off": 701,
+            "on": 145
+          },
+          "real": {
+            "off": 759,
+            "on": 91
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1203,
+            "on": 255
+          },
+          "real": {
+            "off": 1587,
+            "on": 260
+          }
+        },
+        "group": false
+      },
+      "has_camera_exif": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "has_face": {
+        "cal": {
+          "fake": {
+            "off": 438,
+            "on": 408
+          },
+          "real": {
+            "off": 568,
+            "on": 282
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 767,
+            "on": 691
+          },
+          "real": {
+            "off": 1240,
+            "on": 607
+          }
+        },
+        "group": true
+      },
+      "jpeg_q:70-89": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "jpeg_q<70": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "jpeg_q>=90": {
+        "cal": {
+          "fake": {
+            "off": 0,
+            "on": 846
+          },
+          "real": {
+            "off": 0,
+            "on": 850
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 0,
+            "on": 1458
+          },
+          "real": {
+            "off": 0,
+            "on": 1847
+          }
+        },
+        "group": false
+      },
+      "min_side<512": {
+        "cal": {
+          "fake": {
+            "off": 712,
+            "on": 134
+          },
+          "real": {
+            "off": 557,
+            "on": 293
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1243,
+            "on": 215
+          },
+          "real": {
+            "off": 1317,
+            "on": 530
+          }
+        },
+        "group": false
+      },
+      "min_side>1024": {
+        "cal": {
+          "fake": {
+            "off": 801,
+            "on": 45
+          },
+          "real": {
+            "off": 487,
+            "on": 363
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1403,
+            "on": 55
+          },
+          "real": {
+            "off": 868,
+            "on": 979
+          }
+        },
+        "group": false
+      },
+      "screenshot_like": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": true
+      },
+      "upscaled": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": false
+      },
+      "video_frame": {
+        "cal": {
+          "fake": {
+            "off": 846,
+            "on": 0
+          },
+          "real": {
+            "off": 850,
+            "on": 0
+          }
+        },
+        "fit": {
+          "fake": {
+            "off": 1458,
+            "on": 0
+          },
+          "real": {
+            "off": 1847,
+            "on": 0
+          }
+        },
+        "group": true
+      }
+    }
+  },
+  "modality": "image",
+  "schema": "veritas.ablation/1"
+}

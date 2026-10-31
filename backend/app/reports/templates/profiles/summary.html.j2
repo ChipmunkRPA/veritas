@@ -1,0 +1,115 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="identity">
+{% if v.exhibit_image %}
+<figure class="exhibit-thumb"><img src="{{ v.exhibit_image }}" alt="The examined image, reduced"><figcaption class="caption">The examined image, reduced.</figcaption></figure>
+{% endif %}
+<h1 class="title">{{ v.heading }}</h1>
+{% if v.draft_note %}
+<p class="caption draft-note">{{ v.draft_note }}</p>
+{% endif %}
+<p class="meta">{{ v.media_line }}</p>
+<p class="hash mono">SHA-256 {{ s.media.sha256 }}</p>
+<p class="caption">{{ v.analysis_line }}</p>
+{% if v.withheld_note %}
+<p class="caption">{{ v.withheld_note }}</p>
+{% endif %}
+{% if v.custodian_note %}
+<p class="caption custodian-note">{{ v.custodian_note }}</p>
+{% endif %}
+<hr class="rule-double">
+</section>
+<section class="assessment verdict-{{ v.step }}">
+<h2 class="eyebrow">Assessment</h2>
+<p class="headline">{{ v.headline }}</p>
+{% if v.examiner %}
+<p class="headline examiner-opinion">{{ v.examiner.line }}</p>
+{% if v.examiner.refusal %}<p class="examiner-refusal">{{ v.examiner.refusal }}</p>{% endif %}
+<p class="examiner-justification"><span class="muted">{{ v.examiner.label }}:</span> {{ v.examiner.justification }}</p>
+{% if v.examiner.also %}<p class="examiner-justification"><span class="muted">{{ v.examiner.also.label }}:</span> {{ v.examiner.also.text }}</p>{% endif %}
+{% endif %}
+<p class="estimate">{{ v.estimate_line }}</p>
+{% if v.scale %}
+<div class="scale-figure">
+{{ v.scale }}
+{% if v.scale_note %}
+<p class="scale-note">{{ v.scale_note }}</p>
+{% else %}
+<p class="scale-labels"><span>no indications</span><span>inconclusive</span><span>strong indications</span></p>
+{% endif %}
+</div>
+{% endif %}
+{% for note in v.step_notes %}
+<p class="caption step-note">{{ note }}</p>
+{% endfor %}
+</section>
+<section class="guidance">
+<div class="col">
+<h2 class="eyebrow">What this means</h2>
+{% for p in v.means %}
+<p>{{ p }}</p>
+{% endfor %}
+{% if v.reasons %}
+<ul class="reasons">
+{% for r in v.reasons %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+</div>
+<div class="col">
+<h2 class="eyebrow">What this does not mean</h2>
+{% for p in v.does_not_mean %}
+<p>{{ p }}</p>
+{% endfor %}
+</div>
+</section>
+<section class="next">
+<h2 class="eyebrow">Next step</h2>
+<p>{{ v.next_step }}</p>
+</section>
+<section class="testing">
+<h2 class="eyebrow">In testing</h2>
+{% if v.testing.arrays %}
+<div class="arrays">
+{% for a in v.testing.arrays %}
+<div class="array">{{ a.svg }}<p>{{ a.caption }}</p></div>
+{% endfor %}
+</div>
+<p class="caption">{{ v.testing.scope }}</p>
+{% else %}
+<p>{{ v.testing.line }}</p>
+{% endif %}
+{% if v.not_validated %}
+<p class="caption">{{ v.not_validated }}</p>
+{% endif %}
+</section>
+<section class="findings">
+<h2 class="eyebrow">Key findings</h2>
+{% if v.findings %}
+<ol>
+{% for f in v.findings %}
+<li>
+{% if f.thumbnail %}<img class="thumb" src="{{ f.thumbnail }}" alt="{{ f.thumbnail_alt }}">{% endif %}
+<span class="fid">{{ f.id }}</span>
+<span class="strength" role="img" aria-label="{{ f.words }}">{% if f.mark %}{{ v.marks[f.mark] }}{% else %}<span class="meter">{% for n in range(4) %}<i class="{{ 'on' if n < f.bars else 'off' }}"></i>{% endfor %}</span>{% endif %}</span>
+<span class="body"><strong>{{ f.title }}</strong>{% if f.status %} <span class="ex-chip">Examiner: {{ f.status }}</span>{% endif %}{% if f.counter %}<span class="muted"> — counter-evidence</span>{% endif %}<br>{{ f.reason }}{% if f.thumbnail and f.thumbnail_caption %}<span class="caption thumbnail-caption">{{ f.thumbnail_caption }}</span>{% endif %}</span>
+</li>
+{% endfor %}
+</ol>
+{% if v.findings | selectattr("thumbnail") | list %}<p class="caption">{{ v.thumbnail_note }}</p>{% endif %}
+{% if v.findings_beside %}<p class="muted">{{ v.findings_beside }}</p>{% endif %}
+{% else %}
+<p class="muted">{{ v.findings_note }}</p>
+{% endif %}
+{% if v.start_note %}<p class="caption start-note">{{ v.start_note }}</p>{% endif %}
+</section>
+{#- N-19: once the examiner's opinion stands under the headline, the review line is the footer's (it runs on every page) -#}
+{% if not v.examiner %}
+<section class="review">
+<h2 class="eyebrow">Review</h2>
+<p class="status"><span class="status-mark{{ ' is-reviewed' if v.issued else '' }}"></span>{{ v.status_line }}</p>
+</section>
+{% endif %}
+<p class="closing">{{ v.closing }}</p>
+{% endblock %}

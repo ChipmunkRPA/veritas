@@ -1,0 +1,74 @@
+{# Shared finding sentences (tpl-2.10). One sentence per line; every line starts with cite(...) (EA-07).
+   Wording: IF §6.2 strength templates adapted to the UX §7.2 vocabulary (D-16). Detector free text is not quoted in findings: it
+   stays in the evidence ledger (DR P1-7); documentary strings (metadata, credentials, watermark messages) are quoted by their families. #}
+{% macro observation(w) %}
+{% if w.s.score_text != "no score" %}
+{{ cite(w.s.id, w.s.exhibit_ids) }}{{ w.s.name }} returned a score of {{ w.s.score_text }}; what it measured is listed in the evidence ledger.
+{% else %}
+{{ cite(w.s.id, w.s.exhibit_ids) }}{{ w.s.name }} produced a result without a score; what it measured is listed in the evidence ledger.
+{% endif %}
+{% endmacro %}
+
+{# D-63 (tpl-2.10): a check that entered the estimate is worded by what it did there (`w.strength`, `w.direction` from its
+   contribution), then by its own likelihood ratio, named as stand-alone. A check outside the estimate keeps its stand-alone
+   words and says that it is outside. #}
+{% macro strength_sentence(w) %}
+{% if w.not_counted %}
+{# N-19o (D5-04, tpl-2.17): a check whose row the decision does not count: why, then its stand-alone words #}
+{{ cite(w.s.id, "decision") }}This check tests the file’s provenance and integrity and is not one of the statistical checks, so the decision does not count it.
+{{ cite(w.s.id) }}{{ w.standalone }}
+{# N-19o (D5-03): `w.within` is "this result" outside what was validated, where no estimate is shown #}
+{% elif w.in_estimate %}
+{% if w.strength == "none" %}
+{{ cite(w.s.id, "decision") }}In {{ w.within }} the check had little effect.
+{% elif w.direction == "for" %}
+{{ cite(w.s.id, "decision") }}In {{ w.within }} it is {{ w.strength }} support for {{ w.phrase }}{% if w.strength == "weak" %}; benign causes{% if w.fp_modes %} such as “{{ w.fp_modes | join("”, “") }}”{% endif %} can produce the same result{% endif %}.
+{% else %}
+{{ cite(w.s.id, "decision") }}In {{ w.within }} it is {{ w.strength }} support against {{ w.phrase }}{% if w.strength == "weak" %}; detectors miss some AI content{% endif %}.
+{% endif %}
+{{ cite(w.s.id) }}{{ w.standalone }}
+{% elif w.strength == "none" and w.get("outside_both") %}
+{# N-19k (Q2-12): a check that scored and is not counted: its score and why, in one sentence, from the check's own record #}
+{{ cite(w.s.id, "decision") }}{{ w.outside_both }}
+{% elif w.strength == "none" %}
+{{ cite(w.s.id) }}This result provides no information about {{ w.phrase }}.
+{% elif w.direction == "for" and w.strength == "strong" %}
+{{ cite(w.s.id) }}This is strong support for {{ w.phrase }} ({{ w.lr_text }}).
+{% elif w.direction == "for" and w.strength == "moderate" %}
+{{ cite(w.s.id) }}This supports {{ w.phrase }} ({{ w.lr_text }}) and is not readily explained by the processing observed.
+{% elif w.direction == "for" %}
+{{ cite(w.s.id) }}This is consistent with {{ w.phrase }} ({{ w.lr_text }}), but equally with benign causes{% if w.fp_modes %} such as “{{ w.fp_modes | join("”, “") }}”{% endif %}.
+{% elif w.strength == "strong" %}
+{{ cite(w.s.id) }}This is strong support against {{ w.phrase }} ({{ w.lr_text }}).
+{% elif w.strength == "moderate" %}
+{{ cite(w.s.id) }}This is moderate support against {{ w.phrase }} ({{ w.lr_text }}).
+{% else %}
+{{ cite(w.s.id) }}This is weak support against {{ w.phrase }} ({{ w.lr_text }}); detectors miss some AI content.
+{% endif %}
+{% if w.outside_estimate and w.get("outside_line") %}
+{{ cite(w.s.id, "decision") }}{{ w.outside_line }}
+{% elif w.outside_estimate and not w.get("outside_both") %}
+{{ cite(w.s.id, "decision") }}This check is not in this estimate: it carries no weight in the fused model for this input.
+{% endif %}
+{% if w.get("outside_step") %}
+{{ cite(w.s.id) }}{{ w.outside_step }}
+{% endif %}
+{% endmacro %}
+
+{% macro conditions(w) %}
+{% if w.conditions and w.strength != "none" %}
+{{ cite(w.s.id, "condition_profile") }}Conditions present that reduce the reliability of this check: {{ w.conditions | join("; ") }}.
+{% endif %}
+{% endmacro %}
+
+{% macro benchmark(w) %}
+{% if w.benchmark %}
+{{ cite(w.s.id) }}{{ w.benchmark }}
+{% endif %}
+{% endmacro %}
+
+{% macro dissent(w) %}
+{% if w.dissent %}
+{{ cite(w.s.id, "decision") }}{{ w.dissent }}
+{% endif %}
+{% endmacro %}

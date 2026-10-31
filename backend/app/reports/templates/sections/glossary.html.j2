@@ -1,0 +1,8 @@
+<section class="chapter-cont" id="section-glossary">
+<h2 class="chapter-title"><span class="n">{{ v.number.glossary }}</span>Glossary</h2>
+<dl class="glossary">
+{% for g in v.glossary %}
+<div><dt>{{ g.term }}</dt><dd>{{ g.definition }}</dd></div>
+{% endfor %}
+</dl>
+</section>

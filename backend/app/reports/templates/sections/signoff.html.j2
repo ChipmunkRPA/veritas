@@ -1,0 +1,55 @@
+{% set g = v.signoff %}
+<section class="chapter-cont" id="section-signoff">
+<h2 class="chapter-title"><span class="n">{{ v.number.signoff }}</span>Sign-off</h2>
+<h3 class="eyebrow">Machine assessment</h3>
+<p class="machine">{{ g.machine }}</p>
+<p class="caption">{{ g.machine_meta }}</p>
+<hr class="rule">
+{# N-19n (D3-03 d; D-69): "Draft opinion, not signed" stands over a draft opinion only, not over "No opinion is recorded." #}
+<h3 class="eyebrow">{{ 'Draft opinion, not signed' if g.conclusion and not g.signed else 'Examiner’s opinion' }}</h3>
+{% if g.conclusion %}
+<p class="reader examiner-layer">{{ g.conclusion.position }}. {{ g.conclusion.relation }}</p>
+<dl class="facts">
+<dt>Rationale</dt><dd>{{ g.conclusion.rationale }}</dd>
+{% if g.conclusion.justification %}<dt>{{ g.conclusion.justification_label }}</dt><dd>{{ g.conclusion.justification }}</dd>{% endif %}
+{% if g.conclusion.next_steps %}<dt>Next steps</dt><dd>{{ g.conclusion.next_steps }}</dd>{% endif %}
+<dt>Limitations acknowledged</dt><dd>{{ g.conclusion.acknowledged }}</dd>
+<dt>Author</dt><dd>{{ g.conclusion.author }}, {{ g.conclusion.at }}</dd>
+{% if g.conclusion.record %}<dt>Record</dt><dd>{{ g.conclusion.record }}</dd>{% endif %}
+<dt>Review state</dt><dd>{{ g.state }}</dd>
+</dl>
+{% else %}
+<p class="muted">No opinion is recorded. Review state: {{ g.state }}.</p>
+{% endif %}
+<h3 class="eyebrow">Sign-offs</h3>
+{% if g.signoffs %}
+<table class="grid signoffs">
+<thead><tr><th>Kind</th><th>Decision</th><th>Principal</th><th>Signed</th><th>Authenticated by</th><th>Comment</th></tr></thead>
+<tbody>
+{% for x in g.signoffs %}
+<tr><td>{{ x.kind }}</td><td>{{ x.decision }}</td><td>{{ x.name }}</td><td>{{ x.at }}</td><td>{{ x.auth }}</td><td>{{ x.comment or '–' }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p><span class="status-mark{{ ' is-reviewed' if g.issued else '' }}"></span>{{ g.status_line }}</p>
+{% endif %}
+{# D-69: the statements and the signature lines are printed only when an examiner sign-off exists.
+   N-19j (D2-01): each signer has a statement of his own, followed by his own line and no other; a statement and its line
+   stay on one page. The standard profile prints neither statement (D-10), never one signer's without the other's #}
+{% if g.signed %}
+{% for x in g.signoffs %}
+<div class="signer">
+{% if v.declaration and x.statement %}
+<h3 class="eyebrow">{{ x.statement_title }}</h3>
+<p class="reader declaration">{{ x.statement }}</p>
+{% endif %}
+<div class="signature-lines">
+<div><span class="line"></span><p class="caption">Signature · {{ x.kind }}: {{ x.name }}</p></div>
+<div><span class="line"></span><p class="caption">Date</p></div>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+<p class="caption closing-note">{{ v.custody.report_hash }}</p>
+</section>

@@ -32,10 +32,10 @@ from app.engine import rerun
 from app.storage.db import Analysis, AuditEvent
 
 REPO_DIR = BACKEND_DIR.parent
-SECRETS = frozenset({"api_key", "signing_key", "api_key_pepper", "database_url"})
+SECRETS = frozenset({"api_key", "signing_key", "api_key_pepper", "database_url", "stripe_secret_key", "stripe_webhook_secret"})
 HOST_PATHS = frozenset({"data_dir", "hf_home", "models_dir", "models_manifest", "fuser_dir", "report_library_dirs", "batch_local_roots",
                         "text_classifier_finetuned_path", "exiftool_path", "frontend_dir"})
-NOT_CONFIG = frozenset({"build_commit"})
+NOT_CONFIG = frozenset({"build_commit", "billing_mode", "billing_app_origin"})
 LIBRARIES: dict[str, tuple[str, ...]] = {
     "torch": ("torch",),
     "transformers": ("transformers",),

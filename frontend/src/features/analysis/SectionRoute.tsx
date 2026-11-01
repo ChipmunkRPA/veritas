@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useLocation, useOutletContext } from 'react-router-dom'
 import { prefersReducedMotion } from '../../lib/theme'
 import type { WorkspaceContext } from './AnalysisWorkspace'
 
-export type Section = 'summary' | 'findings' | 'exhibit' | 'reached' | 'ledger' | 'provenance' | 'methods' | 'appendix' | 'revision' | 'review'
+export type Section = 'summary' | 'findings' | 'image-evidence' | 'media-evidence' | 'exhibit' | 'reached' | 'ledger' | 'provenance' | 'methods' | 'appendix' | 'revision'
 
 /** How long the page has to keep its height before a deep link counts as landed, and the longest it is followed. */
 const SETTLE_MS = 1500
@@ -18,15 +18,17 @@ const FOLLOW_MS = 12_000
  *  and never after the reader has scrolled, pressed a key or touched the page. */
 export default function SectionRoute({ section }: { section: Section }) {
   const { ready } = useOutletContext<WorkspaceContext>()
+  const { hash } = useLocation()
   useEffect(() => {
     if (!ready) return
     if (section === 'summary') {
       // A link to a ledger row (`#signal-…`) is on the summary's route: the workspace scrolls to that row, and a page that
       // becomes ready after it must not take the reader back to the top.
-      if (!window.location.hash.startsWith('#signal-')) window.scrollTo({ top: 0 })
+      if (!/^#(?:signal-|finding-|image-evidence-|media-evidence-)/.test(hash)) window.scrollTo({ top: 0 })
       return
     }
-    const target = () => document.getElementById(`section-${section}`)
+    const target = () => (/^#(?:finding-F[1-9]\d*|image-evidence-[A-Z]\d+|media-evidence-(?:[A-Z]\d+|AV\d+|voice|timing|visual|all|background))$/.test(hash) ? document.getElementById(hash.slice(1)) : null)
+      ?? document.getElementById(`section-${section}`)
     target()?.scrollIntoView({ block: 'start', behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
     if (typeof ResizeObserver === 'undefined') return
     let stopped = false
@@ -53,6 +55,6 @@ export default function SectionRoute({ section }: { section: Section }) {
     const limit = window.setTimeout(stop, FOLLOW_MS)
     for (const name of inputs) window.addEventListener(name, stop, { passive: true })
     return stop
-  }, [ready, section])
+  }, [ready, section, hash])
   return null
 }

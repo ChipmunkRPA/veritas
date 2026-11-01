@@ -1,7 +1,8 @@
 import { useId, useState, type FormEvent } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { apiClient, unwrap } from '../../lib/api/client'
-import type { Annotation, Finding } from '../../lib/api/queries'
+import { useModelCards, type Annotation, type Finding } from '../../lib/api/queries'
+import { anonymizeFindingText } from '../analysis/checkNames'
 import { Button, EmptyState, IdChip, Menu } from '../../components/ui'
 import { findingsNotWritten } from '../analysis/vocabulary'
 import { EXAMINER_STATUSES, NOTE_REQUIRED, STATUS_WORD, dispositions, type ExaminerStatus, type Visibility } from './review'
@@ -34,6 +35,7 @@ export default function Dispositions({ analysisId, findings, annotations, writab
    *  where the checks and their scores stand: the evidence ledger, or the expert view from the Plain view */
   notWritten?: 'ledger' | 'expert'
 }) {
+  const cards = useModelCards().data ?? []
   const current = dispositions(annotations)
   const [draft, setDraft] = useState<{ findingId: string; status: ExaminerStatus } | null>(null)
   const [note, setNote] = useState('')
@@ -81,7 +83,7 @@ export default function Dispositions({ analysisId, findings, annotations, writab
               <li key={f.id} data-testid="disposition" data-finding={f.id} data-status={d?.status ?? 'none'} className="border-b border-border py-2">
                 <div className="flex items-baseline gap-3 flex-wrap min-h-8">
                   <IdChip>{f.id}</IdChip>
-                  <span className="text-small text-text min-w-0 flex-1 break-words">{f.title}</span>
+                  <span className="text-small text-text min-w-0 flex-1 break-words">{anonymizeFindingText(f, f.title, cards)}</span>
                   <span className="text-small whitespace-nowrap">
                     {d ? <span className="text-annotation font-medium">{STATUS_WORD[d.status]}</span> : <span className="text-text-muted">No status</span>}
                   </span>

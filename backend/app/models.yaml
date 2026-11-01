@@ -109,6 +109,41 @@ models:
       - "torch pickle {model, optimizer, lr_scheduler, max_accuracy, epoch 13, config (yacs CfgNode), amp}; weights_only=True refuses the CfgNode, so app.detectors.image.spai reads it with a restricted unpickler (tensor rebuild, OrderedDict, set, CfgNode as a plain dict; no other global). 324 tensors: 281 float32/int64 tensors (132.6 M parameters) load strictly; 43 MFM classification tensors inference never calls (cls_blocks, cls_pos_embed, actual_cls_token, fc_norm, intermediate_fc_norm, head) are dropped by name"
       - "kept in float32 until the A1 parity run decides fp16"
 
+  - id: fused.opensdi
+    source:
+      type: local
+      path: weights/fused
+      produced_by: "Verified local mirror of released HF weights; download provenance and pinned digest in docs/fused-local-research.md"
+      repo: aonuzhdin/FUSED
+      revision: b7dfe0cb2d2f8fc8fd9e6ebea5f7185cfa8e1af7
+      files:
+        - {path: fused_opensdi.pth, sha256: 7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c, bytes: 319859039}
+    depends_on: [fused.convnext_xxlarge]
+    licence: {spdx: MIT, class: commercial, notice: "HF checkpoint card aonuzhdin/FUSED at b7dfe0cb declares MIT for the weights. This does not license the separate upstream source; no upstream Python is imported or distributed."}
+    footprint: {params_m: 923.3, fp32_mb: 3584, activation_mb_per_item: 2048, estimated: true}
+    devices: {cpu: ok, mps: ok, cuda: unsupported}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.fused_loader:load_fused", pickle: true}
+    notes:
+      - "Local verified mirror only; loader never downloads. SHA-256 checked before weights_only=True and mmap=True; no unsafe globals, exact static config and 879-tensor key/shape/dtype schema required. Independent inference-only tensor implementation; no source redistribution licence is asserted. See docs/fused-local-research.md."
+      - "Composite lease includes the ConvNeXt backbone; the dependency is verified and loaded inside this primary loader, never separately leased. The 3584 MiB weights and 2048 MiB activation budgets are conservative estimates, not measured peaks; batch size is exactly one."
+      - "Float32 only. Ten fixed MPS reference inputs agree within predeclared 1e-4 tolerance; this is bounded numerical parity, not accuracy, cross-device parity or service admission."
+
+  - id: fused.convnext_xxlarge
+    source:
+      type: local
+      path: weights/fused
+      produced_by: "Verified local mirror of released HF safetensors; pinned digest in docs/fused-local-research.md"
+      repo: timm/convnext_xxlarge.clip_laion2b_soup
+      files:
+        - {path: convnext.safetensors, sha256: 1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23, bytes: 3386218152}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "HF checkpoint card timm/convnext_xxlarge.clip_laion2b_soup declares Apache-2.0; implementation uses installed timm (Apache-2.0)."}
+    footprint: {params_m: 843.4, fp32_mb: 3220, activation_mb_per_item: 0, estimated: true}
+    devices: {cpu: ok, mps: ok, cuda: unsupported}
+    fp16_safe: false
+    notes:
+      - "Dependency-only entry: its memory is included in fused.opensdi. Build timm on meta with pretrained=False, remove only the unused classification head, and strictly assign local safetensors. No independent adapter loader or network loading."
+
   - id: mesorch.full_98
     source:
       type: gdrive
@@ -489,6 +524,87 @@ models:
     load: {adapter_loader: "app.detectors.text.adapters.loaders:load_causal_lm"}
     notes: ["stored bf16; v1 runs the Binoculars pair in fp16 on accelerators (core/device.py) and v2 matches it (fp16_safe); v1↔v2 document parity: docs/v2/qa/p6_document_parity.md"]
 
+  - id: silero.speech_activity
+    source:
+      type: local
+      path: weights/audio-upgrade
+      revision: 066409f3d9db45a30d21dfcbf9147826ffdd7052
+      produced_by: Pinned publisher download; docs/commercial-model-audit.md
+      files:
+      - path: silero_vad.jit
+        sha256: e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720
+        bytes: 2272526
+    licence:
+      spdx: MIT
+      class: commercial
+      notice: Publisher explicitly licenses code and pretrained models MIT; notice in
+        third-party notices.
+    footprint:
+      params_m: 0.6
+      fp32_mb: 4
+      activation_mb_per_item: 8
+    devices:
+      mps: fallback_cpu
+      cuda: fallback_cpu
+    load:
+      adapter_loader: app.detectors.audio.upgraded:load_speech_activity
+  - id: pella.voice_v2
+    source:
+      type: local
+      path: weights/audio-upgrade
+      revision: 29daea8b04acf2d3f11d1d0da6b01c17fc8a1e4b
+      produced_by: Publisher HF checkpoint plus pinned facebook/w2v-bert-2.0 config;
+        docs/commercial-model-audit.md
+      files:
+      - path: pellav2_detector.pt
+        sha256: d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac
+        bytes: 2322248702
+      - path: w2v-bert-config.json
+        sha256: f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675
+        bytes: 1874
+    depends_on:
+    - silero.speech_activity
+    licence:
+      spdx: MIT
+      class: commercial
+      notice: Publisher declares MIT for weights and inference source; facebook/w2v-bert-2.0
+        backbone declares MIT. Training corpus not documented; no inherited accuracy
+        claims.
+    footprint:
+      params_m: 580
+      fp32_mb: 2300
+      activation_mb_per_item: 700
+    load:
+      adapter_loader: app.detectors.audio.upgraded:load_voice
+      pickle: true
+  - id: panns.cnn10
+    source:
+      type: local
+      path: weights/audio-upgrade
+      produced_by: Official Zenodo 3987831 and publisher AudioSet class index; docs/commercial-model-audit.md
+      files:
+      - path: panns-Cnn10.pth
+        sha256: 5240bdc47444e331bbeb54fd741d2b3f933a4526e84b0c17bf3593df94b13962
+        bytes: 25237595
+      - path: class_labels_indices.csv
+        sha256: cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429
+        bytes: 14675
+    licence:
+      spdx: CC-BY-4.0
+      class: commercial
+      notice: Official Zenodo pretrained weights CC-BY-4.0, inference code MIT. Attribution
+        retained; no raw AudioSet clips distributed.
+    footprint:
+      params_m: 6.3
+      fp32_mb: 30
+      activation_mb_per_item: 160
+    devices:
+      mps: fallback_cpu
+      cuda: fallback_cpu
+    load:
+      adapter_loader: app.detectors.audio.upgraded:load_sound_events
+      pickle: true
+
 detectors:
   # ---------------------------------------------------------------- image
   - id: img.univfd
@@ -752,9 +868,37 @@ detectors:
     citation: "Andrii Yermakov, Jan Cech, Jiri Matas, Mario Fritz. Deepfake Detection that Generalizes Across Benchmarks. WACV 2026, pp. 773-783 (arXiv 2508.06248)"
     admission: {decision: rejected, date: "2026-09-17", evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md): rejected; A1 pass (parity passed); A2 AUC 0.8751; A3a -1.2 pts; A3b fail; A4 pass; A5 not established: jpeg75 +0.0 pts (n 7), social_ig +0.0 pts (n 7); A6 pass; automated record pending human review"}
 
+  - id: loc.fused
+    adapter: app.detectors.image.adapters.localisers:FusedDetector
+    version: 0.1.0
+    name: FUSED OpenSDI local inspection
+    modality: image
+    family: localiser
+    hypotheses: [H2_localised_manipulation]
+    models: [fused.opensdi]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    calibration: {method: none}
+    known_limitations:
+      - "Limited local inspection only; default disabled and absent from fitted decision weights. Scores and pixels are uncalibrated measurements, not probabilities of editing or authenticity."
+      - "A fixed whole-image response gate >= 0.5 selects candidate regions. Raw masks and measurements remain unchanged; gate eligibility is separate from deterministic quality/reliability conditions. A failed gate means regions were withheld, not that the image is authentic."
+      - "Whole image is resized to 512 square with PIL bilinear interpolation, without preserving aspect ratio. No native tile inference, even under the deep profile; fine or small edits can be lost."
+      - "The fixed 200-image holdout with production component filtering and two-region cap has edited mean IoU 0.3544 and F1 0.4570, regions on 4/100 authentic images, and zero overlap on 13/100 edited images. Ungated raw maps produce regions on all 100 authentic images. These convenience data do not establish representative product accuracy; policy and hashes are recorded in docs/fused-local-research.md."
+      - "An empty, gated-out or diffuse map does not determine whether an image is fully generated, authentic, or edited elsewhere."
+    source_url: https://huggingface.co/aonuzhdin/FUSED/tree/b7dfe0cb2d2f8fc8fd9e6ebea5f7185cfa8e1af7
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "Released OpenSDI checkpoint; exact checkpoint training membership, contamination and representativeness are not independently established."
+    coverage_date: "not established; local compatibility and fixed holdout checked 2026-10-31"
+    input_constraints: ["one already-oriented PIL image; RGB to 512 x 512 via PIL bilinear; forensic ImageNet statistics and saved semantic statistics; float32 CPU/MPS only; no EXIF transform inside the detector, no tiling, no batching"]
+    fp_modes: ["regions on 4/100 authentic holdout images after the fixed image gate and production two-region cap; all 100 have regions without the image gate", "13/100 edited holdout images have zero retained overlap; unassessed content and low responses must not be labelled authentic"]
+    citation: "FUSED released OpenSDI checkpoint, aonuzhdin/FUSED at b7dfe0cb2d2f8fc8fd9e6ebea5f7185cfa8e1af7; independent tensor interpreter and local evaluation in docs/fused-local-research.md."
+    admission: {decision: pending, evidence: "Bounded numerical reference parity and predeclared holdout support limited local inspection only; no fitted weight, service admission, calibrated probability or accuracy guarantee. See docs/fused-local-research.md."}
+
   - id: loc.mesorch
     adapter: app.detectors.image.adapters.localisers:MesorchDetector
-    version: 0.4.0
+    version: 0.4.2
     name: Mesorch (ConvNeXt-T + SegFormer MiT-B3, DCT bands)
     modality: image
     family: localiser
@@ -788,7 +932,7 @@ detectors:
 
   - id: loc.radar
     adapter: app.detectors.image.adapters.localisers:RadarDetector
-    version: 0.4.0
+    version: 0.4.2
     name: RADAR (DINOv2 ViT-B/14 + Depth Anything V2 Base, diffusion inpainting)
     modality: image
     family: localiser
@@ -1292,7 +1436,7 @@ detectors:
 
   - id: vid.lipsync.stable_syncnet
     adapter: app.detectors.video.adapters.lipsync:StableSyncNetDetector
-    version: 0.4.0
+    version: 0.5.0
     name: "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track"
     modality: video
     family: av-sync
@@ -1322,7 +1466,7 @@ detectors:
 
   - id: vid.lipsync.landmark_xcorr
     adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
-    version: 0.4.0
+    version: 0.5.1
     name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
     modality: video
     family: av-sync
@@ -1759,7 +1903,7 @@ detectors:
 
   - id: txt.binoculars
     adapter: app.detectors.text.adapters.learned:BinocularsDetector
-    version: 0.3.0
+    version: 0.4.0
     name: Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)
     modality: text
     family: text
@@ -1802,3 +1946,80 @@ detectors:
     fp_modes: ["not established"]
     citation: "Veritas v0.3 stylometry rules (backend/app/detectors/text/stylometry.py)"
     admission: {decision: pending, evidence: "v0.3 measurements in docs/evaluation.md; admission pending"}
+
+  - id: aud.pella_v2
+    adapter: app.detectors.video.adapters.audio:PellaVoiceDetector
+    version: 1.1.0
+    name: Synthetic-voice inspection
+    modality: audio
+    family: voice
+    hypotheses:
+    - H2_localised_manipulation
+    models:
+    - pella.voice_v2
+    - silero.speech_activity
+    profiles:
+    - quick
+    - full
+    - deep
+    default_enabled: true
+    legacy_weight: 1.0
+    known_limitations:
+    - Local opt-in uses frozen voice-specific calibration; full statistical admission criteria remain unmet.
+    - Input is DC-centered, high-pass filtered at 20 Hz, normalized to -23 LUFS, clipped
+      and zero-padded to four seconds.
+    - The publisher does not document the training corpus. Local fixture checks are
+      not an accuracy benchmark.
+    source_url: https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector
+    threat:
+    - voice
+    lane: voice
+    training_data: Not documented by checkpoint publisher
+    coverage_date: not established
+    input_constraints:
+    - 16000 Hz mono; frozen source sample coordinates
+    contamination_sets: []
+    fp_modes:
+    - Unfamiliar content, music, recording noise and compression
+    citation: Publisher pinned release; see docs/commercial-model-audit.md
+    admission:
+      decision: pending
+      date: '2026-10-31'
+      evidence: Local experimental rollout with separate calibration; see docs/local-audio-rollout.md.
+
+  - id: aud.sound_events
+    adapter: app.detectors.video.adapters.audio:SoundEventsDetector
+    version: 1.0.0
+    name: Sound-event context
+    modality: audio
+    family: acoustic-context
+    hypotheses: []
+    models:
+    - panns.cnn10
+    profiles:
+    - quick
+    - full
+    - deep
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations:
+    - Uncalibrated inspection output; no matched representative evaluation or false-positive
+      rate established.
+    - Sound tags describe mixed audio, never an AI or authenticity verdict.
+    source_url: https://zenodo.org/records/3987831
+    threat:
+    - voice
+    lane: null
+    training_data: AudioSet weak clip-level sound labels; source audio retains separate
+      rights
+    coverage_date: not established
+    input_constraints:
+    - 16000 Hz mono; frozen source sample coordinates
+    contamination_sets: []
+    fp_modes:
+    - Unfamiliar content, music, recording noise and compression
+    citation: Publisher pinned release; see docs/commercial-model-audit.md
+    admission:
+      decision: pending
+      date: '2026-10-31'
+      evidence: Local integration candidate; no new calibration or accuracy claim.

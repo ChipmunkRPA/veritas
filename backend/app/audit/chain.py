@@ -62,6 +62,7 @@ ACTIONS = frozenset({
     "note_added", "status_changed", "conclusion_recorded", "signoff", "report_generated", "package_exported", "redaction",
     "retention_purge", "deletion_requested", "permission_changed", "login", "login_failed", "policy_changed",
     "fuser_loaded", "webhook_configured",
+    "image_evidence_generated", "video_evidence_generated", "audio_evidence_generated", "document_evidence_generated",
     "fuser_review_recorded", "fuser_review_withdrawn",  # N-9, D-57: the review of a served fuser artefact (`fusion.review_log`)
     "case_created", "case_updated",  # PRD CM-01 "case CRUD with audit events"; not in the §4.8 list
     "signing_key_adopted",  # N-17a: the key an earlier build derived from the API key, written to its file (`keyguard.adopt_derived`)

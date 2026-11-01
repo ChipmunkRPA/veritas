@@ -31,13 +31,15 @@ from typing import Any
 
 import numpy as np
 
+from app.core.canonical import canonical_json
 from app.core.evidence import Signal
 from app.detectors.audio import waveform
 from app.detectors.audio.coverage import content_rows, coverage_seconds, scored_voice_spans
+from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import fuse as legacy_fuse
 from app.detectors.common.fusion import fuse_probability, prob_to_signal_fields
 from app.detectors.video import segments as temporal_segments
-from app.detectors.video.audio import SR, VOICE_WINDOW_S, extract_audio
+from app.detectors.video.audio import SR, VOICE_WINDOW_S
 from app.detectors.video.decode import _input
 from app.engine.detector import Modality, StageOutputs
 from app.engine.fusion import abstain
@@ -46,8 +48,11 @@ from app.engine.stages import common
 from app.engine.stages import video as vid
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
+from app.storage.artefacts import get_artefact, register_artefact
+from app.storage.db import DetectorRun
 
-PIPELINE_VERSION = "aud-2.0-a21"  # a21 (N-19q, finding 11; synthesis tpl-2.19): the heading of a check whose part in the estimate and stand-alone reading give two grades names its reading ("Weak support against AI generation in this estimate"); the finding of a check that entered the estimate stores its stand-alone words. a20 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. a19: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). a18: a decisive code needs the estimate as published in its answer’s part of the scale (D-77), which changes results under a configured prior (`VERITAS_PRIOR_AI`); the reason’s number is the printed whole points (N-19m, third part). a17: the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded (N-19k; browser QA Q2-14); a16: the rule of D-76 (a decisive result needs a check whose published row is at least ln 2 toward its answer; it changes no recording of the packaged model, whose one row is beyond ln 2 in every decisive result) and each row of a check says whether the decision counts it (`counted`); a15: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04); a14: a strong code needs two checks that scored, so the one-detector audio model never gives the strongest headline of either side, and a fallback result without a check of the sound is not assessable (N-18, D-64, 2026-10-03); a13: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and the voice lane series is a "window score" (N-17, D-68); a12: a recording that is not assessable under a loaded fusion model is that model's result, not the fallback's (N-17, QA P1-4, 2026-10-03); a11: with one voice detector the voice signal is that detector's, so its contribution, ledger row and finding agree (N-17, QA P1-4, 2026-10-03); a10: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); a9: contributions are measured from each check's neutral point (N-17); a8: L-7: waveform envelope and spectrogram exhibits
+# a22: preserve analysed PCM, source sample mapping and window-input hashes.
+PIPELINE_VERSION = "aud-2.0-a25"  # a21 (N-19q, finding 11; synthesis tpl-2.19): the heading of a check whose part in the estimate and stand-alone reading give two grades names its reading ("Weak support against AI generation in this estimate"); the finding of a check that entered the estimate stores its stand-alone words. a20 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. a19: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). a18: a decisive code needs the estimate as published in its answer’s part of the scale (D-77), which changes results under a configured prior (`VERITAS_PRIOR_AI`); the reason’s number is the printed whole points (N-19m, third part). a17: the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded (N-19k; browser QA Q2-14); a16: the rule of D-76 (a decisive result needs a check whose published row is at least ln 2 toward its answer; it changes no recording of the packaged model, whose one row is beyond ln 2 in every decisive result) and each row of a check says whether the decision counts it (`counted`); a15: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04); a14: a strong code needs two checks that scored, so the one-detector audio model never gives the strongest headline of either side, and a fallback result without a check of the sound is not assessable (N-18, D-64, 2026-10-03); a13: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and the voice lane series is a "window score" (N-17, D-68); a12: a recording that is not assessable under a loaded fusion model is that model's result, not the fallback's (N-17, QA P1-4, 2026-10-03); a11: with one voice detector the voice signal is that detector's, so its contribution, ledger row and finding agree (N-17, QA P1-4, 2026-10-03); a10: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); a9: contributions are measured from each check's neutral point (N-17); a8: L-7: waveform envelope and spectrogram exhibits
 FUSER_ID = "legacy.audio"
 H2 = "H2_localised_manipulation"
 ENTRY_STAGES = ("provenance", "detect")
@@ -116,22 +121,31 @@ def provenance(ctx: StageContext) -> dict[str, Any]:
 
 
 def decode(ctx: StageContext) -> dict[str, Any]:
-    """Up to 600 s of 16 kHz mono PCM into run state (not persisted); the JSON output carries its sha256 for resume checks."""
+    """Decode once, preserving the exact checked PCM and its rational source timeline."""
     from app.detectors.video.adapters.common import AudioTrack
 
-    pcm = extract_audio(common.media_path(ctx), max_seconds=AUDIO_MAX_SECONDS)
-    if pcm is None:
-        raise ValueError("The audio stream is unreadable (corrupt file or unsupported codec)")
+    source_sha = ctx.outputs["ingest"]["sha256"]
+    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS)
+    pcm = decoded.pcm
     ctx.check("audio decoding")
     ctx.state["audio"] = AudioTrack("analysed", pcm, len(pcm))
+    with ctx.sessions() as db:
+        wav = register_artefact(db, ctx.store, decoded.wav, media_type="audio/wav", role="working_copy",
+                               created_by="audio-input/1", analysis_id=ctx.analysis_id)
+        mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
+                                   created_by="audio-input/1", analysis_id=ctx.analysis_id)
+        binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],
+                   "wav_sha256": wav.sha256, "mapping_sha256": mapping.sha256,
+                   "sample_rate": SR, "samples": int(len(pcm))}
+        objects = [{"id": a.id, "sha256": a.sha256, "size_bytes": a.bytes, "media_type": a.media_type,
+                    "role": a.role, "created_by": a.created_by} for a in (wav, mapping)]
+        db.commit()
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
-            "sha256": hashlib.sha256(pcm.tobytes()).hexdigest()}
+            "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects}
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
     content = ctx.outputs["condition"]["content"]
-    if not content["assessable"]:
-        return {"detectors": [], "not_run": content["reason"], "exhibits": [], "artefacts": []}
     track = ctx.state.get("audio")
     if track is None:
         raise RuntimeError("the decoded audio is not available")
@@ -159,7 +173,8 @@ def sole_voice_entry(entries: Sequence[Mapping[str, Any]]) -> Mapping[str, Any] 
     P1-4). The signal is then that check: it takes the detector's id, so the contribution the fusion model gives the detector,
     the ledger row and the finding are one thing. With several voice detectors the signal is their weighted average and keeps
     the id of the legacy fuser; no fusion model holds such an average, so it stays outside the estimate."""
-    scored = [e for e in entries if e["status"] == "ok" and e["family"] == "voice" and e["aggregate"] is not None and _windows(e)]
+    scored = [e for e in entries if e["status"] == "ok" and e["family"] == "voice" and e["aggregate"] is not None
+              and e["detector_id"] not in vid.AUDIO_INSPECTION_DETECTORS and _windows(e)]
     return scored[0] if len(scored) == 1 else None
 
 
@@ -194,7 +209,9 @@ def temporal(ctx: StageContext) -> dict[str, Any]:
     series = temporal_segments.collect(detected, lane_of=_lane_of, channel_of=lambda entry: "audio")
     voice_id = voice_signal_id(detected)
     lanes, found = vid._emit_lanes(ctx, series, {e["detector_id"]: e for e in detected}, None,
-                                   published=lambda entry, track_id: [voice_id] if entry["family"] == "voice" else [],
+                                   published=lambda entry, track_id: ([common.signal_id(entry["detector_id"], entry["aggregate"])]
+                                       if entry["detector_id"] in vid.AUDIO_INSPECTION_DETECTORS and entry["aggregate"] is not None
+                                       else [voice_id] if entry["family"] == "voice" else []),
                                    subject="whole recording")
     content = ctx.outputs["condition"]["content"]
     spans = scored_voice_spans(detected)
@@ -211,7 +228,8 @@ def temporal(ctx: StageContext) -> dict[str, Any]:
 # --- legacy voice fuser --------------------------------------------------------------------------------------------
 
 def _voice_entries(ctx: StageContext) -> list[dict[str, Any]]:
-    return [e for e in common.entries(ctx, ("detect",)) if e["status"] == "ok" and e["family"] == "voice" and e["aggregate"] is not None]
+    return [e for e in common.entries(ctx, ("detect",)) if e["status"] == "ok" and e["family"] == "voice" and e["aggregate"] is not None
+              and e["detector_id"] not in vid.AUDIO_INSPECTION_DETECTORS]
 
 
 def voice_signal(ctx: StageContext, entries: list[dict[str, Any]], samples: int) -> Signal | None:
@@ -248,6 +266,15 @@ def voice_signal(ctx: StageContext, entries: list[dict[str, Any]], samples: int)
 
 def fuse(ctx: StageContext) -> dict[str, Any]:
     """Legacy voice fuser → uncalibrated fallback Decision (§4.4), `not_assessable` for music- or silence-dominated audio."""
+    from app.core.config import settings
+    from app.detectors.audio import calibration
+
+    if settings.audio_detector_mode == "candidate" or ctx.state.get("fuser_pin") == calibration.SHA256:
+        if ctx.state.get("force_fallback") or ctx.state.get("fuser_pin") not in (None, calibration.SHA256):
+            raise ValueError("This saved analysis requires the legacy audio configuration; restore it before rerunning.")
+        from app.engine.stages.audio_screening import fuse as screening_fuse
+
+        return screening_fuse(ctx)
     selection = common.select_fusion(ctx, "audio")
     content = ctx.outputs["condition"]["content"]
     facts = ctx.outputs["probe"]["facts"]
@@ -264,6 +291,7 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
                                        fallback_detector=FUSER_ID, modality="audio", version=PIPELINE_VERSION, hypothesis=H2,
                                        family="voice", exhibit_ids=None if sole is not None else detector_exhibits)
                for n, s in enumerate(legacy_signals, 1)]
+    signals += vid.synthesis_signals(ctx, len(signals) + 1)
     vid.attach_temporal(ctx, signals)
     if content["assessable"]:
         decision = common.fallback_decision(verdict, informative=signal is not None, subject="recording")
@@ -323,4 +351,17 @@ def render(ctx: StageContext) -> dict[str, Any]:
 def publish(ctx: StageContext) -> dict[str, Any]:
     result: AnalysisResultV2 = common.build_result(ctx, kind="audio", pipeline_version=PIPELINE_VERSION, entry_stages=ENTRY_STAGES,
                                                    exhibit_stages=EXHIBIT_STAGES)
+    binding = (ctx.outputs.get("decode") or {}).get("evidence_input")
+    if binding is not None:
+        records, sound_records = [], []
+        with ctx.sessions() as db:
+            for entry in common.entries(ctx, ("detect",)):
+                if entry.get("status") != "ok" or entry.get("family") not in {"voice", "acoustic-context"} or not entry.get("run_id"):
+                    continue
+                run = db.get(DetectorRun, entry["run_id"])
+                if run is None or run.analysis_id != ctx.analysis_id or not run.raw_output_artefact_id:
+                    raise ValueError("A scored audio check has no stored input record")
+                raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
+                (records if entry["family"] == "voice" else sound_records).append({"detector_id": entry["detector_id"], "raw_output_sha256": raw.sha256})
+        result.manifest.sampling["audio_evidence"] = {"input": binding, "checks": records, "sound_checks": sound_records}
     return common.publish(ctx, result, dict(ctx.outputs["fuse"]["v1"]), pipeline_version=PIPELINE_VERSION, run_stages=ENTRY_STAGES)

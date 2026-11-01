@@ -1,0 +1,71 @@
+{% if v.get('image_evidence') %}
+<section class="chapter image-evidence{% if s.report.profile in ['summary', 'newsroom'] and (v.image_evidence.packets or v.image_evidence.get('inspection_checks')) %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
+<h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
+<p>{{ v.image_evidence.note }}</p>
+{% if v.image_evidence.available %}
+<p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
+<p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
+{% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if v.image_evidence.get('inspection_checks') %}
+<div class="image-inspection-checks">
+<h3>How inspection regions were selected</h3>
+<p class="caption">The image gate controls candidate display. The reliability mask separately excludes areas where measurement is less reliable. Neither establishes authenticity.</p>
+{% for check in v.image_evidence.inspection_checks %}
+<article class="image-inspection-check">
+<h4>{{ check.label }} · {{ check.eligibility.title }}</h4>
+{% if check.eligibility.score is not none %}<p class="caption">Whole-image response <span class="mono">{{ check.eligibility.score }}</span> · display threshold <span class="mono">{{ check.eligibility.threshold }}</span>. This response is uncalibrated; it is not a region or pixel probability.</p>{% endif %}
+<p class="caption">{{ check.eligibility.explanation }}</p>
+{% if check.counts %}
+<dl class="evidence-measurements">
+<div><dt>Measured regions before image gate</dt><dd>{{ check.counts.raw }}</dd></div>
+<div><dt>{{ check.eligible_count_label }}</dt><dd>{{ check.counts.eligible }}</dd></div>
+<div><dt>Shown in these evidence cards</dt><dd>{{ check.counts.selected }}</dd></div>
+<div><dt>Eligible regions not shown</dt><dd>{{ check.counts.omitted }}</dd></div>
+</dl>
+{% if check.counts.suppressed %}<p class="caption">{{ check.counts.suppressed }} measured region(s) were withheld by the image gate. The raw map remains in the evidence record; withheld regions are not cleared as authentic.</p>{% endif %}
+{% if check.counts.omitted %}<p class="caption">{{ check.counts.omitted }} eligible region(s) are not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>{% endif %}
+{% else %}<p class="caption">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>{% endif %}
+{% if check.map_grid %}<p class="caption">Measured grid {{ check.map_grid | join(' × ') }}. Displaying a larger image does not add detection detail.</p>{% endif %}
+{% if check.excluded_percent is not none %}<p class="caption">{{ check.excluded_percent }}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>{% endif %}
+</article>
+{% endfor %}
+<p class="caption">This coverage lists checks with recorded maps. Skipped, failed or unavailable checks remain in the analysis check record; their absence here is not a negative finding.</p>
+</div>
+{% endif %}
+{% for packet in v.image_evidence.packets %}
+<article class="image-evidence-packet" id="image-evidence-{{ packet.id }}">
+<h3>{{ packet.id }} · {{ packet.title }}</h3>
+{% if packet.get('customer_inference') %}<p class="finding-inference"><strong>Inference:</strong> {{ packet.customer_inference }}</p>{% endif %}
+<p class="caption">{% if packet.evidence_type == 'localisation' %}Localisation candidate{% else %}Inspection region{% endif %}{% if packet.finding_ids %} · Findings {{ packet.finding_ids | join(', ') }}{% endif %}{% if packet.signal_refs %} · Checks {% for ref in packet.signal_refs %}{{ ref.display_id }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+{% if not v.image_evidence.withheld %}
+<div class="evidence-plates{% if packet.images | length > 3 %} evidence-plates-four{% endif %}">
+{% for image in packet.images %}
+<figure>
+<img src="{{ image.uri }}" alt="{{ packet.id }}: {{ image.label }}">
+<figcaption>{{ image.label }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% if packet.get('overlay_legend') %}<p class="caption">{{ packet.overlay_legend }}</p>{% endif %}
+{% endif %}
+<p class="evidence-position caption">Region: x {{ packet.region.x }}, y {{ packet.region.y }}, width {{ packet.region.w }}, height {{ packet.region.h }} px. Crop: x {{ packet.crop_region.x }}, y {{ packet.crop_region.y }}, width {{ packet.crop_region.w }}, height {{ packet.crop_region.h }} px.</p>
+<p><strong>Observed:</strong> {{ packet.observation }}</p>
+<p><strong>Interpretation:</strong> {{ packet.interpretation }}</p>
+{% if packet.get('localisation') %}<p class="caption">Measured grid {{ packet.localisation.grid | join(' × ') }} · selected area {{ '%.2f' | format(packet.localisation.region_area_fraction * 100) }}% · operating threshold {{ packet.localisation.threshold }} (uncalibrated). White mask cells mark this selected region; black does not mean verified authentic.</p>{% endif %}
+{% if packet.get('eligibility_view') %}
+<div class="image-eligibility-note"><p class="caption"><strong>{{ packet.eligibility_view.title }}.</strong>{% if packet.eligibility_view.score is not none %} Whole-image response <span class="mono">{{ packet.eligibility_view.score }}</span> · display threshold <span class="mono">{{ packet.eligibility_view.threshold }}</span>. This response is uncalibrated; it is not a region or pixel probability.{% endif %} {{ packet.eligibility_view.explanation }}</p></div>
+{% endif %}
+{% if packet.measurements %}<dl class="evidence-measurements">
+{% for measure in packet.measurements %}<div><dt>{{ measure.label }}</dt><dd>{{ measure.value }}{% if measure.unit %} {{ measure.unit }}{% endif %}</dd></div>{% endfor %}
+</dl>{% endif %}
+{% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
+<p class="caption evidence-asset-hashes">{% for image in packet.images %}{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
+</article>
+{% else %}
+<p>{% if v.image_evidence.get('inspection_checks') %}No candidate regions are shown in this report. The coverage above explains what was measured and withheld.{% else %}No usable local inspection regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
+{% endfor %}
+{% if v.image_evidence.omitted_regions %}<p class="caption">{{ v.image_evidence.omitted_regions }} additional candidate regions were omitted from this bounded evidence set.</p>{% endif %}
+{% for note in v.image_evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
+{% endif %}
+</section>
+{% endif %}

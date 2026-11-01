@@ -6,7 +6,7 @@ import { shortHash } from '../../lib/format'
 import { calibrationMethod, policyWords } from '../../lib/recordWords'
 import { sliceWords } from '../../lib/sliceWords'
 import { fuserReview } from './vocabulary'
-import { ADMISSION_WORD, NOT_ESTABLISHED, admissionWord, fmtMetric, measuredRows, withCi, type EvalRow } from '../models/catalogue'
+import { ADMISSION_WORD, NOT_ESTABLISHED, admissionRecord, admissionWord, fmtMetric, measuredRows, withCi, type EvalRow } from './validation'
 
 type Calibration = NonNullable<AnalysisDetail['calibration']>[number]
 export type ErrorRate = NonNullable<Calibration['error_rates']>[number]
@@ -82,11 +82,11 @@ type DetectorRef = NonNullable<NonNullable<AnalysisDetail['manifest']>['detector
  *  without one prints the current card, marked. `decision` is what the Acceptance factor counts. */
 export function recordedAdmission(ref: DetectorRef, card: ModelCard | undefined): { text: string; decision: string | null } {
   const recorded = ref.admission
-  const now = card?.admission
+  const now = admissionRecord(card)
   if (recorded) {
     const changed = card != null && (now?.decision !== recorded.decision || (now?.date ?? null) !== (recorded.date ?? null))
     const addendum = changed ? ` (card now: ${[now ? admissionWord(card).split(' · ')[0] : 'not recorded', now?.date].filter(Boolean).join(', ')})` : ''
-    return { text: `${ADMISSION_WORD[recorded.decision] ?? recorded.decision}${addendum}`, decision: recorded.decision }
+    return { text: `${ADMISSION_WORD[recorded.decision] ?? 'not recorded'}${addendum}`, decision: recorded.decision }
   }
   if (card && now) return { text: `${admissionWord(card)} (not recorded at analysis time)`, decision: now.decision }
   return { text: 'not recorded', decision: null }
@@ -102,10 +102,10 @@ export function detectorValidation(a: AnalysisDetail, cards: readonly ModelCard[
     const rows = card ? measuredRows(card) : []
     const hit: EvalRow | undefined = slice ? rows.find((r) => r.slice === slice) : undefined
     const measured = hit
-      ? [`AUC ${fmtMetric(hit.auc)}`, `TPR at 1 % FPR ${fmtMetric(hit.tpr_at_fpr01)}`, `ECE ${fmtMetric(hit.ece)}`, hit.n != null ? `n ${hit.n}` : null, [hit.bench, hit.date].filter(Boolean).join(', ')]
+      ? [`AUC ${fmtMetric(hit.auc)}`, `TPR at 1 % FPR ${fmtMetric(hit.tpr_at_fpr01)}`, `ECE ${fmtMetric(hit.ece)}`, hit.n != null ? `n ${hit.n}` : null, [hit.benchmark_recorded ? 'recorded benchmark' : null, hit.date].filter(Boolean).join(', ')]
         .filter(Boolean).join(' · ')
       : rows.length ? `${NOT_ESTABLISHED} for this slice (${rows.length} benchmark ${rows.length === 1 ? 'row' : 'rows'} on the card)`
-        : card ? `${NOT_ESTABLISHED}: no benchmark results on the card` : `${NOT_ESTABLISHED}: no model card on record`
+        : card ? `${NOT_ESTABLISHED}: no benchmark results on record` : `${NOT_ESTABLISHED}: no benchmark record available`
     return { id: d.id, version: d.version, card, measured, established: hit != null, admission: recordedAdmission(d, card).text }
   })
 }
@@ -125,7 +125,7 @@ export function reliabilityFactors(a: AnalysisDetail, cards: readonly ModelCard[
   const tested = fuser?.bench_version
     ? `Fusion calibrated and tested on ${fuser.bench_version}${fuser.bench_manifest_sha256 ? ` (manifest ${shortHash(fuser.bench_manifest_sha256)})` : ''}${ref ? `; validation record ${ref.dossier_version}` : ''}`
     : ref ? `Validation record ${ref.dossier_version}` : null
-  const publication = detectors.length === 0 ? null : cited > 0 ? `${ofChecks(cited, detectors.length, 'cites', 'cite')} a publication (listed on the model cards)` : null
+  const publication = detectors.length === 0 ? null : cited > 0 ? `${ofChecks(cited, detectors.length, 'cites', 'cite')} a publication` : null
   const errorRate = m && (m.tpr != null || m.fpr != null)
     ? `This slice (${sliceWords(a.condition_profile?.slice_id)}): TPR ${withCi(m.tpr, m.tpr_ci95)}, FPR ${withCi(m.fpr, m.fpr_ci95)}`
     : rates.length ? `${rates.length} measured error-rate ${rates.length === 1 ? 'row' : 'rows'} for the fusion (${[...new Set(rates.map((r) => r.bench_version))].join(', ')})` : null

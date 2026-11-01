@@ -104,7 +104,7 @@ def build_report(summary: dict, result: dict, art_dir: Path, out_path: Path, *, 
     signals = result["signals"]
     tmp_path = out_path.with_suffix(".pdf.tmp")
     doc = SimpleDocTemplate(str(tmp_path), pagesize=A4, leftMargin=16 * mm, rightMargin=16 * mm, topMargin=14 * mm, bottomMargin=14 * mm,
-                            title=f"Veritas report — {summary['filename']}", author=f"{settings.app_name} {settings.version}")
+                            title=f"Chipmunk Verify report — {summary['filename']}", author=f"{settings.app_name} {settings.version}")
     W = A4[0] - 32 * mm
     el: list = []
 

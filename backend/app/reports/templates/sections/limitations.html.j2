@@ -1,6 +1,7 @@
 <section class="chapter-cont" id="section-limitations">
 <h2 class="chapter-title"><span class="n">{{ v.number.limitations }}</span>Limitations</h2>
 <h3 class="eyebrow">Applied to this exhibit</h3>
+{% if v.get('customer_historical_note') %}<p class="caption">{{ v.customer_historical_note }}</p>{% endif %}
 {% if v.limitations %}
 <table class="grid limitations">
 <tbody>

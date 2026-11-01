@@ -8,7 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import ClassVar, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from app.version import VERSION
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="VERITAS_", env_file=BACKEND_DIR / ".env", extra="ignore", hide_input_in_errors=True)
 
     # --- service ---
-    app_name: str = "Veritas"  # the service's name, as the API's description and the v1 report builder print it
+    app_name: str = "Chipmunk Verify"  # the service's name, as the API's description and the v1 report builder print it
     # The version the probes, the metrics, manifests, reports, packages, webhooks and backups state (D-58). Not a field:
     # VERITAS_VERSION and a `.env` line are not read, and the configuration hash of a result does not hold it
     version: ClassVar[str] = VERSION
@@ -66,6 +66,11 @@ class Settings(BaseSettings):
     session_ttl_s: int = 12 * 3600  # browser session lifetime
     login_rate_per_minute: int = 10  # sign-in attempts per client
     credential_failures_per_minute: int = 20  # wrong API keys and dead sessions per client before 429 (SEC-07)
+    # Hosted Checkout: explicit opt-in, never falls back to free submissions when enabled but unconfigured.
+    billing_mode: Literal["disabled", "test", "live"] = "disabled"
+    stripe_secret_key: SecretStr | None = None
+    stripe_webhook_secret: SecretStr | None = None
+    billing_app_origin: str = "http://127.0.0.1:5230"
     api_key_pepper: str | None = None  # HMAC pepper for principal API keys; default: data/keys/api_key_pepper.key (0600)
     job_timeout_s: int = 900  # per-analysis wall-clock budget (cooperative deadline + watchdog)
     max_requeue_attempts: int = 3  # poison-input guard on crash recovery
@@ -126,9 +131,9 @@ class Settings(BaseSettings):
 
     # --- detector engine (v2) ---
     models_manifest: Path | None = None  # default: app/models.yaml
-    # preset (commercial | research) or a JSON/YAML mapping (D-04). Default (D-34): the commercial preset plus the Veritas
-    # fine-tune txt.desklib_ft_v2, licence class unknown, disclosed in the result manifest and its model card.
-    licence_policy: str = '{"preset": "commercial", "allow_detectors": ["txt.desklib_ft_v2"]}'
+    # Commercial deployments have no default exception for weights with unresolved permissions.
+    # Explicit research policies remain available for separately authorised evaluation.
+    licence_policy: str = "commercial"
     default_profile: Literal["auto", "quick", "full", "deep"] = "auto"  # auto: full on accelerators, quick on CPU
     model_memory_budget_mb: str = "auto"  # auto: MPS min(0.5·RAM, RAM−20 GB), CUDA 0.85·VRAM, CPU 0.5·RAM (D-21)
     # VERITAS_OFFLINE: no network fetches; HF hub and transformers read the local cache only. Unset: true in prod, false in dev
@@ -209,6 +214,8 @@ class Settings(BaseSettings):
 
     # --- audio (video sound track) ---
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers
+    # Local rollout switch; the legacy weights/calibration remain installed for rollback.
+    audio_detector_mode: Literal["legacy", "candidate"] = "legacy"
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"
         "Gustking/wav2vec2-large-xlsr-deepfake-audio-classification|fake|1.0",  # AUC 0.917 overall / 0.974 ASVspoof-DF

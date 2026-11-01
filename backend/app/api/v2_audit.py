@@ -96,6 +96,36 @@ def _json(model: BaseModel) -> JSONResponse:
     return JSONResponse(jsonable_encoder(model), headers=NO_STORE)
 
 
+_MACHINE_AUDIT_DETAIL_KEYS = {
+    'analysis_started': {'refusion'},
+    'analysis_finished': {'refusion', 'status'},
+    'manifest_recorded': {'pipeline_version', 'manifest_hash'},
+    'fuser_loaded': {'kind', 'version'},
+    'fuser_review_recorded': {'kind', 'version', 'reviewer', 'review_date', 'statement_sha256', 'review_sha256', 'replaces'},
+    'fuser_review_withdrawn': {'kind', 'version', 'reviewer', 'review_date', 'statement_sha256', 'review_sha256', 'replaces'},
+}
+
+
+def _customer_audit_page(page: AuditPage) -> JSONResponse:
+    """Project machine details only; user-supplied notes and original hashes remain unchanged.
+
+    Hashes commit to the stored events, not these projected rows. Verification uses the stored chain.
+    """
+    from app.api.public_projection import alias_id, alias_signal
+
+    body = jsonable_encoder(page)
+    for row in body['items']:
+        details = row.get('details') or {}
+        if details.get('target_type') == 'signal' and isinstance(details.get('target_id'), str):
+            details['target_id'] = alias_signal(details['target_id'])
+        allowed = _MACHINE_AUDIT_DETAIL_KEYS.get(row['action'])
+        if allowed is not None:
+            row['object_ids'] = [alias_id(item) for item in row['object_ids']]
+            row['details'] = {key: value for key, value in row['details'].items() if key in allowed}
+    return JSONResponse(body, headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection',
+                                      'X-Audit-Hash-Meaning': 'original-events-not-projected-rows'})
+
+
 def _visible_cases(db: Session, principal: Principal, case_id: str | None) -> list[str] | None:
     """The cases whose events the caller may read (None: every event). A non-member asking for a case gets not found."""
     if principal.satisfies("administrator"):
@@ -133,7 +163,7 @@ def list_audit(request: Request, case_id: str | None = Query(None, max_length=36
     events = list(itertools.islice(chain.iter_events(case_ids=cases, action=_action(action), after_seq=after_seq, batch=limit + 1),
                                    limit + 1))
     page = events[:limit]
-    return _json(AuditPage(items=_named(page), next_after_seq=page[-1]["seq"] if len(events) > limit else None))
+    return _customer_audit_page(AuditPage(items=_named(page), next_after_seq=page[-1]["seq"] if len(events) > limit else None))
 
 
 @router.get("/audit/verify", response_model=ChainVerification, responses=problem_responses(401, 403))
@@ -144,19 +174,10 @@ def verify_audit() -> JSONResponse:
 
 
 @router.get("/audit/export", response_class=StreamingResponse,
-            responses={200: {"content": {"application/x-ndjson": {}, "text/csv": {}}, "description": "The audit log"},
-                       **problem_responses(401, 403, 404, 422)})
+            responses=problem_responses(401, 403, 404, 409, 422))
 def export_audit(request: Request, export_format: Literal["jsonl", "csv"] = Query("jsonl", alias="format"),
                  case_id: str | None = Query(None, max_length=36)) -> StreamingResponse:
-    with get_session() as db:
-        cases = _visible_cases(db, request.state.principal, case_id)
-    events = chain.iter_events(case_ids=cases)
-    if export_format == "jsonl":
-        body, media_type = chain.jsonl_lines(events), "application/x-ndjson"
-    else:
-        body, media_type = chain.csv_lines(events), "text/csv; charset=utf-8"
-    return StreamingResponse(body, media_type=media_type,
-                             headers={**NO_STORE, "Content-Disposition": f'attachment; filename="veritas-audit.{export_format}"'})
+    raise ProblemError(409, "Audit export unavailable", "A customer-safe audit export is not available yet. The original audit chain remains stored and can be verified in the app.")
 
 
 @router.get("/cases/{case_id}/custody", response_model=AuditPage, responses=problem_responses(401, 403, 404, 422))
@@ -172,7 +193,7 @@ def list_custody(case_id: str, request: Request,
             raise ProblemError(403, "Forbidden", "The custody log of a case is open to its owner, to reviewers and to administrators.")
     events = list(itertools.islice(chain.iter_events(case_ids=[case_id], after_seq=after_seq, batch=limit + 1), limit + 1))
     page = events[:limit]
-    return _json(AuditPage(items=_named(page), next_after_seq=page[-1]["seq"] if len(events) > limit else None))
+    return _customer_audit_page(AuditPage(items=_named(page), next_after_seq=page[-1]["seq"] if len(events) > limit else None))
 
 
 @router.get("/cases/{case_id}/custody/verify", response_model=CustodyVerification, responses=problem_responses(401, 404))

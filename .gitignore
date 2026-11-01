@@ -20,6 +20,12 @@ __pycache__/
 
 # local state
 /tmp/
+/backend/tmp/
+/output/
+.DS_Store
+.env
+.env.*
+!.env.example
 *.pid
 frontend/scripts/_*.mjs
 *.egg-info/

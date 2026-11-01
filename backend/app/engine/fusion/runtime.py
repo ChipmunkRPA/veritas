@@ -389,11 +389,17 @@ def fuse_with_artefact(selection: Selection, entries: Sequence[Mapping[str, Any]
     ctx = context_from(condition, kind)
     terms = ctx.terms()
     checks_not_run = not_run(fuser.detectors, by_id, {d for j, d in enumerate(fuser.detectors) if fuser.space.gate_open(j, terms)})
+    # An explicitly retired slot uses the fitted missing-input feature. A real
+    # failed/skipped run is still an error; only an absent entry is exempt.
+    checks_not_run = {d: why for d, why in checks_not_run.items()
+                      if d not in selection.intentionally_missing or d in by_id}
     if condition_failed:
         checks_not_run = {CONDITION_CHECK: CONDITION_FAILED, **checks_not_run}
     out = fuser.apply(scores, ctx, prior_ai=prior_ai, inactive=checks_not_run)
     shift = prior_logit(prior_ai)
     caveats: list[str] = []
+    if selection.intentionally_missing:
+        caveats.append('Speech was assessed separately. Its replacement check does not enter the combined video percentage.')
     if selection.pending_review:  # D-57: no review sidecar names this artefact's sha256
         caveats.append(PENDING_REVIEW_CAVEAT)
     if prior_ai is not None:

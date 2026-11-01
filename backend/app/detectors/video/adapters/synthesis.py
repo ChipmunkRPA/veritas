@@ -204,4 +204,11 @@ class D3Detector(Detector):
             metrics={"clips": float(len(inputs.clips)), "clips_scored": float(len(scored)), "shots": float(inputs.shots),
                      "shots_scored": float(shots_scored), "frames_scored": float(frames_scored), "sigma_median": median,
                      "sigma_min": lowest.sigma, "sigma_max": max(sigmas)},
-            exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL))
+            exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL),
+            details={"video_window_binding_version": "source-frame-window/1", "evidence_windows": [
+                {"unit_ref": f"clip:{k}", "frame_indices": frames, "start_pts": inputs.table.pts[frames[0]],
+                 "end_pts": inputs.table.pts[frames[-1]], "time_base": inputs.table.time_base,
+                 "measure": "temporal_feature_variation", "value": stat.sigma,
+                 "curve": [{"frame_index": frames[j + 1], "support_frame_indices": frames[j:j + 3], "value": float(value)}
+                           for j, value in enumerate(stat.second_order)]}
+                for k, _, frames, stat in scored]})

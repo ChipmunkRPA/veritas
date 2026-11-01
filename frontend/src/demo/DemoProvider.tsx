@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { api } from '../lib/api'
+import { useBilling } from '../lib/api/billing'
 import { buildSteps } from './steps'
 import { DEMO_STORAGE_KEY, isDone, isFailed, isSettled, type DemoAnalysis, type DemoState, type TourStep } from './types'
 
@@ -56,6 +57,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const nav = useNavigate()
   const loc = useLocation()
   const qc = useQueryClient()
+  const billing = useBilling()
   const starting = useRef(false)
 
   useEffect(() => { persist(state) }, [state])
@@ -63,6 +65,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const steps = useMemo(() => (state.items.length ? buildSteps(state.items) : []), [state.items])
 
   const start = useCallback(() => {
+    if (!billing.data) return
+    if (billing.data.enabled) { nav('/upload'); return }
     if (starting.current) return
     setResumed(false)
     setState((s) => (s.phase === 'idle' ? { ...s, error: null } : s))
@@ -77,17 +81,18 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       })
       .catch((e: Error) => setState({ ...IDLE, error: e.message || 'Could not start the demo' }))
       .finally(() => { starting.current = false })
-  }, [state.phase, state.error, qc])
+  }, [state.phase, state.error, qc, billing.data, nav])
 
   // Deep links: `/demo` (redirected to `/?demo=1` by the router) or `/?demo=1`. Cleared from the URL once consumed.
   useEffect(() => {
     const params = new URLSearchParams(loc.search)
     if (params.get('demo') === '1') {
+      if (!billing.data) return
       params.delete('demo')
       nav({ pathname: loc.pathname, search: params.toString() ? `?${params}` : '' }, { replace: true })
       start()
     }
-  }, [loc.search, loc.pathname, nav, start])
+  }, [loc.search, loc.pathname, nav, start, billing.data])
 
   // Poll unsettled analyses while the demo is live.
   useEffect(() => {

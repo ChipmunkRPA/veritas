@@ -1,0 +1,71 @@
+{
+  "objective": "Complete locally verified image, video, audio and document evidence chains, beginning with image editing localization; ordinary views, PDFs and JSON must share source-anchored evidence without exposing model identities.",
+  "goal_status": "complete",
+  "updated": "2026-10-31",
+  "requirements": [
+    {
+      "id": "image-localization",
+      "status": "complete",
+      "acceptance": "Learned spatial edit masks, source crops and explicit resolution/threshold/coverage; local known-edit and authentic-control evaluation; no classifier attention presented as editing proof.",
+      "evidence": "Local inspection runtime enabled and verified against a reference on 10 fixed samples; two application samples are bit-identical. A disjoint 200-image holdout with a fixed whole-image gate and two-region cap measured mean IoU 0.3544, F1 0.4570, 4/100 authentic false positives and 13/100 edited images with zero overlap. This is limited inspection validation, not a representative accuracy claim. Writer precision now matches persisted PNGs; the separate amendment preserves the original audits. Actual edited fbee815b-3801-4d44-8781-7b6353600a07 and authentic control aa5cd758-b4b1-4d65-b025-d8c1ab762ba0 verify exact source crops, stored scalar/quality maps, masks, overlay toggles and coordinate navigation. The control retains three measured candidates suppressed by the fixed gate, with the reason visible. Default registry enablement and fitted decision weight remain unchanged; local response masks are not original-pixel edit proof."
+    },
+    {
+      "id": "image-exports",
+      "status": "complete",
+      "acceptance": "Ordinary UI, frozen PDF and JSON share identical region/mask evidence hashes; previous analyses and signatures unchanged.",
+      "evidence": "Image evidence v3 ordinary UI, API and JSON match frozen r59 signed PDFs VR18/VR19 and four source-optional ZIPs. 35 unique PNGs, nine exact original crops and 29 embedded packet plates were verified. Signatures and the independent offline verifier pass; 23 prior analyses, 17 prior reports and the first control are unchanged. Proof: backend/data/image-evidence-v3-demo/verification.json, browser-verification.json and exports/veritas-report-2.0.r59/."
+    },
+    {
+      "id": "video",
+      "status": "complete",
+      "acceptance": "Correct frame PTS/time-base/player anchors, sampled-frame coverage, source frames/crops/overlays, score-linked segments, playable navigation and evidence exports; VFR/nonzero-start verified.",
+      "evidence": "Video evidence v3 verified on mux revision 78fdcf6e-0269-4b41-9729-5fc191b53cf6 (30.20 s) and silent control 980bd904-8e3d-4f68-a3ec-f3ddbe921116 (22.40 s). Four actual voice windows and 11 AV windows yield four voice and four AV packets; seven AV windows are explicitly omitted from cards. Fresh original-source decoding matches 144893 PCM samples, 63 source frames and 100 measured mouth inputs. All 145 mux assets and 11 control assets are parent-bound and verified. Browser audio/video playback, frame-60 seek at 2.5 s, all 31 lags, 55 energy blocks and 25 patches per AV example pass. Silent control has no voice/AV evidence and makes no negative claim. VFR, repeated frames and nonzero origins are covered by fixtures. r61 PDFs VR21/VR22 (52/28 pages) and four ZIPs pass exact API/JSON, PNG-pixel, manifest, signature and offline verification. The assembled mux uses unrelated TTS and is an engineering fixture, not an accuracy benchmark. See docs/video-audio-evidence.md and backend/data/video-evidence-v3-demo/exports/veritas-report-2.0.r61/verification-fce7462f2ab6.json."
+    },
+    {
+      "id": "audio",
+      "status": "complete",
+      "acceptance": "Frozen analyzed PCM and exact scored windows, source clips/context playback, waveform and score track, exclusions and precision limits, synchronized exports; sample-rate/channel/offset cases verified.",
+      "evidence": "Real local TTS and silence analyses verified: exact analyzed PCM, 9 source-bound windows, 12 sample-identical WAVs and 14 regenerated PNGs; browser played 4s selected and8s context clips, source clocks displayed. Silence has0 scored windows and no authenticity claim. API/JSON, r56 signed PDFs VR13/14 and four source-optional public ZIPs verified with independent key; r55 leaking audio PDF withheld unchanged. Workflow validation only, not a detector-accuracy benchmark."
+    },
+    {
+      "id": "text-document-email",
+      "status": "complete",
+      "acceptance": "Actual classifier context and Unicode offsets, PDF page/quad screenshots, DOCX paragraph/table anchors, EML MIME body/quotes/attachments, local OCR with quality status; synchronized exports.",
+      "evidence": "Source-mapped PDF/DOCX/EML/OCR, paired token-context v2, true disagreement selection and r58 signed PDF/JSON/ZIP passed real local verification. Browser accepted DOCX Paragraph 2/document path 1, EML MIME body 1.1.1 with explicit quote/signature/attachment limits, OCR exact1700x2200 input and1450x179 crop with recognition-quality disclosure, and actual ratio/classifier disagreement/context expansion. See backend/data/document-evidence-demo/browser-verification.json and ratio-parity/verification.json. Engineering evidence coverage is verified; statistical authorship remains uncalibrated and partial/unsupported extraction is explicit."
+    },
+    {
+      "id": "customer-evidence-package",
+      "status": "complete",
+      "acceptance": "Allowlisted public evidence ZIP with model-free metadata, complete artifact manifest, new signature and offline integrity verification; tampering/missing assets/mismatched versions refused.",
+      "evidence": "Allowlisted public packages carry the frozen source-anchored evidence, complete asset manifest and independent signature. Original uploads are optional and excluded by default. Image, video, audio and document packages pass offline verification without model, database or network access; tampering, wrong versions, missing assets and unauthorized case access are rejected. Public metadata omits model identities while preserving source quotations. Earlier incompatible or identity-leaking signed reports remain stored unchanged and are withheld from download. The actual r60 VR20 download now returns HTTP 409; the clean r61 replacement is available."
+    },
+    {
+      "id": "local-release",
+      "status": "complete",
+      "acceptance": "Real local end-to-end runs for all modalities, browser playback/navigation, rendered PDFs, JSON/package integrity and access-control tests; recorded performance/limitations. All required paths must work before goal completion.",
+      "evidence": "All four modality evidence chains passed actual local API, ordinary-browser, PDF, JSON and package acceptance. Image overlays/crops, video source-frame navigation, selected/context audio playback, PDF/DOCX/EML source anchors and OCR crops were exercised. Full backend baseline: 418 tests passed; subsequent focused regressions passed for fractional audio sample clocks (48), public projection/history/exports (45), and report presentation/guards/video nesting (48). Final frontend suite: 54 tests passed; TypeScript, production build, API type drift check, targeted Ruff and git diff checks pass. All 80 final video PDF pages were rendered and inspected; evidence layouts have no clipping. The final historical audit preserves 26 analyses, 19 prior signed reports and the additional withheld VR20. API remains running on 127.0.0.1:8160 and frontend on 127.0.0.1:5230; the image example is left open. This completes local evidence functionality; detector outputs remain inspection clues with the documented validation limits."
+    }
+  ],
+  "constraints": [
+    "Do not expose internal model names in customer UI, generated media, PDF, JSON or APIs.",
+    "Do not mutate immutable published results or signed reports.",
+    "Failure, missing source, unsupported content and unmeasured regions must not appear as negative findings.",
+    "Localization scores are not calibrated probabilities or proof of AI use.",
+    "Validate locally before GCP and Stripe work. Downloads permitted; user data stays local."
+  ],
+  "completed_at": "2026-10-31T22:46:13.976525+00:00",
+  "latest_follow_up": {
+    "completed_at": "2026-10-31T23:53:46.909626+00:00",
+    "scope": "Video/audio/document export alignment and descriptive mixed-track acoustic context",
+    "report_template": "veritas-report-2.0.r64",
+    "reports": {
+      "audio": "VR-2026-000029",
+      "video": "VR-2026-000030",
+      "document": "VR-2026-000031"
+    },
+    "verification": "backend/data/multimedia-background-demo/r64/final-verification.json",
+    "pages_visually_checked": 106,
+    "privacy_policy": "All pre-r64 PDF/package downloads withheld; immutable stored reports/results preserved. Source quotations remain verbatim.",
+    "limitations": "Mixed-track acoustics do not separate voice/environment or prove synthesis; fixture verification does not measure detector accuracy."
+  }
+}

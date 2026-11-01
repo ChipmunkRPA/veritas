@@ -8,6 +8,7 @@ applies the hypothesis rule (a bona fide voice is weak evidence about the visual
 from __future__ import annotations
 
 import functools
+import hashlib
 from typing import ClassVar
 
 import numpy as np
@@ -78,10 +79,10 @@ class _VoiceClassifier(Detector):
         windows = self._windows(ctx)
         if not windows:
             return DetectorResult.not_applicable(self._no_window(ctx))
-        feature_extractor, model = ctx.lease.get(self.MODEL_ID).obj
-        clf = AudioClassifier.from_parts(feature_extractor, model, self.POSITIVE, ctx.device, repo=self.REPO)
+        clf = self.classifier(ctx)
         preds = [float(p) for p in clf.predict([c for _, c in windows])]
-        units = [UnitScore(f"window:{k}", p, "probability", quality={"start_s": start, "end_s": start + len(c) / SR})
+        units = [UnitScore(f"window:{k}", p, "probability", quality={"start_s": start, "end_s": start + len(c) / SR,
+                           "start_sample": float(round(start * SR)), "end_sample": float(round(start * SR) + len(c))})
                  for k, (p, (start, c)) in enumerate(zip(preds, windows, strict=True))]
         mean = float(np.mean(preds))
         seconds = coverage_seconds((start, start + len(chunk) / SR) for start, chunk in windows)
@@ -91,7 +92,7 @@ class _VoiceClassifier(Detector):
             x_unit="s", title=f"{self.spec.name} per window", media_ref="audio",
             caption=f"Raw classifier output per ≤ {VOICE_WINDOW_S:g} s window at a {hop:g} s hop, plotted at the window centre; uncalibrated.")
         side = "synthetic" if mean >= 0.5 else "bona fide"
-        return DetectorResult(
+        result = DetectorResult(
             status="ok", unit_scores=units,
             aggregate=UnitScore("global", mean, "probability", quality={"windows": float(len(units)), "seconds": seconds,
                                                                      "decoded_seconds": decoded_seconds}),
@@ -101,7 +102,17 @@ class _VoiceClassifier(Detector):
             reasoning=f"On average the classifier places the voice on the {side} side of its decision boundary.",
             metrics={"mean": mean, "windows": float(len(units)), "seconds": seconds, "decoded_seconds": decoded_seconds,
                      "hop_s": float(hop)}, exhibit_ids=[exhibit],
-            model_revisions=revisions(ctx, self.MODEL_ID))
+            model_revisions=revisions(ctx, self.MODEL_ID),
+            details={"audio_input": {"version": "audio-input/1", "sample_rate": SR, "samples": ctx.outputs.audio.samples,
+                                     "pcm_sha256": hashlib.sha256(ctx.outputs.audio.pcm.astype("<f4").tobytes()).hexdigest()}})
+        return self.finish(ctx, result, windows, clf)
+
+    def finish(self, ctx, result, windows, classifier):
+        return result
+
+    def classifier(self, ctx):
+        feature_extractor, model = ctx.lease.get(self.MODEL_ID).obj
+        return AudioClassifier.from_parts(feature_extractor, model, self.POSITIVE, ctx.device, repo=self.REPO)
 
 
 class GustkingVoiceDetector(_VoiceClassifier):
@@ -115,3 +126,80 @@ class MoTheCreatorVoiceDetector(_VoiceClassifier):
     spec = video_spec("aud.mo_thecreator_w2v2", "mo-thecreator wav2vec2-base deepfake audio classifier", InputUnit.AUDIO_WINDOW, (H2,),
                       ("series",), family="voice", model_ids=(MODEL_ID,), needs=("audio",), modality=Modality.AUDIO, timeout_s=60.0,
                       profiles=DEEP_ONLY, version="0.4.0")
+
+
+class PellaVoiceDetector(_VoiceClassifier):
+    MODEL_ID, REPO = "pella.voice_v2", "Sadanie/pellav2-audio-deepfake-detector"
+    spec = video_spec("aud.pella_v2", "Synthetic-voice inspection", InputUnit.AUDIO_WINDOW, (H2,), ("series",),
+                      family="voice", model_ids=(MODEL_ID, "silero.speech_activity"), needs=("audio",), modality=Modality.AUDIO,
+                      devices=("cpu",), timeout_s=300.0, version="1.1.0")
+
+    def finish(self, ctx, result, windows, classifier):
+        from app.core.config import settings
+        from app.detectors.audio import calibration
+
+        if settings.audio_detector_mode != "candidate":
+            return result
+        screening = calibration.evaluate(result.aggregate.raw, ctx.outputs.audio.pcm, windows, classifier, ctx.deadline)
+        result.details['audio_screening'] = screening
+        result.reasoning = screening['reason'] + ' ' + screening['limitation']
+        result.reference = 'Frozen voice-specific calibration with an 80% tendency threshold and uncertainty checks.'
+        return result
+
+    def activation_plan(self, ctx):
+        return (ActivationUse(self.MODEL_ID, 1, "audio window", "One normalized four-second speech window at a time"),
+                ActivationUse("silero.speech_activity", 1, "audio stream", "Independent speech activity for video sound tracks"))
+
+    def _windows(self, ctx):
+        # Preserve the previous detector's original gate and calibration path.
+        # This independent candidate alone uses learned speech activity.
+        params = SAMPLING[Profile(ctx.profile)]
+        audio = ctx.outputs.audio
+        spans = None if ctx.lease is None else ctx.lease.get("silero.speech_activity").obj.spans(audio.pcm)
+        return voice_windows(audio.pcm, params.voice_hop_s or VOICE_WINDOW_S,
+            max_windows=params.audio_windows or audio.max_windows or MAX_VOICE_WINDOWS,
+            keep=None if spans is None else functools.partial(window_in_speech, spans))
+
+    @staticmethod
+    def _no_window(ctx):
+        return "No source window of at least one second contains at least half detected speech."
+
+    def classifier(self, ctx):
+        return ctx.lease.get(self.MODEL_ID).obj
+
+
+class SoundEventsDetector(Detector):
+    MODEL_ID = "panns.cnn10"
+    spec = video_spec("aud.sound_events", "Sound-event context", InputUnit.AUDIO_WINDOW, (), ("table",),
+                      family="acoustic-context", model_ids=(MODEL_ID,), needs=("audio",), modality=Modality.AUDIO,
+                      devices=("cpu",), timeout_s=180.0, version="1.0.0")
+
+    def activation_plan(self, ctx):
+        return (ActivationUse(self.MODEL_ID, 1, "audio window", "One ten-second mixed-track window at a time"),)
+
+    def applicable(self, ctx):
+        audio = ctx.outputs.audio
+        return Applicability(bool(audio is not None and audio.pcm is not None and len(audio.pcm) >= SR),
+                             "At least one second of decoded audio is required")
+
+    def run(self, ctx):
+        pcm = ctx.outputs.audio.pcm
+        model = ctx.lease.get(self.MODEL_ID).obj
+        windows = []
+        for start in range(0, min(len(pcm), 600 * SR), 10 * SR):
+            end = min(len(pcm), start + 10 * SR)
+            if end-start < SR:
+                continue
+            ctx.deadline.check("sound-event context")
+            windows.append({"start_sample": start, "end_sample": end, "labels": model.predict(pcm[start:end])})
+        table = ctx.exhibits.table(["start_s", "end_s", "possible sounds"],
+            [[w["start_sample"]/SR, w["end_sample"]/SR, "; ".join(f"{v['label']}: {v['score']:.3f}" for v in w["labels"])] for w in windows],
+            title="Possible sounds in the mixed track", media_ref="audio",
+            caption="Ten-second sound tags are descriptive inspection scores. They do not separate sound sources or establish AI generation.")
+        return DetectorResult(status="ok", unit_scores=[], aggregate=None,
+            observed=f"Sound-event context recorded for {len(windows)} source windows.",
+            reference="Mixed-track sound categories; no synthetic-voice or authenticity hypothesis.",
+            reasoning="Use these tags to inspect speech, music and environmental sound alongside the waveform.",
+            metrics={"windows": len(windows)}, exhibit_ids=[table], model_revisions=revisions(ctx, self.MODEL_ID),
+            details={"audio_input": {"version": "audio-input/1", "sample_rate": SR, "samples": len(pcm),
+                "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()}, "sound_windows": windows})

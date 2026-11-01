@@ -15,7 +15,7 @@ from app.core.config import settings
 
 IMAGE_MIMES = {"image/jpeg", "image/png", "image/webp", "image/heic", "image/heif", "image/tiff", "image/bmp", "image/gif", "image/avif"}
 VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/x-msvideo", "video/mpeg", "video/3gpp", "video/x-m4v"}
-DOC_EXTS = {".pdf", ".docx", ".txt", ".md", ".markdown", ".html", ".htm"}
+DOC_EXTS = {".pdf", ".docx", ".txt", ".md", ".markdown", ".html", ".htm", ".eml"}
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
 M4A_EXTS = {".m4a", ".m4b"}
@@ -205,12 +205,14 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
         elif (mime in ("application/zip", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") and Path(filename).suffix.lower() == ".docx") or (mime or "").endswith("wordprocessingml.document"):
             ext = ".docx"
             mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        elif ext == ".eml" and mime is None:
+            mime = "message/rfc822"
         elif mime is None and ext in DOC_EXTS:
             pass
         elif mime and mime.startswith("text/"):
             ext = ext if ext in DOC_EXTS else ".txt"
         else:
-            raise ValueError(f"Unsupported document type ({mime or ext}); accepted: PDF, DOCX, TXT, MD, HTML")
+            raise ValueError(f"Unsupported document type ({mime or ext}); accepted: PDF, DOCX, TXT, MD, HTML, EML")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

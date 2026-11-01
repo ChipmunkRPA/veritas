@@ -117,25 +117,38 @@ class _HFClassifier(Detector):
             units = [UnitScore(f"face:{i}", float(pr["p_ai"]), "probability",
                                quality={"whole_image_input": float(whole), "upscaled": float(up)})
                      for i, (pr, (_, whole, up)) in enumerate(zip(preds, inputs, strict=True))]
-            p = max(u.raw for u in units)
+            # The attribution must explain the exact input whose score becomes the aggregate.
+            # With several faces, the first crop need not be the highest-scoring crop.
+            selected = max(range(len(units)), key=lambda i: units[i].raw)
+            p = units[selected].raw
             all_upscaled, any_whole = all(up for _, _, up in inputs), any(whole for _, whole, _ in inputs)
             quality = {"n_faces": float(len(faces)), "face_inputs_upscaled": float(all_upscaled), "whole_image_input": float(any_whole)}
             target = (f"{len(faces)} face input(s){' (portrait, whole image)' if any_whole else ''}, maximum taken"
                       + ("; every face input was upscaled to the model input" if all_upscaled else ""))
-            cam_input, cam_box = inputs[0][0], (None if inputs[0][1] else crop_box(rgb.shape, faces[0]))
+            cam_input = inputs[selected][0]
+            cam_box = None if inputs[selected][1] else crop_box(rgb.shape, faces[selected])
+            cam_scope = units[selected].unit_ref
         else:
             p = float(clf.predict([Image.fromarray(rgb)])[0]["p_ai"])
             quality = {"no_face": 1.0} if self.FACE_ORIENTED else {}
             target = ("whole image (no face found; outside the model's training distribution)" if self.FACE_ORIENTED
                       else "whole image")
             cam_input, cam_box = rgb, None
+            cam_scope = "global"
         aggregate = UnitScore("global", p, "probability", quality=quality)
         exhibit_ids = []
+        details = {}
         if ctx.profile != Profile.QUICK and p >= 0.5:
             ctx.deadline.check("grad-cam")
             cam = vit_gradcam_map(clf, cam_input)
             if cam is not None:
                 exhibit_ids.append(_attribution(ctx, cam, rgb.shape, cam_box, self.spec.name))
+                details["attribution"] = {
+                    "version": "input-binding/1", "input_scope_ref": cam_scope, "input_score": p,
+                    "semantics": "classifier_attribution", "coverage_kind": "input_footprint",
+                    "coordinate_space": coordinate_space(ctx),
+                    "crop_box_xyxy": list(cam_box) if cam_box is not None else None,
+                }
         kind = "face-oriented" if self.FACE_ORIENTED else "AI-image"
         side = "synthetic" if p >= 0.5 else "real"
         return DetectorResult(
@@ -144,7 +157,8 @@ class _HFClassifier(Detector):
             reference="Fine-tuned binary classifier; decision boundary at 0.5",
             reasoning=f"The {kind} classifier places its input on the {side} side of its decision boundary"
                       + ("; the attribution map shows where it looked." if exhibit_ids else "."),
-            metrics={"p_ai": p, **quality}, exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL_ID))
+            metrics={"p_ai": p, **quality}, details=details, exhibit_ids=exhibit_ids,
+            model_revisions=revisions(ctx, self.MODEL_ID))
 
 
 class AteeqqDetector(_HFClassifier):

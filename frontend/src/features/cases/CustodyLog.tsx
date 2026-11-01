@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ApiError, apiClient, authHeaders, unwrap } from '../../lib/api/client'
+import { ApiError, apiClient, unwrap } from '../../lib/api/client'
 import { qk, useCustody, useMe, type AuditEvent } from '../../lib/api/queries'
 import { mayExportCustody, mayReadCustody } from '../../lib/api/roles'
 import { cx } from '../../lib/cx'
@@ -10,9 +9,8 @@ import { actorName, eventDetail, eventHash, eventWord, exhibitOf, fmtUtc, isAlar
 /** Custody log (UX §5.12; PRD CC-01, CC-02): the case's audit events in seq order, never editable, with the verification of the
  *  hash chain and of every original (`GET /cases/{id}/custody/verify`). Verifying re-hashes the originals, so it runs on request.
  *  An original that verifies leaves no event; one that does not joins the log as `hash_mismatch`, once (N-10). The log itself is
- *  open to the owner of the case, to reviewers and to administrators (`GET /cases/{id}/custody`; D-67); its export is the
- *  export of the audit log (reviewers and administrators). */
-export default function CustodyLog({ caseId, reference, myRole, labels, names }: {
+ *  open to the owner of the case, to reviewers and to administrators (`GET /cases/{id}/custody`; D-67). */
+export default function CustodyLog({ caseId, myRole, labels, names }: {
   caseId: string
   reference: string
   /** The reader's role on the case: its owner reads the log. */
@@ -31,25 +29,6 @@ export default function CustodyLog({ caseId, reference, myRole, labels, names }:
     mutationFn: () => unwrap(apiClient.GET('/api/v2/cases/{case_id}/custody/verify', { params: { path: { case_id: caseId } } })),
     onSettled: () => { void qc.invalidateQueries({ queryKey: qk.custody(caseId) }) },
   })
-  const [exporting, setExporting] = useState<string | null>(null)
-
-  const exportCsv = async () => {
-    setExporting('Preparing…')
-    try {
-      const r = await fetch(`/api/v2/audit/export?format=csv&case_id=${encodeURIComponent(caseId)}`, { headers: authHeaders() })
-      if (!r.ok) throw new Error(r.statusText || `HTTP ${r.status}`)
-      const url = URL.createObjectURL(await r.blob())
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `custody-${reference}.csv`
-      a.click()
-      URL.revokeObjectURL(url)
-      setExporting(null)
-    } catch (e) {
-      setExporting(`Export failed: ${(e as Error).message}`)
-    }
-  }
-
   const v = verify.data
   const brokenOriginals = v ? v.originals.filter((o) => o.status !== 'verified') : []
   // a report of an analysis that was deleted or purged is listed as removed under that event: it is not a failure (N-9a)
@@ -63,14 +42,13 @@ export default function CustodyLog({ caseId, reference, myRole, labels, names }:
       <div className="flex items-center justify-between gap-4 flex-wrap border-b border-border-strong pb-2">
         <h2 id="custody-heading" className="eyebrow m-0">Custody log</h2>
         <div className="flex items-center gap-4">
-          {log.isSuccess && mayExportCustody(me.data) && <Button variant="text" onClick={() => void exportCsv()}>Export CSV</Button>}
           <Button variant="ghost" className="h-8 px-3" onClick={() => verify.mutate()} disabled={verify.isPending}>
             {verify.isPending ? 'Verifying…' : 'Verify chain and originals'}
           </Button>
         </div>
       </div>
       <p className="mt-2 mb-0 text-caption text-text-muted max-w-[72ch]">Append-only. Times are UTC. Verifying re-hashes every original of the case and records the result here.</p>
-      {exporting && <p className="mt-2 mb-0 text-small text-text-muted" role="status">{exporting}</p>}
+      {log.isSuccess && mayExportCustody(me.data) && <p className="mt-2 mb-0 text-caption text-text-muted">Custody CSV export is temporarily unavailable while a model-anonymous export is developed.</p>}
 
       <div aria-live="polite" data-testid="custody-verify" data-state={verify.isPending ? 'pending' : v ? (v.valid ? 'valid' : 'invalid') : verify.error ? 'error' : 'idle'}>
         {v && (

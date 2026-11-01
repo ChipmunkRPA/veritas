@@ -157,7 +157,7 @@ _POLICY_PARTS = {"commercial": "commercial licences only", "research": "research
 
 
 OWN_SOURCE = "this repository:"
-PART_OF_VERITAS = "Part of Veritas (no model download)"
+PART_OF_VERITAS = "Part of Chipmunk Verify (no model download)"
 _REPOSITORY_PATH = re.compile(r"(?:docs|backend|frontend|scripts|tests)/[\w./<>-]+")
 
 

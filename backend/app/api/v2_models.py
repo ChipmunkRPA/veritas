@@ -91,6 +91,38 @@ class ModelCard(DetectorEntry):
     client: CardCopy | None = None
 
 
+class CustomerModelEntry(BaseModel):
+    id: str
+    installed: bool
+    loaded: bool
+    loaded_devices: list[str] = Field(default_factory=list)
+    depends_on: list[str] = Field(default_factory=list)
+    licence: dict[str, Any]
+
+
+class CustomerModelCard(BaseModel):
+    """Availability and evaluation facts for a check, without an upstream model card."""
+
+    id: str
+    version: str
+    name: str
+    modality: str
+    family: str
+    enabled: bool
+    licence_policy: str
+    installed: bool
+    loaded: bool | None
+    models: list[str] = Field(default_factory=list)
+    model_entries: list[CustomerModelEntry] = Field(default_factory=list)
+    profiles: list[str] = Field(default_factory=list)
+    hypotheses: list[str] = Field(default_factory=list)
+    threat: list[str] = Field(default_factory=list)
+    lane: str | None = None
+    eval: list[dict[str, Any]] = Field(default_factory=list)
+    admission: dict[str, Any] | None = None
+    citation: str | None = None
+
+
 @lru_cache(maxsize=256)
 def _text(path: Path, mtime_ns: int) -> str:  # keyed on mtime so an edited record is re-read
     return path.read_text(encoding="utf-8", errors="replace")
@@ -258,7 +290,7 @@ def raw_prose(card: dict[str, Any]) -> list[tuple[str, str]]:
     return out
 
 
-@router.get("/models", response_model=Page[ModelCard], responses=problem_responses(400, 401, 422))
+@router.get("/models", response_model=Page[CustomerModelCard], responses=problem_responses(400, 401, 422))
 def list_models(request: Request, cursor: Cursor = None, limit: Limit = DEFAULT_LIMIT, modality: str | None = None, enabled: bool | None = None):
     """Model cards by detector id."""
     registry = get_registry()
@@ -270,31 +302,27 @@ def list_models(request: Request, cursor: Cursor = None, limit: Limit = DEFAULT_
     if enabled is not None:
         cards = [c for c in cards if c["enabled"] is enabled]
     page, next_cursor = paginate(cards, lambda c: (c["id"],), cursor, limit)
-    return JSONResponse(content={"items": page, "next_cursor": next_cursor}, headers=NO_STORE)
+    from app.api.public_projection import project_card, public_cursor
+
+    return JSONResponse(content={"items": [project_card(c) for c in page], "next_cursor": public_cursor(next_cursor)},
+                        headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection'})
 
 
-@router.get("/models/{detector_id}", response_model=ModelCard, responses=problem_responses(401, 404))
+@router.get("/models/{detector_id}", response_model=CustomerModelCard, responses=problem_responses(401, 404))
 def get_model(detector_id: str, request: Request):
+    from app.api.public_projection import original_id, project_card
+
     registry = get_registry()
-    det = registry.manifest.detector(detector_id)
+    det = registry.manifest.detector(original_id(detector_id))
     if det is None:
         raise ProblemError(404, "Detector not found", "No detector with this id is in the models manifest.")
     administrator = request.state.principal.satisfies("administrator")
-    return JSONResponse(content=_card(registry, det, _loaded_models(registry), administrator=administrator), headers=NO_STORE)
+    return JSONResponse(content=project_card(_card(registry, det, _loaded_models(registry), administrator=administrator)),
+                        headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection'})
 
 
 @router.get("/models/{detector_id}/records/{record_id}", response_class=Response,
-            responses={200: {"content": {"text/markdown": {"schema": {"type": "string"}}}}, **problem_responses(401, 403, 404, 422, 500)})
+            responses=problem_responses(401, 403, 404, 422))
 def get_model_record(detector_id: str, record_id: str = PathParam(pattern=RECORD_ID)):
-    """The admission record of the detector, as Markdown text. Administrators only."""
-    det = get_registry().manifest.detector(detector_id)
-    if det is None:
-        raise ProblemError(404, "Detector not found", "No detector with this id is in the models manifest.")
-    path = next((p for ref, p in _records(det.id) if ref.id == record_id), None)
-    if path is None:
-        raise ProblemError(404, "Record not found", "This detector has no record with this id.")
-    try:
-        text = _read(path)
-    except OSError as exc:
-        raise ProblemError(500, "Record unreadable", "The record could not be read.") from exc
-    return Response(content=text, media_type="text/markdown; charset=utf-8", headers=NO_STORE)
+    """Internal model records are not available in the customer view."""
+    raise ProblemError(404, "Record not found", "This record is not available in the customer view.")

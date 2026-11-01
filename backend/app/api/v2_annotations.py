@@ -222,7 +222,14 @@ class AnnotationList(BaseModel):
 # --- helpers -------------------------------------------------------------------------------------------------------------
 
 def _json(model: BaseModel, status_code: int = 200) -> JSONResponse:
-    return JSONResponse(jsonable_encoder(model), status_code=status_code, headers=NO_STORE)
+    from app.api.public_projection import alias_signal
+
+    body = jsonable_encoder(model)
+    rows = body.get('items', []) if isinstance(model, AnnotationList) else [body]
+    for row in rows:
+        if row.get('target_type') == 'signal' and isinstance(row.get('target_id'), str):
+            row['target_id'] = alias_signal(row['target_id'])
+    return JSONResponse(body, status_code=status_code, headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection'})
 
 
 _utc = times.to_utc  # one form on every engine: a time is printed in UTC (D-72)
@@ -296,7 +303,20 @@ def _target(db: Session, analysis: Analysis, target_type: str, target_id: str | 
     else:  # exhibit, or a region on an exhibit
         found = db.scalars(select(ExhibitRow.id).where(ExhibitRow.id == target_id, ExhibitRow.analysis_id == analysis.id)).first() is not None
     if not found:
-        raise _invalid(f"No {'exhibit' if target_type == 'region' else target_type} {target_id} exists in this analysis.")
+        from app.api.public_projection import alias_signal
+
+        shown = alias_signal(target_id) if target_type == 'signal' and target_id is not None else target_id
+        raise _invalid(f"No {'exhibit' if target_type == 'region' else target_type} {shown} exists in this analysis.")
+
+
+def _signal_target(db: Session, aid: str, target_id: str) -> str:
+    from app.api.public_projection import original_id
+
+    candidates = tuple(db.scalars(select(SignalRow.signal_id).where(SignalRow.analysis_id == aid)))
+    try:
+        return original_id(target_id, candidates=candidates)
+    except ValueError:
+        raise _invalid("The signal reference does not uniquely identify a signal in this analysis.") from None
 
 
 def _geometry(analysis: Analysis, shape: str, geometry: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -385,7 +405,8 @@ def list_annotations(aid: str, target_type: TargetType | None = None, target_id:
         if target_type is not None:
             query = query.where(AnnotationRow.target_type == target_type)
         if target_id is not None:
-            query = query.where(AnnotationRow.target_id == target_id)
+            resolved = _signal_target(db, aid, target_id) if target_type in (None, 'signal') else target_id
+            query = query.where(AnnotationRow.target_id == resolved)
         if not include_deleted:
             query = query.where(AnnotationRow.deleted_at.is_(None))
         rows = db.scalars(query.order_by(AnnotationRow.created_at, AnnotationRow.id)).all()
@@ -402,11 +423,13 @@ def create_annotation(aid: str, req: AnnotationCreate, request: Request) -> JSON
         with audit.writing() as db:  # N-9: a note or an examiner status is stored with its custody event or not at all
             analysis = _analysis(db, aid)
             _writable(analysis)
-            geometry = _validated(db, analysis, target_type=req.target_type, target_id=req.target_id, shape=req.shape,
+            target_id = (_signal_target(db, aid, req.target_id)
+                         if req.target_type == 'signal' and req.target_id is not None else req.target_id)
+            geometry = _validated(db, analysis, target_type=req.target_type, target_id=target_id, shape=req.shape,
                                   geometry=req.geometry, examiner_status=req.examiner_status, body=body)
             now = utcnow()
             row = AnnotationRow(id=str(uuid.uuid4()), analysis_id=aid, case_id=analysis.case_id, author_id=principal.id,
-                                target_type=req.target_type, target_id=req.target_id, shape=req.shape, geometry=geometry,
+                                target_type=req.target_type, target_id=target_id, shape=req.shape, geometry=geometry,
                                 examiner_status=req.examiner_status, body=body, visibility=req.visibility, created_at=now,
                                 revision=1)
             first = _revision(row, principal.id, now)

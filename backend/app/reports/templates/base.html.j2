@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>{{ v.title }}</title>
-<meta name="author" content="Veritas {{ s.report.veritas_version }}">
+<meta name="author" content="Chipmunk Verify {{ s.report.veritas_version }}">
 <meta name="description" content="{{ v.subject }}">
 <meta name="keywords" content="{{ v.keywords }}">
 <meta name="generator" content="{{ template_set }}">
@@ -15,10 +15,10 @@
 <header class="page-header">
 <span class="ph-left">{{ v.header_left }}</span>
 <span class="ph-centre">{{ v.header_centre }}</span>
-<span class="ph-right">{{ s.report.display_id }} · page <span class="page-number"></span> of <span class="page-count"></span></span>
+<span class="ph-right">{{ v.get('public_report_id', s.report.display_id) }} · page <span class="page-number"></span> of <span class="page-count"></span></span>
 </header>
 <footer class="page-footer">
-<p class="pf-line">Exhibit SHA-256 {{ s.media.sha256 | short_hash }} · Analysis {{ s.analysis.id[:8] }} · Generated {{ s.report.requested_at | utc }} · Veritas {{ s.report.veritas_version }}</p>
+<p class="pf-line">Exhibit SHA-256 {{ s.media.sha256 | short_hash }} · Analysis {{ s.analysis.id[:8] }} · Generated {{ s.report.requested_at | utc }} · Chipmunk Verify {{ s.report.veritas_version }}</p>
 <p class="pf-status"><span class="status-mark{{ ' is-reviewed' if v.issued else '' }}"></span>{{ v.status_line }}</p>
 </footer>
 <main>

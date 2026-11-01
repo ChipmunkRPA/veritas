@@ -110,6 +110,8 @@ class DetectorRegistry:
             raise KeyError(f"unknown detector {detector_id!r}")
         policy = self.policy
         reasons: list[str] = []
+        if settings.audio_detector_mode == "candidate" and detector_id in {"aud.gustking_xlsr", "aud.mo_thecreator_w2v2"}:
+            reasons.append("retained for audio rollback; local candidate is selected")
         if detector_id in policy.deny_detectors:
             reasons.append("listed in deny_detectors")
         allow_listed = detector_id in policy.allow_detectors

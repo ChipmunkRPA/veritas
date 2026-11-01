@@ -6,6 +6,8 @@ BG := bash backend/scripts/bg.sh
 API_TYPES_TMP := frontend/.api-types-check
 E2E_BASE_URL ?= http://localhost:5230
 SHARDS ?= 4
+VERITAS_MODELS_DIR ?= $(CURDIR)/models
+VERITAS_HF_HOME ?= $(VERITAS_MODELS_DIR)/hf
 # The commit an image is built from (N-15; D-58): the checkout's HEAD, or the value given where there is no checkout (a
 # release archive). Every result manifest, the probes and the metrics of the image state it.
 VERITAS_BUILD_COMMIT ?= $(shell git rev-parse HEAD 2>/dev/null)
@@ -20,24 +22,22 @@ setup:            ## install the backend (uv, Python 3.12) at the tested version
 		|| echo "Pango is missing, so v2 PDF reports cannot render: macOS brew install pango; Debian apt install libpango-1.0-0 libpangoft2-1.0-0"
 
 backend:          ## run API with reload on :8160 (foreground)
-	cd backend && .venv/bin/uvicorn app.main:app --reload --port 8160 --no-proxy-headers
+	cd backend && VERITAS_MODELS_DIR="$(VERITAS_MODELS_DIR)" VERITAS_HF_HOME="$(VERITAS_HF_HOME)" .venv/bin/uvicorn app.main:app --reload --port 8160 --no-proxy-headers
 
 frontend:         ## run Vite dev server on :5230 (foreground; proxies /api -> :8160)
 	cd frontend && npm run dev
 
 dev-api:          ## start the dev API on :8160 detached (PID file backend/data/jobs/dev-api.pid)
 	@! lsof -nP -iTCP:8160 -sTCP:LISTEN >/dev/null || { echo "port 8160 is in use:"; lsof -nP -iTCP:8160 -sTCP:LISTEN; exit 1; }
-	cd backend && bash scripts/bg.sh start dev-api -- .venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8160 --no-proxy-headers
+	cd backend && VERITAS_MODELS_DIR="$(VERITAS_MODELS_DIR)" VERITAS_HF_HOME="$(VERITAS_HF_HOME)" bash scripts/bg.sh start dev-api -- .venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8160 --no-proxy-headers
 
 dev-web:          ## start the Vite dev server on :5230 detached (PID file backend/data/jobs/dev-web.pid)
 	@! lsof -nP -iTCP:5230 -sTCP:LISTEN >/dev/null || { echo "port 5230 is in use:"; lsof -nP -iTCP:5230 -sTCP:LISTEN; exit 1; }
-	cd frontend && bash ../backend/scripts/bg.sh start dev-web -- npm run dev -- --host 127.0.0.1 --port 5230 --strictPort
+	cd frontend && bash ../backend/scripts/bg.sh start dev-web -- ./node_modules/.bin/vite --host 127.0.0.1 --port 5230 --strictPort
 
 stop-all-dev:     ## stop the dev API/UI started by dev-api/dev-web (PID files only, never by pattern)
-	-@[ ! -f backend/data/jobs/dev-web.pid ] || $(BG) stop dev-web
-	-@[ ! -f backend/data/jobs/dev-api.pid ] || $(BG) stop dev-api
-	-@[ -f /tmp/veritas_api.pid ] && kill $$(cat /tmp/veritas_api.pid) 2>/dev/null && rm -f /tmp/veritas_api.pid || true
-	-@[ -f /tmp/veritas_vite.pid ] && kill $$(cat /tmp/veritas_vite.pid) 2>/dev/null && rm -f /tmp/veritas_vite.pid || true
+	@$(BG) stop dev-web
+	@$(BG) stop dev-api
 
 stop: stop-all-dev
 

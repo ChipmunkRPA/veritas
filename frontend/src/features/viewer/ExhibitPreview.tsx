@@ -5,6 +5,7 @@ import { useExhibitPayloads, type AnalysisDetail, type ExhibitMeta, type Finding
 import { SHOW_THRESHOLD_OVERLAY } from '../../lib/colormap'
 import { fitView, type Size } from '../../lib/coords'
 import { cx } from '../../lib/cx'
+import { anonymizeModelNames } from '../analysis/checkNames'
 import { activeLenses, allMaps, available, catalogue, heatmapLens, lensDef, mapById, presetLayers, regionItems, toggleLayers, type LensKey } from './lenses'
 import RegionsOverlay from './RegionsOverlay'
 import type { Scene } from './scene'
@@ -77,7 +78,7 @@ export default function ExhibitPreview({ analysis, exhibits, findings, token, no
   const shown = TOGGLES.filter((k) => (k === 'reliability' ? maps.some((m) => m.reliability_mask_artefact_id != null) : available(cat, k, activeMap)))
   const href = `/analyses/${analysis.id}/evidence?${serialiseViewerState({ ...parseViewerState(new URLSearchParams()), layers }).toString()}`
   const lensName = activeMap ? lensDef(heatmapLens(activeMap)).name.toLowerCase() : null
-  const caption = `Exhibit — Source image${visible.some((r) => r.lens === 'faces') ? ' with detected faces' : ''}${activeMap ? `; ${lensName} lens (${activeMap.title}) at ${layers.map?.opacity ?? DEFAULT_OPACITY} %` : ''}.`
+  const caption = `Exhibit — Source image${visible.some((r) => r.lens === 'faces') ? ' with detected faces' : ''}${activeMap ? `; ${lensName} lens (${anonymizeModelNames(activeMap.title)}) at ${layers.map?.opacity ?? DEFAULT_OPACITY} %` : ''}.`
 
   return (
     <section id="section-exhibit" data-testid="exhibit-preview" aria-labelledby="exhibit-heading" className="scroll-mt-14">

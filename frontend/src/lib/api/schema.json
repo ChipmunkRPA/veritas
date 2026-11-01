@@ -1,73 +1,6 @@
 {
   "components": {
     "schemas": {
-      "Admission": {
-        "additionalProperties": false,
-        "properties": {
-          "criteria": {
-            "additionalProperties": true,
-            "title": "Criteria",
-            "type": "object"
-          },
-          "date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Date"
-          },
-          "decision": {
-            "default": "pending",
-            "enum": [
-              "pending",
-              "admitted",
-              "rejected",
-              "retired"
-            ],
-            "title": "Decision",
-            "type": "string"
-          },
-          "evidence": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Evidence"
-          },
-          "reviewed_by": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reviewed By"
-          },
-          "served_until": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Served Until"
-          }
-        },
-        "title": "Admission",
-        "type": "object"
-      },
       "AnalysisDetail": {
         "properties": {
           "band": {
@@ -329,6 +262,19 @@
             ],
             "description": "Null when the file was not taken in through a case intake"
           },
+          "customer_assessment": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Versioned customer interpretation of the saved estimate, including the 80% leaning rule. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.",
+            "title": "Customer Assessment"
+          },
           "deciding_record": {
             "anyOf": [
               {
@@ -464,7 +410,7 @@
                 "type": "null"
               }
             ],
-            "description": "The exhibit label of the file in that case (A, B, …)",
+            "description": "The exhibit label of the file in that case (A, B, \u2026)",
             "title": "Exhibit Label"
           },
           "filename": {
@@ -604,6 +550,7 @@
                 "type": "null"
               }
             ],
+            "description": "SHA-256 of the original stored result, not these projected response bytes",
             "title": "Result Hash"
           },
           "result_schema_version": {
@@ -1046,7 +993,7 @@
                 "type": "null"
               }
             ],
-            "description": "The exhibit label of the file in that case (A, B, …)",
+            "description": "The exhibit label of the file in that case (A, B, \u2026)",
             "title": "Exhibit Label"
           },
           "filename": {
@@ -2309,7 +2256,7 @@
                 "type": "null"
               }
             ],
-            "description": "The SHA-256 the browser computed before upload (UX §5.1)",
+            "description": "The SHA-256 the browser computed before upload (UX \u00a75.1)",
             "title": "Client Sha256"
           },
           "custodian_stated_hash": {
@@ -2515,33 +2462,6 @@
           }
         },
         "title": "Body_create_batch_api_v2_batches_post",
-        "type": "object"
-      },
-      "Calibration": {
-        "additionalProperties": false,
-        "properties": {
-          "artefact": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Artefact"
-          },
-          "method": {
-            "default": "none",
-            "enum": [
-              "platt",
-              "none"
-            ],
-            "title": "Method",
-            "type": "string"
-          }
-        },
-        "title": "Calibration",
         "type": "object"
       },
       "CalibrationInfo": {
@@ -2755,163 +2675,6 @@
           "note"
         ],
         "title": "Cancellation",
-        "type": "object"
-      },
-      "CardCopy": {
-        "description": "The card as a client page prints it (L-7): no ticket or decision ids, repository paths or raw enums.",
-        "properties": {
-          "citation": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Citation"
-          },
-          "contamination_sets": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Contamination Sets",
-            "type": "array"
-          },
-          "coverage_date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Coverage Date"
-          },
-          "disclosures": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Disclosures",
-            "type": "array"
-          },
-          "enablement_reasons": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Enablement Reasons",
-            "type": "array"
-          },
-          "engineering": {
-            "description": "Recorded strings the client wording shortens or leaves out",
-            "items": {
-              "$ref": "#/components/schemas/EngineeringNote"
-            },
-            "title": "Engineering",
-            "type": "array"
-          },
-          "failure_modes": {
-            "description": "False-positive modes, then known limitations",
-            "items": {
-              "type": "string"
-            },
-            "title": "Failure Modes",
-            "type": "array"
-          },
-          "family": {
-            "title": "Family",
-            "type": "string"
-          },
-          "hypotheses": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Hypotheses",
-            "type": "array"
-          },
-          "input_constraints": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Input Constraints",
-            "type": "array"
-          },
-          "lane": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Lane"
-          },
-          "licence_notices": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Model id → licence notice",
-            "title": "Licence Notices",
-            "type": "object"
-          },
-          "licence_policy": {
-            "title": "Licence Policy",
-            "type": "string"
-          },
-          "record_titles": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Record id → title",
-            "title": "Record Titles",
-            "type": "object"
-          },
-          "source": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Where the check comes from: a download address, or that it is part of Veritas",
-            "title": "Source"
-          },
-          "threats": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Threats",
-            "type": "array"
-          },
-          "training_data": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Training Data"
-          },
-          "truncated": {
-            "description": "One-value fields whose wording is the lead of the recorded value",
-            "items": {
-              "type": "string"
-            },
-            "title": "Truncated",
-            "type": "array"
-          }
-        },
-        "required": [
-          "family",
-          "licence_policy"
-        ],
-        "title": "CardCopy",
         "type": "object"
       },
       "CaseCreate": {
@@ -3488,7 +3251,7 @@
             "title": "Steps From"
           },
           "version": {
-            "description": "1, 2, … per analysis revision (L-5)",
+            "description": "1, 2, \u2026 per analysis revision (L-5)",
             "title": "Version",
             "type": "integer"
           }
@@ -3993,6 +3756,187 @@
         "title": "CustodyVerification",
         "type": "object"
       },
+      "CustomerModelCard": {
+        "description": "Availability and evaluation facts for a check, without an upstream model card.",
+        "properties": {
+          "admission": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Admission"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "eval": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Eval",
+            "type": "array"
+          },
+          "family": {
+            "title": "Family",
+            "type": "string"
+          },
+          "hypotheses": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "installed": {
+            "title": "Installed",
+            "type": "boolean"
+          },
+          "lane": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lane"
+          },
+          "licence_policy": {
+            "title": "Licence Policy",
+            "type": "string"
+          },
+          "loaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loaded"
+          },
+          "modality": {
+            "title": "Modality",
+            "type": "string"
+          },
+          "model_entries": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerModelEntry"
+            },
+            "title": "Model Entries",
+            "type": "array"
+          },
+          "models": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Models",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "profiles": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Profiles",
+            "type": "array"
+          },
+          "threat": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Threat",
+            "type": "array"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "name",
+          "modality",
+          "family",
+          "enabled",
+          "licence_policy",
+          "installed",
+          "loaded"
+        ],
+        "title": "CustomerModelCard",
+        "type": "object"
+      },
+      "CustomerModelEntry": {
+        "properties": {
+          "depends_on": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Depends On",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "installed": {
+            "title": "Installed",
+            "type": "boolean"
+          },
+          "licence": {
+            "additionalProperties": true,
+            "title": "Licence",
+            "type": "object"
+          },
+          "loaded": {
+            "title": "Loaded",
+            "type": "boolean"
+          },
+          "loaded_devices": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Loaded Devices",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "installed",
+          "loaded",
+          "licence"
+        ],
+        "title": "CustomerModelEntry",
+        "type": "object"
+      },
       "Decision": {
         "additionalProperties": false,
         "properties": {
@@ -4342,7 +4286,7 @@
                 "type": "null"
               }
             ],
-            "description": "|after − before| of a numeric field",
+            "description": "|after \u2212 before| of a numeric field",
             "title": "Delta"
           },
           "field": {
@@ -4620,32 +4564,6 @@
         "title": "DetectorRunV2",
         "type": "object"
       },
-      "EngineeringNote": {
-        "properties": {
-          "field": {
-            "description": "What the string is, in words",
-            "title": "Field",
-            "type": "string"
-          },
-          "text": {
-            "description": "The manifest string, verbatim",
-            "title": "Text",
-            "type": "string"
-          },
-          "withheld": {
-            "default": true,
-            "description": "False when the client wording prints the string without its references",
-            "title": "Withheld",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "field",
-          "text"
-        ],
-        "title": "EngineeringNote",
-        "type": "object"
-      },
       "ErrorRate": {
         "additionalProperties": false,
         "properties": {
@@ -4734,80 +4652,6 @@
           "bench_version"
         ],
         "title": "ErrorRate",
-        "type": "object"
-      },
-      "EvalRow": {
-        "additionalProperties": false,
-        "properties": {
-          "auc": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Auc"
-          },
-          "bench": {
-            "title": "Bench",
-            "type": "string"
-          },
-          "date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Date"
-          },
-          "ece": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Ece"
-          },
-          "n": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "N"
-          },
-          "slice": {
-            "title": "Slice",
-            "type": "string"
-          },
-          "tpr_at_fpr01": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tpr At Fpr01"
-          }
-        },
-        "required": [
-          "bench",
-          "slice"
-        ],
-        "title": "EvalRow",
         "type": "object"
       },
       "EvidenceSentence": {
@@ -5416,64 +5260,8 @@
         "title": "Finding",
         "type": "object"
       },
-      "Footprint": {
-        "additionalProperties": false,
-        "properties": {
-          "activation_mb_per_item": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Activation Mb Per Item"
-          },
-          "estimated": {
-            "default": true,
-            "title": "Estimated",
-            "type": "boolean"
-          },
-          "fp16_mb": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fp16 Mb"
-          },
-          "fp32_mb": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fp32 Mb"
-          },
-          "params_m": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Params M"
-          }
-        },
-        "title": "Footprint",
-        "type": "object"
-      },
       "FrameTableV2": {
-        "description": "The per-frame pts table of a video analysis (probe, V-1) and its planned sample frames, so a player maps media\ntime to the analysed frame index (ARCHITECTURE §7.5 `pts.ts`).",
+        "description": "The per-frame pts table of a video analysis (probe, V-1) and its planned sample frames, so a player maps media\ntime to the analysed frame index (ARCHITECTURE \u00a77.5 `pts.ts`).",
         "properties": {
           "height": {
             "title": "Height",
@@ -5542,7 +5330,7 @@
             "type": "boolean"
           },
           "time_base": {
-            "description": "e.g. 1/30000; frame k shows at pts[k] × time_base seconds",
+            "description": "e.g. 1/30000; frame k shows at pts[k] \u00d7 time_base seconds",
             "title": "Time Base",
             "type": "string"
           },
@@ -6191,7 +5979,7 @@
             "type": "array"
           },
           "label": {
-            "description": "Exhibit label within the case (A, B, …)",
+            "description": "Exhibit label within the case (A, B, \u2026)",
             "title": "Label",
             "type": "string"
           },
@@ -6456,64 +6244,6 @@
           }
         },
         "title": "LegacySignalFields",
-        "type": "object"
-      },
-      "Licence": {
-        "additionalProperties": false,
-        "properties": {
-          "class": {
-            "enum": [
-              "commercial",
-              "non_commercial",
-              "unknown"
-            ],
-            "title": "Class",
-            "type": "string"
-          },
-          "notice": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Notice"
-          },
-          "spdx": {
-            "title": "Spdx",
-            "type": "string"
-          }
-        },
-        "required": [
-          "spdx",
-          "class"
-        ],
-        "title": "Licence",
-        "type": "object"
-      },
-      "LoadSpec": {
-        "additionalProperties": false,
-        "properties": {
-          "adapter_loader": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Adapter Loader"
-          },
-          "pickle": {
-            "default": false,
-            "title": "Pickle",
-            "type": "boolean"
-          }
-        },
-        "title": "LoadSpec",
         "type": "object"
       },
       "LoginOut": {
@@ -6972,383 +6702,6 @@
         "title": "Modality",
         "type": "string"
       },
-      "ModelCard": {
-        "additionalProperties": false,
-        "properties": {
-          "adapter": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Adapter"
-          },
-          "admission": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Admission"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "admission_record": {
-            "default": false,
-            "description": "An admission record of this detector is on file",
-            "title": "Admission Record",
-            "type": "boolean"
-          },
-          "calibration": {
-            "$ref": "#/components/schemas/Calibration"
-          },
-          "citation": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Citation"
-          },
-          "client": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CardCopy"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "contamination_sets": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Contamination Sets",
-            "type": "array"
-          },
-          "coverage_date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Coverage Date"
-          },
-          "default_enabled": {
-            "default": false,
-            "title": "Default Enabled",
-            "type": "boolean"
-          },
-          "disclosures": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Disclosures",
-            "type": "array"
-          },
-          "enabled": {
-            "title": "Enabled",
-            "type": "boolean"
-          },
-          "enablement_reasons": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Enablement Reasons",
-            "type": "array"
-          },
-          "eval": {
-            "items": {
-              "$ref": "#/components/schemas/EvalRow"
-            },
-            "title": "Eval",
-            "type": "array"
-          },
-          "family": {
-            "title": "Family",
-            "type": "string"
-          },
-          "fp_modes": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Fp Modes",
-            "type": "array"
-          },
-          "hypotheses": {
-            "items": {
-              "$ref": "#/components/schemas/Hypothesis"
-            },
-            "title": "Hypotheses",
-            "type": "array"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "input_constraints": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Input Constraints",
-            "type": "array"
-          },
-          "installed": {
-            "description": "Every direct and transitive model the detector needs is installed (true for a model-free detector)",
-            "title": "Installed",
-            "type": "boolean"
-          },
-          "known_limitations": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Known Limitations",
-            "type": "array"
-          },
-          "lane": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Lane"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "legacy_weight": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Legacy Weight"
-          },
-          "licence_policy": {
-            "title": "Licence Policy",
-            "type": "string"
-          },
-          "loaded": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Every direct model has a runtime bundle tracked in memory; dependencies may be held inside those bundles without separate entries; null for a model-free detector",
-            "title": "Loaded"
-          },
-          "modality": {
-            "$ref": "#/components/schemas/Modality"
-          },
-          "model_entries": {
-            "items": {
-              "$ref": "#/components/schemas/ModelState"
-            },
-            "title": "Model Entries",
-            "type": "array"
-          },
-          "models": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Models",
-            "type": "array"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "profiles": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Profiles",
-            "type": "array"
-          },
-          "records": {
-            "description": "The admission record, on an administrator's card; empty for every other role",
-            "items": {
-              "$ref": "#/components/schemas/RecordRef"
-            },
-            "title": "Records",
-            "type": "array"
-          },
-          "source_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Url"
-          },
-          "superseded_by": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Superseded By"
-          },
-          "threat": {
-            "items": {
-              "enum": [
-                "full_synthesis",
-                "face_swap",
-                "partial_edit",
-                "gan_face",
-                "t2v",
-                "voice",
-                "temporal",
-                "lip_sync",
-                "ai_text"
-              ],
-              "type": "string"
-            },
-            "title": "Threat",
-            "type": "array"
-          },
-          "training_data": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Training Data"
-          },
-          "validated_slices": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Validated Slices",
-            "type": "array"
-          },
-          "version": {
-            "title": "Version",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "name",
-          "modality",
-          "family",
-          "enabled",
-          "licence_policy",
-          "installed",
-          "loaded"
-        ],
-        "title": "ModelCard",
-        "type": "object"
-      },
-      "ModelState": {
-        "additionalProperties": false,
-        "properties": {
-          "depends_on": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Depends On",
-            "type": "array"
-          },
-          "devices": {
-            "additionalProperties": {
-              "enum": [
-                "ok",
-                "fallback_cpu",
-                "unsupported"
-              ],
-              "type": "string"
-            },
-            "title": "Devices",
-            "type": "object"
-          },
-          "footprint": {
-            "$ref": "#/components/schemas/Footprint"
-          },
-          "fp16_safe": {
-            "default": false,
-            "title": "Fp16 Safe",
-            "type": "boolean"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "installed": {
-            "description": "Every pinned file of the model is on disk",
-            "title": "Installed",
-            "type": "boolean"
-          },
-          "keep_warm": {
-            "default": false,
-            "title": "Keep Warm",
-            "type": "boolean"
-          },
-          "licence": {
-            "$ref": "#/components/schemas/Licence"
-          },
-          "load": {
-            "$ref": "#/components/schemas/LoadSpec"
-          },
-          "loaded": {
-            "description": "The model manager independently tracks this model ID in memory; false does not rule out its use inside another model's runtime bundle",
-            "title": "Loaded",
-            "type": "boolean"
-          },
-          "loaded_devices": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Loaded Devices",
-            "type": "array"
-          },
-          "notes": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Notes",
-            "type": "array"
-          },
-          "source": {
-            "$ref": "#/components/schemas/Source"
-          }
-        },
-        "required": [
-          "id",
-          "source",
-          "licence",
-          "installed",
-          "loaded"
-        ],
-        "title": "ModelState",
-        "type": "object"
-      },
       "NotValidatedDisclosure": {
         "properties": {
           "id": {
@@ -7490,7 +6843,7 @@
                 "type": "null"
               }
             ],
-            "description": "veritas-evidence-<analysis id8>-r<revision>[-draft].zip",
+            "description": "Download filename; new public packages use chipmunk-evidence-<analysis id8>-r<revision>[-draft].zip",
             "title": "Filename"
           },
           "finished_at": {
@@ -7534,6 +6887,10 @@
           },
           "report_id": {
             "title": "Report Id",
+            "type": "string"
+          },
+          "schema_id": {
+            "title": "Schema Id",
             "type": "string"
           },
           "sha256": {
@@ -7599,6 +6956,7 @@
           "report_id",
           "case_id",
           "kind",
+          "schema_id",
           "include_original",
           "status",
           "error",
@@ -7621,7 +6979,7 @@
         "properties": {
           "include_original": {
             "default": false,
-            "description": "Put the original in source/ (needed by `app.cli reproduce`)",
+            "description": "Include unredacted user source bytes; public packages do not support inference reproduction",
             "title": "Include Original",
             "type": "boolean"
           },
@@ -7730,6 +7088,33 @@
         "title": "Page[CaseOut]",
         "type": "object"
       },
+      "Page_CustomerModelCard_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerModelCard"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "Page[CustomerModelCard]",
+        "type": "object"
+      },
       "Page_DetectorRunV2_": {
         "properties": {
           "items": {
@@ -7836,33 +7221,6 @@
           "items"
         ],
         "title": "Page[ItemOut]",
-        "type": "object"
-      },
-      "Page_ModelCard_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ModelCard"
-            },
-            "title": "Items",
-            "type": "array"
-          },
-          "next_cursor": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next Cursor"
-          }
-        },
-        "required": [
-          "items"
-        ],
-        "title": "Page[ModelCard]",
         "type": "object"
       },
       "Page_SignalV2_": {
@@ -8030,7 +7388,7 @@
         "properties": {
           "alpha_moderate": {
             "default": 0.05,
-            "description": "Conformal α of ai_supported / no_ai_indicators",
+            "description": "Conformal \u03b1 of ai_supported / no_ai_indicators",
             "enum": [
               0.01,
               0.05
@@ -8040,7 +7398,7 @@
           },
           "alpha_strong": {
             "default": 0.01,
-            "description": "Conformal α of the *_strong codes (a singleton set at this level)",
+            "description": "Conformal \u03b1 of the *_strong codes (a singleton set at this level)",
             "enum": [
               0.01,
               0.05
@@ -8540,37 +7898,6 @@
           }
         },
         "title": "ReanalyseRequest",
-        "type": "object"
-      },
-      "RecordRef": {
-        "properties": {
-          "id": {
-            "description": "`admission:<detector id>`",
-            "title": "Id",
-            "type": "string"
-          },
-          "kind": {
-            "const": "admission",
-            "title": "Kind",
-            "type": "string"
-          },
-          "path": {
-            "description": "Repository path of the record",
-            "title": "Path",
-            "type": "string"
-          },
-          "title": {
-            "title": "Title",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "kind",
-          "path",
-          "title"
-        ],
-        "title": "RecordRef",
         "type": "object"
       },
       "RefusionAccepted": {
@@ -9280,6 +8607,11 @@
             "title": "Display Id",
             "type": "string"
           },
+          "downloadable": {
+            "description": "Whether this immutable report uses an approved public template and has a file",
+            "title": "Downloadable",
+            "type": "boolean"
+          },
           "duration_ms": {
             "anyOf": [
               {
@@ -9476,6 +8808,7 @@
           "engine",
           "engine_version",
           "status",
+          "downloadable",
           "error",
           "snapshot_hash",
           "sha256",
@@ -9824,7 +9157,7 @@
         "type": "object"
       },
       "ReviewBrief": {
-        "description": "The review block of an analysis (D-27, D-56 displayed state; UX §5.14, §5.16; C-5).",
+        "description": "The review block of an analysis (D-27, D-56 displayed state; UX \u00a75.14, \u00a75.16; C-5).",
         "properties": {
           "conclusion_id": {
             "anyOf": [
@@ -11067,148 +10400,6 @@
         "title": "SliceMetrics",
         "type": "object"
       },
-      "Source": {
-        "additionalProperties": false,
-        "properties": {
-          "archive": {
-            "anyOf": [
-              {
-                "enum": [
-                  "zip",
-                  "tar"
-                ],
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Archive"
-          },
-          "entrypoint": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Entrypoint"
-          },
-          "file_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Id"
-          },
-          "files": {
-            "items": {
-              "$ref": "#/components/schemas/WeightFile"
-            },
-            "title": "Files",
-            "type": "array"
-          },
-          "mirror_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mirror Url"
-          },
-          "path": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Path"
-          },
-          "produced_by": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Produced By"
-          },
-          "ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Ref"
-          },
-          "repo": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Repo"
-          },
-          "revision": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Revision"
-          },
-          "type": {
-            "enum": [
-              "hf",
-              "url",
-              "gdrive",
-              "torch_hub",
-              "local"
-            ],
-            "title": "Type",
-            "type": "string"
-          },
-          "url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Url"
-          }
-        },
-        "required": [
-          "type"
-        ],
-        "title": "Source",
-        "type": "object"
-      },
       "StageV2": {
         "properties": {
           "attempt": {
@@ -12145,42 +11336,6 @@
         "title": "WebhookPatch",
         "type": "object"
       },
-      "WeightFile": {
-        "additionalProperties": false,
-        "properties": {
-          "bytes": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Bytes"
-          },
-          "path": {
-            "title": "Path",
-            "type": "string"
-          },
-          "sha256": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sha256"
-          }
-        },
-        "required": [
-          "path"
-        ],
-        "title": "WeightFile",
-        "type": "object"
-      },
       "WithdrawPost": {
         "additionalProperties": false,
         "properties": {
@@ -12200,7 +11355,7 @@
     }
   },
   "info": {
-    "title": "Veritas",
+    "title": "Chipmunk Verify",
     "version": "2.1.1"
   },
   "openapi": "3.1.0",
@@ -12391,7 +11546,7 @@
     "/api/analyses/{aid}/download-token": {
       "get": {
         "deprecated": true,
-        "description": "Short-lived token for browser downloads (artifacts, source, report, export) — keeps the API key out of URLs. The token\nacts as the calling principal (C-1). A resource token cannot mint another one, so its 600 s expiry holds (Q-2 F1).",
+        "description": "Short-lived token for browser downloads (artifacts, source, report, export) \u2014 keeps the API key out of URLs. The token\nacts as the calling principal (C-1). A resource token cannot mint another one, so its 600 s expiry holds (Q-2 F1).",
         "operationId": "download_token_api_analyses__aid__download_token_get",
         "parameters": [
           {
@@ -12508,7 +11663,7 @@
     "/api/analyses/{aid}/source": {
       "get": {
         "deprecated": true,
-        "description": "The original served inline for viewing, recorded as `original_viewed` (C-3). Views are not re-hashed; ARCHITECTURE §4.8\nrequires the full re-hash before reports, exports and downloads.",
+        "description": "The original served inline for viewing, recorded as `original_viewed` (C-3). Views are not re-hashed; ARCHITECTURE \u00a74.8\nrequires the full re-hash before reports, exports and downloads.",
         "operationId": "source_api_analyses__aid__source_get",
         "parameters": [
           {
@@ -12795,13 +11950,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -13292,13 +12447,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -13805,13 +12960,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -14010,6 +13165,264 @@
         ]
       }
     },
+    "/api/v2/analyses/{aid}/evidence-packets": {
+      "get": {
+        "operationId": "image_evidence_api_v2_analyses__aid__evidence_packets_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "set_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Set Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Image Evidence",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
+    "/api/v2/analyses/{aid}/evidence-packets/{set_id}/assets/{sha256}.{extension}": {
+      "get": {
+        "operationId": "evidence_asset_api_v2_analyses__aid__evidence_packets__set_id__assets__sha256___extension__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "set_id",
+            "required": true,
+            "schema": {
+              "title": "Set Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "sha256",
+            "required": true,
+            "schema": {
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "extension",
+            "required": true,
+            "schema": {
+              "title": "Extension",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Evidence Asset",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
+    "/api/v2/analyses/{aid}/evidence-packets/{set_id}/images/{sha256}.png": {
+      "get": {
+        "operationId": "image_evidence_plate_api_v2_analyses__aid__evidence_packets__set_id__images__sha256__png_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "set_id",
+            "required": true,
+            "schema": {
+              "title": "Set Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "sha256",
+            "required": true,
+            "schema": {
+              "title": "Sha256",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Image Evidence Plate",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
     "/api/v2/analyses/{aid}/exhibits": {
       "get": {
         "description": "Exhibit metadata by id, with the binary routes each exhibit has.",
@@ -14044,13 +13457,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -14170,13 +13583,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -14280,7 +13693,7 @@
     },
     "/api/v2/analyses/{aid}/frames": {
       "get": {
-        "description": "The pts table of a video analysis from its probe stage (V-1), planned sample frames and the shot cuts\n(ARCHITECTURE §7.5). 422 for other kinds; 409 while the probe has not finished; 404 when a finished analysis has no table\n(v1 pipeline, or no decodable video frames).",
+        "description": "The pts table of a video analysis from its probe stage (V-1), planned sample frames and the shot cuts\n(ARCHITECTURE \u00a77.5). 422 for other kinds; 409 while the probe has not finished; 404 when a finished analysis has no table\n(v1 pipeline, or no decodable video frames).",
         "operationId": "analysis_frames_api_v2_analyses__aid__frames_get",
         "parameters": [
           {
@@ -15070,13 +14483,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -15841,13 +15254,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -15955,11 +15368,7 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/x-ndjson": {},
-              "text/csv": {}
-            },
-            "description": "The audit log"
+            "description": "Successful Response"
           },
           "401": {
             "content": {
@@ -15993,6 +15402,17 @@
               "application/problem+json": {}
             },
             "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Conflict"
           },
           "422": {
             "content": {
@@ -16499,13 +15919,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -16852,13 +16272,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -17025,13 +16445,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -18385,13 +17805,13 @@
             }
           },
           {
-            "description": "Page size (≤ 200)",
+            "description": "Page size (\u2264 200)",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": 50,
-              "description": "Page size (≤ 200)",
+              "description": "Page size (\u2264 200)",
               "maximum": 200,
               "minimum": 1,
               "title": "Limit",
@@ -18436,7 +17856,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Page_ModelCard_"
+                  "$ref": "#/components/schemas/Page_CustomerModelCard_"
                 }
               }
             },
@@ -18501,7 +17921,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ModelCard"
+                  "$ref": "#/components/schemas/CustomerModelCard"
                 }
               }
             },
@@ -18548,7 +17968,7 @@
     },
     "/api/v2/models/{detector_id}/records/{record_id}": {
       "get": {
-        "description": "The admission record of the detector, as Markdown text. Administrators only.",
+        "description": "Internal model records are not available in the customer view.",
         "operationId": "get_model_record_api_v2_models__detector_id__records__record_id__get",
         "parameters": [
           {
@@ -18573,13 +17993,6 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "text/markdown": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "description": "Successful Response"
           },
           "401": {
@@ -18625,17 +18038,6 @@
               "application/problem+json": {}
             },
             "description": "Unprocessable Entity"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Problem"
-                }
-              },
-              "application/problem+json": {}
-            },
-            "description": "Internal Server Error"
           }
         },
         "summary": "Get Model Record",

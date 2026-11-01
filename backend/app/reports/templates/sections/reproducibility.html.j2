@@ -1,16 +1,16 @@
 {% set a = v.appendix %}
 <section class="chapter-cont" id="section-appendix-a">
 <h2 class="chapter-title"><span class="n">{{ v.number['appendix-a'] }}</span>Appendix A · Reproducibility</h2>
-<p class="caption intro">The reproducibility manifest is attached to this PDF as manifest.json.</p>
+<p class="caption intro">A redacted record of hashes is attached as manifest.json. Exact reproduction requires the original internal analysis record and model registry.</p>
 <dl class="facts rows">
 {% for r in a.rows %}
 <div><dt>{{ r.key }}</dt><dd class="{{ '' if r.get('prose') else 'mono' }}{{ ' muted' if not r.established else '' }}">{{ r.value }}</dd></div>
 {% endfor %}
 </dl>
-<h3 class="eyebrow">Model registry</h3>
+<h3 class="eyebrow">Analysis checks</h3>
 {% if a.registry %}
 <table class="grid registry">
-<thead><tr><th>Detector</th><th>Version</th><th>Weights SHA-256 or revision</th><th>Licence</th><th>Coverage</th><th>Device</th></tr></thead>
+<thead><tr><th>Check</th><th>Version</th><th>Weights SHA-256 or revision</th><th>Licence</th><th>Coverage</th><th>Device</th></tr></thead>
 <tbody>
 {% for r in a.registry %}
 <tr><td class="mono">{{ r.id }}</td><td class="mono">{{ r.version }}</td><td class="mono hash-cell">{{ r.weights }}</td><td>{{ r.licence }}</td><td>{{ r.coverage }}</td><td>{{ r.device }}</td></tr>

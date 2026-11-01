@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Finding } from '../../lib/api/queries'
 import { cx } from '../../lib/cx'
+import { anonymizeFindingText } from '../analysis/checkNames'
 import type { VideoSegment } from './model'
 
 /** `mm:ss.s` for list rows (UX §5.10 "00:12.4–00:15.9"); hours are added when needed. */
@@ -51,7 +52,7 @@ export default function SegmentList({ analysisId, segments, selected, findings, 
               <span className="font-mono text-mono num text-text">{inspectionOnly ? <span className="sr-only">For inspection only</span> : s.peak.toFixed(2)}</span>
               <span className="col-span-2 truncate">{[s.laneName.toLowerCase(), s.trackName].filter(Boolean).join(' · ')}</span>
             </button>
-            {cited.map((f) => <Link key={f.id} to={`/analyses/${analysisId}/findings`} className="font-mono text-micro text-accent underline underline-offset-[3px]" title={f.title}>{f.id}</Link>)}
+            {cited.map((f) => <Link key={f.id} to={`/analyses/${analysisId}/findings`} className="font-mono text-micro text-accent underline underline-offset-[3px]" title={anonymizeFindingText(f, f.title)}>{f.id}</Link>)}
           </li>
         )
       })}

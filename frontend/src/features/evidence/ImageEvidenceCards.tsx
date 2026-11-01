@@ -1,0 +1,177 @@
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { Button, ErrorState, SkeletonRows } from '../../components/ui'
+import { cx } from '../../lib/cx'
+import { evidenceImageUrl, evidenceSourceUrl, measurementValue, useImageEvidence, type EvidenceImage, type ImageEvidencePacket, type ImageEvidenceSet } from './imagePackets'
+import ImageInspectionChecks, { CandidateEligibilityNote } from './ImageInspectionChecks'
+
+function EvidencePicture({ set, artifact, token, ready, alt }: {
+  set: ImageEvidenceSet; artifact: EvidenceImage; token: string; ready: boolean; alt: string
+}) {
+  const [failed, setFailed] = useState(false)
+  const [attempt, setAttempt] = useState(0)
+  const src = ready ? evidenceImageUrl(set, artifact, token) : null
+  return (
+    <div className="min-h-44 aspect-[4/3] rounded-md border border-border bg-surface-2 flex items-center justify-center overflow-hidden">
+      {!ready ? <p className="m-4 text-small text-text-muted">Preparing secure media links…</p>
+        : !src || failed ? <div role="alert" className="p-4 text-small text-text-muted">
+          <p className="m-0">This evidence image could not be loaded. Its recorded position and explanation remain below.</p>
+          {src && <Button variant="text" className="mt-2" onClick={() => { setFailed(false); setAttempt((x) => x + 1) }}>Retry image</Button>}
+        </div>
+          : <img key={`${artifact.sha256}:${attempt}`} src={src} alt={alt} width={artifact.width} height={artifact.height}
+            loading="lazy" className="block w-full h-full object-contain" onError={() => setFailed(true)} />}
+    </div>
+  )
+}
+
+function EvidenceCard({ packet, set, token, mediaReady }: {
+  packet: ImageEvidencePacket; set: ImageEvidenceSet; token: string; mediaReady: boolean
+}) {
+  const [overlay, setOverlay] = useState(false)
+  const [mask, setMask] = useState(false)
+  const { x, y, w, h } = packet.region
+  const coordinates = `x ${measurementValue(x)}, y ${measurementValue(y)}, ${measurementValue(w)} × ${measurementValue(h)} px`
+  return (
+    <article id={`image-evidence-${packet.id}`} tabIndex={-1} data-testid="image-evidence-card" data-evidence-id={packet.id}
+      className="border-t border-border pt-6 scroll-mt-20 focus-visible:outline-2 focus-visible:outline-accent">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="font-mono text-small text-accent">{packet.id}</span>
+        <h3 className="m-0 text-body font-medium text-text">{packet.title}</h3>
+        <span className="text-caption text-text-muted">{packet.evidence_type === 'localisation' ? 'Localisation candidate' : 'Inspection region'}</span>
+      </div>
+      <p className="mt-2 mb-0 text-body text-text max-w-[80ch]">{packet.observation}</p>
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-4 max-[639px]:grid-cols-1">
+        <figure className="m-0 min-w-0">
+          <div className="mb-2 min-h-8 flex items-center text-small font-medium text-text">Position in the source</div>
+          <EvidencePicture key={`context:${token}`} set={set} artifact={packet.artifacts.context} token={token} ready={mediaReady}
+            alt={`${packet.id}: full source image with the inspection region outlined`} />
+          <figcaption className="mt-2 text-caption text-text-muted">Outline marks this region. The surrounding image is retained for context.</figcaption>
+        </figure>
+        <figure className="m-0 min-w-0">
+          <div className="mb-2 min-h-8 flex items-center justify-between gap-2 flex-wrap">
+            <span className="text-small font-medium text-text">{mask ? 'Measured region mask' : overlay ? 'Diagnostic overlay' : 'Original crop'}</span>
+            {packet.artifacts.mask && <button type="button" aria-pressed={mask} aria-label={`Show measured mask for ${packet.id}`}
+              onClick={() => { setMask((v) => !v); setOverlay(false) }}
+              className="min-h-8 px-2.5 rounded-sm border border-border text-small text-text-muted hover:text-text">
+              {mask ? 'Show original crop' : 'Show mask'}
+            </button>}
+            <button type="button" aria-pressed={overlay} aria-label={`Show diagnostic overlay for ${packet.id}`} onClick={() => { setOverlay((v) => !v); setMask(false) }}
+              className={cx('min-h-8 px-2.5 rounded-sm border text-small transition-colors duration-fast',
+                overlay ? 'border-accent bg-surface-3 text-accent' : 'border-border text-text-muted hover:text-text hover:bg-surface-2')}>
+              {overlay ? 'Hide overlay' : 'Show overlay'}
+            </button>
+          </div>
+          <EvidencePicture key={`${mask ? 'mask' : overlay ? 'overlay' : 'crop'}:${token}`} set={set}
+            artifact={mask && packet.artifacts.mask ? packet.artifacts.mask : overlay ? packet.artifacts.overlay : packet.artifacts.crop}
+            token={token} ready={mediaReady} alt={`${packet.id}: ${mask ? 'selected connected region on the full measured grid' : overlay ? 'diagnostic overlay on the same source crop' : 'unaltered source crop with surrounding context'}`} />
+          <figcaption aria-live="polite" className="mt-2 text-caption text-text-muted">
+            {mask ? 'White marks this selected component; black means outside this component, not verified authentic. Boundaries follow the measured grid.'
+              : overlay ? packet.overlay_legend : 'Cropped from the submitted image. This is not a reconstructed “before” image.'}
+          </figcaption>
+        </figure>
+      </div>
+      <div className="mt-5 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-8 gap-y-4 max-[639px]:grid-cols-1">
+        <div>
+          <h4 className="m-0 text-small font-medium text-text">What supports this region</h4>
+          <p className="mt-2 mb-0 text-small text-text">{packet.interpretation}</p>
+          {packet.localisation && <p className="mt-2 mb-0 text-small text-text-muted">
+            Measured grid {packet.localisation.grid.join(' × ')} · selected area {measurementValue(packet.localisation.region_area_fraction * 100)}% · operating threshold {measurementValue(packet.localisation.threshold)} (uncalibrated).
+          </p>}
+          {packet.localisation?.candidate_eligibility && <CandidateEligibilityNote gate={packet.localisation.candidate_eligibility} />}
+          {packet.measurements.length > 0 && <dl className="mt-3 mb-0 space-y-1.5">
+            {packet.measurements.map((m, i) => <div key={`${m.label}:${i}`} className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 text-small">
+              <dt className="text-text-muted">{m.label}</dt>
+              <dd className="m-0 font-mono text-text num text-right">{measurementValue(m.value)}{m.unit ? ` ${m.unit}` : ''}</dd>
+            </div>)}
+          </dl>}
+        </div>
+        <div>
+          <h4 className="m-0 text-small font-medium text-text">Other explanations and limits</h4>
+          <ul className="mt-2 mb-0 pl-4 space-y-1 text-small text-text-muted list-disc">
+            {packet.limitations.map((line, i) => <li key={i}>{line}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div className="mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+        <Link to={evidenceSourceUrl(set.analysis_id, packet)} data-testid="evidence-source-link"
+          className="text-small font-medium text-accent underline underline-offset-[3px] hover:text-accent-hover">Inspect this position in the original image</Link>
+        <span className="text-caption font-mono text-text-muted num">{coordinates}</span>
+      </div>
+      {(packet.finding_ids.length > 0 || packet.signal_refs.length > 0) && <p className="mt-2 mb-0 text-caption text-text-muted">
+        {packet.finding_ids.length > 0 && <span>Related findings: {packet.finding_ids.map((id, i) => <span key={id}>
+          {i > 0 && ', '}<Link to={`#finding-${encodeURIComponent(id)}`} className="underline underline-offset-[3px] hover:text-text">{id}</Link>
+        </span>)}. </span>}
+        {packet.signal_refs.length > 0 && <span>Recorded checks: {packet.signal_refs.map((s) => s.display_id ?? 'Check').join(', ')}.</span>}
+      </p>}
+    </article>
+  )
+}
+
+export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const [showAll, setShowAll] = useState(false)
+  const { hash, key } = useLocation()
+  const root = useRef<HTMLDivElement>(null)
+  const landed = useRef<string | null>(null)
+  useEffect(() => {
+    const navigation = `${key}:${hash}:${set.id}`
+    if (landed.current === navigation) return
+    const index = set.packets.findIndex((packet) => hash === `#image-evidence-${encodeURIComponent(packet.id)}`)
+    if (index < 0 || set.status !== 'ready') return
+    if (index >= 3 && !showAll) {
+      setShowAll(true)
+      return
+    }
+    const article = document.getElementById(`image-evidence-${set.packets[index].id}`)
+    if (!article || !root.current?.contains(article)) return
+    landed.current = navigation
+    article.focus({ preventScroll: true })
+    article.scrollIntoView?.({ block: 'start' })
+  }, [hash, key, set.id, set.packets, set.status, showAll])
+  const localised = set.packets.some((p) => p.evidence_type === 'localisation')
+  const shown = showAll ? set.packets : set.packets.slice(0, 3)
+  return (
+    <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
+      {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
+        Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.
+      </p> : set.packets.length === 0 ? <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">
+        {set.coverage?.inspection_checks?.length ? 'No candidate regions are shown in these evidence cards. The coverage below explains what was measured and withheld.' : 'No localisable region evidence is available for this result.'}
+        {' '}A whole-image score cannot identify which pixels were edited, and this does not establish that the image is unaltered.
+      </p> : <>
+        <p className="mt-3 mb-0 text-body text-text-muted max-w-[80ch]">
+          {localised ? 'Inspect the areas identified by local checks alongside their source crops and limitations.'
+            : 'These areas contain diagnostic differences worth inspecting. They are not confirmed edits, and do not establish that AI was used.'}
+        </p>
+        {!localised && <p data-testid="no-edit-localisation" className="mt-2 mb-0 text-small text-text-muted">This evidence set contains diagnostic inspection regions, not confirmed edit locations.</p>}
+        <div id="image-evidence-cards" className="mt-5 space-y-7">{shown.map((packet) => <EvidenceCard key={`${set.id}:${packet.id}`} packet={packet} set={set} token={token} mediaReady={mediaReady} />)}</div>
+        {set.packets.length > 3 && <Button variant="text" className="mt-5" aria-expanded={showAll} aria-controls="image-evidence-cards" onClick={() => setShowAll((v) => !v)}>
+          {showAll ? 'Show first 3 regions' : `Show all ${set.packets.length} recorded regions`}
+        </Button>}
+      </>}
+      <ImageInspectionChecks checks={set.coverage?.inspection_checks ?? []} />
+      {set.omitted_regions > 0 && <p className="mt-4 mb-0 text-small text-text-muted">{set.omitted_regions} additional candidate {set.omitted_regions === 1 ? 'region is' : 'regions are'} not included in these evidence cards.</p>}
+      {set.limitations.length > 0 && <ul className="mt-4 mb-0 pl-4 space-y-1 text-small text-text-muted list-disc">
+        {set.limitations.map((line, i) => <li key={i}>{line}</li>)}
+      </ul>}
+      {set.status === 'ready' && set.sha256 && <details className="mt-5 text-small text-text-muted">
+        <summary className="cursor-pointer">Evidence record</summary>
+        <p className="mt-2 mb-0">The same recorded crops and observations are included in new PDFs and JSON exports. Later evidence versions do not change earlier reports.</p>
+        <dl className="mt-2 mb-0 space-y-2 text-caption">
+          <div><dt>Evidence SHA-256</dt><dd className="m-0 font-mono break-all">{set.sha256}</dd></div>
+          <div><dt>Original image SHA-256</dt><dd className="m-0 font-mono break-all">{set.source.sha256}</dd></div>
+        </dl>
+      </details>}
+    </div>
+  )
+}
+
+export default function ImageEvidenceCards({ analysisId, token, mediaReady }: { analysisId: string; token: string; mediaReady: boolean }) {
+  const evidence = useImageEvidence(analysisId)
+  return (
+    <section id="section-image-evidence" data-testid="image-evidence" aria-labelledby="image-evidence-heading" className="scroll-mt-14">
+      <h2 id="image-evidence-heading" className="m-0 eyebrow">Image evidence</h2>
+      {evidence.isPending ? <SkeletonRows className="mt-4" />
+        : evidence.error ? <ErrorState className="mt-3" onRetry={() => void evidence.refetch()}>Could not load the image evidence: {evidence.error.message}</ErrorState>
+          : evidence.data && <ImageEvidenceContent key={evidence.data.id ?? evidence.data.status} set={evidence.data} token={token} mediaReady={mediaReady} />}
+    </section>
+  )
+}

@@ -119,7 +119,7 @@ function caseChanges(d: Record<string, unknown>): string {
 /** The actor's display name: the name the log itself gives (N-19j, browser QA Q2-10: an administrator who is no member of
  *  the case stood there by id), else case members and the caller by id; `system` is the engine itself. */
 export function actorName(id: string, names: ReadonlyMap<string, string>, given?: string | null): string {
-  if (id === 'system') return 'Veritas'
+  if (id === 'system') return 'Chipmunk Verify'
   return given || names.get(id) || id
 }
 

@@ -49,7 +49,7 @@ VALIDATED_SIZES = Path(__file__).with_name("validated_sizes.json")
 MIN_SUPPORT_CLASS_N = 100
 CAPPED_CODES = frozenset({"ai_supported_strong", "ai_supported", "no_ai_indicators", "no_ai_indicators_strong"})
 MODEL_UNUSED = "no calibrated fusion model was used for this analysis"  # N-19k: `runtime.FALLBACK_ENVELOPE_UNUSED`
-NOT_ASSESSABLE_VERBAL = "Veritas could not assess this file reliably"  # UX §7.1 basis `insufficient`
+NOT_ASSESSABLE_VERBAL = "Chipmunk Verify could not assess this file reliably"  # UX §7.1 basis `insufficient`
 # Screenshot rule: a lossless file without EXIF whose size is a common display resolution (either orientation).
 SCREEN_SIZES = frozenset({
     (1280, 720), (1366, 768), (1440, 900), (1536, 864), (1600, 900), (1680, 1050), (1920, 1080), (1920, 1200), (2560, 1440),

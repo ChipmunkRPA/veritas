@@ -1,0 +1,1 @@
+{% if v.get('customer_assessment', {}).get('applies') %}{{ v.customer_estimate_first }}{% if v.get('customer_interval_value') %} {{ v.customer_assessment.interval_label }}: <span class="customer-number">{{ v.customer_interval_value }}</span>.{% endif %}{% else %}{{ fallback_estimate }}{% endif %}

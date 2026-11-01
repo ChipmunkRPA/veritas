@@ -1,0 +1,103 @@
+{% if v.get('evidence') %}
+{% set evidence = v.evidence %}
+{% macro plates(images, wide=false) %}
+{% if images and not evidence.withheld %}
+<div class="multimedia-plates{% if wide %} multimedia-wide{% endif %}">
+{% for image in images %}<figure><img src="{{ image.uri }}" alt="{{ image.label }}"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}
+</div>
+{% endif %}
+{% endmacro %}
+<section class="chapter multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
+<h2 class="chapter-title" id="multimedia-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}{{ evidence.title }}</h2>
+<p>{{ evidence.note }}</p>
+{% if evidence.available %}
+<p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
+<p class="caption">{{ evidence.coverage_note }}</p>
+{% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.withheld %}<p class="caption evidence-withheld">Source media, page images and verbatim excerpts are withheld in this redacted copy. Evidence hashes, measured responses and non-content anchors remain.</p>{% endif %}
+{% if evidence.packets %}
+<h3>Evidence locator</h3>
+<p class="caption">These identifiers match the local analysis view and evidence.json. Each JSON pointer below identifies the exact packet in that file. Asset checksums identify the same PNG, WAV or MP4 files in the evidence ZIP.</p>
+<table class="multimedia-locator"><thead><tr><th>Evidence</th><th>Source location</th><th>JSON pointer</th></tr></thead><tbody>
+{% for packet in evidence.packets %}<tr><td><a href="#multimedia-evidence-{{ packet.id }}">{{ packet.id }}</a></td><td>{{ packet.locator }}</td><td class="mono">{{ packet.json_pointer }}</td></tr>{% endfor %}
+</tbody></table>
+{% endif %}
+{{ plates(evidence.overview, true) }}
+{% for context in evidence.acoustic_contexts %}
+<div class="multimedia-acoustic-summary">
+<h3>Background and acoustic context</h3>
+<p>{{ context.method.description }}</p>
+<p class="caption">{{ context.bin_count }} measured time bins; {{ context.event_count }} selected acoustic events. JSON pointer <span class="mono">{{ context.json_pointer }}</span>. These measurements describe the mixed recording; they do not isolate background sounds from speech or determine AI authorship.</p>
+{% if context.source.sample_rate %}<p class="caption">Source PCM: {{ context.source.samples }} samples at {{ context.source.sample_rate }} Hz. SHA-256 <span class="mono evidence-hash">{{ context.source.pcm_sha256 }}</span>.</p>{% endif %}
+{{ plates(context.images, true) }}
+{% for note in context.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
+</div>
+{% endfor %}
+{% for packet in evidence.packets %}
+<article class="multimedia-evidence-packet" id="multimedia-evidence-{{ packet.id }}">
+<h3>{{ packet.id }} - {{ packet.title }}</h3>
+{% if packet.get('customer_inference') %}<p class="finding-inference"><strong>Inference:</strong> {{ packet.customer_inference }}</p>{% endif %}
+<p class="caption">JSON pointer <span class="mono">{{ packet.json_pointer }}</span> - {{ packet.locator }}.</p>
+<p class="caption">{% if packet.finding_ids %}Findings {{ packet.finding_ids | join(', ') }}{% endif %}{% if packet.signal_refs %} - Checks {% for ref in packet.signal_refs %}{{ ref.display_id or 'recorded check' }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+<p><strong>Observed:</strong> {{ packet.observation }}</p>
+<p><strong>Interpretation:</strong> {{ packet.interpretation }}</p>
+{% if packet.kind in ['video', 'av'] %}
+{{ plates(packet.images, true) }}
+{% if packet.clip and packet.clip.status == 'ready' %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}
+{% if packet.clip and packet.clip.status == 'unavailable' %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
+{% if packet.kind == 'av' %}<p class="caption">These 25 measurement ticks used the exact gray patches shown below. A source frame can repeat at multiple ticks; the three full-size frames are representatives.</p>{% elif packet.window %}<p class="caption">This window used {{ packet.window.frame_indices | length }} recorded input frames. The displayed frames are representatives; the window measurement is not a per-frame score.</p>{% endif %}
+{% for frame in packet.frames %}
+<div class="multimedia-frame">
+<p class="caption"><strong>{{ frame.id }}</strong> - source frame {{ frame.anchor.frame_index }}, PTS {{ frame.anchor.pts }} at time base {{ frame.anchor.time_base }}; source time {{ '%.6f' | format(frame.anchor.stream_time_s) }} s{% if frame.anchor.playback_time_s is not none %}; playback {{ '%.6f' | format(frame.anchor.playback_time_s) }} s{% endif %}{% if frame.score is not none %}; response {{ '%.4f' | format(frame.score) }} (uncalibrated){% endif %}.</p>
+{{ plates(frame.images) }}
+{% if frame.context_region %}<p class="caption">{% if packet.kind == 'av' %}Measured mouth input{% else %}Detected face context{% endif %}: x {{ frame.context_region.x }}, y {{ frame.context_region.y }}, width {{ frame.context_region.w }}, height {{ frame.context_region.h }} pixels. This is not a pixel-edit mask.</p>{% endif %}
+<p class="caption evidence-hash">Decoded RGB SHA-256 <span class="mono">{{ frame.anchor.decoded_rgb_sha256 }}</span></p>
+</div>
+{% endfor %}
+{% if packet.kind == 'av' %}
+<p class="caption">The selected lag is {{ packet.measurement.offset_ms }} ms; positive means audio later than the picture. All 31 lag candidates from -600 to +600 ms are retained in JSON. Peak correlation {{ '%.4f' | format(packet.measurement.peak_correlation) }} is a correspondence measure, not an AI probability.</p>
+<p class="caption">Unshifted audio window: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz. Full lag-search audio: samples [{{ packet.audio.context_interval.start_sample }}, {{ packet.audio.context_interval.end_sample }}). The silent MP4 is visual context; these WAV samples retain the actual audio inputs.</p>
+{% for range in packet.audio.source_ranges %}<p class="caption">Source audio PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.</p>{% endfor %}
+{% if not evidence.withheld %}<div class="multimedia-mouth-inputs">{% for input in packet.measured_inputs %}<figure><img src="{{ input.image.uri }}" alt="{{ input.image.label }}"><figcaption>{{ input.image.label }}<br>PTS {{ input.frame_pts }}</figcaption></figure>{% endfor %}</div>{% endif %}
+<p class="caption">Gray mouth crops are the actual 32 by 24 inputs after grayscale and area resizing; they are not an edit mask. Correlation can be affected by ordinary timing offsets, occlusion, facial hair or unrelated speech.</p>
+{% endif %}
+{% elif packet.kind == 'sound' %}
+<p class="caption">Sound-category input: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz; {{ '%.3f' | format(packet.audio.start_s) }}-{{ '%.3f' | format(packet.audio.end_s) }} seconds on the analysed PCM timeline. Category scores rank possible sounds and are not AI confidence percentages.</p>
+{{ plates(packet.images, true) }}
+<p class="caption">The matching selected WAV clip is included in the JSON evidence assets and evidence ZIP. Each label covers this complete source window, not an exact sound onset or an edit boundary.</p>
+{% elif packet.kind in ['audio', 'acoustic'] %}
+<p class="caption">{% if packet.kind == 'acoustic' %}Measured acoustic interval{% else %}Scored input{% endif %}: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz, {{ '%.3f' | format(packet.audio.start_s) }}-{{ '%.3f' | format(packet.audio.end_s) }} seconds on the analysed PCM timeline. Listening context: samples [{{ packet.audio.context_interval.start_sample }}, {{ packet.audio.context_interval.end_sample }}).</p>
+{% for range in packet.audio.source_ranges %}<p class="caption">Source timestamps [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }} correspond to samples [{{ range.start_sample }}, {{ range.end_sample }}).{% if packet.audio.source_ranges | length > 1 %} The source timeline contains separate ranges; they must not be treated as uninterrupted playback.{% endif %}</p>{% endfor %}
+{% if packet.kind == 'acoustic' %}<p class="caption">Acoustic context only; this interval is not a detected voice-replacement boundary.{% if packet.related_voice_packet_ids %} Overlapping voice-check intervals: {{ packet.related_voice_packet_ids | join(', ') }}. Their overlap is not independent confirmation.{% endif %}</p>{% endif %}
+{{ plates(packet.images, true) }}
+<p class="caption">The PDF is static. Selected and context WAV clips are identified by the same hashes as the JSON evidence assets; the plots provide inspection context and cannot independently establish synthesis.</p>
+{% elif packet.kind == 'document' %}
+<p class="caption">Highlighted range [{{ packet.focus_range.start }}, {{ packet.focus_range.end }}) in extracted Unicode codepoints. A context response is not a word-level authorship probability.</p>
+{% if not evidence.withheld %}
+<div class="multimedia-source-context"><h4>Original text and surrounding context</h4><blockquote>{{ packet.context.before }}<mark>{{ packet.context.focus }}</mark>{{ packet.context.after }}</blockquote><p class="caption">Source context [{{ packet.context.start }}, {{ packet.context.end }}). Highlighting identifies the selected passage; it does not prove those words were generated.</p></div>
+{% for anchor in packet.source_locations %}
+<p class="caption">Source: {% if anchor.kind == 'pdf' %}PDF page {{ anchor.page }}{% if anchor.get('extraction') == 'ocr' %}, OCR text{% endif %}; coordinates refer to the unrotated page.{% elif anchor.kind == 'docx' %}DOCX paragraph {{ anchor.paragraph_index + 1 }}, body path {{ anchor.body_path | join(' / ') }}.{% elif anchor.kind in ['email', 'markup'] %}MIME part {{ anchor.get('mime_part', 'body') }}, role {{ anchor.get('quote_role', 'unknown') }}.{% else %}{{ anchor.kind }} text{% if anchor.get('source_start') is not none %}, source offset {{ anchor.source_start }}{% endif %}.{% endif %}</p>
+{% endfor %}
+{{ plates(packet.images) }}
+{% endif %}
+{% for window in packet.windows %}
+<div class="multimedia-scored-context"><h4>Actual scored input {{ loop.index }}</h4>
+<p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }} - {% if window.score_kind == 'perplexity_ratio' %}raw writing-pattern ratio{% else %}uncalibrated response{% endif %} {{ '%.4f' | format(window.score) }}. Inspection boundary: {% if window.ai_when == 'lt' %}below{% else %}at or above{% endif %} {{ window.threshold }}. {% if window.supports_ai %}This response supports inspection at that boundary.{% else %}This response does not support the AI flag at that boundary; disagreement is retained.{% endif %} This is not a calibrated authorship probability.</p>
+<p class="caption">{% if window.score_kind == 'perplexity_ratio' %}Source envelope{% else %}Input ranges{% endif %} {% for span in window.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}{% if window.score_kind == 'perplexity_ratio' %}. The excerpt covers the actual recorded token contexts; exact token sequences and selected-token ranges are retained in JSON.{% else %}; these ranges were joined with a space.{% endif %}</p>
+{% if not evidence.withheld %}<blockquote>{{ window.text }}</blockquote>{% endif %}
+<p class="caption evidence-hash">{% if window.score_kind == 'perplexity_ratio' %}Source envelope{% else %}Actual input{% endif %} SHA-256 <span class="mono">{{ window.input_sha256 }}</span>{% if window.token_coverage.get('tokens') is not none %}; {{ window.token_coverage.tokens }} content token(s){% if window.token_coverage.get('token_windows') is not none %} across {{ window.token_coverage.token_windows }} input window(s){% endif %}{% if window.token_coverage.get('covered_tokens') is not none %}; {{ window.token_coverage.covered_tokens }} token(s) included in the response{% endif %}.{% endif %}</p>
+{% for context in window.contexts %}<p class="caption evidence-hash">Actual token context [{{ context.source_token_range | join(', ') }}); predicted tokens in that forward pass [{{ context.scored_token_range | join(', ') }}), plus {{ context.anchor_token_count }} non-source anchor token(s). These are the forward-input and prediction ranges, not necessarily all the tokens used for this passage's ratio. Token sequence SHA-256 <span class="mono">{{ context.token_ids_sha256 }}</span>.</p>{% endfor %}
+{% if window.score_kind == 'perplexity_ratio' %}<p class="caption">This passage's ratio uses {{ window.tokens_scored }} selected token(s), intersecting source characters {% for span in window.scored_spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}.{% if window.neighbor_expansion %} The reduction includes neighbouring sentences because the focus sentence was short.{% endif %} Surrounding forward context can influence those token responses. Displayed scores are rounded; direction follows the recorded full-precision value.</p>{% endif %}
+</div>
+{% endfor %}
+{% endif %}
+{% if packet.measurements %}<dl class="evidence-measurements">{% for measure in packet.measurements %}<div><dt>{{ measure.label }}</dt><dd>{{ measure.value }}{% if measure.get('unit') %} {{ measure.unit }}{% endif %}</dd></div>{% endfor %}</dl>{% endif %}
+{% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
+{% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
+</article>
+{% else %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endfor %}
+{% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
+{% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
+{% endif %}
+</section>
+{% endif %}

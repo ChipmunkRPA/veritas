@@ -111,7 +111,7 @@ def current(db: Session, analysis: Analysis, result: dict[str, Any], *, profile:
         return None
     now = snapshot.build(db, analysis, result, report_id="", revision=0, profile=profile, redacted=redacted, supersedes_report_id=None,
                          revision_reason=None, requested_at=utcnow(), requested_by=rows[0].requested_by,
-                         template_set=engine.TEMPLATE_SET, veritas_version=settings.version, verified=verified)
+                         template_set=engine.TEMPLATE_SET, veritas_version=settings.version, verified=verified, store=store)
     # N-19f (code review R4-02): the walk of the custody log is left out of `record_state` (the log grows with every report),
     # so a request got an earlier report that says "intact" after its own walk had found the chain broken, and a report that
     # says "broken" once the chain verified again. A report is reused only when this request's walk is valid and the report's
@@ -154,7 +154,7 @@ def prepare(db: Session, analysis: Analysis, result: dict[str, Any], *, profile:
     frozen = snapshot.build(db, analysis, result, report_id=report_id, revision=revision, profile=profile, redacted=redacted,
                             supersedes_report_id=previous.id if previous is not None else None, revision_reason=revision_reason,
                             requested_at=requested_at, requested_by=requested_by, template_set=engine.TEMPLATE_SET,
-                            veritas_version=settings.version, verified=verified)
+                            veritas_version=settings.version, verified=verified, store=store)
     stored = register_artefact(db, store, snapshot.dump(frozen), media_type="application/json", role="stage_output",
                                created_by="report", analysis_id=analysis.id)
     row = ReportRow(id=report_id, display_id=frozen.report.display_id, revision=revision, supersedes_report_id=frozen.report.supersedes_report_id,
@@ -246,7 +246,7 @@ def run(report_id: str, *, store: ObjectStore | None = None, timeout_s: float | 
         signature = key.sign(rendered.pdf)
         signing.ensure_registered(key)
     except (ArtefactNotFound, ObjectNotFound):
-        return _fail(report_id, "The stored report snapshot is missing; the report was not produced.")
+        return _fail(report_id, "The stored report snapshot or a frozen evidence artifact is missing; the report was not produced.")
     except (engine.EngineUnavailable, signing.SigningKeyError) as e:
         return _fail(report_id, str(e))
     except deadline.JobTimeout as e:  # N-9: the render is left to end by itself; nothing it returns is stored

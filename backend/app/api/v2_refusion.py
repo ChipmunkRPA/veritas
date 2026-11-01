@@ -71,7 +71,9 @@ def request_refusion(aid: str, request: Request, body: RefusionRequest | None = 
             except LookupError:
                 raise ProblemError(404, "Analysis not found", "No analysis exists with this id.") from None
             except refusion.RefusionError as e:
-                raise ProblemError(409, "Re-fusion not possible", str(e)) from None
+                from app.api.public_projection import neutral_text
+
+                raise ProblemError(409, "Re-fusion not possible", neutral_text(str(e))) from None
             except IntegrityError:  # unique analyses.supersedes_id: a concurrent reanalyse or re-fusion committed first (D-47)
                 db.rollback()
                 raise ProblemError(409, "Re-fusion not possible", "a newer revision of this analysis was created at the same time") from None

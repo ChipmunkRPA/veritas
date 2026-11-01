@@ -14,9 +14,15 @@ export interface Verdict {
   probability_ai: number | null; band: string; confidence: string; label: string; summary: string
   reasoning: string[]; caveats: string[]; signals_for_ai: number; signals_for_authentic: number; signals_total: number
 }
+/** Public diagnostic measurements; opaque keys may identify additional checks. */
+export interface SentenceScores {
+  classification_response?: number; classification_response_secondary?: number
+  pattern_ratio?: number; pattern_response?: number; style?: number
+  [key: string]: number | undefined
+}
 export interface SentenceOut {
   idx: number; start: number; end: number; text: string; paragraph: number; p_ai: number | null; band: string
-  reasons: string[]; scores: Record<string, number>; flags?: string[]
+  reasons: string[]; scores: SentenceScores; flags?: string[]
 }
 export interface Analysis {
   id: string; kind: Kind; filename: string; content_type: string; size_bytes: number; sha256: string; status: string
@@ -32,7 +38,7 @@ export interface Analysis {
 
     frames?: { index: number; time: number; p_frame: number; p_face: number | null; p_general: number; faces: number; scores: Record<string, number> }[]
     text?: string; sentences?: SentenceOut[]; paragraphs?: [number, number][]
-    stats?: { words: number; sentences: number; scored_sentences?: number; ai_sentences: number; mixed_sentences: number; human_sentences: number; ai_share: number; mixed_share: number; weighted_ai_share: number; binoculars_document: number | null }
+    stats?: { words: number; sentences: number; scored_sentences?: number; ai_sentences: number; mixed_sentences: number; human_sentences: number; ai_share: number; mixed_share: number; weighted_ai_share: number; document_pattern_ratio?: number | null }
     metadata?: Record<string, unknown>
   } | null
 }

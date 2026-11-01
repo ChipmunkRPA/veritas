@@ -11,11 +11,15 @@
 """
 from __future__ import annotations
 
+import base64
 import dataclasses
+import hashlib
+import uuid
 from typing import Any
 
+from app.core.canonical import canonical_hash
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
-from app.detectors.text.extract import Document
+from app.detectors.text.extract import EXTRACTION_VERSION, Document
 from app.detectors.text.pipeline import (
     DocumentScores,
     assemble_document,
@@ -29,10 +33,10 @@ from app.engine.detector import ON_THIS_SERVER, Modality, StageOutputs, of_the_s
 from app.engine.registry import TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.schemas.evidence import AnalysisResultV2
+from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p17"  # p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
+PIPELINE_VERSION = "doc-2.0-p20"  # p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -56,13 +60,32 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     doc, sents = decode_document(path, path.suffix)
     words = check_document_length(doc, sents)
+    artifacts = []
+    for digest, encoded in doc.source_rasters.items():
+        content = base64.b64decode(encoded, validate=True)
+        if hashlib.sha256(content).hexdigest() != digest:
+            raise ValueError("Frozen OCR input does not match its source commitment")
+        obj = ctx.store.put_bytes(content)
+        artifacts.append({"id": str(uuid.uuid5(uuid.NAMESPACE_URL, f"ocr:{ctx.analysis_id}:{digest}")),
+                          "sha256": obj.sha256, "size_bytes": obj.size_bytes, "media_type": "image/png",
+                          "role": "preview", "created_by": "document-ocr/1"})
     return {"text": doc.text, "paragraphs": [[int(a), int(b)] for a, b in doc.paragraphs], "meta": common.json_safe(doc.meta),
-            "sentences": [dataclasses.asdict(s) for s in sents], "words": words}
+            "sentences": [dataclasses.asdict(s) for s in sents], "words": words, "source_map": doc.source_map,
+            "artefacts": artifacts}
+
+
+def current_decode_output(output: Any) -> bool:
+    """Do not reuse pre-OCR extraction; its absent page mapping cannot be invented."""
+    if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
+        return False
+    hashes = {artifact.get("sha256") for artifact in output.get("artefacts", [])}
+    return all(page.get("raster", {}).get("sha256") in hashes for page in output.get("meta", {}).get("ocr", {}).get("pages", [])
+               if page.get("raster"))
 
 
 def document_input(ctx: StageContext) -> tuple[Document, list[Sentence]]:
     d = ctx.outputs["decode"]
-    doc = Document(d["text"], [(int(a), int(b)) for a, b in d["paragraphs"]], dict(d.get("meta") or {}))
+    doc = Document(d["text"], [(int(a), int(b)) for a, b in d["paragraphs"]], dict(d.get("meta") or {}), list(d.get("source_map") or []))
     return doc, [Sentence(**s) for s in d["sentences"]]
 
 
@@ -171,6 +194,31 @@ def not_run_on_server(detected: dict[str, Any]) -> str | None:
     return f"{len(server)} {'check' if len(server) == 1 else 'checks'} {ON_THIS_SERVER}: {names}."
 
 
+def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str, Any]:
+    """Retain measured excerpt results but withhold a whole-file verdict for unread pages."""
+    unchecked = doc.meta.get("unmapped_pages") or []
+    if not unchecked:
+        return output
+    scope = (f"Pages {', '.join(map(str, unchecked))} were not reliably extracted and were not checked. "
+             "The recorded scores and excerpts apply only to extracted text. No whole-document authorship conclusion is available.")
+    before = output["decision"]
+    decision = Decision.model_validate({**before, "code": "not_assessable",
+        "verbal": "Partially assessed: some document pages remain unchecked", "reason": scope,
+        "probability_ai_calibrated": None, "probability_ai_uncalibrated": None, "ci90": None,
+        "band": "uncertain", "confidence": "low", "driving_hypothesis": None, "provenance_record": None,
+        "statistical_alone": None, "statistical_estimate_before_provenance": None, "contributions": []}).model_dump(mode="json")
+    output = {**output, "decision": decision, "caveats": [*output.get("caveats", []), scope]}
+    output["assessments"] = [{**assessment, "applicable": False, "probability": None, "ci90": None,
+                              "contributions": [], "lanes": [], "note": scope}
+                             if assessment.get("hypothesis") == "H1_whole_content_synthesis" else assessment
+                             for assessment in output.get("assessments", [])]
+    if isinstance(output.get("v1"), dict) and "verdict" in output["v1"]:
+        verdict = common.legacy_verdict(output["v1"]["verdict"], decision)
+        verdict.update(summary=decision["verbal"], reasoning=[scope], caveats=[*verdict.get("caveats", []), scope])
+        output["v1"] = {**output["v1"], "verdict": verdict}
+    return output
+
+
 def fuse(ctx: StageContext) -> dict[str, Any]:
     """Legacy fuser → uncalibrated fallback Decision (§4.4) plus the v1 document blocks. With a compatible fuser artefact
     the calibrated decision replaces the fallback decision (M-2)."""
@@ -188,6 +236,10 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
                                        modality="text", version=PIPELINE_VERSION, family="text",
                                        exhibit_ids=[spans_id] if s["id"] == "sentence_consensus" else None)
                for n, s in enumerate(legacy["signals"], 1)]
+    for signal in signals:
+        entry = by_id.get(signal["detector_id"], {})
+        if source_details := entry.get("details", {}).get("text_evidence"):
+            signal["details"]["text_evidence"] = source_details
     # Stylometry also creates sentence_consensus, so counting legacy signals
     # mistakes two heuristic views for independent learned evidence. Sources are
     # present only for successful detector runs with an aggregate. Learned
@@ -214,8 +266,10 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
            "caveats": [FALLBACK_CAVEAT, *notes, *legacy["verdict"]["caveats"]], "v1": common.json_safe(view),
            **common.stage_exhibits(ctx, {"fuse"})}
     if selection.mode == "artefact":
-        return common.artefact_fusion(ctx, "document", selection, out, detected.get("detectors", []))
-    return common.fallback_fusion(ctx, "document", selection, out)
+        fused = common.artefact_fusion(ctx, "document", selection, out, detected.get("detectors", []))
+    else:
+        fused = common.fallback_fusion(ctx, "document", selection, out)
+    return enforce_extraction_scope(fused, doc)
 
 
 def synthesise(ctx: StageContext) -> dict[str, Any]:
@@ -235,11 +289,21 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
     view = dict(ctx.outputs["fuse"]["v1"])
     decoded = ctx.outputs["decode"]
     legacy_artifacts = (ctx.outputs.get("render") or {}).get("legacy_artifacts") or {}
-    view.update(text=decoded["text"], paragraphs=decoded["paragraphs"], artifacts=sorted(legacy_artifacts), timings={})
+    view.update(text=decoded["text"], paragraphs=decoded["paragraphs"], artifacts=sorted(legacy_artifacts), timings={},
+                source_map=decoded.get("source_map", []))
     return view
 
 
 def publish(ctx: StageContext) -> dict[str, Any]:
     result = common.build_result(ctx, kind="document", pipeline_version=PIPELINE_VERSION, entry_stages=("detect",),
                                  exhibit_stages=EXHIBIT_STAGES)
+    decoded = ctx.outputs["decode"]
+    result.manifest.sampling["document_source"] = {
+        "version": decoded.get("meta", {}).get("source_map_version"),
+        "source_sha256": decoded.get("meta", {}).get("original_sha256"),
+        "extracted_text_sha256": decoded.get("meta", {}).get("extracted_text_sha256"),
+        "source_map_sha256": canonical_hash(decoded.get("source_map", [])),
+        "decode_sha256": canonical_hash(decoded),
+        "offset_unit": "unicode_codepoint",
+    }
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=("detect",))

@@ -154,6 +154,9 @@ async def authorize(request: Request) -> None:
         denial = await run_in_threadpool(_case_denial, principal, dict(request.path_params), minimum)
         if denial is not None:
             raise _denied(request, denial)
+    from app.billing.service import guard_submission
+
+    guard_submission(request.method, getattr(request.scope.get("route"), "path", ""))
     request.state.authorized = True
 
 

@@ -29,7 +29,7 @@ const CATEGORIES = {
   sync: { title: 'Speech and lip movement', detail: 'Compare speech timing with the movement of a visible speaking face.' },
   recording: { title: 'Recording structure', detail: 'Inspect frame timing and how the recording was encoded.' },
   writing: { title: 'Writing patterns', detail: 'Examine language patterns that may help assess how the text was produced.' },
-  other: { title: 'Additional checks', detail: 'Other available checks are listed in the model catalogue.' },
+  other: { title: 'Additional checks', detail: 'Other checks may also be available for this source.' },
 } as const
 type Category = keyof typeof CATEGORIES
 

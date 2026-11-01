@@ -53,9 +53,10 @@ DISCLOSURES: tuple[Disclosure, ...] = (
     Disclosure("image.faces", _has_face, "AI-generated faces",
                "AI-generated faces are not validated. Detection at the 5 % threshold is 63 % (58 of 92) against 85 %, and 51 % for "
                "face-swap stills."),
-    Disclosure("image.localisers", _ran("loc.mesorch", "loc.radar"), "region maps",
-               "Region maps are not validated and carry no weight in the decision. The Mesorch localiser marks a region on 36 % of "
-               "genuine photographs, so a marked region is not evidence of an edit on its own."),
+    Disclosure("image.localisers", _ran("loc.mesorch", "loc.radar", "loc.fused"), "region maps",
+               "Region maps are not validated and carry no weight in the decision. An earlier evaluation of one local editing "
+               "check marked regions on 36 % of genuine photographs; this is not an error rate for every check or image. "
+               "A marked region is not evidence of an edit on its own."),
     Disclosure("image.unadmitted_detectors", _ran("img.spai", "img.univfd"), "SPAI and UnivFD",
                "SPAI and UnivFD are not admitted: their scores are shown but carry no weight in the decision."),
     Disclosure("video.synthesis", _kind("video"), "fully generated video",
@@ -105,6 +106,10 @@ def for_result(result: Result) -> list[dict[str, str]]:
 
     The measured figures are those of the fusion that produced the result (D-68): a fallback result gets the one fallback
     disclosure, on the screen (the analysis API) and in the reports (since report template set r21)."""
+    from app.detectors.audio.calibration import SHA256, NOTE
+
+    if (result.get("decision") or {}).get("fuser_sha256") == SHA256:
+        return [{"id": "audio.local_screening", "label": "local speech calibration", "text": NOTE}]
     if FALLBACK.applies(result):
         text = FALLBACK_BESIDE_RECORD if record_decides(result) else FALLBACK.text
         return [{"id": FALLBACK.id, "label": FALLBACK.label, "text": text}]

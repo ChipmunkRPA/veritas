@@ -140,7 +140,7 @@ def encode_cursor(key: Sequence[Any]) -> str:
     return base64.urlsafe_b64encode(json.dumps(list(key), separators=(",", ":")).encode()).decode().rstrip("=")
 
 
-def decode_cursor(cursor: str | None, arity: int | None) -> list[Any] | None:
+def decode_cursor(cursor: str | None, arity: int | None, *, candidates: Sequence[str] = ()) -> list[Any] | None:
     """The key after which the next page starts, or None for the first page. Raises ProblemError(400) when malformed."""
     if cursor is None:
         return None
@@ -152,13 +152,22 @@ def decode_cursor(cursor: str | None, arity: int | None) -> list[Any] | None:
             or not all(isinstance(k, str | int | float) and not isinstance(k, bool) for k in key)
             or any(holds_nul(k) for k in key)):  # N-10: a key is compared in a statement
         raise ProblemError(400, "Invalid cursor", "The cursor is malformed; use the next_cursor value of a previous page.")
-    return key
+    from app.api.public_projection import original_id
+
+    try:
+        return [original_id(item, candidates=candidates) if isinstance(item, str) else item for item in key]
+    except ValueError:
+        raise ProblemError(400, "Invalid cursor", "The cursor does not uniquely identify a record in this collection.") from None
 
 
 def paginate[I](items: Sequence[I], key: Callable[[I], tuple[Any, ...]], cursor: str | None,
                 limit: int) -> tuple[list[I], str | None]:
     """Keyset pagination over a small, fully loaded collection already sorted by `key`."""
-    after = decode_cursor(cursor, len(key(items[0])) if items else None)
+    candidates = tuple(part for item in items for part in key(item) if isinstance(part, str))
+    after = decode_cursor(cursor, len(key(items[0])) if items else None, candidates=candidates)
+    if after is not None and any(isinstance(part, str) and part.startswith(('check.', 'component.'))
+                                 and part not in candidates for part in after):
+        raise ProblemError(400, "Invalid cursor", "The cursor does not belong to this collection.")
     try:
         remaining = [item for item in items if after is None or list(key(item)) > after]
     except TypeError:  # a cursor from another collection (mismatched key types)
@@ -208,7 +217,9 @@ def analysis_progress(aid: str, request: Request, after: int = Query(0, ge=0, le
         body = Progress(analysis_id=aid, status=analysis.status, progress=analysis.progress,
                         current_stage=analysis.current_stage, events=[ProgressEvent(**event_json(e)) for e in batch],
                         next_after=batch[-1].seq if batch else after)
-    return JSONResponse(content=body.model_dump(mode="json"), headers=NO_STORE)
+    from app.api.public_projection import project
+
+    return JSONResponse(content=project(body.model_dump(mode="json")), headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection'})
 
 
 @router.get("/analyses/{aid}/events", response_class=StreamingResponse,
@@ -238,7 +249,8 @@ def analysis_events(aid: str, request: Request, after: int | None = Query(None, 
         refused.headers["Retry-After"] = "5"
         return refused
     return StreamingResponse(_stream(aid, cursor, request, lease), media_type="text/event-stream",
-                             headers={**NO_STORE, "X-Accel-Buffering": "no"}, background=BackgroundTask(lease.release))
+                             headers={**NO_STORE, "X-Accel-Buffering": "no", 'X-Chipmunk-View': 'customer-projection'},
+                             background=BackgroundTask(lease.release))
 
 
 class StreamLease:
@@ -288,8 +300,10 @@ STREAMS = StreamRegistry()
 
 
 def _frame(event: str, data: dict[str, Any], seq: int | None = None) -> str:
+    from app.api.public_projection import project
+
     head = f"id: {seq}\n" if seq is not None else ""
-    return f"{head}event: {event}\ndata: {json.dumps(data, separators=(',', ':'))}\n\n"
+    return f"{head}event: {event}\ndata: {json.dumps(project(data), separators=(',', ':'))}\n\n"
 
 
 def _poll(aid: str, cursor: int) -> tuple[list[tuple[int, str, dict[str, Any]]], str | None]:

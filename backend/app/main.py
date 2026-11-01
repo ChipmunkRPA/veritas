@@ -20,9 +20,12 @@ from app.api.v2_audit import router as v2_audit_router
 from app.api.v2_auth import public_router as v2_auth_public_router
 from app.api.v2_auth import router as v2_auth_router
 from app.api.v2_batches import router as v2_batches_router
+from app.api.v2_billing import public_router as v2_billing_public_router
+from app.api.v2_billing import router as v2_billing_router
 from app.api.v2_cancel import router as v2_cancel_router
 from app.api.v2_cases import router as v2_cases_router
 from app.api.v2_evidence import router as v2_evidence_router
+from app.api.v2_evidence_packets import router as v2_evidence_packets_router
 from app.api.v2_models import router as v2_models_router
 from app.api.v2_policy import router as v2_policy_router
 from app.api.v2_refusion import router as v2_refusion_router
@@ -97,7 +100,7 @@ def body_limit(path: str) -> int:
     `max_json_bytes` (Q-2 L-1, L-2)."""
     if path.startswith("/api/analyze/"):
         return KIND_LIMITS.get(path.rsplit("/", 1)[-1], settings.max_video_bytes) + 1024 * 1024
-    if path.startswith("/api/v2/cases/") and path.endswith("/items"):
+    if (path.startswith("/api/v2/cases/") and path.endswith("/items")) or path == "/api/v2/billing/checkout":
         return max(KIND_LIMITS.values()) + 1024 * 1024  # the declared kind is a form field; intake enforces its own limit
     if path == "/api/v2/batches":
         return settings.batch_max_bytes + 16 * 1024 * 1024
@@ -115,7 +118,7 @@ def upload_limiter(scope):
         declared = path.rsplit("/", 1)[-1]
     elif path == "/api/v2/batches":
         field_caps = {"archive": settings.batch_max_bytes}
-    elif not (path.startswith("/api/v2/cases/") and path.endswith("/items")):
+    elif not ((path.startswith("/api/v2/cases/") and path.endswith("/items")) or path == "/api/v2/billing/checkout"):
         return None
     content_type = next((v for k, v in scope["headers"] if k == b"content-type"), b"")
     return upload_limits.for_body(content_type, KIND_LIMITS, declared_kind=declared, field_caps=field_caps, detect=detect_kind)
@@ -232,10 +235,13 @@ app.include_router(v2_annotations_router)
 app.include_router(v2_review_router)
 app.include_router(v2_rerun_router)
 app.include_router(v2_evidence_router)
+app.include_router(v2_evidence_packets_router)
 app.include_router(v2_models_router)
 app.include_router(v2_refusion_router)
 app.include_router(v2_reports_router)
 app.include_router(v2_batches_router)
+app.include_router(v2_billing_public_router)
+app.include_router(v2_billing_router)
 app.include_router(v2_webhooks_router)
 app.include_router(v2_policy_router)
 install_problem_handlers(app)

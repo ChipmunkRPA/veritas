@@ -16,7 +16,9 @@
 <p class="examiner-justification"><span class="muted">{{ v.examiner.label }}:</span> {{ v.examiner.justification }}</p>
 {% if v.examiner.also %}<p class="examiner-justification"><span class="muted">{{ v.examiner.also.label }}:</span> {{ v.examiner.also.text }}</p>{% endif %}
 {% endif %}
-<p class="estimate">{{ v.summary.estimate }}</p>
+<p class="estimate">{% set fallback_estimate = v.summary.estimate %}{% include 'sections/customer_estimate.html.j2' %}</p>
+{% if v.get('customer_assessment', {}).get('scope_note') %}<p class="customer-scope"><strong>{{ v.customer_assessment.scope_label }}.</strong> {{ v.customer_assessment.scope_note }}</p>{% endif %}
+{% if v.get('customer_interval_note') %}<p class="caption">{{ v.customer_interval_note }}</p>{% endif %}
 {% if v.scale %}
 <div class="scale-figure">
 {{ v.scale }}
@@ -57,6 +59,7 @@
 </div>
 <div class="col">
 <h3 class="eyebrow">What this does not mean</h3>
+{% if v.get('customer_uncertainty') %}<p>{{ v.customer_uncertainty }}</p>{% endif %}
 {% for p in v.summary.does_not_mean %}
 <p>{{ p }}</p>
 {% endfor %}
@@ -67,6 +70,7 @@
 <p>{{ v.summary.testing }}</p>
 <h3 class="eyebrow">Next step</h3>
 <p>{{ v.summary.next_step }}</p>
+{% if v.get('expert_note') %}<p class="expert-contact">{{ v.expert_note }}</p>{% endif %}
 <h3 class="eyebrow" id="scope">Scope of examination</h3>
 <table class="grid">
 <thead><tr><th class="w-question">Question addressed</th><th>What ran</th></tr></thead>

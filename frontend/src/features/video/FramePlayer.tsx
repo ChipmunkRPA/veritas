@@ -22,6 +22,7 @@ export interface FramePlayerApi {
   ready: boolean
   error: string | null
   approximate: boolean
+  clockMapped: boolean
   rate: number
   seekFrame: (k: number) => void
   step: (delta: number) => void
@@ -32,7 +33,15 @@ export interface FramePlayerApi {
 /** `<video>` + `requestVideoFrameCallback` (ARCHITECTURE §7.5): the presented frame's `mediaTime` maps to a frame index through the
  *  pts table. A frame step seeks a quarter frame past the frame's start and the callback (or `seeked`) confirms the landing frame.
  *  Without the callback the index follows `currentTime` and is marked approximate. */
-export function useFramePlayer(index: PtsIndex | null, initialFrame: number | null, source: string | null): FramePlayerApi {
+export function playbackSeekTime(index: PtsIndex, frame: number, timelineOrigin: number | null): number | null {
+  if (timelineOrigin == null || !Number.isFinite(timelineOrigin)) return null
+  const value = seekTime(index, frame) - timelineOrigin
+  return Number.isFinite(value) && value >= 0 ? value : null
+}
+
+export function useFramePlayer(index: PtsIndex | null, initialFrame: number | null, source: string | null,
+  timelineOrigin: number | null = null): FramePlayerApi {
+  const clockMapped = timelineOrigin != null && Number.isFinite(timelineOrigin)
   const [video, setVideo] = useState<HTMLVideoElement | null>(null)
   const [frame, setFrame] = useState(initialFrame ?? 0)
   const frameRef = useRef(frame)
@@ -51,7 +60,7 @@ export function useFramePlayer(index: PtsIndex | null, initialFrame: number | nu
     setPlaying(false)
     setSeeking(false)
     setError(null)
-    if (!video || !index || !source) return
+    if (!video || !index || !source || !clockMapped || timelineOrigin == null) return
     // A refreshed signed URL reloads the same video element. Preserve the live
     // frame, including navigation performed while media access was unavailable.
     initial.current ??= frameRef.current
@@ -62,11 +71,11 @@ export function useFramePlayer(index: PtsIndex | null, initialFrame: number | nu
     setApproximate(!callback)
     const onPresented: FrameCallback = (_now, meta) => {
       if (!live || !callback) return
-      if (metadataReady && video.readyState >= 1) setFrame(frameAt(index, meta.mediaTime))
+      if (metadataReady && video.readyState >= 1) setFrame(frameAt(index, meta.mediaTime + timelineOrigin))
       handle = video.requestVideoFrameCallback(onPresented)
     }
     if (callback) handle = video.requestVideoFrameCallback(onPresented)
-    const sync = () => { if (metadataReady && video.readyState >= 1) setFrame(frameAt(index, video.currentTime)) }
+    const sync = () => { if (metadataReady && video.readyState >= 1) setFrame(frameAt(index, video.currentTime + timelineOrigin)) }
     const onSeeking = () => setSeeking(true)
     const onSeeked = () => { setSeeking(false); sync() }
     const onTime = () => { if (!callback) sync() }
@@ -77,7 +86,8 @@ export function useFramePlayer(index: PtsIndex | null, initialFrame: number | nu
       setReady(true)
       video.playbackRate = rateRef.current
       if (initial.current != null) {
-        video.currentTime = seekTime(index, initial.current)
+        const time = playbackSeekTime(index, initial.current, timelineOrigin)
+        if (time != null) video.currentTime = time
         initial.current = null
       }
     }
@@ -90,7 +100,7 @@ export function useFramePlayer(index: PtsIndex | null, initialFrame: number | nu
       if (callback) video.cancelVideoFrameCallback(handle)
       for (const [name, fn] of events) video.removeEventListener(name, fn)
     }
-  }, [video, index, source])
+  }, [video, index, source, timelineOrigin, clockMapped])
 
   const seekFrame = useCallback((k: number) => {
     if (!index) return
@@ -98,21 +108,22 @@ export function useFramePlayer(index: PtsIndex | null, initialFrame: number | nu
     setFrame(target)
     // Metadata navigation stays available while secure media links are pending.
     // Apply the latest requested frame when the video finally attaches and can seek.
-    if (video && video.readyState >= 1 && !error) video.currentTime = seekTime(index, target)
+    const time = playbackSeekTime(index, target, timelineOrigin)
+    if (video && video.readyState >= 1 && !error && time != null) video.currentTime = time
     else initial.current = target
-  }, [video, index, error])
+  }, [video, index, error, timelineOrigin])
   const step = useCallback((delta: number) => { if (index) seekFrame(stepFrame(index, frameRef.current, delta)) }, [index, seekFrame])
   const toggle = useCallback(() => {
-    if (!video || error) return
+    if (!video || error || !clockMapped) return
     if (video.paused) void video.play().catch(() => undefined)
     else video.pause()
-  }, [video, error])
+  }, [video, error, clockMapped])
   const setRate = useCallback((r: number) => {
     rateRef.current = r
     if (video) video.playbackRate = r
     setRateState(r)
   }, [video])
-  return { ref: setVideo, frame, playing, seeking, ready, error, approximate, rate, seekFrame, step, toggle, setRate }
+  return { ref: setVideo, frame, playing, seeking, ready, error, approximate, clockMapped, rate, seekFrame, step, toggle, setRate }
 }
 
 function Scrubber({ index, frame, onFrame }: { index: PtsIndex; frame: number; onFrame: (k: number) => void }) {
@@ -208,7 +219,7 @@ export default function FramePlayer({ player, index, frames, model, src, stillUr
   const nearest = nearestFrame(sampled, frame)
   const nearestStill = nearest == null ? null : model.stills.find((s) => s.frame === nearest) ?? null
   const paused = !player.playing && !player.seeking
-  const still = player.error ? nearestStill : paused ? stillAt : null
+  const still = player.error || !player.clockMapped ? nearestStill : paused ? stillAt : null
   const [loaded, setLoaded] = useState<string | null>(null)
   const stillSrc = still ? stillUrl(still) : null
   const detectorView = still != null && loaded === stillSrc
@@ -222,14 +233,14 @@ export default function FramePlayer({ player, index, frames, model, src, stillUr
     .filter((b): b is { track: TrackItem; at: NonNullable<ReturnType<typeof boxAt>> } => b.at != null)
 
   const gop = frames.key_frames.length > 1 ? Math.max(...frames.key_frames.slice(1).map((k, i) => k - frames.key_frames[i])) : frames.pict_types.length
-  const caption = player.error
+  const caption = !player.clockMapped ? 'Playback timing is not verified for this analysis. Inspect the recorded stills; a new analysis can capture the source clock.' : player.error
     ? player.error
     : player.approximate ? 'This browser has no frame callback: the frame index follows the playback clock and is approximate.'
       : index.vfr || gop > LONG_GOP_FRAMES ? 'Browser seeking can land ±1 frame from the analysed frame; key frames show the exact analysed image.' : null
   const t = index.times[frame] ?? 0
 
   const placed = scale > 0 ? boxes.map(({ at }) => ({ x: offset.x + at.box.x * scale, y: offset.y + at.box.y * scale, w: at.box.w * scale, h: at.box.h * scale })) : []
-  const badge = !src ? 'Preview unavailable' : detectorView && still ? `Detector view · analysed frame ${still.frame}` : player.playing ? 'Playing' : stillAt ? 'Loading the analysed frame…' : `Video · frame ${frame} was not sampled`
+  const badge = !src ? 'Preview unavailable' : detectorView && still ? `Detector view · analysed frame ${still.frame}` : !player.clockMapped ? 'Playback clock unavailable' : player.playing ? 'Playing' : stillAt ? 'Loading the analysed frame…' : `Video · frame ${frame} was not sampled`
   const corner = badgeCorner(placed, badgeWidth(badge), size)
   const badgeAt = badgeRect(corner, badgeWidth(badge), size)
   return (
@@ -238,12 +249,12 @@ export default function FramePlayer({ player, index, frames, model, src, stillUr
         data-testid="video-stage" data-frame={frame} data-view={!src ? 'unavailable' : detectorView ? 'still' : 'video'}
         className="viewer-stage stage relative h-[min(480px,42vh)] min-h-[200px] bg-stage overflow-hidden outline-none">
         <p id="video-stage-description" className="sr-only">Space plays, comma and full stop step frames, brackets jump between flagged segments.</p>
-        {src && <video ref={player.ref} src={src} preload="auto" playsInline className="absolute inset-0 w-full h-full object-contain" aria-label="Source video" />}
+        {src && player.clockMapped && <video ref={player.ref} src={src} preload="auto" playsInline className="absolute inset-0 w-full h-full object-contain" aria-label="Source video" />}
         {stillSrc && (
           <img key={stillSrc} src={stillSrc} alt={`Detector view: the analysed frame ${still?.frame} as the detectors scored it`} onLoad={() => setLoaded(stillSrc)}
             data-testid="detector-still" className={cx('absolute inset-0 w-full h-full object-contain bg-stage', !detectorView && 'invisible')} />
         )}
-        {src && scale > 0 && (
+        {src && scale > 0 && (player.clockMapped || detectorView) && (
           <svg aria-hidden width={size.width} height={size.height} className="absolute inset-0 pointer-events-none">
             {boxes.map(({ track, at }) => {
               const x = offset.x + at.box.x * scale
@@ -271,7 +282,7 @@ export default function FramePlayer({ player, index, frames, model, src, stillUr
       </div>
 
       <div role="toolbar" aria-label="Transport" className="mt-2 flex items-center gap-1 flex-wrap min-h-8">
-        <button type="button" className={transportButton} onClick={player.toggle} disabled={!src || !!player.error} aria-label={player.playing ? 'Pause (Space)' : 'Play (Space)'} title={player.playing ? 'Pause (Space)' : 'Play (Space)'}>
+        <button type="button" className={transportButton} onClick={player.toggle} disabled={!src || !!player.error || !player.clockMapped} aria-label={player.playing ? 'Pause (Space)' : 'Play (Space)'} title={player.playing ? 'Pause (Space)' : 'Play (Space)'}>
           {player.playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />}
         </button>
         <button type="button" className={transportButton} onClick={() => player.step(-1)} aria-label="Previous frame (,)" title="Previous frame (, · Shift for 10)"><StepBack size={16} strokeWidth={1.5} aria-hidden /></button>

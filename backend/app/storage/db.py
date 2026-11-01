@@ -153,6 +153,42 @@ class Analysis(Base):
         }
 
 
+class BillingOrderRow(Base):
+    """One fixed-price purchase; no analysis is queued until verified payment fulfillment."""
+    __tablename__ = "billing_orders"
+    __table_args__ = (Index("ux_billing_owner_request", "owner_id", "request_key", unique=True),)
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    owner_id: Mapped[str] = mapped_column(String(36), index=True)
+    request_key: Mapped[str] = mapped_column(String(64))
+    case_id: Mapped[str] = mapped_column(String(36))
+    media_id: Mapped[str] = mapped_column(String(36))
+    kind: Mapped[str] = mapped_column(String(16))
+    filename: Mapped[str] = mapped_column(String(255))
+    content_type: Mapped[str] = mapped_column(String(100))
+    sha256: Mapped[str] = mapped_column(String(64))
+    size_bytes: Mapped[int] = mapped_column(BigInteger)
+    profile: Mapped[str] = mapped_column(String(16))
+    amount_minor: Mapped[int] = mapped_column(Integer)
+    currency: Mapped[str] = mapped_column(String(3))
+    mode: Mapped[str] = mapped_column(String(8))
+    status: Mapped[str] = mapped_column(String(24), index=True)
+    stripe_session_id: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
+    checkout_url: Mapped[str | None] = mapped_column(Text, nullable=True)
+    payment_intent_id: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
+    analysis_id: Mapped[str | None] = mapped_column(String(36), unique=True, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    paid_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class BillingEventRow(Base):
+    """Processed Stripe event IDs, committed in the same transaction as fulfillment."""
+    __tablename__ = "billing_events"
+    id: Mapped[str] = mapped_column(String(255), primary_key=True)
+    order_id: Mapped[str] = mapped_column(String(36), index=True)
+    processed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class Artefact(Base):
     """Index row for one object in the content-addressed store (several rows may share a sha256)."""
     __tablename__ = "artefacts"
@@ -594,6 +630,8 @@ class PackageRow(Base):
     report_id: Mapped[str] = mapped_column(String(32))
     case_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     kind: Mapped[str] = mapped_column(String(8))  # draft | issue (D-27)
+    schema_id: Mapped[str] = mapped_column(String(64), default="veritas.evidence/2.0",
+                                         server_default="veritas.evidence/2.0")
     include_original: Mapped[bool] = mapped_column(Boolean, default=False, server_default=false())
     status: Mapped[str] = mapped_column(String(16))  # queued | running | done | failed
     error: Mapped[str | None] = mapped_column(Text, nullable=True)

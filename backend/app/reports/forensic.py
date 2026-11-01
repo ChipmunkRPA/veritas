@@ -445,7 +445,7 @@ def record_alone_text(decision: dict[str, Any], why: str | None = None) -> str:
     none = f"There is no statistical {number} to break down" + (f": {why}." if why else ".")
     if (view.record_of(decision) or {}).get("kind") == "decisive_ai":
         return f"{none} The provenance record decides the result."
-    return f"{none} The number is the value Veritas gives the provenance record."
+    return f"{none} The number is the value Chipmunk Verify gives the provenance record."
 
 
 def fallback_text(check: dict[str, Any], decision: dict[str, Any] | None = None, why: str | None = None,
@@ -461,7 +461,7 @@ def fallback_text(check: dict[str, Any], decision: dict[str, Any] | None = None,
         # estimate came from the uncalibrated fallback")
         came = fallback_score_word(decision or {}) or "score"
         return (f"{view.no_model(profile, 'is loaded')}, so the {came} came from the uncalibrated fallback with hand-set weights. That "
-                "path records no additive contributions, and Veritas does not draw a breakdown that does not add up.")
+                "path records no additive contributions, and Chipmunk Verify does not draw a breakdown that does not add up.")
     if reason == "capped":
         return "There is no estimate to break down: a check that this analysis depends on did not run."
     if reason == "no_estimate":
@@ -666,7 +666,7 @@ def narrative(decision: dict[str, Any]) -> list[str]:
     little = len(detectors) - up - down
     missing = sum(1 for r in rows if r["kind"] == "missing")
     adjustments = [view.row_label(r, decision) for r in rows if r["kind"] == "override"]
-    out = [f"{_spelled(len(detectors))} {'check' if len(detectors) == 1 else 'checks'} entered the fusion model. Veritas combines them "
+    out = [f"{_spelled(len(detectors))} {'check' if len(detectors) == 1 else 'checks'} entered the fusion model. Chipmunk Verify combines them "
            "by adding each check’s evidence on a log-odds scale, weighted by how reliable the check was in testing.",
            f"{_counted(up).capitalize()} pushed the estimate up, {_counted(down)} pushed it down, and {_counted(little)} had little effect.",
            *view.not_counted_lines(decision)]
@@ -813,7 +813,7 @@ def estimate_sentence(decision: dict[str, Any], basis: str, coverage: dict[str, 
     if basis == "documentary_declared":
         # N-19m (D3-05; R7-01): one sentence for the statistical number beside every record, with its unit ("The statistical
         # checks alone estimate 90." stood here) and with what the checks alone decided
-        return ("The file’s signed credentials declare AI generation, which Veritas treats as documentary evidence. "
+        return ("The file’s signed credentials declare AI generation, which Chipmunk Verify treats as documentary evidence. "
                 f"{view.statistical_sentence(decision, profile)}")
     if view.no_estimate_capped(decision):
         return view.NO_ESTIMATE_NOT_RUN
@@ -836,7 +836,7 @@ def lay_summary(snapshot: ReportSnapshot, decision: dict[str, Any], basis: str, 
     kind, result = snapshot.analysis.kind, snapshot.result
     coverage = snapshot.analysis.coverage.model_dump() if snapshot.analysis.coverage is not None else None
     received = snapshot.media.received_at
-    examined = f"Veritas examined {ARTICLE.get(kind, 'a file')}" + (f" taken in on {formatting.utc_date(received)}" if received else "") + "."
+    examined = f"Chipmunk Verify examined {ARTICLE.get(kind, 'a file')}" + (f" taken in on {formatting.utc_date(received)}" if received else "") + "."
     means, does_not_mean = view.guidance(kind, decision, basis, coverage, list(result.get("findings") or []),
                                          list(result.get("signals") or []), result.get("condition_profile"),
                                          caveats=result.get("caveats"))
@@ -1797,7 +1797,7 @@ def provenance(snapshot: ReportSnapshot, signals: dict[str, dict[str, Any]]) -> 
 # the headline follows "not fixed ranges of the estimate"
 HEADLINE_RULE = (
     "The headline follows two calibrated levels, and a headline of one answer must meet two further conditions.",
-    "At each level Veritas forms the set of answers (AI, not AI) that the estimate is compatible with for inputs of this context. "
+    "At each level Chipmunk Verify forms the set of answers (AI, not AI) that the estimate is compatible with for inputs of this context. "
     "The moderate level is 5 % and the strong level 1 % by default; a workspace policy can set both to the same value.",
     "A set of one answer at the moderate level gives “{likely_ai}” or “{likely_authentic}”. When the set at the strong level "
     "holds that one answer too and at least two checks scored, the headline is “{very_likely_ai}” or “{very_likely_authentic}”: "
@@ -2159,11 +2159,11 @@ def own_rule(citation: str) -> bool:
 
 
 def publication_line(cited: int, own: int, n: int) -> str | None:
-    """The row "Peer review and publication": the checks that cite a publication other than Veritas's rules, and the
-    others named as Veritas's rules."""
+    """The row "Peer review and publication": the checks that cite a publication other than Chipmunk Verify's rules, and the
+    others named as Chipmunk Verify's rules."""
     if not n or not (cited or own):
         return None
-    rules = f"{own} {'is' if own == 1 else 'are'} Veritas’s own {'rule' if own == 1 else 'rules'}, with no publication"
+    rules = f"{own} {'is' if own == 1 else 'are'} Chipmunk Verify’s own {'rule' if own == 1 else 'rules'}, with no publication"
     if not cited:
         return f"No check in this analysis cites a publication; {rules} (listed on the model cards)"
     line = f"{of_checks(cited, n, 'cites', 'cite')} a publication"
@@ -2185,7 +2185,7 @@ def reproducibility(snapshot: ReportSnapshot, engine_version: str, template_set:
     decision = result.get("decision") or {}
     created, finished = snapshot.analysis.created_at, snapshot.analysis.finished_at
     duration = f"{(finished - created).total_seconds():.1f} s" if created and finished else NOT_RECORDED
-    rows = [_row("Veritas", m.get("veritas_version"), NOT_RECORDED), _row("Pipeline", m.get("pipeline_version"), NOT_RECORDED),
+    rows = [_row("Chipmunk Verify", m.get("veritas_version"), NOT_RECORDED), _row("Pipeline", m.get("pipeline_version"), NOT_RECORDED),
             _row("Profile", (f"{m.get('profile')} (effective: {m['effective_profile']})" if m.get("effective_profile") and m.get("effective_profile") != m.get("profile") else m.get("profile")), NOT_RECORDED),
             _row("Licence posture", formatting.policy_words(m.get("licence_posture")), NOT_RECORDED), _row("Git commit", m.get("git_commit"), NOT_RECORDED),
             _row("Configuration SHA-256", m.get("config_sha256"), NOT_RECORDED),
@@ -2218,7 +2218,7 @@ def reproducibility(snapshot: ReportSnapshot, engine_version: str, template_set:
     # N-19c (design review DS-17, DS-18): the last row of the manifest table, in words a reader can act on. It means the re-run
     # with the pinned manifest of this analysis (it named the route of a new analysis under the current configuration, as an
     # API path), and it no longer starts a page of its own.
-    again = (f"run analysis {snapshot.analysis.id} again with the manifest pinned above (in Veritas, “Re-run…” on the analysis), on an "
+    again = (f"run analysis {snapshot.analysis.id} again with the manifest pinned above (in Chipmunk Verify, “Re-run…” on the analysis), on an "
              "instance that holds the weights listed under Model registry")
     number = "score" if (result.get("decision") or {}).get("fusion_mode") == "fallback" else "estimate"
     rerun = (f"To reproduce the result, {again}. On the same host and device the file should again be not assessable, for the same reason."
@@ -2241,7 +2241,7 @@ def manifest_attachment(snapshot: ReportSnapshot, engine_version: str, template_
 
 
 NOT_STATED = "not stated"
-TAKEN_IN = "taken in by Veritas"
+TAKEN_IN = "taken in by Chipmunk Verify"
 
 
 def custodian_hash_row(snapshot: ReportSnapshot) -> str | None:
@@ -2255,7 +2255,7 @@ def custodian_hash_row(snapshot: ReportSnapshot) -> str | None:
 
 def acquired_row(snapshot: ReportSnapshot) -> str | None:
     """The cover row "Acquired (as stated)" (N-19; browser QA P1-8): what the custodian stated of the acquisition, then the
-    time at which Veritas took the file in. The cover printed that system time as "Received", under the custody label."""
+    time at which Chipmunk Verify took the file in. The cover printed that system time as "Received", under the custody label."""
     media = snapshot.media
     if media.received_at is None:
         return None
@@ -2267,7 +2267,7 @@ def acquired_row(snapshot: ReportSnapshot) -> str | None:
 
 def intake_record(snapshot: ReportSnapshot) -> list[dict[str, Any]] | None:
     """The intake record of the exhibit, for the custody appendix (N-19; browser QA P1-8): method, custodian, source, date
-    acquired and notes as they were stated at intake, and the time Veritas took the file in. None without an intake record
+    acquired and notes as they were stated at intake, and the time Chipmunk Verify took the file in. None without an intake record
     (a file that was not taken in through a case intake). The stated hash and its comparison stand beside the hashes."""
     media = snapshot.media
     if media.received_at is None:
@@ -2460,7 +2460,7 @@ def signoff(snapshot: ReportSnapshot, decision: dict[str, Any], basis: str, stat
                  "name": s.principal_name, "at": formatting.utc(s.signed_at), "comment": s.comment,
                  "statement_title": (statement(s) or (None, None))[0], "statement": (statement(s) or (None, None))[1],
                  "auth": AUTH_WORD.get(str(auth.get(s.id)), "not recorded")} for s in ordered]
-    return {"machine": machine, "machine_meta": f"Veritas {snapshot.report.veritas_version} · analysis {snapshot.analysis.id[:8]} · "
+    return {"machine": machine, "machine_meta": f"Chipmunk Verify {snapshot.report.veritas_version} · analysis {snapshot.analysis.id[:8]} · "
                                                 f"{formatting.utc(snapshot.analysis.finished_at)}",
             "conclusion": conclusion, "signoffs": signoffs, "issued": status.issued, "status_line": status.line,
             # D-69: a conclusion without an examiner sign-off is a draft opinion, with no declaration and no signature lines
@@ -2627,10 +2627,10 @@ def forensic_view(snapshot: ReportSnapshot, images: dict[str, str], *, engine_ve
              _row("Review", status.line),
              _row("Classification", case.classification.capitalize() if case and case.classification else None, "Not classified")]
     return {
-        "title": f"Veritas {title.lower()} {report.display_id}",
+        "title": f"Chipmunk Verify {title.lower()} {report.display_id}",
         "subject": f"{centre} · {media.filename}",
-        "keywords": f"Veritas, {report.profile}, {report.display_id}, analysis {snapshot.analysis.id}",
-        "header_left": f"Veritas · {title}",
+        "keywords": f"Chipmunk Verify, {report.profile}, {report.display_id}, analysis {snapshot.analysis.id}",
+        "header_left": f"Chipmunk Verify · {title}",
         "header_centre": view.header_centre(centre, view.draft_mark(report.profile, status)),
         "issued": status.issued,
         "status_line": status.line,
@@ -2638,7 +2638,7 @@ def forensic_view(snapshot: ReportSnapshot, images: dict[str, str], *, engine_ve
         "cover_title": COVER_TITLE.get(kind, COVER_TITLE["image"]),
         "cover": cover,
         "cover_headline": view.headline(decision, basis),
-        "scope_statement": (f"This report records an automated examination by Veritas {report.veritas_version} and, where stated, an examiner’s "
+        "scope_statement": (f"This report records an automated examination by Chipmunk Verify {report.veritas_version} and, where stated, an examiner’s "
                             f"review. {COVER_NOT_ASSESSABLE if view.not_assessable(decision) else COVER_ESTIMATES} Section "
                             f"{number['limitations']} lists the limitations that applied to this exhibit."),
         "sections": sections,

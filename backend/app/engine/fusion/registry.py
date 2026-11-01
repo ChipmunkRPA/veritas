@@ -133,7 +133,7 @@ def needs_faces(registry: Any) -> Callable[[str], bool]:
 
 
 def compatibility(doc: Mapping[str, Any], kind: str, loaded: Mapping[str, str], *, face_detector: bool = True,
-                  needs_faces: Callable[[str], bool] | None = None) -> str | None:
+                  needs_faces: Callable[[str], bool] | None = None, permitted_missing: Mapping[str, str] | None = None) -> str | None:
     """None when the artefact may be used; otherwise the first reason it may not. `face_detector`: whether a face-detection
     detector is available; without one, an artefact holding a detector that needs faces (`needs_faces`) or a gate literal on a
     face term is refused (D-49)."""
@@ -147,6 +147,9 @@ def compatibility(doc: Mapping[str, Any], kind: str, loaded: Mapping[str, str], 
         detector_id = det.get("id")
         expected = det.get("weights_sha12") or str(det.get("score_key") or "").partition("@")[2]
         if detector_id not in loaded:
+            if ((permitted_missing or {}).get(detector_id) == expected
+                    and f"miss:{detector_id}" in (doc.get("coef") or {})):
+                continue  # Use the fitted missing-input feature; never substitute a new detector's score.
             return f"detector {detector_id} is not enabled (disabled, denied by the licence policy or not in this profile)"
         if loaded[detector_id] == NOT_INSTALLED:
             return f"detector {detector_id} has no installed weights"
@@ -185,6 +188,7 @@ class Selection:
     # checks of this analysis, another version than the configured one, a re-run of a fallback analysis): such a result
     # does not say that no fusion model is loaded
     installed: bool = False
+    intentionally_missing: tuple[str, ...] = ()
 
     @property
     def reviewed_by(self) -> str | None:
@@ -199,7 +203,7 @@ class Selection:
 
     def as_json(self) -> dict[str, Any]:
         return {"mode": self.mode, "sha256": self.sha256, "file": self.path.name if self.path else None,
-                "version": self.version, "reason": self.reason,
+                "version": self.version, "reason": self.reason, "intentionally_missing": list(self.intentionally_missing),
                 "rejected": [{"file": name, "reason": why} for name, why in self.rejected]}
 
 
@@ -398,7 +402,8 @@ def release_candidates(kind: str, listed: list[tuple[str, Path]]) -> tuple[list[
 
 
 def select_fuser(kind: str, loaded: Mapping[str, str], *, fusion_dir: Path | None = None, pin: str | None = None,
-                 face_detector: bool = True, needs_faces: Callable[[str], bool] | None = None) -> Selection:
+                 face_detector: bool = True, needs_faces: Callable[[str], bool] | None = None,
+                 permitted_missing: Mapping[str, str] | None = None) -> Selection:
     """The release artefact for this kind when it is compatible, else the fallback with the reason (`compatibility`). With `pin`
     (a re-run, re-fusion or reproduction), the installed artefact with that sha256, whatever its version."""
     rejected: list[tuple[str, str]] = []
@@ -416,7 +421,8 @@ def select_fuser(kind: str, loaded: Mapping[str, str], *, fusion_dir: Path | Non
             continue
         if pin is not None and entry.sha256 != pin:
             continue
-        why = compatibility(entry.doc, kind, loaded, face_detector=face_detector, needs_faces=needs_faces)
+        why = compatibility(entry.doc, kind, loaded, face_detector=face_detector, needs_faces=needs_faces,
+                            permitted_missing=permitted_missing)
         if why is None:
             try:
                 fuser = _fuser(path, entry)
@@ -425,6 +431,7 @@ def select_fuser(kind: str, loaded: Mapping[str, str], *, fusion_dir: Path | Non
             else:
                 return Selection(kind=kind, mode="artefact", fuser=fuser, sha256=entry.sha256, path=path, version=version,
                                  reason=f"{path.name} matches the enabled detectors", rejected=tuple(rejected),
+                                 intentionally_missing=tuple(d for d in fuser.detectors if d not in loaded and d in (permitted_missing or {})),
                                  review=read_review(path, entry.sha256, fusion_dir)[0])
         rejected.append((path.name, why))
         if pin is not None:
@@ -441,7 +448,14 @@ def select_fuser(kind: str, loaded: Mapping[str, str], *, fusion_dir: Path | Non
 
 def select_for_registry(registry: Any, kind: str, profile: Profile | str, *, pin: str | None = None) -> Selection:
     """A fresh run's selection: the detectors and face detectors enabled for this kind and profile."""
-    return select_fuser(kind, loaded_detector_hashes(registry, kind, profile), pin=pin,
+    permitted_missing = {}
+    if kind == "video" and settings.audio_detector_mode == "candidate" and pin is None:
+        from app.bench.score import weights_sha12
+
+        old = registry.manifest.detector("aud.gustking_xlsr")
+        if old is not None and registry.decision(old.id).reasons == ("retained for audio rollback; local candidate is selected",):
+            permitted_missing[old.id] = weights_sha12(registry.manifest, old.id)
+    return select_fuser(kind, loaded_detector_hashes(registry, kind, profile), pin=pin, permitted_missing=permitted_missing,
                         face_detector=face_detector_enabled(registry, kind, profile), needs_faces=needs_faces(registry))
 
 
@@ -454,7 +468,20 @@ def review_state(selection: Selection) -> str | None:
 
 def fusion_status(registry: Any, profile: Profile | str) -> dict[str, str]:
     """`fusion: artefact | fallback` per analysis kind with a v2 pipeline, for `/api/ready` (§5.2)."""
-    return {kind: select_for_registry(registry, kind, profile).mode for kind in STATUS_KINDS}
+    status = {kind: select_for_registry(registry, kind, profile).mode for kind in STATUS_KINDS}
+    if settings.audio_detector_mode == "candidate":
+        from app.detectors.audio import calibration
+        from app.engine.fetchers import installed
+
+        try:
+            calibration.load()
+            detector = registry.manifest.detector("aud.pella_v2")
+            ready = registry.decision(detector.id).enabled and all(
+                installed(registry.manifest.model(mid)) for mid in registry.required_models(detector))
+            status["audio"] = "artefact" if ready else "fallback"
+        except (OSError, ValueError):
+            status["audio"] = "fallback"
+    return status
 
 
 def release_artefact(kind: str) -> dict[str, Any] | None:

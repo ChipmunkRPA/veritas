@@ -35,7 +35,8 @@ def text_spec(det_id: str, name: str, unit: InputUnit, produces: tuple[str, ...]
 def document_input(ctx: RunContext) -> tuple[Document, list[Sentence]]:
     """The decode stage output: text, paragraph offsets, metadata and the v0.3 sentence segmentation."""
     d = ctx.outputs.document or {}
-    doc = Document(d.get("text", ""), [(int(a), int(b)) for a, b in d.get("paragraphs", [])], dict(d.get("meta") or {}))
+    doc = Document(d.get("text", ""), [(int(a), int(b)) for a, b in d.get("paragraphs", [])], dict(d.get("meta") or {}),
+                   list(d.get("source_map") or []))
     return doc, [Sentence(**s) for s in d.get("sentences", [])]
 
 

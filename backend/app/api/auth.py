@@ -90,7 +90,7 @@ def row_principal(row: PrincipalRow, auth: str, **kw: str) -> Principal:
 def single_user_enabled() -> bool:
     """Loopback requests act as local-examiner (D-09), by default when no API key is set. Never in prod, and never behind a proxy
     the API is told to trust, where the socket address says nothing about the client (Q-2 F7)."""
-    if settings.environment == "prod" or settings.trust_proxy:
+    if settings.environment == "prod" or settings.trust_proxy or settings.billing_mode != "disabled":
         return False
     return settings.single_user if settings.single_user is not None else not settings.api_key
 
@@ -251,6 +251,8 @@ def principal_for_subject(sub: str) -> Principal | None:
     """The principal a resource token was issued to, when it can still act."""
     if sub == BOOTSTRAP_ID:
         return bootstrap_principal("token") if settings.api_key else None
+    if sub == LOCAL_ID and settings.billing_mode != "disabled":
+        return None  # earlier anonymous download tokens must not reopen paid customers' cases
     if sub == LOCAL_ID:
         return local_principal("token") if single_user_enabled() else None
     with get_session() as db:

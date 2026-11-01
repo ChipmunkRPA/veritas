@@ -5,6 +5,7 @@ import type { EventsState } from '../../lib/api/sse'
 import { fmtElapsed, fmtSeconds } from '../../lib/format'
 import { cx } from '../../lib/cx'
 import { notRunOnServer, ofTheServer, ON_THIS_SERVER } from './answer'
+import { anonymizeModelNames } from './checkNames'
 
 /** Stage ids of the image, document, video and audio DAGs (backend `app/engine/pipelines.py`). */
 const STAGE_LABEL: Record<string, string> = {
@@ -58,25 +59,25 @@ function StageRow({ s, now }: { s: Stage; now: number }) {
       <span className="text-text truncate">{STAGE_LABEL[s.stage] ?? s.stage}</span>
       <span className="text-text-muted">{g.word}</span>
       <span className="font-mono text-mono text-text-muted num max-[639px]:hidden">{secs != null && secs >= 0 ? fmtSeconds(secs, 1) : ''}</span>
-      {s.error && <span className={cx('col-start-2 col-span-3 font-mono text-caption break-words', s.status === 'failed' ? 'text-danger' : 'text-text-muted')}>{s.error}</span>}
+      {s.error && <span className={cx('col-start-2 col-span-3 font-mono text-caption break-words', s.status === 'failed' ? 'text-danger' : 'text-text-muted')}>{anonymizeModelNames(s.error)}</span>}
     </li>
   )
 }
 
 /** N-19k (D2-05): what a list of checks says of one whose name neither the result nor the registry holds; never its id. */
 export const UNNAMED_CHECK = 'a check without a recorded name'
-/** A check as the ledger names it (the API's `name` of the run), with its id and version for the tooltip. */
-export const checkName = (r: Pick<DetectorRun, 'name'>): string => r.name ?? UNNAMED_CHECK
+/** Display a neutral check label rather than the implementation name recorded in the run. */
+export const checkName = (_r: Pick<DetectorRun, 'name'>, index?: number): string => index == null ? 'Analysis check' : `Check ${index + 1}`
 
 /** One detector that finished: glyph, the check's name as the ledger has it (N-19k; it read the detector id: "img.dda"),
  *  status, then its duration or the reason it did not run (P9). */
-function CheckRow({ r }: { r: DetectorRun }) {
+function CheckRow({ r, index }: { r: DetectorRun; index: number }) {
   const g = RUN_GLYPH[r.status] ?? { glyph: '○', word: r.status.replace(/_/g, ' '), className: 'text-text-muted' }
-  const detail = r.status === 'ok' ? (r.duration_ms != null ? fmtSeconds(r.duration_ms / 1000, 1) : '') : (r.reason ?? '')
+  const detail = r.status === 'ok' ? (r.duration_ms != null ? fmtSeconds(r.duration_ms / 1000, 1) : '') : anonymizeModelNames(r.reason ?? '')
   return (
     <li className={ROW} data-status={r.status}>
       <span aria-hidden className={cx('font-mono', g.className)}>{g.glyph}</span>
-      <span data-check className="text-small text-text truncate" title={`${r.detector_id} ${r.detector_version}`}>{checkName(r)}</span>
+      <span data-check className="text-small text-text truncate">{checkName(r, index)}</span>
       <span className="text-text-muted">{g.word}</span>
       <span className={cx('text-text-muted break-words max-[639px]:col-start-2 max-[639px]:col-span-2', r.status === 'ok' && 'font-mono text-mono num')}>{detail}</span>
     </li>
@@ -110,7 +111,7 @@ function Checks({ runs }: { runs: readonly DetectorRun[] }) {
     <>
       <h3 className="mt-6 eyebrow">Checks</h3>
       {runs.length > 0
-        ? <ol data-testid="coverage" className="mt-2 border-t border-border">{runs.map((r) => <CheckRow key={r.id} r={r} />)}</ol>
+        ? <ol data-testid="coverage" className="mt-2 border-t border-border">{runs.map((r, i) => <CheckRow key={r.id} r={r} index={i} />)}</ol>
         : <p data-testid="coverage" className="mt-2 text-small text-text-muted">No check has finished yet.</p>}
     </>
   )

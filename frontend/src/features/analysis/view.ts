@@ -1,5 +1,5 @@
-/** Plain / Expert result view (PRD UX-01; ARCHITECTURE §7.2; UX §4.1). Plain shows L1 (the answer) and L2 (key findings) and the
- *  examiner layer; Expert adds L3 (exhibit, how the estimate was reached, evidence, provenance) and L4 (methods, appendix). */
+/** Plain / Detailed self-service views. Both show the automated conclusion and source evidence.
+ *  The existing "expert" URL value opens the detailed record, not a paid expert service or manual review workflow. */
 
 export type ResultView = 'plain' | 'expert'
 

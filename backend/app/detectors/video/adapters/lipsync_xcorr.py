@@ -24,8 +24,15 @@ import numpy as np
 
 from app.detectors.video import lipsync, sampling, xcorr
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, H2, video_spec
-from app.detectors.video.adapters.lipsync import AUDIO_REASONS, AVInputs, segment_rows, speech_exhibit
+from app.detectors.video.adapters.lipsync import (
+    AUDIO_REASONS,
+    AVInputs,
+    segment_rows,
+    source_audio_origin,
+    speech_exhibit,
+)
 from app.detectors.video.adapters.swap import track_name
+from app.detectors.video.av_evidence import capture_correlation
 from app.engine.detector import Applicability, Detector, DetectorResult, InputUnit, RunContext, UnitScore
 
 NO_SPEECH = "no speech detected in the sound track"
@@ -95,7 +102,7 @@ class LandmarkXcorrDetector(Detector):
     spec = video_spec("vid.lipsync.landmark_xcorr",
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.4.0")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.1")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av
@@ -116,10 +123,13 @@ class LandmarkXcorrDetector(Detector):
         if inputs.audio.status == "silent" or inputs.audio.pcm is None:
             return self._informational("The sound track is silent", 0.0)
         pcm = inputs.audio.pcm
+        origin = source_audio_origin(inputs)
+        if isinstance(origin, str):
+            return DetectorResult.not_applicable(origin)
         speech = lipsync.vad(pcm)
         if not speech.speech.any():
             return self._informational("No speech detected in the sound track", 0.0)
-        grid = lipsync.tick_grid(inputs.table.times(), sampling.duration_s(inputs.table), len(pcm))
+        grid = lipsync.tick_grid(inputs.table.times(), sampling.duration_s(inputs.table), len(pcm), audio_start_s=origin)
         by_track = {t["track_id"]: {f["frame_index"]: f for f in inputs.frames.get(t["track_id"]) or []
                                     if f.get("landmarks") and len(f["landmarks"]) >= 5} for t in inputs.tracks}
         candidates = {tid: w for tid, frames in by_track.items()
@@ -148,7 +158,9 @@ class LandmarkXcorrDetector(Detector):
         for tid, ws in kept.items():
             apertures[tid] = {k: xcorr.aperture(patch) for k, patch in patches[tid].items()}
             results[tid] = lipsync.track_sync([xcorr.window_sync(w, apertures[tid], speech.level) for w in ws], xcorr.SETTINGS)
-        return self._result(ctx, inputs, grid, speech, scores, results, apertures, len(candidates))
+        result = self._result(ctx, inputs, grid, speech, scores, results, apertures, len(candidates))
+        result.details['av_input'] = capture_correlation(inputs, grid, speech, results, patches, apertures, by_track, scores)
+        return result
 
     def _result(self, ctx: RunContext, inputs: AVInputs, grid: lipsync.TickGrid, speech: lipsync.Speech, scores: dict[str, float],
                 results: dict[str, lipsync.TrackSync], apertures: dict[str, dict[int, float]], candidates: int) -> DetectorResult:

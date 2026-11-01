@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import type { AnalysisDetail, ModelCard } from '../../lib/api/queries'
 import { Dl, ErrorState, SkeletonRows } from '../../components/ui'
 import CalibrationDiagram from './CalibrationDiagram'
-import { withCi } from '../models/catalogue'
+import { withCi } from './validation'
 import { detectorValidation, envelopeStatement, fusedErrorRates, methodRows, reliabilityFactors, sliceRows, type ErrorRate, type Row } from './methods'
 
 const THRESHOLD_WORD: Record<string, string> = { 'conformal_0.05': '5 % conformal', 'conformal_0.01': '1 % conformal' }
@@ -58,24 +57,17 @@ export default function MethodsPanel({ analysis, cards, cardsPending = false, ca
 
       <CalibrationDiagram analysis={analysis} />
 
-      <h3 className="mt-8 m-0 eyebrow">Detectors</h3>
-      {cardsError && <ErrorState className="mt-2" onRetry={onRetryCards}>Model cards could not be loaded: {cardsError.message}</ErrorState>}
+      <h3 className="mt-8 m-0 eyebrow">Analysis checks</h3>
+      {cardsError && <ErrorState className="mt-2" onRetry={onRetryCards}>Evaluation records could not be loaded.</ErrorState>}
       {cardsPending ? <SkeletonRows className="mt-2" /> : detectors.length > 0 ? (
         <div className="mt-2 overflow-x-auto">
           <table role="table" data-testid="methods-detectors" className={TABLE}>
-            <thead role="rowgroup"><tr role="row" className="border-b border-border-strong">{['Detector', 'Measured for this slice', 'Admission'].map(th)}</tr></thead>
+            <thead role="rowgroup"><tr role="row" className="border-b border-border-strong">{['Check', 'Measured for this slice', 'Admission'].map(th)}</tr></thead>
             <tbody role="rowgroup">
-              {detectors.map((d) => (
+              {detectors.map((d, i) => (
                 <tr role="row" key={d.id} className="border-b border-border">
                   <td role="cell" className="py-1.5 pr-4 align-top">
-                    {/* N-19d: a check is named by its model card; its id is the reference under the name */}
-                    {d.card && d.card.name && d.card.name !== d.id
-                      ? <><Link to={`/models/${encodeURIComponent(d.id)}`} className="text-accent underline underline-offset-[3px]">{d.card.name}</Link>
-                          <span className="block font-mono text-caption text-text-muted break-all">{d.id} · {d.version}</span></>
-                      : <>{d.card
-                          ? <Link to={`/models/${encodeURIComponent(d.id)}`} className="font-mono text-mono text-accent underline underline-offset-[3px] break-all">{d.id}</Link>
-                          : <span className="font-mono text-mono text-text break-all">{d.id}</span>}
-                          <span className="block font-mono text-caption text-text-muted">{d.version}</span></>}
+                    Check {i + 1}
                   </td>
                   <td role="cell" data-th="measured for this slice" className={d.established ? 'py-1.5 pr-4 align-top text-text' : 'py-1.5 pr-4 align-top text-text-muted'}>{d.measured}</td>
                   <td role="cell" data-th="admission" className="py-1.5 pr-4 align-top text-text-muted">{d.admission}</td>
@@ -84,7 +76,7 @@ export default function MethodsPanel({ analysis, cards, cardsPending = false, ca
             </tbody>
           </table>
         </div>
-      ) : <p className="mt-2 m-0 text-small text-text-muted">The reproducibility manifest lists no detectors.</p>}
+      ) : <p className="mt-2 m-0 text-small text-text-muted">The analysis record lists no checks.</p>}
 
       <h3 className="mt-8 m-0 eyebrow">Reliability factors</h3>
       {cardsPending ? <SkeletonRows className="mt-2" /> : (

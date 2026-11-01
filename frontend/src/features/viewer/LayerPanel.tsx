@@ -3,6 +3,7 @@ import { SHOW_THRESHOLD_MAX } from '../../lib/colormap'
 import type { Size } from '../../lib/coords'
 import { cx } from '../../lib/cx'
 import { Button, HeatLegend, Select } from '../../components/ui'
+import { anonymizeModelNames } from '../analysis/checkNames'
 import type { ProbeValue } from './heatmap'
 import { available, FAMILIES, LENSES, lensDef, shareText, type AnnotationItem, type Catalogue, type HeatmapPayload, type LensKey, type MapLensKey, type RegionItem } from './lenses'
 
@@ -128,16 +129,16 @@ export function Inspector({ cat, source, activeMap, mapLens, opacity, onOpacity,
       <Section title="Lens" testId="lens-section">
         {activeMap && mapLens ? (
           <>
-            <p className="m-0 text-small text-text">{lensDef(mapLens).name} <span className="text-text-muted">· {activeMap.title}</span></p>
+            <p className="m-0 text-small text-text">{lensDef(mapLens).name} <span className="text-text-muted">· {anonymizeModelNames(activeMap.title)}</span></p>
             {cat.maps[mapLens].length > 1 && (
               <Select compact aria-label="Map" value={activeMap.id} onChange={(e) => onSelectMap(e.target.value)} className="mt-2 w-full">
-                {cat.maps[mapLens].map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
+                {cat.maps[mapLens].map((m) => <option key={m.id} value={m.id}>{anonymizeModelNames(m.title)}</option>)}
               </Select>
             )}
             <p className="mt-1 mb-0 text-caption text-text-muted">{lensDef(mapLens).meaning}</p>
             <Slider label="Opacity" testId="opacity" value={opacity} min={0} max={100} step={5} display={`${opacity} %`} onChange={onOpacity} />
             <Slider label="Show ≥" testId="threshold" value={thr} min={0} max={SHOW_THRESHOLD_MAX} step={0.05} display={thr.toFixed(2)} onChange={onThreshold} />
-            <HeatLegend className="mt-4" title={`${activeMap.title}${activeMap.calibrated ? '' : ' · uncalibrated'}`} attention={mapLens === 'attention'} showUnreliable={hasMask} />
+            <HeatLegend className="mt-4" title={`${anonymizeModelNames(activeMap.title)}${activeMap.calibrated ? '' : ' · uncalibrated'}`} attention={mapLens === 'attention'} showUnreliable={hasMask} />
             <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-small text-text">
               <label className="inline-flex items-center gap-2 min-h-8"><input type="checkbox" checked={mapOnly} onChange={(e) => onMapOnly(e.target.checked)} className="accent-text" /> Map only</label>
               {hasMask && <label className="inline-flex items-center gap-2 min-h-8"><input type="checkbox" checked={dim} onChange={(e) => onDim(e.target.checked)} className="accent-text" /> Dim unreliable</label>}

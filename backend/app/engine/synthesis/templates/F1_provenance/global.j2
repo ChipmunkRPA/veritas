@@ -8,7 +8,7 @@
 {{ cite(w.detector_ref) }}No Content Credentials found. Most files carry none; this is not evidence either way.
 {% elif w.variant == "decisive" %}
 {{ cite(w.s.id) }}The file's Content Credentials, validated against the trust list, declare AI generation: “{{ w.s.observed }}”.
-{{ cite(w.s.id, "decision") }}Veritas treats this documentary record as deciding the result; {{ w.statistical_clause }}.
+{{ cite(w.s.id, "decision") }}Chipmunk Verify treats this documentary record as deciding the result; {{ w.statistical_clause }}.
 {{ cite(w.s.id) }}Credentials record what the signing software declared; they do not describe the scene or who directed it.
 {{ cite(w.s.id) }}Revocation status was not checked (offline).
 {% elif w.variant == "trusted_capture" %}
@@ -25,7 +25,7 @@
 {% elif w.variant == "untrusted" %}
 {{ cite(w.s.id) }}Credentials are intact, but the signer is not on the trust list, so its identity is unverified.
 {% if w.s.legacy_trusted %}
-{{ cite(w.s.id) }}The signer is on the legacy CAI interim list, which Veritas reports separately and does not treat as the trust list.
+{{ cite(w.s.id) }}The signer is on the legacy CAI interim list, which Chipmunk Verify reports separately and does not treat as the trust list.
 {% endif %}
 {{ m.strength_sentence(w) }}
 {% else %}

@@ -214,7 +214,8 @@ class GenDTrackDetector(Detector):
                      "track_logit_max": top.top_mean, "track_logit_min": min(s[5].top_mean for s in scored),
                      "flagged_tracks": float(flagged_tracks), "small_face_tracks": float(sum(s[5].small_face for s in scored)),
                      "gradcam_maps": float(len(maps))},
-            exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL))
+            exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL),
+            details={"frame_pts_unit": "milliseconds", "source_time_base": inputs.table.time_base})
 
     def _gradcam(self, ctx: RunContext, model: Any, inputs: TrackInputs, scored: list) -> list[str]:
         chosen = []
@@ -246,5 +247,7 @@ class GenDTrackDetector(Detector):
                          "manipulation; the mask marks the crop the detector saw."),
                 value_range=(0.0, 1.0), mask=mask, source_signal_ids=[f"{self.spec.id}:{track['track_id']}"], media_ref="frame",
                 coordinate_space={"width": size[0], "height": size[1], "scale_to_original": round(width / size[0], 6)},
-                frame_pts=window.pts))
+                # The legacy exhibit/still API uses milliseconds. The immutable
+                # video evidence anchors separately preserve exact stream PTS.
+                frame_pts=round(window.time_s * 1000)))
         return ids

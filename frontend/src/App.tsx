@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { Boxes, FolderOpen, LayoutList, FilePlus2, Sun, Moon, Play, ScanLine } from 'lucide-react'
+import { FolderOpen, LayoutList, FilePlus2, Sun, Moon, Play } from 'lucide-react'
+import BrandMark from './components/BrandMark'
 import { api } from './lib/api'
+import { useBilling } from './lib/api/billing'
 import { useMe, useModelCards } from './lib/api/queries'
 import { availableChecks } from './features/models/availability'
 import { engineCapacityNotice, engineNotice, engineReady } from './features/engine/engineState'
@@ -45,6 +47,7 @@ export default function App() {
   const health = useQuery({ queryKey: ['health'], queryFn: api.health, refetchInterval: HEALTH_INTERVAL, retry: 0 })
   const catalogue = useModelCards()
   const me = useMe()
+  const billing = useBilling()
   const session = me.data?.auth === 'session' ? me.data : null
   const { theme, toggle } = useTheme()
   const demo = useDemo()
@@ -99,27 +102,29 @@ export default function App() {
         'max-[639px]:w-full max-[639px]:min-h-0 max-[639px]:max-h-none max-[639px]:items-center max-[639px]:border-r-0 max-[639px]:border-b max-[639px]:static',
       )}>
         <div className={cx('workspace-brand px-5 pt-7 pb-6 max-[959px]:px-0 max-[959px]:text-center max-[639px]:py-0 max-[639px]:px-4 max-[639px]:text-left', rail && 'px-0 text-center')}>
-          <NavLink to="/" className="display text-[25px] leading-7 font-medium text-text flex items-center gap-2.5 max-[959px]:justify-center max-[639px]:justify-start" aria-label="Veritas home">
-            <ScanLine size={24} strokeWidth={1.5} aria-hidden className={cx('text-accent max-[959px]:hidden max-[639px]:block', rail && 'hidden')} />
-            <span className={rail ? 'hidden max-[639px]:inline' : 'max-[959px]:hidden max-[639px]:inline'}>Veritas</span>
-            <span className={rail ? 'inline max-[639px]:hidden' : 'hidden max-[959px]:inline max-[639px]:hidden'} aria-hidden>V</span>
+          <NavLink to="/" className="text-text flex items-center gap-2.5 max-[959px]:justify-center max-[639px]:justify-start" aria-label="Chipmunk Verify home">
+            <BrandMark className="w-8 h-8 shrink-0" />
+            <span className={cx('leading-none', rail ? 'hidden max-[639px]:block' : 'max-[959px]:hidden max-[639px]:block')}>
+              <span className="block text-[19px] font-semibold tracking-[-0.045em]">chipmunk</span>
+              <span className="block mt-1 text-[10px] font-semibold tracking-[0.2em] uppercase">Verify</span>
+            </span>
           </NavLink>
-          <p className={cx('text-caption text-text-muted mt-0.5 max-[959px]:hidden', rail && 'hidden')}>Media authenticity lab</p>
+          <p className={cx('text-caption text-text-muted mt-3 max-[959px]:hidden', rail && 'hidden')}>Media authenticity lab</p>
         </div>
         <nav aria-label="Primary" className="workspace-shell-nav flex flex-col gap-1 mx-2 mt-1 max-[959px]:mx-1 max-[639px]:flex-row max-[639px]:mt-0">
           <NavItem rail={rail} to="/" end icon={<FolderOpen size={16} strokeWidth={1.5} />} label="Cases" />
           <NavItem rail={rail} to="/analyses" icon={<LayoutList size={16} strokeWidth={1.5} />} label="Analyses" />
           {starts && <NavItem rail={rail} to="/upload" icon={<FilePlus2 size={16} strokeWidth={1.5} />} label="New analysis" />}
-          <NavItem rail={rail} to="/models" icon={<Boxes size={16} strokeWidth={1.5} />} label="Models" />
         </nav>
         {/* N-19a ("Actions by role"): a viewer or a reviewer is not offered what starts work */}
-        {starts && <div className={cx('workspace-demo px-4 mt-5 max-[959px]:px-0 max-[959px]:flex max-[959px]:justify-center', rail && 'px-0 flex justify-center')}>
+        {starts && billing.data?.enabled === false && <div className={cx('workspace-demo px-4 mt-5 max-[959px]:px-0 max-[959px]:flex max-[959px]:justify-center', rail && 'px-0 flex justify-center')}>
           <Button variant="ghost" data-testid="demo-now" title={demo.active ? 'Demo running' : 'Demo now — a guided walkthrough of five samples'} aria-pressed={demo.active} onClick={demo.start}
             className={cx('w-full h-8 px-3 gap-2 justify-start max-[959px]:w-8 max-[959px]:px-0 max-[959px]:justify-center max-[959px]:border-0', rail && 'w-8 px-0 justify-center border-0')}>
             <Play size={14} strokeWidth={1.5} aria-hidden className="shrink-0" />
             <span className={rail ? 'sr-only' : 'max-[959px]:sr-only'}>{demo.active ? 'Demo running' : 'Demo now'}</span>
           </Button>
         </div>}
+        <a href="/licenses/audio-model-notices.txt" target="_blank" rel="noreferrer" className={cx('mx-4 mt-4 mb-3 text-caption text-text-muted underline underline-offset-2 max-[959px]:sr-only', rail && 'sr-only')}>Third-party notices</a>
         <div className={cx('workspace-engine mt-auto px-4 pb-5 pt-4 border-t border-border max-[959px]:px-0 max-[959px]:flex max-[959px]:flex-col max-[959px]:items-center max-[959px]:gap-3 max-[639px]:ml-auto max-[639px]:border-t-0 max-[639px]:p-0 max-[639px]:pr-3 max-[639px]:mt-0 max-[639px]:flex-row max-[639px]:items-center max-[639px]:gap-2', rail && 'px-0 flex flex-col items-center gap-3')}>
           <div className={rail ? 'hidden max-[639px]:block' : 'max-[959px]:hidden max-[639px]:block'} title={facts ? checksTitle : engineWord} data-testid="engine-block" data-facts={facts}>
             {/* ENGINE line carries the theme toggle, right-aligned to the text column (icon glyph flush with the 16 px inset). */}

@@ -8,14 +8,13 @@ import AuthGate from './features/auth/AuthGate'
 import SignInPage from './features/auth/SignInPage'
 import Dashboard from './pages/Dashboard'
 import Upload from './pages/Upload'
+import BillingReturn from './pages/BillingReturn'
 import DesignGallery from './pages/DesignGallery'
 import CasesDashboard from './features/cases/CasesDashboard'
 import CaseWorkspace from './features/cases/CaseWorkspace'
 import AnalysisWorkspace from './features/analysis/AnalysisWorkspace'
 import SectionRoute from './features/analysis/SectionRoute'
 import EvidenceViewer from './features/viewer/EvidenceViewer'
-import ModelCatalogue from './features/models/ModelCatalogue'
-import ModelCardPage from './features/models/ModelCardPage'
 import BatchPage from './features/batches/BatchPage'
 import { DemoProvider } from './demo/DemoProvider'
 import DemoOverlay from './demo/DemoOverlay'
@@ -37,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <Route path="cases/:caseId" element={<CaseWorkspace />} />
               <Route path="analyses" element={<Dashboard />} />
               <Route path="upload" element={<Upload />} />
+              <Route path="billing/return" element={<BillingReturn />} />
               {/* ARCHITECTURE §7.2: upload into a case, with the acquisition fields open (UX §5.1). */}
               <Route path="cases/:caseId/upload" element={<Upload />} />
               {/* Batch progress (ARCHITECTURE §7.2 `/batches/:id`, PRD API-01). */}
@@ -47,6 +47,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <Route path="analyses/:id" element={<AnalysisWorkspace />}>
                 <Route index element={<SectionRoute section="summary" />} />
                 <Route path="findings" element={<SectionRoute section="findings" />} />
+                <Route path="image-evidence" element={<SectionRoute section="image-evidence" />} />
+                <Route path="media-evidence" element={<SectionRoute section="media-evidence" />} />
                 <Route path="exhibit" element={<SectionRoute section="exhibit" />} />
                 <Route path="reached" element={<SectionRoute section="reached" />} />
                 <Route path="ledger" element={<SectionRoute section="ledger" />} />
@@ -54,11 +56,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <Route path="methods" element={<SectionRoute section="methods" />} />
                 <Route path="appendix" element={<SectionRoute section="appendix" />} />
                 <Route path="revision" element={<SectionRoute section="revision" />} />
-                <Route path="review" element={<SectionRoute section="review" />} />
+                <Route path="review" element={<Navigate to="../?view=plain" replace />} />
               </Route>
-              {/* Model catalogue and cards (ARCHITECTURE §7.2, VG-01). */}
-              <Route path="models" element={<ModelCatalogue />} />
-              <Route path="models/:detectorId" element={<ModelCardPage />} />
+              {/* Preserve old bookmarks without exposing the retired catalogue. */}
+              <Route path="models" element={<Navigate to="/" replace />} />
+              <Route path="models/:detectorId" element={<Navigate to="/" replace />} />
               {/* Deep link: /demo starts the guided walkthrough (the provider consumes and clears `?demo=1`). */}
               <Route path="demo" element={<Navigate to="/analyses?demo=1" replace />} />
               {/* L-7: an address that matches no page says so inside the workspace shell instead of rendering nothing. */}

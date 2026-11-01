@@ -22,8 +22,12 @@ SATISFIES: dict[str, frozenset[str]] = {
     "administrator": frozenset({"administrator"}),
 }
 PUBLIC: frozenset[tuple[str, str]] = frozenset({("GET", "/api/health"), ("GET", "/api/ready"), ("POST", "/api/v2/auth/login"),
-                                                ("POST", "/api/v2/auth/logout")})
+                                                ("POST", "/api/v2/auth/logout"), ("GET", "/api/v2/billing/config"),
+                                                ("POST", "/api/v2/billing/webhook")})
 ROUTES: dict[tuple[str, str], str] = {
+    ("POST", "/api/v2/billing/checkout"): "examiner",
+    ("POST", "/api/v2/billing/orders/{order_id}/checkout"): "examiner",
+    ("GET", "/api/v2/billing/orders/{order_id}"): "viewer",
     # v1 (/api): kept through v2.1 (API-03)
     ("POST", "/api/analyze/{kind}"): "examiner",
     ("POST", "/api/analyze-text"): "examiner",
@@ -49,6 +53,9 @@ ROUTES: dict[tuple[str, str], str] = {
     ("GET", "/api/v2/analyses/{aid}/findings"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/assessments"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/exhibits"): "viewer",
+    ("GET", "/api/v2/analyses/{aid}/evidence-packets"): "viewer",
+    ("GET", "/api/v2/analyses/{aid}/evidence-packets/{set_id}/images/{sha256}.png"): "viewer",
+    ("GET", "/api/v2/analyses/{aid}/evidence-packets/{set_id}/assets/{sha256}.{extension}"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/stills/{pts}.jpg"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/frames"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/progress"): "viewer",

@@ -58,6 +58,32 @@ class AVInputs:
     frames: dict[str, list[dict[str, Any]]]  # track_id → face_track exhibit frames
     audio: Any  # AudioTrack
     store: Any  # FrameStore (iter_many)
+    audio_mapping: dict[str, Any] | None = None
+
+
+def source_audio_origin(inputs: AVInputs) -> float | str:
+    """PCM tick zero on the source clock, or why it cannot be safely joined to video frames.
+
+    Concatenating decoder blocks across a timestamp jump must never turn it into a measured lip-sync step.
+    Such files remain eligible for independent voice checks; the AV lane currently requires continuous timestamps.
+    """
+    import hashlib
+
+    from app.detectors.audio.decode import source_ranges
+
+    mapping = inputs.audio_mapping
+    pcm = getattr(inputs.audio, "pcm", None)
+    if not mapping or pcm is None:
+        return "audio-visual timing unavailable: no verified source audio timeline"
+    if mapping.get("samples") != len(pcm) or mapping.get("pcm_sha256") != hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest():
+        return "audio-visual timing unavailable: decoded audio differs from its source timeline"
+    try:
+        ranges = source_ranges(mapping, 0, len(pcm))
+    except (ValueError, KeyError, TypeError):
+        return "audio-visual timing unavailable: invalid source audio timeline"
+    if len(ranges) != 1:
+        return "audio-visual timing unavailable: discontinuous audio timestamps are not yet supported"
+    return ranges[0]["source_start_pts"] / lipsync.SR
 
 
 def _ms(ticks: float) -> int:
@@ -130,7 +156,7 @@ class StableSyncNetDetector(Detector):
     spec = video_spec("vid.lipsync.stable_syncnet",
                       "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", model_ids=(MODEL,),
-                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.4.0")
+                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.5.0")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.MODEL, self.BATCH, "audio/visual window",
@@ -154,10 +180,13 @@ class StableSyncNetDetector(Detector):
         """(speech, tick grid, frames by track, windows by track) of the tracks seen for a full window of speech, or the
         reason there is none. No model and no decoding."""
         pcm = inputs.audio.pcm
+        origin = source_audio_origin(inputs)
+        if isinstance(origin, str):
+            return origin
         speech = lipsync.vad(pcm)
         if not speech.speech.any():
             return NO_SPEECH
-        grid = lipsync.tick_grid(inputs.table.times(), sampling.duration_s(inputs.table), len(pcm))
+        grid = lipsync.tick_grid(inputs.table.times(), sampling.duration_s(inputs.table), len(pcm), audio_start_s=origin)
         by_track = {t["track_id"]: {f["frame_index"]: f for f in inputs.frames.get(t["track_id"]) or []} for t in inputs.tracks}
         candidates = {tid: w for tid, frames in by_track.items() if (w := lipsync.track_windows(tid, frames, grid, speech))}
         return (speech, grid, by_track, candidates) if candidates else NO_VISIBLE

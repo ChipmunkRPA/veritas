@@ -16,6 +16,7 @@ import SyncOffsetPlot from './SyncOffsetPlot'
 import TimelineLanes from './TimelineLanes'
 import TrackGallery from './TrackGallery'
 import { buildVideoModel, uncountedNote, type StillItem, type VideoModel, type VideoSegment } from './model'
+import { useMultimediaEvidence } from '../evidence/multimediaPackets'
 
 const NO_ANNOTATIONS: readonly Annotation[] = []
 const KEY_FRAMES_PER_SEGMENT = 2
@@ -68,6 +69,9 @@ export default function VideoWorkspace() {
   const a = q.data
   const done = a?.status === 'done' && a.kind === 'video'
   const evidence = useVideoEvidence(a, done)
+  const sourceEvidence = useMultimediaEvidence(id, 'video', done)
+  const sourceClock = sourceEvidence.data?.schema === 'chipmunk.video-evidence/1' && sourceEvidence.data.status === 'ready'
+    ? sourceEvidence.data.source.timeline_origin_s ?? null : null
   const findings = useFindings(id, done)
   const tok = useQuery({ queryKey: qk.downloadToken(id), queryFn: () => api.downloadToken(id), enabled: done, staleTime: 5 * 60_000 })
   const token = tok.data ?? ''
@@ -89,16 +93,18 @@ export default function VideoWorkspace() {
     return <div className="p-12"><ErrorState onRetry={evidence.retry}>{evidence.error?.message ?? 'The frame table could not be read.'}</ErrorState></div>
   }
   return <Workspace analysis={a} index={evidence.index} frames={evidence.frames} model={evidence.model} findings={findings.data ?? []} token={token}
+    timelineOrigin={sourceClock}
     mediaFailed={!!tok.error} mediaPending={tok.isFetching} onMediaRetry={() => void tok.refetch()} />
 }
 
-function Workspace({ analysis, index, frames, model, findings, token, mediaFailed, mediaPending, onMediaRetry }: {
+function Workspace({ analysis, index, frames, model, findings, token, mediaFailed, mediaPending, onMediaRetry, timelineOrigin }: {
   analysis: AnalysisDetail
   index: PtsIndex
   frames: FrameTable
   model: VideoModel
   findings: readonly Finding[]
   token: string
+  timelineOrigin: number | null
   mediaFailed: boolean
   mediaPending: boolean
   onMediaRetry: () => void
@@ -120,7 +126,7 @@ function Workspace({ analysis, index, frames, model, findings, token, mediaFaile
   const initialT = params.get('t') != null ? Number(params.get('t')) : null
   const tokenReady = !hasApiKey || token !== ''
   const src = tokenReady ? api.sourceUrl(analysis.id, token) : null
-  const player = useFramePlayer(index, initialT != null && Number.isFinite(initialT) ? frameAt(index, initialT) : selected?.startFrame ?? null, src)
+  const player = useFramePlayer(index, initialT != null && Number.isFinite(initialT) ? frameAt(index, initialT) : selected?.startFrame ?? null, src, timelineOrigin)
   const time = index.times[player.frame] ?? 0
   const still = useMemo(() => tokenReady ? stillUrl(analysis.id, token) : () => null, [analysis.id, token, tokenReady])
 

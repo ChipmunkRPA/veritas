@@ -1,6 +1,6 @@
-# Veritas: local deepfake and AI-media detection with evidence reporting
+# Chipmunk Verify: local deepfake and AI-media detection with evidence reporting
 
-Veritas examines images, videos, recordings and documents on your own machine and reports what it found as evidence: a fused
+Chipmunk Verify examines images, videos, recordings and documents on your own machine and reports what it found as evidence: a fused
 probability with its uncertainty, every signal behind it (observed value, reference, direction), exhibits (heatmaps, localisation
 maps, face tracks, video and audio timeline lanes, sentence highlights), plain-language findings, and the limitations that applied.
 Examiners work in cases with a hash-chained custody log, analyst notes, conclusions, sign-off and peer review, and issue signed
@@ -25,31 +25,44 @@ All models run locally, and production defaults are offline. Verdicts are probab
 
 Architecture summary: [`docs/architecture.md`](docs/architecture.md); binding design and decisions: [`docs/v2/`](docs/v2/).
 
+## Local Stripe payment testing
+
+Optional Stripe-hosted Checkout charges **US$9.99 per automated analysis**. Payment verification creates one analysis job; repeated checkout requests and webhook deliveries do not create another charge or analysis. Billing requires a named account. Expert services are separately contracted through sales@chipmunkrpa.com.
+
+Follow [`docs/local-stripe-billing.md`](docs/local-stripe-billing.md) to connect a Stripe sandbox and forward webhooks locally. The sandbox has been verified through payment, completed analysis, and duplicate-event replay. Live charging is not enabled by this setup.
+
+The independent audio calibration pilot is specified in [`docs/audio-calibration-v2-protocol.md`](docs/audio-calibration-v2-protocol.md). Its candidate calibration files stay outside the serving configuration and cannot authorize a model replacement.
+
+The larger follow-up is specified in [`docs/audio-calibration-v3-protocol.md`](docs/audio-calibration-v3-protocol.md): 420 new original recordings, including 300 held out across three AI voice-generator families and two authentic collections. It evaluates clean speech, noise at 0/5/15 dB, and music at 5/15 dB. The candidate's fixed sensitivity check can withhold an unstable original conclusion; it does not change the underlying probability. `backend/scripts/calibrate_audio_v3.py` enforces separate fitting/calibration/test stages, pinned data and execution receipts, and an immutable calibration before test access. Run artifacts remain under the ignored `backend/data/independent-evaluation/audio-v3/` directory; the experiment cannot auto-publish a fusion calibration. Exact DFADD prompt mappings are unavailable, and reused voice/background groups limit the independence of the observations.
+
+The completed v3 audit verified 1,800 held-out test inputs. Requiring the calibration class check reduced wrong original calls from 89 to zero and false-AI calls from 18 to seven, while conclusion coverage fell from 93.0% to 69.9%. The extra stability check withheld eight correct conclusions without preventing another error (final coverage 69.5%). Strong noise/music left too many authentic inputs inconclusive; 26 admission gates remain unmet. Those strict research admission gates remain unmet. A separately authorized local rollout can now select the candidate with its own frozen calibration; see [local selection, limitations, and rollback](docs/local-audio-rollout.md). It remains outside the combined video percentage. Run `backend/.venv/bin/python backend/scripts/render_audio_calibration_v3.py` to regenerate the audited [local report](output/evaluation/audio-calibration-v3.html) and per-input CSV.
+
 ## Quick start (macOS / Linux, Python 3.12, Node 20+, ffmpeg)
 
-**Archive limitation:** this source copy omits the test suites and most development scripts, including the background
-launcher used by `make dev-api` and `make dev-web`. The commands and release records below describe the original complete
+**Archive limitation:** this source copy omits the test suites and most development scripts. The release records below describe the original complete
 checkout; they cannot all be reproduced from this archive. Model weights are provisioned separately; see [MODELS.md](MODELS.md).
 The supplied fine-tuned text model is not downloadable from the public model sources.
 
-Install the dependencies, then start the API and frontend in separate terminals:
+Install the dependencies once:
 
 ```bash
 cd backend
 uv venv --python 3.12
 uv pip install --python .venv/bin/python -e ".[dev,eval,postgres]" pip -c requirements/tested-versions.txt
-VERITAS_OFFLINE=true VERITAS_MODELS_DIR=../models .venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8160 --no-proxy-headers
+cd ../frontend && npm ci
 ```
 
-```bash
-cd frontend
-npm ci
-npm run dev -- --host 127.0.0.1 --port 5230 --strictPort
-```
-
-Open `http://127.0.0.1:5230/`; stop each server with Ctrl-C. The application can start without all model files, but
+From the project root, start the local servers with `make dev-api dev-web`; stop them with `make stop`. Open
+`http://127.0.0.1:5230/`. The launcher looks for model files under the project's `models` directory and keeps logs in
+`backend/data/jobs/`. The application can start without all model files, but
 analyses may be incomplete or not assessable. To install the public model weights, use the fetch and verification
 procedure in [MODELS.md](MODELS.md); that procedure does not recover the separately supplied fine-tuned model.
+
+On the original Mac, the local `backend/.env` sets a 7,600 MB model budget to allow Binoculars and the video face detector
+to run. This is above the automatic budget and has only been smoke-tested on short samples; if the computer experiences memory
+pressure, remove `VERITAS_MODEL_MEMORY_BUDGET_MB` from that file to restore the automatic setting. Some video and text
+checks may still be skipped depending on the input and available resources. Existing analyses retain their original results;
+run a new analysis to use the installed models. The `.env` file and model weights are local and are not committed.
 
 ExifTool (metadata rules) and Pango (WeasyPrint reports) are recommended: `brew install exiftool pango`. Docker, air-gapped
 installs, Postgres and GPU hosts: [`docs/runbook.md`](docs/runbook.md) (its "Build status" names the last commit whose images were built and what was run in them; the CUDA image has never been built).

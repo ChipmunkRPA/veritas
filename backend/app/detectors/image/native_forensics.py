@@ -14,8 +14,9 @@ baseline; the measurements below reuse its metrics and score mappings.
   shorter side below 512 px), Hann window, no resampling. Images below `MIN_SPECTRUM_PX` are not measured.
 - **Scores** stay the v0.3 hand-set logistic mappings (`forensics.ela_score`, `noise_score`, `spectrum_score`): uncalibrated,
   capped to [0.40, 0.75]. Their rates on vb reals are in `docs/v2/qa/i1_forensic_fpr.md`.
-- **Display maps** are block means over an integer factor so the long side is ≤ 4096 px; `scale_to_original` maps them to
-  native pixels. Only the display is reduced. At ≤ 1024 px with orientation 1, ELA and noise reproduce v0.3 exactly.
+- **Display maps** are area-resampled over the complete native image so the long side is ≤ 4096 px. Their coordinate
+  space is the full native extent, including incomplete edge blocks. Only the display is reduced. At ≤ 1024 px with
+  orientation 1, ELA and noise reproduce v0.3 exactly.
 """
 from __future__ import annotations
 
@@ -40,6 +41,7 @@ TILE = 512
 MAX_TILES = 3
 MIN_SPECTRUM_PX = 64
 ORIENTATION_TAG = 0x0112
+DISPLAY_MAPPING_VERSION = "full-extent-area/1"
 
 _METHODS = {2: lambda a: a[:, ::-1], 3: lambda a: a[::-1, ::-1], 4: lambda a: a[::-1], 5: lambda a: a.swapaxes(0, 1),
             6: lambda a: np.rot90(a, -1), 7: lambda a: a.swapaxes(0, 1)[::-1, ::-1], 8: lambda a: np.rot90(a, 1)}
@@ -92,9 +94,10 @@ def _display(values: np.ndarray, max_side: int = MAX_SIDE) -> tuple[np.ndarray, 
     height, width = values.shape
     factor = max(1, math.ceil(max(height, width) / max_side))
     if factor > 1:
-        hh, ww = (height // factor) * factor, (width // factor) * factor
-        values = values[:hh, :ww].reshape(hh // factor, factor, ww // factor, factor).mean(axis=(1, 3))
-    return values, {"width": int(values.shape[1]), "height": int(values.shape[0]), "scale_to_original": width / values.shape[1]}
+        # Keep the last row/column: trimming to a block multiple silently loses
+        # measured edge pixels and makes full-source overlays geometrically wrong.
+        values = cv2.resize(values, (math.ceil(width / factor), math.ceil(height / factor)), interpolation=cv2.INTER_AREA)
+    return values, {"width": width, "height": height, "scale_to_original": 1.0}
 
 
 def _face_ratio(values: np.ndarray, face_box: tuple[int, int, int, int] | None) -> float | None:

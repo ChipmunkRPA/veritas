@@ -2,15 +2,15 @@ import { Fragment, useCallback, useEffect, useMemo, useState, type KeyboardEvent
 import { ChevronRight } from 'lucide-react'
 import { hasApiKey } from '../../lib/api'
 import { useModelCards, type AnalysisDetail, type DetectorRun, type ExhibitMeta, type Finding, type SignalV2 } from '../../lib/api/queries'
-import { measuredRows } from '../models/catalogue'
-import { prob, shortHash } from '../../lib/format'
+import { measuredRows } from '../analysis/validation'
+import { prob } from '../../lib/format'
 import { cx } from '../../lib/cx'
-import { Button, CodeChip, DirectionMark, Disclosure, EmptyState, Eyebrow, HatchSwatch, Menu, StrengthMeter } from '../../components/ui'
+import { Button, DirectionMark, EmptyState, Eyebrow, HatchSwatch, Menu, StrengthMeter } from '../../components/ui'
 import { useDemoAction, type StepAction } from '../../demo/types'
 import { ofTheServer, ON_THIS_SERVER, type Decision } from '../analysis/answer'
 import { MENTION_DIRECTION, MENTION_WHY, NOT_COUNTED, isMention, mentionFields, mentionWords, modelUnused, rowNotCounted, signed } from '../analysis/contributions'
 import { NOT_IN_ESTIMATE, entered, littleOf, measuredFromNeutral } from '../analysis/vocabulary'
-import ModelCardSheet from './ModelCardSheet'
+import { anonymizeDetectorDescription, anonymizeModelNames } from '../analysis/checkNames'
 import {
   anchorOf, contributionBar, effect, lensFamily, notRunRows, signalDirection, signalStrength, standaloneP, statusWord, testingLines,
 } from './ledger'
@@ -40,7 +40,9 @@ function ContributionCell({ logit, uncounted = false }: { logit: number | null |
   )
 }
 
-function Figures({ s, exhibits, token }: { s: SignalV2; exhibits: readonly ExhibitMeta[]; token: string }) {
+function Figures({ s, exhibits, token, signals }: { s: SignalV2; exhibits: readonly ExhibitMeta[]; token: string; signals: readonly SignalV2[] }) {
+  const sourceEvidence = /^(prov\.|img\.meta\.|vid\.meta\.)/.test(s.detector_id)
+  const title = (value: string) => sourceEvidence ? value : anonymizeModelNames(value, undefined, signals)
   const mine = exhibits.filter((x) => ((s.exhibit_ids ?? []).includes(x.id) || (x.source_signal_ids ?? []).includes(s.id))
     && ((x.binaries ?? []).includes('preview') || (x.kind === 'image' && (x.binaries ?? []).includes('payload'))))
   if (mine.length === 0) return null
@@ -52,10 +54,10 @@ function Figures({ s, exhibits, token }: { s: SignalV2; exhibits: readonly Exhib
         return (
           <figure key={x.id} className="m-0 max-w-[240px]">
             <span className="inline-block align-top h-[120px] max-w-full rounded-md border border-border bg-surface overflow-hidden">
-              {ready && <img src={`/api/v2/exhibits/${x.id}/${part}${token ? `?token=${encodeURIComponent(token)}` : ''}`} alt={x.title} loading="lazy"
+              {ready && <img src={`/api/v2/exhibits/${x.id}/${part}${token ? `?token=${encodeURIComponent(token)}` : ''}`} alt={title(x.title)} loading="lazy"
                 className={cx('block h-full w-auto', x.kind === 'heatmap' && '[image-rendering:pixelated]')} />}
             </span>
-            <figcaption className="mt-1 text-caption text-text-muted">{x.display_id ? `${x.display_id} — ` : ''}{x.title}</figcaption>
+            <figcaption className="mt-1 text-caption text-text-muted">{x.display_id ? `${x.display_id} — ` : ''}{title(x.title)}</figcaption>
           </figure>
         )
       })}
@@ -63,14 +65,13 @@ function Figures({ s, exhibits, token }: { s: SignalV2; exhibits: readonly Exhib
   )
 }
 
-function Expanded({ s, analysis, exhibits, token, totalWeight, largest, onCard }: {
+function Expanded({ s, analysis, exhibits, token, totalWeight, largest, signals }: {
   s: SignalV2; analysis: AnalysisDetail; exhibits: readonly ExhibitMeta[]; token: string; totalWeight: number; largest: number | null
-  onCard: (id: string, trigger: HTMLElement) => void
+  signals: readonly SignalV2[]
 }) {
   const { p, calibrated } = { p: standaloneP(s), calibrated: s.calibrated_probability != null }
   // the cards the workspace has loaded (no request of its own): the count of benchmark results for the "In testing" line
   const card = useModelCards(false).data?.find((c) => c.id === s.detector_id)
-  const ref = (analysis.manifest?.detectors ?? []).find((x) => x.id === s.detector_id)
   const artefact = analysis.decision?.fusion_mode === 'artefact'
   const calibratedBy = artefact ? 'calibrated by the fusion model' : 'calibrated'
   const weight = s.effective_weight != null ? `weight ${s.effective_weight.toFixed(2)} of ${totalWeight.toFixed(2)}` : null
@@ -81,48 +82,37 @@ function Expanded({ s, analysis, exhibits, token, totalWeight, largest, onCard }
   const reliability = s.reliability?.factor != null && s.reliability.factor < 1
     ? `${s.reliability.factor.toFixed(2)} · ${(s.reliability.reasons ?? []).join('; ') || 'reduced by the reliability rules'}`
     : 'full weight: no reliability rule reduced it'
-  const raw = { metrics: s.metrics, details: s.details, reliability_inputs: s.reliability?.inputs, model_revisions: s.model_revisions, calibration_ref: s.calibration_ref, raw_score: s.raw_score, raw_kind: s.raw_kind }
+  const label = `Analysis check${s.display_id ? ` ${s.display_id}` : ''}`
+  const sourceEvidence = /^(prov\.|img\.meta\.|vid\.meta\.)/.test(s.detector_id)
+  const safe = (value: string) => sourceEvidence ? value : anonymizeModelNames(value, undefined, signals)
   const rows: [string, ReactNode][] = [
     // N-19p (browser QA Q6-01): a mention in the finding's words and its field, as the row says (it read the check's label,
     // "IPTC DigitalSourceType = trainedAlgorithmicMedia")
     ['Observed', <span className="font-mono text-mono break-words">{isMention(s)
       ? `${mentionWords(s.observed)}${mentionFields(s.details) ? ` (in ${mentionFields(s.details)})` : ''}` : s.observed || '—'}</span>],
-    ['Reference', s.reference || 'No reference distribution on record.'],
+    ['Reference', sourceEvidence ? (s.reference || 'No reference distribution on record.') : anonymizeDetectorDescription(s.reference || 'No reference distribution on record.', undefined, signals)],
     // N-19d: "calibrated" stood beside a model card that says "Calibration: none": under a fusion model it is that model which
     // calibrates the score, not the check
-    ['P(AI)', isMention(s) ? 'none: a mention sets no number in this result' : p == null ? 'not established' : calibrated ? `${prob(p)} · ${calibratedBy}${s.calibration_ref ? ` (${s.calibration_ref})` : ''}` : `${prob(p)} · raw detector score, not a calibrated probability`],
+    ['P(AI)', isMention(s) ? 'none: a mention sets no number in this result' : p == null ? 'not established' : calibrated ? `${prob(p)} · ${calibratedBy}` : `${prob(p)} · raw detector score, not a calibrated probability`],
     ['Contribution', contribution],
-    ['Reliability', reliability],
-    ['In testing', <>{testingLines(s, analysis.calibration ?? [], analysis.kind, card ? measuredRows(card).length : 0).map((l) => <span key={l} className="block">{l}</span>)}</>],
-    ['Known false alarms', (s.fp_modes ?? []).length > 0 ? (s.fp_modes ?? []).join(' · ') : 'None recorded on the signal; see the model card.'],
+    ['Reliability', safe(reliability)],
+    ['In testing', <>{testingLines(s, analysis.calibration ?? [], analysis.kind, card ? measuredRows(card).length : 0).map((l) => <span key={l} className="block">{safe(l)}</span>)}</>],
+    ['Known false alarms', (s.fp_modes ?? []).length > 0 ? safe((s.fp_modes ?? []).join(' · ')) : 'None recorded for this check.'],
   ]
   if (s.provenance_override) rows.push(['Provenance override', `${s.provenance_override.replace(/_/g, ' ')} (provenance precedence, applied before fusion)`])
   return (
     <div className="px-6 pt-4 pb-5 pl-14 max-[639px]:pl-6">
-      <p className="m-0 text-body font-medium text-text">{s.name} <span className="ml-2 eyebrow">{lensFamily(s, exhibits)}</span></p>
+      <p className="m-0 text-body font-medium text-text">{label} <span className="ml-2 eyebrow">{lensFamily(s, exhibits)}</span></p>
       {(isMention(s) || s.reasoning) && (<>
         <Eyebrow as="h4" className="mt-3">Why this matters</Eyebrow>
-        <p className="mt-1 m-0 display text-reader text-text max-w-(--container-reader)">{isMention(s) ? MENTION_WHY : s.reasoning}</p>
+        <p className="mt-1 m-0 display text-reader text-text max-w-(--container-reader)">{isMention(s) ? MENTION_WHY : safe(s.reasoning ?? '')}</p>
       </>)}
       <dl className="mt-4 m-0 grid grid-cols-[136px_minmax(0,1fr)] gap-x-4 gap-y-1.5 text-small max-w-[80ch] max-[639px]:grid-cols-1">
         {rows.map(([k, v]) => (
           <div key={k} className="contents"><dt className="eyebrow pt-[3px]">{k}</dt><dd className="m-0 text-text min-w-0">{v}</dd></div>
         ))}
-        <div className="contents">
-          <dt className="eyebrow pt-[3px]">Model</dt>
-          <dd className="m-0 text-text min-w-0 flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-mono text-mono">{s.detector_id} {s.detector_version}</span>
-            {ref?.weights_sha256 && <CodeChip copy={ref.weights_sha256} title="Copy weights sha256">{shortHash(ref.weights_sha256)}</CodeChip>}
-            {!ref?.weights_sha256 && ref?.revision && <span className="font-mono text-mono text-text-muted">rev {shortHash(ref.revision)}</span>}
-            {ref?.licence && <span className="text-text-muted">· {ref.licence}</span>}
-            <Button variant="text" data-testid="model-card-open" onClick={(e) => onCard(s.detector_id, e.currentTarget)}>Model card ▸</Button>
-          </dd>
-        </div>
       </dl>
-      <div className="mt-4"><Figures s={s} exhibits={exhibits} token={token} /></div>
-      <Disclosure className="mt-3" label="Raw details">
-        <pre className="m-0 max-h-60 overflow-auto bg-surface border border-border rounded-sm p-3 font-mono text-caption leading-[18px] text-text">{JSON.stringify(raw, null, 1)}</pre>
-      </Disclosure>
+      <div className="mt-4"><Figures s={s} exhibits={exhibits} token={token} signals={signals} /></div>
     </div>
   )
 }
@@ -139,7 +129,6 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
 }) {
   const [open, setOpen] = useState<Record<string, boolean>>({})
   const [sort, setSort] = useState<Sort>('effect')
-  const [sheet, setSheet] = useState<{ id: string; trigger: HTMLElement } | null>(null)
   const active = useMemo(() => signals.filter((s) => s.status === 'ok'), [signals])
   // D-63 (`vocabulary.ts`): ln 2 for "little effect" and strength from the contribution in a result measured from neutral points
   const little = littleOf(analysis.decision)
@@ -184,7 +173,7 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
   // `e` toggles expand all while focus is inside the ledger and not in a form field (WCAG 2.1.4).
   const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     const t = e.target as HTMLElement
-    if (e.key === 'e' && !e.metaKey && !e.ctrlKey && !e.altKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(t.tagName) && !t.isContentEditable && !sheet) toggleAll()
+    if (e.key === 'e' && !e.metaKey && !e.ctrlKey && !e.altKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(t.tagName) && !t.isContentEditable) toggleAll()
   }
 
   return (
@@ -243,7 +232,7 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
                       <td role="cell" className="py-3 pr-3 align-top font-mono text-mono num text-text max-[639px]:col-start-1 max-[639px]:row-start-1">{s.display_id ?? '—'}</td>
                       <td role="cell" className="py-3 pr-4 align-top min-w-0 max-[639px]:col-start-2 max-[639px]:col-span-2 max-[639px]:row-start-1">
                         <button type="button" aria-expanded={o} aria-controls={detailId} onClick={(e) => { e.stopPropagation(); toggle() }} className="block w-full min-w-0 text-left rounded-sm">
-                          <span data-testid="ledger-name" className="block text-body font-medium text-text truncate max-[639px]:whitespace-normal max-[639px]:[overflow-wrap:anywhere]" title={s.name}>{s.name}</span>
+                          <span data-testid="ledger-name" className="block text-body font-medium text-text truncate max-[639px]:whitespace-normal max-[639px]:[overflow-wrap:anywhere]" title={`Analysis check${s.display_id ? ` ${s.display_id}` : ''}`}>{`Analysis check${s.display_id ? ` ${s.display_id}` : ''}`}</span>
                           <span className="block eyebrow text-micro mt-0.5 truncate">{[s.category, lensFamily(s, exhibits)].filter((word, i, words) => words.findIndex((w) => w.trim().toLowerCase() === word.trim().toLowerCase()) === i).join(' · ')}</span>
                         </button>
                       </td>
@@ -268,7 +257,7 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
                     <tr role="row" className={cx('border-b border-border max-[639px]:!p-0', !o && 'border-b-0')}>
                       <td role="cell" colSpan={COLS} className="p-0 max-[639px]:!p-0">
                         <div id={detailId} className="disclosure bg-surface-2" data-open={o}>
-                          <div>{o && <Expanded s={s} analysis={analysis} exhibits={exhibits} token={token} totalWeight={totalWeight} largest={largest} onCard={(id, trigger) => setSheet({ id, trigger })} />}</div>
+                          <div>{o && <Expanded s={s} analysis={analysis} exhibits={exhibits} token={token} totalWeight={totalWeight} largest={largest} signals={signals} />}</div>
                         </div>
                       </td>
                     </tr>
@@ -283,8 +272,8 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
                   <td role="cell" className="py-2.5 pr-3 align-top font-mono text-mono num text-text-muted max-[639px]:w-12 max-[639px]:shrink-0">{r.displayId ?? ''}</td>
                   <td role="cell" colSpan={COLS - 1} className="py-2.5 align-top max-[639px]:min-w-0">
                     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small">
-                      <HatchSwatch label={<span className="text-text">{r.name}</span>} />
-                      <span className="text-text-muted">{ofTheServer(r.status, r.reason) ? ON_THIS_SERVER : statusWord(r.status)} · {r.reason}</span>
+                      <HatchSwatch label={<span className="text-text">{r.displayId ? `Analysis check ${r.displayId}` : 'Analysis check'}</span>} />
+                      <span className="text-text-muted">{ofTheServer(r.status, r.reason) ? ON_THIS_SERVER : statusWord(r.status)} · {anonymizeModelNames(r.reason ?? '', undefined, signals)}</span>
                     </span>
                   </td>
                 </tr>
@@ -294,7 +283,6 @@ export default function SignalsLedger({ analysis, signals, runs, exhibits, findi
         </div>
       )}
       {anyRaw && <p className="mt-3 m-0 text-caption text-text-muted">P(AI) in muted type is a raw detector score, not a calibrated probability.</p>}
-      <ModelCardSheet detectorId={sheet?.id ?? null} returnFocus={sheet?.trigger ?? null} onClose={() => setSheet(null)} />
     </section>
   )
 }

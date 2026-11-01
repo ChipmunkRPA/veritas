@@ -56,7 +56,7 @@ IMAGE_STAGES: tuple[StageDef, ...] = (
 )
 DOCUMENT_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
-    StageDef("decode", doc.decode, after=("ingest",), critical=True, weight=0.5),
+    StageDef("decode", doc.decode, after=("ingest",), critical=True, weight=0.5, reuse_if=doc.current_decode_output),
     # Revalidate stored text on every resume/refusion before any cached result can be reused.
     StageDef("condition", doc.condition, after=("decode",), persist=False, critical=True, weight=0.5),
     StageDef("detect", doc.detect, after=("decode", "condition"), lane="mixed", weight=4.0),

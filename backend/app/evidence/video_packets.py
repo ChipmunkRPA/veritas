@@ -1,0 +1,530 @@
+"""Immutable, source-checked evidence of actual video frame observations.
+
+An uncalibrated frame/face score supports inspecting that sampled input. It is
+never converted into a pixel edit mask or continuous temporal coverage. Native
+frame commitments written during inference bind every saved crop to the pixels
+actually decoded, even with VFR, nonzero PTS origins and evicted frame caches.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import re
+import uuid
+from copy import deepcopy
+from typing import Any
+
+from PIL import Image, ImageDraw
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from app.api.public_projection import alias_signal
+from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.video.decode import FrameTable, decode_frames
+from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
+from app.evidence.mp4 import validate_clip_binding
+from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
+from app.storage.artefacts import get_artefact, register_artefact
+from app.storage.db import Analysis, AnalysisStage, Artefact
+from app.storage.objects import ObjectStore
+
+SCHEMA = "chipmunk.video-evidence/1"
+VERSION = "video-evidence-4"
+CREATOR = "video-evidence-packets/4"
+CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", CREATOR)
+NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4"})
+ANCHOR_VERSION = "stream-pts-rgb24/1"
+MAX_PACKETS = 6
+MAX_FRAMES_PER_PACKET = 3
+PREVIEW_MAX = 960
+_NS = uuid.UUID("ab90189d-875b-4d57-a2cb-f56d6cad158f")
+_SHA = re.compile(r"[a-f0-9]{64}")
+
+
+def packet_hash(document: dict[str, Any]) -> str:
+    return canonical_hash({k: v for k, v in document.items() if k != "sha256"})
+
+
+def current_set_id(analysis: Analysis) -> str:
+    return str(uuid.uuid5(_NS, f"{analysis.id}:{analysis.result_hash}:{VERSION}"))
+
+
+def _stage(db: Session, store: ObjectStore, analysis_id: str, name: str) -> tuple[dict, str] | None:
+    row = db.get(AnalysisStage, (analysis_id, name))
+    if row is None or row.status != "done" or row.output_artefact_id is None:
+        return None
+    art = get_artefact(db, row.output_artefact_id, analysis_id=analysis_id)
+    if art.role != "stage_output" or art.media_type != "application/json":
+        raise PacketIntegrityError("Video source record is not a stage output")
+    return json.loads(_verified(store, art.sha256)), art.sha256
+
+
+def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list]:
+    probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
+    sampling = result.get("manifest", {}).get("sampling", {})
+    if (probe is None or render is None or sampling.get("frame_anchor_version") != ANCHOR_VERSION
+            or render[0].get("frame_anchor_version") != ANCHOR_VERSION):
+        raise PacketIntegrityError("This video has no source-frame commitments; reanalyse it to create frame evidence")
+    table_doc, anchors = probe[0].get("frame_table"), render[0].get("frame_anchors")
+    if not isinstance(table_doc, dict) or not isinstance(anchors, list):
+        raise PacketIntegrityError("Video frame records are missing")
+    if (canonical_hash(table_doc) != sampling.get("frame_table_sha256")
+            or canonical_hash(anchors) != sampling.get("frame_anchor_sha256")):
+        raise PacketIntegrityError("Video source records differ from the published commitments")
+    table = FrameTable.from_json(table_doc)
+    if not len(table) or min(table.width, table.height) <= 0:
+        raise PacketIntegrityError("Video frame table has no valid frames")
+    by_index = {}
+    for anchor in anchors:
+        i = anchor["frame_index"]
+        if (not isinstance(i, int) or isinstance(i, bool) or not 0 <= i < len(table) or i in by_index
+                or anchor.get("pts") != table.pts[i] or anchor.get("time_base") != table.time_base
+                or (anchor.get("width"), anchor.get("height")) != (table.width, table.height)
+                or not _SHA.fullmatch(str(anchor.get("decoded_rgb_sha256", "")))):
+            raise PacketIntegrityError("Video frame anchor is inconsistent with its frame table")
+        by_index[i] = anchor
+    # Source start time is frozen with the result. For older files without it,
+    # leave browser navigation unknown rather than silently assume zero.
+    origin = sampling.get("timeline_origin_s")
+    if origin is not None and (not isinstance(origin, int | float) or not math.isfinite(origin)):
+        raise PacketIntegrityError("Video timeline origin is invalid")
+    source = {"sha256": analysis.sha256, "stream_selector": "v:0", "time_base": table.time_base,
+              "width": table.width, "height": table.height, "frame_count": len(table),
+              "timeline_origin_s": origin, "coordinate_space": "display-oriented-native-frame",
+              "frame_table_sha256": sampling["frame_table_sha256"], "frame_anchor_sha256": sampling["frame_anchor_sha256"]}
+    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}]
+
+
+def _signals(result: dict, exhibit: dict) -> list[dict]:
+    refs = exhibit.get("source_signal_ids", [])
+    return [s for s in result.get("signals", []) if s.get("status", "ok") == "ok"
+            and (s["id"] in refs or exhibit["id"] in s.get("exhibit_ids", []))]
+
+
+def _series_points(db: Session, store: ObjectStore, aid: str, series: dict) -> list:
+    if series.get("points") is not None:
+        return series["points"]
+    if not series.get("payload_artefact_id"):
+        return []
+    row = get_artefact(db, series["payload_artefact_id"], analysis_id=aid)
+    if row.media_type != "application/json":
+        return []
+    data = json.loads(_verified(store, row.sha256))
+    return data if isinstance(data, list) else []
+
+
+def _observations(db: Session, store: ObjectStore, analysis: Analysis, result: dict,
+                  table: FrameTable, anchors: dict) -> tuple[list[dict], set[int], int]:
+    # A rounded second is merely a lookup aid. Every match must be unique and
+    # agree with exact PTS time within the six-decimal serialization precision.
+    by_time: dict[float, list[int]] = {}
+    for i in anchors:
+        if i not in table.interpolated:
+            by_time.setdefault(round(table.seconds(i), 6), []).append(i)
+    candidates, scored_frames, omitted = [], set(), 0
+    for exhibit in sorted(result.get("exhibits", []), key=lambda e: e["id"]):
+        if exhibit.get("kind") != "series" or exhibit.get("x_unit") != "s" or exhibit.get("media_ref") != "frame":
+            continue
+        signals = _signals(result, exhibit)
+        if not signals:
+            continue
+        for series in exhibit.get("series", []):
+            name = series.get("name")
+            # Smoothed/fused curves are not raw frame measurements. Interval
+            # window scores also need an explicit input-window binding first.
+            if name not in {"p", "logit"}:
+                continue
+            rows = []
+            for point in _series_points(db, store, analysis.id, series):
+                if not isinstance(point, list | tuple) or len(point) != 2:
+                    continue
+                time_s, score = point
+                if any(not isinstance(v, int | float) or isinstance(v, bool) or not math.isfinite(v) for v in point):
+                    continue
+                possible = by_time.get(round(time_s, 6), [])
+                if len(possible) != 1 or abs(table.seconds(possible[0]) - time_s) > 0.0000011:
+                    omitted += 1
+                    continue
+                i = possible[0]
+                rows.append({"frame_index": i, "score": score})
+                scored_frames.add(i)
+            if not rows:
+                continue
+            rows.sort(key=lambda r: r["frame_index"])
+            threshold = 0.0 if name == "logit" else 0.5
+            peak = max(range(len(rows)), key=lambda j: rows[j]["score"])
+            if rows[peak]["score"] < threshold:
+                continue
+            selected = sorted({max(0, peak - 1), peak, min(len(rows) - 1, peak + 1)})
+            candidates.append({"exhibit": exhibit, "signals": signals, "series_name": name,
+                               "track_id": series.get("track_id"), "peak": rows[peak], "threshold": threshold,
+                               "rows": [rows[j] for j in selected], "scored_frame_count": len(rows)})
+    return candidates, scored_frames, omitted
+
+
+def _face_context(result: dict, track_id: str | None, index: int, table: FrameTable, *, face_check: bool) -> dict | None:
+    width, height = table.width, table.height
+    if track_id is None:
+        # The served per-frame face path selects the largest detected face. This
+        # box is context only: aligned crops or whole-portrait inputs may differ.
+        sampling = result.get("manifest", {}).get("sampling", {})
+        ms = round(table.seconds(index) * 1000)
+        if (not face_check or sampling.get("exhibit_frame_pts_unit") != "milliseconds"
+                or sum(round(table.seconds(i)*1000) == ms for i in range(len(table))) != 1):
+            return None
+        boxes = [r["region"]["bbox"] for e in result.get("exhibits", []) if e.get("kind") == "regions"
+                 and e.get("created_by") == "vid.faces.yunet" for r in e.get("regions", [])
+                 if r.get("region", {}).get("kind") == "bbox" and r["region"].get("frame_pts") == ms]
+        return _box(_bounds(max(boxes, key=lambda b: b["w"]*b["h"]), width, height)) if boxes else None
+    matches = [frame for e in result.get("exhibits", []) if e.get("kind") == "face_track"
+               and e.get("track", {}).get("track_id") == track_id for frame in e.get("frames", [])
+               if frame.get("frame_index") == index and frame.get("pts") == table.pts[index]]
+    if len(matches) != 1:
+        return None
+    return _box(_bounds(matches[0].get("bbox"), width, height))
+
+
+def _window_observations(result: dict, table: FrameTable, anchors: dict) -> tuple[list[dict], set[int]]:
+    """Temporal feature statistics must cite every frame used by that window.
+
+    Select the lowest observed variation for inspection, without borrowing the
+    whole-video median threshold as a threshold on individual windows.
+    """
+    candidates, scored = [], set()
+    for signal in result.get("signals", []):
+        details = signal.get("details", {})
+        if signal.get("status", "ok") != "ok" or details.get("video_window_binding_version") != "source-frame-window/1":
+            continue
+        windows = []
+        for window in details.get("evidence_windows", []):
+            indices = window.get("frame_indices", [])
+            value = window.get("value")
+            if (window.get("measure") != "temporal_feature_variation" or not isinstance(value, int | float)
+                    or isinstance(value, bool) or not math.isfinite(value) or value < 0):
+                continue
+            if (not indices or indices != sorted(set(indices)) or any(i not in anchors or i in table.interpolated for i in indices)
+                    or window.get("time_base") != table.time_base or window.get("start_pts") != table.pts[indices[0]]
+                    or window.get("end_pts") != table.pts[indices[-1]]):
+                raise PacketIntegrityError("A video scoring window does not match its committed input frames")
+            for point in window.get("curve", []):
+                if (point.get("frame_index") not in indices or not set(point.get("support_frame_indices", [])).issubset(indices)
+                        or len(point.get("support_frame_indices", [])) != 3 or not isinstance(point.get("value"), int | float)
+                        or not math.isfinite(point["value"])):
+                    raise PacketIntegrityError("A temporal measurement is not bound to its three source frames")
+            scored.update(indices)
+            windows.append(window)
+        if windows:
+            selected = min(windows, key=lambda w: (w["value"], w["frame_indices"][0]))
+            indices = selected["frame_indices"]
+            shown = sorted({indices[0], indices[len(indices)//2], indices[-1]})
+            candidates.append({"window": selected, "signals": [signal], "track_id": None, "series_name": "temporal_variation",
+                               "exhibit": {"id": next(iter(signal.get("exhibit_ids", [])), "")},
+                               "rows": [{"frame_index": i, "score": None} for i in shown],
+                               "peak": {"frame_index": shown[len(shown)//2], "score": selected["value"]},
+                               "threshold": None, "scored_frame_count": len(indices)})
+    return candidates, scored
+
+
+def _context(source: Image.Image, region: dict | None, label: str) -> Image.Image:
+    image = source.copy()
+    image.thumbnail((PREVIEW_MAX, PREVIEW_MAX), Image.Resampling.LANCZOS)
+    draw = ImageDraw.Draw(image)
+    if region:
+        sx, sy = image.width / source.width, image.height / source.height
+        x, y, w, h = (region[k] for k in ("x", "y", "w", "h"))
+        draw.rectangle((round(x*sx), round(y*sy), round((x+w-1)*sx), round((y+h-1)*sy)), outline=(250, 170, 40), width=3)
+    draw.rectangle((0, 0, min(image.width - 1, 230), 20), fill=(30, 35, 30))
+    draw.text((5, 4), label, fill=(255, 230, 165))
+    return image
+
+
+def _contact(images: list[Image.Image], labels: list[str]) -> Image.Image:
+    panel_w, panel_h = 320, 220
+    sheet = Image.new("RGB", (panel_w * len(images), panel_h), (247, 247, 242))
+    draw = ImageDraw.Draw(sheet)
+    for n, (image, label) in enumerate(zip(images, labels, strict=True)):
+        thumb = image.copy()
+        thumb.thumbnail((panel_w - 8, panel_h - 28), Image.Resampling.LANCZOS)
+        sheet.paste(thumb, (n * panel_w + (panel_w - thumb.width) // 2, 0))
+        draw.text((n * panel_w + 6, panel_h - 20), label, fill=(25, 30, 25))
+    return sheet
+
+
+def _channel_coverage(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> dict:
+    probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
+    has_audio = probe[0].get("info", {}).get("has_audio") if probe else None
+    mapping = render[0].get("audio_mapping") if render else None
+    sampling = result.get("manifest", {}).get("sampling", {})
+    mapping_verified = bool(mapping and mapping.get("source_sha256") == analysis.sha256
+                            and canonical_hash(mapping) == sampling.get("video_audio_mapping_sha256"))
+    decode_status = render[0].get("audio_status") if render else None
+    channels = {}
+    for key, family in (("audio", "voice"), ("av_sync", "av-sync")):
+        checks = [s for s in result.get("signals", []) if s.get("family") == family]
+        successful = [s for s in checks if s.get("status", "ok") == "ok"]
+        if has_audio is False:
+            status, reason = "absent", "The source has no audio stream; voice and audio/video synchronization cannot be checked."
+        elif successful:
+            status, reason = "evidence_unavailable", "This channel produced responses, but source-bound playable audio/window evidence has not been frozen for this video."
+        else:
+            status, reason = "not_assessed", "No successful check with source-bound evidence is available for this channel."
+        channels[key] = {"status": status, "reason": reason, "source_audio_present": has_audio,
+                         "source_mapping_verified": mapping_verified, "decode_status": decode_status,
+                         "successful_check_count": len(successful), "check_count": len(checks),
+                         "check_refs": [{"id": alias_signal(s["id"]), "display_id": s.get("display_id"), "status": s.get("status", "ok")} for s in checks]}
+    return channels
+
+
+def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any]) -> dict[str, Any]:
+    if analysis.kind != "video" or not analysis.result_hash:
+        raise ValueError("Video evidence needs a published video result")
+    if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
+        raise PacketIntegrityError("Video result or original identity does not match")
+    store.verify(analysis.sha256)
+    table, source, anchors, records = _records(db, store, analysis, result)
+    candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
+    window_candidates, window_frames = _window_observations(result, table, anchors)
+    candidates = window_candidates + candidates
+    scored_frames |= window_frames
+    set_id = current_set_id(analysis)
+    document = {"schema": SCHEMA, "version": VERSION, "id": set_id, "status": "ready", "analysis_id": analysis.id,
+                "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
+                "coverage": {"kind": "point_and_window_samples" if window_candidates else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
+                             "scored_frame_indices": sorted(scored_frames), "scored_frame_count": len(scored_frames),
+                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates),
+                             "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
+                             "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
+                "source_records": records, "omitted_candidates": max(0, len(candidates) - MAX_PACKETS),
+                "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
+                                "Frame and face classification scores do not locate edited pixels or prove AI editing.",
+                                "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
+    chosen = candidates[:MAX_PACKETS]
+    wanted = sorted({r["frame_index"] for c in chosen for r in c["rows"]})
+    decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, wanted)} if wanted else {}
+    for i in wanted:
+        if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:
+            raise PacketIntegrityError("Video evidence pixels differ from the frame decoded during analysis")
+    clip_cache = {}
+    for number, candidate in enumerate(chosen, 1):
+        packet_id = f"V{number:02d}"
+        artifacts, frames, context_images, labels = {}, [], [], []
+
+        def add(role: str, image: Image.Image, target: dict = artifacts) -> None:
+            art = register_artefact(db, store, _png(image), media_type="image/png", role="preview", created_by=CREATOR,
+                                    analysis_id=analysis.id)
+            target[role] = {"sha256": art.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
+                               "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{art.sha256}.png"}
+
+        for pos, row in enumerate(candidate["rows"], 1):
+            i = row["frame_index"]
+            image = Image.fromarray(decoded[i])
+            region = _face_context(result, candidate["track_id"], i, table,
+                                   face_check=any(s.get("family") == "learned-face" for s in candidate["signals"]))
+            stream_s = table.seconds(i)
+            player_s = None if source["timeline_origin_s"] is None else stream_s - source["timeline_origin_s"]
+            label = f"{packet_id}.{pos} - frame {i}, {stream_s:.3f} s"
+            context = _context(image, region, label)
+            original_key, context_key = f"frame_{pos}_original", f"frame_{pos}_context"
+            add(original_key, image)
+            add(context_key, context)
+            refs = {"original": original_key, "context": context_key}
+            if region:
+                crop_key = f"frame_{pos}_crop"
+                add(crop_key, image.crop(_bounds(region, table.width, table.height)))
+                refs["crop"] = crop_key
+            frames.append({"id": f"{packet_id}.{pos}", "anchor": {**anchors[i], "original_sha256": analysis.sha256,
+                           "stream_selector": "v:0", "stream_time_s": stream_s, "playback_time_s": player_s,
+                           "coordinate_space": "display-oriented-native-frame"}, "score": row["score"],
+                           "is_peak": "window" not in candidate and i == candidate["peak"]["frame_index"], "context_region": region,
+                           "region_meaning": "detected_face_context" if region else "whole_frame_context",
+                           "artifact_refs": refs})
+            context_images.append(context)
+            labels.append(f"Frame {i}; score {row['score']:.3f}" if row["score"] is not None else f"Frame {i}; window context")
+        add("contact_sheet", _contact(context_images, labels))
+        signal_ids = {s["id"] for s in candidate["signals"]}
+        exhibit_id = candidate["exhibit"]["id"]
+        findings = [f["id"] for f in result.get("findings", []) if (signal_ids | {exhibit_id}).intersection(f.get("evidence_ids", []))]
+        face = candidate["track_id"] is not None or any(s.get("family") == "learned-face" for s in candidate["signals"])
+        measure = "Frame logit" if candidate["series_name"] == "logit" else "Frame detection score"
+        packet = {"id": packet_id, "title": "Face-forgery inspection clue" if face else "Frame synthesis inspection clue",
+                                   "evidence_type": "statistical", "claim_scope": "sampled_frames", "semantics": "classifier_response",
+                                   "finding_ids": findings, "exhibit_refs": [exhibit_id] if exhibit_id else [],
+                                   "signal_refs": [{"id": alias_signal(s["id"]), "display_id": s.get("display_id")} for s in candidate["signals"]],
+                                   "observation": f"{measure} reached {candidate['peak']['score']:.3f} at frame {candidate['peak']['frame_index']}; "
+                                                  f"the recorded decision boundary is {candidate['threshold']}.",
+                                   "interpretation": "This recorded response supports examining the sampled input and its neighbours. "
+                                                     "Compression, motion blur and unfamiliar content can also affect the response.",
+                                   "measurements": [{"label": measure, "value": candidate["peak"]["score"], "unit": "uncalibrated score"},
+                                                    {"label": "Recorded decision boundary", "value": candidate["threshold"], "unit": "score"},
+                                                    {"label": "Frames scored by this series", "value": candidate["scored_frame_count"], "unit": "frames"}],
+                                   "limitations": ["No calibrated probability or pixel-level edit boundary is established by this score.",
+                                                    "A face outline is detected-face context, not a manipulation mask or exact aligned classifier input.",
+                                                    "Only the displayed sampled frames carry these observations; playback between them is context."],
+                                   "frames": frames, "artifacts": artifacts,
+                                   "derivation": {"version": VERSION, "selection": "highest_recorded_point_and_adjacent_samples",
+                                                  "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
+                                                  "source_pixels": "exact_native_rgb", "contact_sheet": "sampled_sequence"}}
+        if "window" in candidate:
+            window = candidate["window"]
+            indices = window["frame_indices"]
+            origin = source["timeline_origin_s"]
+            packet.update({"title": "Temporal variation inspection clue", "evidence_type": "anomaly",
+                           "claim_scope": "sampled_window", "semantics": "temporal_feature_variation",
+                           "observation": f"Temporal feature variation was {window['value']:.5f} across {len(indices)} sampled frames. "
+                                          "This is the lowest recorded clip variation for this check.",
+                           "interpretation": "A relatively flat sequence of visual features is a synthesis clue measured by this check. "
+                                             "Static scenes and ordinary camera footage can also have low variation.",
+                           "measurements": [{"label": "Temporal feature variation", "value": window["value"], "unit": "feature-distance standard deviation"},
+                                            {"label": "Input frames in this window", "value": len(indices), "unit": "frames"}],
+                           "window": {"frame_indices": indices, "start_pts": window["start_pts"], "end_pts": window["end_pts"],
+                                      "time_base": table.time_base, "start_stream_s": table.seconds(indices[0]),
+                                      "end_stream_s": table.seconds(indices[-1]),
+                                      "start_playback_s": None if origin is None else table.seconds(indices[0]) - origin,
+                                      "end_playback_s": None if origin is None else table.seconds(indices[-1]) - origin},
+                           "observed_curve": window.get("curve", []),
+                           "limitations": ["This is an uncalibrated window statistic, not a probability of AI generation.",
+                                            "No individual-window decision threshold is established here; the lowest observed variation is selected for inspection.",
+                                            "The contact sheet contains representative input frames. The listed input frames establish actual sample coverage."],
+                           "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
+        try:
+            bounds = select_range(table, candidate["peak"]["frame_index"])
+            if bounds not in clip_cache:
+                clip_cache[bounds] = build_clip(store.path_for(analysis.sha256), table, source_sha256=analysis.sha256,
+                                               focus_index=candidate["peak"]["frame_index"], sampled_frame_indices=[],
+                                               timeline_origin_s=source["timeline_origin_s"])
+            data, metadata, description = clip_cache[bounds]
+            art = register_artefact(db, store, data, media_type="video/mp4", role="preview", created_by=CREATOR, analysis_id=analysis.id)
+            artifacts["context_clip"] = {**metadata, "sha256": art.sha256, "media_type": "video/mp4",
+                                         "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{art.sha256}.mp4"}
+            packet["clip"] = deepcopy(description)
+            measured = packet.get("window", {}).get("frame_indices") or [f["anchor"]["frame_index"] for f in frames]
+            packet["clip"]["sampled_frame_indices"] = [i for i in measured if bounds[0] <= i < bounds[1]]
+        except ClipUnavailable as error:
+            packet["clip"] = {"status": "unavailable", "reason": str(error)}
+        document["packets"].append(packet)
+    if VERSION in NESTED_VERSIONS:
+        from app.evidence import video_audio, video_av
+
+        document["audio"] = video_audio.build_channel(db, analysis, store, result, set_id=set_id)
+        document["av"] = video_av.build_channel(db, analysis, store, result, set_id=set_id,
+            video_source=source, table=table, anchors=anchors, audio_channel=document["audio"])
+        document["coverage"]["channels"] = {
+            key: {"status": document[key]["status"], "reason": document[key].get("reason") or
+                  ("Actual voice windows and source samples are retained." if key == "audio" else
+                   "Measured mouth/audio correlation windows and source inputs are retained; this is not AI proof.")}
+            for key in ("audio", "av")}
+    document = json.loads(canonical_json(document))
+    document["sha256"] = packet_hash(document)
+    validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
+                        original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",
+                     created_by=CREATOR, analysis_id=analysis.id, artefact_id=set_id)
+    return document
+
+
+def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
+                        original_result_hash: str, source_sha256: str) -> None:
+    if (document.get("schema") != SCHEMA or document.get("version") not in {"video-evidence-1", "video-evidence-2", *NESTED_VERSIONS}
+            or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
+            or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
+            or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
+        raise PacketIntegrityError("Video evidence differs from its source, result or recorded hash")
+    source = document["source"]
+    table_base = FrameTable(time_base=source["time_base"], pts=(), key_frames=(), pict_types="", width=source["width"],
+                            height=source["height"], coded_width=source["width"], coded_height=source["height"]).tb
+    ids = set()
+    for packet in document["packets"]:
+        if (packet["id"] in ids or (packet.get("evidence_type"), packet.get("claim_scope"))
+                not in {("statistical", "sampled_frames"), ("anomaly", "sampled_window")}):
+            raise PacketIntegrityError("Video evidence has duplicate or misrepresented observations")
+        ids.add(packet["id"])
+        artifacts = packet["artifacts"]
+        for asset in artifacts.values():
+            if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or asset.get("media_type") not in {"image/png", "video/mp4"}
+                    or min(asset.get("width", 0), asset.get("height", 0)) <= 0):
+                raise PacketIntegrityError("Video evidence has invalid image references")
+        try:
+            validate_clip_binding(packet, source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
+        if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:
+            raise PacketIntegrityError("Video evidence omits its context-clip availability")
+        for frame in packet["frames"]:
+            anchor = frame["anchor"]
+            if (anchor.get("original_sha256") != source_sha256 or anchor.get("time_base") != source["time_base"]
+                    or not 0 <= anchor.get("frame_index", -1) < source["frame_count"]
+                    or not _SHA.fullmatch(str(anchor.get("decoded_rgb_sha256", "")))
+                    or abs(float(anchor["pts"] * table_base) - anchor["stream_time_s"]) > 0.0000011):
+                raise PacketIntegrityError("Video evidence frame has an invalid source anchor")
+            origin, playback = source.get("timeline_origin_s"), anchor.get("playback_time_s")
+            if (origin is None) != (playback is None) or (origin is not None and abs(anchor["stream_time_s"] - origin - playback) > 0.000002):
+                raise PacketIntegrityError("Video evidence mixes stream timestamps and playback time")
+            if not set(frame["artifact_refs"].values()).issubset(artifacts):
+                raise PacketIntegrityError("Video frame refers to an image outside its packet")
+            if frame.get("context_region"):
+                _bounds(frame["context_region"], source["width"], source["height"])
+        if packet.get("window"):
+            window = packet["window"]
+            indices = window["frame_indices"]
+            if (not indices or indices != sorted(set(indices)) or any(not 0 <= i < source["frame_count"] for i in indices)
+                    or window.get("time_base") != source["time_base"]
+                    or not {f["anchor"]["frame_index"] for f in packet["frames"]}.issubset(indices)):
+                raise PacketIntegrityError("Video window evidence has invalid frame support")
+    if document["version"] in NESTED_VERSIONS:
+        from app.evidence.av_binding import validate_av_channel
+        from app.evidence.video_audio import validate_channel
+
+        try:
+            validate_channel(document["audio"], source_sha256=source_sha256)
+            validate_av_channel(document["av"], source)
+            if (document["version"] == "video-evidence-4" and document["audio"]["coverage"] is not None
+                    and not document["audio"].get("acoustic_context")):
+                raise ValueError("Current video evidence omits its acoustic context measurements")
+        except (KeyError, TypeError, ValueError) as error:
+            raise PacketIntegrityError("Video audio/AV evidence has invalid source bindings") from error
+        all_ids = [p["id"] for part in (document, document["audio"], document["av"]) for p in part["packets"]]
+        all_ids.extend(p["id"] for p in (document["audio"].get("acoustic_context") or {}).get("events", []))
+        if len(all_ids) != len(set(all_ids)):
+            raise PacketIntegrityError("Video channels contain ambiguous packet identifiers")
+    elif any(key in document for key in ("audio", "av")):
+        raise PacketIntegrityError("Historical video evidence cannot introduce undeclared nested channels")
+
+
+def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_id: str | None = None) -> dict[str, Any] | None:
+    query = select(Artefact).where(Artefact.analysis_id == analysis.id, Artefact.created_by.in_(CREATORS),
+                                   Artefact.role == "exhibit_payload", Artefact.media_type == "application/json")
+    if set_id is not None:
+        query = query.where(Artefact.id == set_id)
+    row = db.scalars(query.order_by(Artefact.created_at.desc(), Artefact.id)).first()
+    if row is None:
+        return None
+    document = json.loads(_verified(store, row.sha256))
+    if document.get("id") != row.id:
+        raise PacketIntegrityError("Video evidence identity differs from its stored object")
+    validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
+                        original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    store.verify(analysis.sha256)
+    if document["version"] in NESTED_VERSIONS:
+        for key in ("audio", "av"):
+            if document[key]["coverage"] is not None:
+                for name in ("wav_sha256", "mapping_sha256"):
+                    store.verify(document[key]["source"][name])
+    return document
+
+
+def persist_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, result: dict | None = None) -> dict | None:
+    if analysis.kind != "video" or not analysis.result_hash:
+        return None
+    existing = load_packet_set(db, analysis, store, set_id=current_set_id(analysis))
+    if existing is not None:
+        return existing
+    return build_packet_set(db, analysis, store, result or json.loads(_verified(store, analysis.result_hash)))
+
+
+def unavailable_packet_set(analysis: Analysis) -> dict:
+    return {"schema": SCHEMA, "status": "not_generated" if analysis.kind == "video" else "not_applicable", "id": None,
+            "version": VERSION, "sha256": None, "analysis_id": analysis.id, "revision": analysis.revision,
+            "original_result_hash": analysis.result_hash, "source": {"sha256": analysis.sha256}, "packets": [],
+            "coverage": None, "omitted_candidates": 0,
+            "limitations": ["Source-bound video evidence is not available for this revision. Reanalyse the video to record exact frame commitments."]}

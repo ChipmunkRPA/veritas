@@ -1,10 +1,10 @@
 <section class="chapter-cont" id="section-revisions">
 <h2 class="chapter-title"><span class="n">{{ v.number.revisions }}</span>Revision history</h2>
 <table class="grid revisions">
-<thead><tr><th>Report</th><th class="num">Revision</th><th>Requested</th><th>Review state</th><th>Reason</th><th>PDF SHA-256</th></tr></thead>
+<thead><tr><th>Report</th><th class="num">Revision</th><th>Generated</th><th>Type</th><th>Reason</th><th>PDF SHA-256</th></tr></thead>
 <tbody>
 {% for r in v.revisions %}
-<tr><td class="mono">{{ r.display_id }}<br><span class="caption">{{ r.id }}</span></td><td class="num">{{ r.revision }}</td><td>{{ r.at }}</td><td>{{ r.state }}</td><td>{{ r.reason }}</td><td class="mono">{{ r.sha256 }}</td></tr>
+<tr><td class="mono">{% if v.get('customer_report') %}{{ r.id }}{% else %}{{ r.display_id }}<br><span class="caption">{{ r.id }}</span>{% endif %}</td><td class="num">{{ r.revision }}</td><td>{{ r.at }}</td><td>{{ r.state }}</td><td>{{ r.reason }}</td><td class="mono">{{ r.sha256 }}</td></tr>
 {% endfor %}
 </tbody>
 </table>

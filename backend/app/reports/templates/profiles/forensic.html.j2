@@ -3,6 +3,8 @@
 {% include "sections/cover.html.j2" %}
 {% include "sections/summary.html.j2" %}
 {% include "sections/findings.html.j2" %}
+{% include "sections/image_evidence.html.j2" %}
+{% include "sections/multimedia_evidence.html.j2" %}
 {% include "sections/estimate.html.j2" %}
 {% include "sections/exhibits.html.j2" %}
 {% include "sections/temporal.html.j2" %}
@@ -13,7 +15,9 @@
 {% include "sections/glossary.html.j2" %}
 {% include "sections/reproducibility.html.j2" %}
 {% include "sections/custody.html.j2" %}
+{% if not v.get('customer_report') %}
 {% include "sections/notes.html.j2" %}
 {% include "sections/signoff.html.j2" %}
+{% endif %}
 {% include "sections/revisions.html.j2" %}
 {% endblock %}

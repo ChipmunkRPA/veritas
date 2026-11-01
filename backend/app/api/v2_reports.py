@@ -42,6 +42,7 @@ from app.audit import chain as audit
 from app.cases import access, review
 from app.core import times
 from app.reports import engine, package, service, signing, snapshot
+from app.reports.public_policy import downloadable_template, package_template
 from app.storage.db import Analysis, PackageRow, ReportRow, get_session
 
 router = APIRouter(prefix="/api/v2", tags=["v2"], dependencies=[Depends(rate_limit), Depends(authorize)], route_class=CheckedRoute)
@@ -79,6 +80,7 @@ class ReportOut(BaseModel):
     engine: str
     engine_version: str | None
     status: Literal["queued", "running", "done", "failed"]
+    downloadable: bool = Field(description="Whether this immutable report uses an approved public template and has a file")
     error: str | None
     snapshot_hash: str
     sha256: str | None = Field(description="SHA-256 of the PDF once done")
@@ -98,12 +100,13 @@ class ReportList(BaseModel):
 _utc = times.to_utc  # one form on every engine: a time is printed in UTC (D-72)
 
 
-def _out(row: ReportRow) -> ReportOut:
+def _out(row: ReportRow, analysis_kind: str) -> ReportOut:
     return ReportOut(id=row.id, display_id=row.display_id, revision=row.revision, supersedes_report_id=row.supersedes_report_id,
                      revision_reason=row.revision_reason, analysis_id=row.analysis_id, analysis_revision=row.analysis_revision,
                      case_id=row.case_id, profile=row.profile, redacted=row.redacted, review_state=row.review_state,  # type: ignore[arg-type]
                      issuable=bool(row.issuable),
                      template_set=row.template_set, engine=row.engine, engine_version=row.engine_version, status=row.status,  # type: ignore[arg-type]
+                     downloadable=row.status == 'done' and row.artefact_id is not None and downloadable_template(row.template_set, analysis_kind),
                      error=row.error, snapshot_hash=row.snapshot_hash, sha256=row.sha256, page_count=row.page_count,
                      duration_ms=row.duration_ms, signature=row.signature, signing_key_id=row.signing_key_id, requested_by=row.requested_by,
                      requested_at=_utc(row.requested_at), finished_at=_utc(row.finished_at))  # type: ignore[arg-type]
@@ -192,14 +195,14 @@ def _queue_report(db: Session, aid: str, req: ReportRequest, principal_id: str,
     if req.reuse:
         existing = service.current(db, analysis, result, profile=req.profile, redacted=req.profile == "newsroom", verified=verified)
         if existing is not None:
-            out = _out(existing)
+            out = _out(existing, analysis.kind)
             db.rollback()
             return out, False
     # D-10: the newsroom explainer is always redacted, with a `redaction` custody event
     row, events = service.prepare(db, analysis, result, profile=req.profile, redacted=req.profile == "newsroom",
                                   revision_reason=clean_body(req.revision_reason), requested_by=principal_id, engine_version=version,
                                   verified=verified)
-    out = _out(row)
+    out = _out(row, analysis.kind)
     jobs.submit_report_in(db, row.id)
     audit.commit_with(db, events)
     return out, True
@@ -208,15 +211,16 @@ def _queue_report(db: Session, aid: str, req: ReportRequest, principal_id: str,
 @router.get("/analyses/{aid}/reports", response_model=ReportList, responses=problem_responses(401, 404))
 def list_reports(aid: str) -> JSONResponse:
     with get_session() as db:
-        _analysis(db, aid)
+        analysis = _analysis(db, aid)
         rows = db.scalars(select(ReportRow).where(ReportRow.analysis_id == aid).order_by(ReportRow.requested_at.desc(), ReportRow.id.desc()))
-        return _json(ReportList(items=[_out(r) for r in rows]))
+        return _json(ReportList(items=[_out(r, analysis.kind) for r in rows]))
 
 
 @router.get("/reports/{report_id}", response_model=ReportOut, responses=problem_responses(401, 404))
 def get_report(report_id: str) -> JSONResponse:
     with get_session() as db:
-        return _json(_out(_report(db, report_id)))
+        row = _report(db, report_id)
+        return _json(_out(row, _analysis(db, row.analysis_id).kind))
 
 
 @router.get("/reports/{report_id}/file", response_class=Response,
@@ -226,8 +230,10 @@ def report_file(report_id: str, request: Request) -> Response:
         row = _report(db, report_id)
         if row.status != "done" or row.artefact_id is None:
             raise ProblemError(409, "Report not ready", f"The report is {row.status}; its file exists once it is done.")
+        if not downloadable_template(row.template_set, _analysis(db, row.analysis_id).kind):
+            raise ProblemError(409, "Earlier report unavailable", "This earlier report may contain model names. Generate a new report to download a version with neutral check labels. The original remains stored.")
         response = _binary(request, _artefact(db, row.artefact_id, row.analysis_id))
-        filename = f"veritas-{row.display_id}.pdf"
+        filename = f"chipmunk-verify-{row.display_id}.pdf"
     if response.status_code == 200:
         response.headers["Content-Disposition"] = f'attachment; filename="{filename}"'
     return response
@@ -238,12 +244,13 @@ def report_file(report_id: str, request: Request) -> Response:
 def report_preview(report_id: str) -> HTMLResponse:
     with get_session() as db:
         row = _report(db, report_id)
+        if row.template_set != engine.TEMPLATE_SET:
+            raise ProblemError(409, "Earlier report unavailable", "This earlier report may contain model names. Generate a new report to preview a version with neutral check labels. The original remains stored.")
         data = _read_verified(_artefact(db, row.snapshot_artefact_id, row.analysis_id))
-        requested_template, completed = row.template_set, row.status == "done"
+        requested_template = row.template_set
     frozen = snapshot.load(data)
     if not requested_template == frozen.report.template_set == engine.TEMPLATE_SET:
-        guidance = ("Download the stored PDF to view the completed report, or request a new report revision." if completed
-                    else "Request a new report revision.")
+        guidance = "Request a new report revision; earlier reports may contain model names."
         raise ProblemError(409, "Report template mismatch",
                            "The requested report template does not match the stored snapshot and current HTML renderer. " + guidance)
     try:
@@ -266,7 +273,7 @@ class PackageRequest(RequestModel):
     model_config = ConfigDict(extra="forbid")
     report_id: str = Field(min_length=1, max_length=32, description="A finished, signed report of this analysis (report.pdf)")
     kind: Literal["draft", "issue"] = Field(default="draft", description="D-27: issue needs a report requested as reviewed or approved")
-    include_original: bool = Field(default=False, description="Put the original in source/ (needed by `app.cli reproduce`)")
+    include_original: bool = Field(default=False, description="Include unredacted user source bytes; public packages do not support inference reproduction")
 
 
 class PackageOut(BaseModel):
@@ -275,10 +282,11 @@ class PackageOut(BaseModel):
     report_id: str
     case_id: str | None
     kind: Literal["draft", "issue"]
+    schema_id: str
     include_original: bool
     status: Literal["queued", "running", "done", "failed"]
     error: str | None
-    filename: str | None = Field(description="veritas-evidence-<analysis id8>-r<revision>[-draft].zip")
+    filename: str | None = Field(description="Download filename; new public packages use chipmunk-evidence-<analysis id8>-r<revision>[-draft].zip")
     sha256: str | None = Field(description="SHA-256 of the ZIP once done, recorded as package_exported")
     manifest_sha256: str | None
     signature: str | None = Field(description="Ed25519 signature over manifest.sha256, base64")
@@ -293,6 +301,7 @@ class PackageOut(BaseModel):
 def _package_out(db: Session, row: PackageRow) -> PackageOut:
     report = db.get(ReportRow, row.report_id)
     return PackageOut(id=row.id, analysis_id=row.analysis_id, report_id=row.report_id, case_id=row.case_id, kind=row.kind,  # type: ignore[arg-type]
+                      schema_id=row.schema_id,
                       include_original=row.include_original, status=row.status, error=row.error,  # type: ignore[arg-type]
                       filename=package.filename(row, report) if report is not None else None, sha256=row.sha256,
                       manifest_sha256=row.manifest_sha256, signature=row.signature, signing_key_id=row.signing_key_id,
@@ -354,25 +363,24 @@ def request_package(aid: str, req: PackageRequest, request: Request) -> JSONResp
         if report is None or report.analysis_id != aid:
             raise ProblemError(404, *access.NOT_FOUND["report"])
         if report.redacted:
-            raise ProblemError(422, "Invalid request", "A package carries the full result and custody extract; package a summary, "
-                                                       "standard or forensic report, not the redacted newsroom explainer.")
-        if report.status != "done" or report.artefact_id is None:
-            raise ProblemError(409, "Report not ready", f"The report is {report.status}; a package is built from a finished report.")
-        if not report.signature:
-            raise ProblemError(409, "Report not signed", "This report was generated before reports were signed; request a new "
-                                                         "revision and package that.")
-        if req.kind == "issue" and analysis.withdrawn_at is not None:
-            raise ProblemError(409, "Revision withdrawn", "This revision was withdrawn and should not be relied on, so it is not issued. "
-                                                          "Export a draft.")
-        if req.kind == "issue" and review.superseded(db, aid):
-            raise ProblemError(409, "Revision superseded", "A newer revision of this analysis exists; issue a report of the latest "
-                                                           "revision.")
-        if req.kind == "issue":
-            refusal = _issue_refusal(report, review.brief(db, analysis))
-            if refusal is not None:
+            raise ProblemError(422, "Invalid request", "Evidence packages include source excerpts and crops. Choose an unredacted report.")
+        if not package_template(report.template_set, analysis.kind):
+            raise ProblemError(409, "Earlier report unavailable", "Generate a new report with the current public evidence format. The original remains stored.")
+        if report.status != 'done' or report.artefact_id is None or not report.signature:
+            raise ProblemError(409, "Report not ready", "A public package needs a completed, signed report.")
+        if req.kind == 'issue':
+            if analysis.withdrawn_at is not None or review.superseded(db, aid):
+                raise ProblemError(409, "Revision unavailable", "A withdrawn or superseded revision cannot be issued.")
+            if refusal := _issue_refusal(report, review.brief(db, analysis)):
                 raise ProblemError(409, "Report not issuable", refusal)
-        # N-9: the package row and its job are one transaction
-        row = package.prepare(db, analysis, report, kind=req.kind, include_original=req.include_original, created_by=principal.id)
+        # Check availability now, then verify it again against the frozen report in the job.
+        from app.reports.public_package import _evidence
+        try:
+            _evidence(snapshot.load(_read_verified(_artefact(db, report.snapshot_artefact_id, aid))))
+        except (package.PackageError, ValueError) as error:
+            raise ProblemError(409, "Evidence unavailable", str(error)) from None
+        row = package.prepare(db, analysis, report, kind=req.kind, include_original=req.include_original,
+                              created_by=principal.id, schema_id=package.PUBLIC_SCHEMA)
         out = _package_out(db, row)
         jobs.submit_package_in(db, row.id)
         db.commit()
@@ -391,11 +399,15 @@ def get_package(package_id: str) -> JSONResponse:
 def package_file(package_id: str, request: Request) -> Response:
     with get_session() as db:
         row = _package(db, package_id)
-        if row.status != "done" or row.artefact_id is None:
+        if row.schema_id != package.PUBLIC_SCHEMA:
+            raise ProblemError(409, "Earlier package unavailable", "This internal package may contain model names. Export a new public evidence package. The original remains stored.")
+        if row.status != 'done' or row.artefact_id is None:
             raise ProblemError(409, "Package not ready", f"The package is {row.status}; its file exists once it is done.")
-        response = _binary(request, _artefact(db, row.artefact_id, row.analysis_id))
         report = db.get(ReportRow, row.report_id)
-        name = package.filename(row, report) if report is not None else f"veritas-evidence-{row.id}.zip"
+        if report is None or not package_template(report.template_set, _analysis(db, row.analysis_id).kind):
+            raise ProblemError(409, "Earlier package unavailable", "Generate a new report and public evidence package. The original remains stored.")
+        response = _binary(request, _artefact(db, row.artefact_id, row.analysis_id))
+        name = package.filename(row, report) if report is not None else f'chipmunk-evidence-{row.id}.zip'
     if response.status_code == 200:
-        response.headers["Content-Disposition"] = f'attachment; filename="{name}"'
+        response.headers['Content-Disposition'] = f'attachment; filename="{name}"'
     return response

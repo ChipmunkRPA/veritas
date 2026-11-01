@@ -1,0 +1,45 @@
+[
+  {"name":"AI boundary","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.8,"ci90":[0.72,0.88]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"ai","confidence_pct":80,"headline":"Leaning towards an AI-generated or AI-altered file","interval_pct":[72,88]}},
+  {"name":"below AI boundary is not rounded up","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.799999,"ci90":[0.72,0.88]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null,"probability_ai_pct":79.9}},
+  {"name":"original boundary","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.2,"ci90":[0.1,0.3]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"original","confidence_pct":80,"headline":"Leaning towards an original file","interval_pct":[70,90],"interval_label":"90% interval for original-file likelihood"}},
+  {"name":"below original boundary is not rounded up","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.200001},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null}},
+  {"name":"real video saved estimate","input":{"decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.126264,"ci90":[0.059251,0.289501]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"original","confidence_pct":87.3,"interval_pct":[71,94]}},
+  {"name":"real audio interval upper end is not confidence","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.755266,"ci90":[0.693863,0.819836]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null,"interval_pct":[69.3,81.9]}},
+  {"name":"fallback is not confidence","input":{"decision":{"code":"ai_supported","fusion_mode":"fallback","probability_ai_uncalibrated":0.99},"condition_profile":{"within_validated_envelope":false}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null,"headline":"Inconclusive: no calibrated estimate"}},
+  {"name":"uncalibrated field cannot fill a missing calibrated field","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_uncalibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
+  {"name":"outside scope","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":false}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
+  {"name":"unknown scope","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.99}},"expected":{"direction":"unavailable","confidence_pct":null}},
+  {"name":"not assessable keeps gate","input":{"decision":{"code":"not_assessable","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null}},
+  {"name":"failed run keeps gate","input":{"status":"failed","decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null}},
+  {"name":"provenance floor is not confidence","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.85,"driving_hypothesis":"H3_provenance_integrity"},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"record","applies":false,"headline":null,"confidence_pct":null}},
+  {"name":"strong disagreement keeps gate","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.9},"condition_profile":{"within_validated_envelope":true},"caveats":["Detectors strongly disagree: the disagreement index is above the 95th percentile of the calibration set."]},"expected":{"direction":"inconclusive","confidence_pct":null,"headline":"Inconclusive: the evidence does not support a reliable tendency"}},
+  {"name":"unsupported prior keeps gate","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.95,"reason":"Saved estimate. AI generation or manipulation is the answer of the estimate, and no check gives at least weak support for it: the estimate rests on the model's starting point for inputs like this one, so the result is inconclusive."},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null}},
+  {"name":"malformed interval omitted","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.9,"ci90":[0.95,0.8]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"ai","confidence_pct":90,"interval_pct":null}},
+  {"name":"invalid estimate omitted","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":1.01},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
+  {"name":"missing decision","input":{},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
+  {"name":"real video excludes checked voice and timing from visual percentage","input":{
+    "kind":"video","status":"done","condition_profile":{"within_validated_envelope":true},
+    "decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.126264,"ci90":[0.059251,0.289501],"contributions":[
+      {"kind":"detector","signal_id":"check.visual1:global","counted":true,"logit":-1.517146},
+      {"kind":"detector","signal_id":"check.visual2:global","counted":true,"logit":-0.608716},
+      {"kind":"detector","signal_id":"check.face:global","counted":true,"logit":0.320748},
+      {"kind":"detector","signal_id":"check.voice:global","counted":false,"logit":0}
+    ]},
+    "signals":[
+      {"id":"check.visual1:global","detector_id":"check.visual1","modality":"video","status":"ok"},
+      {"id":"check.visual2:global","detector_id":"check.visual2","modality":"video","status":"ok"},
+      {"id":"check.face:global","detector_id":"check.face","modality":"video","status":"ok"},
+      {"id":"check.voice:global","detector_id":"check.voice","modality":"audio","family":"voice","status":"ok","raw_score":0.839957,"effective_weight":0,"outside_estimate":{"reason":"zero_weight"}},
+      {"id":"check.timing:track:0","detector_id":"check.timing","modality":"video","family":"av-sync","lane":"lip_sync","status":"ok","effective_weight":0,"outside_estimate":{"reason":"not_in_model"}}
+    ]},"expected":{"headline":"Leaning towards original visual content","direction":"original","confidence_pct":87.3,"scope":"visual_content","scope_label":"Visual content only","excluded_channels":["voice","audio_picture_timing"],"interval_label":"90% interval for this scoped estimate"}},
+  {"name":"counted voice prevents describing a mixed percentage as visual-only","input":{
+    "kind":"video","condition_profile":{"within_validated_envelope":true},
+    "decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.13,"contributions":[
+      {"kind":"detector","signal_id":"opaque_visual","counted":true,"logit":-1},
+      {"kind":"detector","signal_id":"opaque_voice","counted":true,"logit":-1}
+    ]},
+    "findings":[{"family":"F3_whole_image_generation","evidence_ids":["opaque_visual"]},{"family":"A1_voice","evidence_ids":["opaque_voice"]},{"family":"V2_lip_sync","evidence_ids":["opaque_timing"]}],
+    "signals":[{"id":"opaque_visual","status":"ok"},{"id":"opaque_voice","status":"ok"},{"id":"opaque_timing","status":"ok","outside_estimate":{"reason":"not_in_model"}}]
+  },"expected":{"direction":"original","scope":"assessed_components","headline":"Leaning towards original content in the assessed components","excluded_channels":["audio_picture_timing"]}},
+  {"name":"video without channel records does not imply whole-file clearance","input":{"kind":"video","decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.1},"condition_profile":{"within_validated_envelope":true}},"expected":{"scope":"assessed_components","headline":"Leaning towards original content in the assessed components","excluded_channels":[]}}
+]

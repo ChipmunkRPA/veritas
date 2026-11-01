@@ -90,7 +90,8 @@ class ELADetector(Detector):
         return DetectorResult(
             status="ok", unit_scores=[aggregate], aggregate=aggregate, observed=observed,
             reference="Single-generation image: uniform error; face vs surrounding-ring ratio ≈ 1.0 (0.7–1.4); block CV < 0.9",
-            reasoning=reasoning, metrics={**_metrics(m), "exif_orientation": float(orientation)}, exhibit_ids=[exhibit])
+            reasoning=reasoning, metrics={**_metrics(m), "exif_orientation": float(orientation)}, exhibit_ids=[exhibit],
+            details={"display_mapping_version": native_forensics.DISPLAY_MAPPING_VERSION})
 
 
 class NoiseResidualDetector(Detector):
@@ -118,7 +119,8 @@ class NoiseResidualDetector(Detector):
             observed=f"σ={m['noise_std']}, local CV={m['noise_local_cv']}, flat fraction={m['noise_flat_fraction']}"
                      + (f", face/bg ratio={ratio}" if ratio is not None else ""),
             reference="Camera: flat fraction < 0.6, face vs surrounding-ring noise ratio 0.6–1.6",
-            reasoning="; ".join(parts) + ".", metrics=_metrics(m), exhibit_ids=[exhibit])
+            reasoning="; ".join(parts) + ".", metrics=_metrics(m), exhibit_ids=[exhibit],
+            details={"display_mapping_version": native_forensics.DISPLAY_MAPPING_VERSION})
 
 
 DQ_VERSION = "0.4.0"

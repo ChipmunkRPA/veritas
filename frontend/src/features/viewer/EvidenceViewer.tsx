@@ -18,7 +18,7 @@ import AnnotationDialog, { type AnnotationDraft } from './AnnotationDialog'
 import CompareSlider from './CompareSlider'
 import { probeMap } from './heatmap'
 import { Inspector, LensRail, type Readout } from './LayerPanel'
-import { LENSES, activeLenses, allMaps, annotationItems, catalogue, describeRegions, heatmapLens, lensByLetter, mapById, presetLayers, regionItems, toggleLayers, type LensKey } from './lenses'
+import { LENSES, activeLenses, allMaps, annotationItems, catalogue, describeRegions, heatmapLens, lensByLetter, mapById, presetLayers, regionItems, toggleLayers, type LensKey, type RegionItem } from './lenses'
 import Loupe, { LOUPE_FACTORS } from './Loupe'
 import RegionsOverlay from './RegionsOverlay'
 import type { Scene } from './scene'
@@ -114,8 +114,18 @@ function ImageEvidenceViewer() {
   const decodedActive = activeMap ? heat.decoded[activeMap.id] ?? null : null
   const heatBitmap = heat.layer(activeMap?.id)
 
-  const items = useMemo(() => regionItems(cat, source), [cat, source])
-  const visibleItems = useMemo(() => items.filter((r) => layers.marks.some((m) => m.kind === r.lens && m.id === r.exhibitId)), [items, layers.marks])
+  const focusBox = state.focus && source && state.focus.x + state.focus.w <= source.width && state.focus.y + state.focus.h <= source.height ? state.focus : null
+  const focusKey = focusBox ? [focusBox.x, focusBox.y, focusBox.w, focusBox.h].join(',') : null
+  const items = useMemo(() => {
+    const recorded = regionItems(cat, source)
+    if (!focusBox) return recorded
+    const focused: RegionItem = { key: 'source-focus', label: 'Area', exhibitId: 'source-focus', lens: 'regions', box: focusBox,
+      polygon: null, score: null, probability: null, share: null, pair: null, text: 'Source coordinates opened for inspection. This outline is a navigation aid, not a new detection.' }
+    return [...recorded, focused]
+    // The key contains all geometry, so zoom URL updates do not rebuild the source selection.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cat, source, focusKey])
+  const visibleItems = useMemo(() => items.filter((r) => r.key === 'source-focus' || layers.marks.some((m) => m.kind === r.lens && m.id === r.exhibitId)), [items, layers.marks])
   const notes = useMemo(() => annotationItems(annotations.data ?? []), [annotations.data])
   const visibleNotes = active.has('annotations') ? notes : []
 
@@ -156,6 +166,10 @@ function ImageEvidenceViewer() {
           fitMode.current = false
           return frameBox(target.box, pane)
         }
+        if (focusBox) {
+          fitMode.current = false
+          return frameBox(focusBox, pane)
+        }
         fitMode.current = true
         return fitView(source, pane)
       }
@@ -165,7 +179,7 @@ function ImageEvidenceViewer() {
     })
     // runs when the source or the pane size changes; the deep link is read once, on the first view
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [source, pane.width, pane.height])
+  }, [source, pane.width, pane.height, focusKey])
 
   // Mirror zoom and centre into the URL once a gesture settles (fit stays implicit).
   useEffect(() => {

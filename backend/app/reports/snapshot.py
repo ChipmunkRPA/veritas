@@ -230,6 +230,14 @@ class ReportSnapshot(_Frozen):
     # snapshot frozen before it has the four keys and keeps its bytes)
     custody_verification: dict[str, Any] | None = None
     detector_names: dict[str, str] = Field(default_factory=dict)  # names the findings quote (coverage "Not run: <name>")
+    # Public, immutable packet set frozen at request time. Historical snapshots omit this added field entirely.
+    image_evidence: dict[str, Any] | None = None
+    # Optional non-image packet set; absent historical snapshots must retain their canonical bytes.
+    evidence: dict[str, Any] | None = None
+
+    @model_serializer(mode="wrap")
+    def _omit_unset_image_evidence(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        return _without_unset(handler(self), "image_evidence", "evidence")
 
 
 FULL_PROFILES = frozenset({"standard", "forensic"})
@@ -267,8 +275,8 @@ _utc = times.to_utc  # one form on every engine: a time is printed in UTC (D-72)
 
 
 def principal_names(db: Session, ids: set[str]) -> dict[str, str]:
-    """Display names of principals; the built-in principals by their fixed names, `system` as Veritas, unknown ids as themselves."""
-    names = {BOOTSTRAP_ID: bootstrap_principal().display_name, LOCAL_ID: local_principal().display_name, audit.SYSTEM_ACTOR: "Veritas"}
+    """Display names of principals; the built-in principals by their fixed names, `system` as Chipmunk Verify, unknown ids as themselves."""
+    names = {BOOTSTRAP_ID: bootstrap_principal().display_name, LOCAL_ID: local_principal().display_name, audit.SYSTEM_ACTOR: "Chipmunk Verify"}
     wanted = ids - set(names)
     if wanted:
         names.update({row.id: row.display_name for row in db.scalars(select(PrincipalRow).where(PrincipalRow.id.in_(wanted)))})
@@ -437,7 +445,11 @@ def review_of(db: Session, analysis: Analysis) -> SnapshotReview:
 
 def build(db: Session, analysis: Analysis, result: dict[str, Any], *, report_id: str, revision: int, profile: str, redacted: bool,
           supersedes_report_id: str | None, revision_reason: str | None, requested_at: datetime, requested_by: str,
-          template_set: str, veritas_version: str, verified: audit.Verification | None = None) -> ReportSnapshot:
+          template_set: str, veritas_version: str, verified: audit.Verification | None = None,
+          store: ObjectStore | None = None) -> ReportSnapshot:
+    from app.reports.image_evidence import capture
+    from app.reports.multimedia_evidence import capture as capture_multimedia
+
     frozen_review = review_of(db, analysis)
     names = principal_names(db, {requested_by})
     media = db.get(MediaObject, analysis.media_id) if analysis.media_id else None
@@ -480,12 +492,14 @@ def build(db: Session, analysis: Analysis, result: dict[str, Any], *, report_id:
                      for a in annotations],
         custody=custody,
         thumbnails=thumbnail_artefacts(db, analysis.id, result),
-        exhibit_images=exhibit_images(db, analysis, result, finding_thumbnails_only=not full),
+        exhibit_images=exhibit_images(db, analysis, result, store=store, finding_thumbnails_only=not full),
         model_cards=model_cards(result) if full else [],
         revisions=revisions(db, analysis.id, profile, revision) if full else [],
         actor_names=principal_names(db, {str(e["actor_id"]) for e in custody} | {a.author_id for a in annotations}) if full else {},
         custody_verification=custody_verification(db, verified) if full else None,
         detector_names=detector_names(db, analysis.id, result) if full else {},
+        image_evidence=capture(db, analysis, store=store),
+        evidence=capture_multimedia(db, analysis, result=result, store=store),
     )
 
 

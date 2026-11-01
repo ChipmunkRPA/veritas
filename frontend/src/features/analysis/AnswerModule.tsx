@@ -3,13 +3,14 @@ import type { AnalysisDetail, Finding } from '../../lib/api/queries'
 import { cx } from '../../lib/cx'
 import { Button, ConfidenceMeter, Eyebrow, ScaleInterval } from '../../components/ui'
 import {
-  agreement, basisOf, checksCounted, errorRateLine, guidance, headline, insufficientReasons, lowAgreement, nextStep, noEstimateLine, notRunCount, notRunOfServer,
+  agreement, basisOf, checksCounted, errorRateLine, flaggedOutsideSentence, guidance, headline, insufficientReasons, invalidSentence, lowAgreement, nextStep, noEstimateLine, notRunCount, notRunOfServer,
   uncalibratedNote,
   numeral, stepOf, type Basis, type FlagSignal,
 } from './answer'
 import { numberPhrase, resultNumber, scaleNote, statisticalAlone } from './resultNumber'
 import { CAPTURE_BASIS, aloneOtherWay, markerBasisWord, markerOf, outsideValidated, recordOf, statisticalWithheld } from './record'
 import { failedSteps, findingsFailed } from './vocabulary'
+import { presentedCustomerAssessment } from './customerAssessment'
 
 const STEP_TEXT = ['text-text', 'text-verdict-1', 'text-verdict-2', 'text-verdict-3', 'text-verdict-4', 'text-verdict-5'] as const
 
@@ -66,12 +67,19 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
   const d = analysis.decision
   if (!d) return null
   const basis = basisOf(d, findings)
-  const step = stepOf(d, basis)
+  const customer = presentedCustomerAssessment({ ...analysis, findings, signals })
+  const step = customer.applies ? customer.direction === 'ai' ? 4 : customer.direction === 'original' ? 2
+    : customer.direction === 'unavailable' ? 0 : 3 : stepOf(d, basis)
   const n = resultNumber(d, findings, analysis.condition_profile)
   const ci = n.kind === 'calibrated' || n.kind === 'text' ? n.range : null
   const phrase = numberPhrase(n)
   const g = guidance(analysis.kind, d, basis, errorRateLine(analysis.kind, d, analysis.condition_profile, analysis.calibration ?? []), analysis.coverage, findings, signals,
     analysis.condition_profile, analysis.caveats)
+  const customerLimits = [customer.limitation, flaggedOutsideSentence(analysis.kind,
+    customer.direction === 'original' ? { ...d, code: 'no_ai_indicators' } : d, findings, signals), invalidSentence(findings)]
+    .filter((text): text is string => !!text)
+  const displayGuidance = customer.applies ? { means: [customer.meaning], doesNotMean: customerLimits } : g
+  const displayedInterval = customer.applies ? customer.interval_pct : ci
   // N-19n (Q4-01): the step that writes the findings failed: no agreement is worked out, and the next step is to run again
   const noFindings = findingsFailed(analysis.caveats)
   const agree = agreement(d, analysis.coverage, findings, noFindings)
@@ -86,15 +94,31 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
   return (
     <section id="section-summary" data-testid="answer" data-code={d.code} data-basis={basis} data-tour="verdict" aria-labelledby={headingId}
       className="scroll-mt-14 border-b border-border pb-8">
-      <Eyebrow as="h2" id={headingId}>Summary</Eyebrow>
+      <Eyebrow as="h2" id={headingId}>Automated conclusion</Eyebrow>
       <p data-testid="headline" className={cx('mt-3 m-0 display text-h1 font-normal max-w-[36ch]', STEP_TEXT[step])}>
-        {headline(d, basis)}{lowAgreement(d, findings, analysis.condition_profile) && ' — the checks disagree'}
+        {customer.applies ? customer.headline : headline(d, basis)}{!customer.applies && lowAgreement(d, findings, analysis.condition_profile) && ' — the checks disagree'}
       </p>
+      {customer.applies && customer.scope_note && <div data-testid="assessment-scope" className="mt-4 border-l-2 border-accent bg-surface-2 px-4 py-3 text-body text-text max-w-[76ch]">
+        <p className="m-0 font-semibold">{customer.scope_label}</p>
+        <p className="mt-1 mb-0">{customer.scope_note}</p>
+      </div>}
       {opinion}
 
       <div className="mt-6 grid gap-10 min-[960px]:grid-cols-[7fr_5fr]">
         <div className="min-w-0">
-          {basis === 'documentary_declared' ? (
+          {customer.applies ? (
+            <div data-testid="customer-assessment" data-direction={customer.direction}>
+              {customer.confidence_pct !== null ? <>
+                <p className="m-0 display text-h2 text-text num">{customer.confidence_label}: <strong className="font-medium">{customer.confidence_pct}%</strong></p>
+                <p className="mt-2 mb-0 text-small text-text-muted">{customer.direction === 'ai' ? 'In favour of AI generation or AI alteration.'
+                  : customer.scope === 'visual_content' ? 'In favour of original visual content.'
+                    : customer.scope === 'assessed_components' ? 'In favour of original content in the assessed components.' : 'In favour of an original file.'} This is an estimate, not a verified accuracy rate.</p>
+              </> : <p className="m-0 text-body text-text-muted">{customer.probability_ai_pct !== null
+                ? `Estimated AI likelihood: ${customer.probability_ai_pct}%. No reliable 80% tendency is established.`
+                : 'A confidence percentage is not available for this result.'}</p>}
+              <p className="mt-3 mb-0 text-small text-text-muted">A tendency requires an eligible estimate of at least 80% for that answer. Individual check scores and the upper end of an uncertainty interval do not meet this rule by themselves.</p>
+            </div>
+          ) : basis === 'documentary_declared' ? (
             <div data-testid="documentary-seal">
               <p className="m-0 display text-h2 text-text"><span aria-hidden>◆ </span>Documentary</p>
               <p className={cx('mt-2 m-0 text-small num', againstInk(d, analysis.condition_profile))}>Statistical checks alone: {statisticalAlone(d, analysis.condition_profile)}</p>
@@ -129,7 +153,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
                 : basis === 'insufficient' || notRunOfServer(d, analysis.coverage) ? noEstimateLine(analysis.coverage, d) : 'No estimate: a check that this analysis depends on did not run.'}
             </p>
           )}
-          {basis !== 'documentary_declared' && (
+          {!customer.applies && basis !== 'documentary_declared' && (
             <div className="mt-6" data-tour="scale">
               {n.kind === 'calibrated'
                 ? <ScaleInterval step={step} estimate={n.estimate * 100} low={ci?.[0]} high={ci?.[1]} note={scaleNote(d, n.kind)} />
@@ -161,8 +185,16 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
             // the statistical checks' own, and not where a record set it ("Plausible: not established" read as something the
             // record failed to establish) or decides alone
             <>
-              <dt className="eyebrow pt-1">Plausible</dt>
-              <dd data-testid="fact-plausible" className="m-0 text-body text-text num">{ci ? `${ci[0]}–${ci[1]}` : <span className="text-text-muted">not established</span>}</dd>
+              <dt className="eyebrow pt-1">Estimate range</dt>
+              <dd data-testid="fact-plausible" className="m-0 text-body text-text num">
+                {displayedInterval ? <>
+                  <span className="font-medium">{displayedInterval[0]}–{displayedInterval[1]}%</span> <span className="text-small text-text-muted">({customer.applies ? customer.interval_label : '90% interval'})</span>
+                  <p className="mt-1 mb-0 text-small text-text-muted">{customer.applies ? customer.interval_note : 'Uncertainty in the automated estimate. It does not cover every detection error or unfamiliar type of content.'}</p>
+                </> : <span className="text-small text-text-muted">{n.kind === 'uncalibrated'
+                  ? 'Unavailable — this analysis is not calibrated.'
+                  : n.kind === 'capped' ? 'Unavailable — this input is outside the validated scope.'
+                    : 'Unavailable — no reliable interval was established for this result.'}</span>}
+              </dd>
             </>
           )}
           {n.kind !== 'record' && !(n.kind === 'none' && d.fusion_mode === 'artefact') && (
@@ -171,9 +203,10 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
             // fallback's "No · …" claims nothing and stays); outside what was validated the fact says that the
             // calibration does not reach the input
             <>
-              <dt className="eyebrow pt-1">Calibrated</dt>
+              <dt className="eyebrow pt-1">{customer.applies ? 'Accuracy at 80%' : 'Calibrated'}</dt>
               <dd data-testid="fact-calibrated" className="m-0 text-body text-text">
-                {n.kind === 'capped' && d.fusion_mode === 'artefact' ? CALIBRATION_OUTSIDE
+                {customer.applies ? 'Not yet measured. We do not have verified counts of genuine files falsely flagged, or AI files missed, at this 80% threshold.'
+                  : n.kind === 'capped' && d.fusion_mode === 'artefact' ? CALIBRATION_OUTSIDE
                   : `${checksOwn ? `${CALIBRATED_CHECKS} · ` : ''}${calibratedWord(analysis, d, onExpert != null)}`}
               </dd>
             </>
@@ -190,7 +223,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
       <div className="mt-8 grid gap-10 min-[960px]:grid-cols-2">
         <div data-testid="means" className="min-w-0">
           <h3 className="m-0 text-h3 font-semibold text-text">What this means</h3>
-          {g.means.map((p) => <p key={p} className="mt-2 m-0 text-body text-text max-w-[64ch]">{p}</p>)}
+          {displayGuidance.means.map((p) => <p key={p} className="mt-2 m-0 text-body text-text max-w-[64ch]">{p}</p>)}
           {basis === 'insufficient' && (
             <ul className="mt-2 m-0 p-0 list-none space-y-1">
               {insufficientReasons(d, analysis.condition_profile, analysis.coverage).map((r) => (
@@ -201,7 +234,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
         </div>
         <div data-testid="does-not-mean" className="min-w-0">
           <h3 className="m-0 text-h3 font-semibold text-text">What this does not mean</h3>
-          {g.doesNotMean.map((p) => <p key={p} className="mt-2 m-0 text-body text-text max-w-[64ch]">{p}</p>)}
+          {displayGuidance.doesNotMean.map((p) => <p key={p} className="mt-2 m-0 text-body text-text max-w-[64ch]">{p}</p>)}
         </div>
       </div>
 
@@ -213,7 +246,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
               <p data-testid="not-validated-sentence" className="m-0 text-small text-text">
                 {notValidated.length === 1 ? notValidated[0].text : `Not validated for this result: ${notValidated.map((x) => x.label).join('; ')}.`}
               </p>
-              <Button variant="text" className="mt-1" onClick={onExpert}>Details in the expert view</Button>
+              <Button variant="text" className="mt-1" onClick={onExpert}>View validation details</Button>
             </div>
           ) : (
             <ul className="m-0 p-0 list-none space-y-1.5 max-w-[72ch]">

@@ -8,7 +8,7 @@
  * - `layers` absent means "the preset of the analysis" (UX §5.5: the lens the top finding needs); `layers=` (empty) is "no lenses".
  * - At most one map lens (UX §5.9 "Combinations"); marks stack. Parsing is tolerant: malformed parts are dropped, numbers clamped.
  */
-import { MAX_ZOOM, MIN_ZOOM } from '../../lib/coords'
+import { MAX_ZOOM, MIN_ZOOM, type Box } from '../../lib/coords'
 import { SHOW_THRESHOLD_MAX, SHOW_THRESHOLD_OVERLAY } from '../../lib/colormap'
 
 export type MarkKind = 'reliability' | 'regions' | 'faces' | 'clones' | 'annotations'
@@ -29,6 +29,8 @@ export interface ViewerState {
   finding: string | null
   compare: CompareMode
   swipe: number
+  /** Exact source-pixel position opened from an image evidence card. */
+  focus?: Box | null
 }
 
 export const DEFAULT_OPACITY = 70
@@ -86,6 +88,10 @@ export function parseViewerState(params: URLSearchParams): ViewerState {
   const exhibit = params.get('exhibit')
   const region = params.get('region')
   const finding = params.get('finding')
+  const focusValues = params.get('focus')?.split(',').map(Number)
+  const focus = focusValues?.length === 4 && focusValues.every(Number.isFinite)
+    && focusValues[0] >= 0 && focusValues[1] >= 0 && focusValues[2] > 0 && focusValues[3] > 0
+    ? { x: focusValues[0], y: focusValues[1], w: focusValues[2], h: focusValues[3] } : null
   return {
     exhibit: exhibit && ID.test(exhibit) ? exhibit : null,
     layers: params.has('layers') ? parseLayers(params.get('layers') ?? '') : null,
@@ -97,6 +103,7 @@ export function parseViewerState(params: URLSearchParams): ViewerState {
     finding: finding && LABEL.test(finding) ? finding : null,
     compare: (COMPARE as readonly string[]).includes(compare ?? '') ? (compare as CompareMode) : 'overlay',
     swipe: swipe === null ? DEFAULT_SWIPE : clamp(swipe, 0, 100),
+    focus,
   }
 }
 
@@ -113,6 +120,7 @@ export function serialiseViewerState(s: ViewerState): URLSearchParams {
   if (s.cy !== null) p.set('cy', trim(s.cy, 1))
   if (s.region) p.set('region', s.region)
   if (s.finding) p.set('finding', s.finding)
+  if (s.focus) p.set('focus', [s.focus.x, s.focus.y, s.focus.w, s.focus.h].map((v) => trim(v, 3)).join(','))
   if (s.compare !== 'overlay') p.set('compare', s.compare)
   if (s.compare === 'swipe' && s.swipe !== DEFAULT_SWIPE) p.set('swipe', trim(s.swipe, 0))
   return p

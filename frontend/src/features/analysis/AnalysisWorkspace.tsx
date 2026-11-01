@@ -1,10 +1,10 @@
 import MediaAccessNotice from '../../components/MediaAccessNotice'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { MoreHorizontal } from 'lucide-react'
 import { api, hasApiKey } from '../../lib/api'
-import { isTerminal, qk, useAnalysis, useAnnotations, useCase, useDetectorRuns, useExhibits, useFindings, useMe, useModelCards, useSignals } from '../../lib/api/queries'
+import { isTerminal, qk, useAnalysis, useCase, useDetectorRuns, useExhibits, useFindings, useMe, useModelCards, useSignals } from '../../lib/api/queries'
 import { ApiError } from '../../lib/api/client'
 import { useMediaQuery } from '../../lib/useMediaQuery'
 import NotFound from '../../components/NotFound'
@@ -35,20 +35,16 @@ import CustodianHashNotice from '../cases/CustodianHashNotice'
 import ProvenancePanel from './ProvenancePanel'
 import TechnicalAppendix from './TechnicalAppendix'
 import MethodsPanel from './MethodsPanel'
-import ReviewStateLine from '../review/ReviewStateLine'
-import ExaminerOpinion from '../review/ExaminerOpinion'
-import PeerReviewAction from '../review/PeerReviewAction'
-import { STATUS_WORD, dispositions } from '../review/review'
-import ReviewPanel, { LockedBanner } from '../review/ReviewPanel'
 import ExportDialog from '../reports/ExportDialog'
 import RerunDialog from './RerunDialog'
 import { useSectionInView } from './sectionInView'
-import SentenceNotes, { sentenceNoteNumbers } from '../review/SentenceNotes'
-import WithdrawDialog from '../review/WithdrawDialog'
-import { useMayWithdraw } from '../review/withdraw'
 import { requestRunAgain, unpublishedRevision } from '../../lib/api/rerun'
 import { deletable, mayDelete, mayExamine } from '../../lib/api/roles'
 import RevisionDeltas from './RevisionDeltas'
+import ImageEvidenceCards from '../evidence/ImageEvidenceCards'
+import MultimediaEvidenceCards from '../evidence/MultimediaEvidenceCards'
+import ExpertAnalysisInvitation from './ExpertAnalysisInvitation'
+import AutomatedResultStatus from './AutomatedResultStatus'
 
 /** Passed to the nested section routes, which scroll once the section they target has rendered. */
 export interface WorkspaceContext {
@@ -59,10 +55,11 @@ const SECTIONS: { path: string; label: string }[] = [
   { path: '', label: 'Summary' },
   { path: 'findings', label: 'Findings' },
 ]
-/** UX §4.2 section index of a v2 analysis; image and video analyses add the exhibit preview (E-4, E-5), and the examiner layer
- *  closes the document (ARCHITECTURE §7.2 `review`, E-6). */
-const V2_SECTIONS = (exhibit: boolean, revision: boolean): { path: string; label: string }[] => [
+/** The self-service result exposes the automated assessment and its supporting evidence. */
+const V2_SECTIONS = (exhibit: boolean, revision: boolean, image = false, media = false): { path: string; label: string }[] => [
   ...SECTIONS,
+  ...(image ? [{ path: 'image-evidence', label: 'Image evidence' }] : []),
+  ...(media ? [{ path: 'media-evidence', label: 'Source evidence' }] : []),
   ...(exhibit ? [{ path: 'exhibit', label: 'Exhibit' }] : []),
   { path: 'reached', label: 'How reached' },
   { path: 'ledger', label: 'Evidence' },
@@ -71,17 +68,17 @@ const V2_SECTIONS = (exhibit: boolean, revision: boolean): { path: string; label
   { path: 'appendix', label: 'Appendix' },
   // Q-4c: a revision that supersedes another shows its deltas (CC-03).
   ...(revision ? [{ path: 'revision', label: 'Revision' }] : []),
-  { path: 'review', label: 'Review' },
 ]
 
 /** Every section a result page can hold, in the order of the index; a page observes those it shows. */
-const ALL_SECTIONS = ['summary', 'findings', 'exhibit', 'reached', 'ledger', 'provenance', 'methods', 'appendix', 'revision', 'review'] as const
+const ALL_SECTIONS = ['summary', 'findings', 'image-evidence', 'media-evidence', 'exhibit', 'reached', 'ledger', 'provenance', 'methods', 'appendix', 'revision'] as const
 
 /** Analysis workspace (ARCHITECTURE §7.1–7.3, UX §4.2): header with the review state line, a sticky section index, the progress
  *  rail while the analysis runs, then one scrolling document whose sections the nested routes deep-link to. Analyses with a v2
  *  decision get the answer module and key findings (E-2), the exhibit preview that opens the evidence viewer or the video
  *  workspace (E-4, E-5) or the manuscript, how the estimate was reached, coverage and the evidence ledger, provenance, methods and
- *  the technical appendix (E-3, E-7), and the review panel (E-6). v1 results render through `legacy/` only (E-8). */
+ *  the technical appendix (E-3, E-7). Expert services are arranged separately through the contact invitation.
+ *  v1 results render through `legacy/` only (E-8). */
 export default function AnalysisWorkspace() {
   const { id = '' } = useParams()
   const nav = useNavigate()
@@ -95,10 +92,6 @@ export default function AnalysisWorkspace() {
   const findings = useFindings(id, done)
   const signals = useSignals(id, v2)
   const exhibits = useExhibits(id, v2)
-  // N-19 (D-69): the examiner's status of a finding is a chip on its key-finding row
-  const annotations = useAnnotations(id, v2)
-  const statuses = useMemo(() => new Map([...dispositions(annotations.data ?? [])].map(([finding, d]) => [finding, STATUS_WORD[d.status]])), [annotations.data])
-  const sentenceNotes = useMemo(() => sentenceNoteNumbers(annotations.data ?? []), [annotations.data])
   const runs = useDetectorRuns(id, v2)
   const cards = useModelCards(v2)
   const tok = useQuery({ queryKey: qk.downloadToken(id), queryFn: () => api.downloadToken(id), enabled: done, staleTime: 5 * 60_000 })
@@ -126,8 +119,6 @@ export default function AnalysisWorkspace() {
   const [exporting, setExporting] = useState(false)
   const [rerunning, setRerunning] = useState(false)
   const [rerunRefused, setRerunRefused] = useState(false)
-  const [withdrawing, setWithdrawing] = useState(false)
-  const withdraws = useMayWithdraw(a)  // D-70: a signed revision is withdrawn from the More actions menu
   const me = useMe()
   const toggleInHeader = useMediaQuery('(min-width: 640px) and (max-width: 1199px)')
   const linksRef = useRef<HTMLDivElement>(null)
@@ -216,11 +207,18 @@ export default function AnalysisWorkspace() {
     : a.kind === 'video' && r?.video?.width ? `${r.video.width}×${r.video.height}`
       : a.kind === 'audio' ? describeFacts(audioFacts) : null
   const elapsedRun = a.started_at && a.finished_at ? (Date.parse(a.finished_at) - Date.parse(a.started_at)) / 1000 : null
-  const engine = health.data?.device && health.data.version ? `${deviceWords(health.data.device)} · Veritas ${health.data.version}` : null
+  const engine = health.data?.device && health.data.version ? `${deviceWords(health.data.device)} · Chipmunk Verify ${health.data.version}` : null
   const t = tok.data ?? ''
   const ready = done ? legacy.isSuccess && findings.isFetched && (!v2 || (signals.isFetched && runs.isFetched && exhibits.isFetched)) : true
   const rail = <ProgressRail analysis={a} events={events} />
-  const sections = v2 ? V2_SECTIONS(a.kind === 'image' || a.kind === 'video' || a.kind === 'audio', a.supersedes_id != null).filter((s) => expert || !EXPERT_SECTIONS.has(s.path)) : SECTIONS
+  const evidenceFirst = !expert && (a.kind === 'video' || a.kind === 'audio' || a.kind === 'document')
+  const mediaLabel = a.kind === 'video' ? 'Video & audio' : a.kind === 'audio' ? 'Audio intervals' : 'Text passages'
+  const sections = v2 ? V2_SECTIONS(a.kind === 'image' || a.kind === 'video' || a.kind === 'audio', a.supersedes_id != null, a.kind === 'image', a.kind === 'video' || a.kind === 'audio' || a.kind === 'document')
+    .filter((s) => expert || !EXPERT_SECTIONS.has(s.path)).map((s) => s.path === 'media-evidence' ? { ...s, label: mediaLabel } : s) : SECTIONS
+  if (v2 && evidenceFirst) {
+    const index = sections.findIndex((item) => item.path === 'media-evidence')
+    if (index > 1) sections.splice(1, 0, ...sections.splice(index, 1))
+  }
   // With an API key configured, media requests carry the signed token: wait for it before rendering stills, frames and thumbnails.
   const tokenReady = !hasApiKey || !!t
   const mediaNotice = <MediaAccessNotice ready={tokenReady} failed={!!tok.error} pending={tok.isFetching} onRetry={() => void tok.refetch()} />
@@ -234,9 +232,7 @@ export default function AnalysisWorkspace() {
 
   const exhibit = a.kind === 'document'
     ? r?.sentences && r.text != null && r.paragraphs
-      // N-19a ("Workflow"): a note on a sentence is added where the sentence is read, and marked there
-      ? <ManuscriptView sentences={r.sentences} text={r.text} paragraphs={r.paragraphs} noted={v2 ? sentenceNotes : undefined}
-          notes={v2 ? (idx) => <SentenceNotes key={idx} analysis={a} sentenceIdx={idx} /> : undefined} />
+      ? <ManuscriptView sentences={r.sentences} text={r.text} paragraphs={r.paragraphs} />
       : null
     : a.kind !== 'image' && a.kind !== 'video' && a.kind !== 'audio' ? null
       : !tokenReady
@@ -253,22 +249,26 @@ export default function AnalysisWorkspace() {
           {exhibitNotice ?? <SkeletonRows className="mt-4" />}
         </section>
 
+  const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
   const body = !legacy.data ? null : !v2 ? (
-    <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{hr}<FindingsList query={findings} failed={findingsFailed(a.caveats)} /></>} />
+    <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />
   ) : (
     <div className="mt-12 space-y-12" data-testid="v2-result">
       {findings.isFetched
-        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []} opinion={<ExaminerOpinion analysis={a} />} onExpert={view === 'plain' ? () => chooseView('expert') : undefined} extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
+        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []} onExpert={view === 'plain' ? () => chooseView('expert') : undefined} extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
         : <section id="section-summary" className="scroll-mt-14 border-b border-border pb-8"><SkeletonRows /></section>}
-      <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} statuses={statuses} plain={view === 'plain'} />
+      {expertInvitation}
+      {!evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain={view === 'plain'} />}
+      {a.kind === 'image' && <ImageEvidenceCards analysisId={a.id} token={t} mediaReady={tokenReady} />}
+      {(a.kind === 'video' || a.kind === 'audio' || a.kind === 'document') && <MultimediaEvidenceCards analysisId={a.id} kind={a.kind} token={t} mediaReady={tokenReady} />}
+      {evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain />}
       {view === 'plain' && (
         <section data-testid="plain-more" aria-labelledby="plain-more-heading" className="border-t border-border pt-8">
-          <h2 id="plain-more-heading" className="m-0 eyebrow">The evidence</h2>
+          <h2 id="plain-more-heading" className="m-0 eyebrow">Full analysis record</h2>
           <p className="mt-3 mb-0 text-body text-text max-w-[70ch]">
-            This plain view shows the answer and the key findings. The expert view adds the exhibit, how the estimate was reached, every
-            check with its reference, provenance and metadata, methods and validation, and the technical appendix.
+            The source evidence above is available in this view. The full record adds the interactive exhibit, how the estimate was reached, every check with its reference, provenance and validation.
           </p>
-          <Button variant="ghost" className="mt-4" onClick={() => chooseView('expert')}>See the evidence</Button>
+          <Button variant="ghost" className="mt-4" onClick={() => chooseView('expert')}>Open full analysis record</Button>
         </section>
       )}
       {mediaNotice}
@@ -313,7 +313,7 @@ export default function AnalysisWorkspace() {
               {(['plain', 'expert'] as const).map((v) => (
                 <button key={v} type="button" aria-pressed={view === v} onClick={() => { if (view !== v) chooseView(v) }}
                   className={cx('h-7 px-2.5 text-small transition-colors duration-fast first:border-r first:border-border', view === v ? 'bg-surface-3 text-text' : 'text-text-muted hover:text-text')}>
-                  {v === 'plain' ? 'Plain' : 'Expert'}
+                  {v === 'plain' ? 'Plain' : 'Detailed'}
                 </button>
               ))}
             </div>
@@ -329,7 +329,6 @@ export default function AnalysisWorkspace() {
             : <Link to="/analyses" data-testid="back-link" className="text-small text-text-muted hover:text-text inline-flex items-center min-h-8">‹ Analyses</Link>}
           <div className="flex items-center gap-2">
             {done && toggleInHeader && viewToggle}
-            {done && v2 && <PeerReviewAction analysis={a} />}
             {done && (
               <>
                 {/* Q-4c: re-run with the pinned manifest (CC-03); the dialog explains a refusal. */}
@@ -350,18 +349,16 @@ export default function AnalysisWorkspace() {
                     : <Button variant="ghost" disabled title="Secure media links are unavailable" data-tour="report">PDF report</Button>}
                 {superseded ? null : tokenReady ? <ButtonLink href={api.exportUrl(a.id, t)} variant="ghost" target="_blank" rel="noreferrer">JSON</ButtonLink>
                   : <Button variant="ghost" disabled title="Secure media links are unavailable">JSON</Button>}
-                {v2 && !superseded && <ExportDialog open={exporting} analysis={a} me={me.data} onClose={() => setExporting(false)} />}
+                {v2 && !superseded && <ExportDialog open={exporting} analysis={a} me={me.data} selfService onClose={() => setExporting(false)} />}
               </>
             )}
             <Menu align="right" ariaLabel="More actions" trigger={<MoreHorizontal size={16} strokeWidth={1.5} aria-hidden />} triggerClassName="h-8 w-8 justify-center"
-              items={[{ id: 'copy', label: 'Copy analysis ID' }, ...(withdraws ? [{ id: 'withdraw', label: 'Withdraw…', danger: true }] : []),
+              items={[{ id: 'copy', label: 'Copy analysis ID' },
                 ...(deletes ? [{ id: 'delete', label: 'Delete analysis', danger: true }] : [])]}
               onSelect={(k) => {
                 if (k === 'copy') navigator.clipboard?.writeText(a.id).catch(() => undefined)
-                if (k === 'withdraw') setWithdrawing(true)
                 if (k === 'delete') setConfirming(true)
               }} />
-            {withdrawing && <WithdrawDialog open analysis={a} onClose={() => setWithdrawing(false)} />}
           </div>
         </div>
         {confirming && (
@@ -384,8 +381,7 @@ export default function AnalysisWorkspace() {
           <span>submitted {fmtDateLong(a.created_at)}</span>
           {elapsedRun != null && <span>{fmtSeconds(elapsedRun)}</span>}
         </div>
-        {done && <p data-testid="review-state" className="mt-3 m-0"><ReviewStateLine analysis={a} /></p>}
-        {done && <LockedBanner analysis={a} />}
+        {done && <AutomatedResultStatus analysis={a} />}
         <CustodianHashNotice analysis={a} />
       </header>
       {done && (
@@ -454,7 +450,6 @@ export default function AnalysisWorkspace() {
       {done && legacy.error && <ErrorState className="mt-12" onRetry={() => void legacy.refetch()}>{(legacy.error as Error).message}</ErrorState>}
       {done && legacy.isPending && <SkeletonRows className="mt-12" />}
       {done && body}
-      {v2 && legacy.data && findings.isFetched && <ReviewPanel analysis={a} findings={findings.data ?? []} caseRole={caseQ.data?.my_role} plain={view === 'plain'} />}
       {done && <div className="mt-12">{rail}</div>}
 
       <Outlet context={{ ready } satisfies WorkspaceContext} />

@@ -52,6 +52,7 @@ class LocaliserOutput:
     weights_sha256: str
     resolution_policy: dict[str, Any]
     conditions: dict[str, float] = field(default_factory=dict)  # native-pixel shares per condition
+    candidate_eligibility: dict[str, Any] | None = None  # selection only; never changes the raw map or reliability
 
 
 # --- geometry --------------------------------------------------------------------------------------------------------
@@ -188,8 +189,10 @@ def components(values: np.ndarray, reliable: np.ndarray, width: int, height: int
         if area < min_area:
             continue
         inside = values[labels == i]
-        found.append(({"kind": "bbox", "bbox": {"x": round(x * sx, 1), "y": round(y * sy, 1), "w": round(w * sx, 1),
-                                                  "h": round(h * sy, 1)}},
+        x0, y0 = round(x * sx, 1), round(y * sy, 1)
+        x1, y1 = round((x + w) * sx, 1), round((y + h) * sy, 1)
+        found.append(({"kind": "bbox", "bbox": {"x": x0, "y": y0, "w": round(x1 - x0, 1),
+                                                  "h": round(y1 - y0, 1)}},
                       {"mean": round(float(inside.mean()), 4), "max": round(float(inside.max()), 4),
                        "area_share": round(area / float(grid_w * grid_h), 4)}))
     found.sort(key=lambda r: (-r[1]["mean"], -r[1]["area_share"], r[0]["bbox"]["y"], r[0]["bbox"]["x"]))

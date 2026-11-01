@@ -8,6 +8,7 @@ with uncached frames is one decoder pass.
 """
 from __future__ import annotations
 
+import hashlib
 import threading
 from collections import OrderedDict
 from collections.abc import Callable, Iterable, Iterator
@@ -26,6 +27,7 @@ class FrameStore:
         self.path, self.table, self.max_bytes = path, table, int(max_bytes)
         self._check, self._decoder = check, decoder
         self._cache: OrderedDict[tuple[int, int | None], np.ndarray] = OrderedDict()
+        self._native_anchors: dict[int, dict] = {}
         self._lock = threading.Lock()
         self.bytes = 0
         self.hits = self.misses = self.evictions = self.decode_passes = 0
@@ -69,6 +71,14 @@ class FrameStore:
             for frame in frames:
                 frame.rgb.setflags(write=False)
                 with self._lock:
+                    if max_side is None:
+                        anchor = {"frame_index": frame.index, "pts": frame.pts, "time_base": self.table.time_base,
+                                  "width": int(frame.rgb.shape[1]), "height": int(frame.rgb.shape[0]),
+                                  "decoded_rgb_sha256": hashlib.sha256(frame.rgb.tobytes()).hexdigest()}
+                        previous = self._native_anchors.get(frame.index)
+                        if previous is not None and previous != anchor:
+                            raise DecodeError("Video could not be decoded consistently: a repeated frame changed")
+                        self._native_anchors[frame.index] = anchor
                     self._put((frame.index, max_side), frame.rgb)
                 yield frame.index, frame.rgb
         finally:
@@ -85,3 +95,12 @@ class FrameStore:
         if index not in frames:
             raise DecodeError(f"Video could not be decoded: frame {index} is not available")
         return frames[index]
+
+    def native_anchors(self) -> list[dict]:
+        """Pixels actually decoded at native resolution, independent of cache eviction.
+
+        Decode coverage is not detector coverage; callers must join these anchors to
+        successful scoring windows before presenting a frame as scored evidence.
+        """
+        with self._lock:
+            return [dict(self._native_anchors[i]) for i in sorted(self._native_anchors)]

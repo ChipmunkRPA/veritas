@@ -83,6 +83,8 @@ def reproduce(path: Path, *, tolerance: float = DEFAULT_TOLERANCE, public_key_pe
     if not verification.ok:
         raise SignerNotAuthenticated(verification)
     bundle = verification.bundle
+    if bundle.get('schema') != pv.SCHEMA:
+        raise ReproduceRefused('This public derivative verifies evidence integrity but cannot reproduce inference. Obtain the authorised internal analysis record separately.')
     source = bundle.get("source") or {}
     if not source.get("file"):
         raise ReproduceRefused("The package holds no original (source/); export it again with the original to reproduce it.")

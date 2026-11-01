@@ -121,7 +121,9 @@ def request_rerun(aid: str, request: Request, body: RerunRequest | None = None) 
         try:
             pins = rerun.check(db, get_registry(), source, _result(db, source) if _published(source) else None, stored)
         except rerun.RerunRefused as e:
-            raise ProblemError(409, "Re-run not possible", str(e)) from None
+            from app.api.public_projection import neutral_text
+
+            raise ProblemError(409, "Re-run not possible", neutral_text(str(e))) from None
         base_id = source.id
     try:
         sha256 = audit.verify_original("rerun", actor_id=principal.id, analysis_id=base_id)
@@ -186,4 +188,12 @@ def revision_deltas(aid: str, tolerance: Annotated[float | None, Query(
                   if a.kind == "video" and published else None for a, published in ((source, before), (revision, after))]
         body = rerun.deltas(revision, source, before=before, after=after, mode=rerun.mode_of(db, aid), before_frames=frames[0],
                             after_frames=frames[1], tolerance=tolerance)
-    return JSONResponse(jsonable_encoder(RevisionDeltas(**body)), headers=NO_STORE)
+    from app.api.public_projection import alias_id, project
+
+    public = project(jsonable_encoder(RevisionDeltas(**body)))
+    for section in ('deltas', 'manifest_changes'):
+        for item in public.get(section, []):
+            for field in ('item', 'field', 'before', 'after'):
+                if isinstance(item.get(field), str):
+                    item[field] = alias_id(item[field])
+    return JSONResponse(public, headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection'})

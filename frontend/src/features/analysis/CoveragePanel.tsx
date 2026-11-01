@@ -1,4 +1,5 @@
-import type { AnalysisDetail, DetectorRun, Finding } from '../../lib/api/queries'
+import { useModelCards, type AnalysisDetail, type DetectorRun, type Finding } from '../../lib/api/queries'
+import { anonymizeModelNames } from './checkNames'
 import { deviceWords } from '../../lib/recordWords'
 import { statusWord } from '../signals/ledger'
 import { notRunOnServer, ofTheServer, ON_THIS_SERVER } from './answer'
@@ -13,6 +14,7 @@ const GROUP: Record<string, 'ran' | 'not run' | 'failed'> = { ok: 'ran', skipped
 /** Coverage (UX §8.5 partial analysis, P9; ARCHITECTURE §4.5 `coverage` finding): which checks produced a result, which did not and why,
  *  the profile that ran, the devices, and whether the input sits inside a validated slice. */
 export default function CoveragePanel({ analysis, runs, findings }: { analysis: AnalysisDetail; runs: readonly DetectorRun[]; findings: readonly Finding[] }) {
+  const cards = useModelCards().data ?? []
   const total = analysis.coverage?.detectors_total ?? runs.length
   const by = analysis.coverage?.by_status ?? {}
   const count = (g: string) => Object.entries(by).filter(([s]) => (GROUP[s] ?? 'not run') === g).reduce((n, [, k]) => n + k, 0)
@@ -38,7 +40,7 @@ export default function CoveragePanel({ analysis, runs, findings }: { analysis: 
       </p>
       {off.length > 0 && (
         <ul className="mt-2 m-0 p-0 list-none text-small">
-          {off.map((r) => <li key={r.id} data-status={r.status}><span data-check className="text-text" title={`${r.detector_id} ${r.detector_version}`}>{checkName(r)}</span> <span className="text-text-muted">· {ofTheServer(r.status, r.reason) ? ON_THIS_SERVER : statusWord(r.status)}{r.reason ? ` · ${r.reason}` : ''}</span></li>)}
+          {off.map((r) => <li key={r.id} data-status={r.status}><span data-check className="text-text">{anonymizeModelNames(checkName(r), cards)}</span> <span className="text-text-muted">· {ofTheServer(r.status, r.reason) ? ON_THIS_SERVER : statusWord(r.status)}{r.reason ? ` · ${anonymizeModelNames(r.reason, cards)}` : ''}</span></li>)}
         </ul>
       )}
       {cp && (
@@ -47,7 +49,7 @@ export default function CoveragePanel({ analysis, runs, findings }: { analysis: 
         </p>
       )}
       {/* N-19k: the count stands in the first line of this block; the finding's own first sentence said it again */}
-      {coverageFinding && withoutCount(coverageFinding.statement) && <p data-testid="coverage-finding" className="mt-2 m-0 text-small text-text-muted max-w-[80ch]">{withoutCount(coverageFinding.statement)}</p>}
+      {coverageFinding && withoutCount(coverageFinding.statement) && <p data-testid="coverage-finding" className="mt-2 m-0 text-small text-text-muted max-w-[80ch]">{anonymizeModelNames(withoutCount(coverageFinding.statement), cards)}</p>}
     </div>
   )
 }

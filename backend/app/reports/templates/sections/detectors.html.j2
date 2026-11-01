@@ -1,6 +1,6 @@
 {% set d = v.detectors %}
 <section class="chapter-cont" id="section-detectors">
-<h2 class="chapter-title"><span class="n">{{ v.number.detectors }}</span>Detector results and error rates</h2>
+<h2 class="chapter-title"><span class="n">{{ v.number.detectors }}</span>Technical check records</h2>
 <h3 class="eyebrow">Evidence ledger</h3>
 {% if d.ledger %}
 <table class="grid ledger">
@@ -27,7 +27,8 @@
 </tbody>
 </table>
 {% endif %}
-<h3 class="eyebrow">Detectors, models and known error rates</h3>
+<h3 class="eyebrow">Check specifications and historical testing</h3>
+{% if v.get('customer_historical_note') %}<p class="caption">{{ v.customer_historical_note }}</p>{% endif %}
 {% for x in d.detectors %}
 <div class="detector" id="{{ x.anchor }}">
 <p class="d-head"><span class="mono">{{ x.id }}</span> {{ x.name }} · version {{ x.version }}</p>

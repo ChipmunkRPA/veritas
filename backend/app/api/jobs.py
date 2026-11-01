@@ -20,6 +20,7 @@ from sqlalchemy import Connection, insert, select, update
 from sqlalchemy.orm import Session
 
 from app.audit import chain as audit
+from app.billing.entitlements import PaymentRequired, require_analysis_payment, require_batch_payment
 from app.core import deadline
 from app.core.config import settings
 from app.core.errors import (  # noqa: F401 (re-exported for v1 callers and tests)
@@ -191,6 +192,10 @@ def _audited(analysis_id: str, refusion: bool, run: Callable[[], str]) -> str:
     with get_session() as s:
         a = s.get(Analysis, analysis_id)
         submitted_by, status = (a.submitted_by, a.status) if a is not None else (None, None)
+        if a is not None and status not in ("cancelled", "done"):
+            # HTTP checks do not cover work left in the queue by an earlier free
+            # instance. Validate the committed receipt before audit/start or models.
+            require_analysis_payment(s, a)
     if status in (None, "cancelled"):
         return run()
     actor, details = submitted_by or audit.SYSTEM_ACTOR, {"refusion": True} if refusion else {}
@@ -378,11 +383,14 @@ def _handle_batch_expand(ctx: JobContext) -> str:
     from app.batches import service as batches
 
     try:
+        require_batch_payment()
         outcome = batches.expand(ctx.job.subject_id, submit=submit_batch_item)
     except Exception as e:  # the job ends here and is not retried: the batch must not read `expanding` for ever
         try:
-            batches.mark_failed(ctx.job.subject_id, f"The batch could not be expanded: an internal error stopped it ({type(e).__name__}). "
-                                                    "The server log has the detail under this batch id.")
+            reason = str(e) if isinstance(e, PaymentRequired) else (
+                f"The batch could not be expanded: an internal error stopped it ({type(e).__name__}). "
+                "The server log has the detail under this batch id.")
+            batches.mark_failed(ctx.job.subject_id, reason)
         except Exception as marking:  # noqa: BLE001 - the database is away: the first error is the one to report
             log.error("batches.mark_failed_failed", batch_id=ctx.job.subject_id, error=str(marking)[:500])
         raise
@@ -490,6 +498,11 @@ def adopt_orphans(queue: JobQueue) -> int:
     with get_session() as s:
         for a in s.query(Analysis).filter(Analysis.status.in_(["queued", "running"])).all():
             if a.id in active:
+                continue
+            try:
+                require_analysis_payment(s, a)
+            except PaymentRequired as error:
+                failed.append((a.id, str(error)))
                 continue
             if _cancelled_job(queue, a.id):
                 # a cancellation whose terminal projection failed (e.g. the expiry callback) is honoured, never re-run

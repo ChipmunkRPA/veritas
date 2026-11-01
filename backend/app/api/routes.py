@@ -14,9 +14,8 @@ from app.api.security import CheckedRoute, authorize, make_download_token, rate_
 from app.audit import chain as audit
 from app.cases import access, intake, review
 from app.cases.intake import KIND_LIMITS
-from app.core.config import settings, text_classifier_source
+from app.core.config import settings
 from app.core.device import DEVICE
-from app.detectors.common.registry import registry
 from app.storage import files
 from app.storage.db import Analysis, get_session
 
@@ -65,13 +64,15 @@ def analyze_text(req: TextRequest, request: Request):
 @router.get("/analyses", response_model=list[AnalysisSummary])
 def list_analyses(request: Request, limit: int = Query(50, ge=1, le=500), kind: str | None = None):
     """Newest first. A non-administrator sees the analyses of its cases only (C-2)."""
+    from app.api.public_projection import project
+
     with get_session() as db:
         q = db.query(Analysis).order_by(Analysis.created_at.desc())
         if (visible := access.visible_analyses(request.state.principal)) is not None:
             q = q.filter(visible)
         if kind:
             q = q.filter(Analysis.kind == kind)
-        return [a.to_summary() for a in q.limit(limit).all()]
+        return JSONResponse(project([a.to_summary() for a in q.limit(limit).all()]), headers={'X-Chipmunk-View': 'customer-projection'})
 
 
 def _get(aid: str) -> Analysis:
@@ -84,8 +85,10 @@ def _get(aid: str) -> Analysis:
 
 @router.get("/analyses/{aid}", response_model=AnalysisDetail)
 def get_analysis(aid: str):
+    from app.api.public_projection import project
+
     a = _get(aid)
-    return {**a.to_summary(), "result": a.result}
+    return JSONResponse(project({**a.to_summary(), "result": a.result}), headers={'X-Chipmunk-View': 'customer-projection'})
 
 
 def _verified(aid: str, purpose: str, actor_id: str) -> None:
@@ -116,8 +119,13 @@ def delete_analysis(aid: str, request: Request):
 
 @router.get("/analyses/{aid}/artifacts/{name}")
 def artifact(aid: str, name: str):
+    from app.api.public_projection import artifact_alias
+
     _get(aid)
-    p = settings.artifacts_dir / aid / files.safe_filename(name)
+    directory = settings.artifacts_dir / aid
+    p = directory / files.safe_filename(name)
+    if not p.is_file() and directory.is_dir():
+        p = next((entry for entry in directory.iterdir() if entry.is_file() and artifact_alias(entry.name) == name), p)
     if not p.is_file():
         raise HTTPException(404, "Artifact not found")
     return FileResponse(p)
@@ -218,24 +226,8 @@ def _v1_number(a: Analysis) -> str | None:
 def report(aid: str, request: Request):
     """The PDF report, with the review status line of the revision. Generating it re-hashes the original first and records
     `report_generated` (C-3). A withdrawn or superseded revision answers 409."""
-    a = _get(aid)
-    if a.status != "done" or not a.result:
-        raise HTTPException(409, f"Analysis status is {a.status}")
-    line = _current_revision(a)
-    number = _v1_number(a)
-    target = _v1_report_file(aid, line)
-    p = Path(a.report_path) if a.report_path else None
-    if p is None or not p.is_file() or p.name != target.name or (number is not None and not _v1_made_with(aid, target.name, number)):
-        from app.reports.builder import build_report
-
-        actor = request.state.principal.id
-        _verified(aid, "report", actor)
-        p = build_report(a.to_summary(), a.result, files.artifact_dir(aid), target, review_line=line, number=number)
-        with get_session() as db:
-            db.get(Analysis, aid).report_path = str(p)
-            db.commit()
-        audit.record_report(aid, Path(p), actor_id=actor, number=number)
-    return FileResponse(p, media_type="application/pdf", filename=f"veritas-report-{aid[:8]}.pdf")
+    _get(aid)
+    raise HTTPException(410, "This older report format is unavailable in the customer view. Generate a new report from the analysis Export menu.")
 
 
 @router.get("/analyses/{aid}/export.json")
@@ -246,7 +238,39 @@ def export_json(aid: str, request: Request):
     _current_revision(a)
     actor = request.state.principal.id
     _verified(aid, "export", actor)
-    response = JSONResponse({**a.to_summary(), "result": a.result}, headers={"Content-Disposition": f'attachment; filename="veritas-{aid[:8]}.json"'})
+    from app.api.public_projection import project
+    from app.engine.customer_assessment import customer_assessment
+    from app.reports import view as report_view
+
+    # Analysis.result is the compatibility/v1 result. The confidence rule must
+    # read the frozen v2 decision rather than infer one from those legacy scores.
+    stored = a.result or {}
+    if getattr(a, "result_schema_version", 1) == 2:
+        from app.api.v2_evidence import _result
+
+        with get_session() as db:
+            stored = _result(db, db.get(Analysis, a.id)) or {}
+    evidence = {}
+    if getattr(a, "kind", None) in {"image", "video", "audio", "document"}:
+        from app.evidence.service import load_packet_set, unavailable_packet_set
+        from app.storage.objects import ObjectStoreError, default_store
+
+        with get_session() as db:
+            try:
+                packet_set = load_packet_set(db, a, default_store())
+            except (ObjectStoreError, ValueError, KeyError, TypeError):
+                raise HTTPException(status_code=500, detail="Evidence failed integrity checks; export was not served.") from None
+            evidence = {"image_evidence" if a.kind == "image" else "evidence": packet_set or unavailable_packet_set(a)}
+    decision = stored.get("decision") or {}
+    display_result = {**stored, "kind": getattr(a, "kind", stored.get("kind")), "status": a.status}
+    if decision and not decision.get("provenance_record"):
+        display_result["stored_record"] = report_view.stored_record(
+            decision, list(stored.get("assessments") or []), list(stored.get("signals") or []))
+    response = JSONResponse({**project({**a.to_summary(), "result": a.result}), **evidence,
+                             "customer_assessment": customer_assessment(display_result),
+                             "projection": {"view": "customer", "result_hash": "hashes the original stored result"}},
+                            headers={"Content-Disposition": f'attachment; filename="chipmunk-verify-{aid[:8]}.json"',
+                                     'X-Chipmunk-View': 'customer-projection'})
     # N-9: a read. The append comes before the response leaves, so a failed append exports nothing
     audit.record("package_exported", actor_id=actor, analysis_id=aid, after_hash=hashlib.sha256(response.body).hexdigest(),
                  details={"format": "v1-export-json"})
@@ -270,9 +294,11 @@ async def ready(request: Request, profile: str | None = Query(None, pattern="^(q
     `loaded` models, and per analysis kind `fusion` (`artefact` or `fallback`), `fusers` (version, the start of the sha256,
     review state) and `text_classifier`; with `profile`, what serves under that profile."""
     from app.api import probes
+    from app.api.public_projection import project
 
     code, body = await probes.ready_body(request, profile)
-    return JSONResponse(status_code=code, content=body, headers={"Cache-Control": "no-store"})
+    return JSONResponse(status_code=code, content=project(body),
+                        headers={"Cache-Control": "no-store", 'X-Chipmunk-View': 'customer-projection'})
 
 
 @router.get("/metrics", response_class=PlainTextResponse)
@@ -287,9 +313,10 @@ def metrics():
 
 @router.get("/models")
 def models():
+    from app.engine.registry import get_registry
+
+    available = sum(1 for item in get_registry().decisions() if item.enabled)
     return {
         "device": str(DEVICE),
-        "image": {"univfd": settings.univfd_enabled, "dfdc_effnet_b7": [u.rsplit("/", 1)[-1] for u in settings.dfdc_urls] if settings.dfdc_enabled else None, "classifiers": settings.image_classifiers, "face_detector": "OpenCV YuNet 2023mar"},
-        "text": {"primary": text_classifier_source(), "secondary": settings.text_secondary_classifier_id, "binoculars": [settings.binoculars_observer_id, settings.binoculars_performer_id] if settings.binoculars_enabled else None, "binoculars_threshold": settings.binoculars_threshold},
-        "loaded": registry.loaded(),
+        "available_checks": available,
     }

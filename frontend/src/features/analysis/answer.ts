@@ -38,7 +38,7 @@ export const HEADLINE: Record<BandKey | Exclude<Basis, 'inferential'>, string> =
   documentary_declared: DECLARATION_HEADLINE,  // N-19p (D6-01): the case row prints it too
   documentary_metadata: 'The file’s metadata names an AI generator',
   documentary_capture: CAPTURE_HEADLINE,  // N-19m (D3-01; D-15)
-  insufficient: 'Veritas could not assess this file reliably',
+  insufficient: 'Chipmunk Verify could not assess this file reliably',
 }
 
 const MEDIA: Record<string, readonly [string, string]> = {
@@ -463,7 +463,7 @@ export function offScaleSentence(d: Decision): string | null {
   const [read, bound] = side === 'for' ? ['indications', '65 or more'] : ['no significant indications', '34 or less']
   const part = offScalePart(d)
   if (part !== null) return `The estimate itself, ${numeral(p)} out of 100, stands in ${ANSWERS_PART[part]} (${PART_BOUND[part]}). The calibrated levels for inputs like this one would have read ${read}; a headline of that answer also needs an estimate of ${bound}.`
-  return `The estimate itself, ${numeral(p)} out of 100, stands in the middle part of the scale (35 to 64), where Veritas gives no answer. The calibrated levels for inputs like this one would have read ${read}; a headline of that answer also needs an estimate of ${bound}.`
+  return `The estimate itself, ${numeral(p)} out of 100, stands in the middle part of the scale (35 to 64), where Chipmunk Verify gives no answer. The calibrated levels for inputs like this one would have read ${read}; a headline of that answer also needs an estimate of ${bound}.`
 }
 
 /** N-19n (supervisor check 29; `abstain.PRIOR_CAVEAT`, word for word: a backend test reads these lines): the caveat of a
@@ -703,7 +703,7 @@ export function flaggedOutsideSentence(kind: string, d: Decision, findings: read
 function baseGuidance(kind: string, d: Decision, basis: Basis, rateLine: string, profile?: ConditionProfile | null): Guidance {
   const [one] = media(kind)
   const confounders = CONFOUNDERS[kind] ?? CONFOUNDERS.image
-  if (basis === 'insufficient') return { means: ['Veritas could not assess this file, for these reasons:'], doesNotMean: ['It is not a finding either way.'] }  // N-17 (D-68)
+  if (basis === 'insufficient') return { means: ['Chipmunk Verify could not assess this file, for these reasons:'], doesNotMean: ['It is not a finding either way.'] }  // N-17 (D-68)
   if (basis === 'documentary_declared') {
     return {
       means: ['A signed record inside the file, validated as untampered, states that the signing software generated or edited it.'],
@@ -724,7 +724,7 @@ function baseGuidance(kind: string, d: Decision, basis: Basis, rateLine: string,
     // N-19m (D3-01): what it does not mean is said of the record, not of detectors; the line on error rates stays
     return {
       means: [`${CAPTURE_MEANS} ${statisticalSentence(d, profile)}`],
-      doesNotMean: [CAPTURE_NOT, ...(kind === 'audio' ? [AUDIO_MISS] : []), rateLine],
+      doesNotMean: [CAPTURE_NOT, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
     }
   }
   switch (CODE_BAND[d.code as Exclude<DecisionCode, 'not_assessable'>]) {
@@ -750,12 +750,12 @@ function baseGuidance(kind: string, d: Decision, basis: Basis, rateLine: string,
     case 'likely_authentic':
       return {
         means: ['The combined evidence does not show significant indications of AI generation or manipulation.'],
-        doesNotMean: [`It does not confirm the ${one} is authentic or unedited.`, ...(kind === 'audio' ? [AUDIO_MISS] : []), rateLine],
+        doesNotMean: [`It does not confirm the ${one} is authentic or unedited.`, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
       }
     default:
       return {
         means: ['The combined evidence does not indicate AI generation or manipulation.'],
-        doesNotMean: [`It does not confirm the ${one} is authentic or unedited. Detectors miss some AI content.`, ...(kind === 'audio' ? [AUDIO_MISS] : []), rateLine],
+        doesNotMean: [`It does not confirm the ${one} is authentic or unedited. Detectors miss some AI content.`, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
       }
   }
 }

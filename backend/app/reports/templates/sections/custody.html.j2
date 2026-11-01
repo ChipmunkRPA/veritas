@@ -15,11 +15,12 @@
 <dt>{{ r.key }}</dt><dd class="{{ 'muted' if not r.established else '' }}">{{ r.value }}</dd>
 {% endfor %}
 </dl>
-<p class="caption">Method, custodian, source, date acquired and notes are printed as they were stated at intake; Veritas did not verify them.</p>
+<p class="caption">Method, custodian, source, date acquired and notes are printed as they were stated at intake; Chipmunk Verify did not verify them.</p>
 {% else %}
 <p class="muted">No intake record: this file was not taken in through a case intake.</p>
 {% endif %}
 <h3 class="eyebrow">Custody log</h3>
+{% if c.get('actor_note') %}<p class="caption">{{ c.actor_note }}</p>{% endif %}
 <dl class="facts">
 <dt>Extract</dt><dd>{{ c.extract }}</dd>
 <dt>Chain</dt><dd>{{ c.chain }}</dd>
@@ -27,7 +28,7 @@
 </dl>
 {% if c.rows %}
 <table class="grid custody">
-<thead><tr><th class="num">Seq</th><th>Time (UTC)</th><th>Event</th><th>Detail</th><th>Actor</th><th>Object hash</th><th>Event hash</th><th>Recomputed</th></tr></thead>
+<thead><tr><th class="num">Seq</th><th>Time (UTC)</th><th>Event</th><th>Detail</th><th>{{ 'Recorded by' if v.get('customer_report') else 'Actor' }}</th><th>Object hash</th><th>Event hash</th><th>Recomputed</th></tr></thead>
 <tbody>
 {% for r in c.rows %}
 <tr><td class="num mono">{{ r.seq }}</td><td class="mono">{{ r.ts }}</td><td>{{ r.action }}</td><td{{ r.detail | word_cell }}>{{ r.detail }}</td><td>{{ r.actor }}</td><td class="mono">{{ r.object }}</td><td class="mono">{{ r.hash }}</td><td>{{ 'consistent' if r.ok else 'does not match' }}</td></tr>

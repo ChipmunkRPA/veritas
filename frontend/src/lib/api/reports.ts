@@ -19,7 +19,7 @@ export const EXPORT_CHOICES: readonly { id: ExportChoice; label: string; descrip
   { id: 'standard', label: 'Standard report', description: 'Layered PDF: summary, findings, evidence, methods, custody and review' },
   { id: 'forensic', label: 'Forensic report', description: 'Full record: findings, exhibits, methods, error rates, custody, declaration and signature' },
   { id: 'newsroom', label: 'Newsroom explainer', description: 'Publishable PDF; the filename, source fields and metadata are hidden' },
-  { id: 'bundle', label: 'Evidence bundle', description: 'ZIP: bundle.json, the forensic report, figures, manifest.sha256 and signatures' },
+  { id: 'bundle', label: 'Evidence ZIP', description: 'Forensic PDF, the same evidence record, source crops and clips, and signed file hashes' },
 ]
 
 export const PROFILE_WORD: Record<ReportProfile, string> = {
@@ -74,12 +74,21 @@ export async function generateReport(aid: string, profile: ReportProfile, onStat
   return untilDone(() => unwrap(apiClient.GET('/api/v2/reports/{report_id}', { params: { path: { report_id: created.id } } })), onStatus)
 }
 
-export async function generatePackage(aid: string, reportId: string, kind: ReportPackage['kind'], includeOriginal: boolean,
+export const PUBLIC_PACKAGE_SCHEMA = 'chipmunk.public-evidence/1'
+
+function publicPackage(value: ReportPackage): ReportPackage {
+  if (value.schema_id !== PUBLIC_PACKAGE_SCHEMA) {
+    throw new ApiError(409, 'Export format unavailable', 'This export is not a supported public evidence ZIP. Generate a new evidence ZIP.')
+  }
+  return value
+}
+
+export async function generatePackage(aid: string, reportId: string, kind: ReportPackage['kind'], includeOriginal = false,
   onStatus?: (status: string) => void): Promise<ReportPackage> {
-  const created = await unwrap(apiClient.POST('/api/v2/analyses/{aid}/packages', {
+  const created = publicPackage(await unwrap(apiClient.POST('/api/v2/analyses/{aid}/packages', {
     params: { path: { aid } }, body: { report_id: reportId, kind, include_original: includeOriginal },
-  }))
-  return untilDone(() => unwrap(apiClient.GET('/api/v2/packages/{package_id}', { params: { path: { package_id: created.id } } })), onStatus)
+  })))
+  return untilDone(async () => publicPackage(await unwrap(apiClient.GET('/api/v2/packages/{package_id}', { params: { path: { package_id: created.id } } }))), onStatus)
 }
 
 export async function downloadFile(path: string, filename: string): Promise<void> {
@@ -100,10 +109,15 @@ function saveBlob(blob: Blob, filename: string): void {
   URL.revokeObjectURL(url)
 }
 
-export const reportFilename = (r: Pick<Report, 'display_id'>): string => `veritas-${r.display_id}.pdf`
-export const downloadReport = (r: Report): Promise<void> => downloadFile(`/api/v2/reports/${encodeURIComponent(r.id)}/file`, reportFilename(r))
-export const downloadPackage = (p: ReportPackage): Promise<void> =>
-  downloadFile(`/api/v2/packages/${encodeURIComponent(p.id)}/file`, p.filename ?? `veritas-evidence-${p.id.slice(0, 8)}.zip`)
+export const reportFilename = (r: Pick<Report, 'display_id'>): string => `chipmunk-verify-${r.display_id}.pdf`
+export async function downloadReport(r: Report): Promise<void> {
+  if (!r.downloadable) throw new ApiError(409, 'Report unavailable', 'This report is not available for download. Generate a new report.')
+  await downloadFile(`/api/v2/reports/${encodeURIComponent(r.id)}/file`, reportFilename(r))
+}
+export async function downloadPackage(p: ReportPackage): Promise<void> {
+  publicPackage(p)
+  await downloadFile(`/api/v2/packages/${encodeURIComponent(p.id)}/file`, p.filename ?? `chipmunk-evidence-${p.id.slice(0, 8)}.zip`)
+}
 
 /** The key that signs this instance's reports and bundles. Whoever receives a bundle checks it against this key, pinned by
  *  its id or by the key file (`verify --expect-key-id`, `--public-key`): the copy inside a bundle says nothing about who signed
@@ -117,7 +131,7 @@ export function useInstanceKey(enabled: boolean) {
   })
 }
 
-export const instanceKeyFilename = (k: Pick<InstanceKey, 'key_id'>): string => `veritas-instance-key-${k.key_id.replace(/^ed25519:/, '')}.pem`
+export const instanceKeyFilename = (k: Pick<InstanceKey, 'key_id'>): string => `chipmunk-instance-key-${k.key_id.replace(/^ed25519:/, '')}.pem`
 export const saveInstanceKey = (k: InstanceKey): void => saveBlob(new Blob([k.public_key_pem], { type: 'application/x-pem-file' }), instanceKeyFilename(k))
 
 /** The analysis's reports, newest first; polls while one is queued or running. */

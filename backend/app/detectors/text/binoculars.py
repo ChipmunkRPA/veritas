@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from contextlib import AbstractContextManager
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 import numpy as np
@@ -19,13 +19,16 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from app.core import deadline
+from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.core.device import DEVICE, llm_dtype
 from app.detectors.common.registry import registry
+from app.detectors.text.extract import text_hash
 
 CTX = 1024
 STRIDE = 768
 LOSS_BLOCK_TOKENS = 32
+MAX_EVIDENCE_TOKENS = 262144
 
 
 @dataclass
@@ -34,6 +37,10 @@ class TokenScores:
     obs_nll: np.ndarray  # observer negative log-likelihood per token
     xent: np.ndarray  # performer→observer cross-entropy per token
     unscored_first_token: bool = False  # only when the tokenizer has no EOS anchor; both first losses must be NaN
+    # Captured at the actual forward call, never reconstructed by tokenizing a displayed excerpt.
+    input_contexts: list[dict[str, Any]] = field(default_factory=list)
+    source_token_ids: list[int] = field(default_factory=list)
+    evidence_limit_exceeded: bool = False
 
     def valid_mask(self) -> np.ndarray:
         """Validate complete expected coverage, never infer missing coverage from NaNs."""
@@ -253,11 +260,14 @@ class Binoculars:
         n = len(ids)
         if len(offsets) != n:
             raise ValueError("Binoculars tokenizer ID/offset alignment is invalid")
+        if any(len(o) != 2 or any(type(v) is not int for v in o) or not 0 <= o[0] <= o[1] <= len(text) for o in offsets):
+            raise ValueError("Binoculars tokenizer offsets are not source Unicode codepoint ranges")
         nll = np.full(n, np.nan, dtype=np.float32)
         xent = np.full(n, np.nan, dtype=np.float32)
         # leading BOS-like anchor so the first real token is scored too
         anchor = [self.tok.eos_token_id] if self.tok.eos_token_id is not None else []
         body = CTX - len(anchor)
+        contexts = []
         start = 0
         while start < n:
             checkpoint("Binoculars token window")
@@ -270,13 +280,26 @@ class Binoculars:
             _check_losses(a, b, len(chunk) - 1)
             # a[k] scores chunk[k+1]. With an anchor, chunk[k+1] == ids[ctx_start + k]; without, ids[ctx_start + k + 1].
             shift = 0 if anchor else 1
+            mapped = [(a, b) for a, b in offsets[ctx_start:end] if b > a]
+            if not mapped:
+                raise ValueError("Binoculars input context has no source text mapping")
+            lo, hi = min(a for a, _ in mapped), max(b for _, b in mapped)
+            if n <= MAX_EVIDENCE_TOKENS:
+                contexts.append({"id": f"context:{len(contexts)}", "spans": [{"start": lo, "end": hi}],
+                             "text": text[lo:hi], "input_sha256": text_hash(text[lo:hi]),
+                             "source_token_range": [ctx_start, end],
+                             "scored_token_range": [max(start, ctx_start + shift), end],
+                             "input_token_ids": list(chunk), "token_ids_sha256": canonical_hash(list(chunk)),
+                             "token_offsets": [list(o) for o in offsets[ctx_start:end]],
+                             "anchor_token_count": len(anchor), "context_limit": CTX, "stride": STRIDE})
             for k in range(len(a)):
                 di = ctx_start + k + shift
                 if start <= di < end:
                     nll[di], xent[di] = a[k], b[k]
             start = end
         checkpoint("perplexity scoring")
-        scores = TokenScores(offsets, nll, xent, unscored_first_token=bool(n and not anchor))
+        scores = TokenScores(offsets, nll, xent, unscored_first_token=bool(n and not anchor), input_contexts=contexts,
+                             source_token_ids=list(ids), evidence_limit_exceeded=n > MAX_EVIDENCE_TOKENS)
         scores.valid_mask()
         checkpoint("completed Binoculars token coverage")
         return scores
@@ -311,14 +334,32 @@ def document_score(ts: TokenScores) -> tuple[float | None, int]:
 
 def sentence_scores(ts: TokenScores, sents: list) -> list[float | None]:
     """Per-sentence scores; a sentence with too few tokens (and at least 3 words) is scored with its neighbours."""
-    out: list[float | None] = [None] * len(sents)
+    return [record["score"] for record in sentence_score_records(ts, sents)]
+
+
+def sentence_score_records(ts: TokenScores, sents: list) -> list[dict[str, Any]]:
+    """The exact reduction spans, including the existing short-sentence neighbour fallback.
+
+    Ratios use only overlapping scored tokens. Their predictions came from the
+    rolling contexts retained on TokenScores, not an isolated sentence forward.
+    """
+    out: list[dict[str, Any]] = [{} for _ in sents]
+    valid = ts.valid_mask()
     for s in sents:
+        lo, hi = s.start, s.end
         sc, _n = Binoculars.score_span(ts, s.start, s.end)
         if sc is None and s.n_words >= 3:  # short sentence: include neighbours for a stable estimate
             lo = sents[max(0, s.idx - 1)].start
             hi = sents[min(len(sents) - 1, s.idx + 1)].end
             sc, _n = Binoculars.score_span(ts, lo, hi)
-        out[s.idx] = sc
+        indices = [i for i, (a, b) in enumerate(ts.offsets) if b > lo and a < hi and valid[i]]
+        out[s.idx] = {"score": sc, "scored_spans": [{"start": lo, "end": hi}],
+                      "scored_token_indices": indices, "tokens_scored": len(indices),
+                      "neighbor_expansion": (lo, hi) != (s.start, s.end),
+                      "mean_negative_log_likelihood": float(np.mean(ts.obs_nll[indices])) if indices else None,
+                      "mean_cross_entropy": float(np.mean(ts.xent[indices])) if indices else None,
+                      "context_ids": [c["id"] for c in ts.input_contexts
+                                      if any(c["scored_token_range"][0] <= i < c["scored_token_range"][1] for i in indices)]}
     return out
 
 

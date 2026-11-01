@@ -4,7 +4,17 @@ This file imports nothing of the application: `pipeline.extract_within` runs it 
 (`python -I extract.py <path> <ext>`), which prints the document, or the error, as one JSON object (N-10; SEC-04)."""
 from __future__ import annotations
 
+import base64
+import csv
+import hashlib
+import io
+import json
+import math
 import re
+import shutil
+import subprocess
+import tempfile
+import time
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
@@ -15,6 +25,112 @@ class Document:
     text: str
     paragraphs: list[tuple[int, int]]  # (start, end) char offsets into text
     meta: dict = field(default_factory=dict)
+    source_map: list[dict] = field(default_factory=list)
+    source_rasters: dict[str, str] = field(default_factory=dict)  # SHA256 -> base64 exact OCR input PNG, child transport only
+
+
+SOURCE_MAP_VERSION = "document-source/1"
+EXTRACTION_VERSION = "document-extraction/2"
+OCR_VERSION = "local-ocr/1"
+OCR_MIN_MEAN_CONFIDENCE = 75.0
+OCR_MAX_PAGES = 12
+OCR_MAX_PIXELS = 4_000_000
+OCR_MAX_RASTER_BYTES = 24 * 1024 * 1024
+OCR_BUDGET_SECONDS = 70.0
+
+
+def text_hash(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8", "surrogatepass")).hexdigest()
+
+
+def _normalise(raw: str, *, dehyphenate: bool = False) -> tuple[str, list[tuple[int, int]]]:
+    """Normalise whitespace while retaining each output codepoint's source range."""
+    omitted = {m.start() + len(m.group(1)) for m in re.finditer(r"(\w)-\n(?=\w)", raw)} if dehyphenate else set()
+    omitted |= {i + 1 for i in list(omitted)}
+    chars: list[str] = []
+    origins: list[tuple[int, int]] = []
+    for i, ch in enumerate(raw):
+        if i in omitted:
+            continue
+        if ch.isspace():
+            if chars and chars[-1] == " ":
+                origins[-1] = (origins[-1][0], i + 1)
+            else:
+                chars.append(" ")
+                origins.append((i, i + 1))
+        else:
+            chars.append(ch)
+            origins.append((i, i + 1))
+    start, end = (1 if chars and chars[0] == " " else 0), len(chars)
+    if end and chars[-1] == " ":
+        end -= 1
+    return "".join(chars[start:end]), origins[start:end]
+
+
+def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) -> Document:
+    texts: list[str] = []
+    spans: list[tuple[int, int]] = []
+    mapping: list[dict] = []
+    pos = 0
+    for raw, source in parts:
+        text, origins = _normalise(raw, dehyphenate=dehyphenate)
+        if not text:
+            continue
+        if texts:
+            pos += 2
+        entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words"}}
+        entry.update(start=pos, end=pos + len(text), offset_unit="unicode_codepoint")
+        if source.get("kind") in {"text", "email", "docx"}:
+            # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
+            # its entire source range. These are decoded codepoints, not bytes.
+            ranges: list[list[int]] = []
+            base = source.get("source_start", 0)
+            previous_direct = False
+            for i, (a, b) in enumerate(origins):
+                row = [pos + i, pos + i + 1, base + a, base + b]
+                direct = b - a == 1 and raw[a:b] == text[i]
+                if ranges and previous_direct and direct and ranges[-1][1] == row[0] and ranges[-1][3] == row[2]:
+                    ranges[-1][1], ranges[-1][3] = row[1], row[3]
+                else:
+                    ranges.append(row)
+                previous_direct = direct
+            entry["source_ranges"] = ranges
+        glyphs = source.get("glyphs")
+        if glyphs is not None:
+            fragments = []
+            for match in re.finditer(r"\S+", text):
+                a, b = origins[match.start()][0], origins[match.end() - 1][1]
+                boxes = [box for box in glyphs[a:b] if box is not None]
+                # A dehyphenated word can span two lines. Keep separate boxes;
+                # their bounding union would highlight unrelated words between.
+                lines: list[list] = []
+                for box in boxes:
+                    if not lines or abs(lines[-1][0][1] - box[1]) > 1:
+                        lines.append([])
+                    lines[-1].append(box)
+                for line in lines:
+                    fragment = {"start": pos + match.start(), "end": pos + match.end(),
+                                "bbox": [min(x[0] for x in line), min(x[1] for x in line),
+                                         max(x[2] for x in line), max(x[3] for x in line)]}
+                    recognized = [w for w in source.get("ocr_words", []) if w["start"] < b and w["end"] > a]
+                    if recognized:
+                        fragment.update(text=match.group(), recognition_confidence=min(w["confidence"] for w in recognized))
+                    fragments.append(fragment)
+            entry["fragments"] = fragments
+            entry["geometry_granularity"] = "word"
+        mapping.append(entry)
+        spans.append((pos, pos + len(text)))
+        texts.append(text)
+        pos += len(text)
+    return Document("\n\n".join(texts), spans, source_map=mapping)
+
+
+def _seal(doc: Document, *, original_sha256: str | None = None) -> Document:
+    doc.meta.update(source_map_version=SOURCE_MAP_VERSION, extraction_version=EXTRACTION_VERSION, offset_unit="unicode_codepoint",
+                    extracted_text_sha256=text_hash(doc.text), normalization="whitespace-and-paragraphs/1")
+    if original_sha256:
+        doc.meta["original_sha256"] = original_sha256
+    return doc
 
 
 _WS = re.compile(r"[ \t ]+")
@@ -59,41 +175,284 @@ def _dehyphenate(s: str) -> str:
     return re.sub(r"(\w)-\n(\w)", r"\1\2", s)
 
 
+def _ocr_runtime() -> dict:
+    """Only use the provisioned, hash-pinned local language data; never download at inference."""
+    binary = shutil.which("tesseract")
+    if not binary:
+        return {"available": False, "reason": "Local OCR executable is not installed."}
+    root = Path(__file__).resolve().parents[4] / "models"
+    try:
+        manifest = json.loads((root / "ocr-manifest.json").read_text())
+        directory = root / "weights/ocr/tessdata"
+        hashes = {}
+        for item in manifest["files"]:
+            name = item["file"]
+            if name not in {"eng.traineddata", "chi_sim.traineddata", "chi_tra.traineddata", "osd.traineddata"}:
+                raise ValueError("Unexpected OCR model file")
+            data = (directory / name).read_bytes()
+            if hashlib.sha256(data).hexdigest() != item["sha256"]:
+                raise ValueError("OCR language data hash mismatch")
+            hashes[name] = item["sha256"]
+        if len(hashes) != 4:
+            raise ValueError("OCR language data incomplete")
+        version = subprocess.run([binary, "--version"], capture_output=True, timeout=5, check=True).stdout.decode().splitlines()[0]
+        return {"available": True, "binary": binary, "directory": str(directory), "engine_version": version,
+                "language_data_sha256": hashes, "languages": "eng+chi_sim+chi_tra"}
+    except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+        return {"available": False, "reason": "Verified local OCR language data or executable is unavailable."}
+
+
+_LANGUAGE_IDENTIFIER = None
+
+
+def _ocr_language(text: str) -> dict:
+    global _LANGUAGE_IDENTIFIER
+    if sum(ch.isalpha() for ch in text) < 25:
+        return {"code": None, "confidence": None, "status": "unknown", "reason": "Too little recognized text to assess language."}
+    try:
+        if _LANGUAGE_IDENTIFIER is None:
+            from langid.langid import LanguageIdentifier, model
+            _LANGUAGE_IDENTIFIER = LanguageIdentifier.from_modelstring(model, norm_probs=True)
+        code, confidence = _LANGUAGE_IDENTIFIER.classify(text)
+        supported = code in {"en", "zh"} and confidence >= 0.8
+        return {"code": code, "confidence": float(confidence), "status": "supported" if supported else "unknown_or_unsupported",
+                "method": "statistical-language-identification", "reason": None if supported else "Recognized language is uncertain or outside local OCR coverage."}
+    except (ImportError, ValueError):
+        return {"code": None, "confidence": None, "status": "unknown", "reason": "Local language coverage check is unavailable."}
+
+
+def _ocr_call(runtime: dict, raster: bytes, *, osd=False, timeout=10.0) -> str:
+    # Subprocess receives only locally generated raster bytes and fixed options.
+    # Paths and document contents are never interpolated into a shell command.
+    with tempfile.TemporaryDirectory(prefix="chipmunk-ocr-") as temporary:
+        path = Path(temporary) / "input.png"
+        path.write_bytes(raster)
+        command = [runtime["binary"], str(path), "stdout", "--tessdata-dir", runtime["directory"],
+                   "-l", "osd" if osd else runtime["languages"], "--psm", "0" if osd else "3"]
+        if not osd:
+            command += ["--oem", "1", "-c", "tessedit_create_tsv=1"]
+        completed = subprocess.run(command, capture_output=True, timeout=timeout, check=True)
+        return completed.stdout.decode("utf-8", "replace")
+
+
+def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, dict]], dict, bytes | None]:
+    import pymupdf
+    from PIL import Image
+
+    info = {"page": page.number + 1, "status": "unchecked", "version": OCR_VERSION,
+            "page_rotation": page.rotation, "confidence_semantics": "OCR recognition quality, not AI-generation confidence"}
+    if not runtime.get("available"):
+        return [], {**info, "reason": runtime["reason"]}, None
+    if remaining < 2:
+        return [], {**info, "reason": "Local OCR time budget exhausted; this page was not checked."}, None
+    rotation = page.rotation
+    try:
+        page.set_rotation(0)
+        width, height = page.rect.width, page.rect.height
+        scale = min(200 / 72, math.sqrt(OCR_MAX_PIXELS / (width * height)))
+        pixmap = page.get_pixmap(matrix=pymupdf.Matrix(scale, scale), colorspace=pymupdf.csGRAY, alpha=False)
+    finally:
+        page.set_rotation(rotation)
+    original = Image.frombytes("L", (pixmap.width, pixmap.height), pixmap.samples)
+    raw = io.BytesIO()
+    original.save(raw, format="PNG")
+    clockwise, osd_info = 0, {"status": "unavailable"}
+    started = time.monotonic()
+    try:
+        detected = _ocr_call(runtime, raw.getvalue(), osd=True, timeout=min(5, remaining / 3))
+        fields = dict(re.findall(r"^([^:\n]+):\s*([^\n]+)", detected, re.MULTILINE))
+        candidate = int(fields.get("Rotate", "0"))
+        orientation_confidence = float(fields.get("Orientation confidence", "0"))
+        if candidate in {0, 90, 180, 270} and orientation_confidence >= 2:
+            clockwise = candidate
+        osd_info = {"status": "estimated", "script": fields.get("Script"),
+                    "orientation_confidence": orientation_confidence,
+                    "script_confidence": float(fields.get("Script confidence", "0")),
+                    "applied_rotation_clockwise": clockwise}
+    except (ValueError, subprocess.SubprocessError):
+        pass  # OCR can still recognize short upright pages; language/quality gates remain mandatory.
+    rotated = original.rotate(-clockwise, expand=True)
+    raw = io.BytesIO()
+    rotated.save(raw, format="PNG")
+    raster = raw.getvalue()
+    sx, sy = original.width / width, original.height / height
+    transforms = {0: [1 / sx, 0, 0, 1 / sy, 0, 0],
+                  90: [0, -1 / sy, 1 / sx, 0, 0, height],
+                  180: [-1 / sx, 0, 0, -1 / sy, width, height],
+                  270: [0, 1 / sy, -1 / sx, 0, width, 0]}
+    raster_info = {"sha256": hashlib.sha256(raster).hexdigest(), "width": rotated.width, "height": rotated.height,
+                   "base_width": original.width, "base_height": original.height,
+                   "page_width": width, "page_height": height, "page_rotation_removed": rotation,
+                   "rotation_clockwise": clockwise, "input_to_page": transforms[clockwise],
+                   "measured_dpi_x": sx * 72, "measured_dpi_y": sy * 72,
+                   "colorspace": "grayscale", "renderer": f"pymupdf-{pymupdf.VersionBind}"}
+    info.update(raster=raster_info, orientation=osd_info, engine_version=runtime["engine_version"],
+                language_data_sha256=runtime["language_data_sha256"], languages_requested=runtime["languages"])
+    try:
+        tsv = _ocr_call(runtime, raster, timeout=max(1, min(10, remaining - (time.monotonic() - started))))
+        words = []
+        for row in csv.DictReader(io.StringIO(tsv), delimiter="\t", quoting=csv.QUOTE_NONE):
+            if row.get("level") != "5" or not (row.get("text") or "").strip():
+                continue
+            x, y, w, h = [int(row[k]) for k in ("left", "top", "width", "height")]
+            confidence = float(row["conf"])
+            if not (0 <= x < x + w <= rotated.width and 0 <= y < y + h <= rotated.height and 0 <= confidence <= 100):
+                raise ValueError("OCR returned invalid word coordinates or quality")
+            a, b, c, d, e, f = transforms[clockwise]
+            points = [(a * px + c * py + e, b * px + d * py + f) for px, py in ((x, y), (x + w, y), (x, y + h), (x + w, y + h))]
+            words.append({"text": row["text"].strip(), "confidence": confidence, "input_bbox": [x, y, x + w, y + h],
+                          "bbox": [min(p[0] for p in points), min(p[1] for p in points), max(p[0] for p in points), max(p[1] for p in points)],
+                          "paragraph": [int(row["block_num"]), int(row["par_num"])], "line": int(row["line_num"])})
+    except (ValueError, KeyError, subprocess.SubprocessError):
+        return [], {**info, "reason": "Local OCR failed or exceeded its per-page time limit; this page was not checked."}, raster
+    # Preserve all recognized words, including rejected pages, in the frozen decode.
+    cursor, recognized = 0, []
+    for word in words:
+        if recognized:
+            cursor += 1
+        word.update(start=cursor, end=cursor + len(word["text"]), offset_unit="unicode_codepoint")
+        recognized.append(word["text"])
+        cursor = word["end"]
+    recognized_text = " ".join(recognized)
+    language = _ocr_language(recognized_text)
+    mean = sum(w["confidence"] * len(w["text"]) for w in words) / max(1, sum(len(w["text"]) for w in words))
+    low_fraction = sum(w["confidence"] < 50 for w in words) / max(1, len(words))
+    info.update(recognized_text=recognized_text, words=words, language=language,
+                mean_recognition_confidence=mean, low_confidence_word_fraction=low_fraction,
+                quality_policy={"mean_minimum": OCR_MIN_MEAN_CONFIDENCE, "low_word_threshold": 50, "maximum_low_word_fraction": 0.15})
+    if not words or len(recognized_text.strip()) < 25:
+        return [], {**info, "reason": "Too little readable OCR text; this page remains unchecked."}, raster
+    if mean < OCR_MIN_MEAN_CONFIDENCE or low_fraction > 0.15:
+        return [], {**info, "reason": "OCR recognition quality is too low; this page remains unchecked."}, raster
+    if language["status"] != "supported":
+        return [], {**info, "reason": language["reason"] + " This page remains unchecked."}, raster
+    parts = []
+    groups: dict[tuple, list[dict]] = {}
+    for word in words:
+        groups.setdefault(tuple(word["paragraph"]), []).append(word)
+    for index, group in enumerate(groups.values()):
+        raw, glyphs, mapped, position = [], [], [], 0
+        for word in group:
+            if raw:
+                raw.append(" ")
+                glyphs.append(None)
+                position += 1
+            raw.append(word["text"])
+            glyphs.extend([word["bbox"]] * len(word["text"]))
+            mapped.append({**word, "start": position, "end": position + len(word["text"])})
+            position += len(word["text"])
+        boxes = [word["bbox"] for word in group]
+        parts.append(("".join(raw), {"kind": "pdf", "extraction": "ocr", "page": page.number + 1, "block": index,
+                      "page_rotation": rotation, "page_width": width, "page_height": height,
+                      "coordinate_space": "unrotated-page-points", "glyphs": glyphs, "ocr_words": mapped,
+                      "bbox": [min(x[0] for x in boxes), min(x[1] for x in boxes), max(x[2] for x in boxes), max(x[3] for x in boxes)],
+                      "ocr": {"raster": raster_info, "language": language,
+                              "mean_recognition_confidence": mean, "confidence_semantics": info["confidence_semantics"]}}))
+    return parts, {**info, "status": "extracted", "reason": None}, raster
+
+
 def extract_pdf(path: Path) -> Document:
     import pymupdf
 
-    paras: list[str] = []
+    parts: list[tuple[str, dict]] = []
+    empty_pages: list[int] = []
+    ocr_pages, rasters, raster_bytes = [], {}, 0
+    runtime = None
+    started = time.monotonic()
     pages = 0
     with pymupdf.open(path) as doc:
         for page in doc:
             pages += 1
-            blocks = page.get_text("blocks")
-            blocks.sort(key=lambda b: (round(b[1] / 5), b[0]))
+            blocks = page.get_text("rawdict")["blocks"]
+            blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
+            page_chars = 0
             for b in blocks:
-                if b[6] != 0:  # image block
+                if b["type"] != 0:
                     continue
-                t = _dehyphenate(b[4]).replace("\n", " ").strip()
-                if len(t) >= 2:
-                    paras.append(t)
-    d = _join_paragraphs(paras)
-    d.meta = {"pages": pages, "method": "pymupdf"}
+                chars, glyphs = [], []
+                for line in b["lines"]:
+                    for span in line["spans"]:
+                        for char in span["chars"]:
+                            chars.append(char["c"])
+                            glyphs.extend([list(char["bbox"])] * len(char["c"]))
+                    chars.append("\n")
+                    glyphs.append(None)
+                raw = "".join(chars)
+                if sum(ch.isalnum() for ch in raw) >= 2:
+                    page_chars += len(raw.strip())
+                    parts.append((raw, {"kind": "pdf", "page": page.number + 1, "block": b["number"],
+                                        "bbox": list(b["bbox"]), "page_rotation": page.rotation,
+                                        "page_width": page.cropbox.width, "page_height": page.cropbox.height,
+                                        "coordinate_space": "unrotated-page-points", "extraction": "text_layer", "glyphs": glyphs}))
+            if page_chars < 2:
+                if runtime is None:
+                    runtime = _ocr_runtime()
+                if len(ocr_pages) >= OCR_MAX_PAGES or raster_bytes >= OCR_MAX_RASTER_BYTES:
+                    local_parts, info, raster = [], {"page": page.number + 1, "status": "unchecked", "reason": "Local OCR page or raster budget exhausted; this page was not checked."}, None
+                else:
+                    local_parts, info, raster = _ocr_page(page, runtime, OCR_BUDGET_SECONDS - (time.monotonic() - started))
+                if raster is not None:
+                    if raster_bytes + len(raster) > OCR_MAX_RASTER_BYTES:
+                        local_parts, raster = [], None
+                        info = {"page": page.number + 1, "status": "unchecked", "reason": "OCR raster storage budget exhausted; this page was not checked."}
+                    else:
+                        rasters[hashlib.sha256(raster).hexdigest()] = base64.b64encode(raster).decode("ascii")
+                        raster_bytes += len(raster)
+                ocr_pages.append(info)
+                parts.extend(local_parts)
+                if info["status"] != "extracted":
+                    empty_pages.append(page.number + 1)
+    d = _join_mapped(parts, dehyphenate=True)
+    d.source_rasters = rasters
+    d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
+              "ocr": {"version": OCR_VERSION, "status": "not_needed" if not ocr_pages else "partial" if empty_pages else "complete",
+                      "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages], "unchecked_pages": empty_pages,
+                      "confidence_semantics": "OCR recognition quality, not AI-generation confidence",
+                      "max_pages": OCR_MAX_PAGES, "max_pixels_per_page": OCR_MAX_PIXELS}}
+    if empty_pages:
+        d.meta["coverage_warning"] = f"Pages {', '.join(map(str, empty_pages))} could not be reliably extracted. They were not checked and must not be treated as human-authored."
+    elif ocr_pages:
+        d.meta["coverage_warning"] = "Scanned pages were transcribed locally. OCR recognition quality is not AI-generation confidence; language identification is heuristic. Compare all excerpts with their frozen page images."
     if len(d.text.split()) < 5 and pages:
-        d.meta["warning"] = "The PDF contains little or no extractable text (scanned image?). OCR is not performed."
+        d.meta["warning"] = "The PDF contains little or no reliably extracted text. Unreadable pages remain unchecked."
     return d
 
 
 def extract_docx(path: Path) -> Document:
     import docx
+    from docx.oxml.ns import qn
+    from docx.table import Table
+    from docx.text.paragraph import Paragraph
 
     d = docx.Document(str(path))
-    paras = [p.text for p in d.paragraphs]
-    for t in d.tables:
-        for row in t.rows:
-            cells = [c.text.strip() for c in row.cells]
-            if any(cells):
-                paras.append(" | ".join(c for c in cells if c))
-    doc = _join_paragraphs(paras)
-    doc.meta = {"method": "python-docx", "paragraph_count": len(d.paragraphs)}
+    parts: list[tuple[str, dict]] = []
+
+    def walk(parent, elements, path_parts):
+        for index, element in enumerate(elements):
+            path_here = [*path_parts, index]
+            if element.tag == qn("w:p"):
+                paragraph = Paragraph(element, parent)
+                cursor, runs = 0, []
+                for ri, run in enumerate(paragraph.runs):
+                    runs.append({"run": ri, "start": cursor, "end": cursor + len(run.text)})
+                    cursor += len(run.text)
+                parts.append((paragraph.text, {"kind": "docx", "body_path": path_here,
+                                               "paragraph_index": len(parts), "runs": runs,
+                                               "run_mapping_complete": cursor == len(paragraph.text)}))
+            elif element.tag == qn("w:tbl"):
+                table = Table(element, parent)
+                seen = set()
+                for row_i, row in enumerate(table.rows):
+                    for col_i, cell in enumerate(row.cells):
+                        if cell._tc in seen:
+                            continue
+                        seen.add(cell._tc)
+                        walk(cell, cell._tc, [*path_here, "row", row_i, "cell", col_i])
+
+    walk(d, d.element.body, [])
+    doc = _join_mapped(parts)
+    doc.meta = {"method": "python-docx", "paragraph_count": len(parts),
+                "coverage_warning": "Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and embedded attachments were not checked; DOCX has no stable page numbers."}
     return doc
 
 
@@ -126,10 +485,13 @@ def extract_text_like(path: Path, ext: str) -> Document:
     data = path.read_bytes()
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
         raw = data.decode("utf-16", errors="replace")
+        encoding = "utf-16"
     elif data.startswith(b"\xef\xbb\xbf"):
         raw = data.decode("utf-8-sig", errors="replace")
+        encoding = "utf-8-sig"
     else:
         raw = data.decode("utf-8", errors="replace")
+        encoding = "utf-8"
     if ext in (".html", ".htm"):
         h = _HTMLText()
         h.feed(raw)
@@ -141,11 +503,80 @@ def extract_text_like(path: Path, ext: str) -> Document:
         method = "markdown"
     else:
         method = "plain"
-    paras = re.split(r"\n\s*\n", raw.replace("\r\n", "\n"))
-    paras = [p.replace("\n", " ") for p in paras]
-    d = _join_paragraphs(paras)
-    d.meta = {"method": method}
+    d = _join_mapped(_text_parts(raw, kind="text" if method == "plain" else "markup"))
+    d.meta = {"method": method, "encoding": encoding,
+              "decoded_source_sha256": text_hash(raw) if method == "plain" else None}
+    if method != "plain":
+        d.meta["coverage_warning"] = "Markup was converted to text. Excerpts map to the extracted text, not exact HTML or Markdown source positions."
     return d
+
+
+def _text_parts(raw: str, *, kind: str = "text", **anchor) -> list[tuple[str, dict]]:
+    parts, cursor = [], 0
+    for blank in re.finditer(r"(?:\r?\n)[ \t]*(?:\r?\n)", raw):
+        parts.append((raw[cursor:blank.start()], {"kind": kind, "source_start": cursor, **anchor}))
+        cursor = blank.end()
+    parts.append((raw[cursor:], {"kind": kind, "source_start": cursor, **anchor}))
+    return parts
+
+
+def extract_eml(path: Path) -> Document:
+    from email import policy
+    from email.parser import BytesParser
+
+    message = BytesParser(policy=policy.default).parsebytes(path.read_bytes())
+
+    def leaves(part, part_id="1"):
+        yield part_id, part
+        if part.is_multipart():
+            for index, child in enumerate(part.iter_parts(), 1):
+                yield from leaves(child, f"{part_id}.{index}")
+
+    indexed = list(leaves(message))
+    body = message.get_body(preferencelist=("plain", "html"))
+    if body is None:
+        raise ValueError("This email has no readable plain-text or HTML body. Attachments are not analysed as its body.")
+    mime_part = next(part_id for part_id, part in indexed if part is body)
+    raw = body.get_content()
+    if not isinstance(raw, str):
+        raise ValueError("This email body could not be decoded as text.")
+    is_html = body.get_content_type() == "text/html"
+    if is_html:
+        parser = _HTMLText()
+        parser.feed(raw)
+        parts = _text_parts("".join(parser.parts), kind="markup", mime_part=mime_part, quote_role="unknown")
+    else:
+        # Quotation detection is a navigation aid, never an authorship assertion.
+        # Keep the '>' prefixes and signature text rather than silently deleting it.
+        parts, accumulated, start, cursor, previous_role = [], [], 0, 0, None
+        quoted_tail, signature = False, False
+        for line in raw.splitlines(keepends=True):
+            stripped = line.strip()
+            if re.match(r"On .{1,300} wrote:\s*$", stripped, re.IGNORECASE) or stripped.startswith("-----Original Message-----"):
+                quoted_tail = True
+            if stripped == "--":
+                signature = True
+            role = "quoted" if quoted_tail or stripped.startswith(">") else "signature" if signature else "body"
+            if accumulated and (role != previous_role or not stripped):
+                parts.append(("".join(accumulated), {"kind": "email", "source_start": start,
+                                                    "mime_part": mime_part, "quote_role": previous_role}))
+                accumulated = []
+            if stripped:
+                if not accumulated:
+                    start = cursor
+                accumulated.append(line)
+                previous_role = role
+            cursor += len(line)
+        if accumulated:
+            parts.append(("".join(accumulated), {"kind": "email", "source_start": start,
+                                                "mime_part": mime_part, "quote_role": previous_role}))
+    document = _join_mapped(parts)
+    attachments = [{"mime_part": part_id, "filename": part.get_filename(), "content_type": part.get_content_type()}
+                   for part_id, part in indexed if part.get_content_disposition() == "attachment" or part.get_filename()]
+    document.meta = {"method": "email", "email": {"body_part": mime_part, "body_content_type": body.get_content_type(),
+                     "quote_detection": "heuristic", "headers_authenticated": False, "attachments": attachments},
+                     "coverage_warning": "Only the selected email body was checked. Quoted text and signatures are labelled heuristically. Attachments were not analysed and sender authenticity was not verified."}
+    return document
 
 
 def extract(path: Path, ext: str) -> Document:
@@ -154,17 +585,18 @@ def extract(path: Path, ext: str) -> Document:
         d = extract_pdf(path)
     elif ext == ".docx":
         d = extract_docx(path)
+    elif ext == ".eml":
+        d = extract_eml(path)
     else:
         d = extract_text_like(path, ext)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
-    return d
+    return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 
 
 def from_string(text: str) -> Document:
-    paras = [p.replace("\n", " ") for p in re.split(r"\n\s*\n", text.replace("\r\n", "\n"))]
-    d = _join_paragraphs(paras)
+    d = _join_mapped(_text_parts(text))
     d.meta = {"method": "string", "chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)}
-    return d
+    return _seal(d)
 
 
 def _child(argv: list[str]) -> int:
@@ -175,7 +607,7 @@ def _child(argv: list[str]) -> int:
 
     try:
         d = extract(Path(argv[1]), argv[2])
-        out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta}
+        out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map, "source_rasters": d.source_rasters}
     except Exception as e:  # noqa: BLE001 - handed to the parent, which raises it again
         out = {"error": {"type": type(e).__name__, "message": str(e), "value_error": isinstance(e, ValueError)}}
     sys.stdout.write(json.dumps(out))  # ASCII only: a lone surrogate of a damaged file crosses as an escape

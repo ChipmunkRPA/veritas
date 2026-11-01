@@ -508,6 +508,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/analyses/{aid}/evidence-packets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Image Evidence */
+        get: operations["image_evidence_api_v2_analyses__aid__evidence_packets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/analyses/{aid}/evidence-packets/{set_id}/assets/{sha256}.{extension}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Evidence Asset */
+        get: operations["evidence_asset_api_v2_analyses__aid__evidence_packets__set_id__assets__sha256___extension__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/analyses/{aid}/evidence-packets/{set_id}/images/{sha256}.png": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Image Evidence Plate */
+        get: operations["image_evidence_plate_api_v2_analyses__aid__evidence_packets__set_id__images__sha256__png_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/analyses/{aid}/exhibits": {
         parameters: {
             query?: never;
@@ -1366,7 +1417,7 @@ export interface paths {
         };
         /**
          * Get Model Record
-         * @description The admission record of the detector, as Markdown text. Administrators only.
+         * @description Internal model records are not available in the customer view.
          */
         get: operations["get_model_record_api_v2_models__detector_id__records__record_id__get"];
         put?: never;
@@ -1651,27 +1702,6 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** Admission */
-        Admission: {
-            /** Criteria */
-            criteria?: {
-                [key: string]: unknown;
-            };
-            /** Date */
-            date?: string | null;
-            /**
-             * Decision
-             * @default pending
-             * @enum {string}
-             */
-            decision: "pending" | "admitted" | "rejected" | "retired";
-            /** Evidence */
-            evidence?: string | null;
-            /** Reviewed By */
-            reviewed_by?: string | null;
-            /** Served Until */
-            served_until?: string | null;
-        };
         /** AnalysisDetail */
         AnalysisDetail: {
             /** Band */
@@ -1748,6 +1778,13 @@ export interface components {
             /** @description Null when the file was not taken in through a case intake */
             custodian_hash?: components["schemas"]["CustodianHashCheck"] | null;
             /**
+             * Customer Assessment
+             * @description Versioned customer interpretation of the saved estimate, including the 80% leaning rule. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.
+             */
+            customer_assessment?: {
+                [key: string]: unknown;
+            } | null;
+            /**
              * Deciding Record
              * @description The trusted provenance record that decides the result, as the stored result names it: `capture_record` (a trusted capture), `declaration` (a trusted declaration of generative AI); null for a marker and where no record decides. On the fallback a declaration and a marker give the same code and hypothesis, so a list reads the row by this field (N-19p, D6-01)
              */
@@ -1810,7 +1847,10 @@ export interface components {
             profile: string | null;
             /** Progress */
             progress: number | null;
-            /** Result Hash */
+            /**
+             * Result Hash
+             * @description SHA-256 of the original stored result, not these projected response bytes
+             */
             result_hash?: string | null;
             /** Result Schema Version */
             result_schema_version: number;
@@ -2354,17 +2394,6 @@ export interface components {
              */
             profile?: ("quick" | "full" | "deep") | null;
         };
-        /** Calibration */
-        Calibration: {
-            /** Artefact */
-            artefact?: string | null;
-            /**
-             * Method
-             * @default none
-             * @enum {string}
-             */
-            method: "platt" | "none";
-        };
         /** CalibrationInfo */
         CalibrationInfo: {
             /** Artefact Sha256 */
@@ -2432,70 +2461,6 @@ export interface components {
             by: string;
             /** Note */
             note: string | null;
-        };
-        /**
-         * CardCopy
-         * @description The card as a client page prints it (L-7): no ticket or decision ids, repository paths or raw enums.
-         */
-        CardCopy: {
-            /** Citation */
-            citation?: string | null;
-            /** Contamination Sets */
-            contamination_sets?: string[];
-            /** Coverage Date */
-            coverage_date?: string | null;
-            /** Disclosures */
-            disclosures?: string[];
-            /** Enablement Reasons */
-            enablement_reasons?: string[];
-            /**
-             * Engineering
-             * @description Recorded strings the client wording shortens or leaves out
-             */
-            engineering?: components["schemas"]["EngineeringNote"][];
-            /**
-             * Failure Modes
-             * @description False-positive modes, then known limitations
-             */
-            failure_modes?: string[];
-            /** Family */
-            family: string;
-            /** Hypotheses */
-            hypotheses?: string[];
-            /** Input Constraints */
-            input_constraints?: string[];
-            /** Lane */
-            lane?: string | null;
-            /**
-             * Licence Notices
-             * @description Model id → licence notice
-             */
-            licence_notices?: {
-                [key: string]: string;
-            };
-            /** Licence Policy */
-            licence_policy: string;
-            /**
-             * Record Titles
-             * @description Record id → title
-             */
-            record_titles?: {
-                [key: string]: string;
-            };
-            /**
-             * Source
-             * @description Where the check comes from: a download address, or that it is part of Veritas
-             */
-            source?: string | null;
-            /** Threats */
-            threats?: string[];
-            /** Training Data */
-            training_data?: string | null;
-            /**
-             * Truncated
-             * @description One-value fields whose wording is the lead of the recorded value
-             */
-            truncated?: string[];
         };
         /** CaseCreate */
         CaseCreate: {
@@ -2847,6 +2812,69 @@ export interface components {
             /** Valid */
             valid: boolean;
         };
+        /**
+         * CustomerModelCard
+         * @description Availability and evaluation facts for a check, without an upstream model card.
+         */
+        CustomerModelCard: {
+            /** Admission */
+            admission?: {
+                [key: string]: unknown;
+            } | null;
+            /** Citation */
+            citation?: string | null;
+            /** Enabled */
+            enabled: boolean;
+            /** Eval */
+            eval?: {
+                [key: string]: unknown;
+            }[];
+            /** Family */
+            family: string;
+            /** Hypotheses */
+            hypotheses?: string[];
+            /** Id */
+            id: string;
+            /** Installed */
+            installed: boolean;
+            /** Lane */
+            lane?: string | null;
+            /** Licence Policy */
+            licence_policy: string;
+            /** Loaded */
+            loaded: boolean | null;
+            /** Modality */
+            modality: string;
+            /** Model Entries */
+            model_entries?: components["schemas"]["CustomerModelEntry"][];
+            /** Models */
+            models?: string[];
+            /** Name */
+            name: string;
+            /** Profiles */
+            profiles?: string[];
+            /** Threat */
+            threat?: string[];
+            /** Version */
+            version: string;
+        };
+        /** CustomerModelEntry */
+        CustomerModelEntry: {
+            /** Depends On */
+            depends_on?: string[];
+            /** Id */
+            id: string;
+            /** Installed */
+            installed: boolean;
+            /** Licence */
+            licence: {
+                [key: string]: unknown;
+            };
+            /** Loaded */
+            loaded: boolean;
+            /** Loaded Devices */
+            loaded_devices?: string[];
+        };
         /** Decision */
         Decision: {
             /**
@@ -3021,25 +3049,6 @@ export interface components {
             /** Status */
             status: string;
         };
-        /** EngineeringNote */
-        EngineeringNote: {
-            /**
-             * Field
-             * @description What the string is, in words
-             */
-            field: string;
-            /**
-             * Text
-             * @description The manifest string, verbatim
-             */
-            text: string;
-            /**
-             * Withheld
-             * @description False when the client wording prints the string without its references
-             * @default true
-             */
-            withheld: boolean;
-        };
         /** ErrorRate */
         ErrorRate: {
             /** Bench Version */
@@ -3071,23 +3080,6 @@ export interface components {
                 number,
                 number
             ];
-        };
-        /** EvalRow */
-        EvalRow: {
-            /** Auc */
-            auc?: number | null;
-            /** Bench */
-            bench: string;
-            /** Date */
-            date?: string | null;
-            /** Ece */
-            ece?: number | null;
-            /** N */
-            n?: number | null;
-            /** Slice */
-            slice: string;
-            /** Tpr At Fpr01 */
-            tpr_at_fpr01?: number | null;
         };
         /** EvidenceSentence */
         EvidenceSentence: {
@@ -3252,22 +3244,6 @@ export interface components {
             strength: "decisive" | "strong" | "moderate" | "weak" | "none";
             /** Title */
             title: string;
-        };
-        /** Footprint */
-        Footprint: {
-            /** Activation Mb Per Item */
-            activation_mb_per_item?: number | null;
-            /**
-             * Estimated
-             * @default true
-             */
-            estimated: boolean;
-            /** Fp16 Mb */
-            fp16_mb?: number | null;
-            /** Fp32 Mb */
-            fp32_mb?: number | null;
-            /** Params M */
-            params_m?: number | null;
         };
         /**
          * FrameTableV2
@@ -3644,28 +3620,6 @@ export interface components {
             /** Value */
             value?: number | null;
         };
-        /** Licence */
-        Licence: {
-            /**
-             * Class
-             * @enum {string}
-             */
-            class: "commercial" | "non_commercial" | "unknown";
-            /** Notice */
-            notice?: string | null;
-            /** Spdx */
-            spdx: string;
-        };
-        /** LoadSpec */
-        LoadSpec: {
-            /** Adapter Loader */
-            adapter_loader?: string | null;
-            /**
-             * Pickle
-             * @default false
-             */
-            pickle: boolean;
-        };
         /** LoginOut */
         LoginOut: {
             /**
@@ -3836,133 +3790,6 @@ export interface components {
          * @enum {string}
          */
         Modality: "image" | "video" | "audio" | "text" | "container";
-        /** ModelCard */
-        ModelCard: {
-            /** Adapter */
-            adapter?: string | null;
-            admission?: components["schemas"]["Admission"] | null;
-            /**
-             * Admission Record
-             * @description An admission record of this detector is on file
-             * @default false
-             */
-            admission_record: boolean;
-            calibration?: components["schemas"]["Calibration"];
-            /** Citation */
-            citation?: string | null;
-            client?: components["schemas"]["CardCopy"] | null;
-            /** Contamination Sets */
-            contamination_sets?: string[];
-            /** Coverage Date */
-            coverage_date?: string | null;
-            /**
-             * Default Enabled
-             * @default false
-             */
-            default_enabled: boolean;
-            /** Disclosures */
-            disclosures?: string[];
-            /** Enabled */
-            enabled: boolean;
-            /** Enablement Reasons */
-            enablement_reasons?: string[];
-            /** Eval */
-            eval?: components["schemas"]["EvalRow"][];
-            /** Family */
-            family: string;
-            /** Fp Modes */
-            fp_modes?: string[];
-            /** Hypotheses */
-            hypotheses?: components["schemas"]["Hypothesis"][];
-            /** Id */
-            id: string;
-            /** Input Constraints */
-            input_constraints?: string[];
-            /**
-             * Installed
-             * @description Every direct and transitive model the detector needs is installed (true for a model-free detector)
-             */
-            installed: boolean;
-            /** Known Limitations */
-            known_limitations?: string[];
-            lane?: components["schemas"]["Lane"] | null;
-            /** Legacy Weight */
-            legacy_weight?: number | null;
-            /** Licence Policy */
-            licence_policy: string;
-            /**
-             * Loaded
-             * @description Every direct model has a runtime bundle tracked in memory; dependencies may be held inside those bundles without separate entries; null for a model-free detector
-             */
-            loaded: boolean | null;
-            modality: components["schemas"]["Modality"];
-            /** Model Entries */
-            model_entries?: components["schemas"]["ModelState"][];
-            /** Models */
-            models?: string[];
-            /** Name */
-            name: string;
-            /** Profiles */
-            profiles?: string[];
-            /**
-             * Records
-             * @description The admission record, on an administrator's card; empty for every other role
-             */
-            records?: components["schemas"]["RecordRef"][];
-            /** Source Url */
-            source_url?: string | null;
-            /** Superseded By */
-            superseded_by?: string | null;
-            /** Threat */
-            threat?: ("full_synthesis" | "face_swap" | "partial_edit" | "gan_face" | "t2v" | "voice" | "temporal" | "lip_sync" | "ai_text")[];
-            /** Training Data */
-            training_data?: string | null;
-            /** Validated Slices */
-            validated_slices?: {
-                [key: string]: unknown;
-            }[];
-            /** Version */
-            version: string;
-        };
-        /** ModelState */
-        ModelState: {
-            /** Depends On */
-            depends_on?: string[];
-            /** Devices */
-            devices?: {
-                [key: string]: "ok" | "fallback_cpu" | "unsupported";
-            };
-            footprint?: components["schemas"]["Footprint"];
-            /**
-             * Fp16 Safe
-             * @default false
-             */
-            fp16_safe: boolean;
-            /** Id */
-            id: string;
-            /**
-             * Installed
-             * @description Every pinned file of the model is on disk
-             */
-            installed: boolean;
-            /**
-             * Keep Warm
-             * @default false
-             */
-            keep_warm: boolean;
-            licence: components["schemas"]["Licence"];
-            load?: components["schemas"]["LoadSpec"];
-            /**
-             * Loaded
-             * @description The model manager independently tracks this model ID in memory; false does not rule out its use inside another model's runtime bundle
-             */
-            loaded: boolean;
-            /** Loaded Devices */
-            loaded_devices?: string[];
-            /** Notes */
-            notes?: string[];
-            source: components["schemas"]["Source"];
-        };
         /** NotValidatedDisclosure */
         NotValidatedDisclosure: {
             /**
@@ -4023,7 +3850,7 @@ export interface components {
             file_count: number | null;
             /**
              * Filename
-             * @description veritas-evidence-<analysis id8>-r<revision>[-draft].zip
+             * @description Download filename; new public packages use chipmunk-evidence-<analysis id8>-r<revision>[-draft].zip
              */
             filename: string | null;
             /** Finished At */
@@ -4041,6 +3868,8 @@ export interface components {
             manifest_sha256: string | null;
             /** Report Id */
             report_id: string;
+            /** Schema Id */
+            schema_id: string;
             /**
              * Sha256
              * @description SHA-256 of the ZIP once done, recorded as package_exported
@@ -4065,7 +3894,7 @@ export interface components {
         PackageRequest: {
             /**
              * Include Original
-             * @description Put the original in source/ (needed by `app.cli reproduce`)
+             * @description Include unredacted user source bytes; public packages do not support inference reproduction
              * @default false
              */
             include_original: boolean;
@@ -4103,6 +3932,13 @@ export interface components {
             /** Next Cursor */
             next_cursor?: string | null;
         };
+        /** Page[CustomerModelCard] */
+        Page_CustomerModelCard_: {
+            /** Items */
+            items: components["schemas"]["CustomerModelCard"][];
+            /** Next Cursor */
+            next_cursor?: string | null;
+        };
         /** Page[DetectorRunV2] */
         Page_DetectorRunV2_: {
             /** Items */
@@ -4128,13 +3964,6 @@ export interface components {
         Page_ItemOut_: {
             /** Items */
             items: components["schemas"]["ItemOut"][];
-            /** Next Cursor */
-            next_cursor?: string | null;
-        };
-        /** Page[ModelCard] */
-        Page_ModelCard_: {
-            /** Items */
-            items: components["schemas"]["ModelCard"][];
             /** Next Cursor */
             next_cursor?: string | null;
         };
@@ -4376,26 +4205,6 @@ export interface components {
              * @description Why the analysis is reanalysed (recorded in the custody log). Required when the revision is signed off.
              */
             reason?: string | null;
-        };
-        /** RecordRef */
-        RecordRef: {
-            /**
-             * Id
-             * @description `admission:<detector id>`
-             */
-            id: string;
-            /**
-             * Kind
-             * @constant
-             */
-            kind: "admission";
-            /**
-             * Path
-             * @description Repository path of the record
-             */
-            path: string;
-            /** Title */
-            title: string;
         };
         /** RefusionAccepted */
         RefusionAccepted: {
@@ -4650,6 +4459,11 @@ export interface components {
              * @description R-<analysis id8>-DRAFT-<revision> until the report is issuable, then R-<analysis id8>-<revision>
              */
             display_id: string;
+            /**
+             * Downloadable
+             * @description Whether this immutable report uses an approved public template and has a file
+             */
+            downloadable: boolean;
             /** Duration Ms */
             duration_ms: number | null;
             /** Engine */
@@ -5235,36 +5049,6 @@ export interface components {
                 number
             ] | null;
         };
-        /** Source */
-        Source: {
-            /** Archive */
-            archive?: ("zip" | "tar") | null;
-            /** Entrypoint */
-            entrypoint?: string | null;
-            /** File Id */
-            file_id?: string | null;
-            /** Files */
-            files?: components["schemas"]["WeightFile"][];
-            /** Mirror Url */
-            mirror_url?: string | null;
-            /** Path */
-            path?: string | null;
-            /** Produced By */
-            produced_by?: string | null;
-            /** Ref */
-            ref?: string | null;
-            /** Repo */
-            repo?: string | null;
-            /** Revision */
-            revision?: string | null;
-            /**
-             * Type
-             * @enum {string}
-             */
-            type: "hf" | "url" | "gdrive" | "torch_hub" | "local";
-            /** Url */
-            url?: string | null;
-        };
         /** StageV2 */
         StageV2: {
             /** Attempt */
@@ -5581,15 +5365,6 @@ export interface components {
             rotate_secret: boolean;
             /** Url */
             url?: string | null;
-        };
-        /** WeightFile */
-        WeightFile: {
-            /** Bytes */
-            bytes?: number | null;
-            /** Path */
-            path: string;
-            /** Sha256 */
-            sha256?: string | null;
         };
         /** WithdrawPost */
         WithdrawPost: {
@@ -6815,6 +6590,176 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Problem"];
+                };
+            };
+        };
+    };
+    image_evidence_api_v2_analyses__aid__evidence_packets_get: {
+        parameters: {
+            query?: {
+                set_id?: string | null;
+            };
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    evidence_asset_api_v2_analyses__aid__evidence_packets__set_id__assets__sha256___extension__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+                set_id: string;
+                sha256: string;
+                extension: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    image_evidence_plate_api_v2_analyses__aid__evidence_packets__set_id__images__sha256__png_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+                set_id: string;
+                sha256: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
                 };
             };
         };
@@ -8150,15 +8095,12 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description The audit log */
+            /** @description Successful Response */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content: {
-                    "application/x-ndjson": unknown;
-                    "text/csv": unknown;
-                };
+                content?: never;
             };
             /** @description Unauthorized */
             401: {
@@ -8182,6 +8124,16 @@ export interface operations {
             };
             /** @description Not Found */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -10030,7 +9982,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Page_ModelCard_"];
+                    "application/json": components["schemas"]["Page_CustomerModelCard_"];
                 };
             };
             /** @description Bad Request */
@@ -10082,7 +10034,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ModelCard"];
+                    "application/json": components["schemas"]["CustomerModelCard"];
                 };
             };
             /** @description Unauthorized */
@@ -10133,9 +10085,7 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content: {
-                    "text/markdown": string;
-                };
+                content?: never;
             };
             /** @description Unauthorized */
             401: {
@@ -10169,16 +10119,6 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Problem"];
-                    "application/problem+json": unknown;
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
                 headers: {
                     [name: string]: unknown;
                 };

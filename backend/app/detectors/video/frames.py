@@ -48,6 +48,8 @@ def probe(path: Path) -> dict:
         "nb_frames": int(v.get("nb_frames", 0) or 0),
         "pix_fmt": v.get("pix_fmt"),
         "has_audio": a is not None,
+        "timeline_origin_s": float(fmt["start_time"]) if fmt.get("start_time") not in (None, "N/A") else None,
+        "video_start_s": float(v["start_time"]) if v.get("start_time") not in (None, "N/A") else None,
         "audio_codec": a.get("codec_name") if a else None,
         "tags": tags,
     }

@@ -5,6 +5,7 @@ import { ApiError } from '../../lib/api/client'
 import { qk, type AnalysisDetail, type Me } from '../../lib/api/queries'
 import { requestRerun, rerunNeedsReason, rerunRefusal, unpublishedRevision } from '../../lib/api/rerun'
 import { namedAccount } from '../../lib/api/roles'
+import { useBilling } from '../../lib/api/billing'
 import { Button } from '../../components/ui'
 import { textareaClass } from '../review/Dispositions'
 
@@ -24,6 +25,8 @@ export default function RerunDialog({ open, analysis, me, onClose, onRefused }: 
   const uid = useId()
   const nav = useNavigate()
   const qc = useQueryClient()
+  const billing = useBilling()
+  const paid = billing.data?.enabled === true
   const [note, setNote] = useState('')
   const retry = unpublishedRevision(analysis.status, analysis.supersedes_id)
   const signed = !retry && rerunNeedsReason(analysis.review?.locked_at)
@@ -68,15 +71,15 @@ export default function RerunDialog({ open, analysis, me, onClose, onRefused }: 
         Re-run <span className="font-mono text-mono text-text-muted">{analysis.id.slice(0, 8)}</span>
       </h2>
       <div className="px-6 py-5">
-        {retry ? (
+        {paid ? <p className="m-0 text-small text-text">Each new analysis costs {billing.data?.price_display} USD. Upload the source again and complete checkout to start another analysis. Your existing result stays available.</p> : <>{retry ? (
           <p className="m-0 text-small text-text">
             Revision {analysis.revision} was {analysis.status} before it published, so the revision it would have replaced is still
             current. A new revision of that one analyses this file again with the pins revision {analysis.revision} was queued with. The
-            original is re-hashed first. Veritas refuses when a pinned weight or detector is no longer available, and names it.
+            original is re-hashed first. Chipmunk Verify refuses when a pinned weight or detector is no longer available, and names it.
           </p>
         ) : <p className="m-0 text-small text-text">
           Revision {analysis.revision + 1} analyses this file again with the pinned manifest of revision {analysis.revision}: the same
-          profile, detector versions and weights, fusion artefact and policy thresholds. The original is re-hashed first. Veritas refuses
+          profile, detector versions and weights, fusion artefact and policy thresholds. The original is re-hashed first. Chipmunk Verify refuses
           when a pinned weight or detector is no longer available, and names it.
         </p>}
         {signed && (
@@ -88,7 +91,7 @@ export default function RerunDialog({ open, analysis, me, onClose, onRefused }: 
         <label className="mt-4 flex flex-col gap-1.5 text-small">
           <span className="text-text">Why re-run <span className="text-text-muted">({signed ? 'required; ' : ''}recorded in the custody log)</span></span>
           <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} maxLength={4000} disabled={busy} required={signed} className={textareaClass} />
-        </label>
+        </label></>}
       </div>
       <div className="dialog-actions px-6 py-4 border-t border-border">
         {(refusal || error) && (
@@ -100,7 +103,11 @@ export default function RerunDialog({ open, analysis, me, onClose, onRefused }: 
         )}
         <div className="flex items-center justify-end gap-4">
           <Button variant="text" onClick={onClose} disabled={busy}>Close</Button>
-          <Button variant="primary" onClick={() => run.mutate()} disabled={busy || !!refusal || missing}>{busy ? 'Queuing…' : 'Re-run'}</Button>
+          <Button variant="primary" onClick={() => {
+            if (paid) { onClose(); nav(`/upload?kind=${analysis.kind}`) }
+            else run.mutate()
+          }} disabled={busy || billing.isPending || billing.isError || (!paid && (!!refusal || missing))}>{paid ? 'New paid analysis' : busy ? 'Queuing…' : 'Re-run'}</Button>
+          {billing.isError && <span role="alert" className="text-small text-danger">Pricing is unavailable. Reopen this dialog to try again.</span>}
         </div>
       </div>
     </dialog>

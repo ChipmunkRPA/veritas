@@ -25,7 +25,7 @@ from app.detectors.text.binoculars import (
     MIN_DOCUMENT_TOKENS,
     Binoculars,
     document_score,
-    sentence_scores,
+    sentence_score_records,
 )
 from app.detectors.text.classifier import (
     PRIMARY_BATCH,
@@ -33,6 +33,7 @@ from app.detectors.text.classifier import (
     DesklibClassifier,
     SecondaryClassifier,
 )
+from app.detectors.text.extract import text_hash
 from app.detectors.text.pipeline import PRIMARY_CHUNK_MAX_LEN, chunk_average, chunk_words, chunks_of, windows
 from app.engine.detector import (
     ActivationUse,
@@ -62,9 +63,10 @@ class _SequenceClassifier(Detector):
         return has_sentences(ctx)
 
     def run(self, ctx: RunContext) -> DetectorResult:
-        _doc, sents = document_input(ctx)
+        doc, sents = document_input(ctx)
         clf = self.backend(ctx)
-        p_win = [float(p) for p in clf.predict(windows(sents, settings.text_window_sentences), batch=self.BATCH, check=ctx.deadline.check)]
+        inputs = windows(sents, settings.text_window_sentences)
+        p_win = [float(p) for p in clf.predict(inputs, batch=self.BATCH, check=ctx.deadline.check)]
         window_coverage = clf.last_coverage
         ctx.deadline.check("sentence windows")
         chunks = chunks_of(sents)
@@ -80,6 +82,14 @@ class _SequenceClassifier(Detector):
         aggregate = UnitScore("global", p_doc, "probability", quality={"chunks": float(len(chunks)), "sentences": float(len(sents)),
                                                                      "tokens": float(token_count), "token_windows": float(token_windows)})
         side = "LLM-written" if p_doc >= 0.5 else "human-written"
+        half = settings.text_window_sentences // 2
+        input_windows = []
+        for i, (source, score) in enumerate(zip(inputs, p_win, strict=True)):
+            group = sents[max(0, i - half):i + half + 1]
+            input_windows.append({"unit_ref": f"sentence:{i}", "focus": {"start": sents[i].start, "end": sents[i].end},
+                                  "spans": [{"start": s.start, "end": s.end} for s in group],
+                                  "input_sha256": text_hash(source), "score": score,
+                                  "token_coverage": window_coverage[i]})
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"sigmoid output {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "
@@ -88,7 +98,10 @@ class _SequenceClassifier(Detector):
             reference="Binary AI-text classifier; decision boundary at 0.5",
             reasoning=f"The classifier places the document on the {side} side of its decision boundary.",
             metrics={"chunks": float(len(chunks)), "sentences": float(len(sents)), "tokens": float(token_count),
-                     "token_windows": float(token_windows)}, model_revisions=revisions(ctx, self.MODEL_ID))
+                     "token_windows": float(token_windows)}, model_revisions=revisions(ctx, self.MODEL_ID),
+            details={"text_evidence": {"version": "scored-context/1", "offset_unit": "unicode_codepoint",
+                      "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
+                      "windows": input_windows}})
 
 
 class DesklibDetector(_SequenceClassifier):
@@ -122,7 +135,7 @@ class HelloSimpleAIDetector(_SequenceClassifier):
 class BinocularsDetector(Detector):
     OBSERVER, PERFORMER = "hf.qwen.qwen2_5_1_5b", "hf.qwen.qwen2_5_1_5b_instruct"
     spec = text_spec("txt.binoculars", "Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)", InputUnit.DOCUMENT,
-                     model_ids=(OBSERVER, PERFORMER), timeout_s=180.0, profiles=FULL_DEEP)
+                     model_ids=(OBSERVER, PERFORMER), timeout_s=180.0, profiles=FULL_DEEP, version="0.4.0")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return tuple(ActivationUse(m, 1, "token sequence", f"One sequence at a time, at most {CTX} tokens including optional EOS anchor",
@@ -135,17 +148,58 @@ class BinocularsDetector(Detector):
     def run(self, ctx: RunContext) -> DetectorResult:
         doc, sents = document_input(ctx)
         tokenizer, observer = ctx.lease.get(self.OBSERVER).obj
-        _tokenizer, performer = ctx.lease.get(self.PERFORMER).obj
+        other_tokenizer, performer = ctx.lease.get(self.PERFORMER).obj
+        # Cross-entropy compares the same vocabulary positions. A matching excerpt
+        # alone is insufficient if the paired tokenizers map other tokens differently.
+        if tokenizer.get_vocab() != other_tokenizer.get_vocab():
+            raise ValueError("The paired text check requires identical vocabulary IDs")
         b = Binoculars.from_parts(tokenizer, observer, performer, ctx.device)
         ts = b.token_scores(doc.text, check=ctx.deadline.check)
+        counterpart = other_tokenizer(doc.text, return_offsets_mapping=True, add_special_tokens=False)
+        if counterpart["input_ids"] != ts.source_token_ids or [tuple(o) for o in counterpart["offset_mapping"]] != ts.offsets:
+            raise ValueError("The paired text check tokenizers disagree on the actual source input")
         score, n_tokens = document_score(ts)
         if score is None:
             return DetectorResult.not_applicable(f"fewer than {MIN_DOCUMENT_TOKENS} scored tokens")
         ctx.deadline.check("sentence spans")
-        per_sentence = sentence_scores(ts, sents)
+        records = sentence_score_records(ts, sents)
+        per_sentence = [record["score"] for record in records]
         units = [UnitScore(f"sentence:{i}", sc, "score") for i, sc in enumerate(per_sentence) if sc is not None]
         aggregate = UnitScore("global", score, "score", quality={"tokens": float(n_tokens)})
         machine_like = score < settings.binoculars_threshold
+        contexts = {c["id"]: c for c in ts.input_contexts}
+        windows = []
+        omitted = []
+        for sentence, record in zip(sents, records, strict=True):
+            if record["score"] is None:
+                omitted.append({"unit_ref": f"sentence:{sentence.idx}", "reason": "Fewer than 12 scored tokens, including the recorded neighbour fallback."})
+                continue
+            if ts.evidence_limit_exceeded:
+                omitted.append({"unit_ref": f"sentence:{sentence.idx}", "reason": "Exact token context recording exceeded the 262144-token evidence bound; this local score is not presented as source-mapped evidence."})
+                continue
+            selected = [contexts[key] for key in record["context_ids"]]
+            # Keep selected public records bounded without changing inference or
+            # pretending a truncated input was the context that produced a score.
+            if not selected or len(selected) > 16:
+                omitted.append({"unit_ref": f"sentence:{sentence.idx}", "reason": "This score spans more than 16 recorded token contexts or has no exact context; local input proof is omitted."})
+                continue
+            lo = min(c["spans"][0]["start"] for c in selected)
+            hi = max(c["spans"][0]["end"] for c in selected)
+            windows.append({**record, "unit_ref": f"sentence:{sentence.idx}",
+                            "focus": {"start": sentence.start, "end": sentence.end},
+                            "spans": [{"start": lo, "end": hi}], "input_sha256": text_hash(doc.text[lo:hi]),
+                            "score_kind": "perplexity_ratio", "threshold": settings.binoculars_threshold,
+                            "score_exact_hex": float(record["score"]).hex(),
+                            "threshold_exact_hex": float(settings.binoculars_threshold).hex(),
+                            "mean_negative_log_likelihood_exact_hex": float(record["mean_negative_log_likelihood"]).hex(),
+                            "mean_cross_entropy_exact_hex": float(record["mean_cross_entropy"]).hex(),
+                            "ai_when": "lt", "is_calibrated": False,
+                            "input_semantics": "Source envelope of the recorded rolling contexts. Exact paired-model input is the committed token-ID sequence, not a re-tokenized excerpt.",
+                            "shared_input_anchor_id": tokenizer.eos_token_id,
+                            "paired_tokenizer_default_eos_ids": [tokenizer.eos_token_id, other_tokenizer.eos_token_id],
+                            "anchor_policy": "The first tokenizer's explicit leading token is supplied in the same input sequence to both models; their default end tokens need not agree.",
+                            "token_coverage": {"tokens": record["tokens_scored"], "covered_tokens": record["tokens_scored"],
+                                               "token_windows": len(selected)}})
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"observer log-perplexity / cross-perplexity = {score:.4f} over {n_tokens} tokens; "
@@ -156,4 +210,10 @@ class BinocularsDetector(Detector):
                        "statistical fingerprint of LLM sampling." if machine_like else
                        "The text carries more surprise than LLM-sampled text, consistent with human authorship."),
             metrics={"tokens": float(n_tokens), "sentences_scored": float(len(units))},
-            model_revisions=revisions(ctx, self.OBSERVER, self.PERFORMER))
+            model_revisions=revisions(ctx, self.OBSERVER, self.PERFORMER),
+            details={"text_evidence": {"version": "scored-context/2", "offset_unit": "unicode_codepoint",
+                     "extracted_text_sha256": text_hash(doc.text), "join": "single_source_span",
+                     "shared_tokenization_verified": True, "windows": windows, "contexts": ts.input_contexts,
+                     "omitted_windows": omitted, "unscored_first_token": ts.unscored_first_token,
+                     "document_score": {"score": score, "score_kind": "perplexity_ratio", "tokens_scored": n_tokens,
+                                        "threshold": settings.binoculars_threshold, "ai_when": "lt", "is_calibrated": False}}})

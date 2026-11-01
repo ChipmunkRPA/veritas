@@ -1,8 +1,9 @@
 import { useId, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ScanLine } from 'lucide-react'
+import BrandMark from '../../components/BrandMark'
 import { apiClient, unwrap } from '../../lib/api/client'
+import { useBilling } from '../../lib/api/billing'
 import { clearSessionEnded } from '../../lib/api/sessionEnd'
 import { Button } from '../../components/ui'
 import { inputClass } from '../cases/NewCaseDialog'
@@ -22,6 +23,7 @@ export default function SignIn({ keyRefused, sessionNotKept = false, named }: {
 }) {
   const uid = useId()
   const qc = useQueryClient()
+  const billing = useBilling()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [invalid, setInvalid] = useState<string | null>(null)
@@ -54,14 +56,17 @@ export default function SignIn({ keyRefused, sessionNotKept = false, named }: {
     <main id="main-content" className="min-h-screen bg-surface text-text px-10 pt-16 pb-24 max-[639px]:px-4 max-[639px]:pt-8" data-testid="sign-in">
       {/* N-19d (design review, P2 "screens"): the wordmark and the form are one column in the middle of the page (they stood at
           its left edge, with the rest of a wide window empty) */}
-      <p className="display mx-auto my-0 max-w-[360px] text-[25px] leading-7 font-medium flex items-center gap-2.5">
-        <ScanLine size={24} strokeWidth={1.5} aria-hidden className="text-accent" />Veritas
+      <p className="mx-auto my-0 max-w-[360px] font-semibold flex items-center gap-2.5">
+        <BrandMark className="w-9 h-9 shrink-0" /><span className="leading-none"><span className="block text-[21px] tracking-[-0.045em]">chipmunk</span><span className="block mt-1 text-[10px] uppercase tracking-[0.2em]">Verify</span></span>
       </p>
       <form onSubmit={submit} noValidate aria-labelledby={`${uid}-title`} className="mx-auto mt-16 max-w-[360px] max-[639px]:mt-10">
         <h1 id={`${uid}-title`} className="display text-display font-normal m-0">Sign in</h1>
-        {named
-          ? <p className="mt-3 mb-0 text-small text-text-muted" data-testid="sign-in-named">A conclusion and a sign-off are recorded under a named account. Use the username and password your administrator issued.{named.singleUser && ' On a single-user installation the operator creates the account on this machine, as the runbook describes under “First administrator”.'}</p>
-          : <p className="mt-3 mb-0 text-small text-text-muted">This instance needs an account. Use the username and password your administrator issued.</p>}
+        <p className="mt-3 mb-0 text-small text-text-muted" data-testid={named ? 'sign-in-named' : undefined}>Sign in to access your private analyses and reports. Use the username and password issued for your account.</p>
+        {billing.data?.enabled && <div className="mt-5 p-4 rounded-md border border-border bg-surface-2" aria-label="Analysis price">
+          <p className="m-0 text-body font-medium">{billing.data.price_display} USD per analysis</p>
+          <p className="mt-2 mb-0 text-small text-text-muted">One payment through Stripe. No subscription. An automated result may be inconclusive.</p>
+          {billing.data.mode === 'test' && <p className="mt-2 mb-0 text-caption text-accent">Test mode — no real payment is collected.</p>}
+        </div>}
         {keyRefused && <p className="mt-2 mb-0 text-small text-text-muted">The API key stored in this browser was not accepted; signing in replaces it.</p>}
         {sessionNotKept && !login.isPending && (
           <p role="alert" data-testid="session-not-kept" className="mt-4 mb-0 text-small text-danger">
@@ -83,7 +88,7 @@ export default function SignIn({ keyRefused, sessionNotKept = false, named }: {
           <Button variant="primary" type="submit" disabled={login.isPending}>{login.isPending ? 'Signing in…' : 'Sign in'}</Button>
           {named && <Link to={named.back} className="text-small text-accent underline underline-offset-[3px] decoration-1 hover:decoration-2">Back without signing in</Link>}
         </div>
-        <p className="mt-8 mb-0 text-caption text-text-muted">Sign-ins and failed attempts are recorded in the audit log. Programs use an API key instead.</p>
+        <p className="mt-8 mb-0 text-small text-text-muted">Need an account or help signing in? Contact <a href="mailto:sales@chipmunkrpa.com" className="text-accent underline underline-offset-4">sales@chipmunkrpa.com</a>.</p>
       </form>
     </main>
   )

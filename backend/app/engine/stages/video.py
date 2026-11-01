@@ -38,9 +38,11 @@ from typing import Any
 import numpy as np
 from PIL import Image
 
+from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.core.evidence import band_for
 from app.detectors.audio.coverage import coverage_seconds, scored_voice_spans
+from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import prob_to_signal_fields
 from app.detectors.image.classifiers import specs as classifier_specs
 from app.detectors.image.scoring import dfdc_frame_weight, face_frame_weight, frame_weight, fuse_frame_scores
@@ -55,7 +57,7 @@ from app.detectors.video.adapters.lipsync import AVInputs
 from app.detectors.video.adapters.swap import TrackInputs
 from app.detectors.video.adapters.synthesis import ClipInputs
 from app.detectors.video.adapters.tracks import LowResVideo
-from app.detectors.video.audio import SR, extract_audio, is_mostly_silence, silent_signal, voice_signal
+from app.detectors.video.audio import SR, is_mostly_silence, silent_signal, voice_signal
 from app.detectors.video.audio import specs as audio_specs
 from app.detectors.video.decode import DecodeError, FrameTable, decode_stream, probe_frames
 from app.detectors.video.frame_store import FrameStore
@@ -81,7 +83,9 @@ from app.engine.stages import common
 from app.schemas.evidence import AnalysisResultV2, Decision, SignalV2, TimeSegment
 from app.schemas.legacy import BAND_CODE, FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "vid-2.0-p35"  # p35 (N-19q, finding 4; synthesis tpl-2.19): the finding on the checks that ran says of the Content Credentials check of the container that read the file and found no manifest that it ran and found none (it read "Not run: C2PA Content Credentials (video containers) (not applicable: …)" beside "No Content Credentials"); the earlier method's per-frame series under a fusion model is titled "Per-frame values of the earlier method (the estimate does not read them)" (finding 6); the finding of a check that entered the estimate stores its stand-alone words. p34 (N-19p, design review D6-05; synthesis tpl-2.18): the coverage finding counts the statistical checks only ("1 of 1 scored check flagged this file" beside "Only one statistical check scored"; it read "1 of 2", counting the codec lane). p33 (N-19p, security re-check SEC6-01, code review R10-02, R10-03): a v0.3 signal's `observed`, `reasoning` and the strings of its `details` are filtered as text from the file (a container tag held RLO, ESC and BEL in the signal of the capture-device tags, on both fusion paths), text from a file keeps its words apart, and the title and caption of every exhibit are filtered (`prov.c2pa.video` 0.4.3, `vid.meta.container` 0.3.1, `vid.codec.ffprobe` 0.4.1). p32 (N-19o, design review D5-03): outside what was validated, where no estimate is shown, the finding of a check of little effect is titled "Little effect" and a check that entered says "In this result …"; (D5-04): the finding of the container check, whose row the decision publishes and does not count, is titled by what it tests and says that the decision does not count it; its strength, direction and every count are unchanged (it read "Little effect on the estimate" and "In this estimate the check had little effect."). p31 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. p30 (N-19n, the marker’s finding, one step for the part; design review D3-07): the finding of a self-declared marker is a record’s (its title "Self-declared: …", "Self-declared, not applied: …" under a record that outranks it); Content Credentials that do not validate are titled as such; the caveat of what was set aside names it without a reason; a signal copies what its check found and where (`details`). p29: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). p28: a decisive code of the statistical checks needs the estimate as published in its answer’s part of the scale (D-77) and checks that together give it at least ln 2 (D-76 as amended); a result that fails one is inconclusive with that condition’s reason, and `fusion.rule` and `statistical_alone.rule` name it; the reason’s number is the printed whole points; a cap’s reason quotes the levels’ headline only where both conditions would have left it (N-19m, third part). p27: under a self-declared marker the confidence of a result is low where D-76 took the decisive code of the statistical estimate, as it is for a check that did not run, for disagreement and for a wide interval (it was medium) (N-19m; code review R7-03, D-76 as amended on 2026-10-05); p26: the decision of a result that a trusted capture decides is headed by the record ("The file's Content Credentials record a capture of these bytes" in `verbal`, on both fusion paths; it read the sentence of the decision code); its code, number, band and confidence are unchanged (N-19m; design review D3-01, D-15); p25: the row of a self-declared record in the breakdown names the kind of the record (Content Credentials by what they name or declare; it read "Generator named in unsigned metadata or a public watermark") (N-19l; code review R6-04); p24: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p23: a decisive result needs a check that supports it (D-76): a result that the statistical checks would decide inside the envelope without a check whose published row is at least ln 2 toward its answer is inconclusive, and its reason says so; each row of a check says whether the decision counts it (`counted`: not a row of zero, not the row of a check that declares H3: the container check, which the number line counted and the runtime did not); p22: a result that a provenance record decides names its record (`provenance_record`) and words a marker by its kind; the caveat of the statistical estimate before the override prints the clamped number, the caveats of an interval stand only with one, and outside what was validated that caveat says that the number is not shown; the fallback publishes its statistical score beside a record where a check of the content scored and none where records alone scored, and a fallback result that a record decides outside what was validated says so in its reason; the reason of a marker that decides alone ends with the sentence of its case (N-19h, E-19 … E-21, 2026-10-04); p21: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04), and a fallback result whose condition stage failed is capped at inconclusive (N-19f, R4-03); p20: a strong code needs two checks that scored, and a fallback result in which only container or provenance records scored is not assessable (N-18, D-64, 2026-10-03); p19: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and a lane series is a "window score" (N-17, D-68); p18: a composite signal of one detector (the face-swap check, the voice check) is that detector's check and takes its id, so the fusion model's contribution reaches it; the per-frame series of the earlier method is titled as outside the estimate under a fusion model (N-17, D-63; browser QA P1-5); p17: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); p16: contributions are measured from each check's neutral point (N-17); p15: distinguish unsupported C2PA containers from absent credentials (2026-09-20)
+# p37: freeze decoded voice PCM and actual AV correlation inputs for immutable nested evidence.
+# p36: exact source-frame commitments and consistent legacy exhibit time units.
+PIPELINE_VERSION = "vid-2.0-p39"  # p35 (N-19q, finding 4; synthesis tpl-2.19): the finding on the checks that ran says of the Content Credentials check of the container that read the file and found no manifest that it ran and found none (it read "Not run: C2PA Content Credentials (video containers) (not applicable: …)" beside "No Content Credentials"); the earlier method's per-frame series under a fusion model is titled "Per-frame values of the earlier method (the estimate does not read them)" (finding 6); the finding of a check that entered the estimate stores its stand-alone words. p34 (N-19p, design review D6-05; synthesis tpl-2.18): the coverage finding counts the statistical checks only ("1 of 1 scored check flagged this file" beside "Only one statistical check scored"; it read "1 of 2", counting the codec lane). p33 (N-19p, security re-check SEC6-01, code review R10-02, R10-03): a v0.3 signal's `observed`, `reasoning` and the strings of its `details` are filtered as text from the file (a container tag held RLO, ESC and BEL in the signal of the capture-device tags, on both fusion paths), text from a file keeps its words apart, and the title and caption of every exhibit are filtered (`prov.c2pa.video` 0.4.3, `vid.meta.container` 0.3.1, `vid.codec.ffprobe` 0.4.1). p32 (N-19o, design review D5-03): outside what was validated, where no estimate is shown, the finding of a check of little effect is titled "Little effect" and a check that entered says "In this result …"; (D5-04): the finding of the container check, whose row the decision publishes and does not count, is titled by what it tests and says that the decision does not count it; its strength, direction and every count are unchanged (it read "Little effect on the estimate" and "In this estimate the check had little effect."). p31 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. p30 (N-19n, the marker’s finding, one step for the part; design review D3-07): the finding of a self-declared marker is a record’s (its title "Self-declared: …", "Self-declared, not applied: …" under a record that outranks it); Content Credentials that do not validate are titled as such; the caveat of what was set aside names it without a reason; a signal copies what its check found and where (`details`). p29: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). p28: a decisive code of the statistical checks needs the estimate as published in its answer’s part of the scale (D-77) and checks that together give it at least ln 2 (D-76 as amended); a result that fails one is inconclusive with that condition’s reason, and `fusion.rule` and `statistical_alone.rule` name it; the reason’s number is the printed whole points; a cap’s reason quotes the levels’ headline only where both conditions would have left it (N-19m, third part). p27: under a self-declared marker the confidence of a result is low where D-76 took the decisive code of the statistical estimate, as it is for a check that did not run, for disagreement and for a wide interval (it was medium) (N-19m; code review R7-03, D-76 as amended on 2026-10-05); p26: the decision of a result that a trusted capture decides is headed by the record ("The file's Content Credentials record a capture of these bytes" in `verbal`, on both fusion paths; it read the sentence of the decision code); its code, number, band and confidence are unchanged (N-19m; design review D3-01, D-15); p25: the row of a self-declared record in the breakdown names the kind of the record (Content Credentials by what they name or declare; it read "Generator named in unsigned metadata or a public watermark") (N-19l; code review R6-04); p24: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p23: a decisive result needs a check that supports it (D-76): a result that the statistical checks would decide inside the envelope without a check whose published row is at least ln 2 toward its answer is inconclusive, and its reason says so; each row of a check says whether the decision counts it (`counted`: not a row of zero, not the row of a check that declares H3: the container check, which the number line counted and the runtime did not); p22: a result that a provenance record decides names its record (`provenance_record`) and words a marker by its kind; the caveat of the statistical estimate before the override prints the clamped number, the caveats of an interval stand only with one, and outside what was validated that caveat says that the number is not shown; the fallback publishes its statistical score beside a record where a check of the content scored and none where records alone scored, and a fallback result that a record decides outside what was validated says so in its reason; the reason of a marker that decides alone ends with the sentence of its case (N-19h, E-19 … E-21, 2026-10-04); p21: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04), and a fallback result whose condition stage failed is capped at inconclusive (N-19f, R4-03); p20: a strong code needs two checks that scored, and a fallback result in which only container or provenance records scored is not assessable (N-18, D-64, 2026-10-03); p19: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and a lane series is a "window score" (N-17, D-68); p18: a composite signal of one detector (the face-swap check, the voice check) is that detector's check and takes its id, so the fusion model's contribution reaches it; the per-frame series of the earlier method is titled as outside the estimate under a fusion model (N-17, D-63; browser QA P1-5); p17: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); p16: contributions are measured from each check's neutral point (N-17); p15: distinguish unsupported C2PA containers from absent credentials (2026-09-20)
 FUSER_ID = "legacy.video"
 C2PA_DETECTOR = "prov.c2pa.video"
 H3 = "H3_provenance_integrity"
@@ -162,17 +166,21 @@ def provenance(ctx: StageContext) -> dict[str, Any]:
                                 outputs=StageOutputs(probe=ctx.outputs["probe"]["info"]))
 
 
-def _audio(path: Path, has_audio: bool) -> AudioTrack:
+def _audio(path: Path, has_audio: bool, *, source_sha256: str, capture: Callable | None = None) -> tuple[AudioTrack, dict[str, Any] | None]:
     if not has_audio:
-        return AudioTrack("absent")
-    pcm = extract_audio(path)
-    if pcm is None:
-        return AudioTrack("unreadable")
+        return AudioTrack("absent"), None
+    try:
+        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=120)
+    except (ValueError, RuntimeError):
+        return AudioTrack("unreadable"), None
+    pcm, mapping = decoded.pcm, decoded.mapping
+    if capture is not None:
+        capture(decoded)
     if len(pcm) < SR:
-        return AudioTrack("short", None, len(pcm))
+        return AudioTrack("short", None, len(pcm)), mapping
     if is_mostly_silence(pcm):
-        return AudioTrack("silent", None, len(pcm))
-    return AudioTrack("analysed", pcm, len(pcm))
+        return AudioTrack("silent", None, len(pcm)), mapping
+    return AudioTrack("analysed", pcm, len(pcm)), mapping
 
 
 def decode(ctx: StageContext) -> dict[str, Any]:
@@ -192,14 +200,21 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     if not frames:
         raise ValueError("No frames could be decoded")
     ctx.check("frame decoding")
-    audio = _audio(path, bool(probed["info"].get("has_audio")))
+    from app.evidence.video_audio import freeze_input
+
+    audio_evidence = {}
+    audio, audio_mapping = _audio(path, bool(probed["info"].get("has_audio")), source_sha256=ctx.outputs["ingest"]["sha256"],
+                                  capture=lambda decoded: audio_evidence.update(freeze_input(ctx, decoded)))
     ctx.state["frames"], ctx.state["frame_store"], ctx.state["audio"] = frames, store, audio
+    ctx.state["video_audio_mapping"] = audio_mapping
     height, width = frames[0].rgb.shape[:2]
     return {"method": "pts-accurate", "time_base": table.time_base,
             "frames": [{"index": f.index, "frame_index": f.frame_index, "time_s": f.time_s, "pts_ms": f.pts_ms, "pts": f.pts,
                         "sha256": hashlib.sha256(f.rgb.tobytes()).hexdigest()} for f in frames],
             "missing_frames": [i for i in wanted if i not in decoded], "width": int(width), "height": int(height),
-            "audio": {"status": audio.status, "samples": audio.samples, "seconds": round(audio.samples / SR, 3)}}
+            "audio": {"status": audio.status, "samples": audio.samples, "seconds": round(audio.samples / SR, 3),
+                      "source_mapping": audio_mapping, "evidence_input": audio_evidence.get("input")},
+            "artefacts": audio_evidence.get("artefacts", [])}
 
 
 def shots(ctx: StageContext) -> dict[str, Any]:
@@ -269,7 +284,7 @@ def av_inputs(ctx: StageContext, tracked: TrackInputs | None) -> AVInputs | None
     if tracked is None:
         return None
     return AVInputs(table=tracked.table, tracks=tracked.tracks, frames=tracked.frames, audio=ctx.state.get("audio"),
-                    store=tracked.store)
+                    store=tracked.store, audio_mapping=ctx.state.get("video_audio_mapping"))
 
 
 def codec_inputs(ctx: StageContext) -> CodecInputs | None:
@@ -450,7 +465,7 @@ def video_scores(ctx: StageContext) -> VideoScores:
                  for d, key in VOICE_DETECTORS if d in ok and ok[d]["aggregate"] is not None}
         if preds:
             weights = {repo.split("/")[-1]: w for repo, _pos, w in audio_specs()}
-            spans = scored_voice_spans(ok.values())
+            spans = scored_voice_spans([ok[d] for d, _ in VOICE_DETECTORS if d in ok])
             scored_samples = round(coverage_seconds(spans) * SR)
             sig, audio_info = voice_signal(preds, weights, scored_samples, windows_label="window(s) of ≤ 4 s")
             coverage = {"seconds_decoded": round(audio["samples"] / SR, 3), "scored_spans": [list(span) for span in spans]}
@@ -512,6 +527,9 @@ SYNTHESIS_DETECTORS = {"vid.synth.d3_xclip": "temporal", "vid.synth.frames.commf
                        "vid.codec.ffprobe": "metadata"}  # whole-video v2 detectors publishing one global signal → signal category
 
 
+AUDIO_INSPECTION_DETECTORS = {"aud.pella_v2": "model"}
+
+
 def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
     """One global signal per whole-video v2 detector run with an aggregate (V-4: D3 and the frame channel; V-6: the codec
     lane): the aggregate as the raw score, threat and fp_modes from the model card, and the exhibits that cite the signal.
@@ -521,14 +539,14 @@ def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         aggregate = entry["aggregate"]
-        if entry["status"] != "ok" or entry["detector_id"] not in SYNTHESIS_DETECTORS or aggregate is None:
+        if entry["status"] != "ok" or entry["detector_id"] not in {**SYNTHESIS_DETECTORS, **AUDIO_INSPECTION_DETECTORS} or aggregate is None:
             continue
         card = manifest.detector(entry["detector_id"]) if manifest is not None else None
         sid = common.signal_id(entry["detector_id"], aggregate)
         out.append(SignalV2.model_validate({
             "id": sid, "display_id": f"S{first + len(out):02d}", "detector_id": entry["detector_id"],
             "detector_version": entry["version"], "model_revisions": entry["model_revisions"], "name": entry["name"],
-            "family": entry["family"], "modality": entry["modality"], "category": SYNTHESIS_DETECTORS[entry["detector_id"]],
+            "family": entry["family"], "modality": entry["modality"], "category": {**SYNTHESIS_DETECTORS, **AUDIO_INSPECTION_DETECTORS}[entry["detector_id"]],
             "status": "ok", "scope": "global",
             "scope_ref": aggregate["unit_ref"], "hypothesis": entry["hypotheses"][0] if entry["hypotheses"] else None,
             "lane": card.lane if card is not None else None, "threat": list(card.threat) if card is not None else [],
@@ -536,6 +554,8 @@ def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
             "raw_kind": aggregate["raw_kind"], "effective_weight": 0.0, "observed": entry["observed"],
             "reference": entry["reference"], "reasoning": entry["reasoning"], "metrics": entry["metrics"],
             "details": entry.get("details") or {},
+            "calibrated_probability": ((entry.get("details") or {}).get("audio_screening") or {}).get("probability_ai"),
+            "calibration_ref": ((entry.get("details") or {}).get("audio_screening") or {}).get("calibration_sha256"),
             "exhibit_ids": [x["id"] for x in exhibits if sid in (x.get("source_signal_ids") or [])],
             "legacy": {"direction": "inconclusive", "strength": "none", "decisive": False},
         }).model_dump(mode="json"))
@@ -664,6 +684,8 @@ def _published_ids(entry: Mapping[str, Any], track_id: str | None, *, voice_id: 
     signal of a per-track detector, or the global signal of a whole-video detector. Other detectors publish no signal on
     this path."""
     detector_id = entry["detector_id"]
+    if detector_id in AUDIO_INSPECTION_DETECTORS and entry["aggregate"] is not None:
+        return [common.signal_id(detector_id, entry["aggregate"])]
     if detector_id in dict(VOICE_DETECTORS):
         return [voice_id]
     if track_id is not None and detector_id in TRACK_TEXT:
@@ -854,7 +876,12 @@ def render(ctx: StageContext) -> dict[str, Any]:
     faces_per_frame = (ctx.outputs.get("faces") or {}).get("faces") or [[] for _ in frames]
     per_frame = [{"p_frame": fr["p_frame"], "p_face": fr["p_face"], "faces": faces_per_frame[k]} for k, fr in enumerate(view["frames"])]
     artifacts, key_times = video_artifacts(common.legacy_artifact_dir(ctx), [f.rgb for f in frames], per_frame, [f.time_s for f in frames])
-    return {**out, **stills, "legacy_artifacts": artifacts, "key_frame_times": key_times}
+    frame_store = ctx.state.get("frame_store")
+    anchors = frame_store.native_anchors() if frame_store is not None else []
+    return {**out, **stills, "legacy_artifacts": artifacts, "key_frame_times": key_times,
+            "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
+            "audio_mapping": ctx.state.get("video_audio_mapping"),
+            "audio_status": (ctx.outputs.get("decode") or {}).get("audio", {}).get("status")}
 
 
 def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
@@ -867,4 +894,16 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
 def publish(ctx: StageContext) -> dict[str, Any]:
     result = common.build_result(ctx, kind="video", pipeline_version=PIPELINE_VERSION, entry_stages=ENTRY_STAGES,
                                  exhibit_stages=EXHIBIT_STAGES)
+    rendered = ctx.outputs.get("render") or {}
+    if rendered.get("frame_anchor_version") == "stream-pts-rgb24/1":
+        result.manifest.sampling.update({"frame_anchor_version": "stream-pts-rgb24/1",
+                                         "frame_anchor_sha256": canonical_hash(rendered["frame_anchors"]),
+                                         "frame_table_sha256": canonical_hash(ctx.outputs["probe"]["frame_table"]),
+                                         "timeline_origin_s": ctx.outputs["probe"]["info"].get("timeline_origin_s"),
+                                         "exhibit_frame_pts_unit": "milliseconds"})
+    if rendered.get("audio_mapping") is not None:
+        result.manifest.sampling["video_audio_mapping_sha256"] = canonical_hash(rendered["audio_mapping"])
+    from app.evidence.video_audio import published_record
+
+    result.manifest.sampling["video_audio_evidence"] = published_record(ctx)
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=SIGNAL_STAGES)

@@ -27,7 +27,7 @@ export default function IntakeChecks({ kind, profile, cards, pending, error, onR
       </p>
       {batch && <p className="text-small text-text-muted mt-0 mb-4">This guide describes the selected source type. Each batch file uses the checks for its detected type.</p>}
       {checks.length === 0
-        ? <p role="status" className="text-small text-text mt-0 mb-0">No checks are currently available for this source{profile ? ` in ${PROFILE_NAMES[profile]}` : ''}. Review the model catalogue before relying on an assessment.</p>
+        ? <p role="status" className="text-small text-text mt-0 mb-0">No checks are currently available for this source{profile ? ` in ${PROFILE_NAMES[profile]}` : ''}. An assessment cannot be made with the checks currently available.</p>
         : <>
           <p className="text-caption text-text-muted mt-0 mb-5 num">{checks.length} {checks.length === 1 ? 'check' : 'checks'} available{profile ? ` for ${PROFILE_NAMES[profile]}` : ' across profiles'}.</p>
           <dl className="m-0 space-y-5">

@@ -40,7 +40,7 @@ HEADLINE = {  # UX §7.1 L1 headlines, verbatim (answer.ts HEADLINE)
     "documentary_declared": "The file’s Content Credentials declare it was created with AI",
     "documentary_metadata": "The file’s metadata names an AI generator",
     "documentary_capture": "The file’s Content Credentials record a capture of these bytes",  # N-19m (D3-01; D-15)
-    "insufficient": "Veritas could not assess this file reliably",
+    "insufficient": "Chipmunk Verify could not assess this file reliably",
 }
 MEDIA = {"image": ("image", "images"), "video": ("video", "videos"), "document": ("document", "documents"), "audio": ("recording", "recordings")}
 CONFOUNDERS = {"image": "heavy compression or re-saving, or beauty filters and HDR processing",
@@ -1474,7 +1474,7 @@ def off_scale_sentence(decision: dict[str, Any]) -> str | None:
                 f"The calibrated levels for inputs like this one would have read {read}; a headline of that answer also needs an "
                 f"estimate of {bound}.")
     return (f"The estimate itself, {numeral(estimate_of(decision))} out of 100, stands in the middle part of the scale (35 to 64), "
-            f"where Veritas gives no answer. The calibrated levels for inputs like this one would have read {read}; a headline "
+            f"where Chipmunk Verify gives no answer. The calibrated levels for inputs like this one would have read {read}; a headline "
             f"of that answer also needs an estimate of {bound}.")
 
 
@@ -1642,7 +1642,7 @@ def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str
     one, _ = media(kind)
     confounders = CONFOUNDERS.get(kind, CONFOUNDERS["image"])
     if basis == "insufficient":
-        return ["Veritas could not assess this file, for these reasons:"], ["It is not a finding either way."]  # L-3, N-17; answer.ts
+        return ["Chipmunk Verify could not assess this file, for these reasons:"], ["It is not a finding either way."]  # L-3, N-17; answer.ts
     if basis == "documentary_declared":
         return (["A signed record inside the file, validated as untampered, states that the signing software generated or edited it."],
                 ["Credentials record what the signing software declared. They don’t describe the scene or who directed it."])
@@ -1654,7 +1654,7 @@ def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str
                 [f"It is not a finding of manipulation, and not a finding that the {one} is unaltered. Obtain the original file or another source."])
     band = CODE_BAND[decision["code"]]
     if (record_of(decision) or {}).get("kind") == "trusted_capture":  # N-19h (E-20, 2): the record decides, and what stands beside it
-        miss = [AUDIO_MISS] if kind == "audio" else []
+        miss = [AUDIO_MISS] if kind == "audio" and decision.get("fuser_sha256") != "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf" else []
         return [f"{CAPTURE_MEANS} {statistical_sentence(decision, profile)}"], [CAPTURE_NOT, *miss]  # N-19m (D3-01)
     if band == "very_likely_ai":
         return (["The combined evidence strongly points toward AI generation or manipulation."],
@@ -1671,7 +1671,7 @@ def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str
         return (["The combined evidence does not support a conclusive assessment.", *([outside] if outside else []),
                  *([levels] if levels else [])],
                 [f"It is not a finding of manipulation, and not a finding that the {one} is unaltered. Obtain the original file or another source."])
-    miss = [AUDIO_MISS] if kind == "audio" else []  # L-3: `docs/limitations.md`, "Synthetic voice"
+    miss = [AUDIO_MISS] if kind == "audio" and decision.get("fuser_sha256") != "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf" else []  # L-3: `docs/limitations.md`, "Synthetic voice"
     if band == "likely_authentic":
         return (["The combined evidence does not show significant indications of AI generation or manipulation."],
                 [f"It does not confirm the {one} is authentic or unedited.", *miss])
@@ -1699,7 +1699,7 @@ def levels_sentence(decision: dict[str, Any] | None) -> str | None:
 
 
 def insufficient_reasons(decision: dict[str, Any], profile: dict[str, Any] | None, coverage: dict[str, Any] | None = None) -> list[str]:
-    """The reasons under "Veritas could not assess this file": the server's first (N-14a), then the decision's and the input's.
+    """The reasons under "Chipmunk Verify could not assess this file": the server's first (N-14a), then the decision's and the input's.
 
     N-19k (browser QA lead 3): the line under the headline already counts the checks that could not run on this server, so
     where the decision's reason names them ("2 checks could not run on this server: A (memory budget); B …") the count is
@@ -2314,7 +2314,7 @@ def media_line(snapshot: ReportSnapshot) -> str:
     parts += [snapshot.media.content_type, formatting.size(snapshot.media.size_bytes)]
     if snapshot.media.received_at is not None:
         # N-19: the system's time is not "received". N-19k (Q2-14): nor the day the picture was taken ("taken in 4 Oct 2026")
-        parts.append(f"taken in by Veritas on {formatting.utc_date(snapshot.media.received_at)}")
+        parts.append(f"taken in by Chipmunk Verify on {formatting.utc_date(snapshot.media.received_at)}")
     parts.append(f"analysed {formatting.utc_date(snapshot.analysis.finished_at)}")
     return " · ".join(parts)
 
@@ -2344,10 +2344,10 @@ def page_view(snapshot: ReportSnapshot, images: dict[str, str] | None = None, *,
     failed = effect.findings_failed(result.get("caveats"))
     return {
         "not_validated": not_validated_line(unvalidated),
-        "title": f"Veritas {title.lower()} {report.display_id}",
+        "title": f"Chipmunk Verify {title.lower()} {report.display_id}",
         "subject": f"{title} · {media(kind)[0]}" if redacted else f"{centre} · {snapshot.media.filename}",
-        "keywords": f"Veritas, {report.profile}, {report.display_id}" + ("" if redacted else f", analysis {snapshot.analysis.id}"),
-        "header_left": f"Veritas · {title}",
+        "keywords": f"Chipmunk Verify, {report.profile}, {report.display_id}" + ("" if redacted else f", analysis {snapshot.analysis.id}"),
+        "header_left": f"Chipmunk Verify · {title}",
         "header_centre": header_centre(centre, draft_mark(report.profile, status)),
         # D-69: the newsroom profile repeats its mark once under the title
         "draft_note": draft_mark(report.profile, status) if report.profile == "newsroom" else None,

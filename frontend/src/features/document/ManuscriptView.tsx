@@ -4,6 +4,7 @@ import { prob } from '../../lib/format'
 import { cx } from '../../lib/cx'
 import { Button, Eyebrow } from '../../components/ui'
 import { useDemoAction, type StepAction } from '../../demo/types'
+import { sentenceScoreRows } from './sentenceScores'
 
 type Dim = 'none' | 'non-ai' | 'non-mixed'
 const isFlagged = (s: SentenceOut) => s.band === 'ai' || s.band === 'mixed'
@@ -24,6 +25,10 @@ export default function ManuscriptView({ sentences, text, paragraphs, noted, not
   const [dim, setDim] = useState<Dim>('none')
   const [numbers, setNumbers] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
+  // Extraction anchors count Unicode codepoints; JS string.slice counts UTF-16
+  // code units, which shifts every later sentence after an emoji/non-BMP letter.
+  const sourceCharacters = useMemo(() => Array.from(text), [text])
+  const sourceExcerpt = (s: SentenceOut) => sourceCharacters.slice(s.start, s.end).join('')
   const byPar = useMemo(() => {
     const m = new Map<number, SentenceOut[]>()
     sentences.forEach((s) => { if (!m.has(s.paragraph)) m.set(s.paragraph, []); m.get(s.paragraph)!.push(s) })
@@ -31,6 +36,7 @@ export default function ManuscriptView({ sentences, text, paragraphs, noted, not
   }, [sentences])
   const flagged = useMemo(() => sentences.filter(isFlagged).map((s) => s.idx), [sentences])
   const sel = selIdx == null ? null : sentences.find((s) => s.idx === selIdx) ?? null
+  const scoreRows = sel ? sentenceScoreRows(sel.scores) : []
 
   const focusSentence = (idx: number) => rootRef.current?.querySelector<HTMLElement>(`[data-idx="${idx}"]`)?.focus({ preventScroll: false })
   const step = useCallback((dir: 1 | -1) => {
@@ -96,14 +102,14 @@ export default function ManuscriptView({ sentences, text, paragraphs, noted, not
             return (
               <div key={pi} className="grid grid-cols-[40px_1fr] mb-5">
                 <span aria-hidden className="font-mono text-caption text-text-muted pt-2 select-none">¶{pi + 1}</span>
-                <p className="m-0 display text-reader text-text">
+                <p className="m-0 reader text-reader text-text">
                   {ss.map((s) => (
                     <span key={s.idx}>
                       {numbers && <span aria-hidden className="font-mono text-micro text-text-muted align-super mr-0.5 select-none">{s.idx + 1}</span>}
                       <span data-idx={s.idx} role="button" tabIndex={s.p_ai == null ? -1 : 0} className={cls(s)} onClick={() => s.p_ai != null && setSelIdx(s.idx)} onKeyDown={(e) => onSentKey(e, s)}
                         aria-pressed={selIdx === s.idx} aria-label={s.p_ai == null ? `Sentence ${s.idx + 1}, not scored` : `Sentence ${s.idx + 1}, ${bandWord(s.band)} band, uncalibrated score ${prob(s.p_ai)}`}
                         title={s.p_ai == null ? 'not scored' : undefined}>
-                        {text.slice(s.start, s.end)}
+                        {sourceExcerpt(s)}
                       </span>
                       {noted?.get(s.idx)?.length ? (
                         <span data-testid="sentence-mark" className="font-mono text-micro text-annotation align-super ml-0.5 select-none"
@@ -126,14 +132,14 @@ export default function ManuscriptView({ sentences, text, paragraphs, noted, not
             : 'max-[959px]:hidden',
         )}>
           {!sel ? (
-            <p className="display text-reader text-text-muted">Select a sentence to see its evidence.</p>
+            <p className="reader text-reader text-text-muted">Select a sentence to see its evidence.</p>
           ) : (
             <div key={sel.idx} className="animate-fade-in">
               <div className="flex items-center justify-between gap-4">
                 <Eyebrow>Sentence {sel.idx + 1} · ¶{sel.paragraph + 1}</Eyebrow>
                 <Button variant="text" className="hidden max-[959px]:inline-flex" onClick={() => setSelIdx(null)}>Close</Button>
               </div>
-              <blockquote className={cx('m-0 mt-2 pl-3 border-l-[3px] display text-reader italic text-text', bandRule(sel.band))}>{sel.text}</blockquote>
+              <blockquote className={cx('m-0 mt-2 pl-3 border-l-[3px] reader text-reader italic text-text', bandRule(sel.band))}>{sourceExcerpt(sel)}</blockquote>
               <dl className="mt-4 m-0 grid grid-cols-[72px_1fr] gap-x-4 gap-y-1 text-small">
                 <dt className="text-text-muted">Band</dt><dd className={cx('m-0 font-medium', bandText(sel.band))}>{bandWord(sel.band)}</dd>
                 <dt className="text-text-muted">Score</dt><dd className="m-0 font-mono text-mono num text-text">{prob(sel.p_ai)}</dd>
@@ -148,14 +154,15 @@ export default function ManuscriptView({ sentences, text, paragraphs, noted, not
                 </div>
               )}
               {notes?.(sel.idx)}
-              {Object.keys(sel.scores).length > 0 && (
+              {scoreRows.length > 0 && (
                 <div className="mt-4 pt-4 border-t border-border">
                   <Eyebrow as="h3">Scores</Eyebrow>
                   <table className="mt-2 w-full border-collapse"><tbody>
-                    {Object.entries(sel.scores).map(([k, v]) => (
-                      <tr key={k} className="border-b border-border last:border-b-0"><td className="py-1 font-mono text-mono text-text-muted">{k}</td><td className="py-1 text-right font-mono text-mono text-text num">{typeof v === 'number' ? v.toFixed(3) : String(v)}</td></tr>
+                    {scoreRows.map(({ key, label, value }) => (
+                      <tr key={key} className="border-b border-border last:border-b-0"><td className="py-1 text-small text-text-muted">{label}</td><td className="py-1 text-right font-mono text-mono text-text num">{value.toFixed(3)}</td></tr>
                     ))}
                   </tbody></table>
+                  <p className="mt-2 mb-0 text-caption text-text-muted">Raw diagnostic values; ratios and responses use different scales. None is a probability of authorship.</p>
                 </div>
               )}
             </div>

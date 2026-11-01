@@ -81,7 +81,7 @@ export function c2paWords(state: C2paState, checked: boolean): { line: string; s
     case 'absent': return { state: 'absent', line: 'No Content Credentials found. Most files carry none; this is not evidence either way.' }
     default:
       return checked
-        ? { state: 'unknown', line: 'The Content Credentials check ran but recorded no validation state (for example, a remote manifest that Veritas does not fetch offline).' }
+        ? { state: 'unknown', line: 'The Content Credentials check ran but recorded no validation state (for example, a remote manifest that Chipmunk Verify does not fetch offline).' }
         : { state: 'not-run', line: 'Content Credentials were not checked for this analysis.' }
   }
 }

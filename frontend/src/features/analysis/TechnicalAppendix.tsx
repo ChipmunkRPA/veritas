@@ -11,6 +11,7 @@ import { fuserReview } from './vocabulary'
 import { errorRateLine, type Decision } from './answer'
 import { outsideValidated } from './record'
 import { appendixStatistical } from './resultNumber'
+import { anonymizeModelNames } from './checkNames'
 
 const or = (v: ReactNode | null | undefined, empty = 'not recorded') => (v == null || v === '' ? <span className="text-text-muted">{empty}</span> : v)
 const hash = (h: string | null | undefined) => (h ? <CodeChip copy={h} title="Copy full hash">{shortHash(h, 10, 6)}</CodeChip> : or(null))
@@ -29,7 +30,7 @@ function Table({ head, rows, testId }: { head: string[]; rows: ReactNode[][]; te
 
 /** L4 technical appendix (UX §4.1; ARCHITECTURE §6.6 reproducibility manifest, CC-03): engine and model hashes, configuration,
  *  calibration, condition profile, the contribution-integrity record, caveats, timings, the v1 flat metadata and the raw JSON. */
-export default function TechnicalAppendix({ analysis, runs, token, legacyMetadata, engine, cards }: {
+export default function TechnicalAppendix({ analysis, runs, token, legacyMetadata, engine }: {
   analysis: AnalysisDetail; runs: readonly DetectorRun[]; token: string; legacyMetadata?: Record<string, unknown> | null; engine: string | null
   /** The model cards, for the name of a check beside its id (N-19d); without them the id stands alone. */
   cards?: readonly ModelCard[]
@@ -43,7 +44,7 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
   const check = d ? integrity(d) : null
 
   const manifestRows: DlRow[] = m ? [
-    { key: 'Veritas', value: mono(m.veritas_version) },
+    { key: 'Chipmunk Verify', value: mono(m.veritas_version) },
     { key: 'Pipeline', value: mono(m.pipeline_version) },
     { key: 'Profile', value: `${m.profile}${m.effective_profile && m.effective_profile !== m.profile ? ` → ${m.effective_profile}` : ''}` },
     { key: 'Licence posture', value: or(policyWords(m.licence_posture)) },
@@ -56,7 +57,7 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
     { key: 'Policy thresholds', value: or(m.policy_thresholds_id) },
     { key: 'Libraries', value: Object.keys(m.library_versions ?? {}).length ? mono(Object.entries(m.library_versions ?? {}).map(([k, v]) => `${k} ${v}`).join(' · ')) : or(null) },
     { key: 'Sampling', value: or(samplingWords(m.sampling), 'not applicable') },
-    ...((m.disclosures ?? []).length ? [{ key: 'Disclosures', value: (m.disclosures ?? []).join(' ') }] : []),
+    ...((m.disclosures ?? []).length ? [{ key: 'Disclosures', value: anonymizeModelNames((m.disclosures ?? []).join(' ')) }] : []),
   ] : []
 
   // N-19l (R6-02): outside what was validated no line gives the statistical estimate or its logit. That the rows add up is
@@ -90,11 +91,10 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
           {m ? <Dl rows={manifestRows} keyWidth={144} /> : <p className="m-0 text-small text-text-muted">This analysis carries no reproducibility manifest (v0.3 pipeline).</p>}
         </Disclosure>
         <Disclosure label="Detectors and weights" summary={`${(m?.detectors ?? []).length}`} testId="appendix-detectors">
-          <Table testId="appendix-detector-table" head={['Detector', 'Version', 'Weights / revision', 'Licence', 'Device', 'Status', 'Duration']}
-            rows={(m?.detectors ?? []).map((x) => {
+          <Table testId="appendix-detector-table" head={['Check', 'Version', 'Weights / revision', 'Licence', 'Device', 'Status', 'Duration']}
+            rows={(m?.detectors ?? []).map((x, i) => {
               const r = runOf(x.id)
-              const name = cards?.find((c) => c.id === x.id)?.name
-              return [name && name !== x.id ? <>{name} <span className="block font-mono text-caption text-text-muted break-all">{x.id}</span></> : mono(x.id), mono(x.version), x.weights_sha256 ? hash(x.weights_sha256) : x.revision ? mono(shortHash(x.revision)) : or(null, 'model-free'), or(x.licence),
+              return [`Check ${i + 1}`, mono(x.version), x.weights_sha256 ? hash(x.weights_sha256) : x.revision ? mono(shortHash(x.revision)) : or(null, 'model-free'), or(x.licence),
                 or(deviceWords(x.device ?? r?.device, x.precision ?? r?.dtype)), r?.status ?? '—', r?.duration_ms != null ? mono(fmtSeconds(r.duration_ms / 1000, 2)) : '—']
             })} />
         </Disclosure>
@@ -111,7 +111,7 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
         </Disclosure>
         <Disclosure label="Calibration and fusion" summary={fusionWords(d?.fusion_mode) ?? '—'} testId="appendix-calibration">
           <Table head={['Subject', 'Method', 'Benchmark', 'ECE', 'Brier', 'Error-rate rows', 'Review']}
-            rows={(analysis.calibration ?? []).map((c) => [calibrationSubject(c.subject) === c.subject ? mono(c.subject) : calibrationSubject(c.subject), calibrationMethod(c.method), or(c.bench_version), c.ece != null ? <>{mono(c.ece.toFixed(3))} <span className="text-text-muted">{testViewWords(c.test_view)}</span></> : '—', c.brier != null ? mono(c.brier.toFixed(3)) : '—', String((c.error_rates ?? []).length), fuserReview(c.reviewed_by, c.review_date)])} />
+            rows={(analysis.calibration ?? []).map((c) => [anonymizeModelNames(calibrationSubject(c.subject)), calibrationMethod(c.method), or(c.bench_version), c.ece != null ? <>{mono(c.ece.toFixed(3))} <span className="text-text-muted">{testViewWords(c.test_view)}</span></> : '—', c.brier != null ? mono(c.brier.toFixed(3)) : '—', String((c.error_rates ?? []).length), fuserReview(c.reviewed_by, c.review_date)])} />
           <p data-testid="appendix-integrity" className="mt-3 m-0 text-small text-text max-w-[80ch]">{integrityText}</p>
           {/* N-19h (E-20, 8): outside what was validated the number is printed beside no record */}
           {d && appendixStatistical(d, cp) != null && <p data-testid="appendix-statistical" className="mt-1 m-0 text-small text-text">{appendixStatistical(d, cp)}</p>}
@@ -128,7 +128,7 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
           ]} /> : <p className="m-0 text-small text-text-muted">No condition profile recorded.</p>}
         </Disclosure>
         <Disclosure label="Caveats" summary={`${(analysis.caveats ?? []).length}`} testId="appendix-caveats">
-          <ul className="m-0 pl-4 list-disc text-small text-text space-y-1 max-w-[80ch]">{(analysis.caveats ?? []).map((c) => <li key={c}>{c}</li>)}</ul>
+          <ul className="m-0 pl-4 list-disc text-small text-text space-y-1 max-w-[80ch]">{(analysis.caveats ?? []).map((c) => <li key={c}>{anonymizeModelNames(c)}</li>)}</ul>
         </Disclosure>
         <Disclosure label="Timings" summary={analysis.started_at && analysis.finished_at ? fmtSeconds((Date.parse(analysis.finished_at) - Date.parse(analysis.started_at)) / 1000, 1) : '—'} testId="appendix-timings">
           <Table head={['Stage', 'Status', 'Duration']} rows={stageRows} />

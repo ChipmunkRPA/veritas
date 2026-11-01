@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import Counter
 from collections.abc import Sequence
 from datetime import UTC, datetime
@@ -204,11 +205,15 @@ class Cancellation(BaseModel):
 
 
 class AnalysisDetailV2(AnalysisSummaryV2):
+    customer_assessment: dict[str, Any] | None = Field(default=None, description=(
+        "Versioned customer interpretation of the saved estimate, including the 80% leaning rule. "
+        "Derived for display; it does not replace the frozen decision or alter result_hash. "
+        "Automated likelihood is not a validated accuracy rate."))
     cancellation: Cancellation | None = None
     custodian_hash: CustodianHashCheck | None = Field(default=None, description="Null when the file was not taken in through a case intake")
     cancel_requested: bool = Field(default=False, description="An active analysis/refusion job has pending cooperative cancellation")
     review: ReviewBrief | None = None
-    result_hash: str | None = None
+    result_hash: str | None = Field(default=None, description="SHA-256 of the original stored result, not these projected response bytes")
     input: InputRef | None = None
     manifest: ReproManifest | None = None
     decision: Decision | None = None
@@ -331,7 +336,11 @@ class TokenGrant(BaseModel):
 # --- helpers -----------------------------------------------------------------------------------------------
 
 def _json(body: Any, status_code: int = 200) -> JSONResponse:
-    return JSONResponse(content=body, status_code=status_code, headers=NO_STORE)
+    from app.api.public_projection import project
+
+    return JSONResponse(content=project(body), status_code=status_code,
+                        headers={**NO_STORE, 'X-Chipmunk-View': 'customer-projection',
+                                 'X-Result-Hash-Meaning': 'original-record'})
 
 
 _iso = times.iso_z  # one form on every engine (D-72)
@@ -480,16 +489,34 @@ def _etag_matches(header: str | None, sha256: str) -> bool:
     return bool(header) and any(t.strip() in ("*", f'"{sha256}"', f'W/"{sha256}"') for t in (header or "").split(","))
 
 
-def _binary(request: Request, row: Artefact, *, exhibit: bool = False) -> Response:
+def _binary(request: Request, row: Artefact, *, exhibit: bool = False, byte_ranges: bool = False) -> Response:
     """A stored binary with its ETag. `exhibit`: what an exhibit route serves is shown inline only when it is a raster
     image; any other stored type (an SVG or HTML thumbnail an earlier build stored from a manifest) is a download in a
     sandbox, never a document of this origin (N-10; SEC-10)."""
     headers = {"ETag": f'"{row.sha256}"', "Cache-Control": IMMUTABLE, "X-Content-Type-Options": "nosniff"}
+    if byte_ranges:
+        headers["Accept-Ranges"] = "bytes"
     if exhibit and row.media_type not in RASTER_TYPES:
         headers.update({"Content-Disposition": "attachment", "Content-Security-Policy": "sandbox"})
     if _etag_matches(request.headers.get("if-none-match"), row.sha256):
         return Response(status_code=304, headers=headers)
-    return Response(content=_read_verified(row), media_type=row.media_type, headers=headers)
+    content = _read_verified(row)
+    # Opt-in only for allowlisted presentation media, after the caller's case /
+    # evidence-set checks and the complete object's hash verification. A range
+    # never grants access to an undeclared source/raw object.
+    requested = request.headers.get("range") if byte_ranges else None
+    if requested and request.headers.get("if-range", headers["ETag"]) == headers["ETag"]:
+        match = re.fullmatch(r"bytes=(\d{0,20})-(\d{0,20})", requested.strip())
+        if not match or not any(match.groups()) or not content:
+            return Response(status_code=416, headers={**headers, "Content-Range": f"bytes */{len(content)}"})
+        first, last = match.groups()
+        start = int(first) if first else max(0, len(content) - int(last))
+        end = min(int(last), len(content) - 1) if first and last else len(content) - 1
+        if start >= len(content) or end < start or (not first and int(last) == 0):
+            return Response(status_code=416, headers={**headers, "Content-Range": f"bytes */{len(content)}"})
+        headers["Content-Range"] = f"bytes {start}-{end}/{len(content)}"
+        return Response(content=content[start:end + 1], status_code=206, media_type=row.media_type, headers=headers)
+    return Response(content=content, media_type=row.media_type, headers=headers)
 
 
 # --- analyses ----------------------------------------------------------------------------------------------
@@ -581,6 +608,9 @@ def get_analysis(aid: str):
                 # N-19l (code review R6-01): the rule for a result stored before N-19h is the server's. The detail holds
                 # no signals, so the page cannot work the record out; it reads this field (`record.ts withRecord`)
                 body["stored_record"] = report_view.stored_record(body["decision"], body["assessments"], list(result.get("signals") or []))
+    from app.engine.customer_assessment import customer_assessment
+
+    body["customer_assessment"] = customer_assessment({**(result or {}), **body})
     return _json(body)
 
 

@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import type { UseQueryResult } from '@tanstack/react-query'
 import { api, hasApiKey } from '../../lib/api'
-import type { AnalysisDetail, ExhibitMeta, Finding, SignalV2 } from '../../lib/api/queries'
+import { useModelCards, type AnalysisDetail, type ExhibitMeta, type Finding, type ModelCard, type SignalV2 } from '../../lib/api/queries'
+import { anonymizeFindingText } from './checkNames'
 import { cx } from '../../lib/cx'
-import { Button, DirectionMark, EmptyState, ErrorState, IdChip, SkeletonRows, StrengthMeter, type StrengthLevel } from '../../components/ui'
+import { Button, DirectionMark, EmptyState, ErrorState, SkeletonRows, StrengthMeter, type StrengthLevel } from '../../components/ui'
 import { FindingRows } from './FindingsList'
-import { ASIDE_NOTE, ASIDE_TITLE, OUTSIDE_FINDINGS, contextFindings, contributionLine, isDocumentary, keyFindings, markOf, noWeight, notCounted, plainNames, provenanceAside, reasonOf, recordPlate, type Decision, type KeyFinding } from './answer'
+import { ASIDE_NOTE, ASIDE_TITLE, OUTSIDE_FINDINGS, contextFindings, contributionLine, isDocumentary, keyFindings, markOf, noWeight, notCounted, provenanceAside, reasonOf, recordPlate, type Decision, type KeyFinding } from './answer'
 import { startingPointNote } from './contributions'
 import { outsideValidated, recordOf } from './record'
 import { NOT_IN_ESTIMATE, VOICE_STEP, findingsFailed, findingsNotWritten, measuredFromNeutral, outsideSentence, outsideWhy } from './vocabulary'
+import FindingSupport, { useFindingEvidence, type FindingSupportData } from './FindingSupportPanel'
 
 /** IF §6.2 bands onto the four-bar meter by count (D-16): weak 1, moderate 2, strong 3; decisive is the ◆ seal. The fourth bar
  *  stays empty until a band above "strong" exists, so the meter never says more than the finding's words. */
@@ -26,7 +29,7 @@ const WHOLE_IMAGE = new Set(['F3_whole_image_generation', 'F4_localised_manipula
 
 const DIRECTION_MARK = { for: 'ai', against: 'authentic', neutral: 'neutral' } as const
 
-function Thumb({ k, analysis, exhibits, token }: { k: KeyFinding; analysis: AnalysisDetail; exhibits: readonly ExhibitMeta[]; token: string }) {
+function Thumb({ k, analysis, exhibits, token, cards, signals }: { k: KeyFinding; analysis: AnalysisDetail; exhibits: readonly ExhibitMeta[]; token: string; cards: readonly ModelCard[]; signals: readonly SignalV2[] }) {
   const f = k.finding
   const heat = exhibits.find((x) => f.evidence_ids?.includes(x.id) && (x.binaries ?? []).includes('preview'))
   const ready = !hasApiKey || token !== ''
@@ -39,37 +42,13 @@ function Thumb({ k, analysis, exhibits, token }: { k: KeyFinding; analysis: Anal
     <span data-testid="finding-thumb" data-thumb={src ? (heat ? 'heatmap' : 'source') : 'plate'}
       className="block w-24 h-[72px] rounded-md border border-border bg-surface-2 overflow-hidden max-[959px]:w-[72px] max-[959px]:h-[54px]">
       {/* Maps upscale nearest-neighbour so boundaries never look more precise than the model (UX §8.3). */}
-      <img src={src} alt={reasonOf(k)[0]} loading="lazy" className={cx('block w-full h-full object-cover', heat && '[image-rendering:pixelated]')} />
+      <img src={src} alt={anonymizeFindingText(f, reasonOf(k)[0], cards, signals)} loading="lazy" className={cx('block w-full h-full object-cover', heat && '[image-rendering:pixelated]')} />
     </span>
   )
 }
 
-/** Preserve the canonical finding reference (D-26); signal ids link to their evidence-ledger rows. */
-function EvidenceIds({ f, signals }: { f: Finding; signals: readonly SignalV2[] }) {
-  const refs: SignalV2[] = []
-  for (const e of f.evidence_ids ?? []) {
-    const s = signals.find((x) => x.id === e) ?? (e.startsWith('detector:') ? signals.find((x) => x.detector_id === e.slice('detector:'.length)) : undefined)
-    if (s && !refs.includes(s)) refs.push(s)
-  }
-  return (
-    <p className="mt-2 m-0 font-mono text-caption text-text-muted num">
-      <span>Reference <IdChip title={`Finding ${f.id}`}>{f.id}</IdChip></span>
-      {refs.length > 0 && <span className="sr-only">; evidence: </span>}
-      {refs.map((s) => (
-        <span key={s.id}>
-          <span aria-hidden> · </span>
-          <a href={`#signal-${encodeURIComponent(s.legacy?.v1_id || s.id)}`} title={`${s.name}: open its row in the evidence ledger`}
-            className="underline decoration-border-strong underline-offset-[3px] hover:text-text hover:decoration-text">{s.display_id ?? s.id}</a>
-        </span>
-      ))}
-    </p>
-  )
-}
-
-function Row({ k, position, analysis, signals, exhibits, token, status, plain }: { k: KeyFinding; position: number; analysis: AnalysisDetail; signals: readonly SignalV2[]; exhibits: readonly ExhibitMeta[]; token: string; status?: string; plain: boolean }) {
+function Row({ k, position, analysis, signals, exhibits, token, plain, cards, support }: { k: KeyFinding; position: number; analysis: AnalysisDetail; signals: readonly SignalV2[]; exhibits: readonly ExhibitMeta[]; token: string; plain: boolean; cards: readonly ModelCard[]; support: FindingSupportData }) {
   const f = k.finding
-  // N-19d: Plain view holds no log-odds and no architecture in a check's name
-  const names = plain ? signals.map((s) => s.name) : []
   // N-19n (D3-09): outside what was validated no estimate is shown, and no finding says that it raised or lowered one
   const moved = analysis.decision && !outsideValidated(analysis.decision as Decision, analysis.condition_profile)
     ? contributionLine(f, analysis.decision as Decision, plain) : null
@@ -83,7 +62,7 @@ function Row({ k, position, analysis, signals, exhibits, token, status, plain }:
       <span data-testid="key-finding-position" className="pt-0.5 font-mono text-caption text-text-muted num">
         <span className="sr-only">Key finding </span>{position}
       </span>
-      <span className="max-[639px]:hidden"><Thumb k={k} analysis={analysis} exhibits={exhibits} token={token} /></span>
+      <span className="max-[639px]:hidden"><Thumb k={k} analysis={analysis} exhibits={exhibits} token={token} cards={cards} signals={signals} /></span>
       <div className="min-w-0">
         <div className="flex items-center gap-x-3 gap-y-1 flex-wrap">
           <DirectionMark direction={DIRECTION_MARK[k.direction]} showWord={false} />
@@ -91,14 +70,12 @@ function Row({ k, position, analysis, signals, exhibits, token, status, plain }:
             ? <StrengthMeter level={mark.level} muted={mark.muted} label={mark.word} />
             : <StrengthMeter level={METER[f.strength]} direction={k.direction === 'neutral' ? undefined : k.direction} />}
           <h3 className="m-0 text-body font-medium text-text">
-            {f.title}{k.counter && <span className="font-normal text-text-muted"> — counter-evidence</span>}
+            {anonymizeFindingText(f, f.title, cards, signals)}{k.counter && <span className="font-normal text-text-muted"> — counter-evidence</span>}
           </h3>
-          {/* N-19 (D-69; browser QA P1-6): the examiner's status of the finding, wherever the finding is listed */}
-          {status && <span data-testid="examiner-status" className="inline-flex items-center h-5 px-1.5 rounded-sm border border-annotation text-caption font-medium text-annotation whitespace-nowrap">Examiner: {status}</span>}
         </div>
-        {reasonOf(k).map((s) => <p key={s} className="mt-1 m-0 text-body text-text max-w-[72ch]">{plain ? plainNames(s, names) : s}</p>)}
+        {reasonOf(k).map((s) => <p key={s} className="mt-1 m-0 text-body text-text max-w-[72ch]">{anonymizeFindingText(f, s, cards, signals)}</p>)}
         {moved && <p data-testid="key-finding-contribution" className="mt-1 m-0 text-small text-text-muted max-w-[72ch]">{moved}</p>}
-        <EvidenceIds f={f} signals={signals} />
+        <FindingSupport finding={f} data={support} cards={cards} />
       </div>
     </li>
   )
@@ -115,20 +92,28 @@ export function outsideLine(f: Finding, signals: readonly SignalV2[], kind: stri
   return f.family === 'A1_voice' && kind === 'video' ? `${sentence} ${VOICE_STEP}` : sentence
 }
 
-export default function KeyFindings({ analysis, query, signals, exhibits, token, statuses, plain = false }: {
+export default function KeyFindings({ analysis, query, signals, exhibits, token, plain = false }: {
   analysis: AnalysisDetail
   query: UseQueryResult<Finding[], Error>
   signals: readonly SignalV2[]
   exhibits: readonly ExhibitMeta[]
   token: string
-  /** the examiner's latest status of each finding, in words (finding id → "Disputed"); none while no status is set */
-  statuses?: ReadonlyMap<string, string>
   /** Plain view (N-19d): the size of a check's effect in a word, and no architecture in a check's name */
   plain?: boolean
 }) {
   const [all, setAll] = useState(false)
+  const { hash } = useLocation()
+  const cards = useModelCards().data ?? []
+  const evidence = useFindingEvidence(analysis)
+  const support: FindingSupportData = { analysisId: analysis.id, signals, ...evidence }
   const items = query.data ?? []
   const keys = analysis.decision ? keyFindings(items, analysis.decision) : []
+  // Image evidence links to a precise finding without requiring Expert mode.
+  useEffect(() => {
+    if (!/^#finding-F[1-9]\d*$/.test(hash)) return
+    if (!all) { setAll(true); return }
+    document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'center' })
+  }, [hash, all, query.data])
   const toward = keys.filter((k) => k.direction === 'for').length
   const against = keys.filter((k) => k.direction === 'against').length
   // D-63: in a result measured from neutral points a check below ln 2 is neither; the header says how many there were
@@ -152,13 +137,14 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
   return (
     <section id="section-findings" data-testid="findings" aria-labelledby="findings-heading" className="scroll-mt-14">
       <div className="flex items-baseline justify-between gap-4 flex-wrap">
-        <h2 id="findings-heading" className="m-0 eyebrow">Key findings</h2>
+        <h2 id="findings-heading" className="m-0 eyebrow">Findings and supporting evidence</h2>
         {keys.length > 0 && !noReasons && (
           <p data-testid="key-finding-counts" className="m-0 text-small text-text-muted num">
             {pointing} · {against} against{little > 0 && ` · ${little} had little effect`}
           </p>
         )}
       </div>
+      <p className="mt-2 mb-0 text-small text-text-muted max-w-[76ch]">Read what each check found, then open its recorded source locations or check results. Findings are generated automatically.</p>
       {keys.length > 0 && noReasons && <p data-testid="key-findings-outside" className="mt-2 m-0 text-small text-text-muted max-w-[72ch]">{OUTSIDE_FINDINGS}</p>}
       {query.isPending && <SkeletonRows className="mt-4" />}
       {query.error && <ErrorState className="mt-4" onRetry={() => void query.refetch()}>{query.error.message}</ErrorState>}
@@ -172,7 +158,7 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
           : 'No individual check produced more than weak support either way.'}</EmptyState>}
       {keys.length > 0 && (
         <ol className="mt-3 m-0 p-0 list-none border-t border-border-strong">
-          {keys.map((k, index) => <Row key={k.finding.id} k={k} position={index + 1} analysis={analysis} signals={signals} exhibits={exhibits} token={token} status={statuses?.get(k.finding.id)} plain={plain} />)}
+          {keys.map((k, index) => <Row key={k.finding.id} k={k} position={index + 1} analysis={analysis} signals={signals} exhibits={exhibits} token={token} plain={plain} cards={cards} support={support} />)}
         </ol>
       )}
       {startNote && <p data-testid="starting-point-note" className="mt-3 m-0 text-small text-text-muted max-w-[72ch]">{startNote}</p>}
@@ -181,7 +167,7 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
           <h3 className="m-0 eyebrow">Context: checks outside the fused estimate</h3>
           {/* N-19f, N-19h: no cause, so none that is untrue of a finding listed here: a check the model holds, with its gate open,
               can have no weight, and a record that was not applied (a marker under a trusted capture) is no check of the model's */}
-          <p data-testid="context-findings-note" className="mt-1 m-0 text-small text-text-muted max-w-[72ch]">These findings carry no weight in this decision. They are shown for the examiner.</p>
+          <p data-testid="context-findings-note" className="mt-1 m-0 text-small text-text-muted max-w-[72ch]">These findings provide additional context and carry no weight in the automated conclusion.</p>
           <ul className="mt-2 m-0 p-0 list-none">
             {context.map((f) => {
               // N-19k (Q2-12): a check that scored and is not counted says both halves in one sentence, its score and why,
@@ -189,8 +175,9 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
               const said = outsideLine(f, signals, analysis.kind)
               return (
                 <li key={f.id} data-finding={f.id} className="py-1.5 border-b border-border text-small text-text">
-                  <span className="font-mono text-caption text-text-muted num">{f.id}</span> {f.title}{said == null && <span className="text-text-muted"> · {outsideWords}</span>}
+                  <span className="font-mono text-caption text-text-muted num">{f.id}</span> {anonymizeFindingText(f, f.title, cards, signals)}{said == null && <span className="text-text-muted"> · {outsideWords}</span>}
                   {said != null && <p data-testid="outside-why" className="mt-0.5 m-0 text-small text-text-muted max-w-[72ch]">{said}</p>}
+                  <FindingSupport finding={f} data={support} cards={cards} />
                 </li>
               )
             })}
@@ -209,19 +196,20 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
               return (
                 <li key={f.id} data-finding={f.id} className="flex items-center gap-x-3 gap-y-1 flex-wrap py-1.5 border-b border-border text-small text-text">
                   <StrengthMeter level={mark?.level ?? 'self_declared'} muted={mark?.muted ?? true} label={mark?.word ?? 'not applied'} />
-                  <span><span className="font-mono text-caption text-text-muted num">{f.id}</span> {f.title}</span>
+                  <span><span className="font-mono text-caption text-text-muted num">{f.id}</span> {anonymizeFindingText(f, f.title, cards, signals)}</span>
+                  <FindingSupport finding={f} data={support} cards={cards} />
                 </li>
               )
             })}
           </ul>
         </div>
       )}
-      {items.length > keys.length && (
+      {(items.length > keys.length || all) && (
         <div className="mt-3">
           <Button variant="text" aria-expanded={all} aria-controls="all-findings" onClick={() => setAll(!all)}>
             {all ? 'Hide the full list' : `All ${items.length} findings, with coverage and conditions`}
           </Button>
-          {all && <div id="all-findings" className="mt-3"><FindingRows items={items} decision={analysis.decision} /></div>}
+          {all && <div id="all-findings" className="mt-3"><FindingRows items={items} decision={analysis.decision} support={support} /></div>}
         </div>
       )}
     </section>

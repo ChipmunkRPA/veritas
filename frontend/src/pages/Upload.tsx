@@ -5,7 +5,8 @@ import { ArrowRight, File as FileIcon, UploadCloud, X } from 'lucide-react'
 import { api, type Kind } from '../lib/api'
 import { MAX_BATCH_FILES, droppedFiles, submitBatch, usable, withRelativePaths } from '../lib/api/batches'
 import { intakeItem, type AnalysisProfile } from '../lib/api/intake'
-import { qk, useCases, useModelCards, type Case } from '../lib/api/queries'
+import { qk, useCases, useMe, useModelCards, type Case } from '../lib/api/queries'
+import { BillingError, billingApi, hasBillingIdentity, openCheckout, useBilling } from '../lib/api/billing'
 import { fmtBytes, wordCount } from '../lib/format'
 import { cx } from '../lib/cx'
 import { Button, Disclosure, Eyebrow, Select, Tabs } from '../components/ui'
@@ -41,6 +42,15 @@ export default function Upload() {
   const [created, setCreated] = useState<Case | null>(null)
   const [profile, setProfile] = useState<AnalysisProfile | ''>('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const attemptKey = useRef(crypto.randomUUID())
+  const submitting = useRef(false)
+  const billing = useBilling()
+  const me = useMe()
+  const paid = billing.data?.enabled === true
+  const signedIn = hasBillingIdentity(me.data)
+  const billingProblem = billing.isPending ? 'Checking analysis pricing…' : billing.isError ? 'Pricing is unavailable. Try again before starting an analysis.'
+    : paid && !billing.data?.ready ? 'Checkout is not available yet. Please try again later.'
+    : paid && !signedIn ? 'Sign in to keep your payment and analysis private.' : null
   const nav = useNavigate()
   const qc = useQueryClient()
   const cases = useCases()
@@ -50,8 +60,9 @@ export default function Upload() {
   const isBatch = batch.length > 1
   const batchBytes = batch.reduce((n, f) => n + f.size, 0)
   const usingText = kind === 'document' && !file && !isBatch && text.trim().length > 0
-  const problem = caseId && !isBatch ? draftProblem(draft) : null
-  const ready = isBatch ? batch.length <= MAX_BATCH_FILES : (!!file || (kind === 'document' && words >= MIN_WORDS)) && !problem
+  const problem = !paid && caseId && !isBatch ? draftProblem(draft) : null
+  const sourceReady = isBatch ? !paid && batch.length <= MAX_BATCH_FILES : (!!file || (kind === 'document' && words >= MIN_WORDS)) && !problem
+  const ready = sourceReady && !billingProblem
   const options = [...(cases.data ?? []), ...(created && !cases.data?.some((c) => c.id === created.id) ? [created] : [])]
     .filter((c) => !c.implicit || c.id === routeCase)
     .sort((x, y) => Date.parse(y.updated_at) - Date.parse(x.updated_at))
@@ -60,12 +71,20 @@ export default function Upload() {
   const pickCase = (id: string) => { setCaseId(id); setDraft(id ? recallDraft(id) : EMPTY_DRAFT) }
 
   const up = useMutation({
-    mutationFn: async (): Promise<string> => {
+    mutationFn: async (): Promise<{ path: string; checkout?: boolean }> => {
+      if (billingProblem) throw new Error(billingProblem)
+      if (paid) {
+        if (isBatch) throw new Error('Choose one file per checkout. Each analysis costs $9.99 USD.')
+        const blob = usingText ? new File([text], 'pasted-text.txt', { type: 'text/plain' }) : file!
+        setProgress(null)
+        const result = await billingApi.checkout(kind, blob, profile || 'full', attemptKey.current)
+        return { path: result.checkout_url, checkout: true }
+      }
       if (isBatch) {
         setProgress(0)
         const r = await submitBatch(batch, caseId || undefined, setProgress, profile || undefined)
         void qc.invalidateQueries({ queryKey: qk.cases() })
-        return `/batches/${r.id}`
+        return { path: `/batches/${r.id}` }
       }
       if (caseId) {
         const blob = usingText ? new File([text], 'pasted-text.txt', { type: 'text/plain' }) : file!
@@ -77,17 +96,19 @@ export default function Upload() {
         }, profile || undefined)
         rememberDraft(caseId, draft)
         for (const key of [qk.cases(), qk.case(caseId), qk.caseItems(caseId), qk.caseAnalyses(caseId), qk.custody(caseId)]) void qc.invalidateQueries({ queryKey: key })
-        return r.analysis ? `/analyses/${r.analysis.id}` : `/cases/${caseId}`
+        return { path: r.analysis ? `/analyses/${r.analysis.id}` : `/cases/${caseId}` }
       }
-      if (usingText) { setProgress(null); return `/analyses/${(await api.text(text, undefined, profile || undefined)).id}` }
+      if (usingText) { setProgress(null); return { path: `/analyses/${(await api.text(text, undefined, profile || undefined)).id}` } }
       setProgress(0)
-      return `/analyses/${(await api.uploadWithProgress(kind, file!, (f) => setProgress(f), profile || undefined)).id}`
+      return { path: `/analyses/${(await api.uploadWithProgress(kind, file!, (f) => setProgress(f), profile || undefined)).id}` }
     },
-    onSuccess: (path) => nav(path),
+    onSuccess: ({ path, checkout }) => { if (checkout) openCheckout(path); else nav(path) },
+    onError: () => { submitting.current = false },
     onSettled: () => { setProgress(null); setHashing(false) },
   })
 
   const choose = (f: File | null) => {
+    if (submitting.current) return
     setBatch([])
     if (!f) { setFile(null); setError(null); return }
     const err = validate(f, tab)
@@ -95,6 +116,8 @@ export default function Upload() {
     setFile(err ? null : f)
   }
   const chooseMany = (files: File[]) => {
+    if (submitting.current) return
+    if (paid && files.length > 1) { setError('Choose one file per checkout. Each analysis costs $9.99 USD.'); return }
     const list = usable(files)
     if (list.length === 0) { setError(files.length ? 'Only hidden files were chosen' : null); return }
     if (list.length === 1) { choose(list[0]); return }
@@ -110,8 +133,9 @@ export default function Upload() {
     input.onchange = () => chooseMany(withRelativePaths(Array.from(input.files ?? [])))
     input.click()
   }
-  const onTab = (k: Kind) => { setSearchParams((params) => { params.set('kind', k); return params }, { replace: true }) }
+  const onTab = (k: Kind) => { if (submitting.current) return; setSearchParams((params) => { params.set('kind', k); return params }, { replace: true }) }
   useEffect(() => { setFile(null); setBatch([]); setError(null); up.reset() }, [kind]) // clear source when its examination type changes
+  useEffect(() => { attemptKey.current = crypto.randomUUID(); up.reset() }, [file, text, profile, kind]) // retry unchanged input with the same payment key
   const onDrop = (e: DragEvent) => {
     e.preventDefault()
     setDrag(false)
@@ -120,9 +144,9 @@ export default function Upload() {
 
   const pctLabel = progress == null ? null : `${Math.round(progress * 100)} %`  // N-19d: one percent format ("57%" against "70 %")
   const busy = up.isPending
-  const idleLabel = isBatch ? `Submit batch (${batch.length} files)` : 'Begin analysis'
+  const idleLabel = paid ? `Continue to checkout · ${billing.data?.price_display}` : isBatch ? `Submit batch (${batch.length} files)` : 'Begin analysis'
   // N-19a: while the button is switched off, the line beside it says what is missing
-  const missing = busy ? null : beginBlocked({ kind, hasFile: !!file, words, minWords: MIN_WORDS, batch: batch.length, maxBatch: MAX_BATCH_FILES, problem })
+  const missing = busy ? null : billingProblem ?? (paid && isBatch ? 'Choose one file per checkout.' : null) ?? beginBlocked({ kind, hasFile: !!file, words, minWords: MIN_WORDS, batch: batch.length, maxBatch: MAX_BATCH_FILES, problem })
 
   return (
     <div>
@@ -132,7 +156,16 @@ export default function Upload() {
         </Link>
       )}
       <h1 className="display text-h1 font-normal text-text m-0">New analysis</h1>
-      <p className="text-small text-text-muted mt-1 mb-8 max-w-[62ch]">Add a file or text, choose the case and the depth of analysis, then read the findings with their limits.</p>
+      <p className="text-small text-text-muted mt-1 mb-8 max-w-[62ch]">{paid ? 'Add a file or text, pay securely with Stripe, then your analysis begins.' : 'Add a file or text, choose the case and the depth of analysis, then read the findings with their limits.'}</p>
+
+      {paid && <section aria-label="Analysis price" className="mb-8 p-5 rounded-md border border-border bg-surface-2">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span className="text-h2 font-semibold text-text">{billing.data?.price_display}</span><span className="text-small text-text-muted">USD per analysis · one payment · no subscription</span></div>
+        <p className="text-small font-medium text-text mt-3 mb-0">Payment is required before analysis. Your analysis starts only after Stripe confirms your payment.</p>
+        <p className="text-small text-text mt-2 mb-0">Includes the automated analysis and available supporting evidence, PDF report and JSON export. Results may be inconclusive; payment does not guarantee an AI or original classification.</p>
+        {billing.data?.mode === 'test' && <p role="status" className="text-caption text-accent mt-2 mb-0">Test mode — use Stripe test payment details. No real payment is collected.</p>}
+        {!signedIn && <Link to={`/sign-in?next=${encodeURIComponent(`/upload?kind=${kind}`)}`} className="inline-flex mt-3 text-small text-accent underline underline-offset-4">Sign in to continue</Link>}
+      </section>}
+      {billing.isError && <p className="text-small text-danger mb-6" role="alert">Pricing could not be loaded. <Button variant="text" onClick={() => void billing.refetch()}>Try again</Button></p>}
 
       <div className="intake-layout">
       <div className="intake-form">
@@ -167,13 +200,11 @@ export default function Upload() {
               Drop {tab.noun} here, or{' '}
               <label className="text-accent underline underline-offset-[3px] decoration-1 hover:text-accent-hover hover:decoration-2 cursor-pointer focus-within:shadow-focus rounded-sm">
                 browse
-                <input ref={inputRef} type="file" multiple className="sr-only" accept={tab.accept} onChange={(e) => { chooseMany(Array.from(e.target.files ?? [])); e.target.value = '' }} />
+                <input ref={inputRef} type="file" multiple={!paid} disabled={busy} className="sr-only" accept={tab.accept} onChange={(e) => { chooseMany(Array.from(e.target.files ?? [])); e.target.value = '' }} />
               </label>
             </p>
             <p className="text-caption text-text-muted mt-1">
-              {tab.formats} · several files or a{' '}
-              <Button variant="text" className="text-caption" onClick={pickFolder}>folder</Button>
-              {' '}make a batch
+              {tab.formats}{paid ? ' · one file per checkout' : <> · several files or a{' '}<Button variant="text" className="text-caption" onClick={pickFolder}>folder</Button>{' '}make a batch</>}
             </p>
           </div>
         ) : (
@@ -204,14 +235,14 @@ export default function Upload() {
                 {words} {words === 1 ? 'word' : 'words'}{words > 0 && words < MIN_WORDS ? <span className="text-caption font-sans"> · minimum {MIN_WORDS} words</span> : null}
               </span>
             </div>
-            <textarea value={text} onChange={(e) => setText(e.target.value)} aria-label="Text to analyse" placeholder="Paste the text to analyse"
+            <textarea disabled={busy} value={text} onChange={(e) => setText(e.target.value)} aria-label="Text to analyse" placeholder="Paste the text to analyse"
               className="mt-2 w-full min-h-60 p-4 rounded-sm bg-surface border border-graphic display text-reader text-text placeholder:text-text-muted resize-y focus-visible:border-accent" />
           </div>
         )}
       </div>
 
       <div className="flex items-center gap-3 mt-8 mb-3 pt-6 border-t border-border"><span className="font-mono text-caption text-accent num">02</span><h2 className="text-h3 text-text font-medium m-0">Set up the examination</h2></div>
-      <Disclosure className="mt-3" testId="case-custody" label="Case & custody" defaultOpen={!!routeCase}
+      {paid ? <p className="text-small text-text-muted mt-2">Your upload is prepared for checkout. One file or pasted text is included in each payment; uploading alone does not start an analysis.</p> : <Disclosure className="mt-3" testId="case-custody" label="Case & custody" defaultOpen={!!routeCase}
         summary={chosen ? (chosen.implicit ? 'unfiled case' : chosen.reference) : isBatch ? 'new case for the batch' : 'quick analysis'}>
         <div className="grid grid-cols-[140px_minmax(0,1fr)] gap-x-6 items-start max-[639px]:grid-cols-1 max-[639px]:gap-y-1">
           <label htmlFor="intake-case" className="text-small text-text-muted pt-2 max-[639px]:pt-0">Case</label>
@@ -229,23 +260,23 @@ export default function Upload() {
             ? <div className="mt-4"><IntakeFields draft={draft} onChange={setDraft} /></div>
             : <p className="mt-2 mb-0 text-caption text-text-muted max-w-[60ch]">Choose a case to record who supplied the file, how it was acquired and when it was received.</p>}
         {!isBatch && <p className="mt-4 mb-0 text-caption text-text-muted max-w-[60ch]">The file is hashed on this device before upload (SHA-256). The server refuses the upload if its own hash differs.</p>}
-      </Disclosure>
+      </Disclosure>}
       <NewCaseDialog open={creating} onClose={() => setCreating(false)} onCreated={(c) => { setCreated(c); setCreating(false); pickCase(c.id) }} />
 
       <div className="mt-6 grid grid-cols-[140px_minmax(0,1fr)] gap-x-6 items-start max-[639px]:grid-cols-1 max-[639px]:gap-y-1" data-testid="intake-profile">
         <label htmlFor="intake-profile" className="text-small text-text-muted pt-2 max-[639px]:pt-0">Analysis profile</label>
         <div>
-          <Select id="intake-profile" value={profile} onChange={(e) => setProfile(e.target.value as AnalysisProfile | '')} className="w-56">
-            {PROFILES.map((p) => <option key={p.id || 'default'} value={p.id}>{p.label}</option>)}
+          <Select id="intake-profile" disabled={busy} value={profile} onChange={(e) => setProfile(e.target.value as AnalysisProfile | '')} className="w-56">
+            {PROFILES.map((p) => <option key={p.id || 'default'} value={p.id}>{paid && !p.id ? 'Full (recommended)' : p.label}</option>)}
           </Select>
-          <p className="mt-1 mb-0 text-caption text-text-muted max-w-[60ch]">{PROFILES.find((p) => p.id === profile)!.detail}{isBatch ? ' Applies to every file of the batch.' : ''}</p>
+          <p className="mt-1 mb-0 text-caption text-text-muted max-w-[60ch]">{PROFILES.find((p) => p.id === (paid && !profile ? 'full' : profile))!.detail}{isBatch ? ' Applies to every file of the batch.' : ''}</p>
         </div>
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-        <Button variant="primary" aria-disabled={!ready || busy} aria-busy={busy || undefined} disabled={!ready} aria-describedby={missing ? 'begin-missing' : undefined}
-          onClick={() => { if (!busy && ready) up.mutate() }} className="relative overflow-hidden min-w-36">
-          {busy ? (hashing ? 'Hashing…' : pctLabel ? `Uploading… ${pctLabel}` : 'Submitting…') : <>{idleLabel}<ArrowRight size={16} strokeWidth={1.5} aria-hidden /></>}
+        <Button variant="primary" aria-disabled={!ready || busy} aria-busy={busy || undefined} disabled={!ready || busy} aria-describedby={missing ? 'begin-missing' : undefined}
+          onClick={() => { if (!submitting.current && !busy && ready) { submitting.current = true; up.mutate() } }} className="relative overflow-hidden min-w-36">
+          {busy ? (paid ? 'Preparing secure checkout…' : hashing ? 'Hashing…' : pctLabel ? `Uploading… ${pctLabel}` : 'Submitting…') : <>{idleLabel}<ArrowRight size={16} strokeWidth={1.5} aria-hidden /></>}
           {busy && (
             <span aria-hidden className="absolute left-0 bottom-0 h-0.5 w-full bg-surface/30 overflow-hidden">
               {progress != null
@@ -258,16 +289,17 @@ export default function Upload() {
         {pctLabel && <span className="sr-only" aria-live="polite">Uploading {pctLabel}</span>}
         {missing && <span id="begin-missing" data-testid="begin-missing" className="basis-full text-small text-text-muted">{missing}</span>}
         {up.error && <span className="text-small text-danger" role="alert">{(up.error as Error).message}</span>}
+        {up.error instanceof BillingError && up.error.orderId && <Link to={`/billing/return?order_id=${encodeURIComponent(up.error.orderId)}`} className="text-small text-accent underline underline-offset-4">Resume this order</Link>}
       </div>
 
       </div>
       <aside aria-label="Examination guide" className="min-w-0">
-        {/* L-7 (design P2): the list of checks that will run, and the way to their cards; no promotional panels */}
+        {/* The checks available for the selected source and profile. */}
         <h2 className="m-0 eyebrow flex items-center gap-2"><MediaIcon kind={kind} size={16} />Checks for this {tab.label.toLowerCase()}</h2>
         <IntakeChecks kind={kind} profile={profile} cards={catalogue.data} pending={catalogue.isPending} error={catalogue.isError}
           onRetry={() => void catalogue.refetch()} batch={isBatch} />
         <p className="text-small text-text-muted mt-6 mb-0 pt-4 border-t border-border">
-          Each check has a <Link to="/models" className="text-accent underline underline-offset-[3px] decoration-1 hover:decoration-2">model card</Link> with what it was trained on, what it gets wrong and what has been measured.
+          Available checks depend on the source, analysis profile and this computer's resources.
         </p>
       </aside>
       </div>

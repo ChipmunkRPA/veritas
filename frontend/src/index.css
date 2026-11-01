@@ -1,14 +1,15 @@
 @import "tailwindcss";
-@import "@fontsource-variable/newsreader";        /* display serif, opsz + wght axes */
-@import "@fontsource-variable/inter";             /* UI sans */
+@import "@fontsource-variable/newsreader";        /* document reader */
+@import "@fontsource-variable/manrope";           /* Chipmunk display headings */
+@import "@fontsource-variable/dm-sans";           /* Chipmunk UI sans */
 @import "@fontsource-variable/jetbrains-mono";    /* figures, hashes, code */
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   /* ---------- font families ---------- */
-  --font-display: "Newsreader Variable", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   /* ---------- type scale (px / line-height) ---------- */
@@ -26,16 +27,16 @@
   --text-micro: 11px;     --text-micro--line-height: 14px;
 
   /* ---------- colour: light ---------- */
-  --color-surface: #FCFBF9;          /* page */
-  --color-surface-2: #F4F2EC;        /* chrome, table head, code bg */
-  --color-surface-3: #EBE8E1;        /* hover / pressed / selected row */
-  --color-border: #E4E0D7;           /* hairline */
-  --color-border-strong: #BDB6A9;    /* inputs, secondary buttons */
-  --color-text: #1B1A17;
-  --color-text-muted: #625D54;
-  --color-text-faint: #857F73;       /* >= 18 px or non-text only */
-  --color-accent: #1F4D8F;           /* links, focus ring, active nav rule */
-  --color-accent-hover: #173D73;
+  --color-surface: #F8F7F1;          /* Chipmunk's warm off-white */
+  --color-surface-2: #F0F2EB;        /* chrome, table head, code bg */
+  --color-surface-3: #E3E9E0;        /* hover / pressed / selected row */
+  --color-border: #D7DED5;           /* hairline */
+  --color-border-strong: #AAB8AE;    /* inputs, secondary buttons */
+  --color-text: #183C34;
+  --color-text-muted: #52675E;
+  --color-text-faint: #77877D;       /* >= 18 px or non-text only */
+  --color-accent: #285F50;           /* links, focus ring, active nav rule */
+  --color-accent-hover: #183C34;
   --color-on-accent: #FFFFFF;
   --color-danger: #9B2915;
   --color-ok: #0B6B54;
@@ -73,7 +74,7 @@
 
   /* ---------- radii ---------- */
   --radius-xs: 2px;   /* highlights, chips */
-  --radius-sm: 4px;   /* buttons, inputs, code */
+  --radius-sm: 2px;   /* buttons, inputs, code */
   --radius-md: 6px;   /* images, plates, popovers, stage */
 
   /* ---------- shadows (two, both rare) ---------- */
@@ -81,8 +82,8 @@
   --shadow-focus: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
 
   /* Restrained workspace lighting, requested for intake/home. Static; evidence colours remain semantic. */
-  --color-workspace-tint: #EDF3FC;
-  --color-workspace-glow: rgb(69 120 202 / .12);
+  --color-workspace-tint: #E2EAE1;
+  --color-workspace-glow: rgb(40 95 80 / .12);
   --shadow-workspace: 0 0 56px var(--color-workspace-glow), 0 1px 0 var(--color-border);
   --shadow-workspace-action: 0 3px 18px var(--color-workspace-glow);
 
@@ -179,16 +180,16 @@
 
 /* ---------- dark theme overrides (same token names) ---------- */
 [data-theme="dark"] {
-  --color-surface: #191815;
-  --color-surface-2: #201F1B;
-  --color-surface-3: #2A2823;
-  --color-border: #34322C;
-  --color-border-strong: #4C4941;
-  --color-text: #ECE9E2;
-  --color-text-muted: #A9A396;
-  --color-text-faint: #7C766B;
-  --color-accent: #8FB4E8;
-  --color-accent-hover: #A9C6EE;
+  --color-surface: #142722;
+  --color-surface-2: #1A302A;
+  --color-surface-3: #263E35;
+  --color-border: #395047;
+  --color-border-strong: #61756A;
+  --color-text: #F0F1E8;
+  --color-text-muted: #B4C3B7;
+  --color-text-faint: #93A79A;
+  --color-accent: #A8D8BF;
+  --color-accent-hover: #C4E7D1;
   --color-on-accent: #191815;
   --color-danger: #EB6F5B;
   --color-ok: #4DBF9F;
@@ -206,8 +207,8 @@
   --color-series-general: #8FB4E8;
   --color-series-threshold: #4C4941;
   --shadow-popover: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .5);
-  --color-workspace-tint: #202A38;
-  --color-workspace-glow: rgb(104 158 240 / .13);
+  --color-workspace-tint: #29483A;
+  --color-workspace-glow: rgb(140 202 165 / .13);
   /* dark media stage (direction C §4.8) */
   --color-stage: #0B0B0C;
   --color-stage-2: #141416;
@@ -259,6 +260,7 @@ body { margin: 0; background: var(--color-surface); color: var(--color-text); }
 
 .num { font-variant-numeric: tabular-nums lining-nums; }
 .display { font-family: var(--font-display); font-optical-sizing: auto; font-variant-numeric: lining-nums; }
+.reader { font-family: "Newsreader Variable", Georgia, serif; font-optical-sizing: auto; }
 .eyebrow {
   font: 500 var(--text-eyebrow) / var(--text-eyebrow--line-height) var(--font-sans);
   letter-spacing: var(--text-eyebrow--letter-spacing);

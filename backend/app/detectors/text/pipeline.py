@@ -12,9 +12,12 @@ from __future__ import annotations
 import io
 import json
 import math
+import os
+import signal
 import subprocess
 import sys
 import time
+from contextlib import suppress
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -459,9 +462,18 @@ def extract_within(path: Path, ext: str) -> Document:
     child is killed. An error of the reader is raised here under its own class name, a `ValueError` as a `ValueError`,
     so the reason shown to the person reads as it did in process (`errors.friendly_error`)."""
     limit = settings.document_decode_timeout_s
+    process = subprocess.Popen(extract_command(path, ext), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                               start_new_session=os.name == "posix")  # noqa: S603
     try:
-        done = subprocess.run(extract_command(path, ext), capture_output=True, timeout=limit, check=False)  # noqa: S603
+        stdout, stderr = process.communicate(timeout=limit)
+        done = subprocess.CompletedProcess(process.args, process.returncode, stdout, stderr)
     except subprocess.TimeoutExpired:
+        if os.name == "posix":
+            with suppress(ProcessLookupError):  # The child may exit at the timeout boundary.
+                os.killpg(process.pid, signal.SIGKILL)
+        else:
+            process.kill()
+        process.communicate()
         raise _not_within(limit) from None
     try:
         out = json.loads(done.stdout)
@@ -474,7 +486,8 @@ def extract_within(path: Path, ext: str) -> Document:
         failed = out["error"]
         base = ValueError if failed.get("value_error") else RuntimeError
         raise type(str(failed.get("type") or "ExtractionError"), (base,), {})(str(failed.get("message") or ""))
-    return Document(out["text"], [(int(a), int(b)) for a, b in out["paragraphs"]], dict(out["meta"]))
+    return Document(out["text"], [(int(a), int(b)) for a, b in out["paragraphs"]], dict(out["meta"]),
+                    list(out.get("source_map") or []), dict(out.get("source_rasters") or {}))
 
 
 def segment_command() -> list[str]:

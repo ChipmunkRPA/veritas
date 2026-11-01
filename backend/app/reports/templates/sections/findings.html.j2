@@ -1,6 +1,6 @@
 <section class="chapter-cont" id="section-findings">
-<h2 class="chapter-title"><span class="n">{{ v.number.findings }}</span>Key findings</h2>
-<p class="caption intro">Findings in rank order. Strength words follow likelihood-ratio bands (section {{ v.number.methods }}); the direction is toward or against AI generation or manipulation. Examiner dispositions are a separate layer, marked Examiner.</p>
+<h2 class="chapter-title"><span class="n">{{ v.number.findings }}</span>Findings and supporting evidence</h2>
+<p class="caption intro">Each finding separates the observation from its interpretation and links to the supporting record. A finding's direction is not a separate confidence percentage. Inspection-only checks are identified explicitly.</p>
 {% if v.findings %}
 <ol class="finding-list">
 {% for f in v.findings %}
@@ -9,9 +9,19 @@
 <div class="f-body">
 <p class="f-head"><span class="fid">{{ f.id }}</span><span class="strength">{% if f.mark %}{{ v.marks[f.mark] }}{% else %}<span class="meter">{% for n in range(4) %}<i class="{{ 'on' if n < f.bars else 'off' }}"></i>{% endfor %}</span>{% endif %}</span></p>
 <p class="f-title">{{ f.title | symbols }}</p>
+{% if f.get('inference') %}
+<p class="finding-inference"><strong>Inference:</strong> {{ f.inference }}</p>
+{% for t in f.observations %}<p><strong>Observed:</strong> {{ t | symbols }}</p>{% endfor %}
+{% if f.scope_note %}<p class="caption">{{ f.scope_note }}</p>{% endif %}
+{% if f.support %}
+<ul class="finding-source-links">{% for evidence in f.support[:3] %}<li><a class="xref" href="{{ evidence.href }}">{{ evidence.label }}</a>{% if not evidence.direct %} (related check input){% endif %}</li>{% endfor %}</ul>
+{% if f.support | length > 3 %}<p class="caption">Additional recorded locations: {% for evidence in f.support[3:] %}<a href="{{ evidence.href }}">{{ evidence.id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+{% endif %}
+{% else %}
 {% for t in f.sentences %}
 <p>{{ t | symbols }}</p>
 {% endfor %}
+{% endif %}
 {% if f.thumbnail and f.thumbnail_caption %}<p class="caption">{{ f.thumbnail_caption }}</p>{% endif %}
 {% for n in f.notes %}
 <p class="caption">{{ n | symbols }}</p>

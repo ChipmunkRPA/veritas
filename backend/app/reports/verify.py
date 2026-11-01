@@ -198,12 +198,17 @@ def _verify(zf: zipfile.ZipFile, public_key_pem: bytes | None, out: Verification
     except (ValueError, UnicodeDecodeError):
         out.checks.append(Check("bundle", False, "bundle.json is not valid JSON"))
         return out
-    if not isinstance(bundle, dict) or bundle.get("schema") != SCHEMA:
-        out.checks.append(Check("bundle", False, f"bundle.json is not a {SCHEMA} document"))
+    from app.reports import public_verify
+
+    if not isinstance(bundle, dict) or bundle.get("schema") not in {SCHEMA, public_verify.SCHEMA}:
+        out.checks.append(Check("bundle", False, "bundle.json has an unsupported evidence schema"))
         return out
     out.bundle = bundle
     out.checks.append(_reports(zf, names, bundle, key, out.key_id))
-    out.checks.append(_custody(bundle))
+    if bundle['schema'] == public_verify.SCHEMA:
+        out.checks.extend(Check(*item) for item in public_verify.checks(zf, names, bundle))
+    else:
+        out.checks.append(_custody(bundle))
     return out
 
 
@@ -216,6 +221,9 @@ def _archive(zf: zipfile.ZipFile) -> tuple[set[str], str | None]:
     names: set[str] = set()
     for info in infos:
         name = info.filename
+        limit = 32 * 1024 * 1024 if name.endswith(('.json', '.sha256')) else 16 * 1024 if name.endswith(('.pem', '.sig')) else None
+        if limit is not None and info.file_size > limit:
+            return names, f"metadata file {name!r} exceeds the size limit"
         if info.is_dir():
             continue
         parts = PurePosixPath(name).parts

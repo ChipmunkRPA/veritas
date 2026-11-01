@@ -5,6 +5,7 @@ import { halfUp } from '../../lib/format'
 import { countedRows, estimateOf, type Decision } from './answer'
 import { recordAlone, recordAloneText, recordOf, recordSetNumber, type MarkerKind } from './record'
 import { LN2, littleOf, signalDirection } from './vocabulary'
+import { anonymizeModelNames } from './checkNames'
 
 export type ContributionRow = NonNullable<Decision['contributions']>[number]
 
@@ -202,7 +203,7 @@ export function mentionFields(details: unknown): string | null {
   return fields.length === 0 ? null : fields.length === 1 ? fields[0] : `${fields.slice(0, -1).join(', ')} and ${fields[fields.length - 1]}`
 }
 /** N-19p (Q6-01): what a mention means, in the place of the check's own "weak evidence only" */
-export const MENTION_WHY = 'A text field of the file’s metadata mentions AI. Anyone can write such a field, and Veritas looks for words, not their meaning, so it sets no number in this result.'
+export const MENTION_WHY = 'A text field of the file’s metadata mentions AI. Anyone can write such a field, and Chipmunk Verify looks for words, not their meaning, so it sets no number in this result.'
 
 /** Standalone probability of a signal: calibrated when available, else a raw score that is itself a probability. */
 export function standaloneP(s: SignalV2): number | null {
@@ -227,10 +228,12 @@ export function waterfall(d: Decision, signals: readonly SignalV2[], top = 6): B
 
   const out: Bar[] = [bar({ key: 'start', kind: 'start', label: startKind(d) === 'neutral_start' ? NEUTRAL_START_LABEL : STARTING_POINT_LABEL, delta: start, from: start, to: start })]
   let running = start
+  const labelFor = (label: string, s?: SignalV2) => s && /^(prov\.|img\.meta\.|vid\.meta\.)/.test(s.detector_id)
+    ? label : anonymizeModelNames(label, undefined, signals)
   const detectorBar = (r: ContributionRow, key: string): Bar => {
     const s = r.signal_id ? byId.get(r.signal_id) : undefined
     const b = bar({
-      key, kind: r.kind === 'missing' ? 'missing' : 'detector', label: (s?.name ?? r.label) + (r.baseline === 'p50' ? FROM_FIFTY : ''), displayId: s?.display_id ?? null,
+      key, kind: r.kind === 'missing' ? 'missing' : 'detector', label: labelFor(s?.name ?? r.label, s) + (r.baseline === 'p50' ? FROM_FIFTY : ''), displayId: s?.display_id ?? null,
       signalId: r.signal_id ?? null, delta: r.logit, from: running, to: running + r.logit, weight: s?.effective_weight ?? null,
       p: s ? standaloneP(s) : null, approximate: r.approximate ?? false, notCounted: r.kind === 'detector' && r.counted === false,
     })
@@ -245,7 +248,7 @@ export function waterfall(d: Decision, signals: readonly SignalV2[], top = 6): B
   }
   adjustments.forEach((r, i) => {
     const s = r.signal_id ? byId.get(r.signal_id) : undefined
-    const b = bar({ key: `adjust-${i}`, kind: 'adjustment', label: rowLabel(r.label, d), displayId: s?.display_id ?? null, signalId: r.signal_id ?? null,
+    const b = bar({ key: `adjust-${i}`, kind: 'adjustment', label: labelFor(rowLabel(r.label, d), s), displayId: s?.display_id ?? null, signalId: r.signal_id ?? null,
       delta: r.logit, from: running, to: running + r.logit, approximate: r.approximate ?? false })
     running = b.to
     out.push(b)
@@ -289,7 +292,7 @@ export function narrative(d: Decision): string[] {
   const missing = rows.filter((r) => r.kind === 'missing').length
   const adjustments = rows.filter((r) => r.kind === 'override')
   const out = [
-    `${spelled(detectors.length)} ${detectors.length === 1 ? 'check' : 'checks'} entered the fusion model. Veritas combines them by adding each check’s evidence on a log-odds scale, with weights fitted on the benchmark's training data, not on its test data.`,
+    `${spelled(detectors.length)} ${detectors.length === 1 ? 'check' : 'checks'} entered the fusion model. Chipmunk Verify combines them by adding each check’s evidence on a log-odds scale, with weights fitted on the benchmark's training data, not on its test data.`,
     `${counted(up, true)} pushed the estimate up, ${counted(down)} pushed it down, ${counted(little)} had little effect.`,
     ...notCountedLines(d),
   ]
@@ -349,7 +352,7 @@ export function fallbackText(check: Extract<Integrity, { ok: false }>, d?: Decis
     case 'fallback': {
       // N-19h (E-20, 1; `forensic.fallback_text`): a floor or a cap does not come from hand-set weights
       const set = recordSetNumber(d)
-      return `No calibrated fusion model ${modelUnused(profile) ? 'was used for this analysis' : 'is loaded'}, so the ${set ? 'statistical score' : 'score'} came from the uncalibrated fallback with hand-set weights. That path records no additive contributions, and Veritas does not draw a breakdown that does not add up. Each check’s weight is listed in the evidence ledger.`
+      return `No calibrated fusion model ${modelUnused(profile) ? 'was used for this analysis' : 'is loaded'}, so the ${set ? 'statistical score' : 'score'} came from the uncalibrated fallback with hand-set weights. That path records no additive contributions, and Chipmunk Verify does not draw a breakdown that does not add up. Each check’s weight is listed in the evidence ledger.`
     }
     case 'capped':
       return 'There is no estimate to break down: a check that this analysis depends on did not run.'

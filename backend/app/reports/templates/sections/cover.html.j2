@@ -1,6 +1,22 @@
 <section class="cover" id="section-cover">
 <h1 class="title cover-title">{{ v.cover_title }}</h1>
 <hr class="rule-double">
+{% if v.get('customer_report') %}
+<div class="cover-assessment customer-result">
+<p class="eyebrow">Automated conclusion</p>
+<p class="headline">{{ v.cover_headline }}</p>
+{% if v.get('customer_assessment', {}).get('applies') %}
+<p class="estimate">{% set fallback_estimate = v.customer_estimate %}{% include 'sections/customer_estimate.html.j2' %}</p>
+{% if v.customer_assessment.get('scope_note') %}<p class="customer-scope"><strong>{{ v.customer_assessment.scope_label }}.</strong> {{ v.customer_assessment.scope_note }}</p>{% endif %}
+<p class="caption">{{ v.customer_assessment.limitation }}</p>
+{% endif %}
+</div>
+{% if v.get('channel_findings') %}
+<div class="cover-channel-findings">
+{% for channel in v.channel_findings %}<p><strong>{{ channel.label }}:</strong> {{ channel.text }}</p>{% endfor %}
+</div>
+{% endif %}
+{% endif %}
 <dl class="facts cover-facts">
 {% for r in v.cover %}
 <dt>{{ r.key }}</dt><dd class="{{ 'mono' if r.mono is defined and r.mono else '' }}{{ ' muted' if not r.established else '' }}">{{ r.value }}</dd>
@@ -15,4 +31,5 @@
 </div>
 {% endif %}
 <p class="scope-statement">{{ v.scope_statement }}</p>
+{% if v.get('expert_note') %}<p class="expert-contact">{{ v.expert_note }}</p>{% endif %}
 </section>

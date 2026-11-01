@@ -58,7 +58,7 @@ export default function VerdictModule({ v, signals, stats, kind }: { v: Verdict;
 
   return (
     <section aria-labelledby={headingId} data-tour="verdict" className="border-t border-border-strong border-b border-b-border py-8">
-      <Eyebrow as="h2" id={headingId}>Verdict</Eyebrow>
+      <Eyebrow as="h2" id={headingId}>Automated conclusion</Eyebrow>
       <p className="sr-only">{pctTarget == null ? 'No estimate' : `Probability of AI generation ${pctTarget} percent`}, {label.toLowerCase()}, {v.confidence} confidence.</p>
 
       <div className="mt-4 grid gap-10 min-[960px]:grid-cols-[7fr_5fr]">
@@ -109,9 +109,9 @@ export default function VerdictModule({ v, signals, stats, kind }: { v: Verdict;
           {kind === 'document' && stats && (<>
             <dt className="eyebrow pt-1">Corpus</dt>
             <dd className="m-0 text-body text-text num">{stats.words} words · {stats.sentences} sentences</dd>
-            {stats.binoculars_document != null && (<>
-              <dt className="eyebrow pt-1">Binoculars</dt>
-              <dd className="m-0 text-body text-text"><span className="font-mono text-mono num">{stats.binoculars_document.toFixed(3)}</span><span className="text-text-muted"> · whole document</span></dd>
+            {stats.document_pattern_ratio != null && Number.isFinite(stats.document_pattern_ratio) && (<>
+              <dt className="eyebrow pt-1">Pattern ratio</dt>
+              <dd className="m-0 text-body text-text"><span className="font-mono text-mono num">{stats.document_pattern_ratio.toFixed(3)}</span><span className="text-text-muted"> · whole document, not a probability</span></dd>
             </>)}
           </>)}
           <dt className="eyebrow pt-1">Basis</dt>

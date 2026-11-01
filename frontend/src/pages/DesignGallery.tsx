@@ -153,7 +153,7 @@ export default function DesignGallery() {
     <div className="min-h-screen bg-surface text-text">
       <header className="border-b border-border">
         <div className="max-w-(--container-content) mx-auto h-14 px-12 flex items-center justify-between max-[959px]:px-6">
-          <Link to="/" className="display text-[22px] leading-7 font-medium text-text">Veritas</Link>
+          <Link to="/" className="display text-[22px] leading-7 font-medium text-text">Chipmunk Verify</Link>
           <Button variant="icon" data-testid="gallery-theme" onClick={toggle} aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'} title="Theme">
             {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} aria-hidden /> : <Moon size={16} strokeWidth={1.5} aria-hidden />}
           </Button>
@@ -297,7 +297,7 @@ export default function DesignGallery() {
               <li><ReviewStateMark state="reviewed">Reviewed by R. Okafor, 11 Sep 2026 — opinion: concurs with the machine assessment</ReviewStateMark></li>
               <li><ReviewStateMark state="approved">Reviewed by D. Whitfield, 11 Sep 2026 · second review by M. Lee, 12 Sep 2026</ReviewStateMark></li>
               <li><ReviewStateMark state="disputed">Disputed · signed by D. Whitfield, 11 Sep 2026 · second review by M. Lee, 12 Sep 2026 — peer review: does not concur with the examiner’s opinion</ReviewStateMark></li>
-              <li><ReviewStateMark state="superseded">Superseded by analysis 91c2e0a4 (Veritas 2.1.0)</ReviewStateMark></li>
+              <li><ReviewStateMark state="superseded">Superseded by analysis 91c2e0a4 (Chipmunk Verify 2.1.0)</ReviewStateMark></li>
               <li><ReviewStateMark state="withdrawn">Withdrawn — reason recorded in the custody log</ReviewStateMark></li>
             </ul>
           </Row>

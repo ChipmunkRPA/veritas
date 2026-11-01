@@ -307,7 +307,7 @@ export function aloneWhy(d: { fusion_mode?: string | null }, assessments: readon
 /** What stands in place of the breakdown where a record decides alone (`forensic.record_alone_text`). */
 export function recordAloneText(d: DecisionLike & { fusion_mode?: string | null }, why: string | null): string {
   const none = `There is no statistical ${d.fusion_mode === 'fallback' ? 'score' : 'estimate'} to break down${why ? `: ${why}.` : '.'}`
-  return recordOf(d)?.kind === 'decisive_ai' ? `${none} The provenance record decides the result.` : `${none} The number is the value Veritas gives the provenance record.`
+  return recordOf(d)?.kind === 'decisive_ai' ? `${none} The provenance record decides the result.` : `${none} The number is the value Chipmunk Verify gives the provenance record.`
 }
 
 /** N-19h (E-20, 2): a capture's result is the signed record's, not what the combined evidence indicates (`view.CAPTURE_MEANS`). */

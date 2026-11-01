@@ -62,6 +62,7 @@ from app.storage.objects import CHUNK, ObjectNotFound, ObjectStore, default_stor
 log = get_logger(__name__)
 OPEN = ("queued", "running")  # the states the final write of a job may change
 SCHEMA = "veritas.evidence/2.0"
+PUBLIC_SCHEMA = "chipmunk.public-evidence/1"
 KINDS = ("draft", "issue")
 EXHIBIT_FIELDS = (("payload_artefact_id", "payload"), ("reliability_mask_artefact_id", "reliability_mask"),
                   ("preview_artefact_id", "preview"))
@@ -89,14 +90,16 @@ def _ts(dt: datetime) -> str:
 
 
 def filename(package: PackageRow, report: ReportRow) -> str:
-    return f"veritas-evidence-{package.analysis_id[:8]}-r{report.revision:02d}{'-draft' if package.kind == 'draft' else ''}.zip"
+    prefix = "chipmunk-evidence" if package.schema_id == PUBLIC_SCHEMA else "veritas-evidence"
+    return f"{prefix}-{package.analysis_id[:8]}-r{report.revision:02d}{'-draft' if package.kind == 'draft' else ''}.zip"
 
 
-def prepare(db: Session, analysis: Analysis, report: ReportRow, *, kind: str, include_original: bool, created_by: str) -> PackageRow:
+def prepare(db: Session, analysis: Analysis, report: ReportRow, *, kind: str, include_original: bool, created_by: str,
+            schema_id: str = SCHEMA) -> PackageRow:
     """Add the package row as `queued`, flushed and not committed. The caller queues the job in the same transaction and
     commits (`v2_reports.request_package`)."""
     row = PackageRow(id=str(uuid.uuid4()), analysis_id=analysis.id, report_id=report.id, case_id=analysis.case_id, kind=kind,
-                     include_original=include_original, status="queued", created_by=created_by, created_at=utcnow())
+                     include_original=include_original, status="queued", created_by=created_by, created_at=utcnow(), schema_id=schema_id)
     db.add(row)
     db.flush()
     log.info("packages.requested", package_id=row.id, analysis_id=analysis.id, report_id=report.id, kind=kind)
@@ -290,6 +293,12 @@ def _matching_summary(db: Session, store: ObjectStore, report: ReportRow, frozen
 def build(db: Session, package: PackageRow | None, *, store: ObjectStore, key: signing.InstanceKey, exported_at: datetime) -> Built:
     if package is None:
         raise PackageError("The package request no longer exists.")
+    if package.schema_id == PUBLIC_SCHEMA:
+        from app.reports.public_package import build_public
+
+        return build_public(db, package, store=store, key=key, exported_at=exported_at)
+    if package.schema_id != SCHEMA:
+        raise PackageError("The package format is unsupported.")
     analysis, report = db.get(Analysis, package.analysis_id), db.get(ReportRow, package.report_id)
     if analysis is None or report is None or report.analysis_id != analysis.id:
         raise PackageError("The report of this package no longer exists; the package was not produced.")
@@ -429,13 +438,13 @@ def _readme(bundle: dict[str, Any], report: ReportRow, name: str, names: list[st
     if bundle["source"] is not None:
         rows.append(("source/", "the original file"))
     rows.append(("reproduce.md", "how to re-run the analysis and compare its raw scores"))
-    lines = ["Veritas evidence package", "", f"Package    {name}", f"Status     {kind}", f"Review     {review_line}",
+    lines = ["Chipmunk Verify evidence package", "", f"Package    {name}", f"Status     {kind}", f"Review     {review_line}",
              f"Analysis   {analysis['id']} (revision {analysis['revision']}, {analysis['kind']})",
              f"Report     {report.id} revision {report.revision} ({report.profile})", f"Exported   {bundle['generated_at']}",
              f"Signed by  {bundle['signing']['key_id']} (Ed25519)", "", "Files"]
     lines += [f"  {path:<24} {text}" for path, text in rows]
     lines += ["", "How to verify",
-              "  Hashes only, without Veritas:  sha256sum -c manifest.sha256",
+              "  Hashes only, without Chipmunk Verify:  sha256sum -c manifest.sha256",
               "  Everything, with no server and no network, against the instance key:",
               f"    python -m app.cli verify {name} --public-key <instance key PEM>",
               f"    python -m app.cli verify {name} --expect-key-id <instance key id>",

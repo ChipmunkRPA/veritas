@@ -4,9 +4,9 @@
   grid), it takes the RMS level in dBFS and the spectral flatness of 100–4000 Hz. A hop is speech when its level is at
   least 12 dB above the track's 10th-percentile level and above −50 dBFS, and its flatness is below 0.4 (voiced speech is
   harmonic, noise is flat). Gaps under 0.3 s are closed, then runs under 0.2 s are dropped.
-- **Tick grid.** SyncNet works at 25 fps. Tick k is video time t0 + k / 25 (t0 is the first frame's time) and audio
+- **Tick grid.** SyncNet works at 25 fps. Tick k is source time t0 + k / 25 (t0 is the first decoded audio sample) and audio
   samples k × 640 onwards. Each tick takes the nearest decoded frame, so a 24 or 30 fps video repeats or skips frames.
-  Audio time starts at the first audio sample, so a start offset between the streams shows as a constant offset.
+  Source timestamps align the two streams. Ticks before video starts have no frame and cannot form a scoring window.
 - **Windows.** Per face track, the grid's consecutive 1 s windows (25 ticks) in which the track is present on every
   tick and at least half the ticks are speech; at most 30 per track, evenly thinned (VF §8.2).
 - **Active speaker.** Mouth motion is the mean absolute change of a 32 × 24 grey mouth patch between consecutive ticks.
@@ -128,7 +128,7 @@ def vad(pcm: np.ndarray, sr: int = SR) -> Speech:
 @dataclass(frozen=True)
 class TickGrid:
     t0: float
-    frames: tuple[int, ...]  # frame-table index per tick (repeats allowed)
+    frames: tuple[int, ...]  # frame-table index per tick (repeats allowed; -1 before video coverage)
     audio_ticks: int
 
     @property
@@ -139,22 +139,24 @@ class TickGrid:
         return self.t0 + tick / FPS
 
 
-def tick_grid(times: np.ndarray, duration: float, audio_samples: int) -> TickGrid:
+def tick_grid(times: np.ndarray, duration: float, audio_samples: int, *, audio_start_s: float | None = None) -> TickGrid:
     """The nearest frame per tick over the ticks both streams cover."""
     if len(times) == 0:
         return TickGrid(0.0, (), audio_samples // HOP)
-    t0 = float(times.min())
+    video_start = float(times.min())
+    # The optional default preserves callers of the legacy helper; production AV adapters require a verified mapping.
+    t0 = video_start if audio_start_s is None else float(audio_start_s)
     audio_ticks = audio_samples // HOP
-    n = min(int(np.floor(duration * FPS + 1e-9)), audio_ticks)
+    n = min(max(0, int(np.floor((video_start + duration - t0) * FPS + 1e-9))), audio_ticks)
     order = np.argsort(times, kind="stable")
     sorted_t = times[order]
     targets = t0 + np.arange(max(n, 0)) / FPS
     if len(sorted_t) == 1:
-        return TickGrid(t0, tuple(int(order[0]) for _ in targets), audio_ticks)
+        return TickGrid(t0, tuple(int(order[0]) if t >= video_start else -1 for t in targets), audio_ticks)
     pos = np.clip(np.searchsorted(sorted_t, targets), 1, len(sorted_t) - 1)
     left, right = sorted_t[pos - 1], sorted_t[pos]
     choose = np.where(targets - left <= right - targets, pos - 1, pos)
-    return TickGrid(t0, tuple(int(i) for i in order[choose]), audio_ticks)
+    return TickGrid(t0, tuple(int(i) if t >= video_start else -1 for t, i in zip(targets, order[choose], strict=True)), audio_ticks)
 
 
 @dataclass(frozen=True)

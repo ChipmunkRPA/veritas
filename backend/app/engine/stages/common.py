@@ -518,6 +518,23 @@ def synthesise_findings(ctx: StageContext, *, kind: str, entry_stages: tuple[str
         exhibits=stage_exhibit_list(ctx, exhibit_stages), condition_profile=fused.get("condition_profile"),
         calibration=fused.get("calibration") or [], cards=cards, family_by_v1_id=family_by_v1_id or {},
         not_run=(fused.get("fusion") or {}).get("not_run") or [], failed_steps=failed_steps(ctx)))
+    # A calibrated speech decision includes abstention guards. Generic LR wording
+    # must not turn an uncertain decision back into an AI/original conclusion.
+    for finding in findings:
+        if finding.get("family") != "A1_voice" or finding.get("scope"):
+            continue
+        linked = [s for s in fused.get("signals", []) if s["id"] in finding.get("evidence_ids", [])]
+        screen = next((s.get("details", {}).get("audio_screening") for s in linked
+                       if s.get("details", {}).get("audio_screening")), None)
+        if screen:
+            direction = screen.get("decision", "inconclusive")
+            statement = screen["reason"] + " " + screen["limitation"]
+            finding.update(title={"ai": "Leaning towards AI-generated speech", "original": "Leaning towards original speech"}.get(
+                               direction, "Inconclusive speech assessment"),
+                           statement=statement, sentences=[], probability=screen.get("probability_ai"),
+                           direction={"ai": "for", "original": "against"}.get(direction, "neutral"),
+                           strength="weak" if direction != "inconclusive" else "none",
+                           standalone_strength=None, standalone_direction=None)
     return {"findings": findings, "template_set": synthesis.TEMPLATE_SET}
 
 
@@ -966,12 +983,22 @@ def publish(ctx: StageContext, result: AnalysisResultV2, v1: dict[str, Any], *, 
             analysis.probability_ai = result.decision.probability_ai
             analysis.band = result.decision.band
             analysis.pipeline_version = pipeline_version
+            evidence_events = []
+            if analysis.kind in {"image", "video", "audio", "document"}:
+                from app.evidence.service import current_set_id, load_packet_set, persist_packet_set
+
+                previous = load_packet_set(db, analysis, ctx.store, set_id=current_set_id(analysis))
+                packet_set = persist_packet_set(db, analysis, ctx.store, result=result.model_dump(mode="json"))
+                if previous is None and packet_set:
+                    evidence_events.append({"action": f"{analysis.kind}_evidence_generated", "actor_id": actor,
+                                            "analysis_id": ctx.analysis_id, "object_ids": [packet_set["id"]],
+                                            "after_hash": packet_set["sha256"], "details": {"version": packet_set["version"]}})
             artefact_id = artefact.id
             audit.commit_with(db, [{
                 "action": "manifest_recorded", "actor_id": actor, "analysis_id": ctx.analysis_id, "object_ids": [artefact_id],
                 "after_hash": result_hash,
                 "details": {"pipeline_version": pipeline_version,
-                            "manifest_hash": canonical_hash(manifest) if manifest is not None else None}}])
+                            "manifest_hash": canonical_hash(manifest) if manifest is not None else None}}, *evidence_events])
             return artefact_id
 
     artefact_id = audit.repeated(unit)

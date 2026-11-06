@@ -53,6 +53,15 @@ or a generic dataset link.
   experiment was stopped before fitting. All byte/PCM reconstruction claims remain
   scoped to waveforms. Use the [identity audit and repair](../audio-source-identity-v9.md)
   when assessing source independence; the original v8 capsule remains unchanged.
+- `audio-v9-execution-freeze.json`: safe projection of the corrected prospective
+  execution lock, binding the unchanged learner/service, verified commercial
+  model/runtime commitments, 51 implementation pins and nineteen predetermined
+  native cache replays. The standard-library review and eight actual-freeze
+  alteration rejections accompany it. It includes no private source/cache paths
+  or detector outcomes. See the [execution record](../audio-identity-v9-execution.md)
+  and [immutable protocol](../audio-identity-v9-execution-protocol.md). Actual
+  extraction, performance, adoption and outside reviewer participation are
+  separate requirements.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

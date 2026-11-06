@@ -122,6 +122,9 @@ Its source-separation claims are superseded; waveform reproduction remains valid
 The corrected source plan retains the fixed fresh recordings and joins their
 known parent identities. This repair supports a new experiment, not a measured
 detection improvement.
+Its [prospective execution freeze](docs/audio-identity-v9-execution.md) records
+the unchanged learner, corrected roles and native cache-verification requirements
+before new extraction or fitting; it does not establish a passing replacement.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

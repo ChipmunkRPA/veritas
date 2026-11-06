@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.audio-identity-execution-tamper-review/9",
+  "execution_sha256": "b73e5933deb418129f570500a90672e062d159ed84d39ddf8bc8744d2f13ff8c",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "missing native replay",
+      "rejected": true,
+      "reason": "Complete unique native selection required"
+    },
+    {
+      "alteration": "old denominator",
+      "rejected": true,
+      "reason": "Corrected denominators and terminal cache required"
+    },
+    {
+      "alteration": "changed method",
+      "rejected": true,
+      "reason": "Unchanged statistical method/model/runtime/service required"
+    },
+    {
+      "alteration": "changed weight bytes",
+      "rejected": true,
+      "reason": "Unchanged statistical method/model/runtime/service required"
+    },
+    {
+      "alteration": "hidden private path",
+      "rejected": true,
+      "reason": "Exact execution schema/allowlist required"
+    },
+    {
+      "alteration": "claims fitting already occurred",
+      "rejected": true,
+      "reason": "Prospective freeze cannot claim an executed result"
+    },
+    {
+      "alteration": "dropped code pins",
+      "rejected": true,
+      "reason": "Complete implementation pins required"
+    },
+    {
+      "alteration": "changed confirmation",
+      "rejected": true,
+      "reason": "Execution differs from the corrected published sources"
+    }
+  ],
+  "scope": "Actual public execution freeze alterations; local metadata/code checks, not outside review."
+}

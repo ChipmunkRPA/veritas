@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Froze corrected audio v9 execution before new extraction/fitting, retaining
+  the unchanged learner and all sixteen gates. The runner binds all 4,248 consumed
+  inputs and refuses reserved confirmation. Checkpoint/runtime/feature checks
+  identify 1,846 exact-input cache candidates; nineteen native checks are required
+  before reuse and 2,402 inputs require new extraction. All 132 selected tests,
+  the 51-file metadata/code review and eight actual-freeze alteration checks
+  passed. No model gain, serving change or outside review is claimed.
+  [Execution and remaining stages](audio-identity-v9-execution.md).
+
 - The wider audio identity audit superseded v8 before fitting. Checked1054
   originals across all868 earlier source references; no reserved recording,
   non-silent2–4second prefix or known script was reused. However, the publisher's

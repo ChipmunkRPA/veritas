@@ -511,3 +511,26 @@ unknown pretrained overlap or independent permission verification. The initial
 mono-only metadata-planning stop is retained locally; the valid preparation
 uses production downmix for mono/stereo isolated turns. No fresh classifier
 has run, and no outside reviewer has participated.
+
+The next [execution record](../audio-guard-v7-confirmation-execution.md) freezes
+all1080 exact mixtures, the original candidate head/current service comparator,
+runtime, checkpoint and code commitments before the first fresh forward.
+`audio-v7-confirmation-inputs.json.gz` includes all recipes and numerical
+artifacts but no source waveforms or pretrained checkpoints. Offline review:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.reproduce_audio_confirmation_v7 docs/evaluation-panels/audio-v7-confirmation-inputs.json.gz /tmp/audio-v7-confirmation-input-review.json
+```
+
+The unchanged source catalogue must remain beside the capsule. Its hash and
+each foreground/group/truth/background binding are checked. The preparation
+review does not run neural inference or constitute completed confirmation.
+`prepare_audio_confirmation_variants_v7.py <prepared-root>` creates canonical
+four-second mixtures. `audit_audio_confirmation_inputs_v7.py <root> <new-output>`
+replays all source/mixture/sample commitments and eighteen production decodes.
+`audit_audio_confirmation_parity_v7.py <development-root> <new-output>` replays
+thirteen consumed cases before fresh inference. Then
+`score_audio_confirmation_v7.py freeze <root> <new-lock> --head <original-head>`
+binds the completed preparation/current runner before its `score <lock>
+<new-jsonl>` stage. Provision commercial checkpoints and point the existing
+model/HF cache settings to them; serving state is not modified by these tools.

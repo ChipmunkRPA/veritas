@@ -17,6 +17,15 @@ or a generic dataset link.
   controls, including source groups and known inserted frame/time intervals.
 - `video-v6-exclusions.json`: prior source/donor identifiers excluded before
   selection. It preserves the exclusion identities, not local setup paths.
+- `audio-v4-v6-development.json`: 120 already-consumed original audio files,
+  12 noise/music recordings, all 720 input recipes, exact file/decoded/sample
+  payload hashes, original WAV container timestamps, and five connected-source
+  folds. It includes frozen baseline responses and guarded reference decisions.
+  These are development inputs, never a new confirmation set.
+- `audio-v4-v6-reconstruction.json`: local offline reconstruction receipts for
+  all 720 inputs. Independently recomputed sample payloads, complete WAV files
+  and production-decoded PCM matched their declared hashes. This is local
+  reproducibility evidence, not outside review or a fresh accuracy study.
 
 Image selection plans and manifests are exact copies of the frozen metadata.
 The video source/exclusion catalogue is deliberately limited to reproducibility
@@ -34,3 +43,49 @@ Follow the linked cards for original source credits and media terms. Project
 methods, curation, derived fields, unavailable-mask handling, and outcome
 limitations are described in the linked experiment reports. Publisher labels
 and declared rights are not independent authentication of every source.
+
+## Audio review and offline reconstruction
+
+The audio catalogue has its own per-source licence declarations and attribution:
+DFADD's revised release, underlying VCTK and LJ Speech, LibriSpeech, and selected
+MUSAN FreeSound/RFM recordings. The TGIF/RTFS terms above do not apply to audio.
+Full transcripts, private paths, audio payloads and model weights are omitted.
+
+To reproduce inputs, acquire the separately permitted original/background bytes
+at the pinned references. For archive members retain the declared member; for
+Parquet sources use the source identity and recorded background row coordinates.
+Verify the source-byte hashes and place each extracted recording in a separate
+cache as `<sha256>.audio`. Then, from the repository root:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python backend/scripts/rebuild_audio_development_panel.py \
+  docs/evaluation-panels/audio-v4-v6-development.json \
+  /path/to/separately-acquired-source-cache /path/to/new-output-directory \
+  --catalogue-sha256 c0efaa0c9924f0a57fa42bf3d613e351c122070d43dce47a500ac5969eecbabd
+```
+
+The helper is offline: it downloads nothing, loads no detector and submits no
+paid analysis. It recomputes the speech normalization, background intervals,
+SNR mixtures and shared attenuation, verifies the float sample payload before
+restoring the recorded WAV header timestamp, and checks both complete file and
+production-decoded PCM hashes. Only reconstructed benchmark copies receive the
+recorded timestamp. Original acquired recordings remain unchanged. Every planned
+case receives a receipt, including failures; an existing output is refused.
+Decoder/library differences must be reported, not silently relabelled.
+
+The local source-cache reconstruction passed all 720 cases. Its exact receipts
+are in `audio-v4-v6-reconstruction.json`. An earlier attempt reproduced the
+samples but failed exact file hashes because libsndfile writes a current PEAK
+timestamp; that failed attempt is retained in ignored local research storage.
+The revised catalogue records that header field, and the helper checks the
+independently recomputed sample hash before restoring it. The combined audio
+development, export/reconstruction and portable review suite passed 83 tests.
+This verifies the stated local workflow, not outside reviewer participation.
+
+Rebuilding consumed data checks reproducibility, not fresh detector accuracy.
+The [v4 enhancement](../audio-noise-view-v4-evaluation.md),
+[v5 quality calibration](../audio-quality-v5-evaluation.md), and
+[v6 decision layer](../audio-residual-v6-evaluation.md) were rejected under their
+frozen advancement criteria. A new method or outside confirmation needs a
+separately frozen source selection and
+decision. No outside reviewer has independently verified these audio results.

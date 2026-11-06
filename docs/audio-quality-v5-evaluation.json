@@ -1,0 +1,2272 @@
+{
+  "schema": "chipmunk.audio-quality-development-summary/5",
+  "method": {
+    "version": "audio-original-quality-development/5.0",
+    "sample_rate": 16000,
+    "frame_samples": 512,
+    "hop_samples": 256,
+    "fft": "noncentered real FFT; periodic Hann",
+    "spectral_band_hz": [
+      80,
+      7600
+    ],
+    "flatness": "median geometric/arithmetic frame power, relative 1e-12 floor",
+    "flatness_coordinate": "clip((log10(flatness) + 5) / 5, 0, 1)",
+    "floor_coordinate": "clip((log10(frame_energy_p10 / frame_energy_p90) + 4) / 4, 0, 1)",
+    "normalization": "divide waveform by peak for scale invariance; never alter classifier input",
+    "candidate": "raw logit + two quality coordinates + both raw/quality interactions + intercept",
+    "constraint": "nonnegative raw-logit slope at all four quality-box corners",
+    "ridge": 0.001,
+    "reference_prior": 0.5,
+    "selection": "one prespecified candidate; quality-only fit is a nuisance diagnostic",
+    "deployment_eligible": false
+  },
+  "manifest_sha256": "ff49bcf9a27205f407f6dcea324256b70a2f157e2c41601addadd5bf7bf5c242",
+  "feature_receipt_sha256": "010a471a959eb8fa1848c808ae6762cbaceaf132027a37953aad0ff2b8481a11",
+  "primary_for_fresh_confirmation": null,
+  "development_gates": {
+    "overall_brier_gain": true,
+    "overall_log_loss_gain": true,
+    "brier_interval_below_zero": true,
+    "strong_condition_proper_scores": false,
+    "joint_voice_panel_brier_improves": true,
+    "no_material_false_call_increase": false,
+    "clean_correct_call_retention": true,
+    "strong_condition_usefulness": false,
+    "no_new_execution_failure": true,
+    "same_assessed_inputs": true
+  },
+  "deployment_eligible": false,
+  "execution_status": {
+    "ok": 690,
+    "not_applicable": 30
+  },
+  "groups": {
+    "all": {
+      "original": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "ai": 298,
+          "inconclusive": 80,
+          "original": 342
+        },
+        "false_ai": 3,
+        "false_original": 27,
+        "correct_ai": 295,
+        "correct_original": 315,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.05796038852125625,
+        "log_loss": 0.2011177799913324,
+        "auc": 0.9846467303071629
+      },
+      "quality": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "ai": 297,
+          "inconclusive": 129,
+          "original": 294
+        },
+        "false_ai": 3,
+        "false_original": 9,
+        "correct_ai": 294,
+        "correct_original": 285,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.052092432894687145,
+        "log_loss": 0.17613945979127238,
+        "auc": 0.9844324306773167
+      },
+      "quality_only": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "inconclusive": 720
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.25227042621813195,
+        "log_loss": 0.6977030310496486,
+        "auc": 0.46736070524059947
+      }
+    },
+    "clean": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 57,
+          "original": 58,
+          "inconclusive": 5
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 57,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.004167483671179854,
+        "log_loss": 0.052462563529477785,
+        "auc": 1.0
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 57,
+          "original": 58,
+          "inconclusive": 5
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 57,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.0006039980142520495,
+        "log_loss": 0.01865726099305505,
+        "auc": 1.0
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.24907917763745513,
+        "log_loss": 0.6912962636620565,
+        "auc": 0.5586811857229277
+      }
+    },
+    "noise_0": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 25,
+          "original": 58,
+          "ai": 37
+        },
+        "false_ai": 1,
+        "false_original": 12,
+        "correct_ai": 36,
+        "correct_original": 46,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.1370205369421031,
+        "log_loss": 0.4125018092745158,
+        "auc": 0.9065335753176045
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 54,
+          "ai": 37,
+          "original": 29
+        },
+        "false_ai": 1,
+        "false_original": 2,
+        "correct_ai": 36,
+        "correct_original": 27,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.1202873635400818,
+        "log_loss": 0.3645305365159073,
+        "auc": 0.912885662431942
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.2562436016530642,
+        "log_loss": 0.7056697117307662,
+        "auc": 0.3729582577132488
+      }
+    },
+    "noise_5": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 43,
+          "original": 62,
+          "inconclusive": 15
+        },
+        "false_ai": 0,
+        "false_original": 9,
+        "correct_ai": 43,
+        "correct_original": 53,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.09840321464260157,
+        "log_loss": 0.3030180469267803,
+        "auc": 0.9652147610405324
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 43,
+          "original": 42,
+          "inconclusive": 35
+        },
+        "false_ai": 0,
+        "false_original": 3,
+        "correct_ai": 43,
+        "correct_original": 39,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.08660618404608707,
+        "log_loss": 0.2686470535488026,
+        "auc": 0.9567453115547491
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.2553782426459199,
+        "log_loss": 0.7039351332844428,
+        "auc": 0.3895946763460376
+      }
+    },
+    "noise_15": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 53,
+          "original": 59,
+          "inconclusive": 8
+        },
+        "false_ai": 0,
+        "false_original": 4,
+        "correct_ai": 53,
+        "correct_original": 55,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.036865105593350614,
+        "log_loss": 0.13937170729154952,
+        "auc": 0.9963702359346642
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 53,
+          "original": 54,
+          "inconclusive": 13
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 53,
+        "correct_original": 54,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.032173640287868906,
+        "log_loss": 0.11666280647642646,
+        "auc": 0.9960677555958862
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.25353578220012685,
+        "log_loss": 0.7002457564302484,
+        "auc": 0.4546279491833032
+      }
+    },
+    "music_5": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 49,
+          "inconclusive": 17
+        },
+        "false_ai": 2,
+        "false_original": 2,
+        "correct_ai": 52,
+        "correct_original": 47,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.05395792077097421,
+        "log_loss": 0.2073387364249598,
+        "auc": 0.9839685420447671
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 51,
+          "inconclusive": 15
+        },
+        "false_ai": 2,
+        "false_original": 2,
+        "correct_ai": 52,
+        "correct_original": 49,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.055451703103207836,
+        "log_loss": 0.20837268905628503,
+        "auc": 0.9739866908650938
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.2491940787178515,
+        "log_loss": 0.6915341951418733,
+        "auc": 0.5623109497882641
+      }
+    },
+    "music_15": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 56,
+          "inconclusive": 10
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 54,
+        "correct_original": 56,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.017512695467914608,
+        "log_loss": 0.09295028883609405,
+        "auc": 0.999697519661222
+      },
+      "quality": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 7,
+          "original": 60,
+          "ai": 53
+        },
+        "false_ai": 0,
+        "false_original": 2,
+        "correct_ai": 53,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.017712782753750086,
+        "log_loss": 0.08043337814397616,
+        "auc": 0.998790078644888
+      },
+      "quality_only": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 120
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.24843198431406638,
+        "log_loss": 0.6900103150020044,
+        "auc": 0.6088929219600724
+      }
+    },
+    "joint_vctk": {
+      "original": {
+        "planned_inputs": 480,
+        "originals": 80,
+        "connected_groups": 20,
+        "assessed_inputs": 454,
+        "unassessed_inputs": 26,
+        "decisions": {
+          "ai": 296,
+          "inconclusive": 64,
+          "original": 120
+        },
+        "false_ai": 1,
+        "false_original": 27,
+        "correct_ai": 295,
+        "correct_original": 93,
+        "real_inputs": 120,
+        "ai_inputs": 360,
+        "brier": 0.06387606270107136,
+        "log_loss": 0.22137823662369888,
+        "auc": 0.9747907512031805
+      },
+      "quality": {
+        "planned_inputs": 480,
+        "originals": 80,
+        "connected_groups": 20,
+        "assessed_inputs": 454,
+        "unassessed_inputs": 26,
+        "decisions": {
+          "ai": 295,
+          "inconclusive": 90,
+          "original": 95
+        },
+        "false_ai": 1,
+        "false_original": 9,
+        "correct_ai": 294,
+        "correct_original": 86,
+        "real_inputs": 120,
+        "ai_inputs": 360,
+        "brier": 0.05907726302095571,
+        "log_loss": 0.19512403099257317,
+        "auc": 0.9773592801841389
+      },
+      "quality_only": {
+        "planned_inputs": 480,
+        "originals": 80,
+        "connected_groups": 20,
+        "assessed_inputs": 454,
+        "unassessed_inputs": 26,
+        "decisions": {
+          "inconclusive": 480
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "real_inputs": 120,
+        "ai_inputs": 360,
+        "brier": 0.25356666804643874,
+        "log_loss": 0.7002984689045912,
+        "auc": 0.4340500104624391
+      }
+    }
+  },
+  "paired": {
+    "all": {
+      "common_inputs": 690,
+      "brier_difference": -0.005867955626569092,
+      "log_loss_difference": -0.02497832020006001,
+      "brier_difference_ci95": [
+        -0.011548947788617982,
+        -9.818934952047481e-05
+      ],
+      "log_loss_difference_ci95": [
+        -0.041178198815574406,
+        -0.00891825157897558
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "clean": {
+      "common_inputs": 115,
+      "brier_difference": -0.0035634856569278046,
+      "log_loss_difference": -0.033805302536422735,
+      "brier_difference_ci95": [
+        -0.0038502732882309794,
+        -0.003230496045615038
+      ],
+      "log_loss_difference_ci95": [
+        -0.036583398595262835,
+        -0.030907736437081407
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "noise_0": {
+      "common_inputs": 115,
+      "brier_difference": -0.016733173402021302,
+      "log_loss_difference": -0.04797127275860852,
+      "brier_difference_ci95": [
+        -0.036235268042683066,
+        0.0030184249261803082
+      ],
+      "log_loss_difference_ci95": [
+        -0.10178564424053767,
+        0.004753136803492125
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "noise_5": {
+      "common_inputs": 115,
+      "brier_difference": -0.011797030596514524,
+      "log_loss_difference": -0.03437099337797776,
+      "brier_difference_ci95": [
+        -0.025405340724855,
+        0.0011158007597349162
+      ],
+      "log_loss_difference_ci95": [
+        -0.07431034624216527,
+        0.0023025999379367337
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "noise_15": {
+      "common_inputs": 115,
+      "brier_difference": -0.004691465305481706,
+      "log_loss_difference": -0.022708900815123074,
+      "brier_difference_ci95": [
+        -0.010023813566637082,
+        0.0007178227401559721
+      ],
+      "log_loss_difference_ci95": [
+        -0.03809602085331126,
+        -0.006903383575465174
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "music_5": {
+      "common_inputs": 115,
+      "brier_difference": 0.0014937823322336188,
+      "log_loss_difference": 0.0010339526313252207,
+      "brier_difference_ci95": [
+        -0.001493484155008742,
+        0.005174412230161179
+      ],
+      "log_loss_difference_ci95": [
+        -0.011520705234949757,
+        0.01671297678911065
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "music_15": {
+      "common_inputs": 115,
+      "brier_difference": 0.00020008728583547838,
+      "log_loss_difference": -0.012516910692117904,
+      "brier_difference_ci95": [
+        -0.003390936911646412,
+        0.004750094917992418
+      ],
+      "log_loss_difference_ci95": [
+        -0.023874811879850424,
+        0.0023606331233600305
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    },
+    "joint_vctk": {
+      "common_inputs": 454,
+      "brier_difference": -0.004798799680115656,
+      "log_loss_difference": -0.026254205631125734,
+      "brier_difference_ci95": [
+        -0.011106850808145854,
+        0.0019512178233914222
+      ],
+      "log_loss_difference_ci95": [
+        -0.04307789068185233,
+        -0.007800073867553171
+      ],
+      "bootstrap_defined": 2000,
+      "bootstrap_requested": 2000,
+      "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+    }
+  },
+  "partitions": {
+    "generator": {
+      "NaturalSpeech2": {
+        "original": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 118,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "ai": 109,
+            "original": 7,
+            "inconclusive": 4
+          },
+          "false_ai": 0,
+          "false_original": 7,
+          "correct_ai": 109,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 118,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "ai": 109,
+            "inconclusive": 10,
+            "original": 1
+          },
+          "false_ai": 0,
+          "false_original": 1,
+          "correct_ai": 109,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality_only": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 118,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "inconclusive": 120
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        }
+      },
+      "PflowTTS": {
+        "original": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 108,
+          "unassessed_inputs": 12,
+          "decisions": {
+            "inconclusive": 28,
+            "ai": 82,
+            "original": 10
+          },
+          "false_ai": 0,
+          "false_original": 10,
+          "correct_ai": 82,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 108,
+          "unassessed_inputs": 12,
+          "decisions": {
+            "inconclusive": 36,
+            "ai": 82,
+            "original": 2
+          },
+          "false_ai": 0,
+          "false_original": 2,
+          "correct_ai": 82,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality_only": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 108,
+          "unassessed_inputs": 12,
+          "decisions": {
+            "inconclusive": 120
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        }
+      },
+      "StyleTTS2": {
+        "original": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 120,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "ai": 104,
+            "inconclusive": 6,
+            "original": 10
+          },
+          "false_ai": 0,
+          "false_original": 10,
+          "correct_ai": 104,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 120,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "ai": 103,
+            "inconclusive": 11,
+            "original": 6
+          },
+          "false_ai": 0,
+          "false_original": 6,
+          "correct_ai": 103,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality_only": {
+          "planned_inputs": 120,
+          "originals": 20,
+          "connected_groups": 20,
+          "assessed_inputs": 120,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 120
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 0,
+          "ai_inputs": 120,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        }
+      },
+      "human": {
+        "original": {
+          "planned_inputs": 360,
+          "originals": 60,
+          "connected_groups": 60,
+          "assessed_inputs": 344,
+          "unassessed_inputs": 16,
+          "decisions": {
+            "original": 315,
+            "inconclusive": 42,
+            "ai": 3
+          },
+          "false_ai": 3,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 315,
+          "real_inputs": 360,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality": {
+          "planned_inputs": 360,
+          "originals": 60,
+          "connected_groups": 60,
+          "assessed_inputs": 344,
+          "unassessed_inputs": 16,
+          "decisions": {
+            "original": 285,
+            "inconclusive": 72,
+            "ai": 3
+          },
+          "false_ai": 3,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 285,
+          "real_inputs": 360,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality_only": {
+          "planned_inputs": 360,
+          "originals": 60,
+          "connected_groups": 60,
+          "assessed_inputs": 344,
+          "unassessed_inputs": 16,
+          "decisions": {
+            "inconclusive": 360
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 360,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        }
+      }
+    },
+    "dataset": {
+      "isjwdu/DFADD": {
+        "original": {
+          "planned_inputs": 480,
+          "originals": 80,
+          "connected_groups": 20,
+          "assessed_inputs": 454,
+          "unassessed_inputs": 26,
+          "decisions": {
+            "ai": 296,
+            "inconclusive": 64,
+            "original": 120
+          },
+          "false_ai": 1,
+          "false_original": 27,
+          "correct_ai": 295,
+          "correct_original": 93,
+          "real_inputs": 120,
+          "ai_inputs": 360,
+          "brier": 0.06387606270107136,
+          "log_loss": 0.22137823662369888,
+          "auc": 0.9747907512031805
+        },
+        "quality": {
+          "planned_inputs": 480,
+          "originals": 80,
+          "connected_groups": 20,
+          "assessed_inputs": 454,
+          "unassessed_inputs": 26,
+          "decisions": {
+            "ai": 295,
+            "inconclusive": 90,
+            "original": 95
+          },
+          "false_ai": 1,
+          "false_original": 9,
+          "correct_ai": 294,
+          "correct_original": 86,
+          "real_inputs": 120,
+          "ai_inputs": 360,
+          "brier": 0.05907726302095571,
+          "log_loss": 0.19512403099257317,
+          "auc": 0.9773592801841389
+        },
+        "quality_only": {
+          "planned_inputs": 480,
+          "originals": 80,
+          "connected_groups": 20,
+          "assessed_inputs": 454,
+          "unassessed_inputs": 26,
+          "decisions": {
+            "inconclusive": 480
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 120,
+          "ai_inputs": 360,
+          "brier": 0.25356666804643874,
+          "log_loss": 0.7002984689045912,
+          "auc": 0.4340500104624391
+        }
+      },
+      "openslr/librispeech_asr": {
+        "original": {
+          "planned_inputs": 240,
+          "originals": 40,
+          "connected_groups": 40,
+          "assessed_inputs": 236,
+          "unassessed_inputs": 4,
+          "decisions": {
+            "original": 222,
+            "inconclusive": 16,
+            "ai": 2
+          },
+          "false_ai": 2,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 222,
+          "real_inputs": 240,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality": {
+          "planned_inputs": 240,
+          "originals": 40,
+          "connected_groups": 40,
+          "assessed_inputs": 236,
+          "unassessed_inputs": 4,
+          "decisions": {
+            "original": 199,
+            "inconclusive": 39,
+            "ai": 2
+          },
+          "false_ai": 2,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 199,
+          "real_inputs": 240,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        },
+        "quality_only": {
+          "planned_inputs": 240,
+          "originals": 40,
+          "connected_groups": 40,
+          "assessed_inputs": 236,
+          "unassessed_inputs": 4,
+          "decisions": {
+            "inconclusive": 240
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 240,
+          "ai_inputs": 0,
+          "brier": null,
+          "log_loss": null,
+          "auc": null
+        }
+      }
+    },
+    "background_id": {
+      "None": {
+        "original": {
+          "planned_inputs": 120,
+          "originals": 120,
+          "connected_groups": 60,
+          "assessed_inputs": 115,
+          "unassessed_inputs": 5,
+          "decisions": {
+            "ai": 57,
+            "original": 58,
+            "inconclusive": 5
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 57,
+          "correct_original": 58,
+          "real_inputs": 60,
+          "ai_inputs": 60,
+          "brier": 0.004167483671179854,
+          "log_loss": 0.052462563529477785,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 120,
+          "originals": 120,
+          "connected_groups": 60,
+          "assessed_inputs": 115,
+          "unassessed_inputs": 5,
+          "decisions": {
+            "ai": 57,
+            "original": 58,
+            "inconclusive": 5
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 57,
+          "correct_original": 58,
+          "real_inputs": 60,
+          "ai_inputs": 60,
+          "brier": 0.0006039980142520495,
+          "log_loss": 0.01865726099305505,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 120,
+          "originals": 120,
+          "connected_groups": 60,
+          "assessed_inputs": 115,
+          "unassessed_inputs": 5,
+          "decisions": {
+            "inconclusive": 120
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 60,
+          "ai_inputs": 60,
+          "brier": 0.24907917763745513,
+          "log_loss": 0.6912962636620565,
+          "auc": 0.5586811857229277
+        }
+      },
+      "music/rfm/music-rfm-0088.wav": {
+        "original": {
+          "planned_inputs": 58,
+          "originals": 29,
+          "connected_groups": 21,
+          "assessed_inputs": 56,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "inconclusive": 3,
+            "ai": 29,
+            "original": 26
+          },
+          "false_ai": 0,
+          "false_original": 1,
+          "correct_ai": 29,
+          "correct_original": 25,
+          "real_inputs": 26,
+          "ai_inputs": 32,
+          "brier": 0.018401882286366883,
+          "log_loss": 0.09771779586808493,
+          "auc": 0.9987179487179487
+        },
+        "quality": {
+          "planned_inputs": 58,
+          "originals": 29,
+          "connected_groups": 21,
+          "assessed_inputs": 56,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "inconclusive": 2,
+            "ai": 29,
+            "original": 27
+          },
+          "false_ai": 0,
+          "false_original": 1,
+          "correct_ai": 29,
+          "correct_original": 26,
+          "real_inputs": 26,
+          "ai_inputs": 32,
+          "brier": 0.016445739798908312,
+          "log_loss": 0.08229480699953065,
+          "auc": 0.9935897435897436
+        },
+        "quality_only": {
+          "planned_inputs": 58,
+          "originals": 29,
+          "connected_groups": 21,
+          "assessed_inputs": 56,
+          "unassessed_inputs": 2,
+          "decisions": {
+            "inconclusive": 58
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 26,
+          "ai_inputs": 32,
+          "brier": 0.24973613809595865,
+          "log_loss": 0.6926211178646215,
+          "auc": 0.5282051282051282
+        }
+      },
+      "music/rfm/music-rfm-0116.wav": {
+        "original": {
+          "planned_inputs": 70,
+          "originals": 35,
+          "connected_groups": 27,
+          "assessed_inputs": 69,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "original": 36,
+            "ai": 25,
+            "inconclusive": 9
+          },
+          "false_ai": 0,
+          "false_original": 1,
+          "correct_ai": 25,
+          "correct_original": 35,
+          "real_inputs": 38,
+          "ai_inputs": 32,
+          "brier": 0.06222407552547532,
+          "log_loss": 0.21000215580198592,
+          "auc": 0.9983552631578947
+        },
+        "quality": {
+          "planned_inputs": 70,
+          "originals": 35,
+          "connected_groups": 27,
+          "assessed_inputs": 69,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "original": 40,
+            "ai": 25,
+            "inconclusive": 5
+          },
+          "false_ai": 0,
+          "false_original": 3,
+          "correct_ai": 25,
+          "correct_original": 37,
+          "real_inputs": 38,
+          "ai_inputs": 32,
+          "brier": 0.0696117851705077,
+          "log_loss": 0.2257728739419508,
+          "auc": 0.9860197368421053
+        },
+        "quality_only": {
+          "planned_inputs": 70,
+          "originals": 35,
+          "connected_groups": 27,
+          "assessed_inputs": 69,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "inconclusive": 70
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 38,
+          "ai_inputs": 32,
+          "brier": 0.2498622894167252,
+          "log_loss": 0.6928719432114878,
+          "auc": 0.5328947368421051
+        }
+      },
+      "music/rfm/music-rfm-0122.wav": {
+        "original": {
+          "planned_inputs": 62,
+          "originals": 31,
+          "connected_groups": 25,
+          "assessed_inputs": 61,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "ai": 34,
+            "inconclusive": 5,
+            "original": 23
+          },
+          "false_ai": 2,
+          "false_original": 0,
+          "correct_ai": 32,
+          "correct_original": 23,
+          "real_inputs": 28,
+          "ai_inputs": 34,
+          "brier": 0.045880936629793465,
+          "log_loss": 0.19594154668047675,
+          "auc": 0.990546218487395
+        },
+        "quality": {
+          "planned_inputs": 62,
+          "originals": 31,
+          "connected_groups": 25,
+          "assessed_inputs": 61,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "ai": 34,
+            "original": 24,
+            "inconclusive": 4
+          },
+          "false_ai": 2,
+          "false_original": 0,
+          "correct_ai": 32,
+          "correct_original": 24,
+          "real_inputs": 28,
+          "ai_inputs": 34,
+          "brier": 0.04187154894329441,
+          "log_loss": 0.1690545265036102,
+          "auc": 0.9947478991596639
+        },
+        "quality_only": {
+          "planned_inputs": 62,
+          "originals": 31,
+          "connected_groups": 25,
+          "assessed_inputs": 61,
+          "unassessed_inputs": 1,
+          "decisions": {
+            "inconclusive": 62
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 28,
+          "ai_inputs": 34,
+          "brier": 0.2504585461654961,
+          "log_loss": 0.6940650399449225,
+          "auc": 0.48739495798319327
+        }
+      },
+      "music/rfm/music-rfm-0129.wav": {
+        "original": {
+          "planned_inputs": 50,
+          "originals": 25,
+          "connected_groups": 20,
+          "assessed_inputs": 44,
+          "unassessed_inputs": 6,
+          "decisions": {
+            "ai": 20,
+            "inconclusive": 10,
+            "original": 20
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 20,
+          "correct_original": 20,
+          "real_inputs": 28,
+          "ai_inputs": 22,
+          "brier": 0.01031021707510007,
+          "log_loss": 0.0836252770702598,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 50,
+          "originals": 25,
+          "connected_groups": 20,
+          "assessed_inputs": 44,
+          "unassessed_inputs": 6,
+          "decisions": {
+            "ai": 19,
+            "inconclusive": 11,
+            "original": 20
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 19,
+          "correct_original": 20,
+          "real_inputs": 28,
+          "ai_inputs": 22,
+          "brier": 0.01170001244001554,
+          "log_loss": 0.0859993876187126,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 50,
+          "originals": 25,
+          "connected_groups": 20,
+          "assessed_inputs": 44,
+          "unassessed_inputs": 6,
+          "decisions": {
+            "inconclusive": 50
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 28,
+          "ai_inputs": 22,
+          "brier": 0.24547101138282304,
+          "log_loss": 0.6840819743093496,
+          "auc": 0.6583333333333332
+        }
+      },
+      "noise/free-sound/noise-free-sound-0020.wav": {
+        "original": {
+          "planned_inputs": 54,
+          "originals": 18,
+          "connected_groups": 14,
+          "assessed_inputs": 54,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "original": 44,
+            "ai": 7,
+            "inconclusive": 3
+          },
+          "false_ai": 0,
+          "false_original": 20,
+          "correct_ai": 7,
+          "correct_original": 24,
+          "real_inputs": 24,
+          "ai_inputs": 30,
+          "brier": 0.26866889702005203,
+          "log_loss": 0.7501342897908839,
+          "auc": 0.8847222222222222
+        },
+        "quality": {
+          "planned_inputs": 54,
+          "originals": 18,
+          "connected_groups": 14,
+          "assessed_inputs": 54,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 39,
+            "original": 8,
+            "ai": 7
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 7,
+          "correct_original": 8,
+          "real_inputs": 24,
+          "ai_inputs": 30,
+          "brier": 0.20041327669714892,
+          "log_loss": 0.5656435312615146,
+          "auc": 0.7749999999999999
+        },
+        "quality_only": {
+          "planned_inputs": 54,
+          "originals": 18,
+          "connected_groups": 14,
+          "assessed_inputs": 54,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 54
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 24,
+          "ai_inputs": 30,
+          "brier": 0.2587306647098925,
+          "log_loss": 0.7106809132497174,
+          "auc": 0.31805555555555554
+        }
+      },
+      "noise/free-sound/noise-free-sound-0021.wav": {
+        "original": {
+          "planned_inputs": 48,
+          "originals": 16,
+          "connected_groups": 12,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "ai": 24,
+            "inconclusive": 8,
+            "original": 16
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 24,
+          "correct_original": 16,
+          "real_inputs": 21,
+          "ai_inputs": 27,
+          "brier": 0.020805700272463427,
+          "log_loss": 0.11122505437732744,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 48,
+          "originals": 16,
+          "connected_groups": 12,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "ai": 24,
+            "inconclusive": 14,
+            "original": 10
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 24,
+          "correct_original": 10,
+          "real_inputs": 21,
+          "ai_inputs": 27,
+          "brier": 0.04447035220059611,
+          "log_loss": 0.1738993084045527,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 48,
+          "originals": 16,
+          "connected_groups": 12,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 48
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 21,
+          "ai_inputs": 27,
+          "brier": 0.25387747017464635,
+          "log_loss": 0.7009283767929622,
+          "auc": 0.3630952380952383
+        }
+      },
+      "noise/free-sound/noise-free-sound-0056.wav": {
+        "original": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 13,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 3,
+            "ai": 21,
+            "original": 27
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 21,
+          "correct_original": 27,
+          "real_inputs": 27,
+          "ai_inputs": 24,
+          "brier": 0.005339680247174651,
+          "log_loss": 0.058565214011904176,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 13,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 3,
+            "ai": 21,
+            "original": 27
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 21,
+          "correct_original": 27,
+          "real_inputs": 27,
+          "ai_inputs": 24,
+          "brier": 0.002352183490786115,
+          "log_loss": 0.036052456296269464,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 13,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 51
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 27,
+          "ai_inputs": 24,
+          "brier": 0.24822793676697708,
+          "log_loss": 0.6895981851824267,
+          "auc": 0.5414462081128746
+        }
+      },
+      "noise/free-sound/noise-free-sound-0064.wav": {
+        "original": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 14,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "original": 22,
+            "ai": 15,
+            "inconclusive": 14
+          },
+          "false_ai": 1,
+          "false_original": 1,
+          "correct_ai": 14,
+          "correct_original": 21,
+          "real_inputs": 33,
+          "ai_inputs": 18,
+          "brier": 0.11074501408657011,
+          "log_loss": 0.33380948629925,
+          "auc": 0.9462962962962963
+        },
+        "quality": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 14,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 19,
+            "original": 17,
+            "ai": 15
+          },
+          "false_ai": 1,
+          "false_original": 0,
+          "correct_ai": 14,
+          "correct_original": 17,
+          "real_inputs": 33,
+          "ai_inputs": 18,
+          "brier": 0.11124188705938948,
+          "log_loss": 0.3357954057844884,
+          "auc": 0.9351851851851852
+        },
+        "quality_only": {
+          "planned_inputs": 51,
+          "originals": 17,
+          "connected_groups": 14,
+          "assessed_inputs": 48,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 51
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 33,
+          "ai_inputs": 18,
+          "brier": 0.24986460548571982,
+          "log_loss": 0.6928759974752761,
+          "auc": 0.5537037037037038
+        }
+      },
+      "noise/free-sound/noise-free-sound-0066.wav": {
+        "original": {
+          "planned_inputs": 45,
+          "originals": 15,
+          "connected_groups": 15,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "ai": 19,
+            "original": 23,
+            "inconclusive": 3
+          },
+          "false_ai": 0,
+          "false_original": 4,
+          "correct_ai": 19,
+          "correct_original": 19,
+          "real_inputs": 21,
+          "ai_inputs": 24,
+          "brier": 0.0739777376715097,
+          "log_loss": 0.24220718509613126,
+          "auc": 0.9761904761904762
+        },
+        "quality": {
+          "planned_inputs": 45,
+          "originals": 15,
+          "connected_groups": 15,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "ai": 19,
+            "original": 22,
+            "inconclusive": 4
+          },
+          "false_ai": 0,
+          "false_original": 4,
+          "correct_ai": 19,
+          "correct_original": 18,
+          "real_inputs": 21,
+          "ai_inputs": 24,
+          "brier": 0.07936919692409852,
+          "log_loss": 0.2512802247432877,
+          "auc": 0.9623015873015873
+        },
+        "quality_only": {
+          "planned_inputs": 45,
+          "originals": 15,
+          "connected_groups": 15,
+          "assessed_inputs": 45,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 45
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 21,
+          "ai_inputs": 24,
+          "brier": 0.25327852188920225,
+          "log_loss": 0.6997154507191872,
+          "auc": 0.4265873015873018
+        }
+      },
+      "noise/free-sound/noise-free-sound-0078.wav": {
+        "original": {
+          "planned_inputs": 39,
+          "originals": 13,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "ai": 12,
+            "original": 24,
+            "inconclusive": 3
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 12,
+          "correct_original": 24,
+          "real_inputs": 27,
+          "ai_inputs": 12,
+          "brier": 0.005421144627566614,
+          "log_loss": 0.057877160118939036,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 39,
+          "originals": 13,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "ai": 12,
+            "original": 24,
+            "inconclusive": 3
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 12,
+          "correct_original": 24,
+          "real_inputs": 27,
+          "ai_inputs": 12,
+          "brier": 0.0005833939298944704,
+          "log_loss": 0.018448225612035525,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 39,
+          "originals": 13,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 39
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 27,
+          "ai_inputs": 12,
+          "brier": 0.2676742444785962,
+          "log_loss": 0.7285796164973036,
+          "auc": 0.12499999999999993
+        }
+      },
+      "noise/free-sound/noise-free-sound-0080.wav": {
+        "original": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 6,
+            "ai": 19,
+            "original": 11
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 19,
+          "correct_original": 11,
+          "real_inputs": 12,
+          "ai_inputs": 24,
+          "brier": 0.06849809356389797,
+          "log_loss": 0.22775348554827415,
+          "auc": 0.9930555555555556
+        },
+        "quality": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 7,
+            "original": 10,
+            "ai": 19
+          },
+          "false_ai": 0,
+          "false_original": 1,
+          "correct_ai": 19,
+          "correct_original": 9,
+          "real_inputs": 12,
+          "ai_inputs": 24,
+          "brier": 0.0752126418995675,
+          "log_loss": 0.24384844857929866,
+          "auc": 0.9652777777777778
+        },
+        "quality_only": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 10,
+          "assessed_inputs": 36,
+          "unassessed_inputs": 0,
+          "decisions": {
+            "inconclusive": 36
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 12,
+          "ai_inputs": 24,
+          "brier": 0.25043641556329954,
+          "log_loss": 0.6940210227001024,
+          "auc": 0.4722222222222223
+        }
+      },
+      "noise/free-sound/noise-free-sound-0081.wav": {
+        "original": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 12,
+          "assessed_inputs": 33,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 8,
+            "ai": 16,
+            "original": 12
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 16,
+          "correct_original": 12,
+          "real_inputs": 15,
+          "ai_inputs": 21,
+          "brier": 0.05987556703441543,
+          "log_loss": 0.20156716951222498,
+          "auc": 1.0
+        },
+        "quality": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 12,
+          "assessed_inputs": 33,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 13,
+            "ai": 16,
+            "original": 7
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 16,
+          "correct_original": 7,
+          "real_inputs": 15,
+          "ai_inputs": 21,
+          "brier": 0.05461789735092212,
+          "log_loss": 0.20311196255337727,
+          "auc": 1.0
+        },
+        "quality_only": {
+          "planned_inputs": 36,
+          "originals": 12,
+          "connected_groups": 12,
+          "assessed_inputs": 33,
+          "unassessed_inputs": 3,
+          "decisions": {
+            "inconclusive": 36
+          },
+          "false_ai": 0,
+          "false_original": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "real_inputs": 15,
+          "ai_inputs": 21,
+          "brier": 0.25074477801620965,
+          "log_loss": 0.6946538778680462,
+          "auc": 0.49603174603174593
+        }
+      }
+    }
+  },
+  "cv_parameters": [
+    {
+      "fold": 0,
+      "arm": "original",
+      "coefficients": [
+        0.468236596194094,
+        1.0696192874287453
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    },
+    {
+      "fold": 0,
+      "arm": "quality",
+      "coefficients": [
+        0.9677291434801909,
+        1.1044317721365426,
+        1.6221373818265916,
+        -0.5980183955953083,
+        -0.14994085640421315,
+        -0.8440436682736974
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    },
+    {
+      "fold": 0,
+      "arm": "quality_only",
+      "coefficients": [
+        0.10363785599904313,
+        -0.17439781921859035,
+        0.01958063792205955
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    },
+    {
+      "fold": 1,
+      "arm": "original",
+      "coefficients": [
+        0.4758390168337239,
+        1.0216922470993983
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 1,
+      "arm": "quality",
+      "coefficients": [
+        0.8712968820750485,
+        0.90841418879192,
+        1.7810178552219504,
+        -0.47725021788582583,
+        -0.11524319933580228,
+        -0.8087240100954115
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 1,
+      "arm": "quality_only",
+      "coefficients": [
+        -0.7940477907137057,
+        -0.10364498920757668,
+        0.5804144895083869
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 2,
+      "arm": "original",
+      "coefficients": [
+        0.4647448663327265,
+        1.038151701750246
+      ],
+      "fit_originals_by_class": [
+        46,
+        48
+      ]
+    },
+    {
+      "fold": 2,
+      "arm": "quality",
+      "coefficients": [
+        0.9215555085370376,
+        1.0904878145195125,
+        1.321860586872494,
+        -0.5499096916486084,
+        -0.1379579084528117,
+        -0.7083722316509307
+      ],
+      "fit_originals_by_class": [
+        46,
+        48
+      ]
+    },
+    {
+      "fold": 2,
+      "arm": "quality_only",
+      "coefficients": [
+        -0.6507330297314504,
+        -0.09696446992103233,
+        0.4839018700754477
+      ],
+      "fit_originals_by_class": [
+        46,
+        48
+      ]
+    },
+    {
+      "fold": 3,
+      "arm": "original",
+      "coefficients": [
+        0.4839012655014548,
+        1.2221759426063432
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 3,
+      "arm": "quality",
+      "coefficients": [
+        0.9752752661236376,
+        1.1241790063292803,
+        1.250458817754346,
+        -0.5572674023505824,
+        -0.19236029577347177,
+        -0.5111375089030078
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 3,
+      "arm": "quality_only",
+      "coefficients": [
+        -0.5576403563592613,
+        0.3537292149450936,
+        0.18831955162162137
+      ],
+      "fit_originals_by_class": [
+        46,
+        47
+      ]
+    },
+    {
+      "fold": 4,
+      "arm": "original",
+      "coefficients": [
+        0.47233747422980454,
+        0.8441138281376594
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    },
+    {
+      "fold": 4,
+      "arm": "quality",
+      "coefficients": [
+        0.9731123926115972,
+        1.5019956279022322,
+        1.0096080479931455,
+        -0.6691967491553402,
+        -0.05624275534029523,
+        -0.9499456502758565
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    },
+    {
+      "fold": 4,
+      "arm": "quality_only",
+      "coefficients": [
+        -0.19704533436515892,
+        -0.39229478664478823,
+        0.33368821698172113
+      ],
+      "fit_originals_by_class": [
+        47,
+        47
+      ]
+    }
+  ],
+  "operational_reference": {
+    "all": {
+      "planned_inputs": 720,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 690,
+      "unassessed_inputs": 30,
+      "decisions": {
+        "ai": 267,
+        "inconclusive": 219,
+        "original": 234
+      },
+      "false_ai": 1,
+      "false_original": 0,
+      "correct_ai": 266,
+      "correct_original": 234,
+      "real_inputs": 360,
+      "ai_inputs": 360,
+      "brier": 0.06275137446244389,
+      "log_loss": 0.223497696945617,
+      "auc": 0.9878336255601015
+    },
+    "clean": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 57,
+        "original": 57,
+        "inconclusive": 6
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 57,
+      "correct_original": 57,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.003031416196395392,
+      "log_loss": 0.055550349539952484,
+      "auc": 1.0
+    },
+    "noise_0": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 68,
+        "ai": 30,
+        "original": 22
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 30,
+      "correct_original": 22,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.15165553072529353,
+      "log_loss": 0.4651770349739041,
+      "auc": 0.9222625529340593
+    },
+    "noise_5": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 37,
+        "inconclusive": 51,
+        "original": 32
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 37,
+      "correct_original": 32,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.10684377667074588,
+      "log_loss": 0.3449786892654614,
+      "auc": 0.9742891712038718
+    },
+    "noise_15": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 50,
+        "original": 51,
+        "inconclusive": 19
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 50,
+      "correct_original": 51,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.037832060827762595,
+      "log_loss": 0.1538337010567105,
+      "auc": 0.9963702359346642
+    },
+    "music_5": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 55,
+        "original": 25,
+        "ai": 40
+      },
+      "false_ai": 1,
+      "false_original": 0,
+      "correct_ai": 39,
+      "correct_original": 25,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.05650802384529076,
+      "log_loss": 0.21385601220470862,
+      "auc": 0.9863883847549909
+    },
+    "music_15": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 20,
+        "original": 47,
+        "ai": 53
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 53,
+      "correct_original": 47,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.020627719710293972,
+      "log_loss": 0.10772887232118453,
+      "auc": 1.0
+    },
+    "joint_vctk": {
+      "planned_inputs": 480,
+      "originals": 80,
+      "connected_groups": 20,
+      "assessed_inputs": 454,
+      "unassessed_inputs": 26,
+      "decisions": {
+        "ai": 267,
+        "inconclusive": 157,
+        "original": 56
+      },
+      "false_ai": 1,
+      "false_original": 0,
+      "correct_ai": 266,
+      "correct_original": 56,
+      "real_inputs": 120,
+      "ai_inputs": 360,
+      "brier": 0.06591914602589957,
+      "log_loss": 0.2350591728107788,
+      "auc": 0.978415986608077
+    }
+  },
+  "limitations": [
+    "All prior test responses are consumed.",
+    "Unpublished DFADD transcript mapping; prompt-index grouping is conservative, not proof of text independence.",
+    "Unverified pretrained overlap.",
+    "Intervals conditional on the reused consumed background pool.",
+    "Authentic source and generated-family channel confounding remain.",
+    "Waveform quality features can encode source/channel differences; inspect the joint VCTK panel and quality-only nuisance diagnostic.",
+    "This experiment uses no new checkpoint and does not alter the existing voice calibration.",
+    "No outside independent review; CV probabilities are not service calibrations."
+  ]
+}

@@ -119,3 +119,19 @@ integration remains unfinished.
   calibration are unchanged. Fresh multi-generator source metadata and rights
   were checked, but no fresh audio confirmation was scored. See the
   [complete result and limits](audio-noise-view-v4-evaluation.md).
+- A distinct original-waveform quality calibration completed the same 720
+  consumed inputs. It also failed the fixed strong-noise usefulness and
+  condition-specific error gates, despite better pooled probability scoring.
+  Rejected without changing serving behavior or scoring fresh confirmation
+  audio. [V5 result](audio-quality-v5-evaluation.md).
+- A frozen-backbone residual-head comparison completed all 720 inputs with
+  unchanged raw-response replay and zero extraction failures. It improved
+  common-assessed Brier from 0.057960 to 0.038711 but failed the fixed strong-noise
+  usefulness gate. Rejected without scoring fresh confirmation or changing the
+  serving calculation. [V6 result](audio-residual-v6-evaluation.md).
+- Expanded the public source catalogue to audio: 120 original references,
+  12 background recordings and 720 exact recipes/connected-fold assignments.
+  Added an offline reconstruction helper and locally reproduced all 720 float
+  payloads, WAV files and production PCM hashes. Original WAV header timestamps
+  are explicit metadata; the first timestamp-mismatch attempt remains recorded
+  locally. This enables outside replication; no outside review has occurred.

@@ -66,8 +66,15 @@ predetermined native cache audit; failures remain visible rather than dropped.
 
 ## Remaining work
 
-Publish this prospective freeze before new neural forwards or fitting. Complete
-native verification and all consumed extraction, fit only on fitting roles,
+The prospective freeze was published and remotely verified at commit
+`4e1c59cd4ce28a58c2c9e95f65fc7aa2def6ddc3` before new neural forwards or fitting.
+All nineteen predetermined native cache replays then matched exactly, including
+the unassessed case. The [complete native audit](evaluation-panels/audio-v9-native-cache-audit.json)
+joins its IDs to the public source capsule and preserves the original JSONL
+digest. Exact-input reuse is permitted and consumed extraction is underway.
+No corrected fitting, fresh scoring or replacement decision has occurred.
+
+Complete all consumed extraction, fit only on fitting roles,
 calibrate only on calibration roles, then compare every development input.
 Complete numerical/native audits before considering a separately frozen fresh
 confirmation. Preserve serving defaults, rollback, payment and authentication.

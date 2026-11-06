@@ -113,6 +113,27 @@ lip-sync offsets, or source positions. Include a separate localization audit:
 
 ## Model-free checks
 
+For a first independent contribution, the corrected audio source graph and
+execution freeze can be reviewed with the standard library alone:
+
+```sh
+python3 backend/scripts/review_audio_identity_plan_v9.py \
+  docs/evaluation-panels/audio-v9-identity-plan.json.gz \
+  docs/evaluation-panels/audio-v8-source-plan.json.gz /tmp/new-source-review.json
+python3 backend/scripts/review_audio_identity_execution_v9.py review \
+  docs/evaluation-panels/audio-v9-execution-freeze.json \
+  docs/evaluation-panels/audio-v9-identity-plan.json.gz \
+  docs/evaluation-panels/audio-v8-source-plan.json.gz \
+  /tmp/new-execution-review.json --project .
+```
+
+Use new output paths. Report the commit, your environment, receipt hashes and
+which checks you independently inspected. A successful metadata/code review
+does not establish native inference parity, predictive accuracy or customer
+usability. The [writing source preflight](writing-source-preflight-v2.md) similarly
+distinguishes source-position verification from detector validation and records
+unresolved source terms before reuse.
+
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
 ```

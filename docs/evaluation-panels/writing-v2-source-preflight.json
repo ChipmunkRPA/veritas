@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.writing-source-preflight/2",
+  "passed": true,
+  "source_rows": 362,
+  "prior_mixed_authors": 40,
+  "unused_authors_before_text_checks": 59,
+  "audited_rows": 362,
+  "failed_rows": 0,
+  "unused_author_nonreused_pool": {
+    "rows": 202,
+    "authors": 59,
+    "mixed_rows": 138,
+    "human_only_rows": 53,
+    "generator_rows": {
+      "qwen2.5:7b": 31,
+      "human-only": 53,
+      "llama4:scout": 28,
+      "deepseek-chat": 32,
+      "gpt-5.2": 32,
+      "gemini-3-flash-preview": 26
+    }
+  },
+  "source_terms": "Pinned dataset card says cc-by-sa-4.0 in metadata and gpl-2.0 in prose. Unresolved; do not assign an unambiguous license or publish source text/annotations from this audit.",
+  "detector_terms": "Pinned detector card consistently declares Apache-2.0 and commercial use; no new weights are downloaded or executed here.",
+  "scope": "Provenance/Unicode-offset inventory only. Pool is not selected/frozen confirmation. Near-duplicate, shared-prompt, training-overlap and cross-source checks remain; no accuracy, authorship confidence or outside review is established.",
+  "new_inference_run": false,
+  "fitting_started": false,
+  "deployment_eligible": false,
+  "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+  "previous_manifest_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+  "publisher_cards_sha256": {
+    "aitdna-card.md": "23c9f9af9dde11accd92ec3d94c87f190ceafda209d9749c3995c44a98010cb0",
+    "tropa-card.md": "b511193473ce1507ca578c465561bd8ea06f37df8549d972beaad8b9143350a7"
+  },
+  "audit_code_sha256": "dc53bfd7256a073fb03b916eba361a7f5dbffacebe3c1d29c4cf45e3b119d25b",
+  "complete_private_receipt_sha256": "959e1bc74b3283c3aaab5543bb314a66462e23f1e0f3d5d0356d48beb69966c0"
+}

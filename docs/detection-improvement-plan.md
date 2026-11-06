@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Audited all 362 mixed-writing source records and original extraction positions:
+  zero failures. Forty previously consumed authors are excluded; 59 unused authors
+  supply 138 mixed and 53 declared human-only records before further connected-source
+  selection. Exact pinned publisher cards expose conflicting dataset license
+  declarations; record the ambiguity before new training/redistribution. The
+  installed detector's card consistently permits commercial use. Nine focused
+  tests passed. No inference, calibration, accuracy gain or outside review is
+  claimed. [Source audit and remaining work](writing-source-preflight-v2.md).
+
 - Froze corrected audio v9 execution before new extraction/fitting, retaining
   the unchanged learner and all sixteen gates. The runner binds all 4,248 consumed
   inputs and refuses reserved confirmation. Checkpoint/runtime/feature checks
@@ -73,6 +82,9 @@ integration remains unfinished.
   the 51-file metadata/code review and eight actual-freeze alteration checks
   passed. No model gain, serving change or outside review is claimed.
   [Execution and remaining stages](audio-identity-v9-execution.md).
+  Published the freeze as `4e1c59c` before any new forward; all nineteen native
+  cache replays subsequently matched exactly and permitted exact-input reuse.
+  Consumed extraction is in progress; no corrected fitting or fresh scoring yet.
 
 - The wider audio identity audit superseded v8 before fitting. Checked1054
   originals across all868 earlier source references; no reserved recording,

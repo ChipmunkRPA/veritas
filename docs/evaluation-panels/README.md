@@ -8,6 +8,12 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`writing-v2-source-preflight.json` is an aggregate-only source/Unicode-position
+audit, including pinned publisher-card checksums and unresolved conflicting
+dataset license declarations. It exports no source text, author names, queries,
+per-record span annotations or predictions. Its unused-author inventory is not
+a frozen confirmation panel; see the [source review](../writing-source-preflight-v2.md).
+
 - `iml-vit-v4-plan.json` and `iml-vit-v4-manifest.json`: the 48 original/edit
   pairs in the [IML-ViT comparison](../iml-vit-localization-evaluation.md).
 - `tiled-splice-v5-plan.json` and `tiled-splice-v5-manifest.json`: the next 48
@@ -62,6 +68,9 @@ or a generic dataset link.
   and [immutable protocol](../audio-identity-v9-execution-protocol.md). Actual
   extraction, performance, adoption and outside reviewer participation are
   separate requirements.
+  `audio-v9-native-cache-audit.json` adds all nineteen successful predetermined
+  native replays after prospective publication and before any exact-input reuse.
+  IDs join to the corrected capsule; this is local parity, not detector accuracy.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

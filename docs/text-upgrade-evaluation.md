@@ -18,6 +18,13 @@ group, authorship label, generator and text hash. Text and weights stay in ignor
 | [PhishingSpamDataSet](https://github.com/HarmJ0y/PhishingSpamDataSet/tree/d13e9bb73d03f458e6d5b6cb6c7b0a708ea47e3d) | Legitimate messages paired with AI rewrites by original message number, across 11 generator labels | 240 evaluation only |
 | [AITDNA](https://huggingface.co/datasets/UKPLab/AITDNA/tree/21d77f7d44833507750c0da309295c4147c1bda5), CC BY-SA 4.0 dataset declaration | Human–AI coauthored texts with source span annotations, one per author | 40 evaluation only |
 
+The [6 November source/position audit](writing-source-preflight-v2.md) found that
+the pinned AITDNA card's metadata declaration above conflicts with its prose
+GPL-2.0 declaration. The earlier metadata record does not resolve those terms.
+No new training or source-text/annotation redistribution is authorized by that
+record. The new audit checks all 362 rows and inventories unused authors without
+running a detector or changing the historical results below.
+
 Selection happens before inference. Binary sets use one original and one AI text per
 topic or original message group, with normalized exact-text deduplication within each
 domain. Text length is 50–750 words by whitespace count, and email selection uses a

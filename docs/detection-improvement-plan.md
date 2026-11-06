@@ -153,3 +153,12 @@ integration remains unfinished.
   raw logits and a standard-library window/denominator review tool. This enables
   outside arithmetic review but does not constitute it.
   [V5 result and failure record](mouth-artifact-v5-evaluation.md).
+- Fitted a separate direct mouth-chip head on 16 consumed actors with four
+  different point-selection actors, excluding all eight video-development
+  actors. All 800 training frames and 2,016 video input bindings passed source
+  replay. The head flagged two AI clips at the wrong range and three ordinary
+  controls; it correctly localized 0/16 edits and was rejected under the frozen
+  gates. Published a compact numerical fitting capsule and a CPU refit helper;
+  local coefficients, normalization and point reproduced with zero differences.
+  No fresh actors, customer detector or confidence changes. Outside review is
+  still outstanding. [V6 results](mouth-trained-v6-evaluation.md).

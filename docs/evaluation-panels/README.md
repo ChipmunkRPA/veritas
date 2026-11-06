@@ -2,7 +2,9 @@
 
 These are public dataset references, selection metadata, file hashes, and known
 edit positions for the new local comparisons. **No source media, customer uploads,
-or model checkpoints are included.** They let independent reviewers identify the
+or upstream model checkpoints are included.** The v6 fitting capsule includes
+derived numerical features and fitted linear parameters, with separate data
+terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
@@ -157,3 +159,32 @@ recomputes the non-AI-only point, and includes every planned case. It cannot
 verify actual pixels/model execution, missing eligible windows, face-track
 membership, spatial masks or independent accuracy. Those require separately
 permitted media and full source/weight replay.
+
+## Refit the experimental mouth head without vision weights
+
+The [v6 result](../mouth-trained-v6-evaluation.md) includes a compact
+`mouth-v6-fitting-capsule.json.gz`: 800 generic mouth-feature vectors, actor roles,
+source/PNG identities, fitted coefficients and normalization. Its underlying
+CREMA-D-derived data retains ODbL/DbCL attribution and terms, recorded inside the
+capsule. It contains no source images, private paths or pretrained vision weights.
+
+In an environment with NumPy, OpenCV and scikit-learn, run:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python backend/scripts/mouth_probe_capsule.py replay \
+  docs/evaluation-panels/mouth-v6-fitting-capsule.json.gz /path/to/new-refit.json \
+  --sha256 11f6c6dcdeb755aa25aee8b01498f3c59619176abd886bd50fc533584831cfb4
+```
+
+The helper loads no pretrained model. It validates vector commitments and actor
+separation, refits the same actor/class-balanced head and point, and compares
+coefficients/normalization to the stored result. It refuses a different capsule
+digest or an existing output. The local CPU replay had zero differences. Library
+differences must be reported; the helper's numerical tolerance is explicit in code.
+
+The training and 48-video source audits are `mouth-v6-training-audit.json` and
+`mouth-v6-video-audit.json`; the numerical replay is `mouth-v6-fitting-replay.json`.
+These are local correspondence/refitting checks. No outside reviewer has
+independently verified them. Refit success does not validate the neural feature
+extraction, source rights, fresh accuracy or the failed detector. This head is
+not enabled and its raw margin is not AI confidence.

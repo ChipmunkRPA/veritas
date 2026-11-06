@@ -112,3 +112,10 @@ integration remains unfinished.
   evidence version 7. See the [release record](local-face-sequence-rollout.md).
   No voice, lip-sync, text or independent-review requirement is completed by
   this video-only integration.
+- Completed a 720-input, consumed-data audio development comparison of original,
+  enhanced and combined views. The combined view improved probability scoring
+  but lost correct conclusions under strong noise and music, failing the frozen
+  usefulness gate. Both replacements were rejected; the running detector and
+  calibration are unchanged. Fresh multi-generator source metadata and rights
+  were checked, but no fresh audio confirmation was scored. See the
+  [complete result and limits](audio-noise-view-v4-evaluation.md).

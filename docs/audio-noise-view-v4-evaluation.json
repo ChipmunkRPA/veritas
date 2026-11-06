@@ -1,0 +1,1146 @@
+{
+  "schema": "chipmunk.audio-noise-development-summary/4",
+  "manifest_sha256": "ccecfe4acf8db9065b71da2ac7f97536369247f634ea8bc1d2546c2b90e757c0",
+  "score_receipt_sha256": "3ff3e5c0efc0c770a9381b91696508cc4acdb08f2ae4db4e56ffa2de44c28a13",
+  "primary_for_fresh_confirmation": null,
+  "deployment_eligible": false,
+  "execution_status": {
+    "ok": 690,
+    "not_applicable": 30
+  },
+  "groups": {
+    "all": {
+      "original": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "ai": 298,
+          "inconclusive": 80,
+          "original": 342
+        },
+        "false_ai": 3,
+        "false_original": 27,
+        "correct_ai": 295,
+        "correct_original": 315,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.05796038845163358,
+        "log_loss": 0.20111778544751233,
+        "auc": 0.9846467303071629
+      },
+      "enhanced": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "inconclusive": 517,
+          "original": 203
+        },
+        "false_ai": 0,
+        "false_original": 2,
+        "correct_ai": 0,
+        "correct_original": 201,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.11770574168704195,
+        "log_loss": 0.3724337105193899,
+        "auc": 0.9396064679524646
+      },
+      "combined": {
+        "planned_inputs": 720,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 690,
+        "unassessed_inputs": 30,
+        "decisions": {
+          "ai": 299,
+          "inconclusive": 156,
+          "original": 265
+        },
+        "false_ai": 3,
+        "false_original": 4,
+        "correct_ai": 296,
+        "correct_original": 261,
+        "real_inputs": 360,
+        "ai_inputs": 360,
+        "brier": 0.05066863369028533,
+        "log_loss": 0.17129962882377364,
+        "auc": 0.986745892590428
+      }
+    },
+    "clean": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 57,
+          "original": 58,
+          "inconclusive": 5
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 57,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.004167485794517686,
+        "log_loss": 0.05246257803295299,
+        "auc": 1.0
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 62,
+          "original": 58
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.025994627155442537,
+        "log_loss": 0.12977977305816457,
+        "auc": 1.0
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 57,
+          "original": 58,
+          "inconclusive": 5
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 57,
+        "correct_original": 58,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.00023505241218334635,
+        "log_loss": 0.015125791495749476,
+        "auc": 1.0
+      }
+    },
+    "noise_0": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 25,
+          "original": 58,
+          "ai": 37
+        },
+        "false_ai": 1,
+        "false_original": 12,
+        "correct_ai": 36,
+        "correct_original": 46,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.1370205336500766,
+        "log_loss": 0.41250180324778984,
+        "auc": 0.9065335753176045
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 105,
+          "original": 15
+        },
+        "false_ai": 0,
+        "false_original": 1,
+        "correct_ai": 0,
+        "correct_original": 14,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.2169702757208929,
+        "log_loss": 0.6296378620236405,
+        "auc": 0.766182698124622
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 53,
+          "original": 29,
+          "ai": 38
+        },
+        "false_ai": 1,
+        "false_original": 2,
+        "correct_ai": 37,
+        "correct_original": 27,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.12294204769284822,
+        "log_loss": 0.37700057503935636,
+        "auc": 0.9071385359951604
+      }
+    },
+    "noise_5": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 43,
+          "original": 62,
+          "inconclusive": 15
+        },
+        "false_ai": 0,
+        "false_original": 9,
+        "correct_ai": 43,
+        "correct_original": 53,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.0984032127779492,
+        "log_loss": 0.303018045426574,
+        "auc": 0.9652147610405324
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 103,
+          "original": 17
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 17,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.1805441544008556,
+        "log_loss": 0.5237200679370766,
+        "auc": 0.869933454325469
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 43,
+          "original": 35,
+          "inconclusive": 42
+        },
+        "false_ai": 0,
+        "false_original": 1,
+        "correct_ai": 43,
+        "correct_original": 34,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.08487123029546359,
+        "log_loss": 0.26599703271305214,
+        "auc": 0.9733817301875378
+      }
+    },
+    "noise_15": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 53,
+          "original": 59,
+          "inconclusive": 8
+        },
+        "false_ai": 0,
+        "false_original": 4,
+        "correct_ai": 53,
+        "correct_original": 55,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.03686510564393566,
+        "log_loss": 0.13937171397251524,
+        "auc": 0.9963702359346642
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 85,
+          "original": 35
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 35,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.09902879538424064,
+        "log_loss": 0.3215561027535388,
+        "auc": 0.9764065335753176
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 53,
+          "inconclusive": 20,
+          "original": 47
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 53,
+        "correct_original": 47,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.03206505619489752,
+        "log_loss": 0.11655502009079877,
+        "auc": 0.9972776769509981
+      }
+    },
+    "music_5": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 49,
+          "inconclusive": 17
+        },
+        "false_ai": 2,
+        "false_original": 2,
+        "correct_ai": 52,
+        "correct_original": 47,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.05395792186412183,
+        "log_loss": 0.2073387431068574,
+        "auc": 0.9839685420447671
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 91,
+          "original": 29
+        },
+        "false_ai": 0,
+        "false_original": 1,
+        "correct_ai": 0,
+        "correct_original": 28,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.1349307596833784,
+        "log_loss": 0.43313519069143225,
+        "auc": 0.9470659407138536
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 42,
+          "inconclusive": 24
+        },
+        "false_ai": 2,
+        "false_original": 1,
+        "correct_ai": 52,
+        "correct_original": 41,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.051855058403548336,
+        "log_loss": 0.1956822490503246,
+        "auc": 0.9824561403508772
+      }
+    },
+    "music_15": {
+      "original": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 56,
+          "inconclusive": 10
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 54,
+        "correct_original": 56,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.01751269745426113,
+        "log_loss": 0.09295030299616912,
+        "auc": 0.999697519661222
+      },
+      "enhanced": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "inconclusive": 71,
+          "original": 49
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 0,
+        "correct_original": 49,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.05518353883383071,
+        "log_loss": 0.20982097891522092,
+        "auc": 0.9978826376285541
+      },
+      "combined": {
+        "planned_inputs": 120,
+        "originals": 120,
+        "connected_groups": 60,
+        "assessed_inputs": 115,
+        "unassessed_inputs": 5,
+        "decisions": {
+          "ai": 54,
+          "original": 54,
+          "inconclusive": 12
+        },
+        "false_ai": 0,
+        "false_original": 0,
+        "correct_ai": 54,
+        "correct_original": 54,
+        "real_inputs": 60,
+        "ai_inputs": 60,
+        "brier": 0.012857943452947801,
+        "log_loss": 0.06114001848762346,
+        "auc": 0.999395039322444
+      }
+    }
+  },
+  "paired": {
+    "all": {
+      "enhanced": {
+        "common_inputs": 690,
+        "brier_difference": 0.05974535323540836,
+        "log_loss_difference": 0.1713159250718776,
+        "brier_difference_ci95": [
+          0.0392946524908195,
+          0.08125406503985617
+        ],
+        "log_loss_difference_ci95": [
+          0.12183380273736594,
+          0.2235118663317434
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty.",
+        "development_gates": {
+          "overall_brier_gain": false,
+          "overall_log_loss_gain": false,
+          "brier_interval_below_zero": false,
+          "strong_noise_and_music_proper_scores": false,
+          "no_material_false_call_increase": true,
+          "clean_correct_call_retention": false,
+          "strong_condition_usefulness": false,
+          "no_new_execution_failures": true
+        }
+      },
+      "combined": {
+        "common_inputs": 690,
+        "brier_difference": -0.00729175476134825,
+        "log_loss_difference": -0.02981815662373869,
+        "brier_difference_ci95": [
+          -0.011554713789265746,
+          -0.002971978284793772
+        ],
+        "log_loss_difference_ci95": [
+          -0.042001796684426496,
+          -0.017595793970411402
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty.",
+        "development_gates": {
+          "overall_brier_gain": true,
+          "overall_log_loss_gain": true,
+          "brier_interval_below_zero": true,
+          "strong_noise_and_music_proper_scores": true,
+          "no_material_false_call_increase": true,
+          "clean_correct_call_retention": true,
+          "strong_condition_usefulness": false,
+          "no_new_execution_failures": true
+        }
+      }
+    },
+    "clean": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.021827141360924854,
+        "log_loss_difference": 0.07731719502521156,
+        "brier_difference_ci95": [
+          0.02092229465405704,
+          0.02282490852796966
+        ],
+        "log_loss_difference_ci95": [
+          0.07458738191237343,
+          0.08018230185969645
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.00393243338233434,
+        "log_loss_difference": -0.037336786537203515,
+        "brier_difference_ci95": [
+          -0.0041241374544707795,
+          -0.003742477904276979
+        ],
+        "log_loss_difference_ci95": [
+          -0.03828179068461688,
+          -0.03629798291634105
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    },
+    "noise_0": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.07994974207081623,
+        "log_loss_difference": 0.21713605877585057,
+        "brier_difference_ci95": [
+          0.032062096216209576,
+          0.12439959185148441
+        ],
+        "log_loss_difference_ci95": [
+          0.08639849201923522,
+          0.34605078116742977
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.014078485957228389,
+        "log_loss_difference": -0.03550122820843344,
+        "brier_difference_ci95": [
+          -0.025031897967338033,
+          -0.0031996284361943865
+        ],
+        "log_loss_difference_ci95": [
+          -0.07141326728752731,
+          0.0014736770255403984
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    },
+    "noise_5": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.08214094162290642,
+        "log_loss_difference": 0.2207020225105026,
+        "brier_difference_ci95": [
+          0.03346113671765432,
+          0.13070346186897938
+        ],
+        "log_loss_difference_ci95": [
+          0.10043538903993471,
+          0.34089282150101696
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.013531982482485615,
+        "log_loss_difference": -0.03702101271352188,
+        "brier_difference_ci95": [
+          -0.023943745613211435,
+          -0.003429132014253461
+        ],
+        "log_loss_difference_ci95": [
+          -0.06870758095016911,
+          -0.006587466087420536
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    },
+    "noise_15": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.06216368974030498,
+        "log_loss_difference": 0.18218438878102358,
+        "brier_difference_ci95": [
+          0.030341021865855227,
+          0.0944487502232472
+        ],
+        "log_loss_difference_ci95": [
+          0.10191540741115804,
+          0.26335758366200407
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.00480004944903813,
+        "log_loss_difference": -0.02281669388171647,
+        "brier_difference_ci95": [
+          -0.012474817456064312,
+          0.0022173050209914986
+        ],
+        "log_loss_difference_ci95": [
+          -0.04592787143489195,
+          -0.0020503645816664145
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    },
+    "music_5": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.08097283781925654,
+        "log_loss_difference": 0.2257964475845748,
+        "brier_difference_ci95": [
+          0.04908489311047833,
+          0.11337408712938007
+        ],
+        "log_loss_difference_ci95": [
+          0.13127549185706835,
+          0.31554029757268776
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.0021028634605734908,
+        "log_loss_difference": -0.011656494056532787,
+        "brier_difference_ci95": [
+          -0.007638674348830936,
+          0.0033593290077631034
+        ],
+        "log_loss_difference_ci95": [
+          -0.03314346983407063,
+          0.01043626380378952
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    },
+    "music_15": {
+      "enhanced": {
+        "common_inputs": 115,
+        "brier_difference": 0.03767084137956959,
+        "log_loss_difference": 0.11687067591905179,
+        "brier_difference_ci95": [
+          0.020557734747076173,
+          0.05542940118068893
+        ],
+        "log_loss_difference_ci95": [
+          0.07285470159861931,
+          0.16202730763286222
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      },
+      "combined": {
+        "common_inputs": 115,
+        "brier_difference": -0.004654754001313327,
+        "log_loss_difference": -0.03181028450854566,
+        "brier_difference_ci95": [
+          -0.008330766369999376,
+          -0.001657465488535337
+        ],
+        "log_loss_difference_ci95": [
+          -0.042726814172687394,
+          -0.02114505627982745
+        ],
+        "bootstrap_defined": 2000,
+        "bootstrap_requested": 2000,
+        "interpretation": "Consumed identity/prompt-connected CV diagnostic, conditional on frozen fold fits and backgrounds; not fresh-test or calibration uncertainty."
+      }
+    }
+  },
+  "cross_validation_parameters": [
+    {
+      "fold": 0,
+      "arm": "original",
+      "fields": [
+        "raw"
+      ],
+      "slopes": [
+        0.46823651465225596
+      ],
+      "intercept": 1.0696190199945625,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 0,
+      "arm": "enhanced",
+      "fields": [
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.6017842559521428
+      ],
+      "intercept": -3.3828175681606645,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 0,
+      "arm": "combined",
+      "fields": [
+        "raw",
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.38710616410404053,
+        0.19194221061852673
+      ],
+      "intercept": -0.11211462024050589,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 1,
+      "arm": "original",
+      "fields": [
+        "raw"
+      ],
+      "slopes": [
+        0.47583898063921004
+      ],
+      "intercept": 1.0216924492085866,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 1,
+      "arm": "enhanced",
+      "fields": [
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.7014607369883058
+      ],
+      "intercept": -3.985212740372388,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 1,
+      "arm": "combined",
+      "fields": [
+        "raw",
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.38695471886135163,
+        0.2087226875155911
+      ],
+      "intercept": -0.2301477308320756,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 2,
+      "arm": "original",
+      "fields": [
+        "raw"
+      ],
+      "slopes": [
+        0.4647448038144705
+      ],
+      "intercept": 1.0381515309780434,
+      "fit_originals_by_class": [
+        46,
+        48
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 2,
+      "arm": "enhanced",
+      "fields": [
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.5760389939652985
+      ],
+      "intercept": -3.064780565871912,
+      "fit_originals_by_class": [
+        46,
+        48
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 2,
+      "arm": "combined",
+      "fields": [
+        "raw",
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.37347858213261975,
+        0.20282718043874923
+      ],
+      "intercept": -0.15624117108080018,
+      "fit_originals_by_class": [
+        46,
+        48
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 3,
+      "arm": "original",
+      "fields": [
+        "raw"
+      ],
+      "slopes": [
+        0.48390122416469916
+      ],
+      "intercept": 1.2221758594246286,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 3,
+      "arm": "enhanced",
+      "fields": [
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.543044107303173
+      ],
+      "intercept": -2.890807444072652,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 3,
+      "arm": "combined",
+      "fields": [
+        "raw",
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.39029018365854573,
+        0.1934773734867273
+      ],
+      "intercept": 0.010178792120155607,
+      "fit_originals_by_class": [
+        46,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 4,
+      "arm": "original",
+      "fields": [
+        "raw"
+      ],
+      "slopes": [
+        0.47233746669026305
+      ],
+      "intercept": 0.8441138813513369,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 4,
+      "arm": "enhanced",
+      "fields": [
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.6236299660870167
+      ],
+      "intercept": -3.4343580826192754,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    },
+    {
+      "fold": 4,
+      "arm": "combined",
+      "fields": [
+        "raw",
+        "enhanced_raw"
+      ],
+      "slopes": [
+        0.3910284513201135,
+        0.18921355944628232
+      ],
+      "intercept": -0.24941282165155404,
+      "fit_originals_by_class": [
+        47,
+        47
+      ],
+      "reference_prior": 0.5,
+      "ridge": 0.001
+    }
+  ],
+  "operational_reference": {
+    "all": {
+      "planned_inputs": 720,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 690,
+      "unassessed_inputs": 30,
+      "decisions": {
+        "ai": 267,
+        "inconclusive": 219,
+        "original": 234
+      },
+      "false_ai": 1,
+      "false_original": 0,
+      "correct_ai": 266,
+      "correct_original": 234,
+      "real_inputs": 360,
+      "ai_inputs": 360,
+      "brier": 0.06275137446244389,
+      "log_loss": 0.223497696945617,
+      "auc": 0.9878336255601015
+    },
+    "clean": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 57,
+        "original": 57,
+        "inconclusive": 6
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 57,
+      "correct_original": 57,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.003031416196395392,
+      "log_loss": 0.055550349539952484,
+      "auc": 1.0
+    },
+    "noise_0": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 68,
+        "ai": 30,
+        "original": 22
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 30,
+      "correct_original": 22,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.15165553072529353,
+      "log_loss": 0.4651770349739041,
+      "auc": 0.9222625529340593
+    },
+    "noise_5": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 37,
+        "inconclusive": 51,
+        "original": 32
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 37,
+      "correct_original": 32,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.10684377667074588,
+      "log_loss": 0.3449786892654614,
+      "auc": 0.9742891712038718
+    },
+    "noise_15": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "ai": 50,
+        "original": 51,
+        "inconclusive": 19
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 50,
+      "correct_original": 51,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.037832060827762595,
+      "log_loss": 0.1538337010567105,
+      "auc": 0.9963702359346642
+    },
+    "music_5": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 55,
+        "original": 25,
+        "ai": 40
+      },
+      "false_ai": 1,
+      "false_original": 0,
+      "correct_ai": 39,
+      "correct_original": 25,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.05650802384529076,
+      "log_loss": 0.21385601220470862,
+      "auc": 0.9863883847549909
+    },
+    "music_15": {
+      "planned_inputs": 120,
+      "originals": 120,
+      "connected_groups": 60,
+      "assessed_inputs": 115,
+      "unassessed_inputs": 5,
+      "decisions": {
+        "inconclusive": 20,
+        "original": 47,
+        "ai": 53
+      },
+      "false_ai": 0,
+      "false_original": 0,
+      "correct_ai": 53,
+      "correct_original": 47,
+      "real_inputs": 60,
+      "ai_inputs": 60,
+      "brier": 0.020627719710293972,
+      "log_loss": 0.10772887232118453,
+      "auc": 1.0
+    }
+  },
+  "limitations": [
+    "All prior test responses are consumed.",
+    "Unpublished DFADD transcript mapping; prompt-index grouping is conservative, not proof of text independence.",
+    "Unverified pretrained overlap.",
+    "Intervals conditional on the reused consumed background pool.",
+    "Authentic source and generated-family channel confounding remain.",
+    "Development CV probabilities are not service calibrations.",
+    "No outside reviewer has independently validated these outcomes."
+  ]
+}

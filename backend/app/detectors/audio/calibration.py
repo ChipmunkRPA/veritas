@@ -100,7 +100,7 @@ def evaluate(raw, pcm, windows, classifier, deadline) -> dict:
         direction = 'inconclusive'
         reason = 'The original-file tendency was withheld because the voice response was unstable or the stability check was unavailable.'
     elif direction == 'inconclusive':
-        reason = 'The calibrated voice estimate and uncertainty check do not jointly support an 80% tendency.'
+        reason = 'The calibrated voice estimate and uncertainty check do not jointly support a reliable tendency.'
     else:
         reason = ('Leaning towards AI-generated speech.' if direction == 'ai' else 'Leaning towards original speech.')
     return {'version': VERSION, 'calibration_sha256': SHA256, 'probability_ai': p if supported else None,

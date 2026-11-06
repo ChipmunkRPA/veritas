@@ -135,3 +135,12 @@ integration remains unfinished.
   payloads, WAV files and production PCM hashes. Original WAV header timestamps
   are explicit metadata; the first timestamp-mismatch attempt remains recorded
   locally. This enables outside replication; no outside review has occurred.
+- Built and audited 48 known AI mouth-edit/non-AI controls from eight consumed
+  CREMA-D actors, using permitted generator weights and replacement face
+  preprocessing. All native pixels, masks, clocks and audio passed replay.
+  The current sequence statistic localized 0/16 AI edits; the mouth-region
+  prototype localized 1/16 and failed its frozen gates. Timing checks flagged
+  none and remain contextual observations. Rejected without enabling a method
+  or scoring fresh actors. Published source references, asset pins and
+  generation/audit tooling; outside review remains outstanding.
+  [Results and limits](mouth-sequence-v4-evaluation.md).

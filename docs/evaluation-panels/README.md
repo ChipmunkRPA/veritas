@@ -26,6 +26,15 @@ or a generic dataset link.
   all 720 inputs. Independently recomputed sample payloads, complete WAV files
   and production-decoded PCM matched their declared hashes. This is local
   reproducibility evidence, not outside review or a fresh accuracy study.
+- `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
+  consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
+  mask references, source-frame hashes and frozen comparison.
+- `mouth-v4-source-audit.json`: all 48 cases passed exact native pixel, mask,
+  clock, surrounding-frame and soundtrack replay checks. This is local source
+  verification, not detection accuracy or outside review.
+- `mouth-v4-renderer-assets.json` and `mouth-v4-renderer-LICENSE.txt`: permitted
+  human generator source/checkpoint pins and terms. The restricted InsightFace
+  detector is excluded. These create benchmark inputs, not customer detections.
 
 Image selection plans and manifests are exact copies of the frozen metadata.
 The video source/exclusion catalogue is deliberately limited to reproducibility
@@ -89,3 +98,35 @@ The [v4 enhancement](../audio-noise-view-v4-evaluation.md),
 frozen advancement criteria. A new method or outside confirmation needs a
 separately frozen source selection and
 decision. No outside reviewer has independently verified these audio results.
+
+## AI mouth-edit replication
+
+The [mouth comparison](../mouth-sequence-v4-evaluation.md) includes true neural
+redraws, ordinary local edits and timing controls, with exact before/during/after
+positions. It is consumed development. CREMA-D source/derived data retains
+ODbL/DbCL terms and publisher attribution; MIT code does not relicense it.
+Media and mask PNGs are not bundled. The catalogue distinguishes raw FLV hashes
+from normalized and generated files; do not compare a downloaded FLV with a
+derived MKV digest.
+
+The standard-library helper downloads only reviewed human animation modules,
+checkpoints, the permitted landmark bundle and publisher licence:
+
+```sh
+python3 backend/scripts/fetch_mouth_benchmark_assets.py \
+  docs/evaluation-panels/mouth-v4-renderer-assets.json /path/to/benchmark-assets
+```
+
+Use `--verify-only` for an existing cache. Generation uses the isolated MediaPipe
+0.10.32 runtime described in `video-forensic-followup.md`, preserving the app's
+OpenCV dependency. `smoke_mouth_renderer.py` supports CPU/MPS; the tested full
+generation driver in `prepare_mouth_edit_v4.py` uses MPS on the local Mac. The
+catalogue links source references and the original normalization recipe.
+Container bytes and neural outputs can vary by library/device; record new
+hashes and masks rather than silently substituting them in frozen results.
+
+`audit_mouth_edit_v4.py` verifies input pixels, masks, clocks and audio.
+`compare_mouth_sequence_v4.py` freezes, scores and reviews the paired production
+adapter inputs. Its internal point has feature-distance units and is not an AI
+confidence percentage. The candidate failed its gates and is not enabled.
+No outside reviewer has validated this panel.

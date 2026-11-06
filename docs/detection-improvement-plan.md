@@ -65,12 +65,20 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
-- Prepared a separate FUSED crop-localization development experiment using the
-  existing MIT checkpoint, independent runtime and Apache-2.0 backbone. It reuses
-  exactly 24 consumed source pairs with native/JPEG75 variants, preserves current
-  displayed regions, and fits crop admission only on genuine controls. No fresh
-  confirmation, serving or confidence change is authorized by development.
-  [Protocol](fused-crop-v6-protocol.md). A new primary-source review confirmed
+- Verified the owner's institutional AITDNA archive against its published
+  checksum and all ZIP CRCs. Its span file differs in bytes but all362 decoded
+  records/schema match the acquired copy. The institutional CC-BY-SA metadata
+  and bundled GPL-2.0 README retain the terms conflict; no source replacement,
+  new writing inference/training or outside review occurred.
+  [Institutional follow-up](writing-source-preflight-v2.md).
+
+- Completed the separate FUSED crop-localization development experiment: all
+  96 inputs/384 crop forwards, no failures. Native overlapping edits rise10→12
+  with genuine highlights2→3; JPEG overlapping edits3→10 with highlights1→2.
+  Both formats advance to separately frozen fresh confirmation, not service
+  adoption. All88 targeted tests pass.48 new source pairs are selected without
+  inference, excluding240 prior originals/eight historical web examples.
+  [Results and next work](fused-crop-v6-development.md). A primary-source review confirmed
   commercial grants for SAFIRE/CAT-Net but owner-only downloads, and unresolved
   separately hosted DetectiveSAM weight terms; no restricted weights acquired.
   [Source review](image-localizer-v6-source-review.md).

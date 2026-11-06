@@ -1,0 +1,1149 @@
+{
+  "schema": "chipmunk.tgif-localization/1",
+  "declared_at": "2026-11-06T22:41:14.794241+00:00",
+  "metadata_revision": "fc5c557bd1a2d49a5dabc3676a54cfc44798f4ea",
+  "metadata_sha256": {
+    "metadata/ps_testing.csv": "96dedc49c99af4f8ed72ecbcdc18b4338946e181c6e49022aba828c8f0d61d2c",
+    "metadata/sd2_testing.csv": "e63b68f42ef235f9a33773e7c1eed62048ebb0a8743924cba83879be654080ff",
+    "metadata-flux/flux1filldev_testing.csv": "987a60a2ebb226291440cd54dc14b4c02f9a563c402d0765446053cf50f25f9e"
+  },
+  "source_license": "CC BY-SA 4.0; https://github.com/IDLabMedia/tgif-dataset",
+  "excluded_coco_ids": [
+    "100283",
+    "10393",
+    "104198",
+    "104603",
+    "104782",
+    "105923",
+    "107851",
+    "110211",
+    "11122",
+    "112298",
+    "118921",
+    "119641",
+    "126137",
+    "126216",
+    "130586",
+    "135673",
+    "152686",
+    "154213",
+    "15440",
+    "154425",
+    "157213",
+    "15810",
+    "159311",
+    "162732",
+    "163746",
+    "165500",
+    "166664",
+    "173033",
+    "176901",
+    "178618",
+    "179285",
+    "17959",
+    "181303",
+    "181666",
+    "182923",
+    "183391",
+    "185409",
+    "186345",
+    "187055",
+    "189828",
+    "190236",
+    "193743",
+    "193884",
+    "196442",
+    "197388",
+    "198960",
+    "199310",
+    "199395",
+    "199977",
+    "20059",
+    "201676",
+    "203546",
+    "203864",
+    "208901",
+    "214205",
+    "215245",
+    "217060",
+    "217948",
+    "21903",
+    "22396",
+    "225184",
+    "22935",
+    "229747",
+    "232646",
+    "23359",
+    "235778",
+    "238013",
+    "238039",
+    "239843",
+    "24260",
+    "245915",
+    "2473",
+    "251824",
+    "252507",
+    "255483",
+    "256775",
+    "257624",
+    "259625",
+    "263860",
+    "263966",
+    "26501",
+    "266409",
+    "269196",
+    "271402",
+    "272049",
+    "288685",
+    "289960",
+    "293300",
+    "294695",
+    "297343",
+    "308476",
+    "312586",
+    "314294",
+    "314709",
+    "320743",
+    "324715",
+    "329827",
+    "33368",
+    "338304",
+    "340272",
+    "342397",
+    "343218",
+    "347265",
+    "348881",
+    "350002",
+    "350405",
+    "351823",
+    "357238",
+    "357888",
+    "361147",
+    "364166",
+    "36539",
+    "369323",
+    "369751",
+    "371552",
+    "374369",
+    "375763",
+    "376112",
+    "378453",
+    "37988",
+    "382009",
+    "384670",
+    "387916",
+    "389316",
+    "389566",
+    "398203",
+    "3983",
+    "398742",
+    "39914",
+    "39951",
+    "401250",
+    "403122",
+    "406129",
+    "407298",
+    "407868",
+    "410428",
+    "410650",
+    "414133",
+    "414795",
+    "425906",
+    "429761",
+    "431693",
+    "431727",
+    "43314",
+    "433243",
+    "433515",
+    "438862",
+    "44195",
+    "445248",
+    "445602",
+    "44652",
+    "44699",
+    "447313",
+    "449406",
+    "449579",
+    "449996",
+    "453981",
+    "457559",
+    "459809",
+    "464144",
+    "464872",
+    "466602",
+    "46804",
+    "469174",
+    "470952",
+    "471789",
+    "473974",
+    "474170",
+    "474881",
+    "475191",
+    "484296",
+    "485027",
+    "493019",
+    "493284",
+    "494759",
+    "5001",
+    "500716",
+    "504635",
+    "508586",
+    "509735",
+    "514797",
+    "521231",
+    "522889",
+    "525322",
+    "534394",
+    "535578",
+    "53624",
+    "53626",
+    "541055",
+    "544444",
+    "545129",
+    "545407",
+    "545730",
+    "546011",
+    "549738",
+    "550322",
+    "552612",
+    "5529",
+    "554156",
+    "556765",
+    "55950",
+    "560266",
+    "561958",
+    "562121",
+    "563349",
+    "564133",
+    "565624",
+    "567432",
+    "569976",
+    "570688",
+    "571857",
+    "572517",
+    "573258",
+    "573391",
+    "576654",
+    "577959",
+    "579893",
+    "5992",
+    "60102",
+    "64523",
+    "64718",
+    "69106",
+    "6954",
+    "71711",
+    "71756",
+    "74860",
+    "78915",
+    "7938",
+    "79969",
+    "80274",
+    "83113",
+    "85478",
+    "86755",
+    "89078",
+    "90284",
+    "90631",
+    "91619",
+    "91921",
+    "94852",
+    "94944",
+    "95155",
+    "95899",
+    "96427",
+    "96825",
+    "97230",
+    "97679",
+    "99054",
+    "99242"
+  ],
+  "sources_per_family": 16,
+  "selection": "tgif-chipmunk-localization-test-v1: SHA-256 order within family and mask variant, gen_variation_id 0; one use of each COCO source across families; half bounding-box, half segmentation masks",
+  "reference": "Exact RGB changes between the published full-image splice and its uncropped source. Author masks retained separately for coordinate and overlap diagnostics.",
+  "evaluation": "Unscored source preparation. Current native/JPEG components remain controls; exact crop gates and method must be frozen and publicly verified before any confirmation detector forward. No development-only adoption.",
+  "groups": {
+    "firefly": [
+      {
+        "source_id": "502599",
+        "family": "firefly",
+        "category": "airplane",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/airplane/502599_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/airplane/502599_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/airplane/502599_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "724",
+        "family": "firefly",
+        "category": "stop sign",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/stop sign/724_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/stop sign/724_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/stop sign/724_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "501243",
+        "family": "firefly",
+        "category": "zebra",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/zebra/501243_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/zebra/501243_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/zebra/501243_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "65736",
+        "family": "firefly",
+        "category": "tennis racket",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/tennis racket/65736_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/65736_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/65736_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "158548",
+        "family": "firefly",
+        "category": "sheep",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/sheep/158548_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/sheep/158548_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/sheep/158548_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "266892",
+        "family": "firefly",
+        "category": "tennis racket",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/tennis racket/266892_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/266892_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/266892_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "119995",
+        "family": "firefly",
+        "category": "tennis racket",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/tennis racket/119995_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/119995_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/119995_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "468965",
+        "family": "firefly",
+        "category": "kite",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/kite/468965_mask_bbox.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/kite/468965_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/kite/468965_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "516316",
+        "family": "firefly",
+        "category": "zebra",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/zebra/516316_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/zebra/516316_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/zebra/516316_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "465180",
+        "family": "firefly",
+        "category": "elephant",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/elephant/465180_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/elephant/465180_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/elephant/465180_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "577149",
+        "family": "firefly",
+        "category": "zebra",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/zebra/577149_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/zebra/577149_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/zebra/577149_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "407650",
+        "family": "firefly",
+        "category": "snowboard",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/snowboard/407650_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/snowboard/407650_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/snowboard/407650_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "474028",
+        "family": "firefly",
+        "category": "sports ball",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/sports ball/474028_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/sports ball/474028_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/sports ball/474028_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "212072",
+        "family": "firefly",
+        "category": "stop sign",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/stop sign/212072_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/stop sign/212072_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/stop sign/212072_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "127530",
+        "family": "firefly",
+        "category": "tennis racket",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/tennis racket/127530_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/127530_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/127530_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "230166",
+        "family": "firefly",
+        "category": "sheep",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+          "testing/sheep/230166_mask_segm.png_ps_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/sheep/230166_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/sheep/230166_mask_segm.png"
+        ]
+      }
+    ],
+    "sd2": [
+      {
+        "source_id": "154947",
+        "family": "sd2",
+        "category": "sheep",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/sheep/154947_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/sheep/154947_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/sheep/154947_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "186042",
+        "family": "sd2",
+        "category": "skis",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/skis/186042_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/skis/186042_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/skis/186042_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "125257",
+        "family": "sd2",
+        "category": "snowboard",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/snowboard/125257_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/snowboard/125257_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/snowboard/125257_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "47740",
+        "family": "sd2",
+        "category": "kite",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/kite/47740_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/kite/47740_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/kite/47740_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "343496",
+        "family": "sd2",
+        "category": "stop sign",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/stop sign/343496_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/stop sign/343496_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/stop sign/343496_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "31269",
+        "family": "sd2",
+        "category": "zebra",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/zebra/31269_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/zebra/31269_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/zebra/31269_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "136334",
+        "family": "sd2",
+        "category": "skis",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/skis/136334_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/skis/136334_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/skis/136334_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "343937",
+        "family": "sd2",
+        "category": "snowboard",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/snowboard/343937_mask_bbox.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/snowboard/343937_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/snowboard/343937_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "288430",
+        "family": "sd2",
+        "category": "kite",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/kite/288430_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/kite/288430_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/kite/288430_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "451714",
+        "family": "sd2",
+        "category": "skis",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/skis/451714_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/skis/451714_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/skis/451714_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "151629",
+        "family": "sd2",
+        "category": "tennis racket",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/tennis racket/151629_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/151629_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/151629_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "100723",
+        "family": "sd2",
+        "category": "stop sign",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/stop sign/100723_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/stop sign/100723_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/stop sign/100723_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "297698",
+        "family": "sd2",
+        "category": "skis",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/skis/297698_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/skis/297698_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/skis/297698_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "410221",
+        "family": "sd2",
+        "category": "airplane",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/airplane/410221_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/airplane/410221_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/airplane/410221_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "80022",
+        "family": "sd2",
+        "category": "tennis racket",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/tennis racket/80022_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/tennis racket/80022_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/tennis racket/80022_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "236599",
+        "family": "sd2",
+        "category": "kite",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+          "testing/kite/236599_mask_segm.png_ps_mask.png_sd2_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+          "testing/kite/236599_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+          "testing/kite/236599_mask_segm.png"
+        ]
+      }
+    ],
+    "flux-fill": [
+      {
+        "source_id": "60770",
+        "family": "flux-fill",
+        "category": "zebra",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/zebra/60770_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/zebra/60770_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/zebra/60770_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "30504",
+        "family": "flux-fill",
+        "category": "skis",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/skis/30504_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/skis/30504_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/skis/30504_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "218424",
+        "family": "flux-fill",
+        "category": "zebra",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/zebra/218424_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/zebra/218424_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/zebra/218424_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "225405",
+        "family": "flux-fill",
+        "category": "sports ball",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/sports ball/225405_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/sports ball/225405_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/sports ball/225405_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "312720",
+        "family": "flux-fill",
+        "category": "skis",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/skis/312720_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/skis/312720_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/skis/312720_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "368294",
+        "family": "flux-fill",
+        "category": "scissors",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/scissors/368294_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/scissors/368294_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/scissors/368294_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "473121",
+        "family": "flux-fill",
+        "category": "skis",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/skis/473121_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/skis/473121_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/skis/473121_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "225946",
+        "family": "flux-fill",
+        "category": "stop sign",
+        "mask_variant": "bbox",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/stop sign/225946_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/stop sign/225946_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/stop sign/225946_mask_bbox.png"
+        ]
+      },
+      {
+        "source_id": "290592",
+        "family": "flux-fill",
+        "category": "sheep",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/sheep/290592_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/sheep/290592_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/sheep/290592_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "156071",
+        "family": "flux-fill",
+        "category": "sheep",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/sheep/156071_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/sheep/156071_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/sheep/156071_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "270244",
+        "family": "flux-fill",
+        "category": "zebra",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/zebra/270244_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/zebra/270244_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/zebra/270244_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "83540",
+        "family": "flux-fill",
+        "category": "skis",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/skis/83540_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/skis/83540_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/skis/83540_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "377113",
+        "family": "flux-fill",
+        "category": "skis",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/skis/377113_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/skis/377113_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/skis/377113_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "99024",
+        "family": "flux-fill",
+        "category": "scissors",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/scissors/99024_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/scissors/99024_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/scissors/99024_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "263679",
+        "family": "flux-fill",
+        "category": "kite",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/kite/263679_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/kite/263679_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/kite/263679_mask_segm.png"
+        ]
+      },
+      {
+        "source_id": "341719",
+        "family": "flux-fill",
+        "category": "snowboard",
+        "mask_variant": "segm",
+        "image": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+          "testing/snowboard/341719_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+        ],
+        "original": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+          "testing/snowboard/341719_orig.png"
+        ],
+        "mask": [
+          "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+          "testing/snowboard/341719_mask_segm.png"
+        ]
+      }
+    ]
+  },
+  "crop_development_review_sha256": "9c9572eb66af942b4e94f262714b9ecc89d50fbf742d57e664dc3ba6e05642cc",
+  "candidate_image_gates": {
+    "native": 0.5474082231521608,
+    "jpeg75": 0.9998180270195008
+  },
+  "historical_manifest_sha256": {
+    "tgif-pairs-v2": "4ec157d240f88fce43e554d5dee0bd2da9ac388345d3f0a188c93826629c8230",
+    "tgif-confirmation-v3": "9312e1489828103dbff602c5c240c3b1ecba3808757517bf005b3bf0493e58ed",
+    "tgif-confirmation-v4": "18d36f12036bbd467de625efb33887dc61f67c237fb3808e65b506501ad2b871",
+    "tgif-confirmation-v5": "00975f23e17b1dc5cbd67a69325e42412719922f9a770fd3a6df91afdb6d30ea"
+  },
+  "new_classifier_forwards": 0
+}

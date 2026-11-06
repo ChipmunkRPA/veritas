@@ -55,6 +55,24 @@ consistently declares Apache-2.0 and commercial use. Its card SHA-256 is
 `b511193473ce1507ca578c465561bd8ea06f37df8549d972beaad8b9143350a7`.
 No additional pretrained checkpoint is downloaded, selected or executed here.
 
+## Institutional archive follow-up, 6 November
+
+Also checked the author's [TU Darmstadt repository item](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5170)
+and its linked 8,730,233-byte dataset archive. The download matches the
+repository's published MD5, and every ZIP member passes its CRC check. Item
+metadata explicitly declares CC-BY-SA-4.0, but the bundled README still says
+`gpl-2.0`. This additional owner-hosted release therefore retains the same terms
+conflict; do not silently choose the more convenient declaration.
+
+The institutional span Parquet has different file bytes from the acquired
+Hugging Face copy, but its Arrow schema and all 362 decoded records match
+exactly. This supplies independent transfer/provenance evidence, not independent
+human review or detection validation. No source was replaced and no classifier
+forward or training ran. The [aggregate receipt](evaluation-panels/writing-v2-institutional-source-review.json)
+publishes archive/card/checksum commitments and the equality result, without
+text, queries, author identifiers or per-record annotations. A new commercially
+permitted training-data decision remains necessary.
+
 ## Reproduce the audit
 
 Acquire the pinned span archive and original manifest separately. Retrieve the

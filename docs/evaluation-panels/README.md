@@ -8,6 +8,16 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`fused-crop-v6-development-freeze.json` records the prospective consumed-source
+image-crop method; `image-localizer-v6-source-review.json` retains commercial
+grant/download-access observations. `fused-crop-v6-development-review.json`
+contains all96 development outcomes, crop-score/input/map commitments and
+per-generator measurements. Both formats advance to a fresh comparison, without
+service adoption. `fused-crop-v6-source-plan.json` supplies the48 new public source
+references selected after excluding248 historical image IDs. This is unscored
+source preparation, not fresh detection evidence or outside human review.
+[Results, limits and remaining steps](../fused-crop-v6-development.md).
+
 `audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
 unprojected-final control, unchanged source roles/checkpoints/runtime/service and
 all 64 implementation pins. Model-free preflight and nine actual-freeze alteration
@@ -43,6 +53,10 @@ audit, including pinned publisher-card checksums and unresolved conflicting
 dataset license declarations. It exports no source text, author names, queries,
 per-record span annotations or predictions. Its unused-author inventory is not
 a frozen confirmation panel; see the [source review](../writing-source-preflight-v2.md).
+`writing-v2-institutional-source-review.json` adds the university archive's
+published-checksum/CRC checks and exact decoded-span equality with the existing
+362-record copy. Its metadata and bundled README retain conflicting terms;
+no new training, text redistribution or detector result is authorized.
 
 - `iml-vit-v4-plan.json` and `iml-vit-v4-manifest.json`: the 48 original/edit
   pairs in the [IML-ViT comparison](../iml-vit-localization-evaluation.md).

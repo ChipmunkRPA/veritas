@@ -13,7 +13,13 @@ the next prospective nonlinear/control-quality comparison and all4,248 finite
 measurements, with402 cached filtered-probe descriptors. They include no raw
 audio, transcripts, provider IDs or private paths. The model-free preflight and
 seven altered-freeze rejections accompany the [execution record](../audio-conditional-v10-execution.md).
-These are preparation, not candidate accuracy, fresh results or outside review.
+These preserve the prospective preparation, not an accuracy claim.
+`audio-v10-development-review.json.gz` now contains every consumed-development
+outcome/probe, original small fitted trees/calibration and full summaries/audit
+receipts. It references the existing v9 vector packet and v10 quality packet.
+Both eligible arms failed; no fresh confirmation or serving change followed.
+The [result and reproduction instructions](../audio-conditional-v10-development-evaluation.md)
+distinguish local numerical/native checks from outside human validation.
 
 `writing-v2-source-preflight.json` is an aggregate-only source/Unicode-position
 audit, including pinned publisher-card checksums and unresolved conflicting

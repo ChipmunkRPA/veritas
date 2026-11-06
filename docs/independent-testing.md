@@ -142,6 +142,14 @@ the original feature/fit artifacts and all conclusions/gates; it does not
 re-execute native model forwards or establish fresh accuracy. The native replay
 receipt is separate. The candidate failed development and remains disabled.
 
+The [conditional audio result](audio-conditional-v10-development-evaluation.md)
+adds a separate nonlinear/quality comparison with all outcomes, small fitted
+numerical trees and 121 native replay receipts. Its public-only numerical refit
+uses the already published vectors/quality packet, without private manifests or
+pretrained downloads. Both eligible arms failed; reproducing that rejection is
+a useful contribution. Please distinguish arithmetic reproduction, source/audio
+re-execution, predictive evaluation and usability feedback in any review.
+
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
 ```

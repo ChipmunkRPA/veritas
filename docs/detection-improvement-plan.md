@@ -65,6 +65,17 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed conditional audio v10: all1,449 outcomes,1,420 assessed/29 unassessed,
+  zero failures. Nonlinear and added-quality arms reduced false AI58→0 but correct
+  conclusions fell1,004→804/609 and inconclusive rose387→644/840. Both failed the
+  same five of sixteen unchanged requirements and remain disabled. All121 native
+  cases and every22 new probe matched; fitting-only CPU refit/JSON-native prediction
+  parity passed exactly. Complete public results reference existing vectors and
+  include all outcomes/parameters for numerical reproduction without model/media
+  downloads. No fresh scoring or outside human participation. Guard removal alone
+  still cannot recover five generators; next test representation/mapping rather
+  than weaken uncertainty rules. [Result](audio-conditional-v10-development-evaluation.md).
+
 - Prepared audio v10 before project fitting: a compact nonlinear control, a
   separate arm adding two unchanged waveform descriptors and a non-adoptable
   quality-only nuisance check. All4,248 exact quality measurements and402 cached

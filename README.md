@@ -129,10 +129,11 @@ The [completed corrected comparison](docs/audio-identity-v9-development-evaluati
 reduced false AI calls but lost correct conclusions and increased abstention,
 failing five unchanged requirements. It remains disabled; complete numerical
 reproduction and 99 native replay receipts are available for outside review.
-The next [conditional response experiment](docs/audio-conditional-v10-execution.md)
-freezes a nonlinear control, separate added-quality arm and non-adoptable nuisance
-check before fitting. It retains corrected source roles and all acceptance rules;
-its preparation is not a measured improvement or serving change.
+The [completed conditional response comparison](docs/audio-conditional-v10-development-evaluation.md)
+separately tested nonlinear mapping and added acoustic-quality inputs. Both
+failed the same five requirements: fewer false alarms came with fewer useful
+conclusions. Neither was enabled or sent to fresh confirmation. Complete public
+arithmetic, fitting-only refit and 121 native replay receipts support outside review.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

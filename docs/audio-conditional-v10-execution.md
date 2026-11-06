@@ -61,7 +61,18 @@ Keep the original `audio-v9-identity-plan.json.gz` catalogue beside the new
 resources. The original v9 numerical capsule provides all frozen representations
 for later numerical reproduction; it is referenced, not duplicated here.
 
-## Next stages
+## Execution completed after publication
+
+The prospective freeze was published and remote-verified as `aea0558` before
+fitting. All1,449 development outcomes completed, zero failures. Both eligible
+arms failed five of sixteen unchanged gates, so neither advances to confirmation
+or serving. All121 native checks, including every22 newly computed probe, passed;
+fitting-only refit and native/JSON prediction parity were exact. The
+[complete result](audio-conditional-v10-development-evaluation.md) preserves every
+outcome and supplies public-only numerical reproduction. The original protocol,
+54 implementation pins, source roles and reserved confirmation remain unchanged.
+
+## Original planned stages
 
 Publish the freeze before project fitting or new neural forwards. Then fit only
 the214 fitting originals and calibrate each arm on the97 separate originals.

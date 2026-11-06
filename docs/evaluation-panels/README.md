@@ -479,3 +479,35 @@ CLI's help and the [fixed protocol](../audio-guard-v7-development.md); use new
 output paths and preserve every original failed/unassessed case. Source replay
 uses `audit_audio_guard_v7.py` with the original manifest/representation/head/
 score bindings. Existing consumed inputs are not fresh test sources.
+
+## Fresh audio v7 source preparation, before detector inference
+
+`audio-v7-fresh-sources.json` publishes the fixed120 foreground references,
+six separate genuine background speakers, eight noise/four music recordings,
+source/full-decoded/prefix hashes, archive integrity receipts and110 connected
+foreground groups. Some ElevenLabs script openings are shared and remain
+connected. This source catalogue contains no detector scores or passing
+confirmation result. The [prospective design](../audio-guard-v7-confirmation.md)
+specifies1080 planned conditions and advancement requirements; a final exact
+variant/method/gate manifest is still required before scoring.
+
+The source-selection tooling imports no classifier. After acquiring the pinned
+publisher metadata and archives under their separate terms, run
+`prepare_audio_confirmation_v7.py <evaluation-data-root> <new-plan.json>`.
+It uses all66 unused LibriSpeech speakers, the actual synthesized Chatterbox
+turn indices and thirty ElevenLabs voices with distinct complete scripts.
+Fetch the plan's fixed ElevenLabs assets with the checksummed downloader, then
+run `prepare_audio_confirmation_inputs_v7.py <evaluation-data-root> <plan>
+<new-output-root>`. This checks original/prefix novelty, known groups and
+unused backgrounds using the existing permitted MUSAN cache. It preserves
+source failures instead of changing selections based on responses. Local
+manifest hashes include local paths and need not match another machine's JSON;
+source byte/PCM commitments and source roles are the portable comparison.
+
+`export_audio_confirmation_sources_v7.py <prepared-sources.json> <new-public.json>`
+exports references and hashes without source audio, full transcripts or local
+paths. Metadata IDs and checksums do not establish biometric identity novelty,
+unknown pretrained overlap or independent permission verification. The initial
+mono-only metadata-planning stop is retained locally; the valid preparation
+uses production downmix for mono/stereo isolated turns. No fresh classifier
+has run, and no outside reviewer has participated.

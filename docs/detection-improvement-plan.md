@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared the prospective v7 fresh audio sources without classifier inference:
+  60 unused genuine speakers,30 ElevenLabs voices/complete scripts,30 Chatterbox
+  prompt IDs/dialogues, six separate genuine background speakers and twelve
+  unused noise/music recordings. Known shared script openings leave110
+  connected foreground groups, not120 independent prompts. Source/full-decoded/
+  prefix checks and publisher checksums passed; public references and a
+  prospective1080-input design/gates are available. Exact variants and scoring
+  code still require a final freeze before inference. This is source preparation,
+  not completed confirmation or outside testing. [Design](audio-guard-v7-confirmation.md).
+
 - Audio v7 separated fitting from class-set calibration and compared with the
   exact current guarded service on all720 consumed development inputs. All12
   frozen development gates passed:563 correct versus500, the same1false AI/0

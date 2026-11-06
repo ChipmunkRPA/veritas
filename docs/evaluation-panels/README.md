@@ -188,3 +188,48 @@ These are local correspondence/refitting checks. No outside reviewer has
 independently verified them. Refit success does not validate the neural feature
 extraction, source rights, fresh accuracy or the failed detector. This head is
 not enabled and its raw margin is not AI confidence.
+
+## Second-family controlled mouth edits
+
+The [v7 extension](../mouth-multifamily-v7-evaluation.md) adds forty clips from
+the same eight consumed actors. `mouth-v7-development-inputs.json` retains every
+new input, native interval, mask reference, crop mapping and render proof hash.
+`mouth-v7-source-neural-audit.json` verifies all 2,740 native frames/800 masks and
+320 neural input bindings, plus a fixed sample of 32 neural output replays.
+Raw current-check windows, frozen code/point, and the 88-clip two-family summary
+are separate JSON files in this directory. This is development characterization,
+not fresh accuracy or independent review.
+
+Only seven permitted generator assets are downloaded; no publisher demo media,
+face-parsing, DWPose/S3FD or optional SyncNet weights are acquired:
+
+```sh
+python3 backend/scripts/fetch_mouth_generator_v7.py \
+  docs/evaluation-panels/mouth-v7-generator-assets.json /path/to/benchmark-assets \
+  --sha256 bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc
+```
+
+`--verify-only` checks an existing complete cache without downloading. Publisher
+LFS/Git identities and byte bounds are mandatory; an unexpected existing file
+is refused. The source notice and separate CREMA-D terms remain applicable.
+No publisher Python/shell file is executed by this helper.
+
+The tested research runtime adds four pinned wheels to the project's existing
+backend environment through a separate path:
+
+```sh
+backend/.venv/bin/python -m pip install --require-hashes --no-deps --only-binary=:all: \
+  --target /path/to/new-research-runtime -r docs/evaluation-panels/mouth-v7-runtime.lock
+```
+
+Select that path only for research processes, for example
+`PYTHONPATH=backend:/path/to/new-research-runtime`. This does not upgrade the app's
+environment. Package/version identities are in `mouth-v7-runtime.json`.
+The GPU smoke and generation/audit drivers are tested on this Mac with explicit
+MPS/float32. The smoke exposes a CPU option, but this port has not been forward
+tested on CPU. Full generation is not validated for CUDA or GCP.
+Source reconstruction needs the separately acquired v4 original cache;
+its raw, normalized and lossless-parent digests have distinct meanings.
+Re-encoding/device/library differences require new receipts, not substitution in
+the frozen results. Model/source names here document research rights and methods;
+they do not add identifiers to customer analysis exports or reports.

@@ -1,0 +1,37 @@
+{
+  "purpose": "Isolated benchmark generator only; application environment unchanged",
+  "packages": [
+    {
+      "name": "diffusers",
+      "version": "0.42.1",
+      "wheel": "diffusers-0.42.1-py3-none-any.whl",
+      "sha256": "9154faa704ce00e0b77f568e0d64786064368528aab5fc14eeea92f87d788014",
+      "url": "https://files.pythonhosted.org/packages/e1/e9/4328c781bc64f8b74363f66674c00e65021e9a857fb9cb4882ed447956cd/diffusers-0.42.1-py3-none-any.whl",
+      "license": "Apache 2.0 License"
+    },
+    {
+      "name": "importlib-metadata",
+      "version": "10.1.0",
+      "wheel": "importlib_metadata-10.1.0-py3-none-any.whl",
+      "sha256": "cf45ce66a929c64e994185a809c04840d0501db17e663810d993d0f4829265c7",
+      "url": "https://files.pythonhosted.org/packages/65/b6/495438ad95e0102aff8f6786b5474202f38cd5d4700d03a72b77977dec10/importlib_metadata-10.1.0-py3-none-any.whl",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2",
+      "wheel": "zipp-4.1.2-py3-none-any.whl",
+      "sha256": "b30cb6cd253122169c47de245ca24a86bac2a5d3802ba15bf7ba6414eb9e144d",
+      "url": "https://files.pythonhosted.org/packages/b8/44/7bd2007260da11cccca29ba2d4c345f1287aa663db38ee7cefeabf6386a5/zipp-4.1.2-py3-none-any.whl",
+      "license": "MIT"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.32.0",
+      "wheel": "huggingface_hub-1.32.0-py3-none-any.whl",
+      "sha256": "b0c7c80561969d9cdacdd55fce67ba9584cca0b9d4ea80957a3a5c1445fac5c8",
+      "url": "https://files.pythonhosted.org/packages/1b/cf/d98dd561d6d0d7b7d7a64d1563f8aaaa7c235daee41c1c9bcc3da62420ed/huggingface_hub-1.32.0-py3-none-any.whl",
+      "license": "Apache-2.0"
+    }
+  ]
+}

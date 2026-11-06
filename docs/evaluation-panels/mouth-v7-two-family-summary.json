@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.mouth-two-family-consumed-summary/7",
+  "role": "Descriptive consumed-development review-cue characterization; not fresh accuracy or customer confidence",
+  "review_point": 0.007326911389827726,
+  "shared_implementation_files": {
+    "backend/app/detectors/video/adapters/face_sequence.py": "95d2b66f3ade4bf3acb975696746ba45f373fc1825535f68b4037fa317d1ef66",
+    "backend/app/detectors/video/adapters/lipsync_xcorr.py": "f7fa2c38f901a1fce0af795eb528a1918f4a7d43f4608499877c2aff24d5bef7",
+    "backend/app/detectors/video/adapters/tracks.py": "e04fb00a143374e743862749498008e1420d0c6488a47de90b346fcf0f81522d",
+    "backend/app/detectors/video/face_sequence.py": "e61ce53e6fafbb3dc0ae90425d13324392ac1d70fb6bd442beb0d0e0c3fe684d",
+    "backend/app/detectors/video/tracking.py": "b9d64f3de822f82781980bf62f901b97c62b758078d5cbfed6591dc2609ace43",
+    "backend/app/detectors/video/xcorr.py": "cc891a4e21a064552e441bb73db1e698ff90f18d273cdf74bacf6c165f8165cd",
+    "backend/app/models.yaml": "c7754ce5edd80160a4e2d3d8988b610b992eb4f713f64a81c39437fc1196bd71",
+    "backend/scripts/compare_mouth_sequence_v4.py": "ef5195270068a28ab082ba7015d03a8d5e78b21c466d64525613b903eb7e9a74"
+  },
+  "planned_clips": 88,
+  "source_actor_groups": 8,
+  "ai_edits": 32,
+  "non_ai_controls": 56,
+  "assessed": 88,
+  "localized_ai": 0,
+  "ai_without_flag": 32,
+  "non_ai_review_flags": 1,
+  "families": {
+    "LivePortrait-adapted": {
+      "planned": 48,
+      "ai_edits": 16,
+      "non_ai_controls": 32,
+      "assessed": 48,
+      "localized_ai": 0,
+      "ai_without_flag": 16,
+      "non_ai_flags": 0,
+      "mean_ai_temporal_iou": 0.0,
+      "mean_ai_spatial_iou": 0.0
+    },
+    "MuseTalk-adapted": {
+      "planned": 40,
+      "ai_edits": 16,
+      "non_ai_controls": 24,
+      "assessed": 40,
+      "localized_ai": 0,
+      "ai_without_flag": 16,
+      "non_ai_flags": 1,
+      "mean_ai_temporal_iou": 0.0,
+      "mean_ai_spatial_iou": 0.0
+    }
+  },
+  "limitations": [
+    "All variants share eight consumed source actors, four sentence families and a studio recording context.",
+    "Raw review-cue outcomes do not measure the entire app, general authenticity accuracy or independent false-alarm rates.",
+    "Current numeric point and shared production implementations were unchanged; no rejected detector revived.",
+    "No outside reviewer or new confirmation actors."
+  ]
+}

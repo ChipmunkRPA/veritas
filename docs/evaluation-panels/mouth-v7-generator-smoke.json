@@ -1,0 +1,174 @@
+{
+  "purpose": "Bounded deterministic generator smoke on one already-consumed source frame.",
+  "device": "mps",
+  "source_id": "crema-1051-original",
+  "source_sha256": "c026735ee9e848fdab7044eaeccfc3dff7472cdd58aaf95e450e3fc1dfabef98",
+  "frame_index": 36,
+  "pts": 1480,
+  "time_base": "1/1000",
+  "native_rgb_sha256": "d3dc3b21bf7b840b1131ce0d263de1697857b4e76ea0f912b9d255fc716a5308",
+  "alignment_matrix_hex": [
+    [
+      "0x1.d77b654b82c34p+0",
+      "0x0.0p+0",
+      "-0x1.3a83aef6ca971p+8"
+    ],
+    [
+      "0x0.0p+0",
+      "0x1.8618618618618p+0",
+      "-0x1.089e79e79e79ep+7"
+    ]
+  ],
+  "aligned_rgb_sha256": "5dff0376f85de198031b70b81d8088aa1c8cc2ed893a1d53359465a11441e8b6",
+  "pcm_sha256": "07ba656a9500db7fa3c77f5b8d997f1c679572eb81ab429e4745450622b00d15",
+  "seeded_repeat_exact": true,
+  "audio_conditioning_changed_crop_pixels": 56615,
+  "libraries": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "diffusers": "0.42.1",
+    "huggingface_hub": "1.32.0"
+  },
+  "records": [
+    {
+      "tag": "aligned",
+      "conditioning_frame": 36,
+      "conditioning_f32_sha256": "03721db87d07bf07687c1bbecc1b2821058288a27675ebeb31350f8d065b2ad2",
+      "proof": {
+        "method": "musetalk-adapted-benchmark/7.0",
+        "seed": 717,
+        "masked_input_f32_sha256": "62a53a23e2e1c7f0df16fdd2f1e8a54d6d99cc6f1c6510b6565d2550af3c0fa1",
+        "original_input_f32_sha256": "a8a87cdca436801a1112610ec4ff22a803d7cbc60f192835279fd78be9b03cf3",
+        "sampled_latents_f32_sha256": "fd43e86536c7ea3219d418066ee252448f250e85d9d9df7cdcf31c4b4fef54b7",
+        "condition_with_position_f32_sha256": "70d60971bb83fe3fa5657173044e8ac1649a2420aa631fb9c2d496586412874f",
+        "predicted_latents_f32_sha256": "ec69162a8726a02d86dcddc298669dbf6bcfd36a4cc001651b62a49ff1701a46",
+        "output_rgb_sha256": "bd274778fabec97a361e3feeacc39807f4cecf6b458d6aa1f7766943bf77e96c"
+      },
+      "seconds": 0.48970450001070276,
+      "changed_native_pixels": 2710,
+      "native_rgb_sha256": "6b19ad092f066bf3e2f586ee172967dbca0f8ef7d6a5bf4729a7ea3218dc9f3c"
+    },
+    {
+      "tag": "repeat",
+      "conditioning_frame": 36,
+      "conditioning_f32_sha256": "03721db87d07bf07687c1bbecc1b2821058288a27675ebeb31350f8d065b2ad2",
+      "proof": {
+        "method": "musetalk-adapted-benchmark/7.0",
+        "seed": 717,
+        "masked_input_f32_sha256": "62a53a23e2e1c7f0df16fdd2f1e8a54d6d99cc6f1c6510b6565d2550af3c0fa1",
+        "original_input_f32_sha256": "a8a87cdca436801a1112610ec4ff22a803d7cbc60f192835279fd78be9b03cf3",
+        "sampled_latents_f32_sha256": "fd43e86536c7ea3219d418066ee252448f250e85d9d9df7cdcf31c4b4fef54b7",
+        "condition_with_position_f32_sha256": "70d60971bb83fe3fa5657173044e8ac1649a2420aa631fb9c2d496586412874f",
+        "predicted_latents_f32_sha256": "ec69162a8726a02d86dcddc298669dbf6bcfd36a4cc001651b62a49ff1701a46",
+        "output_rgb_sha256": "bd274778fabec97a361e3feeacc39807f4cecf6b458d6aa1f7766943bf77e96c"
+      },
+      "seconds": 0.38980166701367125,
+      "changed_native_pixels": 2710,
+      "native_rgb_sha256": "6b19ad092f066bf3e2f586ee172967dbca0f8ef7d6a5bf4729a7ea3218dc9f3c"
+    },
+    {
+      "tag": "earlier",
+      "conditioning_frame": 28,
+      "conditioning_f32_sha256": "2ca5e21bbd1f043db8e3b880557ea03a516f4f9820ac225b49328f3a9f23155a",
+      "proof": {
+        "method": "musetalk-adapted-benchmark/7.0",
+        "seed": 717,
+        "masked_input_f32_sha256": "62a53a23e2e1c7f0df16fdd2f1e8a54d6d99cc6f1c6510b6565d2550af3c0fa1",
+        "original_input_f32_sha256": "a8a87cdca436801a1112610ec4ff22a803d7cbc60f192835279fd78be9b03cf3",
+        "sampled_latents_f32_sha256": "fd43e86536c7ea3219d418066ee252448f250e85d9d9df7cdcf31c4b4fef54b7",
+        "condition_with_position_f32_sha256": "98ad53ae29adcc50425d9e0ac440df18c64fe4076fc9634c1bde25046e89ad9b",
+        "predicted_latents_f32_sha256": "d2d064ef053cc6d9de6e83fad3c7ff68b0ec5d257c1185fbebb464bbcf225af8",
+        "output_rgb_sha256": "96af72ed991a26efce2d4135ef97b2494371a8439f9bfb6c1bcd246984831952"
+      },
+      "seconds": 0.38760783296311274,
+      "changed_native_pixels": 2712,
+      "native_rgb_sha256": "87606ba6367951b8ebb349f0c5684665ba2b148ab2e4d09505b10c683939c1d1"
+    }
+  ],
+  "accuracy_or_deployment_validation": false,
+  "strict_load_audit": {
+    "vae_attention_key_mapping": [
+      {
+        "from": "decoder.mid_block.attentions.0.key.bias",
+        "to": "decoder.mid_block.attentions.0.to_k.bias"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.key.weight",
+        "to": "decoder.mid_block.attentions.0.to_k.weight"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.proj_attn.bias",
+        "to": "decoder.mid_block.attentions.0.to_out.0.bias"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.proj_attn.weight",
+        "to": "decoder.mid_block.attentions.0.to_out.0.weight"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.query.bias",
+        "to": "decoder.mid_block.attentions.0.to_q.bias"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.query.weight",
+        "to": "decoder.mid_block.attentions.0.to_q.weight"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.value.bias",
+        "to": "decoder.mid_block.attentions.0.to_v.bias"
+      },
+      {
+        "from": "decoder.mid_block.attentions.0.value.weight",
+        "to": "decoder.mid_block.attentions.0.to_v.weight"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.key.bias",
+        "to": "encoder.mid_block.attentions.0.to_k.bias"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.key.weight",
+        "to": "encoder.mid_block.attentions.0.to_k.weight"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.proj_attn.bias",
+        "to": "encoder.mid_block.attentions.0.to_out.0.bias"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.proj_attn.weight",
+        "to": "encoder.mid_block.attentions.0.to_out.0.weight"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.query.bias",
+        "to": "encoder.mid_block.attentions.0.to_q.bias"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.query.weight",
+        "to": "encoder.mid_block.attentions.0.to_q.weight"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.value.bias",
+        "to": "encoder.mid_block.attentions.0.to_v.bias"
+      },
+      {
+        "from": "encoder.mid_block.attentions.0.value.weight",
+        "to": "encoder.mid_block.attentions.0.to_v.weight"
+      }
+    ],
+    "vae_all_cpu_tensors_exact": true,
+    "all_three_modules_strict_loaded": true
+  },
+  "geometry": {
+    "mode": "landmark-box",
+    "bbox": [
+      171,
+      87,
+      310,
+      255
+    ],
+    "approximate_half_face_y": 171.0247097015381,
+    "interpretation": "YuNet five-point approximation, not measured 68-point landmark 29"
+  },
+  "implementation_sha256": {
+    "musetalk_benchmark_v7.py": "bc856716cce377ef3398afd8c88e64cde5f1f0da8f8bc3fd5818b18ec7837b2e",
+    "smoke_mouth_generator_v7.py": "8e36f494dfd80cc0f5682cb8e336f31ab09afc65843356298a503d92da84827e"
+  }
+}

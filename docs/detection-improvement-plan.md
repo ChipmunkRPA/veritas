@@ -162,3 +162,13 @@ integration remains unfinished.
   local coefficients, normalization and point reproduced with zero differences.
   No fresh actors, customer detector or confidence changes. Outside review is
   still outstanding. [V6 results](mouth-trained-v6-evaluation.md).
+- Added a second permitted mouth-rendering family with an isolated Mac runtime,
+  strict checked weights, deterministic audio-conditioned generation and matched
+  ordinary resampling/blur controls. All forty new clips were prepared. Source
+  replay passed 2,740 frames, 800 masks, all 320 neural input bindings and a fixed
+  sample of 32 bitwise neural-output replays. The unchanged current cue localized
+  0/16 new AI edits and flagged one strong-blur control. Across two families:
+  88 assessed correlated clips, 32 AI edits, zero correct locations, one control
+  flag. This extends consumed-source development, not fresh confirmation or
+  model admission. All source metadata, rights, recipe and review measurements
+  are published; outside review remains pending. [V7 result](mouth-multifamily-v7-evaluation.md).

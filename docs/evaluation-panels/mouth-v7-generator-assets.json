@@ -1,0 +1,164 @@
+{
+  "schema": "chipmunk.mouth-generator-assets/7",
+  "purpose": "Local known-edit benchmark generation only; not a customer detector",
+  "source_revision": "0a89dec45a0192b824e3cf4daf96c239440c5ed8",
+  "source_review": {
+    "source_revision": "0a89dec45a0192b824e3cf4daf96c239440c5ed8",
+    "reviewed_code": [
+      {
+        "path": "LICENSE",
+        "git_blob": "132bf6fc803b84b40fee6c2132907dfaa396dc3b",
+        "sha256": "992ec5fd1dd4964cfa003665196cd0c0c10a7a5aa10109991e964eebd2c7f116",
+        "bytes": 13427
+      },
+      {
+        "path": "README.md",
+        "git_blob": "49e76c449c13ec29daef1bdf9b48457cb8909d33",
+        "sha256": "63587c38fa53bd3292654a71aa6978628db02dd02cc93153030f3d0dca7721bf",
+        "bytes": 22817
+      },
+      {
+        "path": "download_weights.sh",
+        "git_blob": "affa5a9d970cc90e0dfcc778e593adab9c261fdd",
+        "sha256": "926e9f48ca878829eb145ce0a40cc17472c14cda73bf408604358cccc28c78a0",
+        "bytes": 1734
+      },
+      {
+        "path": "musetalk/models/unet.py",
+        "git_blob": "575e79af26e04b9c37d9c233d406e67a206c6a90",
+        "sha256": "05d5dadfde2e726b61d8387a4876336d4dcacc696636e8dcfec69863ce819256",
+        "bytes": 1686
+      },
+      {
+        "path": "musetalk/models/vae.py",
+        "git_blob": "51efef420f46ec0dc01d5c8ac12825e6e4c355c0",
+        "sha256": "6ecde3f4417178d8a9de5ed6045e2a4832efa65189b10b0672cab68efe529d32",
+        "bytes": 5419
+      },
+      {
+        "path": "musetalk/utils/audio_processor.py",
+        "git_blob": "dbdee25393f721bc27b35bc4cb5bda7a82b2b9bc",
+        "sha256": "b7b62f3daa99678576138bf581a6394a10d346571a2530a760d1299ffd622b81",
+        "bytes": 4227
+      },
+      {
+        "path": "scripts/inference.py",
+        "git_blob": "428afb99a8fbb3175598e18c096b12dbfdf943d5",
+        "sha256": "aaf9c8289c8f07eaf00b87fb11442ac0e1005ac4e2f469966ae3dab2dc4a03aa",
+        "bytes": 13461
+      }
+    ],
+    "model_cards": [
+      {
+        "role": "musetalk-checkpoint",
+        "url": "https://huggingface.co/TMElyralab/MuseTalk/resolve/2bcb936e2fddb4d86db4c62fd45b387d0c061571/README.md",
+        "sha256": "1e005ec9c3bfc7313714e714abea62205098299139db5cccb884a19a46e2a579",
+        "declared_license": "mit"
+      },
+      {
+        "role": "vae",
+        "url": "https://huggingface.co/stabilityai/sd-vae-ft-mse/resolve/31f26fdeee1355a5c34592e401dd41e45d25a493/README.md",
+        "sha256": "8ac69483c18a45d0fee531e08b6ede97ee9b4c79e875659c1b0e6a5903ca3400",
+        "declared_license": "mit"
+      },
+      {
+        "role": "speech",
+        "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/README.md",
+        "sha256": "57a3bbbbf1e79369e4d1ced790812a1723b43a256c1b43fc70cc2f3339ae9881",
+        "declared_license": "apache-2.0"
+      }
+    ],
+    "scope": "Acquisition for permission/dependency inspection only; no code executed or checkpoint downloaded"
+  },
+  "assets": [
+    {
+      "role": "musetalk",
+      "path": "musetalk/musetalk.json",
+      "url": "https://huggingface.co/TMElyralab/MuseTalk/resolve/2bcb936e2fddb4d86db4c62fd45b387d0c061571/musetalkV15/musetalk.json?download=true",
+      "bytes": 748,
+      "sha256": null,
+      "git_blob": "b822db87e503a283fbbee73617f89dcd294cb91c",
+      "license": "mit",
+      "publisher_repo": "TMElyralab/MuseTalk",
+      "revision": "2bcb936e2fddb4d86db4c62fd45b387d0c061571"
+    },
+    {
+      "role": "musetalk",
+      "path": "musetalk/unet.pth",
+      "url": "https://huggingface.co/TMElyralab/MuseTalk/resolve/2bcb936e2fddb4d86db4c62fd45b387d0c061571/musetalkV15/unet.pth?download=true",
+      "bytes": 3400074924,
+      "sha256": "7ebf6c98c181e20838e4c0054e96e944ac60d5d692cc01db42839fe11b787007",
+      "git_blob": "ad33c410815bf12300e8cac58b10255df3e61d88",
+      "license": "mit",
+      "publisher_repo": "TMElyralab/MuseTalk",
+      "revision": "2bcb936e2fddb4d86db4c62fd45b387d0c061571"
+    },
+    {
+      "role": "vae",
+      "path": "vae/config.json",
+      "url": "https://huggingface.co/stabilityai/sd-vae-ft-mse/resolve/31f26fdeee1355a5c34592e401dd41e45d25a493/config.json?download=true",
+      "bytes": 547,
+      "sha256": null,
+      "git_blob": "0db26717579be63eb0ddbf15b43faa43700dfe5a",
+      "license": "mit",
+      "publisher_repo": "stabilityai/sd-vae-ft-mse",
+      "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493"
+    },
+    {
+      "role": "vae",
+      "path": "vae/diffusion_pytorch_model.safetensors",
+      "url": "https://huggingface.co/stabilityai/sd-vae-ft-mse/resolve/31f26fdeee1355a5c34592e401dd41e45d25a493/diffusion_pytorch_model.safetensors?download=true",
+      "bytes": 334643276,
+      "sha256": "a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815",
+      "git_blob": "90464d67ac7303d0ee4696334df13da130a948ea",
+      "license": "mit",
+      "publisher_repo": "stabilityai/sd-vae-ft-mse",
+      "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493"
+    },
+    {
+      "role": "speech",
+      "path": "speech/config.json",
+      "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/config.json?download=true",
+      "bytes": 1983,
+      "sha256": null,
+      "git_blob": "417aa9de49a132dd3eb6a56d3be2718b15f08917",
+      "license": "apache-2.0",
+      "publisher_repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af"
+    },
+    {
+      "role": "speech",
+      "path": "speech/preprocessor_config.json",
+      "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/preprocessor_config.json?download=true",
+      "bytes": 184990,
+      "sha256": null,
+      "git_blob": "c2048dfa9fd94a052e62e908d2c4dfb18534b4d2",
+      "license": "apache-2.0",
+      "publisher_repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af"
+    },
+    {
+      "role": "speech",
+      "path": "speech/model.safetensors",
+      "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/model.safetensors?download=true",
+      "bytes": 151061672,
+      "sha256": "7ebd0e69e78190ffe1438491fa05cc1f5c1aa3a4c4db3bc1723adbb551ea2395",
+      "git_blob": "fe42acd740b2c47cb34cf7b92426e3f82c1ce357",
+      "license": "apache-2.0",
+      "publisher_repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af"
+    }
+  ],
+  "excluded_components": [
+    "Original internet test media",
+    "DWPose",
+    "S3FD",
+    "face-parsing checkpoints",
+    "SyncNet"
+  ],
+  "limitations": [
+    "Publisher permissions are recorded; a complete training-data rights audit is not established.",
+    "Adapted permitted face geometry and masks differ from the publisher demo pipeline.",
+    "No fresh detector confirmation or customer-model admission follows from downloading these assets."
+  ]
+}

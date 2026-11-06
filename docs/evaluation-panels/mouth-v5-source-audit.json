@@ -1,0 +1,252 @@
+{
+  "schema": "chipmunk.mouth-artifact-source-audit/5",
+  "manifest_sha256": "d652d3d67ff9bc670ed0e7b18eecc0958daf71fcd6a05c55f0dfd2c16b32a0b2",
+  "score_receipt_sha256": "57f42b591105455d2bf25dadcb37c555d8be69b06191992acfb0c9d9ea2ce5cd",
+  "implementation_sha256": "1ee6911764b6f2b884c4e97ba12008d16b15d5be57536a61dfd9ca027b7d28cf",
+  "planned": 48,
+  "passed": 48,
+  "verified_frames": 2016,
+  "scope": "Local source/crop/tensor correspondence, not outside review or accuracy validation",
+  "cases": [
+    {
+      "id": "crema-1009-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1009-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1009-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1009-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1009-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1009-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1074-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1026-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1016-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1080-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1005-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1021-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:original",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:local-light",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:local-resample",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:constant-audio-delay",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:ai-redraw",
+      "status": "ok",
+      "verified_frames": 42
+    },
+    {
+      "id": "crema-1008-original:ai-retime",
+      "status": "ok",
+      "verified_frames": 42
+    }
+  ]
+}

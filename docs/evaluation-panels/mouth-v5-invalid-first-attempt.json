@@ -1,0 +1,8 @@
+{
+  "decision": "invalid; do not use accuracy or localization outcomes",
+  "reason": "FrameStore.iter_many emits cached frames first. Experimental runner zipped capture order to sorted feature indices. All 48 independent native pixel checks failed at first model input.",
+  "source_audit_sha256": "bf4b92c801a41af0d690b172c0b34d08f95b277e159d1e323b48bf5ec25bf0d5",
+  "score_receipt_sha256": "881031ce6a438edfbad2e27a0cce652c438884ef395de23c94624eb9b898645e",
+  "lock_sha256": "0aab5d55a10452af456efb186f172f00cd60e83a73d5cb5c3f516736731049a4",
+  "next": "Change capture-to-index association only; retain sources, response formula and gates. Re-freeze as v5.1 and rescore consumed development. No fresh actors."
+}

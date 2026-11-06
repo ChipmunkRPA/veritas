@@ -6,6 +6,16 @@ feature change. It does not train a new head, certify lip synchronization,
 produce calibrated AI confidence, or alter serving behavior. A successful
 development screen still needs a separately frozen fresh-actor/sentence test.
 
+Revision 5.1 repairs an experimental input-binding error, without changing the
+statistic, cases or advancement gates. The initial v5.0 runner wrongly paired
+capture order with sorted feature indices; FrameStore returns cached frames
+first. All 48 independent native-pixel audits failed, invalidating that run's
+localization figures. Its code is retained at Git revision `549c89e` and its
+local receipts remain immutable. Revision 5.1 associates native crops with the
+adapter's original insertion keys before feature sorting and verifies the exact
+112-pixel production crop at that boundary. Every frame must pass the separate
+source/tensor audit before interpreting the new comparison.
+
 Use the already installed GenD CLIP L/14 checkpoint at registry revision
 `891ce014a0308386c4d7d25b3dcf436a22db5504`, weight SHA-256
 `d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833`.

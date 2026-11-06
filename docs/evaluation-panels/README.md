@@ -130,3 +130,30 @@ hashes and masks rather than silently substituting them in frozen results.
 adapter inputs. Its internal point has feature-distance units and is not an AI
 confidence percentage. The candidate failed its gates and is not enabled.
 No outside reviewer has validated this panel.
+
+## Model-free review of learned mouth-edit responses
+
+The [v5 comparison](../mouth-artifact-v5-evaluation.md) publishes
+`mouth-v5-public-responses.json` with all retained source-clock/model-input
+hashes and raw logits. `mouth-v5-source-audit.json` verifies 2,016 input bindings;
+`mouth-v5-invalid-first-attempt.json` preserves the invalid run's notice. The
+candidate was rejected. These are consumed development and local audits, not
+outside validation.
+
+An outside reviewer can check arithmetic and temporal denominators without
+installing the app or downloading weights:
+
+```sh
+python3 backend/scripts/review_mouth_artifact.py \
+  docs/evaluation-panels/mouth-v4-development.json \
+  docs/evaluation-panels/mouth-v5-public-responses.json /path/to/new-review.json \
+  --catalogue-sha256 82d90c2c1e0c05d3a8ecb42370f51c2fd62a139a1b8972e31fb6724d203b5b65 \
+  --receipt-sha256 a54e474404ccc8f136306bafeb4844e51dd86ad31b62df5a97f29146430c6339
+```
+
+The helper refuses changed input digests and existing outputs. It recomputes
+each reported window from retained logits, checks its recorded source timing,
+recomputes the non-AI-only point, and includes every planned case. It cannot
+verify actual pixels/model execution, missing eligible windows, face-track
+membership, spatial masks or independent accuracy. Those require separately
+permitted media and full source/weight replay.

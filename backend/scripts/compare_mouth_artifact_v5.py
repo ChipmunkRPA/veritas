@@ -16,7 +16,7 @@ from app.detectors.video.face_sequence import REVIEW_POINT
 from scripts import compare_mouth_sequence_v4 as previous
 from scripts.liveportrait_mouth_benchmark import digest
 
-METHOD = "learned-face-artifact-contrast/5.0"
+METHOD = "learned-face-artifact-contrast/5.1"
 CONTROLS = {"original", "local-light", "local-resample", "constant-audio-delay"}
 
 
@@ -87,12 +87,24 @@ def measured_region(window, inputs, table):
     }
 
 
+def associate_native_crops(crops, native):
+    """Join at the adapter's insertion boundary, before patch_features sorts keys."""
+    if len(crops) != len(native):
+        raise ValueError("Native aligned crops do not correspond to baseline feature inputs")
+    by_index = {}
+    for (i, resized), (pixels, binding) in zip(crops.items(), native, strict=True):
+        if not np.array_equal(cv2.resize(pixels, (112, 112), interpolation=cv2.INTER_AREA), resized):
+            raise ValueError("Captured native pixels differ from the production feature crop")
+        by_index[i] = (pixels, binding)
+    return by_index
+
+
 def score_case(path, case, reference, models, device):
     from app.detectors.image import gend
     from app.detectors.video.adapters import face_sequence as adapter
 
     captured, native = {}, []
-    real_warp, real_windows = adapter.warp, adapter.sequence_windows
+    real_warp, real_windows, real_features = adapter.warp, adapter.sequence_windows, adapter.patch_features
 
     def capture_crop(rgb, matrix, side):
         crop = real_warp(rgb, matrix, side)
@@ -113,9 +125,14 @@ def score_case(path, case, reference, models, device):
         captured["args"] = args
         return real_windows(*args)
 
+    def capture_features(crops, *args, **kwargs):
+        captured["native_by_index"] = associate_native_crops(crops, native)
+        return real_features(crops, *args, **kwargs)
+
     with (
         patch.object(adapter, "warp", side_effect=capture_crop),
         patch.object(adapter, "sequence_windows", side_effect=capture_windows),
+        patch.object(adapter, "patch_features", side_effect=capture_features),
     ):
         replay = previous.score_case(path, case, models)
     for key in ("status", "base_windows", "sampling_centers", "time_base", "baseline_capture_parity"):
@@ -124,20 +141,20 @@ def score_case(path, case, reference, models, device):
     if "args" not in captured:
         return {"status": "not_applicable", "artifact_windows": [], "baseline_replay_parity": True}
     centers, tracks, features, table = captured["args"]
-    if len(native) != len(features):
+    native_by_index = captured["native_by_index"]
+    if set(native_by_index) != set(features):
         raise ValueError("Native aligned crops do not correspond to baseline feature inputs")
     indices = list(features)
-    # The production adapter inserts crops in decoded source order before patch_features sorts them.
     if indices != sorted(indices):
         raise ValueError("Unexpected production crop ordering")
     logits, bindings = {}, []
     for start in range(0, len(indices), 4):
-        batch = gend.to_batch([crop for crop, _ in native[start : start + 4]])
+        batch = gend.to_batch([native_by_index[i][0] for i in indices[start : start + 4]])
         values = gend.logits(models["gend.clip_l14"].obj, batch, device)
         for offset, z in enumerate(values):
             k = start + offset
             i = indices[k]
-            _, binding = native[k]
+            _, binding = native_by_index[i]
             binding.update(
                 frame_index=i,
                 pts=table.pts[i],
@@ -171,6 +188,10 @@ def frozen_implementation():
         "backend/app/detectors/image/faces.py",
         "backend/app/detectors/video/face_sequence.py",
         "backend/app/detectors/video/adapters/face_sequence.py",
+        "backend/app/detectors/video/frame_store.py",
+        "backend/app/detectors/video/decode.py",
+        "backend/app/detectors/video/adapters/tracks.py",
+        "backend/app/detectors/video/tracking.py",
         "backend/app/models.yaml",
     ]
     return {p: digest(root / p) for p in paths}

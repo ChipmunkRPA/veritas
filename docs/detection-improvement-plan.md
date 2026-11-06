@@ -144,3 +144,12 @@ integration remains unfinished.
   or scoring fresh actors. Published source references, asset pins and
   generation/audit tooling; outside review remains outstanding.
   [Results and limits](mouth-sequence-v4-evaluation.md).
+- Tested a distinct learned face-forgery temporal contrast on the same 48
+  consumed mouth cases. A separate audit caught a cached-frame ordering error;
+  the invalid run remains retained. After correcting and re-freezing only the
+  input binding, all 2,016 native/crop/tensor checks and 48 baseline replays
+  passed. The valid candidate localized 0/16 AI edits and failed its gates.
+  Rejected without fresh actors or serving changes. Published all input hashes,
+  raw logits and a standard-library window/denominator review tool. This enables
+  outside arithmetic review but does not constitute it.
+  [V5 result and failure record](mouth-artifact-v5-evaluation.md).

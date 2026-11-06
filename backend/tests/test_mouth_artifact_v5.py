@@ -77,3 +77,32 @@ def test_unassessed_positive_is_a_miss_even_with_no_exceptions():
     summary = trial.previous.summary(outcomes)
     assert summary["planned"] == summary["ai_edits"] == summary["ai_without_flag"] == 1
     assert summary["localized_ai"] == summary["assessed"] == 0
+
+
+def test_cached_first_frame_store_preserves_explicit_input_association(tmp_path):
+    import cv2
+
+    from app.detectors.video.frame_store import FrameStore
+
+    def decode(path, table, indices, **kwargs):
+        for i in indices:
+            yield SimpleNamespace(index=i, pts=table.pts[i], rgb=np.full((120, 120, 3), i, np.uint8))
+
+    table = SimpleNamespace(pts=list(range(8)), time_base="1/25")
+    store = FrameStore(tmp_path / "unused", table, decoder=decode)
+    store.get_many([3, 5])
+    emitted = list(store.iter_many(range(1, 7)))
+    assert [i for i, _ in emitted] == [3, 5, 1, 2, 4, 6]
+    crops = {i: cv2.resize(rgb, (112, 112), interpolation=cv2.INTER_AREA) for i, rgb in emitted}
+    native = [(rgb, {"source_value": int(rgb[0, 0, 0])}) for _, rgb in emitted]
+    joined = trial.associate_native_crops(crops, native)
+    for i in sorted(crops):
+        pixels, binding = joined[i]
+        assert binding["source_value"] == i == int(pixels[0, 0, 0])
+
+
+def test_native_crop_mismatch_is_refused_before_scoring():
+    crops = {8: np.ones((112, 112, 3), np.uint8)}
+    native = [(np.zeros((224, 224, 3), np.uint8), {})]
+    with pytest.raises(ValueError, match="native pixels differ"):
+        trial.associate_native_crops(crops, native)

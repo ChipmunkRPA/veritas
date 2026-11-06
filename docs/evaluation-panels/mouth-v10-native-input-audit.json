@@ -1,0 +1,798 @@
+{
+  "schema": "chipmunk.mouth-context-native-input-audit/10",
+  "lock_sha256": "8322f244d2916f136578472d7a9c2de6c8803ae8a61a13069cef051e6c1369c5",
+  "calibration_scores_sha256": "27b0e05e2d2df31bab72d33245179d4e99b1e3963f91a896aae815f43c943616",
+  "development_scores_sha256": "0a93da0a8efe317c0e25cba84a6f906a6fd959a19d6cb2ed24e57346f1fbeacd",
+  "implementation_sha256": "c5192a8a8e32e2931337d2977228dba9ff40e9d0aa0fc558c33d1a8038676d33",
+  "planned": 112,
+  "passed": 112,
+  "native_inputs": 4704,
+  "head_input_bindings": 9408,
+  "cases": [
+    {
+      "id": "crema-1043-original:v10:original",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1043-original:v10:local-light",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1043-original:v10:local-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1043-original:v10:muse-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1043-original:v10:local-blur-2",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1043-original:v10:local-blur-4",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:original",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:local-light",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:local-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:muse-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:local-blur-2",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1075-original:v10:local-blur-4",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:original",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:local-light",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:local-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:muse-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:local-blur-2",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1086-original:v10:local-blur-4",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:original",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:local-light",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:local-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:muse-resample",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:local-blur-2",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1083-original:v10:local-blur-4",
+      "stage": "calibration",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:original",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:local-light",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:local-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:constant-audio-delay",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:ai-redraw",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:ai-retime",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1009-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1074-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1026-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1016-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1080-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1005-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1021-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:muse-resample",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:local-blur-2",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:local-blur-4",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:muse-ai-aligned",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    },
+    {
+      "id": "crema-1008-original:muse-ai-earlier",
+      "stage": "development",
+      "status": "ok",
+      "native_inputs": 42,
+      "head_input_bindings": 84
+    }
+  ],
+  "scope": "Every retained RGB/PTS/crop/normalized-input binding across two heads,24 calibration/88 development clips; not neural output truth, causal localization or outside review."
+}

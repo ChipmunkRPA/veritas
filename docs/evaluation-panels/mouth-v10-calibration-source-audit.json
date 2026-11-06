@@ -1,0 +1,158 @@
+{
+  "schema": "chipmunk.mouth-context-calibration-source-audit/10",
+  "plan_sha256": "7b690d7ef83d2ffa3182749ef6790b4395673e952272bb49405bc744ab5a3cab",
+  "manifest_sha256": "6edcab13fdfbfa5dd270f44b3d80e621698f8d4d7ce0dd88d65fe82a7c1beeef",
+  "audit_implementation_sha256": "8eebe4ef36f73afd8d9aa4157e5781a2614a428867ce207c739f290677ba6005",
+  "planned": 24,
+  "passed": 24,
+  "native_frames": 1332,
+  "exact_masks": 480,
+  "common_pcm_samples": 852480,
+  "cases": [
+    {
+      "id": "crema-1043-original:v10:original",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1043-original:v10:local-light",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1043-original:v10:local-resample",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1043-original:v10:muse-resample",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1043-original:v10:local-blur-2",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1043-original:v10:local-blur-4",
+      "status": "ok",
+      "frames": 55,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:original",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:local-light",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:local-resample",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:muse-resample",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:local-blur-2",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1075-original:v10:local-blur-4",
+      "status": "ok",
+      "frames": 58,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:original",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:local-light",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:local-resample",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:muse-resample",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:local-blur-2",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1086-original:v10:local-blur-4",
+      "status": "ok",
+      "frames": 59,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:original",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:local-light",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:local-resample",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:muse-resample",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:local-blur-2",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    },
+    {
+      "id": "crema-1083-original:v10:local-blur-4",
+      "status": "ok",
+      "frames": 50,
+      "masks": 20
+    }
+  ],
+  "scope": "All native calibration frames, exact masks, fresh ordinary operation geometry, source/encoded clocks and selected original PCM; no head inference or outside validation."
+}

@@ -319,3 +319,47 @@ The unchanged `/8` source/forward audit formats bind the V9 lock/head; they do
 not indicate use of a V8 candidate at inference. Public source data retain
 their separate ODbL/DbCL terms. Media and learned weights stay outside Git.
 No customer or cloud service starts through these research stages.
+# Surrounding-footage mouth evidence (v10)
+
+The [V10 comparison](../mouth-context-v10-evaluation.md) recovers more edit
+locations but fails both frozen ordinary-flag gates. Neither arm is enabled.
+It preserves24 ordinary calibration inputs, complete112-case/two-head raw
+inputs/context schedules and every eligible window, not just the top12.
+
+Anyone with standard Python can reconstruct every eligible context window,
+point selection, old raw-response correspondence and combined arm decisions:
+
+```sh
+python3 backend/scripts/review_mouth_context_v10.py docs /tmp/mouth-v10-review.json
+```
+
+The output must be new. Expected:24 calibration/88 development cases,5,626
+windows, primary21 locations/12 ordinary flags, secondary26/24. This arithmetic
+review does not prove neural inference, original pixels/masks/spatial IoU,
+generalization or outside participation. Existing metadata retain their
+separate CREMA-D ODbL/DbCL terms. Media and checkpoint binaries remain outside Git.
+
+To reconstruct a new local research run, preserve V6–V9 inputs/receipts and the
+permitted face task. Use the backend Python, offline model/cache settings and
+`PYTHONPATH=backend`; ordinary construction/source auditing additionally needs
+the existing isolated `video-v3/av/mesh-runtime` on that path (MediaPipe0.10.32).
+It is not installed into the app. Source picture/audio offsets are explicit;
+never loop/pad missing context or assume picture index equals audio time.
+
+Run `prepare_mouth_context_v10.py plan <v6-source-plan> <new-v10-plan> --task
+<verified-face-task>`, then `build <new-plan> <new-calibration-inputs>`. Require
+all24 ready and run `audit_mouth_context_v10.py <plan> <manifest> <new-source-audit>`.
+The frozen experiment layout expects these as `lipsync-v10/calibration-plan.json`,
+`calibration-inputs-v2/manifest.json` and `calibration-source-audit.json` under
+the common independent-evaluation root. The initial `calibration-inputs` failure
+is preserved separately; a new reconstruction must use new output directories.
+
+Run stages of `backend/scripts/run_mouth_context_v10.py`: `freeze <common-root>
+<new-experiment-dir>`, `calibration <lock> <new-calibration-scores>`, `calibrate
+<lock> <new-points> --receipt <calibration-scores>`, `development <lock>
+<new-development-scores>`, and `review <lock> <new-summary> --receipt <development-scores>
+--points <points>`. Learned scoring requires explicit local MPS; there is no
+silent fallback or new head training. Run `audit_mouth_context_inputs_v10.py
+<lock> <calibration-scores> <development-scores> <new-native-audit>` to replay all
+source bindings. Physical root paths bind private manifest bytes, so a new run
+has new receipt hashes. No customer or cloud service starts through these stages.

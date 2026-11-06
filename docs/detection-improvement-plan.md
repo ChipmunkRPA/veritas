@@ -65,6 +65,18 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- V10 created/audited24 ordinary point clips with exact common source clocks,
+  preserving all four point actors (three incomplete final audio spans trimmed,
+  no padding). Fixed source-relative temporal windows, actual window-level
+  calibration and two predeclared combinations completed all88 consumed clips.
+  Primary located21/32 versus V8 14/32 but flagged12/56 ordinary controls;
+  secondary26/32 with24/56. Both failed the fixed ordinary-flag gates and remain
+  disabled. Native replay passed4704 inputs/9408 head bindings; stdlib review
+  reconstructs all5626 eligible windows, including unhighlighted candidates.
+  First-family sensitivity improved, while ordinary-motion discrimination is
+  now the demonstrated blocker. No new/fresh actors, weight training, package
+  upgrade, global-confidence or serving change. [V10 result](mouth-context-v10-evaluation.md).
+
 - V9 source-matched ranking/teacher retention trained the same two small
   vision blocks on the immutable V8 panel, with 768 fitting pairs and 4,096
   fitting-only teacher targets. All teacher/source/full-forward/native-video

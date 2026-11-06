@@ -233,3 +233,54 @@ its raw, normalized and lossless-parent digests have distinct meanings.
 Re-encoding/device/library differences require new receipts, not substitution in
 the frozen results. Model/source names here document research rights and methods;
 they do not add identifiers to customer analysis exports or reports.
+# Two-family learned mouth experiment (v8)
+
+The [v8 result](../mouth-learning-v8-evaluation.md) contains a real learned
+localization gain, but it failed the frozen both-family advancement requirement.
+The candidate is research only. Public `mouth-v8-*` metadata includes source
+roles, every native training/view commitment, learning/point receipt, all 88
+outcomes and source/numerical audit receipts. No customer data, media or model
+binary is included. These were consumed-source local experiments, not outside
+validation. Component and source-data terms remain separate.
+
+Anyone with Python 3 can check retained-window arithmetic and complete outcome
+counts without ML packages or checkpoint downloads:
+
+```sh
+python3 backend/scripts/review_mouth_learning_v8.py \
+  docs/evaluation-panels/mouth-v8-review-responses.json.gz \
+  docs/mouth-learning-v8-evaluation.json \
+  docs/evaluation-panels/mouth-v8-head.json \
+  /tmp/mouth-v8-public-review.json
+```
+
+The output must be a new file. This checks 1,056 retained candidate windows and
+176 outcomes. It does not certify model inference, omitted windows, native
+masks, spatial overlap, statistical generalization or outside participation.
+
+For a new local MPS experiment, first reconstruct the existing v6/v7 sources and
+permitted assets using their sections below. Preserve their original files.
+Set `PYTHONPATH=backend`, `VERITAS_MODELS_DIR` and `VERITAS_HF_HOME` to the
+reviewed local caches and enable offline mode. The new generation stages need
+the isolated hash-locked v7 renderer library path appended to `PYTHONPATH`;
+learning/comparison use the app's existing runtime. Then run:
+
+1. `prepare_mouth_learning_v8.py plan <v6-training-plan> <new-v8-plan> --parent-manifest <v6-still-manifest>`.
+2. `prepare_mouth_learning_v8.py build <new-v8-plan> <new-v8-inputs> --asset-manifest docs/evaluation-panels/mouth-v7-generator-assets.json --assets <v7-assets>`.
+3. With `lipsync-v4`, `lipsync-v6`, `lipsync-v7` and the new `lipsync-v8` under one data root, run
+   `run_mouth_learning_v8.py freeze <data-root> <new-v8-experiment>`, then its
+   `cache <lock> <new-cache>` stage.
+4. Run `audit_mouth_learning_v8.py <new-v8-plan> <lock> <cache> <new-audit> --asset-manifest <asset-manifest> --assets <v7-assets>` and require all planned cases.
+5. Run `run_mouth_learning_v8.py train <lock> <new-trained-dir> --cache <cache>`,
+   then `score <lock> <new-score-jsonl> --head <trained-dir/head.json>`, followed
+   by `review <lock> <new-summary> --receipt <score-jsonl>`.
+6. Run `audit_mouth_video_v8.py <lock> <score-jsonl> <new-video-audit>` and
+   `replay_mouth_learning_v8.py <lock> <cache> <head> <new-forward-audit>`.
+
+These script names are under `backend/scripts/`, run with the backend Python
+environment. Each output directory/file is new; failed receipts remain
+separate. Physical root paths are part of private manifest bytes, so a new
+location produces new container receipt hashes. Public source/pixel/tensor
+commitments identify the original run; a reconstruction is a new run, not a
+claim of original receipt-byte identity. Cross-device training parity remains
+unverified. No customer or cloud service is started by these research stages.

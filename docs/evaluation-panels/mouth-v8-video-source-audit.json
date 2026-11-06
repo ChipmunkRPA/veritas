@@ -1,0 +1,453 @@
+{
+  "schema": "chipmunk.mouth-learning-video-source-audit/8",
+  "lock_sha256": "b3474e89fd6cc4af1eb958764433ec57ea4faad582efd8f4d1e29e992ad2a598",
+  "score_receipt_sha256": "68bc7eac352f99fc147b002ba7284d2eca9a7ef53585762a1f6474e9de83786d",
+  "implementation_sha256": "a367bae6c1ddeba736f7430560e654966dd74c1ab25dc33ed2383e2ccc55fab7",
+  "shared_auditor_sha256": "01850d3adffc06a4d51ab6b803a1872d64048f97e8da98d84b4cc0ef87836422",
+  "planned": 88,
+  "passed": 88,
+  "verified_inputs": 3696,
+  "cases": [
+    {
+      "id": "crema-1009-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:original",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:local-light",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:local-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:constant-audio-delay",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:ai-redraw",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:ai-retime",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1009-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1074-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1026-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1016-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1080-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1005-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1021-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:muse-resample",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:local-blur-2",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:local-blur-4",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:muse-ai-aligned",
+      "status": "ok",
+      "verified_inputs": 42
+    },
+    {
+      "id": "crema-1008-original:muse-ai-earlier",
+      "status": "ok",
+      "verified_inputs": 42
+    }
+  ],
+  "scope": "Native RGB/PTS/alignment/mouth-chip/model-input correspondence; not outside review or causal attribution"
+}

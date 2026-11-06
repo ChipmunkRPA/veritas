@@ -63,6 +63,18 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 6 November
+
+- V8 actually trained the final two small vision blocks on 1,600 two-family
+  stills (16 fit/four point actors, eight excluded video actors). All source,
+  native-input and learned-state replays passed. On 88 consumed clips it
+  localized 14/32 AI edits versus 0/32, with 0/56 ordinary flags versus 1/56.
+  All successes were MuseTalk (14/16); LivePortrait remained 0/16. The frozen
+  both-family requirement failed, so the candidate is retained as research,
+  not enabled or advanced as a passing replacement. Published source/role/
+  learning bindings, full results and a standard-library retained-window
+  reviewer; no fresh actors or outside review. [V8 results](mouth-learning-v8-evaluation.md).
+
 ## Progress on 5 November
 
 - Completed a new 48-source paired PNG/JPEG IML-ViT comparison, including a pinned

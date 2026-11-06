@@ -1,0 +1,39 @@
+{
+  "schema": "chipmunk.mouth-learning-lock/8",
+  "method": "mouth-two-block-learning/8.0",
+  "training_manifest_sha256": "b5c0f09654784a5665c5ca0f1c6dca8fe8a14a1fb4de40f68eff51e30c0959cf",
+  "implementation_sha256": {
+    "backend/scripts/run_mouth_learning_v8.py": "e7829479ad6b7a0d76dd6c748b7d26458496171f3a4980f968ea5780044a91e4",
+    "backend/scripts/mouth_learner_v8.py": "959733279a1406c92f21415c529049f87234047f32fcc3b38d3acfb78ea835d8",
+    "backend/scripts/mouth_probe_v6.py": "538673c7c0f3fd0fdf07d73a96007f0a614de4e09071dc9ad5ab761fbc95a87e",
+    "backend/scripts/compare_mouth_probe_v6.py": "0f321ead75bba9b1e12619967c5b0382b91d2d81dbb9a9a66edd54392a6f27de",
+    "backend/scripts/compare_mouth_sequence_v4.py": "ef5195270068a28ab082ba7015d03a8d5e78b21c466d64525613b903eb7e9a74",
+    "backend/scripts/compare_mouth_artifact_v5.py": "31955e97f171df22fb4069119401369208fc54b10e12817e1b3b1839d48fd6d6",
+    "backend/app/detectors/image/gend.py": "e82ada80ffd7550a72ac74265dc8a19fef1c57ce2ccd8c0d34b835bf1331c3c8",
+    "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+    "backend/app/detectors/video/frame_store.py": "5cad0916d36e77ad873ef39d86140aadc82d61e7de011138a776818512d4955a",
+    "backend/app/detectors/video/face_sequence.py": "e61ce53e6fafbb3dc0ae90425d13324392ac1d70fb6bd442beb0d0e0c3fe684d",
+    "backend/app/detectors/video/adapters/face_sequence.py": "95d2b66f3ade4bf3acb975696746ba45f373fc1825535f68b4037fa317d1ef66",
+    "backend/app/detectors/video/adapters/loaders.py": "e68960817fc0948c303313b7dd559c4f02fd7feeebf374c0ca65c26af5ea8b8a",
+    "backend/app/detectors/video/adapters/tracks.py": "e04fb00a143374e743862749498008e1420d0c6488a47de90b346fcf0f81522d",
+    "backend/app/detectors/video/tracking.py": "b9d64f3de822f82781980bf62f901b97c62b758078d5cbfed6591dc2609ace43",
+    "backend/app/models.yaml": "c7754ce5edd80160a4e2d3d8988b610b992eb4f713f64a81c39437fc1196bd71",
+    "docs/mouth-learning-v8-development.md": "f4e16c393f50c99e39e2e10267822814ad936e0b6eb803e3e447374d06113236"
+  },
+  "deployment_eligible": false,
+  "original_lock_sha256": "b3474e89fd6cc4af1eb958764433ec57ea4faad582efd8f4d1e29e992ad2a598",
+  "development": [
+    {
+      "manifest_sha256": "d652d3d67ff9bc670ed0e7b18eecc0958daf71fcd6a05c55f0dfd2c16b32a0b2",
+      "receipt_sha256": "da28a3e2aa26b9422d5f9dee630a6a55553ae6611bc8d063347db2e8011c4551",
+      "family": "liveportrait",
+      "planned": 48
+    },
+    {
+      "manifest_sha256": "1f8944a1512a926cda1a29a8b421fe58ca28bc239ffdbfd6fe1433920f67e80b",
+      "receipt_sha256": "e9df76821df26e0d5a8a7b8e39d52f86a3a6f84268438f4b50f2f47dc8dc29ed",
+      "family": "musetalk",
+      "planned": 40
+    }
+  ]
+}

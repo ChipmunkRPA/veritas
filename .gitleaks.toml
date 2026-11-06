@@ -22,3 +22,12 @@ description = "Demo step identifier, not an API key"
 condition = "AND"
 paths = ['''(^|/)frontend/src/demo/steps\.ts$''']
 regexes = ['''^img2-provenance$''']
+
+# Hashes of verified frozen vision parameters; names include "token" and
+# "key" as neural-network terminology. Match only these digest fields.
+[[allowlists]]
+description = "V8 research frozen-parameter SHA-256 metadata"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/mouth-v8-head\.json$''']
+regexTarget = "match"
+regexes = ['''^backbone\.(?:embeddings\.(?:cls_token|mask_token)|encoder\.layer\.[0-9]\.attention\.attention\.key\.(?:weight|bias))": "[0-9a-f]{64}"$''']

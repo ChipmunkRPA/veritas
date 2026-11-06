@@ -363,3 +363,40 @@ silent fallback or new head training. Run `audit_mouth_context_inputs_v10.py
 <lock> <calibration-scores> <development-scores> <new-native-audit>` to replay all
 source bindings. Physical root paths bind private manifest bytes, so a new run
 has new receipt hashes. No customer or cloud service starts through these stages.
+
+# Complete-video temporal learner (v11, in progress)
+
+The [current preparation record](../mouth-temporal-v11-evaluation.md) describes
+all160 audited fitting clips from sixteen actors. The compressed
+`mouth-v11-preparation.json.gz` includes the exact source links/roles/common
+clocks, masks' hashes and geometry/conditioning bindings, runtime declarations,
+frozen method hashes and160 complete audit outcomes. It contains no source
+pictures, audio or checkpoints. Known construction masks are evaluation truth,
+not a detector's pixel attribution. No learned-result capsule is published yet.
+
+To reconstruct, provision the existing V4 permitted portrait/mesh assets, V7
+speech-rendering assets and isolated runtime, and the unchanged V6 source-role
+plan. With the application environment and relevant isolated runtime paths,
+run `prepare_mouth_temporal_v11.py plan <v6-plan> <new-plan>
+--asset-manifest <v7-assets-json> --portrait-root <v4-assets-root>` then
+`build <new-plan> <new-input-dir> --speech-assets <v7-asset-dir>`.
+Run `audit_mouth_temporal_source_v11.py <plan> <manifest> <v7-asset-dir>
+<new-source-audit>`. New outputs are exclusive; do not overwrite a failed run.
+The comparison expects `lipsync-v11/training-plan.json`,
+`training-inputs/manifest.json` and `training-source-audit.json` under the common
+independent-evaluation root. Native MPS generation/replay is explicit.
+
+`run_mouth_temporal_v11.py freeze <common-root> <new-experiment>` binds the
+method before new responses. The `fit`, `calibration` and `development` stages
+take `<lock> <new-feature-receipt>`; fit uses the sixteen fitting actors,
+calibration uses the24 ordinary V10 point clips, and development reuses the88
+consumed clips. The latter two reuse immutable audited neural responses and
+freshly replay native pixels/chips and measure geometry. Run `train <lock>
+<new-head> --fit <fit-features> --calibration <point-features>` only after the
+source audit, then `review <lock> <new-summary> --head <head> --receipt
+<development-features>`. Training and development comparison are outstanding.
+
+`export_mouth_temporal_v11.py <v11-root> <destination> --preparation-only`
+exports the present metadata. The default full export and
+`review_mouth_temporal_v11.py <capsule> --refit` await a completed result capsule;
+do not interpret their presence as successful evaluation or outside review.

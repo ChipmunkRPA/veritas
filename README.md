@@ -106,6 +106,8 @@ unsuccessful candidates instead of changing the service to weaker checks.
 The [active improvement plan](docs/detection-improvement-plan.md) tracks the next
 video, audio and writing evaluations. Independent contributors can use the
 [portable testing contract](docs/independent-testing.md) and evaluation issue form.
+The [complete-video temporal experiment](docs/mouth-temporal-v11-evaluation.md)
+has verified fitting-source preparation; its detection comparison is still running.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

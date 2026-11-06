@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- V11 freezes a49-variable video-window learner combining retained vision heads
+  with measured mouth/pose/quality. Generated all160 complete fitting clips on
+  the original16 fit actors, separate from4 point/8 development actors. Source
+  audit passed9580 frames,3200 exact masks, selected original PCM,1280 neural
+  input bindings and128 fixed output replays. All24 point clips have valid
+  measurements. Full fitting-response extraction is running; no learned head,
+  development result or replacement decision yet. Published preparation/source
+  metadata and frozen code; serving and overall confidence are unchanged.
+  [Preparation and remaining checks](mouth-temporal-v11-evaluation.md).
+
 - V10 created/audited24 ordinary point clips with exact common source clocks,
   preserving all four point actors (three incomplete final audio spans trimmed,
   no padding). Fixed source-relative temporal windows, actual window-level

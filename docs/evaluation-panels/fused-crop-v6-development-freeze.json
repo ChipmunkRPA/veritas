@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.fused-crop-v6-development-freeze/1",
+  "prepared_date": "2026-11-06",
+  "stage": "prospective_consumed_source_development",
+  "new_forwards_started": false,
+  "code_sha256": {
+    "backend/scripts/score_fused_crop_v6.py": "7a999b96f5c4862263ad98c140bc7be4360a3a7947565a23724aa7492e33d7d5",
+    "backend/scripts/fused_crop_v6.py": "a0b6460a6e557e00c4824fc521b6e8f0b9fc0649d808d821cb5394d84216fb4b",
+    "backend/scripts/review_fused_crop_v6.py": "be2bdd4a9a13180950f076fd8bb6e6546d39a594f00c7b2414ad3fc6a5505f0a",
+    "backend/scripts/score_splice_localizers.py": "760278ed8a036832420b224c89b970449f03edd98de2f53c2127ac5448f36d4c",
+    "backend/scripts/audit_fused_production_grid.py": "951e763942e511630c48797bc87f37c55d28df3f10be4ae0718ab53c98a889c2",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/scripts/evaluate_iml_vit.py": "5621d74ea82ca25f6e9e4752f582b4303abb0885aa511c25f9d49d515138dba8",
+    "backend/app/detectors/image/fused.py": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb",
+    "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+    "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+    "backend/tests/test_fused_crop_v6.py": "36f220331b9d9132a5ebdd9f5c8875783199a17b93ad2cf53b7ea87df07af05f",
+    "docs/fused-crop-v6-protocol.md": "452e3e4c28f60dd23a03ae85b8fe058ace2955a74b45966f64396328bad84db5"
+  },
+  "manifest_sha256": "4ec157d240f88fce43e554d5dee0bd2da9ac388345d3f0a188c93826629c8230",
+  "consumed_selection_sha256": "36a7c32af569d912b0d3737c2486092d4cf37469c2a652e8bd5acfa1cf55e04d",
+  "planned_source_groups": 24,
+  "planned_images": 48,
+  "planned_format_inputs": 96,
+  "crops_per_eligible_input": 4,
+  "conditions": [
+    "native",
+    "jpeg75"
+  ],
+  "development_acceptance": "More overlapping edits and higher mean IoU, at most one additional genuine highlight per format. Selection on genuine controls only; development cannot authorize service adoption.",
+  "fresh_confirmation_started": false,
+  "may_enable_service": false,
+  "overall_confidence_weight": 0,
+  "source_review_sha256": "7c386dfd0f262c0a77862107dad083d097daf13692d2fb3aa06e6d07d58ade11",
+  "source_review_document_sha256": "6292ffd3cf10e4b7ee7ddeddaa1b0eb5b8a3e7e80beaee2d5dd517a391a1717e"
+}

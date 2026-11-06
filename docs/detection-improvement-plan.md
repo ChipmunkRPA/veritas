@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared a separate FUSED crop-localization development experiment using the
+  existing MIT checkpoint, independent runtime and Apache-2.0 backbone. It reuses
+  exactly 24 consumed source pairs with native/JPEG75 variants, preserves current
+  displayed regions, and fits crop admission only on genuine controls. No fresh
+  confirmation, serving or confidence change is authorized by development.
+  [Protocol](fused-crop-v6-protocol.md). A new primary-source review confirmed
+  commercial grants for SAFIRE/CAT-Net but owner-only downloads, and unresolved
+  separately hosted DetectiveSAM weight terms; no restricted weights acquired.
+  [Source review](image-localizer-v6-source-review.md).
+
 - Prepared audio v12 before new source forwards: fixed hidden-state indices
   8/16/24 versus unprojected-final control, unchanged objective, independent guards
   and sixteen gates. Rehashed all 4,248 waveform files; source roles, 62 unassessed

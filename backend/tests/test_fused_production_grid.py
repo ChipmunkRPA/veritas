@@ -69,10 +69,16 @@ def test_quantization_conditions_and_gate_never_clear_excluded_truth():
         assert row["metrics"][gate]["per_map_display_cap"]["iou"] == 0
 
 
-def test_component_reconstruction_detects_runtime_disagreement(monkeypatch):
-    monkeypatch.setattr(audit.loc, "components", lambda *args: ([], []))
+@pytest.mark.parametrize("threshold", [.5, .7])
+def test_component_reconstruction_detects_runtime_disagreement(monkeypatch, threshold):
+    def disagree(*args, **kwargs):
+        assert kwargs == {"threshold": threshold}
+        return [], []
+
+    monkeypatch.setattr(audit.loc, "components", disagree)
     with pytest.raises(ValueError, match="differs"):
-        audit.component_masks(np.ones((10, 10), np.float32), np.ones((10, 10), bool), 10, 10)
+        audit.component_masks(np.ones((10, 10), np.float32), np.ones((10, 10), bool), 10, 10,
+                              threshold=threshold)
 
 
 @pytest.fixture

@@ -1,0 +1,47 @@
+{
+  "schema": "chipmunk.image-localizer-v6-source-review/1",
+  "checked_date": "2026-11-06",
+  "new_weight_files_acquired": 0,
+  "new_candidate_forwards": 0,
+  "serving_changed": false,
+  "outside_reviewers": 0,
+  "candidates": [
+    {
+      "name": "SAFIRE",
+      "repository": "https://github.com/mjkwon2021/SAFIRE",
+      "revision": "ec2af6af8c789fb6359493a3e352f89c6fd8107f",
+      "code_license": "Apache-2.0",
+      "weights_license": "CC-BY-4.0",
+      "readme_sha256": "02c33e38289734e2543612d82790473f8d87856e0def042e84c18d4148a705bb",
+      "decision": "defer_asset_unavailable",
+      "observation": "Author-linked checkpoint download restricted to owner/editors; stopped without weights",
+      "refusal_sha256": "77cacfd00216dd8a30003e624b34af904516816090de6a2dcc0a5b0480a44bd0"
+    },
+    {
+      "name": "CAT-Net v2",
+      "repository": "https://github.com/mjkwon2021/CAT-Net",
+      "revision": "5eb85900b0e72423c95a8d41bc835b86c8671f8a",
+      "code_license": "Apache-2.0",
+      "weights_license": "CC-BY-4.0",
+      "third_party_licenses": [
+        "HRNet: MIT",
+        "SyncBN: BSD-3-Clause"
+      ],
+      "readme_sha256": "b69b5b2451fe2fcfbbcfed5bd8ca511a655158bb1b3e5ce0a87f16495cb2f817",
+      "decision": "defer_asset_unavailable",
+      "observation": "Author-linked checkpoint download restricted to owner/editors; stopped without weights",
+      "refusal_sha256": "340ea2f45941f0580ba649745df5cecb63175fc764adb0b9e28b7f933f5ba899"
+    },
+    {
+      "name": "DetectiveSAM",
+      "repository": "https://github.com/Gertlek/DetectiveSAM",
+      "revision": "2ca86f12f6bab76ed693ddf105f7baa23f10b991",
+      "code_license": "MIT",
+      "weights_repository": "https://huggingface.co/Gertlek/DetectiveSAM",
+      "weights_revision": "a90e147e985ef8f532d3b38d9319e494275201a9",
+      "weights_license": "other; release terms unresolved",
+      "weights_card_sha256": "ec089ba4857dac567676cf912362c5aa7dc5b8fd971dfd1b4addaf808f017e7e",
+      "decision": "defer_weight_terms_unresolved"
+    }
+  ]
+}

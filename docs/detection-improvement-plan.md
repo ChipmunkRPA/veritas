@@ -77,6 +77,12 @@ integration remains unfinished.
   Published metadata checks cover every recipe and40 frozen implementation files;
   39 focused tests passed. No new performance result, serving change or outside
   reviewer participation is claimed. [Method and source review](audio-multisource-v8-development.md).
+  After the prospective freeze was published as`6ad06da`, complete independent
+  source reconstruction and a public-capsule-only rebuild both matched all5364
+  inputs;72 fixed native decoder checks passed.43 focused tests passed. An
+  additive141-source publisher-location supplement, full digest receipts and an
+  offline model-free reconstruction helper improve external reproducibility.
+  [Source replay and remaining stages](audio-multisource-v8-execution.md).
 
 - Completed all1080 frozen fresh audio v7 inputs across two new generator
   source panels and genuine noise/music/overlapping-speech controls. Correct

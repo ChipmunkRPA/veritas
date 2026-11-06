@@ -39,6 +39,15 @@ or a generic dataset link.
   outside reviewer participation is implied. Upstream permissions include
   separate CC-BY4, CC-BY-SA4, selected MUSAN public-domain/CC-BY3 and publisher
   PLN MIT terms; see the per-source declarations and protocol.
+  The additive `audio-v8-source-locations-supplement.json` supplies missing
+  publisher-file locations for141 existing source hashes without changing the
+  capsule or source selection. `audio-v8-input-audit.json.gz` records complete
+  original/mixture/WAV/PCM reconstruction and72 native decoder checks.
+  `audio-v8-public-reconstruction.json.gz` records all5364 successful offline
+  rebuilds using only the public capsule and separately acquired originals.
+  [Rebuild instructions](../audio-multisource-v8-execution.md) require no models
+  or private manifests; these are local reproducibility checks, not outside
+  reviewer participation or detection-performance results.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

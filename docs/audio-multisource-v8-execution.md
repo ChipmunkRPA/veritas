@@ -64,3 +64,51 @@ rollback verification. A failed gate stops advancement. No actual GCP resources,
 model default, overall confidence, billing or authentication changes are part of
 this freeze. No external reviewer has validated it; the public resources enable
 review without claiming that it has occurred.
+
+## Source reconstruction completed after publication
+
+The original freeze and its40 implementation pins remain unchanged. A separate
+read-only source audit, added after extraction started, independently rebuilt all
+5364 exact mixtures from all662 original recordings. Float payloads, complete WAV
+files and production PCM matched; all72 predetermined role/class/condition native
+decoder checks matched. It does not inspect learned responses or change inputs.
+The [complete audit receipts](evaluation-panels/audio-v8-input-audit.json.gz) retain
+every case. This is actual source reconstruction, separate from the earlier
+metadata-only reviewer.
+
+The [offline helper](../backend/scripts/rebuild_audio_multisource_inputs_v8.py)
+then rebuilt all5364 inputs using **only the public capsule and a cache of complete
+original recording bytes**. It uses no private manifests, source text, provider
+IDs or neural models. Its [complete receipts](evaluation-panels/audio-v8-public-reconstruction.json.gz)
+contain5364 successes and zero missing/failed backgrounds. Their original JSONL
+SHA-256 is`a2638450ceade866c6714fa7097a7df6efc76029ec6c8fb17ff458224031d9ba`.
+The43 focused v8 tests passed, including original-cache corruption/path rejection,
+actual SNR preservation and source-location validation. The earlier221 selected
+regressions remain the freeze's broader check.
+
+The original capsule omitted direct URLs for141 older source entries. An additive
+[location supplement](evaluation-panels/audio-v8-source-locations-supplement.json)
+maps those same original-byte hashes to publisher files. Its six referenced
+archives were checked against their publisher MD5/SHA-256; direct recording assets
+must match the frozen original's byte count and SHA-256. No case, role, selection,
+method, parameter or capsule byte changes. The supplement's SHA-256 is
+`6b4675428eca594d1e0b2c9967fb9f344bb27a6fe207768fbbbb6aa4550724fb`.
+
+Acquire complete originals separately under their per-source terms. Use the
+capsule's Parquet row coordinates or archive-member-name digest and original-byte
+digest, plus the supplement where needed. Place each original in a separate cache
+as`<sha256>.audio`. From the repository root:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python backend/scripts/rebuild_audio_multisource_inputs_v8.py \
+  docs/evaluation-panels/audio-v8-source-plan.json.gz \
+  /path/to/separately-acquired-source-cache /path/to/new-output-directory \
+  --capsule-sha256 ba58b6646be0d9ce36f8675d80fff3ea146ced3b767882d86bcd02cfa53af0f3
+```
+
+The helper downloads nothing and preserves every planned receipt on source
+failures. Existing output is refused. A decoder or numerical difference must be
+reported rather than silently replacing a source. These successful local replays
+are not independent human review or evidence of better detector accuracy. Learned
+extraction is still a separate ongoing stage; fitting/calibration/development and
+fresh confirmation remain required before any replacement.

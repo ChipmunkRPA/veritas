@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared one full-representation audio v11 comparison after v10 rejection:
+  retain all1024 frozen coordinates with fitting-only diagonal normalization
+  at the old16-dimensional variance budget, unchanged objective/regularization,
+  independent calibration and all sixteen gates. Original4,248 consumed inputs,
+  424 exact cached probes and reserved confirmation remain pinned. All119 selected
+  regressions and seven actual-public-freeze alteration checks passed;58 code
+  files are frozen. Publish before project fitting. No gain, serving change,
+  fresh scoring or outside review claimed. [Preparation](audio-full-representation-v11-execution.md).
+
 - Completed conditional audio v10: all1,449 outcomes,1,420 assessed/29 unassessed,
   zero failures. Nonlinear and added-quality arms reduced false AI58→0 but correct
   conclusions fell1,004→804/609 and inconclusive rose387→644/840. Both failed the

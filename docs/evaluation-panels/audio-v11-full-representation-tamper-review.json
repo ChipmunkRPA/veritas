@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.audio-full-representation-public-tamper-review/11",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "changed learner",
+      "rejected": true,
+      "reason": "Fixed full-representation objective and solver required"
+    },
+    {
+      "alteration": "changed solver",
+      "rejected": true,
+      "reason": "Fixed full-representation objective and solver required"
+    },
+    {
+      "alteration": "changed source receipt",
+      "rejected": true,
+      "reason": "Original source/feature/calibration/probe commitments required"
+    },
+    {
+      "alteration": "changed checkpoint",
+      "rejected": true,
+      "reason": "Original commercial checkpoints, runtime and service required"
+    },
+    {
+      "alteration": "changed role count",
+      "rejected": true,
+      "reason": "Complete corrected consumed roles and cached probes required"
+    },
+    {
+      "alteration": "fitting claim",
+      "rejected": true,
+      "reason": "Prospective freeze cannot claim fitting, inference or deployment"
+    },
+    {
+      "alteration": "hidden path",
+      "rejected": true,
+      "reason": "Private paths cannot enter a public freeze"
+    }
+  ],
+  "scope": "Deliberate local actual-freeze alterations; no fitting or outside participation."
+}

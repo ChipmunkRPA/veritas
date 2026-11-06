@@ -8,6 +8,12 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`audio-v11-full-representation-freeze.json` binds one prospective supervised
+full-vector comparison with the unchanged objective, corrected roles, commercial
+checkpoint/runtime/service commitments and58 code pins. Its model-free preflight
+and seven actual-freeze alteration checks are preparation, not accuracy or outside
+validation. See the [execution record](../audio-full-representation-v11-execution.md).
+
 `audio-v10-conditional-freeze.json` and `audio-v10-quality-inputs.jsonl.gz` bind
 the next prospective nonlinear/control-quality comparison and all4,248 finite
 measurements, with402 cached filtered-probe descriptors. They include no raw

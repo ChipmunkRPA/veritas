@@ -65,15 +65,19 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
-- V11 freezes a49-variable video-window learner combining retained vision heads
+- V11 froze a49-variable video-window learner combining retained vision heads
   with measured mouth/pose/quality. Generated all160 complete fitting clips on
   the original16 fit actors, separate from4 point/8 development actors. Source
   audit passed9580 frames,3200 exact masks, selected original PCM,1280 neural
   input bindings and128 fixed output replays. All24 point clips have valid
-  measurements. Full fitting-response extraction is running; no learned head,
-  development result or replacement decision yet. Published preparation/source
-  metadata and frozen code; serving and overall confidence are unchanged.
-  [Preparation and remaining checks](mouth-temporal-v11-evaluation.md).
+  measurements. All160 fitting clips supplied3560 windows, and the classifier
+  completed all88 development cases:32/32 locations versus14/32, but22/56
+  ordinary flags versus0/56, including4/8 untouched originals. Rejected on the
+  unchanged false-flag gates. A post-hoc scalar bound retains at most16locations
+  at<=1ordinary flag; a cutoff change alone cannot meet the frozen criteria.
+  Published all6373 eligible windows and fitting coefficients; independent CPU
+  refit matched exactly. Serving/overall confidence unchanged; no fresh or
+  outside validation. [Complete result](mouth-temporal-v11-evaluation.md).
 
 - V10 created/audited24 ordinary point clips with exact common source clocks,
   preserving all four point actors (three incomplete final audio spans trimmed,

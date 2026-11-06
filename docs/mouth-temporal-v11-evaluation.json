@@ -1,0 +1,2377 @@
+{
+  "schema": "chipmunk.mouth-temporal-summary/11",
+  "lock_sha256": "0df3362399a2e5c5c835fd2d63e20a21308d3134a4660cd2424acbc544e96d03",
+  "head_sha256": "6b5a1d5e0d191efbe06a988f6322d092d8dc8b1ae704729ce7c413935240c149",
+  "receipt_sha256": "ac88874f034e7bbc62869d35a7884de1c1509ef28830e21bd3932019025b06b9",
+  "review_point": 1.9996717658980965,
+  "baseline": {
+    "planned": 88,
+    "ai_edits": 32,
+    "non_ai_controls": 56,
+    "assessed": 88,
+    "localized_ai": 14,
+    "ai_without_flag": 18,
+    "non_ai_flags": 0,
+    "mean_ai_temporal_iou": 0.3020089285714286,
+    "mean_ai_spatial_iou": 0.15117657053268102
+  },
+  "temporal_only": {
+    "planned": 88,
+    "ai_edits": 32,
+    "non_ai_controls": 56,
+    "assessed": 88,
+    "localized_ai": 32,
+    "ai_without_flag": 0,
+    "non_ai_flags": 22,
+    "mean_ai_temporal_iou": 0.6631663209748508,
+    "mean_ai_spatial_iou": 0.26628277945750095
+  },
+  "combined": {
+    "planned": 88,
+    "ai_edits": 32,
+    "non_ai_controls": 56,
+    "assessed": 88,
+    "localized_ai": 32,
+    "ai_without_flag": 0,
+    "non_ai_flags": 22,
+    "mean_ai_temporal_iou": 0.6539913090916947,
+    "mean_ai_spatial_iou": 0.26655376638218753
+  },
+  "gates": {
+    "six_net_additional_locations": true,
+    "first_family_six_locations": true,
+    "both_first_family_conditions": true,
+    "retained_second_family": true,
+    "at_most_one_lost_location": true,
+    "total_ordinary_flags": false,
+    "condition_ordinary_flags": false,
+    "spatial_iou_gain": true,
+    "retained_temporal_iou": true,
+    "retained_coverage": true,
+    "complete_replays": true
+  },
+  "passes": false,
+  "families": {
+    "liveportrait": {
+      "planned": 48,
+      "ai_edits": 16,
+      "non_ai_controls": 32,
+      "assessed": 48,
+      "localized_ai": 16,
+      "ai_without_flag": 0,
+      "non_ai_flags": 14,
+      "mean_ai_temporal_iou": 0.60780302048224,
+      "mean_ai_spatial_iou": 0.18879124400621294
+    },
+    "musetalk": {
+      "planned": 40,
+      "ai_edits": 16,
+      "non_ai_controls": 24,
+      "assessed": 40,
+      "localized_ai": 16,
+      "ai_without_flag": 0,
+      "non_ai_flags": 8,
+      "mean_ai_temporal_iou": 0.7001795977011495,
+      "mean_ai_spatial_iou": 0.3443162887581621
+    }
+  },
+  "cases": {
+    "combined": [
+      {
+        "id": "crema-1009-original:original",
+        "group": "CREMA-D:1009",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-light",
+        "group": "CREMA-D:1009",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-resample",
+        "group": "CREMA-D:1009",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:constant-audio-delay",
+        "group": "CREMA-D:1009",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:ai-redraw",
+        "group": "CREMA-D:1009",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.1254093886462882
+      },
+      {
+        "id": "crema-1009-original:ai-retime",
+        "group": "CREMA-D:1009",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.52,
+        "localized": true,
+        "spatial_iou": 0.1373437714599643
+      },
+      {
+        "id": "crema-1074-original:original",
+        "group": "CREMA-D:1074",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-light",
+        "group": "CREMA-D:1074",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-resample",
+        "group": "CREMA-D:1074",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:constant-audio-delay",
+        "group": "CREMA-D:1074",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:ai-redraw",
+        "group": "CREMA-D:1074",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": true,
+        "spatial_iou": 0.2710301394511921
+      },
+      {
+        "id": "crema-1074-original:ai-retime",
+        "group": "CREMA-D:1074",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": true,
+        "spatial_iou": 0.26235699211373986
+      },
+      {
+        "id": "crema-1026-original:original",
+        "group": "CREMA-D:1026",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-light",
+        "group": "CREMA-D:1026",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-resample",
+        "group": "CREMA-D:1026",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:constant-audio-delay",
+        "group": "CREMA-D:1026",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:ai-redraw",
+        "group": "CREMA-D:1026",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": true,
+        "spatial_iou": 0.15153027278775782
+      },
+      {
+        "id": "crema-1026-original:ai-retime",
+        "group": "CREMA-D:1026",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.17824310520939735
+      },
+      {
+        "id": "crema-1016-original:original",
+        "group": "CREMA-D:1016",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-light",
+        "group": "CREMA-D:1016",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-resample",
+        "group": "CREMA-D:1016",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:constant-audio-delay",
+        "group": "CREMA-D:1016",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:ai-redraw",
+        "group": "CREMA-D:1016",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.17550884217550886
+      },
+      {
+        "id": "crema-1016-original:ai-retime",
+        "group": "CREMA-D:1016",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.17225806451612904
+      },
+      {
+        "id": "crema-1080-original:original",
+        "group": "CREMA-D:1080",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-light",
+        "group": "CREMA-D:1080",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.4000000000000001,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-resample",
+        "group": "CREMA-D:1080",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:constant-audio-delay",
+        "group": "CREMA-D:1080",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:ai-redraw",
+        "group": "CREMA-D:1080",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": true,
+        "spatial_iou": 0.2811361981063365
+      },
+      {
+        "id": "crema-1080-original:ai-retime",
+        "group": "CREMA-D:1080",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6666666666666665,
+        "localized": true,
+        "spatial_iou": 0.2978030919446705
+      },
+      {
+        "id": "crema-1005-original:original",
+        "group": "CREMA-D:1005",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-light",
+        "group": "CREMA-D:1005",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-resample",
+        "group": "CREMA-D:1005",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:constant-audio-delay",
+        "group": "CREMA-D:1005",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:ai-redraw",
+        "group": "CREMA-D:1005",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.2234624145785877
+      },
+      {
+        "id": "crema-1005-original:ai-retime",
+        "group": "CREMA-D:1005",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.2255125284738041
+      },
+      {
+        "id": "crema-1021-original:original",
+        "group": "CREMA-D:1021",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-light",
+        "group": "CREMA-D:1021",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-resample",
+        "group": "CREMA-D:1021",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:constant-audio-delay",
+        "group": "CREMA-D:1021",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:ai-redraw",
+        "group": "CREMA-D:1021",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.1804358844399392
+      },
+      {
+        "id": "crema-1021-original:ai-retime",
+        "group": "CREMA-D:1021",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.1808618934509671
+      },
+      {
+        "id": "crema-1008-original:original",
+        "group": "CREMA-D:1008",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-light",
+        "group": "CREMA-D:1008",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-resample",
+        "group": "CREMA-D:1008",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:constant-audio-delay",
+        "group": "CREMA-D:1008",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:ai-redraw",
+        "group": "CREMA-D:1008",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.27586206896551707,
+        "localized": true,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:ai-retime",
+        "group": "CREMA-D:1008",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": true,
+        "spatial_iou": 0.15776731674512443
+      },
+      {
+        "id": "crema-1009-original:muse-resample",
+        "group": "CREMA-D:1009",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-blur-2",
+        "group": "CREMA-D:1009",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-blur-4",
+        "group": "CREMA-D:1009",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:muse-ai-aligned",
+        "group": "CREMA-D:1009",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.2952446588559614
+      },
+      {
+        "id": "crema-1009-original:muse-ai-earlier",
+        "group": "CREMA-D:1009",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.2926862799010173
+      },
+      {
+        "id": "crema-1074-original:muse-resample",
+        "group": "CREMA-D:1074",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-blur-2",
+        "group": "CREMA-D:1074",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-blur-4",
+        "group": "CREMA-D:1074",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:muse-ai-aligned",
+        "group": "CREMA-D:1074",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.30507690528507
+      },
+      {
+        "id": "crema-1074-original:muse-ai-earlier",
+        "group": "CREMA-D:1074",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.3037511436413541
+      },
+      {
+        "id": "crema-1026-original:muse-resample",
+        "group": "CREMA-D:1026",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-blur-2",
+        "group": "CREMA-D:1026",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-blur-4",
+        "group": "CREMA-D:1026",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:muse-ai-aligned",
+        "group": "CREMA-D:1026",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.3871437823834197
+      },
+      {
+        "id": "crema-1026-original:muse-ai-earlier",
+        "group": "CREMA-D:1026",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.4106130860381247
+      },
+      {
+        "id": "crema-1016-original:muse-resample",
+        "group": "CREMA-D:1016",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-blur-2",
+        "group": "CREMA-D:1016",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-blur-4",
+        "group": "CREMA-D:1016",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:muse-ai-aligned",
+        "group": "CREMA-D:1016",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.29475209272376046
+      },
+      {
+        "id": "crema-1016-original:muse-ai-earlier",
+        "group": "CREMA-D:1016",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.2989375402446877
+      },
+      {
+        "id": "crema-1080-original:muse-resample",
+        "group": "CREMA-D:1080",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-blur-2",
+        "group": "CREMA-D:1080",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6666666666666665,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-blur-4",
+        "group": "CREMA-D:1080",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5128205128205128,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:muse-ai-aligned",
+        "group": "CREMA-D:1080",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.3458602466236054
+      },
+      {
+        "id": "crema-1080-original:muse-ai-earlier",
+        "group": "CREMA-D:1080",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.3581033262561925
+      },
+      {
+        "id": "crema-1005-original:muse-resample",
+        "group": "CREMA-D:1005",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-blur-2",
+        "group": "CREMA-D:1005",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-blur-4",
+        "group": "CREMA-D:1005",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:muse-ai-aligned",
+        "group": "CREMA-D:1005",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7999999999999998,
+        "localized": true,
+        "spatial_iou": 0.3475639170284612
+      },
+      {
+        "id": "crema-1005-original:muse-ai-earlier",
+        "group": "CREMA-D:1005",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7999999999999998,
+        "localized": true,
+        "spatial_iou": 0.3395601797115157
+      },
+      {
+        "id": "crema-1021-original:muse-resample",
+        "group": "CREMA-D:1021",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-blur-2",
+        "group": "CREMA-D:1021",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-blur-4",
+        "group": "CREMA-D:1021",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:muse-ai-aligned",
+        "group": "CREMA-D:1021",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7142857142857143,
+        "localized": true,
+        "spatial_iou": 0.39144851657940666
+      },
+      {
+        "id": "crema-1021-original:muse-ai-earlier",
+        "group": "CREMA-D:1021",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.37665827036104116
+      },
+      {
+        "id": "crema-1008-original:muse-resample",
+        "group": "CREMA-D:1008",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.27586206896551707,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-blur-2",
+        "group": "CREMA-D:1008",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5882352941176471,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-blur-4",
+        "group": "CREMA-D:1008",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5882352941176471,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:muse-ai-aligned",
+        "group": "CREMA-D:1008",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.38131244936537945
+      },
+      {
+        "id": "crema-1008-original:muse-ai-earlier",
+        "group": "CREMA-D:1008",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.3803482251315967
+      }
+    ],
+    "temporal": [
+      {
+        "id": "crema-1009-original:original",
+        "group": "CREMA-D:1009",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-light",
+        "group": "CREMA-D:1009",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-resample",
+        "group": "CREMA-D:1009",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:constant-audio-delay",
+        "group": "CREMA-D:1009",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:ai-redraw",
+        "group": "CREMA-D:1009",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.1254093886462882
+      },
+      {
+        "id": "crema-1009-original:ai-retime",
+        "group": "CREMA-D:1009",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.52,
+        "localized": true,
+        "spatial_iou": 0.1373437714599643
+      },
+      {
+        "id": "crema-1074-original:original",
+        "group": "CREMA-D:1074",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-light",
+        "group": "CREMA-D:1074",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-resample",
+        "group": "CREMA-D:1074",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:constant-audio-delay",
+        "group": "CREMA-D:1074",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:ai-redraw",
+        "group": "CREMA-D:1074",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": true,
+        "spatial_iou": 0.2710301394511921
+      },
+      {
+        "id": "crema-1074-original:ai-retime",
+        "group": "CREMA-D:1074",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": true,
+        "spatial_iou": 0.26235699211373986
+      },
+      {
+        "id": "crema-1026-original:original",
+        "group": "CREMA-D:1026",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-light",
+        "group": "CREMA-D:1026",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-resample",
+        "group": "CREMA-D:1026",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:constant-audio-delay",
+        "group": "CREMA-D:1026",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:ai-redraw",
+        "group": "CREMA-D:1026",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": true,
+        "spatial_iou": 0.15153027278775782
+      },
+      {
+        "id": "crema-1026-original:ai-retime",
+        "group": "CREMA-D:1026",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.65,
+        "localized": true,
+        "spatial_iou": 0.17824310520939735
+      },
+      {
+        "id": "crema-1016-original:original",
+        "group": "CREMA-D:1016",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-light",
+        "group": "CREMA-D:1016",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-resample",
+        "group": "CREMA-D:1016",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:constant-audio-delay",
+        "group": "CREMA-D:1016",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:ai-redraw",
+        "group": "CREMA-D:1016",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.17550884217550886
+      },
+      {
+        "id": "crema-1016-original:ai-retime",
+        "group": "CREMA-D:1016",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.17225806451612904
+      },
+      {
+        "id": "crema-1080-original:original",
+        "group": "CREMA-D:1080",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-light",
+        "group": "CREMA-D:1080",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.4000000000000001,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-resample",
+        "group": "CREMA-D:1080",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:constant-audio-delay",
+        "group": "CREMA-D:1080",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:ai-redraw",
+        "group": "CREMA-D:1080",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": true,
+        "spatial_iou": 0.2811361981063365
+      },
+      {
+        "id": "crema-1080-original:ai-retime",
+        "group": "CREMA-D:1080",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6666666666666665,
+        "localized": true,
+        "spatial_iou": 0.2978030919446705
+      },
+      {
+        "id": "crema-1005-original:original",
+        "group": "CREMA-D:1005",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-light",
+        "group": "CREMA-D:1005",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-resample",
+        "group": "CREMA-D:1005",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:constant-audio-delay",
+        "group": "CREMA-D:1005",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:ai-redraw",
+        "group": "CREMA-D:1005",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.2234624145785877
+      },
+      {
+        "id": "crema-1005-original:ai-retime",
+        "group": "CREMA-D:1005",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.2255125284738041
+      },
+      {
+        "id": "crema-1021-original:original",
+        "group": "CREMA-D:1021",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-light",
+        "group": "CREMA-D:1021",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-resample",
+        "group": "CREMA-D:1021",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:constant-audio-delay",
+        "group": "CREMA-D:1021",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:ai-redraw",
+        "group": "CREMA-D:1021",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.1804358844399392
+      },
+      {
+        "id": "crema-1021-original:ai-retime",
+        "group": "CREMA-D:1021",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.1808618934509671
+      },
+      {
+        "id": "crema-1008-original:original",
+        "group": "CREMA-D:1008",
+        "condition": "original",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-light",
+        "group": "CREMA-D:1008",
+        "condition": "local-light",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-resample",
+        "group": "CREMA-D:1008",
+        "condition": "local-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:constant-audio-delay",
+        "group": "CREMA-D:1008",
+        "condition": "constant-audio-delay",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:ai-redraw",
+        "group": "CREMA-D:1008",
+        "condition": "ai-redraw",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.27586206896551707,
+        "localized": true,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:ai-retime",
+        "group": "CREMA-D:1008",
+        "condition": "ai-retime",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.44827586206896547,
+        "localized": true,
+        "spatial_iou": 0.15776731674512443
+      },
+      {
+        "id": "crema-1009-original:muse-resample",
+        "group": "CREMA-D:1009",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-blur-2",
+        "group": "CREMA-D:1009",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:local-blur-4",
+        "group": "CREMA-D:1009",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1009-original:muse-ai-aligned",
+        "group": "CREMA-D:1009",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.2952446588559614
+      },
+      {
+        "id": "crema-1009-original:muse-ai-earlier",
+        "group": "CREMA-D:1009",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.8999999999999999,
+        "localized": true,
+        "spatial_iou": 0.30174966352624494
+      },
+      {
+        "id": "crema-1074-original:muse-resample",
+        "group": "CREMA-D:1074",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6206896551724137,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-blur-2",
+        "group": "CREMA-D:1074",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:local-blur-4",
+        "group": "CREMA-D:1074",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1074-original:muse-ai-aligned",
+        "group": "CREMA-D:1074",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.30507690528507
+      },
+      {
+        "id": "crema-1074-original:muse-ai-earlier",
+        "group": "CREMA-D:1074",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.7000000000000001,
+        "localized": true,
+        "spatial_iou": 0.3037511436413541
+      },
+      {
+        "id": "crema-1026-original:muse-resample",
+        "group": "CREMA-D:1026",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-blur-2",
+        "group": "CREMA-D:1026",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:local-blur-4",
+        "group": "CREMA-D:1026",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1026-original:muse-ai-aligned",
+        "group": "CREMA-D:1026",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": true,
+        "spatial_iou": 0.38975913761158837
+      },
+      {
+        "id": "crema-1026-original:muse-ai-earlier",
+        "group": "CREMA-D:1026",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285714,
+        "localized": true,
+        "spatial_iou": 0.38676249373224136
+      },
+      {
+        "id": "crema-1016-original:muse-resample",
+        "group": "CREMA-D:1016",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-blur-2",
+        "group": "CREMA-D:1016",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:local-blur-4",
+        "group": "CREMA-D:1016",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1016-original:muse-ai-aligned",
+        "group": "CREMA-D:1016",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.29475209272376046
+      },
+      {
+        "id": "crema-1016-original:muse-ai-earlier",
+        "group": "CREMA-D:1016",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.586206896551724,
+        "localized": true,
+        "spatial_iou": 0.3012935975110529
+      },
+      {
+        "id": "crema-1080-original:muse-resample",
+        "group": "CREMA-D:1080",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5714285714285715,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-blur-2",
+        "group": "CREMA-D:1080",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.6666666666666665,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:local-blur-4",
+        "group": "CREMA-D:1080",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5128205128205128,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1080-original:muse-ai-aligned",
+        "group": "CREMA-D:1080",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.761904761904762,
+        "localized": true,
+        "spatial_iou": 0.3458602466236054
+      },
+      {
+        "id": "crema-1080-original:muse-ai-earlier",
+        "group": "CREMA-D:1080",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.761904761904762,
+        "localized": true,
+        "spatial_iou": 0.3581033262561925
+      },
+      {
+        "id": "crema-1005-original:muse-resample",
+        "group": "CREMA-D:1005",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-blur-2",
+        "group": "CREMA-D:1005",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:local-blur-4",
+        "group": "CREMA-D:1005",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1005-original:muse-ai-aligned",
+        "group": "CREMA-D:1005",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.3475639170284612
+      },
+      {
+        "id": "crema-1005-original:muse-ai-earlier",
+        "group": "CREMA-D:1005",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5263157894736842,
+        "localized": true,
+        "spatial_iou": 0.3395601797115157
+      },
+      {
+        "id": "crema-1021-original:muse-resample",
+        "group": "CREMA-D:1021",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-blur-2",
+        "group": "CREMA-D:1021",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:local-blur-4",
+        "group": "CREMA-D:1021",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": false,
+        "temporal_iou": 0.0,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1021-original:muse-ai-aligned",
+        "group": "CREMA-D:1021",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.39144851657940666
+      },
+      {
+        "id": "crema-1021-original:muse-ai-earlier",
+        "group": "CREMA-D:1021",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.9523809523809523,
+        "localized": true,
+        "spatial_iou": 0.37665827036104116
+      },
+      {
+        "id": "crema-1008-original:muse-resample",
+        "group": "CREMA-D:1008",
+        "condition": "muse-resample",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.27586206896551707,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-blur-2",
+        "group": "CREMA-D:1008",
+        "condition": "local-blur-2",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5882352941176471,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:local-blur-4",
+        "group": "CREMA-D:1008",
+        "condition": "local-blur-4",
+        "label": 0,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.5882352941176471,
+        "localized": false,
+        "spatial_iou": 0.0
+      },
+      {
+        "id": "crema-1008-original:muse-ai-aligned",
+        "group": "CREMA-D:1008",
+        "condition": "muse-ai-aligned",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.85,
+        "localized": true,
+        "spatial_iou": 0.37909052273693156
+      },
+      {
+        "id": "crema-1008-original:muse-ai-earlier",
+        "group": "CREMA-D:1008",
+        "condition": "muse-ai-earlier",
+        "label": 1,
+        "assessed": true,
+        "flagged": true,
+        "temporal_iou": 0.85,
+        "localized": true,
+        "spatial_iou": 0.3837143663561953
+      }
+    ]
+  },
+  "selected_signals": [
+    {
+      "id": "crema-1009-original:original",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:local-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:constant-audio-delay",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1009-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1074-original:original",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1074-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1074-original:local-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1074-original:constant-audio-delay",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1074-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1074-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1026-original:original",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:local-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1026-original:constant-audio-delay",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1026-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1016-original:original",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:local-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:constant-audio-delay",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1016-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:original",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:local-light",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:local-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:constant-audio-delay",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1005-original:original",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:local-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1005-original:constant-audio-delay",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1005-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1021-original:original",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1021-original:local-light",
+      "signal": null
+    },
+    {
+      "id": "crema-1021-original:local-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1021-original:constant-audio-delay",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1021-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1021-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:original",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:local-light",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:local-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:constant-audio-delay",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:ai-redraw",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:ai-retime",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1009-original:muse-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1009-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1009-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1074-original:muse-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1074-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1074-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1074-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1074-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1026-original:muse-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1026-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1026-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1016-original:muse-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1016-original:muse-ai-aligned",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1016-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1080-original:muse-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:local-blur-2",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:local-blur-4",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1080-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1080-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1005-original:muse-resample",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1005-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1005-original:muse-ai-earlier",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1021-original:muse-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1021-original:local-blur-2",
+      "signal": null
+    },
+    {
+      "id": "crema-1021-original:local-blur-4",
+      "signal": null
+    },
+    {
+      "id": "crema-1021-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1021-original:muse-ai-earlier",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:muse-resample",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:local-blur-2",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:local-blur-4",
+      "signal": "relative"
+    },
+    {
+      "id": "crema-1008-original:muse-ai-aligned",
+      "signal": "absolute"
+    },
+    {
+      "id": "crema-1008-original:muse-ai-earlier",
+      "signal": "absolute"
+    }
+  ],
+  "deployment_eligible": false,
+  "original_summary_sha256": "c15fb8c0e620dcf34fcaa30d5c04e63374a4d6a636eb30412132c710f7778f60",
+  "fitting_capsule_sha256": "ac7555bf05b0b4c013f93ce07144880a67886916d84c22748fead5cf1e791566"
+}

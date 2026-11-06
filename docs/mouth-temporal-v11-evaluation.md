@@ -1,15 +1,43 @@
-# Complete-video temporal learner: preparation verified, comparison running
+# Complete-video temporal learner: all edits located, too many ordinary flags
 
-**No replacement decision yet.** All160 planned fitting videos passed the source
-audit. Frozen-head feature extraction is running; the49-variable temporal
-classifier has not yet been fitted or evaluated. The retained V8 research
-candidate, customer service, overall confidence, payment and GCP are unchanged.
+**Reject V11 under its frozen false-flag requirements.** It located32/32 known
+edits but flagged22/56 ordinary controls, versus14/32 and0/56 for the retained
+V8 research candidate. Four of eight untouched original recordings were flagged.
+All88 cases were assessed; incomplete execution does not explain the tradeoff.
+Customer service, overall confidence, payment and GCP are unchanged.
 
 The [predeclared protocol](mouth-temporal-v11-development.md) addresses V10's
 specificity failure: surrounding-footage comparisons recovered edits but also
 flagged ordinary motion. This experiment learns from actual video windows,
 including measured lip aperture, pose and native image quality, rather than
 changing another scalar point after observing the development results.
+
+## Complete consumed-development result
+
+| Method | First-family locations (16) | Second-family locations (16) | All locations (32) | Ordinary flags (56) |
+|---|---:|---:|---:|---:|
+| Retained V8 absolute evidence | 0 | 14 | 14 | 0 |
+| Preserve V8, add V11 temporal learner | 16 | 16 | 32 | 22 |
+
+The temporal learner alone also located32/32 with22 ordinary flags. The combined
+method preserves existing V8 evidence first, so it can select a different
+retained interval from the temporal-only method. Mean time/spatial IoU across
+all32 AI edits was .653991/.266554 for the combination, versus .302009/.151177
+for V8. No existing success was lost, but both total and per-condition ordinary
+flag gates failed; the other nine frozen gates passed. These are component
+location results on correlated derivatives of eight consumed actors, not
+whole-file accuracy, fresh validation or a population false-alarm estimate.
+[All outcomes and gates](mouth-temporal-v11-evaluation.json) remain visible.
+
+The result shows that the selected features can expose edits, while their
+ranking still confuses ordinary recordings. A separate, explicitly post-hoc
+[ranking bound](evaluation-panels/mouth-v11-ranking-bound.json) retains at most
+16/32 locations (two first-family,14 second-family) at any higher scalar point
+allowing at most one ordinary flag, with absolute-first/top-window selection
+unchanged. It therefore cannot satisfy the frozen gain and both-family gates
+simply by raising the point. That diagnostic is not a new calibrated/adopted
+point and does not alter the rejected outcome. Better discrimination is needed;
+the physical causes of individual false flags remain unproven.
 
 ## Complete fitting construction
 
@@ -49,35 +77,56 @@ It excludes source media, checkpoints, customer uploads and private filesystem
 paths. Existing generator declarations remain separate from dataset terms and
 do not establish complete pretrained-data rights.
 
-## Frozen comparison and remaining work
+The separate standard-library preparation reviewer passed all160 published
+records and their clock/role/seed/boundary/audit consistency checks. Six tests
+also reject corrupt offsets, timestamps, roles, missing conditions and seeds.
+It checks metadata assertions; the native-source audit above checks the actual
+local media. Neither is evidence of outside human participation.
+
+## Frozen fitting and complete arithmetic review
 
 Both learned vision heads remain fixed. The new linear classifier uses49
 inference-available variables; no generator, condition, original reference or
 truth mask enters its features. Fit roles, source/class/condition weighting,
 normalization, optimizer and regularization were fixed before new responses.
-All24 reserved ordinary point clips have valid measurements and492 eligible
-windows; these do not fit the classifier. The review point will use only those
-ordinary windows. It is a raw-margin review point, not a public confidence claim.
+All160 fitting clips supplied3,560 windows; the fixed optimizer converged in74
+iterations. All24 reserved ordinary point clips supplied492 eligible windows;
+these did not fit the classifier. Their maximum margin was1.9996717658980963,
+and the fixed nextafter rule selected1.9996717658980965. Zero flags on those
+controls are by construction, not independently estimated specificity. This
+raw-margin review point is not a calibrated AI probability or public claim.
 
-Preserve V8 absolute evidence first, then evaluate the temporal learner across
-all88 consumed development clips against the unchanged V9 advancement gates.
-Source-matched fitting and complete-window response extraction are in progress.
-No accuracy, false-alarm reduction, calibration improvement or fresh validation
-has been established. The standalone fitting/refit reviewer is implemented,
-but has not yet been exercised against a complete learned-result capsule.
+Extraction replayed native RGB/clock/aligned-chip/normalized-input bindings and
+measured geometry/quality on all272 fitting, point and development cases,
+covering11,424 measured native inputs. Fitting neural responses were newly run;
+point/development reused immutable, previously audited V10 neural responses,
+with fresh native-input/measurement replay. This is not a new neural-forward
+run for every reused response. The app's package environment was unchanged.
 
-The92 inherited/focused research tests passed, followed by eight temporal tests
-(six repeated and two additional):94 distinct focused checks. They cover exact
-common clocks, complete feature order/window populations, missing measurements,
-role separation, native geometry, deterministic seed binding, independent
-feature arithmetic and translation behavior. Lint checks passed. These checks
-do not establish detection quality or independent human participation.
+The public [fitting capsule](evaluation-panels/mouth-v11-fitting-review.json.gz)
+retains all6,373 eligible windows, native/raw-response bindings, geometry traces,
+49-variable inputs, fitting labels and coefficients, point selection, every
+development result and fixed evidence priority. The standard-library reviewer
+reconstructs the feature/normalizer/margin/window/decision/gate arithmetic. Its
+optional independent CPU refit reproduced every coefficient and intercept
+exactly (maximum difference0). [Review receipt](evaluation-panels/mouth-v11-fitting-review.json).
+Four intentional corruption checks rejected an omitted non-highlighted window,
+changed aperture, changed fitted intercept and falsified ordinary-flag gate.
+[Tamper checks](evaluation-panels/mouth-v11-review-tamper-checks.json).
 
-After fitting: complete the frozen development comparison, publish every
-outcome and a fitting/refit capsule, and record adopt/reject/defer. A passing
-development experiment still needs unseen actors AND new sentences, multiple
-generators, realistic ordinary transformations, independent review, evidence/
-export/payment integration and separate overall-confidence validation.
+All102 focused mouth-research tests passed, including the portable preparation
+review and inclusive/tied-boundary ranking cases. Lint and whitespace checks
+passed. The four real-capsule tamper checks above are additional intentional
+corruption runs, not extra independent samples or outside evaluations.
+
+These metadata/arithmetic reviews do not independently decode source pixels,
+rerun all neural forwards, establish truth-mask intersection/spatial IoU, or
+prove generalization. No outside reviewer participated. No unused actors/new
+sentences were scored to rescue this failed experiment, and no confidence or
+production detector was replaced. A future passing method still needs separately
+frozen fresh confirmation, independent review, customer evidence/export/payment
+integration and separate overall-confidence validation. The low-error ranking
+gap argues against another scalar-point adjustment on these same actors.
 
 Audio, image and writing improvements remain in the wider
 [improvement plan](detection-improvement-plan.md). Outside review is outstanding;

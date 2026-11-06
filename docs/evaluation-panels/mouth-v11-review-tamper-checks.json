@@ -1,0 +1,27 @@
+{
+  "capsule_sha256": "ac7555bf05b0b4c013f93ce07144880a67886916d84c22748fead5cf1e791566",
+  "passed": true,
+  "checks": [
+    {
+      "case": "omitted non-highlighted window",
+      "rejected": true,
+      "reason": "A complete temporal window was omitted or repeated"
+    },
+    {
+      "case": "changed measured aperture",
+      "rejected": true,
+      "reason": "Temporal feature/fitting arithmetic differs"
+    },
+    {
+      "case": "changed fitted intercept",
+      "rejected": true,
+      "reason": "Temporal feature/fitting arithmetic differs"
+    },
+    {
+      "case": "falsified ordinary flag gate",
+      "rejected": true,
+      "reason": "Frozen advancement gates differ"
+    }
+  ],
+  "scope": "Local intentional metadata corruption tests, not outside validation."
+}

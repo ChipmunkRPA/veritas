@@ -107,7 +107,8 @@ The [active improvement plan](docs/detection-improvement-plan.md) tracks the nex
 video, audio and writing evaluations. Independent contributors can use the
 [portable testing contract](docs/independent-testing.md) and evaluation issue form.
 The [complete-video temporal experiment](docs/mouth-temporal-v11-evaluation.md)
-has verified fitting-source preparation; its detection comparison is still running.
+located more edits but failed its ordinary-footage false-alarm requirements;
+its complete fitting and comparison records are published for review.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

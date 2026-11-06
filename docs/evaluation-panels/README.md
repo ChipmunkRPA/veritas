@@ -364,15 +364,31 @@ silent fallback or new head training. Run `audit_mouth_context_inputs_v10.py
 source bindings. Physical root paths bind private manifest bytes, so a new run
 has new receipt hashes. No customer or cloud service starts through these stages.
 
-# Complete-video temporal learner (v11, in progress)
+# Complete-video temporal learner (v11, rejected)
 
-The [current preparation record](../mouth-temporal-v11-evaluation.md) describes
+The [completed experiment](../mouth-temporal-v11-evaluation.md) describes
 all160 audited fitting clips from sixteen actors. The compressed
 `mouth-v11-preparation.json.gz` includes the exact source links/roles/common
 clocks, masks' hashes and geometry/conditioning bindings, runtime declarations,
 frozen method hashes and160 complete audit outcomes. It contains no source
 pictures, audio or checkpoints. Known construction masks are evaluation truth,
-not a detector's pixel attribution. No learned-result capsule is published yet.
+not a detector's pixel attribution. The learner located32/32 known edits but
+flagged22/56 ordinary clips, versus14/32 and0/56 for retained V8. It remains
+disabled under the frozen false-flag requirements; no fresh confirmation was
+scored. The complete fitting/result capsule is published too.
+
+Review its metadata consistency without application dependencies or models:
+
+```sh
+python3 backend/scripts/review_mouth_temporal_preparation_v11.py docs/evaluation-panels/mouth-v11-preparation.json.gz
+```
+
+The [local review receipt](mouth-v11-preparation-review.json) checks all160
+source-condition/audit records, original and encoded clocks, exact known edit
+positions, sample offsets, source-bound seeds and construction input bindings.
+It does not decode source bytes, execute the generators or prove label truth.
+Six focused tests include corrupted offset, timestamp, role, condition and seed
+cases. Local reproduction is not evidence of an outside reviewer participating.
 
 To reconstruct, provision the existing V4 permitted portrait/mesh assets, V7
 speech-rendering assets and isolated runtime, and the unchanged V6 source-role
@@ -394,9 +410,27 @@ consumed clips. The latter two reuse immutable audited neural responses and
 freshly replay native pixels/chips and measure geometry. Run `train <lock>
 <new-head> --fit <fit-features> --calibration <point-features>` only after the
 source audit, then `review <lock> <new-summary> --head <head> --receipt
-<development-features>`. Training and development comparison are outstanding.
+<development-features>`. All160 fitting,24 point and88 development cases have
+completed; each new reconstruction must retain every planned source/condition.
 
 `export_mouth_temporal_v11.py <v11-root> <destination> --preparation-only`
-exports the present metadata. The default full export and
-`review_mouth_temporal_v11.py <capsule> --refit` await a completed result capsule;
-do not interpret their presence as successful evaluation or outside review.
+exports the preparation metadata; the default full export includes the fitting
+capsule. Review all6373 eligible windows, feature/normalizer/decision arithmetic
+and optionally refit the49-variable classifier on CPU:
+
+```sh
+PYTHONPATH=backend python3 -m scripts.review_mouth_temporal_v11 docs/evaluation-panels/mouth-v11-fitting-review.json.gz
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_mouth_temporal_v11 docs/evaluation-panels/mouth-v11-fitting-review.json.gz --refit
+```
+
+The first command needs only the standard library; refitting additionally needs
+NumPy/scikit-learn. The local refit matched all coefficients exactly. These
+reviews do not rerun the vision networks, physically inspect source masks or
+establish outside participation. Raw responses are not authenticity probabilities.
+
+`diagnose_mouth_temporal_ranking_v11.py <capsule> <new-output>` reconstructs the
+explicitly post-hoc scalar-ranking bound. Preserving V8 first and allowing<=1
+ordinary flag retains at most16/32 locations, including only two first-family
+edits. This is not a new calibrated review point or a way to rescue the failed
+experiment. The [record](mouth-v11-ranking-bound.json) remains separate from the
+frozen [full outcome](../mouth-temporal-v11-evaluation.json).

@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared an additive audio verification supplement during corrected extraction,
+  before fitting/comparison. The fixed native plan covers all 99 development
+  dataset/generator/truth/condition cells without score selection. Complete
+  numerical review reconstructs guard ranks, both stability checks and all
+  outcomes, with an optional fitting-only CPU refit. All 115 selected regressions
+  passed. This does not change the original learner or sixteen acceptance gates;
+  no completed-candidate result or accuracy gain is claimed.
+  [Verification protocol](audio-identity-v9-review-protocol.md).
+
 - Audited all 362 mixed-writing source records and original extraction positions:
   zero failures. Forty previously consumed authors are excluded; 59 unused authors
   supply 138 mixed and 53 declared human-only records before further connected-source

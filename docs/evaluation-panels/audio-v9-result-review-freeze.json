@@ -1,0 +1,19 @@
+{
+  "schema": "chipmunk.audio-identity-result-review-freeze/9",
+  "original_private_execution_sha256": "cf407808611a847702ad1c482af6705095d2dc011ead9ebed29e5afe3b3acb18",
+  "original_public_execution_sha256": "b73e5933deb418129f570500a90672e062d159ed84d39ddf8bc8744d2f13ff8c",
+  "native_plan_sha256": "48795283220152d5de07356ff54c018b8da797749957b6480d27582de97eed1e",
+  "implementation_sha256": {
+    "backend/scripts/audit_audio_identity_forwards_v9.py": "f948d0b3df77afe7e96843e61b7ebef53f1e49641c16bd41dfb9c6186f36521e",
+    "backend/scripts/review_audio_identity_numerics_v9.py": "4793a5549a37aaa4a37d4d1d50399c8fd07ec511f87c8a02af7c74373df679a2",
+    "docs/audio-identity-v9-review-protocol.md": "6a9c99586dd2e1b767c0961bc19c96d711cdfe7dc6b2f53c33f9f931d207996f"
+  },
+  "original_implementation_files_unchanged": 51,
+  "native_cases": 99,
+  "prepared_during_extraction": true,
+  "fitting_started": false,
+  "development_comparison_started": false,
+  "method_or_gates_changed": false,
+  "deployment_eligible": false,
+  "scope": "Supplemental verification freeze only; original learner and all acceptance rules unchanged. No outside reviewer participation."
+}

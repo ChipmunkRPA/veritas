@@ -71,6 +71,10 @@ a frozen confirmation panel; see the [source review](../writing-source-preflight
   `audio-v9-native-cache-audit.json` adds all nineteen successful predetermined
   native replays after prospective publication and before any exact-input reuse.
   IDs join to the corrected capsule; this is local parity, not detector accuracy.
+  `audio-v9-native-development-plan.json` fixes 99 development cells using metadata
+  alone; `audio-v9-result-review-freeze.json` binds the additive verification code
+  prepared during extraction and before fitting/comparison. These are planned
+  verification, not completed-candidate results. See the [supplement](../audio-identity-v9-review-protocol.md).
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

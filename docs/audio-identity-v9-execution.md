@@ -76,6 +76,10 @@ No corrected fitting, fresh scoring or replacement decision has occurred.
 
 Complete all consumed extraction, fit only on fitting roles,
 calibrate only on calibration roles, then compare every development input.
+The [additional review protocol](audio-identity-v9-review-protocol.md) fixes
+99 native development cells and complete numerical/refit verification during
+extraction, before fitting/comparison. It changes no acceptance rule or original
+implementation pin. These reviews have not yet run on a completed candidate.
 Complete numerical/native audits before considering a separately frozen fresh
 confirmation. Preserve serving defaults, rollback, payment and authentication.
 Image, video, writing and actual independent human testing remain unfinished

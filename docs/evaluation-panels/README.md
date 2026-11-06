@@ -13,6 +13,11 @@ full-vector comparison with the unchanged objective, corrected roles, commercial
 checkpoint/runtime/service commitments and58 code pins. Its model-free preflight
 and seven actual-freeze alteration checks are preparation, not accuracy or outside
 validation. See the [execution record](../audio-full-representation-v11-execution.md).
+`audio-v11-development-review.json.gz` now retains every development outcome,
+original small fit/head object and new-probe vector, referencing existing public
+v9 vectors/v9-v10 cached probes. All 125 native checks and numerical/refit review
+passed. Four detection gates failed; no fresh scoring or serving change followed.
+[Results and reproduction](../audio-full-representation-v11-development-evaluation.md).
 
 `audio-v10-conditional-freeze.json` and `audio-v10-quality-inputs.jsonl.gz` bind
 the next prospective nonlinear/control-quality comparison and all4,248 finite

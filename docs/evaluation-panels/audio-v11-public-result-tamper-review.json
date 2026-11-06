@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.audio-full-representation-public-result-tamper/11",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "changed fitted coefficient",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "changed source group",
+      "rejected": true,
+      "reason": "Sanitized source/truth/group/role binding differs"
+    },
+    {
+      "alteration": "changed probability",
+      "rejected": true,
+      "reason": "Missing probability mismatch"
+    },
+    {
+      "alteration": "unassessed called original",
+      "rejected": true,
+      "reason": "Independent calibrated/raw stability decision differs"
+    },
+    {
+      "alteration": "changed cached probe PCM",
+      "rejected": true,
+      "reason": "Referenced probe must match the exact original cache"
+    },
+    {
+      "alteration": "changed new probe vector",
+      "rejected": true,
+      "reason": "Stored representation changed"
+    },
+    {
+      "alteration": "changed complete denominator",
+      "rejected": true,
+      "reason": "Every summary, stratum, uncertainty interval and gate must agree"
+    },
+    {
+      "alteration": "dropped native case",
+      "rejected": true,
+      "reason": "All predetermined native cells and every new probe required"
+    },
+    {
+      "alteration": "hidden local path",
+      "rejected": true,
+      "reason": "Local paths cannot enter the public capsule"
+    }
+  ],
+  "scope": "Deliberate local actual-capsule alterations, not neural execution or outside human review."
+}

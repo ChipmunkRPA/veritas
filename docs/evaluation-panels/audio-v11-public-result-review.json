@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "inputs": 4248,
+  "outcomes": 1449,
+  "computed_probes": 427,
+  "new_probes": 26,
+  "refit_performed": true,
+  "refit_max_absolute_difference": {
+    "coefficients": 0.0,
+    "unit_head": 0.0,
+    "center": 0.0,
+    "scale": 0.0
+  },
+  "scope": "Public-input numerical reconstruction with optional fitting-only CPU refit; original native receipts checked without rerunning audio. Exact original fit/head bytes, sanitized outcome/summary lineage. No private manifest, source audio, pretrained download, fresh confirmation or outside human validation.",
+  "schema": "chipmunk.audio-full-representation-public-result-review/11",
+  "original_fit_head_reproduced": true,
+  "gates": {
+    "brier_gain": true,
+    "log_loss_gain": true,
+    "brier_interval_below_zero": true,
+    "strong_condition_brier": true,
+    "total_false_calls": true,
+    "condition_false_calls": true,
+    "generator_false_original_calls": true,
+    "clean_retention": true,
+    "generator_ai_retention": false,
+    "strong_condition_usefulness": false,
+    "background_speech_usefulness": false,
+    "background_speech_class_retention": false,
+    "same_assessed": true,
+    "complete_cases": true,
+    "no_extraction_failures": true,
+    "no_probe_failures": true
+  },
+  "advance_to_fresh_confirmation": false,
+  "native_cases": 125,
+  "serving_changed": false,
+  "outside_reviewer_participation": false,
+  "native_reexecution_performed_by_this_review": false
+}

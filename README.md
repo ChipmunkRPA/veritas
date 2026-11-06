@@ -134,9 +134,11 @@ separately tested nonlinear mapping and added acoustic-quality inputs. Both
 failed the same five requirements: fewer false alarms came with fewer useful
 conclusions. Neither was enabled or sent to fresh confirmation. Complete public
 arithmetic, fitting-only refit and 121 native replay receipts support outside review.
-The next [full-representation comparison](docs/audio-full-representation-v11-execution.md)
-prospectively tests all frozen audio coordinates with the original weighted
-objective and acceptance rules. It is preparation, not a demonstrated gain.
+The [completed full-vector comparison](docs/audio-full-representation-v11-development-evaluation.md)
+recovers 72 correct conclusions against the rejected projection control but still
+loses 60 against service, failing four fixed requirements. It remains disabled;
+all outcomes, small parameters and 125 native receipts support public-only
+numerical/refit review without pretrained-model downloads.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

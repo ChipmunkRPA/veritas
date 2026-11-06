@@ -36,7 +36,7 @@ has its own SHA-256:
 `9f23fe7ab11c4672ca13949956fbf57ed88a74308507015fb20db90f5a356c82`.
 The public allowlist excludes the private source root.
 
-All119 selected regression tests passed. New synthetic cases verify that a
+All119 selected regression tests passed. New synthetic cases verify that
 a high-index input coordinate can affect a supervised response,
 held roles cannot learn normalization/coefficients, metadata cannot alter a
 prediction, missing speech remains unassessed, calibration retains missing
@@ -53,7 +53,18 @@ python3 backend/scripts/export_audio_full_representation_v11.py review \
   /tmp/new-audio-v11-preflight.json --project .
 ```
 
-## Execution order
+## Completed after public freeze
+
+Published and remote-verified the preparation as `e2c1877` before fitting.
+All 1,449 development inputs completed: 1,420 assessed, 29 unassessed, zero failed.
+The candidate made 944 correct conclusions versus 1,004 service and 872 PCA16;
+two false AI, zero false original, 503 inconclusive. Four unchanged gates failed.
+No reserved confirmation was scored or default changed. All 125 native checks,
+every 26 new probe and exact fitting-only refit passed. The [full result and
+public-only reproduction](audio-full-representation-v11-development-evaluation.md)
+preserve all outcomes and the prospective 58 code pins unchanged.
+
+## Original execution order
 
 Publish and remote-verify this freeze before any project fitting or new forward.
 Then fit only fitting originals, save parameters before independent calibration,

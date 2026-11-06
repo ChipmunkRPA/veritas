@@ -1,0 +1,71 @@
+{
+  "schema": "chipmunk.audio-full-representation-guard-only-bound/11",
+  "families": [
+    {
+      "generator": "Chatterbox",
+      "service_correct_ai": 78,
+      "candidate_correct_ai": 67,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 73,
+      "frozen_minimum_to_retain": 76,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "ElevenLabs",
+      "service_correct_ai": 54,
+      "candidate_correct_ai": 40,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 47,
+      "frozen_minimum_to_retain": 52,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "NaturalSpeech2",
+      "service_correct_ai": 167,
+      "candidate_correct_ai": 144,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 155,
+      "frozen_minimum_to_retain": 165,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "PflowTTS",
+      "service_correct_ai": 115,
+      "candidate_correct_ai": 91,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 106,
+      "frozen_minimum_to_retain": 113,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "StyleTTS2",
+      "service_correct_ai": 89,
+      "candidate_correct_ai": 70,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 79,
+      "frozen_minimum_to_retain": 87,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "fleurs-amazon",
+      "service_correct_ai": 25,
+      "candidate_correct_ai": 21,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 25,
+      "frozen_minimum_to_retain": 23,
+      "guard_only_retention_possible": true
+    },
+    {
+      "generator": "fleurs-azure",
+      "service_correct_ai": 42,
+      "candidate_correct_ai": 35,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 37,
+      "frozen_minimum_to_retain": 40,
+      "guard_only_retention_possible": false
+    },
+    {
+      "generator": "fleurs-google",
+      "service_correct_ai": 78,
+      "candidate_correct_ai": 76,
+      "fixed_probability_ai_ceiling_without_any_guard_or_stability_veto": 76,
+      "frozen_minimum_to_retain": 76,
+      "guard_only_retention_possible": true
+    }
+  ],
+  "guard_only_cannot_pass": true,
+  "scope": "Post-result arithmetic on consumed development. Holding fitted probabilities/internal operating points fixed, even removing every class/stability veto cannot meet all per-generator retention requirements. An optimistic ceiling, not permission to remove guards. No new method, point selection, fresh scoring or causal claim."
+}

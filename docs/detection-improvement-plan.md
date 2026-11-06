@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed full-vector audio v11: all 1,449 inputs, 1,420 assessed/29 unassessed,
+  zero failures. Correct conclusions 944 versus 872 PCA16 and 1,004 service;
+  false AI 2/false original 0/inconclusive 503. Clean retention recovers, but four
+  unchanged gates fail; no fresh scoring or enablement. All 125 native cases,
+  every 26 new probe and exact fitting-only refit passed. Public reproduction,
+  nine actual-capsule alteration checks and 127 regressions passed. Guard removal
+  still cannot recover six families. Next investigate preselected earlier/middle/
+  later frozen features. [Complete result](audio-full-representation-v11-development-evaluation.md).
+
 - Prepared one full-representation audio v11 comparison after v10 rejection:
   retain all1024 frozen coordinates with fitting-only diagonal normalization
   at the old16-dimensional variance budget, unchanged objective/regularization,

@@ -150,6 +150,13 @@ pretrained downloads. Both eligible arms failed; reproducing that rejection is
 a useful contribution. Please distinguish arithmetic reproduction, source/audio
 re-execution, predictive evaluation and usability feedback in any review.
 
+The [full-vector audio comparison](audio-full-representation-v11-development-evaluation.md)
+also remains disabled after four failed requirements. Its small public packet
+reuses previously published vectors/cached probes. The supplied command refits
+only fitting sources and reproduces all conclusions/gates without private
+manifests or model downloads. Native source re-execution covers 125 fixed/new-probe
+cases and is a separate recorded check.
+
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
 ```

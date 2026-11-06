@@ -24,7 +24,7 @@ if TYPE_CHECKING:
     from app.storage.db import Analysis
 
 KINDS = frozenset({"video", "audio", "document"})
-NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6"})
+NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"})
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
@@ -148,6 +148,14 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
+        if sequence := packet.get("face_sequence"):
+            for item in sequence["frame_inputs"]:
+                committed = by_index.get(item["frame_index"])
+                if committed is None or any(item[key] != committed[key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise ObjectIntegrityError("Face sequence input differs from its analysed frame commitment")
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            if not any((s.get("details") or {}).get("face_sequence") == sequence for s in frozen.get("signals", [])):
+                raise ObjectIntegrityError("Face sequence differs from the frozen analysis measurement")
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -167,6 +175,16 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 rgb = image.convert("RGB")
                 if hashlib.sha256(rgb.tobytes()).hexdigest() != anchor["decoded_rgb_sha256"]:
                     raise ObjectIntegrityError("Displayed video pixels differ from the analysed frame")
+                if sequence := packet.get("face_sequence"):
+                    import cv2
+
+                    item = next(row for row in sequence["frame_inputs"] if row["frame_index"] == anchor["frame_index"])
+                    matrix = np.array([[float.fromhex(value) for value in row] for row in item["alignment_matrix_hex"]])
+                    side = item["alignment_side"]
+                    aligned = cv2.resize(cv2.warpAffine(np.asarray(rgb), matrix, (side, side), flags=cv2.INTER_LINEAR),
+                                         (112, 112), interpolation=cv2.INTER_AREA)
+                    if hashlib.sha256(aligned.tobytes()).hexdigest() != item["aligned_rgb_sha256"]:
+                        raise ObjectIntegrityError("Recorded face features refer to a different aligned source crop")
                 if "crop" in frame["artifact_refs"]:
                     crop_asset = packet["artifacts"][frame["artifact_refs"]["crop"]]
                     with Image.open(io.BytesIO(assets[crop_asset["sha256"]])) as crop:
@@ -399,6 +417,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["images"] = [plate("contact_sheet", packet["artifacts"]["contact_sheet"], "Sampled frames (not continuous playback)")]
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
+            row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             for frame in packet["frames"]:
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
@@ -474,7 +493,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            interval = row["face_interval"]
+            interval = row["face_sequence"] or row["face_interval"]
             row["locator"] = (f"Face review range {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s"
                               if interval else "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s"
                                                          for f in packet["frames"]))

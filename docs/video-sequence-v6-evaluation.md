@@ -1,10 +1,11 @@
 # Fresh consecutive-face sequence comparison
 
 Completed locally on 5 November 2026. The primary raw consecutive-crop method
-passes the predeclared comparison for **local evidence integration**. It is not
-enabled in the service yet. Runtime integration, source bindings, PDF/JSON
-correspondence, model-name filtering, and full-flow verification must pass before
-the local default changes. Whole-file confidence is unchanged.
+passes the predeclared comparison for **local evidence integration**. It has subsequently
+passed isolated production-adapter, source-binding, PDF/JSON, name-filtering and
+prepaid-flow verification. The [local release record](local-face-sequence-rollout.md)
+describes opt-in and rollback; the repository default remains legacy. Whole-file
+confidence is unchanged.
 
 ## Fixed comparison
 

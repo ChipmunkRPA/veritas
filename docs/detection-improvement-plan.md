@@ -101,3 +101,14 @@ integration remains unfinished.
   Next: integrate the primary method with exact input bindings and verify UI,
   PDF, JSON and the paid analysis flow before local enablement. It must retain
   zero weight in overall confidence until separately calibrated for that purpose.
+
+- Integrated the primary raw video sequence method behind an explicit local
+  mode with rollback. Production-adapter parity passed all 120 consumed v6
+  inputs. Real prepaid worker/report/package tests passed on the swap, its
+  untouched source, and rollback; same-input overall decisions were identical.
+  The small review check runs even when the old large classifier is resource
+  skipped, while overall confidence still discloses that missing check. Native
+  inputs, before/during/after roles and aligned-crop commitments travel through
+  evidence version 7. See the [release record](local-face-sequence-rollout.md).
+  No voice, lip-sync, text or independent-review requirement is completed by
+  this video-only integration.

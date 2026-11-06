@@ -36,7 +36,7 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
           alt={`${current.frame.id}: selected original face crop`} />
           <figcaption className="mt-2 text-caption text-text-muted">Original source crop for checking the suspicious sample against its surroundings.</figcaption></figure>}
       </div>
-      <p className="mt-3 mb-0 text-caption text-text-muted">{current.packet.face_interval
+      <p className="mt-3 mb-0 text-caption text-text-muted">{current.packet.face_interval || current.packet.face_sequence
         ? 'The range reflects measured changes on one track. Review the surrounding face samples for context.'
         : current.packet.claim_scope === 'sampled_window'
         ? 'The response belongs to the recorded window; this representative frame has no separate AI score.'

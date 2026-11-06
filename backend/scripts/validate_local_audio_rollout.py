@@ -30,6 +30,9 @@ def main():
     parser.add_argument('--video-control', type=Path, help='Use a speaking video as the video case in candidate mode')
     parser.add_argument('--video-evidence-only', action='store_true', help='Verify a video evidence fixture without voice-specific assertions')
     parser.add_argument('--device', choices=['cpu', 'mps'], default='cpu')
+    parser.add_argument('--models-dir', type=Path, default=ROOT/'models')
+    parser.add_argument('--research-dir', type=Path, default=ROOT/'backend/data/independent-evaluation/audio-v3')
+    parser.add_argument('--require-face-sequence', action='store_true', help='Fail unless the video produces a source-bound face-sequence review packet')
     args = parser.parse_args()
     if args.video_control is not None and args.mode != 'candidate':
         parser.error('--video-control requires --mode candidate')
@@ -40,7 +43,8 @@ def main():
     data = folder/'data'
     assert not (data/'veritas.db').exists(), 'Use a fresh output directory; completed runs are immutable.'
     os.environ.update(VERITAS_DATA_DIR=str(data), VERITAS_DATABASE_URL=f'sqlite:///{data}/veritas.db',
-        VERITAS_MODELS_DIR=str(ROOT/'models'), VERITAS_AUDIO_DETECTOR_MODE=args.mode,
+        VERITAS_MODELS_DIR=str(args.models_dir.resolve()), VERITAS_HF_HOME=str(args.models_dir.resolve()/'hf'),
+        VERITAS_AUDIO_DETECTOR_MODE=args.mode,
         VERITAS_BILLING_MODE='test', VERITAS_STRIPE_SECRET_KEY='sk_test_isolated_validation',
         VERITAS_STRIPE_WEBHOOK_SECRET='whsec_isolated_validation', VERITAS_API_KEY=secrets.token_hex(32),
         VERITAS_API_KEY_PEPPER=secrets.token_hex(32), VERITAS_SIGNING_KEY=secrets.token_hex(32),
@@ -53,7 +57,7 @@ def main():
     from fastapi.testclient import TestClient
     from app.main import app
     from app.api import auth
-    from app.billing import service
+    from app.billing import purchase_notice, service
     from app.storage.db import Analysis, Job, get_session
     from app.storage.objects import default_store
     from app.detectors.audio.calibration import SHA256
@@ -73,7 +77,7 @@ def main():
             return copy.deepcopy(remote[sid])
         return copy.deepcopy(remote[path.rsplit('/', 1)[-1]])
     service._stripe = provider
-    research = ROOT/'backend/data/independent-evaluation/audio-v3'
+    research = args.research_dir.resolve()
     rows = json.loads((research/'predictions.json').read_text())
     chosen = [next(r for r in rows if r['label'] == label and r['condition'] == condition)
               for label in (0, 1) for condition in ('clean', 'noise_0')]
@@ -109,13 +113,20 @@ def main():
             key, _ = auth.issue_api_key(db, owner)
             db.commit()
         client.headers['X-API-Key'] = key
+        for template in service.BLOCKED_SUBMISSION_ROUTES:
+            if '{aid}' in template or '{case_id}' in template:
+                continue  # Missing or unauthorized existing resources correctly return 404 before billing.
+            path = template.replace('{kind}', 'video').replace('{aid}', 'unpaid-validation').replace('{case_id}', 'unpaid-validation')
+            refused = client.post(path)
+            assert refused.status_code == 402, (path, refused.status_code)
         public_key = client.get('/api/v2/instance/public-key').json()['public_key_pem'].encode()
         for case in cases:
             started = time.monotonic()
             with get_session() as db:
                 before = (db.query(Analysis).count(), db.query(Job).count())
             response = client.post('/api/v2/billing/checkout', headers={'Idempotency-Key': str(uuid.uuid4())},
-                data={'kind': case['kind'], 'profile': 'full'},
+                data={'kind': case['kind'], 'profile': 'full', 'risk_accepted': 'true',
+                      'risk_notice_version': purchase_notice.VERSION, 'risk_notice_sha256': purchase_notice.SHA256},
                 files={'file': (case['path'].name, case['path'].read_bytes(), 'application/octet-stream')})
             assert response.status_code == 201, response.text
             oid = response.json()['order_id']
@@ -173,6 +184,17 @@ def main():
             (case_folder/'api.json').write_bytes(detail.content)
             # Complete export, evidence asset/range, PDF, signature and package correspondence.
             check = exports(client, aid, case_folder, default_store(), public_key)
+            if args.require_face_sequence:
+                review = next(s for s in signals if s['detector_id'] == 'vid.review.face_sequence')
+                assert review['status'] == 'ok' and review['details']['face_sequence']
+                assert review['effective_weight'] == 0 and review['calibrated_probability'] is None
+                assert review.get('contribution_logit') is None and review.get('contribution_pp') is None
+                evidence = json.loads((case_folder/'evidence.json').read_bytes())
+                packet = next(p for p in evidence['packets'] if p.get('face_sequence'))
+                assert packet['finding_ids'] and [f['interval_role'] for f in packet['frames']] == ['before', 'during', 'after']
+                assert all(f['score'] is None and not f['is_peak'] for f in packet['frames'])
+                assert check['assets'] > 0
+                check['face_sequence_verified'] = True
             if args.mode == 'candidate' and case['kind'] == 'video' and not args.video_evidence_only:
                 soundtrack = detail.json()['customer_assessment']['soundtrack']
                 assert soundtrack == json.loads((case_folder/'export.json').read_bytes())['customer_assessment']['soundtrack']

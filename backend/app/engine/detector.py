@@ -158,6 +158,7 @@ class StageOutputs:
     clips: Any = None  # video: per-shot clip inputs for the synthesis lane (V-4)
     av: Any = None  # video: tracks, sound track and frames for the lip-sync lane (V-5)
     codec: Any = None  # video: original file, frame table and shot cuts for the codec lane (V-6)
+    face_review: Any = None  # source-bound consecutive crops; separate from authenticity fusion
 
 
 @dataclass

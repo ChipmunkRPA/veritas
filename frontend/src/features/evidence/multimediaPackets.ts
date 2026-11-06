@@ -30,6 +30,9 @@ export interface VideoEvidencePacket extends PacketBase {
   claim_scope: 'sampled_frames' | 'sampled_window'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
+  face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
+    centers: Record<'before' | 'during' | 'after', number[]>;
+    frame_inputs: { frame_index: number; pts: number; decoded_rgb_sha256: string; aligned_rgb_sha256: string }[] }
   clip?: { status: 'unavailable'; reason: string } | { status: 'ready'; artifact_ref: string;
     start_frame_index: number; end_frame_index_exclusive: number; source_pts: number[]; clip_pts: number[]; clip_time_base: string;
     start_stream_s: number; last_stream_s: number; start_playback_s: number | null;

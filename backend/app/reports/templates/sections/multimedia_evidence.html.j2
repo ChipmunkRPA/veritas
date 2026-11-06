@@ -43,6 +43,7 @@
 <p><strong>Interpretation:</strong> {{ packet.interpretation }}</p>
 {% if packet.kind in ['video', 'av'] %}
 {% if packet.face_interval %}<p class="caption">The flagged range covers {{ packet.face_interval.samples.during | length }} scored samples. The before and after frames show the nearest scored samples on the same track.</p>{% endif %}
+{% if packet.face_sequence %}<p class="caption">The review range spans {{ '%.3f' | format(packet.face_sequence.start_stream_s) }}-{{ '%.3f' | format(packet.face_sequence.end_stream_s) }} s on the source clock. Three consecutive source crops support each of {{ packet.face_sequence.centers.during | length }} centers in this range. Before and after groups provide comparison context. The sequence response is not an individual-frame confidence.</p>{% endif %}
 {{ plates(packet.images, true) }}
 {% if packet.clip and packet.clip.status == 'ready' %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}
 {% if packet.clip and packet.clip.status == 'unavailable' %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}

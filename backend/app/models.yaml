@@ -1432,6 +1432,28 @@ detectors:
     citation: "Oquab et al. DINOv2: Learning Robust Visual Features without Supervision. TMLR (2024). Wu, Peng, Yu. YuNet: A Tiny Millisecond-level Face Detector. Machine Intelligence Research (2023)."
     admission: {decision: pending, evidence: "face tracker without a score; fixture tests and identity distances in docs/v2/qa/v2_tracks.md (V-2)"}
 
+  - id: vid.review.face_sequence
+    adapter: app.detectors.video.adapters.face_sequence:FaceSequenceReviewDetector
+    version: 0.1.0
+    name: "Consecutive face-change review"
+    modality: video
+    family: face-sequence-review
+    hypotheses: []
+    models: [yunet.2023mar, dinov2.small]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["Uncalibrated window statistic, excluded from overall confidence", "Lighting, motion, expression, jump cuts and recompression can cause review cues", "Short RTFS comparison only; long clips, unseen identities and generators remain unvalidated", "Uses the existing detected largest-face sample plan, three native neighbors per center, and unambiguous tracked context"]
+    source_url: https://github.com/ChipmunkRPA/veritas
+    threat: [face_swap]
+    training_data: "No detector fitting; DINOv2 LVD-142M self-supervised features. Internal review point selected on 30 consumed source groups."
+    coverage_date: "2026-11-05 local v6 comparison"
+    input_constraints: ["112 px aligned RGB, float32, batches of at most 12", "At most 64 centers; at least 7 eligible centers, 2 flanks on each side, 3 core centers", "Native triplets span at most 0.13 s; center gaps at most 0.55 s; core range 0.52-2.6 s"]
+    contamination_sets: [LVD-142M, RTFS-10K]
+    fp_modes: ["Fresh genuine/control review flags remained 21/60; this is not a whole-file false-positive rate"]
+    citation: "Oquab et al. DINOv2. TMLR (2024). Wu, Peng, Yu. YuNet. Machine Intelligence Research (2023). Local method and evaluation: docs/video-sequence-v6-evaluation.md."
+    admission: {decision: pending, evidence: "Raw v6 localized 19/60 swaps vs 7/60 at the same 21/60 control review flags. Local evidence integration only; no confidence admission."}
+
   - id: vid.swap.gend_clip_l14
     adapter: app.detectors.video.adapters.swap:GenDTrackDetector
     version: 0.4.0

@@ -31,11 +31,11 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = "video-evidence-6"
-CREATOR = "video-evidence-packets/6"
+VERSION = "video-evidence-7"
+CREATOR = "video-evidence-packets/7"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
-            "video-evidence-packets/5", CREATOR)
-NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", VERSION})
+            "video-evidence-packets/5", "video-evidence-packets/6", CREATOR)
+NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", VERSION})
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -252,6 +252,43 @@ def _context(source: Image.Image, region: dict | None, label: str) -> Image.Imag
     return image
 
 
+def _sequence_observations(result: dict, table: FrameTable, source: dict, anchors: dict) -> tuple[list[dict], set[int]]:
+    candidates, scored = [], set()
+    for signal in result.get("signals", []):
+        details = signal.get("details") or {}
+        record = details.get("face_sequence")
+        if signal.get("status", "ok") != "ok" or details.get("face_sequence_binding_version") != face_interval_binding.SEQUENCE_METHOD:
+            continue
+        for window in details.get("face_sequence_windows", []):
+            face_interval_binding.validate_sequence_record(window, source, table_pts=table.pts,
+                                                          interpolated=table.interpolated, require_flag=False)
+            for item in window["frame_inputs"]:
+                index = item["frame_index"]
+                if index not in anchors or any(item[key] != anchors[index][key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise PacketIntegrityError("Face sequence coverage differs from committed decoded source frames")
+                scored.add(index)
+        if record is None:
+            continue
+        face_interval_binding.validate_sequence_record(record, source, table_pts=table.pts, interpolated=table.interpolated)
+        inputs = {row["frame_index"]: row for row in record["frame_inputs"]}
+        for index, row in inputs.items():
+            if index not in anchors or any(row[key] != anchors[index][key] for key in ("pts", "decoded_rgb_sha256")):
+                raise PacketIntegrityError("Face sequence inputs differ from the committed decoded source frames")
+        indices = sorted(inputs)
+        groups = record["centers"]
+        shown = [("before", groups["before"][-1]), ("during", groups["during"][len(groups["during"])//2]),
+                 ("after", groups["after"][0])]
+        candidates.append({"face_sequence": record, "window": {"frame_indices": indices, "value": record["response"],
+                           "start_pts": table.pts[indices[0]], "end_pts": table.pts[indices[-1]]},
+                           "signals": [signal], "track_id": record["track_id"], "series_name": "face_sequence_change",
+                           "exhibit": {"id": next(iter(signal.get("exhibit_ids", [])), "")},
+                           "rows": [{"frame_index": i, "score": None, "interval_role": role} for role, i in shown],
+                           "peak": {"frame_index": shown[1][1], "score": record["response"]},
+                           "threshold": None, "scored_frame_count": len(indices)})
+        scored.update(indices)
+    return candidates, scored
+
+
 def _contact(images: list[Image.Image], labels: list[str]) -> Image.Image:
     panel_w, panel_h = 320, 220
     sheet = Image.new("RGB", (panel_w * len(images), panel_h), (247, 247, 242))
@@ -298,19 +335,24 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     table, source, anchors, records = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
+    sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
+    window_frames |= sequence_frames
+    sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
+                          and (signal.get("details") or {}).get("face_sequence_binding_version") == face_interval_binding.SEQUENCE_METHOD
+                          and ((signal.get("details") or {}).get("face_sequence_windows") or (signal.get("details") or {}).get("face_sequence")))
     face_candidates = [item for item in candidates if "face_interval" in item]
     existing = window_candidates + [item for item in candidates if "face_interval" not in item]
-    chosen = face_candidates[:2] + existing[:MAX_PACKETS]
+    chosen = sequence_candidates[:1] + face_candidates[:2-len(sequence_candidates[:1])] + existing[:MAX_PACKETS]
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     document = {"schema": SCHEMA, "version": VERSION, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
-                "coverage": {"kind": "point_and_window_samples" if window_candidates else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
+                "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
                              "scored_frame_indices": sorted(scored_frames), "scored_frame_count": len(scored_frames),
-                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates),
+                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks,
                              "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
                              "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
-                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) - len(chosen),
+                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) + len(sequence_candidates) - len(chosen),
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
@@ -335,6 +377,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             image = Image.fromarray(decoded[i])
             region = _face_context(result, candidate["track_id"], i, table,
                                    face_check=any(s.get("family") == "learned-face" for s in candidate["signals"]))
+            if sequence := candidate.get("face_sequence"):
+                measured = next(row for row in sequence["frame_inputs"] if row["frame_index"] == i)
+                region = _box(_bounds(measured["bbox"], table.width, table.height))
             stream_s = table.seconds(i)
             player_s = None if source["timeline_origin_s"] is None else stream_s - source["timeline_origin_s"]
             label = f"{packet_id}.{pos} - frame {i}, {stream_s:.3f} s"
@@ -404,6 +449,19 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                             "No individual-window decision threshold is established here; the lowest observed variation is selected for inspection.",
                                             "The contact sheet contains representative input frames. The listed input frames establish actual sample coverage."],
                            "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
+        if sequence := candidate.get("face_sequence"):
+            start, end = sequence["start_stream_s"], sequence["end_stream_s"]
+            packet.update(title="Face-change range to review", semantics=face_interval_binding.SEQUENCE_METHOD,
+                          face_sequence=sequence,
+                          observation=f"Inner-face appearance changed relative to both surrounding time groups from {start:.3f} to {end:.3f} s.",
+                          interpretation="This pattern supports reviewing a possible face edit. Head motion, expression, lighting and compression can also cause it. The displayed frames show before, during and after context; none has an individual AI confidence score.",
+                          measurements=[{"label": "Face-sequence change", "value": sequence["response"], "unit": "uncalibrated feature distance"},
+                                        {"label": "Input frames in this window", "value": len(sequence["frame_inputs"]), "unit": "frames"}],
+                          limitations=["This is a window-level review cue, not proof of a face swap or an authenticity probability.",
+                                       "Three consecutive native face crops support each listed center. Gaps between centers are not continuously assessed.",
+                                       "The face crops shown here are source context, not pixel-level manipulation masks.",
+                                       "This cue does not change overall confidence."],
+                          derivation={**packet["derivation"], "selection": "highest_source_bound_face_sequence_change"})
         if interval := candidate.get("face_interval"):
             start, end = interval["start_stream_s"], interval["end_stream_s"]
             packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
@@ -506,10 +564,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_channel(document["audio"], source_sha256=source_sha256)
             validate_av_channel(document["av"], source)
-            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6"} and document["audio"]["coverage"] is not None
+            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")
-            if (document["version"] in {"video-evidence-5", "video-evidence-6"} and document["audio"]["coverage"] is not None
+            if (document["version"] in {"video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
                     and document["audio"]["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2"):
                 raise ValueError("Current video evidence omits continuity measurements")
         except (KeyError, TypeError, ValueError) as error:

@@ -38,6 +38,24 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows a sequence review range with before/during/after frames and no invented frame confidence', () => {
+    const set = structuredClone(video)
+    set.version = 'video-evidence-7'
+    const item = set.packets[0]
+    item.claim_scope = 'sampled_window'
+    item.face_sequence = { start_stream_s: 12, end_stream_s: 13, response: .02,
+      centers: { before: [1, 2], during: [3, 4, 5], after: [6, 7] }, frame_inputs: [] }
+    item.frames = (['before', 'during', 'after'] as const).map((role, index) => ({ ...item.frames[0],
+      id: `V01.${index+1}`, interval_role: role, score: null, is_peak: false }))
+    show(set)
+    expect(screen.getByText(/Three consecutive crops support each of 3 centers/)).toBeTruthy()
+    expect(screen.getAllByText(/before flagged range/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/during flagged range/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/after flagged range/i).length).toBeGreaterThan(0)
+    expect(screen.queryByText(/response 0\.700/)).toBeNull()
+    expect(screen.queryByText(/peak sample/)).toBeNull()
+  })
+
   it('plays exact audio windows and context while showing sample coverage, source offsets and precision limits', () => {
     show(audio)
     expect(screen.getByLabelText('P01: exact scored window').getAttribute('src')).toContain(`/assets/${'f'.repeat(64)}.wav?token=signed%20token`)

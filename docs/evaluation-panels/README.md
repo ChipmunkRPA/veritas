@@ -48,6 +48,11 @@ or a generic dataset link.
   [Rebuild instructions](../audio-multisource-v8-execution.md) require no models
   or private manifests; these are local reproducibility checks, not outside
   reviewer participation or detection-performance results.
+  **Speaker-separation correction:** the v8 role plan is superseded. Its literal
+  metadata review missed known cloned/genuine LibriSpeech identity links, and the
+  experiment was stopped before fitting. All byte/PCM reconstruction claims remain
+  scoped to waveforms. Use the [identity audit and repair](../audio-source-identity-v9.md)
+  when assessing source independence; the original v8 capsule remains unchanged.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

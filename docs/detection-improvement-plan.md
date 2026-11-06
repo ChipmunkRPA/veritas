@@ -65,6 +65,18 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- The wider audio identity audit superseded v8 before fitting. Checked1054
+  originals across all868 earlier source references; no reserved recording,
+  non-silent2–4second prefix or known script was reused. However, the publisher's
+  cloning code identifies LibriSpeech parent speakers, revealing six cross-role
+  groups missed by literal dataset-key checks. Stopped v8 at1882 complete records
+  without fitting or fresh scoring. The corrected metadata plan retains all120
+  confirmation recordings in118 groups, retires four connected consumed sources,
+  and keeps known cloned/genuine identities together.5328 repaired inputs rebuilt
+  from the public capsule alone;14 identity/role/privacy tests and five actual
+  capsule alteration checks passed. No model improvement, serving change or
+  outside validation is claimed. [Correction and next work](audio-source-identity-v9.md).
+
 - Prepared the next audio v8 experiment before new fitting/inference: account for
   all540 consumed source references, retain476 eligible originals in174fit/
   84calibration/106development connected groups, and reserve120 new foregrounds

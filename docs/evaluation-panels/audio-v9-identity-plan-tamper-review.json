@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "alteration": "canonical cross-role speaker",
+      "rejected": true
+    },
+    {
+      "alteration": "split statistical group",
+      "rejected": true
+    },
+    {
+      "alteration": "missing recipe",
+      "rejected": true
+    },
+    {
+      "alteration": "changed sample clock",
+      "rejected": true
+    },
+    {
+      "alteration": "wrong-role background",
+      "rejected": true
+    }
+  ],
+  "scope": "Local actual public-capsule alteration rejection; no neural or outside validation."
+}

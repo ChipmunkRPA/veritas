@@ -1,5 +1,14 @@
 # Audio v8 prospective execution freeze
 
+**Superseded before fitting.** A later publisher-identity audit found six voice
+groups crossing the intended data roles. DuplexGen's cloned-voice IDs refer to
+LibriSpeech speakers; distinct dataset prefixes had hidden those links. The
+extraction was stopped after1882 records, before any candidate fitting or fresh
+scoring. No v8 replacement or accuracy improvement is supported. The original
+freeze, waveform checks and receipts remain preserved. See the
+[identity correction](audio-source-identity-v9.md); the metadata-only review below
+did not establish complete cross-corpus speaker independence.
+
 6 November 2026. This record captures the state **before v8 neural extraction or
 project-data fitting**. It is not a performance result. The current app's audio
 calibration and overall confidence remain unchanged.

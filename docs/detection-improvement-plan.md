@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared audio v12 before new source forwards: fixed hidden-state indices
+  8/16/24 versus unprojected-final control, unchanged objective, independent guards
+  and sixteen gates. Rehashed all 4,248 waveform files; source roles, 62 unassessed
+  records, 450 old probe references and reserved confirmation remain unchanged.
+  All 64 method/protocol files and original baseline digests are bound. All 160
+  regressions and nine actual-freeze alteration checks passed. Publish before
+  extraction; no accuracy, serving change or outside review claimed.
+  [Preparation and execution](audio-layer-v12-execution.md).
+
 - Completed full-vector audio v11: all 1,449 inputs, 1,420 assessed/29 unassessed,
   zero failures. Correct conclusions 944 versus 872 PCA16 and 1,004 service;
   false AI 2/false original 0/inconclusive 503. Clean retention recovers, but four

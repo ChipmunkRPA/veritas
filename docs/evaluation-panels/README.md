@@ -8,6 +8,12 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
+unprojected-final control, unchanged source roles/checkpoints/runtime/service and
+all 64 implementation pins. Model-free preflight and nine actual-freeze alteration
+checks are prospective preparation, not real-model parity, accuracy or outside
+human testing. [Protocol and remaining execution](../audio-layer-v12-execution.md).
+
 `audio-v11-full-representation-freeze.json` binds one prospective supervised
 full-vector comparison with the unchanged objective, corrected roles, commercial
 checkpoint/runtime/service commitments and58 code pins. Its model-free preflight

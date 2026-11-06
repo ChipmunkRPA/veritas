@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.audio-layer-public-tamper-review/12",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "changed layer order",
+      "rejected": true,
+      "reason": "Fixed preselected layers, objective and solver required"
+    },
+    {
+      "alteration": "changed regularization",
+      "rejected": true,
+      "reason": "Fixed preselected layers, objective and solver required"
+    },
+    {
+      "alteration": "changed source receipt",
+      "rejected": true,
+      "reason": "Original source, service, reserved and full-vector control commitments required"
+    },
+    {
+      "alteration": "changed checkpoint",
+      "rejected": true,
+      "reason": "Original commercial checkpoints, runtime and service required"
+    },
+    {
+      "alteration": "changed missing count",
+      "rejected": true,
+      "reason": "Complete original roles, statuses, references and native cells required"
+    },
+    {
+      "alteration": "changed native coverage",
+      "rejected": true,
+      "reason": "Complete original roles, statuses, references and native cells required"
+    },
+    {
+      "alteration": "dropped implementation pin",
+      "rejected": true,
+      "reason": "Complete unchanged baseline and all new implementation files required"
+    },
+    {
+      "alteration": "fitting claim",
+      "rejected": true,
+      "reason": "Prospective freeze cannot claim fitting, neural forwards or deployment"
+    },
+    {
+      "alteration": "hidden field",
+      "rejected": true,
+      "reason": "Exact public prospective field allowlist required"
+    }
+  ],
+  "scope": "Deliberate local actual-freeze alterations, not model execution or outside participation."
+}

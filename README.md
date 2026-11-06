@@ -139,6 +139,10 @@ recovers 72 correct conclusions against the rejected projection control but stil
 loses 60 against service, failing four fixed requirements. It remains disabled;
 all outcomes, small parameters and 125 native receipts support public-only
 numerical/refit review without pretrained-model downloads.
+The next [fixed-layer comparison](docs/audio-layer-v12-execution.md) preselects
+earlier/middle/later speech features and a matched final-vector control. Its
+source/runtime/code freeze and preparation tests precede any new project forward;
+preparation alone is not a detection improvement or outside validation.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

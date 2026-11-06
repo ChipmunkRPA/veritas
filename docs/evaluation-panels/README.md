@@ -8,6 +8,13 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`audio-v10-conditional-freeze.json` and `audio-v10-quality-inputs.jsonl.gz` bind
+the next prospective nonlinear/control-quality comparison and all4,248 finite
+measurements, with402 cached filtered-probe descriptors. They include no raw
+audio, transcripts, provider IDs or private paths. The model-free preflight and
+seven altered-freeze rejections accompany the [execution record](../audio-conditional-v10-execution.md).
+These are preparation, not candidate accuracy, fresh results or outside review.
+
 `writing-v2-source-preflight.json` is an aggregate-only source/Unicode-position
 audit, including pinned publisher-card checksums and unresolved conflicting
 dataset license declarations. It exports no source text, author names, queries,

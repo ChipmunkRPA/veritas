@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared audio v10 before project fitting: a compact nonlinear control, a
+  separate arm adding two unchanged waveform descriptors and a non-adoptable
+  quality-only nuisance check. All4,248 exact quality measurements and402 cached
+  filtered-probe measurements passed. Freeze binds54 project/twelve installed
+  learner files and unchanged commercial checkpoints/source roles/baseline.
+  All96 selected tests, public metadata review and seven actual-freeze alteration
+  checks passed. Original sixteen gates, independent calibration and confirmation
+  restrictions remain. No improvement or outside review is claimed.
+  [Design and execution](audio-conditional-v10-execution.md).
+
 - Completed corrected audio v9: all 4,248 consumed features (zero failures),
   independent fit/calibration and all 1,449 development outcomes. False AI fell
   58 → 3, but correct calls fell 1,004 → 872 and inconclusive rose 387 → 573.

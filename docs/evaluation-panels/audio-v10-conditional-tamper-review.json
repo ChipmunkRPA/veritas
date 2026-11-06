@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.audio-conditional-preflight-tamper/10",
+  "freeze_sha256": "bc5711f4b2f3fdbc68509d7f89c7e7647179fcbe5056e9fa817352b7e2b977a8",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "missing original descriptor",
+      "rejected": true,
+      "reason": "Finite bounded original/probe descriptors required"
+    },
+    {
+      "alteration": "confirmation role",
+      "rejected": true,
+      "reason": "Every corrected consumed measurement and role required"
+    },
+    {
+      "alteration": "random early stopping",
+      "rejected": true,
+      "reason": "Fixed arm/learner/no-random-holdout design required"
+    },
+    {
+      "alteration": "changed code pin",
+      "rejected": true,
+      "reason": "Frozen implementation source changed"
+    },
+    {
+      "alteration": "claims fitting started",
+      "rejected": true,
+      "reason": "Prospective freeze cannot claim a completed fitting or inference"
+    },
+    {
+      "alteration": "private path field",
+      "rejected": true,
+      "reason": "Exact public prospective schema/allowlist required"
+    },
+    {
+      "alteration": "changed projection",
+      "rejected": true,
+      "reason": "Original source/feature/projection/service commitments required"
+    }
+  ],
+  "scope": "Actual prospective metadata alterations; no project fitting, neural inference, accuracy or outside reviewer."
+}

@@ -115,6 +115,10 @@ passed development, but its [1080-input fresh comparison](docs/audio-guard-v7-co
 added wrong conclusions despite better aggregate probability scores. It remains
 disabled under the frozen error limits; complete fitting, fresh outcomes and
 numerical reproduction materials are available for outside review.
+The next [multi-generator audio protocol](docs/audio-multisource-v8-development.md)
+reserves fresh sources before fitting and separates voice, script and background
+connections. Its public source/input capsule supports model-free review; it is
+preparation for a new experiment, not a measured detection improvement.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

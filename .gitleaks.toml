@@ -31,3 +31,13 @@ condition = "AND"
 paths = ['''(^|/)docs/evaluation-panels/mouth-v(?:8|9)-head\.json$''']
 regexTarget = "match"
 regexes = ['''^backbone\.(?:embeddings\.(?:cls_token|mask_token)|encoder\.layer\.[0-9]\.attention\.attention\.key\.(?:weight|bias))": "[0-9a-f]{64}"$''']
+
+# Every flagged value was independently recomputed from the private source
+# connection metadata before this exact field/path exception was introduced.
+# The expanded JSON is scanned at this path; raw profile IDs are never exported.
+[[allowlists]]
+description = "V8 audio public source connection SHA-256 fingerprints"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/audio-v8-source-plan\.json$''']
+regexTarget = "match"
+regexes = ['''^(?:voice_key_sha256|source_key_sha256)": "[0-9a-f]{64}"$''']

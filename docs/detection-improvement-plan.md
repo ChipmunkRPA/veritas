@@ -65,6 +65,19 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared the next audio v8 experiment before new fitting/inference: account for
+  all540 consumed source references, retain476 eligible originals in174fit/
+  84calibration/106development connected groups, and reserve120 new foregrounds
+  across genuine speech, ElevenLabs-v4, Kokoro and Chatterbox. Prepared5364 exact
+  four-second inputs with66 role-separated noise/music/genuine-speech backgrounds.
+  All662 source-byte/full-production-PCM identities are distinct, with known
+  voice/script/prefix connections kept together. The initial insufficient-noise
+  preparation is preserved; a fixed publisher-checksummed public-domain subset
+  extension supplies eligible originals without changing duration rules.
+  Published metadata checks cover every recipe and40 frozen implementation files;
+  39 focused tests passed. No new performance result, serving change or outside
+  reviewer participation is claimed. [Method and source review](audio-multisource-v8-development.md).
+
 - Completed all1080 frozen fresh audio v7 inputs across two new generator
   source panels and genuine noise/music/overlapping-speech controls. Correct
   calls761→823 and Brier0.121088→0.113554, but false AI35→38, false original

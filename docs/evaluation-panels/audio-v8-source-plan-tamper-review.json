@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "alteration": "waveform clock",
+      "rejected": true
+    },
+    {
+      "alteration": "truth label",
+      "rejected": true
+    },
+    {
+      "alteration": "fresh/consumed roles",
+      "rejected": true
+    },
+    {
+      "alteration": "missing outcome recipe",
+      "rejected": true
+    },
+    {
+      "alteration": "frozen source pin",
+      "rejected": true
+    }
+  ],
+  "scope": "Local public metadata alteration rejection; no source decoding, inference or outside reviewer."
+}

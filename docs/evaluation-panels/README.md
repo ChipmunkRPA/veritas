@@ -28,6 +28,17 @@ or a generic dataset link.
   all 720 inputs. Independently recomputed sample payloads, complete WAV files
   and production-decoded PCM matched their declared hashes. This is local
   reproducibility evidence, not outside review or a fresh accuracy study.
+- `audio-v8-source-plan.json.gz`: all596 foreground originals,66 noise/music/
+  genuine-speech backgrounds and5364 exact input recipes for the next
+  [multi-generator experiment](../audio-multisource-v8-development.md). Source,
+  voice and text connection IDs are hashed; transcripts, profile IDs and local
+  paths are omitted. Only120 foregrounds are reserved fresh confirmation; the
+  other476 are previously consumed fitting/calibration/development sources.
+  `audio-v8-source-plan-review.json` checks all roles/recipes and40 implementation
+  pins with the standard-library reviewer. No detector outputs, fitted head or
+  outside reviewer participation is implied. Upstream permissions include
+  separate CC-BY4, CC-BY-SA4, selected MUSAN public-domain/CC-BY3 and publisher
+  PLN MIT terms; see the per-source declarations and protocol.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

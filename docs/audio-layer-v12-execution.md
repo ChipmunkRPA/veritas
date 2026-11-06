@@ -1,4 +1,13 @@
-# Fixed-layer audio comparison: prospective preparation
+# Fixed-layer audio comparison: preparation and completed execution
+
+## Completed outcome
+
+All 4,248 extractions and 1,449 development outcomes completed without failures.
+Both frozen mappings failed four of sixteen unchanged quality requirements and
+remain disabled. All 508 native replays, exact numerical/refit review and
+public-only reconstruction passed. No reserved confirmation was scored.
+See the [complete result and reproduction](audio-layer-v12-development-evaluation.md).
+The prospective preparation below is retained as the record before execution.
 
 6 November 2026. Prepared the [fixed-layer protocol](audio-layer-v12-protocol.md)
 after the completed full-vector candidate failed four adoption requirements.

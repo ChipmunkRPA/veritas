@@ -23,12 +23,24 @@ the20-file method/runtime/weight/source freeze and unchanged genuine-only gates.
 Its complete source audit and78 selected tests are prospective preparation, not
 held-out accuracy or outside human validation.
 [Confirmation protocol and execution](../fused-crop-v6-confirmation-execution.md).
+`fused-crop-v6-confirmation-review.json` now retains all192 completed fresh
+outcomes, native replay, crop/input/map commitments and per-generator metrics.
+Both formats fail the unchanged genuine-highlight requirement and remain
+disabled. [Complete result](../fused-crop-v6-confirmation-result.md).
 
 `audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
 unprojected-final control, unchanged source roles/checkpoints/runtime/service and
 all 64 implementation pins. Model-free preflight and nine actual-freeze alteration
 checks are prospective preparation, not real-model parity, accuracy or outside
 human testing. [Protocol and remaining execution](../audio-layer-v12-execution.md).
+`audio-v12-development-review.json.gz` and its three role-separated layer packets
+now preserve the complete rejected result. Lossless float32 transport restores
+all4,248 original feature receipt records byte-for-byte, referencing the existing
+v9 final vectors. All1,449 outcomes,422 computed probes,508 native checks and both
+fitted objects remain auditable. Empty-cache public-only replay and both exact
+refits passed; thirteen actual-packet alterations were rejected. Four unchanged
+quality requirements failed in each arm; neither enters confirmation or serving.
+[Full results and commands](../audio-layer-v12-development-evaluation.md).
 
 `audio-v11-full-representation-freeze.json` binds one prospective supervised
 full-vector comparison with the unchanged objective, corrected roles, commercial

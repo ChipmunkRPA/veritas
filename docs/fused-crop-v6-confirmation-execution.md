@@ -1,7 +1,10 @@
 # Fresh image-crop confirmation: preparation and execution
 
-6 November 2026. Source preparation and the prospective freeze are complete.
-No fresh detector outcome or service adoption is established by this record.
+6 November 2026. **Completed and rejected in both formats.** All192 fresh inputs
+completed without failure; native genuine highlights2→9 and JPEG3→6 exceed
+the frozen additional-one allowance. The current checks remain selected.
+[Full result and complete outcomes](fused-crop-v6-confirmation-result.md).
+The preparation record below preserves what was fixed before inference.
 
 All48 original/edit pairs and48 publisher masks were acquired, without a missing
 asset or case replacement. Every native original/edit pixel change matches its
@@ -24,9 +27,9 @@ The original thirteen development method files remain unchanged. All78 selected
 source, role, native-parity, coordinate, damaged-evidence and display tests pass.
 They establish implementation safeguards, not improved held-out detection.
 
-After publication and remote verification, the next stages are twelve consumed
-native replays, all192 fresh source/format outcomes, and reconstruction with the
-unchanged [acceptance rules](fused-crop-v6-confirmation-protocol.md). The runner
+After publication and remote verification as`589f81a`, all twelve consumed
+native replays matched exactly, and all192 fresh source/format outcomes were
+reconstructed with the unchanged [acceptance rules](fused-crop-v6-confirmation-protocol.md). The runner
 requires the separately recorded freeze hash and completed native receipt hash.
 It refuses changed locks or failed/incomplete parity before fresh model loading.
 Native replay is local implementation verification, not outside human review.

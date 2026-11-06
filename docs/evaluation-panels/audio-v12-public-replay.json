@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.audio-layer-public-review/12",
+  "passed": true,
+  "inputs": 4248,
+  "outcomes": 1449,
+  "computed_probes": 422,
+  "native_cases": 508,
+  "arms": {
+    "final_control": {
+      "normalization_rebuilt": true,
+      "independent_guards_rebuilt": true,
+      "all_dual_stability_decisions_rebuilt": true,
+      "operational_counts_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_object_matched": true
+    },
+    "layers": {
+      "normalization_rebuilt": true,
+      "independent_guards_rebuilt": true,
+      "all_dual_stability_decisions_rebuilt": true,
+      "operational_counts_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_object_matched": true
+    }
+  },
+  "selected_arm_for_possible_confirmation": null,
+  "scope": "Public-only lossless feature receipt reconstruction and numerical/refit review; no pretrained model, source waveforms, private manifest, new inference or outside reviewer required."
+}

@@ -65,6 +65,22 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed audio v12: all4,248 extractions and1,449 development outcomes,
+  zero failures. Final/layer mappings yield913/920 correct conclusions versus
+  service1,004, with2 false AI each and534/527 inconclusive versus387. Both
+  fail the same four of sixteen unchanged requirements; reject without reserved
+  confirmation or serving changes. All508 native replays, numerical reconstruction
+  and both exact refits passed. Lossless public packets restore the full feature
+  receipt; empty-cache public-only refits and13 alteration checks passed.
+  [Complete result](audio-layer-v12-development-evaluation.md).
+
+- Completed fresh crop-localization confirmation and rejected both formats under
+  the frozen false-highlight cap. All192 inputs/768 crops completed and twelve
+  consumed replays matched exactly. Native located edits12→20, but genuine
+  highlights2→9; JPEG edits12→13/highlights3→6. No service/confidence change.
+  All288 TGIF originals/eight web examples must now be excluded from any new
+  confirmation. [Complete result](fused-crop-v6-confirmation-result.md).
+
 - Prepared fresh image-crop confirmation: all48 unused pairs/all48 publisher
   masks acquired, exact RGB-reference/geometry checks passed and no source/file
   reuse after248ID exclusions. Minimum perceptual distance12 to history/20 within

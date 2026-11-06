@@ -1,0 +1,72 @@
+{
+  "schema": "chipmunk.audio-layer-public-tamper/12",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "fitted coefficient",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "calibration guard",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "source group",
+      "rejected": true,
+      "reason": "Complete public outcome source/truth/role binding differs"
+    },
+    {
+      "alteration": "mapped probability",
+      "rejected": true,
+      "reason": "Missing probability mismatch"
+    },
+    {
+      "alteration": "unassessed called original",
+      "rejected": true,
+      "reason": "Independent raw/mapped stability or conclusion differs"
+    },
+    {
+      "alteration": "probe layer order",
+      "rejected": true,
+      "reason": "Original complete neural probe commitments changed"
+    },
+    {
+      "alteration": "probe float payload",
+      "rejected": true,
+      "reason": "Packed vector payload changed"
+    },
+    {
+      "alteration": "missing role packet",
+      "rejected": true,
+      "reason": "All three original source roles required"
+    },
+    {
+      "alteration": "missing outcome",
+      "rejected": true,
+      "reason": "Complete public outcome source/truth/role binding differs"
+    },
+    {
+      "alteration": "missing native case",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "response header",
+      "rejected": true,
+      "reason": "Original complete response header binding differs"
+    },
+    {
+      "alteration": "private path",
+      "rejected": true,
+      "reason": "Local paths cannot enter the public capsule"
+    },
+    {
+      "alteration": "layer packet transfer",
+      "rejected": true,
+      "reason": "Changed public layer packet transfer"
+    }
+  ],
+  "scope": "Deliberate alterations of the actual result packet; no new neural inference or outside review."
+}

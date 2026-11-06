@@ -17,12 +17,16 @@ from scripts.review_audio_confirmation_v7 import reconstruct
 
 
 def same_tree(a, b):
+    if isinstance(a, bool) or isinstance(b, bool):
+        return type(a) is type(b) and a == b
     if isinstance(a, dict) and isinstance(b, dict):
         return a.keys() == b.keys() and all(same_tree(a[k], b[k]) for k in a)
     if isinstance(a, list) and isinstance(b, list):
         return len(a) == len(b) and all(same_tree(x, y) for x, y in zip(a, b, strict=True))
     if isinstance(a, float) and isinstance(b, (int, float)):
         return math.isclose(a, b, abs_tol=1e-10, rel_tol=1e-10)
+    if isinstance(a, int):
+        return isinstance(b, int) and a == b
     return a == b
 
 
@@ -100,6 +104,15 @@ def review(body, source_catalogue):
     if body["detector_inference_run"]:
         if body["response_header"]["lock_sha256"] != body["original_lock_sha256"]:
             raise ValueError("Responses bound to different original lock")
+        native = body["native_audit"]
+        selected = {r["id"] for r in body["input_audit"]["cases"] if r["sampled_production_decode"]}
+        if (
+            native["lock_sha256"] != body["original_lock_sha256"]
+            or native["scores_sha256"] != body["summary"]["scores_sha256"]
+            or {r["id"] for r in native["cases"]} != selected
+            or len(native["cases"]) != 18
+        ):
+            raise ValueError("Native audit did not preserve the18 preselected source cells")
         rebuilt = reconstruct(lock, body["head"], variants, body["outcomes"])
         if any(
             not same_tree(rebuilt[k], body["summary"][k])
@@ -119,6 +132,8 @@ def review(body, source_catalogue):
             outcomes=1080,
             gates_passed=sum(rebuilt["gates"].values()),
             candidate_passes=rebuilt["passes"],
+            native_replay_cells=len(native["cases"]),
+            native_replay_receipt_passed=native["passed"] and all(r["passed"] for r in native["cases"]),
         )
     return result
 

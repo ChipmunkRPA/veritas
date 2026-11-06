@@ -1,0 +1,34 @@
+{
+  "schema": "chipmunk.audio-fresh-public-tamper-check/7",
+  "capsule_sha256": "adb266b57f2164d61619741a496c16b05a6574e805938e7384d7cd5b9c57af95",
+  "reviewer_sha256": "b829d04e708048aa1c4492fc81ad728669469fa55723e1072833201df083117d",
+  "passed": true,
+  "cases": [
+    {
+      "test": "changed_candidate_probability",
+      "rejected": true,
+      "reason": "Probability/guard arithmetic mismatch"
+    },
+    {
+      "test": "changed_probe_clock",
+      "rejected": true,
+      "reason": "Probe representation/sample clock differs"
+    },
+    {
+      "test": "changed_outcome_truth",
+      "rejected": true,
+      "reason": "Outcome source clock/hash/label/condition differs"
+    },
+    {
+      "test": "missing_outcome",
+      "rejected": true,
+      "reason": "Fixed head and every planned outcome required"
+    },
+    {
+      "test": "changed_candidate_head",
+      "rejected": true,
+      "reason": "Published candidate head differs from frozen original artifact"
+    }
+  ],
+  "scope": "Five targeted local integrity rejection checks. Not exhaustive security assessment or outside validation."
+}

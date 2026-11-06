@@ -62,13 +62,18 @@ def export(root, destination, full=False):
     if full:
         header, outcomes = load_rows(root / "scores.jsonl")
         summary = json.loads((root / "summary.json").read_text())
+        native = json.loads((root / "native-audit.json").read_text())
         if (
             header["lock_sha256"] != digest(lock_path)
             or summary["scores_sha256"] != digest(root / "scores.jsonl")
             or len(outcomes) != 1080
         ):
             raise ValueError("All frozen outcomes and bound summary required")
-        body.update(response_header=header, outcomes=outcomes, summary=summary)
+        if native["lock_sha256"] != digest(lock_path) or native["scores_sha256"] != digest(
+            root / "scores.jsonl"
+        ):
+            raise ValueError("Native audit must refer to these exact immutable outcomes")
+        body.update(response_header=header, outcomes=outcomes, summary=summary, native_audit=native)
     raw = json.dumps(body, allow_nan=False, separators=(",", ":")).encode()
     if b"/Users/" in raw or b"/private/" in raw or b"/home/" in raw:
         raise ValueError("Private filesystem path survived explicit export field selection")

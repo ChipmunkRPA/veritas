@@ -111,9 +111,10 @@ The [complete-video temporal experiment](docs/mouth-temporal-v11-evaluation.md)
 located more edits but failed its ordinary-footage false-alarm requirements;
 its complete fitting and comparison records are published for review.
 The [source-separated audio experiment](docs/audio-guard-v7-evaluation.md)
-passed its frozen development gates against the actual guarded service. It
-remains disabled pending a separately frozen fresh comparison; its complete
-CPU fitting and decision reconstruction is available for outside review.
+passed development, but its [1080-input fresh comparison](docs/audio-guard-v7-confirmation-evaluation.md)
+added wrong conclusions despite better aggregate probability scores. It remains
+disabled under the frozen error limits; complete fitting, fresh outcomes and
+numerical reproduction materials are available for outside review.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

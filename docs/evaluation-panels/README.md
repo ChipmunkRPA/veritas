@@ -534,3 +534,22 @@ thirteen consumed cases before fresh inference. Then
 binds the completed preparation/current runner before its `score <lock>
 <new-jsonl>` stage. Provision commercial checkpoints and point the existing
 model/HF cache settings to them; serving state is not modified by these tools.
+
+The completed [fresh outcome](../audio-guard-v7-confirmation-evaluation.md) failed
+four frozen requirements and remains disabled. `audio-v7-confirmation-review.json.gz`
+adds all1080 original/probe representations, actual-service and candidate
+outcomes, the exact summary and18 preselected native replays. Nothing is
+refitted by the portable result review:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.reproduce_audio_confirmation_v7 docs/evaluation-panels/audio-v7-confirmation-review.json.gz /tmp/audio-v7-confirmation-result-review.json
+```
+
+Source/representation/probability/guard/stability and complete operational
+arithmetic are reconstructed, using the shared declared proper-score/bootstrap/
+gate implementation. Numeric comparisons allow1e-10 tolerance; discrete
+outcomes and gates must match exactly. No waveform decoding, neural forwards or
+outside participation follows from this CPU review. The separate native replay
+is `audit_audio_confirmation_forwards_v7.py <confirmation-root> <new-receipt>`;
+it keeps the18 source/class/condition cells selected before classification and
+never replaces original outcomes. All replays matched exactly locally.

@@ -65,6 +65,17 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed all1080 frozen fresh audio v7 inputs across two new generator
+  source panels and genuine noise/music/overlapping-speech controls. Correct
+  calls761→823 and Brier0.121088→0.113554, but false AI35→38, false original
+  39→52 and worse equal-level speech Brier failed four of sixteen gates.
+  Rejected under unchanged requirements; current calibration/overall confidence
+  retained. All18 preselected native source replays matched exactly and the
+  complete numerical record is published. This exposes modern-TTS false
+  original calls under noise and genuine multi-speaker false alarms; it is
+  not outside validation or completion of the other media work.
+  [Full result and next work](audio-guard-v7-confirmation-evaluation.md).
+
 - Prepared the prospective v7 fresh audio sources without classifier inference:
   60 unused genuine speakers,30 ElevenLabs voices/complete scripts,30 Chatterbox
   prompt IDs/dialogues, six separate genuine background speakers and twelve

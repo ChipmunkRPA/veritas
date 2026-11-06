@@ -132,6 +132,13 @@ Existing source attribution and commercial-permission records remain required.
 
 ## Limits and next decision
 
+The later [fresh1080-input confirmation](audio-guard-v7-confirmation-evaluation.md)
+failed four prospective gates: false AI35→38, false original39→52, and worse
+equal-level background-speech Brier. V7 remains disabled despite more correct
+calls and better pooled proper scores. The following development limits and
+original advancement rule remain historical; this is no longer a candidate
+waiting for its first fresh comparison.
+
 These short clips are about 2–4 seconds long and contribute one complete
 analysis window. This is not a whole-recording or mixed-speaker validation.
 There are 120 original development files and 60 connected groups, not 720

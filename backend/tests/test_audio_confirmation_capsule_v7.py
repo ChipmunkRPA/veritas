@@ -5,7 +5,13 @@ from pathlib import Path
 
 import pytest
 
-from scripts.reproduce_audio_confirmation_v7 import review
+from scripts.reproduce_audio_confirmation_v7 import review, same_tree
+
+
+def test_discrete_gates_and_counts_do_not_use_float_or_boolean_coercion():
+    assert not same_tree({"passes": True}, {"passes": 1})
+    assert not same_tree({"assessed": 1080}, {"assessed": 1080.0})
+    assert same_tree({"brier": 0.1}, {"brier": 0.1 + 1e-12})
 
 
 @pytest.fixture(scope="module")

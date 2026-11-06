@@ -17,6 +17,12 @@ service adoption. `fused-crop-v6-source-plan.json` supplies the48 new public sou
 references selected after excluding248 historical image IDs. This is unscored
 source preparation, not fresh detection evidence or outside human review.
 [Results, limits and remaining steps](../fused-crop-v6-development.md).
+`fused-crop-v6-confirmation-manifest.json` retains all96 acquired source-image
+references and mask commitments. `fused-crop-v6-confirmation-freeze.json` binds
+the20-file method/runtime/weight/source freeze and unchanged genuine-only gates.
+Its complete source audit and78 selected tests are prospective preparation, not
+held-out accuracy or outside human validation.
+[Confirmation protocol and execution](../fused-crop-v6-confirmation-execution.md).
 
 `audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
 unprojected-final control, unchanged source roles/checkpoints/runtime/service and

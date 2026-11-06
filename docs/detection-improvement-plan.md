@@ -65,6 +65,14 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared fresh image-crop confirmation: all48 unused pairs/all48 publisher
+  masks acquired, exact RGB-reference/geometry checks passed and no source/file
+  reuse after248ID exclusions. Minimum perceptual distance12 to history/20 within
+  panel. All20 method/runtime/test pins and original gates frozen;78 selected
+  regressions pass. Publish/verify before twelve consumed native replays and192
+  fresh inputs. No fresh detection result or service change yet.
+  [Execution record](fused-crop-v6-confirmation-execution.md).
+
 - Verified the owner's institutional AITDNA archive against its published
   checksum and all ZIP CRCs. Its span file differs in bytes but all362 decoded
   records/schema match the acquired copy. The institutional CC-BY-SA metadata

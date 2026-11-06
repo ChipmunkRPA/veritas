@@ -65,6 +65,18 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- V9 source-matched ranking/teacher retention trained the same two small
+  vision blocks on the immutable V8 panel, with 768 fitting pairs and 4,096
+  fitting-only teacher targets. All teacher/source/full-forward/native-video
+  replays passed. It lost V8's gain: 0/32 located versus 14/32, both 0/56
+  ordinary flags. Rejected under the frozen gates, preserving V8 and the app.
+  A post-hoc scalar-ranking bound proves that no point allowing <=1 ordinary
+  flag could recover more than one first-family edit or any second-family
+  edit on this consumed panel. Next work needs source-relative temporal
+  evidence or better separation, plus calibration at the actual window unit;
+  point relaxation alone cannot meet the retained requirements. No fresh
+  actors or outside review. [V9 result and diagnostic](mouth-paired-v9-evaluation.md).
+
 - V8 actually trained the final two small vision blocks on 1,600 two-family
   stills (16 fit/four point actors, eight excluded video actors). All source,
   native-input and learned-state replays passed. On 88 consumed clips it

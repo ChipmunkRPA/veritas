@@ -71,7 +71,7 @@ def review(responses, summary, head):
                     checked_windows += 1
                 if windows != sorted(windows, key=lambda w: (-w["response"], w["start_s"], w["track_id"])):
                     raise ValueError("Retained candidate windows are not ranked as declared")
-            chosen = next((w for w in windows if w["response"] > point), None)
+            chosen = next((w for w in windows if w["response"] >= point), None)
             interval = [chosen["start_s"], chosen["end_s"]] if chosen else None
             temporal = overlap(interval, row["edit_time_range_s"])
             calculated.append(

@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.mouth-paired-posthoc-ranking-bound/9",
+  "public_responses_sha256": "3d6f6497889191451ccfede88a510c71dab050c32008d32644ce7182841b766b",
+  "original_score_receipt_sha256": "cf8db2b5e6258012bdb9d5a90fd1e25f5b2d2466704035d87b7eddde6e85431c",
+  "frozen_review_point": 2.486741309111251,
+  "ordinary_cases": 56,
+  "allowed_ordinary_flags": 1,
+  "second_highest_ordinary_response": 2.444695806585588,
+  "minimum_float64_scalar_point_for_at_most_one_ordinary_flag": 2.4446958065855884,
+  "ordinary_flags_at_bound": 0,
+  "families": {
+    "liveportrait": {
+      "ai_cases": 16,
+      "maximum_ai_window_response": 2.4509807718997205,
+      "maximum_flaggable_ai_cases_at_one_ordinary_flag": 1,
+      "maximum_correct_locations_at_one_ordinary_flag": 1
+    },
+    "musetalk": {
+      "ai_cases": 16,
+      "maximum_ai_window_response": 2.4029879117832347,
+      "maximum_flaggable_ai_cases_at_one_ordinary_flag": 0,
+      "maximum_correct_locations_at_one_ordinary_flag": 0
+    }
+  },
+  "reasoning": "The detector uses response >= point. Every scalar point allowing at most one ordinary flag must be strictly above the second-highest ordinary response; nextafter toward infinity is the smallest allowed float64 point. AI flag sets at higher points can only shrink.",
+  "scope": "Post-hoc diagnostic on eight consumed actors and correlated variants. Neither an adopted point nor fresh accuracy/false-alarm evidence. Frozen point, weights and all outcomes remain unchanged.",
+  "superseded_local_diagnostic_sha256": "b3a4510d6e884606fb9b8960d4809cd920cba8eb6a706ec5397cd3ae7dd77264",
+  "correction": "The initial diagnostic used strict >. This diagnostic uses the actual >= detector rule and the smallest allowed float64 point. No frozen outcome or point changed."
+}

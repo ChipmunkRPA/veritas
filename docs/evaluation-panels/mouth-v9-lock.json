@@ -1,0 +1,3130 @@
+{
+  "schema": "chipmunk.mouth-source-paired-lock/9",
+  "method": "mouth-source-paired-retention/9.0",
+  "parent_lock_sha256": "b3474e89fd6cc4af1eb958764433ec57ea4faad582efd8f4d1e29e992ad2a598",
+  "parent_head_sha256": "3044f1c4659245d965ecae80f7374dbee8d5374428f24f780f83aedccdddeb6c",
+  "parent_weights_sha256": "7a349fd2f32a8a834634a7e781f294d244c3a9cf97aea9eb8230b0e3a7ea3948",
+  "parent_scores_sha256": "68bc7eac352f99fc147b002ba7284d2eca9a7ef53585762a1f6474e9de83786d",
+  "parent_summary_sha256": "493f27363a198e1c6132eed8cfb517fbb3d92dfdfce50f1d7471258c81a62156",
+  "training_audit_sha256": "91691513950c44c6cd7c816baf3484a15d91231a6b19fd11cb37366d7b1e45df",
+  "parent_video_audit_sha256": "a73c511f84d190aa40641057f15ec86ae283f89b9c6bb6096ad0cf2e5cbc2630",
+  "parent_forward_replay_sha256": "5e834dc25764ba5e3041a4a9ee47937016b7b4102a0d25c1c42d2f304dc6d179",
+  "cache_receipt_sha256": "94412561b73c164d53a2a4250c0f6c951911571f3136ccd85e95d05b4221af1e",
+  "training_manifest_sha256": "b5c0f09654784a5665c5ca0f1c6dca8fe8a14a1fb4de40f68eff51e30c0959cf",
+  "implementation_sha256": {
+    "backend/scripts/run_mouth_learning_v8.py": "e7829479ad6b7a0d76dd6c748b7d26458496171f3a4980f968ea5780044a91e4",
+    "backend/scripts/mouth_learner_v8.py": "959733279a1406c92f21415c529049f87234047f32fcc3b38d3acfb78ea835d8",
+    "backend/scripts/mouth_probe_v6.py": "538673c7c0f3fd0fdf07d73a96007f0a614de4e09071dc9ad5ab761fbc95a87e",
+    "backend/scripts/compare_mouth_probe_v6.py": "0f321ead75bba9b1e12619967c5b0382b91d2d81dbb9a9a66edd54392a6f27de",
+    "backend/scripts/compare_mouth_sequence_v4.py": "ef5195270068a28ab082ba7015d03a8d5e78b21c466d64525613b903eb7e9a74",
+    "backend/scripts/compare_mouth_artifact_v5.py": "31955e97f171df22fb4069119401369208fc54b10e12817e1b3b1839d48fd6d6",
+    "backend/app/detectors/image/gend.py": "e82ada80ffd7550a72ac74265dc8a19fef1c57ce2ccd8c0d34b835bf1331c3c8",
+    "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+    "backend/app/detectors/video/frame_store.py": "5cad0916d36e77ad873ef39d86140aadc82d61e7de011138a776818512d4955a",
+    "backend/app/detectors/video/face_sequence.py": "e61ce53e6fafbb3dc0ae90425d13324392ac1d70fb6bd442beb0d0e0c3fe684d",
+    "backend/app/detectors/video/adapters/face_sequence.py": "95d2b66f3ade4bf3acb975696746ba45f373fc1825535f68b4037fa317d1ef66",
+    "backend/app/detectors/video/adapters/loaders.py": "e68960817fc0948c303313b7dd559c4f02fd7feeebf374c0ca65c26af5ea8b8a",
+    "backend/app/detectors/video/adapters/tracks.py": "e04fb00a143374e743862749498008e1420d0c6488a47de90b346fcf0f81522d",
+    "backend/app/detectors/video/tracking.py": "b9d64f3de822f82781980bf62f901b97c62b758078d5cbfed6591dc2609ace43",
+    "backend/app/models.yaml": "c7754ce5edd80160a4e2d3d8988b610b992eb4f713f64a81c39437fc1196bd71",
+    "docs/mouth-learning-v8-development.md": "f4e16c393f50c99e39e2e10267822814ad936e0b6eb803e3e447374d06113236",
+    "backend/scripts/run_mouth_paired_v9.py": "63f9a0561fe6839a879a442c9354968d7f59fff91bbdc2aa4dbabbf1dcf5343c",
+    "backend/scripts/mouth_paired_v9.py": "b78f947f02af59958fa37889529f29a2c41c2d57de708dbe26be4a8b16fd7725",
+    "backend/scripts/audit_mouth_paired_v9.py": "079bf1a313e9243c21c459d14e56f929aeb32538f653d53a1e9ba8bf3f2e0d07",
+    "backend/scripts/audit_mouth_video_v8.py": "a367bae6c1ddeba736f7430560e654966dd74c1ab25dc33ed2383e2ccc55fab7",
+    "backend/scripts/replay_mouth_learning_v8.py": "46da2d9449684a6d2acb6002f572599f51476c858278f773abe6e2cb9f9c5ab6",
+    "backend/scripts/audit_mouth_probe_v6.py": "01850d3adffc06a4d51ab6b803a1872d64048f97e8da98d84b4cc0ef87836422",
+    "docs/mouth-paired-v9-development.md": "83502e0c72b920b2b0385916dfe8941ae58b852401cd73e18605830377771da8"
+  },
+  "pairs": [
+    {
+      "positive_id": "crema-1051-original:25:ai-redraw",
+      "negative_id": "crema-1051-original:25:original"
+    },
+    {
+      "positive_id": "crema-1051-original:25:ai-redraw",
+      "negative_id": "crema-1051-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:25:ai-redraw",
+      "negative_id": "crema-1051-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:25:ai-retime",
+      "negative_id": "crema-1051-original:25:original"
+    },
+    {
+      "positive_id": "crema-1051-original:25:ai-retime",
+      "negative_id": "crema-1051-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:25:ai-retime",
+      "negative_id": "crema-1051-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-redraw",
+      "negative_id": "crema-1051-original:28:original"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-redraw",
+      "negative_id": "crema-1051-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-redraw",
+      "negative_id": "crema-1051-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-retime",
+      "negative_id": "crema-1051-original:28:original"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-retime",
+      "negative_id": "crema-1051-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:28:ai-retime",
+      "negative_id": "crema-1051-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-redraw",
+      "negative_id": "crema-1051-original:30:original"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-redraw",
+      "negative_id": "crema-1051-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-redraw",
+      "negative_id": "crema-1051-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-retime",
+      "negative_id": "crema-1051-original:30:original"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-retime",
+      "negative_id": "crema-1051-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:30:ai-retime",
+      "negative_id": "crema-1051-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-redraw",
+      "negative_id": "crema-1051-original:33:original"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-redraw",
+      "negative_id": "crema-1051-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-redraw",
+      "negative_id": "crema-1051-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-retime",
+      "negative_id": "crema-1051-original:33:original"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-retime",
+      "negative_id": "crema-1051-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:33:ai-retime",
+      "negative_id": "crema-1051-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-redraw",
+      "negative_id": "crema-1051-original:36:original"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-redraw",
+      "negative_id": "crema-1051-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-redraw",
+      "negative_id": "crema-1051-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-retime",
+      "negative_id": "crema-1051-original:36:original"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-retime",
+      "negative_id": "crema-1051-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:36:ai-retime",
+      "negative_id": "crema-1051-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-redraw",
+      "negative_id": "crema-1051-original:39:original"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-redraw",
+      "negative_id": "crema-1051-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-redraw",
+      "negative_id": "crema-1051-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-retime",
+      "negative_id": "crema-1051-original:39:original"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-retime",
+      "negative_id": "crema-1051-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:39:ai-retime",
+      "negative_id": "crema-1051-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-redraw",
+      "negative_id": "crema-1051-original:41:original"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-redraw",
+      "negative_id": "crema-1051-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-redraw",
+      "negative_id": "crema-1051-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-retime",
+      "negative_id": "crema-1051-original:41:original"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-retime",
+      "negative_id": "crema-1051-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:41:ai-retime",
+      "negative_id": "crema-1051-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-redraw",
+      "negative_id": "crema-1051-original:44:original"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-redraw",
+      "negative_id": "crema-1051-original:44:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-redraw",
+      "negative_id": "crema-1051-original:44:local-resample"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-retime",
+      "negative_id": "crema-1051-original:44:original"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-retime",
+      "negative_id": "crema-1051-original:44:local-light"
+    },
+    {
+      "positive_id": "crema-1051-original:44:ai-retime",
+      "negative_id": "crema-1051-original:44:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-redraw",
+      "negative_id": "crema-1065-original:16:original"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-redraw",
+      "negative_id": "crema-1065-original:16:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-redraw",
+      "negative_id": "crema-1065-original:16:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-retime",
+      "negative_id": "crema-1065-original:16:original"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-retime",
+      "negative_id": "crema-1065-original:16:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:16:ai-retime",
+      "negative_id": "crema-1065-original:16:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-redraw",
+      "negative_id": "crema-1065-original:19:original"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-redraw",
+      "negative_id": "crema-1065-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-redraw",
+      "negative_id": "crema-1065-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-retime",
+      "negative_id": "crema-1065-original:19:original"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-retime",
+      "negative_id": "crema-1065-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:19:ai-retime",
+      "negative_id": "crema-1065-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-redraw",
+      "negative_id": "crema-1065-original:21:original"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-redraw",
+      "negative_id": "crema-1065-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-redraw",
+      "negative_id": "crema-1065-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-retime",
+      "negative_id": "crema-1065-original:21:original"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-retime",
+      "negative_id": "crema-1065-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:21:ai-retime",
+      "negative_id": "crema-1065-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-redraw",
+      "negative_id": "crema-1065-original:24:original"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-redraw",
+      "negative_id": "crema-1065-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-redraw",
+      "negative_id": "crema-1065-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-retime",
+      "negative_id": "crema-1065-original:24:original"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-retime",
+      "negative_id": "crema-1065-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:24:ai-retime",
+      "negative_id": "crema-1065-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-redraw",
+      "negative_id": "crema-1065-original:27:original"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-redraw",
+      "negative_id": "crema-1065-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-redraw",
+      "negative_id": "crema-1065-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-retime",
+      "negative_id": "crema-1065-original:27:original"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-retime",
+      "negative_id": "crema-1065-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:27:ai-retime",
+      "negative_id": "crema-1065-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-redraw",
+      "negative_id": "crema-1065-original:30:original"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-redraw",
+      "negative_id": "crema-1065-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-redraw",
+      "negative_id": "crema-1065-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-retime",
+      "negative_id": "crema-1065-original:30:original"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-retime",
+      "negative_id": "crema-1065-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:30:ai-retime",
+      "negative_id": "crema-1065-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-redraw",
+      "negative_id": "crema-1065-original:32:original"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-redraw",
+      "negative_id": "crema-1065-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-redraw",
+      "negative_id": "crema-1065-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-retime",
+      "negative_id": "crema-1065-original:32:original"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-retime",
+      "negative_id": "crema-1065-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:32:ai-retime",
+      "negative_id": "crema-1065-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-redraw",
+      "negative_id": "crema-1065-original:35:original"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-redraw",
+      "negative_id": "crema-1065-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-redraw",
+      "negative_id": "crema-1065-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-retime",
+      "negative_id": "crema-1065-original:35:original"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-retime",
+      "negative_id": "crema-1065-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1065-original:35:ai-retime",
+      "negative_id": "crema-1065-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-redraw",
+      "negative_id": "crema-1068-original:20:original"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-redraw",
+      "negative_id": "crema-1068-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-redraw",
+      "negative_id": "crema-1068-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-retime",
+      "negative_id": "crema-1068-original:20:original"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-retime",
+      "negative_id": "crema-1068-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:20:ai-retime",
+      "negative_id": "crema-1068-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-redraw",
+      "negative_id": "crema-1068-original:23:original"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-redraw",
+      "negative_id": "crema-1068-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-redraw",
+      "negative_id": "crema-1068-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-retime",
+      "negative_id": "crema-1068-original:23:original"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-retime",
+      "negative_id": "crema-1068-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:23:ai-retime",
+      "negative_id": "crema-1068-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-redraw",
+      "negative_id": "crema-1068-original:25:original"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-redraw",
+      "negative_id": "crema-1068-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-redraw",
+      "negative_id": "crema-1068-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-retime",
+      "negative_id": "crema-1068-original:25:original"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-retime",
+      "negative_id": "crema-1068-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:25:ai-retime",
+      "negative_id": "crema-1068-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-redraw",
+      "negative_id": "crema-1068-original:28:original"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-redraw",
+      "negative_id": "crema-1068-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-redraw",
+      "negative_id": "crema-1068-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-retime",
+      "negative_id": "crema-1068-original:28:original"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-retime",
+      "negative_id": "crema-1068-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:28:ai-retime",
+      "negative_id": "crema-1068-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-redraw",
+      "negative_id": "crema-1068-original:31:original"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-redraw",
+      "negative_id": "crema-1068-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-redraw",
+      "negative_id": "crema-1068-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-retime",
+      "negative_id": "crema-1068-original:31:original"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-retime",
+      "negative_id": "crema-1068-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:31:ai-retime",
+      "negative_id": "crema-1068-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-redraw",
+      "negative_id": "crema-1068-original:34:original"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-redraw",
+      "negative_id": "crema-1068-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-redraw",
+      "negative_id": "crema-1068-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-retime",
+      "negative_id": "crema-1068-original:34:original"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-retime",
+      "negative_id": "crema-1068-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:34:ai-retime",
+      "negative_id": "crema-1068-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-redraw",
+      "negative_id": "crema-1068-original:36:original"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-redraw",
+      "negative_id": "crema-1068-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-redraw",
+      "negative_id": "crema-1068-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-retime",
+      "negative_id": "crema-1068-original:36:original"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-retime",
+      "negative_id": "crema-1068-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:36:ai-retime",
+      "negative_id": "crema-1068-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-redraw",
+      "negative_id": "crema-1068-original:39:original"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-redraw",
+      "negative_id": "crema-1068-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-redraw",
+      "negative_id": "crema-1068-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-retime",
+      "negative_id": "crema-1068-original:39:original"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-retime",
+      "negative_id": "crema-1068-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1068-original:39:ai-retime",
+      "negative_id": "crema-1068-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-redraw",
+      "negative_id": "crema-1036-original:22:original"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-redraw",
+      "negative_id": "crema-1036-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-redraw",
+      "negative_id": "crema-1036-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-retime",
+      "negative_id": "crema-1036-original:22:original"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-retime",
+      "negative_id": "crema-1036-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:22:ai-retime",
+      "negative_id": "crema-1036-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-redraw",
+      "negative_id": "crema-1036-original:25:original"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-redraw",
+      "negative_id": "crema-1036-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-redraw",
+      "negative_id": "crema-1036-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-retime",
+      "negative_id": "crema-1036-original:25:original"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-retime",
+      "negative_id": "crema-1036-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:25:ai-retime",
+      "negative_id": "crema-1036-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-redraw",
+      "negative_id": "crema-1036-original:27:original"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-redraw",
+      "negative_id": "crema-1036-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-redraw",
+      "negative_id": "crema-1036-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-retime",
+      "negative_id": "crema-1036-original:27:original"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-retime",
+      "negative_id": "crema-1036-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:27:ai-retime",
+      "negative_id": "crema-1036-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-redraw",
+      "negative_id": "crema-1036-original:30:original"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-redraw",
+      "negative_id": "crema-1036-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-redraw",
+      "negative_id": "crema-1036-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-retime",
+      "negative_id": "crema-1036-original:30:original"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-retime",
+      "negative_id": "crema-1036-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:30:ai-retime",
+      "negative_id": "crema-1036-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-redraw",
+      "negative_id": "crema-1036-original:33:original"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-redraw",
+      "negative_id": "crema-1036-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-redraw",
+      "negative_id": "crema-1036-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-retime",
+      "negative_id": "crema-1036-original:33:original"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-retime",
+      "negative_id": "crema-1036-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:33:ai-retime",
+      "negative_id": "crema-1036-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-redraw",
+      "negative_id": "crema-1036-original:36:original"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-redraw",
+      "negative_id": "crema-1036-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-redraw",
+      "negative_id": "crema-1036-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-retime",
+      "negative_id": "crema-1036-original:36:original"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-retime",
+      "negative_id": "crema-1036-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:36:ai-retime",
+      "negative_id": "crema-1036-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-redraw",
+      "negative_id": "crema-1036-original:38:original"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-redraw",
+      "negative_id": "crema-1036-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-redraw",
+      "negative_id": "crema-1036-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-retime",
+      "negative_id": "crema-1036-original:38:original"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-retime",
+      "negative_id": "crema-1036-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:38:ai-retime",
+      "negative_id": "crema-1036-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-redraw",
+      "negative_id": "crema-1036-original:41:original"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-redraw",
+      "negative_id": "crema-1036-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-redraw",
+      "negative_id": "crema-1036-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-retime",
+      "negative_id": "crema-1036-original:41:original"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-retime",
+      "negative_id": "crema-1036-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1036-original:41:ai-retime",
+      "negative_id": "crema-1036-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-redraw",
+      "negative_id": "crema-1067-original:16:original"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-redraw",
+      "negative_id": "crema-1067-original:16:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-redraw",
+      "negative_id": "crema-1067-original:16:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-retime",
+      "negative_id": "crema-1067-original:16:original"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-retime",
+      "negative_id": "crema-1067-original:16:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:16:ai-retime",
+      "negative_id": "crema-1067-original:16:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-redraw",
+      "negative_id": "crema-1067-original:19:original"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-redraw",
+      "negative_id": "crema-1067-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-redraw",
+      "negative_id": "crema-1067-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-retime",
+      "negative_id": "crema-1067-original:19:original"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-retime",
+      "negative_id": "crema-1067-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:19:ai-retime",
+      "negative_id": "crema-1067-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-redraw",
+      "negative_id": "crema-1067-original:21:original"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-redraw",
+      "negative_id": "crema-1067-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-redraw",
+      "negative_id": "crema-1067-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-retime",
+      "negative_id": "crema-1067-original:21:original"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-retime",
+      "negative_id": "crema-1067-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:21:ai-retime",
+      "negative_id": "crema-1067-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-redraw",
+      "negative_id": "crema-1067-original:24:original"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-redraw",
+      "negative_id": "crema-1067-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-redraw",
+      "negative_id": "crema-1067-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-retime",
+      "negative_id": "crema-1067-original:24:original"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-retime",
+      "negative_id": "crema-1067-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:24:ai-retime",
+      "negative_id": "crema-1067-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-redraw",
+      "negative_id": "crema-1067-original:27:original"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-redraw",
+      "negative_id": "crema-1067-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-redraw",
+      "negative_id": "crema-1067-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-retime",
+      "negative_id": "crema-1067-original:27:original"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-retime",
+      "negative_id": "crema-1067-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:27:ai-retime",
+      "negative_id": "crema-1067-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-redraw",
+      "negative_id": "crema-1067-original:30:original"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-redraw",
+      "negative_id": "crema-1067-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-redraw",
+      "negative_id": "crema-1067-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-retime",
+      "negative_id": "crema-1067-original:30:original"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-retime",
+      "negative_id": "crema-1067-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:30:ai-retime",
+      "negative_id": "crema-1067-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-redraw",
+      "negative_id": "crema-1067-original:32:original"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-redraw",
+      "negative_id": "crema-1067-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-redraw",
+      "negative_id": "crema-1067-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-retime",
+      "negative_id": "crema-1067-original:32:original"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-retime",
+      "negative_id": "crema-1067-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:32:ai-retime",
+      "negative_id": "crema-1067-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-redraw",
+      "negative_id": "crema-1067-original:35:original"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-redraw",
+      "negative_id": "crema-1067-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-redraw",
+      "negative_id": "crema-1067-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-retime",
+      "negative_id": "crema-1067-original:35:original"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-retime",
+      "negative_id": "crema-1067-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1067-original:35:ai-retime",
+      "negative_id": "crema-1067-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-redraw",
+      "negative_id": "crema-1081-original:22:original"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-redraw",
+      "negative_id": "crema-1081-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-redraw",
+      "negative_id": "crema-1081-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-retime",
+      "negative_id": "crema-1081-original:22:original"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-retime",
+      "negative_id": "crema-1081-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:22:ai-retime",
+      "negative_id": "crema-1081-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-redraw",
+      "negative_id": "crema-1081-original:25:original"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-redraw",
+      "negative_id": "crema-1081-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-redraw",
+      "negative_id": "crema-1081-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-retime",
+      "negative_id": "crema-1081-original:25:original"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-retime",
+      "negative_id": "crema-1081-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:25:ai-retime",
+      "negative_id": "crema-1081-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-redraw",
+      "negative_id": "crema-1081-original:27:original"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-redraw",
+      "negative_id": "crema-1081-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-redraw",
+      "negative_id": "crema-1081-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-retime",
+      "negative_id": "crema-1081-original:27:original"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-retime",
+      "negative_id": "crema-1081-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:27:ai-retime",
+      "negative_id": "crema-1081-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-redraw",
+      "negative_id": "crema-1081-original:30:original"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-redraw",
+      "negative_id": "crema-1081-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-redraw",
+      "negative_id": "crema-1081-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-retime",
+      "negative_id": "crema-1081-original:30:original"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-retime",
+      "negative_id": "crema-1081-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:30:ai-retime",
+      "negative_id": "crema-1081-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-redraw",
+      "negative_id": "crema-1081-original:33:original"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-redraw",
+      "negative_id": "crema-1081-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-redraw",
+      "negative_id": "crema-1081-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-retime",
+      "negative_id": "crema-1081-original:33:original"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-retime",
+      "negative_id": "crema-1081-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:33:ai-retime",
+      "negative_id": "crema-1081-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-redraw",
+      "negative_id": "crema-1081-original:36:original"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-redraw",
+      "negative_id": "crema-1081-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-redraw",
+      "negative_id": "crema-1081-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-retime",
+      "negative_id": "crema-1081-original:36:original"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-retime",
+      "negative_id": "crema-1081-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:36:ai-retime",
+      "negative_id": "crema-1081-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-redraw",
+      "negative_id": "crema-1081-original:38:original"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-redraw",
+      "negative_id": "crema-1081-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-redraw",
+      "negative_id": "crema-1081-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-retime",
+      "negative_id": "crema-1081-original:38:original"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-retime",
+      "negative_id": "crema-1081-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:38:ai-retime",
+      "negative_id": "crema-1081-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-redraw",
+      "negative_id": "crema-1081-original:41:original"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-redraw",
+      "negative_id": "crema-1081-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-redraw",
+      "negative_id": "crema-1081-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-retime",
+      "negative_id": "crema-1081-original:41:original"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-retime",
+      "negative_id": "crema-1081-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1081-original:41:ai-retime",
+      "negative_id": "crema-1081-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-redraw",
+      "negative_id": "crema-1012-original:21:original"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-redraw",
+      "negative_id": "crema-1012-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-redraw",
+      "negative_id": "crema-1012-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-retime",
+      "negative_id": "crema-1012-original:21:original"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-retime",
+      "negative_id": "crema-1012-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:21:ai-retime",
+      "negative_id": "crema-1012-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-redraw",
+      "negative_id": "crema-1012-original:24:original"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-redraw",
+      "negative_id": "crema-1012-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-redraw",
+      "negative_id": "crema-1012-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-retime",
+      "negative_id": "crema-1012-original:24:original"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-retime",
+      "negative_id": "crema-1012-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:24:ai-retime",
+      "negative_id": "crema-1012-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-redraw",
+      "negative_id": "crema-1012-original:26:original"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-redraw",
+      "negative_id": "crema-1012-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-redraw",
+      "negative_id": "crema-1012-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-retime",
+      "negative_id": "crema-1012-original:26:original"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-retime",
+      "negative_id": "crema-1012-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:26:ai-retime",
+      "negative_id": "crema-1012-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-redraw",
+      "negative_id": "crema-1012-original:29:original"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-redraw",
+      "negative_id": "crema-1012-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-redraw",
+      "negative_id": "crema-1012-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-retime",
+      "negative_id": "crema-1012-original:29:original"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-retime",
+      "negative_id": "crema-1012-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:29:ai-retime",
+      "negative_id": "crema-1012-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-redraw",
+      "negative_id": "crema-1012-original:32:original"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-redraw",
+      "negative_id": "crema-1012-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-redraw",
+      "negative_id": "crema-1012-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-retime",
+      "negative_id": "crema-1012-original:32:original"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-retime",
+      "negative_id": "crema-1012-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:32:ai-retime",
+      "negative_id": "crema-1012-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-redraw",
+      "negative_id": "crema-1012-original:35:original"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-redraw",
+      "negative_id": "crema-1012-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-redraw",
+      "negative_id": "crema-1012-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-retime",
+      "negative_id": "crema-1012-original:35:original"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-retime",
+      "negative_id": "crema-1012-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:35:ai-retime",
+      "negative_id": "crema-1012-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-redraw",
+      "negative_id": "crema-1012-original:37:original"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-redraw",
+      "negative_id": "crema-1012-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-redraw",
+      "negative_id": "crema-1012-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-retime",
+      "negative_id": "crema-1012-original:37:original"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-retime",
+      "negative_id": "crema-1012-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:37:ai-retime",
+      "negative_id": "crema-1012-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-redraw",
+      "negative_id": "crema-1012-original:40:original"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-redraw",
+      "negative_id": "crema-1012-original:40:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-redraw",
+      "negative_id": "crema-1012-original:40:local-resample"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-retime",
+      "negative_id": "crema-1012-original:40:original"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-retime",
+      "negative_id": "crema-1012-original:40:local-light"
+    },
+    {
+      "positive_id": "crema-1012-original:40:ai-retime",
+      "negative_id": "crema-1012-original:40:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-redraw",
+      "negative_id": "crema-1076-original:21:original"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-redraw",
+      "negative_id": "crema-1076-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-redraw",
+      "negative_id": "crema-1076-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-retime",
+      "negative_id": "crema-1076-original:21:original"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-retime",
+      "negative_id": "crema-1076-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:21:ai-retime",
+      "negative_id": "crema-1076-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-redraw",
+      "negative_id": "crema-1076-original:24:original"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-redraw",
+      "negative_id": "crema-1076-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-redraw",
+      "negative_id": "crema-1076-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-retime",
+      "negative_id": "crema-1076-original:24:original"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-retime",
+      "negative_id": "crema-1076-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:24:ai-retime",
+      "negative_id": "crema-1076-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-redraw",
+      "negative_id": "crema-1076-original:26:original"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-redraw",
+      "negative_id": "crema-1076-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-redraw",
+      "negative_id": "crema-1076-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-retime",
+      "negative_id": "crema-1076-original:26:original"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-retime",
+      "negative_id": "crema-1076-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:26:ai-retime",
+      "negative_id": "crema-1076-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-redraw",
+      "negative_id": "crema-1076-original:29:original"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-redraw",
+      "negative_id": "crema-1076-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-redraw",
+      "negative_id": "crema-1076-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-retime",
+      "negative_id": "crema-1076-original:29:original"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-retime",
+      "negative_id": "crema-1076-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:29:ai-retime",
+      "negative_id": "crema-1076-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-redraw",
+      "negative_id": "crema-1076-original:32:original"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-redraw",
+      "negative_id": "crema-1076-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-redraw",
+      "negative_id": "crema-1076-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-retime",
+      "negative_id": "crema-1076-original:32:original"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-retime",
+      "negative_id": "crema-1076-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:32:ai-retime",
+      "negative_id": "crema-1076-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-redraw",
+      "negative_id": "crema-1076-original:35:original"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-redraw",
+      "negative_id": "crema-1076-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-redraw",
+      "negative_id": "crema-1076-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-retime",
+      "negative_id": "crema-1076-original:35:original"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-retime",
+      "negative_id": "crema-1076-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:35:ai-retime",
+      "negative_id": "crema-1076-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-redraw",
+      "negative_id": "crema-1076-original:37:original"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-redraw",
+      "negative_id": "crema-1076-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-redraw",
+      "negative_id": "crema-1076-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-retime",
+      "negative_id": "crema-1076-original:37:original"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-retime",
+      "negative_id": "crema-1076-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:37:ai-retime",
+      "negative_id": "crema-1076-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-redraw",
+      "negative_id": "crema-1076-original:40:original"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-redraw",
+      "negative_id": "crema-1076-original:40:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-redraw",
+      "negative_id": "crema-1076-original:40:local-resample"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-retime",
+      "negative_id": "crema-1076-original:40:original"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-retime",
+      "negative_id": "crema-1076-original:40:local-light"
+    },
+    {
+      "positive_id": "crema-1076-original:40:ai-retime",
+      "negative_id": "crema-1076-original:40:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-redraw",
+      "negative_id": "crema-1072-original:19:original"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-redraw",
+      "negative_id": "crema-1072-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-redraw",
+      "negative_id": "crema-1072-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-retime",
+      "negative_id": "crema-1072-original:19:original"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-retime",
+      "negative_id": "crema-1072-original:19:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:19:ai-retime",
+      "negative_id": "crema-1072-original:19:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-redraw",
+      "negative_id": "crema-1072-original:22:original"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-redraw",
+      "negative_id": "crema-1072-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-redraw",
+      "negative_id": "crema-1072-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-retime",
+      "negative_id": "crema-1072-original:22:original"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-retime",
+      "negative_id": "crema-1072-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:22:ai-retime",
+      "negative_id": "crema-1072-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-redraw",
+      "negative_id": "crema-1072-original:24:original"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-redraw",
+      "negative_id": "crema-1072-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-redraw",
+      "negative_id": "crema-1072-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-retime",
+      "negative_id": "crema-1072-original:24:original"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-retime",
+      "negative_id": "crema-1072-original:24:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:24:ai-retime",
+      "negative_id": "crema-1072-original:24:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-redraw",
+      "negative_id": "crema-1072-original:27:original"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-redraw",
+      "negative_id": "crema-1072-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-redraw",
+      "negative_id": "crema-1072-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-retime",
+      "negative_id": "crema-1072-original:27:original"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-retime",
+      "negative_id": "crema-1072-original:27:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:27:ai-retime",
+      "negative_id": "crema-1072-original:27:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-redraw",
+      "negative_id": "crema-1072-original:30:original"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-redraw",
+      "negative_id": "crema-1072-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-redraw",
+      "negative_id": "crema-1072-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-retime",
+      "negative_id": "crema-1072-original:30:original"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-retime",
+      "negative_id": "crema-1072-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:30:ai-retime",
+      "negative_id": "crema-1072-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-redraw",
+      "negative_id": "crema-1072-original:33:original"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-redraw",
+      "negative_id": "crema-1072-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-redraw",
+      "negative_id": "crema-1072-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-retime",
+      "negative_id": "crema-1072-original:33:original"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-retime",
+      "negative_id": "crema-1072-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:33:ai-retime",
+      "negative_id": "crema-1072-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-redraw",
+      "negative_id": "crema-1072-original:35:original"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-redraw",
+      "negative_id": "crema-1072-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-redraw",
+      "negative_id": "crema-1072-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-retime",
+      "negative_id": "crema-1072-original:35:original"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-retime",
+      "negative_id": "crema-1072-original:35:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:35:ai-retime",
+      "negative_id": "crema-1072-original:35:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-redraw",
+      "negative_id": "crema-1072-original:38:original"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-redraw",
+      "negative_id": "crema-1072-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-redraw",
+      "negative_id": "crema-1072-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-retime",
+      "negative_id": "crema-1072-original:38:original"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-retime",
+      "negative_id": "crema-1072-original:38:local-light"
+    },
+    {
+      "positive_id": "crema-1072-original:38:ai-retime",
+      "negative_id": "crema-1072-original:38:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-redraw",
+      "negative_id": "crema-1059-original:20:original"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-redraw",
+      "negative_id": "crema-1059-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-redraw",
+      "negative_id": "crema-1059-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-retime",
+      "negative_id": "crema-1059-original:20:original"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-retime",
+      "negative_id": "crema-1059-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:20:ai-retime",
+      "negative_id": "crema-1059-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-redraw",
+      "negative_id": "crema-1059-original:23:original"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-redraw",
+      "negative_id": "crema-1059-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-redraw",
+      "negative_id": "crema-1059-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-retime",
+      "negative_id": "crema-1059-original:23:original"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-retime",
+      "negative_id": "crema-1059-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:23:ai-retime",
+      "negative_id": "crema-1059-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-redraw",
+      "negative_id": "crema-1059-original:25:original"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-redraw",
+      "negative_id": "crema-1059-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-redraw",
+      "negative_id": "crema-1059-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-retime",
+      "negative_id": "crema-1059-original:25:original"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-retime",
+      "negative_id": "crema-1059-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:25:ai-retime",
+      "negative_id": "crema-1059-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-redraw",
+      "negative_id": "crema-1059-original:28:original"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-redraw",
+      "negative_id": "crema-1059-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-redraw",
+      "negative_id": "crema-1059-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-retime",
+      "negative_id": "crema-1059-original:28:original"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-retime",
+      "negative_id": "crema-1059-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:28:ai-retime",
+      "negative_id": "crema-1059-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-redraw",
+      "negative_id": "crema-1059-original:31:original"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-redraw",
+      "negative_id": "crema-1059-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-redraw",
+      "negative_id": "crema-1059-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-retime",
+      "negative_id": "crema-1059-original:31:original"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-retime",
+      "negative_id": "crema-1059-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:31:ai-retime",
+      "negative_id": "crema-1059-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-redraw",
+      "negative_id": "crema-1059-original:34:original"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-redraw",
+      "negative_id": "crema-1059-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-redraw",
+      "negative_id": "crema-1059-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-retime",
+      "negative_id": "crema-1059-original:34:original"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-retime",
+      "negative_id": "crema-1059-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:34:ai-retime",
+      "negative_id": "crema-1059-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-redraw",
+      "negative_id": "crema-1059-original:36:original"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-redraw",
+      "negative_id": "crema-1059-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-redraw",
+      "negative_id": "crema-1059-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-retime",
+      "negative_id": "crema-1059-original:36:original"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-retime",
+      "negative_id": "crema-1059-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:36:ai-retime",
+      "negative_id": "crema-1059-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-redraw",
+      "negative_id": "crema-1059-original:39:original"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-redraw",
+      "negative_id": "crema-1059-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-redraw",
+      "negative_id": "crema-1059-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-retime",
+      "negative_id": "crema-1059-original:39:original"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-retime",
+      "negative_id": "crema-1059-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1059-original:39:ai-retime",
+      "negative_id": "crema-1059-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-redraw",
+      "negative_id": "crema-1087-original:17:original"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-redraw",
+      "negative_id": "crema-1087-original:17:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-redraw",
+      "negative_id": "crema-1087-original:17:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-retime",
+      "negative_id": "crema-1087-original:17:original"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-retime",
+      "negative_id": "crema-1087-original:17:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:17:ai-retime",
+      "negative_id": "crema-1087-original:17:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-redraw",
+      "negative_id": "crema-1087-original:20:original"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-redraw",
+      "negative_id": "crema-1087-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-redraw",
+      "negative_id": "crema-1087-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-retime",
+      "negative_id": "crema-1087-original:20:original"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-retime",
+      "negative_id": "crema-1087-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:20:ai-retime",
+      "negative_id": "crema-1087-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-redraw",
+      "negative_id": "crema-1087-original:22:original"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-redraw",
+      "negative_id": "crema-1087-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-redraw",
+      "negative_id": "crema-1087-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-retime",
+      "negative_id": "crema-1087-original:22:original"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-retime",
+      "negative_id": "crema-1087-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:22:ai-retime",
+      "negative_id": "crema-1087-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-redraw",
+      "negative_id": "crema-1087-original:25:original"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-redraw",
+      "negative_id": "crema-1087-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-redraw",
+      "negative_id": "crema-1087-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-retime",
+      "negative_id": "crema-1087-original:25:original"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-retime",
+      "negative_id": "crema-1087-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:25:ai-retime",
+      "negative_id": "crema-1087-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-redraw",
+      "negative_id": "crema-1087-original:28:original"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-redraw",
+      "negative_id": "crema-1087-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-redraw",
+      "negative_id": "crema-1087-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-retime",
+      "negative_id": "crema-1087-original:28:original"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-retime",
+      "negative_id": "crema-1087-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:28:ai-retime",
+      "negative_id": "crema-1087-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-redraw",
+      "negative_id": "crema-1087-original:31:original"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-redraw",
+      "negative_id": "crema-1087-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-redraw",
+      "negative_id": "crema-1087-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-retime",
+      "negative_id": "crema-1087-original:31:original"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-retime",
+      "negative_id": "crema-1087-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:31:ai-retime",
+      "negative_id": "crema-1087-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-redraw",
+      "negative_id": "crema-1087-original:33:original"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-redraw",
+      "negative_id": "crema-1087-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-redraw",
+      "negative_id": "crema-1087-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-retime",
+      "negative_id": "crema-1087-original:33:original"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-retime",
+      "negative_id": "crema-1087-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:33:ai-retime",
+      "negative_id": "crema-1087-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-redraw",
+      "negative_id": "crema-1087-original:36:original"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-redraw",
+      "negative_id": "crema-1087-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-redraw",
+      "negative_id": "crema-1087-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-retime",
+      "negative_id": "crema-1087-original:36:original"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-retime",
+      "negative_id": "crema-1087-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1087-original:36:ai-retime",
+      "negative_id": "crema-1087-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-redraw",
+      "negative_id": "crema-1025-original:23:original"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-redraw",
+      "negative_id": "crema-1025-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-redraw",
+      "negative_id": "crema-1025-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-retime",
+      "negative_id": "crema-1025-original:23:original"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-retime",
+      "negative_id": "crema-1025-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:23:ai-retime",
+      "negative_id": "crema-1025-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-redraw",
+      "negative_id": "crema-1025-original:26:original"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-redraw",
+      "negative_id": "crema-1025-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-redraw",
+      "negative_id": "crema-1025-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-retime",
+      "negative_id": "crema-1025-original:26:original"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-retime",
+      "negative_id": "crema-1025-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:26:ai-retime",
+      "negative_id": "crema-1025-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-redraw",
+      "negative_id": "crema-1025-original:28:original"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-redraw",
+      "negative_id": "crema-1025-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-redraw",
+      "negative_id": "crema-1025-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-retime",
+      "negative_id": "crema-1025-original:28:original"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-retime",
+      "negative_id": "crema-1025-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:28:ai-retime",
+      "negative_id": "crema-1025-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-redraw",
+      "negative_id": "crema-1025-original:31:original"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-redraw",
+      "negative_id": "crema-1025-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-redraw",
+      "negative_id": "crema-1025-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-retime",
+      "negative_id": "crema-1025-original:31:original"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-retime",
+      "negative_id": "crema-1025-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:31:ai-retime",
+      "negative_id": "crema-1025-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-redraw",
+      "negative_id": "crema-1025-original:34:original"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-redraw",
+      "negative_id": "crema-1025-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-redraw",
+      "negative_id": "crema-1025-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-retime",
+      "negative_id": "crema-1025-original:34:original"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-retime",
+      "negative_id": "crema-1025-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:34:ai-retime",
+      "negative_id": "crema-1025-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-redraw",
+      "negative_id": "crema-1025-original:37:original"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-redraw",
+      "negative_id": "crema-1025-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-redraw",
+      "negative_id": "crema-1025-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-retime",
+      "negative_id": "crema-1025-original:37:original"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-retime",
+      "negative_id": "crema-1025-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:37:ai-retime",
+      "negative_id": "crema-1025-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-redraw",
+      "negative_id": "crema-1025-original:39:original"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-redraw",
+      "negative_id": "crema-1025-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-redraw",
+      "negative_id": "crema-1025-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-retime",
+      "negative_id": "crema-1025-original:39:original"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-retime",
+      "negative_id": "crema-1025-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:39:ai-retime",
+      "negative_id": "crema-1025-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-redraw",
+      "negative_id": "crema-1025-original:42:original"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-redraw",
+      "negative_id": "crema-1025-original:42:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-redraw",
+      "negative_id": "crema-1025-original:42:local-resample"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-retime",
+      "negative_id": "crema-1025-original:42:original"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-retime",
+      "negative_id": "crema-1025-original:42:local-light"
+    },
+    {
+      "positive_id": "crema-1025-original:42:ai-retime",
+      "negative_id": "crema-1025-original:42:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-redraw",
+      "negative_id": "crema-1085-original:17:original"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-redraw",
+      "negative_id": "crema-1085-original:17:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-redraw",
+      "negative_id": "crema-1085-original:17:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-retime",
+      "negative_id": "crema-1085-original:17:original"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-retime",
+      "negative_id": "crema-1085-original:17:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:17:ai-retime",
+      "negative_id": "crema-1085-original:17:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-redraw",
+      "negative_id": "crema-1085-original:20:original"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-redraw",
+      "negative_id": "crema-1085-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-redraw",
+      "negative_id": "crema-1085-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-retime",
+      "negative_id": "crema-1085-original:20:original"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-retime",
+      "negative_id": "crema-1085-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:20:ai-retime",
+      "negative_id": "crema-1085-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-redraw",
+      "negative_id": "crema-1085-original:22:original"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-redraw",
+      "negative_id": "crema-1085-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-redraw",
+      "negative_id": "crema-1085-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-retime",
+      "negative_id": "crema-1085-original:22:original"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-retime",
+      "negative_id": "crema-1085-original:22:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:22:ai-retime",
+      "negative_id": "crema-1085-original:22:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-redraw",
+      "negative_id": "crema-1085-original:25:original"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-redraw",
+      "negative_id": "crema-1085-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-redraw",
+      "negative_id": "crema-1085-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-retime",
+      "negative_id": "crema-1085-original:25:original"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-retime",
+      "negative_id": "crema-1085-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:25:ai-retime",
+      "negative_id": "crema-1085-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-redraw",
+      "negative_id": "crema-1085-original:28:original"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-redraw",
+      "negative_id": "crema-1085-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-redraw",
+      "negative_id": "crema-1085-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-retime",
+      "negative_id": "crema-1085-original:28:original"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-retime",
+      "negative_id": "crema-1085-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:28:ai-retime",
+      "negative_id": "crema-1085-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-redraw",
+      "negative_id": "crema-1085-original:31:original"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-redraw",
+      "negative_id": "crema-1085-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-redraw",
+      "negative_id": "crema-1085-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-retime",
+      "negative_id": "crema-1085-original:31:original"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-retime",
+      "negative_id": "crema-1085-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:31:ai-retime",
+      "negative_id": "crema-1085-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-redraw",
+      "negative_id": "crema-1085-original:33:original"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-redraw",
+      "negative_id": "crema-1085-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-redraw",
+      "negative_id": "crema-1085-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-retime",
+      "negative_id": "crema-1085-original:33:original"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-retime",
+      "negative_id": "crema-1085-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:33:ai-retime",
+      "negative_id": "crema-1085-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-redraw",
+      "negative_id": "crema-1085-original:36:original"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-redraw",
+      "negative_id": "crema-1085-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-redraw",
+      "negative_id": "crema-1085-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-retime",
+      "negative_id": "crema-1085-original:36:original"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-retime",
+      "negative_id": "crema-1085-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1085-original:36:ai-retime",
+      "negative_id": "crema-1085-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-redraw",
+      "negative_id": "crema-1044-original:25:original"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-redraw",
+      "negative_id": "crema-1044-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-redraw",
+      "negative_id": "crema-1044-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-retime",
+      "negative_id": "crema-1044-original:25:original"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-retime",
+      "negative_id": "crema-1044-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:25:ai-retime",
+      "negative_id": "crema-1044-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-redraw",
+      "negative_id": "crema-1044-original:28:original"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-redraw",
+      "negative_id": "crema-1044-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-redraw",
+      "negative_id": "crema-1044-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-retime",
+      "negative_id": "crema-1044-original:28:original"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-retime",
+      "negative_id": "crema-1044-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:28:ai-retime",
+      "negative_id": "crema-1044-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-redraw",
+      "negative_id": "crema-1044-original:30:original"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-redraw",
+      "negative_id": "crema-1044-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-redraw",
+      "negative_id": "crema-1044-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-retime",
+      "negative_id": "crema-1044-original:30:original"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-retime",
+      "negative_id": "crema-1044-original:30:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:30:ai-retime",
+      "negative_id": "crema-1044-original:30:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-redraw",
+      "negative_id": "crema-1044-original:33:original"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-redraw",
+      "negative_id": "crema-1044-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-redraw",
+      "negative_id": "crema-1044-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-retime",
+      "negative_id": "crema-1044-original:33:original"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-retime",
+      "negative_id": "crema-1044-original:33:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:33:ai-retime",
+      "negative_id": "crema-1044-original:33:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-redraw",
+      "negative_id": "crema-1044-original:36:original"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-redraw",
+      "negative_id": "crema-1044-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-redraw",
+      "negative_id": "crema-1044-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-retime",
+      "negative_id": "crema-1044-original:36:original"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-retime",
+      "negative_id": "crema-1044-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:36:ai-retime",
+      "negative_id": "crema-1044-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-redraw",
+      "negative_id": "crema-1044-original:39:original"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-redraw",
+      "negative_id": "crema-1044-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-redraw",
+      "negative_id": "crema-1044-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-retime",
+      "negative_id": "crema-1044-original:39:original"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-retime",
+      "negative_id": "crema-1044-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:39:ai-retime",
+      "negative_id": "crema-1044-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-redraw",
+      "negative_id": "crema-1044-original:41:original"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-redraw",
+      "negative_id": "crema-1044-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-redraw",
+      "negative_id": "crema-1044-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-retime",
+      "negative_id": "crema-1044-original:41:original"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-retime",
+      "negative_id": "crema-1044-original:41:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:41:ai-retime",
+      "negative_id": "crema-1044-original:41:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-redraw",
+      "negative_id": "crema-1044-original:44:original"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-redraw",
+      "negative_id": "crema-1044-original:44:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-redraw",
+      "negative_id": "crema-1044-original:44:local-resample"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-retime",
+      "negative_id": "crema-1044-original:44:original"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-retime",
+      "negative_id": "crema-1044-original:44:local-light"
+    },
+    {
+      "positive_id": "crema-1044-original:44:ai-retime",
+      "negative_id": "crema-1044-original:44:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-redraw",
+      "negative_id": "crema-1046-original:20:original"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-redraw",
+      "negative_id": "crema-1046-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-redraw",
+      "negative_id": "crema-1046-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-retime",
+      "negative_id": "crema-1046-original:20:original"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-retime",
+      "negative_id": "crema-1046-original:20:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:20:ai-retime",
+      "negative_id": "crema-1046-original:20:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-redraw",
+      "negative_id": "crema-1046-original:23:original"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-redraw",
+      "negative_id": "crema-1046-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-redraw",
+      "negative_id": "crema-1046-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-retime",
+      "negative_id": "crema-1046-original:23:original"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-retime",
+      "negative_id": "crema-1046-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:23:ai-retime",
+      "negative_id": "crema-1046-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-redraw",
+      "negative_id": "crema-1046-original:25:original"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-redraw",
+      "negative_id": "crema-1046-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-redraw",
+      "negative_id": "crema-1046-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-retime",
+      "negative_id": "crema-1046-original:25:original"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-retime",
+      "negative_id": "crema-1046-original:25:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:25:ai-retime",
+      "negative_id": "crema-1046-original:25:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-redraw",
+      "negative_id": "crema-1046-original:28:original"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-redraw",
+      "negative_id": "crema-1046-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-redraw",
+      "negative_id": "crema-1046-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-retime",
+      "negative_id": "crema-1046-original:28:original"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-retime",
+      "negative_id": "crema-1046-original:28:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:28:ai-retime",
+      "negative_id": "crema-1046-original:28:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-redraw",
+      "negative_id": "crema-1046-original:31:original"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-redraw",
+      "negative_id": "crema-1046-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-redraw",
+      "negative_id": "crema-1046-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-retime",
+      "negative_id": "crema-1046-original:31:original"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-retime",
+      "negative_id": "crema-1046-original:31:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:31:ai-retime",
+      "negative_id": "crema-1046-original:31:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-redraw",
+      "negative_id": "crema-1046-original:34:original"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-redraw",
+      "negative_id": "crema-1046-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-redraw",
+      "negative_id": "crema-1046-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-retime",
+      "negative_id": "crema-1046-original:34:original"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-retime",
+      "negative_id": "crema-1046-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:34:ai-retime",
+      "negative_id": "crema-1046-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-redraw",
+      "negative_id": "crema-1046-original:36:original"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-redraw",
+      "negative_id": "crema-1046-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-redraw",
+      "negative_id": "crema-1046-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-retime",
+      "negative_id": "crema-1046-original:36:original"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-retime",
+      "negative_id": "crema-1046-original:36:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:36:ai-retime",
+      "negative_id": "crema-1046-original:36:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-redraw",
+      "negative_id": "crema-1046-original:39:original"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-redraw",
+      "negative_id": "crema-1046-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-redraw",
+      "negative_id": "crema-1046-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-retime",
+      "negative_id": "crema-1046-original:39:original"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-retime",
+      "negative_id": "crema-1046-original:39:local-light"
+    },
+    {
+      "positive_id": "crema-1046-original:39:ai-retime",
+      "negative_id": "crema-1046-original:39:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-redraw",
+      "negative_id": "crema-1084-original:18:original"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-redraw",
+      "negative_id": "crema-1084-original:18:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-redraw",
+      "negative_id": "crema-1084-original:18:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-retime",
+      "negative_id": "crema-1084-original:18:original"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-retime",
+      "negative_id": "crema-1084-original:18:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:18:ai-retime",
+      "negative_id": "crema-1084-original:18:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-redraw",
+      "negative_id": "crema-1084-original:21:original"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-redraw",
+      "negative_id": "crema-1084-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-redraw",
+      "negative_id": "crema-1084-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-retime",
+      "negative_id": "crema-1084-original:21:original"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-retime",
+      "negative_id": "crema-1084-original:21:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:21:ai-retime",
+      "negative_id": "crema-1084-original:21:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-redraw",
+      "negative_id": "crema-1084-original:23:original"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-redraw",
+      "negative_id": "crema-1084-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-redraw",
+      "negative_id": "crema-1084-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-retime",
+      "negative_id": "crema-1084-original:23:original"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-retime",
+      "negative_id": "crema-1084-original:23:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:23:ai-retime",
+      "negative_id": "crema-1084-original:23:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-redraw",
+      "negative_id": "crema-1084-original:26:original"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-redraw",
+      "negative_id": "crema-1084-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-redraw",
+      "negative_id": "crema-1084-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-retime",
+      "negative_id": "crema-1084-original:26:original"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-retime",
+      "negative_id": "crema-1084-original:26:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:26:ai-retime",
+      "negative_id": "crema-1084-original:26:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-redraw",
+      "negative_id": "crema-1084-original:29:original"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-redraw",
+      "negative_id": "crema-1084-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-redraw",
+      "negative_id": "crema-1084-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-retime",
+      "negative_id": "crema-1084-original:29:original"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-retime",
+      "negative_id": "crema-1084-original:29:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:29:ai-retime",
+      "negative_id": "crema-1084-original:29:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-redraw",
+      "negative_id": "crema-1084-original:32:original"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-redraw",
+      "negative_id": "crema-1084-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-redraw",
+      "negative_id": "crema-1084-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-retime",
+      "negative_id": "crema-1084-original:32:original"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-retime",
+      "negative_id": "crema-1084-original:32:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:32:ai-retime",
+      "negative_id": "crema-1084-original:32:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-redraw",
+      "negative_id": "crema-1084-original:34:original"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-redraw",
+      "negative_id": "crema-1084-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-redraw",
+      "negative_id": "crema-1084-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-retime",
+      "negative_id": "crema-1084-original:34:original"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-retime",
+      "negative_id": "crema-1084-original:34:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:34:ai-retime",
+      "negative_id": "crema-1084-original:34:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-redraw",
+      "negative_id": "crema-1084-original:37:original"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-redraw",
+      "negative_id": "crema-1084-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-redraw",
+      "negative_id": "crema-1084-original:37:local-resample"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-retime",
+      "negative_id": "crema-1084-original:37:original"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-retime",
+      "negative_id": "crema-1084-original:37:local-light"
+    },
+    {
+      "positive_id": "crema-1084-original:37:ai-retime",
+      "negative_id": "crema-1084-original:37:local-resample"
+    }
+  ],
+  "fitting_teacher_offsets": 4096,
+  "deployment_eligible": false,
+  "original_lock_sha256": "11a7c4e45e075511fd7c66c40fa313dffa7c2407c29ad89b134da21b32101ea4",
+  "development": [
+    {
+      "manifest_sha256": "d652d3d67ff9bc670ed0e7b18eecc0958daf71fcd6a05c55f0dfd2c16b32a0b2",
+      "receipt_sha256": "da28a3e2aa26b9422d5f9dee630a6a55553ae6611bc8d063347db2e8011c4551",
+      "family": "liveportrait",
+      "planned": 48
+    },
+    {
+      "manifest_sha256": "1f8944a1512a926cda1a29a8b421fe58ca28bc239ffdbfd6fe1433920f67e80b",
+      "receipt_sha256": "e9df76821df26e0d5a8a7b8e39d52f86a3a6f84268438f4b50f2f47dc8dc29ed",
+      "family": "musetalk",
+      "planned": 40
+    }
+  ]
+}

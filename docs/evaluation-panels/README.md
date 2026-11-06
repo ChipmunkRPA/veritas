@@ -284,3 +284,38 @@ location produces new container receipt hashes. Public source/pixel/tensor
 commitments identify the original run; a reconstruction is a new run, not a
 claim of original receipt-byte identity. Cross-device training parity remains
 unverified. No customer or cloud service is started by these research stages.
+# Source-matched mouth experiment (v9)
+
+The [v9 comparison](../mouth-paired-v9-evaluation.md) failed its frozen gates
+and lost the earlier candidate's gain. It is not enabled. Its public metadata
+retains the complete 88-case, three-arm comparison, 768 source-matched fitting
+pairs, 4,096 teacher fitting targets, and source/full-forward audits.
+
+Standard Python, without ML packages or weights, can replay retained-window
+arithmetic, all pair/source-role correspondences, and teacher payload hashes:
+
+```sh
+python3 backend/scripts/review_mouth_paired_v9.py docs /tmp/mouth-v9-review.json
+python3 backend/scripts/diagnose_mouth_ranking_v9.py \
+  docs/evaluation-panels/mouth-v9-review-responses.json.gz \
+  /tmp/mouth-v9-ranking-diagnostic.json
+```
+
+Outputs must be new files. The second command is an explicitly post-hoc
+consumed-data bound, not an adopted point or fresh false-alarm claim. These
+tools do not replay neural inference, omitted windows, masks/spatial IoU or
+generalization, and local reproduction is not outside review.
+
+For a new local experiment using the existing backend environment, offline
+reviewed model caches and immutable V8 inputs, run the following stages of
+`backend/scripts/run_mouth_paired_v9.py`: `freeze <v8-experiment> <new-v9-dir>`,
+`train <v9-lock> <new-trained-dir>`, `score <v9-lock> <new-score-jsonl> --head
+<v9-head>`, and `review <v9-lock> <new-summary> --receipt <v9-scores>`.
+The lock is `<new-v9-dir>/lock.json`; MPS is explicit, with no silent fallback.
+Run `audit_mouth_pairs_v9.py <v9-lock> <v9-head> <new-fit-replay>` and
+`audit_mouth_paired_v9.py forward <v9-lock> <v9-head> <new-forward-replay>`;
+its `video <v9-lock> <v9-scores> <new-video-audit>` stage replays native inputs.
+The unchanged `/8` source/forward audit formats bind the V9 lock/head; they do
+not indicate use of a V8 candidate at inference. Public source data retain
+their separate ODbL/DbCL terms. Media and learned weights stay outside Git.
+No customer or cloud service starts through these research stages.

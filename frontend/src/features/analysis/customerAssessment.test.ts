@@ -6,7 +6,7 @@ const cases = JSON.parse(readFileSync(new URL('../../../../backend/tests/fixture
   name: string; input: Parameters<typeof customerAssessment>[0]; expected: Record<string, unknown>
 }[]
 
-describe('customer 80% tendency, shared report/API cases', () => {
+describe('evidence-led customer interpretation, shared report/API cases', () => {
   for (const c of cases) it(c.name, () => {
     const before = JSON.stringify(c.input)
     const got = customerAssessment(c.input)
@@ -14,12 +14,12 @@ describe('customer 80% tendency, shared report/API cases', () => {
     expect(JSON.stringify(c.input)).toBe(before)
     if (got.confidence_pct !== null) {
       expect(got.limitation).toContain('not an independently established accuracy')
-      expect(got.confidence_label).toBe('Automated estimate')
+      expect(got.confidence_label).toBe('Reference-calibrated overall estimate')
     }
     expect(got.interval_note).toContain('90% accurate')
     if (got.scope === 'visual_content') {
-      expect(got.scope_note).toContain('checked separately')
-      expect(got.scope_note).toContain('audio has not been cleared as original')
+      expect(got.scope_note).toContain('uses sampled visual content')
+      expect(got.excluded_channels).toEqual(['voice', 'audio_picture_timing'])
     }
   })
   it('accepts only a complete, matching API presentation', () => {
@@ -36,12 +36,20 @@ describe('customer 80% tendency, shared report/API cases', () => {
     expect(presentedCustomerAssessment({ ...input, signals: undefined, customer_assessment: fromApi })).toBe(fromApi)
     expect(presentedCustomerAssessment({ ...input, signals: undefined, customer_assessment: {} }).scope).toBe('assessed_components')
   })
+  it('recomputes a cached v1 original headline when the recorded decision is inconclusive', () => {
+    const input = { ...cases[2].input, decision: { ...cases[2].input.decision!, code: 'inconclusive' as const } }
+    const previous = { ...customerAssessment(cases[2].input), rule: '80-percent-leaning/v1' }
+    const got = presentedCustomerAssessment({ ...input, customer_assessment: previous })
+    expect(got.direction).toBe('inconclusive')
+    expect(got.confidence_pct).toBeNull()
+    expect(got.headline).toContain('Inconclusive')
+  })
 })
 
 describe('local speech calibration', () => {
   for (const [code, p, direction, confidence] of [
     ['ai_supported', .92, 'ai', 92], ['no_ai_indicators', .08, 'original', 92],
-    ['inconclusive', .92, 'inconclusive', null], ['inconclusive', null, 'inconclusive', null],
+    ['inconclusive', .92, 'inconclusive', null], ['inconclusive', .08, 'inconclusive', null], ['inconclusive', null, 'inconclusive', null],
   ] as const) it(`${code} at ${p} respects the saved uncertainty decision`, () => {
     const input = { kind: 'audio', status: 'done',
       decision: { code, fuser_sha256: '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf',
@@ -54,5 +62,42 @@ describe('local speech calibration', () => {
     expect(got.interval_pct).toBeNull()
     expect(got.limitation).toContain('short English speech')
     expect(presentedCustomerAssessment({ ...input, customer_assessment: got })).toBe(got)
+  })
+})
+
+describe('email headline fallback', () => {
+  for (const [code, p, direction] of [
+    ['ai_supported', .92, 'ai'], ['inconclusive', .08, 'inconclusive'], ['no_ai_indicators', .08, 'inconclusive'],
+  ] as const) it(`keeps the saved email policy for ${code}`, () => {
+    const input = { kind: 'document', status: 'done', condition_profile: {
+      slice_id: 'document/local-email-v1', within_validated_envelope: true },
+    decision: { code, probability_ai_calibrated: p, fusion_mode: 'artefact', ci90: [.05, .95],
+      verbal: 'Saved email headline', reason: 'Saved email result' },
+    } as Parameters<typeof customerAssessment>[0]
+    const result = customerAssessment(input)
+    expect(result.direction).toBe(direction)
+    expect(result.scope_label).toBe('Selected email body')
+    if (direction === 'inconclusive') {
+      expect(result.headline).toBe('Inconclusive: no reliable AI-writing tendency')
+      expect(result.confidence_pct).toBeNull()
+    }
+  })
+})
+
+describe('article presentation scope', () => {
+  for (const [code, p, direction] of [
+    ['ai_supported', .92, 'ai'], ['no_ai_indicators', .08, 'original'], ['inconclusive', .92, 'inconclusive'],
+  ] as const) it(`preserves ${direction} without reusing old threshold copy`, () => {
+    const input = { kind: 'document', status: 'done', condition_profile: {
+      slice_id: 'document/local-article-v1', within_validated_envelope: true },
+    decision: { code, probability_ai_calibrated: p, fusion_mode: 'artefact', ci90: [.05, .95],
+      verbal: '60% screening threshold', reason: 'Saved threshold copy' },
+    } as Parameters<typeof customerAssessment>[0]
+    const result = customerAssessment(input)
+    expect(result.direction).toBe(direction)
+    expect(result.scope_label).toBe('Extracted writing')
+    expect(JSON.stringify(result)).not.toContain('60% screening threshold')
+    if (direction === 'inconclusive') expect(result.confidence_pct).toBeNull()
+    else expect(result.meaning).toContain('not the authorship of every highlighted passage')
   })
 })

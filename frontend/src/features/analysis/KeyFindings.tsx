@@ -1,3 +1,4 @@
+import { presentedCustomerAssessment } from './customerAssessment'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import type { UseQueryResult } from '@tanstack/react-query'
@@ -65,16 +66,16 @@ function Row({ k, position, analysis, signals, exhibits, token, plain, cards, su
       <span className="max-[639px]:hidden"><Thumb k={k} analysis={analysis} exhibits={exhibits} token={token} cards={cards} signals={signals} /></span>
       <div className="min-w-0">
         <div className="flex items-center gap-x-3 gap-y-1 flex-wrap">
-          <DirectionMark direction={DIRECTION_MARK[k.direction]} showWord={false} />
-          {mark
+          {!plain && <DirectionMark direction={DIRECTION_MARK[k.direction]} showWord={false} />}
+          {!plain && (mark
             ? <StrengthMeter level={mark.level} muted={mark.muted} label={mark.word} />
-            : <StrengthMeter level={METER[f.strength]} direction={k.direction === 'neutral' ? undefined : k.direction} />}
+            : <StrengthMeter level={METER[f.strength]} direction={k.direction === 'neutral' ? undefined : k.direction} />)}
           <h3 className="m-0 text-body font-medium text-text">
             {anonymizeFindingText(f, f.title, cards, signals)}{k.counter && <span className="font-normal text-text-muted"> — counter-evidence</span>}
           </h3>
         </div>
-        {reasonOf(k).map((s) => <p key={s} className="mt-1 m-0 text-body text-text max-w-[72ch]">{anonymizeFindingText(f, s, cards, signals)}</p>)}
-        {moved && <p data-testid="key-finding-contribution" className="mt-1 m-0 text-small text-text-muted max-w-[72ch]">{moved}</p>}
+        {!plain && reasonOf(k).map((s) => <p key={s} className="mt-1 m-0 text-body text-text max-w-[72ch]">{anonymizeFindingText(f, s, cards, signals)}</p>)}
+        {!plain && moved && <p data-testid="key-finding-contribution" className="mt-1 m-0 text-small text-text-muted max-w-[72ch]">{moved}</p>}
         <FindingSupport finding={f} data={support} cards={cards} />
       </div>
     </li>
@@ -101,11 +102,12 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
   /** Plain view (N-19d): the size of a check's effect in a word, and no architecture in a check's name */
   plain?: boolean
 }) {
-  const [all, setAll] = useState(false)
+  const [all, setAll] = useState(plain)
+  useEffect(() => { if (plain) setAll(true) }, [plain])
   const { hash } = useLocation()
   const cards = useModelCards().data ?? []
   const evidence = useFindingEvidence(analysis)
-  const support: FindingSupportData = { analysisId: analysis.id, signals, ...evidence }
+  const support: FindingSupportData = { analysisId: analysis.id, signals, kind: analysis.kind, decision: analysis.decision, status: analysis.status, condition_profile: analysis.condition_profile, calibration: analysis.calibration ?? [], assessments: presentedCustomerAssessment({ ...analysis, findings: query.data ?? [], signals }).finding_assessments, ...evidence }
   const items = query.data ?? []
   const keys = analysis.decision ? keyFindings(items, analysis.decision) : []
   // Image evidence links to a precise finding without requiring Expert mode.
@@ -133,6 +135,17 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
   const startNote = analysis.decision && keys.length > 0 && !outside ? startingPointNote(analysis.decision as Decision) : null
   // D-63: a check outside the estimate carries its stand-alone word and "not in this estimate"; an earlier result keeps its words
   const outsideWords = measuredFromNeutral(analysis.decision) ? NOT_IN_ESTIMATE : 'not in this decision'
+
+  if (plain) return (
+    <section id="section-findings" data-testid="findings" aria-labelledby="findings-heading" className="scroll-mt-14">
+      <h2 id="findings-heading" className="m-0 eyebrow">Findings and supporting evidence</h2>
+      <p className="mt-2 mb-0 text-small text-text-muted max-w-[76ch]">Read the observations, interpretation and scope of each finding. Open its source links to inspect the recorded evidence.</p>
+      {query.isPending && <SkeletonRows className="mt-4" />}
+      {query.error && <ErrorState className="mt-4" onRetry={() => void query.refetch()}>{query.error.message}</ErrorState>}
+      {query.isSuccess && items.length === 0 && <EmptyState className="mt-4">No findings were recorded. Missing evidence does not establish original content.</EmptyState>}
+      {items.length > 0 && <div className="mt-3"><FindingRows items={items} decision={analysis.decision} support={support} /></div>}
+    </section>
+  )
 
   return (
     <section id="section-findings" data-testid="findings" aria-labelledby="findings-heading" className="scroll-mt-14">
@@ -209,7 +222,7 @@ export default function KeyFindings({ analysis, query, signals, exhibits, token,
           <Button variant="text" aria-expanded={all} aria-controls="all-findings" onClick={() => setAll(!all)}>
             {all ? 'Hide the full list' : `All ${items.length} findings, with coverage and conditions`}
           </Button>
-          {all && <div id="all-findings" className="mt-3"><FindingRows items={items} decision={analysis.decision} support={support} /></div>}
+          {all && <div id="all-findings" className="mt-3"><FindingRows detailed={!plain} items={items} decision={analysis.decision} support={support} /></div>}
         </div>
       )}
     </section>

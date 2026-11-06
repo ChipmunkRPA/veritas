@@ -22,6 +22,7 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.decode import FrameTable, decode_frames
+from app.evidence import face_interval_binding, face_intervals
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
 from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
@@ -30,10 +31,11 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = "video-evidence-4"
-CREATOR = "video-evidence-packets/4"
-CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", CREATOR)
-NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4"})
+VERSION = "video-evidence-6"
+CREATOR = "video-evidence-packets/6"
+CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
+            "video-evidence-packets/5", CREATOR)
+NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", VERSION})
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -157,9 +159,20 @@ def _observations(db: Session, store: ObjectStore, analysis: Analysis, result: d
             if rows[peak]["score"] < threshold:
                 continue
             selected = sorted({max(0, peak - 1), peak, min(len(rows) - 1, peak + 1)})
-            candidates.append({"exhibit": exhibit, "signals": signals, "series_name": name,
-                               "track_id": series.get("track_id"), "peak": rows[peak], "threshold": threshold,
-                               "rows": [rows[j] for j in selected], "scored_frame_count": len(rows)})
+            candidate = {"exhibit": exhibit, "signals": signals, "series_name": name,
+                         "track_id": series.get("track_id"), "peak": rows[peak], "threshold": threshold,
+                         "rows": [rows[j] for j in selected], "scored_frame_count": len(rows)}
+            candidates.append(candidate)
+            if name == "p" and exhibit.get("created_by") == face_intervals.FRAME_CHECK:
+                tracks = face_intervals.bind_tracks(rows, result["exhibits"], table)
+                for interval in face_intervals.localize(tracks):
+                    peak_sample = interval.peak
+                    candidates.append({**candidate, "track_id": interval.track_id,
+                                       "face_interval": face_intervals.record(interval, table),
+                                       "peak": {"frame_index": peak_sample.frame_index, "score": peak_sample.score},
+                                       "rows": [{"frame_index": sample.frame_index, "score": sample.score, "interval_role": role}
+                                                for role, sample in (("before", interval.before[-1]), ("during", peak_sample),
+                                                                     ("after", interval.after[0]))]})
     return candidates, scored_frames, omitted
 
 
@@ -285,7 +298,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     table, source, anchors, records = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
-    candidates = window_candidates + candidates
+    face_candidates = [item for item in candidates if "face_interval" in item]
+    existing = window_candidates + [item for item in candidates if "face_interval" not in item]
+    chosen = face_candidates[:2] + existing[:MAX_PACKETS]
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     document = {"schema": SCHEMA, "version": VERSION, "id": set_id, "status": "ready", "analysis_id": analysis.id,
@@ -295,11 +310,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                              "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates),
                              "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
                              "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
-                "source_records": records, "omitted_candidates": max(0, len(candidates) - MAX_PACKETS),
+                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) - len(chosen),
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
-    chosen = candidates[:MAX_PACKETS]
     wanted = sorted({r["frame_index"] for c in chosen for r in c["rows"]})
     decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, wanted)} if wanted else {}
     for i in wanted:
@@ -339,8 +353,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                            "is_peak": "window" not in candidate and i == candidate["peak"]["frame_index"], "context_region": region,
                            "region_meaning": "detected_face_context" if region else "whole_frame_context",
                            "artifact_refs": refs})
+            if role := row.get("interval_role"):
+                frames[-1]["interval_role"] = role
             context_images.append(context)
-            labels.append(f"Frame {i}; score {row['score']:.3f}" if row["score"] is not None else f"Frame {i}; window context")
+            labels.append(f"{role.title()} | {stream_s:.3f} s | frame {i}" if role else
+                          f"Frame {i}; score {row['score']:.3f}" if row["score"] is not None else f"Frame {i}; window context")
         add("contact_sheet", _contact(context_images, labels))
         signal_ids = {s["id"] for s in candidate["signals"]}
         exhibit_id = candidate["exhibit"]["id"]
@@ -387,6 +404,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                             "No individual-window decision threshold is established here; the lowest observed variation is selected for inspection.",
                                             "The contact sheet contains representative input frames. The listed input frames establish actual sample coverage."],
                            "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
+        if interval := candidate.get("face_interval"):
+            start, end = interval["start_stream_s"], interval["end_stream_s"]
+            packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
+                          semantics=face_intervals.METHOD, face_interval=interval,
+                          observation=f"The face check stayed elevated across {len(interval['samples']['during'])} sampled frames from {start:.3f} to {end:.3f} s.",
+                          interpretation="The responses rose and fell on the same tracked face. Review the surrounding frames for changes in the face, lighting, blur, or compression.",
+                          measurements=[{"label": "Rise above both neighboring groups", "value": interval["lift"], "unit": "uncalibrated score"}],
+                          limitations=["The range runs from the first to the last flagged sample. Exact edit boundaries and pixels remain undetermined.",
+                                       "A face track joins nearby detections. It does not establish anyone's identity."],
+                          derivation={**packet["derivation"], "selection": "sustained_face_response_with_flanking_context"})
         try:
             bounds = select_range(table, candidate["peak"]["frame_index"])
             if bounds not in clip_cache:
@@ -446,7 +473,8 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
                 raise PacketIntegrityError("Video evidence has invalid image references")
         try:
             validate_clip_binding(packet, source)
-        except ValueError as error:
+            face_interval_binding.validate_packet(packet, source)
+        except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
         if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:
             raise PacketIntegrityError("Video evidence omits its context-clip availability")
@@ -478,9 +506,12 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_channel(document["audio"], source_sha256=source_sha256)
             validate_av_channel(document["av"], source)
-            if (document["version"] == "video-evidence-4" and document["audio"]["coverage"] is not None
+            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6"} and document["audio"]["coverage"] is not None
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")
+            if (document["version"] in {"video-evidence-5", "video-evidence-6"} and document["audio"]["coverage"] is not None
+                    and document["audio"]["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2"):
+                raise ValueError("Current video evidence omits continuity measurements")
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError("Video audio/AV evidence has invalid source bindings") from error
         all_ids = [p["id"] for part in (document, document["audio"], document["av"]) for p in part["packets"]]

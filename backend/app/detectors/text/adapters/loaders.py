@@ -28,6 +28,14 @@ def load_desklib(model_id: str, device: str, dtype: str) -> LoadedModel:
     return LoadedModel((tokenizer, model, entry.source.repo or model_id), _revision(entry))
 
 
+def load_four_class_text(model_id: str, device: str, dtype: str) -> LoadedModel:
+    from app.detectors.text.classifier import FourClassTextClassifier
+
+    entry = _entry(model_id)
+    classifier = FourClassTextClassifier.from_snapshot(_snapshot(model_id), device)
+    return LoadedModel((classifier.tok, classifier.model), _revision(entry))
+
+
 def load_desklib_finetune(model_id: str, device: str, dtype: str) -> LoadedModel:
     """The fine-tuned weights with the base checkpoint's tokenizer, as v0.3 loads them (the fine-tune kept the vocabulary)."""
     from transformers import AutoTokenizer

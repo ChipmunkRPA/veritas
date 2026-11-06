@@ -175,10 +175,10 @@ def integrity_score(values: np.ndarray, reliable: np.ndarray) -> float:
     return float(np.partition(valid.ravel(), valid.size - k)[valid.size - k:].mean())
 
 
-def components(values: np.ndarray, reliable: np.ndarray, width: int, height: int
+def components(values: np.ndarray, reliable: np.ndarray, width: int, height: int, *, threshold: float = THRESHOLD
                ) -> tuple[list[dict[str, Any]], list[dict[str, float]]]:
     """Connected components of map ≥ `THRESHOLD` among reliable cells: `ScoredRegion` dicts in native px, and their stats."""
-    binary = ((values >= THRESHOLD) & reliable).astype(np.uint8)
+    binary = ((values >= threshold) & reliable).astype(np.uint8)
     n, labels, stats, _ = cv2.connectedComponentsWithStats(binary, connectivity=8)
     grid_h, grid_w = values.shape
     sx, sy = width / grid_w, height / grid_h

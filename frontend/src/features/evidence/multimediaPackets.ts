@@ -21,12 +21,15 @@ interface SetBase {
 }
 export interface VideoEvidenceFrame {
   id: string; score: number | null; is_peak: boolean; region_meaning: string
+  interval_role?: 'before' | 'during' | 'after'
   anchor: { frame_index: number; pts: number; time_base: string; stream_time_s: number; playback_time_s: number | null }
   artifact_refs: { original: string; context: string; crop?: string }
   context_region: { x: number; y: number; w: number; h: number } | null
 }
 export interface VideoEvidencePacket extends PacketBase {
   claim_scope: 'sampled_frames' | 'sampled_window'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
+  face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
+    samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   clip?: { status: 'unavailable'; reason: string } | { status: 'ready'; artifact_ref: string;
     start_frame_index: number; end_frame_index_exclusive: number; source_pts: number[]; clip_pts: number[]; clip_time_base: string;
     start_stream_s: number; last_stream_s: number; start_playback_s: number | null;
@@ -54,7 +57,7 @@ export interface AudioEvidencePacket extends PacketBase {
     source_start_pts: number; source_end_pts: number; time_base: string })[] }
 }
 export interface AcousticContextEvent {
-  id: string; category: 'energy_change' | 'near_silence' | 'clipping'
+  id: string; category: 'energy_change' | 'near_silence' | 'clipping' | 'spectral_transition'
   interval: SampleInterval; context_interval: SampleInterval; start_s: number; end_s: number
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   observation: string; interpretation: string; limitations: string[]; observations: EvidenceMeasure[]
@@ -62,7 +65,7 @@ export interface AcousticContextEvent {
   related_voice_packet_ids: string[]
 }
 export interface AcousticContext {
-  schema: 'chipmunk.acoustic-context/1'; status: 'ready'
+  schema: 'chipmunk.acoustic-context/1' | 'chipmunk.acoustic-context/2'; status: 'ready'
   source: { sha256: string; pcm_sha256: string; sample_rate: number; samples: number; coordinate_space: 'analysed-mono-pcm' }
   method: { version: string; frame_samples: number; description: string; thresholds: Record<string, number> }
   summary?: { measured_samples: number; frame_count: number; low_energy_reference_dbfs: number; peak_dbfs: number;
@@ -70,7 +73,7 @@ export interface AcousticContext {
   overview: Record<'energy' | 'spectrogram', EvidenceAsset>
   bins: (SampleInterval & { start_s: number; end_s: number; rms_dbfs: number; peak_dbfs: number;
     clipped_fraction: number; low_band_fraction: number; high_band_fraction: number; spectral_flatness: number })[]
-  events: AcousticContextEvent[]; limitations: string[]; omitted_events?: number
+  events: AcousticContextEvent[]; limitations: string[]; omitted_events?: number; omitted_continuity_windows?: number
 }
 export interface SoundEventContext {
   schema: 'chipmunk.sound-events/1'; status: 'ready'

@@ -6,8 +6,9 @@ export function CandidateEligibilityNote({ gate }: { gate: CandidateEligibility 
   return <div className="mt-3 rounded-md border border-border bg-surface-2 p-3 text-small" data-testid="image-candidate-eligibility">
     <p className="m-0 font-medium text-text">{view.title}</p>
     {view.score !== null && <p className="mt-1 mb-0 text-text-muted break-words">
-      Whole-image response <span className="font-mono num">{view.score}</span> · display threshold <span className="font-mono num">{view.threshold}</span>.
-      {' '}This response is uncalibrated; it is not a region or pixel probability.
+      {view.areaCells ? 'Active screening cells ' : 'Whole-image response '}<span className="font-mono num">{view.score}</span>
+      {view.areaCells ? ' · minimum ' : ' · display threshold '}<span className="font-mono num">{view.threshold}</span>.
+      {!view.areaCells && ' This response is uncalibrated; it is not a region or pixel probability.'}
     </p>}
     <p className="mt-1 mb-0 text-text-muted">{view.explanation}</p>
   </div>

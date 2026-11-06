@@ -1,3 +1,4 @@
+import PurchaseRiskAcknowledgement from '../features/billing/PurchaseRiskAcknowledgement'
 import { useEffect, useRef, useState, type DragEvent } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -6,7 +7,7 @@ import { api, type Kind } from '../lib/api'
 import { MAX_BATCH_FILES, droppedFiles, submitBatch, usable, withRelativePaths } from '../lib/api/batches'
 import { intakeItem, type AnalysisProfile } from '../lib/api/intake'
 import { qk, useCases, useMe, useModelCards, type Case } from '../lib/api/queries'
-import { BillingError, billingApi, hasBillingIdentity, openCheckout, useBilling } from '../lib/api/billing'
+import { BillingError, billingApi, hasBillingIdentity, openCheckout, purchaseAcceptance, useBilling } from '../lib/api/billing'
 import { fmtBytes, wordCount } from '../lib/format'
 import { cx } from '../lib/cx'
 import { Button, Disclosure, Eyebrow, Select, Tabs } from '../components/ui'
@@ -34,6 +35,7 @@ export default function Upload() {
   const [text, setText] = useState('')
   const [drag, setDrag] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [riskAccepted, setRiskAccepted] = useState(false)
   const [progress, setProgress] = useState<number | null>(null)
   const [hashing, setHashing] = useState(false)
   const [caseId, setCaseId] = useState(routeCase)
@@ -47,10 +49,12 @@ export default function Upload() {
   const billing = useBilling()
   const me = useMe()
   const paid = billing.data?.enabled === true
+  const purchaseNotice = billing.data?.purchase_notice
   const signedIn = hasBillingIdentity(me.data)
   const billingProblem = billing.isPending ? 'Checking analysis pricing…' : billing.isError ? 'Pricing is unavailable. Try again before starting an analysis.'
     : paid && !billing.data?.ready ? 'Checkout is not available yet. Please try again later.'
-    : paid && !signedIn ? 'Sign in to keep your payment and analysis private.' : null
+    : paid && !signedIn ? 'Sign in to keep your payment and analysis private.'
+    : paid && !purchaseNotice ? 'Analysis limitations could not be loaded. Refresh pricing before paying.' : null
   const nav = useNavigate()
   const qc = useQueryClient()
   const cases = useCases()
@@ -62,7 +66,7 @@ export default function Upload() {
   const usingText = kind === 'document' && !file && !isBatch && text.trim().length > 0
   const problem = !paid && caseId && !isBatch ? draftProblem(draft) : null
   const sourceReady = isBatch ? !paid && batch.length <= MAX_BATCH_FILES : (!!file || (kind === 'document' && words >= MIN_WORDS)) && !problem
-  const ready = sourceReady && !billingProblem
+  const ready = sourceReady && !billingProblem && (!paid || riskAccepted)
   const options = [...(cases.data ?? []), ...(created && !cases.data?.some((c) => c.id === created.id) ? [created] : [])]
     .filter((c) => !c.implicit || c.id === routeCase)
     .sort((x, y) => Date.parse(y.updated_at) - Date.parse(x.updated_at))
@@ -74,10 +78,11 @@ export default function Upload() {
     mutationFn: async (): Promise<{ path: string; checkout?: boolean }> => {
       if (billingProblem) throw new Error(billingProblem)
       if (paid) {
+        if (!riskAccepted || !purchaseNotice) throw new Error('Read and accept the analysis limitations before checkout.')
         if (isBatch) throw new Error('Choose one file per checkout. Each analysis costs $9.99 USD.')
         const blob = usingText ? new File([text], 'pasted-text.txt', { type: 'text/plain' }) : file!
         setProgress(null)
-        const result = await billingApi.checkout(kind, blob, profile || 'full', attemptKey.current)
+        const result = await billingApi.checkout(kind, blob, profile || 'full', attemptKey.current, purchaseAcceptance(purchaseNotice))
         return { path: result.checkout_url, checkout: true }
       }
       if (isBatch) {
@@ -136,6 +141,7 @@ export default function Upload() {
   const onTab = (k: Kind) => { if (submitting.current) return; setSearchParams((params) => { params.set('kind', k); return params }, { replace: true }) }
   useEffect(() => { setFile(null); setBatch([]); setError(null); up.reset() }, [kind]) // clear source when its examination type changes
   useEffect(() => { attemptKey.current = crypto.randomUUID(); up.reset() }, [file, text, profile, kind]) // retry unchanged input with the same payment key
+  useEffect(() => { setRiskAccepted(false) }, [file, text, profile, kind, purchaseNotice?.version, purchaseNotice?.sha256])
   const onDrop = (e: DragEvent) => {
     e.preventDefault()
     setDrag(false)
@@ -146,7 +152,7 @@ export default function Upload() {
   const busy = up.isPending
   const idleLabel = paid ? `Continue to checkout · ${billing.data?.price_display}` : isBatch ? `Submit batch (${batch.length} files)` : 'Begin analysis'
   // N-19a: while the button is switched off, the line beside it says what is missing
-  const missing = busy ? null : billingProblem ?? (paid && isBatch ? 'Choose one file per checkout.' : null) ?? beginBlocked({ kind, hasFile: !!file, words, minWords: MIN_WORDS, batch: batch.length, maxBatch: MAX_BATCH_FILES, problem })
+  const missing = busy ? null : billingProblem ?? (paid && isBatch ? 'Choose one file per checkout.' : null) ?? beginBlocked({ kind, hasFile: !!file, words, minWords: MIN_WORDS, batch: batch.length, maxBatch: MAX_BATCH_FILES, problem }) ?? (paid && !riskAccepted ? 'Read and accept the analysis limitations before checkout.' : null)
 
   return (
     <div>
@@ -272,6 +278,8 @@ export default function Upload() {
           <p className="mt-1 mb-0 text-caption text-text-muted max-w-[60ch]">{PROFILES.find((p) => p.id === (paid && !profile ? 'full' : profile))!.detail}{isBatch ? ' Applies to every file of the batch.' : ''}</p>
         </div>
       </div>
+
+      {paid && purchaseNotice && <PurchaseRiskAcknowledgement kind={kind} notice={purchaseNotice} accepted={riskAccepted} onChange={setRiskAccepted} disabled={busy} />}
 
       <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
         <Button variant="primary" aria-disabled={!ready || busy} aria-busy={busy || undefined} disabled={!ready || busy} aria-describedby={missing ? 'begin-missing' : undefined}

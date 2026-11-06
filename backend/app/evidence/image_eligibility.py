@@ -9,13 +9,35 @@ import math
 import re
 
 _SHA = re.compile(r"[a-f0-9]{64}")
+RESPONSE_GATE = "image-candidate-eligibility/1"
+AREA_GATE = "image-candidate-eligibility/2"
+
+
+def area_counts(gate: dict) -> tuple[int, int, int]:
+    active, minimum, total = (gate.get(key) for key in ("active_cells", "minimum_active_cells", "input_cells"))
+    if (any(type(count) is not int for count in (active, minimum, total))
+            or not 0 <= active <= total or not 1 <= minimum <= total):
+        raise ValueError("The image candidate gate has invalid response cell counts")
+    return active, minimum, total
+
+
+def area_gate(active: int, minimum: int, total: int) -> dict:
+    counts = {"active_cells": active, "minimum_active_cells": minimum, "input_cells": total}
+    area_counts(counts)
+    score, threshold = active / total, minimum / total
+    return {"schema": AREA_GATE, "status": "evaluated", "scope": "whole_image",
+            "score_kind": "native_response_area_fraction", "comparison": "greater_or_equal",
+            "score": score, "score_hex": score.hex(), "threshold": threshold, "threshold_hex": threshold.hex(),
+            "eligible": active >= minimum, "role": "candidate_selection_only", "raw_mask_retained": True,
+            **counts}
 
 
 def validate_gate(gate: dict, *, source_sha256: str | None = None,
                   scalar_map_sha256: str | None = None) -> None:
     if not isinstance(gate, dict):
         raise ValueError("The image candidate gate is missing")
-    if (gate.get("schema") != "image-candidate-eligibility/1" or gate.get("status") != "evaluated"
+    schema = gate.get("schema")
+    if (schema not in {RESPONSE_GATE, AREA_GATE} or gate.get("status") != "evaluated"
             or gate.get("scope") != "whole_image" or gate.get("comparison") != "greater_or_equal"):
         raise ValueError("The image candidate gate has an unsupported rule")
     try:
@@ -23,7 +45,14 @@ def validate_gate(gate: dict, *, source_sha256: str | None = None,
         threshold = float.fromhex(gate["threshold_hex"])
     except (KeyError, TypeError, ValueError) as exc:
         raise ValueError("The image candidate gate has no exact response") from exc
-    if (not math.isfinite(score) or not 0 <= score <= 1 or threshold != 0.5
+    if schema == AREA_GATE:
+        active, minimum, total = area_counts(gate)
+        if (gate.get("score_kind") != "native_response_area_fraction" or score != active / total
+                or threshold != minimum / total):
+            raise ValueError("The image candidate gate contradicts its native response cell counts")
+    elif threshold != 0.5:
+        raise ValueError("The image candidate gate has an unsupported response threshold")
+    if (not math.isfinite(score) or not 0 <= score <= 1
             or type(gate.get("eligible")) is not bool or gate["eligible"] != (score >= threshold)):
         raise ValueError("The image candidate eligibility contradicts its recorded response")
     for name, value in (("score", score), ("threshold", threshold)):

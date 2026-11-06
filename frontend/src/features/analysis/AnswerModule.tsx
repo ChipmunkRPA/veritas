@@ -1,4 +1,6 @@
+import StandardScreeningNotice from './StandardScreeningNotice'
 import { useId, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import type { AnalysisDetail, Finding } from '../../lib/api/queries'
 import { cx } from '../../lib/cx'
 import { Button, ConfidenceMeter, Eyebrow, ScaleInterval } from '../../components/ui'
@@ -94,7 +96,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
   return (
     <section id="section-summary" data-testid="answer" data-code={d.code} data-basis={basis} data-tour="verdict" aria-labelledby={headingId}
       className="scroll-mt-14 border-b border-border pb-8">
-      <Eyebrow as="h2" id={headingId}>Automated conclusion</Eyebrow>
+      <Eyebrow as="h2" id={headingId}>Overall assessment</Eyebrow>
       <p data-testid="headline" className={cx('mt-3 m-0 display text-h1 font-normal max-w-[36ch]', STEP_TEXT[step])}>
         {customer.applies ? customer.headline : headline(d, basis)}{!customer.applies && lowAgreement(d, findings, analysis.condition_profile) && ' — the checks disagree'}
       </p>
@@ -102,6 +104,15 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
         <p className="m-0 font-semibold">{customer.scope_label}</p>
         <p className="mt-1 mb-0">{customer.scope_note}</p>
       </div>}
+      {customer.soundtrack && <section aria-label="Speech in this soundtrack" className="mt-4 border border-border bg-surface px-4 py-3 max-w-[76ch]">
+        <p className="m-0 text-small font-semibold">Speech in this soundtrack</p>
+        <p className="mt-1 mb-0 text-body text-text">{customer.soundtrack.headline}</p>
+        {customer.soundtrack.confidence_pct !== null && <p className="mt-1 mb-0 text-small num">Reference-calibrated estimate <strong>{customer.soundtrack.confidence_pct}%</strong></p>}
+        <p className="mt-2 mb-0 text-small text-text-muted">{customer.soundtrack.limitation}</p>
+        <Link to={`/analyses/${encodeURIComponent(analysis.id)}/media-evidence?view=plain#media-evidence-voice`}
+          className="mt-2 inline-block text-small text-accent underline underline-offset-2">Inspect voice evidence</Link>
+      </section>}
+      <StandardScreeningNotice />
       {opinion}
 
       <div className="mt-6 grid gap-10 min-[960px]:grid-cols-[7fr_5fr]">
@@ -114,9 +125,9 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
                   : customer.scope === 'visual_content' ? 'In favour of original visual content.'
                     : customer.scope === 'assessed_components' ? 'In favour of original content in the assessed components.' : 'In favour of an original file.'} This is an estimate, not a verified accuracy rate.</p>
               </> : <p className="m-0 text-body text-text-muted">{customer.probability_ai_pct !== null
-                ? `Estimated AI likelihood: ${customer.probability_ai_pct}%. No reliable 80% tendency is established.`
+                ? `Estimated AI likelihood: ${customer.probability_ai_pct}%. No reliable overall tendency is established.`
                 : 'A confidence percentage is not available for this result.'}</p>}
-              <p className="mt-3 mb-0 text-small text-text-muted">A tendency requires an eligible estimate of at least 80% for that answer. Individual check scores and the upper end of an uncertainty interval do not meet this rule by themselves.</p>
+              <p className="mt-3 mb-0 text-small text-text-muted">The overall estimate uses only the applicable, calibrated checks. It is not an average of finding scores; raw responses and uncertainty interval endpoints are not confidence.</p>
             </div>
           ) : basis === 'documentary_declared' ? (
             <div data-testid="documentary-seal">
@@ -203,9 +214,9 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
             // fallback's "No · …" claims nothing and stays); outside what was validated the fact says that the
             // calibration does not reach the input
             <>
-              <dt className="eyebrow pt-1">{customer.applies ? 'Accuracy at 80%' : 'Calibrated'}</dt>
+              <dt className="eyebrow pt-1">{customer.applies ? 'Validation of this result' : 'Calibrated'}</dt>
               <dd data-testid="fact-calibrated" className="m-0 text-body text-text">
-                {customer.applies ? 'Not yet measured. We do not have verified counts of genuine files falsely flagged, or AI files missed, at this 80% threshold.'
+                {customer.applies ? 'Comparable error rates are not established for this result. Individual findings can be inspection-only; the combined estimate does not clear unassessed parts of the file.'
                   : n.kind === 'capped' && d.fusion_mode === 'artefact' ? CALIBRATION_OUTSIDE
                   : `${checksOwn ? `${CALIBRATED_CHECKS} · ` : ''}${calibratedWord(analysis, d, onExpert != null)}`}
               </dd>

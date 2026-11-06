@@ -276,7 +276,7 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
     rule = _mask_rule(signals, values)
     gate = rule.get("candidate_eligibility")
     # New gated adapters must never be silently interpreted as an ungated legacy check.
-    if heat.get("created_by") == "loc.fused" and gate is None:
+    if heat.get("created_by") in {"loc.fused", "loc.splice"} and gate is None:
         raise PacketIntegrityError("The image candidate eligibility record is missing")
     if gate is not None:
         try:

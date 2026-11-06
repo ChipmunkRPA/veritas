@@ -49,8 +49,13 @@
 </table>
 {% endif %}
 {% include "sections/historical_calibration.html.j2" %}
+{% if v.get('customer_reference_test') %}
+<h3 class="eyebrow">Reference results for the recorded writing scope</h3>
+<p class="caption">{{ v.customer_reference_test }}</p>
+{% else %}
 <h3 class="eyebrow">Recorded error rates for the earlier decision rules</h3>
-<p class="caption">The records below concern the stored testing thresholds. They do not measure the new 80% customer-facing leaning rule. That rule's false-alarm and missed-detection rates remain unestablished.</p>
+<p class="caption">The records below concern the stored testing thresholds. These historical results do not establish a universal accuracy rate for the current evidence-led assessment.</p>
+{% endif %}
 <p class="caption">A false alarm is an original test file incorrectly flagged as AI. A missed detection is an AI test file that was not flagged. These rates describe the evaluated examples and the selected decision boundary, not a guarantee for this file.</p>
 {% if e.rates %}
 <table class="grid">

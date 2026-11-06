@@ -8,6 +8,26 @@ from app.reports.snapshot import snapshot_hash
 from app.reports.specimens import specimen
 
 
+def test_skipped_check_diagnostics_are_private_even_without_statistical_signals():
+    original = specimen('video', 'standard')
+    result = deepcopy(original.result)
+    result['signals'] = []
+    result['manifest']['detectors'] = [{'id': 'vid.dda', 'version': '1.0.0'}]
+    snapshot = original.model_copy(update={'result': result})
+    reason = 'Too few checks could run: DDA (DINOv2 ViT-L/14 + LoRA), frames below 336 px.'
+    quote = 'The source says “DDA”.'
+    view = {'summary': {'insufficient': [reason], 'text': reason + ' ' + quote},
+            'reasons': [reason], 'notes': [{'body': 'User wrote DINOv2'}]}
+    before = snapshot_hash(snapshot)
+    public = public_view(snapshot, view)
+    for value in [*public['summary']['insufficient'], *public['reasons']]:
+        assert 'DINOv2' not in value and 'DDA' not in value and 'ViT' not in value
+        assert 'frames below 336 px' in value
+    assert quote in public['summary']['text']
+    assert public['notes'] == view['notes'] and snapshot_hash(snapshot) == before
+    assert view['summary']['insufficient'] == [reason]
+
+
 @pytest.mark.parametrize('kind', ['image', 'video', 'audio', 'document'])
 def test_generated_configuration_fields_hide_architectures_and_fusion_identity(kind):
     original = specimen(kind, 'forensic')

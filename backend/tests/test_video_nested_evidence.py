@@ -23,7 +23,7 @@ from app.storage.db import AnalysisStage, ReportRow
 from app.storage.objects import ObjectIntegrityError
 
 
-@pytest.fixture(params=['video-evidence-3', 'video-evidence-4'])
+@pytest.fixture(params=['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'])
 def nested_case(av_fixture, monkeypatch, request):
     f = av_fixture
     anchors = list(f.anchors.values())
@@ -44,6 +44,13 @@ def nested_case(av_fixture, monkeypatch, request):
     # remain readable and are never retroactively enriched.
     monkeypatch.setattr(video_packets, 'VERSION', request.param)
     monkeypatch.setattr(video_packets, 'CREATOR', 'video-evidence-packets/' + request.param.rsplit('-', 1)[1])
+    if request.param == 'video-evidence-4':
+        from app.evidence import audio_background
+        current_acoustics = audio_background.build_content
+        def historical_acoustics(*args, **kwargs):
+            kwargs.setdefault('version', 'mixed-acoustics-1')
+            return current_acoustics(*args, **kwargs)
+        monkeypatch.setattr(audio_background, 'build_content', historical_acoustics)
     if request.param == 'video-evidence-3':
         from app.evidence import audio_packets
 
@@ -66,8 +73,8 @@ def nested_case(av_fixture, monkeypatch, request):
 
 def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, monkeypatch):
     f = nested_case
-    assert f.document['version'] in {'video-evidence-3', 'video-evidence-4'}
-    assert ('acoustic_context' in f.document['audio']) == (f.document['version'] == 'video-evidence-4')
+    assert f.document['version'] in video_packets.NESTED_VERSIONS
+    assert ('acoustic_context' in f.document['audio']) == (f.document['version'] != 'video-evidence-3')
     assert f.document['audio']['status'] == f.document['av']['status'] == 'ready'
     assert service.load_packet_set(f.db, f.analysis, f.store) == f.document
     assert multimedia_evidence.capture(f.db, f.analysis, result=f.result, store=f.store) == f.document
@@ -89,7 +96,7 @@ def test_nested_report_section_has_input_proof_and_withholds_source(nested_case,
     view = multimedia_evidence.view(frozen, store=f.store)
     assert [p['kind'] for p in view['packets']] == ['audio', 'av', 'av', 'av']
     html = engine._env.get_template('sections/multimedia_evidence.html.j2').render(v={'evidence': view}, s=frozen)
-    for required in ('Synthetic-voice inspection window', 'All 31 lag candidates', 'Source audio PTS', 'actual 32 by 24 inputs'):
+    for required in ('Speech inspection window', 'All 31 lag candidates', 'Source audio PTS', 'actual 32 by 24 inputs'):
         assert required in html
     assert ('<img src="data:image/png;base64,' in html) is not redacted
     assert 'aud.gustking_xlsr' not in html
@@ -197,7 +204,7 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.image_eligibility'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.image_eligibility'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

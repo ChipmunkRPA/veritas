@@ -166,4 +166,14 @@ describe('image evidence cards', () => {
     expect(screen.getByText('Image eligibility unavailable')).toBeTruthy()
     expect(screen.getByText(/Region coverage counts are unavailable/)).toBeTruthy()
   })
+
+  it('shows the recorded cell counts for an area-based eligibility rule', () => {
+    const area = { ...gate(.125, false), schema: 'image-candidate-eligibility/2' as const,
+      threshold: .25, threshold_exact_decimal: '0.25', active_cells: 128, minimum_active_cells: 256, input_cells: 1024 }
+    show({ ...evidence, packets: [], coverage: { inspection_checks: [check({ candidate_eligibility: area })] } })
+    const note = screen.getByTestId('image-candidate-eligibility')
+    expect(note.textContent).toContain('Active screening cells 128 · minimum 256')
+    expect(note.textContent).toContain('Small or weak edits may be missed.')
+    expect(note.textContent).not.toContain('0.125')
+  })
 })

@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from importlib.util import find_spec
 from typing import Any, ClassVar
 
 import cv2
@@ -31,7 +32,9 @@ from app.engine.detector import (
     RunContext,
     UnitScore,
 )
-from app.evidence.image_eligibility import validate_gate
+from app.evidence.image_eligibility import AREA_GATE, area_gate, validate_gate
+
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
 class LocaliserDetector(Detector):
@@ -46,6 +49,7 @@ class LocaliserDetector(Detector):
     REFERENCE: ClassVar[str] = ""
     SCREENING_RESIZE: ClassVar[str] = "resized"  # how the screening pass fits the whole image to the model input
     SUPPORTS_TILES: ClassVar[bool] = True
+    REGION_THRESHOLD: ClassVar[float] = loc.THRESHOLD
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         count = self.TILE_BATCH if self.SUPPORTS_TILES and ctx.profile == Profile.DEEP else 1
@@ -86,7 +90,7 @@ class LocaliserDetector(Detector):
         # so later evidence can reproduce the component boundaries without
         # rerunning a model or silently changing threshold membership.
         recorded_values = np.rint(np.clip(values.astype(np.float64), 0, 1) * 255) / 255.0
-        regions, stats = loc.components(recorded_values, reliable, width, height)
+        regions, stats = loc.components(recorded_values, reliable, width, height, threshold=self.REGION_THRESHOLD)
         policy = {"mode": "tiled" if tiled else "screening", "input_px": self.INPUT, "grid": list(grid),
                   "scale_x": round(self.INPUT / width, 4), "scale_y": round(self.INPUT / height, 4), "tiles": n_tiles,
                   "overlap_px": self.OVERLAP if tiled else 0}
@@ -120,7 +124,7 @@ class LocaliserDetector(Detector):
             out.anomaly_map, semantics="p_manipulated", calibrated=False, value_range=(0.0, 1.0), mask=out.reliable,
             title=f"{self.METHOD} manipulation map",
             caption=f"Per-pixel output of {self.METHOD} in [0, 1], uncalibrated, from {pass_text}. Areas at or above "
-                    f"{loc.THRESHOLD} outside the less reliable areas form candidate regions. "
+                    f"{self.REGION_THRESHOLD} outside the less reliable areas form candidate regions. "
                     f"{selection_note}Masked: {loc.CONDITIONS_LABEL.lower()}.",
             media_ref="original", coordinate_space={"width": width, "height": height, "scale_to_original": 1.0})]
         candidate_gate = None
@@ -136,7 +140,7 @@ class LocaliserDetector(Detector):
         if out.regions:
             exhibit_ids.append(ctx.exhibits.regions(
                 out.regions, title=f"Regions flagged by {self.METHOD}", media_ref="original",
-                caption=f"Connected areas where the {self.METHOD} map reaches {loc.THRESHOLD} outside the less reliable areas: "
+                caption=f"Connected areas where the {self.METHOD} map reaches {self.REGION_THRESHOLD} outside the less reliable areas: "
                         "regions flagged for examination, not a mask of what was changed.",
                 coordinate_space={"width": width, "height": height, "scale_to_original": 1.0}))
         n = len(out.regions)
@@ -146,28 +150,34 @@ class LocaliserDetector(Detector):
                                        "screening_scale": round(self.INPUT / max(width, height), 4)})
         units = [UnitScore(f"region:{k}", stat["mean"], "score", quality={"area_share": stat["area_share"], "max": stat["max"]})
                  for k, stat in enumerate(out.region_stats, 1)]
-        flagged = float((out.anomaly_map >= loc.THRESHOLD).mean())
+        flagged = float((out.anomaly_map >= self.REGION_THRESHOLD).mean())
         largest = (f"; R1 mean {out.region_stats[0]['mean']:.2f} over {100 * out.region_stats[0]['area_share']:.1f} % of the "
                    "image" if n else "")
         screening_note = ("" if tiled else f" The map was computed at screening resolution (×{self.INPUT / max(width, height):.2f}"
                           " on the long side), which attenuates fine compression and noise traces; Deep analysis adds "
                           "native-resolution tiles." if self.SUPPORTS_TILES else
                           f" The whole image was inspected at {self.INPUT} × {self.INPUT}; native-resolution tiles are not available for this check.")
-        reasoning = (f"The localisation model marks {n} area(s) for examination where its map reaches the {loc.THRESHOLD} "
+        reasoning = (f"The localisation model marks {n} area(s) for examination where its map reaches the {self.REGION_THRESHOLD} "
                      "operating threshold outside the less reliable areas." if n else
-                     f"The localisation model marks no area at its {loc.THRESHOLD} operating threshold outside the less "
+                     f"The localisation model marks no area at its {self.REGION_THRESHOLD} operating threshold outside the less "
                      "reliable areas. A fully generated image also gives an empty or diffuse map, so this says nothing "
                      "about generation.")
         if candidate_gate is not None:
-            reasoning = (f"The whole-image response {candidate_gate['score_exact_decimal']} "
-                         f"{'reached' if candidate_gate['eligible'] else 'did not reach'} the fixed selection threshold "
-                         "0.5. This uncalibrated response selects candidates; it does not validate any pixel as edited. "
+            if candidate_gate["schema"] == AREA_GATE:
+                summary = (f"{candidate_gate['active_cells']} cells in the screening map exceeded the response cutoff. "
+                           f"The area rule requires {candidate_gate['minimum_active_cells']} active cells to display candidate regions. "
+                           "Normal processing can also produce a region. ")
+            else:
+                summary = (f"The whole-image response {candidate_gate['score_exact_decimal']} "
+                           f"{'reached' if candidate_gate['eligible'] else 'did not reach'} the fixed selection threshold "
+                           "0.5. This uncalibrated response selects candidates; it does not validate any pixel as edited. ")
+            reasoning = (summary
                          + (reasoning if candidate_gate["eligible"] else
                             "Local map regions were withheld by this gate. The original response and quality mask are retained; this is not a finding of authenticity."))
         return DetectorResult(
             status="ok", unit_scores=units or [aggregate], aggregate=aggregate,
             observed=f"integrity score {out.integrity_score:.3f} (mean of the top 1 % of reliable map values); {n} region(s) "
-                     f"at map ≥ {loc.THRESHOLD}{largest}; {100 * out.conditions['unreliable']:.1f} % of pixels in less "
+                     f"at map ≥ {self.REGION_THRESHOLD}{largest}; {100 * out.conditions['unreliable']:.1f} % of pixels in less "
                      f"reliable areas; {pass_text}",
             reference=self.REFERENCE, reasoning=reasoning + screening_note,
             metrics={"integrity": out.integrity_score, "map_max": float(out.anomaly_map.max()), "flagged_share": flagged,
@@ -175,7 +185,7 @@ class LocaliserDetector(Detector):
                      "grid_h": float(grid_h), **{f"{k}_share": v for k, v in out.conditions.items()}},
             exhibit_ids=exhibit_ids, model_revisions=revisions(ctx, self.MODEL),
             details={"localisation": {
-                "schema": "recorded-mask/1", "threshold": loc.THRESHOLD,
+                "schema": "recorded-mask/1", "threshold": self.REGION_THRESHOLD,
                 "comparison": "greater_or_equal", "scalar_encoding": "linear_uint8",
                 "component_connectivity": 8, "minimum_region_fraction": loc.MIN_REGION_FRACTION,
                 "grid": [grid_w, grid_h], "coordinate_space": "exif-oriented-original",
@@ -187,33 +197,28 @@ class LocaliserDetector(Detector):
             }})
 
 
-class FusedDetector(LocaliserDetector):
-    """Independently implemented single-screening map with explicit image selection."""
+class GatedScreeningDetector(LocaliserDetector):
+    """One screening map with eligibility independent of the quality mask."""
 
-    MODEL = "fused.opensdi"
-    METHOD = "FUSED"
-    INPUT = 512
     TILE_BATCH = 1
     SUPPORTS_TILES = False
-    REFERENCE = ("An uncalibrated local editing response from a 512-square screening input; fixed image selection "
-                 "threshold 0.5 and recorded component threshold 0.5. Local independent-sample evaluation found "
-                 "missed edits and authentic-image false alarms. Unmarked pixels are not confirmed authentic.")
-    spec = image_spec("loc.fused", "FUSED AI-inpainting localisation", "localiser", InputUnit.IMAGE,
-                      (H2,), ("heatmap", "regions"), model_ids=(MODEL,), devices=("mps", "cpu"),
-                      timeout_s=180.0, version="0.1.0")
+
+    @abstractmethod
+    def response(self, model: Any, image: Image.Image) -> tuple[np.ndarray, dict]:
+        """Return the original map and the associated selection record."""
 
     def predict(self, model: Any, images: list[np.ndarray], device: Any) -> list[np.ndarray]:
         if len(images) != 1:
             raise ValueError("This local inspection check supports one screening image at a time")
-        return [model.predict(Image.fromarray(images[0])).raw_mask]
+        return [self.response(model, Image.fromarray(images[0]))[0]]
 
     def localise(self, ctx: RunContext, pixels: np.ndarray) -> loc.LocaliserOutput:
         model = ctx.lease.get(self.MODEL)
-        prediction = model.obj.predict(Image.fromarray(pixels))
-        validate_gate(prediction.candidate_eligibility)
+        raw, eligibility = self.response(model.obj, Image.fromarray(pixels))
+        validate_gate(eligibility)
         height, width = pixels.shape[:2]
         grid = loc.grid_shape(width, height, loc.GRID_MAX_SIDE["screening"])
-        native = np.asarray(prediction.raw_mask)
+        native = np.asarray(raw)
         if (native.shape != (self.INPUT, self.INPUT) or not np.isfinite(native).all()
                 or native.min() < 0 or native.max() > 1):
             raise ValueError("The image localisation response has invalid dimensions or values")
@@ -222,8 +227,8 @@ class FusedDetector(LocaliserDetector):
         unreliable, shares = loc.conditions_mask(pixels, structure.quality_luma if structure else None)
         reliable = loc.reliable_grid(unreliable, grid)
         recorded = np.rint(np.clip(values.astype(np.float64), 0, 1) * 255) / 255.0
-        regions, stats = loc.components(recorded, reliable, width, height)
-        if not prediction.candidate_eligibility["eligible"]:
+        regions, stats = loc.components(recorded, reliable, width, height, threshold=self.REGION_THRESHOLD)
+        if not eligibility["eligible"]:
             regions, stats = [], []
         return loc.LocaliserOutput(
             anomaly_map=values, reliable=reliable, reliability_source="conditions",
@@ -232,7 +237,61 @@ class FusedDetector(LocaliserDetector):
             resolution_policy={"mode": "screening", "input_px": self.INPUT, "grid": list(grid),
                                "scale_x": round(self.INPUT / width, 4), "scale_y": round(self.INPUT / height, 4),
                                "tiles": 0, "overlap_px": 0},
-            candidate_eligibility=dict(prediction.candidate_eligibility))
+            candidate_eligibility=eligibility)
+
+
+class FusedDetector(GatedScreeningDetector):
+    """AI-inpainting screening map with a learned image-level gate."""
+
+    MODEL = "fused.opensdi"
+    METHOD = "FUSED"
+    INPUT = 512
+    REFERENCE = ("An uncalibrated local editing response from a 512-square screening input; fixed image selection "
+                 "threshold 0.5 and recorded component threshold 0.5. Local independent-sample evaluation found "
+                 "missed edits and authentic-image false alarms. Unmarked pixels are not confirmed authentic.")
+    spec = image_spec("loc.fused", "FUSED AI-inpainting localisation", "localiser", InputUnit.IMAGE,
+                      (H2,), ("heatmap", "regions"), model_ids=(MODEL,), devices=("mps", "cpu"),
+                      timeout_s=180.0, version="0.1.0")
+
+    def applicable(self, ctx: RunContext) -> Applicability:
+        from app.engine.fetchers import installed
+        from app.engine.registry import get_registry
+
+        registry = get_registry()
+        model = registry.manifest.model(SpliceDetector.MODEL)
+        if (model and registry.decision(SpliceDetector.spec.id).enabled and find_spec("segmentation_models_pytorch")
+                and installed(model) and original_bytes(ctx).startswith(PNG_SIGNATURE)):
+            return Applicability(False, "A dedicated local editing check covers this file format")
+        return super().applicable(ctx)
+
+    def response(self, model: Any, image: Image.Image) -> tuple[np.ndarray, dict]:
+        prediction = model.predict(image)
+        return prediction.raw_mask, dict(prediction.candidate_eligibility)
+
+
+class SpliceDetector(GatedScreeningDetector):
+    """Recompression consistency inspection for PNG images."""
+
+    MODEL = "tidal.splice_v30_1"
+    METHOD = "Recompression consistency"
+    INPUT = 384
+    REGION_THRESHOLD = 0.7
+    REFERENCE = ("Region scores describe local recompression response at three JPEG qualities. This screening check "
+                 "was evaluated on PNG splices and can miss small edits. Normal processing can also produce a highlight.")
+    spec = image_spec("loc.splice", METHOD, "localiser", InputUnit.IMAGE, (H2,), ("heatmap", "regions"),
+                      model_ids=(MODEL,), devices=("cpu",), timeout_s=120.0, version="0.1.0")
+
+    def applicable(self, ctx: RunContext) -> Applicability:
+        if not original_bytes(ctx).startswith(PNG_SIGNATURE):
+            return Applicability(False, "This local edit check is assessed on PNG images")
+        return super().applicable(ctx)
+
+    def response(self, model: Any, image: Image.Image) -> tuple[np.ndarray, dict]:
+        from app.detectors.image import splice
+
+        raw = splice.predict(model, image)
+        cells = int((raw > splice.PIXEL_THRESHOLD).sum())
+        return raw, area_gate(cells, splice.MINIMUM_ACTIVE_CELLS, raw.size)
 
 
 class MesorchDetector(LocaliserDetector):

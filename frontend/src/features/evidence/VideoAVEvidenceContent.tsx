@@ -3,14 +3,18 @@ import { ContextClip } from './VideoEvidenceContent'
 import { rationalSeconds, seconds, type VideoAVChannel, type VideoAVPacket, type VideoEvidenceSet } from './multimediaPackets'
 
 const signed = (value: number) => `${value > 0 ? '+' : ''}${value}`
+const hasTimingChange = (packet: VideoAVPacket) => packet.measurement.overlaps_offset_step || packet.measurement.overlaps_correlation_collapse
+
+function intervalLabel(range: VideoAVPacket['anchor']['source_timestamp_ranges'][number]) {
+  const start = rationalSeconds(range.source_start_pts, range.time_base)
+  const end = rationalSeconds(range.source_end_pts, range.time_base)
+  return start !== null && end !== null ? `${seconds(start)}–${seconds(end)}` : 'time conversion unavailable'
+}
+
 function SourceInterval({ packet }: { packet: VideoAVPacket }) {
   return <div className="mt-3 text-caption text-text-muted">
-    {packet.anchor.source_timestamp_ranges.map((range, index) => {
-      const start = rationalSeconds(range.source_start_pts, range.time_base)
-      const end = rationalSeconds(range.source_end_pts, range.time_base)
-      return <p key={index} className="mt-1 mb-0 font-mono">Selected source interval: {start !== null && end !== null ? `${seconds(start)}–${seconds(end)}` : 'time conversion unavailable'}
-        {' '}· PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}</p>
-    })}
+    {packet.anchor.source_timestamp_ranges.map((range, index) => <p key={index} className="mt-1 mb-0 font-mono">Selected source interval: {intervalLabel(range)}
+      {' '}· PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}</p>)}
     <p className="mt-1 mb-0">Analyzed audio samples [{packet.interval.start_sample}, {packet.interval.end_sample});
       {' '}search context [{packet.context_interval.start_sample}, {packet.context_interval.end_sample}). WAV controls begin at zero inside each clip.</p>
   </div>
@@ -20,8 +24,17 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
   set: VideoEvidenceSet; channel: VideoAVChannel; token: string; mediaReady: boolean
 }) {
   const coverage = channel.coverage
+  const flaggedWindows = channel.packets.filter(hasTimingChange)
   return <div data-testid="video-av-evidence">
     <p className="mt-2 mb-0 text-small text-text-muted">Compare measured mouth appearance and audio energy on their original clocks. Correlation and timing differences do not prove AI generation, editing, or who is speaking.</p>
+    {flaggedWindows.length > 0 ? <nav aria-label="Flagged timing intervals" className="mt-4 rounded-md border border-border p-4">
+      <h4 className="m-0 text-small font-medium">Timing intervals to review</h4>
+      <p className="mt-2 mb-0 text-small text-text-muted">These measured windows overlap a flagged change. They can extend beyond the change itself.</p>
+      <ul className="mt-2 mb-0 space-y-1 text-small">{flaggedWindows.map((packet) => <li key={packet.id}>
+        <a className="text-accent underline" href={`#media-evidence-${packet.id}`}>{packet.id} · {packet.anchor.source_timestamp_ranges.map(intervalLabel).join(' · ')}</a>
+        {' '}· {packet.measurement.overlaps_offset_step ? 'Offset change' : 'Drop in mouth and audio agreement'}
+      </li>)}</ul>
+    </nav> : channel.packets.length > 0 && <p className="mt-3 mb-0 text-small text-text-muted">The displayed windows contain no flagged timing change. A consistent delay can still be present, and a redrawn mouth can match its audio.</p>}
     {coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{coverage.selected_windows} of {coverage.recorded_windows} recorded alignment windows are shown; {coverage.omitted_windows} are omitted.
         {' '}Flagged windows are shown first, followed by measured examples in time order. Overlapping windows are not independent confirmations.</p>
@@ -31,7 +44,7 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
     </div> : <p className="mt-3 text-small text-text-muted">Alignment coverage is unavailable. Unmeasured intervals have not been cleared.</p>}
     <div className="mt-6 space-y-7">{channel.packets.map((packet) => {
       const measurement = packet.measurement
-      const flagged = measurement.overlaps_offset_step || measurement.overlaps_correlation_collapse
+      const flagged = hasTimingChange(packet)
       const sampleRate = packet.anchor.sample_rate
       return <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
         <h4 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h4>
@@ -39,8 +52,8 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
         <p className="mt-2 mb-0 text-small text-text-muted">{flagged ? 'This window overlaps a recorded timing or correlation change.' : 'Informational measured example; no recorded timing-change or correlation-collapse segment overlaps this window.'}</p>
         <SourceInterval packet={packet} />
         <EvidenceMeasurements values={packet.measurements} />
-        <p className="mt-2 mb-0 text-small text-text-muted">Positive lag means audio later than the picture. The selected lag is the highest measured correlation among {measurement.lag_profile.length} candidates; it is not a probability of manipulation.</p>
-        {measurement.low_correlation && <p className="mt-2 mb-0 text-small text-text-muted">The peak is below the recorded correlation operating threshold of {measurement.minimum_trusted_peak}. The timing estimate may be unreliable.</p>}
+        <p className="mt-2 mb-0 text-small text-text-muted">The selected lag is the best match among {measurement.lag_profile.length} tested shifts. Positive means the audio is later than the picture. The correlation does not estimate the probability of manipulation.</p>
+        {measurement.peak_correlation < measurement.minimum_trusted_peak && <p className="mt-2 mb-0 text-small text-text-muted">The strongest match is below the recorded threshold of {measurement.minimum_trusted_peak}. This window cannot support a reliable timing estimate.</p>}
         <div className={`${evidenceGrid} mt-4`}>
           <EvidenceAudio set={set} artifact={packet.artifacts.selected_clip} token={token} ready={mediaReady} alt={`${packet.id}: exact unshifted source audio window`} />
           <EvidenceAudio set={set} artifact={packet.artifacts.context_clip} token={token} ready={mediaReady} alt={`${packet.id}: exact audio search context`} />

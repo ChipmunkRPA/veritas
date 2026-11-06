@@ -11,7 +11,9 @@ import re
 from collections.abc import Callable
 from typing import Any
 
-from app.engine.customer_assessment import customer_assessment
+from app.engine.customer_assessment import EMAIL_REFERENCE_SLICE, customer_assessment, text_reference_rate
+from app.engine.finding_assessment import finding_assessment
+from app.engine.service_policy import standard_service_policy
 from app.reports import formatting, view
 from app.reports.snapshot import ReportSnapshot
 
@@ -21,10 +23,10 @@ RATE_EXPLANATION = (
     "verified accuracy rate for files like this one."
 )
 TENDENCY_RATE_EXPLANATION = (
-    "Error rates for the 80% leaning rule have not been established for comparable files. In plain language, "
-    "we have not measured how often this rule would wrongly call an original file AI, or call an AI file original. "
-    "The percentage is a system estimate, not a measured success rate."
+    "Reference testing does not establish a universal accuracy rate for these findings. Errors and inconclusive results "
+    "remain possible. The combined percentage reflects only eligible checks; inspection-only findings are not averaged into it."
 )
+
 FOCUS = {
     "F3_whole_image_generation": "Visual-generation check",
     "F4_localised_manipulation": "Local editing check",
@@ -72,6 +74,9 @@ def _observation(signal: dict, public_ledger: dict[str, dict], redact: Callable[
     text = str(row.get("observed") or text)
     # Even old snapshots must use the allowlisted audio observation projection.
     text = re.split(r"; per (?:model|check):", text, maxsplit=1)[0]
+    if "mean p(synthetic)=" in text:
+        text = text.replace("mean p(synthetic)=", "Raw speech inspection response ")
+        text += ". This response is not a calibrated confidence percentage."
     text = text.replace("fused p(synthetic)=", "Combined voice-check response ").replace("p(fake)=", "inspection response ")
     return redact(text) if text else "No separate observation was saved for this check."
 
@@ -96,6 +101,11 @@ def _packet_inference(packet: dict) -> str:
         response = next((v for k, v in measures.items() if k in {"Frame detection score", "Window detection score"} and v is not None), None)
         if response is not None and boundary is not None and response >= boundary:
             return "Leaning towards an AI/deepfake pattern in this sampled input. This is an inspection clue, not the probability that these pixels were altered."
+    if packet.get("evidence_type") == "anomaly":
+        if packet.get("semantics") == "error_level":
+            return "This region responds differently to JPEG recompression. Texture, edges and earlier saves can cause the difference."
+        if packet.get("semantics") == "residual":
+            return "The measured noise varies across this region. Lighting, texture and ordinary processing can cause the variation."
     if packet.get("region"):
         return "Possible editing trace in this region. The recorded pattern warrants inspection, but does not by itself distinguish AI editing from ordinary processing."
     return "Insufficient evidence for an AI/original conclusion at this source location. The recorded response and its limits are shown below."
@@ -160,6 +170,9 @@ def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[d
         inference = "Insufficient evidence for a reliable AI/original conclusion from this check alone."
         if outside:
             inference += " It is included as inspection context and does not change the combined estimate."
+    assessment = finding_assessment(finding, {**result, "kind": snapshot.analysis.kind})
+    if family not in SOURCE_FAMILIES:
+        inference = assessment["interpretation"]
     if not observations:
         observations = list(row.get("sentences") or [row.get("reason") or "No scored observation was recorded."])
     if family not in SOURCE_FAMILIES | CONTEXT_FAMILIES and not links:
@@ -168,7 +181,7 @@ def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[d
         scope = "The source links below identify the saved inputs and observations. Selected samples do not cover every pixel, frame, word or sound."
     else:
         scope = ""
-    return {**row, "title": focus, "inference": inference, "observations": observations, "support": links, "notes": [],
+    return {**row, "assessment": assessment, "title": focus, "inference": inference, "observations": observations, "support": links, "notes": [],
             "scope_note": scope, "status": None, "disposition": None,
             "reason": " ".join([inference, *observations[:1]])}
 
@@ -188,13 +201,22 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     out["header_centre"] = snapshot.analysis.kind.capitalize()
     out["status_line"] = "Prepared by Chipmunk Verify | Automated analysis"
     out["draft_note"] = None
-    out["expert_contact"] = "sales@chipmunkrpa.com"
-    out["expert_note"] = "For a detailed expert examination, written opinion or expert witness support, contact sales@chipmunkrpa.com. Scope and fees are agreed under a separate engagement contract."
-    out["scope_statement"] = "This report presents Chipmunk Verify's automated analysis and source-linked evidence. It is not an expert witness opinion. A separate expert engagement can examine the original material and its wider context."
+    policy = standard_service_policy()
+    out["service_policy"] = policy
+    out["expert_contact"] = policy["expert_contact"]
+    out["expert_note"] = policy["private_engagement_notice"] + " Contact " + policy["expert_contact"] + "."
+    out["scope_statement"] = policy["court_notice"]
     out["closing"] = out["expert_note"]
     assessment = customer_assessment({**snapshot.result, "kind": snapshot.analysis.kind})
+    text_rate = text_reference_rate(snapshot.analysis.kind, snapshot.result.get("condition_profile"),
+                                          snapshot.result.get("calibration") or [])
     out["customer_assessment"] = assessment
-    out["customer_historical_note"] = "Historical test figures in this appendix describe earlier check configurations and test thresholds. They do not measure the error rate of the 80% customer conclusion rule, and they do not validate newly added inspection-only checks."
+    out["customer_reference_test"] = text_rate
+    out["customer_historical_note"] = (
+        "The reference evaluation applies only to its recorded sample, scope and decision rules."
+        if text_rate else
+        "Historical test figures in this appendix describe earlier check configurations and test thresholds. They do not establish a universal customer accuracy rate or validate newly added inspection-only checks."
+    )
     summary = out.get("summary") or {}
     if assessment["applies"]:
         estimate = (f"{assessment['confidence_label']}: {assessment['confidence_pct']:g}% in this direction."
@@ -253,11 +275,22 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     by_id = {str(f["id"]): f for f in out["findings"]}
     out["channel_findings"] = []
     if snapshot.analysis.kind == "video":
+        soundtrack = assessment.get("soundtrack")
+        voice_packet_ids = {p["id"] for p in packets if p.get("kind") == "audio"}
+        if soundtrack and any(image.get("anchor") == "multimedia-evidence-voice-waveform" and image.get("uri")
+                              for image in (out.get("evidence") or {}).get("overview") or []):
+            out["customer_soundtrack_link"] = {"href": "#multimedia-evidence-voice-waveform", "label": "Voice waveform"}
         for label, families in [("Visual content", {"F3_whole_image_generation", "V3_synthetic_video"}),
                                 ("Faces", {"V1_face_track", "F10_face"}),
                                 ("Voice", {"A1_voice"}), ("Voice / mouth timing", {"V2_lip_sync"})]:
             members = [f for f in stored.values() if f.get("family") in families]
             if not members:
+                continue
+            if label == "Voice" and soundtrack:
+                packet_link = next((link for f in members
+                    for link in by_id.get(str(f.get("id")), {}).get("support", []) if link["id"] in voice_packet_ids), None)
+                if packet_link:
+                    out["customer_soundtrack_link"] = {"href": packet_link["href"], "label": f"Voice interval {packet_link['id']}"}
                 continue
             included = [f for f in members if _number(f.get("contribution_logit")) is not None
                         and not any(s.get("outside_estimate") for s in _signals(f, snapshot.result))
@@ -280,12 +313,14 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     summary["context"] = "Some checks are inspection-only and do not change the combined estimate. Their findings below say so explicitly." if view.context_findings(list(stored.values()), snapshot.result.get("decision") or {}) else ""
     for packet in packets:
         if snapshot.analysis.kind == "video" and packet.get("kind") == "audio" and any(s.get("outside_estimate") for f in stored.values() if f.get("family") == "A1_voice" for s in _signals(f, snapshot.result)):
-            summary["context"] += " In this video, the voice evidence is separate from the visual estimate; a visual leaning towards original content does not clear the voice as original."
+            summary["context"] += (" Read the separate speech assessment for the voice evidence."
+                                   if assessment.get("soundtrack") else
+                                   " In this video, the voice evidence is separate from the visual estimate; a visual leaning towards original content does not clear the voice as original.")
             break
     if assessment["applies"]:
-        summary["testing"] = TENDENCY_RATE_EXPLANATION
+        summary["testing"] = text_rate or TENDENCY_RATE_EXPLANATION
         if isinstance(out.get("testing"), dict):
-            out["testing"].update(arrays=[], line=TENDENCY_RATE_EXPLANATION)
+            out["testing"].update(arrays=[], line=summary["testing"])
     elif "not established" in str(summary.get("testing")):
         summary["testing"] = RATE_EXPLANATION
     if not assessment["applies"] and "not established" in str((out.get("testing") or {}).get("line")):
@@ -296,12 +331,16 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
                 if method.get("key") == "Fusion":
                     method["value"] = str(method.get("value") or "").replace(
                         "conformal bands for the headline.",
-                        "uncertainty bands retained from the saved calculation. The customer headline uses the 80% point-estimate rule below.")
+                        "uncertainty bands retained from the saved calculation. The customer assessment preserves evidence scope and the recorded uncertainty safeguards.")
         rule = out["methods"].get("headline_rule") or {}
         if assessment["applies"]:
-            rule["sentences"] = ["The customer conclusion leans towards AI-generated content when the usable combined AI estimate reaches 80%, and towards original content when the original-file estimate reaches 80%.",
-                                 "The point estimate controls this wording, not an endpoint of the uncertainty interval. Missing calibration, unsupported inputs or conflicting evidence can prevent a directional conclusion."]
-            rule.update(rates=[], scope=None, note=TENDENCY_RATE_EXPLANATION)
+            if (snapshot.result.get("condition_profile") or {}).get("slice_id") == EMAIL_REFERENCE_SLICE:
+                rule["sentences"] = ["The selected email body can receive an AI-writing tendency only when its calibrated check and recorded uncertainty safeguards support that interpretation.",
+                                     "The point estimate controls this wording. The interval reflects uncertainty in the reference fit."]
+            else:
+                rule["sentences"] = ["The overall assessment uses applicable, calibrated evidence and the recorded uncertainty safeguards. Missing calibration or unsupported coverage leaves the result inconclusive.",
+                                     "Confidence is scoped to the assessed evidence; it is not an average of finding percentages or an uncertainty-interval endpoint. Missing calibration, unsupported inputs or conflicting evidence can prevent a directional conclusion."]
+            rule.update(rates=[], scope=None, note=text_rate or TENDENCY_RATE_EXPLANATION)
         elif rule.get("note") and not rule.get("rates"):
             rule["note"] = RATE_EXPLANATION
     if snapshot.analysis.kind == "video":

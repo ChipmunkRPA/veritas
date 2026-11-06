@@ -13,7 +13,13 @@ notices retain their recorded sources.
   `frontend/package-lock.json` other than the fonts. The repository does not carry them, but a container image and the
   built web application do, and neither comes with their licence texts. An image built with `BAKE_MODELS` also carries
   the weights below without their licence texts. Whoever distributes an image or a build adds them.
-- **Veritas itself** has no licence file here: the choice of a licence for the repository is its owner's.
+- **Project-authored source** is released under the [MIT License](LICENSE). That license does not replace
+  third-party code, font, trust-data, model-weight, dataset, or runtime-dependency terms.
+
+Runtime packages are installed separately. In particular, PyMuPDF/MuPDF are offered under AGPL or a
+commercial license, as described in the [publisher's license notice](https://pymupdf.readthedocs.io/en/latest/about.html#license-and-copyright).
+The project's MIT license does not waive those terms. Review dependency obligations when deploying or
+distributing a complete application, container, or hosted service.
 
 ## Code in the repository
 
@@ -46,7 +52,7 @@ their licence texts are in `frontend/public/licenses`. All are under the SIL Ope
 
 ## Model weights
 
-The 36 models of `backend/app/models.yaml`, each pinned to a revision or to file hashes. The class decides
+The 38 model/component entries of `backend/app/models.yaml`, each pinned to a revision or to file hashes. The class decides
 what may run. The default licence policy (`VERITAS_LICENCE_POLICY`) is the `commercial` preset: a detector runs only
 when every model it needs is of the class `commercial`. No unknown or non-commercial checkpoint is allowlisted by default. The local `loc.fused` opt-in enables an otherwise default-disabled detector whose weights and dependency are already classified commercial; it is not an exception for unknown weights.
 The note of each row is the manifest's record of where the licence was read.
@@ -94,3 +100,10 @@ The note of each row is the manifest's record of where the licence was read.
 ## Audio additions reviewed 2026-10-31
 
 The registry now also pins Silero speech activity (MIT), Pella v2 plus its W2v-BERT 2.0 configuration (publisher MIT declarations), and PANNs Cnn10 (weights CC-BY-4.0; inference source MIT). Full attribution and copied notices are in [the public legal notice](frontend/public/licenses/audio-model-notices.txt). The code under `app/third_party/panns` retains its MIT notice; `app/third_party/kaldi` retains the TorchAudio BSD-2-Clause notice. The latter is the exact filterbank arithmetic with unused MFCC/native imports removed. No sound-category output is treated as authenticity evidence. See [commercial audit](docs/commercial-model-audit.md) for licensing layers, unresolved provenance, pins and measured limitations.
+
+## Image and text additions recorded 2026-11-05
+
+| Component | Pinned publisher | Declared weight license | Notes |
+| --- | --- | --- | --- |
+| `tidal.splice_v30_1` | [the-harsh-vardhan/TIDAL](https://huggingface.co/the-harsh-vardhan/TIDAL/tree/6bc4c3fd066f13d614949db64eb7f1abdc912ada) | Apache-2.0 | Publisher declaration; training-source provenance is separate. Local checkpoint is not bundled. |
+| `hf.wasitaigenerated.text_small` | [wasitaigeneratedcom/ai-text-detector-small](https://huggingface.co/wasitaigeneratedcom/ai-text-detector-small/tree/f1795c86806e6838d4afa33d0b1427f8430c9615) | Apache-2.0 | Publisher permits commercial use; upstream MIT attributions are in its pinned NOTICE. Weights are not bundled. |

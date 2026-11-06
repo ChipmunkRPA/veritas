@@ -1,0 +1,1109 @@
+[
+  {
+    "name": "matched whole-input calibration",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": 86.0,
+      "confidence_label": "Reference-calibrated estimate for this check",
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "This estimate applies to the stated check and assessed input. It is not measured accuracy for this file or a probability for every highlighted pixel, frame, word or sound.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "original reference estimate",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "against",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.08,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "original",
+      "included_in_overall": true,
+      "label": "Leans original",
+      "confidence_pct": 92.0,
+      "confidence_label": "Reference-calibrated estimate for this check",
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "This estimate applies to the stated check and assessed input. It is not measured accuracy for this file or a probability for every highlighted pixel, frame, word or sound.",
+      "interpretation": "The recorded check leans original in its assessed scope. Absence of an AI flag does not prove the file is original."
+    }
+  },
+  {
+    "name": "uncalibrated raw response is not confidence",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ],
+      "probability": 0.999
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "a crop cannot inherit a whole-image confidence",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": {
+        "kind": "bbox",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 12
+        }
+      },
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Selected image region",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "a window cannot inherit a global confidence",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "window",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Selected recording window",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "missing calibration reference",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": null
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "wrong calibration record",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": null
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "unsupported input",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": false
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "metadata is context",
+    "finding": {
+      "id": "F1",
+      "family": "F8_metadata_consistency",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "context",
+      "included_in_overall": false,
+      "label": "Context only",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Recorded observation",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "This records provenance, timing, file history or conditions. It does not by itself establish AI generation or original authorship."
+    }
+  },
+  {
+    "name": "unavailable check is inconclusive",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "skipped",
+          "scope": "global",
+          "calibrated_probability": 0.01,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "inconclusive",
+      "included_in_overall": true,
+      "label": "Inconclusive",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The checks needed for this finding are missing, unavailable or incomplete. Missing evidence does not favour original content."
+    }
+  },
+  {
+    "name": "confidence direction conflicts with recorded finding",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.02,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "inconclusive",
+      "included_in_overall": true,
+      "label": "Inconclusive",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded tendency and calibrated estimate disagree. No finding confidence is assigned."
+    }
+  },
+  {
+    "name": "checked independently from overall",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": false,
+      "label": "Leans AI",
+      "confidence_pct": 86.0,
+      "confidence_label": "Reference-calibrated estimate for this check",
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "This estimate applies to the stated check and assessed input. It is not measured accuracy for this file or a probability for every highlighted pixel, frame, word or sound.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "calibration does not create a direction for a neutral finding",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "neutral",
+      "strength": "none",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "inconclusive",
+      "included_in_overall": true,
+      "label": "Inconclusive",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded evidence does not establish an AI or original tendency for this finding."
+    }
+  },
+  {
+    "name": "no averaging of two calibrated checks",
+    "finding": {
+      "id": "F1",
+      "family": "F3_whole_image_generation",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global",
+        "second"
+      ]
+    },
+    "result": {
+      "kind": "image",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.86,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        },
+        {
+          "id": "second",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.99,
+          "raw_score": 0.99,
+          "calibration_ref": "check.example@1.0/eval-1"
+        }
+      ],
+      "calibration": [
+        {
+          "subject": "check.example@1.0",
+          "method": "platt",
+          "bench_version": "eval-1",
+          "artefact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bench_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ]
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Whole-image generation indicators",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The recorded check provides an AI-leaning inspection clue; it does not prove AI origin."
+    }
+  },
+  {
+    "name": "supported speech calibration",
+    "finding": {
+      "id": "F1",
+      "family": "A1_voice",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "audio",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": false
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.93,
+          "raw_score": 0.99,
+          "calibration_ref": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+          "details": {
+            "audio_screening": {
+              "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+              "scope_supported": true,
+              "decision": "ai",
+              "probability_ai": 0.93,
+              "original_stability_veto": false
+            }
+          }
+        }
+      ],
+      "calibration": [],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ],
+        "fuser_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "ai",
+      "included_in_overall": true,
+      "label": "Leans AI",
+      "confidence_pct": 93.0,
+      "confidence_label": "Reference-calibrated estimate for this check",
+      "scope_label": "Speech in the assessed recording",
+      "confidence_note": "This estimate applies to the stated check and assessed input. It is not measured accuracy for this file or a probability for every highlighted pixel, frame, word or sound.",
+      "interpretation": "The calibrated speech check leans AI within the assessed recording."
+    }
+  },
+  {
+    "name": "unsupported speech duration",
+    "finding": {
+      "id": "F1",
+      "family": "A1_voice",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "audio",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": false
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.93,
+          "raw_score": 0.99,
+          "calibration_ref": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+          "details": {
+            "audio_screening": {
+              "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+              "scope_supported": false,
+              "decision": "ai",
+              "probability_ai": 0.93,
+              "original_stability_veto": false
+            }
+          }
+        }
+      ],
+      "calibration": [],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ],
+        "fuser_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "inconclusive",
+      "included_in_overall": true,
+      "label": "Inconclusive",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Speech in the assessed recording",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The saved speech calibration does not support a reliable tendency for this recording."
+    }
+  },
+  {
+    "name": "saved speech uncertainty is retained",
+    "finding": {
+      "id": "F1",
+      "family": "A1_voice",
+      "direction": "for",
+      "strength": "moderate",
+      "scope": null,
+      "evidence_ids": [
+        "check:global"
+      ]
+    },
+    "result": {
+      "kind": "audio",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": false
+      },
+      "signals": [
+        {
+          "id": "check:global",
+          "detector_id": "check.example",
+          "detector_version": "1.0",
+          "category": "model",
+          "status": "ok",
+          "scope": "global",
+          "calibrated_probability": 0.93,
+          "raw_score": 0.99,
+          "calibration_ref": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+          "details": {
+            "audio_screening": {
+              "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+              "scope_supported": true,
+              "decision": "inconclusive",
+              "probability_ai": 0.93,
+              "original_stability_veto": false
+            }
+          }
+        }
+      ],
+      "calibration": [],
+      "decision": {
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check:global",
+            "counted": true,
+            "logit": 1.0
+          }
+        ],
+        "fuser_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+      }
+    },
+    "expected": {
+      "version": "finding-interpretation/v1",
+      "finding_id": "F1",
+      "direction": "inconclusive",
+      "included_in_overall": true,
+      "label": "Inconclusive",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "scope_label": "Speech in the assessed recording",
+      "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
+      "interpretation": "The saved speech calibration does not support a reliable tendency for this recording."
+    }
+  }
+]

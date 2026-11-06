@@ -18,6 +18,7 @@ import uuid
 from typing import Any
 
 from app.core.canonical import canonical_hash
+from app.core.config import settings
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
 from app.detectors.text.extract import EXTRACTION_VERSION, Document
 from app.detectors.text.pipeline import (
@@ -30,13 +31,14 @@ from app.detectors.text.pipeline import (
 )
 from app.detectors.text.segment import Sentence
 from app.engine.detector import ON_THIS_SERVER, Modality, StageOutputs, of_the_server
-from app.engine.registry import TEXT_PRIMARY_DETECTORS
+from app.engine.fusion.registry import Selection
+from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
-from app.engine.stages import common
+from app.engine.stages import common, document_screening
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p20"  # p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
+PIPELINE_VERSION = "doc-2.0-p23"  # p23: email calibration and passage evidence, without pilot article confidence; p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -122,7 +124,7 @@ def _creator_exhibit(detected: dict[str, Any], creator: str, kind: str, title: s
 def _classifier_note(primary: dict[str, Any], detected: dict[str, Any]) -> str:
     """Which primary classifier served (D-62): the base classifier is named as standing in when the fine-tune was enabled and
     its files are not installed."""
-    fine_tune_id = PRIMARY_DETECTORS[0]
+    fine_tune_id = TEXT_FINETUNE_DETECTOR
     fine_tune = next((e for e in detected.get("detectors", []) if e["detector_id"] == fine_tune_id), None)
     if (primary["detector_id"] != fine_tune_id and fine_tune is not None and fine_tune["status"] == "skipped"
             and "not installed" in (fine_tune.get("reason") or "")):
@@ -145,7 +147,7 @@ def document_scores(detected: dict[str, Any], n_sentences: int) -> tuple[Documen
         scores.p_chunks = [chunks[k] for k in sorted(chunks)]
         scores.p_doc_primary = primary["aggregate"]["raw"]
         scores.primary_source = next(iter(primary["model_revisions"]), primary["detector_id"])
-        scores.primary_fine_tuned = primary["detector_id"] == PRIMARY_DETECTORS[0]
+        scores.primary_fine_tuned = primary["detector_id"] == TEXT_FINETUNE_DETECTOR
         sources["classifier_document"] = primary["detector_id"]
         for other in PRIMARY_DETECTORS:
             if other in ok and other != primary["detector_id"]:
@@ -222,11 +224,23 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
 def fuse(ctx: StageContext) -> dict[str, Any]:
     """Legacy fuser → uncalibrated fallback Decision (§4.4) plus the v1 document blocks. With a compatible fuser artefact
     the calibrated decision replaces the fallback decision (M-2)."""
-    selection = common.select_fusion(ctx, "document")
+    pin = ctx.state.get("fuser_pin")
+    if pin == document_screening.RETIRED_ARTICLE_PIN:
+        raise ValueError(document_screening.RETIRED_ARTICLE_REASON)
+    local_mode = settings.text_detector_mode == "candidate" and pin is None
+    local_email = pin == document_screening.EMAIL_SHA256 or (local_mode and not ctx.state.get("force_fallback"))
+    selection = (Selection(kind="document", mode="fallback") if local_mode or local_email
+                 else common.select_fusion(ctx, "document"))
     doc, sents = document_input(ctx)
     detected = ctx.outputs.get("detect") or {}
     scores, sources, notes = document_scores(detected, len(sents))
     legacy = assemble_document(doc, sents, scores, None)
+    if sources.get("classifier_document") == document_screening.DETECTOR:
+        for signal in legacy["signals"]:
+            if signal["id"] == "classifier_document":
+                primary = next(e for e in detected["detectors"] if e["detector_id"] == document_screening.DETECTOR)
+                signal.update(name="Text authorship check", observed=primary["observed"],
+                              reference=primary["reference"], reasoning=primary["reasoning"])
     spans_id = ctx.exhibits.add(
         "text_spans", title="Sentence scores (hand-set weights)", media_ref="document", caption=SPANS_CAPTION,
         spans=[{"start": x["start"], "end": x["end"], "sentence_idx": x["idx"], "probability": x["p_ai"], "label": x["band"],
@@ -249,6 +263,11 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     abstain = selection.mode == "fallback" and not learned_available
     informative = not abstain and any(s["ai_probability"] is not None for s in legacy["signals"])
     decision = common.fallback_decision(legacy["verdict"], informative=informative, subject="document")
+    inspection_only = local_mode and informative
+    if inspection_only:
+        decision = Decision(code="inconclusive", verbal="Inconclusive authorship", band="uncertain", confidence="low",
+                            reason="Passage evidence is available for review. No whole-document confidence is available.",
+                            fusion_mode="fallback").model_dump(mode="json")
     if abstain:
         # N-14a: checks that were skipped for the server's memory budget or for model files that are not installed are named
         # in the reason as the server's, so that nobody reads the result as a fault of the file
@@ -256,6 +275,8 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
                         band="uncertain", reason=" ".join(filter(None, [NO_LEARNED_EVIDENCE, not_run_on_server(detected)])))
         notes.append(NO_LEARNED_EVIDENCE)
     verdict = common.legacy_verdict({**legacy["verdict"], "caveats": [*notes, *legacy["verdict"]["caveats"]]}, decision)
+    if inspection_only:
+        verdict.update(reasoning=[decision["reason"]])
     if abstain:
         # The legacy adapter otherwise keeps its original AI label and summary,
         # even when the canonical decision publishes no estimate.
@@ -269,6 +290,8 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
         fused = common.artefact_fusion(ctx, "document", selection, out, detected.get("detectors", []))
     else:
         fused = common.fallback_fusion(ctx, "document", selection, out)
+        if local_email:
+            fused = document_screening.apply(ctx, doc, fused)
     return enforce_extraction_scope(fused, doc)
 
 

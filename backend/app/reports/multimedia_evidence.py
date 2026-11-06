@@ -24,7 +24,7 @@ if TYPE_CHECKING:
     from app.storage.db import Analysis
 
 KINDS = frozenset({"video", "audio", "document"})
-NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4"})
+NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6"})
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
@@ -129,6 +129,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.video.decode import FrameTable
+    from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
 
@@ -146,6 +147,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         raise ObjectIntegrityError("Frozen video frames have ambiguous identities")
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
+        validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -396,10 +398,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if packet_kind in {"video", "av"}:
             row["images"] = [plate("contact_sheet", packet["artifacts"]["contact_sheet"], "Sampled frames (not continuous playback)")]
             row["window"] = copy.deepcopy(packet.get("window"))
+            row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             for frame in packet["frames"]:
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
+                                      "interval_role": frame.get("interval_role"),
                                       "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch") if role in frame["artifact_refs"]]})
         elif packet_kind == "audio":
@@ -470,8 +474,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            row["locator"] = "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s"
-                                        for f in packet["frames"])
+            interval = row["face_interval"]
+            row["locator"] = (f"Face review range {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s"
+                              if interval else "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s"
+                                                         for f in packet["frames"]))
         else:
             locations = []
             for anchor in packet["anchors"]:
@@ -504,7 +510,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                   + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
                                   for check in document.get("coverage", {}).get("checks", []) if check["status"] != "recorded"]
                                  if kind == "document" else []),
-            "overview": [plate(role, asset, overview_label(pk, part, role))
+            "overview": [{**plate(role, asset, overview_label(pk, part, role)),
+                          "anchor": "multimedia-evidence-voice-waveform" if pk == "audio" and role == "waveform" else None}
                          for pk, part in parts for role, asset in sorted((part.get("overview") or {}).items())],
             "limitations": [note for _, part in parts for note in part.get("limitations", [])],
             "omitted": sum(part.get("omitted_candidates", part.get("omitted_windows", (part.get("coverage") or {}).get("omitted_windows", 0))) for _, part in parts),

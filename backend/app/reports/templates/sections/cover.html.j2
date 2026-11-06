@@ -3,7 +3,7 @@
 <hr class="rule-double">
 {% if v.get('customer_report') %}
 <div class="cover-assessment customer-result">
-<p class="eyebrow">Automated conclusion</p>
+<p class="eyebrow">Overall assessment</p>
 <p class="headline">{{ v.cover_headline }}</p>
 {% if v.get('customer_assessment', {}).get('applies') %}
 <p class="estimate">{% set fallback_estimate = v.customer_estimate %}{% include 'sections/customer_estimate.html.j2' %}</p>
@@ -11,6 +11,7 @@
 <p class="caption">{{ v.customer_assessment.limitation }}</p>
 {% endif %}
 </div>
+{% include 'sections/customer_soundtrack.html.j2' %}
 {% if v.get('channel_findings') %}
 <div class="cover-channel-findings">
 {% for channel in v.channel_findings %}<p><strong>{{ channel.label }}:</strong> {{ channel.text }}</p>{% endfor %}
@@ -30,6 +31,8 @@
 {% if v.examiner.refusal %}<p class="examiner-refusal">{{ v.examiner.refusal }}</p>{% endif %}
 </div>
 {% endif %}
+{% if v.get("service_policy") %}<p class="eyebrow">{{ v.service_policy.title }}</p>
+<p class="caption">{{ v.service_policy.confidence_notice }}</p>{% endif %}
 <p class="scope-statement">{{ v.scope_statement }}</p>
 {% if v.get('expert_note') %}<p class="expert-contact">{{ v.expert_note }}</p>{% endif %}
 </section>

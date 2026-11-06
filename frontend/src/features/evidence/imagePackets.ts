@@ -11,7 +11,7 @@ export interface EvidenceImage {
 }
 
 export interface CandidateEligibility {
-  schema: 'image-candidate-eligibility/1'
+  schema: 'image-candidate-eligibility/1' | 'image-candidate-eligibility/2'
   status: 'evaluated'
   eligible: boolean
   scope: 'whole_image'
@@ -25,6 +25,9 @@ export interface CandidateEligibility {
   reason: string
   source_sha256?: string
   scalar_map_sha256?: string
+  active_cells?: number
+  minimum_active_cells?: number
+  input_cells?: number
 }
 
 export interface ImageInspectionCheck {

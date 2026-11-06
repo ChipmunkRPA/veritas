@@ -13,7 +13,9 @@ def _session():
     yield object()
 
 
-@pytest.mark.parametrize('template', ['veritas-report-2.0.r47', 'veritas-report-2.0.r50', 'veritas-report-2.0.r51', 'veritas-report-2.0.r63'])
+@pytest.mark.parametrize('template', ['veritas-report-2.0.r47', 'veritas-report-2.0.r50', 'veritas-report-2.0.r51', 'veritas-report-2.0.r63',
+                                     'veritas-report-2.0.r64', 'veritas-report-2.0.r65', 'veritas-report-2.0.r66',
+                                     'veritas-report-2.0.r67', 'veritas-report-2.0.r68'])
 def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
     row = SimpleNamespace(status='done', artefact_id='old', template_set=template, analysis_id='analysis')
     monkeypatch.setattr(v2_reports, 'get_session', _session)
@@ -54,11 +56,11 @@ def test_internal_package_download_stays_blocked(monkeypatch):
 
 
 @pytest.mark.parametrize('kind', ['image', 'audio', 'video', 'document'])
-def test_every_pre_r64_template_is_withheld_for_all_kinds(kind):
+def test_reports_using_the_old_headline_rule_require_a_new_copy(kind):
     from app.reports.public_policy import downloadable_template, package_template
 
     for check in (downloadable_template, package_template):
-        for revision in range(18, 64):
+        for revision in range(18, 72):
             assert not check(f'veritas-report-2.0.r{revision}', kind)
         assert check(v2_reports.engine.TEMPLATE_SET, kind)
 

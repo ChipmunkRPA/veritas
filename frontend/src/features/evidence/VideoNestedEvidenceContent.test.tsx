@@ -122,10 +122,22 @@ describe('video v3 nested source-bound evidence', () => {
     expect(screen.getByAltText('AV01.1: exact source mouth crop')).toBeTruthy()
     expect(screen.getByAltText('AV01.1: exact measured grayscale mouth patch')).toBeTruthy()
     expect(screen.getAllByText(/Representative frames have no individual AI score/)).toHaveLength(3)
-    expect(screen.getByText(/not a probability of manipulation/)).toBeTruthy()
+    expect(screen.getByText(/does not estimate the probability of manipulation/)).toBeTruthy()
     expect(screen.getByText(/do not prove AI generation, editing, or who is speaking/)).toBeTruthy()
     expect(screen.getByText(/Informational measured example/)).toBeTruthy()
     expect(screen.queryByText(/95%/)).toBeNull()
+  })
+
+  it('links a flagged timing change to its source interval and warns when the measured match is weak', () => {
+    const set = fixture()
+    set.av!.packets[0].measurement.overlaps_offset_step = true
+    set.av!.packets[0].measurement.peak_correlation = .39
+    show(set)
+    const index = within(screen.getByRole('navigation', { name: 'Flagged timing intervals' }))
+    const link = index.getByRole('link', { name: 'AV01 · 6.400 s–7.400 s' })
+    expect(link.getAttribute('href')).toBe('#media-evidence-AV01')
+    expect(document.getElementById('media-evidence-AV01')).toBeTruthy()
+    expect(screen.getByText(/This window cannot support a reliable timing estimate/)).toBeTruthy()
   })
 
   it('distinguishes missing audio and unsupported alignment from negative findings', () => {

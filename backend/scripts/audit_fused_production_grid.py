@@ -81,9 +81,9 @@ def to_source(mask: np.ndarray, width: int, height: int) -> np.ndarray:
     return np.asarray(Image.fromarray(mask.astype(np.uint8) * 255).resize((width, height), Image.Resampling.NEAREST)) > 0
 
 
-def component_masks(values: np.ndarray, reliable: np.ndarray, width: int, height: int):
+def component_masks(values: np.ndarray, reliable: np.ndarray, width: int, height: int, *, threshold: float = loc.THRESHOLD):
     """Recover all label memberships, checking exact capped output against runtime."""
-    binary = (values >= loc.THRESHOLD) & reliable
+    binary = (values >= threshold) & reliable
     n, labels, stats, _ = cv2.connectedComponentsWithStats(binary.astype(np.uint8), connectivity=8)
     gh, gw = values.shape
     sx, sy = width / gw, height / gh
@@ -102,7 +102,7 @@ def component_masks(values: np.ndarray, reliable: np.ndarray, width: int, height
                         "stats": {"mean": round(float(inside.mean()), 4), "max": round(float(inside.max()), 4),
                                   "area_share": round(area / values.size, 4)}})
     records.sort(key=lambda r: (-r["stats"]["mean"], -r["stats"]["area_share"], r["bbox"]["y"], r["bbox"]["x"]))
-    regions, runtime_stats = loc.components(values, reliable, width, height)
+    regions, runtime_stats = loc.components(values, reliable, width, height, threshold=threshold)
     capped = records[:loc.MAX_REGIONS]
     if ([r["region"]["bbox"] for r in regions] != [r["bbox"] for r in capped]
             or runtime_stats != [r["stats"] for r in capped]

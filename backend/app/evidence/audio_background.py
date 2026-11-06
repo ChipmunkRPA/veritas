@@ -8,17 +8,21 @@ from __future__ import annotations
 
 import hashlib
 import io
+import json
 import math
 from collections.abc import Callable
 
 import numpy as np
 from PIL import Image, ImageDraw
 
-from app.core.canonical import canonical_hash
+from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
+from app.evidence.audio_continuity import METHOD as CONTINUITY_METHOD
+from app.evidence.audio_continuity import candidates as continuity_windows
+from app.evidence.audio_continuity import select as select_continuity
 
-SCHEMA = "chipmunk.acoustic-context/1"
-VERSION = "mixed-acoustics-1"
+SCHEMA = "chipmunk.acoustic-context/2"
+VERSION = "mixed-acoustics-2"
 FRAME_SAMPLES = 8000
 MAX_EVENTS = 8
 THRESHOLDS = {"energy_change_db": 12.0, "near_silence_dbfs": -60.0,
@@ -91,13 +95,19 @@ def _candidates(bins: list[dict]) -> list[dict]:
     return candidates
 
 
-def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict]) -> dict:
+def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict], *, version: str = VERSION) -> dict:
+    if version not in {"mixed-acoustics-1", VERSION}:
+        raise ValueError("Unsupported acoustic measurement version")
     bins = measurements(pcm)
     candidates = _candidates(bins)
-    selected = sorted(sorted(candidates, key=lambda c: (-c["priority"], -c["strength"], c["start_sample"], c["category"]))[:MAX_EVENTS],
-                      key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
-    document = {"schema": SCHEMA, "status": "ready", "source": source,
-                "method": {"version": VERSION, "frame_samples": FRAME_SAMPLES,
+    selected = sorted(candidates, key=lambda c: (-c["priority"], -c["strength"], c["start_sample"], c["category"]))[:MAX_EVENTS]
+    rows = json.loads(canonical_json(continuity_windows(pcm))) if version == VERSION else []
+    extra = select_continuity(rows)
+    selected += [{**row, "category": "spectral_transition", "value": row["spectral_distance"],
+                  "change_sample": row["boundary_sample"]} for row in extra]
+    selected.sort(key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
+    document = {"schema": SCHEMA if version == VERSION else "chipmunk.acoustic-context/1", "status": "ready", "source": source,
+                "method": {"version": version, "frame_samples": FRAME_SAMPLES,
                            "description": "Deterministic measurements of frozen mixed mono PCM; no sound-source separation or AI classification.",
                            "thresholds": THRESHOLDS, "selection": "Clipping, then energy changes, then longest quiet intervals; up to eight, shown in time order.",
                            "spectral_bands_hz": {"low": [0, 250], "high": [4000, 8000]},
@@ -111,11 +121,21 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                             "peak_dbfs": _db(float(np.max(np.abs(pcm)))),
                             "clipped_samples": int(np.sum(np.abs(pcm) >= THRESHOLDS["clipping_absolute_amplitude"])),
                             "near_silence_samples": sum(x["end_sample"]-x["start_sample"] for x in bins if x["rms_dbfs"] <= THRESHOLDS["near_silence_dbfs"])},
-                "bins": bins, "events": [], "omitted_events": len(candidates)-len(selected), "limitations": LIMITATIONS}
+                "bins": bins, "events": [], "omitted_events": len(candidates)-len(selected)+len(extra), "limitations": list(LIMITATIONS)}
+    if version == VERSION:
+        document["method"]["continuity"] = CONTINUITY_METHOD
+        document["method"]["selection"] += " Up to four distinct frequency-content transitions are added without replacing the original leads."
+        document["continuity_windows"] = rows
+        document["omitted_continuity_windows"] = sum(row["stationary_spectral_distance"] > CONTINUITY_METHOD["selection_threshold"] for row in rows) - len(extra)
+        document["limitations"].append("A possible sound-content transition may be ordinary music, a new sound, microphone movement or recording processing. Steady sound helped this check in local testing; it missed many other edits and does not identify AI generation.")
     for i, candidate in enumerate(selected, 1):
         a, b, category, value = (candidate[k] for k in ("start_sample", "end_sample", "category", "value"))
         ca, cb = max(0, a-2*SAMPLE_RATE), min(len(pcm), b+2*SAMPLE_RATE)
-        if category == "energy_change":
+        if category == "spectral_transition":
+            label, unit = "Frequency-content distance between adjacent half-second windows", "distance (0–1)"
+            observation = f"The mixed-track frequency profile changes around the {candidate['change_sample']/SAMPLE_RATE:.3f} s comparison position (distance {value:.3f}; review threshold {CONTINUITY_METHOD['selection_threshold']:.3f})."
+            interpretation = "Possible sound-content transition: listen to the selected interval and surrounding sound. Ordinary music, a new sound or recording processing can cause this pattern. This is a listening lead, not evidence of AI origin or an exact splice boundary."
+        elif category == "energy_change":
             label, unit = "Adjacent half-second RMS change", "dB"
             observation = f"Mixed-track RMS changes by {value:+.1f} dB across the {candidate['change_sample']/SAMPLE_RATE:.3f} s bin boundary."
             interpretation = "Listen for a recording-level or ambience transition. Speech onset, music and automatic gain changes can produce the same pattern."
@@ -137,6 +157,12 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                  "limitations": ["This interval is descriptive acoustic context, not a synthetic-voice finding or exact edit boundary."]}
         if "change_sample" in candidate:
             event["change_sample"] = candidate["change_sample"]
+        if category == "spectral_transition":
+            event["title"] = "Possible sound-content transition"
+            event["observations"].extend([
+                {"label": "Within-side frequency variation", "value": candidate["within_side_instability"], "unit": "distance (0–1)"},
+                {"label": "Absolute RMS change between comparison windows", "value": candidate["energy_change_db"], "unit": "dB"},
+            ])
         document["events"].append(event)
     return document
 
@@ -215,8 +241,8 @@ def spectrogram(pcm: np.ndarray, start: int, end: int, selected: tuple[int, int]
 
 
 def build_content(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict],
-                  make_asset: Callable, waveform: Callable) -> dict:
-    document = _base(pcm, mapping, source, voice_packets)
+                  make_asset: Callable, waveform: Callable, *, version: str = VERSION) -> dict:
+    document = _base(pcm, mapping, source, voice_packets, version=version)
     document["overview"] = {"energy": make_asset(energy_chart(document["bins"], len(pcm)), "image/png", width=960, height=280),
                             "spectrogram": make_asset(spectrogram(pcm, 0, len(pcm)), "image/png", width=960, height=320)}
     for event in document["events"]:
@@ -236,7 +262,8 @@ def verify_source_content(context: dict, *, pcm: np.ndarray, mapping: dict, sour
     """Recompute every descriptive value and pixel/clip hash from frozen PCM."""
     def expected_asset(data, media_type, **metadata):
         return {"sha256": hashlib.sha256(data).hexdigest(), "media_type": media_type, **metadata}
-    expected = build_content(pcm, mapping, source, voice_packets, expected_asset, waveform)
+    expected = build_content(pcm, mapping, source, voice_packets, expected_asset, waveform,
+                             version=context.get("method", {}).get("version"))
     def without_urls(value):
         if isinstance(value, dict):
             return {k: without_urls(v) for k,v in value.items() if k != "url"}

@@ -144,6 +144,23 @@ models:
     notes:
       - "Dependency-only entry: its memory is included in fused.opensdi. Build timm on meta with pretrained=False, remove only the unused classification head, and strictly assign local safetensors. No independent adapter loader or network loading."
 
+  - id: tidal.splice_v30_1
+    source:
+      type: local
+      path: weights/splice
+      produced_by: "Verified local mirror of the publisher's pinned vR.P.30.1 checkpoint"
+      repo: the-harsh-vardhan/TIDAL
+      revision: 6bc4c3fd066f13d614949db64eb7f1abdc912ada
+      files:
+        - {path: tidal-v30.1.pt, sha256: ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061, bytes: 97958262}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "Pinned publisher weight repository declares Apache-2.0. Training-source provenance is separate."}
+    footprint: {params_m: 24.4, fp32_mb: 94, activation_mb_per_item: 256, estimated: true}
+    devices: {cpu: ok, mps: unsupported, cuda: unsupported}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.splice:load_splice", pickle: true}
+    notes:
+      - "CPU float32, one 384-square response map; ResNet-34 U-Net with decoder attention. Local-only weights_only=True loader, digest and size checked before deserialization."
+
   - id: mesorch.full_98
     source:
       type: gdrive
@@ -449,6 +466,22 @@ models:
     licence: {spdx: MIT, class: commercial, notice: "HF model-card licence mit (base model microsoft/deberta-v3-large)"}
     footprint: {params_m: 434, fp32_mb: 1656, activation_mb_per_item: 400, estimated: true}
     load: {adapter_loader: "app.detectors.text.adapters.loaders:load_desklib"}
+
+  - id: hf.wasitaigenerated.text_small
+    source:
+      type: hf
+      repo: wasitaigeneratedcom/ai-text-detector-small
+      revision: f1795c86806e6838d4afa33d0b1427f8430c9615
+      files:
+        - {path: NOTICE, sha256: 4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57, bytes: 401}
+        - {path: config.json, sha256: deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3, bytes: 1146}
+        - {path: model.safetensors, sha256: 4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087, bytes: 1736113280}
+        - {path: serving_head.json, sha256: 098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab, bytes: 380}
+        - {path: tokenizer.json, sha256: 2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf, bytes: 8339875}
+        - {path: tokenizer_config.json, sha256: d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432, bytes: 532}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "Publisher checkpoint card declares Apache-2.0 and commercial use. Upstream MIT attributions in NOTICE."}
+    footprint: {params_m: 434, fp32_mb: 1656, activation_mb_per_item: 400, estimated: true}
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_four_class_text"}
 
   - id: local.desklib_ft_v2
     source:
@@ -895,6 +928,32 @@ detectors:
     fp_modes: ["regions on 4/100 authentic holdout images after the fixed image gate and production two-region cap; all 100 have regions without the image gate", "13/100 edited holdout images have zero retained overlap; unassessed content and low responses must not be labelled authentic"]
     citation: "FUSED released OpenSDI checkpoint, aonuzhdin/FUSED at b7dfe0cb2d2f8fc8fd9e6ebea5f7185cfa8e1af7; independent tensor interpreter and local evaluation in docs/fused-local-research.md."
     admission: {decision: pending, evidence: "Bounded numerical reference parity and predeclared holdout support limited local inspection only; no fitted weight, service admission, calibrated probability or accuracy guarantee. See docs/fused-local-research.md."}
+
+  - id: loc.splice
+    adapter: app.detectors.image.adapters.localisers:SpliceDetector
+    version: 0.1.0
+    name: Recompression consistency
+    modality: image
+    family: localiser
+    hypotheses: [H2_localised_manipulation]
+    models: [tidal.splice_v30_1]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    calibration: {method: none}
+    known_limitations:
+      - "This inspection check is assessed on lossless PNG splices. A highlight can also reflect ordinary image processing."
+      - "Native response cells above 0.70 must meet the frozen minimum-area rule. Small or weak edits can go unmarked."
+      - "The region response is not an authorship probability or a contribution to the whole-image estimate."
+    source_url: https://huggingface.co/the-harsh-vardhan/TIDAL/tree/6bc4c3fd066f13d614949db64eb7f1abdc912ada
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "Exact training source membership is not documented in the checkpoint release."
+    coverage_date: "Local TGIF2 source-paired checks, November 2026"
+    input_constraints: ["PNG, already oriented RGB, at least 64 px on each side, one 384-square CPU float32 input"]
+    fp_modes: ["Ordinary processing with local recompression differences; small edits may have insufficient map support"]
+    citation: "Publisher's TIDAL vR.P.30.1 checkpoint and local matched evaluation in docs/image-localizer-upgrade.md."
+    admission: {decision: pending, evidence: "Independent runtime parity and source-disjoint PNG splice evaluation are recorded in docs/image-localizer-upgrade.md."}
 
   - id: loc.mesorch
     adapter: app.detectors.image.adapters.localisers:MesorchDetector
@@ -1831,6 +1890,28 @@ detectors:
     admission: {decision: rejected, date: "2026-09-14", evidence: "A-1 audio admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-aud.mo_thecreator_w2v2.md): A3a / A3b not established (no audio LGO folds), A4 fail (A-bonafide, on its CI); out-of-fold AUC 0.7822 with vs 0.7904 without; decided before the lockbox run; automated record pending human review"}
 
   # ---------------------------------------------------------------- text
+  - id: txt.four_class
+    adapter: app.detectors.text.adapters.learned:FourClassTextDetector
+    version: 1.0.0
+    name: Tropa Mini text classifier
+    modality: text
+    family: text
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.wasitaigenerated.text_small]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 2.0
+    known_limitations: ["Research candidate. The aggregate combines raw generation and rewriting classes."]
+    source_url: https://huggingface.co/wasitaigeneratedcom/ai-text-detector-small
+    threat: [ai_text]
+    training_data: "Fine-tune of Desklib. Complete fine-tuning corpus not established."
+    coverage_date: "not established"
+    input_constraints: ["English prose; publisher recommends at least 50 words"]
+    contamination_sets: [liamdugan/raid]
+    fp_modes: ["short, simple learner writing; unfamiliar text domains"]
+    citation: "Pinned publisher checkpoint and docs/text-upgrade-evaluation.md"
+    admission: {decision: pending, evidence: "Paired document and email evaluation in progress"}
+
   - id: txt.desklib
     adapter: app.detectors.text.adapters.learned:DesklibDetector
     version: 0.4.0

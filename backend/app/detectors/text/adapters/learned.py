@@ -31,6 +31,7 @@ from app.detectors.text.classifier import (
     PRIMARY_BATCH,
     SECONDARY_BATCH,
     DesklibClassifier,
+    FourClassTextClassifier,
     SecondaryClassifier,
 )
 from app.detectors.text.extract import text_hash
@@ -50,6 +51,9 @@ class _SequenceClassifier(Detector):
     MODEL_ID: ClassVar[str]
     CHUNK_MAX_LEN: ClassVar[int] = 512
     BATCH: ClassVar[int] = PRIMARY_BATCH
+    SCORE_KIND: ClassVar[str] = "sigmoid output"
+    REFERENCE: ClassVar[str] = "Binary AI-text classifier; decision boundary at 0.5"
+    AI_SIDE: ClassVar[str] = "LLM-written"
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.MODEL_ID, self.BATCH, "token window",
@@ -81,7 +85,7 @@ class _SequenceClassifier(Detector):
                   for k, (p, (_, a, b), w) in enumerate(zip(p_chunks, chunks, words, strict=True))]
         aggregate = UnitScore("global", p_doc, "probability", quality={"chunks": float(len(chunks)), "sentences": float(len(sents)),
                                                                      "tokens": float(token_count), "token_windows": float(token_windows)})
-        side = "LLM-written" if p_doc >= 0.5 else "human-written"
+        side = self.AI_SIDE if p_doc >= 0.5 else "human-written"
         half = settings.text_window_sentences // 2
         input_windows = []
         for i, (source, score) in enumerate(zip(inputs, p_win, strict=True)):
@@ -92,10 +96,10 @@ class _SequenceClassifier(Detector):
                                   "token_coverage": window_coverage[i]})
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
-            observed=f"sigmoid output {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "
+            observed=f"{self.SCORE_KIND} {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "
                      f"windows of {settings.text_window_sentences} sentences scored. Document chunks cover all {token_count} content "
                      f"tokens in {token_windows} non-overlapping token window(s)",
-            reference="Binary AI-text classifier; decision boundary at 0.5",
+            reference=self.REFERENCE,
             reasoning=f"The classifier places the document on the {side} side of its decision boundary.",
             metrics={"chunks": float(len(chunks)), "sentences": float(len(sents)), "tokens": float(token_count),
                      "token_windows": float(token_windows)}, model_revisions=revisions(ctx, self.MODEL_ID),
@@ -119,6 +123,20 @@ class DesklibFinetuneDetector(DesklibDetector):
     MODEL_ID = "local.desklib_ft_v2"
     spec = text_spec("txt.desklib_ft_v2", "desklib-ft-v2 (Veritas fine-tune, DeBERTa-v3-large)", InputUnit.SENTENCES,
                      model_ids=(MODEL_ID,), timeout_s=120.0, version="0.4.0")
+
+
+class FourClassTextDetector(_SequenceClassifier):
+    MODEL_ID = "hf.wasitaigenerated.text_small"
+    CHUNK_MAX_LEN = PRIMARY_CHUNK_MAX_LEN
+    SCORE_KIND = "AI authorship or rewriting response"
+    REFERENCE = "Combined response for generation and AI rewriting. The 0.5 reference separates raw score directions."
+    AI_SIDE = "AI-written or AI-rewritten"
+    spec = text_spec("txt.four_class", "Tropa Mini text classifier", InputUnit.SENTENCES,
+                     model_ids=(MODEL_ID,), timeout_s=120.0, version="1.0.0")
+
+    def backend(self, ctx: RunContext) -> FourClassTextClassifier:
+        tokenizer, model = ctx.lease.get(self.MODEL_ID).obj
+        return FourClassTextClassifier(tokenizer, model, ctx.device)
 
 
 class HelloSimpleAIDetector(_SequenceClassifier):

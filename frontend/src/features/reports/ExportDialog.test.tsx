@@ -42,6 +42,23 @@ beforeEach(() => {
 afterEach(cleanup)
 
 describe('self-service exports', () => {
+  it.each(['PDF', 'ZIP'])('regenerates retired r68 reports through the existing %s action', async (format) => {
+    const old = report({ id: 'old-report', display_id: 'R-old', template_set: 'veritas-report-2.0.r68', downloadable: false })
+    const current = report({ id: 'new-report', display_id: 'R-new', template_set: 'veritas-report-2.0.r69', downloadable: true })
+    mocked.reports = [old]
+    mocked.generateReport.mockResolvedValue(current)
+    show(analysis(), true)
+    expect(screen.getByText('Generate a new report')).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Download R-old' })).toBeNull()
+    if (format === 'ZIP') fireEvent.click(screen.getByRole('radio', { name: /Evidence ZIP/ }))
+    fireEvent.click(screen.getByRole('button', { name: format === 'ZIP' ? 'Download evidence ZIP' : 'Download report' }))
+    await waitFor(() => expect(mocked.generateReport).toHaveBeenCalledWith('analysis-1', 'forensic', expect.any(Function), format === 'ZIP'))
+    if (format === 'ZIP') await waitFor(() => expect(mocked.generatePackage).toHaveBeenCalledWith('analysis-1', 'new-report', 'draft', false, expect.any(Function)))
+    else await waitFor(() => expect(mocked.downloadReport).toHaveBeenCalledWith(current))
+    expect(mocked.downloadReport).not.toHaveBeenCalledWith(old)
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+
   it('downloads a report without showing the examination workflow or signed column', async () => {
     mocked.reports = [report()]
     show(analysis(), true)

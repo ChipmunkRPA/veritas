@@ -28,6 +28,7 @@ from typing import Any
 
 from app.core import coords, effect
 from app.engine import card_copy
+from app.engine.customer_assessment import text_reference_rate
 from app.engine.detector import ON_THIS_SERVER, of_the_server
 from app.engine.fusion import abstain, decisive
 from app.engine.fusion.decisive import OVERRIDE_PROBABILITY, WATERMARK_DETECTORS
@@ -514,6 +515,8 @@ def _per_100(rate: float) -> str:
 
 
 def _error_rate_sentence(inp: SynthesisInput) -> str:
+    if line := text_reference_rate(inp.kind, inp.condition_profile, inp.calibration):
+        return line
     media = MEDIA.get(inp.kind, ("file", "files"))[1]
     contexts = _contexts(inp.kind, inp.condition_profile or {})
     rows = [r for c in inp.calibration if str(c.get("subject", "")).startswith("fuser-") for r in c.get("error_rates") or []]

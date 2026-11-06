@@ -141,6 +141,13 @@ def public_view(snapshot: ReportSnapshot, original: dict[str, Any]) -> dict[str,
             if isinstance(ref, dict) and str(ref.get('href', '')).startswith(('#sig-check-', '#det-check-')):
                 ref['label'] = _text(ref.get('label'), names)
     summary = out.get('summary') or {}
+    # Abstention diagnostics are generated from skipped-check names. They are
+    # separate from finding cards and also appear when no statistical signal ran.
+    for field in ('insufficient', 'text'):
+        if field in summary:
+            summary[field] = _machine(summary[field], names)
+    if 'reasons' in out:
+        out['reasons'] = _machine(out['reasons'], names)
     for row in summary.get('reasons') or []:
         if families.get(str(row.get('id'))) not in _SOURCE_FAMILIES:
             for field in ('title', 'text'):

@@ -179,6 +179,7 @@ class BillingOrderRow(Base):
     analysis_id: Mapped[str | None] = mapped_column(String(36), unique=True, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     paid_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    purchase_acknowledgement: Mapped[dict | None] = mapped_column(JSON, nullable=True)
 
 
 class BillingEventRow(Base):

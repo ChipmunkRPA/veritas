@@ -110,6 +110,9 @@ class DetectorRegistry:
             raise KeyError(f"unknown detector {detector_id!r}")
         policy = self.policy
         reasons: list[str] = []
+        text_candidate = settings.text_detector_mode == "candidate"
+        if text_candidate and detector_id in {TEXT_FINETUNE_DETECTOR, "txt.desklib"}:
+            reasons.append("retained for text rollback; local candidate is selected")
         if settings.audio_detector_mode == "candidate" and detector_id in {"aud.gustking_xlsr", "aud.mo_thecreator_w2v2"}:
             reasons.append("retained for audio rollback; local candidate is selected")
         if detector_id in policy.deny_detectors:
@@ -122,7 +125,7 @@ class DetectorRegistry:
             elif not policy.allows_class(model.licence.class_) and not allow_listed:
                 reasons.append(f"model {model_id} has licence class {model.licence.class_}, denied by the "
                                f"{policy.label} licence policy")
-        if not det.default_enabled and not allow_listed:
+        if not det.default_enabled and not allow_listed and not (text_candidate and detector_id == "txt.four_class"):
             reasons.append("not default-enabled and not in allow_detectors")
         if det.superseded_by and self._supersedes(det.superseded_by):
             reasons.append(f"superseded by {det.superseded_by}, which is enabled and installed")
@@ -276,7 +279,8 @@ def build_registry(manifest_path: Path | str | None = None, policy: str | Mappin
     return DetectorRegistry(manifest, parse_policy(settings.licence_policy if policy is None else policy))
 
 
-TEXT_PRIMARY_DETECTORS = ("txt.desklib_ft_v2", "txt.desklib")  # the fine-tune first: it serves when enabled and installed (D-34)
+TEXT_FINETUNE_DETECTOR = "txt.desklib_ft_v2"
+TEXT_PRIMARY_DETECTORS = ("txt.four_class", TEXT_FINETUNE_DETECTOR, "txt.desklib")
 
 
 def text_classifier_status(registry: DetectorRegistry, profile: Profile | str) -> dict[str, Any]:
@@ -292,7 +296,7 @@ def text_classifier_status(registry: DetectorRegistry, profile: Profile | str) -
         return det is not None and all((m := registry.manifest.model(mid)) is not None and installed(m)
                                        for mid in registry.required_models(det))
 
-    fine_tune_id = TEXT_PRIMARY_DETECTORS[0]
+    fine_tune_id = TEXT_FINETUNE_DETECTOR
     serving = next((d for d in TEXT_PRIMARY_DETECTORS if d in enabled and has_files(d)), None)
     known = registry.manifest.detector(fine_tune_id) is not None
     fine_tune = ("not_enabled" if not known or not registry.decision(fine_tune_id).enabled

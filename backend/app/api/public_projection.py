@@ -171,7 +171,7 @@ def localisation_reference(detector_id: str | None) -> str | None:
     transcription of the source. Do not apply this rule to arbitrary detectors
     or provenance records whose observed values can be user evidence.
     """
-    if not isinstance(detector_id, str) or detector_id.split(':', 1)[0] not in {'loc.mesorch', 'loc.radar', 'loc.fused'}:
+    if not isinstance(detector_id, str) or detector_id.split(':', 1)[0] not in {'loc.mesorch', 'loc.radar', 'loc.fused', 'loc.splice'}:
         return None
     return ('An uncalibrated local editing response. The operating threshold and measured regions are recorded '
             'with this check. A flagged region is an inspection candidate, not proof of AI editing.')

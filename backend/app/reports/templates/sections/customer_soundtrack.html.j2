@@ -1,0 +1,8 @@
+{% set soundtrack = v.get('customer_assessment', {}).get('soundtrack') %}
+{% if soundtrack %}
+<div class="finding-inference">
+<p class="customer-scope"><strong>Speech in this soundtrack.</strong> {{ soundtrack.headline }}.{% if soundtrack.confidence_pct is not none %} Reference-calibrated estimate <strong>{{ '%g' | format(soundtrack.confidence_pct) }}%</strong>.{% endif %}
+{% if v.get('customer_soundtrack_link') %} <a href="{{ v.customer_soundtrack_link.href }}">{{ v.customer_soundtrack_link.label }}</a>.{% endif %}</p>
+<p class="caption">{{ soundtrack.limitation }}</p>
+</div>
+{% endif %}

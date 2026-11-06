@@ -27,7 +27,14 @@ def main():
     parser.add_argument('--mode', choices=['legacy', 'candidate'], required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--cases', nargs='+', help='Run only named engineering cases')
+    parser.add_argument('--video-control', type=Path, help='Use a speaking video as the video case in candidate mode')
+    parser.add_argument('--video-evidence-only', action='store_true', help='Verify a video evidence fixture without voice-specific assertions')
+    parser.add_argument('--device', choices=['cpu', 'mps'], default='cpu')
     args = parser.parse_args()
+    if args.video_control is not None and args.mode != 'candidate':
+        parser.error('--video-control requires --mode candidate')
+    if args.video_evidence_only and (args.video_control is None or args.cases != ['video']):
+        parser.error('--video-evidence-only requires --video-control and --cases video')
     folder = args.output.resolve()
     folder.mkdir(parents=True, exist_ok=True)
     data = folder/'data'
@@ -37,7 +44,7 @@ def main():
         VERITAS_BILLING_MODE='test', VERITAS_STRIPE_SECRET_KEY='sk_test_isolated_validation',
         VERITAS_STRIPE_WEBHOOK_SECRET='whsec_isolated_validation', VERITAS_API_KEY=secrets.token_hex(32),
         VERITAS_API_KEY_PEPPER=secrets.token_hex(32), VERITAS_SIGNING_KEY=secrets.token_hex(32),
-        VERITAS_SINGLE_USER='false', VERITAS_DEVICE='cpu', VERITAS_OFFLINE='true',
+        VERITAS_SINGLE_USER='false', VERITAS_DEVICE=args.device, VERITAS_OFFLINE='true',
         VERITAS_JOB_TIMEOUT_S='900', VERITAS_MIN_FREE_BYTES='0', VERITAS_RUN_WORKER='true')
     import torch
     torch.set_num_threads(4)
@@ -81,14 +88,16 @@ def main():
         source, rate = sf.read(cases[2]['path'], dtype='float32')
         sf.write(folder/'long.wav', np.tile(source, 3), rate, subtype='FLOAT')
         sf.write(folder/'silence.wav', np.zeros(64000, np.float32), 16000, subtype='FLOAT')
-        # Static slate + real test speech; a plumbing fixture, not a video accuracy test.
-        subprocess.run(['ffmpeg', '-nostdin', '-loglevel', 'error', '-f', 'lavfi', '-i',
-                        'color=c=0x254d42:s=640x360:r=25:d=4', '-i', str(cases[2]['path']),
-                        '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'pcm_s16le', '-shortest',
-                        str(folder/'speech-video.mov')], check=True)
+        video = args.video_control.resolve() if args.video_control else folder/'speech-video.mov'
+        if not args.video_control:
+            # Static slate + real test speech; a plumbing fixture, not a video accuracy test.
+            subprocess.run(['ffmpeg', '-nostdin', '-loglevel', 'error', '-f', 'lavfi', '-i',
+                            'color=c=0x254d42:s=640x360:r=25:d=4', '-i', str(cases[2]['path']),
+                            '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'pcm_s16le', '-shortest',
+                            str(video)], check=True)
         cases += [{'name': 'long', 'kind': 'audio', 'path': folder/'long.wav'},
                   {'name': 'silence', 'kind': 'audio', 'path': folder/'silence.wav'},
-                  {'name': 'video', 'kind': 'video', 'path': folder/'speech-video.mov'}]
+                  {'name': 'video', 'kind': 'video', 'path': video}]
     if args.cases:
         assert set(args.cases) <= {c['name'] for c in cases}
         cases = [c for c in cases if c['name'] in args.cases]
@@ -136,7 +145,9 @@ def main():
             signals = result['signals']
             primary = next((s for s in signals if s['detector_id'] == 'aud.pella_v2'), None)
             screen = primary['details'].get('audio_screening') if primary else None
-            if args.mode == 'candidate':
+            if args.video_evidence_only:
+                assert result['kind'] == 'video'
+            elif args.mode == 'candidate':
                 assert not any(s['detector_id'] == 'aud.gustking_xlsr' for s in signals)
                 if case['name'] not in ('silence',):
                     assert screen, 'Real candidate did not run'
@@ -162,6 +173,18 @@ def main():
             (case_folder/'api.json').write_bytes(detail.content)
             # Complete export, evidence asset/range, PDF, signature and package correspondence.
             check = exports(client, aid, case_folder, default_store(), public_key)
+            if args.mode == 'candidate' and case['kind'] == 'video' and not args.video_evidence_only:
+                soundtrack = detail.json()['customer_assessment']['soundtrack']
+                assert soundtrack == json.loads((case_folder/'export.json').read_bytes())['customer_assessment']['soundtrack']
+                assert soundtrack['direction'] == screen['decision']
+                import pymupdf
+
+                with pymupdf.open(case_folder/'report.pdf') as report:
+                    cover = ' '.join(report[0].get_text().split())
+                    assert soundtrack['headline'] in cover
+                    if soundtrack['confidence_pct'] is not None:
+                        assert f"{soundtrack['confidence_pct']:g}%" in cover
+                check['soundtrack'] = soundtrack
             check.update(case=case['name'], seconds=round(time.monotonic()-started, 2),
                          decision=result['decision']['code'], probability_ai=result['decision']['probability_ai_calibrated'],
                          payment_before_analysis=True, candidate_calibration=screen)

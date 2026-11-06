@@ -1,0 +1,24 @@
+title = "Chipmunk Verify secret scanning"
+
+[extend]
+useDefault = true
+
+# Exact public identifiers reviewed during the initial source-release audit.
+# These exceptions do not permit credentials elsewhere in these files.
+[[allowlists]]
+description = "Video detector identifier, not an API key"
+condition = "AND"
+paths = ['''(^|/)backend/app/engine/stages/video\.py$''']
+regexes = ['''^vid\.frames\.dfdc_b7$''']
+
+[[allowlists]]
+description = "Documented generated key filename, not key material"
+condition = "AND"
+paths = ['''(^|/)docs/runbook\.md$''']
+regexes = ['''^instance_ed25519\.pem$''']
+
+[[allowlists]]
+description = "Demo step identifier, not an API key"
+condition = "AND"
+paths = ['''(^|/)frontend/src/demo/steps\.ts$''']
+regexes = ['''^img2-provenance$''']

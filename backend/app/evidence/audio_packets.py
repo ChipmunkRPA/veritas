@@ -27,7 +27,7 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
 SCHEMA = "chipmunk.audio-evidence/1"
-VERSION = "audio-evidence-2"
+VERSION = "audio-evidence-3"
 CREATOR = "audio-evidence-packets/1"
 MAX_PACKETS = 6
 THRESHOLD = 0.5
@@ -65,13 +65,15 @@ def _interval(value: Any, samples: int) -> tuple[int, int]:
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
-    if (document.get("schema") != SCHEMA or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
+    if (document.get("schema") != SCHEMA or document.get("version") not in {"audio-evidence-1", "audio-evidence-2", VERSION} or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
         raise PacketIntegrityError("Audio evidence is not bound to its frozen result and source")
     validate_content(document)
-    if document.get("version") == VERSION and not document.get("acoustic_context"):
+    if document.get("version") in {"audio-evidence-2", VERSION} and not document.get("acoustic_context"):
         raise PacketIntegrityError("Current audio evidence lacks frozen acoustic context")
+    if document.get("version") == VERSION and document["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2":
+        raise PacketIntegrityError("Current audio evidence lacks continuity measurements")
 
 
 def validate_content(document: dict[str, Any]) -> None:

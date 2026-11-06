@@ -8,6 +8,24 @@ from __future__ import annotations
 import math
 import re
 
+CONTINUITY_METHOD = {
+    "side_samples": 8000,
+    "step_samples": 4000,
+    "fft_samples": 2048,
+    "fft_hop_samples": 512,
+    "frequency_bands": 24,
+    "frequency_range_hz": [60, 7800],
+    "band_spacing": "geometric",
+    "profile": "median Hann-window power per band, normalized across bands",
+    "distance": "square-root Jensen-Shannon distance, base 2",
+    "maximum_within_side_instability": 0.20,
+    "minimum_side_rms_dbfs": -60.0,
+    "selection_threshold": 0.534556,
+    "selection_comparison": "strictly greater than",
+    "scope": "Mixed-track frequency content; no separated background or AI-origin classification.",
+    "fft_support": "Full 2048-sample frames at 512-sample hops inside each half-second side; final 320 samples of each side are outside FFT support.",
+}
+
 
 def validate_acoustic_context(context: dict, *, source: dict, voice_packets: list[dict]) -> None:
     try:
@@ -36,8 +54,9 @@ def _validate(context, source, voice_packets):
     def sha(value):
         return bool(re.fullmatch(r"[a-f0-9]{64}", str(value)))
 
-    require(context["schema"] == "chipmunk.acoustic-context/1" and context["status"] == "ready",
+    require(context["schema"] in {"chipmunk.acoustic-context/1", "chipmunk.acoustic-context/2"} and context["status"] == "ready",
             "Unsupported acoustic-context schema or status")
+    current = context["schema"] == "chipmunk.acoustic-context/2"
     binding = context["source"]
     require(binding == {key: source[key] for key in ("sha256", "pcm_sha256", "samples", "sample_rate", "coordinate_space")}
             and all(sha(binding[key]) for key in ("sha256", "pcm_sha256")), "Acoustic context uses a different source input")
@@ -45,7 +64,7 @@ def _validate(context, source, voice_packets):
     require(integer(samples) and 0 < samples <= 600 * 16000 and source["sample_rate"] == 16000
             and source["coordinate_space"] == "analysed-mono-pcm", "Invalid acoustic PCM coordinates")
     method = context["method"]
-    require(method["version"] == "mixed-acoustics-1" and method["frame_samples"] == 8000
+    require(method["version"] == ("mixed-acoustics-2" if current else "mixed-acoustics-1") and method["frame_samples"] == 8000
             and method["thresholds"] == {"energy_change_db": 12.0, "near_silence_dbfs": -60.0,
                 "clipping_absolute_amplitude": 0.999, "clipping_fraction": 0.001}
             and method["spectral_bands_hz"] == {"low": [0, 250], "high": [4000, 8000]}
@@ -95,6 +114,39 @@ def _validate(context, source, voice_packets):
                 <= sum(r["end_sample"] - r["start_sample"] for r in bins if r["rms_dbfs"] <= -59.999999),
             "Acoustic summary differs from measured coverage")
     require(integer(context["omitted_events"]) and context["omitted_events"] >= 0, "Invalid acoustic omission count")
+    transitions = {}
+    if current:
+        require(method["continuity"] == CONTINUITY_METHOD, "Unsupported continuity derivation")
+        rows = context["continuity_windows"]
+        require(isinstance(rows, list) and len(rows) <= max(0, (samples - 16000) // 4000 + 1), "Invalid continuity window count")
+        previous_boundary = -1
+        eligible = []
+        for row in rows:
+            boundary = row["boundary_sample"]
+            a, b = interval(row)
+            require(integer(boundary) and boundary % 4000 == 0 and previous_boundary < boundary
+                    and a == boundary - 8000 and b == boundary + 8000 and seconds(row["boundary_s"], boundary),
+                    "Continuity comparison differs from source coordinates")
+            previous_boundary = boundary
+            require(numeric(row["energy_change_db"], 0, 120)
+                    and all(numeric(row[k], 0, 1) for k in ("spectral_distance", "within_side_instability", "stationary_spectral_distance")),
+                    "Invalid continuity measurements")
+            gated = row["stationary_spectral_distance"]
+            require((gated == 0 and (row["within_side_instability"] >= .199999 or row["spectral_distance"] == 0))
+                    or (same(gated, row["spectral_distance"]) and row["within_side_instability"] <= .200001),
+                    "Continuity stability condition differs")
+            if gated > CONTINUITY_METHOD["selection_threshold"]:
+                eligible.append(row)
+        for row in sorted(eligible, key=lambda r: (-r["stationary_spectral_distance"], r["boundary_sample"])):
+            if not any(abs(row["boundary_sample"] - other) < 16000 for other in transitions):
+                transitions[row["boundary_sample"]] = row
+            if len(transitions) >= 4:
+                break
+        require(integer(context["omitted_continuity_windows"])
+                and context["omitted_continuity_windows"] == len(eligible) - len(transitions),
+                "Continuity omission count differs")
+    else:
+        require("continuity_windows" not in context and "continuity" not in method, "Legacy acoustics cannot contain new continuity fields")
 
     def image(asset, height):
         require(asset["media_type"] == "image/png" and sha(asset["sha256"])
@@ -103,11 +155,12 @@ def _validate(context, source, voice_packets):
     require(set(context["overview"]) == {"energy", "spectrogram"}, "Acoustic overview lacks required source plots")
     image(context["overview"]["energy"], 280)
     image(context["overview"]["spectrogram"], 320)
-    require(isinstance(context["events"], list) and len(context["events"]) <= 8, "Too many acoustic evidence events")
+    require(isinstance(context["events"], list) and len(context["events"]) <= (12 if current else 8), "Too many acoustic evidence events")
     previous = None
+    seen_transitions = set()
     for index, event in enumerate(context["events"], 1):
         require(event["id"] == f"B{index:02d}" and event["evidence_type"] == "descriptive"
-                and event["category"] in {"near_silence", "energy_change", "clipping"}, "Invalid acoustic event identity or semantics")
+                and event["category"] in ({"near_silence", "energy_change", "clipping", "spectral_transition"} if current else {"near_silence", "energy_change", "clipping"}), "Invalid acoustic event identity or semantics")
         a, b = interval(event["interval"])
         ca, cb = interval(event["context_interval"])
         order = (a, b, event["category"])
@@ -118,11 +171,20 @@ def _validate(context, source, voice_packets):
         require(event["related_voice_packet_ids"] == [p["id"] for p in voice_packets
                 if p["interval"]["start_sample"] < b and p["interval"]["end_sample"] > a], "Acoustic event voice references differ")
         selected = [row for row in bins if a <= row["start_sample"] < b]
-        require(bool(selected) and selected[0]["start_sample"] == a and selected[-1]["end_sample"] == b,
+        require(event["category"] == "spectral_transition" or (bool(selected) and selected[0]["start_sample"] == a and selected[-1]["end_sample"] == b),
                 "Acoustic event does not align to measured bins")
         value = event["observations"][0]["value"]
         require(numeric(value, -120, 120), "Invalid acoustic event measurement")
-        if event["category"] == "near_silence":
+        if event["category"] == "spectral_transition":
+            boundary = event["change_sample"]
+            row = transitions.get(boundary)
+            require(row is not None and boundary not in seen_transitions and a == row["start_sample"] and b == row["end_sample"]
+                    and same(value, row["spectral_distance"]) and len(event["observations"]) == 3
+                    and same(event["observations"][1]["value"], row["within_side_instability"])
+                    and same(event["observations"][2]["value"], row["energy_change_db"]),
+                    "Sound-content transition differs from its comparison windows")
+            seen_transitions.add(boundary)
+        elif event["category"] == "near_silence":
             require(b - a >= 8000 and all(row["rms_dbfs"] <= -59.999999 for row in selected)
                     and same(value, min(row["rms_dbfs"] for row in selected)), "Quiet event differs from measured energy")
         elif event["category"] == "clipping":
@@ -141,3 +203,4 @@ def _validate(context, source, voice_packets):
                     and asset["channels"] == 1 and asset["samples"] == end - start, "Acoustic clip differs from its sample interval")
         image(event["artifacts"]["waveform"], 280)
         image(event["artifacts"]["spectrogram"], 320)
+    require(seen_transitions == set(transitions), "Selected continuity leads are missing")

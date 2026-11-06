@@ -254,14 +254,14 @@ export default function AnalysisWorkspace() {
     <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />
   ) : (
     <div className="mt-12 space-y-12" data-testid="v2-result">
-      {findings.isFetched
-        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []} onExpert={view === 'plain' ? () => chooseView('expert') : undefined} extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
-        : <section id="section-summary" className="scroll-mt-14 border-b border-border pb-8"><SkeletonRows /></section>}
-      {expertInvitation}
       {!evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain={view === 'plain'} />}
       {a.kind === 'image' && <ImageEvidenceCards analysisId={a.id} token={t} mediaReady={tokenReady} />}
       {(a.kind === 'video' || a.kind === 'audio' || a.kind === 'document') && <MultimediaEvidenceCards analysisId={a.id} kind={a.kind} token={t} mediaReady={tokenReady} />}
       {evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain />}
+      {findings.isFetched
+        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []} onExpert={view === 'plain' ? () => chooseView('expert') : undefined} extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
+        : <section id="section-summary" className="scroll-mt-14 border-b border-border pb-8"><SkeletonRows /></section>}
+      {expertInvitation}
       {view === 'plain' && (
         <section data-testid="plain-more" aria-labelledby="plain-more-heading" className="border-t border-border pt-8">
           <h2 id="plain-more-heading" className="m-0 eyebrow">Full analysis record</h2>

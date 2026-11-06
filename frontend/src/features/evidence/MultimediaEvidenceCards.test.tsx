@@ -77,6 +77,20 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Playback timing is not verified/)).toBeTruthy()
   })
 
+  it('shows the interval clock and labels before, during and after images', () => {
+    const set = structuredClone(video)
+    const item = set.packets[0], frame = item.frames[0]
+    item.claim_scope = 'sampled_window'
+    const sample = { frame_index: 6, pts: 12000, score: .7 }
+    item.face_interval = { start_stream_s: 12, end_stream_s: 13, lift: .28, samples: { before: [], during: [sample], after: [] } }
+    item.frames = (['before', 'during', 'after'] as const).map((role, index) => ({ ...frame, id: `V01.${index+1}`, interval_role: role }))
+    show(set)
+    expect(screen.getByText('12.000 s–13.000 s')).toBeTruthy()
+    for (const role of ['Before', 'During', 'After']) {
+      expect(screen.getAllByText(new RegExp(`${role} flagged range`, 'i'))).toHaveLength(2)
+    }
+  })
+
   it('selects a visible video moment using its saved playback clock and shows its source inspection area', () => {
     show(video)
     const player = screen.getByLabelText('Original video evidence playback') as HTMLVideoElement

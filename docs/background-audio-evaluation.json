@@ -1,0 +1,569 @@
+{
+  "date": "2026-11-04",
+  "scope": "Background and mixed-track acoustic research; a descriptive transition lead is integrated for new analyses. No environmental AI-origin classifier was enabled.",
+  "production": {
+    "audio_version": "audio-evidence-3",
+    "video_version": "video-evidence-5",
+    "acoustic_schema": "chipmunk.acoustic-context/2",
+    "public_title": "Possible sound-content transition",
+    "existing_descriptive_events_preserved": 8,
+    "additional_distinct_leads_maximum": 4,
+    "legacy_acoustics_recomputed_with_original_method": true,
+    "authenticity_score_changed": false,
+    "source_separation_performed": false,
+    "time_support": "Half a second on either side of a comparison position on a 0.25-second grid; not an exact edit boundary. Spectral support and incomplete edge support are declared in method metadata."
+  },
+  "first_study": {
+    "calibration_recording_or_location_groups": 34,
+    "holdout_groups": 66,
+    "source_audio_files": 300,
+    "derived_cases": 800,
+    "frozen_threshold": 0.534556,
+    "holdout_original_flags": {
+      "energy_baseline": 1,
+      "continuity": 3
+    },
+    "holdout_splices_localized": {
+      "energy_baseline": 0,
+      "continuity": 9,
+      "n": 66
+    },
+    "limitations": [
+      "Donor pairs form cycles within categories, so the 66 splice cases are not independent.",
+      "An initially chosen 15-percentage-point admission gate was not passed. That frozen result is retained.",
+      "Stable air-conditioning accounted for 8 of 9 localized edits; music contributed 2 of 3 original-clip flags."
+    ]
+  },
+  "fresh_confirmation": {
+    "new_recording_or_location_groups": 76,
+    "disjoint_source_pairs": 38,
+    "derived_cases": 190,
+    "threshold_or_measurement_retuned": false,
+    "frozen_result": {
+      "cohorts": {
+        "air_conditioner": {
+          "crossfade_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 2,
+            "new_flags": 1,
+            "new_localized": 1
+          },
+          "gain_only": {
+            "baseline_flags": 2,
+            "baseline_localized": 0,
+            "n": 2,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 2,
+            "new_flags": 1,
+            "new_localized": 1
+          },
+          "original": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 4,
+            "new_flags": 0,
+            "new_localized": 0
+          }
+        },
+        "all": {
+          "crossfade_splice": {
+            "baseline_flags": 3,
+            "baseline_localized": 2,
+            "n": 38,
+            "new_flags": 9,
+            "new_localized": 7
+          },
+          "gain_only": {
+            "baseline_flags": 20,
+            "baseline_localized": 0,
+            "n": 38,
+            "new_flags": 1,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 3,
+            "baseline_localized": 2,
+            "n": 38,
+            "new_flags": 9,
+            "new_localized": 7
+          },
+          "original": {
+            "baseline_flags": 3,
+            "baseline_localized": 0,
+            "n": 76,
+            "new_flags": 3,
+            "new_localized": 0
+          }
+        },
+        "engine": {
+          "crossfade_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 5,
+            "new_localized": 5
+          },
+          "gain_only": {
+            "baseline_flags": 8,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 5,
+            "new_localized": 5
+          },
+          "original": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 24,
+            "new_flags": 0,
+            "new_localized": 0
+          }
+        },
+        "home": {
+          "crossfade_splice": {
+            "baseline_flags": 3,
+            "baseline_localized": 2,
+            "n": 6,
+            "new_flags": 1,
+            "new_localized": 1
+          },
+          "gain_only": {
+            "baseline_flags": 3,
+            "baseline_localized": 0,
+            "n": 6,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 3,
+            "baseline_localized": 2,
+            "n": 6,
+            "new_flags": 1,
+            "new_localized": 1
+          },
+          "original": {
+            "baseline_flags": 3,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 0,
+            "new_localized": 0
+          }
+        },
+        "music": {
+          "crossfade_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 2,
+            "new_localized": 0
+          },
+          "gain_only": {
+            "baseline_flags": 6,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 1,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 2,
+            "new_localized": 0
+          },
+          "original": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 24,
+            "new_flags": 3,
+            "new_localized": 0
+          }
+        },
+        "outdoor": {
+          "crossfade_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 6,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "gain_only": {
+            "baseline_flags": 1,
+            "baseline_localized": 0,
+            "n": 6,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "hard_splice": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 6,
+            "new_flags": 0,
+            "new_localized": 0
+          },
+          "original": {
+            "baseline_flags": 0,
+            "baseline_localized": 0,
+            "n": 12,
+            "new_flags": 0,
+            "new_localized": 0
+          }
+        }
+      },
+      "deployment_eligible": false,
+      "eligible_as_ai_origin_detector": false,
+      "eligible_as_manual_review_lead": false,
+      "manifest_sha256": "f50da3a0fcb240b7994fce330deacd692b2090ee2c5bb2dc692b871e20419af4",
+      "paired_localized_recall_difference_ci95": [
+        0.0,
+        0.263158
+      ],
+      "protocol_sha256": "838bdeae7bd5d3a402bd54b9becf33517a89cbb6cb04c6d30b80dc3797a67703",
+      "scores_sha256": "7b5ccb614fd0c40cc550d0665b9a372799e435f4eb301719bfc8795cfdeee432",
+      "source_group_overlap_with_first_study": [],
+      "threshold": 0.534556,
+      "untouched_control_fpr_cluster_ci95": [
+        0.0,
+        0.105263
+      ],
+      "untouched_pair_any_false_flag_wilson95": {
+        "high": 0.172855,
+        "low": 0.014554
+      }
+    },
+    "product_scope_supplement": {
+      "additional_localized_fraction_ci95": [
+        0.052632,
+        0.289474
+      ],
+      "additional_original_flag_fraction_ci95": [
+        0.0,
+        0.105263
+      ],
+      "analysis": "Post-result supplemental product-scope comparison; does not replace the frozen preregistered outcome.",
+      "claim": "Possible sound-content transition for listening review; no AI-origin or exact splice proof.",
+      "counts": {
+        "crossfade_splice": {
+          "baseline_flags": 3,
+          "baseline_localized": 2,
+          "combined_flags": 11,
+          "combined_localized": 8,
+          "n": 38,
+          "selected_flags": 9,
+          "selected_localized": 7
+        },
+        "gain_only": {
+          "baseline_flags": 20,
+          "baseline_localized": 0,
+          "combined_flags": 21,
+          "combined_localized": 0,
+          "n": 38,
+          "selected_flags": 1,
+          "selected_localized": 0
+        },
+        "hard_splice": {
+          "baseline_flags": 3,
+          "baseline_localized": 2,
+          "combined_flags": 11,
+          "combined_localized": 8,
+          "n": 38,
+          "selected_flags": 9,
+          "selected_localized": 7
+        },
+        "original": {
+          "baseline_flags": 3,
+          "baseline_localized": 0,
+          "combined_flags": 6,
+          "combined_localized": 0,
+          "n": 76,
+          "selected_flags": 3,
+          "selected_localized": 0
+        }
+      },
+      "manifest_sha256": "f50da3a0fcb240b7994fce330deacd692b2090ee2c5bb2dc692b871e20419af4",
+      "product_selection": "At most four strongest one-second supports, positions at least one second apart; existing energy leads preserved.",
+      "scores_sha256": "7b5ccb614fd0c40cc550d0665b9a372799e435f4eb301719bfc8795cfdeee432"
+    },
+    "interpretation": "The replacement comparison lower confidence limit is zero. Additive review preserves energy leads and finds six additional known edit locations, with three additional unchanged-clip flags (all music). This additive scope was explicitly evaluated after the frozen follow-up outcome; it is not represented as a preregistered success."
+  },
+  "environmental_origin_research": {
+    "checkpoint": "Official EnvSDD TTA AASIST baseline",
+    "results": {
+      "auc_real_vs_all_generated": 0.904419,
+      "calibration_test_pcm_overlap": [],
+      "commercial_weights_license_established": false,
+      "counts": {
+        "ata": {
+          "flagged": 62,
+          "n": 64,
+          "rate": 0.96875,
+          "wilson_ci95": {
+            "high": 0.991388,
+            "low": 0.893027
+          }
+        },
+        "real": {
+          "flagged": 8,
+          "n": 64,
+          "rate": 0.125,
+          "wilson_ci95": {
+            "high": 0.227746,
+            "low": 0.064722
+          }
+        },
+        "tta_unseen": {
+          "flagged": 42,
+          "n": 64,
+          "rate": 0.65625,
+          "wilson_ci95": {
+            "high": 0.760769,
+            "low": 0.534036
+          }
+        }
+      },
+      "datasets": {
+        "Clotho": {
+          "ata": {
+            "flagged": 30,
+            "n": 32,
+            "rate": 0.9375
+          },
+          "real": {
+            "flagged": 5,
+            "n": 32,
+            "rate": 0.15625
+          },
+          "tta_unseen": {
+            "flagged": 21,
+            "n": 32,
+            "rate": 0.65625
+          }
+        },
+        "DCASE2023Task7": {
+          "ata": {
+            "flagged": 32,
+            "n": 32,
+            "rate": 1.0
+          },
+          "real": {
+            "flagged": 3,
+            "n": 32,
+            "rate": 0.09375
+          },
+          "tta_unseen": {
+            "flagged": 21,
+            "n": 32,
+            "rate": 0.65625
+          }
+        }
+      },
+      "deployment_eligible": false,
+      "duplicate_test_input_hashes": {},
+      "protocol_sha256": "da8fe4a3fbd46706933cbe78171ae2a71df62c54e0310657865ede0772965896",
+      "scope": "Frozen pretrained environmental detector; publisher-held-out datasets and unseen generator; a small research evaluation, not a localised manipulation proof.",
+      "scores_sha256": "ab17664f289cd78910039627cf22ecb5fb44b57b39ca73b923157746aaf8cd9f",
+      "statistical_admission_passed": false,
+      "threshold": {
+        "positive": "fake_margin > threshold",
+        "scores_calibration_sha256": "734bfad8e60bc2ebff01a5aa6a0829dbec2efc5108e1130ece9f1266832873b4",
+        "threshold": -0.381762
+      }
+    },
+    "production_enabled": false,
+    "decision": "The frozen operating point has 12.5% real-recording false positives and 65.6% recall for an unseen text-to-audio generator. Whole-window scores do not locate manipulated regions. Further independent calibration and validation are needed."
+  },
+  "remaining_gaps": [
+    "No isolated background stem or speech/music separation.",
+    "No reliable AI-origin decision for background audio.",
+    "The stable-background benefit does not establish general music, outdoor or quiet room-tone edit detection.",
+    "Real-source file/location grouping does not prove independent recording sessions.",
+    "Only short controlled 4-second excerpts and known 2-second cut positions were evaluated; codecs, long recordings, reverberation and natural editing require broader controls.",
+    "Possible natural music transitions are shown as listening context; their presence is not manipulation proof."
+  ],
+  "primary_sources": [
+    {
+      "title": "Official EnvSDD benchmark and code",
+      "url": "https://github.com/apple-yinhan/EnvSDD"
+    },
+    {
+      "title": "Official source data",
+      "url": "https://huggingface.co/datasets/EnvSDD/EnvSDD",
+      "revision": "b0832726deb55484dbce869c6f09c41f7e9e5fbb"
+    },
+    {
+      "title": "Official environmental detector checkpoints",
+      "url": "https://zenodo.org/records/15480032"
+    },
+    {
+      "title": "EnvSDD paper",
+      "url": "https://www.isca-archive.org/interspeech_2025/yin25_interspeech.pdf"
+    },
+    {
+      "title": "FakeSound partial environmental-audio manipulation research",
+      "url": "https://github.com/FakeSoundData/FakeSound"
+    }
+  ],
+  "reproduce": {
+    "working_directory": "backend",
+    "prepared_inputs": "Retained under data/background-evaluation-v1, intentionally outside source control. Publisher bytes, exact scored PCM, metadata and hashes are retained. Prepare stages refuse to replace differing frozen protocols/manifests.",
+    "commands": [
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_continuity.py prepare",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_continuity.py score",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_continuity.py evaluate",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_followup.py prepare",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_followup.py score",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_followup.py evaluate",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_background_followup.py review",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_environment_detector.py prepare",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_environment_detector.py score",
+      "PYTHONPATH=. .venv/bin/python scripts/evaluate_environment_detector.py evaluate",
+      "PYTHONPATH=. .venv/bin/python scripts/audit_background_evaluation.py"
+    ],
+    "environment_classifier_prerequisites": {
+      "architecture_url": "https://raw.githubusercontent.com/apple-yinhan/EnvSDD/main/networks/aasist.py",
+      "architecture_sha256": "45e5fb35d59e3945b021430280697fe4fb33730fe59af92180563d4c9c1dadde",
+      "archive_url": "https://zenodo.org/api/records/15480032/files/TTA.zip/content",
+      "archive_entry": "TTA/aasist.pth",
+      "checkpoint_sha256": "3b40c5ee8f51bc5f6173350f1b011ec37071f0cd5b5acbc220db24bb52a0a321",
+      "loading": "Reviewed architecture; pinned hashes and torch.load(weights_only=True); no remote code or ordinary pickle loading.",
+      "license": "Upstream code is MIT; checkpoint commercial redistribution permission has not been established."
+    }
+  },
+  "artifact_files": [
+    {
+      "path": "backend/data/background-evaluation-v1/protocol.json",
+      "sha256": "4f9cead4f6d1101a4ea71e43635c9b6998851c007ac600c24e3118fb49a4de5b"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/manifest.json",
+      "sha256": "92dca324198b3b85db604e832d725223802723b490f9db01d73abe9952127330"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/scores.json",
+      "sha256": "6c0270ac65c0d65aba7b30e6489cdceffe23a653cb93bd2969a1e1cca7e87b71"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/thresholds.json",
+      "sha256": "f90de4691adbaaa506d19df6c420d44aa4e0a5fdea6d5655d0569f7bae81c392"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/evaluation.json",
+      "sha256": "a7c786be3a01ab1eb641ab45ae633cf62cc2084a44218edc23c122a8eeceac31"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/fresh-followup/protocol.json",
+      "sha256": "838bdeae7bd5d3a402bd54b9becf33517a89cbb6cb04c6d30b80dc3797a67703"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/fresh-followup/manifest.json",
+      "sha256": "f50da3a0fcb240b7994fce330deacd692b2090ee2c5bb2dc692b871e20419af4"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/fresh-followup/scores.json",
+      "sha256": "7b5ccb614fd0c40cc550d0665b9a372799e435f4eb301719bfc8795cfdeee432"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/fresh-followup/evaluation.json",
+      "sha256": "d38e829977f64785ff27c7137826e8c2f06b8eef0e71db883b58da90375f7220"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/fresh-followup/product-selection.json",
+      "sha256": "e4b0fec0cccd431041867d36a31ce4a937d4f254c97d2e2bc5b201e8fb66ebfc"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/environment-detector/protocol.json",
+      "sha256": "da8fe4a3fbd46706933cbe78171ae2a71df62c54e0310657865ede0772965896"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/environment-detector/manifest.json",
+      "sha256": "7b259f869d3a90d820b93b1d07a239c36f7b540e2f0a4932782c77f103ab470e"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/environment-detector/scores.json",
+      "sha256": "ab17664f289cd78910039627cf22ecb5fb44b57b39ca73b923157746aaf8cd9f"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/environment-detector/threshold.json",
+      "sha256": "9bb615c6abecc0684e24ff61ab8c4757dc0778069d5f57e5c0c70894d858c403"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/environment-detector/evaluation.json",
+      "sha256": "7438735a52eff4a7a890411663cbedd1d64b1e2b491fb90cdad8d2753f11cd5c"
+    },
+    {
+      "path": "backend/data/background-evaluation-v1/input-audit.json",
+      "sha256": "76475768048452df41419793b98be01fb04ddfb61a27e9122037f4cba31b20ae"
+    }
+  ],
+  "input_reproducibility_audit": {
+    "environment_classifier_inputs_rebuilt_exactly": 226,
+    "fresh_derived_controls_rebuilt_exactly": 190,
+    "fresh_vs_first_group_and_source_hash_overlap": 0,
+    "normalized_source_inputs_rebuilt_exactly": 376,
+    "protocol_bindings": [
+      "4f9cead4f6d1101a4ea71e43635c9b6998851c007ac600c24e3118fb49a4de5b",
+      "838bdeae7bd5d3a402bd54b9becf33517a89cbb6cb04c6d30b80dc3797a67703",
+      "da8fe4a3fbd46706933cbe78171ae2a71df62c54e0310657865ede0772965896"
+    ],
+    "scope": "Input and known-edit derivation audit; classifier logits are retained outputs, not recomputed by this audit.",
+    "status": "passed"
+  },
+  "isolated_local_rollout": {
+    "command": "PYTHONPATH=. .venv/bin/python scripts/validate_local_background_rollout.py --input data/background-evaluation-v1/fresh-followup/inputs/9a63cbef87d77c0f0f08f9c89c9c6e2be512bb201d002e46b4563287a040b58a.wav --with-video --output data/background-rollout-r69-verified",
+    "output": "backend/data/background-rollout-r69-verified",
+    "billing": "Production payment gate and signed test webhook; only Stripe HTTP transport simulated. No shared-app analysis or real charge.",
+    "sources": "Known real engine-recording splice, plus static-slate video carrying the same lossless PCM. This is an integration test, not an independent accuracy test.",
+    "results": [
+      {
+        "case": "background-edit",
+        "analysis_id": "3f1bdee1-6973-564b-b7f7-494706fefefa",
+        "version": "audio-evidence-3",
+        "pages": 13,
+        "assets": 9,
+        "public_names_scan_passed": true,
+        "signed_pdf_and_offline_package_verified": true,
+        "api_json_snapshot_equal": true,
+        "all_pngs_exact_in_pdf": true,
+        "decision": "not_assessable",
+        "payment_before_analysis": true
+      },
+      {
+        "case": "background-edit-video",
+        "analysis_id": "8d0b5f04-fef0-5f7a-ab5c-9a4a1ee24402",
+        "version": "video-evidence-5",
+        "pages": 21,
+        "assets": 9,
+        "public_names_scan_passed": true,
+        "signed_pdf_and_offline_package_verified": true,
+        "api_json_snapshot_equal": true,
+        "all_pngs_exact_in_pdf": true,
+        "decision": "not_assessable",
+        "payment_before_analysis": true
+      }
+    ],
+    "visual_qa": "All34 pages reviewed; detailed acoustic/summary pages reviewed at full rendered size."
+  },
+  "report_privacy_fix": {
+    "template": "veritas-report-2.0.r69",
+    "bug": "Generated insufficient-summary paragraphs could expose skipped-check names in PDFs even when API JSON was neutral.",
+    "fix": "Apply existing name projection to generated summary diagnostics and aggregate prose; preserve source quotations and snapshot hashes.",
+    "historical_policy": "Keep older signed bytes; require r69 or current approved template for customer downloads and packages. Existing PDF and ZIP regeneration actions are tested.",
+    "checks": {
+      "public_view_regressions": 17,
+      "public_download_guards": 31,
+      "export_dialog_tests": 16
+    }
+  }
+}

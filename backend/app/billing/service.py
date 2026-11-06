@@ -25,6 +25,7 @@ from sqlalchemy.exc import IntegrityError
 from app.api import jobs
 from app.api.auth import Principal
 from app.audit import chain as audit
+from app.billing import purchase_notice
 from app.cases import intake
 from app.core.config import settings
 from app.storage import files, locks
@@ -79,7 +80,8 @@ def ready() -> bool:
 
 def configuration() -> dict:
     return {"enabled": enabled(), "mode": settings.billing_mode, "ready": ready(), "amount_minor": AMOUNT_MINOR,
-            "currency": CURRENCY, "price_display": "US$9.99", "requires_sign_in": True}
+            "currency": CURRENCY, "price_display": "US$9.99", "requires_sign_in": True,
+            "purchase_notice": purchase_notice.public_notice()}
 
 
 def require_ready() -> None:
@@ -130,7 +132,33 @@ def order_status(order_id: str, owner_id: str) -> dict:
         analysis = db.get(Analysis, order.analysis_id) if order.analysis_id else None
         return {"order_id": order.id, "status": order.status, "analysis_id": order.analysis_id,
                 "analysis_status": analysis.status if analysis else None, "amount_minor": order.amount_minor,
-                "currency": order.currency}
+                "currency": order.currency, "kind": order.kind,
+                "purchase_acknowledged": purchase_notice.recorded(order.purchase_acknowledgement, owner_id),
+                "purchase_notice": purchase_notice.public_notice()}
+
+
+def require_purchase_acknowledgement(accepted: bool, version: str | None, sha256: str | None) -> None:
+    if not purchase_notice.validates(accepted, version, sha256):
+        raise BillingError(422, "Read and accept the current analysis limitations before checkout. "
+                           "Detection and a conclusive result are not guaranteed.")
+
+
+def acknowledge_order(order_id: str, owner_id: str, *, accepted: bool = False,
+                      version: str | None = None, sha256: str | None = None) -> None:
+    with get_session() as db:
+        locks.serialise(db, "billing-order", order_id)
+        order = db.get(BillingOrderRow, order_id)
+        if order is None or order.owner_id != owner_id:
+            raise BillingError(404, "Order not found.")
+        if order.status in {"fulfilled", "expired", "payment_failed"}:
+            raise BillingError(409, "This checkout has already completed, expired or failed.", order_id=order.id)
+        if purchase_notice.recorded(order.purchase_acknowledgement, owner_id):
+            return
+        require_purchase_acknowledgement(accepted, version, sha256)
+        # Older unknown-outcome Stripe requests must retain their exact original
+        # idempotent parameters. Their disclosure is accepted in our app on resume.
+        order.purchase_acknowledgement = purchase_notice.receipt(owner_id, utcnow().isoformat(), stripe_notice=False)
+        db.commit()
 
 
 def _metadata(order: BillingOrderRow) -> dict[str, str]:
@@ -143,8 +171,10 @@ def _same_upload(order: BillingOrderRow, *, sha256: str, kind: str, profile: str
 
 
 def create_order(src: BinaryIO, filename: str, kind: str, *, owner_id: str, request_key: str, profile: str,
-                 client_sha256: str | None = None) -> BillingOrderRow:
+                 client_sha256: str | None = None, risk_accepted: bool = False,
+                 risk_notice_version: str | None = None, risk_notice_sha256: str | None = None) -> BillingOrderRow:
     require_ready()
+    require_purchase_acknowledgement(risk_accepted, risk_notice_version, risk_notice_sha256)
     if kind not in intake.KIND_LIMITS:
         raise BillingError(422, "Choose image, video, audio or document.")
     # Bind a repeated upload request to its bytes before accepting its idempotency key.
@@ -156,6 +186,9 @@ def create_order(src: BinaryIO, filename: str, kind: str, *, owner_id: str, requ
                                                           BillingOrderRow.request_key == request_key))
         if previous is not None:
             _same_upload(previous, sha256=sha256, kind=kind, profile=profile)
+            if previous.status in {"pending", "awaiting_payment"} and not purchase_notice.recorded(previous.purchase_acknowledgement, owner_id):
+                previous.purchase_acknowledgement = purchase_notice.receipt(owner_id, utcnow().isoformat(), stripe_notice=False)
+                db.commit()
             db.expunge(previous)
             return previous
     src.seek(0)
@@ -185,7 +218,8 @@ def create_order(src: BinaryIO, filename: str, kind: str, *, owner_id: str, requ
                             media_id=received.media.id, kind=kind, filename=shown,
                             content_type=received.media.mime_sniffed or "application/octet-stream", sha256=received.media.sha256,
                             size_bytes=received.media.size_bytes, profile=profile, amount_minor=AMOUNT_MINOR, currency=CURRENCY,
-                            mode=settings.billing_mode, status="pending", created_at=utcnow())
+                            mode=settings.billing_mode, status="pending", created_at=utcnow(),
+                            purchase_acknowledgement=purchase_notice.receipt(owner_id, utcnow().isoformat(), stripe_notice=True))
     try:
         with get_session() as db:
             db.add(order)
@@ -211,6 +245,8 @@ def checkout(order_id: str, owner_id: str) -> dict:
         raise BillingError(409, "This order belongs to another payment environment. Start a new checkout.", order_id=order.id)
     if order.status in {"fulfilled", "expired", "payment_failed"}:
         raise BillingError(409, "This checkout has already completed, expired or failed.", order_id=order.id)
+    if not purchase_notice.recorded(order.purchase_acknowledgement, owner_id):
+        raise BillingError(422, "Accept the analysis limitations before returning to checkout.", order_id=order.id)
     if order.checkout_url:
         return {"order_id": order.id, "checkout_url": order.checkout_url, "status": order.status}
     # Stripe keeps idempotency keys for at least 24 hours. Never reuse an unknown-outcome request after that window.
@@ -227,6 +263,8 @@ def checkout(order_id: str, owner_id: str) -> dict:
             "line_items[0][price_data][product_data][name]": "Chipmunk Verify — one analysis",
             "line_items[0][quantity]": 1, "allow_promotion_codes": "false",
             "automatic_tax[enabled]": "false", "adaptive_pricing[enabled]": "false"}
+    if order.purchase_acknowledgement.get("stripe_notice") is True:
+        data["custom_text[submit][message]"] = order.purchase_acknowledgement["notice"]["stripe_message"]
     data.update({f"metadata[{key}]": value for key, value in _metadata(order).items()})
     try:
         session = _stripe("POST", "checkout/sessions", data=data, idempotency_key=f"chipmunk-order-{order.id}")

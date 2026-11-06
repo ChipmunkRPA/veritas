@@ -1,45 +1,2748 @@
 [
-  {"name":"AI boundary","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.8,"ci90":[0.72,0.88]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"ai","confidence_pct":80,"headline":"Leaning towards an AI-generated or AI-altered file","interval_pct":[72,88]}},
-  {"name":"below AI boundary is not rounded up","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.799999,"ci90":[0.72,0.88]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null,"probability_ai_pct":79.9}},
-  {"name":"original boundary","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.2,"ci90":[0.1,0.3]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"original","confidence_pct":80,"headline":"Leaning towards an original file","interval_pct":[70,90],"interval_label":"90% interval for original-file likelihood"}},
-  {"name":"below original boundary is not rounded up","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.200001},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null}},
-  {"name":"real video saved estimate","input":{"decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.126264,"ci90":[0.059251,0.289501]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"original","confidence_pct":87.3,"interval_pct":[71,94]}},
-  {"name":"real audio interval upper end is not confidence","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.755266,"ci90":[0.693863,0.819836]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null,"interval_pct":[69.3,81.9]}},
-  {"name":"fallback is not confidence","input":{"decision":{"code":"ai_supported","fusion_mode":"fallback","probability_ai_uncalibrated":0.99},"condition_profile":{"within_validated_envelope":false}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null,"headline":"Inconclusive: no calibrated estimate"}},
-  {"name":"uncalibrated field cannot fill a missing calibrated field","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_uncalibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
-  {"name":"outside scope","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":false}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
-  {"name":"unknown scope","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.99}},"expected":{"direction":"unavailable","confidence_pct":null}},
-  {"name":"not assessable keeps gate","input":{"decision":{"code":"not_assessable","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null}},
-  {"name":"failed run keeps gate","input":{"status":"failed","decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.99},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null}},
-  {"name":"provenance floor is not confidence","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.85,"driving_hypothesis":"H3_provenance_integrity"},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"record","applies":false,"headline":null,"confidence_pct":null}},
-  {"name":"strong disagreement keeps gate","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.9},"condition_profile":{"within_validated_envelope":true},"caveats":["Detectors strongly disagree: the disagreement index is above the 95th percentile of the calibration set."]},"expected":{"direction":"inconclusive","confidence_pct":null,"headline":"Inconclusive: the evidence does not support a reliable tendency"}},
-  {"name":"unsupported prior keeps gate","input":{"decision":{"code":"inconclusive","fusion_mode":"artefact","probability_ai_calibrated":0.95,"reason":"Saved estimate. AI generation or manipulation is the answer of the estimate, and no check gives at least weak support for it: the estimate rests on the model's starting point for inputs like this one, so the result is inconclusive."},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"inconclusive","confidence_pct":null}},
-  {"name":"malformed interval omitted","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":0.9,"ci90":[0.95,0.8]},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"ai","confidence_pct":90,"interval_pct":null}},
-  {"name":"invalid estimate omitted","input":{"decision":{"code":"ai_supported","fusion_mode":"artefact","probability_ai_calibrated":1.01},"condition_profile":{"within_validated_envelope":true}},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
-  {"name":"missing decision","input":{},"expected":{"direction":"unavailable","confidence_pct":null,"probability_ai_pct":null}},
-  {"name":"real video excludes checked voice and timing from visual percentage","input":{
-    "kind":"video","status":"done","condition_profile":{"within_validated_envelope":true},
-    "decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.126264,"ci90":[0.059251,0.289501],"contributions":[
-      {"kind":"detector","signal_id":"check.visual1:global","counted":true,"logit":-1.517146},
-      {"kind":"detector","signal_id":"check.visual2:global","counted":true,"logit":-0.608716},
-      {"kind":"detector","signal_id":"check.face:global","counted":true,"logit":0.320748},
-      {"kind":"detector","signal_id":"check.voice:global","counted":false,"logit":0}
-    ]},
-    "signals":[
-      {"id":"check.visual1:global","detector_id":"check.visual1","modality":"video","status":"ok"},
-      {"id":"check.visual2:global","detector_id":"check.visual2","modality":"video","status":"ok"},
-      {"id":"check.face:global","detector_id":"check.face","modality":"video","status":"ok"},
-      {"id":"check.voice:global","detector_id":"check.voice","modality":"audio","family":"voice","status":"ok","raw_score":0.839957,"effective_weight":0,"outside_estimate":{"reason":"zero_weight"}},
-      {"id":"check.timing:track:0","detector_id":"check.timing","modality":"video","family":"av-sync","lane":"lip_sync","status":"ok","effective_weight":0,"outside_estimate":{"reason":"not_in_model"}}
-    ]},"expected":{"headline":"Leaning towards original visual content","direction":"original","confidence_pct":87.3,"scope":"visual_content","scope_label":"Visual content only","excluded_channels":["voice","audio_picture_timing"],"interval_label":"90% interval for this scoped estimate"}},
-  {"name":"counted voice prevents describing a mixed percentage as visual-only","input":{
-    "kind":"video","condition_profile":{"within_validated_envelope":true},
-    "decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.13,"contributions":[
-      {"kind":"detector","signal_id":"opaque_visual","counted":true,"logit":-1},
-      {"kind":"detector","signal_id":"opaque_voice","counted":true,"logit":-1}
-    ]},
-    "findings":[{"family":"F3_whole_image_generation","evidence_ids":["opaque_visual"]},{"family":"A1_voice","evidence_ids":["opaque_voice"]},{"family":"V2_lip_sync","evidence_ids":["opaque_timing"]}],
-    "signals":[{"id":"opaque_visual","status":"ok"},{"id":"opaque_voice","status":"ok"},{"id":"opaque_timing","status":"ok","outside_estimate":{"reason":"not_in_model"}}]
-  },"expected":{"direction":"original","scope":"assessed_components","headline":"Leaning towards original content in the assessed components","excluded_channels":["audio_picture_timing"]}},
-  {"name":"video without channel records does not imply whole-file clearance","input":{"kind":"video","decision":{"code":"no_ai_indicators","fusion_mode":"artefact","probability_ai_calibrated":0.1},"condition_profile":{"within_validated_envelope":true}},"expected":{"scope":"assessed_components","headline":"Leaning towards original content in the assessed components","excluded_channels":[]}}
+  {
+    "name": "AI boundary",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.6,
+        "ci90": [
+          0.5,
+          0.7
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "ai",
+      "headline": "Leaning towards AI-generated or AI-altered content",
+      "confidence_pct": 60.0,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 60.0,
+      "interval_pct": [
+        50.0,
+        70.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The applicable, reference-calibrated checks lean towards AI generation or alteration. Review the supporting findings and their scope.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "below AI boundary is not rounded up",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.599999,
+        "ci90": [
+          0.5,
+          0.7
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: no reliable overall tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 59.9,
+      "interval_pct": [
+        50.0,
+        70.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded estimate does not establish a reliable tendency. Review the observations, source links and check coverage.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "original boundary",
+    "input": {
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.4,
+        "ci90": [
+          0.3,
+          0.5
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original content in the assessed scope",
+      "confidence_pct": 60.0,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 40.0,
+      "interval_pct": [
+        50.0,
+        70.0
+      ],
+      "interval_label": "90% interval for original-file likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The applicable, reference-calibrated checks lean towards original content in the assessed scope. Local flags and checks outside the estimate require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "below original boundary is not rounded up",
+    "input": {
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.400001
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: no reliable overall tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 40.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded estimate does not establish a reliable tendency. Review the observations, source links and check coverage.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "real video saved estimate",
+    "input": {
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original content in the assessed scope",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for original-file likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The applicable, reference-calibrated checks lean towards original content in the assessed scope. Local flags and checks outside the estimate require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "real audio interval upper end is not confidence",
+    "input": {
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.755266,
+        "ci90": [
+          0.693863,
+          0.819836
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 75.5,
+      "interval_pct": [
+        69.3,
+        81.9
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "fallback is not confidence",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "fallback",
+        "probability_ai_uncalibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": false
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "Inconclusive: no calibrated estimate",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The available checks provide inspection scores, but those scores have not been calibrated into a reliable whole-file likelihood.",
+      "limitation": "An inspection response is not a calibrated confidence percentage. Use the linked evidence to examine the file further.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "uncalibrated field cannot fill a missing calibrated field",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_uncalibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "No reliable automated conclusion",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The analysis did not establish a usable whole-file estimate.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "outside scope",
+    "input": {
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": false
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "Inconclusive: this input is outside the verified scope",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The saved validation does not cover this kind of input well enough to support a reliable combined assessment.",
+      "limitation": "A score can still be recorded for inspection, but it cannot support a confidence percentage for this file.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "unknown scope",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "Inconclusive: this input is outside the verified scope",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The saved validation does not cover this kind of input well enough to support a reliable combined assessment.",
+      "limitation": "A score can still be recorded for inspection, but it cannot support a confidence percentage for this file.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "not assessable keeps gate",
+    "input": {
+      "decision": {
+        "code": "not_assessable",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "No reliable automated conclusion",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The analysis did not establish a usable whole-file estimate.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "failed run keeps gate",
+    "input": {
+      "status": "failed",
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "No reliable automated conclusion",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The analysis did not establish a usable whole-file estimate.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "provenance floor is not confidence",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.85,
+        "driving_hypothesis": "H3_provenance_integrity"
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": false,
+      "direction": "record",
+      "headline": null,
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The conclusion follows the file's provenance record, not a confidence percentage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "strong disagreement keeps gate",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.9
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "caveats": [
+        "Detectors strongly disagree: the disagreement index is above the 95th percentile of the calibration set."
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 90.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "unsupported prior keeps gate",
+    "input": {
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.95,
+        "reason": "Saved estimate. AI generation or manipulation is the answer of the estimate, and no check gives at least weak support for it: the estimate rests on the model's starting point for inputs like this one, so the result is inconclusive."
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 95.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "malformed interval omitted",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.9,
+        "ci90": [
+          0.95,
+          0.8
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "ai",
+      "headline": "Leaning towards AI-generated or AI-altered content",
+      "confidence_pct": 90.0,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 90.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The applicable, reference-calibrated checks lean towards AI generation or alteration. Review the supporting findings and their scope.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "invalid estimate omitted",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 1.01
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "No reliable automated conclusion",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The analysis did not establish a usable whole-file estimate.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "missing decision",
+    "input": {},
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "unavailable",
+      "headline": "No reliable automated conclusion",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The analysis did not establish a usable whole-file estimate.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "real video excludes checked voice and timing from visual percentage",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "counted voice prevents describing a mixed percentage as visual-only",
+    "input": {
+      "kind": "video",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.13,
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "opaque_visual",
+            "counted": true,
+            "logit": -1
+          },
+          {
+            "kind": "detector",
+            "signal_id": "opaque_voice",
+            "counted": true,
+            "logit": -1
+          }
+        ]
+      },
+      "findings": [
+        {
+          "family": "F3_whole_image_generation",
+          "evidence_ids": [
+            "opaque_visual"
+          ]
+        },
+        {
+          "family": "A1_voice",
+          "evidence_ids": [
+            "opaque_voice"
+          ]
+        },
+        {
+          "family": "V2_lip_sync",
+          "evidence_ids": [
+            "opaque_timing"
+          ]
+        }
+      ],
+      "signals": [
+        {
+          "id": "opaque_visual",
+          "status": "ok"
+        },
+        {
+          "id": "opaque_voice",
+          "status": "ok"
+        },
+        {
+          "id": "opaque_timing",
+          "status": "ok",
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original content in the assessed components",
+      "confidence_pct": 87.0,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 13.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original content in the assessed components. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "assessed_components",
+      "scope_label": "Assessed components only",
+      "scope_note": "The main assessment uses sampled visual content and speech. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "video without channel records does not imply whole-file clearance",
+    "input": {
+      "kind": "video",
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.1
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 10.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "assessed_components",
+      "scope_label": "Check coverage not yet available",
+      "scope_note": "The saved result does not establish which content checks contributed to the main assessment. Visual content check coverage is unavailable in the saved result. Voice/audio check coverage is unavailable in the saved result. Audio/picture timing check coverage is unavailable in the saved result.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "image inconclusive at 0.01 retains recorded outcome",
+    "input": {
+      "kind": "image",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.01,
+        "ci90": [
+          0,
+          0.02
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 1.0,
+      "interval_pct": [
+        0.0,
+        2.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "image inconclusive at 0.99 retains recorded outcome",
+    "input": {
+      "kind": "image",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99,
+        "ci90": [
+          0.98,
+          1
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 99.0,
+      "interval_pct": [
+        98.0,
+        100.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "video inconclusive at 0.01 retains recorded outcome",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.01,
+        "ci90": [
+          0,
+          0.02
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 1.0,
+      "interval_pct": [
+        0.0,
+        2.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "assessed_components",
+      "scope_label": "Check coverage not yet available",
+      "scope_note": "The saved result does not establish which content checks contributed to the main assessment. Visual content check coverage is unavailable in the saved result. Voice/audio check coverage is unavailable in the saved result. Audio/picture timing check coverage is unavailable in the saved result.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "video inconclusive at 0.99 retains recorded outcome",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99,
+        "ci90": [
+          0.98,
+          1
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 99.0,
+      "interval_pct": [
+        98.0,
+        100.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "assessed_components",
+      "scope_label": "Check coverage not yet available",
+      "scope_note": "The saved result does not establish which content checks contributed to the main assessment. Visual content check coverage is unavailable in the saved result. Voice/audio check coverage is unavailable in the saved result. Audio/picture timing check coverage is unavailable in the saved result.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "document inconclusive at 0.01 retains recorded outcome",
+    "input": {
+      "kind": "document",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.01,
+        "ci90": [
+          0,
+          0.02
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 1.0,
+      "interval_pct": [
+        0.0,
+        2.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "document inconclusive at 0.99 retains recorded outcome",
+    "input": {
+      "kind": "document",
+      "status": "done",
+      "decision": {
+        "code": "inconclusive",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99,
+        "ci90": [
+          0.98,
+          1
+        ]
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 99.0,
+      "interval_pct": [
+        98.0,
+        100.0
+      ],
+      "interval_label": "90% interval for AI likelihood",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded result remains inconclusive. Review the linked findings and the coverage of checks that could not complete.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "failed audio checks retain visual-only scope",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "failed",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "failed",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some voice/audio checks could not complete. Some audio/picture timing checks could not complete.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "timeout audio checks retain visual-only scope",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "timeout",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "timeout",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some voice/audio checks could not complete. Some audio/picture timing checks could not complete.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "skipped audio checks retain visual-only scope",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "skipped",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "skipped",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some voice/audio checks were skipped. Some audio/picture timing checks were skipped.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "not_applicable audio checks retain visual-only scope",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "not_applicable",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "not_applicable",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some voice/audio checks were unavailable or not applicable. Some audio/picture timing checks were unavailable or not applicable.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "missing audio records retain visual-only scope",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "original",
+      "headline": "Leaning towards original visual content",
+      "confidence_pct": 87.3,
+      "confidence_label": "Reference-calibrated overall estimate",
+      "probability_ai_pct": 12.6,
+      "interval_pct": [
+        71.0,
+        94.0
+      ],
+      "interval_label": "90% interval for this scoped estimate",
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The reference-calibrated checks included in this estimate lean towards original visual content. Local flags and excluded checks require separate consideration.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Voice/audio check coverage is unavailable in the saved result. Audio/picture timing check coverage is unavailable in the saved result.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "skipped contributing visual check prevents original tendency",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "skipped"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some visual content checks were skipped. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "failed contributing visual check prevents original tendency",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "failed"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some visual content checks could not complete. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "timeout contributing visual check prevents original tendency",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "timeout"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some visual content checks could not complete. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "not_applicable contributing visual check prevents original tendency",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "not_applicable"
+        },
+        {
+          "id": "check.visual2:global",
+          "detector_id": "check.visual2",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Some visual content checks were unavailable or not applicable. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "ai_supported cannot reverse its recorded direction",
+    "input": {
+      "decision": {
+        "code": "ai_supported",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.01
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 1.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded decision does not support the direction suggested by the estimate.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "no_ai_indicators cannot reverse its recorded direction",
+    "input": {
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.99
+      },
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: the checks do not support a reliable tendency",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": 99.0,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "The recorded decision does not support the direction suggested by the estimate.",
+      "limitation": "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "skipped contributing speech check cannot clear an audio file",
+    "input": {
+      "kind": "audio",
+      "status": "done",
+      "decision": {
+        "code": "no_ai_indicators",
+        "verbal": "Leaning towards original speech",
+        "fuser_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+        "probability_ai_calibrated": 0.01,
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "voice",
+            "counted": true,
+            "logit": -3
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "voice",
+          "modality": "audio",
+          "status": "skipped"
+        }
+      ],
+      "condition_profile": {
+        "within_validated_envelope": true
+      }
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "whole_file",
+      "scope_label": "Assessed content",
+      "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.",
+      "excluded_channels": [],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  },
+  {
+    "name": "missing contributing visual result prevents original tendency",
+    "input": {
+      "kind": "video",
+      "status": "done",
+      "condition_profile": {
+        "within_validated_envelope": true
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "fusion_mode": "artefact",
+        "probability_ai_calibrated": 0.126264,
+        "ci90": [
+          0.059251,
+          0.289501
+        ],
+        "contributions": [
+          {
+            "kind": "detector",
+            "signal_id": "check.visual1:global",
+            "counted": true,
+            "logit": -1.517146
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.visual2:global",
+            "counted": true,
+            "logit": -0.608716
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.face:global",
+            "counted": true,
+            "logit": 0.320748
+          },
+          {
+            "kind": "detector",
+            "signal_id": "check.voice:global",
+            "counted": false,
+            "logit": 0
+          }
+        ]
+      },
+      "signals": [
+        {
+          "id": "check.visual1:global",
+          "detector_id": "check.visual1",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.face:global",
+          "detector_id": "check.face",
+          "modality": "video",
+          "status": "ok"
+        },
+        {
+          "id": "check.voice:global",
+          "detector_id": "check.voice",
+          "modality": "audio",
+          "family": "voice",
+          "status": "ok",
+          "raw_score": 0.839957,
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "zero_weight"
+          }
+        },
+        {
+          "id": "check.timing:track:0",
+          "detector_id": "check.timing",
+          "modality": "video",
+          "family": "av-sync",
+          "lane": "lip_sync",
+          "status": "ok",
+          "effective_weight": 0,
+          "outside_estimate": {
+            "reason": "not_in_model"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "rule": "evidence-led-assessment/v4",
+      "finding_assessments": [],
+      "applies": true,
+      "direction": "inconclusive",
+      "headline": "Inconclusive: contributing checks could not complete",
+      "confidence_pct": null,
+      "confidence_label": null,
+      "probability_ai_pct": null,
+      "interval_pct": null,
+      "interval_label": null,
+      "interval_note": "This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.",
+      "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage.",
+      "limitation": "Review the recorded observations and any checks that could not run. Missing evidence does not favour either answer.",
+      "scope": "visual_content",
+      "scope_label": "Visual content only",
+      "scope_note": "The main assessment uses sampled visual content. Voice/audio was checked separately from the main assessment. Audio/picture timing was checked separately from the main assessment.",
+      "excluded_channels": [
+        "voice",
+        "audio_picture_timing"
+      ],
+      "service_policy": {
+        "version": "standard-saas-evidence/v2",
+        "service_tier": "standard_saas",
+        "title": "Preliminary screening - not for court use",
+        "confidence_notice": "Findings link observations to their supporting evidence and distinguish AI-leaning, original-leaning and inconclusive results. Displayed percentages are system estimates, not verified accuracy or proof. Unsupported and inconclusive checks remain unresolved.",
+        "court_notice": "This automated SaaS report has limited scientific reliability and is not prepared for court filing, proof of authenticity or expert testimony. Do not rely on it as court evidence. Automated checks can miss AI content and flag genuine content.",
+        "private_engagement_notice": "A privately researched report, expert opinion or litigation support requires a separate signed engagement with the Chipmunk Verify expert. Scope, methods, fees and deliverables are agreed privately. A private engagement does not guarantee court admissibility.",
+        "expert_contact": "sales@chipmunkrpa.com",
+        "court_use": "not_prepared_for_court_use",
+        "separate_expert_engagement_required": true
+      }
+    }
+  }
 ]

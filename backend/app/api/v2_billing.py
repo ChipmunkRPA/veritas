@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from typing import Literal
 
-from fastapi import APIRouter, Depends, File, Form, Header, Request, UploadFile
+from fastapi import APIRouter, Body, Depends, File, Form, Header, Request, UploadFile
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field, StrictBool
 from starlette.concurrency import run_in_threadpool
 
 from app.api.security import CheckedRoute, authorize, rate_limit
@@ -35,11 +36,15 @@ def create_checkout(request: Request, file: UploadFile = File(...),
                     kind: Literal["image", "video", "audio", "document"] = Form(...),
                     profile: Literal["quick", "full", "deep"] = Form("full"),
                     client_sha256: str | None = Form(None, pattern=r"^[0-9A-Fa-f]{64}$"),
+                    risk_accepted: bool = Form(False), risk_notice_version: str | None = Form(None, max_length=80),
+                    risk_notice_sha256: str | None = Form(None, max_length=64),
                     idempotency_key: str = Header(..., min_length=8, max_length=64, pattern=r"^[A-Za-z0-9_-]+$")):
     try:
         service.require_owner_principal(request.state.principal)
         order = service.create_order(file.file, file.filename or f"upload.{kind}", kind, owner_id=request.state.principal.id,
-                                     request_key=idempotency_key, profile=profile, client_sha256=client_sha256)
+                                     request_key=idempotency_key, profile=profile, client_sha256=client_sha256,
+                                     risk_accepted=risk_accepted, risk_notice_version=risk_notice_version,
+                                     risk_notice_sha256=risk_notice_sha256)
         return JSONResponse(service.checkout(order.id, request.state.principal.id), status_code=201, headers=NO_STORE)
     except service.BillingError as error:
         return _error(error)
@@ -47,10 +52,20 @@ def create_checkout(request: Request, file: UploadFile = File(...),
         raise ProblemError(error.status, error.title, error.detail) from error
 
 
+class PurchaseAcceptance(BaseModel):
+    risk_accepted: StrictBool = False
+    risk_notice_version: str | None = Field(None, max_length=80)
+    risk_notice_sha256: str | None = Field(None, max_length=64)
+
+
 @router.post("/orders/{order_id}/checkout")
-def retry_checkout(order_id: str, request: Request):
+def retry_checkout(order_id: str, request: Request, acceptance: PurchaseAcceptance | None = Body(None)):
     try:
         service.require_owner_principal(request.state.principal)
+        service.acknowledge_order(order_id, request.state.principal.id,
+                                  accepted=acceptance.risk_accepted if acceptance else False,
+                                  version=acceptance.risk_notice_version if acceptance else None,
+                                  sha256=acceptance.risk_notice_sha256 if acceptance else None)
         return JSONResponse(service.checkout(order_id, request.state.principal.id), headers=NO_STORE)
     except service.BillingError as error:
         return _error(error)

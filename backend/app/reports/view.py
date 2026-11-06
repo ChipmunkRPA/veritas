@@ -19,6 +19,7 @@ from typing import Any, NamedTuple
 from app.cases.review import PEER_APPROVES
 from app.core import effect
 from app.core.rounding import half_up
+from app.engine.customer_assessment import text_reference_rate
 from app.engine.detector import ON_THIS_SERVER, SERVER_REASONS
 from app.engine.fusion import abstain, decisive, disclosures
 from app.engine.fusion.runtime import D49_NOTES, MODEL_UNUSED
@@ -1154,6 +1155,8 @@ def in_testing(kind: str, decision: dict[str, Any], profile: dict[str, Any] | No
     the first matching context; icon arrays only when every count shown comes from ≥ 100 test items. Never another context's
     numbers."""
     one, many = media(kind)
+    if line := text_reference_rate(kind, profile, calibration):
+        return {"line": line, "scope": "Held-out writing from the local reference evaluation.", "arrays": []}
     rows = [r for c in calibration if str(c.get("subject", "")).startswith("fuser-") for r in c.get("error_rates") or []]
     contexts = error_rate_contexts(kind, profile)
     for context in contexts:

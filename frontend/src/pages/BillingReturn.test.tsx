@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { readFileSync } from 'node:fs'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router-dom'
@@ -10,7 +11,8 @@ vi.mock('../lib/api/billing', async (original) => ({
   ...await original<object>(), billingApi: { order: vi.fn(), resume: vi.fn() }, openCheckout: vi.fn(),
 }))
 const id = '11111111-1111-4111-8111-111111111111'
-const base: BillingOrder = { order_id: id, status: 'awaiting_payment', analysis_id: null, analysis_status: null, amount_minor: 999, currency: 'usd' }
+const notice = JSON.parse(readFileSync('../backend/tests/fixtures/purchase_notice.json', 'utf8'))
+const base: BillingOrder = { order_id: id, status: 'awaiting_payment', analysis_id: null, analysis_status: null, amount_minor: 999, currency: 'usd', kind: 'image', purchase_acknowledged: true, purchase_notice: notice }
 const clients: QueryClient[] = []
 function mount(search = '') {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } })
@@ -21,6 +23,19 @@ beforeEach(() => vi.mocked(billingApi.order).mockResolvedValue(base))
 afterEach(() => { cleanup(); clients.forEach((c) => c.clear()); clients.length = 0; vi.resetAllMocks() })
 
 describe('Stripe return page', () => {
+  it('requires acknowledgement when an older saved checkout has no acceptance record', async () => {
+    vi.mocked(billingApi.order).mockResolvedValue({ ...base, purchase_acknowledged: false })
+    vi.mocked(billingApi.resume).mockResolvedValue({ order_id: id, checkout_url: 'https://checkout.stripe.com/c/pay/test', status: 'awaiting_payment' })
+    mount('&cancelled=1')
+    const button = await screen.findByRole('button', { name: 'Return to checkout' }) as HTMLButtonElement
+    expect(button.disabled).toBe(true)
+    fireEvent.click(button)
+    expect(billingApi.resume).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByRole('checkbox', { name: /I understand and accept/ }))
+    fireEvent.click(button)
+    await waitFor(() => expect(openCheckout).toHaveBeenCalledOnce())
+    expect(billingApi.resume).toHaveBeenCalledWith(id, { risk_accepted: true, risk_notice_version: notice.version, risk_notice_sha256: notice.sha256 })
+  })
   it('does not treat a success-looking return query as proof of payment', async () => {
     mount('&paid=true&session_id=cs_test_claim')
     await screen.findByText(/We are waiting for Stripe to confirm payment/)
@@ -42,7 +57,7 @@ describe('Stripe return page', () => {
     const button = await screen.findByRole('button', { name: 'Return to checkout' })
     fireEvent.click(button); fireEvent.click(button)
     await waitFor(() => expect(billingApi.resume).toHaveBeenCalledTimes(1))
-    expect(billingApi.resume).toHaveBeenCalledWith(id)
+    expect(billingApi.resume).toHaveBeenCalledWith(id, undefined)
     finish({ order_id: id, checkout_url: 'https://checkout.stripe.com/c/pay/test', status: 'awaiting_payment' })
     await waitFor(() => expect(openCheckout).toHaveBeenCalledOnce())
   })

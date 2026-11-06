@@ -25,8 +25,12 @@ from app.storage.objects import ObjectIntegrityError
 @pytest.fixture
 def acoustic_report_case(request, monkeypatch):
     def source_file(path):
-        pcm = np.random.default_rng(209).normal(size=8 * 16000) * .002
-        pcm[4 * 16000:] *= 12
+        if getattr(request, 'param', None) == 'spectral':
+            time = np.arange(4 * 16000) / 16000
+            pcm = np.concatenate([.15 * np.sin(2 * np.pi * 300 * time), .15 * np.sin(2 * np.pi * 3000 * time)])
+        else:
+            pcm = np.random.default_rng(209).normal(size=8 * 16000) * .002
+            pcm[4 * 16000:] *= 12
         path.write_bytes(wav_bytes(pcm.astype(np.float32)))
 
     monkeypatch.setattr(test_audio_evidence, '_write_source', source_file)
@@ -38,6 +42,22 @@ def acoustic_report_case(request, monkeypatch):
         'analysis': old.analysis.model_copy(update={'id': analysis.id, 'revision': analysis.revision}),
         'media': old.media.model_copy(update={'sha256': analysis.sha256})})
     return frozen, store
+
+
+@pytest.mark.parametrize('acoustic_report_case', ['spectral'], indirect=True)
+def test_continuity_report_preserves_source_locations_and_public_title(acoustic_report_case):
+    frozen, store = acoustic_report_case
+    event, = [e for e in frozen.evidence['acoustic_context']['events'] if e['category'] == 'spectral_transition']
+    view = multimedia_evidence.view(frozen, store=store)
+    row = next(p for p in view['packets'] if p['id'] == event['id'])
+    assert row['title'] == 'Possible sound-content transition'
+    assert row['audio']['interval'] == event['interval'] == {'start_sample': 56000, 'end_sample': 72000}
+    assert row['audio']['source_ranges'] == event['source_timestamp_ranges']
+    assert row['measurements'] == event['observations']
+    html = engine._env.get_template('sections/multimedia_evidence.html.j2').render(v={'evidence': view}, s=frozen)
+    assert 'Possible sound-content transition' in html and 'Ordinary music' in html
+    assert row['json_pointer'] in html and event['artifacts']['selected_clip']['sha256'] in html
+    assert 'audioldm' not in html.lower() and 'aasist' not in html.lower()
 
 
 def test_report_events_link_to_exact_json_samples_source_clock_and_pngs(acoustic_report_case):

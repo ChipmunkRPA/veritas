@@ -62,7 +62,7 @@ def test_failed_stability_probe_withholds_original():
 
 @pytest.mark.parametrize('code,p,direction,confidence', [('ai_supported', .92, 'ai', 92.),
     ('no_ai_indicators', .08, 'original', 92.), ('inconclusive', .92, 'inconclusive', None),
-    ('inconclusive', None, 'inconclusive', None)])
+    ('inconclusive', .08, 'inconclusive', None), ('inconclusive', None, 'inconclusive', None)])
 def test_customer_result_uses_saved_calibration_and_guards(code, p, direction, confidence):
     result = customer_assessment({'kind': 'audio', 'status': 'done',
         'decision': {'fuser_sha256': c.SHA256, 'code': code, 'verbal': 'Speech assessment',
@@ -70,6 +70,26 @@ def test_customer_result_uses_saved_calibration_and_guards(code, p, direction, c
         'condition_profile': {'within_validated_envelope': False}})
     assert result['direction'] == direction and result['confidence_pct'] == confidence
     assert result['interval_pct'] is None
+
+
+@pytest.mark.parametrize('scope, p, guarded, veto, direction, confidence', [
+    (True, .921, 'ai', False, 'ai', 92.1),
+    (True, .08, 'original', False, 'original', 92.),
+    (True, .92, 'inconclusive', False, 'inconclusive', None),
+    (True, .08, 'original', True, 'inconclusive', None),
+    (False, .92, 'ai', False, 'inconclusive', None),
+])
+def test_video_soundtrack_uses_only_eligible_saved_speech(scope, p, guarded, veto, direction, confidence):
+    screen = {'calibration_sha256': c.SHA256, 'scope_supported': scope, 'probability_ai': p,
+              'decision': guarded, 'original_stability_veto': veto}
+    signal = {'status': 'ok', 'scope': 'global', 'modality': 'audio', 'id': 'S02',
+              'calibration_ref': c.SHA256, 'details': {'audio_screening': screen}, 'effective_weight': 0.}
+    baseline = {'kind': 'video', 'status': 'done', 'signals': [signal]}
+    result = customer_assessment(baseline)
+    assert result['direction'] == 'unavailable' and result['confidence_pct'] is None
+    assert result['soundtrack']['direction'] == direction and result['soundtrack']['confidence_pct'] == confidence
+    signal['calibration_ref'] = 'different-reference'
+    assert 'soundtrack' not in customer_assessment(baseline)
 
 
 def test_candidate_switch_and_legacy_rollback(monkeypatch):

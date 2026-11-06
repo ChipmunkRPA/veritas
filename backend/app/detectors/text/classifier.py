@@ -6,7 +6,9 @@ Secondary: Hello-SimpleAI/chatgpt-detector-roberta — HC3-trained RoBERTa (Chat
 """
 from __future__ import annotations
 
+import json
 from contextlib import AbstractContextManager, nullcontext
+from pathlib import Path
 from typing import Any
 
 import torch
@@ -85,6 +87,47 @@ class DesklibClassifier:
             return torch.sigmoid(logits).squeeze(-1)
 
         scores, self.last_coverage = classify_complete(texts, self.tok, self.device, score, max_len=max_len, batch=batch, check=check)
+        return scores
+
+
+class FourClassTextModel(DesklibAIDetectionModel):
+    """Mean-pooled classifier with the four classes specified by the pinned release."""
+
+    def __init__(self, config):
+        super().__init__(config)
+        if config.detector_num_labels != 4:
+            raise ValueError("Unexpected text classification head")
+        self.classifier = nn.Linear(config.hidden_size, 4)
+
+
+class FourClassTextClassifier:
+    def __init__(self, tokenizer: Any, model: FourClassTextModel, device: Any) -> None:
+        self.tok, self.model, self.device = tokenizer, model, device
+
+    @classmethod
+    def from_snapshot(cls, path: Path, device: Any) -> FourClassTextClassifier:
+        head = json.loads((path / "serving_head.json").read_text(encoding="utf-8"))
+        if head["labels"] != ["human", "ai", "ai_edited", "humanized"] or head["human_index"] != 0:
+            raise ValueError("Unexpected text classification labels")
+        tokenizer = AutoTokenizer.from_pretrained(path, local_files_only=True, trust_remote_code=False)
+        model, info = FourClassTextModel.from_pretrained(
+            path, local_files_only=True, use_safetensors=True, output_loading_info=True,
+        )
+        if any(info.get(key) for key in ("missing_keys", "mismatched_keys", "error_msgs", "unexpected_keys")):
+            raise ValueError("The text classifier checkpoint did not load exactly")
+        return cls(tokenizer, model.to(device).eval(), device)
+
+    @torch.inference_mode()
+    def predict(self, texts: list[str], max_len: int = 512, batch: int = PRIMARY_BATCH, *, check=deadline.check) -> list[float]:
+        def score(encoded):
+            ids = encoded["input_ids"]
+            output = self.model(ids, attention_mask=encoded["attention_mask"])
+            logits = _validated_logits(output["logits"], len(ids), width=4)
+            return 1 - logits.softmax(dim=-1)[:, 0]
+
+        scores, self.last_coverage = classify_complete(
+            texts, self.tok, self.device, score, max_len=max_len, batch=batch, check=check,
+        )
         return scores
 
 

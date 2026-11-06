@@ -1,17 +1,22 @@
 <section class="chapter-cont" id="section-findings">
 <h2 class="chapter-title"><span class="n">{{ v.number.findings }}</span>Findings and supporting evidence</h2>
-<p class="caption intro">Each finding separates the observation from its interpretation and links to the supporting record. A finding's direction is not a separate confidence percentage. Inspection-only checks are identified explicitly.</p>
+<p class="caption intro">Read the observed evidence, its interpretation and source links together. Confidence is shown only when calibration supports the finding's stated scope. Context-only or inconclusive observations do not establish original content.</p>
 {% if v.findings %}
 <ol class="finding-list">
 {% for f in v.findings %}
 <li id="{{ f.anchor }}">
 {% if f.thumbnail %}<div class="f-thumb"><img src="{{ f.thumbnail }}" alt="{{ f.thumbnail_alt }}"></div>{% endif %}
 <div class="f-body">
-<p class="f-head"><span class="fid">{{ f.id }}</span><span class="strength">{% if f.mark %}{{ v.marks[f.mark] }}{% else %}<span class="meter">{% for n in range(4) %}<i class="{{ 'on' if n < f.bars else 'off' }}"></i>{% endfor %}</span>{% endif %}</span></p>
+<p class="f-head"><span class="fid">{{ f.id }}</span>{% if f.get('assessment') %}<span class="strength">{{ f.assessment.label }}</span>{% endif %}</p>
 <p class="f-title">{{ f.title | symbols }}</p>
 {% if f.get('inference') %}
-<p class="finding-inference"><strong>Inference:</strong> {{ f.inference }}</p>
 {% for t in f.observations %}<p><strong>Observed:</strong> {{ t | symbols }}</p>{% endfor %}
+<p class="finding-inference"><strong>Interpretation:</strong> {{ f.inference }}</p>
+{% if f.get('assessment') %}
+<p><strong>Finding confidence:</strong> {% if f.assessment.confidence_pct is not none %}{{ f.assessment.confidence_pct }}% - {{ f.assessment.confidence_label }}.{% else %}Not established for this finding.{% endif %}</p>
+<p class="caption"><strong>Scope:</strong> {{ f.assessment.scope_label }}. {{ f.assessment.confidence_note }}</p>
+<p class="caption">Overall estimate: {% if f.assessment.included_in_overall is sameas true %}Included.{% elif f.assessment.included_in_overall is sameas false %}Assessed separately.{% else %}Coverage not recorded.{% endif %}</p>
+{% endif %}
 {% if f.scope_note %}<p class="caption">{{ f.scope_note }}</p>{% endif %}
 {% if f.support %}
 <ul class="finding-source-links">{% for evidence in f.support[:3] %}<li><a class="xref" href="{{ evidence.href }}">{{ evidence.label }}</a>{% if not evidence.direct %} (related check input){% endif %}</li>{% endfor %}</ul>

@@ -57,6 +57,9 @@ DISCLOSURES: tuple[Disclosure, ...] = (
                "Region maps are not validated and carry no weight in the decision. An earlier evaluation of one local editing "
                "check marked regions on 36 % of genuine photographs; this is not an error rate for every check or image. "
                "A marked region is not evidence of an edit on its own."),
+    Disclosure("image.splice_regions", _ran("loc.splice"), "local editing regions",
+               "The PNG region check looks for local recompression differences. It can flag ordinary processing, "
+               "and small or weak edits can go unmarked. Region measurements carry no weight in the whole-image estimate."),
     Disclosure("image.unadmitted_detectors", _ran("img.spai", "img.univfd"), "SPAI and UnivFD",
                "SPAI and UnivFD are not admitted: their scores are shown but carry no weight in the decision."),
     Disclosure("video.synthesis", _kind("video"), "fully generated video",

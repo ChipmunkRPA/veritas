@@ -141,10 +141,24 @@ def check(db: Session, registry: Any, source: Analysis, result: Mapping[str, Any
     mode = decision.get("fusion_mode")
     fuser = decision.get("fuser_sha256") if mode == "artefact" else None
     profile = manifest.get("profile") or source.profile
-    if fuser is not None:
-        selection = select_for_registry(registry, source.kind, profile, pin=fuser)
-        if selection.mode != "artefact":
-            problems.append(f"fuser artefact {fuser[:12]}…: {selection.reason}")
+
+    def fuser_problem(pin: str, pinned_profile: str) -> str | None:
+        if source.kind == "document":
+            from app.engine.stages import document_screening
+
+            if pin == document_screening.RETIRED_ARTICLE_PIN:
+                return document_screening.RETIRED_ARTICLE_REASON
+            if pin == document_screening.EMAIL_SHA256:
+                try:
+                    document_screening.load()
+                except (OSError, ValueError) as exc:
+                    return str(exc)
+                return None
+        selection = select_for_registry(registry, source.kind, pinned_profile, pin=pin)
+        return (selection.reason or "no compatible calibration") if selection.mode != "artefact" else None
+
+    if fuser is not None and (problem := fuser_problem(fuser, profile)):
+        problems.append(f"fuser artefact {fuser[:12]}…: {problem}")
     policy_id = manifest.get("policy_thresholds_id")
     if policy_id is not None and db.get(PolicyThresholdsRow, policy_id) is None:
         problems.append(f"policy thresholds {policy_id}: not found")
@@ -153,10 +167,8 @@ def check(db: Session, registry: Any, source: Analysis, result: Mapping[str, Any
     if stored:
         pins = dict(stored)
         kept_fuser = pins.get("fuser_sha256") if pins.get("fusion_mode") == "artefact" else None
-        if kept_fuser is not None and kept_fuser != fuser:
-            selection = select_for_registry(registry, source.kind, pins.get("profile") or profile, pin=kept_fuser)
-            if selection.mode != "artefact":
-                problems.append(f"fuser artefact {str(kept_fuser)[:12]}…: {selection.reason}")
+        if kept_fuser is not None and kept_fuser != fuser and (problem := fuser_problem(kept_fuser, pins.get("profile") or profile)):
+            problems.append(f"fuser artefact {str(kept_fuser)[:12]}…: {problem}")
         kept_policy = pins.get("policy_thresholds_id")
         if kept_policy is not None and kept_policy != policy_id and db.get(PolicyThresholdsRow, kept_policy) is None:
             problems.append(f"policy thresholds {kept_policy}: not found")

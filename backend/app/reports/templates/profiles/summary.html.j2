@@ -19,6 +19,12 @@
 {% endif %}
 <hr class="rule-double">
 </section>
+{% if v.get("service_policy") %}<section class="service-scope">
+<h2 class="eyebrow">{{ v.service_policy.title }}</h2>
+<p class="caption">{{ v.service_policy.confidence_notice }}</p>
+<p class="caption">{{ v.scope_statement }}</p>
+<p class="caption">{{ v.expert_note }}</p>
+</section>{% endif %}
 <section class="assessment verdict-{{ v.step }}">
 <h2 class="eyebrow">Assessment</h2>
 <p class="headline">{{ v.headline }}</p>
@@ -30,6 +36,7 @@
 {% endif %}
 <p class="estimate">{% set fallback_estimate = v.estimate_line %}{% include 'sections/customer_estimate.html.j2' %}</p>
 {% if v.get('customer_assessment', {}).get('scope_note') %}<p class="customer-scope"><strong>{{ v.customer_assessment.scope_label }}.</strong> {{ v.customer_assessment.scope_note }}</p>{% endif %}
+{% include 'sections/customer_soundtrack.html.j2' %}
 {% if v.get('customer_interval_note') %}<p class="caption">{{ v.customer_interval_note }}</p>{% endif %}
 {% if v.scale %}
 <div class="scale-figure">
@@ -95,8 +102,7 @@
 <li>
 {% if f.thumbnail %}<img class="thumb" src="{{ f.thumbnail }}" alt="{{ f.thumbnail_alt }}">{% endif %}
 <span class="fid">{{ f.id }}</span>
-<span class="strength" role="img" aria-label="{{ f.words }}">{% if f.mark %}{{ v.marks[f.mark] }}{% else %}<span class="meter">{% for n in range(4) %}<i class="{{ 'on' if n < f.bars else 'off' }}"></i>{% endfor %}</span>{% endif %}</span>
-<span class="body"><strong>{{ f.title }}</strong>{% if f.status %} <span class="ex-chip">Examiner: {{ f.status }}</span>{% endif %}{% if f.counter %}<span class="muted"> — counter-evidence</span>{% endif %}<br>{{ f.reason }}{% if f.get('support') %}<span class="caption">Source evidence: {% for evidence in f.support %}<a href="{{ evidence.href }}">{{ evidence.id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}{% if f.thumbnail and f.thumbnail_caption %}<span class="caption thumbnail-caption">{{ f.thumbnail_caption }}</span>{% endif %}</span>
+<span class="body"><strong>{{ f.title }}</strong>{% if f.get("assessment") %} <span class="muted">{{ f.assessment.label }}</span>{% endif %}{% if f.status %} <span class="ex-chip">Examiner: {{ f.status }}</span>{% endif %}{% if f.counter %}<span class="muted"> — counter-evidence</span>{% endif %}<br>{% if f.get("observations") %}<strong>Observed:</strong> {{ f.observations[0] }}<br>{% endif %}<strong>Interpretation:</strong> {{ f.inference or f.reason }}{% if f.get("assessment") %}<span class="caption">Finding confidence: {% if f.assessment.confidence_pct is not none %}{{ f.assessment.confidence_pct }}% for {{ f.assessment.scope_label }}.{% else %}Not established for this finding.{% endif %}</span>{% endif %}{% if f.get('support') %}<span class="caption">Source evidence: {% for evidence in f.support %}<a href="{{ evidence.href }}">{{ evidence.id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}{% if f.thumbnail and f.thumbnail_caption %}<span class="caption thumbnail-caption">{{ f.thumbnail_caption }}</span>{% endif %}</span>
 </li>
 {% endfor %}
 </ol>

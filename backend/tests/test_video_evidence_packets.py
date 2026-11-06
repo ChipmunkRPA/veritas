@@ -23,6 +23,7 @@ from app.detectors.video.swap import Window
 from app.evidence.image_packets import PacketIntegrityError
 from app.evidence.video_packets import (
     ANCHOR_VERSION,
+    VERSION,
     build_packet_set,
     load_packet_set,
     packet_hash,
@@ -121,7 +122,7 @@ def test_vfr_nonzero_origin_and_exact_frame_crops(video_fixture):
         assert frame["region_meaning"] == "detected_face_context"
     assert "PRIVATE MODEL" not in json.dumps(document)
     assert "not necessarily consecutive" in " ".join(document["limitations"])
-    assert document["version"] == "video-evidence-4"
+    assert document["version"] == VERSION
     assert packet["clip"]["status"] == "ready"
     assert packet["clip"]["source_pts"] == list(table.pts)
     assert packet["clip"]["sampled_frame_indices"] == [1, 2, 3]

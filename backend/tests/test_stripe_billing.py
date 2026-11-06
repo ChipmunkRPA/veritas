@@ -23,7 +23,7 @@ from sqlalchemy.orm import Session
 from app.api import auth, jobs, routes, security, tokens, v2_billing
 from app.api.v2 import install_problem_handlers
 from app.audit import chain as audit
-from app.billing import service
+from app.billing import purchase_notice, service
 from app.cases import intake
 from app.core.config import settings
 from app.engine.queue import JobQueue
@@ -96,11 +96,80 @@ def billing(tmp_path, monkeypatch):
     engine.dispose()
 
 
-def upload(f, *, request_key=None, headers=None, content=None, filename="private-name.png"):
+def upload(f, *, request_key=None, headers=None, content=None, filename="private-name.png", acknowledgement=True,
+           notice_version=None, notice_sha256=None):
+    data = {"kind": "image", "profile": "full"}
+    if acknowledgement is not None:
+        data.update(risk_accepted=str(acknowledgement).lower(), risk_notice_version=notice_version or purchase_notice.VERSION,
+                    risk_notice_sha256=notice_sha256 or purchase_notice.SHA256)
     return f.client.post("/api/v2/billing/checkout", headers={**(headers or f.headers),
                          "Idempotency-Key": request_key or str(uuid.uuid4())},
-                         data={"kind": "image", "profile": "full"},
+                         data=data,
                          files={"file": (filename, content if content is not None else f.image, "image/png")})
+
+
+@pytest.mark.parametrize("options", [
+    {"acknowledgement": None}, {"acknowledgement": False},
+    {"notice_version": "outdated-notice"}, {"notice_sha256": "0" * 64},
+])
+def test_no_order_payment_or_analysis_without_current_explicit_acknowledgement(billing, options):
+    response = upload(billing, **options)
+    assert response.status_code == 422
+    assert "accept" in response.json()["detail"].lower()
+    assert billing.created == []
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == db.query(Analysis).count() == db.query(Job).count() == 0
+
+
+def test_purchase_receipt_and_hosted_warning_are_bound_to_the_order(billing):
+    key = str(uuid.uuid4())
+    first = upload(billing, request_key=key)
+    assert first.status_code == 201
+    oid = first.json()["order_id"]
+    with billing.sessions() as db:
+        receipt = copy.deepcopy(db.get(BillingOrderRow, oid).purchase_acknowledgement)
+    assert receipt["accepted_by"] == billing.owner.id
+    assert receipt["notice"] == purchase_notice.NOTICE
+    assert receipt["notice_sha256"] == purchase_notice.SHA256
+    assert receipt["accepted_at"]
+    assert billing.created[0][0]["custom_text[submit][message]"] == purchase_notice.NOTICE["stripe_message"]
+    assert "private-name.png" not in json.dumps(billing.created)
+    assert upload(billing, request_key=key).json()["order_id"] == oid
+    with billing.sessions() as db:
+        assert db.get(BillingOrderRow, oid).purchase_acknowledgement == receipt
+    assert len(billing.created) == 1
+
+
+def test_old_checkout_requires_acknowledgement_on_resume(billing):
+    oid = upload(billing).json()["order_id"]
+    with billing.sessions() as db:
+        db.get(BillingOrderRow, oid).purchase_acknowledgement = None
+        db.commit()
+    path = f"/api/v2/billing/orders/{oid}/checkout"
+    assert billing.client.post(path, headers=billing.headers).status_code == 422
+    accepted = {"risk_accepted": True, "risk_notice_version": purchase_notice.VERSION,
+                "risk_notice_sha256": purchase_notice.SHA256}
+    assert billing.client.post(path, headers=billing.other_headers, json=accepted).status_code == 404
+    assert billing.client.post(path, headers=billing.headers, json=accepted).status_code == 200
+    with billing.sessions() as db:
+        receipt = db.get(BillingOrderRow, oid).purchase_acknowledgement
+        assert purchase_notice.recorded(receipt, billing.owner.id)
+        assert receipt["stripe_notice"] is False
+    assert len(billing.created) == 1
+
+
+def test_cannot_record_retrospective_acceptance_for_a_completed_order(billing):
+    oid = upload(billing).json()["order_id"]
+    with billing.sessions() as db:
+        order = db.get(BillingOrderRow, oid)
+        order.purchase_acknowledgement, order.status = None, "fulfilled"
+        db.commit()
+    response = billing.client.post(f"/api/v2/billing/orders/{oid}/checkout", headers=billing.headers,
+                                   json={"risk_accepted": True, "risk_notice_version": purchase_notice.VERSION,
+                                         "risk_notice_sha256": purchase_notice.SHA256})
+    assert response.status_code == 409
+    with billing.sessions() as db:
+        assert db.get(BillingOrderRow, oid).purchase_acknowledgement is None
 
 
 def event_for(f, order_id, *, event_id="evt_test_paid", paid=True):
@@ -387,7 +456,7 @@ def test_public_config_never_contains_credentials_and_secrets_do_not_enter_prove
     response = billing.client.get("/api/v2/billing/config")
     assert response.status_code == 200
     assert response.json() == {"enabled": True, "mode": "test", "ready": True, "amount_minor": 999,
-                               "currency": "usd", "price_display": "US$9.99", "requires_sign_in": True}
+                               "currency": "usd", "price_display": "US$9.99", "requires_sign_in": True, "purchase_notice": purchase_notice.public_notice()}
     assert "sk_test_" not in response.text and "whsec_" not in response.text
     assert "stripe_secret_key" not in sanitised_settings()
     assert "stripe_webhook_secret" not in sanitised_settings()

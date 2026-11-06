@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
+import { readFileSync } from 'node:fs'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { BillingError, billingApi, checkoutAddress, hasBillingIdentity } from './billing'
+import { BillingError, billingApi, purchaseAcceptance, checkoutAddress, hasBillingIdentity } from './billing'
 
 vi.mock('../hash', () => ({ sha256Blob: vi.fn(async () => 'a'.repeat(64)) }))
 afterEach(() => { vi.unstubAllGlobals(); localStorage.clear() })
@@ -23,13 +24,16 @@ describe('payment client boundaries', () => {
     const fetcher = vi.fn(async () => new Response(JSON.stringify({ order_id: 'order', checkout_url: 'https://checkout.stripe.com/c/pay/test', status: 'awaiting_payment' }), { status: 200 }))
     vi.stubGlobal('fetch', fetcher)
     localStorage.setItem('veritas_api_key', 'fixture-key')
-    await billingApi.checkout('document', new File(['Example'], 'source.txt'), 'full', 'same-attempt')
+    await billingApi.checkout('document', new File(['Example'], 'source.txt'), 'full', 'same-attempt', purchaseAcceptance(JSON.parse(readFileSync('../backend/tests/fixtures/purchase_notice.json', 'utf8'))))
     const [path, init] = fetcher.mock.calls[0] as unknown as [string, RequestInit]
     expect(path).toBe('/api/v2/billing/checkout')
     expect(init.headers).toMatchObject({ 'Idempotency-Key': 'same-attempt', 'X-API-Key': 'fixture-key' })
     const body = init.body as FormData
     expect(body.get('client_sha256')).toBe('a'.repeat(64))
     expect(body.get('kind')).toBe('document')
+    expect(body.get('risk_accepted')).toBe('true')
+    expect(body.get('risk_notice_version')).toBe('purchase-risk/v1')
+    expect(body.get('risk_notice_sha256')).toMatch(/^[a-f0-9]{64}$/)
     expect(body.has('amount_minor')).toBe(false)
     expect(body.has('currency')).toBe(false)
   })

@@ -12,13 +12,14 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
+from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 
 SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
-VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3'}, 'video': {'video-evidence-1', 'video-evidence-2', 'video-evidence-3', 'video-evidence-4'},
-            'audio': {'audio-evidence-1', 'audio-evidence-2'}, 'document': {'document-evidence-1', 'document-evidence-2'}}
+VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3'}, 'video': {'video-evidence-1', 'video-evidence-2', 'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'},
+            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2'}}
 
 
 def _require(condition: bool, detail: str) -> None:
@@ -66,13 +67,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'video':
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
-        if evidence['version'] in {'video-evidence-3', 'video-evidence-4'}:
+            validate_face_interval(packet, evidence['source'])
+        if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'}:
             from app.evidence.audio_binding import validate_audio_channel
             from app.evidence.av_binding import validate_av_channel
 
             validate_audio_channel(evidence['audio'], source['sha256'])
-            if evidence['version'] == 'video-evidence-4' and evidence['audio']['coverage'] is not None:
+            if evidence['version'] in {'video-evidence-4', 'video-evidence-5', 'video-evidence-6'} and evidence['audio']['coverage'] is not None:
                 _require(bool(evidence['audio'].get('acoustic_context')), 'Video acoustic context is missing')
+            if evidence['version'] in {'video-evidence-5', 'video-evidence-6'} and evidence['audio']['coverage'] is not None:
+                _require(evidence['audio']['acoustic_context']['schema'] == 'chipmunk.acoustic-context/2', 'Video continuity measurements are missing')
             validate_av_channel(evidence['av'], evidence['source'])
             packet_ids = [p['id'] for part in (evidence, evidence['audio'], evidence['av']) for p in part['packets']]
             _require(len(packet_ids) == len(set(packet_ids)), 'Video evidence packet identifiers collide across channels')
@@ -92,12 +96,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
     refs = {}
     parts = [evidence]
-    if evidence['version'] in {'video-evidence-3', 'video-evidence-4'}:
+    if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'}:
         parts.extend(evidence[key] for key in ('audio', 'av'))
     if analysis['kind'] == 'audio':
         acoustic = evidence.get('acoustic_context')
-        if evidence['version'] == 'audio-evidence-2':
+        if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')
+        if evidence['version'] == 'audio-evidence-3':
+            _require(acoustic['schema'] == 'chipmunk.acoustic-context/2', 'Audio continuity measurements are missing')
         if acoustic is not None:
             from app.evidence.audio_background_binding import validate_acoustic_context
 

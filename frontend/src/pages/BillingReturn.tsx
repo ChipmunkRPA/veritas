@@ -1,9 +1,10 @@
-import { useRef } from 'react'
+import PurchaseRiskAcknowledgement from '../features/billing/PurchaseRiskAcknowledgement'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { CheckCircle2, CreditCard, LoaderCircle } from 'lucide-react'
 import { Button } from '../components/ui'
-import { billingApi, openCheckout, orderPrice } from '../lib/api/billing'
+import { billingApi, openCheckout, orderPrice, purchaseAcceptance } from '../lib/api/billing'
 
 export default function BillingReturn() {
   const [params] = useSearchParams()
@@ -11,6 +12,7 @@ export default function BillingReturn() {
   const validId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
   const returnedFromCancel = params.get('cancelled') === '1'
   const opening = useRef(false)
+  const [riskAccepted, setRiskAccepted] = useState(false)
   const order = useQuery({
     queryKey: ['billing', 'order', id], queryFn: () => billingApi.order(id), enabled: validId, retry: 0,
     refetchInterval: (query) => {
@@ -19,10 +21,18 @@ export default function BillingReturn() {
     },
   })
   const resume = useMutation({
-    mutationFn: async () => { const result = await billingApi.resume(id); openCheckout(result.checkout_url) },
+    mutationFn: async () => {
+      const current = order.data
+      if (!current?.purchase_acknowledged && (!riskAccepted || !current?.purchase_notice)) {
+        throw new Error('Read and accept the analysis limitations before checkout.')
+      }
+      const result = await billingApi.resume(id, current?.purchase_acknowledged ? undefined : purchaseAcceptance(current!.purchase_notice))
+      openCheckout(result.checkout_url)
+    },
     onError: () => { opening.current = false; void order.refetch() },
   })
   const data = order.data
+  useEffect(() => { setRiskAccepted(false) }, [id, data?.purchase_notice?.version, data?.purchase_notice?.sha256])
   const fulfilled = data?.status === 'fulfilled'
   const failed = fulfilled && ['failed', 'cancelled'].includes(data.analysis_status ?? '')
   const expired = data?.status === 'expired'
@@ -57,8 +67,10 @@ export default function BillingReturn() {
             : <p role="status" className="text-small text-text mt-3 mb-0">{returnedFromCancel
               ? 'Payment has not been confirmed for this order. You can return to the same checkout when you are ready.'
               : 'We are waiting for Stripe to confirm payment. Your analysis starts after that confirmation. This page checks automatically.'}</p>}
+          {waiting && !data.purchase_acknowledged && data.purchase_notice && <PurchaseRiskAcknowledgement kind={data.kind} notice={data.purchase_notice} accepted={riskAccepted} onChange={setRiskAccepted} disabled={resume.isPending} />}
+          {waiting && data.purchase_acknowledged && <p className="mt-4 mb-0 text-small text-text-muted">Your earlier acknowledgment is saved with this order. Automated checks may miss deepfakes, flag genuine material, or return no conclusion.</p>}
           {waiting && <div className="mt-5">
-            <Button variant={returnedFromCancel ? 'primary' : 'ghost'} disabled={resume.isPending} onClick={() => {
+            <Button variant={returnedFromCancel ? 'primary' : 'ghost'} disabled={resume.isPending || (!data.purchase_acknowledged && (!data.purchase_notice || !riskAccepted))} onClick={() => {
               if (opening.current) return
               opening.current = true
               resume.mutate()

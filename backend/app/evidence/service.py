@@ -82,7 +82,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     if document is None:
         return {}
     parts = [document]
-    if document.get("version") in {"video-evidence-3", "video-evidence-4"}:
+    if document.get("version") in {"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6"}:
         parts.extend(document[key] for key in ("audio", "av"))
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]

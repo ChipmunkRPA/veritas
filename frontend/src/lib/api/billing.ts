@@ -5,6 +5,26 @@ import { ApiError, authHeaders } from './client'
 import { refusedSession } from './sessionEnd'
 import type { AnalysisProfile } from './intake'
 
+export interface PurchaseNotice {
+  version: string
+  sha256: string
+  title: string
+  points: string[]
+  acknowledgement_label: string
+  document_notice: string
+  stripe_message: string
+}
+
+export interface PurchaseAcceptance {
+  risk_accepted: true
+  risk_notice_version: string
+  risk_notice_sha256: string
+}
+
+export function purchaseAcceptance(notice: PurchaseNotice): PurchaseAcceptance {
+  return { risk_accepted: true, risk_notice_version: notice.version, risk_notice_sha256: notice.sha256 }
+}
+
 export interface BillingConfig {
   enabled: boolean
   mode: 'disabled' | 'test' | 'live'
@@ -13,6 +33,7 @@ export interface BillingConfig {
   amount_minor: number
   price_display: string
   requires_sign_in: boolean
+  purchase_notice: PurchaseNotice
 }
 
 export interface BillingOrder {
@@ -22,6 +43,9 @@ export interface BillingOrder {
   analysis_status: string | null
   amount_minor: number
   currency: string
+  kind: Kind
+  purchase_acknowledged: boolean
+  purchase_notice: PurchaseNotice
 }
 
 export interface CheckoutResult {
@@ -51,16 +75,21 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export const billingApi = {
   config: (): Promise<BillingConfig> => request('/config'),
-  checkout: async (kind: Kind, file: File, profile: AnalysisProfile, key: string): Promise<CheckoutResult> => {
+  checkout: async (kind: Kind, file: File, profile: AnalysisProfile, key: string, acceptance: PurchaseAcceptance): Promise<CheckoutResult> => {
     const body = new FormData()
     body.append('file', file)
     body.append('kind', kind)
     body.append('profile', profile)
+    body.append('risk_accepted', String(acceptance.risk_accepted))
+    body.append('risk_notice_version', acceptance.risk_notice_version)
+    body.append('risk_notice_sha256', acceptance.risk_notice_sha256)
     body.append('client_sha256', await sha256Blob(file))
     return request('/checkout', { method: 'POST', headers: { 'Idempotency-Key': key }, body })
   },
   order: (id: string): Promise<BillingOrder> => request(`/orders/${encodeURIComponent(id)}`),
-  resume: (id: string): Promise<CheckoutResult> => request(`/orders/${encodeURIComponent(id)}/checkout`, { method: 'POST' }),
+  resume: (id: string, acceptance?: PurchaseAcceptance): Promise<CheckoutResult> => request(`/orders/${encodeURIComponent(id)}/checkout`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(acceptance ?? {}),
+  }),
 }
 
 export const useBilling = () => useQuery({ queryKey: ['billing', 'config'], queryFn: billingApi.config, staleTime: 30_000, retry: 0 })

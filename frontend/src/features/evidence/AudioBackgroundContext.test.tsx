@@ -42,6 +42,21 @@ const show = (set: AudioEvidenceSet, entry = '/analysis') => render(<MemoryRoute
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('background and recording context', () => {
+  it('shows a new continuity lead with the same source-bound media and ordinary-music limitation', () => {
+    const set = fixture()
+    set.version = 'audio-evidence-3'
+    set.acoustic_context!.schema = 'chipmunk.acoustic-context/2'
+    set.acoustic_context!.events[0].category = 'spectral_transition'
+    set.acoustic_context!.events[0].interpretation = 'Ordinary music can cause this pattern; this is a listening lead, not evidence of AI origin.'
+    set.acoustic_context!.omitted_continuity_windows = 2
+    show(set)
+    expect(screen.getByRole('button', { name: 'Inspect B01, Possible sound-content transition, 2.000 s–3.000 s' })).toBeTruthy()
+    expect(screen.getByText(/Ordinary music can cause/)).toBeTruthy()
+    expect(screen.getByText(/2 overlapping or lower-ranked frequency comparisons/)).toBeTruthy()
+    expect(screen.getByLabelText('B01: exact acoustic interval').getAttribute('src')).toContain(set.acoustic_context!.events[0].artifacts.selected_clip.sha256)
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+
   it('shows real acoustic assets and intervals even with no voice scoring, without treating quiet sound as synthesis', () => {
     const set = fixture(), original = structuredClone(set)
     show(set)

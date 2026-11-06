@@ -1,18 +1,22 @@
-from copy import deepcopy
 import hashlib
 import io
+from copy import deepcopy
 
 import numpy as np
-from PIL import Image
 import pytest
+from PIL import Image
 
 from app.core.canonical import canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav
-from app.evidence.audio_background import build_content, measurements, spectrogram_values, verify_source_content
+from app.evidence.audio_background import (
+    build_content,
+    spectrogram_values,
+    verify_source_content,
+)
 from app.evidence.audio_packets import _chart
 
 
-def build(pcm):
+def build(pcm, *, version='mixed-acoustics-2'):
     pcm = (np.rint(np.asarray(pcm) * 32768).clip(-32768, 32767).astype('<i2').astype(np.float32) / 32768)
     sha = hashlib.sha256(pcm.astype('<f4').tobytes()).hexdigest()
     source = {'sha256': 'a'*64, 'pcm_sha256': sha, 'samples': len(pcm), 'sample_rate': SAMPLE_RATE, 'coordinate_space': 'analysed-mono-pcm'}
@@ -26,7 +30,7 @@ def build(pcm):
         assets[sha] = data
         return {'sha256': sha, 'media_type': media_type, 'url': '/assets/'+sha, **metadata}
     packets = [{'id':'A01', 'interval':{'start_sample':0, 'end_sample':len(pcm)}}]
-    document = build_content(pcm, mapping, source, packets, asset, _chart)
+    document = build_content(pcm, mapping, source, packets, asset, _chart, version=version)
     return document, assets, pcm, source, mapping, packets
 
 

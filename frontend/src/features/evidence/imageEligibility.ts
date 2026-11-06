@@ -13,11 +13,26 @@ export function eligibilityView(gate?: CandidateEligibility) {
     explanation: 'This record does not document a whole-image eligibility gate. Missing eligibility information does not establish authenticity.' }
   const score = decimal(gate.score_exact_decimal, gate.score)
   const threshold = decimal(gate.threshold_exact_decimal, gate.threshold)
-  if (gate.schema !== 'image-candidate-eligibility/1' || gate.status !== 'evaluated' || gate.scope !== 'whole_image'
+  if (!['image-candidate-eligibility/1', 'image-candidate-eligibility/2'].includes(gate.schema)
+    || gate.status !== 'evaluated' || gate.scope !== 'whole_image'
     || gate.comparison !== 'greater_or_equal' || typeof gate.eligible !== 'boolean' || score === null || threshold === null
     || gate.eligible !== (score >= threshold)) {
     return { status: 'unavailable' as const, title: 'Image eligibility unavailable', score: null, threshold: null,
       explanation: 'An exact eligibility response could not be displayed. This does not establish that the image is unaltered.' }
+  }
+  if (gate.schema === 'image-candidate-eligibility/2') {
+    const { active_cells: active, minimum_active_cells: minimum, input_cells: total } = gate
+    if (active === undefined || minimum === undefined || total === undefined
+      || ![active, minimum, total].every(Number.isSafeInteger) || active < 0 || active > total
+      || minimum < 1 || minimum > total || active / total !== score || minimum / total !== threshold) {
+      return { status: 'unavailable' as const, title: 'Image eligibility unavailable', score: null, threshold: null,
+        explanation: 'The recorded response cell counts could not be verified.' }
+    }
+    return { status: gate.eligible ? 'eligible' as const : 'withheld' as const, areaCells: true,
+      title: gate.eligible ? 'Eligible for region inspection' : 'Regions withheld by the image gate',
+      score: String(active), threshold: String(minimum), explanation: gate.eligible
+        ? 'The map met the minimum area rule for showing candidates. Normal processing can also create a highlight.'
+        : 'The map was below the minimum area rule. Small or weak edits may be missed.' }
   }
   return { status: gate.eligible ? 'eligible' as const : 'withheld' as const,
     title: gate.eligible ? 'Eligible for region inspection' : 'Regions withheld by the image gate',

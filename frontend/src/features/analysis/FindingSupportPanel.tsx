@@ -5,6 +5,7 @@ import { getImageEvidence } from '../evidence/imagePackets'
 import { getMultimediaEvidence } from '../evidence/multimediaPackets'
 import { anonymizeModelNames } from './checkNames'
 import { findingSupport, type FindingSupportEvidence, type FindingSupportLink } from './findingSupport'
+import { findingAssessment, findingObservations, type FindingAssessment, type FindingContext } from './findingAssessment'
 
 /** One query per findings list; it shares the evidence cards' query cache. */
 export function useFindingEvidence(analysis: Pick<AnalysisDetail, 'id' | 'kind'>) {
@@ -23,13 +24,14 @@ export function useFindingEvidence(analysis: Pick<AnalysisDetail, 'id' | 'kind'>
   return { evidence: result.data, pending: supported && result.isPending, failed: result.isError, retry: () => { void result.refetch() } }
 }
 
-export interface FindingSupportData {
+export interface FindingSupportData extends FindingContext {
   analysisId: string
   signals: readonly SignalV2[]
   evidence?: FindingSupportEvidence
   pending?: boolean
   failed?: boolean
   retry?: () => void
+  assessments?: readonly FindingAssessment[]
 }
 
 /** Read-only observations and links, never an examiner disposition or a new detection claim. */
@@ -38,6 +40,8 @@ export default function FindingSupportPanel({ finding, data, cards = [] }: {
 }) {
   const support = findingSupport({ ...data, finding })
   const describe = (text: string) => anonymizeModelNames(text, cards, data.signals)
+  const assessment = data.assessments?.find(row => row.finding_id === finding.id) ?? findingAssessment(finding, data)
+  const observations = findingObservations(finding, data)
   const packet = (item: FindingSupportLink) => (
     <li key={item.id} className="border-l-2 border-border pl-3">
       <Link to={item.href} data-testid="finding-source-support" className="inline-block min-h-8 text-small font-medium text-accent underline underline-offset-[3px] hover:text-accent-hover">
@@ -49,6 +53,18 @@ export default function FindingSupportPanel({ finding, data, cards = [] }: {
   )
   return (
     <div data-testid="finding-support" data-finding-id={finding.id} className="mt-3 w-full min-w-0">
+      <p className="m-0 text-caption font-medium text-text-muted">Observed evidence</p>
+      {observations.slice(0, 2).map(text => <p key={text} className="mt-1 mb-0 text-small text-text max-w-[78ch]">{describe(text)}</p>)}
+      <dl data-testid="finding-interpretation" data-direction={assessment.direction} className="mt-3 mb-3 grid grid-cols-[110px_minmax(0,1fr)] gap-x-3 gap-y-1 text-small">
+        <dt className="text-text-muted">Interpretation</dt><dd className="m-0 font-medium text-text">{assessment.label}</dd>
+        <dt className="text-text-muted">Confidence</dt><dd className="m-0 text-text">{assessment.confidence_pct === null
+          ? 'Not established for this finding' : `${assessment.confidence_pct}% · ${assessment.confidence_label}`}</dd>
+        <dt className="text-text-muted">Scope</dt><dd className="m-0 text-text">{assessment.scope_label}</dd>
+        <dt className="text-text-muted">Overall estimate</dt><dd className="m-0 text-text">{assessment.included_in_overall === true ? 'Included'
+          : assessment.included_in_overall === false ? 'Assessed separately' : 'Coverage not recorded'}</dd>
+      </dl>
+      <p className="mt-1 mb-0 text-small text-text max-w-[78ch]">{assessment.interpretation}</p>
+      <p className="mt-1 mb-3 text-caption text-text-muted max-w-[84ch]">{assessment.confidence_note}</p>
       <p className="m-0 text-caption font-medium text-text-muted">Supporting evidence · <span className="font-mono">{finding.id}</span></p>
       {support.packets.length > 0 && <>
         <ul className="mt-2 mb-0 p-0 list-none space-y-3">{support.packets.slice(0, 2).map(packet)}</ul>

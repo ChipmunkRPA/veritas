@@ -4,7 +4,7 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, e
 import { rationalSeconds, seconds, type AcousticContextEvent, type AudioEvidenceSet } from './multimediaPackets'
 
 const labels: Record<AcousticContextEvent['category'], string> = {
-  energy_change: 'Sound level change', near_silence: 'Very quiet interval', clipping: 'Near-full-scale samples',
+  spectral_transition: 'Possible sound-content transition', energy_change: 'Sound level change', near_silence: 'Very quiet interval', clipping: 'Near-full-scale samples',
 }
 
 export default function AudioBackgroundContext({ set, token, mediaReady, pauseAudio }: {
@@ -19,7 +19,7 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
     if (event) { pauseAudio(); setSelectedId(event.id) }
   }, [hash, context]) // pauseAudio is a presentation callback; source/hash changes select the event.
   const selected = events.find((event) => event.id === selectedId) ?? events[0]
-  const bound = context?.schema === 'chipmunk.acoustic-context/1' && context.status === 'ready'
+  const bound = context && ['chipmunk.acoustic-context/1', 'chipmunk.acoustic-context/2'].includes(context.schema) && context.status === 'ready'
     && context.source.sha256 === set.source.sha256
     && context.source.pcm_sha256 === set.source.pcm_sha256
     && context.source.sample_rate === set.source.sample_rate && context.source.sample_rate > 0
@@ -36,7 +36,7 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
     {!context ? <p className="mt-2 mb-0 text-small text-text-muted">Background and recording measurements were not captured for this saved result. Run a new analysis to include them; their absence does not clear the recording.</p>
       : !bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The acoustic record does not match this analyzed audio input. Its charts and clips cannot be shown.</p>
         : <>
-          <p className="mt-2 mb-0 text-small text-text-muted">Inspect changes in the mixed sound track, including quiet intervals and near-full-scale samples. Voice, music and environmental sound remain mixed together; this is not an isolated background track or a verdict about AI use.</p>
+          <p className="mt-2 mb-0 text-small text-text-muted">Inspect changes in the mixed sound track, including possible sound-content transitions, quiet intervals and near-full-scale samples. Voice, music and environmental sound remain mixed together; this is not an isolated background track or a verdict about AI use.</p>
           <p className="mt-2 mb-0 font-mono text-caption text-text-muted">Measured input: 0.000 s–{seconds(context.source.samples / context.source.sample_rate)} · {context.bins.length} recorded acoustic blocks</p>
           {context.summary && <EvidenceMeasurements values={[
             { label: 'Low-energy reference of the mixed track', value: context.summary.low_energy_reference_dbfs, unit: 'dBFS' },
@@ -89,6 +89,7 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
             </article>)}
           </> : <p className="mt-4 mb-0 text-small text-text-muted">No acoustic interval met the saved selection rules. The overview remains available; this does not establish authenticity or a natural voice.</p>}
           {(context.omitted_events ?? 0) > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">{context.omitted_events} further acoustic observations are omitted from this bounded presentation.</p>}
+          {(context.omitted_continuity_windows ?? 0) > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">{context.omitted_continuity_windows} overlapping or lower-ranked frequency comparisons are recorded in the export. Up to four distinct transition leads are shown.</p>}
           <EvidenceLimits lines={context.limitations} />
         </>}
   </section>

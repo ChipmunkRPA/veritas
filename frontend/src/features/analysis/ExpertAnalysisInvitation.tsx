@@ -1,3 +1,4 @@
+import { STANDARD_SERVICE_POLICY as policy } from './standardServicePolicy'
 import { ArrowUpRight, MessagesSquare } from 'lucide-react'
 import { ButtonLink, CodeChip } from '../../components/ui'
 
@@ -31,13 +32,12 @@ export default function ExpertAnalysisInvitation({ analysisId }: { analysisId: s
           <p className="eyebrow m-0 flex items-center gap-2 text-accent">
             <MessagesSquare size={16} strokeWidth={1.5} aria-hidden /> Expert services
           </p>
-          <h2 id="expert-analysis-heading" className="display mt-2 mb-0 text-h2 font-medium text-text">Need a deeper expert analysis?</h2>
+          <h2 id="expert-analysis-heading" className="display mt-2 mb-0 text-h2 font-medium text-text">Need a privately researched expert report?</h2>
           <p className="mt-2 mb-0 text-body text-text">
-            Contact the Chipmunk team to discuss a closer examination of the original material,
-            a written expert opinion, or expert witness support.
+            {policy.private_engagement_notice}
           </p>
           <p className="mt-2 mb-0 text-small text-text-muted">
-            Scope, fees and deliverables are agreed directly under a separate signed engagement agreement.
+            {policy.court_notice}
           </p>
         </div>
         <div className="flex shrink-0 flex-col items-start gap-2 lg:max-w-[260px]">

@@ -12,11 +12,13 @@ from PIL import Image
 
 from app.detectors.image import fused
 from app.detectors.image import localiser as loc
-from app.detectors.image.adapters.localisers import FusedDetector
+from app.detectors.image.adapters.localisers import FusedDetector, SpliceDetector
 from app.engine.detector import Profile
 from app.engine.exhibits import ExhibitWriter
 from app.engine.manifest import load_manifest
 from app.engine.models import ManagedModel
+from app.evidence.image_eligibility import validate_gate
+from app.reports.image_eligibility import eligibility_view
 from app.storage.objects import ObjectStore
 
 
@@ -153,3 +155,23 @@ def test_persisted_source_and_scalar_hash_bind_gate_with_raw_score(context_facto
         assert result.metrics["regions"] == 0
         assert "withheld" in result.reasoning and "not a finding of authenticity" in result.reasoning
     assert "uncalibrated" in result.reasoning and "does not validate any pixel" in result.reasoning
+
+
+def test_splice_region_boundary_and_native_area_are_separate(context_factory, monkeypatch):
+    from app.detectors.image import splice
+
+    ctx, _, store = context_factory(object())
+    ctx.exhibits = ExhibitWriter("splice-adapter-fixture", store, created_by="loc.splice")
+    raw = np.full((splice.INPUT_SIZE, splice.INPUT_SIZE), .65, np.float32)
+    raw[:80, :100] = .8
+    monkeypatch.setattr(splice, "predict", lambda model, image: raw)
+    result = SpliceDetector().run(ctx)
+    measured = result.details["localisation"]
+    gate = measured["candidate_eligibility"]
+    assert measured["threshold"] == .7
+    assert gate["active_cells"] == 8000 and gate["minimum_active_cells"] == 7993
+    assert gate["eligible"] and result.metrics["regions"] == 1
+    assert eligibility_view(gate)["score"] == "8000"
+    assert result.metrics["flagged_share"] < .07  # The .65 background never passes the .70 rule.
+    with pytest.raises(ValueError, match="contradicts its native response cell counts"):
+        validate_gate({**gate, "active_cells": 7900})

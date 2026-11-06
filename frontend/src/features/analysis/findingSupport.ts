@@ -58,6 +58,11 @@ function videoLocation(packet: VideoEvidencePacket): LocatedPacket | null {
   const frames = (packet.frames ?? []).filter(validFrame)
   const frame = frames.find((item) => item.is_peak) ?? frames[0]
   if (!frame) return null
+  const face = packet.face_interval
+  if (face && finite(face.start_stream_s) && finite(face.end_stream_s) && face.end_stream_s > face.start_stream_s) {
+    return { packet, label: `${packet.id} · Face review ${seconds(face.start_stream_s)}–${seconds(face.end_stream_s)} (source clock)`,
+      scope: 'video_frames', note: 'Before, during and after frames from one tracked face. The range marks sampled responses.' }
+  }
   let location = `Frame ${frame.anchor.frame_index} · ${seconds(frame.anchor.stream_time_s)} (source clock)`
   const window = packet.window
   if (packet.claim_scope === 'sampled_window' && window && finite(window.start_stream_s) && finite(window.end_stream_s)
@@ -100,7 +105,7 @@ function documentLocation(packet: DocumentEvidencePacket, chars?: number): Locat
 /** Keep nested links aligned with the channels the evidence workspace can actually render. */
 function videoLocations(set: VideoEvidenceSet): (LocatedPacket | null)[] {
   const result = set.packets.map(videoLocation)
-  if (!['video-evidence-3', 'video-evidence-4'].includes(set.version)) return result
+  if (!['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'].includes(set.version)) return result
   const audio = set.audio, av = set.av
   const audioCoverage = audio?.coverage, avCoverage = av?.coverage
   if (audio && audio.source.sha256 === set.source.sha256 && ['ready', 'not_assessed'].includes(audio.status)

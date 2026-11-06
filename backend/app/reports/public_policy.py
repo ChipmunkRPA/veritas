@@ -3,10 +3,9 @@ from app.reports import engine
 
 
 def downloadable_template(template: str, kind: str | None = None) -> bool:
-    # Pre-r64 generated methods, calibration rows and implementation coverage
-    # can expose architecture/fusion identities for any media kind. A clean
-    # individual fixture cannot establish that an entire old template is safe.
-    return template in {engine.TEMPLATE_SET, 'veritas-report-2.0.r64', 'veritas-report-2.0.r65', 'veritas-report-2.0.r66'}
+    # Earlier headlines could promote inconclusive results or overstate video
+    # coverage. Generate a new public copy using the corrected presentation.
+    return template == engine.TEMPLATE_SET
 
 
 def package_template(template: str, kind: str | None = None) -> bool:

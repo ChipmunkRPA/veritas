@@ -1,0 +1,400 @@
+{
+  "schema": "chipmunk.splice-tiles-review/1",
+  "section": "confirmation",
+  "manifest_sha256": "00975f23e17b1dc5cbd67a69325e42412719922f9a770fd3a6df91afdb6d30ea",
+  "lock_sha256": "2f629621740c55e4a59e7ea5354388272a6578b6e322b6d62b3e4e3e2cb5cabb",
+  "predictions_sha256": "86974aeba3398029b94c7ead007fa1ea37ec381703081db3cc3be3f40aa63c08",
+  "jpeg_reference_sha256": "6f874bbccaa70923566e711c32c3005dc5846d98b599c8bf3a76c62944ebbffe",
+  "conditions": {
+    "native": {
+      "baseline": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 0,
+        "edits_with_overlap": 15,
+        "mean_edit_iou": 0.20383780744892924,
+        "mean_edit_pixel_f1": 0.24081990518170449
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 0,
+        "edits_with_overlap": 15,
+        "mean_edit_iou": 0.20383780744892924,
+        "mean_edit_pixel_f1": 0.24081990518170449
+      },
+      "paired_iou_difference": {
+        "mean": 0.0,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ]
+      },
+      "meets_count_tradeoff": false,
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 96,
+      "qualifies_for_scoped_local_adoption": false
+    },
+    "jpeg75": {
+      "baseline": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 6,
+        "edits_with_overlap": 9,
+        "mean_edit_iou": 0.060820096591585514,
+        "mean_edit_pixel_f1": 0.08702267375845794
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 6,
+        "edits_with_overlap": 9,
+        "mean_edit_iou": 0.060820096591585514,
+        "mean_edit_pixel_f1": 0.08702267375845794
+      },
+      "paired_iou_difference": {
+        "mean": 0.0,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ]
+      },
+      "meets_count_tradeoff": false,
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 96,
+      "qualifies_for_scoped_local_adoption": false
+    }
+  },
+  "families": {
+    "firefly": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 3,
+          "mean_edit_iou": 0.13927341351862738,
+          "mean_edit_pixel_f1": 0.15981659728749498
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 3,
+          "mean_edit_iou": 0.13927341351862738,
+          "mean_edit_pixel_f1": 0.15981659728749498
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 1,
+          "edits_with_overlap": 1,
+          "mean_edit_iou": 0.02295333318789439,
+          "mean_edit_pixel_f1": 0.033575830707248
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 1,
+          "edits_with_overlap": 1,
+          "mean_edit_iou": 0.02295333318789439,
+          "mean_edit_pixel_f1": 0.033575830707248
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      }
+    },
+    "flux-fill": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.2702151752603696,
+          "mean_edit_pixel_f1": 0.31177048685020714
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.2702151752603696,
+          "mean_edit_pixel_f1": 0.31177048685020714
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 2,
+          "mean_edit_iou": 0.07154489179617411,
+          "mean_edit_pixel_f1": 0.08743633953857412
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 2,
+          "mean_edit_iou": 0.07154489179617411,
+          "mean_edit_pixel_f1": 0.08743633953857412
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      }
+    },
+    "sd2": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.2020248335677908,
+          "mean_edit_pixel_f1": 0.25087263140741134
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.2020248335677908,
+          "mean_edit_pixel_f1": 0.25087263140741134
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 3,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.08796206479068805,
+          "mean_edit_pixel_f1": 0.1400558510295517
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 3,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.08796206479068805,
+          "mean_edit_pixel_f1": 0.1400558510295517
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "meets_count_tradeoff": false,
+        "tile_failure_count": 0,
+        "cases_with_scheduled_tiles": 32
+      }
+    }
+  },
+  "limits": "Localization component only, not whole-file AI confidence or the complete UI packet policy. Generator training overlap unknown. Formats share source groups. A failed additional tile check retains only the prior assessed result and remains recorded as a tile failure.",
+  "decision": "Rejected: no new overlapping edits and no IoU gain on fresh confirmation; customer configuration and confidence remain unchanged.",
+  "source_overlap_audit": {
+    "method": "63-bit median DCT perceptual hash on original controls, excluding DC; flags require manual inspection, not proof of source identity.",
+    "minimum_distance": 16,
+    "exact_byte_matches": 0,
+    "new_sources": 48,
+    "prior_sources": 192
+  },
+  "secondary_author_mask_unavailable": 1,
+  "reference_mask": "Exact native RGB differences between each verified original and its delivered splice. One secondary author mask is absent and remains declared unavailable; no source was replaced.",
+  "global_normalization_development": {
+    "native": {
+      "baseline": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 5,
+        "edits_with_overlap": 16,
+        "mean_edit_iou": 0.12850609213370995,
+        "mean_edit_pixel_f1": 0.15380664360489604
+      },
+      "candidate": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 6,
+        "edits_with_overlap": 16,
+        "mean_edit_iou": 0.12850609213370995,
+        "mean_edit_pixel_f1": 0.15380664360489604
+      },
+      "paired_iou_difference": {
+        "mean": 0.0,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ]
+      },
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 144,
+      "meets_count_tradeoff": false,
+      "qualifies_for_scoped_local_adoption": false
+    },
+    "jpeg75": {
+      "baseline": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 3,
+        "edits_with_overlap": 8,
+        "mean_edit_iou": 0.03736810087372448,
+        "mean_edit_pixel_f1": 0.05379174557706222
+      },
+      "candidate": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 4,
+        "edits_with_overlap": 8,
+        "mean_edit_iou": 0.03736810087372448,
+        "mean_edit_pixel_f1": 0.05379174557706222
+      },
+      "paired_iou_difference": {
+        "mean": 0.0,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ]
+      },
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 144,
+      "meets_count_tradeoff": false,
+      "qualifies_for_scoped_local_adoption": false
+    }
+  },
+  "local_normalization_development": {
+    "native": {
+      "baseline": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 5,
+        "edits_with_overlap": 16,
+        "mean_edit_iou": 0.12850609213370995,
+        "mean_edit_pixel_f1": 0.15380664360489604
+      },
+      "candidate": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 6,
+        "edits_with_overlap": 17,
+        "mean_edit_iou": 0.13681294480955217,
+        "mean_edit_pixel_f1": 0.16420259757603695
+      },
+      "paired_iou_difference": {
+        "mean": 0.008306852675842198,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.02492055802752659
+        ]
+      },
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 144,
+      "meets_count_tradeoff": true,
+      "qualifies_for_scoped_local_adoption": false
+    },
+    "jpeg75": {
+      "baseline": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 3,
+        "edits_with_overlap": 8,
+        "mean_edit_iou": 0.03736810087372448,
+        "mean_edit_pixel_f1": 0.05379174557706222
+      },
+      "candidate": {
+        "originals": 72,
+        "edits": 72,
+        "unassessed": 0,
+        "originals_with_regions": 4,
+        "edits_with_overlap": 8,
+        "mean_edit_iou": 0.03736810087372448,
+        "mean_edit_pixel_f1": 0.05379174557706222
+      },
+      "paired_iou_difference": {
+        "mean": 0.0,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ]
+      },
+      "tile_failure_count": 0,
+      "cases_with_scheduled_tiles": 144,
+      "meets_count_tradeoff": false,
+      "qualifies_for_scoped_local_adoption": false
+    }
+  },
+  "source_archive_sha256": "a17c7080f65d9a12f15aaa1238468f670830c7d1ab1d68b51052a9b55cc81007"
+}

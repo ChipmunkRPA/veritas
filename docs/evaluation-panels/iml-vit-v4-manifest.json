@@ -1,0 +1,2071 @@
+{
+  "dataset": "TGIF and TGIF2",
+  "revision": "fc5c557bd1a2d49a5dabc3676a54cfc44798f4ea",
+  "plan_sha256": "05cb4b55f9895c85b9264a62d2d69aa20cde4357dad3d39e22892e20a9858406",
+  "items": [
+    {
+      "id": "firefly-271402-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "271402",
+      "image": "9b039a2fd12a25852859f6fd630247403ec7a9d11e6dfc56ae0473c68cc00456.png",
+      "image_sha256": "9b039a2fd12a25852859f6fd630247403ec7a9d11e6dfc56ae0473c68cc00456",
+      "archive_source": {
+        "file": "9b039a2fd12a25852859f6fd630247403ec7a9d11e6dfc56ae0473c68cc00456.png",
+        "sha256": "9b039a2fd12a25852859f6fd630247403ec7a9d11e6dfc56ae0473c68cc00456",
+        "bytes": 942754,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/tennis racket/271402_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-271402-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "271402",
+      "image": "e922ae8d47ac5f19f8b26fccb97c943d08b5eb5dd60dab0d17552f4b6356fb95.png",
+      "image_sha256": "e922ae8d47ac5f19f8b26fccb97c943d08b5eb5dd60dab0d17552f4b6356fb95",
+      "archive_source": {
+        "file": "e922ae8d47ac5f19f8b26fccb97c943d08b5eb5dd60dab0d17552f4b6356fb95.png",
+        "sha256": "e922ae8d47ac5f19f8b26fccb97c943d08b5eb5dd60dab0d17552f4b6356fb95",
+        "bytes": 940550,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/tennis racket/271402_mask_bbox.png_ps_0.png"
+      },
+      "mask": "5da6890b610a3ee7d44bc997bea3dab61d5c9a062f11ac5dceddc0f70ebdc3c0.mask.png",
+      "mask_sha256": "5da6890b610a3ee7d44bc997bea3dab61d5c9a062f11ac5dceddc0f70ebdc3c0",
+      "author_mask": {
+        "file": "f75c70a6c275db890e4c5730db59aae1fcfa1d284431d120c56875d17a911113.png",
+        "sha256": "f75c70a6c275db890e4c5730db59aae1fcfa1d284431d120c56875d17a911113",
+        "bytes": 1485,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/tennis racket/271402_mask_bbox.png"
+      },
+      "changed_fraction": 0.09512410121681415,
+      "changed_within_author_mask": 0.9536052814875382
+    },
+    {
+      "id": "firefly-471789-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "471789",
+      "image": "5150e789beb7aadb650696433409f72282e43ad2def6c40d1617e08f8b856b69.png",
+      "image_sha256": "5150e789beb7aadb650696433409f72282e43ad2def6c40d1617e08f8b856b69",
+      "archive_source": {
+        "file": "5150e789beb7aadb650696433409f72282e43ad2def6c40d1617e08f8b856b69.png",
+        "sha256": "5150e789beb7aadb650696433409f72282e43ad2def6c40d1617e08f8b856b69",
+        "bytes": 951606,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/kite/471789_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-471789-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "471789",
+      "image": "9b55ed80d24386b18505207348c8327b133e0e2a5be0cc043a6b2de9469b424b.png",
+      "image_sha256": "9b55ed80d24386b18505207348c8327b133e0e2a5be0cc043a6b2de9469b424b",
+      "archive_source": {
+        "file": "9b55ed80d24386b18505207348c8327b133e0e2a5be0cc043a6b2de9469b424b.png",
+        "sha256": "9b55ed80d24386b18505207348c8327b133e0e2a5be0cc043a6b2de9469b424b",
+        "bytes": 950786,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/kite/471789_mask_bbox.png_ps_0.png"
+      },
+      "mask": "54522105f7ed95d25458262cf7cf948e9f055688d3cac539c9c3b5d0d63aaa90.mask.png",
+      "mask_sha256": "54522105f7ed95d25458262cf7cf948e9f055688d3cac539c9c3b5d0d63aaa90",
+      "author_mask": {
+        "file": "0c96330af4c322c71a75932a55beb8e84a2660d6115b256d1dc43179438fee70.png",
+        "sha256": "0c96330af4c322c71a75932a55beb8e84a2660d6115b256d1dc43179438fee70",
+        "bytes": 959,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/kite/471789_mask_bbox.png"
+      },
+      "changed_fraction": 0.010128021240234375,
+      "changed_within_author_mask": 0.948901443816698
+    },
+    {
+      "id": "firefly-438862-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "438862",
+      "image": "5b135ac1b99d43fa5086ce362aea9c227cf477e29be68dc11c0d1d9349a9b70b.png",
+      "image_sha256": "5b135ac1b99d43fa5086ce362aea9c227cf477e29be68dc11c0d1d9349a9b70b",
+      "archive_source": {
+        "file": "5b135ac1b99d43fa5086ce362aea9c227cf477e29be68dc11c0d1d9349a9b70b.png",
+        "sha256": "5b135ac1b99d43fa5086ce362aea9c227cf477e29be68dc11c0d1d9349a9b70b",
+        "bytes": 1313507,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sports ball/438862_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-438862-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "438862",
+      "image": "e1db407a82eb33103d59812721d51fb95fd17a9df9aaba987b142ae8a2575cf2.png",
+      "image_sha256": "e1db407a82eb33103d59812721d51fb95fd17a9df9aaba987b142ae8a2575cf2",
+      "archive_source": {
+        "file": "e1db407a82eb33103d59812721d51fb95fd17a9df9aaba987b142ae8a2575cf2.png",
+        "sha256": "e1db407a82eb33103d59812721d51fb95fd17a9df9aaba987b142ae8a2575cf2",
+        "bytes": 1280591,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/sports ball/438862_mask_bbox.png_ps_0.png"
+      },
+      "mask": "16ff5320c6258c5b0016fa183314ae2006386640da90c18f76d19709b3afbeb0.mask.png",
+      "mask_sha256": "16ff5320c6258c5b0016fa183314ae2006386640da90c18f76d19709b3afbeb0",
+      "author_mask": {
+        "file": "55132a5f282aef3c9fc2f69c61be87a7251226750eb793b16b1a8b423a5570a7.png",
+        "sha256": "55132a5f282aef3c9fc2f69c61be87a7251226750eb793b16b1a8b423a5570a7",
+        "bytes": 907,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sports ball/438862_mask_bbox.png"
+      },
+      "changed_fraction": 0.006415572382869692,
+      "changed_within_author_mask": 0.9416090929351459
+    },
+    {
+      "id": "firefly-229747-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "229747",
+      "image": "a7c170dcdb968edfa7cf592112161021d335295594e6696880e78a454ff0e2dc.png",
+      "image_sha256": "a7c170dcdb968edfa7cf592112161021d335295594e6696880e78a454ff0e2dc",
+      "archive_source": {
+        "file": "a7c170dcdb968edfa7cf592112161021d335295594e6696880e78a454ff0e2dc.png",
+        "sha256": "a7c170dcdb968edfa7cf592112161021d335295594e6696880e78a454ff0e2dc",
+        "bytes": 621373,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/airplane/229747_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-229747-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "229747",
+      "image": "e49702771ddcfa47a9464fdd0f43b6c1cc6a10c7bd439b79c21cb1dad2533e88.png",
+      "image_sha256": "e49702771ddcfa47a9464fdd0f43b6c1cc6a10c7bd439b79c21cb1dad2533e88",
+      "archive_source": {
+        "file": "e49702771ddcfa47a9464fdd0f43b6c1cc6a10c7bd439b79c21cb1dad2533e88.png",
+        "sha256": "e49702771ddcfa47a9464fdd0f43b6c1cc6a10c7bd439b79c21cb1dad2533e88",
+        "bytes": 575326,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/airplane/229747_mask_bbox.png_ps_0.png"
+      },
+      "mask": "d9870f0099dcbebe35a1a070bcb1f55151a179dfc8b9c8c4c00ef7187a43a423.mask.png",
+      "mask_sha256": "d9870f0099dcbebe35a1a070bcb1f55151a179dfc8b9c8c4c00ef7187a43a423",
+      "author_mask": {
+        "file": "4070d6337f233cf5fc9a1d7ae4f26a59547f8171341b33b7a8a8bd27f3910030.png",
+        "sha256": "4070d6337f233cf5fc9a1d7ae4f26a59547f8171341b33b7a8a8bd27f3910030",
+        "bytes": 1451,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/airplane/229747_mask_bbox.png"
+      },
+      "changed_fraction": 0.1132598242638568,
+      "changed_within_author_mask": 0.9685574041438912
+    },
+    {
+      "id": "firefly-504635-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "504635",
+      "image": "d1da254dfcbf9360aa8b56e322a9bc9f3ac3ca7f248e02d0424c2c866631f488.png",
+      "image_sha256": "d1da254dfcbf9360aa8b56e322a9bc9f3ac3ca7f248e02d0424c2c866631f488",
+      "archive_source": {
+        "file": "d1da254dfcbf9360aa8b56e322a9bc9f3ac3ca7f248e02d0424c2c866631f488.png",
+        "sha256": "d1da254dfcbf9360aa8b56e322a9bc9f3ac3ca7f248e02d0424c2c866631f488",
+        "bytes": 1212700,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/504635_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-504635-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "504635",
+      "image": "7bf4a98d959982513910deaa2aa3b4557925f357fe79b13bb474661fab8bb2ef.png",
+      "image_sha256": "7bf4a98d959982513910deaa2aa3b4557925f357fe79b13bb474661fab8bb2ef",
+      "archive_source": {
+        "file": "7bf4a98d959982513910deaa2aa3b4557925f357fe79b13bb474661fab8bb2ef.png",
+        "sha256": "7bf4a98d959982513910deaa2aa3b4557925f357fe79b13bb474661fab8bb2ef",
+        "bytes": 1211095,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/zebra/504635_mask_bbox.png_ps_0.png"
+      },
+      "mask": "086d4050b25fc09c953c3b635eafa82fd30602edb6c5bb798c4c703754d22f32.mask.png",
+      "mask_sha256": "086d4050b25fc09c953c3b635eafa82fd30602edb6c5bb798c4c703754d22f32",
+      "author_mask": {
+        "file": "bfec383e77e88378e41c332305e554c16565eb0fa0594623a24b4dca1f2b4267.png",
+        "sha256": "bfec383e77e88378e41c332305e554c16565eb0fa0594623a24b4dca1f2b4267",
+        "bytes": 1468,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/504635_mask_bbox.png"
+      },
+      "changed_fraction": 0.1521028359030837,
+      "changed_within_author_mask": 0.9497115058264509
+    },
+    {
+      "id": "firefly-186345-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "186345",
+      "image": "f971862bd6cd14fd9abe0522e51bdc136a6d7c57ecfc670fd992f2d52756d966.png",
+      "image_sha256": "f971862bd6cd14fd9abe0522e51bdc136a6d7c57ecfc670fd992f2d52756d966",
+      "archive_source": {
+        "file": "f971862bd6cd14fd9abe0522e51bdc136a6d7c57ecfc670fd992f2d52756d966.png",
+        "sha256": "f971862bd6cd14fd9abe0522e51bdc136a6d7c57ecfc670fd992f2d52756d966",
+        "bytes": 727477,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/kite/186345_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-186345-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "186345",
+      "image": "84cf8218cb5d8a3f8225c926de4303d705dbb3763f3b85efc99350fe1b057a27.png",
+      "image_sha256": "84cf8218cb5d8a3f8225c926de4303d705dbb3763f3b85efc99350fe1b057a27",
+      "archive_source": {
+        "file": "84cf8218cb5d8a3f8225c926de4303d705dbb3763f3b85efc99350fe1b057a27.png",
+        "sha256": "84cf8218cb5d8a3f8225c926de4303d705dbb3763f3b85efc99350fe1b057a27",
+        "bytes": 673473,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/kite/186345_mask_bbox.png_ps_0.png"
+      },
+      "mask": "33c0c4b30dc4757c354ad2058f9324c46fd1aafabc33f72aa18f10d95d83bacb.mask.png",
+      "mask_sha256": "33c0c4b30dc4757c354ad2058f9324c46fd1aafabc33f72aa18f10d95d83bacb",
+      "author_mask": {
+        "file": "284ed75ac913c42c899b57ae86cc0f003f2f707f09b1c5c44eac705f568a2218.png",
+        "sha256": "284ed75ac913c42c899b57ae86cc0f003f2f707f09b1c5c44eac705f568a2218",
+        "bytes": 963,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/kite/186345_mask_bbox.png"
+      },
+      "changed_fraction": 0.007675215126811594,
+      "changed_within_author_mask": 0.9507652590816891
+    },
+    {
+      "id": "firefly-571857-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "571857",
+      "image": "c2d88d58647f5dda5594e309d8c5312be184961c949b55556e8b3322c6d58bd0.png",
+      "image_sha256": "c2d88d58647f5dda5594e309d8c5312be184961c949b55556e8b3322c6d58bd0",
+      "archive_source": {
+        "file": "c2d88d58647f5dda5594e309d8c5312be184961c949b55556e8b3322c6d58bd0.png",
+        "sha256": "c2d88d58647f5dda5594e309d8c5312be184961c949b55556e8b3322c6d58bd0",
+        "bytes": 929844,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/airplane/571857_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-571857-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "571857",
+      "image": "22c3d25aa282412be57648d2e4af5df2459fb9fab02aa1c32f7025931217df72.png",
+      "image_sha256": "22c3d25aa282412be57648d2e4af5df2459fb9fab02aa1c32f7025931217df72",
+      "archive_source": {
+        "file": "22c3d25aa282412be57648d2e4af5df2459fb9fab02aa1c32f7025931217df72.png",
+        "sha256": "22c3d25aa282412be57648d2e4af5df2459fb9fab02aa1c32f7025931217df72",
+        "bytes": 872449,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/airplane/571857_mask_bbox.png_ps_0.png"
+      },
+      "mask": "6cc48570b31c8267314da4a58808c025d0ae4dc8a3d627fe29059662d4b064c4.mask.png",
+      "mask_sha256": "6cc48570b31c8267314da4a58808c025d0ae4dc8a3d627fe29059662d4b064c4",
+      "author_mask": {
+        "file": "b29fc64871ec4d2ec3924ac0e3a3d1d94b5b55b931dde006e4ffee339402d622.png",
+        "sha256": "b29fc64871ec4d2ec3924ac0e3a3d1d94b5b55b931dde006e4ffee339402d622",
+        "bytes": 900,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/airplane/571857_mask_bbox.png"
+      },
+      "changed_fraction": 0.025293434558746483,
+      "changed_within_author_mask": 0.9472788150502242
+    },
+    {
+      "id": "firefly-64718-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "64718",
+      "image": "aaa001aef89cf17d03cb773ba75c5e190c1404c3f475f40592d83bf292a29198.png",
+      "image_sha256": "aaa001aef89cf17d03cb773ba75c5e190c1404c3f475f40592d83bf292a29198",
+      "archive_source": {
+        "file": "aaa001aef89cf17d03cb773ba75c5e190c1404c3f475f40592d83bf292a29198.png",
+        "sha256": "aaa001aef89cf17d03cb773ba75c5e190c1404c3f475f40592d83bf292a29198",
+        "bytes": 944210,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/tennis racket/64718_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-64718-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "64718",
+      "image": "d4ea5879b73e938854383c0e8b3e37bb3a8826577f89058d2752f59a8762484d.png",
+      "image_sha256": "d4ea5879b73e938854383c0e8b3e37bb3a8826577f89058d2752f59a8762484d",
+      "archive_source": {
+        "file": "d4ea5879b73e938854383c0e8b3e37bb3a8826577f89058d2752f59a8762484d.png",
+        "sha256": "d4ea5879b73e938854383c0e8b3e37bb3a8826577f89058d2752f59a8762484d",
+        "bytes": 927301,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/tennis racket/64718_mask_bbox.png_ps_0.png"
+      },
+      "mask": "fee76d57bf54e3a249decd7a345ed0eda762633cc3f3fb5a2abf7da61793aeb7.mask.png",
+      "mask_sha256": "fee76d57bf54e3a249decd7a345ed0eda762633cc3f3fb5a2abf7da61793aeb7",
+      "author_mask": {
+        "file": "60aa70bb26edebb0a1788988716a72d8055867769c76130bc389a7ec34a2e751.png",
+        "sha256": "60aa70bb26edebb0a1788988716a72d8055867769c76130bc389a7ec34a2e751",
+        "bytes": 1290,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/tennis racket/64718_mask_bbox.png"
+      },
+      "changed_fraction": 0.038717676044474396,
+      "changed_within_author_mask": 0.9669590046910055
+    },
+    {
+      "id": "firefly-159311-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "159311",
+      "image": "99157489452e47a4325a9673868a1d44f8eb63ba9ad04174333071ebc56b5849.png",
+      "image_sha256": "99157489452e47a4325a9673868a1d44f8eb63ba9ad04174333071ebc56b5849",
+      "archive_source": {
+        "file": "99157489452e47a4325a9673868a1d44f8eb63ba9ad04174333071ebc56b5849.png",
+        "sha256": "99157489452e47a4325a9673868a1d44f8eb63ba9ad04174333071ebc56b5849",
+        "bytes": 882542,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/159311_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-159311-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "159311",
+      "image": "e881029f3e6c4ed55f4d12785ffbfb5b2fdb95729cd4671de444555a052c872c.png",
+      "image_sha256": "e881029f3e6c4ed55f4d12785ffbfb5b2fdb95729cd4671de444555a052c872c",
+      "archive_source": {
+        "file": "e881029f3e6c4ed55f4d12785ffbfb5b2fdb95729cd4671de444555a052c872c.png",
+        "sha256": "e881029f3e6c4ed55f4d12785ffbfb5b2fdb95729cd4671de444555a052c872c",
+        "bytes": 887033,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/zebra/159311_mask_segm.png_ps_0.png"
+      },
+      "mask": "d4aca7edb5df5ced2b80e1b6337fbe39a4fb60d18a1d729ae23b860a93159dcf.mask.png",
+      "mask_sha256": "d4aca7edb5df5ced2b80e1b6337fbe39a4fb60d18a1d729ae23b860a93159dcf",
+      "author_mask": {
+        "file": "b95f6075b492ec9f0e63b29c26a7fedf15a0231a89eb107aa096bf387540c5a0.png",
+        "sha256": "b95f6075b492ec9f0e63b29c26a7fedf15a0231a89eb107aa096bf387540c5a0",
+        "bytes": 3259,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/159311_mask_segm.png"
+      },
+      "changed_fraction": 0.2797795497185741,
+      "changed_within_author_mask": 0.9125383493436604
+    },
+    {
+      "id": "firefly-389566-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "389566",
+      "image": "6fb1344e50e59ba901de85e79bcaf1fca21c281e9261fe77536aae40734c46ae.png",
+      "image_sha256": "6fb1344e50e59ba901de85e79bcaf1fca21c281e9261fe77536aae40734c46ae",
+      "archive_source": {
+        "file": "6fb1344e50e59ba901de85e79bcaf1fca21c281e9261fe77536aae40734c46ae.png",
+        "sha256": "6fb1344e50e59ba901de85e79bcaf1fca21c281e9261fe77536aae40734c46ae",
+        "bytes": 856482,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sheep/389566_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-389566-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "389566",
+      "image": "0072503cfd87e1aec99bfd9e9d28799d1f46e853be45fd8163ce7f0ee0202ae3.png",
+      "image_sha256": "0072503cfd87e1aec99bfd9e9d28799d1f46e853be45fd8163ce7f0ee0202ae3",
+      "archive_source": {
+        "file": "0072503cfd87e1aec99bfd9e9d28799d1f46e853be45fd8163ce7f0ee0202ae3.png",
+        "sha256": "0072503cfd87e1aec99bfd9e9d28799d1f46e853be45fd8163ce7f0ee0202ae3",
+        "bytes": 801106,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/sheep/389566_mask_segm.png_ps_0.png"
+      },
+      "mask": "e89e3bc7f3ccca308ff2eb7c3ef32fc9922be83d977cd508e15d7afb0e351244.mask.png",
+      "mask_sha256": "e89e3bc7f3ccca308ff2eb7c3ef32fc9922be83d977cd508e15d7afb0e351244",
+      "author_mask": {
+        "file": "55f607141aeda8e0e7a5576d6d68ecf3b7468fbe03f09a461019d5d96a58bd01.png",
+        "sha256": "55f607141aeda8e0e7a5576d6d68ecf3b7468fbe03f09a461019d5d96a58bd01",
+        "bytes": 1654,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sheep/389566_mask_segm.png"
+      },
+      "changed_fraction": 0.016863218338213762,
+      "changed_within_author_mask": 0.9093606918772257
+    },
+    {
+      "id": "firefly-252507-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "252507",
+      "image": "f7e00d004ba4a6aa65a790106d4135f4599ca2dda2a15c20ebba572722f4cab3.png",
+      "image_sha256": "f7e00d004ba4a6aa65a790106d4135f4599ca2dda2a15c20ebba572722f4cab3",
+      "archive_source": {
+        "file": "f7e00d004ba4a6aa65a790106d4135f4599ca2dda2a15c20ebba572722f4cab3.png",
+        "sha256": "f7e00d004ba4a6aa65a790106d4135f4599ca2dda2a15c20ebba572722f4cab3",
+        "bytes": 524703,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/skis/252507_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-252507-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "252507",
+      "image": "437a688e1897493786e95d26b599143f899da40574bc2463c6efd46ed48acb63.png",
+      "image_sha256": "437a688e1897493786e95d26b599143f899da40574bc2463c6efd46ed48acb63",
+      "archive_source": {
+        "file": "437a688e1897493786e95d26b599143f899da40574bc2463c6efd46ed48acb63.png",
+        "sha256": "437a688e1897493786e95d26b599143f899da40574bc2463c6efd46ed48acb63",
+        "bytes": 491889,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/skis/252507_mask_segm.png_ps_0.png"
+      },
+      "mask": "adae5efd24dcfef3a5d08e10532a66b7372f646dbf667fea70560176a0fa0246.mask.png",
+      "mask_sha256": "adae5efd24dcfef3a5d08e10532a66b7372f646dbf667fea70560176a0fa0246",
+      "author_mask": {
+        "file": "d18dc911b78280a06fa1a44438dbef1e71610ac255967adefafefd15366b0adc.png",
+        "sha256": "d18dc911b78280a06fa1a44438dbef1e71610ac255967adefafefd15366b0adc",
+        "bytes": 877,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/skis/252507_mask_segm.png"
+      },
+      "changed_fraction": 0.003585416666666667,
+      "changed_within_author_mask": 0.6234747239976758
+    },
+    {
+      "id": "firefly-509735-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "509735",
+      "image": "b2a7385f045ef8e614018d87b38a35aa190cae3df15a4440e4f83d95180ac0e0.png",
+      "image_sha256": "b2a7385f045ef8e614018d87b38a35aa190cae3df15a4440e4f83d95180ac0e0",
+      "archive_source": {
+        "file": "b2a7385f045ef8e614018d87b38a35aa190cae3df15a4440e4f83d95180ac0e0.png",
+        "sha256": "b2a7385f045ef8e614018d87b38a35aa190cae3df15a4440e4f83d95180ac0e0",
+        "bytes": 1326290,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/509735_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-509735-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "509735",
+      "image": "effe99aa6601eea32efdc42eb921401a04c03e1abc6ffd3554dacb499ca54850.png",
+      "image_sha256": "effe99aa6601eea32efdc42eb921401a04c03e1abc6ffd3554dacb499ca54850",
+      "archive_source": {
+        "file": "effe99aa6601eea32efdc42eb921401a04c03e1abc6ffd3554dacb499ca54850.png",
+        "sha256": "effe99aa6601eea32efdc42eb921401a04c03e1abc6ffd3554dacb499ca54850",
+        "bytes": 1300384,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/zebra/509735_mask_segm.png_ps_0.png"
+      },
+      "mask": "b279bb4f847e1ac2b9004091710753db2bc63954ec5735e6ebda925e9ac3d8a6.mask.png",
+      "mask_sha256": "b279bb4f847e1ac2b9004091710753db2bc63954ec5735e6ebda925e9ac3d8a6",
+      "author_mask": {
+        "file": "af1e109a0a8598258494ff3470613d1a01421da74ec3683ed07f1348bb0e7f7d.png",
+        "sha256": "af1e109a0a8598258494ff3470613d1a01421da74ec3683ed07f1348bb0e7f7d",
+        "bytes": 1990,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/509735_mask_segm.png"
+      },
+      "changed_fraction": 0.03387774614522907,
+      "changed_within_author_mask": 0.8988626790227464
+    },
+    {
+      "id": "firefly-225184-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "225184",
+      "image": "895e6b4c3bad9422bc2b6a90c65f6e67115763466600de34f82805697fae5c44.png",
+      "image_sha256": "895e6b4c3bad9422bc2b6a90c65f6e67115763466600de34f82805697fae5c44",
+      "archive_source": {
+        "file": "895e6b4c3bad9422bc2b6a90c65f6e67115763466600de34f82805697fae5c44.png",
+        "sha256": "895e6b4c3bad9422bc2b6a90c65f6e67115763466600de34f82805697fae5c44",
+        "bytes": 1510402,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sheep/225184_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-225184-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "225184",
+      "image": "4663407f2710f548d3ee7b1751668e4255c66ecfb205c4e3569138b5b6f643af.png",
+      "image_sha256": "4663407f2710f548d3ee7b1751668e4255c66ecfb205c4e3569138b5b6f643af",
+      "archive_source": {
+        "file": "4663407f2710f548d3ee7b1751668e4255c66ecfb205c4e3569138b5b6f643af.png",
+        "sha256": "4663407f2710f548d3ee7b1751668e4255c66ecfb205c4e3569138b5b6f643af",
+        "bytes": 1420398,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/sheep/225184_mask_segm.png_ps_0.png"
+      },
+      "mask": "ecb6085eda51fc0e98542aa142c89bf932f9880d45c32dd7ef595944ff548a4d.mask.png",
+      "mask_sha256": "ecb6085eda51fc0e98542aa142c89bf932f9880d45c32dd7ef595944ff548a4d",
+      "author_mask": {
+        "file": "d6e86ec812983ca75f02b1eed282e276c0acea2c6f9eb5b94bf27cde64873d44.png",
+        "sha256": "d6e86ec812983ca75f02b1eed282e276c0acea2c6f9eb5b94bf27cde64873d44",
+        "bytes": 1419,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sheep/225184_mask_segm.png"
+      },
+      "changed_fraction": 0.0059675850718194255,
+      "changed_within_author_mask": 0.8318782180434295
+    },
+    {
+      "id": "firefly-193884-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "193884",
+      "image": "80fcfac24177933c3fc1d8f7af624355fb071ec0a59d88e94a284cfe7e3c00d7.png",
+      "image_sha256": "80fcfac24177933c3fc1d8f7af624355fb071ec0a59d88e94a284cfe7e3c00d7",
+      "archive_source": {
+        "file": "80fcfac24177933c3fc1d8f7af624355fb071ec0a59d88e94a284cfe7e3c00d7.png",
+        "sha256": "80fcfac24177933c3fc1d8f7af624355fb071ec0a59d88e94a284cfe7e3c00d7",
+        "bytes": 984951,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/stop sign/193884_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-193884-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "193884",
+      "image": "4782b264f2a00d1ba26cb4a57e1803c6fb9fd113ac3b57802731eda6493a769a.png",
+      "image_sha256": "4782b264f2a00d1ba26cb4a57e1803c6fb9fd113ac3b57802731eda6493a769a",
+      "archive_source": {
+        "file": "4782b264f2a00d1ba26cb4a57e1803c6fb9fd113ac3b57802731eda6493a769a.png",
+        "sha256": "4782b264f2a00d1ba26cb4a57e1803c6fb9fd113ac3b57802731eda6493a769a",
+        "bytes": 952112,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/stop sign/193884_mask_segm.png_ps_0.png"
+      },
+      "mask": "a9e76fbcc5816213e8adbc19c711f01deaeadeb3011c668acca96693879b23f6.mask.png",
+      "mask_sha256": "a9e76fbcc5816213e8adbc19c711f01deaeadeb3011c668acca96693879b23f6",
+      "author_mask": {
+        "file": "1f6cc2e9a5f8ee63434aeb1dc81e926982d8aff90a63355b31c646a36d7bc992.png",
+        "sha256": "1f6cc2e9a5f8ee63434aeb1dc81e926982d8aff90a63355b31c646a36d7bc992",
+        "bytes": 1353,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/stop sign/193884_mask_segm.png"
+      },
+      "changed_fraction": 0.010690053304036459,
+      "changed_within_author_mask": 0.9313667182110146
+    },
+    {
+      "id": "firefly-375763-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "375763",
+      "image": "21b8fc086e7a18b1dee5fed14c63de753729319886a4c34a4b0fc2e7d7f4a90d.png",
+      "image_sha256": "21b8fc086e7a18b1dee5fed14c63de753729319886a4c34a4b0fc2e7d7f4a90d",
+      "archive_source": {
+        "file": "21b8fc086e7a18b1dee5fed14c63de753729319886a4c34a4b0fc2e7d7f4a90d.png",
+        "sha256": "21b8fc086e7a18b1dee5fed14c63de753729319886a4c34a4b0fc2e7d7f4a90d",
+        "bytes": 1467172,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sheep/375763_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-375763-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "375763",
+      "image": "67d427fa1bcfb156d941ab464edec7bbf43213df86a5edd647828110cd294efd.png",
+      "image_sha256": "67d427fa1bcfb156d941ab464edec7bbf43213df86a5edd647828110cd294efd",
+      "archive_source": {
+        "file": "67d427fa1bcfb156d941ab464edec7bbf43213df86a5edd647828110cd294efd.png",
+        "sha256": "67d427fa1bcfb156d941ab464edec7bbf43213df86a5edd647828110cd294efd",
+        "bytes": 1408853,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/sheep/375763_mask_segm.png_ps_0.png"
+      },
+      "mask": "7fd4de5dfc7fa3dd7391e5a625723e97dc6efdbf7a18c146e23046d0d952444a.mask.png",
+      "mask_sha256": "7fd4de5dfc7fa3dd7391e5a625723e97dc6efdbf7a18c146e23046d0d952444a",
+      "author_mask": {
+        "file": "46f76efe5b5dab4538a4f402de939ad19507694700d85d13e03ac57b183a0b02.png",
+        "sha256": "46f76efe5b5dab4538a4f402de939ad19507694700d85d13e03ac57b183a0b02",
+        "bytes": 1809,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sheep/375763_mask_segm.png"
+      },
+      "changed_fraction": 0.023240407307942707,
+      "changed_within_author_mask": 0.9112545822618592
+    },
+    {
+      "id": "firefly-189828-0",
+      "family": "firefly",
+      "label": 0,
+      "source_id": "189828",
+      "image": "585ab7b2bd46a5280fb4da7fafe71c31d08fd07ff2cf84a9bb0c87989043e92a.png",
+      "image_sha256": "585ab7b2bd46a5280fb4da7fafe71c31d08fd07ff2cf84a9bb0c87989043e92a",
+      "archive_source": {
+        "file": "585ab7b2bd46a5280fb4da7fafe71c31d08fd07ff2cf84a9bb0c87989043e92a.png",
+        "sha256": "585ab7b2bd46a5280fb4da7fafe71c31d08fd07ff2cf84a9bb0c87989043e92a",
+        "bytes": 358122,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/airplane/189828_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "firefly-189828-1",
+      "family": "firefly",
+      "label": 1,
+      "source_id": "189828",
+      "image": "c99fe20de4b9368b64b890e08a09449fdf9d3f3cb108d05ca6c3ba46bf0a2dc2.png",
+      "image_sha256": "c99fe20de4b9368b64b890e08a09449fdf9d3f3cb108d05ca6c3ba46bf0a2dc2",
+      "archive_source": {
+        "file": "c99fe20de4b9368b64b890e08a09449fdf9d3f3cb108d05ca6c3ba46bf0a2dc2.png",
+        "sha256": "c99fe20de4b9368b64b890e08a09449fdf9d3f3cb108d05ca6c3ba46bf0a2dc2",
+        "bytes": 357003,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/ps-sp/ps-sp_testing.tar.gz",
+        "member": "testing/airplane/189828_mask_segm.png_ps_0.png"
+      },
+      "mask": "cdfadbfa99e40a9a37f3ae2b5d273aa6355f4635701193c43927bf2a6d6c696d.mask.png",
+      "mask_sha256": "cdfadbfa99e40a9a37f3ae2b5d273aa6355f4635701193c43927bf2a6d6c696d",
+      "author_mask": {
+        "file": "ca2d227393a63b85025d2aab2fba8c455821932dc7d88da11153a4d50ef4935e.png",
+        "sha256": "ca2d227393a63b85025d2aab2fba8c455821932dc7d88da11153a4d50ef4935e",
+        "bytes": 1200,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/airplane/189828_mask_segm.png"
+      },
+      "changed_fraction": 0.016916570549788543,
+      "changed_within_author_mask": 0.8177083333333334
+    },
+    {
+      "id": "sd2-44195-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "44195",
+      "image": "bd4f6f2a4e9bfa3851c765097f576e2eac76257ea18520899f001b578d2ef689.png",
+      "image_sha256": "bd4f6f2a4e9bfa3851c765097f576e2eac76257ea18520899f001b578d2ef689",
+      "archive_source": {
+        "file": "bd4f6f2a4e9bfa3851c765097f576e2eac76257ea18520899f001b578d2ef689.png",
+        "sha256": "bd4f6f2a4e9bfa3851c765097f576e2eac76257ea18520899f001b578d2ef689",
+        "bytes": 1066427,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/snowboard/44195_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-44195-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "44195",
+      "image": "ea4ab1e8cb68e2233e7310c74ec4348ab6d569089208b101d9d3025a9590fc09.png",
+      "image_sha256": "ea4ab1e8cb68e2233e7310c74ec4348ab6d569089208b101d9d3025a9590fc09",
+      "archive_source": {
+        "file": "ea4ab1e8cb68e2233e7310c74ec4348ab6d569089208b101d9d3025a9590fc09.png",
+        "sha256": "ea4ab1e8cb68e2233e7310c74ec4348ab6d569089208b101d9d3025a9590fc09",
+        "bytes": 1084751,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/snowboard/44195_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "0d2283b0c62906ee06aebfb70e285b394c0e83ced9389b61680e2f9df460f2d5.mask.png",
+      "mask_sha256": "0d2283b0c62906ee06aebfb70e285b394c0e83ced9389b61680e2f9df460f2d5",
+      "author_mask": {
+        "file": "ca215d3bd0119d2d03d87467fd29a080906634eb3e69f76d101f3e53cb5d633f.png",
+        "sha256": "ca215d3bd0119d2d03d87467fd29a080906634eb3e69f76d101f3e53cb5d633f",
+        "bytes": 1129,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/snowboard/44195_mask_bbox.png"
+      },
+      "changed_fraction": 0.06157094594594595,
+      "changed_within_author_mask": 0.9432656035665294
+    },
+    {
+      "id": "sd2-217060-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "217060",
+      "image": "92ab1dd5ec645296eadb1aaa15af83ff32ddf9c44c69e8e98d8381540ed24b9d.png",
+      "image_sha256": "92ab1dd5ec645296eadb1aaa15af83ff32ddf9c44c69e8e98d8381540ed24b9d",
+      "archive_source": {
+        "file": "92ab1dd5ec645296eadb1aaa15af83ff32ddf9c44c69e8e98d8381540ed24b9d.png",
+        "sha256": "92ab1dd5ec645296eadb1aaa15af83ff32ddf9c44c69e8e98d8381540ed24b9d",
+        "bytes": 429546,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/airplane/217060_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-217060-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "217060",
+      "image": "69ec5f10276ffba5b901b1b23725c7e0c41fa0c1eda4ee77b40242e12b28a661.png",
+      "image_sha256": "69ec5f10276ffba5b901b1b23725c7e0c41fa0c1eda4ee77b40242e12b28a661",
+      "archive_source": {
+        "file": "69ec5f10276ffba5b901b1b23725c7e0c41fa0c1eda4ee77b40242e12b28a661.png",
+        "sha256": "69ec5f10276ffba5b901b1b23725c7e0c41fa0c1eda4ee77b40242e12b28a661",
+        "bytes": 426263,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/airplane/217060_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "d119e375d62814ce47356cec0b3c82d8418d70c1a66de07b3a8c4ae59274a4ad.mask.png",
+      "mask_sha256": "d119e375d62814ce47356cec0b3c82d8418d70c1a66de07b3a8c4ae59274a4ad",
+      "author_mask": {
+        "file": "0d95435cc78569eb3afd7840627faf430a72d759dd1a8d6d0e35c9e2b2dca918.png",
+        "sha256": "0d95435cc78569eb3afd7840627faf430a72d759dd1a8d6d0e35c9e2b2dca918",
+        "bytes": 1026,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/airplane/217060_mask_bbox.png"
+      },
+      "changed_fraction": 0.022091952237215908,
+      "changed_within_author_mask": 0.9377119176189879
+    },
+    {
+      "id": "sd2-545129-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "545129",
+      "image": "6d1717b0072a616065f9e8fcbdbbc18172efce2e60259f558cbb628e62391e5f.png",
+      "image_sha256": "6d1717b0072a616065f9e8fcbdbbc18172efce2e60259f558cbb628e62391e5f",
+      "archive_source": {
+        "file": "6d1717b0072a616065f9e8fcbdbbc18172efce2e60259f558cbb628e62391e5f.png",
+        "sha256": "6d1717b0072a616065f9e8fcbdbbc18172efce2e60259f558cbb628e62391e5f",
+        "bytes": 741997,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/545129_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-545129-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "545129",
+      "image": "fd2568de8623de412f81e95454cb7c7ba428eaf96e4d99e7ed21b4ab9ee5829e.png",
+      "image_sha256": "fd2568de8623de412f81e95454cb7c7ba428eaf96e4d99e7ed21b4ab9ee5829e",
+      "archive_source": {
+        "file": "fd2568de8623de412f81e95454cb7c7ba428eaf96e4d99e7ed21b4ab9ee5829e.png",
+        "sha256": "fd2568de8623de412f81e95454cb7c7ba428eaf96e4d99e7ed21b4ab9ee5829e",
+        "bytes": 726812,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/zebra/545129_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "543f0687a41a154213d2f7d56dc12199e83c8a8305c1d28704b7b4b6af6a3caf.mask.png",
+      "mask_sha256": "543f0687a41a154213d2f7d56dc12199e83c8a8305c1d28704b7b4b6af6a3caf",
+      "author_mask": {
+        "file": "283ab8a805c0ad4af4f68e13366c8701b7969c08eac6a2faf9f02a95eb3562cb.png",
+        "sha256": "283ab8a805c0ad4af4f68e13366c8701b7969c08eac6a2faf9f02a95eb3562cb",
+        "bytes": 899,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/545129_mask_bbox.png"
+      },
+      "changed_fraction": 0.13372216170418785,
+      "changed_within_author_mask": 0.9412607720012822
+    },
+    {
+      "id": "sd2-185409-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "185409",
+      "image": "b214f371b4969217b0a02e3f17d09f420fd2697ba2b9ebb0a98c9738b40b45d1.png",
+      "image_sha256": "b214f371b4969217b0a02e3f17d09f420fd2697ba2b9ebb0a98c9738b40b45d1",
+      "archive_source": {
+        "file": "b214f371b4969217b0a02e3f17d09f420fd2697ba2b9ebb0a98c9738b40b45d1.png",
+        "sha256": "b214f371b4969217b0a02e3f17d09f420fd2697ba2b9ebb0a98c9738b40b45d1",
+        "bytes": 1406917,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/185409_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-185409-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "185409",
+      "image": "83d5d9f862dace4ed245e24a47eb093e3a17e1f9b1e53ecd5996087403230b4f.png",
+      "image_sha256": "83d5d9f862dace4ed245e24a47eb093e3a17e1f9b1e53ecd5996087403230b4f",
+      "archive_source": {
+        "file": "83d5d9f862dace4ed245e24a47eb093e3a17e1f9b1e53ecd5996087403230b4f.png",
+        "sha256": "83d5d9f862dace4ed245e24a47eb093e3a17e1f9b1e53ecd5996087403230b4f",
+        "bytes": 1393308,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/zebra/185409_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "34655794bec371db80ef1b19cae3a246cf931099a12e465e39d585d3b643ab73.mask.png",
+      "mask_sha256": "34655794bec371db80ef1b19cae3a246cf931099a12e465e39d585d3b643ab73",
+      "author_mask": {
+        "file": "7c3c0aea0ae96adde4fc725e5fd6a1082529c79162632499d3f3b5bfbf4095bf.png",
+        "sha256": "7c3c0aea0ae96adde4fc725e5fd6a1082529c79162632499d3f3b5bfbf4095bf",
+        "bytes": 1372,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/185409_mask_bbox.png"
+      },
+      "changed_fraction": 0.12638562407817108,
+      "changed_within_author_mask": 0.9472454584824379
+    },
+    {
+      "id": "sd2-485027-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "485027",
+      "image": "6ea743dc90b51b4d424855e824f579951e67c18f892979b1aa12a9a993e366b5.png",
+      "image_sha256": "6ea743dc90b51b4d424855e824f579951e67c18f892979b1aa12a9a993e366b5",
+      "archive_source": {
+        "file": "6ea743dc90b51b4d424855e824f579951e67c18f892979b1aa12a9a993e366b5.png",
+        "sha256": "6ea743dc90b51b4d424855e824f579951e67c18f892979b1aa12a9a993e366b5",
+        "bytes": 565742,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/tennis racket/485027_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-485027-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "485027",
+      "image": "7ff8f9457831050c4d521eadf753eaadce19ed0d8a78c37f3a5c3a1009c72f37.png",
+      "image_sha256": "7ff8f9457831050c4d521eadf753eaadce19ed0d8a78c37f3a5c3a1009c72f37",
+      "archive_source": {
+        "file": "7ff8f9457831050c4d521eadf753eaadce19ed0d8a78c37f3a5c3a1009c72f37.png",
+        "sha256": "7ff8f9457831050c4d521eadf753eaadce19ed0d8a78c37f3a5c3a1009c72f37",
+        "bytes": 572381,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/tennis racket/485027_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "077d58263a7f1d1ca6db6a2e40d1da7808663f4a20e33d8e884c1799644f9a83.mask.png",
+      "mask_sha256": "077d58263a7f1d1ca6db6a2e40d1da7808663f4a20e33d8e884c1799644f9a83",
+      "author_mask": {
+        "file": "eac79c442329d57bd306c01126107c55ed8da9074d98bae927b942542808c2be.png",
+        "sha256": "eac79c442329d57bd306c01126107c55ed8da9074d98bae927b942542808c2be",
+        "bytes": 836,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/tennis racket/485027_mask_bbox.png"
+      },
+      "changed_fraction": 0.031947544642857144,
+      "changed_within_author_mask": 0.9421539159530425
+    },
+    {
+      "id": "sd2-570688-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "570688",
+      "image": "c98325a58bfafd137da43e9039acfb4110956c36819c479fe89f545a53975059.png",
+      "image_sha256": "c98325a58bfafd137da43e9039acfb4110956c36819c479fe89f545a53975059",
+      "archive_source": {
+        "file": "c98325a58bfafd137da43e9039acfb4110956c36819c479fe89f545a53975059.png",
+        "sha256": "c98325a58bfafd137da43e9039acfb4110956c36819c479fe89f545a53975059",
+        "bytes": 970113,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/kite/570688_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-570688-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "570688",
+      "image": "4f172fb680d9d24af44018b32023fe023cc3f5696685192c66164ab26a7d87d2.png",
+      "image_sha256": "4f172fb680d9d24af44018b32023fe023cc3f5696685192c66164ab26a7d87d2",
+      "archive_source": {
+        "file": "4f172fb680d9d24af44018b32023fe023cc3f5696685192c66164ab26a7d87d2.png",
+        "sha256": "4f172fb680d9d24af44018b32023fe023cc3f5696685192c66164ab26a7d87d2",
+        "bytes": 970208,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/kite/570688_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "a2756dc0e01d2eb947522ff13292ba6fbe12865ebb4ada573538f967f2dd3d2a.mask.png",
+      "mask_sha256": "a2756dc0e01d2eb947522ff13292ba6fbe12865ebb4ada573538f967f2dd3d2a",
+      "author_mask": {
+        "file": "61d0f234aa782a25b6820bb3ca110cd67d8d1cee97a770f06de472ece329bd5d.png",
+        "sha256": "61d0f234aa782a25b6820bb3ca110cd67d8d1cee97a770f06de472ece329bd5d",
+        "bytes": 928,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/kite/570688_mask_bbox.png"
+      },
+      "changed_fraction": 0.005615234375,
+      "changed_within_author_mask": 0.9929800724637681
+    },
+    {
+      "id": "sd2-449406-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "449406",
+      "image": "c58e7d5f883b3b042f7d4f6be3bc418e829d13ffd7cafc87bfbf7de82b22d633.png",
+      "image_sha256": "c58e7d5f883b3b042f7d4f6be3bc418e829d13ffd7cafc87bfbf7de82b22d633",
+      "archive_source": {
+        "file": "c58e7d5f883b3b042f7d4f6be3bc418e829d13ffd7cafc87bfbf7de82b22d633.png",
+        "sha256": "c58e7d5f883b3b042f7d4f6be3bc418e829d13ffd7cafc87bfbf7de82b22d633",
+        "bytes": 1041013,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/zebra/449406_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-449406-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "449406",
+      "image": "a974aca71fe076551cf62451471446973cfb5fa1fd33e149d7075df8ff3ed7e8.png",
+      "image_sha256": "a974aca71fe076551cf62451471446973cfb5fa1fd33e149d7075df8ff3ed7e8",
+      "archive_source": {
+        "file": "a974aca71fe076551cf62451471446973cfb5fa1fd33e149d7075df8ff3ed7e8.png",
+        "sha256": "a974aca71fe076551cf62451471446973cfb5fa1fd33e149d7075df8ff3ed7e8",
+        "bytes": 1032005,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/zebra/449406_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "7c3cfcf783c5b25e9f2171cef5b6549d97d9507f3bd22c08f5eeb4439368592b.mask.png",
+      "mask_sha256": "7c3cfcf783c5b25e9f2171cef5b6549d97d9507f3bd22c08f5eeb4439368592b",
+      "author_mask": {
+        "file": "ba06d78c0e673ee7106ca1b8d9526179e1f3f046b187c055585b739106387686.png",
+        "sha256": "ba06d78c0e673ee7106ca1b8d9526179e1f3f046b187c055585b739106387686",
+        "bytes": 1006,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/zebra/449406_mask_bbox.png"
+      },
+      "changed_fraction": 0.23420497185741088,
+      "changed_within_author_mask": 0.9384368898012316
+    },
+    {
+      "id": "sd2-36539-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "36539",
+      "image": "7c57657721b78be59dfabb205b4672a92205c8830a66bb0fc71ec1a07cd3c2c5.png",
+      "image_sha256": "7c57657721b78be59dfabb205b4672a92205c8830a66bb0fc71ec1a07cd3c2c5",
+      "archive_source": {
+        "file": "7c57657721b78be59dfabb205b4672a92205c8830a66bb0fc71ec1a07cd3c2c5.png",
+        "sha256": "7c57657721b78be59dfabb205b4672a92205c8830a66bb0fc71ec1a07cd3c2c5",
+        "bytes": 1156842,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/snowboard/36539_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-36539-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "36539",
+      "image": "2f28d0916786cc33fde25f3211ac16b32dbe353c09ca698751fd405a2cc039b1.png",
+      "image_sha256": "2f28d0916786cc33fde25f3211ac16b32dbe353c09ca698751fd405a2cc039b1",
+      "archive_source": {
+        "file": "2f28d0916786cc33fde25f3211ac16b32dbe353c09ca698751fd405a2cc039b1.png",
+        "sha256": "2f28d0916786cc33fde25f3211ac16b32dbe353c09ca698751fd405a2cc039b1",
+        "bytes": 1161367,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/snowboard/36539_mask_bbox.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "1fce6372786eb7c2f5fceb7aeccb1872e3676c84e0e5bf9ac675290ce77713e0.mask.png",
+      "mask_sha256": "1fce6372786eb7c2f5fceb7aeccb1872e3676c84e0e5bf9ac675290ce77713e0",
+      "author_mask": {
+        "file": "4c7fce793dcf6de933b9442b4baaa9d82956af52a8fade2ade2240cf1e381ec5.png",
+        "sha256": "4c7fce793dcf6de933b9442b4baaa9d82956af52a8fade2ade2240cf1e381ec5",
+        "bytes": 866,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/snowboard/36539_mask_bbox.png"
+      },
+      "changed_fraction": 0.019395417734260616,
+      "changed_within_author_mask": 0.9085145595281976
+    },
+    {
+      "id": "sd2-232646-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "232646",
+      "image": "71da5459225921370a8c3ebaf056076715cb367d8c8cd6c9760aad95fda7593b.png",
+      "image_sha256": "71da5459225921370a8c3ebaf056076715cb367d8c8cd6c9760aad95fda7593b",
+      "archive_source": {
+        "file": "71da5459225921370a8c3ebaf056076715cb367d8c8cd6c9760aad95fda7593b.png",
+        "sha256": "71da5459225921370a8c3ebaf056076715cb367d8c8cd6c9760aad95fda7593b",
+        "bytes": 874326,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/stop sign/232646_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-232646-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "232646",
+      "image": "587fdc4cd26c626364943f1c7f04c7183f09d63e5f028b7e460c6d4cee54c578.png",
+      "image_sha256": "587fdc4cd26c626364943f1c7f04c7183f09d63e5f028b7e460c6d4cee54c578",
+      "archive_source": {
+        "file": "587fdc4cd26c626364943f1c7f04c7183f09d63e5f028b7e460c6d4cee54c578.png",
+        "sha256": "587fdc4cd26c626364943f1c7f04c7183f09d63e5f028b7e460c6d4cee54c578",
+        "bytes": 889169,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/stop sign/232646_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "d41fca999807df2131ce849b826d856f290bbfd36eee003da81bc000ab1f6d68.mask.png",
+      "mask_sha256": "d41fca999807df2131ce849b826d856f290bbfd36eee003da81bc000ab1f6d68",
+      "author_mask": {
+        "file": "e40f180bad79f19c6febd025f834bcedebb4964109d03782a612665889bd6d4d.png",
+        "sha256": "e40f180bad79f19c6febd025f834bcedebb4964109d03782a612665889bd6d4d",
+        "bytes": 1774,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/stop sign/232646_mask_segm.png"
+      },
+      "changed_fraction": 0.025329813415750916,
+      "changed_within_author_mask": 0.9486419055688933
+    },
+    {
+      "id": "sd2-552612-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "552612",
+      "image": "06dcace0c7b47dab9470389eab8ccc5af98dd5c5117a6dad415497ecf829b0f1.png",
+      "image_sha256": "06dcace0c7b47dab9470389eab8ccc5af98dd5c5117a6dad415497ecf829b0f1",
+      "archive_source": {
+        "file": "06dcace0c7b47dab9470389eab8ccc5af98dd5c5117a6dad415497ecf829b0f1.png",
+        "sha256": "06dcace0c7b47dab9470389eab8ccc5af98dd5c5117a6dad415497ecf829b0f1",
+        "bytes": 528583,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sheep/552612_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-552612-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "552612",
+      "image": "d7a4c0b7def4197952d8753fb9b45a5989614386a9703c95cdbc880d6a979aaa.png",
+      "image_sha256": "d7a4c0b7def4197952d8753fb9b45a5989614386a9703c95cdbc880d6a979aaa",
+      "archive_source": {
+        "file": "d7a4c0b7def4197952d8753fb9b45a5989614386a9703c95cdbc880d6a979aaa.png",
+        "sha256": "d7a4c0b7def4197952d8753fb9b45a5989614386a9703c95cdbc880d6a979aaa",
+        "bytes": 529880,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/sheep/552612_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "669497ee052f2e5ece616121a35adaefaaddffd2ff83be840b2e984b6b206225.mask.png",
+      "mask_sha256": "669497ee052f2e5ece616121a35adaefaaddffd2ff83be840b2e984b6b206225",
+      "author_mask": {
+        "file": "83360d562392cf9b23538162a9c8a52cc3599a549184b1565b374a3a15e634de.png",
+        "sha256": "83360d562392cf9b23538162a9c8a52cc3599a549184b1565b374a3a15e634de",
+        "bytes": 1023,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sheep/552612_mask_segm.png"
+      },
+      "changed_fraction": 0.021380665555982743,
+      "changed_within_author_mask": 0.861013986013986
+    },
+    {
+      "id": "sd2-96825-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "96825",
+      "image": "35953f79b327df6a69d543d8ce3863b442bfc2ba238faf129189a620fc2fc4a8.png",
+      "image_sha256": "35953f79b327df6a69d543d8ce3863b442bfc2ba238faf129189a620fc2fc4a8",
+      "archive_source": {
+        "file": "35953f79b327df6a69d543d8ce3863b442bfc2ba238faf129189a620fc2fc4a8.png",
+        "sha256": "35953f79b327df6a69d543d8ce3863b442bfc2ba238faf129189a620fc2fc4a8",
+        "bytes": 1107242,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/skis/96825_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-96825-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "96825",
+      "image": "761371719fb2d576340dda2d1e9026d05864c6e3ea63fb5315d2d5513d96b87c.png",
+      "image_sha256": "761371719fb2d576340dda2d1e9026d05864c6e3ea63fb5315d2d5513d96b87c",
+      "archive_source": {
+        "file": "761371719fb2d576340dda2d1e9026d05864c6e3ea63fb5315d2d5513d96b87c.png",
+        "sha256": "761371719fb2d576340dda2d1e9026d05864c6e3ea63fb5315d2d5513d96b87c",
+        "bytes": 1107659,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/skis/96825_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "eafa3d4b1440c2937eee999011d54eb5044930501b492a77513f1f297814d965.mask.png",
+      "mask_sha256": "eafa3d4b1440c2937eee999011d54eb5044930501b492a77513f1f297814d965",
+      "author_mask": {
+        "file": "2bd618fff1534a0f5adbaddd88b12f354db1b0a873e4924d432b1045babf7679.png",
+        "sha256": "2bd618fff1534a0f5adbaddd88b12f354db1b0a873e4924d432b1045babf7679",
+        "bytes": 984,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/skis/96825_mask_segm.png"
+      },
+      "changed_fraction": 0.0011733676690480147,
+      "changed_within_author_mask": 0.47281921618204803
+    },
+    {
+      "id": "sd2-293300-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "293300",
+      "image": "d4c3efb15ea04217b14a5812524f560da1f77b2680ca909a87fa6e6731e23559.png",
+      "image_sha256": "d4c3efb15ea04217b14a5812524f560da1f77b2680ca909a87fa6e6731e23559",
+      "archive_source": {
+        "file": "d4c3efb15ea04217b14a5812524f560da1f77b2680ca909a87fa6e6731e23559.png",
+        "sha256": "d4c3efb15ea04217b14a5812524f560da1f77b2680ca909a87fa6e6731e23559",
+        "bytes": 1323581,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/elephant/293300_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-293300-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "293300",
+      "image": "0d0b8e68d826bf7f3dfb3d331628b3a4c1f3b289fc463ceda3559f89ccf27598.png",
+      "image_sha256": "0d0b8e68d826bf7f3dfb3d331628b3a4c1f3b289fc463ceda3559f89ccf27598",
+      "archive_source": {
+        "file": "0d0b8e68d826bf7f3dfb3d331628b3a4c1f3b289fc463ceda3559f89ccf27598.png",
+        "sha256": "0d0b8e68d826bf7f3dfb3d331628b3a4c1f3b289fc463ceda3559f89ccf27598",
+        "bytes": 1326450,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/elephant/293300_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "6b15e32cf17ea04b25721d92ae3c554a457055b0a994baf033796acbca1dfb01.mask.png",
+      "mask_sha256": "6b15e32cf17ea04b25721d92ae3c554a457055b0a994baf033796acbca1dfb01",
+      "author_mask": {
+        "file": "9fd5b9d587e0ff099210cf6fca047e8ff82aaa70fa9043e79a6652f1d9c16a00.png",
+        "sha256": "9fd5b9d587e0ff099210cf6fca047e8ff82aaa70fa9043e79a6652f1d9c16a00",
+        "bytes": 3175,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/elephant/293300_mask_segm.png"
+      },
+      "changed_fraction": 0.14810721312225475,
+      "changed_within_author_mask": 0.8674518511367476
+    },
+    {
+      "id": "sd2-384670-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "384670",
+      "image": "411d397a298efc22ebb0e2d38adc8721f49f12bf7f4c3ca196223237305ad39c.png",
+      "image_sha256": "411d397a298efc22ebb0e2d38adc8721f49f12bf7f4c3ca196223237305ad39c",
+      "archive_source": {
+        "file": "411d397a298efc22ebb0e2d38adc8721f49f12bf7f4c3ca196223237305ad39c.png",
+        "sha256": "411d397a298efc22ebb0e2d38adc8721f49f12bf7f4c3ca196223237305ad39c",
+        "bytes": 1012769,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/tennis racket/384670_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-384670-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "384670",
+      "image": "365511a926d9f5fb257b48810b46365c66f7b3465470b0d7efd3119d1a432ada.png",
+      "image_sha256": "365511a926d9f5fb257b48810b46365c66f7b3465470b0d7efd3119d1a432ada",
+      "archive_source": {
+        "file": "365511a926d9f5fb257b48810b46365c66f7b3465470b0d7efd3119d1a432ada.png",
+        "sha256": "365511a926d9f5fb257b48810b46365c66f7b3465470b0d7efd3119d1a432ada",
+        "bytes": 1014817,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/tennis racket/384670_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "a650875345b580a7c81cad5132ae35e4ef18e639c172f4235173a3bc13852a2d.mask.png",
+      "mask_sha256": "a650875345b580a7c81cad5132ae35e4ef18e639c172f4235173a3bc13852a2d",
+      "author_mask": {
+        "file": "00385d795aebd9173e7cdd5a3b71e127820c3cc559960d9d7f465b52f8924eff.png",
+        "sha256": "00385d795aebd9173e7cdd5a3b71e127820c3cc559960d9d7f465b52f8924eff",
+        "bytes": 1394,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/tennis racket/384670_mask_segm.png"
+      },
+      "changed_fraction": 0.005437215169270833,
+      "changed_within_author_mask": 0.8568755846585594
+    },
+    {
+      "id": "sd2-308476-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "308476",
+      "image": "4b9099b91cfc419ef0a61c5eea8552e3a195653f31b3ef3751842a6544524384.png",
+      "image_sha256": "4b9099b91cfc419ef0a61c5eea8552e3a195653f31b3ef3751842a6544524384",
+      "archive_source": {
+        "file": "4b9099b91cfc419ef0a61c5eea8552e3a195653f31b3ef3751842a6544524384.png",
+        "sha256": "4b9099b91cfc419ef0a61c5eea8552e3a195653f31b3ef3751842a6544524384",
+        "bytes": 1290834,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/sports ball/308476_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-308476-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "308476",
+      "image": "b78f6dc3634b9af089446e832c316e4fd90320ffda3c1173cc8cee7f1ee8d656.png",
+      "image_sha256": "b78f6dc3634b9af089446e832c316e4fd90320ffda3c1173cc8cee7f1ee8d656",
+      "archive_source": {
+        "file": "b78f6dc3634b9af089446e832c316e4fd90320ffda3c1173cc8cee7f1ee8d656.png",
+        "sha256": "b78f6dc3634b9af089446e832c316e4fd90320ffda3c1173cc8cee7f1ee8d656",
+        "bytes": 1299096,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/sports ball/308476_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "80ffdea5f694353c79ed3c2e929b21cd338470eb1a3aee1c2dc2fa19c6e1bb56.mask.png",
+      "mask_sha256": "80ffdea5f694353c79ed3c2e929b21cd338470eb1a3aee1c2dc2fa19c6e1bb56",
+      "author_mask": {
+        "file": "9ecb3705bcdd6d0e14cd9f31ef6435d05f357d0d5a81fc5fdd8b34195fc83aa1.png",
+        "sha256": "9ecb3705bcdd6d0e14cd9f31ef6435d05f357d0d5a81fc5fdd8b34195fc83aa1",
+        "bytes": 1360,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/sports ball/308476_mask_segm.png"
+      },
+      "changed_fraction": 0.013470967610677084,
+      "changed_within_author_mask": 0.9187275816499906
+    },
+    {
+      "id": "sd2-347265-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "347265",
+      "image": "ed3e7db6289ad3935cfd72e3caf4d68d29e77c3ca9d32ae287563d81aa94afc5.png",
+      "image_sha256": "ed3e7db6289ad3935cfd72e3caf4d68d29e77c3ca9d32ae287563d81aa94afc5",
+      "archive_source": {
+        "file": "ed3e7db6289ad3935cfd72e3caf4d68d29e77c3ca9d32ae287563d81aa94afc5.png",
+        "sha256": "ed3e7db6289ad3935cfd72e3caf4d68d29e77c3ca9d32ae287563d81aa94afc5",
+        "bytes": 1415893,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/skis/347265_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-347265-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "347265",
+      "image": "2d5be6c84b76d9983e1a8888be39225b2a6fea6a2a26401052fa3f8b87cc4d89.png",
+      "image_sha256": "2d5be6c84b76d9983e1a8888be39225b2a6fea6a2a26401052fa3f8b87cc4d89",
+      "archive_source": {
+        "file": "2d5be6c84b76d9983e1a8888be39225b2a6fea6a2a26401052fa3f8b87cc4d89.png",
+        "sha256": "2d5be6c84b76d9983e1a8888be39225b2a6fea6a2a26401052fa3f8b87cc4d89",
+        "bytes": 1415813,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/skis/347265_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "df396d94d0329b60139d2f52cf224a090cea4021fa3a755e6bf3977f1880d606.mask.png",
+      "mask_sha256": "df396d94d0329b60139d2f52cf224a090cea4021fa3a755e6bf3977f1880d606",
+      "author_mask": {
+        "file": "30bc24ed9f585ce124f82e29590d678124ae8397f39c5d972056cbd95436224b.png",
+        "sha256": "30bc24ed9f585ce124f82e29590d678124ae8397f39c5d972056cbd95436224b",
+        "bytes": 1074,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/skis/347265_mask_segm.png"
+      },
+      "changed_fraction": 0.00125394628477306,
+      "changed_within_author_mask": 0.8335233751425314
+    },
+    {
+      "id": "sd2-500716-0",
+      "family": "sd2",
+      "label": 0,
+      "source_id": "500716",
+      "image": "0593822a4b4fa1191911f1f77c39cd6143642fa0e7e113696056d1c95828bef9.png",
+      "image_sha256": "0593822a4b4fa1191911f1f77c39cd6143642fa0e7e113696056d1c95828bef9",
+      "archive_source": {
+        "file": "0593822a4b4fa1191911f1f77c39cd6143642fa0e7e113696056d1c95828bef9.png",
+        "sha256": "0593822a4b4fa1191911f1f77c39cd6143642fa0e7e113696056d1c95828bef9",
+        "bytes": 1223336,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/orig/orig_testing.tar.gz",
+        "member": "testing/scissors/500716_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "sd2-500716-1",
+      "family": "sd2",
+      "label": 1,
+      "source_id": "500716",
+      "image": "87041ccf9c270923b7b27ba491713960cf88b2612e77bd8d0aa99cf20592f023.png",
+      "image_sha256": "87041ccf9c270923b7b27ba491713960cf88b2612e77bd8d0aa99cf20592f023",
+      "archive_source": {
+        "file": "87041ccf9c270923b7b27ba491713960cf88b2612e77bd8d0aa99cf20592f023.png",
+        "sha256": "87041ccf9c270923b7b27ba491713960cf88b2612e77bd8d0aa99cf20592f023",
+        "bytes": 1226182,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+        "member": "testing/scissors/500716_mask_segm.png_ps_mask.png_sd2_0.png"
+      },
+      "mask": "97aa38078edaa6e62c1c2261b4a6c1f943d8d37621e5865a2fe546ab22b663de.mask.png",
+      "mask_sha256": "97aa38078edaa6e62c1c2261b4a6c1f943d8d37621e5865a2fe546ab22b663de",
+      "author_mask": {
+        "file": "deb3a934a09548b8c4be1df9b514e166e4a9b4c13ba7f5683f4736a799092929.png",
+        "sha256": "deb3a934a09548b8c4be1df9b514e166e4a9b4c13ba7f5683f4736a799092929",
+        "bytes": 4370,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+        "member": "testing/scissors/500716_mask_segm.png"
+      },
+      "changed_fraction": 0.0774871792672887,
+      "changed_within_author_mask": 0.8731825413294598
+    },
+    {
+      "id": "flux-fill-46804-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "46804",
+      "image": "fe4048aca7f9f2164333479469cdc81530054fa78a1f6cb51a6f6931d4fafa5f.png",
+      "image_sha256": "fe4048aca7f9f2164333479469cdc81530054fa78a1f6cb51a6f6931d4fafa5f",
+      "archive_source": {
+        "file": "fe4048aca7f9f2164333479469cdc81530054fa78a1f6cb51a6f6931d4fafa5f.png",
+        "sha256": "fe4048aca7f9f2164333479469cdc81530054fa78a1f6cb51a6f6931d4fafa5f",
+        "bytes": 1700483,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/sheep/46804_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-46804-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "46804",
+      "image": "ba73a85a6f0904d329058f10cb330befd7ed38411170df3042cb05e38ce4cde0.png",
+      "image_sha256": "ba73a85a6f0904d329058f10cb330befd7ed38411170df3042cb05e38ce4cde0",
+      "archive_source": {
+        "file": "ba73a85a6f0904d329058f10cb330befd7ed38411170df3042cb05e38ce4cde0.png",
+        "sha256": "ba73a85a6f0904d329058f10cb330befd7ed38411170df3042cb05e38ce4cde0",
+        "bytes": 1742612,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/sheep/46804_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "309aecde6fb47f62b11342bf4761fb965a7a9864446b87e3ff5c3a7a964de1ed.mask.png",
+      "mask_sha256": "309aecde6fb47f62b11342bf4761fb965a7a9864446b87e3ff5c3a7a964de1ed",
+      "author_mask": {
+        "file": "29919c88db668b9cd44d95cdde98fd6c7c7f02f83410e08f4b0a6d7ab7d30e0e.png",
+        "sha256": "29919c88db668b9cd44d95cdde98fd6c7c7f02f83410e08f4b0a6d7ab7d30e0e",
+        "bytes": 1828,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/sheep/46804_mask_bbox.png"
+      },
+      "changed_fraction": 0.24738311767578125,
+      "changed_within_author_mask": 0.9389462863017219
+    },
+    {
+      "id": "flux-fill-154425-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "154425",
+      "image": "aed586862f00613c7e15faaff82c66d60424949c7af97739fef4071521250134.png",
+      "image_sha256": "aed586862f00613c7e15faaff82c66d60424949c7af97739fef4071521250134",
+      "archive_source": {
+        "file": "aed586862f00613c7e15faaff82c66d60424949c7af97739fef4071521250134.png",
+        "sha256": "aed586862f00613c7e15faaff82c66d60424949c7af97739fef4071521250134",
+        "bytes": 1017661,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/kite/154425_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-154425-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "154425",
+      "image": "8bc602525c6a0572fe33319edf662d2efc8db6ee0cc47826a754c8fad4b38c2b.png",
+      "image_sha256": "8bc602525c6a0572fe33319edf662d2efc8db6ee0cc47826a754c8fad4b38c2b",
+      "archive_source": {
+        "file": "8bc602525c6a0572fe33319edf662d2efc8db6ee0cc47826a754c8fad4b38c2b.png",
+        "sha256": "8bc602525c6a0572fe33319edf662d2efc8db6ee0cc47826a754c8fad4b38c2b",
+        "bytes": 1031006,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/kite/154425_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "de19c95114e393e4922197f6b7b5c994805d6ac792c46773bd1d1416bf41796f.mask.png",
+      "mask_sha256": "de19c95114e393e4922197f6b7b5c994805d6ac792c46773bd1d1416bf41796f",
+      "author_mask": {
+        "file": "b1b9dff92ef274e7af7bde866d9a7aa68782ba60df39733b41913e0fd5a3d613.png",
+        "sha256": "b1b9dff92ef274e7af7bde866d9a7aa68782ba60df39733b41913e0fd5a3d613",
+        "bytes": 1398,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/kite/154425_mask_bbox.png"
+      },
+      "changed_fraction": 0.19711776206083606,
+      "changed_within_author_mask": 0.9466099779030506
+    },
+    {
+      "id": "flux-fill-431693-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "431693",
+      "image": "4260033a8771fc7963f1a0e1ae65a51caa152cbda368474853a63127aec13fca.png",
+      "image_sha256": "4260033a8771fc7963f1a0e1ae65a51caa152cbda368474853a63127aec13fca",
+      "archive_source": {
+        "file": "4260033a8771fc7963f1a0e1ae65a51caa152cbda368474853a63127aec13fca.png",
+        "sha256": "4260033a8771fc7963f1a0e1ae65a51caa152cbda368474853a63127aec13fca",
+        "bytes": 854881,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/tennis racket/431693_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-431693-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "431693",
+      "image": "5f9f308d5e5282ce2d181a664016ea91232d7e22265bfc9393a040e472a7640e.png",
+      "image_sha256": "5f9f308d5e5282ce2d181a664016ea91232d7e22265bfc9393a040e472a7640e",
+      "archive_source": {
+        "file": "5f9f308d5e5282ce2d181a664016ea91232d7e22265bfc9393a040e472a7640e.png",
+        "sha256": "5f9f308d5e5282ce2d181a664016ea91232d7e22265bfc9393a040e472a7640e",
+        "bytes": 857663,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/tennis racket/431693_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "f81728eb4ed94bb6df9eae1befc8c30e2922d7c45ff8e480cb9d3638ff61a8a9.mask.png",
+      "mask_sha256": "f81728eb4ed94bb6df9eae1befc8c30e2922d7c45ff8e480cb9d3638ff61a8a9",
+      "author_mask": {
+        "file": "89db87de27916a3c2b8c76ec4bb728afb7a921bd4cab3440e6c8a098993e2ebb.png",
+        "sha256": "89db87de27916a3c2b8c76ec4bb728afb7a921bd4cab3440e6c8a098993e2ebb",
+        "bytes": 893,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/tennis racket/431693_mask_bbox.png"
+      },
+      "changed_fraction": 0.012003967400807813,
+      "changed_within_author_mask": 0.953910447761194
+    },
+    {
+      "id": "flux-fill-449996-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "449996",
+      "image": "20ab2e929cec42528ff9a3892d0f00e049a926830881b32483aca739af6e934b.png",
+      "image_sha256": "20ab2e929cec42528ff9a3892d0f00e049a926830881b32483aca739af6e934b",
+      "archive_source": {
+        "file": "20ab2e929cec42528ff9a3892d0f00e049a926830881b32483aca739af6e934b.png",
+        "sha256": "20ab2e929cec42528ff9a3892d0f00e049a926830881b32483aca739af6e934b",
+        "bytes": 630872,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/airplane/449996_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-449996-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "449996",
+      "image": "484608b4a328aab695345c4f7e4525180d68937655dd5782a06281e1b128ddcf.png",
+      "image_sha256": "484608b4a328aab695345c4f7e4525180d68937655dd5782a06281e1b128ddcf",
+      "archive_source": {
+        "file": "484608b4a328aab695345c4f7e4525180d68937655dd5782a06281e1b128ddcf.png",
+        "sha256": "484608b4a328aab695345c4f7e4525180d68937655dd5782a06281e1b128ddcf",
+        "bytes": 631066,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/airplane/449996_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "ed719ae7f4a52b6ff2a8bb6aa70e1efa185cf7b05454710277f555a38cae0a7e.mask.png",
+      "mask_sha256": "ed719ae7f4a52b6ff2a8bb6aa70e1efa185cf7b05454710277f555a38cae0a7e",
+      "author_mask": {
+        "file": "4e57223a8c36c36e6e8a68a20db8a961742abde0d6392e621788d6e159c742e7.png",
+        "sha256": "4e57223a8c36c36e6e8a68a20db8a961742abde0d6392e621788d6e159c742e7",
+        "bytes": 912,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/airplane/449996_mask_bbox.png"
+      },
+      "changed_fraction": 0.02248432048290772,
+      "changed_within_author_mask": 0.9285351612084285
+    },
+    {
+      "id": "flux-fill-508586-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "508586",
+      "image": "310b60956c196a0fea0f3c5c5e10b327df2f7d0fc1ebc9701021521f46a9695d.png",
+      "image_sha256": "310b60956c196a0fea0f3c5c5e10b327df2f7d0fc1ebc9701021521f46a9695d",
+      "archive_source": {
+        "file": "310b60956c196a0fea0f3c5c5e10b327df2f7d0fc1ebc9701021521f46a9695d.png",
+        "sha256": "310b60956c196a0fea0f3c5c5e10b327df2f7d0fc1ebc9701021521f46a9695d",
+        "bytes": 861279,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/zebra/508586_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-508586-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "508586",
+      "image": "323f50d13f750958673451f5ba4c2bd73c0d043344552cfdc4f430db19537861.png",
+      "image_sha256": "323f50d13f750958673451f5ba4c2bd73c0d043344552cfdc4f430db19537861",
+      "archive_source": {
+        "file": "323f50d13f750958673451f5ba4c2bd73c0d043344552cfdc4f430db19537861.png",
+        "sha256": "323f50d13f750958673451f5ba4c2bd73c0d043344552cfdc4f430db19537861",
+        "bytes": 861487,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/zebra/508586_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "9985d241decc2a18ef3b581652989cb4a8b42649bdb8a9c5a4d5663151c94ec6.mask.png",
+      "mask_sha256": "9985d241decc2a18ef3b581652989cb4a8b42649bdb8a9c5a4d5663151c94ec6",
+      "author_mask": {
+        "file": "974d993b1df70631474cf075704b05029849617fb2b0847e04b73e9960920287.png",
+        "sha256": "974d993b1df70631474cf075704b05029849617fb2b0847e04b73e9960920287",
+        "bytes": 1047,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/zebra/508586_mask_bbox.png"
+      },
+      "changed_fraction": 0.093536376953125,
+      "changed_within_author_mask": 0.9490302700743157
+    },
+    {
+      "id": "flux-fill-214205-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "214205",
+      "image": "01cdfff3cbd37906b5f248b8921415c1b158ac70607bd5376d1a458c35fd0a1e.png",
+      "image_sha256": "01cdfff3cbd37906b5f248b8921415c1b158ac70607bd5376d1a458c35fd0a1e",
+      "archive_source": {
+        "file": "01cdfff3cbd37906b5f248b8921415c1b158ac70607bd5376d1a458c35fd0a1e.png",
+        "sha256": "01cdfff3cbd37906b5f248b8921415c1b158ac70607bd5376d1a458c35fd0a1e",
+        "bytes": 506135,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/airplane/214205_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-214205-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "214205",
+      "image": "d65ddaabe3f63f7d89fe57dfa6156ca4b64a85cfe1a1e4b56e2cea4b3e47de0f.png",
+      "image_sha256": "d65ddaabe3f63f7d89fe57dfa6156ca4b64a85cfe1a1e4b56e2cea4b3e47de0f",
+      "archive_source": {
+        "file": "d65ddaabe3f63f7d89fe57dfa6156ca4b64a85cfe1a1e4b56e2cea4b3e47de0f.png",
+        "sha256": "d65ddaabe3f63f7d89fe57dfa6156ca4b64a85cfe1a1e4b56e2cea4b3e47de0f",
+        "bytes": 506664,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/airplane/214205_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "aebff8f1a5861d4e2c103545e0f9975f2f9e32f01b1a6e62ed0ca423c23e8d38.mask.png",
+      "mask_sha256": "aebff8f1a5861d4e2c103545e0f9975f2f9e32f01b1a6e62ed0ca423c23e8d38",
+      "author_mask": {
+        "file": "7563c2f07155ae0653b7016dda4f1f80dda52f217f839ae81c277c9a91dfc5b3.png",
+        "sha256": "7563c2f07155ae0653b7016dda4f1f80dda52f217f839ae81c277c9a91dfc5b3",
+        "bytes": 952,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/airplane/214205_mask_bbox.png"
+      },
+      "changed_fraction": 0.02823962784900285,
+      "changed_within_author_mask": 0.9374876847290641
+    },
+    {
+      "id": "flux-fill-272049-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "272049",
+      "image": "2269fedd637c0e5f6f89072d4a8cdab802d60e2c464931aa3da81a07e085e4a1.png",
+      "image_sha256": "2269fedd637c0e5f6f89072d4a8cdab802d60e2c464931aa3da81a07e085e4a1",
+      "archive_source": {
+        "file": "2269fedd637c0e5f6f89072d4a8cdab802d60e2c464931aa3da81a07e085e4a1.png",
+        "sha256": "2269fedd637c0e5f6f89072d4a8cdab802d60e2c464931aa3da81a07e085e4a1",
+        "bytes": 1023664,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/airplane/272049_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-272049-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "272049",
+      "image": "ba05ecf7ff4436e4dcab0cb7578bfafec724515f1d582d4147d17026037d27ef.png",
+      "image_sha256": "ba05ecf7ff4436e4dcab0cb7578bfafec724515f1d582d4147d17026037d27ef",
+      "archive_source": {
+        "file": "ba05ecf7ff4436e4dcab0cb7578bfafec724515f1d582d4147d17026037d27ef.png",
+        "sha256": "ba05ecf7ff4436e4dcab0cb7578bfafec724515f1d582d4147d17026037d27ef",
+        "bytes": 1022147,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/airplane/272049_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "f6759ac538e77038d1c762a1e5a868589e8187367c721d6ad1fcb462e11281b7.mask.png",
+      "mask_sha256": "f6759ac538e77038d1c762a1e5a868589e8187367c721d6ad1fcb462e11281b7",
+      "author_mask": {
+        "file": "6198fa58479030da34affbb2daa392908599a945ed82e6f13c33633fe27e7387.png",
+        "sha256": "6198fa58479030da34affbb2daa392908599a945ed82e6f13c33633fe27e7387",
+        "bytes": 1005,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/airplane/272049_mask_bbox.png"
+      },
+      "changed_fraction": 0.05405695232430454,
+      "changed_within_author_mask": 0.9705081069643188
+    },
+    {
+      "id": "flux-fill-433515-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "433515",
+      "image": "b9f92f5489eb1927086c1252bd0a9fedc1a5f740e3582fac6b1a50d744c4b89d.png",
+      "image_sha256": "b9f92f5489eb1927086c1252bd0a9fedc1a5f740e3582fac6b1a50d744c4b89d",
+      "archive_source": {
+        "file": "b9f92f5489eb1927086c1252bd0a9fedc1a5f740e3582fac6b1a50d744c4b89d.png",
+        "sha256": "b9f92f5489eb1927086c1252bd0a9fedc1a5f740e3582fac6b1a50d744c4b89d",
+        "bytes": 1093084,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/kite/433515_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-433515-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "433515",
+      "image": "271719e20a99931e6992cec005ed905de040d159d1b84fef8b9c5da53865ef8a.png",
+      "image_sha256": "271719e20a99931e6992cec005ed905de040d159d1b84fef8b9c5da53865ef8a",
+      "archive_source": {
+        "file": "271719e20a99931e6992cec005ed905de040d159d1b84fef8b9c5da53865ef8a.png",
+        "sha256": "271719e20a99931e6992cec005ed905de040d159d1b84fef8b9c5da53865ef8a",
+        "bytes": 1080436,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/kite/433515_mask_bbox.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "43dd08dc80b1e2cc34a8efa62b187034138825fb5f97c2e1b604967f1b4c17eb.mask.png",
+      "mask_sha256": "43dd08dc80b1e2cc34a8efa62b187034138825fb5f97c2e1b604967f1b4c17eb",
+      "author_mask": {
+        "file": "aa108fa0e3c31974867653b529146cb43050d2e4754af68d3dec9b5556ab51e4.png",
+        "sha256": "aa108fa0e3c31974867653b529146cb43050d2e4754af68d3dec9b5556ab51e4",
+        "bytes": 1232,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/kite/433515_mask_bbox.png"
+      },
+      "changed_fraction": 0.12187830607096355,
+      "changed_within_author_mask": 0.9495665056495112
+    },
+    {
+      "id": "flux-fill-494759-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "494759",
+      "image": "4e13c01aa0e207952d139fa024d374daad9c0b9370529eda3ccbb27d632f3b1a.png",
+      "image_sha256": "4e13c01aa0e207952d139fa024d374daad9c0b9370529eda3ccbb27d632f3b1a",
+      "archive_source": {
+        "file": "4e13c01aa0e207952d139fa024d374daad9c0b9370529eda3ccbb27d632f3b1a.png",
+        "sha256": "4e13c01aa0e207952d139fa024d374daad9c0b9370529eda3ccbb27d632f3b1a",
+        "bytes": 595829,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/kite/494759_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-494759-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "494759",
+      "image": "e827940e407e16329f87833e311ef8d977c1d75584095168b318ab78a3521a16.png",
+      "image_sha256": "e827940e407e16329f87833e311ef8d977c1d75584095168b318ab78a3521a16",
+      "archive_source": {
+        "file": "e827940e407e16329f87833e311ef8d977c1d75584095168b318ab78a3521a16.png",
+        "sha256": "e827940e407e16329f87833e311ef8d977c1d75584095168b318ab78a3521a16",
+        "bytes": 594698,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/kite/494759_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "b0c9affd55447cece5e1d9beb45c68bf5b9e5c6611bdd73bb31eb7b74b9bc2c5.mask.png",
+      "mask_sha256": "b0c9affd55447cece5e1d9beb45c68bf5b9e5c6611bdd73bb31eb7b74b9bc2c5",
+      "author_mask": {
+        "file": "0b5568d102062410852b0eaba9854dbcbc6562ddaf1488a7d3ff5b0127a4f2b5.png",
+        "sha256": "0b5568d102062410852b0eaba9854dbcbc6562ddaf1488a7d3ff5b0127a4f2b5",
+        "bytes": 1645,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/kite/494759_mask_segm.png"
+      },
+      "changed_fraction": 0.007535298665364583,
+      "changed_within_author_mask": 0.758521768477894
+    },
+    {
+      "id": "flux-fill-86755-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "86755",
+      "image": "0b8b99871a6884f1d1c8a43237e7de1bc0e2dc925910d378b6e8d3c14c9ba609.png",
+      "image_sha256": "0b8b99871a6884f1d1c8a43237e7de1bc0e2dc925910d378b6e8d3c14c9ba609",
+      "archive_source": {
+        "file": "0b8b99871a6884f1d1c8a43237e7de1bc0e2dc925910d378b6e8d3c14c9ba609.png",
+        "sha256": "0b8b99871a6884f1d1c8a43237e7de1bc0e2dc925910d378b6e8d3c14c9ba609",
+        "bytes": 1029691,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/skis/86755_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-86755-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "86755",
+      "image": "6c1d1572bd4c216232d10a92d3c00f0a195f780d13d3fcd60c52e5066ffad947.png",
+      "image_sha256": "6c1d1572bd4c216232d10a92d3c00f0a195f780d13d3fcd60c52e5066ffad947",
+      "archive_source": {
+        "file": "6c1d1572bd4c216232d10a92d3c00f0a195f780d13d3fcd60c52e5066ffad947.png",
+        "sha256": "6c1d1572bd4c216232d10a92d3c00f0a195f780d13d3fcd60c52e5066ffad947",
+        "bytes": 1030051,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/skis/86755_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "88453d9ebecf575af931c8bc8cc625f3af1fa1f0a687573125c334fb73c1f01e.mask.png",
+      "mask_sha256": "88453d9ebecf575af931c8bc8cc625f3af1fa1f0a687573125c334fb73c1f01e",
+      "author_mask": {
+        "file": "a0c028ac850b4e9535450bdba99c6e7ff7c5223ef758adb3b1a5a69a69cf4504.png",
+        "sha256": "a0c028ac850b4e9535450bdba99c6e7ff7c5223ef758adb3b1a5a69a69cf4504",
+        "bytes": 1087,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/skis/86755_mask_segm.png"
+      },
+      "changed_fraction": 0.0018717447916666667,
+      "changed_within_author_mask": 0.485054347826087
+    },
+    {
+      "id": "flux-fill-44652-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "44652",
+      "image": "d56141a7fcc34f9e34c05660f4ed8de856a253f710c37d9e7e49eb7421627a1c.png",
+      "image_sha256": "d56141a7fcc34f9e34c05660f4ed8de856a253f710c37d9e7e49eb7421627a1c",
+      "archive_source": {
+        "file": "d56141a7fcc34f9e34c05660f4ed8de856a253f710c37d9e7e49eb7421627a1c.png",
+        "sha256": "d56141a7fcc34f9e34c05660f4ed8de856a253f710c37d9e7e49eb7421627a1c",
+        "bytes": 237208,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/airplane/44652_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-44652-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "44652",
+      "image": "dd0732b44f9cff5fe5bd7f558b5c658542cf8516c649e7b4123bf4170af13dc8.png",
+      "image_sha256": "dd0732b44f9cff5fe5bd7f558b5c658542cf8516c649e7b4123bf4170af13dc8",
+      "archive_source": {
+        "file": "dd0732b44f9cff5fe5bd7f558b5c658542cf8516c649e7b4123bf4170af13dc8.png",
+        "sha256": "dd0732b44f9cff5fe5bd7f558b5c658542cf8516c649e7b4123bf4170af13dc8",
+        "bytes": 245481,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/airplane/44652_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "0095d4b065dcd117618f5f765519b68c8561ef3cdb6cdc5162b02853c5b382cb.mask.png",
+      "mask_sha256": "0095d4b065dcd117618f5f765519b68c8561ef3cdb6cdc5162b02853c5b382cb",
+      "author_mask": {
+        "file": "0d33ba4640bc7d4994caea6233df1f3f425ec9b358d579b6a162546663c73cac.png",
+        "sha256": "0d33ba4640bc7d4994caea6233df1f3f425ec9b358d579b6a162546663c73cac",
+        "bytes": 1985,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/airplane/44652_mask_segm.png"
+      },
+      "changed_fraction": 0.03553229090409956,
+      "changed_within_author_mask": 0.9130819685324534
+    },
+    {
+      "id": "flux-fill-474881-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "474881",
+      "image": "ba6c3b06338760d4b9137f93b363e6e75915623497aba75b226386a76444de20.png",
+      "image_sha256": "ba6c3b06338760d4b9137f93b363e6e75915623497aba75b226386a76444de20",
+      "archive_source": {
+        "file": "ba6c3b06338760d4b9137f93b363e6e75915623497aba75b226386a76444de20.png",
+        "sha256": "ba6c3b06338760d4b9137f93b363e6e75915623497aba75b226386a76444de20",
+        "bytes": 1364966,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/sheep/474881_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-474881-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "474881",
+      "image": "4a261e7a5a74c3bbf1062fe82c809f8f30366ad5ff5a3b0207b3d4d8bc114e4d.png",
+      "image_sha256": "4a261e7a5a74c3bbf1062fe82c809f8f30366ad5ff5a3b0207b3d4d8bc114e4d",
+      "archive_source": {
+        "file": "4a261e7a5a74c3bbf1062fe82c809f8f30366ad5ff5a3b0207b3d4d8bc114e4d.png",
+        "sha256": "4a261e7a5a74c3bbf1062fe82c809f8f30366ad5ff5a3b0207b3d4d8bc114e4d",
+        "bytes": 1365776,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/sheep/474881_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "6201ec0c38514ff4a68cd2cf1df8e47a817aee5cde6a64bc004d497ef86e8733.mask.png",
+      "mask_sha256": "6201ec0c38514ff4a68cd2cf1df8e47a817aee5cde6a64bc004d497ef86e8733",
+      "author_mask": {
+        "file": "ec48bd20097cba92e86b5cb4aa3d79390c85fdfddcb99023eade04adcef78fb8.png",
+        "sha256": "ec48bd20097cba92e86b5cb4aa3d79390c85fdfddcb99023eade04adcef78fb8",
+        "bytes": 2279,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/sheep/474881_mask_segm.png"
+      },
+      "changed_fraction": 0.03454462687174479,
+      "changed_within_author_mask": 0.8450325762874075
+    },
+    {
+      "id": "flux-fill-266409-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "266409",
+      "image": "21e9edfb9327d8a247c9e68a0b0ed9d4f2c556122952996b8e0c1dd40663ac1d.png",
+      "image_sha256": "21e9edfb9327d8a247c9e68a0b0ed9d4f2c556122952996b8e0c1dd40663ac1d",
+      "archive_source": {
+        "file": "21e9edfb9327d8a247c9e68a0b0ed9d4f2c556122952996b8e0c1dd40663ac1d.png",
+        "sha256": "21e9edfb9327d8a247c9e68a0b0ed9d4f2c556122952996b8e0c1dd40663ac1d",
+        "bytes": 896539,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/skis/266409_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-266409-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "266409",
+      "image": "a503e64484c654ec1ee51037631738d70ddd7acec1013249ec00bc2efbbc288c.png",
+      "image_sha256": "a503e64484c654ec1ee51037631738d70ddd7acec1013249ec00bc2efbbc288c",
+      "archive_source": {
+        "file": "a503e64484c654ec1ee51037631738d70ddd7acec1013249ec00bc2efbbc288c.png",
+        "sha256": "a503e64484c654ec1ee51037631738d70ddd7acec1013249ec00bc2efbbc288c",
+        "bytes": 897579,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/skis/266409_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "c028ecab02a730c65d49b4b5fb69d3b7e8729c36570963d2a681b031706cfd17.mask.png",
+      "mask_sha256": "c028ecab02a730c65d49b4b5fb69d3b7e8729c36570963d2a681b031706cfd17",
+      "author_mask": {
+        "file": "4257917da3cc5eb2d81afa784fa08c3e2463f7b71291fe3b61af6f8dfcd5087d.png",
+        "sha256": "4257917da3cc5eb2d81afa784fa08c3e2463f7b71291fe3b61af6f8dfcd5087d",
+        "bytes": 1131,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/skis/266409_mask_segm.png"
+      },
+      "changed_fraction": 0.003962198893229167,
+      "changed_within_author_mask": 0.8016688061617459
+    },
+    {
+      "id": "flux-fill-60102-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "60102",
+      "image": "68ca4048c92eca83208438d8f937de4df4f482ca929a1c8052eec315ac94cb50.png",
+      "image_sha256": "68ca4048c92eca83208438d8f937de4df4f482ca929a1c8052eec315ac94cb50",
+      "archive_source": {
+        "file": "68ca4048c92eca83208438d8f937de4df4f482ca929a1c8052eec315ac94cb50.png",
+        "sha256": "68ca4048c92eca83208438d8f937de4df4f482ca929a1c8052eec315ac94cb50",
+        "bytes": 765379,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/sports ball/60102_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-60102-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "60102",
+      "image": "632d40cfa2ab7248dc0ed90e6bcc02f617718292b708d494006f711c9df4b4a5.png",
+      "image_sha256": "632d40cfa2ab7248dc0ed90e6bcc02f617718292b708d494006f711c9df4b4a5",
+      "archive_source": {
+        "file": "632d40cfa2ab7248dc0ed90e6bcc02f617718292b708d494006f711c9df4b4a5.png",
+        "sha256": "632d40cfa2ab7248dc0ed90e6bcc02f617718292b708d494006f711c9df4b4a5",
+        "bytes": 780964,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/sports ball/60102_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "e2a8279eae52f62817824dfac1ca0e1598984cf4a385db4d8af31e8e3eb3c7de.mask.png",
+      "mask_sha256": "e2a8279eae52f62817824dfac1ca0e1598984cf4a385db4d8af31e8e3eb3c7de",
+      "author_mask": {
+        "file": "d25183615b2e7af3a94638cbb456e934ad70d457e0283d84edc1f3be57c42315.png",
+        "sha256": "d25183615b2e7af3a94638cbb456e934ad70d457e0283d84edc1f3be57c42315",
+        "bytes": 1714,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/sports ball/60102_mask_segm.png"
+      },
+      "changed_fraction": 0.044703165690104164,
+      "changed_within_author_mask": 0.9296848333143702
+    },
+    {
+      "id": "flux-fill-522889-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "522889",
+      "image": "8adedafb7d3030fc78f323926abe451788001dd9fb9ec9d81052b67b3ef30c4d.png",
+      "image_sha256": "8adedafb7d3030fc78f323926abe451788001dd9fb9ec9d81052b67b3ef30c4d",
+      "archive_source": {
+        "file": "8adedafb7d3030fc78f323926abe451788001dd9fb9ec9d81052b67b3ef30c4d.png",
+        "sha256": "8adedafb7d3030fc78f323926abe451788001dd9fb9ec9d81052b67b3ef30c4d",
+        "bytes": 698721,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/tennis racket/522889_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-522889-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "522889",
+      "image": "67e64f906824648a1bebb7e3cb9e1fe86458ca8e5cd3bf0d060c6d0cec490430.png",
+      "image_sha256": "67e64f906824648a1bebb7e3cb9e1fe86458ca8e5cd3bf0d060c6d0cec490430",
+      "archive_source": {
+        "file": "67e64f906824648a1bebb7e3cb9e1fe86458ca8e5cd3bf0d060c6d0cec490430.png",
+        "sha256": "67e64f906824648a1bebb7e3cb9e1fe86458ca8e5cd3bf0d060c6d0cec490430",
+        "bytes": 696905,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/tennis racket/522889_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "07b0a8a4c2a26fb7f999973e0853fc955d39934f7a37df503058a332e02360f1.mask.png",
+      "mask_sha256": "07b0a8a4c2a26fb7f999973e0853fc955d39934f7a37df503058a332e02360f1",
+      "author_mask": {
+        "file": "b8a962ac386543a9ccc914af38179eec1cafc141970aaaf2f87e9869245df281.png",
+        "sha256": "b8a962ac386543a9ccc914af38179eec1cafc141970aaaf2f87e9869245df281",
+        "bytes": 1695,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/tennis racket/522889_mask_segm.png"
+      },
+      "changed_fraction": 0.011229209765957355,
+      "changed_within_author_mask": 0.8435897435897436
+    },
+    {
+      "id": "flux-fill-53626-0",
+      "family": "flux-fill",
+      "label": 0,
+      "source_id": "53626",
+      "image": "0117554f7224b566c5311157f20e6e865f87fbcf161053fabdd4b605ad664cbb.png",
+      "image_sha256": "0117554f7224b566c5311157f20e6e865f87fbcf161053fabdd4b605ad664cbb",
+      "archive_source": {
+        "file": "0117554f7224b566c5311157f20e6e865f87fbcf161053fabdd4b605ad664cbb.png",
+        "sha256": "0117554f7224b566c5311157f20e6e865f87fbcf161053fabdd4b605ad664cbb",
+        "bytes": 1433912,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/orig-flux/orig-flux_testing.tar.gz",
+        "member": "testing/skis/53626_orig.png"
+      },
+      "mask": null,
+      "mask_sha256": null
+    },
+    {
+      "id": "flux-fill-53626-1",
+      "family": "flux-fill",
+      "label": 1,
+      "source_id": "53626",
+      "image": "342e065a23fe14095a5b0e1db072ff918a1bb58a94383efde1c98563f6cf2a5e.png",
+      "image_sha256": "342e065a23fe14095a5b0e1db072ff918a1bb58a94383efde1c98563f6cf2a5e",
+      "archive_source": {
+        "file": "342e065a23fe14095a5b0e1db072ff918a1bb58a94383efde1c98563f6cf2a5e.png",
+        "sha256": "342e065a23fe14095a5b0e1db072ff918a1bb58a94383efde1c98563f6cf2a5e",
+        "bytes": 1433416,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/flux1filldev-sp/flux1filldev-sp_testing.tar.gz",
+        "member": "testing/skis/53626_mask_segm.png_ps_mask.png_flux1filldev_0.png"
+      },
+      "mask": "16e1fc8e52629eb2aea3560b860546d742bac424a4e9573ddc52694d6e3defff.mask.png",
+      "mask_sha256": "16e1fc8e52629eb2aea3560b860546d742bac424a4e9573ddc52694d6e3defff",
+      "author_mask": {
+        "file": "2808d7a3517a8d609cd4793f8af14b05e3fdff91527545c30cb7aa2b85873aba.png",
+        "sha256": "2808d7a3517a8d609cd4793f8af14b05e3fdff91527545c30cb7aa2b85873aba",
+        "bytes": 1239,
+        "archive": "https://cloud.ilabt.imec.be/public.php/dav/files/KG48tLZZzifC5WE/masks-flux/masks-flux_testing.tar.gz",
+        "member": "testing/skis/53626_mask_segm.png"
+      },
+      "changed_fraction": 0.0021044413248697915,
+      "changed_within_author_mask": 0.8749244712990937
+    }
+  ]
+}

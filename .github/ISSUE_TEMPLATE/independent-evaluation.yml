@@ -1,0 +1,50 @@
+name: Independent evaluation or detection failure
+description: Report a reproducible detection result or offer an independent test.
+title: "[Evaluation] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use public source references or synthetic examples. Do not upload customer files,
+        private recordings, identifiable sensitive material, credentials, or restricted
+        datasets. Report security issues through SECURITY.md. Aggregate results and
+        checksums can be shared without sharing the underlying media.
+  - type: dropdown
+    id: modality
+    attributes:
+      label: Media type
+      options:
+        - Image
+        - Video
+        - Audio
+        - Article, document, or email
+        - Cross-media evaluation
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Task, expected behavior, and observed failure
+      description: Explain the known origin or edit, what the app assessed, and what was missed or falsely flagged.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Source references, permission, and independence
+      description: Link public sources and terms; give hashes and known source, speaker, topic, or generator overlap. Do not attach private media.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and complete outcomes
+      description: Include source revision, hardware, selected checks, conditions, assessed coverage, errors, false alarms, misses, and inconclusive counts. Explain sample selection and any exclusions.
+    validations:
+      required: true
+  - type: textarea
+    id: contribution
+    attributes:
+      label: Proposed collaboration or next comparison
+      description: Describe what you can independently reproduce, review, or improve. Do not post private contact information.

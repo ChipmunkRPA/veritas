@@ -11,7 +11,6 @@ from pathlib import Path
 import cv2
 import numpy as np
 import torch
-from prepare_video_upgrade_eval import sha
 
 from app.core.config import settings
 from app.detectors.image.dfdc import DFDCClassifier
@@ -23,6 +22,7 @@ from app.engine.fetchers import ensure_verified
 from app.engine.models import get_model_manager
 from app.engine.registry import get_registry
 from app.evidence.face_intervals import bind_tracks
+from scripts.prepare_video_upgrade_eval import sha
 
 YUNET = "yunet.2023mar"
 DINO = "dinov2.small"

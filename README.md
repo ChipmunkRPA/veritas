@@ -100,6 +100,13 @@ accuracy claim. Later presentation changes do not improve those measured outcome
 Private datasets, source media, credentials, customer reports, and downloaded
 weights remain excluded from this repository.
 
+New source-separated [image-localizer](docs/iml-vit-localization-evaluation.md)
+and [small-edit tiling](docs/tiled-splice-evaluation.md) comparisons retained
+unsuccessful candidates instead of changing the service to weaker checks.
+The [active improvement plan](docs/detection-improvement-plan.md) tracks the next
+video, audio and writing evaluations. Independent contributors can use the
+[portable testing contract](docs/independent-testing.md) and evaluation issue form.
+
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are
 not a claim that the original full release suite can be rerun from this checkout.

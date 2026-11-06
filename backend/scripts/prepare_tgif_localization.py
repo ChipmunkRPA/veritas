@@ -90,7 +90,7 @@ def plan(root: Path, count: int, exclude: set[str]) -> dict:
     return policy
 
 
-def fetch_members(url: str, members: set[str], root: Path) -> dict[str, dict]:
+def fetch_members(url: str, members: set[str], root: Path, *, allow_missing: bool = False) -> dict[str, dict]:
     index = root / f"archive-{sha(url.encode())[:16]}.jsonl"
     result = {}
     if index.exists():
@@ -133,13 +133,15 @@ def fetch_members(url: str, members: set[str], root: Path) -> dict[str, dict]:
                     if members <= result.keys():
                         break
     missing = members - result.keys()
-    if missing:
+    if missing and not allow_missing:
         raise ValueError(f"Missing {len(missing)} members in {url}: {sorted(missing)[:4]}")
+    if missing:
+        print(f"Unavailable secondary author masks in {url}: {sorted(missing)}", flush=True)
     print(f"Verified {len(result)} files from {url.rsplit('/', 1)[1]}", flush=True)
     return result
 
 
-def acquire(root: Path) -> dict:
+def acquire(root: Path, *, allow_missing_author_masks: bool = False) -> dict:
     if (root / "manifest.json").exists():
         raise FileExistsError("Use a fresh output directory")
     plan_bytes = (root / "tgif-plan.json").read_bytes()
@@ -148,29 +150,36 @@ def acquire(root: Path) -> dict:
         raise ValueError("Unrecognized plan metadata revision")
     pairs = [pair for family in protocol["groups"].values() for pair in family]
     archives: dict[str, set[str]] = {}
+    mask_archives = {pair["mask"][0] for pair in pairs}
     for pair in pairs:
         for role in ("image", "original", "mask"):
             url, member = pair[role]
             archives.setdefault(url, set()).add(member)
     with ThreadPoolExecutor(max_workers=5) as pool:
-        downloads = {url: pool.submit(fetch_members, url, members, root) for url, members in archives.items()}
+        downloads = {url: pool.submit(fetch_members, url, members, root,
+                                     allow_missing=allow_missing_author_masks and url in mask_archives)
+                     for url, members in archives.items()}
         assets = {url: task.result() for url, task in downloads.items()}
 
     rows = []
     for pair in pairs:
-        linked = {role: assets[pair[role][0]][pair[role][1]] for role in ("image", "original", "mask")}
+        linked = {role: assets[pair[role][0]].get(pair[role][1]) for role in ("image", "original", "mask")}
         edit, original, author = linked["image"], linked["original"], linked["mask"]
+        if edit is None or original is None or (author is None and not allow_missing_author_masks):
+            raise ValueError("A required image or reference source is unavailable; do not resample the case")
         with Image.open(root / edit["file"]) as edited, Image.open(root / original["file"]) as authentic:
             if (edited.size != authentic.size or min(edited.size) < 64
                     or any(i.getexif().get(274, 1) != 1 for i in (edited, authentic))):
                 raise ValueError(f"Source and edit lack matching native coordinates: {pair['source_id']}")
             changed = np.any(np.asarray(edited.convert("RGB")) != np.asarray(authentic.convert("RGB")), axis=2)
-        with Image.open(root / author["file"]) as mask_image:
-            if mask_image.size != (changed.shape[1], changed.shape[0]):
-                raise ValueError(f"Published mask lacks matching native coordinates: {pair['source_id']}")
-            intended = np.asarray(mask_image.convert("L")) > 127
+        intended = None
+        if author is not None:
+            with Image.open(root / author["file"]) as mask_image:
+                if mask_image.size != (changed.shape[1], changed.shape[0]):
+                    raise ValueError(f"Published mask lacks matching native coordinates: {pair['source_id']}")
+                intended = np.asarray(mask_image.convert("L")) > 127
         changed_count = int(changed.sum())
-        overlap = int((changed & intended).sum())
+        overlap = int((changed & intended).sum()) if intended is not None else None
         if not 0 < changed_count < changed.size or overlap == 0:
             raise ValueError(f"Source comparison does not support a local edit: {pair['source_id']}")
         # A published intended mask may have feathering and may extend beyond the
@@ -189,13 +198,21 @@ def acquire(root: Path) -> dict:
                    "mask_sha256": digest if label else None}
             if label:
                 row["author_mask"] = author
+                row["author_mask_status"] = "available" if author else "unavailable"
+                if author is None:
+                    row["author_mask_reference"] = pair["mask"]
                 row["changed_fraction"] = float(changed.mean())
-                row["changed_within_author_mask"] = overlap / changed_count
+                row["changed_within_author_mask"] = overlap / changed_count if overlap is not None else None
             source(root, row)
             rows.append(row)
     if len({r["image_sha256"] for r in rows}) != len(rows):
         raise ValueError("Duplicate source or edit bytes across sample pairs")
     manifest = {"dataset": "TGIF and TGIF2", "revision": REVISION, "plan_sha256": sha(plan_bytes), "items": rows}
+    if allow_missing_author_masks:
+        manifest["secondary_author_mask_policy"] = (
+            "Missing published author masks are recorded, not substituted or silently resampled. "
+            "The primary reference remains the exact RGB difference between the delivered splice and its original. "
+            "Every original and edited image is still required and verified. Available author masks retain geometry and overlap checks.")
     json_new(root / "manifest.json", manifest)
     print(f"Verified {len(rows) // 2} matched pairs and froze {root / 'manifest.json'}", flush=True)
     return manifest
@@ -209,6 +226,8 @@ if __name__ == "__main__":
     parser.add_argument("--exclude-coco-id", action="append", default=[])
     parser.add_argument("--exclude-manifest", type=Path, action="append", default=[],
                         help="Exclude every COCO source ID in earlier paired evaluation manifests")
+    parser.add_argument("--allow-missing-author-masks", action="store_true",
+                        help="Record unavailable secondary masks while retaining the original exact-pixel reference and source selection")
     args = parser.parse_args()
     if args.count < 2 or args.count % 2:
         parser.error("--count must be a positive even number")
@@ -220,4 +239,4 @@ if __name__ == "__main__":
         args.root.mkdir(parents=True, exist_ok=False)
         plan(args.root, args.count, excluded)
     else:
-        acquire(args.root)
+        acquire(args.root, allow_missing_author_masks=args.allow_missing_author_masks)

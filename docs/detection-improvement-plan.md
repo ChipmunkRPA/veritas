@@ -1,0 +1,103 @@
+# Detection improvement and independent evaluation
+
+Started 5 November 2026. GCP deployment is deferred. This work improves detection
+and the evidence supporting it before expanding hosting.
+
+## Requirements and order
+
+1. **Image edits:** compare a commercially permitted alternate localizer against
+   the currently selected PNG splice check and the fallback image localizer.
+   Include small edits, native PNG, and JPEG recompression. Improve actual edit
+   overlap at a comparable authentic-image review rate before adopting a change.
+2. **Video face swaps and lip sync:** investigate missed swaps and incomplete
+   coverage. Compare candidate changes separately, using new source groups and
+   ordinary cuts, lighting changes, compression, and correctly synchronized
+   speech as controls. Preserve exact source timestamps and before/during/after
+   evidence. Scope audio, face manipulation, and fully generated video separately.
+3. **Audio:** expand noisy-speech evaluation across unseen generators, speakers,
+   background sources, and recording conditions. Keep source families together
+   across data splits; use each candidate's own calibration and keep rollback.
+4. **Writing:** test fresh human/AI article pairs and realistic edited or mixed
+   passages. Evaluate passage position and context as well as document scores.
+   Do not manufacture calibrated authorship confidence from raw responses.
+5. **Independent collaboration:** provide a reproducible, model-independent
+   evaluation contract, contributor instructions, and privacy-safe failure-case
+   reporting. Publish methods and aggregate results with limitations. Do not
+   publish customer uploads or imply independent reviewers have participated
+   before they have done so.
+
+## First new image comparison: predeclared design
+
+- Candidate: official IML-ViT checkpoint, subject to source, checkpoint, and
+  commercial-license verification. Preserve original files and pin SHA-256.
+- Development may reuse consumed evaluation pairs, explicitly labeled as
+  development. Freeze preprocessing, map selection, and gates before any fresh
+  confirmation inference. An engineering smoke is not validation.
+- Confirmation: at least 48 new source-image pairs, selected deterministically
+  from the TGIF/TGIF2 author test splits, excluding all source IDs in earlier
+  local TGIF comparisons. Include Adobe Firefly, SD2, and FLUX Fill. Acquisition
+  failures stay visible; do not replace cases based on detector responses.
+- Score native images and deterministic JPEG quality-75 versions of both
+  original and edited images. Variants of a source remain one statistical group.
+  Recompressed edit masks refer to the original known edit coordinates, rather
+  than treating whole-image JPEG changes as manipulation ground truth.
+- Compare displayed-mask IoU and pixel F1, edit misses, authentic images with a
+  displayed region, assessed coverage, errors, latency, and memory. Misses count
+  as zero overlap. Report each generator/format independently and bootstrap
+  paired differences by source group. Checkpoints do not enter the overall
+  confidence estimate on the strength of localization results alone.
+- Adoption requires more edits overlapping the selected regions and higher mean
+  IoU, with at most one additional authentic image highlighted in each format on
+  the same confirmation sources. Record uncertainty; a small passing comparison
+  supports a scoped local release, not a universal accuracy claim.
+- Preserve baseline weights, immutable past results, model-name filtering, and
+  corresponding source coordinates across UI, PDF, and JSON.
+
+## Completion evidence
+
+Every change needs pinned inputs and weights, a locked development decision,
+complete held-out outcomes including failures, relevant regression tests, and
+an explicit adopt/reject/defer record. A public contribution process is not
+evidence of recruited collaborators or completed independent review. Track
+remaining requirements here and in linked experiment records; do not call the
+overall improvement program complete while any required media evaluation or
+integration remains unfinished.
+
+## Progress on 5 November
+
+- Completed a new 48-source paired PNG/JPEG IML-ViT comparison, including a pinned
+  commercial-permission record and bitwise reference parity. Rejected replacement
+  in both formats because detection overlap and false highlights worsened.
+  [Results and limits](iml-vit-localization-evaluation.md).
+- Added a portable four-media evaluation contract, complete-denominator and
+  split-leakage tests, contributor documentation, and an evaluation issue form.
+  These enable independent contributions; no external reviewer has participated
+  in these local experiments yet.
+- A whole-image-residual tiling prototype added one false review cue and recovered
+  no additional development edits in either tested format. Its frozen development
+  result is retained; do not promote it or consume confirmation inputs to claim
+  a gain. A separately versioned tile-local normalization experiment is planned.
+- Reserved 48 further source-disjoint image pairs for the next viable frozen
+  method. One secondary prompt mask is unavailable in the publisher archive.
+  The original and edited image bytes remain required; exact changed pixels are
+  still the primary reference. The missing mask is explicit in the manifest and
+  no source is substituted. The tile-local normalization variant subsequently
+  scored them after its rule was frozen. Its one-edit development gain did not
+  generalize: no additional confirmation edit overlapped in either format.
+  [Complete tiling results](tiled-splice-evaluation.md). Neither variant is enabled.
+- The next video comparison targets the lighting-related false alarms of the
+  consecutive-crop method. A photometric-normalization candidate will use the
+  existing commercially permitted checkpoints, consumed development data, and
+  new source/donor-disjoint confirmation clips with ordinary-edit controls.
+  It will not change the overall confidence calculation during comparison.
+  Thirty new source groups have supplied all 120 planned original, swapped, and
+  ordinary-edit clips. The unchanged current check completed its baseline. Both
+  consecutive-crop arms were scored on 120 consumed v5 development cases. Raw
+  crops were selected as primary there, before fresh candidate inference;
+  normalization remains a secondary comparison. Fresh confirmation completed:
+  raw crops localized 19/60 swaps versus 7/60 for current, with the same 21/60
+  genuine/control review flags and no lost correct locations. The normalized
+  arm added no improvement. [Results](video-sequence-v6-evaluation.md).
+  Next: integrate the primary method with exact input bindings and verify UI,
+  PDF, JSON and the paid analysis flow before local enablement. It must retain
+  zero weight in overall confidence until separately calibrated for that purpose.

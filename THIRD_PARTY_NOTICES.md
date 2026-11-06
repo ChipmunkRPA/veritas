@@ -107,3 +107,15 @@ The registry now also pins Silero speech activity (MIT), Pella v2 plus its W2v-B
 | --- | --- | --- | --- |
 | `tidal.splice_v30_1` | [the-harsh-vardhan/TIDAL](https://huggingface.co/the-harsh-vardhan/TIDAL/tree/6bc4c3fd066f13d614949db64eb7f1abdc912ada) | Apache-2.0 | Publisher declaration; training-source provenance is separate. Local checkpoint is not bundled. |
 | `hf.wasitaigenerated.text_small` | [wasitaigeneratedcom/ai-text-detector-small](https://huggingface.co/wasitaigeneratedcom/ai-text-detector-small/tree/f1795c86806e6838d4afa33d0b1427f8430c9615) | Apache-2.0 | Publisher permits commercial use; upstream MIT attributions are in its pinned NOTICE. Weights are not bundled. |
+
+## Independent-evaluation metadata and offline candidates
+
+The source catalogues under [`docs/evaluation-panels`](docs/evaluation-panels/README.md)
+retain the TGIF/TGIF2 and RTFS publishers' CC BY-SA 4.0 attribution and terms;
+the code's MIT license does not relicense that dataset metadata. No source media
+or checkpoints are included. Offline IML-ViT evaluation uses the pinned checkpoint
+covered by the maintainer's [MIT commercial-use clarification](https://github.com/SunnyHaze/IML-ViT/issues/60#issuecomment-5099083801).
+The fetched encoder/FPN source retains its Detectron2 attribution. Our small
+checkpoint-compatible prediction head does not import the publisher's decoder
+file that cites separately restricted SegFormer source. This failed candidate
+is not enabled in the service; see the [comparison](docs/iml-vit-localization-evaluation.md).

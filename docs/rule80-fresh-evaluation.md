@@ -1,6 +1,6 @@
 # Fresh evaluation of the frozen 80% headline rule
 
-Policy update on 2026-11-05: the current customer screening cutoff is 60%. This study remains a historical 80% evaluation; its figures must not be presented as validation of the new cutoff. The exact prior production files are retained in the local trial's `frozen-production-source.tar.gz`. Reproduction of this historical study requires those archived sources; the current-code audit deliberately rejects the changed source tree.
+Policy update on 2026-11-05: current customer reports present finding-level tendencies and scoped confidence estimates without a public screening-threshold claim. This study remains a historical 80% evaluation; its figures must not be presented as validation of the current presentation, later model changes, or another operating point. The exact prior production files are retained in the local trial's `frozen-production-source.tar.gz`. Reproduction of this historical study requires those archived sources; the current-code audit deliberately rejects the changed source tree.
 
 Completed locally on 2026-11-04. The result does **not** establish reliable original-content conclusions across the tested edit types. Localized image edits and face swaps exposed false-original headlines; article headlines remained entirely inconclusive.
 

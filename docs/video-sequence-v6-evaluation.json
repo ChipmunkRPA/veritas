@@ -1,0 +1,560 @@
+{
+  "schema": "chipmunk.photometric-review/1",
+  "lock_sha256": "fb0842680b201ea1492d9a7b00400580ab53ebe0fa75dbccbb00ee17798d4299",
+  "manifest_sha256": "15758eb29000c9d5e2dab80334caa7190766bd839de85fa4c4ca6d26fdf59e58",
+  "candidate_sha256": "c9dbe7fb5a55f5925395ad5541e39b2224d77de2945bafbc68dac6d74b352a20",
+  "baseline_sha256": "fe274cddd4d7850f1776e77450a3b4952f16a4cadeb9c2778086c5c1f2655d99",
+  "confirmation": {
+    "current": {
+      "planned": 120,
+      "source_groups": 30,
+      "originals": 60,
+      "edits": 60,
+      "hard_controls": 30,
+      "original_flags": 21,
+      "hard_control_flags": 12,
+      "localized_edits": 7,
+      "missed_localizations": 53,
+      "mean_edit_iou": 0.09248686823248227,
+      "baseline_scored_cases": 120,
+      "baseline_failures": 0,
+      "baseline_unassessed": 0,
+      "baseline_status_counts": {
+        "ok": 120
+      },
+      "candidate_failures": 0,
+      "candidate_status_counts": {
+        "ok": 120
+      },
+      "candidate_window_cases": 0,
+      "unavailable_sources": 0
+    },
+    "raw": {
+      "planned": 120,
+      "source_groups": 30,
+      "originals": 60,
+      "edits": 60,
+      "hard_controls": 30,
+      "original_flags": 21,
+      "hard_control_flags": 12,
+      "localized_edits": 19,
+      "missed_localizations": 41,
+      "mean_edit_iou": 0.2508856308135628,
+      "baseline_scored_cases": 120,
+      "baseline_failures": 0,
+      "baseline_unassessed": 0,
+      "baseline_status_counts": {
+        "ok": 120
+      },
+      "candidate_failures": 0,
+      "candidate_status_counts": {
+        "ok": 120
+      },
+      "candidate_window_cases": 108,
+      "unavailable_sources": 0,
+      "paired_iou": {
+        "candidate_minus_current": 0.15839876258108057,
+        "source_group_bootstrap_95_percent": [
+          0.06888496738988054,
+          0.26179980677230946
+        ],
+        "source_groups": 30
+      },
+      "meets_count_tradeoff": true,
+      "qualifies_for_scoped_local_adoption": true
+    },
+    "normalized": {
+      "planned": 120,
+      "source_groups": 30,
+      "originals": 60,
+      "edits": 60,
+      "hard_controls": 30,
+      "original_flags": 21,
+      "hard_control_flags": 12,
+      "localized_edits": 7,
+      "missed_localizations": 53,
+      "mean_edit_iou": 0.09248686823248227,
+      "baseline_scored_cases": 120,
+      "baseline_failures": 0,
+      "baseline_unassessed": 0,
+      "baseline_status_counts": {
+        "ok": 120
+      },
+      "candidate_failures": 0,
+      "candidate_status_counts": {
+        "ok": 120
+      },
+      "candidate_window_cases": 108,
+      "unavailable_sources": 0,
+      "paired_iou": {
+        "candidate_minus_current": 0.0,
+        "source_group_bootstrap_95_percent": [
+          0.0,
+          0.0
+        ],
+        "source_groups": 30
+      },
+      "meets_count_tradeoff": false,
+      "qualifies_for_scoped_local_adoption": false
+    }
+  },
+  "primary_candidate": "raw",
+  "limits": "Matched, short clips from two swap families. Training/subject overlap beyond declared source and donor IDs is unknown. Review ranges and feature responses do not prove AI generation or supply overall confidence. Source groups, including two swaps and two controls, are resampled together for paired IoU uncertainty.",
+  "families": {
+    "inswapper": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 7,
+        "missed_localizations": 23,
+        "mean_edit_iou": 0.13992845117845118,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 13,
+        "missed_localizations": 17,
+        "mean_edit_iou": 0.30650559931574967,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 7,
+        "missed_localizations": 23,
+        "mean_edit_iou": 0.13992845117845118,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      }
+    },
+    "jump-cut": {
+      "current": {
+        "planned": 10,
+        "source_groups": 10,
+        "originals": 10,
+        "edits": 0,
+        "hard_controls": 10,
+        "original_flags": 4,
+        "hard_control_flags": 4,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 10,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 10
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 10
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 10,
+        "source_groups": 10,
+        "originals": 10,
+        "edits": 0,
+        "hard_controls": 10,
+        "original_flags": 4,
+        "hard_control_flags": 4,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 10,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 10
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 10
+        },
+        "candidate_window_cases": 7,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 10,
+        "source_groups": 10,
+        "originals": 10,
+        "edits": 0,
+        "hard_controls": 10,
+        "original_flags": 4,
+        "hard_control_flags": 4,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 10,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 10
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 10
+        },
+        "candidate_window_cases": 7,
+        "unavailable_sources": 0
+      }
+    },
+    "lighting-change": {
+      "current": {
+        "planned": 7,
+        "source_groups": 7,
+        "originals": 7,
+        "edits": 0,
+        "hard_controls": 7,
+        "original_flags": 1,
+        "hard_control_flags": 1,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 7,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 7
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 7
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 7,
+        "source_groups": 7,
+        "originals": 7,
+        "edits": 0,
+        "hard_controls": 7,
+        "original_flags": 1,
+        "hard_control_flags": 1,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 7,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 7
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 7
+        },
+        "candidate_window_cases": 7,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 7,
+        "source_groups": 7,
+        "originals": 7,
+        "edits": 0,
+        "hard_controls": 7,
+        "original_flags": 1,
+        "hard_control_flags": 1,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 7,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 7
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 7
+        },
+        "candidate_window_cases": 7,
+        "unavailable_sources": 0
+      }
+    },
+    "original_videos": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 30,
+        "edits": 0,
+        "hard_controls": 0,
+        "original_flags": 9,
+        "hard_control_flags": 0,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 30,
+        "edits": 0,
+        "hard_controls": 0,
+        "original_flags": 9,
+        "hard_control_flags": 0,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 30,
+        "edits": 0,
+        "hard_controls": 0,
+        "original_flags": 9,
+        "hard_control_flags": 0,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      }
+    },
+    "recompression": {
+      "current": {
+        "planned": 13,
+        "source_groups": 13,
+        "originals": 13,
+        "edits": 0,
+        "hard_controls": 13,
+        "original_flags": 7,
+        "hard_control_flags": 7,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 13,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 13
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 13
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 13,
+        "source_groups": 13,
+        "originals": 13,
+        "edits": 0,
+        "hard_controls": 13,
+        "original_flags": 7,
+        "hard_control_flags": 7,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 13,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 13
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 13
+        },
+        "candidate_window_cases": 13,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 13,
+        "source_groups": 13,
+        "originals": 13,
+        "edits": 0,
+        "hard_controls": 13,
+        "original_flags": 7,
+        "hard_control_flags": 7,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "mean_edit_iou": null,
+        "baseline_scored_cases": 13,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 13
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 13
+        },
+        "candidate_window_cases": 13,
+        "unavailable_sources": 0
+      }
+    },
+    "uniface": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 0,
+        "missed_localizations": 30,
+        "mean_edit_iou": 0.045045285286513366,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 0,
+        "unavailable_sources": 0
+      },
+      "raw": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 6,
+        "missed_localizations": 24,
+        "mean_edit_iou": 0.19526566231137596,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      },
+      "normalized": {
+        "planned": 30,
+        "source_groups": 30,
+        "originals": 0,
+        "edits": 30,
+        "hard_controls": 0,
+        "original_flags": 0,
+        "hard_control_flags": 0,
+        "localized_edits": 0,
+        "missed_localizations": 30,
+        "mean_edit_iou": 0.045045285286513366,
+        "baseline_scored_cases": 30,
+        "baseline_failures": 0,
+        "baseline_unassessed": 0,
+        "baseline_status_counts": {
+          "ok": 30
+        },
+        "candidate_failures": 0,
+        "candidate_status_counts": {
+          "ok": 30
+        },
+        "candidate_window_cases": 27,
+        "unavailable_sources": 0
+      }
+    }
+  },
+  "retention": {
+    "newly_localized_edits": 12,
+    "lost_localizations": 0,
+    "new_genuine_flags": 0,
+    "removed_genuine_flags": 0
+  },
+  "thresholds": {
+    "raw": 0.007326911389827726,
+    "normalized": 0.03725649546831847
+  },
+  "decision": "Primary raw consecutive-crop method passes the predeclared local comparison. Integrate and test source-bound UI/PDF/JSON evidence before enabling locally; no overall confidence promotion. Normalization does not advance."
+}

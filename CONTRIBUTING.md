@@ -43,5 +43,11 @@ from the imported source archive. Do not represent those records as newly reprod
 Maintainers review proposed changes and may request additional evidence before adopting a detector.
 An issue or pull request does not automatically change a serving calibration or benchmark.
 
+For independent testing, use the [portable evaluation contract](docs/independent-testing.md)
+and the repository's **Independent evaluation or detection failure** issue form.
+The contract checks source separation, complete denominators, and frozen system
+identities across all four media types. The [active improvement plan](docs/detection-improvement-plan.md)
+lists the current priorities and the evidence needed before adopting a change.
+
 Project-authored contributions are provided under the [MIT License](LICENSE).
 Identify any third-party material and retain its original license and attribution.

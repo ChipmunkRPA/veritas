@@ -1,0 +1,121 @@
+# Independent testing and collaboration
+
+We welcome independent evaluations of images, video, audio, and writing. The
+current detection-improvement program is in [this plan](detection-improvement-plan.md).
+An implementation by our team is not an independent review; an external test
+must identify who ran it, how inputs were selected, and what was independently
+checked. We do not currently claim recruited reviewers or completed community pilots.
+
+## Useful contributions
+
+- Reproduce a published failure on a permitted input, including its source hash,
+  exact check coverage, app revision, hardware, and relevant source positions.
+- Compare a proposed detector or preprocessing change against the current check
+  on identical, source-separated inputs. Include ordinary editing, compression,
+  background sound, and other plausible non-AI explanations.
+- Audit a calibration, sample split, mask or timestamp measurement, license
+  declaration, or claimed numerical parity. A code audit and a detection-quality
+  evaluation answer different questions; label them separately.
+- Test whether ordinary users can follow findings to evidence and understand
+  inconclusive outcomes. Document the task and feedback without private uploads.
+
+Use the repository's **Independent evaluation or detection failure** issue form.
+Issues and pull requests are reviewable proposals; they do not automatically
+change a serving model, calibration, or stored result. Do not submit media that
+you do not have permission to share. Public references, hashes, methods, and
+aggregate outcomes are sufficient when source media cannot be redistributed.
+
+The [public evaluation source catalogues](evaluation-panels/README.md) identify
+the exact new image/video panels with public references, hashes, and edit
+positions. Their dataset metadata retains its separate attribution and terms.
+
+## Portable evaluation contract
+
+`backend/app/bench/independent.py` is standard-library-only. Its command-line
+wrapper runs without downloaded weights and does not start the app:
+
+```sh
+python3 backend/scripts/independent_review.py audit manifest.json
+python3 backend/scripts/independent_review.py freeze manifest.json development.json thresholds.json frozen.json
+python3 backend/scripts/independent_review.py summarize manifest.json confirmation.json frozen.json summary.json
+python3 backend/scripts/independent_review.py compare manifest.json baseline.json baseline-frozen.json candidate.json candidate-frozen.json comparison.json
+```
+
+Outputs refuse overwrite. Keep the original manifests, frozen decisions, and
+receipts. Store private evaluation media outside Git. The summary deliberately
+omits individual source identifiers and media; review it before public sharing.
+
+The manifest has `schema: "chipmunk.independent-evaluation/1"` and a `cases` array.
+Each case records:
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Unique input variant |
+| `modality` | `image`, `video`, `audio`, or `text` |
+| `split` | `development` or `confirmation` |
+| `group` | Shared parent-source group, consistent across variants and modalities |
+| `label` | Integer 0 for declared genuine control, 1 for known generation/manipulation |
+| `family`, `condition` | Generator/control family and transformation or recording condition |
+| `source_sha256`, `input_sha256` | Parent source and exact scored-file digests |
+| `lineage` | Known linked original, speaker, synthetic voice, topic, transcript, or source identifiers |
+| `license` | `id`, explicit `evaluation_permitted`, and explicit `redistribution_permitted` |
+
+Known lineage, group identities, and source/input hashes cannot cross splits.
+These are declared identities: the checker cannot discover undisclosed training
+overlap, authenticate a publisher's labels, grant rights, or infer subject consent.
+Check near duplicates and connected source lineage before freezing the selection.
+Keep source families and transformed copies together. Explain any unknown overlap.
+
+Each system receipt records `manifest_sha256` (canonical JSON digest from the
+audit), `split`, `system`, `implementation_sha256`, a nonempty `weight_sha256`
+array, `score_kind` (`raw` or `calibrated`), `response_units`, and `predictions`. Calibrated receipts
+also require `calibration_sha256`. Every planned case appears exactly once with
+its `id`, `input_sha256`, and `status`:
+
+- `ok`: a finite `response`, oriented towards the declared positive class. Raw
+  measurements retain their actual units, including signed responses. Calibrated
+  estimates must lie between 0 and 1.
+- `inconclusive`, `not_applicable`, or `failed`: `response: null` and a specific `reason`.
+
+Raw responses are not confidence probabilities. Missing responses must not be
+written as zero. Candidate calibrations have their own identities; changing a
+system, checkpoint, implementation, or calibration after the freeze is refused.
+The `thresholds.json` file maps each evaluated modality to a fixed **internal
+benchmark flag point**. This is not a public screening cutoff or a rule for the
+customer headline. Operating points use the declared response units; signed raw
+measurements are not clipped or mislabeled as probabilities. Select operating points only on development data and explain
+the choice; the wrapper intentionally does not optimize them on confirmation.
+
+All planned inputs remain in alert/miss and coverage denominators, including
+errors and abstentions. AUC covers only scored inputs. Brier is reported only for
+declared calibrated responses and scored cases. AI without an alert includes
+unassessed inputs; it must not be described as a genuine-content verdict.
+Paired comparisons resample declared source groups and report each media type and
+condition separately. A small bootstrap interval describes this panel, not future
+customers or unknown generators. Report all original/edit counts alongside rates.
+
+## Evidence localization
+
+The portable receipt assesses input-level responses. It does not certify masks,
+lip-sync offsets, or source positions. Include a separate localization audit:
+
+- Images: original dimensions and orientation, reference-mask hash, exact scoring
+  grid and projection, displayed-region policy, IoU/pixel F1 including misses,
+  and authentic inputs receiving highlights. Bounding rectangles are not masks.
+- Video: known manipulated frame ranges, exact presentation timestamps, track
+  coverage, interval overlap including misses, and before/during/after frames.
+- Audio: original and decoded hashes, sample rate, sample bounds, independent
+  source groups, measured mixture SNR, and whether the background was separated
+  or remains part of a mixed recording.
+- Writing: immutable extracted text, Unicode offset convention, scored context
+  windows, source passage positions, and whether word-level labels are actually
+  available. A passage response is not proof of individual AI-written words.
+
+## Model-free checks
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
+```
+
+Those tests use explicitly synthetic response fixtures. They verify the audit
+contract and denominators, not the predictive accuracy of any detector.

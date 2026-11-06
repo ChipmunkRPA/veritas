@@ -1,0 +1,2256 @@
+{
+  "policy": "chipmunk-face-interval/1",
+  "source_manifest_sha256": "1607a5a935be65443572f8e9e43e4d1436015c6c57b1d0431d61401ea0eeb297",
+  "items": [
+    {
+      "id": "rtfs-103-original_videos",
+      "group": "RTFS:efjS8i82htM",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-103-original_videos.mp4",
+      "sha256": "fe6c6da8f0cdce0bc50c074f9ba4fe747da5505cc50cf61fbce0d64aca8d46e0",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        99
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-103-inswapper",
+      "group": "RTFS:efjS8i82htM",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-103-inswapper.mp4",
+      "sha256": "b1b36e4f152cf0f1881c9e0079e6f54c2515f6a12cd54d0ceb2964a017ebc279",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        99
+      ],
+      "edit_s": [
+        2.875,
+        4.125
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-103-uniface",
+      "group": "RTFS:efjS8i82htM",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-103-uniface.mp4",
+      "sha256": "91dd30f39f345c87a017e3f4c3687fad000de06dd2708ed24c7c62e3ed4ee653",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        99
+      ],
+      "edit_s": [
+        2.875,
+        4.125
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-103-original_videos-ordinary",
+      "group": "RTFS:efjS8i82htM",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-103-original_videos-ordinary.mp4",
+      "sha256": "01536dd52d921142e28de35728e1fa395789f65012b4e4e582ee523631e2c386",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-104-original_videos",
+      "group": "RTFS:ecYvoeH9L9o",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-104-original_videos.mp4",
+      "sha256": "23955881112b928c561f4a4136c25b863351832bd1b7351c9aceb906766f2047",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        25,
+        55
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-104-inswapper",
+      "group": "RTFS:ecYvoeH9L9o",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-104-inswapper.mp4",
+      "sha256": "5169e3d4012ccd3bc1df029fddb5bf17c5871651b893e3e19872b24448cd67c8",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        25,
+        55
+      ],
+      "edit_s": [
+        1.0416666666666667,
+        2.2916666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-104-uniface",
+      "group": "RTFS:ecYvoeH9L9o",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-104-uniface.mp4",
+      "sha256": "80196f82ea0179fe2cda2c5454668d9497cf806c27ffaf774f043ef3401af803",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        25,
+        55
+      ],
+      "edit_s": [
+        1.0416666666666667,
+        2.2916666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-104-original_videos-ordinary",
+      "group": "RTFS:ecYvoeH9L9o",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-104-original_videos-ordinary.mp4",
+      "sha256": "87bf3fdcd62a3e0ac173c45d20e388d6881a03f8cd1e4a5a520b87f37910c24a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-105-original_videos",
+      "group": "RTFS:nBUhQbJk4y8",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-105-original_videos.mp4",
+      "sha256": "606fa609ca7bbfd2520f15bedb9ff77d41f74331ec287688fbcc0c92781ff69c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        63,
+        93
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-105-inswapper",
+      "group": "RTFS:nBUhQbJk4y8",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-105-inswapper.mp4",
+      "sha256": "1f05f2372c79479c2cf2aa35b4161127e6652e0d617f112da9ca6990876c0877",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        63,
+        93
+      ],
+      "edit_s": [
+        2.625,
+        3.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-105-uniface",
+      "group": "RTFS:nBUhQbJk4y8",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-105-uniface.mp4",
+      "sha256": "c29efb195ad1f47626e61f8269df94560966e1c84a2bfe905ecf738f07433fb9",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        63,
+        93
+      ],
+      "edit_s": [
+        2.625,
+        3.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-105-original_videos-ordinary",
+      "group": "RTFS:nBUhQbJk4y8",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-105-original_videos-ordinary.mp4",
+      "sha256": "e65c8b9c2612b8973e89e223cb2364269a6970329d3e3a054c1cecd315a99c09",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-106-original_videos",
+      "group": "RTFS:s63NK0YYqXo",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-106-original_videos.mp4",
+      "sha256": "321c4b10b6a79b00834acaf9017b44643462514a2b46a748614bd0e2925d9bac",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        40,
+        70
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-106-inswapper",
+      "group": "RTFS:s63NK0YYqXo",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-106-inswapper.mp4",
+      "sha256": "e3fc051ada6398897fbfc20332c4feece7e959f2de6f333b3d7ddb5225a6c313",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        40,
+        70
+      ],
+      "edit_s": [
+        1.6666666666666667,
+        2.9166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-106-uniface",
+      "group": "RTFS:s63NK0YYqXo",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-106-uniface.mp4",
+      "sha256": "8172721e0aee5d06013d88cf328680119d788217ab9438967810cdeb41485e80",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        40,
+        70
+      ],
+      "edit_s": [
+        1.6666666666666667,
+        2.9166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-106-original_videos-ordinary",
+      "group": "RTFS:s63NK0YYqXo",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-106-original_videos-ordinary.mp4",
+      "sha256": "2be733b1e64609424381d599e81f776b97f178bdb415f918e63c4d13d4ac675b",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-107-original_videos",
+      "group": "RTFS:uP_Ds5vD8Yc",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-107-original_videos.mp4",
+      "sha256": "613c689e2cf37c280ad9d64ca7273cc34b6aee3fbd0083ffb27eabfff117b46a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        63
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-107-inswapper",
+      "group": "RTFS:uP_Ds5vD8Yc",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-107-inswapper.mp4",
+      "sha256": "765cec2655ff253b558d9ad61c4efb5fee2fc16915e5f7e90340f3f18eb4c88b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        63
+      ],
+      "edit_s": [
+        1.375,
+        2.625
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-107-uniface",
+      "group": "RTFS:uP_Ds5vD8Yc",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-107-uniface.mp4",
+      "sha256": "33bd8091765b572df16bddbd4bf36ccf150b8e53bf4f4845f0488a7b3580e3ed",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        63
+      ],
+      "edit_s": [
+        1.375,
+        2.625
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-107-original_videos-ordinary",
+      "group": "RTFS:uP_Ds5vD8Yc",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-107-original_videos-ordinary.mp4",
+      "sha256": "7248f902b078962c2c70ad4b9bd5b580a5a347ce2db1c1a74fbda29041af0cb7",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-108-original_videos",
+      "group": "RTFS:_ILCmG-pM4g",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-108-original_videos.mp4",
+      "sha256": "c7addd8607829cfef64313c77b41b5ab371b73498eb9596b1e826b901976da40",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-108-inswapper",
+      "group": "RTFS:_ILCmG-pM4g",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-108-inswapper.mp4",
+      "sha256": "6c749b1eb9205d6baaaa64801029c6f451b843449cdc5b65f374cf3903ef44f0",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": [
+        2.0416666666666665,
+        3.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-108-uniface",
+      "group": "RTFS:_ILCmG-pM4g",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-108-uniface.mp4",
+      "sha256": "04f8639ba8044f11ebd738b317eae785c8c8072e35a7d040c10f4fdb2ff614ee",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": [
+        2.0416666666666665,
+        3.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-108-original_videos-ordinary",
+      "group": "RTFS:_ILCmG-pM4g",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-108-original_videos-ordinary.mp4",
+      "sha256": "ebd4e6fd27a5f70493130037e9ce953d98184115002865806f340b423d74f317",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-109-original_videos",
+      "group": "RTFS:axYwLGk2hv8",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-109-original_videos.mp4",
+      "sha256": "caf2c7c3f5bce7ab7ee1737245ef824c35cc9e9affdc8292541b56befd132036",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        94,
+        124
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-109-inswapper",
+      "group": "RTFS:axYwLGk2hv8",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-109-inswapper.mp4",
+      "sha256": "a44ba10210b183965b00bcf0c52ee734ca63e8cb5b97e56b4a273750e9903612",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        94,
+        124
+      ],
+      "edit_s": [
+        3.9166666666666665,
+        5.166666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-109-uniface",
+      "group": "RTFS:axYwLGk2hv8",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-109-uniface.mp4",
+      "sha256": "5926a4d3a5fff8aac7a5841948138aae6d6da7fd3d1801f9c39379edee4a9ace",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        94,
+        124
+      ],
+      "edit_s": [
+        3.9166666666666665,
+        5.166666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-109-original_videos-ordinary",
+      "group": "RTFS:axYwLGk2hv8",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-109-original_videos-ordinary.mp4",
+      "sha256": "c956b31622002a8aefd89df03eb68a02b5d4c23d1f062b5c87cea27b2f07b877",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-110-original_videos",
+      "group": "RTFS:MTQ-JZZUIjU",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-110-original_videos.mp4",
+      "sha256": "e9af844db72e73a23b968870f0b5223e48c7d9fdee2c527e6ee24f015fd78e5c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        44,
+        92
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-110-inswapper",
+      "group": "RTFS:MTQ-JZZUIjU",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-110-inswapper.mp4",
+      "sha256": "09ddcbdd21dc40736eff9e58bd1226ed31adc5564733df852a94569aa0dbfc1b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        44,
+        92
+      ],
+      "edit_s": [
+        1.8333333333333333,
+        3.8333333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-110-uniface",
+      "group": "RTFS:MTQ-JZZUIjU",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-110-uniface.mp4",
+      "sha256": "96054ce789dad8e59a61a000f7a4b0c3c0fcc669aa5fede9f4aedc58985be4e0",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        44,
+        92
+      ],
+      "edit_s": [
+        1.8333333333333333,
+        3.8333333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-110-original_videos-ordinary",
+      "group": "RTFS:MTQ-JZZUIjU",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-110-original_videos-ordinary.mp4",
+      "sha256": "1621ec68a9d1b105f07c10017c9edb50ba19883808f981c5ac56fd2baaa24942",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-111-original_videos",
+      "group": "RTFS:X8DJWo4G0qU",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-111-original_videos.mp4",
+      "sha256": "e65c5083ea6c4390c4db09b93830de4921760cd162e4a346d153ea3301ebfd8d",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        52,
+        88
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-111-inswapper",
+      "group": "RTFS:X8DJWo4G0qU",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-111-inswapper.mp4",
+      "sha256": "fbed425a8eb7e81c996ccd1e12902d971d23548d3a976704f2909728596a47bb",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        52,
+        88
+      ],
+      "edit_s": [
+        2.1666666666666665,
+        3.6666666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-111-uniface",
+      "group": "RTFS:X8DJWo4G0qU",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-111-uniface.mp4",
+      "sha256": "a2c06c23a8d23206fbc7e89bfe543d4b432eb1a9de10718d7a00e473b38b3b9f",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        52,
+        88
+      ],
+      "edit_s": [
+        2.1666666666666665,
+        3.6666666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-111-original_videos-ordinary",
+      "group": "RTFS:X8DJWo4G0qU",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-111-original_videos-ordinary.mp4",
+      "sha256": "b5563173fa041f7b9071dcb1a80474ce1ba6b19b77f147e7a7e963954109d949",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-112-original_videos",
+      "group": "RTFS:6MUmTukDVAw",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-112-original_videos.mp4",
+      "sha256": "8ae042e59e81172eebb0838ad67916391496d875adf5cc974f7b63d799552b00",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        59,
+        107
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-112-inswapper",
+      "group": "RTFS:6MUmTukDVAw",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-112-inswapper.mp4",
+      "sha256": "c9a8ee2efcd68186f77c7b25a5cc8091bdf0bea4a96ffb6c6c905ca171d67790",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        59,
+        107
+      ],
+      "edit_s": [
+        2.4583333333333335,
+        4.458333333333333
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-112-uniface",
+      "group": "RTFS:6MUmTukDVAw",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-112-uniface.mp4",
+      "sha256": "6eb1998064a4fcc3ab9d407befc957b60525f6bfd0e981e8b9f2069541256f4e",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        59,
+        107
+      ],
+      "edit_s": [
+        2.4583333333333335,
+        4.458333333333333
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-112-original_videos-ordinary",
+      "group": "RTFS:6MUmTukDVAw",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-112-original_videos-ordinary.mp4",
+      "sha256": "ae61bbe48f15d6e0bbf33a36b7f79e69a07e544094e8d32ac4f27967c1111a06",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-113-original_videos",
+      "group": "RTFS:f04Chlv9t3k",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-113-original_videos.mp4",
+      "sha256": "8a6834783626c4e39ed068b66148fe0143cbb4db33af52f5a6b872458d7b8b7e",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        20,
+        50
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-113-inswapper",
+      "group": "RTFS:f04Chlv9t3k",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-113-inswapper.mp4",
+      "sha256": "a2abf51bfb83bd04064b86f0c75001b4053c1091a400a77ba92f631c45efea0e",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        20,
+        50
+      ],
+      "edit_s": [
+        0.8333333333333334,
+        2.0833333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-113-uniface",
+      "group": "RTFS:f04Chlv9t3k",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-113-uniface.mp4",
+      "sha256": "f98516d523baa8ee0930b1f0181d85efc08c795caae3e303b4f195bc78628166",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        20,
+        50
+      ],
+      "edit_s": [
+        0.8333333333333334,
+        2.0833333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-113-original_videos-ordinary",
+      "group": "RTFS:f04Chlv9t3k",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-113-original_videos-ordinary.mp4",
+      "sha256": "5cc2f12cb77952ef47272ba1c52752dda4e00948cab1cd1df32a75ef0bcb7997",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-114-original_videos",
+      "group": "RTFS:Rf9m540etnM",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-114-original_videos.mp4",
+      "sha256": "8b6cfa36616da70b21c8935259d18b4277695bc29cb2ac1d077458978480692b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        70
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-114-inswapper",
+      "group": "RTFS:Rf9m540etnM",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-114-inswapper.mp4",
+      "sha256": "884cabc84d5c3043834ad9f5daed638d8e67d9d419266b50a4e826b997f5bcda",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        70
+      ],
+      "edit_s": [
+        1.4166666666666667,
+        2.9166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-114-uniface",
+      "group": "RTFS:Rf9m540etnM",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-114-uniface.mp4",
+      "sha256": "0edacd0d7a5d3f8ecb48fe04ee47f1b489e43ea182c36c7ff578b175da147c1a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        70
+      ],
+      "edit_s": [
+        1.4166666666666667,
+        2.9166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-114-original_videos-ordinary",
+      "group": "RTFS:Rf9m540etnM",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-114-original_videos-ordinary.mp4",
+      "sha256": "61cce30629fbf5a0380bf93c98f2dbc55f7f70db12d1875d6906ca9cb60a3571",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-115-original_videos",
+      "group": "RTFS:DLQy0x_Guik",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-115-original_videos.mp4",
+      "sha256": "9e7c246af54cedfe6da948265ce5f1b696c041bd318653cffdb8c443258fecdd",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        27,
+        75
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-115-inswapper",
+      "group": "RTFS:DLQy0x_Guik",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-115-inswapper.mp4",
+      "sha256": "807a6980f320220b027e1f035358ae3885802458c18d17f8ce6b72e3e245e829",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        27,
+        75
+      ],
+      "edit_s": [
+        1.125,
+        3.125
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-115-uniface",
+      "group": "RTFS:DLQy0x_Guik",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-115-uniface.mp4",
+      "sha256": "44a356ac9fbda3f40ed6e4d06393cbbdf145d60fe06184436bd758585b14df41",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        27,
+        75
+      ],
+      "edit_s": [
+        1.125,
+        3.125
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-115-original_videos-ordinary",
+      "group": "RTFS:DLQy0x_Guik",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-115-original_videos-ordinary.mp4",
+      "sha256": "a4fa9b300973b50de8465edd43162ab6de2c396813a006a1193874eb064d4806",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-116-original_videos",
+      "group": "RTFS:7-kM7EC9lCI",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-116-original_videos.mp4",
+      "sha256": "d2d9a111032b85d87318b62d26e607406ce4bf4f4bcd551ded2b54af90730124",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        81
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-116-inswapper",
+      "group": "RTFS:7-kM7EC9lCI",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-116-inswapper.mp4",
+      "sha256": "d8d8dd49c6d50b693e5cb07522b746c0540b2cbdf03590f1f593a1bbab0ea6d3",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        81
+      ],
+      "edit_s": [
+        1.375,
+        3.375
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-116-uniface",
+      "group": "RTFS:7-kM7EC9lCI",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-116-uniface.mp4",
+      "sha256": "b34f4d77234b76a6b6a622f7a02f9c672ceac7c78d4c4d5f09f50bc65d369886",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        33,
+        81
+      ],
+      "edit_s": [
+        1.375,
+        3.375
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-116-original_videos-ordinary",
+      "group": "RTFS:7-kM7EC9lCI",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-116-original_videos-ordinary.mp4",
+      "sha256": "a2e6ee100be9a2c7df457741f418d8aa2b46ba20a6c29b14c23a73be1b099f6a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-117-original_videos",
+      "group": "RTFS:f97TW8bnkeU",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-117-original_videos.mp4",
+      "sha256": "55301006d03ec0f8039258e63312f9c6ef2f755a12bb890ed0aaf6f3f6b67270",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-117-inswapper",
+      "group": "RTFS:f97TW8bnkeU",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-117-inswapper.mp4",
+      "sha256": "e08651d7c2a80e013d5a2c81c7eb91915e3f7f626de7081f78e7beb6ba76c6e8",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": [
+        2.875,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-117-uniface",
+      "group": "RTFS:f97TW8bnkeU",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-117-uniface.mp4",
+      "sha256": "bc33788ddc8dfca1fc4ee386773337f680e5f4a0bec051db896e6cca637e807c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": [
+        2.875,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-117-original_videos-ordinary",
+      "group": "RTFS:f97TW8bnkeU",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-117-original_videos-ordinary.mp4",
+      "sha256": "22e52d04618970fdcf13b72a70f852f77e5c563d81e1d02e29df7b6b8c5e1814",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-118-original_videos",
+      "group": "RTFS:jOlXLLU2fgg",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-118-original_videos.mp4",
+      "sha256": "6e99dc86d6abe741f3a8ea5f1d054874a10155f33312f459fd935f9f76db94e9",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        67,
+        97
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-118-inswapper",
+      "group": "RTFS:jOlXLLU2fgg",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-118-inswapper.mp4",
+      "sha256": "337329dfec9119eaf8305c1d3c6f1fdb7bfc28c33aef4cc8276baa254fb22955",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        67,
+        97
+      ],
+      "edit_s": [
+        2.7916666666666665,
+        4.041666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-118-uniface",
+      "group": "RTFS:jOlXLLU2fgg",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-118-uniface.mp4",
+      "sha256": "38f8f5dcb86a5f8a31f44a9a80df2567ddc2f34e9abd81085782a963b476fed0",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        67,
+        97
+      ],
+      "edit_s": [
+        2.7916666666666665,
+        4.041666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-118-original_videos-ordinary",
+      "group": "RTFS:jOlXLLU2fgg",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-118-original_videos-ordinary.mp4",
+      "sha256": "40d1484f15f12ae4d79aaf96774e453010b90561b2256d8c79c0109d0f8b7e14",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-119-original_videos",
+      "group": "RTFS:nozu63OfSDk",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-119-original_videos.mp4",
+      "sha256": "633e1539954350d1e05b1cf6184463dc64a74d2bdbfb382ebe439d4257bb23da",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        66,
+        114
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-119-inswapper",
+      "group": "RTFS:nozu63OfSDk",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-119-inswapper.mp4",
+      "sha256": "177378edfbe0786ec8b4b3c1f31283a62e04e60a77e681542a458c911cfff6e3",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        66,
+        114
+      ],
+      "edit_s": [
+        2.75,
+        4.75
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-119-uniface",
+      "group": "RTFS:nozu63OfSDk",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-119-uniface.mp4",
+      "sha256": "ed851eabd518cd16a042db32bd9cd9d7c1eedeb44553a5ec14138d11e37b809c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        66,
+        114
+      ],
+      "edit_s": [
+        2.75,
+        4.75
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-119-original_videos-ordinary",
+      "group": "RTFS:nozu63OfSDk",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-119-original_videos-ordinary.mp4",
+      "sha256": "7a8e5e17f46bed4cfe0bbfdbcbcc2631df294af171b46bf799ca89de7f809f08",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-120-original_videos",
+      "group": "RTFS:ISA0zCtF8H0",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-120-original_videos.mp4",
+      "sha256": "2833906dc45e4dbf2d2fe33765b96be9cb997bd223059a6439557ccea7fd3a11",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        88,
+        124
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-120-inswapper",
+      "group": "RTFS:ISA0zCtF8H0",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-120-inswapper.mp4",
+      "sha256": "4185dbdc57e5a3909158c41144703e2f8c6b9b60cae40566858a7e590d5b1210",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        88,
+        124
+      ],
+      "edit_s": [
+        3.6666666666666665,
+        5.166666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-120-uniface",
+      "group": "RTFS:ISA0zCtF8H0",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-120-uniface.mp4",
+      "sha256": "d138e91bcb518664f3bdb2300c74b1e12709386252090dba0b99296558c1749d",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        88,
+        124
+      ],
+      "edit_s": [
+        3.6666666666666665,
+        5.166666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-120-original_videos-ordinary",
+      "group": "RTFS:ISA0zCtF8H0",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-120-original_videos-ordinary.mp4",
+      "sha256": "5a164642246b94fda36ffdf786003400b8d23a2a5cb8efed82cde3b0d9f85434",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-121-original_videos",
+      "group": "RTFS:KAuGJ6o5Ync",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-121-original_videos.mp4",
+      "sha256": "ab07344b567052b83b62b2a89e784d36a498e324800bb116fd775528aae8425c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        78
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-121-inswapper",
+      "group": "RTFS:KAuGJ6o5Ync",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-121-inswapper.mp4",
+      "sha256": "4729914af03e3fa42710324172b83ccc10bed5e3876688d1a008fe6fc5732390",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        78
+      ],
+      "edit_s": [
+        1.25,
+        3.25
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-121-uniface",
+      "group": "RTFS:KAuGJ6o5Ync",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-121-uniface.mp4",
+      "sha256": "1e81cb84f58ead915f788982d39862155917bbb7e75530686198f9b59593cdff",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        78
+      ],
+      "edit_s": [
+        1.25,
+        3.25
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-121-original_videos-ordinary",
+      "group": "RTFS:KAuGJ6o5Ync",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-121-original_videos-ordinary.mp4",
+      "sha256": "309eb9b640acbb3d610966b8f96b09d3147b77d05a412f853f5136e150e4ac3d",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-122-original_videos",
+      "group": "RTFS:3LtHfZil7Fo",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-122-original_videos.mp4",
+      "sha256": "0d0ca8b81501fb6cc1b3416ece408c465d795ac46ea18ab54bf6d2b4a9fb2e3a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        29,
+        59
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-122-inswapper",
+      "group": "RTFS:3LtHfZil7Fo",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-122-inswapper.mp4",
+      "sha256": "950789fa9f0f82c1a814058fcfb76b1a75f5611932759a69d3d2fdf0b6396a6c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        29,
+        59
+      ],
+      "edit_s": [
+        1.2083333333333333,
+        2.4583333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-122-uniface",
+      "group": "RTFS:3LtHfZil7Fo",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-122-uniface.mp4",
+      "sha256": "cbc0ec8f2ebfcafcdfa4b2625d9e5064db54a2c03a78059e34d5749aac9b3a16",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        29,
+        59
+      ],
+      "edit_s": [
+        1.2083333333333333,
+        2.4583333333333335
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-122-original_videos-ordinary",
+      "group": "RTFS:3LtHfZil7Fo",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-122-original_videos-ordinary.mp4",
+      "sha256": "e10d039c8c8de899143e335c9593b9de72b69f901ee47130252e8d280fced69f",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-123-original_videos",
+      "group": "RTFS:00c6JM69rik",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-123-original_videos.mp4",
+      "sha256": "0c349acc0651496d7c9c7033b45fb4fff75168fd115048e5f4790c889645842d",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        31,
+        61
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-123-inswapper",
+      "group": "RTFS:00c6JM69rik",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-123-inswapper.mp4",
+      "sha256": "3ea884a41608374b3c08603b8c1627d81dd70ed09d3523166c15563569ed2de4",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        31,
+        61
+      ],
+      "edit_s": [
+        1.2916666666666667,
+        2.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-123-uniface",
+      "group": "RTFS:00c6JM69rik",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-123-uniface.mp4",
+      "sha256": "a78f1601c9438b2c1c46da86940c496f7ba41d0112300005e61860b3528c5a3c",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        31,
+        61
+      ],
+      "edit_s": [
+        1.2916666666666667,
+        2.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-123-original_videos-ordinary",
+      "group": "RTFS:00c6JM69rik",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-123-original_videos-ordinary.mp4",
+      "sha256": "c7d2bb09691b44ab1a562f6911869b9a8cd509fb2f9d97e24127e45a95a42309",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-124-original_videos",
+      "group": "RTFS:EB7AShR-cn4",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-124-original_videos.mp4",
+      "sha256": "cae14ec8540e19712b22fb5dd21b46da786467886c51e8b83cd4e09bf9c4703d",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-124-inswapper",
+      "group": "RTFS:EB7AShR-cn4",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-124-inswapper.mp4",
+      "sha256": "b292eb307da7603ff30fbb33fc0a45476219bef7cbd00df0c449648a9bdd3780",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": [
+        2.875,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-124-uniface",
+      "group": "RTFS:EB7AShR-cn4",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-124-uniface.mp4",
+      "sha256": "4a31a3c78ead94fc7107308c772816c4f02fab692dd654f993cb79fbfeaa628a",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        69,
+        117
+      ],
+      "edit_s": [
+        2.875,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-124-original_videos-ordinary",
+      "group": "RTFS:EB7AShR-cn4",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-124-original_videos-ordinary.mp4",
+      "sha256": "fa4b04836c33397b1f180a36dd3bebafe956fcb35e3958bcfcba4f62d4accc8f",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-125-original_videos",
+      "group": "RTFS:ey7QqhdcGWY",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-125-original_videos.mp4",
+      "sha256": "821b12217fec3555256057cc0474a5d430531433f45d406019cb54cc95245fd7",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-125-inswapper",
+      "group": "RTFS:ey7QqhdcGWY",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-125-inswapper.mp4",
+      "sha256": "e7014600055972d9f3243ec774fdb12212e022f7402191c7e225bfe8742f5771",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": [
+        2.0416666666666665,
+        3.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-125-uniface",
+      "group": "RTFS:ey7QqhdcGWY",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-125-uniface.mp4",
+      "sha256": "70780ecc53fc8e3c87ccb6a2eb16a1ec6f03cf182806587a2e82583e9afe74da",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        49,
+        85
+      ],
+      "edit_s": [
+        2.0416666666666665,
+        3.5416666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-125-original_videos-ordinary",
+      "group": "RTFS:ey7QqhdcGWY",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-125-original_videos-ordinary.mp4",
+      "sha256": "10b9f27b85c9dbc408cfe7cb8b5fbc10a83f9e30dfc14d342a0e1c3cfc2787a8",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-126-original_videos",
+      "group": "RTFS:Di5LE2uq9Ic",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-126-original_videos.mp4",
+      "sha256": "20de197b74fffcab3178a0afe50bfaad44b717724692778148b963894acf8c08",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        87,
+        117
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-126-inswapper",
+      "group": "RTFS:Di5LE2uq9Ic",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-126-inswapper.mp4",
+      "sha256": "6c6b38f2d932d7221a153c1b36536f61c8dae5cd4077b81e21fe3c6a6a7ff532",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        87,
+        117
+      ],
+      "edit_s": [
+        3.625,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-126-uniface",
+      "group": "RTFS:Di5LE2uq9Ic",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-126-uniface.mp4",
+      "sha256": "618cf32b7a6c2b6010b52d7aeb155f1b96935f452754255f2d2799c777e6463f",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        87,
+        117
+      ],
+      "edit_s": [
+        3.625,
+        4.875
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-126-original_videos-ordinary",
+      "group": "RTFS:Di5LE2uq9Ic",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-126-original_videos-ordinary.mp4",
+      "sha256": "de2efbc25690121f1504c5cb0de7be50813dc5e5cb41e1a853e3f2ad26ecf3ca",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-127-original_videos",
+      "group": "RTFS:dMG225BEvvE",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-127-original_videos.mp4",
+      "sha256": "d1e7e3b05d10972e224d4aaa896dc686ac5cf053462b4ae689aa3d1b9cb16b1b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        21,
+        57
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-127-inswapper",
+      "group": "RTFS:dMG225BEvvE",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-127-inswapper.mp4",
+      "sha256": "6b961d818b1463820d8af21c7e944ddff3253f9b1ab7fdae23166105d8383dae",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        21,
+        57
+      ],
+      "edit_s": [
+        0.875,
+        2.375
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-127-uniface",
+      "group": "RTFS:dMG225BEvvE",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-127-uniface.mp4",
+      "sha256": "2bbdf1e1deb2f3c4c99b3af66228f9b4c6bb4c1d4267b9f1e70d93b6d14c5ec7",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        21,
+        57
+      ],
+      "edit_s": [
+        0.875,
+        2.375
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-127-original_videos-ordinary",
+      "group": "RTFS:dMG225BEvvE",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-127-original_videos-ordinary.mp4",
+      "sha256": "1848c4ea95b6a380af24781f6d7dda4c00be1db086413138a1046eca4e2adce9",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-128-original_videos",
+      "group": "RTFS:P1OEaqKgeQ0",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-128-original_videos.mp4",
+      "sha256": "dc28b337934873546d2981488e568116329a78f5c7df78bad0730b14662f2462",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        28,
+        64
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-128-inswapper",
+      "group": "RTFS:P1OEaqKgeQ0",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-128-inswapper.mp4",
+      "sha256": "0dd3774d17b8837ad359d64c686cdf2c5bc9313f7abf3be12ad1ee4e1821bb14",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        28,
+        64
+      ],
+      "edit_s": [
+        1.1666666666666667,
+        2.6666666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-128-uniface",
+      "group": "RTFS:P1OEaqKgeQ0",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-128-uniface.mp4",
+      "sha256": "1a5a3ff762d57077048d7891318aa7e4686818998f7632eea695d5c703c94e67",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        28,
+        64
+      ],
+      "edit_s": [
+        1.1666666666666667,
+        2.6666666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-128-original_videos-ordinary",
+      "group": "RTFS:P1OEaqKgeQ0",
+      "family": "lighting-change",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-128-original_videos-ordinary.mp4",
+      "sha256": "7335a4086cde932546c6d6927bcfbef83c83180229a8fd39b8fb3930b31a0613",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-129-original_videos",
+      "group": "RTFS:mD24h-bbdMU",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-129-original_videos.mp4",
+      "sha256": "6abdd778f0dbb993a2edabdbe60d0a17d7bced9bd60a3b0e352cc24ae409bf99",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        82
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-129-inswapper",
+      "group": "RTFS:mD24h-bbdMU",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-129-inswapper.mp4",
+      "sha256": "ef3088b605d9c35d72cde0ac37a2175f328b0706d1970e209c5ee8a1411e4dc7",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        82
+      ],
+      "edit_s": [
+        1.4166666666666667,
+        3.4166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-129-uniface",
+      "group": "RTFS:mD24h-bbdMU",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-129-uniface.mp4",
+      "sha256": "929cb080c0c205cbab81030fd686b7c72af966b68de0ba84275ff38110da2401",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        34,
+        82
+      ],
+      "edit_s": [
+        1.4166666666666667,
+        3.4166666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-129-original_videos-ordinary",
+      "group": "RTFS:mD24h-bbdMU",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-129-original_videos-ordinary.mp4",
+      "sha256": "338e69ecfb87bb62d6988ae1f4d04af72972a7b0c48b4efa752fa4c1a7cc7b37",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-130-original_videos",
+      "group": "RTFS:UUXxwkSCwgU",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-130-original_videos.mp4",
+      "sha256": "f1c71f33859b8629c2d125fc989d64943bf7e63e27a08f7c9786ead64f52faff",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        70,
+        106
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-130-inswapper",
+      "group": "RTFS:UUXxwkSCwgU",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-130-inswapper.mp4",
+      "sha256": "c718fdaf344e725a24ffe82d2368efe7702d27a5ea147abe2753d777c1a2b4f5",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        70,
+        106
+      ],
+      "edit_s": [
+        2.9166666666666665,
+        4.416666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-130-uniface",
+      "group": "RTFS:UUXxwkSCwgU",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-130-uniface.mp4",
+      "sha256": "e000307e768ab576179aff80d222440169ae1c0978b8f9a937857f5802caebbb",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        70,
+        106
+      ],
+      "edit_s": [
+        2.9166666666666665,
+        4.416666666666667
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-130-original_videos-ordinary",
+      "group": "RTFS:UUXxwkSCwgU",
+      "family": "jump-cut",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-130-original_videos-ordinary.mp4",
+      "sha256": "7344bdf8b213b13d92988ab984a67444a88e38e7947808cf23ade5a35cca8aa0",
+      "frame_count": 141,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-131-original_videos",
+      "group": "RTFS:b-fgELoW-7g",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-131-original_videos.mp4",
+      "sha256": "86c40ff265ba47b37c5f4336657190377021a10d3fc92666335f3fcfb7fea233",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        55,
+        91
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-131-inswapper",
+      "group": "RTFS:b-fgELoW-7g",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-131-inswapper.mp4",
+      "sha256": "6d15e395570d74ab3e2211f90ad3761404e6a6f496f63451ac95fa53a528ef4b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        55,
+        91
+      ],
+      "edit_s": [
+        2.2916666666666665,
+        3.7916666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-131-uniface",
+      "group": "RTFS:b-fgELoW-7g",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-131-uniface.mp4",
+      "sha256": "165eddc5650a94c955cd2164ae4bf9fcd3f404d8180fe3c24704849aec5bedfa",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        55,
+        91
+      ],
+      "edit_s": [
+        2.2916666666666665,
+        3.7916666666666665
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-131-original_videos-ordinary",
+      "group": "RTFS:b-fgELoW-7g",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-131-original_videos-ordinary.mp4",
+      "sha256": "6f1ff00bf8bda80aa455f646967efc72355e13d49da6aa659d50adbc19e83811",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    },
+    {
+      "id": "rtfs-132-original_videos",
+      "group": "RTFS:xc_6lC8XQtk",
+      "family": "original_videos",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-132-original_videos.mp4",
+      "sha256": "1544ae541faaacd337ca532296dbb350dcf5a78d9656f00d4214e229f213755b",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        66
+      ],
+      "edit_s": null,
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-132-inswapper",
+      "group": "RTFS:xc_6lC8XQtk",
+      "family": "inswapper",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-132-inswapper.mp4",
+      "sha256": "44578ab17eb9cb4f7fd8fedb45c180c989dada78e7c8e875166a573c863aa7a1",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        66
+      ],
+      "edit_s": [
+        1.25,
+        2.75
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-132-uniface",
+      "group": "RTFS:xc_6lC8XQtk",
+      "family": "uniface",
+      "status": "ready",
+      "split": "test",
+      "label": 1,
+      "path": "rtfs-132-uniface.mp4",
+      "sha256": "8254e307ce5b2242d58ca4079a3b3a2e22df483a12032b1e177d5a25e6dc38ac",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": [
+        30,
+        66
+      ],
+      "edit_s": [
+        1.25,
+        2.75
+      ],
+      "exact_frames_verified": true
+    },
+    {
+      "id": "rtfs-132-original_videos-ordinary",
+      "group": "RTFS:xc_6lC8XQtk",
+      "family": "recompression",
+      "status": "ready",
+      "split": "test",
+      "label": 0,
+      "path": "rtfs-132-original_videos-ordinary.mp4",
+      "sha256": "37fdd5a94df41b555f4952f7e79f83a4e2e5f502a6917b2fa7cf7cbed3cdfe82",
+      "frame_count": 144,
+      "fps": 24,
+      "inserted_frames": null,
+      "edit_s": null,
+      "exact_frames_verified": false
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "schema": "chipmunk.iml-vit-comparison/1",
+  "manifest_sha256": "18d36f12036bbd467de625efb33887dc61f67c237fb3808e65b506501ad2b871",
+  "plan_sha256": "05cb4b55f9895c85b9264a62d2d69aa20cde4357dad3d39e22892e20a9858406",
+  "decision_sha256": "a176e1ef53b7141874b2d90055faead26f6d76f14eda36ef64cc3279a75b999f",
+  "candidate_predictions_sha256": "a0883a26dc3604ff351d57da5e508cd939e5f3975cd41bad1c0bed3f94f9c65b",
+  "checkpoint_sha256": "7631fe852e139d904ad96fd766a37120d703c966cb80dfad70ffae4ff426cce4",
+  "conditions": {
+    "native": {
+      "current": {
+        "originals": 48,
+        "edits": 48,
+        "assessed": 96,
+        "failures": 0,
+        "not_applicable": 0,
+        "originals_with_regions": 0,
+        "edits_with_overlap": 10,
+        "missed_edits": 38,
+        "mean_edit_iou": 0.14976538127836225,
+        "mean_edit_pixel_f1": 0.16833953906302904,
+        "median_runtime_s": 0.15724656198290177
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "assessed": 96,
+        "failures": 0,
+        "not_applicable": 0,
+        "originals_with_regions": 8,
+        "edits_with_overlap": 8,
+        "missed_edits": 40,
+        "mean_edit_iou": 0.043484105028835575,
+        "mean_edit_pixel_f1": 0.057577120377623144,
+        "median_runtime_s": 0.9588130829797592
+      },
+      "paired": {
+        "metric": "source-paired mean edited IoU",
+        "candidate_minus_current": -0.10628127624952666,
+        "source_bootstrap_95_percent": [
+          -0.20013878869547816,
+          -0.01688481150500051
+        ],
+        "source_groups": 48,
+        "iterations": 5000,
+        "seed": 20261105
+      },
+      "qualifies_for_local_adoption": false,
+      "families": {
+        "firefly": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 0,
+            "edits_with_overlap": 2,
+            "missed_edits": 14,
+            "mean_edit_iou": 0.05014655792440184,
+            "mean_edit_pixel_f1": 0.06627804551974588,
+            "median_runtime_s": 0.16041718699852936
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 3,
+            "edits_with_overlap": 2,
+            "missed_edits": 14,
+            "mean_edit_iou": 0.01935976429236295,
+            "mean_edit_pixel_f1": 0.03301354737278725,
+            "median_runtime_s": 0.9585181454895064
+          }
+        },
+        "flux-fill": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 0,
+            "edits_with_overlap": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.22604670125492873,
+            "mean_edit_pixel_f1": 0.23721477783973427,
+            "median_runtime_s": 0.15724656198290177
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 3,
+            "edits_with_overlap": 2,
+            "missed_edits": 14,
+            "mean_edit_iou": 0.08821057001521262,
+            "mean_edit_pixel_f1": 0.10037817559597549,
+            "median_runtime_s": 0.9580836454988457
+          }
+        },
+        "sd2": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 0,
+            "edits_with_overlap": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.17310288465575613,
+            "mean_edit_pixel_f1": 0.20152579382960698,
+            "median_runtime_s": 0.15472020802553743
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 2,
+            "edits_with_overlap": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.022881980778931166,
+            "mean_edit_pixel_f1": 0.0393396381641067,
+            "median_runtime_s": 0.9847769374900963
+          }
+        }
+      }
+    },
+    "jpeg75": {
+      "current": {
+        "originals": 48,
+        "edits": 48,
+        "assessed": 96,
+        "failures": 0,
+        "not_applicable": 0,
+        "originals_with_regions": 5,
+        "edits_with_overlap": 9,
+        "missed_edits": 39,
+        "mean_edit_iou": 0.07931480718882764,
+        "mean_edit_pixel_f1": 0.10739511565523718,
+        "median_runtime_s": 0.585627291991841
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "assessed": 96,
+        "failures": 0,
+        "not_applicable": 0,
+        "originals_with_regions": 9,
+        "edits_with_overlap": 3,
+        "missed_edits": 45,
+        "mean_edit_iou": 0.014664323678167007,
+        "mean_edit_pixel_f1": 0.023092689866737088,
+        "median_runtime_s": 0.9586680000065826
+      },
+      "paired": {
+        "metric": "source-paired mean edited IoU",
+        "candidate_minus_current": -0.06465048351066063,
+        "source_bootstrap_95_percent": [
+          -0.1154840856987146,
+          -0.02101774523420911
+        ],
+        "source_groups": 48,
+        "iterations": 5000,
+        "seed": 20261105
+      },
+      "qualifies_for_local_adoption": false,
+      "families": {
+        "firefly": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 2,
+            "edits_with_overlap": 1,
+            "missed_edits": 15,
+            "mean_edit_iou": 0.0218130690948045,
+            "mean_edit_pixel_f1": 0.03233939490192964,
+            "median_runtime_s": 0.5891343750117812
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 3,
+            "edits_with_overlap": 1,
+            "missed_edits": 15,
+            "mean_edit_iou": 0.007248298261492627,
+            "mean_edit_pixel_f1": 0.012990098758965608,
+            "median_runtime_s": 0.9580291875172406
+          }
+        },
+        "flux-fill": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 1,
+            "edits_with_overlap": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.12035299226088672,
+            "mean_edit_pixel_f1": 0.15855068622070168,
+            "median_runtime_s": 0.58518200047547
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 3,
+            "edits_with_overlap": 1,
+            "missed_edits": 15,
+            "mean_edit_iou": 0.02250679712208926,
+            "mean_edit_pixel_f1": 0.03309558453567592,
+            "median_runtime_s": 0.9572899169579614
+          }
+        },
+        "sd2": {
+          "current": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 2,
+            "edits_with_overlap": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.0957783602107917,
+            "mean_edit_pixel_f1": 0.13129526584308027,
+            "median_runtime_s": 0.5853627499600407
+          },
+          "candidate": {
+            "originals": 16,
+            "edits": 16,
+            "assessed": 32,
+            "failures": 0,
+            "not_applicable": 0,
+            "originals_with_regions": 3,
+            "edits_with_overlap": 1,
+            "missed_edits": 15,
+            "mean_edit_iou": 0.01423787565091913,
+            "mean_edit_pixel_f1": 0.02319238630556975,
+            "median_runtime_s": 0.9845283960166853
+          }
+        }
+      }
+    }
+  },
+  "decision": "Rejected for local replacement in both native PNG and JPEG75 scopes; current checks and customer confidence are unchanged.",
+  "limits": "48 paired sources from one benchmark suite and three generators; training overlap unknown. Pixel metrics measure the selected localization component, not all UI evidence packets or AI confidence. JPEG copies share source groups; do not double independent sample size. Runtime includes concurrent local experiments and is diagnostic, not a controlled hardware benchmark.",
+  "license_references": {
+    "checkpoint_permission": "https://github.com/SunnyHaze/IML-ViT/issues/60#issuecomment-5099083801",
+    "code": "https://github.com/SunnyHaze/IML-ViT/tree/07dd2be0f4ea27a5c97c9fa5ffbe236733833eac",
+    "dataset": "https://github.com/IDLabMedia/tgif-dataset/tree/fc5c557bd1a2d49a5dabc3676a54cfc44798f4ea"
+  },
+  "reference_parity": {
+    "receipt_sha256": "5137fa434d8e72e7f357b76a2dd27ce001d43d83c72054fbfd76fa681520925e",
+    "cases": 6,
+    "device": "cpu",
+    "dtype": "float32",
+    "bitwise_equal": true,
+    "scope": "One genuine and one edited image from each development generator, same preprocessed tensors. Not an accuracy test."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.audio-v7-public-tamper-check/1",
+  "capsule_sha256": "37d775c639b6105ca7b451fbe9e2b6aa117fabace7a7646e55c6c58aeb814bee",
+  "passed": true,
+  "cases": [
+    {
+      "test": "missing_input",
+      "rejected": true,
+      "reason": "All complete fitting/calibration/development inputs required"
+    },
+    {
+      "test": "changed_role_group",
+      "rejected": true,
+      "reason": "Source group/role leakage or altered assignments"
+    },
+    {
+      "test": "changed_guard_maximum",
+      "rejected": true,
+      "reason": "Probability/guard arithmetic mismatch"
+    },
+    {
+      "test": "changed_probe_sample_clock",
+      "rejected": true,
+      "reason": "Probe representation/sample clock differs"
+    }
+  ],
+  "scope": "Targeted local integrity rejection checks; not an outside review or exhaustive security assessment."
+}

@@ -64,7 +64,8 @@ Open <http://127.0.0.1:5230/>. Keep configuration and credentials in ignored loc
 environment files. Production deployment needs authentication, HTTPS, protected
 storage, retention configuration, and a review of dependency licenses.
 
-Model weights are **not included**. Follow [MODELS.md](MODELS.md) to provision
+Pretrained neural checkpoints are **not included**. Small research decision-head
+and projection parameters are published with evaluation capsules. Follow [MODELS.md](MODELS.md) to provision
 permitted, pinned weights. Missing or resource-limited checks must be disclosed.
 Repository defaults retain legacy selections; the locally verified candidate
 modes are explicit opt-ins. See [audio selection and rollback](docs/local-audio-rollout.md)
@@ -109,6 +110,10 @@ video, audio and writing evaluations. Independent contributors can use the
 The [complete-video temporal experiment](docs/mouth-temporal-v11-evaluation.md)
 located more edits but failed its ordinary-footage false-alarm requirements;
 its complete fitting and comparison records are published for review.
+The [source-separated audio experiment](docs/audio-guard-v7-evaluation.md)
+passed its frozen development gates against the actual guarded service. It
+remains disabled pending a separately frozen fresh comparison; its complete
+CPU fitting and decision reconstruction is available for outside review.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

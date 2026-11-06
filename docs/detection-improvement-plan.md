@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Audio v7 separated fitting from class-set calibration and compared with the
+  exact current guarded service on all720 consumed development inputs. All12
+  frozen development gates passed:563 correct versus500, the same1false AI/0
+  false-original calls, and156 inconclusive versus219. The candidate still
+  leaves83/360 AI inputs inconclusive; music5 log loss and AUC worsened.
+  All720 source bindings/297 probe views passed audit, and public CPU refit
+  reproduced the fitted coefficients exactly. This permits a separately
+  frozen fresh comparison only; no serving/overall-confidence change or
+  outside validation. [Complete result](audio-guard-v7-evaluation.md).
+
 - V11 froze a49-variable video-window learner combining retained vision heads
   with measured mouth/pose/quality. Generated all160 complete fitting clips on
   the original16 fit actors, separate from4 point/8 development actors. Source

@@ -434,3 +434,48 @@ ordinary flag retains at most16/32 locations, including only two first-family
 edits. This is not a new calibrated review point or a way to rescue the failed
 experiment. The [record](mouth-v11-ranking-bound.json) remains separate from the
 frozen [full outcome](../mouth-temporal-v11-evaluation.json).
+
+## Reproduce source-separated audio v7 fitting and decisions
+
+The [v7 development result](../audio-guard-v7-evaluation.md) passed its frozen
+development gates against the actual guarded service. The candidate remains
+disabled pending a separately frozen fresh comparison. This is not a rescue
+of V4–V6 or an outside validation claim.
+
+`audio-v7-fitting-review.json.gz` contains all1,440 fit/calibration/development
+feature rows, source metadata and hashed known text connections, fitted
+projection/decision parameters, class-set calibration groups, all720 development
+outcomes and297 stability-probe representations. Waveforms, full transcripts,
+private paths and pretrained neural checkpoints are excluded. Source attribution
+and separate dataset rights still apply.
+
+With the declared NumPy/SciPy/scikit-learn runtime, reconstruct all source roles,
+independent guard arithmetic, exact serving comparator, conclusions, complete
+operational counts and gates, and optionally refit the small decision head:
+
+```sh
+PYTHONHASHSEED=0 PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_guard_v7 docs/evaluation-panels/audio-v7-fitting-review.json.gz /tmp/audio-v7-review.json --refit
+```
+
+The output must be a new file. Omit `--refit` to skip fitting/bootstrap replay.
+`PYTHONHASHSEED=0` is part of the recorded statistical runtime: the inherited
+bootstrap helper's set-based strata order is otherwise process-dependent.
+The capsule records the exact package versions and source implementation pins.
+Its SHA-256 is `37d775c639b6105ca7b451fbe9e2b6aa117fabace7a7646e55c6c58aeb814bee`.
+
+The local CPU receipt is `audio-v7-fitting-replay.json`; all coefficients matched
+exactly. This shares the declared fitter/projection/bootstrap, with separately
+reconstructed guard/decision arithmetic. It does not decode audio or rerun
+neural inference. `audio-v7-source-audit.json` records the separate audit of720
+source/PCM bindings,297 regenerated probe views and six sampled neural forwards.
+`audio-v7-tamper-checks.json` records four targeted integrity rejection checks.
+None of these local scripts establishes outside participation or generalization.
+
+To rebuild from separately provisioned licensed inputs, use
+`prepare_audio_guard_v7.py` to create/check a frozen manifest,
+`run_audio_guard_v7.py extract` for representations, then its `train` and
+`evaluate` stages, keeping fitting and calibration roles disjoint. Consult each
+CLI's help and the [fixed protocol](../audio-guard-v7-development.md); use new
+output paths and preserve every original failed/unassessed case. Source replay
+uses `audit_audio_guard_v7.py` with the original manifest/representation/head/
+score bindings. Existing consumed inputs are not fresh test sources.

@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.audio-identity-public-result-tamper-review/9",
+  "passed": true,
+  "cases": [
+    {
+      "alteration": "changed representation",
+      "rejected": true,
+      "reason": "Exact original feature receipt cannot be reconstructed"
+    },
+    {
+      "alteration": "source role moved to confirmation",
+      "rejected": true,
+      "reason": "Exact original feature receipt cannot be reconstructed"
+    },
+    {
+      "alteration": "changed fitted coefficient",
+      "rejected": true,
+      "reason": "Exact original fitted artifact differs"
+    },
+    {
+      "alteration": "changed candidate probability",
+      "rejected": true,
+      "reason": "Missing probability mismatch"
+    },
+    {
+      "alteration": "unassessed source called original",
+      "rejected": true,
+      "reason": "Candidate dual-stability conclusion or explanation differs"
+    },
+    {
+      "alteration": "changed complete denominator",
+      "rejected": true,
+      "reason": "Every summary value and frozen gate must agree"
+    },
+    {
+      "alteration": "dropped native replay case",
+      "rejected": true,
+      "reason": "Complete predetermined native result audit required"
+    },
+    {
+      "alteration": "hidden local path",
+      "rejected": true,
+      "reason": "Local paths cannot enter the public capsule"
+    }
+  ],
+  "scope": "Local deliberate changes to the complete actual public capsule; no neural execution, outside reviewer or performance claim.",
+  "capsule_sha256": "0546940a656ce0f718318975491ee041f2a429be15ac57d316e8e5e3ea6345c3"
+}

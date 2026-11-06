@@ -65,6 +65,19 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed corrected audio v9: all 4,248 consumed features (zero failures),
+  independent fit/calibration and all 1,449 development outcomes. False AI fell
+  58 → 3, but correct calls fell 1,004 → 872 and inconclusive rose 387 → 573.
+  Five of sixteen unchanged requirements failed, so reject without fresh scoring
+  or serving changes. All 99 predetermined native cells/fifteen probes matched;
+  complete numerical reconstruction and CPU refit passed with zero coefficient
+  error. Public-only numerical replay reproduced exact original feature/fit
+  artifacts with an empty model cache. No outside human review is claimed.
+  A post-result fixed-probability ceiling proves guard removal alone cannot
+  restore the required AI retention for five generator families. The next
+  method must improve mapping/representation, not just weaken uncertainty checks.
+  [Full result, conditions and next work](audio-identity-v9-development-evaluation.md).
+
 - Prepared an additive audio verification supplement during corrected extraction,
   before fitting/comparison. The fixed native plan covers all 99 development
   dataset/generator/truth/condition cells without score selection. Complete

@@ -1,10 +1,16 @@
 # Corrected audio identity experiment — execution record
 
-6 November 2026. The [identity repair](audio-source-identity-v9.md) now has a
-prospective execution freeze. No corrected candidate has been fitted or scored
-at this freeze. The running audio calibration and overall confidence are unchanged.
-Results will be added here; the separate [protocol](audio-identity-v9-execution-protocol.md)
-and its implementation pins remain immutable.
+6 November 2026. The [identity repair](audio-source-identity-v9.md) has completed
+its corrected development experiment. The initial freeze preceded extraction
+and fitting. The running audio calibration and overall confidence are unchanged;
+the separate [protocol](audio-identity-v9-execution-protocol.md) and implementation
+pins remain immutable.
+
+**Completed development:** the [full comparison](audio-identity-v9-development-evaluation.md)
+failed five of sixteen fixed requirements despite fewer false AI calls and
+better probability scores. All extraction, numerical/refit and 99 native
+checks completed; no fresh scoring or serving change occurred. The prospective
+freeze details below remain historical commitments.
 
 ## Bound inputs and method
 
@@ -71,16 +77,17 @@ The prospective freeze was published and remotely verified at commit
 All nineteen predetermined native cache replays then matched exactly, including
 the unassessed case. The [complete native audit](evaluation-panels/audio-v9-native-cache-audit.json)
 joins its IDs to the public source capsule and preserves the original JSONL
-digest. Exact-input reuse is permitted and consumed extraction is underway.
-No corrected fitting, fresh scoring or replacement decision has occurred.
+digest. Exact-input reuse and all consumed extraction subsequently completed.
+The corrected candidate was fitted and rejected; no fresh scoring occurred.
 
-Complete all consumed extraction, fit only on fitting roles,
-calibrate only on calibration roles, then compare every development input.
+All consumed extraction, fitting, separate calibration and development comparison
+are now complete. The candidate is rejected under the unchanged rules.
 The [additional review protocol](audio-identity-v9-review-protocol.md) fixes
 99 native development cells and complete numerical/refit verification during
 extraction, before fitting/comparison. It changes no acceptance rule or original
-implementation pin. These reviews have not yet run on a completed candidate.
-Complete numerical/native audits before considering a separately frozen fresh
-confirmation. Preserve serving defaults, rollback, payment and authentication.
+implementation pin. Both reviews passed on the completed result, including an
+exact CPU refit and all 99 native cells. This does not override the failed
+development requirements; do not advance this candidate to fresh confirmation.
+Preserve serving defaults, rollback, payment and authentication.
 Image, video, writing and actual independent human testing remain unfinished
 parts of the wider program. GCP remains deferred.

@@ -134,6 +134,14 @@ usability. The [writing source preflight](writing-source-preflight-v2.md) simila
 distinguishes source-position verification from detector validation and records
 unresolved source terms before reuse.
 
+The [complete corrected audio result](audio-identity-v9-development-evaluation.md)
+also supplies all consumed representations, fitted parameters and outcomes for
+a numerical review with optional CPU refit. That command needs Python numerical
+dependencies but no source audio or pretrained-model downloads. It reproduces
+the original feature/fit artifacts and all conclusions/gates; it does not
+re-execute native model forwards or establish fresh accuracy. The native replay
+receipt is separate. The candidate failed development and remains disabled.
+
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
 ```

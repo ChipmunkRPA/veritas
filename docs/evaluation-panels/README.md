@@ -75,6 +75,14 @@ a frozen confirmation panel; see the [source review](../writing-source-preflight
   alone; `audio-v9-result-review-freeze.json` binds the additive verification code
   prepared during extraction and before fitting/comparison. These are planned
   verification, not completed-candidate results. See the [supplement](../audio-identity-v9-review-protocol.md).
+  The completed `audio-v9-development-review.json.gz` contains all 4,248 feature
+  records, 1,449 outcomes and original fitting arithmetic. It reproduces the exact
+  original feature JSONL and fit/head artifacts; outcome provider IDs are sanitized
+  and background strata are hashed. The candidate failed five unchanged gates
+  and remains disabled. Numerical/CPU-refit, 99-cell native and public-only replay
+  receipts accompany the [full result](../audio-identity-v9-development-evaluation.md).
+  The numerical capsule needs no source audio or pretrained-model downloads;
+  its successful local replay does not establish outside reviewer participation.
 - `mouth-v4-development.json`: 48 AI mouth-edit/non-AI control cases, eight
   consumed CREMA-D sources, separate raw/normalized hashes, exact edit intervals,
   mask references, source-frame hashes and frozen comparison.

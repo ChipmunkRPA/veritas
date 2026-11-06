@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.audio-identity-consumed-diagnostic/9",
+  "responses_sha256": "7dff2eb4259f97731bfde0b6e1f3e38a0fb60d9920431212eeb8f9790e8fac9e",
+  "outcomes": 1449,
+  "candidate_disposition": {
+    "direction_issued": 876,
+    "class_guard_not_unique": 292,
+    "stability_veto": 18,
+    "score_between_internal_points": 234,
+    "unassessed": 29
+  },
+  "by_truth_class": {
+    "0": {
+      "direction_issued": 301,
+      "class_guard_not_unique": 245,
+      "stability_veto": 18,
+      "score_between_internal_points": 113,
+      "unassessed": 16
+    },
+    "1": {
+      "direction_issued": 575,
+      "score_between_internal_points": 121,
+      "class_guard_not_unique": 47,
+      "unassessed": 13
+    }
+  },
+  "scope": "Post-result descriptive counts on consumed development only; no new operating point, candidate, acceptance rule or causal attribution."
+}

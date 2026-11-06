@@ -125,6 +125,10 @@ detection improvement.
 Its [prospective execution freeze](docs/audio-identity-v9-execution.md) records
 the unchanged learner, corrected roles and native cache-verification requirements
 before new extraction or fitting; it does not establish a passing replacement.
+The [completed corrected comparison](docs/audio-identity-v9-development-evaluation.md)
+reduced false AI calls but lost correct conclusions and increased abstention,
+failing five unchanged requirements. It remains disabled; complete numerical
+reproduction and 99 native replay receipts are available for outside review.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

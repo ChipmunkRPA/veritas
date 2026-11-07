@@ -1,0 +1,29 @@
+{
+  "private_lock_sha256": "4387e1be8d90f281b1f32d84af13e83b9cb7a0e270dbda970fa9e48f696bd501",
+  "private_calibration_journal_sha256": "cc5bff6b1c3101f339082c560b4e7e244e654783a3ba212c8a2797c4b646ca46",
+  "gate": {
+    "kind": "strictly_greater_than_max_of_48_genuine_responses",
+    "raw_mean_logit": -5.4320597648620605,
+    "calibration_inputs": 48,
+    "calibration_groups": 24,
+    "note": "Empirical genuine-tail operating point, not an AI probability, accuracy guarantee or public screening threshold."
+  },
+  "profile": {
+    "arm": "candidate-calibration",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 4012392448,
+    "samples": 200,
+    "sample_errors": 0,
+    "duration_s": 102.74128354201093,
+    "created_at": "2026-11-07T11:13:26.866426+00:00"
+  },
+  "calibration_counts": {
+    "planned": 48,
+    "ok": 48,
+    "failed": 0,
+    "genuine_source_groups": 24
+  },
+  "development_images_scored_before_this_record": 0,
+  "serving_changed": false
+}

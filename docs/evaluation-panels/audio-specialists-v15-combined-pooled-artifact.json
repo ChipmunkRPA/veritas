@@ -1,0 +1,158 @@
+{
+  "schema": "chipmunk.specialist-calibration/2",
+  "policy": {
+    "specialists": [
+      {
+        "id": "audio.full",
+        "modality": "audio",
+        "family": "voice",
+        "target": "audio.synthetic_voice",
+        "contexts": [
+          "pooled"
+        ],
+        "routing_sha256": "16588346917b10b8304e9f520cf8af947972265cb2161448b4c2669b9f28a2ee",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "f480a9f6581ed14091bfbcd3c44295534f2546f86f25dda8b785a85689247cf2",
+          "weight_sha256": [
+            "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+            "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+            "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "cd4bd0d0dc1dfae636c4c7c6bb6742784b74373102ebf05c0854fce1c8e44bc8"
+        }
+      },
+      {
+        "id": "audio.band",
+        "modality": "audio",
+        "family": "voice",
+        "target": "audio.synthetic_voice",
+        "contexts": [
+          "pooled"
+        ],
+        "routing_sha256": "16588346917b10b8304e9f520cf8af947972265cb2161448b4c2669b9f28a2ee",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "f480a9f6581ed14091bfbcd3c44295534f2546f86f25dda8b785a85689247cf2",
+          "weight_sha256": [
+            "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+            "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+            "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "cd4bd0d0dc1dfae636c4c7c6bb6742784b74373102ebf05c0854fce1c8e44bc8"
+        }
+      }
+    ]
+  },
+  "feature_pooling": "positive_logit_max_per_dependency_family",
+  "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "plan_sha256": "83486ea7be31ff31822da6a58484fc298f6a931825659b711c01cb4b6bdee48d",
+  "training_sha256": "b061a07bd991eab915b0c1a7ed048978257f7a258852c85fa44af83f5a9aa892",
+  "minimum_groups_per_class": 25,
+  "l2": 0.001,
+  "specialists": {
+    "audio.full|pooled": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 36,
+        "1": 36
+      },
+      "center": [
+        0.5020266582455194
+      ],
+      "scale": [
+        0.4947226456425621
+      ],
+      "coefficients": [
+        2.2256461837541566
+      ],
+      "intercept": -0.006358206886676561,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "audio.band|pooled": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 36,
+        "1": 36
+      },
+      "center": [
+        0.5243581895001805
+      ],
+      "scale": [
+        0.49230608505778095
+      ],
+      "coefficients": [
+        2.128882557306204
+      ],
+      "intercept": -0.0970162785229855,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    }
+  },
+  "combiners": {
+    "audio|voice": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 36,
+          "1": 36
+        },
+        "center": [
+          1.447341967538463
+        ],
+        "scale": [
+          1.028996248855037
+        ],
+        "coefficients": [
+          1.7653462930376842
+        ],
+        "intercept": -0.2789432820758631,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 1008,
+      "fitting_unassessed": 43,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 34,
+          "1": 36
+        },
+        "center": [
+          -0.3961811684624479
+        ],
+        "scale": [
+          1.817681889746761
+        ],
+        "coefficients": [
+          2.157591784013232
+        ],
+        "intercept": -0.41111457722953,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 1008,
+      "calibration_unassessed": 39
+    }
+  },
+  "serving_admitted": false,
+  "reference_prior": 0.5,
+  "sha256": "4142b6ae6db8b0249273e68ab08803a4835b8fa36b6755cac981207f4211b264"
+}

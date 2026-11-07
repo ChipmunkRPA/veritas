@@ -1,0 +1,664 @@
+{
+  "schema": "chipmunk.audio-specialists-result/15",
+  "policy": {
+    "schema": "chipmunk.audio-specialists-scoring-policy/15",
+    "arms": [
+      "full-pooled",
+      "full-context",
+      "combined-pooled",
+      "combined-context"
+    ],
+    "source_method": {
+      "schema": "chipmunk.audio-specialists-method/15",
+      "source_groups": 143,
+      "sample_rate": 16000,
+      "source_prefix_samples": 64000,
+      "composite_samples": 128000,
+      "source_selection": "All143 consumed AI-containing connected groups; hash-first AI source, same-group human if available, otherwise one unused hash-ordered genuine-only group. No authenticity score selection.",
+      "roles": [
+        "specialist_cal",
+        "fusion_fit",
+        "fusion_cal",
+        "confirmation"
+      ],
+      "roles_rule": "Stratify by selected AI generator; salted hash order and globally continuing round-robin roles. All originals, speaker/transcript ancestry and backgrounds remain role-disjoint.",
+      "backgrounds": "All48 consumed licensed originals, disjoint canonical identities; hash-partition each kind into four roles; pair-hash choice and deterministic four-second offset within its role. Reused nuisance parents within a role are disclosed.",
+      "patterns": {
+        "human": [
+          0,
+          0
+        ],
+        "ai": [
+          1,
+          1
+        ],
+        "human-ai": [
+          0,
+          1
+        ],
+        "ai-human": [
+          1,
+          0
+        ]
+      },
+      "conditions": [
+        [
+          "clean",
+          null,
+          null
+        ],
+        [
+          "noise_-5",
+          "noise",
+          -5
+        ],
+        [
+          "noise_5",
+          "noise",
+          5
+        ],
+        [
+          "music_-5",
+          "music",
+          -5
+        ],
+        [
+          "music_5",
+          "music",
+          5
+        ],
+        [
+          "speech_-5",
+          "speech",
+          -5
+        ],
+        [
+          "speech_5",
+          "speech",
+          5
+        ]
+      ],
+      "render": "Normalize both foreground prefixes separately to RMS0.1; add the same selected human/noise/music background to the second half at -5 or5dB; one peak-safe gain shared by all patterns/conditions of a pair; canonical mono16kHz s16 WAV roundtrip.",
+      "source_truth": "Any overlap of a planned4s window with a known AI foreground interval. Background speech is genuine. Ordinary edits/looping, noise and speaker changes alone are not AI truth.",
+      "windows": "Full-profile production0,2,4s windows on8s input; original full-clip Silero gate; every planned window retained, including gated-out evidence.",
+      "band": "Whole-clip zero-phase Butterworth100\u20133800Hz/order4; same source windows/gate; never treated as a second truth or a recovered original.",
+      "routing": "Original-window measured normalized spectral-flatness>=0.65: diffuse; otherwise concentrated. Generator, known SNR, recipe, label and model response are excluded from routing.",
+      "context_cut": 0.65,
+      "contexts": [
+        "concentrated",
+        "diffuse"
+      ],
+      "minimum_groups_per_class": 25,
+      "calibration": "Four source-disjoint roles; full-view pooled/context and full+band pooled/context arms. One dependence family; maximum positive calibrated logit, separately fitted/calibrated file result. L2=.001;50:50 reference prior.",
+      "operating_comparison": "Internal AI-only point on fusion_cal genuine foreground-pair maxima: strict greater than nearest-rank ceil((n+1)*.9), capped at n. All arm artifacts/points frozen before confirmation authenticity inference. No customer threshold or error guarantee.",
+      "quality_gates": "Against pooled full-view research reference: more AI files found, no additional false-AI foreground groups, no coverage loss, lower source/class-balanced Brier. Per-condition/local errors and all inconclusive denominators retained; no automatic admission.",
+      "native_audit": "Exact publisher assets; retained exact old WAV/PCM/raw parity before new authenticity inference; first window per role/view/context direct repeat; source/native coordinates audited separately.",
+      "device": "cpu",
+      "dtype": "float32",
+      "threads": 4,
+      "resource_guard": {
+        "tree_rss_gib": 6,
+        "minimum_available_mib": 1536,
+        "minimum_disk_mib": 1536,
+        "maximum_seconds_per_role": 3600
+      },
+      "serving_admitted": false,
+      "limits": "Consumed foregrounds/backgrounds, unknown external model-training overlap and artificial splice boundaries.35/36 foreground-pair groups per role are not independent background recordings; each role has6 noise/3music/3speech parents. No background-authenticity, unseen-customer, fresh-independent or court claim."
+    },
+    "l2": 0.001,
+    "minimum_groups_per_class": 25,
+    "native_parity_absolute_limit": 1e-06,
+    "native_repeat_exact": true,
+    "operating_alpha": 0.1,
+    "operating_minimum_assessed_genuine_groups": 25,
+    "operating_scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+    "additional_continuation_gates": [
+      "no_clean_ai_detection_loss",
+      "no_additional_false_ai_groups_in_any_condition",
+      "more_ai_detected_across_strong_noise_music_speech",
+      "no_condition_coverage_loss"
+    ],
+    "admission": "No serving admission; continuation only. Consumed sources, limited independent background parents and external pretraining overlap require new independent-source validation."
+  },
+  "arms": {
+    "full-pooled": {
+      "all": {
+        "planned": 980,
+        "assessed": 938,
+        "inconclusive": 42,
+        "genuine": 245,
+        "ai": 735,
+        "false_ai": 10,
+        "ai_flagged": 579,
+        "ai_not_flagged_including_inconclusive": 156,
+        "genuine_groups": 35,
+        "false_ai_groups": 7,
+        "source_class_balanced_brier_on_scored_cases": 0.13411157229613396
+      },
+      "conditions": {
+        "clean": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 98,
+          "ai_not_flagged_including_inconclusive": 7,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.01796231420037142
+        },
+        "noise_-5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 72,
+          "ai_not_flagged_including_inconclusive": 33,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.14288944307658805
+        },
+        "noise_5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 84,
+          "ai_not_flagged_including_inconclusive": 21,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.0899301367391469
+        },
+        "music_-5": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 65,
+          "ai_not_flagged_including_inconclusive": 40,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.1652755949887818
+        },
+        "music_5": {
+          "planned": 140,
+          "assessed": 132,
+          "inconclusive": 8,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 76,
+          "ai_not_flagged_including_inconclusive": 29,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.08930201387628478
+        },
+        "speech_-5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 3,
+          "ai_flagged": 85,
+          "ai_not_flagged_including_inconclusive": 20,
+          "genuine_groups": 35,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": 0.237988142970458
+        },
+        "speech_5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 5,
+          "ai_flagged": 99,
+          "ai_not_flagged_including_inconclusive": 6,
+          "genuine_groups": 35,
+          "false_ai_groups": 5,
+          "source_class_balanced_brier_on_scored_cases": 0.18659100170618825
+        }
+      },
+      "point": {
+        "status": "fitted",
+        "threshold": 0.816575037916721,
+        "genuine_groups_total": 36,
+        "genuine_groups_with_assessed_files": 34,
+        "unassessed_genuine_files": 15,
+        "scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 32,
+        "calibration_genuine_groups_flagged": 2
+      },
+      "head_status": {
+        "audio.full|pooled": "fitted"
+      },
+      "continuation_gates": {
+        "more_ai_files_found": false,
+        "no_additional_false_ai_foreground_groups": true,
+        "no_coverage_loss": true,
+        "lower_source_balanced_brier": false,
+        "no_clean_ai_detection_loss": true,
+        "no_additional_false_ai_groups_in_any_condition": true,
+        "more_strong_background_ai_files_found": false,
+        "no_condition_coverage_loss": true
+      },
+      "continuation_eligible": false
+    },
+    "full-context": {
+      "all": {
+        "planned": 980,
+        "assessed": 938,
+        "inconclusive": 42,
+        "genuine": 245,
+        "ai": 735,
+        "false_ai": 5,
+        "ai_flagged": 520,
+        "ai_not_flagged_including_inconclusive": 215,
+        "genuine_groups": 35,
+        "false_ai_groups": 3,
+        "source_class_balanced_brier_on_scored_cases": 0.12513556477479962
+      },
+      "conditions": {
+        "clean": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 90,
+          "ai_not_flagged_including_inconclusive": 15,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.0190097003643881
+        },
+        "noise_-5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 68,
+          "ai_not_flagged_including_inconclusive": 37,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.13943191470847066
+        },
+        "noise_5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 77,
+          "ai_not_flagged_including_inconclusive": 28,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.09444991424832119
+        },
+        "music_-5": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 58,
+          "ai_not_flagged_including_inconclusive": 47,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.1462337825926942
+        },
+        "music_5": {
+          "planned": 140,
+          "assessed": 132,
+          "inconclusive": 8,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 69,
+          "ai_not_flagged_including_inconclusive": 36,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.08156405373864978
+        },
+        "speech_-5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 71,
+          "ai_not_flagged_including_inconclusive": 34,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.22069753409841636
+        },
+        "speech_5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 2,
+          "ai_flagged": 87,
+          "ai_not_flagged_including_inconclusive": 18,
+          "genuine_groups": 35,
+          "false_ai_groups": 2,
+          "source_class_balanced_brier_on_scored_cases": 0.16372314821575032
+        }
+      },
+      "point": {
+        "status": "fitted",
+        "threshold": 0.8354868854770487,
+        "genuine_groups_total": 36,
+        "genuine_groups_with_assessed_files": 34,
+        "unassessed_genuine_files": 15,
+        "scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 32,
+        "calibration_genuine_groups_flagged": 2
+      },
+      "head_status": {
+        "audio.full|concentrated": "fitted",
+        "audio.full|diffuse": "fitted"
+      },
+      "continuation_gates": {
+        "more_ai_files_found": false,
+        "no_additional_false_ai_foreground_groups": true,
+        "no_coverage_loss": true,
+        "lower_source_balanced_brier": true,
+        "no_clean_ai_detection_loss": false,
+        "no_additional_false_ai_groups_in_any_condition": true,
+        "more_strong_background_ai_files_found": false,
+        "no_condition_coverage_loss": true
+      },
+      "continuation_eligible": false
+    },
+    "combined-pooled": {
+      "all": {
+        "planned": 980,
+        "assessed": 938,
+        "inconclusive": 42,
+        "genuine": 245,
+        "ai": 735,
+        "false_ai": 10,
+        "ai_flagged": 579,
+        "ai_not_flagged_including_inconclusive": 156,
+        "genuine_groups": 35,
+        "false_ai_groups": 7,
+        "source_class_balanced_brier_on_scored_cases": 0.14923470106184378
+      },
+      "conditions": {
+        "clean": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 98,
+          "ai_not_flagged_including_inconclusive": 7,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.04052479008116678
+        },
+        "noise_-5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 72,
+          "ai_not_flagged_including_inconclusive": 33,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.15177544729582002
+        },
+        "noise_5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 84,
+          "ai_not_flagged_including_inconclusive": 21,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.1072201748083051
+        },
+        "music_-5": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 65,
+          "ai_not_flagged_including_inconclusive": 40,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.15240809716699327
+        },
+        "music_5": {
+          "planned": 140,
+          "assessed": 132,
+          "inconclusive": 8,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 76,
+          "ai_not_flagged_including_inconclusive": 29,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.09670398764172011
+        },
+        "speech_-5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 3,
+          "ai_flagged": 85,
+          "ai_not_flagged_including_inconclusive": 20,
+          "genuine_groups": 35,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": 0.27183422089691467
+        },
+        "speech_5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 5,
+          "ai_flagged": 99,
+          "ai_not_flagged_including_inconclusive": 6,
+          "genuine_groups": 35,
+          "false_ai_groups": 5,
+          "source_class_balanced_brier_on_scored_cases": 0.20787274267841233
+        }
+      },
+      "point": {
+        "status": "fitted",
+        "threshold": 0.7890424405965843,
+        "genuine_groups_total": 36,
+        "genuine_groups_with_assessed_files": 34,
+        "unassessed_genuine_files": 15,
+        "scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 32,
+        "calibration_genuine_groups_flagged": 2
+      },
+      "head_status": {
+        "audio.full|pooled": "fitted",
+        "audio.band|pooled": "fitted"
+      },
+      "continuation_gates": {
+        "more_ai_files_found": false,
+        "no_additional_false_ai_foreground_groups": true,
+        "no_coverage_loss": true,
+        "lower_source_balanced_brier": false,
+        "no_clean_ai_detection_loss": true,
+        "no_additional_false_ai_groups_in_any_condition": true,
+        "more_strong_background_ai_files_found": false,
+        "no_condition_coverage_loss": true
+      },
+      "continuation_eligible": false
+    },
+    "combined-context": {
+      "all": {
+        "planned": 980,
+        "assessed": 938,
+        "inconclusive": 42,
+        "genuine": 245,
+        "ai": 735,
+        "false_ai": 5,
+        "ai_flagged": 520,
+        "ai_not_flagged_including_inconclusive": 215,
+        "genuine_groups": 35,
+        "false_ai_groups": 3,
+        "source_class_balanced_brier_on_scored_cases": 0.1406376329839393
+      },
+      "conditions": {
+        "clean": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 90,
+          "ai_not_flagged_including_inconclusive": 15,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.04192866423087679
+        },
+        "noise_-5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 68,
+          "ai_not_flagged_including_inconclusive": 37,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.14882950898295277
+        },
+        "noise_5": {
+          "planned": 140,
+          "assessed": 134,
+          "inconclusive": 6,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 77,
+          "ai_not_flagged_including_inconclusive": 28,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.11220220524046043
+        },
+        "music_-5": {
+          "planned": 140,
+          "assessed": 133,
+          "inconclusive": 7,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 58,
+          "ai_not_flagged_including_inconclusive": 47,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.14441844602589468
+        },
+        "music_5": {
+          "planned": 140,
+          "assessed": 132,
+          "inconclusive": 8,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 0,
+          "ai_flagged": 69,
+          "ai_not_flagged_including_inconclusive": 36,
+          "genuine_groups": 35,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": 0.0893734800261137
+        },
+        "speech_-5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 1,
+          "ai_flagged": 71,
+          "ai_not_flagged_including_inconclusive": 34,
+          "genuine_groups": 35,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": 0.23994642946624478
+        },
+        "speech_5": {
+          "planned": 140,
+          "assessed": 136,
+          "inconclusive": 4,
+          "genuine": 35,
+          "ai": 105,
+          "false_ai": 2,
+          "ai_flagged": 87,
+          "ai_not_flagged_including_inconclusive": 18,
+          "genuine_groups": 35,
+          "false_ai_groups": 2,
+          "source_class_balanced_brier_on_scored_cases": 0.19276414621998056
+        }
+      },
+      "point": {
+        "status": "fitted",
+        "threshold": 0.8023806741201563,
+        "genuine_groups_total": 36,
+        "genuine_groups_with_assessed_files": 34,
+        "unassessed_genuine_files": 15,
+        "scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 32,
+        "calibration_genuine_groups_flagged": 2
+      },
+      "head_status": {
+        "audio.full|concentrated": "fitted",
+        "audio.full|diffuse": "fitted",
+        "audio.band|concentrated": "fitted",
+        "audio.band|diffuse": "fitted"
+      },
+      "continuation_gates": {
+        "more_ai_files_found": false,
+        "no_additional_false_ai_foreground_groups": true,
+        "no_coverage_loss": true,
+        "lower_source_balanced_brier": false,
+        "no_clean_ai_detection_loss": false,
+        "no_additional_false_ai_groups_in_any_condition": true,
+        "more_strong_background_ai_files_found": false,
+        "no_condition_coverage_loss": true
+      },
+      "continuation_eligible": false
+    }
+  },
+  "serving_admitted": false,
+  "limits": "Consumed foregrounds/backgrounds, unknown external model-training overlap and artificial splice boundaries.35/36 foreground-pair groups per role are not independent background recordings; each role has6 noise/3music/3speech parents. No background-authenticity, unseen-customer, fresh-independent or court claim."
+}

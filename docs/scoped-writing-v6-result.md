@@ -52,7 +52,7 @@ cannot change fitting, and a missing required check withholds the combination
 instead of producing an originality verdict. The external CI wrapper is
 separate from the frozen science.
 
-Linux fitting is **not reliably portable yet**. Of three actual runs, one
+Linux fitting is **not reliably portable yet**. Of four actual runs, two
 refitted all eight arms and reproduced every exact count/status/decision with
 maximum numerical difference1.1546319456101628e-14. Two failed during fitting.
 The first harness captured the original child diagnostic, so its cause remains

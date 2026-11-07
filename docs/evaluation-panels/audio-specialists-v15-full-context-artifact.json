@@ -1,0 +1,133 @@
+{
+  "schema": "chipmunk.specialist-calibration/2",
+  "policy": {
+    "specialists": [
+      {
+        "id": "audio.full",
+        "modality": "audio",
+        "family": "voice",
+        "target": "audio.synthetic_voice",
+        "contexts": [
+          "concentrated",
+          "diffuse"
+        ],
+        "routing_sha256": "f18675eab4e24c826bd18acf238ee6976900899ef1e181b54bdbe4b0a6a6dc65",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "f480a9f6581ed14091bfbcd3c44295534f2546f86f25dda8b785a85689247cf2",
+          "weight_sha256": [
+            "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+            "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+            "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "cd4bd0d0dc1dfae636c4c7c6bb6742784b74373102ebf05c0854fce1c8e44bc8"
+        }
+      }
+    ]
+  },
+  "feature_pooling": "positive_logit_max_per_dependency_family",
+  "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "plan_sha256": "563a4ae8d093e1db71091aeab25cc7f586360515a6748a08ed579642f3aa49ce",
+  "training_sha256": "cc0e08f65a5cf83c7716c9c0ad53134504f793916689f84127037fa57715f699",
+  "minimum_groups_per_class": 25,
+  "l2": 0.001,
+  "specialists": {
+    "audio.full|concentrated": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 35,
+        "1": 36
+      },
+      "center": [
+        0.5055104116458654
+      ],
+      "scale": [
+        0.4956137974173118
+      ],
+      "coefficients": [
+        2.299845595735102
+      ],
+      "intercept": -0.02321602349703235,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "audio.full|diffuse": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 29,
+        "1": 33
+      },
+      "center": [
+        0.48746590978833915
+      ],
+      "scale": [
+        0.49142924114747677
+      ],
+      "coefficients": [
+        1.5707703938670263
+      ],
+      "intercept": 0.033582522128316396,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    }
+  },
+  "combiners": {
+    "audio|voice": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 36,
+          "1": 36
+        },
+        "center": [
+          1.297529622980381
+        ],
+        "scale": [
+          1.044702378780738
+        ],
+        "coefficients": [
+          1.8652706994626302
+        ],
+        "intercept": -0.19896145553928243,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 1008,
+      "fitting_unassessed": 43,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 34,
+          "1": 36
+        },
+        "center": [
+          -0.1929607512384958
+        ],
+        "scale": [
+          1.9386405845124324
+        ],
+        "coefficients": [
+          2.155767821476994
+        ],
+        "intercept": -0.29114500587052244,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 1008,
+      "calibration_unassessed": 39
+    }
+  },
+  "serving_admitted": false,
+  "reference_prior": 0.5,
+  "sha256": "418f380126bb6f68240ea869a7d98bf8890acab954d67aafdab9b13ef7cb5944"
+}

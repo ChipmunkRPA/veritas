@@ -1,0 +1,1446 @@
+{
+  "schema": "chipmunk.audio-specialists-local-source-review/15",
+  "freeze_sha256": "284e231e6b4c959a3e325c1906d2dfb6c14e6ab0aad86e7fddd435b1330bf174",
+  "implementation_sha256": "51f9acabba0c4f01a75fc1cde4f680c59a4931bda1d7b033393f488a850872b3",
+  "metadata_audit": {
+    "files": 4004,
+    "windows": 12012,
+    "foreground_pairs": 143,
+    "background_originals": 48,
+    "counts": {
+      "confirmation/clean/ai": 35,
+      "confirmation/clean/ai-human": 35,
+      "confirmation/clean/human": 35,
+      "confirmation/clean/human-ai": 35,
+      "confirmation/files": 980,
+      "confirmation/music_-5/ai": 35,
+      "confirmation/music_-5/ai-human": 35,
+      "confirmation/music_-5/human": 35,
+      "confirmation/music_-5/human-ai": 35,
+      "confirmation/music_5/ai": 35,
+      "confirmation/music_5/ai-human": 35,
+      "confirmation/music_5/human": 35,
+      "confirmation/music_5/human-ai": 35,
+      "confirmation/noise_-5/ai": 35,
+      "confirmation/noise_-5/ai-human": 35,
+      "confirmation/noise_-5/human": 35,
+      "confirmation/noise_-5/human-ai": 35,
+      "confirmation/noise_5/ai": 35,
+      "confirmation/noise_5/ai-human": 35,
+      "confirmation/noise_5/human": 35,
+      "confirmation/noise_5/human-ai": 35,
+      "confirmation/speech_-5/ai": 35,
+      "confirmation/speech_-5/ai-human": 35,
+      "confirmation/speech_-5/human": 35,
+      "confirmation/speech_-5/human-ai": 35,
+      "confirmation/speech_5/ai": 35,
+      "confirmation/speech_5/ai-human": 35,
+      "confirmation/speech_5/human": 35,
+      "confirmation/speech_5/human-ai": 35,
+      "confirmation/speech_eligible": 2870,
+      "confirmation/speech_unassessed": 70,
+      "fusion_cal/clean/ai": 36,
+      "fusion_cal/clean/ai-human": 36,
+      "fusion_cal/clean/human": 36,
+      "fusion_cal/clean/human-ai": 36,
+      "fusion_cal/files": 1008,
+      "fusion_cal/music_-5/ai": 36,
+      "fusion_cal/music_-5/ai-human": 36,
+      "fusion_cal/music_-5/human": 36,
+      "fusion_cal/music_-5/human-ai": 36,
+      "fusion_cal/music_5/ai": 36,
+      "fusion_cal/music_5/ai-human": 36,
+      "fusion_cal/music_5/human": 36,
+      "fusion_cal/music_5/human-ai": 36,
+      "fusion_cal/noise_-5/ai": 36,
+      "fusion_cal/noise_-5/ai-human": 36,
+      "fusion_cal/noise_-5/human": 36,
+      "fusion_cal/noise_-5/human-ai": 36,
+      "fusion_cal/noise_5/ai": 36,
+      "fusion_cal/noise_5/ai-human": 36,
+      "fusion_cal/noise_5/human": 36,
+      "fusion_cal/noise_5/human-ai": 36,
+      "fusion_cal/speech_-5/ai": 36,
+      "fusion_cal/speech_-5/ai-human": 36,
+      "fusion_cal/speech_-5/human": 36,
+      "fusion_cal/speech_-5/human-ai": 36,
+      "fusion_cal/speech_5/ai": 36,
+      "fusion_cal/speech_5/ai-human": 36,
+      "fusion_cal/speech_5/human": 36,
+      "fusion_cal/speech_5/human-ai": 36,
+      "fusion_cal/speech_eligible": 2957,
+      "fusion_cal/speech_unassessed": 67,
+      "fusion_fit/clean/ai": 36,
+      "fusion_fit/clean/ai-human": 36,
+      "fusion_fit/clean/human": 36,
+      "fusion_fit/clean/human-ai": 36,
+      "fusion_fit/files": 1008,
+      "fusion_fit/music_-5/ai": 36,
+      "fusion_fit/music_-5/ai-human": 36,
+      "fusion_fit/music_-5/human": 36,
+      "fusion_fit/music_-5/human-ai": 36,
+      "fusion_fit/music_5/ai": 36,
+      "fusion_fit/music_5/ai-human": 36,
+      "fusion_fit/music_5/human": 36,
+      "fusion_fit/music_5/human-ai": 36,
+      "fusion_fit/noise_-5/ai": 36,
+      "fusion_fit/noise_-5/ai-human": 36,
+      "fusion_fit/noise_-5/human": 36,
+      "fusion_fit/noise_-5/human-ai": 36,
+      "fusion_fit/noise_5/ai": 36,
+      "fusion_fit/noise_5/ai-human": 36,
+      "fusion_fit/noise_5/human": 36,
+      "fusion_fit/noise_5/human-ai": 36,
+      "fusion_fit/speech_-5/ai": 36,
+      "fusion_fit/speech_-5/ai-human": 36,
+      "fusion_fit/speech_-5/human": 36,
+      "fusion_fit/speech_-5/human-ai": 36,
+      "fusion_fit/speech_5/ai": 36,
+      "fusion_fit/speech_5/ai-human": 36,
+      "fusion_fit/speech_5/human": 36,
+      "fusion_fit/speech_5/human-ai": 36,
+      "fusion_fit/speech_eligible": 2947,
+      "fusion_fit/speech_unassessed": 77,
+      "specialist_cal/clean/ai": 36,
+      "specialist_cal/clean/ai-human": 36,
+      "specialist_cal/clean/human": 36,
+      "specialist_cal/clean/human-ai": 36,
+      "specialist_cal/files": 1008,
+      "specialist_cal/music_-5/ai": 36,
+      "specialist_cal/music_-5/ai-human": 36,
+      "specialist_cal/music_-5/human": 36,
+      "specialist_cal/music_-5/human-ai": 36,
+      "specialist_cal/music_5/ai": 36,
+      "specialist_cal/music_5/ai-human": 36,
+      "specialist_cal/music_5/human": 36,
+      "specialist_cal/music_5/human-ai": 36,
+      "specialist_cal/noise_-5/ai": 36,
+      "specialist_cal/noise_-5/ai-human": 36,
+      "specialist_cal/noise_-5/human": 36,
+      "specialist_cal/noise_-5/human-ai": 36,
+      "specialist_cal/noise_5/ai": 36,
+      "specialist_cal/noise_5/ai-human": 36,
+      "specialist_cal/noise_5/human": 36,
+      "specialist_cal/noise_5/human-ai": 36,
+      "specialist_cal/speech_-5/ai": 36,
+      "specialist_cal/speech_-5/ai-human": 36,
+      "specialist_cal/speech_-5/human": 36,
+      "specialist_cal/speech_-5/human-ai": 36,
+      "specialist_cal/speech_5/ai": 36,
+      "specialist_cal/speech_5/ai-human": 36,
+      "specialist_cal/speech_5/human": 36,
+      "specialist_cal/speech_5/human-ai": 36,
+      "specialist_cal/speech_eligible": 2981,
+      "specialist_cal/speech_unassessed": 43
+    },
+    "eligible_local_support_groups": {
+      "confirmation/concentrated/0": 32,
+      "confirmation/concentrated/1": 35,
+      "confirmation/diffuse/0": 29,
+      "confirmation/diffuse/1": 28,
+      "fusion_cal/concentrated/0": 36,
+      "fusion_cal/concentrated/1": 36,
+      "fusion_cal/diffuse/0": 23,
+      "fusion_cal/diffuse/1": 28,
+      "fusion_fit/concentrated/0": 35,
+      "fusion_fit/concentrated/1": 35,
+      "fusion_fit/diffuse/0": 36,
+      "fusion_fit/diffuse/1": 35,
+      "specialist_cal/concentrated/0": 35,
+      "specialist_cal/concentrated/1": 36,
+      "specialist_cal/diffuse/0": 29,
+      "specialist_cal/diffuse/1": 33
+    },
+    "source_assignment_and_local_coordinates_passed": true,
+    "waveform_bytes_independently_verified": false,
+    "speech_gate_independently_verified": false,
+    "publisher_labels_independently_established": false,
+    "new_model_forwards": 0,
+    "limits": "Known source/speaker/transcript ancestry only; no independent-person, background-population or unseen-model-training claim."
+  },
+  "all_four_native_role_receipts_verified": true,
+  "arms": {
+    "full-pooled": {
+      "local": {
+        "planned": 2940,
+        "genuine": 1225,
+        "ai": 1715,
+        "assessed": 2870,
+        "inconclusive": 70,
+        "ties": 0,
+        "false_ai": 167,
+        "ai_not_leaning_including_ties_and_inconclusive": 190,
+        "source_class_balanced_brier_on_scored_units": 0.09675512352166868
+      },
+      "strata": {
+        "condition": {
+          "clean": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 408,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 13,
+            "source_class_balanced_brier_on_scored_units": 0.010824089455628343
+          },
+          "music_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 407,
+            "inconclusive": 13,
+            "ties": 0,
+            "false_ai": 25,
+            "ai_not_leaning_including_ties_and_inconclusive": 45,
+            "source_class_balanced_brier_on_scored_units": 0.1315762479294517
+          },
+          "music_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 406,
+            "inconclusive": 14,
+            "ties": 0,
+            "false_ai": 14,
+            "ai_not_leaning_including_ties_and_inconclusive": 35,
+            "source_class_balanced_brier_on_scored_units": 0.08534014376377125
+          },
+          "noise_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 409,
+            "inconclusive": 11,
+            "ties": 0,
+            "false_ai": 20,
+            "ai_not_leaning_including_ties_and_inconclusive": 50,
+            "source_class_balanced_brier_on_scored_units": 0.13190788228236547
+          },
+          "noise_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 408,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 9,
+            "ai_not_leaning_including_ties_and_inconclusive": 29,
+            "source_class_balanced_brier_on_scored_units": 0.07607741283587108
+          },
+          "speech_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 416,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 53,
+            "ai_not_leaning_including_ties_and_inconclusive": 14,
+            "source_class_balanced_brier_on_scored_units": 0.1484969708344862
+          },
+          "speech_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 416,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 46,
+            "ai_not_leaning_including_ties_and_inconclusive": 4,
+            "source_class_balanced_brier_on_scored_units": 0.11466228174182651
+          }
+        },
+        "pattern": {
+          "ai": {
+            "planned": 735,
+            "genuine": 0,
+            "ai": 735,
+            "assessed": 701,
+            "inconclusive": 34,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 66,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "ai-human": {
+            "planned": 735,
+            "genuine": 245,
+            "ai": 490,
+            "assessed": 705,
+            "inconclusive": 30,
+            "ties": 0,
+            "false_ai": 59,
+            "ai_not_leaning_including_ties_and_inconclusive": 30,
+            "source_class_balanced_brier_on_scored_units": 0.10556779087982508
+          },
+          "human": {
+            "planned": 735,
+            "genuine": 735,
+            "ai": 0,
+            "assessed": 735,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 108,
+            "ai_not_leaning_including_ties_and_inconclusive": 0,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "human-ai": {
+            "planned": 735,
+            "genuine": 245,
+            "ai": 490,
+            "assessed": 729,
+            "inconclusive": 6,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 94,
+            "source_class_balanced_brier_on_scored_units": 0.08287521035625084
+          }
+        },
+        "context": {
+          "pooled": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 167,
+            "ai_not_leaning_including_ties_and_inconclusive": 190,
+            "source_class_balanced_brier_on_scored_units": 0.09675512352166868
+          }
+        },
+        "specialist": {
+          "audio.full": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 167,
+            "ai_not_leaning_including_ties_and_inconclusive": 190,
+            "source_class_balanced_brier_on_scored_units": 0.09675512352166868
+          }
+        },
+        "generator": {
+          "Chatterbox": {
+            "planned": 588,
+            "genuine": 245,
+            "ai": 343,
+            "assessed": 588,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 23,
+            "ai_not_leaning_including_ties_and_inconclusive": 28,
+            "source_class_balanced_brier_on_scored_units": 0.07951092107292923
+          },
+          "ElevenLabs": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 420,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 36,
+            "ai_not_leaning_including_ties_and_inconclusive": 19,
+            "source_class_balanced_brier_on_scored_units": 0.1221432709003734
+          },
+          "NaturalSpeech2": {
+            "planned": 672,
+            "genuine": 280,
+            "ai": 392,
+            "assessed": 665,
+            "inconclusive": 7,
+            "ties": 0,
+            "false_ai": 46,
+            "ai_not_leaning_including_ties_and_inconclusive": 42,
+            "source_class_balanced_brier_on_scored_units": 0.11077099734382814
+          },
+          "PflowTTS": {
+            "planned": 336,
+            "genuine": 140,
+            "ai": 196,
+            "assessed": 275,
+            "inconclusive": 61,
+            "ties": 0,
+            "false_ai": 11,
+            "ai_not_leaning_including_ties_and_inconclusive": 78,
+            "source_class_balanced_brier_on_scored_units": 0.11945178177084961
+          },
+          "StyleTTS2": {
+            "planned": 84,
+            "genuine": 35,
+            "ai": 49,
+            "assessed": 84,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 2,
+            "ai_not_leaning_including_ties_and_inconclusive": 4,
+            "source_class_balanced_brier_on_scored_units": 0.0650573462999002
+          },
+          "fleurs-amazon": {
+            "planned": 168,
+            "genuine": 70,
+            "ai": 98,
+            "assessed": 168,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 11,
+            "ai_not_leaning_including_ties_and_inconclusive": 3,
+            "source_class_balanced_brier_on_scored_units": 0.08430015667331833
+          },
+          "fleurs-azure": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 418,
+            "inconclusive": 2,
+            "ties": 0,
+            "false_ai": 35,
+            "ai_not_leaning_including_ties_and_inconclusive": 10,
+            "source_class_balanced_brier_on_scored_units": 0.10248214992643183
+          },
+          "fleurs-google": {
+            "planned": 252,
+            "genuine": 105,
+            "ai": 147,
+            "assessed": 252,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 3,
+            "ai_not_leaning_including_ties_and_inconclusive": 6,
+            "source_class_balanced_brier_on_scored_units": 0.03636433537777091
+          }
+        }
+      },
+      "source_windows_s": {
+        "0-4": {
+          "planned": 980,
+          "genuine": 490,
+          "ai": 490,
+          "assessed": 952,
+          "inconclusive": 28,
+          "ties": 0,
+          "false_ai": 0,
+          "ai_not_leaning_including_ties_and_inconclusive": 28,
+          "source_class_balanced_brier_on_scored_units": 0.009165186045932527
+        },
+        "2-6": {
+          "planned": 980,
+          "genuine": 245,
+          "ai": 735,
+          "assessed": 955,
+          "inconclusive": 25,
+          "ties": 0,
+          "false_ai": 49,
+          "ai_not_leaning_including_ties_and_inconclusive": 79,
+          "source_class_balanced_brier_on_scored_units": 0.12223283099153393
+        },
+        "4-8": {
+          "planned": 980,
+          "genuine": 490,
+          "ai": 490,
+          "assessed": 963,
+          "inconclusive": 17,
+          "ties": 0,
+          "false_ai": 118,
+          "ai_not_leaning_including_ties_and_inconclusive": 83,
+          "source_class_balanced_brier_on_scored_units": 0.16392669102346147
+        }
+      },
+      "head_support": {
+        "audio.full|pooled": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 36,
+            "1": 36
+          }
+        }
+      }
+    },
+    "full-context": {
+      "local": {
+        "planned": 2940,
+        "genuine": 1225,
+        "ai": 1715,
+        "assessed": 2870,
+        "inconclusive": 70,
+        "ties": 0,
+        "false_ai": 167,
+        "ai_not_leaning_including_ties_and_inconclusive": 190,
+        "source_class_balanced_brier_on_scored_units": 0.09556021629598775
+      },
+      "strata": {
+        "condition": {
+          "clean": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 408,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 13,
+            "source_class_balanced_brier_on_scored_units": 0.013986500608849123
+          },
+          "music_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 407,
+            "inconclusive": 13,
+            "ties": 0,
+            "false_ai": 25,
+            "ai_not_leaning_including_ties_and_inconclusive": 45,
+            "source_class_balanced_brier_on_scored_units": 0.12790050659062113
+          },
+          "music_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 406,
+            "inconclusive": 14,
+            "ties": 0,
+            "false_ai": 14,
+            "ai_not_leaning_including_ties_and_inconclusive": 35,
+            "source_class_balanced_brier_on_scored_units": 0.08442690187465904
+          },
+          "noise_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 409,
+            "inconclusive": 11,
+            "ties": 0,
+            "false_ai": 20,
+            "ai_not_leaning_including_ties_and_inconclusive": 50,
+            "source_class_balanced_brier_on_scored_units": 0.12949606900769817
+          },
+          "noise_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 408,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 9,
+            "ai_not_leaning_including_ties_and_inconclusive": 29,
+            "source_class_balanced_brier_on_scored_units": 0.0758591249997144
+          },
+          "speech_-5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 416,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 53,
+            "ai_not_leaning_including_ties_and_inconclusive": 14,
+            "source_class_balanced_brier_on_scored_units": 0.1451657062824503
+          },
+          "speech_5": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 416,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 46,
+            "ai_not_leaning_including_ties_and_inconclusive": 4,
+            "source_class_balanced_brier_on_scored_units": 0.11082455479001656
+          }
+        },
+        "pattern": {
+          "ai": {
+            "planned": 735,
+            "genuine": 0,
+            "ai": 735,
+            "assessed": 701,
+            "inconclusive": 34,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 66,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "ai-human": {
+            "planned": 735,
+            "genuine": 245,
+            "ai": 490,
+            "assessed": 705,
+            "inconclusive": 30,
+            "ties": 0,
+            "false_ai": 59,
+            "ai_not_leaning_including_ties_and_inconclusive": 30,
+            "source_class_balanced_brier_on_scored_units": 0.10293671549315281
+          },
+          "human": {
+            "planned": 735,
+            "genuine": 735,
+            "ai": 0,
+            "assessed": 735,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 108,
+            "ai_not_leaning_including_ties_and_inconclusive": 0,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "human-ai": {
+            "planned": 735,
+            "genuine": 245,
+            "ai": 490,
+            "assessed": 729,
+            "inconclusive": 6,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 94,
+            "source_class_balanced_brier_on_scored_units": 0.08215941584170526
+          }
+        },
+        "context": {
+          "concentrated": {
+            "planned": 2181,
+            "genuine": 846,
+            "ai": 1335,
+            "assessed": 2128,
+            "inconclusive": 53,
+            "ties": 0,
+            "false_ai": 90,
+            "ai_not_leaning_including_ties_and_inconclusive": 129,
+            "source_class_balanced_brier_on_scored_units": 0.09077948078872825
+          },
+          "diffuse": {
+            "planned": 759,
+            "genuine": 379,
+            "ai": 380,
+            "assessed": 742,
+            "inconclusive": 17,
+            "ties": 0,
+            "false_ai": 77,
+            "ai_not_leaning_including_ties_and_inconclusive": 61,
+            "source_class_balanced_brier_on_scored_units": 0.16349720744928842
+          }
+        },
+        "specialist": {
+          "audio.full": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 167,
+            "ai_not_leaning_including_ties_and_inconclusive": 190,
+            "source_class_balanced_brier_on_scored_units": 0.09556021629598775
+          }
+        },
+        "generator": {
+          "Chatterbox": {
+            "planned": 588,
+            "genuine": 245,
+            "ai": 343,
+            "assessed": 588,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 23,
+            "ai_not_leaning_including_ties_and_inconclusive": 28,
+            "source_class_balanced_brier_on_scored_units": 0.07525304836482072
+          },
+          "ElevenLabs": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 420,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 36,
+            "ai_not_leaning_including_ties_and_inconclusive": 19,
+            "source_class_balanced_brier_on_scored_units": 0.11958269552553327
+          },
+          "NaturalSpeech2": {
+            "planned": 672,
+            "genuine": 280,
+            "ai": 392,
+            "assessed": 665,
+            "inconclusive": 7,
+            "ties": 0,
+            "false_ai": 46,
+            "ai_not_leaning_including_ties_and_inconclusive": 42,
+            "source_class_balanced_brier_on_scored_units": 0.11202079056153008
+          },
+          "PflowTTS": {
+            "planned": 336,
+            "genuine": 140,
+            "ai": 196,
+            "assessed": 275,
+            "inconclusive": 61,
+            "ties": 0,
+            "false_ai": 11,
+            "ai_not_leaning_including_ties_and_inconclusive": 78,
+            "source_class_balanced_brier_on_scored_units": 0.11701955296681617
+          },
+          "StyleTTS2": {
+            "planned": 84,
+            "genuine": 35,
+            "ai": 49,
+            "assessed": 84,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 2,
+            "ai_not_leaning_including_ties_and_inconclusive": 4,
+            "source_class_balanced_brier_on_scored_units": 0.06371758076896379
+          },
+          "fleurs-amazon": {
+            "planned": 168,
+            "genuine": 70,
+            "ai": 98,
+            "assessed": 168,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 11,
+            "ai_not_leaning_including_ties_and_inconclusive": 3,
+            "source_class_balanced_brier_on_scored_units": 0.08617288969133241
+          },
+          "fleurs-azure": {
+            "planned": 420,
+            "genuine": 175,
+            "ai": 245,
+            "assessed": 418,
+            "inconclusive": 2,
+            "ties": 0,
+            "false_ai": 35,
+            "ai_not_leaning_including_ties_and_inconclusive": 10,
+            "source_class_balanced_brier_on_scored_units": 0.10286588487675387
+          },
+          "fleurs-google": {
+            "planned": 252,
+            "genuine": 105,
+            "ai": 147,
+            "assessed": 252,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 3,
+            "ai_not_leaning_including_ties_and_inconclusive": 6,
+            "source_class_balanced_brier_on_scored_units": 0.03509514442775219
+          }
+        }
+      },
+      "source_windows_s": {
+        "0-4": {
+          "planned": 980,
+          "genuine": 490,
+          "ai": 490,
+          "assessed": 952,
+          "inconclusive": 28,
+          "ties": 0,
+          "false_ai": 0,
+          "ai_not_leaning_including_ties_and_inconclusive": 28,
+          "source_class_balanced_brier_on_scored_units": 0.012256187773384731
+        },
+        "2-6": {
+          "planned": 980,
+          "genuine": 245,
+          "ai": 735,
+          "assessed": 955,
+          "inconclusive": 25,
+          "ties": 0,
+          "false_ai": 49,
+          "ai_not_leaning_including_ties_and_inconclusive": 79,
+          "source_class_balanced_brier_on_scored_units": 0.12134674991055763
+        },
+        "4-8": {
+          "planned": 980,
+          "genuine": 490,
+          "ai": 490,
+          "assessed": 963,
+          "inconclusive": 17,
+          "ties": 0,
+          "false_ai": 118,
+          "ai_not_leaning_including_ties_and_inconclusive": 83,
+          "source_class_balanced_brier_on_scored_units": 0.15883420484087424
+        }
+      },
+      "head_support": {
+        "audio.full|concentrated": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 35,
+            "1": 36
+          }
+        },
+        "audio.full|diffuse": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 29,
+            "1": 33
+          }
+        }
+      }
+    },
+    "combined-pooled": {
+      "local": {
+        "planned": 5880,
+        "genuine": 2450,
+        "ai": 3430,
+        "assessed": 5740,
+        "inconclusive": 140,
+        "ties": 0,
+        "false_ai": 381,
+        "ai_not_leaning_including_ties_and_inconclusive": 359,
+        "source_class_balanced_brier_on_scored_units": 0.10038658713631728
+      },
+      "strata": {
+        "condition": {
+          "clean": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 816,
+            "inconclusive": 24,
+            "ties": 0,
+            "false_ai": 3,
+            "ai_not_leaning_including_ties_and_inconclusive": 25,
+            "source_class_balanced_brier_on_scored_units": 0.014522590024109668
+          },
+          "music_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 814,
+            "inconclusive": 26,
+            "ties": 0,
+            "false_ai": 54,
+            "ai_not_leaning_including_ties_and_inconclusive": 85,
+            "source_class_balanced_brier_on_scored_units": 0.13054542452865908
+          },
+          "music_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 812,
+            "inconclusive": 28,
+            "ties": 0,
+            "false_ai": 34,
+            "ai_not_leaning_including_ties_and_inconclusive": 64,
+            "source_class_balanced_brier_on_scored_units": 0.08650823486176112
+          },
+          "noise_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 818,
+            "inconclusive": 22,
+            "ties": 0,
+            "false_ai": 44,
+            "ai_not_leaning_including_ties_and_inconclusive": 94,
+            "source_class_balanced_brier_on_scored_units": 0.12933572011323316
+          },
+          "noise_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 816,
+            "inconclusive": 24,
+            "ties": 0,
+            "false_ai": 22,
+            "ai_not_leaning_including_ties_and_inconclusive": 57,
+            "source_class_balanced_brier_on_scored_units": 0.0795604970257819
+          },
+          "speech_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 832,
+            "inconclusive": 8,
+            "ties": 0,
+            "false_ai": 124,
+            "ai_not_leaning_including_ties_and_inconclusive": 26,
+            "source_class_balanced_brier_on_scored_units": 0.16256154470289558
+          },
+          "speech_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 832,
+            "inconclusive": 8,
+            "ties": 0,
+            "false_ai": 100,
+            "ai_not_leaning_including_ties_and_inconclusive": 8,
+            "source_class_balanced_brier_on_scored_units": 0.1210777330294327
+          }
+        },
+        "pattern": {
+          "ai": {
+            "planned": 1470,
+            "genuine": 0,
+            "ai": 1470,
+            "assessed": 1402,
+            "inconclusive": 68,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 129,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "ai-human": {
+            "planned": 1470,
+            "genuine": 490,
+            "ai": 980,
+            "assessed": 1410,
+            "inconclusive": 60,
+            "ties": 0,
+            "false_ai": 129,
+            "ai_not_leaning_including_ties_and_inconclusive": 59,
+            "source_class_balanced_brier_on_scored_units": 0.11110796403088824
+          },
+          "human": {
+            "planned": 1470,
+            "genuine": 1470,
+            "ai": 0,
+            "assessed": 1470,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 252,
+            "ai_not_leaning_including_ties_and_inconclusive": 0,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "human-ai": {
+            "planned": 1470,
+            "genuine": 490,
+            "ai": 980,
+            "assessed": 1458,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 171,
+            "source_class_balanced_brier_on_scored_units": 0.07691464573483436
+          }
+        },
+        "context": {
+          "pooled": {
+            "planned": 5880,
+            "genuine": 2450,
+            "ai": 3430,
+            "assessed": 5740,
+            "inconclusive": 140,
+            "ties": 0,
+            "false_ai": 381,
+            "ai_not_leaning_including_ties_and_inconclusive": 359,
+            "source_class_balanced_brier_on_scored_units": 0.10038658713631728
+          }
+        },
+        "specialist": {
+          "audio.band": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 214,
+            "ai_not_leaning_including_ties_and_inconclusive": 169,
+            "source_class_balanced_brier_on_scored_units": 0.10401805075096585
+          },
+          "audio.full": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 167,
+            "ai_not_leaning_including_ties_and_inconclusive": 190,
+            "source_class_balanced_brier_on_scored_units": 0.09675512352166868
+          }
+        },
+        "generator": {
+          "Chatterbox": {
+            "planned": 1176,
+            "genuine": 490,
+            "ai": 686,
+            "assessed": 1176,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 50,
+            "ai_not_leaning_including_ties_and_inconclusive": 55,
+            "source_class_balanced_brier_on_scored_units": 0.08142033145861982
+          },
+          "ElevenLabs": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 840,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 75,
+            "ai_not_leaning_including_ties_and_inconclusive": 35,
+            "source_class_balanced_brier_on_scored_units": 0.12101516043058815
+          },
+          "NaturalSpeech2": {
+            "planned": 1344,
+            "genuine": 560,
+            "ai": 784,
+            "assessed": 1330,
+            "inconclusive": 14,
+            "ties": 0,
+            "false_ai": 105,
+            "ai_not_leaning_including_ties_and_inconclusive": 73,
+            "source_class_balanced_brier_on_scored_units": 0.1130860192414079
+          },
+          "PflowTTS": {
+            "planned": 672,
+            "genuine": 280,
+            "ai": 392,
+            "assessed": 550,
+            "inconclusive": 122,
+            "ties": 0,
+            "false_ai": 31,
+            "ai_not_leaning_including_ties_and_inconclusive": 156,
+            "source_class_balanced_brier_on_scored_units": 0.1315230830714208
+          },
+          "StyleTTS2": {
+            "planned": 168,
+            "genuine": 70,
+            "ai": 98,
+            "assessed": 168,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 6,
+            "ai_not_leaning_including_ties_and_inconclusive": 7,
+            "source_class_balanced_brier_on_scored_units": 0.0687786328103311
+          },
+          "fleurs-amazon": {
+            "planned": 336,
+            "genuine": 140,
+            "ai": 196,
+            "assessed": 336,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 22,
+            "ai_not_leaning_including_ties_and_inconclusive": 6,
+            "source_class_balanced_brier_on_scored_units": 0.08369105977023808
+          },
+          "fleurs-azure": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 836,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 79,
+            "ai_not_leaning_including_ties_and_inconclusive": 17,
+            "source_class_balanced_brier_on_scored_units": 0.10696761642966615
+          },
+          "fleurs-google": {
+            "planned": 504,
+            "genuine": 210,
+            "ai": 294,
+            "assessed": 504,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 13,
+            "ai_not_leaning_including_ties_and_inconclusive": 10,
+            "source_class_balanced_brier_on_scored_units": 0.04557770223058019
+          }
+        }
+      },
+      "source_windows_s": {
+        "0-4": {
+          "planned": 1960,
+          "genuine": 980,
+          "ai": 980,
+          "assessed": 1904,
+          "inconclusive": 56,
+          "ties": 0,
+          "false_ai": 0,
+          "ai_not_leaning_including_ties_and_inconclusive": 56,
+          "source_class_balanced_brier_on_scored_units": 0.010286436891123038
+        },
+        "2-6": {
+          "planned": 1960,
+          "genuine": 490,
+          "ai": 1470,
+          "assessed": 1910,
+          "inconclusive": 50,
+          "ties": 0,
+          "false_ai": 125,
+          "ai_not_leaning_including_ties_and_inconclusive": 143,
+          "source_class_balanced_brier_on_scored_units": 0.13575462995053086
+        },
+        "4-8": {
+          "planned": 1960,
+          "genuine": 980,
+          "ai": 980,
+          "assessed": 1926,
+          "inconclusive": 34,
+          "ties": 0,
+          "false_ai": 256,
+          "ai_not_leaning_including_ties_and_inconclusive": 160,
+          "source_class_balanced_brier_on_scored_units": 0.1664362776590279
+        }
+      },
+      "head_support": {
+        "audio.full|pooled": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 36,
+            "1": 36
+          }
+        },
+        "audio.band|pooled": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 36,
+            "1": 36
+          }
+        }
+      }
+    },
+    "combined-context": {
+      "local": {
+        "planned": 5880,
+        "genuine": 2450,
+        "ai": 3430,
+        "assessed": 5740,
+        "inconclusive": 140,
+        "ties": 0,
+        "false_ai": 381,
+        "ai_not_leaning_including_ties_and_inconclusive": 359,
+        "source_class_balanced_brier_on_scored_units": 0.09845998117260835
+      },
+      "strata": {
+        "condition": {
+          "clean": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 816,
+            "inconclusive": 24,
+            "ties": 0,
+            "false_ai": 3,
+            "ai_not_leaning_including_ties_and_inconclusive": 25,
+            "source_class_balanced_brier_on_scored_units": 0.017177098956894746
+          },
+          "music_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 814,
+            "inconclusive": 26,
+            "ties": 0,
+            "false_ai": 54,
+            "ai_not_leaning_including_ties_and_inconclusive": 85,
+            "source_class_balanced_brier_on_scored_units": 0.12685043984428648
+          },
+          "music_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 812,
+            "inconclusive": 28,
+            "ties": 0,
+            "false_ai": 34,
+            "ai_not_leaning_including_ties_and_inconclusive": 64,
+            "source_class_balanced_brier_on_scored_units": 0.08513380236789439
+          },
+          "noise_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 818,
+            "inconclusive": 22,
+            "ties": 0,
+            "false_ai": 44,
+            "ai_not_leaning_including_ties_and_inconclusive": 94,
+            "source_class_balanced_brier_on_scored_units": 0.12687421154752737
+          },
+          "noise_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 816,
+            "inconclusive": 24,
+            "ties": 0,
+            "false_ai": 22,
+            "ai_not_leaning_including_ties_and_inconclusive": 57,
+            "source_class_balanced_brier_on_scored_units": 0.07930663159109373
+          },
+          "speech_-5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 832,
+            "inconclusive": 8,
+            "ties": 0,
+            "false_ai": 124,
+            "ai_not_leaning_including_ties_and_inconclusive": 26,
+            "source_class_balanced_brier_on_scored_units": 0.15699174435086052
+          },
+          "speech_5": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 832,
+            "inconclusive": 8,
+            "ties": 0,
+            "false_ai": 100,
+            "ai_not_leaning_including_ties_and_inconclusive": 8,
+            "source_class_balanced_brier_on_scored_units": 0.11551437895491498
+          }
+        },
+        "pattern": {
+          "ai": {
+            "planned": 1470,
+            "genuine": 0,
+            "ai": 1470,
+            "assessed": 1402,
+            "inconclusive": 68,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 129,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "ai-human": {
+            "planned": 1470,
+            "genuine": 490,
+            "ai": 980,
+            "assessed": 1410,
+            "inconclusive": 60,
+            "ties": 0,
+            "false_ai": 129,
+            "ai_not_leaning_including_ties_and_inconclusive": 59,
+            "source_class_balanced_brier_on_scored_units": 0.10616199569479078
+          },
+          "human": {
+            "planned": 1470,
+            "genuine": 1470,
+            "ai": 0,
+            "assessed": 1470,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 252,
+            "ai_not_leaning_including_ties_and_inconclusive": 0,
+            "source_class_balanced_brier_on_scored_units": null
+          },
+          "human-ai": {
+            "planned": 1470,
+            "genuine": 490,
+            "ai": 980,
+            "assessed": 1458,
+            "inconclusive": 12,
+            "ties": 0,
+            "false_ai": 0,
+            "ai_not_leaning_including_ties_and_inconclusive": 171,
+            "source_class_balanced_brier_on_scored_units": 0.07720304114057112
+          }
+        },
+        "context": {
+          "concentrated": {
+            "planned": 4362,
+            "genuine": 1692,
+            "ai": 2670,
+            "assessed": 4256,
+            "inconclusive": 106,
+            "ties": 0,
+            "false_ai": 204,
+            "ai_not_leaning_including_ties_and_inconclusive": 245,
+            "source_class_balanced_brier_on_scored_units": 0.09218524632679634
+          },
+          "diffuse": {
+            "planned": 1518,
+            "genuine": 758,
+            "ai": 760,
+            "assessed": 1484,
+            "inconclusive": 34,
+            "ties": 0,
+            "false_ai": 177,
+            "ai_not_leaning_including_ties_and_inconclusive": 114,
+            "source_class_balanced_brier_on_scored_units": 0.1771072693020798
+          }
+        },
+        "specialist": {
+          "audio.band": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 214,
+            "ai_not_leaning_including_ties_and_inconclusive": 169,
+            "source_class_balanced_brier_on_scored_units": 0.10135974604922894
+          },
+          "audio.full": {
+            "planned": 2940,
+            "genuine": 1225,
+            "ai": 1715,
+            "assessed": 2870,
+            "inconclusive": 70,
+            "ties": 0,
+            "false_ai": 167,
+            "ai_not_leaning_including_ties_and_inconclusive": 190,
+            "source_class_balanced_brier_on_scored_units": 0.09556021629598775
+          }
+        },
+        "generator": {
+          "Chatterbox": {
+            "planned": 1176,
+            "genuine": 490,
+            "ai": 686,
+            "assessed": 1176,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 50,
+            "ai_not_leaning_including_ties_and_inconclusive": 55,
+            "source_class_balanced_brier_on_scored_units": 0.07692566242528177
+          },
+          "ElevenLabs": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 840,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 75,
+            "ai_not_leaning_including_ties_and_inconclusive": 35,
+            "source_class_balanced_brier_on_scored_units": 0.11722567540850726
+          },
+          "NaturalSpeech2": {
+            "planned": 1344,
+            "genuine": 560,
+            "ai": 784,
+            "assessed": 1330,
+            "inconclusive": 14,
+            "ties": 0,
+            "false_ai": 105,
+            "ai_not_leaning_including_ties_and_inconclusive": 73,
+            "source_class_balanced_brier_on_scored_units": 0.11532140662757154
+          },
+          "PflowTTS": {
+            "planned": 672,
+            "genuine": 280,
+            "ai": 392,
+            "assessed": 550,
+            "inconclusive": 122,
+            "ties": 0,
+            "false_ai": 31,
+            "ai_not_leaning_including_ties_and_inconclusive": 156,
+            "source_class_balanced_brier_on_scored_units": 0.12747573634092135
+          },
+          "StyleTTS2": {
+            "planned": 168,
+            "genuine": 70,
+            "ai": 98,
+            "assessed": 168,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 6,
+            "ai_not_leaning_including_ties_and_inconclusive": 7,
+            "source_class_balanced_brier_on_scored_units": 0.0653856350402338
+          },
+          "fleurs-amazon": {
+            "planned": 336,
+            "genuine": 140,
+            "ai": 196,
+            "assessed": 336,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 22,
+            "ai_not_leaning_including_ties_and_inconclusive": 6,
+            "source_class_balanced_brier_on_scored_units": 0.08547043008363292
+          },
+          "fleurs-azure": {
+            "planned": 840,
+            "genuine": 350,
+            "ai": 490,
+            "assessed": 836,
+            "inconclusive": 4,
+            "ties": 0,
+            "false_ai": 79,
+            "ai_not_leaning_including_ties_and_inconclusive": 17,
+            "source_class_balanced_brier_on_scored_units": 0.1047169947083091
+          },
+          "fleurs-google": {
+            "planned": 504,
+            "genuine": 210,
+            "ai": 294,
+            "assessed": 504,
+            "inconclusive": 0,
+            "ties": 0,
+            "false_ai": 13,
+            "ai_not_leaning_including_ties_and_inconclusive": 10,
+            "source_class_balanced_brier_on_scored_units": 0.04303521996282679
+          }
+        }
+      },
+      "source_windows_s": {
+        "0-4": {
+          "planned": 1960,
+          "genuine": 980,
+          "ai": 980,
+          "assessed": 1904,
+          "inconclusive": 56,
+          "ties": 0,
+          "false_ai": 0,
+          "ai_not_leaning_including_ties_and_inconclusive": 56,
+          "source_class_balanced_brier_on_scored_units": 0.013041514791340473
+        },
+        "2-6": {
+          "planned": 1960,
+          "genuine": 490,
+          "ai": 1470,
+          "assessed": 1910,
+          "inconclusive": 50,
+          "ties": 0,
+          "false_ai": 125,
+          "ai_not_leaning_including_ties_and_inconclusive": 143,
+          "source_class_balanced_brier_on_scored_units": 0.13465762257787897
+        },
+        "4-8": {
+          "planned": 1960,
+          "genuine": 980,
+          "ai": 980,
+          "assessed": 1926,
+          "inconclusive": 34,
+          "ties": 0,
+          "false_ai": 256,
+          "ai_not_leaning_including_ties_and_inconclusive": 160,
+          "source_class_balanced_brier_on_scored_units": 0.15950498932861706
+        }
+      },
+      "head_support": {
+        "audio.full|concentrated": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 35,
+            "1": 36
+          }
+        },
+        "audio.full|diffuse": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 29,
+            "1": 33
+          }
+        },
+        "audio.band|concentrated": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 35,
+            "1": 36
+          }
+        },
+        "audio.band|diffuse": {
+          "status": "fitted",
+          "source_groups_by_class": {
+            "0": 29,
+            "1": 33
+          }
+        }
+      }
+    }
+  },
+  "new_model_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Local tendencies use the internal0.5 readout under a50:50 reference prior; no customer threshold or accuracy guarantee. Overlapping windows, full/band views and reused nuisance parents are correlated, not independent trials. This review checks retained source coordinates/truth commitments and scalar replay, not independent waveforms or publisher authenticity."
+}

@@ -1,0 +1,42 @@
+{
+  "specialist_cal": {
+    "schema": "chipmunk.specialist-local-resource-profile/3",
+    "module": "scripts.run_audio_specialists_v15",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 3085631488,
+    "sample_errors": 0,
+    "duration_s": 2948.3429607090075,
+    "seconds_limit": 3600
+  },
+  "fusion_fit": {
+    "schema": "chipmunk.specialist-local-resource-profile/3",
+    "module": "scripts.run_audio_specialists_v15",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 3088351232,
+    "sample_errors": 1,
+    "duration_s": 2916.8478947919793,
+    "seconds_limit": 3600
+  },
+  "fusion_cal": {
+    "schema": "chipmunk.specialist-local-resource-profile/3",
+    "module": "scripts.run_audio_specialists_v15",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 3093413888,
+    "sample_errors": 2,
+    "duration_s": 2919.7891754170414,
+    "seconds_limit": 3600
+  },
+  "confirmation": {
+    "schema": "chipmunk.specialist-local-resource-profile/3",
+    "module": "scripts.run_audio_specialists_v15",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 3141238784,
+    "sample_errors": 0,
+    "duration_s": 2828.6474671670003,
+    "seconds_limit": 3600
+  }
+}

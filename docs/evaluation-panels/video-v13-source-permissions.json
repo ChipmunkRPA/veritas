@@ -1,0 +1,65 @@
+{
+  "schema": "chipmunk.video-source-permission-review/13",
+  "candidates": [
+    {
+      "repository": "Ahsanz/DeMamba-GenVideo100K",
+      "revision": "08664b1ea90a1de2bbc1f9a77e3ba0dd1dd4846e",
+      "weight_card_license": "apache-2.0",
+      "card_sha256": "a522f68fa52dc8dbc12b0fa585846e8f5378823beb0dadd52f5b9eee90ae56b6",
+      "card_url": "https://huggingface.co/Ahsanz/DeMamba-GenVideo100K/blob/08664b1ea90a1de2bbc1f9a77e3ba0dd1dd4846e/README.md",
+      "decision": "research_preflight_only_no_predictive_result",
+      "weights_acquired": true
+    },
+    {
+      "repository": "mertkayacs/xdfdet",
+      "revision": "2ca840b3b1faad541c6a15c03dbe8f3cc2052c69",
+      "weight_card_license": "cc-by-nc-4.0",
+      "card_sha256": "ebba841b7a0f0eef29f98570204d498602a1578f31694ab09625e40e9418b791",
+      "card_url": "https://huggingface.co/mertkayacs/xdfdet/blob/2ca840b3b1faad541c6a15c03dbe8f3cc2052c69/README.md",
+      "decision": "exclude_under_commercial_policy",
+      "weights_acquired": false
+    }
+  ],
+  "permitted_candidate_upstreams": [
+    {
+      "name": "XCLIP-README.md",
+      "url": "https://huggingface.co/microsoft/xclip-base-patch16/resolve/d6184e3fd8780d04c85d0f1eabe5f94bf44d98f6/README.md",
+      "bytes": 2728,
+      "sha256": "7e49123d064919c3f64125331915af2ef61691c9e14284e984b1cc1e5e93a92f"
+    },
+    {
+      "name": "DeMamba-LICENSE",
+      "url": "https://raw.githubusercontent.com/chenhaoxing/DeMamba/646db285f4b473b2678d9a9eeb836f781459fa99/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "name": "Mamba-LICENSE",
+      "url": "https://raw.githubusercontent.com/alxndrTL/mamba.py/5c4136c2c28bc10d5d6655aa81b7a60051b50f00/LICENSE",
+      "bytes": 1069,
+      "sha256": "011235acc8c9b140ed6013f9b855e82d24c855dbe7f26c4632ab9c9b969add37"
+    },
+    {
+      "name": "VideoX-LICENSE",
+      "url": "https://raw.githubusercontent.com/microsoft/VideoX/1744b2159c3d11694f94dab4fcde8660c685e79a/LICENSE",
+      "bytes": 1267,
+      "sha256": "5c47310aaa4b66be539a2a85975ea02a900a83083d424b5f3e854931538890c1"
+    },
+    {
+      "name": "upstream-DeMamba.py",
+      "url": "https://raw.githubusercontent.com/chenhaoxing/DeMamba/646db285f4b473b2678d9a9eeb836f781459fa99/models/DeMamba.py",
+      "bytes": 6058,
+      "sha256": "3e86a0a0b9bcf6d337018318439c78b3d1cfaa729a9417af8872318d6a95eed8"
+    },
+    {
+      "name": "upstream-mamba_base.py",
+      "url": "https://raw.githubusercontent.com/chenhaoxing/DeMamba/646db285f4b473b2678d9a9eeb836f781459fa99/models/mamba_base.py",
+      "bytes": 12240,
+      "sha256": "7678dafe18323742a0792525efadcff02fe173bd53113d4e25c92f174c7cb4a9"
+    }
+  ],
+  "baseline_head_only_mit_not_accepted": true,
+  "joint_candidate_permission_followup": "av-v12-permission-followup.json",
+  "trained_data_rights_independently_verified": false,
+  "outside_reviewers": 0
+}

@@ -79,6 +79,15 @@ with the commit, runtime, failure and receipt; do not silently relax comparison
 tolerances or change the original fitted objects. Cross-platform exact refits
 have not been demonstrated.
 
+A [GitHub-hosted workflow](../.github/workflows/audio-public-replay.yml) now
+defines two separate Linux checks: complete arithmetic replay and strict exact
+refitting. Both use the same pinned numerical versions and require the absence
+of app/neural dependencies. The workflow has read-only repository permissions,
+uses pinned setup actions, retains failed checks and prints completed receipts.
+Its execution result must be inspected before claiming external-host parity;
+adding the workflow does not establish that it passed. It is automated
+reproduction by our team, not outside human review or fresh predictive testing.
+
 The reproduced result still rejects both candidates. No arm is selected for
 fresh confirmation, and the current service is unchanged. All 1,080 reserved
 confirmation inputs remain unscored. Derived speech features retain their

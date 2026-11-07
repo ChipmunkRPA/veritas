@@ -1,6 +1,16 @@
-# Audio-visual candidate: resolve loading and time axes before evaluation
+# Audio-visual candidate: excluded after dependency review
 
-The publisher supplies a commercially usable MIT declaration for
+**Permission follow-up: exclude this candidate from the commercial comparison.**
+Its configuration requires `MCG-NJU/videomae-base`, whose
+[pinned weight card](https://huggingface.co/MCG-NJU/videomae-base/blob/dc740ceda42fce44faed2ea03c6d447db72f6af9/README.md)
+declares CC-BY-NC-4.0. The head's MIT tag does not replace that restriction.
+The [follow-up receipt](evaluation-panels/av-v12-permission-followup.json) binds
+the configuration, declaration and original structural review. Three public
+checks for the historical training revision also returned 404; equivalence has
+not been established. No complete candidate/backbone weights were acquired and
+no recording was scored. The original structural record below is retained.
+
+The publisher supplies an MIT declaration for
 [DAVID-Net's code](https://github.com/MIHMahmudEli/david-net-av-v2/tree/bc911636a11a42fd0291bc31a5f092e1dd3dc811)
 and [weight card](https://huggingface.co/MIHMahmudEli/david-net-av-v2/blob/a071972e6b9325da99a0d4ec2adce35a2446215b/README.md).
 It is worth inspecting because it separates audio, picture and joint outputs.
@@ -91,9 +101,10 @@ header. Review uses those local files and PyTorch; it performs no network
 requests or source-media inference. Existing sources are verified before reuse,
 and existing reports are never overwritten.
 
-Next establish complete weight/backbone lineage, implement a strict research
-adapter with decoded picture/audio clocks, and freeze the complete comparison
-before any source scoring. Retain all four picture/audio authenticity
+This candidate cannot proceed under the current commercial-use requirement.
+A different permitted method needs complete weight/backbone lineage, a strict
+research adapter with decoded picture/audio clocks, and a complete comparison
+frozen before any source scoring. Retain all four picture/audio authenticity
 combinations, ordinary edits, false flags, missed locations and inconclusive
 results. A passing development result would still need fresh confirmation,
 own calibration and evidence/export/prepaid-flow verification. The current audio

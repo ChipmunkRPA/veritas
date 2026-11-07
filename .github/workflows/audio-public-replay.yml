@@ -1,0 +1,66 @@
+name: Public audio reproduction
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/audio-public-replay.yml
+      - backend/requirements-audio-public-review.txt
+      - backend/scripts/*audio*.py
+      - docs/evaluation-panels/audio-v13-*
+      - docs/evaluation-panels/audio-v9-*
+      - docs/evaluation-panels/audio-v8-*
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-audio-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  numerical-review:
+    name: Linux ${{ matrix.mode }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [arithmetic, exact-refit]
+    env:
+      OMP_NUM_THREADS: "4"
+      OPENBLAS_NUM_THREADS: "4"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.6"
+      - name: Install numerical libraries only
+        run: python -m pip install --isolated --no-cache-dir -r backend/requirements-audio-public-review.txt
+      - name: Check the numerical environment
+        run: |
+          python - <<'PY'
+          import importlib.metadata, importlib.util, json, platform
+          packages = ("numpy", "scipy", "scikit-learn", "joblib", "narwhals", "threadpoolctl", "cloudpickle")
+          print(json.dumps({"python": platform.python_version(), "platform": platform.platform(), "versions": {n: importlib.metadata.version(n) for n in packages}}))
+          for name in ("torch", "transformers", "fastapi", "cv2"):
+              assert importlib.util.find_spec(name) is None, name
+          PY
+      - name: Reconstruct all public outcomes
+        if: matrix.mode == 'arithmetic'
+        run: python backend/scripts/review_audio_public_portable_v13.py docs/evaluation-panels/audio-v13-development-review.json.gz "$RUNNER_TEMP/audio-v13-review.json"
+      - name: Reconstruct outcomes and require exact fitting objects
+        if: matrix.mode == 'exact-refit'
+        run: python backend/scripts/review_audio_public_portable_v13.py docs/evaluation-panels/audio-v13-development-review.json.gz "$RUNNER_TEMP/audio-v13-review.json" --refit
+      - name: Show completed receipt or explicit failure
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/audio-v13-review.json" ]; then
+            cat "$RUNNER_TEMP/audio-v13-review.json"
+          else
+            echo "No completed review receipt. Inspect the failed step; no checks were relaxed."
+          fi

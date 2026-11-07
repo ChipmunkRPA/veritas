@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.av-candidate-permission-followup/12",
+  "prior_preflight_commit": "906f31f942f8c9d09a48341546bda9aa7227bfdc",
+  "prior_preflight_receipt_sha256": "cfa2be7afcdea4ab7682d2ba7ab96374546152877e1e5b0369b4862a49d8e7f4",
+  "candidate": "MIHMahmudEli/david-net-av-v2",
+  "candidate_revision": "a071972e6b9325da99a0d4ec2adce35a2446215b",
+  "candidate_config_sha256": "94bf7388c72c51977ce53023510880cba34f78c8bbf5ebac3c4e29deb1c86ed6",
+  "candidate_weight_card_declares": "mit",
+  "required_visual_backbone": {
+    "repository": "MCG-NJU/videomae-base",
+    "revision": "dc740ceda42fce44faed2ea03c6d447db72f6af9",
+    "license_declared": "cc-by-nc-4.0",
+    "card_sha256": "1cfd632ad35d864085baeb8cc55168ee1b59592a3a92221c3f7d405374bd0376",
+    "card_url": "https://huggingface.co/MCG-NJU/videomae-base/blob/dc740ceda42fce44faed2ea03c6d447db72f6af9/README.md"
+  },
+  "commercial_policy_eligible": false,
+  "decision": "exclude_candidate_before_weight_or_source_inference",
+  "reason": "Required visual backbone explicitly declares non-commercial terms; the head MIT tag does not replace those terms.",
+  "candidate_full_weights_acquired": false,
+  "new_backbone_weights_acquired": false,
+  "candidate_media_inference_performed": false,
+  "historical_revision_public_checks": [
+    {
+      "repository": "MIHMahmudEli/Thesis",
+      "revision": "6793d730aa734433bc3c7bc9ff4f89e0b5dc40d1",
+      "endpoint": "commit_api",
+      "http_status": 404
+    },
+    {
+      "repository": "MIHMahmudEli/Thesis",
+      "revision": "6793d730aa734433bc3c7bc9ff4f89e0b5dc40d1",
+      "endpoint": "raw_model",
+      "http_status": 404
+    },
+    {
+      "repository": "MIHMahmudEli/Thesis",
+      "revision": "6793d730aa734433bc3c7bc9ff4f89e0b5dc40d1",
+      "endpoint": "raw_encoders",
+      "http_status": 404
+    }
+  ],
+  "historical_revision_interpretation": "The three public unauthenticated endpoints were unavailable; no private access attempted and no historical-source equivalence established.",
+  "stock_api_adopted": false,
+  "serving_changed": false,
+  "outside_reviewers": 0
+}

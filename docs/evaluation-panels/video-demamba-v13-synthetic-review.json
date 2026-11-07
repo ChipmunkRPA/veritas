@@ -1,0 +1,140 @@
+{
+  "schema": "chipmunk.demamba-synthetic-compatibility/13",
+  "passed": true,
+  "repository": "Ahsanz/DeMamba-GenVideo100K",
+  "revision": "08664b1ea90a1de2bbc1f9a77e3ba0dd1dd4846e",
+  "weight_sha256": "f89897c72b595aa85a524e59083919cebb0b92161d2a694a2cbffbdd8456ce17",
+  "reviewer_sha256": "4effcd01b240bcf444dbd421a1070ea1138190ab4654c1a0685009ce6535bd18",
+  "assets_sha256": {
+    "README.md": "a522f68fa52dc8dbc12b0fa585846e8f5378823beb0dadd52f5b9eee90ae56b6",
+    "eval_demamba_standalone.py": "ffcb27191451e2a901720b9599315a6bd261a8b3261ffbeceafd504e9cee4fa6",
+    "XCLIP-README.md": "7e49123d064919c3f64125331915af2ef61691c9e14284e984b1cc1e5e93a92f",
+    "DeMamba-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "Mamba-LICENSE": "011235acc8c9b140ed6013f9b855e82d24c855dbe7f26c4632ab9c9b969add37",
+    "VideoX-LICENSE": "5c47310aaa4b66be539a2a85975ea02a900a83083d424b5f3e854931538890c1"
+  },
+  "loaded": {
+    "epoch": 15,
+    "tensors": 366,
+    "parameters": 125710849,
+    "unsafe_globals": [],
+    "strict_state_load": true,
+    "renamed_tensor_prefixes": 366,
+    "tensor_name_mapping_sha256": "2e2dffb6a5a04fcfb86bd2a535cf28a3f760c00078aebc5643362f1bff30a544",
+    "constant_buffer_materialization": {
+      "name": "encoder.embeddings.position_ids",
+      "shape": [
+        1,
+        197
+      ],
+      "dtype": "int64",
+      "rule": "Exact CPU constructor constant arange197; not a trained tensor or missing-state fallback",
+      "sha256": "c2840e3020bfdac59cb5665333b43529c2be5b7026b53c39f0ee1df68ad7afa3"
+    },
+    "vision_config": {
+      "hidden_size": 768,
+      "intermediate_size": 3072,
+      "num_hidden_layers": 12,
+      "num_attention_heads": 12,
+      "mit_hidden_size": 512,
+      "mit_intermediate_size": 2048,
+      "mit_num_hidden_layers": 1,
+      "mit_num_attention_heads": 8,
+      "image_size": 224,
+      "patch_size": 16,
+      "num_frames": 8,
+      "hidden_act": "quick_gelu",
+      "layer_norm_eps": 1e-05,
+      "attention_dropout": 0.0,
+      "dropout": 0.0,
+      "drop_path_rate": 0.0
+    },
+    "attention_implementation": "eager",
+    "transformer_source_sha256": "26f7a2b3a26ca88af35e5d6795762853839ef372d1c1b07e7297dc0ac81192ee"
+  },
+  "recurrence_tolerances": {
+    "absolute": 1e-05,
+    "relative": 1e-05
+  },
+  "graph_tolerances": {
+    "absolute": 0.0001,
+    "relative": 1e-05
+  },
+  "scan_cases": [
+    {
+      "length": 1,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "length": 2,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "length": 3,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "length": 4,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "length": 5,
+      "max_absolute_difference": 2.384185791015625e-07
+    },
+    {
+      "length": 8,
+      "max_absolute_difference": 1.1920928955078125e-07
+    },
+    {
+      "length": 9,
+      "max_absolute_difference": 2.384185791015625e-07
+    },
+    {
+      "length": 16,
+      "max_absolute_difference": 4.76837158203125e-07
+    },
+    {
+      "length": 31,
+      "max_absolute_difference": 4.76837158203125e-07
+    }
+  ],
+  "synthetic_cases": [
+    {
+      "kind": "zeros",
+      "input_sha256": "b9798651c5da488d2280ffca2a63b5d73ae46756ee01b2533071831747b5f9c1",
+      "logit": 10.503480911254883,
+      "repeat_exact": true,
+      "direct_recurrence_max_difference": 9.5367431640625e-07,
+      "runtime_s": 2.4221
+    },
+    {
+      "kind": "seeded_noise",
+      "input_sha256": "43afea1a944f2ac20943f75ad66e822f8e5e524284b8af81afc23849ec7f5272",
+      "logit": 7.2567057609558105,
+      "repeat_exact": true,
+      "direct_recurrence_max_difference": 0.0,
+      "runtime_s": 2.2735
+    },
+    {
+      "kind": "temporal_ramp",
+      "input_sha256": "68acd5f08040776bbc444880675e0872cd4ba61a00721e3eff772119f1de9c89",
+      "logit": 8.780806541442871,
+      "repeat_exact": true,
+      "direct_recurrence_max_difference": 0.0,
+      "runtime_s": 2.2541
+    }
+  ],
+  "reference_scope": "Independent serial recurrence; vision library, trained tensors and remaining graph shared. Channel-axis reversal from publisher source is preserved. This does not prove historical training-runtime equivalence.",
+  "runtime": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "device": "cpu",
+    "threads": 2
+  },
+  "source_recordings_scored": 0,
+  "classifier_fitted": false,
+  "calibration_fitted": false,
+  "predictive_accuracy_validated": false,
+  "serving_admitted": false,
+  "outside_reviewers": 0
+}

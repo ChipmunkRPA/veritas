@@ -90,3 +90,26 @@ media, text or model weights. The [local replay receipt](evaluation-panels/speci
 records the actual local run. Linux reproduction is pending at publication;
 only a later actual job receipt can establish that result. Neither numerical
 replay is outside human review or fresh detection validation.
+
+The [initial Linux workflow](https://github.com/ChipmunkRPA/veritas/actions/runs/42413110055)
+failed before creating a job: an unquoted colon in the one-line dependency setup
+command made the workflow invalid YAML. No Linux computation or passing result
+is claimed for that run. The corrected CI wrapper preserves the original
+byte-frozen analysis snapshot at
+[fafafe8](https://github.com/ChipmunkRPA/veritas/commit/fafafe88ab8db2bdd72d4612227bb396ab09f8ad).
+It archives exactly55 public source/packet dependencies from that commit and
+executes the original numerical replay there, including its originally committed
+workflow bytes. The analysis implementation, parameters and original results are
+unchanged. Eight additional regressions cover archive source selection, path
+containment and parsing the corrected workflow. The actual local archived replay
+also passed with maximum numeric difference0.
+
+From a complete repository clone with the pinned numerical dependencies, replay
+the immutable study through the corrected external wrapper:
+
+```sh
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 python -m scripts.replay_frozen_source_tail_v1 /tmp/source-tail-review.json
+```
+
+Use a new output path for each attempt. This wrapper, rather than a direct refit
+against an updated working tree, preserves the original study's byte commitments.

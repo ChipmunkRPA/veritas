@@ -1,0 +1,39 @@
+{
+  "schema": "chipmunk.video-native-release-preflight/14",
+  "private_lock_sha256": "29da2f38c58193e3f8c2e74cea74a6edee9fb0b758e010a0a9b5806a580c1ea3",
+  "public_freeze_sha256": "6cd72f21b5d8ed46099c885e951b84f40545e620e66f8a2be4338d67ddb1724b",
+  "complete_lock_alterations": [
+    {
+      "alteration": "method",
+      "rejected": true
+    },
+    {
+      "alteration": "omitted_file",
+      "rejected": true
+    },
+    {
+      "alteration": "changed_file",
+      "rejected": true
+    },
+    {
+      "alteration": "code",
+      "rejected": true
+    },
+    {
+      "alteration": "prior_freeze",
+      "rejected": true
+    },
+    {
+      "alteration": "already_started",
+      "rejected": true
+    },
+    {
+      "alteration": "admitted",
+      "rejected": true
+    }
+  ],
+  "prior_local_preflight_strengthening": "Require complete exact set of five bound comparison/resource files; initial local lock retained, no native forwards or publication before correction.",
+  "native_forwards_started": false,
+  "passed": true,
+  "serving_admitted": false
+}

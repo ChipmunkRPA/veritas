@@ -1,0 +1,42 @@
+{
+  "python": "3.12.6",
+  "system_site_packages": false,
+  "numerical_versions": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.6.0",
+    "narwhals": "2.28.0",
+    "threadpoolctl": "3.8.0",
+    "cloudpickle": "3.1.2"
+  },
+  "forbidden_imports": [
+    "PIL",
+    "app",
+    "cv2",
+    "fastapi",
+    "matplotlib",
+    "torch",
+    "torchaudio",
+    "transformers"
+  ],
+  "original_training_modules_blocked": [
+    "mouth_probe_v6",
+    "mouth_temporal_v11",
+    "mouth_temporal_v12"
+  ],
+  "completed_actual_public_refit": true,
+  "new_neural_forwards": 0,
+  "outside_reviewers": 0,
+  "forbidden_packages_absent": {
+    "torch": true,
+    "torchaudio": true,
+    "transformers": true,
+    "cv2": true,
+    "fastapi": true,
+    "PIL": true,
+    "matplotlib": true
+  },
+  "pyvenv_configuration_checked": true,
+  "include_system_site_packages": false
+}

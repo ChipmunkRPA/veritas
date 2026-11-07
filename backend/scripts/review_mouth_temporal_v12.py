@@ -132,16 +132,19 @@ def review(source_path, freeze_path, packet_path, output, refit=False):
         'complete_export_correspondence': result['native_estimator_export_windows'] == 6373 and result['max_native_export_margin_difference'] <= 1e-10}
     require(result['gates'] == gates and result['passes'] is all(gates.values()) and result['deployment_eligible'] is False,
             'Unchanged requirements/admission differ')
+    refit_code_sha256 = None
     if refit:
-        from scripts.mouth_temporal_v12 import fit
-        _, rebuilt = fit(source['fitting_windows'])
+        from scripts import refit_mouth_public_v12 as portable_refit
+        rebuilt = portable_refit.reconstruct(source, freeze['lock']['rules']['method'], margin)
         require(all(head[k] == v for k, v in rebuilt.items()), 'Complete fitting-only JSON tree refit differs')
+        refit_code_sha256 = digest(Path(portable_refit.__file__))
     receipt = {'schema': 'chipmunk.mouth-histogram-public-review/12', 'passed': True, 'packet_sha256': digest(packet_path),
         'source_packet_sha256': SOURCE_SHA, 'public_freeze_sha256': FREEZE_SHA, 'reviewer_sha256': digest(Path(__file__)),
+        'refit_code_sha256': refit_code_sha256,
         'development_cases': 88, 'trees': 100, 'point_windows': 492, 'development_windows': sum(len(r['windows']) for r in development),
         'fitting_only_exact_refit_performed': refit, 'gates': gates, 'candidate_passes': all(gates.values()),
         'outside_reviewers': 0, 'serving_admitted': False,
-        'scope': 'Separate scalar raw-tree traversal, point rule, complete ranking/time/outcomes/counts/requirements; prior source arithmetic shared. Stored spatial IoU and estimator/export audit assertions bound, not independently rerun. Optional exact refit shares declared learner. No native decode/neural forward, fresh source test or outside human review.'}
+        'scope': 'Separate scalar raw-tree traversal, point rule, complete ranking/time/outcomes/counts/requirements; prior source arithmetic shared. Stored spatial IoU and estimator/export audit assertions bound, not independently rerun. Optional exact refit separately rebuilds input weights/matrix/JSON export with shared declared scikit-learn learner; no original training module or neural dependencies. No native decode/neural forward, fresh source test or outside human review.'}
     with output.open('x') as stream:
         json.dump(receipt, stream, indent=2, allow_nan=False)
         stream.write('\n')

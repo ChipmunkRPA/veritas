@@ -84,3 +84,8 @@ checks do not establish detection quality outside the frozen consumed panel.
 Better discrimination, unused actors/new sentences, independent testing,
 customer evidence/export/prepaid-flow checks and separate confidence validation
 remain necessary before adoption. GCP remains last.
+
+The [portable public review](mouth-public-portable-review-v12.md) now supports
+both standard-library arithmetic and a numerical-only exact refit without
+the original training/decoder/neural dependency chain. Its new receipts and
+planned Linux workflow do not revise this rejected result.

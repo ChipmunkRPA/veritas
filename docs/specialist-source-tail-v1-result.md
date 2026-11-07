@@ -87,9 +87,13 @@ The [public package](evaluation-panels/specialist-source-tail-v1-release.json)
 contains aggregate results, fitted parameters, points, source commitments and
 replay instructions. It reuses earlier public scalar packets and includes no raw
 media, text or model weights. The [local replay receipt](evaluation-panels/specialist-source-tail-v1-local-numerical-reproduction.json)
-records the actual local run. Linux reproduction is pending at publication;
-only a later actual job receipt can establish that result. Neither numerical
-replay is outside human review or fresh detection validation.
+records the actual local run. The [actual corrected Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42413673942)
+passed: all eight arms retained exactly the same counts and decisions, with
+maximum numeric difference3.3306690738754696e-16, below the unchanged1e-6 limit.
+Reserved-response parameter/point invariance passed for all eight arms. The
+[decoded job receipt](evaluation-panels/specialist-source-tail-v1-linux-review.json)
+records the completed job's actual output. Neither numerical replay is outside
+human review or fresh detection validation.
 
 The [initial Linux workflow](https://github.com/ChipmunkRPA/veritas/actions/runs/42413110055)
 failed before creating a job: an unquoted colon in the one-line dependency setup
@@ -102,7 +106,8 @@ executes the original numerical replay there, including its originally committed
 workflow bytes. The analysis implementation, parameters and original results are
 unchanged. Eight additional regressions cover archive source selection, path
 containment and parsing the corrected workflow. The actual local archived replay
-also passed with maximum numeric difference0.
+also passed with maximum numeric difference0; its [actual receipt](evaluation-panels/specialist-source-tail-v1-local-frozen-archive-reproduction.json)
+records the same55 selected source files and immutable release commitment.
 
 From a complete repository clone with the pinned numerical dependencies, replay
 the immutable study through the corrected external wrapper:

@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.specialist-source-tail-actual-linux-review/1",
+  "repository": "ChipmunkRPA/veritas",
+  "workflow_head_sha": "a5a85c555741dbe1cd085a76d7fcca3d3a9c1ffa",
+  "run_id": 42413673942,
+  "job_id": 128527017529,
+  "run_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42413673942",
+  "job_conclusion": "success",
+  "observed_from": "Decoded completed job logs",
+  "actual_job_receipt": {
+    "schema": "chipmunk.specialist-source-tail-frozen-archive-replay/1",
+    "science_commit": "fafafe88ab8db2bdd72d4612227bb396ab09f8ad",
+    "frozen_release_sha256": "22ff0ccb0086a6650e35b70d1829ead66c6c2403377f048785d0348a24c60b5a",
+    "selected_repository_files": 55,
+    "archive_sha256": "fc3edeba9480aa281caf916837cbf7c4c5a64790e9889e0847e7e91c0d16c496",
+    "original_numerical_receipt_sha256": "68259d2a157ea6fe05e3dcc8e3ae1cb08ca4f33f2fe22b31de2d7e4db2a83512",
+    "numerical": {
+      "schema": "chipmunk.specialist-source-tail-numerical-reproduction/1",
+      "studies": 2,
+      "arms": 8,
+      "maximum_absolute_numeric_difference": 3.3306690738754696e-16,
+      "absolute_numerical_limit": 0.000001,
+      "counts_and_decisions_exact": true,
+      "reserved_response_parameter_and_point_invariance_arms": 8,
+      "new_neural_forwards": 0,
+      "raw_media_or_weights_loaded": false,
+      "serving_admitted": false,
+      "scope": "Numerical refit of consumed-source development scalars only; not native inference, fresh quality or outside human review."
+    },
+    "frozen_study_source_modified": false,
+    "raw_media_or_weights_loaded": false,
+    "serving_admitted": false,
+    "scope": "Corrected external wrapper executes the original immutable consumed-source numerical study; no fresh detection or outside human review."
+  },
+  "outside_human_review": false,
+  "serving_admitted": false
+}

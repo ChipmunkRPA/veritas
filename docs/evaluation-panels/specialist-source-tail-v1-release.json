@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.specialist-source-tail-release/1",
+  "freeze": "docs/evaluation-panels/specialist-source-tail-v1-freeze.json",
+  "expected": "docs/evaluation-panels/specialist-source-tail-v1-result.json",
+  "absolute_numerical_limit": 1e-06,
+  "files_sha256": {
+    ".github/workflows/specialist-source-tail-v1-review.yml": "b185dcb68cb2a520e0ddf4638266b82cab1f5fd1f1228cb53a7e2b4368fd746a",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/scripts/reproduce_specialist_source_tail_v1.py": "aed9d3d915bf5044e72f16f9aa1230bbe651cdc7871acd51b5917f06ba749d51",
+    "backend/scripts/reproduce_writing_specialists_v5.py": "0f4c604fbd4d39f42ec477085348d023d4f890c86555fe62e065e2f89d511b42",
+    "backend/scripts/specialist_source_tail_v1.py": "e611012924ee99eb022d5c8a65b84458b6b1a51459367abf8f2622cd59a41a95",
+    "backend/tests/test_specialist_source_tail_v1.py": "19e5a1fa3fc4637b361bb71d4662e58af3b5f3e0c2518e604ba1af49afe03ff7",
+    "docs/evaluation-panels/image-specialists-v10-release.json": "bddc2e44c6cb29caf7d9900f5e102d21ec2749a82d1cff1e69a88c8d8a64baee",
+    "docs/evaluation-panels/specialist-source-tail-v1-artifacts.json": "b5e867d129cb6303d79491551fff32c802294a2bf53397a235a23f9f09c23529",
+    "docs/evaluation-panels/specialist-source-tail-v1-fit-complete.json": "a706113112abab7b1e59e3830342c0ee93d7390144c5e72e67564cb1f4921f7b",
+    "docs/evaluation-panels/specialist-source-tail-v1-freeze.json": "352348fadc490d74de9c72a149efe8ec128cdce0c9ab3203971ce61fdf011c94",
+    "docs/evaluation-panels/specialist-source-tail-v1-result.json": "9315e24f8e2499e3bfa97c98ee8163e8f6b3b6a3ebb73f3a5893d0550b5f4137",
+    "docs/evaluation-panels/writing-specialists-v5-release.json": "a70a59c5db577f8c0c5dba45e29e54b33d5b122663c47ee306b79cc86aa60f4c",
+    "docs/specialist-source-tail-v1-protocol.md": "b63b406886d3304966128ea809da726a5e6a673721073f5c395fe83d9381314a"
+  },
+  "new_neural_forwards": 0,
+  "source_freshness": "Consumed-source post-hoc development. Frozen before this analysis; not fresh or outside validation.",
+  "serving_admitted": false
+}

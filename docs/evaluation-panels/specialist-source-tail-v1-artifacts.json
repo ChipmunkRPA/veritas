@@ -1,0 +1,1304 @@
+{
+  "image-specialists-v10": {
+    "condition-image": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "native",
+                "jpeg75"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.whole",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "28332deaae83276b4d5244025bcef711085dc692c2659c96988777dbeec4dfca",
+              "target": "image.ai_edit"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "d850ef26b04222368892c1d7e2224a3ff7b31123997019f510e9d54be0e6308f",
+        "training_sha256": "373f23b9e0b1ec3f030bd9675a39d0d517d59b4c571a60074870fe853cb875ae",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "image.whole|native": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.1464088084303815
+            ],
+            "scale": [
+              0.33639454586114914
+            ],
+            "coefficients": [
+              0.8554752200354674
+            ],
+            "intercept": 0.08005865232454701,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "image.whole|jpeg75": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.0004764638602675102
+            ],
+            "scale": [
+              0.0008135168101343854
+            ],
+            "coefficients": [
+              0.0
+            ],
+            "intercept": 0.0,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "image|splice": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                0.20033254233042538
+              ],
+              "scale": [
+                0.6235478921124783
+              ],
+              "coefficients": [
+                0.5907399304552281
+              ],
+              "intercept": 0.03837061927996279,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 240,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                -0.034659650508937094
+              ],
+              "scale": [
+                0.47848171435408615
+              ],
+              "coefficients": [
+                0.9539597995093896
+              ],
+              "intercept": 0.11710886233115148,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 240,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "698b3f35f0024d0be75dd9ad4c7f4554e989b42516967935f397af75b60edaaf"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.4711117751810332,
+        "genuine_groups_total": 60,
+        "genuine_groups_with_assessed_files": 60,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 55,
+        "calibration_genuine_groups_flagged": 0
+      }
+    },
+    "condition-regions": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "native",
+                "jpeg75"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.whole",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "28332deaae83276b4d5244025bcef711085dc692c2659c96988777dbeec4dfca",
+              "target": "image.ai_edit"
+            },
+            {
+              "contexts": [
+                "native",
+                "jpeg75"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.region",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "28332deaae83276b4d5244025bcef711085dc692c2659c96988777dbeec4dfca",
+              "target": "image.ai_edit"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "b1d6ba9f8325bce16656fc2391776b9772799ee07550d776863cc43ce5d9e7f6",
+        "training_sha256": "153c5e1fe7c2ad9cbc4d7dfe4e119085669f8254aa294841a8a3a831623c32a5",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "image.whole|native": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.1464088084303815
+            ],
+            "scale": [
+              0.33639454586114914
+            ],
+            "coefficients": [
+              0.8554752200354674
+            ],
+            "intercept": 0.08005865232454701,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "image.whole|jpeg75": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.0004764638602675102
+            ],
+            "scale": [
+              0.0008135168101343854
+            ],
+            "coefficients": [
+              0.0
+            ],
+            "intercept": 0.0,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "image.region|native": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.04144952351189432
+            ],
+            "scale": [
+              0.08747400361497887
+            ],
+            "coefficients": [
+              2.346238417534568
+            ],
+            "intercept": 0.47562108643828166,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "image.region|jpeg75": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.0018370162413692426
+            ],
+            "scale": [
+              0.010636550684507445
+            ],
+            "coefficients": [
+              0.14181411166224472
+            ],
+            "intercept": 0.0032326367334173842,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "image|splice": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                0.8853263997618169
+              ],
+              "scale": [
+                2.12717362931253
+              ],
+              "coefficients": [
+                0.7408752298129666
+              ],
+              "intercept": 0.05607223203133004,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 240,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                -0.04272566904800276
+              ],
+              "scale": [
+                0.5746614628700599
+              ],
+              "coefficients": [
+                0.8141230474986628
+              ],
+              "intercept": 0.07552074222249407,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 240,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "6aa5b509ca7533f36c10919eca188867d9760c2892f19133cf51ec61dae7a239"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.6507869310333925,
+        "genuine_groups_total": 60,
+        "genuine_groups_with_assessed_files": 60,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 55,
+        "calibration_genuine_groups_flagged": 5
+      }
+    },
+    "global-image": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.whole",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "71cd971f497f16036aeb8845d771fffe53ed63c98932083bac10e64d3bb687f8",
+              "target": "image.ai_edit"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "1c77185a2c833bf89e80291aabc9f861bf9a6877f6a700176095f6c98c663a0f",
+        "training_sha256": "51d7a1f3f9bab37b3c03cc3be66045dba1a0618df733444e082c9575c6f3ade7",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "image.whole|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.0734426361453245
+            ],
+            "scale": [
+              0.24880723149719175
+            ],
+            "coefficients": [
+              0.5867611108356515
+            ],
+            "intercept": 0.039927754040878526,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "image|splice": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                0.24176756244400727
+              ],
+              "scale": [
+                0.6665507551116152
+              ],
+              "coefficients": [
+                0.46751764309405147
+              ],
+              "intercept": 0.01874575906108083,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 240,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                -0.05873141765851563
+              ],
+              "scale": [
+                0.3560461816781158
+              ],
+              "coefficients": [
+                0.9689771889569299
+              ],
+              "intercept": 0.12049874591906207,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 240,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "73181b6ce15be1464c016cba36fcdb40cd4586bdff0f2235090f2b3ad55be211"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.46750937672145443,
+        "genuine_groups_total": 60,
+        "genuine_groups_with_assessed_files": 60,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 55,
+        "calibration_genuine_groups_flagged": 2
+      }
+    },
+    "global-regions": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.whole",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "71cd971f497f16036aeb8845d771fffe53ed63c98932083bac10e64d3bb687f8",
+              "target": "image.ai_edit"
+            },
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "splice",
+              "higher_means_ai": true,
+              "id": "image.region",
+              "modality": "image",
+              "producer": {
+                "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+                "implementation_sha256": "5af0565efd0e6b2b2794547ae05a6492420fe7e525298b963872b9b6f287b301",
+                "kind": "model",
+                "native_receipt_sha256": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+                "weight_sha256": [
+                  "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "71cd971f497f16036aeb8845d771fffe53ed63c98932083bac10e64d3bb687f8",
+              "target": "image.ai_edit"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "d209a8d17aedefe26d4bba6b05aad705b1128c9120fb82842d33112fae1ea60c",
+        "training_sha256": "0adac8c56fddf196463975c6666a98ec3013b60a383624a0339c713b0c69542d",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "image.whole|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.0734426361453245
+            ],
+            "scale": [
+              0.24880723149719175
+            ],
+            "coefficients": [
+              0.5867611108356515
+            ],
+            "intercept": 0.039927754040878526,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "image.region|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 60,
+              "1": 60
+            },
+            "center": [
+              0.021643269876631795
+            ],
+            "scale": [
+              0.0653812392243606
+            ],
+            "coefficients": [
+              1.373540308744428
+            ],
+            "intercept": 0.18363999292016014,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "image|splice": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                0.819733454294792
+              ],
+              "scale": [
+                1.6689026179545803
+              ],
+              "coefficients": [
+                0.5580474767320981
+              ],
+              "intercept": 0.028149326106936993,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 240,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 60,
+                "1": 60
+              },
+              "center": [
+                -0.06496688785638957
+              ],
+              "scale": [
+                0.4534182441941155
+              ],
+              "coefficients": [
+                0.8092360271493091
+              ],
+              "intercept": 0.0729605605756623,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 240,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "af7a520358e76812b2d04bf890b50884a45797eb434dec980d02ae89260579dd"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.6648379851396441,
+        "genuine_groups_total": 60,
+        "genuine_groups_with_assessed_files": 60,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 55,
+        "calibration_genuine_groups_flagged": 5
+      }
+    }
+  },
+  "writing-specialists-v5": {
+    "baseline-global": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "baseline",
+              "higher_means_ai": true,
+              "id": "writing.baseline",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+                "weight_sha256": [
+                  "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "4641f533a69f3bf15a979029fc76b4f4eb18806aca0b4ff33ad04ff873739e9e",
+              "target": "text.ai"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "64f9a51b12e8eefdab2ac34f92f556799959beb248635840a8effbbb36fc91ca",
+        "training_sha256": "8df7d1ab2054021ef8481ec4ccc8d0389ada4aedb5c2598af3c458fe968ec4cf",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "writing.baseline|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.6845918777398765
+            ],
+            "scale": [
+              0.4211087972932535
+            ],
+            "coefficients": [
+              1.6464594126998828
+            ],
+            "intercept": -0.24083467660795407,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "text|baseline": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                0.7237259348473877
+              ],
+              "scale": [
+                0.40587561945524653
+              ],
+              "coefficients": [
+                1.5624311080103523
+              ],
+              "intercept": -0.2597371663011429,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 128,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                -0.3050754090232991
+              ],
+              "scale": [
+                1.604543717013043
+              ],
+              "coefficients": [
+                2.8463423687748417
+              ],
+              "intercept": -0.9076781009255889,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 128,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "879e9cd33b34bba4891a969190f6cdb384e607422de7ba96476dad2f2dfdc1b2"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.7186492482075193,
+        "genuine_groups_total": 32,
+        "genuine_groups_with_assessed_files": 32,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 30,
+        "calibration_genuine_groups_flagged": 2
+      }
+    },
+    "baseline-context": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "short",
+                "long"
+              ],
+              "family": "baseline",
+              "higher_means_ai": true,
+              "id": "writing.baseline",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+                "weight_sha256": [
+                  "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "b1bffc9f82288ca85cd2e90d7fd0740752f1468b818a6be20f0fa0275705f5b6",
+              "target": "text.ai"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "3ddc1b0b34f55588aeff931cbb9e75a0ac611b3f73ae16cd3a65a6b02a51341a",
+        "training_sha256": "4ccc5634ea34cbe81beae07c7c26e286bbd44b0b1b9fe4839ae8ef1ab57cd98c",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "writing.baseline|short": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.655421482399106
+            ],
+            "scale": [
+              0.43308781396767876
+            ],
+            "coefficients": [
+              1.314987769175605
+            ],
+            "intercept": -0.11146088495208219,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "writing.baseline|long": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.713762273080647
+            ],
+            "scale": [
+              0.40669197161926446
+            ],
+            "coefficients": [
+              2.757629847944329
+            ],
+            "intercept": -0.8268905416638721,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "text|baseline": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                0.7644738459914824
+              ],
+              "scale": [
+                0.4517710587935374
+              ],
+              "coefficients": [
+                1.5922253012852785
+              ],
+              "intercept": -0.2471378268009024,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 128,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                -0.2609049335346263
+              ],
+              "scale": [
+                1.5923417387796006
+              ],
+              "coefficients": [
+                2.3484497409069864
+              ],
+              "intercept": -0.5815558381457707,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 128,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "0d51be48b379cfc89a1d0c884280a73189d41a3fa46ad007cfd4d393cdba8c92"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.7620380206401957,
+        "genuine_groups_total": 32,
+        "genuine_groups_with_assessed_files": 32,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 30,
+        "calibration_genuine_groups_flagged": 2
+      }
+    },
+    "combined-global": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "baseline",
+              "higher_means_ai": true,
+              "id": "writing.baseline",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+                "weight_sha256": [
+                  "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "4641f533a69f3bf15a979029fc76b4f4eb18806aca0b4ff33ad04ff873739e9e",
+              "target": "text.ai"
+            },
+            {
+              "contexts": [
+                "pooled"
+              ],
+              "family": "candidate",
+              "higher_means_ai": true,
+              "id": "writing.candidate",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "da23e40c2cdc8eebaaf0558a25932721d9c3753d3e044ddd5cc7b1ddf6eea823",
+                "weight_sha256": [
+                  "2ae8059c621795fc490353bbd920bc3672e6eaf8ad66ddb7c015b4ecb0129218"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "4641f533a69f3bf15a979029fc76b4f4eb18806aca0b4ff33ad04ff873739e9e",
+              "target": "text.ai"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "c3221ef61c829a33d6f5539868a72e3691cc87d2a21d2bf2d04f02732783e11c",
+        "training_sha256": "4c409a7ea1033e46ca976cc869876986fd4c4ee3012ce1e96d843b9070d870a4",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "writing.baseline|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.6845918777398765
+            ],
+            "scale": [
+              0.4211087972932535
+            ],
+            "coefficients": [
+              1.6464594126998828
+            ],
+            "intercept": -0.24083467660795407,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "writing.candidate|pooled": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.6187749876698945
+            ],
+            "scale": [
+              0.4207101962981726
+            ],
+            "coefficients": [
+              1.0070028380023957
+            ],
+            "intercept": -0.04156762599297973,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "text|baseline,candidate": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                0.7237259348473869,
+                0.5970040650468958
+              ],
+              "scale": [
+                0.40587561945524664,
+                0.32981906337140965
+              ],
+              "coefficients": [
+                1.4021975498296755,
+                0.5532146595629254
+              ],
+              "intercept": -0.23465111253748772,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 128,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                -0.345088668393007
+              ],
+              "scale": [
+                1.827063954527462
+              ],
+              "coefficients": [
+                2.922553030935768
+              ],
+              "intercept": -0.8114736912127174,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 128,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "aa4f17dc9426d5090ba4ae477920b93f89743b8a4a45625aad8d9399f991e78f"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.7485359273183773,
+        "genuine_groups_total": 32,
+        "genuine_groups_with_assessed_files": 32,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 30,
+        "calibration_genuine_groups_flagged": 2
+      }
+    },
+    "combined-context": {
+      "artifact": {
+        "schema": "chipmunk.specialist-calibration/2",
+        "policy": {
+          "specialists": [
+            {
+              "contexts": [
+                "short",
+                "long"
+              ],
+              "family": "baseline",
+              "higher_means_ai": true,
+              "id": "writing.baseline",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+                "weight_sha256": [
+                  "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "b1bffc9f82288ca85cd2e90d7fd0740752f1468b818a6be20f0fa0275705f5b6",
+              "target": "text.ai"
+            },
+            {
+              "contexts": [
+                "short",
+                "long"
+              ],
+              "family": "candidate",
+              "higher_means_ai": true,
+              "id": "writing.candidate",
+              "modality": "text",
+              "producer": {
+                "commercial_license_record_sha256": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+                "implementation_sha256": "8a5f7c34539f0bf2976097a8d8fc8d398bd072fb057e74c6c674c62b8d1d1ae9",
+                "kind": "model",
+                "native_receipt_sha256": "da23e40c2cdc8eebaaf0558a25932721d9c3753d3e044ddd5cc7b1ddf6eea823",
+                "weight_sha256": [
+                  "2ae8059c621795fc490353bbd920bc3672e6eaf8ad66ddb7c015b4ecb0129218"
+                ]
+              },
+              "raw_range": [
+                0.0,
+                1.0
+              ],
+              "routing_sha256": "b1bffc9f82288ca85cd2e90d7fd0740752f1468b818a6be20f0fa0275705f5b6",
+              "target": "text.ai"
+            }
+          ]
+        },
+        "feature_pooling": "positive_logit_max_per_dependency_family",
+        "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+        "packages": {
+          "numpy": "2.2.6",
+          "scipy": "1.18.1"
+        },
+        "plan_sha256": "d6b16fa0d1694d7a1c227b88c03fa711a4e63309d600c3e396676da15eaeb967",
+        "training_sha256": "1267311b4d98c7b8c5d5d47b07c3f8848845388621086932ded746c813477d7e",
+        "minimum_groups_per_class": 25,
+        "l2": 0.001,
+        "specialists": {
+          "writing.baseline|short": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.655421482399106
+            ],
+            "scale": [
+              0.43308781396767876
+            ],
+            "coefficients": [
+              1.314987769175605
+            ],
+            "intercept": -0.11146088495208219,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "writing.baseline|long": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.713762273080647
+            ],
+            "scale": [
+              0.40669197161926446
+            ],
+            "coefficients": [
+              2.757629847944329
+            ],
+            "intercept": -0.8268905416638721,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "writing.candidate|short": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.6750298331317026
+            ],
+            "scale": [
+              0.38983172463030624
+            ],
+            "coefficients": [
+              0.8896894992790041
+            ],
+            "intercept": -0.04200388306013783,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          },
+          "writing.candidate|long": {
+            "status": "fitted",
+            "source_groups_by_class": {
+              "0": 32,
+              "1": 32
+            },
+            "center": [
+              0.5625201422080863
+            ],
+            "scale": [
+              0.44237557542702444
+            ],
+            "coefficients": [
+              1.13832221827543
+            ],
+            "intercept": -0.0318487216691997,
+            "reference_prior": 0.5,
+            "source_count_target_smoothing": true
+          }
+        },
+        "combiners": {
+          "text|baseline,candidate": {
+            "response": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                0.7644738459914824,
+                0.6090743649325367
+              ],
+              "scale": [
+                0.4517710587935374,
+                0.3957377758663991
+              ],
+              "coefficients": [
+                1.4124275762514116,
+                0.6160625783829612
+              ],
+              "intercept": -0.21904870839779372,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "fitting_files": 128,
+            "fitting_unassessed": 0,
+            "calibration": {
+              "status": "fitted",
+              "source_groups_by_class": {
+                "0": 32,
+                "1": 32
+              },
+              "center": [
+                -0.23667628502206894
+              ],
+              "scale": [
+                1.8189106824444226
+              ],
+              "coefficients": [
+                2.696858647948449
+              ],
+              "intercept": -0.565637377298046,
+              "reference_prior": 0.5,
+              "source_count_target_smoothing": true
+            },
+            "calibration_files": 128,
+            "calibration_unassessed": 0
+          }
+        },
+        "serving_admitted": false,
+        "reference_prior": 0.5,
+        "sha256": "982500a33906425996c95c6f044516dbda0c40af296c008132cf1a73d4b68ec1"
+      },
+      "operating_point": {
+        "status": "fitted",
+        "threshold": 0.6948704101487334,
+        "genuine_groups_total": 32,
+        "genuine_groups_with_assessed_files": 32,
+        "genuine_groups_with_no_assessed_files": 0,
+        "unassessed_genuine_files": 0,
+        "scope": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+        "serving_admitted": false,
+        "upper_rank": 30,
+        "calibration_genuine_groups_flagged": 2
+      }
+    }
+  }
+}

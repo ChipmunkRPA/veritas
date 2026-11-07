@@ -30,6 +30,15 @@ These consumed-source pilots do not replace fresh, source-disjoint validation.
 No new specialist calibration contributes to customer confidence. The video
 source inventory is preparation, not a substitute for video model evaluation.
 
+A later, separately frozen genuine-source operating comparison reuses those
+image and passage scalars. It found one image development candidate: pooled
+regional calibration detects26/120 edits versus22/120 with the same10/120 false
+genuine flags. JPEG still finds only2/60 edits, and the whole-map reference has
+many flat boundary ties. Passage alternatives still lose too much detection.
+This qualifies a direct serving-baseline comparison and possible later fresh
+validation, not a customer rollout or a revision of the original diagnostic
+results. [Full operating comparison](specialist-source-tail-v1-result.md).
+
 ## Scope of the next real-data comparisons
 
 | Medium | Specialist evidence | Conditions selected before detection scores | Controls that must remain genuine |

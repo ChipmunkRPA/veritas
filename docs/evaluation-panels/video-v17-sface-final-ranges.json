@@ -1,0 +1,3008 @@
+{
+  "schema": "chipmunk.sface-public-final-ranges/17",
+  "public_panel_sha256": "4ccdfe8352a6df921243f5e2d83a63d6389a9480d2111db1007407ff3a58aff0",
+  "public_source_plan_sha256": "a826e166b0542ad3bf5fcf1de00c3f9958976a62351cb3c5fa55906220598da6",
+  "cases": [
+    {
+      "id": "rtfs-133-original_videos",
+      "group": "RTFS:00alq36jhjk",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "not_applicable",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-133-inswapper",
+      "group": "RTFS:00alq36jhjk",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.625,
+        4.125
+      ],
+      "current_range_s": [
+        3.0833333333333335,
+        3.625
+      ],
+      "candidate_range_s": [
+        3.0833333333333335,
+        3.625
+      ],
+      "current_iou": 0.361111111111111,
+      "candidate_iou": 0.361111111111111,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": false,
+      "candidate_status": "not_applicable",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-133-uniface",
+      "group": "RTFS:00alq36jhjk",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.625,
+        4.125
+      ],
+      "current_range_s": [
+        2.8333333333333335,
+        3.625
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        3.625
+      ],
+      "current_iou": 0.5277777777777777,
+      "candidate_iou": 0.5277777777777777,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": false,
+      "candidate_status": "not_applicable",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-133-original_videos-ordinary",
+      "group": "RTFS:00alq36jhjk",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "not_applicable",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-134-original_videos",
+      "group": "RTFS:8CWs28W97Nw",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-134-inswapper",
+      "group": "RTFS:8CWs28W97Nw",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.375,
+        3.875
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        3.625
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.6944444444444443,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-134-uniface",
+      "group": "RTFS:8CWs28W97Nw",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.375,
+        3.875
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-134-original_videos-ordinary",
+      "group": "RTFS:8CWs28W97Nw",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-135-original_videos",
+      "group": "RTFS:lTW66Zn5A1M",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-135-inswapper",
+      "group": "RTFS:lTW66Zn5A1M",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.75,
+        2.25
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        0.75,
+        2.0416666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-135-uniface",
+      "group": "RTFS:lTW66Zn5A1M",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.75,
+        2.25
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        0.75,
+        2.0416666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-135-original_videos-ordinary",
+      "group": "RTFS:lTW66Zn5A1M",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-136-original_videos",
+      "group": "RTFS:ebtteIeoqyg",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-136-inswapper",
+      "group": "RTFS:ebtteIeoqyg",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.1666666666666665,
+        5.166666666666667
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "candidate_range_s": [
+        3.3333333333333335,
+        5.166666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666665,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-136-uniface",
+      "group": "RTFS:ebtteIeoqyg",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.1666666666666665,
+        5.166666666666667
+      ],
+      "current_range_s": [
+        4.125,
+        4.916666666666667
+      ],
+      "candidate_range_s": [
+        3.3333333333333335,
+        5.166666666666667
+      ],
+      "current_iou": 0.39583333333333337,
+      "candidate_iou": 0.9166666666666665,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-136-original_videos-ordinary",
+      "group": "RTFS:ebtteIeoqyg",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.52,
+        3.04
+      ],
+      "candidate_range_s": [
+        2.52,
+        3.04
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-137-original_videos",
+      "group": "RTFS:j6ryJ7hQBjQ",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "candidate_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-137-inswapper",
+      "group": "RTFS:j6ryJ7hQBjQ",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.0,
+        3.0
+      ],
+      "current_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "current_iou": 0.9166666666666667,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-137-uniface",
+      "group": "RTFS:j6ryJ7hQBjQ",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.0,
+        3.0
+      ],
+      "current_range_s": [
+        1.7916666666666667,
+        2.8333333333333335
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "current_iou": 0.5208333333333334,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-137-original_videos-ordinary",
+      "group": "RTFS:j6ryJ7hQBjQ",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "candidate_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-138-original_videos",
+      "group": "RTFS:tJpznMRu07s",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        1.7916666666666667,
+        3.625
+      ],
+      "candidate_range_s": [
+        1.7916666666666667,
+        3.625
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-138-inswapper",
+      "group": "RTFS:tJpznMRu07s",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9166666666666666,
+        2.1666666666666665
+      ],
+      "current_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "current_iou": 0.8333333333333333,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-138-uniface",
+      "group": "RTFS:tJpznMRu07s",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9166666666666666,
+        2.1666666666666665
+      ],
+      "current_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "current_iou": 0.8333333333333333,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-138-original_videos-ordinary",
+      "group": "RTFS:tJpznMRu07s",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        1.0,
+        1.7916666666666667
+      ],
+      "candidate_range_s": [
+        4.375,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-139-original_videos",
+      "group": "RTFS:QDRbfUB49Co",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-139-inswapper",
+      "group": "RTFS:QDRbfUB49Co",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.875,
+        2.125
+      ],
+      "current_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "current_iou": 0.3030303030303031,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-139-uniface",
+      "group": "RTFS:QDRbfUB49Co",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.875,
+        2.125
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.0,
+        2.0416666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-139-original_videos-ordinary",
+      "group": "RTFS:QDRbfUB49Co",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-140-original_videos",
+      "group": "RTFS:eSj31_Rckys",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-140-inswapper",
+      "group": "RTFS:eSj31_Rckys",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.5416666666666667,
+        3.5416666666666665
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.5416666666666667,
+        3.3333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8958333333333335,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-140-uniface",
+      "group": "RTFS:eSj31_Rckys",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.5416666666666667,
+        3.5416666666666665
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.5416666666666667,
+        3.3333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8958333333333335,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-140-original_videos-ordinary",
+      "group": "RTFS:eSj31_Rckys",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-141-original_videos",
+      "group": "RTFS:WMsHPzOmJk4",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-141-inswapper",
+      "group": "RTFS:WMsHPzOmJk4",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.5,
+        5.0
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.625,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8611111111111113,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-141-uniface",
+      "group": "RTFS:WMsHPzOmJk4",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.5,
+        5.0
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.625,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8611111111111113,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-141-original_videos-ordinary",
+      "group": "RTFS:WMsHPzOmJk4",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-142-original_videos",
+      "group": "RTFS:SSOxL2VRIeE",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-142-inswapper",
+      "group": "RTFS:SSOxL2VRIeE",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.5,
+        2.75
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.5416666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8333333333333334,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-142-uniface",
+      "group": "RTFS:SSOxL2VRIeE",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.5,
+        2.75
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.5416666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8333333333333334,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-142-original_videos-ordinary",
+      "group": "RTFS:SSOxL2VRIeE",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-143-original_videos",
+      "group": "RTFS:LQBbBhQhsEQ",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-143-inswapper",
+      "group": "RTFS:LQBbBhQhsEQ",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.0416666666666665,
+        5.041666666666667
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666665,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-143-uniface",
+      "group": "RTFS:LQBbBhQhsEQ",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.0416666666666665,
+        5.041666666666667
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666665,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-143-original_videos-ordinary",
+      "group": "RTFS:LQBbBhQhsEQ",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-144-original_videos",
+      "group": "RTFS:FdpEAz1htV4",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-144-inswapper",
+      "group": "RTFS:FdpEAz1htV4",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.4583333333333333,
+        2.7083333333333335
+      ],
+      "current_range_s": [
+        2.0416666666666665,
+        2.5833333333333335
+      ],
+      "candidate_range_s": [
+        1.5416666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.4333333333333335,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-144-uniface",
+      "group": "RTFS:FdpEAz1htV4",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.4583333333333333,
+        2.7083333333333335
+      ],
+      "current_range_s": [
+        2.0416666666666665,
+        2.5833333333333335
+      ],
+      "candidate_range_s": [
+        1.5416666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.4333333333333335,
+      "candidate_iou": 0.8333333333333333,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-144-original_videos-ordinary",
+      "group": "RTFS:FdpEAz1htV4",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-145-original_videos",
+      "group": "RTFS:dOzteI67K3M",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        3.625,
+        4.125
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-145-inswapper",
+      "group": "RTFS:dOzteI67K3M",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.125,
+        2.625
+      ],
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        1.2916666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8611111111111112,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-145-uniface",
+      "group": "RTFS:dOzteI67K3M",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.125,
+        2.625
+      ],
+      "current_range_s": [
+        1.2916666666666667,
+        2.5833333333333335
+      ],
+      "candidate_range_s": [
+        1.2916666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.8611111111111112,
+      "candidate_iou": 0.8611111111111112,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-145-original_videos-ordinary",
+      "group": "RTFS:dOzteI67K3M",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "candidate_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-146-original_videos",
+      "group": "RTFS:eA8cEm4lFTo",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "candidate_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-146-inswapper",
+      "group": "RTFS:eA8cEm4lFTo",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.75,
+        3.25
+      ],
+      "current_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "candidate_range_s": [
+        1.7916666666666667,
+        3.0833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8611111111111112,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-146-uniface",
+      "group": "RTFS:eA8cEm4lFTo",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.75,
+        3.25
+      ],
+      "current_range_s": [
+        1.7916666666666667,
+        2.2916666666666665
+      ],
+      "candidate_range_s": [
+        1.7916666666666667,
+        3.0833333333333335
+      ],
+      "current_iou": 0.3333333333333332,
+      "candidate_iou": 0.8611111111111112,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-146-original_videos-ordinary",
+      "group": "RTFS:eA8cEm4lFTo",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "candidate_range_s": [
+        5.166666666666667,
+        5.666666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-147-original_videos",
+      "group": "RTFS:HKMNTf4tBpE",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        3.625,
+        4.125
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-147-inswapper",
+      "group": "RTFS:HKMNTf4tBpE",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.3333333333333333,
+        3.3333333333333335
+      ],
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        1.2916666666666667,
+        3.3333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9795918367346937,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-147-uniface",
+      "group": "RTFS:HKMNTf4tBpE",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        1.3333333333333333,
+        3.3333333333333335
+      ],
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        1.2916666666666667,
+        3.3333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9795918367346937,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-147-original_videos-ordinary",
+      "group": "RTFS:HKMNTf4tBpE",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        3.625,
+        4.125
+      ],
+      "candidate_range_s": [
+        3.625,
+        4.125
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-148-original_videos",
+      "group": "RTFS:ozo3HCJVJEA",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        4.125,
+        4.625
+      ],
+      "candidate_range_s": [
+        4.125,
+        4.625
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-148-inswapper",
+      "group": "RTFS:ozo3HCJVJEA",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9166666666666666,
+        2.4166666666666665
+      ],
+      "current_range_s": [
+        4.125,
+        4.625
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.2916666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-148-uniface",
+      "group": "RTFS:ozo3HCJVJEA",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9166666666666666,
+        2.4166666666666665
+      ],
+      "current_range_s": [
+        4.125,
+        4.625
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.2916666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-148-original_videos-ordinary",
+      "group": "RTFS:ozo3HCJVJEA",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        3.56,
+        4.04
+      ],
+      "candidate_range_s": [
+        3.56,
+        4.04
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-149-original_videos",
+      "group": "RTFS:OX7tc-E8J8I",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-149-inswapper",
+      "group": "RTFS:OX7tc-E8J8I",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.375,
+        3.875
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-149-uniface",
+      "group": "RTFS:OX7tc-E8J8I",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.375,
+        3.875
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-149-original_videos-ordinary",
+      "group": "RTFS:OX7tc-E8J8I",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-150-original_videos",
+      "group": "RTFS:hl4Us3ktO04",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-150-inswapper",
+      "group": "RTFS:hl4Us3ktO04",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.875,
+        2.375
+      ],
+      "current_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.2916666666666665
+      ],
+      "current_iou": 0.702127659574468,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-150-uniface",
+      "group": "RTFS:hl4Us3ktO04",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.875,
+        2.375
+      ],
+      "current_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "candidate_range_s": [
+        1.0,
+        2.2916666666666665
+      ],
+      "current_iou": 0.702127659574468,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-150-original_videos-ordinary",
+      "group": "RTFS:hl4Us3ktO04",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-151-original_videos",
+      "group": "RTFS:tvbswkAr7_c",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-151-inswapper",
+      "group": "RTFS:tvbswkAr7_c",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.75,
+        2.0
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        0.75,
+        1.7916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8333333333333334,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-151-uniface",
+      "group": "RTFS:tvbswkAr7_c",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.75,
+        2.0
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        0.75,
+        1.7916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8333333333333334,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-151-original_videos-ordinary",
+      "group": "RTFS:tvbswkAr7_c",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-152-original_videos",
+      "group": "RTFS:6AuF4szWc10",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        1.2916666666666667,
+        1.7916666666666667
+      ],
+      "candidate_range_s": [
+        1.2916666666666667,
+        1.7916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-152-inswapper",
+      "group": "RTFS:6AuF4szWc10",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.5416666666666665,
+        5.041666666666667
+      ],
+      "current_range_s": [
+        1.2916666666666667,
+        1.7916666666666667
+      ],
+      "candidate_range_s": [
+        3.625,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-152-uniface",
+      "group": "RTFS:6AuF4szWc10",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.5416666666666665,
+        5.041666666666667
+      ],
+      "current_range_s": [
+        4.375,
+        4.916666666666667
+      ],
+      "candidate_range_s": [
+        3.625,
+        4.916666666666667
+      ],
+      "current_iou": 0.3611111111111112,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-152-original_videos-ordinary",
+      "group": "RTFS:6AuF4szWc10",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        4.375,
+        4.916666666666667
+      ],
+      "candidate_range_s": [
+        4.375,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-153-original_videos",
+      "group": "RTFS:nzZsCIqYQAA",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "candidate_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-153-inswapper",
+      "group": "RTFS:nzZsCIqYQAA",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.5,
+        4.0
+      ],
+      "current_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-153-uniface",
+      "group": "RTFS:nzZsCIqYQAA",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.5,
+        4.0
+      ],
+      "current_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.861111111111111,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-153-original_videos-ordinary",
+      "group": "RTFS:nzZsCIqYQAA",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "candidate_range_s": [
+        4.916666666666667,
+        5.416666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-154-original_videos",
+      "group": "RTFS:GpHUJ6SGeTE",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-154-inswapper",
+      "group": "RTFS:GpHUJ6SGeTE",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.75,
+        5.0
+      ],
+      "current_range_s": [
+        4.375,
+        4.916666666666667
+      ],
+      "candidate_range_s": [
+        3.875,
+        4.916666666666667
+      ],
+      "current_iou": 0.43333333333333357,
+      "candidate_iou": 0.8333333333333336,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-154-uniface",
+      "group": "RTFS:GpHUJ6SGeTE",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.75,
+        5.0
+      ],
+      "current_range_s": [
+        3.875,
+        4.916666666666667
+      ],
+      "candidate_range_s": [
+        3.875,
+        4.916666666666667
+      ],
+      "current_iou": 0.8333333333333336,
+      "candidate_iou": 0.8333333333333336,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-154-original_videos-ordinary",
+      "group": "RTFS:GpHUJ6SGeTE",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-155-original_videos",
+      "group": "RTFS:674za6Yr3Po",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-155-inswapper",
+      "group": "RTFS:674za6Yr3Po",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.0,
+        4.0
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        2.0416666666666665,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-155-uniface",
+      "group": "RTFS:674za6Yr3Po",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.0,
+        4.0
+      ],
+      "current_range_s": [
+        3.3333333333333335,
+        3.875
+      ],
+      "candidate_range_s": [
+        2.0416666666666665,
+        3.875
+      ],
+      "current_iou": 0.27083333333333326,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-155-original_videos-ordinary",
+      "group": "RTFS:674za6Yr3Po",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-156-original_videos",
+      "group": "RTFS:1FZ_1AW9V5s",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.5833333333333335,
+        3.3333333333333335
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.3333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-156-inswapper",
+      "group": "RTFS:1FZ_1AW9V5s",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.8333333333333335,
+        4.083333333333333
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        3.3333333333333335
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        3.875
+      ],
+      "current_iou": 0.3333333333333334,
+      "candidate_iou": 0.8333333333333335,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-156-uniface",
+      "group": "RTFS:1FZ_1AW9V5s",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.8333333333333335,
+        4.083333333333333
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        3.3333333333333335
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        3.875
+      ],
+      "current_iou": 0.3333333333333334,
+      "candidate_iou": 0.8333333333333335,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-156-original_videos-ordinary",
+      "group": "RTFS:1FZ_1AW9V5s",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.52,
+        3.04
+      ],
+      "candidate_range_s": [
+        2.52,
+        3.04
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-157-original_videos",
+      "group": "RTFS:2Bx4TT-61QQ",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-157-inswapper",
+      "group": "RTFS:2Bx4TT-61QQ",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.2083333333333335,
+        3.4583333333333335
+      ],
+      "current_range_s": [
+        2.2916666666666665,
+        3.3333333333333335
+      ],
+      "candidate_range_s": [
+        2.2916666666666665,
+        3.3333333333333335
+      ],
+      "current_iou": 0.8333333333333336,
+      "candidate_iou": 0.8333333333333336,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-157-uniface",
+      "group": "RTFS:2Bx4TT-61QQ",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.2083333333333335,
+        3.4583333333333335
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "candidate_range_s": [
+        2.2916666666666665,
+        3.3333333333333335
+      ],
+      "current_iou": 0.4,
+      "candidate_iou": 0.8333333333333336,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-157-original_videos-ordinary",
+      "group": "RTFS:2Bx4TT-61QQ",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "candidate_range_s": [
+        2.5833333333333335,
+        3.0833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-158-original_videos",
+      "group": "RTFS:M2xmsclh3UA",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-158-inswapper",
+      "group": "RTFS:M2xmsclh3UA",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.0833333333333335,
+        5.083333333333333
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.916666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-158-uniface",
+      "group": "RTFS:M2xmsclh3UA",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        3.0833333333333335,
+        5.083333333333333
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        4.916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.916666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-158-original_videos-ordinary",
+      "group": "RTFS:M2xmsclh3UA",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-159-original_videos",
+      "group": "RTFS:9VIpnBAs36M",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-159-inswapper",
+      "group": "RTFS:9VIpnBAs36M",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9583333333333334,
+        2.9583333333333335
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-159-uniface",
+      "group": "RTFS:9VIpnBAs36M",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        0.9583333333333334,
+        2.9583333333333335
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        1.0,
+        2.8333333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.9166666666666667,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-159-original_videos-ordinary",
+      "group": "RTFS:9VIpnBAs36M",
+      "family": "jump-cut",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-160-original_videos",
+      "group": "RTFS:m5-HrKTFDX4",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "candidate_range_s": [
+        0.75,
+        1.2916666666666667
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-160-inswapper",
+      "group": "RTFS:m5-HrKTFDX4",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.6666666666666665,
+        4.166666666666667
+      ],
+      "current_range_s": [
+        2.5833333333333335,
+        4.125
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        4.125
+      ],
+      "current_iou": 0.9210526315789473,
+      "candidate_iou": 0.8611111111111107,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-160-uniface",
+      "group": "RTFS:m5-HrKTFDX4",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.6666666666666665,
+        4.166666666666667
+      ],
+      "current_range_s": [
+        2.8333333333333335,
+        4.125
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        4.125
+      ],
+      "current_iou": 0.8611111111111107,
+      "candidate_iou": 0.8611111111111107,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-160-original_videos-ordinary",
+      "group": "RTFS:m5-HrKTFDX4",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        0.5,
+        1.0
+      ],
+      "candidate_range_s": [
+        0.5,
+        1.0
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-161-original_videos",
+      "group": "RTFS:FvtuPC64EQ4",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-161-inswapper",
+      "group": "RTFS:FvtuPC64EQ4",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.875,
+        4.125
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.6333333333333332,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-161-uniface",
+      "group": "RTFS:FvtuPC64EQ4",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.875,
+        4.125
+      ],
+      "current_range_s": null,
+      "candidate_range_s": [
+        3.0833333333333335,
+        3.875
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.6333333333333332,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-161-original_videos-ordinary",
+      "group": "RTFS:FvtuPC64EQ4",
+      "family": "recompression",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": null,
+      "candidate_range_s": null,
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-162-original_videos",
+      "group": "RTFS:cFF-0nXWLAI",
+      "family": "original_videos",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        1.7916666666666667,
+        2.5833333333333335
+      ],
+      "candidate_range_s": [
+        1.7916666666666667,
+        2.5833333333333335
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-162-inswapper",
+      "group": "RTFS:cFF-0nXWLAI",
+      "family": "inswapper",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.7083333333333335,
+        4.208333333333333
+      ],
+      "current_range_s": [
+        4.625,
+        5.166666666666667
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        4.125
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.8611111111111113,
+      "current_localized": false,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-162-uniface",
+      "group": "RTFS:cFF-0nXWLAI",
+      "family": "uniface",
+      "label": 1,
+      "role": "confirmation",
+      "known_edit_s": [
+        2.7083333333333335,
+        4.208333333333333
+      ],
+      "current_range_s": [
+        1.7916666666666667,
+        4.125
+      ],
+      "candidate_range_s": [
+        2.8333333333333335,
+        4.125
+      ],
+      "current_iou": 0.5862068965517242,
+      "candidate_iou": 0.8611111111111113,
+      "current_localized": true,
+      "candidate_localized": true,
+      "candidate_used": true,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    },
+    {
+      "id": "rtfs-162-original_videos-ordinary",
+      "group": "RTFS:cFF-0nXWLAI",
+      "family": "lighting-change",
+      "label": 0,
+      "role": "confirmation",
+      "known_edit_s": null,
+      "current_range_s": [
+        1.7916666666666667,
+        2.2916666666666665
+      ],
+      "candidate_range_s": [
+        1.7916666666666667,
+        2.2916666666666665
+      ],
+      "current_iou": 0.0,
+      "candidate_iou": 0.0,
+      "current_localized": false,
+      "candidate_localized": false,
+      "candidate_used": false,
+      "candidate_status": "ok",
+      "native_alignment_all_exact": true
+    }
+  ],
+  "summary": {
+    "schema": "chipmunk.sface-fresh-confirmation-result/17",
+    "lock_sha256": "ec6e884ecdbc64c452e4ea48901a61423015ffa64b1116a5db5f36785aaf6f1b",
+    "point": {
+      "method": "strictly_greater_than_second_largest_currently_unflagged_genuine_case_maximum",
+      "value": 0.11243900750879454,
+      "planned_genuine": 60,
+      "available_genuine": 56,
+      "available_source_groups": 28,
+      "eligible_currently_unflagged_genuine": 30,
+      "maximum_additional_genuine_calibration_flags": 1,
+      "confidence_calibration": false,
+      "identity_match_point": false,
+      "note": "Inspection feature units, not an authenticity probability or public screening threshold."
+    },
+    "current": {
+      "planned": 120,
+      "source_groups": 30,
+      "edits": 60,
+      "genuine": 60,
+      "localized_edits": 25,
+      "missed_localizations": 35,
+      "genuine_review_flags": 26,
+      "ordinary_edit_flags": 13,
+      "mean_edit_iou": 0.25031186361627633,
+      "status_counts": {
+        "not_applicable": 4,
+        "ok": 116
+      },
+      "failed_cases": 0
+    },
+    "candidate": {
+      "planned": 120,
+      "source_groups": 30,
+      "edits": 60,
+      "genuine": 60,
+      "localized_edits": 60,
+      "missed_localizations": 0,
+      "genuine_review_flags": 26,
+      "ordinary_edit_flags": 13,
+      "mean_edit_iou": 0.848440098261527,
+      "status_counts": {
+        "not_applicable": 4,
+        "ok": 116
+      },
+      "failed_cases": 0
+    },
+    "families": {
+      "inswapper": {
+        "current": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 30,
+          "genuine": 0,
+          "localized_edits": 11,
+          "missed_localizations": 19,
+          "genuine_review_flags": 0,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": 0.2255033161024203,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 30,
+          "genuine": 0,
+          "localized_edits": 30,
+          "missed_localizations": 0,
+          "genuine_review_flags": 0,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": 0.845662320483749,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        }
+      },
+      "jump-cut": {
+        "current": {
+          "planned": 7,
+          "source_groups": 7,
+          "edits": 0,
+          "genuine": 7,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 3,
+          "ordinary_edit_flags": 3,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "ok": 7
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 7,
+          "source_groups": 7,
+          "edits": 0,
+          "genuine": 7,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 3,
+          "ordinary_edit_flags": 3,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "ok": 7
+          },
+          "failed_cases": 0
+        }
+      },
+      "lighting-change": {
+        "current": {
+          "planned": 10,
+          "source_groups": 10,
+          "edits": 0,
+          "genuine": 10,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 6,
+          "ordinary_edit_flags": 6,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "ok": 10
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 10,
+          "source_groups": 10,
+          "edits": 0,
+          "genuine": 10,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 6,
+          "ordinary_edit_flags": 6,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "ok": 10
+          },
+          "failed_cases": 0
+        }
+      },
+      "original_videos": {
+        "current": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 0,
+          "genuine": 30,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 13,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 0,
+          "genuine": 30,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 13,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        }
+      },
+      "recompression": {
+        "current": {
+          "planned": 13,
+          "source_groups": 13,
+          "edits": 0,
+          "genuine": 13,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 4,
+          "ordinary_edit_flags": 4,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 12
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 13,
+          "source_groups": 13,
+          "edits": 0,
+          "genuine": 13,
+          "localized_edits": 0,
+          "missed_localizations": 0,
+          "genuine_review_flags": 4,
+          "ordinary_edit_flags": 4,
+          "mean_edit_iou": null,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 12
+          },
+          "failed_cases": 0
+        }
+      },
+      "uniface": {
+        "current": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 30,
+          "genuine": 0,
+          "localized_edits": 14,
+          "missed_localizations": 16,
+          "genuine_review_flags": 0,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": 0.2751204111301323,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        },
+        "candidate": {
+          "planned": 30,
+          "source_groups": 30,
+          "edits": 30,
+          "genuine": 0,
+          "localized_edits": 30,
+          "missed_localizations": 0,
+          "genuine_review_flags": 0,
+          "ordinary_edit_flags": 0,
+          "mean_edit_iou": 0.8512178760393045,
+          "status_counts": {
+            "not_applicable": 1,
+            "ok": 29
+          },
+          "failed_cases": 0
+        }
+      }
+    },
+    "requirements": {
+      "all120_cases30_source_groups_accounted": true,
+      "no_candidate_failure": true,
+      "complete_without_guard": true,
+      "all_current_checks_freshly_recomputed": true,
+      "all_native_alignments_inputs_features_match": true,
+      "more_correct_edit_localizations": true,
+      "genuine_total_flags_at_most_current_plus_one": true,
+      "ordinary_edit_flags_at_most_current_plus_one": true,
+      "mean_edit_iou_not_lower": true,
+      "no_swap_family_localization_loss": true
+    },
+    "qualifies_for_local_integration_testing": true,
+    "paired_iou": {
+      "source_groups": 30,
+      "mean_paired_difference": 0.5981282346452504,
+      "source_group_bootstrap_95_percentile": [
+        0.4859687073096203,
+        0.7061246606062925
+      ],
+      "replicates": 5000,
+      "seed": 20261107
+    },
+    "paired_localization_rate": {
+      "source_groups": 30,
+      "mean_paired_difference": 0.5833333333333334,
+      "source_group_bootstrap_95_percentile": [
+        0.43333333333333335,
+        0.7333333333333333
+      ],
+      "replicates": 5000,
+      "seed": 20261107
+    },
+    "paired_genuine_flag_rate": {
+      "source_groups": 30,
+      "mean_paired_difference": 0.0,
+      "source_group_bootstrap_95_percentile": [
+        0.0,
+        0.0
+      ],
+      "replicates": 5000,
+      "seed": 20261107
+    },
+    "profiles": {
+      "baseline": {
+        "role": "baseline",
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 17,
+        "sampled_tree_rss_lower_bound_bytes": 2236121088,
+        "duration_s": 559.1248491669539
+      },
+      "candidate": {
+        "role": "candidate",
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 30,
+        "sampled_tree_rss_lower_bound_bytes": 1041121280,
+        "duration_s": 484.85674633295275
+      }
+    },
+    "fresh_source_and_donor_ids": true,
+    "fresh_people_or_upstream_training_proven": false,
+    "serving_changed": false,
+    "overall_confidence_changed": false,
+    "outside_human_reviewers": 0,
+    "scope": "Fresh source-video IDs/donor filenames; bounded face-transition ranges and review flags, not calibrated AI/identity probability. Entire baseline rerun, unchanged v16 method and point; no historical reference parity claimed."
+  },
+  "paired_changes": {
+    "new_correct_locations": 35,
+    "lost_correct_locations": 0,
+    "new_genuine_flags": 0,
+    "cleared_genuine_flags": 0
+  },
+  "candidate_window_usage": {
+    "edited_candidate_ranges": 58,
+    "genuine_candidate_ranges": 0,
+    "edited_correct_fallbacks": 2,
+    "genuine_shared_fallback_flags": 26
+  },
+  "engineering_counts": {
+    "fresh_current_recomputed_cases": 120,
+    "native_alignment_passed_cases": 120
+  },
+  "contains_real_face_vectors_or_raw_images": false
+}

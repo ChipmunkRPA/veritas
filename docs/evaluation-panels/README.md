@@ -8,6 +8,31 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+## Latest review entry points (7 November 2026)
+
+- [Face-transition development](../video-v16-sface-development-evaluation.md):
+  all120 consumed cases, final time ranges and a standard-library replay. Local
+  and actual Linux review reproduce all counts and ten advancement requirements.
+  Real face embeddings and imagery remain private. The unchanged method's
+  [fresh-source confirmation](../video-v17-sface-confirmation-evaluation.md)
+  subsequently located60/60 edits versus25/60 with the same26/60 genuine flags;
+  58 ranges came from the new cue and two from its declared fallback. All ten
+  requirements passed. Local integration remains required before default changes.
+- [Image generation comparison](../image-smaug-v7-development-evaluation.md):
+  all224 scalar inputs and original mixed-image gates, including the failed
+  regional-edit/JPEG advancement result. Linux replay passed; no service adoption.
+- [Overlapping-speech comparison](../audio-separation-v14-development-evaluation.md):
+  complete original outcomes, native review, independent arithmetic and exact
+  refits. Both candidates were rejected. Serving audio calibration is unchanged.
+- [Approved full audio-layer package](../audio-layer-v12-development-evaluation.md):
+  60.5 MB of derived feature/review packets published for reproduction under
+  separate data terms. No source recordings or customer uploads are included;
+  derived voice representations are not asserted to be anonymous.
+
+The chronological preparation records below preserve what was known at each
+freeze. Use the linked completed results for current decisions. Automated replay
+does not count as an outside human review; none has been recorded.
+
 `audio-v14-separation-structural-audit.json` publishes a strict345-tensor
 five-million-parameter load, pinned checkpoint/package/code hashes, retained
 license/rate metadata discrepancies, and three exact synthetic comparisons

@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.sface-confirmation-range-release/17",
+  "files_sha256": {
+    "backend/scripts/reproduce_sface_confirmation_v17.py": "7ab8fdfc5e7297ef597b9a68966557c4853f6babb77a64646e936e78822a99c3",
+    "backend/scripts/reproduce_sface_result_v16.py": "06dcab203fab9a17f061ba86b5c07d2b6595c1fa91e8ea62bd1e4fa32051ac3e",
+    "docs/evaluation-panels/video-v17-sface-final-ranges.json": "7c0836dc287e23e13e7d502b73d90d8786a42c4e89be6d90305b4b793ff954fd",
+    "docs/evaluation-panels/video-v17-sface-prepared-panel.json": "4ccdfe8352a6df921243f5e2d83a63d6389a9480d2111db1007407ff3a58aff0",
+    "docs/evaluation-panels/video-v17-sface-source-plan.json": "a826e166b0542ad3bf5fcf1de00c3f9958976a62351cb3c5fa55906220598da6",
+    "docs/evaluation-panels/video-v17-sface-private-review-aggregate.json": "d3b3fe4f3edf60ceab2754c3e8f2afdd720ee844cf9d15330c92fe62135562a4",
+    "docs/evaluation-panels/video-v17-sface-portable-review.json": "c8f429ed4f3ad87a427d423e41a359a43607c3eb8a49f19e36a62af6f3b367a2",
+    "docs/evaluation-panels/video-v17-sface-portable-tamper.json": "e678a5c98193d7e7725c4a88ad754ba58166c67b553f47bad3255cbcbe5063a0",
+    "docs/video-v17-sface-confirmation-evaluation.json": "30f58af9e15a4b052babf57d41ce762c35b9dda95786a0abab31fe5193849246",
+    "docs/video-v17-sface-confirmation-evaluation.md": "6d8a8590c8ae90b6d369621a6857fabcba90e50badaa9e5b1bd0afc99a9e5178",
+    ".github/workflows/sface-confirmation-review.yml": "5627a2972f9a234b59854a45504b1edfb099ed4e6c19c37143218e045121f8ae"
+  },
+  "raw_face_vectors_or_images": false,
+  "scope": "Public fresh source/range/count review. Native/vector/model evidence remains separately documented."
+}

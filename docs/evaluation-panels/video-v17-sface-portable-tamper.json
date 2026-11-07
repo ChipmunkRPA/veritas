@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "mutations": [
+    {
+      "mutation": "missing",
+      "rejected": true
+    },
+    {
+      "mutation": "duplicate",
+      "rejected": true
+    },
+    {
+      "mutation": "label",
+      "rejected": true
+    },
+    {
+      "mutation": "truth",
+      "rejected": true
+    },
+    {
+      "mutation": "range",
+      "rejected": true
+    },
+    {
+      "mutation": "overlap",
+      "rejected": true
+    },
+    {
+      "mutation": "status",
+      "rejected": true
+    },
+    {
+      "mutation": "guard",
+      "rejected": true
+    },
+    {
+      "mutation": "advance",
+      "rejected": true
+    },
+    {
+      "mutation": "point",
+      "rejected": true
+    },
+    {
+      "mutation": "prior_source",
+      "rejected": true
+    },
+    {
+      "mutation": "prior_donor",
+      "rejected": true
+    }
+  ],
+  "scope": "Actual final-range/source plan deliberately altered; no raw imagery or face representations.",
+  "packet_sha256": "7c0836dc287e23e13e7d502b73d90d8786a42c4e89be6d90305b4b793ff954fd"
+}

@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "source_groups": 30,
+  "source_metadata_records": 90,
+  "cases": 120,
+  "previous_source_groups_excluded": 132,
+  "previous_donor_files_excluded": 264,
+  "aggregate_fields_verified": 154,
+  "per_case_iou_and_location_flags_verified": 240,
+  "additional_descriptive_paired_and_usage_counts_verified": 8,
+  "gates_verified": 10,
+  "native_or_biometric_inference_repeated": false,
+  "private_vectors_or_images_exported": false,
+  "scope": "Separate source-ID/donor exclusions, final ranges, IoU, counts and fixed-decision arithmetic. Native/fresh-recomputation totals remain recorded engineering claims; no biometric inference, bootstrap or unseen-person assertion.",
+  "packet_sha256": "7c0836dc287e23e13e7d502b73d90d8786a42c4e89be6d90305b4b793ff954fd"
+}

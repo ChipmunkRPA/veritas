@@ -85,6 +85,15 @@ and prompt relationships must be audited by the real-data adapter. The framework
 does not discover undeclared relationships. Cross-fitting can be a future,
 separately reviewed alternative when data is scarce; do not quietly reuse roles.
 
+These four roles assume the base detector is already fixed. Exclude all known
+project-level base-detector/head training ancestry from them, or fit that head on
+a separate earlier source-disjoint set. Cached scores from a head trained on the
+new calibration/confirmation sources are not out-of-sample observations. The
+source adapters must audit that provenance before real fitting. External
+pretraining overlap may remain unknown and must be disclosed. Benchmark-only
+generator identities or true mixture SNR cannot substitute for routing features
+measured on an unknown customer input.
+
 ```mermaid
 flowchart LR
   A[Source regions, intervals and passages] --> B[Check and context calibration]
@@ -164,7 +173,12 @@ agreement limit of1e-6 over32 file and128 unit outputs, exact nonnumerical
 bindings, and six adverse invariants. Its numerical tolerance applies only to
 this new authored integration test, not earlier studies' exact-fit requirements.
 The workflow needs no model, image/audio/video processing, API or customer data.
-An actual completed run receipt is required before claiming Linux success.
+The [actual corrected Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42395499155)
+passed all six invariants and compared160 file/unit probabilities. Its maximum
+absolute difference from the recorded Mac outputs was5.551115123125783e-17,
+within the unchanged1e-6 limit. The
+[decoded-log receipt](evaluation-panels/specialist-calibration-v2-linux-review.json)
+records the actual job. This establishes authored numerical integration only.
 
 Still required across **all four modalities**: inventory actual local-unit truth
 and independent groups; build audited source/context adapters; obtain missing

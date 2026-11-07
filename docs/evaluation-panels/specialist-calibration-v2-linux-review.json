@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.specialist-v2-actual-linux-review/2",
+  "run_id": 42395499155,
+  "job_id": 128471876933,
+  "head_sha": "c149481f99fac972f9f4b04358f4b4b4e204bfd0",
+  "url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42395499155",
+  "conclusion": "success",
+  "environment": "ubuntu-24.04; Python3.12.6; NumPy2.2.6; SciPy1.18.1",
+  "actual_decoded_receipt": {
+    "schema": "chipmunk.specialist-authored-host-review/2",
+    "passed": true,
+    "files": 128,
+    "observations": 512,
+    "confirmation_files": 32,
+    "confirmation_local_outputs": 128,
+    "probabilities_compared": 160,
+    "max_absolute_probability_difference": 5.551115123125783e-17,
+    "predeclared_absolute_limit": 1e-06,
+    "adverse_invariants_checked": [
+      "cross_role_lineage_refused",
+      "confirmation_not_fitted",
+      "missing_required_evidence_withheld",
+      "duplicate_family_not_amplified",
+      "unknown_unit_truth_not_copied",
+      "unrelated_genuine_not_subtracted_in_all_four_media"
+    ],
+    "real_media_evaluated": 0,
+    "new_neural_forwards": 0,
+    "serving_admitted": false,
+    "scope": "Authored-score four-media numerical integration only; not real-model accuracy or outside human review."
+  },
+  "canonical_actual_receipt_sha256": "f36b673deea33841a83bf33eaf414d9d3d299c040dca84cb8dbed7e8e1239b42",
+  "outside_human_reviewers": 0,
+  "serving_changed": false,
+  "real_media_evaluated": 0
+}

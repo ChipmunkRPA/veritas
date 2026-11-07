@@ -14,7 +14,7 @@ or a generic dataset link.
   separate local/check/context calibrations plus separately fitted/calibrated
   combination, role/source isolation and position binding. The public authored
   corrected version2 example covers128 symbolic files/512 observations and63 local selected tests;
-  it establishes software integration, not real-model detection improvement.
+  actual Linux authored integration also passes. This is not real-model detection improvement.
 - [Region-aligned calibration](../image-region-calibration-v9-result.md):
  312 consumed cases with complete-region rather than pixel-maximum calibration.
  Both formats still locate0/48 edits versus12/48 current and are rejected.

@@ -139,10 +139,27 @@ recovers 72 correct conclusions against the rejected projection control but stil
 loses 60 against service, failing four fixed requirements. It remains disabled;
 all outcomes, small parameters and 125 native receipts support public-only
 numerical/refit review without pretrained-model downloads.
-The next [fixed-layer comparison](docs/audio-layer-v12-execution.md) preselects
-earlier/middle/later speech features and a matched final-vector control. Its
-source/runtime/code freeze and preparation tests precede any new project forward;
-preparation alone is not a detection improvement or outside validation.
+The completed [fixed-layer comparison](docs/audio-layer-v12-development-evaluation.md)
+also failed its unchanged usefulness requirements. Lossless public audio feature
+packets and fitted objects now support [portable arithmetic/refit review](docs/audio-public-portable-review-v13.md)
+without model weights or recordings. External Linux arithmetic reproduction
+passed; strict exact cross-platform refitting remains failed, with diagnostic
+differences that changed no directional outcomes. Automated external-host
+reproduction is distinct from outside human review; no outside human has participated.
+The [two-source audio extraction](docs/audio-separation-v14-execution.md) stopped
+on a decoder failure before fitting. Its partial journal remains preserved and
+does not establish detection quality.
+
+The [general-video temporal study](docs/video-demamba-v13-execution.md) completed
+its candidate run but lost the baseline process before a complete comparison.
+A [separate sequential replication](docs/video-v13-sequential-replication.md)
+keeps the original method and quality requirements, preserves the interrupted
+journal, and adds resource and prior-result correspondence guards.
+The completed [small nonlinear mouth-window experiment](docs/mouth-temporal-v12-evaluation.md)
+located26/32 edits versus14/32 for its retained reference, but flagged12/56
+ordinary clips versus0/56. It was rejected under the frozen false-flag rules;
+complete JSON trees, every development window and standalone replay/refit
+materials are public. Unused actors were not scored to rescue the result.
 
 Some historical release records and Makefile targets refer to tests, development
 scripts, and benchmark inputs absent from the imported archive. Those records are

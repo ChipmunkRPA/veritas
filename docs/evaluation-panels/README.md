@@ -54,6 +54,15 @@ unchanged gates. Its13 actual-metadata alteration checks are in
 `audio-v13-wavlm-preflight.json`. These files contain no speech feature vectors,
 source media, private paths or completed accuracy result.
 [Protocol and execution](../audio-wavlm-v13-execution.md).
+Both new speech mappings subsequently failed the unchanged adoption criteria.
+`audio-v13-development-review.json.gz` and five role-separated
+`audio-v13-features-{role}-{part}.jsonl.gz` files preserve the original4,248-record
+feature receipt losslessly, all1,449 outcomes/511 probes, parameters, source
+terms and native/numerical receipts. Empty-cache numerical replay and both exact
+refits passed. No pretrained weights, raw recordings, customer files or transcripts
+are included. [Full results and commands](../audio-wavlm-v13-development-evaluation.md).
+The [aggregate](../audio-wavlm-v13-development-evaluation.json) and explicitly
+post-result `audio-v13-probability-ceiling.json` require no feature downloads.
 
 `audio-v11-full-representation-freeze.json` binds one prospective supervised
 full-vector comparison with the unchanged objective, corrected roles, commercial
@@ -88,6 +97,12 @@ a frozen confirmation panel; see the [source review](../writing-source-preflight
 published-checksum/CRC checks and exact decoded-span equality with the existing
 362-record copy. Its metadata and bundled README retain conflicting terms;
 no new training, text redistribution or detector result is authorized.
+
+`writing-v3-focus-preparation.json` records exact source/position reconstruction
+for40 consumed documents/674 foci and strict structural loading of an alternative
+MIT-declared classifier. It contains no source wording, author names, per-record
+annotations or detector scores. No new authorship inference or calibration has
+run. [Truth scope and next comparison](../writing-focus-v3-preparation.md).
 
 - `iml-vit-v4-plan.json` and `iml-vit-v4-manifest.json`: the 48 original/edit
   pairs in the [IML-ViT comparison](../iml-vit-localization-evaluation.md).

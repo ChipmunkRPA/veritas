@@ -1,0 +1,68 @@
+{
+  "schema": "chipmunk.wavlm-public-tamper/13",
+  "passed": true,
+  "unmodified_packet_passed": true,
+  "cases": [
+    {
+      "alteration": "fitted coefficient",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "calibration guard",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "mapped probability",
+      "rejected": true,
+      "reason": "Probability/guard arithmetic mismatch"
+    },
+    {
+      "alteration": "unassessed called original",
+      "rejected": true,
+      "reason": "Unassessed inputs cannot acquire a directional conclusion"
+    },
+    {
+      "alteration": "source group",
+      "rejected": true,
+      "reason": "Complete original source/truth/role outcomes required"
+    },
+    {
+      "alteration": "missing outcome",
+      "rejected": true,
+      "reason": "Complete original source/truth/role outcomes required"
+    },
+    {
+      "alteration": "missing feature role",
+      "rejected": true,
+      "reason": "Original complete feature header and three source roles required"
+    },
+    {
+      "alteration": "feature transfer",
+      "rejected": true,
+      "reason": "Changed role packet transfer or denominator"
+    },
+    {
+      "alteration": "missing native case",
+      "rejected": true,
+      "reason": "Exact original fitted artifact bytes required"
+    },
+    {
+      "alteration": "scope admission",
+      "rejected": true,
+      "reason": "Exact public result fields, lineage and non-admission required"
+    },
+    {
+      "alteration": "coherently changed probe feature",
+      "rejected": true,
+      "reason": "Original complete probe commitments changed"
+    },
+    {
+      "alteration": "coherent feature and transfer digests",
+      "rejected": true,
+      "reason": "Public parts do not restore the original receipt byte-for-byte"
+    }
+  ],
+  "scope": "Actual packet alterations, no new inference or outside review"
+}

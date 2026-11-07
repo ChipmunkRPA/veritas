@@ -1,5 +1,17 @@
 # Noise-aware speech experiment: prepared before source inference
 
+## Completed result
+
+Both fixed candidates are rejected. All4,248 extractions and the corrected
+1,449-input comparison completed; the original34-record initialization failure
+is retained. Combined features improve noise/music but fail generator and
+background-speech retention/usefulness. All593 native replays, numerical review
+and both exact refits pass. Empty-cache public-only replay reproduces the complete
+feature receipt and both fits, with12 actual-packet alteration rejections.
+The [complete result and reproduction](audio-wavlm-v13-development-evaluation.md)
+records every condition and limit. No reserved confirmation or service change.
+Preparation and the original execution chronology below are retained.
+
 6 November 2026. Prepared a different frozen backbone after the fixed-layer
 experiment failed useful-detection requirements. The [prospective protocol](audio-wavlm-v13-protocol.md)
 fixes both arms, extraction, fitting/calibration and all original sixteen gates.

@@ -1,0 +1,203 @@
+{
+  "schema": "chipmunk.wavlm-v13-posthoc-ceiling/1",
+  "responses_sha256": "1ab0c272491d0b14a7718c02ca888d550bb2a30c5868defa808f503d7528b48f",
+  "frozen_necessary_ai_probability": 0.8,
+  "generator_allowed_loss": 2,
+  "arms": {
+    "standalone": {
+      "all": {
+        "current_correct_ai": 648,
+        "fixed_probability_ai_ceiling": 30,
+        "actual_correct_ai": 30
+      },
+      "clean": {
+        "current_correct_ai": 82,
+        "fixed_probability_ai_ceiling": 8,
+        "actual_correct_ai": 8
+      },
+      "generator:NaturalSpeech2": {
+        "current_correct_ai": 167,
+        "fixed_probability_ai_ceiling": 2,
+        "actual_correct_ai": 2
+      },
+      "noise_0": {
+        "current_correct_ai": 59,
+        "fixed_probability_ai_ceiling": 3,
+        "actual_correct_ai": 3
+      },
+      "noise_5": {
+        "current_correct_ai": 62,
+        "fixed_probability_ai_ceiling": 4,
+        "actual_correct_ai": 4
+      },
+      "noise_15": {
+        "current_correct_ai": 72,
+        "fixed_probability_ai_ceiling": 4,
+        "actual_correct_ai": 4
+      },
+      "music_5": {
+        "current_correct_ai": 60,
+        "fixed_probability_ai_ceiling": 4,
+        "actual_correct_ai": 4
+      },
+      "music_15": {
+        "current_correct_ai": 79,
+        "fixed_probability_ai_ceiling": 4,
+        "actual_correct_ai": 4
+      },
+      "speech_0": {
+        "current_correct_ai": 67,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "background_speech": {
+        "current_correct_ai": 234,
+        "fixed_probability_ai_ceiling": 3,
+        "actual_correct_ai": 3
+      },
+      "speech_5": {
+        "current_correct_ai": 83,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "speech_15": {
+        "current_correct_ai": 84,
+        "fixed_probability_ai_ceiling": 3,
+        "actual_correct_ai": 3
+      },
+      "generator:PflowTTS": {
+        "current_correct_ai": 115,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "generator:Chatterbox": {
+        "current_correct_ai": 78,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "generator:StyleTTS2": {
+        "current_correct_ai": 89,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "generator:fleurs-google": {
+        "current_correct_ai": 78,
+        "fixed_probability_ai_ceiling": 19,
+        "actual_correct_ai": 19
+      },
+      "generator:fleurs-azure": {
+        "current_correct_ai": 42,
+        "fixed_probability_ai_ceiling": 1,
+        "actual_correct_ai": 1
+      },
+      "generator:fleurs-amazon": {
+        "current_correct_ai": 25,
+        "fixed_probability_ai_ceiling": 0,
+        "actual_correct_ai": 0
+      },
+      "generator:ElevenLabs": {
+        "current_correct_ai": 54,
+        "fixed_probability_ai_ceiling": 8,
+        "actual_correct_ai": 8
+      }
+    },
+    "complement": {
+      "all": {
+        "current_correct_ai": 648,
+        "fixed_probability_ai_ceiling": 611,
+        "actual_correct_ai": 522
+      },
+      "clean": {
+        "current_correct_ai": 82,
+        "fixed_probability_ai_ceiling": 82,
+        "actual_correct_ai": 82
+      },
+      "generator:NaturalSpeech2": {
+        "current_correct_ai": 167,
+        "fixed_probability_ai_ceiling": 157,
+        "actual_correct_ai": 129
+      },
+      "noise_0": {
+        "current_correct_ai": 59,
+        "fixed_probability_ai_ceiling": 64,
+        "actual_correct_ai": 63
+      },
+      "noise_5": {
+        "current_correct_ai": 62,
+        "fixed_probability_ai_ceiling": 68,
+        "actual_correct_ai": 64
+      },
+      "noise_15": {
+        "current_correct_ai": 72,
+        "fixed_probability_ai_ceiling": 76,
+        "actual_correct_ai": 74
+      },
+      "music_5": {
+        "current_correct_ai": 60,
+        "fixed_probability_ai_ceiling": 65,
+        "actual_correct_ai": 61
+      },
+      "music_15": {
+        "current_correct_ai": 79,
+        "fixed_probability_ai_ceiling": 82,
+        "actual_correct_ai": 81
+      },
+      "speech_0": {
+        "current_correct_ai": 67,
+        "fixed_probability_ai_ceiling": 33,
+        "actual_correct_ai": 8
+      },
+      "background_speech": {
+        "current_correct_ai": 234,
+        "fixed_probability_ai_ceiling": 174,
+        "actual_correct_ai": 97
+      },
+      "speech_5": {
+        "current_correct_ai": 83,
+        "fixed_probability_ai_ceiling": 58,
+        "actual_correct_ai": 18
+      },
+      "speech_15": {
+        "current_correct_ai": 84,
+        "fixed_probability_ai_ceiling": 83,
+        "actual_correct_ai": 71
+      },
+      "generator:PflowTTS": {
+        "current_correct_ai": 115,
+        "fixed_probability_ai_ceiling": 101,
+        "actual_correct_ai": 82
+      },
+      "generator:Chatterbox": {
+        "current_correct_ai": 78,
+        "fixed_probability_ai_ceiling": 68,
+        "actual_correct_ai": 61
+      },
+      "generator:StyleTTS2": {
+        "current_correct_ai": 89,
+        "fixed_probability_ai_ceiling": 83,
+        "actual_correct_ai": 73
+      },
+      "generator:fleurs-google": {
+        "current_correct_ai": 78,
+        "fixed_probability_ai_ceiling": 76,
+        "actual_correct_ai": 67
+      },
+      "generator:fleurs-azure": {
+        "current_correct_ai": 42,
+        "fixed_probability_ai_ceiling": 43,
+        "actual_correct_ai": 39
+      },
+      "generator:fleurs-amazon": {
+        "current_correct_ai": 25,
+        "fixed_probability_ai_ceiling": 26,
+        "actual_correct_ai": 22
+      },
+      "generator:ElevenLabs": {
+        "current_correct_ai": 54,
+        "fixed_probability_ai_ceiling": 57,
+        "actual_correct_ai": 49
+      }
+    }
+  },
+  "scope": "Post-result upper bound with every other guard removed and probabilities fixed. No new decision policy, operating-point change, fitting, fresh evidence or enablement."
+}

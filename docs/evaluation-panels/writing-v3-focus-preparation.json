@@ -1,0 +1,50 @@
+{
+  "schema": "chipmunk.writing-focus-preparation-public/3",
+  "input_packet_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+  "preparation_code_sha256": "e716089f8e079cce6565d9af6117ff2443b2b9c28a11148920d23ff55bdaacda",
+  "source_manifest_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+  "source_span_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+  "historical_passage_sha256": "33fd38ce148fbbaf507d4df8a5ddfac4df215aa3cd597573bf23d535657b53b3",
+  "documents": 40,
+  "author_groups": 40,
+  "foci": 674,
+  "all674_historical_inputs_matched": true,
+  "context_sentences": 3,
+  "pure_human_origin_foci": 153,
+  "pure_bot_origin_foci": 322,
+  "uncovered_ai_characters": 0,
+  "tests_passed": 12,
+  "candidate_structural_audit": {
+    "schema": "chipmunk.writing-v3-structural-audit/1",
+    "repository": "Oxidane/tmr-ai-text-detector",
+    "revision": "0ceddea903015ef99cbaa040a4d8a216aed9c683",
+    "strict_state_load": true,
+    "tensor_entries": 201,
+    "parameters": 124647170,
+    "all_parameters_frozen": true,
+    "source_card_license": "MIT",
+    "source_card_sha256": "9a2e93fb2848c5707322588e7685d5abd4f38e08df9b346065d7f4ba390cd687",
+    "model_weight_sha256": "a74ea30f5db6a1094510be903ce374426191addaf7d860b766077de246d32358",
+    "tokenizer_fast": true,
+    "max_length": 512,
+    "labels": {
+      "0": "human",
+      "1": "ai"
+    },
+    "ai_class_basis": "Model card usage explicitly selects softmax class1; not inferred from generic label names",
+    "runtime": {
+      "torch": "2.13.0",
+      "transformers": "5.15.1"
+    },
+    "project_texts_scored": 0,
+    "synthetic_forwards": 0,
+    "serving_changed": false,
+    "seconds": 2.5440246670041233
+  },
+  "classifier_forwards": 0,
+  "training_or_calibration_performed": false,
+  "source_data_terms_conflict_retained": true,
+  "outside_reviewers": 0,
+  "serving_changed": false,
+  "scope": "Consumed source/position preparation only. User/Bot retained-character origins are not independently verified unassisted/AI-use labels. No text, author names, queries, per-record annotations or scores."
+}

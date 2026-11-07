@@ -65,6 +65,26 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed the new speech-backbone comparison:4,248 feature records and1,449
+  development outcomes. Combined noise/music improves, but correct AI648→522,
+  correct original356→437, false AI58→4 and inconclusive387→486. Three original
+  gates fail; feature-only fails eleven. Reject both without reserved scoring or
+  serving changes. Initial duplicate thread initialization failure is preserved;
+  the corrected journal's first33 successes match exactly. All593 native replays,
+  numerical reconstruction and both exact refits pass. Lossless public feature
+  packets restore the full receipt; empty-cache public-only refits and12 actual
+  alteration checks pass. Guard removal alone still cannot recover four families.
+  [Full result](audio-wavlm-v13-development-evaluation.md).
+
+- Prepared writing focus/context comparison inputs: all40 consumed documents,
+  40 author groups and674 exact historical sentence/context bindings; no omitted
+  AI-labeled characters. Twelve position/provenance tests pass. A125M-parameter
+  MIT-declared alternative strictly loads, with zero classifier forwards so far.
+  User-origin spans inside assisted documents are not unassisted controls; do not
+  mislabel their highlights as population false alarms. No new training or source
+  text redistribution grant is inferred from the retained data terms conflict.
+  [Preparation and next comparison](writing-focus-v3-preparation.md).
+
 - Completed the fresh image-crop comparison: all192 inputs, zero failures.
   Native overlapping edits12→20 but genuine highlights2→9; JPEG edits12→13
   and highlights3→6. Both fail the unchanged allowance and remain disabled.

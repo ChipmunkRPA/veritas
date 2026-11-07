@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.wavlm-public-review/13",
+  "passed": true,
+  "inputs": 4248,
+  "outcomes": 1449,
+  "computed_probes": 511,
+  "native_cases": 593,
+  "arms": {
+    "standalone": {
+      "normalization_calibration_prediction_stability_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true
+    },
+    "complement": {
+      "normalization_calibration_prediction_stability_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true
+    }
+  },
+  "selected_arm_for_possible_confirmation": null,
+  "scope": "Public-only exact feature receipt/numerical/refit replay; shared declared statistics/bootstrap/gates. No pretrained model, source media, private manifest, new inference or outside human review."
+}

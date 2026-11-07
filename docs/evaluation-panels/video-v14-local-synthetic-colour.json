@@ -1,0 +1,67 @@
+{
+  "schema": "chipmunk.synthetic-video-colour-reproduction/14",
+  "python": "3.12.6",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "2.2.6",
+  "opencv": "5.0.0",
+  "opencv_ffmpeg_build": [
+    "FFMPEG:                      YES",
+    "avcodec:                   YES (61.19.101)",
+    "avformat:                  YES (61.7.100)",
+    "avutil:                    YES (59.39.100)",
+    "swscale:                   YES (8.3.100)"
+  ],
+  "ffmpeg_version": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+  "ffmpeg_binary_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+  "experiment_code_sha256": "4b6e0ab2ccd71f9167c972ffd96f94f172f7a299cc49958272610c83bfeed93b",
+  "renderer_code_sha256": "91db094adc4e5803c70da729c68195bf283a84e0b55bffc165ae4acf00f0841e",
+  "synthetic_rgb_input_sha256": "c5b7d2e868131f3608e55f77f78141e000ab10afda1fc40d90f35b2e95ba0b0b",
+  "synthetic_file_sha256": "c846abd697f463b0e9363dfb0444100d5ad73529bd8e7522e84893509784e3e7",
+  "frames_created": 12,
+  "audited_frame": 3,
+  "stream_metadata": {
+    "pix_fmt": "yuv420p",
+    "color_range": "tv",
+    "color_space": "bt709",
+    "disposition": {
+      "default": 0,
+      "dub": 0,
+      "original": 0,
+      "comment": 0,
+      "lyrics": 0,
+      "karaoke": 0,
+      "forced": 0,
+      "hearing_impaired": 0,
+      "visual_impaired": 0,
+      "clean_effects": 0,
+      "attached_pic": 0,
+      "timed_thumbnails": 0,
+      "non_diegetic": 0,
+      "captions": 0,
+      "descriptions": 0,
+      "metadata": 0,
+      "dependent": 0,
+      "still_image": 0
+    },
+    "tags": {
+      "ENCODER": "Lavc61.3.100 ffv1",
+      "DURATION": "00:00:01.500000000"
+    }
+  },
+  "opencv_rgb_sha256": "9ce043edb99b3f77717b15b90ecec3e2a7ff02de7f7ece72dd507f76929d89f9",
+  "ffmpeg_rgb_sha256": {
+    "metadata_default": "6f84ac1f95125d61f7753a301975eab1e55c79a7aa4180355831ae7197b5bf33",
+    "bt601": "9ce043edb99b3f77717b15b90ecec3e2a7ff02de7f7ece72dd507f76929d89f9",
+    "bt709": "6f84ac1f95125d61f7753a301975eab1e55c79a7aa4180355831ae7197b5bf33"
+  },
+  "conditions": {
+    "metadata_default_equals_explicit_bt709": true,
+    "opencv_equals_explicit_bt601": true,
+    "opencv_differs_from_metadata_default": true
+  },
+  "hypothesis_reproduced": true,
+  "neural_forwards": 0,
+  "private_inputs_used": false,
+  "serving_changed": false,
+  "scope": "Synthetic controlled renderer behaviour on this actual environment; not real-clip replay, a global OpenCV claim, detector accuracy, neural/native model verification or outside human review. Generated container hashes may differ across runs/platforms; installed binary hashes are environment-specific."
+}

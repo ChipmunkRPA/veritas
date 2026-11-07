@@ -1,0 +1,149 @@
+{
+  "schema": "chipmunk.video-rgb-posthoc-diagnostic/14",
+  "cases": [
+    {
+      "id": "deepaction-074-Pexels",
+      "variant": "original",
+      "source_sha256": "86111df3af8a68a46c7564e1bd5a49ca89ff9844623844ab9de8c97fc8080ffc",
+      "first_audited_frame": 180,
+      "original_cv_rgb_hash_reproduced": true,
+      "stream": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "replays": [
+        {
+          "ffmpeg_format": "rgb24",
+          "rgb_sha256": "755ff21d2f90562e5a53d44e592df4c27ee563dc20fac3959d339ee4cc084698",
+          "pixels_exact": false,
+          "different_channel_values": 22576921,
+          "total_channel_values": 24883200,
+          "max_absolute_difference": 18,
+          "mean_absolute_difference": 2.3091702031893004
+        },
+        {
+          "ffmpeg_format": "bgr24",
+          "rgb_sha256": "755ff21d2f90562e5a53d44e592df4c27ee563dc20fac3959d339ee4cc084698",
+          "pixels_exact": false,
+          "different_channel_values": 22576921,
+          "total_channel_values": 24883200,
+          "max_absolute_difference": 18,
+          "mean_absolute_difference": 2.3091702031893004
+        }
+      ]
+    },
+    {
+      "id": "deepaction-074-Pexels",
+      "variant": "matched",
+      "source_sha256": "34b0b64a31d70790b4690da501cf48baf27509ab7f1da366854225e2b4c7715c",
+      "first_audited_frame": 30,
+      "original_cv_rgb_hash_reproduced": true,
+      "stream": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "replays": [
+        {
+          "ffmpeg_format": "rgb24",
+          "rgb_sha256": "ceb661437ff6975f09693b24ecb1654c4cb6237c7594c06fe948c370b1f2a0c8",
+          "pixels_exact": false,
+          "different_channel_values": 361582,
+          "total_channel_values": 388800,
+          "max_absolute_difference": 6,
+          "mean_absolute_difference": 2.416440329218107
+        },
+        {
+          "ffmpeg_format": "bgr24",
+          "rgb_sha256": "ceb661437ff6975f09693b24ecb1654c4cb6237c7594c06fe948c370b1f2a0c8",
+          "pixels_exact": false,
+          "different_channel_values": 361582,
+          "total_channel_values": 388800,
+          "max_absolute_difference": 6,
+          "mean_absolute_difference": 2.416440329218107
+        }
+      ]
+    },
+    {
+      "id": "deepaction-010-Pexels",
+      "variant": "original",
+      "source_sha256": "17c5d96a119d24c6adbb3ab3ee5a72dd062be9efb4abc23e7b2f4ddcff57a513",
+      "first_audited_frame": 30,
+      "original_cv_rgb_hash_reproduced": true,
+      "stream": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "replays": [
+        {
+          "ffmpeg_format": "rgb24",
+          "rgb_sha256": "5f065bc4853c5284bb4ec5d0a000dfbbd2071fa973dee6b2f4c6555370a619fe",
+          "pixels_exact": false,
+          "different_channel_values": 20898438,
+          "total_channel_values": 24883200,
+          "max_absolute_difference": 10,
+          "mean_absolute_difference": 2.0395535943930043
+        },
+        {
+          "ffmpeg_format": "bgr24",
+          "rgb_sha256": "5f065bc4853c5284bb4ec5d0a000dfbbd2071fa973dee6b2f4c6555370a619fe",
+          "pixels_exact": false,
+          "different_channel_values": 20898438,
+          "total_channel_values": 24883200,
+          "max_absolute_difference": 10,
+          "mean_absolute_difference": 2.0395535943930043
+        }
+      ]
+    },
+    {
+      "id": "deepaction-010-Pexels",
+      "variant": "matched",
+      "source_sha256": "f3b7724ce41781225adf7c422deb3aa200cdcc15a19ed6dabd83f162bf3a4c48",
+      "first_audited_frame": 30,
+      "original_cv_rgb_hash_reproduced": true,
+      "stream": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "replays": [
+        {
+          "ffmpeg_format": "rgb24",
+          "rgb_sha256": "8842474ba790fd9eb443912b3cb081a53a228718dd411dbad585852d0d079948",
+          "pixels_exact": false,
+          "different_channel_values": 599705,
+          "total_channel_values": 691200,
+          "max_absolute_difference": 11,
+          "mean_absolute_difference": 2.089973958333333
+        },
+        {
+          "ffmpeg_format": "bgr24",
+          "rgb_sha256": "8842474ba790fd9eb443912b3cb081a53a228718dd411dbad585852d0d079948",
+          "pixels_exact": false,
+          "different_channel_values": 599705,
+          "total_channel_values": 691200,
+          "max_absolute_difference": 11,
+          "mean_absolute_difference": 2.089973958333333
+        }
+      ]
+    }
+  ],
+  "neural_forwards": 0,
+  "source_or_threshold_changed": false,
+  "root_cause_isolated": false,
+  "scope": "First selected native frame of four already-failed audit cases; source-order replay and two default output formats only. Does not repair the original audit or establish predictive quality."
+}

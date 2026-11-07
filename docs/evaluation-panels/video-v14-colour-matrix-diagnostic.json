@@ -1,0 +1,212 @@
+{
+  "schema": "chipmunk.video-colour-conversion-diagnostic/14",
+  "diagnostic_code_sha256": "91db094adc4e5803c70da729c68195bf283a84e0b55bffc165ae4acf00f0841e",
+  "candidate_journal_sha256": "1f2970c6a31ae37f76e31c1b5d4f3fbda396d1a58c1c1ffef2891a5dbeec60b3",
+  "prior_diagnostic_sha256": "cb08ae54ee4d51b64ca1f97300126cf437a20b8f8071db19c3797bbc54bae601",
+  "opencv_version": "5.0.0",
+  "numpy_version": "2.2.6",
+  "ffmpeg_binary_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+  "cases": [
+    {
+      "id": "deepaction-074-Pexels",
+      "variant": "original",
+      "source_sha256": "86111df3af8a68a46c7564e1bd5a49ca89ff9844623844ab9de8c97fc8080ffc",
+      "native_index": 180,
+      "native_size": [
+        2160,
+        3840
+      ],
+      "opencv_rgb_sha256": "ea1f061b002f8e84e1b4ec10cc4300a4cd3e695e75f32bee5bce5f4dba7430f5",
+      "prior_stream_metadata": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "original_default_rgb_reproduced": true,
+      "comparisons": [
+        {
+          "conversion": "metadata_default",
+          "rgb_sha256": "755ff21d2f90562e5a53d44e592df4c27ee563dc20fac3959d339ee4cc084698",
+          "equals_original_opencv": false,
+          "changed_channel_values": 22576921,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 18,
+          "mean_absolute_channel_difference": 2.3091702031893004
+        },
+        {
+          "conversion": "explicit_bt601",
+          "rgb_sha256": "ea1f061b002f8e84e1b4ec10cc4300a4cd3e695e75f32bee5bce5f4dba7430f5",
+          "equals_original_opencv": true,
+          "changed_channel_values": 0,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 0,
+          "mean_absolute_channel_difference": 0.0
+        },
+        {
+          "conversion": "explicit_bt709",
+          "rgb_sha256": "755ff21d2f90562e5a53d44e592df4c27ee563dc20fac3959d339ee4cc084698",
+          "equals_original_opencv": false,
+          "changed_channel_values": 22576921,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 18,
+          "mean_absolute_channel_difference": 2.3091702031893004
+        }
+      ]
+    },
+    {
+      "id": "deepaction-074-Pexels",
+      "variant": "matched",
+      "source_sha256": "34b0b64a31d70790b4690da501cf48baf27509ab7f1da366854225e2b4c7715c",
+      "native_index": 30,
+      "native_size": [
+        270,
+        480
+      ],
+      "opencv_rgb_sha256": "a19825ab4553aba049c00eaf111af807b38012b18bc8ba89a5fb8ead35cd0f43",
+      "prior_stream_metadata": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "original_default_rgb_reproduced": true,
+      "comparisons": [
+        {
+          "conversion": "metadata_default",
+          "rgb_sha256": "ceb661437ff6975f09693b24ecb1654c4cb6237c7594c06fe948c370b1f2a0c8",
+          "equals_original_opencv": false,
+          "changed_channel_values": 361582,
+          "total_channel_values": 388800,
+          "max_absolute_channel_difference": 6,
+          "mean_absolute_channel_difference": 2.416440329218107
+        },
+        {
+          "conversion": "explicit_bt601",
+          "rgb_sha256": "a19825ab4553aba049c00eaf111af807b38012b18bc8ba89a5fb8ead35cd0f43",
+          "equals_original_opencv": true,
+          "changed_channel_values": 0,
+          "total_channel_values": 388800,
+          "max_absolute_channel_difference": 0,
+          "mean_absolute_channel_difference": 0.0
+        },
+        {
+          "conversion": "explicit_bt709",
+          "rgb_sha256": "ceb661437ff6975f09693b24ecb1654c4cb6237c7594c06fe948c370b1f2a0c8",
+          "equals_original_opencv": false,
+          "changed_channel_values": 361582,
+          "total_channel_values": 388800,
+          "max_absolute_channel_difference": 6,
+          "mean_absolute_channel_difference": 2.416440329218107
+        }
+      ]
+    },
+    {
+      "id": "deepaction-010-Pexels",
+      "variant": "original",
+      "source_sha256": "17c5d96a119d24c6adbb3ab3ee5a72dd062be9efb4abc23e7b2f4ddcff57a513",
+      "native_index": 30,
+      "native_size": [
+        3840,
+        2160
+      ],
+      "opencv_rgb_sha256": "d3d3a699dc1198706831a74708778031e4a89edf626913cc1c60d84e303620db",
+      "prior_stream_metadata": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "original_default_rgb_reproduced": true,
+      "comparisons": [
+        {
+          "conversion": "metadata_default",
+          "rgb_sha256": "5f065bc4853c5284bb4ec5d0a000dfbbd2071fa973dee6b2f4c6555370a619fe",
+          "equals_original_opencv": false,
+          "changed_channel_values": 20898438,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 10,
+          "mean_absolute_channel_difference": 2.0395535943930043
+        },
+        {
+          "conversion": "explicit_bt601",
+          "rgb_sha256": "d3d3a699dc1198706831a74708778031e4a89edf626913cc1c60d84e303620db",
+          "equals_original_opencv": true,
+          "changed_channel_values": 0,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 0,
+          "mean_absolute_channel_difference": 0.0
+        },
+        {
+          "conversion": "explicit_bt709",
+          "rgb_sha256": "5f065bc4853c5284bb4ec5d0a000dfbbd2071fa973dee6b2f4c6555370a619fe",
+          "equals_original_opencv": false,
+          "changed_channel_values": 20898438,
+          "total_channel_values": 24883200,
+          "max_absolute_channel_difference": 10,
+          "mean_absolute_channel_difference": 2.0395535943930043
+        }
+      ]
+    },
+    {
+      "id": "deepaction-010-Pexels",
+      "variant": "matched",
+      "source_sha256": "f3b7724ce41781225adf7c422deb3aa200cdcc15a19ed6dabd83f162bf3a4c48",
+      "native_index": 30,
+      "native_size": [
+        640,
+        360
+      ],
+      "opencv_rgb_sha256": "89c92215c4de9192ff3be411bbcc5a9e314e190e52e3eab464b17b60f880cbce",
+      "prior_stream_metadata": {
+        "codec_name": "h264",
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      "original_default_rgb_reproduced": true,
+      "comparisons": [
+        {
+          "conversion": "metadata_default",
+          "rgb_sha256": "8842474ba790fd9eb443912b3cb081a53a228718dd411dbad585852d0d079948",
+          "equals_original_opencv": false,
+          "changed_channel_values": 599705,
+          "total_channel_values": 691200,
+          "max_absolute_channel_difference": 11,
+          "mean_absolute_channel_difference": 2.089973958333333
+        },
+        {
+          "conversion": "explicit_bt601",
+          "rgb_sha256": "89c92215c4de9192ff3be411bbcc5a9e314e190e52e3eab464b17b60f880cbce",
+          "equals_original_opencv": true,
+          "changed_channel_values": 0,
+          "total_channel_values": 691200,
+          "max_absolute_channel_difference": 0,
+          "mean_absolute_channel_difference": 0.0
+        },
+        {
+          "conversion": "explicit_bt709",
+          "rgb_sha256": "8842474ba790fd9eb443912b3cb081a53a228718dd411dbad585852d0d079948",
+          "equals_original_opencv": false,
+          "changed_channel_values": 599705,
+          "total_channel_values": 691200,
+          "max_absolute_channel_difference": 11,
+          "mean_absolute_channel_difference": 2.089973958333333
+        }
+      ]
+    }
+  ],
+  "neural_forwards": 0,
+  "original_audit_changed": false,
+  "original_rejection_changed": false,
+  "serving_changed": false,
+  "scope": "Post-hoc first selected frame of the four failed cases, shared single FFmpeg decode and three colour-conversion branches. Original OpenCV/default RGB hashes must reproduce. No complete-clip/model replay, changed pixels in original journal, relaxed tolerance or detection-quality claim."
+}

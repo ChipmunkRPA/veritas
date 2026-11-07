@@ -67,9 +67,12 @@ The unchanged16-case native audit completed under the same memory limits after
 its own public freeze, commit `637e3a35c162535ceb5c3890eaae9fd984e6c2aa`.
 Twelve cases passed. Four cases (DeepAction010/074 Pexels originals and their
 matched versions) failed exact RGB correspondence between OpenCV and separate
-FFmpeg capture. Their cause is unresolved. Those cases did not complete their
-later neural-response replay. No tolerance was widened and no failed case was
-substituted. The native sampler was also incomplete. A successful arithmetic
+FFmpeg capture. A later [source-only colour audit](video-v14-colour-rendering-audit.md)
+reproduced all32 original input-frame/crop/tensor commitments under explicit
+BT.601 rendering, while the sources and FFmpeg default use BT.709. This explains
+the rendering discrepancy and preserves the original failed receipt. Those cases
+still did not complete their later neural-response replay. No tolerance was
+widened and no failed case was substituted. The native sampler was also incomplete. A successful arithmetic
 review validates reported calculations and failure handling; it cannot turn
 these native failures into passes.
 

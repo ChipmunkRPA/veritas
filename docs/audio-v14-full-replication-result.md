@@ -1,4 +1,4 @@
-# Audio full replication completed; calibrated comparison running
+# Audio full replication completed
 
 7 November 2026. The [prospectively frozen complete repeat](audio-v14-full-replication.md)
 finished all4,248 original inputs from input0, with4,186 assessed,62 unassessed
@@ -33,3 +33,8 @@ validation. License/sample-rate limitations in the original protocol persist.
 No recordings or feature values are added by this metadata-only release.
 The serving model, own existing calibration, overall confidence, billing and
 GCP remain unchanged. Actual outside human reviewers remain zero.
+
+Subsequent update: the [complete development comparison](audio-separation-v14-development-evaluation.md)
+rejects both arms. Separate numerical reconstruction and exact refits passed;
+the new native replay remains running. The linked completion receipt is the
+earlier extraction/post-fitting snapshot, not a current accuracy assessment.

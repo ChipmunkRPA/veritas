@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.audio-separation-numerical/14",
+  "passed": true,
+  "lock_sha256": "93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b",
+  "receipt_sha256": "4a2f277f909767e351f7121bb715de1c2729680915e847256f7bbef31b165292",
+  "head_sha256": "c0617baecea5b744060e7301f954ca6f094ea59e78d4c1a2617e9d26431cc6c9",
+  "responses_sha256": "fa7569d82b07344a649f4926bbec3c461fb1bbb4c634546cb84c415901cee6f1",
+  "summary_sha256": "3c9d6646520cad6f05557e688f94ab7c5a520836ddb0b3e8d404db8728c561b8",
+  "review_code_sha256": "1463fb03934eec7d0e37725af83f4c7e8dddcee306d3af3800c5fcc91a474b11",
+  "inputs": 4248,
+  "outcomes": 1449,
+  "arms": {
+    "separated": {
+      "normalization_rebuilt": true,
+      "calibration_rebuilt": true,
+      "bag_probability_stability_counts_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true
+    },
+    "complement": {
+      "normalization_rebuilt": true,
+      "calibration_rebuilt": true,
+      "bag_probability_stability_counts_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true
+    }
+  },
+  "scope": "Separate normalization, source/bag predictor, group ranks, existing independent guard/stability and counts; shared declared statistics/gates and exact refit learner. No source forward or outside human review."
+}

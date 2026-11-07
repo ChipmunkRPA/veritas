@@ -76,8 +76,13 @@ PYTHONPATH=backend python -m scripts.reproduce_video_color_v14 /tmp/new-colour-r
 ```
 
 [Local synthetic receipt](evaluation-panels/video-v14-local-synthetic-colour.json).
-The public workflow adds an actual isolated Linux experiment; its result is
-pending until observed and reported separately. A nonreproduced hypothesis
+The public workflow adds an actual isolated Linux experiment. Its first
+[attempt](https://github.com/ChipmunkRPA/veritas/actions/runs/42356352972)
+stopped when the FFmpeg availability check failed; the
+experiment never ran and no hypothesis outcome was produced. The workflow now
+installs that missing system dependency when needed, with source experiment,
+library pins and exact conditions unchanged. Its result remains pending until
+observed and reported separately. A nonreproduced hypothesis
 leaves a completed failure receipt and fails the job rather than relaxing the
 checks. Synthetic decoder reproduction is not real-clip or detector validation,
 and it is not participation by an outside human reviewer.

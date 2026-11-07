@@ -1,5 +1,13 @@
 # Fresh image-crop confirmation: preparation and execution
 
+## Completed outcome
+
+All192 planned fresh inputs completed with zero failures. Both formats failed
+the unchanged genuine-highlight allowance, so the crop method remains disabled.
+Twelve consumed-source native replays matched exactly before fresh inference.
+See the [aggregate results and limits](fused-crop-v6-confirmation-result.md).
+The prospective preparation below is retained as the record before execution.
+
 6 November 2026. Source preparation and the prospective freeze are complete.
 No fresh detector outcome or service adoption is established by this record.
 

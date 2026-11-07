@@ -1,0 +1,267 @@
+{
+  "schema": "chipmunk.fused-crop-confirmation-aggregate/6",
+  "section": "confirmation",
+  "freeze_sha256": "b104d811e896390fda8d6bd4d4e3d89fa1d80a1c647536f052649a2fe5e03ffd",
+  "predictions_sha256": "81838d9d4ceceec49ee48212a72c217ea714dac8b654bf4965dc998eb21a4492",
+  "conditions": {
+    "native": {
+      "baseline": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 2,
+        "edits_with_overlap": 12,
+        "mean_edit_iou": 0.18395056979618474,
+        "mean_edit_pixel_f1": 0.20990234691068774
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 9,
+        "edits_with_overlap": 20,
+        "mean_edit_iou": 0.23354543696107,
+        "mean_edit_pixel_f1": 0.2789321367679997
+      },
+      "paired_iou_difference": {
+        "mean": 0.04959486716488524,
+        "source_bootstrap_95_percent": [
+          0.013689074053157127,
+          0.09555993079904264
+        ]
+      },
+      "crop_failures": 0,
+      "crop_unassessed": 0,
+      "meets_fresh_count_tradeoff": false,
+      "qualifies_for_local_integration": false
+    },
+    "jpeg75": {
+      "baseline": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 3,
+        "edits_with_overlap": 12,
+        "mean_edit_iou": 0.10343970102436507,
+        "mean_edit_pixel_f1": 0.13790622243478237
+      },
+      "candidate": {
+        "originals": 48,
+        "edits": 48,
+        "unassessed": 0,
+        "originals_with_regions": 6,
+        "edits_with_overlap": 13,
+        "mean_edit_iou": 0.10371079366370124,
+        "mean_edit_pixel_f1": 0.13844144318201498
+      },
+      "paired_iou_difference": {
+        "mean": 0.0002710926393361766,
+        "source_bootstrap_95_percent": [
+          0.0,
+          0.00081327791800853
+        ]
+      },
+      "crop_failures": 0,
+      "crop_unassessed": 0,
+      "meets_fresh_count_tradeoff": false,
+      "qualifies_for_local_integration": false
+    }
+  },
+  "families": {
+    "firefly": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 5,
+          "mean_edit_iou": 0.21234129602021212,
+          "mean_edit_pixel_f1": 0.2519824238965328
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 7,
+          "mean_edit_iou": 0.2608919002424322,
+          "mean_edit_pixel_f1": 0.32190808212241284
+        },
+        "paired_iou_difference": {
+          "mean": 0.04855060422222006,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.12207256583150639
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": false
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 1,
+          "edits_with_overlap": 2,
+          "mean_edit_iou": 0.041777749272057484,
+          "mean_edit_pixel_f1": 0.061712293510194055
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 2,
+          "mean_edit_iou": 0.041777749272057484,
+          "mean_edit_pixel_f1": 0.061712293510194055
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": false
+      }
+    },
+    "flux-fill": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 1,
+          "edits_with_overlap": 3,
+          "mean_edit_iou": 0.15814745300987704,
+          "mean_edit_pixel_f1": 0.1708428228312368
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 5,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.21731358770603454,
+          "mean_edit_pixel_f1": 0.24436300665850116
+        },
+        "paired_iou_difference": {
+          "mean": 0.0591661346961575,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.16596573877804208
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": false
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 4,
+          "mean_edit_iou": 0.16117899625466472,
+          "mean_edit_pixel_f1": 0.19193404244299786
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 4,
+          "mean_edit_iou": 0.16117899625466472,
+          "mean_edit_pixel_f1": 0.19193404244299786
+        },
+        "paired_iou_difference": {
+          "mean": 0.0,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.0
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": false
+      }
+    },
+    "sd2": {
+      "native": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 1,
+          "edits_with_overlap": 4,
+          "mean_edit_iou": 0.18136296035846508,
+          "mean_edit_pixel_f1": 0.2068817940042936
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 7,
+          "mean_edit_iou": 0.22243082293474326,
+          "mean_edit_pixel_f1": 0.27052532152308517
+        },
+        "paired_iou_difference": {
+          "mean": 0.041067862576278175,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.09909720355173182
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": true
+      },
+      "jpeg75": {
+        "baseline": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 0,
+          "edits_with_overlap": 6,
+          "mean_edit_iou": 0.10736235754637302,
+          "mean_edit_pixel_f1": 0.16007233135115517
+        },
+        "candidate": {
+          "originals": 16,
+          "edits": 16,
+          "unassessed": 0,
+          "originals_with_regions": 2,
+          "edits_with_overlap": 7,
+          "mean_edit_iou": 0.10817563546438154,
+          "mean_edit_pixel_f1": 0.16167799359285298
+        },
+        "paired_iou_difference": {
+          "mean": 0.0008132779180085299,
+          "source_bootstrap_95_percent": [
+            0.0,
+            0.00243983375402559
+          ]
+        },
+        "crop_failures": 0,
+        "crop_unassessed": 0,
+        "meets_fresh_count_tradeoff": false
+      }
+    }
+  },
+  "may_enable_service": false,
+  "overall_confidence_weight": 0,
+  "limits": "Source-disjoint TGIF/TGIF2 localization component comparison; no overall confidence weight. Formats share48 sources. RGB-change references do not independently prove semantic edit boundaries. Native inference parity and source separation are local checks, not outside review. Qualifying localization still requires UI/PDF/JSON integration verification; no automatic default change.",
+  "planned_inputs": 192,
+  "assessed_inputs": 192,
+  "failures": 0,
+  "source_pairs": 48,
+  "private_review_sha256": "c6d7ef84781cfe0671b27e8da191f799c9c8b9d79ed5c8d2ba831f7a2bdf9aea",
+  "outside_reviewers": 0
+}

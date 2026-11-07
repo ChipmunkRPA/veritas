@@ -65,6 +65,21 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed the fresh image-crop comparison: all192 inputs, zero failures.
+  Native overlapping edits12→20 but genuine highlights2→9; JPEG edits12→13
+  and highlights3→6. Both fail the unchanged allowance and remain disabled.
+  Twelve consumed native replays match exactly. All288 TGIF originals/eight
+  historical web examples are now excluded from future confirmation.
+  [Complete aggregate result](fused-crop-v6-confirmation-result.md).
+
+- Completed audio v12: all4,248 extractions/all1,449 development outcomes,
+  zero failures. Correct conclusions913/920 versus service1,004, with2 false AI
+  each and534/527 inconclusive versus387. Both fail the same four of sixteen
+  gates. All508 native checks, both exact refits and public-only numerical
+  reconstruction pass. Aggregate results are published; full derived-feature
+  disclosure remains pending. No reserved confirmation or service changes.
+  [Complete aggregate result](audio-layer-v12-development-evaluation.md).
+
 - Prepared a different noise-aware speech backbone with94.4million frozen
   parameters, publisher-checksummed weights and model-card-linked CC-BY-SA-3.0
   terms (separate code MIT). Strict load and two synthetic-only repeated forwards

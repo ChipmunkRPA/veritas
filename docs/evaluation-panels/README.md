@@ -23,12 +23,22 @@ the20-file method/runtime/weight/source freeze and unchanged genuine-only gates.
 Its complete source audit and78 selected tests are prospective preparation, not
 held-out accuracy or outside human validation.
 [Confirmation protocol and execution](../fused-crop-v6-confirmation-execution.md).
+The completed192-input comparison rejects both formats for excessive genuine
+highlights. `fused-crop-v6-confirmation-summary.json` publishes only aggregate
+counts/uncertainty, with no file-level outcomes or source media.
+[Result and limitations](../fused-crop-v6-confirmation-result.md).
 
 `audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
 unprojected-final control, unchanged source roles/checkpoints/runtime/service and
 all 64 implementation pins. Model-free preflight and nine actual-freeze alteration
 checks are prospective preparation, not real-model parity, accuracy or outside
 human testing. [Protocol and remaining execution](../audio-layer-v12-execution.md).
+Both mappings subsequently failed four of sixteen unchanged requirements.
+The [public aggregate](../audio-layer-v12-development-evaluation.json) includes
+all condition/generator counts and gates, excluding file-level results, voice
+vectors and fitted parameters. The complete lossless packet passed locally;
+its public disclosure remains a separate pending decision.
+[Result and verification scope](../audio-layer-v12-development-evaluation.md).
 
 `audio-v13-wavlm-source-review.json` records the new noise-aware backbone's pinned
 source/checksum/license references, strict structural load and synthetic-only

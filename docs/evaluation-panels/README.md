@@ -10,6 +10,10 @@ or a generic dataset link.
 
 ## Latest review entry points (7 November 2026)
 
+- [Regional patch-drift comparison](../image-patch-drift-v8-development-evaluation.md):
+  all312 scalar/source bindings, four genuine-only points, complete pixel-count
+  replay and both preserved operational failures. Both readouts located0/48 edits
+  in each format versus12/48 current. All four arms rejected; no service change.
 - [Face-transition development](../video-v16-sface-development-evaluation.md):
   all120 consumed cases, final time ranges and a standard-library replay. Local
   and actual Linux review reproduce all counts and ten advancement requirements.
@@ -17,7 +21,9 @@ or a generic dataset link.
   [fresh-source confirmation](../video-v17-sface-confirmation-evaluation.md)
   subsequently located60/60 edits versus25/60 with the same26/60 genuine flags;
   58 ranges came from the new cue and two from its declared fallback. All ten
-  requirements passed. Local integration remains required before default changes.
+  requirements passed. The [completed local rollout](../local-face-appearance-v17-rollout.md)
+  covers actual-adapter parity, prepaid/UI/API/PDF/JSON/name filtering and rollback.
+  The local main app uses the upgrade; the repository default remains legacy.
 - [Image generation comparison](../image-smaug-v7-development-evaluation.md):
   all224 scalar inputs and original mixed-image gates, including the failed
   regional-edit/JPEG advancement result. Linux replay passed; no service adoption.

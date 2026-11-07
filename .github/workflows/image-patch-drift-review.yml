@@ -1,0 +1,66 @@
+name: Regional image scalar-count review
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/image-patch-drift-review.yml
+      - backend/scripts/reproduce_patch_drift_v8.py
+      - docs/evaluation-panels/image-v8-patch-drift-public-scalars.json
+      - docs/evaluation-panels/image-v8-patch-drift-release.json
+
+permissions:
+  contents: read
+
+jobs:
+  scalar-count-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: backend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.6"
+      - name: Verify pinned public package and source bytes
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, json, pathlib
+          public = pathlib.Path('docs/evaluation-panels')
+          release = json.loads((public/'image-v8-patch-drift-release.json').read_text())
+          for name, expected in release['files_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
+          frozen = json.loads((public/'image-v8-patch-drift-development-freeze.json').read_text())
+          for name, expected in frozen['implementation_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
+          for name in ('torch', 'transformers', 'numpy', 'PIL', 'cv2', 'fastapi'):
+              assert importlib.util.find_spec(name) is None, name
+          print('Exact public packet and source hashes; standard library only.')
+          PY
+      - name: Refit genuine points and recompute every development count
+        run: python -m scripts.reproduce_patch_drift_v8 review "$RUNNER_TEMP/patch-drift-review.json"
+      - name: Refuse altered identities, labels, outcomes and adoption claims
+        run: python -m scripts.reproduce_patch_drift_v8 tamper "$RUNNER_TEMP/patch-drift-tamper.json"
+      - name: Compare actual Linux receipts with the recorded local receipts
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          for suffix in ('review', 'tamper'):
+              actual = json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/f'patch-drift-{suffix}.json').read_text())
+              expected = json.loads(pathlib.Path(f'docs/evaluation-panels/image-v8-patch-drift-portable-{suffix}.json').read_text())
+              assert actual == expected, suffix
+          print('Both actual Linux receipts equal the recorded local receipts exactly.')
+          PY
+      - name: Show actual receipts or explicit incomplete status
+        if: always()
+        run: |
+          for name in patch-drift-review patch-drift-tamper; do
+            if [ -f "$RUNNER_TEMP/$name.json" ]; then
+              cat "$RUNNER_TEMP/$name.json"
+            else
+              echo "No completed $name receipt; inspect the failed step."
+            fi
+          done

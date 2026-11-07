@@ -1,0 +1,305 @@
+{
+  "schema": "chipmunk.patch-drift-portable-review/8",
+  "passed": true,
+  "verified_cases": 312,
+  "genuine_points_refitted": 4,
+  "development_metric_sets_recomputed": 576,
+  "native_probe_receipts_bound": 12,
+  "conditions": {
+    "native": {
+      "baseline": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 12,
+          "missed_edits": 36,
+          "mean_edit_iou": 0.18395056979618474,
+          "genuine_highlights": 2,
+          "genuine_mean_highlight_fraction": 0.0018992205269667648
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 5,
+            "missed_edits": 11,
+            "mean_edit_iou": 0.21234129602021212,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 3,
+            "missed_edits": 13,
+            "mean_edit_iou": 0.15814745300987704,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.0032605580283034527
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.18136296035846508,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.002437103552596842
+          }
+        }
+      },
+      "arms": {
+        "raw": {
+          "statistics": {
+            "overall": {
+              "edited_count": 48,
+              "genuine_count": 48,
+              "overlapping_edits": 0,
+              "missed_edits": 48,
+              "mean_edit_iou": 0.0,
+              "genuine_highlights": 1,
+              "genuine_mean_highlight_fraction": 0.00030504079920689394
+            },
+            "families": {
+              "firefly": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "flux-fill": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "sd2": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 1,
+                "genuine_mean_highlight_fraction": 0.0009151223976206818
+              }
+            }
+          },
+          "requirements": {
+            "complete": true,
+            "independent_checks": true,
+            "at_least_four_more_overlapping_edits": false,
+            "mean_edit_iou_not_lower": false,
+            "genuine_highlights_within_one": true,
+            "no_family_overlap_loss": false
+          },
+          "passed": false
+        },
+        "within_image": {
+          "statistics": {
+            "overall": {
+              "edited_count": 48,
+              "genuine_count": 48,
+              "overlapping_edits": 0,
+              "missed_edits": 48,
+              "mean_edit_iou": 0.0,
+              "genuine_highlights": 0,
+              "genuine_mean_highlight_fraction": 0.0
+            },
+            "families": {
+              "firefly": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "flux-fill": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "sd2": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              }
+            }
+          },
+          "requirements": {
+            "complete": true,
+            "independent_checks": true,
+            "at_least_four_more_overlapping_edits": false,
+            "mean_edit_iou_not_lower": false,
+            "genuine_highlights_within_one": true,
+            "no_family_overlap_loss": false
+          },
+          "passed": false
+        }
+      },
+      "selected_arm": null
+    },
+    "jpeg75": {
+      "baseline": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 12,
+          "missed_edits": 36,
+          "mean_edit_iou": 0.10343970102436507,
+          "genuine_highlights": 3,
+          "genuine_mean_highlight_fraction": 0.003989990540947771
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 2,
+            "missed_edits": 14,
+            "mean_edit_iou": 0.041777749272057484,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.007385248767400875
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.16117899625466472,
+            "genuine_highlights": 2,
+            "genuine_mean_highlight_fraction": 0.0045847228554424385
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 6,
+            "missed_edits": 10,
+            "mean_edit_iou": 0.10736235754637302,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          }
+        }
+      },
+      "arms": {
+        "raw": {
+          "statistics": {
+            "overall": {
+              "edited_count": 48,
+              "genuine_count": 48,
+              "overlapping_edits": 0,
+              "missed_edits": 48,
+              "mean_edit_iou": 0.0,
+              "genuine_highlights": 1,
+              "genuine_mean_highlight_fraction": 0.00018426659641484624
+            },
+            "families": {
+              "firefly": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "flux-fill": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "sd2": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 1,
+                "genuine_mean_highlight_fraction": 0.0005527997892445387
+              }
+            }
+          },
+          "requirements": {
+            "complete": true,
+            "independent_checks": true,
+            "at_least_four_more_overlapping_edits": false,
+            "mean_edit_iou_not_lower": false,
+            "genuine_highlights_within_one": true,
+            "no_family_overlap_loss": false
+          },
+          "passed": false
+        },
+        "within_image": {
+          "statistics": {
+            "overall": {
+              "edited_count": 48,
+              "genuine_count": 48,
+              "overlapping_edits": 0,
+              "missed_edits": 48,
+              "mean_edit_iou": 0.0,
+              "genuine_highlights": 0,
+              "genuine_mean_highlight_fraction": 0.0
+            },
+            "families": {
+              "firefly": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "flux-fill": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              },
+              "sd2": {
+                "edited_count": 16,
+                "genuine_count": 16,
+                "overlapping_edits": 0,
+                "missed_edits": 16,
+                "mean_edit_iou": 0.0,
+                "genuine_highlights": 0,
+                "genuine_mean_highlight_fraction": 0.0
+              }
+            }
+          },
+          "requirements": {
+            "complete": true,
+            "independent_checks": true,
+            "at_least_four_more_overlapping_edits": false,
+            "mean_edit_iou_not_lower": false,
+            "genuine_highlights_within_one": true,
+            "no_family_overlap_loss": false
+          },
+          "passed": false
+        }
+      },
+      "selected_arm": null
+    }
+  },
+  "scope": "Standard-library scalar/source-binding/count replay; no neural inference or outside human review."
+}

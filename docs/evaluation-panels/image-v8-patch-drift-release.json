@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.patch-drift-public-release/8",
+  "files_sha256": {
+    "backend/scripts/reproduce_patch_drift_v8.py": "02e47242566d3428199778586f1f09114e7eff02ac54bbd169cea7e414f4a8bf",
+    ".github/workflows/image-patch-drift-review.yml": "984305fd1b2e269cfd569c6b4dc70612ecdf3609a9dc8498be4020f038c82cc4",
+    "docs/evaluation-panels/image-v8-patch-drift-public-scalars.json": "32aeabcfd2e04a432eee30b46e6915e591616985dfa75397ae5a58c04ebb20d5",
+    "docs/evaluation-panels/image-v8-patch-drift-development-review.json": "9f71bf5715067114de6cdfbd0afb222c803f6ffa7db9bf0dc5a055b37e857d2f",
+    "docs/evaluation-panels/image-v8-patch-drift-development-panel.json": "8d443e9bcea966401ecb7b8bfb0b778087ee1f2be1b0de8175ad8c12385fdb5f",
+    "docs/evaluation-panels/image-v8-patch-drift-development-freeze.json": "9229bc0afd16c4e8ff35a11602ad01bd6e022e54e59fe6b59e99b25b588ea8d3",
+    "docs/evaluation-panels/image-v8-patch-drift-operating-points.json": "5777b0624e2618960c9a15c9c56081d42518c629192a0c6a562441aa4fbb1534",
+    "docs/evaluation-panels/image-v8-patch-drift-operational-amendment.json": "5ea473247ba6f1a70413fc76fc59d32d3599bc1003b4c8a5a83efb1a0b5b5da4",
+    "docs/evaluation-panels/image-v8-patch-drift-retry-repeat.json": "891a46be61aca73fe036c07af2be8a91c2c9cda0fcaff3fc845f279653190e81",
+    "docs/evaluation-panels/image-v8-patch-drift-synthetic-native.json": "e374b2ece9027474411fc400ff31b15a03e3c605738b4b700e261f45b4fe92b3",
+    "docs/evaluation-panels/image-v8-patch-drift-portable-review.json": "513cf311c1539abff009fd590eedfa2ed6f4eb0ce6f53fb4f3f5acfdaabef360",
+    "docs/evaluation-panels/image-v8-patch-drift-portable-tamper.json": "290181004b8833c9638855f13fd23acfe8f797ff0ce075a1df26d2d8bdfa3987"
+  },
+  "public_case_count": 312,
+  "source_media_or_real_embeddings_included": false,
+  "serving_changed": false,
+  "scope": "Exact local scalar receipts and pinned source; actual separate-host status is recorded after the workflow completes."
+}

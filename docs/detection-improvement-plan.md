@@ -63,6 +63,25 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 7 November
+
+- Completed the regional patch-drift comparison:312 consumed inputs, exact
+  native/pixel replay and genuine-only points published before development.
+  Both readouts located0/48 edits per format versus12/48 current. All four arms
+  rejected; no fresh confirmation or service change. Two operational failures
+  were retained, a resource-only retry was prospectively published, and all34
+  repeated cases matched exactly. [Complete negative result and reproduction](image-patch-drift-v8-development-evaluation.md).
+- Finished fresh face-transition confirmation and local integration:60/60
+  located edits versus25/60, same26/60 genuine review flags;58 new-cue ranges
+  and two declared fallbacks. Actual-adapter parity, paid local flows,
+  UI/API/PDF/JSON filtering and rollback passed. The main local app uses the
+  appearance cue; repository default remains legacy. [Local rollout](local-face-appearance-v17-rollout.md).
+- Public audio packages, complete rejected speech/writing comparisons and
+  separate-host replay entry points are available in
+  [independent testing](independent-testing.md). Outside human reviewers remain
+  zero, outreach is not authorized, and GCP is still deferred. Regional image
+  edits, difficult audio, lip sync, general video and writing remain open work.
+
 ## Progress on 6 November
 
 - Published/remote-verified the full two-source audio freeze as220e488 before

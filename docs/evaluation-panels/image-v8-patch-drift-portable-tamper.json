@@ -1,0 +1,59 @@
+{
+  "schema": "chipmunk.patch-drift-portable-tamper/8",
+  "passed": true,
+  "refused": 13,
+  "cases": [
+    {
+      "id": "missing_case",
+      "refused": true
+    },
+    {
+      "id": "duplicated_case",
+      "refused": true
+    },
+    {
+      "id": "changed_source",
+      "refused": true
+    },
+    {
+      "id": "changed_role",
+      "refused": true
+    },
+    {
+      "id": "changed_label",
+      "refused": true
+    },
+    {
+      "id": "changed_input",
+      "refused": true
+    },
+    {
+      "id": "missing_native_probe",
+      "refused": true
+    },
+    {
+      "id": "changed_genuine_maximum",
+      "refused": true
+    },
+    {
+      "id": "changed_pixel_count",
+      "refused": true
+    },
+    {
+      "id": "changed_point_binding",
+      "refused": true
+    },
+    {
+      "id": "changed_retry_provenance",
+      "refused": true
+    },
+    {
+      "id": "false_adoption_claim",
+      "refused": true
+    },
+    {
+      "id": "false_advancement_claim",
+      "refused": true
+    }
+  ]
+}

@@ -37,7 +37,7 @@ provide human outside review, or alter the application or GCP infrastructure.
 PYTHONPATH=backend python -m scripts.reproduce_video_yuv_v15 NEW_RECEIPT.json
 ```
 
-## Observed local outcome; Linux pending
+## Observed local and Linux outcomes
 
 Two local executions recovered every native byte and authored timestamp
 exactly, with identical native and renderer RGB hashes between runs. OpenCV
@@ -45,5 +45,24 @@ matches explicit BT.601; metadata/default matches explicit BT.709. The
 [first local receipt](evaluation-panels/video-v15-local-native-yuv.json)
 records the full commitments and actual decoder builds. Fourteen source/clock/
 observation tests and seven existing replay-clock tests passed. No integrity
-test requires an OpenCV mismatch. The separate Linux execution is pending;
-cross-platform renderer identity has not yet been established.
+test requires an OpenCV mismatch.
+
+The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42357968808)
+completed its source-integrity checks. All147,456 native bytes, their SHA-256
+and every timestamp match the authored local source exactly. Linux OpenCV
+matches its default/explicit BT.709 branch, rather than its BT.601 branch.
+[Completed Linux receipt](evaluation-panels/linux-video-v15-native-yuv.json).
+
+Despite identical native YUV input, **both explicit renderer RGB hashes still
+differ across hosts**. The experiment removes source RGB-to-YUV encoding as
+that discrepancy's cause, but does not identify a single library/version cause
+or establish pixel-identical conversion. The actual system FFmpeg versions
+are7.0.2 locally and6.1.1 on Linux; bundled OpenCV FFmpeg/swscale builds differ
+as previously recorded. A package-version match is insufficient evidence for
+an identical rendering contract. Future cross-platform calibration and native
+evidence require the actual decoder/build and input/output commitments.
+
+Linux workflow success means native source integrity and observations were
+recorded, not that the earlier failed RGB hypothesis became true, the explicit
+renderer hashes agree, a detector improved or an outside reviewer participated.
+No original audit/gate, threshold, tolerance, score or serving method changed.

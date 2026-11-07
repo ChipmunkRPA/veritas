@@ -1,0 +1,187 @@
+{
+  "schema": "chipmunk.patch-drift-synthetic-native/8",
+  "passed": true,
+  "freeze_sha256": "e6872c605cd1d1a42fda7bdc59f1026b2d5729d86dd2ce1f7fdce6889477393b",
+  "cases": [
+    {
+      "id": "authored-00",
+      "passed": true,
+      "source_geometry": [
+        448,
+        448,
+        3
+      ],
+      "source_rgb_sha256": "9e327462720712c63a0e01716721cab1f74ad900472fc1a805fecf8510ca085a",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "8a25f9d000396f94712ddb8f040a3e078c6dd832da415568d3e0112c4a559b90",
+        "changed_float32_sha256": "a774433ca0b857dead24497a9726670dffec9b9dee961f8e15669cf366698d0e",
+        "normalized_nchw_float32_sha256": "19553d1d66ad8574592ca9336b09f7c55c604f6d5e19812f1c21df9d86a11b34",
+        "native_features_float32_sha256": "0c4ddd628b195c2815e80a51491b99895dbd114a3ea6ae8ef299100b46736d03",
+        "native_raw_map_float32_sha256": "a0b2ddd127bff0c9a97046397beb33b042f7e0ef2958608d3e2fd17d2344642e",
+        "filtered_map_float32_sha256": "29ae8af7dd9585d6495b34f428aff826985c605866215742098614d784398506",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "4a976d5ce60656c0713ed99f0d64a25dab6e39db705d2c2e87541626f3a59af4"
+    },
+    {
+      "id": "authored-01",
+      "passed": true,
+      "source_geometry": [
+        448,
+        448,
+        3
+      ],
+      "source_rgb_sha256": "34ffc39a401ffa861ce755d87242518f437646679b37b7feff13db6d3a6294ae",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "2f1832c94e8516c72e93d104f0d014a99263ab1ccce23e840c32b3cb38cf18cd",
+        "changed_float32_sha256": "2f1832c94e8516c72e93d104f0d014a99263ab1ccce23e840c32b3cb38cf18cd",
+        "normalized_nchw_float32_sha256": "9a45dc77fab66c7e68766d03d88b7e19b1ea980f221afbffe355184db13f0073",
+        "native_features_float32_sha256": "3d604b5dcb8caab346a806c883b0eeda08ba33d249bf6f74655516d4296fd2a9",
+        "native_raw_map_float32_sha256": "3ba6038a29ddc9470d29c5a60bf1ccb03679628cba69bbe56374f15f8bdbc770",
+        "filtered_map_float32_sha256": "51b3878243689f69a5c61c59fe70e5c6734fd5dd3320f423930f4cc511689344",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "fc23b24179d44452c0bbf09cf7950dcfb49e31bf39a0a9e44077f9264ab21c56"
+    },
+    {
+      "id": "authored-02",
+      "passed": true,
+      "source_geometry": [
+        448,
+        448,
+        3
+      ],
+      "source_rgb_sha256": "90a72b9e6502eec33b6e0834595b3b9d2b6c976da8c62abc9b18df30ea783b53",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "109f52e23a5858bf6e7b855f81f188fc9102f071fd87fdef9dfbdbc9ba1c1983",
+        "changed_float32_sha256": "109f52e23a5858bf6e7b855f81f188fc9102f071fd87fdef9dfbdbc9ba1c1983",
+        "normalized_nchw_float32_sha256": "23a358db9c4a56d52b2d0c59c7ca1c4b0641e232fd56bfa87a8e0db3a879d9a2",
+        "native_features_float32_sha256": "8d7cd0a81d723f722d423181abd4ad4f15c46e96984361e779baa57db0b43b9d",
+        "native_raw_map_float32_sha256": "8c7fabefcb9b3cb7a304c1ffd86385d8708e34236d63b307ebbed4e665c86155",
+        "filtered_map_float32_sha256": "bd09c3f353e0978a2b15660ef1ac34d0e11993bac00239815094d6a1e161df42",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "1c83b7e71f4790acf87560f612eacb3d580826de7a6eb0d888f7756db13c69c8"
+    },
+    {
+      "id": "authored-03",
+      "passed": true,
+      "source_geometry": [
+        320,
+        512,
+        3
+      ],
+      "source_rgb_sha256": "14d491efa7ed8f9a402d27dbc077445cc6e0b524977cf77c075cd10d527ab7fc",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "1a160642f9960bc2ea7f1b1f2547939d1f49b999eee713d5726373b8dc39865e",
+        "changed_float32_sha256": "4a8779735dff89e691df712e9923512b779bfad516708eb0efe32b2a1570c276",
+        "normalized_nchw_float32_sha256": "ec30df994445b1c5235f3c759a4b99f78419a3df0ea619f0beaad03ceecfe415",
+        "native_features_float32_sha256": "ac63f72c9f68d2e63dd9c52685d9776592d218f94bfb16b41ae2d98abc049fd1",
+        "native_raw_map_float32_sha256": "993de18044d73131c53b1f25ffe0141975c254aeab238aac2cb86bfd7ef85fe0",
+        "filtered_map_float32_sha256": "8efbc3c1d9d1366e6f9edccbbb2b23ca0edac331e623e74db71eb73b5b09d1f3",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "d5c125dba0fba90e7c8060b2277e9b6c3d838fea33defcb9e9ce457173ba4501"
+    },
+    {
+      "id": "authored-04",
+      "passed": true,
+      "source_geometry": [
+        517,
+        391,
+        3
+      ],
+      "source_rgb_sha256": "0d12a827968fc27af125c7813834db12801822709af04e56b54d10f0b2c432e5",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "4cf3421fa254ec824c43b25c185e0cfa7d3311c3b6c78a84a54307cb3d545571",
+        "changed_float32_sha256": "9c4334e571eb6fd99cb7f109405cb8e0887c42aaeafac40e6e6403c98a5ffd1c",
+        "normalized_nchw_float32_sha256": "41c9248488898cf9cf5c43a829923184e3202e616124a2088c8f334447c982d2",
+        "native_features_float32_sha256": "8d310e83b0412dea1f50c5cbfa648d87799709fc79f28c243ac9e321aea6244c",
+        "native_raw_map_float32_sha256": "4a0aa00034e69f5a117dcda115dec1bfa20ad6a662e2cc81906d7b57f79cb19a",
+        "filtered_map_float32_sha256": "68d1ce5628f42c60f3d74231a1947074f28b0e785726c52c783ec1a9c56bbf34",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "e2e7d6f9468ce371779963bb2c9a1d794e52c6cdff3f41290736dfc73b45b981"
+    },
+    {
+      "id": "authored-05",
+      "passed": true,
+      "source_geometry": [
+        448,
+        448,
+        3
+      ],
+      "source_rgb_sha256": "4a94d432a7e79074d29c7a7364e85182ae54f59e7d66d3bc64ccd1dd942a02ec",
+      "normalization_max_difference": 0.0,
+      "native": {
+        "clean_float32_sha256": "77ef2310e9348c2370dcce78b235d827424463166e383cfae230e250bd368abf",
+        "changed_float32_sha256": "77ef2310e9348c2370dcce78b235d827424463166e383cfae230e250bd368abf",
+        "normalized_nchw_float32_sha256": "218817702ef8fbbde3544d844689f4cf51a8453b9b75737351475270ec40a4ef",
+        "native_features_float32_sha256": "df090ba5ea3d4c8f5bd19179182f9aee47bd72dababc5d4387b9726c57da7838",
+        "native_raw_map_float32_sha256": "583a4a05c3e08044489cd783e6e6edd5ea3cebb67069311746ef35b55188f005",
+        "filtered_map_float32_sha256": "ecc10d5352ad50b14975619cd716a7ed0e47e78d604646963101fbd31dee5b52",
+        "native_shape": [
+          2,
+          1024,
+          768
+        ],
+        "dtype": "float32",
+        "readout_one_based_block": 10,
+        "reference_compared": true,
+        "native_hook_feature_max_difference": 0.0
+      },
+      "private_synthetic_arrays_sha256": "8f8b35ffd6e1e1bdf1358aca45f40060a3e0850954b60ba303ee53108996c1cf"
+    }
+  ],
+  "max_normalization_difference": 0.0,
+  "max_feature_difference": 0.0,
+  "project_images_scored": 0,
+  "serving_changed": false,
+  "new_accuracy_result": false,
+  "scope": "Authored synthetic preprocessing/native-readout/reference arithmetic only; no detection quality or outside human review."
+}

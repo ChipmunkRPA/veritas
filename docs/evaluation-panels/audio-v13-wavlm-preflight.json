@@ -1,0 +1,65 @@
+{
+  "schema": "chipmunk.wavlm-v13-public-preflight/1",
+  "passed": true,
+  "unmodified_packet_passed": true,
+  "freeze_sha256": "34096f6cd001c27e217ba7ff8ee5f2ff6bae48d85c4d91b9424cb78e2ef3b4a1",
+  "source_inputs": 4248,
+  "implementation_files": 69,
+  "installed_files": 5,
+  "cases": [
+    {
+      "alteration": "dropped role",
+      "rejected": true
+    },
+    {
+      "alteration": "missing status",
+      "rejected": true
+    },
+    {
+      "alteration": "source digest",
+      "rejected": true
+    },
+    {
+      "alteration": "reserved digest",
+      "rejected": true
+    },
+    {
+      "alteration": "weight digest",
+      "rejected": true
+    },
+    {
+      "alteration": "baseline weight missing",
+      "rejected": true
+    },
+    {
+      "alteration": "missing code",
+      "rejected": true
+    },
+    {
+      "alteration": "missing installed code",
+      "rejected": true
+    },
+    {
+      "alteration": "missing native cell",
+      "rejected": true
+    },
+    {
+      "alteration": "forward claim",
+      "rejected": true
+    },
+    {
+      "alteration": "fitting claim",
+      "rejected": true
+    },
+    {
+      "alteration": "private root",
+      "rejected": true
+    },
+    {
+      "alteration": "changed layer order",
+      "rejected": true
+    }
+  ],
+  "project_forwards": 0,
+  "scope": "Actual prospective metadata/code alterations; no speech inference, fitting or outside human review"
+}

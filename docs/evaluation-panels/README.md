@@ -30,6 +30,15 @@ all 64 implementation pins. Model-free preflight and nine actual-freeze alterati
 checks are prospective preparation, not real-model parity, accuracy or outside
 human testing. [Protocol and remaining execution](../audio-layer-v12-execution.md).
 
+`audio-v13-wavlm-source-review.json` records the new noise-aware backbone's pinned
+source/checksum/license references, strict structural load and synthetic-only
+repeatability. `audio-v13-wavlm-freeze.json` binds69 project/five installed files,
+all4,248 original consumed inputs, independent roles, both prospective heads and
+unchanged gates. Its13 actual-metadata alteration checks are in
+`audio-v13-wavlm-preflight.json`. These files contain no speech feature vectors,
+source media, private paths or completed accuracy result.
+[Protocol and execution](../audio-wavlm-v13-execution.md).
+
 `audio-v11-full-representation-freeze.json` binds one prospective supervised
 full-vector comparison with the unchanged objective, corrected roles, commercial
 checkpoint/runtime/service commitments and58 code pins. Its model-free preflight

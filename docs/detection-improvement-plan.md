@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared a different noise-aware speech backbone with94.4million frozen
+  parameters, publisher-checksummed weights and model-card-linked CC-BY-SA-3.0
+  terms (separate code MIT). Strict load and two synthetic-only repeated forwards
+  passed. All58 selected tests pass. Freeze binds69 project/five installed files,
+  every4,248 original consumed input, source roles, original16 gates and reserved
+  confirmation. Thirteen actual-metadata alterations are rejected. Publish before
+  source forwards/fitting; no detection gain or outside review claimed.
+  [Prospective preparation](audio-wavlm-v13-execution.md).
+
 - Prepared fresh image-crop confirmation: all48 unused pairs/all48 publisher
   masks acquired, exact RGB-reference/geometry checks passed and no source/file
   reuse after248ID exclusions. Minimum perceptual distance12 to history/20 within

@@ -1,0 +1,72 @@
+{
+  "schema": "chipmunk.audio-full-replication-completion/14",
+  "observed_at": "2026-11-07T09:27:58.153117+00:00",
+  "original_lock_sha256": "93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b",
+  "operational_lock_sha256": "08d49a8d59be8c0b353f798b16ec7541fb0973e99a2803837301dcc008f9ae2b",
+  "original_failed_receipt_sha256": "7084fd34ee80948ec1180f9dc848b1235665df29580006e148703c3c052a7b9b",
+  "original_failed_attempt_preserved": true,
+  "completed_feature_receipt_sha256": "4a2f277f909767e351f7121bb715de1c2729680915e847256f7bbef31b165292",
+  "completed_feature_receipt_bytes": 185085217,
+  "ordered_records": 4248,
+  "status_counts": {
+    "ok": 4186,
+    "not_applicable": 62
+  },
+  "prior_nonfailed_records": 3818,
+  "all_prior_semantic_records_exact_excluding_only_runtime": true,
+  "old_failed_input_index_zero_based": 3818,
+  "old_failed_input_new_status": "ok",
+  "guard": null,
+  "child_exit_code": 0,
+  "child_completed": true,
+  "private_profile_sha256": "5176074d029b2504413895c8f12d39932cb1700d63db50e5f19ea27d7b53fd97",
+  "private_child_result_sha256": "840a9d56cf13c03a019f6e9d2400bfc10f92df3ec7fa83d90a5fb8baf7ffc9d9",
+  "memory": {
+    "complete": false,
+    "metric": "sampled_process_tree_rss",
+    "sampled_max_rss_bytes": 5196677120,
+    "sample_count": 64603,
+    "sample_attempts": 64939,
+    "duration_s": 7357.11531199998,
+    "interval_s": 0.1,
+    "finished": true
+  },
+  "sampler_error_types": {
+    "NoSuchProcess": 611,
+    "ZombieProcess": 5
+  },
+  "memory_limitation": "Incomplete process-tree sampling; maximum successful RSS sample is only a lower bound, not a true memory peak or capacity guarantee.",
+  "trained_head_sha256": "c0617baecea5b744060e7301f954ca6f094ea59e78d4c1a2617e9d26431cc6c9",
+  "trained_fit_sha256": "347e7401a456d261394d6c82b0d6e0ce5950cde7724a0672f1371a67cb006011",
+  "fitting_completed": true,
+  "independent_calibration_completed": true,
+  "frozen_fit_roles": 1926,
+  "frozen_calibration_roles": 873,
+  "fitted_arms": {
+    "separated": {
+      "coefficient_count": 1026,
+      "optimizer_iterations": 52,
+      "calibration_groups_by_truth": {
+        "0": 59,
+        "1": 29
+      }
+    },
+    "complement": {
+      "coefficient_count": 1028,
+      "optimizer_iterations": 158,
+      "calibration_groups_by_truth": {
+        "0": 59,
+        "1": 29
+      }
+    }
+  },
+  "development_comparison_started": true,
+  "development_comparison_completed": false,
+  "detection_quality_established": false,
+  "new_neural_native_audit_completed": false,
+  "confirmation_scored": false,
+  "original_decoder_failure_cause_isolated": false,
+  "feature_values_or_recordings_published_by_this_receipt": false,
+  "outside_human_reviewers": 0,
+  "serving_admitted": false
+}

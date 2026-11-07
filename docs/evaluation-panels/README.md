@@ -14,6 +14,7 @@ or a generic dataset link.
   all312 scalar/source bindings, four genuine-only points, complete pixel-count
   replay and both preserved operational failures. Both readouts located0/48 edits
   in each format versus12/48 current. All four arms rejected; no service change.
+  Actual Linux scalar/count and13-alteration review passed with exact local receipt agreement.
 - [Face-transition development](../video-v16-sface-development-evaluation.md):
   all120 consumed cases, final time ranges and a standard-library replay. Local
   and actual Linux review reproduce all counts and ten advancement requirements.

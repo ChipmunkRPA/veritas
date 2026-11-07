@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.patch-drift-actual-linux-review/8",
+  "run_id": 42388055027,
+  "job_id": 128449555302,
+  "url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42388055027",
+  "head_sha": "ecdc474102ddc01b92e08942b14bcbd034770d1b",
+  "job_conclusion": "success",
+  "all_workflow_steps_completed_successfully": true,
+  "environment": "ubuntu-24.04; Python3.12.6; standard library only",
+  "pinned_project_source_files_verified": 431,
+  "actual_log_receipts": {
+    "review": {
+      "actual_decoded_log_receipt_equals_local": true,
+      "canonical_receipt_sha256": "1dd121ba099f8502c7b5d330fdaadfa7dd0127c4fc02975fb8a01cc805326972",
+      "local_recorded_file_sha256": "513cf311c1539abff009fd590eedfa2ed6f4eb0ce6f53fb4f3f5acfdaabef360"
+    },
+    "tamper": {
+      "actual_decoded_log_receipt_equals_local": true,
+      "canonical_receipt_sha256": "df83ced0c8daec3a041aa1b9c5f9784e2b4d066aa2f652a6c36749b6e40cbc4c",
+      "local_recorded_file_sha256": "290181004b8833c9638855f13fd23acfe8f797ff0ce075a1df26d2d8bdfa3987"
+    }
+  },
+  "case_bindings_verified": 312,
+  "genuine_only_points_refitted": 4,
+  "development_metric_sets_recomputed": 576,
+  "native_probe_receipts_bound": 12,
+  "deliberate_packet_alterations_refused": 13,
+  "all_24_advancement_requirements_recomputed": true,
+  "new_neural_inference": false,
+  "outside_human_reviewers": 0,
+  "serving_changed": false,
+  "scope": "Actual separate-host source/scalar/count review. Local native-image/vector/mask checks are separate; no photos or real-image vectors were sent to Linux."
+}

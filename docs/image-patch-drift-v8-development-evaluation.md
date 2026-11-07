@@ -145,8 +145,13 @@ all family aggregates and all24 advancement checks. All13 deliberate alterations
 are refused, including changed retry provenance. It is scalar-count review,
 not new neural inference, source-mask verification or outside human testing.
 The separately run local audit supplies the private pixel/vector checks above.
-The new Linux workflow runs the scalar and alteration checks on a separate host;
-an actual completed run receipt must be recorded before claiming it passed.
+The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42388055027)
+completed successfully on Ubuntu24.04/Python3.12.6 without model or image libraries.
+It verified all431 pinned project source files, replayed all counts and13
+alterations, and compared both actual receipts with the recorded local receipts
+exactly. The [separate-host receipt](evaluation-panels/image-v8-patch-drift-linux-review.json)
+records decoded log checks and their hashes. This did not repeat neural inference
+or send photos or real-image vectors to Linux, and is not outside human review.
 
 The current face-transition local release remains in place. Image checks,
 customer conclusions, audio calibration, billing and GCP deployment are unchanged

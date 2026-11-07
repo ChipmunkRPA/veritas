@@ -5,6 +5,12 @@ and the evidence supporting it before expanding hosting.
 
 ## Requirements and order
 
+On7 November the user directed region/check/context-specific calibration and a
+tested combined result **across all four modalities**. The
+[shared evaluation implementation and required real-data work](specialist-calibration-design.md)
+now define that path. It supplements the full requirements below; an authored
+software smoke does not complete any modality's real-data calibration or release.
+
 1. **Image edits:** compare a commercially permitted alternate localizer against
    the currently selected PNG splice check and the fallback image localizer.
    Include small edits, native PNG, and JPEG recompression. Improve actual edit
@@ -65,6 +71,12 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Implemented the shared image/video/audio/passage calibration framework and
+  explicit source-disjoint specialist/fusion/calibration/confirmation roles.
+  Local authored command flow passes for16 context heads/four calibrated
+  combiners;54 selected tests cover leakage, coordinates, missing local truth,
+  skipped checks and duplicate-family evidence. Real-data adapters, support,
+  new comparisons and fresh confirmation remain required across all four media.
 - Tested area-aligned regional calibration on all312 consumed response grids.
   Both formats still locate0/48 edits versus12/48 current, with one genuine
   highlight each. All plateau/source/pixel checks pass, but quality gates fail.

@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.specialist-synthetic-cli-receipt/1",
+  "producer_kind": "authored_synthetic_fixture",
+  "real_media_files_evaluated": 0,
+  "new_neural_forwards": 0,
+  "model_performance_claim": false,
+  "files": 128,
+  "local_observations": 512,
+  "modalities": [
+    "image",
+    "video",
+    "audio",
+    "text"
+  ],
+  "specialist_context_calibrators": 16,
+  "separately_calibrated_combiners": 4,
+  "confirmation_files": 32,
+  "confirmation_local_outputs": 128,
+  "support_setting_for_authored_fixture_only": 3,
+  "default_real_data_support_floor_per_class": 25,
+  "selected_tests_passed": 54,
+  "serving_admitted": false,
+  "source_sha256": {
+    "backend/app/bench/specialists.py": "4fb92bf366b5c2200e6be8ccbf4808c4e8777c5d11703e6739131904425a2ae1",
+    "backend/scripts/specialist_calibration.py": "3e17431c53bf28b9d28dffadc047a72f0091a04f4f83449b13718338b53aa09d",
+    "backend/tests/test_specialist_calibration.py": "00f182902cfb67fd2a0856bd86bea99eb988822228ede9e52bb0e869c5761dad"
+  },
+  "private_cli_artifact_sha256": {
+    "manifest.json": "706d72751cc7d7367dda11a7dea44791519c0ee089c3cea98d0205e78d5fdf0b",
+    "audit.json": "5967fabec6f033344a3c781531d3e63bd59e4bf07d1131d171bde87ed5a1bdcc",
+    "freeze.json": "90c8436ac9bbac58f6e8fc4b823f458d461b791de01f6950e6fbc80b9ee24428",
+    "artifact.json": "537051557f2f2eff3769a4f28f8594e2681f99db964963b99450a42cfb4403c2",
+    "confirmation.json": "298da0f06d2e91f954d6f0af1155d549ee5c7cdc01b65f23a3ed2564fbc0a3dc"
+  },
+  "limits": "Authored-score software integration only. No real-data calibration, detector performance, independent human review or customer admission."
+}

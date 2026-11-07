@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.specialist-authored-host-review/1",
+  "passed": true,
+  "files": 128,
+  "observations": 512,
+  "confirmation_files": 32,
+  "confirmation_local_outputs": 128,
+  "probabilities_compared": 160,
+  "max_absolute_probability_difference": 0.0,
+  "predeclared_absolute_limit": 1e-06,
+  "adverse_invariants_checked": [
+    "cross_role_lineage_refused",
+    "confirmation_not_fitted",
+    "missing_required_evidence_withheld",
+    "duplicate_family_not_amplified",
+    "unknown_unit_truth_not_copied"
+  ],
+  "real_media_evaluated": 0,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "scope": "Authored-score four-media numerical integration only; not real-model accuracy or outside human review."
+}

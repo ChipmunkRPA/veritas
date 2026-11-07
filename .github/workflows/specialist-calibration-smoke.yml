@@ -1,0 +1,53 @@
+name: Four-media specialist calibration authored smoke
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/specialist-calibration-smoke.yml
+      - backend/app/bench/specialists.py
+      - backend/scripts/specialist_calibration.py
+      - backend/scripts/review_specialist_fixture.py
+      - docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json
+      - docs/evaluation-panels/specialist-calibration-v1-authored-expected.json
+      - docs/evaluation-panels/specialist-calibration-v1-release.json
+
+permissions:
+  contents: read
+
+jobs:
+  authored-numerical-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      PYTHONPATH: backend
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.6'
+      - name: Verify exact reviewed source and authored packets
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          release = json.loads(pathlib.Path('docs/evaluation-panels/specialist-calibration-v1-release.json').read_text())
+          for name, expected in release['files_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
+          assert release['authored_only'] and release['real_media_files'] == 0
+          print('Exact authored-only source/packet hashes; no real media or model weights.')
+          PY
+      - name: Install only the two pinned numerical dependencies
+        run: python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
+      - name: Audit and freeze the authored128-file plan
+        run: |
+          python -m scripts.specialist_calibration audit docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-audit.json"
+          python -m scripts.specialist_calibration freeze docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-freeze.json" --minimum-groups-per-class 3
+      - name: Fit specialists and both levels of combination using disjoint roles
+        run: python -m scripts.specialist_calibration fit docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-fit.json" --frozen "$RUNNER_TEMP/authored-freeze.json"
+      - name: Evaluate the frozen authored confirmation
+        run: python -m scripts.specialist_calibration evaluate docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-confirmation.json" --artifact "$RUNNER_TEMP/authored-fit.json"
+      - name: Check numerical agreement and adverse invariants
+        run: python -m scripts.review_specialist_fixture "$RUNNER_TEMP/authored-fit.json" "$RUNNER_TEMP/authored-confirmation.json" "$RUNNER_TEMP/authored-host-review.json"

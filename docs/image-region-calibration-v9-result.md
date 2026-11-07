@@ -91,8 +91,12 @@ source/certificate bindings and120 genuine display audits, recomputes384
 development metric sets, all family aggregates and12 advancement requirements.
 All14 deliberate changes are refused. This portable path checks scalar and
 certificate consistency; the private-grid/source reconstruction above ran
-separately. An actual completed Linux receipt is required before claiming
-separate-host agreement. Outside human reviewers remain zero.
+separately. The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42391078342)
+passed, verifying435 frozen source files and reproducing both recorded local
+receipts exactly. The [decoded-log review](evaluation-panels/image-region-calibration-v9-linux-review.json)
+records312 bindings, two point refits and14 refused alterations. This is scalar
+and certificate consistency, not private-grid reconstruction or new inference.
+Outside human reviewers remain zero.
 
 This rules out the pixel-maximum/display-area mismatch as a sufficient fix in
 the tested configuration. It does not isolate the remaining cause. The next

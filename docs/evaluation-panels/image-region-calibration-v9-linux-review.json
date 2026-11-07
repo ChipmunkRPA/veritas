@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.image-region-calibration-linux-review/9",
+  "run_id": 42391078342,
+  "job_id": 128458583861,
+  "url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42391078342",
+  "head_sha": "ea085bff97d7a593b361e389ed4daa2c9ae2a130",
+  "job_conclusion": "success",
+  "environment": "ubuntu-24.04; Python3.12.6; standard library only",
+  "frozen_project_source_files_verified": 435,
+  "case_bindings": 312,
+  "genuine_points_refitted": 2,
+  "genuine_display_audits_bound": 120,
+  "development_metric_sets_recomputed": 384,
+  "deliberate_alterations_refused": 14,
+  "actual_log_receipts": {
+    "review": {
+      "actual_decoded_receipt_equals_recorded_local": true,
+      "canonical_receipt_sha256": "a32c1fbfca40a1ba5137aeff7bd6e0cbbf2ddc858b095ac4886f53aada0ea979"
+    },
+    "tamper": {
+      "actual_decoded_receipt_equals_recorded_local": true,
+      "canonical_receipt_sha256": "2c25cc47eb783a95cf5e692d2fd83b8e7c6c86c4686b43dd7d300b55fa044222"
+    }
+  },
+  "new_neural_forwards": 0,
+  "outside_human_reviewers": 0,
+  "serving_changed": false,
+  "scope": "Scalar/certificate/count review. Private-grid source reconstruction ran locally, not on Linux."
+}

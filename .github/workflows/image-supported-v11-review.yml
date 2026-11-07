@@ -1,0 +1,32 @@
+name: Supported image immutable scalar review
+on:
+  push:
+    paths:
+      - '.github/workflows/image-supported-v11-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-source-refit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install model-free numerical dependencies
+        run: |
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
+      - name: Replay the immutable actual PNG and JPEG comparison
+        env:
+          PYTHONPATH: backend
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          python -m scripts.replay_frozen_specialist_release_v5 28490416cebd2090e24e12bbc0f9117b4bd541ac docs/evaluation-panels/image-supported-v11-release.json image-supported-v11-linux-review.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-supported-v11-linux-review
+          path: image-supported-v11-linux-review.json

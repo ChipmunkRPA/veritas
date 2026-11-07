@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.writing-specialists-actual-linux-review/5",
+  "workflow_run_id": 42401818195,
+  "workflow_job_id": 128491040493,
+  "head_sha": "0b374e9f81e4a86235ed9d166f3dc5cd1aa032ee",
+  "workflow_conclusion": "success",
+  "job_conclusion": "success",
+  "source": "Decoded actual GitHub Actions job log",
+  "actual_result": {
+    "schema": "chipmunk.writing-specialists-scalar-reproduction/5",
+    "passed": true,
+    "arms": 4,
+    "source_groups": 128,
+    "constructed_documents": 512,
+    "confirmation_documents_per_arm": 128,
+    "probabilities_compared": 2048,
+    "max_absolute_probability_difference": 3.3306690738754696e-16,
+    "predeclared_absolute_limit": 0.000001,
+    "confirmation_not_fitted": true,
+    "missing_check_withheld": true,
+    "cross_role_lineage_refused": true,
+    "new_neural_forwards": 0,
+    "source_text_or_weights_loaded": false,
+    "serving_admitted": false,
+    "limits": "Real retained scalar numerical replay only. Does not establish native model equivalence, unseen base training, author independence, broader quality or outside human review."
+  }
+}

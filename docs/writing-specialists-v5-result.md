@@ -58,7 +58,11 @@ confirmation file/local probabilities exactly. It also refused cross-role source
 lineage, kept confirmation scores out of fitting and withheld the combined score
 when a required check was skipped. The separate Linux workflow reproduces these
 numerical steps only; it does not independently run the text models or examine
-authorship. Its actual outcome is recorded separately once available.
+authorship. The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42401818195)
+passed:2,048 probabilities compared, maximum absolute difference
+3.3306690738754696e-16 within the unchanged1e-6 limit, with all three adverse
+invariants preserved. The [decoded job receipt](evaluation-panels/writing-specialists-v5-linux-review.json)
+records the observed outcome; it is not an outside human review.
 
 ## Limits and next work across all four media
 

@@ -20,10 +20,24 @@ choose these roles.
 
 There are 432 retained interval clips from 114 groups: 228 inserted-swap clips,
 114 unmodified clips and 90 ordinary-edit controls. Positive clips have retained
-exact-frame preparation receipts and a 24 fps source clock. This metadata audit
-verifies the file bindings, not every decoded frame again. The earlier source
-preparation verified frame content; a new inference adapter must independently
-check actual decoding, timestamps and local labels against these bindings.
+exact-frame preparation receipts. The earlier source preparation verified frame
+content; a new inference adapter must independently check actual decoding,
+timestamps and local labels against these bindings.
+
+A separate check of all 432 retained production probe receipts found an important
+nominal-clock mismatch: 31 ordinary jump-cut controls are actually 25 fps, while
+the old preparation manifest calls them 24 fps. Substituting nominal frame rate
+would shift a full-clip duration by as much as 235 ms. All positive intervals and
+original controls use measured 24 fps; the other ordinary controls use 24 fps.
+The [retained-clock receipt](evaluation-panels/video-specialists-v18-retained-clock-audit.json)
+records these counts and exact journal commitments. It reads previously measured
+native timestamps; it does not claim 432 new decodes or detector forwards.
+
+The new input adapter uses actual PTS for every file, retaining the measured
+clock for older ordinary controls. New ordinary controls explicitly request
+24 fps. A tiny authored native encoding regression verified that a 120-frame
+input produces the intended 112-frame jump cut at 24 fps, with exact retained
+frame content. It is a software regression, not fresh detection evidence.
 
 The [aggregate receipt](evaluation-panels/video-specialists-v18-source-audit.json)
 records actual path/byte counts, role coverage and source-manifest commitments.
@@ -38,6 +52,10 @@ these planned denominators before inference; do not select replacements from
 their eventual detection scores. Keep original/AI variants and ordinary controls
 in their connected source role. New preparation must verify known edit boundaries
 and source-frame correspondence without storing unnecessary duplicate media.
+The input adapter is implemented and its clock/truth tests pass. Its full
+648-clip real preparation is queued after the current audio pipeline; that
+preparation has not yet run. Temporary group renderings are deleted only after
+their byte/clock commitments are written. Original research clips remain intact.
 
 The first detector comparison will separate face-crop authenticity evidence from
 within-track appearance and photometric changes. A local window needs its own

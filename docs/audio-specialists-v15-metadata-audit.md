@@ -27,3 +27,17 @@ not independently decode waveform bytes, reproduce the speech gate or establish
 publisher labels. Source preparation already recorded its actual decoder probes
 and byte/PCM commitments; native authenticity scoring is a separate sequential
 study. No new waveform, accuracy or improvement result is claimed by this audit.
+
+The post-inference reviewer is implemented separately. Once all four native role
+receipts and artifact/point hashes are complete, it will check every local output
+against its source window and report condition, mixture pattern, context, view,
+generator and time-range errors. Eight authored tests reject moved or missing
+evidence and preserve source-balanced error counts. Actual full-result review
+has not run while native inference remains active.
+
+The version4 scalar replay helper also handles unavailable scores explicitly.
+Three authored regression tests preserve missing confirmation units, test result
+withholding on a previously assessed file and refuse to claim that adverse check
+passed when every file was already inconclusive. Earlier image/passage replay
+code remains pinned. This replay is prepared for the audio release; no actual
+audio Linux replay or outside human review is claimed yet.

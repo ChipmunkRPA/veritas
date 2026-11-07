@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.video-specialists-retained-clock-audit/18",
+  "implementation_sha256": "3418437f312064c35a8786c08a526649189deb8d7fb939ce339b52858e6164c3",
+  "source_inventory_sha256": "f3d067ffd3259763da0abcd850ccd81deb6f4d8819395513386dc621826a94e7",
+  "historical_native_journal_sha256": {
+    "backend/data/independent-evaluation/video-v4/development.jsonl": "66191d039012b54b3e72dce6fdf7504dcbe5b7ac44f11ccdd23edb6c391f174c",
+    "backend/data/independent-evaluation/video-v4/test.jsonl": "1d68ff10a0933430cb3a2a31db1aef54c12aacd7f6e13a3ffc6870b32ac903c9",
+    "backend/data/independent-evaluation/video-v5/current-development.jsonl": "b516ee00e378d4f3ebfabac61243f1caa88732085a4a0e7818bf52b42f806c2d",
+    "backend/data/independent-evaluation/video-v5/current-test.jsonl": "c19b9f9377cf1eee57af63bfb84c769ffb6275e8f10f136e50a63e6bef9b066c",
+    "backend/data/independent-evaluation/video-v6/current-test.jsonl": "fe274cddd4d7850f1776e77450a3b4952f16a4cadeb9c2778086c5c1f2655d99",
+    "backend/data/independent-evaluation/video-v17-sface/baseline.jsonl": "30aa6d70da31e8b152554184a4ef2384ced1b459fa44ebeb87a2fe493bd4f09f"
+  },
+  "retained_clip_truth_bindings_verified": 432,
+  "previously_measured_native_pts_tables_verified": 432,
+  "native_family_rate_counts": {
+    "inswapper/24": 114,
+    "jump-cut/25": 31,
+    "lighting-change/24": 26,
+    "original_videos/24": 114,
+    "recompression/24": 33,
+    "uniface/24": 114
+  },
+  "nominal_manifest_rate_mismatches": 31,
+  "maximum_nominal_duration_error_ms": 235.0,
+  "positive_intervals_require_actual24fps": true,
+  "ordinary_controls_keep_actual_source_clock": true,
+  "new_decodes": 0,
+  "new_detector_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Checks retained native production probe receipts and source bindings, not fresh decoding, detection quality, distinct people or independent provenance."
+}

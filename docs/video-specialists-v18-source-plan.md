@@ -52,10 +52,10 @@ these planned denominators before inference; do not select replacements from
 their eventual detection scores. Keep original/AI variants and ordinary controls
 in their connected source role. New preparation must verify known edit boundaries
 and source-frame correspondence without storing unnecessary duplicate media.
-The input adapter and its full648-clip preparation are now complete. All162
+The input adapter and its full 648-clip preparation are now complete. All 162
 connected source-video groups have two inserted-swap clips, an original and an
-ordinary-edit control. It verified every native frame clock and prepared216
-virtual clips. Role input counts are164,164,160 and160. The
+ordinary-edit control. It verified every native frame clock and prepared 216
+virtual clips. Role input counts are 164,164,160 and 160. The
 [actual preparation receipt](evaluation-panels/video-specialists-v18-input-preparation.json)
 records the exact input-plan/policy commitments. Temporary group renderings
 were deleted only after byte/clock commitments were written; scoring must
@@ -70,7 +70,7 @@ before yielding files to a future scorer. Successful temporary renderings are
 removed after the caller records evidence; failed attempts remain for inspection.
 Eight reconstruction guards passed. A real first-hash virtual-group pilot
 reproduced all four original prepared clips and native PTS commitments exactly
-in4.34seconds, with zero detector forwards. The
+in 4.34 seconds, with zero detector forwards. The
 [pilot receipt](evaluation-panels/video-specialists-v18-rematerialization-pilot.json)
 is source reconstruction evidence only. Actual scoring, calibration and
 improvement gates still need their own full frozen protocol and execution.
@@ -79,8 +79,8 @@ The first waiting postprocessing coordinator used the frozen audio-only runner's
 allowlist for the future video job. That mismatch was caught before any child
 work started. The waiting coordinator was cancelled, with its original state,
 log and cancellation receipt preserved; the active audio pipeline was not
-interrupted or restarted. The corrected version3 coordinator uses a separate
-video-only version4 runner and preflights the actual queued command without
+interrupted or restarted. The corrected version 3 coordinator uses a separate
+video-only version 4 runner and preflights the actual queued command without
 starting a worker or creating output. Two CLI regressions cover the supported
 video command and rejection of an audio command by that runner. Frozen audio
 runner bytes remain unchanged.

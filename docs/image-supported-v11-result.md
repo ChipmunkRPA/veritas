@@ -1,27 +1,27 @@
 # Actual PNG/JPEG calibration comparison: completed result
 
 Only the JPEG primary-plus-regions arm qualifies for further comparison. Its
-gain is small:10/60 edited files found versus9/60 for the actual current
-component selector, with5/60 genuine false flags in both. This is consumed
+gain is small: 10/60 edited files found versus 9/60 for the actual current
+component selector, with 5/60 genuine false flags in both. This is consumed
 development evidence, not a serving admission or improved pixel localization.
 No PNG alternative met the false-alarm gates. Keep serving behavior unchanged.
 
 ## Full source-bound experiment
 
-The run completed all960 planned inputs from240 original/edit pairs: actual
-PNG/TIDAL and JPEG/FUSED paths, with60 source pairs in each of four disjoint
+The run completed all 960 planned inputs from 240 original/edit pairs: actual
+PNG/TIDAL and JPEG/FUSED paths, with 60 source pairs in each of four disjoint
 roles. It fitted all four methods and all eight per-format internal points
-before either confirmation-format job. All eight native jobs exited0 with
+before either confirmation-format job. All eight native jobs exited 0 with
 no resource guard, and all planned observations remained in their denominators.
 The source panel and its earlier diagnostic outcomes were already consumed.
 
 Scalar heads separately calibrate the primary response, integrity response and
 quadrant-presence readouts as applicable. PNG/JPEG use separate combination
 fits and calibration. The calibration budget is chosen from common complete
-genuine calibration groups, matched to the current selector and capped at10%.
+genuine calibration groups, matched to the current selector and capped at 10%.
 That internal operating comparison does not promise a customer false-alarm
 rate. Actual confirmation rates can differ. All calibration arms below assessed
-all120 reserved inputs per format, without inconclusive files.
+all 120 reserved inputs per format, without inconclusive files.
 
 | Format / method | Edited files found /60 | Genuine false flags /60 | Source/class-balanced Brier |
 |---|---:|---:|---:|
@@ -38,16 +38,16 @@ all120 reserved inputs per format, without inconclusive files.
 
 The current component selector supplies a flag/mask rather than a calibrated
 file probability; no comparable Brier is invented for it. JPEG's primary-only
-arm has102/120 exact internal-point ties, which are not AI flags or originality
-verdicts. Regional readouts remove those ties, but the resulting10/60 detection
+arm has 102/120 exact internal-point ties, which are not AI flags or originality
+verdicts. Regional readouts remove those ties, but the resulting 10/60 detection
 rate remains weak. The JPEG continuation gate is a narrow file-presence
 calibration result. It does not validate whole-generation detection, individual
 pixel authorship, a new localizer or the full application's headline.
 
 ## Localization remains a separate weakness
 
-The current selector's edited-image mean pixel F1/IoU is0.162242/0.136122 for PNG
-and0.058404/0.038637 for JPEG. Metrics compare selected connected pixels against
+The current selector's edited-image mean pixel F1/IoU is 0.162242/0.136122 for PNG
+and 0.058404/0.038637 for JPEG. Metrics compare selected connected pixels against
 retained exact RGB change masks. They never fill enclosing bounding rectangles.
 Changed pixels are not independent proof of AI authorship, and quadrant-level
 presence probabilities are not calibrated per-pixel heatmaps. No alternative
@@ -55,16 +55,16 @@ pixel mask is claimed as improved by this file-level experiment.
 
 ## Native and source checks
 
-The run made864 native forwards including repeats/probes, reusing144 checked
+The run made 864 native forwards including repeats/probes, reusing 144 checked
 PNG maps. Every role's genuine/AI PNG probe reproduced its retained native map
 bitwise, and the native repeats matched. Every JPEG role checked the original
 image head and source-projected map against two retained references within the
-frozen1e-4 limits, preserved the eligibility gate side, and repeated those
-probes plus the first new input in each class. Native512 reference maps were
+frozen 1e-4 limits, preserved the eligibility gate side, and repeated those
+probes plus the first new input in each class. Native 512×512 reference maps were
 not retained in the older JPEG study; do not claim their bitwise parity.
 
-A separate zero-model audit recomputed167,586,843 original pair pixels and
-replayed actual production postprocessing for all480 PNG and480 JPEG inputs.
+A separate zero-model audit recomputed 167,586,843 original pair pixels and
+replayed actual production postprocessing for all 480 PNG and 480 JPEG inputs.
 Original bytes/RGB, source dimensions, every local label, raw tensor/file
 hashes, exact scalar readouts, selected connected masks and mask metrics all
 matched. It also verified native-versus-cached counters and all role resource
@@ -73,14 +73,14 @@ Seven authored regressions refuse changed labels, measurements, masks, tensor
 hashes and inference counters. This is source/postprocessing QA, not outside
 human review or fresh detection validation.
 
-Model-free local refitting reproduced all4,320 local/file probabilities exactly.
-Changing1,440 reserved unit responses could not change fitted parameters, a
+Model-free local refitting reproduced all 4,320 local/file probabilities exactly.
+Changing 1,440 reserved unit responses could not change fitted parameters, a
 missing required check withheld a previously assessed result, and cross-role
 source lineage was refused. This numerical replay is separate from native
 map/source QA and from a complete customer analysis flow.
 
 The actual [Linux workflow](https://github.com/ChipmunkRPA/veritas/actions/runs/42424669448)
-also refitted the unchanged four methods from50 dependencies archived at the
+also refitted the unchanged four methods from 50 dependencies archived at the
 immutable publication commit. The
 [decoded numerical receipt](evaluation-panels/image-supported-v11-linux-review.json)
 records its agreement and adverse checks. No photo, native map or model weights

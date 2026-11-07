@@ -6,10 +6,10 @@ customer API, PDF or billing behavior changed.
 
 All eight methods were frozen in commit `f12193bdf3ad8e9def6cb1e7f833177c0a98dff5`.
 Each used the same consumed writing-v5 model responses and source-disjoint
-four-role assignment:128 connected prompt/components,32 per role,16 generators.
+four-role assignment: 128 connected prompt/components,32 per role,16 generators.
 All eight fitted artifacts and genuine-only internal points preceded reserved
-evaluation. Each reserved comparison contains96 AI-containing constructions
-and32 human constructions. These are artificial60-word first /100-word second
+evaluation. Each reserved comparison contains 96 AI-containing constructions
+and 32 human constructions. These are artificial 60-word first /100-word second
 passages, not fresh articles, emails or complete documents.
 
 | Calibration and combination | AI found /96 | False AI flags /32 | Inconclusive /128 | Source/class-balanced Brier |
@@ -26,13 +26,13 @@ passages, not fresh articles, emails or complete documents.
 The new feature preserves information that the earlier maximum discards, but
 the actual tradeoff is insufficient. In the pooled comparison it finds one
 more AI-containing file and introduces one additional false flag. It also
-loses one short-AI-first detection:25/32 versus26/32 for the pooled baseline.
-Length-specific consistency recovers18/32 short-AI-first mixtures from the
-length-specific reference's0/32, but adds six human false flags. Lower Brier
+loses one short-AI-first detection: 25/32 versus 26/32 for the pooled baseline.
+Length-specific consistency recovers 18/32 short-AI-first mixtures from the
+length-specific reference's 0/32, but adds six human false flags. Lower Brier
 alone cannot establish improved detection at a similar false-alarm rate.
 Neither scoped alternative passes the predeclared continuation gates.
 
-All128 reserved files were numerically assessed in every arm; an assessed
+All 128 reserved files were numerically assessed in every arm; an assessed
 probability is not a validated statement of authorship. Rates are small-panel
 development observations, not estimates of customer accuracy. Same-source
 agreement can reinforce shared mistakes. The pooled reference remains a
@@ -44,17 +44,17 @@ and [replay release](evaluation-panels/scoped-writing-v6-release.json) retain al
 counts, source-bound character locations, parameters, probabilities, internal
 points and failures. No raw passage or customer document is republished.
 
-Local reconstruction archived34 dependencies from the immutable science
+Local reconstruction archived 34 dependencies from the immutable science
 commit. It refitted all eight arms, compared every fitted parameter, local/file
 probability, exact count and decision, and reproduced them with maximum numeric
-difference0. All eight adverse checks confirmed that changed reserved responses
+difference 0. All eight adverse checks confirmed that changed reserved responses
 cannot change fitting, and a missing required check withholds the combination
 instead of producing an originality verdict. The external CI wrapper is
 separate from the frozen science.
 
 Linux fitting is **not reliably portable yet**. Of four actual runs, two
 refitted all eight arms and reproduced every exact count/status/decision with
-maximum numerical difference1.1546319456101628e-14. Two failed during fitting.
+maximum numerical difference 1.1546319456101628e-14. Two failed during fitting.
 The first harness captured the original child diagnostic, so its cause remains
 unknown. The external wrapper was changed only to expose that diagnostic;
 the immutable science, thresholds and packages were not changed. A further
@@ -75,6 +75,6 @@ Run the model-free reconstruction from a full Git checkout:
 PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 python -m scripts.replay_scoped_writing_v6 /private/tmp/scoped-writing-v6-review.json
 ```
 
-Use the pinned NumPy2.2.6 /SciPy1.18.1 versions with Python3.12. Nothing loads a
+Use the pinned NumPy 2.2.6 /SciPy 1.18.1 versions with Python 3.12. Nothing loads a
 pretrained model, raw media or voice/face embedding. No untouched source reserve
 was spent to rescue this rejected development candidate.

@@ -1,0 +1,39 @@
+{
+  "private_lock_sha256": "f6d6d7a7f185e86742a86233e381b2178bda2f39f22c218032a97bb72936a69e",
+  "private_calibration_journal_sha256": "5384b05045b79ab6be005c0627b4e747a3b27a145f5d9040102c76c409e9834c",
+  "point": {
+    "method": "strictly_greater_than_second_largest_currently_unflagged_genuine_case_maximum",
+    "value": 0.11243900750879454,
+    "planned_genuine": 60,
+    "available_genuine": 56,
+    "available_source_groups": 28,
+    "eligible_currently_unflagged_genuine": 30,
+    "maximum_additional_genuine_calibration_flags": 1,
+    "confidence_calibration": false,
+    "identity_match_point": false,
+    "note": "Inspection feature units, not an authenticity probability or public screening threshold."
+  },
+  "calibration": {
+    "planned": 60,
+    "ok": 56,
+    "not_applicable": 4,
+    "failed": 0,
+    "current_flags": 28,
+    "replacement_flags": 28,
+    "new_flags": 1,
+    "current_parity_cases": 60,
+    "native_parity_cases": 60,
+    "face_frame_bindings": 3786
+  },
+  "profile": {
+    "role": "calibration",
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 15,
+    "sampled_tree_rss_lower_bound_bytes": 1065844736,
+    "duration_s": 231.69229216699023
+  },
+  "development_clips_scored_before_this_record": 0,
+  "real_face_vectors_or_imagery_included": false,
+  "scope": "Genuine-only incremental review-budget operating point, not AI confidence or an identity-match threshold. Actual frame/source/feature packets remain private."
+}

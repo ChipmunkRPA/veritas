@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.face-appearance-local-activation/17",
+  "passed": true,
+  "code_commit": "77283a69224dbf358cc53692122b27418f620c01",
+  "review_mode": "appearance",
+  "appearance_enabled": true,
+  "previous_sequence_disabled_but_retained": true,
+  "new_asset_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+  "http_status": {
+    "api": 200,
+    "frontend": 200,
+    "anonymous_analyses": 401,
+    "anonymous_checkout": 401,
+    "anonymous_submission": 401
+  },
+  "audio_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "overall_confidence_weight": 0,
+  "billing_mode": "test",
+  "price_minor": 999,
+  "currency": "usd",
+  "real_charge_performed": false,
+  "historical_analysis_records_rewritten": false,
+  "scope": "Actual main local API/frontend restart and health/auth/config/asset smoke; full paid inference/export/browser verification is separately recorded on isolated retained research cases."
+}

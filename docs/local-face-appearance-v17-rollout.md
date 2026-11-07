@@ -5,6 +5,11 @@ and has passed local production, prepaid-flow, export and browser verification.
 It remains an **inspection cue with zero overall-confidence weight**. This
 release adds no public confidence cutoff, identity lookup or lip-sync claim.
 
+The main local Mac app now uses `appearance` for new analyses after an idle API
+restart. Its health, authentication, pinned asset and unchanged USD 9.99 test-mode
+prepayment settings passed the [activation smoke check](evaluation-panels/video-v17-local-activation.json).
+The repository default remains `legacy`; existing results retain their recorded method.
+
 ## Why this method qualifies
 
 The [consumed-source comparison](video-v16-sface-development-evaluation.md)

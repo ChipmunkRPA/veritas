@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [arithmetic, exact-refit]
+        mode: [arithmetic, exact-refit, refit-diagnostics]
     env:
       OMP_NUM_THREADS: "4"
       OPENBLAS_NUM_THREADS: "4"
@@ -56,11 +56,16 @@ jobs:
       - name: Reconstruct outcomes and require exact fitting objects
         if: matrix.mode == 'exact-refit'
         run: python backend/scripts/review_audio_public_portable_v13.py docs/evaluation-panels/audio-v13-development-review.json.gz "$RUNNER_TEMP/audio-v13-review.json" --refit
+      - name: Diagnose both refits without changing exact acceptance
+        if: matrix.mode == 'refit-diagnostics'
+        run: python backend/scripts/diagnose_audio_public_refit_v13.py docs/evaluation-panels/audio-v13-development-review.json.gz "$RUNNER_TEMP/audio-v13-diagnostics.json"
       - name: Show completed receipt or explicit failure
         if: always()
         run: |
           if [ -f "$RUNNER_TEMP/audio-v13-review.json" ]; then
             cat "$RUNNER_TEMP/audio-v13-review.json"
+          elif [ -f "$RUNNER_TEMP/audio-v13-diagnostics.json" ]; then
+            cat "$RUNNER_TEMP/audio-v13-diagnostics.json"
           else
             echo "No completed review receipt. Inspect the failed step; no checks were relaxed."
           fi

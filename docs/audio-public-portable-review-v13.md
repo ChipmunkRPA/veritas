@@ -80,13 +80,37 @@ tolerances or change the original fitted objects. Cross-platform exact refits
 have not been demonstrated.
 
 A [GitHub-hosted workflow](../.github/workflows/audio-public-replay.yml) now
-defines two separate Linux checks: complete arithmetic replay and strict exact
-refitting. Both use the same pinned numerical versions and require the absence
+defines separate Linux checks for complete arithmetic replay, strict exact
+refitting and diagnostic refit differences. All use the same pinned numerical
+versions and require the absence
 of app/neural dependencies. The workflow has read-only repository permissions,
 uses pinned setup actions, retains failed checks and prints completed receipts.
 Its execution result must be inspected before claiming external-host parity;
 adding the workflow does not establish that it passed. It is automated
 reproduction by our team, not outside human review or fresh predictive testing.
+
+The [first Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42334171628)
+at commit `69f4681509d9853dfd9d75bd36eacdd356de1fd3` is complete. Its arithmetic
+job reproduced all 4,248 records and all 1,449 original outcomes/statistics,
+including rejection of both candidates. The
+[captured receipt](evaluation-panels/audio-v13-linux-arithmetic-review.json)
+records Linux x86_64, Python 3.12.6 and the same seven pinned package versions.
+The strict refit job failed on the standalone fitted object's exact equality;
+it did not complete the second arm. This is a real limitation of the demonstrated
+refit portability. The original failure remains visible and its check is unchanged.
+
+The separate diagnostic command first requires complete original arithmetic
+replay, then refits both arms using the unchanged fitting-only learner. It reports
+coefficient/normalization/probability differences, own calibration and changed
+decisions with missing probes explicit. A completed diagnostic is not exact
+parity, a replacement fit, native inference or a new accuracy result:
+
+```sh
+/tmp/chipmunk-audio-review/bin/python \
+  backend/scripts/diagnose_audio_public_refit_v13.py \
+  docs/evaluation-panels/audio-v13-development-review.json.gz \
+  /tmp/new-refit-diagnostics.json
+```
 
 The reproduced result still rejects both candidates. No arm is selected for
 fresh confirmation, and the current service is unchanged. All 1,080 reserved

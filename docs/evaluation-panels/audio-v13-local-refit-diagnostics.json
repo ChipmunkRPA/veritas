@@ -1,0 +1,62 @@
+{
+  "schema": "chipmunk.public-audio-refit-diagnostics/13",
+  "diagnostic_execution_completed": true,
+  "original_arithmetic_review_passed": true,
+  "all_refitted_objects_exact": true,
+  "arms": {
+    "standalone": {
+      "complete_fitted_object_exact": true,
+      "non_numerical_metadata_equal": true,
+      "normalization_center_max_absolute_difference": 0.0,
+      "normalization_scale_max_absolute_difference": 0.0,
+      "coefficients_max_absolute_difference": 0.0,
+      "own_guards_equal_to_same_arithmetic_original": true,
+      "maximum_development_probability_difference": 0.0,
+      "development_rows": 1449,
+      "changed_directional_outcomes_using_available_probes": 0,
+      "new_required_but_missing_public_probes": 0
+    },
+    "complement": {
+      "complete_fitted_object_exact": true,
+      "non_numerical_metadata_equal": true,
+      "normalization_center_max_absolute_difference": 0.0,
+      "normalization_scale_max_absolute_difference": 0.0,
+      "coefficients_max_absolute_difference": 0.0,
+      "own_guards_equal_to_same_arithmetic_original": true,
+      "maximum_development_probability_difference": 0.0,
+      "development_rows": 1449,
+      "changed_directional_outcomes_using_available_probes": 0,
+      "new_required_but_missing_public_probes": 0
+    }
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.6.0",
+    "narwhals": "2.28.0",
+    "threadpoolctl": "3.8.0",
+    "cloudpickle": "3.1.2"
+  },
+  "numerical_libraries": [
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 4,
+      "prefix": "libomp",
+      "version": null
+    }
+  ],
+  "capsule_sha256": "84848472fef312c5fb5fd2ceddacd5fbe217caebadd09aacd85f28f5ee21cac3",
+  "reviewer_sha256": "88cd8b725efe792bd3cf3d6845758f144d2afcc8c8df533fb546c484647784fd",
+  "portable_reviewer_sha256": "e19abef956f314af5a0a06918d90577bcd094ac94fb3484c0a2779a309f181ee",
+  "original_exact_refit_check_relaxed": false,
+  "replacement_objects_saved": false,
+  "source_recordings_scored": 0,
+  "serving_changed": false,
+  "outside_reviewers": 0,
+  "scope": "Diagnostic differences after complete original arithmetic replay. Refit predictions and own guards are measured using existing public probes; new required missing probes are explicit. No neural forwards, fresh predictive test, replacement fit/calibration or outside human review."
+}

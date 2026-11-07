@@ -67,6 +67,17 @@ only the scan with that direct recurrence changes the largest final logit by
 0.000000954, within the originally declared absolute 0.0001/relative 0.00001
 graph tolerances. No tolerances were relaxed after the failed initialization.
 
+The native-input preparation helper now records eight actual frame indices,
+decoded PTS values, crop geometry and pixel/tensor commitments. Five synthetic
+image geometries reproduce the publisher's preprocessing byte-for-byte, and
+four index schedules reproduce its supported center-window selection. Fifteen
+focused clock/input tests pass. Missing/guessed FPS, invalid clocks and fewer
+than eight actual sampled frames remain unassessed, instead of acquiring the
+publisher's zero padding. The helper preserves the original square-image crop
+behavior. Actual decoded-clock/pixel association still needs an independent
+source replay, and no project video has been decoded through this new helper
+or classified. These preparation checks do not complete the execution freeze.
+
 The independent reference covers recurrence arithmetic. The vision library,
 trained tensors, remaining graph and framework remain shared. Synthetic outputs
 are neither calibration examples nor authentic/AI test cases. Their high raw

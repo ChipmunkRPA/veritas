@@ -1,0 +1,169 @@
+{
+  "schema": "chipmunk.image-cue-actual-linux-review/7",
+  "run_id": 42370570244,
+  "job_id": 128397655294,
+  "head_sha": "d592b879ebbb341407eedfe62447f42fe91ebda4",
+  "url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42370570244",
+  "status": "completed",
+  "conclusion": "success",
+  "runner": "ubuntu-24.04",
+  "python": "3.12.6",
+  "source_and_payload_checks_passed": true,
+  "standard_library_only_check_passed": true,
+  "actual_review": {
+    "passed": true,
+    "inputs": 224,
+    "genuine_gate_exact": true,
+    "counts_compared": 418,
+    "all_planned_source_byte_label_group_role_bindings_checked": true,
+    "requirements_compared": 10,
+    "raw_three_logit_and_sigmoid_reductions_checked": 224,
+    "paired_bootstrap_intervals_recomputed": false,
+    "native_neural_inference_recomputed": false,
+    "source_pixels_recomputed": false,
+    "outside_human_review": false,
+    "scope": "Separate standard-library arithmetic implementation. Does not reproduce interval bootstraps, source pixels, pretrained model forwards or native audit claims.",
+    "packet_sha256": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564"
+  },
+  "actual_tamper": {
+    "passed": true,
+    "mutations": [
+      {
+        "mutation": "missing",
+        "rejected": true,
+        "reason": "Exact unique planned input count required"
+      },
+      {
+        "mutation": "duplicate",
+        "rejected": true,
+        "reason": "Exact unique planned input count required"
+      },
+      {
+        "mutation": "unknown_id",
+        "rejected": true,
+        "reason": "Planned source IDs differ from original public freeze"
+      },
+      {
+        "mutation": "role",
+        "rejected": true,
+        "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+      },
+      {
+        "mutation": "truth",
+        "rejected": true,
+        "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+      },
+      {
+        "mutation": "input_hash",
+        "rejected": true,
+        "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+      },
+      {
+        "mutation": "nonfinite",
+        "rejected": true,
+        "reason": "Three finite crop logits and mean required"
+      },
+      {
+        "mutation": "crop_mean",
+        "rejected": true,
+        "reason": "Neural outer logit reduction mismatch"
+      },
+      {
+        "mutation": "sigmoid",
+        "rejected": true,
+        "reason": "Raw sigmoid reduction mismatch"
+      },
+      {
+        "mutation": "relaxed_gate",
+        "rejected": true,
+        "reason": "Recorded point differs from genuine-only maximum"
+      },
+      {
+        "mutation": "failed_calibration",
+        "rejected": true,
+        "reason": "Genuine-only complete operating-point set required"
+      },
+      {
+        "mutation": "failed_development",
+        "rejected": true,
+        "reason": "Independent development accounting differs"
+      },
+      {
+        "mutation": "changed_direction",
+        "rejected": true,
+        "reason": "Independent development accounting differs"
+      },
+      {
+        "mutation": "forced_advance",
+        "rejected": true,
+        "reason": "Independent advancement requirements differ"
+      }
+    ],
+    "scope": "Deliberate changes to the actual public scalar response packet; no pretrained inference or source pixels are tested.",
+    "packet_sha256": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564"
+  },
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2
+    },
+    {
+      "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3
+    },
+    {
+      "name": "Verify reviewed source and response packet bytes",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4
+    },
+    {
+      "name": "Recompute source bindings and all directional counts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5
+    },
+    {
+      "name": "Refuse changed inputs, labels, roles, scores and advancement claims",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 6
+    },
+    {
+      "name": "Show receipts or explicit incomplete status",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 7
+    },
+    {
+      "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 13
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 15
+    }
+  ],
+  "scope": "Actual separate Linux machine reproduced scalar source bindings/counts/gates and refused 14 mutations. No source pixels or pretrained neural inference replayed; no outside human reviewer.",
+  "decoded_job_log_text_sha256": "707a20719ec67604714a0ef82e711d4339c6526bbbab3b6a34dd879b328c57a9"
+}

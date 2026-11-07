@@ -42,8 +42,9 @@ No speech-derived feature vectors are in this prospective metadata package.
 The freeze was published and remotely verified as `45e8ff9` before any project
 speech forward. Extraction then completed all4,248 records:4,186 assessed,
 62 unassessed and zero failures. Both fixed heads converged on fitting sources
-and their own independent calibrations were saved. Development comparison is
-in progress; these execution facts do not establish an accuracy gain.
+and their own independent calibrations were saved. Comparison has no complete
+result; the initialization failure and continuation are recorded below.
+These execution facts do not establish an accuracy gain.
 
 The first freeze attempt stopped because the destination directory did not exist;
 it wrote no lock or feature journal and ran no project forward. Created the empty
@@ -65,13 +66,13 @@ PYTHONPATH=backend backend/.venv/bin/python -m scripts.run_audio_wavlm_v13 \
   extract "$research_root/lock.json" "$research_root/features.jsonl"
 PYTHONPATH=backend backend/.venv/bin/python -m scripts.run_audio_wavlm_v13 \
   train "$research_root/lock.json" "$research_root/trained" --receipt "$research_root/features.jsonl"
-PYTHONPATH=backend backend/.venv/bin/python -m scripts.run_audio_wavlm_v13 \
-  compare "$research_root/lock.json" "$research_root/responses.jsonl" \
-  --receipt "$research_root/features.jsonl" --head "$research_root/trained/head.json"
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.execute_audio_wavlm_v13 \
+  compare "$research_root/lock.json" "$research_root/features.jsonl" \
+  "$research_root/trained/head.json" "$research_root/responses-callable.jsonl"
 PYTHONPATH=backend backend/.venv/bin/python -m scripts.run_audio_wavlm_v13 \
   review "$research_root/lock.json" "$research_root/summary.json" \
   --receipt "$research_root/features.jsonl" --head "$research_root/trained/head.json" \
-  --responses "$research_root/responses.jsonl"
+  --responses "$research_root/responses-callable.jsonl"
 ```
 
 The fitting stage refuses incomplete/failed extraction and saves fitting objects
@@ -102,10 +103,27 @@ until those stages actually finish.
 ```sh
 PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_wavlm_v13 \
   numerical "$research_root/lock.json" "$research_root/features.jsonl" \
-  "$research_root/trained/head.json" "$research_root/responses.jsonl" \
+  "$research_root/trained/head.json" "$research_root/responses-callable.jsonl" \
   "$research_root/numerical-review.json" --summary "$research_root/summary.json" --refit
-PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_wavlm_v13 \
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.execute_audio_wavlm_v13 \
   native "$research_root/lock.json" "$research_root/features.jsonl" \
-  "$research_root/trained/head.json" "$research_root/responses.jsonl" \
-  "$research_root/native-review.json"
+  "$research_root/trained/head.json" "$research_root/native-review.json" \
+  --responses "$research_root/responses-callable.jsonl"
 ```
+
+## Recorded execution initialization correction
+
+The first comparison stopped at input34 with a retained RuntimeError: both the
+research CLI and the original-model loader initialized PyTorch inter-op threads.
+PyTorch permits that process initialization only once. A minimal duplicate-call
+reproduction confirms the cause; the same input and exact frozen validator pass
+through the callable functions without the redundant CLI initialization.
+
+`execute_audio_wavlm_v13.py` calls those unchanged functions in a dedicated
+process, setting the declared four intra-op threads and leaving inter-op ownership
+to the original-model loader. The [execution supplement](evaluation-panels/audio-v13-thread-ownership-supplement.json)
+binds the launcher, original69-file freeze, complete feature receipt, both original
+fitted/calibrated objects and failed-prefix digest before continuing. Use a new
+`responses-callable.jsonl` journal; preserve the original failed34-record journal.
+No source, feature, fitting, calibration, filtering, stability or gate changes.
+No detection result was selected or rescued by this initialization correction.

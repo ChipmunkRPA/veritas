@@ -1,0 +1,33 @@
+name: Voice specialist immutable scalar review
+on:
+  push:
+    paths:
+      - 'backend/scripts/replay_frozen_specialist_release_v5.py'
+      - '.github/workflows/audio-specialists-v15-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-source-refit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies without model packages
+        run: |
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
+      - name: Replay the original complete audio scalar package
+        env:
+          PYTHONPATH: backend
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          python -m scripts.replay_frozen_specialist_release_v5 2c0b61d523d9b8a4e341489e5f9fea34bea91139 docs/evaluation-panels/audio-specialists-v15-release.json audio-specialists-v15-linux-review.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio-specialists-v15-linux-review
+          path: audio-specialists-v15-linux-review.json

@@ -1,0 +1,128 @@
+{
+  "schema": "chipmunk.patch-drift-native-freeze/8",
+  "source_sha256": {
+    "backend/scripts/image_patch_drift_v8.py": "b3050185a9766bc2725fc4429cb9935e16d72d00ef7ca0cee8182dce3cbe9d12",
+    "backend/scripts/audit_image_patch_drift_v8.py": "95ba4e3932adf27d409914d3bd8de6181478189e30a85db29e45446228179369",
+    "backend/tests/test_image_patch_drift_v8.py": "51b049436e02ea66d49edf8d70306209022fe482e8c0b7bea66e92897dc2d9e7",
+    "docs/image-patch-drift-v8-native-protocol.md": "cce5e3508bd4616a174dda44aa9808d5fc4012df7ce2b7e414ed920c50a052c5",
+    "docs/third-party/TRAIL-v8-MIT.txt": "05c0436a2390998a6eb5133626cfea701ea33edaba2d2d26b91ee569d356403a",
+    "backend/app/detectors/image/radar.py": "d42bad4f23887b9f0f48f4d8e0fca0e418305ee78054f67c73558ac08cfa353e",
+    "backend/app/engine/fetchers.py": "e83fa48fef53026f30930b71feb57b114b9c5fcdf307bb47a0b75ae8e3fba366"
+  },
+  "reference": {
+    "repository": "VishalJ99/trail-image-edit-localization",
+    "revision": "0fce0f1de2ac0d219baf91592ee2bca95ec0a219",
+    "files": [
+      {
+        "path": "LICENSE",
+        "git_blob_sha1": "da75db7beca322d06707ef0cfdbbf9c1b4ee8596",
+        "sha256": "05c0436a2390998a6eb5133626cfea701ea33edaba2d2d26b91ee569d356403a",
+        "bytes": 1070
+      },
+      {
+        "path": "configs/models.json",
+        "git_blob_sha1": "481af8c08d9bcfb4acb5818ce749ca60d91a8bf9",
+        "sha256": "26602d5c40ec9236e11b941a0c8715c1b98dc4cb76d08a6b759218a0d22e53eb",
+        "bytes": 4997
+      },
+      {
+        "path": "src/trail/core.py",
+        "git_blob_sha1": "4fef13b2513778a4769f5d99d955203c975ddd44",
+        "sha256": "4c21d9bef25ed280f2ccb50129c7fcb2c09373fa070f30e91ad38e31bcb7ff92",
+        "bytes": 7755
+      },
+      {
+        "path": "src/trail/models.py",
+        "git_blob_sha1": "8bc8f52e582b046965d9daf046e5b73907f28377",
+        "sha256": "b8b3a97203654812c6f5333fd378873c7191b4e1eddadb122f0b19f39ff27858",
+        "bytes": 9665
+      },
+      {
+        "path": "src/trail/runner.py",
+        "git_blob_sha1": "dedbc2dde3291d812ca3a40bca06325b1443a187",
+        "sha256": "f15ecfa3936efe79b94374b18cbb76122efb0b21b3f363c7bbf2da6cb8958187",
+        "bytes": 5277
+      },
+      {
+        "path": "results/model_family/selected_layers_all16.csv",
+        "git_blob_sha1": "1d3e8cd71184a4d19faa05e46eb34fbfff4c90da",
+        "sha256": "d93452fb67459e3ae38b11d094ffd55f52ba959b622f1340c29c6069130c64e6",
+        "bytes": 3906
+      },
+      {
+        "path": "pyproject.toml",
+        "git_blob_sha1": "f828f9131e34a3def27ce9ef3c086b23984a0cc1",
+        "sha256": "df6a9b102b1075f919fdf537622f2911c5302f11cd4a6e2c52ef058559868fab",
+        "bytes": 1011
+      }
+    ]
+  },
+  "assets": {
+    "dinov2.vitb14_reg4": {
+      "license": {
+        "spdx": "Apache-2.0",
+        "class_": "commercial",
+        "notice": "github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0); the README releases code and model weights under Apache-2.0"
+      },
+      "files": {
+        "models/weights/dinov2_vitb14_reg4_pretrain.pth": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71"
+      }
+    },
+    "dinov2.vitl14": {
+      "license": {
+        "spdx": "Apache-2.0",
+        "class_": "commercial",
+        "notice": "github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"
+      },
+      "files": {
+        "models/weights/dinov2.vitl14/hub/facebookresearch_dinov2_b8931f7bf91576930313be2c6d6af376033b35f0.zip": "218d1e159ebd7d928aa76e5412ac04455c92aad9ecb3c48ab8542a98ccc1b357"
+      }
+    }
+  },
+  "installed_source_sha256": {
+    "PIL/_imaging.cpython-312-darwin.so": "ee754300d3bda6413b80ddabe3a7ed7b419e1b0468bf2830e2b19fe68f14be42",
+    "PIL/_imagingcms.cpython-312-darwin.so": "292f96c5464a5607e2674dae85d9739436c9f22b17590625f7d674ddcff59849",
+    "PIL/_imagingft.cpython-312-darwin.so": "dde5db0339f044b53f15abc9deb1093021cd59787b58b073cb90a4bdb8a3d31c",
+    "PIL/_imagingmath.cpython-312-darwin.so": "2e3922ab8e63b3260996a3c676431396d85b1ad5adb0aba4607a443d77818448",
+    "PIL/_imagingmorph.cpython-312-darwin.so": "24d8534d10301f367d37b99352e410ae266258e9f149dd5da30e7b5de194ad19",
+    "PIL/_imagingtk.cpython-312-darwin.so": "9e889cbafba6ddc60872d2307de7d73fca1e4867267dabdc8503e2aa4ece4ba1",
+    "cv2/cv2.abi3.so": "5879758f1a4f0d83ad6be16848478d3b109aab09a402139f9768dfb630fdf072",
+    "tokenizers/tokenizers.abi3.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+    "torch/_C.cpython-312-darwin.so": "aee3839e4c52bd074fc78b026e3eee6e4f7cfd714ed571fae3483f30f67d5c3c",
+    "torch/lib/libtorch_cpu.dylib": "f1584a65a2a09b5ddbe90a4e195ba824087b430a9f21cb1df9b8894177b99987",
+    "torch/nn/functional.py": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e",
+    "transformers/image_transforms.py": "a34742c0083619bd528e8e025d5e52ea82e854098d58a3cbedd8c76e7a2c9fe9",
+    "transformers/image_utils.py": "e202665798fc2b68ec0d2ba4304af0f2d1948c34ee85d2c47a231a36acfa5fb2",
+    "transformers/masking_utils.py": "e8c497af6979274fc6ae78980ad9893e7850bdb750e46d459f09178123992196",
+    "transformers/modeling_rope_utils.py": "a8bf3f6a53760366fb5fa51cecc06a8707d3cded36fd8f3ac51e140c0718af21",
+    "transformers/modeling_utils.py": "a7392c26dd2f005383cc3c1f8562638a6039d393ca03fb1933513479a6d264e4",
+    "transformers/models/dinov2/__init__.py": "3afac03258723da32fbc4e56db1de1c50e848e43d86607ac8b323f8ce0b92b71",
+    "transformers/models/dinov2/configuration_dinov2.py": "5d90862b483744e951756f18b9b93bc1a04634c8744ddf74e8f3fb0b6ebe97f5",
+    "transformers/models/dinov2/modeling_dinov2.py": "9c7e028bdadef16e4fe6c59833ac916fe0a7987d1ac968a6f19aca40359ea9f8",
+    "transformers/models/siglip/__init__.py": "c86d7a096d1a0bcd0c3facedcbe5592c1c72924ff99f08e4f7b8996aeae547bd",
+    "transformers/models/siglip/configuration_siglip.py": "0a402ea5452a1527ad54f5339889774549688f5f84028af30979bdbc4b32206e",
+    "transformers/models/siglip/image_processing_pil_siglip.py": "61ff04dc131c526dd5e638bc2ad778cc1186989f474507bd3bf7368ea09f54c1",
+    "transformers/models/siglip/image_processing_siglip.py": "f716aedcc35e6e271662e1bee77d9546fcf3155a6c6bd166872a87540e853c4c",
+    "transformers/models/siglip/modeling_siglip.py": "0a0d2b55f4fcb977b74549540211e42a3c3f41d0d446dc474dcc244a925791aa",
+    "transformers/models/siglip/processing_siglip.py": "68e439312a0ca5ffcc161d6fb76b6bb929b5634a05a47092657efb1b5a115087",
+    "transformers/models/siglip/tokenization_siglip.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",
+    "transformers/models/vit/__init__.py": "22d6be7c2b82dd889e316a249833a74e671cef8621abe177dd3ebcd4130ec859",
+    "transformers/models/vit/configuration_vit.py": "0ec851794e2692154466915ecd7344ab77f42b8c1ca7832078bfe9e5af5e506c",
+    "transformers/models/vit/image_processing_pil_vit.py": "4d0e23446e71e8aa7feb8c8cb4fdeca2b383087a12a394696440c29b3f73e953",
+    "transformers/models/vit/image_processing_vit.py": "577efcaea463026feabca901673b23e421cfcbe3544a79f3affdad5ac38213c4",
+    "transformers/models/vit/modeling_vit.py": "d6e8e18d0d7c32beaac672b5701f1e83d72df62781e79f8508ca7f3dc0db9de2",
+    "transformers/processing_utils.py": "e270803a5f5e3de4852e7f5df36fc4beefc102f613880532ca2bf157015e791b"
+  },
+  "packages": {
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0"
+  },
+  "native_inputs": 6,
+  "cpu_normalization_absolute_limit": 5e-07,
+  "native_hook_feature_limit": 0.0,
+  "project_images_scored": 0,
+  "serving_changed": false,
+  "private_native_freeze_sha256": "e6872c605cd1d1a42fda7bdc59f1026b2d5729d86dd2ce1f7fdce6889477393b"
+}

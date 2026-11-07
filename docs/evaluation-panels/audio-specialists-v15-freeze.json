@@ -1,0 +1,162 @@
+{
+  "schema": "chipmunk.audio-specialists-freeze/15",
+  "policy": {
+    "schema": "chipmunk.audio-specialists-scoring-policy/15",
+    "arms": [
+      "full-pooled",
+      "full-context",
+      "combined-pooled",
+      "combined-context"
+    ],
+    "source_method": {
+      "schema": "chipmunk.audio-specialists-method/15",
+      "source_groups": 143,
+      "sample_rate": 16000,
+      "source_prefix_samples": 64000,
+      "composite_samples": 128000,
+      "source_selection": "All143 consumed AI-containing connected groups; hash-first AI source, same-group human if available, otherwise one unused hash-ordered genuine-only group. No authenticity score selection.",
+      "roles": [
+        "specialist_cal",
+        "fusion_fit",
+        "fusion_cal",
+        "confirmation"
+      ],
+      "roles_rule": "Stratify by selected AI generator; salted hash order and globally continuing round-robin roles. All originals, speaker/transcript ancestry and backgrounds remain role-disjoint.",
+      "backgrounds": "All48 consumed licensed originals, disjoint canonical identities; hash-partition each kind into four roles; pair-hash choice and deterministic four-second offset within its role. Reused nuisance parents within a role are disclosed.",
+      "patterns": {
+        "human": [
+          0,
+          0
+        ],
+        "ai": [
+          1,
+          1
+        ],
+        "human-ai": [
+          0,
+          1
+        ],
+        "ai-human": [
+          1,
+          0
+        ]
+      },
+      "conditions": [
+        [
+          "clean",
+          null,
+          null
+        ],
+        [
+          "noise_-5",
+          "noise",
+          -5
+        ],
+        [
+          "noise_5",
+          "noise",
+          5
+        ],
+        [
+          "music_-5",
+          "music",
+          -5
+        ],
+        [
+          "music_5",
+          "music",
+          5
+        ],
+        [
+          "speech_-5",
+          "speech",
+          -5
+        ],
+        [
+          "speech_5",
+          "speech",
+          5
+        ]
+      ],
+      "render": "Normalize both foreground prefixes separately to RMS0.1; add the same selected human/noise/music background to the second half at -5 or5dB; one peak-safe gain shared by all patterns/conditions of a pair; canonical mono16kHz s16 WAV roundtrip.",
+      "source_truth": "Any overlap of a planned4s window with a known AI foreground interval. Background speech is genuine. Ordinary edits/looping, noise and speaker changes alone are not AI truth.",
+      "windows": "Full-profile production0,2,4s windows on8s input; original full-clip Silero gate; every planned window retained, including gated-out evidence.",
+      "band": "Whole-clip zero-phase Butterworth100\u20133800Hz/order4; same source windows/gate; never treated as a second truth or a recovered original.",
+      "routing": "Original-window measured normalized spectral-flatness>=0.65: diffuse; otherwise concentrated. Generator, known SNR, recipe, label and model response are excluded from routing.",
+      "context_cut": 0.65,
+      "contexts": [
+        "concentrated",
+        "diffuse"
+      ],
+      "minimum_groups_per_class": 25,
+      "calibration": "Four source-disjoint roles; full-view pooled/context and full+band pooled/context arms. One dependence family; maximum positive calibrated logit, separately fitted/calibrated file result. L2=.001;50:50 reference prior.",
+      "operating_comparison": "Internal AI-only point on fusion_cal genuine foreground-pair maxima: strict greater than nearest-rank ceil((n+1)*.9), capped at n. All arm artifacts/points frozen before confirmation authenticity inference. No customer threshold or error guarantee.",
+      "quality_gates": "Against pooled full-view research reference: more AI files found, no additional false-AI foreground groups, no coverage loss, lower source/class-balanced Brier. Per-condition/local errors and all inconclusive denominators retained; no automatic admission.",
+      "native_audit": "Exact publisher assets; retained exact old WAV/PCM/raw parity before new authenticity inference; first window per role/view/context direct repeat; source/native coordinates audited separately.",
+      "device": "cpu",
+      "dtype": "float32",
+      "threads": 4,
+      "resource_guard": {
+        "tree_rss_gib": 6,
+        "minimum_available_mib": 1536,
+        "minimum_disk_mib": 1536,
+        "maximum_seconds_per_role": 3600
+      },
+      "serving_admitted": false,
+      "limits": "Consumed foregrounds/backgrounds, unknown external model-training overlap and artificial splice boundaries.35/36 foreground-pair groups per role are not independent background recordings; each role has6 noise/3music/3speech parents. No background-authenticity, unseen-customer, fresh-independent or court claim."
+    },
+    "l2": 0.001,
+    "minimum_groups_per_class": 25,
+    "native_parity_absolute_limit": 1e-06,
+    "native_repeat_exact": true,
+    "operating_alpha": 0.1,
+    "operating_minimum_assessed_genuine_groups": 25,
+    "operating_scope": "Genuine foreground-pair maxima of assessed fusion_cal files; unassessed files/groups explicitly counted, no response imputation. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+    "additional_continuation_gates": [
+      "no_clean_ai_detection_loss",
+      "no_additional_false_ai_groups_in_any_condition",
+      "more_ai_detected_across_strong_noise_music_speech",
+      "no_condition_coverage_loss"
+    ],
+    "admission": "No serving admission; continuation only. Consumed sources, limited independent background parents and external pretraining overlap require new independent-source validation."
+  },
+  "code_sha256": {
+    "backend/scripts/prepare_audio_specialists_v15.py": "40342b9b975904b2723e4558ce0e9dbb58815623c6de97aa4212a77f3dee4176",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c",
+    "backend/scripts/specialist_runtime_v3.py": "97c4a5e2f1729b8d9f9e4553232a4b719e15aed0ee5d3f1c4359de9fd1b3f396",
+    "backend/scripts/specialist_calibration.py": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/scripts/audio_quality_v5.py": "ed44937634e686e52c449252bad4ba0f448ac191ed21f60fde2e95222f198081",
+    "backend/scripts/audio_calibration_v3_methods.py": "9f47f54d2386b637c025a9a1ef1acca447b406695e7f1efb7e585f11225e3b24",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/third_party/kaldi/fbank.py": "12828851efc621af15718b82c09889316673092c1c17242d403152457e322a04",
+    "backend/tests/test_audio_specialists_v15.py": "340a76b74c89fe0d391022aef4a6efeedb3ebc1073d4900ac9436ba916085e7f",
+    "docs/audio-specialists-v15-protocol.md": "12a7c3a9803ecb895c77544efc574eb1f53bd5f0bbc5e3889fab2846d36b2e32"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "tokenizers": "0.22.2",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2"
+  },
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "source_plan_sha256": "e78eb1e3e7824a11109fda9ef4223f75dafae2a1345aa2615413ba6974672f7f",
+  "signal_plan_sha256": "1b2737f41d273fd30b8648030764853f95e02523fa39d6f27798af10a845325f",
+  "signal_audit_sha256": "1235b0b22f0cfecf93cb142c47ab568685139cae4dd07eb3c663b61d8a6f2055",
+  "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+  "serving_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "new_authenticity_classifier_forwards": 0,
+  "serving_admitted": false,
+  "private_freeze_sha256": "284e231e6b4c959a3e325c1906d2dfb6c14e6ab0aad86e7fddd435b1330bf174",
+  "source_role": "Consumed-source development; no new authenticity-model forward at freeze."
+}

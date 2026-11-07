@@ -1,0 +1,118 @@
+{
+  "schema": "chipmunk.audio-specialists-signal-audit/15",
+  "signal_plan_sha256": "1b2737f41d273fd30b8648030764853f95e02523fa39d6f27798af10a845325f",
+  "source_plan_sha256": "e78eb1e3e7824a11109fda9ef4223f75dafae2a1345aa2615413ba6974672f7f",
+  "files": 4004,
+  "windows": 12012,
+  "native_decode_probes": 56,
+  "unique_view_pcm_hashes": 18016,
+  "eligible_foreground_groups_by_role_context_class": [
+    {
+      "role": "specialist_cal",
+      "context": "concentrated",
+      "label": 0,
+      "groups": 35
+    },
+    {
+      "role": "specialist_cal",
+      "context": "concentrated",
+      "label": 1,
+      "groups": 36
+    },
+    {
+      "role": "specialist_cal",
+      "context": "diffuse",
+      "label": 0,
+      "groups": 29
+    },
+    {
+      "role": "specialist_cal",
+      "context": "diffuse",
+      "label": 1,
+      "groups": 33
+    },
+    {
+      "role": "fusion_fit",
+      "context": "concentrated",
+      "label": 0,
+      "groups": 35
+    },
+    {
+      "role": "fusion_fit",
+      "context": "concentrated",
+      "label": 1,
+      "groups": 35
+    },
+    {
+      "role": "fusion_fit",
+      "context": "diffuse",
+      "label": 0,
+      "groups": 36
+    },
+    {
+      "role": "fusion_fit",
+      "context": "diffuse",
+      "label": 1,
+      "groups": 35
+    },
+    {
+      "role": "fusion_cal",
+      "context": "concentrated",
+      "label": 0,
+      "groups": 36
+    },
+    {
+      "role": "fusion_cal",
+      "context": "concentrated",
+      "label": 1,
+      "groups": 36
+    },
+    {
+      "role": "fusion_cal",
+      "context": "diffuse",
+      "label": 0,
+      "groups": 23
+    },
+    {
+      "role": "fusion_cal",
+      "context": "diffuse",
+      "label": 1,
+      "groups": 28
+    },
+    {
+      "role": "confirmation",
+      "context": "concentrated",
+      "label": 0,
+      "groups": 32
+    },
+    {
+      "role": "confirmation",
+      "context": "concentrated",
+      "label": 1,
+      "groups": 35
+    },
+    {
+      "role": "confirmation",
+      "context": "diffuse",
+      "label": 0,
+      "groups": 29
+    },
+    {
+      "role": "confirmation",
+      "context": "diffuse",
+      "label": 1,
+      "groups": 28
+    }
+  ],
+  "authenticity_classifier_forwards": 0,
+  "source_reserve_scored": false,
+  "serving_admitted": false,
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1"
+  },
+  "background_independence_limit": "Consumed foregrounds/backgrounds, unknown external model-training overlap and artificial splice boundaries.35/36 foreground-pair groups per role are not independent background recordings; each role has6 noise/3music/3speech parents. No background-authenticity, unseen-customer, fresh-independent or court claim."
+}

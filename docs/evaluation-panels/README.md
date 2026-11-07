@@ -8,6 +8,14 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`writing-v3-focus-freeze.json` binds the prospective12-file four-arm consumed
+writing comparison, exact674 focus/context inputs, pinned commercial model
+assets and runtime, complete token coverage, native replay plan and fixed
+author-group continuation requirements. No source text, author names, queries,
+per-record annotations or classifier scores are published by this freeze.
+Forty-five selected tests and source-only tokenizer audits are preparation,
+not improved detection or fresh accuracy. [Protocol and execution](../writing-focus-v3-execution.md).
+
 `fused-crop-v6-development-freeze.json` records the prospective consumed-source
 image-crop method; `image-localizer-v6-source-review.json` retains commercial
 grant/download-access observations. `fused-crop-v6-development-review.json`

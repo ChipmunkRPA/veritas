@@ -65,6 +65,15 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Implemented a prospective writing2x2 comparison: current/candidate models on
+  exact focus sentences and three-sentence contexts, all40 consumed authors and
+  674 foci. Forty-five selected tests pass. Independent native token-ID audits
+  retain every input; candidate inference has not begun. Freeze binds12 project
+  files, installed/runtime/source/model assets, both diagnostic references and
+  author-group continuation gates. Native single-window replay is predeclared.
+  No fitting, source-text redistribution, fresh confirmation or serving adoption
+  follows from this development design. [Protocol and execution](writing-focus-v3-execution.md).
+
 - Completed the new speech-backbone comparison:4,248 feature records and1,449
   development outcomes. Combined noise/music improves, but correct AI648→522,
   correct original356→437, false AI58→4 and inconclusive387→486. Three original

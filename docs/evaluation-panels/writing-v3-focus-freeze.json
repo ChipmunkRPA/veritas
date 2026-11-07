@@ -1,0 +1,109 @@
+{
+  "schema": "chipmunk.writing-focus-public-freeze/3",
+  "historical_sha256": "33fd38ce148fbbaf507d4df8a5ddfac4df215aa3cd597573bf23d535657b53b3",
+  "input_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+  "method": {
+    "schema": "chipmunk.writing-focus-method/3",
+    "design": "2x2: unchanged baseline and candidate, each on three-sentence context and exact focus",
+    "documents": 40,
+    "author_groups": 40,
+    "foci": 674,
+    "models": [
+      "baseline",
+      "candidate"
+    ],
+    "views": [
+      "context",
+      "focus"
+    ],
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "batch": 4,
+    "max_len": 512,
+    "baseline_response": "1 minus human softmax; includes ai, ai_edited and humanized classes",
+    "candidate_response": "softmax class1 AI; no temperature or fitted calibration",
+    "coverage": "all native content tokens, stride0 overflow; content-token-weighted mean",
+    "native_audit": "first focus of every author, both views and models; plus every input with tokenizer overflow; direct single-window forwards, absolute tolerance1e-5",
+    "reference_points": [
+      0.5,
+      0.8
+    ],
+    "comparison": "candidate/focus versus baseline/context; all four arms retained",
+    "author_bootstrap": {
+      "seed": 20261106,
+      "replicates": 2000,
+      "interval": [
+        0.025,
+        0.975
+      ]
+    },
+    "development_continuation": {
+      "complete_no_failures": true,
+      "more_pure_bot_recoveries_at_both_points": true,
+      "human_origin_highlight_rate_increase_at_most": 0.02,
+      "bot_character_recall_not_lower_at_both_points": true,
+      "author_mean_iou_gain_lower_interval_above": 0.0
+    },
+    "fitting": false,
+    "confirmation": false,
+    "serving_adoption_permitted": false,
+    "scope": "Consumed mixed-author development and retained-character provenance, not unassisted-human false alarms, word-origin proof, calibrated confidence or fresh validation"
+  },
+  "implementation_sha256": {
+    "backend/scripts/writing_focus_v3.py": "f71448d811fc0082520eeb297f2d31238302bace360030859f1acf6e257c1fa9",
+    "backend/scripts/run_writing_focus_v3.py": "aa28a353fc697a8c3ceb837037f473b8d894430772ff01a9e172c2fd552da8f7",
+    "backend/scripts/prepare_writing_focus_v3.py": "e716089f8e079cce6565d9af6117ff2443b2b9c28a11148920d23ff55bdaacda",
+    "backend/scripts/audit_writing_sources_v2.py": "dc53bfd7256a073fb03b916eba361a7f5dbffacebe3c1d29c4cf45e3b119d25b",
+    "backend/tests/test_writing_focus_comparison_v3.py": "57116887acc6fc01aba5b83390f0270a75c1a9ef1b01a7f1eaa744bc5105ffac",
+    "docs/writing-focus-v3-protocol.md": "304a6720e0cead031fbc162cdf71c3097635f5b5a97bf11347615999b60523be",
+    "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+    "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+    "backend/app/detectors/text/pipeline.py": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f",
+    "backend/app/detectors/text/extract.py": "c0d3c4704302c4084a4d35bbdeae1c6b75388e07cce07610aec83384011d222f",
+    "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+    "backend/app/detectors/text/adapters/learned.py": "06d0dba2d9745d4cc72902a1c9ba7244d8a12e08c515a9085f243315d5563187"
+  },
+  "runtime": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0"
+  },
+  "installed_sha256": {
+    "transformers.models.deberta_v2.modeling_deberta_v2": "bc0eb5729a6431daae48784c606005c86f44a47b955f0267d874479e3e8df43c",
+    "transformers.models.roberta.modeling_roberta": "451d2961d38a3c56e06aa01c962184c5f5cff39d40c333a26abd9fc173c91916",
+    "transformers.modeling_utils": "a7392c26dd2f005383cc3c1f8562638a6039d393ca03fb1933513479a6d264e4",
+    "transformers.tokenization_utils_tokenizers": "bf921a160f483c7a32973952ed82a08c7d8982f769726bd220933aae2df98de8",
+    "transformers.tokenization_utils_base": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e",
+    "tokenizers.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+    "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e"
+  },
+  "baseline_assets": {
+    "NOTICE": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57",
+    "config.json": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3",
+    "model.safetensors": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087",
+    "serving_head.json": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab",
+    "tokenizer.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf",
+    "tokenizer_config.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+  },
+  "candidate_assets": {
+    "README.md": "9a2e93fb2848c5707322588e7685d5abd4f38e08df9b346065d7f4ba390cd687",
+    "config.json": "96530fd73c11eae27beb5e13a86297b8c720fc7bc9ea30b31ba51978070dc44d",
+    "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+    "model.safetensors": "a74ea30f5db6a1094510be903ce374426191addaf7d860b766077de246d32358",
+    "special_tokens_map.json": "f23c8e6099631c233c16d9bf8dab198f610826cdd1b358f270f6d55c1863e857",
+    "tokenizer.json": "1f33749d010b4d63908e5c174c341622cb45039dd73a139dcd95bd74cc7e304b",
+    "tokenizer_config.json": "288b4077af1ffb3beead6d96fccfc93beb2df9b689cbb038c4eb329165efc43a",
+    "vocab.json": "ed19656ea1707df69134c4af35c8ceda2cc9860bf2c3495026153a133670ab5e"
+  },
+  "baseline_revision": "f1795c86806e6838d4afa33d0b1427f8430c9615",
+  "candidate_revision": "0ceddea903015ef99cbaa040a4d8a216aed9c683",
+  "new_classifier_forwards": 0,
+  "fitting_started": false,
+  "serving_adoption_permitted": false,
+  "private_lock_sha256": "d811c94fdebf0437ce86715cf7a1110834b63ab05fb24d9d606a59452dc789b1"
+}

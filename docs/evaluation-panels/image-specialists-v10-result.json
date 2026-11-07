@@ -1,0 +1,83 @@
+{
+  "schema": "chipmunk.image-specialists-result/10",
+  "method": {
+    "schema": "chipmunk.image-specialists-method/10",
+    "source_groups": 240,
+    "roles": [
+      "specialist_cal",
+      "fusion_fit",
+      "fusion_cal",
+      "confirmation"
+    ],
+    "groups_per_role": 60,
+    "minimum_groups_per_class": 25,
+    "selection": "All240 consumed paired sources from the four declared manifests; no fresh-confirmation claim. Hash-order within three edit families, round-robin roles; exact source or original-byte duplicates across roles refused.",
+    "units": "Whole-image95th percentile and mean native response in four deterministic source-coordinate quadrants. Labels are actual retained edit-mask intersection, not copied file truth.",
+    "projection": "Nearest-neighbor native384-square float32 map to stored-source width/height; no EXIF orientation or resampling of truth.",
+    "contexts": "Actual PNG or deterministic Pillow JPEGquality75 bytes, established before detection; compression changes are not additional AI-edit truth.",
+    "combination": "Same fixed model and dependence family for whole/region readouts; positive calibrated maximum, not five independent votes. Separate fitted and calibrated file combination.",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 2,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "diagnostic_point": 0.5,
+    "tie_tolerance": 1e-12,
+    "native_audit": "First original/edit input per role/format repeated bitwise; compare every available original PNG response to retained144-map TIDAL journal.",
+    "resource_guard": {
+      "tree_rss_gib": 6,
+      "minimum_available_mib": 1536,
+      "minimum_disk_mib": 1536,
+      "maximum_seconds": 1800
+    },
+    "serving_admitted": false,
+    "limits": "Consumed COCO-derived inpainting development; external base-training overlap unknown. JPEG TIDAL is experimental: serving JPEG continues to use its current check. Regions are spatial associations, not proof of pixel origin. No full-generation, face-specific, customer confidence or court claim."
+  },
+  "arms": {
+    "global-image": {
+      "planned_files": 240,
+      "scored_files": 240,
+      "inconclusive_files": 0,
+      "genuine_files": 120,
+      "ai_files": 120,
+      "source_balanced_brier_on_scored_cases": 0.25482491137326624,
+      "false_ai_files": 10,
+      "missed_ai_files": 98,
+      "unassessed_or_tied_files": 0
+    },
+    "condition-image": {
+      "planned_files": 240,
+      "scored_files": 240,
+      "inconclusive_files": 0,
+      "genuine_files": 120,
+      "ai_files": 120,
+      "source_balanced_brier_on_scored_cases": 0.2534879533091192,
+      "false_ai_files": 9,
+      "missed_ai_files": 102,
+      "unassessed_or_tied_files": 0
+    },
+    "global-regions": {
+      "planned_files": 240,
+      "scored_files": 240,
+      "inconclusive_files": 0,
+      "genuine_files": 120,
+      "ai_files": 120,
+      "source_balanced_brier_on_scored_cases": 0.2413227682254045,
+      "false_ai_files": 23,
+      "missed_ai_files": 74,
+      "unassessed_or_tied_files": 0
+    },
+    "condition-regions": {
+      "planned_files": 240,
+      "scored_files": 240,
+      "inconclusive_files": 0,
+      "genuine_files": 120,
+      "ai_files": 120,
+      "source_balanced_brier_on_scored_cases": 0.2405686275294342,
+      "false_ai_files": 20,
+      "missed_ai_files": 76,
+      "unassessed_or_tied_files": 0
+    }
+  },
+  "serving_admitted": false
+}

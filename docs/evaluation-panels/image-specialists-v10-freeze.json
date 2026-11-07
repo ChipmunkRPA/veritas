@@ -1,0 +1,57 @@
+{
+  "schema": "chipmunk.image-specialists-freeze/10",
+  "method": {
+    "schema": "chipmunk.image-specialists-method/10",
+    "source_groups": 240,
+    "roles": [
+      "specialist_cal",
+      "fusion_fit",
+      "fusion_cal",
+      "confirmation"
+    ],
+    "groups_per_role": 60,
+    "minimum_groups_per_class": 25,
+    "selection": "All240 consumed paired sources from the four declared manifests; no fresh-confirmation claim. Hash-order within three edit families, round-robin roles; exact source or original-byte duplicates across roles refused.",
+    "units": "Whole-image95th percentile and mean native response in four deterministic source-coordinate quadrants. Labels are actual retained edit-mask intersection, not copied file truth.",
+    "projection": "Nearest-neighbor native384-square float32 map to stored-source width/height; no EXIF orientation or resampling of truth.",
+    "contexts": "Actual PNG or deterministic Pillow JPEGquality75 bytes, established before detection; compression changes are not additional AI-edit truth.",
+    "combination": "Same fixed model and dependence family for whole/region readouts; positive calibrated maximum, not five independent votes. Separate fitted and calibrated file combination.",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 2,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "diagnostic_point": 0.5,
+    "tie_tolerance": 1e-12,
+    "native_audit": "First original/edit input per role/format repeated bitwise; compare every available original PNG response to retained144-map TIDAL journal.",
+    "resource_guard": {
+      "tree_rss_gib": 6,
+      "minimum_available_mib": 1536,
+      "minimum_disk_mib": 1536,
+      "maximum_seconds": 1800
+    },
+    "serving_admitted": false,
+    "limits": "Consumed COCO-derived inpainting development; external base-training overlap unknown. JPEG TIDAL is experimental: serving JPEG continues to use its current check. Regions are spatial associations, not proof of pixel origin. No full-generation, face-specific, customer confidence or court claim."
+  },
+  "plan_sha256": "9d3082de6ef42978d36b99481b3c1524d6f1fd59b52c5c8ff3477c50a75c71ea",
+  "code_sha256": {
+    "adapter": "a2290034ca2cce1c32d61e521b80ff2e797b4e4ad65308202d8c64e17d3cbf64",
+    "engine": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "fitting": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "model": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "source": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "input_bytes": "5621d74ea82ca25f6e9e4752f582b4303abb0885aa511c25f9d49d515138dba8"
+  },
+  "runtime": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "segmentation-models-pytorch": "0.5.0"
+  },
+  "weight_sha256": "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061",
+  "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+  "serving_admitted": false,
+  "private_freeze_sha256": "de7a62fde993c7264b286b3e0aeec3e1e84bfc68b73c457c56253f25b67d7206"
+}

@@ -199,5 +199,12 @@ file Brier loss and reduced human false alarms, but increased missed AI at the
 frozen diagnostic readout. It is not serving-admitted. Prompt/duplicate isolation
 does not establish independence between writers, and external training overlap
 is unknown. This is a real-data development step, distinct from the authored
-v2 harness. Image, video and voice adapters and broader independent-source
-confirmation still remain; the four-media rollout is not complete.
+v2 harness. Broader independent-source confirmation remains required.
+
+The [v10 image pilot](image-specialists-v10-result.md) now tests whole-image and
+source-bound quadrant calibrations with separate PNG/JPEG contexts on240 consumed
+source pairs. Regional readouts found more edits at a higher false-alarm rate;
+JPEG remained weak. It is not serving-admitted. All960 input hashes and4,800
+local-truth boxes were independently reconstructed; all144 retained native maps
+matched. Video and noisy-voice adapters remain, and neither pilot completes the
+four-media rollout or establishes general customer accuracy.

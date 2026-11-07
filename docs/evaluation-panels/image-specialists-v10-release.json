@@ -1,0 +1,39 @@
+{
+  "schema": "chipmunk.specialist-real-scalar-release/3",
+  "study": "image-specialists-v10",
+  "modality": "image",
+  "manifests": "docs/evaluation-panels/image-specialists-v10-manifests.json.gz",
+  "expected": "docs/evaluation-panels/image-specialists-v10-expected.json.gz",
+  "files_sha256": {
+    ".github/workflows/image-specialists-v10-review.yml": "776b298ad9a58c5cf29e3db39b02d8017095a7b5938ca330d5a5d6dfeb4f8342",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "backend/scripts/evaluate_iml_vit.py": "5621d74ea82ca25f6e9e4752f582b4303abb0885aa511c25f9d49d515138dba8",
+    "backend/scripts/image_specialists_v10.py": "a2290034ca2cce1c32d61e521b80ff2e797b4e4ad65308202d8c64e17d3cbf64",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/scripts/reproduce_specialist_study.py": "0b1256bf93f5ef0a9e8d5315b4c7e42d73f9b78cf0a4be48768b4e99e638ccce",
+    "backend/scripts/review_image_specialists_v10.py": "f38726ba41520713286ce44736686a1cb0c58ef53e1daec1be7fded60bf15461",
+    "backend/scripts/specialist_calibration.py": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "backend/tests/test_image_specialists_v10.py": "bcbc9a20db2e96f79235ff4abb52bbfe22a93235b868d49ba6fe46a6a01fa290",
+    "docs/evaluation-panels/image-specialists-v10-confirmation-native.json": "e40aede4b06da6b224186fc028a64f542a67a6efbe71a0328968ae132aee4fe2",
+    "docs/evaluation-panels/image-specialists-v10-expected.json.gz": "fb8a80cc9cf8cdf8fdfcc1783c60665ae0eec18b1683740f2977dff86584426e",
+    "docs/evaluation-panels/image-specialists-v10-freeze.json": "de098b835caeb8add84649466d7c89c929b2bb78dc04d2ade23922275b03bb77",
+    "docs/evaluation-panels/image-specialists-v10-manifests.json.gz": "3803c85f3d20fb1d99c85a84f283599adc3367bb6e44feb3ee9a5ba91e0d2bba",
+    "docs/evaluation-panels/image-specialists-v10-result.json": "5e4f730bc7f35da1f5153e2d9a11d92521374fa21d154f8260dacc8f961230a6",
+    "docs/evaluation-panels/image-specialists-v10-source-condition-review.json": "384516234ef524b231844624daa05ef4bff502959af27766b1034fb3a6f1516f",
+    "docs/evaluation-panels/image-specialists-v10-training-native.json": "5af18ea62f5cd068e0e98a901b06b758643d7e57a13523a6500fed051a156730",
+    "docs/image-specialists-v10-protocol.md": "4487001b32ec372619e06754e29c9a6b2fe46b88fbb7c0c94296b4ac40876c55"
+  },
+  "manifest_sha256": {
+    "global-image": "2e922491f470c1d03f773600d124619aa3fd2991bcb690c48c95bea3b160b8f8",
+    "condition-image": "f2c118d98dde2465f9d1f0af35fec2efba8e501f9af17251e9c77e3a64df1a86",
+    "global-regions": "2d6658fec1b0bfbf8646766a8fd52900898cf3f361ca33ce8d22123bb1987d97",
+    "condition-regions": "5c66c4141a067a6da8799241248c0a9a591deda7470016d8217433e162920b1b"
+  },
+  "adverse_arm": "condition-regions",
+  "absolute_probability_limit": 1e-06,
+  "source_groups": 240,
+  "source_freshness": "All consumed development; four new source-disjoint roles do not create fresh independent data.",
+  "attribution": "TGIF/TGIF2, IDLabMedia, CC-BY-SA-4.0. Source masks/images remain private. Derived retained scalars, source commitments, region labels/positions and aggregates are for numerical reproducibility. Apache-2.0 TIDAL weight stays local.",
+  "serving_admitted": false
+}

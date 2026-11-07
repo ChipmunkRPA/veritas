@@ -1,0 +1,128 @@
+{
+  "private_lock_sha256": "f6d6d7a7f185e86742a86233e381b2178bda2f39f22c218032a97bb72936a69e",
+  "record": {
+    "schema": "chipmunk.sface-transition-lock/16",
+    "panel_sha256": "6fed01a8fe62e4993ff63fbf8d5efe3078411a68bbcb8cbd6acad957d98b5e49",
+    "source_sha256": {
+      "backend/scripts/sface_transition_v16.py": "aebff729f6e4cd6ed9175bc9c3fedefe8b82a4f0bc1774e7b1584c20ec8a88af",
+      "backend/scripts/run_sface_transition_v16.py": "6d045f394af031b78bf2456ba3fb478b0d87fe12984a4c736eeb7dbe2cfa35bb",
+      "backend/scripts/review_sface_transition_v16.py": "e8b474da52c61f656ed655a9b992404e9d8ed2fa559cd10b595b7e3ecddfb6e3",
+      "backend/scripts/sface_native_v15.py": "13af3ff49fec234a1f8efcd3dcca1c3e23fff727ec005e99fe812ee4f01c349b",
+      "backend/scripts/run_image_smaug_v7.py": "f54bb8ee94ddc024532f1bf44cc425f3ff48910bd2ec96f047e287155203f571",
+      "backend/tests/test_sface_transition_v16.py": "10d2e2a1505a5e9c75277c723fb9bc8db96cd007f3d91b1b4c99ff43035cc004",
+      "docs/video-v16-sface-development-protocol.md": "52a83e25d3016392c9dc2fe15bc6d8f80662257583ca4447e3316cf9351adbb3",
+      "backend/app/detectors/video/face_sequence.py": "e61ce53e6fafbb3dc0ae90425d13324392ac1d70fb6bd442beb0d0e0c3fe684d",
+      "backend/app/detectors/video/adapters/face_sequence.py": "95d2b66f3ade4bf3acb975696746ba45f373fc1825535f68b4037fa317d1ef66",
+      "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+      "backend/app/detectors/video/tracking.py": "b9d64f3de822f82781980bf62f901b97c62b758078d5cbfed6591dc2609ace43",
+      "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+      "backend/app/detectors/image/gend.py": "e82ada80ffd7550a72ac74265dc8a19fef1c57ce2ccd8c0d34b835bf1331c3c8",
+      "backend/app/evidence/face_intervals.py": "9b5e895b72ab8c343a631cce6b473ae8cae68fa4f6b946d3f31c4a863dadd9bb",
+      "backend/app/engine/models.py": "fc41ff6f955dce63f92803ef975d4da4d0b5207c22c4ee55b4f5a2c38b86d52d",
+      "backend/app/detectors/video/adapters/loaders.py": "e68960817fc0948c303313b7dd559c4f02fd7feeebf374c0ca65c26af5ea8b8a",
+      "backend/app/detectors/image/adapters/loaders.py": "bba80e7d8298267fb43154e5a52d305efee6dcfc16b39e277a970df71d03a8b3",
+      "backend/app/engine/registry.py": "718bf06e131ce4878b762c666b5beed4b53973c0a0dd7f085a75f75243e9fcd6",
+      "backend/app/core/config.py": "02daa6f31a054311ad583b26f00a05cf48f7b0d5218481cd4f8ed8fe17b52a8b",
+      "backend/app/models.yaml": "c7754ce5edd80160a4e2d3d8988b610b992eb4f713f64a81c39437fc1196bd71",
+      "docs/evaluation-panels/video-v15-sface-acquisition.json": "3653de324a0d4763e8f6a11b0cf6e51861ffcc5107f84e7f65c42e1677d83ae5",
+      "docs/evaluation-panels/video-v15-sface-synthetic-runtime.json": "55fb2b66993cdbfbaa344c903cb00906012920e0191be56ed54407ed611d808a",
+      "docs/evaluation-panels/video-v15-sface-runtime-fingerprint.json": "f24e320e7de7816e2e1489511faaf40d23731a19d5435354b598e8cd4c3e05f4"
+    },
+    "model_assets": {
+      "yunet.2023mar": {
+        "licence": {
+          "spdx": "MIT",
+          "class_": "commercial",
+          "notice": "opencv_zoo models/face_detection_yunet/LICENSE (MIT, Shiqi Yu)"
+        },
+        "files": {
+          "models/weights/face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+        }
+      },
+      "dinov2.small": {
+        "licence": {
+          "spdx": "Apache-2.0",
+          "class_": "commercial",
+          "notice": "HF model-card licence apache-2.0 (facebook/dinov2-small, not gated; checked 2026-09-13); github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"
+        },
+        "files": {
+          "models/hf/hub/models--facebook--dinov2-small/blobs/5664b325e6258d3960fad8c4c1cff958f3cc2272": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+          "models/hf/hub/models--facebook--dinov2-small/blobs/ff5b47c2edcd1d3556d63c01a65d93b58b9efce1": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+          "models/hf/hub/models--facebook--dinov2-small/blobs/ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+        }
+      }
+    },
+    "sface_weight_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+    "native_proof_sha256": "55fb2b66993cdbfbaa344c903cb00906012920e0191be56ed54407ed611d808a",
+    "config_sha256": "57db5d08ca251fdf7bbd1cacd17b5e6f6d28f9cd4cc932ba0b1099fc8e740759",
+    "settings": {
+      "face_min_size": 48,
+      "model_memory_budget_mb": "7600"
+    },
+    "installed_source_sha256": {
+      "PIL/_imaging.cpython-312-darwin.so": "ee754300d3bda6413b80ddabe3a7ed7b419e1b0468bf2830e2b19fe68f14be42",
+      "PIL/_imagingcms.cpython-312-darwin.so": "292f96c5464a5607e2674dae85d9739436c9f22b17590625f7d674ddcff59849",
+      "PIL/_imagingft.cpython-312-darwin.so": "dde5db0339f044b53f15abc9deb1093021cd59787b58b073cb90a4bdb8a3d31c",
+      "PIL/_imagingmath.cpython-312-darwin.so": "2e3922ab8e63b3260996a3c676431396d85b1ad5adb0aba4607a443d77818448",
+      "PIL/_imagingmorph.cpython-312-darwin.so": "24d8534d10301f367d37b99352e410ae266258e9f149dd5da30e7b5de194ad19",
+      "PIL/_imagingtk.cpython-312-darwin.so": "9e889cbafba6ddc60872d2307de7d73fca1e4867267dabdc8503e2aa4ece4ba1",
+      "cv2/cv2.abi3.so": "5879758f1a4f0d83ad6be16848478d3b109aab09a402139f9768dfb630fdf072",
+      "tokenizers/tokenizers.abi3.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+      "torch/_C.cpython-312-darwin.so": "aee3839e4c52bd074fc78b026e3eee6e4f7cfd714ed571fae3483f30f67d5c3c",
+      "torch/lib/libtorch_cpu.dylib": "f1584a65a2a09b5ddbe90a4e195ba824087b430a9f21cb1df9b8894177b99987",
+      "torch/nn/functional.py": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e",
+      "transformers/image_transforms.py": "a34742c0083619bd528e8e025d5e52ea82e854098d58a3cbedd8c76e7a2c9fe9",
+      "transformers/image_utils.py": "e202665798fc2b68ec0d2ba4304af0f2d1948c34ee85d2c47a231a36acfa5fb2",
+      "transformers/masking_utils.py": "e8c497af6979274fc6ae78980ad9893e7850bdb750e46d459f09178123992196",
+      "transformers/modeling_rope_utils.py": "a8bf3f6a53760366fb5fa51cecc06a8707d3cded36fd8f3ac51e140c0718af21",
+      "transformers/modeling_utils.py": "a7392c26dd2f005383cc3c1f8562638a6039d393ca03fb1933513479a6d264e4",
+      "transformers/models/dinov2/__init__.py": "3afac03258723da32fbc4e56db1de1c50e848e43d86607ac8b323f8ce0b92b71",
+      "transformers/models/dinov2/configuration_dinov2.py": "5d90862b483744e951756f18b9b93bc1a04634c8744ddf74e8f3fb0b6ebe97f5",
+      "transformers/models/dinov2/modeling_dinov2.py": "9c7e028bdadef16e4fe6c59833ac916fe0a7987d1ac968a6f19aca40359ea9f8",
+      "transformers/models/siglip/__init__.py": "c86d7a096d1a0bcd0c3facedcbe5592c1c72924ff99f08e4f7b8996aeae547bd",
+      "transformers/models/siglip/configuration_siglip.py": "0a402ea5452a1527ad54f5339889774549688f5f84028af30979bdbc4b32206e",
+      "transformers/models/siglip/image_processing_pil_siglip.py": "61ff04dc131c526dd5e638bc2ad778cc1186989f474507bd3bf7368ea09f54c1",
+      "transformers/models/siglip/image_processing_siglip.py": "f716aedcc35e6e271662e1bee77d9546fcf3155a6c6bd166872a87540e853c4c",
+      "transformers/models/siglip/modeling_siglip.py": "0a0d2b55f4fcb977b74549540211e42a3c3f41d0d446dc474dcc244a925791aa",
+      "transformers/models/siglip/processing_siglip.py": "68e439312a0ca5ffcc161d6fb76b6bb929b5634a05a47092657efb1b5a115087",
+      "transformers/models/siglip/tokenization_siglip.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",
+      "transformers/models/vit/__init__.py": "22d6be7c2b82dd889e316a249833a74e671cef8621abe177dd3ebcd4130ec859",
+      "transformers/models/vit/configuration_vit.py": "0ec851794e2692154466915ecd7344ab77f42b8c1ca7832078bfe9e5af5e506c",
+      "transformers/models/vit/image_processing_pil_vit.py": "4d0e23446e71e8aa7feb8c8cb4fdeca2b383087a12a394696440c29b3f73e953",
+      "transformers/models/vit/image_processing_vit.py": "577efcaea463026feabca901673b23e421cfcbe3544a79f3affdad5ac38213c4",
+      "transformers/models/vit/modeling_vit.py": "d6e8e18d0d7c32beaac672b5701f1e83d72df62781e79f8508ca7f3dc0db9de2",
+      "transformers/processing_utils.py": "e270803a5f5e3de4852e7f5df36fc4beefc102f613880532ca2bf157015e791b"
+    },
+    "tools": {
+      "ffmpeg": {
+        "binary_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+        "version": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers"
+      },
+      "ffprobe": {
+        "binary_sha256": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae",
+        "version": "ffprobe version 7.0.2 Copyright (c) 2007-2024 the FFmpeg developers"
+      }
+    },
+    "packages": {
+      "torch": "2.13.0",
+      "transformers": "5.15.1",
+      "numpy": "2.2.6",
+      "opencv-python-headless": "5.0.0.93"
+    },
+    "planned_calibration": 60,
+    "planned_development": 120,
+    "project_sface_forwards_before_freeze": 0,
+    "fresh_confirmation_scored": false,
+    "serving_changed": false
+  },
+  "source_selection": {
+    "calibration_genuine_cases": 60,
+    "calibration_source_groups": 30,
+    "development_cases": 120,
+    "development_source_groups": 30,
+    "native_clock_tables_verified": 180
+  },
+  "method_tests_passed": 14,
+  "project_sface_forwards_before_freeze": 0,
+  "scope": "Prospective consumed-source bounded face-appearance study. No real-face vectors or imagery included; no fresh confirmation or serving change."
+}

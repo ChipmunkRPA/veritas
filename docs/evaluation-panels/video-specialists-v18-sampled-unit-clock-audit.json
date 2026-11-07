@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.video-specialist-unit-clock-audit/18",
+  "implementation_sha256": "ec769c1d1e1662d219588b38dc1a3c0cdeb1aab8a767ba6915e5b0fe3af24c04",
+  "source_inventory_sha256": "f3d067ffd3259763da0abcd850ccd81deb6f4d8819395513386dc621826a94e7",
+  "cached_native_journal_sha256": {
+    "backend/data/independent-evaluation/video-v4/development.jsonl": "66191d039012b54b3e72dce6fdf7504dcbe5b7ac44f11ccdd23edb6c391f174c",
+    "backend/data/independent-evaluation/video-v4/test.jsonl": "1d68ff10a0933430cb3a2a31db1aef54c12aacd7f6e13a3ffc6870b32ac903c9",
+    "backend/data/independent-evaluation/video-v5/current-development.jsonl": "b516ee00e378d4f3ebfabac61243f1caa88732085a4a0e7818bf52b42f806c2d",
+    "backend/data/independent-evaluation/video-v5/current-test.jsonl": "c19b9f9377cf1eee57af63bfb84c769ffb6275e8f10f136e50a63e6bef9b066c",
+    "backend/data/independent-evaluation/video-v6/current-test.jsonl": "fe274cddd4d7850f1776e77450a3b4952f16a4cadeb9c2778086c5c1f2655d99",
+    "backend/data/independent-evaluation/video-v17-sface/baseline.jsonl": "30aa6d70da31e8b152554184a4ef2384ced1b459fa44ebeb87a2fe493bd4f09f"
+  },
+  "retained_clips": 432,
+  "planned_units": 9504,
+  "genuine_clips": 204,
+  "known_edit_frames_not_directly_sampled": 6450,
+  "whole_ai_clips_with_no_positive_planned_unit": 0,
+  "genuine_local_units_in_ai_clips": 2650,
+  "native_rate_24": 401,
+  "whole_ai_clips": 228,
+  "native_rate_25": 31,
+  "private_unit_plan_sha256": "0100766ce8476df7e71dcaf0d1c4c6b61dfd7868f0c7ea772a10c4d27fc39b0a",
+  "new_decodes": 0,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Read retained native clocks/source boundaries, not detector scores. Only432 retained clips; full648 preparation and native scoring/calibration remain separate. Sparse frame presence is not pixel/identity truth or a whole-file originality verdict."
+}

@@ -15,3 +15,14 @@ def test_parameter_roundoff_is_measured_but_integer_boolean_and_missing_changes_
 def test_archive_requires_exact_repository_paths(name):
     with pytest.raises(ValueError):
         safe(name)
+
+
+def test_failed_frozen_subprocess_retains_its_actual_diagnostic(monkeypatch):
+    from types import SimpleNamespace
+
+    from scripts import replay_scoped_writing_v6 as replay
+
+    monkeypatch.setattr(replay.subprocess, 'run', lambda *args, **kwargs: SimpleNamespace(
+        returncode=1, stderr='authored fitting failure: exact cause', stdout=''))
+    with pytest.raises(RuntimeError, match='authored fitting failure: exact cause'):
+        replay.run_stage(['authored-only-command'])

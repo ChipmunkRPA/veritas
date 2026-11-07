@@ -59,6 +59,12 @@ def packet(trial, arms):
     return result
 
 
+def run_stage(command, **kwargs):
+    result = subprocess.run(command, capture_output=True, text=True, **kwargs)
+    if result.returncode:
+        raise RuntimeError('Immutable scientific subprocess failed; original stderr follows:\n' + result.stderr[-8000:])
+
+
 def replay(output):
     if output.exists():
         raise FileExistsError('Retain the previous numerical replay')
@@ -101,8 +107,7 @@ def replay(output):
         (trial / 'freeze.json').write_bytes(frozen_bytes)
         environment = {**os.environ, 'PYTHONPATH': str(tree / 'backend'), 'OPENBLAS_NUM_THREADS': '1'}
         for stage in ('fit', 'review'):
-            subprocess.run([sys.executable, '-m', 'scripts.scoped_writing_v6', stage, str(trial)],
-                cwd=tree, env=environment, check=True, capture_output=True, text=True)
+            run_stage([sys.executable, '-m', 'scripts.scoped_writing_v6', stage, str(trial)], cwd=tree, env=environment)
         maximum = compare(packet(trial, release['arms']), expected)
         if maximum > release['absolute_numerical_limit']:
             raise ValueError('Numerical refit exceeds the fixed tolerance')

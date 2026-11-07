@@ -81,11 +81,28 @@ The public workflow adds an actual isolated Linux experiment. Its first
 stopped when the FFmpeg availability check failed; the
 experiment never ran and no hypothesis outcome was produced. The workflow now
 installs that missing system dependency when needed, with source experiment,
-library pins and exact conditions unchanged. Its result remains pending until
-observed and reported separately. A nonreproduced hypothesis
-leaves a completed failure receipt and fails the job rather than relaxing the
-checks. Synthetic decoder reproduction is not real-clip or detector validation,
-and it is not participation by an outside human reviewer.
+library pins and exact conditions unchanged.
+
+The [next Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42356642465)
+completed the experiment and **did not reproduce the Mac-specific hypothesis**.
+Its OpenCV5.0.0 wheel bundles swscale9.5.101/avcodec62.28.101, versus the local
+swscale8.3.100/avcodec61.19.101. On its generated source, OpenCV matches the
+default/explicit BT.709 rendering, not BT.601. The workflow remains failed under
+its original conditions; no result or requirement was revised to obtain a pass.
+[Actual completed negative receipt](evaluation-panels/linux-video-v14-colour-experiment.json).
+
+Both hosts used identical synthetic RGB input, but generated their encoded
+sources separately. Explicit renderer RGB hashes differ across hosts too, so
+this experiment did not isolate a single library/platform cause: native YUV
+equivalence was not measured. A separate follow-up should feed fixed native
+YUV samples, verify lossless sample recovery and record each renderer before
+claiming cross-platform pixel identity. Do not change the completed experiment
+or call the local result universal. Native decoder behaviour requires its own
+recorded build and source-input commitments before cloud results can inherit
+local calibration or evidence claims.
+
+Synthetic decoder reproduction is not real-clip or detector validation, and it
+is not participation by an outside human reviewer.
 
 For the real-source supplement, first obtain the permitted original clips and
 extract the unchanged `candidate.jsonl` member from the public

@@ -1,0 +1,88 @@
+{
+  "schema": "chipmunk.external-linux-video-colour/14",
+  "run_id": 42356642465,
+  "run_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42356642465",
+  "job_id": 128356060564,
+  "commit": "e0bc0ad427b40b26dccba6a8b92e8a879687039f",
+  "conclusion": "failure",
+  "experiment_completed": true,
+  "hypothesis_reproduced": false,
+  "earlier_setup_failure": {
+    "run_id": 42356352972,
+    "experiment_ran": false,
+    "reason": "FFmpeg availability check failed before the experiment."
+  },
+  "result": {
+    "schema": "chipmunk.synthetic-video-colour-reproduction/14",
+    "python": "3.12.6",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "opencv_ffmpeg_build": [
+      "FFMPEG:                      YES",
+      "avcodec:                   YES (62.28.101)",
+      "avformat:                  YES (62.12.101)",
+      "avutil:                    YES (60.26.101)",
+      "swscale:                   YES (9.5.101)"
+    ],
+    "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffmpeg_binary_sha256": "ed16af623947494a72e284b6eb8ff225f2da22b38b5d5069c2fd4b4ba3384e41",
+    "experiment_code_sha256": "4b6e0ab2ccd71f9167c972ffd96f94f172f7a299cc49958272610c83bfeed93b",
+    "renderer_code_sha256": "91db094adc4e5803c70da729c68195bf283a84e0b55bffc165ae4acf00f0841e",
+    "synthetic_rgb_input_sha256": "c5b7d2e868131f3608e55f77f78141e000ab10afda1fc40d90f35b2e95ba0b0b",
+    "synthetic_file_sha256": "0c4ebfed9d95bc7e40d2e02d8f2a6bd1d1247e6aaada785aa7289c3472021562",
+    "frames_created": 12,
+    "audited_frame": 3,
+    "stream_metadata": {
+      "pix_fmt": "yuv420p",
+      "color_range": "tv",
+      "color_space": "bt709",
+      "disposition": {
+        "default": 0,
+        "dub": 0,
+        "original": 0,
+        "comment": 0,
+        "lyrics": 0,
+        "karaoke": 0,
+        "forced": 0,
+        "hearing_impaired": 0,
+        "visual_impaired": 0,
+        "clean_effects": 0,
+        "attached_pic": 0,
+        "timed_thumbnails": 0,
+        "non_diegetic": 0,
+        "captions": 0,
+        "descriptions": 0,
+        "metadata": 0,
+        "dependent": 0,
+        "still_image": 0
+      },
+      "tags": {
+        "ENCODER": "Lavc60.31.102 ffv1",
+        "DURATION": "00:00:01.500000000"
+      }
+    },
+    "opencv_rgb_sha256": "e2b60c52085046b1f7fdef1834089cedf129f66a5e8a54dfc237a4aa3a84f0b6",
+    "ffmpeg_rgb_sha256": {
+      "metadata_default": "e2b60c52085046b1f7fdef1834089cedf129f66a5e8a54dfc237a4aa3a84f0b6",
+      "bt601": "2a477768455c0736148a07d98d775c5bfdaf4eb821bdf3d8cc73387f6d3fae4e",
+      "bt709": "e2b60c52085046b1f7fdef1834089cedf129f66a5e8a54dfc237a4aa3a84f0b6"
+    },
+    "conditions": {
+      "metadata_default_equals_explicit_bt709": true,
+      "opencv_equals_explicit_bt601": false,
+      "opencv_differs_from_metadata_default": false
+    },
+    "hypothesis_reproduced": false,
+    "neural_forwards": 0,
+    "private_inputs_used": false,
+    "serving_changed": false,
+    "scope": "Synthetic controlled renderer behaviour on this actual environment; not real-clip replay, a global OpenCV claim, detector accuracy, neural/native model verification or outside human review. Generated container hashes may differ across runs/platforms; installed binary hashes are environment-specific."
+  },
+  "interpretation": "Completed negative reproduction: within this Linux-generated source, OpenCV matches metadata/default BT709 rather than the Mac build's BT601 behaviour. Exact same NumPy/OpenCV package versions bundle different FFmpeg libraries. Source RGB input is identical across hosts, but separate encoding produced different decoded RGB hashes even for explicit matrices; native YUV equivalence was not audited. Do not isolate a single platform cause or relax/overwrite the original hypothesis. Follow-up must hold native YUV samples identical before comparing renderers.",
+  "neural_forwards": 0,
+  "private_inputs_used": false,
+  "original_native_gate_changed": false,
+  "serving_changed": false,
+  "outside_human_reviewers": 0
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.face-transition-sface-acquisition/15",
+  "repository": "opencv/opencv_zoo",
+  "revision": "48b10fa505aeb51fbd127fc60a5c660040e823b7",
+  "publisher_weight_path": "models/face_recognition_sface/face_recognition_sface_2021dec.onnx",
+  "local_model_basename": "sface.onnx",
+  "weight_bytes": 38696353,
+  "weight_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+  "metadata_files": [
+    {
+      "name": "README.md",
+      "bytes": 2267,
+      "git_blob_sha1": "fed1076e5686c62fea1895714ac70cb9aec45c3f",
+      "sha256": "e090e126f3fb5c0b0b2d84ee644b17e42a70b2e45a90616814970b811e91d063"
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 11358,
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "name": "sface.py",
+      "bytes": 2277,
+      "git_blob_sha1": "cb467071237235d3f5b95aa5d14c8a7f5c2c1238",
+      "sha256": "a2351d8387a0fc6b4ddb5f13f5e30d2afa32bc25ede9d80c39d1ebf212a48ef7"
+    }
+  ],
+  "license": "Per-model README explicitly applies Apache2.0 to all files in the directory, including the stored ONNX model; exact Apache license retained. Complete training-data rights are not established by this declaration.",
+  "intended_role": "Research same-clip appearance/feature discontinuity across bounded face-swap transitions, no named-person identification or reference identity database. This is not an AI classifier, stable whole-clip swap detector or lip-sync detector.",
+  "model_runtime_initialized": false,
+  "project_inference": false,
+  "new_package_installed": false,
+  "publisher_python_executed": false,
+  "serving_admitted": false
+}

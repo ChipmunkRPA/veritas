@@ -1,0 +1,38 @@
+{
+  "schema": "chipmunk.sface-native-prospective-freeze/15",
+  "reference_source": {
+    "repository": "opencv/opencv",
+    "tag": "5.0.0",
+    "revision": "40738fb16ceddb5fb3fea747585f7ce6abb0605b",
+    "files": {
+      "modules/objdetect/src/face_recognize.cpp": {
+        "sha256": "92bb8b201f2f84c19e5be93495a0c6069f9b32deb78d7c8c3ba24e53e0b3e53e",
+        "bytes": 8320
+      },
+      "LICENSE": {
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "bytes": 11358
+      }
+    }
+  },
+  "weight_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+  "implementation_sha256": {
+    "backend/scripts/sface_native_v15.py": "13af3ff49fec234a1f8efcd3dcca1c3e23fff727ec005e99fe812ee4f01c349b",
+    "backend/scripts/audit_sface_native_v15.py": "236d78532e31527a53fcc0446574d805b5985f8113a054922d1cbf5d55a2a3f4",
+    "backend/tests/test_sface_native_v15.py": "6563e2f0565458f0f0d5b1374f4c7e3944eb4e0a5271cfaf303775f9401973bf",
+    "docs/video-v15-sface-native-protocol.md": "0a61ddf417727def3a9ab05ddfd9aa5520a2e61dd4eab9496857590a3e816af8",
+    "docs/third-party/opencv-sface-v15-Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "THIRD_PARTY_NOTICES.md": "e118616255f971fe7d8dafaa3f36f13dc608c059ea7267ad16b6a8db238beaa5"
+  },
+  "model_free_contract_tests": {
+    "passed": 13,
+    "failed": 0
+  },
+  "synthetic_cases_planned": 24,
+  "actual_model_initialized": false,
+  "project_frames_scored": 0,
+  "pending": "Guarded native alignment/blob and same-engine direct graph comparison, after current image study model jobs complete.",
+  "serving_changed": false,
+  "installed_wheel_commit_identity_proven": false,
+  "scope": "Prospective synthetic compatibility test; not face-swap quality, calibration, pixel proof or outside human review."
+}

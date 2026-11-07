@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.video-object-release-prospective-review/14",
+  "private_lock_sha256": "df1665ece8ec6475e2764b66b899fe0c97425f21673c53290a9abb3ecee0061f",
+  "public_freeze_sha256": "eaab52d41ad6602bd5f09b5847849eeb3daa5fb5f187d9def6af4094142c9176",
+  "cleanup_invariant_tests_passed": 3,
+  "complete_lock_alterations": [
+    {
+      "alteration": "method",
+      "rejected": true
+    },
+    {
+      "alteration": "resources",
+      "rejected": true
+    },
+    {
+      "alteration": "first_failure",
+      "rejected": true
+    },
+    {
+      "alteration": "second_failure",
+      "rejected": true
+    },
+    {
+      "alteration": "candidate",
+      "rejected": true
+    },
+    {
+      "alteration": "code",
+      "rejected": true
+    },
+    {
+      "alteration": "prior_code",
+      "rejected": true
+    },
+    {
+      "alteration": "diagnosis",
+      "rejected": true
+    },
+    {
+      "alteration": "already_started",
+      "rejected": true
+    },
+    {
+      "alteration": "admitted",
+      "rejected": true
+    }
+  ],
+  "new_full_repeat_forwards_started": false,
+  "calibration_fitted": false,
+  "serving_admitted": false,
+  "passed": true,
+  "outside_reviewers": 0
+}

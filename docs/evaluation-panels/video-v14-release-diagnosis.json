@@ -1,0 +1,360 @@
+{
+  "schema": "chipmunk.video-release-diagnosis/14",
+  "diagnostic_code_sha256": "5b2834d87516b5a85a06dc13fb78615251b7b221d43e01c5ac8321ab761957d6",
+  "original_lock_sha256": "87c8db6e370993cb9aea6c77f5ca1dce45e62246483ac130f169f76e872299ae",
+  "indices": [
+    0,
+    1,
+    40,
+    41,
+    42,
+    84
+  ],
+  "cases": [
+    {
+      "index": 0,
+      "id": "deepaction-025-Pexels",
+      "variant": "original",
+      "sha256": "300c531aa5b1ca1aab635b7822e45463f1fda13bb4a245659a3d437748635924",
+      "before": {
+        "rss_bytes": 660766720,
+        "mps_current_bytes": 0,
+        "mps_driver_bytes": 475136,
+        "system_available_bytes": 11301076992
+      },
+      "after_score": {
+        "rss_bytes": 2912927744,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8128249856
+      },
+      "unreachable_python_objects_collected": 4837,
+      "after_gc": {
+        "rss_bytes": 2313142272,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8647901184
+      },
+      "after_empty_cache": {
+        "rss_bytes": 2313142272,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8647901184
+      },
+      "max_prior_raw_difference": 0.0,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      },
+      "reference_kind": "original84rowbaseline",
+      "max_reference_raw_difference": 0.0
+    },
+    {
+      "index": 1,
+      "id": "deepaction-025-Pexels",
+      "variant": "matched",
+      "sha256": "2f963aad0798f0019fe99ab37140ddce77bd2bde740d4b24b7a6fba3eeb18b22",
+      "before": {
+        "rss_bytes": 2313142272,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8647901184
+      },
+      "after_score": {
+        "rss_bytes": 2314223616,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8647802880
+      },
+      "unreachable_python_objects_collected": 3130,
+      "after_gc": {
+        "rss_bytes": 2314223616,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8649015296
+      },
+      "after_empty_cache": {
+        "rss_bytes": 2314223616,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8649015296
+      },
+      "max_prior_raw_difference": 0.0,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "not_applicable",
+        "vid.synth.frames.dda": "not_applicable"
+      },
+      "reference_kind": "original84rowbaseline",
+      "max_reference_raw_difference": 0.0
+    },
+    {
+      "index": 40,
+      "id": "deepaction-075-Pexels",
+      "variant": "original",
+      "sha256": "8c0ce4d296fb78fa2e9fa9c1673b59623dec44ecd8e6a2ed77c842f9ff2c174b",
+      "before": {
+        "rss_bytes": 2314223616,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8649031680
+      },
+      "after_score": {
+        "rss_bytes": 2325807104,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8378155008
+      },
+      "unreachable_python_objects_collected": 403,
+      "after_gc": {
+        "rss_bytes": 2297118720,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8378662912
+      },
+      "after_empty_cache": {
+        "rss_bytes": 2297118720,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8378662912
+      },
+      "max_prior_raw_difference": 0.0,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      },
+      "reference_kind": "original84rowbaseline",
+      "max_reference_raw_difference": 0.0
+    },
+    {
+      "index": 41,
+      "id": "deepaction-075-Pexels",
+      "variant": "matched",
+      "sha256": "7003a834a8f186ecd7e11173d416607276bc801241bde6443879af58a62326c4",
+      "before": {
+        "rss_bytes": 2297118720,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8378662912
+      },
+      "after_score": {
+        "rss_bytes": 2279260160,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7626440704
+      },
+      "unreachable_python_objects_collected": 341,
+      "after_gc": {
+        "rss_bytes": 2279260160,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7626440704
+      },
+      "after_empty_cache": {
+        "rss_bytes": 2279260160,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7626440704
+      },
+      "max_prior_raw_difference": 0.0,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "not_applicable",
+        "vid.synth.frames.dda": "ok"
+      },
+      "reference_kind": "original84rowbaseline",
+      "max_reference_raw_difference": 0.0
+    },
+    {
+      "index": 42,
+      "id": "deepaction-075-RunwayML",
+      "variant": "original",
+      "sha256": "6e830ad97ca230be725b33059ed82d89f497ebd7a26a2d9dc65b589a5e67ef7b",
+      "before": {
+        "rss_bytes": 2279260160,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7626440704
+      },
+      "after_score": {
+        "rss_bytes": 1932886016,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7866023936
+      },
+      "unreachable_python_objects_collected": 459,
+      "after_gc": {
+        "rss_bytes": 1080541184,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7866023936
+      },
+      "after_empty_cache": {
+        "rss_bytes": 1080541184,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7866023936
+      },
+      "max_prior_raw_difference": 0.0,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      },
+      "reference_kind": "original84rowbaseline",
+      "max_reference_raw_difference": 0.0
+    },
+    {
+      "index": 84,
+      "id": "deepaction-022-Pexels",
+      "variant": "original",
+      "sha256": "95e87d907526dc23e4fe13eb67421852ff136b72aac0072cb84ed43770756c54",
+      "before": {
+        "rss_bytes": 1080541184,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2311798784,
+        "system_available_bytes": 7866023936
+      },
+      "after_score": {
+        "rss_bytes": 2393735168,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8323203072
+      },
+      "unreachable_python_objects_collected": 463,
+      "after_gc": {
+        "rss_bytes": 2236645376,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8415608832
+      },
+      "after_empty_cache": {
+        "rss_bytes": 2236645376,
+        "mps_current_bytes": 1327549440,
+        "mps_driver_bytes": 2307604480,
+        "system_available_bytes": 8415608832
+      },
+      "max_prior_raw_difference": null,
+      "check_statuses": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      },
+      "reference_kind": "previousguarded3inputdiagnostic",
+      "max_reference_raw_difference": 0.0
+    }
+  ],
+  "completed": true,
+  "guard": null,
+  "child_exit_code": 0,
+  "finite_raw_responses_compared": 9,
+  "all_reference_statuses_exact": true,
+  "all_reference_probabilities_exact": true,
+  "memory_sampler": {
+    "complete": false,
+    "metric": "sampled_process_tree_rss",
+    "sampled_max_rss_bytes": 4222468096,
+    "interval_s": 0.1,
+    "sample_count": 741,
+    "sample_attempts": 754,
+    "duration_s": 85.64880583400372,
+    "finished": true,
+    "roots": [
+      {
+        "pid": 1286,
+        "create_time": 1794031419.15162
+      }
+    ],
+    "errors": [
+      {
+        "sample": 95,
+        "operation": "rss",
+        "pid": 1290,
+        "error": "ZombieProcess"
+      },
+      {
+        "sample": 101,
+        "operation": "identity",
+        "pid": 1291,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 223,
+        "operation": "children",
+        "pid": 1295,
+        "error": "NoSuchProcess"
+      },
+      {
+        "sample": 223,
+        "operation": "rss",
+        "pid": 1295,
+        "error": "NoSuchProcess"
+      },
+      {
+        "sample": 332,
+        "operation": "identity",
+        "pid": 1312,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 488,
+        "operation": "rss",
+        "pid": 1321,
+        "error": "ZombieProcess"
+      },
+      {
+        "sample": 489,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 490,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 491,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 492,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 493,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 494,
+        "operation": "identity",
+        "pid": 1321,
+        "error": "ProcessLookupError"
+      },
+      {
+        "sample": 515,
+        "operation": "rss",
+        "pid": 1329,
+        "error": "ZombieProcess"
+      },
+      {
+        "sample": 640,
+        "operation": "identity",
+        "pid": 1340,
+        "error": "ProcessLookupError"
+      }
+    ],
+    "limitations": [
+      "Maximum of successful RSS samples; short-lived processes and between-sample peaks may be missed.",
+      "Process RSS totals can double-count shared pages; not GPU memory or a true process/system peak.",
+      "Only the supplied process roots and observed descendants are in scope; other workers are not inferred."
+    ]
+  },
+  "quality_comparison": false,
+  "serving_changed": false,
+  "outside_human_reviewers": 0,
+  "scope": "Posthoc separate per-score snapshots around gc.collect thenMPSempty_cache; all sixpreviously consumedinputs/statuses/rawresponses repeat. RSS maychangeforotherreasons; originalkillcause notisolated. No point/model/source/gate changes or native freshconfirmation. Samplerincomplete observations onlylowerbounds."
+}

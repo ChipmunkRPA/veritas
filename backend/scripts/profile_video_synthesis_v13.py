@@ -89,18 +89,19 @@ def worker(lock_path, output):
         time.sleep(.05)
 
 
-def profile(lock_path, output):
+def profile(lock_path, output, *, worker_module='scripts.profile_video_synthesis_v13', limits=None):
     from app.bench.process_memory import ProcessMemorySampler
 
+    limits = LIMITS if limits is None else limits
     if output.exists():
         raise ValueError('New diagnostic directory required; never restart existing work')
     if psutil.disk_usage(output.parent).free < 2 * 1024**3 or psutil.virtual_memory().available < 6 * 1024**3:
         raise ValueError('Insufficient initial resource headroom for diagnosis')
     output.mkdir(parents=True)
-    write(output / 'limits.json', LIMITS)
+    write(output / 'limits.json', limits)
     started = time.monotonic()
     with (output / 'worker.log').open('w') as log:
-        child = subprocess.Popen([sys.executable, '-m', 'scripts.profile_video_synthesis_v13', 'worker', str(lock_path), str(output)], stdout=log, stderr=subprocess.STDOUT)
+        child = subprocess.Popen([sys.executable, '-m', worker_module, 'worker', str(lock_path), str(output)], stdout=log, stderr=subprocess.STDOUT)
         process = psutil.Process(child.pid)
         created = process.create_time()
         guard = None
@@ -114,10 +115,10 @@ def profile(lock_path, output):
                     readings = {'parent_rss_bytes': parent_rss, 'tree_rss_bytes': tree_rss,
                                 'system_available_bytes': psutil.virtual_memory().available, 'free_disk_bytes': psutil.disk_usage(output).free,
                                 'elapsed_s': time.monotonic() - started}
-                    reasons = [name for name in ('parent_rss_bytes', 'tree_rss_bytes') if readings[name] > LIMITS[name]]
-                    reasons += ['system_available_bytes'] if readings['system_available_bytes'] < LIMITS['min_system_available_bytes'] else []
-                    reasons += ['free_disk_bytes'] if readings['free_disk_bytes'] < LIMITS['min_free_disk_bytes'] else []
-                    reasons += ['timeout'] if readings['elapsed_s'] > LIMITS['timeout_s'] else []
+                    reasons = [name for name in ('parent_rss_bytes', 'tree_rss_bytes') if readings[name] > limits[name]]
+                    reasons += ['system_available_bytes'] if readings['system_available_bytes'] < limits['min_system_available_bytes'] else []
+                    reasons += ['free_disk_bytes'] if readings['free_disk_bytes'] < limits['min_free_disk_bytes'] else []
+                    reasons += ['timeout'] if readings['elapsed_s'] > limits['timeout_s'] else []
                     if reasons:
                         guard = {'reasons': reasons, 'readings': readings}
                         break
@@ -142,8 +143,8 @@ def profile(lock_path, output):
             exit_code = child.wait()
     result = {'schema': 'chipmunk.video-v13-resource-diagnostic/13', 'pid': child.pid, 'created': created,
               'profile_code_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-              'original_lock_sha256': hashlib.sha256(lock_path.read_bytes()).hexdigest(),
-              'limits': LIMITS, 'guard': guard, 'child_exit_code': exit_code, 'memory': sampler.report(),
+              'input_lock_sha256': hashlib.sha256(lock_path.read_bytes()).hexdigest(),
+              'limits': limits, 'worker_module': worker_module, 'guard': guard, 'child_exit_code': exit_code, 'memory': sampler.report(),
               'child_result_available': (output / 'child-result.json').exists(), 'quality_comparison': False,
               'serving_changed': False, 'root_cause_of_previous_termination_isolated': False}
     write(output / 'profile.json', result)

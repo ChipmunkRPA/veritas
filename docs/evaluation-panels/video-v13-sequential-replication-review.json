@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.video-v13-sequential-replication-preflight/1",
+  "private_replication_lock_sha256": "7d814c7e54b779d0d051aaf4a690cabef707edb35e9151445e816ae77667a9d3",
+  "public_freeze_sha256": "3314545a38e1b4fec34e890d16ed34512d4cb2bac2bb31aa8a8b50d9ffaaeeb7",
+  "synthetic_correspondence_tests_passed": 8,
+  "actual_complete_lock_alterations": [
+    {
+      "alteration": "order",
+      "rejected": true
+    },
+    {
+      "alteration": "timeout",
+      "rejected": true
+    },
+    {
+      "alteration": "prior_failure",
+      "rejected": true
+    },
+    {
+      "alteration": "candidate",
+      "rejected": true
+    },
+    {
+      "alteration": "code",
+      "rejected": true
+    },
+    {
+      "alteration": "already_started",
+      "rejected": true
+    },
+    {
+      "alteration": "admitted",
+      "rejected": true
+    }
+  ],
+  "original_app_method_files_unchanged": 360,
+  "new_baseline_forwards_started": false,
+  "calibration_fitted": false,
+  "serving_admitted": false,
+  "passed": true
+}

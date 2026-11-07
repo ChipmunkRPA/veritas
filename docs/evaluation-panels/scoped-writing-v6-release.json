@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.scoped-writing-release/6",
+  "science_commit": "f12193bdf3ad8e9def6cb1e7f833177c0a98dff5",
+  "freeze_sha256": "f6a04efb25a6ec1b8e7fc0ba3c5bd824ca2d3f1d4e038f1031a2cafff84f4596",
+  "arms": [
+    "global-baseline",
+    "global-original-combined",
+    "global-shared-max",
+    "global-shared-scoped",
+    "context-baseline",
+    "context-original-combined",
+    "context-shared-max",
+    "context-shared-scoped"
+  ],
+  "expected": "docs/evaluation-panels/scoped-writing-v6-expected.json.gz",
+  "expected_sha256": "c7ecbcfc3a4fa3e360239706243d8c1537245cebf82217943d51222ab425402c",
+  "absolute_numerical_limit": 1e-06,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "scope": "All fitted parameters, per-format-independent passage contexts, local character positions, probabilities, counts and frozen operating decisions; consumed source numerical comparison only."
+}

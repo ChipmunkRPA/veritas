@@ -1,0 +1,33 @@
+name: Scoped passage calibration numerical review
+on:
+  push:
+    paths:
+      - 'backend/scripts/replay_scoped_writing_v6.py'
+      - 'docs/evaluation-panels/scoped-writing-v6-release.json'
+      - '.github/workflows/scoped-writing-v6-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  immutable-scalar-refit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install model-free numerical dependencies
+        run: |
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
+      - name: Refit all eight immutable arms and verify exact decisions
+        env:
+          PYTHONPATH: backend
+          OPENBLAS_NUM_THREADS: '1'
+        run: python -m scripts.replay_scoped_writing_v6 scoped-writing-v6-linux-review.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scoped-writing-v6-linux-review
+          path: scoped-writing-v6-linux-review.json

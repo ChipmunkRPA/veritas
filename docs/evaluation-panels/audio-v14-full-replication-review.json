@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.audio-full-replication-preflight/14",
+  "passed": true,
+  "private_lock_sha256": "08d49a8d59be8c0b353f798b16ec7541fb0973e99a2803837301dcc008f9ae2b",
+  "public_freeze_sha256": "322d05685c71b3c4c29fbc54add0da215122446a6ad16fda41817c101d7a6895",
+  "actual_lock_alterations": [
+    {
+      "alteration": "method",
+      "rejected": true
+    },
+    {
+      "alteration": "limits",
+      "rejected": true
+    },
+    {
+      "alteration": "code",
+      "rejected": true
+    },
+    {
+      "alteration": "original",
+      "rejected": true
+    },
+    {
+      "alteration": "partial",
+      "rejected": true
+    },
+    {
+      "alteration": "started",
+      "rejected": true
+    },
+    {
+      "alteration": "admitted",
+      "rejected": true
+    }
+  ],
+  "stderr_integrity_tests_passed": 2,
+  "original_project_implementations": 79,
+  "new_forwards_started": false,
+  "serving_admitted": false
+}

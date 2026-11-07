@@ -97,7 +97,12 @@ environment. It uses stored calibration coefficients, not an independent refit;
 it binds the native receipts without rerunning video decoding or neural models.
 The original prospective freeze checksum is embedded in the arithmetic reviewer.
 [Completed local receipt](evaluation-panels/video-v13-independent-review.json).
-Fourteen existing arithmetic integrity tests passed. The public workflow adds
-an external Linux replay; its result must be reported separately when available.
+Fourteen existing arithmetic integrity tests passed. Actual external Linux
+arithmetic also passed on Ubuntu24.04/x86_64, Python3.12.6 and NumPy2.2.6,
+with the app, neural models, decoders, SciPy and scikit-learn absent.
+It retained all192 outcomes per method and all seven failed requirements.
+[Hosted run](https://github.com/ChipmunkRPA/veritas/actions/runs/42350672676);
+[parsed completed receipt](evaluation-panels/linux-video-v13-arithmetic-review.json).
+This reproduces calculations, not decoding, source truth or detection quality.
 Actual outside human reviewers remain zero. Current detector, overall confidence,
 customer reports, prepaid billing and GCP infrastructure are unchanged.

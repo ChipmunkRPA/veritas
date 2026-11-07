@@ -1,0 +1,44 @@
+{
+  "schema": "chipmunk.audio-full-replication-public-freeze/14",
+  "private_lock_sha256": "08d49a8d59be8c0b353f798b16ec7541fb0973e99a2803837301dcc008f9ae2b",
+  "lock": {
+    "schema": "chipmunk.audio-full-replication-lock/14",
+    "original_sha256": "93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b",
+    "partial_sha256": "7084fd34ee80948ec1180f9dc848b1235665df29580006e148703c3c052a7b9b",
+    "policy": {
+      "operation": "New full4248 ordered extraction from input0, original CPUfloat32/four threads and sole original inter-op owner; no retries, skip, denoising, PCM substitution, scoring or feature changes.",
+      "parity": "All3818 prior successful/unassessed records must match exactly excluding runtime_s only; original failed3819-row attempt retained unchanged. No fitting partial/new failed journal.",
+      "diagnostics": "Capture original failure exception chain and complete CalledProcessError.stderr privately, no stdout or raw audio. Original exception printing, failed row and stop behavior preserved.",
+      "limits": {
+        "parent_rss_bytes": 4831838208,
+        "tree_rss_bytes": 6442450944,
+        "min_system_available_bytes": 1610612736,
+        "min_free_disk_bytes": 1073741824,
+        "timeout_s": 21600,
+        "interval_s": 0.1
+      },
+      "reserved_confirmation_scored": false,
+      "serving_admitted": false
+    },
+    "implementation_sha256": [
+      {
+        "path": "backend/scripts/profile_video_synthesis_v13.py",
+        "sha256": "4ff16dc68e91929225d3d426d514d3990db8db84a91a165f86d135d0198f6ea4"
+      },
+      {
+        "path": "backend/scripts/repeat_audio_separation_v14.py",
+        "sha256": "f1282fed9449dbd09f7099ca42d1b83f713308d4b626b4843b73d13713a1ee10"
+      },
+      {
+        "path": "backend/tests/test_repeat_audio_separation_v14.py",
+        "sha256": "7c56845a79966924bcbb6ff62c4aed688c944f8062ae5c4b75907d61c46ee4fe"
+      },
+      {
+        "path": "docs/audio-v14-full-replication.md",
+        "sha256": "98434f21835ca75fc63650f78acc2a5dc956033d06201ad9a0260240001dbdba"
+      }
+    ],
+    "new_forwards_started": false,
+    "deployment_eligible": false
+  }
+}

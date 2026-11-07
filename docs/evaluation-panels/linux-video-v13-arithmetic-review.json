@@ -1,0 +1,67 @@
+{
+  "schema": "chipmunk.external-linux-video-arithmetic/13",
+  "run_id": 42350672676,
+  "run_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42350672676",
+  "job_id": 128337917738,
+  "commit": "ebaf90deb54cf6bc9c707d13d2da450011db06d0",
+  "conclusion": "success",
+  "environment": {
+    "python": "3.12.6",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "numpy": "2.2.6"
+  },
+  "scope": "Actual isolated hosted Linux numerical arithmetic from public packet; no media/decoder/neural replay, calibration refit or outside human review. Failed detection and native requirements preserved.",
+  "arithmetic": {
+    "schema": "chipmunk.video-demamba-independent-arithmetic/13",
+    "passed": true,
+    "public_freeze_sha256": "fe8aa9a67bcca54259b0d2e9bf7966b9723fc73ac1ebb4d891601559e3898d61",
+    "baseline_sha256": "365e1ca463c26590402af552990c13f83d3028f41b9306f7815151f6d5bc75a3",
+    "candidate_sha256": "1f2970c6a31ae37f76e31c1b5d4f3fbda396d1a58c1c1ffef2891a5dbeec60b3",
+    "summary_sha256": "5a380917b07f1290569e6921aabd8813a917feb6faee69d0529b01e6d3fd2151",
+    "native_sha256": "c2510b0a16a42f2d87e44920b08ebf34818f620c9e328666a946aa6f5cc80cf6",
+    "reviewer_sha256": "db446ef785ecf3733230b01677e94af866b6ff9f593e357a373154abfbcfc3a9",
+    "planned_inputs_per_method": 288,
+    "development_outcomes_per_method": 192,
+    "totals": {
+      "baseline": {
+        "planned": 192,
+        "assessed": 175,
+        "failed": 0,
+        "inconclusive": 103,
+        "correct_ai": 51,
+        "correct_original": 25,
+        "false_ai": 5,
+        "false_original": 8,
+        "ai_without_ai_conclusion": 45
+      },
+      "candidate": {
+        "planned": 192,
+        "assessed": 188,
+        "failed": 0,
+        "inconclusive": 192,
+        "correct_ai": 0,
+        "correct_original": 0,
+        "false_ai": 0,
+        "false_original": 0,
+        "ai_without_ai_conclusion": 96
+      }
+    },
+    "gates": {
+      "complete_matrix": true,
+      "no_failures": true,
+      "calibration_support": true,
+      "brier_gain": false,
+      "brier_interval": false,
+      "wrong_directions": true,
+      "ai_usefulness": false,
+      "original_retention": false,
+      "total_correct": false,
+      "scope_retention": false,
+      "native_correspondence": false
+    },
+    "advance_to_fresh_confirmation": false,
+    "serving_admitted": false,
+    "outside_human_reviewers": 0,
+    "scope": "Separate NumPy-only reduction of stored probabilities/calibration coefficients, ranks, losses, grouped bootstrap, all-source outcomes and requirements. No calibration refit, raw-media truth audit, native/model forward or outside human review. Arithmetic tolerance1e-11relative/1e-12absolute; directions and gates exact. Shared NumPy RNG/quantile, no original evaluator imports."
+  }
+}

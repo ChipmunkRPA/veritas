@@ -1,0 +1,74 @@
+{
+  "schema": "chipmunk.video-specialists-source-audit/18",
+  "implementation_sha256": "5a6698d50a492b66a0363b8d3389740abcdd0ab61d8011e632e6a946a72e9036",
+  "private_inventory_sha256": "f3d067ffd3259763da0abcd850ccd81deb6f4d8819395513386dc621826a94e7",
+  "acquisition_revision": "bca865e675852666a426368b2f5614abf1c1926a",
+  "parent_manifest_sha256": {
+    "backend/data/independent-evaluation/video-v2/face-swap/manifest.json": "a86cc49c7b0a40815e0e5921fdf1ccb7260f174d6d937d4e6ed2d684223977eb",
+    "backend/data/independent-evaluation/video-v3/face-swap/manifest.json": "b732512832ea90eb36db1c7255c2e6c05a78bf5d4b7f8fb1d78ccf87f32bf8b5",
+    "backend/data/independent-evaluation/video-v4/face-sources/manifest.json": "a604addc29bc9efa9b5f88e9d6b6a6fc2355ddede85be26da7c362e4ff547a49",
+    "backend/data/independent-evaluation/video-v5/sources/manifest.json": "101876f69cf5b2abb4cc2355f45d4b8e8f200371bc543d3592ab5dffb53887f7",
+    "backend/data/independent-evaluation/video-v6/sources/manifest.json": "1607a5a935be65443572f8e9e43e4d1436015c6c57b1d0431d61401ea0eeb297",
+    "backend/data/independent-evaluation/video-v17-sface/sources/manifest.json": "d1ea0edb5b1833506d0694b3625afad8061cd8fff82dcd70ac9ba15de379c2a3",
+    "backend/data/independent-evaluation/video-v4/intervals/manifest.json": "88d21ead5044c55722fa70d71da9bc411d90c8a60d6aeee56bdb90b08e43e732",
+    "backend/data/independent-evaluation/video-v5/intervals/manifest.json": "82b7b77de9d8dbdd4e29ed72403828bc334643d997180be36fe62fc8b3fac341",
+    "backend/data/independent-evaluation/video-v6/intervals/manifest.json": "15758eb29000c9d5e2dab80334caa7190766bd839de85fa4c4ca6d26fdf59e58",
+    "backend/data/independent-evaluation/video-v17-sface/intervals/manifest.json": "cc71debd8d1587089e2e28ca7c6e0775a6fc6a17af9df46a937fed166b9b311e"
+  },
+  "source_video_groups": 162,
+  "known_connected_components": 162,
+  "component_size_counts": {
+    "1": 162
+  },
+  "parents": 486,
+  "retained_interval_clips": 432,
+  "retained_interval_groups": 114,
+  "media_bytes_checked": 2005023136,
+  "unique_media_paths_checked": 1404,
+  "roles": {
+    "specialist_cal": {
+      "connected_components": 41,
+      "source_video_groups": 41,
+      "groups_with_existing_intervals": 29,
+      "groups_requiring_new_interval_preparation": 12,
+      "existing_positive_clips": 58,
+      "existing_genuine_clips": 55,
+      "existing_ordinary_edit_controls": 26
+    },
+    "fusion_fit": {
+      "connected_components": 41,
+      "source_video_groups": 41,
+      "groups_with_existing_intervals": 28,
+      "groups_requiring_new_interval_preparation": 13,
+      "existing_positive_clips": 56,
+      "existing_genuine_clips": 49,
+      "existing_ordinary_edit_controls": 21
+    },
+    "fusion_cal": {
+      "connected_components": 40,
+      "source_video_groups": 40,
+      "groups_with_existing_intervals": 28,
+      "groups_requiring_new_interval_preparation": 12,
+      "existing_positive_clips": 56,
+      "existing_genuine_clips": 50,
+      "existing_ordinary_edit_controls": 22
+    },
+    "confirmation": {
+      "connected_components": 40,
+      "source_video_groups": 40,
+      "groups_with_existing_intervals": 29,
+      "groups_requiring_new_interval_preparation": 11,
+      "existing_positive_clips": 58,
+      "existing_genuine_clips": 50,
+      "existing_ordinary_edit_controls": 21
+    }
+  },
+  "minimum_groups_per_class": 25,
+  "new_detector_forwards": 0,
+  "new_video_calibration_fitted": false,
+  "new_video_calibration_tested": false,
+  "serving_admitted": false,
+  "weight_scope": "Existing pinned commercially licensed face models only; any additional model requires its own weight-specific primary grant. This inventory loads no model.",
+  "dataset_license": "RTFS-10K publisher declares CC-BY-SA-4.0; source publisher labels/rights are not independently guaranteed.",
+  "limits": "All sources previously consumed in development. Known source-video/donor-file/byte disjointness does not prove distinct people, original licensors rights, or disjoint external model training. No new lip-generation, natural edit, fresh-source or authenticity-confidence result."
+}

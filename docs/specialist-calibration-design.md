@@ -2,7 +2,7 @@
 
 The local evaluation framework now supports separate calibrations for distinct
 checks and contexts, followed by a separately fitted and calibrated combination.
-This implements the cross-modal testing architecture requested7 November2026.
+This implements the cross-modal testing architecture requested 7 November 2026.
 It does not establish improved real-media detection, supply new trained detectors
 or change customer confidence. Every generated artifact has `serving_admitted:false`.
 
@@ -12,6 +12,23 @@ evidence from an unrelated region subtracting from positive evidence elsewhere.
 Version2 fixes that any-AI pooling rule before real-data fitting. The old numerical
 result, failed launch and four failing tests are preserved; no serving score was
 ever changed by either prototype.
+
+## Real-data progress, 7 November 2026
+
+The architecture has not yet completed real-data fitting for all four media.
+Numerical reproduction on another machine is separate from an independent
+review of media, labels, provenance and detection quality.
+
+| Medium | Actual work completed | Current decision |
+| --- | --- | --- |
+| Image | Four arms fitted and tested on 240 consumed source pairs, with exact changed-pixel truth and PNG/JPEG conditions. Actual Linux scalar refit passed. | Regional readouts found more edits but also raised false alarms; not admitted. [Results](image-specialists-v10-result.md). |
+| Passage | Two models, passage-length contexts and four combinations tested on 128 consumed prompt/source components, including mixed human/AI documents. Actual Linux scalar refit passed. | Lower probability loss and fewer false alarms came with more missed AI passages/documents; not admitted. [Results](writing-specialists-v5-result.md). |
+| Voice/audio | Source/signal plan frozen for 143 consumed foreground pairs, eight AI generators, 48 role-disjoint background originals and 4,004 known-boundary composites. Native parity passed; sequential real inference in progress. | No outcome or improvement claim until every frozen stage and independent source/result audit completes. [Protocol](audio-specialists-v15-protocol.md). |
+| Video | Original/derived bytes and known source/donor connections audited for all 162 consumed paired source-video groups; 114 groups already have retained exact-boundary clips. | New four-role video calibration has not been fitted or tested. [Source audit and remaining work](video-specialists-v18-source-plan.md). |
+
+These consumed-source pilots do not replace fresh, source-disjoint validation.
+No new specialist calibration contributes to customer confidence. The video
+source inventory is preparation, not a substitute for video model evaluation.
 
 ## Scope of the next real-data comparisons
 

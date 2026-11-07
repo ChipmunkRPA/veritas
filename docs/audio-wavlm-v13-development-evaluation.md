@@ -133,8 +133,12 @@ complete fitted objects and every outcome/statistic. Thirteen transport tests
 passed. Twelve actual-packet alterations were refused after the unchanged packet
 passed, including coherently changed feature/probe payloads and transfer hashes.
 Numerical replay
-requires numerical dependencies and the referenced public files, but no model
-downloads, source audio or private manifest. Actual outside reviewers remain zero.
+requires the referenced public files, but no model downloads, source audio or
+private manifest. The original command above imports the app's neural dependency
+chain. A [portable alternative](audio-public-portable-review-v13.md) now supports
+a new numerical-only environment and explicitly blocks those imports. Its local
+verification exactly reproduced both fits and all outcomes. Actual outside
+reviewers remain zero.
 
 ## Next work
 

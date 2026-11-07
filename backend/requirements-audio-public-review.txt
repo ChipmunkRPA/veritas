@@ -1,0 +1,9 @@
+# Tested in a new Python 3.12 environment with no system site packages.
+# Numerical review only: no app, neural runtime, decoder, or pretrained weights.
+numpy==2.2.6
+scipy==1.18.1
+scikit-learn==1.9.0
+joblib==1.6.0
+narwhals==2.28.0
+threadpoolctl==3.8.0
+cloudpickle==3.1.2

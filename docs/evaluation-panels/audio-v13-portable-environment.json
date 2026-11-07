@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.portable-audio-review-environment/13",
+  "system_site_packages": false,
+  "python": "3.12.6",
+  "platform": "Darwin",
+  "architecture": "arm64",
+  "isolated_install": true,
+  "source": "Public PyPI binary distributions; isolated installer, no wheel cache",
+  "app_environment_modified": false,
+  "torch_installed": false,
+  "transformers_installed": false,
+  "cache_locations_initially_empty": true,
+  "installed": [
+    {
+      "name": "numpy",
+      "version": "2.2.6",
+      "wheel": "numpy-2.2.6-cp312-cp312-macosx_14_0_arm64.whl",
+      "sha256": "894b3a42502226a1cac872f840030665f33326fc3dac8e57c607905773cdcde3"
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "wheel": "scipy-1.18.1-cp312-cp312-macosx_14_0_arm64.whl",
+      "sha256": "7bbf207c4453ce1ad2e00b17313852b33310b83090c2311bdaf97f93c0380d12"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.0",
+      "wheel": "scikit_learn-1.9.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "sha256": "5be45aa4a42a68a533913a6ed736cf309de2226411c79ef8d609a5456f1939b1"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0",
+      "wheel": "joblib-1.6.0-py3-none-any.whl",
+      "sha256": "3dbbf9f6e4b592a2357b854608e980fe6390d131d7a82f011a377ef2ebef7aba"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.28.0",
+      "wheel": "narwhals-2.28.0-py3-none-any.whl",
+      "sha256": "1f69d6385ec30e2fa6e1fdeb37c562ecabd0f713f6f3e3b58a668c5c9df9567f"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.8.0",
+      "wheel": "threadpoolctl-3.8.0-py3-none-any.whl",
+      "sha256": "f1b49c82704d50f13ffae019c727b0fa4f6791a58f48f06a09c45face1be66da"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "wheel": "cloudpickle-3.1.2-py3-none-any.whl",
+      "sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a"
+    }
+  ],
+  "limits": "This is the actual tested local numerical environment, not a cross-platform wheel lock or independent human review."
+}

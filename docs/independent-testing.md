@@ -157,6 +157,13 @@ only fitting sources and reproduces all conclusions/gates without private
 manifests or model downloads. Native source re-execution covers 125 fixed/new-probe
 cases and is a separate recorded check.
 
+For a model-free starting point with a clean installation, use the
+[portable v13 numerical review](audio-public-portable-review-v13.md). It has a
+separate seven-package requirements file and blocks app/neural imports. Local
+verification reconstructed every feature record, both complete fitting-only
+objects and all 1,449 outcomes in a new environment. The result remains rejected;
+this is a reproducibility check, not fresh accuracy or outside participation.
+
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_review.py
 ```

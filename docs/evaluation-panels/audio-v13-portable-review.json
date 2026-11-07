@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.portable-audio-public-review/13",
+  "passed": true,
+  "capsule_sha256": "84848472fef312c5fb5fd2ceddacd5fbe217caebadd09aacd85f28f5ee21cac3",
+  "reviewer_sha256": "e19abef956f314af5a0a06918d90577bcd094ac94fb3484c0a2779a309f181ee",
+  "inputs": 4248,
+  "outcomes": 1449,
+  "original_feature_receipt_reproduced_byte_for_byte": true,
+  "arms": {
+    "standalone": {
+      "all_normalization_calibration_outcomes_statistics_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true,
+      "failed_gates": [
+        "brier_gain",
+        "log_loss_gain",
+        "brier_interval_below_zero",
+        "strong_condition_brier",
+        "total_false_calls",
+        "generator_false_original_calls",
+        "clean_retention",
+        "generator_ai_retention",
+        "strong_condition_usefulness",
+        "background_speech_usefulness",
+        "background_speech_class_retention"
+      ]
+    },
+    "complement": {
+      "all_normalization_calibration_outcomes_statistics_rebuilt": true,
+      "refit_performed": true,
+      "exact_refit_matched": true,
+      "failed_gates": [
+        "generator_ai_retention",
+        "background_speech_usefulness",
+        "background_speech_class_retention"
+      ]
+    }
+  },
+  "selected_arm_for_possible_confirmation": null,
+  "native_metadata_cases": 593,
+  "computed_probes": 511,
+  "native_reexecution_performed": false,
+  "serving_admitted": false,
+  "blocked_neural_or_app_imports_loaded": [],
+  "runtime": {
+    "python": "3.12.6",
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.6.0",
+    "narwhals": "2.28.0",
+    "threadpoolctl": "3.8.0",
+    "cloudpickle": "3.1.2"
+  },
+  "scope": "Public v13 receipt/outcome/statistics replay and optional shared declared exact fitter. Earlier experiments are checksum-bound inputs. No source recordings, checkpoint downloads, model inference or outside human participation."
+}

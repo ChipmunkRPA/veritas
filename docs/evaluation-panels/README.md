@@ -27,6 +27,8 @@ The completed192-input comparison rejects both formats for excessive genuine
 highlights. `fused-crop-v6-confirmation-summary.json` publishes only aggregate
 counts/uncertainty, with no file-level outcomes or source media.
 [Result and limitations](../fused-crop-v6-confirmation-result.md).
+`fused-crop-v6-confirmation-review.json` adds every192 case outcome and
+input/crop/map commitments, with no source images or raw masks.
 
 `audio-v12-layer-freeze.json` binds fixed speech-layer indices 8/16/24, a matched
 unprojected-final control, unchanged source roles/checkpoints/runtime/service and
@@ -36,8 +38,12 @@ human testing. [Protocol and remaining execution](../audio-layer-v12-execution.m
 Both mappings subsequently failed four of sixteen unchanged requirements.
 The [public aggregate](../audio-layer-v12-development-evaluation.json) includes
 all condition/generator counts and gates, excluding file-level results, voice
-vectors and fitted parameters. The complete lossless packet passed locally;
-its public disclosure remains a separate pending decision.
+vectors and fitted parameters. `audio-v12-development-review.json.gz` and the
+three role-separated `audio-v12-layer-{fit,cal,development}.jsonl.gz` packets now
+publish every4,248 original feature record losslessly, every1,449 development
+outcome,422 computed probes and fitted/calibrated objects. Empty-cache public-only
+exact refits passed; thirteen actual-packet alterations were rejected. No raw
+waveforms, transcripts, customer uploads or full pretrained weights are included.
 [Result and verification scope](../audio-layer-v12-development-evaluation.md).
 
 `audio-v13-wavlm-source-review.json` records the new noise-aware backbone's pinned

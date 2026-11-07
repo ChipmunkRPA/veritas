@@ -6,7 +6,7 @@ All4,248 extractions and1,449 development outcomes completed without failures.
 Both mappings failed four of sixteen unchanged quality requirements and remain
 disabled. All508 native replays and exact numerical/refit review passed; no
 reserved confirmation was scored. The [aggregate result](audio-layer-v12-development-evaluation.md)
-is public; full derived-feature disclosure is a separate pending decision.
+and complete lossless reproduction packet are public.
 The prospective preparation below is retained as the record before execution.
 
 6 November 2026. Prepared the [fixed-layer protocol](audio-layer-v12-protocol.md)

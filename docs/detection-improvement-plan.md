@@ -76,8 +76,7 @@ integration remains unfinished.
   zero failures. Correct conclusions913/920 versus service1,004, with2 false AI
   each and534/527 inconclusive versus387. Both fail the same four of sixteen
   gates. All508 native checks, both exact refits and public-only numerical
-  reconstruction pass. Aggregate results are published; full derived-feature
-  disclosure remains pending. No reserved confirmation or service changes.
+  reconstruction pass. Aggregate results and full lossless reproduction packets are published. No reserved confirmation or service changes.
   [Complete aggregate result](audio-layer-v12-development-evaluation.md).
 
 - Prepared a different noise-aware speech backbone with94.4million frozen
@@ -88,6 +87,11 @@ integration remains unfinished.
   confirmation. Thirteen actual-metadata alterations are rejected. Publish before
   source forwards/fitting; no detection gain or outside review claimed.
   [Prospective preparation](audio-wavlm-v13-execution.md).
+  After remote verification as45e8ff9, all4,248 extractions completed (4,186
+  assessed/62 unassessed, zero failures), and both fixed heads/calibrations were
+  saved. Initial comparison stopped at34 on duplicate thread initialization;
+  the failed attempt is retained and a single-owner callable launcher is bound
+  before continuation. No completed quality result or serving change yet.
 
 - Prepared fresh image-crop confirmation: all48 unused pairs/all48 publisher
   masks acquired, exact RGB-reference/geometry checks passed and no source/file

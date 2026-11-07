@@ -74,7 +74,7 @@ calls remain genuine overlapping-speech mixtures. All clean conclusions match
 service. Neither background tags nor waveform shape establishes foreground
 authorship. Internal research decision points are not public threshold claims.
 
-## Verification and publication scope
+## Verification and public reproduction
 
 Every source forward reproduced the original raw score, final-vector bytes,
 activity/window result and status. All 508 native replays passed: the union of
@@ -89,16 +89,42 @@ replay also passed with empty model/data caches, including both exact refits.
 Nineteen focused codec/arithmetic tests passed. Thirteen deliberate alterations
 of the actual public packet were refused after the unchanged packet passed.
 
-The [published aggregate](audio-layer-v12-development-evaluation.json) contains
-complete condition/generator-group results, uncertainty and all adoption gates.
-It excludes file-level outcomes, voice features and fitted parameters. The full
-lossless reproduction package is prepared and verified locally; its public
-disclosure awaits the separate user decision. Public aggregate access alone
-does not reproduce neural outputs or permit the exact numerical refit.
+The [public aggregate](audio-layer-v12-development-evaluation.json) provides
+condition/generator summaries and gates without downloading feature vectors.
+
+The complete public packet is
+[`audio-v12-development-review.json.gz`](evaluation-panels/audio-v12-development-review.json.gz),
+with separate `audio-v12-layer-fit.jsonl.gz`, `audio-v12-layer-cal.jsonl.gz` and
+`audio-v12-layer-development.jsonl.gz` beside it. Lossless float32 layer payloads
+reference the existing public v9 final vectors and reconstruct the original
+4,248-record feature receipt byte-for-byte. All 1,449 outcomes, filtered-probe
+vectors, fitted parameters, condition/generator summaries and audit receipts
+remain available. Background identifiers use the public hashed source catalogue.
+Source waveforms, transcripts, customer uploads, provider identifiers, private
+paths and full pretrained weights are excluded. Data terms accompany the packet;
+derived representations are not asserted to be anonymous recordings.
+
+From a checkout with the referenced earlier public packets present:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.publish_audio_layer_results_v12 \
+  review docs/evaluation-panels/audio-v12-development-review.json.gz \
+  /tmp/new-audio-v12-review.json --refit
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.publish_audio_layer_results_v12 \
+  tamper docs/evaluation-panels/audio-v12-development-review.json.gz \
+  /tmp/new-audio-v12-tamper.json
+```
+
+This requires numerical dependencies, but no model downloads, raw media or
+private manifest. Numerical reproduction is distinct from native neural replay
+and from outside human review; actual outside reviewers remain zero.
 
 ## Next decision
 
-Reject both arms without scoring reserved confirmation. Test the separately
-frozen [noise-aware backbone](audio-wavlm-v13-execution.md) with its own fitting
-and calibration under the original quality requirements. No model change,
-confidence admission or outside human validation follows from these checks.
+Reject both arms without spending the reserved confirmation set. Another
+representation/learner must improve actual discrimination in noise and overlapping
+speech under the original useful-detection and false-call requirements. The separately frozen
+[noise-aware backbone](audio-wavlm-v13-execution.md) has its own permitted source,
+extraction and independent fitting/calibration. Its comparison remains unfinished. Download or reconstruction
+success alone establishes no detection benefit. Image, video, writing and actual
+outside testing remain part of the unfinished improvement program; GCP stays last.

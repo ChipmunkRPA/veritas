@@ -31,13 +31,13 @@ format qualifies for local integration. These are component review cues and
 changed-pixel overlap measurements, not whole-file AI verdicts or calibrated
 probabilities. The48 sources are shared across formats and are now consumed.
 
-The [published aggregate](evaluation-panels/fused-crop-v6-confirmation-summary.json)
-preserves per-format/per-generator counts, uncertainty and frozen decisions.
-The complete local192-case review reconstructs source bytes, crop coordinates
-and map commitments; its aggregate does not reproduce those neural outputs.
-No source image, raw mask, checkpoint, file-level outcome or private path is
-redistributed here. Service, overall confidence and customer exports are unchanged.
-Outside human reviewers:0.
+The [aggregate summary](evaluation-panels/fused-crop-v6-confirmation-summary.json)
+provides per-format/per-generator counts and uncertainty.
+The [complete result](evaluation-panels/fused-crop-v6-confirmation-review.json)
+retains all192 case outcomes, per-generator metrics, native replay, raw-map/RGB
+commitments and unchanged gates. No source image, raw mask, checkpoint or private
+path is redistributed. No overall-confidence, API/UI/PDF/JSON or serving default
+was changed. Outside human reviewers:0.
 
 This rejects the tested maximum-of-four-crops method. The improvement seen on
 the24-source development panel did not retain its genuine-image tradeoff on

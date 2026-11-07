@@ -65,6 +65,16 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed the two-source audio execution runner and prospective lock: all
+  4,248 original consumed inputs, unchanged roles/62 unassessed,79 project/six
+  installed code pins, own bag fitting/calibration, both raw/mapped stability
+  and original16 requirements. Both estimates retain full clocks, waveform and
+  feature hashes; native review also checks the inspected upstream graph on
+  original and required band inputs. All67 selected tests pass, and13 actual
+  freeze alterations are refused. No project recording forward/fitting has begun.
+  Publish and verify the complete freeze before extraction; reserved1,080 inputs
+  and serving defaults remain unchanged. [Execution](audio-separation-v14-execution.md).
+
 - Prepared a materially different overlapping-voice method: a pinned
   5,066,929-parameter two-source separator, both source estimates inspected by
   the frozen voice backbone, and a weak mixture-label objective that does not

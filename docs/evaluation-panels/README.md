@@ -16,6 +16,13 @@ voice features, pretrained tensors or accuracy outcomes. Twenty focused tests
 pass, including synthetic fit/calibration smokes; no project recording,
 project-fitted classifier or serving change is established.
 [Method and required execution freeze](../audio-separation-v14-preparation.md).
+`audio-v14-separation-freeze.json` subsequently binds the complete prospective
+79-file experiment, six installed implementations, original input/weight/role
+checksums, own bag fitting/calibration and all sixteen unchanged gates.
+`audio-v14-freeze-alterations.json` records thirteen refused variants of the
+actual freeze. All67 selected tests pass. No project recording forward, project
+fitting, fresh accuracy or outside human review is established by these metadata
+checks. [Execution and full protocol](../audio-separation-v14-execution.md).
 
 `writing-v3-focus-freeze.json` binds the prospective12-file four-arm consumed
 writing comparison, exact674 focus/context inputs, pinned commercial model

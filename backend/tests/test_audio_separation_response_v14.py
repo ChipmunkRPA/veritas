@@ -63,7 +63,7 @@ def test_missing_incomplete_or_invalid_stems_cannot_be_scored_as_original():
 
 def test_predictor_is_symmetric_and_does_not_read_source_metadata():
     row = source_row()
-    fitted = {"arm": "separated", "transform": {"center": [0.] * 1024, "scale": [1.] * 1024,
+    fitted = {"arm": "separated", "method": method.METHOD, "transform": {"center": [0.] * 1024, "scale": [1.] * 1024,
                "variance_factor": .125}, "coefficients": [1., *[0.] * 1024, 0.]}
     assert method.predict(row, fitted) == pytest.approx(.82)
     altered = copy.deepcopy(row)
@@ -106,3 +106,30 @@ def test_synthetic_bag_fit_and_separate_group_calibration_keep_missing_groups(ar
     pools = method.calibrate(calibration, fitted)
     assert len(pools["0"]) == len(pools["1"]) == 9
     assert pools["0"][0]["maximum"] is None
+
+
+@pytest.mark.parametrize("change", ["scale", "center", "budget", "coefficient_shape", "negative_slope",
+                                    "nonfinite_coefficient", "arm", "method"])
+def test_invalid_fitted_mapping_does_not_silently_produce_an_inconclusive_probability(change):
+    fitted = {"arm": "separated", "method": method.METHOD,
+        "transform": {"center": [0.] * 1024, "scale": [1.] * 1024, "variance_factor": .125},
+        "coefficients": [1., *[0.] * 1024, 0.]}
+    method.validate_fitted(fitted)
+    if change == "scale":
+        fitted["transform"]["scale"][0] = 0
+    elif change == "center":
+        fitted["transform"]["center"][0] = float("nan")
+    elif change == "budget":
+        fitted["transform"]["variance_factor"] = 1.
+    elif change == "coefficient_shape":
+        fitted["coefficients"].pop()
+    elif change == "negative_slope":
+        fitted["coefficients"][0] = -1.
+    elif change == "nonfinite_coefficient":
+        fitted["coefficients"][1] = float("nan")
+    elif change == "arm":
+        fitted["arm"] = "unknown"
+    else:
+        fitted["method"] = {}
+    with pytest.raises(ValueError):
+        method.predict(source_row(), fitted)

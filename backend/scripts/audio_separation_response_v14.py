@@ -136,6 +136,7 @@ def fit(rows, arm):
 
 
 def predict(row, fitted):
+    validate_fitted(fitted)
     x = design(row, fitted["transform"])
     if x is None:
         return None
@@ -144,6 +145,20 @@ def predict(row, fitted):
     if fitted["arm"] == "complement":
         value += beta[-2] * clipped_logit(row["raw"]) + beta[-1]
     return float(expit(value))
+
+
+def validate_fitted(fitted):
+    if fitted.get("arm") not in ARMS or fitted.get("method") != METHOD:
+        raise ValueError("Exact declared fitted arm/method required")
+    transform = fitted["transform"]
+    center, scale, beta = [np.asarray(x, np.float64) for x in
+                           (transform["center"], transform["scale"], fitted["coefficients"])]
+    expected = SOURCE_WIDTH + (2 if fitted["arm"] == "complement" else 0)
+    if (center.shape != (DIMENSIONS,) or scale.shape != center.shape or beta.shape != (expected,)
+            or not np.isfinite(center).all() or not np.isfinite(scale).all() or not np.isfinite(beta).all()
+            or (scale < 1e-6).any() or transform["variance_factor"] != np.sqrt(16 / DIMENSIONS)
+            or beta[0] < 0 or (fitted["arm"] == "complement" and beta[-2] < 0)):
+        raise ValueError("Finite complete fitting-only mapping and declared raw slopes required")
 
 
 def calibrate(rows, fitted):

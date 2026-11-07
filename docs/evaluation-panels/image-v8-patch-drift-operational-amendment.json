@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.patch-drift-operational-amendment/8",
+  "development_freeze_sha256": "9229bc0afd16c4e8ff35a11602ad01bd6e022e54e59fe6b59e99b25b588ea8d3",
+  "points_sha256": "5777b0624e2618960c9a15c9c56081d42518c629192a0c6a562441aa4fbb1534",
+  "original_development_attempt": {
+    "planned": 192,
+    "complete_prediction_records": 34,
+    "status_counts": {
+      "ok": 34
+    },
+    "profile": {
+      "role": "development",
+      "child_exit_code": -15,
+      "guard": "memory_disk_or_time",
+      "sample_errors": 0,
+      "sampled_tree_rss_lower_bound_bytes": 807632896,
+      "duration_s": 15.527888083015569
+    },
+    "predictions_sha256": "97b2d160d40fcb83684532b3bb47fa48a293b180a7dbccd0775bf9fb001f6aa7",
+    "aggregate_quality_review_written": false,
+    "retained_privately": true
+  },
+  "retry_plan": {
+    "same_192_input_development_panel": true,
+    "rerun_all_inputs_without_selecting_by_outcome": true,
+    "genuine_only_calibration_reused_byte_identical": true,
+    "genuine_calibration_records": 120,
+    "changed_code_models_points_masks_or_advancement_rules": false,
+    "resource_guard_unchanged": true,
+    "new_attempt": "image-v8-patch-drift-attempt3",
+    "fresh_confirmation": false,
+    "require_34_repeated_cases_exact_native_map_commitments": true
+  },
+  "resource_remediation": {
+    "verified_recoverable_scan_copy_files_removed": 2315,
+    "verified_recoverable_scan_copy_bytes_removed": 585634832,
+    "inactive_unadopted_download_cache": {
+      "schema": "chipmunk.inactive-research-download-cache-removal/1",
+      "path": "models/research/image-v7-smaug/model.safetensors",
+      "bytes": 877599816,
+      "sha256": "c5ae3fac7470126f25d2dca2386d8728f7c828fae53e8ac9eb006937821ea006",
+      "recover_from_pinned_public_url": "https://huggingface.co/abacusai/Smaug-AI-Image-Detector/resolve/c7c95951e04a87b884a4ad479401b1128c3903bd/model.safetensors",
+      "reason": "Unadopted candidate failed its fixed development gate; release space for a regional-edit study after a disk guard. Preserve all research outputs and commercial-license/source receipts.",
+      "serving_or_rollback_model_changed": false,
+      "research_results_deleted": false
+    },
+    "free_disk_before_new_attempt_bytes": 3069038592
+  },
+  "serving_changed": false,
+  "overall_confidence_changed": false,
+  "outside_human_reviewers": 0
+}

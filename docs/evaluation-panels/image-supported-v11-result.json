@@ -1,0 +1,280 @@
+{
+  "schema": "chipmunk.image-supported-result/11",
+  "policy": {
+    "schema": "chipmunk.image-supported-policy/11",
+    "branches": {
+      "png": {
+        "model": "tidal.splice_v30_1",
+        "device": "cpu",
+        "raw_side": 384
+      },
+      "jpeg": {
+        "model": "fused.opensdi",
+        "device": "mps",
+        "raw_side": 512
+      }
+    },
+    "arms": {
+      "primary": [
+        false,
+        false
+      ],
+      "primary-integrity": [
+        true,
+        false
+      ],
+      "primary-regions": [
+        false,
+        true
+      ],
+      "primary-integrity-regions": [
+        true,
+        true
+      ]
+    },
+    "minimum_groups_per_class": 25,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "routing": "Original PNG/JPEG byte signature only; never use generator, truth, or response for routing.",
+    "combination": "One dependence family per supported format. Positive specialist-logit maxima within family; separate PNG/JPEG combination fitting and calibration.",
+    "point": "Same complete fusion_cal genuine source groups across all four arms. Match current localiser flagged-group count, capped atfloor(0.1*n). Strict greater than sorted genuine group maximum at rankn-budget. Minimum25 common complete groups. Never impute missing evidence.",
+    "native_png": "CPUfloat32,2threads. Retained-map parity and repeats bitwise exact; source bytes and all local coordinates bound.",
+    "native_jpeg": "MPSfloat32, batch1. Retained consumed JPEG image-head and source-projected-map parity; atol=rtol=1e-4. First new input per class repeated at the same tolerance; image-gate side must remain unchanged.",
+    "source": "All240 consumed TGIF pairs from unchanged image-v10 roles; native PNG and deterministic JPEGquality75. No new fresh source reserve.",
+    "truth": "Exact original/edit RGB change mask; local presence is mask intersection with source-coordinate quadrant. JPEG compression does not add AI truth.",
+    "scope": "Local editing/inpainting presence and existing localiser component selection. Not whole-generation coverage or a full application-verdict comparison.",
+    "resource_guard": {
+      "tree_rss_gib": 6,
+      "minimum_available_mib": 1536,
+      "minimum_disk_mib": 1536,
+      "maximum_seconds_per_role_format": 900
+    },
+    "serving_admitted": false
+  },
+  "formats": {
+    "png": {
+      "current_components": {
+        "planned": 120,
+        "genuine": 60,
+        "ai": 60,
+        "assessed": 120,
+        "inconclusive": 0,
+        "false_ai": 5,
+        "ai_found": 16,
+        "ai_not_flagged_including_inconclusive": 44,
+        "exact_point_ties": 0,
+        "source_class_balanced_brier": null
+      },
+      "arms": {
+        "primary": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 8,
+          "ai_found": 23,
+          "ai_not_flagged_including_inconclusive": 37,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.23559063160561045,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": false,
+            "no_primary_detection_loss": true,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": false
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        },
+        "primary-integrity": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 9,
+          "ai_found": 29,
+          "ai_not_flagged_including_inconclusive": 31,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.20802020495779638,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": false,
+            "no_primary_detection_loss": true,
+            "no_additional_primary_false_flags": false,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        },
+        "primary-regions": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 6,
+          "ai_found": 22,
+          "ai_not_flagged_including_inconclusive": 38,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.22384235307561115,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": false,
+            "no_primary_detection_loss": false,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        },
+        "primary-integrity-regions": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 6,
+          "ai_found": 22,
+          "ai_not_flagged_including_inconclusive": 38,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.21786900894966263,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": false,
+            "no_primary_detection_loss": false,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        }
+      },
+      "current_edited_mask_mean_pixel_f1": 0.16224235026848602,
+      "current_edited_mask_mean_iou": 0.13612241372955058,
+      "localization_quality_unsupported_inputs": 0
+    },
+    "jpeg": {
+      "current_components": {
+        "planned": 120,
+        "genuine": 60,
+        "ai": 60,
+        "assessed": 120,
+        "inconclusive": 0,
+        "false_ai": 5,
+        "ai_found": 9,
+        "ai_not_flagged_including_inconclusive": 51,
+        "exact_point_ties": 0,
+        "source_class_balanced_brier": null
+      },
+      "arms": {
+        "primary": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 8,
+          "ai_found": 10,
+          "ai_not_flagged_including_inconclusive": 50,
+          "exact_point_ties": 102,
+          "source_class_balanced_brier": 0.25126841288579826,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": false,
+            "no_primary_detection_loss": true,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": false
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        },
+        "primary-integrity": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 2,
+          "ai_found": 5,
+          "ai_not_flagged_including_inconclusive": 55,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.23475924269014456,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": false,
+            "no_additional_current_false_flags": true,
+            "no_primary_detection_loss": false,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        },
+        "primary-regions": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 5,
+          "ai_found": 10,
+          "ai_not_flagged_including_inconclusive": 50,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.2456211248991059,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": true,
+            "no_additional_current_false_flags": true,
+            "no_primary_detection_loss": true,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": true,
+          "detection_improved_over_current": true
+        },
+        "primary-integrity-regions": {
+          "planned": 120,
+          "genuine": 60,
+          "ai": 60,
+          "assessed": 120,
+          "inconclusive": 0,
+          "false_ai": 2,
+          "ai_found": 5,
+          "ai_not_flagged_including_inconclusive": 55,
+          "exact_point_ties": 0,
+          "source_class_balanced_brier": 0.23642428984954525,
+          "continuation_gates": {
+            "complete_calibrated_coverage": true,
+            "no_current_detection_loss": false,
+            "no_additional_current_false_flags": true,
+            "no_primary_detection_loss": false,
+            "no_additional_primary_false_flags": true,
+            "no_primary_coverage_loss": true,
+            "lower_brier_than_primary": true
+          },
+          "calibration_continuation_eligible": false,
+          "detection_improved_over_current": false
+        }
+      },
+      "current_edited_mask_mean_pixel_f1": 0.058404286049010296,
+      "current_edited_mask_mean_iou": 0.03863730940562144,
+      "localization_quality_unsupported_inputs": 0
+    }
+  },
+  "serving_admitted": false,
+  "limits": "Consumed paired development,60 source groups per reserved format. References are actual localiser components, not the complete application verdict. Regional calibration is local presence in a quadrant, not pixel authorship. No new serving probability, fresh validation or outside human review."
+}

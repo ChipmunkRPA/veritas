@@ -1,0 +1,40 @@
+{
+  "png": {
+    "status": "fitted",
+    "format": "png",
+    "threshold": 0.7241898725648774,
+    "planned_genuine_files": 60,
+    "planned_genuine_groups": 60,
+    "common_complete_genuine_groups": 60,
+    "excluded_incomplete_genuine_groups": 0,
+    "unassessed_genuine_files": 0,
+    "reference_flagged_common_genuine_groups": 0,
+    "matched_false_flag_budget": 0,
+    "comparison": "strictly_greater_than_genuine_group_maximum_order_statistic",
+    "minimum_complete_groups": 25,
+    "source_group_cap": 0.1,
+    "scope": "Common complete fusion_cal genuine source groups only; no missing-score imputation or reserved-role selection.",
+    "serving_admitted": false,
+    "upper_rank": 60,
+    "calibration_flagged_groups": 0
+  },
+  "jpeg": {
+    "status": "fitted",
+    "format": "jpeg",
+    "threshold": 0.635194827991909,
+    "planned_genuine_files": 60,
+    "planned_genuine_groups": 60,
+    "common_complete_genuine_groups": 60,
+    "excluded_incomplete_genuine_groups": 0,
+    "unassessed_genuine_files": 0,
+    "reference_flagged_common_genuine_groups": 3,
+    "matched_false_flag_budget": 3,
+    "comparison": "strictly_greater_than_genuine_group_maximum_order_statistic",
+    "minimum_complete_groups": 25,
+    "source_group_cap": 0.1,
+    "scope": "Common complete fusion_cal genuine source groups only; no missing-score imputation or reserved-role selection.",
+    "serving_admitted": false,
+    "upper_rank": 57,
+    "calibration_flagged_groups": 3
+  }
+}

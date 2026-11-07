@@ -1,0 +1,286 @@
+{
+  "schema": "chipmunk.specialist-calibration/2",
+  "policy": {
+    "specialists": [
+      {
+        "id": "image.png.primary",
+        "modality": "image",
+        "family": "png-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "png"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      },
+      {
+        "id": "image.png.integrity",
+        "modality": "image",
+        "family": "png-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "png"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      },
+      {
+        "id": "image.jpeg.primary",
+        "modality": "image",
+        "family": "jpeg-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "jpeg"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c",
+            "1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      },
+      {
+        "id": "image.jpeg.integrity",
+        "modality": "image",
+        "family": "jpeg-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "jpeg"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c",
+            "1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      }
+    ]
+  },
+  "feature_pooling": "positive_logit_max_per_dependency_family",
+  "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "plan_sha256": "a5ca5684681116a4b437a4a13a92f7c9b181008d06a997c26e322d67a436b1e7",
+  "training_sha256": "8b2a6f8cbe282cf6bd367e66ce186678598dcd166737b099f50938d20cf3a934",
+  "minimum_groups_per_class": 25,
+  "l2": 0.001,
+  "specialists": {
+    "image.png.primary|png": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.02387734872323495
+      ],
+      "scale": [
+        0.045708402054625744
+      ],
+      "coefficients": [
+        1.6415492685156103
+      ],
+      "intercept": 0.26834122889432294,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "image.png.integrity|png": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.5483050054659545
+      ],
+      "scale": [
+        0.4518222846754596
+      ],
+      "coefficients": [
+        0.9388298930375534
+      ],
+      "intercept": -0.013838587511940854,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "image.jpeg.primary|jpeg": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.16099632826936744
+      ],
+      "scale": [
+        0.32512250495904177
+      ],
+      "coefficients": [
+        0.31653041518942954
+      ],
+      "intercept": 0.0048765644171018885,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "image.jpeg.integrity|jpeg": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.783211281398932
+      ],
+      "scale": [
+        0.11738147031786664
+      ],
+      "coefficients": [
+        0.5396881997737432
+      ],
+      "intercept": 0.0023584527596665636,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    }
+  },
+  "combiners": {
+    "image|jpeg-local-edit": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.18588068769110047
+        ],
+        "scale": [
+          0.3149131330105714
+        ],
+        "coefficients": [
+          0.3995187008692425
+        ],
+        "intercept": 0.007606115486907022,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 120,
+      "fitting_unassessed": 0,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.08513434722255757
+        ],
+        "scale": [
+          0.4564700506601161
+        ],
+        "coefficients": [
+          0.39438170765393304
+        ],
+        "intercept": 0.005412268678009326,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 120,
+      "calibration_unassessed": 0
+    },
+    "image|png-local-edit": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.9152385527394538
+        ],
+        "scale": [
+          1.5528229040965569
+        ],
+        "coefficients": [
+          1.7940516717450516
+        ],
+        "intercept": 0.28015878150964235,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 120,
+      "fitting_unassessed": 0,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.05279822337723722
+        ],
+        "scale": [
+          1.384288169110996
+        ],
+        "coefficients": [
+          2.0554293077475565
+        ],
+        "intercept": 0.3350310942459933,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 120,
+      "calibration_unassessed": 0
+    }
+  },
+  "serving_admitted": false,
+  "reference_prior": 0.5,
+  "sha256": "830caa307e6df9e78c4e10584153d670871998129f7496393b62d06b0ee55b30"
+}

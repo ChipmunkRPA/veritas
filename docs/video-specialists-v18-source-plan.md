@@ -52,10 +52,15 @@ these planned denominators before inference; do not select replacements from
 their eventual detection scores. Keep original/AI variants and ordinary controls
 in their connected source role. New preparation must verify known edit boundaries
 and source-frame correspondence without storing unnecessary duplicate media.
-The input adapter is implemented and its clock/truth tests pass. Its full
-648-clip real preparation is queued after the current audio pipeline; that
-preparation has not yet run. Temporary group renderings are deleted only after
-their byte/clock commitments are written. Original research clips remain intact.
+The input adapter and its full648-clip preparation are now complete. All162
+connected source-video groups have two inserted-swap clips, an original and an
+ordinary-edit control. It verified every native frame clock and prepared216
+virtual clips. Role input counts are164,164,160 and160. The
+[actual preparation receipt](evaluation-panels/video-specialists-v18-input-preparation.json)
+records the exact input-plan/policy commitments. Temporary group renderings
+were deleted only after byte/clock commitments were written; scoring must
+reconstruct them and verify those bytes/clocks again. Original research clips
+remain intact. No detector or calibration ran in this preparation.
 
 The first waiting postprocessing coordinator used the frozen audio-only runner's
 allowlist for the future video job. That mismatch was caught before any child

@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.image-supported-role-native/11",
+  "role": "fusion_fit",
+  "format": "png",
+  "freeze_sha256": "bbf3a3587f55386b916a4392fa325b4e7a2817f8ef42a8a1b8c5bd1a5e667588",
+  "journal_sha256": "1d2d743b87635fff1551aa3310ef0e88eb92ed7ed0592048ba95ae6dc29a88ec",
+  "complete_inputs": 120,
+  "new_neural_forwards": 98,
+  "model_weights_loaded": true,
+  "native_reference_checks": [
+    {
+      "input_sha256": "06266c9d3b031bfd9a6d8fea155b2f808fde6ece6ba033a6c5f09305feb873ec",
+      "retained_map_exact": true,
+      "maximum_map_difference": 0.0,
+      "primary_difference": null,
+      "map_bitwise_exact": true
+    },
+    {
+      "input_sha256": "0e07c50189c1c310c34eb3caeb22d9f3afbb0c8d7208900313cf3c13fa8f2a37",
+      "retained_map_exact": true,
+      "maximum_map_difference": 0.0,
+      "primary_difference": null,
+      "map_bitwise_exact": true
+    }
+  ],
+  "new_input_class_repeats": 2,
+  "serving_admitted": false
+}

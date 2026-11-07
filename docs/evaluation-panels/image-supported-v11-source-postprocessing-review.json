@@ -1,0 +1,108 @@
+{
+  "schema": "chipmunk.image-supported-source-postprocessing-review/11",
+  "implementation_sha256": "8226a9c420781119c2df261a50ddfe4b2bc9929ce71e6aaa2c72b3e76c922543",
+  "freeze_sha256": "bbf3a3587f55386b916a4392fa325b4e7a2817f8ef42a8a1b8c5bd1a5e667588",
+  "completed_result_sha256": "caeb4b7ee86f56db87cb4a6038249e636e115c1cb7fe08865ee1b6aac2857152",
+  "actual_role_receipts_sha256": {
+    "specialist_cal-png": "36c5b8c6cdcd0a172e920faa5ec6fa55525e1f79586a19ab178abae33e2d74af",
+    "specialist_cal-jpeg": "f406bd937796a5d4b7470a9e7b9d0505caffce392227c4dd691a28060ca42447",
+    "fusion_fit-png": "d65feef9bf234e16dc967f0530223c199e3964dbc0627bf2576a82d4b00211ca",
+    "fusion_fit-jpeg": "371fa1b3aeb1329a9a254d98b9ab6f85b09400d75e7f759eccd1a9cbaebc1392",
+    "fusion_cal-png": "07e3a3b2c9809e0fb576f864b1ba6480623d724fc97d8abe932a42a9d0c08876",
+    "fusion_cal-jpeg": "c9edd5b1ea15e993228d19dcc40169565d34322c29dcf0cd357f47a44010c0c4",
+    "confirmation-png": "f74b0ecd9ea02fbd1bf58dcb571907e1f135eba2fd118abc02d12395a13a08b7",
+    "confirmation-jpeg": "11660ed3393616e86b9000ae94d2b135a8e1f5e0fda66e8eec1a8d83ebdeb6d7"
+  },
+  "original_pairs": 240,
+  "original_pair_pixels": 167586843,
+  "png_source_bound_postprocessing_cases": 480,
+  "jpeg_source_bound_postprocessing_cases": 480,
+  "actual_native_forward_count_all_roles": 864,
+  "resource_profiles": {
+    "specialist_cal-png": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1079508992,
+      "sample_errors": 0,
+      "duration_s": 21.58893933391664,
+      "seconds_limit": 900
+    },
+    "specialist_cal-jpeg": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 807337984,
+      "sample_errors": 0,
+      "duration_s": 87.38567145809066,
+      "seconds_limit": 900
+    },
+    "fusion_fit-png": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1056980992,
+      "sample_errors": 0,
+      "duration_s": 21.32663174998015,
+      "seconds_limit": 900
+    },
+    "fusion_fit-jpeg": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 771735552,
+      "sample_errors": 0,
+      "duration_s": 87.2924262090819,
+      "seconds_limit": 900
+    },
+    "fusion_cal-png": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1082146816,
+      "sample_errors": 0,
+      "duration_s": 20.271322750020772,
+      "seconds_limit": 900
+    },
+    "fusion_cal-jpeg": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 835272704,
+      "sample_errors": 0,
+      "duration_s": 87.99803658295423,
+      "seconds_limit": 900
+    },
+    "confirmation-png": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1092042752,
+      "sample_errors": 0,
+      "duration_s": 19.413234750041738,
+      "seconds_limit": 900
+    },
+    "confirmation-jpeg": {
+      "schema": "chipmunk.specialist-local-resource-profile/5",
+      "module": "scripts.run_image_supported_v11",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 782434304,
+      "sample_errors": 0,
+      "duration_s": 87.0013973750174,
+      "seconds_limit": 900
+    }
+  },
+  "this_review_new_neural_forwards": 0,
+  "this_review_weights_loaded": false,
+  "all_actual_sources_maps_local_labels_and_component_masks_replayed_exactly": true,
+  "serving_admitted": false,
+  "limits": "All consumed sources. Exact changed-pixel masks are not proof of AI authorship. Current component overlap, quarter-presence calibration, native inference, numerical refit and outside human review are distinct. No fresh or whole-app verification."
+}

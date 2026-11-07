@@ -1,0 +1,199 @@
+{
+  "schema": "chipmunk.specialist-calibration/2",
+  "policy": {
+    "specialists": [
+      {
+        "id": "image.png.primary",
+        "modality": "image",
+        "family": "png-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "png"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      },
+      {
+        "id": "image.jpeg.primary",
+        "modality": "image",
+        "family": "jpeg-local-edit",
+        "target": "image.local_editing_presence",
+        "contexts": [
+          "jpeg"
+        ],
+        "routing_sha256": "c74c8ab606da3645f3b1d2089c108cf6d53e0136f4dc9975facda5ad414e905a",
+        "higher_means_ai": true,
+        "raw_range": [
+          0.0,
+          1.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "3e36413fdfc05412e626f085676b708c6c65f3636ba85d3ef84f784223fc297f",
+          "weight_sha256": [
+            "7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c",
+            "1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "9a444cc98a8582487c87ab485f8d44edfb7b55c9bfc1d449e18f3bd7b953ff25"
+        }
+      }
+    ]
+  },
+  "feature_pooling": "positive_logit_max_per_dependency_family",
+  "implementation_sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "plan_sha256": "0027055e1748f2c08ee62474a61f13f41a5264f21440f97873a659fd07dbad66",
+  "training_sha256": "4f23333189810968ba02a86fc08d73734c7d589253cffee9fb3d6fd08bf7b502",
+  "minimum_groups_per_class": 25,
+  "l2": 0.001,
+  "specialists": {
+    "image.png.primary|png": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.02387734872323495
+      ],
+      "scale": [
+        0.045708402054625744
+      ],
+      "coefficients": [
+        1.6415492685156103
+      ],
+      "intercept": 0.26834122889432294,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    },
+    "image.jpeg.primary|jpeg": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 60,
+        "1": 60
+      },
+      "center": [
+        0.16099632826936744
+      ],
+      "scale": [
+        0.32512250495904177
+      ],
+      "coefficients": [
+        0.31653041518942954
+      ],
+      "intercept": 0.0048765644171018885,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true
+    }
+  },
+  "combiners": {
+    "image|jpeg-local-edit": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.10072062812588395
+        ],
+        "scale": [
+          0.24824085151655542
+        ],
+        "coefficients": [
+          0.47897628481463456
+        ],
+        "intercept": 0.018762554599862317,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 120,
+      "fitting_unassessed": 0,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.003275928323461706
+        ],
+        "scale": [
+          0.4846339930273262
+        ],
+        "coefficients": [
+          0.4838072644493722
+        ],
+        "intercept": 0.020034851402353556,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 120,
+      "calibration_unassessed": 0
+    },
+    "image|png-local-edit": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          0.7012833364423527
+        ],
+        "scale": [
+          1.5951580037532973
+        ],
+        "coefficients": [
+          1.454256735235764
+        ],
+        "intercept": 0.21684212723998536,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "fitting_files": 120,
+      "fitting_unassessed": 0,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 60,
+          "1": 60
+        },
+        "center": [
+          -0.01159679255135887
+        ],
+        "scale": [
+          1.1151357394798
+        ],
+        "coefficients": [
+          1.881592941894342
+        ],
+        "intercept": 0.34337567610878156,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true
+      },
+      "calibration_files": 120,
+      "calibration_unassessed": 0
+    }
+  },
+  "serving_admitted": false,
+  "reference_prior": 0.5,
+  "sha256": "cc9f4e1aecf38597776b9570f0afb8502e33be18b3676709a8a234bec28daa93"
+}

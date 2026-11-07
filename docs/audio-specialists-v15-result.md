@@ -96,6 +96,15 @@ cross-role source lineage was refused. The
 records these checks. This does not turn the rejected candidates into useful
 replacements.
 
+The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42423467035)
+also archived44 exact dependencies from the published package commit and
+refitted all four methods. It reproduced20,972 probabilities with maximum
+difference3.3306690738754696e-16, including the same missing-evidence and
+reserved-response adverse checks. The
+[decoded workflow receipt](evaluation-panels/audio-specialists-v15-linux-review.json)
+records that result. One successful audio replay does not resolve the separate
+passage fitting failures below or establish portable training reliability.
+
 The separate passage replay exposed occasional v2 fitting nonconvergence on
 Linux. This audio package does not claim reliable cross-platform fitting from
 a local pass; any Linux failure must stay visible. Serving inference continues

@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.immutable-specialist-release-replay/5",
+  "science_commit": "2c0b61d523d9b8a4e341489e5f9fea34bea91139",
+  "release": "docs/evaluation-panels/audio-specialists-v15-release.json",
+  "release_sha256": "ce3bd0f0d46f1a1cbb6ae8864c45ba1b4d6d19186dccda7c41519e8e94566fcf",
+  "selected_repository_files": 44,
+  "numerical": {
+    "schema": "chipmunk.specialist-real-scalar-reproduction/4",
+    "study": "audio-specialists-v15",
+    "modality": "audio",
+    "arms": 4,
+    "probabilities_compared": 20972,
+    "max_absolute_probability_difference": 3.3306690738754696e-16,
+    "absolute_probability_limit": 0.000001,
+    "confirmation_not_fitted": true,
+    "changed_assessed_confirmation_units": 5740,
+    "preserved_unassessed_confirmation_units": 140,
+    "missing_required_check_withheld": true,
+    "missing_check_test_status": "passed_on_previously_assessed_file",
+    "cross_role_lineage_refused": true,
+    "new_neural_forwards": 0,
+    "raw_media_or_weights_loaded": false,
+    "serving_admitted": false,
+    "scope": "Retained-scalar numerical replay only; not native inference, source truth, fresh detection quality or outside human review."
+  },
+  "frozen_science_modified": false,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "scope": "Immutable consumed-source scalar replay, not native inference, fresh detection quality or outside human review.",
+  "github": {
+    "run_id": 42423467035,
+    "job_id": 128556651262,
+    "head_sha": "fd41c5d11474ec03309bd3a5cd3e6f330894eec8",
+    "conclusion": "success",
+    "source": "decoded actual job log"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "chipmunk.image-smaug-acquisition/7",
+  "repository": "abacusai/Smaug-AI-Image-Detector",
+  "revision": "c7c95951e04a87b884a4ad479401b1128c3903bd",
+  "files": [
+    {
+      "name": "model.safetensors",
+      "bytes": 877599816,
+      "sha256": "c5ae3fac7470126f25d2dca2386d8728f7c828fae53e8ac9eb006937821ea006",
+      "publisher_git_blob_sha1": "d53d2c9af0db91b5c4d3da03313a3da1265f00c9"
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 32170510,
+      "sha256": "4d777ef5bdc1aa36227abdfb77c3e49e7b9c892d16e1b6bda41c393504828be4",
+      "publisher_git_blob_sha1": "8562f6c9ab4b722ecf89bf869e734560e54d3b85"
+    },
+    {
+      "name": "README.md",
+      "bytes": 21347,
+      "sha256": "d6ecaff5970c61b5b253a8f1ef1cfbc4b8a6a89582708b67a9ad580ae241f42b",
+      "git_blob_sha1": "e2d97bd112725b51a83285c69037e8863166217d"
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "name": "config.json",
+      "bytes": 3077,
+      "sha256": "ffc45049b25de336c1a1fbcf1e0d33e22b4e27029ac6c6828796f526ea314f94",
+      "git_blob_sha1": "5b3aa3aee431df0669f6fdeb5cd600d0ffcaa148"
+    },
+    {
+      "name": "processor_config.json",
+      "bytes": 1788,
+      "sha256": "5bce6851e8be949925e1d2e9b9687738e5ef5dc4553927ccd38fdfb181dad732",
+      "git_blob_sha1": "4232217a956318483b70e59b188b104e40eeba24"
+    },
+    {
+      "name": "modules.json",
+      "bytes": 537,
+      "sha256": "6c6d5d37d92be385f64363f97b94d12e59ed4ee41858e0dd432fc19dd283fe00",
+      "git_blob_sha1": "6c655edbae07bbfa35999b6b0db1191f3126a063"
+    },
+    {
+      "name": "1_Pooling/config.json",
+      "bytes": 90,
+      "sha256": "8759bdf7c77efc7df7723f64856a593c8943b71ee38baf2a88771fbaf78438f9",
+      "git_blob_sha1": "2730fc1de168630e474c4066987f46d091de2189"
+    },
+    {
+      "name": "2_Normalize/config.json",
+      "bytes": 97,
+      "sha256": "cdb09dfca347a56aa2d691744e38d5ad3c7cbc2834e7181272b9a15328b82524",
+      "git_blob_sha1": "8babba92405167e8718211dc51f44fb117e423e4"
+    },
+    {
+      "name": "3_Dense/config.json",
+      "bytes": 225,
+      "sha256": "9a8e63111293722eaf7addb6c409ed4eb02a6dc1ef5ab8ef2e0b10c64e9884f5",
+      "git_blob_sha1": "28ac839031ae1f5aca2a852b0de6671f359fa342"
+    },
+    {
+      "name": "3_Dense/model.safetensors",
+      "bytes": 1690,
+      "sha256": "b09918c3838ef3b9dbd7057b0a8d382eced8fa06363ed62a5f60abe65cc65809",
+      "git_blob_sha1": "ececb176bec22ad50e0ff1d32e5ca1bb40ef462f"
+    },
+    {
+      "name": "config_sentence_transformers.json",
+      "bytes": 1326,
+      "sha256": "a4e4dc2e81bc436135b6318c96b3d937a82e96da066fa34ab9993dbe155bf2d2",
+      "git_blob_sha1": "a4d3f665058fd1e6dc3b4a9884578a00d7b23c22"
+    },
+    {
+      "name": "sentence_bert_config.json",
+      "bytes": 747,
+      "sha256": "b1bcd9f2dce3ae863b359e87d0710b5dbc3314a59ecb4e2f97c7778fc8e4b228",
+      "git_blob_sha1": "b3b98f8308641875fca1e4ddbfae5f38996bb54f"
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 1600,
+      "sha256": "fd4bc42eca490af2f3ab7e1e22cdef97a8c5a2354146d5700d5d55ecf70f1de5",
+      "git_blob_sha1": "e2c1beecc75964f716e57cfa799bdf2f23e18c78"
+    }
+  ],
+  "base_repository": "google/embeddinggemma-2",
+  "base_revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+  "weight_tensors": 624,
+  "serialized_values": 438760472,
+  "dtypes_by_values": {
+    "BF16": 438760472
+  },
+  "serialized_payload_contiguous_and_complete": true,
+  "publisher_python_executed": false,
+  "model_runtime_initialized": false,
+  "project_inference": false,
+  "app_environment_changed": false,
+  "serving_admitted": false
+}

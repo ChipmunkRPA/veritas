@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.image-smaug-research-environment/7",
+  "packages": [
+    {
+      "package": "transformers",
+      "version": "5.22.2",
+      "wheel_sha256": "829c2820aff91730b8ec45a4b8ff4be07f586a140b68a9073998b36fa35297dc",
+      "research_environment": true
+    },
+    {
+      "package": "sentence-transformers",
+      "version": "6.2.0",
+      "wheel_sha256": "ffb51ccfef65427cfa61776d0eeeb257600b0099cf0c7533ae9a6856d31e4665",
+      "research_environment": true
+    },
+    {
+      "package": "huggingface-hub",
+      "version": "1.32.0",
+      "wheel_sha256": "b0c7c80561969d9cdacdd55fce67ba9584cca0b9d4ea80957a3a5c1445fac5c8",
+      "research_environment": true
+    },
+    {
+      "package": "tokenizers",
+      "version": "0.23.1",
+      "wheel_sha256": "e0948bbb1ac1d7cdfc9fb6d62c596e3b7550036ad60ecd654a66ad273326324e",
+      "research_environment": true
+    }
+  ],
+  "shared_app_dependencies_referenced_read_only": true,
+  "new_packages_installed_in_app": false,
+  "main_transformers_version": "5.15.1",
+  "new_transformers_has_native_architecture_source": true,
+  "model_initialized": false,
+  "publisher_reference_module_imported": false,
+  "original_audio_implementation_files_unchanged": 79
+}

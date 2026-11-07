@@ -148,7 +148,9 @@ differences that changed no directional outcomes. Automated external-host
 reproduction is distinct from outside human review; no outside human has participated.
 The [two-source audio extraction](docs/audio-separation-v14-execution.md) stopped
 on a decoder failure before fitting. Its partial journal remains preserved and
-does not establish detection quality.
+does not establish detection quality. A [separately frozen full replication](docs/audio-v14-full-replication.md)
+is running from the first input with resource guards and private decoder-error
+capture; it has not yet produced a complete quality result.
 
 The [completed general-video study](docs/video-demamba-v13-result.md) rejected
 its candidate: all192 development cases were inconclusive after its own

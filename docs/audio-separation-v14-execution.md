@@ -132,3 +132,18 @@ and record its own execution lineage. Plan that work after the active video
 processing, with resource headroom and decoder diagnostics recorded explicitly.
 The reserved confirmation panel remains unscored and the serving model remains
 unchanged.
+
+## New full replication: in progress
+
+The [operational plan](audio-v14-full-replication.md), wrapper, error-evidence
+tests and [prospective freeze](evaluation-panels/audio-v14-full-replication-freeze.json)
+were published and remote-verified as
+`9bb7e0e2faf182ee8c49f131b6e9cbc7f2e72233` before the new extraction started.
+It uses a distinct journal, starts from input0 and retains all4,248 source roles.
+The full original method and79 implementation pins remain unchanged.
+
+The first100 new records reproduced the corresponding old semantic records
+exactly, excluding only elapsed runtime. This is an interim prefix check;
+it does not satisfy the required complete4,248-record run or all3,818 prior
+nonfailed correspondences. No fitting, calibration, quality comparison or
+fresh confirmation has started. The original failure remains preserved.

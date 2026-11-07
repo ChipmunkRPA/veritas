@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.video-rematerialization-native-pilot/18",
+  "implementation_sha256": "bb570630041cb47340c6e2260f0a66d70c172bd0dcabce1c5003d93c6d05662a",
+  "input_preparation_sha256": "bd26051c5d82eff24f3c15b9b63a1428f28be7f6ad4f6e180a738039ec4fc4bf",
+  "selection": "First hash-ordered fully virtual consumed group; no detector scores used",
+  "group_commitment": "003f67ac928b88b535f1a6d0cd191f684fddd1c221fe2522a6ddde37a1836407",
+  "role": "specialist_cal",
+  "source_clips": 4,
+  "all_input_bytes_and_native_pts_exact": true,
+  "input_sha256": [
+    "167cac4c01209f2a3539334dd6a1e99843111a3b451f487d8ed3896525fecfd3",
+    "191bde2b1d3048b1264a0526cd50fd3352b36fa17daf61dd3d3d52b4ae0f96e5",
+    "27e9ad76d870e6b3d78a1a016997d7ac65171634eafd577a6dc8c8a538726685",
+    "cd7e22355900ece00f5fa6eb8bb449e8b73e1a0834206f6bc7ad79267483f1e5"
+  ],
+  "pts_table_sha256": [
+    "25718b58102dd2ffc2cdf2723864f17cac44b50a0bf0197ca1563b6600aa287c",
+    "25718b58102dd2ffc2cdf2723864f17cac44b50a0bf0197ca1563b6600aa287c",
+    "25718b58102dd2ffc2cdf2723864f17cac44b50a0bf0197ca1563b6600aa287c",
+    "25718b58102dd2ffc2cdf2723864f17cac44b50a0bf0197ca1563b6600aa287c"
+  ],
+  "duration_s": 4.338432374992408,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Source reconstruction only. No detection result, calibration, fresh source or outside human review."
+}

@@ -62,6 +62,19 @@ were deleted only after byte/clock commitments were written; scoring must
 reconstruct them and verify those bytes/clocks again. Original research clips
 remain intact. No detector or calibration ran in this preparation.
 
+The scoring input adapter is now implemented in
+`backend/scripts/materialize_video_specialists_v18.py`. It checks the complete
+prepared inventory and connected-role assignments, reconstructs one private
+group at a time, and verifies its exact bytes, measured clock and edit boundary
+before yielding files to a future scorer. Successful temporary renderings are
+removed after the caller records evidence; failed attempts remain for inspection.
+Eight reconstruction guards passed. A real first-hash virtual-group pilot
+reproduced all four original prepared clips and native PTS commitments exactly
+in4.34seconds, with zero detector forwards. The
+[pilot receipt](evaluation-panels/video-specialists-v18-rematerialization-pilot.json)
+is source reconstruction evidence only. Actual scoring, calibration and
+improvement gates still need their own full frozen protocol and execution.
+
 The first waiting postprocessing coordinator used the frozen audio-only runner's
 allowlist for the future video job. That mismatch was caught before any child
 work started. The waiting coordinator was cancelled, with its original state,

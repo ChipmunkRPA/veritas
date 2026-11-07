@@ -79,6 +79,27 @@ def test_record_retains_native_triplets_and_nonzero_source_clock():
     assert [item["frame_index"] for item in value["frame_inputs"]][:3] == [1, 2, 3]
 
 
+def test_exact_measurements_survive_canonical_rounding_without_changing_decision():
+    import json
+
+    from app.core.canonical import canonical_json
+
+    source_table, value, source = sample()
+    value.update(response=-0.02720938716083765, inner_change=0.023972488939762115,
+                 outer_change=0.07032953202724457, flank_change=0.025669019669294357)
+    value['measurement_hex'] = {k: float(value[k]).hex() for k in ('response', 'inner_change', 'outer_change', 'flank_change')}
+    rounded = json.loads(canonical_json(value))
+    # This real retained scalar case exceeds the old1.1e-6 approximate check
+    # solely after independent six-decimal rounding of its four components.
+    assert abs(rounded['response']-(rounded['inner_change']-.6*rounded['outer_change']-.35*rounded['flank_change'])) > .0000011
+    validate_sequence_record(rounded, source, table_pts=source_table.pts, require_flag=False)
+    with pytest.raises(ValueError):
+        validate_sequence_record(rounded, source, table_pts=source_table.pts)
+    rounded['measurement_hex']['response'] = .5.hex()
+    with pytest.raises(ValueError, match='exact commitments'):
+        validate_sequence_record(rounded, source, table_pts=source_table.pts, require_flag=False)
+
+
 @pytest.mark.parametrize("damage", ["missing_neighbor", "wrong_pts", "interpolated", "wrong_range", "arithmetic", "nan",
                                     "bad_crop_hash", "bad_alignment", "unordered_centers", "misplaced_role", "frame_probability", "peak"])
 def test_inconsistent_evidence_is_rejected(damage):
@@ -171,6 +192,7 @@ def test_uncalibrated_review_response_has_zero_fusion_weight():
 def test_unflagged_windows_retain_assessed_coverage_without_a_negative_verdict():
     source_table, value, source = sample()
     value.update(inner_change=.001, response=.001-.60*.01-.35*.04)
+    value['measurement_hex'] = {k: float(value[k]).hex() for k in ('response', 'inner_change', 'outer_change', 'flank_change')}
     signal = {"id": DETECTOR+":global", "details": {"face_sequence_binding_version": SEQUENCE_METHOD,
                "face_sequence": None, "face_sequence_windows": [value]}, "status": "ok"}
     anchors = {item["frame_index"]: deepcopy(item) for item in value["frame_inputs"]}

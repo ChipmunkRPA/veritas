@@ -257,9 +257,13 @@ def _sequence_observations(result: dict, table: FrameTable, source: dict, anchor
     for signal in result.get("signals", []):
         details = signal.get("details") or {}
         record = details.get("face_sequence")
-        if signal.get("status", "ok") != "ok" or details.get("face_sequence_binding_version") != face_interval_binding.SEQUENCE_METHOD:
+        if signal.get("status", "ok") != "ok" or details.get("face_sequence_binding_version") not in face_interval_binding.SEQUENCE_METHODS:
             continue
+        if record is not None and record.get('method') != details['face_sequence_binding_version']:
+            raise PacketIntegrityError('Face review measurement method differs from its binding version')
         for window in details.get("face_sequence_windows", []):
+            if window.get('method') != details['face_sequence_binding_version']:
+                raise PacketIntegrityError('Face review coverage method differs from its binding version')
             face_interval_binding.validate_sequence_record(window, source, table_pts=table.pts,
                                                           interpolated=table.interpolated, require_flag=False)
             for item in window["frame_inputs"]:
@@ -338,7 +342,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
     window_frames |= sequence_frames
     sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
-                          and (signal.get("details") or {}).get("face_sequence_binding_version") == face_interval_binding.SEQUENCE_METHOD
+                          and (signal.get("details") or {}).get("face_sequence_binding_version") in face_interval_binding.SEQUENCE_METHODS
                           and ((signal.get("details") or {}).get("face_sequence_windows") or (signal.get("details") or {}).get("face_sequence")))
     face_candidates = [item for item in candidates if "face_interval" in item]
     existing = window_candidates + [item for item in candidates if "face_interval" not in item]
@@ -451,9 +455,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                            "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
         if sequence := candidate.get("face_sequence"):
             start, end = sequence["start_stream_s"], sequence["end_stream_s"]
-            packet.update(title="Face-change range to review", semantics=face_interval_binding.SEQUENCE_METHOD,
+            packet.update(title="Face-change range to review", semantics=sequence['method'],
                           face_sequence=sequence,
-                          observation=f"Inner-face appearance changed relative to both surrounding time groups from {start:.3f} to {end:.3f} s.",
+                          observation=f"Face appearance changed relative to both surrounding time groups from {start:.3f} to {end:.3f} s.",
                           interpretation="This pattern supports reviewing a possible face edit. Head motion, expression, lighting and compression can also cause it. The displayed frames show before, during and after context; none has an individual AI confidence score.",
                           measurements=[{"label": "Face-sequence change", "value": sequence["response"], "unit": "uncalibrated feature distance"},
                                         {"label": "Input frames in this window", "value": len(sequence["frame_inputs"]), "unit": "frames"}],

@@ -53,6 +53,9 @@ def validate_packet(packet: dict, source: dict, *, table_pts: tuple[int, ...] | 
 
 SEQUENCE_METHOD = "face-sequence-change/1"
 SEQUENCE_REVIEW_POINT = 0.007326911389827726
+APPEARANCE_METHOD = "face-appearance-change/1"
+APPEARANCE_REVIEW_POINT = 0.11243900750879454
+SEQUENCE_METHODS = frozenset({SEQUENCE_METHOD, APPEARANCE_METHOD})
 
 
 def validate_sequence_record(record: dict, source: dict, *, table_pts=None, interpolated=(), require_flag=True) -> None:
@@ -60,7 +63,7 @@ def validate_sequence_record(record: dict, source: dict, *, table_pts=None, inte
     import math
     import re
 
-    if record.get("method") != SEQUENCE_METHOD or record.get("time_base") != source["time_base"]:
+    if record.get("method") not in SEQUENCE_METHODS or record.get("time_base") != source["time_base"]:
         raise ValueError("Face sequence has an invalid method or source clock")
     groups = record["centers"]
     before, during, after = (groups[role] for role in ("before", "during", "after"))
@@ -87,6 +90,7 @@ def validate_sequence_record(record: dict, source: dict, *, table_pts=None, inte
         landmarks = item["landmarks"]
         if (not all(re.fullmatch(r"[a-f0-9]{64}", str(item.get(key, ""))) for key in ("decoded_rgb_sha256", "aligned_rgb_sha256"))
                 or item.get("aligned_size") != 112 or type(item.get("alignment_side")) is not int or item["alignment_side"] <= 0
+                or (record['method'] == APPEARANCE_METHOD and item['alignment_side'] != 112)
                 or len(matrix) != 2 or any(len(row) != 3 for row in matrix)
                 or len(exact_matrix) != 2 or any(len(row) != 3 for row in exact_matrix)
                 or any(not math.isfinite(exact) or abs(exact-approx) > .000001
@@ -109,12 +113,28 @@ def validate_sequence_record(record: dict, source: dict, *, table_pts=None, inte
             or abs(record["start_stream_s"]-float(a*base)) > 1e-6
             or abs(record["end_stream_s"]-float(b*base)) > 1e-6):
         raise ValueError("Face sequence range differs from its measured core")
-    measures = [record[key] for key in ("response", "inner_change", "outer_change", "flank_change")]
+    appearance = record['method'] == APPEARANCE_METHOD
+    keys = (("response", "middle_to_before", "middle_to_after", "flank_change") if appearance else
+            ("response", "inner_change", "outer_change", "flank_change"))
+    measures = [record[key] for key in keys]
     if any(not isinstance(x, int | float) or isinstance(x, bool) or not math.isfinite(x) for x in measures):
         raise ValueError("Face sequence has a nonfinite response")
+    exact_commitments = appearance or 'measurement_hex' in record
+    if exact_commitments:
+        exact = [float.fromhex(record['measurement_hex'][key]) for key in keys]
+        if any(not math.isfinite(v) or abs(v - approx) > .000001 for v, approx in zip(exact, measures, strict=True)):
+            raise ValueError('Face appearance measurements lost their exact commitments')
+        measures = exact
+    if appearance:
+        response, left, right, flank = measures
+        if ((require_flag and response <= APPEARANCE_REVIEW_POINT)
+                or not all(-1e-12 <= v <= 2.000000000001 for v in (left, right, flank))
+                or abs(response - (min(left, right) - .35 * flank)) > 1e-12):
+            raise ValueError('Face appearance review response has inconsistent arithmetic')
+        return
     response, inner, outer, flank = measures
     if ((require_flag and response < SEQUENCE_REVIEW_POINT) or not all(-1e-5 <= value <= 2.00001 for value in (inner, outer, flank))
-            or abs(response-(inner-.60*outer-.35*flank)) > .0000011):
+            or abs(response-(inner-.60*outer-.35*flank)) > (1e-12 if exact_commitments else .0000011)):
         raise ValueError("Face sequence review response has inconsistent arithmetic")
 
 
@@ -122,9 +142,10 @@ def validate_sequence_packet(packet: dict, source: dict, *, table_pts=None, inte
     import math
 
     record = packet.get("face_sequence")
-    if record is None and packet.get("semantics") != SEQUENCE_METHOD:
+    if record is None and packet.get("semantics") not in SEQUENCE_METHODS:
         return
-    if (not isinstance(record, dict) or packet.get("semantics") != SEQUENCE_METHOD
+    if (not isinstance(record, dict) or packet.get("semantics") not in SEQUENCE_METHODS
+            or packet.get('semantics') != record.get('method')
             or packet.get("claim_scope") != "sampled_window" or packet.get("evidence_type") != "anomaly"):
         raise ValueError("Face sequence misrepresents its measurement scope")
     validate_sequence_record(record, source, table_pts=table_pts, interpolated=interpolated)

@@ -347,6 +347,18 @@ models:
     keep_warm: true
     load: {adapter_loader: "app.detectors.image.adapters.loaders:load_yunet"}
 
+  - id: opencv.sface.2021dec
+    source:
+      type: url
+      url: https://media.githubusercontent.com/media/opencv/opencv_zoo/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_recognition_sface/face_recognition_sface_2021dec.onnx
+      files:
+        - {path: face_recognition_sface_2021dec.onnx, sha256: 0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79, bytes: 38696353}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "opencv_zoo face_recognition_sface README explicitly licenses all directory files including ONNX under Apache-2.0; retained notice docs/third-party/opencv-sface-v15-Apache-2.0.txt"}
+    footprint: {params_m: 9.7, fp32_mb: 37, activation_mb_per_item: 64, estimated: true}
+    devices: {cpu: ok, mps: unsupported, cuda: unsupported}
+    load: {adapter_loader: "app.detectors.video.adapters.loaders:load_face_appearance"}
+    notes: ["Within-clip bounded appearance changes only; no named identity database or AI probability", "Native BGR uint8 aligned112 input; graph handles its own scaling"]
+
   - id: dfdc.effnet_b7_555
     source:
       type: url
@@ -1453,6 +1465,28 @@ detectors:
     fp_modes: ["Fresh genuine/control review flags remained 21/60; this is not a whole-file false-positive rate"]
     citation: "Oquab et al. DINOv2. TMLR (2024). Wu, Peng, Yu. YuNet. Machine Intelligence Research (2023). Local method and evaluation: docs/video-sequence-v6-evaluation.md."
     admission: {decision: pending, evidence: "Raw v6 localized 19/60 swaps vs 7/60 at the same 21/60 control review flags. Local evidence integration only; no confidence admission."}
+
+  - id: vid.review.face_appearance
+    adapter: app.detectors.video.adapters.face_appearance:FaceAppearanceReviewDetector
+    version: 0.1.0
+    name: "Face appearance transition review"
+    modality: video
+    family: face-sequence-review
+    hypotheses: []
+    models: [yunet.2023mar, dinov2.small, opencv.sface.2021dec]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["Uncalibrated time-window inspection cue; excluded from overall confidence", "Motion, expression, lighting, cuts and compression can resemble an edit", "Short bounded swaps only; full-clip swaps without original flanks, lip synchronization, long clips and other families remain unvalidated", "Current sequence fallback is retained on unavailable candidate context; shared legacy review flags remain high"]
+    source_url: https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_recognition_sface
+    threat: [face_swap]
+    training_data: "No task-specific head fitted. Upstream facial representation training provenance not fully established. Review point selected on60 consumed genuine clips before AI development."
+    coverage_date: "2026-11-07 source-disjoint local v17 confirmation"
+    input_constraints: ["Native aligned112 BGR input, float32 128-value output normalized in float64", "At most64 centers; three consecutive native frames per center", "Same tracked windows as v16: two flanks per side, at least three core centers, core0.52-2.6 seconds, center gaps at most0.55 seconds"]
+    contamination_sets: [RTFS-10K, "upstream face identities unknown"]
+    fp_modes: ["Fresh combined genuine/control review flags26/60, all from shared fallback; not a whole-file false-positive rate"]
+    citation: "OpenCV Zoo SFace model and Apache-2.0 directory notice. Frozen method/native contracts and development/confirmation: docs/video-v16-sface-development-evaluation.md and docs/video-v17-sface-confirmation-evaluation.md."
+    admission: {decision: pending, evidence: "Fresh unchanged combined method located60/60 vs25/60 at the same26/60 genuine flags; new cue supplied58 edit ranges and declared current fallback two. Local inspection integration only; no AI confidence admission."}
 
   - id: vid.swap.gend_clip_l14
     adapter: app.detectors.video.adapters.swap:GenDTrackDetector

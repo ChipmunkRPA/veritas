@@ -5,6 +5,16 @@ from __future__ import annotations
 from app.detectors.image.adapters.loaders import LoadedModel, _entry, _file, _revision
 
 
+def load_face_appearance(model_id: str, device: str, dtype: str) -> LoadedModel:
+    """Qualified native BGR112 contract, pinned Apache-2.0 OpenCV model; CPU only."""
+    import cv2
+
+    entry = _entry(model_id)
+    recognizer = cv2.FaceRecognizerSF.create(str(_file(entry)), '',
+        cv2.dnn.DNN_BACKEND_OPENCV, cv2.dnn.DNN_TARGET_CPU)
+    return LoadedModel(recognizer, _revision(entry))
+
+
 def load_audio_classifier(model_id: str, device: str, dtype: str) -> LoadedModel:
     from transformers import AutoFeatureExtractor, AutoModelForAudioClassification
 

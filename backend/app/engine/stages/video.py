@@ -53,6 +53,7 @@ from app.detectors.video.adapters import lipsync_xcorr as xcorr_lane
 from app.detectors.video.adapters import swap as swap_lane
 from app.detectors.video.adapters.codec import CodecInputs
 from app.detectors.video.adapters.common import AudioTrack, SampledFrame
+from app.detectors.video.adapters.face_appearance import DETECTOR as APPEARANCE_REVIEW
 from app.detectors.video.adapters.face_sequence import DETECTOR as SEQUENCE_REVIEW
 from app.detectors.video.adapters.face_sequence import FAMILY as SEQUENCE_FAMILY
 from app.detectors.video.adapters.face_sequence import SequenceInputs
@@ -340,7 +341,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),
                                audio_failure=audio_failure)
-    if SEQUENCE_REVIEW not in ctx.state["registry"].enabled(Modality.VIDEO, ctx.profile):
+    if not {SEQUENCE_REVIEW, APPEARANCE_REVIEW}.intersection(ctx.state["registry"].enabled(Modality.VIDEO, ctx.profile)):
         return out
     store = ctx.state.get("frame_store")
     sampled = ctx.state.get("frames") or []
@@ -548,7 +549,7 @@ SYNTHESIS_DETECTORS = {"vid.synth.d3_xclip": "temporal", "vid.synth.frames.commf
 
 
 AUDIO_INSPECTION_DETECTORS = {"aud.pella_v2": "model"}
-REVIEW_DETECTORS = {SEQUENCE_REVIEW: "temporal"}
+REVIEW_DETECTORS = {SEQUENCE_REVIEW: "temporal", APPEARANCE_REVIEW: "temporal"}
 
 
 def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
@@ -869,14 +870,14 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
     out = common.synthesise_findings(ctx, kind="video", entry_stages=ENTRY_STAGES, exhibit_stages=EXHIBIT_STAGES,
                                      family_by_v1_id=FINDING_FAMILY)
     for signal in (ctx.outputs.get("fuse") or {}).get("signals", []):
-        if signal.get("detector_id") != SEQUENCE_REVIEW or signal.get("status", "ok") != "ok":
+        if signal.get("detector_id") not in REVIEW_DETECTORS or signal.get("status", "ok") != "ok":
             continue
         sequence = (signal.get("details") or {}).get("face_sequence")
         for finding in out["findings"]:
             if signal["id"] not in finding["evidence_ids"]:
                 continue
             first = (f"Review a possible face edit from {sequence['start_stream_s']:.3f} to {sequence['end_stream_s']:.3f} s: "
-                     "the inner-face appearance changed relative to both surrounding time groups."
+                     "the face appearance changed relative to both surrounding time groups."
                      if sequence else "The sampled face sequences supplied no additional change range to review. This does not establish an original file.")
             second = "Motion, expression, lighting and compression may cause similar changes. This inspection cue has no calibrated AI probability and does not change overall confidence."
             finding.update(title="Possible face-change range" if sequence else "No additional face-change range",

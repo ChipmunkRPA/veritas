@@ -202,9 +202,10 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
-        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding'):
+        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.face_interval_binding', 'app.evidence.sound_event_binding'):
             return None
-        if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api')):
+        if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
+                                'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):
             raise RuntimeError('Offline verification imported runtime: ' + fullname)
 sys.meta_path.insert(0, RuntimeUnavailable())
 def no_network(*args, **kwargs):
@@ -219,6 +220,21 @@ sys.exit(0 if result.ok else 1)
     assert offline.returncode == 0, offline.stdout + offline.stderr
     assert json.loads(offline.stdout)["result"] == "verified"
     assert leaked == [], f"Public derivative exposes internal check identities: {leaked}"
+
+
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py'])
+def test_new_offline_binding_helpers_remain_standard_library_only(name):
+    import ast
+
+    path = Path(__file__).parents[1] / 'app/evidence' / name
+    imports = set()
+    for node in ast.walk(ast.parse(path.read_text())):
+        if isinstance(node, ast.Import):
+            imports.update(n.name.split('.')[0] for n in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            assert node.level == 0
+            imports.add(node.module.split('.')[0])
+    assert imports <= sys.stdlib_module_names
 
 
 @pytest.fixture

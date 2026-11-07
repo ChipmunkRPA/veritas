@@ -118,7 +118,8 @@ class DetectorRegistry:
         if detector_id in policy.deny_detectors:
             reasons.append("listed in deny_detectors")
         allow_listed = detector_id in policy.allow_detectors
-        sequence_review = detector_id == "vid.review.face_sequence" and settings.video_face_review_mode == "sequence"
+        sequence_review = (detector_id == "vid.review.face_sequence" and settings.video_face_review_mode == "sequence"
+                           or detector_id == "vid.review.face_appearance" and settings.video_face_review_mode == "appearance")
         for model_id in self.required_models(det):
             model = self.manifest.model(model_id)
             if model is None:

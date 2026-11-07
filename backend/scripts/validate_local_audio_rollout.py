@@ -5,18 +5,19 @@ HTTP transport is doubled; the payment gate, signed webhook, queue, models,
 calibration, evidence and report pipeline are production code. No real charge.
 """
 from __future__ import annotations
+
 import argparse
 import copy
 import hashlib
 import hmac
 import json
 import os
-from pathlib import Path
 import secrets
 import subprocess
 import sys
 import time
 import uuid
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT/'backend'), str(Path(__file__).parent)]
@@ -33,6 +34,7 @@ def main():
     parser.add_argument('--models-dir', type=Path, default=ROOT/'models')
     parser.add_argument('--research-dir', type=Path, default=ROOT/'backend/data/independent-evaluation/audio-v3')
     parser.add_argument('--require-face-sequence', action='store_true', help='Fail unless the video produces a source-bound face-sequence review packet')
+    parser.add_argument('--require-face-appearance', action='store_true', help='Verify the qualified appearance method, with source-bound before/during/after evidence')
     args = parser.parse_args()
     if args.video_control is not None and args.mode != 'candidate':
         parser.error('--video-control requires --mode candidate')
@@ -50,18 +52,22 @@ def main():
         VERITAS_API_KEY_PEPPER=secrets.token_hex(32), VERITAS_SIGNING_KEY=secrets.token_hex(32),
         VERITAS_SINGLE_USER='false', VERITAS_DEVICE=args.device, VERITAS_OFFLINE='true',
         VERITAS_JOB_TIMEOUT_S='900', VERITAS_MIN_FREE_BYTES='0', VERITAS_RUN_WORKER='true')
+    if args.require_face_appearance:
+        os.environ['VERITAS_VIDEO_FACE_REVIEW_MODE'] = 'appearance'
     import torch
     torch.set_num_threads(4)
     torch.set_num_interop_threads(1)
     torch.manual_seed(0)
     from fastapi.testclient import TestClient
-    from app.main import app
+    from verify_multimedia_exports import run as exports
+    from verify_multimedia_exports import scan
+
     from app.api import auth
     from app.billing import purchase_notice, service
+    from app.detectors.audio.calibration import SHA256
+    from app.main import app
     from app.storage.db import Analysis, Job, get_session
     from app.storage.objects import default_store
-    from app.detectors.audio.calibration import SHA256
-    from verify_multimedia_exports import run as exports, scan
     remote = {}
 
     def provider(method, path, *, data=None, params=None, idempotency_key=None):
@@ -109,7 +115,8 @@ def main():
     with TestClient(app) as client:
         with get_session() as db:
             owner = auth.new_principal('rollout-validation', 'examiner')
-            db.add(owner); db.flush()
+            db.add(owner)
+            db.flush()
             key, _ = auth.issue_api_key(db, owner)
             db.commit()
         client.headers['X-API-Key'] = key
@@ -136,11 +143,13 @@ def main():
             remote[sid].update(payment_status='paid', status='complete')
             event = {'id': 'evt_test_' + oid.replace('-', ''), 'type': 'checkout.session.completed', 'livemode': False,
                      'data': {'object': {'id': sid}}}
-            payload = json.dumps(event, separators=(',', ':')).encode(); stamp = str(int(time.time()))
+            payload = json.dumps(event, separators=(',', ':')).encode()
+            stamp = str(int(time.time()))
             sig = hmac.new(b'whsec_isolated_validation', stamp.encode()+b'.'+payload, hashlib.sha256).hexdigest()
             paid = client.post('/api/v2/billing/webhook', content=payload, headers={'Stripe-Signature': f't={stamp},v1={sig}'})
             assert paid.status_code == 200, paid.text
-            order = client.get(f'/api/v2/billing/orders/{oid}').json(); aid = order['analysis_id']
+            order = client.get(f'/api/v2/billing/orders/{oid}').json()
+            aid = order['analysis_id']
             print(json.dumps({'case': case['name'], 'analysis_id': aid, 'stage': 'paid_and_queued'}), flush=True)
             until = time.monotonic()+950
             while True:
@@ -179,14 +188,20 @@ def main():
                 assert any(s['detector_id'] == 'aud.gustking_xlsr' for s in signals)
                 assert result['decision']['fuser_sha256'] != SHA256
                 assert screen is None
-            detail = client.get(f'/api/v2/analyses/{aid}'); detail.raise_for_status(); scan(detail.text)
-            case_folder = folder/case['name']; case_folder.mkdir()
+            detail = client.get(f'/api/v2/analyses/{aid}')
+            detail.raise_for_status()
+            scan(detail.text)
+            case_folder = folder/case['name']
+            case_folder.mkdir()
             (case_folder/'api.json').write_bytes(detail.content)
             # Complete export, evidence asset/range, PDF, signature and package correspondence.
             check = exports(client, aid, case_folder, default_store(), public_key)
-            if args.require_face_sequence:
-                review = next(s for s in signals if s['detector_id'] == 'vid.review.face_sequence')
+            if args.require_face_sequence or args.require_face_appearance:
+                expected_detector = 'vid.review.face_appearance' if args.require_face_appearance else 'vid.review.face_sequence'
+                review = next(s for s in signals if s['detector_id'] == expected_detector)
                 assert review['status'] == 'ok' and review['details']['face_sequence']
+                if args.require_face_appearance:
+                    assert review['details']['face_sequence']['method'] == 'face-appearance-change/1'
                 assert review['effective_weight'] == 0 and review['calibrated_probability'] is None
                 assert review.get('contribution_logit') is None and review.get('contribution_pp') is None
                 evidence = json.loads((case_folder/'evidence.json').read_bytes())

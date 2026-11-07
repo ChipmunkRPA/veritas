@@ -47,6 +47,7 @@ def record(window: dict, table: FrameTable, inputs: dict[int, dict]) -> dict:
             "start_stream_s": window["start_s"], "end_stream_s": window["end_s"],
             "response": window["response"], "inner_change": window["inner_change"],
             "outer_change": window["outer_change"], "flank_change": window["flank_change"],
+            "measurement_hex": {key: float(window[key]).hex() for key in ("response", "inner_change", "outer_change", "flank_change")},
             "centers": roles, "frame_inputs": [inputs[i] for i in indices]}
 
 
@@ -108,7 +109,7 @@ class FaceSequenceReviewDetector(Detector):
             return DetectorResult.not_applicable("no source-bound sequence has sufficient unambiguous tracked face context")
         highest = windows[0]
         selected = record(highest, table, bindings) if highest["response"] >= REVIEW_POINT else None
-        sid = f"{DETECTOR}:global"
+        sid = f"{self.spec.id}:global"
         exhibit = ctx.exhibits.series([{"name": "sequence_change", "points": [
             ((w["start_s"]+w["end_s"])/2, w["response"]) for w in windows]}], x_unit="s",
             title="Face-sequence change measurements", media_ref="frame", source_signal_ids=[sid],

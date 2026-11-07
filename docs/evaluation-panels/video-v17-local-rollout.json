@@ -1,0 +1,137 @@
+{
+  "schema": "chipmunk.face-appearance-local-integration/17",
+  "passed": true,
+  "fresh_confirmation_commit": "f2e12a2bfbf60d546ca75d4848e2d9f4b4298a52",
+  "source_sha256": {
+    "backend/app/detectors/video/face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "backend/app/detectors/video/adapters/face_appearance.py": "ee93228af740474a0025c59ebfca955b4eb4806e8ba93977f9b2cc6975bfe32d",
+    "backend/app/detectors/video/adapters/face_sequence.py": "f03b51a79af5fb904e57dbe4e5fff796fde1000d82116345994140eb7c3f9d81",
+    "backend/app/evidence/face_interval_binding.py": "f5bceaf615f91a79367a89d829e2372f5d4f6e9ac1e78ba4a8fb369dd67c32e2",
+    "backend/app/evidence/video_packets.py": "11c013ecc3a8b9e027c7449ae8c48fce48899ebbe0843c553c09870adb900c8f",
+    "backend/app/models.yaml": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+    "backend/app/engine/stages/video.py": "5e1bd7a15d55fde46cda0abf822f6dc1e2d0d1b5792e98ff1dd89bee867261a5",
+    "backend/app/engine/registry.py": "b4f732b805a5453981465dfe2d070af4d337ca0bd1634cd58d708fbcfd68d2e8"
+  },
+  "production_parity": {
+    "complete": true,
+    "cases": 120,
+    "direct_appearance_ranges": 58,
+    "fallback_cases": 4,
+    "no_window_cases": 4,
+    "canonical_records_verified": 1392,
+    "native_frame_bindings_verified": 46023,
+    "retained_windows_verified": 1392,
+    "max_component_difference": 0.0,
+    "source_image_or_face_vector_exported": false,
+    "fresh_quality_reestimated": false
+  },
+  "original_parity_launcher_sha256": "7011a75e325e5b39e2c2d2d81ada9511192a162bb794ba37d531dc2ba32088ea",
+  "only_unused_import_removed_from_original_launcher": true,
+  "retained_private_parity_journal_sha256": "cccd0c63319828af25e0c254790ccf532ad96ac1591dac8f642185b78e38ada4",
+  "full_paid_flows": {
+    "swap": {
+      "payment_before_analysis": true,
+      "source_sha256": "2c7ed0688be0f5a45c20ca2841c4b95e5105fa571aae193ed268a36041043495",
+      "decision": "inconclusive",
+      "public_direction": "unavailable",
+      "public_headline": "Inconclusive: this input is outside the verified scope",
+      "assets": 17,
+      "pdf_pages": 31,
+      "exports_and_assets_verified": true,
+      "model_names_hidden": true,
+      "review_weight_zero": true,
+      "review_probability_unassigned": true,
+      "appearance_range": {
+        "method": "face-appearance-change/1",
+        "start_stream_s": 2.583333,
+        "end_stream_s": 3.875,
+        "response": 0.487082
+      }
+    },
+    "genuine": {
+      "payment_before_analysis": true,
+      "source_sha256": "8caba6f5fb8230c94d1e6ae73138b8c4c339876872c2ca0ab6ad4eb2441c71fa",
+      "decision": "inconclusive",
+      "public_direction": "unavailable",
+      "public_headline": "Inconclusive: this input is outside the verified scope",
+      "assets": 6,
+      "pdf_pages": 29,
+      "exports_and_assets_verified": true,
+      "model_names_hidden": true,
+      "review_weight_zero": true,
+      "review_probability_unassigned": true,
+      "appearance_range": null
+    },
+    "rollback-v2": {
+      "payment_before_analysis": true,
+      "source_sha256": "2c7ed0688be0f5a45c20ca2841c4b95e5105fa571aae193ed268a36041043495",
+      "decision": "inconclusive",
+      "public_direction": "unavailable",
+      "public_headline": "Inconclusive: this input is outside the verified scope",
+      "assets": 6,
+      "pdf_pages": 29,
+      "exports_and_assets_verified": true,
+      "model_names_hidden": true,
+      "review_weight_zero": true,
+      "review_probability_unassigned": true,
+      "appearance_range": null
+    }
+  },
+  "same_file_overall_decision_and_recorded_score_identical": true,
+  "browser": {
+    "passed": true,
+    "real_retained_paid_analysis": true,
+    "source_roles_and_seek": [
+      {
+        "role": "before",
+        "frame_index": 55,
+        "source_s": 2.291667,
+        "player_s": 2.291667
+      },
+      {
+        "role": "during",
+        "frame_index": 80,
+        "source_s": 3.333333,
+        "player_s": 3.333333
+      },
+      {
+        "role": "after",
+        "frame_index": 99,
+        "source_s": 4.125,
+        "player_s": 4.125
+      }
+    ],
+    "context_clip_seek_s": 3.333333,
+    "all_evidence_images_loaded": {
+      "count": 6,
+      "loaded": 6
+    },
+    "desktop_and_mobile_verified": true,
+    "mobile_document_has_no_horizontal_overflow": true,
+    "model_names_hidden": true,
+    "consumer_review_controls_absent": true,
+    "console_errors": []
+  },
+  "regressions": {
+    "customer_access_billing_reports_packages": 217,
+    "later_exact_commitments_and_evidence": 108,
+    "selected_frontend": 29,
+    "suites_overlap": true
+  },
+  "initial_failures_retained": {
+    "offline_guard_cases": 6,
+    "rollback_serialization": 1
+  },
+  "pdf_layout_visually_reviewed": true,
+  "raw_faces_or_biometric_vectors_published": false,
+  "real_stripe_charge": false,
+  "local_default_changed": false,
+  "scope": "Qualified local integration; real worker/export/browser paths on retained research fixtures, Stripe transport doubled. Technical source/range/aggregate evidence only. Activation follows separately; no overall confidence calibration or outside human review.",
+  "nonsemantic_cleanup": {
+    "file": "backend/app/detectors/video/face_appearance.py",
+    "original_parity_math_sha256": "12008041ab65f49e1f813225ff20ae8be0713b030d4f26e86fc22afacb8fafd6",
+    "published_math_sha256": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "only_trailing_blank_line_removed": true,
+    "ast_identical": true
+  }
+}

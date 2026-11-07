@@ -1,0 +1,11 @@
+{
+  "schema": "chipmunk.patch-drift-launch-observation-failure/8",
+  "stage": "profile-calibration",
+  "parent_exception": "PermissionError: sysctl process enumeration not permitted",
+  "project_prediction_records": 0,
+  "calibration_output_directory_created": false,
+  "worker_live_on_explicit_process_check": false,
+  "code_or_data_changed": false,
+  "replacement_attempt": "image-v8-patch-drift-attempt2",
+  "reason": "Explicit clean attempt with process-monitoring access; not detection-result-based retry."
+}

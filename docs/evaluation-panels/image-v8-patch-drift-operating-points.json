@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.patch-drift-operating-points/8",
+  "freeze_sha256": "9229bc0afd16c4e8ff35a11602ad01bd6e022e54e59fe6b59e99b25b588ea8d3",
+  "calibration_predictions_sha256": "2e820d929cac56ad258c18f4bfc0b51fd2d2b1b1dbfac99b4dbbd3d2746bb443",
+  "points": {
+    "native": {
+      "raw": 0.0758519172668457,
+      "within_image": 40.344932556152344
+    },
+    "jpeg75": {
+      "raw": 0.07012814283370972,
+      "within_image": 37.21767807006836
+    }
+  },
+  "genuine_maxima_above_point": {
+    "native": {
+      "raw": 1,
+      "within_image": 1
+    },
+    "jpeg75": {
+      "raw": 1,
+      "within_image": 1
+    }
+  },
+  "passed": true,
+  "edited_images_used": 0,
+  "not_ai_probabilities": true
+}

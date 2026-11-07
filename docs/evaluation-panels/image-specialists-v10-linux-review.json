@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.image-specialists-actual-linux-review/10",
+  "workflow_run_id": 42403632633,
+  "workflow_job_id": 128496546379,
+  "head_sha": "cec30a043d098a64fed66258dc29b485f4edaa93",
+  "workflow_conclusion": "success",
+  "job_conclusion": "success",
+  "source": "Decoded actual GitHub Actions job log",
+  "actual_result": {
+    "schema": "chipmunk.specialist-real-scalar-reproduction/3",
+    "study": "image-specialists-v10",
+    "modality": "image",
+    "arms": 4,
+    "probabilities_compared": 3840,
+    "max_absolute_probability_difference": 3.3306690738754696e-16,
+    "absolute_probability_limit": 0.000001,
+    "confirmation_not_fitted": true,
+    "missing_required_check_withheld": true,
+    "cross_role_lineage_refused": true,
+    "new_neural_forwards": 0,
+    "raw_media_or_weights_loaded": false,
+    "serving_admitted": false,
+    "scope": "Real retained-scalar numerical replay only; not native inference, fresh source quality, training-overlap exclusion or outside human review."
+  }
+}

@@ -67,7 +67,11 @@ probabilities exactly, including source coordinates and status bindings. Three
 adverse checks preserved confirmation isolation, refused cross-role lineage and
 withheld a combined score for a skipped required check. A separate Linux workflow
 repeats scalar fitting only; it does not run the model or independently examine
-source truth. Its actual receipt is recorded separately once observed.
+source truth. The [actual Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42403632633)
+passed: all 3,840 probabilities agreed within the unchanged 1e-6 limit, with a
+maximum difference of 3.3306690738754696e-16. All three adverse invariants passed.
+The [decoded job receipt](evaluation-panels/image-specialists-v10-linux-review.json)
+records that outcome, which is not an outside human review.
 
 ## Reproduction and limits
 

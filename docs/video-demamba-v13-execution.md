@@ -5,6 +5,11 @@ The complete [protocol](video-demamba-v13-protocol.md) and
 comparison before any project recording is scored. This is a consumed-source
 development study, not fresh confirmation or a production model replacement.
 
+**Completed result:** the full guarded baseline and comparison now exist.
+The candidate failed six quality requirements and four native RGB cases;
+it remains rejected. See the [complete result and public replay](video-demamba-v13-result.md).
+The interrupted attempts below remain historical execution records.
+
 The lock retains all 288 planned inputs: 284 available and four already
 unavailable, with 96 calibration and 192 development variants. It pins 360
 project implementations, eleven critical installed files/binaries, complete

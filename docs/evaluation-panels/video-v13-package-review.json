@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.video-public-packet-review/13",
+  "passed": true,
+  "packet_sha256": "694d537982f98b25c7695e2ec66e0a19e4a0935691c8e76a407e544502969472",
+  "expanded_sha256": "d23742c4e5c50be92ffac72ff3581b55f202a3384de562aac8b8319422e1d724",
+  "compressed_bytes": 645819,
+  "expanded_bytes": 3912990,
+  "exact_members": 9,
+  "blocked_imports": [
+    "app",
+    "torch",
+    "transformers",
+    "cv2",
+    "scipy",
+    "sklearn",
+    "scripts.run_video_demamba_v13"
+  ],
+  "actual_packet_alterations": [
+    {
+      "alteration": "omitted",
+      "rejected": true
+    },
+    {
+      "alteration": "changed_bytes",
+      "rejected": true
+    },
+    {
+      "alteration": "path_traversal",
+      "rejected": true
+    },
+    {
+      "alteration": "false_completion",
+      "rejected": true
+    }
+  ],
+  "arithmetic_tests_passed": 14,
+  "native_cases_passed": 12,
+  "native_cases_failed": 4,
+  "native_failures_preserved": true,
+  "serving_admitted": false,
+  "outside_human_reviewers": 0
+}

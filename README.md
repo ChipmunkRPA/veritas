@@ -150,11 +150,12 @@ The [two-source audio extraction](docs/audio-separation-v14-execution.md) stoppe
 on a decoder failure before fitting. Its partial journal remains preserved and
 does not establish detection quality.
 
-The [general-video temporal study](docs/video-demamba-v13-execution.md) completed
-its candidate run but lost the baseline process before a complete comparison.
-A [separate sequential replication](docs/video-v13-sequential-replication.md)
-keeps the original method and quality requirements, preserves the interrupted
-journal, and adds resource and prior-result correspondence guards.
+The [completed general-video study](docs/video-demamba-v13-result.md) rejected
+its candidate: all192 development cases were inconclusive after its own
+calibration. A complete guarded baseline repeated all84 earlier responses
+exactly; both interrupted attempts remain preserved. Lossless public responses
+support a separate NumPy-only arithmetic review. Four of16 independent native
+RGB checks failed and remain explicit; no serving check was replaced.
 The completed [small nonlinear mouth-window experiment](docs/mouth-temporal-v12-evaluation.md)
 located26/32 edits versus14/32 for its retained reference, but flagged12/56
 ordinary clips versus0/56. It was rejected under the frozen false-flag rules;

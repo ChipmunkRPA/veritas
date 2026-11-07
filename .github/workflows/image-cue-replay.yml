@@ -1,0 +1,58 @@
+name: Image cue scalar-response review
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/image-cue-replay.yml
+      - backend/scripts/reproduce_image_cues_v7.py
+      - docs/evaluation-panels/image-v7-cue-responses.json
+      - docs/evaluation-panels/image-v7-cue-release.json
+
+permissions:
+  contents: read
+
+jobs:
+  scalar-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: backend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.6"
+      - name: Verify reviewed source and response packet bytes
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, json, pathlib
+          release = json.loads(pathlib.Path('docs/evaluation-panels/image-v7-cue-release.json').read_text())
+          for name, expected in release['files_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
+          for name in ('torch', 'transformers', 'fastapi', 'numpy', 'PIL'):
+              assert importlib.util.find_spec(name) is None, name
+          print('Exact reviewed scalar packet and source hashes; standard library only.')
+          PY
+      - name: Recompute source bindings and all directional counts
+        run: |
+          python -m scripts.reproduce_image_cues_v7 review \
+            docs/evaluation-panels/image-v7-cue-responses.json "$RUNNER_TEMP/image-cue-review.json" \
+            --panel docs/evaluation-panels/image-v7-smaug-development-panel.json
+      - name: Refuse changed inputs, labels, roles, scores and advancement claims
+        run: |
+          python -m scripts.reproduce_image_cues_v7 tamper \
+            docs/evaluation-panels/image-v7-cue-responses.json "$RUNNER_TEMP/image-cue-tamper.json" \
+            --panel docs/evaluation-panels/image-v7-smaug-development-panel.json
+      - name: Show receipts or explicit incomplete status
+        if: always()
+        run: |
+          for name in image-cue-review image-cue-tamper; do
+            if [ -f "$RUNNER_TEMP/$name.json" ]; then
+              cat "$RUNNER_TEMP/$name.json"
+            else
+              echo "No completed $name receipt; inspect the failed step."
+            fi
+          done

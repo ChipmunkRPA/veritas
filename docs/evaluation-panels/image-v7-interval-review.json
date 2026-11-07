@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "intervals_compared_exact": 4,
+  "replicates_each": 2000,
+  "seed": 20261107,
+  "numpy": "2.2.6",
+  "packet_sha256": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564",
+  "values": {
+    "native:ai_gain_interval": {
+      "planned_inputs": 44,
+      "source_components": 44,
+      "paired_rate_difference": 0.13636363636363635,
+      "component_bootstrap_95_percentile": [
+        0.045454545454545456,
+        0.25
+      ]
+    },
+    "native:false_alarm_change_interval": {
+      "planned_inputs": 44,
+      "source_components": 44,
+      "paired_rate_difference": 0.0,
+      "component_bootstrap_95_percentile": [
+        0.0,
+        0.0
+      ]
+    },
+    "jpeg75:ai_gain_interval": {
+      "planned_inputs": 44,
+      "source_components": 44,
+      "paired_rate_difference": 0.045454545454545456,
+      "component_bootstrap_95_percentile": [
+        0.0,
+        0.11363636363636363
+      ]
+    },
+    "jpeg75:false_alarm_change_interval": {
+      "planned_inputs": 44,
+      "source_components": 44,
+      "paired_rate_difference": 0.0,
+      "component_bootstrap_95_percentile": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "scope": "Separate NumPy count-weighted implementation of the declared paired component bootstrap. No pretrained inference, source pixel audit or outside human review."
+}

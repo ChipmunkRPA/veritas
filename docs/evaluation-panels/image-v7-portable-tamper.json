@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "mutations": [
+    {
+      "mutation": "missing",
+      "rejected": true,
+      "reason": "Exact unique planned input count required"
+    },
+    {
+      "mutation": "duplicate",
+      "rejected": true,
+      "reason": "Exact unique planned input count required"
+    },
+    {
+      "mutation": "unknown_id",
+      "rejected": true,
+      "reason": "Planned source IDs differ from original public freeze"
+    },
+    {
+      "mutation": "role",
+      "rejected": true,
+      "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+    },
+    {
+      "mutation": "truth",
+      "rejected": true,
+      "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+    },
+    {
+      "mutation": "input_hash",
+      "rejected": true,
+      "reason": "Input bytes, source group, truth label or role differs from original public freeze"
+    },
+    {
+      "mutation": "nonfinite",
+      "rejected": true,
+      "reason": "Three finite crop logits and mean required"
+    },
+    {
+      "mutation": "crop_mean",
+      "rejected": true,
+      "reason": "Neural outer logit reduction mismatch"
+    },
+    {
+      "mutation": "sigmoid",
+      "rejected": true,
+      "reason": "Raw sigmoid reduction mismatch"
+    },
+    {
+      "mutation": "relaxed_gate",
+      "rejected": true,
+      "reason": "Recorded point differs from genuine-only maximum"
+    },
+    {
+      "mutation": "failed_calibration",
+      "rejected": true,
+      "reason": "Genuine-only complete operating-point set required"
+    },
+    {
+      "mutation": "failed_development",
+      "rejected": true,
+      "reason": "Independent development accounting differs"
+    },
+    {
+      "mutation": "changed_direction",
+      "rejected": true,
+      "reason": "Independent development accounting differs"
+    },
+    {
+      "mutation": "forced_advance",
+      "rejected": true,
+      "reason": "Independent advancement requirements differ"
+    }
+  ],
+  "scope": "Deliberate changes to the actual public scalar response packet; no pretrained inference or source pixels are tested.",
+  "packet_sha256": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564"
+}

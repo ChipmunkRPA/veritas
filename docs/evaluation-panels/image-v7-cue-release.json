@@ -1,0 +1,13 @@
+{
+  "schema": "chipmunk.public-image-cue-release/7",
+  "files_sha256": {
+    "backend/scripts/reproduce_image_cues_v7.py": "368b40cc7bd1c661342ad23de12dd496b16a474a8d0523b107a890c06b3ae89d",
+    "backend/scripts/review_image_cue_intervals_v7.py": "9c1ea58bbea50c396980c1adcfe10fea5eeb5307f0db080ac9a852efe3425fba",
+    "docs/evaluation-panels/image-v7-cue-responses.json": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564",
+    "docs/evaluation-panels/image-v7-smaug-development-panel.json": "cb0220479eeac876bbfdc41413a2abcd48fa7264de99cb2156beb7148672c193"
+  },
+  "metadata_and_scalar_responses_only": true,
+  "no_raw_images_or_face_embeddings": true,
+  "no_customer_uploads_or_model_weights": true,
+  "scope": "Source-bound scalar arithmetic reproduction; not fresh detection validation, neural inference replay or outside human review."
+}

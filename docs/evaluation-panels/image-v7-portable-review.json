@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "inputs": 224,
+  "genuine_gate_exact": true,
+  "counts_compared": 418,
+  "all_planned_source_byte_label_group_role_bindings_checked": true,
+  "requirements_compared": 10,
+  "raw_three_logit_and_sigmoid_reductions_checked": 224,
+  "paired_bootstrap_intervals_recomputed": false,
+  "native_neural_inference_recomputed": false,
+  "source_pixels_recomputed": false,
+  "outside_human_review": false,
+  "scope": "Separate standard-library arithmetic implementation. Does not reproduce interval bootstraps, source pixels, pretrained model forwards or native audit claims.",
+  "packet_sha256": "cd78b7a85e26a1156f8803b02f02a71b7896f00d5996fec186524b6129f1d564"
+}

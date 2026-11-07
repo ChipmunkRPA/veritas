@@ -1,0 +1,1429 @@
+{
+  "schema": "chipmunk.sface-synthetic-runtime/15",
+  "weight_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+  "upstream_cpp_sha256": "92bb8b201f2f84c19e5be93495a0c6069f9b32deb78d7c8c3ba24e53e0b3e53e",
+  "opencv": "5.0.0",
+  "cases": [
+    {
+      "fixture_seed": 0,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "83c02a8512bb57f6819933bb9978dd69b8fe99e221f5e5cf631a8df2ff0e735d",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "98ca163a564d52016aa4ab5ea23798ad6e8d7b55238c5310e8915e62e63d8c51",
+      "separate_crop_sha256": "98ca163a564d52016aa4ab5ea23798ad6e8d7b55238c5310e8915e62e63d8c51",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "5a0508128b9d7460abf9b62c94a5d9784462dd5a91e4f6a5710c27e72bb3102b",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "a47f98866447347b301b96a417379d8530da02ea72f83194d37e28456792ac79"
+    },
+    {
+      "fixture_seed": 0,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "83c02a8512bb57f6819933bb9978dd69b8fe99e221f5e5cf631a8df2ff0e735d",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "bbc276b256c68f8a15d51ebfaafa7bf7318f87b1469ee49895794fee8d482053",
+      "separate_crop_sha256": "bbc276b256c68f8a15d51ebfaafa7bf7318f87b1469ee49895794fee8d482053",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "2035e1265972013774028ac64d0d573ecdb19d32cd4a66dcc07c44528f409973",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "db98d258e4e10c4617468175fd4e9cb4eef193011a23db5481770099a959636b"
+    },
+    {
+      "fixture_seed": 0,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "83c02a8512bb57f6819933bb9978dd69b8fe99e221f5e5cf631a8df2ff0e735d",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "498abb0597d5f2c05d2b6fcfd665cfd1f2c929eead7ca140b62d422145fb1dd3",
+      "separate_crop_sha256": "498abb0597d5f2c05d2b6fcfd665cfd1f2c929eead7ca140b62d422145fb1dd3",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "feb044593395c099005ac08b0aa8727367b0775fa220d46a489b0881d47d91fa",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "c94e508efa7c2ad22611ada329743f0beb68c53cda8fdab9152c3ec0eadd9525"
+    },
+    {
+      "fixture_seed": 1,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "fa5ac74080f943162febd981aa7be18b78d12b78b064e7f3a7e879bf0949f04f",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "beddb8a353d8b5153f68d693bb8f2d1c5bee3719c2d32703e20f51da886dff19",
+      "separate_crop_sha256": "beddb8a353d8b5153f68d693bb8f2d1c5bee3719c2d32703e20f51da886dff19",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "769cce4036bfcd32dc6606ab8b5b6a6cfde6769b821d96889e14ab8a559a92d4",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "73a8085f4773dcea91d79b240b1f85381a8c96778979b05994cf032415f31bfc"
+    },
+    {
+      "fixture_seed": 1,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "fa5ac74080f943162febd981aa7be18b78d12b78b064e7f3a7e879bf0949f04f",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "b172a7149b917ae8ccec51b673118ff33ebedd73db484a9cd05a05d280e00026",
+      "separate_crop_sha256": "b172a7149b917ae8ccec51b673118ff33ebedd73db484a9cd05a05d280e00026",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "09ca5de1b269979cc21012e0f1c0568a656838f7543edf9a96487cffa069b213",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "e9b27a10068a6ea14aaad327bfd6a4853cf24d7643c33f585461d9d578e30657"
+    },
+    {
+      "fixture_seed": 1,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "fa5ac74080f943162febd981aa7be18b78d12b78b064e7f3a7e879bf0949f04f",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "28c653c2f820f06f0e065cf9d0efed3de809b35acdfe05d0d14e93baa8b68776",
+      "separate_crop_sha256": "28c653c2f820f06f0e065cf9d0efed3de809b35acdfe05d0d14e93baa8b68776",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "e9d56867bdb00cb3de93b072d92f7b56cf3a3d0f08aa3e44c69560a639c4c274",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "fcf9cf7cc44485a5a95de3d53ae8feb7ad921936c02d8bdbf72f431d33c93ffe"
+    },
+    {
+      "fixture_seed": 2,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "53b1653e768ec806945e73b8c6907dcd66d3ef8955b4b138b88a5cfc6ac63c8c",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "85eb5be0cfd2456a7e0301e4c696b801c3d9f39e988572cae5b205bc2821a498",
+      "separate_crop_sha256": "85eb5be0cfd2456a7e0301e4c696b801c3d9f39e988572cae5b205bc2821a498",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "c08d62676bfe7e76583dea8360ff8dc1b5e2cd35f093dad21fd4fa522d68ee37",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "35d2ed9a16b93a65ba83c2bfdf095880c101c6c5c5be57dfd5017338449a8a08"
+    },
+    {
+      "fixture_seed": 2,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "53b1653e768ec806945e73b8c6907dcd66d3ef8955b4b138b88a5cfc6ac63c8c",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "b9f03ac6031a063613b0c443976ad9c00efea61937cde10645bb2552d525efa7",
+      "separate_crop_sha256": "b9f03ac6031a063613b0c443976ad9c00efea61937cde10645bb2552d525efa7",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "a6a3150df47d04c3ac2676a2115e53e62adc3e8d4b8b31a085f7187350fd0b00",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "f22a6b86a6909ffc544ee355e6833eb304de41eb7d6514744f4aae50a219067b"
+    },
+    {
+      "fixture_seed": 2,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "53b1653e768ec806945e73b8c6907dcd66d3ef8955b4b138b88a5cfc6ac63c8c",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "534ff1ff5619ad1504448f155076fe9100760fc36953809e90bc97a0d29f17ad",
+      "separate_crop_sha256": "534ff1ff5619ad1504448f155076fe9100760fc36953809e90bc97a0d29f17ad",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "818f9f34c019edc83fb86825785a2471f6b71bcc187485329ff263191405bb26",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "7869595111724987c8a1272d112a8b5c27b192ad3a27b6fb90d1a801ed10b2fa"
+    },
+    {
+      "fixture_seed": 3,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "373badb9e6260138963361ed415bff800ca98a995c76788fcb023761fe53af44",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "a31a57679fa414aee5566d4ee4ff4ab8dbb3bdc728a11c405a379566d399ffe7",
+      "separate_crop_sha256": "a31a57679fa414aee5566d4ee4ff4ab8dbb3bdc728a11c405a379566d399ffe7",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "c7e87f23ec480ef12dd8c2681e1b8d460ca54dffb049b892ac1cbac347266d38",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "13ba399e4728813acf0a0eed2344ec21c0c3e0972bd1da7fcade27022849103f"
+    },
+    {
+      "fixture_seed": 3,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "373badb9e6260138963361ed415bff800ca98a995c76788fcb023761fe53af44",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "741c886158746ee7423d88ba06e17d672e4484f3cbf403df7011881f1eb6fb14",
+      "separate_crop_sha256": "741c886158746ee7423d88ba06e17d672e4484f3cbf403df7011881f1eb6fb14",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "9610a68e6fac1901073e00b65cec832b89f35eb3ddc63015a444ed1d4ee80863",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "4e84a22d7aca337cba6bc62e5f0260af05d8a9b12121be4f8efe4dc4eb1325ba"
+    },
+    {
+      "fixture_seed": 3,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "373badb9e6260138963361ed415bff800ca98a995c76788fcb023761fe53af44",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "2631c8c8fd5ce07bb77b05968430de6f876d883baa51ca01fe3d67bada1bb468",
+      "separate_crop_sha256": "2631c8c8fd5ce07bb77b05968430de6f876d883baa51ca01fe3d67bada1bb468",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "8a8b35094858d72c7417678a106788f805b1c23ef17d818b71b43bc172335fb4",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "44662ee98b1cd9f76b263b439767b18fc7605b586e8052c5683337a02ed6c0d3"
+    },
+    {
+      "fixture_seed": 4,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "d244c9635fa2747a62fbd02fcea035c39a12124729e7d24fea0939092f471885",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "21f1eabe3bffd72e3115e2c888e12e561c55b39ec973d52fbaca9114063a1361",
+      "separate_crop_sha256": "21f1eabe3bffd72e3115e2c888e12e561c55b39ec973d52fbaca9114063a1361",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "c74539667c59b1fde6346f62c0a82a4cdc4e587986d3f665feae2319d8938e5c",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "6a0c8cfae76bfeb4c75bc277c21f242befe45b3a143cb02ebc8bc9453c54a28c"
+    },
+    {
+      "fixture_seed": 4,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "d244c9635fa2747a62fbd02fcea035c39a12124729e7d24fea0939092f471885",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "461c148c15a6c1d1f64c2c4a2413ac7ac189e8ea4421a535c5d9fb8d6abad6c4",
+      "separate_crop_sha256": "461c148c15a6c1d1f64c2c4a2413ac7ac189e8ea4421a535c5d9fb8d6abad6c4",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "8eac51a166f5d3936f3e9ba3d4a091db560cb45f0abf726a164320d269ad1e77",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "e9573152025a94d71c8cf5346662d949dc80565a3af61faea77e2ba354194ff1"
+    },
+    {
+      "fixture_seed": 4,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "d244c9635fa2747a62fbd02fcea035c39a12124729e7d24fea0939092f471885",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "9c0676a843b0bcd05e90588d500ce584eea63581903bf9d64c0eae939ca961d5",
+      "separate_crop_sha256": "9c0676a843b0bcd05e90588d500ce584eea63581903bf9d64c0eae939ca961d5",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "954d615e28bf7e6ec27d9920e62f28d7754f4a3d7070f08fc92469146b201f8c",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "c18c6d34c4ca6ef32f3f4fd9978dd7af331d8bfbe7a3599a6608a3d939410835"
+    },
+    {
+      "fixture_seed": 5,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "edf3926b1e5816d5e37aedf32b4734ef94f03beb2f2d086745b61c3d36dfece3",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "a046de1b5be126ec39270cd7cd1893ab9d5cc0d617a8ab4c150de1ddafee0832",
+      "separate_crop_sha256": "a046de1b5be126ec39270cd7cd1893ab9d5cc0d617a8ab4c150de1ddafee0832",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "9fc2acc1b0877dc04b73ee2aa4e3b4900f2583604c0ca53d29f431e9d410804c",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "77306087d56402aba8e6084aaee97ba225e9f276f454e5dc0d9e99532d0e2b90"
+    },
+    {
+      "fixture_seed": 5,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "edf3926b1e5816d5e37aedf32b4734ef94f03beb2f2d086745b61c3d36dfece3",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "d4939062471a01511aee53a7c020a92a3098d72e50a5d74846e2eaeef8372932",
+      "separate_crop_sha256": "d4939062471a01511aee53a7c020a92a3098d72e50a5d74846e2eaeef8372932",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "dcb42ac496749bcda68110af04eb8bb2f55d2d50670a62e654f993f931b1a0b7",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "705369320eae4cd9d49fd96a75cddd2880c7b1cffbb5945dd19f0a9384bd4ec1"
+    },
+    {
+      "fixture_seed": 5,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "edf3926b1e5816d5e37aedf32b4734ef94f03beb2f2d086745b61c3d36dfece3",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "ba3fcdf266bca4dc7c4b377fc5b146f8776afc55afaa75ae17410d8ba1be9e52",
+      "separate_crop_sha256": "ba3fcdf266bca4dc7c4b377fc5b146f8776afc55afaa75ae17410d8ba1be9e52",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "47eea8696a0efa8bf00eb1770d2012ca03b91b0ca14b08b0407ac5040e1d39b6",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "8d054d0de9d8106e6f493d3ce68027af8d86870756fab6387bc2a56b6a466bc4"
+    },
+    {
+      "fixture_seed": 6,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "0622da7139e94fb8deaaeeb2a5fddc056277532e73affed74d00f1094e8964e6",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "229e888a07731bad412cbf4013f3ace06e6220509326ae7318ca7354a35e3626",
+      "separate_crop_sha256": "229e888a07731bad412cbf4013f3ace06e6220509326ae7318ca7354a35e3626",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "7cf599aeb6dc6fb109d3184b969d9ba83c3f918527a5c11c403be7dbbf514c6d",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "0bcf4b1795e3e47c869d86dc68ae9bac2a91088fe4cb27ee38a65ce6cec71dbc"
+    },
+    {
+      "fixture_seed": 6,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "0622da7139e94fb8deaaeeb2a5fddc056277532e73affed74d00f1094e8964e6",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "248292a1cdf63d461870be1fa643f5f1e9ff9a3f5aa2f4803b36b6878f43dd42",
+      "separate_crop_sha256": "248292a1cdf63d461870be1fa643f5f1e9ff9a3f5aa2f4803b36b6878f43dd42",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "f36e754801a302d512c8248e87db564f9a134c4809eec83f0166acb4f7b5c921",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "ee2845834a47118baa5ea98ead00fec882018fb0c196f7af25f89522d6cdbef1"
+    },
+    {
+      "fixture_seed": 6,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "0622da7139e94fb8deaaeeb2a5fddc056277532e73affed74d00f1094e8964e6",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "04fdedd78a64ecac4ec93f4e0ec1f6f1eed41bf1ce28461ffd408eec06ace6ae",
+      "separate_crop_sha256": "04fdedd78a64ecac4ec93f4e0ec1f6f1eed41bf1ce28461ffd408eec06ace6ae",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "44fa4530fabfbf93502625895de373887d5b7c38132736c0d5777c39468a031e",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "fceafeb98293053a6a710eefdf020663667cb45927c86dc1206dfad743fb06ac"
+    },
+    {
+      "fixture_seed": 7,
+      "transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_rgb_sha256": "bb761f1f2d9894e33184559d6a005e205bb3be9d8f60f7a87f59eb3e7c3bc847",
+      "landmarks_float32_hex": [
+        [
+          "0x1.325b580000000p+5",
+          "0x1.9d92060000000p+5"
+        ],
+        [
+          "0x1.2620900000000p+6",
+          "0x1.9c02de0000000p+5"
+        ],
+        [
+          "0x1.c0339c0000000p+5",
+          "0x1.1ef2480000000p+6"
+        ],
+        [
+          "0x1.4c64f80000000p+5",
+          "0x1.7176460000000p+6"
+        ],
+        [
+          "0x1.1aeb6a0000000p+6",
+          "0x1.70d1000000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.ffffffab0b164p-1",
+          "0x1.3d7076624019fp-29",
+          "0x1.4341527e00000p-15"
+        ],
+        [
+          "-0x1.3d7076619e0c5p-29",
+          "0x1.ffffffab0b164p-1",
+          "0x1.8e1a012800000p-16"
+        ]
+      ],
+      "native_crop_sha256": "67a24142b92ade9815a9f6e401fc9048dd859207f202416017a86d23f0e713b6",
+      "separate_crop_sha256": "67a24142b92ade9815a9f6e401fc9048dd859207f202416017a86d23f0e713b6",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "afbd20f6500eb1c36b8f2070bdcc71160f2f335073c8e6933930ad40bec318ef",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "8e7942b9fb0a8a2472877589ae2ab4df0e637e81f70a0e29bef7e5fd402874d2"
+    },
+    {
+      "fixture_seed": 7,
+      "transform": [
+        1.2,
+        0.1,
+        16.0,
+        8.0
+      ],
+      "source_rgb_sha256": "bb761f1f2d9894e33184559d6a005e205bb3be9d8f60f7a87f59eb3e7c3bc847",
+      "landmarks_float32_hex": [
+        [
+          "0x1.bc3eec0000000p+5",
+          "0x1.2940dc0000000p+6"
+        ],
+        [
+          "0x1.8682860000000p+6",
+          "0x1.39354c0000000p+6"
+        ],
+        [
+          "0x1.2933860000000p+6",
+          "0x1.9176760000000p+6"
+        ],
+        [
+          "0x1.b45b800000000p+5",
+          "0x1.ed0cc80000000p+6"
+        ],
+        [
+          "0x1.659f880000000p+6",
+          "0x1.fa432e0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.a888fce3a2f55p-1",
+          "0x1.54c3c00239a45p-4",
+          "-0x1.bdd4de69fc6d8p+3"
+        ],
+        [
+          "-0x1.54c3c00239a45p-4",
+          "0x1.a888fce3a2f55p-1",
+          "-0x1.5357c73d6db10p+2"
+        ]
+      ],
+      "native_crop_sha256": "4a062b6952c457b74f658c5a3eedd630dfcce1adbcf0789e96eac9befbe82378",
+      "separate_crop_sha256": "4a062b6952c457b74f658c5a3eedd630dfcce1adbcf0789e96eac9befbe82378",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "397816dcf02a4d6e206199f78dec3219f69a8b1d3d151a9d632efd1802b99aea",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "bc38822a44d9502b699ba8cf3507a7c645b7b82332304c6ee8bc2109186e7cdb"
+    },
+    {
+      "fixture_seed": 7,
+      "transform": [
+        0.8,
+        -0.2,
+        35.0,
+        18.0
+      ],
+      "source_rgb_sha256": "bb761f1f2d9894e33184559d6a005e205bb3be9d8f60f7a87f59eb3e7c3bc847",
+      "landmarks_float32_hex": [
+        [
+          "0x1.24f72e0000000p+6",
+          "0x1.a391fc0000000p+5"
+        ],
+        [
+          "0x1.935a5e0000000p+6",
+          "0x1.758b540000000p+5"
+        ],
+        [
+          "0x1.69501c0000000p+6",
+          "0x1.055d1c0000000p+6"
+        ],
+        [
+          "0x1.4907300000000p+6",
+          "0x1.4f43660000000p+6"
+        ],
+        [
+          "0x1.a471280000000p+6",
+          "0x1.3c34ac0000000p+6"
+        ]
+      ],
+      "matrix_float64_hex": [
+        [
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.fc97de47e0d99p-3",
+          "-0x1.33433acbb425ep+5"
+        ],
+        [
+          "0x1.fc97de47e0d97p-3",
+          "0x1.399f0e5ab7ccdp+0",
+          "-0x1.ebe45aa39ef28p+4"
+        ]
+      ],
+      "native_crop_sha256": "851916d142619d7eae5c85a9a4c0b4663413b880d247b25b6cb7e1845fd96c59",
+      "separate_crop_sha256": "851916d142619d7eae5c85a9a4c0b4663413b880d247b25b6cb7e1845fd96c59",
+      "crop_exact": true,
+      "crop_differing_channel_values": 0,
+      "blob_exact": true,
+      "feature_shape": [
+        1,
+        128
+      ],
+      "input_blob_sha256": "9a60b4856ea03f3b9bd4071c11a1967746d4455da7d982627cb0340e8d3d588d",
+      "feature_finite_nonzero": true,
+      "native_repeat_exact": true,
+      "max_graph_difference": 0.0,
+      "relative_graph_difference": 0.0,
+      "feature_sha256": "35fe06a67adb506f023ccabfa76ef5b4538eeac3a9bd17f847f801ebdab9b78c"
+    }
+  ],
+  "project_frames_scored": 0,
+  "fixed_requirements": "Every crop and BGR/RGB blob byte exact; finite nonzero same-shape features; repeat exact; graph max absolute<=1e-4 and relative<=1e-5.",
+  "passed": true,
+  "scope": "24 self-authored random-color/landmark fixtures. Separate outer alignment/blob transcription versus native OpenCV FaceRecognizerSF, then same OpenCV DNN graph; not an alternate inference engine, a face-swap benchmark, identity verification, calibrated probability or outside human review.",
+  "serving_changed": false
+}

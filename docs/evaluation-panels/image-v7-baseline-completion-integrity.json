@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "full_retained_packet_hashes_verified": 224,
+  "canonical_result_hashes_verified": 224,
+  "source_input_hashes_bound": 224,
+  "frozen_customer_interpretations_recomputed": 224,
+  "exact_17_detector_sets_verified": 224,
+  "all_check_statuses": {
+    "not_applicable": 793,
+    "ok": 3015
+  },
+  "stage_output_counts": {
+    "ingest": 224,
+    "probe": 224,
+    "decode": 224,
+    "faces": 224,
+    "condition": 224,
+    "provenance": 224,
+    "detect": 224,
+    "localise": 224,
+    "fuse": 224,
+    "synthesise": 224,
+    "render": 224,
+    "publish": 224
+  },
+  "git_metadata_commits": {
+    "0783ceb30b124f94fb044677f5261b096decbd5f": 135,
+    "1ff51a0104d68cd70769f3d26e2504d8c08e6a39": 89
+  },
+  "all_422_scoring_source_hashes_unchanged": true,
+  "scope": "Full current-pipeline completion/integrity and interpretation review; not a repeated neural forward or retained PDF/image-asset replay. Two checkout HEAD metadata values reflect added research-only files while identical scoring source/config/weights remained frozen."
+}

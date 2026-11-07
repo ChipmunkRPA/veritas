@@ -1,0 +1,620 @@
+{
+  "schema": "chipmunk.image-smaug-development-result/7",
+  "lock_sha256": "4387e1be8d90f281b1f32d84af13e83b9cb7a0e270dbda970fa9e48f696bd501",
+  "input_count": 224,
+  "development_inputs": 176,
+  "gate": {
+    "kind": "strictly_greater_than_max_of_48_genuine_responses",
+    "raw_mean_logit": -5.4320597648620605,
+    "calibration_inputs": 48,
+    "calibration_groups": 24,
+    "note": "Empirical genuine-tail operating point, not an AI probability, accuracy guarantee or public screening threshold."
+  },
+  "scope": "Consumed development only. Union of AI indications is not a replacement calibrated overall conclusion. No candidate original vote, public threshold claim, pixel edit-mask claim or app integration.",
+  "requirements": {
+    "complete_original_model_runs": true,
+    "all_candidate_responses_complete": true,
+    "all_baseline_publications_complete": true,
+    "native_replay_complete": true,
+    "native_extra_genuine_at_most_one": true,
+    "native_at_least_four_added_ai_sources": true,
+    "native_two_added_generation_families": true,
+    "jpeg75_extra_genuine_at_most_one": true,
+    "jpeg75_at_least_four_added_ai_sources": false,
+    "jpeg75_two_added_generation_families": true
+  },
+  "advance_to_separate_fresh_confirmation": false,
+  "local_edit_usefulness_requirements": {
+    "native": false,
+    "jpeg75": false
+  },
+  "local_edit_usefulness_established_in_development": false,
+  "by_format": {
+    "native": {
+      "planned": 88,
+      "genuine": 44,
+      "ai": 44,
+      "baseline_ai_indications": 15,
+      "candidate_ai_indications": 20,
+      "combined_ai_indications": 21,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 29,
+      "combined_missed_ai_indications": 23,
+      "current_false_original": 10,
+      "current_directions": {
+        "original": 46,
+        "record": 7,
+        "inconclusive": 16,
+        "ai": 15,
+        "unavailable": 4
+      },
+      "current_inconclusive": 16,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 7,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0,
+      "ai_gain_interval": {
+        "planned_inputs": 44,
+        "source_components": 44,
+        "paired_rate_difference": 0.13636363636363635,
+        "component_bootstrap_95_percentile": [
+          0.045454545454545456,
+          0.25
+        ]
+      },
+      "false_alarm_change_interval": {
+        "planned_inputs": 44,
+        "source_components": 44,
+        "paired_rate_difference": 0.0,
+        "component_bootstrap_95_percentile": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "jpeg75": {
+      "planned": 88,
+      "genuine": 44,
+      "ai": 44,
+      "baseline_ai_indications": 18,
+      "candidate_ai_indications": 20,
+      "combined_ai_indications": 20,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 26,
+      "combined_missed_ai_indications": 24,
+      "current_false_original": 16,
+      "current_directions": {
+        "original": 57,
+        "inconclusive": 12,
+        "ai": 18,
+        "unavailable": 1
+      },
+      "current_inconclusive": 12,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0,
+      "ai_gain_interval": {
+        "planned_inputs": 44,
+        "source_components": 44,
+        "paired_rate_difference": 0.045454545454545456,
+        "component_bootstrap_95_percentile": [
+          0.0,
+          0.11363636363636363
+        ]
+      },
+      "false_alarm_change_interval": {
+        "planned_inputs": 44,
+        "source_components": 44,
+        "paired_rate_difference": 0.0,
+        "component_bootstrap_95_percentile": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "by_format_family": {
+    "native:FLUX.1-schnell": {
+      "planned": 7,
+      "genuine": 0,
+      "ai": 7,
+      "baseline_ai_indications": 5,
+      "candidate_ai_indications": 7,
+      "combined_ai_indications": 7,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 2,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 5,
+        "inconclusive": 2
+      },
+      "current_inconclusive": 2,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:PixArt-Sigma-XL-2-1024-MS": {
+      "planned": 7,
+      "genuine": 0,
+      "ai": 7,
+      "baseline_ai_indications": 4,
+      "candidate_ai_indications": 7,
+      "combined_ai_indications": 7,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 3,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 4,
+        "inconclusive": 3
+      },
+      "current_inconclusive": 3,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:camera": {
+      "planned": 20,
+      "genuine": 20,
+      "ai": 0,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 0,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "original": 16,
+        "unavailable": 4
+      },
+      "current_inconclusive": 0,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:firefly": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 1,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 1,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 7,
+      "combined_missed_ai_indications": 7,
+      "current_false_original": 0,
+      "current_directions": {
+        "record": 7,
+        "original": 6,
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "current_inconclusive": 2,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 7,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:flux-fill": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 8,
+      "combined_missed_ai_indications": 8,
+      "current_false_original": 6,
+      "current_directions": {
+        "inconclusive": 3,
+        "original": 13
+      },
+      "current_inconclusive": 3,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:sd2": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 8,
+      "combined_missed_ai_indications": 8,
+      "current_false_original": 4,
+      "current_directions": {
+        "original": 11,
+        "inconclusive": 5
+      },
+      "current_inconclusive": 5,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "native:stable-diffusion-3-medium-diffusers": {
+      "planned": 6,
+      "genuine": 0,
+      "ai": 6,
+      "baseline_ai_indications": 5,
+      "candidate_ai_indications": 6,
+      "combined_ai_indications": 6,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 1,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 5,
+        "inconclusive": 1
+      },
+      "current_inconclusive": 1,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:FLUX.1-schnell": {
+      "planned": 7,
+      "genuine": 0,
+      "ai": 7,
+      "baseline_ai_indications": 6,
+      "candidate_ai_indications": 7,
+      "combined_ai_indications": 7,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 1,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 6,
+        "inconclusive": 1
+      },
+      "current_inconclusive": 1,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:PixArt-Sigma-XL-2-1024-MS": {
+      "planned": 7,
+      "genuine": 0,
+      "ai": 7,
+      "baseline_ai_indications": 6,
+      "candidate_ai_indications": 7,
+      "combined_ai_indications": 7,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 1,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 6,
+        "inconclusive": 1
+      },
+      "current_inconclusive": 1,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:camera": {
+      "planned": 20,
+      "genuine": 20,
+      "ai": 0,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 0,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "original": 19,
+        "unavailable": 1
+      },
+      "current_inconclusive": 0,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:firefly": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 8,
+      "combined_missed_ai_indications": 8,
+      "current_false_original": 5,
+      "current_directions": {
+        "original": 11,
+        "inconclusive": 5
+      },
+      "current_inconclusive": 5,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:flux-fill": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 8,
+      "combined_missed_ai_indications": 8,
+      "current_false_original": 6,
+      "current_directions": {
+        "inconclusive": 2,
+        "original": 14
+      },
+      "current_inconclusive": 2,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:sd2": {
+      "planned": 16,
+      "genuine": 8,
+      "ai": 8,
+      "baseline_ai_indications": 0,
+      "candidate_ai_indications": 0,
+      "combined_ai_indications": 0,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 8,
+      "combined_missed_ai_indications": 8,
+      "current_false_original": 5,
+      "current_directions": {
+        "original": 13,
+        "inconclusive": 3
+      },
+      "current_inconclusive": 3,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    },
+    "jpeg75:stable-diffusion-3-medium-diffusers": {
+      "planned": 6,
+      "genuine": 0,
+      "ai": 6,
+      "baseline_ai_indications": 6,
+      "candidate_ai_indications": 6,
+      "combined_ai_indications": 6,
+      "baseline_false_alarms": 0,
+      "candidate_false_alarms": 0,
+      "combined_false_alarms": 0,
+      "baseline_missed_ai_indications": 0,
+      "combined_missed_ai_indications": 0,
+      "current_false_original": 0,
+      "current_directions": {
+        "ai": 6
+      },
+      "current_inconclusive": 0,
+      "candidate_failures": 0,
+      "baseline_failures": 0,
+      "provenance_led": 0,
+      "new_conflicts_with_original": 0,
+      "candidate_original_votes": 0
+    }
+  },
+  "check_statuses_all_planned_baseline_inputs": [
+    {
+      "detector": "img.dda",
+      "status": "not_applicable",
+      "reason": "image short side below 336 px (native crops only, no upscaling)",
+      "count": 2
+    },
+    {
+      "detector": "img.dda",
+      "status": "ok",
+      "reason": null,
+      "count": 222
+    },
+    {
+      "detector": "img.dfdc_b7",
+      "status": "not_applicable",
+      "reason": "no face detected",
+      "count": 183
+    },
+    {
+      "detector": "img.dfdc_b7",
+      "status": "ok",
+      "reason": null,
+      "count": 41
+    },
+    {
+      "detector": "img.faces.yunet",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.forensic.copymove",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.forensic.ela",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.forensic.jpeg_dq",
+      "status": "not_applicable",
+      "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels",
+      "count": 75
+    },
+    {
+      "detector": "img.forensic.jpeg_dq",
+      "status": "ok",
+      "reason": null,
+      "count": 149
+    },
+    {
+      "detector": "img.forensic.noise",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.hf.ateeqq",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.hf.dima806",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.meta.consistency",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.meta.exif",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.meta.generator",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "img.meta.qtables",
+      "status": "not_applicable",
+      "reason": "not a JPEG file with quantisation tables",
+      "count": 92
+    },
+    {
+      "detector": "img.meta.qtables",
+      "status": "ok",
+      "reason": null,
+      "count": 132
+    },
+    {
+      "detector": "img.watermark.dwtdct",
+      "status": "ok",
+      "reason": null,
+      "count": 224
+    },
+    {
+      "detector": "loc.fused",
+      "status": "not_applicable",
+      "reason": "A dedicated local editing check covers this file format",
+      "count": 92
+    },
+    {
+      "detector": "loc.fused",
+      "status": "ok",
+      "reason": null,
+      "count": 132
+    },
+    {
+      "detector": "loc.splice",
+      "status": "not_applicable",
+      "reason": "This local edit check is assessed on PNG images",
+      "count": 132
+    },
+    {
+      "detector": "loc.splice",
+      "status": "ok",
+      "reason": null,
+      "count": 92
+    },
+    {
+      "detector": "prov.c2pa",
+      "status": "not_applicable",
+      "reason": "no C2PA manifest",
+      "count": 217
+    },
+    {
+      "detector": "prov.c2pa",
+      "status": "ok",
+      "reason": null,
+      "count": 7
+    }
+  ],
+  "native_probes": 26,
+  "native_max_logit_difference": 9.5367431640625e-07,
+  "native_max_sigmoid_difference": 2.0372681319713593e-10,
+  "original_journal_sha256": {
+    "baseline.jsonl": "a020593babb420ed45b254a6958af8f3b5ff20a78c1210028d29d8549e009dc5",
+    "candidate-calibration.jsonl": "cc5bff6b1c3101f339082c560b4e7e244e654783a3ba212c8a2797c4b646ca46",
+    "candidate-development.jsonl": "dc6f46c517b5286a86da09d6c7cdbb0354610da75b4b565da5cbd6062c67cdce",
+    "candidate-audit.jsonl": "f308ef515cb3d965eec8b241f278cb6cd7e25e877ecc354975fb01b89d444c3c"
+  },
+  "fresh_confirmation_scored": false,
+  "serving_changed": false,
+  "outside_human_reviewers": 0
+}

@@ -1,5 +1,7 @@
 # Image classification candidate: acquisition and runtime preparation
 
+Current status: the [completed development comparison](image-smaug-v7-development-evaluation.md) shows a whole-generation gain and no localized-edit recovery; the original advancement rule did not pass. The acquisition-stage observations below are historical. The candidate remains a research asset.
+
 7 November 2026. Acquired Smaug as a separate **whole-image** candidate, not a
 replacement for edit-boundary localization. The [pinned detector notice](https://huggingface.co/abacusai/Smaug-AI-Image-Detector/blob/c7c95951e04a87b884a4ad479401b1128c3903bd/README.md#8-license)
 and [exact Apache2 license](https://huggingface.co/abacusai/Smaug-AI-Image-Detector/blob/c7c95951e04a87b884a4ad479401b1128c3903bd/LICENSE)

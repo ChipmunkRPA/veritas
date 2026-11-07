@@ -1,5 +1,7 @@
 # Bounded face-swap transitions: permitted feature model acquired
 
+Current status: the [actual synthetic native runtime](video-v15-sface-native-runtime.md) passed all 24 probes; no project face/video comparison has yet been run. The acquisition-stage observations below are historical.
+
 7 November 2026. Acquired a small SFace/MobileFaceNet feature extractor as a
 possible ingredient for a different transition-localization method. The official
 [OpenCV Zoo model-directory notice](https://github.com/opencv/opencv_zoo/blob/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_recognition_sface/README.md#license)

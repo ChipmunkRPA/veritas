@@ -1,0 +1,3440 @@
+{
+  "original_journal_sha256": "f308ef515cb3d965eec8b241f278cb6cd7e25e877ecc354975fb01b89d444c3c",
+  "cases": [
+    {
+      "id": "42cee4c80f0fc4e27b1a07c8-jpeg75",
+      "input_sha256": "8bd7eef7da9b3ece45e19f1cca0995cc5d79caca64457ffb5a0a28c087d8f797",
+      "status": "ok",
+      "crop_logits": [
+        -10.060833930969238,
+        -9.966501235961914,
+        -10.072555541992188
+      ],
+      "mean_logit": -10.033297538757324,
+      "independent_mean_logit": -10.033296902974447,
+      "raw_sigmoid_response": 4.39111863670405e-05,
+      "crop_rgb_sha256": [
+        "58f94786b47de757a43553f207511d0c0e1edebe210a4eb44f9a4d3612b409ca",
+        "1e75a97179581d829efd2b5436db7642a9e1499256fa3140b558375f759013d7",
+        "2e7319b62133825fd26f245bd5ec6d5bbb044cb14655fd4bffff09861c7d6f1f"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            0,
+            0,
+            528,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              337920,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            88,
+            0,
+            616,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              56320,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              394240,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            176,
+            0,
+            704,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              112640,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              450560,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1192890829988755
+    },
+    {
+      "id": "c48ff9144b79dee423954f29-native",
+      "input_sha256": "0df6cf41a0df82a4087f3123adbff46492074acd0bfcf1478833aae12b8d3a04",
+      "status": "ok",
+      "crop_logits": [
+        -9.329703330993652,
+        -9.019254684448242,
+        -8.571072578430176
+      ],
+      "mean_logit": -8.973342895507812,
+      "independent_mean_logit": -8.97334353129069,
+      "raw_sigmoid_response": 0.00012672772572841495,
+      "crop_rgb_sha256": [
+        "d58c2db585bab8bff1e26727426b14550cd5f78fb0fb1db9ee4cb61a288c0bb1",
+        "0478964d4ba3ab0aed085eb294a7b3898839d91118b5cacd14fb9c7283321e7d",
+        "b6934a0de8abe0fe1feb7a5257ece825453811f4a869b0420ab49b4080ca86ec"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              540672,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            120,
+            24,
+            648,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              122880,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              663552,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            240,
+            24,
+            768,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              245760,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              786432,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1301593329990283
+    },
+    {
+      "id": "a4e978b58ea261bb083177fc-jpeg75",
+      "input_sha256": "6b5c959c2f7455dba1b3f7a05b069bd4f7d1015a2fc5089a0551ee2656d34a3f",
+      "status": "ok",
+      "crop_logits": [
+        -8.864340782165527,
+        -9.0193510055542,
+        -9.044238090515137
+      ],
+      "mean_logit": -8.97597599029541,
+      "independent_mean_logit": -8.975976626078287,
+      "raw_sigmoid_response": 0.0001263945159735158,
+      "crop_rgb_sha256": [
+        "aad43e6c411bbc2e263da495341513ac8e90f507c2d09ea60c8a5f23efd6d436",
+        "9fde6db9e9daaf6fe0395e505245e956a1017b91d83d109be3bb9dada67719b4",
+        "3b2e9024da05f25c1c6202e72abb8353958d64bd7cbff02e749d542d71f202d5"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            576
+          ],
+          "resized_size": [
+            1024,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              1024
+            ],
+            [
+              13824,
+              576
+            ],
+            [
+              540672,
+              1024
+            ],
+            [
+              317952,
+              576
+            ]
+          ],
+          "resampling": null
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            576
+          ],
+          "resized_size": [
+            1024,
+            576
+          ],
+          "resized_crop_xyxy": [
+            248,
+            24,
+            776,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              253952,
+              1024
+            ],
+            [
+              13824,
+              576
+            ],
+            [
+              794624,
+              1024
+            ],
+            [
+              317952,
+              576
+            ]
+          ],
+          "resampling": null
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            576
+          ],
+          "resized_size": [
+            1024,
+            576
+          ],
+          "resized_crop_xyxy": [
+            496,
+            24,
+            1024,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              507904,
+              1024
+            ],
+            [
+              13824,
+              576
+            ],
+            [
+              1048576,
+              1024
+            ],
+            [
+              317952,
+              576
+            ]
+          ],
+          "resampling": null
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1077969589969143
+    },
+    {
+      "id": "4cfdaca3f62111a64982ab94-jpeg75",
+      "input_sha256": "d0bfac814e455da98fcdb602f03497aa169d0af8f805dedbeb75669f8d17a49e",
+      "status": "ok",
+      "crop_logits": [
+        -7.711978435516357,
+        -8.096633911132812,
+        -7.069774150848389
+      ],
+      "mean_logit": -7.626129150390625,
+      "independent_mean_logit": -7.6261288324991865,
+      "raw_sigmoid_response": 0.0004873068246524781,
+      "crop_rgb_sha256": [
+        "38bbf8efa11cc6a2d6fecb2b11be462ca164f789ece2f0260a89c82846e3826e",
+        "aec4df26d7b42bf28ee5f0eef4297aed8a33388e2af56093fb7e02c2a9c2cc46",
+        "e1a0cf2dc07efe07cad4aaf4afd46c62709d1200a61c6580eaddeb2b8925f7ea"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            819
+          ],
+          "resized_size": [
+            720,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              720
+            ],
+            [
+              19656,
+              576
+            ],
+            [
+              540672,
+              720
+            ],
+            [
+              452088,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            819
+          ],
+          "resized_size": [
+            720,
+            576
+          ],
+          "resized_crop_xyxy": [
+            96,
+            24,
+            624,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              98304,
+              720
+            ],
+            [
+              19656,
+              576
+            ],
+            [
+              638976,
+              720
+            ],
+            [
+              452088,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            819
+          ],
+          "resized_size": [
+            720,
+            576
+          ],
+          "resized_crop_xyxy": [
+            192,
+            24,
+            720,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              196608,
+              720
+            ],
+            [
+              19656,
+              576
+            ],
+            [
+              737280,
+              720
+            ],
+            [
+              452088,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1104192920029163
+    },
+    {
+      "id": "17d314006575133cb460ebbe-native",
+      "input_sha256": "484608b4a328aab695345c4f7e4525180d68937655dd5782a06281e1b128ddcf",
+      "status": "ok",
+      "crop_logits": [
+        -8.722116470336914,
+        -8.923501968383789,
+        -9.138639450073242
+      ],
+      "mean_logit": -8.928086280822754,
+      "independent_mean_logit": -8.928085962931315,
+      "raw_sigmoid_response": 0.00013259398110676557,
+      "crop_rgb_sha256": [
+        "29f1d59187476e5fe1979557401cb5be7d6737a509c8c0c6850c46c0523a67b9",
+        "b94e2c08e1a21c01fe7d72deae4a598dab5ea327d9d96778a95667bf051ce35a",
+        "4a6964e32a8f50c4e1e4bf9f2f6cced9287a9beb0fd99ba0558f1f2d741012ca"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              540144,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            166,
+            24,
+            694,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              169818,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              709962,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            332,
+            24,
+            860,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              339636,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              879780,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1199450840358622
+    },
+    {
+      "id": "1640f2a0c8ed25d21e55c141-native",
+      "input_sha256": "a16477461194fb23fe74eb4aa7a181a93441db558766bf533529984a3dd11488",
+      "status": "ok",
+      "crop_logits": [
+        -9.797840118408203,
+        -9.71773910522461,
+        -9.99893569946289
+      ],
+      "mean_logit": -9.83817195892334,
+      "independent_mean_logit": -9.8381716410319,
+      "raw_sigmoid_response": 5.3371943067759275e-05,
+      "crop_rgb_sha256": [
+        "5d4eb2647553d9a670f80e2541c5ca31edc63379c5e819af2bb57bf63e7dba12",
+        "a3ade6af21f3d5ea40e25894eaf74f9499862f8a7fb447b3a22b39892ba60a4c",
+        "2ca30cdf50e4b3e164f6a0e058673fdc13f0b4c2a346333c0fee0a813dd31290"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            0,
+            0,
+            528,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              337920,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            88,
+            0,
+            616,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              56320,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              394240,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            640,
+            480
+          ],
+          "resized_size": [
+            704,
+            528
+          ],
+          "resized_crop_xyxy": [
+            176,
+            0,
+            704,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              112640,
+              704
+            ],
+            [
+              0,
+              528
+            ],
+            [
+              450560,
+              704
+            ],
+            [
+              253440,
+              528
+            ]
+          ],
+          "resampling": "BICUBIC"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.122231749992352
+    },
+    {
+      "id": "71228910a0d4dad51b7c2d63-jpeg75",
+      "input_sha256": "9115051887a1b5543f825e53b1f10f3b1defc34e64708db7e1d92f79148919dd",
+      "status": "ok",
+      "crop_logits": [
+        -10.007996559143066,
+        -9.83542251586914,
+        -9.756026268005371
+      ],
+      "mean_logit": -9.86648178100586,
+      "independent_mean_logit": -9.86648178100586,
+      "raw_sigmoid_response": 5.188225622987375e-05,
+      "crop_rgb_sha256": [
+        "ad878b791953b5e0c7d81403f243d04a7f5609599dc3bf9155e87eaabbb93718",
+        "ba05c35b5bfbfd88987db906be986f338cd867dd6d21f64742458d6332dc89ec",
+        "39b782c39bb54b111400344fe08143b843e4898ada36a6a59555b1a6a4a24bc7"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              540672,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            120,
+            24,
+            648,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              122880,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              663552,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            240,
+            24,
+            768,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              245760,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              786432,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1274088750360534
+    },
+    {
+      "id": "71bd841beb4240fb96e9f4ba-native",
+      "input_sha256": "8f30c5c6b9d70b9f884a0958a5c01179b8dac110566dc7afe604cd19bd4ea24e",
+      "status": "ok",
+      "crop_logits": [
+        -8.394200325012207,
+        -8.336247444152832,
+        -8.755266189575195
+      ],
+      "mean_logit": -8.495238304138184,
+      "independent_mean_logit": -8.495237986246744,
+      "raw_sigmoid_response": 0.000204397743800655,
+      "crop_rgb_sha256": [
+        "cafc9c29ffdc8db59ebf1de6f5eb47553bc7c2e19a91fca00a0203107aeb94d8",
+        "79f316e5381cdf2ba327e15c02d966cacd4b38289b2d39a87cd08dc805d8f9e7",
+        "1e09071b3eec2c231a7b64abdf1de67ce5c11d518425c3a5b795be681157396e"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              540144,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            166,
+            24,
+            694,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              169818,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              709962,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1023,
+            685
+          ],
+          "resized_size": [
+            860,
+            576
+          ],
+          "resized_crop_xyxy": [
+            332,
+            24,
+            860,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              339636,
+              860
+            ],
+            [
+              16440,
+              576
+            ],
+            [
+              879780,
+              860
+            ],
+            [
+              378120,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.118877583008725
+    },
+    {
+      "id": "065d6790ad053596da457f51-native",
+      "input_sha256": "9f16135e8b9247a9fd325bb0492d6215dc411f831a25379ef72ae323e77cb8ac",
+      "status": "ok",
+      "crop_logits": [
+        -9.316547393798828,
+        -9.414090156555176,
+        -9.920287132263184
+      ],
+      "mean_logit": -9.550308227539062,
+      "independent_mean_logit": -9.550308227539062,
+      "raw_sigmoid_response": 7.11742541170679e-05,
+      "crop_rgb_sha256": [
+        "5ab5d5d3e0a91fb49e106da079455cd777d015c77da27ceee17bc32ed2e66098",
+        "4dd94b0702cca2071bf4cb580ff5384aa42e42653104be3d313d950508ecbf48",
+        "299d412834b20d0fcf888df4068203721106110f53c9dd2439707ba81e40283f"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              540672,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            168,
+            24,
+            696,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              172032,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              712704,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            336,
+            24,
+            864,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              344064,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              884736,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.117158416949678
+    },
+    {
+      "id": "b3786f214a17ce2eacaaa102-jpeg75",
+      "input_sha256": "0913ba64adb695cdadff26c1fb0b9d4b90e6d8c77b5c2402edb843b039585bdb",
+      "status": "ok",
+      "crop_logits": [
+        -9.804282188415527,
+        -9.692212104797363,
+        -9.730958938598633
+      ],
+      "mean_logit": -9.742484092712402,
+      "independent_mean_logit": -9.742484410603842,
+      "raw_sigmoid_response": 5.873099871678278e-05,
+      "crop_rgb_sha256": [
+        "38e3d9883dc59d9ce0abf2000ba40edbeb48f9bc80ae9944ae9a4738ce8dcb74",
+        "6da68f3e097af904e2fc29392e0ba4fae3d6c699bd3adfd8a208fc2f30047db3",
+        "b02a5a9306de9c79b611ba5ebd747a4ac13ac20988d182fa4f1d7f1d372a2221"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            813,
+            1024
+          ],
+          "resized_size": [
+            576,
+            725
+          ],
+          "resized_crop_xyxy": [
+            24,
+            0,
+            552,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              19512,
+              576
+            ],
+            [
+              0,
+              725
+            ],
+            [
+              448776,
+              576
+            ],
+            [
+              540672,
+              725
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            813,
+            1024
+          ],
+          "resized_size": [
+            576,
+            725
+          ],
+          "resized_crop_xyxy": [
+            24,
+            98,
+            552,
+            626
+          ],
+          "source_edge_bounds_rational": [
+            [
+              19512,
+              576
+            ],
+            [
+              100352,
+              725
+            ],
+            [
+              448776,
+              576
+            ],
+            [
+              641024,
+              725
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            813,
+            1024
+          ],
+          "resized_size": [
+            576,
+            725
+          ],
+          "resized_crop_xyxy": [
+            24,
+            197,
+            552,
+            725
+          ],
+          "source_edge_bounds_rational": [
+            [
+              19512,
+              576
+            ],
+            [
+              201728,
+              725
+            ],
+            [
+              448776,
+              576
+            ],
+            [
+              742400,
+              725
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1146603749948554
+    },
+    {
+      "id": "3513ea26457c99dc3217e086-native",
+      "input_sha256": "70a17289fd34488b3c1a1473c06dcbfae810ff9a4dbde4ac612e28454cf62d51",
+      "status": "ok",
+      "crop_logits": [
+        9.876880645751953,
+        10.04804801940918,
+        10.08260726928711
+      ],
+      "mean_logit": 10.002511978149414,
+      "independent_mean_logit": 10.002511978149414,
+      "raw_sigmoid_response": 0.9999547004699707,
+      "crop_rgb_sha256": [
+        "1295336a88e91b110385f4b989fce8f4d8851606f89fe410990bb9b83fa41bb8",
+        "8bb0e2b2d93b1626d5f3b7be10e4d8d26495c64a6fcc96bdae624f678791ce55",
+        "9e380c21dab1ce4b9dfbbb7f2e2f5eef8f49454d81468b48f09f61a462667442"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1235507499659434
+    },
+    {
+      "id": "af4ccda5e3f6c58cdf5dfd1f-jpeg75",
+      "input_sha256": "2ec0ad95aa6ce401ddc67aff104f12dae9cce348cb172924272ec6350916b21d",
+      "status": "ok",
+      "crop_logits": [
+        -9.894645690917969,
+        -9.811138153076172,
+        -9.555917739868164
+      ],
+      "mean_logit": -9.753900527954102,
+      "independent_mean_logit": -9.753900527954102,
+      "raw_sigmoid_response": 5.806435729027726e-05,
+      "crop_rgb_sha256": [
+        "75c735b017d80f3bda2d0ca93278576cd96a6c908a48d913ee011b0d4b588f2f",
+        "adcfdf173d7c708eb784ac0a35f4d941c04eaaa9a26f801a297820fccfc643fc",
+        "41617b9203f896f62adea0b3e89ae763e51bed8e8012a643f62b73cecc2c7b26"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              540672,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            120,
+            24,
+            648,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              122880,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              663552,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            240,
+            24,
+            768,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              245760,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              786432,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1054663749528117
+    },
+    {
+      "id": "8be32be39636c77b19774e89-native",
+      "input_sha256": "ab999495cea209a6164d8c1977a2ce04630fe65a13652872a358666212387ef2",
+      "status": "ok",
+      "crop_logits": [
+        8.272647857666016,
+        8.17190933227539,
+        7.667189598083496
+      ],
+      "mean_logit": 8.037249565124512,
+      "independent_mean_logit": 8.037248929341635,
+      "raw_sigmoid_response": 0.9996769428253174,
+      "crop_rgb_sha256": [
+        "abaa2eb90a50a515665993aec342b780e54f551a3fbd7bd6df9dc22d6a64e19b",
+        "c9ff58ceed858ce92687cff83e3910febc3bb3245ebef679f76bd937a637bcb1",
+        "236060119fb09f0e8a205ddcb906cc7762916617a8a6d333f394cb3049bd298a"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.118304583011195
+    },
+    {
+      "id": "13d09796df760a884cf42b26-native",
+      "input_sha256": "e5959a7d27055d558fd75c0717f8dbf7f42182482d649cfe1d3722cf4cae85ad",
+      "status": "ok",
+      "crop_logits": [
+        -8.006427764892578,
+        -9.141716003417969,
+        -8.57654094696045
+      ],
+      "mean_logit": -8.574894905090332,
+      "independent_mean_logit": -8.574894905090332,
+      "raw_sigmoid_response": 0.0001887506659841165,
+      "crop_rgb_sha256": [
+        "6fc553ba549006606a77e08b0cc7aac173c167d2e15058714dbea4bbfe80968e",
+        "7d3775326fbc896716036cf056b209dd2d92eea6ffd280cde175f2fa7f3b13bd",
+        "d8c5b54aafc94e0aefa0a6718108a557f4549e4d9b5941fd7b1fbb46e8432cf3"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              540672,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            120,
+            24,
+            648,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              122880,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              663552,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            240,
+            24,
+            768,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              245760,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              786432,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1200312500004657
+    },
+    {
+      "id": "f57a7a356d2b4679ccc25dfa-jpeg75",
+      "input_sha256": "3c7f417afc58f0e9efdd42c1274198295deefda507602277300a33861c00d282",
+      "status": "ok",
+      "crop_logits": [
+        -8.700538635253906,
+        -8.99031925201416,
+        -8.906323432922363
+      ],
+      "mean_logit": -8.865726470947266,
+      "independent_mean_logit": -8.865727106730143,
+      "raw_sigmoid_response": 0.0001411245611961931,
+      "crop_rgb_sha256": [
+        "a0d957c7d978fcd7613a4f25ade04e5c11b16184cc1f286aed587a8072219969",
+        "d12a0e659a8cb15278f9af3f89031e7413ad9a409d00080c59364a4e040e8023",
+        "630134dddc2aed73eccdbc48c67e045186910f64af247492c0f8f8175c4659a9"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            704
+          ],
+          "resized_size": [
+            838,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              838
+            ],
+            [
+              16896,
+              576
+            ],
+            [
+              540672,
+              838
+            ],
+            [
+              388608,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            704
+          ],
+          "resized_size": [
+            838,
+            576
+          ],
+          "resized_crop_xyxy": [
+            155,
+            24,
+            683,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              158720,
+              838
+            ],
+            [
+              16896,
+              576
+            ],
+            [
+              699392,
+              838
+            ],
+            [
+              388608,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            704
+          ],
+          "resized_size": [
+            838,
+            576
+          ],
+          "resized_crop_xyxy": [
+            310,
+            24,
+            838,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              317440,
+              838
+            ],
+            [
+              16896,
+              576
+            ],
+            [
+              858112,
+              838
+            ],
+            [
+              388608,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1095277089625597
+    },
+    {
+      "id": "c00d90a40edb831a5e91f1ad-jpeg75",
+      "input_sha256": "3cec2e77c5305ff4146e494f83f67dc1efeb33d07197a8da41cd3a0e8bfa739a",
+      "status": "ok",
+      "crop_logits": [
+        -8.701120376586914,
+        -7.920182228088379,
+        -9.338464736938477
+      ],
+      "mean_logit": -8.6532564163208,
+      "independent_mean_logit": -8.653255780537924,
+      "raw_sigmoid_response": 0.00017452702741138637,
+      "crop_rgb_sha256": [
+        "830c753d92fb4323dccc4b69c13a10762446146da0002b44aeb3f7f018f4e238",
+        "9abe092f0c146f47d32f72c8bf0f344c8d40df6c98d0cd62240d6009d5b347f0",
+        "6a0472268510cfddcc3f00b39023c918cb14a4b358b5d9b6c477a867beaaf2b7"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            680,
+            1024
+          ],
+          "resized_size": [
+            576,
+            867
+          ],
+          "resized_crop_xyxy": [
+            24,
+            0,
+            552,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16320,
+              576
+            ],
+            [
+              0,
+              867
+            ],
+            [
+              375360,
+              576
+            ],
+            [
+              540672,
+              867
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            680,
+            1024
+          ],
+          "resized_size": [
+            576,
+            867
+          ],
+          "resized_crop_xyxy": [
+            24,
+            169,
+            552,
+            697
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16320,
+              576
+            ],
+            [
+              173056,
+              867
+            ],
+            [
+              375360,
+              576
+            ],
+            [
+              713728,
+              867
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            680,
+            1024
+          ],
+          "resized_size": [
+            576,
+            867
+          ],
+          "resized_crop_xyxy": [
+            24,
+            339,
+            552,
+            867
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16320,
+              576
+            ],
+            [
+              347136,
+              867
+            ],
+            [
+              375360,
+              576
+            ],
+            [
+              887808,
+              867
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1093300840002485
+    },
+    {
+      "id": "e2240c5a9f83728e3be9365b-native",
+      "input_sha256": "43cfda84013d4f3adfb768fdb781e726ca593a5023068ae3c0945d356ea8e841",
+      "status": "ok",
+      "crop_logits": [
+        -8.135334968566895,
+        -8.652359008789062,
+        -8.29460334777832
+      ],
+      "mean_logit": -8.36076545715332,
+      "independent_mean_logit": -8.36076577504476,
+      "raw_sigmoid_response": 0.00023381055507343262,
+      "crop_rgb_sha256": [
+        "6f1801827eb05215cf32aadeb0c19323c9b315ac2555d9d99a2d42b6504b5f9d",
+        "a5283440500effba7c240b43d30a9c0e839700cbcd813ec8e98af3f95202d6bc",
+        "6cc071301730ad2b44ed1d3f70cfe352325d1d19dacf76312c50c17ef8ba635d"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            709
+          ],
+          "resized_size": [
+            832,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              832
+            ],
+            [
+              17016,
+              576
+            ],
+            [
+              540672,
+              832
+            ],
+            [
+              391368,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            709
+          ],
+          "resized_size": [
+            832,
+            576
+          ],
+          "resized_crop_xyxy": [
+            152,
+            24,
+            680,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              155648,
+              832
+            ],
+            [
+              17016,
+              576
+            ],
+            [
+              696320,
+              832
+            ],
+            [
+              391368,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            709
+          ],
+          "resized_size": [
+            832,
+            576
+          ],
+          "resized_crop_xyxy": [
+            304,
+            24,
+            832,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              311296,
+              832
+            ],
+            [
+              17016,
+              576
+            ],
+            [
+              851968,
+              832
+            ],
+            [
+              391368,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 2.0372681319713593e-10,
+      "seconds": 2.119799374951981
+    },
+    {
+      "id": "37eacf2ab327c650deeed470-native",
+      "input_sha256": "87195b8251a77562f9a210f160f7eda8014d33c6ba064a99b315d63f77ef353b",
+      "status": "ok",
+      "crop_logits": [
+        7.926988124847412,
+        7.989294528961182,
+        8.384135246276855
+      ],
+      "mean_logit": 8.100139617919922,
+      "independent_mean_logit": 8.100139300028482,
+      "raw_sigmoid_response": 0.9996966123580933,
+      "crop_rgb_sha256": [
+        "a771074c869a29b4ce2128d2987617c64b40d5aa959db56f3276f8fd0b7305be",
+        "b4d2b27a52490f9ff0dc32a588a8e8cc46422dbc1abd1904e2876ca88e1c273e",
+        "e814845d8592e81cef02d51138c9ccb90b625fd1a038fcf1289e176befbd120f"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 4.76837158203125e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.118672415963374
+    },
+    {
+      "id": "14ce52f56354381c5a334dda-native",
+      "input_sha256": "ddd0769e84107d6b4701ad906b8457c238fb080bebac4a191f46ed713bf5f4bf",
+      "status": "ok",
+      "crop_logits": [
+        -9.355941772460938,
+        -9.416857719421387,
+        -9.375007629394531
+      ],
+      "mean_logit": -9.38260269165039,
+      "independent_mean_logit": -9.382602373758951,
+      "raw_sigmoid_response": 8.416874334216118e-05,
+      "crop_rgb_sha256": [
+        "a8fb6be626aac7f54c2855dc7b217a208517cb42d6604ee4e1ad0e9b401bcb24",
+        "412cd37e28465b18bf8f39bad1aa267be5902aa784ba41ee753610f0285ae84d",
+        "092add698d175721d00e130b4e0352be7f1ed1bfffa3da0ed5efc7739ad5f168"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            800,
+            533
+          ],
+          "resized_size": [
+            800,
+            533
+          ],
+          "resized_crop_xyxy": [
+            0,
+            2,
+            528,
+            530
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              800
+            ],
+            [
+              1066,
+              533
+            ],
+            [
+              422400,
+              800
+            ],
+            [
+              282490,
+              533
+            ]
+          ],
+          "resampling": null
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            800,
+            533
+          ],
+          "resized_size": [
+            800,
+            533
+          ],
+          "resized_crop_xyxy": [
+            136,
+            2,
+            664,
+            530
+          ],
+          "source_edge_bounds_rational": [
+            [
+              108800,
+              800
+            ],
+            [
+              1066,
+              533
+            ],
+            [
+              531200,
+              800
+            ],
+            [
+              282490,
+              533
+            ]
+          ],
+          "resampling": null
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            800,
+            533
+          ],
+          "resized_size": [
+            800,
+            533
+          ],
+          "resized_crop_xyxy": [
+            272,
+            2,
+            800,
+            530
+          ],
+          "source_edge_bounds_rational": [
+            [
+              217600,
+              800
+            ],
+            [
+              1066,
+              533
+            ],
+            [
+              640000,
+              800
+            ],
+            [
+              282490,
+              533
+            ]
+          ],
+          "resampling": null
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 8.731149137020111e-11,
+      "seconds": 2.1073517909971997
+    },
+    {
+      "id": "ff1f463f8445d11b404f44be-jpeg75",
+      "input_sha256": "36341698e41b6bbb2d00b4b720daac7e2c360ada58db7568859b74c42fa85703",
+      "status": "ok",
+      "crop_logits": [
+        -8.83222770690918,
+        -9.010631561279297,
+        -7.415007591247559
+      ],
+      "mean_logit": -8.419288635253906,
+      "independent_mean_logit": -8.419288953145346,
+      "raw_sigmoid_response": 0.0002205228665843606,
+      "crop_rgb_sha256": [
+        "2044332b1772f32d07d00c03f7aa9f045708def33706a8c3ddf04dcfe70860e1",
+        "e3a5a68e73110e7b4174a0a071a0c6eb7d7fe92627371eb2a881f3370a42fdbd",
+        "804caf8f9134ba25be7863de3a77758935e035cee35e4bacdafa6994e205877c"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            683,
+            1024
+          ],
+          "resized_size": [
+            576,
+            864
+          ],
+          "resized_crop_xyxy": [
+            24,
+            0,
+            552,
+            528
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16392,
+              576
+            ],
+            [
+              0,
+              864
+            ],
+            [
+              377016,
+              576
+            ],
+            [
+              540672,
+              864
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            683,
+            1024
+          ],
+          "resized_size": [
+            576,
+            864
+          ],
+          "resized_crop_xyxy": [
+            24,
+            168,
+            552,
+            696
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16392,
+              576
+            ],
+            [
+              172032,
+              864
+            ],
+            [
+              377016,
+              576
+            ],
+            [
+              712704,
+              864
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            683,
+            1024
+          ],
+          "resized_size": [
+            576,
+            864
+          ],
+          "resized_crop_xyxy": [
+            24,
+            336,
+            552,
+            864
+          ],
+          "source_edge_bounds_rational": [
+            [
+              16392,
+              576
+            ],
+            [
+              344064,
+              864
+            ],
+            [
+              377016,
+              576
+            ],
+            [
+              884736,
+              864
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.112277916050516
+    },
+    {
+      "id": "16a49f079c23dbcc19bfe7c1-native",
+      "input_sha256": "16ed7101ba38793c74cf984da5005a93b936628b3694ce40c207ef9eb5ec53e2",
+      "status": "ok",
+      "crop_logits": [
+        -8.477729797363281,
+        -6.9157891273498535,
+        -8.22105598449707
+      ],
+      "mean_logit": -7.871524810791016,
+      "independent_mean_logit": -7.871524969736735,
+      "raw_sigmoid_response": 0.00038130683242343366,
+      "crop_rgb_sha256": [
+        "b589a59093c1e24ce13cfd92b41233a6580dafe3dcfa2223c9c813a975c14ac6",
+        "5863c8d7f017caeea601951fc3c5c9f1470e7879cfc30d884973bc64e90675ad",
+        "8841c192889e7ba24d20531e3e0b1957fa520006de4543c75a2cd98ccca48822"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            681
+          ],
+          "resized_size": [
+            866,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              866
+            ],
+            [
+              16344,
+              576
+            ],
+            [
+              540672,
+              866
+            ],
+            [
+              375912,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            681
+          ],
+          "resized_size": [
+            866,
+            576
+          ],
+          "resized_crop_xyxy": [
+            169,
+            24,
+            697,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              173056,
+              866
+            ],
+            [
+              16344,
+              576
+            ],
+            [
+              713728,
+              866
+            ],
+            [
+              375912,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            681
+          ],
+          "resized_size": [
+            866,
+            576
+          ],
+          "resized_crop_xyxy": [
+            338,
+            24,
+            866,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              346112,
+              866
+            ],
+            [
+              16344,
+              576
+            ],
+            [
+              886784,
+              866
+            ],
+            [
+              375912,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1191274999873713
+    },
+    {
+      "id": "90b8deab24fed48a46aaff41-jpeg75",
+      "input_sha256": "cba84539f008641dfa0d185403610a3735b0f23dc9e2d91e99ccaff85f0eca5b",
+      "status": "ok",
+      "crop_logits": [
+        9.608482360839844,
+        8.952825546264648,
+        9.571897506713867
+      ],
+      "mean_logit": 9.377735137939453,
+      "independent_mean_logit": 9.377735137939453,
+      "raw_sigmoid_response": 0.999915361404419,
+      "crop_rgb_sha256": [
+        "373f3f0d27c49ee29bc4f4a6835cbe70023b3aa34d8ba83510d44062b5572ccf",
+        "4b03126b17c9c484109990b143a1b93bae2f254cb469e601ccafc21ec7411d64",
+        "31e2bce61cd8836ef902bbee14ce4027f9fecb3495374d84508ad041bd659972"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1174674999783747
+    },
+    {
+      "id": "474bfbb044ae39bbc25ecb53-jpeg75",
+      "input_sha256": "65713b577f1104a7402eef982a99cb63802fc1ec7f20d22de791f489da6567ce",
+      "status": "ok",
+      "crop_logits": [
+        10.301677703857422,
+        10.276496887207031,
+        10.255512237548828
+      ],
+      "mean_logit": 10.2778959274292,
+      "independent_mean_logit": 10.27789560953776,
+      "raw_sigmoid_response": 0.9999656677246094,
+      "crop_rgb_sha256": [
+        "779f8803cd788497cd08d197eefb14b054d8c070848d01948429a6e5ba0ba26b",
+        "0786e08534321eb6ec6b6a98fa751b9da209935e2b0a53fda3b611bccee9c85f",
+        "074bb75cce9331b5303dc31aca8978078d640fae492d79848396acec9b277f01"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 9.5367431640625e-07,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1136585000203922
+    },
+    {
+      "id": "94445066f9b08d917337b450-jpeg75",
+      "input_sha256": "a014a6bb2690355b9fc455ac3a3746b767a784d081b95c3e890741ec5423393d",
+      "status": "ok",
+      "crop_logits": [
+        10.224872589111328,
+        10.236612319946289,
+        10.21506404876709
+      ],
+      "mean_logit": 10.225516319274902,
+      "independent_mean_logit": 10.225516319274902,
+      "raw_sigmoid_response": 0.9999637603759766,
+      "crop_rgb_sha256": [
+        "718ccafd243062ddce12e7943dcf08cfd9f21fa02fcdda20d22f8d98d8ac885d",
+        "5b040fe44c02a23e4630b4d6a256bab4ab3c4fcf035c8a573c2c76f81484b4df",
+        "688ae4e849e95543e63417ac6547226de7ca46998ed71b0ee3386a42f4f41f09"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              540672,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            24,
+            24,
+            552,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              24576,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              565248,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            1024
+          ],
+          "resized_size": [
+            576,
+            576
+          ],
+          "resized_crop_xyxy": [
+            48,
+            24,
+            576,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              49152,
+              576
+            ],
+            [
+              24576,
+              576
+            ],
+            [
+              589824,
+              576
+            ],
+            [
+              565248,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.113821375009138
+    },
+    {
+      "id": "67e2b5f284fa77f680620492-native",
+      "input_sha256": "7fccdcf02641172e410a988dd4f9487497c7d83805901fde25615c3127831fd0",
+      "status": "ok",
+      "crop_logits": [
+        -8.900840759277344,
+        -8.851171493530273,
+        -9.410518646240234
+      ],
+      "mean_logit": -9.054177284240723,
+      "independent_mean_logit": -9.054176966349283,
+      "raw_sigmoid_response": 0.00011688802624121308,
+      "crop_rgb_sha256": [
+        "5dbe575f9734273bf67506672dadb4411bde7ac0202de6935b33be725df4ae8e",
+        "31416d7925480a8d4a8eff586d01349be2dd248db2393d2187035b4e5069e339",
+        "861aee33a180eb05463cff3317ffae8e7e80ab161d738a102fb22c7407bbef38"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              540672,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            120,
+            24,
+            648,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              122880,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              663552,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            768
+          ],
+          "resized_size": [
+            768,
+            576
+          ],
+          "resized_crop_xyxy": [
+            240,
+            24,
+            768,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              245760,
+              768
+            ],
+            [
+              18432,
+              576
+            ],
+            [
+              786432,
+              768
+            ],
+            [
+              423936,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.12139337498229
+    },
+    {
+      "id": "065d6790ad053596da457f51-jpeg75",
+      "input_sha256": "9325800d75d34ff99c69b5894342184a1aeaf02f52ffe566674c8d314e8c81c2",
+      "status": "ok",
+      "crop_logits": [
+        -9.80725383758545,
+        -9.447111129760742,
+        -10.010339736938477
+      ],
+      "mean_logit": -9.754900932312012,
+      "independent_mean_logit": -9.754901568094889,
+      "raw_sigmoid_response": 5.8006295148516074e-05,
+      "crop_rgb_sha256": [
+        "ec732b5addf9a8318383cce52192cf72a1bde0f5f7a6aedb87471e97fb015d5c",
+        "2d5db06cf7007623a33f9822e8477669e22aed7dd5a606edbcb655fd3a1b6240",
+        "52daf23d19e985bd213832154d5e77ac490cb8cdd9dab0e1e3877d4d338fa710"
+      ],
+      "traces": [
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            0,
+            24,
+            528,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              0,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              540672,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            168,
+            24,
+            696,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              172032,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              712704,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        },
+        {
+          "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+          "oriented_original_size": [
+            1024,
+            683
+          ],
+          "resized_size": [
+            864,
+            576
+          ],
+          "resized_crop_xyxy": [
+            336,
+            24,
+            864,
+            552
+          ],
+          "source_edge_bounds_rational": [
+            [
+              344064,
+              864
+            ],
+            [
+              16392,
+              576
+            ],
+            [
+              884736,
+              864
+            ],
+            [
+              377016,
+              576
+            ]
+          ],
+          "resampling": "LANCZOS"
+        }
+      ],
+      "native_replay_passed": true,
+      "max_logit_difference": 0.0,
+      "sigmoid_difference": 0.0,
+      "seconds": 2.1150253750383854
+    }
+  ],
+  "case_count": 26,
+  "all_native_replays_passed": true,
+  "scope": "26 deterministic project-source/crop/coordinate/single-batch replays. No raw images, model weights or face embeddings."
+}

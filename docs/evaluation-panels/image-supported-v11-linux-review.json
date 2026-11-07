@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.immutable-specialist-release-replay/5",
+  "science_commit": "28490416cebd2090e24e12bbc0f9117b4bd541ac",
+  "release": "docs/evaluation-panels/image-supported-v11-release.json",
+  "release_sha256": "76d3e9da625d5f2e11f25abb11d586f15910ddf0062b033e46ff141d0efd5a3f",
+  "selected_repository_files": 50,
+  "numerical": {
+    "schema": "chipmunk.specialist-real-scalar-reproduction/4",
+    "study": "image-supported-v11",
+    "modality": "image",
+    "arms": 4,
+    "probabilities_compared": 4320,
+    "max_absolute_probability_difference": 3.3306690738754696e-16,
+    "absolute_probability_limit": 0.000001,
+    "confirmation_not_fitted": true,
+    "changed_assessed_confirmation_units": 1440,
+    "preserved_unassessed_confirmation_units": 0,
+    "missing_required_check_withheld": true,
+    "missing_check_test_status": "passed_on_previously_assessed_file",
+    "cross_role_lineage_refused": true,
+    "new_neural_forwards": 0,
+    "raw_media_or_weights_loaded": false,
+    "serving_admitted": false,
+    "scope": "Retained-scalar numerical replay only; not native inference, source truth, fresh detection quality or outside human review."
+  },
+  "frozen_science_modified": false,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "scope": "Immutable consumed-source scalar replay, not native inference, fresh detection quality or outside human review.",
+  "github": {
+    "run_id": 42424669448,
+    "job_id": 128560274051,
+    "head_sha": "578992bfaf807780386c84cff0fa2e9f5ab448f7",
+    "conclusion": "success",
+    "source": "decoded actual job log"
+  }
+}

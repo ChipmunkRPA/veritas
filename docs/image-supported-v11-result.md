@@ -79,6 +79,14 @@ missing required check withheld a previously assessed result, and cross-role
 source lineage was refused. This numerical replay is separate from native
 map/source QA and from a complete customer analysis flow.
 
+The actual [Linux workflow](https://github.com/ChipmunkRPA/veritas/actions/runs/42424669448)
+also refitted the unchanged four methods from50 dependencies archived at the
+immutable publication commit. The
+[decoded numerical receipt](evaluation-panels/image-supported-v11-linux-review.json)
+records its agreement and adverse checks. No photo, native map or model weights
+were loaded. This is one successful numerical run, not fresh detection or a
+resolution of the separate passage-fitting portability failures.
+
 The [complete result](evaluation-panels/image-supported-v11-result.json),
 [source audit](evaluation-panels/image-supported-v11-source-postprocessing-review.json)
 and [scalar replay release](evaluation-panels/image-supported-v11-release.json)

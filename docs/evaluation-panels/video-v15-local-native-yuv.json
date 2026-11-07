@@ -1,0 +1,73 @@
+{
+  "schema": "chipmunk.fixed-native-yuv-experiment/15",
+  "python": "3.12.6",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "2.2.6",
+  "opencv": "5.0.0",
+  "opencv_ffmpeg_build": [
+    "FFMPEG:                      YES",
+    "avcodec:                   YES (61.19.101)",
+    "avformat:                  YES (61.7.100)",
+    "avutil:                    YES (59.39.100)",
+    "swscale:                   YES (8.3.100)"
+  ],
+  "ffmpeg_version": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+  "ffmpeg_binary_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+  "experiment_code_sha256": "bf7b247db65bb97cd852089da5124a1b0f58f47294cb6a693ff1b2fec4706029",
+  "renderer_code_sha256": "91db094adc4e5803c70da729c68195bf283a84e0b55bffc165ae4acf00f0841e",
+  "authored_yuv_sha256": "2025fc4531fbd91e0148b7b26b17181157c0e80ede8b1361d9c5a561f9a02cf4",
+  "native_samples_bytes": 147456,
+  "recovered_yuv_sha256": "2025fc4531fbd91e0148b7b26b17181157c0e80ede8b1361d9c5a561f9a02cf4",
+  "native_samples_exact": true,
+  "container_sha256": "ff17f36ab1907d918bce1b21aba15a3bce5c75121ebcaf5bdd6bb94dee217408",
+  "frames": 12,
+  "audited_frame": 3,
+  "source_timestamps_exact": true,
+  "source_stream": {
+    "width": 128,
+    "height": 64,
+    "pix_fmt": "yuv420p",
+    "color_range": "tv",
+    "color_space": "bt709",
+    "time_base": "1/1000",
+    "disposition": {
+      "default": 0,
+      "dub": 0,
+      "original": 0,
+      "comment": 0,
+      "lyrics": 0,
+      "karaoke": 0,
+      "forced": 0,
+      "hearing_impaired": 0,
+      "visual_impaired": 0,
+      "clean_effects": 0,
+      "attached_pic": 0,
+      "timed_thumbnails": 0,
+      "non_diegetic": 0,
+      "captions": 0,
+      "descriptions": 0,
+      "metadata": 0,
+      "dependent": 0,
+      "still_image": 0
+    },
+    "tags": {
+      "ENCODER": "Lavc61.3.100 ffv1",
+      "DURATION": "00:00:01.500000000"
+    }
+  },
+  "opencv_rgb_sha256": "8fd66650cb8b2af555a77e920f6f20247d649d209b39e4be72daea96a89a8713",
+  "ffmpeg_rgb_sha256": {
+    "metadata_default": "482360c568a875154b18f835091ed71da883d8593e871c0960ed099c76f1e152",
+    "bt601": "8fd66650cb8b2af555a77e920f6f20247d649d209b39e4be72daea96a89a8713",
+    "bt709": "482360c568a875154b18f835091ed71da883d8593e871c0960ed099c76f1e152"
+  },
+  "opencv_matches": [
+    "bt601"
+  ],
+  "metadata_default_equals_bt709": true,
+  "explicit_matrices_differ": true,
+  "neural_forwards": 0,
+  "private_inputs_used": false,
+  "original_experiment_changed": false,
+  "scope": "Fixed authored YUV and exact native recovery isolate encoding conversion. Renderer equality and mismatch are observations, not pass conditions, detector validation, a single-library causal claim or original native-gate repair."
+}

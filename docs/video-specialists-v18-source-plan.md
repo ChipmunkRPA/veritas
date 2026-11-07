@@ -57,6 +57,16 @@ The input adapter is implemented and its clock/truth tests pass. Its full
 preparation has not yet run. Temporary group renderings are deleted only after
 their byte/clock commitments are written. Original research clips remain intact.
 
+The first waiting postprocessing coordinator used the frozen audio-only runner's
+allowlist for the future video job. That mismatch was caught before any child
+work started. The waiting coordinator was cancelled, with its original state,
+log and cancellation receipt preserved; the active audio pipeline was not
+interrupted or restarted. The corrected version3 coordinator uses a separate
+video-only version4 runner and preflights the actual queued command without
+starting a worker or creating output. Two CLI regressions cover the supported
+video command and rejection of an audio command by that runner. Frozen audio
+runner bytes remain unchanged.
+
 The first detector comparison will separate face-crop authenticity evidence from
 within-track appearance and photometric changes. A local window needs its own
 overlap label; a whole-file swap label cannot be copied into an unchanged window.

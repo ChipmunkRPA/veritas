@@ -1,0 +1,135 @@
+{
+  "schema": "chipmunk.writing-specialists-result/5",
+  "arms": {
+    "baseline-global": {
+      "planned_files": 128,
+      "scored_files": 128,
+      "inconclusive_files": 0,
+      "genuine_files": 32,
+      "ai_files": 96,
+      "source_balanced_brier_on_scored_cases": 0.14606707262100332,
+      "false_ai_files": 11,
+      "missed_ai_files": 4,
+      "correct_ai_files": 92,
+      "correct_human_files": 21,
+      "local_contexts": {
+        "pooled": {
+          "planned_units": 256,
+          "scored_units": 256,
+          "brier": 0.14271341233664986
+        }
+      },
+      "artifact_sha256": "6f10e3ea1ebf28794cb680511b17456948a1d0349cb9f97745433e401c07434e"
+    },
+    "baseline-context": {
+      "planned_files": 128,
+      "scored_files": 128,
+      "inconclusive_files": 0,
+      "genuine_files": 32,
+      "ai_files": 96,
+      "source_balanced_brier_on_scored_cases": 0.13701206645043487,
+      "false_ai_files": 11,
+      "missed_ai_files": 7,
+      "correct_ai_files": 89,
+      "correct_human_files": 21,
+      "local_contexts": {
+        "long": {
+          "planned_units": 128,
+          "scored_units": 128,
+          "brier": 0.10595305501521377
+        },
+        "short": {
+          "planned_units": 128,
+          "scored_units": 128,
+          "brier": 0.16659570093188206
+        }
+      },
+      "artifact_sha256": "36b1846c2ea4cc863523073cfec7c9b02c3cd553c0fd982a09b0250f70aa8a6f"
+    },
+    "combined-global": {
+      "planned_files": 128,
+      "scored_files": 128,
+      "inconclusive_files": 0,
+      "genuine_files": 32,
+      "ai_files": 96,
+      "source_balanced_brier_on_scored_cases": 0.13249601982584489,
+      "false_ai_files": 7,
+      "missed_ai_files": 12,
+      "correct_ai_files": 84,
+      "correct_human_files": 25,
+      "local_contexts": {
+        "pooled": {
+          "planned_units": 512,
+          "scored_units": 512,
+          "brier": 0.16724882103346328
+        }
+      },
+      "artifact_sha256": "5f34729e17c0a8a9aeb7913ed4436428b3567fb0338810eb9e95a39420cba221"
+    },
+    "combined-context": {
+      "planned_files": 128,
+      "scored_files": 128,
+      "inconclusive_files": 0,
+      "genuine_files": 32,
+      "ai_files": 96,
+      "source_balanced_brier_on_scored_cases": 0.12216866068920725,
+      "false_ai_files": 6,
+      "missed_ai_files": 15,
+      "correct_ai_files": 81,
+      "correct_human_files": 26,
+      "local_contexts": {
+        "long": {
+          "planned_units": 256,
+          "scored_units": 256,
+          "brier": 0.1302570842720838
+        },
+        "short": {
+          "planned_units": 256,
+          "scored_units": 256,
+          "brier": 0.1960025781952747
+        }
+      },
+      "artifact_sha256": "d3835476aa6e154a18fb7446bb743c60a06f0f66eb8a37e2d8454827422af504"
+    }
+  },
+  "method": {
+    "schema": "chipmunk.writing-specialists-method/5",
+    "question_groups": 128,
+    "groups_per_role": 32,
+    "minimum_groups_per_class": 25,
+    "selection": "Hash-ordered connected prompt/answer components, unchanged ASCII strings only; >=160 whitespace words per source; one human and one AI answer per component.",
+    "passages": "First60 words and next100 words, copied as exact contiguous source slices; no paraphrasing. Four two-passage compositions with explicit source provenance.",
+    "routing": "Measured whitespace-word count: <=75 short, >75 long; no generator, label, score or source identity in routing.",
+    "combination": "One dependency family per fixed detector; supervised nonnegative combiner, separate combination calibration; no independence claim.",
+    "roles": [
+      "specialist_cal",
+      "fusion_fit",
+      "fusion_cal",
+      "confirmation"
+    ],
+    "max_len": 512,
+    "batch": 4,
+    "threads": 4,
+    "native_audit": "First hash-ordered input for each training role/context/truth class, plus every tokenizer overflow; separate direct unbatched forward, abs difference <=1e-5.",
+    "diagnostic_point": 0.5,
+    "diagnostic_tie_tolerance": 1e-12,
+    "admission": "Development pilot only: author IDs absent and external detector training overlap unknown. No serving admission regardless of numerical improvement.",
+    "reference_prior": 0.5,
+    "serving_admitted": false,
+    "resource_guard": {
+      "tree_rss_gib": 6,
+      "minimum_available_mib": 1536,
+      "minimum_disk_mib": 1536,
+      "maximum_seconds": 1800
+    }
+  },
+  "freeze_sha256": "7663609d60ceed4a74deb138fab289848272c359449e832b81d886206a0bdc8a",
+  "serving_admitted": false,
+  "limits": [
+    "No participant IDs: prompt/duplicate disjointness is not author disjointness.",
+    "Publisher source labels are not an independent authorship examination.",
+    "External detector training overlap unknown; preliminary development only.",
+    "Artificial concatenation boundaries and ASCII-only English are limited conditions."
+  ],
+  "interpretation": "Internal50:50 diagnostic tendency only, no public threshold or validated customer probability. No automatic adoption; absent author IDs and unknown external training overlap require additional independent sources."
+}

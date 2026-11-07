@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.writing-specialists-release/5",
+  "private_freeze_sha256": "7663609d60ceed4a74deb138fab289848272c359449e832b81d886206a0bdc8a",
+  "files_sha256": {
+    ".github/workflows/writing-specialists-v5-review.yml": "2aea3864caf4152a95cd2b7aa62ac174f54291529c281f1c42e9d44384bd8082",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+    "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+    "backend/scripts/audit_writing_specialists_v5.py": "6eefa8e5ae7deee06a06ce74f3f3740a1424e22f925c2dbc779528d751921922",
+    "backend/scripts/reproduce_writing_specialists_v5.py": "0f4c604fbd4d39f42ec477085348d023d4f890c86555fe62e065e2f89d511b42",
+    "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+    "backend/scripts/specialist_calibration.py": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "backend/scripts/writing_focus_v3.py": "f71448d811fc0082520eeb297f2d31238302bace360030859f1acf6e257c1fa9",
+    "backend/scripts/writing_modernbert_v4.py": "8d0cfe1fabdc7f60d7c17765319a16e6299a97c861757cb3b1cdc2a8a55418dc",
+    "backend/scripts/writing_specialists_v5.py": "7d82110d437ff6887ea8096d3083e11a0d2d2a5d53afa9d5a619422e48b0397a",
+    "backend/tests/test_writing_specialists_v5.py": "f8a0eb874db63ec568c899c153ad2b47ccde732328b871e3df78a8d449324ea0",
+    "docs/evaluation-panels/writing-specialists-v5-baseline-confirmation-native.json": "bfb96a53ea3c7aeea4045502f9d3373d46c6831779ebd612a06c419e1ac58763",
+    "docs/evaluation-panels/writing-specialists-v5-baseline-training-native.json": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+    "docs/evaluation-panels/writing-specialists-v5-candidate-confirmation-native.json": "cc1a1dd3e0e50d0eb23ce9606fc0dfa7e44f3796a057a6b71b47e24f8110acab",
+    "docs/evaluation-panels/writing-specialists-v5-candidate-training-native.json": "da23e40c2cdc8eebaaf0558a25932721d9c3753d3e044ddd5cc7b1ddf6eea823",
+    "docs/evaluation-panels/writing-specialists-v5-commercial-source-review.json": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+    "docs/evaluation-panels/writing-specialists-v5-expected.json.gz": "c67633601fd05e81693781ec42e96d0ea2b978e55b707fb53d3d304072bb7a36",
+    "docs/evaluation-panels/writing-specialists-v5-original-source-audit.json": "c82fa4acc4bc8fc625da592442585931c619d9d6b033e4b6b5f60ef612d9ca9a",
+    "docs/evaluation-panels/writing-specialists-v5-result.json": "b737b1b3410d77152112bddaa97a6374df420731aee14864db4a6545edd8939e",
+    "docs/evaluation-panels/writing-specialists-v5-scalars.json.gz": "1098ac7fa80f6e4ffabf70322d87144eb2323c88cceaeb11c7eb36e80e84b23f",
+    "docs/writing-specialists-v5-protocol.md": "facc0c01d327164a0ff36d244c545a5ec6d812fe1296057c04dde4d6334faeab"
+  },
+  "manifest_sha256": {
+    "baseline-global": "53bea5302647dd7e30f58a2d65ede29a49fd5c96c90a6603a278f3e47acfa26e",
+    "baseline-context": "6207f271e542062bacee54d88232128f8c0565ce8fbdc68d0004f6ecc9b95bdb",
+    "combined-global": "4361d4b34de73d3d8d3fb174181012e42c4e4c034bdb87db17183467be9941e3",
+    "combined-context": "7a4247f00b1910f2587355548044560058f0cb837846ddeb181607ccade240f3"
+  },
+  "packet_attribution": "TXD-22, Iqbal and Kashem, Mendeley Data V1, doi:10.17632/prcjcggtjf.1; publisher CC-BY-4.0. No raw text. Retained detector scalars, source commitments, constructed-scope labels and positions support numerical reproduction.",
+  "source_texts_published": false,
+  "numerical_probability_agreement_limit": 1e-06,
+  "source_groups": 128,
+  "constructed_documents": 512,
+  "serving_admitted": false,
+  "linux_status": "not_run_yet"
+}

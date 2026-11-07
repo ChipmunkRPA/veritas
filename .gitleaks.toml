@@ -93,3 +93,73 @@ regexes = [
   '''^tokenizers\.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327"$''',
   '''^token_ids_sha256": "(?:cd3e736fa17c4add7fbb306b5f0514fc4530a0c6988d6ec4bfff34c163085f62|735f7a33ce92b4e1692e16a4e021839e900002eabd594726520a70c6ff15fbf7|553149c682a0acd0ca0dde7e15f78bf07c8ae55451790e0b248b1e05e2f3bc40)"$''',
 ]
+
+# Publication review7Nov2026: all27 legacy findings independently recomputed
+# from actual source files, tokenizer assets or installed native libraries.
+# Match exact filename, field and value; never exempt a complete receipt.
+[[rules.allowlists]]
+description = "Verified legacy source/runtime SHA-256 metadata: image-v7-smaug-development-freeze.json"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/image\-v7\-smaug\-development\-freeze\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"backend/app/api/auth\.py": "ae272ad08b85cb1073103d6bff4776c5739f6d8b8c632c1e32cfae345920421c",?\s*$''',
+  '''^\s*"backend/app/api/tokens\.py": "7fba4392287cc00a6619be446846ec414bad3c5b59f892f4e9ee603d50b086e3",?\s*$''',
+  '''^\s*"backend/app/api/v2_auth\.py": "35e0047d53b80d9db0329e4ffe1a7c56dd135227e3e38c18d2110213b5efff9d",?\s*$''',
+  '''^\s*"backend/app/cases/access\.py": "384518dce65eb183c0fa324d86031c5f7f78475b6547a352a01e8800f5e0e544",?\s*$''',
+  '''^\s*"backend/app/reports/templates/tokens\.css": "56f7ca5f883ffc9527982504ec906ff0116cfee11b74c00447702b9005a93922",?\s*$''',
+  '''^\s*"tokenizer\.json": "4d777ef5bdc1aa36227abdfb77c3e49e7b9c892d16e1b6bda41c393504828be4",?\s*$''',
+  '''^\s*"tokenizer_config\.json": "fd4bc42eca490af2f3ab7e1e22cdef97a8c5a2354146d5700d5d55ecf70f1de5",?\s*$''',
+  '''^\s*"tokenizers/tokenizers\.abi3\.so": "01a6e7dc78d57760f4297a1cf8c40fc3e77bcabe855c590a36d0072709284091",?\s*$''',
+  '''^\s*"tokenizers/tokenizers\.abi3\.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",?\s*$''',
+  '''^\s*"transformers/models/siglip/tokenization_siglip\.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",?\s*$''',
+]
+
+[[rules.allowlists]]
+description = "Verified legacy source/runtime SHA-256 metadata: image-v8-patch-drift-development-freeze.json"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/image\-v8\-patch\-drift\-development\-freeze\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"backend/app/api/auth\.py": "ae272ad08b85cb1073103d6bff4776c5739f6d8b8c632c1e32cfae345920421c",?\s*$''',
+  '''^\s*"backend/app/api/tokens\.py": "7fba4392287cc00a6619be446846ec414bad3c5b59f892f4e9ee603d50b086e3",?\s*$''',
+  '''^\s*"backend/app/api/v2_auth\.py": "35e0047d53b80d9db0329e4ffe1a7c56dd135227e3e38c18d2110213b5efff9d",?\s*$''',
+  '''^\s*"backend/app/cases/access\.py": "384518dce65eb183c0fa324d86031c5f7f78475b6547a352a01e8800f5e0e544",?\s*$''',
+  '''^\s*"backend/app/reports/templates/tokens\.css": "56f7ca5f883ffc9527982504ec906ff0116cfee11b74c00447702b9005a93922",?\s*$''',
+]
+
+[[rules.allowlists]]
+description = "Verified legacy source/runtime SHA-256 metadata: image-v8-patch-drift-native-freeze.json"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/image\-v8\-patch\-drift\-native\-freeze\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"tokenizers/tokenizers\.abi3\.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",?\s*$''',
+  '''^\s*"transformers/models/siglip/tokenization_siglip\.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",?\s*$''',
+]
+
+[[rules.allowlists]]
+description = "Verified legacy source/runtime SHA-256 metadata: video-v16-sface-freeze.json"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/video\-v16\-sface\-freeze\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"tokenizers/tokenizers\.abi3\.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",?\s*$''',
+  '''^\s*"transformers/models/siglip/tokenization_siglip\.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",?\s*$''',
+]
+
+[[rules.allowlists]]
+description = "Verified legacy source/runtime SHA-256 metadata: video-v17-sface-freeze.json"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/video\-v17\-sface\-freeze\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"backend/app/api/auth\.py": "ae272ad08b85cb1073103d6bff4776c5739f6d8b8c632c1e32cfae345920421c",?\s*$''',
+  '''^\s*"backend/app/api/tokens\.py": "7fba4392287cc00a6619be446846ec414bad3c5b59f892f4e9ee603d50b086e3",?\s*$''',
+  '''^\s*"backend/app/api/v2_auth\.py": "35e0047d53b80d9db0329e4ffe1a7c56dd135227e3e38c18d2110213b5efff9d",?\s*$''',
+  '''^\s*"backend/app/cases/access\.py": "384518dce65eb183c0fa324d86031c5f7f78475b6547a352a01e8800f5e0e544",?\s*$''',
+  '''^\s*"backend/app/reports/templates/tokens\.css": "56f7ca5f883ffc9527982504ec906ff0116cfee11b74c00447702b9005a93922",?\s*$''',
+  '''^\s*"timm/task/token_distillation\.py": "d7c40dc3ff36c5609526f51d662d8ef45707a77027dfe1547dede252f92f895e",?\s*$''',
+  '''^\s*"tokenizers/tokenizers\.abi3\.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",?\s*$''',
+  '''^\s*"transformers/models/siglip/tokenization_siglip\.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",?\s*$''',
+]

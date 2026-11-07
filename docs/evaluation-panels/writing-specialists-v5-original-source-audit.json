@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.writing-specialists-original-audit/5",
+  "source_sha256": "232c260f8caf7ea61a331f39fa730956862afbe0c5fc554720daa07d215a2f7d",
+  "plan_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+  "code_sha256": "6eefa8e5ae7deee06a06ce74f3f3740a1424e22f925c2dbc779528d751921922",
+  "source_records": 66000,
+  "source_groups": 128,
+  "actual_original_source_slices_verified": 512,
+  "roles": {
+    "specialist_cal": 32,
+    "fusion_fit": 32,
+    "fusion_cal": 32,
+    "confirmation": 32
+  },
+  "adverse_bindings_refused": {
+    "wrong_source_row": true,
+    "wrong_original_span": true,
+    "copied_file_truth": true
+  },
+  "source_text_published": false,
+  "participant_independence_established": false,
+  "external_training_overlap_excluded": false,
+  "new_model_forwards": 0,
+  "serving_admitted": false
+}

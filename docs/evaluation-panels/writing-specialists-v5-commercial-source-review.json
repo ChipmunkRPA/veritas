@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.specialist-commercial-source-review/3",
+  "dataset": {
+    "url": "https://data.mendeley.com/datasets/prcjcggtjf/1",
+    "doi": "10.17632/prcjcggtjf.1",
+    "file_url": "https://data.mendeley.com/public-files/datasets/prcjcggtjf/files/1e842f9d-4ff8-4986-bc7c-cde460f806ee/file_downloaded",
+    "file_sha256": "232c260f8caf7ea61a331f39fa730956862afbe0c5fc554720daa07d215a2f7d",
+    "publisher_license": "CC-BY-4.0",
+    "acquired_bytes": 121656267,
+    "review": "Publisher page explicitly declares CC BY4.0. Preserve attribution. Do not redistribute raw text in this study. Publisher labels and consent claims are not independently established."
+  },
+  "models": {
+    "baseline": {
+      "repository": "wasitaigeneratedcom/ai-text-detector-small",
+      "revision": "f1795c86806e6838d4afa33d0b1427f8430c9615",
+      "declared_license": "Apache-2.0",
+      "upstream": "desklib/Microsoft MIT; NOTICE retained",
+      "external_training_overlap": "Unknown; full training corpus not disclosed."
+    },
+    "candidate": {
+      "repository": "GeorgeDrayson/modernbert-ai-detection-raid-mage",
+      "revision": "e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624",
+      "declared_license": "Apache-2.0",
+      "base": "answerdotai/ModernBERT-base Apache-2.0",
+      "declared_training": "RAID and MAGE; not used as unseen validation. Other external pretraining overlap remains unknown."
+    }
+  },
+  "card_sha256": {
+    "baseline_card": "b511193473ce1507ca578c465561bd8ea06f37df8549d972beaad8b9143350a7",
+    "candidate_card": "328d6508b1a135e8d1559e25efdf0cb7dc9f00ba78663fc6904003ff0ab73891",
+    "candidate_base_card": "40539466fa1117be4693b8f1fdfdac81fac3c5db472ff57bc05d013d48eafa82"
+  },
+  "research_only": true,
+  "serving_admitted": false,
+  "prior_acquisition_failures": [
+    "Page/API HTTP403; no content or model training occurred.",
+    "Browser download timed out; exact displayed public file URL later succeeded.",
+    "Strict UTF-8 and CP1252 source parsing refused; original bytes retained, ASCII-only pilot prospectively specified."
+  ]
+}

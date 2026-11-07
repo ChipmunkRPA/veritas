@@ -189,3 +189,15 @@ Do not equate the completed harness with completed calibration or improved
 detection. Public methods/limitations and educational resources can be shared;
 customer uploads, real face embeddings and raw research media remain private.
 Outreach still requires its existing authorization. GCP remains last.
+
+## First real-data adapter: passages
+
+The [v5 passage pilot](writing-specialists-v5-result.md) now fits and tests four
+arms using real retained responses on128 prompt components and exact copied
+source passages. Separate length calibration plus two fixed detectors improved
+file Brier loss and reduced human false alarms, but increased missed AI at the
+frozen diagnostic readout. It is not serving-admitted. Prompt/duplicate isolation
+does not establish independence between writers, and external training overlap
+is unknown. This is a real-data development step, distinct from the authored
+v2 harness. Image, video and voice adapters and broader independent-source
+confirmation still remain; the four-media rollout is not complete.

@@ -112,3 +112,26 @@ other simultaneous activity and does not establish the earlier kill's cause.
 Heavy replications should run sequentially with resource/decoder diagnostics,
 using distinct journals that preserve the original interrupted attempts. Do not
 fill gaps from this diagnostic or silently resume the old quality comparison.
+
+### Sequential replication: stopped by the preset memory guard
+
+The separately published sequential replication completed42 inputs (37 assessed,
+five unassessed). Every one reproduced its earlier raw probabilities exactly
+and preserved assessment/check applicability. At the next1280×768 input the
+unchanged4.5GiB parent-RSS guard observed4,874,747,904 bytes and terminated only
+the owned worker (child exit-15). System available memory was8,156,184,576 bytes
+and free disk5,945,860,096 bytes at that observation. This was a conservative
+configured guard stop, not another unexplained OS kill or a detector verdict.
+
+The42-row journal remains separate from the first84-row interruption. The
+memory sampler encountered exiting children and is incomplete; its successful
+RSS observations are only a lower bound. There is still no complete baseline,
+calibration or valid candidate quality comparison. Do not merge the partial
+journals, increase a quality threshold after results, or count a guard stop as
+unassessed/original. [Complete interruption receipt](evaluation-panels/video-v13-sequential-replication-incomplete.json).
+
+The next investigation should measure object/allocator release between complete
+analyses or collect the same production-check native inputs with bounded
+retention. Any changed collector needs a separate prospective plan and complete
+native/status/raw-response correspondence before its results can be used. The
+original model/quality requirements and interrupted attempts remain unchanged.

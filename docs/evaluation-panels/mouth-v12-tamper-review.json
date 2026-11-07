@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.mouth-histogram-public-alterations/12",
+  "packet_sha256": "a8cc715dd0e8d2792c9d0072e1bb96ccdaa5d25a9b297edbf427ad3c16db7502",
+  "cases": [
+    {
+      "alteration": "omitted_window",
+      "rejected": true
+    },
+    {
+      "alteration": "changed_tree",
+      "rejected": true
+    },
+    {
+      "alteration": "wrong_point",
+      "rejected": true
+    },
+    {
+      "alteration": "false_gate",
+      "rejected": true
+    }
+  ],
+  "passed": true,
+  "outside_reviewers": 0
+}

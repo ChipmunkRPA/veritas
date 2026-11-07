@@ -1,0 +1,83 @@
+{
+  "schema": "chipmunk.video-v13-terminal-source-decode-diagnostic/13",
+  "source_sha256": "95e87d907526dc23e4fe13eb67421852ff136b72aac0072cb84ed43770756c54",
+  "id": "deepaction-022-Pexels",
+  "size": [
+    3840,
+    2160
+  ],
+  "native_frames": 260,
+  "requested_native_indices": [
+    0,
+    6,
+    13,
+    19,
+    26,
+    33,
+    39,
+    46,
+    53,
+    59,
+    66,
+    73,
+    79,
+    86,
+    92,
+    99,
+    106,
+    112,
+    119,
+    126,
+    132,
+    139,
+    146,
+    152,
+    159,
+    166,
+    172,
+    179,
+    185,
+    192,
+    199,
+    205,
+    212,
+    219,
+    225,
+    232,
+    239,
+    245,
+    252,
+    259
+  ],
+  "decoded_frames": 40,
+  "retained_frame_bytes": 995328000,
+  "cache_bytes": 995328000,
+  "ordered_pixel_hash_commitment": "4bc92764cd6fc5f02cd164149997dccaa869bb45ce2c406e94f58261894b6a07",
+  "elapsed_s": 4.645981332985684,
+  "new_neural_forwards": 0,
+  "comparison_or_calibration": false,
+  "root_cause_of_prior_termination_isolated": false,
+  "source_decode_repeated_successfully": true,
+  "memory": {
+    "complete": true,
+    "metric": "sampled_process_tree_rss",
+    "sampled_max_rss_bytes": 2541142016,
+    "interval_s": 0.1,
+    "sample_count": 41,
+    "sample_attempts": 41,
+    "duration_s": 4.650017999985721,
+    "finished": true,
+    "roots": [
+      {
+        "pid": 99741,
+        "create_time": 1794029464.505557
+      }
+    ],
+    "errors": [],
+    "limitations": [
+      "Maximum of successful RSS samples; short-lived processes and between-sample peaks may be missed.",
+      "Process RSS totals can double-count shared pages; not GPU memory or a true process/system peak.",
+      "Only the supplied process roots and observed descendants are in scope; other workers are not inferred."
+    ]
+  }
+}

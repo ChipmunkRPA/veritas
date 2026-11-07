@@ -61,3 +61,31 @@ The public freeze's exact checksum is embedded in the reviewer. Arithmetic
 comparison allows relative error1e-11 and absolute error1e-12; directional
 outcomes and requirement decisions must match exactly. This tolerance does not
 alter the original model, calibration, native replay or advancement rules.
+
+## Interrupted baseline: no valid quality comparison
+
+The candidate process completed all288 planned inputs:280 assessed, four
+unsupported and four already unavailable, with no failed row. Its complete
+journal has SHA-256
+`1f2970c6a31ae37f76e31c1b5d4f3fbda396d1a58c1c1ffef2891a5dbeec60b3`.
+The existing-check process was terminated with exit status137 after84 rows:
+74 assessed and ten unassessed. Its unchanged partial journal has SHA-256
+`55de1e6a759a68a37da7d636759aff37d484b7eee724eff6ba1f996a038d7f26`.
+The remaining204 planned rows have no baseline result. No calibration fit,
+complete comparison, native model audit or advancement decision is available.
+Neither incomplete execution nor unsupported scope supplies an original vote.
+
+The next input was the original3840×2160,260-frame,10.4-second camera clip
+`deepaction-022-Pexels`, whose checksum remains unchanged. A later bounded
+decoder-only diagnostic decoded every forty planned native pictures correctly.
+Their retained pixels occupied995,328,000 bytes. The complete0.1-second process-
+tree sampler observed maximum RSS2,541,142,016 bytes. Sampled RSS can double-count
+shared pages, omit between-sample peaks and excludes a distinct GPU allocation
+measure. There were no neural forwards in this diagnostic. It confirms a
+substantial resource requirement but does not isolate the original termination
+cause. [Diagnostic receipt](evaluation-panels/video-v13-terminal-source-decode-diagnostic.json).
+
+Preserve both journals. Do not treat the candidate's completed run as a quality
+gain, fit on only the surviving baseline cases, silently resume a failed
+journal, or replace a serving check. A resource-profiled complete repeat and
+the original calibration/native/quality requirements remain necessary.

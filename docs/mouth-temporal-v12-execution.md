@@ -33,3 +33,6 @@ exported margins on all6,373 windows. Development location measurements use the
 original native regions and verified local changed-pixel masks. Original neural
 responses and native geometry are reused; this is not a new neural-forward run
 or unused-actor confirmation. No serving, billing or GCP changes are made.
+
+The completed single attempt is now [rejected under the unchanged ordinary-flag
+requirements](mouth-temporal-v12-evaluation.md). No unused actor was scored.

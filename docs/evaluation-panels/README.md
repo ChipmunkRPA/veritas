@@ -8,6 +8,15 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+`audio-v14-separation-structural-audit.json` publishes a strict345-tensor
+five-million-parameter load, pinned checkpoint/package/code hashes, retained
+license/rate metadata discrepancies, and three exact synthetic comparisons
+against inspected upstream mask/filterbank code. It includes no source media,
+voice features, pretrained tensors or accuracy outcomes. Twenty focused tests
+pass, including synthetic fit/calibration smokes; no project recording,
+project-fitted classifier or serving change is established.
+[Method and required execution freeze](../audio-separation-v14-preparation.md).
+
 `writing-v3-focus-freeze.json` binds the prospective12-file four-arm consumed
 writing comparison, exact674 focus/context inputs, pinned commercial model
 assets and runtime, complete token coverage, native replay plan and fixed

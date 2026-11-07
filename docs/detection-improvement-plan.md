@@ -65,6 +65,18 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Prepared a materially different overlapping-voice method: a pinned
+  5,066,929-parameter two-source separator, both source estimates inspected by
+  the frozen voice backbone, and a weak mixture-label objective that does not
+  label both estimates AI. Strict345-tensor load and all three synthetic upstream
+  graph comparisons pass exactly. Retained the card's3.0/4.0 ShareAlike version
+  discrepancy and checkpoint8000/training-card16000 metadata discrepancy; changing
+  only metadata rate has no forward effect. Twenty focused tests pass, including
+  both analytic gradients, source-permutation invariance and synthetic fit/calibration
+  smokes. No project recording, project fitting/calibration, reserve, installed
+  dependency or serving change yet. Complete the
+  source-bound execution freeze before forwards. [Preparation](audio-separation-v14-preparation.md).
+
 - Completed all four writing focus/context arms:40 authors/674 foci, no failures
   or token omissions. Candidate/focus recovers306 versus295 pure-Bot passages at
   the first fixed research reference, but highlights136 versus52 pure-User-origin

@@ -1,0 +1,106 @@
+{
+  "schema": "chipmunk.audio-separation-structural-audit/14",
+  "spec": {
+    "repository": "JorisCos/ConvTasNet_Libri2Mix_sepclean_16k",
+    "revision": "e1ef95ab7a037950f3a606b9a56760cf94701d3d",
+    "weight_sha256": "8d97f012f7b2f22bb79cb0d0983a7ba27a52c1796ee3f63cbf25b4d28630adce",
+    "card_sha256": "c34341c446d0c5abd1603ee3cb9e4c0093a7b2422389fdeceeea7625e280fce1",
+    "parameters": 5066929,
+    "tensor_entries": 345,
+    "clock": "Declared training16kHz; serialized default8000 retained as metadata only. Free learned filters have no samplerate-dependent arithmetic. No resampling.",
+    "input": "Exact mono16kHz64000 float32 samples, no input normalization, denoising, padding or clipping",
+    "output": "Two unordered64000-sample float32 source estimates; not identified people or guaranteed clean voices",
+    "terms": "Card metadata CC-BY-SA-4.0, explicit author notice CC-BY-SA-3.0, LibriSpeech source CC-BY-4.0. Version conflict retained; no unambiguous license or complete training-rights warranty asserted.",
+    "runtime": "CPUfloat32, frozen weights, eval. Inspected local architecture, no dynamic remote code or unsafe pickle globals.",
+    "serving_admitted": false
+  },
+  "model_args_retained": {
+    "fb_name": "FreeFB",
+    "n_filters": 512,
+    "kernel_size": 32,
+    "stride": 16,
+    "sample_rate": 8000,
+    "in_chan": 512,
+    "out_chan": 512,
+    "bn_chan": 128,
+    "hid_chan": 512,
+    "skip_chan": 128,
+    "conv_kernel_size": 3,
+    "n_blocks": 8,
+    "n_repeats": 3,
+    "n_src": 2,
+    "norm_type": "gLN",
+    "mask_act": "relu",
+    "encoder_activation": null
+  },
+  "strict_tensor_load": true,
+  "all345_tensor_entries_loaded": true,
+  "unsafe_pickle_globals": [],
+  "upstream_packages": {
+    "asteroid-0.7.0-py3-none-any.whl": "ea97a24901d9d9851b4a594171bd7c6dd900fee2c132b9ce045aa09926d489c7",
+    "asteroid_filterbanks-0.4.0-py3-none-any.whl": "4932ac8b6acc6e08fb87cbe8ece84215b5a74eee284fe83acf3540a72a02eaf5"
+  },
+  "upstream_code_sha256": {
+    "norms": "80bc9d54d9bbae5b3a110516cb927b5fc9a8ff72e10a257acb6ed4569c1e605b",
+    "convolutional": "11bf596c85e69b768fee9e76508c0db24ed5fc02a534ce7f56a4f2e609eda296"
+  },
+  "local_code_sha256": "1afd81ecc375ed0d0b4a40e1dcffadcd2c8589eb3fadae0711533e5a699ec259",
+  "audit_code_sha256": "d982f6258a70fc953f3cf8fdb799513fb99629beeec94d8e1dd5d3677d71f987",
+  "synthetic_probes": [
+    {
+      "id": "two_sines",
+      "input_sha256": "74890a28c58daee6beec23df6055e268ac311191ada53a2f0065bb5cefb6dc51",
+      "output_sha256": "48f481549241c4cae6f431b8c0e5426a8c1f411f8e7a173280833ed0c6538fb5",
+      "output_shape": [
+        2,
+        64000
+      ],
+      "source_unchanged": true,
+      "upstream_max_absolute_difference": 0.0,
+      "sample_rate_metadata_max_difference": 0.0,
+      "all_outputs_exact": true,
+      "seconds_three_forwards": 1.122727792011574
+    },
+    {
+      "id": "seeded_noise",
+      "input_sha256": "2c8f5d9586403686b9f2da353a91648045e15784465b98e542143bfcc26a50b3",
+      "output_sha256": "914858aea59244269e4083177aee2ceddfad1b23cf7634b259543145962af7b5",
+      "output_shape": [
+        2,
+        64000
+      ],
+      "source_unchanged": true,
+      "upstream_max_absolute_difference": 0.0,
+      "sample_rate_metadata_max_difference": 0.0,
+      "all_outputs_exact": true,
+      "seconds_three_forwards": 1.107166417001281
+    },
+    {
+      "id": "impulse",
+      "input_sha256": "74c30c605a444514a86a02662a36c0e24f4729c2b51d88562010982ce076ccf5",
+      "output_sha256": "63d80fca0f5cb3dcce9c1e9f27f324d3ae89c3a24ba13d8b4046301ed8de9b1c",
+      "output_shape": [
+        2,
+        64000
+      ],
+      "source_unchanged": true,
+      "upstream_max_absolute_difference": 0.0,
+      "sample_rate_metadata_max_difference": 0.0,
+      "all_outputs_exact": true,
+      "seconds_three_forwards": 1.1269870000542141
+    }
+  ],
+  "repeated_synthetic_exact": true,
+  "passed": true,
+  "runtime": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4
+  },
+  "project_recordings_scored": 0,
+  "fitting_started": false,
+  "serving_changed": false,
+  "scope": "Inspected upstream mask/filterbank graph parity on synthetic inputs only; no physical separation quality, AI detection gain, license-version resolution or outside review established."
+}

@@ -65,6 +65,13 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Published/remote-verified the full two-source audio freeze as220e488 before
+  starting original-recording extraction. The live append-only run preserves
+  all unassessed inputs; no fitting/calibration or new accuracy result yet.
+  Added a separate source/bag arithmetic reviewer outside the frozen79 files;
+  seven hand-computed numerical tests pass. Full reconstruction and exact refits
+  await the completed recording run. [Execution](audio-separation-v14-execution.md).
+
 - Completed the two-source audio execution runner and prospective lock: all
   4,248 original consumed inputs, unchanged roles/62 unassessed,79 project/six
   installed code pins, own bag fitting/calibration, both raw/mapped stability

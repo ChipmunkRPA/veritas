@@ -3,10 +3,13 @@
 6 November 2026. The complete local experiment now binds 79 project files,
 six installed implementations, all 4,248 original consumed inputs, exact voice/VAD
 and separation weights, source roles, own fitting/calibration, stability and the
-original sixteen requirements. No project recording has been scored or used to
-fit this candidate yet. The complete [protocol](audio-separation-v14-protocol.md)
-and [public freeze](evaluation-panels/audio-v14-separation-freeze.json) must be
-published and remote-verified before extraction starts.
+original sixteen requirements. At freeze publication no project recording had
+been scored or used to fit this candidate. The complete
+[protocol](audio-separation-v14-protocol.md) and
+[public freeze](evaluation-panels/audio-v14-separation-freeze.json) were published
+and remote-verified as `220e4888942e00ac934150945ce1fccbab520e29` before
+extraction started. Extraction is now running under the unchanged lock; fitting
+and calibration have not started.
 
 Private lock SHA-256:
 `93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b`.
@@ -73,6 +76,24 @@ and exact fitting-only refits remain necessary alongside native correspondence.
 A complete result must retain misses, false calls, inconclusive outcomes and
 every frozen requirement, including strong background speech. A failed arm
 cannot be rescued by changing a point, dropping difficult cases or relaxing gates.
+
+The separate arithmetic reviewer is implemented outside the frozen inference
+files. Seven focused tests pass, including hand-computed source/bag responses,
+permutation, standardization/intercept positions and stable extreme logits.
+Complete real-data reconstruction and exact refits await the completed receipt,
+trained objects and outcomes; the tests do not claim those stages have passed.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_separation_v14 \
+  /path/to/audio-v14/lock.json /path/to/audio-v14/features.jsonl \
+  /path/to/audio-v14/trained/head.json /path/to/audio-v14/responses.jsonl \
+  /path/to/audio-v14/summary.json /path/to/audio-v14/numerical-review.json --refit
+```
+
+This reconstructs source and bag probabilities, fitting-only normalization,
+group/truth calibration, stability and operational counts with separate arithmetic.
+Declared statistics/gates and the exact refit learner remain shared. It runs no
+neural forwards and is not an outside reviewer.
 
 Only a passing consumed result can permit a separately frozen fresh comparison;
 it does not enable the detector, customer confidence or model-specific claims.

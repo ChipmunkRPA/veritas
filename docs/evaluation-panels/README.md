@@ -23,6 +23,10 @@ checksums, own bag fitting/calibration and all sixteen unchanged gates.
 actual freeze. All67 selected tests pass. No project recording forward, project
 fitting, fresh accuracy or outside human review is established by these metadata
 checks. [Execution and full protocol](../audio-separation-v14-execution.md).
+After remote verification as220e488, the full extraction began. A separate
+source/bag arithmetic reviewer and seven synthetic numerical tests are now
+available; full real-data numerical replay/refits remain pending completion.
+These additions do not modify any of the79 frozen inference/method files.
 
 `writing-v3-focus-freeze.json` binds the prospective12-file four-arm consumed
 writing comparison, exact674 focus/context inputs, pinned commercial model

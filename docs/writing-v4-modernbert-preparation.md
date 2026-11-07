@@ -5,6 +5,11 @@ for a future local comparison. No model construction, classifier forward on
 project text, fitting or serving change has taken place. The resource-heavy
 audio extraction continues alone.
 
+The [additive comparison implementation](writing-modernbert-v4-execution.md)
+and [prospective protocol](writing-modernbert-v4-protocol.md) are now available.
+Synthetic runtime verification and the completed execution freeze are pending;
+the code release does not claim that either has run.
+
 ## Source and permitted use
 
 The [exact fine-tuned card](https://huggingface.co/GeorgeDrayson/modernbert-ai-detection-raid-mage/blob/e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624/README.md)

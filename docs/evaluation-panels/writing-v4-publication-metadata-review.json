@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.writing-modernbert-publication-metadata-review/4",
+  "initial_findings": 3,
+  "findings": "All three are exact public tokenizer-asset SHA256 values, individually recomputed from acquired pinned files; no actual credential was found.",
+  "rule": "generic-api-key only; AND exact one source path and exact field/value pair; no whole-file or global path exclusion.",
+  "source_path": "backend/scripts/writing_modernbert_v4.py",
+  "config_sha256": "cb6b7f9d033f9b21fcf6abc46a07502240faebe506e152c1028cc129b063174a",
+  "regression_source_sha256": "6afaea576af510288d6d42d90f789d65b8032a1e9ff3fabe1ad49f5e3df6203c",
+  "scanner_tests_passed": 28,
+  "scanner_tests_skipped": 0,
+  "generic_and_provider_secret_detection_preserved": true,
+  "wrong_path_field_value_refused": true,
+  "new_candidate_model_constructed": false,
+  "serving_admitted": false,
+  "verified_files": [
+    {
+      "filename": "tokenizer.json",
+      "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+    },
+    {
+      "filename": "tokenizer_config.json",
+      "sha256": "c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb"
+    },
+    {
+      "filename": "special_tokens_map.json",
+      "sha256": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049"
+    }
+  ],
+  "scanner_configuration_review": {
+    "default_scanner_skips_own_filename": true,
+    "byte_identical_mirror_scanned": true,
+    "mirror_filename": "scanner-configuration-reviewed.toml",
+    "configuration_metadata_false_positives": 3,
+    "verified_public_installed_source_fingerprints": [
+      {
+        "module": "transformers.tokenization_utils_tokenizers",
+        "source_sha256": "bf921a160f483c7a32973952ed82a08c7d8982f769726bd220933aae2df98de8",
+        "recomputed": true
+      },
+      {
+        "module": "transformers.tokenization_utils_base",
+        "source_sha256": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e",
+        "recomputed": true
+      },
+      {
+        "module": "tokenizers.tokenizers",
+        "source_sha256": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+        "recomputed": true
+      }
+    ],
+    "handling": "Only the three exact literal installed-source digests in scanner regex definitions are manually classified as metadata. No added global/path ignore, baseline suppression or rule relaxation. Any other finding blocks publication."
+  }
+}

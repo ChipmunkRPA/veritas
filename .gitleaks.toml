@@ -62,3 +62,16 @@ regexes = [
   '''^transformers\.tokenization_utils_base": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e"$''',
   '''^tokenizers\.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327"$''',
 ]
+
+# Recomputed from the exact acquired v4 tokenizer files before publication.
+# Restrict to these three field/value pairs in this one source file.
+[[rules.allowlists]]
+description = "Writing v4 verified tokenizer file SHA-256 commitments"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_modernbert_v4\.py$''']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json['"]: ['"]6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30['"]$''',
+  '''^tokenizer_config\.json['"]: ['"]c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb['"]$''',
+  '''^special_tokens_map\.json['"]: ['"]ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049['"]$''',
+]

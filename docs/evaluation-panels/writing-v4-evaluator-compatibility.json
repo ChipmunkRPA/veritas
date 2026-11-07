@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.writing-modernbert-evaluator-compatibility/4",
+  "passed": true,
+  "source_fixture_lock_sha256": "d811c94fdebf0437ce86715cf7a1110834b63ab05fb24d9d606a59452dc789b1",
+  "old_project_pins_unchanged": 12,
+  "complete_documents": 40,
+  "complete_foci": 674,
+  "arms": 4,
+  "all_original_aggregate_fields_exact": [
+    "arms",
+    "focus_context_shifts",
+    "primary_author_paired_comparison",
+    "historical_baseline_context_replay",
+    "development_gates",
+    "qualifies_for_further_development_validation",
+    "documents",
+    "foci",
+    "failures",
+    "uncovered_bot_characters",
+    "fresh_confirmation",
+    "fitting_performed",
+    "serving_adoption_permitted",
+    "outside_reviewers"
+  ],
+  "original_nine_gates_exact": true,
+  "separate_arithmetic_reconstruction_passed": true,
+  "new_candidate_forwards": 0,
+  "real_new_candidate_native_audit": false,
+  "serving_admitted": false,
+  "scope": "Known completed v3 baseline/TMR responses and native metadata used only as an evaluator/reducer fixture, with new fixture bindings. No ModernBERT model construction, inference, detection-quality or native-execution result. All fixture media/text/rows/native metadata remain local."
+}

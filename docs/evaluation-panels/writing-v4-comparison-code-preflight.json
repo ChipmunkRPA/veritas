@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.writing-modernbert-code-preflight/4",
+  "selected_tests_passed": 73,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "prior_project_implementations_unchanged": {
+    "audio_v14": 79,
+    "video_v13": 360,
+    "writing_v3": 12
+  },
+  "known_completed_fixture_compatibility_sha256": "dc96ed2c671bba9d335a92d85bebab3f4ef9244b282be380bb1df74e36ffea93",
+  "original_shared_rules_unchanged": true,
+  "coverage_native_reduction_functions_AST_equal_after_schema_rename": 7,
+  "code_and_protocol_sha256": {
+    "backend/scripts/writing_modernbert_v4.py": "8d0cfe1fabdc7f60d7c17765319a16e6299a97c861757cb3b1cdc2a8a55418dc",
+    "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+    "backend/scripts/review_writing_modernbert_v4.py": "8e80d7ee51ef37e413c28a81517507bf9444bca4bb941a4618da099e121e475b",
+    "backend/tests/test_writing_modernbert_v4.py": "0c1db9b4d38cda81f353b2c9b3afb56eef85df9399821fa7f225748ae586be95",
+    "docs/writing-modernbert-v4-protocol.md": "5171d1e0ac2db97ab0aef713cc9a87a7d8d87767527846e9e20fdab61845fa4e",
+    "docs/writing-modernbert-v4-execution.md": "b96fa34f3527fa8584c727d4ac5954e0f8df2f7ac3e09f081011d18356ba3968"
+  },
+  "synthetic_runtime_complete": false,
+  "execution_freeze_created": false,
+  "new_candidate_model_constructed": false,
+  "new_candidate_project_forwards": 0,
+  "unused_authors_scored": false,
+  "fitting_started": false,
+  "serving_admitted": false,
+  "outside_human_reviewers": 0,
+  "scope": "Implementation integrity and known-old-result numerical fixture checks only. Actual candidate load/synthetic runtime, execution freeze, project inference, native auditing and predictive evaluation are pending. Active heavy audio evaluation remains protected."
+}

@@ -73,3 +73,16 @@ Primary continuation gates are frozen before responses. Neither a passing
 consumed-development comparison nor a native numerical replay enables serving,
 restores whole-document confidence or establishes independent human validation.
 The broader image/video/audio/writing improvement program remains unfinished.
+
+## Completed development result
+
+All four arms subsequently completed with zero failed documents. The proposed
+candidate/focus replacement fails four of nine frozen continuation gates.
+Both 80-input native audits and separate arithmetic reconstruction pass; no
+source-disjoint confirmation, calibration or serving change follows.
+[Complete result and limitations](writing-focus-v3-development-result.md).
+
+The public result contains aggregates and checksums. Exact execution still needs
+separately obtained original sources and historical local input/response
+artifacts; aggregates alone cannot reproduce neural scores or passage positions.
+No self-contained public writing replay or outside reproduction is claimed.

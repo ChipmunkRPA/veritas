@@ -65,6 +65,17 @@ integration remains unfinished.
 
 ## Progress on 6 November
 
+- Completed all four writing focus/context arms:40 authors/674 foci, no failures
+  or token omissions. Candidate/focus recovers306 versus295 pure-Bot passages at
+  the first fixed research reference, but highlights136 versus52 pure-User-origin
+  passages. At the second:287 versus276,108 versus38. Four of nine frozen gates
+  fail, rejecting the replacement without source-disjoint confirmation or serving
+  changes. Removing context from the current model also loses substantial AI
+  recovery. All160 native replays and separate reconstruction of every aggregate,
+  rank, interval and decision pass; earlier674 context scores match within1.2e−7.
+  User-origin highlights in assisted text are not unassisted-human false-alarm
+  rates. [Complete result and diagnosis](writing-focus-v3-development-result.md).
+
 - Implemented a prospective writing2x2 comparison: current/candidate models on
   exact focus sentences and three-sentence contexts, all40 consumed authors and
   674 foci. Forty-five selected tests pass. Independent native token-ID audits

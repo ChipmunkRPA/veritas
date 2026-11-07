@@ -15,6 +15,14 @@ author-group continuation requirements. No source text, author names, queries,
 per-record annotations or classifier scores are published by this freeze.
 Forty-five selected tests and source-only tokenizer audits are preparation,
 not improved detection or fresh accuracy. [Protocol and execution](../writing-focus-v3-execution.md).
+`writing-v3-focus-development.json` subsequently records all four completed
+aggregate arms, exact coverage,40-author intervals and nine unchanged gates.
+The candidate/focus replacement fails four requirements because human-origin
+highlights rise sharply without supported author-IoU improvement. Both80-input
+native audits and separate arithmetic reconstruction pass; the numerical review
+receipt binds their complete private artifacts. No source wording, passage labels,
+author identifiers or response journals are published. No serving change or
+fresh validation follows. [Result and limitations](../writing-focus-v3-development-result.md).
 
 `fused-crop-v6-development-freeze.json` records the prospective consumed-source
 image-crop method; `image-localizer-v6-source-review.json` retains commercial

@@ -1,0 +1,291 @@
+{
+  "schema": "chipmunk.writing-focus-development/3",
+  "lock_sha256": "d811c94fdebf0437ce86715cf7a1110834b63ab05fb24d9d606a59452dc789b1",
+  "input_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+  "baseline_response_sha256": "2f0562b113f64c5dde7169730cb279cc19db67671c9c05380100e57c74428367",
+  "candidate_response_sha256": "6c11a35eb488c82b1cb9d6d70e04905767af1ee72c8460660ef9219bbaa1c48a",
+  "documents": 40,
+  "author_groups": 40,
+  "foci": 674,
+  "failures": 0,
+  "uncovered_bot_characters": 0,
+  "arms": {
+    "baseline/context": {
+      "pure_origin_rank_auc": 0.8782324524012503,
+      "focus_provenance_spearman": 0.5874865726392262,
+      "coverage": {
+        "inputs": 674,
+        "tokens": 52385,
+        "token_windows": 674
+      },
+      "0.5": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 51468,
+          "highlighted_human_characters": 12393,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 295,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 52,
+          "highlighted_mixed_foci": 129
+        },
+        "rates": {
+          "bot_character_recall": 0.8934796194708701,
+          "human_origin_character_highlight_rate": 0.4749185667752443,
+          "bot_character_precision": 0.8059378963686757,
+          "character_iou": 0.7352886552280812,
+          "pure_bot_recovery_rate": 0.9161490683229814,
+          "pure_human_origin_highlight_rate": 0.33986928104575165
+        },
+        "author_mean_iou": 0.6538208736977176
+      },
+      "0.8": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 47927,
+          "highlighted_human_characters": 10515,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 276,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 38,
+          "highlighted_mixed_foci": 113
+        },
+        "rates": {
+          "bot_character_recall": 0.8320081938754254,
+          "human_origin_character_highlight_rate": 0.4029507568499713,
+          "bot_character_precision": 0.8200780260771363,
+          "character_iou": 0.7035775627945213,
+          "pure_bot_recovery_rate": 0.8571428571428571,
+          "pure_human_origin_highlight_rate": 0.24836601307189543
+        },
+        "author_mean_iou": 0.6246754108531679
+      }
+    },
+    "baseline/focus": {
+      "pure_origin_rank_auc": 0.7373239150732755,
+      "focus_provenance_spearman": 0.34103588401170043,
+      "coverage": {
+        "inputs": 674,
+        "tokens": 18163,
+        "token_windows": 674
+      },
+      "0.5": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 37404,
+          "highlighted_human_characters": 9860,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 202,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 43,
+          "highlighted_mixed_foci": 90
+        },
+        "rates": {
+          "bot_character_recall": 0.6493299076453024,
+          "human_origin_character_highlight_rate": 0.3778501628664495,
+          "bot_character_precision": 0.7913845633039945,
+          "character_iou": 0.5544290288153682,
+          "pure_bot_recovery_rate": 0.6273291925465838,
+          "pure_human_origin_highlight_rate": 0.28104575163398693
+        },
+        "author_mean_iou": 0.4957449661468137
+      },
+      "0.8": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 28159,
+          "highlighted_human_characters": 6927,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 150,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 25,
+          "highlighted_mixed_foci": 67
+        },
+        "rates": {
+          "bot_character_recall": 0.48883758072356087,
+          "human_origin_character_highlight_rate": 0.265453151944817,
+          "bot_character_precision": 0.8025708259704726,
+          "character_iou": 0.4363639181168741,
+          "pure_bot_recovery_rate": 0.4658385093167702,
+          "pure_human_origin_highlight_rate": 0.16339869281045752
+        },
+        "author_mean_iou": 0.3873815635980796
+      }
+    },
+    "candidate/context": {
+      "pure_origin_rank_auc": 0.7281492307067755,
+      "focus_provenance_spearman": 0.33275443238683466,
+      "coverage": {
+        "inputs": 674,
+        "tokens": 53735,
+        "token_windows": 674
+      },
+      "0.5": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 54719,
+          "highlighted_human_characters": 25498,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 303,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 143,
+          "highlighted_mixed_foci": 197
+        },
+        "rates": {
+          "bot_character_recall": 0.9499166724533018,
+          "human_origin_character_highlight_rate": 0.9771220540333397,
+          "bot_character_precision": 0.6821372028373038,
+          "character_iou": 0.6584558735048495,
+          "pure_bot_recovery_rate": 0.9409937888198758,
+          "pure_human_origin_highlight_rate": 0.934640522875817
+        },
+        "author_mean_iou": 0.6381610156422394
+      },
+      "0.8": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 53003,
+          "highlighted_human_characters": 24054,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 291,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 129,
+          "highlighted_mixed_foci": 195
+        },
+        "rates": {
+          "bot_character_recall": 0.9201270745087147,
+          "human_origin_character_highlight_rate": 0.9217857827169956,
+          "bot_character_precision": 0.6878414680042046,
+          "character_iou": 0.6490852090425923,
+          "pure_bot_recovery_rate": 0.9037267080745341,
+          "pure_human_origin_highlight_rate": 0.8431372549019608
+        },
+        "author_mean_iou": 0.6297579320338172
+      }
+    },
+    "candidate/focus": {
+      "pure_origin_rank_auc": 0.7175942840904477,
+      "focus_provenance_spearman": 0.2921009017592596,
+      "coverage": {
+        "inputs": 674,
+        "tokens": 18648,
+        "token_windows": 674
+      },
+      "0.5": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 55174,
+          "highlighted_human_characters": 24570,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 306,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 136,
+          "highlighted_mixed_foci": 191
+        },
+        "rates": {
+          "bot_character_recall": 0.9578154294840636,
+          "human_origin_character_highlight_rate": 0.9415596857635562,
+          "bot_character_precision": 0.6918890449438202,
+          "character_iou": 0.6714289191228369,
+          "pure_bot_recovery_rate": 0.9503105590062112,
+          "pure_human_origin_highlight_rate": 0.8888888888888888
+        },
+        "author_mean_iou": 0.6479534754809645
+      },
+      "0.8": {
+        "counts": {
+          "bot_characters": 57604,
+          "human_characters": 26095,
+          "located_bot_characters": 52702,
+          "highlighted_human_characters": 21896,
+          "pure_bot_foci": 322,
+          "recovered_pure_bot_foci": 287,
+          "pure_human_foci": 153,
+          "highlighted_pure_human_foci": 108,
+          "highlighted_mixed_foci": 183
+        },
+        "rates": {
+          "bot_character_recall": 0.9149017429345184,
+          "human_origin_character_highlight_rate": 0.8390879478827361,
+          "bot_character_precision": 0.7064800664897182,
+          "character_iou": 0.6629182389937107,
+          "pure_bot_recovery_rate": 0.8913043478260869,
+          "pure_human_origin_highlight_rate": 0.7058823529411765
+        },
+        "author_mean_iou": 0.6352343662195026
+      }
+    }
+  },
+  "focus_context_shifts": {
+    "baseline": {
+      "mean_focus_minus_context": -0.19992871224349612,
+      "mean_absolute_shift": 0.3016014960470115,
+      "0.5": {
+        "context_only_highlights": 177,
+        "focus_only_highlights": 36
+      },
+      "0.8": {
+        "context_only_highlights": 215,
+        "focus_only_highlights": 30
+      }
+    },
+    "candidate": {
+      "mean_focus_minus_context": -0.02855056253308845,
+      "mean_absolute_shift": 0.08474696132020046,
+      "0.5": {
+        "context_only_highlights": 28,
+        "focus_only_highlights": 18
+      },
+      "0.8": {
+        "context_only_highlights": 65,
+        "focus_only_highlights": 28
+      }
+    }
+  },
+  "primary_author_paired_comparison": {
+    "0.5": {
+      "author_mean_iou_gain": -0.005867398216752996,
+      "percentile95": [
+        -0.04606012787333966,
+        0.03584511674723931
+      ]
+    },
+    "0.8": {
+      "author_mean_iou_gain": 0.010558955366334702,
+      "percentile95": [
+        -0.025477723029867352,
+        0.05010779035616872
+      ]
+    }
+  },
+  "historical_baseline_context_replay": {
+    "inputs": 674,
+    "max_absolute_response_difference": 1.1920928955078125e-07,
+    "differences_above1e_minus5": 0,
+    "scope": "Current unchanged full-token baseline rerun; historical scores are comparison only, not reused in primary arms"
+  },
+  "development_gates": {
+    "complete_no_failures": true,
+    "0.5_more_pure_bot_recoveries": true,
+    "0.5_human_origin_highlights": false,
+    "0.5_bot_character_retention": true,
+    "0.5_author_iou_gain": false,
+    "0.8_more_pure_bot_recoveries": true,
+    "0.8_human_origin_highlights": false,
+    "0.8_bot_character_retention": true,
+    "0.8_author_iou_gain": false
+  },
+  "qualifies_for_further_development_validation": false,
+  "serving_adoption_permitted": false,
+  "fitting_performed": false,
+  "fresh_confirmation": false,
+  "outside_reviewers": 0,
+  "scope": "Consumed mixed-author development and retained-character provenance, not unassisted-human false alarms, word-origin proof, calibrated confidence or fresh validation"
+}

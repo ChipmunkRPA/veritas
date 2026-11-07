@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.image-smaug-runtime-profile-summary/7",
+  "child_exit_code": 0,
+  "guard": null,
+  "worker_code_sha256": "fce57d8ff53f40c443ec73837c542cbc0566dfe43540ced3481cc30c429b2bd3",
+  "sampled_max_rss_lower_bound_bytes": 4170596352,
+  "duration_s": 23.310563415987417,
+  "worker_result_available": true,
+  "project_images_scored": 0,
+  "metric": "Sampled worker-process RSS only, not process tree/GPU/system memory; lower bound, not a true memory peak.",
+  "limits": {
+    "worker_rss_bytes": 6442450944,
+    "min_system_available_bytes": 1610612736,
+    "timeout_s": 180
+  },
+  "prototype_and_public_helper_synthetic_results_equal": true,
+  "private_complete_profile_sha256": "5ebb932dca993704c131c7d994c3b4d759b0b1bc706aafc4e1191949da74f051"
+}

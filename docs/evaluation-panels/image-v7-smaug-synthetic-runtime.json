@@ -1,0 +1,390 @@
+{
+  "schema": "chipmunk.image-smaug-synthetic-runtime/7",
+  "base_state": {
+    "tensors": 624,
+    "values": 438760472,
+    "all_released_values_exact": true
+  },
+  "head_state": {
+    "tensors": 2,
+    "values": 769,
+    "all_released_values_exact": true
+  },
+  "packages": {
+    "torch": "2.13.0",
+    "transformers": "5.22.2",
+    "sentence-transformers": "6.2.0",
+    "huggingface-hub": "1.32.0",
+    "tokenizers": "0.23.1",
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0"
+  },
+  "input_rgb_sha256": [
+    "73e1a88f1b104e5ec57b29289ef68e14f4ba8af7730a190b48b62baab19a4043",
+    "dfe584147eb816ca4c2cdbc551c21dace6c13a05f4f7f36492b086be0d1e2819",
+    "99faaf4772e9dbd5f2e98f05b11710659d6a44d8d0905ff580ee174ccc4cb016"
+  ],
+  "crop_rgb_sha256": [
+    [
+      "16865af70910db102c93517d72a611f634685cd46b75fb756afaf2d7d5c5e5d5",
+      "ec01a5c91515b8bca222a8305a74ba8abaeee0ce506132f9e0ffac638113f571",
+      "f77990f04d99eac78af93ebf8b8daa05735664d94e49ca384cf6cad84984da7d"
+    ],
+    [
+      "1c22c3514d9fe2b49e7eb902fd1759dc642e5fd51062b1a55a87c7779565c8e0",
+      "b580808ebb8d85188a770cf55062bdf7d41e623a7ecf52394f5ce2a367c0dc00",
+      "642715a5b33c85e59f987e88444df1297995757c284e8fa39d7133b968f89c30"
+    ],
+    [
+      "e6bce737f8f876ac696590c9612e4ec270086516ddac660602de9e2aa5d0ec8e",
+      "c857ba90ac788243a7cdc0f6415d5ab88aac528ff11d41da4114bc8bcde7c27b",
+      "1061274371abfb23b0cd5183ffc0c25cdf4ae357ef47eca4f520206c2a29a2e3"
+    ]
+  ],
+  "crop_traces": [
+    [
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          640,
+          640
+        ],
+        "resized_size": [
+          576,
+          576
+        ],
+        "resized_crop_xyxy": [
+          0,
+          24,
+          528,
+          552
+        ],
+        "source_edge_bounds_rational": [
+          [
+            0,
+            576
+          ],
+          [
+            15360,
+            576
+          ],
+          [
+            337920,
+            576
+          ],
+          [
+            353280,
+            576
+          ]
+        ],
+        "resampling": "LANCZOS"
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          640,
+          640
+        ],
+        "resized_size": [
+          576,
+          576
+        ],
+        "resized_crop_xyxy": [
+          24,
+          24,
+          552,
+          552
+        ],
+        "source_edge_bounds_rational": [
+          [
+            15360,
+            576
+          ],
+          [
+            15360,
+            576
+          ],
+          [
+            353280,
+            576
+          ],
+          [
+            353280,
+            576
+          ]
+        ],
+        "resampling": "LANCZOS"
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          640,
+          640
+        ],
+        "resized_size": [
+          576,
+          576
+        ],
+        "resized_crop_xyxy": [
+          48,
+          24,
+          576,
+          552
+        ],
+        "source_edge_bounds_rational": [
+          [
+            30720,
+            576
+          ],
+          [
+            15360,
+            576
+          ],
+          [
+            368640,
+            576
+          ],
+          [
+            353280,
+            576
+          ]
+        ],
+        "resampling": "LANCZOS"
+      }
+    ],
+    [
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          700,
+          400
+        ],
+        "resized_size": [
+          924,
+          528
+        ],
+        "resized_crop_xyxy": [
+          0,
+          0,
+          528,
+          528
+        ],
+        "source_edge_bounds_rational": [
+          [
+            0,
+            924
+          ],
+          [
+            0,
+            528
+          ],
+          [
+            369600,
+            924
+          ],
+          [
+            211200,
+            528
+          ]
+        ],
+        "resampling": "BICUBIC"
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          700,
+          400
+        ],
+        "resized_size": [
+          924,
+          528
+        ],
+        "resized_crop_xyxy": [
+          198,
+          0,
+          726,
+          528
+        ],
+        "source_edge_bounds_rational": [
+          [
+            138600,
+            924
+          ],
+          [
+            0,
+            528
+          ],
+          [
+            508200,
+            924
+          ],
+          [
+            211200,
+            528
+          ]
+        ],
+        "resampling": "BICUBIC"
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          700,
+          400
+        ],
+        "resized_size": [
+          924,
+          528
+        ],
+        "resized_crop_xyxy": [
+          396,
+          0,
+          924,
+          528
+        ],
+        "source_edge_bounds_rational": [
+          [
+            277200,
+            924
+          ],
+          [
+            0,
+            528
+          ],
+          [
+            646800,
+            924
+          ],
+          [
+            211200,
+            528
+          ]
+        ],
+        "resampling": "BICUBIC"
+      }
+    ],
+    [
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          529,
+          711
+        ],
+        "resized_size": [
+          529,
+          711
+        ],
+        "resized_crop_xyxy": [
+          0,
+          0,
+          528,
+          528
+        ],
+        "source_edge_bounds_rational": [
+          [
+            0,
+            529
+          ],
+          [
+            0,
+            711
+          ],
+          [
+            279312,
+            529
+          ],
+          [
+            375408,
+            711
+          ]
+        ],
+        "resampling": null
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          529,
+          711
+        ],
+        "resized_size": [
+          529,
+          711
+        ],
+        "resized_crop_xyxy": [
+          0,
+          91,
+          528,
+          619
+        ],
+        "source_edge_bounds_rational": [
+          [
+            0,
+            529
+          ],
+          [
+            64701,
+            711
+          ],
+          [
+            279312,
+            529
+          ],
+          [
+            440109,
+            711
+          ]
+        ],
+        "resampling": null
+      },
+      {
+        "coordinate_space": "EXIF-oriented original RGB pixel-edge coordinates",
+        "oriented_original_size": [
+          529,
+          711
+        ],
+        "resized_size": [
+          529,
+          711
+        ],
+        "resized_crop_xyxy": [
+          0,
+          183,
+          528,
+          711
+        ],
+        "source_edge_bounds_rational": [
+          [
+            0,
+            529
+          ],
+          [
+            130113,
+            711
+          ],
+          [
+            279312,
+            529
+          ],
+          [
+            505521,
+            711
+          ]
+        ],
+        "resampling": null
+      }
+    ]
+  ],
+  "views": 9,
+  "repeat_exact": true,
+  "max_single_batch_logit_difference": 2.384185791015625e-07,
+  "max_single_batch_probability_difference": 0.0,
+  "max_independent_mean_logit_sigmoid_difference": 1.0897694871503383e-08,
+  "passed": true,
+  "fixed_tolerances": {
+    "single_batch_logits": 0.0001,
+    "single_batch_probabilities_and_manual_reduction": 1e-05
+  },
+  "project_images_scored": 0,
+  "publisher_python_executed": false,
+  "serving_admitted": false,
+  "scope": "Three authored synthetic RGB fixtures only. Full released state equality, standard native pipeline repeat/batch behavior and separate outer mean-logit/sigmoid arithmetic; not an alternate architecture implementation, detection accuracy, calibration or localized pixel evidence."
+}

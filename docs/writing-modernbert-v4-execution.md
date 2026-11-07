@@ -6,6 +6,10 @@ code, results, inputs and model assets remain unchanged. The actual synthetic
 check has now passed and its prospective comparison lock has been created.
 This is runtime preparation, not a detection-quality result.
 
+Subsequent result: the [complete four-arm comparison](writing-modernbert-v4-development-evaluation.md)
+now rejects the candidate. Both native replays and the separate full arithmetic
+review pass; no unused author, serving model or customer confidence changed.
+
 ## Actual synthetic runtime and lock
 
 The138-tensor/149,606,402-parameter standard model loaded completely as

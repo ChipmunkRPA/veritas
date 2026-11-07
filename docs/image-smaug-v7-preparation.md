@@ -1,4 +1,4 @@
-# Image classification candidate: assets verified, inference pending
+# Image classification candidate: acquisition and runtime preparation
 
 7 November 2026. Acquired Smaug as a separate **whole-image** candidate, not a
 replacement for edit-boundary localization. The [pinned detector notice](https://huggingface.co/abacusai/Smaug-AI-Image-Detector/blob/c7c95951e04a87b884a4ad479401b1128c3903bd/README.md#8-license)
@@ -9,8 +9,10 @@ cleared training-image rights or performance on our sources.
 
 The877,599,816-byte base weight and32,170,510-byte tokenizer match publisher LFS
 commitments. Header inspection verifies624 contiguous complete BF16 tensors,
-438,760,472 values, plus the separate769-value classification head. No neural
-runtime was initialized or project image scored. Model files stay outside Git.
+438,760,472 values, plus the separate769-value classification head. At this
+acquisition step, no neural runtime was initialized or project image scored.
+The [later native runtime check](image-smaug-v7-runtime.md) has now passed on
+authored synthetic fixtures. Model files stay outside Git.
 [Acquisition snapshot](evaluation-panels/image-v7-smaug-acquisition.json) and
 [base notice commitments](evaluation-panels/image-v7-smaug-base-notices.json).
 
@@ -18,7 +20,8 @@ The app's Transformers5.15.1 lacks this architecture. Four compatible,
 hash-verified wheels were installed into a separate research environment:
 Transformers5.22.2, SentenceTransformers6.2.0, Hub1.32.0 and Tokenizers0.23.1.
 Other existing dependencies are referenced read-only. Their declared dependency
-requirements pass metadata checks, but actual model loading remains untested.
+requirements pass metadata checks. Actual strict model loading subsequently
+passed in that research environment, as recorded in the runtime review.
 App packages stay unchanged; all79 frozen audio source files and six critical
 installed audio implementation hashes were rechecked unchanged.
 [Research environment receipt](evaluation-panels/image-v7-smaug-research-environment.json).

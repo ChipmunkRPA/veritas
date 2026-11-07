@@ -78,13 +78,18 @@ and every gate remain unchanged.
 
 ## Verification and remaining work
 
-Separate arithmetic reconstruction passes for all1,449 outcomes, including
+[Separate arithmetic reconstruction](evaluation-panels/audio-v14-separation-numerical-review.json)
+passes for all1,449 outcomes, including
 normalization, source/bag responses, calibration ranks, stability decisions,
 counts and both exact fitting-only refits. Declared statistical/gate functions
 and the refit learner remain shared; this is not outside human review.
-The new native replay is running for all99 predeclared cells and every one of
-the74 computed filtered probes. Its outcome remains pending and must be
-reported separately; no native pass is claimed yet.
+The [completed native replay](evaluation-panels/audio-v14-separation-native-review.json)
+passes all170 unique cases: the union of all99 predeclared cells and every one
+of the74 computed filtered probes. Original activity/raw/vector responses,
+complete estimated-source features, filtered responses and upstream-graph
+waveform hashes reproduce exactly. Every public case's source/PCM commitment
+and predetermined/probe membership were also checked against the complete
+journals. This verifies the measured computation, not detector superiority.
 
 Do not score the1,080 reserved confirmation variants for these rejected arms.
 Future audio work must improve discrimination under interference rather than

@@ -1,14 +1,16 @@
-# Alternative writing detector: acquired, not evaluated
+# Alternative writing detector: acquisition snapshot
 
 7 November 2026. Downloaded a standard ModernBERT-base classification checkpoint
-for a future local comparison. No model construction, classifier forward on
-project text, fitting or serving change has taken place. The resource-heavy
-audio extraction continues alone.
+for a future local comparison. At acquisition, no model construction,
+classifier forward on project text, fitting or serving change had taken place.
+The resource-heavy audio extraction was running separately.
 
 The [additive comparison implementation](writing-modernbert-v4-execution.md)
 and [prospective protocol](writing-modernbert-v4-protocol.md) are now available.
-Synthetic runtime verification and the completed execution freeze are pending;
-the code release does not claim that either has run.
+At that code-only release, synthetic runtime verification and the completed
+execution freeze were still pending. The [actual runtime and lock](writing-modernbert-v4-execution.md#actual-synthetic-runtime-and-lock)
+have since completed after the audio work. This acquisition snapshot itself
+does not establish classifier performance.
 
 ## Source and permitted use
 

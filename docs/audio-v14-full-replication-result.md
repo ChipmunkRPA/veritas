@@ -35,6 +35,6 @@ The serving model, own existing calibration, overall confidence, billing and
 GCP remain unchanged. Actual outside human reviewers remain zero.
 
 Subsequent update: the [complete development comparison](audio-separation-v14-development-evaluation.md)
-rejects both arms. Separate numerical reconstruction and exact refits passed;
-the new native replay remains running. The linked completion receipt is the
+rejects both arms. Separate numerical reconstruction, both exact refits and
+all170 new native replays passed. The linked completion receipt is the
 earlier extraction/post-fitting snapshot, not a current accuracy assessment.

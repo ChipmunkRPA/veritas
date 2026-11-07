@@ -1,10 +1,30 @@
-# Writing comparison: implementation ready, runtime checks pending
+# Writing comparison: synthetic runtime verified and prospective lock created
 
 7 November 2026. Added a separate runner and arithmetic reviewer for the
 [prospective ModernBERT design](writing-modernbert-v4-protocol.md). Original v3
-code, results, inputs and model assets remain unchanged. No ModernBERT model
-has been constructed or scored; there is no completed synthetic runtime check,
-execution freeze or new detection-quality result yet.
+code, results, inputs and model assets remain unchanged. The actual synthetic
+check has now passed and its prospective comparison lock has been created.
+This is runtime preparation, not a detection-quality result.
+
+## Actual synthetic runtime and lock
+
+The138-tensor/149,606,402-parameter standard model loaded completely as
+CPUfloat32 with eager attention. Repeated batch4 responses are identical;
+single/batch and separate native response differences are at most
+3.5390257835388184e-8, below the original1e-5 requirement. All three authored
+synthetic inputs retain every native token, including the1,081-token probe
+processed in three windows. No project text, fitting or calibration was used.
+[Complete synthetic receipt](evaluation-panels/writing-v4-modernbert-synthetic-runtime.json).
+
+The [prospective public lock](evaluation-panels/writing-v4-modernbert-freeze.json)
+binds the successful receipt, all original model/input/historical assets,
+14 source files,11 critical installed implementations, runtime and every
+unchanged comparison rule. Private lock SHA-256:
+`0a239741c9820301b678178f66534afa593d305c2ce09ebba511800413e1dade`.
+Its recorded project classifier forwards are zero. Publish and remote-verify
+this complete record before starting the actual consumed-document comparison.
+No calibrated authorship probability, new-source performance or serving
+admission follows from the synthetic pass.
 
 The new implementation keeps the original40 documents/674 focus-context pairs,
 four arms, both research references and all nine quality requirements. Seven

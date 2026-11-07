@@ -1,0 +1,89 @@
+{
+  "schema": "chipmunk.writing-modernbert-synthetic-runtime/4",
+  "candidate_assets": {
+    "README.md": "328d6508b1a135e8d1559e25efdf0cb7dc9f00ba78663fc6904003ff0ab73891",
+    "BASE_README.md": "40539466fa1117be4693b8f1fdfdac81fac3c5db472ff57bc05d013d48eafa82",
+    "config.json": "a6225f6c55e0fb92ccb6a53832714993a5eeceff0a4ac89e90f803de8e06a742",
+    "model.safetensors": "2ae8059c621795fc490353bbd920bc3672e6eaf8ad66ddb7c015b4ecb0129218",
+    "tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+    "tokenizer_config.json": "c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb",
+    "special_tokens_map.json": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049"
+  },
+  "implementation_sha256": {
+    "backend/scripts/writing_focus_v3.py": "f71448d811fc0082520eeb297f2d31238302bace360030859f1acf6e257c1fa9",
+    "backend/scripts/writing_modernbert_v4.py": "8d0cfe1fabdc7f60d7c17765319a16e6299a97c861757cb3b1cdc2a8a55418dc",
+    "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+    "backend/scripts/review_writing_modernbert_v4.py": "8e80d7ee51ef37e413c28a81517507bf9444bca4bb941a4618da099e121e475b",
+    "backend/scripts/prepare_writing_focus_v3.py": "e716089f8e079cce6565d9af6117ff2443b2b9c28a11148920d23ff55bdaacda",
+    "backend/scripts/audit_writing_sources_v2.py": "dc53bfd7256a073fb03b916eba361a7f5dbffacebe3c1d29c4cf45e3b119d25b",
+    "backend/tests/test_writing_modernbert_v4.py": "0c1db9b4d38cda81f353b2c9b3afb56eef85df9399821fa7f225748ae586be95",
+    "docs/writing-modernbert-v4-protocol.md": "5171d1e0ac2db97ab0aef713cc9a87a7d8d87767527846e9e20fdab61845fa4e",
+    "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+    "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+    "backend/app/detectors/text/pipeline.py": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f",
+    "backend/app/detectors/text/extract.py": "c0d3c4704302c4084a4d35bbdeae1c6b75388e07cce07610aec83384011d222f",
+    "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+    "backend/app/detectors/text/adapters/learned.py": "06d0dba2d9745d4cc72902a1c9ba7244d8a12e08c515a9085f243315d5563187"
+  },
+  "installed_sha256": {
+    "transformers.models.deberta_v2.modeling_deberta_v2": "bc0eb5729a6431daae48784c606005c86f44a47b955f0267d874479e3e8df43c",
+    "transformers.models.modernbert.modeling_modernbert": "c208d5e979e953b38f72d4ca7bc9acd99c83eb1a7a8a607d93c0134634763459",
+    "transformers.models.modernbert.configuration_modernbert": "6bddc1471bde497acf90e786585df6bf2a4a43c913c572a1ba2e6b3315b2b648",
+    "transformers.modeling_rope_utils": "a8bf3f6a53760366fb5fa51cecc06a8707d3cded36fd8f3ac51e140c0718af21",
+    "transformers.masking_utils": "e8c497af6979274fc6ae78980ad9893e7850bdb750e46d459f09178123992196",
+    "transformers.activations": "5b20c0a3625edc0001a98f09ce3c6b5baa1100e1d7ad8dee649e4d45c8468665",
+    "transformers.modeling_utils": "a7392c26dd2f005383cc3c1f8562638a6039d393ca03fb1933513479a6d264e4",
+    "transformers.tokenization_utils_tokenizers": "bf921a160f483c7a32973952ed82a08c7d8982f769726bd220933aae2df98de8",
+    "transformers.tokenization_utils_base": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e",
+    "tokenizers.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+    "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e"
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "platform": "Darwin",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.13.0",
+      "transformers": "5.15.1",
+      "tokenizers": "0.22.2",
+      "safetensors": "0.8.0",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.0"
+    }
+  },
+  "synthetic_input_sha256": [
+    "825e77ee1baa50428194e4bd12e833eb29ab45b14bfe38d25de260883d902690",
+    "184b44a525a670250a856799a78bfe9be2976c8dc2f39484c297adb90b0a2fe2",
+    "c690bea8e57bcf47e74f5ddad7dac76a5b627cc8508be9a945fbc39a2bc27394"
+  ],
+  "strict_state_load": true,
+  "repeat_exact": true,
+  "responses": [
+    0.01265979278832674,
+    0.006662954110652208,
+    0.9838603205089763
+  ],
+  "coverage": [
+    {
+      "tokens": 16,
+      "token_windows": 1,
+      "token_ids_sha256": "cd3e736fa17c4add7fbb306b5f0514fc4530a0c6988d6ec4bfff34c163085f62"
+    },
+    {
+      "tokens": 17,
+      "token_windows": 1,
+      "token_ids_sha256": "735f7a33ce92b4e1692e16a4e021839e900002eabd594726520a70c6ff15fbf7"
+    },
+    {
+      "tokens": 1081,
+      "token_windows": 3,
+      "token_ids_sha256": "553149c682a0acd0ca0dde7e15f78bf07c8ae55451790e0b248b1e05e2f3bc40"
+    }
+  ],
+  "max_single_batch_difference": 3.5390257835388184e-08,
+  "max_direct_difference": 3.5390257835388184e-08,
+  "project_text_forwards": 0,
+  "serving_admitted": false,
+  "scope": "Only synthetic execution/token coverage and strict state correspondence; no project text, calibration, attribution truth or detection-quality validation."
+}

@@ -75,3 +75,21 @@ regexes = [
   '''^tokenizer_config\.json['"]: ['"]c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb['"]$''',
   '''^special_tokens_map\.json['"]: ['"]ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049['"]$''',
 ]
+
+# All26 findings in these two receipts were recomputed: tokenizer assets,
+# installed tokenizer implementation files and authored synthetic native IDs.
+# Match only the11 reviewed field/value pairs, never either complete file.
+[[rules.allowlists]]
+description = "Writing v4 actual freeze and synthetic token SHA-256 commitments"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/writing-v4-modernbert-(?:freeze|synthetic-runtime)\.json$''']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json": "(?:2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf|6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30)"$''',
+  '''^tokenizer_config\.json": "(?:d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432|c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb)"$''',
+  '''^special_tokens_map\.json": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049"$''',
+  '''^transformers\.tokenization_utils_tokenizers": "bf921a160f483c7a32973952ed82a08c7d8982f769726bd220933aae2df98de8"$''',
+  '''^transformers\.tokenization_utils_base": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e"$''',
+  '''^tokenizers\.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327"$''',
+  '''^token_ids_sha256": "(?:cd3e736fa17c4add7fbb306b5f0514fc4530a0c6988d6ec4bfff34c163085f62|735f7a33ce92b4e1692e16a4e021839e900002eabd594726520a70c6ff15fbf7|553149c682a0acd0ca0dde7e15f78bf07c8ae55451790e0b248b1e05e2f3bc40)"$''',
+]

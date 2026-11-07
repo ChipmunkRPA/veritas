@@ -1,0 +1,38 @@
+{
+  "schema": "chipmunk.scoped-writing-numerical-replay/6",
+  "science_commit": "f12193bdf3ad8e9def6cb1e7f833177c0a98dff5",
+  "freeze_sha256": "f6a04efb25a6ec1b8e7fc0ba3c5bd824ca2d3f1d4e038f1031a2cafff84f4596",
+  "arms": 8,
+  "selected_repository_files": 34,
+  "maximum_absolute_numerical_difference": 1.1546319456101628e-14,
+  "absolute_numerical_limit": 0.000001,
+  "all_counts_statuses_decisions_exact": true,
+  "confirmation_invariance_and_missing_check_tests": "passed_all_eight_arms",
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "scope": "Immutable consumed-source scalar/parameter replay; not fresh detection, native input reproduction or outside human review.",
+  "github": {
+    "run_id": 42421936835,
+    "job_id": 128552028739,
+    "head_sha": "f4f7731a7d8b7f420c471a0db1289b929bc74662",
+    "conclusion": "success",
+    "source": "decoded actual job log"
+  },
+  "portable_fitting_reliability_established": false,
+  "repeat_attempt": {
+    "run_id": 42422124158,
+    "job_id": 128552590926,
+    "conclusion": "failure",
+    "stage": "unchanged v2 scalar specialist calibration fit",
+    "actual_diagnostic": "Source-balanced monotone calibration fit did not converge",
+    "science_changed": false,
+    "raw_media_or_weights_loaded": false
+  },
+  "prior_attempt": {
+    "run_id": 42421500310,
+    "job_id": 128550699602,
+    "conclusion": "failure",
+    "stage": "immutable fitting",
+    "cause": "Unknown: the initial external harness captured child stderr and did not display it. Preserve this failure; do not attribute success to a change in scientific settings."
+  }
+}

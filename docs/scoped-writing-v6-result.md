@@ -50,8 +50,24 @@ probability, exact count and decision, and reproduced them with maximum numeric
 difference0. All eight adverse checks confirmed that changed reserved responses
 cannot change fitting, and a missing required check withholds the combination
 instead of producing an originality verdict. The external CI wrapper is
-separate from the frozen science. Linux execution remains pending until an
-actual successful workflow receipt is recorded; it is not outside human review.
+separate from the frozen science.
+
+Linux fitting is **not reliably portable yet**. Of three actual runs, one
+refitted all eight arms and reproduced every exact count/status/decision with
+maximum numerical difference1.1546319456101628e-14. Two failed during fitting.
+The first harness captured the original child diagnostic, so its cause remains
+unknown. The external wrapper was changed only to expose that diagnostic;
+the immutable science, thresholds and packages were not changed. A further
+run then exposed `Source-balanced monotone calibration fit did not converge`
+inside the unchanged v2 scalar-head fitting method. Preserve these failures;
+one success is insufficient evidence of portable training reliability.
+
+The [actual successful receipt](evaluation-panels/scoped-writing-v6-linux-review.json)
+and its recorded failed attempts distinguish numerical agreement from reliable
+fitting. This is an additional reason to retain the serving baseline. A future
+solver repair requires its own prospective method and comparison; do not patch
+the live frozen audio/image experiments to make them pass. None of these jobs
+constitutes outside human review or fresh detection validation.
 
 Run the model-free reconstruction from a full Git checkout:
 

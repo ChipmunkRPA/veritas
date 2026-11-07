@@ -17,5 +17,5 @@
   "absolute_numerical_limit": 1e-06,
   "new_neural_forwards": 0,
   "serving_admitted": false,
-  "scope": "All fitted parameters, per-format-independent passage contexts, local character positions, probabilities, counts and frozen operating decisions; consumed source numerical comparison only."
+  "scope": "All fitted parameters, separately calibrated passage contexts, local character positions, probabilities, counts and frozen operating decisions; consumed source numerical comparison only."
 }

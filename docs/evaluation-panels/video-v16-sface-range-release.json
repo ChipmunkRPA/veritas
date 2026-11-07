@@ -1,0 +1,17 @@
+{
+  "schema": "chipmunk.sface-final-range-release/16",
+  "files_sha256": {
+    "backend/scripts/audit_sface_vectors_v16.py": "0ce2570ea8112b9e503e065b2c00211c04da45f0885d6392661caad71df0534d",
+    "backend/scripts/reproduce_sface_result_v16.py": "06dcab203fab9a17f061ba86b5c07d2b6595c1fa91e8ea62bd1e4fa32051ac3e",
+    "docs/video-v16-sface-development-evaluation.md": "a54a68397bc20a1e842d9eb887e6b481f116873b9b36a826447d7fd719844868",
+    "docs/video-v16-sface-development-evaluation.json": "03e8ab621f9c5df6c0685892f653d1ac6fd45f8d8d0d535e9b9ea5564843bda4",
+    "docs/evaluation-panels/video-v16-sface-final-ranges.json": "c9db749a901b9ba1f69482b9d03a41364ae95ed281f26d581594cb60b56e73ee",
+    "docs/evaluation-panels/video-v16-sface-private-review-aggregate.json": "328ec85416b45d6c1736f18c662c2537ec147a9e5c22df7c74fb6e288d626f85",
+    "docs/evaluation-panels/video-v16-sface-portable-review.json": "0d4ea63a1d6dcfe81f29f4b784e13d0587d181eb0290b564d5c87b6e98023bd2",
+    "docs/evaluation-panels/video-v16-sface-portable-tamper.json": "49f4b456f1823f140e13c3b582c356df6fb05ea7da474a3600a8bed91e860ed2",
+    "docs/evaluation-panels/video-v16-sface-panel.json": "e019aee0fb3edb4104f9a11f084441c4bd0c86510e1e6cfdafaecc115f991efe",
+    ".github/workflows/sface-range-review.yml": "0d72b6102e952174d78302bd13cf74c78af5c7b19a721fcc2ecae3103a265b29"
+  },
+  "raw_face_vectors_or_images": false,
+  "scope": "Published range/source-label/count replay; private native/vector audits remain distinct."
+}

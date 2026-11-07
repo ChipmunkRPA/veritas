@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "mutations": [
+    {
+      "mutation": "missing",
+      "rejected": true
+    },
+    {
+      "mutation": "duplicate",
+      "rejected": true
+    },
+    {
+      "mutation": "unknown_id",
+      "rejected": true
+    },
+    {
+      "mutation": "label",
+      "rejected": true
+    },
+    {
+      "mutation": "truth",
+      "rejected": true
+    },
+    {
+      "mutation": "range",
+      "rejected": true
+    },
+    {
+      "mutation": "overlap",
+      "rejected": true
+    },
+    {
+      "mutation": "status",
+      "rejected": true
+    },
+    {
+      "mutation": "guard",
+      "rejected": true
+    },
+    {
+      "mutation": "advance",
+      "rejected": true
+    }
+  ],
+  "scope": "Actual published range packet deliberately changed; no raw media or face vectors.",
+  "packet_sha256": "c9db749a901b9ba1f69482b9d03a41364ae95ed281f26d581594cb60b56e73ee"
+}

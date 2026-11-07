@@ -1,0 +1,307 @@
+{
+  "schema": "chipmunk.sface-transition-development-result/16",
+  "lock_sha256": "f6d6d7a7f185e86742a86233e381b2178bda2f39f22c218032a97bb72936a69e",
+  "point": {
+    "method": "strictly_greater_than_second_largest_currently_unflagged_genuine_case_maximum",
+    "value": 0.11243900750879454,
+    "planned_genuine": 60,
+    "available_genuine": 56,
+    "available_source_groups": 28,
+    "eligible_currently_unflagged_genuine": 30,
+    "maximum_additional_genuine_calibration_flags": 1,
+    "confidence_calibration": false,
+    "identity_match_point": false,
+    "note": "Inspection feature units, not an authenticity probability or public screening threshold."
+  },
+  "current": {
+    "planned": 120,
+    "source_groups": 30,
+    "edits": 60,
+    "genuine": 60,
+    "localized_edits": 19,
+    "missed_localizations": 41,
+    "genuine_review_flags": 21,
+    "ordinary_edit_flags": 12,
+    "mean_edit_iou": 0.2508856308135628,
+    "status_counts": {
+      "ok": 108,
+      "not_applicable": 12
+    },
+    "failed_cases": 0
+  },
+  "candidate": {
+    "planned": 120,
+    "source_groups": 30,
+    "edits": 60,
+    "genuine": 60,
+    "localized_edits": 55,
+    "missed_localizations": 5,
+    "genuine_review_flags": 21,
+    "ordinary_edit_flags": 12,
+    "mean_edit_iou": 0.7607879690915405,
+    "status_counts": {
+      "ok": 108,
+      "not_applicable": 12
+    },
+    "failed_cases": 0
+  },
+  "families": {
+    "inswapper": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 30,
+        "genuine": 0,
+        "localized_edits": 13,
+        "missed_localizations": 17,
+        "genuine_review_flags": 0,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": 0.30650559931574967,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 30,
+        "genuine": 0,
+        "localized_edits": 28,
+        "missed_localizations": 2,
+        "genuine_review_flags": 0,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": 0.7629407468693182,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      }
+    },
+    "jump-cut": {
+      "current": {
+        "planned": 10,
+        "source_groups": 10,
+        "edits": 0,
+        "genuine": 10,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 4,
+        "ordinary_edit_flags": 4,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 7,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 10,
+        "source_groups": 10,
+        "edits": 0,
+        "genuine": 10,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 4,
+        "ordinary_edit_flags": 4,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 7,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      }
+    },
+    "lighting-change": {
+      "current": {
+        "planned": 7,
+        "source_groups": 7,
+        "edits": 0,
+        "genuine": 7,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 1,
+        "ordinary_edit_flags": 1,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 7
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 7,
+        "source_groups": 7,
+        "edits": 0,
+        "genuine": 7,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 1,
+        "ordinary_edit_flags": 1,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 7
+        },
+        "failed_cases": 0
+      }
+    },
+    "original_videos": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 0,
+        "genuine": 30,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 9,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 0,
+        "genuine": 30,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 9,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      }
+    },
+    "recompression": {
+      "current": {
+        "planned": 13,
+        "source_groups": 13,
+        "edits": 0,
+        "genuine": 13,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 7,
+        "ordinary_edit_flags": 7,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 13
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 13,
+        "source_groups": 13,
+        "edits": 0,
+        "genuine": 13,
+        "localized_edits": 0,
+        "missed_localizations": 0,
+        "genuine_review_flags": 7,
+        "ordinary_edit_flags": 7,
+        "mean_edit_iou": null,
+        "status_counts": {
+          "ok": 13
+        },
+        "failed_cases": 0
+      }
+    },
+    "uniface": {
+      "current": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 30,
+        "genuine": 0,
+        "localized_edits": 6,
+        "missed_localizations": 24,
+        "genuine_review_flags": 0,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": 0.19526566231137596,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      },
+      "candidate": {
+        "planned": 30,
+        "source_groups": 30,
+        "edits": 30,
+        "genuine": 0,
+        "localized_edits": 27,
+        "missed_localizations": 3,
+        "genuine_review_flags": 0,
+        "ordinary_edit_flags": 0,
+        "mean_edit_iou": 0.7586351913137627,
+        "status_counts": {
+          "ok": 27,
+          "not_applicable": 3
+        },
+        "failed_cases": 0
+      }
+    }
+  },
+  "case_changes": {
+    "new_correct_locations": 36,
+    "lost_correct_locations": 0,
+    "new_genuine_flags": 0,
+    "removed_genuine_flags": 0
+  },
+  "requirements": {
+    "all_source_cases_accounted": true,
+    "no_candidate_failure": true,
+    "all_original_runs_complete_without_guard": true,
+    "all_current_consecutive_replays_match": true,
+    "all_actual_native_alignments_inputs_features_match": true,
+    "more_correct_edit_localizations": true,
+    "genuine_total_flags_at_most_current_plus_one": true,
+    "ordinary_edit_flags_at_most_current_plus_one": true,
+    "mean_edit_iou_not_lower": true,
+    "no_swap_family_localization_loss": true
+  },
+  "advance_to_separately_frozen_fresh_confirmation": true,
+  "paired_iou": {
+    "source_groups": 30,
+    "mean_paired_difference": 0.5099023382779778,
+    "source_group_bootstrap_95_percentile": [
+      0.3992617374316544,
+      0.6204560993554237
+    ],
+    "replicates": 5000,
+    "seed": 20261107
+  },
+  "paired_localization_rate": {
+    "source_groups": 30,
+    "mean_paired_difference": 0.6,
+    "source_group_bootstrap_95_percentile": [
+      0.46625000000000016,
+      0.7333333333333333
+    ],
+    "replicates": 5000,
+    "seed": 20261107
+  },
+  "paired_genuine_flag_rate": {
+    "source_groups": 30,
+    "mean_paired_difference": 0.0,
+    "source_group_bootstrap_95_percentile": [
+      0.0,
+      0.0
+    ],
+    "replicates": 5000,
+    "seed": 20261107
+  },
+  "private_journal_sha256": {
+    "calibration.jsonl": "5384b05045b79ab6be005c0627b4e747a3b27a145f5d9040102c76c409e9834c",
+    "development.jsonl": "3e143680735c910c03d66dda288e81775dc05659d75bc755fc56f6240c51ccce"
+  },
+  "fresh_confirmation_scored": false,
+  "serving_changed": false,
+  "outside_human_reviewers": 0,
+  "scope": "Consumed source-bound bounded-transition review cues, not AI authenticity/identity probabilities. Frozen legacy fallback/track receipts shared; current consecutive model recomputed with parity; not full current-pipeline reevaluation. Real face vectors remain private."
+}

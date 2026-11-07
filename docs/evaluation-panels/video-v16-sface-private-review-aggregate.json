@@ -1,0 +1,16 @@
+{
+  "schema": "chipmunk.sface-private-vector-arithmetic/16",
+  "passed": true,
+  "cases": 180,
+  "native_vector_bytes_verified": 11676,
+  "retained_windows_verified": 1968,
+  "all_allowed_source_track_cadence_windows_searched": true,
+  "native_profile_passed_cases": 180,
+  "float64_arithmetic_tolerance": 1e-10,
+  "max_separate_component_difference": 4.440892098500626e-16,
+  "raw_vectors_exported": false,
+  "native_neural_inference_repeated": false,
+  "outside_human_review": false,
+  "scope": "Separate private vector-byte/source/track binding and prefix-sum/cosine arithmetic. No pretrained model inference or public biometric-vector export. Existing declared model/native/quality gates unchanged.",
+  "original_private_receipt_sha256": "11a920ed0cd9bc61159453bcc497b4ae723e11ad1af11d57511e2d6f5b042f1a"
+}

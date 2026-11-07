@@ -8,8 +8,9 @@ been scored or used to fit this candidate. The complete
 [protocol](audio-separation-v14-protocol.md) and
 [public freeze](evaluation-panels/audio-v14-separation-freeze.json) were published
 and remote-verified as `220e4888942e00ac934150945ce1fccbab520e29` before
-extraction started. Extraction is now running under the unchanged lock; fitting
-and calibration have not started.
+extraction started. The first extraction attempt subsequently stopped on a
+decoder failure at input 3,819. Its journal is preserved; fitting and calibration
+have not started. See the terminal execution review below.
 
 Private lock SHA-256:
 `93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b`.
@@ -100,3 +101,34 @@ it does not enable the detector, customer confidence or model-specific claims.
 The source/model terms and sample-rate metadata limitations remain explicit.
 Image, video, writing, outside testing and eventual GCP validation remain in the
 wider program. Actual outside human reviewers remain zero.
+
+## First extraction attempt: stopped before fitting
+
+The original process exited with status1 after recording 3,819 of the planned
+4,248 inputs: 3,761 successful source-feature extractions, 57 genuinely
+unassessed inputs and one failure. The remaining 429 inputs were not processed.
+The retained journal is 166,294,784 bytes with SHA-256
+`7084fd34ee80948ec1180f9dc848b1235665df29580006e148703c3c052a7b9b`.
+All 79 frozen project implementations remained unchanged. There is no trained
+head, calibrated candidate, completed development comparison or accuracy result.
+This is an incomplete execution, not an inconclusive detection result.
+
+The failed input belongs to the original fitting role. Its source file still
+matches the frozen checksum. FFmpeg returned status252 while decoding it; the
+decoder raised its verified-timeline error and the runner stopped as required.
+Three later decoder-only repetitions each produced exactly the original
+64,000 samples and PCM checksum, without a neural forward. The original process
+did not retain FFmpeg's stderr in its journal, so these successful repetitions
+do not isolate the original failure's cause. Low available storage was observed
+afterward; a causal connection has not been established.
+
+The [diagnostic receipt](evaluation-panels/audio-v14-terminal-input-diagnostic.json)
+binds the original failure journal and unchanged input to those repetitions.
+No failed row is dropped, replaced, relabeled or converted to an original-file
+vote. The failed journal cannot be used to fit a partial candidate or silently
+resumed. Any later complete replication must use a distinct journal, preserve
+this failed attempt, retain every source and unchanged comparison requirement,
+and record its own execution lineage. Plan that work after the active video
+processing, with resource headroom and decoder diagnostics recorded explicitly.
+The reserved confirmation panel remains unscored and the serving model remains
+unchanged.

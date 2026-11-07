@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.audio-v14-terminal-input-diagnostic/14",
+  "private_lock_sha256": "93223afb27132aa3557b70f5c433aec126409ebd06d2beea6d5f34b3551e744b",
+  "failed_journal_sha256": "7084fd34ee80948ec1180f9dc848b1235665df29580006e148703c3c052a7b9b",
+  "input_id": "6b2e4cab512bf4bd110ade2b7fbe1a4e94a38c721c8568a8ea17bc38e5c7dd1a",
+  "source_sha256": "e5b9152bf1c70b1f751519f5edde4ca0a15c60f53d434fd4bf10bd055fd837c9",
+  "decoder_exit_status_original": 252,
+  "repeat_decodes": [
+    {
+      "samples": 64000,
+      "pcm_sha256": "0550752874e9318d79703e2e665ec90312d9a47f9445d19fc453d9f7ac077d80",
+      "matches_original": true
+    },
+    {
+      "samples": 64000,
+      "pcm_sha256": "0550752874e9318d79703e2e665ec90312d9a47f9445d19fc453d9f7ac077d80",
+      "matches_original": true
+    },
+    {
+      "samples": 64000,
+      "pcm_sha256": "0550752874e9318d79703e2e665ec90312d9a47f9445d19fc453d9f7ac077d80",
+      "matches_original": true
+    }
+  ],
+  "model_forward_runs": 0,
+  "root_cause_isolated": false,
+  "failed_journal_retained": true,
+  "fitting_started": false,
+  "serving_admitted": false
+}

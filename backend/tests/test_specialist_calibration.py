@@ -39,6 +39,12 @@ def fixture():
                                     'end': (k + 1) * length, 'extent': 2 * length}
                                 if modality == 'audio':
                                     span['sample_rate'] = 16000
+                                elif modality == 'text':
+                                    span['text_sha256'] = h('extracted-text-' + ident)
+                                elif modality == 'video':
+                                    span['frames'] = {'start': k * 24, 'end': (k + 1) * 24, 'extent': 48}
+                                    span['region'] = {'kind': 'pixels', 'x': 0, 'y': 0, 'width': 640,
+                                        'height': 360, 'source_width': 1920, 'source_height': 1080}
                             raw = 2. * label - 1. + (-4. if k == 0 else 4.) + .03 * index
                             units.append({'id': name + '.' + context, 'specialist': spec['id'],
                                 'context': context, 'routing_sha256': spec['routing_sha256'],
@@ -46,12 +52,17 @@ def fixture():
                                 'measurement_sha256': h(ident + name + context + str(raw)),
                                 'location': span, 'status': 'ok', 'raw': raw, 'label': label,
                                 'label_scope': 'local_unit', 'label_provenance_sha256': h(ident + name + context + 'truth')})
-                    files.append({'id': ident, 'group': ident, 'role': role, 'modality': modality,
+                    geometry = {'image': {'width': 20, 'height': 10},
+                        'video': {'duration_ns': 2 * 10**9, 'frame_count': 48, 'width': 1920,
+                            'height': 1080, 'pts_table_sha256': h('source-pts-' + ident)},
+                        'audio': {'sample_count': 32000, 'sample_rate': 16000},
+                        'text': {'codepoints': 80, 'text_sha256': h('extracted-text-' + ident)}}[modality]
+                    files.append({'id': ident, 'group': ident, 'role': role, 'modality': modality, 'source_geometry': geometry,
                         'source_sha256': h('source-' + ident), 'input_sha256': h('input-' + ident),
                         'lineage': ['source-family-' + ident], 'label': label, 'label_scope': 'planned_units',
                         'label_provenance_sha256': h('scope-truth-' + ident),
                         'required_families': ['first', 'second'], 'units': units})
-    return {'schema': 'chipmunk.specialist-evaluation/1', 'policy': policy, 'files': files}
+    return {'schema': 'chipmunk.specialist-evaluation/2', 'policy': policy, 'files': files}
 
 
 @pytest.fixture(scope='module')
@@ -210,3 +221,43 @@ def test_cli_freeze_protects_fitting_data_and_preserves_future_confirmation(trai
     changed['files'][0]['units'][0]['raw'] += .1
     with pytest.raises(ValueError, match='changed after freeze'):
         fit(changed, lock)
+
+
+@pytest.mark.parametrize('modality', MEDIA)
+def test_unrelated_genuine_regions_do_not_lower_other_positive_evidence(modality, trained):
+    from app.bench.specialists import _features
+
+    manifest, artifact = trained
+    file = copy.deepcopy(next(f for f in manifest['files'] if f['role'] == 'confirmation'
+        and f['modality'] == modality and f['label'] == 1))
+    neutral, genuine = copy.deepcopy(file), copy.deepcopy(file)
+    for unit_a, unit_b in zip(neutral['units'], genuine['units'], strict=True):
+        if unit_a['specialist'].endswith('.second'):
+            head = artifact['specialists'][unit_a['specialist'] + '|' + unit_a['context']]
+            coefficient = head['coefficients'][0]
+            assert coefficient > 0
+            unit_a['raw'] = head['center'][0] - head['scale'][0] * head['intercept'] / coefficient
+            unit_b['raw'] = head['center'][0] + head['scale'][0] * (-2 - head['intercept']) / coefficient
+            unit_a['label'] = unit_b['label'] = 0
+    original = _features(neutral, artifact)
+    changed = _features(genuine, artifact)
+    assert original[0] > 0  # Positive evidence in the first region stays present.
+    assert changed == pytest.approx(original, abs=1e-12)
+
+
+@pytest.mark.parametrize('modality', MEDIA)
+def test_local_geometry_cannot_silently_change_source(modality):
+    manifest = fixture()
+    file = next(f for f in manifest['files'] if f['modality'] == modality)
+    keys = {'image': 'width', 'video': 'duration_ns', 'audio': 'sample_rate', 'text': 'codepoints'}
+    file['source_geometry'][keys[modality]] += 1
+    with pytest.raises(ValueError):
+        audit(manifest)
+
+
+def test_video_local_region_is_checked_against_source_frame_geometry():
+    manifest = fixture()
+    file = next(f for f in manifest['files'] if f['modality'] == 'video')
+    file['units'][0]['location']['region']['x'] = 1920
+    with pytest.raises(ValueError, match='outside'):
+        audit(manifest)

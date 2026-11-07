@@ -15,7 +15,7 @@ import math
 from collections import Counter, defaultdict
 from pathlib import Path
 
-SCHEMA = 'chipmunk.specialist-evaluation/1'
+SCHEMA = 'chipmunk.specialist-evaluation/2'
 ROLES = ('specialist_cal', 'fusion_fit', 'fusion_cal', 'confirmation')
 MEDIA = ('image', 'video', 'audio', 'text')
 STATUSES = ('ok', 'failed', 'skipped', 'not_applicable', 'unavailable')
@@ -102,6 +102,8 @@ def audit(manifest):
         allowed = {s['family'] for s in specialists if s['modality'] == file['modality']}
         check(isinstance(families, list) and families and len(set(families)) == len(families)
             and set(families) <= allowed, 'Predeclared required evidence families required')
+        geometry = file.get('source_geometry')
+        check(isinstance(geometry, dict), 'Source geometry must be bound at file level')
         units = file.get('units')
         check(isinstance(units, list) and units, 'All planned evidence units must be recorded, including failures')
         ids = set()
@@ -116,6 +118,30 @@ def audit(manifest):
                 'Context must bind the frozen pre-score routing measurement')
             check(is_hash(row.get('measurement_sha256')), 'Exact measurement commitment required')
             location(file['modality'], row.get('location'))
+            span = row['location']
+            if file['modality'] == 'image':
+                check(geometry.get('width') == span['source_width'] and geometry.get('height') == span['source_height'],
+                    'Local pixels disagree with the declared source geometry')
+            elif file['modality'] == 'video':
+                check(type(geometry.get('duration_ns')) is int and geometry['duration_ns'] == span['extent']
+                    and is_hash(geometry.get('pts_table_sha256')), 'Video duration and original clock commitment required')
+                if span.get('region') is not None:
+                    location('image', span['region'])
+                    check(span['region']['source_width'] == geometry.get('width')
+                        and span['region']['source_height'] == geometry.get('height'), 'Video region disagrees with source frame geometry')
+                if span.get('frames') is not None:
+                    frames = span['frames']
+                    check(all(type(frames.get(k)) is int for k in ('start', 'end', 'extent'))
+                        and 0 <= frames['start'] < frames['end'] <= frames['extent'] == geometry.get('frame_count'),
+                        'Video frame range outside original frame extent')
+            elif file['modality'] == 'audio':
+                check(type(geometry.get('sample_count')) is int and type(geometry.get('sample_rate')) is int
+                    and geometry['sample_count'] == span['extent'] and geometry['sample_rate'] == span['sample_rate'],
+                    'Audio interval disagrees with the source sample clock')
+            else:
+                check(type(geometry.get('codepoints')) is int and geometry['codepoints'] == span['extent']
+                    and is_hash(geometry.get('text_sha256')) and span.get('text_sha256') == geometry['text_sha256'],
+                    'Passage offsets must bind the exact extracted text and extent')
             check(row.get('status') in STATUSES, 'Explicit local observation status required')
             if row['status'] == 'ok':
                 check(finite(row.get('raw')) and spec['raw_range'][0] <= row['raw'] <= spec['raw_range'][1], 'Finite declared raw response required')
@@ -201,9 +227,11 @@ def _features(file, artifact):
         families[family].append(_logit(model, [row['raw']]))
     if set(families) != set(file['required_families']):
         return None
-    # Same-family windows/heads do not become repeated independent votes. The
-    # maxima are scores for the separately fitted AND calibrated file combiner.
-    return [max(families[key]) for key in sorted(file['required_families'])]
+    # The combined target is ANY AI in the planned scope. Genuine evidence in a
+    # different region/target must not subtract from positive evidence elsewhere.
+    # Same-family observations are not repeated independent votes. These positive
+    # maxima are features, not probabilities, for separately fitted/calibrated fusion.
+    return [max(0., max(families[key])) for key in sorted(file['required_families'])]
 
 
 def pattern(file):
@@ -214,7 +242,8 @@ def train(manifest, *, min_groups_per_class=25, l2=.001):
     audit(manifest)
     check(type(min_groups_per_class) is int and min_groups_per_class >= 2 and finite(l2) and l2 > 0, 'Explicit support and regularization required')
     training = [f for f in manifest['files'] if f['role'] != 'confirmation']
-    artifact = {'schema': 'chipmunk.specialist-calibration/1', 'policy': copy.deepcopy(manifest['policy']),
+    artifact = {'schema': 'chipmunk.specialist-calibration/2', 'policy': copy.deepcopy(manifest['policy']),
+        'feature_pooling': 'positive_logit_max_per_dependency_family',
         'implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'packages': {n: importlib.metadata.version(n) for n in ('numpy', 'scipy')},
         'plan_sha256': plan_digest(manifest), 'training_sha256': digest(training),
@@ -245,7 +274,8 @@ def train(manifest, *, min_groups_per_class=25, l2=.001):
 
 def evaluate(manifest, artifact):
     audit(manifest)
-    check(artifact.get('schema') == 'chipmunk.specialist-calibration/1'
+    check(artifact.get('schema') == 'chipmunk.specialist-calibration/2'
+        and artifact.get('feature_pooling') == 'positive_logit_max_per_dependency_family'
         and artifact.get('serving_admitted') is False
         and artifact.get('sha256') == digest({k: v for k, v in artifact.items() if k != 'sha256'}), 'Exact fitted artifact required')
     check(artifact['implementation_sha256'] == hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -294,6 +324,6 @@ def evaluate(manifest, artifact):
             'ai_files': sum(r['label'] == 1 for r in selected),
             'source_balanced_brier_on_scored_cases': (by_class[0] + by_class[1]) / 2
                 if all(v is not None for v in by_class.values()) else None}
-    return {'schema': 'chipmunk.specialist-confirmation/1', 'artifact_sha256': artifact['sha256'],
+    return {'schema': 'chipmunk.specialist-confirmation/2', 'artifact_sha256': artifact['sha256'],
         'outcomes': outcomes, 'unit_outcomes': local, 'summaries': summaries, 'serving_admitted': False,
         'limits': 'Research scores under a50:50 reference prior; no validated customer accuracy or scope beyond planned units.'}

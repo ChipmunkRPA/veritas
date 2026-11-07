@@ -18,7 +18,7 @@ def implementation():
 def freeze(manifest, minimum, l2):
     engine.audit(manifest)
     engine.check(type(minimum) is int and minimum >= 2 and engine.finite(l2) and l2 > 0, 'Explicit fitting options required')
-    value = {'schema': 'chipmunk.specialist-fit-freeze/1', 'plan_sha256': engine.plan_digest(manifest),
+    value = {'schema': 'chipmunk.specialist-fit-freeze/2', 'plan_sha256': engine.plan_digest(manifest),
         'training_sha256': engine.digest([f for f in manifest['files'] if f['role'] != 'confirmation']),
         'implementation_sha256': implementation(),
         'packages': {n: importlib.metadata.version(n) for n in ('numpy', 'scipy')},
@@ -27,7 +27,7 @@ def freeze(manifest, minimum, l2):
 
 
 def fit(manifest, lock):
-    engine.check(lock.get('schema') == 'chipmunk.specialist-fit-freeze/1'
+    engine.check(lock.get('schema') == 'chipmunk.specialist-fit-freeze/2'
         and lock.get('sha256') == engine.digest({k: v for k, v in lock.items() if k != 'sha256'}), 'Exact prospective fit freeze required')
     actual = freeze(manifest, lock['minimum_groups_per_class'], lock['l2'])
     engine.check(actual == lock, 'Plan, fitting/calibration observations, code or runtime changed after freeze')

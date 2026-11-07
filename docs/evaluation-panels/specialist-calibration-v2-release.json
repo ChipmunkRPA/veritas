@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.specialist-authored-release/2",
+  "files_sha256": {
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/scripts/specialist_calibration.py": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "backend/scripts/review_specialist_fixture.py": "5e3a339fada61e8fb5554eb9de85ee949a00b89d12accbccb991b86158ca488b",
+    "backend/tests/test_specialist_calibration.py": "7418f0abcbbd0bdea0bfcc89e4a047a0642bf99ad21b8ebf48799f80820a6ee6",
+    ".github/workflows/specialist-calibration-smoke.yml": "9124ef041cf6d1d38eb101596ca9931ac8b059ecee56fe93831a9957d98a21c0",
+    "docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json": "b46d0220fb55be1661d08d6b232ec967dda34cff7302728ae09cd8b2e499a7bd",
+    "docs/evaluation-panels/specialist-calibration-v2-authored-expected.json": "4a3b02a0af2a42ea33b053d623b6ea76d30925c51cd0cc79b8d3a3876a1f3828",
+    "docs/evaluation-panels/specialist-calibration-v2-synthetic-cli.json": "1a59e51ec1339b68a5a0ee3ab6a11bc98d2cbd124ec2d3bc00723b31ebe9c2f0",
+    "docs/evaluation-panels/specialist-calibration-v2-authored-local-review.json": "42e0321e9dd48acef8cffd9130fbf57ad7e9dc963ab5b7e629a77a6c1a77fb8a"
+  },
+  "authored_only": true,
+  "real_media_files": 0,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "linux_probability_absolute_limit_fixed_before_first_run": 1e-06,
+  "prior_real_data_study_requirements_changed": false,
+  "negative_cancellation_corrected_before_real_data_fitting": true,
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  }
+}

@@ -74,8 +74,9 @@ integration remains unfinished.
 - Implemented the shared image/video/audio/passage calibration framework and
   explicit source-disjoint specialist/fusion/calibration/confirmation roles.
   Local authored command flow passes for16 context heads/four calibrated
-  combiners;54 selected tests cover leakage, coordinates, missing local truth,
-  skipped checks and duplicate-family evidence. Real-data adapters, support,
+  combiners;63 selected tests cover leakage, coordinates, missing local truth,
+  skipped checks, duplicate-family evidence and the version2 safeguard preventing
+  unrelated genuine regions subtracting from positive evidence. Real-data adapters, support,
   new comparisons and fresh confirmation remain required across all four media.
 - Tested area-aligned regional calibration on all312 consumed response grids.
   Both formats still locate0/48 edits versus12/48 current, with one genuine

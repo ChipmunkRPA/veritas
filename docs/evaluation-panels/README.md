@@ -13,7 +13,7 @@ or a generic dataset link.
 - [Four-media specialist-calibration framework](../specialist-calibration-design.md):
   separate local/check/context calibrations plus separately fitted/calibrated
   combination, role/source isolation and position binding. The public authored
-  example covers128 symbolic files/512 observations and54 local selected tests;
+  corrected version2 example covers128 symbolic files/512 observations and63 local selected tests;
   it establishes software integration, not real-model detection improvement.
 - [Region-aligned calibration](../image-region-calibration-v9-result.md):
  312 consumed cases with complete-region rather than pixel-maximum calibration.

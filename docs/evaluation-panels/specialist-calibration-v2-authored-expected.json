@@ -1,0 +1,2988 @@
+{
+  "schema": "chipmunk.specialist-confirmation/2",
+  "artifact_sha256": "eda7685b79463913da017646009ae7a8ff3b157f4973342056f65a2a7a03c70a",
+  "outcomes": [
+    {
+      "id": "image-confirmation-0-0",
+      "group": "image-confirmation-0-0",
+      "modality": "image",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-0-1",
+      "group": "image-confirmation-0-1",
+      "modality": "image",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-0-2",
+      "group": "image-confirmation-0-2",
+      "modality": "image",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-0-3",
+      "group": "image-confirmation-0-3",
+      "modality": "image",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-1-0",
+      "group": "image-confirmation-1-0",
+      "modality": "image",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8091107021655152,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-1-1",
+      "group": "image-confirmation-1-1",
+      "modality": "image",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8233693496161293,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-1-2",
+      "group": "image-confirmation-1-2",
+      "modality": "image",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8367777900539416,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "image-confirmation-1-3",
+      "group": "image-confirmation-1-3",
+      "modality": "image",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8493545956872676,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-0-0",
+      "group": "video-confirmation-0-0",
+      "modality": "video",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-0-1",
+      "group": "video-confirmation-0-1",
+      "modality": "video",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-0-2",
+      "group": "video-confirmation-0-2",
+      "modality": "video",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-0-3",
+      "group": "video-confirmation-0-3",
+      "modality": "video",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-1-0",
+      "group": "video-confirmation-1-0",
+      "modality": "video",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8091107021655152,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-1-1",
+      "group": "video-confirmation-1-1",
+      "modality": "video",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8233693496161293,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-1-2",
+      "group": "video-confirmation-1-2",
+      "modality": "video",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8367777900539416,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "video-confirmation-1-3",
+      "group": "video-confirmation-1-3",
+      "modality": "video",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8493545956872676,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-0-0",
+      "group": "audio-confirmation-0-0",
+      "modality": "audio",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-0-1",
+      "group": "audio-confirmation-0-1",
+      "modality": "audio",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-0-2",
+      "group": "audio-confirmation-0-2",
+      "modality": "audio",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-0-3",
+      "group": "audio-confirmation-0-3",
+      "modality": "audio",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-1-0",
+      "group": "audio-confirmation-1-0",
+      "modality": "audio",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8091107021655152,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-1-1",
+      "group": "audio-confirmation-1-1",
+      "modality": "audio",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8233693496161293,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-1-2",
+      "group": "audio-confirmation-1-2",
+      "modality": "audio",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8367777900539416,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "audio-confirmation-1-3",
+      "group": "audio-confirmation-1-3",
+      "modality": "audio",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8493545956872676,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-0-0",
+      "group": "text-confirmation-0-0",
+      "modality": "text",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-0-1",
+      "group": "text-confirmation-0-1",
+      "modality": "text",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-0-2",
+      "group": "text-confirmation-0-2",
+      "modality": "text",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-0-3",
+      "group": "text-confirmation-0-3",
+      "modality": "text",
+      "label": 0,
+      "status": "ok",
+      "probability": 0.1703468905631384,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-1-0",
+      "group": "text-confirmation-1-0",
+      "modality": "text",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8091107021655152,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-1-1",
+      "group": "text-confirmation-1-1",
+      "modality": "text",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8233693496161293,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-1-2",
+      "group": "text-confirmation-1-2",
+      "modality": "text",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8367777900539416,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    },
+    {
+      "id": "text-confirmation-1-3",
+      "group": "text-confirmation-1-3",
+      "modality": "text",
+      "label": 1,
+      "status": "ok",
+      "probability": 0.8493545956872676,
+      "scope": "planned_evidence_units",
+      "reference_prior": 0.5
+    }
+  ],
+  "unit_outcomes": [
+    {
+      "file_id": "image-confirmation-0-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "image-confirmation-0-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "image-confirmation-0-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "image-confirmation-0-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "image-confirmation-0-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "image-confirmation-0-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "image-confirmation-0-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "image-confirmation-0-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "image-confirmation-0-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "image-confirmation-0-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "image-confirmation-0-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "image-confirmation-0-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "image-confirmation-0-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "image-confirmation-0-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "image-confirmation-0-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "image-confirmation-0-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "image-confirmation-1-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "image-confirmation-1-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "image-confirmation-1-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "image-confirmation-1-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "image-confirmation-1-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "image-confirmation-1-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "image-confirmation-1-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "image-confirmation-1-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "image-confirmation-1-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "image-confirmation-1-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "image-confirmation-1-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "image-confirmation-1-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "image-confirmation-1-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "image-confirmation-1-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "image-confirmation-1-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "pixels",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "image-confirmation-1-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "pixels",
+        "x": 10,
+        "y": 0,
+        "width": 10,
+        "height": 10,
+        "source_width": 20,
+        "source_height": 10
+      },
+      "specialist": "image.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "video-confirmation-0-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "video-confirmation-0-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "video-confirmation-0-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "video-confirmation-0-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "video-confirmation-0-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "video-confirmation-0-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "video-confirmation-0-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "video-confirmation-0-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "video-confirmation-0-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "video-confirmation-0-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "video-confirmation-0-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "video-confirmation-0-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "video-confirmation-0-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "video-confirmation-0-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "video-confirmation-0-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "video-confirmation-0-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "video-confirmation-1-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "video-confirmation-1-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "video-confirmation-1-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "video-confirmation-1-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "video-confirmation-1-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "video-confirmation-1-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "video-confirmation-1-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "video-confirmation-1-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "video-confirmation-1-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "video-confirmation-1-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "video-confirmation-1-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "video-confirmation-1-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "video-confirmation-1-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "video-confirmation-1-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "video-confirmation-1-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 0,
+        "end": 1000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 0,
+          "end": 24,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "video-confirmation-1-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "time",
+        "unit": "nanoseconds",
+        "start": 1000000000,
+        "end": 2000000000,
+        "extent": 2000000000,
+        "frames": {
+          "start": 24,
+          "end": 48,
+          "extent": 48
+        },
+        "region": {
+          "kind": "pixels",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 360,
+          "source_width": 1920,
+          "source_height": 1080
+        }
+      },
+      "specialist": "video.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "audio-confirmation-0-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "audio-confirmation-0-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "audio-confirmation-0-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "audio-confirmation-0-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "audio-confirmation-0-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "audio-confirmation-0-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "audio-confirmation-0-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "audio-confirmation-0-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "audio-confirmation-0-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "audio-confirmation-0-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "audio-confirmation-0-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "audio-confirmation-0-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "audio-confirmation-0-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "audio-confirmation-0-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "audio-confirmation-0-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "audio-confirmation-0-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "audio-confirmation-1-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "audio-confirmation-1-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "audio-confirmation-1-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "audio-confirmation-1-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "audio-confirmation-1-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "audio-confirmation-1-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "audio-confirmation-1-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "audio-confirmation-1-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "audio-confirmation-1-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "audio-confirmation-1-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "audio-confirmation-1-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "audio-confirmation-1-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "audio-confirmation-1-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "audio-confirmation-1-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "audio-confirmation-1-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 0,
+        "end": 16000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "audio-confirmation-1-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "samples",
+        "unit": "samples",
+        "start": 16000,
+        "end": 32000,
+        "extent": 32000,
+        "sample_rate": 16000
+      },
+      "specialist": "audio.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "text-confirmation-0-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "4ce344edd03ab37d9b37ec842be50c863bb1b32199ca86802926b0609ec51471"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "text-confirmation-0-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "4ce344edd03ab37d9b37ec842be50c863bb1b32199ca86802926b0609ec51471"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "text-confirmation-0-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "4ce344edd03ab37d9b37ec842be50c863bb1b32199ca86802926b0609ec51471"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "text-confirmation-0-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "4ce344edd03ab37d9b37ec842be50c863bb1b32199ca86802926b0609ec51471"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16012993989830795
+    },
+    {
+      "file_id": "text-confirmation-0-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "2a5451ee9336eac71813dc0637413ee9ca8856af6d9b406bed9299b454b190fa"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "text-confirmation-0-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "2a5451ee9336eac71813dc0637413ee9ca8856af6d9b406bed9299b454b190fa"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "text-confirmation-0-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "2a5451ee9336eac71813dc0637413ee9ca8856af6d9b406bed9299b454b190fa"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765608
+    },
+    {
+      "file_id": "text-confirmation-0-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "2a5451ee9336eac71813dc0637413ee9ca8856af6d9b406bed9299b454b190fa"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.16663239453765596
+    },
+    {
+      "file_id": "text-confirmation-0-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "857e1f28b62e1d10344d4912e9d8d377200b84b8d039eb544500f9514af1e6c6"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "text-confirmation-0-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "857e1f28b62e1d10344d4912e9d8d377200b84b8d039eb544500f9514af1e6c6"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "text-confirmation-0-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "857e1f28b62e1d10344d4912e9d8d377200b84b8d039eb544500f9514af1e6c6"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618718
+    },
+    {
+      "file_id": "text-confirmation-0-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "857e1f28b62e1d10344d4912e9d8d377200b84b8d039eb544500f9514af1e6c6"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.17334439880618727
+    },
+    {
+      "file_id": "text-confirmation-0-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "3243fe0e7fe856b3ab7fac9076b60a40a47e2a1271079775db922faa682f98b9"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "text-confirmation-0-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "3243fe0e7fe856b3ab7fac9076b60a40a47e2a1271079775db922faa682f98b9"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "text-confirmation-0-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "3243fe0e7fe856b3ab7fac9076b60a40a47e2a1271079775db922faa682f98b9"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "text-confirmation-0-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "3243fe0e7fe856b3ab7fac9076b60a40a47e2a1271079775db922faa682f98b9"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.18026828193691144
+    },
+    {
+      "file_id": "text-confirmation-1-0",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "d4e7d428ae6bcf9a06501bb835fc0528558bc3cbfd2db2323bb0f511f63d05ec"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "text-confirmation-1-0",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "d4e7d428ae6bcf9a06501bb835fc0528558bc3cbfd2db2323bb0f511f63d05ec"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "text-confirmation-1-0",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "d4e7d428ae6bcf9a06501bb835fc0528558bc3cbfd2db2323bb0f511f63d05ec"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "text-confirmation-1-0",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "d4e7d428ae6bcf9a06501bb835fc0528558bc3cbfd2db2323bb0f511f63d05ec"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8197317180630886
+    },
+    {
+      "file_id": "text-confirmation-1-1",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "37cd1dff5f5c97b5a74c1d486020c244c1e4ebeee91c92aff7b0ac6dbf9c63b4"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "text-confirmation-1-1",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "37cd1dff5f5c97b5a74c1d486020c244c1e4ebeee91c92aff7b0ac6dbf9c63b4"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "text-confirmation-1-1",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "37cd1dff5f5c97b5a74c1d486020c244c1e4ebeee91c92aff7b0ac6dbf9c63b4"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938128
+    },
+    {
+      "file_id": "text-confirmation-1-1",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "37cd1dff5f5c97b5a74c1d486020c244c1e4ebeee91c92aff7b0ac6dbf9c63b4"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8266556011938129
+    },
+    {
+      "file_id": "text-confirmation-1-2",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "c0e290e17eeab01dd4284db434b1ed3ffc8366bd3263b2138ebe16721b93c151"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "text-confirmation-1-2",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "c0e290e17eeab01dd4284db434b1ed3ffc8366bd3263b2138ebe16721b93c151"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "text-confirmation-1-2",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "c0e290e17eeab01dd4284db434b1ed3ffc8366bd3263b2138ebe16721b93c151"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.833367605462344
+    },
+    {
+      "file_id": "text-confirmation-1-2",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "c0e290e17eeab01dd4284db434b1ed3ffc8366bd3263b2138ebe16721b93c151"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8333676054623439
+    },
+    {
+      "file_id": "text-confirmation-1-3",
+      "unit_id": "first.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "2069a1e0100d901978b1a1adf20fb3a671ed304b4d4aa760b55bc8c3e265da3b"
+      },
+      "specialist": "text.first",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "text-confirmation-1-3",
+      "unit_id": "first.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "2069a1e0100d901978b1a1adf20fb3a671ed304b4d4aa760b55bc8c3e265da3b"
+      },
+      "specialist": "text.first",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "text-confirmation-1-3",
+      "unit_id": "second.normal",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 0,
+        "end": 40,
+        "extent": 80,
+        "text_sha256": "2069a1e0100d901978b1a1adf20fb3a671ed304b4d4aa760b55bc8c3e265da3b"
+      },
+      "specialist": "text.second",
+      "context": "normal",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    },
+    {
+      "file_id": "text-confirmation-1-3",
+      "unit_id": "second.difficult",
+      "location": {
+        "kind": "text",
+        "unit": "unicode_codepoints",
+        "start": 40,
+        "end": 80,
+        "extent": 80,
+        "text_sha256": "2069a1e0100d901978b1a1adf20fb3a671ed304b4d4aa760b55bc8c3e265da3b"
+      },
+      "specialist": "text.second",
+      "context": "difficult",
+      "reference_prior": 0.5,
+      "status": "ok",
+      "probability": 0.8398700601016922
+    }
+  ],
+  "summaries": {
+    "image": {
+      "planned_files": 8,
+      "scored_files": 8,
+      "inconclusive_files": 0,
+      "genuine_files": 4,
+      "ai_files": 4,
+      "source_balanced_brier_on_scored_cases": 0.029130611355139127
+    },
+    "video": {
+      "planned_files": 8,
+      "scored_files": 8,
+      "inconclusive_files": 0,
+      "genuine_files": 4,
+      "ai_files": 4,
+      "source_balanced_brier_on_scored_cases": 0.029130611355139127
+    },
+    "audio": {
+      "planned_files": 8,
+      "scored_files": 8,
+      "inconclusive_files": 0,
+      "genuine_files": 4,
+      "ai_files": 4,
+      "source_balanced_brier_on_scored_cases": 0.029130611355139127
+    },
+    "text": {
+      "planned_files": 8,
+      "scored_files": 8,
+      "inconclusive_files": 0,
+      "genuine_files": 4,
+      "ai_files": 4,
+      "source_balanced_brier_on_scored_cases": 0.029130611355139127
+    }
+  },
+  "serving_admitted": false,
+  "limits": "Research scores under a50:50 reference prior; no validated customer accuracy or scope beyond planned units."
+}

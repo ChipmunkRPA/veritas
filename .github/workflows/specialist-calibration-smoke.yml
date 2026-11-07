@@ -8,9 +8,9 @@ on:
       - backend/app/bench/specialists.py
       - backend/scripts/specialist_calibration.py
       - backend/scripts/review_specialist_fixture.py
-      - docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json
-      - docs/evaluation-panels/specialist-calibration-v1-authored-expected.json
-      - docs/evaluation-panels/specialist-calibration-v1-release.json
+      - docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json
+      - docs/evaluation-panels/specialist-calibration-v2-authored-expected.json
+      - docs/evaluation-panels/specialist-calibration-v2-release.json
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         run: |
           python - <<'PY'
           import hashlib, json, pathlib
-          release = json.loads(pathlib.Path('docs/evaluation-panels/specialist-calibration-v1-release.json').read_text())
+          release = json.loads(pathlib.Path('docs/evaluation-panels/specialist-calibration-v2-release.json').read_text())
           for name, expected in release['files_sha256'].items():
               assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
           assert release['authored_only'] and release['real_media_files'] == 0
@@ -44,11 +44,11 @@ jobs:
           python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
       - name: Audit and freeze the authored128-file plan
         run: |
-          python -m scripts.specialist_calibration audit docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-audit.json"
-          python -m scripts.specialist_calibration freeze docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-freeze.json" --minimum-groups-per-class 3
+          python -m scripts.specialist_calibration audit docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json "$RUNNER_TEMP/authored-audit.json"
+          python -m scripts.specialist_calibration freeze docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json "$RUNNER_TEMP/authored-freeze.json" --minimum-groups-per-class 3
       - name: Fit specialists and both levels of combination using disjoint roles
-        run: python -m scripts.specialist_calibration fit docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-fit.json" --frozen "$RUNNER_TEMP/authored-freeze.json"
+        run: python -m scripts.specialist_calibration fit docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json "$RUNNER_TEMP/authored-fit.json" --frozen "$RUNNER_TEMP/authored-freeze.json"
       - name: Evaluate the frozen authored confirmation
-        run: python -m scripts.specialist_calibration evaluate docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-confirmation.json" --artifact "$RUNNER_TEMP/authored-fit.json"
+        run: python -m scripts.specialist_calibration evaluate docs/evaluation-panels/specialist-calibration-v2-authored-manifest.json "$RUNNER_TEMP/authored-confirmation.json" --artifact "$RUNNER_TEMP/authored-fit.json"
       - name: Check numerical agreement and adverse invariants
         run: python -m scripts.review_specialist_fixture "$RUNNER_TEMP/authored-fit.json" "$RUNNER_TEMP/authored-confirmation.json" "$RUNNER_TEMP/authored-host-review.json"

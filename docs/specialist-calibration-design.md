@@ -6,6 +6,13 @@ This implements the cross-modal testing architecture requested7 November2026.
 It does not establish improved real-media detection, supply new trained detectors
 or change customer confidence. Every generated artifact has `serving_admitted:false`.
 
+The current recipe is **version2**. The first authored prototype passed local and
+Linux numerical checks, but four later semantic regression tests exposed negative
+evidence from an unrelated region subtracting from positive evidence elsewhere.
+Version2 fixes that any-AI pooling rule before real-data fitting. The old numerical
+result, failed launch and four failing tests are preserved; no serving score was
+ever changed by either prototype.
+
 ## Scope of the next real-data comparisons
 
 | Medium | Specialist evidence | Conditions selected before detection scores | Controls that must remain genuine |
@@ -30,11 +37,13 @@ binds a specialist, declared target, dependency family, score-blind context rule
 measurement commitment, status and source coordinates:
 
 - Images: stored-source integer pixel rectangle and original dimensions.
-- Video: integer source nanosecond interval and extent; the adapter must retain
-  the original frame/PTS correspondence for actual frame evidence.
-- Audio: original sample interval, extent and sample rate.
-- Passages: Unicode-codepoint offsets and extracted-text extent; byte offsets
-  cannot be substituted. The adapter must bind the actual extracted text.
+- Video: integer source nanosecond interval, file duration and original PTS-table
+  commitment. Supplied frame ranges and pixel regions are checked against the
+  file's declared frame count/dimensions. The adapter must still verify the actual
+  time/frame/PTS correspondence.
+- Audio: original sample interval/extent/rate, agreeing with the file's clock.
+- Passages: Unicode-codepoint offsets and extracted-text extent/digest, matching
+  the file's extracted-text identity. Byte offsets cannot be substituted.
 
 Each known local label needs its own source/provenance digest and `local_unit`
 scope. A whole-file AI label cannot fill unknown local labels. A positive file
@@ -60,7 +69,9 @@ selecting a calibration from the suspicious score or known truth is prohibited.
    groups per class and context; this is a support floor, not an accuracy guarantee.
 2. **Combination fitting:** on different source groups, learn nonnegative weights
    from the specialist outputs. Within one dependency family use its maximum
-   calibrated logit, so duplicate windows do not add independent votes. This is
+   **positive** calibrated logit, floored at zero, so duplicate windows do not add
+   independent votes and a genuine region cannot subtract from a positive region
+   in this any-AI scope. Local genuine-leaning estimates remain inspectable. This is
    a feature of a supervised combiner, not an independent-probability product.
 3. **Combination calibration:** on another source-disjoint set, calibrate the
    combined response. Separately calibrated inputs do not automatically make a
@@ -112,12 +123,12 @@ Calibration cannot supply discrimination absent from a detector. The completed
 
 ## Local command interface
 
-Prepare a private JSON manifest with schema `chipmunk.specialist-evaluation/1`,
-`policy.specialists` and complete `files`/`units` arrays. The authored fixture in
+Prepare a private JSON manifest with schema `chipmunk.specialist-evaluation/2`,
+`policy.specialists`, source geometry and complete `files`/`units` arrays. The authored fixture in
 `backend/tests/test_specialist_calibration.py` is an executable structural example,
 not a real dataset or example of native model output. A
-[public authored manifest](evaluation-panels/specialist-calibration-v1-authored-manifest.json)
-and its [recorded numerical outputs](evaluation-panels/specialist-calibration-v1-authored-expected.json)
+[public authored manifest](evaluation-panels/specialist-calibration-v2-authored-manifest.json)
+and its [recorded numerical outputs](evaluation-panels/specialist-calibration-v2-authored-expected.json)
 are available for a lean numerical reproduction with NumPy2.2.6/SciPy1.18.1 only.
 Its source, routing, measurement and label-provenance hashes identify authored
 symbolic placeholders; they do not claim nonexistent real-media files or native
@@ -142,14 +153,15 @@ The authored synthetic CLI run covers128 files/512 observations across all four
 modalities,16 check/context calibrators, four combiners with their own calibration,
 32 confirmation files and128 local confirmation outputs. Its deliberately small
 support setting is3, solely for integration testing. The25-group default correctly
-withholds scores on that fixture. Fifty-four selected tests pass, including
+withholds scores on that fixture. Sixty-three selected tests pass, including
 existing independent-evaluation checks, role leakage, wrong coordinate units,
 copied whole-file labels, missing evidence, duplicate-family votes, confirmation
-isolation, model-review commitments and freeze integrity.
+isolation, model-review commitments, source-geometry binding, unrelated-negative
+evidence and freeze integrity.
 
 The separate-host authored smoke has a prospectively fixed absolute probability
 agreement limit of1e-6 over32 file and128 unit outputs, exact nonnumerical
-bindings, and five adverse invariants. Its numerical tolerance applies only to
+bindings, and six adverse invariants. Its numerical tolerance applies only to
 this new authored integration test, not earlier studies' exact-fit requirements.
 The workflow needs no model, image/audio/video processing, API or customer data.
 An actual completed run receipt is required before claiming Linux success.

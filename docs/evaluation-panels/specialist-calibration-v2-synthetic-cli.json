@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.specialist-synthetic-cli-receipt/2",
+  "producer_kind": "authored_synthetic_fixture",
+  "real_media_files_evaluated": 0,
+  "new_neural_forwards": 0,
+  "model_performance_claim": false,
+  "files": 128,
+  "local_observations": 512,
+  "modalities": [
+    "image",
+    "video",
+    "audio",
+    "text"
+  ],
+  "specialist_context_calibrators": 16,
+  "separately_calibrated_combiners": 4,
+  "confirmation_files": 32,
+  "confirmation_local_outputs": 128,
+  "support_setting_for_authored_fixture_only": 3,
+  "default_real_data_support_floor_per_class": 25,
+  "selected_tests_passed": 63,
+  "serving_admitted": false,
+  "feature_pooling": "positive_logit_max_per_dependency_family",
+  "negative_cancellation_failures_before_repair": 4,
+  "source_sha256": {
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/scripts/specialist_calibration.py": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67",
+    "backend/scripts/review_specialist_fixture.py": "5e3a339fada61e8fb5554eb9de85ee949a00b89d12accbccb991b86158ca488b",
+    "backend/tests/test_specialist_calibration.py": "7418f0abcbbd0bdea0bfcc89e4a047a0642bf99ad21b8ebf48799f80820a6ee6"
+  },
+  "private_cli_artifact_sha256": {
+    "manifest.json": "b46d0220fb55be1661d08d6b232ec967dda34cff7302728ae09cd8b2e499a7bd",
+    "audit.json": "5967fabec6f033344a3c781531d3e63bd59e4bf07d1131d171bde87ed5a1bdcc",
+    "freeze.json": "52983bdbf81e7b863a651556d443ea9d753c52355ed523d796142d88acc93fb2",
+    "artifact.json": "91f4b156fbbfa12829e8d99411fe8d109dcf13f6af85ba06ed04f3f7bc29f456",
+    "confirmation.json": "4a3b02a0af2a42ea33b053d623b6ea76d30925c51cd0cc79b8d3a3876a1f3828",
+    "host-review.json": "42e0321e9dd48acef8cffd9130fbf57ad7e9dc963ab5b7e629a77a6c1a77fb8a"
+  },
+  "limits": "Authored-score software integration and semantic guards only. No real-media calibration, detector-performance improvement, independent human review or customer admission."
+}

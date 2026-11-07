@@ -1,0 +1,15 @@
+{
+  "schema": "chipmunk.specialist-negative-cancellation-regression/1",
+  "prior_framework_commit": "16bd8f2f0390a0863d97c448dd575a24290a7f33",
+  "authored_synthetic_only": true,
+  "new_tests_failed_before_repair": 4,
+  "modalities": [
+    "image",
+    "video",
+    "audio",
+    "text"
+  ],
+  "reason": "Negative evidence from a different required family could subtract from positive evidence elsewhere in an any-AI scope.",
+  "original_log_retained": true,
+  "serving_was_ever_admitted": false
+}

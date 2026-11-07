@@ -40,7 +40,8 @@ jobs:
           print('Exact authored-only source/packet hashes; no real media or model weights.')
           PY
       - name: Install only the two pinned numerical dependencies
-        run: python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
+        run: |
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.18.1
       - name: Audit and freeze the authored128-file plan
         run: |
           python -m scripts.specialist_calibration audit docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json "$RUNNER_TEMP/authored-audit.json"

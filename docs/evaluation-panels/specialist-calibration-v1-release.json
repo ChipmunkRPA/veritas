@@ -5,7 +5,7 @@
     "backend/scripts/specialist_calibration.py": "3e17431c53bf28b9d28dffadc047a72f0091a04f4f83449b13718338b53aa09d",
     "backend/scripts/review_specialist_fixture.py": "a42c3b1021ae55cf5d1d6d8821f04198c8e4cf0f818f4a54f86499c4a6e889d7",
     "backend/tests/test_specialist_calibration.py": "00f182902cfb67fd2a0856bd86bea99eb988822228ede9e52bb0e869c5761dad",
-    ".github/workflows/specialist-calibration-smoke.yml": "6029ab9a3fb785710f1a5a58077cf054e04b032ea6d5c475d3bd923e69ff8cc3",
+    ".github/workflows/specialist-calibration-smoke.yml": "7c2e793c58181e72f007d970f65501fd978150a50d45d1feb982e71ecb67cf43",
     "docs/evaluation-panels/specialist-calibration-v1-authored-manifest.json": "706d72751cc7d7367dda11a7dea44791519c0ee089c3cea98d0205e78d5fdf0b",
     "docs/evaluation-panels/specialist-calibration-v1-authored-expected.json": "298da0f06d2e91f954d6f0af1155d549ee5c7cdc01b65f23a3ed2564fbc0a3dc",
     "docs/evaluation-panels/specialist-calibration-v1-synthetic-cli.json": "58f0b09860e94c1be80dccfef0be5a4fc9dc44673fbf052f43417bc8b6b46ebc",
@@ -20,5 +20,15 @@
   "packages": {
     "numpy": "2.2.6",
     "scipy": "1.18.1"
+  },
+  "workflow_launch_repair": {
+    "first_run_id": 42393461352,
+    "first_run_head_sha": "c4c8318d3fa052f4bb59daaca2ad2e5575bd2c8c",
+    "first_run_conclusion": "failure",
+    "jobs_created": 0,
+    "cause": "Unquoted colon in YAML run scalar; reproduced locally as ScannerError line43,column54.",
+    "prior_workflow_sha256": "6029ab9a3fb785710f1a5a58077cf054e04b032ea6d5c475d3bd923e69ff8cc3",
+    "repair": "Use a literal run block for the same dependency command.",
+    "code_data_models_or_probability_limit_changed": false
   }
 }

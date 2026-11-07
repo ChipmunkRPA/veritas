@@ -1,0 +1,142 @@
+{
+  "schema": "chipmunk.video-v13-resource-diagnostic/13",
+  "pid": 99915,
+  "created": 1794029835.121902,
+  "profile_code_sha256": "210037e5ce5b66ba77e1e2764d000076e1309226cb794eacb71693acba17f46e",
+  "original_lock_sha256": "87c8db6e370993cb9aea6c77f5ca1dce45e62246483ac130f169f76e872299ae",
+  "limits": {
+    "parent_rss_bytes": 4831838208,
+    "tree_rss_bytes": 6442450944,
+    "min_system_available_bytes": 1610612736,
+    "min_free_disk_bytes": 1073741824,
+    "timeout_s": 180,
+    "interval_s": 0.1,
+    "source_indices": [
+      82,
+      83,
+      84
+    ]
+  },
+  "guard": null,
+  "child_exit_code": 0,
+  "memory": {
+    "complete": false,
+    "metric": "sampled_process_tree_rss",
+    "sampled_max_rss_bytes": 4169302016,
+    "interval_s": 0.1,
+    "sample_count": 328,
+    "sample_attempts": 331,
+    "duration_s": 37.386297125020064,
+    "finished": true,
+    "roots": [
+      {
+        "pid": 99915,
+        "create_time": 1794029835.121902
+      }
+    ],
+    "errors": [
+      {
+        "sample": 162,
+        "operation": "rss",
+        "pid": 99933,
+        "error": "NoSuchProcess"
+      },
+      {
+        "sample": 208,
+        "operation": "children",
+        "pid": 99938,
+        "error": "NoSuchProcess"
+      },
+      {
+        "sample": 208,
+        "operation": "rss",
+        "pid": 99938,
+        "error": "NoSuchProcess"
+      },
+      {
+        "sample": 217,
+        "operation": "identity",
+        "pid": 99939,
+        "error": "ProcessLookupError"
+      }
+    ],
+    "limitations": [
+      "Maximum of successful RSS samples; short-lived processes and between-sample peaks may be missed.",
+      "Process RSS totals can double-count shared pages; not GPU memory or a true process/system peak.",
+      "Only the supplied process roots and observed descendants are in scope; other workers are not inferred."
+    ]
+  },
+  "child_result_available": true,
+  "quality_comparison": false,
+  "serving_changed": false,
+  "root_cause_of_previous_termination_isolated": false,
+  "child_completed": true,
+  "case_statuses": [
+    {
+      "index": 82,
+      "id": "deepaction-086-VideoPoet",
+      "variant": "original",
+      "sha256": "8475c8e2abf659d07cf6ca0f33dfbbf78a1c0a493f515dcc78c5211742e12215",
+      "checks": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      }
+    },
+    {
+      "index": 83,
+      "id": "deepaction-086-VideoPoet",
+      "variant": "matched",
+      "sha256": "8eba3fb43fc942de4e0c1e10f9540e659c268a90db827ed3cf01fe86cc4115a3",
+      "checks": {
+        "vid.synth.frames.commfor384": "not_applicable",
+        "vid.synth.frames.dda": "not_applicable"
+      }
+    },
+    {
+      "index": 84,
+      "id": "deepaction-022-Pexels",
+      "variant": "original",
+      "sha256": "95e87d907526dc23e4fe13eb67421852ff136b72aac0072cb84ed43770756c54",
+      "checks": {
+        "vid.synth.frames.commfor384": "ok",
+        "vid.synth.frames.dda": "ok"
+      }
+    }
+  ],
+  "previous_two_input_correspondence": [
+    {
+      "source_index": 82,
+      "check": "vid.synth.frames.commfor384",
+      "status_matches": true,
+      "applicability_matches": true,
+      "absolute_probability_difference": 0.0
+    },
+    {
+      "source_index": 82,
+      "check": "vid.synth.frames.dda",
+      "status_matches": true,
+      "applicability_matches": true,
+      "absolute_probability_difference": 0.0
+    },
+    {
+      "source_index": 83,
+      "check": "vid.synth.frames.commfor384",
+      "status_matches": true,
+      "applicability_matches": true,
+      "absolute_probability_difference": null
+    },
+    {
+      "source_index": 83,
+      "check": "vid.synth.frames.dda",
+      "status_matches": true,
+      "applicability_matches": true,
+      "absolute_probability_difference": null
+    }
+  ],
+  "stage_events": 84,
+  "maximum_recorded_stage_parent_rss_bytes": 2938896384,
+  "maximum_recorded_stage_mps_driver_bytes": 2311798784,
+  "memory_recording_success": false,
+  "observed_rss_is_lower_bound": true,
+  "scope": "Three post-hoc source-sequence repeats with unchanged original synthesis adapters, source/method/code/model freeze. Source82 raw responses reproduced exactly;83 applicability reproduced;4K source84 completed. No quality comparison, calibration, failure-journal resumption, serving change or isolated cause."
+}

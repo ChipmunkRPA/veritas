@@ -89,3 +89,26 @@ Preserve both journals. Do not treat the candidate's completed run as a quality
 gain, fit on only the surviving baseline cases, silently resume a failed
 journal, or replace a serving check. A resource-profiled complete repeat and
 the original calibration/native/quality requirements remain necessary.
+
+### Guarded three-input diagnosis
+
+A later isolated worker repeated the original input indices82/83 and then the
+interrupted4K input84 through the unchanged baseline scorer. All three completed.
+Both prior scored-check responses at82 reproduced exactly (absolute difference0)
+and both unassessed statuses at83 were preserved. Both checks assessed input84.
+Stage instrumentation recorded RSS and MPS allocation without altering the
+source algorithm. No app, model, source or comparison requirement changed.
+
+The owner process imposed4.5GiB parent RSS/6GiB tree RSS, minimum1.5GiB available
+memory/1GiB disk and180seconds. No guard fired. Successful samples observed tree
+RSS4,169,302,016 bytes. Four observation errors involved exiting decoder
+children, making the memory recording incomplete: this value is a lower bound
+from successful observations, not a successful peak-memory measurement. The
+complete decoder-only result above remains a different, narrower observation.
+[Resource receipt](evaluation-panels/video-v13-owned-resource-profile.json).
+
+This post-hoc sequence does not reproduce the original long-running worker or
+other simultaneous activity and does not establish the earlier kill's cause.
+Heavy replications should run sequentially with resource/decoder diagnostics,
+using distinct journals that preserve the original interrupted attempts. Do not
+fill gaps from this diagnostic or silently resume the old quality comparison.

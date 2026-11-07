@@ -1,0 +1,68 @@
+{
+  "schema": "chipmunk.video-demamba-prospective-review/13",
+  "private_lock_sha256": "87c8db6e370993cb9aea6c77f5ca1dce45e62246483ac130f169f76e872299ae",
+  "public_freeze_sha256": "fe8aa9a67bcca54259b0d2e9bf7966b9723fc73ac1ebb4d891601559e3898d61",
+  "planned_inputs": 288,
+  "source_statuses": {
+    "ready": 284,
+    "unavailable": 4
+  },
+  "roles": {
+    "calibration": 96,
+    "test": 192
+  },
+  "project_implementation_files": 360,
+  "installed_implementation_files": 11,
+  "synthetic_selected_tests_passed": 53,
+  "actual_complete_lock_alterations": [
+    {
+      "alteration": "threshold",
+      "rejected": true
+    },
+    {
+      "alteration": "native",
+      "rejected": true
+    },
+    {
+      "alteration": "code",
+      "rejected": true
+    },
+    {
+      "alteration": "runtime",
+      "rejected": true
+    },
+    {
+      "alteration": "installed",
+      "rejected": true
+    },
+    {
+      "alteration": "source",
+      "rejected": true
+    },
+    {
+      "alteration": "preparation",
+      "rejected": true
+    },
+    {
+      "alteration": "already_scored",
+      "rejected": true
+    },
+    {
+      "alteration": "fitted",
+      "rejected": true
+    },
+    {
+      "alteration": "admitted",
+      "rejected": true
+    },
+    {
+      "alteration": "assets",
+      "rejected": true
+    }
+  ],
+  "recordings_scored": 0,
+  "calibration_fitted": false,
+  "serving_admitted": false,
+  "outside_human_reviewers": 0,
+  "passed": true
+}

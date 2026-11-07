@@ -1,0 +1,56 @@
+{
+  "schema": "chipmunk.mouth-public-linux-review/12",
+  "run_id": 42347349044,
+  "job_id": 128327854623,
+  "commit_sha": "3f159b4cbd3b187487867afd8aeffbdb292dbddd",
+  "run_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42347349044",
+  "mode": "refit",
+  "conclusion": "success",
+  "receipt": {
+    "schema": "chipmunk.mouth-histogram-public-review/12",
+    "passed": true,
+    "packet_sha256": "a8cc715dd0e8d2792c9d0072e1bb96ccdaa5d25a9b297edbf427ad3c16db7502",
+    "source_packet_sha256": "ac7555bf05b0b4c013f93ce07144880a67886916d84c22748fead5cf1e791566",
+    "public_freeze_sha256": "e0f60e10aac8cce8e4aec5a2df04da5f11d508f951aaf25dfeb39a98cbc0d6cf",
+    "reviewer_sha256": "c6af36b6af4c20b4b61fc2010b70dc5bf34e411862ecb170e595d4b9afb2813b",
+    "refit_code_sha256": "12bf9f7be08fd2e9ace468fd01a753bf5fa9264c15c4624110c527d05aca1bf9",
+    "development_cases": 88,
+    "trees": 100,
+    "point_windows": 492,
+    "development_windows": 2321,
+    "fitting_only_exact_refit_performed": true,
+    "gates": {
+      "six_net_additional_locations": true,
+      "first_family_six_locations": true,
+      "both_first_family_conditions": true,
+      "retained_second_family": true,
+      "at_most_one_lost_location": true,
+      "total_ordinary_flags": false,
+      "condition_ordinary_flags": false,
+      "spatial_iou_gain": true,
+      "retained_temporal_iou": true,
+      "retained_coverage": true,
+      "complete_replays": true,
+      "complete_export_correspondence": true
+    },
+    "candidate_passes": false,
+    "outside_reviewers": 0,
+    "serving_admitted": false,
+    "scope": "Separate scalar raw-tree traversal, point rule, complete ranking/time/outcomes/counts/requirements; prior source arithmetic shared. Stored spatial IoU and estimator/export audit assertions bound, not independently rerun. Optional exact refit separately rebuilds input weights/matrix/JSON export with shared declared scikit-learn learner; no original training module or neural dependencies. No native decode/neural forward, fresh source test or outside human review."
+  },
+  "environment": {
+    "python": "3.12.6",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.0",
+      "joblib": "1.6.0",
+      "narwhals": "2.28.0",
+      "threadpoolctl": "3.8.0",
+      "cloudpickle": "3.1.2"
+    }
+  },
+  "outside_human_reviewers": 0,
+  "scope": "GitHub-hosted automated Linux reproduction of published consumed evidence; shared learner for optional refit, no source media or neural forwards. Rejected detector remains rejected."
+}

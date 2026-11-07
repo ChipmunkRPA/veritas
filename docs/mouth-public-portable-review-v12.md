@@ -60,9 +60,24 @@ unchanged and retain their historical reviewer hashes.
 The new `mouth-public-replay.yml` workflow runs separate standard-library and
 numerical-refit jobs on GitHub-hosted Ubuntu24.04/Python3.12.6. It has read-only
 repository permissions, disables persisted checkout credentials, pins the two
-actions by commit and downloads no neural models or source recordings. Its
-results are pending until the actual hosted jobs complete. A failure will remain
-visible; local success does not imply exact cross-platform refitting.
+actions by commit and downloads no neural models or source recordings.
+
+Both actual hosted jobs completed successfully at commit
+`3f159b4cbd3b187487867afd8aeffbdb292dbddd`:
+
+| Hosted mode | Result | Verified scope |
+|---|---|---|
+| Standard-library arithmetic | Passed | All100 trees,492 point windows,2,321 development windows,88 outcomes and unchanged requirements |
+| Numerical-only exact refit | Passed | Complete stored fitting-only JSON tree object reproduced exactly, followed by the same full arithmetic review |
+
+The [GitHub run](https://github.com/ChipmunkRPA/veritas/actions/runs/42347349044)
+and parsed [arithmetic receipt](evaluation-panels/linux-mouth-v12-stdlib-review.json)
+and [refit receipt](evaluation-panels/linux-mouth-v12-refit-review.json) preserve
+the job IDs, source commit, reviewer hashes and complete outputs. The numerical
+job recorded Linux x86_64, Python3.12.6 and the same seven pinned versions. The
+standard-library job disabled site packages and installed no numerical stack.
+These results concern this mouth-evaluation workflow; they do not change the
+separate audio workflow's previously recorded strict-refit failure.
 
 This is reproducibility preparation and automated external-host testing, not
 outside human participation or independent source-truth/accuracy validation.

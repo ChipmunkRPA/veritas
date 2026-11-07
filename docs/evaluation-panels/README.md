@@ -10,6 +10,10 @@ or a generic dataset link.
 
 ## Latest review entry points (7 November 2026)
 
+- [Region-aligned calibration](../image-region-calibration-v9-result.md):
+ 312 consumed cases with complete-region rather than pixel-maximum calibration.
+ Both formats still locate0/48 edits versus12/48 current and are rejected.
+ All312 plateau/source/pixel checks pass; no new neural inference or service change.
 - [Regional patch-drift comparison](../image-patch-drift-v8-development-evaluation.md):
   all312 scalar/source bindings, four genuine-only points, complete pixel-count
   replay and both preserved operational failures. Both readouts located0/48 edits

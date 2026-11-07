@@ -1,0 +1,65 @@
+name: Connected-region calibration count review
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/image-region-calibration-review.yml
+      - backend/scripts/reproduce_image_regions_v9.py
+      - docs/evaluation-panels/image-region-calibration-v9-public-scalars.json
+      - docs/evaluation-panels/image-region-calibration-v9-release.json
+
+permissions:
+  contents: read
+
+jobs:
+  region-count-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: backend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.6"
+      - name: Verify exact frozen source and public packet bytes
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, json, pathlib
+          public = pathlib.Path('docs/evaluation-panels')
+          for manifest, key in [('image-region-calibration-v9-release.json','files_sha256'),
+              ('image-region-calibration-v9-freeze.json','code_sha256'),
+              ('image-v8-patch-drift-development-freeze.json','implementation_sha256')]:
+              for name, expected in json.loads((public/manifest).read_text())[key].items():
+                  assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == expected, name
+          for name in ('torch', 'transformers', 'numpy', 'PIL', 'cv2', 'fastapi'):
+              assert importlib.util.find_spec(name) is None, name
+          print('Exact frozen source and packet hashes; standard library only.')
+          PY
+      - name: Refit genuine region points and recompute all count decisions
+        run: python -m scripts.reproduce_image_regions_v9 review "$RUNNER_TEMP/region-review.json"
+      - name: Refuse changed inputs, plateaus, counts and adoption claims
+        run: python -m scripts.reproduce_image_regions_v9 tamper "$RUNNER_TEMP/region-tamper.json"
+      - name: Compare actual Linux receipts to recorded local receipts
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          for kind in ('review','tamper'):
+              actual = json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/f'region-{kind}.json').read_text())
+              expected = json.loads(pathlib.Path(f'docs/evaluation-panels/image-region-calibration-v9-portable-{kind}.json').read_text())
+              assert actual == expected, kind
+          print('Actual Linux receipts equal both recorded local receipts exactly.')
+          PY
+      - name: Show actual receipts or explicit incomplete status
+        if: always()
+        run: |
+          for kind in review tamper; do
+            if [ -f "$RUNNER_TEMP/region-$kind.json" ]; then
+              cat "$RUNNER_TEMP/region-$kind.json"
+            else
+              echo "No completed region-$kind receipt; inspect the failed step."
+            fi
+          done

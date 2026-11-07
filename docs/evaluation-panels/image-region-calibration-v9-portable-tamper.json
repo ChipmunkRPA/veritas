@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.image-regions-portable-tamper/9",
+  "passed": true,
+  "refused": 14,
+  "cases": [
+    "missing_case",
+    "duplicate_case",
+    "changed_source",
+    "changed_role",
+    "changed_label",
+    "changed_response_archive",
+    "changed_grid_geometry",
+    "false_region_certificate",
+    "false_unavailability",
+    "changed_point_binding",
+    "changed_pixel_count",
+    "false_adoption",
+    "false_fresh_inference",
+    "false_qualification"
+  ]
+}

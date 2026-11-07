@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.image-region-calibration-release/9",
+  "files_sha256": {
+    "backend/scripts/reproduce_image_regions_v9.py": "6f43cd3d6277a1ee0c2679e8d9441de38c3e82a28a87e6ace45ee5cb867912ad",
+    "backend/scripts/reproduce_patch_drift_v8.py": "02e47242566d3428199778586f1f09114e7eff02ac54bbd169cea7e414f4a8bf",
+    ".github/workflows/image-region-calibration-review.yml": "5ae32dfad67db71d3b087bb64c8e1a0f9f3a6f10ee94f97e45303e115e9e1c92",
+    "docs/evaluation-panels/image-region-calibration-v9-freeze.json": "7f614e80830a48fd260e077c08c6e8da9723315be3a160fb5dbe26f2daf60f9e",
+    "docs/evaluation-panels/image-region-calibration-v9-points.json": "abaf4058c4476a6faca14e518908032e0d042d6c3146c897595fbea4a8416f08",
+    "docs/evaluation-panels/image-region-calibration-v9-public-scalars.json": "22b5c25f1755b691fe3bd422f97e0e8d22b7dd4bc92ef075eb217c7e9ca2adc9",
+    "docs/evaluation-panels/image-region-calibration-v9-review.json": "83aa483847557c7705023fd333059d410c498439c892becc7acf245d3c7a106a",
+    "docs/evaluation-panels/image-region-calibration-v9-portable-review.json": "638386c5bc645c38c5fc7f9098066f505c3992431b31af9f1650ddc683249f8b",
+    "docs/evaluation-panels/image-region-calibration-v9-portable-tamper.json": "b1659e09c87e2ce421c037da4212d5555a357026e759045f1b975f03b5546167",
+    "docs/evaluation-panels/image-v8-patch-drift-development-panel.json": "8d443e9bcea966401ecb7b8bfb0b778087ee1f2be1b0de8175ad8c12385fdb5f",
+    "docs/evaluation-panels/image-v8-patch-drift-public-scalars.json": "32aeabcfd2e04a432eee30b46e6915e591616985dfa75397ae5a58c04ebb20d5"
+  },
+  "public_case_count": 312,
+  "new_neural_forwards": 0,
+  "serving_changed": false,
+  "source_media_or_real_embeddings_included": false
+}

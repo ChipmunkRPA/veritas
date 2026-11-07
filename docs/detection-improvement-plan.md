@@ -65,6 +65,11 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Tested area-aligned regional calibration on all312 consumed response grids.
+  Both formats still locate0/48 edits versus12/48 current, with one genuine
+  highlight each. All plateau/source/pixel checks pass, but quality gates fail.
+  The pixel-maximum/display-area mismatch alone does not fix misses. No new
+  neural inference, reserve scoring or serving change. [Complete result](image-region-calibration-v9-result.md).
 - Completed the regional patch-drift comparison:312 consumed inputs, exact
   native/pixel replay and genuine-only points published before development.
   Both readouts located0/48 edits per format versus12/48 current. All four arms

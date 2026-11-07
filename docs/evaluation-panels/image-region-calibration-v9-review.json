@@ -1,0 +1,218 @@
+{
+  "schema": "chipmunk.image-region-calibration-review/9",
+  "freeze_sha256": "7f614e80830a48fd260e077c08c6e8da9723315be3a160fb5dbe26f2daf60f9e",
+  "points_sha256": "abaf4058c4476a6faca14e518908032e0d042d6c3146c897595fbea4a8416f08",
+  "verified_calibration_inputs": 120,
+  "verified_development_inputs": 192,
+  "independent_plateau_and_pixel_replays": 312,
+  "genuine_displayed_region_refits": {
+    "native": 1,
+    "jpeg75": 1
+  },
+  "conditions": {
+    "native": {
+      "baseline": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 12,
+          "missed_edits": 36,
+          "mean_edit_iou": 0.18395056979618474,
+          "genuine_highlights": 2,
+          "genuine_mean_highlight_fraction": 0.0018992205269667648
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 5,
+            "missed_edits": 11,
+            "mean_edit_iou": 0.21234129602021212,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 3,
+            "missed_edits": 13,
+            "mean_edit_iou": 0.15814745300987704,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.0032605580283034527
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.18136296035846508,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.002437103552596842
+          }
+        }
+      },
+      "candidate": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 0,
+          "missed_edits": 48,
+          "mean_edit_iou": 0.0,
+          "genuine_highlights": 1,
+          "genuine_mean_highlight_fraction": 0.0004281548035837672
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.0012844644107513016
+          }
+        }
+      },
+      "requirements": {
+        "complete": true,
+        "independent_checks": true,
+        "at_least_four_more_overlapping_edits": false,
+        "mean_edit_iou_not_lower": false,
+        "genuine_highlights_within_one": true,
+        "no_family_overlap_loss": false
+      },
+      "passed": false
+    },
+    "jpeg75": {
+      "baseline": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 12,
+          "missed_edits": 36,
+          "mean_edit_iou": 0.10343970102436507,
+          "genuine_highlights": 3,
+          "genuine_mean_highlight_fraction": 0.003989990540947771
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 2,
+            "missed_edits": 14,
+            "mean_edit_iou": 0.041777749272057484,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.007385248767400875
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 4,
+            "missed_edits": 12,
+            "mean_edit_iou": 0.16117899625466472,
+            "genuine_highlights": 2,
+            "genuine_mean_highlight_fraction": 0.0045847228554424385
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 6,
+            "missed_edits": 10,
+            "mean_edit_iou": 0.10736235754637302,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          }
+        }
+      },
+      "candidate": {
+        "overall": {
+          "edited_count": 48,
+          "genuine_count": 48,
+          "overlapping_edits": 0,
+          "missed_edits": 48,
+          "mean_edit_iou": 0.0,
+          "genuine_highlights": 1,
+          "genuine_mean_highlight_fraction": 0.000277598681854001
+        },
+        "families": {
+          "firefly": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "flux-fill": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 0,
+            "genuine_mean_highlight_fraction": 0.0
+          },
+          "sd2": {
+            "edited_count": 16,
+            "genuine_count": 16,
+            "overlapping_edits": 0,
+            "missed_edits": 16,
+            "mean_edit_iou": 0.0,
+            "genuine_highlights": 1,
+            "genuine_mean_highlight_fraction": 0.000832796045562003
+          }
+        }
+      },
+      "requirements": {
+        "complete": true,
+        "independent_checks": true,
+        "at_least_four_more_overlapping_edits": false,
+        "mean_edit_iou_not_lower": false,
+        "genuine_highlights_within_one": true,
+        "no_family_overlap_loss": false
+      },
+      "passed": false
+    }
+  },
+  "profiles": {
+    "calibration": {
+      "role": "calibration",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 142966784,
+      "sample_errors": 0,
+      "duration_s": 6.587054625037126
+    },
+    "development": {
+      "role": "development",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 218103808,
+      "sample_errors": 0,
+      "duration_s": 14.946262208046392
+    }
+  },
+  "new_neural_forwards": 0,
+  "source_role": "Consumed-source geometry/calibration development only.",
+  "serving_changed": false,
+  "overall_confidence_weight": 0
+}

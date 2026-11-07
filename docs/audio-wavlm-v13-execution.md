@@ -39,6 +39,12 @@ plan. Private roots are excluded. A separate [preflight](evaluation-panels/audio
 accepts the unchanged actual packet and rejects13 deliberate alterations.
 No speech-derived feature vectors are in this prospective metadata package.
 
+The freeze was published and remotely verified as `45e8ff9` before any project
+speech forward. Extraction then completed all4,248 records:4,186 assessed,
+62 unassessed and zero failures. Both fixed heads converged on fitting sources
+and their own independent calibrations were saved. Development comparison is
+in progress; these execution facts do not establish an accuracy gain.
+
 The first freeze attempt stopped because the destination directory did not exist;
 it wrote no lock or feature journal and ran no project forward. Created the empty
 directory and repeated the unchanged preparation successfully. Both logs remain
@@ -80,3 +86,26 @@ separately frozen fresh confirmation. Failure rejects the arm without scoring
 the reserved set. Passing development alone changes no service or confidence.
 Independent outside human reviewers remain zero. Image/video/writing work and
 outside testing remain unfinished; GCP stays last.
+
+## Additive verification prepared before development outcomes
+
+`review_audio_wavlm_v13.py` separately reconstructs linear probability arithmetic,
+fitting-only normalization, worst-group/truth calibration, raw/mapped stability
+and complete operational counts. It uses the shared declared statistical
+bootstrap/gate implementation and original learner for optional exact refits.
+Its native mode replays the union of99 predeclared cells and every required
+filtered probe, including original model/status/window parity. The helper does
+not change the69 frozen method files or any acceptance rule. Eight hand-calculated
+and invalid-input predictor checks passed; no native/numerical result is implied
+until those stages actually finish.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_wavlm_v13 \
+  numerical "$research_root/lock.json" "$research_root/features.jsonl" \
+  "$research_root/trained/head.json" "$research_root/responses.jsonl" \
+  "$research_root/numerical-review.json" --summary "$research_root/summary.json" --refit
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.review_audio_wavlm_v13 \
+  native "$research_root/lock.json" "$research_root/features.jsonl" \
+  "$research_root/trained/head.json" "$research_root/responses.jsonl" \
+  "$research_root/native-review.json"
+```

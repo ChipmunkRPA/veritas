@@ -1,0 +1,75 @@
+{
+  "method": {
+    "schema": "chipmunk.scoped-writing-method/6",
+    "arms": {
+      "global-baseline": [
+        "global",
+        "baseline"
+      ],
+      "global-original-combined": [
+        "global",
+        "original-combined"
+      ],
+      "global-shared-max": [
+        "global",
+        "shared-max"
+      ],
+      "global-shared-scoped": [
+        "global",
+        "shared-scoped"
+      ],
+      "context-baseline": [
+        "context",
+        "baseline"
+      ],
+      "context-original-combined": [
+        "context",
+        "original-combined"
+      ],
+      "context-shared-max": [
+        "context",
+        "shared-max"
+      ],
+      "context-shared-scoped": [
+        "context",
+        "shared-scoped"
+      ]
+    },
+    "minimum_source_groups_per_class": 25,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "point": "Only fusion_cal genuine files. One maximum among assessed files per connected source group; missing files/groups explicitly counted, never imputed. Strict greater than upper nearest rank ceil((n+1)*.9), capped at n.",
+    "alpha": 0.1,
+    "same_scope": "Exact semantic target and source location including extracted-text hash. Distinct declared specialists; no duplicate view or across-passage agreement.",
+    "family": "The shared-max and shared-scoped arms put both authorship detectors in one dependent writing-view family. Original-combined preserves v5 separate families as a separate reference, not an independence claim.",
+    "selection": "All eight artifacts and genuine-only points precede reserved-role evaluation. No generator-specific routing, threshold tuning, new media or native inference.",
+    "limits": "Consumed writing-v5 sources and known diagnostic outcomes. Artificial60-word first/100-word second mixtures; no whole document/language/generator generalization or fresh validation.",
+    "serving_admitted": false
+  },
+  "code_sha256": {
+    "backend/scripts/scoped_writing_v6.py": "a304effa578708e387e6f6510f2e4ce5f542a3737ea1677e276451d754b8a8ba",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/app/bench/specialists_scoped_v3.py": "8dacc51a3c7f302451bf08958c964ad805eca4e9cf489d4acd49d8251d7a80f5",
+    "backend/scripts/specialist_source_tail_v1.py": "e611012924ee99eb022d5c8a65b84458b6b1a51459367abf8f2622cd59a41a95",
+    "backend/scripts/reproduce_writing_specialists_v5.py": "0f4c604fbd4d39f42ec477085348d023d4f890c86555fe62e065e2f89d511b42",
+    "backend/tests/test_specialist_scoped_v3.py": "dde65831b7e7b0caec817a1f93d4655e4f2d58a4b2a0ed75e69d9380079be241",
+    "backend/tests/test_scoped_writing_v6.py": "951e566127bcf0f6b6cd23832f7d63d9fe78e8a77e3ea8d66a0c4cd87decdfe4",
+    "docs/scoped-consistency-v3-design.md": "f8ca87dd7a94a31fd381794a14ba42f73db8d308e8ce1026a0a76203797fb373"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "manifest_sha256": {
+    "global-baseline": "53bea5302647dd7e30f58a2d65ede29a49fd5c96c90a6603a278f3e47acfa26e",
+    "global-original-combined": "4361d4b34de73d3d8d3fb174181012e42c4e4c034bdb87db17183467be9941e3",
+    "global-shared-max": "83f18bfe17cea551b247d7f251141ee84ba20fc46261d83de6b8c7de9971200e",
+    "global-shared-scoped": "83f18bfe17cea551b247d7f251141ee84ba20fc46261d83de6b8c7de9971200e",
+    "context-baseline": "6207f271e542062bacee54d88232128f8c0565ce8fbdc68d0004f6ecc9b95bdb",
+    "context-original-combined": "7a4247f00b1910f2587355548044560058f0cb837846ddeb181607ccade240f3",
+    "context-shared-max": "220c64674c159cf8f87c9ac7d1b0779434fcf9ff0e4d71f38b24c8462068519f",
+    "context-shared-scoped": "220c64674c159cf8f87c9ac7d1b0779434fcf9ff0e4d71f38b24c8462068519f"
+  },
+  "new_neural_forwards": 0,
+  "serving_admitted": false
+}

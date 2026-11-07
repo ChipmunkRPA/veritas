@@ -1,0 +1,11 @@
+{
+  "schema": "chipmunk.image-supported-freeze-preflight-failure/11",
+  "failed_freeze_sha256": "fb885a315d86682c24d0768537f9e96f9147acf5ed8472cae43c8706241e219c",
+  "failure": "in-memory tuple arm declarations differ from their JSON list representation",
+  "native_image_forwards": 0,
+  "image_worker_started": false,
+  "pipeline_state_created": false,
+  "original_scientific_sources_retained": "freeze-attempt1-source",
+  "repair": "Normalize the arm declaration to JSON lists before freezing, add a real frozen-policy roundtrip regression, create an explicit replacement freeze. No fitting data, model, tolerance, role or outcome was inspected to choose this repair.",
+  "serving_admitted": false
+}

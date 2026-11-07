@@ -1,0 +1,212 @@
+{
+  "schema": "chipmunk.image-supported-cached-preview/11.2",
+  "freeze_sha256": "dc71218c6de16dd233d10caeea1fe3a7c9cf9c4c32be0e4214d0ce3d1d90b562",
+  "cases_sha256": "102137896b605a771ac15fdd8d3244783d4d0c83bf9a9921fa0733142286e706",
+  "cached_cases": 144,
+  "connected_groups": 72,
+  "source_roles": {
+    "specialist_cal": 30,
+    "fusion_fit": 28,
+    "fusion_cal": 40,
+    "confirmation": 46
+  },
+  "all": {
+    "current": {
+      "planned": 144,
+      "genuine": 72,
+      "ai": 72,
+      "unassessed": 0,
+      "ai_flagged": 17,
+      "ai_not_flagged_including_unassessed": 55,
+      "false_ai": 5,
+      "ai_groups_flagged": 17,
+      "genuine_groups_flagged": 5,
+      "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+    },
+    "global-regions": {
+      "planned": 144,
+      "genuine": 72,
+      "ai": 72,
+      "unassessed": 0,
+      "ai_flagged": 28,
+      "ai_not_flagged_including_unassessed": 44,
+      "false_ai": 9,
+      "ai_groups_flagged": 28,
+      "genuine_groups_flagged": 9,
+      "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+    },
+    "condition-regions": {
+      "planned": 144,
+      "genuine": 72,
+      "ai": 72,
+      "unassessed": 0,
+      "ai_flagged": 28,
+      "ai_not_flagged_including_unassessed": 44,
+      "false_ai": 9,
+      "ai_groups_flagged": 28,
+      "genuine_groups_flagged": 9,
+      "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+    }
+  },
+  "by_role": {
+    "confirmation": {
+      "current": {
+        "planned": 46,
+        "genuine": 23,
+        "ai": 23,
+        "unassessed": 0,
+        "ai_flagged": 7,
+        "ai_not_flagged_including_unassessed": 16,
+        "false_ai": 3,
+        "ai_groups_flagged": 7,
+        "genuine_groups_flagged": 3,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "global-regions": {
+        "planned": 46,
+        "genuine": 23,
+        "ai": 23,
+        "unassessed": 0,
+        "ai_flagged": 11,
+        "ai_not_flagged_including_unassessed": 12,
+        "false_ai": 5,
+        "ai_groups_flagged": 11,
+        "genuine_groups_flagged": 5,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "condition-regions": {
+        "planned": 46,
+        "genuine": 23,
+        "ai": 23,
+        "unassessed": 0,
+        "ai_flagged": 11,
+        "ai_not_flagged_including_unassessed": 12,
+        "false_ai": 5,
+        "ai_groups_flagged": 11,
+        "genuine_groups_flagged": 5,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      }
+    },
+    "fusion_cal": {
+      "current": {
+        "planned": 40,
+        "genuine": 20,
+        "ai": 20,
+        "unassessed": 0,
+        "ai_flagged": 3,
+        "ai_not_flagged_including_unassessed": 17,
+        "false_ai": 0,
+        "ai_groups_flagged": 3,
+        "genuine_groups_flagged": 0,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "global-regions": {
+        "planned": 40,
+        "genuine": 20,
+        "ai": 20,
+        "unassessed": 0,
+        "ai_flagged": 6,
+        "ai_not_flagged_including_unassessed": 14,
+        "false_ai": 0,
+        "ai_groups_flagged": 6,
+        "genuine_groups_flagged": 0,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "condition-regions": {
+        "planned": 40,
+        "genuine": 20,
+        "ai": 20,
+        "unassessed": 0,
+        "ai_flagged": 6,
+        "ai_not_flagged_including_unassessed": 14,
+        "false_ai": 0,
+        "ai_groups_flagged": 6,
+        "genuine_groups_flagged": 0,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      }
+    },
+    "fusion_fit": {
+      "current": {
+        "planned": 28,
+        "genuine": 14,
+        "ai": 14,
+        "unassessed": 0,
+        "ai_flagged": 5,
+        "ai_not_flagged_including_unassessed": 9,
+        "false_ai": 1,
+        "ai_groups_flagged": 5,
+        "genuine_groups_flagged": 1,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "global-regions": {
+        "planned": 28,
+        "genuine": 14,
+        "ai": 14,
+        "unassessed": 0,
+        "ai_flagged": 8,
+        "ai_not_flagged_including_unassessed": 6,
+        "false_ai": 1,
+        "ai_groups_flagged": 8,
+        "genuine_groups_flagged": 1,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "condition-regions": {
+        "planned": 28,
+        "genuine": 14,
+        "ai": 14,
+        "unassessed": 0,
+        "ai_flagged": 8,
+        "ai_not_flagged_including_unassessed": 6,
+        "false_ai": 1,
+        "ai_groups_flagged": 8,
+        "genuine_groups_flagged": 1,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      }
+    },
+    "specialist_cal": {
+      "current": {
+        "planned": 30,
+        "genuine": 15,
+        "ai": 15,
+        "unassessed": 0,
+        "ai_flagged": 2,
+        "ai_not_flagged_including_unassessed": 13,
+        "false_ai": 1,
+        "ai_groups_flagged": 2,
+        "genuine_groups_flagged": 1,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "global-regions": {
+        "planned": 30,
+        "genuine": 15,
+        "ai": 15,
+        "unassessed": 0,
+        "ai_flagged": 3,
+        "ai_not_flagged_including_unassessed": 12,
+        "false_ai": 3,
+        "ai_groups_flagged": 3,
+        "genuine_groups_flagged": 3,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      },
+      "condition-regions": {
+        "planned": 30,
+        "genuine": 15,
+        "ai": 15,
+        "unassessed": 0,
+        "ai_flagged": 3,
+        "ai_not_flagged_including_unassessed": 12,
+        "false_ai": 3,
+        "ai_groups_flagged": 3,
+        "genuine_groups_flagged": 3,
+        "note": "A missing flag is not an original-file verdict. Current unassessed count means no reliable localization cells; prototype unassessed count means no calibrated file score."
+      }
+    }
+  },
+  "current_edited_mean_pixel_f1": 0.15519354456702755,
+  "current_edited_mean_pixel_iou": 0.12979659839488228,
+  "new_neural_forwards": 0,
+  "qualification_allowed": false,
+  "serving_admitted": false,
+  "required_next": "Complete source-disjoint-role comparison on all supported PNG and JPEG inputs and frozen new per-format calibration. This cache includes fitting sources and has no JPEG responses; it cannot admit or reject a final branch-calibration design.",
+  "limits": "All144 cached PNG cases/72 consumed pairs, including model-calibration fitting roles. Actual current localiser postprocessing only, not full application verdict or independent validation."
+}

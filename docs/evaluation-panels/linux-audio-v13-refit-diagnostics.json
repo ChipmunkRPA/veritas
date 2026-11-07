@@ -1,0 +1,80 @@
+{
+  "schema": "chipmunk.public-audio-refit-diagnostics/13",
+  "diagnostic_execution_completed": true,
+  "original_arithmetic_review_passed": true,
+  "all_refitted_objects_exact": false,
+  "arms": {
+    "standalone": {
+      "complete_fitted_object_exact": false,
+      "non_numerical_metadata_equal": true,
+      "normalization_center_max_absolute_difference": 2.6645352591003757e-15,
+      "normalization_scale_max_absolute_difference": 3.885780586188048e-16,
+      "coefficients_max_absolute_difference": 7.650130529057719e-16,
+      "own_guards_equal_to_same_arithmetic_original": false,
+      "maximum_development_probability_difference": 2.220446049250313e-16,
+      "development_rows": 1449,
+      "changed_directional_outcomes_using_available_probes": 0,
+      "new_required_but_missing_public_probes": 0
+    },
+    "complement": {
+      "complete_fitted_object_exact": false,
+      "non_numerical_metadata_equal": true,
+      "normalization_center_max_absolute_difference": 2.6645352591003757e-15,
+      "normalization_scale_max_absolute_difference": 3.885780586188048e-16,
+      "coefficients_max_absolute_difference": 2.7755575615628914e-16,
+      "own_guards_equal_to_same_arithmetic_original": false,
+      "maximum_development_probability_difference": 3.3306690738754696e-16,
+      "development_rows": 1449,
+      "changed_directional_outcomes_using_available_probes": 0,
+      "new_required_but_missing_public_probes": 0
+    }
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.6.0",
+    "narwhals": "2.28.0",
+    "threadpoolctl": "3.8.0",
+    "cloudpickle": "3.1.2"
+  },
+  "numerical_libraries": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 4,
+      "prefix": "libscipy_openblas",
+      "version": "0.3.31.dev",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 4,
+      "prefix": "libscipy_openblas",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 4,
+      "prefix": "libgomp",
+      "version": null
+    }
+  ],
+  "capsule_sha256": "84848472fef312c5fb5fd2ceddacd5fbe217caebadd09aacd85f28f5ee21cac3",
+  "reviewer_sha256": "88cd8b725efe792bd3cf3d6845758f144d2afcc8c8df533fb546c484647784fd",
+  "portable_reviewer_sha256": "e19abef956f314af5a0a06918d90577bcd094ac94fb3484c0a2779a309f181ee",
+  "original_exact_refit_check_relaxed": false,
+  "replacement_objects_saved": false,
+  "source_recordings_scored": 0,
+  "serving_changed": false,
+  "outside_reviewers": 0,
+  "scope": "Diagnostic differences after complete original arithmetic replay. Refit predictions and own guards are measured using existing public probes; new required missing probes are explicit. No neural forwards, fresh predictive test, replacement fit/calibration or outside human review."
+}

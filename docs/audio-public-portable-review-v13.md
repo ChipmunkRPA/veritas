@@ -112,6 +112,21 @@ parity, a replacement fit, native inference or a new accuracy result:
   /tmp/new-refit-diagnostics.json
 ```
 
+The [diagnostic Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42334918878)
+at commit `2c5662af6f66cfae3eafef81e76531863571173c` completed both arms.
+Its [receipt](evaluation-panels/linux-audio-v13-refit-diagnostics.json) reports
+maximum normalization-center difference 2.67e-15, coefficient difference
+7.66e-16 and development-probability difference 3.34e-16. Non-numerical metadata
+is identical. No directional outcome changed among 1,449 rows in either arm,
+and no newly required public probe was missing. Own guard values differ at
+floating precision, so they are not claimed to be bit-identical either.
+
+The arithmetic and diagnostic jobs passed; the original exact-refit job still
+failed and the combined workflow remains failed. Small measured differences
+do not turn that exact check into a pass. Numerical library versions and BLAS
+details are recorded; the specific cause has not been isolated. No fitted
+object, calibration, tolerance, decision rule or serving model was replaced.
+
 The reproduced result still rejects both candidates. No arm is selected for
 fresh confirmation, and the current service is unchanged. All 1,080 reserved
 confirmation inputs remain unscored. Derived speech features retain their

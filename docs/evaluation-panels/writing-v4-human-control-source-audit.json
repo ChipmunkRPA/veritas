@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.writing-controls-public-source-audit/4",
+  "rules": {
+    "selection": "Every unused-author human_only=True row, no response-driven selection.",
+    "history": "Source order, publisher Python codepoint index semantics, only User insert/delete/retain; strict bounds, finite nondecreasing timestamps; complete exact final span text. Never clamp, repair, reorder or invent characters.",
+    "overlap": "All680 prior full texts, normalized exact match and five-word shingle comparisons; shared>=20 and (Jaccard>=0.5 or smaller-set containment>=0.8). Corpus source words and row identities remain private.",
+    "interpretation": "Publisher-controlled human-only condition and edit-log consistency, not verified absence of all off-platform assistance. Same task pool; no topic-disjoint or pretrained-training-disjoint claim.",
+    "unresolved": "Keep every planned control in inventory. Invalid history or prior near-duplicate is explicit unsupported source, never a human verdict, omitted record or a detector false alarm.",
+    "classifier_forwards": 0,
+    "fitting_performed": false,
+    "serving_admitted": false
+  },
+  "source_rows": 362,
+  "prior_documents": 680,
+  "consumed_authors": 40,
+  "unused_human_controls": 53,
+  "unused_human_authors": 49,
+  "history_exact": 45,
+  "history_unsupported": 8,
+  "controls_with_prior_exact_match": 0,
+  "controls_with_prior_near_match": 0,
+  "source_audit_eligible": 45,
+  "tasks": {
+    "Creative Writing": 21,
+    "Argumentative Writing": 16,
+    "Explanatory Writing": 16
+  },
+  "settings": {
+    "standard": 36,
+    "scientific": 17
+  },
+  "source_artifacts_sha256": {
+    "archive_sha256": "65c7d38a96295453933a5620b46fc1baa54a54651b93dd7bed34d8f17262c641",
+    "raw_parquet_sha256": "c799c1fe9dfce294dfda8c47fb57e77a357df6ec8e0dbca62b206b9dded28628",
+    "spans_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+    "prior_manifest_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+    "code_sha256": "d581bcc111a8f77e73a65213f84d95b763a2fc6c8eafedab0223be379474c3bb"
+  },
+  "private_inventory_sha256": "78917e8decb1dbe312849e89afdc4f898c10d2643ef5c147f6f62720c729458c",
+  "data_terms": "Institutional CC-BY-SA4 metadata and bundled GPL2 prose conflict retained; source wording, author identities, edit logs, queries and per-document annotations remain private. No new training/redistribution clearance inferred.",
+  "outside_human_reviewers": 0
+}

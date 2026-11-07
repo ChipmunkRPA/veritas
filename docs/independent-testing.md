@@ -6,6 +6,27 @@ An implementation by our team is not an independent review; an external test
 must identify who ran it, how inputs were selected, and what was independently
 checked. We do not currently claim recruited reviewers or completed community pilots.
 
+## Choose a review to reproduce
+
+These are bounded entry points for contributors. Automated Linux reproduction
+is separate from an outside person's review. A reproduced calculation does not
+establish source truth, neural input correspondence or detection quality.
+The first three paths use this public repository; the writing source audit
+additionally requires separately acquired study data.
+
+| Package | What can be reproduced | Current evidence and limitation |
+| --- | --- | --- |
+| [Mouth-window review](mouth-public-portable-review-v12.md) | Standard-library arithmetic, or seven-package exact fitting-only tree refit; no media or neural weights | Both Linux modes passed. Candidate still rejected for excess ordinary-clip flags. |
+| [General-video review](video-demamba-v13-result.md) | NumPy-only all192 outcomes per method, losses, grouped intervals and11 requirements from nine lossless members | Linux arithmetic passed. Candidate rejected; four of16 native RGB checks remain failed. |
+| [Audio review](audio-public-portable-review-v13.md) | All4,248 feature records,1,449 development outcomes and optional exact fitting-only numerical refit | Linux arithmetic passed; strict exact cross-platform refit failed. Diagnostics changed no directional calls; exact check was not relaxed. |
+| [Writing-control source audit](writing-v4-human-controls.md) | Original human-only history replay and overlap audit, using separately obtained study data | Local source audit only;45 supported/eight unresolved controls, no classifier scores. Source text and edit logs are not in the public package. |
+
+For a useful review, identify your commit and environment, choose which claims
+you independently inspect, retain failures and return the generated receipt
+with any proposed issue or pull request. Exact commands and data/dependency
+boundaries are linked above. No account credentials, customer uploads or model
+downloads are needed for the first three numerical paths.
+
 ## Useful contributions
 
 - Reproduce a published failure on a permitted input, including its source hash,

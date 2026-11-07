@@ -1,0 +1,115 @@
+{
+  "schema": "chipmunk.writing-modernbert-acquisition/4",
+  "acquisition": {
+    "repository": "GeorgeDrayson/modernbert-ai-detection-raid-mage",
+    "revision": "e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624",
+    "weight_bytes": 598439784,
+    "weight_sha256": "2ae8059c621795fc490353bbd920bc3672e6eaf8ad66ddb7c015b4ecb0129218",
+    "license": "Apache-2.0 declared in exact fine-tuned card; exact base card explicitly grants model weights/architecture/code under Apache2.0",
+    "base_repository": "answerdotai/ModernBERT-base",
+    "base_revision": "8949b909ec900327062f0ebf497f51aef5e6f0c8",
+    "dataset_training": "Publisher declares MAGE and RAID; neither serves as presumed unseen confirmation. Exact pretraining overlap unknown.",
+    "project_text_scored": false,
+    "model_loaded": false,
+    "serving_admitted": false
+  },
+  "metadata": {
+    "candidate": {
+      "repo": "GeorgeDrayson/modernbert-ai-detection-raid-mage",
+      "revision": "e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624",
+      "files": [
+        {
+          "name": "README.md",
+          "bytes": 1771,
+          "git_blob_sha1": "fe48983c27ee686d3fced35d955c203d85d58ebd",
+          "sha256": "328d6508b1a135e8d1559e25efdf0cb7dc9f00ba78663fc6904003ff0ab73891"
+        },
+        {
+          "name": "config.json",
+          "bytes": 1287,
+          "git_blob_sha1": "e2cb1b39f50e629e8e6d385f362e52536e16b255",
+          "sha256": "a6225f6c55e0fb92ccb6a53832714993a5eeceff0a4ac89e90f803de8e06a742"
+        },
+        {
+          "name": "tokenizer.json",
+          "bytes": 3583228,
+          "git_blob_sha1": "2f4d8583e507b7466d2490e2d6c045647a822698",
+          "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "bytes": 20836,
+          "git_blob_sha1": "d58c30c7a9f85b40896fd7973a11b24581ab60d7",
+          "sha256": "c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "bytes": 694,
+          "git_blob_sha1": "6bf65ea14185a88eef7e24b41c86a953a58dcbad",
+          "sha256": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049"
+        }
+      ]
+    },
+    "base": {
+      "repo": "answerdotai/ModernBERT-base",
+      "revision": "8949b909ec900327062f0ebf497f51aef5e6f0c8",
+      "files": [
+        {
+          "name": "README.md",
+          "bytes": 8427,
+          "git_blob_sha1": "8b9d77d5a470f7ef31f7495da1593826849b6fd6",
+          "sha256": "40539466fa1117be4693b8f1fdfdac81fac3c5db472ff57bc05d013d48eafa82"
+        },
+        {
+          "name": "config.json",
+          "bytes": 1193,
+          "git_blob_sha1": "42dbe7f4826f9479e2f2965806dd206d07a57495",
+          "sha256": "1609d59e627c33eaed524b4f01e546d42e84190a079a5a5ded84b212c41c324f"
+        }
+      ]
+    }
+  },
+  "static_assets": {
+    "schema": "chipmunk.writing-modernbert-static-assets/4",
+    "tensors": 138,
+    "float32_values": 149606402,
+    "contiguous_data_bytes": 598425608,
+    "file_bytes": 598439784,
+    "header_sha256": "731921ed204d9b3aa97c0f86803a1f41658602cd12290a027a2c924f69007aca",
+    "classifier_weight_shape": [
+      2,
+      768
+    ],
+    "classifier_bias_shape": [
+      2
+    ],
+    "architecture": "ModernBertForSequenceClassification",
+    "native_max_position_embeddings": 8192,
+    "stored_problem_type": "multi_label_classification",
+    "remote_custom_code_required": false,
+    "model_constructed": false,
+    "classifier_forwards": 0,
+    "serving_admitted": false
+  },
+  "publisher_inference": {
+    "repository": "GeorgeDrayson/model_collapse",
+    "revision": "feb8511479a2e2dc868e1caf3f63cb99f1fcc746",
+    "source_file": "src/utils/detector.py",
+    "git_blob_sha1": "2422a0d455668b55adfa888d4c25b1b1ade22d5d",
+    "positive_class": 1,
+    "response": "Two-logit softmax[:,1], inference supplies no labels. Stored problem_type multi_label_classification retained, not evidence of calibrated authorship confidence.",
+    "published_temperature": 1.3017339706420898,
+    "published_threshold": 0.7493773102760315,
+    "published_point_adopted": false,
+    "remote_code_executed": false
+  },
+  "next_required": [
+    "Strict standard-local architecture/state load and synthetic native single/batch/token-coverage smoke after full audio extraction.",
+    "Prospective complete consumed40-document674-focus four-arm comparison; no project text forward before source/model/runtime/protocol freeze is published.",
+    "Existing research reference points and nine development requirements; no automatic serving adoption or use of failed TMR candidate on unused controls.",
+    "Only after passing development, separately frozen unused-author human/mixed comparison, own calibration and full customer evidence/flow checks."
+  ],
+  "classifier_forwards": 0,
+  "serving_admitted": false,
+  "outside_human_reviewers": 0
+}

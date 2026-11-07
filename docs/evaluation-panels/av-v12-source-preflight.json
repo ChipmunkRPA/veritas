@@ -1,0 +1,134 @@
+{
+  "schema": "chipmunk.av-candidate-source-preflight/12",
+  "structural_checks_passed": true,
+  "repository": "MIHMahmudEli/david-net-av-v2",
+  "github_revision": "bc911636a11a42fd0291bc31a5f092e1dd3dc811",
+  "hub_revision": "a071972e6b9325da99a0d4ec2adce35a2446215b",
+  "sources_sha256": {
+    "github/src/models/david_net.py": "8d317e6d581379ff39e76cd62fd4ea39e621173a249f8c81b6f5a4478faeb9ec",
+    "github/src/pipeline/encoders.py": "8dbd9396decf43aeacf661a1135bd4788bc757b51a9f52c7093c6de43f182a45",
+    "github/api/inference.py": "0f905f0da92d300224c96488ae793ab06737f192fa493133a2ffd8d7d4482a3b",
+    "github/LICENSE": "3fd4f858876090a176a8483c4ce38d1a07b9cbf35deca2a97055fa334532371e",
+    "hf/README.md": "3fcffb682c3f9a20e18da9eb89b6fff2429d15fce4244f46d24a8e9f5aa6460c",
+    "hf/config.json": "94bf7388c72c51977ce53023510880cba34f78c8bbf5ebac3c4e29deb1c86ed6",
+    "hf/metadata/experiments/CODE_REVISION.json": "00300b67f930457d2da0379054bcefd9dc403c9e575d6d06b83bb05e79460ff9"
+  },
+  "reviewer_sha256": "9ca2601642a0f5c3998c5a69447fd67940f797a4e052ac3ecb18d644c32a2451",
+  "weight_file_bytes_declared": 341484140,
+  "weight_file_sha256_declared": "0ce11de56b8fd1413ce2991e25b5edc56ae1e5ab7a4b577f97165e4b9ce17fbc",
+  "header_sha256_verified": "0140fca0c20e573b9810370d1f3ac8d7f1246ac5b65d6b7cd88b78ae51b63b82",
+  "header_only_bytes_acquired": 17480,
+  "head_tensors_shape_compatible": 187,
+  "head_parameters_from_shapes": 85366665,
+  "graph_on_meta_device": true,
+  "complete_weights_acquired_or_verified": false,
+  "strict_trained_state_load_performed": false,
+  "backbones_acquired_or_loaded": false,
+  "source_media_inference_performed": false,
+  "new_predictive_accuracy_result": false,
+  "interval_examples": [
+    {
+      "flat_index": 0,
+      "tubelet": 0,
+      "spatial_patch": 0,
+      "nominal_time_bin_s": [
+        0.0,
+        0.5
+      ],
+      "stock_reported_intervals": [
+        {
+          "start": 0.0,
+          "end": 0.03,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "flat_index": 15,
+      "tubelet": 0,
+      "spatial_patch": 15,
+      "nominal_time_bin_s": [
+        0.0,
+        0.5
+      ],
+      "stock_reported_intervals": [
+        {
+          "start": 0.47,
+          "end": 0.5,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "flat_index": 16,
+      "tubelet": 1,
+      "spatial_patch": 0,
+      "nominal_time_bin_s": [
+        0.5,
+        1.0
+      ],
+      "stock_reported_intervals": [
+        {
+          "start": 0.5,
+          "end": 0.53,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "flat_index": 31,
+      "tubelet": 1,
+      "spatial_patch": 15,
+      "nominal_time_bin_s": [
+        0.5,
+        1.0
+      ],
+      "stock_reported_intervals": [
+        {
+          "start": 0.97,
+          "end": 1.0,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "flat_index": 127,
+      "tubelet": 7,
+      "spatial_patch": 15,
+      "nominal_time_bin_s": [
+        3.5,
+        4.0
+      ],
+      "stock_reported_intervals": [
+        {
+          "start": 3.97,
+          "end": 4.0,
+          "score": 1.0
+        }
+      ]
+    }
+  ],
+  "time_axis_issue_reproduced": true,
+  "time_axis_scope": "Isolated supplied interval conversion maps each flattened spatial patch to a distinct time subdivision. There are eight nominal temporal bins and sixteen spatial positions per bin, not128 distinct acquisition times. Global transformer context is not confined to those bins. These synthetic bins are not verified native timestamps or causal edit boundaries, and this test does not measure learned localization accuracy.",
+  "stock_api_adopted": false,
+  "serving_changed": false,
+  "overall_confidence_changed": false,
+  "license_declaration": "MIT in publisher code license and weight card; underlying pretrained/data rights are separate and not fully established here.",
+  "historical_source_declared": {
+    "code_repo": "https://github.com/MIHMahmudEli/Thesis.git",
+    "code_revision": "6793d730aa734433bc3c7bc9ff4f89e0b5dc40d1"
+  },
+  "historical_source_equivalence_verified": false,
+  "remaining_requirements": [
+    "Verify complete trained head and exact backbone/source lineage before any recording comparison.",
+    "Use a dedicated strict loader which aborts on missing weights/backbones; do not use stock API fallbacks.",
+    "Preserve decoded picture/audio clocks and separate spatial axes from temporal support.",
+    "Freeze a complete comparison before scoring; use all four audio/video authenticity combinations and ordinary controls.",
+    "Obtain own calibration, location/false-flag/miss results and fresh confirmation before admission."
+  ],
+  "outside_reviewers": 0,
+  "runtime": {
+    "torch": "2.13.0",
+    "numerical_device": "cpu"
+  }
+}

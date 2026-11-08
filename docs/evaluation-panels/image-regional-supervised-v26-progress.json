@@ -1,0 +1,90 @@
+{
+  "schema": "chipmunk.regional-supervised-progress/26",
+  "preparation_commit": "c9be0dc2a153e0a3ff991dcd7a4f17492a7810ff",
+  "public_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "complete_training": false,
+  "planned_updates": 1278,
+  "planned_phases": 40,
+  "reviewed_complete_phases": 2,
+  "reviewed_complete_updates": 64,
+  "source_forwards_completed_in_reviewed_phases": 128,
+  "backwards_completed_in_reviewed_phases": 128,
+  "optimizer_updates_completed_in_reviewed_phases": 64,
+  "groups_by_role": {
+    "diagnostic": 48,
+    "fit": 168,
+    "calibration": 32,
+    "confirmation": 48,
+    "point": 24
+  },
+  "photos_by_role": {
+    "fit": 213,
+    "diagnostic": 59,
+    "confirmation": 59,
+    "point": 27,
+    "calibration": 39
+  },
+  "learned_parameter_tensors": 246,
+  "learned_parameter_elements": 6009089,
+  "training_formats_so_far": [
+    "native"
+  ],
+  "training_negative_kinds_so_far": [
+    "original"
+  ],
+  "local_relevant_tests_passed": 39,
+  "local_lint_passed": true,
+  "local_readback_reviews": [
+    {
+      "phase": 0,
+      "paired_updates_verified": 32,
+      "source_forwards_recorded": 64,
+      "backwards_recorded": 64,
+      "optimizer_tensor_states_verified": 246,
+      "optimizer_steps": [
+        32
+      ],
+      "all_sources_fitting_only": true,
+      "parameter_hash_readback_matches": true,
+      "checkpoint_sha256": "45d24923d953762c6b323a2adbb46c4242464e073ba5f8b955c2946e408ac1e9",
+      "local_global_decoder_actual_change": true,
+      "changed_tensors": 246,
+      "dense_base_and_fixed_frequencies_unchanged": true,
+      "sampled_tree_rss_lower_bound_bytes": 1736065024,
+      "duration_s": 297.4493309169775,
+      "held_out_forwards": 0,
+      "detection_quality_assessed": false
+    },
+    {
+      "phase": 1,
+      "paired_updates_verified": 32,
+      "source_forwards_recorded": 64,
+      "backwards_recorded": 64,
+      "optimizer_tensor_states_verified": 246,
+      "optimizer_steps": [
+        64
+      ],
+      "exact_previous_parameter_state_restored": true,
+      "all_sources_fitting_only": true,
+      "parameter_hash_readback_matches": true,
+      "checkpoint_sha256": "9f611e3829389841164fa0d6011c663235ffcb562f488c40038879f7806721a0",
+      "local_global_decoder_actual_change": true,
+      "changed_tensors": 246,
+      "dense_base_and_fixed_frequencies_unchanged": true,
+      "sampled_tree_rss_lower_bound_bytes": 1761099776,
+      "duration_s": 298.38474758306984,
+      "held_out_forwards": 0,
+      "detection_quality_assessed": false
+    }
+  ],
+  "continuation_driver_sha256": "e88d524f46c618da99502da3ec93459e52983c9818873e39d2cf271914234369",
+  "held_out_source_forwards": 0,
+  "detection_accuracy_assessed": false,
+  "customer_confidence_changed": false,
+  "serving_admitted": false,
+  "scope": "Partial fitting progress only. The saved weights and optimizer moments are private. No held-out quality comparison, confidence calibration, unseen-generator test or outside review has occurred.",
+  "inclusive_remaining_phase_range": [
+    2,
+    39
+  ]
+}

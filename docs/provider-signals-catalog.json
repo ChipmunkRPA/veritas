@@ -1,9 +1,9 @@
 {
   "schema": "provider-signals/1",
-  "reviewed_utc": "2026-11-07",
-  "provider_families": 37,
+  "reviewed_utc": "2026-11-08",
+  "provider_families": 50,
   "purpose": "Research and implementation inventory; never uploaded-file evidence or a guarantee of universal provider coverage.",
-  "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage.",
+  "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage. This is a curated provider-family inventory, not an exhaustive market census. Provider verification scores and watermark-family hits are distinct from trusted documentary declarations.",
   "runtime": {
     "network_verification": "disabled; this inventory performs no requests or customer uploads",
     "verified_shortcut": "Only trusted, valid, asset-bound, explicitly AI-declaring C2PA with no failures or unresolved remote reference.",
@@ -15,7 +15,8 @@
     ],
     "local_document_c2pa": "not integrated; plain text has no file credentials, and supported structured document metadata remains unverified",
     "public_audioseal": "isolated authored-signal evaluation completed; not admitted to serving or confidence",
-    "unchanged": "Statistical calibrations, model weights, prepayment requirement and cloud deployment."
+    "unchanged": "Statistical calibrations, model weights, prepayment requirement and cloud deployment.",
+    "public_visual_wam": "isolated authored image/video contract completed; not admitted to serving, AI confidence or early stopping"
   },
   "shortcut_rules": [
     "A negative, absent, unsupported, stripped, failed or inconclusive check continues normal detection; never infer originality.",
@@ -100,15 +101,71 @@
           "limitations": "Access by application; not a public local production key.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Retained Sora 1/2 video exports with Content Credentials",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://openai.com/index/creating-with-sora-safely/",
+            "https://deploymentsafety.openai.com/sora-2/provenance-and-transparency-initiatives"
+          ],
+          "limitations": "System cards describe video credentials. The current safety page says the Sora product became unavailable on 2026-04-26. Historical files may still carry verifiable credentials. Actual trust, AI declaration and current-file binding are required; no genuine provider fixture was qualified.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements",
+          "availability": "historical"
+        },
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Historical Sora moving video watermarks, product/export dependent",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://openai.com/index/creating-with-sora-safely/",
+            "https://deploymentsafety.openai.com/sora-2/provenance-and-transparency-initiatives"
+          ],
+          "limitations": "A copied/cropped logo cannot authenticate Sora origin. The product is marked unavailable by its current safety page; do not describe it as a current generation service.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "availability": "historical"
+        },
+        {
+          "kind": "provider_internal_search",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Historical Sora internal reverse-image/audio tracing and product detection tools",
+          "verification_route": "internal_only",
+          "source_urls": [
+            "https://openai.com/index/creating-with-sora-safely/",
+            "https://deploymentsafety.openai.com/sora-2/provenance-and-transparency-initiatives"
+          ],
+          "limitations": "Documented internal tooling is not a public compatible decoder or a video check supported by the image/audio Content Provenance API. No internal service access or reverse-engineering performed.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "availability": "historical",
+          "container_scope": "Sora video and its sound; no separate audio-file verifier inferred"
         }
       ],
       "review_status": "scoped_documentation",
       "modality_review": {
         "image": "scoped_signal_documented",
-        "video": "not_established_by_this_review",
+        "video": "historical_documentation_only",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:developers.openai.com C2PA watermark image video Sora",
+        "site:platform.openai.com watermark audio text",
+        "site:developers.openai.com Sora C2PA watermark video",
+        "site:openai.com Sora C2PA watermark"
+      ]
     },
     {
       "id": "anthropic",
@@ -125,7 +182,7 @@
             "https://www.anthropic.com/news/claude-text-watermark",
             "https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html"
           ],
-          "limitations": "Token-choice statistics, not hidden characters or spacing. Product/model availability varies; eligible verification access is not configured.",
+          "limitations": "SynthID-Text variant uses a provider key, not hidden characters or spacing. Private-preview verification access and legacy-model rollout are product/date dependent. A published method/demo key is not the production configuration.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
         },
@@ -151,7 +208,11 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:support.anthropic.com Claude watermark hidden text spaces"
+      ]
     },
     {
       "id": "google",
@@ -196,7 +257,11 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:deepmind.google SynthID detector verifier watermark text image audio video access"
+      ]
     },
     {
       "id": "meta",
@@ -224,13 +289,14 @@
             "audio",
             "text"
           ],
-          "product_scope": "AudioSeal, VideoSeal/PixelSeal, WAM and TextSeal research schemes",
+          "product_scope": "AudioSeal, VideoSeal/PixelSeal, WAM and TextSeal/TextSeal2 research schemes",
           "verification_route": "public_reference_code",
           "source_urls": [
             "https://github.com/facebookresearch/audioseal",
             "https://github.com/facebookresearch/videoseal",
             "https://github.com/facebookresearch/watermark-anything",
-            "https://github.com/facebookresearch/textseal"
+            "https://github.com/facebookresearch/textseal",
+            "https://facebookresearch.github.io/content-seal/"
           ],
           "limitations": "AudioSeal ran in an isolated local evaluation; not serving. Match scheme, version, key/payload and license. Use MIT WAM checkpoint only; exclude non-commercial weights. Anyone can mark genuine content; family presence alone cannot activate our shortcut.",
           "runtime_status": "not_integrated",
@@ -243,7 +309,12 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "https://facebookresearch.github.io/content-seal/",
+        "https://github.com/facebookresearch/content-seal"
+      ]
     },
     {
       "id": "xai",
@@ -259,9 +330,15 @@
           "source_urls": [
             "https://docs.x.ai/developers/advanced-api-usage/watermarking"
           ],
-          "limitations": "Provider detection requires application/access; a copied x-watermark response header does not authenticate an uploaded passage.",
+          "limitations": "Keyed token-choice signal; detection access is by application and can return uncertain. No extra hidden characters. Supported model/team/date settings matter. Copied x-watermark headers cannot authenticate uploaded text.",
           "runtime_status": "not_integrated",
-          "automated_shortcut": "disabled"
+          "automated_shortcut": "disabled",
+          "generation_controls": {
+            "documented_start_date": "2026-11-07",
+            "default": "on for the listed supported models",
+            "team_opt_out": "per model; locked-model exceptions exist",
+            "transport_indicator": "x-watermark response header; not an uploaded-passage signature"
+          }
         },
         {
           "kind": "visible_label",
@@ -285,7 +362,12 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:x.ai Grok imagine watermark C2PA metadata",
+        "https://docs.x.ai/developers/advanced-api-usage/watermarking"
+      ]
     },
     {
       "id": "microsoft",
@@ -346,7 +428,8 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "amazon",
@@ -402,7 +485,8 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "adobe",
@@ -421,15 +505,35 @@
           "limitations": "Some credentials describe capture or ordinary editing. Require explicit AI source type plus trusted byte binding; do not extend this image-specific page to all partner media.",
           "runtime_status": "generic_local_path_only",
           "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "video",
+            "audio"
+          ],
+          "product_scope": "Firefly Translate Audio/Translate Video outputs, including translated speaker voice and lip-movement disclosure",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://helpx.adobe.com/firefly/web/work-with-audio-and-video/work-with-audio/about-translate-audio-and-translate-video.html",
+            "https://helpx.adobe.com/legal/product-descriptions/adobe-firefly.html"
+          ],
+          "limitations": "Credentials can describe partial AI translation, voice generation or lip edits. They do not mean every sound/frame is synthetic. Only supported, trusted, valid, current-file-bound, explicitly AI-declaring credentials may use the generic local path; no genuine Adobe fixture qualified.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
         }
       ],
       "review_status": "scoped_documentation",
       "modality_review": {
         "image": "scoped_signal_documented",
-        "video": "not_established_by_this_review",
-        "audio": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:helpx.adobe.com firefly video audio Content Credentials automatically"
+      ]
     },
     {
       "id": "stability",
@@ -462,8 +566,26 @@
             "https://github.com/huggingface/diffusers/blob/main/src/diffusers/pipelines/stable_diffusion_xl/watermark.py"
           ],
           "limitations": "Legacy pipeline marker is unsigned and copyable; not current universal Stability-hosted coverage or AI-authorship proof.",
-          "runtime_status": "not_integrated",
-          "automated_shortcut": "disabled"
+          "runtime_status": "local_advisory_message_reader",
+          "automated_shortcut": "disabled",
+          "source_blob_sha1": "70d06bb6320d890ea90542cc7551bc42d7c59451",
+          "message_bits": 48
+        },
+        {
+          "kind": "public_watermark",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "CompVis Stable Diffusion 1 reference script DWT-DCT byte-message marking",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py"
+          ],
+          "limitations": "Public unkeyed fixed message can be applied to genuine images by anyone. This establishes a compatible mark observation, not authenticated origin, provider identity or AI authorship. Remains outside confidence and early stopping.",
+          "runtime_status": "local_advisory_message_reader",
+          "automated_shortcut": "disabled",
+          "source_blob_sha1": "bc3864043f676c829b623f444f689f6fe7e4824b",
+          "message_bits": 136
         }
       ],
       "review_status": "scoped_documentation",
@@ -472,7 +594,11 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py"
+      ]
     },
     {
       "id": "bfl",
@@ -492,6 +618,22 @@
           "limitations": "Terms define credentials but do not establish every self-hosted checkpoint/export. Exact hosted product and credential validation still required.",
           "runtime_status": "generic_local_path_only",
           "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "public_watermark",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "FLUX public reference pipeline DWT-DCT fixed-message marking; separate from current hosted credential terms",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://github.com/black-forest-labs/flux/blob/main/src/flux/util.py"
+          ],
+          "limitations": "Public unkeyed fixed message can be applied to genuine images by anyone. This establishes a compatible mark observation, not authenticated origin, provider identity or AI authorship. Remains outside confidence and early stopping.",
+          "runtime_status": "local_advisory_message_reader",
+          "automated_shortcut": "disabled",
+          "source_blob_sha1": "c7b38637628649956771720c9c15c71ef8f01434",
+          "message_bits": 46
         }
       ],
       "review_status": "scoped_documentation",
@@ -500,7 +642,11 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "https://github.com/black-forest-labs/flux/blob/main/src/flux/util.py"
+      ]
     },
     {
       "id": "bria",
@@ -559,7 +705,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "midjourney",
@@ -589,7 +736,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "elevenlabs",
@@ -616,7 +764,8 @@
         "video": "not_established_by_this_review",
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "resemble",
@@ -682,7 +831,8 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "suno",
@@ -737,7 +887,8 @@
         "video": "not_established_by_this_review",
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "minimax",
@@ -774,15 +925,41 @@
             "audio",
             "text"
           ]
+        },
+        {
+          "kind": "audible_label",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Reviewed non-streaming synchronous T2A export; optional ending rhythm notice",
+          "verification_route": "audible_only",
+          "source_urls": [
+            "https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643",
+            "https://solutions.minimax.cn/debug/speech"
+          ],
+          "limitations": "The documented aigc_watermark option defaults off and adds a rhythm notice at the end, only for non-streaming output. No hidden-bit decoder or authenticated attribution contract is supplied. invisible_character_ratio describes input characters, not an audio watermark score.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "generation_controls": {
+            "parameter": "aigc_watermark",
+            "default": false,
+            "streaming_supported": false
+          }
         }
       ],
       "review_status": "scoped_documentation",
       "modality_review": {
         "image": "scoped_signal_documented",
         "video": "not_established_by_this_review",
-        "audio": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:platform.minimax.io watermark audio video aigc metadata",
+        "MiniMax 海螺 语音 隐式水印 检测 官方",
+        "site:platform.minimaxi.com \"aigc_watermark\""
+      ]
     },
     {
       "id": "deepseek",
@@ -809,7 +986,8 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "alibaba",
@@ -838,7 +1016,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "bytedance",
@@ -925,7 +1104,8 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "tencent",
@@ -952,7 +1132,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "baidu",
@@ -980,7 +1161,8 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "kuaishou",
@@ -1009,7 +1191,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "synthesia",
@@ -1050,7 +1233,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "heygen",
@@ -1077,7 +1261,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "runway",
@@ -1104,7 +1289,8 @@
         "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "pika",
@@ -1123,16 +1309,18 @@
           ],
           "limitations": "Current and older policy pages differ. Do not expect a visible mark on current exports or infer an unmarked file is original. No hidden verifier established.",
           "runtime_status": "not_integrated",
-          "automated_shortcut": "disabled"
+          "automated_shortcut": "disabled",
+          "availability": "historical"
         }
       ],
       "review_status": "scoped_documentation",
       "modality_review": {
         "image": "not_established_by_this_review",
-        "video": "scoped_signal_documented",
+        "video": "historical_documentation_only",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "moonshot",
@@ -1162,7 +1350,8 @@
         "video": "scoped_signal_documented",
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "nvidia",
@@ -1193,7 +1382,8 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "kakao",
@@ -1224,7 +1414,8 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "apple",
@@ -1254,40 +1445,98 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-07"
     },
     {
       "id": "zhipu",
-      "name": "Zhipu / GLM",
-      "signals": [],
-      "review_status": "verification_gap",
-      "search_queries": [
-        "site:docs.bigmodel.cn \u6c34\u5370 \u6807\u8bc6",
-        "site:docs.bigmodel.cn watermark"
+      "name": "Zhipu / Z.ai / GLM",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Hosted image-generation and asynchronous video-generation API watermark_enabled option",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://docs.bigmodel.cn/api-reference/模型-api/图像生成.md",
+            "https://docs.bigmodel.cn/api-reference/模型-api/视频生成异步.md"
+          ],
+          "limitations": "The APIs document visible and implicit digital marks enabled by default; disabling requires an approved disclaimer. The video schema reuses image wording. This is product documentation, not a locally qualified decoder.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "generation_controls": {
+            "parameter": "watermark_enabled",
+            "default": true,
+            "opt_out": "customers with approved disclaimer"
+          }
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Implicit digital marking described by the same hosted API parameter",
+          "verification_route": "deployment_specific",
+          "source_urls": [
+            "https://docs.bigmodel.cn/api-reference/模型-api/图像生成.md",
+            "https://docs.bigmodel.cn/api-reference/模型-api/视频生成异步.md"
+          ],
+          "limitations": "No public production extraction algorithm, key, matching detector weights or verification endpoint was established. Open CogView/CogVideo weights do not imply the hosted service marking step. Video/audio scope must not be conflated.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
       ],
-      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "review_status": "scoped_documentation",
+      "search_queries": [
+        "site:docs.bigmodel.cn \"watermark\"",
+        "site:docs.bigmodel.cn \"水印\"",
+        "https://docs.bigmodel.cn/llms.txt"
+      ],
       "modality_review": {
-        "image": "not_established_by_this_review",
-        "video": "not_established_by_this_review",
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08"
     },
     {
       "id": "mistral",
       "name": "Mistral",
-      "signals": [],
-      "review_status": "verification_gap",
-      "search_queries": [
-        "site:mistral.ai watermark detection text Le Chat"
+      "signals": [
+        {
+          "kind": "announced_marking",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Vibe Code output marking and detection commitment",
+          "verification_route": "planned",
+          "source_urls": [
+            "https://legal.mistral.ai/ai-governance/ai-systems/vibe-code/"
+          ],
+          "limitations": "The primary page commits to a marking/detection solution by 2026-12-02. That is a future commitment as of this review, not evidence of a working current verifier or every Mistral model.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "availability": "announced_future",
+          "target_date": "2026-12-02"
+        }
       ],
-      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "review_status": "scoped_documentation",
+      "search_queries": [
+        "site:mistral.ai \"watermark\"",
+        "watermark generated content [domains: mistral.ai]"
+      ],
       "modality_review": {
         "image": "not_established_by_this_review",
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
-        "text": "not_established_by_this_review"
-      }
+        "text": "announced_future_only"
+      },
+      "reviewed_utc": "2026-11-08"
     },
     {
       "id": "cohere",
@@ -1295,7 +1544,7 @@
       "signals": [],
       "review_status": "verification_gap",
       "search_queries": [
-        "site:cohere.com watermark detection generated text transparency"
+        "watermark generated content [domains: cohere.com]"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1303,24 +1552,41 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08"
     },
     {
       "id": "luma",
       "name": "Luma",
-      "signals": [],
-      "review_status": "verification_gap",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Dream Machine plan-dependent export watermark",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://lumalabs.ai/learning-hub/payments-subscriptions"
+          ],
+          "limitations": "Reviewed free/Lite plans describe watermarks; Plus describes no watermark. This does not establish a hidden verifier, Ray/Photon-wide detection, or partner-model coverage.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
       "search_queries": [
-        "site:lumalabs.ai watermark content credentials detection",
+        "site:lumalabs.ai watermark provenance content credentials",
         "site:docs.lumalabs.ai watermark"
       ],
-      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
-        "image": "not_established_by_this_review",
-        "video": "not_established_by_this_review",
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08"
     },
     {
       "id": "udio",
@@ -1328,7 +1594,7 @@
       "signals": [],
       "review_status": "verification_gap",
       "search_queries": [
-        "site:help.udio.com watermark provenance"
+        "watermark content authenticity [domains: help.udio.com, udio.com]"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1336,7 +1602,8 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
-      }
+      },
+      "reviewed_utc": "2026-11-08"
     },
     {
       "id": "ideogram",
@@ -1344,9 +1611,234 @@
       "signals": [],
       "review_status": "verification_gap",
       "search_queries": [
-        "site:docs.ideogram.ai watermark metadata"
+        "watermark metadata [domains: docs.ideogram.ai]"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "reviewed_utc": "2026-11-08"
+    },
+    {
+      "id": "recraft",
+      "name": "Recraft",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "watermark content credentials [domains: recraft.ai]"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "reviewed_utc": "2026-11-08"
+    },
+    {
+      "id": "cartesia",
+      "name": "Cartesia",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "sonic-preview and Sonic-3.6/newer supported speech outputs; streaming and non-streaming",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://docs.cartesia.ai/build-with-cartesia/capability-guides/watermarking",
+            "https://www.cartesia.ai/watermark-detector"
+          ],
+          "limitations": "Detection is statistical and can false-positive; older outputs are not covered. Current fetched docs/portal specify 5 seconds to 5 minutes/32 MB, while an indexed snippet said 3 seconds. Use the current stricter limit until qualified. The API requires a paid-plan key; the public portal does not.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "alternative_verification_routes": [
+            "public_portal"
+          ],
+          "endpoint": "https://api.cartesia.ai/v1/watermark/detect",
+          "api_version": "2026-08-14",
+          "generation_controls": {
+            "default": "always on for supported models",
+            "opt_out": false
+          },
+          "response_contract": {
+            "field": "detected",
+            "type": "boolean",
+            "meaning": "recognized Cartesia watermark, statistical; not complete authorship"
+          },
+          "data_handling": "Portal says server processing worldwide and deletion shortly after use; no precise retention SLA established."
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:cartesia.ai \"watermark\"",
+        "site:docs.cartesia.ai watermark detector"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "inworld",
+      "name": "Inworld",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Inworld hosted TTS watermark declaration",
+          "verification_route": "deployment_specific",
+          "source_urls": [
+            "https://inworld.ai/blog/introducing-inworld-tts"
+          ],
+          "limitations": "The provider declares imperceptible watermarking. The separate detection endpoint exposes a classifier score, not a separately verified watermark result or authenticated provenance proof.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_classifier",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "TTS-2 and TTS-2 Flash speech, including a video container audio track",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://docs.inworld.ai/api-reference/detectionAPI/contentdetection/detect-content"
+          ],
+          "limitations": "Other AI speech can score high. A missing probability is unscored, never a negative. Noise, music, narrowband sound and editing lower scores. A positive score cannot activate a documentary shortcut or establish visual-video provenance.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "endpoint": "https://api.inworld.ai/detection/v1/detect",
+          "container_scope": "audio only; MP4/MOV/MXF accepted for their sound track",
+          "response_contract": {
+            "field": "probability",
+            "type": "optional number in [0,1]",
+            "absent": "not scored",
+            "provider": "inworld"
+          },
+          "upload_limits": {
+            "bytes": 26214400,
+            "audio_seconds": 300
+          },
+          "data_handling": "Provider states file and filename are not stored or logged; no customer request made."
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:inworld.ai watermark audio",
+        "https://docs.inworld.ai/api-reference/detectionAPI/contentdetection/detect-content"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "did",
+      "name": "D-ID",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Studio generated-avatar video notices, plan-dependent",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://help.d-id.com/hc/en-us/articles/31350550554641-How-do-I-change-or-remove-the-watermark-on-my-videos",
+            "https://www.d-id.com/faqs/"
+          ],
+          "limitations": "Current help permits replacement/removal on some plans; FAQ says Enterprise can customize but not remove. Treat the conflict explicitly. No hidden decoder or cryptographic attribution established.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark content credentials [domains: help.d-id.com, d-id.com]"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "writer",
+      "name": "WRITER / Palmyra",
+      "signals": [
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Announced customer-keyed Palmyra text watermark, configurable strength/content types",
+          "verification_route": "planned",
+          "source_urls": [
+            "https://writer.com/blog/oct-roundup-new-at-writer/"
+          ],
+          "limitations": "The article says available by December 2; current production access is not established on 2026-11-08. Customer-specific keys/custom payloads are not public verification configuration. Third-party models retain their own watermark policies.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "availability": "announced_future",
+          "target_date": "2026-12-02"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark detection [domains: writer.com, docs.writer.com]"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "announced_future_only"
+      }
+    },
+    {
+      "id": "stepfun",
+      "name": "StepFun",
+      "signals": [
+        {
+          "kind": "structured_label",
+          "modalities": [],
+          "product_scope": "Hosted platform agreement section 2.2.4 declares visible notices and implicit file metadata; export-specific format unresolved",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://platform.stepfun.com/legal/user-agreement.html"
+          ],
+          "limitations": "Terms describe notices/metadata but provide no per-format serializer, production watermark key or authenticated verifier. An interface notice is not an embedded file credential. No blanket four-modality detector is claimed.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled",
+          "potential_modalities": [
+            "image",
+            "video",
+            "audio",
+            "text"
+          ]
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "AI 内容 标识 水印 [domains: platform.stepfun.com]"
+      ],
       "modality_review": {
         "image": "not_established_by_this_review",
         "video": "not_established_by_this_review",
@@ -1355,14 +1847,152 @@
       }
     },
     {
-      "id": "recraft",
-      "name": "Recraft",
+      "id": "baichuan",
+      "name": "Baichuan",
+      "signals": [
+        {
+          "kind": "structured_label",
+          "modalities": [],
+          "product_scope": "Baixiaoyi output terms allow implicit generation attributes, provider name/code and content identifier",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://policy.baichuan-ai.com/cooperation/agreement"
+          ],
+          "limitations": "The statement says output may contain labels. It does not identify every exported format or establish a public hidden decoder, signing key or verifier. Scope is this named product, not all Baichuan model deployments.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled",
+          "potential_modalities": [
+            "text"
+          ]
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "\"隐式标识\" \"百川\" [domains: baichuan-ai.com]"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Fish Audio",
       "signals": [],
       "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
       "search_queries": [
-        "site:recraft.ai watermark content credentials"
+        "site:docs.fish.audio watermark",
+        "hidden watermark metadata [domains: docs.fish.audio, github.com/fishaudio]"
       ],
-      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output. User-created voices named Watermark were excluded as unrelated user content.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "hume",
+      "name": "Hume",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark provenance [domains: docs.hume.ai, hume.ai]"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "playai",
+      "name": "PlayAI / PlayHT",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:docs.play.ht watermark",
+        "AI watermark detector [domains: docs.play.ai, play.ai, docs.play.ht]"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "ltx",
+      "name": "Lightricks / LTX",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark provenance [domains: ltx.studio, lightricks.com]",
+        "site:docs.ltx.video watermark content credentials"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark AI generated [domains: perplexity.ai]"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output. An acceptable-use prohibition on removing marks is not a deployment or verification specification.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "ibm",
+      "name": "IBM / Granite",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark provenance detector [domains: ibm.com]"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output. General educational/research articles do not establish Granite production marks or a compatible verifier.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "ai21",
+      "name": "AI21 / Jamba",
+      "signals": [],
+      "review_status": "verification_gap",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "watermark generated text [domains: ai21.com]"
+      ],
+      "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
       "modality_review": {
         "image": "not_established_by_this_review",
         "video": "not_established_by_this_review",
@@ -1377,7 +2007,16 @@
     "Stability current hosted FAQ and legacy open reference pipelines describe different marking mechanisms.",
     "Pika current support and older FAQ differ on visible marks.",
     "Some Volcengine pages timed out on direct fetch; indexed official documentation was readable and the podcast example/metadata-writing guide were retrieved.",
-    "The SDK lists PDF as a supported read MIME, but this build refused authored PDF signing. No PDF credential adapter or PDF fast-path compatibility is claimed."
+    "The SDK lists PDF as a supported read MIME, but this build refused authored PDF signing. No PDF credential adapter or PDF fast-path compatibility is claimed.",
+    "2026-11-08: The current Anthropic canonical page also exposes the supported-file credential section; the earlier snapshot discrepancy is retained as a historical observation.",
+    "2026-11-08: Official Cartesia source retrieval specifies a 5-second minimum; the search index showed a 3-second variant. No endpoint qualification or limit behavior was tested.",
+    "2026-11-08: The Zhipu video API watermark field reuses image wording. The actual video parameter is documented; sound-track watermark coverage is not inferred.",
+    "2026-11-08: Mistral Vibe Code and WRITER Palmyra describe future December 2 delivery. Announcements are not current verification capability.",
+    "2026-11-08: Inworld probability is a classifier score with an explicit missing-field noScore result, not a separately authenticated watermark hit.",
+    "2026-11-08: A multilingual/domain-focused search can find user-generated chatbot shares or voices named Watermark; these were excluded as provider-method evidence.",
+    "2026-11-08: D-ID plan help and FAQ differ on watermark removability; neither establishes a hidden verifier.",
+    "2026-11-08: Sora retained-video C2PA/moving marks/internal tracing are separate historical records; the current safety page reports product unavailability from 2026-04-26. Its image/audio provenance API does not thereby gain video support.",
+    "2026-11-08: Adobe Translate Audio/Video documentation explicitly describes credentials for AI speaker voices, translation and lip movements; it does not establish full-file synthesis."
   ],
   "provider_verifiers_called_during_initial_inventory_review": 0,
   "research_qualification": {
@@ -1390,5 +2029,49 @@
     "customer_files_uploaded": 0,
     "customer_routes_enabled": false,
     "notes": "Real research requests on authored controls/public historical Bria examples; no current valid Bria or genuine Suno positive qualified. WebP response contradicted omission contract and remained inconclusive."
+  },
+  "review_history": [
+    {
+      "reviewed_utc": "2026-11-07",
+      "provider_families": 37,
+      "signal_records": 51
+    },
+    {
+      "reviewed_utc": "2026-11-08",
+      "provider_families": 50,
+      "signal_records": 69,
+      "note": "Supplemental primary-source review; individual rows retain their own review dates. Research inventory, not detector coverage."
+    }
+  ],
+  "supplemental_review": "provider-signal-review-2026-11-08.md",
+  "public_reference_readthrough": {
+    "reviewed_utc": "2026-11-08",
+    "checks": [
+      {
+        "provider_mark": "flux",
+        "source_url": "https://github.com/black-forest-labs/flux/blob/main/src/flux/util.py",
+        "source_blob_sha1": "c7b38637628649956771720c9c15c71ef8f01434",
+        "bit_count": 46,
+        "matches_existing_local_reader": true,
+        "external_code_executed": false
+      },
+      {
+        "provider_mark": "sd1",
+        "source_url": "https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py",
+        "source_blob_sha1": "bc3864043f676c829b623f444f689f6fe7e4824b",
+        "bit_count": 136,
+        "matches_existing_local_reader": true,
+        "external_code_executed": false
+      },
+      {
+        "provider_mark": "sdxl",
+        "source_url": "https://github.com/huggingface/diffusers/blob/main/src/diffusers/pipelines/stable_diffusion_xl/watermark.py",
+        "source_blob_sha1": "70d06bb6320d890ea90542cc7551bc42d7c59451",
+        "bit_count": 48,
+        "matches_existing_local_reader": true,
+        "external_code_executed": false
+      }
+    ],
+    "method": "Parse public source constants without executing external code; compare bit payloads with the existing local readers. Not a file-level detection accuracy test."
   }
 }

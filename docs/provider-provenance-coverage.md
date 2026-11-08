@@ -1,11 +1,16 @@
 # Provider signals and the provenance-first gate
 
-Reviewed 7 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **37 provider families**, all four modality fields, **51 scoped signal
+Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
+covers **50 provider families**, all four modality fields, **69 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
-Thirty families have scoped marking/verification documentation; seven remain
-verification gaps. These numbers count research records, not working detectors.
+Thirty-nine families have scoped documentation, including announcements or
+policies with unresolved export scope; eleven remain review gaps.
+These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
+The [four-modality matrix](provider-signal-matrix.md) and
+[supplemental review](provider-signal-review-2026-11-08.md) distinguish current
+marking documentation, future commitments and missing verification routes.
+Individual provider rows retain their actual review dates.
 
 ## What can stop processing now
 
@@ -50,14 +55,14 @@ their saved calculations.
 
 | Provider family | Collected signals and verification route | Important qualification |
 |---|---|---|
-| OpenAI / ChatGPT / Sora | [Image C2PA; image/audio SynthID; Content Provenance API; restricted text access](https://developers.openai.com/api/docs/guides/content-provenance) | The documented endpoint covers images/audio, not a universal Sora video detector. Read each response result separately. |
+| OpenAI / ChatGPT / Sora | [Image C2PA; image/audio SynthID; Content Provenance API; restricted text access](https://developers.openai.com/api/docs/guides/content-provenance); [historical Sora video credentials and marks](https://openai.com/index/creating-with-sora-safely/) | The documented endpoint covers images/audio, not a universal Sora video detector. Historical Sora credentials remain worth inspecting on retained files; internal tracing is not a public decoder. |
 | Anthropic / Claude | [Keyed token-choice watermark](https://www.anthropic.com/news/claude-text-watermark); [supported image-file credentials](https://www.anthropic.com/news/claude-text-watermark?gsid=c8c05ab2-f266-425f-8453-12ae96c34905) | No hidden characters. Private-preview text access differs from ordinary local credential validation. |
 | Google / Gemini / Imagen / Veo / Lyria / NotebookLM | [SynthID for supported image, video, audio and text; public verification portal](https://deepmind.google/models/synthid/) | Public text reference code does not contain the production Gemini key. |
 | Meta / Muse | [Custom Muse Image marking and public Content Seal research schemes](https://github.com/facebookresearch/content-seal) | Public AudioSeal/image/video/text research implementations do not automatically match Muse production. |
 | xAI / Grok | [Supported API text watermark and access-controlled verifier](https://docs.x.ai/developers/advanced-api-usage/watermarking); [visible image/video marks](https://docs.x.ai/grok/faq) | A copied response header or logo is not file authentication. |
 | Microsoft / Azure / Copilot | [Selected hosted C2PA and invisible marks](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure); [verification API](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection) | Resource/Entra access is required; product availability varies. Planned OpenAI text support is not deployed coverage. |
 | Amazon / Nova / Bedrock | [Sonic speech marks and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html); [Canvas/Reel watermark announcement](https://www.amazon.science/blog/amazon-nova-and-our-commitment-to-responsible-ai) | Sonic verification requires AWS contact. A 2024 announcement is not a tested current API. Transcripts are not marked by Sonic. |
-| Adobe / Firefly | [Credentials on the reviewed generated-image workflow](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html) | Editing/capture credentials require different interpretation; this source does not establish every partner product. |
+| Adobe / Firefly | [Image credentials](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html); [Translate Audio/Video credentials](https://helpx.adobe.com/firefly/web/work-with-audio-and-video/work-with-audio/about-translate-audio-and-translate-video.html) | The audio/video workflow describes AI voices, translation and lip edits. This does not establish whole-file synthesis or every partner product. |
 | Stability AI | [Current hosted image/video/audio C2PA](https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq); legacy SDXL reference marker | Current hosted FAQ says C2PA rather than invisible marks. Legacy pipelines and self-hosted open weights have different behavior. |
 | Black Forest Labs / FLUX | [Service credential terms](https://bfl.ai/legal/developer-terms-of-service) and selected Azure-hosted FLUX provenance | Does not establish every checkpoint/export. |
 | Bria | [Image/video credentials and invisible watermark checks](https://docs.bria.ai/visual-verification-overview) | Public image/video verification endpoints require no API token. GIF/WebP image watermark checks are omitted, not negative. |
@@ -81,18 +86,26 @@ their saved calculations.
 | Kakao | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
 | Apple | [Announced upcoming SynthID Detector support](https://deepmind.google/models/synthid/) | “Soon” is not current deployed coverage. |
 
-Focused primary-source searches for **Zhipu/GLM, Mistral, Cohere, Luma, Udio,
-Ideogram and Recraft** did not establish a compatible public production verifier.
-Their search queries and all four explicit modality gaps remain in the catalog.
-This does not mean those providers never mark content. Customer discussions,
-transparency pledges and a shared watermark algorithm are insufficient to fill
-a missing production-verification specification.
+The broader follow-up adds **Cartesia, Inworld, Fish Audio, Hume, PlayAI/PlayHT,
+Lightricks/LTX, D-ID, WRITER/Palmyra, Perplexity, IBM/Granite, AI21/Jamba,
+StepFun and Baichuan**. It finds a concrete Cartesia watermark API, distinguishes
+Inworld's classifier from watermark proof, fills Zhipu's hosted image/video
+marking-documentation gap and records MiniMax's optional audible rhythm notice.
+Luma's visible marks are plan-dependent. Mistral Vibe Code and WRITER describe
+future December 2 commitments; these are not current working verifiers.
+
+Focused primary-source searches still leave **Cohere, Udio, Ideogram, Recraft,
+Fish Audio, Hume, PlayAI/PlayHT, Lightricks/LTX, Perplexity, IBM/Granite and
+AI21/Jamba** as review gaps. Queries and all four explicit modality states remain
+in the catalog. This does not mean those providers never mark content.
+Customer discussions, transparency pledges and a shared watermark algorithm
+are insufficient to fill a missing production-verification specification.
 
 ## What the app collects, and what it does not infer
 
 The [structured-label reader](structured-source-labels.md) recognizes supported
 AIGC fields, locators and checksums. Known-name normalization now covers the
-37 families, including `volcengine` and `seedream`. Recognizing a known string
+50 families, including `volcengine`, `seedream`, Cartesia and Inworld. Recognizing a known string
 does not show the provider actually uses that field, authenticate it, decode a
 hidden watermark or add confidence. Unknown names/codes and private identifiers
 remain withheld. Version 1 historical and version 2 current records render in
@@ -129,9 +142,9 @@ stripped credentials cannot activate the gate. These are locally authored
 declarations under a test authority, not genuine provider fixtures or a detector
 accuracy benchmark. The test authority is never added to production trust.
 
-Next priority is qualifying real-provider fixtures for Suno/Bria and the
+Next priority is qualifying real-provider fixtures for Suno/Bria/Cartesia and the
 available public watermark schemes, then integrating supported routes with
 clear scope and data handling. Restricted production text verification, Muse
-compatibility and the seven review gaps remain open. No new weights,
+compatibility and the eleven review gaps remain open. No new weights,
 statistical calibration, public confidence threshold or GCP deployment was
 introduced by this inventory.

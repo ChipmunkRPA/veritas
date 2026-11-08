@@ -30,9 +30,9 @@ surviving mark at all.
 Exact known-name aliases normalize claims for OpenAI, Anthropic/Claude,
 Google/Gemini, Meta/Muse, xAI/Grok, MiniMax/Hailuo and DeepSeek, plus
 Alibaba/Qwen/Wan, ByteDance/Doubao/Seedance, Tencent/Hunyuan, Baidu/ERNIE and
-Kuaishou/Kling. Version 2 expands known-name normalization to the 37 families in
+Kuaishou/Kling. Version 2 now includes known-name normalization for the 50 families in
 the [provider catalog](provider-signals-catalog.json), including Suno, Bria,
-Microsoft, Adobe, Resemble, ElevenLabs and Kimi. The voice examples published by
+Microsoft, Adobe, Resemble, ElevenLabs, Kimi, Cartesia and Inworld. The voice examples published by
 Volcengine also motivate recognizing its `volcengine` spelling. Both historical
 version 1 and current version 2 records render in the normal view and reports.
 This is normalization of an uploaded field, **not evidence that

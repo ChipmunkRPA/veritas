@@ -11,6 +11,7 @@ import zlib
 import pytest
 from PIL import Image, PngImagePlugin
 
+from app.engine import provenance_gate
 from app.provenance import source_labels as labels
 
 
@@ -49,6 +50,9 @@ def test_named_provider_claims_remain_unverified_and_outside_confidence(tmp_path
     assert row['claimed_provider'] == labels.ALIASES[provider.casefold()]
     assert row['provider_authenticated'] is row['used_in_confidence'] is False
     assert row['confidence_pct'] is None and got['provider_private_watermarks_checked'] is False
+    for kind in ('image', 'video', 'audio', 'document'):
+        decision = provenance_gate.decide({'source_labels': got, 'detectors': []}, kind)
+        assert decision['action'] == 'continue_detection' and decision['basis'] is None
 
 
 @pytest.mark.parametrize('label', ['1', '2', '3'])

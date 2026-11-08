@@ -45,7 +45,8 @@ statistical model admission.
 ## Limits and next work
 
 The [expanded provider review](provider-provenance-coverage.md) now inventories
-37 provider families and 51 scoped signal records, with explicit modality gaps.
+50 provider families and 69 scoped signal records, with explicit modality gaps
+and planned features separated from current documented signals.
 Suno and Bria document public APIs without a token; an account is not a blanket
 prerequisite. Their external routes are not activated. Private keys and provider
 responses are not simulated. [Follow-up qualification](provider-provenance-v1-result.md)

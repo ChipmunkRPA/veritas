@@ -4,7 +4,7 @@
   Haar DWT of the U channel (scales [0, 36, 36]: only U carries the mark), 4 × 4 blocks of the LL band in row order, and
   block k carries bit k mod n. A block votes 1 when |its largest AC value| mod 36 > 18; a bit is 1 when its mean vote × 255
   > 127. `block_votes` computes every vote at once and equals the vendored loop (tested).
-- **Messages** (checked against the sources on 2026-09-12):
+- **Messages** (source constants rechecked on 2026-11-08):
   - SDXL: diffusers `pipelines/stable_diffusion_xl/watermark.py` and Stability AI generative-models, 0xB3EC907BB19E, 48 bits;
   - FLUX reference code: black-forest-labs/flux `src/flux/util.py`, `0b0010101011111110…`. The embedder uses
     `bin(x)[2:]`, which drops the two leading zeros, so the embedded message has **46 bits**;
@@ -12,9 +12,10 @@
   Every embedder converts RGB to BGR before encoding; the decoder reads the stored pixels, without EXIF orientation.
 - **Threshold.** A message is present when its equal bits reach the smallest count whose binomial tail under chance
   (p = ½) is at most P(X ≥ 44 | n = 48) ≈ 7.6e-10 (IF §4.5): 44 of 48, 43 of 46, 103 of 136.
-- **Meaning.** The messages are public and unkeyed, so anyone can embed them in a genuine image: a hit is self-declared
-  evidence (D-15, floor 0.85). No hit says nothing: most generators embed no such message, and it does not survive
-  resizing or cropping.
+- **Meaning.** The messages are public and unkeyed, so anyone can embed them in a genuine image. A hit is an
+  unverified marking observation, outside AI-origin confidence and the early-stop gate. The historical D-15
+  confidence floor was retired. An absent mark establishes neither originality nor absence of AI use; resizing and
+  cropping can remove the mark.
 """
 from __future__ import annotations
 

@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.image-pair-review-freeze/21",
+  "private_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "code_sha256": {
+    "backend/scripts/review_image_pairs_v21.py": "42322d5990a1a618c641ca478646c814102271e7971c4be9c694ae2ae208d837",
+    "backend/scripts/image_pair_review_runtime_v21.py": "9f3f504d0de1a402a432c1218acd123567fd2ad9e9d5235330d4c8bac7755c95",
+    "backend/tests/test_image_pair_review_v21.py": "87fc64caf33f45c75f703ed059c0f87881ad96e1a2ff01b8504175adfc86a566",
+    "backend/tests/test_image_pair_review_runtime_v21.py": "3d5f107c7626399885058c1ad66727e57b9abfb95295deac697e4c1f2cfa878f"
+  },
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "opencv": "5.0.0"
+  },
+  "authored_tests_passed": 19,
+  "final_junit_sha256": "5f2b362b89150e9dae466008f5d684fad8a4086732e1e658dead0f61cb18812b",
+  "first_restricted_junit_sha256": "3366445172462e38abf408b6f0fa5f3b411ffaf7cf450ab6447f989fd81f6b1b",
+  "first_host_15_test_junit_sha256": "30b90f28b0a740658417e96e02b4f4f11098779d869c1c5e8e3e075aaaaae1b6",
+  "frozen_acquisition_code_changed": false,
+  "scientific_pair_rules_changed": false,
+  "first_full_project_review_executed": false,
+  "new_neural_forwards": 0,
+  "fitting_steps": 0,
+  "training_admitted": 0,
+  "outside_human_review": false,
+  "resource_policy": {
+    "seconds": 900,
+    "sampled_tree_rss_limit_bytes": 6442450944,
+    "minimum_ram_and_disk_reserve_bytes": 1610612736
+  },
+  "protected_voice_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "scope": "Separate local full-chain and all-pixel review, to be executed only after complete acquisition and qualification. No remote range reacquisition, whole-archive digest, independent photographer authentication or external human review. Source/pair identities and pixels remain private."
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.image-source-groups-freeze/22",
+  "private_pair_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "previously_consumed_manifest_sha256": {
+    "backend/data/localization-eval/tgif-confirmation-v3/manifest.json": "9312e1489828103dbff602c5c240c3b1ecba3808757517bf005b3bf0493e58ed",
+    "backend/data/localization-eval/tgif-confirmation-v4/manifest.json": "18d36f12036bbd467de625efb33887dc61f67c237fb3808e65b506501ad2b871",
+    "backend/data/localization-eval/tgif-confirmation-v5/manifest.json": "00975f23e17b1dc5cbd67a69325e42412719922f9a770fd3a6df91afdb6d30ea",
+    "backend/data/localization-eval/tgif-pairs-v2/manifest.json": "4ec157d240f88fce43e554d5dee0bd2da9ac388345d3f0a188c93826629c8230"
+  },
+  "code_sha256": {
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/scripts/relayformer_learning_runtime_v22.py": "3a53e9311d5a2f4fa78ee6aab036b0c8ba1e9d26b44cf97b34a91500a2378f0d",
+    "backend/tests/test_image_source_groups_v22.py": "bd9fe45dbae67ba2cb7880cbd168fae0a5de6ea29c2623a972a7f1e576c9927f",
+    "backend/tests/test_regional_runtime_v22.py": "5b8e55e2d99cb4a3644852f2b0d33a8cff3d97e9e2b6057ea7e184379e25fe13"
+  },
+  "protected_sha256": {
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/scripts/review_image_pairs_v21.py": "42322d5990a1a618c641ca478646c814102271e7971c4be9c694ae2ae208d837",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+  },
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0"
+  },
+  "authored_preparation_tests_passed": 39,
+  "final_junit_sha256": "e08b25ba3b8089ae381d2c157ae0e54850eaa7bb9afd99701a3e7cb85d3ff736",
+  "source_group_run_completed": false,
+  "roles_assigned": false,
+  "project_source_neural_forwards": 0,
+  "authored_full_model_backward_probe_completed": false,
+  "fitting_steps": 0,
+  "outside_human_review": false,
+  "resource_policy": {
+    "seconds": 900,
+    "sampled_tree_rss_limit_bytes": 6442450944,
+    "minimum_ram_and_disk_reserve_bytes": 1610612736
+  },
+  "grouping_rule": {
+    "same_source_identity": true,
+    "same_attributed_new_source_profile": true,
+    "exact_source_rgb_and_dimensions": true,
+    "near_thumbnail": {
+      "horizontal_difference_bits": 256,
+      "resize": [
+        17,
+        16
+      ],
+      "positive_bit_range_inclusive": [
+        32,
+        224
+      ],
+      "maximum_hamming_distance_inclusive": 8,
+      "aspect_cross_product_percent_of_larger_inclusive": 2
+    }
+  },
+  "privacy": "Whole-file commitments and aggregates only; raw pixels, new source pairings and thumbnail vectors remain private.",
+  "limits": "Prior240 source profiles, aliases, bursts/crops and external pretraining overlap are unverified. Candidate components are not automatically fresh-confirmation or admitted training data."
+}

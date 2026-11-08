@@ -8,6 +8,7 @@ import { clearSessionEnded } from '../../lib/api/sessionEnd'
 import { Button } from '../../components/ui'
 import { inputClass } from '../cases/NewCaseDialog'
 import { announceSession, noteSignIn, sessionNotKeptMessage } from './session'
+import { STANDARD_SERVICE_POLICY } from '../analysis/standardServicePolicy'
 
 const KEY_STORAGE = 'veritas_api_key'
 
@@ -67,6 +68,7 @@ export default function SignIn({ keyRefused, sessionNotKept = false, named }: {
           <p className="mt-2 mb-0 text-small text-text-muted">One payment through Stripe. No subscription. An automated result may be inconclusive.</p>
           {billing.data.mode === 'test' && <p className="mt-2 mb-0 text-caption text-accent">Test mode — no real payment is collected.</p>}
         </div>}
+        <p className="mt-5 mb-0 text-small text-text-muted" aria-label="Screening limitations">{STANDARD_SERVICE_POLICY.confidence_notice}</p>
         {keyRefused && <p className="mt-2 mb-0 text-small text-text-muted">The API key stored in this browser was not accepted; signing in replaces it.</p>}
         {sessionNotKept && !login.isPending && (
           <p role="alert" data-testid="session-not-kept" className="mt-4 mb-0 text-small text-danger">

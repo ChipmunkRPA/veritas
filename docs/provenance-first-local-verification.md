@@ -16,6 +16,7 @@ statistical model admission.
   policy explain uncertainty, misses, false alarms and inconclusive outcomes.
   Private investigation requires a separate engagement; it guarantees neither
   a conclusion nor court admissibility. Contact: sales@chipmunkrpa.com.
+  Signed-out visitors also see the uncertainty warning on the sign-in page.
 - New purchases require the current disclosure. Existing paid orders retain
   their original valid acknowledgement. USD9.99 prepayment is preserved.
 - Summary PDFs no longer repeat the private-engagement paragraph or force an

@@ -1,0 +1,118 @@
+{
+  "schema": "chipmunk.image-checkpoint-preparation/24",
+  "code_sha256": {
+    "backend/scripts/relayformer_checkpointing_v24.py": "7b7e8bdb3ff60c751497849f204825c7c0d60d835d06c7589042902afd53d002",
+    "backend/scripts/relayformer_checkpointed_probe_v24.py": "20c78ab238679e52afc3393f029bd213d40c339276e731adcb5915054058dbb9",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/local_probe_runtime_v24.py": "706177cf424246b2d09b38588437694590fe8363e60ce6217fec777add7463ae",
+    "backend/tests/test_relayformer_checkpointing_v24.py": "2ad127d5d9b0331c45f9b1e8991bd02aca8a8ee3970eccbb38f0d70da3fe7564",
+    "backend/tests/test_local_probe_runtime_v24.py": "352cb3faa340f9b0433620a60d669aa43453082e7e082b39867f44ca098bf984",
+    "backend/tests/test_checkpoint_comparison_v24.py": "9b081c3ac497804a12332ccf2629ede9adb313f9f63d7bed28ff016b2023fbdb"
+  },
+  "protected_prior_sha256": {
+    "backend/scripts/relayformer_learning_v23.py": "67b68e7a98bc4d537e4b834f4cc792f0313a180f14aa6232a8a118f220a270bc",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+  },
+  "authored_tests_passed": 32,
+  "junit_sha256": "1f9821153afa2e24e23538e8ed7a30ea5a0eaeaf1e4466a76b15b7074500d6da",
+  "first_fixture_failure_junit_sha256": "2e951a7d7e1a2c7abc780855a7b074dd7dbaf62144864718a3413cd8c87b22e1",
+  "first_fixture_failure_source_sha256": "e913c45723c5db80bf78c1ffaf5d07ea6f1b45ce98b584d910f9be473d691f0b",
+  "small_authored_contract": {
+    "schema": "chipmunk.small-authored-checkpoint-contract/24",
+    "torch_version": "2.13.0",
+    "blocks": 12,
+    "input_shape": [
+      16,
+      32
+    ],
+    "input_requires_grad": false,
+    "outputs_exact": true,
+    "all_gradients_exact": true,
+    "all_updated_parameters_exact": true,
+    "baseline_payload": {
+      "packed_nonparameter_tensors": 73,
+      "packed_nonparameter_bytes": 444416
+    },
+    "checkpointed_payload": {
+      "packed_nonparameter_tensors": 25,
+      "packed_nonparameter_bytes": 51200
+    },
+    "trace": {
+      "external_block_calls": 24,
+      "checkpointed_block_calls": 24,
+      "body_entries": 48,
+      "body_completions": 24
+    },
+    "full_detector_executed": false,
+    "project_source_neural_forwards": 0,
+    "scope": "Small authored network only. Packed nonparameter tensor bytes are saved-autograd payload counts, not unique physical storage or a measured peak-RSS reduction.",
+    "source_sha256": {
+      "backend/scripts/relayformer_checkpointing_v24.py": "7b7e8bdb3ff60c751497849f204825c7c0d60d835d06c7589042902afd53d002",
+      "backend/tests/test_relayformer_checkpointing_v24.py": "2ad127d5d9b0331c45f9b1e8991bd02aca8a8ee3970eccbb38f0d70da3fe7564"
+    }
+  },
+  "small_contract_sha256": "a73c5d314f10068c62206b96b8c1d3b217644bc22e3de12c589544b39ca589cf",
+  "actual_observation_only_preflight": {
+    "schema": "chipmunk.authored-comparison-resource-profile/24",
+    "arm": "checkpointed",
+    "module": "scripts.relayformer_checkpointed_probe_v24",
+    "arguments": [
+      "checkpointed",
+      "backend/data/independent-evaluation/image-checkpoint-v24-not-started"
+    ],
+    "preflight_only": true,
+    "child_started": false,
+    "child_exit_code": null,
+    "eligible_at_initial_observation": false,
+    "guard": "initial_headroom_unavailable",
+    "sample_errors": 0,
+    "sampling_error_events": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [
+      {
+        "elapsed_s": 0.00012995803263038397,
+        "tree_rss_bytes": 0,
+        "ram_available_bytes": 5032820736,
+        "disk_free_bytes": 1889316864,
+        "stage": "initial",
+        "violations": [
+          "initial_ram_headroom",
+          "initial_disk_headroom"
+        ]
+      }
+    ],
+    "last_observation": {
+      "elapsed_s": 0.00012995803263038397,
+      "tree_rss_bytes": 0,
+      "ram_available_bytes": 5032820736,
+      "disk_free_bytes": 1889316864
+    },
+    "sampled_tree_rss_lower_bound_bytes": 0,
+    "minimum_observed_available_ram_bytes": 5032820736,
+    "minimum_observed_free_disk_bytes": 1889316864,
+    "resource_journal_sha256": "3c22c164abe4fcfddaa379290f4371be0cf7cea760d1e1193db9c599c5e6a0f2",
+    "duration_s": 0.0003256250638514757,
+    "limits": {
+      "seconds": 900,
+      "sampled_tree_rss_bytes": 6442450944,
+      "ram_and_disk_reserve_bytes": 1610612736,
+      "initial_ram_headroom_bytes": 6442450944,
+      "initial_disk_headroom_bytes": 3221225472
+    },
+    "scope": "An observation-only preflight is not a completed model test. Every observed limit and stopping measurement is retained; no implicit retry. RSS is a sampled lower bound, not a peak guarantee."
+  },
+  "actual_preflight_sha256": "2536f3dd78ea1afa8a05bbf43b6a5d62ff5608fe1ee4c765fb260d71e2201036",
+  "full_baseline_and_checkpointed_probes_completed": false,
+  "full_detector_math_parity_established": false,
+  "full_detector_memory_reduction_established": false,
+  "project_source_neural_forwards": 0,
+  "project_fitting_steps": 0,
+  "new_source_roles_assigned": false,
+  "serving_or_confidence_changed": false,
+  "outside_human_reviewers": 0,
+  "github_workflows_started": false,
+  "gcp_deployed": false,
+  "scope": "Explicit memory/observation preparation only. Full1024 native graph and training method retained; small-network math agreement is not a full-model or accuracy result. New full-model phases require declared starting headroom. Original failures and protected files remain unchanged."
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "chipmunk.regional-supervised-freeze/26",
+  "private_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "source_groups_sha256": "17575bf2662b33ec3fcf9faeaf031286f596b753d7b30f2bcaea2d3a1d801b7a",
+  "pair_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "pair_rows_sha256": "c4ae1c532f4db1f26eb5165754c3591a87fc2c82a6ecb421c9cee9c523028489",
+  "groups_by_role": {
+    "diagnostic": 48,
+    "fit": 168,
+    "calibration": 32,
+    "confirmation": 48,
+    "point": 24
+  },
+  "photos_by_role": {
+    "fit": 213,
+    "diagnostic": 59,
+    "confirmation": 59,
+    "point": 27,
+    "calibration": 39
+  },
+  "fit_updates": 1278,
+  "phases": 40,
+  "code_sha256": {
+    "backend/scripts/image_regional_training_v26.py": "55306d5d6b9664d2c9d60baa0ed36d54cea277435d3578896d8f35e1678f6a29",
+    "backend/scripts/image_regional_training_runtime_v26.py": "fe77eb8fe5bd86cd46c0337b9e57cce2fc886cd28659f6015c7b2757689f5d3c",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+    "backend/scripts/inspect_relayformer_v18.py": "43c0a628b8655d2a5765690572d646c612c3b9aae0430a3ae761876a2686a420",
+    "backend/scripts/prepare_relayformer_v18.py": "cde2fc5c2af3ad04608135b282be6a8bee5082b9a32f97fa7204504d8cf95678",
+    "backend/scripts/relayformer_learning_v23.py": "67b68e7a98bc4d537e4b834f4cc792f0313a180f14aa6232a8a118f220a270bc",
+    "backend/scripts/relayformer_checkpointing_v24.py": "7b7e8bdb3ff60c751497849f204825c7c0d60d835d06c7589042902afd53d002",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae"
+  },
+  "protected_voice_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "project_source_neural_forwards_at_freeze": 0,
+  "serving_admitted": false,
+  "selection": "Use only the final six-epoch checkpoint; no best-epoch selection on held-out outcomes. Calibration and evaluation require a separate frozen readout before their first inference."
+}

@@ -1,9 +1,9 @@
 # Provider marking coverage matrix
 
-Inventory updated 2026-11-08: **71 families, 101 scoped records**, with **20 families remaining explicit review gaps**.
+Inventory updated 2026-11-08: **82 families, 105 scoped records**, with **28 families remaining explicit review gaps**.
 Records include planned features, public research and visible notices; these counts are not working detectors.
 
-Each cell records documentation scope, not measured accuracy or verified production compatibility. “Gap” means not established by this review, including where the provider does not offer that modality. “Planned” means an announcement only; “Historical” is not current export coverage. “Research” identifies a released scheme, without claiming production-provider compatibility. “Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. A generic policy with unresolved export scope does not fill the four cells.
+Each cell records documentation scope, not measured accuracy or verified production compatibility. “Gap” means not established by this review, including where the provider does not offer that modality. “Planned” means an announcement only; “Historical” is not current export coverage. “Research” identifies a released scheme, without claiming production-provider compatibility. “Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. “Metadata service” identifies customer-applied tags, without establishing default model-output marking. A generic policy with unresolved export scope does not fill the four cells.
 
 All external verification routes are disabled for customer files. Only the existing trusted, valid, current-file-bound, explicitly AI-declaring Content Credentials gate can skip statistical checks. A video-container audio check covers sound only. A provider classifier score is not a verified watermark hit.
 
@@ -30,7 +30,7 @@ See the [source catalog](provider-signals-catalog.json), [coverage and gate](pro
 | [DeepSeek](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) | Gap | Gap | Gap | Label policy | 2026-11-08 |
 | [Alibaba / Qwen / Wan](https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference) | Visible label | Visible label | Label policy | Gap | 2026-11-08 |
 | [ByteDance / Doubao / Seedance / Seedream / CapCut / Dreamina](https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en) | Label policy, Watermark, Credentials, Visible label | Visible label, Custom mark, Label policy, Watermark, Credentials | Audible label, Label policy, Watermark, Credentials | Gap | 2026-11-08 |
-| [Tencent / Hunyuan](https://cloud.tencent.com/document/api/1616/119001) | Gap | Visible label | Gap | Gap | 2026-11-07 |
+| [Tencent / Hunyuan](https://cloud.tencent.com/document/api/1616/119001) | Metadata service | Visible label, Metadata service | Metadata service | Metadata service | 2026-11-08 |
 | [Baidu / ERNIE](https://ai.baidu.com/ai-doc/NLP/Ml9i5amtk) | Watermark | Gap | Gap | Gap | 2026-11-07 |
 | [Kuaishou / Kling](https://kling.ai/docs/ai-content-detection) | Watermark | Watermark | Gap | Gap | 2026-11-07 |
 | [Synthesia](https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos) | Gap | Credentials, Visible label | Gap | Gap | 2026-11-07 |
@@ -82,5 +82,16 @@ See the [source catalog](provider-signals-catalog.json), [coverage and gate](pro
 | [Kunlun / Tiangong / Skywork](https://static.tiangong.cn/fe/skywork-site-assets/html/agreement/web-20260514/serve.html) | Gap | Gap | Gap | Label policy | 2026-11-08 |
 | [Shutterstock](https://investor.shutterstock.com/news-releases/news-release-details/shutterstock-joins-content-authenticity-initiative) | Planned | Gap | Gap | Gap | 2026-11-08 |
 | Getty Images / iStock | Gap | Gap | Gap | Gap | 2026-11-08 |
+| [Deepgram](https://deepgram.com/watermark) | Gap | Gap | Watermark | Gap | 2026-11-08 |
+| [Sarvam](https://docs.sarvam.ai/api/api-guides-tutorials/dubbing/how-to/choose-export-formats) | Gap | Visible label | Gap | Gap | 2026-11-08 |
+| [vivo / BlueLM](https://bbs.vivo.com.cn/newbbs/thread/39000231) | Visible label | Visible label | Gap | Gap | 2026-11-08 |
+| Xiaomi / MiMo | Gap | Gap | Gap | Gap | 2026-11-08 |
+| HONOR | Gap | Gap | Gap | Gap | 2026-11-08 |
+| OPPO / Xiaobu | Gap | Gap | Gap | Gap | 2026-11-08 |
+| Moonvalley / Marey | Gap | Gap | Gap | Gap | 2026-11-08 |
+| Rime | Gap | Gap | Gap | Gap | 2026-11-08 |
+| Smallest AI / Waves | Gap | Gap | Gap | Gap | 2026-11-08 |
+| NAVER / HyperCLOVA | Gap | Gap | Gap | Gap | 2026-11-08 |
+| LG AI Research / EXAONE | Gap | Gap | Gap | Gap | 2026-11-08 |
 
 Generated from the catalog with `python backend/scripts/provider_signal_inventory.py --write`. Use `--check` to detect stale counts or a matrix that no longer matches the research records.

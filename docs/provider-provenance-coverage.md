@@ -1,10 +1,10 @@
 # Provider signals and the provenance-first gate
 
 Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **71 provider families**, all four modality fields, **101 scoped signal
+covers **82 provider families**, all four modality fields, **105 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
-Fifty-one families have scoped documentation, including announcements or
-policies with unresolved export scope; twenty remain review gaps.
+Fifty-four families have scoped documentation, including announcements or
+policies with unresolved export scope; twenty-eight remain review gaps.
 These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
 The [four-modality matrix](provider-signal-matrix.md) and
@@ -74,7 +74,7 @@ their saved calculations.
 | DeepSeek | [Platform labeling terms](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) | No compatible public production key or copied-text whitespace decoder established. |
 | Alibaba / Qwen / Wan | [Optional image notice](https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference); [video workflow](https://www.alibabacloud.com/help/en/model-studio/video-generate-edit-model/) | Visible image mark defaults off in the reviewed API; does not establish hidden/text/audio coverage. |
 | ByteDance / Doubao / Seedance / Seedream | [Video watermark option](https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en), [speech metadata/rhythm options](https://docs.volcengine.com/docs/doubao-voice/podcast-api-websocket-v3protocol?lang=en), [structured media labels](https://docs.volcengine.com/docs/intelligent-processing/add-aigc-metadata-guide?lang=zh) | Speech marking defaults off; producer/IDs are caller-configurable. A separate MediaKit custom-mark extractor is not a universal Seedance verifier. |
-| Tencent / Hunyuan | [Video AI notice controls](https://cloud.tencent.com/document/api/1616/119001) | Visible labels do not authenticate the file; hidden checks for other modalities remain unconfirmed. |
+| Tencent / Hunyuan | [Video AI notice controls](https://cloud.tencent.com/document/api/1616/119001); [customer-applied AIGC metadata queries](https://cloud.tencent.com/document/product/460/122025) | Storage request authentication does not authenticate labels. Cloud Infinite capabilities do not establish default Hunyuan/Yuanbao marking. |
 | Baidu / ERNIE | [Image frequency-domain mark and payload](https://ai.baidu.com/ai-doc/NLP/Ml9i5amtk) | Official extraction is not publicly open; Baidu support is needed. |
 | Kuaishou / Kling | [Invisible image/video marks and detection portal](https://kling.ai/docs/ai-content-detection) | No compatible local public decoder or tested API contract established. |
 | Synthesia | [Automatic C2PA and separate visible video notices](https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos) | Editor, API and dubbed visible-label behavior differs; actual credentials still need validation. |
@@ -118,7 +118,7 @@ integration qualified on actual files.
 
 The [structured-label reader](structured-source-labels.md) recognizes supported
 AIGC fields, locators and checksums. Known-name normalization now covers the
-67 families, including `volcengine`, `seedream`, Cartesia, Inworld and SenseTime. Recognizing a known string
+82 families (190 exact aliases), including `volcengine`, `seedream`, Deepgram and Sarvam. Recognizing a known string
 does not show the provider actually uses that field, authenticate it, decode a
 hidden watermark or add confidence. Unknown names/codes and private identifiers
 remain withheld. Version 1 historical and version 2 current records render in
@@ -161,14 +161,16 @@ accuracy benchmark. The test authority is never added to production trust.
 Next priority is qualifying real-provider fixtures for Suno/Bria/Cartesia and the
 available public watermark schemes, then integrating supported routes with
 clear scope and data handling. Restricted production text verification, Muse
-compatibility and the twenty review gaps remain open. No new weights,
+compatibility and the twenty-eight review gaps remain open. No new weights,
 statistical calibration, public confidence threshold or GCP deployment was
 introduced by this inventory.
 
 The [LTX public marking contract](ltx-marking-audio-v1-result.md) adds two
 scoped audio/video records. At that stage, the inventory had 67 families/98 records;
-the subsequent [follow-up search](provider-signal-followup-2026-11-08.md) expands it
-to 71 families/101 records.
+the initial [follow-up search](provider-signal-followup-2026-11-08.md) expanded it
+to 71 families/101 records. The additional speech/mobile/regional sweep now
+records 82 families/105 records, including Deepgram's public speech checker,
+Sarvam's video-only overlay, vivo notices and Tencent metadata-query scopes.
 Its audio code runs locally with exact compatible cached weights; generic
 presence, public-payload recovery and origin authentication remain separate.
 Noise and partial-mark misses are retained. Video implementation is inspected,

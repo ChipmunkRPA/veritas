@@ -1,15 +1,16 @@
 # Provider-signal follow-up: executable routes and remaining gaps
 
 Reviewed 8 November 2026. The source-linked [catalog](provider-signals-catalog.json)
-and [four-modality matrix](provider-signal-matrix.md) now cover **71 provider
-families and 101 signal records**. Twenty families remain explicit search gaps.
+and [four-modality matrix](provider-signal-matrix.md) now cover **82 provider
+families and 105 signal records**. Twenty-eight families remain explicit search gaps.
 These records include public research, visible notices, policies and unconfirmed
 announcements. They are not 101 working detectors or a promise of universal
 provider coverage. Every family has a separate image, video, audio and writing
 state, including unsupported or unresolved scope.
 
-This follow-up rechecked the named major providers, searched 18 existing-family
+The initial follow-up rechecked the named major providers, searched 18 existing-family
 gaps, and added Meitu, Kunlun/Tiangong/Skywork, Shutterstock and Getty/iStock.
+The additional sweep below adds eleven families and four scoped records.
 Queries and primary references are retained per family. A domain search with no
 matching result means this review did not establish a compatible signal; it
 does not establish that a provider never marks its outputs.
@@ -93,5 +94,68 @@ This follow-up made **zero provider-verification requests and zero customer
 uploads**. External customer routes remain disabled. The catalog is research
 documentation and never becomes uploaded-file evidence. Existing model-name
 redaction, USD9.99 prepayment, voice calibration and GCP deferral are unchanged.
-The expanded inventory does not change the existing 155-alias structured-claim
-reader into 71 authenticated provider detectors.
+The expanded inventory and 190-alias structured-claim reader do not establish
+82 authenticated provider detectors.
+
+## Additional sweep: speech, document exports and regional providers
+
+The further search adds Deepgram, Sarvam, vivo/BlueLM, Xiaomi/MiMo, HONOR,
+OPPO/Xiaobu, Moonvalley/Marey, Rime, Smallest AI, NAVER/HyperCLOVA and
+LG AI Research/EXAONE. All four modalities remain explicit for each family.
+Existing gaps for Udio, Fish Audio, Hume, Cohere, AI21 and Perplexity were
+searched again. Queries and focused source findings are retained in the catalog.
+
+| Provider / route | Finding and processing implication |
+|---|---|
+| [Deepgram Flux TTS](https://deepgram.com/watermark) | A public browser checker recognizes its DeepMark audio signal, with detected, not-detected and inconclusive outcomes. Aura is excluded for now. Uploaded video containers cover their soundtrack only. There is no qualified automation contract or local decoder in this app. |
+| [Tencent image](https://cloud.tencent.com/document/product/460/122025), [media](https://cloud.tencent.com/document/product/460/122418) and [document](https://cloud.tencent.com/document/product/460/123077) queries | These retrieve customer-written AIGC fields. Authentication of a storage request does not authenticate the embedded label. The shared field layout can inform bounded local readers; it cannot establish default marking of Hunyuan/Yuanbao outputs. |
+| [Sarvam dubbing exports](https://docs.sarvam.ai/api/api-guides-tutorials/dubbing/how-to/choose-export-formats) | The optional video overlay defaults on. This export feature explicitly does not watermark audio or SRT. Do not extend the video mark to those components or infer absence of every possible mark across Sarvam. |
+| [vivo customer support](https://bbs.vivo.com.cn/newbbs/thread/39000231) | Supported AI photo/video effects can show an AI notice, and a setting hides it on future saved edits. This is a visible claim with unresolved version scope, not a hidden decoder. |
+
+Deepgram's page uses an anti-automation check and shared rate limits. This search
+did not submit any file, bypass the browser check, infer an undocumented endpoint
+or enable a customer route. Its data-handling statements are provider statements,
+not an independently tested retention guarantee. Qualification needs authentic
+marked and unmarked exports, exact input binding, distinct failures and permitted
+integration. It joins the verification queue with CapCut, Suno, Bria and Cartesia.
+
+Several apparent leads remain explicit gaps:
+
+- [Xiaomi's app-store submission guide](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2110)
+  provides AIGC examples for app developers. It does not specify MiMo output
+  marks. [MiMo release notes](https://mimo.mi.com/docs/zh-CN/updates/feature/studio)
+  did not resolve the production-verifier gap.
+- [NAVER's 2024 safety article](https://clova.ai/en/tech-blog/en-navers-approach-to-ai-safety)
+  describes watermark development and C2PA intentions. It does not establish
+  current per-modality deployment or a released verification key.
+- [Rime's terms](https://www.rime.ai/terms) protect any marks it applies; they do
+  not identify current model coverage or a verifier. [Smallest AI's FAQ](https://docs.smallest.ai/voice-agents/resources/faq)
+  says paid users need no attribution or watermark; this does not establish
+  whether an invisible signal exists.
+- [Moonvalley's licensed-training claims](https://www.moonvalley.com/marey),
+  [OPPO's AI product page](https://www.oppo.com/cn/discover/technology/oppo-ai/),
+  HONOR policy-search leads and LG-focused searches did not establish compatible
+  production detectors. [PixVerse's watermark-free plan descriptions](https://app.pixverse.ai/subscribe)
+  do not establish a hidden signal or decoding format.
+
+The separately documented [Tencent Zhuque service](https://cloud.tencent.com/document/product/1552/135974)
+returns statistical image/text classifications. It is a potential detector
+comparison, not recovery of an embedded origin mark or an early-stop signal.
+
+The catalog distinguishes known documentation from deployed checks. It cannot
+promise every provider, version, export, partner or self-hosted derivative.
+Missing marks continue detection. Only the existing qualified signed-credential
+path can currently skip statistical models; newly discovered external routes
+remain disabled pending real-file qualification.
+
+## Local validation of the expanded inventory
+
+All **322 selected backend tests passed** after the final code changes. They
+cover catalog/matrix consistency, stale coverage-count rejection, all 190
+structured-name aliases, hostile and stripped metadata, signed-file/source
+binding, the model-skipping pipeline and report disclosures. Five existing
+PDF-library deprecation warnings were emitted. Static and whitespace checks
+also passed. These are implementation-contract checks, not a fresh accuracy
+benchmark for provider watermarks. This search made zero external verification
+requests and uploaded no customer files. Speech calibration and serving model
+defaults remain unchanged.

@@ -7,7 +7,8 @@ gaps**. This is a curated, sourced inventory, not a guarantee to recognize every
 provider, generation date, model, export or surviving mark. Policies, planned
 features and public research are counted as records, not working detectors.
 The [follow-up](provider-signal-followup-2026-11-08.md) now expands the catalog
-to 71 families/101 records, including the public LTX contract. The current
+to 82 families/105 records, including the public LTX contract and an additional
+speech/mobile/regional-provider sweep. The current
 [matrix](provider-signal-matrix.md) shows the full scope; each source row
 keeps its actual review date and focused search queries.
 

@@ -63,6 +63,16 @@ PROVIDERS = {
     'Freepik': ('freepik', 'magnific'), 'WellSaid': ('wellsaid', 'wellsaid labs'),
     'Voicemod': ('voicemod',), 'OpenMOSS': ('openmoss', 'moss-tts', 'mosi.ai'),
     'Mureka': ('mureka',), 'Krea': ('krea',),
+    'Meitu': ('meitu', 'xiuxiu', 'meiyan', '美图'),
+    'Kunlun / Tiangong / Skywork': ('kunlun', 'tiangong', 'skywork', '天工'),
+    'Shutterstock': ('shutterstock',), 'Getty Images / iStock': ('getty images', 'istock'),
+    'Deepgram': ('deepgram',), 'Sarvam': ('sarvam', 'sarvam ai'),
+    'vivo': ('vivo', 'bluelm', '蓝心'), 'Xiaomi / MiMo': ('xiaomi', 'mimo', '小米'),
+    'HONOR': ('honor', '荣耀'), 'OPPO / Xiaobu': ('oppo', '小布'),
+    'Moonvalley': ('moonvalley', 'marey'), 'Rime': ('rime', 'rime ai'),
+    'Smallest AI': ('smallest ai', 'smallest.ai'),
+    'NAVER / HyperCLOVA': ('naver', 'hyperclova', 'hyperclova x'),
+    'LG AI Research': ('lg ai research', 'exaone'),
 }
 ALIASES = {alias: name for name, aliases in PROVIDERS.items() for alias in aliases}
 DECLARATIONS = {'1': 'Declares AI generation or synthesis', '2': 'Labels possible AI involvement',

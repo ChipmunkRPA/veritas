@@ -1,7 +1,7 @@
 {
   "schema": "provider-signals/1",
   "reviewed_utc": "2026-11-08",
-  "provider_families": 71,
+  "provider_families": 82,
   "purpose": "Research and implementation inventory; never uploaded-file evidence or a guarantee of universal provider coverage.",
   "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage. This is a curated provider-family inventory, not an exhaustive market census. Provider verification scores and watermark-family hits are distinct from trusted documentary declarations.",
   "runtime": {
@@ -1371,16 +1371,62 @@
           "limitations": "Default visible AI notice; disabling requires a console workflow. Not a verified hidden watermark or an all-Hunyuan text/image/audio decoder.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "image",
+            "video",
+            "audio",
+            "text"
+          ],
+          "product_scope": "Tencent Cloud Infinite / COS customer-applied AIGC metadata services; not automatic Hunyuan or Yuanbao output marking",
+          "verification_route": "metadata_query_api",
+          "source_urls": [
+            "https://cloud.tencent.com/document/product/460/122025",
+            "https://cloud.tencent.com/document/product/460/122418",
+            "https://cloud.tencent.com/document/product/460/123077"
+          ],
+          "limitations": "Authenticated storage requests retrieve caller-supplied labels; request authentication does not authenticate embedded claims. Image, media and document operations have different format scopes. Documents are file metadata, not a hidden copied-passage mark. No external endpoint was called; existing local readers cover only their documented subset.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "operations": [
+            "ImageAIGCMetadata",
+            "MediaAIGCMetadata",
+            "DocAIGCMetadata"
+          ],
+          "component_scope": "container_metadata",
+          "response_fields": [
+            "AIGC.Label",
+            "AIGC.ContentProducer",
+            "AIGC.ProduceID",
+            "AIGC.ContentPropagator",
+            "AIGC.PropagateID",
+            "AIGC.ReservedCode1",
+            "AIGC.ReservedCode2"
+          ],
+          "deployment_scope": "customer_applied_service"
         }
       ],
       "review_status": "scoped_documentation",
       "modality_review": {
-        "image": "not_established_by_this_review",
+        "image": "scoped_signal_documented",
         "video": "scoped_signal_documented",
-        "audio": "not_established_by_this_review",
-        "text": "not_established_by_this_review"
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-07"
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:cloud.tencent.com AIGC 标识 检测 API 隐式 标识",
+        "site:cloud.tencent.com/document/product/460 AIGC 元数据 查询 音视频 文档",
+        "site:hunyuan.tencent.com AI 生成 隐式 标识 检测 水印"
+      ],
+      "review_notes": {
+        "sources": [
+          "https://cloud.tencent.com/document/product/1552/135974"
+        ],
+        "finding": "The Zhuque text/image endpoints are statistical classifiers with confidence fields and enterprise access. They are not proof of a recovered provider watermark and do not create a provenance shortcut."
+      }
     },
     {
       "id": "baidu",
@@ -2841,7 +2887,8 @@
       "search_queries": [
         "site:docs.platform.pixverse.ai watermark",
         "site:docs.platform.pixverse.ai watermark metadata",
-        "site:pixverse.ai 隐式 标识"
+        "site:pixverse.ai 隐式 标识",
+        "site:pixverse.ai watermark invisible metadata"
       ],
       "gap": "Focused primary-source searches did not establish a compatible production marking/verification specification. This is a documented search gap, not proof that outputs have no marks.",
       "modality_review": {
@@ -2849,6 +2896,12 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://app.pixverse.ai/subscribe"
+        ],
+        "finding": "Watermark-free plan marketing does not establish a hidden signal, provider authentication, a byte layout or verifier. Gap retained."
       }
     },
     {
@@ -3101,6 +3154,292 @@
         ],
         "finding": "The current FAQ names Bria as its generation provider. That relationship does not establish compatibility with Bria watermark verification or retention of credentials in Getty/iStock exports. A third-party metadata claim was excluded without first-party format/verification support."
       }
+    },
+    {
+      "id": "deepgram",
+      "name": "Deepgram",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Flux TTS speech; Aura verification is described as planned, not covered by this checker",
+          "verification_route": "public_browser_verifier",
+          "source_urls": [
+            "https://deepgram.com/watermark",
+            "https://deepgram.com/product/text-to-speech/flux"
+          ],
+          "limitations": "DeepMark-based audio signal with a public single-file checker. Detected, not-detected and inconclusive states are distinct. MP4/WebM uploads cover sound only. No local decoder or supported automation API was established; browser anti-automation and shared limits apply. No file was uploaded.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "component_scope": "audio_only",
+          "authentication": "Public browser; Cloudflare Turnstile; no account required",
+          "qualification_required": [
+            "authentic marked and unmarked exports",
+            "exact submitted-byte binding",
+            "outcome/error contract",
+            "permitted integration and data handling"
+          ]
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:deepgram.com Aura watermark synthetic audio",
+        "site:developers.deepgram.com watermark verify endpoint DeepMark"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "sarvam",
+      "name": "Sarvam",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Sarvam dubbing MP4 exports; optional composited watermark",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://docs.sarvam.ai/api/api-guides-tutorials/dubbing/how-to/choose-export-formats"
+          ],
+          "limitations": "Video watermark defaults on and can be disabled at job creation. Documentation explicitly says audio and SRT exports are never watermarked by this export feature. Do not extend that statement to every Sarvam model or infer a hidden audio decoder. No exported fixture was tested.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "component_scope": "video_overlay"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:docs.sarvam.ai watermark"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "vivo",
+      "name": "vivo / BlueLM",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Supported vivo AI photo/video effects described by the official customer-service account",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://bbs.vivo.com.cn/newbbs/thread/39000231"
+          ],
+          "limitations": "Official support describes an AI-generated notice and a setting that hides it on subsequently saved edits. No universal software-version scope, hidden decoder or verified provider fixture is established. Absence is not an originality signal.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:vivo.com.cn AI 生成 隐式 标识 水印"
+      ],
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "xiaomi",
+      "name": "Xiaomi / MiMo",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "MiMo 小米 隐式 水印 生成合成 标识 site:mimo.mi.com",
+        "MiMo 小米 隐式 水印 生成合成 标识 site:mi.com"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2110",
+          "https://mimo.mi.com/docs/zh-CN/updates/feature/studio"
+        ],
+        "finding": "HyperOS app-store submission requirements and example AIGC fields do not establish marking in MiMo exports or a compatible production verifier. Product release notes did not resolve this gap."
+      }
+    },
+    {
+      "id": "honor",
+      "name": "HONOR",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:honor.com AI 生成 隐式 标识 水印"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://agreement.itsec.honor.com/asm/agrFile/getHtmlFile?agrNo=1093&branchId=0&country=cn&langCode=zh-cn"
+        ],
+        "finding": "The search index suggested a clause about preserving AI labels. The retrieved page did not establish a product-specific marking format, export coverage or verifier; this lead remains unresolved."
+      }
+    },
+    {
+      "id": "oppo",
+      "name": "OPPO / Xiaobu",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "小布 AI 生成 隐式 标识 水印 site:oppo.com",
+        "小布 AI 生成 隐式 标识 水印 site:heytap.com"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.oppo.com/cn/discover/technology/oppo-ai/",
+          "https://privacy.oppo.com/cn/policy/"
+        ],
+        "finding": "AI editing product descriptions and ordinary camera/location watermarks do not establish an AI-origin marking protocol or decoder. Third-party model relationships are insufficient."
+      }
+    },
+    {
+      "id": "moonvalley",
+      "name": "Moonvalley / Marey",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:moonvalley.com watermark provenance marey",
+        "site:help.moonvalley.com watermark"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.moonvalley.com/marey"
+        ],
+        "finding": "Licensed-training and production-workflow claims do not establish an output watermark, signed credential or verifier."
+      }
+    },
+    {
+      "id": "rime",
+      "name": "Rime",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:rime.ai watermark"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.rime.ai/terms"
+        ],
+        "finding": "Terms prohibit removing any marks embedded by Rime, but do not establish which current model/version emits them or a compatible verification interface. Comparisons discussing competitors are excluded as evidence for Rime outputs."
+      }
+    },
+    {
+      "id": "smallest",
+      "name": "Smallest AI / Waves",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "site:smallest.ai watermark",
+        "site:docs.smallest.ai watermark"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://docs.smallest.ai/voice-agents/resources/faq"
+        ],
+        "finding": "Paid-plan FAQ says no attribution or watermark is required. That is not evidence that an embedded invisible signal is absent. General recommendations and competitor comparisons do not establish marking of its own outputs."
+      }
+    },
+    {
+      "id": "naver",
+      "name": "NAVER / HyperCLOVA",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "HyperCLOVA watermark provenance AI site:clova.ai",
+        "HyperCLOVA watermark provenance AI site:navercorp.com"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://clova.ai/en/tech-blog/en-navers-approach-to-ai-safety"
+        ],
+        "finding": "The 2024 safety article describes developing invisible marks and considering C2PA. It does not establish current per-modality production deployment, a released key or a compatible verifier."
+      }
+    },
+    {
+      "id": "lg",
+      "name": "LG AI Research / EXAONE",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "EXAONE watermark provenance site:lgresearch.ai",
+        "EXAONE watermark provenance site:github.com/LG-AI-EXAONE"
+      ],
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "finding": "Focused primary-source searches did not establish a compatible production marking or verification specification. This is a search gap, not evidence that no marks exist."
+      }
     }
   ],
   "source_observations": [
@@ -3121,7 +3460,11 @@
     "2026-11-08: Adobe Translate Audio/Video documentation explicitly describes credentials for AI speaker voices, translation and lip movements; it does not establish full-file synthesis.",
     "2026-11-08 follow-up: OpenAI textGrain technical report explicitly needs the secret key. Publishing the method does not supply that production key; API watermark generation is opt-in for selected models, not universal text marking.",
     "2026-11-08 follow-up: Recraft conditional marking terms, Canva preservation terms and Ideogram possible safeguards remain documentation observations, not deployed decoder coverage.",
-    "2026-11-08 follow-up: Getty naming Bria as its generation provider does not establish preserved Bria marks or verifier compatibility. Shutterstock July 2023 C2PA intention remains unconfirmed, not current export qualification."
+    "2026-11-08 follow-up: Getty naming Bria as its generation provider does not establish preserved Bria marks or verifier compatibility. Shutterstock July 2023 C2PA intention remains unconfirmed, not current export qualification.",
+    "2026-11-08 additional sweep: Deepgram public checking is specifically Flux TTS audio; Aura detection is described as planned. Video-container acceptance does not imply visual verification. Browser access with Turnstile is not an automation contract.",
+    "2026-11-08 additional sweep: Sarvam export docs explicitly exclude audio/SRT from that video-overlay feature. This is not a universal absence-of-hidden-marks claim.",
+    "2026-11-08 additional sweep: Tencent COS request signatures authorize storage access; they do not authenticate caller-written AIGC metadata. Zhuque classifier confidence is separate from marking detection.",
+    "2026-11-08 additional sweep: HyperOS app-store examples, HONOR policy-search leads, Rime conditional terms, NAVER development announcements and licensed-training claims do not establish current product-compatible decoders."
   ],
   "provider_verifiers_called_during_initial_inventory_review": 0,
   "research_qualification": {
@@ -3146,6 +3489,12 @@
       "provider_families": 50,
       "signal_records": 69,
       "note": "Supplemental primary-source review; individual rows retain their own review dates. Research inventory, not detector coverage."
+    },
+    {
+      "reviewed_utc": "2026-11-08",
+      "provider_families": 71,
+      "signal_records": 101,
+      "note": "Snapshot before the additional audio, mobile-device and regional-provider sweep."
     }
   ],
   "supplemental_review": "provider-signal-review-2026-11-08.md",
@@ -3275,12 +3624,12 @@
   "latest_search": {
     "date": "2026-11-08",
     "report": "provider-signal-followup-2026-11-08.md",
-    "families": 71,
-    "scoped_records": 101,
-    "families_with_no_scoped_specification": 20,
+    "families": 82,
+    "scoped_records": 105,
+    "families_with_no_scoped_specification": 28,
     "provider_verification_requests": 0,
     "customer_uploads": 0,
     "external_customer_routes_enabled": 0,
-    "scope": "Cross-modality follow-up, textGrain method review, 18 targeted existing-family searches and four additional provider families. Record counts include policy and unconfirmed announcements, not operational detectors."
+    "scope": "Additional provider- and modality-focused primary-source sweep: eleven new families, Deepgram Flux TTS public checker, Sarvam video-only overlay, vivo notices and Tencent image/media/document metadata queries. No new external verifier qualified or enabled."
   }
 }

@@ -24,6 +24,14 @@ def test_stale_counts_and_duplicate_families_are_rejected():
         inventory.validate(document)
 
 
+@pytest.mark.parametrize('field', ['families', 'scoped_records', 'families_with_no_scoped_specification'])
+def test_latest_search_cannot_publish_stale_coverage_counts(field):
+    document = catalog()
+    document['latest_search'][field] += 1
+    with pytest.raises(ValueError, match='Latest search counts disagree'):
+        inventory.validate(document)
+
+
 def test_classifier_cannot_become_a_documentary_shortcut():
     document = catalog()
     google = next(p for p in document['providers'] if p['id'] == 'google')
@@ -44,6 +52,12 @@ def test_future_and_version_limited_claims_are_distinct():
 def test_generic_policy_does_not_fill_unestablished_modalities():
     policy = {'kind': 'structured_label', 'modalities': [], 'potential_modalities': list(inventory.MODALITIES)}
     assert all(inventory.cell([policy], m) == 'Gap' for m in inventory.MODALITIES)
+
+
+def test_customer_applied_metadata_service_is_distinct_from_default_output_marking():
+    service = {'kind': 'structured_label', 'modalities': ['image', 'video', 'audio', 'text'],
+               'deployment_scope': 'customer_applied_service'}
+    assert all(inventory.cell([service], m) == 'Metadata service' for m in inventory.MODALITIES)
 
 
 def test_unspecified_export_mark_is_not_a_hidden_watermark_claim():

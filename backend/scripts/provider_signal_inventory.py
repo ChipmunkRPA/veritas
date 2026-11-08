@@ -33,7 +33,9 @@ def cell(signals, modality):
              'publicly_documented_custom_mark': 'Custom mark'}
     applicable = [s for s in signals if modality in s['modalities']
                   and s.get('availability') not in ('announced_future', 'historical')]
-    labels = [names[s['kind']] + (' (version-limited)' if s.get('availability') == 'version_conditional' else '')
+    labels = [('Metadata service' if s.get('deployment_scope') == 'customer_applied_service'
+               and s['kind'] == 'structured_label' else names[s['kind']])
+              + (' (version-limited)' if s.get('availability') == 'version_conditional' else '')
               for s in applicable]
     return ', '.join(dict.fromkeys(labels))
 
@@ -43,6 +45,13 @@ def validate(catalog):
     ids = [p['id'] for p in providers]
     if len(set(ids)) != len(ids) or catalog['provider_families'] != len(providers):
         raise ValueError('Duplicate provider or stale family count')
+    latest = catalog.get('latest_search')
+    if latest is not None and any(latest[key] != expected for key, expected in (
+        ('families', len(providers)),
+        ('scoped_records', sum(len(p['signals']) for p in providers)),
+        ('families_with_no_scoped_specification', sum(not p['signals'] for p in providers)),
+    )):
+        raise ValueError('Latest search counts disagree with the current catalog')
     for provider in providers:
         if set(provider['modality_review']) != set(MODALITIES):
             raise ValueError('Every provider needs all four explicit modality states')
@@ -81,6 +90,7 @@ def render(catalog):
         '“Planned” means an announcement only; “Historical” is not current export coverage. '
         '“Research” identifies a released scheme, without claiming production-provider compatibility. '
         '“Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. '
+        '“Metadata service” identifies customer-applied tags, without establishing default model-output marking. '
         'A generic policy with unresolved export scope does not fill the four cells.',
         '',
         'All external verification routes are disabled for customer files. Only the existing trusted, valid, '

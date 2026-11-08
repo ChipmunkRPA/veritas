@@ -50,3 +50,13 @@ app admission. No serving dependency or confidence changed. Public image/video
 and text family adapters, rights-cleared real-media qualification and app exports
 remain required. External private verifiers are unconfigured; their absence does
 not block this public-family work. No customer media was sent to a provider.
+
+## Executed visual follow-up
+
+The [MIT WAM authored contract](public-visual-watermark-v1-result.md) completed
+72 image cases and96 frame cases, with separate pixel/message/time replay.
+Native partial masks localized well; JPEG/H264 reduced recovery and produced
+false responses. Standalone pinned source bootstrap and procedural inputs are
+publicly reproducible. Real-media/provider qualification and app integration
+remain open. No public-family response enters AI confidence or the trusted
+early-stop gate.

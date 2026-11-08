@@ -104,6 +104,10 @@ including retained false responses and misses. It is not yet a serving detector
 or evidence of Muse compatibility. The separate [fresh speech/background study](public-audioseal-speech-v2-result.md)
 completed576 cases with retained false responses and strong-noise misses; the
 fixed public-family check remains outside serving, confidence and early stopping.
+The separate [visual native contract](public-visual-watermark-v1-result.md) also
+completed72 image and96 frame cases with exact mask/source-time replay.
+Compression-related misses and false responses remain; real-media/provider
+qualification and app admission are still open.
 Matching key/payload, scheme, generation
 configuration, tokenizer and license remain necessary. Public detection-key
 schemes exist; “every detector needs a secret provider key” would be incorrect.

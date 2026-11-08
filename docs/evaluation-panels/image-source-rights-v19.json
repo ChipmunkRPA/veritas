@@ -1,0 +1,453 @@
+{
+  "schema": "chipmunk.image-source-rights-public-package/19",
+  "summary": {
+    "schema": "chipmunk.image-source-rights-summary/19",
+    "scope": "Metadata compatibility and consumed-source inventory, not legal clearance or camera-authenticity proof.",
+    "input_sha256": {
+      "tgif-README.md": "e13d5f8e81c2292c3c95394eb372d5cfe278f34c1edda316a86fa937b19b4eb2",
+      "tgif-LICENSE.txt": "925e1b06fa82e379bad225eb67723f7f296266d61b9fe6ac83445cc9778b8e2c",
+      "tgif-inpaint-loop.py.txt": "eaef170e4cd1c5e55007242db6d55f78eaec4025b197b0ad49b58e49f6a08757",
+      "coco-terms.htm": "bd019f88ee44c29b2f19c5b99888cf5bc2e7c16f57b6e52af8ed3a60462e8bdd",
+      "coco-download.htm": "62e500d3e7be567d97c295f5f56c95a416618d0770dd334a0ab943a4c1e6954b",
+      "metadata-flux/flux1filldev_testing.csv": "987a60a2ebb226291440cd54dc14b4c02f9a563c402d0765446053cf50f25f9e",
+      "metadata-flux/flux1filldev_training.csv": "b7341d7988f6dd0c82abd79f6aa4c681927ebc79621aca1fa1a46bcf68515d59",
+      "metadata-flux/flux1filldev_validation.csv": "31985993d1a50c25350e2789eea7fadf8424218077dc116ecd9103587f329f9a",
+      "metadata-flux/orig-flux_testing.csv": "0f5bfd655def1653c2913329df671772e4c15e1c1aa9fbe1e835499d96acf7ed",
+      "metadata-flux/orig-flux_training.csv": "0f5bfd655def1653c2913329df671772e4c15e1c1aa9fbe1e835499d96acf7ed",
+      "metadata-flux/orig-flux_validation.csv": "0f5bfd655def1653c2913329df671772e4c15e1c1aa9fbe1e835499d96acf7ed",
+      "metadata/orig_testing.csv": "7fbc74f0a0f5416f7a4ea66ab943ae81530bcf3f4d716dee6cb5860aaacf1f4b",
+      "metadata/orig_training.csv": "6952597fe883f5907f5dd91ef0f1fea34b86f29efe0de3f51ef4e3b3f33dd05f",
+      "metadata/orig_validation.csv": "4d87de4ad7ab24ae7bbb4a911f83aa98657785281aa706d1ae50581ddd8c8acf",
+      "metadata/ps_testing.csv": "96dedc49c99af4f8ed72ecbcdc18b4338946e181c6e49022aba828c8f0d61d2c",
+      "metadata/ps_training.csv": "91d5dd47ceea17b373242de2cc5bcea6d391caf4025e8b5d94a7a7a902375bf6",
+      "metadata/ps_validation.csv": "75d9301b84fa7eb26afe968ffdfd1b671cf7e3e084fa194e5b6cf0a41f5af2b4",
+      "metadata/sd2_testing.csv": "e63b68f42ef235f9a33773e7c1eed62048ebb0a8743924cba83879be654080ff",
+      "metadata/sd2_training.csv": "cbb5c5db4514c7db02aeab811376681d301e3019ff69b84b8a0cf05943889851",
+      "metadata/sd2_validation.csv": "dd9b63c2dca0afafbd79e2387264129c0380ac22b96a93332aad5daeac023a90",
+      "annotations_trainval2017.zip": "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268"
+    },
+    "coco_members": {
+      "annotations/captions_train2017.json": {
+        "bytes": 91865115,
+        "sha256": "4b62086319480e0739ef390d04084515defb9c213ff13605a036061e33314317",
+        "zip_crc32": 3427477015,
+        "image_count": 118287
+      },
+      "annotations/captions_val2017.json": {
+        "bytes": 3872473,
+        "sha256": "afe3b30e403dd7f228e2373023abbd60042a6e10ec6874d3652df034d289ebb9",
+        "zip_crc32": 1836330781,
+        "image_count": 5000
+      }
+    },
+    "license_table": [
+      {
+        "url": "http://creativecommons.org/licenses/by-nc-sa/2.0/",
+        "id": 1,
+        "name": "Attribution-NonCommercial-ShareAlike License"
+      },
+      {
+        "url": "http://creativecommons.org/licenses/by-nc/2.0/",
+        "id": 2,
+        "name": "Attribution-NonCommercial License"
+      },
+      {
+        "url": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+        "id": 3,
+        "name": "Attribution-NonCommercial-NoDerivs License"
+      },
+      {
+        "url": "http://creativecommons.org/licenses/by/2.0/",
+        "id": 4,
+        "name": "Attribution License"
+      },
+      {
+        "url": "http://creativecommons.org/licenses/by-sa/2.0/",
+        "id": 5,
+        "name": "Attribution-ShareAlike License"
+      },
+      {
+        "url": "http://creativecommons.org/licenses/by-nd/2.0/",
+        "id": 6,
+        "name": "Attribution-NoDerivs License"
+      },
+      {
+        "url": "http://flickr.com/commons/usage/",
+        "id": 7,
+        "name": "No known copyright restrictions"
+      },
+      {
+        "url": "http://www.usa.gov/copyright.shtml",
+        "id": 8,
+        "name": "United States Government Work"
+      }
+    ],
+    "csv_counts": {
+      "metadata/orig_training.csv": {
+        "rows": 2440,
+        "unique_source_ids": 1558
+      },
+      "metadata/orig_validation.csv": {
+        "rows": 341,
+        "unique_source_ids": 341
+      },
+      "metadata/orig_testing.csv": {
+        "rows": 343,
+        "unique_source_ids": 343
+      },
+      "metadata/ps_training.csv": {
+        "rows": 14640,
+        "unique_source_ids": 1558
+      },
+      "metadata/ps_validation.csv": {
+        "rows": 2046,
+        "unique_source_ids": 341
+      },
+      "metadata/ps_testing.csv": {
+        "rows": 2058,
+        "unique_source_ids": 343
+      },
+      "metadata/sd2_training.csv": {
+        "rows": 14640,
+        "unique_source_ids": 1558
+      },
+      "metadata/sd2_validation.csv": {
+        "rows": 2046,
+        "unique_source_ids": 341
+      },
+      "metadata/sd2_testing.csv": {
+        "rows": 2058,
+        "unique_source_ids": 343
+      },
+      "metadata-flux/flux1filldev_training.csv": {
+        "rows": 14244,
+        "unique_source_ids": 1513
+      },
+      "metadata-flux/flux1filldev_validation.csv": {
+        "rows": 1980,
+        "unique_source_ids": 330
+      },
+      "metadata-flux/flux1filldev_testing.csv": {
+        "rows": 1986,
+        "unique_source_ids": 331
+      },
+      "metadata-flux/orig-flux_training.csv": {
+        "rows": 331,
+        "unique_source_ids": 331
+      },
+      "metadata-flux/orig-flux_validation.csv": {
+        "rows": 331,
+        "unique_source_ids": 331
+      },
+      "metadata-flux/orig-flux_testing.csv": {
+        "rows": 331,
+        "unique_source_ids": 331
+      }
+    },
+    "all_sources": {
+      "sources": 2242,
+      "license_status": {
+        "additional_rights_review": 3,
+        "excluded_no_derivatives": 124,
+        "excluded_noncommercial": 1518,
+        "metadata_by": 400,
+        "metadata_by_sa": 197
+      },
+      "preliminary_metadata_compatible": 597,
+      "training_admitted": 0,
+      "attribution_unverified": 2242,
+      "source_bytes_lineage_unverified": 2242
+    },
+    "publisher_base_roles": {
+      "training": {
+        "sources": 1558,
+        "license_status": {
+          "additional_rights_review": 1,
+          "excluded_no_derivatives": 90,
+          "excluded_noncommercial": 1035,
+          "metadata_by": 292,
+          "metadata_by_sa": 140
+        },
+        "preliminary_metadata_compatible": 432,
+        "training_admitted": 0,
+        "attribution_unverified": 1558,
+        "source_bytes_lineage_unverified": 1558
+      },
+      "validation": {
+        "sources": 341,
+        "license_status": {
+          "additional_rights_review": 2,
+          "excluded_no_derivatives": 24,
+          "excluded_noncommercial": 233,
+          "metadata_by": 54,
+          "metadata_by_sa": 28
+        },
+        "preliminary_metadata_compatible": 82,
+        "training_admitted": 0,
+        "attribution_unverified": 341,
+        "source_bytes_lineage_unverified": 341
+      },
+      "testing": {
+        "sources": 343,
+        "license_status": {
+          "excluded_no_derivatives": 10,
+          "excluded_noncommercial": 250,
+          "metadata_by": 54,
+          "metadata_by_sa": 29
+        },
+        "preliminary_metadata_compatible": 83,
+        "training_admitted": 0,
+        "attribution_unverified": 343,
+        "source_bytes_lineage_unverified": 343
+      }
+    },
+    "consumed_local_sources": {
+      "sources": 240,
+      "license_status": {
+        "excluded_no_derivatives": 7,
+        "excluded_noncommercial": 175,
+        "metadata_by": 38,
+        "metadata_by_sa": 20
+      },
+      "preliminary_metadata_compatible": 58,
+      "training_admitted": 0,
+      "attribution_unverified": 240,
+      "source_bytes_lineage_unverified": 240
+    },
+    "publisher_role_intersections": {
+      "original": {
+        "training/validation": 0,
+        "training/testing": 0,
+        "validation/testing": 0
+      },
+      "firefly": {
+        "training/validation": 0,
+        "training/testing": 0,
+        "validation/testing": 0
+      },
+      "sd2": {
+        "training/validation": 0,
+        "training/testing": 0,
+        "validation/testing": 0
+      },
+      "flux-fill": {
+        "training/validation": 0,
+        "training/testing": 0,
+        "validation/testing": 0
+      },
+      "flux-original": {
+        "training/validation": 331,
+        "training/testing": 331,
+        "validation/testing": 331
+      }
+    },
+    "family_vs_base_role_counts": {
+      "firefly": {
+        "training": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        },
+        "validation": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        },
+        "testing": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        }
+      },
+      "sd2": {
+        "training": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        },
+        "validation": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        },
+        "testing": {
+          "missing_from_base_original": 0,
+          "outside_base_original": 0
+        }
+      },
+      "flux-fill": {
+        "training": {
+          "missing_from_base_original": 45,
+          "outside_base_original": 0
+        },
+        "validation": {
+          "missing_from_base_original": 11,
+          "outside_base_original": 0
+        },
+        "testing": {
+          "missing_from_base_original": 12,
+          "outside_base_original": 0
+        }
+      },
+      "flux-original": {
+        "training": {
+          "missing_from_base_original": 1558,
+          "outside_base_original": 331
+        },
+        "validation": {
+          "missing_from_base_original": 341,
+          "outside_base_original": 331
+        },
+        "testing": {
+          "missing_from_base_original": 12,
+          "outside_base_original": 0
+        }
+      }
+    },
+    "training_eligible_after_full_review": 0,
+    "missing_coco_records": 0,
+    "source_original_digest_variants": {
+      "1": 240
+    },
+    "new_neural_forwards": 0,
+    "fit_or_confidence_change": false,
+    "limitations": [
+      "BY/BY-SA metadata is a preliminary commercial/adaptation filter, not a final grant.",
+      "NC, ND, unknown and other restricted/unreviewed records are not admitted.",
+      "Photographer attribution, underlying high-resolution pixels and transformations remain unverified.",
+      "The publisher fetches higher-resolution Flickr bytes, may rotate them, and crops model-specific originals.",
+      "TGIF ShareAlike obligations, source terms, privacy and generator-output terms need separate review.",
+      "No raw photo, new source pairing or private vector is in this public aggregate.",
+      "Consumed files are development data; no role name makes them fresh confirmation."
+    ]
+  },
+  "separate_local_full_review": {
+    "schema": "chipmunk.image-source-rights-review/19",
+    "public_metadata_counts_match": true,
+    "source_records_reconstructed": 2242,
+    "private_consumed_inventory_assessed": true,
+    "private_consumed_source_count": 240,
+    "private_source_rows_match": true,
+    "freshness_or_training_permission_asserted": false,
+    "outside_human_review_claimed": false,
+    "summary_sha256": "0d534405807c578d59fa9087e7d3a9218ed761c1eb3ac6f7483230e38870a650",
+    "review_program_sha256": "5e634b7522187f6710a78ed0d7be811d07ef7ed113176c73f9a01db6a80eaa11",
+    "limitations": "Separate local arithmetic/source reconstruction, not an outside human review or per-photo attribution/lineage clearance."
+  },
+  "public_only_local_review": {
+    "schema": "chipmunk.image-source-rights-review/19",
+    "public_metadata_counts_match": true,
+    "source_records_reconstructed": 2242,
+    "private_consumed_inventory_assessed": false,
+    "private_consumed_source_count": null,
+    "private_source_rows_match": null,
+    "freshness_or_training_permission_asserted": false,
+    "outside_human_review_claimed": false,
+    "summary_sha256": "0d534405807c578d59fa9087e7d3a9218ed761c1eb3ac6f7483230e38870a650",
+    "review_program_sha256": "5e634b7522187f6710a78ed0d7be811d07ef7ed113176c73f9a01db6a80eaa11",
+    "limitations": "Separate local arithmetic/source reconstruction, not an outside human review or per-photo attribution/lineage clearance."
+  },
+  "rights_review_queue_summary": {
+    "schema": "chipmunk.image-photo-review-queue-summary/19",
+    "audited_summary_sha256": "0d534405807c578d59fa9087e7d3a9218ed761c1eb3ac6f7483230e38870a650",
+    "source_review_sha256": "05ff3069f04804995d4eda4f5edfe4c12d50246acc7dec9cab34ca4a2a46e099",
+    "private_queue_sha256": "8ec6bf88c25ee969310a5a7c0c37821202aafa58f69dbee45c1bce5195f8f4a9",
+    "program_sha256": "cf5746e66d1bdd9320d4faf3441d6dc78e885a1f8da33180d2d2ccb86129793e",
+    "source_category_diagnostics": {
+      "training": {
+        "rows": 2440,
+        "distinct_source_category_pairs": 2440,
+        "distinct_photos": 1558
+      },
+      "validation": {
+        "rows": 341,
+        "distinct_source_category_pairs": 341,
+        "distinct_photos": 341
+      },
+      "testing": {
+        "rows": 343,
+        "distinct_source_category_pairs": 343,
+        "distinct_photos": 343
+      }
+    },
+    "publisher_roles": {
+      "training": {
+        "preliminary_metadata_compatible": 432,
+        "all_three_generators": 420,
+        "all_three_already_locally_consumed": 0,
+        "not_locally_consumed_review_queue": 420,
+        "admitted_to_training": 0
+      },
+      "validation": {
+        "preliminary_metadata_compatible": 82,
+        "all_three_generators": 79,
+        "all_three_already_locally_consumed": 0,
+        "not_locally_consumed_review_queue": 79,
+        "admitted_to_training": 0
+      },
+      "testing": {
+        "preliminary_metadata_compatible": 83,
+        "all_three_generators": 78,
+        "all_three_already_locally_consumed": 54,
+        "not_locally_consumed_review_queue": 24,
+        "admitted_to_training": 0
+      }
+    },
+    "queued_source_photos": 523,
+    "admitted_to_training": 0,
+    "neural_forwards": 0,
+    "purpose": "Prioritized private rights/lineage review only; these are not frozen fit/calibration/confirmation assignments.",
+    "limitations": [
+      "Not locally consumed does not establish freshness, permission, source authenticity or absence of external pretraining overlap.",
+      "The FLUX original CSV filenames are not used to assign roles; actual original/generation source IDs determine the queue.",
+      "All category/generator/format variants of a photograph must stay one statistical source group.",
+      "No photo is admitted until the required rights and lineage checks are completed in a separate version."
+    ]
+  },
+  "guarded_phases": {
+    "acquire-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 48152576,
+      "sample_errors": 0,
+      "duration_s": 20.20885079202708,
+      "seconds_limit": 900
+    },
+    "audit-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 437157888,
+      "sample_errors": 0,
+      "duration_s": 1.5771841669920832,
+      "seconds_limit": 900
+    },
+    "review-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 576290816,
+      "sample_errors": 0,
+      "duration_s": 1.3144499169429764,
+      "seconds_limit": 900
+    },
+    "public-review-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 505167872,
+      "sample_errors": 0,
+      "duration_s": 1.039210999966599,
+      "seconds_limit": 900
+    }
+  },
+  "verification": {
+    "authored_tests_passed": 52,
+    "authored_tests_skipped": 0,
+    "junit_sha256": "cf69e004ef60fcda92c1d2d919f9fef313630a75409b9e041355d40ce2e4c10a",
+    "code_sha256": {
+      "backend/scripts/image_source_rights_v19.py": "2faf2eb06f16440fbf0ccb0d005fed615299e3f51b3920e556abb16364c163c1",
+      "backend/scripts/image_rights_runtime_v19.py": "1b9954b44b376dfa12208cac84b3a9456db12c1d3aa303a89349f50979291535",
+      "backend/scripts/review_image_rights_v19.py": "5e634b7522187f6710a78ed0d7be811d07ef7ed113176c73f9a01db6a80eaa11",
+      "backend/scripts/prepare_image_training_review_v19.py": "cf5746e66d1bdd9320d4faf3441d6dc78e885a1f8da33180d2d2ccb86129793e",
+      "backend/scripts/export_image_rights_v19.py": "93f6b24332a81d62ae84fbc929fa5bb8702e168be60e280d7f50628b69ca0b62",
+      "backend/tests/test_image_source_rights_v19.py": "539af6ab0f224630549988c4ff288eb432d27be17fcfbd2fecd377a1586c203c",
+      "backend/tests/test_image_training_review_v19.py": "a0f11a3f7ab58087d1515ceb3d0d6efbd6db4002c28dadcc33fa61794ed1a763",
+      "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539"
+    }
+  },
+  "publication": "Aggregate counts, public license tables and hashes only. No photographs, new source IDs/pairings, full private inventories, neural maps or private weights.",
+  "release_decision": "No training admission, model promotion, new inference, overall-confidence change, cloud deployment or outside human review."
+}

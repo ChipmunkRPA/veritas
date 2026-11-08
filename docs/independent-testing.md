@@ -13,6 +13,14 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+For a model-free audit of photo licenses and source grouping, the
+[image training-data review](image-source-rights-v19-result.md) provides a
+public-only local command path. It downloads about253MB of official/pinned
+metadata and no photographs. All2,242 metadata source records and per-role
+counts reproduce without the private pairings; attribution/pixel lineage and
+training permission remain unestablished. Its52 authored local tests also cover
+used-source exclusion and inconsistent role files. GitHub Actions stays disabled.
+
 For the new localizers' source-coverage and pixel-projection checks, use the32
 authored tests below (NumPy, Pillow, Torch and pytest; no weights or photos):
 
@@ -61,6 +69,7 @@ separately acquired study data.
 
 | Package | What can be reproduced | Current evidence and limitation |
 | --- | --- | --- |
+| [Image source rights/grouping](image-source-rights-v19-result.md) | Standard-library public metadata/count reviewer after pinned metadata acquisition; no images, model weights or private pairings required | Full local private reconstruction and public-only replay pass for2,242 photos;597 pass a preliminary license filter.523 queued for attribution/lineage review, none admitted to training. Misnamed FLUX original files excluded from role assignment; actual generation splits disjoint. Not detector accuracy, final rights clearance or outside human participation. |
 | [Full-source localizer v18](image-relayformer-v18-result.md) | Frozen native/source reviewer, independent OpenCV/IEEE ranking and contingency counts; exact panel additionally requires private sources and permitted cached weights | All384 inputs/798 project forwards complete. Full384-map repeat and both genuine-point refits pass. Useful regions0/48 per format vs9/48 native and6/48 JPEG current; rejected. Raw photographs/maps remain private; no fresh accuracy, serving admission or outside human review. |
 | [Controlled writing-span learning](writing-spans-v7-result.md) | Public source construction, native loaders, two small learners, calibration/points, and full local source/refit reviewer; exact panel requires private source plan and separately acquired licensed CSV | All992 planned documents and full source/native/refit replay passed. All864 diagnostic arm masks recounted; both learned heads and three calibrators/points refit exactly. Interval found38/128 useful mixed locations vs45/128 current and lost27 previously useful documents; rejected as replacement. Consumed source groups, no serving confidence, fresh-author or outside human review claim. |
 | [Magnified image crops](image-iml-zoom-v16-result.md) | Public authored grid/point arithmetic and complete aggregate results; native source/grid replay requires the retained private panel | All384 candidate variants and96 ordinary-reference runs completed. Candidate found0/48 useful edits per format versus9/48 native and6/48 JPEG current; rejected. Strict real-source independent-mask audit remains failed. Full post-result canonical/sensitivity audit retains25/768 ungated metric discrepancies and one changed point; rejection unchanged. Actual Linux continuous arithmetic passes, without outside human review or fresh accuracy. |

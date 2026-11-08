@@ -81,6 +81,17 @@ integration remains unfinished.
 
 ## Progress on 8 November
 
+- Audited actual per-photo image metadata before regional fine-tuning:2,242
+  distinct source photos,597 preliminary BY/BY-SA-compatible records,523 queued
+  for private attribution/lineage review after common-generator/source exclusions.
+  Publisher training rows represent1,558 source photos; three FLUX original
+  CSVs identically contain331 test photos and cannot assign training roles.
+  Actual generation splits are disjoint. Full separate local reconstruction and
+  public-only replay pass, plus52 authored tests. No photo is admitted to training;
+  only24 unconsumed compatible three-generator test sources remain, so additional
+  permitted sources are needed for a48-source confirmation.
+  [Complete findings and reproduction](image-source-rights-v19-result.md).
+
 - Completed the new source-preserving image localizer comparison and complete
   native replay:384 inputs,798 project-source forwards, no skipped/failed
   images. All384 float32 maps and separate IEEE/component reconstruction match;

@@ -10,6 +10,14 @@ or a generic dataset link.
 
 ## Latest review entry points (8 November 2026)
 
+- [Image training-data rights/grouping audit](../image-source-rights-v19-result.md):
+  per-photo license and source-group counts across2,242 photos;597 preliminary
+  metadata-compatible records and a523-photo private rights-review queue.
+  Full local private-source reconstruction and public-only replay pass;52 tests.
+  Misnamed FLUX original CSVs are explicit, actual generation roles are disjoint,
+  and no photo is admitted to training. Public aggregates/hashes only; no photos,
+  new pairings, model inference, accuracy or outside human review claim.
+
 - [Full-source regional localizer](../image-relayformer-v18-result.md):
   all384 planned inputs,798 project-source forwards and a full exact native
   replay, independent IEEE/component ranking and288 diagnostic mask counts.

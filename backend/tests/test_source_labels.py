@@ -254,3 +254,74 @@ def test_cancellation_during_metadata_parsing_is_never_swallowed(tmp_path):
 
     with pytest.raises(Cancelled):
         labels.inspect_file(path, 'image', hashlib.sha256(data).hexdigest(), check)
+
+
+def document_archive(compression=zipfile.ZIP_DEFLATED):
+    target = io.BytesIO()
+    xml = ('<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/custom-properties" '
+        'xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">'
+        '<property name="AIGC"><vt:lpwstr>' + html.escape(claim('Gemini')) + '</vt:lpwstr></property></Properties>')
+    with zipfile.ZipFile(target, 'w', compression=compression) as archive:
+        archive.writestr('docProps/custom.xml', xml)
+    return target.getvalue()
+
+
+@pytest.mark.parametrize('damage', ['zip64_override', 'multi_disk', 'wrong_count', 'wrong_offset', 'wrong_comment'])
+def test_document_directory_bounds_are_checked_before_zipfile(tmp_path, monkeypatch, damage):
+    data = document_archive()
+    end = data.rfind(b'PK\x05\x06')
+    trailer = bytearray(data[end:])
+    if damage == 'zip64_override':
+        # A real ZIP64 locator can override apparently small legacy sizes.
+        directory_size, offset = struct.unpack('<2I', trailer[12:20])
+        extended = struct.pack('<4sQ2H2I4Q', b'PK\x06\x06', 44, 45, 45, 0, 0, 1, 1,
+            2**32 + directory_size, offset)
+        locator = struct.pack('<4sIQI', b'PK\x06\x07', 0, end, 1)
+        data = data[:end] + extended + locator + trailer
+    else:
+        if damage == 'multi_disk':
+            trailer[4:6] = struct.pack('<H', 1)
+        elif damage == 'wrong_count':
+            trailer[8:12] = b'\0' * 4
+        elif damage == 'wrong_offset':
+            trailer[16:20] = struct.pack('<I', 1)
+        else:
+            trailer[20:22] = struct.pack('<H', 10)
+        data = data[:end] + trailer
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError('An unbounded directory must not reach ZipFile')
+
+    monkeypatch.setattr(labels.zipfile, 'ZipFile', forbidden)
+    got = read(tmp_path, data, 'document')
+    assert got['status'] == 'partial' and got['records'] == []
+
+
+@pytest.mark.parametrize('compression', [zipfile.ZIP_BZIP2, zipfile.ZIP_LZMA])
+def test_unbounded_document_compression_is_refused_before_open(tmp_path, monkeypatch, compression):
+    data = document_archive(compression)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Only bounded stored/deflate metadata may be opened')
+
+    monkeypatch.setattr(zipfile.ZipFile, 'open', forbidden)
+    got = read(tmp_path, data, 'document')
+    assert got['status'] == 'partial' and got['records'] == []
+
+
+def test_document_reader_reuses_the_verified_file_descriptor(tmp_path, monkeypatch):
+    data = document_archive()
+    path = tmp_path / 'source.bin'
+    path.write_bytes(data)
+    original = zipfile.ZipFile
+    opened = []
+
+    def descriptor_only(file, *args, **kwargs):
+        assert hasattr(file, 'read') and hasattr(file, 'seek'), 'Do not reopen a potentially replaced path'
+        opened.append(file)
+        return original(file, *args, **kwargs)
+
+    monkeypatch.setattr(labels.zipfile, 'ZipFile', descriptor_only)
+    got = labels.inspect_file(path, 'document', hashlib.sha256(data).hexdigest())
+    assert opened and got['status'] == 'checked'
+    assert got['records'][0]['claimed_provider'] == 'Google / Gemini'

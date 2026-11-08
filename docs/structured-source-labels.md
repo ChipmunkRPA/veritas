@@ -72,6 +72,12 @@ limits can leave a valid file's labels unassessed, which is reported explicitly.
 Cancellation is preserved; ordinary metadata parse errors remain partial
 evidence instead of becoming authorship conclusions.
 
+The OOXML directory is checked before the archive library reads it: both its
+declared size/count and its actual bounded entries must agree. ZIP64 overrides,
+multiple-disk layouts, inconsistent offsets/comments and unsupported metadata
+compression remain incomplete checks. Only bounded stored/deflate custom
+properties are opened, using the already verified source descriptor.
+
 No model weights, serving calibration or statistical thresholds change.
 Inspection is inside the prepaid analysis pipeline. No customer files are sent
 to external providers. Stripe test/live payment enforcement is unchanged.
@@ -114,3 +120,7 @@ These are authored software and export tests, not real provider watermark
 accuracy validation. No private provider key, external upload, serving model
 replacement or new model dependency is involved. Outside human reviewers remain
 zero. Statistical detection quality remains separate development work.
+
+A further 57 reader and full-flow checks pass after the OOXML preflight
+hardening, including malformed-directory refusal before archive opening,
+unsupported compression refusal and reuse of the verified file descriptor.

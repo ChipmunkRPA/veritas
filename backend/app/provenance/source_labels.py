@@ -378,23 +378,42 @@ class Reader:
             at = pos
         raise InvalidMetadata('Initial Ogg metadata scan limit reached')
 
-    def docx(self, path):
+    def docx(self):
         self.checked.append('OOXML custom AIGC property')
         tail = self.at(max(0, self.size - 65536), min(65536, self.size))
         at = tail.rfind(b'PK\x05\x06')
         if at < 0 or len(tail) - at < 22:
             raise InvalidMetadata('Unsupported document directory')
-        directory = tail[at:at + 22]
-        if int.from_bytes(directory[10:12], 'little') > 2048 or int.from_bytes(directory[12:16], 'little') > 1024 * 1024:
-            raise InvalidMetadata('Oversized document directory')
-        with zipfile.ZipFile(path) as archive:
+        _, disk, directory_disk, disk_entries, entries, size, offset, comment = struct.unpack('<4s4H2IH', tail[at:at + 22])
+        end_record = self.size - len(tail) + at
+        # ZIP64 can override the legacy bounds, even when those legacy fields
+        # are small. Refuse it before ZipFile reads its directory into memory.
+        locator = self.at(end_record - 20, 4) if end_record >= 20 else b''
+        if (disk or directory_disk or disk_entries != entries or entries > 2048 or size > 1024 * 1024
+                or offset + size != end_record or at + 22 + comment != len(tail) or locator == b'PK\x06\x07'):
+            raise InvalidMetadata('Unsupported or oversized document directory')
+        cursor, counted = offset, 0
+        while cursor < end_record:
+            if end_record - cursor < 46 or counted >= 2048:
+                raise InvalidMetadata('Unsupported document directory entries')
+            header = self.at(cursor, 46)
+            name, extra, annotation, start_disk = struct.unpack('<4H', header[28:36])
+            length = 46 + name + extra + annotation
+            if header[:4] != b'PK\x01\x02' or start_disk or cursor + length > end_record:
+                raise InvalidMetadata('Invalid document directory entry')
+            cursor, counted = cursor + length, counted + 1
+        if counted != entries:
+            raise InvalidMetadata('Inconsistent document directory count')
+        # Reuse the verified source descriptor, rather than reopening its path.
+        with zipfile.ZipFile(self.stream) as archive:
             members = [i for i in archive.infolist() if i.filename == 'docProps/custom.xml']
             if len(members) > 1:
                 raise InvalidMetadata('Duplicate document metadata member')
             if not members:
                 return
             member = members[0]
-            if member.file_size > MAX_PACKET or member.flag_bits & 1:
+            if (member.file_size > MAX_PACKET or member.compress_size > MAX_PACKET or member.flag_bits & 1
+                    or member.compress_type not in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED)):
                 raise InvalidMetadata('Unsupported document metadata member')
             with archive.open(member) as stream:
                 root = _xml(stream.read(MAX_PACKET + 1))
@@ -470,7 +489,7 @@ def inspect_file(path: Path, kind: str, expected_sha256: str, check=None) -> dic
             elif kind == 'audio' and magic.startswith(b'OggS'):
                 reader.ogg()
             elif kind == 'document' and magic.startswith(b'PK\x03\x04'):
-                reader.docx(path)
+                reader.docx()
             elif kind == 'document' and magic.startswith(b'%PDF-'):
                 reader.pdf(path)
             else:

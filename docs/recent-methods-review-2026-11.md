@@ -42,9 +42,10 @@ projection from its complementary residual and trains with label-preserving
 environment interventions. This targets lighting/style shortcuts rather than
 assuming a high response proves a forgery. Its guarantees depend on the
 interventions and finite data. For our program, paired compression, lighting and
-ordinary editing controls must accompany any new feature method. The prepared
-48-pair JPEG holdout remains a fixed test of the existing candidate, not a new
-training set for this idea. No EISL implementation or checkpoint was imported;
+ordinary editing controls must accompany any new feature method. The 48-pair
+JPEG confirmation is now complete: the candidate failed three fixed gates and
+was rejected. Those sources are consumed development data, not another fresh
+holdout. No EISL implementation or checkpoint was imported;
 an independent feature-method prototype would be a separately frozen study.
 
 ## Video: explain the temporal features and context

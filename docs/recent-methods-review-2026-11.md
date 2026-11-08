@@ -102,3 +102,11 @@ appropriate data. No new detection model is admitted by this review, and no
 claim of improved detection quality follows from reading the papers. Remaining
 work includes actual method development, frozen comparisons, fresh controls,
 full-app verification and outside human testing.
+
+The [subsequent factorial image experiment](image-region-point-v15-result.md)
+separately tests accurate context means and calibration of actual displayed
+components. It passes the complete new native arithmetic audit but fails pooled
+localization improvement, so no arm is adopted. The
+[broader signal search](provider-signal-broad-search-2026-11-08.md) also adds
+CapCut-family verification, hosted Cosmos marking and other scoped source
+records without presenting them as admitted detectors.

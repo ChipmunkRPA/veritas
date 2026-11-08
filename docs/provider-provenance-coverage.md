@@ -1,14 +1,14 @@
 # Provider signals and the provenance-first gate
 
 Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **57 provider families**, all four modality fields, **83 scoped signal
+covers **67 provider families**, all four modality fields, **96 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
-Forty-four families have scoped documentation, including announcements or
-policies with unresolved export scope; thirteen remain review gaps.
+Forty-eight families have scoped documentation, including announcements or
+policies with unresolved export scope; nineteen remain review gaps.
 These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
 The [four-modality matrix](provider-signal-matrix.md) and
-[latest supplemental review](provider-signal-expansion-2026-11-08.md) distinguish current
+[latest broader search](provider-signal-broad-search-2026-11-08.md) distinguish current
 marking documentation, future commitments and missing verification routes.
 Individual provider rows retain their actual review dates.
 
@@ -60,8 +60,8 @@ their saved calculations.
 | Google / Gemini / Imagen / Veo / Lyria / NotebookLM | [SynthID for supported image, video, audio and text; public verification portal](https://deepmind.google/models/synthid/) | Public text reference code does not contain the production Gemini key. |
 | Meta / Muse | [Custom Muse Image marking and public Content Seal research schemes](https://github.com/facebookresearch/content-seal) | Public AudioSeal/image/video/text research implementations do not automatically match Muse production. |
 | xAI / Grok | [Supported API text watermark and access-controlled verifier](https://docs.x.ai/developers/advanced-api-usage/watermarking); [visible image/video marks](https://docs.x.ai/grok/faq) | A copied response header or logo is not file authentication. |
-| Microsoft / Azure / Copilot | [Selected hosted C2PA and invisible marks](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure); [verification API](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection) | Resource/Entra access is required; product availability varies. Planned OpenAI text support is not deployed coverage. |
-| Amazon / Nova / Bedrock | [Sonic speech marks and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html); [Canvas/Reel watermark announcement](https://www.amazon.science/blog/amazon-nova-and-our-commitment-to-responsible-ai) | Sonic verification requires AWS contact. A 2024 announcement is not a tested current API. Transcripts are not marked by Sonic. |
+| Microsoft / Azure / Copilot | [Selected hosted C2PA and invisible marks](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure); [verification API](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection) | Resource/Entra access is required; product availability varies. Indexed GPT request controls remain unresolved by the retrieved page. |
+| Amazon / Nova / Bedrock | [Sonic speech marks and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html); [Reel 1.1 video credentials and watermark](https://docs.aws.amazon.com/ai/responsible-ai/nova-reel/overview.html) | Sonic verification requires AWS contact. Actual provider fixtures/verifiers remain unqualified. Transcripts are not marked by Sonic. |
 | Adobe / Firefly | [Image credentials](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html); [Translate Audio/Video credentials](https://helpx.adobe.com/firefly/web/work-with-audio-and-video/work-with-audio/about-translate-audio-and-translate-video.html) | The audio/video workflow describes AI voices, translation and lip edits. This does not establish whole-file synthesis or every partner product. |
 | Stability AI | [Current hosted image/video/audio C2PA](https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq); legacy SDXL reference marker | Current hosted FAQ says C2PA rather than invisible marks. Legacy pipelines and self-hosted open weights have different behavior. |
 | Black Forest Labs / FLUX | [Service credential terms](https://bfl.ai/legal/developer-terms-of-service) and selected Azure-hosted FLUX provenance | Does not establish every checkpoint/export. |
@@ -82,7 +82,7 @@ their saved calculations.
 | Runway | [Free-plan video watermark](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Paid exports may be unmarked. |
 | Pika | [Current support says exports have no watermark](https://pika.art/support) | Older FAQ differs; do not assume marks survive across plans/dates. |
 | Moonshot / Kimi | [Explicit notices and implicit metadata rules](https://www.kimi.com/user/agreement/modelUse?version=v2) | Platform terms are not a public decoder/key or proof of all self-hosted output. |
-| NVIDIA | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
+| NVIDIA | [Hosted Cosmos3 Nano visual SynthID](https://build.nvidia.com/nvidia/cosmos3-nano/modelcard) | Named hosted image/video generation; no automatic audio, text, numeric-action or downloadable-checkpoint coverage. |
 | Kakao | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
 | Apple | [Version-limited image SynthID documentation](https://support.apple.com/en-us/149520) | Named tools from OS 27.2; rollout and actual verification were not tested. Google's overview still says “soon”; do not infer other modalities. |
 
@@ -102,16 +102,23 @@ is a statistical image classifier, not a watermark verifier or early-stop route.
 
 Focused primary-source searches still leave **Cohere, Udio, Ideogram, Recraft,
 Fish Audio, Hume, PlayAI/PlayHT, Perplexity, IBM/Granite, AI21/Jamba, Canva,
-Leonardo and Descript** as review gaps. Queries and all four explicit modality states remain
+Leonardo, Descript, PixVerse, Freepik/Magnific, WellSaid, Voicemod,
+OpenMOSS and Mureka** as review gaps. Queries and all four explicit modality states remain
 in the catalog. This does not mean those providers never mark content.
 Customer discussions, transparency pledges and a shared watermark algorithm
 are insufficient to fill a missing production-verification specification.
+
+The [broader follow-up](provider-signal-broad-search-2026-11-08.md) adds the
+CapCut-family public media verifier, scoped Cosmos visual marking, Vidu labels,
+Speechify Studio marking, conditional Higgsfield policy and Krea partner-model
+credentials. It preserves the difference between a documented route and an
+integration qualified on actual files.
 
 ## What the app collects, and what it does not infer
 
 The [structured-label reader](structured-source-labels.md) recognizes supported
 AIGC fields, locators and checksums. Known-name normalization now covers the
-57 families, including `volcengine`, `seedream`, Cartesia, Inworld and SenseTime. Recognizing a known string
+67 families, including `volcengine`, `seedream`, Cartesia, Inworld and SenseTime. Recognizing a known string
 does not show the provider actually uses that field, authenticate it, decode a
 hidden watermark or add confidence. Unknown names/codes and private identifiers
 remain withheld. Version 1 historical and version 2 current records render in

@@ -203,3 +203,11 @@ PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests/test_independent_re
 
 Those tests use explicitly synthetic response fixtures. They verify the audit
 contract and denominators, not the predictive accuracy of any detector.
+
+The [image context/region-point comparison](image-region-point-v15-result.md)
+preserves all four arms and a rejected primary, with complete native/source
+replay and an actual 12-test Linux arithmetic receipt. Its frozen data were
+already consumed; no new outside human reviewer or fresh-quality claim follows.
+The [broader provider-signal inventory](provider-signal-broad-search-2026-11-08.md)
+identifies additional qualification routes and explicit documentation gaps;
+provider policy review is separate from authentic file/response testing.

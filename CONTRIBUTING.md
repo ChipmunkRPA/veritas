@@ -10,6 +10,11 @@ For security-sensitive issues, follow [SECURITY.md](SECURITY.md).
 
 ## Development
 
+The owner has disabled GitHub Actions. Run checks locally and publish reviewed
+updates through direct Git pushes. Do not create, enable, dispatch or rerun
+workflows without a new explicit request. Existing workflow definitions and
+receipts are retained as historical evaluation evidence.
+
 Follow the setup in [README.md](README.md). The source distribution excludes model
 weights and private evaluation inputs. Model-free regression checks include:
 

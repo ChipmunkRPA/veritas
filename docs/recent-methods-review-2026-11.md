@@ -51,6 +51,14 @@ That independent [noise/texture intervention study](image-residual-v13-result.md
 is now complete on consumed development sources: both simple heads lose
 localization quality and are rejected. It neither reproduces nor tests EISL's
 learned CLIP/LoRA implementation, and imports none of its code or weights.
+The subsequent [supervised regional head](image-patch-head-v14-result.md) is
+also complete: frozen licensed visual features plus a small learned head reduce
+false highlights but lose useful localization, so the candidate is rejected.
+Its strict mean-precision audit failed and remains failed. A separately frozen
+full native diagnostic replay reproduces all original features/maps and outcomes;
+the accurate-mean sensitivity probe changes no selected masks. This narrows the
+next work to stronger regional methodology and precision-qualified context
+features, rather than adopting the candidate from fitting loss or a subgroup.
 
 ## Video: explain the temporal features and context
 

@@ -1,0 +1,407 @@
+{
+  "schema": "chipmunk.image-supervised-patch-head-public-result/14",
+  "prospective_freeze_commit": "479b7cca66dec2d8313f7cc977d0b212b6179477",
+  "prospective_freeze_sha256": "5f5d49f802fc7bcf6e064c6a061e735b8783bfde657bf54fbd6ee4724848984c",
+  "diagnostic_freeze_commit": "498023d79f83570702694ce5348cd63c7d5ffede",
+  "diagnostic_freeze_sha256": "1c3b03eee9b39c43d2a0987d8151f32e8eb85e87d5620bd271c7db11621d0b52",
+  "native_development": {
+    "all": {
+      "current_originals_only": {
+        "edited_inputs": 108,
+        "edited_flagged": 19,
+        "edited_iou_at_least_0_3": 6,
+        "edited_mean_iou": 0.04300615014653744,
+        "edited_mean_pixel_f1": 0.0649038457947721,
+        "genuine_inputs": 108,
+        "genuine_flags": 7,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 108,
+        "edited_flagged": 10,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.017772113592735075,
+        "edited_mean_pixel_f1": 0.027452060230478234,
+        "genuine_inputs": 108,
+        "genuine_flags": 0,
+        "ordinary_inputs": 108,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": false,
+        "more_iou_0_3": false,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": false
+    },
+    "v11": {
+      "current_originals_only": {
+        "edited_inputs": 60,
+        "edited_flagged": 9,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.03863730940562144,
+        "edited_mean_pixel_f1": 0.058404286049010296,
+        "genuine_inputs": 60,
+        "genuine_flags": 5,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 60,
+        "edited_flagged": 6,
+        "edited_iou_at_least_0_3": 2,
+        "edited_mean_iou": 0.019195451243418708,
+        "edited_mean_pixel_f1": 0.029523565874111334,
+        "genuine_inputs": 60,
+        "genuine_flags": 0,
+        "ordinary_inputs": 60,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": false,
+        "more_iou_0_3": false,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": false
+    },
+    "consumed-v12": {
+      "current_originals_only": {
+        "edited_inputs": 48,
+        "edited_flagged": 10,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.04846720107268246,
+        "edited_mean_pixel_f1": 0.07302829547697436,
+        "genuine_inputs": 48,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 48,
+        "edited_flagged": 4,
+        "edited_iou_at_least_0_3": 1,
+        "edited_mean_iou": 0.015992941529380536,
+        "edited_mean_pixel_f1": 0.024862678175936848,
+        "genuine_inputs": 48,
+        "genuine_flags": 0,
+        "ordinary_inputs": 48,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": false,
+        "more_iou_0_3": false,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": false
+    },
+    "firefly": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 5,
+        "edited_iou_at_least_0_3": 2,
+        "edited_mean_iou": 0.03662995693915424,
+        "edited_mean_pixel_f1": 0.054497485071852494,
+        "genuine_inputs": 36,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 36,
+        "edited_flagged": 3,
+        "edited_iou_at_least_0_3": 1,
+        "edited_mean_iou": 0.012820283806880566,
+        "edited_mean_pixel_f1": 0.019993790267361797,
+        "genuine_inputs": 36,
+        "genuine_flags": 0,
+        "ordinary_inputs": 36,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": false,
+        "more_iou_0_3": false,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": false
+    },
+    "sd2": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 11,
+        "edited_iou_at_least_0_3": 4,
+        "edited_mean_iou": 0.07883313969326672,
+        "edited_mean_pixel_f1": 0.11798351032927634,
+        "genuine_inputs": 36,
+        "genuine_flags": 3,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 36,
+        "edited_flagged": 3,
+        "edited_iou_at_least_0_3": 0,
+        "edited_mean_iou": 0.009046714545317799,
+        "edited_mean_pixel_f1": 0.015386177733957292,
+        "genuine_inputs": 36,
+        "genuine_flags": 0,
+        "ordinary_inputs": 36,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": false,
+        "more_iou_0_3": false,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": false
+    },
+    "flux-fill": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 3,
+        "edited_iou_at_least_0_3": 0,
+        "edited_mean_iou": 0.013555353807191398,
+        "edited_mean_pixel_f1": 0.02223054198318746,
+        "genuine_inputs": 36,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "candidate": {
+        "edited_inputs": 36,
+        "edited_flagged": 4,
+        "edited_iou_at_least_0_3": 2,
+        "edited_mean_iou": 0.03144934242600687,
+        "edited_mean_pixel_f1": 0.0469762126901156,
+        "genuine_inputs": 36,
+        "genuine_flags": 0,
+        "ordinary_inputs": 36,
+        "ordinary_flags": 0
+      },
+      "continuation_gates": {
+        "higher_mean_iou": true,
+        "more_iou_0_3": true,
+        "no_extra_genuine_flags": true,
+        "ordinary_at_most_5pct": true
+      },
+      "quality_rules_pass": true
+    },
+    "policy": {
+      "schema": "chipmunk.image-supervised-patch-head/14",
+      "sources": "All consumed v13 source groups:120 fit,60 genuine-only point,108 diagnostics; no fresh-source accuracy claim.",
+      "features": "Frozen Apache-2 DINOv2 register-base;448-square bilinear RGB/ImageNet;normalized blocks4,8,12;1024x2304 float32 tokens.",
+      "head": "Concatenate token and token-minus-full-image-mean;4608->64 ReLU->1 sigmoid ranking head;295041 learned parameters.",
+      "fit": "Same840 original/lighting/JPEG55/ordinary-patch cases as v13;64 deterministic stratified cells per case;exact soft source-area labels.",
+      "optimization": "CPU float32/two threads;seed20261108;AdamW lr.001 weight_decay.01;30 epochs,batch512;balanced soft class mass;no early stopping or diagnostic selection.",
+      "point": "Maximum over genuine original and ordinary control per60 point groups;descending indexfloor(.05*n),strict greater-than;AI outcomes never select the point.",
+      "mask": "32x32 median3 reflect;8-connected components>=4 cells;sourcepixel(x,y)->floor(32*x/width),floor(32*y/height).",
+      "continuation": "Higher edited meanIoU and more IoU>=.3 than current,no extra genuine flags,ordinary flags<=5%;full native/source/arithmetic audit also required.",
+      "limits": "Consumed development;not confidence,pixel authorship,unseen-generator validation or serving admission. Current ordinary-control model inference and fresh confirmation follow only a passing development result.",
+      "cache": "Lossless float32 sampled fit vectors and full-image means;full native feature commitments per case,retained ranking maps;separate full native replay required.",
+      "serving_admitted": false,
+      "used_in_confidence": false
+    },
+    "freeze_sha256": "5f5d49f802fc7bcf6e064c6a061e735b8783bfde657bf54fbd6ee4724848984c",
+    "cases": 1344,
+    "backbone_forwards": 1363,
+    "native_hook_probes": 18,
+    "native_repeat_forwards": 1,
+    "head_training": {
+      "epochs": 30,
+      "steps": 3150,
+      "losses": [
+        0.279092803739366,
+        0.14050990179890674,
+        0.10261189022234511,
+        0.08899081093924385,
+        0.0862580747476646,
+        0.08705192314726969,
+        0.08632600275533538,
+        0.0854897115202177,
+        0.08672560637905487,
+        0.08491160571575164,
+        0.08377005912008745,
+        0.08214876758200781,
+        0.08151936729749044,
+        0.080987941828512,
+        0.08275953070038843,
+        0.08242551652448518,
+        0.08143316049660955,
+        0.08091142943927217,
+        0.0801561596847716,
+        0.08090198937626115,
+        0.08033498947819075,
+        0.08019852492780911,
+        0.07993710452602025,
+        0.0802182797165144,
+        0.08092843233829457,
+        0.08037103918336685,
+        0.07914634840119456,
+        0.07876532265827767,
+        0.07882276638632726,
+        0.07919783201955613
+      ],
+      "soft_positive_mass": 7761.5233852205565,
+      "soft_negative_mass": 45998.47661626339,
+      "parameters": 295041,
+      "calibrated_confidence": false
+    },
+    "head_inference_cases": 504,
+    "point": {
+      "value": 0.9993374943733215,
+      "comparison": "strict_greater_than",
+      "calibration_groups": 60,
+      "maximum_flagged_calibration_groups": 3,
+      "scope": "Fixed research comparison point, not an AI confidence or public screening threshold"
+    },
+    "journal_sha256": "2b0c9f68e42538813f2828415afb5d9fd5c7e7468d43c439342fbb34c88ed2cb",
+    "fit_array_bytes": 503409024,
+    "independent_native_audit_required": true,
+    "outside_human_reviewers": 0,
+    "serving_admitted": false,
+    "used_in_confidence": false
+  },
+  "complete_native_diagnostic_replay": {
+    "schema": "chipmunk.image-head-mean-diagnostic-replay/14",
+    "cases": 1344,
+    "backbone_forwards": 1362,
+    "native_hook_probes": 18,
+    "native_feature_values_replayed": 3170893824,
+    "fit_sample_rows_replayed": 840,
+    "sampled_patch_vectors_replayed": 53760,
+    "source_pixels_replayed_including_variants": 939015007,
+    "native_response_cells_replayed": 516096,
+    "native_features_and_maps_exact": true,
+    "source_truth_samples_and_projection_exact": true,
+    "original_genuine_point_and_aggregates_exact": true,
+    "original_mean_failure_counts_by_role": {
+      "fit": 813,
+      "point": 174,
+      "diagnostic": 315
+    },
+    "first_replayed_mean_failure_index": 0,
+    "independent_mean_max_difference": 7.696001557633281e-05,
+    "numpy_head_response_max_difference": 3.672608607674377e-06,
+    "fixed_head_accurate_mean_max_response_effect": 9.694099237789189e-07,
+    "fixed_head_float64_sensitivity_mask_changes_by_role": {},
+    "response_cells_within_original_dense_tolerance_of_point": 6,
+    "sensitivity_is_a_refitted_candidate": false,
+    "optimizer_independently_refit": false,
+    "head_or_point_changed": false,
+    "outside_human_reviewers": 0,
+    "original_strict_audit_passed": false,
+    "original_mean_bound_failures": 1302,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "meaning": "Diagnostic completion never overrides the retained strict-audit failure or original quality rules."
+  },
+  "resource_profiles": {
+    "profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_image_patch_head_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1413398528,
+      "sample_errors": 0,
+      "duration_s": 460.00963979098015,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    },
+    "diagnostic-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.diagnose_image_patch_head_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1427275776,
+      "sample_errors": 0,
+      "duration_s": 445.20380641694646,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    },
+    "failed-strict-audit": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_image_patch_head_v14",
+      "child_exit_code": 1,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 851935232,
+      "sample_errors": 0,
+      "duration_s": 4.4722283750306815,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    },
+    "authored-contract": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_image_patch_head_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 844234752,
+      "sample_errors": 0,
+      "duration_s": 6.06260275002569,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    }
+  },
+  "retained_strict_audit": {
+    "completed": false,
+    "passed": false,
+    "stopped_check": "Independent full-image mean exceeds frozen arithmetic bound",
+    "original_bound": 1e-05,
+    "bound_changed": false,
+    "failed_log_sha256": "69f26d68e30c1a8f89de0ddcf29dabdcd1825f48b44e70f86fe0d31b8d1ab471",
+    "failed_profile_sha256": "bda467a2c2b8dae9bebb57283809a3ab49b9a793b740493d7605f49515988976",
+    "partial_backbone_forward_count": "not recorded; not inferred from duration"
+  },
+  "source_groups": {
+    "fit": 120,
+    "point": 60,
+    "diagnostic": 108
+  },
+  "case_roles": {
+    "fit": 840,
+    "point": 180,
+    "diagnostic": 324
+  },
+  "assets": [
+    {
+      "model": "dinov2.vitb14_reg4",
+      "sha256": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71",
+      "bytes": 346393545,
+      "license": "Apache-2.0"
+    },
+    {
+      "model": "dinov2.vitl14",
+      "sha256": "218d1e159ebd7d928aa76e5412ac04455c92aad9ecb3c48ab8542a98ccc1b357",
+      "bytes": 1834871,
+      "license": "Apache-2.0"
+    }
+  ],
+  "authored_contract_backbone_forwards": 9,
+  "completed_project_scoring_and_diagnostic_backbone_forwards": 2725,
+  "completed_phase_count_excludes_unrecorded_partial_strict_audit": true,
+  "outside_human_reviewers": 0,
+  "customer_inputs": 0,
+  "external_provider_requests": 0,
+  "serving_changed": false,
+  "used_in_confidence": false,
+  "early_stop_eligible": false,
+  "raw_sources_published": false,
+  "source_pairings_published": false,
+  "fit_vectors_or_weights_published": false,
+  "canonical_records_rewritten": false,
+  "limitations": [
+    "Consumed-source development, not fresh accuracy, independent capture truth or unseen-generator validation.",
+    "Ranking sigmoid and genuine-only comparison point are not calibrated AI-authorship confidence.",
+    "Baseline ordinary-control native inference is unassessed here and would be required before fresh confirmation.",
+    "A native/source/NumPy replay is not independent optimizer refitting or outside human review.",
+    "The original strict mean audit failed and remains failed; diagnostic completion does not waive it.",
+    "Accurate-mean response sensitivity retains the original trained head and point; it is not a corrected-model evaluation.",
+    "Keep every original quality-rule failure and subgroup loss; no retuned point or selected subgroup.",
+    "Process memory is a sampled lower bound. All original sampling-error counts remain visible."
+  ],
+  "exporter_sha256": "d86cf0a793ede1f461e081b4a3862041c2a35399384f295741b6b39405837449"
+}

@@ -2,11 +2,18 @@ name: Public audio reproduction
 
 on:
   workflow_dispatch:
+    inputs:
+      science_commit:
+        description: Full immutable revision containing the original v13 study and portable reviewer
+        required: true
+        default: 2c5662af6f66cfae3eafef81e76531863571173c
+        type: string
   push:
     paths:
       - .github/workflows/audio-public-replay.yml
       - backend/requirements-audio-public-review.txt
-      - backend/scripts/*audio*.py
+      - backend/scripts/review_audio_public_portable_v13.py
+      - backend/scripts/diagnose_audio_public_refit_v13.py
       - docs/evaluation-panels/audio-v13-*
       - docs/evaluation-panels/audio-v9-*
       - docs/evaluation-panels/audio-v8-*
@@ -28,14 +35,26 @@ jobs:
       matrix:
         mode: [arithmetic, exact-refit, refit-diagnostics]
     env:
+      SCIENCE_COMMIT: ${{ inputs.science_commit || '2c5662af6f66cfae3eafef81e76531863571173c' }}
       OMP_NUM_THREADS: "4"
       OPENBLAS_NUM_THREADS: "4"
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
     steps:
+      - name: Require an immutable study revision
+        run: |
+          python3 - <<'PY'
+          import os, re
+          assert re.fullmatch(r'[0-9a-f]{40}', os.environ['SCIENCE_COMMIT']), 'A full immutable revision is required'
+          PY
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          ref: ${{ env.SCIENCE_COMMIT }}
+      - name: Record the source being reproduced
+        run: |
+          test "$(git rev-parse HEAD)" = "$SCIENCE_COMMIT"
+          echo "Historical study source: $SCIENCE_COMMIT"
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12.6"

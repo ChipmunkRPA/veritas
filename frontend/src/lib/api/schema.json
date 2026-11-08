@@ -272,7 +272,7 @@
                 "type": "null"
               }
             ],
-            "description": "Versioned customer interpretation of the saved estimate, including the 80% leaning rule. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.",
+            "description": "Versioned evidence-led customer interpretation of the saved estimate and assessed scope. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.",
             "title": "Customer Assessment"
           },
           "deciding_record": {
@@ -2462,6 +2462,82 @@
           }
         },
         "title": "Body_create_batch_api_v2_batches_post",
+        "type": "object"
+      },
+      "Body_create_checkout_api_v2_billing_checkout_post": {
+        "properties": {
+          "client_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9A-Fa-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Sha256"
+          },
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "document"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "profile": {
+            "default": "full",
+            "enum": [
+              "quick",
+              "full",
+              "deep"
+            ],
+            "title": "Profile",
+            "type": "string"
+          },
+          "risk_accepted": {
+            "default": false,
+            "title": "Risk Accepted",
+            "type": "boolean"
+          },
+          "risk_notice_sha256": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Notice Sha256"
+          },
+          "risk_notice_version": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Notice Version"
+          }
+        },
+        "required": [
+          "file",
+          "kind"
+        ],
+        "title": "Body_create_checkout_api_v2_billing_checkout_post",
         "type": "object"
       },
       "CalibrationInfo": {
@@ -7861,6 +7937,41 @@
           "public_key_pem"
         ],
         "title": "PublicKeyOut",
+        "type": "object"
+      },
+      "PurchaseAcceptance": {
+        "properties": {
+          "risk_accepted": {
+            "default": false,
+            "title": "Risk Accepted",
+            "type": "boolean"
+          },
+          "risk_notice_sha256": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Notice Sha256"
+          },
+          "risk_notice_version": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Notice Version"
+          }
+        },
+        "title": "PurchaseAcceptance",
         "type": "object"
       },
       "ReanalyseRequest": {
@@ -15891,6 +16002,194 @@
         "summary": "Batch Summary Json",
         "tags": [
           "v2"
+        ]
+      }
+    },
+    "/api/v2/billing/checkout": {
+      "post": {
+        "operationId": "create_checkout_api_v2_billing_checkout_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "idempotency-key",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 8,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_checkout_api_v2_billing_checkout_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Checkout",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v2/billing/config": {
+      "get": {
+        "operationId": "configuration_api_v2_billing_config_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Configuration",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v2/billing/orders/{order_id}": {
+      "get": {
+        "operationId": "read_order_api_v2_billing_orders__order_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "title": "Order Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Read Order",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v2/billing/orders/{order_id}/checkout": {
+      "post": {
+        "operationId": "retry_checkout_api_v2_billing_orders__order_id__checkout_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "title": "Order Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PurchaseAcceptance"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Acceptance"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retry Checkout",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v2/billing/webhook": {
+      "post": {
+        "operationId": "webhook_api_v2_billing_webhook_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Webhook",
+        "tags": [
+          "billing"
         ]
       }
     },

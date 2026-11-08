@@ -1,0 +1,19 @@
+{% if v.get('source_labels') %}
+{% set labels = v.source_labels %}
+<section id="source-labels" class="source-labels" style="margin-top: 4mm; break-inside: avoid;">
+<h2 class="eyebrow">Source labeling - unverified metadata</h2>
+<p class="caption">{{ labels.notice }}</p>
+<p class="caption">Reader status: {{ labels.status | replace('_', ' ') }}. {% if labels.checked_metadata %}Locations inspected: {{ labels.checked_metadata | join('; ') }}.{% endif %}</p>
+{% for record in labels.records %}
+<div style="break-inside: avoid; margin-top: 2mm;">
+<p><strong>{{ record.id }} - {{ record.declaration }}</strong></p>
+<p class="caption">{{ record.location }}{% if record.byte_offset is not none %}, container byte offset {{ record.byte_offset }}{% endif %}. Claimed provider: {{ record.claimed_provider or 'not identified; unrecognized names and codes are withheld' }}. Provider identity is not authenticated. No confidence percentage is assigned.</p>
+<p class="caption evidence-hash">Extracted label-field SHA-256 <span class="mono">{{ record.payload_sha256 }}</span>. Matching JSON evidence identifier: {{ record.id }}.</p>
+</div>
+{% else %}<p class="caption">{% if labels.status == 'checked' %}No recognized label was found in the inspected fields. This does not establish originality.{% else %}This source-label check is incomplete or unavailable; no conclusion follows from missing labels.{% endif %}</p>{% endfor %}
+{% for issue in labels.issues %}<p class="caption">{{ issue }}</p>{% endfor %}
+<p class="caption evidence-hash">Bound source SHA-256 <span class="mono">{{ labels.source_sha256 }}</span></p>
+</section>
+{% elif v.get('customer_report') %}
+<p class="caption">A structured source-label check was not recorded for this analysis. Missing labels do not establish originality.</p>
+{% endif %}

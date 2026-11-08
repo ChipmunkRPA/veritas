@@ -30,6 +30,15 @@ The gate is inside the analysis pipeline; it does not bypass the USD 9.99
 prepayment requirement. No uploaded file is sent to an outside provider by this
 implementation. It does **not** decode every private watermark below.
 
+There is also a [bounded structured-label reader](structured-source-labels.md)
+for supported image, media and document metadata. Its source-bound SL records
+appear in the normal view, PDF, API and JSON as **unverified claims**, with no
+confidence contribution. Known-name normalization includes the seven families
+below and additional major Chinese providers. It does not establish that each
+provider uses those metadata formats, authenticate a copied provider name or
+activate the trusted shortcut. Unsupported formats and incomplete scans remain
+explicitly unassessed or partial.
+
 ## Named providers
 
 | Provider | Documented marking and verification | What is available here |
@@ -48,8 +57,9 @@ infer their output format or detector availability from another provider's
 implementation. The [Chinese labeling rules](https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm)
 describe explicit labels and implicit metadata. A labeling obligation does not
 give this application a private verification key or make unsigned fields
-tamper-proof. A bounded structured-metadata reader and provider-code review
-remain required follow-up; this release does not claim those are implemented.
+tamper-proof. Supported structured fields are now inspected; unrecognized names
+and provider codes are withheld from the new structured records. Provider-code
+identity resolution and private watermark verification remain follow-up work.
 
 ## Text watermark source review
 

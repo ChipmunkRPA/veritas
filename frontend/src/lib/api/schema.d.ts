@@ -1018,6 +1018,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/billing/checkout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Checkout */
+        post: operations["create_checkout_api_v2_billing_checkout_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/billing/config": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Configuration */
+        get: operations["configuration_api_v2_billing_config_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/billing/orders/{order_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Order */
+        get: operations["read_order_api_v2_billing_orders__order_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/billing/orders/{order_id}/checkout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Retry Checkout */
+        post: operations["retry_checkout_api_v2_billing_orders__order_id__checkout_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v2/billing/webhook": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Webhook */
+        post: operations["webhook_api_v2_billing_webhook_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/cases": {
         parameters: {
             query?: never;
@@ -1779,7 +1864,7 @@ export interface components {
             custodian_hash?: components["schemas"]["CustodianHashCheck"] | null;
             /**
              * Customer Assessment
-             * @description Versioned customer interpretation of the saved estimate, including the 80% leaning rule. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.
+             * @description Versioned evidence-led customer interpretation of the saved estimate and assessed scope. Derived for display; it does not replace the frozen decision or alter result_hash. Automated likelihood is not a validated accuracy rate.
              */
             customer_assessment?: {
                 [key: string]: unknown;
@@ -2393,6 +2478,33 @@ export interface components {
              * @description Analysis profile of every item
              */
             profile?: ("quick" | "full" | "deep") | null;
+        };
+        /** Body_create_checkout_api_v2_billing_checkout_post */
+        Body_create_checkout_api_v2_billing_checkout_post: {
+            /** Client Sha256 */
+            client_sha256?: string | null;
+            /** File */
+            file: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "image" | "video" | "audio" | "document";
+            /**
+             * Profile
+             * @default full
+             * @enum {string}
+             */
+            profile: "quick" | "full" | "deep";
+            /**
+             * Risk Accepted
+             * @default false
+             */
+            risk_accepted: boolean;
+            /** Risk Notice Sha256 */
+            risk_notice_sha256?: string | null;
+            /** Risk Notice Version */
+            risk_notice_version?: string | null;
         };
         /** CalibrationInfo */
         CalibrationInfo: {
@@ -4192,6 +4304,18 @@ export interface components {
              * @description SubjectPublicKeyInfo PEM; pass it to `python -m app.cli verify --public-key`
              */
             public_key_pem: string;
+        };
+        /** PurchaseAcceptance */
+        PurchaseAcceptance: {
+            /**
+             * Risk Accepted
+             * @default false
+             */
+            risk_accepted: boolean;
+            /** Risk Notice Sha256 */
+            risk_notice_sha256?: string | null;
+            /** Risk Notice Version */
+            risk_notice_version?: string | null;
         };
         /** ReanalyseRequest */
         ReanalyseRequest: {
@@ -8549,6 +8673,147 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_checkout_api_v2_billing_checkout_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "idempotency-key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_create_checkout_api_v2_billing_checkout_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    configuration_api_v2_billing_config_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    read_order_api_v2_billing_orders__order_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                order_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retry_checkout_api_v2_billing_orders__order_id__checkout_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                order_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PurchaseAcceptance"] | null;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    webhook_api_v2_billing_webhook_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
         };

@@ -30,6 +30,7 @@ from app.engine.stages import document as doc
 from app.engine.stages import image as img
 from app.engine.stages import video as vid
 from app.policy import thresholds as policy_thresholds
+from app.provenance import source_labels
 from app.storage.db import Analysis, get_session
 from app.storage.objects import ObjectStore, default_store
 
@@ -42,8 +43,9 @@ BUDGET_BYTES = {"image": IMAGE_BUDGET_BYTES, "document": DOCUMENT_BUDGET_BYTES, 
 
 IMAGE_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", img.ingest, critical=True, weight=0.5),
+    StageDef("source_labels", source_labels.stage, after=("ingest",), critical=True, weight=0.1),
     StageDef("probe", img.probe, after=("ingest",), weight=0.5),
-    StageDef("provenance", img.provenance, after=("probe",), reuse_if=img.current_provenance_output),
+    StageDef("provenance", img.provenance, after=("probe", "source_labels"), reuse_if=img.current_provenance_output),
     StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", img.decode, after=("ingest",), persist=False, critical=True),
     StageDef("faces", img.faces, after=("decode", "provenance_gate"), lane="accelerator"),
@@ -57,7 +59,8 @@ IMAGE_STAGES: tuple[StageDef, ...] = (
 )
 DOCUMENT_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
-    StageDef("provenance_gate", provenance_gate.run, after=("ingest",), weight=0.1),
+    StageDef("source_labels", source_labels.stage, after=("ingest",), critical=True, weight=0.1),
+    StageDef("provenance_gate", provenance_gate.run, after=("ingest", "source_labels"), weight=0.1),
     StageDef("decode", doc.decode, after=("ingest",), critical=True, weight=0.5, reuse_if=doc.current_decode_output),
     # Revalidate stored text on every resume/refusion before any cached result can be reused.
     StageDef("condition", doc.condition, after=("decode",), persist=False, critical=True, weight=0.5),
@@ -71,8 +74,9 @@ FULL_DEEP = frozenset({Profile.FULL, Profile.DEEP})
 DEEP_ONLY = frozenset({Profile.DEEP})
 VIDEO_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
+    StageDef("source_labels", source_labels.stage, after=("ingest",), critical=True, weight=0.1),
     StageDef("probe", vid.probe, after=("ingest",), critical=True, weight=0.5),
-    StageDef("provenance", vid.provenance, after=("probe",), weight=0.5, reuse_if=vid.current_provenance_output),
+    StageDef("provenance", vid.provenance, after=("probe", "source_labels"), weight=0.5, reuse_if=vid.current_provenance_output),
     StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", vid.decode, after=("probe",), persist=False, critical=True),
     StageDef("shots", vid.shots, after=("probe",), profiles=FULL_DEEP, weight=0.5),
@@ -91,8 +95,9 @@ VIDEO_STAGES: tuple[StageDef, ...] = (
 )
 AUDIO_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
+    StageDef("source_labels", source_labels.stage, after=("ingest",), critical=True, weight=0.1),
     StageDef("probe", aud.probe, after=("ingest",), critical=True, weight=0.5),
-    StageDef("provenance", aud.provenance, after=("probe",), weight=0.5),
+    StageDef("provenance", aud.provenance, after=("probe", "source_labels"), weight=0.5),
     StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", aud.decode, after=("probe",), persist=False, critical=True),
     StageDef("condition", cond.audio, after=("probe", "decode"), critical=True, weight=0.5),  # detect reads its speech gate
@@ -173,8 +178,8 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
     if refusion:
         # Reuse historical detector evidence without introducing a new gate
         # dependency that would invalidate it and request forbidden inference.
-        stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d != 'provenance_gate'))
-            if 'provenance_gate' in s.after else s for s in stages)
+        stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d not in ('provenance_gate', 'source_labels')))
+            if any(d in s.after for d in ('provenance_gate', 'source_labels')) else s for s in stages)
         if kind == "audio":
             # Fresh detection needs the speech gate; copied scores do not. Recomputing condition must not invalidate
             # the integrity-checked stored detect output and trigger forbidden inference. Temporal still waits for both.

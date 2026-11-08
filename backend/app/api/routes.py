@@ -266,7 +266,9 @@ def export_json(aid: str, request: Request):
     if decision and not decision.get("provenance_record"):
         display_result["stored_record"] = report_view.stored_record(
             decision, list(stored.get("assessments") or []), list(stored.get("signals") or []))
-    response = JSONResponse({**project({**a.to_summary(), "result": a.result}), **evidence,
+    summary = a.to_summary()
+    summary.setdefault('result_hash', getattr(a, 'result_hash', None))
+    response = JSONResponse({**project({**summary, "result": a.result}), **evidence,
                              "customer_assessment": customer_assessment(display_result),
                              "projection": {"view": "customer", "result_hash": "hashes the original stored result"}},
                             headers={"Content-Disposition": f'attachment; filename="chipmunk-verify-{aid[:8]}.json"',

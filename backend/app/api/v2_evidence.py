@@ -206,7 +206,7 @@ class Cancellation(BaseModel):
 
 class AnalysisDetailV2(AnalysisSummaryV2):
     customer_assessment: dict[str, Any] | None = Field(default=None, description=(
-        "Versioned customer interpretation of the saved estimate, including the 80% leaning rule. "
+        "Versioned evidence-led customer interpretation of the saved estimate and assessed scope. "
         "Derived for display; it does not replace the frozen decision or alter result_hash. "
         "Automated likelihood is not a validated accuracy rate."))
     cancellation: Cancellation | None = None

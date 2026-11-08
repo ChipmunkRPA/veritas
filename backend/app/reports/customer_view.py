@@ -201,6 +201,15 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     out["header_centre"] = snapshot.analysis.kind.capitalize()
     out["status_line"] = "Prepared by Chipmunk Verify | Automated analysis"
     out["draft_note"] = None
+    labels = ((snapshot.result.get('manifest') or {}).get('sampling') or {}).get('source_labels')
+    out['source_labels'] = labels if (isinstance(labels, dict) and labels.get('version') == 'source-labels/1'
+        and labels.get('source_sha256') == snapshot.media.sha256) else None
+    # Older frozen document evidence called missing exact inputs "proof".
+    # Describe the missing records without changing that original evidence.
+    evidence = out.get('evidence') or {}
+    for key in ('coverage_details', 'limitations'):
+        if key in evidence:
+            evidence[key] = [line.replace('exact local input proof', 'exact local input records') for line in evidence[key]]
     policy = standard_service_policy()
     out["service_policy"] = policy
     out["expert_contact"] = policy["expert_contact"]

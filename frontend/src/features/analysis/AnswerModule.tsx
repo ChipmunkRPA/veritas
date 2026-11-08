@@ -1,4 +1,5 @@
 import StandardScreeningNotice from './StandardScreeningNotice'
+import SourceLabels from './SourceLabels'
 import { useId, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import type { AnalysisDetail, Finding } from '../../lib/api/queries'
@@ -113,6 +114,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
           className="mt-2 inline-block text-small text-accent underline underline-offset-2">Inspect voice evidence</Link>
       </section>}
       <StandardScreeningNotice />
+      <SourceLabels value={analysis.manifest?.sampling?.source_labels} source={analysis.input?.sha256} />
       {opinion}
 
       <div className="mt-6 grid gap-10 min-[960px]:grid-cols-[7fr_5fr]">

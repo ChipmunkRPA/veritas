@@ -81,6 +81,13 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Added source-bound structured AIGC label evidence across supported image,
+  video, audio and document formats, normal views, all report profiles, API and
+  JSON. Claims stay unverified and outside confidence; missing/malformed fields
+  do not clear originality or bypass models. Original checksums and privacy
+  indicators accompany the records. 408 selected backend and 74 frontend checks
+  pass; no private watermark decoder or statistical model is admitted.
+  [Working coverage and validation](structured-source-labels.md).
 - Completed fresh JPEG confirmation of the frozen regional candidate on 48 new
   source pairs, with 102 actual native forwards. Candidate flags 12/48 edits
   versus 10/48 current, but 5/48 genuine false flags versus 2/48; it also loses an

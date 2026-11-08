@@ -955,6 +955,14 @@ def publish(ctx: StageContext, result: AnalysisResultV2, v1: dict[str, Any], *, 
     stage without its objects and runs it again."""
     from app.audit import chain as audit
 
+    labels = ctx.outputs.get('source_labels')
+    if labels is not None:
+        if labels.get('source_sha256') != ctx.outputs['ingest']['sha256']:
+            raise ValueError('Source labels are not bound to the verified upload')
+        # Documentary context has no signal, contribution, override or score.
+        # Store it in the reproducibility record, outside statistical fusion.
+        result.manifest.sampling['source_labels'] = labels
+        v1 = {**v1, 'source_labels': labels}
     if (missing := missing_objects(ctx)):
         from app.engine.runner import evidence_missing
 

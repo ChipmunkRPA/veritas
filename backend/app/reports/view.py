@@ -255,7 +255,7 @@ def stored_record(decision: dict[str, Any], assessments: list[dict[str, Any]] | 
         return None
     overrides = [s for s in signals or [] if s.get("provenance_override") in decisive.PRECEDENCE]
     if overrides:
-        applied_kind = decisive.resolve(s["provenance_override"] for s in overrides)
+        applied_kind = decisive.resolve((s["provenance_override"] for s in overrides), historical=True)
         applied = [s for s in overrides if s["provenance_override"] == applied_kind]
         return decisive.record(applied_kind, applied, [str(s.get("id")) for s in applied])
     note = next((str(a.get("note") or "") for a in assessments or [] if a.get("hypothesis") == H3), "")

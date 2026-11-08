@@ -118,3 +118,33 @@ def test_every_standard_report_discloses_screening_scope_and_private_engagement(
     assert "does not guarantee a conclusion or court admissibility" in html
     assert "Automated deepfake screening is uncertain" in html
     assert "80% customer-facing" not in html
+
+
+@pytest.mark.parametrize('schema_version', [1, 2])
+def test_retired_marker_export_preserves_original_decision_and_adds_current_interpretation(monkeypatch, schema_version):
+    stored = {'kind': 'image', 'decision': {'code': 'ai_supported', 'fusion_mode': 'fallback',
+              'probability_ai_uncalibrated': .85, 'driving_hypothesis': 'H3_provenance_integrity',
+              'provenance_record': {'kind': 'self_declared_ai', 'marker': 'watermark', 'signal_ids': []}}}
+    before = copy.deepcopy(stored)
+    analysis = SimpleNamespace(id='historical-marker', status='done', result_schema_version=schema_version,
+                               result=stored, to_summary=lambda: {'id': 'historical-marker', 'result_hash': 'saved-hash'})
+    if schema_version == 2:
+        from app.api import v2_evidence
+
+        @contextmanager
+        def sessions():
+            yield SimpleNamespace(get=lambda *_: analysis)
+
+        monkeypatch.setattr(routes, 'get_session', sessions)
+        monkeypatch.setattr(v2_evidence, '_result', lambda *_: stored)
+    monkeypatch.setattr(routes, '_get', lambda _: analysis)
+    monkeypatch.setattr(routes, '_current_revision', lambda _: None)
+    monkeypatch.setattr(routes, '_verified', lambda *_: None)
+    monkeypatch.setattr(routes.audit, 'record', lambda *args, **kwargs: None)
+    response = routes.export_json('historical-marker', SimpleNamespace(state=SimpleNamespace(principal=SimpleNamespace(id='local'))))
+    data = json.loads(response.body)
+    assert data['customer_assessment']['direction'] == 'inconclusive'
+    assert data['customer_assessment']['confidence_pct'] is None
+    assert 'retired rule' in data['customer_assessment']['meaning']
+    assert data['result']['decision']['code'] == 'ai_supported' and data['result']['decision']['probability_ai_uncalibrated'] == .85
+    assert stored == before

@@ -43,6 +43,11 @@ function linked(finding: FindingInput, result: FindingContext) {
 }
 
 export function findingObservations(finding: FindingInput, result: FindingContext): string[] {
+  if (['F1_provenance', 'F2_self_declared_metadata'].includes(finding.family)
+    && (finding.sentences ?? []).some(s => s.text?.includes("sets the result's number at no less than"))) {
+    return [...linked(finding, result).filter(s => (s.status ?? 'ok') === 'ok' && s.observed).map(s => s.observed!),
+      'Historical unverified marker. It does not authenticate AI generation or support a confidence percentage. The saved calculation used a retired marker rule.']
+  }
   if (['coverage', 'F9_distribution_conditions', 'F1_provenance', 'F2_self_declared_metadata', 'F8_metadata_consistency'].includes(finding.family)) {
     const facts = (finding.sentences ?? []).map(s => s.text).filter((text): text is string => typeof text === 'string' && text.length > 0)
     if (facts.length) return facts

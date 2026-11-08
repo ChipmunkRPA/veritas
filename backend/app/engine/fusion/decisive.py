@@ -3,8 +3,8 @@
 - **Overrides**, in precedence order:
   1. `decisive_ai`: a C2PA manifest that validates against the trust list and declares generative AI. s ≥ 0.97.
   2. `trusted_capture`: a trusted capture manifest covering the current bytes. s ≤ 0.10.
-  3. `self_declared_ai`: unsigned generator metadata or a public-message watermark. s is floored at 0.85, with the
-     caveat "self-declared; can be added to a genuine image".
+  Unsigned generator metadata, untrusted declarations and public-message watermarks are advisory only.
+  Their historical `self_declared_ai` classification remains readable, but never changes a fresh estimate.
   Signed documentary evidence outranks unsigned markers, so a trusted capture manifest wins over a self-declared marker;
   the conflict is stated in a caveat.
 - **The statistical estimate** before the override is always kept and shown (invariant 4, D-33).
@@ -20,8 +20,13 @@ from dataclasses import dataclass
 
 from app.engine.fusion.calibration import clamp_probability
 
+# The self-declared value is retained only to interpret historical records.
 OVERRIDE_PROBABILITY = {"decisive_ai": 0.97, "self_declared_ai": 0.85, "trusted_capture": 0.10}
 PRECEDENCE = ("decisive_ai", "trusted_capture", "self_declared_ai")
+ACTIVE_PRECEDENCE = ("decisive_ai", "trusted_capture")
+ADVISORY_CAVEAT = ("An unverified origin marker was detected. It does not authenticate AI generation, "
+                   "does not change the content estimate and cannot stop further checks.")
+MARKER_DETECTORS = frozenset({"img.meta.generator", "img.watermark.dwtdct", "prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio"})
 H3_INFLUENCE_BOUND = 0.05
 CONFLICT_LOGIT = 3.0  # ML §4.7: a statistical estimate beyond |η'| > 3 in the opposite direction adds a caveat
 SELF_DECLARED_CAVEAT = ("Self-declared: the file's metadata names an AI generator. Metadata can be added or edited by anyone, "
@@ -252,15 +257,17 @@ def _sigmoid(x: float) -> float:
     return 1.0 / (1.0 + math.exp(-x)) if x >= 0 else math.exp(x) / (1.0 + math.exp(x))
 
 
-def resolve(kinds: Iterable[str | None]) -> str | None:
+def resolve(kinds: Iterable[str | None], *, historical: bool = False) -> str | None:
     present = {k for k in kinds if k}
     unknown = present - set(PRECEDENCE)
     if unknown:
         raise ValueError(f"unknown provenance overrides {sorted(unknown)}")
-    return next((k for k in PRECEDENCE if k in present), None)
+    return next((k for k in (PRECEDENCE if historical else ACTIVE_PRECEDENCE) if k in present), None)
 
 
 def floor_or_cap(s: float, kind: str) -> float:
+    if kind == "self_declared_ai":
+        return s
     target = OVERRIDE_PROBABILITY[kind]
     return min(s, target) if kind == "trusted_capture" else max(s, target)
 
@@ -288,7 +295,9 @@ def apply(s_statistical: float, kinds: Iterable[str | None], *, watermark: bool 
     present = {k for k in kinds if k}
     kind = resolve(present)
     if kind is None:
-        return OverrideOutcome(None, s_statistical, s_statistical)
+        return OverrideOutcome(None, s_statistical, s_statistical,
+                               (ADVISORY_CAVEAT,) if "self_declared_ai" in present else (),
+                               ("self_declared_ai",) if "self_declared_ai" in present else ())
     s = floor_or_cap(s_statistical, kind)
     # N-19h (E-20, 7): the caveat prints the number that the field beside it holds, clamped (it read "100%" beside 0.98)
     caveats = [STATISTICAL_ESTIMATE_CAVEAT.format(clamp_probability(s_statistical))]

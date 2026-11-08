@@ -27,3 +27,15 @@ describe('finding confidence shared with reports and JSON', () => {
     expect(findingAssessment({ ...original.finding, family: 'V2_lip_sync' }, original.result).direction).toBe('context')
   })
 })
+
+it('explains retired marker prose without endorsing its old forced score', () => {
+  const finding = { id: 'F1', family: 'F1_provenance', evidence_ids: ['marker'], sentences: [
+    { text: "Chipmunk Verify sets the result's number at no less than 85 out of 100 for it." },
+  ] }
+  const before = JSON.stringify(finding)
+  const observed = findingObservations(finding, { signals: [{ id: 'marker', status: 'ok', observed: 'Public watermark: 44 of 48 matching bits.' }] })
+  expect(observed.join(' ')).toContain('44 of 48')
+  expect(observed.join(' ')).toContain('retired marker rule')
+  expect(observed.join(' ')).not.toContain('85 out of 100')
+  expect(JSON.stringify(finding)).toBe(before)
+})

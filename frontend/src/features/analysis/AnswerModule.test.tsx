@@ -91,3 +91,15 @@ describe('automated customer conclusion', () => {
     expect(screen.getByRole('region', { name: 'Speech in this soundtrack' }).textContent).not.toContain('%')
   })
 })
+
+it('presents a historical marker-led answer as inconclusive without its old confidence or agreement meter', () => {
+  render(<AnswerModule analysis={analysis(.85, { code: 'ai_supported', driving_hypothesis: 'H3_provenance_integrity',
+    provenance_record: { kind: 'self_declared_ai', marker: 'watermark', signal_ids: [] },
+    probability_ai_uncalibrated: .85, fusion_mode: 'fallback' })} findings={[]} />)
+  expect(screen.getByTestId('headline').textContent).toBe('Inconclusive: unverified origin marker')
+  expect(screen.getByTestId('customer-assessment').textContent).not.toContain('85%')
+  expect(screen.getByTestId('means').textContent).toContain('retired rule')
+  expect(screen.getByTestId('does-not-mean').textContent).toContain('old marker-led verdict')
+  expect(screen.getByTestId('answer-facts').textContent).toContain('historical calculation')
+  expect(screen.getByTestId('answer-facts').textContent).not.toContain('Agreement')
+})

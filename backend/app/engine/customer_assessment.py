@@ -188,7 +188,15 @@ def customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
         answer["scope_note"] = " ".join(note for note in notes if note)
     if soundtrack is not None:
         answer["soundtrack"] = soundtrack
-    if decision.get("provenance_record") or result.get("stored_record") or decision.get("driving_hypothesis") == "H3_provenance_integrity":
+    from app.reports.view import stored_record
+
+    origin_record = (decision.get("provenance_record") or result.get("stored_record")
+                     or stored_record(dict(decision), result.get("assessments"), result.get("signals")))
+    if origin_record and origin_record.get("kind") == "self_declared_ai":
+        return {**answer, "direction": "inconclusive", "headline": "Inconclusive: unverified origin marker",
+                "meaning": "This saved result used a retired rule that let an unverified marker decide the answer. The marker does not authenticate AI generation.",
+                "limitation": "The original calculation is retained in the analysis record. Run a new analysis for a content-based assessment; no confidence percentage is assigned to the old marker-led verdict."}
+    if origin_record or decision.get("driving_hypothesis") == "H3_provenance_integrity":
         return {**answer, "applies": False, "direction": "record", "headline": None,
                 "meaning": "The conclusion follows the file's provenance record, not a confidence percentage."}
     if result.get("status") not in (None, "done") or not decision or decision.get("code") == "not_assessable":

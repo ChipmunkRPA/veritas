@@ -18,11 +18,10 @@ D-15, D-17, D-31, D-33).
    missing term acts, as the score cache records them (`score_v2.detector_row`). **D-49:** while such a check did not run
    and some statistical detector scored, no estimate, interval, statistical estimate or contribution rows are published
    (the remaining detectors' probability stays in `fusion.estimate_without_not_run`), and H1 / H2 are not applicable.
-6. **Stage 0** on top: a trusted C2PA AI declaration and a trusted capture manifest decide and are not capped; a
-   self-declared marker floors s at 0.85 and never produces a strong code on its own. While a check did not run an override
-   publishes exactly its probability with one override row and no statistical-estimate caveats; self-declared is then low
-   confidence and its reason names the checks. An unsigned marker also preserves low confidence forced by statistical
-   disagreement or a wide interval; it does not resolve either uncertainty.
+6. **Stage 0** on top: a trusted C2PA AI declaration and a trusted capture manifest decide and are not capped.
+   Unsigned metadata, untrusted declarations and public watermarks are advisory. They neither floor an estimate nor
+   supply origin confidence. A calibration containing a retired marker input cannot publish a combined estimate until
+   revalidated; fitted missingness is not evidence that the changed feature set remains calibrated.
 7. **Which checks count (D-64; N-19f).** `n_entered`: the detector rows of the published view that are not zero, outside H3
    (`abstain.checks_entered`). The rule for a strong code, "k of n detectors" and the marker's branch read it.
 8. **Not assessable**, when no override applies, in this order: no artefact detector outside H3 produced a usable score;
@@ -128,6 +127,9 @@ def _signal_id(entry: Mapping[str, Any]) -> str:
 
 def score_of(entry: Mapping[str, Any] | None) -> tuple[float | None, float | None] | None:
     """(probability, logit) of a detector's aggregate, or None when it has no usable probability-scale score."""
+    if entry is not None and (entry.get("detector_id") in decisive.MARKER_DETECTORS
+                              or entry.get("provenance_override") == "self_declared_ai"):
+        return None
     if entry is None or entry.get("status") != "ok" or entry.get("aggregate") is None or entry["aggregate"].get("raw") is None:
         return None
     raw, kind = float(entry["aggregate"]["raw"]), entry["aggregate"]["raw_kind"]
@@ -142,7 +144,9 @@ def unusable_score(entry: Mapping[str, Any]) -> bool:
     """D-49: an `ok` entry whose probability, logit or LLR aggregate is present but unusable (non-finite, or a probability
     outside [0, 1]). An `ok` entry without an aggregate, or with another raw kind, is not unusable: it abstains."""
     aggregate = entry.get("aggregate")
-    return aggregate is not None and aggregate.get("raw_kind") in SCORE_KINDS and score_of(entry) is None
+    return (entry.get("detector_id") not in decisive.MARKER_DETECTORS
+            and entry.get("provenance_override") != "self_declared_ai"
+            and aggregate is not None and aggregate.get("raw_kind") in SCORE_KINDS and score_of(entry) is None)
 
 
 def not_run(detectors: Iterable[str], by_id: Mapping[str, Mapping[str, Any]],
@@ -313,6 +317,11 @@ def annotate(signals: Sequence[Mapping[str, Any]], fields: Mapping[str, Mapping[
     detectors = set(artefact_detectors)
     out = []
     for s in signals:
+        if s.get("detector_id") in decisive.MARKER_DETECTORS or s.get("provenance_override") == "self_declared_ai":
+            out.append({**s, "effective_weight": 0.0, "contribution_logit": None, "contribution_pp": None,
+                        "calibrated_probability": None, "log_lr": None, "calibration_ref": None,
+                        "legacy": {**(s.get("legacy") or {}), "direction": "inconclusive", "strength": "none", "decisive": False}})
+            continue
         extra = fields.get(s["id"])
         why = None if outside is None else outside.get(s["id"])
         if extra is None:
@@ -393,6 +402,11 @@ def fuse_with_artefact(selection: Selection, entries: Sequence[Mapping[str, Any]
     # failed/skipped run is still an error; only an absent entry is exempt.
     checks_not_run = {d: why for d, why in checks_not_run.items()
                       if d not in selection.intentionally_missing or d in by_id}
+    # A fit that relied on origin markers needs a new calibration. Never reuse
+    # its fitted missingness as if excluding a marker preserved that validation.
+    checks_not_run.update({d: "origin-marker input retired; this combined calibration needs revalidation"
+                          for d in fuser.detectors if d in decisive.MARKER_DETECTORS
+                          or (by_id.get(d) or {}).get("provenance_override") == "self_declared_ai"})
     if condition_failed:
         checks_not_run = {CONDITION_CHECK: CONDITION_FAILED, **checks_not_run}
     out = fuser.apply(scores, ctx, prior_ai=prior_ai, inactive=checks_not_run)
@@ -553,32 +567,6 @@ def fuse_with_artefact(selection: Selection, entries: Sequence[Mapping[str, Any]
         verbal = decisive.CAPTURE_VERBAL  # N-19m (D3-01; D-15): the record's own headline; the code and the band stay
         reason = ("A trusted C2PA capture manifest covers the current bytes, so the signed capture state caps the estimate at "
                   f"{decisive.OVERRIDE_PROBABILITY['trusted_capture']:.0%}.")
-    elif outcome.kind == "self_declared_ai":
-        # D-33: an unsigned marker alone cannot inherit a strong code from
-        # context priors or learned missingness when no statistical check scored.
-        if code_final != "ai_supported_strong" or n_entered == 0:
-            band_final, code_final, driving_final = "likely_ai", "ai_supported", H3
-        # Unsigned metadata does not resolve statistical uncertainty (ML 5.2/5.4).
-        # Signed documentary overrides above retain their separate D-15 precedence.
-        # N-19f: a marker that decides alone (no check entered) has confidence low, as while a check did not run
-        # N-19m (R7-03; D-76 as amended on 2026-10-05): and low where D-76 took the decisive code of the statistical estimate
-        # (it was medium beside "no check gave at least weak support", low for the same input without the marker); the third
-        # part: whichever condition took the statistical code, D-77 as D-76
-        confidence = "low" if checks_not_run or n_entered == 0 or strong_disagreement or wide or taken is not None else (
-            "high" if code_final == "ai_supported_strong" else "medium")
-        floor = f"{decisive.OVERRIDE_PROBABILITY['self_declared_ai']:.0%}"
-        # N-19n (D3-07; Q): a marker beside a strong code of the statistical checks changes nothing, and the decision names
-        # no record below. Its headline and its reason are then the checks' too: they read "The file's metadata names an
-        # AI generator" and "… floors the estimate at 85%; …" over a result that the page heads by its strong indications,
-        # and the API and the v1 summary read them
-        if driving_final == H3:
-            verbal = decisive.marker_verbal(marker, kind)
-            reason = decisive.floor_reason(marker, kind, floor)
-        if checks_not_run:
-            reason += f" A check that this analysis depends on did not run: {checks}."
-        elif n_entered == 0:  # N-19h (E-19): on N-19f's path the reason ends with the sentence of that case
-            reason += " " + (abstain.NO_WEIGHT_REASON if n_scored else abstain.not_assessable_reason(
-                [e for e in entries if H3 not in (e.get("hypotheses") or []) and e.get("hypotheses")]))
     elif n_scored == 0:
         s_final, band_final, code_final, confidence, driving_final = None, "uncertain", "not_assessable", "low", None
         verbal = abstain.NOT_ASSESSABLE_VERBAL

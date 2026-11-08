@@ -22,7 +22,7 @@ type Input = FindingContext & {
   condition_profile?: { within_validated_envelope?: boolean | null; slice_id?: string | null } | null
   caveats?: readonly string[]
 }
-export const ASSESSMENT_RULE = 'evidence-led-assessment/v4'
+export const ASSESSMENT_RULE = 'evidence-led-assessment/v5'
 const INTERVAL_NOTE = 'This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.'
 const ESTIMATE_NOTE = "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited."
 const probability = (p: unknown): p is number => typeof p === 'number' && Number.isFinite(p) && p >= 0 && p <= 1
@@ -133,7 +133,13 @@ export function customerAssessment(result: Input): CustomerAssessment {
     included.length ? `Included finding scopes: ${included.join('; ')}.` : null,
     separate.length ? `Finding scopes assessed separately from this percentage: ${separate.join('; ')}.` : null,
   ].filter(Boolean).join(' ')
-  if (d?.provenance_record || result.stored_record || d?.driving_hypothesis === 'H3_provenance_integrity') return {
+  const originRecord = d?.provenance_record ?? result.stored_record
+  if (originRecord && typeof originRecord === 'object' && 'kind' in originRecord && originRecord.kind === 'self_declared_ai') return {
+    ...answer, direction: 'inconclusive', headline: 'Inconclusive: unverified origin marker',
+    meaning: 'This saved result used a retired rule that let an unverified marker decide the answer. The marker does not authenticate AI generation.',
+    limitation: 'The original calculation is retained in the analysis record. Run a new analysis for a content-based assessment; no confidence percentage is assigned to the old marker-led verdict.',
+  }
+  if (originRecord || d?.driving_hypothesis === 'H3_provenance_integrity') return {
     ...answer, applies: false, direction: 'record', headline: null,
     meaning: "The conclusion follows the file's provenance record, not a confidence percentage.",
   }

@@ -1,0 +1,75 @@
+{
+  "schema": "chipmunk.unverified-marker-policy/v1",
+  "cases": [
+    {
+      "case": "plain",
+      "before_code": "not_assessable",
+      "before_uncalibrated_score": null,
+      "after_code": "not_assessable",
+      "after_score": null,
+      "after_confidence": null,
+      "further_checks_attempted": true
+    },
+    {
+      "case": "unsigned_label",
+      "before_code": "not_assessable",
+      "before_uncalibrated_score": null,
+      "after_code": "not_assessable",
+      "after_score": null,
+      "after_confidence": null,
+      "further_checks_attempted": true
+    },
+    {
+      "case": "generation_parameters",
+      "before_code": "ai_supported",
+      "before_uncalibrated_score": 0.85,
+      "after_code": "not_assessable",
+      "after_score": null,
+      "after_confidence": null,
+      "further_checks_attempted": true
+    },
+    {
+      "case": "public_watermark",
+      "before_code": "ai_supported",
+      "before_uncalibrated_score": 0.85,
+      "after_code": "not_assessable",
+      "after_score": null,
+      "after_confidence": null,
+      "further_checks_attempted": true
+    }
+  ],
+  "reports": [
+    {
+      "phase": "before",
+      "pages": 14,
+      "pdf_sha256": "74d9c25c6b1707e867ec8f2f36e608761c17822c3d90eb2563f3aff78206420a",
+      "lint": {
+        "banned_terms": [],
+        "internal_terms": [],
+        "lay_summary_words": 204,
+        "lay_summary_grade": 9.32,
+        "lay_summary_ok": false
+      },
+      "snapshot_sha256": "3fbda339ba1a26aa8ce86306e62d278d7f0bdd2d409b01ca967775672b75792f",
+      "canonical_unchanged": true
+    },
+    {
+      "phase": "after",
+      "pages": 13,
+      "pdf_sha256": "e9b6193cbe23a18048b5db1ff7a7b9c706cf44ddd7827c7258e567983eb32b2c",
+      "lint": {
+        "banned_terms": [],
+        "internal_terms": [],
+        "lay_summary_words": 157,
+        "lay_summary_grade": 8.77,
+        "lay_summary_ok": true
+      },
+      "snapshot_sha256": "6b212c595abd749f17413e32460f5e7e68653c36ea51f39ca1fdde856a663015",
+      "canonical_unchanged": true
+    }
+  ],
+  "model_forwards": 0,
+  "provider_requests": 0,
+  "customer_database_used": false,
+  "scope": "Counterfactual policy correctness only; no AI-detection accuracy claim."
+}

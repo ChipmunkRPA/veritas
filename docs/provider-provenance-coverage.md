@@ -39,6 +39,13 @@ review made no provider-verification calls. A [separate frozen qualification](pr
 subsequently made nine real requests using authored controls and public provider
 samples, with no customer uploads. Neither external route is enabled for customers.
 
+The [marker policy correction](unverified-marker-policy-v1-result.md) also removes
+an old fusion-stage rule that could force an AI outcome from copyable metadata
+or an unkeyed public message after the fast gate correctly continued processing.
+Those observations remain visible, but supply no AI-origin confidence. Historical
+marker-led results receive an explicit retired-rule interpretation without rewriting
+their saved calculations.
+
 ## Broader provider findings
 
 | Provider family | Collected signals and verification route | Important qualification |

@@ -1,6 +1,6 @@
 """Versioned scope of the standard automated service, shared by all exports."""
 
-RULE = "evidence-led-assessment/v4"
+RULE = "evidence-led-assessment/v5"
 THRESHOLD = 0.6
 CONTACT = "sales@chipmunkrpa.com"
 

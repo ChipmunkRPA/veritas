@@ -146,7 +146,10 @@ def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[d
         inference = "Provenance context. A missing or unsigned origin record does not establish whether content is AI-generated."
         if view.is_documentary(finding):
             inference = "Documentary evidence: use the recorded credential statement and verification outcome below."
-        observations = list(row.get("sentences") or [row.get("reason", "")])
+        if any(s.get("provenance_override") == "self_declared_ai" for s in signals):
+            inference = "Unverified origin marker. It does not authenticate AI generation, change the content estimate or justify skipping content checks."
+        else:
+            observations = list(row.get("sentences") or [row.get("reason", "")])
     elif family in CONTEXT_FAMILIES:
         inference = "Coverage information only. Checks that did not run, and unmeasured regions, provide no evidence of originality."
         observations = list(row.get("sentences") or [row.get("reason", "")])
@@ -182,6 +185,7 @@ def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[d
     else:
         scope = ""
     return {**row, "assessment": assessment, "title": focus, "inference": inference, "observations": observations, "support": links, "notes": [],
+            **({"sentences": [inference, *observations]} if family in SOURCE_FAMILIES and any(s.get("provenance_override") == "self_declared_ai" for s in signals) else {}),
             "scope_note": scope, "status": None, "disposition": None,
             "reason": " ".join([inference, *observations[:1]])}
 
@@ -274,8 +278,12 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     for packet in [*packets, *image_packets]:
         packet["customer_inference"] = _packet_inference(packet)
     ledger = {str(r.get("id")): r for r in (out.get("detectors") or {}).get("ledger") or []}
+    unverified_ids = {str(s.get("display_id")) for s in snapshot.result.get("signals") or []
+                      if s.get("provenance_override") == "self_declared_ai" and s.get("display_id")}
     for row in ledger.values():
         row["disposition"] = None
+        if str(row.get("id")) in unverified_ids:
+            row.update(direction="Context only", strength="Unverified", contribution="Not included", p="-")
         if "per check:" in str(row.get("observed")):
             row["observed"] = str(row["observed"]).split("; per check:", 1)[0].replace("fused p(synthetic)=", "Combined voice-check response ")
     for limitation in out.get("limitations") or []:
@@ -284,6 +292,11 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     out["findings"] = [_finding(stored[str(row["id"])], row, snapshot, packets, image_packets, ledger, redact)
                        if str(row.get("id")) in stored else row for row in out.get("findings") or []]
     by_id = {str(f["id"]): f for f in out["findings"]}
+    for row in (out.get("provenance") or {}).get("findings") or []:
+        finding = by_id.get(str(row.get("id")))
+        if finding and "Unverified origin marker" in finding.get("inference", ""):
+            row["statement"] = " ".join([finding["inference"], *finding.get("observations", [])])
+            row["words"] = "Unverified"
     out["channel_findings"] = []
     if snapshot.analysis.kind == "video":
         soundtrack = assessment.get("soundtrack")

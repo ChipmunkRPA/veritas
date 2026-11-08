@@ -70,6 +70,7 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
   const d = analysis.decision
   if (!d) return null
   const basis = basisOf(d, findings)
+  const retiredMarker = recordOf(d)?.kind === 'self_declared_ai'
   const customer = presentedCustomerAssessment({ ...analysis, findings, signals })
   const step = customer.applies ? customer.direction === 'ai' ? 4 : customer.direction === 'original' ? 2
     : customer.direction === 'unavailable' ? 0 : 3 : stepOf(d, basis)
@@ -180,8 +181,8 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
 
         <dl data-testid="answer-facts" className="m-0 self-start grid grid-cols-[112px_minmax(0,1fr)] gap-x-4 gap-y-3">
           <dt className="eyebrow pt-1">Basis</dt>
-          <dd className="m-0 text-body text-text num">{basisWord(basis, analysis.coverage, d, outsideValidated(d, analysis.condition_profile))}</dd>
-          {!documentary && (
+          <dd className="m-0 text-body text-text num">{retiredMarker ? 'Unverified origin marker · historical calculation' : basisWord(basis, analysis.coverage, d, outsideValidated(d, analysis.condition_profile))}</dd>
+          {!documentary && !retiredMarker && (
             // N-19m (D3-01): no fact "Agreement" under a documentary basis (a trusted declaration, a trusted capture), as the
             // reports print none there: the result is the record's ("Agreement: High" stood under a declaration)
             <>

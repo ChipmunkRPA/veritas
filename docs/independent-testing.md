@@ -6,6 +6,34 @@ An implementation by our team is not an independent review; an external test
 must identify who ran it, how inputs were selected, and what was independently
 checked. We do not currently claim recruited reviewers or completed community pilots.
 
+## Start with a bounded check
+
+For an image-coordinate review, use the public authored crop/interpolation
+check. It needs NumPy, SciPy, Pillow and OpenCV, with no photographs, pretrained
+weights or account credentials:
+
+```sh
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 python -m scripts.review_image_iml_zoom_public_v16 /tmp/new-image-crop-review.json
+```
+
+For a smaller audio/video timing review, the signed-lag and sample-block check
+needs only NumPy:
+
+```sh
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 python -m scripts.review_mouth_audio_public_v14 /tmp/new-mouth-timing-review.json
+```
+
+Use a fresh receipt filename; these commands refuse overwrite. Include your
+commit, environment and generated receipt in a proposed evaluation issue.
+These checks validate arithmetic. To evaluate actual detection accuracy, use
+the source-separated manifest contract below with separately permitted real
+and manipulated inputs, retaining false alarms, misses and unassessed cases.
+Do not attach private source media or claim that an authored check measures
+real-world detector accuracy.
+The image arithmetic check passes while the [real-source exact-mask audit](image-iml-zoom-v16-result.md)
+fails at rounding boundaries. Its result and supplementary sensitivity remain
+explicit; passing continuous math does not establish discrete mask parity.
+
 ## Choose a review to reproduce
 
 These are bounded entry points for contributors. Automated Linux reproduction
@@ -17,6 +45,7 @@ separately acquired study data.
 
 | Package | What can be reproduced | Current evidence and limitation |
 | --- | --- | --- |
+| [Magnified image crops](image-iml-zoom-v16-result.md) | Public authored grid/point arithmetic and complete aggregate results; native source/grid replay requires the retained private panel | All384 candidate variants and96 ordinary-reference runs completed. Candidate found0/48 useful edits per format versus9/48 native and6/48 JPEG current; rejected. Strict real-source independent-mask audit remains failed. Full post-result canonical/sensitivity audit retains25/768 ungated metric discrepancies and one changed point; rejection unchanged. Actual Linux continuous arithmetic passes, without outside human review or fresh accuracy. |
 | [Supervised image-region head](image-patch-head-v14-result.md) | Frozen native/source replay, separate NumPy dense-head and coordinate arithmetic, and [actual Linux synthetic checks](evaluation-panels/image-patch-head-v14-linux-synthetic-review.json) | All1,344 development cases completed; candidate rejected for fewer useful regions. Original strict mean audit failed and remains failed. A separately frozen complete diagnostic replay reproduces all native features/maps and original outcomes; no mean-sensitivity mask changes. Raw sources/vectors/head remain private; no fresh accuracy or outside human review. |
 | [Fresh JPEG calibration confirmation](image-fresh-v12-result.md) | Public frozen scoring/audit code and complete aggregate results; source/map replay requires the separately retained private panel and cached permitted weights | All 96 fresh inputs completed; 192 independent probability calculations and 384 source-coordinate means match. Candidate rejected: 12/48 edited flags vs 10/48 current, but 5/48 genuine false flags vs 2/48. Current masks meet IoU >= .3 on 3/48 edits. No serving promotion, public photos/maps or outside human review. |
 | [Four-media specialist calibration](specialist-calibration-design.md) | Public authored128-file/512-observation version2 example, distinct context heads and calibrated combination; source-role/missing-evidence/duplicate-vote/source-geometry checks |63 local selected tests and [actual Linux integration](evaluation-panels/specialist-calibration-v2-linux-review.json) pass. Unrelated genuine regions no longer subtract from positive evidence elsewhere. This is symbolic-score integration only, not real-media calibration or detection quality. |
@@ -224,7 +253,7 @@ The [public LTX audio marking contract](ltx-marking-audio-v1-result.md) adds
 [actual Linux receipt](evaluation-panels/ltx-marking-audio-v1-linux-array-review.json)
 passes 20 arithmetic/contract tests without media or neural inference. No
 provider-authentication, natural-speech accuracy or outside human review follows.
-The [provider follow-up](provider-signal-followup-2026-11-08.md) records 71
+The [provider follow-up](provider-signal-followup-2026-11-08.md) records 82
 families and explicit gaps, separately from operational verification.
 
 The [audio-aware mouth study](mouth-audio-context-v14-result.md) provides another

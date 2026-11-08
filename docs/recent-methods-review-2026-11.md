@@ -7,6 +7,14 @@ dataset permissions are tracked separately. Reading a method is not a model
 replacement; any implementation must pass a fixed matched comparison and fresh
 confirmation appropriate to its actual claim.
 
+The [8 November passage/mixed-audio source review](passage-and-mixture-method-review-2026-11-08.md)
+adds direct generated-span prediction and independently labeled speech/event
+mixtures. It pins inspected inference, matching, coordinate and loss files.
+The audio repository's permissive code and noncommercial checkpoints remain
+separate; those weights are excluded. The passage checkpoint's large backbone,
+data rights, offset handling and independent calibration still need
+qualification. Neither reading changes serving or supplies an accuracy result.
+
 ## Provenance: hard bindings and transformation controls
 
 The October 2026 [soft-binding benchmark](https://arxiv.org/html/2610.04151v1)
@@ -59,6 +67,12 @@ full native diagnostic replay reproduces all original features/maps and outcomes
 the accurate-mean sensitivity probe changes no selected masks. This narrows the
 next work to stronger regional methodology and precision-qualified context
 features, rather than adopting the candidate from fitting loss or a subgroup.
+The [magnified-crop comparison](image-iml-zoom-v16-result.md) separately tests
+the existing permitted transformer localizer at larger crop scale. All384 input
+variants complete, but useful localization is0/48 per format versus9/48 native
+and6/48 JPEG current. Rejected. Its original exact independent-mask audit fails
+at rounding boundaries; a complete post-result sensitivity analysis retains
+the discrepancies and confirms rejection, without clearing the failed audit.
 
 ## Video: explain the temporal features and context
 

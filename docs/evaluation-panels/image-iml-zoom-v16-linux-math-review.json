@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.image-iml-zoom-linux-math-receipt/16",
+  "run_id": 42491297583,
+  "job_id": 128764057381,
+  "run_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42491297583",
+  "workflow_head_sha": "28d8a56253db82aa2689999f475c53598ab323f8",
+  "workflow_path": ".github/workflows/image-iml-zoom-v16-math.yml",
+  "run_status": "completed",
+  "run_conclusion": "success",
+  "job_conclusion": "success",
+  "log_digest_scope": "GitHub connector-decoded UTF-8 job log with one terminal newline; not original transport archive",
+  "review": {
+    "schema": "chipmunk.image-iml-zoom-public-math-review/16",
+    "science_commit": "d1165ffe510eabb38355d0511e52388bea0097a1",
+    "authored_nonsquare_source_geometries": 3,
+    "recorded_crop_grids_checked": 15,
+    "genuine_point_groups": 24,
+    "tied_points_and_ai_role_refusal": true,
+    "maximum_scalar_grid_difference": 3.3306690738754696e-16,
+    "absolute_limit": 1e-12,
+    "python": "3.12.6",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "source_photographs": 0,
+    "neural_forwards": 0,
+    "outside_human_reviewers": 0,
+    "scope": "Authored grid/interpolation/point arithmetic only; no native image-model or detection-quality claim."
+  },
+  "outside_human_reviewers": 0,
+  "decoded_log_sha256": "745a8f9eb84ae1245059ec8220dc22ca1c094f43e106c22b6e29fc67dd6e5b84"
+}

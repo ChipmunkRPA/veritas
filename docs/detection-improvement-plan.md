@@ -591,7 +591,7 @@ integration remains unfinished.
   jump-cut alert violates a frozen rule. Primary rejected; no fresh reserve or
   serving promotion. All 18 focused tests and actual Linux arithmetic pass.
 - The [broader provider search](provider-signal-broad-search-2026-11-08.md)
-  now covers 67 families/96 scoped records with 19 explicit gaps. Newly documented
+  initially covered 67 families/96 scoped records with 19 explicit gaps. Newly documented
   verification routes are distinct from qualified integrations; no external
   customer verifier was enabled.
 
@@ -604,8 +604,9 @@ The [LTX public-pattern contract](ltx-marking-audio-v1-result.md) now completes
 and 20 actual Linux contract tests. Clean expected patterns work; all eight
 noisy cases miss, and wrong payloads trigger generic presence. Keep it isolated,
 without confidence or early stopping. The
-[follow-up inventory](provider-signal-followup-2026-11-08.md) expands to 71
-families/101 records with 20 review gaps. The separate
+[follow-up inventory](provider-signal-followup-2026-11-08.md) now covers 82
+families/105 records with 28 review gaps, including further speech, mobile and
+regional-provider searches. The separate
 [lip-sync permission review](lip-sync-source-review-2026-11-08.md) admits no new
 checkpoint. Serving defaults, rollback, voice calibration and GCP are unchanged.
 
@@ -616,3 +617,22 @@ from 12/56 to 24/56; rejected. The original short-control failure and 178 exact
 persisted-prefix reproductions remain retained. New public NumPy-only arithmetic
 review and an actual Linux run complement 20 local authored tests; outside human participation and fresh
 confirmation remain outstanding. No serving or confidence promotion.
+
+The [magnified image-crop comparison](image-iml-zoom-v16-result.md) completes all
+384 candidate input variants and 96 actual ordinary-reference runs, with 1802
+new neural forwards. Crop localization finds0/48 useful edits per format versus
+9/48 native and6/48 JPEG current; both formats are rejected. The original strict
+independent-mask audit failed at a rounding boundary and remains failed. A
+separately published post-result full384-source/1920-grid sensitivity audit
+reproduces canonical masks/counts, retains25/768 ungated metric discrepancies
+and one changed genuine-only point, and confirms rejection under both numerical
+paths. All25 authored tests and actual Linux continuous arithmetic pass; neither
+clears that strict real-source failure. No fresh reserve or serving promotion.
+
+The [new passage/mixed-audio source review](passage-and-mixture-method-review-2026-11-08.md)
+pins selected boundary-learning and component-target code. Its audio checkpoint
+is explicitly noncommercial and excluded; a compact independently calibrated
+passage implementation and properly labeled speech/background evaluation remain
+future work. Short model-free contributor commands are now prominent in the
+[independent-testing guide](independent-testing.md). No outreach or outside human
+review is claimed, and the full four-media improvement program remains active.

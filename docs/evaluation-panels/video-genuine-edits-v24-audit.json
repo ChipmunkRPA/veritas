@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.ordinary-edit-readonly-audit/24",
+  "status": "passed",
+  "ordinary_clips": 40,
+  "cached_original_baselines": 40,
+  "connected_components": 20,
+  "exact_copied_rgb_frames_checked": 5760,
+  "private_png_anchors_checked": 120,
+  "native_rows_including_original_parity": 42,
+  "native_input_counts": {
+    "face_detection_inputs": 1428,
+    "crop_classifier_inputs": 491,
+    "appearance_inputs": 1393,
+    "patch_feature_inputs": 1393,
+    "native_repeat_inputs": 3
+  },
+  "native_frame_timestamps_independently_checked": 1428,
+  "original_parity_maximum_raw_difference": 0.0,
+  "ordinary_appearance_spans": 22,
+  "spans_overlapping_ordinary_insertion": 22,
+  "ordinary_clips_with_best_span_iou_at_least_point3": 22,
+  "overlap_interpretation": "Correspondence with an ordinary source insertion; not AI localization or pixel authorship.",
+  "profiles": {
+    "source-audit": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1412874240,
+      "sample_errors": 11,
+      "duration_s": 183.95315175002906,
+      "seconds_limit": 900
+    },
+    "native": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 2595127296,
+      "sample_errors": 20,
+      "duration_s": 275.99691391701344,
+      "seconds_limit": 900
+    }
+  },
+  "private_commitments_sha256": {
+    "preparation-freeze.json": "15520e33254a8336f26dbe9d457c65320f0f3c972c798368ff33767167a2fd4e",
+    "source-audit.json": "2eca85c691943392eca1228cfa946bd0134927aaec4e10be33e9ed85d553798f",
+    "scoring-freeze.json": "c7c58cc35d9f53eb1698564719ad6f6570ec2057e916153735927058dba4a56e",
+    "native-receipt.json": "3fd9976c6e650dfd4f1d9c9b9ecc9fc981845654c2058b3e563f36ff5db1e5bb",
+    "result.json": "99a65b720292f15007aec1bbf760ba1f00515f56b0fb59ae7465d21be05f0816"
+  },
+  "new_neural_forwards_in_review": 0,
+  "new_fitting_or_point_selection": false,
+  "public_data": "Aggregate receipts only. No raw frames, private pairings, face vectors or per-frame geometry/hash journals.",
+  "serving_admitted": false,
+  "outside_human_reviews": 0
+}

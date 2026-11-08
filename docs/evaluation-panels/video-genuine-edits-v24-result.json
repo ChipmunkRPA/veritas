@@ -1,0 +1,115 @@
+{
+  "schema": "chipmunk.ordinary-edit-diagnostic-result/24",
+  "summary": {
+    "original-baseline": {
+      "planned": 40,
+      "connected_components": 20,
+      "raw_cues": {
+        "face-crop": {
+          "inspection_alerts": 35,
+          "inconclusive": 2
+        },
+        "face-appearance": {
+          "inspection_alerts": 0,
+          "inconclusive": 1
+        },
+        "face-feature-change": {
+          "inspection_alerts": 0,
+          "inconclusive": 1
+        }
+      },
+      "reference_methods": {
+        "appearance-direct": {
+          "unsupported_ai_proxy_flags": 0,
+          "inconclusive": 1,
+          "components_with_proxy_flags": 0
+        },
+        "appearance-positive": {
+          "unsupported_ai_proxy_flags": 0,
+          "inconclusive": 1,
+          "components_with_proxy_flags": 0
+        },
+        "family-max": {
+          "unsupported_ai_proxy_flags": 0,
+          "inconclusive": 2,
+          "components_with_proxy_flags": 0
+        },
+        "family-repeat": {
+          "unsupported_ai_proxy_flags": 0,
+          "inconclusive": 2,
+          "components_with_proxy_flags": 0
+        },
+        "view-max": {
+          "unsupported_ai_proxy_flags": 1,
+          "inconclusive": 2,
+          "components_with_proxy_flags": 1
+        },
+        "appearance-mapped": {
+          "unsupported_ai_proxy_flags": 0,
+          "inconclusive": 1,
+          "components_with_proxy_flags": 0
+        }
+      }
+    },
+    "ordinary-edit": {
+      "planned": 40,
+      "connected_components": 20,
+      "raw_cues": {
+        "face-crop": {
+          "inspection_alerts": 36,
+          "inconclusive": 3
+        },
+        "face-appearance": {
+          "inspection_alerts": 22,
+          "inconclusive": 18
+        },
+        "face-feature-change": {
+          "inspection_alerts": 0,
+          "inconclusive": 18
+        }
+      },
+      "reference_methods": {
+        "appearance-direct": {
+          "unsupported_ai_proxy_flags": 22,
+          "inconclusive": 18,
+          "components_with_proxy_flags": 11
+        },
+        "appearance-positive": {
+          "unsupported_ai_proxy_flags": 22,
+          "inconclusive": 18,
+          "components_with_proxy_flags": 11
+        },
+        "family-max": {
+          "unsupported_ai_proxy_flags": 7,
+          "inconclusive": 19,
+          "components_with_proxy_flags": 6
+        },
+        "family-repeat": {
+          "unsupported_ai_proxy_flags": 7,
+          "inconclusive": 19,
+          "components_with_proxy_flags": 6
+        },
+        "view-max": {
+          "unsupported_ai_proxy_flags": 21,
+          "inconclusive": 19,
+          "components_with_proxy_flags": 11
+        },
+        "appearance-mapped": {
+          "unsupported_ai_proxy_flags": 22,
+          "inconclusive": 18,
+          "components_with_proxy_flags": 11
+        }
+      }
+    }
+  },
+  "source_components": 20,
+  "source_originals": 40,
+  "new_ordinary_inputs": 40,
+  "cached_original_baselines": 40,
+  "benchmark_truth": "Benchmark no-new-AI label0 based on publisher original labels and copy-only construction. Upstream origin and identities not independently established. Different sources do not necessarily mean different people.",
+  "scope": "Visual ordinary source/scene substitution diagnostic. Consumed sources, no training/calibration/fresh-reserve or full-app assessment.",
+  "interpretation": "Raw appearance alerts can correctly indicate an ordinary appearance change. Only interpreting them as AI authorship is unsupported. v23 scores are frozen reference outputs in an unvalidated context, never calibrated customer confidence.",
+  "new_calibration_or_point_fitting": false,
+  "serving_admitted": false,
+  "outside_human_reviews": 0
+}

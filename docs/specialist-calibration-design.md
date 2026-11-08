@@ -33,11 +33,19 @@ review of media, labels, provenance and detection quality.
 | Passage | Eight scoped/contextual combinations tested on 128 consumed prompt/source components, including mixed human/AI passages and 16 generators. | Pooled scoped combination finds 87/96 versus baseline 86/96 but raises genuine false flags from 6/32 to 7/32. All alternatives fail gates. Linux fitting also has recorded convergence failures. [Result](scoped-writing-v6-result.md). |
 | Voice/audio | All 4,004 planned files completed: eight AI generators, 143 consumed foreground pairs, 48 role-disjoint background originals, exact mixed-voice windows and strong noise/music/speech. Source audit and actual Linux scalar refit passed. | Filtered view adds no detection gain. Contextual calibration loses 59 AI files despite fewer false flags. Retain serving calibration. [Result](audio-specialists-v15-result.md). |
 | Video | All 648 exact clips and 14,256 source-bound units completed. A later controlled scalar comparison preserves individual views and checks numerical fitting. Three new immutable Linux replicas passed. | Preserved views find63/80 swaps at3/80 genuine false flags versus lossy family maximum18/80 at3/80, with matched dimension/penalty controls. Existing raw appearance remains stronger on false alarms/coverage at62/80 and1/80. No promotion. [Latest result](preserved-evidence-v23-result.md), [native/source study](video-face-specialists-v20-result.md). |
+| Video ordinary-edit controls | Forty new copy-only source substitutions, forty cached original baselines and twenty connected source pairs completed with exact native RGB/clock checks and 120 private before/during/after anchors. | The appearance cue flags 22/40 ordinary edits, with 18/40 inconclusive. The per-view combination produces 21/40 unsupported AI-proxy flags and 19/40 inconclusive. Keep appearance changes inspection-only. [Result and limitations](video-genuine-edits-v24-result.md). |
 
 These consumed-source pilots do not replace fresh, source-disjoint validation.
 No new specialist calibration contributes to customer confidence. The video
 source inventory is preparation, separate from the completed scoped video model
 evaluation above.
+
+The ordinary-edit result makes the target distinction concrete: the 22 flagged
+appearance spans all overlap an ordinary source insertion. They can help a
+person inspect a change, but do not establish how it was made. Separate
+calibration cannot convert a change detector into an AI-authorship detector
+without appropriate controls and independent validation. The same requirement
+applies to image anomalies, background-sound transitions and passage style.
 
 A later, separately frozen genuine-source operating comparison reuses those
 image and passage scalars. It found one image development candidate: pooled

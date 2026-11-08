@@ -1,0 +1,98 @@
+{
+  "policy": {
+    "schema": "chipmunk.video-background-context/25",
+    "point": "Only80 genuine fusion_cal clips in40 source components; matched common-assessed group budget from fixed raw appearance point. Minimum25 groups. Strict greater-than. AI calibration clips are not planned/scored.",
+    "diagnostic": "All160 consumed confirmation clips (80 swaps,40 original,40 ordinary controls) plus all40 v24 copy-only scene substitutions. v24 pair links join confirmation sources into20 components. No fresh sources.",
+    "descriptor": "Exact640x480 RGB;12x16 cells of40x40 pixels,float64 mean divided by255. Exclude all cells intersecting any face box expanded25% per edge,common to the exact window. Require25% background cells.",
+    "temporal": "Reuse original frozen three-middle/two-flank centers and consecutive triplets. L1 change on common background;max(0,min(mid-left,mid-right)-.35*left-right).",
+    "primary": "context: cached source-bound appearance raw minus2*background change. Cosine appearance range2 and RGB change range1 motivate the fixed multiplier; no coefficient fitting or selection.",
+    "arms": [
+      "current-fixed",
+      "appearance-matched",
+      "context"
+    ],
+    "control": "appearance-matched uses own genuine-only point without context; isolate point refitting from new information. No probabilistic classifier or AI confidence.",
+    "parity": "First eligible hash-ordered calibration and confirmation clip: re-execute every recorded SFace alignment/vector and supported appearance unit exactly. Other face measurements reused under original source/journal/model commitments. No new face selection.",
+    "audit": "Every newly read native frame equals original source/cached input RGB and PTS;all new block means independently checked via integer integral sums within1e-12. Every temporal value checked by cell-wise scalar transcription within1e-12. Reconstruct saved arrays,points,masks/intervals/counts separately.",
+    "continuation": "Primary must beat both references on usefulAI intervals and meanIoU,lose no already-useful edit,add no original/ordinary false-flag components,reduce v24 scene-cut flags,and have no extra wholly unassessed files. All planned inputs/errors remain.",
+    "limits": "Inspection/localization research,not AI authorship. Consumed sources/publisher truth;no lip-sync,pixel-edit or whole-video authenticity claim. No serving admission without fresh sources and full-app/export tests.",
+    "guard": {
+      "seconds": 900,
+      "rss_gib": 6,
+      "available_mib": 1536,
+      "disk_mib": 1536
+    },
+    "serving_admitted": false,
+    "used_in_confidence": false
+  },
+  "code_sha256": {
+    "backend/scripts/background_context_v25.py": "0e2b2785817b7604b98cc6329b150625e2328a133236e570f0ded7ef6b075b94",
+    "backend/scripts/run_background_context_v25.py": "5b11d30ee01f49f4af2b2218ae859b109955f97b81bb996ae5c5d9d5307daf1b",
+    "backend/scripts/review_background_context_v25.py": "18890f3fd0794d6fab4268f28392c7459edf8e49a7a124325361b11225a78d6d",
+    "backend/scripts/background_context_runtime_v25.py": "6cdbc6d7146770613ad1b10ea7401340960670ef465866858b5295f875f01320",
+    "backend/tests/test_background_context_v25.py": "aa1e443ac248073d5cbd3f838d179c336d287f7bd763540edcd5c71af99be745",
+    "docs/video-background-context-v25-protocol.md": "a1b1423bc2b645163f9d90590b9c6345ae39f5462a4e39af70470f585a574cdc",
+    "backend/scripts/measure_video_specialists_v18.py": "656c65d784829d75f6a2da6ac38eecdde028b0b1b28f736a04e80c5b3edfd582",
+    "backend/scripts/score_video_specialists_v20.py": "66c5c1a614ba6a6ea780f0e3655eeec8a25e2fa438271ac4cd75aa9d03e0d7be",
+    "backend/scripts/genuine_edit_materializer_v24.py": "1303ae0d45312a207a99094b97782c6650cfafde9432e5af3efa8aef58d74926",
+    "backend/app/detectors/video/face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "backend/scripts/audit_video_scoring_inputs_v18.py": "d0d1c7dbce347a2816ed3f3d67561d74aa06ee6b6d206b35f2a18c68ed5dfe0b",
+    "backend/scripts/run_video_specialists_v18.py": "e5a3f818fd37e98be6b3a628f8d1f7f050bbbb0d53745322eb3d61dadf07d7e5",
+    "backend/scripts/prepare_video_scoring_units_v18.py": "fc62e36a503c1d292e562b42c62c4a15b7e0ff86a87ba1100088d2bb4cf89a08",
+    "backend/scripts/materialize_video_specialists_v18.py": "bb570630041cb47340c6e2260f0a66d70c172bd0dcabce1c5003d93c6d05662a",
+    "backend/scripts/video_specialist_units_v18.py": "ec769c1d1e1662d219588b38dc1a3c0cdeb1aab8a767ba6915e5b0fe3af24c04",
+    "backend/scripts/inventory_video_specialists_v18.py": "5a6698d50a492b66a0363b8d3389740abcdd0ab61d8011e632e6a946a72e9036",
+    "backend/scripts/prepare_video_specialists_v18.py": "3418437f312064c35a8786c08a526649189deb8d7fb939ce339b52858e6164c3",
+    "backend/scripts/prepare_face_interval_eval.py": "a5add7b9806cc659bd4489a54a42f9440e6a8bd7947f228226799e3e73a15fc9",
+    "backend/scripts/prepare_video_upgrade_eval.py": "71a10ebc0cd3971609655fab64561a99fcbace3aeae564cb6a70856f7ab389cd",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/tests/test_video_scoring_source_audit_v18.py": "2ef6a6f719cd23173ebabce1b81e02272992d1304438fdeeda3de7115cfced96",
+    "backend/tests/test_video_scoring_plan_v18.py": "874dec029977564740aa4379c29215dd11a5e3beee565507a0fa6e0b5e663b1e"
+  },
+  "model": {
+    "licence": {
+      "spdx": "Apache-2.0",
+      "class_": "commercial",
+      "notice": "opencv_zoo face_recognition_sface README explicitly licenses all directory files including ONNX under Apache-2.0; retained notice docs/third-party/opencv-sface-v15-Apache-2.0.txt"
+    },
+    "files": {
+      "models/weights/face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    }
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0"
+  },
+  "binaries": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "case_counts": {
+    "genuine_point": 80,
+    "diagnostic": 160,
+    "ordinary_scene_edits": 40
+  },
+  "planned_ids_sha256": "bbcbc2fb2e8a070bab732a8c4b7c48542c7d9f213be30fcec9600283b1ba468a",
+  "input_commitments": {
+    "v20-freeze.json:a106da8f959f": "90f0ce86ed8b786c23361e73079c16ec953b5cf8e092e6e1f0a14ec6031c6337",
+    "scoring-input-plan-v2.json:10d09f4f54b0": "7eb6ee61b18f255fb6e21e1c391a1a0e347dffc8d1ba26aa75da4aa56cc37bdf",
+    "source-frame-audit-v1.jsonl:fc776c9e9528": "21ce2999b0e378db360369a8429d70a59c92fbab83e0802eb8fcb509243f8c8d",
+    "fusion_cal-v20-native.json:6521a40c9166": "c4b5acae4e9f4d20ab4fc239d4ca437b7d78be15412854a8ae4d117b4e159ea4",
+    "fusion_cal-v20-native.jsonl:cb9ac87fd286": "0c3651a100f84aa3fdc4eeabae74600392b137fbd994e0b28b14a5f20ffca2b5",
+    "confirmation-v20-native.json:f363149bed08": "bdd2f88a69ed0c3c587c0251f9df406f5dfc51b1fd8383efbb94822b40b3c70b",
+    "confirmation-v20-native.jsonl:db65a4ff965b": "050da5309d9c82be6a39483ded69832b9a938c6592ecb042a2ba7da2e56f2fa8",
+    "source-plan.json:fdbf0c8466f3": "6601cb2b1a1544aea1f437088dfbda261300131f79c500cc1620579aa6fae3d4",
+    "input-plan.jsonl:5ca304d8eae3": "47ca4bb46c91ef1ebc72b209a7e962e63d03c266edc4efc1f32e7515fe77509e",
+    "baselines.json:f9ccb261b5e7": "7dc68949fae1d662a9d390f423432513a32216c4e90fa6dd511131b9b44ec109",
+    "source-audit.json:07828dd13063": "2eca85c691943392eca1228cfa946bd0134927aaec4e10be33e9ed85d553798f",
+    "scoring-freeze.json:c4d36f2eb87d": "c7c58cc35d9f53eb1698564719ad6f6570ec2057e916153735927058dba4a56e",
+    "native-receipt.json:9e6761438829": "3fd9976c6e650dfd4f1d9c9b9ecc9fc981845654c2058b3e563f36ff5db1e5bb",
+    "native.jsonl:9e52b865dc37": "9e19292fdb9551f787083385c6c105b8b99dc3058067630f34284bf45462f5fb",
+    "readonly-audit-with-clock.json:8641f66dc0d7": "8df0e44448e420348a8edce1d63eca4c1cb0a11d13d641ce48ea2c08cbb45288"
+  },
+  "private_freeze_sha256": "fb37c48af29385062a3572655246da4f7d6991ff52283faabc6e976ae9eb7e29",
+  "new_project_pixel_measurements": 0,
+  "preparation_history_sha256": "41020e68d7a170061fa9aee5b538fb0843b08d823df22dd8898795645251c044"
+}

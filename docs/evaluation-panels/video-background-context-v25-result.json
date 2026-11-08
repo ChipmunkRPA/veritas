@@ -1,0 +1,406 @@
+{
+  "schema": "chipmunk.video-background-context-public-development/25",
+  "science_commit": "cf62bee345c524862bdd962db87c7fafe1f5de9f",
+  "private_freeze_sha256": "fb37c48af29385062a3572655246da4f7d6991ff52283faabc6e976ae9eb7e29",
+  "aggregate_result": {
+    "schema": "chipmunk.video-background-context-development/25",
+    "policy": {
+      "schema": "chipmunk.video-background-context/25",
+      "point": "Only80 genuine fusion_cal clips in40 source components; matched common-assessed group budget from fixed raw appearance point. Minimum25 groups. Strict greater-than. AI calibration clips are not planned/scored.",
+      "diagnostic": "All160 consumed confirmation clips (80 swaps,40 original,40 ordinary controls) plus all40 v24 copy-only scene substitutions. v24 pair links join confirmation sources into20 components. No fresh sources.",
+      "descriptor": "Exact640x480 RGB;12x16 cells of40x40 pixels,float64 mean divided by255. Exclude all cells intersecting any face box expanded25% per edge,common to the exact window. Require25% background cells.",
+      "temporal": "Reuse original frozen three-middle/two-flank centers and consecutive triplets. L1 change on common background;max(0,min(mid-left,mid-right)-.35*left-right).",
+      "primary": "context: cached source-bound appearance raw minus2*background change. Cosine appearance range2 and RGB change range1 motivate the fixed multiplier; no coefficient fitting or selection.",
+      "arms": [
+        "current-fixed",
+        "appearance-matched",
+        "context"
+      ],
+      "control": "appearance-matched uses own genuine-only point without context; isolate point refitting from new information. No probabilistic classifier or AI confidence.",
+      "parity": "First eligible hash-ordered calibration and confirmation clip: re-execute every recorded SFace alignment/vector and supported appearance unit exactly. Other face measurements reused under original source/journal/model commitments. No new face selection.",
+      "audit": "Every newly read native frame equals original source/cached input RGB and PTS;all new block means independently checked via integer integral sums within1e-12. Every temporal value checked by cell-wise scalar transcription within1e-12. Reconstruct saved arrays,points,masks/intervals/counts separately.",
+      "continuation": "Primary must beat both references on usefulAI intervals and meanIoU,lose no already-useful edit,add no original/ordinary false-flag components,reduce v24 scene-cut flags,and have no extra wholly unassessed files. All planned inputs/errors remain.",
+      "limits": "Inspection/localization research,not AI authorship. Consumed sources/publisher truth;no lip-sync,pixel-edit or whole-video authenticity claim. No serving admission without fresh sources and full-app/export tests.",
+      "guard": {
+        "seconds": 900,
+        "rss_gib": 6,
+        "available_mib": 1536,
+        "disk_mib": 1536
+      },
+      "serving_admitted": false,
+      "used_in_confidence": false
+    },
+    "freeze_sha256": "fb37c48af29385062a3572655246da4f7d6991ff52283faabc6e976ae9eb7e29",
+    "points": {
+      "current-fixed": {
+        "value": 0.11243900750879454
+      },
+      "appearance-matched": {
+        "value": 0.10179733083341733,
+        "comparison": "strict_greater_than",
+        "assessed_groups": 39,
+        "unassessed_groups": 0,
+        "baseline_flagged_groups": 1,
+        "candidate_flagged_groups": 1,
+        "uses_ai_or_diagnostic": false,
+        "scope": "Internal matched genuine-group comparison; not AI confidence."
+      },
+      "context": {
+        "value": 0.09302866964157606,
+        "comparison": "strict_greater_than",
+        "assessed_groups": 39,
+        "unassessed_groups": 1,
+        "baseline_flagged_groups": 1,
+        "candidate_flagged_groups": 1,
+        "uses_ai_or_diagnostic": false,
+        "scope": "Internal matched genuine-group comparison; not AI confidence."
+      },
+      "point_journal_sha256": "485a0640a33c7e71b457740494d29f80321d3919533abf49a0c068d6af6a7e23",
+      "fit_uses_ai": false,
+      "diagnostic_started": false
+    },
+    "summary": {
+      "current-fixed": {
+        "planned": 200,
+        "edited": 80,
+        "edited_flagged": 62,
+        "useful_iou_0_3": 62,
+        "mean_iou_including_misses": 0.5629313054940057,
+        "unassessed": 17,
+        "families": {
+          "inswapper": {
+            "planned": 40,
+            "flags": 32,
+            "flagged_components": 20,
+            "unassessed": 1,
+            "useful_iou_0_3": 32
+          },
+          "jump-cut": {
+            "planned": 13,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "lighting-change": {
+            "planned": 15,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "ordinary-scene-edit": {
+            "planned": 40,
+            "flags": 22,
+            "flagged_components": 11,
+            "unassessed": 12,
+            "useful_iou_0_3": 0
+          },
+          "original_videos": {
+            "planned": 40,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "recompression": {
+            "planned": 12,
+            "flags": 1,
+            "flagged_components": 1,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "uniface": {
+            "planned": 40,
+            "flags": 30,
+            "flagged_components": 18,
+            "unassessed": 2,
+            "useful_iou_0_3": 30
+          }
+        }
+      },
+      "appearance-matched": {
+        "planned": 200,
+        "edited": 80,
+        "edited_flagged": 63,
+        "useful_iou_0_3": 63,
+        "mean_iou_including_misses": 0.5753440691475797,
+        "unassessed": 17,
+        "families": {
+          "inswapper": {
+            "planned": 40,
+            "flags": 32,
+            "flagged_components": 20,
+            "unassessed": 1,
+            "useful_iou_0_3": 32
+          },
+          "jump-cut": {
+            "planned": 13,
+            "flags": 1,
+            "flagged_components": 1,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "lighting-change": {
+            "planned": 15,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "ordinary-scene-edit": {
+            "planned": 40,
+            "flags": 22,
+            "flagged_components": 11,
+            "unassessed": 12,
+            "useful_iou_0_3": 0
+          },
+          "original_videos": {
+            "planned": 40,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "recompression": {
+            "planned": 12,
+            "flags": 1,
+            "flagged_components": 1,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "uniface": {
+            "planned": 40,
+            "flags": 31,
+            "flagged_components": 19,
+            "unassessed": 2,
+            "useful_iou_0_3": 31
+          }
+        }
+      },
+      "context": {
+        "planned": 200,
+        "edited": 80,
+        "edited_flagged": 63,
+        "useful_iou_0_3": 63,
+        "mean_iou_including_misses": 0.5767320964191398,
+        "unassessed": 17,
+        "families": {
+          "inswapper": {
+            "planned": 40,
+            "flags": 32,
+            "flagged_components": 20,
+            "unassessed": 1,
+            "useful_iou_0_3": 32
+          },
+          "jump-cut": {
+            "planned": 13,
+            "flags": 1,
+            "flagged_components": 1,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "lighting-change": {
+            "planned": 15,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 0,
+            "useful_iou_0_3": 0
+          },
+          "ordinary-scene-edit": {
+            "planned": 40,
+            "flags": 20,
+            "flagged_components": 11,
+            "unassessed": 12,
+            "useful_iou_0_3": 0
+          },
+          "original_videos": {
+            "planned": 40,
+            "flags": 0,
+            "flagged_components": 0,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "recompression": {
+            "planned": 12,
+            "flags": 1,
+            "flagged_components": 1,
+            "unassessed": 1,
+            "useful_iou_0_3": 0
+          },
+          "uniface": {
+            "planned": 40,
+            "flags": 31,
+            "flagged_components": 19,
+            "unassessed": 2,
+            "useful_iou_0_3": 31
+          }
+        }
+      }
+    },
+    "comparisons": {
+      "current-fixed": {
+        "rules": {
+          "more_useful_ai": true,
+          "higher_mean_iou": true,
+          "no_lost_useful_ai": true,
+          "no_extra_unassessed": true,
+          "no_extra_false_components_jump-cut": false,
+          "no_extra_false_components_lighting-change": true,
+          "no_extra_false_components_ordinary-scene-edit": true,
+          "no_extra_false_components_original_videos": true,
+          "no_extra_false_components_recompression": true,
+          "fewer_scene_cut_flags": true
+        },
+        "pass": false
+      },
+      "appearance-matched": {
+        "rules": {
+          "more_useful_ai": false,
+          "higher_mean_iou": true,
+          "no_lost_useful_ai": true,
+          "no_extra_unassessed": true,
+          "no_extra_false_components_jump-cut": true,
+          "no_extra_false_components_lighting-change": true,
+          "no_extra_false_components_ordinary-scene-edit": true,
+          "no_extra_false_components_original_videos": true,
+          "no_extra_false_components_recompression": true,
+          "fewer_scene_cut_flags": true
+        },
+        "pass": false
+      }
+    },
+    "primary_pass": false,
+    "counts": {
+      "native_frames": 9240,
+      "sface_parity_forwards": 66
+    },
+    "point_files": 80,
+    "diagnostic_files": 200,
+    "outcomes": 600,
+    "diagnostic_connected_components": 20,
+    "native_integral_max_difference": 1.1102230246251565e-16,
+    "independent_temporal_max_difference": 5.551115123125783e-17,
+    "all_source_pixels_and_clocks_bound": true,
+    "all_saved_arrays_and_points_replayed": true,
+    "new_background_model_forwards": 0,
+    "fresh_confirmation": false,
+    "outside_human_reviewers": 0,
+    "serving_admitted": false,
+    "used_in_confidence": false
+  },
+  "resource_profiles": {
+    "point": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_background_context_v25",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1088651264,
+      "sample_errors": 7,
+      "duration_s": 122.03313379199244,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "diagnostic": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_background_context_v25",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1046036480,
+      "sample_errors": 12,
+      "duration_s": 146.60219745791983,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "ordinary": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_background_context_v25",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1418117120,
+      "sample_errors": 9,
+      "duration_s": 203.93481441691983,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "review": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_background_context_v25",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 209272832,
+      "sample_errors": 0,
+      "duration_s": 5.2443819580366835,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    }
+  },
+  "points_fit_complete_sha256": "37f4ab432e8e691fdfc317bef83b354d134daddb3cfc3d7fbc262ef93183b556",
+  "external_harness_history": {
+    "schema": "chipmunk.video-context-external-harness-events/25",
+    "events": [
+      {
+        "stage": "local_isolation_preflight",
+        "status": "failed_before_tests",
+        "reason": "Initial socket constructor replacement broke SSL class import. Corrected external isolation harness with a socket subclass and disabled plugin auto-loading; all18 tests then passed. No frozen science change or project pixel measurement was involved."
+      },
+      {
+        "stage": "linux_dispatch_attempt1",
+        "status": "no_run_created",
+        "reason": "GitHub workflow registration returned404 immediately after push. Queried authoritative workflow list; active workflow411126900 then dispatched successfully as run42481140674."
+      }
+    ],
+    "source_scoring_failures": 0
+  },
+  "point_coverage": {
+    "planned_source_groups": 40,
+    "common_assessed_source_groups": 39,
+    "groups_not_common_assessed": 1,
+    "shadow_artifact_scope": "Its unassessed_groups field describes the prefiltered common set only. Use these full40-group coverage counts when reporting availability."
+  },
+  "observation_coverage_by_arm": {
+    "current-fixed": {
+      "planned_files": 200,
+      "wholly_unassessed": 17,
+      "partially_assessed": 6,
+      "all_planned_units_assessed": 177,
+      "planned_units": 1000,
+      "assessed_units": 891
+    },
+    "appearance-matched": {
+      "planned_files": 200,
+      "wholly_unassessed": 17,
+      "partially_assessed": 6,
+      "all_planned_units_assessed": 177,
+      "planned_units": 1000,
+      "assessed_units": 891
+    },
+    "context": {
+      "planned_files": 200,
+      "wholly_unassessed": 17,
+      "partially_assessed": 6,
+      "all_planned_units_assessed": 177,
+      "planned_units": 1000,
+      "assessed_units": 891
+    }
+  },
+  "raw_media_published": false,
+  "source_pairings_published": false,
+  "geometry_or_feature_arrays_published": false,
+  "customer_inputs": 0,
+  "external_provider_requests": 0,
+  "outside_human_reviewers": 0,
+  "serving_changed": false,
+  "used_in_confidence": false,
+  "fresh_confirmation": false,
+  "limits": [
+    "Consumed sources and known constructions; no fresh people, generator transfer or population accuracy claim.",
+    "Face model forwards are repeated on the two prospectively selected clips only; other source-bound native responses are reused.",
+    "Background pixel means and temporal arithmetic were independently checked inline and replayed from private arrays, not re-extracted in a second full native pass.",
+    "No identity lookup, whole-video originality, lip-sync verdict or identified edited pixels.",
+    "Inspection flags and internal comparison points are not customer AI-authorship confidence.",
+    "Any passing development result still needs fresh source confirmation and full-app/export verification.",
+    "Sampled process-tree RSS is a lower bound; retain sampling errors and original failed external harness attempts."
+  ],
+  "exporter_sha256": "6bef1b276a8820844d84e68fe6592f93e05f17b5d66f112aaf7bab5320ded503"
+}

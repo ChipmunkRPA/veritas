@@ -211,3 +211,10 @@ already consumed; no new outside human reviewer or fresh-quality claim follows.
 The [broader provider-signal inventory](provider-signal-broad-search-2026-11-08.md)
 identifies additional qualification routes and explicit documentation gaps;
 provider policy review is separate from authentic file/response testing.
+
+The [background-context video experiment](video-background-context-v25-result.md)
+adds 18 authored spatial/temporal and source-role tests, with an actual isolated
+Linux receipt. The native280-file study and separate600-outcome audit are
+complete, but its primary fails replacement rules. Source footage/geometry/
+descriptors stay private; the public tests reproduce arithmetic and safety
+contracts, not native face inference or fresh accuracy.

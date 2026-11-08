@@ -110,3 +110,10 @@ localization improvement, so no arm is adopted. The
 [broader signal search](provider-signal-broad-search-2026-11-08.md) also adds
 CapCut-family verification, hosted Cosmos marking and other scoped source
 records without presenting them as admitted detectors.
+
+The [scene-context comparison](video-background-context-v25-result.md) now tests
+a concrete source-bound surrounding-pixel descriptor alongside face transitions.
+All 280 planned files and 600 outcomes completed. It removes two ordinary scene-
+substitution alerts but adds no swap beyond appearance recalibration and fails
+the unchanged replacement gates. Coarse background colour is insufficient; no
+new confidence or serving cue was admitted.

@@ -575,3 +575,26 @@ integration remains unfinished.
   flag. This extends consumed-source development, not fresh confirmation or
   model admission. All source metadata, rights, recipe and review measurements
   are published; outside review remains pending. [V7 result](mouth-multifamily-v7-evaluation.md).
+
+## Additional completed development on 8 November
+
+- The [image context/region-point factorial](image-region-point-v15-result.md)
+  passes the new mean arithmetic requirement and complete native/source replay,
+  but still loses useful localization versus current; all four arms remain
+  rejected. Its actual12-test Linux arithmetic receipt is separate from native
+  image inference and outside human review.
+- The [background-context video comparison](video-background-context-v25-result.md)
+  completed 80 genuine calibration files,160 consumed diagnostic clips and 40
+  ordinary source substitutions, with exact source clocks and 600 audited
+  outcomes. It changes62 to 63 localized swaps, but appearance recalibration alone
+  also reaches63; scene alerts22 to 20 still span11 of 20 components, and a new
+  jump-cut alert violates a frozen rule. Primary rejected; no fresh reserve or
+  serving promotion. All 18 focused tests and actual Linux arithmetic pass.
+- The [broader provider search](provider-signal-broad-search-2026-11-08.md)
+  now covers 67 families/96 scoped records with 19 explicit gaps. Newly documented
+  verification routes are distinct from qualified integrations; no external
+  customer verifier was enabled.
+
+Regional image localization, difficult audio, lip sync, general video, writing
+and outside human participation still require work. These completed negative
+comparisons narrow the methodology; they do not complete the improvement goal.

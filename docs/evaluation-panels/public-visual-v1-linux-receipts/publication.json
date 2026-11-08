@@ -1,0 +1,64 @@
+{
+  "schema": "chipmunk.public-visual-receipt-publication/1",
+  "platform": "linux",
+  "files": [
+    {
+      "path": "freeze.json",
+      "original_receipt_sha256": "f3ce98e359d21ec1ef8ed9417812c9866ecd3fd47f204aa0f59cc40fad7dbe92",
+      "public_receipt_sha256": "1f6f610c9d816357734e7ed73314e6c6684d7197d70057488bdac685edffead0",
+      "redactions": [
+        "main",
+        "source"
+      ]
+    },
+    {
+      "path": "result.json",
+      "original_receipt_sha256": "e5004f09a2360824856cb5011913d462b6826e3e377a295a63556a7c87900727",
+      "public_receipt_sha256": "e5004f09a2360824856cb5011913d462b6826e3e377a295a63556a7c87900727",
+      "redactions": []
+    },
+    {
+      "path": "profile/profile.json",
+      "original_receipt_sha256": "1cf765400be61c301783196df21c964cc85284588fd59d7b0b04c3eafd80d61e",
+      "public_receipt_sha256": "b1e4937d48f62425c867a33755a99096b2a48cebe5de564ae7d877b56a2565ab",
+      "redactions": [
+        "arguments source/output paths"
+      ]
+    },
+    {
+      "path": "audit/audit.json",
+      "original_receipt_sha256": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "public_receipt_sha256": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "redactions": []
+    },
+    {
+      "path": "audit-profile/profile.json",
+      "original_receipt_sha256": "b44f25191d98b9d7f10d5e6b35605429cba6e73f2533ab33537eefc216011b6f",
+      "public_receipt_sha256": "a47833e0a95167e1f8e12fe4024f75923121a2a2267cb082ac28db2f3d83e937",
+      "redactions": [
+        "arguments source/output paths"
+      ]
+    },
+    {
+      "path": "environment.json",
+      "original_receipt_sha256": "c73c61e422f0432a77e950b422e97f3d0cf851ff3ca9636dc790927387745f3f",
+      "public_receipt_sha256": "c73c61e422f0432a77e950b422e97f3d0cf851ff3ca9636dc790927387745f3f",
+      "redactions": []
+    },
+    {
+      "path": "acquisition.json",
+      "original_receipt_sha256": "c53802a01f7c70c6868dada8a186e401e44a47423c23c72a1582aeb3c59879cf",
+      "public_receipt_sha256": "c53802a01f7c70c6868dada8a186e401e44a47423c23c72a1582aeb3c59879cf",
+      "redactions": []
+    },
+    {
+      "path": "intent.json",
+      "original_receipt_sha256": "7c3f2d988b7332df7cbd83bffdb25d190d7d0eae6fd59d9ad00aedaa2ea3b0a4",
+      "public_receipt_sha256": "7c3f2d988b7332df7cbd83bffdb25d190d7d0eae6fd59d9ad00aedaa2ea3b0a4",
+      "redactions": []
+    }
+  ],
+  "only_redactions": "Local filesystem source/output paths; all science, numerical results, resource facts and audit facts retained. Original retained records were not rewritten.",
+  "raw_media_published": false,
+  "private_case_rows_published": false
+}

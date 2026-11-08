@@ -77,3 +77,95 @@ workflow itself is not evidence of a completed native run.
   version, and writes a setup-intent receipt before dependency installation.
   This is an environment correction; the immutable experiment revision and
   all its points, cases, guards and checks remain unchanged.
+
+## Completed audio replay after source correction
+
+The arithmetic-only retry in run 42468303951 completed successfully. Its
+[receipt](evaluation-panels/linux-source-pinned-audio-v13-arithmetic-20261108.json)
+reconstructed all **4,248 feature records** and **1,449 development outcomes**,
+including the original byte-for-byte feature receipt and rejection of both
+candidate arms. The separate
+[diagnostic receipt](evaluation-panels/linux-source-pinned-audio-v13-diagnostics-20261108.json)
+completed both fitting-only refits. It found maximum normalization-center
+difference 2.67e-15, coefficient difference 8.21e-16 and development-probability
+difference 2.22e-16. Neither arm changed a directional outcome or needed an
+unavailable extra public probe. These are floating-point differences, not exact
+equality. The strict equality job still failed on the standalone fit, so the
+overall workflow remains failed. No original object or acceptance test changed.
+
+Only the setup-failed arithmetic job was requested for retry; the completed
+diagnostic/strict-fit outcomes were retained. The first attempt's HTTP 504
+setup failure and the earlier changed-source failures remain in GitHub history.
+No new audio-model inference, source recording scoring or speech calibration
+was performed by this replay.
+
+## Completed native visual replay and Mac comparison
+
+[Corrected visual run 42468624233](https://github.com/ChipmunkRPA/veritas/actions/runs/42468624233)
+completed native inference and its separate non-neural audit on Linux x86_64.
+The exact public artifact SHA-256 was
+`c2e6c0a3813fd79b229815a1b0ffdd6ccafeea1652ddc1daec1aad39e59011b2`.
+Its ten files were checked against the allowlist before local extraction. The
+checkpoint SHA-256, all 432 loaded tensors, 94,416,643 parameters, protected
+source/policy identity and core package versions match the Mac study. The Linux
+CPU wheel suffix and FFmpeg version are recorded rather than hidden.
+
+Both platforms completed **168 cases / 191 neural forwards**. Each separate
+audit replayed 11,010,048 presence pixels and 352,321,536 binary bit predictions,
+redecoded six clips / 48 frames and verified source timestamps with zero neural
+forwards. Linux native execution took 74.61 seconds with sampled process-tree
+RSS 1,165,332,480 bytes; audit took 2.53 seconds with 199,680,000 bytes. Neither
+guard triggered; both profiles report zero sampling errors. Sampled RSS is a
+lower bound, not an assertion of the exact memory peak.
+
+The [public comparison](evaluation-panels/public-visual-v1-cross-platform-replay.json)
+retains seven groups with numerical differences. Only two groups changed any
+flag/miss counts, both after H264 encoding:
+
+| Same fixed authored condition | Mac | Linux | Denominator |
+|---|---:|---:|---:|
+| No-added-mark H264 frames flagged | 2 | 3 | 24 frames |
+| Intended partial-mark H264 frames missed | 3 | 2 | 12 marked frames |
+| Partial H264 flags outside intended marked interval | 6 | 4 | 12 outside frames |
+| Partial H264 mean marked-region IoU | 0.2364 | 0.3138 | 12 marked frames |
+
+All image flag/miss counts and raw-video flag/miss counts matched. Some native
+and resized overlaps/pixel counts differ slightly. Linux used FFmpeg 6.1.1 and
+CPU PyTorch builds; the Mac execution used its recorded local runtime. The
+causes of cross-platform differences were not isolated. Neither platform is
+declared better from this comparison. In particular, outside-interval H264
+responses can reflect codec propagation or false-family responses; intended
+insertion boundaries do not prove every changed pixel's cause.
+
+Source, results, audits and resource receipt copies are public in
+[Mac receipts](evaluation-panels/public-visual-v1-mac-receipts/publication.json)
+and [Linux receipts](evaluation-panels/public-visual-v1-linux-receipts/publication.json).
+Only source/output filesystem paths were redacted in the copies; manifests
+retain original/public checksums and list every redaction. Canonical retained
+records were not rewritten. No raw media, case pairings or prediction arrays
+were published. Reproduce the aggregate comparison without a model download:
+
+```sh
+PYTHONPATH=backend python -m scripts.compare_public_visual_native_v1 \
+  docs/evaluation-panels/public-visual-v1-mac-receipts \
+  docs/evaluation-panels/public-visual-v1-linux-receipts \
+  /tmp/new-public-visual-comparison.json
+```
+
+Thirteen selected model-free contract/comparison tests and static checks pass.
+The comparison rejects changed model identities, cases, core package versions,
+incomplete timestamp audits, triggered guards and a false serving-admission flag.
+No test, decoder point or original study code was relaxed. Outside human
+reviewers remain **zero**. No provider compatibility, real-media accuracy,
+AI-confidence contribution or early-stop admission is established.
+
+## Fresh natural-media preparation remains separate
+
+Metadata-only preflight now covers 288 distinct Wikimedia file pages across
+16 retained API responses. Initial date, format, attribution and per-file
+Creative Commons license checks leave 78 image and 24 video candidates from
+65 credited creators. These are publisher metadata claims, not authenticated
+capture truth. No raw media was downloaded or scored for this panel. Visual
+eligibility review, complete source-exclusion checks, downloaded-byte/decoded
+geometry checks and a separate prospective scoring freeze are still required.
+The real-media panel is not described as completed by the Linux authored replay.

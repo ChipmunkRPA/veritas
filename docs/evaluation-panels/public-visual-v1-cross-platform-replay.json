@@ -1,0 +1,668 @@
+{
+  "schema": "chipmunk.public-visual-cross-platform-replay/1",
+  "source_commit": "c2ef887cc236490cdf0962f2754edf554d802a27",
+  "science_identity_matched": true,
+  "both_original_native_contracts_completed": true,
+  "both_model_free_audits_completed": true,
+  "cross_platform_groups_exact": false,
+  "groups_with_any_numerical_difference": 7,
+  "groups_with_changed_flags_or_misses": 2,
+  "mac_packages": {
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "PyYAML": "6.0.3",
+    "einops": "0.8.2",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0"
+  },
+  "linux_environment": {
+    "schema": "chipmunk.public-visual-linux-runtime/1",
+    "science_commit": "c2ef887cc236490cdf0962f2754edf554d802a27",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "python": "3.12.6",
+    "packages": {
+      "torch": "2.13.0+cpu",
+      "torchvision": "0.28.0+cpu",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "PyYAML": "6.0.3",
+      "einops": "0.8.2",
+      "opencv-python-headless": "5.0.0.93",
+      "Pillow": "12.3.0",
+      "psutil": "7.2.2"
+    },
+    "cuda_available": false,
+    "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "outside_human_reviewers": 0,
+    "customer_files": 0,
+    "serving_changed": false
+  },
+  "load_receipt": {
+    "checkpoint_sha256": "90ef232384e023bd63245eb0c131abd69d2afc7b8f17a71ccedceb542bf009e2",
+    "checkpoint_bytes": 377825938,
+    "state_tensors": 432,
+    "loaded_tensors_verified": true,
+    "parameters": 94416643,
+    "weights_only": true,
+    "unrestricted_pickle_used": false,
+    "stored_checkpoint_on_disk": false
+  },
+  "groups": [
+    {
+      "kind": "image",
+      "alteration": "down_up128",
+      "state": "marked",
+      "mac": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9918696085611979,
+        "mean_selected_pixels": 65003.166666666664
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9918543497721354,
+        "mean_selected_pixels": 65002.166666666664
+      },
+      "differences": {
+        "mean_marked_iou": {
+          "mac": 0.9918696085611979,
+          "linux": 0.9918543497721354
+        },
+        "mean_selected_pixels": {
+          "mac": 65003.166666666664,
+          "linux": 65002.166666666664
+        }
+      }
+    },
+    {
+      "kind": "image",
+      "alteration": "down_up128",
+      "state": "ordinary_edit",
+      "mac": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 1,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 116.66666666666667
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 1,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 116.66666666666667
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "down_up128",
+      "state": "partial",
+      "mac": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9630899826491935,
+        "mean_selected_pixels": 16384.166666666668
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.963110214096956,
+        "mean_selected_pixels": 16384.5
+      },
+      "differences": {
+        "mean_marked_iou": {
+          "mac": 0.9630899826491935,
+          "linux": 0.963110214096956
+        },
+        "mean_selected_pixels": {
+          "mac": 16384.166666666668,
+          "linux": 16384.5
+        }
+      }
+    },
+    {
+      "kind": "image",
+      "alteration": "down_up128",
+      "state": "unmarked",
+      "mac": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "down_up128",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "jpeg70",
+      "state": "marked",
+      "mac": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.8102060953776041,
+        "mean_selected_pixels": 53097.666666666664
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.8102060953776041,
+        "mean_selected_pixels": 53097.666666666664
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "jpeg70",
+      "state": "ordinary_edit",
+      "mac": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 2,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 2,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 1024.5
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 2,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 2,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 1024.5
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "jpeg70",
+      "state": "partial",
+      "mac": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 4,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 2,
+        "mean_marked_iou": 0.4242090185743095,
+        "mean_selected_pixels": 8153.5
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 4,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 2,
+        "mean_marked_iou": 0.4242090185743095,
+        "mean_selected_pixels": 8153.5
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "jpeg70",
+      "state": "unmarked",
+      "mac": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 1,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 826.6666666666666
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "jpeg70",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 1,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 826.6666666666666
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "native",
+      "state": "marked",
+      "mac": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9888966878255209,
+        "mean_selected_pixels": 64808.333333333336
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "marked",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9889094034830729,
+        "mean_selected_pixels": 64809.166666666664
+      },
+      "differences": {
+        "mean_marked_iou": {
+          "mac": 0.9888966878255209,
+          "linux": 0.9889094034830729
+        },
+        "mean_selected_pixels": {
+          "mac": 64808.333333333336,
+          "linux": 64809.166666666664
+        }
+      }
+    },
+    {
+      "kind": "image",
+      "alteration": "native",
+      "state": "ordinary_edit",
+      "mac": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "ordinary_edit",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "differences": {}
+    },
+    {
+      "kind": "image",
+      "alteration": "native",
+      "state": "partial",
+      "mac": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.966128138523405,
+        "mean_selected_pixels": 16135.5
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "partial",
+        "cases": 6,
+        "flagged": 6,
+        "unmarked_cases": 0,
+        "unmarked_flagged": 0,
+        "marked_cases": 6,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9661487225910115,
+        "mean_selected_pixels": 16136.166666666666
+      },
+      "differences": {
+        "mean_marked_iou": {
+          "mac": 0.966128138523405,
+          "linux": 0.9661487225910115
+        },
+        "mean_selected_pixels": {
+          "mac": 16135.5,
+          "linux": 16136.166666666666
+        }
+      }
+    },
+    {
+      "kind": "image",
+      "alteration": "native",
+      "state": "unmarked",
+      "mac": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "linux": {
+        "kind": "image",
+        "alteration": "native",
+        "state": "unmarked",
+        "cases": 6,
+        "flagged": 0,
+        "unmarked_cases": 6,
+        "unmarked_flagged": 0,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 0.0
+      },
+      "differences": {}
+    },
+    {
+      "kind": "video",
+      "alteration": "h264",
+      "state": "partial",
+      "mac": {
+        "kind": "video",
+        "alteration": "h264",
+        "state": "partial",
+        "cases": 24,
+        "flagged": 15,
+        "unmarked_cases": 12,
+        "unmarked_flagged": 6,
+        "marked_cases": 12,
+        "marked_missed": 3,
+        "mean_marked_iou": 0.23636053145851255,
+        "mean_selected_pixels": 2979.4166666666665
+      },
+      "linux": {
+        "kind": "video",
+        "alteration": "h264",
+        "state": "partial",
+        "cases": 24,
+        "flagged": 14,
+        "unmarked_cases": 12,
+        "unmarked_flagged": 4,
+        "marked_cases": 12,
+        "marked_missed": 2,
+        "mean_marked_iou": 0.31376677777661105,
+        "mean_selected_pixels": 3881.625
+      },
+      "differences": {
+        "flagged": {
+          "mac": 15,
+          "linux": 14
+        },
+        "unmarked_flagged": {
+          "mac": 6,
+          "linux": 4
+        },
+        "marked_missed": {
+          "mac": 3,
+          "linux": 2
+        },
+        "mean_marked_iou": {
+          "mac": 0.23636053145851255,
+          "linux": 0.31376677777661105
+        },
+        "mean_selected_pixels": {
+          "mac": 2979.4166666666665,
+          "linux": 3881.625
+        }
+      }
+    },
+    {
+      "kind": "video",
+      "alteration": "h264",
+      "state": "unmarked",
+      "mac": {
+        "kind": "video",
+        "alteration": "h264",
+        "state": "unmarked",
+        "cases": 24,
+        "flagged": 2,
+        "unmarked_cases": 24,
+        "unmarked_flagged": 2,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 204.79166666666666
+      },
+      "linux": {
+        "kind": "video",
+        "alteration": "h264",
+        "state": "unmarked",
+        "cases": 24,
+        "flagged": 3,
+        "unmarked_cases": 24,
+        "unmarked_flagged": 3,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 188.5
+      },
+      "differences": {
+        "flagged": {
+          "mac": 2,
+          "linux": 3
+        },
+        "unmarked_flagged": {
+          "mac": 2,
+          "linux": 3
+        },
+        "mean_selected_pixels": {
+          "mac": 204.79166666666666,
+          "linux": 188.5
+        }
+      }
+    },
+    {
+      "kind": "video",
+      "alteration": "raw",
+      "state": "partial",
+      "mac": {
+        "kind": "video",
+        "alteration": "raw",
+        "state": "partial",
+        "cases": 24,
+        "flagged": 12,
+        "unmarked_cases": 12,
+        "unmarked_flagged": 0,
+        "marked_cases": 12,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9191745037001998,
+        "mean_selected_pixels": 7709.25
+      },
+      "linux": {
+        "kind": "video",
+        "alteration": "raw",
+        "state": "partial",
+        "cases": 24,
+        "flagged": 12,
+        "unmarked_cases": 12,
+        "unmarked_flagged": 0,
+        "marked_cases": 12,
+        "marked_missed": 0,
+        "mean_marked_iou": 0.9191543157464168,
+        "mean_selected_pixels": 7709.083333333333
+      },
+      "differences": {
+        "mean_marked_iou": {
+          "mac": 0.9191745037001998,
+          "linux": 0.9191543157464168
+        },
+        "mean_selected_pixels": {
+          "mac": 7709.25,
+          "linux": 7709.083333333333
+        }
+      }
+    },
+    {
+      "kind": "video",
+      "alteration": "raw",
+      "state": "unmarked",
+      "mac": {
+        "kind": "video",
+        "alteration": "raw",
+        "state": "unmarked",
+        "cases": 24,
+        "flagged": 1,
+        "unmarked_cases": 24,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 28.666666666666668
+      },
+      "linux": {
+        "kind": "video",
+        "alteration": "raw",
+        "state": "unmarked",
+        "cases": 24,
+        "flagged": 1,
+        "unmarked_cases": 24,
+        "unmarked_flagged": 1,
+        "marked_cases": 0,
+        "marked_missed": 0,
+        "mean_marked_iou": null,
+        "mean_selected_pixels": 28.666666666666668
+      },
+      "differences": {}
+    }
+  ],
+  "input_receipt_sha256": {
+    "mac": {
+      "freeze.json": "2327236995f1fd14ae56612c5ce4a5872f922067f560fb5bf64d23ec41cce64d",
+      "result.json": "3ddee3e79c5fc5edfeea58df60ba8c57be9ef064f875ed0206108cb8a3d82091",
+      "profile/profile.json": "aec949f07c92aa3d259c7a064784d99e095366960b197b75689296e23880afb0",
+      "audit/audit.json": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "audit-profile/profile.json": "d0a25613ea92384c64b40c54778c95726d80633a368837f696f62470c265620e"
+    },
+    "linux": {
+      "freeze.json": "1f6f610c9d816357734e7ed73314e6c6684d7197d70057488bdac685edffead0",
+      "result.json": "e5004f09a2360824856cb5011913d462b6826e3e377a295a63556a7c87900727",
+      "profile/profile.json": "b1e4937d48f62425c867a33755a99096b2a48cebe5de564ae7d877b56a2565ab",
+      "audit/audit.json": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "audit-profile/profile.json": "a47833e0a95167e1f8e12fe4024f75923121a2a2267cb082ac28db2f3d83e937"
+    }
+  },
+  "outside_human_reviewers": 0,
+  "customer_files": 0,
+  "fresh_natural_media_cases": 0,
+  "new_comparison_neural_forwards": 0,
+  "serving_changed": false,
+  "scope": "Same authored experiment re-executed on another machine; compare aggregate responses after each original within-runtime audit. Raw CI arrays are not exported. Not fresh-media/provider accuracy, human review or serving admission."
+}

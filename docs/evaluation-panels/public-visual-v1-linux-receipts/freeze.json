@@ -1,0 +1,46 @@
+{
+  "policy": {
+    "schema": "chipmunk.public-visual-watermark-authored-policy/1",
+    "scope": "Non-neural authored carriers only; not real-media or production-provider accuracy.",
+    "checkpoint": "Explicit MIT SA-1B checkpoint only, matched to pinned publisher mirror SHA256. Original noncommercial COCO weights excluded.",
+    "storage": "Download checkpoint directly into bounded RAM; verify full length/SHA256 before restricted tensor loading. Retain identity/loaded-tensor receipts; replay requires reacquisition. No source checkpoint is stored on disk.",
+    "images": "Six deterministic256x256 RGB authored carriers; unmarked/full mark/center128x128 partial mark/ordinary rotated center crop; native/JPEG70/down128-up256 bilinear variants.",
+    "preprocessing": "Publisher ImageNet transform; native F32 generation with fixed alternating32bit message, scaling_w2, original JND config. Unnormalize/clamp/half-up RGB8 quantization; partial copies marked center pixels only.",
+    "mask_readout": "Native first-channel logits strictly>0; retain every logit and pixel.8-connected components>=500pixels are inspection regions; this is a proposed inspection rule, not a validated false-alarm guarantee.",
+    "message_readout": "Publisher-supported hard method: each raw bit logit>0, pack all32 binary maps; majority over selected mask pixels. Empty mask is unavailable. Raw continuous bit logits are unused and not retained.",
+    "video": "Three authored moving8frame clips at2fps. Unmarked/partial states; partial center mark on frames2:6 only (1\u20133s), raw frames and H264CRF23; preserve8 decoded frame PTS and exact source coordinates.",
+    "image_cases": 72,
+    "video_frame_cases": 96,
+    "generator_forwards": 18,
+    "detector_forwards": 173,
+    "parity": "Four first-scene wrapper/direct detector comparisons; first partial repeat bit-exact. No response-based point change or case removal.",
+    "inference": "CPUfloat32, twoTorch threads, seed20261108; guard900s/6GiB sampledRSS/1536MiB availableRAM/disk.",
+    "provider_authenticated": false,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "early_stop_eligible": false
+  },
+  "code_sha256": {
+    "backend/scripts/public_visual_watermark_v1.py": "ccee054f5bde3381695d03b6cffc015e596e1b37b2107d6179574bea7eeae71f",
+    "backend/scripts/public_visual_watermark_assets_v1.json": "b780a1d7b70f687e6646a82c839f932c152af8f02d58e30ee6d1323281672049",
+    "backend/scripts/run_public_visual_watermark_v1.py": "92a89b8b12b044b2a5fa93417465a9c6fbf69e95ce9648ceb2d1951272d05bd4",
+    "backend/scripts/review_public_visual_watermark_v1.py": "552566e529042a6867726cb630d6a220502583494cde226d6314b0f5605e3a30",
+    "backend/scripts/public_visual_watermark_runtime_v1.py": "fb5113a5a549e2df166abd4ec161ae4e1b85e4dae5e083ef5458999f4d8847e1",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_public_visual_watermark_v1.py": "058d91f138b9d6bfbbe3e057c562c352d8e0136f4446762fe4085c62a57ffba8",
+    "docs/public-visual-watermark-v1-protocol.md": "4feda2b1a9174adfe55052461333cdf1bc66872960f1292429669029f3d00884"
+  },
+  "packages": {
+    "torch": "2.13.0+cpu",
+    "torchvision": "0.28.0+cpu",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "PyYAML": "6.0.3",
+    "einops": "0.8.2",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0"
+  },
+  "source_assets_sha256": "b780a1d7b70f687e6646a82c839f932c152af8f02d58e30ee6d1323281672049",
+  "neural_forwards_before_freeze": 0,
+  "customer_inputs": 0
+}

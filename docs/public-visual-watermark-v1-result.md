@@ -117,3 +117,9 @@ frozen, plus separately qualified VideoSeal/PixelSeal and text schemes. The newe
 PixelSeal checkpoint's inspected size is1,237,429,197bytes; reading its paper/code
 does not establish compatibility with private Muse deployment. No serving or
 confidence promotion follows from this authored contract. GCP remains last.
+
+The separate [Linux native replay](independent-replay-2026-11-08.md) now also
+completed this immutable authored contract and its model-free audit. The
+cross-platform comparison retains changed H264 flags/misses and small numerical
+differences. This does not replace the Mac results above or complete the
+natural-media/provider qualification.

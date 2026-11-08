@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.public-visual-receipt-publication/1",
+  "platform": "mac",
+  "files": [
+    {
+      "path": "freeze.json",
+      "original_receipt_sha256": "9c4407d2828c8638c3e69594c0ca337826be7f53f29ff1603c7d630f2bc48999",
+      "public_receipt_sha256": "2327236995f1fd14ae56612c5ce4a5872f922067f560fb5bf64d23ec41cce64d",
+      "redactions": [
+        "main",
+        "source"
+      ]
+    },
+    {
+      "path": "result.json",
+      "original_receipt_sha256": "3ddee3e79c5fc5edfeea58df60ba8c57be9ef064f875ed0206108cb8a3d82091",
+      "public_receipt_sha256": "3ddee3e79c5fc5edfeea58df60ba8c57be9ef064f875ed0206108cb8a3d82091",
+      "redactions": []
+    },
+    {
+      "path": "profile/profile.json",
+      "original_receipt_sha256": "ca12e1858714e0ffbd2546e7b40af6fe87f425c252b8dcfa43f13f53a2340fe1",
+      "public_receipt_sha256": "aec949f07c92aa3d259c7a064784d99e095366960b197b75689296e23880afb0",
+      "redactions": [
+        "arguments source/output paths"
+      ]
+    },
+    {
+      "path": "audit/audit.json",
+      "original_receipt_sha256": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "public_receipt_sha256": "aa7aa03544e0fecba64673e65575d404f7a14c9b240cbac8141fd78219d32851",
+      "redactions": []
+    },
+    {
+      "path": "audit-profile/profile.json",
+      "original_receipt_sha256": "97796c1794182437a7226fa911b2878b4359945a2ccf5bb2debc938fe4a79ae5",
+      "public_receipt_sha256": "d0a25613ea92384c64b40c54778c95726d80633a368837f696f62470c265620e",
+      "redactions": [
+        "arguments source/output paths"
+      ]
+    }
+  ],
+  "only_redactions": "Local filesystem source/output paths; all science, numerical results, resource facts and audit facts retained. Original retained records were not rewritten.",
+  "raw_media_published": false,
+  "private_case_rows_published": false
+}

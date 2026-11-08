@@ -1,0 +1,47 @@
+{
+  "schema": "chipmunk.video-face-linux-replay-review/20",
+  "run_id": 42432887072,
+  "job_id": 128585436149,
+  "workflow_id": 410787781,
+  "workflow_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42432887072",
+  "workflow_head_commit": "89c80d8f31857935db62dfa08005d87aae7140c2",
+  "job_conclusion": "success",
+  "replay": {
+    "schema": "chipmunk.immutable-specialist-release-replay/5",
+    "science_commit": "89c80d8f31857935db62dfa08005d87aae7140c2",
+    "release": "docs/evaluation-panels/video-face-specialists-v20-release.json",
+    "release_sha256": "241c1b4fc86ad6c912bd807a126edffade21eaf44421b801c50ba8c8f44739fd",
+    "selected_repository_files": 53,
+    "numerical": {
+      "schema": "chipmunk.specialist-real-scalar-reproduction/4",
+      "study": "video-face-specialists-v20",
+      "modality": "video",
+      "arms": 4,
+      "probabilities_compared": 11168,
+      "max_absolute_probability_difference": 2.220446049250313e-16,
+      "absolute_probability_limit": 0.000001,
+      "confirmation_not_fitted": true,
+      "changed_assessed_confirmation_units": 3416,
+      "preserved_unassessed_confirmation_units": 104,
+      "missing_required_check_withheld": true,
+      "missing_check_test_status": "passed_on_previously_assessed_file",
+      "cross_role_lineage_refused": true,
+      "new_neural_forwards": 0,
+      "raw_media_or_weights_loaded": false,
+      "serving_admitted": false,
+      "scope": "Retained-scalar numerical replay only; not native inference, source truth, fresh detection quality or outside human review."
+    },
+    "frozen_science_modified": false,
+    "new_neural_forwards": 0,
+    "serving_admitted": false,
+    "scope": "Immutable consumed-source scalar replay, not native inference, fresh detection quality or outside human review."
+  },
+  "prior_dispatch_preflight": {
+    "http_status": 404,
+    "job_started": false,
+    "resolution": "Verified the newly pushed workflow was active, then dispatched its actual workflow ID. No failed scientific job was retried."
+  },
+  "outside_human_reviews": 0,
+  "serving_admitted": false,
+  "limits": "Actual GitHub-hosted Linux numerical refit/replay. Not native-model execution, fresh media detection validation, reliably portable fitting for every study, or outside human review."
+}

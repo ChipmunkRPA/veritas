@@ -109,7 +109,19 @@ remapping reproduced private probabilities exactly. Local scalar refit reproduce
 all 11,168 assessed probabilities exactly. Adverse checks changed 3,416 reserved
 measurements without changing fitting, preserved 104 unassessed measurements,
 withheld a combined score when a required check was removed, and rejected
-cross-role lineage. An immutable-commit/Linux replay is recorded separately.
+cross-role lineage. The local immutable-commit replay archived 53 exact declared
+files and reproduced the same probabilities with maximum difference 0.
+
+The actual [Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42432887072)
+completed successfully on immutable science commit
+`89c80d8f31857935db62dfa08005d87aae7140c2`. It archived the same 53 files,
+refitted all four arms, compared 11,168 probabilities with maximum difference
+2.220446049250313e-16, and passed all three adverse checks. The
+[actual receipt](evaluation-panels/video-face-specialists-v20-linux-review.json)
+records run/job identity and the unaltered replay output. An initial dispatch
+before GitHub registered the new workflow returned 404 and started no job;
+the verified workflow then ran once. This success does not resolve the earlier
+passage fitter convergence failures or constitute outside human review.
 
 Next development should compare an appearance-only calibrated reference and a
 jointly fitted combination that retains each view's signal. Family maximum

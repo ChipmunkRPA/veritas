@@ -126,3 +126,11 @@ noisy/partial misses remain retained. The expanded
 [provider review](provider-signal-followup-2026-11-08.md) also reads textGrain
 generation/detection mathematics while preserving its secret-key dependency.
 These are distinct from adopting a new lip-sync or passage detector.
+
+The independently implemented [sound/mouth correspondence study](mouth-audio-context-v14-result.md)
+adds actual clock-bound audio measurements to the existing temporal visual
+learner, with an unchanged-capacity visual-only control. It finds five additional
+known edits but doubles ordinary flags, including original and merely delayed
+recordings. Its full source/audio/feature audit passes; the method is rejected.
+Correlation measures correspondence, not AI provenance. No new paper weights,
+customer confidence or model default was introduced.

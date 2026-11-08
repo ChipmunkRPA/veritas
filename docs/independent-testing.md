@@ -226,3 +226,12 @@ passes 20 arithmetic/contract tests without media or neural inference. No
 provider-authentication, natural-speech accuracy or outside human review follows.
 The [provider follow-up](provider-signal-followup-2026-11-08.md) records 71
 families and explicit gaps, separately from operational verification.
+
+The [audio-aware mouth study](mouth-audio-context-v14-result.md) provides another
+model-free starting point: `python -m scripts.review_mouth_audio_public_v14`
+with a new receipt path and `PYTHONPATH=backend`. Only NumPy is required; it
+checks authored signed lags, exact audio blocks and no-wrap/degenerate cases
+against separately written scalar equations. It does not replay private audio
+or train the small head. The [actual Linux math receipt](evaluation-panels/mouth-audio-context-v14-linux-math-review.json)
+also passes. The complete local 272-track/6,373-window study rejects
+the candidate for excess ordinary flags. Outside human review remains pending.

@@ -608,3 +608,11 @@ without confidence or early stopping. The
 families/101 records with 20 review gaps. The separate
 [lip-sync permission review](lip-sync-source-review-2026-11-08.md) admits no new
 checkpoint. Serving defaults, rollback, voice calibration and GCP are unchanged.
+
+The [audio-aware mouth comparison](mouth-audio-context-v14-result.md) now completes
+all 272 audio tracks and 6,373 windows, with separate full audio/feature/mask/time
+replay. It locates 31/32 edits versus 26/32 visual-only but doubles ordinary flags
+from 12/56 to 24/56; rejected. The original short-control failure and 178 exact
+persisted-prefix reproductions remain retained. New public NumPy-only arithmetic
+review and an actual Linux run complement 20 local authored tests; outside human participation and fresh
+confirmation remain outstanding. No serving or confidence promotion.

@@ -1,0 +1,621 @@
+{
+  "schema": "chipmunk.mouth-audio-context-complete-result/14",
+  "science_commit": "fddd0241b724985b20d750de2c654d9f94f45500",
+  "public_freeze_sha256": "af82459f9aad1aa46194fe4692fb026454365f7d35a4f0e6b3d09fcfb44923e5",
+  "result": {
+    "schema": "chipmunk.mouth-audio-context-development/14",
+    "baseline": {
+      "planned": 88,
+      "ai_edits": 32,
+      "non_ai_controls": 56,
+      "assessed": 88,
+      "localized_ai": 14,
+      "ai_without_flag": 18,
+      "non_ai_flags": 0,
+      "mean_ai_temporal_iou": 0.3020089285714286,
+      "mean_ai_spatial_iou": 0.15117657053268102
+    },
+    "arms": {
+      "control": {
+        "standalone": {
+          "planned": 88,
+          "ai_edits": 32,
+          "non_ai_controls": 56,
+          "assessed": 88,
+          "localized_ai": 26,
+          "ai_without_flag": 6,
+          "non_ai_flags": 12,
+          "mean_ai_temporal_iou": 0.4993729848803705,
+          "mean_ai_spatial_iou": 0.24085935270577158
+        },
+        "combined": {
+          "planned": 88,
+          "ai_edits": 32,
+          "non_ai_controls": 56,
+          "assessed": 88,
+          "localized_ai": 26,
+          "ai_without_flag": 6,
+          "non_ai_flags": 12,
+          "mean_ai_temporal_iou": 0.5324839881200503,
+          "mean_ai_spatial_iou": 0.23990755501428226
+        },
+        "gates": {
+          "six_net_additional_locations": true,
+          "first_family_six_locations": true,
+          "both_first_family_conditions": true,
+          "retained_second_family": true,
+          "at_most_one_lost_location": true,
+          "total_ordinary_flags": false,
+          "condition_ordinary_flags": false,
+          "spatial_iou_gain": true,
+          "retained_temporal_iou": true,
+          "retained_coverage": true,
+          "complete_replays": true
+        },
+        "families": {
+          "liveportrait": {
+            "planned": 48,
+            "ai_edits": 16,
+            "non_ai_controls": 32,
+            "assessed": 48,
+            "localized_ai": 10,
+            "ai_without_flag": 6,
+            "non_ai_flags": 9,
+            "mean_ai_temporal_iou": 0.3762352649858375,
+            "mean_ai_spatial_iou": 0.1354988212704024
+          },
+          "musetalk": {
+            "planned": 40,
+            "ai_edits": 16,
+            "non_ai_controls": 24,
+            "assessed": 40,
+            "localized_ai": 16,
+            "ai_without_flag": 0,
+            "non_ai_flags": 3,
+            "mean_ai_temporal_iou": 0.6887327112542629,
+            "mean_ai_spatial_iou": 0.3443162887581621
+          }
+        }
+      },
+      "candidate": {
+        "standalone": {
+          "planned": 88,
+          "ai_edits": 32,
+          "non_ai_controls": 56,
+          "assessed": 88,
+          "localized_ai": 31,
+          "ai_without_flag": 1,
+          "non_ai_flags": 24,
+          "mean_ai_temporal_iou": 0.6207147024277169,
+          "mean_ai_spatial_iou": 0.264091884413245
+        },
+        "combined": {
+          "planned": 88,
+          "ai_edits": 32,
+          "non_ai_controls": 56,
+          "assessed": 88,
+          "localized_ai": 31,
+          "ai_without_flag": 1,
+          "non_ai_flags": 24,
+          "mean_ai_temporal_iou": 0.6476095927385555,
+          "mean_ai_spatial_iou": 0.2666610486629628
+        },
+        "gates": {
+          "six_net_additional_locations": true,
+          "first_family_six_locations": true,
+          "both_first_family_conditions": true,
+          "retained_second_family": true,
+          "at_most_one_lost_location": true,
+          "total_ordinary_flags": false,
+          "condition_ordinary_flags": false,
+          "spatial_iou_gain": true,
+          "retained_temporal_iou": true,
+          "retained_coverage": true,
+          "complete_replays": true,
+          "no_fewer_locations_than_visual_control": true,
+          "no_more_ordinary_flags_than_visual_control": false
+        },
+        "families": {
+          "liveportrait": {
+            "planned": 48,
+            "ai_edits": 16,
+            "non_ai_controls": 32,
+            "assessed": 48,
+            "localized_ai": 15,
+            "ai_without_flag": 1,
+            "non_ai_flags": 18,
+            "mean_ai_temporal_iou": 0.5950474821804076,
+            "mean_ai_spatial_iou": 0.19026924954818364
+          },
+          "musetalk": {
+            "planned": 40,
+            "ai_edits": 16,
+            "non_ai_controls": 24,
+            "assessed": 40,
+            "localized_ai": 16,
+            "ai_without_flag": 0,
+            "non_ai_flags": 6,
+            "mean_ai_temporal_iou": 0.7001717032967033,
+            "mean_ai_spatial_iou": 0.3430528477777419
+          }
+        }
+      }
+    },
+    "conditions": {
+      "ai-redraw": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 5,
+          "ai_without_flag": 3,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.38055823486857965,
+          "mean_ai_spatial_iou": 0.1314634667174715
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 7,
+          "ai_without_flag": 1,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.563891568201913,
+          "mean_ai_spatial_iou": 0.16920941368966322
+        }
+      },
+      "ai-retime": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 5,
+          "ai_without_flag": 3,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.3719122951030953,
+          "mean_ai_spatial_iou": 0.13953417582333327
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 8,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.6262033961589023,
+          "mean_ai_spatial_iou": 0.2113290854067041
+        }
+      },
+      "constant-audio-delay": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 3,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 6,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "local-blur-2": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 1,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "local-blur-4": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "local-light": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 1,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 3,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "local-resample": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 2,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 4,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "muse-ai-aligned": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 8,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.6813115763546798,
+          "mean_ai_spatial_iou": 0.34355032110563305
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 8,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.7041895604395605,
+          "mean_ai_spatial_iou": 0.3410234391447926
+        }
+      },
+      "muse-ai-earlier": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 8,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.6961538461538461,
+          "mean_ai_spatial_iou": 0.34508225641069123
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 8,
+          "non_ai_controls": 0,
+          "assessed": 8,
+          "localized_ai": 8,
+          "ai_without_flag": 0,
+          "non_ai_flags": 0,
+          "mean_ai_temporal_iou": 0.6961538461538461,
+          "mean_ai_spatial_iou": 0.34508225641069123
+        }
+      },
+      "muse-resample": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 3,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 5,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      },
+      "original": {
+        "control": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 3,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        },
+        "candidate": {
+          "planned": 8,
+          "ai_edits": 0,
+          "non_ai_controls": 8,
+          "assessed": 8,
+          "localized_ai": 0,
+          "ai_without_flag": 0,
+          "non_ai_flags": 5,
+          "mean_ai_temporal_iou": null,
+          "mean_ai_spatial_iou": null
+        }
+      }
+    },
+    "control_parity": {
+      "control_native_export": {
+        "windows": 6373,
+        "maximum_difference": 0.0
+      },
+      "control_exact": true,
+      "candidate_native_export": {
+        "windows": 6373,
+        "maximum_difference": 0.0
+      }
+    },
+    "passes": false,
+    "case_counts": {
+      "fit": 160,
+      "calibration": 24,
+      "development": 88
+    },
+    "all_diagnostic_cases": 88,
+    "window_counts": {
+      "fit": 3560,
+      "calibration": 492,
+      "development": 2321
+    },
+    "new_audio_decodes": 272,
+    "new_visual_neural_forwards": 0,
+    "outside_human_reviewers": 0,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "private_result_sha256": "1dd40dad383d46a2e2e34fdd703d38b46df00b439f09912d3c5ca909fc3cd406",
+    "fit_complete_sha256": "2325e9a98d03d21db0355bed2678f25000766cb56331cf44c4405ebe0df612e9"
+  },
+  "separate_complete_review": {
+    "schema": "chipmunk.mouth-audio-context-complete-review/14",
+    "audio_tracks_redecoded": 272,
+    "pcm_samples_replayed": 10841600,
+    "native_video_clocks_and_frame_geometry": 16940,
+    "new_window_feature_vectors_replayed": 6373,
+    "raw_new_feature_values_replayed": 127460,
+    "all_native_mask_time_outcomes_exact": true,
+    "both_complete_aggregates_exact": true,
+    "result_sha256": "e7b2af4bc8cd040af62e7998d9191229d21eea829a0ebd01019198a3ddd19d1e",
+    "reviewer_sha256": "3fb7582e3af74da9e28ce7e46fabffdc3bf19d60d02d6ac455ffc649134be34e",
+    "new_neural_forwards": 0,
+    "new_head_fits": 0,
+    "outside_human_reviewers": 0
+  },
+  "source_stages": {
+    "fit": {
+      "clips": 160,
+      "windows": 3560,
+      "samples": 6131200,
+      "journal_sha256": "f74be6fa836ec8ab2735c7e1991c72776c56408a245b48b3eb703efcd2ee90a2",
+      "freeze_sha256": "da6016c7711aa5256033a81aaee99597ff09dee0367e6e4709862340b309adf7"
+    },
+    "calibration": {
+      "clips": 24,
+      "windows": 492,
+      "samples": 852480,
+      "journal_sha256": "3ec7ee6b54924c32c483947ed7ab18f55e11a490a3f9662494f7d962aaaff361",
+      "freeze_sha256": "da6016c7711aa5256033a81aaee99597ff09dee0367e6e4709862340b309adf7"
+    },
+    "development": {
+      "clips": 88,
+      "windows": 2321,
+      "samples": 3857920,
+      "journal_sha256": "2fcdb518c84f78b7f474d21e172cfb4a66d0321ae3fbcace229b272315686881",
+      "freeze_sha256": "da6016c7711aa5256033a81aaee99597ff09dee0367e6e4709862340b309adf7"
+    }
+  },
+  "resource_profiles": {
+    "fit-audio-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1078214656,
+      "sample_errors": 1,
+      "duration_s": 73.3567284999881,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "point-audio-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1077772288,
+      "sample_errors": 0,
+      "duration_s": 16.543686291901395,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "fit-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1065500672,
+      "sample_errors": 0,
+      "duration_s": 9.752276625018567,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "development-audio-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1076903936,
+      "sample_errors": 2,
+      "duration_s": 46.99266195902601,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "score-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1097564160,
+      "sample_errors": 1,
+      "duration_s": 10.76194045797456,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "review-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_mouth_audio_context_v14",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1084784640,
+      "sample_errors": 2,
+      "duration_s": 101.73714391607791,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    }
+  },
+  "fit_point_correspondence": {
+    "candidate": {
+      "windows": 4052,
+      "maximum_difference": 0.0
+    },
+    "control": {
+      "windows": 4052,
+      "maximum_difference": 0.0
+    }
+  },
+  "earlier_source_preflight": "Initial preflight failed on evolved face_sequence.py, video loaders.py and models.yaml before a freeze or any audio extraction. Old guard/files remain unchanged; this study binds original visual data and unchanged executed historical helpers separately.",
+  "retained_original_native_attempt": {
+    "file_sha256": {
+      "freeze.json": "6549f65dfbd1d6320af0d2585e576d1f86fede96259c1b2a112328147860d82c",
+      "fit.jsonl": "f74be6fa836ec8ab2735c7e1991c72776c56408a245b48b3eb703efcd2ee90a2",
+      "calibration.jsonl": "e7f4824c36b4cf69f2d2b6c512c128038126f8fcce50ca597ffc404b7f04e4a9",
+      "fit-complete.json": "92b5daa1ac0dbea4cb2d9a16985677b2352d9ab2e246e438d7c51138ab318bfb",
+      "fit-audio-profile/profile.json": "f82b7124685f6931cea1375af2fe68a6e09c076f2610451f8087416fe4f0bab8",
+      "fit-audio-profile/worker.log": "9112ed71fbff72fc92375e39adc646a538d43877abb4d1d5bac14991c88a468f",
+      "point-audio-profile/profile.json": "1a1f4ceda5d24e4f3b4c7b02aa26c88e6b6d832873a5182a3709adcf51df4d7d",
+      "point-audio-profile/worker.log": "f5451d4a1fe8a509b010a6376fe9546438538f8e56fa68af925628e57a453957"
+    },
+    "complete_fit_clips": 160,
+    "persisted_point_clips": 18,
+    "trained_heads": 0,
+    "diagnostic_audio_tracks": 0,
+    "native_failure": "The intact19th control has50 frames; original envelope guard incorrectly required51.",
+    "dispatch": "Original CLI fit action also collides with training and extraction completion filenames."
+  },
+  "retained_original_resource_profiles": {
+    "fit-audio-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v13",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1076101120,
+      "sample_errors": 2,
+      "duration_s": 72.84314054099377,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "point-audio-profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_mouth_audio_context_v13",
+      "child_exit_code": 1,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1075331072,
+      "sample_errors": 0,
+      "duration_s": 14.450009500025772,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    }
+  },
+  "original_prefix_parity": {
+    "fit_cases_exact": 160,
+    "point_cases_exact": 18,
+    "original_failure_unchanged": true
+  },
+  "small_head_fits": 4,
+  "fitting_only_head_reconstructions_included": 2,
+  "new_visual_neural_forwards": 0,
+  "new_external_weights": 0,
+  "customer_inputs": 0,
+  "outside_human_reviewers": 0,
+  "serving_changed": false,
+  "raw_media_new_audio_traces_or_private_heads_published": false,
+  "limitations": [
+    "Consumed correlated development clips from28 actors,not fresh validation.",
+    "Native audio source/clock replay is new; previously audited visual measurements are reused.",
+    "Audio/mouth correlation is not AI provenance or achieved-sync ground truth.",
+    "Clean studio speech does not qualify strong noise,music or overlap.",
+    "A passing development comparison still requires fresh sources and full-app/export/payment verification."
+  ],
+  "exporter_sha256": "18539a15a2feb790bec15ca514573c154246f93fe1827df98d1e768db587259d"
+}

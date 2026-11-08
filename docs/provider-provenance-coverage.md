@@ -1,109 +1,121 @@
-# Provider provenance and the first detection gate
+# Provider signals and the provenance-first gate
 
-Reviewed 7 November 2026. Provider capabilities change; product-specific
-documentation takes precedence over general announcements. A provider name,
-logo, unusual spacing or an unsigned metadata field is not authenticated origin.
+Reviewed 7 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
+covers **37 provider families**, all four modality fields, **51 scoped signal
+records**, primary-source URLs, verification routes and explicit gaps.
+Thirty families have scoped marking/verification documentation; seven remain
+verification gaps. These numbers count research records, not working detectors.
+This is a broader inventory, not a claim to decode every provider or every export.
 
-**Public local detectors do exist.** Provider API access is not a prerequisite
-for all watermark work. Meta releases AudioSeal and image/video research
-detectors with commercially usable code/weights; public text toolkits also
-exist, including schemes with a public detection key. The separate questions
-are whether the released detector matches a product's deployed marks, which
-generation configuration/key it needs, and whether a detected payload proves
-provider identity or AI involvement. See the
-[public implementation review](public-watermark-implementations.md).
+## What can stop processing now
 
-## Current local implementation
+Before models are acquired, supported image, video and audio pipelines validate
+local Content Credentials. Further statistical checks stop only when all of
+these hold: a trusted signer, valid credentials, an explicit AI declaration,
+a hard binding to the current file, no validation failures and no unresolved
+remote reference. The result records the declaration and skipped checks,
+without inventing a statistical confidence score.
 
-Image, video and supported audio pipelines now validate Content Credentials
-before any statistical detector can acquire model weights. The gate requires
-all of: a trusted signer, valid credentials, an explicit AI declaration, a hard
-binding to the uploaded bytes, no validation failures and no unresolved remote
-reference. It is provider-agnostic: it does not trust a company name in a field.
-WAV and M4A have a new model-free audio credential adapter. Other audio
-containers explicitly remain unassessed by that adapter.
+The audio adapter now checks **WAV, M4A, MP3 and FLAC**. Dispatch recognizes FLAC
+with a leading ID3 credential tag as well as ordinary FLAC and MP3 with/without
+ID3. This is format routing; actual SDK signature and content-binding validation
+still decides the gate. There is no provider-name allowlist that bypasses trust.
 
-A qualifying declaration stops subsequent detection, with a recorded reason.
-The result describes AI involvement **declared by the signed record**, not the
-origin of every pixel, sound or sentence. Statistical checks remain marked
-skipped. Audio forms no voice confidence estimate on this path. A trusted
-capture record does not trigger this AI-positive shortcut.
+A signed statement of AI involvement describes the signer's declaration. It does
+not locate every edit, establish complete authorship, or verify truth or intent.
+Capture-only credentials do not trigger this AI-positive shortcut. Missing,
+stripped, invalid, untrusted, unsupported or inconclusive signals continue normal
+detection and never establish originality. Offline trust uses the bundled
+snapshot; revocation and remote manifests are not checked.
 
-Absent, stripped, invalid, untrusted or unsupported credentials continue through
-normal detection. They never clear a file as original. Offline verification uses
-the bundled C2PA Trust List snapshot, without fetching remote manifests or
-checking revocation. The report identifies those limits. Historical refusion
-retains earlier detector evidence instead of erasing it or requesting new models.
+Document bodies and articles have no universal spacing signature. The current
+document pipeline reads supported structured metadata as unverified claims; it
+does not yet validate PDF/Office C2PA or production text watermarks. The installed
+SDK advertises PDF reading, but refused our authored PDF-signing probe, so no
+working PDF credential shortcut is claimed.
 
-The gate is inside the analysis pipeline; it does not bypass the USD 9.99
-prepayment requirement. No uploaded file is sent to an outside provider by this
-implementation. It does **not** decode every private watermark below.
+The gate remains inside the prepaid analysis pipeline. No provider-verification
+API was called and no customer file was uploaded outside the app in this review.
 
-There is also a [bounded structured-label reader](structured-source-labels.md)
-for supported image, media and document metadata. Its source-bound SL records
-appear in the normal view, PDF, API and JSON as **unverified claims**, with no
-confidence contribution. Known-name normalization includes the seven families
-below and additional major Chinese providers. It does not establish that each
-provider uses those metadata formats, authenticate a copied provider name or
-activate the trusted shortcut. Unsupported formats and incomplete scans remain
-explicitly unassessed or partial.
+## Broader provider findings
 
-## Named providers
-
-| Provider | Documented marking and verification | What is available here |
+| Provider family | Collected signals and verification route | Important qualification |
 |---|---|---|
-| OpenAI | The official [Content Provenance API](https://developers.openai.com/api/docs/guides/content-provenance) checks supported image C2PA and image/audio SynthID signals. Text verification requires approved access. A negative result does not rule out OpenAI or other AI content. | Local signed credentials where present and supported. The external API is not configured or called; private text verification is not available here. |
-| Anthropic / Claude | [Provider explanation](https://www.anthropic.com/news/claude-text-watermark) describes statistical word-choice watermarking, with no hidden characters, and a detection API in private preview. Supported generated files can carry C2PA notes indicating Claude involvement. | Local signed credentials where present. No claimed Claude text-key access or automatic private-preview verification. |
-| Google / Gemini, Imagen, Veo and Lyria | [SynthID](https://deepmind.google/models/synthid/) covers provider-supported media; the public detector portal checks images, video and audio from Google and supported partners. [Gemini verification](https://support.google.com/gemini/answer/16722517?hl=en) describes the supported app workflow. | Generic local credentials where present. The provider portal is a separate verification workflow, not an integrated local decoder or an inferred permission to upload customer files. |
-| Meta / Muse | The official [Content Seal overview](https://github.com/facebookresearch/content-seal) explicitly distinguishes Muse Image's custom proprietary implementation from downloadable open research detectors. [AudioSeal](https://github.com/facebookresearch/audioseal) and [VideoSeal/PixelSeal](https://github.com/facebookresearch/videoseal) publish commercially usable code and weights. Public research release does not by itself establish Muse-product compatibility. | Generic local credentials where present. Public watermark-family adapters and their actual compatibility tests are not integrated yet; this work does not require waiting for a provider API. Muse production verification remains separate and unconfigured. No universal Muse text/audio coverage claim. |
-| xAI / Grok | [Output watermarking documentation](https://docs.x.ai/developers/advanced-api-usage/watermarking) describes supported API text marking and a detection API available by application. The [consumer FAQ](https://docs.x.ai/grok/faq) documents visible Grok marks on generated images/video. An API response's watermark header is not an authenticated property of a subsequently copied article. | Generic local credentials where present. A visible logo or copied header cannot stop detection. Access to the provider's text verification API is not configured here. |
-| MiniMax / Hailuo | The official [image API](https://platform.minimax.cn/docs/api-reference/image-generation-t2i) documents optional `aigc_watermark`, default false. This does not establish a universal hidden watermark or independently available decoder across all products and formats. | Generic local credentials where present. No invented MiniMax audio/video/text decoder; optional or removed marks cannot establish originality. |
-| DeepSeek | Its [terms, section 5.3](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) state that platform-generated content receives labels. They do not publish a general detector key or establish that all copied text has a detectable whitespace pattern. | Generic local credentials where present. Provider-specific private text verification is not implemented. |
+| OpenAI / ChatGPT / Sora | [Image C2PA; image/audio SynthID; Content Provenance API; restricted text access](https://developers.openai.com/api/docs/guides/content-provenance) | The documented endpoint covers images/audio, not a universal Sora video detector. Read each response result separately. |
+| Anthropic / Claude | [Keyed token-choice watermark](https://www.anthropic.com/news/claude-text-watermark); [supported image-file credentials](https://www.anthropic.com/news/claude-text-watermark?gsid=c8c05ab2-f266-425f-8453-12ae96c34905) | No hidden characters. Private-preview text access differs from ordinary local credential validation. |
+| Google / Gemini / Imagen / Veo / Lyria / NotebookLM | [SynthID for supported image, video, audio and text; public verification portal](https://deepmind.google/models/synthid/) | Public text reference code does not contain the production Gemini key. |
+| Meta / Muse | [Custom Muse Image marking and public Content Seal research schemes](https://github.com/facebookresearch/content-seal) | Public AudioSeal/image/video/text research implementations do not automatically match Muse production. |
+| xAI / Grok | [Supported API text watermark and access-controlled verifier](https://docs.x.ai/developers/advanced-api-usage/watermarking); [visible image/video marks](https://docs.x.ai/grok/faq) | A copied response header or logo is not file authentication. |
+| Microsoft / Azure / Copilot | [Selected hosted C2PA and invisible marks](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure); [verification API](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection) | Resource/Entra access is required; product availability varies. Planned OpenAI text support is not deployed coverage. |
+| Amazon / Nova / Bedrock | [Sonic speech marks and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html); [Canvas/Reel watermark announcement](https://www.amazon.science/blog/amazon-nova-and-our-commitment-to-responsible-ai) | Sonic verification requires AWS contact. A 2024 announcement is not a tested current API. Transcripts are not marked by Sonic. |
+| Adobe / Firefly | [Credentials on the reviewed generated-image workflow](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html) | Editing/capture credentials require different interpretation; this source does not establish every partner product. |
+| Stability AI | [Current hosted image/video/audio C2PA](https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq); legacy SDXL reference marker | Current hosted FAQ says C2PA rather than invisible marks. Legacy pipelines and self-hosted open weights have different behavior. |
+| Black Forest Labs / FLUX | [Service credential terms](https://bfl.ai/legal/developer-terms-of-service) and selected Azure-hosted FLUX provenance | Does not establish every checkpoint/export. |
+| Bria | [Image/video credentials and invisible watermark checks](https://docs.bria.ai/visual-verification-overview) | Public image/video verification endpoints require no API token. GIF/WebP image watermark checks are omitted, not negative. |
+| Midjourney | [Image/video verifier](https://www.midjourney.com/verify) and [metadata-ID help](https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity) | Help says copied tags fail; the verifier warns marks can be copied/fabricated. No automatic shortcut until this discrepancy and binding are resolved. |
+| ElevenLabs | [Own-audio watermark detector](https://elevenlabs.io/docs/eleven-creative/audio-tools/audio-detector) | A positive may be a watermark OR fallback ML classification. Those outcomes must be distinguished. |
+| Resemble / Chatterbox | [Public Perth audio code](https://github.com/resemble-ai/Perth); [versioned image/video/audio verification API](https://docs.resemble.ai/detect/watermark/detect) | Public v1 is not universal v2/SynthID compatibility. User-applied marks alone do not prove AI generation. |
+| Suno | [C2PA on new song downloads and free verification API](https://suno.com/suno-credentials) | No token in documented examples; old downloads are not retroactively marked. |
+| MiniMax / Hailuo | [Official image CLI watermark option](https://github.com/MiniMax-AI/cli/blob/main/src/commands/image/generate.ts); [MiniMax Code visible/implicit labeling rules](https://code.minimax.io/doc/en/download-watermark-rules.html) | Neither source establishes a universal hidden decoder across all MiniMax products/modalities. |
+| DeepSeek | [Platform labeling terms](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) | No compatible public production key or copied-text whitespace decoder established. |
+| Alibaba / Qwen / Wan | [Optional image notice](https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference); [video workflow](https://www.alibabacloud.com/help/en/model-studio/video-generate-edit-model/) | Visible image mark defaults off in the reviewed API; does not establish hidden/text/audio coverage. |
+| ByteDance / Doubao / Seedance / Seedream | [Video watermark option](https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en), [speech metadata/rhythm options](https://docs.volcengine.com/docs/doubao-voice/podcast-api-websocket-v3protocol?lang=en), [structured media labels](https://docs.volcengine.com/docs/intelligent-processing/add-aigc-metadata-guide?lang=zh) | Speech marking defaults off; producer/IDs are caller-configurable. A separate MediaKit custom-mark extractor is not a universal Seedance verifier. |
+| Tencent / Hunyuan | [Video AI notice controls](https://cloud.tencent.com/document/api/1616/119001) | Visible labels do not authenticate the file; hidden checks for other modalities remain unconfirmed. |
+| Baidu / ERNIE | [Image frequency-domain mark and payload](https://ai.baidu.com/ai-doc/NLP/Ml9i5amtk) | Official extraction is not publicly open; Baidu support is needed. |
+| Kuaishou / Kling | [Invisible image/video marks and detection portal](https://kling.ai/docs/ai-content-detection) | No compatible local public decoder or tested API contract established. |
+| Synthesia | [Automatic C2PA and separate visible video notices](https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos) | Editor, API and dubbed visible-label behavior differs; actual credentials still need validation. |
+| HeyGen | [Default/removable video logos](https://help.heygen.com/en/articles/11057301-how-to-remove-the-heygen-watermark) | Paid workflow may omit the logo. |
+| Runway | [Free-plan video watermark](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Paid exports may be unmarked. |
+| Pika | [Current support says exports have no watermark](https://pika.art/support) | Older FAQ differs; do not assume marks survive across plans/dates. |
+| Moonshot / Kimi | [Explicit notices and implicit metadata rules](https://www.kimi.com/user/agreement/modelUse?version=v2) | Platform terms are not a public decoder/key or proof of all self-hosted output. |
+| NVIDIA | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
+| Kakao | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
+| Apple | [Announced upcoming SynthID Detector support](https://deepmind.google/models/synthid/) | “Soon” is not current deployed coverage. |
 
-Other major providers, including Alibaba/Qwen/Wan, ByteDance/Doubao/Seedance,
-Tencent/Hunyuan, Baidu and Kuaishou/Kling, belong in the ongoing review. Do not
-infer their output format or detector availability from another provider's
-implementation. The [Chinese labeling rules](https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm)
-describe explicit labels and implicit metadata. A labeling obligation does not
-give this application a private verification key or make unsigned fields
-tamper-proof. Supported structured fields are now inspected; unrecognized names
-and provider codes are withheld from the new structured records. Provider-code
-identity resolution and private watermark verification remain follow-up work.
+Focused primary-source searches for **Zhipu/GLM, Mistral, Cohere, Luma, Udio,
+Ideogram and Recraft** did not establish a compatible public production verifier.
+Their search queries and all four explicit modality gaps remain in the catalog.
+This does not mean those providers never mark content. Customer discussions,
+transparency pledges and a shared watermark algorithm are insufficient to fill
+a missing production-verification specification.
 
-## Text watermark source review
+## What the app collects, and what it does not infer
 
-The [official SynthID Text repository](https://github.com/google-deepmind/synthid-text)
-and its [frequentist detector source](https://github.com/google-deepmind/synthid-text/blob/main/src/synthid_text/detector_frequentist.py)
-were inspected. Its [code license](https://github.com/google-deepmind/synthid-text/blob/main/LICENSE)
-is Apache-2.0. The detector uses the generation configuration/key to compute
-masked statistics over tokens. Its null-test p-value is not an AI-authorship
-probability. The reference implementation's demonstration configuration is not
-Google's deployed Gemini key; the repository also warns against treating its
-reference generation code as production-ready. Nothing was installed, imported
-or presented as a universal decoder.
+The [structured-label reader](structured-source-labels.md) recognizes supported
+AIGC fields, locators and checksums. Known-name normalization now covers the
+37 families, including `volcengine` and `seedream`. Recognizing a known string
+does not show the provider actually uses that field, authenticate it, decode a
+hidden watermark or add confidence. Unknown names/codes and private identifiers
+remain withheld. Version 1 historical and version 2 current records render in
+the normal view and reports; both retain source binding.
 
-Meta's [TextSeal toolkit](https://github.com/facebookresearch/textseal) also
-implements a split-key design with public detection. A usable public verification
-key can be sufficient for that scheme; the application must not assert that
-every watermark needs a provider's private secret. The matching tokenizer,
-scheme/configuration, public key where applicable and demonstrated deployment
-compatibility still matter. Toolkit code licensing does not automatically cover
-every language-model checkpoint used in its generation examples.
+Public implementations exist and can be run without provider accounts. Our
+[actual AudioSeal evaluation](public-audio-watermark-v1-result.md) ran locally,
+including retained false responses and misses. It is not yet a serving detector
+or evidence of Muse compatibility. Matching key/payload, scheme, generation
+configuration, tokenizer and license remain necessary. Public detection-key
+schemes exist; “every detector needs a secret provider key” would be incorrect.
 
-## Verification scope and remaining work
+For future external integrations, preserve exact file checksums, route/version,
+applicable checks, provider response, outcome and scope. Admit only authentic
+responses tied to the submitted bytes, tested with real positive and negative
+fixtures, and with clear errors/unavailable states and customer data controls.
+No uploaded JSON, provider-name string or undifferentiated “positive” may trigger
+the shortcut. The catalog itself never becomes per-file evidence.
 
-Authored PNG, WAV and MP4 records passed actual SDK verification and the shipping
-adapters. Local full-pipeline tests reached published results while model leases
-were forbidden. Stripped PNG metadata continued to detection, and changed pixels
-with old credentials failed validation and continued. These use an explicitly
-local test trust root, not impersonated provider credentials or a provider
-accuracy benchmark. An SDK signing-profile issue concerning missing certificate
-Organization fields was identified while constructing the test fixtures; see
-the [upstream issue](https://github.com/contentauth/c2pa-rs/issues/2262).
+## Local qualification and next integrations
 
-External verification needs real API access, documented response semantics,
-account permissions, privacy controls and end-to-end tests before activation.
-Successful provider verification still needs its exact scope recorded. A mark
-can indicate processing or editing without establishing full AI authorship.
-No arbitrary uploaded JSON or caller-supplied `detected` flag may activate the
-trusted gate. Do not mark unavailable verifiers as having checked a file.
+Actual local SDK-signed PNG, MP4, WAV, M4A, MP3 and FLAC fixtures exercise the
+shipping adapters. Thirty full-pipeline cases cover image/video and both audio
+modes across quick/full/deep profiles, with every model lease forbidden.
+Changed MP3/FLAC audio under retained credentials, changed image pixels and
+stripped credentials cannot activate the gate. These are locally authored
+declarations under a test authority, not genuine provider fixtures or a detector
+accuracy benchmark. The test authority is never added to production trust.
+
+Next priority is qualifying real-provider fixtures for Suno/Bria and the
+available public watermark schemes, then integrating supported routes with
+clear scope and data handling. Restricted production text verification, Muse
+compatibility and the seven review gaps remain open. No new weights,
+statistical calibration, public confidence threshold or GCP deployment was
+introduced by this inventory.

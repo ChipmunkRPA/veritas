@@ -10,8 +10,8 @@ const data = { version: 'source-labels/1', source_sha256: source, status: 'check
     location: 'PNG AIGC text', byte_offset: 33, payload_sha256: 'b'.repeat(64), claimed_provider: 'Google / Gemini' }] }
 
 describe('source labels', () => {
-  it('links the source and label while keeping provider identity and confidence unverified', () => {
-    render(<SourceLabels value={data} source={source} />)
+  it.each(['source-labels/1', 'source-labels/2'])('keeps source linkage and unverified status for %s', (version) => {
+    render(<SourceLabels value={{ ...data, version }} source={source} />)
     expect(screen.getByText(/Google \/ Gemini/).textContent).toContain('not authenticated')
     expect(screen.getByText(/No confidence percentage/)).toBeTruthy()
     fireEvent.click(screen.getByText('Source reference'))
@@ -22,6 +22,11 @@ describe('source labels', () => {
     const { rerender } = render(<SourceLabels source={source} />)
     expect(screen.getByText(/not recorded/).textContent).toContain('Missing labels do not establish originality')
     rerender(<SourceLabels source={'c'.repeat(64)} value={data} />)
+    expect(screen.queryByText(/Google \/ Gemini/)).toBeNull()
+    expect(screen.getByText(/not recorded/)).toBeTruthy()
+    rerender(<SourceLabels source={source} value={{ ...data, version: ['source-labels/2'] }} />)
+    expect(screen.queryByText(/Google \/ Gemini/)).toBeNull()
+    rerender(<SourceLabels source={source} value={{ ...data, version: 'unsupported-version' }} />)
     expect(screen.queryByText(/Google \/ Gemini/)).toBeNull()
     expect(screen.getByText(/not recorded/)).toBeTruthy()
   })

@@ -95,6 +95,73 @@ def signed_audio(signing_material):
 
 
 @pytest.fixture(scope='module')
+def compressed_audio_assets(signing_material, signed_audio, tmp_path_factory):
+    signer, bundle = signing_material
+    assets = {}
+    for suffix, mime in [('mp3', 'audio/mpeg'), ('flac', 'audio/flac'), ('m4a', 'audio/mp4')]:
+        directory = tmp_path_factory.mktemp('authored-audio-' + suffix)
+        source, destination = directory / 'source.wav', directory / ('source.' + suffix)
+        source.write_bytes(signed_audio[0])
+        subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-i', str(source), '-map_metadata', '-1',
+            '-threads', '1', str(destination)], check=True, timeout=30)
+        assets[suffix] = sign(destination.read_bytes(), mime, signer), bundle, mime
+    return assets
+
+
+@pytest.mark.parametrize('encoding', ['mp3', 'flac', 'm4a'])
+def test_actual_compressed_audio_credentials_are_validated_before_gate(encoding, compressed_audio_assets, monkeypatch):
+    from app.detectors.audio.provenance_adapter import AudioCredentialsDetector
+    from app.engine.stages.common import detector_entry
+
+    data, bundle, mime = compressed_audio_assets[encoding]
+    assert verifier.sniff_mime(memoryview(data)) == mime
+    report = verifier.read(data, mime, bundle=bundle, legacy=bundle)
+    assert report.state == 'trusted' and report.ai_declared and report.covers_bytes, report
+    monkeypatch.setattr(verifier, 'load_bundle', lambda _: bundle)
+    ctx = SimpleNamespace(media=SimpleNamespace(original_bytes=lambda: data),
+        exhibits=SimpleNamespace(table=Mock(return_value='table'), image=Mock(return_value='thumb')))
+    adapter = AudioCredentialsDetector()
+    entry = detector_entry(adapter.spec, adapter.run(ctx), 'authored-compressed-audio')
+    assert decide({'detectors': [entry]}, 'audio')['action'] == 'stop_statistical_detection'
+
+
+@pytest.mark.parametrize('encoding', ['mp3', 'flac'])
+def test_changed_audio_under_retained_credentials_does_not_activate_gate(encoding, compressed_audio_assets, monkeypatch):
+    from app.detectors.audio.provenance_adapter import AudioCredentialsDetector
+    from app.engine.stages.common import detector_entry
+
+    data, bundle, mime = compressed_audio_assets[encoding]
+    changed = bytearray(data)
+    # The credentials are in the leading ID3 tag; change a trailing audio byte.
+    assert changed[:3] == b'ID3'
+    tag_end = 10 + sum(b << shift for b, shift in zip(changed[6:10], (21, 14, 7, 0), strict=True))
+    assert tag_end < len(changed) - 32
+    changed[-32] ^= 1
+    report = verifier.read(changed, mime, bundle=bundle, legacy=bundle)
+    assert report.state == 'invalid' and not report.covers_bytes, report
+    monkeypatch.setattr(verifier, 'load_bundle', lambda _: bundle)
+    ctx = SimpleNamespace(media=SimpleNamespace(original_bytes=lambda: changed),
+        exhibits=SimpleNamespace(table=Mock(return_value='table'), image=Mock(return_value='thumb')))
+    adapter = AudioCredentialsDetector()
+    entry = detector_entry(adapter.spec, adapter.run(ctx), 'changed-audio-under-credentials')
+    assert decide({'detectors': [entry]}, 'audio')['action'] == 'continue_detection'
+
+
+@pytest.mark.parametrize('data,expected', [
+    (b'fLaC' + bytes(12), 'audio/flac'),
+    (b'ID3\x04\x00\x00\x00\x00\x00\x04TESTfLaC', 'audio/flac'),
+    (b'ID3\x04\x00\x00\x00\x00\x00\x04TEST\xff\xfb\x90\x64', 'audio/mpeg'),
+    (b'ID3\x04\x00\x00\x00\x00\x00\x00', 'audio/mpeg'),
+    (b'\xff\xfb\x90\x64', 'audio/mpeg'),
+    (b'ID3unsupported-test', None), (b'ID3\x04\x00\x00\x80\x00\x00\x00', None),
+    (b'\xff\xe0\x00\x00', None), (b'\xff\xfb\x9c\x64', None),
+    (b'\xff\xfb\xf0\x64', None), (b'\xff\xeb\x90\x64', None),
+])
+def test_audio_container_dispatch_is_bounded_and_not_verification(data, expected):
+    assert verifier.sniff_mime(memoryview(data)) == expected
+
+
+@pytest.fixture(scope='module')
 def signed_video(signing_material, tmp_path_factory):
     signer, bundle = signing_material
     path = tmp_path_factory.mktemp('authored-video') / 'source.mp4'
@@ -172,9 +239,11 @@ def test_actual_audio_and_video_credentials_are_validated_before_gate(kind, requ
     assert decide({'detectors': [entry]}, kind)['action'] == 'stop_statistical_detection'
 
 
-@pytest.mark.parametrize('kind,audio_mode', [('image', 'legacy'), ('video', 'legacy'), ('audio', 'legacy'), ('audio', 'candidate')])
+@pytest.mark.parametrize('kind,audio_mode,encoding', [('image', 'legacy', 'png'), ('video', 'legacy', 'mp4'),
+    *[('audio', mode, encoding) for mode in ('legacy', 'candidate') for encoding in ('wav', 'mp3', 'flac', 'm4a')]])
 @pytest.mark.parametrize('profile', ['quick', 'full', 'deep'])
-def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(kind, audio_mode, profile, request, tmp_path, monkeypatch):
+def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
+        kind, audio_mode, encoding, profile, compressed_audio_assets, request, tmp_path, monkeypatch):
     """Isolated research DB and authored assets; never a customer/payment route."""
     from sqlalchemy import create_engine
     from sqlalchemy.orm import Session
@@ -185,12 +254,15 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(ki
     from app.storage.db import Analysis, Base, MediaObject
     from app.storage.objects import ObjectStore
 
-    if kind == 'image':
+    if kind == 'audio' and encoding != 'wav':
+        data, bundle, mime = compressed_audio_assets[encoding]
+    elif kind == 'image':
         data, _, bundle = request.getfixturevalue('signed_asset')
+        mime = 'image/png'
     else:
         data, bundle = request.getfixturevalue('signed_' + kind)
-    mime = {'image': 'image/png', 'audio': 'audio/wav', 'video': 'video/mp4'}[kind]
-    suffix = {'image': '.png', 'audio': '.wav', 'video': '.mp4'}[kind]
+        mime = {'audio': 'audio/wav', 'video': 'video/mp4'}[kind]
+    suffix = '.' + encoding
     monkeypatch.setattr(verifier, 'load_bundle', lambda _: bundle)
     monkeypatch.setattr(settings, 'data_dir', tmp_path)
     monkeypatch.setattr(settings, 'min_free_bytes', 0)

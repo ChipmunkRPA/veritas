@@ -226,6 +226,23 @@ def sniff_mime(data: bytes | memoryview) -> str | None:
         return "image/gif"
     if head.startswith((b"II*\x00", b"MM\x00*")):
         return "image/tiff"
+    if head.startswith(b"fLaC"):
+        return "audio/flac"
+    if (len(head) >= 10 and head[:3] == b"ID3" and head[3] in (2, 3, 4)
+            and head[4] != 255 and not any(byte & 128 for byte in head[6:10])):
+        size = sum(byte << shift for byte, shift in zip(head[6:10], (21, 14, 7, 0), strict=True))
+        end = 10 + size + (10 if head[3] == 4 and head[5] & 16 else 0)
+        # C2PA's FLAC writer prepends an ID3 manifest tag. Dispatch from the
+        # signature immediately after that bounded tag, without scanning audio.
+        if bytes(data[end:end + 4]) == b"fLaC":
+            return "audio/flac"
+        return "audio/mpeg"
+    # MPEG layer III without an ID3 header. This is container dispatch, not
+    # validation: the SDK still has to validate the file and its hard binding.
+    if (len(head) >= 4 and head[0] == 255 and head[1] & 224 == 224
+            and (head[1] >> 3) & 3 != 1 and (head[1] >> 1) & 3 == 1
+            and (head[2] >> 4) not in (0, 15) and (head[2] >> 2) & 3 != 3):
+        return "audio/mpeg"
     if head.startswith(b"RIFF") and head[8:12] in (b"WEBP", b"AVI ", b"WAVE"):
         return {b"WEBP": "image/webp", b"AVI ": "video/avi", b"WAVE": "audio/wav"}[head[8:12]]
     if head[4:8] == b"ftyp":

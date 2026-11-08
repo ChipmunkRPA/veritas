@@ -10,7 +10,7 @@ statistical model admission.
   Content Credentials before model acquisition. An explicit signed AI declaration
   stops subsequent detection and records the skipped checks. Unsupported,
   absent, stripped, untrusted or invalid credentials continue detection.
-- Audio has a model-free credential adapter for WAV/M4A. Its signed-declaration
+- Audio has a model-free credential adapter for WAV/M4A/MP3/FLAC. Its signed-declaration
   path works in both speech modes without forming a statistical voice confidence.
 - The website, pre-purchase acknowledgement, Stripe message and report/export
   policy explain uncertainty, misses, false alarms and inconclusive outcomes.
@@ -44,16 +44,31 @@ statistical model admission.
 
 ## Limits and next work
 
-The [provider review](provider-provenance-coverage.md) covers OpenAI, Anthropic,
-Google/Gemini, Meta/Muse, xAI/Grok, MiniMax and DeepSeek. Private watermark keys
-or verification APIs are not simulated. No customer files were uploaded to
+The [expanded provider review](provider-provenance-coverage.md) now inventories
+37 provider families and 51 scoped signal records, with explicit modality gaps.
+Suno and Bria document public APIs without a token; an account is not a blanket
+prerequisite. Their external routes are not activated. Private keys and provider
+responses are not simulated. No customer files were uploaded to
 external verifiers. Offline credential checking has trust-snapshot, revocation,
 remote-manifest and container limitations. A signed declaration does not locate
 each edited region or establish the entire history of a file.
 
 The [recent-method review](recent-methods-review-2026-11.md) informs further
-development; reading a paper does not establish an accuracy gain. Real provider
-fixtures and supported verifier integrations, structured labeling metadata,
-new independently implemented methods and fresh controls remain work. The
-separate image holdout remains unscored. No statistical confidence threshold,
+development; reading a paper does not establish an accuracy gain. The structured
+label reader is implemented, and [public AudioSeal](public-audio-watermark-v1-result.md)
+has run in a separate authored-signal experiment without serving admission.
+Real provider fixtures, qualified verifier integrations, further public local
+schemes and fresh statistical controls remain work. No statistical confidence threshold,
 model weights, serving calibration or GCP deployment changed in this release.
+
+## Broader-signal follow-up validation
+
+283 selected backend tests passed after the expanded format/alias changes,
+including actual signed MP3/FLAC/M4A validation, rejection of changed audio under
+retained credentials, 30 full-pipeline runs with model leases forbidden, four
+unsigned-label publication/export flows and payment-before-analysis guards.
+Four frontend tests cover historical/current labels, source mismatch and unknown
+versions; TypeScript and the production build passed. This follow-up validates
+report HTML and JSON handling, without claiming a new provider accuracy study
+or new visual PDF-layout review. The original PDF layout review is above.
+The unchanged speech calibration hash is recorded above.

@@ -1900,7 +1900,7 @@ detectors:
   # ---------------------------------------------------------------- audio
   - id: prov.c2pa.audio
     adapter: app.detectors.audio.provenance_adapter:AudioCredentialsDetector
-    version: 0.4.3
+    version: 0.4.4
     name: Content Credentials on the audio file
     modality: audio
     family: provenance
@@ -1910,14 +1910,14 @@ detectors:
     default_enabled: true
     legacy_weight: 0.0
     known_limitations:
-      - "Offline validation on original WAV and M4A bitstreams only; unsupported containers are explicitly unassessed"
+      - "Offline validation on original WAV, M4A, MP3 and FLAC bitstreams; unsupported containers are explicitly unassessed"
       - "Bundled C2PA Trust List snapshot; revocation and remote manifests are not checked"
       - "Absence of credentials never proves a recording is original; provider-private audio watermarks are not decoded"
     source_url: https://github.com/contentauth/c2pa-python
     threat: [voice]
     training_data: "none; documentary validator shared with image/video Content Credentials"
     coverage_date: "Bundled C2PA Trust List snapshot; see app/provenance/trust/snapshot.json"
-    input_constraints: ["original WAV or M4A bitstream"]
+    input_constraints: ["original WAV, M4A, MP3 or FLAC bitstream"]
     contamination_sets: []
     fp_modes: ["trusted signer key compromise or a false assertion by the signer"]
     citation: "C2PA Technical Specification; c2pa-python"

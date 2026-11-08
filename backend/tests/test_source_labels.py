@@ -40,8 +40,7 @@ def png(value=None, xml=None):
     return target.getvalue()
 
 
-@pytest.mark.parametrize('provider', ['OpenAI', 'Claude', 'Gemini', 'Muse', 'Grok', 'MiniMax', 'DeepSeek',
-    'Qwen', 'Seedance', 'Hunyuan', 'ERNIE', 'Kling'])
+@pytest.mark.parametrize('provider', list(labels.ALIASES))
 def test_named_provider_claims_remain_unverified_and_outside_confidence(tmp_path, provider):
     got = read(tmp_path, png(claim(provider)), 'image')
     assert got['status'] == 'checked' and len(got['records']) == 1

@@ -5,7 +5,7 @@ type Packet = { status: string; source_sha256: string; records: Label[]; checked
 function packet(value: unknown, source: string | undefined): Packet | null {
   if (!value || typeof value !== 'object' || !source) return null
   const data = value as Record<string, unknown>
-  if (data.version !== 'source-labels/1' || data.source_sha256 !== source || !Array.isArray(data.records)
+  if ((data.version !== 'source-labels/1' && data.version !== 'source-labels/2') || data.source_sha256 !== source || !Array.isArray(data.records)
     || typeof data.status !== 'string' || typeof data.notice !== 'string') return null
   const records = data.records.filter((r): r is Label => !!r && typeof r === 'object'
     && typeof r.id === 'string' && typeof r.declaration === 'string' && typeof r.location === 'string'

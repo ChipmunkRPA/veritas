@@ -1,0 +1,1379 @@
+{
+  "schema": "provider-signals/1",
+  "reviewed_utc": "2026-11-07",
+  "provider_families": 37,
+  "purpose": "Research and implementation inventory; never uploaded-file evidence or a guarantee of universal provider coverage.",
+  "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage.",
+  "runtime": {
+    "network_verification": "disabled; this inventory performs no requests or customer uploads",
+    "verified_shortcut": "Only trusted, valid, asset-bound, explicitly AI-declaring C2PA with no failures or unresolved remote reference.",
+    "local_audio_containers": [
+      "WAV",
+      "M4A",
+      "MP3",
+      "FLAC"
+    ],
+    "local_document_c2pa": "not integrated; plain text has no file credentials, and supported structured document metadata remains unverified",
+    "public_audioseal": "isolated authored-signal evaluation completed; not admitted to serving or confidence",
+    "unchanged": "Statistical calibrations, model weights, prepayment requirement and cloud deployment."
+  },
+  "shortcut_rules": [
+    "A negative, absent, unsupported, stripped, failed or inconclusive check continues normal detection; never infer originality.",
+    "A visible label, provider name, whitespace, unsigned metadata, copied header or generic public watermark presence cannot stop detection.",
+    "An external verifier requires a documented scope, authentic response, exact input binding, distinguishable failure states, real positive/negative fixtures and data controls before admission.",
+    "A qualified AI-involvement declaration does not locate every edit or prove complete authorship, truth, intent or court admissibility.",
+    "Catalog records do not feed the gate, API evidence or confidence. Research provenance is separate from each uploaded file's provenance."
+  ],
+  "provider_verifiers_called": 0,
+  "customer_files_uploaded": 0,
+  "shared_metadata": {
+    "fields": [
+      "AIGC.Label",
+      "AIGC.ContentProducer",
+      "AIGC.ProduceID",
+      "AIGC.ContentPropagator",
+      "AIGC.PropagateID",
+      "AIGC.ReservedCode1",
+      "AIGC.ReservedCode2"
+    ],
+    "namespace": [
+      "http://www.tc260.org.cn/ns/AIGC/1.0/",
+      "http://www.tc260.org.cn/ns/AIGC/1.0"
+    ],
+    "containers": "Bounded readers for supported PNG/JPEG/WebP XMP/text/EXIF, media metadata, PDF Info/XMP and OOXML custom properties; see structured-source-labels.md.",
+    "authentication": "Unsigned claims only. Reserved fields/provider codes are not treated as verified signatures or resolved identities.",
+    "source_urls": [
+      "https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm",
+      "https://www.tc260.org.cn/tc260/sjzn/202508/f0a84ada0c11458e9cb6da56c1cb2426/files/760387fb30e94c058c31b8c2b2230020.pdf"
+    ]
+  },
+  "providers": [
+    {
+      "id": "openai",
+      "name": "OpenAI / ChatGPT / Sora",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Supported OpenAI image outputs",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/guides/content-provenance"
+          ],
+          "limitations": "Local C2PA only when present, supported, trusted, asset-bound and explicitly declaring AI; no provider-wide compatibility claim.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "audio"
+          ],
+          "product_scope": "Supported OpenAI SynthID-bearing outputs",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/guides/content-provenance"
+          ],
+          "limitations": "Images and audio only in this documented endpoint; do not infer Sora video coverage. Interpret each result separately; a valid-but-untrusted credential is not sufficient for our local shortcut.",
+          "endpoint": "POST https://api.openai.com/v1/content_provenance_checks",
+          "authentication": "API key / eligible organization",
+          "response_fields": [
+            "results[].type",
+            "results[].outcome",
+            "results[].validation_state"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Approved text-verification access",
+          "verification_route": "restricted_access",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/guides/content-provenance"
+          ],
+          "limitations": "Access by application; not a public local production key.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic / Claude",
+      "signals": [
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Supported Claude generations, including selected cloud-partner deployments",
+          "verification_route": "restricted_access",
+          "source_urls": [
+            "https://www.anthropic.com/news/claude-text-watermark",
+            "https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html"
+          ],
+          "limitations": "Token-choice statistics, not hidden characters or spacing. Product/model availability varies; eligible verification access is not configured.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Supported Claude-generated image files such as PNG/JPEG/SVG",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://www.anthropic.com/news/claude-text-watermark",
+            "https://www.anthropic.com/news/claude-text-watermark?gsid=c8c05ab2-f266-425f-8453-12ae96c34905"
+          ],
+          "limitations": "A credential says Claude made or processed a file, not authorship of every pixel. This image-file example does not establish a document-format or text-watermark decoder.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "google",
+      "name": "Google / Gemini / Imagen / Veo / Lyria / NotebookLM",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "product_scope": "Supported Google AI media; exact product/version matters",
+          "verification_route": "public_portal",
+          "source_urls": [
+            "https://deepmind.google/models/synthid/"
+          ],
+          "limitations": "SynthID portal and Gemini verification are external, not a local public production decoder.",
+          "portal": "https://synthid.com",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Gemini app/web text and separately configured reference generators",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://deepmind.google/models/synthid/",
+            "https://github.com/google-deepmind/synthid-text"
+          ],
+          "limitations": "Apache-2.0 reference code requires matching generation parameters/key/tokenizer; demo keys do not verify deployed Gemini text. A test p-value is not an authorship probability.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "meta",
+      "name": "Meta / Muse",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Muse Image custom production implementation",
+          "verification_route": "deployment_specific",
+          "source_urls": [
+            "https://github.com/facebookresearch/content-seal"
+          ],
+          "limitations": "Public research releases do not establish compatibility with Muse production marks.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "public_watermark",
+          "modalities": [
+            "image",
+            "video",
+            "audio",
+            "text"
+          ],
+          "product_scope": "AudioSeal, VideoSeal/PixelSeal, WAM and TextSeal research schemes",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://github.com/facebookresearch/audioseal",
+            "https://github.com/facebookresearch/videoseal",
+            "https://github.com/facebookresearch/watermark-anything",
+            "https://github.com/facebookresearch/textseal"
+          ],
+          "limitations": "AudioSeal ran in an isolated local evaluation; not serving. Match scheme, version, key/payload and license. Use MIT WAM checkpoint only; exclude non-commercial weights. Anyone can mark genuine content; family presence alone cannot activate our shortcut.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "xai",
+      "name": "xAI / Grok",
+      "signals": [
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Supported Grok API text",
+          "verification_route": "restricted_access",
+          "source_urls": [
+            "https://docs.x.ai/developers/advanced-api-usage/watermarking"
+          ],
+          "limitations": "Provider detection requires application/access; a copied x-watermark response header does not authenticate an uploaded passage.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Consumer generated images/videos",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://docs.x.ai/grok/faq"
+          ],
+          "limitations": "Visible marks can be copied, removed or cropped; no early stop from a logo.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft / Azure / Copilot",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image",
+            "audio",
+            "video"
+          ],
+          "product_scope": "Selected Foundry/Microsoft outputs; listed image and audio models, not every Copilot output",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure"
+          ],
+          "limitations": "Local C2PA only when present, supported, trusted, asset-bound and explicitly declaring AI; no provider-wide compatibility claim.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "audio",
+            "video"
+          ],
+          "product_scope": "Supported Microsoft provenance markers",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection"
+          ],
+          "limitations": "Needs an Azure Content Safety resource and Entra authorization. No resources created. Asynchronous operation; absent markers are not an originality verdict.",
+          "endpoint": "POST {resource_endpoint}/contentsafety/provenance:detect?api-version=2026-07-01-preview",
+          "authentication": "Microsoft Entra bearer",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Selected Anthropic deployments; Azure OpenAI text support is planned for listed families",
+          "verification_route": "restricted_access",
+          "source_urls": [
+            "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure"
+          ],
+          "limitations": "Do not promote planned Azure OpenAI support to an available verifier.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon / Nova / Bedrock",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Nova 2 and 2.5 Sonic generated speech",
+          "verification_route": "provider_contact",
+          "source_urls": [
+            "https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html"
+          ],
+          "limitations": "Speech watermark on and non-disableable; transcripts are not marked. Detection through AWS account team.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Nova Canvas/Reel announced watermarking",
+          "verification_route": "provider_contact",
+          "source_urls": [
+            "https://www.amazon.science/blog/amazon-nova-and-our-commitment-to-responsible-ai"
+          ],
+          "limitations": "2024 announcement is not a tested current detection API; product/format and current verifier need confirmation.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "keyed_text",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Selected Claude models on Bedrock",
+          "verification_route": "restricted_access",
+          "source_urls": [
+            "https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html"
+          ],
+          "limitations": "Anthropic eligibility and exact model list apply; not a universal Bedrock mark.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "adobe",
+      "name": "Adobe / Firefly",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Fully Firefly-generated image pixels in the reviewed workflow",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html"
+          ],
+          "limitations": "Some credentials describe capture or ordinary editing. Require explicit AI source type plus trusted byte binding; do not extend this image-specific page to all partner media.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "stability",
+      "name": "Stability AI",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "product_scope": "Current hosted API and first-party generated media",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq"
+          ],
+          "limitations": "Current hosted FAQ says C2PA, not visible/invisible watermarks. Open weights do not automatically embed credentials.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "public_watermark",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Legacy SDXL reference pipeline fixed DWT-DCT message",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://github.com/huggingface/diffusers/blob/main/src/diffusers/pipelines/stable_diffusion_xl/watermark.py"
+          ],
+          "limitations": "Legacy pipeline marker is unsigned and copyable; not current universal Stability-hosted coverage or AI-authorship proof.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "bfl",
+      "name": "Black Forest Labs / FLUX",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "FLUX service content-credential terms and selected Azure-hosted FLUX outputs",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://bfl.ai/legal/developer-terms-of-service",
+            "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure"
+          ],
+          "limitations": "Terms define credentials but do not establish every self-hosted checkpoint/export. Exact hosted product and credential validation still required.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "bria",
+      "name": "Bria",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Generated Bria visuals",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://docs.bria.ai/visual-verification-overview"
+          ],
+          "limitations": "Bria trust-anchor result is distinct from merely intact credentials; our bundled list must actually trust the signer.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Supported Bria visual-verification formats",
+          "verification_route": "public_api",
+          "source_urls": [
+            "https://docs.bria.ai/visual-verification-overview",
+            "https://docs.bria.ai/visual-verification",
+            "https://docs.bria.ai/integration-methods/for-ai-agents"
+          ],
+          "limitations": "No API token documented. GIF/WebP image watermark check is omitted, not negative. Real positive/binding/response tests and customer data controls are required before activation.",
+          "endpoints": [
+            "POST https://engine.prod.bria-api.com/v2/image/verify",
+            "POST https://engine.prod.bria-api.com/v2/video/verify"
+          ],
+          "authentication": "none documented",
+          "response_fields": [
+            "verified",
+            "validation_state",
+            "is_trusted",
+            "invisible_watermark_detected"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "signals": [
+        {
+          "kind": "provider_metadata",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Downloaded assets supported by Midjourney's verification website",
+          "verification_route": "public_portal",
+          "source_urls": [
+            "https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity",
+            "https://www.midjourney.com/verify"
+          ],
+          "limitations": "Official help says copied tags fail, but verifier itself warns tags/marks can be copied or fabricated and a positive is not proof. Resolve this conflict and test binding before any automatic shortcut.",
+          "portal": "https://www.midjourney.com/verify",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Audio generated directly by supported ElevenLabs models",
+          "verification_route": "signed_in_portal",
+          "source_urls": [
+            "https://elevenlabs.io/docs/eleven-creative/audio-tools/audio-detector"
+          ],
+          "limitations": "Portal positive may mean watermark OR fallback ML classifier. Require separate verified-watermark evidence. Third-party outputs are generally not marked; no compatible public local decoder established.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "resemble",
+      "name": "Resemble AI / Chatterbox",
+      "signals": [
+        {
+          "kind": "public_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Public Perth audio implementation; Chatterbox default marking",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://github.com/resemble-ai/Perth",
+            "https://www.resemble.ai/products/watermarker"
+          ],
+          "limitations": "MIT public release does not prove all Perth v2 or SynthID compatibility. User-applied watermarks can appear on genuine speech.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "product_scope": "Documented versioned Perth verification API",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://docs.resemble.ai/detect/watermark/detect"
+          ],
+          "limitations": "Audio v1/v2 and image/video v2 differ. Custom messages matter for visuals. Keep present/degraded/absent/inconclusive and unavailable detectors distinct; generic mark presence does not itself establish AI origin.",
+          "endpoint": "POST https://app.resemble.ai/api/v2/watermark/detect",
+          "authentication": "bearer API token",
+          "response_fields": [
+            "success",
+            "item.metrics.overall_status",
+            "item.metrics.model_results",
+            "item.metrics.detected_model_versions"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Commercial watermarker product advertises text marking",
+          "verification_route": "deployment_specific",
+          "source_urls": [
+            "https://www.resemble.ai/products/watermarker"
+          ],
+          "limitations": "The reviewed detect API documents image/video/audio, not a qualified production text-verifier contract.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Newly downloaded songs after credentials rollout",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://suno.com/suno-credentials"
+          ],
+          "limitations": "Old downloads are not retroactively marked. Local compatible containers only; actual Suno fixtures are not yet qualified.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Suno-issued C2PA detection service",
+          "verification_route": "public_api",
+          "source_urls": [
+            "https://suno.com/suno-credentials"
+          ],
+          "limitations": "Free documented API; no token in examples. Does not detect other generators. Distinguish verified_suno, no_suno_provenance and inconclusive.",
+          "endpoints": [
+            "POST https://studio-api.prod.suno.com/api/c2pa/detect",
+            "POST https://studio-api.prod.suno.com/api/c2pa/detect/url"
+          ],
+          "authentication": "none documented",
+          "response_fields": [
+            "verdict"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "verdict_values": [
+            "verified_suno",
+            "no_suno_provenance",
+            "inconclusive"
+          ]
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax / Hailuo",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Official image-generation CLI watermark option",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://github.com/MiniMax-AI/cli/blob/main/src/commands/image/generate.ts"
+          ],
+          "limitations": "Optional aigc-watermark flag is not a universal hidden decoder or coverage of all Hailuo videos/audio.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "structured_label",
+          "modalities": [],
+          "product_scope": "MiniMax Code output-label rules; exact exported modalities not established by this page",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://code.minimax.io/doc/en/download-watermark-rules.html"
+          ],
+          "limitations": "The rule distinguishes removable visible labels from retained implicit metadata; it is not a format specification or evidence of deployed tagging in every MiniMax product.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled",
+          "potential_modalities": [
+            "image",
+            "video",
+            "audio",
+            "text"
+          ]
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "signals": [
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Platform-generated content labeling terms",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html"
+          ],
+          "limitations": "Terms are not a public production detector/key specification. No universal copied-text spacing mark established; unsigned fields cannot authenticate origin.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "alibaba",
+      "name": "Alibaba / Qwen / Wan",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Reviewed hosted image API and Wan video-generation options",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference",
+            "https://www.alibabacloud.com/help/en/model-studio/video-generate-edit-model/"
+          ],
+          "limitations": "Reviewed image API watermark defaults false; video workflow has product-dependent marks. Visible AI-generated text is not a hidden verifier or proof; no universal Qwen text/audio key established.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "bytedance",
+      "name": "ByteDance / Doubao / Seedance / Seedream",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Reviewed Seedance video-generation watermark option",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en"
+          ],
+          "limitations": "Generation watermark flag defaults false; hidden-family scope cannot be inferred from this flag.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "publicly_documented_custom_mark",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "AI MediaKit user-applied invisible video watermark",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://docs.volcengine.com/docs/intelligent-processing/video-invisible-watermark-guide?lang=zh"
+          ],
+          "limitations": "Extraction only matches marks made by MediaKit's own insertion API; it is not a documented universal Seedance detector or an AI-generation declaration.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "audible_label",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Doubao Voice generation/podcast optional trailing rhythm",
+          "verification_route": "audible_only",
+          "source_urls": [
+            "https://docs.volcengine.com/docs/doubao-voice/audio-generation-http?lang=zh",
+            "https://docs.volcengine.com/docs/doubao-voice/podcast-api-websocket-v3protocol?lang=en"
+          ],
+          "limitations": "aigc_watermark defaults false; audible rhythm is not a cryptographic or hidden watermark. No rhythm recognizer implemented.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Optional Doubao Voice AIGC metadata in supported MP3/WAV/Ogg Opus",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://docs.volcengine.com/docs/doubao-voice/podcast-api-websocket-v3protocol?lang=en",
+            "https://docs.volcengine.com/docs/doubao-voice/unidirectional-streaming-text-to-speech-http?lang=zh"
+          ],
+          "limitations": "aigc_metadata.enable defaults false. Producer and generation/propagation IDs are caller-configurable. Standards-compatible metadata can be read locally but actual provider-generated byte fixtures remain unqualified; no authentication or early stop.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "product_scope": "AI MediaKit metadata-writing service",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://docs.volcengine.com/docs/intelligent-processing/add-aigc-metadata-guide?lang=zh"
+          ],
+          "limitations": "User-configurable label, producer and IDs on JPEG/PNG/WebP, MP4/MOV and MP3/Ogg/WAV. Writing arbitrary media metadata does not establish AI generation or authenticate ByteDance.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "tencent",
+      "name": "Tencent / Hunyuan",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Reviewed video generation API LogoAdd/LogoParam",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://cloud.tencent.com/document/api/1616/119001"
+          ],
+          "limitations": "Default visible AI notice; disabling requires a console workflow. Not a verified hidden watermark or an all-Hunyuan text/image/audio decoder.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "baidu",
+      "name": "Baidu / ERNIE",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Reviewed AI painting image API hidden frequency-domain marker",
+          "verification_route": "provider_contact",
+          "source_urls": [
+            "https://ai.baidu.com/ai-doc/NLP/Ml9i5amtk",
+            "https://ai.baidu.com/ai-doc/NLP/ek3ipuvem"
+          ],
+          "limitations": "Payload includes service label, content ID and AI method. Official docs say extraction is not publicly open and needs Baidu support. Do not infer other ERNIE modalities.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "kuaishou",
+      "name": "Kuaishou / Kling",
+      "signals": [
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "image",
+            "video"
+          ],
+          "product_scope": "Kling image/video generation detection",
+          "verification_route": "public_portal",
+          "source_urls": [
+            "https://kling.ai/docs/ai-content-detection"
+          ],
+          "limitations": "Official page documents invisible marking, metadata and open-standard alignment; no public compatible local decoder or tested API contract established.",
+          "portal": "https://kling.ai/detection",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "synthesia",
+      "name": "Synthesia",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Machine-readable provenance on generated videos in the reviewed help workflow",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos"
+          ],
+          "limitations": "Automatic provenance is distinct from optional visible labels. API/dubbed visible labels differ; actual credentials and signer must validate.",
+          "runtime_status": "generic_local_path_only",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
+        },
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Workspace/editor AI-generated notice",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos"
+          ],
+          "limitations": "Admin-controlled visible label is not cryptographic proof.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "heygen",
+      "name": "HeyGen",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Default video-logo workflow",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://help.heygen.com/en/articles/11057301-how-to-remove-the-heygen-watermark"
+          ],
+          "limitations": "Paid studio workflow can disable logo. No general hidden-verification contract established from this source.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Reviewed free-plan videos",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details"
+          ],
+          "limitations": "Paid generation can omit visible mark. No general hidden-verification contract established from this source.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "pika",
+      "name": "Pika",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Historical plan/export marks; current support says all current plans export without marks",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://pika.art/support",
+            "https://pika.art/faq"
+          ],
+          "limitations": "Current and older policy pages differ. Do not expect a visible mark on current exports or infer an unmarked file is original. No hidden verifier established.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "scoped_signal_documented",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "moonshot",
+      "name": "Moonshot / Kimi",
+      "signals": [
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "image",
+            "video",
+            "audio",
+            "text"
+          ],
+          "product_scope": "Kimi hosted service labeling rules",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://www.kimi.com/user/agreement/modelUse?version=v2"
+          ],
+          "limitations": "Service terms distinguish explicit notices from metadata identifiers. Not proof of a public decoder/key, exact field compatibility, or labels in all self-hosted Kimi outputs.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "scoped_signal_documented",
+        "audio": "scoped_signal_documented",
+        "text": "scoped_signal_documented"
+      }
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "signals": [
+        {
+          "kind": "partner_listing",
+          "modalities": [],
+          "product_scope": "SynthID Detector partner listing; exact product/modality unconfirmed",
+          "verification_route": "public_portal",
+          "source_urls": [
+            "https://deepmind.google/models/synthid/"
+          ],
+          "limitations": "Partner listing alone does not establish every NVIDIA model/output is marked.",
+          "portal": "https://synthid.com",
+          "potential_modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "kakao",
+      "name": "Kakao",
+      "signals": [
+        {
+          "kind": "partner_listing",
+          "modalities": [],
+          "product_scope": "SynthID Detector partner listing; exact product/modality unconfirmed",
+          "verification_route": "public_portal",
+          "source_urls": [
+            "https://deepmind.google/models/synthid/"
+          ],
+          "limitations": "Partner listing alone does not establish every Kakao model/output is marked.",
+          "portal": "https://synthid.com",
+          "potential_modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "signals": [
+        {
+          "kind": "planned_partner_listing",
+          "modalities": [],
+          "product_scope": "Google says SynthID Detector Apple support is coming soon",
+          "verification_route": "planned",
+          "source_urls": [
+            "https://deepmind.google/models/synthid/"
+          ],
+          "limitations": "Announced future partner is not a deployed compatible detector for Apple output.",
+          "potential_modalities": [
+            "image",
+            "video",
+            "audio"
+          ],
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "zhipu",
+      "name": "Zhipu / GLM",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:docs.bigmodel.cn 水印 标识",
+        "site:docs.bigmodel.cn watermark"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:mistral.ai watermark detection text Le Chat"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:cohere.com watermark detection generated text transparency"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "luma",
+      "name": "Luma",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:lumalabs.ai watermark content credentials detection",
+        "site:docs.lumalabs.ai watermark"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "udio",
+      "name": "Udio",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:help.udio.com watermark provenance"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "ideogram",
+      "name": "Ideogram",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:docs.ideogram.ai watermark metadata"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    },
+    {
+      "id": "recraft",
+      "name": "Recraft",
+      "signals": [],
+      "review_status": "verification_gap",
+      "search_queries": [
+        "site:recraft.ai watermark content credentials"
+      ],
+      "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      }
+    }
+  ],
+  "source_observations": [
+    "Anthropic canonical page extraction and the cached query-parameter variant differ; image-credential detail is explicitly supported by the linked variant. Do not assume the same exact text remains at every URL snapshot.",
+    "Midjourney official help and verification-page proof claims differ; no automatic shortcut admitted.",
+    "Stability current hosted FAQ and legacy open reference pipelines describe different marking mechanisms.",
+    "Pika current support and older FAQ differ on visible marks.",
+    "Some Volcengine pages timed out on direct fetch; indexed official documentation was readable and the podcast example/metadata-writing guide were retrieved.",
+    "The SDK lists PDF as a supported read MIME, but this build refused authored PDF signing. No PDF credential adapter or PDF fast-path compatibility is claimed."
+  ]
+}

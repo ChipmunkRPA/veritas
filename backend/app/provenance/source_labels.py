@@ -15,7 +15,7 @@ import zipfile
 import zlib
 from pathlib import Path
 
-VERSION = 'source-labels/1'
+VERSION = 'source-labels/2'
 MAX_PACKET = 65536
 MAX_JSON = 8192
 MAX_RECORDS = 8
@@ -31,9 +31,19 @@ PROVIDERS = {
     'Meta / Muse': ('meta', 'muse'), 'xAI / Grok': ('xai', 'grok'),
     'MiniMax / Hailuo': ('minimax', 'hailuo', '海螺'), 'DeepSeek': ('deepseek', '深度求索'),
     'Alibaba / Qwen / Wan': ('alibaba', 'qwen', 'wan', '通义千问', '通义万相'),
-    'ByteDance / Doubao / Seedance': ('bytedance', 'doubao', 'seedance', '豆包', '即梦'),
+    'ByteDance / Doubao / Seedance': ('bytedance', 'doubao', 'seedance', 'seedream', 'volcengine', 'byteplus', '豆包', '即梦'),
     'Tencent / Hunyuan': ('tencent', 'hunyuan', '混元'),
     'Baidu / ERNIE': ('baidu', 'ernie', '文心'), 'Kuaishou / Kling': ('kuaishou', 'kling', '可灵'),
+    'Microsoft': ('microsoft', 'copilot'), 'Amazon / Nova': ('amazon', 'nova'),
+    'Adobe / Firefly': ('adobe', 'firefly'), 'Stability AI': ('stability', 'stability ai'),
+    'Black Forest Labs / FLUX': ('black forest labs', 'bfl', 'flux'), 'Bria': ('bria',),
+    'Midjourney': ('midjourney',), 'ElevenLabs': ('elevenlabs',),
+    'Resemble AI / Chatterbox': ('resemble', 'resemble ai', 'chatterbox'), 'Suno': ('suno',),
+    'Synthesia': ('synthesia',), 'HeyGen': ('heygen',), 'Runway': ('runway',), 'Pika': ('pika',),
+    'Moonshot / Kimi': ('moonshot', 'kimi', '月之暗面'), 'Zhipu / GLM': ('zhipu', 'glm', '智谱'),
+    'Mistral': ('mistral',), 'Cohere': ('cohere',), 'Luma': ('luma',), 'Udio': ('udio',),
+    'Ideogram': ('ideogram',), 'Recraft': ('recraft',), 'NVIDIA': ('nvidia',),
+    'Kakao': ('kakao',), 'Apple': ('apple',),
 }
 ALIASES = {alias: name for name, aliases in PROVIDERS.items() for alias in aliases}
 DECLARATIONS = {'1': 'Declares AI generation or synthesis', '2': 'Labels possible AI involvement',

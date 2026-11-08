@@ -1,15 +1,17 @@
 {
-  "version": "purchase-risk/v1",
+  "version": "purchase-risk/v2",
   "title": "Before you pay",
   "points": [
+    "Automated deepfake screening can be unreliable, and performance varies across generators, editing, compression, background noise and writing context. Use the result cautiously as a starting point for further review.",
     "Automated checks can miss AI-generated or deepfake material.",
     "Genuine material can be incorrectly flagged as AI-generated or altered.",
     "Your uploaded file or document may produce an inconclusive result, no usable confidence estimate, or no reliable conclusion.",
     "Payment covers the automated analysis and available evidence; it does not guarantee detection or a conclusive answer.",
-    "The standard SaaS report is preliminary and must not be relied on as court evidence. A private expert report requires a separate signed engagement."
+    "The standard SaaS report is preliminary and must not be relied on as court evidence. A private expert report requires a separate signed engagement.",
+    "For consequential decisions, contact sales@chipmunkrpa.com for a separately scoped private investigation of source files, provenance and corroborating evidence. Expert review does not guarantee a conclusion or court admissibility."
   ],
   "acknowledgement_label": "I understand and accept these analysis limitations before paying US$9.99.",
   "document_notice": "Article checks currently provide inspection evidence without a calibrated whole-article authorship conclusion. Email-body screening is a separate, limited check.",
-  "stripe_message": "Automated analysis can miss deepfakes, flag genuine material, or return no conclusion. Payment covers analysis and available evidence, not guaranteed detection or a conclusive answer. This preliminary SaaS report must not be relied on as court evidence; private expert work requires a separate engagement.",
-  "sha256": "1cbd40494ea16c906da00dba84420e03bc4cfbe0e2a5cc23feaa5e7e779f43d9"
+  "stripe_message": "Automated deepfake screening can be unreliable. Use results cautiously. Automated analysis can miss deepfakes, flag genuine material, or return no conclusion. Payment covers analysis and available evidence, not guaranteed detection or a conclusive answer. This preliminary SaaS report must not be relied on as court evidence; private expert work requires a separate engagement.",
+  "sha256": "22024573c8f354c278dd20bdf387c7cf3de9efcaf8a425629c56f409f4d6d826"
 }

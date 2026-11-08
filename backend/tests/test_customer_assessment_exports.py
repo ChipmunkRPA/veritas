@@ -115,5 +115,6 @@ def test_every_standard_report_discloses_screening_scope_and_private_engagement(
     assert "Do not rely on it as court evidence" in html
     assert "separate signed engagement" in html
     assert "sales@chipmunkrpa.com" in html
-    assert "does not guarantee court admissibility" in html
+    assert "does not guarantee a conclusion or court admissibility" in html
+    assert "Automated deepfake screening is uncertain" in html
     assert "80% customer-facing" not in html

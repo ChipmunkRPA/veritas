@@ -5,6 +5,16 @@ and the evidence supporting it before expanding hosting.
 
 ## Requirements and order
 
+On 7 November the user added three priorities: verified provider provenance
+before statistical detection; stronger customer disclosures and separate expert
+engagement; and recent-paper/code review feeding independently tested methods.
+The named provider review includes OpenAI, Anthropic, Google/Gemini, Meta/Muse,
+xAI/Grok, MiniMax and DeepSeek, with further major Chinese providers in scope.
+See [actual provider coverage and limits](provider-provenance-coverage.md) and
+the [recent-method review](recent-methods-review-2026-11.md). Proprietary verifier
+access is not simulated, unsigned labels/spacing cannot stop detection, and
+no customer file is automatically sent to an external provider.
+
 On7 November the user directed region/check/context-specific calibration and a
 tested combined result **across all four modalities**. The
 [shared evaluation implementation and required real-data work](specialist-calibration-design.md)

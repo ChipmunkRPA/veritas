@@ -1,4 +1,5 @@
-{% if v.get('image_evidence') %}
+{% if v.get('image_evidence') and not v.image_evidence.available %}<p class="caption evidence-unavailable">{{ v.image_evidence.note }}</p>{% endif %}
+{% if v.get('image_evidence') and v.image_evidence.available %}
 <section class="chapter image-evidence{% if s.report.profile in ['summary', 'newsroom'] and (v.image_evidence.packets or v.image_evidence.get('inspection_checks')) %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>

@@ -17,7 +17,7 @@ from typing import Any
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.engine import synthesis
+from app.engine import provenance_gate, synthesis
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile
 from app.engine.profiles import resolve_profile
@@ -44,10 +44,11 @@ IMAGE_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", img.ingest, critical=True, weight=0.5),
     StageDef("probe", img.probe, after=("ingest",), weight=0.5),
     StageDef("provenance", img.provenance, after=("probe",), reuse_if=img.current_provenance_output),
+    StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", img.decode, after=("ingest",), persist=False, critical=True),
-    StageDef("faces", img.faces, after=("decode",), lane="accelerator"),
+    StageDef("faces", img.faces, after=("decode", "provenance_gate"), lane="accelerator"),
     StageDef("condition", cond.image, after=("probe", "decode", "faces"), weight=0.5),
-    StageDef("detect", img.detect, after=("decode", "faces", "probe"), lane="mixed", weight=4.0),
+    StageDef("detect", img.detect, after=("decode", "faces", "probe", "provenance_gate"), lane="mixed", weight=4.0),
     StageDef("localise", img.localise, after=("detect",)),
     StageDef("fuse", img.fuse, after=("provenance", "detect", "localise", "condition")),
     StageDef("synthesise", img.synthesise, after=("fuse",), weight=0.5, reuse_if=common.current_synthesis_output),
@@ -56,10 +57,11 @@ IMAGE_STAGES: tuple[StageDef, ...] = (
 )
 DOCUMENT_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
+    StageDef("provenance_gate", provenance_gate.run, after=("ingest",), weight=0.1),
     StageDef("decode", doc.decode, after=("ingest",), critical=True, weight=0.5, reuse_if=doc.current_decode_output),
     # Revalidate stored text on every resume/refusion before any cached result can be reused.
     StageDef("condition", doc.condition, after=("decode",), persist=False, critical=True, weight=0.5),
-    StageDef("detect", doc.detect, after=("decode", "condition"), lane="mixed", weight=4.0),
+    StageDef("detect", doc.detect, after=("decode", "condition", "provenance_gate"), lane="mixed", weight=4.0),
     StageDef("fuse", doc.fuse, after=("decode", "detect", "condition")),
     StageDef("synthesise", doc.synthesise, after=("fuse",), weight=0.5, reuse_if=common.current_synthesis_output),
     StageDef("render", doc.render, after=("fuse", "synthesise"), weight=0.5),
@@ -71,12 +73,13 @@ VIDEO_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
     StageDef("probe", vid.probe, after=("ingest",), critical=True, weight=0.5),
     StageDef("provenance", vid.provenance, after=("probe",), weight=0.5, reuse_if=vid.current_provenance_output),
+    StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", vid.decode, after=("probe",), persist=False, critical=True),
     StageDef("shots", vid.shots, after=("probe",), profiles=FULL_DEEP, weight=0.5),
-    StageDef("tracks", vid.tracks, after=("probe", "shots"), lane="accelerator", profiles=FULL_DEEP, weight=2.0),
-    StageDef("faces", vid.faces, after=("decode",)),
+    StageDef("tracks", vid.tracks, after=("probe", "shots", "provenance_gate"), lane="accelerator", profiles=FULL_DEEP, weight=2.0),
+    StageDef("faces", vid.faces, after=("decode", "provenance_gate")),
     StageDef("condition", cond.video, after=("probe", "decode", "faces"), weight=0.5),
-    StageDef("detect", vid.detect, after=("decode", "faces", "probe", "shots", "tracks"), lane="mixed", weight=6.0),
+    StageDef("detect", vid.detect, after=("decode", "faces", "probe", "shots", "tracks", "provenance_gate"), lane="mixed", weight=6.0),
     StageDef("temporal", vid.temporal, after=("probe", "tracks", "detect"), weight=0.5),
     StageDef("second_pass", vid.second_pass, after=("probe", "decode", "tracks", "temporal"), lane="mixed", profiles=DEEP_ONLY,
              weight=2.0),
@@ -90,9 +93,10 @@ AUDIO_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
     StageDef("probe", aud.probe, after=("ingest",), critical=True, weight=0.5),
     StageDef("provenance", aud.provenance, after=("probe",), weight=0.5),
+    StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
     StageDef("decode", aud.decode, after=("probe",), persist=False, critical=True),
     StageDef("condition", cond.audio, after=("probe", "decode"), critical=True, weight=0.5),  # detect reads its speech gate
-    StageDef("detect", aud.detect, after=("probe", "decode", "condition"), lane="mixed", weight=4.0),
+    StageDef("detect", aud.detect, after=("probe", "decode", "condition", "provenance_gate"), lane="mixed", weight=4.0),
     StageDef("temporal", aud.temporal, after=("condition", "detect"), weight=0.5),
     StageDef("fuse", aud.fuse, after=("probe", "decode", "provenance", "detect", "condition", "temporal")),
     StageDef("synthesise", aud.synthesise, after=("fuse",), weight=0.5, reuse_if=common.current_synthesis_output),
@@ -167,6 +171,10 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
         stages = tuple(dataclasses.replace(stage, reuse_if=reuse) if stage.id == "provenance" else stage
                        for stage in stages)
     if refusion:
+        # Reuse historical detector evidence without introducing a new gate
+        # dependency that would invalidate it and request forbidden inference.
+        stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d != 'provenance_gate'))
+            if 'provenance_gate' in s.after else s for s in stages)
         if kind == "audio":
             # Fresh detection needs the speech gate; copied scores do not. Recomputing condition must not invalidate
             # the integrity-checked stored detect output and trigger forbidden inference. Temporal still waits for both.

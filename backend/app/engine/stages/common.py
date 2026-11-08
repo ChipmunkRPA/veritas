@@ -32,7 +32,7 @@ from app.core import effect
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.core.logging import get_logger
-from app.engine import build_info, card_copy, profiles, rerun, synthesis
+from app.engine import build_info, card_copy, profiles, provenance_gate, rerun, synthesis
 from app.engine.boundary import NOT_STORED, Cancelled, DetectorRunRecord, run_detector, run_device, store_run
 from app.engine.detector import (
     ON_THIS_SERVER,
@@ -328,6 +328,8 @@ def run_detectors(ctx: StageContext, modalities: Iterable[Modality] = (Modality.
         outputs = StageOutputs(probe=ctx.outputs.get("probe"), faces=(ctx.outputs.get("faces") or {}).get("faces"))
     entries: list[dict[str, Any]] = []
     ran: set[str] = set()
+    documentary_stop = provenance_gate.stop(ctx)
+    first_provenance_stop = None
     for modality in modalities:
         for detector_id in registry.enabled(modality, ctx.profile):
             detector = registry.instance(detector_id)
@@ -342,8 +344,12 @@ def run_detectors(ctx: StageContext, modalities: Iterable[Modality] = (Modality.
             needs = detector.spec.requirements.needs
             failure = (f"face detection did not complete ({face_failure})" if face_failure is not None and "faces" in needs
                        else audio_failure if audio_failure is not None and "audio" in needs else None)
-            if failure is not None:
-                result = DetectorResult.failed(failure[:300])
+            skip_for_record = (documentary_stop and family != 'provenance') or first_provenance_stop is not None
+            if skip_for_record or failure is not None:
+                result = (DetectorResult.skipped(provenance_gate.SKIP_REASON)
+                    if skip_for_record else DetectorResult.failed(failure[:300]))
+                if skip_for_record:
+                    result.details['provenance_gate'] = dict(first_provenance_stop or ctx.outputs['provenance_gate'])
                 result = store_run(run_store, DetectorRunRecord(ctx.analysis_id, detector_id, detector.spec.version, result.status,
                                                                 result.reason, "", "", datetime.now(UTC).isoformat(), 0.0, result),
                                    run_ctx.log, ctx.deadline).result
@@ -352,6 +358,10 @@ def run_detectors(ctx: StageContext, modalities: Iterable[Modality] = (Modality.
             ran.add(detector_id)
             entry = detector_entry(detector.spec, result, run_store.run_id(ctx.analysis_id, detector_id), max_units=max_units)
             entries.append(entry)
+            if family == 'provenance' and first_provenance_stop is None:
+                checked = provenance_gate.decide({'detectors': entries}, ctx.state.get('kind', ''))
+                if checked['action'] == 'stop_statistical_detection':
+                    first_provenance_stop = {**checked, 'source_sha256': (ctx.outputs.get('ingest') or {}).get('sha256')}
             if entry["status"] == "ok":
                 ctx.emit("partial_signal", {"detector_id": detector_id, "signal_id": signal_id(detector_id, entry["aggregate"]),
                                             "name": detector.spec.name, "status": "ok"})

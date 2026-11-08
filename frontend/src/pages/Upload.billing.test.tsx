@@ -107,7 +107,7 @@ describe('paid analysis intake', () => {
     expect(vi.mocked(billingApi.checkout).mock.calls[1][3]).toBe(originalKey)
     expect(vi.mocked(billingApi.checkout).mock.calls[1][0]).toBe('document')
     expect(vi.mocked(billingApi.checkout).mock.calls[1][2]).toBe('full')
-    expect(vi.mocked(billingApi.checkout).mock.calls[1][4]).toMatchObject({ risk_accepted: true, risk_notice_version: 'purchase-risk/v1' })
+    expect(vi.mocked(billingApi.checkout).mock.calls[1][4]).toMatchObject({ risk_accepted: true, risk_notice_version: 'purchase-risk/v2' })
     expect(api.text).not.toHaveBeenCalled()
     expect(api.uploadWithProgress).not.toHaveBeenCalled()
     expect(intakeItem).not.toHaveBeenCalled()

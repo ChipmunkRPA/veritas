@@ -81,7 +81,7 @@ def fallback_floor_reason(source: str, probability: float, marker: str | None = 
 # unsigned metadata that names a generator, a public watermark message, or Content Credentials that are no trusted
 # declaration, in three forms: a generator named under a signer on the trust list (no AI source type declared); under a
 # signer that is not on it, a declaration of AI, or a generator named
-CREDENTIAL_DETECTORS = ("prov.c2pa", "prov.c2pa.video")
+CREDENTIAL_DETECTORS = ("prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio")
 METADATA, WATERMARK = "metadata", "watermark"
 CREDENTIALS_LISTED, CREDENTIALS_UNLISTED_DECLARED, CREDENTIALS_UNLISTED_NAMED = (
     "credentials_listed_signer", "credentials_unlisted_signer_declared", "credentials_unlisted_signer_named")

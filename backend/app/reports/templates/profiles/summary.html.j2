@@ -102,7 +102,7 @@
 <li>
 {% if f.thumbnail %}<img class="thumb" src="{{ f.thumbnail }}" alt="{{ f.thumbnail_alt }}">{% endif %}
 <span class="fid">{{ f.id }}</span>
-<span class="body"><strong>{{ f.title }}</strong>{% if f.get("assessment") %} <span class="muted">{{ f.assessment.label }}</span>{% endif %}{% if f.status %} <span class="ex-chip">Examiner: {{ f.status }}</span>{% endif %}{% if f.counter %}<span class="muted"> — counter-evidence</span>{% endif %}<br>{% if f.get("observations") %}<strong>Observed:</strong> {{ f.observations[0] }}<br>{% endif %}<strong>Interpretation:</strong> {{ f.inference or f.reason }}{% if f.get("assessment") %}<span class="caption">Finding confidence: {% if f.assessment.confidence_pct is not none %}{{ f.assessment.confidence_pct }}% for {{ f.assessment.scope_label }}.{% else %}Not established for this finding.{% endif %}</span>{% endif %}{% if f.get('support') %}<span class="caption">Source evidence: {% for evidence in f.support %}<a href="{{ evidence.href }}">{{ evidence.id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}{% if f.thumbnail and f.thumbnail_caption %}<span class="caption thumbnail-caption">{{ f.thumbnail_caption }}</span>{% endif %}</span>
+<span class="body"><strong>{{ f.title }}</strong>{% if f.get("assessment") %} <span class="muted">{{ f.assessment.label }}</span>{% endif %}{% if f.status %} <span class="ex-chip">Examiner: {{ f.status }}</span>{% endif %}{% if f.counter %}<span class="muted"> — counter-evidence</span>{% endif %}<br>{% if f.get("observations") %}<strong>Observed:</strong> {{ f.observations[0] }}<br>{% endif %}<strong>Interpretation:</strong> {{ f.inference or f.reason }} {% if f.get("assessment") %}<span class="caption">Finding confidence: {% if f.assessment.confidence_pct is not none %}{{ f.assessment.confidence_pct }}% for {{ f.assessment.scope_label }}.{% else %}Not established for this finding.{% endif %}</span>{% endif %}{% if f.get('support') %} <span class="caption">Source evidence: {% for evidence in f.support %}<a href="{{ evidence.href }}">{{ evidence.id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}{% if f.thumbnail and f.thumbnail_caption %}<span class="caption thumbnail-caption">{{ f.thumbnail_caption }}</span>{% endif %}</span>
 </li>
 {% endfor %}
 </ol>
@@ -120,7 +120,7 @@
 <p class="status"><span class="status-mark{{ ' is-reviewed' if v.issued else '' }}"></span>{{ v.status_line }}</p>
 </section>
 {% endif %}
-<p class="closing">{{ v.closing }}</p>
+{% if v.closing %}<p class="closing">{{ v.closing }}</p>{% endif %}
 {% include "sections/image_evidence.html.j2" %}
 {% include "sections/multimedia_evidence.html.j2" %}
 {% endblock %}

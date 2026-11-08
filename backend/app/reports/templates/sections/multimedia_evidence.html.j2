@@ -1,4 +1,5 @@
-{% if v.get('evidence') %}
+{% if v.get('evidence') and not v.evidence.available %}<p class="caption evidence-unavailable">{{ v.evidence.note }}</p>{% endif %}
+{% if v.get('evidence') and v.evidence.available %}
 {% set evidence = v.evidence %}
 {% macro plates(images, wide=false) %}
 {% if images and not evidence.withheld %}

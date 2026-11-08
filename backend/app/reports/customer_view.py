@@ -206,7 +206,9 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     out["expert_contact"] = policy["expert_contact"]
     out["expert_note"] = policy["private_engagement_notice"] + " Contact " + policy["expert_contact"] + "."
     out["scope_statement"] = policy["court_notice"]
-    out["closing"] = out["expert_note"]
+    # The service-scope block already contains the complete engagement notice.
+    # Repeating it below findings can create an otherwise empty extra page.
+    out["closing"] = ""
     assessment = customer_assessment({**snapshot.result, "kind": snapshot.analysis.kind})
     text_rate = text_reference_rate(snapshot.analysis.kind, snapshot.result.get("condition_profile"),
                                           snapshot.result.get("calibration") or [])

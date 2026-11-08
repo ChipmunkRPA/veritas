@@ -7,16 +7,17 @@ import ExpertAnalysisInvitation from './ExpertAnalysisInvitation'
 afterEach(cleanup)
 
 describe('standard SaaS screening scope', () => {
-  it('states the cutoff without claiming measured accuracy and requires a private engagement', () => {
+  it('explains uncertainty without a public threshold claim and requires a private engagement', () => {
     render(<StandardScreeningNotice />)
     const notice = screen.getByTestId('standard-screening-notice')
     expect(notice.textContent).not.toContain('screening threshold')
-    expect(notice.textContent).toContain('Findings link observations')
-    expect(notice.textContent).toContain('not verified accuracy or proof')
+    expect(notice.textContent).toContain('Automated deepfake screening is uncertain')
+    expect(notice.textContent).toContain('not verified accuracy')
+    expect(notice.textContent).toContain('Misses, false alarms and inconclusive results remain possible')
     expect(notice.textContent).toContain('limited scientific reliability')
     expect(notice.textContent).toContain('Do not rely on it as court evidence')
     expect(notice.textContent).toContain('separate signed engagement')
-    expect(notice.textContent).toContain('does not guarantee court admissibility')
+    expect(notice.textContent).toContain('does not guarantee a conclusion or court admissibility')
     expect(screen.getByRole('link').getAttribute('href')).toBe('mailto:sales@chipmunkrpa.com')
   })
 

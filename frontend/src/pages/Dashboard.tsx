@@ -12,6 +12,7 @@ import { REVIEW_STATE } from '../components/ui/Marks'
 import { examinerPosition, numeral } from '../features/analysis/answer'
 import { MediaIcon } from '../components/MediaTypes'
 import { useDemo } from '../demo/DemoProvider'
+import StandardScreeningNotice from '../features/analysis/StandardScreeningNotice'
 import { libraryDecision, libraryNumber, libraryPollInterval, loadLibrary, matchesLibrary, sortLibrary, type LibraryAnalysis, type Sort, type StatusFilter, type TypeFilter, type VerdictFilter } from './analysisLibrary'
 
 const PAGE = 50
@@ -90,6 +91,7 @@ export default function Dashboard() {
         {starts && <ButtonLink href="/upload" variant="primary" onClick={(e) => { e.preventDefault(); nav('/upload') }}><FilePlus2 size={16} strokeWidth={1.5} aria-hidden />New analysis</ButtonLink>}
       </div>
       <p className="text-small text-text-muted mt-1 num">{q.isLoading ? <Skeleton w={200} /> : facts}</p>
+      <StandardScreeningNotice />
 
       {q.data?.hasMore && <p className="mt-2 text-small text-text-muted">The newest {all.length.toLocaleString()} analyses are loaded. Older analyses are not included in search or filters.</p>}
 

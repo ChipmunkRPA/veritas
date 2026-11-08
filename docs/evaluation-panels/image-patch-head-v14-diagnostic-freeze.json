@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.image-head-mean-diagnostics-freeze/14",
+  "original_freeze_sha256": "5f5d49f802fc7bcf6e064c6a061e735b8783bfde657bf54fbd6ee4724848984c",
+  "original_result_sha256": "bd0cb5f135d39d6f0914e9c707e6bd100a570f319a77b4e11bec6ee9e1e0b12d",
+  "fitted_point_sha256": "4441d01fa50bf6d36b23787cdda40c4d9c8c663e0e837b4c2812f382b79c5cf0",
+  "native_journal_sha256": "2b0c9f68e42538813f2828415afb5d9fd5c7e7468d43c439342fbb34c88ed2cb",
+  "outcomes_sha256": "fd8790b24c95d408ab42c8def99e081b8c381a90428c5b43e1492707f4a92b8e",
+  "failed_audit_profile_sha256": "bda467a2c2b8dae9bebb57283809a3ab49b9a793b740493d7605f49515988976",
+  "failed_audit_log_sha256": "69f26d68e30c1a8f89de0ddcf29dabdcd1825f48b44e70f86fe0d31b8d1ab471",
+  "source_sha256": {
+    "backend/scripts/diagnose_image_patch_head_v14.py": "a52ff23d6366ee158350185ced0fb10c6385eb10c74f1adec77a2c8e2bd711fe",
+    "backend/scripts/image_patch_head_diagnostics_runtime_v14.py": "f627c643fc0d41b4e4f3caf3b04d3fa576fb7a20a25fa9d8bc370effa4c8c406",
+    "backend/tests/test_image_patch_head_v14_diagnostics.py": "2904485d516f6518644f8c58cce49dfd4eeded12b6dbf854d4d3ea53dab51243",
+    "docs/image-patch-head-v14-diagnostic-plan.md": "aafcc2b99973b79240695f03d766ba82dd3f27e4401b38d39327bd9b43937718"
+  },
+  "plan": "All1344 native cases/18 full hooks;exact original fit vectors/maps/masks;record every original1e-5 mean failure;retain3e-5 dense arithmetic bound;fixed-head accurate-mean sensitivity only,no refit or point changes.",
+  "diagnostic_backbone_forwards_planned": 1362,
+  "diagnostic_forwards_before_freeze": 0,
+  "original_strict_audit_passed": false,
+  "serving_admitted": false,
+  "used_in_confidence": false
+}

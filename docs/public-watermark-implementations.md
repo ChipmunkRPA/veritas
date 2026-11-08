@@ -60,3 +60,10 @@ false responses. Standalone pinned source bootstrap and procedural inputs are
 publicly reproducible. Real-media/provider qualification and app integration
 remain open. No public-family response enters AI confidence or the trusted
 early-stop gate.
+
+The subsequent [fresh natural-media qualification](public-visual-natural-v2-result.md)
+completed 640 cases on 32 photographs and eight camera clips, with all native
+outputs and source/codec/time evidence separately replayed. Marked cases were
+flagged, but no-added-mark controls also flagged, exact compressed messages
+degraded and compressed responses appeared outside the inserted interval.
+The public family remains research-only, outside confidence and early stopping.

@@ -1,0 +1,85 @@
+{
+  "schema": "chipmunk.image-positive-pairs-freeze/21",
+  "private_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "planned_source_pairs": 397,
+  "publisher_roles": {
+    "training": 317,
+    "validation": 61,
+    "testing": 19
+  },
+  "code_sha256": {
+    "backend/scripts/ranged_gzip_v21.py": "c186ec7f71a11cf3b61b1b7c4602f194ff4a8aab9dbc43cc3e6439e905040834",
+    "backend/scripts/image_pair_truth_v21.py": "d109da5984c695b60a8e7211d4767bdc43f8f0d5c99783048d84ec2c6f817c4b",
+    "backend/scripts/image_positive_pairs_v21.py": "d1f8ff388ea27f62634595b14c1152ba2c6f795377a6093f5658a443820b36ed",
+    "backend/scripts/image_pairs_runtime_v21.py": "53d1ebed76b181f1b3c76db1a3f7c0b723979bfe383a2f34ae2e595de7137ef6",
+    "backend/tests/test_ranged_gzip_v21.py": "f97e48b328333e0806dcebd317ebd161090267945553dbc0b6fe18b37b0331dc",
+    "backend/tests/test_image_pair_truth_v21.py": "0aaa5b9f3febe1a860d35c45e3a8c6c89d85bc3eff4c8bea4426706877ea2281"
+  },
+  "source_index_sha256": "da334b003d9504e5587d67ab539e52e94de75bc7eda9a49b9b02ea7e8fc0e79b",
+  "dataset_license_sha256": "925e1b06fa82e379bad225eb67723f7f296266d61b9fe6ac83445cc9778b8e2c",
+  "archives": {
+    "training-edits": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_training.tar.gz",
+      "bytes": 14359902282,
+      "etag": "\"bbe41aac348ddd4d9f4d687a94390d77\""
+    },
+    "validation-edits": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_validation.tar.gz",
+      "bytes": 2172017290,
+      "etag": "\"44b9e62f224dd312f59d9a5bd79d1171\""
+    },
+    "testing-edits": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/sd2-sp/sd2-sp_testing.tar.gz",
+      "bytes": 2040575228,
+      "etag": "\"2aa172ad2b1200973b7593259b37cc07\""
+    },
+    "training-masks": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_training.tar.gz",
+      "bytes": 31758802,
+      "etag": "\"51ac22fdf32a5cbd518dc0e242648b3d\""
+    },
+    "validation-masks": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_validation.tar.gz",
+      "bytes": 5295371,
+      "etag": "\"9e55620b500ef565cec45feca2f0fd4b\""
+    },
+    "testing-masks": {
+      "url": "https://cloud.ilabt.imec.be/public.php/dav/files/xEeAzrY7ES9KA8o/masks/masks_testing.tar.gz",
+      "bytes": 5272350,
+      "etag": "\"92485c57e07657964a5725400c6e717d\""
+    }
+  },
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "requests": "2.34.2"
+  },
+  "reader": {
+    "package": "indexed-gzip",
+    "version": "1.10.3",
+    "license": "Zlib",
+    "wheel_bytes": 338676,
+    "wheel_sha256": "2e13790ecf7ff673495b1776a2b4868ffb54e3e73bdf94317fc8033e8156859a",
+    "install_receipt_sha256": "4b29799fc1ac3ea1e483aa3f88d147425e9bbe10b8242975704a755944cd3e17",
+    "upstream_source_revision": "d87b55d872a6120423e33acfdf7e0a1c836f7816",
+    "upstream_license_blob": "e9a6155ff464c3c5c4edd2f52e85ee0d97c3860e"
+  },
+  "authored_tests_passed": 18,
+  "junit_sha256": "7f994ef65f20609609a3b3c33c2e3453024a7551052f2e35d2ba9de8054d7a97",
+  "actual_http_smoke": {
+    "first_gzip_header_hex": "1f8b0800000000000003ecfd5550255ff0350a1e1cba7177776bdcdd5d1a6ddc",
+    "gzip_footer_hex": "bce23d3300e83359",
+    "verified_range_requests": 2,
+    "bytes_transferred": 6218,
+    "images_decoded": 0,
+    "neural_forwards": 0
+  },
+  "scope": "Publisher-released SD2-splice data under declared CC BY-SA4.0, with current BY/BY-SA2.0 photo attribution and exact original RGB lineage. Local paired-data qualification only; no generator weights, new Firefly/FLUX data, neural inference, fitting, production admission or blanket rights/camera-authenticity claim.",
+  "fixed_rules": "One preselected shared category, bbox mask and generator variation0 per photo inherited from v20. All397 retained in denominator. Exact native source/edit shape and orientation; nonempty observed RGB change contained in published positive compositing alpha. Whole-mask/truth and two non-generative controls committed. No thresholds selected from model outcomes. Photographer/source-connected fitting roles and fresh confirmation remain separate required work.",
+  "bounded_acquisition": "Each step is a new explicit phase, continuing only a hash-committed successful predecessor. Stop after a full tar member at240seconds or2GiB network transfer;900s/6GiB outer guard,1536MiB reserves. No retry on phase failure. Keep all indexes/checkpoints/range journals private. Imported indexes disable whole-gzip CRC validation; selected PNGs get exact hashes and independent pixel review.",
+  "new_neural_forwards": 0,
+  "fitting_started": false,
+  "training_admitted": 0,
+  "new_project_edit_pngs_retained_before_freeze": 0,
+  "privacy": "Case IDs/pairings, full edited PNGs, source/ordinary pixels and gzip dictionaries remain private. Only plan/program/source/license commitments and aggregate counts are public."
+}

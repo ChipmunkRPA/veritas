@@ -1,0 +1,192 @@
+{
+  "schema": "chipmunk.preserved-video-result/22",
+  "method": {
+    "schema": "chipmunk.preserved-evidence-method/22",
+    "arms": {
+      "appearance-direct": [
+        "face-appearance",
+        "raw-view-max"
+      ],
+      "appearance-positive": [
+        "face-appearance",
+        "family-max"
+      ],
+      "family-max": [
+        "all",
+        "family-max"
+      ],
+      "family-repeat": [
+        "all",
+        "family-max-repeat"
+      ],
+      "view-max": [
+        "all",
+        "view-max"
+      ]
+    },
+    "solver_policy": {
+      "maximum_dimensions": 8,
+      "maximum_iterations": 100,
+      "maximum_backtracks": 60,
+      "vector_kkt_stop": 1e-10,
+      "independent_kkt_limit": 1e-09,
+      "bound_snap": 1e-12,
+      "armijo": 0.0001,
+      "objective_roundoff_units": 8,
+      "reference_prior": 0.5
+    },
+    "minimum": 25,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "old_objective_slack": 1e-11,
+    "repeat_probability_limit": 1e-07,
+    "replay_probability_limit": 1e-06,
+    "point": "Common complete genuine fusion_cal groups, min25; existing raw appearance false-component budget capped atfloor(.1*n). Strict greater than ranked group maximum.",
+    "raw_appearance_point": 0.11243900750879454,
+    "scope": "Consumed source-bound public scalars. No native inference, fresh source or serving admission."
+  },
+  "arms": {
+    "appearance-direct": {
+      "all": {
+        "planned": 160,
+        "assessed": 155,
+        "inconclusive": 5,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 63,
+        "missed_ai_including_inconclusive": 17,
+        "false_ai": 2,
+        "false_ai_groups": 2,
+        "source_class_balanced_brier_on_scored_cases": 0.10319155531036017
+      },
+      "mode": "raw-view-max",
+      "combination_coefficients": {
+        "video|video-face": [
+          3.6899816342713865
+        ]
+      },
+      "qualifies_for_fresh_detection_followup": false
+    },
+    "appearance-positive": {
+      "all": {
+        "planned": 160,
+        "assessed": 155,
+        "inconclusive": 5,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 63,
+        "missed_ai_including_inconclusive": 17,
+        "false_ai": 2,
+        "false_ai_groups": 2,
+        "source_class_balanced_brier_on_scored_cases": 0.10169286804510148
+      },
+      "mode": "family-max",
+      "combination_coefficients": {
+        "video|video-face": [
+          3.816305709120751
+        ]
+      },
+      "qualifies_for_fresh_detection_followup": false
+    },
+    "family-max": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 18,
+        "missed_ai_including_inconclusive": 62,
+        "false_ai": 3,
+        "false_ai_groups": 3,
+        "source_class_balanced_brier_on_scored_cases": 0.20197755034763526
+      },
+      "mode": "family-max",
+      "combination_coefficients": {
+        "video|video-face": [
+          0.9508908561731522
+        ]
+      },
+      "qualifies_for_fresh_detection_followup": false
+    },
+    "family-repeat": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 18,
+        "missed_ai_including_inconclusive": 62,
+        "false_ai": 3,
+        "false_ai_groups": 3,
+        "source_class_balanced_brier_on_scored_cases": 0.20197755034763523
+      },
+      "mode": "family-max-repeat",
+      "combination_coefficients": {
+        "video|video-face": [
+          0.31696361872438417,
+          0.31696361872438417,
+          0.31696361872438417
+        ]
+      },
+      "qualifies_for_fresh_detection_followup": false
+    },
+    "view-max": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 63,
+        "missed_ai_including_inconclusive": 17,
+        "false_ai": 3,
+        "false_ai_groups": 3,
+        "source_class_balanced_brier_on_scored_cases": 0.09688010391511177
+      },
+      "mode": "view-max",
+      "combination_coefficients": {
+        "video|video-face": [
+          2.9220423420742256,
+          0.3142047010950173,
+          0.09056191968100256
+        ]
+      },
+      "qualifies_for_fresh_detection_followup": false
+    }
+  },
+  "serving_admitted": false,
+  "fresh_sources": 0,
+  "outside_human_reviews": 0,
+  "raw_appearance_reference": {
+    "planned": 160,
+    "assessed": 155,
+    "inconclusive": 5,
+    "ai": 80,
+    "genuine": 80,
+    "ai_flagged": 62,
+    "missed_ai_including_inconclusive": 18,
+    "false_ai": 1,
+    "false_ai_groups": 1
+  },
+  "appearance_direct_mapped_point_control": {
+    "planned": 160,
+    "assessed": 155,
+    "inconclusive": 5,
+    "ai": 80,
+    "genuine": 80,
+    "ai_flagged": 62,
+    "missed_ai_including_inconclusive": 18,
+    "false_ai": 1,
+    "false_ai_groups": 1,
+    "source_class_balanced_brier_on_scored_cases": 0.10319155531036017
+  },
+  "matched_duplicate_control_max_probability_difference": 1.6653345369377348e-16,
+  "adverse": {
+    "reserved_not_fitted": true,
+    "changed_reserved_units": 3416,
+    "preserved_missing_units": 104,
+    "missing_check_withheld": true
+  }
+}

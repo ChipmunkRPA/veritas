@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.preserved-evidence-diagnostic-failure/21",
+  "failure": "Post-fit diagnostic passed NumPy float64 values into the strict legacy Python-scalar predictor; no detector, new-method evaluation or serving change.",
+  "profile": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.run_preserved_video_v21",
+    "arguments": [
+      "solver-audit",
+      "<private-scalar-trial>"
+    ],
+    "child_exit_code": 1,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 414859264,
+    "sample_errors": 0,
+    "duration_s": 0.788323917076923,
+    "seconds_limit": 600
+  },
+  "failed_journal": [
+    {
+      "study": "audio-specialists-v15",
+      "arm": "combined-context",
+      "stage": "head.audio.full.concentrated",
+      "input_sha256": "65dbca3279381dd52fa8d1cfffceb911c5485c014412dae01bc936541801f36b",
+      "status": "failed",
+      "error_type": "ValueError",
+      "error": "Unassessed evidence cannot become a zero feature"
+    }
+  ],
+  "correction": "Explicit v22 comparison converts rows to ordinary Python numbers. All solver/data/tolerance/point rules unchanged. Original code/freeze/profile/journal retained.",
+  "serving_admitted": false
+}

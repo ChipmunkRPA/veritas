@@ -1,0 +1,293 @@
+{
+  "schema": "chipmunk.specialist-preserved-calibration/4",
+  "policy": {
+    "specialists": [
+      {
+        "id": "face-crop",
+        "modality": "video",
+        "family": "video-face",
+        "target": "video.sampled_frame_presence",
+        "contexts": [
+          "single-face"
+        ],
+        "routing_sha256": "1d7c0bc59094687a6c95778797569fae9fc08dca7cfdf855c0d9eff2ec647576",
+        "higher_means_ai": true,
+        "raw_range": [
+          -100.0,
+          100.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "32d4efa5d4d89d75c898b572c19d64b7c49d1b762b0f5ca7f766fb4631b28c6c",
+          "weight_sha256": [
+            "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+            "7f2761e13678191774a152121f1630d19baa33a74216dd264d54445d96b16229",
+            "d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833",
+            "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+            "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+            "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+            "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "c99311dfa745999d7874293cd0bbf46ef520e01a4b16545c37e22bbbea0d0df3"
+        }
+      },
+      {
+        "id": "face-appearance",
+        "modality": "video",
+        "family": "video-face",
+        "target": "video.sampled_middle_presence",
+        "contexts": [
+          "single-face"
+        ],
+        "routing_sha256": "1d7c0bc59094687a6c95778797569fae9fc08dca7cfdf855c0d9eff2ec647576",
+        "higher_means_ai": true,
+        "raw_range": [
+          -4.0,
+          4.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "32d4efa5d4d89d75c898b572c19d64b7c49d1b762b0f5ca7f766fb4631b28c6c",
+          "weight_sha256": [
+            "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+            "7f2761e13678191774a152121f1630d19baa33a74216dd264d54445d96b16229",
+            "d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833",
+            "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+            "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+            "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+            "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "c99311dfa745999d7874293cd0bbf46ef520e01a4b16545c37e22bbbea0d0df3"
+        }
+      },
+      {
+        "id": "face-feature-change",
+        "modality": "video",
+        "family": "video-face",
+        "target": "video.sampled_middle_presence",
+        "contexts": [
+          "single-face"
+        ],
+        "routing_sha256": "1d7c0bc59094687a6c95778797569fae9fc08dca7cfdf855c0d9eff2ec647576",
+        "higher_means_ai": true,
+        "raw_range": [
+          -4.0,
+          4.0
+        ],
+        "producer": {
+          "kind": "model",
+          "implementation_sha256": "32d4efa5d4d89d75c898b572c19d64b7c49d1b762b0f5ca7f766fb4631b28c6c",
+          "weight_sha256": [
+            "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+            "7f2761e13678191774a152121f1630d19baa33a74216dd264d54445d96b16229",
+            "d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833",
+            "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+            "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+            "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+            "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+          ],
+          "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+          "native_receipt_sha256": "c99311dfa745999d7874293cd0bbf46ef520e01a4b16545c37e22bbbea0d0df3"
+        }
+      }
+    ]
+  },
+  "mode": "family-max",
+  "implementation_sha256": {
+    "engine": "0d2205237681cc626adcc9280754122afbab3755f439c7d3b70f932d81dd08a7",
+    "solver": "c6094b48d0842db7a763eac740fba65fdea4fbb8c6a9ce236144ea5a36eca653",
+    "legacy": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "plan_sha256": "476d4882b49859418732e7644dc3872d0d70d231a4136a98eca71d1c93572913",
+  "training_sha256": "2bb0757b7b4ccd8864233bfa4332b37715b442d8593dbfe1a4154c87711191c5",
+  "minimum_groups_per_class": 25,
+  "l2": 0.001,
+  "reference_prior": 0.5,
+  "specialists": {
+    "face-crop|single-face": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 41,
+        "1": 41
+      },
+      "center": [
+        0.07372530824707307
+      ],
+      "scale": [
+        2.266516828409424
+      ],
+      "coefficients": [
+        0.6401098751308669
+      ],
+      "intercept": 0.003939214887633656,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true,
+      "fit_method": "bounded-newton-independent-kkt/4",
+      "penalty_multipliers": [
+        1.0
+      ],
+      "numerical_check": {
+        "feasible": true,
+        "independent_kkt_infinity": 4.0766001685454967e-17,
+        "limit": 1e-09,
+        "independent_objective": 0.6458594566166418,
+        "check": "scalar sigmoid/logloss and math.fsum gradient, separate from Newton vector derivatives",
+        "iterations": 4,
+        "vector_kkt_infinity": 3.122502256758253e-17
+      }
+    },
+    "face-appearance|single-face": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 40,
+        "1": 41
+      },
+      "center": [
+        0.041064742458050627
+      ],
+      "scale": [
+        0.17931773482055774
+      ],
+      "coefficients": [
+        0.45870234280582084
+      ],
+      "intercept": 0.014387586433659021,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true,
+      "fit_method": "bounded-newton-independent-kkt/4",
+      "penalty_multipliers": [
+        1.0
+      ],
+      "numerical_check": {
+        "feasible": true,
+        "independent_kkt_infinity": 4.832679395549988e-13,
+        "limit": 1e-09,
+        "independent_objective": 0.6708762969888321,
+        "check": "scalar sigmoid/logloss and math.fsum gradient, separate from Newton vector derivatives",
+        "iterations": 4,
+        "vector_kkt_infinity": 4.832628438047881e-13
+      }
+    },
+    "face-feature-change|single-face": {
+      "status": "fitted",
+      "source_groups_by_class": {
+        "0": 40,
+        "1": 41
+      },
+      "center": [
+        -0.04771506145494095
+      ],
+      "scale": [
+        0.02815356580304874
+      ],
+      "coefficients": [
+        0.08956143725298162
+      ],
+      "intercept": 0.0010663425717403181,
+      "reference_prior": 0.5,
+      "source_count_target_smoothing": true,
+      "fit_method": "bounded-newton-independent-kkt/4",
+      "penalty_multipliers": [
+        1.0
+      ],
+      "numerical_check": {
+        "feasible": true,
+        "independent_kkt_infinity": 5.3939058081153846e-18,
+        "limit": 1e-09,
+        "independent_objective": 0.6921403829292245,
+        "check": "scalar sigmoid/logloss and math.fsum gradient, separate from Newton vector derivatives",
+        "iterations": 3,
+        "vector_kkt_infinity": 1.5233040523421337e-17
+      }
+    }
+  },
+  "combiners": {
+    "video|video-face": {
+      "response": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 38,
+          "1": 38
+        },
+        "center": [
+          1.0161548784932413
+        ],
+        "scale": [
+          0.4222512528983881
+        ],
+        "coefficients": [
+          0.9508908561731522
+        ],
+        "intercept": -0.023049373915547018,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true,
+        "fit_method": "bounded-newton-independent-kkt/4",
+        "penalty_multipliers": [
+          1.0
+        ],
+        "numerical_check": {
+          "feasible": true,
+          "independent_kkt_infinity": 2.2551405187698492e-17,
+          "limit": 1e-09,
+          "independent_objective": 0.605793406306758,
+          "check": "scalar sigmoid/logloss and math.fsum gradient, separate from Newton vector derivatives",
+          "iterations": 5,
+          "vector_kkt_infinity": 1.474514954580286e-17
+        }
+      },
+      "features": [
+        [
+          "family",
+          "video-face"
+        ]
+      ],
+      "penalty_multipliers": [
+        1
+      ],
+      "fitting_files": 164,
+      "fitting_unassessed": 12,
+      "calibration": {
+        "status": "fitted",
+        "source_groups_by_class": {
+          "0": 39,
+          "1": 39
+        },
+        "center": [
+          -0.36739659438094097
+        ],
+        "scale": [
+          1.1314165408176768
+        ],
+        "coefficients": [
+          1.0190000635056897
+        ],
+        "intercept": -0.0013527140534001984,
+        "reference_prior": 0.5,
+        "source_count_target_smoothing": true,
+        "fit_method": "bounded-newton-independent-kkt/4",
+        "penalty_multipliers": [
+          1.0
+        ],
+        "numerical_check": {
+          "feasible": true,
+          "independent_kkt_infinity": 4.800507734381565e-11,
+          "limit": 1e-09,
+          "independent_objective": 0.5904382900062419,
+          "check": "scalar sigmoid/logloss and math.fsum gradient, separate from Newton vector derivatives",
+          "iterations": 4,
+          "vector_kkt_infinity": 4.8005074741730436e-11
+        }
+      },
+      "calibration_files": 160,
+      "calibration_unassessed": 4
+    }
+  },
+  "serving_admitted": false,
+  "sha256": "1e01b301f05efd8f4b8b0793ce57c599ebe55500fc6863093e64934d6c5a7e60"
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.frozen-real-problem-solver-audit/22",
+  "problems": {
+    "audio-specialists-v15.all": 17,
+    "audio-specialists-v15.checked": 17,
+    "image-supported-v11.all": 32,
+    "image-supported-v11.checked": 32,
+    "video-face-specialists-v20.all": 16,
+    "video-face-specialists-v20.checked": 16,
+    "scoped-writing-v6.all": 37,
+    "scoped-writing-v6.checked": 37
+  },
+  "maximum_training_logit_drift": 1.634518689286324e-07,
+  "maximum_old_kkt_infinity": 5.0557164990930326e-09,
+  "maximum_new_objective_excess": 2.220446049250313e-16,
+  "journal_sha256": "6b02938b2476a735338a2d4dd0a7404a4fe19729e54571d071961811a8f42948",
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Exact frozen training-input optimization comparison; not new detection evidence or outside human review."
+}

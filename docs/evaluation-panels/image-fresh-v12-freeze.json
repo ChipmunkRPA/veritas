@@ -1,0 +1,136 @@
+{
+  "schema": "chipmunk.image-jpeg-fresh-freeze/12",
+  "policy": {
+    "schema": "chipmunk.image-jpeg-fresh-confirmation-policy/12",
+    "scope": "48 new known-project source pairs, three existing TGIF generators, JPEGquality75 only. No unseen-generator, external pretraining-independence, pixel-authorship or full-app accuracy claim.",
+    "source": "All48 predeclared sources and96 original/edit inputs. Exclude every prior selected COCO ID, including source drafts. No response filtering, missing-case replacement or refitting.",
+    "truth": "Original RGB pair difference is primary edit mask. JPEG changes are ordinary compression, not additional AI truth. Unavailable secondary author masks are recorded.",
+    "candidate": "Exact v11 primary-regions artifact and JPEG point; exact primary-only comparator and point. Existing actual FUSED component selector is the current reference.",
+    "native": "Same cached commercial FUSED OpenSDI and ConvNeXt, MPSfloat32, batch1. Actual original JPEG bytes decoded before inference. Same source-coordinate readouts and production postprocessing.",
+    "parity": "Before new source forwards, hash-first consumed original/AI JPEG references match their retained heads and torch-bilinear projected maps at atol=rtol=1e-4 and original gate side; repeat both. Repeat first new original/edit input, same limits.",
+    "retention": "Private lossless512 float32 maps plus source/input/RGB/hash journals; no additional retained full-resolution projection arrays. Raw photos/maps remain private.",
+    "missing": "Every planned source retained. Any failed job remains partial with original log and no completed accuracy result. Unavailable required measurement has no combined score; no original verdict.",
+    "gates": "More AI files flagged than current components; no additional genuine false flags or coverage loss against current or primary-only; no AI loss against primary-only; lower Brier than primary-only. All required. No tuning or serving admission on this holdout.",
+    "uncertainty": "5000 paired source-group bootstrap draws, seed20261107, percentile95% intervals. All48 sources together; retain both labels per source. Report each generator separately.",
+    "resource_guard": {
+      "tree_rss_gib": 6,
+      "available_mib": 1536,
+      "disk_mib": 1536,
+      "native_seconds": 900
+    },
+    "serving_admitted": false
+  },
+  "selection": {
+    "schema": "chipmunk.image-fresh-selection/12",
+    "selection_code_sha256": "95db9d34911e7d57a9c4666da1fb2443b7842dbf539a39ffd1591c7b027864ca",
+    "source_helper_sha256": "c18705473785c2826d74a742a9a080476e8cf54c969689f5f90be9ae1ad7f6bb",
+    "source_plan_sha256": "053ec095255f808b6b0b2183a30b755a7cf0941a764d6ab85bc0c7562e0a61cf",
+    "exclusions_sha256": "1605605da1186af2bbe2c6855b5f901ba88a15beb0cc71aff6e65d6a00909d33",
+    "candidate": {
+      "development_trial": "backend/data/independent-evaluation/image-supported-v11",
+      "fit_complete_sha256": "fec052ada55b15c929d0ad6a149233bfa66298b83f4a914dac2f7ad6b6f26a5d",
+      "frozen_artifacts_and_points_sha256": {
+        "primary-artifact.json": "b41600293f2968ed89da3f7e771396d7e82d72369b0f6850fa1fb0cdb063a6ba",
+        "primary-points.json": "64c2f54bc12860429c12e99c43fa7716bd3d3d523a18967d8b4157419a8ccb51",
+        "primary-regions-artifact.json": "2155c7b4073394b57b3d3892ab6dadb17e77bc60f59ead337835a17fa002f29c",
+        "primary-regions-points.json": "7871c6f741d8cde3713af199934be3747f3f6dd53182eb56bde7188f185d33ce"
+      },
+      "choice": "JPEG primary-regions only, selected by the completed v11 development gates. Primary-only is a fixed comparator. No new fits or points."
+    },
+    "planned_source_pairs": 48,
+    "planned_jpeg_inputs": 96,
+    "new_neural_forwards": 0,
+    "native_scoring_protocol_complete": false,
+    "serving_admitted": false
+  },
+  "code_sha256": {
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/app/detectors/image/adapters/common.py": "a79e8e31b96cf6f7fc3d206bb755c20930904269a51342f462da0ea99f7768af",
+    "backend/app/detectors/image/adapters/localisers.py": "1f85939d9e6a346cfce85312d1495285eb23a39282ddcec23b6005f25e099003",
+    "backend/app/detectors/image/fused.py": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb",
+    "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+    "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+    "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "backend/app/evidence/image_eligibility.py": "e5bebad072fbcfd08c9a3a37c0a3ef29ee3e9924145077c0c46bd59d1e57a69c",
+    "backend/scripts/image_supported_calibration_v11.py": "c4408d8e7fc78ed7af46d8a3876e45b81f92ea55d3aae331e6d17197377f3129",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/scripts/prepare_image_confirmation_v12.py": "95db9d34911e7d57a9c4666da1fb2443b7842dbf539a39ffd1591c7b027864ca",
+    "backend/scripts/prepare_image_supported_v11.py": "3964f617320865b0f82ae975463dd9ff6c88fa080d1ff96699b277b18d93d3e0",
+    "backend/scripts/prepare_tgif_localization.py": "c18705473785c2826d74a742a9a080476e8cf54c969689f5f90be9ae1ad7f6bb",
+    "backend/scripts/replay_image_supported_v11.py": "403475ed9fefa90e159b999fdd8745f8da48796f80ab08477718e8e729fa2718",
+    "backend/scripts/review_image_confirmation_v12.py": "eadccef480196337d323a41369fdaec67847605eca4af0d7e07cc86fe36ea75f",
+    "backend/scripts/review_image_supported_v11.py": "8226a9c420781119c2df261a50ddfe4b2bc9929ce71e6aaa2c72b3e76c922543",
+    "backend/scripts/run_image_confirmation_v12.py": "2789d99d8f050edb8b08075894d1ed51da9ebac139e6fb8415d6b2ee49db7d45",
+    "backend/scripts/run_image_supported_v11.py": "8afa74bcc894d627c1903f25dd23a8dac0f12905275e21c831503e1e9bcf94ef",
+    "backend/scripts/specialist_runtime_v12.py": "1c0f8203d8241a131d46b18cf70351f21f8de660967722e6469f946e76385219",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_image_confirmation_v12.py": "5d62ab966b0d3f3342310297803379d7ee16b31b91a122d27ed6adef97bec988",
+    "backend/tests/test_image_supported_calibration_v11.py": "5cf27a6e4b3ab1ac29d0b40f1e6b510e5d18d7b6a0d0217ce470fde07c99d562",
+    "backend/tests/test_image_supported_native_v11.py": "83e3f4b94b9929290851d75c11795a6647ac4943c19603073b8276d155cdbf1b",
+    "backend/tests/test_image_supported_v11.py": "aa2615c3f1c6bde79ef80b373d55f0ed7458bd6bf6e51d62fabcfc374897300e",
+    "docs/image-fresh-v12-protocol.md": "357c514343694e2e4027548348a68535f5ccc1e2ce9035669ca8dbea15ce8623",
+    "docs/image-supported-v11-protocol.md": "eadeff28ae66117b4c2424ff6b6f22caef54122ca2dcdd6c6d6d15379721dfd7"
+  },
+  "inputs_sha256": {
+    "input-plan.json": "5f7d888a6a5a0895171ac6015d76084d3150e9647e387f9ca2b69bb597804ad9",
+    "sources/manifest.json": "2bbca4efb4cda325140940461943e36a2097158103f370434eb672102b5ac958",
+    "acquisition-profile/profile.json": "0cb42fea40dae395566e41c4434f81d48544598580841512f6cfb297340c387e"
+  },
+  "development_freeze_sha256": "bbf3a3587f55386b916a4392fa325b4e7a2817f8ef42a8a1b8c5bd1a5e667588",
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "timm": "1.0.28",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "safetensors": "0.8.0",
+    "segmentation-models-pytorch": "0.5.0"
+  },
+  "assets": {
+    "models/weights/fused/fused_opensdi.pth": "7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c",
+    "models/weights/fused/convnext.safetensors": "1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23"
+  },
+  "runtime_context": {
+    "python": "3.12.6 (main, Sep  6 2024, 19:03:47) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "machine": "arm64",
+    "additional_packages": {
+      "PyYAML": "6.0.3",
+      "psutil": "7.2.2"
+    }
+  },
+  "commercial_license_binding": {
+    "historical_producer_manifest_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+    "current_manifest_sha256": "0ab6e32b1279b37f1797e40a1f3c6277272913237a6d1216b9574e2bd325a99b",
+    "selected_model_records_sha256": "0297473cbdbe8c4a086b864d6772fa34aa1a0696a28c63c5948a771d7231b662",
+    "model_ids": [
+      "fused.opensdi",
+      "fused.convnext_xxlarge"
+    ],
+    "selected_records_equal_original": true
+  },
+  "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+  "original_native_code_sha256": {
+    "backend/scripts/run_image_supported_v11.py": "8afa74bcc894d627c1903f25dd23a8dac0f12905275e21c831503e1e9bcf94ef",
+    "backend/scripts/prepare_image_supported_v11.py": "3964f617320865b0f82ae975463dd9ff6c88fa080d1ff96699b277b18d93d3e0",
+    "backend/scripts/replay_image_supported_v11.py": "403475ed9fefa90e159b999fdd8745f8da48796f80ab08477718e8e729fa2718",
+    "backend/scripts/image_supported_calibration_v11.py": "c4408d8e7fc78ed7af46d8a3876e45b81f92ea55d3aae331e6d17197377f3129",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "backend/app/detectors/image/fused.py": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb",
+    "backend/app/detectors/image/adapters/localisers.py": "1f85939d9e6a346cfce85312d1495285eb23a39282ddcec23b6005f25e099003",
+    "backend/app/detectors/image/adapters/common.py": "a79e8e31b96cf6f7fc3d206bb755c20930904269a51342f462da0ea99f7768af",
+    "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+    "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+    "backend/app/evidence/image_eligibility.py": "e5bebad072fbcfd08c9a3a37c0a3ef29ee3e9924145077c0c46bd59d1e57a69c",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/tests/test_image_supported_v11.py": "aa2615c3f1c6bde79ef80b373d55f0ed7458bd6bf6e51d62fabcfc374897300e",
+    "backend/tests/test_image_supported_calibration_v11.py": "5cf27a6e4b3ab1ac29d0b40f1e6b510e5d18d7b6a0d0217ce470fde07c99d562",
+    "backend/tests/test_image_supported_native_v11.py": "83e3f4b94b9929290851d75c11795a6647ac4943c19603073b8276d155cdbf1b",
+    "docs/image-supported-v11-protocol.md": "eadeff28ae66117b4c2424ff6b6f22caef54122ca2dcdd6c6d6d15379721dfd7"
+  },
+  "scoring_protocol_complete": true,
+  "new_holdout_neural_forwards_before_freeze": 0,
+  "serving_admitted": false
+}

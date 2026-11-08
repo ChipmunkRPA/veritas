@@ -1,0 +1,77 @@
+{
+  "policy": {
+    "schema": "chipmunk.image-supervised-patch-head/14",
+    "sources": "All consumed v13 source groups:120 fit,60 genuine-only point,108 diagnostics; no fresh-source accuracy claim.",
+    "features": "Frozen Apache-2 DINOv2 register-base;448-square bilinear RGB/ImageNet;normalized blocks4,8,12;1024x2304 float32 tokens.",
+    "head": "Concatenate token and token-minus-full-image-mean;4608->64 ReLU->1 sigmoid ranking head;295041 learned parameters.",
+    "fit": "Same840 original/lighting/JPEG55/ordinary-patch cases as v13;64 deterministic stratified cells per case;exact soft source-area labels.",
+    "optimization": "CPU float32/two threads;seed20261108;AdamW lr.001 weight_decay.01;30 epochs,batch512;balanced soft class mass;no early stopping or diagnostic selection.",
+    "point": "Maximum over genuine original and ordinary control per60 point groups;descending indexfloor(.05*n),strict greater-than;AI outcomes never select the point.",
+    "mask": "32x32 median3 reflect;8-connected components>=4 cells;sourcepixel(x,y)->floor(32*x/width),floor(32*y/height).",
+    "continuation": "Higher edited meanIoU and more IoU>=.3 than current,no extra genuine flags,ordinary flags<=5%;full native/source/arithmetic audit also required.",
+    "limits": "Consumed development;not confidence,pixel authorship,unseen-generator validation or serving admission. Current ordinary-control model inference and fresh confirmation follow only a passing development result.",
+    "cache": "Lossless float32 sampled fit vectors and full-image means;full native feature commitments per case,retained ranking maps;separate full native replay required.",
+    "serving_admitted": false,
+    "used_in_confidence": false
+  },
+  "private_freeze_sha256": "5f5d49f802fc7bcf6e064c6a061e735b8783bfde657bf54fbd6ee4724848984c",
+  "code_sha256": {
+    "backend/scripts/image_residual_localizer_v13.py": "b313d81c1c9621137d70b69b3c3a39e5a05aa17d8029fcdd3c5b2467ff6d68cc",
+    "backend/scripts/run_image_residual_v13.py": "458efb42772ce35f3137df280b3c90a35f55eb13314b74de4722187cfdfce2cb",
+    "backend/scripts/image_residual_runtime_v13.py": "4c3cd5d035e56063265409703d2408f765e637113b06c0e36aa14256a61b0912",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_image_residual_v13.py": "7c010f5942d52e0d24ef9018f79e2fdf09661ae0235461c432e5e3895113b794",
+    "docs/image-residual-v13-protocol.md": "404e9075fc498caf3bf6e60f7989c417519629f16cf193c344a2e329b3a56ae1",
+    "backend/scripts/run_image_supported_v11.py": "8afa74bcc894d627c1903f25dd23a8dac0f12905275e21c831503e1e9bcf94ef",
+    "backend/scripts/run_image_confirmation_v12.py": "2789d99d8f050edb8b08075894d1ed51da9ebac139e6fb8415d6b2ee49db7d45",
+    "backend/scripts/prepare_image_supported_v11.py": "3964f617320865b0f82ae975463dd9ff6c88fa080d1ff96699b277b18d93d3e0",
+    "backend/scripts/image_patch_head_v14.py": "c09b00961695b1acc4460a1e8dc924ac4b83d37550c87e9bba605ca92f451672",
+    "backend/scripts/run_image_patch_head_v14.py": "fe2cd594a7dbc162c340598d66efef274d10e3a03e9127f5a7585920d8b1a74e",
+    "backend/scripts/review_image_patch_head_v14.py": "e7e90af5133b8f0346984f9caf076b53acb4807bb62afcdf72fd78468c34b75b",
+    "backend/scripts/image_patch_head_runtime_v14.py": "b7e92f0d0ab788b75bd34fbaeb95c58e1667e412d1fc83004150667ed4b55fc2",
+    "backend/scripts/image_patch_drift_v8.py": "b3050185a9766bc2725fc4429cb9935e16d72d00ef7ca0cee8182dce3cbe9d12",
+    "backend/tests/test_image_patch_head_v14.py": "13b00fea6aa5dddc82855df8f78360d15fa1c53ad5781512edb405e047d87c04",
+    "docs/image-patch-head-v14-protocol.md": "ef5c5b649cb5fc80f0d823d32f5c6989500eac0869b89dc8dd9cffd291bca794",
+    "backend/app/detectors/image/radar.py": "d42bad4f23887b9f0f48f4d8e0fca0e418305ee78054f67c73558ac08cfa353e",
+    "backend/app/engine/fetchers.py": "e83fa48fef53026f30930b71feb57b114b9c5fcdf307bb47a0b75ae8e3fba366",
+    "backend/app/engine/registry.py": "b4f732b805a5453981465dfe2d070af4d337ca0bd1634cd58d708fbcfd68d2e8",
+    "backend/app/core/config.py": "b81fea73c18fd7ece718601891d81b3501047d1a98803776b52a495fa4617be3"
+  },
+  "source_groups": {
+    "fit": 120,
+    "point": 60,
+    "diagnostic": 108
+  },
+  "cases": {
+    "fit": 840,
+    "point": 180,
+    "diagnostic": 324
+  },
+  "authored_contract_sha256": "5a8715e976313a8975b88fd28a3000cb1448db2355babc425efbeedc406b8ba2",
+  "authored_contract_backbone_forwards": 9,
+  "assets": [
+    {
+      "model": "dinov2.vitb14_reg4",
+      "sha256": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71",
+      "bytes": 346393545,
+      "license": "Apache-2.0"
+    },
+    {
+      "model": "dinov2.vitl14",
+      "sha256": "218d1e159ebd7d928aa76e5412ac04455c92aad9ecb3c48ab8542a98ccc1b357",
+      "bytes": 1834871,
+      "license": "Apache-2.0"
+    }
+  ],
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "Pillow": "12.3.0",
+    "safetensors": "0.8.0"
+  },
+  "project_source_forwards_before_freeze": 0,
+  "fresh_confirmation": false,
+  "raw_sources_published": false,
+  "serving_admitted": false
+}

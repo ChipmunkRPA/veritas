@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.regional-calibration-producer-preparation/28",
+  "implementation_frozen": true,
+  "implementation_sha256": {
+    "backend/scripts/image_regional_inference_v28.py": "d923496c02cdda98f952943447d952b835c27aed6aef7677aad2f228a93efc3f",
+    "backend/scripts/image_regional_inference_runtime_v28.py": "16e2678d4deccb3dafe2d9b3eb4889b9badc4d975db646eebfa1ed4d7f26b1c1",
+    "backend/tests/test_image_regional_inference_v28.py": "5e7d7f91fa42f14b3becbba546a2c47db1798cd6e9e3ef8c8a448f3b721e7431",
+    "docs/image-regional-inference-v28-preparation.md": "e57af572b08956973c132f5c5f24157f70ca6091870af3769eb1c9d31276ab86"
+  },
+  "training_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "training_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "readout_v27_freeze_sha256": "b8d881d55726b60ff8c2a4418e94b182bfc1c7a3df136461b6fd30b19da9e1e4",
+  "tests_passed": 14,
+  "lint_passed": true,
+  "tests_used_test_doubles_not_neural_inference": true,
+  "reserved_source_neural_forwards": 0,
+  "inference_admitted": false,
+  "serving_admitted": false,
+  "scope": "Producer/resource implementation preparation only; a complete-training audit and remotely verified final execution supplement remain required."
+}

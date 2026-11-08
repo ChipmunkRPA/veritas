@@ -1,0 +1,424 @@
+{
+  "schema": "chipmunk.image-attribution-lineage-public-package/20",
+  "attribution_summary": {
+    "schema": "chipmunk.image-attribution-summary/20",
+    "planned": 523,
+    "completed": 523,
+    "statuses": {
+      "matched_current_provider_metadata": 465,
+      "unresolved": 58
+    },
+    "http_statuses": {
+      "200": 506,
+      "404": 17
+    },
+    "unresolved_reasons": {
+      "Attribution endpoint unavailable or non-photo result": 17,
+      "Current and recorded license identifiers differ": 35,
+      "Flickr photo response required": 6
+    },
+    "publisher_roles": {
+      "training": {
+        "matched_current_provider_metadata": 373,
+        "unresolved": 47
+      },
+      "validation": {
+        "matched_current_provider_metadata": 69,
+        "unresolved": 10
+      },
+      "testing": {
+        "matched_current_provider_metadata": 23,
+        "unresolved": 1
+      }
+    },
+    "plan_sha256": "50d7f0ea272a98e943dd94df8257b5d1effaeddfa07a9c61aa0b610c43f64d68",
+    "journal_sha256": "0c3e11c6884d35a3eb90b69980f7a22da6acf096b718a1ec280abe7fa0cdea63",
+    "unique_flickr_photo_ids": 523,
+    "flickr_photo_ids_in_multiple_roles": 0,
+    "new_photos_downloaded": 0,
+    "neural_forwards": 0,
+    "training_admitted": 0,
+    "limitations": "Provider author/profile/license correspondence only; source pixels, crops, other rights and independent camera authenticity remain unchecked. No outside human review."
+  },
+  "attribution_local_review": {
+    "schema": "chipmunk.image-attribution-review/20",
+    "source_requests_reviewed": 523,
+    "response_bodies_reviewed": 523,
+    "matched_source_attributions_reconstructed": 465,
+    "complete_counts_and_source_correspondence_match": true,
+    "network_requeried": false,
+    "pixel_lineage_or_camera_authenticity_verified": false,
+    "training_admitted": 0,
+    "outside_human_review": false,
+    "summary_sha256": "888c99c3a32c86032e885f74097bc0a1f99a6156400e3757438546d0495ac23f",
+    "program_sha256": "5c1345b902bfbc867c3d9317f28472ef3af17bb29e90df959f0a2d5ce4995220"
+  },
+  "license_change_diagnostics": [
+    {
+      "historical_license_id": 4,
+      "current_license_id": "0",
+      "current_license_url": null,
+      "count": 4
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "1",
+      "current_license_url": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+      "count": 5
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "11",
+      "current_license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "2",
+      "current_license_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+      "count": 4
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "3",
+      "current_license_url": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+      "count": 3
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "5",
+      "current_license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "6",
+      "current_license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 4,
+      "current_license_id": "8",
+      "current_license_url": "https://www.usa.gov/government-copyright",
+      "count": 1
+    },
+    {
+      "historical_license_id": 5,
+      "current_license_id": "0",
+      "current_license_url": null,
+      "count": 7
+    },
+    {
+      "historical_license_id": 5,
+      "current_license_id": "10",
+      "current_license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 5,
+      "current_license_id": "2",
+      "current_license_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 5,
+      "current_license_id": "3",
+      "current_license_url": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+      "count": 1
+    },
+    {
+      "historical_license_id": 5,
+      "current_license_id": "4",
+      "current_license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "count": 5
+    }
+  ],
+  "nonphoto_diagnostics": [
+    {
+      "type": "link",
+      "flickr_type": "None",
+      "count": 3
+    },
+    {
+      "type": "video",
+      "flickr_type": "video",
+      "count": 3
+    }
+  ],
+  "pixel_lineage_plan_sha256": "80f5f93730677025fe8a1099e11a144cd060173358b2c2b26fd7b5c1f8984af6",
+  "pixel_lineage": {
+    "training": {
+      "schema": "chipmunk.image-pixel-lineage-role-summary/20",
+      "publisher_role": "training",
+      "planned": 373,
+      "completed": 373,
+      "statuses": {
+        "exact_source_rgb": 317,
+        "pixel_mismatch": 56
+      },
+      "geometry": {
+        "full_source": 373
+      },
+      "rotated_sources": 0,
+      "unresolved_reasons": {},
+      "plan_sha256": "80f5f93730677025fe8a1099e11a144cd060173358b2c2b26fd7b5c1f8984af6",
+      "comparisons_sha256": "ba480dd1a621b7d2dd0d87099de91f19a58eee32612fb8925e9c1d95a65e810d",
+      "originals_sha256": "dd4304514cb6cc4088f7e5d44a8cd5ce0575eb8c9f6c1f031751b177f3a692bb",
+      "training_admitted": 0,
+      "neural_forwards": 0,
+      "outside_human_review": false
+    },
+    "validation": {
+      "schema": "chipmunk.image-pixel-lineage-role-summary/20",
+      "publisher_role": "validation",
+      "planned": 69,
+      "completed": 69,
+      "statuses": {
+        "exact_source_rgb": 61,
+        "pixel_mismatch": 8
+      },
+      "geometry": {
+        "full_source": 69
+      },
+      "rotated_sources": 0,
+      "unresolved_reasons": {},
+      "plan_sha256": "80f5f93730677025fe8a1099e11a144cd060173358b2c2b26fd7b5c1f8984af6",
+      "comparisons_sha256": "b5f31571aeaa062131aced6dfef7e9f08bb16720789ed061b0f7bb74f07c254c",
+      "originals_sha256": "207919c186f56378020d29ade9df3aa7c4963e51f497d9cb7fba9ab899f51f1d",
+      "training_admitted": 0,
+      "neural_forwards": 0,
+      "outside_human_review": false
+    },
+    "testing": {
+      "schema": "chipmunk.image-pixel-lineage-role-summary/20",
+      "publisher_role": "testing",
+      "planned": 23,
+      "completed": 23,
+      "statuses": {
+        "exact_source_rgb": 19,
+        "pixel_mismatch": 4
+      },
+      "geometry": {
+        "full_source": 23
+      },
+      "rotated_sources": 0,
+      "unresolved_reasons": {},
+      "plan_sha256": "80f5f93730677025fe8a1099e11a144cd060173358b2c2b26fd7b5c1f8984af6",
+      "comparisons_sha256": "56c2d18e02da618fb09a030a03e8e32a3d7369f0691829d5dc6a271973500ae0",
+      "originals_sha256": "da92178b2e3493661afafd9a605669f0d2961712bf16bc72fc0161c485827a4c",
+      "training_admitted": 0,
+      "neural_forwards": 0,
+      "outside_human_review": false
+    }
+  },
+  "pixel_local_reviews": {
+    "training": {
+      "schema": "chipmunk.image-pixel-lineage-review/20",
+      "publisher_role": "training",
+      "cases_reviewed": 373,
+      "full_pixel_geometry_replays": 373,
+      "native_pillow_opencv_decode_comparisons": 746,
+      "unresolved_source_refusals_reproduced": 0,
+      "exact_source_rgb_replays": 317,
+      "passed": true,
+      "failed_case_count": 0,
+      "training_admitted": 0,
+      "independent_remote_archive_reacquisition": false,
+      "outside_human_review": false,
+      "program_sha256": "d217ec97a7d35097024f731291eeea401c443a0fcd72534613f91fd29b00cd1f",
+      "summary_sha256": "73be401777cbd44abcaa56736e96f426b348e19640cd4cd583892b1b6b092710",
+      "scope": "Retained publisher/JPEG bytes, dual local decoders and separately implemented geometry/counts; not independently authenticated camera content or complete rights clearance."
+    },
+    "validation": {
+      "schema": "chipmunk.image-pixel-lineage-review/20",
+      "publisher_role": "validation",
+      "cases_reviewed": 69,
+      "full_pixel_geometry_replays": 69,
+      "native_pillow_opencv_decode_comparisons": 138,
+      "unresolved_source_refusals_reproduced": 0,
+      "exact_source_rgb_replays": 61,
+      "passed": true,
+      "failed_case_count": 0,
+      "training_admitted": 0,
+      "independent_remote_archive_reacquisition": false,
+      "outside_human_review": false,
+      "program_sha256": "d217ec97a7d35097024f731291eeea401c443a0fcd72534613f91fd29b00cd1f",
+      "summary_sha256": "930ea9090b85f9a7663adf6246201cd40998846ab85362b9a2ed853dea69908a",
+      "scope": "Retained publisher/JPEG bytes, dual local decoders and separately implemented geometry/counts; not independently authenticated camera content or complete rights clearance."
+    },
+    "testing": {
+      "schema": "chipmunk.image-pixel-lineage-review/20",
+      "publisher_role": "testing",
+      "cases_reviewed": 23,
+      "full_pixel_geometry_replays": 23,
+      "native_pillow_opencv_decode_comparisons": 46,
+      "unresolved_source_refusals_reproduced": 0,
+      "exact_source_rgb_replays": 19,
+      "passed": true,
+      "failed_case_count": 0,
+      "training_admitted": 0,
+      "independent_remote_archive_reacquisition": false,
+      "outside_human_review": false,
+      "program_sha256": "d217ec97a7d35097024f731291eeea401c443a0fcd72534613f91fd29b00cd1f",
+      "summary_sha256": "e784e2e421b948d28ecf13d59d62edcd2a4d3661f97acbea4c909d2492fe99df",
+      "scope": "Retained publisher/JPEG bytes, dual local decoders and separately implemented geometry/counts; not independently authenticated camera content or complete rights clearance."
+    }
+  },
+  "total_pixel_statuses": {
+    "exact_source_rgb": 397,
+    "pixel_mismatch": 68
+  },
+  "native_dual_decoder_comparisons": 930,
+  "private_source_index_sha256": "da334b003d9504e5587d67ab539e52e94de75bc7eda9a49b9b02ea7e8fc0e79b",
+  "local_resource_profiles": {
+    "training-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 96649216,
+      "sample_errors": 0,
+      "duration_s": 640.1877427089494,
+      "seconds_limit": 900
+    },
+    "training-review-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 159973376,
+      "sample_errors": 0,
+      "duration_s": 13.161265208967961,
+      "seconds_limit": 900
+    },
+    "validation-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 103448576,
+      "sample_errors": 0,
+      "duration_s": 97.32214516703971,
+      "seconds_limit": 900
+    },
+    "validation-review-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 132464640,
+      "sample_errors": 0,
+      "duration_s": 2.390138000017032,
+      "seconds_limit": 900
+    },
+    "testing-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 102285312,
+      "sample_errors": 0,
+      "duration_s": 81.0443615000695,
+      "seconds_limit": 900
+    },
+    "testing-review-profile": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 126287872,
+      "sample_errors": 0,
+      "duration_s": 1.057803292060271,
+      "seconds_limit": 900
+    },
+    "attribution-acquisition": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 43270144,
+      "sample_errors": 0,
+      "duration_s": 134.495687208022,
+      "seconds_limit": 900
+    },
+    "attribution-review": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1507328,
+      "sample_errors": 0,
+      "duration_s": 0.26372908300254494,
+      "seconds_limit": 900
+    }
+  },
+  "authored_tests_passed": 49,
+  "junit_sha256": "367bf0dcbfdbcd7b7ae27b8db0c861d53c838e9661c91086ffbed2ea07d7840d",
+  "code_sha256": {
+    "backend/scripts/image_attribution_v20.py": "20f45e5db2c918a4ef293e9ca8c6ba81b1fdea7272cef98d372bd3016be572b9",
+    "backend/scripts/image_attribution_runtime_v20.py": "39b9ca93975cc877069eab53eb14727715745899227457568cfe564662ac997d",
+    "backend/scripts/review_image_attribution_v20.py": "5c1345b902bfbc867c3d9317f28472ef3af17bb29e90df959f0a2d5ce4995220",
+    "backend/scripts/image_pixel_lineage_v20.py": "55b96c2e7f418c73262226d13614576c7cfa329460794260bc67a3c730276494",
+    "backend/scripts/review_image_pixel_lineage_v20.py": "d217ec97a7d35097024f731291eeea401c443a0fcd72534613f91fd29b00cd1f",
+    "backend/scripts/image_lineage_review_runtime_v20.py": "4e3eb2eb493481292a6deec86161d1aa0d0b52f2ca89aa95bcc0358a3d5975c2",
+    "backend/scripts/export_image_lineage_v20.py": "69f9295643bc152f12b948ecab8ff11b31e721495470098794f46839c00b7014",
+    "backend/tests/test_image_attribution_v20.py": "a5008a04fbe85147ed3453ca6dd67f186f9ae5b1e75dd4310d1e3f7f9ce6870d",
+    "backend/tests/test_image_pixel_lineage_v20.py": "f87be1cce9314b025cb2ae9a05083e2c4ba3298b28d3eb2c2585c99cb7f2e155",
+    "backend/tests/test_image_lineage_review_v20.py": "8c98b11c01bd09167bc2ab966625030622029965c0d8ea12cf2c3645d4bf6ece"
+  },
+  "primary_terms_snapshots": {
+    "schema": "chipmunk.image-source-terms-snapshots/20",
+    "sources": [
+      {
+        "name": "adobe-generative-terms-20260423.pdf",
+        "url": "https://www.adobe.com/cc-shared/assets/pdf/legal/servicetou/adobe-generative-ai-product-specific-terms-en-us-20260423.pdf",
+        "observed_at": "2026-11-08T19:34:20.506097+00:00",
+        "http_status": 200,
+        "final_url": "https://www.adobe.com/cc-shared/assets/pdf/legal/servicetou/adobe-generative-ai-product-specific-terms-en-us-20260423.pdf",
+        "bytes": 184030,
+        "sha256": "b127dfbb11d1029e6afd84e4dd2e70e212d654acb3f696ea639f1e115fecc586"
+      },
+      {
+        "name": "bfl-synthetic-data-guidance.html",
+        "url": "https://help.bfl.ai/articles/9272590838-self-serve-dev-license-overview-pricing",
+        "observed_at": "2026-11-08T19:34:20.645929+00:00",
+        "http_status": 200,
+        "final_url": "https://help.bfl.ai/articles/9272590838-self-serve-dev-license-overview-pricing",
+        "bytes": 27372,
+        "sha256": "28ce18dea74024045c411e55c377801862a485180187d95fd5ccd468c5156afa"
+      },
+      {
+        "name": "bfl-noncommercial-license.html",
+        "url": "https://bfl.ai/legal/non-commercial-license-terms",
+        "observed_at": "2026-11-08T19:34:24.126480+00:00",
+        "http_status": 200,
+        "final_url": "https://bfl.ai/legal/non-commercial-license-terms",
+        "bytes": 249455,
+        "sha256": "4f8ece5f801d2f5d0a6108933202c6133bf149c6c853b6f0da1684554d01c59b"
+      },
+      {
+        "name": "flickr-attribution-guide.html",
+        "url": "https://www.flickr.com/services/developer/attributions/",
+        "observed_at": "2026-11-08T19:34:24.372556+00:00",
+        "http_status": 200,
+        "final_url": "https://www.flickr.com/services/developer/attributions/",
+        "bytes": 199964,
+        "sha256": "84d242dcd584181661d5f00b05d87ec85dac002d7e9b21795a8e80cd9d65fd67"
+      },
+      {
+        "name": "flickr-license-schemas.html",
+        "url": "https://m.flickr.com/services/api/flickr.photos.licenses.getInfo.html",
+        "observed_at": "2026-11-08T19:34:24.629511+00:00",
+        "http_status": 200,
+        "final_url": "https://m.flickr.com/services/api/flickr.photos.licenses.getInfo.html",
+        "bytes": 204517,
+        "sha256": "199a4b1debbd65a2bc5d1887d070f543aa8bd87f0ee200c012f60de9bc0cf889"
+      }
+    ]
+  },
+  "retained_preparation_failure": {
+    "phase": "source-pixel plan, attempt1",
+    "error_type": "ValueError",
+    "reason": "Relative attribution path passed to Path.relative_to with an absolute repository root. Plan not written.",
+    "failed_program_sha256": "c1ae6ba9abc9370291c24ab4032552d79ad4478be8e9489aee5b33f0d58cf38b",
+    "source_cases_constructed_before_failure": 465,
+    "new_source_photos_downloaded": 0,
+    "neural_forwards": 0,
+    "disposition": "Retained failed preparation; normalize paths and use a new output folder."
+  },
+  "training_admitted": 0,
+  "new_neural_forwards": 0,
+  "serving_or_confidence_changed": false,
+  "outside_human_reviewers": 0,
+  "limitations": [
+    "Exact current source RGB correspondence is not detection accuracy or independent camera authentication.",
+    "Changed license records include several still-permissive schemas; the strict matching audit did not reclassify them as cleared or uniformly restricted.",
+    "Mismatched RGB can reflect image edits, server reencoding or historical decoding; it is not proof of AI manipulation or loss of rights.",
+    "Review replays retained bytes with Pillow/OpenCV and separate integer geometry; it does not reacquire remote archives independently.",
+    "No photographs, new photo IDs/pairings, individual photographer records, neural maps or learned weights are in this public packet."
+  ]
+}

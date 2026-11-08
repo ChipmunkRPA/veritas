@@ -81,6 +81,16 @@ integration remains unfinished.
 
 ## Progress on 8 November
 
+- Completed photo attribution and native pixel lineage before image learning:
+  all 523 metadata cases checked; 465 exact current photo/license matches, 58
+  unresolved cases retained. All 465 source comparisons and separate local
+  replays complete: 397 exact RGB matches, 68 differences, 930 matching dual-
+  decoder checks. All 49 authored tests pass. Current generator-output terms
+  require further release-specific review; no training/model admission or new
+  detector accuracy is claimed. Only 19 unscored test sources also match exact
+  pixels, so the 48-source confirmation requirement still needs more sources.
+  [Complete source-chain findings and limits](image-source-lineage-v20-result.md).
+
 - Audited actual per-photo image metadata before regional fine-tuning:2,242
   distinct source photos,597 preliminary BY/BY-SA-compatible records,523 queued
   for private attribution/lineage review after common-generator/source exclusions.

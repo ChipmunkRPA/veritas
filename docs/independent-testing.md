@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [photo attribution/pixel-lineage review](image-source-lineage-v20-result.md)
+adds 49 authored local checks requiring no model, real photo, credentials or
+network request. Its actual private-panel run covers all 523 attribution records
+and 465 source-pixel comparisons, with separate full reconstruction and dual
+decoders. These verify source correspondence, not detection accuracy or training
+permission. Additional useful contributions are permitted original/edit pairs
+with photographer attribution, exact edit positions and source-group separation;
+do not post customer media or assume a dataset-wide license clears every image.
+
 For a model-free audit of photo licenses and source grouping, the
 [image training-data review](image-source-rights-v19-result.md) provides a
 public-only local command path. It downloads about253MB of official/pinned
@@ -69,6 +78,7 @@ separately acquired study data.
 
 | Package | What can be reproduced | Current evidence and limitation |
 | --- | --- | --- |
+| [Photo attribution and pixel lineage](image-source-lineage-v20-result.md) | Public authored identity/crop/decoder checks; complete real-panel replay requires separately retained permitted photos and private source plans | All 523 metadata responses reconstructed; 465 accepted source identities compared. 397 exact RGB matches, 68 differences; all 465 geometry replays and 930 dual-decoder checks match. No model inference, training admission, camera-authenticity proof or outside human review. Current generator-output terms remain separately scoped. |
 | [Image source rights/grouping](image-source-rights-v19-result.md) | Standard-library public metadata/count reviewer after pinned metadata acquisition; no images, model weights or private pairings required | Full local private reconstruction and public-only replay pass for2,242 photos;597 pass a preliminary license filter.523 queued for attribution/lineage review, none admitted to training. Misnamed FLUX original files excluded from role assignment; actual generation splits disjoint. Not detector accuracy, final rights clearance or outside human participation. |
 | [Full-source localizer v18](image-relayformer-v18-result.md) | Frozen native/source reviewer, independent OpenCV/IEEE ranking and contingency counts; exact panel additionally requires private sources and permitted cached weights | All384 inputs/798 project forwards complete. Full384-map repeat and both genuine-point refits pass. Useful regions0/48 per format vs9/48 native and6/48 JPEG current; rejected. Raw photographs/maps remain private; no fresh accuracy, serving admission or outside human review. |
 | [Controlled writing-span learning](writing-spans-v7-result.md) | Public source construction, native loaders, two small learners, calibration/points, and full local source/refit reviewer; exact panel requires private source plan and separately acquired licensed CSV | All992 planned documents and full source/native/refit replay passed. All864 diagnostic arm masks recounted; both learned heads and three calibrators/points refit exactly. Interval found38/128 useful mixed locations vs45/128 current and lost27 previously useful documents; rejected as replacement. Consumed source groups, no serving confidence, fresh-author or outside human review claim. |

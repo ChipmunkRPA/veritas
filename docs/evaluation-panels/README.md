@@ -10,6 +10,13 @@ or a generic dataset link.
 
 ## Latest review entry points (8 November 2026)
 
+- [Photo attribution and exact source pixels](../image-source-lineage-v20-result.md):
+  all 523 provider records and 465 original/JPEG pairs checked; 397 exact RGB
+  matches, 68 differences. Complete separate local replay and all 930 dual-
+  decoder checks pass, plus 49 authored tests. Current generator-output terms
+  are captured separately; no photo/model is admitted to training. Aggregate
+  hashes/counts only; individual attribution pairs and images remain private.
+
 - [Image training-data rights/grouping audit](../image-source-rights-v19-result.md):
   per-photo license and source-group counts across2,242 photos;597 preliminary
   metadata-compatible records and a523-photo private rights-review queue.

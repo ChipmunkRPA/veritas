@@ -1,0 +1,77 @@
+{
+  "schema": "chipmunk.image-pairs-cache-monitor-amendment/21",
+  "unchanged_private_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "unchanged_original_freeze_commit": "aaa5c7ec4f59cf9538cc8d039d6f10308796f95e",
+  "new_code_sha256": {
+    "backend/scripts/ranged_gzip_cache_v21.py": "74a5cd5d71b014d79145f6d5bd8d34a983ada2c1be749bf1a5c11e484f3a2113",
+    "backend/scripts/image_positive_cached_v21.py": "40190b4a25c80a85b56d1589ea752587dc067dcfddf3ef225432533aae658120",
+    "backend/scripts/image_pairs_cached_runtime_v21.py": "81195c503fc0205cb8d1d3bc0868a4e15aa71d1f237744b635a3f5a658d15a11",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/tests/test_ranged_gzip_cache_v21.py": "f992ba5ed5a3c5b2aba8ff9447a7bbf82fa13d4d44dc72b8adf0dd3876bd065b",
+    "backend/tests/test_data_resource_guard_v21.py": "3a7dbe0038beae5730a42923720f56e9b4d129221cfa4abbd10304e7f8e7d738"
+  },
+  "cache_bytes": 67108864,
+  "case_selection_or_pair_truth_changed": false,
+  "neural_forwards": 0,
+  "model_or_confidence_change": false,
+  "authored_tests_passed": 26,
+  "junit_sha256": "aa475dfa4a5c1a706a3ce010304c4da8e6d846777f764843c5669b49c321271b",
+  "old_phase1_resource_record": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 1,
+    "duration_s": 243.70744816598017,
+    "sampled_tree_rss_lower_bound_bytes": 174030848
+  },
+  "old_phase1_profile_sha256": "a6e402bc22fec41e858d6730c4c2b1b2ce5e70dbe2eccb6e3888797920850c02",
+  "old_sampling_failure_cleared": false,
+  "seed": {
+    "schema": "chipmunk.image-pairs-cache-seed/21",
+    "source_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+    "source_checkpoint_sha256": "32193bb3052696630ec1e074573e75f1fe6573a48ad833fe7a8ff3ad6b99b43c",
+    "source_profile_sha256": "2109be0c19605e3c48d3b82175a727fa63beded28d44ab85c45a4076cbd0dd00",
+    "copied_selected_members": 12,
+    "seed_is_reexecuted_phase": false,
+    "old_phase1_sampling_failure_retained": true,
+    "old_phase1_checkpoint_seeded": false,
+    "old_execution_root": "backend/data/independent-evaluation/image-positive-pairs-v21",
+    "scope": "Only fully verified phase0 is copied; phase1 will be explicitly re-read after cache/monitor amendment publication. No model or pair-truth change."
+  },
+  "monitor_policy": "Retain explicit verified-terminal observation events only after child.poll returns an exit status; unexplained live sampling failures stop the job. Same900s/6GiB and1536MiB reserves. No reinterpretation of the opaque old sampling error.",
+  "retry_policy": "Explicit successor root resumes only fully verified phase0 and re-reads the affected phase. All old raw outputs, indexes and resource records remain retained; no implicit retry or skipped source.",
+  "real_short_worker_smokes": [
+    {
+      "schema": "chipmunk.data-worker-resource-profile/21",
+      "module": "scripts.image_positive_cached_v21",
+      "arguments": [
+        "--help"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 3424256,
+      "sample_errors": 0,
+      "sampling_error_events": [],
+      "terminal_observation_events": [],
+      "duration_s": 0.26815241703297943,
+      "seconds_limit": 900,
+      "scope": "Verified terminal transitions are retained separately from inability to sample a live process. RSS is sampled, not a true peak guarantee."
+    },
+    {
+      "schema": "chipmunk.data-worker-resource-profile/21",
+      "module": "scripts.image_positive_cached_v21",
+      "arguments": [
+        "--help"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 5832704,
+      "sample_errors": 0,
+      "sampling_error_events": [],
+      "terminal_observation_events": [],
+      "duration_s": 0.2645101669477299,
+      "seconds_limit": 900,
+      "scope": "Verified terminal transitions are retained separately from inability to sample a live process. RSS is sampled, not a true peak guarantee."
+    }
+  ],
+  "privacy": "Aggregate operational records and hashes only. No photo IDs/pairings, source pixels, gzip dictionaries or learned weights."
+}

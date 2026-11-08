@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.regional-reserved-readout-freeze/27",
+  "training_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "training_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "code_and_protocol_sha256": {
+    "backend/scripts/image_regional_readout_v27.py": "0f324a53969bea756e7d1e1cad1855e032be922980345d125112e6b481110a73",
+    "backend/tests/test_image_regional_readout_v27.py": "8abcbe8bf225affc27363df9d6e0a0497367a0a5f43583e970abf3b1ce175881",
+    "docs/image-regional-readout-v27-protocol.md": "3485495aa28139c940d71e24592ce7f60b2e3fbdd2250e5975c1d75a93ed8923",
+    "backend/scripts/score_splice_localizers.py": "760278ed8a036832420b224c89b970449f03edd98de2f53c2127ac5448f36d4c",
+    "backend/scripts/audit_fused_production_grid.py": "951e763942e511630c48797bc87f37c55d28df3f10be4ae0718ab53c98a889c2",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/scripts/compare_image_localizers.py": "1b8c8574342b997192260d6f95d709c6c641e65a2399e20a3c1e146d48a15df7",
+    "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+    "backend/app/detectors/image/fused.py": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb",
+    "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+    "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+    "backend/app/evidence/image_packets.py": "d9b8fe674353acc22d812212a7c74bbfba3948d6e6e08b3807decbaa74b2bf5d",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf"
+  },
+  "reserved_source_neural_forwards": 0,
+  "readout_contract_tests_passed": 18,
+  "lint_passed": true,
+  "inference_admitted": false,
+  "probability_calibration_admitted": false,
+  "serving_admitted": false,
+  "required_execution_supplement": [
+    "Final six-epoch learned checkpoint identity, complete training chain and readback proof",
+    "Frozen inference producer and bounded resource wrapper",
+    "Actual source-coordinate and production-map equivalence tests",
+    "Remotely verified publication before reserved-source inference"
+  ],
+  "scope": "Prospective statistical/readout rules only. Training remains active; no inference execution is admitted by this record."
+}

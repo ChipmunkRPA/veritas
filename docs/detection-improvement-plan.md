@@ -81,6 +81,15 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Completed fresh JPEG confirmation of the frozen regional candidate on 48 new
+  source pairs, with 102 actual native forwards. Candidate flags 12/48 edits
+  versus 10/48 current, but 5/48 genuine false flags versus 2/48; it also loses an
+  edited-file flag and has worse Brier than primary-only. Rejected on three
+  fixed gates. Current masks meet IoU >= .3 on 3/48 edits; no pixel-selection gain.
+  Separate source/map/component replay and 192 independently computed file
+  probabilities match exactly, with no extra neural inference. No serving
+  promotion or tuning on this now-consumed holdout.
+  [Full fresh result](image-fresh-v12-result.md).
 - Implemented the shared image/video/audio/passage calibration framework and
   explicit source-disjoint specialist/fusion/calibration/confirmation roles.
   Local authored command flow passes for16 context heads/four calibrated

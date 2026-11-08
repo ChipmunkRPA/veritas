@@ -1,0 +1,307 @@
+{
+  "schema": "chipmunk.image-fresh-jpeg-result/12",
+  "summary": {
+    "current": {
+      "planned": 96,
+      "genuine": 48,
+      "ai": 48,
+      "assessed": 96,
+      "inconclusive": 0,
+      "false_ai": 2,
+      "ai_found": 10,
+      "missed_ai_including_inconclusive": 38,
+      "exact_point_ties": 0,
+      "brier_on_complete_balanced_pairs": null
+    },
+    "primary": {
+      "planned": 96,
+      "genuine": 48,
+      "ai": 48,
+      "assessed": 96,
+      "inconclusive": 0,
+      "false_ai": 5,
+      "ai_found": 13,
+      "missed_ai_including_inconclusive": 35,
+      "exact_point_ties": 78,
+      "brier_on_complete_balanced_pairs": 0.23722175917680358
+    },
+    "primary-regions": {
+      "planned": 96,
+      "genuine": 48,
+      "ai": 48,
+      "assessed": 96,
+      "inconclusive": 0,
+      "false_ai": 5,
+      "ai_found": 12,
+      "missed_ai_including_inconclusive": 36,
+      "exact_point_ties": 0,
+      "brier_on_complete_balanced_pairs": 0.23911696044374042
+    }
+  },
+  "gates": {
+    "more_ai_than_current": true,
+    "no_additional_current_false_flags": false,
+    "no_current_coverage_loss": true,
+    "no_primary_ai_loss": false,
+    "no_additional_primary_false_flags": true,
+    "no_primary_coverage_loss": true,
+    "complete_candidate_coverage": true,
+    "lower_brier_than_primary": false
+  },
+  "qualifies_for_full_app_integration_test": false,
+  "per_generator": {
+    "firefly": {
+      "current": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 0,
+        "ai_found": 2,
+        "missed_ai_including_inconclusive": 14,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": null
+      },
+      "primary": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 0,
+        "ai_found": 2,
+        "missed_ai_including_inconclusive": 14,
+        "exact_point_ties": 30,
+        "brier_on_complete_balanced_pairs": 0.2371150740132466
+      },
+      "primary-regions": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 2,
+        "ai_found": 4,
+        "missed_ai_including_inconclusive": 12,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": 0.24343107999557043
+      }
+    },
+    "flux-fill": {
+      "current": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 1,
+        "ai_found": 3,
+        "missed_ai_including_inconclusive": 13,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": null
+      },
+      "primary": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 3,
+        "ai_found": 5,
+        "missed_ai_including_inconclusive": 11,
+        "exact_point_ties": 24,
+        "brier_on_complete_balanced_pairs": 0.2452183117064427
+      },
+      "primary-regions": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 2,
+        "ai_found": 3,
+        "missed_ai_including_inconclusive": 13,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": 0.24010175302383238
+      }
+    },
+    "sd2": {
+      "current": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 1,
+        "ai_found": 5,
+        "missed_ai_including_inconclusive": 11,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": null
+      },
+      "primary": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 2,
+        "ai_found": 6,
+        "missed_ai_including_inconclusive": 10,
+        "exact_point_ties": 24,
+        "brier_on_complete_balanced_pairs": 0.22933189181072147
+      },
+      "primary-regions": {
+        "planned": 32,
+        "genuine": 16,
+        "ai": 16,
+        "assessed": 32,
+        "inconclusive": 0,
+        "false_ai": 1,
+        "ai_found": 5,
+        "missed_ai_including_inconclusive": 11,
+        "exact_point_ties": 0,
+        "brier_on_complete_balanced_pairs": 0.23381804831181843
+      }
+    }
+  },
+  "paired_bootstrap": {
+    "draws": 5000,
+    "seed": 20261107,
+    "source_groups": 48,
+    "comparisons": {
+      "current": {
+        "ai_flag_rate_difference": {
+          "candidate_minus_reference": 0.041666666666666664,
+          "percentile95_interval": [
+            0.0,
+            0.10416666666666667
+          ]
+        },
+        "genuine_false_flag_rate_difference": {
+          "candidate_minus_reference": 0.0625,
+          "percentile95_interval": [
+            0.0,
+            0.14583333333333334
+          ]
+        },
+        "coverage_rate_difference": {
+          "candidate_minus_reference": 0.0,
+          "percentile95_interval": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary": {
+        "ai_flag_rate_difference": {
+          "candidate_minus_reference": -0.020833333333333332,
+          "percentile95_interval": [
+            -0.125,
+            0.0625
+          ]
+        },
+        "genuine_false_flag_rate_difference": {
+          "candidate_minus_reference": 0.0,
+          "percentile95_interval": [
+            -0.10416666666666667,
+            0.10416666666666667
+          ]
+        },
+        "coverage_rate_difference": {
+          "candidate_minus_reference": 0.0,
+          "percentile95_interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "brier_difference": {
+          "candidate_minus_reference": 0.0018952012669368077,
+          "percentile95_interval": [
+            -0.005818611853315356,
+            0.0104280086943751
+          ]
+        }
+      }
+    },
+    "meaning": "Differences in flag rates across all planned pairs, with unassessed cases retained as not flagged; this does not call them original. See coverage counts separately."
+  },
+  "current_pixel_selection": {
+    "ai_inputs": 48,
+    "ai_masks_iou_at_least_0_3": 3,
+    "ai_mean_iou_including_misses": 0.04846720107268246,
+    "ai_mean_pixel_f1_including_misses": 0.07302829547697436,
+    "genuine_inputs": 48,
+    "genuine_inputs_with_selected_pixels": 2,
+    "genuine_mean_selected_area_fraction": 0.0030416909418384355,
+    "candidate_changes_pixel_selection": false
+  },
+  "current_pixel_selection_per_generator": {
+    "firefly": {
+      "ai_inputs": 16,
+      "ai_masks_iou_at_least_0_3": 2,
+      "ai_mean_iou_including_misses": 0.053958969300389195,
+      "ai_mean_pixel_f1_including_misses": 0.07502386386766155,
+      "genuine_inputs": 16,
+      "genuine_inputs_with_selected_pixels": 0,
+      "genuine_mean_selected_area_fraction": 0.0,
+      "candidate_changes_pixel_selection": false
+    },
+    "flux-fill": {
+      "ai_inputs": 16,
+      "ai_masks_iou_at_least_0_3": 0,
+      "ai_mean_iou_including_misses": 0.030499546066180647,
+      "ai_mean_pixel_f1_including_misses": 0.05001871946217179,
+      "genuine_inputs": 16,
+      "genuine_inputs_with_selected_pixels": 1,
+      "genuine_mean_selected_area_fraction": 0.0014893999383489651,
+      "candidate_changes_pixel_selection": false
+    },
+    "sd2": {
+      "ai_inputs": 16,
+      "ai_masks_iou_at_least_0_3": 1,
+      "ai_mean_iou_including_misses": 0.06094308785147752,
+      "ai_mean_pixel_f1_including_misses": 0.0940423031010897,
+      "genuine_inputs": 16,
+      "genuine_inputs_with_selected_pixels": 1,
+      "genuine_mean_selected_area_fraction": 0.007635672887166341,
+      "candidate_changes_pixel_selection": false
+    }
+  },
+  "local_source_box_scores": {
+    "primary": {
+      "primary": {
+        "planned": 96,
+        "assessed": 96,
+        "positive_units": 48,
+        "negative_units": 48,
+        "descriptive_unweighted_brier": 0.23761555480567695,
+        "scope": "Whole-file editing presence for primary, source-quadrant editing presence for quadrant; not pixel authorship or a class-balanced performance estimate."
+      }
+    },
+    "primary-regions": {
+      "primary": {
+        "planned": 96,
+        "assessed": 96,
+        "positive_units": 48,
+        "negative_units": 48,
+        "descriptive_unweighted_brier": 0.23761555480567695,
+        "scope": "Whole-file editing presence for primary, source-quadrant editing presence for quadrant; not pixel authorship or a class-balanced performance estimate."
+      },
+      "quadrant": {
+        "planned": 384,
+        "assessed": 384,
+        "positive_units": 106,
+        "negative_units": 278,
+        "descriptive_unweighted_brier": 0.23726075006641034,
+        "scope": "Whole-file editing presence for primary, source-quadrant editing presence for quadrant; not pixel authorship or a class-balanced performance estimate."
+      }
+    }
+  },
+  "source_pairs": 48,
+  "jpeg_inputs": 96,
+  "calibration_or_point_refitting": false,
+  "scope": "48 new known-project source pairs, three existing TGIF generators, JPEGquality75 only. No unseen-generator, external pretraining-independence, pixel-authorship or full-app accuracy claim.",
+  "serving_admitted": false,
+  "outside_human_reviews": 0
+}

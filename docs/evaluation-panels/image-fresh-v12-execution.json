@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.image-fresh-public-execution/12",
+  "frozen_protocol_commit": "4bd93fc59187ec975e6b76909de2a8ea42bc461d",
+  "native_freeze_sha256": "8b9d561401d62af63562fe66ada03c9674b3e152415c2b5024b58343260608e3",
+  "result_sha256": "55012c1553db90237d1fde9775f3a89ab358df2d890d0052c977243c5a6f3554",
+  "native_receipt_sha256": "5192e31dc03f0a59658726ac810e4e9d0e6473cc0fc79985b41179eaceff35c2",
+  "private_native_journal_sha256": "67ad54e647fe9333153ea435e967cadae82fb49f88fb6e4b5a9cef8818b942b4",
+  "source_audit_sha256": "602aeb66f624b815a890254a87744158a3f9300ba3d1fe2487d349f87860c80a",
+  "native_forwards": 102,
+  "planned_and_completed_inputs": 96,
+  "resource_profiles": {
+    "native": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_image_confirmation_v12",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 786317312,
+      "sample_errors": 0,
+      "duration_s": 75.53195104200859,
+      "seconds_limit": 900,
+      "private_original_profile_sha256": "7d0ac583b81ac9885f64c874f918c1e87f5e3b5452f85fd0689754c1dee383cf"
+    },
+    "source_arithmetic_audit": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_image_confirmation_v12",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 450871296,
+      "sample_errors": 1,
+      "duration_s": 6.584493209025823,
+      "seconds_limit": 900,
+      "private_original_profile_sha256": "7cd847ce47ef50963bc43c8ea57f5845ee8edf415cd6b3586d3292a55bd1d6fc"
+    }
+  },
+  "holdout_code_or_points_changed_after_freeze": false,
+  "calibration_refitted": false,
+  "decision": "reject_frozen_candidate",
+  "serving_admitted": false,
+  "outside_human_reviews": 0,
+  "privacy": "Raw photos, native maps, per-input journals, source pairings and original machine-specific arguments remain private. Methods, fixed rules and aggregate outcomes are public.",
+  "measurement_limit": "Sampled process-tree RSS is a lower bound, not total GPU memory or a peak-capacity guarantee. Native and audit profiles are separate; the audit had one process-sampling disappearance and no guard failure."
+}

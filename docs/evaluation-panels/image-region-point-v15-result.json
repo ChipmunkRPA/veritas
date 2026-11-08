@@ -1,0 +1,860 @@
+{
+  "schema": "chipmunk.image-region-point-public-development/15",
+  "prospective_freeze_commit": "730e11e75e839c8f4650ec45d6638e6d48bad9d5",
+  "prospective_freeze_sha256": "6d01638d215523a44c7d572d041497e85e065607e2826f44e52c0233965e1243",
+  "primary_candidate": "stable_regions",
+  "native_development": {
+    "all": {
+      "current_originals_only": {
+        "edited_inputs": 108,
+        "edited_flagged": 19,
+        "edited_iou_at_least_0_3": 6,
+        "edited_mean_iou": 0.04300615014653744,
+        "edited_mean_pixel_f1": 0.0649038457947721,
+        "genuine_inputs": 108,
+        "genuine_flags": 7,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 108,
+          "edited_flagged": 10,
+          "edited_iou_at_least_0_3": 3,
+          "edited_mean_iou": 0.017772113592735075,
+          "edited_mean_pixel_f1": 0.027452060230478234,
+          "genuine_inputs": 108,
+          "genuine_flags": 0,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 108,
+          "edited_flagged": 16,
+          "edited_iou_at_least_0_3": 4,
+          "edited_mean_iou": 0.02657590813966987,
+          "edited_mean_pixel_f1": 0.040549149273001725,
+          "genuine_inputs": 108,
+          "genuine_flags": 3,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 1
+        },
+        "stable_maximum": {
+          "edited_inputs": 108,
+          "edited_flagged": 12,
+          "edited_iou_at_least_0_3": 3,
+          "edited_mean_iou": 0.02181459576690648,
+          "edited_mean_pixel_f1": 0.033236257991362914,
+          "genuine_inputs": 108,
+          "genuine_flags": 0,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 108,
+          "edited_flagged": 14,
+          "edited_iou_at_least_0_3": 4,
+          "edited_mean_iou": 0.028233964898793956,
+          "edited_mean_pixel_f1": 0.04290502049458839,
+          "genuine_inputs": 108,
+          "genuine_flags": 2,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 1
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": true
+        }
+      }
+    },
+    "v11": {
+      "current_originals_only": {
+        "edited_inputs": 60,
+        "edited_flagged": 9,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.03863730940562144,
+        "edited_mean_pixel_f1": 0.058404286049010296,
+        "genuine_inputs": 60,
+        "genuine_flags": 5,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 60,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.019195451243418708,
+          "edited_mean_pixel_f1": 0.029523565874111334,
+          "genuine_inputs": 60,
+          "genuine_flags": 0,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 60,
+          "edited_flagged": 9,
+          "edited_iou_at_least_0_3": 3,
+          "edited_mean_iou": 0.028141206054993213,
+          "edited_mean_pixel_f1": 0.041611753134538416,
+          "genuine_inputs": 60,
+          "genuine_flags": 1,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 0
+        },
+        "stable_maximum": {
+          "edited_inputs": 60,
+          "edited_flagged": 7,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.018630057318802573,
+          "edited_mean_pixel_f1": 0.028499649806667242,
+          "genuine_inputs": 60,
+          "genuine_flags": 0,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 60,
+          "edited_flagged": 9,
+          "edited_iou_at_least_0_3": 3,
+          "edited_mean_iou": 0.028329506946071135,
+          "edited_mean_pixel_f1": 0.043412221336763125,
+          "genuine_inputs": 60,
+          "genuine_flags": 1,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 0
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": true
+        }
+      }
+    },
+    "consumed-v12": {
+      "current_originals_only": {
+        "edited_inputs": 48,
+        "edited_flagged": 10,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.04846720107268246,
+        "edited_mean_pixel_f1": 0.07302829547697436,
+        "genuine_inputs": 48,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 48,
+          "edited_flagged": 4,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.015992941529380536,
+          "edited_mean_pixel_f1": 0.024862678175936848,
+          "genuine_inputs": 48,
+          "genuine_flags": 0,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 48,
+          "edited_flagged": 7,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.024619285745515685,
+          "edited_mean_pixel_f1": 0.039220894446080866,
+          "genuine_inputs": 48,
+          "genuine_flags": 2,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 1
+        },
+        "stable_maximum": {
+          "edited_inputs": 48,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.025795268827036363,
+          "edited_mean_pixel_f1": 0.039157018222232505,
+          "genuine_inputs": 48,
+          "genuine_flags": 0,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 48,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.028114537339697487,
+          "edited_mean_pixel_f1": 0.04227101944186998,
+          "genuine_inputs": 48,
+          "genuine_flags": 1,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 1
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": true
+        }
+      }
+    },
+    "firefly": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 5,
+        "edited_iou_at_least_0_3": 2,
+        "edited_mean_iou": 0.03662995693915424,
+        "edited_mean_pixel_f1": 0.054497485071852494,
+        "genuine_inputs": 36,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 3,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.012820283806880566,
+          "edited_mean_pixel_f1": 0.019993790267361797,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.02252842092763725,
+          "edited_mean_pixel_f1": 0.036034622480301176,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "stable_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.022870482455966554,
+          "edited_mean_pixel_f1": 0.036489353645030115,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.02400628764499704,
+          "edited_mean_pixel_f1": 0.0383308921022813,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": true
+        }
+      }
+    },
+    "sd2": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 11,
+        "edited_iou_at_least_0_3": 4,
+        "edited_mean_iou": 0.07883313969326672,
+        "edited_mean_pixel_f1": 0.11798351032927634,
+        "genuine_inputs": 36,
+        "genuine_flags": 3,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 3,
+          "edited_iou_at_least_0_3": 0,
+          "edited_mean_iou": 0.009046714545317799,
+          "edited_mean_pixel_f1": 0.015386177733957292,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.020325722323180535,
+          "edited_mean_pixel_f1": 0.03146479924672852,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "stable_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 2,
+          "edited_iou_at_least_0_3": 0,
+          "edited_mean_iou": 0.006358003761544477,
+          "edited_mean_pixel_f1": 0.011362601692328583,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 3,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.01734946959702298,
+          "edited_mean_pixel_f1": 0.027692463752205784,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": true
+        }
+      }
+    },
+    "flux-fill": {
+      "current_originals_only": {
+        "edited_inputs": 36,
+        "edited_flagged": 3,
+        "edited_iou_at_least_0_3": 0,
+        "edited_mean_iou": 0.013555353807191398,
+        "edited_mean_pixel_f1": 0.02223054198318746,
+        "genuine_inputs": 36,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "old_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 4,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.03144934242600687,
+          "edited_mean_pixel_f1": 0.0469762126901156,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "old_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.03687358116819182,
+          "edited_mean_pixel_f1": 0.05414802609197548,
+          "genuine_inputs": 36,
+          "genuine_flags": 3,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 1
+        },
+        "stable_maximum": {
+          "edited_inputs": 36,
+          "edited_flagged": 4,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.03621530108320841,
+          "edited_mean_pixel_f1": 0.051856818636730036,
+          "genuine_inputs": 36,
+          "genuine_flags": 0,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 0
+        },
+        "stable_regions": {
+          "edited_inputs": 36,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 2,
+          "edited_mean_iou": 0.043346137454361854,
+          "edited_mean_pixel_f1": 0.06269170562927807,
+          "genuine_inputs": 36,
+          "genuine_flags": 2,
+          "ordinary_inputs": 36,
+          "ordinary_flags": 1
+        }
+      },
+      "quality_rules": {
+        "old_maximum": {
+          "rules": {
+            "higher_mean_iou": true,
+            "more_iou_0_3": true,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": true,
+          "primary_candidate": false
+        },
+        "old_regions": {
+          "rules": {
+            "higher_mean_iou": true,
+            "more_iou_0_3": true,
+            "no_extra_genuine_flags": false,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": false,
+          "primary_candidate": false
+        },
+        "stable_maximum": {
+          "rules": {
+            "higher_mean_iou": true,
+            "more_iou_0_3": true,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": true,
+          "primary_candidate": false
+        },
+        "stable_regions": {
+          "rules": {
+            "higher_mean_iou": true,
+            "more_iou_0_3": true,
+            "no_extra_genuine_flags": true,
+            "ordinary_at_most_5pct": true
+          },
+          "pass": true,
+          "primary_candidate": true
+        }
+      }
+    },
+    "policy": {
+      "schema": "chipmunk.image-region-point-factorial/15",
+      "primary_candidate": "stable_regions",
+      "arms": [
+        "old_maximum",
+        "old_regions",
+        "stable_maximum",
+        "stable_regions"
+      ],
+      "context": "Float64 accumulation of all1024 float32 patch vectors,rounded once to float32;refit the same295041-parameter head on fit-role means only.",
+      "region_point": "Highest8-connected superlevel with>=4 cells;process equal-valued cells together. A selected region exists iff activation>point.",
+      "source": "Unchanged consumed288-source v14 plan/all1344 cases;120 fit,60 point,108 diagnostic groups. No fresh-source claim.",
+      "fit_cache": "Reuse immutable old float32 sampled vectors/targets without copying. Recreate all840 full native features and compare every sample/target before fitting;retain new means.",
+      "head": "Concatenate token and token-minus-full-image-mean;4608->64 ReLU->1 sigmoid ranking head;295041 learned parameters.",
+      "optimization": "CPU float32/two threads;seed20261108;AdamW lr.001 weight_decay.01;30 epochs,batch512;balanced soft class mass;no early stopping or diagnostic selection.",
+      "points": "Old/stable heads each have raw-maximum and region-activation points. Both use only genuine original/ordinary variants of60 point groups,descending rank3,strict greater-than.",
+      "isolation": "Freeze both fitted heads identities and all4 points after840 fit+120 genuine point cases,before new AI point/diagnostic scoring. Old data already consumed.",
+      "spatial": "32x32 median3 reflect;8-connected components>=4 cells;sourcepixel(x,y)->floor(32*x/width),floor(32*y/height).",
+      "continuation": "Primary stable_regions must improve edited meanIoU and IoU>=.3 count,no extra genuine flags versus current,and ordinary flags<=5%;complete native/mean/head/source/activation audit required.",
+      "limits": "All other arms are ablations,not selectable alternatives. Current ordinary-control inference,fresh confirmation and full-app testing remain before admission.",
+      "serving_admitted": false,
+      "used_in_confidence": false
+    },
+    "freeze_sha256": "6d01638d215523a44c7d572d041497e85e065607e2826f44e52c0233965e1243",
+    "cases": 1344,
+    "backbone_forwards": 1363,
+    "native_hook_probes": 18,
+    "native_repeat_forwards": 1,
+    "head_training": {
+      "epochs": 30,
+      "steps": 3150,
+      "losses": [
+        0.2790928038812818,
+        0.14050990229561214,
+        0.1026118903642609,
+        0.08899080561740057,
+        0.08625807808268637,
+        0.08705113203752607,
+        0.08633292704111051,
+        0.0852856538125447,
+        0.08600938951685314,
+        0.08392063808583078,
+        0.08391845879100619,
+        0.08339404641162783,
+        0.08218024117606028,
+        0.08358933357965381,
+        0.08159043015468687,
+        0.08229224472528415,
+        0.08163357071933297,
+        0.08013323992490766,
+        0.0806885119704973,
+        0.08195721102612359,
+        0.08042506316588033,
+        0.07944866802011218,
+        0.07962014838343576,
+        0.07978131803018704,
+        0.07949469210136502,
+        0.08015731576652757,
+        0.07951303443738392,
+        0.07893138244038538,
+        0.0793424493854954,
+        0.07944874025526502
+      ],
+      "soft_positive_mass": 7761.5233852205565,
+      "soft_negative_mass": 45998.47661626339,
+      "parameters": 295041,
+      "calibrated_confidence": false
+    },
+    "head_inference_cases": 504,
+    "points": {
+      "old_maximum": {
+        "value": 0.9993374943733215,
+        "kind": "maximum",
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Research comparison rule; not calibrated AI confidence or a public screening threshold"
+      },
+      "old_regions": {
+        "value": 0.9978950023651123,
+        "kind": "regions",
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Research comparison rule; not calibrated AI confidence or a public screening threshold"
+      },
+      "stable_maximum": {
+        "value": 0.9992156028747559,
+        "kind": "maximum",
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Research comparison rule; not calibrated AI confidence or a public screening threshold"
+      },
+      "stable_regions": {
+        "value": 0.9987490177154541,
+        "kind": "regions",
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Research comparison rule; not calibrated AI confidence or a public screening threshold"
+      }
+    },
+    "calibration_group_counts": {
+      "old_maximum": {
+        "displayed_region_groups": 0,
+        "raw_maximum_groups": 3,
+        "activation_groups": 0
+      },
+      "old_regions": {
+        "displayed_region_groups": 3,
+        "raw_maximum_groups": 7,
+        "activation_groups": 3
+      },
+      "stable_maximum": {
+        "displayed_region_groups": 1,
+        "raw_maximum_groups": 3,
+        "activation_groups": 1
+      },
+      "stable_regions": {
+        "displayed_region_groups": 3,
+        "raw_maximum_groups": 7,
+        "activation_groups": 3
+      }
+    },
+    "native_journal_sha256": "c825df3d13b5857a63a867070e308040e275c9cf02281421f07e88c88532b3e4",
+    "outcome_records": 2016,
+    "original_canonical_outcomes_unchanged": true,
+    "fit_vectors_copied": false,
+    "additional_fit_mean_bytes": 7741568,
+    "primary_candidate": "stable_regions",
+    "native_audit_required": true,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "outside_human_reviewers": 0
+  },
+  "complete_native_audit": {
+    "schema": "chipmunk.image-region-point-native-audit/15",
+    "cases": 1344,
+    "backbone_forwards": 1362,
+    "native_hook_probes": 18,
+    "fit_sample_rows_replayed": 840,
+    "sampled_patch_vectors_replayed": 53760,
+    "native_feature_values_replayed": 3170893824,
+    "source_pixels_replayed_including_variants": 939015007,
+    "activation_levels_replayed": 1008,
+    "native_response_cells_replayed": 1032192,
+    "source_mask_metric_sets_replayed": 2016,
+    "new_mean_strict_bound": 1e-05,
+    "stable_mean_max_difference": 3.7277350202202797e-06,
+    "new_mean_strict_criterion_passed": true,
+    "old_mean_bound_failures_retained": 1302,
+    "old_strict_audit_remains_failed": true,
+    "numpy_head_response_max_difference": 5.130477788162224e-06,
+    "native_features_maps_and_fit_samples_exact": true,
+    "source_projection_metrics_exact": true,
+    "independent_activation_and_point_refits_exact": true,
+    "optimizer_independently_refit": false,
+    "outside_human_reviewers": 0,
+    "serving_admitted": false,
+    "used_in_confidence": false
+  },
+  "resource_profiles": {
+    "native": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_image_region_point_v15",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1401896960,
+      "sample_errors": 0,
+      "duration_s": 460.7930304170586,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    },
+    "audit": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_image_region_point_v15",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1438695424,
+      "sample_errors": 0,
+      "duration_s": 454.1675996660488,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    },
+    "authored-contract": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_image_region_point_v15",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 846741504,
+      "sample_errors": 0,
+      "duration_s": 6.252614666009322,
+      "seconds_limit": 900,
+      "arguments_paths_withheld": true
+    }
+  },
+  "source_groups": {
+    "fit": 120,
+    "point": 60,
+    "diagnostic": 108
+  },
+  "case_roles": {
+    "fit": 840,
+    "point": 180,
+    "diagnostic": 324
+  },
+  "assets": [
+    {
+      "model": "dinov2.vitb14_reg4",
+      "sha256": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71",
+      "bytes": 346393545,
+      "license": "Apache-2.0"
+    },
+    {
+      "model": "dinov2.vitl14",
+      "sha256": "218d1e159ebd7d928aa76e5412ac04455c92aad9ecb3c48ab8542a98ccc1b357",
+      "bytes": 1834871,
+      "license": "Apache-2.0"
+    }
+  ],
+  "primary_quality_rules_pass": false,
+  "development_continuation_eligible": false,
+  "fresh_confirmation": false,
+  "serving_changed": false,
+  "used_in_confidence": false,
+  "early_stop_eligible": false,
+  "old_failure_and_canonical_results_unchanged": true,
+  "completed_project_backbone_forwards_including_audit": 2725,
+  "authored_backbone_forwards": 9,
+  "outside_human_reviewers": 0,
+  "customer_inputs": 0,
+  "external_provider_requests": 0,
+  "raw_sources_published": false,
+  "source_pairings_published": false,
+  "feature_vectors_or_weights_published": false,
+  "limits": [
+    "All sources are consumed development data, not fresh project confirmation or an unseen-generator test.",
+    "Four arms share source cases; they are not four independent datasets or independent corroborating votes.",
+    "Region points control in-sample calibration group flags only, not a population false-alarm guarantee.",
+    "Sigmoid ranks, component activation levels and empty masks are not AI-confidence or originality verdicts.",
+    "Old-head arms retain the original failed mean criterion and are not selectable serving candidates.",
+    "Native/source/array replay does not independently refit the optimizer or constitute outside human review.",
+    "Current-selector ordinary-control inference, fresh confirmation and full-app/export tests remain before admission.",
+    "All source/feature data and learned weights remain private; process memory is a sampled lower bound."
+  ],
+  "exporter_sha256": "bdc287f17cc9238fff3ec9d0ca9cbbe87d2468c231db5c4623be37bb85c286b8"
+}

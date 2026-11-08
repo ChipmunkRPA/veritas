@@ -1,0 +1,72 @@
+{
+  "policy": {
+    "schema": "chipmunk.ltx-public-audio-contract/1",
+    "rates": [
+      24000,
+      48000
+    ],
+    "carriers": 4,
+    "seconds": 2,
+    "conditions": [
+      "unmarked",
+      "matching-public-payload",
+      "opposite-public-payload",
+      "mixed-channel-payloads",
+      "middle-only-mark",
+      "marked-plus-noise"
+    ],
+    "native_cases": 48,
+    "file_cases": 32,
+    "codecs": [
+      "pcm16-wav",
+      "aac128k-m4a"
+    ],
+    "files": "For each of8 rate/carrier groups, original and matching mark through both codecs. Decode first exact2seconds at original native rate, preserve stereo,bind file/decoded sample hashes and actual stream timing. AAC encoder delay is decoded by ffmpeg,not treated as a forged offset.",
+    "scope": "Authored mathematical carriers and native Tensor/file contract,not human speech/provider export accuracy,not lip-sync or video marking.",
+    "upstream": "Pinned inspected AST definitions only; omit upstream create/weight-loader/package/file-decode entry points. Reuse exact hash-matching restricted-loaded16-bit generator/detector weights.",
+    "parity": "Each native detector response compared to independent channel-presence and exact integer binomial-bit arithmetic. First generator and detector input repeat bitwise. Stereo channels remain separate mono batch items; no resampling in marker.",
+    "meaning": "Upstream audio detected is family presence,not a payload test. The returned payload field is the baked expected payload,not recovered bits. Matching public marks are copyable and cannot authenticate AI origin or stop detection.",
+    "missing": "Preserve all80 planned cases and errors. Missing/unavailable checks are not negative or original. No inference from absent marks.",
+    "guard": {
+      "seconds": 900,
+      "rss_gib": 6,
+      "available_mib": 1536,
+      "disk_mib": 1536
+    },
+    "used_in_confidence": false,
+    "early_stop_eligible": false,
+    "serving_admitted": false
+  },
+  "code_sha256": {
+    "backend/scripts/ltx_marking_audio_v1.py": "3f35f9acb6fb6d4ba565929326a0f648afcc0885094e4ce9d3fa793e579aba77",
+    "backend/scripts/ltx_marking_sources_v1.json": "b084a2c6cd3a8eefc0812c75afd6dd70d5b71a58468fcb38d005000105030f31",
+    "backend/scripts/run_ltx_marking_audio_v1.py": "1e8ebd484f48fefdba5b4e819dc1cd6d20d88aa9a09f65a9862de73f6aa0467c",
+    "backend/scripts/ltx_marking_runtime_v1.py": "61f02d2cc990abb862c8f6e0d7db928364014201d8928e6aab81f959710208ea",
+    "backend/scripts/public_audio_watermark_v1.py": "735e85cd8c3f9690bd2d4867064e626cc2270fb8ed33687d944ae2fb24acbca5",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_ltx_marking_audio_v1.py": "42b64cc2e8d74a070505b01007c6ff7bf9b7192805868744054ef9b5f900297e",
+    "docs/ltx-marking-audio-v1-protocol.md": "076148538f73f06b34c34d974d0479a3f1139dd651053fae96dfc4b7f2564408"
+  },
+  "source_lock_sha256": "b084a2c6cd3a8eefc0812c75afd6dd70d5b71a58468fcb38d005000105030f31",
+  "cached_source_review_sha256": "5b69370edfd10b03b5ad742028083cab972ba7f01d773308178320626f6c5779",
+  "cached_dependency_manifest_sha256": "409db5ad9ef3119d0a79e325640e8dc612581a4db9830cd8250c4326d09cd7e4",
+  "weight_sha256": {
+    "detector_base.pth": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+    "generator_base.pth": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748"
+  },
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "einops": "0.8.2",
+    "PyYAML": "6.0.3",
+    "psutil": "7.2.2",
+    "Pillow": "12.3.0"
+  },
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "private_freeze_sha256": "1ab3848a76afd1e4c03923bc2a76efbe63506fcd51efed8a8684cf4118d7c759",
+  "authored_media_forwards_before_freeze": 0
+}

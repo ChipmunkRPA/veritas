@@ -1,0 +1,73 @@
+{
+  "schema": "chipmunk.ltx-marking-source/1",
+  "github_revision": "4f521619ae0029e8fbb64d555030c2b121a33b4f",
+  "hub_revision": "718f58d124e0acf58da85752692d93b0bd54c38a",
+  "files": {
+    "hf-README.md": {
+      "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/README.md",
+      "sha256": "e6f382980dc3349110daebda75372bb1d6522c5d3972597b00d00bb23a7a9f9d",
+      "bytes": 6328
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    "hf-LICENSE-videoseal": {
+      "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/LICENSE-videoseal",
+      "sha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+      "bytes": 1087
+    },
+    "hf-LICENSE-audioseal": {
+      "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/LICENSE-audioseal",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "bytes": 1088
+    },
+    "video_seal.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/video_seal.py",
+      "sha256": "b6a6904c7f5c646cf776b92e438820531e7bdae2f27af791ed58880439d7d3f8",
+      "bytes": 5675
+    },
+    "__init__.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/__init__.py",
+      "sha256": "062550eb2dc3ae6d88f57241d4800b9acf20c0f0a4c39520d5726a88e11d2764",
+      "bytes": 2549
+    },
+    "types.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/types.py",
+      "sha256": "2aebc94c9d59458c7ed7facc742a7b2426f37fd6d54842644c1123d7c110aaeb",
+      "bytes": 1614
+    },
+    "mark_detection.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/mark_detection.py",
+      "sha256": "8c97285096cdd315fd1069e24ee222412e25c7b5e65bbf0cdad1655047bdd5de",
+      "bytes": 1291
+    },
+    "audio_seal.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/audio_seal.py",
+      "sha256": "687f3dc7c7d2d6702fd381a78dbde01ad6fc1ae07f48eca6fc0709aac418e541",
+      "bytes": 5028
+    },
+    "hf-pixelseal.yaml": {
+      "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/pixelseal.yaml",
+      "sha256": "96c4a448f7d81810780e5bde5a51b039db544b7ec2baf65a605302c1b17362c9",
+      "bytes": 940
+    },
+    "hf-videoseal_attenuation.yaml": {
+      "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/videoseal_attenuation.yaml",
+      "sha256": "e0d71354f8945cf600bd4ebd5e2641a9c879e017548dd6cc8a6de10239d7e821",
+      "bytes": 141
+    },
+    "score.py": {
+      "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/score.py",
+      "sha256": "caa04450ebb0af1f1f187bf88290a9d34976beaf8dcd1d65d6cbd94db353a42d",
+      "bytes": 1289
+    }
+  },
+  "audio_checkpoint_sha256": {
+    "generator": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+    "detector": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9"
+  },
+  "weight_license": "MIT; code Apache-2.0; generative LTX weights have separate terms and are not used",
+  "scope": "Audio implementation/native24/48kHz PCM contract only; video PixelSeal source inspected but not executed"
+}

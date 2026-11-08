@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.image-pair-index-review-successor/22",
+  "private_plan_sha256": "e7fdb365bbae713c89eb27101bf8578defee695aeba29a5e59c41ce271c8a47a",
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "opencv": "5.0.0"
+  },
+  "code_sha256": {
+    "backend/scripts/review_image_pairs_v22.py": "a241894d8739bcd3dc0d2b75dd52096128e733e612507cfb9963456ca231beb2",
+    "backend/scripts/image_pair_review_runtime_v22.py": "71c8a34e9b8a21207f8c54a0c4d871baad6d220b951390055148b417b890ddd5",
+    "backend/tests/test_image_pair_index_review_v22.py": "c046e965be956ff7b527e1a2cffd3c35358d92d35ab0b3160753e80ecfc22ce7"
+  },
+  "protected_prior_reviewer_sha256": {
+    "backend/scripts/review_image_pairs_v21.py": "42322d5990a1a618c641ca478646c814102271e7971c4be9c694ae2ae208d837",
+    "backend/scripts/image_pair_review_runtime_v21.py": "9f3f504d0de1a402a432c1218acd123567fd2ad9e9d5235330d4c8bac7755c95",
+    "backend/tests/test_image_pair_review_v21.py": "87fc64caf33f45c75f703ed059c0f87881ad96e1a2ff01b8504175adfc86a566",
+    "backend/tests/test_image_pair_review_runtime_v21.py": "3d5f107c7626399885058c1ad66727e57b9abfb95295deac697e4c1f2cfa878f"
+  },
+  "original_failed_review_profile": {
+    "path": "backend/data/independent-evaluation/image-regional-v22-execution/pair-review-profile/profile.json",
+    "sha256": "6c058b4cbce0fcd46eefbf801b4874f6ebbf02faa731e3cbcd5dbcd38cfccb3a"
+  },
+  "preserved_failure_files_sha256": {
+    "backend/data/independent-evaluation/image-regional-v22-execution/pair-review-profile/profile.json": "6c058b4cbce0fcd46eefbf801b4874f6ebbf02faa731e3cbcd5dbcd38cfccb3a",
+    "backend/data/independent-evaluation/image-regional-v22-execution/pair-review-profile/worker.log": "4cc9127f619b3115f4120ca2a835852110d58007a712c23935e6cb5e3837533f",
+    "backend/data/independent-evaluation/image-regional-v22-execution/failure.json": "b4f8776d87c0685473997a67066080bd1e0dc4858c200b86e3784d45c8e50d94"
+  },
+  "original_full_review_passed": false,
+  "authored_tests_passed": 13,
+  "final_junit_sha256": "ff856f174cb6079ff81e09c1a28e82e2cced1d2c9d22d033fd6b1c10b9b81939",
+  "first_12_test_junit_sha256": "14e0cc88405eed47a4a3d0735690f50fd784596a7b4f2f7793f67e0a921f87c9",
+  "upstream": {
+    "repository": "pauldmccarthy/indexed_gzip",
+    "commit": "d87b55d872a6120423e33acfdf7e0a1c836f7816",
+    "path": "indexed_gzip/zran.c",
+    "blob": "f57601cdb5f522a85465b56bda7b4b5293cb21e7",
+    "license": "Zlib"
+  },
+  "reason": "Upstream explicitly permits a zero-point exported/imported index. Complete small mask archives have valid35-byte headers and unchanged committed digests. Original reviewer incorrectly required npoints>0.",
+  "changed_scientific_source_truth_or_control_rules": false,
+  "complete_source_pairs_qualified": 397,
+  "successor_full_project_review_completed": false,
+  "project_neural_forwards": 0,
+  "project_fitting_steps": 0,
+  "outside_human_review": false,
+  "scope": "Prospective explicit index-header/commitment correction only; original failures remain failures. No whole-archive checksum, raw-camera attribution, inference-quality or customer-confidence claim."
+}

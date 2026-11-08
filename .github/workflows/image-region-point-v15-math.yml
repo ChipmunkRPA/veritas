@@ -1,0 +1,93 @@
+name: Image region calibration independent arithmetic
+
+on:
+  workflow_dispatch:
+    inputs:
+      science_commit:
+        description: Immutable prospective factorial study revision
+        required: true
+        default: 730e11e75e839c8f4650ec45d6638e6d48bad9d5
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-region-point-v15-math-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  array-only-calibration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      SCIENCE_COMMIT: ${{ inputs.science_commit }}
+      PYTHONPATH: backend
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      VERITAS_OFFLINE: 'true'
+    steps:
+      - name: Require an immutable source revision
+        run: |
+          python3 - <<'PY'
+          import os, re
+          assert re.fullmatch(r'[0-9a-f]{40}', os.environ['SCIENCE_COMMIT'])
+          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ env.SCIENCE_COMMIT }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.6'
+      - name: Install only the fixed array and test dependencies
+        run: |
+          python -m pip install --isolated --no-cache-dir --only-binary=:all: numpy==2.2.6 scipy==1.18.1 Pillow==12.3.0 pytest==9.1.1 PyYAML==6.0.3 requests==2.32.5 opencv-python-headless==5.0.0.93
+      - name: Verify prospective method commitments and absence of model libraries
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, json, os, pathlib, subprocess
+          assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip() == os.environ['SCIENCE_COMMIT']
+          freeze = json.loads(pathlib.Path('docs/evaluation-panels/image-region-point-v15-freeze.json').read_text())
+          for path, expected in freeze['code_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() == expected, path
+          for name in ('torch', 'transformers', 'fastapi'):
+              assert importlib.util.find_spec(name) is None, name
+          print('All30 prospective source hashes match; no model runtime or study media acquired.')
+          PY
+      - name: Run exhaustive plateau, native-selection and point-isolation arithmetic without network
+        run: |
+          python - <<'PY'
+          import importlib.metadata as md, json, os, pathlib, platform, socket, sys, xml.etree.ElementTree as ET
+          import pytest
+          def forbidden(*args, **kwargs):
+              raise AssertionError('No network in array-only source calibration checks')
+          socket.socket.connect = forbidden
+          socket.create_connection = forbidden
+          junit = pathlib.Path(os.environ['RUNNER_TEMP'], 'image-region-point-v15.xml')
+          status = pytest.main(['--override-ini', 'addopts=', '-q', '--junitxml=' + str(junit), 'backend/tests/test_image_region_point_v15.py'])
+          suites = ET.parse(junit).getroot().findall('testsuite')
+          receipt = {'schema': 'chipmunk.image-region-point-linux-array-review/15',
+                     'science_commit': os.environ['SCIENCE_COMMIT'], 'run_id': os.environ['GITHUB_RUN_ID'],
+                     'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'pytest_exit': status,
+                     'tests': sum(int(s.get('tests', 0)) for s in suites),
+                     'failures': sum(int(s.get('failures', 0)) for s in suites),
+                     'errors': sum(int(s.get('errors', 0)) for s in suites),
+                     'platform': platform.platform(), 'python': platform.python_version(),
+                     'packages': {p: md.version(p) for p in ('numpy', 'scipy', 'Pillow', 'pytest', 'PyYAML', 'requests', 'opencv-python-headless')},
+                     'model_runtime_imported': 'torch' in sys.modules, 'backbone_forwards': 0,
+                     'real_image_inputs': 0, 'outside_human_reviewers': 0, 'serving_changed': False,
+                     'scope': 'Synthetic stable means,all729 small plateau grids,independent activation search,actual native-selection equivalence and genuine point-role isolation. Not real-image model quality or native feature replay.'}
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'image-region-point-v15.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          print(json.dumps(receipt))
+          assert status == 0 and receipt['tests'] == 12 and receipt['failures'] == receipt['errors'] == 0
+          assert not receipt['model_runtime_imported']
+          PY
+      - name: Show actual receipt or explicit incomplete status
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/image-region-point-v15.json" ]; then
+            cat "$RUNNER_TEMP/image-region-point-v15.json"
+          else
+            echo 'No completed arithmetic receipt; retain and inspect the failed step.'
+          fi

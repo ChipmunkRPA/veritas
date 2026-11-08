@@ -1,0 +1,98 @@
+name: Supervised image head synthetic arithmetic review
+
+on:
+  workflow_dispatch:
+    inputs:
+      science_commit:
+        description: Immutable prospective image-head study revision
+        required: true
+        default: 479b7cca66dec2d8313f7cc977d0b212b6179477
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-patch-head-v14-math-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  synthetic-math:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      SCIENCE_COMMIT: ${{ inputs.science_commit }}
+      PYTHONPATH: backend
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '2'
+      VERITAS_OFFLINE: 'true'
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+    steps:
+      - name: Require an immutable study revision
+        run: |
+          python3 - <<'PY'
+          import os, re
+          assert re.fullmatch(r'[0-9a-f]{40}', os.environ['SCIENCE_COMMIT'])
+          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          ref: ${{ env.SCIENCE_COMMIT }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.6'
+      - name: Install the fixed CPU arithmetic environment
+        run: |
+          python -m pip install --isolated --no-cache-dir --only-binary=:all: numpy==2.2.6 scipy==1.18.1 Pillow==12.3.0 pytest==9.1.1 PyYAML==6.0.3 requests==2.32.5 opencv-python-headless==5.0.0.93
+          python -m pip install --isolated --no-cache-dir --only-binary=:all: torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify all prospective method source commitments
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip() == os.environ['SCIENCE_COMMIT']
+          freeze = json.loads(pathlib.Path('docs/evaluation-panels/image-patch-head-v14-freeze.json').read_text())
+          for path, expected in freeze['code_sha256'].items():
+              assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() == expected, path
+          print('All20 prospective source commitments match; no project media or model weights acquired.')
+          PY
+      - name: Run authored geometry, source-role and head arithmetic checks with network and backbone loading forbidden
+        run: |
+          python - <<'PY'
+          import importlib.metadata as md, json, os, pathlib, platform, socket, xml.etree.ElementTree as ET
+          import pytest, torch
+          from scripts import run_image_patch_head_v14 as study
+          def forbidden(*args, **kwargs):
+              raise AssertionError('This synthetic arithmetic review cannot load pretrained weights or contact a server')
+          socket.socket.connect = forbidden
+          socket.create_connection = forbidden
+          torch.hub.load = forbidden
+          torch.load = forbidden
+          study.assets = forbidden
+          study.load_backbone = forbidden
+          junit = pathlib.Path(os.environ['RUNNER_TEMP'], 'image-patch-head-v14-math.xml')
+          status = pytest.main(['--override-ini', 'addopts=', '-q', '--junitxml=' + str(junit), 'backend/tests/test_image_patch_head_v14.py'])
+          suites = ET.parse(junit).getroot().findall('testsuite')
+          receipt = {'schema': 'chipmunk.image-patch-head-linux-synthetic-math/14',
+                     'science_commit': os.environ['SCIENCE_COMMIT'], 'run_id': os.environ['GITHUB_RUN_ID'],
+                     'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'pytest_exit': status,
+                     'tests': sum(int(s.get('tests', 0)) for s in suites),
+                     'failures': sum(int(s.get('failures', 0)) for s in suites),
+                     'errors': sum(int(s.get('errors', 0)) for s in suites),
+                     'platform': platform.platform(), 'python': platform.python_version(),
+                     'packages': {p: md.version(p) for p in ('torch', 'numpy', 'scipy', 'Pillow', 'pytest', 'PyYAML', 'requests', 'opencv-python-headless')},
+                     'pretrained_backbone_forwards': 0, 'real_image_inputs': 0,
+                     'outside_human_reviewers': 0, 'serving_changed': False,
+                     'scope': 'Authored RGB, soft source geometry, role isolation, toy-head learning and independent float64 arithmetic; not actual-image detection quality or full native backbone replay.'}
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'image-patch-head-v14-math.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          print(json.dumps(receipt))
+          assert status == 0 and receipt['tests'] == 11 and receipt['failures'] == receipt['errors'] == 0
+          PY
+      - name: Show receipt or explicit incomplete status
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/image-patch-head-v14-math.json" ]; then
+            cat "$RUNNER_TEMP/image-patch-head-v14-math.json"
+          else
+            echo 'No completed arithmetic receipt; retain and inspect the failed step.'
+          fi

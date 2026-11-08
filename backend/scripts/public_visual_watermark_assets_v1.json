@@ -1,0 +1,254 @@
+{
+  "schema": "chipmunk.public-visual-watermark-assets/1",
+  "source_revision": "2c08af04d037d5667c02f6ddebbda9ff04581c3e",
+  "model_revision": "88ffb2cd1079a76b01d6beda8bf2a433c25fa881",
+  "source_repo": "facebookresearch/watermark-anything",
+  "source_files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1086,
+      "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+    },
+    {
+      "path": "README.md",
+      "bytes": 12339,
+      "sha256": "83956b2b71c89c07fdaa6ca43cdd92b65edd8a8437901cdc6647517c2cd4e677"
+    },
+    {
+      "path": "checkpoints/params.json",
+      "bytes": 1221,
+      "sha256": "d133a504d126b56b3e980add9fc014d718e3635a0f5740d8d6dc3190007fb476"
+    },
+    {
+      "path": "configs/all_augs.yaml",
+      "bytes": 1271,
+      "sha256": "ed40f82dfc1cc41f3dcf19459a4c669807376784cd7713756972079aeb89cb9a"
+    },
+    {
+      "path": "configs/all_augs_multi_wm.yaml",
+      "bytes": 1375,
+      "sha256": "16fad43c39cda6b6bc604aeac27f39605208d4a560b5fad437e95e2da4e99aa8"
+    },
+    {
+      "path": "configs/attenuation.yaml",
+      "bytes": 241,
+      "sha256": "53b58c00f2c8177deb556905fc31d24fba4a078e8072923dfa939e3c2081c4e5"
+    },
+    {
+      "path": "configs/embedder.yaml",
+      "bytes": 1197,
+      "sha256": "447b96cfae182878483c4bf3e80b45f80e5f6a762bbe39ae9e4433a65cac3709"
+    },
+    {
+      "path": "configs/extractor.yaml",
+      "bytes": 1458,
+      "sha256": "1fca6b4c7f6ff53cb44e7b459b02161c1f032ecd824d4e98267817f696db61ed"
+    },
+    {
+      "path": "notebooks/inference_utils.py",
+      "bytes": 10922,
+      "sha256": "634166bd6b21acf3683da9a5cd7d7e0624f0497c47593e1d7e76f15369d2183b"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 141,
+      "sha256": "78a7f428d40f1a3f84bca714b5981243b0f2479d44253ae1d9d37a0ff3c2d0b9"
+    },
+    {
+      "path": "watermark_anything/augmentation/__init__.py",
+      "bytes": 196,
+      "sha256": "24aa69545681d799706619fe4135d2c110c1a19d92988209f95b47fd2b465689"
+    },
+    {
+      "path": "watermark_anything/augmentation/augmenter.py",
+      "bytes": 6813,
+      "sha256": "9e3c2075b27226f44668601dd34945aac25505c5ab26a65f24e468e5bef97979"
+    },
+    {
+      "path": "watermark_anything/augmentation/geometric.py",
+      "bytes": 13754,
+      "sha256": "c1213e5cfd035a6b5fc924c2b4700ca422b911cf760bb2e0138ff1d607d182cd"
+    },
+    {
+      "path": "watermark_anything/augmentation/masks.py",
+      "bytes": 22654,
+      "sha256": "41f2a87c7654756297a9ff2e15a551f391b5bd288fa14e56bf4ef3dcf3f37129"
+    },
+    {
+      "path": "watermark_anything/augmentation/valuemetric.py",
+      "bytes": 7805,
+      "sha256": "bdf4e9f2826157b46b2da70ae7321c7e64c40cb963f947fc4212f7c60e47b860"
+    },
+    {
+      "path": "watermark_anything/data/__init__.py",
+      "bytes": 197,
+      "sha256": "34bd8069c54764e7b8d73a78905dbe6467140a2f73170875128f6ca4d8cdd0aa"
+    },
+    {
+      "path": "watermark_anything/data/loader.py",
+      "bytes": 7839,
+      "sha256": "ec72d8a37c806a2187c4512a5ed68c6e3c2e437265787150dce42113dd3f7ac1"
+    },
+    {
+      "path": "watermark_anything/data/metrics.py",
+      "bytes": 8607,
+      "sha256": "245a7f3f4069c5121da44b4b718571855cd96bb14cfa97eadb08594df4b77933"
+    },
+    {
+      "path": "watermark_anything/data/transforms.py",
+      "bytes": 3990,
+      "sha256": "45f0e56f4e8febb6657a08001b740bcc4c2fa655812215eb4c929324fddafb21"
+    },
+    {
+      "path": "watermark_anything/losses/__init__.py",
+      "bytes": 196,
+      "sha256": "24aa69545681d799706619fe4135d2c110c1a19d92988209f95b47fd2b465689"
+    },
+    {
+      "path": "watermark_anything/losses/detperceptual.py",
+      "bytes": 8229,
+      "sha256": "33078978efdcc4570ce4deb5caef36d80e83378b995f2ba55c2c2baf60faf768"
+    },
+    {
+      "path": "watermark_anything/losses/perceptual.py",
+      "bytes": 2747,
+      "sha256": "c53001d1ccb3a892f569e54125e5fd5e785f3cdf0660a27664915b2771633593"
+    },
+    {
+      "path": "watermark_anything/losses/ssim.py",
+      "bytes": 12283,
+      "sha256": "9c00d723f43a2c41250bfbd6ecec17b9818eace1b7c3bc224e77ee7ec28fe064"
+    },
+    {
+      "path": "watermark_anything/losses/yuvloss.py",
+      "bytes": 718,
+      "sha256": "0022dd0ecccea2d4c37fca1b70b2017930c8e406f31f6058ec22a6c710b706d9"
+    },
+    {
+      "path": "watermark_anything/models/__init__.py",
+      "bytes": 351,
+      "sha256": "456b6fb62cf5cc2b3b9cd89234999f5b451d94dc35c8b22a49bfdf27a73e11b0"
+    },
+    {
+      "path": "watermark_anything/models/embedder.py",
+      "bytes": 2878,
+      "sha256": "d3da6577b58a57f1ec342e46a19860d8cf7125e42b3ddd84c54d3128ff9a5145"
+    },
+    {
+      "path": "watermark_anything/models/extractor.py",
+      "bytes": 2022,
+      "sha256": "2977e20f0c236a903c885a5417dedae5d9e804b31f4ae81e3da6505eb7db0692"
+    },
+    {
+      "path": "watermark_anything/models/wam.py",
+      "bytes": 12878,
+      "sha256": "8ce5b1f40bb79914d24ee0e466f88d8ae91237db44884933e92baf317c4761b9"
+    },
+    {
+      "path": "watermark_anything/modules/__init__.py",
+      "bytes": 197,
+      "sha256": "34bd8069c54764e7b8d73a78905dbe6467140a2f73170875128f6ca4d8cdd0aa"
+    },
+    {
+      "path": "watermark_anything/modules/common.py",
+      "bytes": 5901,
+      "sha256": "7ee220add159638e068ff4f9fe9fe68862c373ccc2c1aed647b1a68a41e47764"
+    },
+    {
+      "path": "watermark_anything/modules/discriminator.py",
+      "bytes": 8010,
+      "sha256": "3b648e1a0ab72ab30d8a58faf5c44973818bbb7917c99374372f4139ac378ccc"
+    },
+    {
+      "path": "watermark_anything/modules/jnd.py",
+      "bytes": 4638,
+      "sha256": "6e7ebbcd589e84107e03d14cfe2fcfc063e0d3c83e4b95d9492eb4683e61cea6"
+    },
+    {
+      "path": "watermark_anything/modules/msg_processor.py",
+      "bytes": 5345,
+      "sha256": "21151d28adf4c6c9fe1999176ea950ee92510e5300a74b03e012b96b0a4cca9a"
+    },
+    {
+      "path": "watermark_anything/modules/pixel_decoder.py",
+      "bytes": 2458,
+      "sha256": "2f26e6b6453dafa736f5afb434598da2928044facc2c8d564fc0815cd572c42c"
+    },
+    {
+      "path": "watermark_anything/modules/vae.py",
+      "bytes": 13679,
+      "sha256": "ed0aa4322e9289c1d399b98ee269bba8405f7b8e1370c511d6302f796a31c8e8"
+    },
+    {
+      "path": "watermark_anything/modules/vit.py",
+      "bytes": 14441,
+      "sha256": "398e82e117cd4a6e09fc4fd0eb2fb4289276768fa2176547adac5f875bb6033f"
+    },
+    {
+      "path": "watermark_anything/utils/__init__.py",
+      "bytes": 1146,
+      "sha256": "dac1ccf022eb2f1e49560bc2488409e11fcc488e6a17d558a161a74e97236c67"
+    },
+    {
+      "path": "watermark_anything/utils/dist.py",
+      "bytes": 8147,
+      "sha256": "a3da9d9aff153f91d4aac5d75b20ba24b5b61cf62f5c6196a33d177c295818b8"
+    },
+    {
+      "path": "watermark_anything/utils/image.py",
+      "bytes": 6534,
+      "sha256": "8889c48956633e6587dae72327ac2296b726d7d691b3b27d1673e5b9536555d9"
+    },
+    {
+      "path": "watermark_anything/utils/logger.py",
+      "bytes": 5445,
+      "sha256": "6859ab2abedfe905db1d9aa7f4d1b22b9457c95d485d2cb9a222faee019ce41f"
+    },
+    {
+      "path": "watermark_anything/utils/optim.py",
+      "bytes": 5599,
+      "sha256": "055bea92ed603130424dc626d9a0c7e2a4bbe5d7348318092cd0cc58f4075f34"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES/lama.LICENSE",
+      "bytes": 11348,
+      "sha256": "4ceeeac5a802e86c413c22b16cce8e9a22027b0250c97e6f8ac97c14cf0542c0"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES/taming-transformers.LICENSE",
+      "bytes": 1093,
+      "sha256": "f6216cce912c447025b8aacfa9ac09634c43815cd8d87762528300e5ddf6b959"
+    }
+  ],
+  "checkpoint": {
+    "source": "https://dl.fbaipublicfiles.com/watermark_anything/wam_mit.pth",
+    "publisher_mirror": "https://huggingface.co/facebook/watermark-anything/resolve/88ffb2cd1079a76b01d6beda8bf2a433c25fa881/checkpoint.pth",
+    "bytes": 377825938,
+    "sha256": "90ef232384e023bd63245eb0c131abd69d2afc7b8f17a71ccedceb542bf009e2",
+    "license": "MIT SA-1B release; original noncommercial COCO checkpoint excluded"
+  },
+  "dependencies": {
+    "private_root": "backend/data/independent-evaluation/public-watermark-v2-source/isolated-python",
+    "manifest": "backend/data/independent-evaluation/public-watermark-v2-source/isolated-python-files.json",
+    "manifest_sha256": "409db5ad9ef3119d0a79e325640e8dc612581a4db9830cd8250c4326d09cd7e4"
+  },
+  "scope": "Source inspection/pinning only; no private provider attribution or neural model has run.",
+  "third_party_notices": [
+    {
+      "path": "THIRD_PARTY_LICENSES/lama.LICENSE",
+      "bytes": 11348,
+      "sha256": "4ceeeac5a802e86c413c22b16cce8e9a22027b0250c97e6f8ac97c14cf0542c0",
+      "repo": "advimman/lama",
+      "revision": "786f5936b27fb3dacd2b1ad799e4de968ea697e7",
+      "source": "https://raw.githubusercontent.com/advimman/lama/786f5936b27fb3dacd2b1ad799e4de968ea697e7/LICENSE"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES/taming-transformers.LICENSE",
+      "bytes": 1093,
+      "sha256": "f6216cce912c447025b8aacfa9ac09634c43815cd8d87762528300e5ddf6b959",
+      "repo": "CompVis/taming-transformers",
+      "revision": "3ba01b241669f5ade541ce990f7650a3b8f65318",
+      "source": "https://raw.githubusercontent.com/CompVis/taming-transformers/3ba01b241669f5ade541ce990f7650a3b8f65318/License.txt"
+    }
+  ]
+}

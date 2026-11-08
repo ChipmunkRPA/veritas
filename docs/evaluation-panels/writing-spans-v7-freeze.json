@@ -1,0 +1,156 @@
+{
+  "schema": "chipmunk.writing-span-freeze/7",
+  "rules": {
+    "roles": {
+      "fit": 288,
+      "cal": 288,
+      "point": 128,
+      "diagnostic": 288
+    },
+    "groups_per_role": 32,
+    "seed": 20261108,
+    "useful_character_iou": 0.3,
+    "interval_recovery_fraction": 0.5,
+    "bootstrap_resamples": 2000,
+    "genuine_only_point": "nextafter(second-highest of32 four-composition group maxima,+infinity); floor.001",
+    "gates": "Interval must beat both current and matched token: more useful mixed documents, higher mean mixed characterIoU, no loss of previously useful mixed document, no fewer useful pureAI or shortAI documents or recovered source AI intervals; no more than1 extra genuine group overall or per genuine composition. Complete successful coverage and strict replay required.",
+    "admission": "Consumed source development only. No serving/confidence admission, even if all development gates pass.",
+    "features": "Complete native CPUfloat32 frozen ModernBERT features in RAM only;512-token stride0 windows;2threads; deterministic algorithms; no omitted non-whitespace character.",
+    "fit": "Only288 fitting documents; token40epochs lr.003, interval60epochs lr.0005; AdamW decay.001,batch8,clip1,final epoch only.8queries,64latent,2decoder layers,4heads,FF128,dropout0;Hungarian class+5L1-2GIoU assignment,weightedCE+5L1+2(1-GIoU).",
+    "calibration": "Separate nonnegative-logistic mapping for each arm, only288 calibration docs: proposed-interval retained publisher-AI non-whitespace fraction. Equal doc/group mass, raw clip1e-6,weighted standardization,L2slope.001,L-BFGS-B500,maxls50,gtol1e-9,ftol2.22e-16,projected gradient<=1e-6. Not customer authorship confidence.",
+    "audit": "Reconstruct all992 documents from original CSV and connected source components;re-infer every native feature hash and all current responses;retrain both heads only on fitting features and require exact state equality;refit calibrators exactly;separately derive source masks/counts;recompute points,summary and gates. Local execution review, no human or independent-source validation.",
+    "resource": "Sequential phases,900seconds,6GiB sampled treeRSS,min1536MiB available RAM/disk;failures retained,no implicit restart."
+  },
+  "code_sha256": {
+    "backend/scripts/writing_span_data_v7.py": "77713f536008cbbd057c2e1c25f050e5b11d4db75ae90bd0df4372baef7eccc2",
+    "backend/scripts/writing_span_geometry_v7.py": "ac4aa39788de1f63902789621a0c13c0d790d394367a27f06466c85c6347cc5d",
+    "backend/scripts/writing_span_heads_v7.py": "79806a04556f2dd3169fa3f136ca5e0d20f02e7364f90f026f9a1120e1c1d8e0",
+    "backend/scripts/writing_span_calibration_v7.py": "89dc2751ab6a03433bf5740e8f602a40af62a34a0ad39cc6e30423e367f6894d",
+    "backend/scripts/writing_span_native_v7.py": "c7aa46f721ec27239ea9c434ee3073685dbf183ab0abc48d375ac281e1c75409",
+    "backend/scripts/writing_span_runtime_v7.py": "e1d9ab10805217aa01a4287dba9f46935cccce9816513ac5f1440a496a22eac1",
+    "backend/scripts/run_writing_spans_v7.py": "7ef1a141f8859bc0bf602aac21768732af89bfc1e2676c33930b212041633319",
+    "backend/scripts/review_writing_spans_v7.py": "bdd2c3f56074b450cfe4f642eadef00af4cb8d253ef69aa0becdb8cf6605821d",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+    "backend/scripts/writing_modernbert_v4.py": "8d0cfe1fabdc7f60d7c17765319a16e6299a97c861757cb3b1cdc2a8a55418dc",
+    "backend/scripts/writing_focus_v3.py": "f71448d811fc0082520eeb297f2d31238302bace360030859f1acf6e257c1fa9",
+    "backend/scripts/prepare_writing_focus_v3.py": "e716089f8e079cce6565d9af6117ff2443b2b9c28a11148920d23ff55bdaacda",
+    "backend/scripts/writing_specialists_v5.py": "7d82110d437ff6887ea8096d3083e11a0d2d2a5d53afa9d5a619422e48b0397a",
+    "backend/scripts/audit_writing_sources_v2.py": "dc53bfd7256a073fb03b916eba361a7f5dbffacebe3c1d29c4cf45e3b119d25b",
+    "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+    "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+    "backend/app/detectors/text/extract.py": "c0d3c4704302c4084a4d35bbdeae1c6b75388e07cce07610aec83384011d222f",
+    "backend/app/detectors/text/pipeline.py": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f",
+    "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+    "backend/app/detectors/text/adapters/learned.py": "06d0dba2d9745d4cc72902a1c9ba7244d8a12e08c515a9085f243315d5563187",
+    "backend/tests/test_writing_spans_v7.py": "731448ba563a573df093da53198449c741f7f6135fa28bb5f921461e799beff7",
+    "docs/writing-spans-v7-protocol.md": "1264862d705123acf6bbf8faef669b53c8282580415800e8f9d4708265c0b8c1"
+  },
+  "input_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+  "source_sha256": "232c260f8caf7ea61a331f39fa730956862afbe0c5fc554720daa07d215a2f7d",
+  "original_plan_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+  "original_freeze_sha256": "7663609d60ceed4a74deb138fab289848272c359449e832b81d886206a0bdc8a",
+  "runtime": {
+    "python": "3.12.6",
+    "platform": "Darwin",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.13.0",
+      "transformers": "5.15.1",
+      "tokenizers": "0.22.2",
+      "safetensors": "0.8.0",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.0"
+    }
+  },
+  "installed_sha256": {
+    "transformers.models.deberta_v2.modeling_deberta_v2": "bc0eb5729a6431daae48784c606005c86f44a47b955f0267d874479e3e8df43c",
+    "transformers.models.modernbert.modeling_modernbert": "c208d5e979e953b38f72d4ca7bc9acd99c83eb1a7a8a607d93c0134634763459",
+    "transformers.models.modernbert.configuration_modernbert": "6bddc1471bde497acf90e786585df6bf2a4a43c913c572a1ba2e6b3315b2b648",
+    "transformers.modeling_rope_utils": "a8bf3f6a53760366fb5fa51cecc06a8707d3cded36fd8f3ac51e140c0718af21",
+    "transformers.masking_utils": "e8c497af6979274fc6ae78980ad9893e7850bdb750e46d459f09178123992196",
+    "transformers.activations": "5b20c0a3625edc0001a98f09ce3c6b5baa1100e1d7ad8dee649e4d45c8468665",
+    "transformers.modeling_utils": "a7392c26dd2f005383cc3c1f8562638a6039d393ca03fb1933513479a6d264e4",
+    "transformers.tokenization_utils_tokenizers": "bf921a160f483c7a32973952ed82a08c7d8982f769726bd220933aae2df98de8",
+    "transformers.tokenization_utils_base": "520a914d0dcc873f8c8788e60ad3007f7db032c82c0b2b2c44ee7f44f2cdad8e",
+    "tokenizers.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",
+    "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e"
+  },
+  "model_assets": {
+    "candidate": {
+      "README.md": "328d6508b1a135e8d1559e25efdf0cb7dc9f00ba78663fc6904003ff0ab73891",
+      "BASE_README.md": "40539466fa1117be4693b8f1fdfdac81fac3c5db472ff57bc05d013d48eafa82",
+      "config.json": "a6225f6c55e0fb92ccb6a53832714993a5eeceff0a4ac89e90f803de8e06a742",
+      "model.safetensors": "2ae8059c621795fc490353bbd920bc3672e6eaf8ad66ddb7c015b4ecb0129218",
+      "tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+      "tokenizer_config.json": "c16f1b07f93d05be753ec0acf8cb511d895a8bdb09669f6b156df81e3f96c2eb",
+      "special_tokens_map.json": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049"
+    },
+    "current": {
+      "NOTICE": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57",
+      "config.json": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3",
+      "model.safetensors": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087",
+      "serving_head.json": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab",
+      "tokenizer.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf",
+      "tokenizer_config.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+    }
+  },
+  "revisions": {
+    "candidate": "e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624",
+    "current": "f1795c86806e6838d4afa33d0b1427f8430c9615"
+  },
+  "synthetic_smoke_sha256": "6c4682cf43b327687947c8614d6896563858c4080e844e62c03c055884a0ae0d",
+  "synthetic_smoke": {
+    "schema": "chipmunk.writing-span-native-smoke/7",
+    "authored_cases": 3,
+    "records": [
+      {
+        "status": "supported",
+        "tokens": 14,
+        "windows": 1,
+        "feature_width": 768,
+        "native_feature_tap_exact": true,
+        "current_direct_audits": 1,
+        "current_maximum_difference": 0.0
+      },
+      {
+        "status": "unsupported_coverage_refused",
+        "new_model_forwards": 0
+      },
+      {
+        "status": "supported",
+        "tokens": 1201,
+        "windows": 3,
+        "feature_width": 768,
+        "native_feature_tap_exact": true,
+        "current_direct_audits": 1,
+        "current_maximum_difference": 0.0
+      }
+    ],
+    "actual_pretrained_forwards": {
+      "encoder": 8,
+      "current_classifier": 6
+    },
+    "encoder_parameters": 149606402,
+    "project_source_forwards": 0,
+    "fitted_heads": 0,
+    "detection_quality": false,
+    "implementation_sha256": "c7aa46f721ec27239ea9c434ee3073685dbf183ab0abc48d375ac281e1c75409"
+  },
+  "token_preflight_sha256": "b82c8d8ba22351e7ddb9e36122622de5b6448bf9f229771ed88d901cb8da83da",
+  "token_preflight": {
+    "schema": "chipmunk.writing-span-token-preflight/7",
+    "input_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+    "documents": 992,
+    "native_nonwhitespace_coverage_failures": 0,
+    "maximum_content_tokens": 251,
+    "documents_above510_content_tokens": 0,
+    "project_model_forwards": 0,
+    "fitting_started": false
+  },
+  "new_project_forwards": 0,
+  "fitting_started": false,
+  "serving_admitted": false,
+  "private_lock_sha256": "61dfe6aa86e6a07fc1a70c04394686b747790f746fca40bd3b5bd406d34ea68a"
+}

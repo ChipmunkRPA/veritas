@@ -94,6 +94,16 @@ are recorded under the [external review plan](preserved-evidence-v22-review-plan
 Numerical portability is distinct from fresh detection quality and outside
 human review; outside human reviewers remain0.
 
+The actual [three-job Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42436036702)
+failed in every replica at the host-versus-stored bitwise normalizer comparison.
+The [failure receipt](evaluation-panels/preserved-evidence-v22-linux-failed-review.json)
+records all three jobs and retained partial-workspace artifacts. This does not
+establish portable success for v22. A separately frozen
+[v23 audit](preserved-evidence-v23-protocol.md) holds the original center/scale
+fixed as part of the optimization problem and records host drift separately;
+it keeps the solver and video methods unchanged. Old runs are not retried or
+rewritten.
+
 Next test stronger genuine edits and missing-view situations, then compare
 source-blind calibration transfer and the full local evidence flow. Appearance
 change is a useful localization cue; real person/scene changes can also cause it.

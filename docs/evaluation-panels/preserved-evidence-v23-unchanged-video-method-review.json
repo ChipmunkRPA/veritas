@@ -1,0 +1,70 @@
+{
+  "schema": "chipmunk.frozen-normalizer-method-isolation/23",
+  "compared_files": 15,
+  "all_bytes_identical": true,
+  "files": [
+    {
+      "name": "appearance-direct-artifact.json",
+      "sha256": "53971fc46de5383a1340efc7911168390b4f792d19ec6c66d5d6b0a0cccb0b9a"
+    },
+    {
+      "name": "appearance-direct-point.json",
+      "sha256": "b3aaddabb76c4fa3731d65195b619b553554086574376925c8f8873c8f7a3795"
+    },
+    {
+      "name": "appearance-direct-evaluation.json",
+      "sha256": "d7108c62873e77fb70ad9c0b91c695b5ed45729896d1c076465d47487af7a2ce"
+    },
+    {
+      "name": "appearance-positive-artifact.json",
+      "sha256": "1060e2f36bb8ee925aa7df3fdd4a168255d37ce08174c17f9b4aabe541ebdb7a"
+    },
+    {
+      "name": "appearance-positive-point.json",
+      "sha256": "5be3b28aba8268e87189fd70455a290068bfada0b864bea1dd351b110eb36d03"
+    },
+    {
+      "name": "appearance-positive-evaluation.json",
+      "sha256": "a66ccfba41dd73f254b57c3ee85506aac8e7b528428dd5d699dc2700a5c17c9f"
+    },
+    {
+      "name": "family-max-artifact.json",
+      "sha256": "3e626b7c813a50b002aafdf193a131d7a654181f7dad0f233f43418be522b47b"
+    },
+    {
+      "name": "family-max-point.json",
+      "sha256": "90c5f2b44e3f6e6f01016e3f69042f382472902b31c575020e8fb51f209148e8"
+    },
+    {
+      "name": "family-max-evaluation.json",
+      "sha256": "2b637738db6f89f806c210a8f7f5ddce3df1f2886506258353a1111a6bebc9d3"
+    },
+    {
+      "name": "family-repeat-artifact.json",
+      "sha256": "085df06a124630cf3452d47d34b483a1c0f30f52f4f979f455a903467dc42d05"
+    },
+    {
+      "name": "family-repeat-point.json",
+      "sha256": "90c5f2b44e3f6e6f01016e3f69042f382472902b31c575020e8fb51f209148e8"
+    },
+    {
+      "name": "family-repeat-evaluation.json",
+      "sha256": "e50c183067609a63fa77f74ffcdfa27b3526e6ea7c219e2ff45f8babef2e6e71"
+    },
+    {
+      "name": "view-max-artifact.json",
+      "sha256": "fb651f5c7fbcbb7812b6b51414ac6a2a70709a519abcb63e978ed50d648748f4"
+    },
+    {
+      "name": "view-max-point.json",
+      "sha256": "37eb315ed1882f5ca19f0d1d741587e82284ce8cdaae8ce4384bb0ee37aeabe6"
+    },
+    {
+      "name": "view-max-evaluation.json",
+      "sha256": "8b34079920ce99ebbf179cf6c35e1b04acce628724016a179555b77ed124a4a6"
+    }
+  ],
+  "change": "Old-problem optimizer audit normalization only; no change to new-video fitter, models, source measurements, points or evaluation outputs.",
+  "new_neural_forwards": 0,
+  "serving_admitted": false
+}

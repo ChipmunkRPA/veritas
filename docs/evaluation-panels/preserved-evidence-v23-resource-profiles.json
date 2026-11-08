@@ -1,0 +1,44 @@
+{
+  "solver-audit": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.run_preserved_video_v23",
+    "arguments": [
+      "solver-audit",
+      "<private-scalar-trial>"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 417431552,
+    "sample_errors": 0,
+    "duration_s": 3.1468920409679413,
+    "seconds_limit": 600
+  },
+  "fit": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.run_preserved_video_v23",
+    "arguments": [
+      "fit",
+      "<private-scalar-trial>"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 341819392,
+    "sample_errors": 0,
+    "duration_s": 4.483664041967131,
+    "seconds_limit": 600
+  },
+  "evaluation": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.run_preserved_video_v23",
+    "arguments": [
+      "evaluate",
+      "<private-scalar-trial>"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 307855360,
+    "sample_errors": 0,
+    "duration_s": 4.735172750079073,
+    "seconds_limit": 600
+  }
+}

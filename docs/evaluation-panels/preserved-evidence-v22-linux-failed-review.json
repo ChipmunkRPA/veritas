@@ -1,0 +1,60 @@
+{
+  "schema": "chipmunk.preserved-evidence-linux-failed-review/22",
+  "science_commit": "57eca736c237a99418513c752d5d3ca4fe3ca636",
+  "run_id": 42436036702,
+  "workflow_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42436036702",
+  "replicas": [
+    {
+      "job_id": 128594956542,
+      "name": "checked-source-refit (1)",
+      "conclusion": "failure",
+      "diagnostic": "Optimizer comparison changed source standardization",
+      "stage": "Exact comparison of host-recomputed normalizer against original stored normalizer, before completing the solver audit"
+    },
+    {
+      "job_id": 128594956645,
+      "name": "checked-source-refit (3)",
+      "conclusion": "failure",
+      "diagnostic": "Optimizer comparison changed source standardization",
+      "stage": "Exact comparison of host-recomputed normalizer against original stored normalizer, before completing the solver audit"
+    },
+    {
+      "job_id": 128594956697,
+      "name": "checked-source-refit (2)",
+      "conclusion": "failure",
+      "diagnostic": "Optimizer comparison changed source standardization",
+      "stage": "Exact comparison of host-recomputed normalizer against original stored normalizer, before completing the solver audit"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13599478338,
+      "name": "preserved-evidence-v22-linux-2",
+      "size_in_bytes": 29614767
+    },
+    {
+      "id": 13599463407,
+      "name": "preserved-evidence-v22-linux-3",
+      "size_in_bytes": 29614777
+    },
+    {
+      "id": 13598979743,
+      "name": "preserved-evidence-v22-linux-1",
+      "size_in_bytes": 29614771
+    }
+  ],
+  "all_three_failed": true,
+  "automatic_retries": 0,
+  "solver_stability_established": false,
+  "frozen_science_modified": false,
+  "serving_admitted": false,
+  "new_neural_forwards": 0,
+  "retained_partial_journal": "docs/evaluation-panels/preserved-evidence-v22-linux-replica1-partial-audit.jsonl",
+  "partial_journal_sha256": "06b8c63395d9ecbbafd69f6f4bb693a47b7587c85786973620e16a29b1d4510a",
+  "first_failed_problem": {
+    "study": "audio-specialists-v15",
+    "arm": "combined-context",
+    "stage": "head.audio.full.diffuse"
+  },
+  "preceding_checked_problems_in_replica1": 1
+}

@@ -218,3 +218,11 @@ Linux receipt. The native280-file study and separate600-outcome audit are
 complete, but its primary fails replacement rules. Source footage/geometry/
 descriptors stay private; the public tests reproduce arithmetic and safety
 contracts, not native face inference or fresh accuracy.
+
+The [public LTX audio marking contract](ltx-marking-audio-v1-result.md) adds
+80 authored native/file cases and a complete separate sample/codec audit. The
+[actual Linux receipt](evaluation-panels/ltx-marking-audio-v1-linux-array-review.json)
+passes 20 arithmetic/contract tests without media or neural inference. No
+provider-authentication, natural-speech accuracy or outside human review follows.
+The [provider follow-up](provider-signal-followup-2026-11-08.md) records 71
+families and explicit gaps, separately from operational verification.

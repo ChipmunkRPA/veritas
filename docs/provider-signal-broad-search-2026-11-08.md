@@ -1,12 +1,14 @@
 # Provider signals: broader search and verification priorities
 
-Reviewed 8 November 2026. The [catalog](provider-signals-catalog.json) now records
+Initial broader review, 8 November 2026. This sweep recorded
 **67 provider families and 96 scoped signal records**, with explicit image,
 video, audio and writing states for each. **Nineteen families remain search
 gaps**. This is a curated, sourced inventory, not a guarantee to recognize every
 provider, generation date, model, export or surviving mark. Policies, planned
 features and public research are counted as records, not working detectors.
-The [matrix](provider-signal-matrix.md) shows the full scope; each source row
+The [follow-up](provider-signal-followup-2026-11-08.md) now expands the catalog
+to 71 families/101 records, including the public LTX contract. The current
+[matrix](provider-signal-matrix.md) shows the full scope; each source row
 keeps its actual review date and focused search queries.
 
 This review searched provider technical documentation, help pages, source

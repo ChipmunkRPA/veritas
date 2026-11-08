@@ -598,3 +598,13 @@ integration remains unfinished.
 Regional image localization, difficult audio, lip sync, general video, writing
 and outside human participation still require work. These completed negative
 comparisons narrow the methodology; they do not complete the improvement goal.
+
+The [LTX public-pattern contract](ltx-marking-audio-v1-result.md) now completes
+80 authored audio cases, 32 actual codec decodes, a full separate sample audit
+and 20 actual Linux contract tests. Clean expected patterns work; all eight
+noisy cases miss, and wrong payloads trigger generic presence. Keep it isolated,
+without confidence or early stopping. The
+[follow-up inventory](provider-signal-followup-2026-11-08.md) expands to 71
+families/101 records with 20 review gaps. The separate
+[lip-sync permission review](lip-sync-source-review-2026-11-08.md) admits no new
+checkpoint. Serving defaults, rollback, voice calibration and GCP are unchanged.

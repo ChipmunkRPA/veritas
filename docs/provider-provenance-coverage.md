@@ -1,14 +1,14 @@
 # Provider signals and the provenance-first gate
 
 Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **67 provider families**, all four modality fields, **96 scoped signal
+covers **71 provider families**, all four modality fields, **101 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
-Forty-eight families have scoped documentation, including announcements or
-policies with unresolved export scope; nineteen remain review gaps.
+Fifty-one families have scoped documentation, including announcements or
+policies with unresolved export scope; twenty remain review gaps.
 These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
 The [four-modality matrix](provider-signal-matrix.md) and
-[latest broader search](provider-signal-broad-search-2026-11-08.md) distinguish current
+[latest broader search](provider-signal-followup-2026-11-08.md) distinguish current
 marking documentation, future commitments and missing verification routes.
 Individual provider rows retain their actual review dates.
 
@@ -161,6 +161,15 @@ accuracy benchmark. The test authority is never added to production trust.
 Next priority is qualifying real-provider fixtures for Suno/Bria/Cartesia and the
 available public watermark schemes, then integrating supported routes with
 clear scope and data handling. Restricted production text verification, Muse
-compatibility and the thirteen review gaps remain open. No new weights,
+compatibility and the twenty review gaps remain open. No new weights,
 statistical calibration, public confidence threshold or GCP deployment was
 introduced by this inventory.
+
+The [LTX public marking contract](ltx-marking-audio-v1-result.md) adds two
+scoped audio/video records. At that stage, the inventory had 67 families/98 records;
+the subsequent [follow-up search](provider-signal-followup-2026-11-08.md) expands it
+to 71 families/101 records.
+Its audio code runs locally with exact compatible cached weights; generic
+presence, public-payload recovery and origin authentication remain separate.
+Noise and partial-mark misses are retained. Video implementation is inspected,
+not executed. Neither path is admitted to serving or the fast gate.

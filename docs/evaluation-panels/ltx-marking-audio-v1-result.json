@@ -1,0 +1,328 @@
+{
+  "schema": "chipmunk.ltx-public-marking-contract-result/1",
+  "original_science_commit": "17002e2cc86d59b51aab32ac36024f6cc7db9902",
+  "continuation_science_commit": "55786dc3ac22cf41c0af9264abd80dd8cf639e32",
+  "private_freeze_sha256": "322900978f2813ce859f618acb0b66a77b6f24244bcf56e4b647dbcd4e5dc0f9",
+  "native": {
+    "policy": {
+      "schema": "chipmunk.ltx-public-audio-contract/1",
+      "rates": [
+        24000,
+        48000
+      ],
+      "carriers": 4,
+      "seconds": 2,
+      "conditions": [
+        "unmarked",
+        "matching-public-payload",
+        "opposite-public-payload",
+        "mixed-channel-payloads",
+        "middle-only-mark",
+        "marked-plus-noise"
+      ],
+      "native_cases": 48,
+      "file_cases": 32,
+      "codecs": [
+        "pcm16-wav",
+        "aac128k-m4a"
+      ],
+      "files": "For each of8 rate/carrier groups, original and matching mark through both codecs. Decode first exact2seconds at original native rate, preserve stereo,bind file/decoded sample hashes and actual stream timing. AAC encoder delay is decoded by ffmpeg,not treated as a forged offset.",
+      "scope": "Authored mathematical carriers and native Tensor/file contract,not human speech/provider export accuracy,not lip-sync or video marking.",
+      "upstream": "Pinned inspected AST definitions only; omit upstream create/weight-loader/package/file-decode entry points. Reuse exact hash-matching restricted-loaded16-bit generator/detector weights.",
+      "parity": "Each native detector response compared to independent channel-presence and exact integer binomial-bit arithmetic. First generator and detector input repeat bitwise. Stereo channels remain separate mono batch items; no resampling in marker.",
+      "meaning": "Upstream audio detected is family presence,not a payload test. The returned payload field is the baked expected payload,not recovered bits. Matching public marks are copyable and cannot authenticate AI origin or stop detection.",
+      "missing": "Preserve all80 planned cases and errors. Missing/unavailable checks are not negative or original. No inference from absent marks.",
+      "guard": {
+        "seconds": 900,
+        "rss_gib": 6,
+        "available_mib": 1536,
+        "disk_mib": 1536
+      },
+      "used_in_confidence": false,
+      "early_stop_eligible": false,
+      "serving_admitted": false
+    },
+    "freeze_sha256": "322900978f2813ce859f618acb0b66a77b6f24244bcf56e4b647dbcd4e5dc0f9",
+    "cases": 80,
+    "summary": {
+      "aac128k-m4a/matching-public-payload": {
+        "cases": 8,
+        "family_presence": 8,
+        "exact_public_payload_with_presence": 8,
+        "bit_matches": {
+          "16": 8
+        }
+      },
+      "aac128k-m4a/unmarked": {
+        "cases": 8,
+        "family_presence": 0,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "5": 5,
+          "8": 1,
+          "6": 2
+        }
+      },
+      "marked-plus-noise": {
+        "cases": 8,
+        "family_presence": 0,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "7": 3,
+          "8": 3,
+          "11": 1,
+          "9": 1
+        }
+      },
+      "matching-public-payload": {
+        "cases": 8,
+        "family_presence": 8,
+        "exact_public_payload_with_presence": 8,
+        "bit_matches": {
+          "16": 8
+        }
+      },
+      "middle-only-mark": {
+        "cases": 8,
+        "family_presence": 1,
+        "exact_public_payload_with_presence": 1,
+        "bit_matches": {
+          "15": 2,
+          "16": 3,
+          "13": 1,
+          "11": 1,
+          "14": 1
+        }
+      },
+      "mixed-channel-payloads": {
+        "cases": 8,
+        "family_presence": 8,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "8": 2,
+          "12": 1,
+          "10": 1,
+          "11": 1,
+          "9": 2,
+          "7": 1
+        }
+      },
+      "opposite-public-payload": {
+        "cases": 8,
+        "family_presence": 8,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "0": 8
+        }
+      },
+      "pcm16-wav/matching-public-payload": {
+        "cases": 8,
+        "family_presence": 8,
+        "exact_public_payload_with_presence": 8,
+        "bit_matches": {
+          "16": 8
+        }
+      },
+      "pcm16-wav/unmarked": {
+        "cases": 8,
+        "family_presence": 0,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "5": 4,
+          "7": 2,
+          "9": 1,
+          "6": 1
+        }
+      },
+      "unmarked": {
+        "cases": 8,
+        "family_presence": 0,
+        "exact_public_payload_with_presence": 0,
+        "bit_matches": {
+          "5": 3,
+          "7": 2,
+          "4": 1,
+          "9": 1,
+          "6": 1
+        }
+      }
+    },
+    "model_load_receipts": {
+      "detector": {
+        "checkpoint_sha256": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+        "source_state_tensors": 54,
+        "loaded_state_tensors": 40,
+        "all_loaded_tensors_verified": true,
+        "parameters": 8647298,
+        "weights_only": true,
+        "unused_training_metadata_resolved": false,
+        "unrestricted_pickle_used": false
+      },
+      "generator": {
+        "checkpoint_sha256": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+        "source_state_tensors": 101,
+        "loaded_state_tensors": 73,
+        "all_loaded_tensors_verified": true,
+        "parameters": 14675873,
+        "weights_only": true,
+        "unused_training_metadata_resolved": false,
+        "unrestricted_pickle_used": false
+      }
+    },
+    "generator_forwards": 17,
+    "detector_forwards": 81,
+    "exact_first_generator_and_detector_repeats": true,
+    "journal_sha256": "1989fadde428588bf3de3239c46c6b8a8ae42577e370e87d0675f4b31b42ff04",
+    "provider_authenticated": false,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "early_stop_eligible": false,
+    "customer_inputs": 0,
+    "outside_human_reviewers": 0,
+    "new_weights_downloaded": 0
+  },
+  "independent_saved_sample_and_file_review": {
+    "schema": "chipmunk.ltx-audio-complete-sample-review/1",
+    "cases": 80,
+    "native_channel_sample_responses_replayed": 11520000,
+    "actual_file_decodes_and_clocks_replayed": 32,
+    "independent_bit_tests_replayed": 80,
+    "first_failed_attempt_prefix_cases_exact": 6,
+    "complete_summary_exact": true,
+    "new_model_forwards": 0,
+    "outside_human_reviewers": 0,
+    "provider_authenticated": false,
+    "used_in_confidence": false,
+    "early_stop_eligible": false,
+    "reviewer_sha256": "585ceeaede9d9ce3881509388f2d1dafd9bb211e2db7f7b3c7d3660717773948"
+  },
+  "resource_profiles": {
+    "failed_original": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_ltx_marking_audio_v1",
+      "child_exit_code": 1,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1123631104,
+      "sample_errors": 0,
+      "duration_s": 19.171655249898322,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "complete_native": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.continue_ltx_marking_audio_v1",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1090846720,
+      "sample_errors": 1,
+      "duration_s": 31.379511624923907,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    },
+    "complete_review": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_ltx_marking_audio_v1",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 64618496,
+      "sample_errors": 0,
+      "duration_s": 3.154596417094581,
+      "seconds_limit": 900,
+      "private_arguments_withheld": true
+    }
+  },
+  "retained_original_failure": {
+    "persisted_cases": 6,
+    "error": "FileNotFoundError while writing first codec packet",
+    "original_files_unchanged": true,
+    "final_model_call_counter": null,
+    "scope": "The failed attempt did not write final counters; the complete continuation counters do not include that earlier work."
+  },
+  "source_lock": {
+    "schema": "chipmunk.ltx-marking-source/1",
+    "github_revision": "4f521619ae0029e8fbb64d555030c2b121a33b4f",
+    "hub_revision": "718f58d124e0acf58da85752692d93b0bd54c38a",
+    "files": {
+      "hf-README.md": {
+        "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/README.md",
+        "sha256": "e6f382980dc3349110daebda75372bb1d6522c5d3972597b00d00bb23a7a9f9d",
+        "bytes": 6328
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "bytes": 11358
+      },
+      "hf-LICENSE-videoseal": {
+        "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/LICENSE-videoseal",
+        "sha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+        "bytes": 1087
+      },
+      "hf-LICENSE-audioseal": {
+        "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/LICENSE-audioseal",
+        "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+        "bytes": 1088
+      },
+      "video_seal.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/video_seal.py",
+        "sha256": "b6a6904c7f5c646cf776b92e438820531e7bdae2f27af791ed58880439d7d3f8",
+        "bytes": 5675
+      },
+      "__init__.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/__init__.py",
+        "sha256": "062550eb2dc3ae6d88f57241d4800b9acf20c0f0a4c39520d5726a88e11d2764",
+        "bytes": 2549
+      },
+      "types.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/types.py",
+        "sha256": "2aebc94c9d59458c7ed7facc742a7b2426f37fd6d54842644c1123d7c110aaeb",
+        "bytes": 1614
+      },
+      "mark_detection.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/mark_detection.py",
+        "sha256": "8c97285096cdd315fd1069e24ee222412e25c7b5e65bbf0cdad1655047bdd5de",
+        "bytes": 1291
+      },
+      "audio_seal.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/audio_seal.py",
+        "sha256": "687f3dc7c7d2d6702fd381a78dbde01ad6fc1ae07f48eca6fc0709aac418e541",
+        "bytes": 5028
+      },
+      "hf-pixelseal.yaml": {
+        "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/pixelseal.yaml",
+        "sha256": "96c4a448f7d81810780e5bde5a51b039db544b7ec2baf65a605302c1b17362c9",
+        "bytes": 940
+      },
+      "hf-videoseal_attenuation.yaml": {
+        "url": "https://huggingface.co/Lightricks/LTX-2-Marking/resolve/718f58d124e0acf58da85752692d93b0bd54c38a/videoseal_attenuation.yaml",
+        "sha256": "e0d71354f8945cf600bd4ebd5e2641a9c879e017548dd6cc8a6de10239d7e821",
+        "bytes": 141
+      },
+      "score.py": {
+        "url": "https://raw.githubusercontent.com/Lightricks/LTX-2/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/score.py",
+        "sha256": "caa04450ebb0af1f1f187bf88290a9d34976beaf8dcd1d65d6cbd94db353a42d",
+        "bytes": 1289
+      }
+    },
+    "audio_checkpoint_sha256": {
+      "generator": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+      "detector": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9"
+    },
+    "weight_license": "MIT; code Apache-2.0; generative LTX weights have separate terms and are not used",
+    "scope": "Audio implementation/native24/48kHz PCM contract only; video PixelSeal source inspected but not executed"
+  },
+  "outside_human_reviewers": 0,
+  "customer_inputs": 0,
+  "provider_verification_calls": 0,
+  "new_weight_downloads": 0,
+  "raw_audio_or_probability_arrays_published": false,
+  "serving_changed": false,
+  "limits": [
+    "Authored mathematical carriers, not natural speech, real provider exports or a population error rate.",
+    "Compatible published audio marking arithmetic executed; full upstream package/loader and video PixelSeal were not executed.",
+    "Public pattern presence is not authenticated provider involvement or AI authorship.",
+    "Noise and partial-mark misses are retained; absent marks never establish originality.",
+    "Sample-array and file replay is not another neural forward pass or outside human review."
+  ],
+  "exporter_sha256": "d7c119db1fffdfd9ffa8d5b9d1fd393e747bf5089c4a3b596789dd2547579e0f"
+}

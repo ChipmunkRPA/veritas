@@ -88,7 +88,7 @@ def render(catalog):
         'A video-container audio check covers sound only. A provider classifier score is not a verified watermark hit.',
         '',
         'See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) '
-        'and [latest search findings](provider-signal-broad-search-2026-11-08.md) for exact products, controls, dates, '
+        'and [latest search findings](provider-signal-followup-2026-11-08.md) for exact products, controls, dates, '
         'limits, contradictions and qualification requirements.',
         '',
         '| Provider family | Image | Video | Audio | Writing | Reviewed |',

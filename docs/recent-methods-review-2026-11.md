@@ -117,3 +117,12 @@ All 280 planned files and 600 outcomes completed. It removes two ordinary scene-
 substitution alerts but adds no swap beyond appearance recalibration and fails
 the unchanged replacement gates. Coarse background colour is insufficient; no
 new confidence or serving cue was admitted.
+
+The [current permission review](lip-sync-source-review-2026-11-08.md) excludes
+unresolved pretrained lip-sync assets without substituting missing weights.
+The resulting [LTX public-pattern audio study](ltx-marking-audio-v1-result.md)
+completes all 80 cases and a separate full audit; wrong-payload presence and
+noisy/partial misses remain retained. The expanded
+[provider review](provider-signal-followup-2026-11-08.md) also reads textGrain
+generation/detection mathematics while preserving its secret-key dependency.
+These are distinct from adopting a new lip-sync or passage detector.

@@ -1,7 +1,7 @@
 {
   "schema": "provider-signals/1",
   "reviewed_utc": "2026-11-08",
-  "provider_families": 67,
+  "provider_families": 71,
   "purpose": "Research and implementation inventory; never uploaded-file evidence or a guarantee of universal provider coverage.",
   "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage. This is a curated provider-family inventory, not an exhaustive market census. Provider verification scores and watermark-family hits are distinct from trusted documentary declarations.",
   "runtime": {
@@ -16,7 +16,8 @@
     "local_document_c2pa": "not integrated; plain text has no file credentials, and supported structured document metadata remains unverified",
     "public_audioseal": "isolated authored-signal evaluation completed; not admitted to serving or confidence",
     "unchanged": "Statistical calibrations, model weights, prepayment requirement and cloud deployment.",
-    "public_visual_wam": "isolated authored image/video contract completed; not admitted to serving, AI confidence or early stopping"
+    "public_visual_wam": "isolated authored image/video contract completed; not admitted to serving, AI confidence or early stopping",
+    "public_ltx_audio": "80-case native public audio pattern contract plus complete sample/codec audit; advisory research only, not serving"
   },
   "shortcut_rules": [
     "A negative, absent, unsupported, stripped, failed or inconclusive check continues normal detection; never infer originality.",
@@ -93,12 +94,14 @@
           "modalities": [
             "text"
           ],
-          "product_scope": "Approved text-verification access",
+          "product_scope": "textGrain: opt-in selected API models globally; eligible ChatGPT/Codex text in the EU, rollout dependent",
           "verification_route": "restricted_access",
           "source_urls": [
-            "https://developers.openai.com/api/docs/guides/content-provenance"
+            "https://developers.openai.com/api/docs/guides/content-provenance",
+            "https://openai.com/index/eu-text-provenance/",
+            "https://cdn.openai.com/pdf/e9508624-d767-41b6-a26d-e34ca798ada6/textgrain-entropy-calibrated-watermarking-for-language-model-text.pdf"
           ],
-          "limitations": "Access by application; not a public local production key.",
+          "limitations": "Published entropy-calibrated token-choice method requires a secret key for verification, not a spacing signature. Detector access is application-based; planned open-source availability does not establish a released production key or local decoder. Short, constrained, edited or translated text may evade detection.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
         },
@@ -164,7 +167,9 @@
         "site:developers.openai.com C2PA watermark image video Sora",
         "site:platform.openai.com watermark audio text",
         "site:developers.openai.com Sora C2PA watermark video",
-        "site:openai.com Sora C2PA watermark"
+        "site:openai.com Sora C2PA watermark",
+        "textGrain watermark text verification official OpenAI",
+        "textGrain entropy calibrated watermark technical report"
       ]
     },
     {
@@ -1831,7 +1836,8 @@
       "search_queries": [
         "watermark generated content [domains: cohere.com]",
         "watermark text detect command [domains: cohere.com, docs.cohere.com]",
-        "site:cohere.com watermark generated text"
+        "site:cohere.com watermark generated text",
+        "site:docs.cohere.com watermark"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1883,7 +1889,8 @@
       "search_queries": [
         "watermark content authenticity [domains: help.udio.com, udio.com]",
         "watermark provenance content detection generated audio [domains: udio.com, help.udio.com]",
-        "site:udio.com watermark provenance AI music detection"
+        "site:udio.com watermark provenance AI music detection",
+        "site:udio.com watermark"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1902,7 +1909,8 @@
       "search_queries": [
         "watermark metadata [domains: docs.ideogram.ai]",
         "watermark AI generated metadata provenance [domains: ideogram.ai, docs.ideogram.ai]",
-        "site:ideogram.ai watermark content credentials metadata"
+        "site:ideogram.ai watermark content credentials metadata",
+        "site:ideogram.ai watermark C2PA provenance"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1911,7 +1919,13 @@
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-08"
+      "reviewed_utc": "2026-11-08",
+      "review_notes": {
+        "sources": [
+          "https://ideogram.ai/legal/non-commercial-model-agreement/"
+        ],
+        "finding": "The model agreement reserves possible safeguards including watermarking; this is not a documented shipped marker or decoder. Noncommercial assets were not acquired or used."
+      }
     },
     {
       "id": "recraft",
@@ -1921,7 +1935,8 @@
       "search_queries": [
         "watermark content credentials [domains: recraft.ai]",
         "watermark AI content credentials detect [domains: recraft.ai]",
-        "site:recraft.ai watermark C2PA content credentials"
+        "site:recraft.ai watermark C2PA content credentials",
+        "site:recraft.ai machine-readable watermarks developer terms"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
       "modality_review": {
@@ -1930,7 +1945,14 @@
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-08"
+      "reviewed_utc": "2026-11-08",
+      "review_notes": {
+        "sources": [
+          "https://www.recraft.ai/legal/developer-terms",
+          "https://feedback.recraft.ai/feature-requests/p/incorporate-content-credentials-into-image-metadata"
+        ],
+        "finding": "Developer terms 6.4 reserve conditional marking; the separate July feature thread records work in progress. Neither supplies a deployed file format, verifier or genuine export. Keep the four modality gaps."
+      }
     },
     {
       "id": "cartesia",
@@ -2189,6 +2211,9 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "finding": "Search hits for voices named Watermark are user-authored voice listings, not a provider watermark specification. The documentation-focused search returned no compatible mark."
       }
     },
     {
@@ -2200,7 +2225,8 @@
       "search_queries": [
         "watermark provenance [domains: docs.hume.ai, hume.ai]",
         "site:dev.hume.ai \"watermark\"",
-        "site:hume.ai watermark Octave detect generated audio"
+        "site:hume.ai watermark Octave detect generated audio",
+        "site:hume.ai watermark audio detection"
       ],
       "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
       "modality_review": {
@@ -2219,7 +2245,8 @@
       "search_queries": [
         "site:docs.play.ht watermark",
         "AI watermark detector [domains: docs.play.ai, play.ai, docs.play.ht]",
-        "site:docs.play.ai \"watermark\""
+        "site:docs.play.ai \"watermark\"",
+        "site:play.ai watermark detection"
       ],
       "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
       "modality_review": {
@@ -2246,6 +2273,42 @@
           "limitations": "Help documents a mark on free exports and watermark-free paid exports. It does not specify a hidden decoder or establish behavior for open weights, Desktop, API exports or every third-party model.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Opt-in LTX-2 public marking pipeline; not all LTX Studio/API/open-weight exports",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://huggingface.co/Lightricks/LTX-2-Marking/tree/718f58d124e0acf58da85752692d93b0bd54c38a",
+            "https://github.com/Lightricks/LTX-2/blob/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/docs/marking.md",
+            "https://github.com/Lightricks/LTX-2/blob/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/audio_seal.py"
+          ],
+          "limitations": "Audio detected reports generic family presence, not baked-payload validation. Returned payload is expected, not recovered. Stereo channels remain separate, native24/48kHz. Wrong/mixed payload presence and5dB-noise misses were demonstrated locally. Public post-hoc marks cannot authenticate AI origin; HDR may have audio only and source audio in A2Vid is unmarked.",
+          "runtime_status": "isolated_80_case_native_audio_contract_complete_not_serving",
+          "automated_shortcut": "disabled",
+          "availability": "opt_in_documented",
+          "license": "MIT marking weights/configs; Apache-2.0 LTX code. Generative LTX model weights have separate terms and were not used."
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Opt-in LTX-2 public marking pipeline; not all LTX Studio/API/open-weight exports",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://huggingface.co/Lightricks/LTX-2-Marking/tree/718f58d124e0acf58da85752692d93b0bd54c38a",
+            "https://github.com/Lightricks/LTX-2/blob/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/docs/marking.md",
+            "https://github.com/Lightricks/LTX-2/blob/4f521619ae0029e8fbb64d555030c2b121a33b4f/packages/ltx-pipelines/src/ltx_pipelines/marking/video_seal.py"
+          ],
+          "limitations": "PixelSeal256-bit mark, opt-in SDR generation; HDR video marking is skipped. Published bit-test decision and sampled frames are not signatures or AI confidence. No video weights loaded, native video detector run or production export fixture qualified in this review.",
+          "runtime_status": "source_inspected_not_executed",
+          "automated_shortcut": "disabled",
+          "availability": "opt_in_documented",
+          "license": "MIT marking weights/configs; Apache-2.0 LTX code. Generative LTX model weights have separate terms and were not used."
         }
       ],
       "review_status": "scoped_documentation",
@@ -2253,14 +2316,16 @@
       "search_queries": [
         "watermark provenance [domains: ltx.studio, lightricks.com]",
         "site:docs.ltx.video watermark content credentials",
-        "watermark content credentials LTX [domains: lightricks.com, ltx.io, docs.ltx.video, github.com/Lightricks]"
+        "watermark content credentials LTX [domains: lightricks.com, ltx.io, docs.ltx.video, github.com/Lightricks]",
+        "LTX-2-Marking VideoSeal AudioSeal official public detector payload"
       ],
       "modality_review": {
         "image": "not_established_by_this_review",
         "video": "scoped_signal_documented",
-        "audio": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
-      }
+      },
+      "source_review_note": "The local contract verifies published audio marking arithmetic with exact cached weight identities, not genuine LTX export provenance. Current hosted exports may use different settings. Public expected payloads are copyable and generic presence is insufficient for attribution."
     },
     {
       "id": "perplexity",
@@ -2270,7 +2335,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "watermark AI generated [domains: perplexity.ai]",
-        "watermark AI provenance text detection [domains: perplexity.ai, docs.perplexity.ai]"
+        "watermark AI provenance text detection [domains: perplexity.ai, docs.perplexity.ai]",
+        "site:perplexity.ai watermark generated text"
       ],
       "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output. An acceptable-use prohibition on removing marks is not a deployment or verification specification.",
       "modality_review": {
@@ -2288,7 +2354,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "watermark provenance detector [domains: ibm.com]",
-        "Granite watermark text provenance detection [domains: ibm.com, research.ibm.com, ibm-granite.github.io]"
+        "Granite watermark text provenance detection [domains: ibm.com, research.ibm.com, ibm-granite.github.io]",
+        "site:ibm.com granite watermark AI generated text"
       ],
       "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output. General educational/research articles do not establish Granite production marks or a compatible verifier.",
       "modality_review": {
@@ -2297,7 +2364,14 @@
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
       },
-      "source_review_note": "Granite checkpoint model.sig signatures authenticate a model download, not an article generated with that model. General watermark commentary is not a deployed Granite output verifier."
+      "source_review_note": "Granite checkpoint model.sig signatures authenticate a model download, not an article generated with that model. General watermark commentary is not a deployed Granite output verifier.",
+      "review_notes": {
+        "sources": [
+          "https://www.ibm.com/think/news/llm-watermarks-what-you-need-to-know",
+          "https://research.ibm.com/blog/tabular-data-watermark"
+        ],
+        "finding": "Explanations of other providers and synthetic-table research do not establish watermark deployment in Granite passage outputs."
+      }
     },
     {
       "id": "ai21",
@@ -2307,7 +2381,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "watermark generated text [domains: ai21.com]",
-        "watermark text AI generated Jamba [domains: ai21.com, docs.ai21.com]"
+        "watermark text AI generated Jamba [domains: ai21.com, docs.ai21.com]",
+        "site:ai21.com watermark text"
       ],
       "gap": "Focused primary-source searches did not establish a compatible public production verification route. This is a review gap, not a claim of unmarked output.",
       "modality_review": {
@@ -2505,7 +2580,8 @@
         "\"Content Credentials\" \"Canva\" [domains: canva.com]",
         "site:canva.com/help \"Content Credentials\"",
         "site:canva.com \"Dream Lab\" \"watermark\"",
-        "site:canva.com AI generated content credentials watermark exports"
+        "site:canva.com AI generated content credentials watermark exports",
+        "site:canva.com AI content credentials C2PA watermark"
       ],
       "reviewed_policy_urls": [
         "https://www.canva.com/policies/api-services-sch1/"
@@ -2517,6 +2593,12 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.canva.com/policies/ai-product-terms/?frame=0"
+        ],
+        "finding": "Preservation of existing provenance including C2PA is required. This does not specify marking on every Canva export or retention of each partner mark."
       }
     },
     {
@@ -2528,7 +2610,8 @@
       "search_queries": [
         "\"watermark\" \"provenance\" [domains: leonardo.ai, intercom.help/leonardo-ai]",
         "site:leonardo.ai \"content credentials\" -site:app.leonardo.ai",
-        "site:leonardo.ai watermark content credentials C2PA"
+        "site:leonardo.ai watermark content credentials C2PA",
+        "site:leonardo.ai content credentials watermark"
       ],
       "source_review_note": "User generation-gallery prompts mentioning no watermark or metadata are not provider documentation and were excluded. Common ownership with Canva does not establish identical export marking.",
       "gap": "No compatible production verification route established by the focused primary-source searches. This does not establish absence of marks; generic policies and unrelated editing watermarks do not count as detection coverage.",
@@ -2549,7 +2632,8 @@
         "watermark provenance AI audio [domains: descript.com, help.descript.com, murf.ai]",
         "site:help.descript.com \"AI\" \"watermark\"",
         "site:help.descript.com \"watermark\" \"export\"",
-        "site:descript.com watermark invisible audio content credentials"
+        "site:descript.com watermark invisible audio content credentials",
+        "site:descript.com watermark AI"
       ],
       "gap": "No compatible production verification route established by the focused primary-source searches. This does not establish absence of marks; generic policies and unrelated editing watermarks do not count as detection coverage.",
       "modality_review": {
@@ -2557,6 +2641,12 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.descript.com/tools/add-watermark-to-video"
+        ],
+        "finding": "An arbitrary user-added logo is a branding layer, not authenticated AI authorship. No compatible hidden output mark was established."
       }
     },
     {
@@ -2768,7 +2858,8 @@
       "review_status": "verification_gap",
       "reviewed_utc": "2026-11-08",
       "search_queries": [
-        "site:freepik.com content credentials watermark AI generated images videos"
+        "site:freepik.com content credentials watermark AI generated images videos",
+        "site:freepik.com AI content credentials"
       ],
       "gap": "Focused primary-source searches did not establish a compatible production marking/verification specification. This is a documented search gap, not proof that outputs have no marks.",
       "reviewed_policy_urls": [
@@ -2790,7 +2881,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "site:wellsaidlabs.com watermark AI audio detection",
-        "site:wellsaid.io watermark audio"
+        "site:wellsaid.io watermark audio",
+        "site:wellsaid.io watermark synthetic audio"
       ],
       "gap": "Focused primary-source searches did not establish a compatible production marking/verification specification. This is a documented search gap, not proof that outputs have no marks.",
       "reviewed_policy_urls": [
@@ -2801,6 +2893,12 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.wellsaid.io/wsa-online"
+        ],
+        "finding": "Retrieved service and cloning terms do not establish a compatible watermark decoder. Absence of a search result is not proof of unmarked audio."
       }
     },
     {
@@ -2811,7 +2909,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "site:voicemod.net watermark generated audio",
-        "site:voicemod.net watermark provenance audio"
+        "site:voicemod.net watermark provenance audio",
+        "site:voicemod.net watermark AI"
       ],
       "gap": "Focused primary-source searches did not establish a compatible production marking/verification specification. This is a documented search gap, not proof that outputs have no marks.",
       "source_review_note": "User-contributed soundboard items named Watermark or No TikTok Watermark were excluded; titles are not provider specifications.",
@@ -2851,7 +2950,8 @@
       "reviewed_utc": "2026-11-08",
       "search_queries": [
         "site:mureka.ai watermark generated audio",
-        "site:mureka.ai watermark detection generated audio"
+        "site:mureka.ai watermark detection generated audio",
+        "site:mureka.ai 隐式 水印 生成 标识"
       ],
       "gap": "Focused primary-source searches did not establish a compatible production marking/verification specification. This is a documented search gap, not proof that outputs have no marks.",
       "modality_review": {
@@ -2859,6 +2959,147 @@
         "video": "not_established_by_this_review",
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
+      },
+      "review_notes": {
+        "sources": [
+          "https://www.mureka.ai/zh-Hans/faq"
+        ],
+        "finding": "FAQ retrieval does not establish a machine-readable marking format or verifier; do not confuse paid download availability with provenance."
+      }
+    },
+    {
+      "id": "meitu",
+      "name": "Meitu / Xiuxiu / Meiyan",
+      "signals": [
+        {
+          "kind": "visible_label",
+          "modalities": [
+            "image",
+            "text"
+          ],
+          "product_scope": "Reviewed Xiuxiu HarmonyOS AI features: lower-left image notice and text/interface disclosure",
+          "verification_route": "visible_only",
+          "source_urls": [
+            "https://pro.meitu.com/xiuxiu/harmonyos-agreements/common/service.html?lang=en"
+          ],
+          "limitations": "Version- and feature-scoped visible notices; interface-only disclosure may not survive export. No hidden mark, signed credential, video/audio coverage or decoder established. A copied notice cannot authenticate origin.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "scoped_signal_documented",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "scoped_signal_documented"
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "Meitu 美图 AI 隐式 水印 内容 标识",
+        "site:meitu.com AI 生成 内容 标识"
+      ],
+      "review_notes": {
+        "sources": [
+          "https://pro.meitu.com/meiyan/agreements/ai-user-rule.html"
+        ],
+        "finding": "The separate Meiyan activity rules restrict generated content to personal uses. No sample was generated, copied or admitted as commercial test data."
+      }
+    },
+    {
+      "id": "tiangong",
+      "name": "Kunlun / Tiangong / Skywork",
+      "signals": [
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Tiangong May 2026 terms for generated documents/files: visible disclosures and implicit file-metadata labels",
+          "verification_route": "metadata_reader",
+          "source_urls": [
+            "https://static.tiangong.cn/fe/skywork-site-assets/html/agreement/web-20260514/serve.html"
+          ],
+          "limitations": "The reviewed document-generation product and clause 3.10 describe a labeling policy, not a cryptographic watermark or verified byte layout. No genuine export, signature or production decoder qualified. Do not extend to every Skywork deployment or to copied plain text.",
+          "runtime_status": "generic_unverified_metadata_path_only",
+          "automated_shortcut": "disabled"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "scoped_signal_documented"
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "Skywork 昆仑 天工 AI 隐式 水印 标识",
+        "site:skywork.ai watermark metadata"
+      ],
+      "review_notes": {
+        "finding": "Scope of image, audio and video exported marks remains unresolved. Third-party model explainers on a Skywork-hosted blog are not first-party evidence about those providers."
+      }
+    },
+    {
+      "id": "shutterstock",
+      "name": "Shutterstock",
+      "signals": [
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "July 2023 announcement of intended C2PA integration for its AI Image Generator",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://investor.shutterstock.com/news-releases/news-release-details/shutterstock-joins-content-authenticity-initiative"
+          ],
+          "limitations": "An old integration intention is not a confirmed current export contract. Product help establishes AI image generation but not completed provenance rollout. No authentic current fixture, issuer, signature or hard binding qualified.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled",
+          "availability": "announced_future"
+        }
+      ],
+      "review_status": "scoped_documentation",
+      "modality_review": {
+        "image": "announced_future_only",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "Shutterstock generative AI Content Credentials C2PA watermark"
+      ],
+      "review_notes": {
+        "sources": [
+          "https://www.shutterstock.com/help/en/articles/10594949-get-to-know-the-ai-generated-content-tool-on-shutterstock"
+        ],
+        "finding": "Retain the announcement date; Planned in the matrix means unconfirmed announcement, not a promised upcoming date. General C2PA support for audio/video is not Shutterstock product coverage."
+      }
+    },
+    {
+      "id": "getty",
+      "name": "Getty Images / iStock",
+      "signals": [],
+      "review_status": "not_established_by_this_review",
+      "modality_review": {
+        "image": "not_established_by_this_review",
+        "video": "not_established_by_this_review",
+        "audio": "not_established_by_this_review",
+        "text": "not_established_by_this_review"
+      },
+      "reviewed_utc": "2026-11-08",
+      "search_queries": [
+        "Getty Images generative AI provenance watermark official",
+        "Getty Images generative AI content credentials official"
+      ],
+      "review_notes": {
+        "sources": [
+          "https://www.gettyimages.co.uk/ai/generation/faqs"
+        ],
+        "finding": "The current FAQ names Bria as its generation provider. That relationship does not establish compatibility with Bria watermark verification or retention of credentials in Getty/iStock exports. A third-party metadata claim was excluded without first-party format/verification support."
       }
     }
   ],
@@ -2877,7 +3118,10 @@
     "2026-11-08: A multilingual/domain-focused search can find user-generated chatbot shares or voices named Watermark; these were excluded as provider-method evidence.",
     "2026-11-08: D-ID plan help and FAQ differ on watermark removability; neither establishes a hidden verifier.",
     "2026-11-08: Sora retained-video C2PA/moving marks/internal tracing are separate historical records; the current safety page reports product unavailability from 2026-04-26. Its image/audio provenance API does not thereby gain video support.",
-    "2026-11-08: Adobe Translate Audio/Video documentation explicitly describes credentials for AI speaker voices, translation and lip movements; it does not establish full-file synthesis."
+    "2026-11-08: Adobe Translate Audio/Video documentation explicitly describes credentials for AI speaker voices, translation and lip movements; it does not establish full-file synthesis.",
+    "2026-11-08 follow-up: OpenAI textGrain technical report explicitly needs the secret key. Publishing the method does not supply that production key; API watermark generation is opt-in for selected models, not universal text marking.",
+    "2026-11-08 follow-up: Recraft conditional marking terms, Canva preservation terms and Ideogram possible safeguards remain documentation observations, not deployed decoder coverage.",
+    "2026-11-08 follow-up: Getty naming Bria as its generation provider does not establish preserved Bria marks or verifier compatibility. Shutterstock July 2023 C2PA intention remains unconfirmed, not current export qualification."
   ],
   "provider_verifiers_called_during_initial_inventory_review": 0,
   "research_qualification": {
@@ -3017,5 +3261,26 @@
     "external_customer_routes_enabled": 0,
     "new_primary_route": "CapCut-family public media verification preview; browser-only contract not yet qualified",
     "guardrail": "Policies, search snippets, callback signatures, public research compatibility and blended classifier responses do not establish an authenticated file-level watermark hit."
+  },
+  "latest_local_qualification": {
+    "date": "2026-11-08",
+    "family": "ltx",
+    "scope": "80 authored native/file audio cases; video source reviewed only",
+    "report": "ltx-marking-audio-v1-result.md",
+    "scoped_records": 98,
+    "families": 67,
+    "customer_uploads": 0,
+    "early_stop_enabled": false
+  },
+  "latest_search": {
+    "date": "2026-11-08",
+    "report": "provider-signal-followup-2026-11-08.md",
+    "families": 71,
+    "scoped_records": 101,
+    "families_with_no_scoped_specification": 20,
+    "provider_verification_requests": 0,
+    "customer_uploads": 0,
+    "external_customer_routes_enabled": 0,
+    "scope": "Cross-modality follow-up, textGrain method review, 18 targeted existing-family searches and four additional provider families. Record counts include policy and unconfirmed announcements, not operational detectors."
   }
 }

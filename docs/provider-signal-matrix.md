@@ -1,13 +1,13 @@
 # Provider marking coverage matrix
 
-Inventory updated 2026-11-08: **67 families, 96 scoped records**, with **19 families remaining explicit review gaps**.
+Inventory updated 2026-11-08: **71 families, 101 scoped records**, with **20 families remaining explicit review gaps**.
 Records include planned features, public research and visible notices; these counts are not working detectors.
 
 Each cell records documentation scope, not measured accuracy or verified production compatibility. “Gap” means not established by this review, including where the provider does not offer that modality. “Planned” means an announcement only; “Historical” is not current export coverage. “Research” identifies a released scheme, without claiming production-provider compatibility. “Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. A generic policy with unresolved export scope does not fill the four cells.
 
 All external verification routes are disabled for customer files. Only the existing trusted, valid, current-file-bound, explicitly AI-declaring Content Credentials gate can skip statistical checks. A video-container audio check covers sound only. A provider classifier score is not a verified watermark hit.
 
-See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) and [latest search findings](provider-signal-broad-search-2026-11-08.md) for exact products, controls, dates, limits, contradictions and qualification requirements.
+See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) and [latest search findings](provider-signal-followup-2026-11-08.md) for exact products, controls, dates, limits, contradictions and qualification requirements.
 
 | Provider family | Image | Video | Audio | Writing | Reviewed |
 |---|---|---|---|---|---|
@@ -57,7 +57,7 @@ See the [source catalog](provider-signals-catalog.json), [coverage and gate](pro
 | Fish Audio | Gap | Gap | Gap | Gap | 2026-11-08 |
 | Hume | Gap | Gap | Gap | Gap | 2026-11-08 |
 | PlayAI / PlayHT | Gap | Gap | Gap | Gap | 2026-11-08 |
-| [Lightricks / LTX](https://help.ltx.io/hc/en-us/p/ltx-studio) | Gap | Export mark | Gap | Gap | 2026-11-08 |
+| [Lightricks / LTX](https://help.ltx.io/hc/en-us/p/ltx-studio) | Gap | Export mark, Watermark | Watermark | Gap | 2026-11-08 |
 | Perplexity | Gap | Gap | Gap | Gap | 2026-11-08 |
 | IBM / Granite | Gap | Gap | Gap | Gap | 2026-11-08 |
 | AI21 / Jamba | Gap | Gap | Gap | Gap | 2026-11-08 |
@@ -78,5 +78,9 @@ See the [source catalog](provider-signals-catalog.json), [coverage and gate](pro
 | Voicemod | Gap | Gap | Gap | Gap | 2026-11-08 |
 | OpenMOSS / MOSI.AI | Gap | Gap | Gap | Gap | 2026-11-08 |
 | Mureka | Gap | Gap | Gap | Gap | 2026-11-08 |
+| [Meitu / Xiuxiu / Meiyan](https://pro.meitu.com/xiuxiu/harmonyos-agreements/common/service.html?lang=en) | Visible label | Gap | Gap | Visible label | 2026-11-08 |
+| [Kunlun / Tiangong / Skywork](https://static.tiangong.cn/fe/skywork-site-assets/html/agreement/web-20260514/serve.html) | Gap | Gap | Gap | Label policy | 2026-11-08 |
+| [Shutterstock](https://investor.shutterstock.com/news-releases/news-release-details/shutterstock-joins-content-authenticity-initiative) | Planned | Gap | Gap | Gap | 2026-11-08 |
+| Getty Images / iStock | Gap | Gap | Gap | Gap | 2026-11-08 |
 
 Generated from the catalog with `python backend/scripts/provider_signal_inventory.py --write`. Use `--check` to detect stale counts or a matrix that no longer matches the research records.

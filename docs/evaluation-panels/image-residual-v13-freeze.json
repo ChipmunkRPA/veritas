@@ -1,0 +1,46 @@
+{
+  "policy": {
+    "version": 13,
+    "source_scope": "Previously consumed project sources only; no fresh accuracy claim.",
+    "fit": "120 v11 source groups (specialist_cal and fusion_fit); exact source RGB masks, original/lighting/jpeg55 variants and genuine ordinary-patch controls.",
+    "point": "60 source-disjoint v11 fusion_cal groups; at most5% genuine groups with original or ordinary-patch response strictly above point; no AI outcomes used.",
+    "diagnostic": "60 v11 confirmation plus48 consumed v12 groups; no role changes or case omission.",
+    "arms": [
+      "residual_features",
+      "residual_features_projected"
+    ],
+    "projection": "Remove top2 fit-genuine standardized intervention-delta covariance directions. Same augmented fit samples, L2=.01, logistic ranking head in both arms.",
+    "localization": "Source-resolution measurements pooled to64x64. Median3x3 response,8-connected components with>=16 cells. Edge-aligned source coordinate projection.",
+    "limits": "No pretrained weights or neural forwards. No confidence calibration, full-image authorship, fresh-source, unseen-generator, external reviewer or serving admission claim.",
+    "continuation": "Require higher mean edited IoU and more IoU>=.3 cases than current, no extra genuine flags, and ordinary-control flags<=5%; passing needs real baseline ordinary controls and fresh confirmation before any promotion.",
+    "serving_admitted": false
+  },
+  "plan_sha256": "2e498783105fedc1fb8d25deac787a75169999dbf4eeca09cd1dca7c56ed9085",
+  "code_sha256": {
+    "backend/scripts/image_residual_localizer_v13.py": "b313d81c1c9621137d70b69b3c3a39e5a05aa17d8029fcdd3c5b2467ff6d68cc",
+    "backend/scripts/run_image_residual_v13.py": "458efb42772ce35f3137df280b3c90a35f55eb13314b74de4722187cfdfce2cb",
+    "backend/scripts/image_residual_runtime_v13.py": "4c3cd5d035e56063265409703d2408f765e637113b06c0e36aa14256a61b0912",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_image_residual_v13.py": "7c010f5942d52e0d24ef9018f79e2fdf09661ae0235461c432e5e3895113b794",
+    "docs/image-residual-v13-protocol.md": "404e9075fc498caf3bf6e60f7989c417519629f16cf193c344a2e329b3a56ae1",
+    "backend/scripts/run_image_supported_v11.py": "8afa74bcc894d627c1903f25dd23a8dac0f12905275e21c831503e1e9bcf94ef",
+    "backend/scripts/run_image_confirmation_v12.py": "2789d99d8f050edb8b08075894d1ed51da9ebac139e6fb8415d6b2ee49db7d45",
+    "backend/scripts/prepare_image_supported_v11.py": "3964f617320865b0f82ae975463dd9ff6c88fa080d1ff96699b277b18d93d3e0"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "Pillow": "12.3.0"
+  },
+  "new_feature_extractions_before_freeze": 0,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "schema": "chipmunk.image-residual-development-freeze/13",
+  "source_group_counts": {
+    "fit": 120,
+    "point": 60,
+    "diagnostic": 108
+  },
+  "feature_cases_planned": 1344,
+  "private_source_inventory_published": false
+}

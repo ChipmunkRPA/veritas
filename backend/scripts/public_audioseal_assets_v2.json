@@ -1,0 +1,866 @@
+{
+  "schema": "chipmunk.public-audioseal-assets/v2",
+  "code_revision": "1496f7662d6aa625602bb0dcd1b4997b63b47609",
+  "model_revision": "3c19eba53390776cf2cc9ed5f6c9ac67ce72ecba",
+  "assets": [
+    {
+      "path": "audioseal-source.zip",
+      "bytes": 2284444,
+      "sha256": "25889ed0e93b690016a823ee90d064d372f4bd16aa1f3c9d5920235a4192cb61",
+      "source": "https://codeload.github.com/facebookresearch/audioseal/zip/1496f7662d6aa625602bb0dcd1b4997b63b47609"
+    },
+    {
+      "path": "detector_base.pth",
+      "bytes": 34667641,
+      "sha256": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+      "source": "https://huggingface.co/facebook/audioseal/resolve/3c19eba53390776cf2cc9ed5f6c9ac67ce72ecba/detector_base.pth"
+    },
+    {
+      "path": "generator_base.pth",
+      "bytes": 58805980,
+      "sha256": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+      "source": "https://huggingface.co/facebook/audioseal/resolve/3c19eba53390776cf2cc9ed5f6c9ac67ce72ecba/generator_base.pth"
+    },
+    {
+      "path": "omegaconf-2.3.0-py3-none-any.whl",
+      "bytes": 79500,
+      "sha256": "7b4df175cdb08ba400f45cae3bdcae7ba8365db4d165fc65fd04b050ab63b46b",
+      "source": "https://files.pythonhosted.org/packages/e3/94/1843518e420fa3ed6919835845df698c7e27e183cb997394e4a670973a65/omegaconf-2.3.0-py3-none-any.whl"
+    },
+    {
+      "path": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "bytes": 117034,
+      "sha256": "f224469b4168294902bb1efa80a8bf7855f24c99aef99cbefc1bcd3cce77881b",
+      "source": "https://files.pythonhosted.org/packages/3e/38/7859ff46355f76f8d19459005ca000b6e7012f2f1ca597746cbcd1fbfe5e/antlr4-python3-runtime-4.9.3.tar.gz"
+    },
+    {
+      "path": "publisher-model-README.md",
+      "bytes": 3929,
+      "sha256": "b9cc1fdec7a5fd200032605fe62f23bdfd1bc7e2bc35abdffd38951dff3a73d8",
+      "source": "https://huggingface.co/facebook/audioseal/resolve/3c19eba53390776cf2cc9ed5f6c9ac67ce72ecba/README.md"
+    },
+    {
+      "path": "antlr4-LICENSE.txt",
+      "bytes": 2699,
+      "sha256": "b1b379fcaf3219593a4c433feb1b35c780bed23fafaae440b1ae2771a9521e3a",
+      "source": "https://raw.githubusercontent.com/antlr/antlr4/e4c1a74c66bd5290364ea2b36c97cd724b247357/LICENSE.txt"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/LICENSE"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11576,
+      "sha256": "4bb9f2ba8cc649ff8b20cbf192978efd7ffb83074832c821f9cab86b545b2963",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/README.md"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1922,
+      "sha256": "f14264f4b5b8b544f937dff76c242d941bb18232f7925ca1dd07fd866300dfea",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/pyproject.toml"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 70,
+      "sha256": "808b85711f2ffcb7f0e1a210c3136c2a0569ef9f443623eaf0db45c80197452b",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/requirements.txt"
+    },
+    {
+      "path": "src/audioseal/__init__.py",
+      "bytes": 552,
+      "sha256": "95faa981e74dcde87fe6afdbd6171f48d71bc9be8052336037f85ab5abe8192c",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/__init__.py"
+    },
+    {
+      "path": "src/audioseal/builder.py",
+      "bytes": 4200,
+      "sha256": "07e5ca4df46354e15c2742427b3f86435dd0b94e66a88434607fd06843a49bf7",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/builder.py"
+    },
+    {
+      "path": "src/audioseal/cards/audioseal_detector_16bits.yaml",
+      "bytes": 604,
+      "sha256": "6c2326f17266ec71ec869dfcc1e8d87c494b7c0c8c80892224603d5d2857f22e",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/cards/audioseal_detector_16bits.yaml"
+    },
+    {
+      "path": "src/audioseal/cards/audioseal_detector_streaming.yaml",
+      "bytes": 622,
+      "sha256": "171c98e8ac1aedebefa6a4b3ba4a213102bc81060b87ad3dbb294e37d62552ef",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/cards/audioseal_detector_streaming.yaml"
+    },
+    {
+      "path": "src/audioseal/cards/audioseal_wm_16bits.yaml",
+      "bytes": 848,
+      "sha256": "cc6d722363a7d23205dd21c7753b620a94691bb1d2a24def28070fa53f5daf52",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/cards/audioseal_wm_16bits.yaml"
+    },
+    {
+      "path": "src/audioseal/cards/audioseal_wm_streaming.yaml",
+      "bytes": 866,
+      "sha256": "8ee5c05be6d14f79b4fc5224844e0e3f8accd5a391f4864db87c69b0efa3e0ee",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/cards/audioseal_wm_streaming.yaml"
+    },
+    {
+      "path": "src/audioseal/libs/__init__.py",
+      "bytes": 198,
+      "sha256": "3cb62676c3fad403516673b2e99cdb6cbc0b71f814c3bb7f551bfa1e8495e062",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/audiocraft/__init__.py",
+      "bytes": 198,
+      "sha256": "3cb62676c3fad403516673b2e99cdb6cbc0b71f814c3bb7f551bfa1e8495e062",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/audiocraft/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/audiocraft/modules/__init__.py",
+      "bytes": 277,
+      "sha256": "adc464bc2bb795ba6b3281363061541522d974ad480fdf8b273f4098fd221d5d",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/audiocraft/modules/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/audiocraft/modules/conv.py",
+      "bytes": 11183,
+      "sha256": "c46fde8e03868a7238e7a3df913316473dbde9383deb7aefe9e96a32b4a90bbe",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/audiocraft/modules/conv.py"
+    },
+    {
+      "path": "src/audioseal/libs/audiocraft/modules/lstm.py",
+      "bytes": 823,
+      "sha256": "9424784da12d34df98fda894d74b1411cab81bc76366c86c4d02deb3b9022fa7",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/audiocraft/modules/lstm.py"
+    },
+    {
+      "path": "src/audioseal/libs/audiocraft/modules/seanet.py",
+      "bytes": 16317,
+      "sha256": "362b7afb0cb25f9d6f6c7d8986ddedf72db526b87ae310a93fab23b4a5484f4b",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/audiocraft/modules/seanet.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/__init__.py",
+      "bytes": 165,
+      "sha256": "a5c81e07b846e88cbd8d799bd77b02c0c4d81fa2ced97160a7f4454c68b860b1",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/__init__.py",
+      "bytes": 705,
+      "sha256": "2a72d7359bc2911dad2098f4487c93b7edd5828289c9b19caa12f6b28cba57a4",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/conv.py",
+      "bytes": 11646,
+      "sha256": "1a8933327232774c618a063592270f1fa89612b5db797b4348a939e4803481c4",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/conv.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/gating.py",
+      "bytes": 2855,
+      "sha256": "4022651ccd89bcc19b18337a18ee77690305fc8b60936354b3bfeda6eb63b1b6",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/gating.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/lstm.py",
+      "bytes": 1950,
+      "sha256": "e0982f9493e11aeca855186161903ef27714e0714fcafb7ac404e56bf9efcfbe",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/lstm.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/resample.py",
+      "bytes": 3674,
+      "sha256": "a90ee2ae92d3d104ef93db37c6d4a1bc13f8694a3d8b1c4711e4e8e56278a832",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/resample.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/rope.py",
+      "bytes": 2776,
+      "sha256": "15d4f510f4f1794acdbf4f0edb254f2a3274c193a71e15078e2351157c4ade93",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/rope.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/seanet.py",
+      "bytes": 18841,
+      "sha256": "fbb3d4680587878f70f5c510fb63886c95c54dc66c3eaca896c8d05a61476763",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/seanet.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/streaming.py",
+      "bytes": 16118,
+      "sha256": "56879f6d1bbc07dcfe7de703ed606501dc4bb1183d50bb01096d78d1c96dc775",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/streaming.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/modules/transformer.py",
+      "bytes": 28263,
+      "sha256": "b5094be6a0652e56ff3197121adcfa9a78927b0e506b7a3081a3c61c0ac25ea2",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/modules/transformer.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/quantization/__init__.py",
+      "bytes": 527,
+      "sha256": "3002d18a52329a0d45e0350c9b5131302c88d9f72c181689a2a0b59083270ae2",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/quantization/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/quantization/base.py",
+      "bytes": 5648,
+      "sha256": "24079ad6c15ad26e1656738db1fe2f9db774007ecb51d902af35838721589ecf",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/quantization/base.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/quantization/core_vq.py",
+      "bytes": 14601,
+      "sha256": "13ec8e2c515689514327580da76709872a1f5a10280654e9f518330c36e2bcbc",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/quantization/core_vq.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/quantization/vq.py",
+      "bytes": 14580,
+      "sha256": "5a9ca1a71f705fda188dcec52e149779489d81f5359ca2b0e62b2db3972467a4",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/quantization/vq.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/utils/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/utils/__init__.py"
+    },
+    {
+      "path": "src/audioseal/libs/moshi/utils/compile.py",
+      "bytes": 11049,
+      "sha256": "c0e5e0688cbe74ad8026e5e28b59cd39fac8c7eadea17cbbb3d963129ee4c11b",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/libs/moshi/utils/compile.py"
+    },
+    {
+      "path": "src/audioseal/loader.py",
+      "bytes": 13203,
+      "sha256": "c59ced042e96f00e8d557cfc7768b3d46d8724220e830b50df41f2155d5ddce2",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/loader.py"
+    },
+    {
+      "path": "src/audioseal/models.py",
+      "bytes": 20560,
+      "sha256": "7e1e1343fb6740d477a3ee5104b82547b834288c4685f51e78a2859c0866e103",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/models.py"
+    },
+    {
+      "path": "src/audioseal/py.typed",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive": "audioseal-source.zip",
+      "member": "audioseal-1496f7662d6aa625602bb0dcd1b4997b63b47609/src/audioseal/py.typed"
+    }
+  ],
+  "dependency_files": [
+    {
+      "path": "omegaconf/__init__.py",
+      "sha256": "9729f08831c414120732aac13771d18742897afcc86a9e8cc942c53643269417",
+      "bytes": 1170,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/__init__.py"
+    },
+    {
+      "path": "omegaconf/_impl.py",
+      "sha256": "0897dc46df0adb406230c5b9bb7abcc2e43d8407809ae62517172dccf8132204",
+      "bytes": 2877,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/_impl.py"
+    },
+    {
+      "path": "omegaconf/_utils.py",
+      "sha256": "6f0f09a6b6b407c6241c5af0383ac170a3ef8104f2534a44a6c90b97b0830518",
+      "bytes": 32564,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/_utils.py"
+    },
+    {
+      "path": "omegaconf/base.py",
+      "sha256": "ac75ae2f0f0889ec3f48d2485242d9cb811fc916fad21c92f57f479783ae06fb",
+      "bytes": 32462,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/base.py"
+    },
+    {
+      "path": "omegaconf/basecontainer.py",
+      "sha256": "1562f63d95916fbc0ff801a978deb9d65fee56736166fcf32e3694743949881f",
+      "bytes": 33318,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/basecontainer.py"
+    },
+    {
+      "path": "omegaconf/dictconfig.py",
+      "sha256": "20fb543c7a1a934db943e82f0d5a8c752e3ded76fab6372c6b0ac75efe224366",
+      "bytes": 27855,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/dictconfig.py"
+    },
+    {
+      "path": "omegaconf/errors.py",
+      "sha256": "79cb5b5fc29dfb914224c4c1221ea3b21aaf0a70a25cc1467c540960621eade4",
+      "bytes": 3595,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/errors.py"
+    },
+    {
+      "path": "omegaconf/grammar_parser.py",
+      "sha256": "ee0bc81acaadb209797b45ce5a123752be7c168224de205a5ff33c25dcb3a583",
+      "bytes": 5511,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar_parser.py"
+    },
+    {
+      "path": "omegaconf/grammar_visitor.py",
+      "sha256": "2fa2cea261b6e0670f035f9a63334e98a2eea799188ab1d3bb2a7ce7b57b4fb0",
+      "bytes": 16055,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar_visitor.py"
+    },
+    {
+      "path": "omegaconf/listconfig.py",
+      "sha256": "2f2351ae7f3806a362cfe4e9c2b0c82dab7c1e1955c3033acc5998093500748a",
+      "bytes": 24671,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/listconfig.py"
+    },
+    {
+      "path": "omegaconf/nodes.py",
+      "sha256": "d574480bcb1f128695e0f4ff566ed9ef924cb08737d24293b891c6c99d9a334c",
+      "bytes": 17479,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/nodes.py"
+    },
+    {
+      "path": "omegaconf/omegaconf.py",
+      "sha256": "8457952f493a3cd46a184ed9529236a7ab1218f91cf4812fb2aaf730d76053fb",
+      "bytes": 39048,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/omegaconf.py"
+    },
+    {
+      "path": "omegaconf/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/py.typed"
+    },
+    {
+      "path": "omegaconf/version.py",
+      "sha256": "f4ebb03d69acacd44141899e8a97b95e7cb0298e23c3e65006b8dba390b931de",
+      "bytes": 442,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/version.py"
+    },
+    {
+      "path": "omegaconf/grammar/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/__init__.py"
+    },
+    {
+      "path": "omegaconf/grammar/gen/OmegaConfGrammarLexer.py",
+      "sha256": "7a8a20d5aa1f3a5b70faeeb5405782599dc0f686babcadad8d3697e30989635e",
+      "bytes": 21689,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/gen/OmegaConfGrammarLexer.py"
+    },
+    {
+      "path": "omegaconf/grammar/gen/OmegaConfGrammarParser.py",
+      "sha256": "5f4b897343a279507f7fdc8a459c3839fc1104f386a22c83323873f0e28fbd9e",
+      "bytes": 63429,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/gen/OmegaConfGrammarParser.py"
+    },
+    {
+      "path": "omegaconf/grammar/gen/OmegaConfGrammarParserListener.py",
+      "sha256": "9dc89b87e36183af297493dd31aa9e1533fcefac2fa3496926a3d785a3a68d95",
+      "bytes": 5843,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/gen/OmegaConfGrammarParserListener.py"
+    },
+    {
+      "path": "omegaconf/grammar/gen/OmegaConfGrammarParserVisitor.py",
+      "sha256": "026be2db8e11b5815e6cd48909b3b0b2a76f416f9081d0ca4e4bb4ad79e40f96",
+      "bytes": 3617,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/gen/OmegaConfGrammarParserVisitor.py"
+    },
+    {
+      "path": "omegaconf/grammar/gen/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/grammar/gen/__init__.py"
+    },
+    {
+      "path": "omegaconf/resolvers/__init__.py",
+      "sha256": "cc4fbc589c22a460b67173ead76086033e3d9bcd85d43d5c28cc2e5771284fb9",
+      "bytes": 60,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/resolvers/__init__.py"
+    },
+    {
+      "path": "omegaconf/resolvers/oc/__init__.py",
+      "sha256": "80b9e229aa2e0a6926d594d03b34b51798c5942330ede2fe69ee8f85a3313638",
+      "bytes": 3548,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/resolvers/oc/__init__.py"
+    },
+    {
+      "path": "omegaconf/resolvers/oc/dict.py",
+      "sha256": "38bee267f68122dee4617c613221714b2b24897fb15c1bc623f0e705b771a95b",
+      "bytes": 2324,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf/resolvers/oc/dict.py"
+    },
+    {
+      "path": "omegaconf-2.3.0.dist-info/LICENSE",
+      "sha256": "b31375ed5d5cbe7ec2d0c4c14df8afa7a8e5501bbe25f70b6cbc461685f4b91a",
+      "bytes": 1518,
+      "archive": "omegaconf-2.3.0-py3-none-any.whl",
+      "member": "omegaconf-2.3.0.dist-info/LICENSE"
+    },
+    {
+      "path": "antlr4/BufferedTokenStream.py",
+      "sha256": "fc1c26cce1f54ceeb22f6c82fd9694ce4821abcc3373450f1df2375299d95303",
+      "bytes": 10780,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/BufferedTokenStream.py"
+    },
+    {
+      "path": "antlr4/CommonTokenFactory.py",
+      "sha256": "4efd7ace0fe9583d43bf722986cc45bbc9f059d2de5d872a27c082e721f08c7f",
+      "bytes": 2110,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/CommonTokenFactory.py"
+    },
+    {
+      "path": "antlr4/CommonTokenStream.py",
+      "sha256": "34d2475f0460dbf667e3a6612720f166dbd9cec3d685be898d76bb063338e5e8",
+      "bytes": 2770,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/CommonTokenStream.py"
+    },
+    {
+      "path": "antlr4/FileStream.py",
+      "sha256": "f9947ffa397f21ff4820160b20d230950ae54d29aee64d5550a0dcde27bb591e",
+      "bytes": 868,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/FileStream.py"
+    },
+    {
+      "path": "antlr4/InputStream.py",
+      "sha256": "b208231368c41af4a0426c45bea79eb93dda39581c1f9b52ee63326d6f30292e",
+      "bytes": 2334,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/InputStream.py"
+    },
+    {
+      "path": "antlr4/IntervalSet.py",
+      "sha256": "09dd162a177f9186e22d82a40cd9dc812335f4602e4bb39a4ce0b8fb962e6ece",
+      "bytes": 5965,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/IntervalSet.py"
+    },
+    {
+      "path": "antlr4/LL1Analyzer.py",
+      "sha256": "a0906f3bbfd2f1c0256ff0f8a963717762252b4a8fe246bea1ea03c71d7a099e",
+      "bytes": 7752,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/LL1Analyzer.py"
+    },
+    {
+      "path": "antlr4/Lexer.py",
+      "sha256": "0bbda1a9ac9f9329a9c5be3a01c4a784f0fd915674aae5a06e81b16ba81c21c8",
+      "bytes": 11542,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/Lexer.py"
+    },
+    {
+      "path": "antlr4/ListTokenSource.py",
+      "sha256": "21f7cb328ed84270ff0a32abcabae03564a4d2ae5049877ba6e672c9493bbce9",
+      "bytes": 5356,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/ListTokenSource.py"
+    },
+    {
+      "path": "antlr4/Parser.py",
+      "sha256": "176436e73d3efff2877dadf9e0a4210eedd9395ccb15f6a0decda2c49e1d97fa",
+      "bytes": 22883,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/Parser.py"
+    },
+    {
+      "path": "antlr4/ParserInterpreter.py",
+      "sha256": "f9053d927e31dd6090f8b480f7d476df51e889c4ea6a488767928cef697e848a",
+      "bytes": 7206,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/ParserInterpreter.py"
+    },
+    {
+      "path": "antlr4/ParserRuleContext.py",
+      "sha256": "c0701574ec4c00ee63914aa5a135d5ce7ff16272618876efbee859a6d874645f",
+      "bytes": 6762,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/ParserRuleContext.py"
+    },
+    {
+      "path": "antlr4/PredictionContext.py",
+      "sha256": "71be0a23a106a52eec47327c52f3c4931a6120d66e5a1ca267de7be76837a6b2",
+      "bytes": 22977,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/PredictionContext.py"
+    },
+    {
+      "path": "antlr4/Recognizer.py",
+      "sha256": "be6280b528c8811f4b42be58cee2b93a63d958c277c7af4eb95650fc54f34071",
+      "bytes": 5383,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/Recognizer.py"
+    },
+    {
+      "path": "antlr4/RuleContext.py",
+      "sha256": "1a2be246fda4fda97520181d24e104a03d2884969577efe1e53fc23c6fc1b268",
+      "bytes": 8099,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/RuleContext.py"
+    },
+    {
+      "path": "antlr4/StdinStream.py",
+      "sha256": "30c487e3337c4fa8bf9eefb7fd394dfb71389cf3386f92a02b8193ea7fc55100",
+      "bytes": 303,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/StdinStream.py"
+    },
+    {
+      "path": "antlr4/Token.py",
+      "sha256": "3ad58269be14b79d97fe72cb000fbcc78665eb1685e9310dfb4d37dee6a8684a",
+      "bytes": 5206,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/Token.py"
+    },
+    {
+      "path": "antlr4/TokenStreamRewriter.py",
+      "sha256": "72e12b413ad7c02ff492a56fdccb135866529be135572d72cc0fb748e84a77fb",
+      "bytes": 10324,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/TokenStreamRewriter.py"
+    },
+    {
+      "path": "antlr4/Utils.py",
+      "sha256": "3b283c0890912f54eb17f41207f2cb955756381e25a1570a3a014d4fe89c3bb7",
+      "bytes": 931,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/Utils.py"
+    },
+    {
+      "path": "antlr4/__init__.py",
+      "sha256": "83c506a5f96794c59c0322ed8a17a3ceb8003f5528ddbf468707c8f109d98edc",
+      "bytes": 1125,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/__init__.py"
+    },
+    {
+      "path": "antlr4/atn/ATN.py",
+      "sha256": "2d813c913f83f05a547797e93adc8e2eabd72c591449af374d5168c210960226",
+      "bytes": 5789,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATN.py"
+    },
+    {
+      "path": "antlr4/atn/ATNConfig.py",
+      "sha256": "b4d7480bafc6af15e5947071de7a405b20e1e8aae884b64357f5f23ebc9d44c6",
+      "bytes": 6565,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNConfig.py"
+    },
+    {
+      "path": "antlr4/atn/ATNConfigSet.py",
+      "sha256": "a91cd5b0178caa4dadc631b70eb1a9b7017a55bda11c2e70dee9a448bd06349c",
+      "bytes": 8312,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNConfigSet.py"
+    },
+    {
+      "path": "antlr4/atn/ATNDeserializationOptions.py",
+      "sha256": "95457f6c65ba9b18fbb76d1eb1d6b962ff97f66f94ff1d7ed3168b89f85720fa",
+      "bytes": 1010,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNDeserializationOptions.py"
+    },
+    {
+      "path": "antlr4/atn/ATNDeserializer.py",
+      "sha256": "6982c30ed43ec32a3780877a03ec03d44dd09a97eb3d9957c63e3f2039be9946",
+      "bytes": 22252,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNDeserializer.py"
+    },
+    {
+      "path": "antlr4/atn/ATNSimulator.py",
+      "sha256": "98373e1b7185de449eaa97c60da6d438b27458b553aa26f166592f5d06260519",
+      "bytes": 2298,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNSimulator.py"
+    },
+    {
+      "path": "antlr4/atn/ATNState.py",
+      "sha256": "35b9dd212594c050c5fefb817db4e2659f063c7a106ba51776a6c3fb28c913b7",
+      "bytes": 7663,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNState.py"
+    },
+    {
+      "path": "antlr4/atn/ATNType.py",
+      "sha256": "c60bfc00c554eed734ed4ef7fe14539b502267b32f1a1a1a3f97d388eaeb0868",
+      "bytes": 422,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ATNType.py"
+    },
+    {
+      "path": "antlr4/atn/LexerATNSimulator.py",
+      "sha256": "9185d1c14bc7a6d49153c4ff2bda52ac694293d632a5678794072382bcb5555a",
+      "bytes": 25465,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/LexerATNSimulator.py"
+    },
+    {
+      "path": "antlr4/atn/LexerAction.py",
+      "sha256": "294789c0a7a405c8749b5a6848fb241c887ed7975c2801b8951ef396af7cb737",
+      "bytes": 10014,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/LexerAction.py"
+    },
+    {
+      "path": "antlr4/atn/LexerActionExecutor.py",
+      "sha256": "eeb960d7b4c77302ecb939a1ecdb0bad36d11f80d3ae6f2a21d5bdff6df90847",
+      "bytes": 6420,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/LexerActionExecutor.py"
+    },
+    {
+      "path": "antlr4/atn/ParserATNSimulator.py",
+      "sha256": "20a0b3b032dcce744e495a2353e75a03280aaf7b2f9740e62b90e19149650126",
+      "bytes": 80365,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/ParserATNSimulator.py"
+    },
+    {
+      "path": "antlr4/atn/PredictionMode.py",
+      "sha256": "8bc07b3142c0eeffaa6d778263fc69eac822db590733a9326ea22b1baad2aeba",
+      "bytes": 22486,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/PredictionMode.py"
+    },
+    {
+      "path": "antlr4/atn/SemanticContext.py",
+      "sha256": "76cd1398ce2a7a76f42cdfab976169fcdff107de7d69b37aec8d7d105eabb3ca",
+      "bytes": 10495,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/SemanticContext.py"
+    },
+    {
+      "path": "antlr4/atn/Transition.py",
+      "sha256": "640b041696b923f9fecf10fa53e0dab8ce7fdf78c52bae71dcf5aeebe356d110",
+      "bytes": 8762,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/Transition.py"
+    },
+    {
+      "path": "antlr4/atn/__init__.py",
+      "sha256": "82c9d076d4c7f085200a2554a507f3871c76a4546f92c5bbe928f0224ddf6129",
+      "bytes": 28,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/atn/__init__.py"
+    },
+    {
+      "path": "antlr4/dfa/DFA.py",
+      "sha256": "c1e221d2e6917da90fd76985bc7a3b534b6a3b718e355dfe9c7164736c64f991",
+      "bytes": 5388,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/dfa/DFA.py"
+    },
+    {
+      "path": "antlr4/dfa/DFASerializer.py",
+      "sha256": "d6cb7f1cef39c972d8cbb8089d3127933b6003a6a6e024fec917a1fa66b3a7d1",
+      "bytes": 2518,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/dfa/DFASerializer.py"
+    },
+    {
+      "path": "antlr4/dfa/DFAState.py",
+      "sha256": "47b27029fd06b4012cf49fcc0ff63458a72ecddb740555f5b28c3ebaff721587",
+      "bytes": 5583,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/dfa/DFAState.py"
+    },
+    {
+      "path": "antlr4/dfa/__init__.py",
+      "sha256": "82c9d076d4c7f085200a2554a507f3871c76a4546f92c5bbe928f0224ddf6129",
+      "bytes": 28,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/dfa/__init__.py"
+    },
+    {
+      "path": "antlr4/error/DiagnosticErrorListener.py",
+      "sha256": "1304b60ff3b1e829af09ad7a34f27db9de1060f1e694f5edebe59d9f58792a0f",
+      "bytes": 4430,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/error/DiagnosticErrorListener.py"
+    },
+    {
+      "path": "antlr4/error/ErrorListener.py",
+      "sha256": "c8ffcc0e0ba89780a3d3fa443f2373787defe19bd48d6e62c038e16135401db1",
+      "bytes": 2722,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/error/ErrorListener.py"
+    },
+    {
+      "path": "antlr4/error/ErrorStrategy.py",
+      "sha256": "d2687314be7b6559e32a41abb5a76d6bddd99b7357745f875b5d03543d3b557b",
+      "bytes": 30391,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/error/ErrorStrategy.py"
+    },
+    {
+      "path": "antlr4/error/Errors.py",
+      "sha256": "8652a781c9417d77640e20329a162cbe1d8e09796f98733691397f035be0a7ec",
+      "bytes": 6759,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/error/Errors.py"
+    },
+    {
+      "path": "antlr4/error/__init__.py",
+      "sha256": "82c9d076d4c7f085200a2554a507f3871c76a4546f92c5bbe928f0224ddf6129",
+      "bytes": 28,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/error/__init__.py"
+    },
+    {
+      "path": "antlr4/tree/Chunk.py",
+      "sha256": "a022198e894babdc64c6d54344e103c5f50682775c127b035b479498b33b1a99",
+      "bytes": 695,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/Chunk.py"
+    },
+    {
+      "path": "antlr4/tree/ParseTreeMatch.py",
+      "sha256": "0dce86556494aa820015751a519a94c0252565f4dc8146c62c6ccd7fa43142f1",
+      "bytes": 4485,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/ParseTreeMatch.py"
+    },
+    {
+      "path": "antlr4/tree/ParseTreePattern.py",
+      "sha256": "01204d6903918777fb7fc2a715e6490b6c96145c78b90971bc2d98e7989f858d",
+      "bytes": 2825,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/ParseTreePattern.py"
+    },
+    {
+      "path": "antlr4/tree/ParseTreePatternMatcher.py",
+      "sha256": "1ed13dca2d54aebd903cb18b24306faf4971bfa6e3ba3f421e5fb87256a149ef",
+      "bytes": 16388,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/ParseTreePatternMatcher.py"
+    },
+    {
+      "path": "antlr4/tree/RuleTagToken.py",
+      "sha256": "9f8cd7726aeb7ec1b297dd698f965871cfc278a3213ebbd8914769a60301a5b6",
+      "bytes": 2022,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/RuleTagToken.py"
+    },
+    {
+      "path": "antlr4/tree/TokenTagToken.py",
+      "sha256": "4b7a370c985fccbe64a42971b0ac88f8897ec6fbae650881008b0b08a163447a",
+      "bytes": 1576,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/TokenTagToken.py"
+    },
+    {
+      "path": "antlr4/tree/Tree.py",
+      "sha256": "648ed4ff923104b9bf22b9df24eb5bd760423c85b2cdf799b4b9e11ca555648c",
+      "bytes": 5572,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/Tree.py"
+    },
+    {
+      "path": "antlr4/tree/Trees.py",
+      "sha256": "26d43b7185a62b023d4c804feb2f572208e5352e26623bf7011c0e7f059ce558",
+      "bytes": 3968,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/Trees.py"
+    },
+    {
+      "path": "antlr4/tree/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/tree/__init__.py"
+    },
+    {
+      "path": "antlr4/xpath/XPath.py",
+      "sha256": "3bdb38f840ef2db01b632b4ffdb69ef59da484b974880b51ccf02d55bb9650ce",
+      "bytes": 13015,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/xpath/XPath.py"
+    },
+    {
+      "path": "antlr4/xpath/__init__.py",
+      "sha256": "82c9d076d4c7f085200a2554a507f3871c76a4546f92c5bbe928f0224ddf6129",
+      "bytes": 28,
+      "archive": "antlr4-python3-runtime-4.9.3.tar.gz",
+      "member": "antlr4-python3-runtime-4.9.3/src/antlr4/xpath/__init__.py"
+    }
+  ],
+  "licenses": {
+    "source_and_weights": "MIT, publisher README and LICENSE; preserve notices",
+    "omegaconf": "BSD-3-Clause; wheel license retained",
+    "antlr4_runtime": "BSD-3-Clause, publisher PKG-INFO; notice retained in source headers"
+  },
+  "source_scope": "Reproduces reviewed public files without importing or executing downloaded code or loading checkpoints.",
+  "model_card_git_blob": "7f6f6fecea61033fc07d58ed8d0bb4a671ac668d",
+  "antlr_license_revision": "e4c1a74c66bd5290364ea2b36c97cd724b247357"
+}

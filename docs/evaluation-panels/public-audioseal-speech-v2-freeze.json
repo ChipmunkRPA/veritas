@@ -1,0 +1,67 @@
+{
+  "policy": {
+    "schema": "chipmunk.public-speech-watermark-policy/2",
+    "speakers": 32,
+    "cases": 576,
+    "source_selection": "Known-unused project speaker identities from fixed public train360 first8 shards; source plan frozen before neural inference. External pretraining overlap unknown. Backgrounds are project-consumed, licensed and canonical-speaker disjoint.",
+    "source_extent": "First128000 mono16kHz s16 source samples (0\u20138s), duration eligibility only; no response-based source choice.",
+    "normalization": "Unmarked foreground float32 at RMS0.1; add native full-clip public mark, fixed alternating16bit message. Partial only copies marked source samples32000:96000; rest bit-identical.",
+    "conditions": [
+      "clean",
+      "white_0db",
+      "noise_0db",
+      "music_0db",
+      "speech_0db",
+      "mp3_64k"
+    ],
+    "states": [
+      "unmarked",
+      "marked",
+      "partial"
+    ],
+    "background": "Four matched0dB backgrounds per speaker: deterministic white noise and exact licensed environmental/music/other-speech excerpts. Gain uses the unmarked foreground RMS, identical for every mark state.",
+    "gain": "One float32 peak-safe gain shared across every mark state and condition for a speaker; min(1,0.8/max absolute pre-codec sample). No hidden clipping.",
+    "codec": "64kbps seekable MP3 of each clean gained state, decoded mono16kHz float32 with exact sample-count requirement; no alignment trimming or padding.",
+    "readout": "Frozen v1 native strict sample>0.5; quarter-second bin selected only when more than half its samples exceed0.5. Every native sample and bin retained.",
+    "planned_generator_forwards": 32,
+    "planned_detector_forwards": 581,
+    "helper_parity_cases": 4,
+    "repeat_cases": 1,
+    "reporting": "Per-condition unmarked false responses, full/partial misses, selected interval IoU/coverage/outside time; same32 speakers repeated, not576 independent sources. Fixed Wilson95 intervals for file rates.",
+    "serving_admission": false,
+    "confidence_admission": false,
+    "provider_authentication": false,
+    "early_stop_eligible": false,
+    "scope": "Public-family localization and robustness only. Deliberately marked real speech is not AI-generated speech."
+  },
+  "input_plan_sha256": "a697fe9b5baa58ab39f850941b70c17f50acb43b8e82c397f944ff4c9b805a26",
+  "code_sha256": {
+    "backend/scripts/acquire_public_audioseal_v2.py": "8cb5cd8a7f0da27415a4e019640ededa3357ff187ae2a7cfa5ddf9aa51e20ceb",
+    "backend/scripts/public_audioseal_assets_v2.json": "211804b122d3ca02e6251c6bd635e4e39d8111167d74c2f7996b5fd96f5e82a6",
+    "backend/scripts/prepare_public_audioseal_speech_v2.py": "c4d8d68c494f8c4daa6906e2eef18d89c1328e486284c36ce14ed5218abf8a26",
+    "backend/scripts/run_public_audioseal_speech_v2.py": "17599d71fc58dd7d8e12a18db603f4944c945c9eaffc32111af9641787ead142",
+    "backend/scripts/review_public_audioseal_speech_v2.py": "fddaad6c09c60dff84bd7a4c235f8a491bb62c39f6c2f569608503a137edc128",
+    "backend/scripts/public_speech_watermark_runtime_v2.py": "7735bcb69f396ea4923f978c1608fa04c1cdc34baad66fffa50ae6f801c0758b",
+    "backend/scripts/public_audio_watermark_v1.py": "735e85cd8c3f9690bd2d4867064e626cc2270fb8ed33687d944ae2fb24acbca5",
+    "backend/scripts/run_public_audio_watermark_v1.py": "37a5c715de41678ee428b2b8bf663eef073edff1dc221edc577677f04276682f",
+    "backend/scripts/review_public_audio_watermark_v1.py": "852cc26fb0bb86609efc03a57dc1a23d8417959c76ba2178a7bc2851af326e81",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/tests/test_public_audioseal_speech_v2.py": "eba4f06268494c09a7119fa9dbfbb5424913d790fe75ae8645525de1fe7a9eca",
+    "docs/public-audioseal-speech-v2-protocol.md": "5172b1bbbdfa01e84dfd3b54102373a4d0cb94e46677023fa6bc3e0b0bafe40a"
+  },
+  "asset_acquisition_sha256": "84cb324bb2c0fab88871cecb4e82bb33d095516d18d252d3f913bc4f8f853840",
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "PyYAML": "6.0.3",
+    "einops": "0.8.2"
+  },
+  "ffmpeg": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+  "neural_forwards_before_freeze": 0,
+  "customer_inputs": 0,
+  "serving_admitted": false,
+  "input_plan_public": false,
+  "private_speech_and_pairings_published": false
+}

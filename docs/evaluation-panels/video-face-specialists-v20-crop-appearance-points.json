@@ -1,0 +1,31 @@
+{
+  "file": {
+    "status": "fitted",
+    "threshold": 0.6705439218206344,
+    "common_genuine_groups": 39,
+    "scope": "Internal evaluation only; no public screening threshold",
+    "serving_admitted": false,
+    "budget": 3,
+    "calibration_groups_flagged": 3
+  },
+  "local": {
+    "face-crop": {
+      "status": "fitted",
+      "threshold": 0.7709039596831595,
+      "common_genuine_groups": 39,
+      "scope": "Internal evaluation only; no public screening threshold",
+      "serving_admitted": false,
+      "budget": 3,
+      "calibration_groups_flagged": 3
+    },
+    "face-appearance": {
+      "status": "fitted",
+      "threshold": 0.5423344285395686,
+      "common_genuine_groups": 39,
+      "scope": "Internal evaluation only; no public screening threshold",
+      "serving_admitted": false,
+      "budget": 1,
+      "calibration_groups_flagged": 1
+    }
+  }
+}

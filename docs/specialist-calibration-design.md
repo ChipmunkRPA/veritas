@@ -15,7 +15,8 @@ ever changed by either prototype.
 
 ## Real-data progress, 7 November 2026
 
-The architecture has not yet completed real-data fitting for all four media.
+The architecture has now completed consumed-source real-data fitting and tests
+for all four media. No new combined calibration is approved for serving.
 Numerical reproduction on another machine is separate from an independent
 review of media, labels, provenance and detection quality.
 
@@ -24,11 +25,12 @@ review of media, labels, provenance and detection quality.
 | Image | All 960 inputs from 240 consumed source pairs completed using the actual PNG and JPEG branches; separate local and combined calibration. Local source audit and Linux scalar refit passed. | Only JPEG primary plus regions qualifies for further comparison: 10/60 edits versus current 9/60, with 5/60 genuine false flags in both. Pixel localization remains weak. No promotion. [Result](image-supported-v11-result.md). |
 | Passage | Eight scoped/contextual combinations tested on 128 consumed prompt/source components, including mixed human/AI passages and 16 generators. | Pooled scoped combination finds 87/96 versus baseline 86/96 but raises genuine false flags from 6/32 to 7/32. All alternatives fail gates. Linux fitting also has recorded convergence failures. [Result](scoped-writing-v6-result.md). |
 | Voice/audio | All 4,004 planned files completed: eight AI generators, 143 consumed foreground pairs, 48 role-disjoint background originals, exact mixed-voice windows and strong noise/music/speech. Source audit and actual Linux scalar refit passed. | Filtered view adds no detection gain. Contextual calibration loses 59 AI files despite fewer false flags. Retain serving calibration. [Result](audio-specialists-v15-result.md). |
-| Video | All 648 exact prepared clips and 93,043 native RGB frames audited; 12,420 changed AI source frames match declared boundaries. No additional sampled-RGB connections between source roles. All 14,256 local supports are fixed before scores. | Separate face-crop, appearance-change and patch-feature heads now have a frozen native protocol. Native scoring is underway; no completed calibration or improvement claim yet. [Protocol](video-face-specialists-v20-protocol.md). |
+| Video | All 648 exact clips and 14,256 source-bound units completed; separate local heads and four frozen combinations. Full source/input review and exact local scalar refit passed. | Crop plus appearance finds 29/80 swaps versus calibrated crop's 11/80, both with 5/80 genuine false flags. Existing raw appearance is stronger at 62/80 and 1/80. No promotion or fresh-reserve spend for this combination. [Result](video-face-specialists-v20-result.md). |
 
 These consumed-source pilots do not replace fresh, source-disjoint validation.
 No new specialist calibration contributes to customer confidence. The video
-source inventory is preparation, not a substitute for video model evaluation.
+source inventory is preparation, separate from the completed scoped video model
+evaluation above.
 
 A later, separately frozen genuine-source operating comparison reuses those
 image and passage scalars. It found one image development candidate: pooled

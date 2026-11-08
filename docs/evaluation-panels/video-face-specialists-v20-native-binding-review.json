@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.video-face-native-binding-review/20",
+  "roles": [
+    "specialist_cal",
+    "fusion_fit",
+    "fusion_cal",
+    "confirmation"
+  ],
+  "implementation_sha256": "c9ee5acd57a341bea366379a18a61a135ae6f94abce7b5558f3854cc329ad8f4",
+  "audited_source_plan_sha256": "7eb6ee61b18f255fb6e21e1c391a1a0e347dffc8d1ba26aa75da4aa56cc37bdf",
+  "source_rgb_journal_sha256": "21ce2999b0e378db360369a8429d70a59c92fbab83e0802eb8fcb509243f8c8d",
+  "native_role_receipt_sha256": {
+    "specialist_cal": "af0379fe6566b378490322d2148808e95c7cb84fdf4c231ee217ad1bf622e1ea",
+    "fusion_fit": "e140613628e21aef728d8d1c6f491eaa5c80b883594365cc03e2cd28563da027",
+    "fusion_cal": "c4b5acae4e9f4d20ab4fc239d4ca437b7d78be15412854a8ae4d117b4e159ea4",
+    "confirmation": "bdd2f88a69ed0c3c587c0251f9df406f5dfc51b1fd8383efbb94822b40b3c70b"
+  },
+  "clips": 648,
+  "units": 14256,
+  "native_input_counts": {
+    "face_detection_inputs": 22032,
+    "crop_classifier_inputs": 7662,
+    "appearance_inputs": 21765,
+    "patch_feature_inputs": 21765,
+    "native_repeat_inputs": 12
+  },
+  "unit_status": {
+    "face-crop": {
+      "ok": 7662,
+      "not_applicable": 114
+    },
+    "face-appearance": {
+      "ok": 3165,
+      "not_applicable": 75
+    },
+    "face-feature-change": {
+      "ok": 3165,
+      "not_applicable": 75
+    }
+  },
+  "source_rgb_and_native_clock_exact": true,
+  "local_truth_and_input_counters_exact": true,
+  "exact_eligible_inputs_crossing_roles": 0,
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "outside_human_reviews": 0,
+  "limits": "Local metadata/commitment review only; no neural re-execution, source authorship verification, new independent identity matching, fresh detection validation or outside human review."
+}

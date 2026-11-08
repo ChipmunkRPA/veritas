@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.video-face-release-decision/20",
+  "serving_admitted": false,
+  "fresh_reserve_authorized_by_this_result": false,
+  "reason": "New combinations improve the calibrated crop reference but are dominated by the stronger existing raw appearance cue on the same fixed-support panel. No promotion or fresh-reserve spending for these combinations.",
+  "protocol_gate_retained_unchanged": {
+    "crop": false,
+    "crop-appearance": true,
+    "crop-features": false,
+    "all": true
+  },
+  "stronger_raw_appearance_reference": {
+    "planned": 160,
+    "assessed": 155,
+    "inconclusive": 5,
+    "ai": 80,
+    "genuine": 80,
+    "ai_flagged": 62,
+    "missed_ai_including_inconclusive": 18,
+    "false_ai": 1,
+    "false_ai_groups": 1
+  },
+  "comparison_scope": "Consumed fixed single-visible-face source-frame supports, not the full application verdict.",
+  "next_development": "Appearance-only calibrated reference and separately fitted per-view features, with dependence/dimension controls and stronger genuine edits before fresh sources.",
+  "outside_human_reviews": 0
+}

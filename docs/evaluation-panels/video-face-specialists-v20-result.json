@@ -1,0 +1,691 @@
+{
+  "schema": "chipmunk.video-face-specialist-result/20",
+  "policy": {
+    "schema": "chipmunk.video-face-specialist-policy/20",
+    "arms": {
+      "crop": [
+        "face-crop"
+      ],
+      "crop-appearance": [
+        "face-crop",
+        "face-appearance"
+      ],
+      "crop-features": [
+        "face-crop",
+        "face-feature-change"
+      ],
+      "all": [
+        "face-crop",
+        "face-appearance",
+        "face-feature-change"
+      ]
+    },
+    "source": "All648 consumed, exact prepared clips in162 known source components; four source-disjoint roles. No fresh reserve used.",
+    "positions": "Frozen half-second centers and native consecutive triplets; three middle, two before and two after centers. No authenticity response chooses positions.",
+    "truth": "Audited changed RGB source-frame presence in sampled support. Publisher manipulation labels, not identified-face or pixel-authorship ground truth.",
+    "views": "Unchanged commercial GenD face-crop logit, SFace appearance transition, DINOv2 patch feature transition. One visible detected face; no identity database.",
+    "native": "YuNet and SFace CPU; GenD and DINOv2 MPSfloat32. Fixed crop batch8 and patch batch12; no adaptive precision/batch fallback.",
+    "repeat": "First eligible crop/appearance/features input in each role. SFace exact; crop absolute1e-4, patches absolute/relative1e-4. Native source RGB must equal model-free audit.",
+    "combination": "Separate monotone local heads by target/view; one dependent video-face family, positive-logit maximum, then separately fitted and calibrated combination. No multiplication of independent votes.",
+    "missing": "Every planned unit retained; any unavailable required unit withholds combined confidence. No missing response becomes zero or an original verdict.",
+    "minimum_groups_per_class": 25,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "points": "Internal evaluation only. Across all four arms use the same completely assessed genuine fusion_cal source components, minimum25. Budget equals raw GenD genuine component false flags, capped atfloor(.1*n). Strict greater than sorted component maxima at rankn-budget. Local points match each existing raw cue in the same manner on common complete genuine files.",
+    "comparison": "Raw current-code cue arithmetic on exactly these fixed supports, not full production tracking/adaptive windows or whole application fusion.",
+    "localization": "Merge flagged support spans separated by at most550ms, for every arm and raw reference. Best merged-span IoU with known edit >=.3; separately count actually sampled flagged source frames and local-unit truth. Bridged gaps are interval estimates, not examined pixels.",
+    "continuation": "Require more AI files at no more genuine false-flag components than crop, no coverage loss, and more correctly localized manipulated clips at IoU>=.3 than crop. Report ordinary controls separately. No automatic serving adoption; fresh-source and full-app tests remain required.",
+    "resource_guard": {
+      "rss_gib": 6,
+      "available_mib": 1536,
+      "disk_mib": 1536,
+      "seconds_per_role": 3600
+    },
+    "serving_admitted": false
+  },
+  "arms": {
+    "crop": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 11,
+        "missed_ai_including_inconclusive": 69,
+        "false_ai": 5,
+        "false_ai_groups": 4,
+        "source_class_balanced_brier_on_scored_cases": 0.2434628681333294
+      },
+      "by_source_family": {
+        "inswapper": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 5,
+          "missed_ai_including_inconclusive": 35,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "jump-cut": {
+          "planned": 13,
+          "assessed": 13,
+          "inconclusive": 0,
+          "ai": 0,
+          "genuine": 13,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "lighting-change": {
+          "planned": 15,
+          "assessed": 14,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 15,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "original_videos": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 0,
+          "genuine": 40,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "recompression": {
+          "planned": 12,
+          "assessed": 11,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 12,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 3,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "uniface": {
+          "planned": 40,
+          "assessed": 37,
+          "inconclusive": 3,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 6,
+          "missed_ai_including_inconclusive": 34,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        }
+      },
+      "local": {
+        "planned_units": 1920,
+        "assessed_units": 1866,
+        "genuine_units": 1664,
+        "ai_units": 256,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 1,
+        "flagged_sampled_source_frames": 31,
+        "flagged_sampled_changed_source_frames": 12,
+        "genuine_clips_with_flagged_spans": 5,
+        "inconclusive_units": 54,
+        "ai_units_flagged": 12,
+        "genuine_units_false_flagged": 19
+      },
+      "points": {
+        "file": {
+          "status": "fitted",
+          "threshold": 0.5629522765958304,
+          "common_genuine_groups": 39,
+          "scope": "Internal evaluation only; no public screening threshold",
+          "serving_admitted": false,
+          "budget": 3,
+          "calibration_groups_flagged": 3
+        },
+        "local": {
+          "face-crop": {
+            "status": "fitted",
+            "threshold": 0.7709039596831595,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 3,
+            "calibration_groups_flagged": 3
+          }
+        }
+      },
+      "head_status": {
+        "face-crop|single-face": "fitted"
+      },
+      "qualifies_for_fresh_source_followup": false
+    },
+    "crop-appearance": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 29,
+        "missed_ai_including_inconclusive": 51,
+        "false_ai": 5,
+        "false_ai_groups": 4,
+        "source_class_balanced_brier_on_scored_cases": 0.20188843704995274
+      },
+      "by_source_family": {
+        "inswapper": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 15,
+          "missed_ai_including_inconclusive": 25,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "jump-cut": {
+          "planned": 13,
+          "assessed": 13,
+          "inconclusive": 0,
+          "ai": 0,
+          "genuine": 13,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "lighting-change": {
+          "planned": 15,
+          "assessed": 14,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 15,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "original_videos": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 0,
+          "genuine": 40,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "recompression": {
+          "planned": 12,
+          "assessed": 11,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 12,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 3,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "uniface": {
+          "planned": 40,
+          "assessed": 37,
+          "inconclusive": 3,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 14,
+          "missed_ai_including_inconclusive": 26,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        }
+      },
+      "local": {
+        "planned_units": 2720,
+        "assessed_units": 2641,
+        "genuine_units": 2182,
+        "ai_units": 538,
+        "ai_units_flagged": 93,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 63,
+        "flagged_sampled_source_frames": 663,
+        "flagged_sampled_changed_source_frames": 563,
+        "genuine_clips_with_flagged_spans": 7,
+        "inconclusive_units": 79,
+        "genuine_units_false_flagged": 21
+      },
+      "points": {
+        "file": {
+          "status": "fitted",
+          "threshold": 0.6705439218206344,
+          "common_genuine_groups": 39,
+          "scope": "Internal evaluation only; no public screening threshold",
+          "serving_admitted": false,
+          "budget": 3,
+          "calibration_groups_flagged": 3
+        },
+        "local": {
+          "face-crop": {
+            "status": "fitted",
+            "threshold": 0.7709039596831595,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 3,
+            "calibration_groups_flagged": 3
+          },
+          "face-appearance": {
+            "status": "fitted",
+            "threshold": 0.5423344285395686,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 1,
+            "calibration_groups_flagged": 1
+          }
+        }
+      },
+      "head_status": {
+        "face-crop|single-face": "fitted",
+        "face-appearance|single-face": "fitted"
+      },
+      "qualifies_for_fresh_source_followup": true
+    },
+    "crop-features": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 11,
+        "missed_ai_including_inconclusive": 69,
+        "false_ai": 5,
+        "false_ai_groups": 4,
+        "source_class_balanced_brier_on_scored_cases": 0.24332426763617285
+      },
+      "by_source_family": {
+        "inswapper": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 5,
+          "missed_ai_including_inconclusive": 35,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "jump-cut": {
+          "planned": 13,
+          "assessed": 13,
+          "inconclusive": 0,
+          "ai": 0,
+          "genuine": 13,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "lighting-change": {
+          "planned": 15,
+          "assessed": 14,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 15,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "original_videos": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 0,
+          "genuine": 40,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "recompression": {
+          "planned": 12,
+          "assessed": 11,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 12,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 3,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "uniface": {
+          "planned": 40,
+          "assessed": 37,
+          "inconclusive": 3,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 6,
+          "missed_ai_including_inconclusive": 34,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        }
+      },
+      "local": {
+        "planned_units": 2720,
+        "assessed_units": 2641,
+        "genuine_units": 2182,
+        "ai_units": 538,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 16,
+        "flagged_sampled_source_frames": 209,
+        "flagged_sampled_changed_source_frames": 134,
+        "genuine_clips_with_flagged_spans": 9,
+        "inconclusive_units": 79,
+        "genuine_units_false_flagged": 24,
+        "ai_units_flagged": 27
+      },
+      "points": {
+        "file": {
+          "status": "fitted",
+          "threshold": 0.5617754734170053,
+          "common_genuine_groups": 39,
+          "scope": "Internal evaluation only; no public screening threshold",
+          "serving_admitted": false,
+          "budget": 3,
+          "calibration_groups_flagged": 3
+        },
+        "local": {
+          "face-crop": {
+            "status": "fitted",
+            "threshold": 0.7709039596831595,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 3,
+            "calibration_groups_flagged": 3
+          },
+          "face-feature-change": {
+            "status": "fitted",
+            "threshold": 0.5353954076639782,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 0,
+            "calibration_groups_flagged": 0
+          }
+        }
+      },
+      "head_status": {
+        "face-crop|single-face": "fitted",
+        "face-feature-change|single-face": "fitted"
+      },
+      "qualifies_for_fresh_source_followup": false
+    },
+    "all": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 29,
+        "missed_ai_including_inconclusive": 51,
+        "false_ai": 5,
+        "false_ai_groups": 4,
+        "source_class_balanced_brier_on_scored_cases": 0.2019775521043411
+      },
+      "by_source_family": {
+        "inswapper": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 15,
+          "missed_ai_including_inconclusive": 25,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "jump-cut": {
+          "planned": 13,
+          "assessed": 13,
+          "inconclusive": 0,
+          "ai": 0,
+          "genuine": 13,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "lighting-change": {
+          "planned": 15,
+          "assessed": 14,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 15,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "original_videos": {
+          "planned": 40,
+          "assessed": 38,
+          "inconclusive": 2,
+          "ai": 0,
+          "genuine": 40,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 1,
+          "false_ai_groups": 1,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "recompression": {
+          "planned": 12,
+          "assessed": 11,
+          "inconclusive": 1,
+          "ai": 0,
+          "genuine": 12,
+          "ai_flagged": 0,
+          "missed_ai_including_inconclusive": 0,
+          "false_ai": 3,
+          "false_ai_groups": 3,
+          "source_class_balanced_brier_on_scored_cases": null
+        },
+        "uniface": {
+          "planned": 40,
+          "assessed": 37,
+          "inconclusive": 3,
+          "ai": 40,
+          "genuine": 0,
+          "ai_flagged": 14,
+          "missed_ai_including_inconclusive": 26,
+          "false_ai": 0,
+          "false_ai_groups": 0,
+          "source_class_balanced_brier_on_scored_cases": null
+        }
+      },
+      "local": {
+        "planned_units": 3520,
+        "assessed_units": 3416,
+        "genuine_units": 2700,
+        "ai_units": 820,
+        "ai_units_flagged": 108,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 63,
+        "flagged_sampled_source_frames": 708,
+        "flagged_sampled_changed_source_frames": 563,
+        "genuine_clips_with_flagged_spans": 11,
+        "inconclusive_units": 104,
+        "genuine_units_false_flagged": 26
+      },
+      "points": {
+        "file": {
+          "status": "fitted",
+          "threshold": 0.6701534575278887,
+          "common_genuine_groups": 39,
+          "scope": "Internal evaluation only; no public screening threshold",
+          "serving_admitted": false,
+          "budget": 3,
+          "calibration_groups_flagged": 3
+        },
+        "local": {
+          "face-crop": {
+            "status": "fitted",
+            "threshold": 0.7709039596831595,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 3,
+            "calibration_groups_flagged": 3
+          },
+          "face-appearance": {
+            "status": "fitted",
+            "threshold": 0.5423344285395686,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 1,
+            "calibration_groups_flagged": 1
+          },
+          "face-feature-change": {
+            "status": "fitted",
+            "threshold": 0.5353954076639782,
+            "common_genuine_groups": 39,
+            "scope": "Internal evaluation only; no public screening threshold",
+            "serving_admitted": false,
+            "budget": 0,
+            "calibration_groups_flagged": 0
+          }
+        }
+      },
+      "head_status": {
+        "face-crop|single-face": "fitted",
+        "face-appearance|single-face": "fitted",
+        "face-feature-change|single-face": "fitted"
+      },
+      "qualifies_for_fresh_source_followup": true
+    }
+  },
+  "raw_cue_references": {
+    "face-crop": {
+      "all": {
+        "planned": 160,
+        "assessed": 151,
+        "inconclusive": 9,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 72,
+        "missed_ai_including_inconclusive": 8,
+        "false_ai": 70,
+        "false_ai_groups": 35
+      },
+      "raw_point": 0.0,
+      "scope": "Same fixed supports and current raw cue arithmetic only; binary flags are not probabilities.",
+      "local": {
+        "planned_units": 1920,
+        "assessed_units": 1866,
+        "genuine_units": 1664,
+        "ai_units": 256,
+        "ai_units_flagged": 164,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 39,
+        "flagged_sampled_source_frames": 845,
+        "flagged_sampled_changed_source_frames": 164,
+        "genuine_clips_with_flagged_spans": 72,
+        "genuine_units_false_flagged": 681,
+        "inconclusive_units": 54
+      }
+    },
+    "face-appearance": {
+      "all": {
+        "planned": 160,
+        "assessed": 155,
+        "inconclusive": 5,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 62,
+        "missed_ai_including_inconclusive": 18,
+        "false_ai": 1,
+        "false_ai_groups": 1
+      },
+      "raw_point": 0.11243900750879454,
+      "scope": "Same fixed supports and current raw cue arithmetic only; binary flags are not probabilities.",
+      "local": {
+        "planned_units": 800,
+        "assessed_units": 775,
+        "ai_units": 282,
+        "ai_units_flagged": 77,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 62,
+        "flagged_sampled_source_frames": 612,
+        "flagged_sampled_changed_source_frames": 543,
+        "genuine_units": 518,
+        "genuine_clips_with_flagged_spans": 1,
+        "inconclusive_units": 25,
+        "genuine_units_false_flagged": 1
+      }
+    },
+    "face-feature-change": {
+      "all": {
+        "planned": 160,
+        "assessed": 155,
+        "inconclusive": 5,
+        "ai": 80,
+        "genuine": 80,
+        "ai_flagged": 8,
+        "missed_ai_including_inconclusive": 72,
+        "false_ai": 1,
+        "false_ai_groups": 1
+      },
+      "raw_point": 0.007326911389827726,
+      "scope": "Same fixed supports and current raw cue arithmetic only; binary flags are not probabilities.",
+      "local": {
+        "planned_units": 800,
+        "assessed_units": 775,
+        "ai_units": 282,
+        "edited_clips": 80,
+        "edited_clips_localized_iou_at_least_0_3": 8,
+        "flagged_sampled_source_frames": 81,
+        "flagged_sampled_changed_source_frames": 70,
+        "genuine_units": 518,
+        "genuine_clips_with_flagged_spans": 1,
+        "inconclusive_units": 25,
+        "ai_units_flagged": 8,
+        "genuine_units_false_flagged": 1
+      }
+    }
+  },
+  "serving_admitted": false,
+  "outside_human_reviews": 0
+}

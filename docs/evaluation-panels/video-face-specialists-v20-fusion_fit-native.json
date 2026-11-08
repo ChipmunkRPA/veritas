@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.video-face-native-receipt/20",
+  "role": "fusion_fit",
+  "journal_sha256": "c2771384bd4f7c83d95d82dbaec02ab95ce58ed002f62f8a1e85e7739bbc2c18",
+  "clips": 164,
+  "native_input_counts": {
+    "face_detection_inputs": 5576,
+    "crop_classifier_inputs": 1952,
+    "appearance_inputs": 5552,
+    "patch_feature_inputs": 5552,
+    "native_repeat_inputs": 3
+  },
+  "native_repeats": [
+    "appearance",
+    "crop",
+    "features"
+  ],
+  "native_source_rgb_bound": true,
+  "duration_s": 391.8931326670572,
+  "serving_admitted": false
+}

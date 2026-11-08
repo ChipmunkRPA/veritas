@@ -1,0 +1,66 @@
+{
+  "specialist_cal": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.score_video_specialists_v20",
+    "arguments": [
+      "native",
+      "<private-video-trial>",
+      "--role",
+      "specialist_cal"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 1931411456,
+    "sample_errors": 27,
+    "duration_s": 380.1186937079765,
+    "seconds_limit": 3600
+  },
+  "fusion_fit": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.score_video_specialists_v20",
+    "arguments": [
+      "native",
+      "<private-video-trial>",
+      "--role",
+      "fusion_fit"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 1932230656,
+    "sample_errors": 24,
+    "duration_s": 393.3241835000226,
+    "seconds_limit": 3600
+  },
+  "fusion_cal": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.score_video_specialists_v20",
+    "arguments": [
+      "native",
+      "<private-video-trial>",
+      "--role",
+      "fusion_cal"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 3097460736,
+    "sample_errors": 27,
+    "duration_s": 375.24032324994914,
+    "seconds_limit": 3600
+  },
+  "confirmation": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.score_video_specialists_v20",
+    "arguments": [
+      "native",
+      "<private-video-trial>",
+      "--role",
+      "confirmation"
+    ],
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 1930952704,
+    "sample_errors": 19,
+    "duration_s": 365.99336016702,
+    "seconds_limit": 3600
+  }
+}

@@ -47,6 +47,10 @@ JPEG confirmation is now complete: the candidate failed three fixed gates and
 was rejected. Those sources are consumed development data, not another fresh
 holdout. No EISL implementation or checkpoint was imported;
 an independent feature-method prototype would be a separately frozen study.
+That independent [noise/texture intervention study](image-residual-v13-result.md)
+is now complete on consumed development sources: both simple heads lose
+localization quality and are rejected. It neither reproduces nor tests EISL's
+learned CLIP/LoRA implementation, and imports none of its code or weights.
 
 ## Video: explain the temporal features and context
 

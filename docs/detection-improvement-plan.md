@@ -81,6 +81,13 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Implemented and tested two new source-resolution noise/texture localizers,
+  with and without a fit-genuine intervention projection. All 1,344 consumed-
+  source feature cases completed. On 108 diagnostic edits, each candidate has
+  only one IoU>=.3 case versus six current; both are rejected. A separate replay
+  matches 1,008 score grids and exact source masks. This is an actual new feature
+  comparison, not another calibration-point adjustment or fresh accuracy claim.
+  [Complete method, controls and result](image-residual-v13-result.md).
 - Added source-bound structured AIGC label evidence across supported image,
   video, audio and document formats, normal views, all report profiles, API and
   JSON. Claims stay unverified and outside confidence; missing/malformed fields

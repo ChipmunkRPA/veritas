@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.image-residual-development-execution/13",
+  "serving_admitted": false,
+  "new_neural_forwards": 0,
+  "outside_human_reviews": 0,
+  "steps": {
+    "features_fit_diagnostics": {
+      "module": "scripts.run_image_residual_v13",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 601227264,
+      "sample_errors": 0,
+      "duration_s": 172.6066355840303,
+      "seconds_limit": 1800,
+      "private_profile_sha256": "d73a01b495da3165ad54a6b0e9de94a3b6307d1ef8a1c3058809d3916c35ce93"
+    },
+    "separate_arithmetic_coordinate_replay": {
+      "module": "scripts.review_image_residual_v13",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 434012160,
+      "sample_errors": 0,
+      "duration_s": 12.372013624990359,
+      "seconds_limit": 900,
+      "private_profile_sha256": "908ed067eae6663dd1169eb569699321c0a64a1c1d4a3e68041955db3beaa627"
+    }
+  },
+  "private_artifact_commitments": {
+    "features.jsonl": "06278fbc9df4e703049b7d787c8ba445428c0bad8304822118d963656c9378c2",
+    "fit-samples-private.npz": "289017c48b63c41fd5a87da88878336faaca2e9b9c52bb252800e4f50f80494d",
+    "outcomes-private.json": "07ff7bb12874a740a21e1fb75123c1eb0e257870a57ee605f300de2b999795db",
+    "residual_features-head-private.json": "a12b892f7db956279336ff280a063117611bc14f69cfe491dda9e3aa2f75241b",
+    "residual_features_projected-head-private.json": "5319b286e0bb2896f498701a079ea723932dcb15790ea2e5891e3b44d08230c7"
+  }
+}

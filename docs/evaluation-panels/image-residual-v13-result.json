@@ -1,0 +1,179 @@
+{
+  "policy": {
+    "version": 13,
+    "source_scope": "Previously consumed project sources only; no fresh accuracy claim.",
+    "fit": "120 v11 source groups (specialist_cal and fusion_fit); exact source RGB masks, original/lighting/jpeg55 variants and genuine ordinary-patch controls.",
+    "point": "60 source-disjoint v11 fusion_cal groups; at most5% genuine groups with original or ordinary-patch response strictly above point; no AI outcomes used.",
+    "diagnostic": "60 v11 confirmation plus48 consumed v12 groups; no role changes or case omission.",
+    "arms": [
+      "residual_features",
+      "residual_features_projected"
+    ],
+    "projection": "Remove top2 fit-genuine standardized intervention-delta covariance directions. Same augmented fit samples, L2=.01, logistic ranking head in both arms.",
+    "localization": "Source-resolution measurements pooled to64x64. Median3x3 response,8-connected components with>=16 cells. Edge-aligned source coordinate projection.",
+    "limits": "No pretrained weights or neural forwards. No confidence calibration, full-image authorship, fresh-source, unseen-generator, external reviewer or serving admission claim.",
+    "continuation": "Require higher mean edited IoU and more IoU>=.3 cases than current, no extra genuine flags, and ordinary-control flags<=5%; passing needs real baseline ordinary controls and fresh confirmation before any promotion.",
+    "serving_admitted": false
+  },
+  "freeze_sha256": "57d65578b1c550028da4b2841439bc85edc961f687c0f277cf9dff0a2f7fcc36",
+  "features_journal_sha256": "06278fbc9df4e703049b7d787c8ba445428c0bad8304822118d963656c9378c2",
+  "feature_cases_completed": 1344,
+  "fit_sample_cells": 107520,
+  "genuine_intervention_delta_cells": 30720,
+  "heads": {
+    "residual_features": {
+      "objective": 0.6159184145451837,
+      "iterations": 58,
+      "removed_dimensions": 0,
+      "point": {
+        "value": 0.9075161502725124,
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Fixed research comparison point, not an AI confidence or public screening threshold"
+      }
+    },
+    "residual_features_projected": {
+      "objective": 0.6188160860967808,
+      "iterations": 48,
+      "removed_dimensions": 2,
+      "point": {
+        "value": 0.9100654786878182,
+        "comparison": "strict_greater_than",
+        "calibration_groups": 60,
+        "maximum_flagged_calibration_groups": 3,
+        "scope": "Fixed research comparison point, not an AI confidence or public screening threshold"
+      }
+    }
+  },
+  "diagnostic": {
+    "all": {
+      "current_originals_only": {
+        "edited_inputs": 108,
+        "edited_flagged": 19,
+        "edited_iou_at_least_0_3": 6,
+        "edited_mean_iou": 0.04300615014653744,
+        "edited_mean_pixel_f1": 0.0649038457947721,
+        "genuine_inputs": 108,
+        "genuine_flags": 7,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "residual_features": {
+          "edited_inputs": 108,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.008622285098676364,
+          "edited_mean_pixel_f1": 0.013093191220093657,
+          "genuine_inputs": 108,
+          "genuine_flags": 4,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 2,
+          "continuation_gates": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_controls_at_most_5pct": true
+          },
+          "development_continuation_eligible": false
+        },
+        "residual_features_projected": {
+          "edited_inputs": 108,
+          "edited_flagged": 6,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.0053267907990648235,
+          "edited_mean_pixel_f1": 0.008513867592790549,
+          "genuine_inputs": 108,
+          "genuine_flags": 6,
+          "ordinary_inputs": 108,
+          "ordinary_flags": 4,
+          "continuation_gates": {
+            "higher_mean_iou": false,
+            "more_iou_0_3": false,
+            "no_extra_genuine_flags": true,
+            "ordinary_controls_at_most_5pct": true
+          },
+          "development_continuation_eligible": false
+        }
+      }
+    },
+    "v11": {
+      "current_originals_only": {
+        "edited_inputs": 60,
+        "edited_flagged": 9,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.03863730940562144,
+        "edited_mean_pixel_f1": 0.058404286049010296,
+        "genuine_inputs": 60,
+        "genuine_flags": 5,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "residual_features": {
+          "edited_inputs": 60,
+          "edited_flagged": 5,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.012899405270041278,
+          "edited_mean_pixel_f1": 0.019038515507407632,
+          "genuine_inputs": 60,
+          "genuine_flags": 3,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 1
+        },
+        "residual_features_projected": {
+          "edited_inputs": 60,
+          "edited_flagged": 4,
+          "edited_iou_at_least_0_3": 1,
+          "edited_mean_iou": 0.005717699266086364,
+          "edited_mean_pixel_f1": 0.008514423687889185,
+          "genuine_inputs": 60,
+          "genuine_flags": 4,
+          "ordinary_inputs": 60,
+          "ordinary_flags": 2
+        }
+      }
+    },
+    "consumed-v12": {
+      "current_originals_only": {
+        "edited_inputs": 48,
+        "edited_flagged": 10,
+        "edited_iou_at_least_0_3": 3,
+        "edited_mean_iou": 0.04846720107268246,
+        "edited_mean_pixel_f1": 0.07302829547697436,
+        "genuine_inputs": 48,
+        "genuine_flags": 2,
+        "ordinary_inputs": 0,
+        "ordinary_flags": 0
+      },
+      "arms": {
+        "residual_features": {
+          "edited_inputs": 48,
+          "edited_flagged": 1,
+          "edited_iou_at_least_0_3": 0,
+          "edited_mean_iou": 0.0032758848844702203,
+          "edited_mean_pixel_f1": 0.005661535860951188,
+          "genuine_inputs": 48,
+          "genuine_flags": 1,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 1
+        },
+        "residual_features_projected": {
+          "edited_inputs": 48,
+          "edited_flagged": 2,
+          "edited_iou_at_least_0_3": 0,
+          "edited_mean_iou": 0.004838155215287899,
+          "edited_mean_pixel_f1": 0.008513172473917254,
+          "genuine_inputs": 48,
+          "genuine_flags": 2,
+          "ordinary_inputs": 48,
+          "ordinary_flags": 2
+        }
+      }
+    }
+  },
+  "new_neural_forwards": 0,
+  "outside_human_reviews": 0,
+  "serving_admitted": false
+}

@@ -1,5 +1,9 @@
 # Broader provider-signal review
 
+This earlier supplement records the 50-family expansion and its validation.
+The [subsequent review](provider-signal-expansion-2026-11-08.md) brings the current
+inventory to 57 families / 83 scoped records; its changes and tests are separate.
+
 Reviewed 8 November 2026. The [catalog](provider-signals-catalog.json) expands
 from 37 to **50 provider families**, with **69 scoped signal records** and a
 [four-modality matrix](provider-signal-matrix.md). Thirty-nine families have

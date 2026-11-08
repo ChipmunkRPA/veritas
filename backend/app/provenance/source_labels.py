@@ -27,7 +27,7 @@ NOTICE = ('These are unverified metadata claims. Labels can be copied, changed o
 PROVIDERS = {
     'OpenAI': ('openai', 'chatgpt', 'sora', 'dall-e'),
     'Anthropic / Claude': ('anthropic', 'claude'),
-    'Google / Gemini': ('google', 'gemini', 'imagen', 'veo', 'lyria'),
+    'Google / Gemini': ('google', 'gemini', 'imagen', 'veo', 'lyria', 'notebooklm', 'genie', 'nano banana'),
     'Meta / Muse': ('meta', 'muse'), 'xAI / Grok': ('xai', 'grok'),
     'MiniMax / Hailuo': ('minimax', 'hailuo', '海螺'), 'DeepSeek': ('deepseek', '深度求索'),
     'Alibaba / Qwen / Wan': ('alibaba', 'qwen', 'wan', '通义千问', '通义万相'),
@@ -52,6 +52,11 @@ PROVIDERS = {
     'WRITER / Palmyra': ('writer', 'palmyra'), 'Perplexity': ('perplexity', 'sonar'),
     'IBM / Granite': ('ibm', 'granite'), 'AI21 / Jamba': ('ai21', 'ai21 labs', 'jamba'),
     'StepFun': ('stepfun', '阶跃星辰'), 'Baichuan': ('baichuan', '百川', '百小应', '百小医'),
+    'Samsung / Galaxy AI': ('samsung', 'galaxy ai'),
+    'SenseTime / SenseNova': ('sensetime', 'sensenova', '商汤', '日日新'),
+    'iFLYTEK / Spark': ('iflytek', 'xfyun', '科大讯飞', '讯飞星火'),
+    'Murf': ('murf', 'murf ai'), 'Canva': ('canva',),
+    'Leonardo AI': ('leonardo ai', 'leonardo.ai'), 'Descript': ('descript',),
 }
 ALIASES = {alias: name for name, aliases in PROVIDERS.items() for alias in aliases}
 DECLARATIONS = {'1': 'Declares AI generation or synthesis', '2': 'Labels possible AI involvement',

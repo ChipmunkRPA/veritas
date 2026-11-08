@@ -29,10 +29,13 @@ def cell(signals, modality):
              'public_watermark': 'Research', 'keyed_text': 'Keyed text', 'provider_metadata': 'Metadata',
              'structured_label': 'Label policy', 'visible_label': 'Visible label',
              'audible_label': 'Audible label', 'provider_classifier': 'Classifier',
+             'export_mark': 'Export mark',
              'publicly_documented_custom_mark': 'Custom mark'}
     applicable = [s for s in signals if modality in s['modalities']
                   and s.get('availability') not in ('announced_future', 'historical')]
-    return ', '.join(dict.fromkeys(names[s['kind']] for s in applicable))
+    labels = [names[s['kind']] + (' (version-limited)' if s.get('availability') == 'version_conditional' else '')
+              for s in applicable]
+    return ', '.join(dict.fromkeys(labels))
 
 
 def validate(catalog):
@@ -77,6 +80,7 @@ def render(catalog):
         '“Gap” means not established by this review, including where the provider does not offer that modality. '
         '“Planned” means an announcement only; “Historical” is not current export coverage. '
         '“Research” identifies a released scheme, without claiming production-provider compatibility. '
+        '“Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. '
         'A generic policy with unresolved export scope does not fill the four cells.',
         '',
         'All external verification routes are disabled for customer files. Only the existing trusted, valid, '
@@ -84,7 +88,7 @@ def render(catalog):
         'A video-container audio check covers sound only. A provider classifier score is not a verified watermark hit.',
         '',
         'See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) '
-        'and [supplemental findings](provider-signal-review-2026-11-08.md) for exact products, controls, dates, '
+        'and [latest supplemental findings](provider-signal-expansion-2026-11-08.md) for exact products, controls, dates, '
         'limits, contradictions and qualification requirements.',
         '',
         '| Provider family | Image | Video | Audio | Writing | Reviewed |',

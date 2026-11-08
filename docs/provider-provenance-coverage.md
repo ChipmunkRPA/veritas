@@ -1,14 +1,14 @@
 # Provider signals and the provenance-first gate
 
 Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **50 provider families**, all four modality fields, **69 scoped signal
+covers **57 provider families**, all four modality fields, **83 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
-Thirty-nine families have scoped documentation, including announcements or
-policies with unresolved export scope; eleven remain review gaps.
+Forty-four families have scoped documentation, including announcements or
+policies with unresolved export scope; thirteen remain review gaps.
 These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
 The [four-modality matrix](provider-signal-matrix.md) and
-[supplemental review](provider-signal-review-2026-11-08.md) distinguish current
+[latest supplemental review](provider-signal-expansion-2026-11-08.md) distinguish current
 marking documentation, future commitments and missing verification routes.
 Individual provider rows retain their actual review dates.
 
@@ -84,7 +84,7 @@ their saved calculations.
 | Moonshot / Kimi | [Explicit notices and implicit metadata rules](https://www.kimi.com/user/agreement/modelUse?version=v2) | Platform terms are not a public decoder/key or proof of all self-hosted output. |
 | NVIDIA | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
 | Kakao | [SynthID Detector partner listing](https://deepmind.google/models/synthid/) | Exact models/modalities are not established by the listing alone. |
-| Apple | [Announced upcoming SynthID Detector support](https://deepmind.google/models/synthid/) | “Soon” is not current deployed coverage. |
+| Apple | [Version-limited image SynthID documentation](https://support.apple.com/en-us/149520) | Named tools from OS 27.2; rollout and actual verification were not tested. Google's overview still says “soon”; do not infer other modalities. |
 
 The broader follow-up adds **Cartesia, Inworld, Fish Audio, Hume, PlayAI/PlayHT,
 Lightricks/LTX, D-ID, WRITER/Palmyra, Perplexity, IBM/Granite, AI21/Jamba,
@@ -94,9 +94,15 @@ marking-documentation gap and records MiniMax's optional audible rhythm notice.
 Luma's visible marks are plan-dependent. Mistral Vibe Code and WRITER describe
 future December 2 commitments; these are not current working verifiers.
 
+The [latest follow-up](provider-signal-expansion-2026-11-08.md) adds Samsung,
+SenseTime, iFLYTEK, Murf, Canva, Leonardo and Descript. It also records Google's
+scoped hosted credentials and Genie preview, Qwen audio tags, Muse's linked
+portal, Hailuo and LTX export marks. Google's separate AI Content Detection API
+is a statistical image classifier, not a watermark verifier or early-stop route.
+
 Focused primary-source searches still leave **Cohere, Udio, Ideogram, Recraft,
-Fish Audio, Hume, PlayAI/PlayHT, Lightricks/LTX, Perplexity, IBM/Granite and
-AI21/Jamba** as review gaps. Queries and all four explicit modality states remain
+Fish Audio, Hume, PlayAI/PlayHT, Perplexity, IBM/Granite, AI21/Jamba, Canva,
+Leonardo and Descript** as review gaps. Queries and all four explicit modality states remain
 in the catalog. This does not mean those providers never mark content.
 Customer discussions, transparency pledges and a shared watermark algorithm
 are insufficient to fill a missing production-verification specification.
@@ -105,7 +111,7 @@ are insufficient to fill a missing production-verification specification.
 
 The [structured-label reader](structured-source-labels.md) recognizes supported
 AIGC fields, locators and checksums. Known-name normalization now covers the
-50 families, including `volcengine`, `seedream`, Cartesia and Inworld. Recognizing a known string
+57 families, including `volcengine`, `seedream`, Cartesia, Inworld and SenseTime. Recognizing a known string
 does not show the provider actually uses that field, authenticate it, decode a
 hidden watermark or add confidence. Unknown names/codes and private identifiers
 remain withheld. Version 1 historical and version 2 current records render in
@@ -120,7 +126,10 @@ fixed public-family check remains outside serving, confidence and early stopping
 The separate [visual native contract](public-visual-watermark-v1-result.md) also
 completed72 image and96 frame cases with exact mask/source-time replay.
 Compression-related misses and false responses remain; real-media/provider
-qualification and app admission are still open.
+qualification and app admission are still open. The subsequent
+[natural-media study](public-visual-natural-v2-result.md) completed 640 cases
+with retained control flags and compressed timing/message failures; it remains
+outside serving, confidence and the early-stop gate.
 Matching key/payload, scheme, generation
 configuration, tokenizer and license remain necessary. Public detection-key
 schemes exist; “every detector needs a secret provider key” would be incorrect.
@@ -145,6 +154,6 @@ accuracy benchmark. The test authority is never added to production trust.
 Next priority is qualifying real-provider fixtures for Suno/Bria/Cartesia and the
 available public watermark schemes, then integrating supported routes with
 clear scope and data handling. Restricted production text verification, Muse
-compatibility and the eleven review gaps remain open. No new weights,
+compatibility and the thirteen review gaps remain open. No new weights,
 statistical calibration, public confidence threshold or GCP deployment was
 introduced by this inventory.

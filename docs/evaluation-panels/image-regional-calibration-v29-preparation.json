@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.regional-calibration-execution-preparation/29",
+  "implementation_frozen": true,
+  "implementation_sha256": {
+    "backend/scripts/prepare_regional_calibration_v29.py": "92bce9a2fc0a13587b7d4ec86a257b8764588196b2e8af4c1fa429d37be7591e",
+    "backend/scripts/regional_calibration_preparation_runtime_v29.py": "eaa6ee7d4878ec7c104d780aaafe9a49dc3420a559a0abc8ab925991180935aa",
+    "backend/tests/test_prepare_regional_calibration_v29.py": "cb65ddfd7c3f20cb5ae744caae1cf5b9e6291419ccb23c9855d89b4bffa84552",
+    "docs/image-regional-calibration-execution-v29-protocol.md": "7435313ecfcc02f063bff74098c38f9ab4757fc0192b70604cee53bd3cb5007c"
+  },
+  "training_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "training_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "readout_v27_freeze_sha256": "b8d881d55726b60ff8c2a4418e94b182bfc1c7a3df136461b6fd30b19da9e1e4",
+  "producer_v28_preparation_sha256": "f2598d5a4a653f8819c92bada1a348d10a7768df6755d1f6ae27657ffc652df2",
+  "tests_passed": 14,
+  "lint_passed": true,
+  "complete_real_training_audit_performed": false,
+  "reserved_source_neural_forwards": 0,
+  "inference_admitted": false,
+  "serving_admitted": false,
+  "scope": "Tested audit/publication/admission implementation only. Actual training completion, bounded complete-chain audit, verified final supplement and all reserved neural calls remain outstanding."
+}

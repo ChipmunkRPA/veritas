@@ -1,0 +1,98 @@
+{
+  "schema": "chipmunk.preserved-evidence-linux-three-replica-review/23",
+  "science_commit": "183c532d3e58dd256e3e47495b4afbd147f6cad7",
+  "run_id": 42437016448,
+  "workflow_id": 410813947,
+  "workflow_url": "https://github.com/ChipmunkRPA/veritas/actions/runs/42437016448",
+  "replicas": [
+    {
+      "job_id": 128597920185,
+      "name": "checked-source-refit (3)",
+      "conclusion": "success",
+      "replay": {
+        "schema": "chipmunk.immutable-preserved-evidence-replay/23",
+        "science_commit": "183c532d3e58dd256e3e47495b4afbd147f6cad7",
+        "archived_files": 208,
+        "numerical": {
+          "schema": "chipmunk.preserved-evidence-numerical-reproduction/23",
+          "compared_floats": 27362,
+          "maximum_absolute_difference": 3.375077994860476e-14,
+          "video_arms": 5,
+          "real_training_problems_checked": 102,
+          "statuses_source_counts_and_decisions_exact": true,
+          "new_fit_checks_and_adverse_checks_passed": true,
+          "new_neural_forwards": 0,
+          "raw_media_or_model_weights_loaded": false,
+          "serving_admitted": false,
+          "outside_human_reviews": 0,
+          "limits": "Immutable consumed-source numerical replay; not native media execution or fresh detection quality."
+        },
+        "frozen_science_modified": false,
+        "new_neural_forwards": 0,
+        "serving_admitted": false
+      }
+    },
+    {
+      "job_id": 128597920274,
+      "name": "checked-source-refit (2)",
+      "conclusion": "success",
+      "replay": {
+        "schema": "chipmunk.immutable-preserved-evidence-replay/23",
+        "science_commit": "183c532d3e58dd256e3e47495b4afbd147f6cad7",
+        "archived_files": 208,
+        "numerical": {
+          "schema": "chipmunk.preserved-evidence-numerical-reproduction/23",
+          "compared_floats": 27362,
+          "maximum_absolute_difference": 3.375077994860476e-14,
+          "video_arms": 5,
+          "real_training_problems_checked": 102,
+          "statuses_source_counts_and_decisions_exact": true,
+          "new_fit_checks_and_adverse_checks_passed": true,
+          "new_neural_forwards": 0,
+          "raw_media_or_model_weights_loaded": false,
+          "serving_admitted": false,
+          "outside_human_reviews": 0,
+          "limits": "Immutable consumed-source numerical replay; not native media execution or fresh detection quality."
+        },
+        "frozen_science_modified": false,
+        "new_neural_forwards": 0,
+        "serving_admitted": false
+      }
+    },
+    {
+      "job_id": 128597920302,
+      "name": "checked-source-refit (1)",
+      "conclusion": "success",
+      "replay": {
+        "schema": "chipmunk.immutable-preserved-evidence-replay/23",
+        "science_commit": "183c532d3e58dd256e3e47495b4afbd147f6cad7",
+        "archived_files": 208,
+        "numerical": {
+          "schema": "chipmunk.preserved-evidence-numerical-reproduction/23",
+          "compared_floats": 27362,
+          "maximum_absolute_difference": 3.375077994860476e-14,
+          "video_arms": 5,
+          "real_training_problems_checked": 102,
+          "statuses_source_counts_and_decisions_exact": true,
+          "new_fit_checks_and_adverse_checks_passed": true,
+          "new_neural_forwards": 0,
+          "raw_media_or_model_weights_loaded": false,
+          "serving_admitted": false,
+          "outside_human_reviews": 0,
+          "limits": "Immutable consumed-source numerical replay; not native media execution or fresh detection quality."
+        },
+        "frozen_science_modified": false,
+        "new_neural_forwards": 0,
+        "serving_admitted": false
+      }
+    }
+  ],
+  "all_three_passed": true,
+  "automatic_retries": 0,
+  "maximum_absolute_difference": 3.375077994860476e-14,
+  "older_failed_v22_run_retained": 42436036702,
+  "outside_human_reviews": 0,
+  "serving_admitted": false,
+  "new_neural_forwards": 0,
+  "limits": "Successful numerical portability on these exact inputs and three planned Linux jobs; not universal convergence, new native inference, fresh detection validation, outside human review or serving admission."
+}

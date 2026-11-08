@@ -6,7 +6,14 @@ This implements the cross-modal testing architecture requested 7 November 2026.
 It does not establish improved real-media detection, supply new trained detectors
 or change customer confidence. Every generated artifact has `serving_admitted:false`.
 
-The current recipe is **version2**. The first authored prototype passed local and
+The frozen original recipe is **version2**. A new research-only
+[preserved-view alternative](preserved-evidence-v23-result.md) retains individual
+check maxima and uses independently checked small Newton fits. It passed102
+original optimization problems across all four media and three planned Linux
+replays. Its actual detection comparison currently covers video only. It does
+not change customer confidence or rewrite completed experiments.
+
+The first authored prototype passed local and
 Linux numerical checks, but four later semantic regression tests exposed negative
 evidence from an unrelated region subtracting from positive evidence elsewhere.
 Version2 fixes that any-AI pooling rule before real-data fitting. The old numerical
@@ -25,7 +32,7 @@ review of media, labels, provenance and detection quality.
 | Image | All 960 inputs from 240 consumed source pairs completed using the actual PNG and JPEG branches; separate local and combined calibration. Local source audit and Linux scalar refit passed. | Only JPEG primary plus regions qualifies for further comparison: 10/60 edits versus current 9/60, with 5/60 genuine false flags in both. Pixel localization remains weak. No promotion. [Result](image-supported-v11-result.md). |
 | Passage | Eight scoped/contextual combinations tested on 128 consumed prompt/source components, including mixed human/AI passages and 16 generators. | Pooled scoped combination finds 87/96 versus baseline 86/96 but raises genuine false flags from 6/32 to 7/32. All alternatives fail gates. Linux fitting also has recorded convergence failures. [Result](scoped-writing-v6-result.md). |
 | Voice/audio | All 4,004 planned files completed: eight AI generators, 143 consumed foreground pairs, 48 role-disjoint background originals, exact mixed-voice windows and strong noise/music/speech. Source audit and actual Linux scalar refit passed. | Filtered view adds no detection gain. Contextual calibration loses 59 AI files despite fewer false flags. Retain serving calibration. [Result](audio-specialists-v15-result.md). |
-| Video | All 648 exact clips and 14,256 source-bound units completed; separate local heads and four frozen combinations. Full source/input review and exact local scalar refit passed. | Crop plus appearance finds 29/80 swaps versus calibrated crop's 11/80, both with 5/80 genuine false flags. Existing raw appearance is stronger at 62/80 and 1/80. No promotion or fresh-reserve spend for this combination. [Result](video-face-specialists-v20-result.md). |
+| Video | All 648 exact clips and 14,256 source-bound units completed. A later controlled scalar comparison preserves individual views and checks numerical fitting. Three new immutable Linux replicas passed. | Preserved views find63/80 swaps at3/80 genuine false flags versus lossy family maximum18/80 at3/80, with matched dimension/penalty controls. Existing raw appearance remains stronger on false alarms/coverage at62/80 and1/80. No promotion. [Latest result](preserved-evidence-v23-result.md), [native/source study](video-face-specialists-v20-result.md). |
 
 These consumed-source pilots do not replace fresh, source-disjoint validation.
 No new specialist calibration contributes to customer confidence. The video

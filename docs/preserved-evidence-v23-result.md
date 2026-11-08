@@ -53,3 +53,16 @@ outcomes and code. No raw clips, face/voice features, alignments or customer
 uploads are added. Local numerical replay and the actual immutable Linux
 receipts are reported separately. Outside human reviewers remain0; numerical
 portability does not establish fresh detection quality or court suitability.
+
+The local immutable replay archived208 exact repository files and reproduced
+all27,362 floating outputs with maximum difference0. The actual
+[v23 Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42437016448)
+then completed all three predeclared replicas successfully, without retries.
+Each archived the same208 files from science commit
+`183c532d3e58dd256e3e47495b4afbd147f6cad7`, checked all102 problems and five
+video methods, and matched every status/source count/decision. The maximum
+numeric difference in every replica was3.375077994860476e-14. The
+[actual three-job receipt](evaluation-panels/preserved-evidence-v23-linux-review.json)
+records job identities and unaltered output. This is successful portability on
+these inputs, not a universal convergence or fresh detection claim. The failed
+v22 run and its original partial journal remain visible.

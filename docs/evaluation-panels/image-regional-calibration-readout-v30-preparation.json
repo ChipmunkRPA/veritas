@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.regional-calibration-map-readout-preparation/30",
+  "implementation_frozen": true,
+  "implementation_sha256": {
+    "backend/scripts/replay_regional_calibration_v30.py": "be3434afc823843bd9dc71c614fd99e56eff1d1ea59f12bdd04d03790e6397e8",
+    "backend/scripts/regional_calibration_readout_runtime_v30.py": "0266233c71e1b7607ef09ad9def81bc4d5d9d57975e84d88e02f5d2e8574284b",
+    "backend/tests/test_replay_regional_calibration_v30.py": "9670eb82add16f6219b18f433b33cd6a717d56c1603f79d5cc69756b6a324a22",
+    "docs/image-regional-calibration-readout-v30-protocol.md": "195998d19fe31b121cfe4b3803a6f6580066915e23cc662f12dccf363954815e"
+  },
+  "training_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "training_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "readout_v27_freeze_sha256": "b8d881d55726b60ff8c2a4418e94b182bfc1c7a3df136461b6fd30b19da9e1e4",
+  "producer_v28_preparation_sha256": "f2598d5a4a653f8819c92bada1a348d10a7768df6755d1f6ae27657ffc652df2",
+  "admission_v29_preparation_sha256": "7c2962f603ba6390e5e5e2d47353b62b4204fe14432f7348a4276d9feb3e2866",
+  "tests_passed": 17,
+  "lint_passed": true,
+  "actual_reserved_map_readout_performed": false,
+  "reserved_source_neural_forwards": 0,
+  "inference_admitted": false,
+  "probability_calibration_performed": false,
+  "serving_admitted": false,
+  "scope": "Tested replay and reporting implementation only. No real reserved maps, policy selection, accuracy comparison or confidence fit has been evaluated."
+}

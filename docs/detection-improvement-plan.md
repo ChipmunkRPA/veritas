@@ -81,6 +81,15 @@ integration remains unfinished.
 
 ## Progress on 8 November
 
+- Completed the new source-preserving image localizer comparison and complete
+  native replay:384 inputs,798 project-source forwards, no skipped/failed
+  images. All384 float32 maps and separate IEEE/component reconstruction match;
+  both genuine points and288 gated pixel-count sets reproduce. Candidate still
+  finds0/48 useful regions per format versus9/48 native and6/48 JPEG current,
+  with larger wrong regions on some genuine sources. Rejected; no fresh reserve
+  or confidence admission. Ungated proposals also generate frequent genuine
+  false highlights. [Complete result and next methodological question](image-relayformer-v18-result.md).
+
 - Finished the controlled writing-span comparison:992 documents, complete
   native/source replay,864 separately recounted diagnostic arm masks, exact
   refits of both heads and three calibrators/points. Interval localization

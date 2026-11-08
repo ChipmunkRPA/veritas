@@ -5,6 +5,11 @@ accuracy, calibrated confidence or a serving release. Neither new image model
 has scored project media. All checks ran locally; GitHub Actions remains disabled.
 Current confidence, rollback, prepaid USD9.99 analysis and GCP deferral are unchanged.
 
+That paragraph records the preparation stage at0c0f2af. The subsequent
+[complete real-image comparison](image-relayformer-v18-result.md) is now
+finished:384 inputs,798 project-source forwards and exact full native replay.
+The candidate fails its localization/false-highlight requirements and is rejected.
+
 ## Word editing needs paired provenance and separate targets
 
 September's [MixDetect paper](https://arxiv.org/html/2609.32625v1) separates edit

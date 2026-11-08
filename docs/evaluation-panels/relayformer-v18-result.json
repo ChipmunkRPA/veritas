@@ -1,0 +1,353 @@
+{
+  "schema": "chipmunk.relayformer-public-result/18",
+  "freeze_sha256": "2d2614e84f22eb716d63b8e2d88ebce6a78fa30433120cee72153597cb9677d6",
+  "point_seal_sha256": "581266a75b93bedfa7dd28e0f26a254582b175a3979847465564d18f9827c295",
+  "result_sha256": "5c7453db9d24e0f3e8155ea5069f7d8814b5c5cd036885eeffeb686f55831e77",
+  "review_sha256": "ef9f9852c665cc1c7a92c6a4064b1149508c76c90da9980de2d957578d020aac",
+  "phases": {
+    "point": {
+      "role": "point",
+      "status": "complete",
+      "freeze_sha256": "2d2614e84f22eb716d63b8e2d88ebce6a78fa30433120cee72153597cb9677d6",
+      "planned": 96,
+      "complete": 96,
+      "failed": 0,
+      "duration_s": 176.10673595801927,
+      "journal_sha256": "0efce8314256eb8d016da790e58b8e774af9c7b891151817e113830c98dd4450",
+      "attempted_model_forwards": 108,
+      "completed_model_forwards": 108
+    },
+    "diagnostic": {
+      "role": "diagnostic",
+      "status": "complete",
+      "freeze_sha256": "2d2614e84f22eb716d63b8e2d88ebce6a78fa30433120cee72153597cb9677d6",
+      "planned": 288,
+      "complete": 288,
+      "failed": 0,
+      "duration_s": 488.0060362078948,
+      "journal_sha256": "b065a1fe3d881c743b9f78d4ec962d3624be9b94fa64edaa5779b7df02071221",
+      "attempted_model_forwards": 306,
+      "completed_model_forwards": 306
+    }
+  },
+  "points": {
+    "native": {
+      "strict_source_second_maximum": [
+        168503,
+        786432
+      ],
+      "minimum_area_fraction": [
+        1,
+        1000
+      ],
+      "source_groups": 24,
+      "genuine_group_budget": 1,
+      "uses_ai_or_diagnostic": false,
+      "groups_flagged": 1
+    },
+    "jpeg75": {
+      "strict_source_second_maximum": [
+        107609,
+        837837
+      ],
+      "minimum_area_fraction": [
+        1,
+        1000
+      ],
+      "source_groups": 24,
+      "genuine_group_budget": 1,
+      "uses_ai_or_diagnostic": false,
+      "groups_flagged": 1
+    }
+  },
+  "summary": {
+    "schema": "chipmunk.relayformer-development-result/18",
+    "formats": {
+      "native": {
+        "arms": {
+          "current": {
+            "edited": 48,
+            "useful_locations": 9,
+            "any_overlap": 10,
+            "mean_iou": 0.14976538127836223,
+            "mean_pixel_f1": 0.16833953906302904,
+            "original_highlights": 0,
+            "original_mean_highlighted_area": 0.0,
+            "ordinary_highlights": 33,
+            "ordinary_mean_highlighted_area": 0.0466400062291624
+          },
+          "candidate": {
+            "edited": 48,
+            "useful_locations": 0,
+            "any_overlap": 2,
+            "mean_iou": 0.0005340079903932952,
+            "mean_pixel_f1": 0.0010525048873069726,
+            "original_highlights": 2,
+            "original_mean_highlighted_area": 0.02968198217921882,
+            "ordinary_highlights": 8,
+            "ordinary_mean_highlighted_area": 0.06119782749787265
+          }
+        },
+        "gates": {
+          "candidate": {
+            "checks": {
+              "more_useful_locations": false,
+              "higher_mean_iou": false,
+              "no_lost_current_useful_location": false,
+              "original_highlight_budget": false,
+              "ordinary_highlight_budget": true
+            },
+            "passes": false,
+            "lost_current_useful_locations": 9,
+            "paired_source_mean_iou_difference_bootstrap95": [
+              -0.2431056758152107,
+              -0.06660489032075327
+            ]
+          }
+        }
+      },
+      "jpeg75": {
+        "arms": {
+          "current": {
+            "edited": 48,
+            "useful_locations": 6,
+            "any_overlap": 9,
+            "mean_iou": 0.07931480718882764,
+            "mean_pixel_f1": 0.10739511565523718,
+            "original_highlights": 5,
+            "original_mean_highlighted_area": 0.0037111048696532958,
+            "ordinary_highlights": 23,
+            "ordinary_mean_highlighted_area": 0.038203271126967454
+          },
+          "candidate": {
+            "edited": 48,
+            "useful_locations": 0,
+            "any_overlap": 1,
+            "mean_iou": 0.00040871034941493265,
+            "mean_pixel_f1": 0.0008016930078210627,
+            "original_highlights": 1,
+            "original_mean_highlighted_area": 0.016655753396129694,
+            "ordinary_highlights": 8,
+            "ordinary_mean_highlighted_area": 0.04533859150014501
+          }
+        },
+        "gates": {
+          "candidate": {
+            "checks": {
+              "more_useful_locations": false,
+              "higher_mean_iou": false,
+              "no_lost_current_useful_location": false,
+              "original_highlight_budget": true,
+              "ordinary_highlight_budget": true
+            },
+            "passes": false,
+            "lost_current_useful_locations": 6,
+            "paired_source_mean_iou_difference_bootstrap95": [
+              -0.133306705736235,
+              -0.032203663529176155
+            ]
+          }
+        }
+      }
+    },
+    "source_groups": 48,
+    "diagnostic_inputs": 288,
+    "advance_to_separate_fresh_confirmation_arm": null,
+    "serving_admitted": false,
+    "used_in_confidence": false,
+    "fresh_source_validation": false,
+    "outside_human_reviewers": 0
+  },
+  "local_review": {
+    "schema": "chipmunk.relayformer-local-review/18",
+    "status": "complete",
+    "outside_human_reviewers": 0,
+    "source_and_native_cases": 384,
+    "separately_reconstructed_components": 384,
+    "separately_recounted_diagnostic_masks": 288,
+    "exact_genuine_point_refits": 2,
+    "complete_float32_maps_repeated_exactly": true,
+    "serving_admitted": false,
+    "reference_scope": "Retained canonical current-selector maps/counts, not a new full SaaS neural run",
+    "historical_failed_iml_audit_cleared": false,
+    "duration_s": 607.4465912079904,
+    "attempted_model_forwards": 384,
+    "completed_model_forwards": 384
+  },
+  "resource_profiles": {
+    "freeze": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_relayformer_v18",
+      "arguments": [
+        "freeze"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 690946048,
+      "sample_errors": 0,
+      "duration_s": 22.87078749993816,
+      "seconds_limit": 900
+    },
+    "point": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_relayformer_v18",
+      "arguments": [
+        "point"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1340309504,
+      "sample_errors": 0,
+      "duration_s": 181.02081187500153,
+      "seconds_limit": 900
+    },
+    "diagnostic": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_relayformer_v18",
+      "arguments": [
+        "diagnostic"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1338638336,
+      "sample_errors": 0,
+      "duration_s": 493.09388800000306,
+      "seconds_limit": 900
+    },
+    "review": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_relayformer_v18",
+      "arguments": [],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1393459200,
+      "sample_errors": 0,
+      "duration_s": 610.1188943750458,
+      "seconds_limit": 900
+    }
+  },
+  "family_diagnostics": {
+    "native": {
+      "firefly": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 1,
+          "original_highlights": 0,
+          "ordinary_highlights": 12
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 1,
+          "ordinary_highlights": 3
+        }
+      },
+      "sd2": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 4,
+          "original_highlights": 0,
+          "ordinary_highlights": 11
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 1,
+          "ordinary_highlights": 2
+        }
+      },
+      "flux-fill": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 4,
+          "original_highlights": 0,
+          "ordinary_highlights": 10
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 0,
+          "ordinary_highlights": 3
+        }
+      }
+    },
+    "jpeg75": {
+      "firefly": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 1,
+          "original_highlights": 2,
+          "ordinary_highlights": 6
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 1,
+          "ordinary_highlights": 3
+        }
+      },
+      "sd2": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 2,
+          "original_highlights": 2,
+          "ordinary_highlights": 8
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 0,
+          "ordinary_highlights": 3
+        }
+      },
+      "flux-fill": {
+        "current": {
+          "edited": 16,
+          "useful_locations": 3,
+          "original_highlights": 1,
+          "ordinary_highlights": 9
+        },
+        "candidate": {
+          "edited": 16,
+          "useful_locations": 0,
+          "original_highlights": 0,
+          "ordinary_highlights": 2
+        }
+      }
+    }
+  },
+  "ungated_descriptive_diagnosis": {
+    "native": {
+      "scope": "Post-result descriptive gate diagnosis; no changed criterion or alternate advancement",
+      "useful_edits": 11,
+      "original_highlights": 38,
+      "ordinary_highlights": 43
+    },
+    "jpeg75": {
+      "scope": "Post-result descriptive gate diagnosis; no changed criterion or alternate advancement",
+      "useful_edits": 6,
+      "original_highlights": 45,
+      "ordinary_highlights": 48
+    }
+  },
+  "candidate_advance_to_fresh_confirmation": null,
+  "complete_local_replay_passed": true,
+  "status_counts": {
+    "ok": 288
+  },
+  "canonical_path": "Unmerged CPUfloat32,complete source maps retained losslessly; exact integer component and point ranking",
+  "reference": "Input-bound retained current-selector outputs; no new full SaaS or baseline neural run",
+  "source": "TGIF/TGIF2 publisher CC BY-SA4.0; underlying photograph rights and training overlap not independently cleared; evaluation only, no redistribution",
+  "serving_admitted": false,
+  "used_in_confidence": false,
+  "github_workflows_executed": 0,
+  "outside_human_reviewers": 0,
+  "raw_photos_or_maps_or_checkpoint_values_published": false,
+  "limitations": [
+    "Consumed project source groups,not fresh accuracy or independently verified pixel authorship.",
+    "Raw sigmoid maps are not calibrated AI-origin probabilities.",
+    "Model plus complete readout tested together; checkpoint/renderer effects not isolated.",
+    "Local repeat and independent component arithmetic do not replace external human review.",
+    "Historical failed IML audits remain failed; this new graph/review does not clear them."
+  ]
+}

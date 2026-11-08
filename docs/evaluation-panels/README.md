@@ -10,6 +10,13 @@ or a generic dataset link.
 
 ## Latest review entry points (8 November 2026)
 
+- [Full-source regional localizer](../image-relayformer-v18-result.md):
+  all384 planned inputs,798 project-source forwards and a full exact native
+  replay, independent IEEE/component ranking and288 diagnostic mask counts.
+  Both formats locate0/48 useful edits and fail replacement requirements.
+  The aggregate retains false-highlight area, all gates and ungated diagnosis;
+  no source images/maps, new confidence or outside human review is claimed.
+
 - [Controlled writing-span learning](../writing-spans-v7-result.md):
   the prospective local-only protocol and aggregate freeze bind992 controlled
   documents, separate fitting/calibration/genuine-point/diagnostic source roles,

@@ -89,3 +89,11 @@ AI-declaration early stop. Real Muse/Gemini/Grok compatibility remains unverifie
 All authored arrays, model checkpoints and per-case journals stay local; public
 outputs are code, methods, hashes and aggregates. No customer analysis, payment,
 serving model, provider upload, GCP action or outside human review occurred.
+
+## Separate real-speech follow-up
+
+The [v2 speech/background study](public-audioseal-speech-v2-result.md) completed
+576 cases on32 known-unused project speakers. Clean/MP3 marks were recovered,
+but no-added-mark controls had false responses and strong backgrounds caused
+many misses. The public-family check remains research-only. This separate
+study preserves every original v1 case, point and code commitment.

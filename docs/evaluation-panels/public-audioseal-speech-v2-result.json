@@ -1,0 +1,427 @@
+{
+  "schema": "chipmunk.public-speech-watermark-result/2",
+  "policy": {
+    "schema": "chipmunk.public-speech-watermark-policy/2",
+    "speakers": 32,
+    "cases": 576,
+    "source_selection": "Known-unused project speaker identities from fixed public train360 first8 shards; source plan frozen before neural inference. External pretraining overlap unknown. Backgrounds are project-consumed, licensed and canonical-speaker disjoint.",
+    "source_extent": "First128000 mono16kHz s16 source samples (0\u20138s), duration eligibility only; no response-based source choice.",
+    "normalization": "Unmarked foreground float32 at RMS0.1; add native full-clip public mark, fixed alternating16bit message. Partial only copies marked source samples32000:96000; rest bit-identical.",
+    "conditions": [
+      "clean",
+      "white_0db",
+      "noise_0db",
+      "music_0db",
+      "speech_0db",
+      "mp3_64k"
+    ],
+    "states": [
+      "unmarked",
+      "marked",
+      "partial"
+    ],
+    "background": "Four matched0dB backgrounds per speaker: deterministic white noise and exact licensed environmental/music/other-speech excerpts. Gain uses the unmarked foreground RMS, identical for every mark state.",
+    "gain": "One float32 peak-safe gain shared across every mark state and condition for a speaker; min(1,0.8/max absolute pre-codec sample). No hidden clipping.",
+    "codec": "64kbps seekable MP3 of each clean gained state, decoded mono16kHz float32 with exact sample-count requirement; no alignment trimming or padding.",
+    "readout": "Frozen v1 native strict sample>0.5; quarter-second bin selected only when more than half its samples exceed0.5. Every native sample and bin retained.",
+    "planned_generator_forwards": 32,
+    "planned_detector_forwards": 581,
+    "helper_parity_cases": 4,
+    "repeat_cases": 1,
+    "reporting": "Per-condition unmarked false responses, full/partial misses, selected interval IoU/coverage/outside time; same32 speakers repeated, not576 independent sources. Fixed Wilson95 intervals for file rates.",
+    "serving_admission": false,
+    "confidence_admission": false,
+    "provider_authentication": false,
+    "early_stop_eligible": false,
+    "scope": "Public-family localization and robustness only. Deliberately marked real speech is not AI-generated speech."
+  },
+  "generator_forwards": 32,
+  "detector_forwards": 581,
+  "load_receipts": {
+    "detector": {
+      "checkpoint_sha256": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+      "source_state_tensors": 54,
+      "loaded_state_tensors": 40,
+      "all_loaded_tensors_verified": true,
+      "parameters": 8647298,
+      "weights_only": true,
+      "unused_training_metadata_resolved": false,
+      "unrestricted_pickle_used": false
+    },
+    "generator": {
+      "checkpoint_sha256": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+      "source_state_tensors": 101,
+      "loaded_state_tensors": 73,
+      "all_loaded_tensors_verified": true,
+      "parameters": 14675873,
+      "weights_only": true,
+      "unused_training_metadata_resolved": false,
+      "unrestricted_pickle_used": false
+    }
+  },
+  "case_count": 576,
+  "source_plan_sha256": "a697fe9b5baa58ab39f850941b70c17f50acb43b8e82c397f944ff4c9b805a26",
+  "outcomes": [
+    {
+      "condition": "clean",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 32,
+      "selected_rate_wilson95": [
+        0.8928208017449293,
+        1.0
+      ],
+      "misses": 0,
+      "mean_interval_iou": 0.9736328125,
+      "mean_mark_coverage": 0.9736328125,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "clean",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 32,
+      "selected_rate_wilson95": [
+        0.8928208017449293,
+        1.0
+      ],
+      "misses": 0,
+      "mean_interval_iou": 0.910437091503268,
+      "mean_mark_coverage": 0.9140625,
+      "mean_outside_mark_s": 0.0234375
+    },
+    {
+      "condition": "clean",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 1,
+      "selected_rate_wilson95": [
+        0.005537860164003122,
+        0.15744263820012558
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.0078125
+    },
+    {
+      "condition": "mp3_64k",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 32,
+      "selected_rate_wilson95": [
+        0.8928208017449293,
+        1.0
+      ],
+      "misses": 0,
+      "mean_interval_iou": 0.9619140625,
+      "mean_mark_coverage": 0.9619140625,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "mp3_64k",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 32,
+      "selected_rate_wilson95": [
+        0.8928208017449293,
+        1.0
+      ],
+      "misses": 0,
+      "mean_interval_iou": 0.90625,
+      "mean_mark_coverage": 0.90625,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "mp3_64k",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 0,
+      "selected_rate_wilson95": [
+        0.0,
+        0.1071791982550706
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "music_0db",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 27,
+      "selected_rate_wilson95": [
+        0.682458504024696,
+        0.9313557971749429
+      ],
+      "misses": 5,
+      "mean_interval_iou": 0.32421875,
+      "mean_mark_coverage": 0.32421875,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "music_0db",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 22,
+      "selected_rate_wilson95": [
+        0.5143332169904459,
+        0.8204745836639026
+      ],
+      "misses": 10,
+      "mean_interval_iou": 0.23078788807189543,
+      "mean_mark_coverage": 0.234375,
+      "mean_outside_mark_s": 0.046875
+    },
+    {
+      "condition": "music_0db",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 2,
+      "selected_rate_wilson95": [
+        0.017310567031640967,
+        0.2014712314415458
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.015625
+    },
+    {
+      "condition": "noise_0db",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 21,
+      "selected_rate_wilson95": [
+        0.4831108797896222,
+        0.7958956207556682
+      ],
+      "misses": 11,
+      "mean_interval_iou": 0.296875,
+      "mean_mark_coverage": 0.296875,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "noise_0db",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 17,
+      "selected_rate_wilson95": [
+        0.3644951711897464,
+        0.6913061289193116
+      ],
+      "misses": 15,
+      "mean_interval_iou": 0.22621783088235292,
+      "mean_mark_coverage": 0.228515625,
+      "mean_outside_mark_s": 0.015625
+    },
+    {
+      "condition": "noise_0db",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 1,
+      "selected_rate_wilson95": [
+        0.005537860164003122,
+        0.15744263820012558
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.0078125
+    },
+    {
+      "condition": "speech_0db",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 31,
+      "selected_rate_wilson95": [
+        0.8425573617998744,
+        0.9944621398359969
+      ],
+      "misses": 1,
+      "mean_interval_iou": 0.447265625,
+      "mean_mark_coverage": 0.447265625,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "speech_0db",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 29,
+      "selected_rate_wilson95": [
+        0.7578184527161212,
+        0.9675984487016337
+      ],
+      "misses": 3,
+      "mean_interval_iou": 0.32877604166666663,
+      "mean_mark_coverage": 0.330078125,
+      "mean_outside_mark_s": 0.015625
+    },
+    {
+      "condition": "speech_0db",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 0,
+      "selected_rate_wilson95": [
+        0.0,
+        0.1071791982550706
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "white_0db",
+      "state": "marked",
+      "n": 32,
+      "selected_cases": 3,
+      "selected_rate_wilson95": [
+        0.032401551298366194,
+        0.24218154728387864
+      ],
+      "misses": 29,
+      "mean_interval_iou": 0.0029296875,
+      "mean_mark_coverage": 0.0029296875,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "white_0db",
+      "state": "partial",
+      "n": 32,
+      "selected_cases": 3,
+      "selected_rate_wilson95": [
+        0.032401551298366194,
+        0.24218154728387864
+      ],
+      "misses": 29,
+      "mean_interval_iou": 0.005859375,
+      "mean_mark_coverage": 0.005859375,
+      "mean_outside_mark_s": 0.0
+    },
+    {
+      "condition": "white_0db",
+      "state": "unmarked",
+      "n": 32,
+      "selected_cases": 0,
+      "selected_rate_wilson95": [
+        0.0,
+        0.1071791982550706
+      ],
+      "misses": null,
+      "mean_interval_iou": null,
+      "mean_mark_coverage": null,
+      "mean_outside_mark_s": 0.0
+    }
+  ],
+  "serving_admitted": false,
+  "provider_authenticated": false,
+  "used_in_confidence": false,
+  "early_stop_eligible": false,
+  "audit": {
+    "schema": "chipmunk.public-speech-watermark-audit/2",
+    "cases": 576,
+    "speakers": 32,
+    "bins_replayed": 18432,
+    "codec_redecodes": 96,
+    "max_mean_absolute_difference": 0.0,
+    "source_plan_sha256": "a697fe9b5baa58ab39f850941b70c17f50acb43b8e82c397f944ff4c9b805a26",
+    "canonical_intervals_verified": true,
+    "native_model_forwards": 0,
+    "outside_human_reviewers": 0,
+    "provider_requests": 0,
+    "claim_scope": "Separate code/arithmetic replay; no outside human validation or AI-authorship accuracy claim."
+  },
+  "profiles": {
+    "source_attempt1": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.prepare_public_audioseal_speech_v2",
+      "child_exit_code": 1,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1470922752,
+      "sample_errors": 0,
+      "duration_s": 102.9025990839582,
+      "seconds_limit": 900
+    },
+    "source_monitor_stop": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.prepare_public_audioseal_speech_v2",
+      "child_exit_code": -15,
+      "guard": "monitor_PermissionError",
+      "sampled_tree_rss_lower_bound_bytes": 0,
+      "sample_errors": 0,
+      "duration_s": 0.003324249992147088,
+      "seconds_limit": 900
+    },
+    "source_recovery": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.prepare_public_audioseal_speech_v2",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 335314944,
+      "sample_errors": 1,
+      "duration_s": 16.83219729096163,
+      "seconds_limit": 900
+    },
+    "native": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_public_audioseal_speech_v2",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 889176064,
+      "sample_errors": 2,
+      "duration_s": 101.87314149993472,
+      "seconds_limit": 900
+    },
+    "audit": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_public_audioseal_speech_v2",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 499154944,
+      "sample_errors": 1,
+      "duration_s": 18.682126999949105,
+      "seconds_limit": 900
+    }
+  },
+  "source_summary": {
+    "fresh_project_speakers": 32,
+    "previously_known_speakers_excluded": 423,
+    "known_foreground_speaker_overlap": 0,
+    "known_background_speaker_overlap": 0,
+    "external_pretraining_overlap": "unknown",
+    "backgrounds_project_consumed": true,
+    "distinct_selected_backgrounds": {
+      "noise": 19,
+      "music": 13,
+      "speech": 15
+    },
+    "background_pool": {
+      "noise": 32,
+      "music": 16,
+      "speech": 18
+    },
+    "cohort_domain": "English read audiobooks; no general language/conversation or provider-compatibility claim"
+  },
+  "acquisition": {
+    "schema": "chipmunk.public-audioseal-acquisition/2",
+    "lock_sha256": "211804b122d3ca02e6251c6bd635e4e39d8111167d74c2f7996b5fd96f5e82a6",
+    "assets": 7,
+    "source_files": 35,
+    "dependency_files": 80,
+    "package_installations": 0,
+    "source_imports": 0,
+    "checkpoint_loads": 0,
+    "neural_forwards": 0,
+    "public_http_downloads": 2,
+    "customer_inputs": 0,
+    "serving_environment_modified": false
+  },
+  "raw_speech_or_pairings_published": false,
+  "freeze_commit": "1c6661e3fc53e78e695521868fcc2982900d4606",
+  "native_result_sha256": "8971979b08b9bd15594b95c45bcaa3809328d517340e84a91dd4285e13ec8a23",
+  "native_private_cases_sha256": "61054caa85b382ed5360f7a5219ba059c0b93c3f7055e3d5d3822df9164d610e",
+  "source_preparation_failure_diagnosis": "Signed16 byte hashes were incorrectly compared with production normalized float32 PCM hashes. Sample values were equal for the first flagged source. Recovered32 original foregrounds remain identical; background verification now uses the production decoder mapping. Earlier rejected short candidates were not retained.",
+  "admission_decision": "Research only. Retain the fixed native point and all misses/false responses. No provider attribution, AI-origin confidence, serving default or early stop."
+}

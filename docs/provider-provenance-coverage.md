@@ -101,7 +101,10 @@ the normal view and reports; both retain source binding.
 Public implementations exist and can be run without provider accounts. Our
 [actual AudioSeal evaluation](public-audio-watermark-v1-result.md) ran locally,
 including retained false responses and misses. It is not yet a serving detector
-or evidence of Muse compatibility. Matching key/payload, scheme, generation
+or evidence of Muse compatibility. The separate [fresh speech/background study](public-audioseal-speech-v2-result.md)
+completed576 cases with retained false responses and strong-noise misses; the
+fixed public-family check remains outside serving, confidence and early stopping.
+Matching key/payload, scheme, generation
 configuration, tokenizer and license remain necessary. Public detection-key
 schemes exist; “every detector needs a secret provider key” would be incorrect.
 

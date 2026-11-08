@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.public-audio-watermark-execution/1",
+  "steps": {
+    "native": {
+      "module": "scripts.run_public_audio_watermark_v1",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1165361152,
+      "sample_errors": 0,
+      "duration_s": 30.578456999966875,
+      "seconds_limit": 900,
+      "private_profile_sha256": "376e04a671b04dbb88632938ec171cf89ac7c26f5729f53d8fc706bcd1f59ed8"
+    },
+    "separate_replay": {
+      "module": "scripts.review_public_audio_watermark_v1",
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 125714432,
+      "sample_errors": 0,
+      "duration_s": 1.2925226249499246,
+      "seconds_limit": 900,
+      "private_profile_sha256": "8ac24a71787200f275df81b5ef03132c101fcdaef5e2fce18c4dbc240e78a1b6"
+    }
+  },
+  "serving_admitted": false,
+  "customer_inputs": 0,
+  "provider_calls": 0
+}

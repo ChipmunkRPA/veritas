@@ -1,0 +1,81 @@
+{
+  "schema": "chipmunk.public-audio-watermark-authored-replay/1",
+  "freeze_sha256": "3638f6b0023a1f138df5b0da4f9d1cf668cb72eff3b5f1f739e99b9f84da074c",
+  "result_sha256": "2cbd4d677d38e5a7ebee1dcee25ff625be58fb7fae720c9e1ba60e4b451d7ddd",
+  "audit_code_sha256": "852cc26fb0bb86609efc03a57dc1a23d8417959c76ba2178a7bc2851af326e81",
+  "source_waveforms_replayed": 32,
+  "independent_quarter_second_bins": 1024,
+  "gapless_codec_inputs_replayed": 8,
+  "maximum_response_mean_difference": 0.0,
+  "aggregate": {
+    "unmarked": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": null,
+      "mean_outside_mark_selected_seconds": 1.75,
+      "mean_marked_seconds_missed": 0.0
+    },
+    "marked": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": 1.0,
+      "mean_outside_mark_selected_seconds": 0.0,
+      "mean_marked_seconds_missed": 0.0
+    },
+    "partial": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": 0.881429383347542,
+      "mean_outside_mark_selected_seconds": 0.625,
+      "mean_marked_seconds_missed": 0.0
+    },
+    "unmarked_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 1,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": null,
+      "mean_outside_mark_selected_seconds": 1.875,
+      "mean_marked_seconds_missed": 0.0
+    },
+    "marked_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "marked_cases_with_no_interval": 1,
+      "mean_interval_iou_on_marked": 0.625,
+      "mean_outside_mark_selected_seconds": 0.0,
+      "mean_marked_seconds_missed": 3.0
+    },
+    "partial_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "marked_cases_with_no_interval": 1,
+      "mean_interval_iou_on_marked": 0.5083333333333333,
+      "mean_outside_mark_selected_seconds": 0.875,
+      "mean_marked_seconds_missed": 1.5
+    },
+    "unmarked_mp3": {
+      "cases": 4,
+      "cases_with_selected_interval": 2,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": null,
+      "mean_outside_mark_selected_seconds": 2.0,
+      "mean_marked_seconds_missed": 0.0
+    },
+    "partial_mp3": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "marked_cases_with_no_interval": 0,
+      "mean_interval_iou_on_marked": 0.8703703703703703,
+      "mean_outside_mark_selected_seconds": 0.8125,
+      "mean_marked_seconds_missed": 0.0
+    }
+  },
+  "new_neural_forwards": 0,
+  "outside_human_reviews": 0,
+  "deployment_compatibility_verified": false,
+  "serving_admitted": false,
+  "private_complete_audit_sha256": "eb2c1efc2eccb43441305d70e36c7a2175e13d402cf3b6d38468163f059c3224"
+}

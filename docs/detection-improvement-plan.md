@@ -81,6 +81,13 @@ integration remains unfinished.
 
 ## Progress on 7 November
 
+- Ran the public AudioSeal generator/detector locally without provider access:
+  32authored cases,41actual forwards, all model tensors verified. A separate
+  replay checks1,024 time bins and8gapless codec inputs. Unmarked-carrier false
+  responses and noisy misses are retained; no real-speech/provider accuracy or
+  serving admission claim follows. Public-family work is executable now and
+  does not wait on private APIs.
+  [Actual local native result and remaining qualification](public-audio-watermark-v1-result.md).
 - Implemented and tested two new source-resolution noise/texture localizers,
   with and without a fit-genuine intervention projection. All 1,344 consumed-
   source feature cases completed. On 108 diagnostic edits, each candidate has

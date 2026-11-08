@@ -1,0 +1,104 @@
+{
+  "schema": "chipmunk.public-audio-watermark-authored-result/1",
+  "policy": {
+    "schema": "chipmunk.public-audio-watermark-authored-policy/1",
+    "scope": "Authored signal implementation test, not real-speech or deployed-provider accuracy validation.",
+    "device": "CPUfloat32, frozen generator/detector, two Torch threads, no serving imports.",
+    "sources": "Four8s16kHz mono carriers: harmonic pulses, speech-shaped noise pulses, chirp mixture, silence. Seed20261108.",
+    "variants": [
+      "unmarked",
+      "marked",
+      "partial",
+      "unmarked_noise",
+      "marked_noise",
+      "partial_noise",
+      "unmarked_mp3",
+      "partial_mp3"
+    ],
+    "mark": "Fixed alternating16bit message; full or source samples32000:96000 only. Unmarked samples outside partial span must be bit-identical.",
+    "noise": "Same white-noise realization at10dB relative to carrier RMS, floor.001; no watermark added to negative controls.",
+    "mp3": "64kbps seekable MP3, decoded16kHzfloat32; exact sample-count preservation required, no hidden alignment trimming/padding.",
+    "readout": "Native per-sample watermark response, strict>0.5; quarter-second bins selected only when more than half their samples exceed0.5. Preserve sample coordinates.",
+    "parity": "Four high-level helper fractions/bits match direct native outputs (fraction tolerance1e-7); first marked native response repeats bit-exactly.",
+    "identity": "No provider/creator authentication, AI confidence contribution or detection early stop from this public-family response.",
+    "planned_cases": 32,
+    "planned_generator_forwards": 4,
+    "planned_detector_forwards": 37,
+    "serving_admitted": false
+  },
+  "freeze_sha256": "3638f6b0023a1f138df5b0da4f9d1cf668cb72eff3b5f1f739e99b9f84da074c",
+  "cases_private_sha256": "bc428d2443dd4ab7a5e0083bf15fd43d28ec8a3c5d60afbabf7d78b0c29ae1a2",
+  "cases": 32,
+  "generator_forwards": 4,
+  "detector_forwards": 37,
+  "repeat_maximum_difference": 0.0,
+  "loader": {
+    "detector": {
+      "checkpoint_sha256": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+      "source_state_tensors": 54,
+      "loaded_state_tensors": 40,
+      "all_loaded_tensors_verified": true,
+      "parameters": 8647298,
+      "weights_only": true,
+      "unused_training_metadata_resolved": false,
+      "unrestricted_pickle_used": false
+    },
+    "generator": {
+      "checkpoint_sha256": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748",
+      "source_state_tensors": 101,
+      "loaded_state_tensors": 73,
+      "all_loaded_tensors_verified": true,
+      "parameters": 14675873,
+      "weights_only": true,
+      "unused_training_metadata_resolved": false,
+      "unrestricted_pickle_used": false
+    }
+  },
+  "aggregate": {
+    "unmarked": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "mean_positive_sample_fraction": 0.239798828125
+    },
+    "marked": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "mean_positive_sample_fraction": 0.99998828125
+    },
+    "partial": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "mean_positive_sample_fraction": 0.585392578125
+    },
+    "unmarked_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 1,
+      "mean_positive_sample_fraction": 0.238033203125
+    },
+    "marked_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "mean_positive_sample_fraction": 0.592099609375
+    },
+    "partial_noise": {
+      "cases": 4,
+      "cases_with_selected_interval": 3,
+      "mean_positive_sample_fraction": 0.40301953125
+    },
+    "unmarked_mp3": {
+      "cases": 4,
+      "cases_with_selected_interval": 2,
+      "mean_positive_sample_fraction": 0.25891796875
+    },
+    "partial_mp3": {
+      "cases": 4,
+      "cases_with_selected_interval": 4,
+      "mean_positive_sample_fraction": 0.596607421875
+    }
+  },
+  "provider_calls": 0,
+  "customer_inputs": 0,
+  "serving_admitted": false,
+  "deployment_compatibility_verified": false,
+  "outside_human_reviews": 0
+}

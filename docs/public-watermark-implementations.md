@@ -41,9 +41,12 @@ claims require the corresponding authenticated declaration or independently
 validated compatible product signal. Missing marks do not establish originality.
 Do not use public demonstration keys to pretend a private product was checked.
 
-At this review, no new public-family adapter, checkpoint download, package
-installation or native watermark accuracy test has been completed. The current
-app's implemented local checks remain trusted Content Credentials and unverified
-structured source-label inspection. External private verifiers remain
-unconfigured; that does not block the public-family development above. No
-customer media was sent to a provider and no serving confidence was changed.
+The [first actual AudioSeal native contract](public-audio-watermark-v1-result.md)
+is now complete: pinned public source/weights, an isolated local adapter,
+32authored cases and a separate waveform/time/readout replay. It found full and
+partial marks but also false responses on unmarked synthetic carriers and noisy
+misses. This is implementation evidence, not real-speech/provider accuracy or
+app admission. No serving dependency or confidence changed. Public image/video
+and text family adapters, rights-cleared real-media qualification and app exports
+remain required. External private verifiers are unconfigured; their absence does
+not block this public-family work. No customer media was sent to a provider.

@@ -1,0 +1,62 @@
+{
+  "policy": {
+    "schema": "chipmunk.public-audio-watermark-authored-policy/1",
+    "scope": "Authored signal implementation test, not real-speech or deployed-provider accuracy validation.",
+    "device": "CPUfloat32, frozen generator/detector, two Torch threads, no serving imports.",
+    "sources": "Four8s16kHz mono carriers: harmonic pulses, speech-shaped noise pulses, chirp mixture, silence. Seed20261108.",
+    "variants": [
+      "unmarked",
+      "marked",
+      "partial",
+      "unmarked_noise",
+      "marked_noise",
+      "partial_noise",
+      "unmarked_mp3",
+      "partial_mp3"
+    ],
+    "mark": "Fixed alternating16bit message; full or source samples32000:96000 only. Unmarked samples outside partial span must be bit-identical.",
+    "noise": "Same white-noise realization at10dB relative to carrier RMS, floor.001; no watermark added to negative controls.",
+    "mp3": "64kbps seekable MP3, decoded16kHzfloat32; exact sample-count preservation required, no hidden alignment trimming/padding.",
+    "readout": "Native per-sample watermark response, strict>0.5; quarter-second bins selected only when more than half their samples exceed0.5. Preserve sample coordinates.",
+    "parity": "Four high-level helper fractions/bits match direct native outputs (fraction tolerance1e-7); first marked native response repeats bit-exactly.",
+    "identity": "No provider/creator authentication, AI confidence contribution or detection early stop from this public-family response.",
+    "planned_cases": 32,
+    "planned_generator_forwards": 4,
+    "planned_detector_forwards": 37,
+    "serving_admitted": false
+  },
+  "code_sha256": {
+    "backend/scripts/public_audio_watermark_v1.py": "735e85cd8c3f9690bd2d4867064e626cc2270fb8ed33687d944ae2fb24acbca5",
+    "backend/scripts/run_public_audio_watermark_v1.py": "37a5c715de41678ee428b2b8bf663eef073edff1dc221edc577677f04276682f",
+    "backend/scripts/public_watermark_runtime_v1.py": "749a5fafdc95c6045a6a476be6d1000702022994ca90e577312db5a8280af785",
+    "backend/scripts/specialist_runtime_v4.py": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539",
+    "backend/tests/test_public_audio_watermark_v1.py": "da542de971759b95ca26200833dcfb6e1986e8d6c22b8d0af9f7f62fec5cab58",
+    "docs/public-audio-watermark-v1-protocol.md": "12e13f0b98d0d01d564ef910bd204386504abd72c87d92f03c138a6413cfdf3a"
+  },
+  "asset_receipts_sha256": {
+    "source-review.json": "d49ce1e3e34f81080d08da40e54cd2317396c6b6ec3522f9e28a1aeb9bc819b1",
+    "downloads.json": "d86e54ea0f7ae8ca93086e38343c5d57ca63660c32cc812842aa0c2a7936f23c",
+    "publisher-model-tree.json": "f10f3109ceb39f87e86749117cba8b3c5bb8474a9ac9566cd78eca11e9b35ccc",
+    "isolated-python-files.json": "2bb43752200a34728a7b40e86db143a7d76a66b3632a453ce53c124772215a3f",
+    "restricted-weight-inspection.json": "b1dd4caa58e61a85c0e094cb2ea9dd2877d72f3babc1c0351625d0f6189e20b1"
+  },
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "PyYAML": "6.0.3",
+    "einops": "0.8.2"
+  },
+  "weights": {
+    "detector_base.pth": "8a78e8a83584113523e161fc599fcab10fd0e94c04d2eb9d2fa1e9ec91ab69d9",
+    "generator_base.pth": "7a845b5fbe9364a63a3909d8ab3fe064d13a76ae4c2e983573e08c69b7b51748"
+  },
+  "native_forwards_before_freeze": 0,
+  "source_code_revision": "1496f7662d6aa625602bb0dcd1b4997b63b47609",
+  "source_model_revision": "3c19eba53390776cf2cc9ed5f6c9ac67ce72ecba",
+  "customer_inputs": 0,
+  "provider_calls": 0,
+  "serving_admitted": false,
+  "schema": "chipmunk.public-audio-watermark-authored-freeze/1",
+  "private_source_path_published": false
+}

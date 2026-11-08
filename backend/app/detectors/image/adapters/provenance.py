@@ -49,7 +49,7 @@ from app.provenance import metadata_rules, qtables, watermarks
 from app.storage.files import untrusted_text
 
 MAX_TABLE_ROWS = 80
-C2PA_VERSION = "0.4.3"  # N-19p (SEC6-01): the titles of its thumbnails are filtered and cut to 200 characters; N-19o: N-19o (SEC5-01): the generator and the signer's name are cut to 200 characters in `observed`
+C2PA_VERSION = "0.4.4"  # N-19p (SEC6-01): the titles of its thumbnails are filtered and cut to 200 characters; N-19o: N-19o (SEC5-01): the generator and the signer's name are cut to 200 characters in `observed`
 METADATA_VERSION = "0.4.5"  # N-19p: 0.4.5 (R10-02, R10-03): the text of its tables keeps its words apart (tab and newline as a space); 0.4.4 (SEC6-02, R10-04): ExifTool reads a copy of a PNG through IEND, with one XMP-keyed chunk outside the bound, also where a chunk runs past the end, and reads the thumbnail from the same copy; the Pillow fallback reads PNG text through the bound and reads a PNG without EXIF; 0.4.3 (R10-01): the PNG keys of the M6 fingerprints are read wherever they stand, past the bound on PNG text; N-19o (SEC5-03, SEC5-02): the PNG text read is bounded in all, and the XMP history is read in one pass, each entry cut to 4 KB; N-19n (SEC4-01): the packet that the rules read is cut to `metadata.XMP_SCAN_BYTES`
 GENERATOR_VERSION = "0.4.7"  # N-19p: 0.4.7 (R10-02, R10-03): text from the file keeps its words apart (tab and newline as a space); 0.4.6 (code review R10-01): the PNG keys that the check reads by name are read wherever they stand, past the bound on PNG text, and the result says how many text chunks the bound left unread (`png_text_unread`); N-19o: 0.4.5 (browser QA Q5-05): a mention in free text says in which fields it stands (`details.mentions`: "the EXIF image description", "the PNG text chunk “Comment”", each with what was found there); 0.4.4 (SEC5-01, SEC5-03): the PNG text read is bounded in all (64 chunks, 64 KB), and text from the file reaches no table or `observed` with a control or direction character; N-19n: 0.4.3 (SEC4-01): the reader of the IPTC source type is linear and bounded, and the packet is cut to `metadata.XMP_SCAN_BYTES` before it is scanned: a packet whose declaration stood past that limit was read before and is not read now; 0.4.2: the result says what was found and where (`details`); 0.4.1: a mention of AI in free text carries no weight in the fallback's score
 EXIF_VERSION = "0.4.1"  # N-19p (R10-03): its exhibit "EXIF tags" is filtered (N-19o) and keeps the words of a tag apart; 0.4.0: I-1: JPEG facts from the bitstream (luma + chroma tables, subsampling); scores unchanged
@@ -94,7 +94,7 @@ def _c2pa_exhibits(ctx: RunContext, report: provenance.C2PAReport, official: pro
                  ["digital source types", "; ".join(f"{s.term} ({s.tier}{', retired term' if s.retired else ''})"
                                                     for s in report.source_types) or "none declared"],
                  ["actions", ", ".join(a["action"] for a in report.actions) or "none"],
-                 ["hash binding", "matches the current bytes" if report.covers_bytes else "does not match the current bytes"],
+                 ["hash binding", report.binding_description],
                  ["legacy trust", _legacy_text(report, legacy)]]
     rows += [["trust list", official.summary()], ["revocation", provenance.REVOCATION_NOTE]]
     ids = [ctx.exhibits.table(["field", "value"], rows, title="C2PA Content Credentials", caption=caption)]
@@ -147,6 +147,9 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
                "remote_reference": float(state == "remote"), "legacy_trusted": float(bool(report.legacy_trusted)),
                "ai_declared": float(report.ai_declared), "capture_declared": float(report.capture_declared),
                "covers_bytes": float(report.covers_bytes), "failure_codes": float(len(report.failure_codes)),
+               "binding_matched": float(report.binding_status == "matched"),
+               "binding_mismatch": float(report.binding_status == "mismatch"),
+               "binding_not_verified": float(report.binding_status == "not_verified"),
                "ingredients": float(max(len(report.chain) - 1, 0))}
     exhibit_ids = _c2pa_exhibits(ctx, report, official, legacy)
     if state == "remote":
@@ -165,11 +168,24 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
     override = None
     if state == "invalid":
         aggregate = UnitScore("global", 0.0, "score", quality={"invalid": 1.0})
-        reference = "An invalid manifest shows modification after signing or a malformed claim, not AI generation"
-        reasoning = ("Content Credentials are present but do not validate (" + ", ".join(report.failure_codes[:3]) + "), so the "
-                     "file or its record changed after signing. What the record declares is not relied on.")
+        reference = ("Certificate dates, signer trust, signature validity and content binding are separate checks. "
+                     "A failure does not establish AI generation or originality.")
+        failures = set(report.failure_codes)
+        issues = []
+        if "signingCredential.expired" in failures:
+            issues.append("the signing certificate is expired")
+        if "signingCredential.untrusted" in failures:
+            issues.append("the signer is not trusted by the configured trust list")
+        if report.binding_status == "mismatch":
+            issues.append("the file content does not match the signed content hash")
+        if not issues:
+            issues.append("one or more signature or credential checks failed")
+        reasoning = ("Content Credentials are present but are not accepted: " + "; ".join(issues) + ". "
+                     "Content binding " + report.binding_description + ". "
+                     "The declaration is not relied on to establish AI involvement; further detection continues.")
     elif report.ai_declared or names:
-        override = "decisive_ai" if trusted and report.ai_declared else "self_declared_ai"
+        override = ("decisive_ai" if trusted and report.ai_declared and report.covers_bytes
+                    and not report.failure_codes else "self_declared_ai")
         aggregate = UnitScore("global", 1.0, "score", quality={"trusted": float(trusted), "valid": 1.0})
         declared = ", ".join(s.term for s in report.source_types if s.tier == "ai") or ("generator named: " + ", ".join(names))
         reference = "Camera and editor manifests carry capture or edit source types, never a generative-AI source type"

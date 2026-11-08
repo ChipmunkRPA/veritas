@@ -1129,7 +1129,7 @@ detectors:
 
   - id: prov.c2pa
     adapter: app.detectors.image.adapters.provenance:C2PADetector
-    version: 0.4.3
+    version: 0.4.4
     name: C2PA Content Credentials
     modality: image
     family: provenance
@@ -1353,7 +1353,7 @@ detectors:
   # ---------------------------------------------------------------- video (v0.3 frame sampling, P-6)
   - id: prov.c2pa.video
     adapter: app.detectors.video.adapters.metadata:C2PAVideoDetector
-    version: 0.4.3
+    version: 0.4.4
     name: C2PA Content Credentials (video containers)
     modality: video
     family: provenance
@@ -1900,7 +1900,7 @@ detectors:
   # ---------------------------------------------------------------- audio
   - id: prov.c2pa.audio
     adapter: app.detectors.audio.provenance_adapter:AudioCredentialsDetector
-    version: 0.4.4
+    version: 0.4.5
     name: Content Credentials on the audio file
     modality: audio
     family: provenance

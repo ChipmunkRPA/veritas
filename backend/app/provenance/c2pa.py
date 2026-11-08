@@ -8,7 +8,7 @@
   not merged into the claim-signer anchors: c2pa-rs has no separate TSA anchor setting, and an untrusted timestamp is
   informational (`timeStamp.untrusted`) without changing the state.
 - **States.** `trusted` (valid and the signer chains to the Trust List), `valid` (intact, signer not on the list), `invalid`
-  (a validation failure: modified after signing or a malformed claim), `absent`, `remote`, `unreadable`.
+  (a validation failure, including certificate/trust failures as well as changed content), `absent`, `remote`, `unreadable`.
 - **Content.** Validation codes (success / informational / failure, active manifest and ingredient deltas), the ingredient
   chain (active → ingredients, recursively), IPTC DigitalSourceType tiers (retired terms parsed), signer and thumbnails.
 """
@@ -33,6 +33,7 @@ REVOCATION_NOTE = "Revocation status was not checked (offline)."
 IPTC_PREFIXES = ("http://cv.iptc.org/newscodes/digitalsourcetype/", "https://cv.iptc.org/newscodes/digitalsourcetype/")
 HARD_BINDING_MATCH = frozenset({"assertion.dataHash.match", "assertion.bmffHash.match", "assertion.boxesHash.match",
                                 "assertion.collectionHash.match"})
+HARD_BINDING_MISMATCH = frozenset(code.removesuffix(".match") + ".mismatch" for code in HARD_BINDING_MATCH)
 STATE_LABELS = {"trusted": "Trusted", "valid": "Valid (signer not on the trust list)", "invalid": "Invalid",
                 "absent": "No manifest", "remote": "Remote manifest (not fetched)", "unreadable": "Unreadable"}
 LEVELS = ("failure", "informational", "success")
@@ -123,8 +124,31 @@ class C2PAReport:
 
     @property
     def covers_bytes(self) -> bool:
-        """A hard binding (data, BMFF, boxes or collection hash) matched the current bytes."""
-        return self.state in ("trusted", "valid") and any(c.level == "success" and c.code in HARD_BINDING_MATCH for c in self.codes)
+        """A valid credential with a positive hard binding on the active asset."""
+        return self.state in ("trusted", "valid") and self.binding_status == "matched"
+
+    @property
+    def binding_status(self) -> str:
+        """Keep byte-binding evidence separate from certificate/trust validity.
+
+        An ingredient's matching hash does not bind the current uploaded asset.
+        Only explicit active-manifest mismatch codes establish a mismatch.
+        """
+        active = [c for c in self.codes if c.scope == "active manifest"]
+        if any(c.level == "failure" and c.code in HARD_BINDING_MISMATCH for c in active):
+            return "mismatch"
+        if any(c.level == "success" and c.code in HARD_BINDING_MATCH for c in active):
+            return "matched"
+        return "not_verified"
+
+    @property
+    def binding_description(self) -> str:
+        if self.binding_status == "matched":
+            return ("matches the current file bytes" +
+                ("; credentials fail other validation checks" if self.state == "invalid" else ""))
+        if self.binding_status == "mismatch":
+            return "does not match the current file bytes"
+        return "not verified for the current file bytes"
 
     @property
     def failure_codes(self) -> list[str]:

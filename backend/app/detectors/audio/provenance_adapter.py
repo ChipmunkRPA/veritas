@@ -7,7 +7,7 @@ from app.provenance.c2pa import sniff_mime
 
 
 class AudioCredentialsDetector(Detector):
-    spec = replace(C2PADetector.spec, id='prov.c2pa.audio', version='0.4.4', modality=Modality.AUDIO,
+    spec = replace(C2PADetector.spec, id='prov.c2pa.audio', version='0.4.5', modality=Modality.AUDIO,
         name='Content Credentials on the audio file')
 
     def run(self, ctx):

@@ -14,3 +14,9 @@ and pushed directly to GitHub, without running GitHub Actions workflows.
   evidence. Do not describe them as newly executed verification.
 - Independent evaluation may continue locally or through separately authorized
   reviewers; it does not require a GitHub workflow run.
+
+# Outreach
+
+The owner explicitly declined external outreach on 8 November 2026. Do not
+email, message or recruit researchers or other people without a new explicit
+instruction. In particular, do not send the prepared ConsumerGenEdit request.

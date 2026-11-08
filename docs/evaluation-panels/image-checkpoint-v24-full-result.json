@@ -1,0 +1,134 @@
+{
+  "schema": "chipmunk.full-authored-checkpoint-result/24",
+  "comparison": {
+    "schema": "chipmunk.authored-regional-checkpoint-parity/24",
+    "complete_cross_arm_math_exact": true,
+    "payload_bytes_baseline": [
+      2843287688,
+      2843287688
+    ],
+    "payload_bytes_checkpointed": [
+      263745032,
+      263745032
+    ],
+    "project_neural_forwards": 0,
+    "project_fitting_steps": 0,
+    "scope": "Exact math comparison only; sampled process profiles and true detection quality require separate assessment.",
+    "packed_activation_payload_reduced_in_both_repeats": true
+  },
+  "resources": {
+    "baseline": {
+      "schema": "chipmunk.authored-comparison-resource-profile/24",
+      "arm": "baseline",
+      "module": "scripts.relayformer_checkpointed_probe_v24",
+      "preflight_only": false,
+      "child_started": true,
+      "child_exit_code": 0,
+      "eligible_at_initial_observation": true,
+      "guard": null,
+      "sample_errors": 0,
+      "sampling_error_events": [],
+      "terminal_observations": [],
+      "resource_limit_observations": [],
+      "last_observation": {
+        "elapsed_s": 15.33978733397089,
+        "tree_rss_bytes": 0,
+        "ram_available_bytes": 9225060352,
+        "disk_free_bytes": 9734766592
+      },
+      "sampled_tree_rss_lower_bound_bytes": 4099899392,
+      "minimum_observed_available_ram_bytes": 6976716800,
+      "minimum_observed_free_disk_bytes": 9734639616,
+      "resource_journal_sha256": "06cdbf29e6ea24ef69676366826df1753d4e5ca175fe41a7186c31126dda2089",
+      "duration_s": 15.340441709035076,
+      "limits": {
+        "seconds": 900,
+        "sampled_tree_rss_bytes": 6442450944,
+        "ram_and_disk_reserve_bytes": 1610612736,
+        "initial_ram_headroom_bytes": 6442450944,
+        "initial_disk_headroom_bytes": 3221225472
+      },
+      "scope": "An observation-only preflight is not a completed model test. Every observed limit and stopping measurement is retained; no implicit retry. RSS is a sampled lower bound, not a peak guarantee."
+    },
+    "checkpointed": {
+      "schema": "chipmunk.authored-comparison-resource-profile/24",
+      "arm": "checkpointed",
+      "module": "scripts.relayformer_checkpointed_probe_v24",
+      "preflight_only": false,
+      "child_started": true,
+      "child_exit_code": 0,
+      "eligible_at_initial_observation": true,
+      "guard": null,
+      "sample_errors": 0,
+      "sampling_error_events": [],
+      "terminal_observations": [],
+      "resource_limit_observations": [],
+      "last_observation": {
+        "elapsed_s": 16.684792750049382,
+        "tree_rss_bytes": 0,
+        "ram_available_bytes": 9281437696,
+        "disk_free_bytes": 9743253504
+      },
+      "sampled_tree_rss_lower_bound_bytes": 1748533248,
+      "minimum_observed_available_ram_bytes": 8125808640,
+      "minimum_observed_free_disk_bytes": 9743245312,
+      "resource_journal_sha256": "42e2695e0320d2436c134abdb15b4f6ea55c2b08fd86e453ea5224c71ff776ce",
+      "duration_s": 16.685360875097103,
+      "limits": {
+        "seconds": 900,
+        "sampled_tree_rss_bytes": 6442450944,
+        "ram_and_disk_reserve_bytes": 1610612736,
+        "initial_ram_headroom_bytes": 6442450944,
+        "initial_disk_headroom_bytes": 3221225472
+      },
+      "scope": "An observation-only preflight is not a completed model test. Every observed limit and stopping measurement is retained; no implicit retry. RSS is a sampled lower bound, not a peak guarantee."
+    }
+  },
+  "resource_profile_sha256": {
+    "baseline": "cec0ae20b9a8b281befc16ab8d92b382085506b143160d8ba766682a4f11f4c8",
+    "checkpointed": "5b77aad963eeea24a81141279e3e529e4f36f610d63468dd7cc4655a173cbc17"
+  },
+  "private_probe_sha256": {
+    "baseline": "68d402c01f7710933938be48688242a913fae84a661f4b1056f70d0199f7e4f1",
+    "checkpointed": "572c3511384ce1ff7b546dbfbc71e447135602dafbec4328c87b4aa4e9096329"
+  },
+  "authored_counters": {
+    "baseline": {
+      "completed_authored_forwards": 4,
+      "completed_backward_passes": 2,
+      "completed_optimizer_updates": 2,
+      "exact_repeat": true,
+      "starting_tensors_restored": true,
+      "native_sigmoid_parity_exact": true,
+      "checkpoint_trace": null
+    },
+    "checkpointed": {
+      "completed_authored_forwards": 4,
+      "completed_backward_passes": 2,
+      "completed_optimizer_updates": 2,
+      "exact_repeat": true,
+      "starting_tensors_restored": true,
+      "native_sigmoid_parity_exact": true,
+      "checkpoint_trace": {
+        "external_block_calls": 92,
+        "checkpointed_block_calls": 46,
+        "body_entries": 92,
+        "body_completions": 46,
+        "no_grad_bypasses": 46
+      }
+    }
+  },
+  "comparison_sha256": "eff47d705fc92ef6ef4a9b77ac7cda731c35e85fd5d490e9cd353d2525fe9bce",
+  "execution_start_sha256": "87010e5fc6a3df76ac85ed11cce4acfced1404459088150631320250a6465226",
+  "preparation_sha256": "1f72739cae8fe7341b32c9382319948c4426fcd3e1ab3682233e4fd0ebab1481",
+  "full_detector_authored_math_parity_established": true,
+  "sampled_rss_fraction_checkpointed_over_baseline": 0.4264819891463327,
+  "source_neural_forwards": 0,
+  "project_fitting_steps": 0,
+  "new_detector_accuracy_gain_established": false,
+  "serving_or_confidence_changed": false,
+  "outside_human_reviewers": 0,
+  "original_v22_and_v23_failures_cleared": false,
+  "voice_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "scope": "Both full1024 image-only authored probes pass exactly, and checkpointing reduces recorded activation payload and sampled maximum RSS with unchanged gradients and updates. Process samples are lower bounds, not true peak guarantees; hardware/time figures are one sequential local pair, not a performance population estimate. No real/project-photo detection accuracy, supervised source fit or model adoption is claimed."
+}

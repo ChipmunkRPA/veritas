@@ -1,0 +1,62 @@
+{
+  "schema": "chipmunk.legacy-owner-overlap-result/25",
+  "summary": {
+    "schema": "chipmunk.legacy-photo-owner-summary/25",
+    "planned": 240,
+    "completed": 240,
+    "statuses": {
+      "matched_current_photo_owner": 226,
+      "unresolved": 14
+    },
+    "matched_current_owner_sources": 226,
+    "legacy_sources_with_owner_unresolved": 14,
+    "all_source_records": 637,
+    "all_components": 531,
+    "components_with_new_sources": 320,
+    "new_components_linked_to_prior_sources": 12,
+    "new_sources_linked_to_prior_sources": 28,
+    "candidate_nontraining_components_without_detected_prior_link": 70,
+    "link_counts": {
+      "same_attributed_profile": 181
+    },
+    "responses_sha256": "04603596534220fa7471c345b8b7d86790bf342c97d3d6584e9ca9e87629b4f7",
+    "private_groups_sha256": "17575bf2662b33ec3fcf9faeaf031286f596b753d7b30f2bcaea2d3a1d801b7a",
+    "source_plan_sha256": "f30bf9b6a91cb1771b4814de6770a4cce4f7ae09df6937d962997c0682adaa83",
+    "neural_forwards": 0,
+    "fitting_steps": 0,
+    "roles_assigned": false,
+    "outside_human_review": false,
+    "scope": "Current provider photo-owner correspondence, not verified individual photographer identity or rights clearance. Unresolved owners, aliases, bursts/crops and external pretraining remain unassessed. No fresh-confirmation or training admission follows."
+  },
+  "provider_http_statuses": {
+    "200": 228,
+    "404": 12
+  },
+  "unresolved_reasons": {
+    "Public photo-owner metadata unavailable": 12,
+    "Canonical Flickr photo response required": 2
+  },
+  "resource_profile": {
+    "schema": "chipmunk.regional-learning-resource-profile/22",
+    "module": "scripts.image_legacy_authors_v25",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 51101696,
+    "sample_errors": 0,
+    "sampling_error_events": [],
+    "terminal_observation_events": [],
+    "duration_s": 121.03774770791642,
+    "seconds_limit": 900,
+    "scope": "Explicit local research worker; neural/source execution counts come from its own actual receipt. Same900s/6GiB and1536MiB reserves. Verified terminal transitions retained; missed live samples fail. RSS is a sampled lower bound, not a peak guarantee."
+  },
+  "resource_profile_sha256": "1006862cf1623460d4ac2a2aee8ed934a77f5aea472092d0f80b57c3e7059812",
+  "summary_sha256": "f7088ffaac00d74c83729bfff07ff53e0e955cf092d4c4ee93886af5a3336c2f",
+  "freeze_sha256": "5a8f2c444f4a7451c0278e3b0362effdaf2d626cbb8d3c90fd46517d932306b1",
+  "private_execution_start_sha256": "0614046f2b72cb29dc575a94d9e291041ab0b1196bbd786ab27e12a65b98c5d2",
+  "no_images_or_weights_requested": true,
+  "roles_assigned": false,
+  "outside_human_reviewers": 0,
+  "outreach_sent": false,
+  "serving_changed": false,
+  "scope": "All240 historical source-owner lookups completed once. Producer replays retained successful bodies with its frozen parser and recomputes the fixed complete source graph. This is not an independently implemented owner parser, outside human review, rights clearance or an accuracy result. Identities, source links and graph vectors stay private."
+}

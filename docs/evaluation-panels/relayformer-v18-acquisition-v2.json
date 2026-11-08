@@ -1,0 +1,73 @@
+{
+  "schema": "chipmunk.relayformer-acquisition/18",
+  "checkpoint_revision": "348c5f7c9069336846cd74bdbbd5cdc85693555d",
+  "code_revision": "23c973fc956195537d85148d124d6a146243f6c9",
+  "code_license": "MIT",
+  "checkpoint_license_declared": "Apache-2.0",
+  "assets": {
+    "upstream/README.md": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/README.md",
+      "git_blob": "ed8acec78a66f764a4150bf867b60a298559ce42",
+      "sha256": "69ac443ec4d46a9a21b9e34ac0178f13a2a738c11a72e118eefc7d50f556b29d",
+      "bytes": 7965
+    },
+    "upstream/LICENSE": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/LICENSE",
+      "git_blob": "feab6d301e74d102ecbbd3b0f9f7b4809f5896c7",
+      "sha256": "49b8601bc931cb5cff60edc3204b342519dc6436d7f3d1aeb13da594006aa97a",
+      "bytes": 1063
+    },
+    "upstream/models/RelayFormer.py": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/models/RelayFormer.py",
+      "git_blob": "de98b88bbed87465c5bcd22495203fa840d8ee44",
+      "sha256": "c6dabe3c2ca692b8bce85090a668d2e2c8a75b154c02500b333965f51d418abc",
+      "bytes": 32822
+    },
+    "upstream/models/GLoRA_vit.py": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/models/GLoRA_vit.py",
+      "git_blob": "93778927e2f0b419bc162b1b62802ea78730c32a",
+      "sha256": "f70a4a7880e092c68cebc472b55633ebb0c7f3e2b79df8f940f8e17b6e7ccd51",
+      "bytes": 25568
+    },
+    "upstream/infer.py": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/infer.py",
+      "git_blob": "4fd1362b9656061a0d7c82445d54ee17a488f8ce",
+      "sha256": "4c13b383c0c3dda2e1314e014d86a5021ef4ea31a008cc7bc151b03363d180e5",
+      "bytes": 10341
+    },
+    "upstream/datasets/inference_dataset.py": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/datasets/inference_dataset.py",
+      "git_blob": "414b2ef70daee1bb52117660816a074ec168f811",
+      "sha256": "cefe47a02548032879eac1baa6a5af8af94de0994962ebaf7ebfb7ef35648985",
+      "bytes": 7793
+    },
+    "upstream/requirements.txt": {
+      "url": "https://raw.githubusercontent.com/WenOOI/RelayFormer/23c973fc956195537d85148d124d6a146243f6c9/requirements.txt",
+      "git_blob": "9f7f1201464883fdc2b323cd34579c2453500484",
+      "sha256": "d3c4bd72301ad08fe621eecc4171e1660247ee03c2e4d76e1ad92f283e630bfb",
+      "bytes": 118
+    },
+    "CHECKPOINT_README.md": {
+      "url": "https://huggingface.co/Wenn11/RelayFormer/resolve/348c5f7c9069336846cd74bdbbd5cdc85693555d/README.md",
+      "sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74",
+      "bytes": 28
+    },
+    "image-only.pth": {
+      "url": "https://huggingface.co/Wenn11/RelayFormer/resolve/348c5f7c9069336846cd74bdbbd5cdc85693555d/image-only.pth",
+      "sha256": "00a0f145ae4a98e66cad95aa79d2ce470d77821ee4262d6b803b3705c11c2090",
+      "bytes": 1102625388
+    }
+  },
+  "upstream_model_code_executed": false,
+  "new_model_forwards": 0,
+  "project_media_forwards": 0,
+  "serving_admitted": false,
+  "customer_confidence_changed": false,
+  "limitations": [
+    "Publisher label is an explicit checkpoint grant, not independent clearance of training photographs.",
+    "Only image checkpoint acquired; video and application-oriented checkpoints are untested.",
+    "Sample preprocessing crops oversized images and sample video iteration may drop trailing frames.",
+    "Implicit timm base-weight downloads and non-strict checkpoint fallback must be disabled before any forward.",
+    "No detection-quality comparison or outside human review yet."
+  ]
+}

@@ -79,6 +79,26 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 8 November
+
+- Finished the controlled writing-span comparison:992 documents, complete
+  native/source replay,864 separately recounted diagnostic arm masks, exact
+  refits of both heads and three calibrators/points. Interval localization
+  recovers more known intervals but loses27 previously useful mixed locations
+  and remains blind to every short insert. Rejected as a replacement; confidence
+  unchanged. [Result and limitations](writing-spans-v7-result.md).
+- Reviewed newer word-edit and image-segmentation methods, excluded noncommercial
+  paired text/checkpoints, and acquired two separately permitted image candidates.
+  Both execute on authored inputs:24 actual forwards total,32 source/geometry
+  tests, exact repeats and fixed optimization bounds. The new localizer loads
+  all410 released tensors and preserves full image coverage with explicit
+  padding/source projection. Sample video-tail loss remains unintegrated.
+  No project-media inference or improved quality is claimed; a complete frozen
+  real-source comparison and fresh confirmation are still required.
+  [Sources, executed contracts and remaining work](new-localizers-and-editing-methods-2026-11-08.md).
+- The owner requires local verification and direct pushes. GitHub Actions stays
+  disabled; historical Linux receipts remain historical and are not rerun.
+
 ## Progress on 7 November
 
 - Ran the public AudioSeal generator/detector locally without provider access:

@@ -1,0 +1,135 @@
+{
+  "schema": "chipmunk.new-localizers-preparation/18",
+  "artifacts_sha256": {
+    "docs/evaluation-panels/image-imdet-v17-acquisition.json": "5407be30daa4fd676a084c7158b91e787b6368645f5c1caca25617e245f4c52b",
+    "docs/evaluation-panels/image-imdet-v17-graph.json": "de59a9fff39fae2ab5f6add65a486d3ce515a8738fda52505c0d8021f63d56fb",
+    "docs/evaluation-panels/image-imdet-v17-authored-native.json": "1bfb0f2a5fd5d4336906105efcdd23ff2cd4687b7de3be50f5bd31bbe551f215",
+    "docs/evaluation-panels/relayformer-v18-acquisition-v2.json": "3c958b094f0b0e81ac1f67a64ddd0315d3c267a6baf6560fc62c7f64a0de3120",
+    "docs/evaluation-panels/relayformer-v18-checkpoint.json": "395b503abf2f783ff398b977a806d044188ad607a856aaa756c20024056eb6ba",
+    "docs/evaluation-panels/relayformer-v18-authored-native.json": "ad26e8376d2d8c81662a55db4523eeac8ca4e90f6f932cae830b9851fb9d3495"
+  },
+  "implementation_sha256": {
+    "backend/scripts/prepare_image_imdet_v17.py": "c4529bd5d67d37fd555a0203c71324db8d4ab65da1b6ef16034ca101b0be9858",
+    "backend/scripts/image_imdet_native_v17.py": "d2dab49d4f7cbdebf0ef8535e92a4d72943dfee25abd8b1adc08c3174623336b",
+    "backend/scripts/image_imdet_runtime_v17.py": "f599f64ca515224794494427fb31fd239f4b2821486cb167ba81b9b74f19668e",
+    "backend/scripts/prepare_relayformer_v18.py": "cde2fc5c2af3ad04608135b282be6a8bee5082b9a32f97fa7204504d8cf95678",
+    "backend/scripts/inspect_relayformer_v18.py": "43c0a628b8655d2a5765690572d646c612c3b9aae0430a3ae761876a2686a420",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+    "backend/scripts/relayformer_runtime_v18.py": "9312df88fe77875e2d9fbf4053b4f81992efe2808357c8fffccda7c0be6fb455",
+    "backend/scripts/export_localizer_preparation_v18.py": "9f33dbca2dc13c27096b45d3a5634f101bb8c04caddcd2f86a97e65f108b8f25",
+    "backend/tests/test_image_imdet_v17.py": "213194ef157d6380b173a16c945953068ddce5eed7d15909c86aa01bc4bfaf8e",
+    "backend/tests/test_relayformer_v18.py": "56f5936260580526d0e8a337672b3ad61e3daed46a540ebac3b1964c3c4afff7"
+  },
+  "resource_profiles": {
+    "tiny_graph": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.image_imdet_native_v17",
+      "arguments": [
+        "inspect",
+        "docs/evaluation-panels/image-imdet-v17-graph.json"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 64290816,
+      "sample_errors": 0,
+      "duration_s": 2.4370655410457402,
+      "seconds_limit": 900
+    },
+    "tiny_authored": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.image_imdet_native_v17",
+      "arguments": [
+        "smoke",
+        "docs/evaluation-panels/image-imdet-v17-authored-native.json"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 406093824,
+      "sample_errors": 0,
+      "duration_s": 3.747115792008117,
+      "seconds_limit": 900
+    },
+    "relay_tensors": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.inspect_relayformer_v18",
+      "arguments": [
+        "docs/evaluation-panels/relayformer-v18-checkpoint.json"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 505511936,
+      "sample_errors": 0,
+      "duration_s": 2.4116142080165446,
+      "seconds_limit": 900
+    },
+    "relay_authored": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.relayformer_native_v18",
+      "arguments": [
+        "docs/evaluation-panels/relayformer-v18-authored-native.json"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1768062976,
+      "sample_errors": 0,
+      "duration_s": 11.360505582997575,
+      "seconds_limit": 900
+    }
+  },
+  "retained_preparation_failures": {
+    "isolated_runtime": {
+      "schema": "chipmunk.imdet-runtime-install/17",
+      "attempt": 1,
+      "status": "failed",
+      "exit_code": 1,
+      "reason": "Conservative installation reserve assertion before onnx install",
+      "last_observed_free_bytes": 1682522112,
+      "reserve_bytes": 1610612736,
+      "completed_packages": [
+        "flatbuffers==25.9.23",
+        "coloredlogs==15.0.1",
+        "humanfriendly==10.0",
+        "onnxruntime==1.23.2",
+        "ml_dtypes==0.5.3"
+      ],
+      "original_install_log_sha256": "1a4814d60dfc34f256c15eab48d3f1313b7028bc32a651eafeda46a4ed003967",
+      "new_model_forwards": 0,
+      "app_environment_modified": false
+    },
+    "separate_runtime_completion": {
+      "schema": "chipmunk.imdet-runtime-install/17",
+      "attempt": 2,
+      "exit_code": 0,
+      "status": "complete",
+      "reason": "Available disk increased before retry; no cache or research artifact deleted",
+      "previous_failure_retained": true,
+      "free_after_bytes": 7140687872,
+      "app_environment_modified": false,
+      "new_model_forwards": 0
+    },
+    "relay_card_format_refusal": {
+      "attempt": 1,
+      "status": "failed",
+      "exit_code": 1,
+      "reason": "Exact source-card whitespace assertion before any checkpoint download",
+      "helper_sha256": "1597330ed155a37db206b1f2869ea983f6cc8822350e5e77b7e02bac94a8d4f6",
+      "model_file_created": false,
+      "upstream_model_code_executed": false,
+      "project_media_forwards": 0
+    }
+  },
+  "actual_authored_forwards": {
+    "tiny_whole_image_classifier": 18,
+    "relay_localizer": 6
+  },
+  "project_media_forwards": 0,
+  "detection_quality_evaluated": false,
+  "serving_admitted": false,
+  "customer_confidence_changed": false,
+  "voice_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "local_authored_tests": 32,
+  "github_workflows_executed": 0,
+  "outside_human_reviewers": 0,
+  "source_images_or_maps_or_weights_published": false,
+  "scope": "Acquisition, permission correspondence, structural inspection, source geometry and actual authored execution only. Matched real-media comparison, fresh confirmation and integration remain required."
+}

@@ -1,0 +1,358 @@
+{
+  "schema": "chipmunk.image-imdet-authored-native/17",
+  "inspection": {
+    "revision": "17e493fd263f9195999d01dde1eee78ea8956638",
+    "model_sha256": "87cf796d2ca7cd20039e17c4be40ff4559f58d16d29410e38e3fb8234e60c10e",
+    "ir_version": 8,
+    "opsets": {
+      "": 17
+    },
+    "nodes": 2274,
+    "operators": {
+      "Add": 116,
+      "Cast": 82,
+      "Clip": 1,
+      "Concat": 103,
+      "Constant": 909,
+      "ConstantOfShape": 2,
+      "Conv": 1,
+      "Div": 28,
+      "Equal": 2,
+      "Erf": 13,
+      "Expand": 3,
+      "Gather": 126,
+      "Gemm": 1,
+      "LayerNormalization": 27,
+      "MatMul": 79,
+      "Mul": 103,
+      "Neg": 24,
+      "Pow": 1,
+      "ReduceL2": 1,
+      "Reshape": 54,
+      "Shape": 142,
+      "Slice": 110,
+      "Softmax": 13,
+      "Split": 13,
+      "Sqrt": 39,
+      "Squeeze": 38,
+      "Sub": 1,
+      "Transpose": 41,
+      "Unsqueeze": 199,
+      "Where": 2
+    },
+    "initializers": 168,
+    "initializer_elements": 6013954,
+    "initializer_types": {
+      "FLOAT": 113,
+      "FLOAT16": 55
+    },
+    "external_tensors": 0,
+    "custom_operator_domains": 0,
+    "runtime": {
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "numpy": "2.2.6",
+      "Pillow": "12.3.0",
+      "torch": "2.13.0",
+      "torchvision": "0.28.0",
+      "ml_dtypes": "0.5.3",
+      "protobuf": "7.36.0"
+    },
+    "isolated_native_code_sha256": {
+      "onnx/__init__.py": "b27b441b17559de3f316ae16de22783ea222ec693153b64493d7d95c5e0dfe8f",
+      "onnxruntime/__init__.py": "1ca44e862e236031dde5dfb8a4d217e3770fa43201dadcf0b947fd43ed16d20e",
+      "onnxruntime/capi/onnxruntime_pybind11_state.so": "60457c9ca71132042584c4fa53234ae218c29d3b744b876c4a68e9e0f3765db1",
+      "onnxruntime/capi/libonnxruntime.1.23.2.dylib": "92500010659b052368797e30c1841956b0efd699a8061ef8b3b25f27449c86e7"
+    },
+    "new_model_forwards": 0,
+    "serving_admitted": false
+  },
+  "authored_inputs": 6,
+  "records": [
+    {
+      "geometry": {
+        "source_size": [
+          31,
+          77
+        ],
+        "resized_size": [
+          256,
+          635
+        ],
+        "resized_crop_xyxy": [
+          0,
+          190,
+          256,
+          446
+        ],
+        "inspected_source_xyxy": [
+          0.0,
+          23.03937007874016,
+          31.0,
+          54.08188976377953
+        ],
+        "conservative_resampling_support_xyxy": [
+          0,
+          22,
+          31,
+          56
+        ],
+        "source_rgb_sha256": "b61c59934e7e28f3edc4f977048b6b67a16ce2b3f482f6a500bbd2ae198b1bff",
+        "input_float32_sha256": "8796380b4fc7df1cbc497fd125083c3ba754eb4f402916cc08aa8a1d70cc7c69",
+        "source_area_fraction": 0.4031496062992126,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.45923346281051636,
+        -1.3719812631607056
+      ],
+      "optimized_logits": [
+        0.4592324197292328,
+        -1.3719810247421265
+      ],
+      "raw_response": 0.8619063716725657,
+      "maximum_logit_difference": 1.043081283569336e-06,
+      "maximum_raw_response_difference": 1.525290259651868e-07,
+      "canonical_repeat_exact": true
+    },
+    {
+      "geometry": {
+        "source_size": [
+          88,
+          47
+        ],
+        "resized_size": [
+          479,
+          256
+        ],
+        "resized_crop_xyxy": [
+          112,
+          0,
+          368,
+          256
+        ],
+        "inspected_source_xyxy": [
+          20.576200417536533,
+          0.0,
+          67.60751565762004,
+          47.0
+        ],
+        "conservative_resampling_support_xyxy": [
+          19,
+          0,
+          69,
+          47
+        ],
+        "source_rgb_sha256": "b7a9207f78a69f5793088689ae4cbbdbfea85818e58df917f9f4b168b2ccbeb0",
+        "input_float32_sha256": "1bfc0ce10a991cc1a94e6010c23a4daf35b7fce038a4fd57a22f377d5d221fe8",
+        "source_area_fraction": 0.534446764091858,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.7959632277488708,
+        -1.3312784433364868
+      ],
+      "optimized_logits": [
+        0.7959597706794739,
+        -1.331273078918457
+      ],
+      "raw_response": 0.8935228663035989,
+      "maximum_logit_difference": 5.364418029785156e-06,
+      "maximum_raw_response_difference": 8.392770545206929e-07,
+      "canonical_repeat_exact": true
+    },
+    {
+      "geometry": {
+        "source_size": [
+          256,
+          256
+        ],
+        "resized_size": [
+          256,
+          256
+        ],
+        "resized_crop_xyxy": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "inspected_source_xyxy": [
+          0.0,
+          0.0,
+          256.0,
+          256.0
+        ],
+        "conservative_resampling_support_xyxy": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "source_rgb_sha256": "ef6cfa2f50bf3a304088cef1621de61550bc043b2b770d81316f83d77ffbad89",
+        "input_float32_sha256": "83d3329d178c510b0b85017111d905eec21f374741acadfd66e93b36208eb808",
+        "source_area_fraction": 1.0,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.892909049987793,
+        -0.9985367059707642
+      ],
+      "optimized_logits": [
+        0.8929059505462646,
+        -0.9985339641571045
+      ],
+      "raw_response": 0.8689202868633712,
+      "maximum_logit_difference": 3.0994415283203125e-06,
+      "maximum_raw_response_difference": 6.653076770612998e-07,
+      "canonical_repeat_exact": true
+    },
+    {
+      "geometry": {
+        "source_size": [
+          515,
+          389
+        ],
+        "resized_size": [
+          338,
+          256
+        ],
+        "resized_crop_xyxy": [
+          41,
+          0,
+          297,
+          256
+        ],
+        "inspected_source_xyxy": [
+          62.47041420118343,
+          0.0,
+          452.5295857988166,
+          389.0
+        ],
+        "conservative_resampling_support_xyxy": [
+          60,
+          0,
+          455,
+          389
+        ],
+        "source_rgb_sha256": "f655a45be13386a6330700b08bab88e4c2e84e507f0078c0b681867464542147",
+        "input_float32_sha256": "bb0010e205a3f03a15915fd96ca812948956170bda5459f8a0668f1aca338b0a",
+        "source_area_fraction": 0.757396449704142,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.5235259532928467,
+        -0.8581286072731018
+      ],
+      "optimized_logits": [
+        0.5235297679901123,
+        -0.8581277132034302
+      ],
+      "raw_response": 0.7992565984745726,
+      "maximum_logit_difference": 3.814697265625e-06,
+      "maximum_raw_response_difference": 4.6860111091451273e-07,
+      "canonical_repeat_exact": true
+    },
+    {
+      "geometry": {
+        "source_size": [
+          389,
+          515
+        ],
+        "resized_size": [
+          256,
+          338
+        ],
+        "resized_crop_xyxy": [
+          0,
+          41,
+          256,
+          297
+        ],
+        "inspected_source_xyxy": [
+          0.0,
+          62.47041420118343,
+          389.0,
+          452.5295857988166
+        ],
+        "conservative_resampling_support_xyxy": [
+          0,
+          60,
+          389,
+          455
+        ],
+        "source_rgb_sha256": "8193437221d356a8cd5b808aa3b71663f195aff1de97091e3eee0c6e3800e0d6",
+        "input_float32_sha256": "d128ec7647730763c960dfb028d9b76d0bfbc92ca6ce91df91079ea55ccf471d",
+        "source_area_fraction": 0.757396449704142,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.4437008500099182,
+        -0.8188349604606628
+      ],
+      "optimized_logits": [
+        0.4437014162540436,
+        -0.8188350796699524
+      ],
+      "raw_response": 0.7794623245487217,
+      "maximum_logit_difference": 5.662441253662109e-07,
+      "maximum_raw_response_difference": 1.1782997411113882e-07,
+      "canonical_repeat_exact": true
+    },
+    {
+      "geometry": {
+        "source_size": [
+          1025,
+          129
+        ],
+        "resized_size": [
+          2034,
+          256
+        ],
+        "resized_crop_xyxy": [
+          889,
+          0,
+          1145,
+          256
+        ],
+        "inspected_source_xyxy": [
+          447.9965585054081,
+          0.0,
+          577.0034414945919,
+          129.0
+        ],
+        "conservative_resampling_support_xyxy": [
+          446,
+          0,
+          579,
+          129
+        ],
+        "source_rgb_sha256": "a0a7c068854e3f51fde5a1a75cb3aa721f15831c9a1873a39a8e3d69de0c3a25",
+        "input_float32_sha256": "ffded41c311a208127720e80fd0226f6cf6d2b0ba816fc625f58bfc142ef4f0b",
+        "source_area_fraction": 0.12586037364798427,
+        "coordinates_mean": "Nominal center-crop bounds; bilinear sampling uses a conservative neighbor-pixel support box. Neither is an edit mask."
+      },
+      "canonical_logits": [
+        0.6759083867073059,
+        -0.9547916650772095
+      ],
+      "optimized_logits": [
+        0.675906777381897,
+        -0.9547879695892334
+      ],
+      "raw_response": 0.8362655162850161,
+      "maximum_logit_difference": 3.6954879760742188e-06,
+      "maximum_raw_response_difference": 7.26365534498008e-07,
+      "canonical_repeat_exact": true
+    }
+  ],
+  "attempted_model_forwards": 18,
+  "completed_model_forwards": 18,
+  "project_media_forwards": 0,
+  "detection_quality_evaluated": false,
+  "logit_bound": 0.01,
+  "response_bound": 0.001,
+  "implementation_sha256": "d2dab49d4f7cbdebf0ef8535e92a4d72943dfee25abd8b1adc08c3174623336b",
+  "serving_admitted": false,
+  "customer_confidence_changed": false
+}

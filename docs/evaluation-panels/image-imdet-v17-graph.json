@@ -1,0 +1,67 @@
+{
+  "revision": "17e493fd263f9195999d01dde1eee78ea8956638",
+  "model_sha256": "87cf796d2ca7cd20039e17c4be40ff4559f58d16d29410e38e3fb8234e60c10e",
+  "ir_version": 8,
+  "opsets": {
+    "": 17
+  },
+  "nodes": 2274,
+  "operators": {
+    "Add": 116,
+    "Cast": 82,
+    "Clip": 1,
+    "Concat": 103,
+    "Constant": 909,
+    "ConstantOfShape": 2,
+    "Conv": 1,
+    "Div": 28,
+    "Equal": 2,
+    "Erf": 13,
+    "Expand": 3,
+    "Gather": 126,
+    "Gemm": 1,
+    "LayerNormalization": 27,
+    "MatMul": 79,
+    "Mul": 103,
+    "Neg": 24,
+    "Pow": 1,
+    "ReduceL2": 1,
+    "Reshape": 54,
+    "Shape": 142,
+    "Slice": 110,
+    "Softmax": 13,
+    "Split": 13,
+    "Sqrt": 39,
+    "Squeeze": 38,
+    "Sub": 1,
+    "Transpose": 41,
+    "Unsqueeze": 199,
+    "Where": 2
+  },
+  "initializers": 168,
+  "initializer_elements": 6013954,
+  "initializer_types": {
+    "FLOAT": 113,
+    "FLOAT16": 55
+  },
+  "external_tensors": 0,
+  "custom_operator_domains": 0,
+  "runtime": {
+    "onnx": "1.19.1",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "ml_dtypes": "0.5.3",
+    "protobuf": "7.36.0"
+  },
+  "isolated_native_code_sha256": {
+    "onnx/__init__.py": "b27b441b17559de3f316ae16de22783ea222ec693153b64493d7d95c5e0dfe8f",
+    "onnxruntime/__init__.py": "1ca44e862e236031dde5dfb8a4d217e3770fa43201dadcf0b947fd43ed16d20e",
+    "onnxruntime/capi/onnxruntime_pybind11_state.so": "60457c9ca71132042584c4fa53234ae218c29d3b744b876c4a68e9e0f3765db1",
+    "onnxruntime/capi/libonnxruntime.1.23.2.dylib": "92500010659b052368797e30c1841956b0efd699a8061ef8b3b25f27449c86e7"
+  },
+  "new_model_forwards": 0,
+  "serving_admitted": false
+}

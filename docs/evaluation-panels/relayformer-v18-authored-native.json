@@ -1,0 +1,105 @@
+{
+  "schema": "chipmunk.relayformer-authored-native/18",
+  "authored_sources": 2,
+  "records": [
+    {
+      "geometry": {
+        "source_size": [
+          515,
+          389
+        ],
+        "fit_size": [
+          515,
+          389
+        ],
+        "canvas_size": [
+          1024,
+          1024
+        ],
+        "source_rgb_sha256": "f655a45be13386a6330700b08bab88e4c2e84e507f0078c0b681867464542147",
+        "input_float32_sha256": "d5aba67069173a86f4daf3eb7f9ea8f67f9029694dcc5be623136669459ca291",
+        "normalization_reference_maximum_difference": 3.651388333913985e-07,
+        "source_cropped": false,
+        "padding_position": "top_left",
+        "padding_rgb": [
+          0,
+          0,
+          0
+        ],
+        "resize": "Only if larger than1024; bilinear, aspect preserved with integer floor sizes",
+        "readout": "Nearest source-center index, exact integer ratios; retain float32 response bits, exclude padding",
+        "response_meaning": "Uncalibrated localizer response, not pixel-authorship probability"
+      },
+      "native": {
+        "actual_patch_count": 2,
+        "actual_patch_float32_sha256": "2f471c46ea9703796dfd6ac4d550586a3453f09444608e9a5eb3e9a3a5f9bae0",
+        "complete_canvas_float32_sha256": "d75a1cc95eab9678e26ac8f041974d34f5f78f39728049435e108f94be0a34d5",
+        "merged_lora": false
+      },
+      "source_map_sha256": "65b92c8652ed22418751498660d48918999320de7e3123cad29efac78d8ddfe9",
+      "canonical_repeat_exact": true,
+      "merged_native": {
+        "actual_patch_count": 2,
+        "actual_patch_float32_sha256": "2f471c46ea9703796dfd6ac4d550586a3453f09444608e9a5eb3e9a3a5f9bae0",
+        "complete_canvas_float32_sha256": "e2ef6c27e6376c73124223e6520dc70a07b227f3d1ccfb9a3bf0509c6a7cdfdb",
+        "merged_lora": true
+      },
+      "merged_unmerged_maximum_difference": 1.5497207641601562e-06
+    },
+    {
+      "geometry": {
+        "source_size": [
+          1401,
+          773
+        ],
+        "fit_size": [
+          1024,
+          564
+        ],
+        "canvas_size": [
+          1024,
+          1024
+        ],
+        "source_rgb_sha256": "ee50dacbbbaff856cdf6c2227b2a0aa0fe137858422f7b7b64894d25321e86b4",
+        "input_float32_sha256": "2d8e6a52b40a5132ee802d0f849659c3a1ba05e82706bd55b89b44166c2bd088",
+        "normalization_reference_maximum_difference": 3.651388333913985e-07,
+        "source_cropped": false,
+        "padding_position": "top_left",
+        "padding_rgb": [
+          0,
+          0,
+          0
+        ],
+        "resize": "Only if larger than1024; bilinear, aspect preserved with integer floor sizes",
+        "readout": "Nearest source-center index, exact integer ratios; retain float32 response bits, exclude padding",
+        "response_meaning": "Uncalibrated localizer response, not pixel-authorship probability"
+      },
+      "native": {
+        "actual_patch_count": 4,
+        "actual_patch_float32_sha256": "787212ba7dec62ec45e0af517ac7e4a820aee2f86fd54c8cd875784bf5b4f5c3",
+        "complete_canvas_float32_sha256": "d41b47d382f0fad6d34bc1d58f5664c84b206d464b9d56816cc30e386a7dff15",
+        "merged_lora": false
+      },
+      "source_map_sha256": "004553799db7b9583715f04ec767b25f6149b15cfbe418c7dfc40daef28a7599",
+      "canonical_repeat_exact": true,
+      "merged_native": {
+        "actual_patch_count": 4,
+        "actual_patch_float32_sha256": "787212ba7dec62ec45e0af517ac7e4a820aee2f86fd54c8cd875784bf5b4f5c3",
+        "complete_canvas_float32_sha256": "da7324b65c14c43f19572d9bedce3481d91c1a9ede1a75c8252cadd93160d3a0",
+        "merged_lora": true
+      },
+      "merged_unmerged_maximum_difference": 1.6391277313232422e-06
+    }
+  ],
+  "complete_checkpoint_tensors": 410,
+  "parameters": 91909179,
+  "attempted_model_forwards": 6,
+  "completed_model_forwards": 6,
+  "project_media_forwards": 0,
+  "detection_quality_evaluated": false,
+  "map_difference_bound": 0.0003,
+  "serving_admitted": false,
+  "customer_confidence_changed": false,
+  "implementation_sha256": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+  "scope": "Strict full pretrained graph and authored geometry/execution only; no real edit detection or accuracy result."
+}

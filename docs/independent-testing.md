@@ -13,6 +13,17 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+For the new localizers' source-coverage and pixel-projection checks, use the32
+authored tests below (NumPy, Pillow, Torch and pytest; no weights or photos):
+
+```sh
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_image_imdet_v17.py backend/tests/test_relayformer_v18.py
+```
+
+Their [native execution record](new-localizers-and-editing-methods-2026-11-08.md)
+is separate:24 actual forwards on authored patterns, not a real-edit accuracy
+evaluation. Neither candidate is admitted to serving confidence.
+
 For an image-coordinate review, use the public authored crop/interpolation
 check. It needs NumPy, SciPy, Pillow and OpenCV, with no photographs, pretrained
 weights or account credentials:

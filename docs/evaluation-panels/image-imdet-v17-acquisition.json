@@ -1,0 +1,50 @@
+{
+  "schema": "chipmunk.image-imdet-acquisition/17",
+  "repository": "Deckard618/imdet",
+  "revision": "17e493fd263f9195999d01dde1eee78ea8956638",
+  "assets": {
+    "README.md": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/README.md",
+      "sha256": "9864138bfae61d4dac2a56ee44249f1a2342abdd7fee4af791a1db8cdc1740d5",
+      "bytes": 6361
+    },
+    "LICENSE": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/LICENSE",
+      "sha256": "8e2a108481b02ee30b246566c3c779174fffe610f950bb880f9608f8c29eb04a",
+      "bytes": 750
+    },
+    "NOTICE": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/NOTICE",
+      "sha256": "52acf07f669b3ff5c90ed728eeaba34b1b571ac601139d4d51671bdd2581ef22",
+      "bytes": 1038
+    },
+    "pe_tiny/LICENSE-pe_tiny.txt": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/pe_tiny/LICENSE-pe_tiny.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    "pe_tiny/config.json": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/pe_tiny/config.json",
+      "sha256": "9facba71cf899c3a6335835a4a7d2b3644b9521f157be6de1de420c8087f568a",
+      "bytes": 657
+    },
+    "pe_tiny/model.onnx": {
+      "url": "https://huggingface.co/Deckard618/imdet/resolve/17e493fd263f9195999d01dde1eee78ea8956638/pe_tiny/model.onnx",
+      "sha256": "87cf796d2ca7cd20039e17c4be40ff4559f58d16d29410e38e3fb8234e60c10e",
+      "bytes": 12509961
+    }
+  },
+  "checkpoint_license": "Apache-2.0",
+  "permission_basis": "Publisher LICENSE explicitly applies folder license to model.onnx and config.json; full Apache text and NOTICE retained.",
+  "new_model_forwards": 0,
+  "project_media_forwards": 0,
+  "fitting_started": false,
+  "serving_admitted": false,
+  "customer_confidence_changed": false,
+  "limitations": [
+    "Publisher-reported accuracy is not our validation.",
+    "Training-source overlap and training protocol remain unverified.",
+    "Whole-image classifier; no native pixel-origin map or demonstrated video capability.",
+    "Only tiny checkpoint acquired; larger alternatives not silently substituted."
+  ]
+}

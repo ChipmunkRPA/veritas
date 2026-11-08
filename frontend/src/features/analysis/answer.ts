@@ -71,7 +71,7 @@ export const isDocumentary = (f: Finding) => f.strength === 'decisive' || f.titl
 // in the muted ink where the decision did not apply it, and its strength word is "self-declared", or "not applied". What
 // a finding is, is read from what a result stores (it holds no variant), so a stored marker's finding loses its bars too.
 const WATERMARK_CHECKS: readonly string[] = ['img.watermark.dwtdct']
-const CREDENTIAL_CHECKS: readonly string[] = ['prov.c2pa', 'prov.c2pa.video']
+const CREDENTIAL_CHECKS: readonly string[] = ['prov.c2pa', 'prov.c2pa.video', 'prov.c2pa.audio']
 /** The check of the finding's first evidence id (a signal's id begins with its detector's: "prov.c2pa:global"). */
 export const firstCheck = (f: Pick<Finding, 'evidence_ids'>): string => ((f.evidence_ids ?? [])[0] ?? '').replace(/^detector:/, '').split(':')[0]
 /** A marker's finding: of self-declared metadata with strength strong (a mention's has none); or of provenance, strong and
@@ -88,7 +88,7 @@ export const isInvalidCredentials = (f: Finding): boolean =>
 /** What the result means says of them, under every headline and on both fusion paths (`view.invalid_sentence`). */
 export function invalidSentence(findings: readonly Finding[]): string | null {
   const invalid = [...findings].sort((a, b) => a.rank - b.rank).find(isInvalidCredentials)
-  return invalid ? `The file’s Content Credentials do not validate (${invalid.id}): the file or the record changed after signing, or the record is malformed. The headline does not take that into account.` : null
+  return invalid ? `The file’s Content Credentials do not validate (${invalid.id}). A certificate, signer-trust, signature or content-binding check failed. This alone does not establish tampering, AI generation or originality.` : null
 }
 export type RecordMark = { level: 'documentary' | 'self_declared'; muted: boolean; word: string }
 /** The mark in the meter's place, with its word; null for a finding with a meter. A documentary record that the decision

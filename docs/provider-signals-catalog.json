@@ -24,7 +24,6 @@
     "A qualified AI-involvement declaration does not locate every edit or prove complete authorship, truth, intent or court admissibility.",
     "Catalog records do not feed the gate, API evidence or confidence. Research provenance is separate from each uploaded file's provenance."
   ],
-  "provider_verifiers_called": 0,
   "customer_files_uploaded": 0,
   "shared_metadata": {
     "fields": [
@@ -542,13 +541,16 @@
           ],
           "authentication": "none documented",
           "response_fields": [
-            "verified",
-            "validation_state",
-            "is_trusted",
-            "invisible_watermark_detected"
+            "result.verified",
+            "result.c2pa.present",
+            "result.c2pa.validation_state",
+            "result.c2pa.is_trusted",
+            "result.invisible_watermark_detected",
+            "request_id"
           ],
-          "runtime_status": "not_integrated",
-          "automated_shortcut": "disabled"
+          "runtime_status": "research HTTP qualification only; not integrated into customer pipelines",
+          "automated_shortcut": "disabled",
+          "qualification_note": "7 HTTP 200 replies: 6 completed, 1 inconclusive. Actual WebP returned a false watermark field where the contract says omitted; no validated current positive."
         }
       ],
       "review_status": "scoped_documentation",
@@ -719,13 +721,14 @@
           "response_fields": [
             "verdict"
           ],
-          "runtime_status": "not_integrated",
+          "runtime_status": "research negative controls exercised; not integrated into customer pipelines",
           "automated_shortcut": "disabled",
           "verdict_values": [
             "verified_suno",
             "no_suno_provenance",
             "inconclusive"
-          ]
+          ],
+          "qualification_note": "2 authored negative controls returned no_suno_provenance; genuine credential-positive coverage remains unqualified."
         }
       ],
       "review_status": "scoped_documentation",
@@ -1259,7 +1262,7 @@
       "signals": [],
       "review_status": "verification_gap",
       "search_queries": [
-        "site:docs.bigmodel.cn 水印 标识",
+        "site:docs.bigmodel.cn \u6c34\u5370 \u6807\u8bc6",
         "site:docs.bigmodel.cn watermark"
       ],
       "gap": "Focused primary-source search did not establish a compatible public production verifier. This is a review gap, not a claim that the provider never marks output.",
@@ -1375,5 +1378,17 @@
     "Pika current support and older FAQ differ on visible marks.",
     "Some Volcengine pages timed out on direct fetch; indexed official documentation was readable and the podcast example/metadata-writing guide were retrieved.",
     "The SDK lists PDF as a supported read MIME, but this build refused authored PDF signing. No PDF credential adapter or PDF fast-path compatibility is claimed."
-  ]
+  ],
+  "provider_verifiers_called_during_initial_inventory_review": 0,
+  "research_qualification": {
+    "study": "provider-provenance-v1",
+    "result": "provider-provenance-v1-result.md",
+    "provider_routes_called": 2,
+    "http_requests": 9,
+    "http_200": 9,
+    "provider_positive_matches": 0,
+    "customer_files_uploaded": 0,
+    "customer_routes_enabled": false,
+    "notes": "Real research requests on authored controls/public historical Bria examples; no current valid Bria or genuine Suno positive qualified. WebP response contradicted omission contract and remained inconclusive."
+  }
 }

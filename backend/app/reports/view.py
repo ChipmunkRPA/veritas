@@ -137,8 +137,8 @@ SELF_DECLARED_WORD, NOT_APPLIED_WORD = "self-declared", "not applied"
 # product's own for the state (`c2pa.STATE_LABELS`), their mark the open diamond in the muted ink, and what the result
 # means names them under every headline, on both fusion paths
 INVALID_WORD = "invalid"
-INVALID_MEANS = ("The file’s Content Credentials do not validate ({id}): the file or the record changed after signing, or the "
-                 "record is malformed. The headline does not take that into account.")
+INVALID_MEANS = ("The file’s Content Credentials do not validate ({id}). A certificate, signer-trust, signature or "
+                 "content-binding check failed. This alone does not establish tampering, AI generation or originality.")
 
 
 def first_check(finding: dict[str, Any]) -> str:
@@ -1824,7 +1824,7 @@ def set_aside(finding: dict[str, Any], decision: dict[str, Any] | None) -> bool:
 # own, each row with its diamond and no meter. It is known by its family, as the page knows it, and not by the signals
 PROVENANCE_FINDINGS = frozenset({"F1_provenance", "F2_self_declared_metadata"})
 ASIDE_TITLE = "Provenance findings that did not decide this result"
-ASIDE_NOTE = "These records of the file did not decide this result; each says why. They are shown for the examiner."
+ASIDE_NOTE = "These records of the file did not decide this result; each says why. They are included as context."
 
 
 def provenance_aside(findings: list[dict[str, Any]], decision: dict[str, Any]) -> list[dict[str, Any]]:

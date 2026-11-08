@@ -150,6 +150,8 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
                "binding_matched": float(report.binding_status == "matched"),
                "binding_mismatch": float(report.binding_status == "mismatch"),
                "binding_not_verified": float(report.binding_status == "not_verified"),
+               "signing_certificate_expired": float("signingCredential.expired" in report.failure_codes),
+               "signer_untrusted": float("signingCredential.untrusted" in report.failure_codes),
                "ingredients": float(max(len(report.chain) - 1, 0))}
     exhibit_ids = _c2pa_exhibits(ctx, report, official, legacy)
     if state == "remote":

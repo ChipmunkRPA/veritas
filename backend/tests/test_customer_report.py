@@ -33,19 +33,20 @@ def sample():
     return frozen, out
 
 
-def test_customer_findings_explain_negative_logits_and_excluded_voice_without_rewriting_records():
+def test_customer_findings_keep_recorded_observations_without_inventing_missing_tendency_metadata():
     frozen, out = sample()
     before = snapshot_hash(frozen)
     shown = customer_view(frozen, out, lambda x: x)
     f1, f2, coverage = shown['findings']
     assert f1['title'] == 'Visual-generation check (S01)'
-    assert 'Leaning towards original content' in f1['inference']
+    assert 'does not by itself establish AI generation or original authorship' in f1['inference']
+    assert f1['assessment']['confidence_pct'] is None
     assert '0 of 8 sampled frames' in f1['observations'][0]
     assert 'negative' not in f1['reason'] and '-1.39' not in f1['reason']
-    assert 'excluded from the combined estimate' in f2['inference']
+    assert f2['assessment']['included_in_overall'] is False
     assert f2['support'][0]['href'] == '#multimedia-evidence-A01'
     assert 'private' not in f2['observations'][0]
-    assert coverage['support'] == [] and 'Coverage information only' in coverage['inference']
+    assert coverage['support'] == [] and coverage['assessment']['direction'] == 'context'
     assert snapshot_hash(frozen) == before
 
 
@@ -96,12 +97,12 @@ def test_small_contributions_are_not_standalone_leanings_and_new_rule_does_not_r
     out['testing'] = {'arrays': [{'caption': 'Old threshold false alarm rate'}], 'line': 'Old rate'}
     out['methods'] = {'headline_rule': {'rates': [{'fpr': .05}], 'sentences': ['old rule'], 'scope': 'old scope'}}
     shown = customer_view(frozen, out, lambda x: x)
-    assert 'No reliable AI/original conclusion' in shown['findings'][0]['inference']
-    assert 'small contribution' in shown['findings'][0]['inference']
+    assert shown['findings'][0]['assessment']['direction'] in ('context', 'inconclusive')
+    assert shown['findings'][0]['assessment']['confidence_pct'] is None
     assert shown['testing']['arrays'] == []
     assert shown['methods']['headline_rule']['rates'] == []
     assert shown['methods']['headline_rule']['scope'] is None
-    assert '80%' in shown['methods']['headline_rule']['note']
+    assert '80%' not in shown['methods']['headline_rule']['note']
 
 
 def test_customer_method_and_identity_do_not_reintroduce_historical_headline_or_draft_workflow():
@@ -110,6 +111,7 @@ def test_customer_method_and_identity_do_not_reintroduce_historical_headline_or_
     shown = customer_view(frozen, out, lambda x: x)
     method = shown['methods']['method'][0]['value']
     assert 'conformal bands for the headline' not in method
-    assert '80% point-estimate rule' in method
+    assert '80% point-estimate rule' not in method
+    assert 'uncertainty safeguards' in method
     assert 'DRAFT' not in shown['title'] + shown['keywords'] + shown['analysis_line']
     assert shown['customer_interval_value'].endswith('%')

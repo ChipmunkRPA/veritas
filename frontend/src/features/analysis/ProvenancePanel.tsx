@@ -215,7 +215,7 @@ export default function ProvenancePanel({ analysis, exhibits, runs }: { analysis
       {payloads.error && <ErrorState className="mt-4" onRetry={payloads.refetch}>{payloads.error.message}</ErrorState>}
       {!payloads.isPending && (
         <>
-          <Block><C2paChain state={c2paState(analysis)} checked={!!c2paRun && c2paRun.status === 'ok'} credentials={fields(findTable(tables, TITLES.c2pa))} chain={chainNodes(findTable(tables, TITLES.chain))} /></Block>
+          <Block><C2paChain state={c2paState(analysis, fields(findTable(tables, TITLES.c2pa)))} checked={!!c2paRun && c2paRun.status === 'ok'} credentials={fields(findTable(tables, TITLES.c2pa))} chain={chainNodes(findTable(tables, TITLES.chain))} /></Block>
           <Block>
             {groups.length > 0
               ? <MetadataTree groups={groups} caption={treeTable?.caption} />

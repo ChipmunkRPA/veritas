@@ -1,0 +1,69 @@
+{
+  "schema": "provider-provenance-qualification-result/1",
+  "plan_sha256": "1775e69325de94c55755aa2e232561d39af521616d3b7945ce23dd0bf25a5516",
+  "freeze_commit": "04ba62d2048ee60ce509032da39e9d9c9309c560",
+  "counts": {
+    "bria": {
+      "cases": 7,
+      "request_attempts": 7,
+      "http_200": 7,
+      "transport_errors": 0,
+      "summary_completed": 6,
+      "provider_reported_matches": 0,
+      "credentials_absent": 4,
+      "credentials_Invalid": 3,
+      "summary_inconclusive": 1
+    },
+    "suno": {
+      "cases": 2,
+      "request_attempts": 2,
+      "http_200": 2,
+      "transport_errors": 0,
+      "summary_completed": 2,
+      "provider_reported_matches": 0
+    }
+  },
+  "contract_discrepancies": {
+    "webp_unexpected_watermark_boolean": 1
+  },
+  "local_content_matching_but_invalid_provider_originals": 2,
+  "local_copied_credential_hash_mismatch_rejected": true,
+  "offline_review": {
+    "frozen_code_commitments": 3,
+    "source_commitments": 9,
+    "request_bodies_reconstructed": 9,
+    "reply_commitments": 9,
+    "local_sdk_results_replayed": 9,
+    "all_passed": true,
+    "new_network_requests": 0,
+    "model_forwards": 0
+  },
+  "native_seconds": 5.609439291991293,
+  "customer_files_uploaded": 0,
+  "provider_positive_matches_observed": 0,
+  "genuine_suno_credential_positive_tested": false,
+  "current_bria_credential_positive_tested": false,
+  "external_serving_admission": false,
+  "statistical_calibration_changed": false,
+  "limitation": "Small contract study on authored controls and historical public provider files; not generator-wide detection accuracy.",
+  "environment": {
+    "python": "3.12.6",
+    "c2pa_python": "0.37.7",
+    "c2pa_rs": "0.90.14",
+    "pillow": "12.3.0",
+    "numpy": "2.2.6"
+  },
+  "software_validation": {
+    "backend_tests": 344,
+    "frontend_tests": 12,
+    "isolated_real_provider_app_flows": 2,
+    "forbidden_model_forwards": 0,
+    "confidence_withheld_in_both_flows": true,
+    "source_binding_and_expiration_explained": true,
+    "pdf_pages": 14,
+    "pdf_banned_terms": [],
+    "pdf_internal_terms": [],
+    "pdf_refused_assets": [],
+    "actual_customer_database_used": false
+  }
+}

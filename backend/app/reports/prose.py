@@ -5,7 +5,7 @@ import re
 
 # Exclude URL path segments and leave a sentence's terminal punctuation intact.
 _LOCAL_PATH = re.compile(r"(?<![\w:/.-])(?:docs|backend|frontend|tests)/[A-Za-z0-9_./<>-]*[A-Za-z0-9_<>-]")
-_TICKET = re.compile(r"(?<![\w-])(?:H-3|I-1|I-4|I-5|I-12|I-14|M-3|D-15)(?![\w-])")
+_TICKET = re.compile(r"(?<![\w-])(?:H-3|I-1|I-4|I-5|I-12|I-14|M-3|D-15|N-\d+[a-z]?)(?![\w-])")
 _PARENTHESES = re.compile(r"\([^()]*\)")
 _OUTCOME = re.compile(r" \([A-Z]\d+\.[a-z][a-z0-9_]*\)(?=:)")
 _EXTERNAL = re.compile(r"(?:https?://)?(?:github\.com|huggingface\.co|arxiv\.org)/[^\s)]+")

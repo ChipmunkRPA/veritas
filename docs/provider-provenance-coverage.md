@@ -34,8 +34,10 @@ does not yet validate PDF/Office C2PA or production text watermarks. The install
 SDK advertises PDF reading, but refused our authored PDF-signing probe, so no
 working PDF credential shortcut is claimed.
 
-The gate remains inside the prepaid analysis pipeline. No provider-verification
-API was called and no customer file was uploaded outside the app in this review.
+The gate remains inside the prepaid analysis pipeline. The initial inventory
+review made no provider-verification calls. A [separate frozen qualification](provider-provenance-v1-result.md)
+subsequently made nine real requests using authored controls and public provider
+samples, with no customer uploads. Neither external route is enabled for customers.
 
 ## Broader provider findings
 

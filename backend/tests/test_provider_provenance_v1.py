@@ -32,7 +32,7 @@ def test_inapplicable_watermark_is_omitted_and_not_a_negative(mime):
 @pytest.mark.parametrize('body', [b'{}', b'[]', b'<html>not JSON</html>',
     b'{"result":{},"result":{}}', b'{"result":NaN}',
     json.dumps(bria(mark=None)).encode(),
-    b'{"result":{"verified":"true","c2pa":{"present":false,"is_trusted":false}}}',
+    b'{"request_id":"example","result":{"verified":"true","c2pa":{"present":false,"is_trusted":false}}}',
     json.dumps({**bria(), 'result': {**bria()['result'], 'verified': True}}).encode(),
     json.dumps(bria(False, True, 'Trusted')).encode()])
 def test_incomplete_contradictory_or_coerced_responses_remain_inconclusive(body):

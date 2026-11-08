@@ -65,8 +65,13 @@ export function severityCounts(groups: readonly TreeGroup[]): Record<Severity, n
 
 export type C2paState = 'absent' | 'valid' | 'trusted' | 'invalid' | null
 
-/** The H3 assessment's `c2pa_state` (null when no Content Credentials check ran or a remote manifest was not fetched). */
-export function c2paState(analysis: Pick<AnalysisDetail, 'assessments'>): C2paState {
+/** Prefer the verified check's table state, then the historical H3 assessment. Null means no usable recorded state. */
+export function c2paState(analysis: Pick<AnalysisDetail, 'assessments'>, credentials?: ReadonlyMap<string, string>): C2paState {
+  const recorded = (credentials?.get('state') ?? '').toLowerCase()
+  if (recorded === 'invalid') return 'invalid'
+  if (recorded === 'trusted') return 'trusted'
+  if (recorded === 'valid' || recorded === 'valid (signer not on the trust list)') return 'valid'
+  if (recorded === 'no manifest') return 'absent'
   const h3 = (analysis.assessments ?? []).find((a) => a.hypothesis === 'H3_provenance_integrity')
   const s = h3?.c2pa_state
   return s === 'absent' || s === 'valid' || s === 'trusted' || s === 'invalid' ? s : null
@@ -77,7 +82,7 @@ export function c2paWords(state: C2paState, checked: boolean): { line: string; s
   switch (state) {
     case 'trusted': return { state: 'valid', line: 'Credentials valid · signer on the trust list' }
     case 'valid': return { state: 'untrusted', line: 'Credentials intact, but the signer isn’t on the trust list, so its identity is unverified.' }
-    case 'invalid': return { state: 'invalid', line: 'Credentials invalid — the file or its record changed after signing. Disregard what the record says.' }
+    case 'invalid': return { state: 'invalid', line: 'Credentials were not accepted. Certificate, trust, signature or content-binding checks can fail; invalid credentials alone do not establish tampering.' }
     case 'absent': return { state: 'absent', line: 'No Content Credentials found. Most files carry none; this is not evidence either way.' }
     default:
       return checked

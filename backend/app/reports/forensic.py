@@ -113,7 +113,7 @@ C2PA_WORDS = {
     "trusted": "Credentials valid · signer on the trust list.",
     "valid": "Credentials intact, but the signer isn’t on the trust list, so its identity is unverified.",
     "well-formed": "Credentials are present and well-formed, but they could not be validated, so what they state is unverified.",
-    "invalid": "Credentials invalid — the file or its record changed after signing. Disregard what the record says.",
+    "invalid": "Credentials were not accepted. Certificate, trust, signature or content-binding checks can fail; invalid credentials alone do not establish tampering.",
 }
 PROVENANCE_FAMILIES = view.RECORD_FAMILIES
 LIPSYNC_LIMITATION = ("Lip-sync manipulation is checked only for audio–video misalignment; well-synchronised lip-sync deepfakes "
@@ -222,7 +222,7 @@ GLOSSARY = (
     ("Hypothesis", "The question a check addresses: whole-content generation (H1), localised manipulation (H2) or declared provenance "
                    "(H3)."),
     # N-19n (D3-07, 8): the strength word of Content Credentials that do not validate
-    ("Invalid", "Content Credentials that do not validate: the file or the record changed after signing, or the record is malformed (no ratio)."),
+    ("Invalid", "Content Credentials with a failed certificate, trust, signature or content-binding check. This alone does not establish tampering or authorship (no ratio)."),
     ("Likelihood ratio", "How much more likely an observation is if the file is AI-generated or manipulated than if it is not. "
                          "Strength words follow its size."),
     ("Log-odds", "The logarithm of p / (1 − p). Adding log-odds is how independent evidence is combined."),
@@ -1754,11 +1754,25 @@ def watermark_words(record: dict[str, Any]) -> str:
 
 
 def provenance(snapshot: ReportSnapshot, signals: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    from app.engine.provenance_gate import CREDENTIALS
+
     result = snapshot.result
     h3 = next((a for a in result.get("assessments") or [] if a.get("hypothesis") == H3), None)
     state = (h3 or {}).get("c2pa_state")
-    credentials = C2PA_WORDS.get(state, "Content Credentials were not checked for this analysis.") if state else \
-        "Content Credentials were not checked for this analysis."
+    records = [s for s in signals.values() if s.get('detector_id') == CREDENTIALS.get(snapshot.analysis.kind)
+               and s.get('status', 'ok') == 'ok']
+    if len(records) == 1:
+        metrics = records[0].get('metrics') or {}
+        def one(key):
+            value = metrics.get(key)
+            return type(value) in (int, float) and value == 1.
+        if one('invalid'):
+            state = 'invalid'
+        elif one('trusted') and one('valid'):
+            state = 'trusted'
+        elif one('valid'):
+            state = 'valid'
+    credentials = C2PA_WORDS.get(state, "No usable Content Credentials verification result was recorded.")
     watermarks = [watermark_words(w) for w in (h3 or {}).get("watermarks") or []]
     rows = []
     for f in sorted((f for f in result.get("findings") or [] if f.get("family") in PROVENANCE_FAMILIES), key=lambda f: int(f.get("rank", 0))):
@@ -2119,8 +2133,8 @@ def methods(snapshot: ReportSnapshot, decision: dict[str, Any]) -> dict[str, Any
                  *([{"word": "self-declared", "rule": "a record in the file that anyone can write (no ratio)"}]
                    if any(view.is_marker(f) for f in snapshot.result.get("findings") or []) else []),
                  # (8): the word of Content Credentials that do not validate, the product's own word for the state
-                 *([{"word": "invalid", "rule": "Content Credentials that do not validate: the file or the record changed after signing, "
-                                                "or the record is malformed (no ratio)"}]
+                 *([{"word": "invalid", "rule": "Content Credentials with a failed certificate, trust, signature or content-binding "
+                                                "check; this alone does not establish tampering or authorship (no ratio)"}]
                    if any(view.is_invalid_credentials(f) for f in snapshot.result.get("findings") or []) else [])]
     strengths_note = ("For a check in the estimate the factor is its contribution: how far it moved the odds from its neutral point, "
                       "toward or against. For a check outside the estimate it is the check’s stand-alone likelihood ratio."
@@ -2197,7 +2211,8 @@ def reproducibility(snapshot: ReportSnapshot, engine_version: str, template_set:
             _row("Policy thresholds", m.get("policy_thresholds_id"), NOT_RECORDED),
             _row("Libraries", " · ".join(f"{k} {v}" for k, v in sorted((m.get("library_versions") or {}).items())) or None, NOT_RECORDED),
             _row("Sampling and seeds", " · ".join(f"{SAMPLING_WORDS.get(k, k.replace('_', ' '))} {formatting.version_words(v) if k == 'plan_version' else v}"
-                                                   for k, v in sorted((m.get("sampling") or {}).items())) or None, "not applicable"),
+                                                   for k, v in sorted((m.get("sampling") or {}).items())
+                                                   if k != 'source_labels') or None, "not applicable"),
             _row("Timings", f"analysis created {formatting.utc_seconds(created)}, finished {formatting.utc_seconds(finished)} ({duration})", NOT_RECORDED),
             _row("Result document SHA-256", canonical_hash(result), NOT_RECORDED),
             _row("Report snapshot SHA-256", snapshot_hash(snapshot), NOT_RECORDED),

@@ -20,8 +20,21 @@
 {{ m.strength_sentence(w) }}
 {{ cite(w.s.id) }}Revocation status was not checked (offline).
 {% elif w.variant == "invalid" %}
-{{ cite(w.s.id) }}Content Credentials are present but do not validate: the file or its record changed after signing.
-{{ cite(w.s.id) }}Disregard what the record says; this concerns modification after signing, not AI generation.
+{{ cite(w.s.id) }}Content Credentials are present, but one or more verification checks failed.
+{% if w.s.certificate_expired %}
+{{ cite(w.s.id) }}The signing certificate is expired.
+{% endif %}
+{% if w.s.signer_untrusted %}
+{{ cite(w.s.id) }}The signer is not trusted by the configured trust list.
+{% endif %}
+{% if w.s.binding_matched %}
+{{ cite(w.s.id) }}The signed content hash matches the current file bytes; the credentials fail other validation checks.
+{% elif w.s.binding_mismatch %}
+{{ cite(w.s.id) }}The current file content does not match the signed content hash.
+{% else %}
+{{ cite(w.s.id) }}A match between the current file and its signed content hash was not established.
+{% endif %}
+{{ cite(w.s.id) }}These credential failures alone do not establish tampering, AI generation or originality. The declaration is not relied on.
 {% elif w.variant == "untrusted" %}
 {{ cite(w.s.id) }}Credentials are intact, but the signer is not on the trust list, so its identity is unverified.
 {% if w.s.legacy_trusted %}

@@ -48,7 +48,9 @@ The [expanded provider review](provider-provenance-coverage.md) now inventories
 37 provider families and 51 scoped signal records, with explicit modality gaps.
 Suno and Bria document public APIs without a token; an account is not a blanket
 prerequisite. Their external routes are not activated. Private keys and provider
-responses are not simulated. No customer files were uploaded to
+responses are not simulated. [Follow-up qualification](provider-provenance-v1-result.md)
+made nine real requests on research fixtures and corrected credential-reporting
+errors; no external customer route was admitted. No customer files were uploaded to
 external verifiers. Offline credential checking has trust-snapshot, revocation,
 remote-manifest and container limitations. A signed declaration does not locate
 each edited region or establish the entire history of a file.

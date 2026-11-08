@@ -3,9 +3,11 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { readFileSync } from 'node:fs'
 import { afterEach, describe, expect, it } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
-import type { AnalysisDetail } from '../../lib/api/queries'
+import type { AnalysisDetail, Finding } from '../../lib/api/queries'
 import AnswerModule from './AnswerModule'
+import { invalidSentence } from './answer'
 import { customerAssessment } from './customerAssessment'
+import { c2paState, c2paWords } from './provenance'
 
 afterEach(cleanup)
 const analysis = (probability: number, extra: Record<string, unknown> = {}) => ({
@@ -16,6 +18,14 @@ const analysis = (probability: number, extra: Record<string, unknown> = {}) => (
 }) as unknown as AnalysisDetail
 
 describe('automated customer conclusion', () => {
+  it('explains invalid audio credentials without inferring changed content', () => {
+    const finding = { id: 'F1', title: 'Content Credentials that do not validate', family: 'F1_provenance', strength: 'strong', direction: 'for', rank: 1,
+      evidence_ids: ['prov.c2pa.audio:global'] } as unknown as Finding
+    expect(invalidSentence([finding])).toContain('certificate')
+    expect(invalidSentence([finding])).not.toContain('changed after signing')
+    expect(c2paWords('invalid', true).line).toContain('alone do not establish tampering')
+    expect(c2paState({ assessments: [] }, new Map([['state', 'Invalid']]))).toBe('invalid')
+  })
   it('shows a supported AI tendency with a supported reference estimate', () => {
     render(<AnswerModule analysis={analysis(.6, { code: 'ai_supported' })} findings={[]} />)
     expect(screen.getByTestId('headline').textContent).toBe('Leaning towards AI-generated or AI-altered content')

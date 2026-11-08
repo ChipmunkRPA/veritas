@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.legacy-photo-owner-freeze/25",
+  "private_plan_sha256": "f30bf9b6a91cb1771b4814de6770a4cce4f7ae09df6937d962997c0682adaa83",
+  "planned_sources": 240,
+  "code_sha256": {
+    "backend/scripts/image_legacy_authors_v25.py": "744804ebd86e9fa5a5028b60dc880c534ad9acf32bb9eff1c156770ef25aa235",
+    "backend/scripts/image_legacy_authors_runtime_v25.py": "f3eaf71197aae7dff7a304c950e29d06a990d6d6ddd9286e99b916f159a1fcbc",
+    "backend/tests/test_image_legacy_authors_v25.py": "0487e3a43813aff9a1b7d63f869fe77876fda8bdae002ba6d27280cacda4b94a"
+  },
+  "protected_sha256": {
+    "backend/scripts/image_attribution_v20.py": "20f45e5db2c918a4ef293e9ca8c6ba81b1fdea7272cef98d372bd3016be572b9",
+    "backend/scripts/image_source_rights_v19.py": "2faf2eb06f16440fbf0ccb0d005fed615299e3f51b3920e556abb16364c163c1",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/scripts/relayformer_learning_runtime_v22.py": "3a53e9311d5a2f4fa78ee6aab036b0c8ba1e9d26b44cf97b34a91500a2378f0d",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+  },
+  "source_graph_sha256": "468491f13c2784a8beec36629d205947b5d1f0458b7106013e68db045ac43dd6",
+  "prior_inventory_sha256": "9a5c817102ff81cf7825becc5107762d7b6bcddc03eceecf2a18601a55ec5f7c",
+  "primary_metadata_archive_sha256": "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+  "all240_primary_photo_references_replayed": true,
+  "requests_version": "2.34.2",
+  "authored_tests_passed": 11,
+  "junit_sha256": "1532eb77125922987071dd629170f252b9ba37e184a5ddd774d1c7e77c1ada20",
+  "plan_resource_profile": {
+    "schema": "chipmunk.regional-learning-resource-profile/22",
+    "module": "scripts.image_legacy_authors_v25",
+    "child_exit_code": 0,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 492404736,
+    "sample_errors": 0,
+    "sampling_error_events": [],
+    "terminal_observation_events": [],
+    "duration_s": 0.7903887080028653,
+    "seconds_limit": 900,
+    "scope": "Explicit local research worker; neural/source execution counts come from its own actual receipt. Same900s/6GiB and1536MiB reserves. Verified terminal transitions retained; missed live samples fail. RSS is a sampled lower bound, not a peak guarantee."
+  },
+  "plan_resource_profile_sha256": "159e655acf75f83313d22b57303b83c9486dbddd40e7ddf4693c2d8329d66dce",
+  "provider_requests_started": false,
+  "neural_forwards": 0,
+  "fitting_steps": 0,
+  "roles_assigned": false,
+  "outside_human_review": false,
+  "scope": "Prospective once-only public owner-metadata audit. No images or weights acquired, no licence/camera/human-identity clearance, no source role or confirmation admission. All failures and unrequested cases remain in the denominator."
+}

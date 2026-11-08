@@ -1,0 +1,644 @@
+{
+  "schema": "chipmunk.writing-span-public-result/7",
+  "source": {
+    "citation": "Iqbal, Md Sadiq; Kashem, Mohammod Abul (2026), TXD-22: A Large-Scale Benchmark Dataset for Multi-Class AI-Generated and Mixed-Source Text Identification, Mendeley Data, V1, doi:10.17632/prcjcggtjf.1",
+    "url": "https://data.mendeley.com/datasets/prcjcggtjf/1",
+    "license": "CC BY 4.0",
+    "modifications": "Exact source slices recomposed into controlled160-word documents with explicit source-character targets; source text remains private.",
+    "source_sha256": "232c260f8caf7ea61a331f39fa730956862afbe0c5fc554720daa07d215a2f7d",
+    "input_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+    "independent_authorship_verified": false,
+    "consumed_development": true
+  },
+  "freeze_sha256": "61dfe6aa86e6a07fc1a70c04394686b747790f746fca40bd3b5bd406d34ea68a",
+  "control_seal_sha256": "fde666390cdc232c9b3ae1ed684895c89494320476d8d360f7c7a7fc1af3973c",
+  "summary_sha256": "f7109ffc138c773acb82aae6cfc8dc6c286ae1e81f3f9ad186a8c572b0d99b8f",
+  "review_sha256": "360492465b4696104f351eda3363c99c01f25b7a833215624547583d41d0a5ad",
+  "roles": {
+    "fit": {
+      "documents": 288,
+      "source_groups": 32,
+      "actual_pretrained_forwards": {
+        "encoder": 289,
+        "current_classifier": 0
+      },
+      "receipt_sha256": "4b26f6f333ffbde4bd889a9605be561ee766cfe8bfed7d5e0ecf3d498697387c"
+    },
+    "cal": {
+      "documents": 288,
+      "source_groups": 32,
+      "actual_pretrained_forwards": {
+        "encoder": 289,
+        "current_classifier": 704
+      },
+      "receipt_sha256": "fc831df17c34103dccf37b904a8805c222a1861f7be83f28f0f6b5ce8e896390"
+    },
+    "point": {
+      "documents": 128,
+      "source_groups": 32,
+      "actual_pretrained_forwards": {
+        "encoder": 129,
+        "current_classifier": 345
+      },
+      "receipt_sha256": "4a3e91d1885d44f9d7902c30095238402e87e017ba8dd998509fe3d9fb9f0645"
+    },
+    "diagnostic": {
+      "documents": 288,
+      "source_groups": 32,
+      "actual_pretrained_forwards": {
+        "encoder": 289,
+        "current_classifier": 692
+      },
+      "receipt_sha256": "2ebe8ec7c72bbbac252fb7080689c451caf4e44b5584ffb5814e610835c41170"
+    }
+  },
+  "head_parameters": {
+    "token": 769,
+    "interval": 154628
+  },
+  "private_head_sha256": {
+    "token": "c4aa149f94b3104e77dc1f78e7a88cbcd9b8df844845c240cf90d68b8cec94f2",
+    "interval": "701dc768a9fb5395881728b33f6c4bf91cb55efe74f6fca0b6b11e47424741f4"
+  },
+  "calibration_target": "Retained publisher-AI non-whitespace fraction inside proposed interval; not customer authorship probability.",
+  "calibrators": {
+    "current": {
+      "intercept": -0.9904687624862132,
+      "slope": 1.4610629984690713,
+      "mean": 0.5485946853636597,
+      "scale": 5.038078080887179,
+      "loss": 0.46275317136183325,
+      "projected_gradient": 8.285767558180446e-10,
+      "source_groups": 32,
+      "documents": 288,
+      "target": "Retained publisher-AI non-whitespace character fraction inside this proposed interval",
+      "customer_confidence": false
+    },
+    "token": {
+      "intercept": -1.0045538495894306,
+      "slope": 1.6232203569936219,
+      "mean": -1.4548417747895097,
+      "scale": 3.1352001144061523,
+      "loss": 0.4692416189138121,
+      "projected_gradient": 1.5857368413155215e-10,
+      "source_groups": 32,
+      "documents": 288,
+      "target": "Retained publisher-AI non-whitespace character fraction inside this proposed interval",
+      "customer_confidence": false
+    },
+    "interval": {
+      "intercept": -0.4203186807760721,
+      "slope": 0.4003028807179278,
+      "mean": -6.970926092059431,
+      "scale": 6.805240080622305,
+      "loss": 0.6534638310352712,
+      "projected_gradient": 2.143302917957668e-11,
+      "source_groups": 32,
+      "documents": 288,
+      "target": "Retained publisher-AI non-whitespace character fraction inside this proposed interval",
+      "customer_confidence": false
+    }
+  },
+  "genuine_only_research_points": {
+    "current": {
+      "cut": 0.7735247837019479,
+      "source_groups": 32,
+      "group_budget": 1,
+      "groups_highlighted": 1,
+      "uses_ai_or_diagnostic": false
+    },
+    "token": {
+      "cut": 0.939479242494501,
+      "source_groups": 32,
+      "group_budget": 1,
+      "groups_highlighted": 1,
+      "uses_ai_or_diagnostic": false
+    },
+    "interval": {
+      "cut": 0.6360061507088932,
+      "source_groups": 32,
+      "group_budget": 1,
+      "groups_highlighted": 1,
+      "uses_ai_or_diagnostic": false
+    }
+  },
+  "summary": {
+    "schema": "chipmunk.writing-span-summary/7",
+    "diagnostic_documents": 288,
+    "diagnostic_groups": 32,
+    "arms": {
+      "current": {
+        "by_recipe": {
+          "ai": {
+            "documents": 32,
+            "highlighted_documents": 27,
+            "useful_locations": 22,
+            "mean_character_iou": 0.5054679001985476,
+            "recovered_intervals": 17,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 15643
+          },
+          "human": {
+            "documents": 32,
+            "highlighted_documents": 2,
+            "useful_locations": 0,
+            "mean_character_iou": 0.9375,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 687,
+            "missed_ai_characters": 0
+          },
+          "human-large-matched": {
+            "documents": 32,
+            "highlighted_documents": 2,
+            "useful_locations": 0,
+            "mean_character_iou": 0.9375,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 525,
+            "missed_ai_characters": 0
+          },
+          "human-many-matched": {
+            "documents": 32,
+            "highlighted_documents": 0,
+            "useful_locations": 0,
+            "mean_character_iou": 1.0,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 0
+          },
+          "human-small-matched": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 431,
+            "missed_ai_characters": 0
+          },
+          "mixed-human-gap": {
+            "documents": 32,
+            "highlighted_documents": 28,
+            "useful_locations": 22,
+            "mean_character_iou": 0.37771653315130427,
+            "recovered_intervals": 20,
+            "truth_intervals": 64,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 18353
+          },
+          "mixed-large": {
+            "documents": 32,
+            "highlighted_documents": 20,
+            "useful_locations": 18,
+            "mean_character_iou": 0.308977533422214,
+            "recovered_intervals": 7,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 142,
+            "missed_ai_characters": 8188
+          },
+          "mixed-many": {
+            "documents": 32,
+            "highlighted_documents": 12,
+            "useful_locations": 5,
+            "mean_character_iou": 0.11686405197987346,
+            "recovered_intervals": 12,
+            "truth_intervals": 96,
+            "highlighted_human_characters": 142,
+            "missed_ai_characters": 17622
+          },
+          "mixed-small": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.0,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 220,
+            "missed_ai_characters": 2349
+          }
+        },
+        "genuine_groups_highlighted": 3,
+        "mixed_documents": 128,
+        "useful_mixed_locations": 45,
+        "mean_mixed_character_iou": 0.20088952963834794,
+        "mixed_intervals_recovered": 39
+      },
+      "token": {
+        "by_recipe": {
+          "ai": {
+            "documents": 32,
+            "highlighted_documents": 30,
+            "useful_locations": 3,
+            "mean_character_iou": 0.12738775868462437,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 27633
+          },
+          "human": {
+            "documents": 32,
+            "highlighted_documents": 2,
+            "useful_locations": 0,
+            "mean_character_iou": 0.9375,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 92,
+            "missed_ai_characters": 0
+          },
+          "human-large-matched": {
+            "documents": 32,
+            "highlighted_documents": 0,
+            "useful_locations": 0,
+            "mean_character_iou": 1.0,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 0
+          },
+          "human-many-matched": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 17,
+            "missed_ai_characters": 0
+          },
+          "human-small-matched": {
+            "documents": 32,
+            "highlighted_documents": 2,
+            "useful_locations": 0,
+            "mean_character_iou": 0.9375,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 51,
+            "missed_ai_characters": 0
+          },
+          "mixed-human-gap": {
+            "documents": 32,
+            "highlighted_documents": 26,
+            "useful_locations": 1,
+            "mean_character_iou": 0.0530927547078722,
+            "recovered_intervals": 0,
+            "truth_intervals": 64,
+            "highlighted_human_characters": 34,
+            "missed_ai_characters": 27882
+          },
+          "mixed-large": {
+            "documents": 32,
+            "highlighted_documents": 10,
+            "useful_locations": 0,
+            "mean_character_iou": 0.014939968959966708,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 86,
+            "missed_ai_characters": 11829
+          },
+          "mixed-many": {
+            "documents": 32,
+            "highlighted_documents": 14,
+            "useful_locations": 0,
+            "mean_character_iou": 0.014573991682304773,
+            "recovered_intervals": 0,
+            "truth_intervals": 96,
+            "highlighted_human_characters": 36,
+            "missed_ai_characters": 19626
+          },
+          "mixed-small": {
+            "documents": 32,
+            "highlighted_documents": 5,
+            "useful_locations": 0,
+            "mean_character_iou": 0.0,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 119,
+            "missed_ai_characters": 2349
+          }
+        },
+        "genuine_groups_highlighted": 3,
+        "mixed_documents": 128,
+        "useful_mixed_locations": 1,
+        "mean_mixed_character_iou": 0.020651678837535922,
+        "mixed_intervals_recovered": 0
+      },
+      "interval": {
+        "by_recipe": {
+          "ai": {
+            "documents": 32,
+            "highlighted_documents": 27,
+            "useful_locations": 27,
+            "mean_character_iou": 0.8127673891142775,
+            "recovered_intervals": 27,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 0,
+            "missed_ai_characters": 5661
+          },
+          "human": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 928,
+            "missed_ai_characters": 0
+          },
+          "human-large-matched": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 519,
+            "missed_ai_characters": 0
+          },
+          "human-many-matched": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 372,
+            "missed_ai_characters": 0
+          },
+          "human-small-matched": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.96875,
+            "recovered_intervals": 0,
+            "truth_intervals": 0,
+            "highlighted_human_characters": 257,
+            "missed_ai_characters": 0
+          },
+          "mixed-human-gap": {
+            "documents": 32,
+            "highlighted_documents": 26,
+            "useful_locations": 21,
+            "mean_character_iou": 0.4953254538987004,
+            "recovered_intervals": 36,
+            "truth_intervals": 64,
+            "highlighted_human_characters": 998,
+            "missed_ai_characters": 13764
+          },
+          "mixed-large": {
+            "documents": 32,
+            "highlighted_documents": 2,
+            "useful_locations": 1,
+            "mean_character_iou": 0.015148236207293476,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 426,
+            "missed_ai_characters": 11752
+          },
+          "mixed-many": {
+            "documents": 32,
+            "highlighted_documents": 21,
+            "useful_locations": 16,
+            "mean_character_iou": 0.36806088213266597,
+            "recovered_intervals": 42,
+            "truth_intervals": 96,
+            "highlighted_human_characters": 742,
+            "missed_ai_characters": 11785
+          },
+          "mixed-small": {
+            "documents": 32,
+            "highlighted_documents": 1,
+            "useful_locations": 0,
+            "mean_character_iou": 0.0,
+            "recovered_intervals": 0,
+            "truth_intervals": 32,
+            "highlighted_human_characters": 366,
+            "missed_ai_characters": 2349
+          }
+        },
+        "genuine_groups_highlighted": 1,
+        "mixed_documents": 128,
+        "useful_mixed_locations": 38,
+        "mean_mixed_character_iou": 0.21963364305966498,
+        "mixed_intervals_recovered": 78
+      }
+    },
+    "interval_vs": {
+      "current": {
+        "checks": {
+          "more_useful_mixed_locations": false,
+          "higher_mixed_character_iou": true,
+          "no_lost_useful_mixed_document": false,
+          "preserves_pure_ai": true,
+          "preserves_short_ai": true,
+          "preserves_interval_recovery": true,
+          "similar_genuine_group_flags": true,
+          "similar_each_genuine_composition": true
+        },
+        "passes_numerical_development_gates": false,
+        "lost_previously_useful_mixed_documents": 27,
+        "mean_iou_difference_source_group_bootstrap95": [
+          -0.047569628581672734,
+          0.08465594719147343
+        ]
+      },
+      "token": {
+        "checks": {
+          "more_useful_mixed_locations": true,
+          "higher_mixed_character_iou": true,
+          "no_lost_useful_mixed_document": true,
+          "preserves_pure_ai": true,
+          "preserves_short_ai": true,
+          "preserves_interval_recovery": true,
+          "similar_genuine_group_flags": true,
+          "similar_each_genuine_composition": true
+        },
+        "passes_numerical_development_gates": true,
+        "lost_previously_useful_mixed_documents": 0,
+        "mean_iou_difference_source_group_bootstrap95": [
+          0.15003232750709783,
+          0.24788950939974466
+        ]
+      }
+    },
+    "passes_numerical_development_gates": false,
+    "serving_admitted": false,
+    "customer_confidence_changed": false,
+    "fresh_source_validation": false,
+    "outside_human_reviewers": 0
+  },
+  "local_review": {
+    "schema": "chipmunk.writing-span-local-review/7",
+    "status": "complete",
+    "freeze_sha256": "61dfe6aa86e6a07fc1a70c04394686b747790f746fca40bd3b5bd406d34ea68a",
+    "outside_human_reviewers": 0,
+    "independent_source_validation": false,
+    "reconstructed_documents": 992,
+    "native_documents_repeated": 992,
+    "exact_head_refits": {
+      "token": true,
+      "interval": true
+    },
+    "exact_calibrator_refits": 3,
+    "exact_genuine_points": 3,
+    "separately_recounted_diagnostic_arm_masks": 864,
+    "unchanged_pretrained_weights": true,
+    "source_text_or_vectors_published": false,
+    "serving_admitted": false,
+    "duration_s": 655.5502540830057,
+    "actual_pretrained_forwards": {
+      "encoder": 996,
+      "current_classifier": 1741
+    }
+  },
+  "resource_profiles": {
+    "fit": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_writing_spans_v7",
+      "arguments": [
+        "fit"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 1388593152,
+      "sample_errors": 0,
+      "duration_s": 40.318040290963836,
+      "seconds_limit": 900
+    },
+    "cal": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_writing_spans_v7",
+      "arguments": [
+        "cal"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 2936143872,
+      "sample_errors": 0,
+      "duration_s": 255.64014529203996,
+      "seconds_limit": 900
+    },
+    "point": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_writing_spans_v7",
+      "arguments": [
+        "point"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 2828877824,
+      "sample_errors": 0,
+      "duration_s": 123.4112411250826,
+      "seconds_limit": 900
+    },
+    "diagnostic": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.run_writing_spans_v7",
+      "arguments": [
+        "diagnostic"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 2924724224,
+      "sample_errors": 0,
+      "duration_s": 252.75868016597815,
+      "seconds_limit": 900
+    },
+    "review": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.review_writing_spans_v7",
+      "arguments": [],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 3369402368,
+      "sample_errors": 0,
+      "duration_s": 659.3245708330069,
+      "seconds_limit": 900
+    }
+  },
+  "passes_complete_local_development_gates": false,
+  "serving_admitted": false,
+  "customer_confidence_changed": false,
+  "github_workflows_executed": 0,
+  "outside_human_reviewers": 0,
+  "public_source_text_or_vectors_or_learned_weights": false,
+  "earlier_authored_runtime_attempt": {
+    "status": "failed_coverage_refusal_retained",
+    "profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.writing_span_native_v7",
+      "arguments": [
+        "output/evaluation/writing-span-v7-native-smoke.json"
+      ],
+      "child_exit_code": 1,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 2447851520,
+      "sample_errors": 0,
+      "duration_s": 14.67126204201486,
+      "seconds_limit": 900
+    },
+    "exact_forward_counter_available": false
+  },
+  "corrected_authored_runtime_attempt": {
+    "receipt": {
+      "schema": "chipmunk.writing-span-native-smoke/7",
+      "authored_cases": 3,
+      "records": [
+        {
+          "status": "supported",
+          "tokens": 14,
+          "windows": 1,
+          "feature_width": 768,
+          "native_feature_tap_exact": true,
+          "current_direct_audits": 1,
+          "current_maximum_difference": 0.0
+        },
+        {
+          "status": "unsupported_coverage_refused",
+          "new_model_forwards": 0
+        },
+        {
+          "status": "supported",
+          "tokens": 1201,
+          "windows": 3,
+          "feature_width": 768,
+          "native_feature_tap_exact": true,
+          "current_direct_audits": 1,
+          "current_maximum_difference": 0.0
+        }
+      ],
+      "actual_pretrained_forwards": {
+        "encoder": 8,
+        "current_classifier": 6
+      },
+      "encoder_parameters": 149606402,
+      "project_source_forwards": 0,
+      "fitted_heads": 0,
+      "detection_quality": false,
+      "implementation_sha256": "c7aa46f721ec27239ea9c434ee3073685dbf183ab0abc48d375ac281e1c75409"
+    },
+    "profile": {
+      "schema": "chipmunk.specialist-local-resource-profile/4",
+      "module": "scripts.writing_span_native_v7",
+      "arguments": [
+        "output/evaluation/writing-span-v7-native-smoke-v2.json"
+      ],
+      "child_exit_code": 0,
+      "guard": null,
+      "sampled_tree_rss_lower_bound_bytes": 3097821184,
+      "sample_errors": 0,
+      "duration_s": 11.047685917001218,
+      "seconds_limit": 900
+    }
+  },
+  "limitations": [
+    "No fresh sources or author IDs; external pretrained-model training overlap is unknown.",
+    "Controlled short ASCII source slices with publisher labels, not natural article/email or intellectual-authorship proof.",
+    "Nine compositions share each group; rates are not independent-person or SaaS population estimates.",
+    "Local execution/refit replay uses the same native libraries and is not outside human review.",
+    "The explicit unsupported combining-character probe remains refused; no full Unicode coverage claim.",
+    "No serving promotion is permitted by this development protocol, even if numerical gates pass."
+  ]
+}

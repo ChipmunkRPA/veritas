@@ -6,6 +6,11 @@ An implementation by our team is not an independent review; an external test
 must identify who ran it, how inputs were selected, and what was independently
 checked. We do not currently claim recruited reviewers or completed community pilots.
 
+Repository-managed GitHub Actions is disabled at the project owner's request.
+Run verification locally and push reviewed updates directly. Historical Linux
+workflow receipts below describe past runs; they are not instructions to start
+or rerun a workflow.
+
 ## Start with a bounded check
 
 For an image-coordinate review, use the public authored crop/interpolation
@@ -45,6 +50,7 @@ separately acquired study data.
 
 | Package | What can be reproduced | Current evidence and limitation |
 | --- | --- | --- |
+| [Controlled writing-span learning](writing-spans-v7-result.md) | Public source construction, native loaders, two small learners, calibration/points, and full local source/refit reviewer; exact panel requires private source plan and separately acquired licensed CSV | All992 planned documents and full source/native/refit replay passed. All864 diagnostic arm masks recounted; both learned heads and three calibrators/points refit exactly. Interval found38/128 useful mixed locations vs45/128 current and lost27 previously useful documents; rejected as replacement. Consumed source groups, no serving confidence, fresh-author or outside human review claim. |
 | [Magnified image crops](image-iml-zoom-v16-result.md) | Public authored grid/point arithmetic and complete aggregate results; native source/grid replay requires the retained private panel | All384 candidate variants and96 ordinary-reference runs completed. Candidate found0/48 useful edits per format versus9/48 native and6/48 JPEG current; rejected. Strict real-source independent-mask audit remains failed. Full post-result canonical/sensitivity audit retains25/768 ungated metric discrepancies and one changed point; rejection unchanged. Actual Linux continuous arithmetic passes, without outside human review or fresh accuracy. |
 | [Supervised image-region head](image-patch-head-v14-result.md) | Frozen native/source replay, separate NumPy dense-head and coordinate arithmetic, and [actual Linux synthetic checks](evaluation-panels/image-patch-head-v14-linux-synthetic-review.json) | All1,344 development cases completed; candidate rejected for fewer useful regions. Original strict mean audit failed and remains failed. A separately frozen complete diagnostic replay reproduces all native features/maps and original outcomes; no mean-sensitivity mask changes. Raw sources/vectors/head remain private; no fresh accuracy or outside human review. |
 | [Fresh JPEG calibration confirmation](image-fresh-v12-result.md) | Public frozen scoring/audit code and complete aggregate results; source/map replay requires the separately retained private panel and cached permitted weights | All 96 fresh inputs completed; 192 independent probability calculations and 384 source-coordinate means match. Candidate rejected: 12/48 edited flags vs 10/48 current, but 5/48 genuine false flags vs 2/48. Current masks meet IoU >= .3 on 3/48 edits. No serving promotion, public photos/maps or outside human review. |

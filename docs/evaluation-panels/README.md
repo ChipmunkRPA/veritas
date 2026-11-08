@@ -8,7 +8,16 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
-## Latest review entry points (7 November 2026)
+## Latest review entry points (8 November 2026)
+
+- [Controlled writing-span learning](../writing-spans-v7-result.md):
+  the prospective local-only protocol and aggregate freeze bind992 controlled
+  documents, separate fitting/calibration/genuine-point/diagnostic source roles,
+  a matched token learner, small interval learner and actual current passage
+  comparator. The interval arm finds38/128 useful mixed locations versus45/128
+  current and is rejected as a replacement. Source text, pairings, complete
+  native features and learned heads remain private; see the result for the
+  terminal full local replay and all limitations. GitHub Actions stays disabled.
 
 - [Four-media specialist-calibration framework](../specialist-calibration-design.md):
   separate local/check/context calibrations plus separately fitted/calibrated

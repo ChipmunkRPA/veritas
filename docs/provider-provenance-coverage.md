@@ -4,6 +4,15 @@ Reviewed 7 November 2026. Provider capabilities change; product-specific
 documentation takes precedence over general announcements. A provider name,
 logo, unusual spacing or an unsigned metadata field is not authenticated origin.
 
+**Public local detectors do exist.** Provider API access is not a prerequisite
+for all watermark work. Meta releases AudioSeal and image/video research
+detectors with commercially usable code/weights; public text toolkits also
+exist, including schemes with a public detection key. The separate questions
+are whether the released detector matches a product's deployed marks, which
+generation configuration/key it needs, and whether a detected payload proves
+provider identity or AI involvement. See the
+[public implementation review](public-watermark-implementations.md).
+
 ## Current local implementation
 
 Image, video and supported audio pipelines now validate Content Credentials
@@ -46,7 +55,7 @@ explicitly unassessed or partial.
 | OpenAI | The official [Content Provenance API](https://developers.openai.com/api/docs/guides/content-provenance) checks supported image C2PA and image/audio SynthID signals. Text verification requires approved access. A negative result does not rule out OpenAI or other AI content. | Local signed credentials where present and supported. The external API is not configured or called; private text verification is not available here. |
 | Anthropic / Claude | [Provider explanation](https://www.anthropic.com/news/claude-text-watermark) describes statistical word-choice watermarking, with no hidden characters, and a detection API in private preview. Supported generated files can carry C2PA notes indicating Claude involvement. | Local signed credentials where present. No claimed Claude text-key access or automatic private-preview verification. |
 | Google / Gemini, Imagen, Veo and Lyria | [SynthID](https://deepmind.google/models/synthid/) covers provider-supported media; the public detector portal checks images, video and audio from Google and supported partners. [Gemini verification](https://support.google.com/gemini/answer/16722517?hl=en) describes the supported app workflow. | Generic local credentials where present. The provider portal is a separate verification workflow, not an integrated local decoder or an inferred permission to upload customer files. |
-| Meta / Muse | Meta's [Muse Image and Muse Video announcement](https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/) describes Content Seal for Muse Image and a preview verification tool. That announcement says video expansion is planned; it does not establish current video coverage. | Generic local credentials where present. Content Seal verification is not integrated. No universal Muse text/audio watermark claim. |
+| Meta / Muse | The official [Content Seal overview](https://github.com/facebookresearch/content-seal) explicitly distinguishes Muse Image's custom proprietary implementation from downloadable open research detectors. [AudioSeal](https://github.com/facebookresearch/audioseal) and [VideoSeal/PixelSeal](https://github.com/facebookresearch/videoseal) publish commercially usable code and weights. Public research release does not by itself establish Muse-product compatibility. | Generic local credentials where present. Public watermark-family adapters and their actual compatibility tests are not integrated yet; this work does not require waiting for a provider API. Muse production verification remains separate and unconfigured. No universal Muse text/audio coverage claim. |
 | xAI / Grok | [Output watermarking documentation](https://docs.x.ai/developers/advanced-api-usage/watermarking) describes supported API text marking and a detection API available by application. The [consumer FAQ](https://docs.x.ai/grok/faq) documents visible Grok marks on generated images/video. An API response's watermark header is not an authenticated property of a subsequently copied article. | Generic local credentials where present. A visible logo or copied header cannot stop detection. Access to the provider's text verification API is not configured here. |
 | MiniMax / Hailuo | The official [image API](https://platform.minimax.cn/docs/api-reference/image-generation-t2i) documents optional `aigc_watermark`, default false. This does not establish a universal hidden watermark or independently available decoder across all products and formats. | Generic local credentials where present. No invented MiniMax audio/video/text decoder; optional or removed marks cannot establish originality. |
 | DeepSeek | Its [terms, section 5.3](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) state that platform-generated content receives labels. They do not publish a general detector key or establish that all copied text has a detectable whitespace pattern. | Generic local credentials where present. Provider-specific private text verification is not implemented. |
@@ -72,6 +81,14 @@ probability. The reference implementation's demonstration configuration is not
 Google's deployed Gemini key; the repository also warns against treating its
 reference generation code as production-ready. Nothing was installed, imported
 or presented as a universal decoder.
+
+Meta's [TextSeal toolkit](https://github.com/facebookresearch/textseal) also
+implements a split-key design with public detection. A usable public verification
+key can be sufficient for that scheme; the application must not assert that
+every watermark needs a provider's private secret. The matching tokenizer,
+scheme/configuration, public key where applicable and demonstrated deployment
+compatibility still matter. Toolkit code licensing does not automatically cover
+every language-model checkpoint used in its generation examples.
 
 ## Verification scope and remaining work
 

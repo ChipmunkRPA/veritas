@@ -35,6 +35,18 @@ jobs:
           import os, re
           assert re.fullmatch(r'[0-9a-f]{40}', os.environ['SCIENCE_COMMIT']), 'A full immutable revision is required'
           PY
+      - name: Record setup intent before dependencies or inference
+        run: |
+          mkdir "$RUNNER_TEMP/visual-public-receipts"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          receipt = {'schema': 'chipmunk.public-visual-linux-intent/1', 'science_commit': os.environ['SCIENCE_COMMIT'],
+                     'run_id': os.environ['GITHUB_RUN_ID'], 'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+                     'phase': 'before_dependency_setup', 'neural_forwards_at_this_step': 0,
+                     'customer_files': 0, 'serving_changed': False}
+          Path(os.environ['RUNNER_TEMP'], 'visual-public-receipts', 'intent.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          PY
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
@@ -46,10 +58,15 @@ jobs:
         run: |
           python -m pip install --isolated --no-cache-dir --only-binary=:all: numpy==2.2.6 scipy==1.18.1 PyYAML==6.0.3 einops==0.8.2 opencv-python-headless==5.0.0.93 Pillow==12.3.0 psutil==7.2.2
           python -m pip install --isolated --no-cache-dir --only-binary=:all: torch==2.13.0 torchvision==0.28.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Install the required video codec tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
       - name: Record the actual source and runtime
         run: |
           test "$(git rev-parse HEAD)" = "$SCIENCE_COMMIT"
-          mkdir "$RUNNER_TEMP/visual-public-receipts"
           python - <<'PY'
           import importlib.metadata as md, json, os, platform, subprocess
           from pathlib import Path

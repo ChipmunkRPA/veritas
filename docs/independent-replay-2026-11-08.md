@@ -60,3 +60,20 @@ artifact actions, no secrets, schedules, GPU or larger runner. Standard hosted
 runner usage is [free for this public repository](https://docs.github.com/en/actions/concepts/billing-and-usage).
 Execution outcomes must be inspected before claiming reproduction. The new
 workflow itself is not evidence of a completed native run.
+
+## Retained execution attempts
+
+- [Audio run 42468303951](https://github.com/ChipmunkRPA/veritas/actions/runs/42468303951)
+  reached the correct historical source. The diagnostic completed successfully;
+  strict exact refitting still failed its original equality requirement. The
+  arithmetic job stopped during Python installation after three HTTP 504
+  responses, before its numerical review. A bounded retry of that setup-failed
+  job is separate from changing or waiving its checks.
+- [Visual run 42468335861](https://github.com/ChipmunkRPA/veritas/actions/runs/42468335861)
+  installed the fixed CPU Python packages, then stopped while recording the
+  environment because FFmpeg was absent from the hosted image. Public source
+  acquisition, checkpoint loading and neural inference had not started. The
+  runner setup now explicitly installs FFmpeg/FFprobe, records the actual codec
+  version, and writes a setup-intent receipt before dependency installation.
+  This is an environment correction; the immutable experiment revision and
+  all its points, cases, guards and checks remain unchanged.

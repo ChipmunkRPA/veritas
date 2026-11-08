@@ -12,6 +12,17 @@ reviewer has participated: the recorded count remains zero.
 
 ## Run from the repository root
 
+Use a separate immutable study checkout, not today's application tree. The
+capsule checks all 69 original implementation hashes and correctly refuses
+later app edits. This revision contains the complete public packet and both
+portable/diagnostic entry points:
+
+```sh
+git worktree add --detach /tmp/chipmunk-audio-v13-source \
+  2c5662af6f66cfae3eafef81e76531863571173c
+cd /tmp/chipmunk-audio-v13-source
+```
+
 Use Python 3.12 and a new output path. Create the environment separately from
 the app. Installing the seven pinned numerical packages requires network access;
 the actual replay uses only files already in the repository.
@@ -88,6 +99,10 @@ uses pinned setup actions, retains failed checks and prints completed receipts.
 Its execution result must be inspected before claiming external-host parity;
 adding the workflow does not establish that it passed. It is automated
 reproduction by our team, not outside human review or fresh predictive testing.
+The workflow now accepts a full immutable study revision, defaulting to the
+revision above, and records the checkout before replay. A separate
+[follow-up note](independent-replay-2026-11-08.md) preserves the later failures
+caused by checking the historical capsule against a changed application tree.
 
 The [first Linux run](https://github.com/ChipmunkRPA/veritas/actions/runs/42334171628)
 at commit `69f4681509d9853dfd9d75bd36eacdd356de1fd3` is complete. Its arithmetic

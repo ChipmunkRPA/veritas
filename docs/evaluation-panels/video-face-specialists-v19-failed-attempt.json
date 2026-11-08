@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.video-face-engineering-failure/19",
+  "failure": "LoadedModel wrapper supplied to YuNet instead of its payload; AttributeError before first detector forward.",
+  "completed_clips": 0,
+  "new_neural_forwards": 0,
+  "journal_sha256": "cb8c3f62ff8214283fa1e08933dbf57dfec74e52bbb69771eee212e9b6c3532d",
+  "freeze_sha256": "bbc4ecde4d1c1b631fb41665f9b081cc4135a2064a2dfbee50d3021b3a7073d4",
+  "profile": {
+    "schema": "chipmunk.specialist-local-resource-profile/4",
+    "module": "scripts.score_video_specialists_v19",
+    "arguments": [
+      "native",
+      "<private-video-trial>",
+      "--role",
+      "specialist_cal"
+    ],
+    "child_exit_code": 1,
+    "guard": null,
+    "sampled_tree_rss_lower_bound_bytes": 1930969088,
+    "sample_errors": 0,
+    "duration_s": 15.485577875049785,
+    "seconds_limit": 3600
+  },
+  "correction": "Explicit v20 attempt unwraps the revision-bound adapter, with a regression. Same sources, labels, roles, weights and evaluation policy. No implicit restart or overwrite.",
+  "serving_admitted": false
+}

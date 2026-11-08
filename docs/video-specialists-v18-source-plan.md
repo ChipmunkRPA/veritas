@@ -75,6 +75,23 @@ in 4.34 seconds, with zero detector forwards. The
 is source reconstruction evidence only. Actual scoring, calibration and
 improvement gates still need their own full frozen protocol and execution.
 
+The subsequent decoded-RGB audit is now complete for all 648 exact inputs:
+93,043 native RGB frames and 12,420 actual changed AI source frames. Every
+positive change is inside its declared interval. No additional exactly equal
+nonuniform sampled frames connect the 162 known components across roles, so
+the original roles stay unchanged. This does not establish person identity,
+pixel authorship, unknown source links or detection quality. The
+[aggregate receipt](evaluation-panels/video-specialists-v18-source-frame-audit.json)
+contains commitments and counts only; per-frame journals remain private.
+
+All 14,256 local units now bind actual changed-frame labels and source-clock
+positions. A [separate native calibration protocol](video-face-specialists-v20-protocol.md)
+freezes the local views, dependent-evidence combination and comparison rules.
+Its first engineering attempt stopped before any detector forward because a
+loaded-model wrapper was passed to a native method. The original source,
+freeze and failed attempt remain; the corrected attempt has a new freeze and
+a regression for the real wrapper contract. Native scoring is underway.
+
 The first waiting postprocessing coordinator used the frozen audio-only runner's
 allowlist for the future video job. That mismatch was caught before any child
 work started. The waiting coordinator was cancelled, with its original state,

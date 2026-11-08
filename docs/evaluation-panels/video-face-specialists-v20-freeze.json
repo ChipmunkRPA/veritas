@@ -1,0 +1,1696 @@
+{
+  "schema": "chipmunk.video-face-specialist-freeze/20",
+  "main": "<private-local-checkout>",
+  "policy": {
+    "schema": "chipmunk.video-face-specialist-policy/20",
+    "arms": {
+      "crop": [
+        "face-crop"
+      ],
+      "crop-appearance": [
+        "face-crop",
+        "face-appearance"
+      ],
+      "crop-features": [
+        "face-crop",
+        "face-feature-change"
+      ],
+      "all": [
+        "face-crop",
+        "face-appearance",
+        "face-feature-change"
+      ]
+    },
+    "source": "All648 consumed, exact prepared clips in162 known source components; four source-disjoint roles. No fresh reserve used.",
+    "positions": "Frozen half-second centers and native consecutive triplets; three middle, two before and two after centers. No authenticity response chooses positions.",
+    "truth": "Audited changed RGB source-frame presence in sampled support. Publisher manipulation labels, not identified-face or pixel-authorship ground truth.",
+    "views": "Unchanged commercial GenD face-crop logit, SFace appearance transition, DINOv2 patch feature transition. One visible detected face; no identity database.",
+    "native": "YuNet and SFace CPU; GenD and DINOv2 MPSfloat32. Fixed crop batch8 and patch batch12; no adaptive precision/batch fallback.",
+    "repeat": "First eligible crop/appearance/features input in each role. SFace exact; crop absolute1e-4, patches absolute/relative1e-4. Native source RGB must equal model-free audit.",
+    "combination": "Separate monotone local heads by target/view; one dependent video-face family, positive-logit maximum, then separately fitted and calibrated combination. No multiplication of independent votes.",
+    "missing": "Every planned unit retained; any unavailable required unit withholds combined confidence. No missing response becomes zero or an original verdict.",
+    "minimum_groups_per_class": 25,
+    "l2": 0.001,
+    "reference_prior": 0.5,
+    "points": "Internal evaluation only. Across all four arms use the same completely assessed genuine fusion_cal source components, minimum25. Budget equals raw GenD genuine component false flags, capped atfloor(.1*n). Strict greater than sorted component maxima at rankn-budget. Local points match each existing raw cue in the same manner on common complete genuine files.",
+    "comparison": "Raw current-code cue arithmetic on exactly these fixed supports, not full production tracking/adaptive windows or whole application fusion.",
+    "localization": "Merge flagged support spans separated by at most550ms, for every arm and raw reference. Best merged-span IoU with known edit >=.3; separately count actually sampled flagged source frames and local-unit truth. Bridged gaps are interval estimates, not examined pixels.",
+    "continuation": "Require more AI files at no more genuine false-flag components than crop, no coverage loss, and more correctly localized manipulated clips at IoU>=.3 than crop. Report ordinary controls separately. No automatic serving adoption; fresh-source and full-app tests remain required.",
+    "resource_guard": {
+      "rss_gib": 6,
+      "available_mib": 1536,
+      "disk_mib": 1536,
+      "seconds_per_role": 3600
+    },
+    "serving_admitted": false
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2",
+    "Pillow": "12.3.0"
+  },
+  "models": {
+    "yunet.2023mar": {
+      "licence": {
+        "spdx": "MIT",
+        "class_": "commercial",
+        "notice": "opencv_zoo models/face_detection_yunet/LICENSE (MIT, Shiqi Yu)"
+      },
+      "files": {
+        "models/weights/face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+      }
+    },
+    "gend.clip_l14": {
+      "licence": {
+        "spdx": "MIT",
+        "class_": "commercial",
+        "notice": "HF model-card licence mit; github.com/yermandy/GenD LICENSE (GitHub licence API: MIT); base encoder openai/clip-vit-large-patch14 from github.com/openai/CLIP (GitHub licence API: MIT)"
+      },
+      "files": {
+        "models/hf/hub/models--yermandy--GenD_CLIP_L_14/blobs/a2ca1a2490d32efa941dacf8665d08ea296dbed6": "7f2761e13678191774a152121f1630d19baa33a74216dd264d54445d96b16229",
+        "models/hf/hub/models--yermandy--GenD_CLIP_L_14/blobs/d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833": "d76f0bdfd74a29fe1b1c1b84a80ac92486993e426878e8c7a3944281fbb96833"
+      }
+    },
+    "opencv.sface.2021dec": {
+      "licence": {
+        "spdx": "Apache-2.0",
+        "class_": "commercial",
+        "notice": "opencv_zoo face_recognition_sface README explicitly licenses all directory files including ONNX under Apache-2.0; retained notice docs/third-party/opencv-sface-v15-Apache-2.0.txt"
+      },
+      "files": {
+        "models/weights/face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+      }
+    },
+    "dinov2.small": {
+      "licence": {
+        "spdx": "Apache-2.0",
+        "class_": "commercial",
+        "notice": "HF model-card licence apache-2.0 (facebook/dinov2-small, not gated; checked 2026-09-13); github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"
+      },
+      "files": {
+        "models/hf/hub/models--facebook--dinov2-small/blobs/5664b325e6258d3960fad8c4c1cff958f3cc2272": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+        "models/hf/hub/models--facebook--dinov2-small/blobs/ff5b47c2edcd1d3556d63c01a65d93b58b9efce1": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+        "models/hf/hub/models--facebook--dinov2-small/blobs/ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+      }
+    }
+  },
+  "inputs_sha256": {
+    "scoring-input-plan-v2.json": "7eb6ee61b18f255fb6e21e1c391a1a0e347dffc8d1ba26aa75da4aa56cc37bdf",
+    "source-frame-audit-v1.jsonl": "21ce2999b0e378db360369a8429d70a59c92fbab83e0802eb8fcb509243f8c8d",
+    "source-frame-audit-v1.json": "7877f9544ddbae50e02cc86122c7343b9a212585263d5fb921df1c679914049e",
+    "source-frame-audit-freeze-v1.json": "95993f3f040aa607d47ccb7953c1662c3a1d775f1dd7473ec1dbde43c29a5e8a"
+  },
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "commercial_license_record_sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e",
+  "confirmation_authenticity_forwards": 0,
+  "serving_admitted": false,
+  "private_original_sha256": "90f0ce86ed8b786c23361e73079c16ec953b5cf8e092e6e1f0a14ec6031c6337",
+  "privacy_note": "Original runtime path redacted; all scientific policy/code/asset/input commitments unchanged. Native media and face records are not published. Code hash map represented as path/digest records to keep credential scanning active without mistaking source paths such as auth.py for secret labels.",
+  "code_sha256_records": [
+    {
+      "path": "backend/app/__init__.py",
+      "sha256": "1d93d3e8edfb9e4aabd9557324f30392336bbdc501f9dc34c5d69eed06dbe9cd"
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/auth.py",
+      "sha256": "ae272ad08b85cb1073103d6bff4776c5739f6d8b8c632c1e32cfae345920421c"
+    },
+    {
+      "path": "backend/app/api/demo.py",
+      "sha256": "338f1e17d80f16a88aad5cde6d6feddb7f92ce533d3995417e0e08aa064171e9"
+    },
+    {
+      "path": "backend/app/api/jobs.py",
+      "sha256": "3cc133603e32c3bf9cf2de1307f64594fc4e68e6b74cbd12b016361732511d3b"
+    },
+    {
+      "path": "backend/app/api/metrics.py",
+      "sha256": "d7e73a9bec947e1da3f1c03fabef48e3053b2267f774ae954168de8313337282"
+    },
+    {
+      "path": "backend/app/api/probes.py",
+      "sha256": "21c6ddd73d4d3c7f501fa65d459c6dd059bb0267da959b3fbd32f9767ba1a697"
+    },
+    {
+      "path": "backend/app/api/public_projection.py",
+      "sha256": "dbb65f3219958decfbee175f96e6b85e48e6c20735beb88389cff833bda666e7"
+    },
+    {
+      "path": "backend/app/api/rbac.py",
+      "sha256": "c26afece28a083635989172b7abc63f62094159fb24fdd9d4df2ecf7a0fd7bf0"
+    },
+    {
+      "path": "backend/app/api/routes.py",
+      "sha256": "845550010c5cdd12ad2abee862c47fa19ccbdcdb7cc812ec30844dfe5aa4a9fd"
+    },
+    {
+      "path": "backend/app/api/schemas.py",
+      "sha256": "d22b2639a449f097db0432a7d406a05d8f67d54f4f2bf0d7944d26b1d273fc31"
+    },
+    {
+      "path": "backend/app/api/security.py",
+      "sha256": "c9bd7163b8681f51a0e6605ebca01b295f64a1ecd72d7893a2e9bf09265208e2"
+    },
+    {
+      "path": "backend/app/api/state.py",
+      "sha256": "9962824c53171107c29dff711e12e2c2e18840bdc98af7deef89d9bfd2f2a57c"
+    },
+    {
+      "path": "backend/app/api/text.py",
+      "sha256": "358f9f4a18bdfbbd85cb362cb2989bbbf609edaa455287cbaf491d552373c573"
+    },
+    {
+      "path": "backend/app/api/tokens.py",
+      "sha256": "7fba4392287cc00a6619be446846ec414bad3c5b59f892f4e9ee603d50b086e3"
+    },
+    {
+      "path": "backend/app/api/upload_limits.py",
+      "sha256": "7333b25c3c212c6d2637512ef1d4f44cff4c9f8dd6211bbbce9f36e4780ab9a7"
+    },
+    {
+      "path": "backend/app/api/v2.py",
+      "sha256": "367cef6e0da74228e2b4a21bc04762a07c2045934359cd8f069c87a3fa8288ea"
+    },
+    {
+      "path": "backend/app/api/v2_annotations.py",
+      "sha256": "51ece9f858cb4f611577a22dc3f6f22c39300285869a07bdb4e41f3469655644"
+    },
+    {
+      "path": "backend/app/api/v2_audit.py",
+      "sha256": "e266f3d3504ef434af81a9088dfd20221f28f3b6b24cbfd1d75d749d2753aeff"
+    },
+    {
+      "path": "backend/app/api/v2_auth.py",
+      "sha256": "35e0047d53b80d9db0329e4ffe1a7c56dd135227e3e38c18d2110213b5efff9d"
+    },
+    {
+      "path": "backend/app/api/v2_batches.py",
+      "sha256": "65dc937d399ad38e7f8906d772ed115331de28967d23d29e47e1338dc74a27b4"
+    },
+    {
+      "path": "backend/app/api/v2_billing.py",
+      "sha256": "2719b6b8825b17ef7a30c46da38b7e430853a5e1d05638ff591ba64e2d4028a6"
+    },
+    {
+      "path": "backend/app/api/v2_cancel.py",
+      "sha256": "138004c0af8d91054e2e76929c03054d9f5950f5903ff9e8edf33b4730f968fd"
+    },
+    {
+      "path": "backend/app/api/v2_cases.py",
+      "sha256": "6f42d5753128738ecb6004ef26c579d4ceebe0e063f719778f7c3cfd6138d84b"
+    },
+    {
+      "path": "backend/app/api/v2_evidence.py",
+      "sha256": "2267b49749453ddb760b03bcc4d965a9d2f16f5e092e9ae3f45338ff0c0aaf84"
+    },
+    {
+      "path": "backend/app/api/v2_evidence_packets.py",
+      "sha256": "0cc6e0890f7a4721df4c1fb4eab57c0bcc79f016c83f0ab004dc769eff6e55f7"
+    },
+    {
+      "path": "backend/app/api/v2_models.py",
+      "sha256": "26efc1b972c0e5fb9f9cd57aaa6ca0f48d0a94830a98d1f352e9df07f3e6cdc3"
+    },
+    {
+      "path": "backend/app/api/v2_policy.py",
+      "sha256": "52cd0b6a35ab998abf7256ad22fa334e438c662a70600d987b9e31cbc128d619"
+    },
+    {
+      "path": "backend/app/api/v2_refusion.py",
+      "sha256": "f5ab977cba24e9612dbc216351e5bb9121069089e22d6077750fb7f19e8db746"
+    },
+    {
+      "path": "backend/app/api/v2_reports.py",
+      "sha256": "d990f54bef7a30c871b4eac6c539b0af297541b6fe9d445ce04900b832640207"
+    },
+    {
+      "path": "backend/app/api/v2_rerun.py",
+      "sha256": "d74ddc167f0a12d40e1baeaa816a15d32c481e632e606ad09b185c234d057739"
+    },
+    {
+      "path": "backend/app/api/v2_review.py",
+      "sha256": "30f2d073c1e853592d76224901e91e895fd95bcc7fe0d1c833c49fb65bfebd87"
+    },
+    {
+      "path": "backend/app/api/v2_webhooks.py",
+      "sha256": "099c0861e694242be469cbf86ca905b019aa4bcd6c653e47586e5016b9054242"
+    },
+    {
+      "path": "backend/app/audit/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/audit/chain.py",
+      "sha256": "6a58dba8798b3375d6eeb3e919d4fe5a40bf27a779d28720d77d053291f38f16"
+    },
+    {
+      "path": "backend/app/batches/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/batches/service.py",
+      "sha256": "caa43e81f09038f649c696a5c1d2dd650d5b90576b025229069c0bae80517ab4"
+    },
+    {
+      "path": "backend/app/bench/__init__.py",
+      "sha256": "9f967d7a2f436652fc5d8ebe16360b15ede03d63808644102ce3c75982ebdd21"
+    },
+    {
+      "path": "backend/app/bench/ablation.py",
+      "sha256": "c892a0536aca6875ca2a4c7ffbb1c27e715c9a707b0cf355c50804d83361d4c1"
+    },
+    {
+      "path": "backend/app/bench/admission_record.py",
+      "sha256": "81eada3875965d09d56edb3e03d131c37a551e8d722c7dd6ce009f223a995459"
+    },
+    {
+      "path": "backend/app/bench/audio_continuity.py",
+      "sha256": "5395e031e539662bec90f0ff7601d09fe486cd00a8693e42d47f9116ba81d036"
+    },
+    {
+      "path": "backend/app/bench/audit.py",
+      "sha256": "718f75f55522cb94c2521289134c42c8ab5313c6339e5c504a460fb62ee589f6"
+    },
+    {
+      "path": "backend/app/bench/cards.py",
+      "sha256": "f1688633de24ae7ac7b2ba0a40af443af69bad2e312eb6c31a254226fe493bf2"
+    },
+    {
+      "path": "backend/app/bench/commons_identity.py",
+      "sha256": "44556dc645b0c8446b98278ec15f4b70d46f2cadbc3fabe64df2f3f193b13ec5"
+    },
+    {
+      "path": "backend/app/bench/contamination.py",
+      "sha256": "bd1b1750482fa91ff5db4f1b042a959aa0b09240db97d0cf5c7ee1999673d9fd"
+    },
+    {
+      "path": "backend/app/bench/content.py",
+      "sha256": "15a07cf026ba622dff23d7a211c1a3509b9f78082e0f8db0f0f9dcbaf7a20124"
+    },
+    {
+      "path": "backend/app/bench/context.py",
+      "sha256": "1de74685c165fab705fee545deabaa7799b44c68b6ab58b9a8a216951d9b3a33"
+    },
+    {
+      "path": "backend/app/bench/core.py",
+      "sha256": "76f9b4fc508800427e0d286a5e52ab99db873bd1cee1f136be031173765a65a6"
+    },
+    {
+      "path": "backend/app/bench/d3_calibration.py",
+      "sha256": "df5890a8880a4ebecf81b3291f1b5af3ffbfc7a2f4a5f7edef2f715282ce155c"
+    },
+    {
+      "path": "backend/app/bench/elimination.py",
+      "sha256": "5742db67c158d4dc8affead957806b3e80f6c4140df9bddd70ad47ac7254bd99"
+    },
+    {
+      "path": "backend/app/bench/fetch.py",
+      "sha256": "8c226ac4880333297cba010a1e476853a997d2cb2b1bda88eac1ba746d57dd7a"
+    },
+    {
+      "path": "backend/app/bench/gate.py",
+      "sha256": "a645e2173eccee40d0d334146e81a243890127beba9ac100cfa66330199690cb"
+    },
+    {
+      "path": "backend/app/bench/identity.py",
+      "sha256": "6971fb1702e94beb5796db60bba79ba9069d1dc2655676dda95f833cd5c65943"
+    },
+    {
+      "path": "backend/app/bench/independent.py",
+      "sha256": "3df19dcff4946166f9e32747c71b2f99c4ffe16a65ac095e2c8ceb10e484ff0c"
+    },
+    {
+      "path": "backend/app/bench/input_integrity.py",
+      "sha256": "e130aa464c7786b739a96f60c4f346289055daa1b3f99623e9dbf433a5d18bdc"
+    },
+    {
+      "path": "backend/app/bench/localiser_rates.py",
+      "sha256": "be1eae128b5a87fa5d898bda2c7b25ab8d22b7b53a03df5ebbf45fec66e7eabe"
+    },
+    {
+      "path": "backend/app/bench/media.py",
+      "sha256": "075b8deadc2c5cdac2df37f0323ca652e81fce0276546985ad75272be4f1a6f1"
+    },
+    {
+      "path": "backend/app/bench/metrics.py",
+      "sha256": "75909c22364d75aaecdce701f0b324e59f42528aabcb2428cac2afe8a7826bec"
+    },
+    {
+      "path": "backend/app/bench/performance_validity.py",
+      "sha256": "4293800a6da779afec8ab6b8a28755140ea03850aa5f59dc1422559490747e90"
+    },
+    {
+      "path": "backend/app/bench/perturb.py",
+      "sha256": "8357e430fa59bc51e92c17725a101dd89be240fa55ca0c9944f8a369194065c4"
+    },
+    {
+      "path": "backend/app/bench/probe.py",
+      "sha256": "6af4649823b3f13abfbaf6682b1e586ab2a2ec41c5accdcd788643fce667a3c9"
+    },
+    {
+      "path": "backend/app/bench/probe_backbones.py",
+      "sha256": "a153f08e5a0d65919d9cef91e3f2e6f596a0daa0a44a72ea8503c04f1cdeb443"
+    },
+    {
+      "path": "backend/app/bench/probe_negatives.py",
+      "sha256": "c7e8e06a6b0134ee666b58f1d1dfbda2b7afea15cd69d86374746ea4a9cb55fc"
+    },
+    {
+      "path": "backend/app/bench/probe_score.py",
+      "sha256": "3ba07df6e771b51456e1575ba26942a9925b18b81499d05e31dacbb058ff7329"
+    },
+    {
+      "path": "backend/app/bench/process_memory.py",
+      "sha256": "953fbde9e66dbd39aa4d972b3f20aa2862d6fc6bc8d64a1af03b19fcc518b6fc"
+    },
+    {
+      "path": "backend/app/bench/real_fp.py",
+      "sha256": "6e8a3c92683596449d7719ae46cbbfbbd84b2d2db29cbd3047c1ec425ea6ad96"
+    },
+    {
+      "path": "backend/app/bench/remote.py",
+      "sha256": "473df4eafab72804c8e06b3eef7f862160f0d12061d598528758dbf15059cb80"
+    },
+    {
+      "path": "backend/app/bench/report.py",
+      "sha256": "14beb4ad65c49c89da368500fe20173151c64861adc3ed2ddd8717e5732871a3"
+    },
+    {
+      "path": "backend/app/bench/scope.py",
+      "sha256": "4e2ebd8ec7fedcaff1735357ba626ca9192e1235cd767f51e5624f1405ac7638"
+    },
+    {
+      "path": "backend/app/bench/score.py",
+      "sha256": "d243677edc48b0263ee73ce5a9425bd82f2954e2a0aa02c9f83bf419a8f563e3"
+    },
+    {
+      "path": "backend/app/bench/score_v2.py",
+      "sha256": "a614651c5c7abe41a9694190a04f79a634daebd2a03c119950c7c2bfee88bbdb"
+    },
+    {
+      "path": "backend/app/bench/shortcut.py",
+      "sha256": "e0888fda36b293effef31988da78d88f7795094924de26f4aab87c23d85230e3"
+    },
+    {
+      "path": "backend/app/bench/slice_map.py",
+      "sha256": "f5adbd51062ad38a53bc026887dfa9f639c7154ae73efd604b0bd0b7d91a618b"
+    },
+    {
+      "path": "backend/app/bench/smoke.py",
+      "sha256": "3bd82ceb8e96bd54b666519b36add9c54321221a3c470ca7f88c7e47bdeacb2c"
+    },
+    {
+      "path": "backend/app/bench/smoke_contract.py",
+      "sha256": "ff008e0e6a0af10b9a0f6139648536173f887c8c97476424d23cc29a6736b8fa"
+    },
+    {
+      "path": "backend/app/bench/smoke_inputs.py",
+      "sha256": "62b773bf55b021f7ed21b06b5cac5ec51ff8186d021bc3fd8529f1286d5376d1"
+    },
+    {
+      "path": "backend/app/bench/spec.py",
+      "sha256": "060e6de21f7ade26a638fcef25fe3975a9ba8047246da4ad1a770b7324235e33"
+    },
+    {
+      "path": "backend/app/bench/specialists.py",
+      "sha256": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d"
+    },
+    {
+      "path": "backend/app/bench/specialists_scoped_v3.py",
+      "sha256": "8dacc51a3c7f302451bf08958c964ad805eca4e9cf489d4acd49d8251d7a80f5"
+    },
+    {
+      "path": "backend/app/bench/splits.py",
+      "sha256": "5f89f82b1e9c0c954e8ebf60fd0e386e1a9b94fe09fa97e84014e7a1c0497da1"
+    },
+    {
+      "path": "backend/app/bench/text_lineage.py",
+      "sha256": "51fcdb72e712026961b0fb0f795ead58271804068e09e6c21f5a8c75334f7b27"
+    },
+    {
+      "path": "backend/app/billing/__init__.py",
+      "sha256": "48f68bac86d372058bf2ac21c88d2c7acaeb43b193dd653ab57df1f3943f661a"
+    },
+    {
+      "path": "backend/app/billing/entitlements.py",
+      "sha256": "9c0c5e9cdaae962a3427925baadd725afb0247efc8b6005beacb32dfca9f6d68"
+    },
+    {
+      "path": "backend/app/billing/preflight.py",
+      "sha256": "06e3ff0ab9c8e58aa498b3bd287c70ed89d4f7e1ce921853105d2744d3790675"
+    },
+    {
+      "path": "backend/app/billing/purchase_notice.py",
+      "sha256": "dc1a29c6d74ef8c409252cf98bdf641967970c1b9dc460b5b127ae9a193f3ada"
+    },
+    {
+      "path": "backend/app/billing/service.py",
+      "sha256": "93373e0c9f380cfb7da3d45c39d5312974d78ee7270a78a541c1a3c67de64bd7"
+    },
+    {
+      "path": "backend/app/cases/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/cases/access.py",
+      "sha256": "384518dce65eb183c0fa324d86031c5f7f78475b6547a352a01e8800f5e0e544"
+    },
+    {
+      "path": "backend/app/cases/examiner.py",
+      "sha256": "b2b341b46d2650cf57623fe4646e972b8bc54abfc5b2a7ff62f99282e91d67f0"
+    },
+    {
+      "path": "backend/app/cases/intake.py",
+      "sha256": "46398c01edced43093dc3aa8d1a83d4b0d18d62955ffe16e24d7d8d37b9ef320"
+    },
+    {
+      "path": "backend/app/cases/review.py",
+      "sha256": "c6b9eab866e6f7870652759bfe0123cff5e79b5eedca7f74ba825cab13d4f858"
+    },
+    {
+      "path": "backend/app/cli/__init__.py",
+      "sha256": "b510f922d55de7b399df3dfce2b81af1db8bd3c35253714bd2ab08dcdc063995"
+    },
+    {
+      "path": "backend/app/cli/__main__.py",
+      "sha256": "e1854004a84f11e60f292bade697ebff682fcf63eade499d2797f5be1a8e0bee"
+    },
+    {
+      "path": "backend/app/core/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/core/canonical.py",
+      "sha256": "1ff25ef61e4ba576003f30d82f1ad09ec4dab6668138ed442d43302476241d56"
+    },
+    {
+      "path": "backend/app/core/config.py",
+      "sha256": "b81fea73c18fd7ece718601891d81b3501047d1a98803776b52a495fa4617be3"
+    },
+    {
+      "path": "backend/app/core/coords.py",
+      "sha256": "17263647ac8a8be2237f348876732dae1857457f75d8b0f1f798566f17940acc"
+    },
+    {
+      "path": "backend/app/core/deadline.py",
+      "sha256": "afab9efa10d03d37c4714ea749e28f6322a8fb76f9b73c965f51186ce7e7fde9"
+    },
+    {
+      "path": "backend/app/core/device.py",
+      "sha256": "b5cee6432bc7ec6b4eb31e09e6dbd5709910768b1615ad438f3e7d75cb27e594"
+    },
+    {
+      "path": "backend/app/core/effect.py",
+      "sha256": "0e83c81a240659a267b5062dd3c546658e74b779c5491a11a9697a1f699ee614"
+    },
+    {
+      "path": "backend/app/core/egress.py",
+      "sha256": "1583615f0bc3cb7f835c9f9a0c4315d3d8869ea7ae1f08ed7204ef0f1871f291"
+    },
+    {
+      "path": "backend/app/core/errors.py",
+      "sha256": "d0760cba9e4953b1040325146c39600d3613a33b0a330324c3c30aa587f787c8"
+    },
+    {
+      "path": "backend/app/core/evidence.py",
+      "sha256": "31543c7a931efda14fce613e1dce39a2d186e4f6ce8e66048ad60cb50ceef9c5"
+    },
+    {
+      "path": "backend/app/core/frontend.py",
+      "sha256": "e575ccc5e9c21822f2c2bc24e639aa7ed6514111c41c975384166137f91fc2b3"
+    },
+    {
+      "path": "backend/app/core/lifecycle.py",
+      "sha256": "71c5c55e4eadcda18a5c5d6a0ad88e82a0cfe2d110c2d8c31045b6d789ad6ab4"
+    },
+    {
+      "path": "backend/app/core/logging.py",
+      "sha256": "c9953ce99caf1dabf0e6287fd7ac5742f746d8efd3d56c5668f2e49a9fc02bf7"
+    },
+    {
+      "path": "backend/app/core/rounding.py",
+      "sha256": "091b5f331d7306c924e3bfa79b5d8638487125999b75fc6d4a91617d47a4f091"
+    },
+    {
+      "path": "backend/app/core/textdiff.py",
+      "sha256": "03433af8ee2257699155541e73cae8d6b2e6b0ec4544f70101100dff12a53a35"
+    },
+    {
+      "path": "backend/app/core/times.py",
+      "sha256": "0c4a0ec5ca3f5d540cb7f1b4d4c8254b6170e7982fa2ae1d93cd7a058c9ffecb"
+    },
+    {
+      "path": "backend/app/detectors/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/detectors/audio/__init__.py",
+      "sha256": "40ea5de510e5c21fa1b00de17afda0141ade79bcb4645be0adca9dbcb4308aa3"
+    },
+    {
+      "path": "backend/app/detectors/audio/calibration.py",
+      "sha256": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee"
+    },
+    {
+      "path": "backend/app/detectors/audio/calibrations/local-speech-v3.json",
+      "sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+    },
+    {
+      "path": "backend/app/detectors/audio/content.py",
+      "sha256": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96"
+    },
+    {
+      "path": "backend/app/detectors/audio/coverage.py",
+      "sha256": "6e047a6ce57534f3f1cfa66a465ae16afc4c0834d9205464535836bbd2a3a879"
+    },
+    {
+      "path": "backend/app/detectors/audio/decode.py",
+      "sha256": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02"
+    },
+    {
+      "path": "backend/app/detectors/audio/upgraded.py",
+      "sha256": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836"
+    },
+    {
+      "path": "backend/app/detectors/audio/waveform.py",
+      "sha256": "7012f1cccd48449be37d076570db6ca42efb015c31331d0704964c6398757fb6"
+    },
+    {
+      "path": "backend/app/detectors/common/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/detectors/common/download.py",
+      "sha256": "1740ffdc92a1ef62186da595fbc9212ba33bd6c60e0da3328f6c9ea6565ab312"
+    },
+    {
+      "path": "backend/app/detectors/common/fusion.py",
+      "sha256": "1bb20a3df15eebccc1fc302809274d8a4a9a42e56f19f3f819bdc1aadaef5078"
+    },
+    {
+      "path": "backend/app/detectors/common/registry.py",
+      "sha256": "d18b75a5db7024e5026aa036e06341382d11ee55094264380107c5a995a7ba22"
+    },
+    {
+      "path": "backend/app/detectors/fakes.py",
+      "sha256": "c89dbc64147a9e6ddc4b010766cc9fb32ace02231f3e690a47ead52fe31369c4"
+    },
+    {
+      "path": "backend/app/detectors/image/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/__init__.py",
+      "sha256": "0cdf825bc5faddda62fe7ca9586eac94bd711333c52b155f9d9f23b8969ed69d"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/common.py",
+      "sha256": "a79e8e31b96cf6f7fc3d206bb755c20930904269a51342f462da0ea99f7768af"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/face_detection.py",
+      "sha256": "8b2175109ac008a2b88fc60e02507babbc5ff41e27ef71fe28d40cec57ea4cc3"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/forensic.py",
+      "sha256": "587ca90c67a45d02677d7ed2ea89f25cf53e077a6da7efa8187bb4913871ce98"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/fused_loader.py",
+      "sha256": "5d26b3723f6fb48f07f1537e0a005428c079a450bd60685401e9bb90f6be73a0"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/learned.py",
+      "sha256": "b45f4ec0534c381353210203caf09432200c31d8bb5dd00365b27d619e5c5a61"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/loaders.py",
+      "sha256": "bba80e7d8298267fb43154e5a52d305efee6dcfc16b39e277a970df71d03a8b3"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/localisers.py",
+      "sha256": "1f85939d9e6a346cfce85312d1495285eb23a39282ddcec23b6005f25e099003"
+    },
+    {
+      "path": "backend/app/detectors/image/adapters/provenance.py",
+      "sha256": "439c18f94b29c65e4d64ca3c8f58734586271eefe4c743b9f991e346120008b4"
+    },
+    {
+      "path": "backend/app/detectors/image/classifiers.py",
+      "sha256": "33c48bc56b749acb2aec3ba8ba70852582df303c0752c63ff1ff907babaff725"
+    },
+    {
+      "path": "backend/app/detectors/image/commfor.py",
+      "sha256": "91e329f031c846f82b9c15e0754215ba4c2e438e53bdc28934a75430713347f4"
+    },
+    {
+      "path": "backend/app/detectors/image/copy_move.py",
+      "sha256": "e359773069999600f16cc2ec142d033d72a4938f577b888a2ecc83bee7fafd16"
+    },
+    {
+      "path": "backend/app/detectors/image/dda.py",
+      "sha256": "777bbdb78713cb4b2d3f34580291cc5beff5002da3f413c06cc3d2ee448c5e32"
+    },
+    {
+      "path": "backend/app/detectors/image/dfdc.py",
+      "sha256": "51f6e553ee592d1594048f17b193081561ef607e804bb43caa33e69aad2afe58"
+    },
+    {
+      "path": "backend/app/detectors/image/faces.py",
+      "sha256": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea"
+    },
+    {
+      "path": "backend/app/detectors/image/forensics.py",
+      "sha256": "b3adcd7150b64493ddc143e718ca910d59035e67d5055aef7d666a22ac5b9547"
+    },
+    {
+      "path": "backend/app/detectors/image/fused.py",
+      "sha256": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb"
+    },
+    {
+      "path": "backend/app/detectors/image/gend.py",
+      "sha256": "e82ada80ffd7550a72ac74265dc8a19fef1c57ce2ccd8c0d34b835bf1331c3c8"
+    },
+    {
+      "path": "backend/app/detectors/image/gradcam.py",
+      "sha256": "96ead4e0f8a10e2ab632c82fa15ad27254887d0e93f60adb54a588ea314858f0"
+    },
+    {
+      "path": "backend/app/detectors/image/jpeg_bitstream.py",
+      "sha256": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a"
+    },
+    {
+      "path": "backend/app/detectors/image/jpeg_dq.py",
+      "sha256": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e"
+    },
+    {
+      "path": "backend/app/detectors/image/localiser.py",
+      "sha256": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c"
+    },
+    {
+      "path": "backend/app/detectors/image/mesorch.py",
+      "sha256": "a83ace5e9b9da2551bf8bd20e58e0e2e690c12e99eacd9deaf7ef7af9c602fa0"
+    },
+    {
+      "path": "backend/app/detectors/image/metadata.py",
+      "sha256": "4b92a5466841c8be378c65c02fa4cbcde453084524d082c7c96ca710a72f08c3"
+    },
+    {
+      "path": "backend/app/detectors/image/native_crops.py",
+      "sha256": "ebca25a9313b810e80757903f2dadd1c8375821b1acedcf487e90fe3701a71c7"
+    },
+    {
+      "path": "backend/app/detectors/image/native_forensics.py",
+      "sha256": "1303cb75ca597e969c4bf44ed7a1ff0ffd872cf5f46c2708cce7713e5129c72a"
+    },
+    {
+      "path": "backend/app/detectors/image/pipeline.py",
+      "sha256": "67b280f3c86de9dd388b6454048b801266389ae627edc23e8851f7d3146ac89e"
+    },
+    {
+      "path": "backend/app/detectors/image/radar.py",
+      "sha256": "d42bad4f23887b9f0f48f4d8e0fca0e418305ee78054f67c73558ac08cfa353e"
+    },
+    {
+      "path": "backend/app/detectors/image/scoring.py",
+      "sha256": "e31d7ee26aee4a888af2f336614a5ed340c442a09b11f63f7b9ba6e6aef4d47c"
+    },
+    {
+      "path": "backend/app/detectors/image/spai.py",
+      "sha256": "cef96caad09b0b01f654404e14549aa8c4648a2859bdd103056117ce83792471"
+    },
+    {
+      "path": "backend/app/detectors/image/splice.py",
+      "sha256": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac"
+    },
+    {
+      "path": "backend/app/detectors/image/univfd.py",
+      "sha256": "16445e0bb006d77c4110ad4ff308fcd8d138b9a499368a2186faf80ace2400c1"
+    },
+    {
+      "path": "backend/app/detectors/text/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/detectors/text/adapters/__init__.py",
+      "sha256": "9d3bda6c9140d0ce7a4f8b5290b25cacdf34896f289f35f60afea4764061fdd8"
+    },
+    {
+      "path": "backend/app/detectors/text/adapters/common.py",
+      "sha256": "18a9eb659fc4c3af5cf1c3a8dfe0bdcb4e5f212f586219fe722e653c276c3ee8"
+    },
+    {
+      "path": "backend/app/detectors/text/adapters/learned.py",
+      "sha256": "06d0dba2d9745d4cc72902a1c9ba7244d8a12e08c515a9085f243315d5563187"
+    },
+    {
+      "path": "backend/app/detectors/text/adapters/loaders.py",
+      "sha256": "8751ad4c08ab1f62f0ea1b96507ca44adb6f521f63606ffb77ed1f6143c8213b"
+    },
+    {
+      "path": "backend/app/detectors/text/adapters/stylometry.py",
+      "sha256": "664c772a9870927d532fa6f41d33282beb589ba0ab43ff98ccb635fe2901124c"
+    },
+    {
+      "path": "backend/app/detectors/text/binoculars.py",
+      "sha256": "7cb5f94b77019221fb3aee35e595c478c942f847a44c537e4f977ae12f55a0c1"
+    },
+    {
+      "path": "backend/app/detectors/text/calibrations/local-article-v1.json",
+      "sha256": "d12ff32c1177b660867f4a9bfaccaed9081d5e538778491f3c9263700ab26597"
+    },
+    {
+      "path": "backend/app/detectors/text/calibrations/local-email-v1.json",
+      "sha256": "a03d90c9d3d342000e742505743e30d4847017775b57c5b50fb9373c09f8db2b"
+    },
+    {
+      "path": "backend/app/detectors/text/classifier.py",
+      "sha256": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1"
+    },
+    {
+      "path": "backend/app/detectors/text/coverage.py",
+      "sha256": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72"
+    },
+    {
+      "path": "backend/app/detectors/text/extract.py",
+      "sha256": "c0d3c4704302c4084a4d35bbdeae1c6b75388e07cce07610aec83384011d222f"
+    },
+    {
+      "path": "backend/app/detectors/text/pipeline.py",
+      "sha256": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f"
+    },
+    {
+      "path": "backend/app/detectors/text/segment.py",
+      "sha256": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050"
+    },
+    {
+      "path": "backend/app/detectors/text/stylometry.py",
+      "sha256": "fd61431eae75c552408832b8cd678e43f51775c0259abcb5f89c02bca7fc6338"
+    },
+    {
+      "path": "backend/app/detectors/video/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/__init__.py",
+      "sha256": "66264ba26015d4403b1ad576f6e303c1d5d2f62ee57b70004153dbc5d6575714"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/audio.py",
+      "sha256": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/codec.py",
+      "sha256": "283cb78b1ebd830a50b10bde444a8697e375c696d134d717279545a10e0704c8"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/common.py",
+      "sha256": "5bad887f6e786cfe81134ccf3c6e8a6d92863737a859dc74906ecbcf0a43d25b"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/face_appearance.py",
+      "sha256": "ee93228af740474a0025c59ebfca955b4eb4806e8ba93977f9b2cc6975bfe32d"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/face_sequence.py",
+      "sha256": "f03b51a79af5fb904e57dbe4e5fff796fde1000d82116345994140eb7c3f9d81"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/frames.py",
+      "sha256": "eb4fe70d832eb70ebc3fd9e5a946791a44d994dc7746a48b37b986d830881f19"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/lipsync.py",
+      "sha256": "97df04da535db663c4e4157389b81d61cdcfedc33216ccf3c95dd4a19d502652"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/lipsync_xcorr.py",
+      "sha256": "f7fa2c38f901a1fce0af795eb528a1918f4a7d43f4608499877c2aff24d5bef7"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/loaders.py",
+      "sha256": "37342d9c6a1086012cb0119fe09737da13e5ce08108ba36c5d96fae5bd580955"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/metadata.py",
+      "sha256": "d321716c99c3747b8c56fcb04c5cb474ff2cf0dadbb0e61bea8b4cb097ed5568"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/swap.py",
+      "sha256": "1006b67de993e3d481791c4b423877252b7e384f69566e37ceacff4d72ccbe99"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/synthesis.py",
+      "sha256": "a31d8392325e48da62926ad05faf3683986cfc1f3b05cecbe0a8859255c1b829"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/synthesis_frames.py",
+      "sha256": "3fefcacde44839cbbdbab857c24e27bbbcd5ef791ac494a80b0afa4547234f65"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/temporal.py",
+      "sha256": "de139bd35e6f2d58311b7b73b9d300e07b91ffac44a3109ea4f041925dbfd058"
+    },
+    {
+      "path": "backend/app/detectors/video/adapters/tracks.py",
+      "sha256": "e04fb00a143374e743862749498008e1420d0c6488a47de90b346fcf0f81522d"
+    },
+    {
+      "path": "backend/app/detectors/video/audio.py",
+      "sha256": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211"
+    },
+    {
+      "path": "backend/app/detectors/video/av_evidence.py",
+      "sha256": "08f7a16b3fd2fe4e9fa091cfe39249458a0d324b89c62eb386a3b1d37e48a326"
+    },
+    {
+      "path": "backend/app/detectors/video/codec.py",
+      "sha256": "b2102929f7849509d7e4a097a998abb4bad726c1b4a679d6d704100e3d0ce2b1"
+    },
+    {
+      "path": "backend/app/detectors/video/d3.py",
+      "sha256": "b9fd68b992d6aebc52fbf96f5230a053f6f2a5953531c76c99adc05fe456cfb5"
+    },
+    {
+      "path": "backend/app/detectors/video/decode.py",
+      "sha256": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074"
+    },
+    {
+      "path": "backend/app/detectors/video/face_appearance.py",
+      "sha256": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea"
+    },
+    {
+      "path": "backend/app/detectors/video/face_sequence.py",
+      "sha256": "e61ce53e6fafbb3dc0ae90425d13324392ac1d70fb6bd442beb0d0e0c3fe684d"
+    },
+    {
+      "path": "backend/app/detectors/video/frame_store.py",
+      "sha256": "5cad0916d36e77ad873ef39d86140aadc82d61e7de011138a776818512d4955a"
+    },
+    {
+      "path": "backend/app/detectors/video/frames.py",
+      "sha256": "d1139f2327808542ad115f540c6c388099cab68b1b34078f65bb12d621f7ba6e"
+    },
+    {
+      "path": "backend/app/detectors/video/lipsync.py",
+      "sha256": "1eab993e08c8dd284586a23f6ba217125f2f70d4daaec42b7207601fb51751ad"
+    },
+    {
+      "path": "backend/app/detectors/video/pipeline.py",
+      "sha256": "c7058504a0751a73cbf932322d070b40ffe2f269845231122cec3b7bbe96964a"
+    },
+    {
+      "path": "backend/app/detectors/video/sampling.py",
+      "sha256": "0eebbe9fe557891dce2cb87e3e92dd4d57a0fc4e40340811a40030033512dd98"
+    },
+    {
+      "path": "backend/app/detectors/video/segments.py",
+      "sha256": "60798733dbdba7cd72e9d20ba27f935f629346d25d540749ee52dc08891b94b2"
+    },
+    {
+      "path": "backend/app/detectors/video/shots.py",
+      "sha256": "158a18f264ced9bc6838db914a8fc1fc5ede5b6170b858ec09ed486a3a8556b3"
+    },
+    {
+      "path": "backend/app/detectors/video/swap.py",
+      "sha256": "e5bb82852fcb4e579f1941c2fa78f74e910db0377a0b14d5ee82835c3b934662"
+    },
+    {
+      "path": "backend/app/detectors/video/syncnet.py",
+      "sha256": "1fcf1f811e31bbdadd61505168d8732e861ff3ad3a43bb408e991030f62bc6d8"
+    },
+    {
+      "path": "backend/app/detectors/video/temporal.py",
+      "sha256": "d13d6f9092c7ecac19054471b8bf957b9ac43f703762d4f9093afe2effa57f74"
+    },
+    {
+      "path": "backend/app/detectors/video/tracking.py",
+      "sha256": "b9d64f3de822f82781980bf62f901b97c62b758078d5cbfed6591dc2609ace43"
+    },
+    {
+      "path": "backend/app/detectors/video/xcorr.py",
+      "sha256": "cc891a4e21a064552e441bb73db1e698ff90f18d273cdf74bacf6c165f8165cd"
+    },
+    {
+      "path": "backend/app/engine/__init__.py",
+      "sha256": "fbcc546363b5c04627a58d420f1376951d949b6d4b914be5aebd4c4b4ef201e6"
+    },
+    {
+      "path": "backend/app/engine/boundary.py",
+      "sha256": "62862fa92accc7a38e2756ae09d403968b612edd37b86bd363feb218318d2413"
+    },
+    {
+      "path": "backend/app/engine/build_info.py",
+      "sha256": "60432e5415dc44db55ca7d1fa67f7bf07db25cc0f2781ceb11569f55372e8e3f"
+    },
+    {
+      "path": "backend/app/engine/capacity.py",
+      "sha256": "dbc8588c4f857a0d0b4c3931adbb5415ca0b31fb3b2097ddbf4766f89b264112"
+    },
+    {
+      "path": "backend/app/engine/card_copy.py",
+      "sha256": "665bbf1d5bfaeb8acaebfe8372888c01cadb40d75f7eaa4ed14618526f67dfcb"
+    },
+    {
+      "path": "backend/app/engine/customer_assessment.py",
+      "sha256": "cf208654ca90182a28170a696abb0610654f99b7c2f3751021e3f795e39e2436"
+    },
+    {
+      "path": "backend/app/engine/detector.py",
+      "sha256": "59cceb134fa2940ba05cfec9b495cbac667a8eaa7f4ca115b2c81990957f9ec9"
+    },
+    {
+      "path": "backend/app/engine/events.py",
+      "sha256": "c7d0236a6b3bb63cf61424b87003427e0aa9071eede3d72666379e0732aa2f5c"
+    },
+    {
+      "path": "backend/app/engine/exhibits.py",
+      "sha256": "e0d6b8c24a01d25247944ee6bc8b192a11733b92c3fb86db517c9a406077799a"
+    },
+    {
+      "path": "backend/app/engine/fetchers.py",
+      "sha256": "e83fa48fef53026f30930b71feb57b114b9c5fcdf307bb47a0b75ae8e3fba366"
+    },
+    {
+      "path": "backend/app/engine/finding_assessment.py",
+      "sha256": "e333a6d1d4fe7c92ae56ebeb62e7fceef2db8dea72ddafc11f34f0ed4891e415"
+    },
+    {
+      "path": "backend/app/engine/fusion/__init__.py",
+      "sha256": "82333d56f46dcdcc0f03d48b14657251b61712c74bd9627222b751d6839aa968"
+    },
+    {
+      "path": "backend/app/engine/fusion/abstain.py",
+      "sha256": "e677fd1ec24f6531b45ad5aa0dea0fe834da2664f1181f46f4a42047e297e43f"
+    },
+    {
+      "path": "backend/app/engine/fusion/artefact.py",
+      "sha256": "85636d7758ee967ea131c7400fbfb9be07282c598ec6fb2c97cdd4efe51402bd"
+    },
+    {
+      "path": "backend/app/engine/fusion/bootstrap.py",
+      "sha256": "a270244eccd700f480b678361e3dda520f893468da92d253671b0f38e0523de3"
+    },
+    {
+      "path": "backend/app/engine/fusion/calibration.py",
+      "sha256": "c6d07f20bc1e955b28173a12f8ada53d32b00fbc96a03ff1049820172d9b435e"
+    },
+    {
+      "path": "backend/app/engine/fusion/calibration_evidence.py",
+      "sha256": "0b908a600b9a24f417d27fc9b5759c3e3bce3de1358d88d1084eb81b1a4ffaf4"
+    },
+    {
+      "path": "backend/app/engine/fusion/conformal.py",
+      "sha256": "a0c36bb14a416d6113724d402b9b6f90dfc7cd6144692018240966313a7e5b9b"
+    },
+    {
+      "path": "backend/app/engine/fusion/content_kinds.json",
+      "sha256": "56608e6a6f48853c7c3a1c63d7313e863a6ea981a0b20faf84fad34674c80d8e"
+    },
+    {
+      "path": "backend/app/engine/fusion/content_kinds.py",
+      "sha256": "615a6e7f7aa3b51fd8789f5553c22783f3bff57dec44a606424f04339d972775"
+    },
+    {
+      "path": "backend/app/engine/fusion/contributions.py",
+      "sha256": "01a3c03a347bb8feebf7c2c345004d780bcc0d5ccc8cf84f6bdf311ec8429b4f"
+    },
+    {
+      "path": "backend/app/engine/fusion/d3_sigma.json",
+      "sha256": "d2936d0fb9a389f94cdcd93c649a2852376574d61ba8ab0d065854e5376f461a"
+    },
+    {
+      "path": "backend/app/engine/fusion/data/reliability-vb-1.1.json",
+      "sha256": "529d5665d76c017ad355bc25f98582f91661d43aec687a2726c33f80992e946f"
+    },
+    {
+      "path": "backend/app/engine/fusion/decisive.py",
+      "sha256": "da7c3ec305c3f862bc7474292f5d8954007d117898a2588522664227dcfcb115"
+    },
+    {
+      "path": "backend/app/engine/fusion/derived.py",
+      "sha256": "e0bf26f5714f4920beabe99d8ad7aee5e656cee782f8435f59cf790bf6c2aed5"
+    },
+    {
+      "path": "backend/app/engine/fusion/disagreement.py",
+      "sha256": "ab00251c9931fb73209146e3749853c9ada3918898fedd7439b6ef7e98802ed4"
+    },
+    {
+      "path": "backend/app/engine/fusion/disclosures.py",
+      "sha256": "564726c15f7f75403244fd4ad4d80a5f78cac401064ff44d53e50bb70990f5ad"
+    },
+    {
+      "path": "backend/app/engine/fusion/features.py",
+      "sha256": "a5b2dd39c40494fc93f843896921ff885d51f4160306838b70304f823e3666d2"
+    },
+    {
+      "path": "backend/app/engine/fusion/not_validated.yaml",
+      "sha256": "9a592f03aa07dd4c48f0e1021aab4dfca595be27ab5a5b44c0b02f62194f4400"
+    },
+    {
+      "path": "backend/app/engine/fusion/policy.py",
+      "sha256": "96b07155be553e0e1fd1a7de9f7f08469773f771d863cef3d8005d2462721dbe"
+    },
+    {
+      "path": "backend/app/engine/fusion/registry.py",
+      "sha256": "d131bc668d88fbdca40847d2ec94897485f79c3b5155a4a43bac2f38236880c7"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/MANIFEST.json",
+      "sha256": "e1eea8fff8bf294e7cbe4c509757bec4eac0caf8fc493f05033c0eb26724549a"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-audio-2.1.1.boot.npy",
+      "sha256": "d864af8a9ae8a1235cf436625ccf42cfca59bc2b3e8ebfaa6e7ea41a585e068b"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-audio-2.1.1.json",
+      "sha256": "44b63c7c8029103cf1b049c0e3548e6c2a39a027d95e39119145b83bc71990d3"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-image-2.1.1.boot.npy",
+      "sha256": "935ecb9b930f5937107323696612fe27c795bd05ed9fa50b9cfc4e5e08839d96"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-image-2.1.1.json",
+      "sha256": "746ada66f73d77c3ca948eb86d38e3f422ac3e6843ccfbab64f807b065ad153a"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-video-2.1.1.boot.npy",
+      "sha256": "b0dac3e3e650572c3ca884ad0f8821042579c11f199374a13bdd2e198b3ba092"
+    },
+    {
+      "path": "backend/app/engine/fusion/release/fuser-video-2.1.1.json",
+      "sha256": "fbbccc434f1af6a9e1fb64ccfddbbc1dc70a01f1f4fab9457b49e699f7ffcb45"
+    },
+    {
+      "path": "backend/app/engine/fusion/review_log.py",
+      "sha256": "403ca8942c3c74bc614af4bf8bfe9d045d71b2b6b546b99e8c7fd132e4614e46"
+    },
+    {
+      "path": "backend/app/engine/fusion/runtime.py",
+      "sha256": "58081250250a50f95d9b20da91cf29dfe7506aee75045d04a0ef206d2ceb90cb"
+    },
+    {
+      "path": "backend/app/engine/fusion/stacker.py",
+      "sha256": "e9f4de45c33c8d2a9e8c7060bc1d4226086ef4dada5bf27be0a189c011c7a84e"
+    },
+    {
+      "path": "backend/app/engine/fusion/validated_sizes.json",
+      "sha256": "369308cd2d7182c49f9cbd3706ba37e5ba9a8bcd61cc51e6f590a6839191f262"
+    },
+    {
+      "path": "backend/app/engine/golden.py",
+      "sha256": "939624963508d751112a274fa59440eec1f2ee6e3d2dee35dd61f4b947ad846e"
+    },
+    {
+      "path": "backend/app/engine/heartbeat.py",
+      "sha256": "3f4ee3de200631fbc91ef17d287b2f35c9bfef8b5bbdcc6a46f48bfb47106eb7"
+    },
+    {
+      "path": "backend/app/engine/manifest.py",
+      "sha256": "56cdd0044a35c20067efda9fb3279e3d495e438e174ac8692130826353e17e9a"
+    },
+    {
+      "path": "backend/app/engine/media.py",
+      "sha256": "03a1d2c80cc1973b3f1a140b730b69fd34799c09ccebe7a035f4137e7f4994be"
+    },
+    {
+      "path": "backend/app/engine/models.py",
+      "sha256": "fc41ff6f955dce63f92803ef975d4da4d0b5207c22c4ee55b4f5a2c38b86d52d"
+    },
+    {
+      "path": "backend/app/engine/pipelines.py",
+      "sha256": "b4d596193892a63e7a587df7f0ef07afb8467112247537d06b2f4196b94af3c2"
+    },
+    {
+      "path": "backend/app/engine/profiles.py",
+      "sha256": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3"
+    },
+    {
+      "path": "backend/app/engine/queue.py",
+      "sha256": "aac18a5aa3de4a6d0b26cd0ec321158341695bc4d58dea6dced0d73a8373216b"
+    },
+    {
+      "path": "backend/app/engine/refusion.py",
+      "sha256": "2d91f2b744c6f41676c4d8bfa40f449dd909fb524acc820c6eff556d9b403865"
+    },
+    {
+      "path": "backend/app/engine/registry.py",
+      "sha256": "b4f732b805a5453981465dfe2d070af4d337ca0bd1634cd58d708fbcfd68d2e8"
+    },
+    {
+      "path": "backend/app/engine/rerun.py",
+      "sha256": "f69d238ca0639f5902c22dcd99603398899a60c511b6bd27e79ab0e43ba0d85a"
+    },
+    {
+      "path": "backend/app/engine/runner.py",
+      "sha256": "63851a91e7e05bf1426e8a62b3ebd273193f2de2449a2d22ff18fa359b2fd107"
+    },
+    {
+      "path": "backend/app/engine/runs.py",
+      "sha256": "188a366128648b9a255f0f45fe5f6eb68716d3566ff2697d6237433ef34e7df5"
+    },
+    {
+      "path": "backend/app/engine/service_policy.py",
+      "sha256": "b8e90473cda3f44c113d1cae5fef88449a22a9d7311a66795960b49270de70ea"
+    },
+    {
+      "path": "backend/app/engine/stages/__init__.py",
+      "sha256": "fb58d56dc7f09ca447e745f83aa8a7695f67608a6d18dd12df954c12a96cac71"
+    },
+    {
+      "path": "backend/app/engine/stages/audio.py",
+      "sha256": "bfb3895328d8afec15429ce97d9505ce9c7a5c38a7f0bfeae6313011aaf8704d"
+    },
+    {
+      "path": "backend/app/engine/stages/audio_screening.py",
+      "sha256": "2f4a17756a19a2eb4edc9736000af3488686c8a23d03d89370132a6ecc21b9aa"
+    },
+    {
+      "path": "backend/app/engine/stages/common.py",
+      "sha256": "9e29dbbb1435a3a99002466d45b24f1f6eb9ee83c54b7510a1a19cb792024f4f"
+    },
+    {
+      "path": "backend/app/engine/stages/condition.py",
+      "sha256": "dd922bf726e66579e4afb738e96203d839bdaf3f959126c7840d150b67afd6df"
+    },
+    {
+      "path": "backend/app/engine/stages/document.py",
+      "sha256": "5ec3aa8076a297344861abcb20aa664940f7d4b9fd29bb12aa6b9765d5f67b95"
+    },
+    {
+      "path": "backend/app/engine/stages/document_screening.py",
+      "sha256": "b9b0ebedb2e6f2d5e36f520230ba64116e6524e1679cdec0972c66a8f553ce42"
+    },
+    {
+      "path": "backend/app/engine/stages/image.py",
+      "sha256": "a36da8d05dc854ff3f3682746bf092b5f62d0ae6c8d2cb0f19f9c6dd1ed2d615"
+    },
+    {
+      "path": "backend/app/engine/stages/video.py",
+      "sha256": "5e1bd7a15d55fde46cda0abf822f6dc1e2d0d1b5792e98ff1dd89bee867261a5"
+    },
+    {
+      "path": "backend/app/engine/synthesis/__init__.py",
+      "sha256": "d9877b3a488bba3e0b1df359d6a6ca46f66bea6da9a057c32bdcbbf02eba8520"
+    },
+    {
+      "path": "backend/app/engine/synthesis/engine.py",
+      "sha256": "05340efe0b96db2e6f7f99f03c3e0927d91d28f58fbe586584b122432eccecd1"
+    },
+    {
+      "path": "backend/app/engine/synthesis/render.py",
+      "sha256": "621a5c051aa1b599ce2f5d6e6e2795f4c09e6d2af384ccf189a3cabfe85893f6"
+    },
+    {
+      "path": "backend/app/engine/synthesis/strength.py",
+      "sha256": "0de3b78e20d1849507ef57870d4149493cfdc390f07cfe73c7ed1ff0b0d62371"
+    },
+    {
+      "path": "backend/app/engine/synthesis/vocabulary.py",
+      "sha256": "1992b8ca63155d7a9436b83b263508a6730bb7c6066beb56802561dfa3914bb2"
+    },
+    {
+      "path": "backend/app/engine/tiles.py",
+      "sha256": "0d5cb9aad85c214942e142375404930e76e1a329fd262f657727ec9fae81109c"
+    },
+    {
+      "path": "backend/app/engine/worker.py",
+      "sha256": "66223594e1383d7173a664b2b3ce95ef600f35768c005a64d2737060a6a74d4b"
+    },
+    {
+      "path": "backend/app/engine/worker_health.py",
+      "sha256": "dd9f543c3aca74bd4101a9df91f82f46a6c04520035c5c7d697585819305d334"
+    },
+    {
+      "path": "backend/app/evidence/__init__.py",
+      "sha256": "72aa8dcd27ac47b4d92397b597ffbb0484cf552fa95e61023dadce3b6c07e751"
+    },
+    {
+      "path": "backend/app/evidence/audio_background.py",
+      "sha256": "588fb284bb32cc49812c3d311e2349852876167543f83e5c95ba3684b4666f44"
+    },
+    {
+      "path": "backend/app/evidence/audio_background_binding.py",
+      "sha256": "35034bdaf278d3c43ed324c6b47b82c7dbb9164ba74aa734f52a92baa023d656"
+    },
+    {
+      "path": "backend/app/evidence/audio_binding.py",
+      "sha256": "be081e72a67b91e71ee18c1d8cad8d89bd2630f7e371eb8b69ac37bf199257f0"
+    },
+    {
+      "path": "backend/app/evidence/audio_continuity.py",
+      "sha256": "77e7ab1cc2cef05bee168584e24824543cf18cb183cfb4ef4664334385de22fd"
+    },
+    {
+      "path": "backend/app/evidence/audio_packets.py",
+      "sha256": "993860990db242f9eede15e519fd800485d9c267b7b04037f2decbdcb8a64446"
+    },
+    {
+      "path": "backend/app/evidence/av_binding.py",
+      "sha256": "c58b5d82af7693003a80e4c0b992177a00e9ce3d2722a9c598f99a90a2e995ce"
+    },
+    {
+      "path": "backend/app/evidence/document_packets.py",
+      "sha256": "18020e0d81f4b218b7fdbf50fa9570977ab1499c8e1f92f62c1e0b98d6ea299b"
+    },
+    {
+      "path": "backend/app/evidence/face_interval_binding.py",
+      "sha256": "f5bceaf615f91a79367a89d829e2372f5d4f6e9ac1e78ba4a8fb369dd67c32e2"
+    },
+    {
+      "path": "backend/app/evidence/face_intervals.py",
+      "sha256": "9b5e895b72ab8c343a631cce6b473ae8cae68fa4f6b946d3f31c4a863dadd9bb"
+    },
+    {
+      "path": "backend/app/evidence/image_eligibility.py",
+      "sha256": "e5bebad072fbcfd08c9a3a37c0a3ef29ee3e9924145077c0c46bd59d1e57a69c"
+    },
+    {
+      "path": "backend/app/evidence/image_packets.py",
+      "sha256": "d9b8fe674353acc22d812212a7c74bbfba3948d6e6e08b3807decbaa74b2bf5d"
+    },
+    {
+      "path": "backend/app/evidence/mp4.py",
+      "sha256": "40c0e568a51a93afb24888be2352b386a317acc97f6281439436548f89d29d9b"
+    },
+    {
+      "path": "backend/app/evidence/service.py",
+      "sha256": "4e28de5b80625c688abd88a21a65a30a25765c829b1c614b61a8fc4ebda07b40"
+    },
+    {
+      "path": "backend/app/evidence/sound_event_binding.py",
+      "sha256": "d4a3cf11324a8ad8f7a8ee7695f78fad41016b8b37a0ad05a2fcdebc12d7b3e6"
+    },
+    {
+      "path": "backend/app/evidence/sound_events.py",
+      "sha256": "9acbfbff03505e99384774b2bf1efdf211ef928d156d5861bd43ce70267a83f2"
+    },
+    {
+      "path": "backend/app/evidence/video_audio.py",
+      "sha256": "004b5a632d3bac4381551ca0d5e7d0e1fc307fa0ed89dad1317a041fa733cfdc"
+    },
+    {
+      "path": "backend/app/evidence/video_av.py",
+      "sha256": "7f5dcce58037ac6873887c37b6e91b29a8ee9ec01a733a5b3706a6c0f42234fd"
+    },
+    {
+      "path": "backend/app/evidence/video_clips.py",
+      "sha256": "cc049a631b4d84bdf80888f0609b7d9f834b8454b0fdc00893f20b634a8a4dd0"
+    },
+    {
+      "path": "backend/app/evidence/video_packets.py",
+      "sha256": "11c013ecc3a8b9e027c7449ae8c48fce48899ebbe0843c553c09870adb900c8f"
+    },
+    {
+      "path": "backend/app/main.py",
+      "sha256": "57556b974433ad7735cb6bcf3d76fa58aa466eb2b690e3a42eff9f43151dd317"
+    },
+    {
+      "path": "backend/app/models.yaml",
+      "sha256": "3ca254ef39c6245e1ba1e36830b8f94a358f5aa948447c0ea48d9626ce734f9e"
+    },
+    {
+      "path": "backend/app/policy/__init__.py",
+      "sha256": "c65044d68953c2ee55c3eaa814506b0197c4fe831c2345551d176edd53a13693"
+    },
+    {
+      "path": "backend/app/policy/thresholds.py",
+      "sha256": "130657eac6e89c9c605f9a7ef7f7c32ae076c1408d17de4f92af02523182c13b"
+    },
+    {
+      "path": "backend/app/provenance/__init__.py",
+      "sha256": "b2dadd2be116235b20524fe1e1bc9265443c33a4e19bd9cf4e8749557bb5fe30"
+    },
+    {
+      "path": "backend/app/provenance/c2pa.py",
+      "sha256": "c5c8c643bc6f97bb2c6d5d632c186464adfd35b7f7777a9de038eac8dcc2a203"
+    },
+    {
+      "path": "backend/app/provenance/exiftool.py",
+      "sha256": "c77fba998caef3f151bcb1c8c734afcaeb297a8f34d578f92ef9ed65c452c394"
+    },
+    {
+      "path": "backend/app/provenance/metadata_rules.py",
+      "sha256": "be4def2faae19163743b9e1b2979edb38b9ad4c3bb37998e5fa9dd72666a419d"
+    },
+    {
+      "path": "backend/app/provenance/qtable_db.json",
+      "sha256": "6801dd295635e2c94c3076dd61fa172cc01164ececc4bf574af51c912617d3d0"
+    },
+    {
+      "path": "backend/app/provenance/qtables.py",
+      "sha256": "7e1a69f2b7fe9a2a87ffe6852d74d65d60d27019a335dc8259699a36ac32b5ed"
+    },
+    {
+      "path": "backend/app/provenance/trust/iptc_digital_source_type.json",
+      "sha256": "4debe7d10abc7e0eff8e17847f978c021fec398a1426a40c2de12244b93227e4"
+    },
+    {
+      "path": "backend/app/provenance/trust/snapshot.json",
+      "sha256": "9f4745249988f0d8bea52bb8b9eae1e4e203b4d7a3a36dc033607a8a9d63cd69"
+    },
+    {
+      "path": "backend/app/provenance/watermarks.py",
+      "sha256": "58abf6c49fe97afa4919418fb774b4a9730c33bb1af6cc72935f5c801fd4a7d4"
+    },
+    {
+      "path": "backend/app/reports/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/reports/builder.py",
+      "sha256": "4e3c28b0f4fd1d03a6da0307bbf4f523178a6ef66ac5a8774a6cfdb3d1b819f7"
+    },
+    {
+      "path": "backend/app/reports/citations.py",
+      "sha256": "8d369ff2cd9c88daf432bac2dd393958efd88b960b89474127f3b7960ee5f035"
+    },
+    {
+      "path": "backend/app/reports/customer_view.py",
+      "sha256": "414a9fc2d87aaf6e560359087a71361413c00fb817cf2786fee171cf575bdf36"
+    },
+    {
+      "path": "backend/app/reports/engine.py",
+      "sha256": "b98024345f4cfaa4a54a1a7739cbfec65078b58a91f05f68473b59ca868c72bf"
+    },
+    {
+      "path": "backend/app/reports/figures.py",
+      "sha256": "23e9c5fe1741bd5087b82d21d3921fda5950b58324a025408095dff7ec32b3af"
+    },
+    {
+      "path": "backend/app/reports/forensic.py",
+      "sha256": "ea2d590b440bbf7fa1ee6da2fd71730019f6b211f6f7df031c6c14ad3e54faca"
+    },
+    {
+      "path": "backend/app/reports/formatting.py",
+      "sha256": "18ca4b8a9f63c003227966017768c32c1d42ab7790b3b05bb4364105ee3462f2"
+    },
+    {
+      "path": "backend/app/reports/heatmaps.py",
+      "sha256": "68527302f8066dbe0de62f17550e3d53c0f81ee8ef69ed1dd09a0735473c7849"
+    },
+    {
+      "path": "backend/app/reports/image_eligibility.py",
+      "sha256": "993c5355f6386d185b10a531963009b7dec714d3093f94a4971c6ae927f24849"
+    },
+    {
+      "path": "backend/app/reports/image_evidence.py",
+      "sha256": "57e9a216e962a7ee7fccdbd039f8423bffc9ccc80952cc21212b7690fab31d7e"
+    },
+    {
+      "path": "backend/app/reports/lint.py",
+      "sha256": "fbf38fa252204a7d7558baa4ef2c07f65ec2386abfd6d48ed29a18ab82f03e7a"
+    },
+    {
+      "path": "backend/app/reports/multimedia_evidence.py",
+      "sha256": "3928268a20c0ef8b977ffffe6f10d729dbb4a01fe36d12813cfd330284fe3500"
+    },
+    {
+      "path": "backend/app/reports/package.py",
+      "sha256": "3e4274ae0e535e6fb93433ddaa8f52e7cc8de813fa2fb4799df3e8593d724621"
+    },
+    {
+      "path": "backend/app/reports/prose.py",
+      "sha256": "411b62e880d0cbb248a4fbe2a27836aeea4d60ba45c2b78e22696f2ef7b7b2f8"
+    },
+    {
+      "path": "backend/app/reports/public_package.py",
+      "sha256": "565b8501133f41a6a6de1147fb412b0016a39269aa63a0d1380262c15ba51c6f"
+    },
+    {
+      "path": "backend/app/reports/public_policy.py",
+      "sha256": "72df1a4facd5a35e3f3572df83b0e7d115e2f051e21f755fff2a60cbe9e4a6af"
+    },
+    {
+      "path": "backend/app/reports/public_verify.py",
+      "sha256": "be4191d0e9fa048ad817a32ec7bef191678bc7c6f6848ce3cbd78b122f69766b"
+    },
+    {
+      "path": "backend/app/reports/public_view.py",
+      "sha256": "30edaf9c7d7236123932d54bb61228f0ee67a3d71ccd7d32e2961608b5e6b690"
+    },
+    {
+      "path": "backend/app/reports/repair.py",
+      "sha256": "9fc7bd5de34b7c80dcbe4ad13c0f6fdc4620d798ba4f7da62e0bb51003c3de0b"
+    },
+    {
+      "path": "backend/app/reports/reproduce.py",
+      "sha256": "ff0e7ff5ed120f48ccd0d72d3c1366334d08c3b1c245ed595a4cce94a335b0d6"
+    },
+    {
+      "path": "backend/app/reports/scalar_heatmap.py",
+      "sha256": "184b9179d4879b429b4b1dde6426b4fd1676f876a51098bf1dcc627e55616a87"
+    },
+    {
+      "path": "backend/app/reports/service.py",
+      "sha256": "a2cedac94470f032a7317db52101703108d725219e7589c1674cbf800fd90a1f"
+    },
+    {
+      "path": "backend/app/reports/signing.py",
+      "sha256": "b93b19d00dd0b5d69511adf637c12c9e630473d1ba0735c049bf7702b6268b51"
+    },
+    {
+      "path": "backend/app/reports/snapshot.py",
+      "sha256": "e1645a6564d66d05a111559ba613e63005529862fdf4c00300d2e6d072fc2d3e"
+    },
+    {
+      "path": "backend/app/reports/specimens.py",
+      "sha256": "61f01ef49bc0cc60d0e25eb554a75b4cb06994d9966798bab517eb178719af64"
+    },
+    {
+      "path": "backend/app/reports/verify.py",
+      "sha256": "377e928e613ee0c72ec5b44ebae8e8b740701cd0bf5b5eae4c0cfbf0ec021279"
+    },
+    {
+      "path": "backend/app/reports/view.py",
+      "sha256": "fc9cf64903b35c265c8b5a4a4d3f05acc05277d59646b90a6569911a4e32bc6e"
+    },
+    {
+      "path": "backend/app/retention.py",
+      "sha256": "9e867f5ea24cf6fedeee6b279a7604cbc28889d5fbb2aa0de11b964498ae9c38"
+    },
+    {
+      "path": "backend/app/schemas/__init__.py",
+      "sha256": "e611baa5676da8612693dedf4a534fa58d9b2c417c7089619d6de6ba6cec40fe"
+    },
+    {
+      "path": "backend/app/schemas/evidence.py",
+      "sha256": "1c6167eec8d658cbbfe9617689cbe75477f99ab0b9d4efab1466eff9247a5a37"
+    },
+    {
+      "path": "backend/app/schemas/legacy.py",
+      "sha256": "b6ad9769da61c9917bfd05b0f46fdb96fbd6e48af2dca706c9ca7dc37f9af432"
+    },
+    {
+      "path": "backend/app/storage/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/storage/artefacts.py",
+      "sha256": "51c8390687158eb92c35cbf023a0b7c12f36c0b71548e584fa44f757c0cb4cd4"
+    },
+    {
+      "path": "backend/app/storage/backup.py",
+      "sha256": "2d21c80bae10747e1d7ee82fe44c48f5ffc02516ae9d04f66eb9ebfdfe1ba95a"
+    },
+    {
+      "path": "backend/app/storage/db.py",
+      "sha256": "5f2b15aa6c7ccb8e5cb6b71ce30138f61210e7b2fa1c532c68eec1f6407c9d2b"
+    },
+    {
+      "path": "backend/app/storage/files.py",
+      "sha256": "4fc5333b73d33af148323dd742c113335731998f6521df594a33e94924288074"
+    },
+    {
+      "path": "backend/app/storage/keyguard.py",
+      "sha256": "4bd9d518a1f071bc645e7c6867cf60345218a2631708eb65d4e5350feed4efb6"
+    },
+    {
+      "path": "backend/app/storage/locks.py",
+      "sha256": "21a09f68dd0e85e88956ebcc9a0dcdd8c38001a72f0bce1c7077813c84d4deb1"
+    },
+    {
+      "path": "backend/app/storage/migrations.py",
+      "sha256": "6bf0039e180456183d030ee83b12f00cd8fe95f76b4e646fb2fa370209089c6d"
+    },
+    {
+      "path": "backend/app/storage/objects.py",
+      "sha256": "3ec041363c96f5b06d5a775f9cfe0270e90ac3cb8d8769772fe60e5be4e933e2"
+    },
+    {
+      "path": "backend/app/storage/pg_grants.py",
+      "sha256": "86cb55584922e159163679292cf7e5cee43c8ed3d43730cc5f2d8237d5d4c07f"
+    },
+    {
+      "path": "backend/app/storage/refusals.py",
+      "sha256": "21521ac27f631189cb26db8d0d28215470585b2cdec02f4a00c2b409aed78610"
+    },
+    {
+      "path": "backend/app/storage/running.py",
+      "sha256": "e0b8ef6c19adfa30453ddc6602fc333e176740b4108873d274601accba557390"
+    },
+    {
+      "path": "backend/app/storage/space.py",
+      "sha256": "19c682e83bb7c29f15e23b1eba373a8d89d9047f1d43daeb4499b9c603d0c5e8"
+    },
+    {
+      "path": "backend/app/third_party/__init__.py",
+      "sha256": "07dec8624b0fc9d223245605e34c96a3a25b8de535db9fc2f94fffdd0073fb7d"
+    },
+    {
+      "path": "backend/app/third_party/cospy/__init__.py",
+      "sha256": "04839c57e84550f9d60c99bd70b9d95853dc7eabe57c608686889b44dc35480f"
+    },
+    {
+      "path": "backend/app/third_party/cospy/model.py",
+      "sha256": "fc214d0539229c19a6fff8fb608b7b353aef84fa00aa9a2b77cc9f9eaf118a17"
+    },
+    {
+      "path": "backend/app/third_party/imwatermark/__init__.py",
+      "sha256": "48666734f9cb40c2636f63f943be8b556883a9f3315cb3aebc836a3f70a3b7cf"
+    },
+    {
+      "path": "backend/app/third_party/imwatermark/max_dct.py",
+      "sha256": "04f5bb5937e5ace59537f17c4365d09c4efb78447f31fc2376434b18f53c58bb"
+    },
+    {
+      "path": "backend/app/third_party/kaldi/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/third_party/kaldi/fbank.py",
+      "sha256": "12828851efc621af15718b82c09889316673092c1c17242d403152457e322a04"
+    },
+    {
+      "path": "backend/app/third_party/latentsync/stable_syncnet.py",
+      "sha256": "89af82ac95419b9b91000839c5c46ec5b82da18857ef6761a7bd16795f5e49e0"
+    },
+    {
+      "path": "backend/app/third_party/panns/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/third_party/panns/cnn10.py",
+      "sha256": "909f010e1b23e1ea9cd606279263e33e211b136ffb900ed6aac551aa6e5da4ac"
+    },
+    {
+      "path": "backend/app/version.py",
+      "sha256": "68ea348b014ffb594eb4e6500203ce96d8712e3dbf4d8be6d8e5f10a285c29dc"
+    },
+    {
+      "path": "backend/app/webhooks/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/webhooks/service.py",
+      "sha256": "40b6cefba57520f9ae68951cc021da77aad49e4ccc5b252f8b01ab98963ce578"
+    },
+    {
+      "path": "backend/scripts/audit_video_scoring_inputs_v18.py",
+      "sha256": "d0d1c7dbce347a2816ed3f3d67561d74aa06ee6b6d206b35f2a18c68ed5dfe0b"
+    },
+    {
+      "path": "backend/scripts/inventory_video_specialists_v18.py",
+      "sha256": "5a6698d50a492b66a0363b8d3389740abcdd0ab61d8011e632e6a946a72e9036"
+    },
+    {
+      "path": "backend/scripts/materialize_video_specialists_v18.py",
+      "sha256": "bb570630041cb47340c6e2260f0a66d70c172bd0dcabce1c5003d93c6d05662a"
+    },
+    {
+      "path": "backend/scripts/measure_video_specialists_v18.py",
+      "sha256": "656c65d784829d75f6a2da6ac38eecdde028b0b1b28f736a04e80c5b3edfd582"
+    },
+    {
+      "path": "backend/scripts/prepare_face_interval_eval.py",
+      "sha256": "a5add7b9806cc659bd4489a54a42f9440e6a8bd7947f228226799e3e73a15fc9"
+    },
+    {
+      "path": "backend/scripts/prepare_video_scoring_units_v18.py",
+      "sha256": "fc62e36a503c1d292e562b42c62c4a15b7e0ff86a87ba1100088d2bb4cf89a08"
+    },
+    {
+      "path": "backend/scripts/prepare_video_specialists_v18.py",
+      "sha256": "3418437f312064c35a8786c08a526649189deb8d7fb939ce339b52858e6164c3"
+    },
+    {
+      "path": "backend/scripts/prepare_video_upgrade_eval.py",
+      "sha256": "71a10ebc0cd3971609655fab64561a99fcbace3aeae564cb6a70856f7ab389cd"
+    },
+    {
+      "path": "backend/scripts/run_video_specialists_v18.py",
+      "sha256": "e5a3f818fd37e98be6b3a628f8d1f7f050bbbb0d53745322eb3d61dadf07d7e5"
+    },
+    {
+      "path": "backend/scripts/score_video_specialists_v19.py",
+      "sha256": "815276ab6f80c01596d964943092a695fe12c0b0bb1a8ed8c3c6c513a1341ade"
+    },
+    {
+      "path": "backend/scripts/score_video_specialists_v20.py",
+      "sha256": "66c5c1a614ba6a6ea780f0e3655eeec8a25e2fa438271ac4cd75aa9d03e0d7be"
+    },
+    {
+      "path": "backend/scripts/specialist_calibration.py",
+      "sha256": "9c1131976ea43c1ca146a05a9fd36777a25576f2c3fc3fe6f482f9a6ad305e67"
+    },
+    {
+      "path": "backend/scripts/specialist_runtime_v4.py",
+      "sha256": "8a359b72ada45c7ebac51115ba6ba7918a12fb9a973c56306232ad9f70c14539"
+    },
+    {
+      "path": "backend/scripts/specialist_runtime_v6.py",
+      "sha256": "315ee7ce44102c2df535a937ac5b9e0f46bea903cb1bdb20053265fa594d78ba"
+    },
+    {
+      "path": "backend/scripts/specialist_runtime_v7.py",
+      "sha256": "bde22d134ebe72f14e3663266858511d23cfab55861e64157a7a54737415a128"
+    },
+    {
+      "path": "backend/scripts/video_specialist_units_v18.py",
+      "sha256": "ec769c1d1e1662d219588b38dc1a3c0cdeb1aab8a767ba6915e5b0fe3af24c04"
+    },
+    {
+      "path": "backend/tests/test_video_scoring_plan_v18.py",
+      "sha256": "874dec029977564740aa4379c29215dd11a5e3beee565507a0fa6e0b5e663b1e"
+    },
+    {
+      "path": "backend/tests/test_video_scoring_source_audit_v18.py",
+      "sha256": "2ef6a6f719cd23173ebabce1b81e02272992d1304438fdeeda3de7115cfced96"
+    },
+    {
+      "path": "backend/tests/test_video_specialist_measurements_v18.py",
+      "sha256": "385bf2dd99c2b7724b983a89466d408a321ca6dad10fcde197a529c75cf194cc"
+    },
+    {
+      "path": "backend/tests/test_video_specialists_v19.py",
+      "sha256": "3a2de4d50e7b57a70bb66ed185093f8de5d10c05701dde782464d147595af4fe"
+    },
+    {
+      "path": "backend/tests/test_video_specialists_v20.py",
+      "sha256": "3393a1f65ad84585caf66868aaf470ace76d0292713666dfff44676a6892ec9b"
+    },
+    {
+      "path": "docs/video-face-specialists-v19-protocol.md",
+      "sha256": "2752383ed3138ef713db2672f6505598dbe0b59d28f41dbf3bef05b26696e6f5"
+    },
+    {
+      "path": "docs/video-face-specialists-v20-protocol.md",
+      "sha256": "049f618da48c2a47a020a4d181c3d56c771fc4cc39184619e7e74ea56d434846"
+    }
+  ]
+}

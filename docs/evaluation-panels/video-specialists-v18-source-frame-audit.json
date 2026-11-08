@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.video-source-frame-audit/18",
+  "method": {
+    "source": "All648 prepared consumed clips; reconstruct/verify exact input bytes and actual native clock.",
+    "truth": "AI source-frame presence requires publisher AI label, insertion into the known interval, and an actual decoded RGB change from the original. Ordinary controls remain genuine even when pixels change. No identified-face/pixel-authorship truth.",
+    "connections": "Seed original known source/donor/byte components. Join groups sharing an exactly equal nonuniform decoded RGB frame among predeclared model input frames. Uniform color frames are not identity/source links.",
+    "roles": "Preserve original roles if every refined component stays inside one role. If any component crosses roles, reassign all refined components in salted-hash order round-robin before any authenticity inference. No scores choose roles.",
+    "local": "Recompute sampled local labels from actual changed-frame indices; preserve full-clip truth and unobserved-edited-frame count separately.",
+    "new_authenticity_forwards": 0,
+    "serving_admitted": false
+  },
+  "freeze_sha256": "95993f3f040aa607d47ccb7953c1662c3a1d775f1dd7473ec1dbde43c29a5e8a",
+  "implementation_sha256": "d0d1c7dbce347a2816ed3f3d67561d74aa06ee6b6d206b35f2a18c68ed5dfe0b",
+  "source_plan_sha256": "d6a287bf2ddceaf43b3b705961d7c7fd7d2062361dc3328d8e8547c3f665ba58",
+  "completed_source_plan_sha256": "7eb6ee61b18f255fb6e21e1c391a1a0e347dffc8d1ba26aa75da4aa56cc37bdf",
+  "journal_sha256": "21ce2999b0e378db360369a8429d70a59c92fbab83e0802eb8fcb509243f8c8d",
+  "declared_ai_frames": 12420,
+  "actual_changed_ai_source_frames": 12420,
+  "native_rgb_frames": 93043,
+  "complete_clips": 648,
+  "clips_with_ai_outside_all_sampled_support": 0,
+  "components": 162,
+  "additional_rgb_connections": 0,
+  "components_crossing_original_roles": 0,
+  "role_reassignment_required": false,
+  "roles": {
+    "specialist_cal": 164,
+    "fusion_fit": 164,
+    "fusion_cal": 160,
+    "confirmation": 160
+  },
+  "new_neural_forwards": 0,
+  "serving_admitted": false,
+  "limits": "Actual RGB difference and publisher source labels, not identity/pixel authorship or detection quality. Source groups/people/pretraining may have unknown connections."
+}

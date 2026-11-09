@@ -1,0 +1,39 @@
+{
+  "schema": "chipmunk.audio-generator-preparation-failure/54",
+  "status": "failed_before_generation",
+  "code_sha256": {
+    "backend/scripts/audio_generator_checks_v54.py": "d1123819b8478f70aa838f64603eb422b69545de4697040160e5c5cdf958df5e",
+    "backend/scripts/audio_generator_qualification_v54.py": "c1ebe5b971c5e715a15cc9688e0c470fc96edac2e98d5359f0e89498e52dc854",
+    "backend/scripts/audio_generator_observer_v54.py": "b62325a054258f660aa69b4acecd1a57367e628c0dfaec03a25b885a01546857",
+    "backend/tests/test_audio_generator_checks_v54.py": "96448d254326a3d0005d3a2772f880b2abfe16a96d6b969b96133028ddbb764f",
+    "docs/audio-generator-qualification-v54-protocol.md": "c664f28330206a187c68ab947183ed3a06646eca9cbcbc35eb87e799c95773c8",
+    "docs/evaluation-panels/audio-generator-runtime-v54-requirements.lock": "a758839111674b5f57f700cd11e709e0015fcc9e3c5996d66609d244c1f9df26"
+  },
+  "profile_sha256": "07a7155db32205bd4853334032ec6bd9e513767e4c9f859040d1a649ac126107",
+  "resource_journal_sha256": "42d0f12e1d9b6c22bd5ce3ec1787410008481f7da01f772dffdc8048681cdb3e",
+  "child_exit_code": 1,
+  "guard": null,
+  "sample_errors": 0,
+  "sampled_tree_rss_lower_bound_bytes": 450707456,
+  "failure": "Installed-file audit included project metadata discovered through working directory/PYTHONPATH, outside the isolated runtime.",
+  "diagnostic": {
+    "extra_project_distribution_entries": 2,
+    "outside_runtime_records": 598,
+    "isolated_site_packages_missing_records": 0
+  },
+  "new_generator_forwards": 0,
+  "new_detector_forwards": 0,
+  "weights_downloaded_and_publisher_verified": true,
+  "dependency_packages_installed": 90,
+  "dependency_check_passed": true,
+  "unit_tests_passed": 8,
+  "compile_attempt_a01": "Failed external ExFAT source extraction; unchanged requirements resolved in a separate internal build cache.",
+  "english_package_download_a01": "HTTP 504; separate official release asset API download succeeded.",
+  "preparation_paths_preserved": true,
+  "smoke_started": false,
+  "serving_defaults_changed": false,
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false,
+  "successor": "Keep v54 code/results unchanged; use a separately named prospective inventory-scope correction."
+}

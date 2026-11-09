@@ -35,9 +35,10 @@ truth/provider/condition/source metadata are omitted. This
 [wiring check](evaluation-panels/audio-combined-confidence-v84-fitted-wiring.json)
 uses fitting/calibration data and does not establish held-role reliability.
 
-Selection and final-confirmation outcomes remain unused. The exact selected
-methods must be published before final forwards. There is no completed fresh
-selection/final detection or new calibration-quality result yet.
+Selection extraction on separate recordings has started. Final-confirmation
+inputs remain unused. The exact selected methods must be published before final
+forwards. There is no completed fresh selection/final detection or new
+calibration-quality result yet.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all
@@ -97,3 +98,22 @@ binding checks rejected two engineering preparations before acceptance. Their
 preserves the stops and unpublished rejected draft. The accepted preparation
 sampled 544,849,920 bytes RSS with no resource violation. These are preparation
 results, not new calibration accuracy or held-role performance.
+
+The v88 extra map subsequently fitted successfully in 13.92 seconds, with
+575,127,552 bytes of sampled child-tree RSS and no guard, sampling error or
+resource-limit observation. Both branches have calibration support. Its
+[aggregate training receipt](evaluation-panels/audio-common-reference-v88-training.json)
+keeps the learned maps and branch reference priors private. A
+[separate arithmetic check](evaluation-panels/audio-common-reference-v88-fitted-wiring.json)
+reproduced all 2,007 assessed fitting/calibration probabilities within 1.12e-16,
+preserved all 81 unassessed cases, and verified that predictions do not consume
+truth/provider/condition/source metadata. The original context score
+coefficients and routing cutoff remain identical. These checks verify wiring
+on reused development data, not independent detection or calibration accuracy.
+
+The held selection comparison runs fourteen screening variants on the same
+inputs, including current and retained heads, decision combinations, and the
+three new calibrated fusion variants. This is a comparison of methods over two
+backbones, not fourteen independent models. Both predeclared selection rules
+remain unchanged. No candidate has been promoted based on the development
+checks.

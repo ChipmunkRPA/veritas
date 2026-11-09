@@ -29,15 +29,19 @@ The next audio confidence study now has a
 genuine recordings, 240 AI recordings from three generator families and 48
 backgrounds. All 64 matched stock sources generated and decoded successfully.
 The four source roles remain separate across 157 known connected groups.
-Its source preparation is complete; combined confidence fitting and held-role
+Its source preparation and combined confidence fitting are complete; held-role
 performance conclusions remain pending.
 Its [4,176 fixed clean/background variants](audio-confidence-mixtures-v82-result.md)
 are now fully decoded and verified. Two
 [small score-fusion candidates](audio-score-fusion-v83-method.md) have authored-
 data method checks. The [prospective comparison is now running](audio-combined-confidence-v84-progress.md):
-all eighteen consumed native reproduction cases passed, and fitting/calibration
-extraction has started. Their selection and final-confirmation performance is
-still unmeasured.
+all eighteen consumed native reproduction cases passed, all 2,088 fitting and
+calibration cases finished, and both new fusion methods have their own fitted
+calibration maps. A third, shared-reference calibration variant also finished
+fitting without changing the original score coefficients. Selection extraction
+on separate recordings has started. The same held inputs compare fourteen
+screening variants; they are not fourteen independent backbones. Selection and
+final-confirmation performance is still unmeasured.
 
 ## How the revised comparisons choose
 

@@ -44,3 +44,14 @@ IDs/pairings, individual fingerprints, compact/full response records, features
 and learned coefficients remain private. Aggregate metrics, errors, coverage
 and limitations will be reported after selection and final confirmation. No
 workflow, outreach, real payment or GCP work is part of this execution.
+
+The [supplemental v86 diagnostics](audio-fusion-diagnostics-v86-protocol.md)
+were fixed during fitting/calibration extraction, before selection/final
+forwards. They preserve every condition-by-family cell without changing the
+primary method or selection rule. The
+[background-exposure histograms](evaluation-panels/audio-background-exposure-v86.json)
+confirm overall truth-class balance but show uneven exposure within individual
+AI families. Also, class-only error/bin summaries must not be interpreted as
+standalone probability-calibration tests. Five additional checks verify joint
+counts, missing outcomes and background-role/exposure handling. These are
+secondary descriptive diagnostics, not a new performance or reliability result.

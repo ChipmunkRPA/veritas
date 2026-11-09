@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.audio-fusion-secondary-diagnostics-freeze/86",
+  "source_manifest_sha256": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+  "private_background_plan_sha256": "124e014584188b6d58a75ba60ec051513b266e0d32931d4a94b89250b00f9e7d",
+  "primary_experiment_freeze_sha256": "5a6cefd6d09b7a78b5699f2a625aeaff3d0886d57621be916df04be134e31b17",
+  "code_sha256": {
+    "backend/scripts/audio_fusion_diagnostics_v86.py": "de6427baf156e0107091fff536a1831418bfeac59221c81d631c8075483e412a",
+    "backend/tests/test_audio_fusion_diagnostics_v86.py": "ebcb8c7decdf873ae46e8619aceecb1d73ee63bf480b5b444c6d0ace483d9854",
+    "docs/audio-fusion-diagnostics-v86-protocol.md": "bc18a41d40d2ccdfd6d0f102f471ab1759a4b4b46f96d33fa8ee041d05440c1e"
+  },
+  "primary_method_or_selection_changed": false,
+  "first_fitting_extraction_already_started": true,
+  "fixed_before_selection_or_confirmation_forwards": true,
+  "trained_artifacts_exist": false,
+  "joint_cells": 36,
+  "new_neural_calls": 0,
+  "scope": "Secondary descriptive counts and exposure diagnostics. Fixed before held-role outputs, not before fitting extraction. No primary selection or scientific method change."
+}

@@ -1,0 +1,439 @@
+{
+  "schema": "chipmunk.native-multimodel-comparison-result/45",
+  "execution_freeze_sha256": "56e1cad738f3d81211fa619c82354685bda99fb4434123fb00858ca6b0d07d5e",
+  "methods": {
+    "baseline": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.1388888888888889,
+      "mean_iou_over_groups": 0.13785861927419096,
+      "false_groups_by_kind": {
+        "original": 2,
+        "tone": 6,
+        "blur": 8
+      },
+      "any_negative_false_groups": 8,
+      "edited_photos": 27,
+      "usefully_localized_photos": 4,
+      "edited_photos_without_retained_region": 20,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 2,
+          "mean_wrongly_highlighted_area_fraction": 0.0030178022973331407
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 6,
+          "mean_wrongly_highlighted_area_fraction": 0.020018646004357363
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 8,
+          "mean_wrongly_highlighted_area_fraction": 0.013208889402860942
+        }
+      },
+      "paired_useful_fraction_difference": 0.0,
+      "paired_group_bootstrap_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.0,
+          0.0
+        ],
+        "tone": [
+          0.0,
+          0.0
+        ],
+        "blur": [
+          0.0,
+          0.0
+        ]
+      },
+      "new_useful_photos": 0,
+      "lost_useful_photos": 0
+    },
+    "p0.90-a0.01000": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.7777777777777778,
+      "mean_iou_over_groups": 0.5011541571129684,
+      "false_groups_by_kind": {
+        "original": 8,
+        "tone": 7,
+        "blur": 6
+      },
+      "any_negative_false_groups": 8,
+      "edited_photos": 27,
+      "usefully_localized_photos": 21,
+      "edited_photos_without_retained_region": 3,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 9,
+          "mean_wrongly_highlighted_area_fraction": 0.017719936245752136
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 8,
+          "mean_wrongly_highlighted_area_fraction": 0.016277878654460298
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 6,
+          "mean_wrongly_highlighted_area_fraction": 0.009312346715999908
+        }
+      },
+      "paired_useful_fraction_difference": 0.638888888888889,
+      "paired_group_bootstrap_95pct_interval": [
+        0.4444444444444445,
+        0.8333333333333334
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.0,
+          0.5
+        ],
+        "tone": [
+          -0.16666666666666666,
+          0.25
+        ],
+        "blur": [
+          -0.2916666666666667,
+          0.125
+        ]
+      },
+      "new_useful_photos": 17,
+      "lost_useful_photos": 0
+    },
+    "p0.60-a0.01000": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.7777777777777778,
+      "mean_iou_over_groups": 0.48060782099986615,
+      "false_groups_by_kind": {
+        "original": 10,
+        "tone": 10,
+        "blur": 10
+      },
+      "any_negative_false_groups": 10,
+      "edited_photos": 27,
+      "usefully_localized_photos": 21,
+      "edited_photos_without_retained_region": 2,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 13,
+          "mean_wrongly_highlighted_area_fraction": 0.029321381631186774
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 13,
+          "mean_wrongly_highlighted_area_fraction": 0.02811114100158357
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 12,
+          "mean_wrongly_highlighted_area_fraction": 0.019535282042691834
+        }
+      },
+      "paired_useful_fraction_difference": 0.638888888888889,
+      "paired_group_bootstrap_95pct_interval": [
+        0.4583333333333333,
+        0.8194444444444445
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.08333333333333333,
+          0.5833333333333334
+        ],
+        "tone": [
+          -0.08333333333333333,
+          0.4166666666666667
+        ],
+        "blur": [
+          -0.16666666666666666,
+          0.3333333333333333
+        ]
+      },
+      "new_useful_photos": 17,
+      "lost_useful_photos": 0
+    },
+    "p0.40-a0.00100": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.6944444444444445,
+      "mean_iou_over_groups": 0.4531909488355639,
+      "false_groups_by_kind": {
+        "original": 13,
+        "tone": 13,
+        "blur": 13
+      },
+      "any_negative_false_groups": 14,
+      "edited_photos": 27,
+      "usefully_localized_photos": 19,
+      "edited_photos_without_retained_region": 1,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 16,
+          "mean_wrongly_highlighted_area_fraction": 0.03962031923813069
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 16,
+          "mean_wrongly_highlighted_area_fraction": 0.03795062789471543
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 16,
+          "mean_wrongly_highlighted_area_fraction": 0.02825485233008276
+        }
+      },
+      "paired_useful_fraction_difference": 0.5555555555555556,
+      "paired_group_bootstrap_95pct_interval": [
+        0.3611111111111111,
+        0.75
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.20833333333333334,
+          0.6666666666666666
+        ],
+        "tone": [
+          0.041666666666666664,
+          0.5416666666666666
+        ],
+        "blur": [
+          -0.08333333333333333,
+          0.4583333333333333
+        ]
+      },
+      "new_useful_photos": 15,
+      "lost_useful_photos": 0
+    },
+    "fused-reference": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.05555555555555555,
+      "mean_iou_over_groups": 0.03292431334212013,
+      "false_groups_by_kind": {
+        "original": 1,
+        "tone": 2,
+        "blur": 3
+      },
+      "any_negative_false_groups": 3,
+      "edited_photos": 27,
+      "usefully_localized_photos": 2,
+      "edited_photos_without_retained_region": 23,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 1,
+          "mean_wrongly_highlighted_area_fraction": 0.0010570398313738479
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 2,
+          "mean_wrongly_highlighted_area_fraction": 0.0012834278066051568
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 3,
+          "mean_wrongly_highlighted_area_fraction": 0.0017311768014964723
+        }
+      },
+      "paired_useful_fraction_difference": -0.08333333333333333,
+      "paired_group_bootstrap_95pct_interval": [
+        -0.25,
+        0.08333333333333333
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          -0.16666666666666666,
+          0.08333333333333333
+        ],
+        "tone": [
+          -0.375,
+          0.041666666666666664
+        ],
+        "blur": [
+          -0.4583333333333333,
+          0.041666666666666664
+        ]
+      },
+      "new_useful_photos": 1,
+      "lost_useful_photos": 3
+    },
+    "current-or-strict": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.7777777777777778,
+      "mean_iou_over_groups": 0.4765686430636455,
+      "false_groups_by_kind": {
+        "original": 10,
+        "tone": 10,
+        "blur": 11
+      },
+      "any_negative_false_groups": 12,
+      "edited_photos": 27,
+      "usefully_localized_photos": 21,
+      "edited_photos_without_retained_region": 3,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 11,
+          "mean_wrongly_highlighted_area_fraction": 0.020737738543085273
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 11,
+          "mean_wrongly_highlighted_area_fraction": 0.029550823301005145
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 12,
+          "mean_wrongly_highlighted_area_fraction": 0.022521236118860852
+        }
+      },
+      "paired_useful_fraction_difference": 0.638888888888889,
+      "paired_group_bootstrap_95pct_interval": [
+        0.4444444444444445,
+        0.8333333333333334
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.16666666666666666,
+          0.5416666666666666
+        ],
+        "tone": [
+          0.041666666666666664,
+          0.3333333333333333
+        ],
+        "blur": [
+          0.0,
+          0.25
+        ]
+      },
+      "new_useful_photos": 17,
+      "lost_useful_photos": 0
+    },
+    "current-and-strict": {
+      "groups": 24,
+      "useful_photo_fraction_mean_over_groups": 0.1388888888888889,
+      "mean_iou_over_groups": 0.14182026500958053,
+      "false_groups_by_kind": {
+        "original": 0,
+        "tone": 2,
+        "blur": 0
+      },
+      "any_negative_false_groups": 2,
+      "edited_photos": 27,
+      "usefully_localized_photos": 4,
+      "edited_photos_without_retained_region": 21,
+      "control_photos": {
+        "original": {
+          "photos": 27,
+          "flagged": 0,
+          "mean_wrongly_highlighted_area_fraction": 0.0
+        },
+        "tone": {
+          "photos": 27,
+          "flagged": 2,
+          "mean_wrongly_highlighted_area_fraction": 0.006745701357812515
+        },
+        "blur": {
+          "photos": 27,
+          "flagged": 0,
+          "mean_wrongly_highlighted_area_fraction": 0.0
+        }
+      },
+      "paired_useful_fraction_difference": 0.0,
+      "paired_group_bootstrap_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          -0.20833333333333334,
+          0.0
+        ],
+        "tone": [
+          -0.3333333333333333,
+          -0.041666666666666664
+        ],
+        "blur": [
+          -0.5416666666666666,
+          -0.16666666666666666
+        ]
+      },
+      "new_useful_photos": 0,
+      "lost_useful_photos": 0
+    }
+  },
+  "tradeoff_comparison": {
+    "models": {
+      "baseline": {
+        "observed_dominated_by": [
+          "current-and-strict"
+        ],
+        "retained_in_comparison": true
+      },
+      "p0.90-a0.01000": {
+        "observed_dominated_by": [],
+        "retained_in_comparison": true
+      },
+      "p0.60-a0.01000": {
+        "observed_dominated_by": [
+          "p0.90-a0.01000"
+        ],
+        "retained_in_comparison": true
+      },
+      "p0.40-a0.00100": {
+        "observed_dominated_by": [
+          "current-or-strict",
+          "p0.60-a0.01000",
+          "p0.90-a0.01000"
+        ],
+        "retained_in_comparison": true
+      },
+      "fused-reference": {
+        "observed_dominated_by": [
+          "current-and-strict"
+        ],
+        "retained_in_comparison": true
+      },
+      "current-or-strict": {
+        "observed_dominated_by": [
+          "p0.60-a0.01000",
+          "p0.90-a0.01000"
+        ],
+        "retained_in_comparison": true
+      },
+      "current-and-strict": {
+        "observed_dominated_by": [],
+        "retained_in_comparison": true
+      }
+    },
+    "observed_frontier": [
+      "current-and-strict",
+      "p0.90-a0.01000"
+    ],
+    "maximize": [
+      "useful"
+    ],
+    "minimize": [
+      "original",
+      "tone",
+      "blur"
+    ],
+    "automatic_rejection": false,
+    "serving_admitted": false,
+    "statistical_superiority_established": false,
+    "scope": "Observed point-estimate tradeoffs only. Keep component error types, coverage and complementary cases visible. Do not select on an independent final benchmark and reuse it as validation."
+  },
+  "automatic_zero_false_alarm_increase_rule_applied": false,
+  "comparison_source_role": "point",
+  "source_groups": 24,
+  "photos": 27,
+  "final_confirmation_used": false,
+  "probability_calibration_performed": false,
+  "serving_admitted": false,
+  "scope": "Previously unused project source groups, now used for model/readout comparison and selection. Same editing family; source aliases/pretraining overlap unknown. Bootstrap intervals are conditional, pointwise and not simultaneous across methods. No retained region establishes whole-file originality; scores are not authorship probabilities."
+}

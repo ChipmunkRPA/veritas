@@ -1,0 +1,155 @@
+{
+  "schema": "chipmunk.native-multimodel-comparison-execution/45",
+  "execution_freeze_sha256": "56e1cad738f3d81211fa619c82354685bda99fb4434123fb00858ca6b0d07d5e",
+  "summary_sha256": "7f2bc695455ba5786c59d0a7c63d3483d7d9b1d039860e51bb8c2e273493be63",
+  "unique_neural_calls": 324,
+  "repeat_neural_calls": 3,
+  "completed_neural_calls": 327,
+  "successful_producer_phases": 15,
+  "successful_readout_phases": 5,
+  "successful_seal_phases": 1,
+  "failed_guarded_or_missing_phases": 0,
+  "source_photos": 27,
+  "source_components": 24,
+  "readouts": 7,
+  "source_views": 108,
+  "standalone_screening_mask_metric_parity_checks": 540,
+  "combined_masks_measured": 216,
+  "separate_count_arithmetic_matches": true,
+  "fixed_model_assets_reverified": 4,
+  "code_bindings_reverified": 56,
+  "final_checkpoint_sha256": "09ef907f347896eda95226b6e95ab75872bd3820a5a5bc9f9bf1daefda425300",
+  "protected_audio_calibration_unchanged": true,
+  "focused_tests_passed": 47,
+  "profiles": [
+    {
+      "phase": "baseline-native-000",
+      "profile_sha256": "a6b04917f2db1d69cd63651bdc6bf675152c82020654291b91a974ed72899210",
+      "duration_s": 7.228535708039999,
+      "sampled_tree_rss_lower_bound_bytes": 956628992
+    },
+    {
+      "phase": "baseline-native-001",
+      "profile_sha256": "14b6b3afa0d7c9d570d43d2e2c4e835ad23229e7e4af7d0410823f0fbb14ca9e",
+      "duration_s": 6.953369333059527,
+      "sampled_tree_rss_lower_bound_bytes": 991707136
+    },
+    {
+      "phase": "baseline-native-002",
+      "profile_sha256": "16621bc5ae956988eb99cd2ee421356ae33ae2ed117315fdfc86fd53d307c194",
+      "duration_s": 6.6854242499684915,
+      "sampled_tree_rss_lower_bound_bytes": 957726720
+    },
+    {
+      "phase": "baseline-native-003",
+      "profile_sha256": "f4ae089bb2d8b89996fa500d8386703f9341ac06135bfc0046c19b8dc6e05dd4",
+      "duration_s": 6.676142334006727,
+      "sampled_tree_rss_lower_bound_bytes": 980008960
+    },
+    {
+      "phase": "baseline-native-004",
+      "profile_sha256": "3182a51bc75b2c3903ec6428efc7558cd972af69e8533c6c05e105d95aefdc57",
+      "duration_s": 4.269088041968644,
+      "sampled_tree_rss_lower_bound_bytes": 948846592
+    },
+    {
+      "phase": "candidate-native-000",
+      "profile_sha256": "31aa405b35ff579f3cc9b18e74fd1d68436dd141452b11e780c1ef0f7b1ac19c",
+      "duration_s": 46.52555525000207,
+      "sampled_tree_rss_lower_bound_bytes": 1494908928
+    },
+    {
+      "phase": "candidate-native-001",
+      "profile_sha256": "1267acc4383d1f05c1948a591e5756b0a754a1f9de4642e12c55d15e154d5a4d",
+      "duration_s": 42.29406487499364,
+      "sampled_tree_rss_lower_bound_bytes": 1505067008
+    },
+    {
+      "phase": "candidate-native-002",
+      "profile_sha256": "e1338577647a3cad42badc6eb6771459ea336b92657b23ec0b7dc02ed8a11915",
+      "duration_s": 43.04942908301018,
+      "sampled_tree_rss_lower_bound_bytes": 1484111872
+    },
+    {
+      "phase": "candidate-native-003",
+      "profile_sha256": "9b51e90abfc8cca6a2cbc59f436d64391542c963db05e498df72f67a08525a79",
+      "duration_s": 43.01619191595819,
+      "sampled_tree_rss_lower_bound_bytes": 1499365376
+    },
+    {
+      "phase": "candidate-native-004",
+      "profile_sha256": "14b17e410edf58e5d08e4adf2e52fe8941f311034a4f9ff7faad1b7382773abb",
+      "duration_s": 23.25802924996242,
+      "sampled_tree_rss_lower_bound_bytes": 1485406208
+    },
+    {
+      "phase": "comparison-seal",
+      "profile_sha256": "0fe1127a26ce9e93d42c95a2a208932b81e6c7551b0b16eac8bb25dd085982ef",
+      "duration_s": 1.3373109160456806,
+      "sampled_tree_rss_lower_bound_bytes": 284393472
+    },
+    {
+      "phase": "fused-reference-native-000",
+      "profile_sha256": "32e0bffa1a3ce72cc37a1745d2cb44dcf397bf051bea551dd3700c9478cd1d3c",
+      "duration_s": 24.301558875013143,
+      "sampled_tree_rss_lower_bound_bytes": 588496896
+    },
+    {
+      "phase": "fused-reference-native-001",
+      "profile_sha256": "c77253a5ee8716cbc9b268a34179a4572f7d10ae09f9c5339a240d51436a6297",
+      "duration_s": 22.172474458930083,
+      "sampled_tree_rss_lower_bound_bytes": 668647424
+    },
+    {
+      "phase": "fused-reference-native-002",
+      "profile_sha256": "3c81eb6562c2e64382735af7a7c1571d4a7b0cfff3c67c6dbf21cbc32f1fec92",
+      "duration_s": 21.61348058306612,
+      "sampled_tree_rss_lower_bound_bytes": 580665344
+    },
+    {
+      "phase": "fused-reference-native-003",
+      "profile_sha256": "7e2f93395caf09fa7957bd6f521fec324cec323459949e07783c409eb57a8890",
+      "duration_s": 21.640795874991454,
+      "sampled_tree_rss_lower_bound_bytes": 698122240
+    },
+    {
+      "phase": "fused-reference-native-004",
+      "profile_sha256": "1e9202a23f586857f4f7d576005c8ec329942d1882424e119b8101cb306442fb",
+      "duration_s": 13.383102667052299,
+      "sampled_tree_rss_lower_bound_bytes": 638386176
+    },
+    {
+      "phase": "readout-000",
+      "profile_sha256": "62db8f204e91fd75dfcd46e4353462ec78816108a60df7d2bb1608ce71c98edb",
+      "duration_s": 10.14240745792631,
+      "sampled_tree_rss_lower_bound_bytes": 504332288
+    },
+    {
+      "phase": "readout-001",
+      "profile_sha256": "5d040d2e2fbe7efb7855d45dffcef34ce1ef88618f32af07cee2e9573d75c1cc",
+      "duration_s": 9.866257666959427,
+      "sampled_tree_rss_lower_bound_bytes": 602882048
+    },
+    {
+      "phase": "readout-002",
+      "profile_sha256": "5db2d311e59fd50378cf20fcad50d5982461671850f3384e842f33774a553c45",
+      "duration_s": 9.616814166074619,
+      "sampled_tree_rss_lower_bound_bytes": 501628928
+    },
+    {
+      "phase": "readout-003",
+      "profile_sha256": "56eb7263a4dd37b665d5fa57f26ffc06407107aa327dd3bb7e5d0c0ae81f4e94",
+      "duration_s": 9.084505458013155,
+      "sampled_tree_rss_lower_bound_bytes": 651935744
+    },
+    {
+      "phase": "readout-004",
+      "profile_sha256": "2f3b265dc73cca0a8181976c6e4b5349852807adf2ff1c0208e9c9a049726826",
+      "duration_s": 5.893698040978052,
+      "sampled_tree_rss_lower_bound_bytes": 567197696
+    }
+  ],
+  "final_confirmation_used": false,
+  "serving_admitted": false,
+  "scope": "Previously unused source groups now consumed for model/readout comparison and selection. Three exact first-input repeats; not a complete second neural replay. Separate contingency/group counts match. RSS is sampled; no population accuracy or authorship confidence claim. Raw sources, maps, pairings and learned states private."
+}

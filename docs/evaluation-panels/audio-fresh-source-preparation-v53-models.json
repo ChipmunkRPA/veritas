@@ -1,0 +1,131 @@
+{
+  "schema": "chipmunk.fresh-audio-generator-metadata/53",
+  "scope": "Publisher metadata and pinned model cards only; runtime, all auxiliary assets and source roles remain unqualified.",
+  "models": [
+    {
+      "repository": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "publisher_license": "apache-2.0",
+      "metadata_sha256": "4a408eb3567f793db0f3c0eb7fd629883a95f0bb525e168057185d58e996dd12",
+      "readme_sha256": "91dcabced89db6f109b8786642f50402d3ee87450e8189589b6f85520e7f4d78",
+      "weights_metadata": [
+        {
+          "file": "kokoro-v1_0.pth",
+          "bytes": 327212226,
+          "lfs": {
+            "sha256": "496dba118d1a58f5f3db2efc88dbdc216e0483fc89fe6e47ee1f2c53f18ad1e4",
+            "size": 327212226,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "weights_downloaded": false,
+      "generation_calls": 0
+    },
+    {
+      "repository": "myshell-ai/MeloTTS-English",
+      "revision": "bb4fb7346d566d277ba8c8c7dbfdf6786139b8ef",
+      "publisher_license": "mit",
+      "metadata_sha256": "9d96643054f247d3851c18070263cac5c63cffda2512cf5dfafa617caf6d680a",
+      "readme_sha256": "493958e29457067b476c3e871885d848dd46c8fb74c8694b46fa94ad062e00c1",
+      "weights_metadata": [
+        {
+          "file": "checkpoint.pth",
+          "bytes": 207860748,
+          "lfs": {
+            "sha256": "acd278040eaf9536908e2b965273df5a731c44d8f0da66cc5fed7972772ed23c",
+            "size": 207860748,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "weights_downloaded": false,
+      "generation_calls": 0
+    },
+    {
+      "repository": "OuteAI/OuteTTS-0.3-500M",
+      "revision": "7e7c98867a077fca82ede8aa649b3afc698dd8c8",
+      "publisher_license": "cc-by-sa-4.0",
+      "metadata_sha256": "d43a0deb689faaa91306bacfce5530b2e2981b006b371d30a6d111624b585466",
+      "readme_sha256": "34b5b92f8b183c32521bf705fb07769854ef1e9ed2e7c40a306c7d162b5c12b0",
+      "weights_metadata": [
+        {
+          "file": "model.safetensors",
+          "bytes": 998419744,
+          "lfs": {
+            "sha256": "d25a5a752adc8fa1c2fd83dfadbf07ceebe550d8652cde46f86b5c23b426b563",
+            "size": 998419744,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "weights_downloaded": false,
+      "generation_calls": 0
+    },
+    {
+      "repository": "ResembleAI/chatterbox-turbo",
+      "revision": "749d1c1a46eb10492095d68fbcf55691ccf137cd",
+      "publisher_license": "mit",
+      "metadata_sha256": "0d409224a6c74f019600e57c80f82cbc28dd18057ad692e4d25bc3c62fb5555b",
+      "readme_sha256": "d007d8c2ed2093530d95eee9d623f8977c321f6f361c19dafa07c000375808d7",
+      "weights_metadata": [
+        {
+          "file": "conds.pt",
+          "bytes": 169454,
+          "lfs": {
+            "sha256": "b1852099306fd6a7814eb9d0bd10186caba7249596cc23868f78a0eefbfa5033",
+            "size": 169454,
+            "pointerSize": 131
+          }
+        },
+        {
+          "file": "s3gen.safetensors",
+          "bytes": 1056484620,
+          "lfs": {
+            "sha256": "2b78103c654207393955e4900aac14a12de8ef25f4b09424f1ef91941f161d4e",
+            "size": 1056484620,
+            "pointerSize": 135
+          }
+        },
+        {
+          "file": "s3gen_meanflow.safetensors",
+          "bytes": 1064875036,
+          "lfs": {
+            "sha256": "d65cb687a2ed581ee6cc297e919ffefa63386944f42364ae13b78a594945514f",
+            "size": 1064875036,
+            "pointerSize": 135
+          }
+        },
+        {
+          "file": "t3_turbo_v1.safetensors",
+          "bytes": 1915480052,
+          "lfs": {
+            "sha256": "fcf1f8c1d651bb7e3acd69ee5be269b4ac10c02980b7708213d598bc9f7cdf87",
+            "size": 1915480052,
+            "pointerSize": 135
+          }
+        },
+        {
+          "file": "ve.safetensors",
+          "bytes": 5695784,
+          "lfs": {
+            "sha256": "f0921cab452fa278bc25cd23ffd59d36f816d7dc5181dd1bef9751a7fb61f63c",
+            "size": 5695784,
+            "pointerSize": 132
+          }
+        }
+      ],
+      "weights_downloaded": false,
+      "generation_calls": 0
+    }
+  ],
+  "new_model_calls": 0,
+  "source_audio_downloaded": false,
+  "source_documentation": "docs/audio-fresh-source-preparation-v53.md",
+  "weights_bytes_verified": false,
+  "code_and_auxiliary_asset_chain_approval": false,
+  "runtime_qualified": false,
+  "source_roles_assigned": false,
+  "new_detector_calls": 0,
+  "default_changed": false
+}

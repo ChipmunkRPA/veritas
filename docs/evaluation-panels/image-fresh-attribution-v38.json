@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.fresh-image-attribution-readout/38",
+  "planned": 256,
+  "recorded": 256,
+  "statuses": {
+    "matched_current_provider_metadata": 189,
+    "unresolved": 67
+  },
+  "http_statuses": {
+    "200": 215,
+    "404": 41
+  },
+  "unresolved_reasons": {
+    "Flickr photo response required": 9,
+    "Attribution endpoint unavailable": 41,
+    "Current and recorded license identifiers differ": 15,
+    "Current static source identity differs from COCO record": 2
+  },
+  "matched_photo_licences": {
+    "4": 111,
+    "5": 78
+  },
+  "matched_linked_to_known_creator_keys": 26,
+  "matched_without_known_creator_link": 163,
+  "distinct_unlinked_creator_keys": 157,
+  "prior_sources_with_unknown_creator": 14,
+  "private_plan_sha256": "5de3ab56de9f228c90a0e74ed58d28634b334be7b3bb3d1f8f0e8100c33a192d",
+  "phase_profiles": [
+    {
+      "phase": 0,
+      "profile_sha256": "04c61f18284d0d093ff681ee55ca9db5a3f00a36ebf47038b60079b97e8a3f63",
+      "sampled_tree_rss_lower_bound_bytes": 52002816,
+      "duration_s": 8.523112999973819
+    },
+    {
+      "phase": 1,
+      "profile_sha256": "1df0231178d038e891f791b1aa8516727fe5158cd09641977ec95fd1ccef5aef",
+      "sampled_tree_rss_lower_bound_bytes": 52084736,
+      "duration_s": 8.511049124994315
+    },
+    {
+      "phase": 2,
+      "profile_sha256": "545fc1a91016618e07e609d00b3232b12dcce8dfdb5bae473b05de40b48e05ba",
+      "sampled_tree_rss_lower_bound_bytes": 52101120,
+      "duration_s": 8.50577766704373
+    },
+    {
+      "phase": 3,
+      "profile_sha256": "aabd8c39f1b31156b04b1a1804daba56761b96afc907edb027b995136f7f3be2",
+      "sampled_tree_rss_lower_bound_bytes": 52248576,
+      "duration_s": 8.532798875006847
+    },
+    {
+      "phase": 4,
+      "profile_sha256": "bdad7189b2f5dd074fc7e3eeb85a1743a308fdc1438d346b92c6fadc03c6b051",
+      "sampled_tree_rss_lower_bound_bytes": 52084736,
+      "duration_s": 8.537343250005506
+    },
+    {
+      "phase": 5,
+      "profile_sha256": "fc287dfc68574f7019c269bf9d982541ab925f092fa302d0839eb0ae74eb58b1",
+      "sampled_tree_rss_lower_bound_bytes": 52166656,
+      "duration_s": 9.319409749936312
+    },
+    {
+      "phase": 6,
+      "profile_sha256": "da017dc26ee391cb0136b3c6709c41c8f36293bdabed16dd4862af9b147ace8c",
+      "sampled_tree_rss_lower_bound_bytes": 52133888,
+      "duration_s": 8.80327470798511
+    },
+    {
+      "phase": 7,
+      "profile_sha256": "79b0d285aa04a330ec79d030adff7f21061a85d2b32263451fd103b7e8ea00cb",
+      "sampled_tree_rss_lower_bound_bytes": 52215808,
+      "duration_s": 8.52207341697067
+    }
+  ],
+  "retained_failed_v37_summary_profile_sha256": "0a7a993ddb8b2d02cd9e60fa0b07b24af812b73ca0bd243bf12365fbad670273",
+  "readout_program_sha256": "7de430a6ac1602fe7ed7ff7dd469238876ad87fb8842be1d3d0000cb03e08302",
+  "correction": "Read stored v22/v25/v35 author keys directly after canonical-key validation; apply author_key only to newly received profile URLs. No repeated requests, changed selections or response edits. Original v37 summary remains failed.",
+  "images_downloaded": 0,
+  "neural_calls": 0,
+  "roles_assigned": false,
+  "evaluation_admitted": false,
+  "limitations": "Current photo/server/secret/owner/CC-BY or BY-SA2.0 correspondence only. No source pixels, cross-pool exact/near duplicate grouping, creator-alias resolution, pretraining independence, camera authenticity or complete generation rights established. No external person contacted. Unresolved requests retained without replacement; no accuracy result.",
+  "readout_profile_sha256": "d72ea34161567ef42f63425686b03b34a9c14ed31c51af291fd32ffd12e22678",
+  "private_summary_sha256": "d52987951642ec2e96e554c0ab0db98c73a8633ee61c9fbd05483782d6f5dfb6",
+  "local_focused_tests_passed": 47,
+  "collection_freeze_commit": "2987384b93aa4e7d294da5162c68bf13852ec71c",
+  "collection_freeze_remote_blob_sha": "f3b97715b741deb244d2263dc9f7c7ce3cffe7c1",
+  "retained_failed_initial_plan_profile_sha256": "c3040e6cd2132386e2e06e37b99dde28244b9bd41156760e09eb6d974fb0f9e7"
+}

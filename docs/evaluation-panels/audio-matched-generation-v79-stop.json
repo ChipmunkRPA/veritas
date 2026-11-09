@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.audio-matched-generation-technical-stop/79",
+  "preflight_sources": 64,
+  "complete_phoneme_chunks": 64,
+  "g2p_calls": 64,
+  "generation_batch_status": "stopped_before_model_import_and_forward",
+  "reason": "Optional soundfile module absent from isolated runtime",
+  "generated_sources": 0,
+  "generator_forwards": 0,
+  "detector_calls": 0,
+  "raw_outputs_or_partial_journals": 0,
+  "artifacts_sha256": {
+    "preflight.json": "7aa62445c924c85b4f8e271678c02c0320e0cec4430508739d3239ce54ee144c",
+    "preflight-profile/profile.json": "eb55dc77828476c887b3be796e019d28d5379cfc61512392fc0b53c48319c35c",
+    "batch-00-profile/profile.json": "67517536b0bfeb992f73fa76f5b4542452bf9851c5de9116e6490bbda73b682c",
+    "batch-00-profile/worker.log": "8f667a88b25d42abc4e3540be470dabcab8ae492ad7391ce8aaea442b9dbd6fd"
+  },
+  "technical_successor": 80,
+  "defaults_changed": false
+}

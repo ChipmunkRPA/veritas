@@ -35,10 +35,11 @@ truth/provider/condition/source metadata are omitted. This
 [wiring check](evaluation-panels/audio-combined-confidence-v84-fitted-wiring.json)
 uses fitting/calibration data and does not establish held-role reliability.
 
-Selection extraction on separate recordings has started. Final-confirmation
-inputs remain unused. The exact selected methods must be published before final
-forwards. There is no completed fresh selection/final detection or new
-calibration-quality result yet.
+All 1,044 selection inputs have completed and both fixed selection procedures
+choose the global combination. Final-confirmation inputs remain unused at this
+recording point. Publish the exact selection receipts before final forwards.
+The selection results below are method-development evidence, not completed
+final confirmation or a serving change.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all
@@ -117,3 +118,63 @@ three new calibrated fusion variants. This is a comparison of methods over two
 backbones, not fourteen independent models. Both predeclared selection rules
 remain unchanged. No candidate has been promoted based on the development
 checks.
+
+## Completed selection comparison
+
+The [primary selection](evaluation-panels/audio-combined-confidence-v84-selection.json)
+and [fourteen-method comparison](evaluation-panels/audio-common-reference-v88-selection.json)
+use the same 1,044 variants of 116 foreground files: 540 AI and 504 genuine
+variants across 27 known connected groups. These correlated variants and shared
+backgrounds are not 1,044 independent voices. All twelve extraction stages
+passed in 1,429.86 seconds total, with no resource violation. Sampled RSS reached
+4,993,302,528 bytes; minimum available RAM was 3,887,726,592 bytes. The
+[arithmetic replay](evaluation-panels/audio-head-replay-v85-selection.json)
+verified all 1,008 assessed cases and preserved 36 unassessed cases. See the
+[resource receipt](evaluation-panels/audio-combined-confidence-v84-selection-resources.json).
+
+| Method and declared decision rule | AI found / 540 | Genuine correct / 504 | False AI | False original | Without direction |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Current complete decision | 427 | 242 | 54 | 5 | 316 |
+| Retained two-check conflict-abstention method | 433 | 307 | 55 | 18 | 231 |
+| New global combination, tendency at 0.5 | 456 | 402 | 97 | 53 | 36 |
+| New context-balanced combination, tendency at 0.5 | 456 | 402 | 97 | 53 | 36 |
+| New shared-reference context combination, tendency at 0.5 | 455 | 402 | 97 | 54 | 36 |
+
+The pair recovers **71 correct directions, loses none**, and adds one false AI
+and thirteen false-original directions. All thirteen added false-original calls
+are expressive-generator cases. This coverage gain merits final testing; an
+extra error is not an automatic rejection. In strong noise (0 dB), AI hits rise
+33 to 36 and genuine correct 22 to 28; false AI rises nine to ten and false
+original one to two. Each condition contains 60 AI and 56 genuine variants.
+
+Global recovers 189 correct directions but adds 43 false AI and 48 false-original
+calls, turning all 280 assessed current inconclusive cases into directions.
+Its different decision rule makes coverage alone insufficient evidence of
+improvement. Across overlapping-speech conditions, global falsely flags 77/168
+genuine variants, versus 42/168 for both current and the pair. Under strong
+noise alone, global yields 40 AI hits, 42 genuine correct, 14 false AI, nine false
+original and eleven without direction. Background speech remains a weakness;
+these checks do not identify which overlapping speaker is synthetic.
+
+The frozen balanced-reference ranking loss is 0.120760 for current, 0.113149
+global, 0.114551 context-balanced and 0.112343 shared-reference context (lower is
+better). The shared-reference gain over global is 0.000805, below the fixed
+0.005 complexity margin, so **both procedures select global**. Global's weighted
+ten-bin calibration error is 0.092561 versus current 0.080941; AUROC is 0.928694
+versus 0.944673. Lower average squared error does not establish uniformly better
+calibration or discrimination. The ineligible context-prior-only control has
+AUROC 0.534787. Class-only bins are not standalone calibration tests.
+
+The receipts also compare identical fixed research score points. At symmetric
+0.8, current's score-only rule has 450 AI hits, 384 genuine correct, 89 false AI,
+44 false original and 77 without direction; global has 434, 345, 57, 31 and 177.
+The score-only current rule omits its complete decision's validity/stability
+abstention; it is not the first table's current method. These internal research
+curves and selection margin are not public thresholds or confidence guarantees.
+
+No map, head, routing cutoff, reference rule or candidate pool was retuned on
+selection responses. Both exact fixed choices must be published before final
+forwards. All fourteen methods share that one final cohort; reporting two
+analyses does not create two independent confirmations. Serving, evidence/report
+consistency, prepayment and rollback qualification remain separate work. No
+default has changed.

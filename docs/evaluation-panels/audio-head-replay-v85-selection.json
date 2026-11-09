@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-head-numerical-replay-selection/85",
+  "status": "complete",
+  "role": "selection",
+  "chunks": 12,
+  "cases": 1044,
+  "assessed_cases_replayed": 1008,
+  "unassessed_cases_preserved": 36,
+  "maximum_probability_reconstruction_errors": {
+    "original_head": 7.933656254177635e-08,
+    "serving_calibration": 0.0,
+    "v7": 2.7755575615628914e-17,
+    "standalone": 0.0,
+    "complement": 0.0
+  },
+  "reviewer_sha256": "17f0d958d74aa0d6b2dffb796fcd50405ef2d8af35da65b6880441b0cd023d70",
+  "new_neural_calls": 0,
+  "replay_receipt_sha256": [
+    "bbd3cfe5426e59b0d39fe38eab4c722e32e19f35d3a6724d48c1b438b40a94eb",
+    "353430046c066ec357353ddbd8d65e75a5c6580fb28f4760c5bdcdf601b642fc",
+    "19248f6789c95600e35543a5c85f8c43acb9ec95437c53d5f54a4f48af82fed6",
+    "dff20e88a150736ed03f2c2bd05183fb28c15c8f39662776bcd8121e396bb25c",
+    "cec52e137b3ee9b8a1ceae47c864baab81f0a8ef0cc83ded9df0bdf1b25d6fcf",
+    "3f96772916b6bb8c83b6c2d6377b7912288d5915004d95f3cc0bda6faa7b77a9",
+    "a089015f3286aa3030a3b9ffb9599fb1ccbac57c49ceb4ae09a47af300af09e4",
+    "dcbea813e105bba202d42515694fa8e5467fed67e7b02e81d8a026361be74fa7",
+    "d2dccbc0bc75cf6d674a0d8999840a7b4016f18464d2c0f2c449912c437b499c",
+    "f81c34db30a5144b43f30d34e985ef2f42e80be987748e60dcda7151f5e9d3c5",
+    "6da116c828981293442c76045d44e00bb049de9af401dc4a6704910e15f1b439",
+    "6fd044be13e39555c7d0fdac4f8a1cc0104c4d860b2deb1f030e567519373a11"
+  ],
+  "scope": "Separate recorded-feature/scalar-head arithmetic, hashes and clock review. Not fresh model execution, truth adjudication, stability-decision reanalysis, empirical accuracy, outside human review or confidence reliability."
+}

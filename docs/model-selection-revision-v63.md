@@ -29,8 +29,8 @@ The next audio confidence study now has a
 genuine recordings, 240 AI recordings from three generator families and 48
 backgrounds. All 64 matched stock sources generated and decoded successfully.
 The four source roles remain separate across 157 known connected groups.
-Its source preparation and combined confidence fitting are complete; held-role
-performance conclusions remain pending.
+Its source preparation, combined confidence fitting and selection are complete;
+final-confirmation performance remains pending.
 Its [4,176 fixed clean/background variants](audio-confidence-mixtures-v82-result.md)
 are now fully decoded and verified. Two
 [small score-fusion candidates](audio-score-fusion-v83-method.md) have authored-
@@ -39,9 +39,12 @@ all eighteen consumed native reproduction cases passed, all 2,088 fitting and
 calibration cases finished, and both new fusion methods have their own fitted
 calibration maps. A third, shared-reference calibration variant also finished
 fitting without changing the original score coefficients. Selection extraction
-on separate recordings has started. The same held inputs compare fourteen
-screening variants; they are not fourteen independent backbones. Selection and
-final-confirmation performance is still unmeasured.
+on separate recordings has completed. The same held inputs compare fourteen
+screening variants; they are not fourteen independent backbones. The two-check
+method recovers 71 additional correct directions with one extra false AI and
+thirteen extra false-original directions. Both fixed score-combination selection
+procedures choose the global map. Final-confirmation performance remains
+unmeasured; the linked progress report records selection tradeoffs and limits.
 
 ## How the revised comparisons choose
 
@@ -61,11 +64,13 @@ final-confirmation performance is still unmeasured.
    when sensitivity, false alarms, coverage and cost differ. Assess the size
    and distribution of gains and errors; do not impose a zero-loss rule or
    choose only a favorable subgroup. Describe uncertainty and known dependence.
-5. **Calibrate after selecting the method.** Each model keeps its own valid
-   calibration. A combination needs a calibration fitted for that combination
-   on separately assigned sources. Agreement, a larger union or an average of
-   confidence scores does not automatically create a calibrated probability.
-   Preserve separate final confirmation; do not repeatedly tune on its answers.
+5. **Fit and calibrate combinations separately.** Each candidate keeps its own
+   calibration. Fit combinations on their assigned fitting sources, calibrate
+   each on separate calibration sources, compare the fixed candidates on method-
+   selection sources, then confirm the chosen method on a final separate role.
+   Agreement, a larger union or an average of confidence scores does not
+   automatically create a calibrated probability. Do not repeatedly tune on
+   final answers or refit the chosen maps using their confirmation responses.
 6. **Adopt useful improvements after serving checks.** Confirm preprocessing,
    evidence geometry/time/text alignment, UI/PDF/JSON consistency, charge-before-
    analysis behavior and rollback locally. A useful improvement may be adopted

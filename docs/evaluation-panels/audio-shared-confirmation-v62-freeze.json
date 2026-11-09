@@ -1,0 +1,272 @@
+{
+  "schema": "chipmunk.audio-shared-confirmation-freeze/62",
+  "inputs_sha256": "14828469353f3b37a60da86f6588b817d946846303c275afa46e4f752bce4e26",
+  "source_sha256": "f3d7a7f2e20a9d2aa9092c371f5af4d2a05ed9172e4652677049a8286f61605f",
+  "heads_sha256": {
+    "v7": "fa1a0faec12fd6926cefb8f7ffe9c9736f517ea89b44a2ff13ab17f4d028c408",
+    "v13": "23350d709c9dc4c968066e2ab36bb16792f5c18d2513408b5f5c3298a8f83ae9"
+  },
+  "artifacts_sha256": {
+    "backend/data/independent-evaluation/audio-v7/development/trained/head.json": "fa1a0faec12fd6926cefb8f7ffe9c9736f517ea89b44a2ff13ab17f4d028c408",
+    "backend/data/independent-evaluation/audio-v13-wavlm/trained/head.json": "23350d709c9dc4c968066e2ab36bb16792f5c18d2513408b5f5c3298a8f83ae9",
+    "backend/data/independent-evaluation/audio-reserve-audit-v60/summary.json": "2a026cb29085acdfecd4378996c10440150392c7579cbd1aefb7c182becb7950",
+    "backend/data/independent-evaluation/audio-reserve-audit-v60/additive-review.json": "7c766e608a91b178d9699b3c4fbf8d24b51e2ef4529fb759c6b06c0283f7394b",
+    "backend/data/independent-evaluation/audio-v9/development/variants.json": "6cf19bbe44433b4dd85dd7758cbef9a33c9dd184417dd7a2ef72c1505a6d6f7c",
+    "backend/data/independent-evaluation/audio-v7/development/manifest.json": "a797d0b6bdd7bad2f02132844a7275716e34c4cb1b93cc4d59d3b2c98e0d35b4",
+    "backend/data/independent-evaluation/audio-v9/development/representations.jsonl": "315c07c1eec95553760a671e0480fb99bb53669e6f5679be0a73a1077cac512d",
+    "backend/data/independent-evaluation/audio-v13-wavlm/features.jsonl": "33ede5fb2efc5ecb5bffb406d024417ad37385ee9362db41ca7a8948e5c8dac2",
+    "backend/data/independent-evaluation/audio-v13-wavlm/responses-callable.jsonl": "1ab0c272491d0b14a7718c02ca888d550bb2a30c5868defa808f503d7528b48f"
+  },
+  "code_sha256": {
+    "backend/app/detectors/audio/calibration.py": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/video/adapters/audio.py": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/engine/boundary.py": "62862fa92accc7a38e2756ae09d403968b612edd37b86bd363feb218318d2413",
+    "backend/app/engine/fetchers.py": "e83fa48fef53026f30930b71feb57b114b9c5fcdf307bb47a0b75ae8e3fba366",
+    "backend/app/engine/profiles.py": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3",
+    "backend/app/engine/registry.py": "999063a7e3cb0953ab63f4bbcf8d08dcbb88e9d5cfa2c257925e2b95b4205ea7",
+    "backend/app/models.yaml": "2966b6c6b49d59b8501175aaac08af1873424360c702f69bac610b922ea65e52",
+    "backend/app/third_party/kaldi/fbank.py": "12828851efc621af15718b82c09889316673092c1c17242d403152457e322a04",
+    "backend/scripts/acquire_genuine_audio_v8.py": "81d80978476e5bd23b86aea4a49d2d609aca1fa287aed45738936cc4a1141810",
+    "backend/scripts/acquire_genuine_parquet_v8.py": "1f445e4baaead5b4cc837c232cc1ffeda0ef5846a0bf0b851a677711d3224dc1",
+    "backend/scripts/audio_calibration_v3_methods.py": "9f47f54d2386b637c025a9a1ef1acca447b406695e7f1efb7e585f11225e3b24",
+    "backend/scripts/audio_combinations_v52.py": "87ac6f5340592b0b2c4b5cae2584b7784dcdf8bff842448c3a4a2480aeb1fae3",
+    "backend/scripts/audio_conditional_v10.py": "275db2137cc2192d17a0a22e8fd93530be9c0896aaaca5a864b325815b347ed4",
+    "backend/scripts/audio_confirmation_v7.py": "620f7153d3c4131fefe7848a11395a6630f2dff5098306cdefa8e5287f46b991",
+    "backend/scripts/audio_full_representation_v11.py": "ad03ccc47c73d5e856ea4818089750cca18921e8d082326284207237876804d8",
+    "backend/scripts/audio_guard_v7.py": "ce03afe9e60f499a58030f2335a5fab1ad19fdb18b02fd0dde1981df2d26fd3c",
+    "backend/scripts/audio_history_v58.py": "5d95c44098b7e1ecf663f99f7b7ad5d9185d55e5629a64dac8f28bdf2c5d557c",
+    "backend/scripts/audio_layer_features_v12.py": "d6ce1821c007dc7c019ee66baf18c71728ad98d4ff22d6a027eab0d3503bcc06",
+    "backend/scripts/audio_layer_response_v12.py": "9294b113d12fa34a207c088ea53291c64041dc19bb3cf59e3539b4a9c2121353",
+    "backend/scripts/audio_multisource_v8.py": "8b2ce53d4db6ab229075e794642afd70e8c8e9cf2bb0c4c7825b65ab4f6fcb82",
+    "backend/scripts/audio_quality_v5.py": "ed44937634e686e52c449252bad4ba0f448ac191ed21f60fde2e95222f198081",
+    "backend/scripts/audio_reserve_audit_v60.py": "86e65e55eed201681c9991a9441bdd3a237171c11668bc91ef6b17978b5e6599",
+    "backend/scripts/audio_residual_head_v6.py": "f2cd45ca51fd034bcb6530a6c9bd90cbd4140dcb74b297fe6d86fb7ce87cadca",
+    "backend/scripts/audio_shared_confirmation_v62.py": "c2e7926d49758aec83c2a7c61dedd018e6da20bf48768f9e5c9b2f530ffe3b57",
+    "backend/scripts/audio_shared_runtime_v62.py": "74f5450c2352fc9a05d4f651c23a6a0dd6fba6111ded07a2ad2983f9af84fd7b",
+    "backend/scripts/audio_source_identity_v9.py": "f6f29da2585b4827a3de4fdde84d3a0be6f4e3d483fd61ef598e172a40b86660",
+    "backend/scripts/audio_wavlm_features_v13.py": "2aa5bc006003cb7bc98a7c22947616acdb1d9ac3b19047253af3ce985c6e1aba",
+    "backend/scripts/audio_wavlm_response_v13.py": "23bda722c1321021444def2612475803e4b33baeb03854d72982130f54ed35a2",
+    "backend/scripts/audit_audio_identity_forwards_v9.py": "f948d0b3df77afe7e96843e61b7ebef53f1e49641c16bd41dfb9c6186f36521e",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/scripts/evaluate_audio_multisource_v8.py": "553268ae3d3da041ecc52c70e42f816395b589b8a3156417840f7d839d963bf1",
+    "backend/scripts/evaluation_tradeoffs_v44.py": "943e5318514f3c47b5736031420e20b807bd8f9d433517c2c8691bd019e08b7e",
+    "backend/scripts/export_audio_full_representation_v11.py": "4eca2f86e55a28e5151acbd5d51447728c4c23dbf41deac1e760939685447c37",
+    "backend/scripts/export_audio_identity_v9.py": "62efc11e07f45ec353ac48aac3e27f9f5d10278ab9dbe11c6b7e9f0379d5fd8f",
+    "backend/scripts/export_audio_layer_v12.py": "3aefd3860b13dcad3d8eea35424969b697c55513fda52ae11eb7fbce5d593e91",
+    "backend/scripts/export_audio_multisource_v8.py": "ce8661740d25505819f0c8f11777772fc260051b9c3a815516ed2cc3ac046665",
+    "backend/scripts/image_regional_continuation_runtime_v41.py": "1326b488e0b698956467d3cf60767d7552e1ec65409410c8fe7e476cd1224a5a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/materialize_background_audio_v8.py": "2c2cc7c61488592b356b4b8204395a476c8853c7604dff1ed43586c47be92c61",
+    "backend/scripts/materialize_reserved_audio_v8.py": "d732e07e5dba336c8e4f6384d0dc0e3f731091979b420c17c6de64de330845ed",
+    "backend/scripts/plan_audio_identity_v9.py": "6e44bef919e1b14131155d83e07e409735f474cf15c4142e596f4b9a97539ca1",
+    "backend/scripts/plan_audio_multisource_v8.py": "b796042fd13f52ad0367a100ec97561a3f6bad35517e1482c591904df561a967",
+    "backend/scripts/prepare_audio_confirmation_inputs_v7.py": "fea7dabd4e448dc3c80f9077b90b08c52bd6cdc9471a837ee96e42a5896cdc39",
+    "backend/scripts/prepare_audio_confirmation_v7.py": "abfa02e6e8504dc93e3a4136db892173d5f32c367576f231f71ef0e6ad4ff652",
+    "backend/scripts/prepare_audio_confirmation_variants_v7.py": "e82dfe9e6fb268572584fead9cab1200dc50a19a8baf0358d1d848c878da8ed3",
+    "backend/scripts/prepare_audio_guard_v7.py": "bcbfd20c32559385d6750530c4fd6b8a60d4043c731595c1643d3e29413a2cee",
+    "backend/scripts/prepare_audio_identity_inputs_v9.py": "3e0cfd5adb8a7a16fcd46dcc87dcdee7687009e8fa7b551876a01a5e6adc2b0b",
+    "backend/scripts/prepare_audio_multisource_v8.py": "ba7d790b79fe2a3d7e02ec7ae79531baf63b308a650f0f4e85247d207cf8d235",
+    "backend/scripts/prepare_audio_multisource_variants_v8.py": "4c5bccefe0af1ddb5d9ac7d7e4b6948281b21ba060c23998c9b05bdd110f24c7",
+    "backend/scripts/rebuild_audio_identity_inputs_v9.py": "6531f5c5f58775e2853c29012eee79a1eceb6e544d0c50ca8c7b6357ba99bbb9",
+    "backend/scripts/review_audio_confirmation_v7.py": "d5aa7106a7cdf98aca3cd00701091cb6ac9a47c72953106b332b1ed01a9c0810",
+    "backend/scripts/review_audio_guard_v7.py": "019b45345f8670696850ff2a15479018c3ea212c48f5b17fdf0f53518ad88cfd",
+    "backend/scripts/review_audio_identity_execution_v9.py": "d2161efc25d21cc5ec244b8129b36c79ff5b00e4a42461f3e38f7c2c021dc2de",
+    "backend/scripts/review_audio_identity_plan_v9.py": "6c714b5b645c4bfc783dc25bc6fa175984315f3f289c27f9d672a3a24efd22b9",
+    "backend/scripts/review_audio_multisource_plan_v8.py": "9e723cfe4a7b5c2b31ff85a5d16a9724786742e425a11171edc502cb8b937514",
+    "backend/scripts/review_audio_noise_v4.py": "cee15d73fa0951c81cf70268e25eb49b587a87431d69cc838ff5112345702f66",
+    "backend/scripts/review_audio_reserve_v60.py": "22be46064150ddd47e65738226552a31d9c84164558ecd30300594b0dc0717cb",
+    "backend/scripts/run_audio_conditional_v10.py": "cfb1a485d92fc4f7332664946a97d42b9c4f4de1a4cee628ff6e1f8b19f0cc68",
+    "backend/scripts/run_audio_full_representation_v11.py": "1969183f2ba6fc3a34072e2cba46f0ed99d3d8510c8e58a771cce8bca074e910",
+    "backend/scripts/run_audio_guard_v7.py": "49ca4a1efbc305216a06beac9362fa8566f1de1574478d152418f51169c45774",
+    "backend/scripts/run_audio_identity_v9.py": "8cb20f23be82dfa3428fbb6caf2a66ea612bfca3ad10853a9852ff3c96549179",
+    "backend/scripts/run_audio_layer_v12.py": "d3e7b75743b27c9010d2c3256a6afa519d499535d931d7d81c576f837b8117dd",
+    "backend/scripts/run_audio_multisource_v8.py": "ca8616fadc5ac5abbd0b9d7aaa3abbb9bcbc84e959239ae67fee2bb4c9ad7f22",
+    "backend/scripts/run_audio_wavlm_v13.py": "8a475217c05d4f5964c9159461c3a8cbfae26de6248b0afbc398a5336c7fc1c8",
+    "backend/scripts/score_audio_confirmation_v7.py": "bdb70a7eeb33c3c6fcb1ddb9f8d19d9c8c66f92a51d9910489a03c42d657342d",
+    "backend/tests/test_audio_shared_confirmation_v62.py": "9c228fb301d2e8f702680045a49cfecf6df7679a0c8b929efa5c4d24fb16655d",
+    "backend/tests/test_audio_wavlm_v13.py": "d672542d430616fceadaea6b718e85790208d66e994dbd770a98a47f39e0541a",
+    "docs/audio-conditional-v10-protocol.md": "4df3920fc611225f84f954dafd3e20570bbe47448c2643679066909ecb98d88f",
+    "docs/audio-full-representation-v11-protocol.md": "58f8e920c9555c1e18932104ca00bab37bd657c2194a059480a368ca8e2d8008",
+    "docs/audio-guard-v7-confirmation.md": "bc8b3624e7529546fe52a31635ece08da285f89033cc676960df8ab0670aa99a",
+    "docs/audio-guard-v7-development.md": "f93531545309f76683e23b12a8986534922941a5dbf8e05afa0e20846a8fb04a",
+    "docs/audio-identity-v9-execution-protocol.md": "22f12ff91a43c7e7f1ff98a2e25b9a6e280a094e7e132f8188419b4434d5ed4a",
+    "docs/audio-layer-v12-protocol.md": "19617a22c507d94e63e8c79c89c7f03b225d0da8571eb5ebe7dee86407cf2323",
+    "docs/audio-multisource-v8-development.md": "a8914f234842617af8ed1090c6e1889386058e0d6f26dd01fa54d98534a4305d",
+    "docs/audio-shared-confirmation-v62-protocol.md": "139b8943060a4789ac3e554824824fa30ada1c8beeffa88174baa2db7aa5566f",
+    "docs/audio-wavlm-v13-protocol.md": "3be13ead47fa97e1b465dd5bbbc7a0cf750bed591d8b7fbdba81e211f2fa2dc0"
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.0",
+    "torch": "2.13.0",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "packages": {
+      "transformers": "5.15.1",
+      "pyloudnorm": "0.1.1",
+      "soundfile": "0.14.0"
+    },
+    "platform": "Darwin",
+    "machine": "arm64"
+  },
+  "installed_implementation_sha256": {
+    "transformers.models.wavlm.modeling_wavlm": "b9607c8c9c94d6d8567f13246d1eb5b793e219419032cd8ee8cc9926ce80f145",
+    "transformers.models.wavlm.configuration_wavlm": "2ab3a6662a0b2b3ac7e6963fc19df2fa8f75f9441164e0de7e6965bdfcb610b3",
+    "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e",
+    "scipy.optimize._lbfgsb_py": "61b69554f33a210284d4ae3de7da282152f9302b428eeb16984498b54e381d57",
+    "scipy.optimize._lbfgsb": "24a8a24d2fa62c723161f800a86662f15300acbf35b16b3d3749047896b552f9"
+  },
+  "baseline_weights": {
+    "pella.voice_v2": [
+      {
+        "name": "pellav2_detector.pt",
+        "bytes": 2322248702,
+        "sha256": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac"
+      },
+      {
+        "name": "w2v-bert-config.json",
+        "bytes": 1874,
+        "sha256": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+      }
+    ],
+    "silero.speech_activity": [
+      {
+        "name": "silero_vad.jit",
+        "bytes": 2272526,
+        "sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+      }
+    ]
+  },
+  "wavlm_assets": {
+    "pytorch_model.bin": {
+      "sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+      "bytes": 377617425
+    },
+    "config.json": {
+      "sha256": "fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4",
+      "bytes": 2232
+    },
+    "preprocessor_config.json": {
+      "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2",
+      "bytes": 215
+    },
+    "README.md": {
+      "sha256": "d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e",
+      "bytes": 3904
+    },
+    "UniSpeech-LICENSE": {
+      "sha256": "74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91",
+      "bytes": 21153
+    },
+    "unilm-LICENSE": {
+      "sha256": "904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe",
+      "bytes": 1104
+    }
+  },
+  "methods": {
+    "current": [
+      [
+        "current"
+      ],
+      "single"
+    ],
+    "new_features_only": [
+      [
+        "standalone"
+      ],
+      "single"
+    ],
+    "features_plus_current": [
+      [
+        "complement"
+      ],
+      "single"
+    ],
+    "pair_conflict_abstain": [
+      [
+        "current",
+        "complement"
+      ],
+      "available_no_conflict"
+    ],
+    "current_then_complement": [
+      [
+        "current",
+        "complement"
+      ],
+      "priority"
+    ],
+    "complement_then_current": [
+      [
+        "complement",
+        "current"
+      ],
+      "priority"
+    ],
+    "pair_any_ai": [
+      [
+        "current",
+        "complement"
+      ],
+      "any_ai"
+    ],
+    "pair_agreement_only": [
+      [
+        "current",
+        "complement"
+      ],
+      "agreement_only"
+    ],
+    "three_conflict_abstain": [
+      [
+        "current",
+        "complement",
+        "standalone"
+      ],
+      "available_no_conflict"
+    ],
+    "three_any_ai": [
+      [
+        "current",
+        "complement",
+        "standalone"
+      ],
+      "any_ai"
+    ]
+  },
+  "additional_method": "v7 with its own unchanged fitted head, guards and stability rule",
+  "v7_source_overlap": {
+    "fit_cal_sources": 120,
+    "reserve_sources": 120,
+    "known_identity_keys_in_common": {
+      "voice": 2
+    },
+    "scope": "Older v7 head has two known fitting/calibration voice overlaps. No known recording/PCM/text overlap. Current protected calibration and pretrained exposure are not claimed speaker-independent."
+  },
+  "parity_inputs": 18,
+  "parity_ids_sha256": "0d3949fd960b23a4ea6dea44b0792f024c7e7de541131bd06a7c43d758cf950b",
+  "inputs": 1080,
+  "foregrounds": 120,
+  "connected_foreground_groups": 118,
+  "chunk_size": 90,
+  "chunks": 12,
+  "probability_refit": false,
+  "combined_probability": null,
+  "bootstrap": {
+    "seed": 6207,
+    "replicates": 2000,
+    "unit": "connected foreground group",
+    "limits": "Exploratory paired count-change interval; shared backgrounds are not independent and no customer confidence interval is established."
+  },
+  "decision_policy": "Report gains, lost correct cases, both wrong directions, unassessed/inconclusive, generators and conditions. No zero-error or no-loss automatic rejection. Compare tradeoffs; no automatic default or service confidence change.",
+  "fresh_calls_started": false,
+  "deployment_eligible": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "chipmunk.audio-shared-fixed-monitor-profile/62",
+  "module": "scripts.audio_shared_confirmation_v62",
+  "arguments": [
+    "prepare"
+  ],
+  "child_started": false,
+  "child_exit_code": null,
+  "guard": "initial_headroom_unavailable",
+  "sample_errors": 0,
+  "sampling_error_events": [],
+  "terminal_observations": [],
+  "resource_limit_observations": [
+    {
+      "elapsed_s": 0.00011129199992865324,
+      "tree_rss_bytes": 0,
+      "ram_available_bytes": 6224822272,
+      "disk_free_bytes": 10076803072,
+      "checkpoint_disk_free_bytes": 7858318213120,
+      "violations": [
+        "initial_ram_headroom"
+      ]
+    }
+  ],
+  "last_observation": {
+    "elapsed_s": 0.00011129199992865324,
+    "tree_rss_bytes": 0,
+    "ram_available_bytes": 6224822272,
+    "disk_free_bytes": 10076803072,
+    "checkpoint_disk_free_bytes": 7858318213120,
+    "violations": [
+      "initial_ram_headroom"
+    ]
+  },
+  "sampled_tree_rss_lower_bound_bytes": 0,
+  "minimum_observed_available_ram_bytes": 6224822272,
+  "minimum_observed_free_disk_bytes": 10076803072,
+  "resource_journal_sha256": "8dd18f5b80644a74c7613b0ab2cdd9dbd93a41398def04bf5f7e29a1e7b1cdcf",
+  "duration_s": 0.0013762499438598752,
+  "limits": {
+    "seconds": 900,
+    "sampled_tree_rss_bytes": 6442450944,
+    "ram_and_disk_reserve_bytes": 1610612736,
+    "initial_ram_headroom_bytes": 6442450944,
+    "initial_disk_headroom_bytes": 3221225472
+  },
+  "monitor_implementation_sha256": "41bf68e6c56ad9c41fded7a05e0354efffd9b3dd5d3940d17eab126a92eccbe7",
+  "scope": "One explicit prospective audio stage with frozen methods and corrected terminal observation. Consumed parity must pass before fresh model calls. No retry, fallback or overwrite. Missing live workers and all resource violations remain failures. RSS is sampled, not a true peak guarantee."
+}

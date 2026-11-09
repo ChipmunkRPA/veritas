@@ -1,0 +1,34 @@
+{
+  "schema": "chipmunk.audio-combination-execution/52",
+  "freeze_sha256": "5ce09fc31cba8dcfaf5dc86e09f7b7b215a618bcef13f7fa8bb581646186233b",
+  "remote_freeze_blob": "eb3d9389f47e9ce55e8636f2fa3ae7c3538e0d89",
+  "code_commit": "318c90b",
+  "frozen_code_bindings_reverified": 8,
+  "result_sha256": "0efa2eb358f28987feae47a4fa0de3b4df202f7e5640788c8075943d5db6c72f",
+  "profiles": [
+    {
+      "stage": "audio-combinations-v52-preparation-profile",
+      "sha256": "6e8bb752b5b506cf0f02c6016be1209a7d1345b77b7f2f8c17f40fc1aae57086",
+      "duration_s": 0.26996362500358373,
+      "sampled_tree_rss_lower_bound_bytes": 376832
+    },
+    {
+      "stage": "evaluation-profile",
+      "sha256": "640bc413afb8ada4d6cdf045ecd6e6ad002c90655f65babf5b93413f02f0377b",
+      "duration_s": 0.26051425002515316,
+      "sampled_tree_rss_lower_bound_bytes": 753664
+    }
+  ],
+  "all_profiles_passed": true,
+  "set_review_sha256": "929f8e0441b3f5aca69820b6206be5c784317cc114dab898e237d9b5067970e0",
+  "additive_reviewer_code_sha256": "85184b9de1963f4a98842160f3ce52b7bdf7fa107219b18f7d5d892886048589",
+  "adverse_checks_sha256": "b96ccbb25317eda0b23b77e1fcd47c9eca521f1e3a658d5b9783c36c86de711b",
+  "tests_passed": 12,
+  "new_model_calls": 0,
+  "new_parameters_fitted": 0,
+  "protected_audio_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "model_defaults_changed": false,
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false
+}

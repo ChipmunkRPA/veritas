@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-reserve-recorded-exposure-audit/60",
+  "source_plan_sha256": "f3d7a7f2e20a9d2aa9092c371f5af4d2a05ed9172e4652677049a8286f61605f",
+  "variants_sha256": "14828469353f3b37a60da86f6588b817d946846303c275afa46e4f752bce4e26",
+  "input_bindings_sha256": "731f79cf9de1d0b1a8083d90a1be47fec42c41ac8bce15345fcfbd206d22e3f5",
+  "audit_code_sha256": "86e65e55eed201681c9991a9441bdd3a237171c11668bc91ef6b17978b5e6599",
+  "metadata_files": 4802,
+  "metadata_bytes": 2660483796,
+  "parsed_objects": 329336,
+  "identity_matched_records": 8682,
+  "identity_matched_files": 24,
+  "screening_record_paths": [],
+  "errors": [],
+  "reserve_foregrounds": 120,
+  "reserve_groups": 118,
+  "reserve_inputs": 1080,
+  "generators": {
+    "ElevenLabs-v4": 24,
+    "Kokoro-82M": 12,
+    "Chatterbox": 24,
+    "human": 60
+  },
+  "overlap_with_v9_consumed_sources": {
+    "sha256": 0,
+    "canonical_speaker": 0,
+    "transcript_sha256": 0,
+    "source_prefix_pcm_sha256": 0
+  },
+  "matched_records_sha256": "a2fd8ccdc13feb0d71f4f914d31300d8778b2d7ce85715c7b13ac20d832bd203",
+  "new_model_calls": 0,
+  "fresh_test_started": false,
+  "scope": "Recorded research JSON/JSONL identity matches, including plans and reconstruction. Screening-field matches require review; no matches cannot prove absence of unrecorded calls, biometric overlap or pretraining exposure. Historical voice reuse outside the fitting pool remains disclosed."
+}

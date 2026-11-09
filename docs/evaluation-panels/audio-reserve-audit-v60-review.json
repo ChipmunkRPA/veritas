@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-reserve-alias-review/60",
+  "original_summary_sha256": "2a026cb29085acdfecd4378996c10440150392c7579cbd1aefb7c182becb7950",
+  "review_code_sha256": "22be46064150ddd47e65738226552a31d9c84164558ecd30300594b0dc0717cb",
+  "normalized_identity_code_sha256": "5d95c44098b7e1ecf663f99f7b7ad5d9185d55e5629a64dac8f28bdf2c5d557c",
+  "rows": {
+    "reserve": 120,
+    "consumed": 472
+  },
+  "coverage": {
+    "reserve": {
+      "bytes": 120,
+      "pcm": 120,
+      "voice": 120,
+      "text": 120,
+      "prefix8": 120
+    },
+    "consumed": {
+      "bytes": 472,
+      "pcm": 472,
+      "voice": 472,
+      "text": 368,
+      "prefix8": 368
+    }
+  },
+  "normalized_cross_role_overlaps": {},
+  "pcm_aliases": 240,
+  "additional_alias_matches": 3186,
+  "alias_screening_matches": [],
+  "historical_files_reverified": 4802,
+  "new_model_calls": 0,
+  "scope": "All source rows have normalized identity coverage; no known reserve/consumed byte, PCM, voice or declared text connection is allowed. Recorded output search supplements, not replaces, source-role separation. No claim of unseen voices across all history or pretraining."
+}

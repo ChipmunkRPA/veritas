@@ -1,0 +1,68 @@
+{
+  "schema": "chipmunk.audio-shared-v62-stop-review/64",
+  "original_method_freeze_sha256": "3d270f8bd1ceb7764be7715a4325bda1b29c42b86b51e6573ae98f604bfc3a30",
+  "original_failed_profile": {
+    "schema": "chipmunk.audio-shared-fixed-monitor-profile/62",
+    "module": "scripts.audio_shared_confirmation_v62",
+    "arguments": [
+      "chunk",
+      "0"
+    ],
+    "child_started": true,
+    "child_exit_code": -15,
+    "guard": "live_sampling_unavailable",
+    "sample_errors": 1,
+    "sampling_error_events": [
+      {
+        "type": "NoSuchProcess",
+        "classification": "unresolved_live_sampling_failure"
+      }
+    ],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "last_observation": {
+      "elapsed_s": 53.546390749979764,
+      "tree_rss_bytes": 0,
+      "ram_available_bytes": 9461432320,
+      "disk_free_bytes": 10071044096,
+      "checkpoint_disk_free_bytes": 7858318213120,
+      "violations": []
+    },
+    "sampled_tree_rss_lower_bound_bytes": 4593614848,
+    "minimum_observed_available_ram_bytes": 4213751808,
+    "minimum_observed_free_disk_bytes": 10071044096,
+    "resource_journal_sha256": "aaa30dc6f5b33770dc4718beea0cafaa9fa21a97d732022c3a7d6039789c6462",
+    "duration_s": 53.54781395802274,
+    "limits": {
+      "seconds": 900,
+      "sampled_tree_rss_bytes": 6442450944,
+      "ram_and_disk_reserve_bytes": 1610612736,
+      "initial_ram_headroom_bytes": 6442450944,
+      "initial_disk_headroom_bytes": 3221225472
+    },
+    "monitor_implementation_sha256": "74f5450c2352fc9a05d4f651c23a6a0dd6fba6111ded07a2ad2983f9af84fd7b",
+    "scope": "One explicit prospective audio stage with frozen methods and corrected terminal observation. Consumed parity must pass before fresh model calls. No retry, fallback or overwrite. Missing live workers and all resource violations remain failures. RSS is sampled, not a true peak guarantee."
+  },
+  "complete_prefix_records": 33,
+  "possible_in_flight_additional_inputs": 1,
+  "prefix_journal_sha256": "de905cffd3f9c335f1f49a369c879839276cfe70c1e26d961a0aa456cccb8122",
+  "old_attempt_status": "failed and preserved",
+  "native_parity_cases_passed": 18,
+  "native_parity_sha256": "cd835687a60874487d18dffa70618a08b421d84315fac739e4e45f7167e43744",
+  "monitor_stress": {
+    "schema": "chipmunk.audio-monitor-descendant-stress/64",
+    "child_exit_code": 0,
+    "error": null,
+    "spawned_short_lived_children": 250,
+    "samples": 621,
+    "sampled_tree_rss_lower_bound_bytes": 31211520,
+    "duration_s": 4.844944125041366,
+    "sampler_sha256": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "new_model_calls": 0,
+    "scope": "Actual short-lived subprocess stress plus separately tested race/error paths; not a true peak guarantee."
+  },
+  "verified_descendant_exit_events_in_stress": 6,
+  "monitor_stress_sha256": "5fa322176e1faf09ea9bffc2bdbd43536d9719f3b5552aab79bac256203fb926",
+  "first_monitor_stress_failure_sha256": "4dde9db1bc45bf5969334a71b5139f06e8f2ffdd51a3fd0d5cf37e8f7271ec69",
+  "customer_or_default_change": false
+}

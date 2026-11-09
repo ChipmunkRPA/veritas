@@ -1,0 +1,102 @@
+{
+  "schema": "chipmunk.broader-image-source-feasibility/35",
+  "diffseg_release": "8049819755ff430dcf4701636b14e6f1df6c4542",
+  "training_archive": {
+    "directory_entries": 57998,
+    "paired_image_mask_stems": 28998,
+    "sidecar_rows": 28998,
+    "sidecar_field_sets": [
+      {
+        "fields": [
+          "image_file_name",
+          "mask_file_name"
+        ],
+        "rows": 28998
+      }
+    ],
+    "metadata_bytes_read": 6797179,
+    "range_requests": 7,
+    "sidecar_crc32_verified": true,
+    "sidecar_sha256": "4e78c0172ad90e798229edf8da5dbc4902f6a4f9669b5d4cecae8f73b64eb675",
+    "full_archive_sha256_verified": false,
+    "png_payload_bytes_read": 0,
+    "result_sha256": "06f2f6a3662b9d32464d36a68fba069db109911597604a8de4f927e36f51aecb",
+    "profile_sha256": "c51a5e3a312b0048a507d7ae52dc5765dc2ebbb44b0515cb9d47c1fba45cf9aa"
+  },
+  "owned_source_feasibility": {
+    "schema": "chipmunk.owned-source-feasibility-result/35",
+    "candidate_photos": 68,
+    "existing_study_sources": 637,
+    "candidate_components": 56,
+    "candidate_photos_in_prior_linked_components": 10,
+    "metadata_and_pixel_unlinked_photos": 58,
+    "metadata_and_pixel_unlinked_components": 49,
+    "unlinked_license_ids": {
+      "5": 18,
+      "4": 40
+    },
+    "pairwise_link_reasons_all_sources": {
+      "same_attributed_profile": 230
+    },
+    "current_flickr_jpegs_decoded": 68,
+    "new_network_requests": 0,
+    "neural_forwards": 0,
+    "new_generator_outputs": 0,
+    "new_roles_assigned": false,
+    "source_media_admitted_for_generation": false,
+    "private_groups_sha256": "380fa4c3685339c66b6b135edf032326532bdcd0fec5c1727b862cab80cd28e8",
+    "source_index_sha256": "da334b003d9504e5587d67ab539e52e94de75bc7eda9a49b9b02ea7e8fc0e79b",
+    "prior_groups_sha256": "17575bf2662b33ec3fcf9faeaf031286f596b753d7b30f2bcaea2d3a1d801b7a",
+    "grouping_implementation_sha256": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "scope": "Feasibility for a separate prospectively frozen controlled-generation study only. The current Flickr JPEGs differ from old publisher PNGs; that is neither AI detection nor camera-origin authentication. Existing source-photo licence snapshots are not new generator-output clearance. Unresolved old-owner aliases, unseen edits and pretraining overlaps remain limitations."
+  },
+  "bounded_profiles": {
+    "training_metadata": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sample_errors": 0,
+      "elapsed_s": 3.1881975000724196,
+      "sampled_tree_rss_lower_bound_bytes": 105562112
+    },
+    "cached_source_graph": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sample_errors": 0,
+      "elapsed_s": 0.7984396249521524,
+      "sampled_tree_rss_lower_bound_bytes": 76349440
+    }
+  },
+  "generator_metadata_candidates": [
+    {
+      "repository": "black-forest-labs/FLUX.2-klein-4B",
+      "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+      "license": "apache-2.0",
+      "gated": false,
+      "metadata_sha256": "9fe1e0312c8c3f8696e5a1a4d02485b6fdcc619b6c16b5c9428102f6b8a2a982"
+    },
+    {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+      "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "license": "creativeml-openrail-m",
+      "gated": false,
+      "metadata_sha256": "897696ff69153175dfeec52b694f18aafe65c29768fc69cfa45be8e0d3a45803"
+    },
+    {
+      "repository": "kandinsky-community/kandinsky-2-2-decoder-inpaint",
+      "revision": "db790ad5cbcabed886f069ef2710774657621702",
+      "license": "apache-2.0",
+      "gated": false,
+      "metadata_sha256": "41fb56839017cfdac6477cd320ccab6c5fccdd50cbbe48362fdaf063f2fe408f"
+    }
+  ],
+  "new_generator_weights_downloaded": 0,
+  "generator_outputs_created": 0,
+  "new_roles_assigned": false,
+  "source_media_admitted_for_generation": false,
+  "new_source_identifiers_publicly_shared": 0,
+  "neural_forwards_in_this_review": 0,
+  "outside_human_review": false,
+  "outreach_performed": false,
+  "serving_admitted": false,
+  "scope": "Metadata and cached-source feasibility only. No original-file authentication, generator selection, project-source generation, detector evaluation or default change."
+}

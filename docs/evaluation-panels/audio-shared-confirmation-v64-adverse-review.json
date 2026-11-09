@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.audio-shared-adverse-review/65",
+  "original_result_sha256": "6c4c630fde050486266d17254f2f862eb4dddb6bde055ce91e665bef506644bf",
+  "cases": [
+    {
+      "case": "changed_total",
+      "rejected": true,
+      "reason": "Standalone or combined operational counts differ",
+      "altered_result_sha256": "1db7efb0e760a624265228e7ab751fa115fe2a50fa2a0ed5ef816b3d93dc0ceb"
+    },
+    {
+      "case": "changed_lost_case_count",
+      "rejected": true,
+      "reason": "Actual newly gained/lost cases differ",
+      "altered_result_sha256": "69fd5371e1cd3136c015ba183d3475d30b2aca2ef0dd703ecb4174d38e9e3292"
+    }
+  ],
+  "new_model_calls": 0,
+  "original_files_modified": false
+}

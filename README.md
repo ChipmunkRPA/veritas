@@ -94,6 +94,20 @@ Start with [the current evidence/report policy](docs/standard-saas-report-policy
 [the frozen cross-media evaluation](docs/rule80-fresh-evaluation.md), and
 [the commercial model audit](docs/commercial-model-audit.md).
 
+The [revised model-selection review](docs/model-selection-revision-v63.md)
+reopens useful image, video, audio and passage candidates and their actual
+combinations. Earlier frozen gate failures remain historical results; a modest
+extra false alarm or lost hit is not an automatic reason to reject a new
+comparison. Shared backbones and agreeing decisions do not provide independent
+corroboration or a calibrated combined confidence.
+
+The [complete shared audio comparison](docs/audio-shared-confirmation-v64-result.md)
+tests 11 fixed methods on 1,080 cases from 120 recordings. A two-head combination
+adds 91 correct conclusions with no extra false AI alarms, but also adds 28 AI
+cases incorrectly leaning original. Its coverage gain supports further combined-
+confidence calibration; the serving model and confidence remain unchanged. The
+report retains all methods, conditions, source limits and the interrupted run.
+
 The historical cross-media study completed 288 analyses. It exposed missed local
 image edits and face swaps, noise-related audio uncertainty, and inconclusive
 article results. It is an evaluation of its frozen decision rules, not a universal
@@ -102,8 +116,8 @@ Private datasets, source media, credentials, customer reports, and downloaded
 weights remain excluded from this repository.
 
 New source-separated [image-localizer](docs/iml-vit-localization-evaluation.md)
-and [small-edit tiling](docs/tiled-splice-evaluation.md) comparisons retained
-unsuccessful candidates instead of changing the service to weaker checks.
+and [small-edit tiling](docs/tiled-splice-evaluation.md) comparisons retain
+complete candidate outcomes and their original admission decisions.
 The [active improvement plan](docs/detection-improvement-plan.md) tracks the next
 video, audio and writing evaluations. Independent contributors can use the
 [portable testing contract](docs/independent-testing.md) and evaluation issue form.
@@ -149,8 +163,11 @@ reproduction is distinct from outside human review; no outside human has partici
 The [two-source audio extraction](docs/audio-separation-v14-execution.md) stopped
 on a decoder failure before fitting. Its partial journal remains preserved and
 does not establish detection quality. A [separately frozen full replication](docs/audio-v14-full-replication.md)
-is running from the first input with resource guards and private decoder-error
-capture; it has not yet produced a complete quality result.
+completed all 4,248 inputs from the first input with resource guards and private
+decoder-error capture. Its
+[completed development comparison](docs/audio-separation-v14-development-evaluation.md)
+rejected both frozen arms; the original failure remains preserved. These results
+are distinct from a newly frozen comparison of actual decision combinations.
 
 The [completed general-video study](docs/video-demamba-v13-result.md) rejected
 its candidate: all192 development cases were inconclusive after its own

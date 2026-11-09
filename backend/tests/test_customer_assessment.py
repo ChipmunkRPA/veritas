@@ -13,7 +13,10 @@ CASES = json.loads((Path(__file__).parent / "fixtures/customer_assessment_cases.
 def test_customer_assessment(case):
     before = copy.deepcopy(case["input"])
     got = customer_assessment(case["input"])
-    assert {key: got[key] for key in case["expected"]} == case["expected"]
+    # Retain all historical numeric/headline expectations; only the versioned
+    # presentation marker advances with the current protocol.
+    expected = {**case["expected"], "rule": RULE}
+    assert {key: got[key] for key in expected} == expected
     assert case["input"] == before
     assert got["rule"] == RULE
     if got["confidence_pct"] is not None:

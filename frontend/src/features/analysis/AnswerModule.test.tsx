@@ -16,6 +16,8 @@ const analysis = (probability: number, extra: Record<string, unknown> = {}) => (
   decision: { code: 'inconclusive', confidence: 'low', fusion_mode: 'artefact', probability_ai_calibrated: probability,
     reason: 'Saved calibrated estimate.', ci90: [0.7, 0.9], ...extra },
 }) as unknown as AnalysisDetail
+const wholeSignals = [{ id: 'whole:global', family: 'learned-whole-image', hypothesis: 'H1_whole_content_synthesis', status: 'ok' }]
+const contributions = [{ kind: 'detector', signal_id: 'whole:global', counted: true, logit: 1 }]
 
 describe('automated customer conclusion', () => {
   it('explains invalid audio credentials without inferring changed content', () => {
@@ -27,20 +29,20 @@ describe('automated customer conclusion', () => {
     expect(c2paState({ assessments: [] }, new Map([['state', 'Invalid']]))).toBe('invalid')
   })
   it('shows a supported AI tendency with a supported reference estimate', () => {
-    render(<AnswerModule analysis={analysis(.6, { code: 'ai_supported' })} findings={[]} />)
-    expect(screen.getByTestId('headline').textContent).toBe('Leaning towards AI-generated or AI-altered content')
-    expect(screen.getByTestId('customer-assessment').textContent).toContain('Reference-calibrated overall estimate: 60%')
-    expect(screen.getByTestId('means').textContent).toContain('reference-calibrated checks lean')
+    render(<AnswerModule analysis={analysis(.6, { code: 'ai_supported', contributions })} findings={[]} signals={wholeSignals} />)
+    expect(screen.getByTestId('headline').textContent).toBe('Whole-image generation checks lean towards AI generation or alteration')
+    expect(screen.getByTestId('customer-assessment').textContent).toContain('Scoped image-check estimate: 60%')
+    expect(screen.getByTestId('means').textContent).toContain('calibrated estimate applies to the listed image checks')
     expect(screen.getByTestId('means').textContent).not.toContain('does not support a conclusive assessment')
     expect(screen.getByTestId('does-not-mean').textContent).toContain('not an independently established accuracy')
     expect(screen.getByTestId('fact-calibrated').textContent).toContain('Comparable error rates')
   })
   it('shows confidence and interval for the original direction, not the complementary AI score', () => {
-    render(<AnswerModule analysis={analysis(.126264, { code: 'no_ai_indicators', ci90: [.059251, .289501] })} findings={[]} />)
-    expect(screen.getByTestId('headline').textContent).toBe('Leaning towards original content in the assessed scope')
+    render(<AnswerModule analysis={analysis(.126264, { code: 'no_ai_indicators', ci90: [.059251, .289501], contributions })} findings={[]} signals={wholeSignals} />)
+    expect(screen.getByTestId('headline').textContent).toBe('Whole-image generation checks lean original; local edits remain unresolved')
     expect(screen.getByTestId('customer-assessment').textContent).toContain('87.3%')
     expect(screen.getByTestId('fact-plausible').textContent).toContain('71–94%')
-    expect(screen.getByTestId('fact-plausible').textContent).toContain('original-file likelihood')
+    expect(screen.getByTestId('fact-plausible').textContent).toContain('for these image checks')
   })
   it('does not promote an interval endpoint or raw fallback score to confidence', () => {
     const { rerender } = render(<AnswerModule analysis={analysis(.755266)} findings={[]} />)

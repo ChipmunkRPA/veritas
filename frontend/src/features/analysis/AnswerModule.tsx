@@ -125,11 +125,12 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
               {customer.confidence_pct !== null ? <>
                 <p className="m-0 display text-h2 text-text num">{customer.confidence_label}: <strong className="font-medium">{customer.confidence_pct}%</strong></p>
                 <p className="mt-2 mb-0 text-small text-text-muted">{customer.direction === 'ai' ? 'In favour of AI generation or AI alteration.'
+                  : customer.scope === 'image_components' ? 'For the image checks listed above; localized edits remain unresolved.'
                   : customer.scope === 'visual_content' ? 'In favour of original visual content.'
                     : customer.scope === 'assessed_components' ? 'In favour of original content in the assessed components.' : 'In favour of an original file.'} This is an estimate, not a verified accuracy rate.</p>
               </> : <p className="m-0 text-body text-text-muted">{customer.probability_ai_pct !== null
                 ? `Estimated AI likelihood: ${customer.probability_ai_pct}%. No reliable overall tendency is established.`
-                : 'A confidence percentage is not available for this result.'}</p>}
+                : 'An overall confidence percentage is not available for this file.'}</p>}
               <p className="mt-3 mb-0 text-small text-text-muted">The overall estimate uses only the applicable, calibrated checks. It is not an average of finding scores; raw responses and uncertainty interval endpoints are not confidence.</p>
             </div>
           ) : basis === 'documentary_declared' ? (

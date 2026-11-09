@@ -2,6 +2,7 @@ import { findingAssessment, isFindingAssessment, type FindingAssessment, type Fi
 import { STANDARD_SERVICE_POLICY, type StandardServicePolicy } from './standardServicePolicy'
 import { ruleTaken, type Decision } from './answer'
 import { outsideValidated } from './record'
+import { imageAssessmentScope } from './imageAssessmentScope'
 
 /** Mirrored by engine/customer_assessment.py; the parity fixtures test both implementations. */
 export interface CustomerAssessment {
@@ -10,11 +11,14 @@ export interface CustomerAssessment {
   headline: string | null; confidence_pct: number | null; confidence_label: string | null
   probability_ai_pct: number | null; interval_pct: [number, number] | null
   interval_label: string | null; interval_note: string; meaning: string; limitation: string
-  scope: 'whole_file' | 'visual_content' | 'assessed_components'; scope_label: string; scope_note: string | null
+  scope: 'whole_file' | 'visual_content' | 'assessed_components' | 'image_components'; scope_label: string; scope_note: string | null
   excluded_channels: ('voice' | 'audio_picture_timing')[]
   soundtrack?: { direction: 'ai' | 'original' | 'inconclusive'; headline: string; confidence_pct: number | null; limitation: string }
+  component_estimate?: { direction: 'ai' | 'original'; headline: string; confidence_pct: number; confidence_label: string;
+    probability_ai_pct: number | null; interval_pct: [number, number] | null; interval_label: string | null; scope_label: string }
 }
 type Signal = { id: string; detector_id?: string | null; family?: string | null; modality?: string | null; lane?: string | null
+  hypothesis?: string | null; metrics?: Record<string, unknown> | null; details?: Record<string, unknown> | null
   legacy?: { v1_id?: string | null } | null; status?: string | null; outside_estimate?: unknown; effective_weight?: number | null }
 type Input = FindingContext & {
   decision?: Decision | null; status?: string; stored_record?: unknown
@@ -22,7 +26,7 @@ type Input = FindingContext & {
   condition_profile?: { within_validated_envelope?: boolean | null; slice_id?: string | null } | null
   caveats?: readonly string[]
 }
-export const ASSESSMENT_RULE = 'evidence-led-assessment/v5'
+export const ASSESSMENT_RULE = 'evidence-led-assessment/v6'
 const INTERVAL_NOTE = 'This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.'
 const ESTIMATE_NOTE = "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited."
 const probability = (p: unknown): p is number => typeof p === 'number' && Number.isFinite(p) && p >= 0 && p <= 1
@@ -96,13 +100,20 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
     const text = (x: unknown) => x === null || typeof x === 'string'
     const range = row.interval_pct
     const soundtrack = row.soundtrack as Record<string, unknown> | null | undefined
+    const component = row.component_estimate as Record<string, unknown> | null | undefined
+    const componentValid = component === undefined || (result.kind === 'image' && component !== null && typeof component === 'object'
+      && ['ai', 'original'].includes(String(component.direction)) && typeof component.confidence_pct === 'number'
+      && percent(component.confidence_pct) && percent(component.probability_ai_pct)
+      && ['headline', 'confidence_label', 'scope_label'].every(k => typeof component[k] === 'string') && text(component.interval_label)
+      && (component.interval_pct === null || (Array.isArray(component.interval_pct) && component.interval_pct.length === 2
+        && component.interval_pct.every(x => typeof x === 'number' && percent(x)) && component.interval_pct[0] <= component.interval_pct[1])))
     if ((row.service_policy as StandardServicePolicy | undefined)?.version === STANDARD_SERVICE_POLICY.version
-      && row.rule === ASSESSMENT_RULE && Array.isArray(row.finding_assessments) && row.finding_assessments.every(isFindingAssessment) && typeof row.applies === 'boolean'
+      && row.rule === ASSESSMENT_RULE && componentValid && Array.isArray(row.finding_assessments) && row.finding_assessments.every(isFindingAssessment) && typeof row.applies === 'boolean'
       && ['ai', 'original', 'inconclusive', 'unavailable', 'record'].includes(String(row.direction))
       && text(row.headline) && text(row.confidence_label) && text(row.interval_label)
       && percent(row.confidence_pct) && percent(row.probability_ai_pct)
       && (range === null || (Array.isArray(range) && range.length === 2 && range.every(x => typeof x === 'number' && percent(x)) && range[0] <= range[1]))
-      && ['whole_file', 'visual_content', 'assessed_components'].includes(String(row.scope)) && typeof row.scope_label === 'string' && text(row.scope_note)
+      && ['whole_file', 'visual_content', 'assessed_components', 'image_components'].includes(String(row.scope)) && typeof row.scope_label === 'string' && text(row.scope_note)
       && Array.isArray(row.excluded_channels) && row.excluded_channels.every(c => c === 'voice' || c === 'audio_picture_timing')
       && (soundtrack === undefined || (result.kind === 'video' && soundtrack !== null && typeof soundtrack === 'object'
         && ['ai', 'original', 'inconclusive'].includes(String(soundtrack.direction))
@@ -114,7 +125,7 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
   return customerAssessment(result)
 }
 
-export function customerAssessment(result: Input): CustomerAssessment {
+function baseCustomerAssessment(result: Input): CustomerAssessment {
   const d = result.decision
   const profile = result.condition_profile
   const [scope, contentAssessed] = videoScope(result)
@@ -230,4 +241,8 @@ export function customerAssessment(result: Input): CustomerAssessment {
     if (answer.interval_pct) answer.interval_label = '90% interval for this scoped estimate'
   }
   return answer
+}
+
+export function customerAssessment(result: Input): CustomerAssessment {
+  return imageAssessmentScope(result, baseCustomerAssessment(result))
 }

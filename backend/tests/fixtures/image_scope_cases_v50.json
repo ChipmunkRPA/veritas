@@ -1,0 +1,34 @@
+{
+  "base": {
+    "kind": "image", "status": "done",
+    "decision": {"code": "no_ai_indicators", "fusion_mode": "artefact", "probability_ai_calibrated": 0.03,
+      "ci90": [0.01, 0.08], "band": "low", "confidence": "normal",
+      "contributions": [{"kind": "detector", "signal_id": "whole:global", "counted": true, "logit": -2.0}]},
+    "condition_profile": {"within_validated_envelope": true},
+    "signals": [
+      {"id": "whole:global", "detector_id": "whole", "family": "learned-whole-image", "hypothesis": "H1_whole_content_synthesis", "status": "ok", "effective_weight": 1.0},
+      {"id": "regional:global", "detector_id": "regional", "family": "localiser", "hypothesis": "H2_localised_manipulation", "status": "ok", "effective_weight": 0.0,
+       "outside_estimate": {"reason": "not_in_model"}, "metrics": {"regions": 1},
+       "details": {"localisation": {"candidate_eligibility": {"eligible": true}}}}
+    ],
+    "findings": []
+  },
+  "cases": [
+    {"name": "editing cue prevents a whole-file original conclusion", "regions": 1, "local_status": "ok", "eligible": true,
+     "expected": {"direction": "inconclusive", "headline": "Local editing cues found; AI origin is inconclusive", "confidence_pct": null, "probability_ai_pct": null, "scope": "image_components"}, "component_confidence": 97},
+    {"name": "no highlight still scopes the original estimate", "regions": 0, "local_status": "ok", "eligible": true,
+     "expected": {"direction": "original", "headline": "Whole-image generation checks lean original; local edits remain unresolved", "confidence_pct": 97, "scope": "image_components"}},
+    {"name": "withheld region is not a positive localization", "regions": 1, "local_status": "ok", "eligible": false,
+     "expected": {"direction": "original", "confidence_pct": 97, "scope": "image_components"}},
+    {"name": "failed localization is not a positive observation", "regions": 1, "local_status": "failed", "eligible": true,
+     "expected": {"direction": "original", "confidence_pct": 97, "scope": "image_components"}},
+    {"name": "AI tendency remains limited to contributing checks", "regions": 1, "local_status": "ok", "eligible": true, "ai": true,
+     "expected": {"direction": "ai", "headline": "Whole-image generation checks lean towards AI generation or alteration", "confidence_pct": 97, "scope": "image_components"}},
+    {"name": "unrecorded contributor scope cannot clear an image", "regions": 0, "local_status": "ok", "eligible": true, "unknown_scope": true,
+     "expected": {"direction": "inconclusive", "headline": "Inconclusive: image-check coverage is not established", "confidence_pct": null}},
+    {"name": "a skipped contributing check cannot clear an image", "regions": 1, "local_status": "ok", "eligible": true, "whole_status": "skipped",
+     "expected": {"direction": "inconclusive", "headline": "Inconclusive: contributing checks could not complete", "confidence_pct": null}},
+    {"name": "inconclusive recorded decision stays inconclusive", "regions": 1, "local_status": "ok", "eligible": true, "code": "inconclusive",
+     "expected": {"direction": "inconclusive", "headline": "Inconclusive: the checks do not support a reliable tendency", "confidence_pct": null}}
+  ]
+}

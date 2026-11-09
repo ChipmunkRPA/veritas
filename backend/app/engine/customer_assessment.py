@@ -156,7 +156,7 @@ def text_reference_rate(kind: str, profile: Mapping[str, Any] | None, calibratio
     return None
 
 
-def customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
+def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
     """Read-only interpretation shared by API, JSON and report presentation.
 
     ``result`` is an analysis-detail-shaped mapping with decision, condition_profile,
@@ -297,3 +297,9 @@ def customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
         if answer["interval_pct"] is not None:
             answer["interval_label"] = "90% interval for this scoped estimate"
     return answer
+
+
+def customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
+    from app.engine.image_assessment_scope import image_scope
+
+    return image_scope(result, _customer_assessment(result))

@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { customerAssessment, presentedCustomerAssessment } from './customerAssessment'
+import { ASSESSMENT_RULE, customerAssessment, presentedCustomerAssessment } from './customerAssessment'
 
 const cases = JSON.parse(readFileSync(new URL('../../../../backend/tests/fixtures/customer_assessment_cases.json', import.meta.url), 'utf8')) as {
   name: string; input: Parameters<typeof customerAssessment>[0]; expected: Record<string, unknown>
@@ -10,7 +10,7 @@ describe('evidence-led customer interpretation, shared report/API cases', () => 
   for (const c of cases) it(c.name, () => {
     const before = JSON.stringify(c.input)
     const got = customerAssessment(c.input)
-    expect(got).toMatchObject(c.expected)
+    expect(got).toMatchObject({ ...c.expected, rule: ASSESSMENT_RULE })
     expect(JSON.stringify(c.input)).toBe(before)
     if (got.confidence_pct !== null) {
       expect(got.limitation).toContain('not an independently established accuracy')

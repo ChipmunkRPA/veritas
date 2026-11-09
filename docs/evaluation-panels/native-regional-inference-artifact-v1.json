@@ -1,0 +1,16 @@
+{
+  "schema": "chipmunk.private-regional-inference-artifact-receipt/1",
+  "source_checkpoint_sha256": "09ef907f347896eda95226b6e95ab75872bd3820a5a5bc9f9bf1daefda425300",
+  "source_chain_sha256": "ca2663dc4ddd86f1ee1e699d2fc3c3586d9043bea0c5732af72a1c829a61f350",
+  "adapter_sha256": "4a8b7b45fc05c601e79c6cc8e58ea494a042af330bf3dc2042a7c89cf373ed03",
+  "bytes": 24062644,
+  "tensors": 246,
+  "parameters": 6009089,
+  "exact_tensor_roundtrip": true,
+  "optimizer_state_included": false,
+  "fitting_or_neural_calls": 0,
+  "serving_admitted": false,
+  "authorship_probability_calibrated": false,
+  "artifact_published": false,
+  "scope": "Private local inference artifact; all 246 learned tensors roundtrip exactly. Base checkpoint, reviewed graph, production forward parity and full flow tests remain required. No training, model inference, confidence admission or blanket production-training permission is implied."
+}

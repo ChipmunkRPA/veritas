@@ -1,0 +1,203 @@
+{
+  "schema": "chipmunk.native-confirmation-result/46",
+  "execution_freeze_sha256": "5638ae5813774d0e4beecd9d76f1f46fab2a42412ae1406a70588b62c266d9b7",
+  "methods": {
+    "baseline": {
+      "groups": 48,
+      "useful_photo_fraction_mean_over_groups": 0.20833333333333334,
+      "mean_iou_over_groups": 0.19179954814125197,
+      "false_groups_by_kind": {
+        "original": 3,
+        "tone": 3,
+        "blur": 12
+      },
+      "any_negative_false_groups": 14,
+      "edited_photos": 59,
+      "usefully_localized_photos": 10,
+      "edited_photos_without_retained_region": 44,
+      "control_photos": {
+        "original": {
+          "photos": 59,
+          "flagged": 3,
+          "mean_wrongly_highlighted_area_fraction": 0.0015448474630692117
+        },
+        "tone": {
+          "photos": 59,
+          "flagged": 3,
+          "mean_wrongly_highlighted_area_fraction": 0.0017524753870871038
+        },
+        "blur": {
+          "photos": 59,
+          "flagged": 12,
+          "mean_wrongly_highlighted_area_fraction": 0.01545472885716718
+        }
+      },
+      "paired_useful_fraction_difference": 0.0,
+      "paired_group_bootstrap_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.0,
+          0.0
+        ],
+        "tone": [
+          0.0,
+          0.0
+        ],
+        "blur": [
+          0.0,
+          0.0
+        ]
+      },
+      "new_useful_photos": 0,
+      "lost_useful_photos": 0
+    },
+    "p0.90-a0.01000": {
+      "groups": 48,
+      "useful_photo_fraction_mean_over_groups": 0.75,
+      "mean_iou_over_groups": 0.5293078007133657,
+      "false_groups_by_kind": {
+        "original": 11,
+        "tone": 10,
+        "blur": 7
+      },
+      "any_negative_false_groups": 12,
+      "edited_photos": 59,
+      "usefully_localized_photos": 45,
+      "edited_photos_without_retained_region": 6,
+      "control_photos": {
+        "original": {
+          "photos": 59,
+          "flagged": 13,
+          "mean_wrongly_highlighted_area_fraction": 0.007452272626321121
+        },
+        "tone": {
+          "photos": 59,
+          "flagged": 12,
+          "mean_wrongly_highlighted_area_fraction": 0.007149620388764743
+        },
+        "blur": {
+          "photos": 59,
+          "flagged": 9,
+          "mean_wrongly_highlighted_area_fraction": 0.006087963114691485
+        }
+      },
+      "paired_useful_fraction_difference": 0.5416666666666666,
+      "paired_group_bootstrap_95pct_interval": [
+        0.3958333333333333,
+        0.6875
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          0.041666666666666664,
+          0.2916666666666667
+        ],
+        "tone": [
+          0.041666666666666664,
+          0.2708333333333333
+        ],
+        "blur": [
+          -0.2708333333333333,
+          0.0625
+        ]
+      },
+      "new_useful_photos": 36,
+      "lost_useful_photos": 1
+    },
+    "current-and-strict": {
+      "groups": 48,
+      "useful_photo_fraction_mean_over_groups": 0.1875,
+      "mean_iou_over_groups": 0.17490116402206982,
+      "false_groups_by_kind": {
+        "original": 0,
+        "tone": 1,
+        "blur": 0
+      },
+      "any_negative_false_groups": 1,
+      "edited_photos": 59,
+      "usefully_localized_photos": 9,
+      "edited_photos_without_retained_region": 44,
+      "control_photos": {
+        "original": {
+          "photos": 59,
+          "flagged": 0,
+          "mean_wrongly_highlighted_area_fraction": 0.0
+        },
+        "tone": {
+          "photos": 59,
+          "flagged": 1,
+          "mean_wrongly_highlighted_area_fraction": 4.813210545671745e-06
+        },
+        "blur": {
+          "photos": 59,
+          "flagged": 0,
+          "mean_wrongly_highlighted_area_fraction": 0.0
+        }
+      },
+      "paired_useful_fraction_difference": -0.020833333333333332,
+      "paired_group_bootstrap_95pct_interval": [
+        -0.0625,
+        0.0
+      ],
+      "paired_false_group_difference_intervals": {
+        "original": [
+          -0.14583333333333334,
+          0.0
+        ],
+        "tone": [
+          -0.10416666666666667,
+          0.0
+        ],
+        "blur": [
+          -0.375,
+          -0.125
+        ]
+      },
+      "new_useful_photos": 0,
+      "lost_useful_photos": 1
+    }
+  },
+  "tradeoff_comparison": {
+    "models": {
+      "baseline": {
+        "observed_dominated_by": [],
+        "retained_in_comparison": true
+      },
+      "p0.90-a0.01000": {
+        "observed_dominated_by": [],
+        "retained_in_comparison": true
+      },
+      "current-and-strict": {
+        "observed_dominated_by": [],
+        "retained_in_comparison": true
+      }
+    },
+    "observed_frontier": [
+      "baseline",
+      "current-and-strict",
+      "p0.90-a0.01000"
+    ],
+    "maximize": [
+      "useful"
+    ],
+    "minimize": [
+      "original",
+      "tone",
+      "blur"
+    ],
+    "automatic_rejection": false,
+    "serving_admitted": false,
+    "statistical_superiority_established": false,
+    "scope": "Observed point-estimate tradeoffs only. Keep component error types, coverage and complementary cases visible. Do not select on an independent final benchmark and reuse it as validation."
+  },
+  "automatic_zero_false_alarm_increase_rule_applied": false,
+  "comparison_source_role": "confirmation",
+  "source_groups": 48,
+  "photos": 59,
+  "final_confirmation_used": true,
+  "probability_calibration_performed": false,
+  "serving_admitted": false,
+  "scope": "Confirmation source groups and readouts fixed before inference; no fitting or model selection uses these labels. Same editing family; creator aliases/pretraining overlap unknown. Conditional pointwise bootstrap intervals are not simultaneous or customer authorship probabilities. No retained region establishes whole-file originality."
+}

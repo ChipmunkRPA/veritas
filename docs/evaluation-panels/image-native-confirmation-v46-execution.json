@@ -1,0 +1,216 @@
+{
+  "schema": "chipmunk.native-confirmation-execution/46",
+  "freeze_sha256": "5638ae5813774d0e4beecd9d76f1f46fab2a42412ae1406a70588b62c266d9b7",
+  "summary_sha256": "7ed348b1e92c9af2faf333f6d5ceb8df8df3d671e3cfeb0cf3bc13934cf12b65",
+  "unique_neural_calls": 472,
+  "repeat_neural_calls": 2,
+  "completed_neural_calls": 474,
+  "successful_producer_phases": 20,
+  "successful_readout_phases": 10,
+  "successful_summary_phases": 1,
+  "failed_guarded_or_missing_phases": 0,
+  "source_photos": 59,
+  "source_components": 48,
+  "source_views": 236,
+  "readouts": 3,
+  "standalone_production_mask_metric_parity_checks": 472,
+  "actual_intersection_masks_measured": 236,
+  "separate_count_review_matches": true,
+  "used_assets_reverified": 2,
+  "code_bindings_reverified": 64,
+  "final_checkpoint_sha256": "09ef907f347896eda95226b6e95ab75872bd3820a5a5bc9f9bf1daefda425300",
+  "protected_audio_calibration_unchanged": true,
+  "focused_tests_passed": 49,
+  "profiles": [
+    {
+      "phase": "baseline-native-000",
+      "profile_sha256": "0e06e103c931fdfabef8e8d4dcc3a908933d8db385204de275fe93bb8adffa07",
+      "duration_s": 6.695286417030729,
+      "sampled_tree_rss_lower_bound_bytes": 1026850816
+    },
+    {
+      "phase": "baseline-native-001",
+      "profile_sha256": "ecf82884b090278400751569a836db146efe562d41e0a960ecdbd94e0e623333",
+      "duration_s": 6.663279666099697,
+      "sampled_tree_rss_lower_bound_bytes": 961855488
+    },
+    {
+      "phase": "baseline-native-002",
+      "profile_sha256": "6ce7b383147a20360fdc07d7eba32d92e226ecd64f21dd3f6e9eeb8368f96d0b",
+      "duration_s": 6.697239250061102,
+      "sampled_tree_rss_lower_bound_bytes": 954122240
+    },
+    {
+      "phase": "baseline-native-003",
+      "profile_sha256": "39257bfed7927200cda85fa925a832e995b29094bb77681904e7731e83fa5df3",
+      "duration_s": 6.710909291985445,
+      "sampled_tree_rss_lower_bound_bytes": 952778752
+    },
+    {
+      "phase": "baseline-native-004",
+      "profile_sha256": "5cc6c78d9fc2052a954ee627819514f0c57b4d6670e58e30d325b960d83bed56",
+      "duration_s": 6.928871624986641,
+      "sampled_tree_rss_lower_bound_bytes": 1020592128
+    },
+    {
+      "phase": "baseline-native-005",
+      "profile_sha256": "a27b88397a81182c574fd1431cc2dcc1aa175ea45de8f685d023cb82c2a5855c",
+      "duration_s": 6.682594459038228,
+      "sampled_tree_rss_lower_bound_bytes": 957022208
+    },
+    {
+      "phase": "baseline-native-006",
+      "profile_sha256": "ddd5d0021e486c7e85ea24348262fddadaf1daa370f91ab30a0f2189b0094486",
+      "duration_s": 6.94614312495105,
+      "sampled_tree_rss_lower_bound_bytes": 972046336
+    },
+    {
+      "phase": "baseline-native-007",
+      "profile_sha256": "0ee8cf37bac62d1a64c37dcb3c187a355e59dff31881f93412144d6022232b52",
+      "duration_s": 6.653648250037804,
+      "sampled_tree_rss_lower_bound_bytes": 963395584
+    },
+    {
+      "phase": "baseline-native-008",
+      "profile_sha256": "2960e8ff81c1e3171a95b0906a046568bb7608ee4be259f36dbd509298b47de4",
+      "duration_s": 6.977506208000705,
+      "sampled_tree_rss_lower_bound_bytes": 964018176
+    },
+    {
+      "phase": "baseline-native-009",
+      "profile_sha256": "080791f0386887b6148f777f610be2b2a46842a8b876a7ba261e7e940cbb1cc7",
+      "duration_s": 6.143470708979294,
+      "sampled_tree_rss_lower_bound_bytes": 952172544
+    },
+    {
+      "phase": "candidate-native-000",
+      "profile_sha256": "e89bffc646db8fd1e068184ba67261cf0963cee45d9525912fe7fd617301800e",
+      "duration_s": 44.41868929204065,
+      "sampled_tree_rss_lower_bound_bytes": 1528348672
+    },
+    {
+      "phase": "candidate-native-001",
+      "profile_sha256": "5f3c43e8d1654898b96f88b2699616ffa326adfbd02789c1d40888a771dba9a2",
+      "duration_s": 41.77795762498863,
+      "sampled_tree_rss_lower_bound_bytes": 1489403904
+    },
+    {
+      "phase": "candidate-native-002",
+      "profile_sha256": "27f1b44c39aa7597295d91d7e5324e337851d32c5df5fd166f5a610e5a38b0f1",
+      "duration_s": 41.43359066697303,
+      "sampled_tree_rss_lower_bound_bytes": 1482522624
+    },
+    {
+      "phase": "candidate-native-003",
+      "profile_sha256": "8f4f258445d0949f39ad0cbdb3a0901185c81f0d5c30ecf3cd7973f5de292a8a",
+      "duration_s": 41.95708283397835,
+      "sampled_tree_rss_lower_bound_bytes": 1482342400
+    },
+    {
+      "phase": "candidate-native-004",
+      "profile_sha256": "689176b36fdebf249ad8cf38fa02208bec872be5325eef8842cb35eec06cb696",
+      "duration_s": 42.53570283402223,
+      "sampled_tree_rss_lower_bound_bytes": 1507262464
+    },
+    {
+      "phase": "candidate-native-005",
+      "profile_sha256": "e53fbc1161760808670583ead76e88026fee7d515b84c17d0ca52d5b199d91c5",
+      "duration_s": 41.87644891696982,
+      "sampled_tree_rss_lower_bound_bytes": 1486356480
+    },
+    {
+      "phase": "candidate-native-006",
+      "profile_sha256": "d2c024f7f20539c35379e16b37839fe5e088e2eabb53f4b2ae9db068b05176d0",
+      "duration_s": 42.237613292061724,
+      "sampled_tree_rss_lower_bound_bytes": 1477214208
+    },
+    {
+      "phase": "candidate-native-007",
+      "profile_sha256": "a3f3d217666a0a720a7ebb6955df348052fb5c67a062fa9ab1aba888cf772809",
+      "duration_s": 41.67488145804964,
+      "sampled_tree_rss_lower_bound_bytes": 1490436096
+    },
+    {
+      "phase": "candidate-native-008",
+      "profile_sha256": "a1fbdcb89fc4a7859e1869419f129d516c71818efa1f7956bd8ccc5d9bb2b383",
+      "duration_s": 43.06383745896164,
+      "sampled_tree_rss_lower_bound_bytes": 1491238912
+    },
+    {
+      "phase": "candidate-native-009",
+      "profile_sha256": "5f4b470a9463239a709b436b35921187d5b2a95896947a572a9a57b5da8bc33a",
+      "duration_s": 36.87465779099148,
+      "sampled_tree_rss_lower_bound_bytes": 1482555392
+    },
+    {
+      "phase": "comparison-seal",
+      "profile_sha256": "1fd924ed6dccb1dd1b25f77cae2615cf538220915e1a5eae8925daa68309e3bd",
+      "duration_s": 1.3408437089528888,
+      "sampled_tree_rss_lower_bound_bytes": 288849920
+    },
+    {
+      "phase": "readout-000",
+      "profile_sha256": "945b8aa53a8e0d97ae37b11da25e5509199a83e2433490aba52d14b0360f10af",
+      "duration_s": 5.365332707995549,
+      "sampled_tree_rss_lower_bound_bytes": 683589632
+    },
+    {
+      "phase": "readout-001",
+      "profile_sha256": "cb7f5cf69837179f8cec54af950fa6b97423e9e1e109877a88d3d808e9101f90",
+      "duration_s": 5.06854274997022,
+      "sampled_tree_rss_lower_bound_bytes": 571768832
+    },
+    {
+      "phase": "readout-002",
+      "profile_sha256": "b30b06f0a1bcdbe15fe859d2f70cbacb7f917c925ea1b2654ef010fcdea2e39b",
+      "duration_s": 5.0878531250637025,
+      "sampled_tree_rss_lower_bound_bytes": 493977600
+    },
+    {
+      "phase": "readout-003",
+      "profile_sha256": "f583e705537c2aa6066687b7044f9ab0bd0a50e9356ac8bbad446fffa27782bf",
+      "duration_s": 5.3330597499152645,
+      "sampled_tree_rss_lower_bound_bytes": 493076480
+    },
+    {
+      "phase": "readout-004",
+      "profile_sha256": "3e92c5e9e405387a86c82604e41a4a11e16537f3668f52fcdc280c67822b929b",
+      "duration_s": 5.339464583899826,
+      "sampled_tree_rss_lower_bound_bytes": 606240768
+    },
+    {
+      "phase": "readout-005",
+      "profile_sha256": "100890c87751b8a0270e3c780106a252eec6c6a991908854f118243e96394b41",
+      "duration_s": 5.091144375037402,
+      "sampled_tree_rss_lower_bound_bytes": 561905664
+    },
+    {
+      "phase": "readout-006",
+      "profile_sha256": "ee29ee1654020221947cd9b2b8b50445da0c2ef86c3286fa27c6a24baaec0771",
+      "duration_s": 5.341058332938701,
+      "sampled_tree_rss_lower_bound_bytes": 577945600
+    },
+    {
+      "phase": "readout-007",
+      "profile_sha256": "df2a15c639b660ff4b98243e2adb511487ec99725e6a2905d8ba3ea87d959499",
+      "duration_s": 5.0825453751022,
+      "sampled_tree_rss_lower_bound_bytes": 572325888
+    },
+    {
+      "phase": "readout-008",
+      "profile_sha256": "29d5144dde8feab56baf92e11fc065bdacc51f933f852889b2dd2dfa271d4795",
+      "duration_s": 5.348411416984163,
+      "sampled_tree_rss_lower_bound_bytes": 570474496
+    },
+    {
+      "phase": "readout-009",
+      "profile_sha256": "9e5b7ef317f5aaefce805b520b6bc2fdcd5c07eb35f00b936055592465960258",
+      "duration_s": 4.824514499981888,
+      "sampled_tree_rss_lower_bound_bytes": 493518848
+    }
+  ],
+  "selection_preceded_confirmation": true,
+  "new_fits_or_setting_changes": 0,
+  "serving_admitted": false,
+  "scope": "Confirmation on source groups held out before fitting/calibration/comparison. Same editing family and imperfect metadata grouping; not an unseen-generator guarantee. No full second neural replay or outside human review. Resource RSS is sampled. Raw sources/maps/pairings and learned weights private."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "chipmunk.audio-confidence-mixture-freeze/82",
+  "source_manifest_sha256": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+  "source_profile_sha256": "52f5a098c9b6e9fae623d59449b861187a773bf966c065b35d8643a5c3ccdef0",
+  "private_plan_sha256": "124e014584188b6d58a75ba60ec051513b266e0d32931d4a94b89250b00f9e7d",
+  "code_sha256": {
+    "backend/scripts/audio_confidence_mixtures_v82.py": "e764cc36211074a63514dd369d28b9bc7dedd83d1fda691a263e42494829cf4d",
+    "backend/scripts/audio_mixtures_runtime_v82.py": "f880837737f762e07ff70f3b4c03b6dc3b141a039c2dd99130a6b55b53430ce9",
+    "backend/tests/test_audio_confidence_mixtures_v82.py": "316495c14675598017c7f1109aaf19e292ed5e2a16ef46176e77c1c91502edff",
+    "docs/audio-confidence-mixtures-v82-protocol.md": "dc0b37ab30a870415de06c53595b9a1d6a8443ea1df45befc632a2feaec76e1c",
+    "backend/scripts/prepare_audio_confirmation_variants_v7.py": "e82dfe9e6fb268572584fead9cab1200dc50a19a8baf0358d1d848c878da8ed3",
+    "backend/scripts/audio_confirmation_v7.py": "620f7153d3c4131fefe7848a11395a6630f2dff5098306cdefa8e5287f46b991",
+    "backend/scripts/audio_complete_sources_v81.py": "8987b2b9846e6fcc1bfd55f9227b3402cea463bf1101bdcb6d40dc5df84e55f0",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/image_regional_continuation_runtime_v41.py": "1326b488e0b698956467d3cf60767d7552e1ec65409410c8fe7e476cd1224a5a"
+  },
+  "roles": [
+    "fusion_fit",
+    "confidence_cal",
+    "selection",
+    "confirmation"
+  ],
+  "conditions": [
+    "clean",
+    "noise_0",
+    "noise_5",
+    "noise_15",
+    "music_5",
+    "music_15",
+    "speech_0",
+    "speech_5",
+    "speech_15"
+  ],
+  "foregrounds": 464,
+  "backgrounds": 48,
+  "planned_variants": 4176,
+  "variants_per_role": 1044,
+  "foreground_interval_samples": [
+    0,
+    64000
+  ],
+  "sample_rate": 16000,
+  "mixture_rule": "Unchanged v7 clean/background mixture helper: foreground RMS 0.1, requested background SNR, one common peak gain across all nine variants, then normal PCM16 encoding and exact production decode.",
+  "background_allocation": "Four within-role sources per kind, ordered by fixed hash; cycle independently within each truth class in fixed foreground hash order. Offset is hash of foreground raw bytes and kind. No detector, VAD or ASR selection.",
+  "detector_calls_permitted": 0,
+  "confidence_fitting_permitted": false,
+  "scope": "Fixed four-second clean and controlled background variants. Correlated variants/shared backgrounds; no new accuracy, real-world SNR distribution or confidence claim."
+}

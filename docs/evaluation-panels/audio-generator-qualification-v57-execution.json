@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-generator-execution/57",
+  "freeze_sha256": "41275f19b177b883b4efed5d9aa099ad14af37bb0958906a04611fd9009316e0",
+  "remote_freeze_blob": "25e884ed52883a515682c21fe700fcce0d3d8ba4",
+  "code_commit": "523e1b5",
+  "result_sha256": "97b7b17ac2f897bee2e212a070673939d6297c2084bb614e977e12c2fc231443",
+  "profiles": [
+    {
+      "stage": "audio-generator-qualification-v57-preparation-profile",
+      "profile_sha256": "f353a9d6fdd322ace1377bb96e407184050d6c46a9e29cb7d3fdc3229afc4736",
+      "duration_s": 5.013297499972396,
+      "sampled_tree_rss_lower_bound_bytes": 450527232
+    },
+    {
+      "stage": "smoke-profile",
+      "profile_sha256": "86e3d8d108261dad94afce11007b361508313c06b6f5ee2961fb4bdbc9e3d507",
+      "duration_s": 11.924367166939192,
+      "sampled_tree_rss_lower_bound_bytes": 1521188864
+    }
+  ],
+  "all_profiles_passed": true,
+  "runtime_packages_reverified": 90,
+  "runtime_files_reverified": 25302,
+  "project_code_bindings_reverified": 11,
+  "new_generator_forwards": 3,
+  "g2p_calls": 2,
+  "new_detector_forwards": 0,
+  "protected_audio_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "earlier_failed_attempts_rewritten": false,
+  "workflow_runs": 0,
+  "outreach_sent": false,
+  "deployment_done": false
+}

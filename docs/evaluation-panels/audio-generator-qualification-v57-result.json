@@ -1,0 +1,83 @@
+{
+  "schema": "chipmunk.audio-generator-smoke-result/57",
+  "status": "complete",
+  "strict_loaded_state": {
+    "checkpoint_tensors": 548,
+    "checkpoint_elements": 81763410,
+    "all_checkpoint_tensors_exact": true,
+    "extra_identity_tensors_verified": 140,
+    "all_parameters_frozen": true
+  },
+  "qualified_module_origins": {
+    "torch": "lib/python3.12/site-packages/torch/__init__.py",
+    "numpy": "lib/python3.12/site-packages/numpy/__init__.py",
+    "kokoro": "lib/python3.12/site-packages/kokoro/__init__.py",
+    "misaki": "lib/python3.12/site-packages/misaki/__init__.py",
+    "transformers": "lib/python3.12/site-packages/transformers/__init__.py",
+    "en_core_web_sm": "lib/python3.12/site-packages/en_core_web_sm/__init__.py"
+  },
+  "calls": [
+    {
+      "call": 0,
+      "prompt": 0,
+      "phoneme_count": 82,
+      "duration_s": 0.8703242499614134,
+      "samples": 134400,
+      "sample_rate": 24000,
+      "seconds": 5.6,
+      "rms": 0.04884868162461587,
+      "peak": 0.36689528822898865,
+      "clipped_samples_if_pcm16": 0,
+      "float32_sha256": "2e3ffdabaf3aee026b81290b23c40daa68cdeaeb2189f2114c215d6b74b3d83e"
+    },
+    {
+      "call": 1,
+      "prompt": 1,
+      "phoneme_count": 71,
+      "duration_s": 0.6625643329462036,
+      "samples": 111000,
+      "sample_rate": 24000,
+      "seconds": 4.625,
+      "rms": 0.0480069769682461,
+      "peak": 0.47110888361930847,
+      "clipped_samples_if_pcm16": 0,
+      "float32_sha256": "a0c6e59c0582f020bcb67b0979e019f713e15585607e644403a7f5930bd7e008"
+    },
+    {
+      "call": 2,
+      "prompt": 0,
+      "phoneme_count": 82,
+      "duration_s": 0.7641402090666816,
+      "samples": 134400,
+      "sample_rate": 24000,
+      "seconds": 5.6,
+      "rms": 0.04884868162461587,
+      "peak": 0.36689528822898865,
+      "clipped_samples_if_pcm16": 0,
+      "float32_sha256": "2e3ffdabaf3aee026b81290b23c40daa68cdeaeb2189f2114c215d6b74b3d83e"
+    }
+  ],
+  "repeat_exact": true,
+  "g2p_calls": 2,
+  "state_unchanged_after_inference": true,
+  "new_generator_forwards": 3,
+  "new_detector_calls": 0,
+  "network_attempts": 0,
+  "device": "cpu",
+  "dtype": "float32",
+  "load_and_generation_duration_s": 5.184968625078909,
+  "scope": "Two authored English prompts through complete G2P and pinned generator. No research source, customer data, detector accuracy, intelligibility review or serving default is qualified.",
+  "runtime_packages": 90,
+  "runtime_files_reverified_after_smoke": 25302,
+  "project_code_bindings_reverified": 11,
+  "unit_tests_passed": 13,
+  "weights_publisher_bindings_verified": true,
+  "earlier_v54_v55_failures_preserved": true,
+  "fresh_research_sources_generated": 0,
+  "fresh_detector_validation_complete": false,
+  "other_generators_qualified": false,
+  "serving_defaults_changed": false,
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false
+}

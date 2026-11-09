@@ -106,6 +106,13 @@ checks. These are local software/correctness checks, not new detector accuracy
 measurements or an outside review. The current default staged pipeline remains
 selected, and the frozen audio study bindings were reverified unchanged.
 
+One remaining generated voice-reference sentence still exposed the retired
+80% service-threshold wording. The public projection now replaces that exact
+application sentence with scope and uncertainty wording, including in saved
+results. Source material and measured percentages remain intact. Local public
+projection/history and customer export checks pass; numerical detector code,
+calibration bytes and experiment bindings remain unchanged.
+
 Customer-facing findings continue to name the checked scope and supporting
 evidence without model identities or a public threshold claim. Skipped and
 inconclusive checks cannot become an original-file verdict. The automated SaaS

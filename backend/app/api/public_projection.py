@@ -159,6 +159,9 @@ def neutral_text(value: str, *, candidates: Iterable[str] = (), names: Iterable[
     value = value.replace(
         'The calibrated voice estimate and uncertainty check do not jointly support an 80% tendency.',
         'The calibrated voice estimate and uncertainty check do not jointly support a reliable tendency.')
+    value = value.replace(
+        'Frozen voice-specific calibration with an 80% tendency threshold and uncertainty checks.',
+        'Speech-specific reference calibration, with duration limits and uncertainty checks.')
     ids = _candidate_aliases(tuple(sorted(set(candidates) | {match.group() for match in _HISTORICAL_DETECTOR.finditer(value)})))
     names = sorted(set(_identities()[1]) | {name for name in names if len(name) >= 3}, key=len, reverse=True)
     for original in sorted(ids, key=len, reverse=True):

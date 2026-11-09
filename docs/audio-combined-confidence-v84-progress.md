@@ -36,10 +36,12 @@ truth/provider/condition/source metadata are omitted. This
 uses fitting/calibration data and does not establish held-role reliability.
 
 All 1,044 selection inputs have completed and both fixed selection procedures
-choose the global combination. Final-confirmation inputs remain unused at this
-recording point. Publish the exact selection receipts before final forwards.
-The selection results below are method-development evidence, not completed
-final confirmation or a serving change.
+choose the global combination. Both exact receipts were published in f1c7682
+and their GitHub blob hashes verified before final forwards. Final confirmation
+has completed its first 87-case stage and is waiting for the original 6-GiB
+initial RAM headroom before attempting the next stage. No final performance
+summary has been calculated. The results below are selection evidence, not
+completed final confirmation or a serving change.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all

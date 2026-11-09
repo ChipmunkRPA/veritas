@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-joint-source-candidate-inventory/68",
+  "genuine_records": 8668,
+  "genuine_voices": 77,
+  "genuine_history_unseen_voices": 59,
+  "genuine_declared_text_unseen_records": 8668,
+  "clone_records": 3452,
+  "clone_voices": 373,
+  "clone_header_failures": 0,
+  "clone_eligible4_metadata_candidates": 690,
+  "clone_eligible4_history_unseen_voices": 197,
+  "clone_eligible4_declared_voices": 295,
+  "clone_eligible12_metadata_candidates": 1,
+  "clone_archive_bytes_verified": 6031923200,
+  "genuine_catalogue_sha256": "c448e12ec319539bd93fd89eaa33db9865cb9065edf928825c1ed09366983786",
+  "clone_catalogue_sha256": "1a24b5c8548535623a45487fe039ec6519db9fcb2512f4d3ebbef441a2f898db",
+  "input_bindings_sha256": "6c3947254cbe84e8db81cb2c8309e4098cf7ec0dc36c5b5478d9c4ba0efc555b",
+  "code_sha256": "72fff1814afe2b12133d6f36cbf6696db980843ac9f79a3a6aee9ff5ade73595",
+  "candidate_generators": {
+    "Chatterbox": 3452
+  },
+  "roles_assigned": false,
+  "audio_pcm_decodes": 0,
+  "new_model_calls": 0,
+  "scope": "Candidate provenance/text and clone WAV headers only. Full selected bytes and production PCM must be verified before model calls; historical metadata novelty is not biometric or pretrained-corpus independence. Errors and short/seen candidates are retained."
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.audio-genuine-corpus-receipt/67",
+  "revision": "71cacbfb7e2354c4226d01e70d77d5fca3d04ba1",
+  "metadata_sha256": "b1ca3b912f90c112f7df124b98b7970914ca467c230fb4a300b0ccc66195e4c6",
+  "archives": [
+    {
+      "source_path": "clean/train.360/0000.parquet",
+      "name": "libri360-0000.parquet",
+      "bytes": 474769063,
+      "sha256": "d4772d5a61a86a4064958e3a6685567d3f74c8080c6e90b8f5db9dd339320966",
+      "url": "https://huggingface.co/datasets/openslr/librispeech_asr/resolve/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1/clean/train.360/0000.parquet",
+      "status": "publisher-verified",
+      "duration_s": 23.31867341697216
+    },
+    {
+      "source_path": "clean/train.360/0001.parquet",
+      "name": "libri360-0001.parquet",
+      "bytes": 486692347,
+      "sha256": "421a693637bfe48947782f3afa5b79364d6d7bbbf83185efaa10a2ced28a0288",
+      "url": "https://huggingface.co/datasets/openslr/librispeech_asr/resolve/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1/clean/train.360/0001.parquet",
+      "status": "publisher-verified",
+      "duration_s": 9.777129499940202
+    },
+    {
+      "source_path": "clean/train.360/0002.parquet",
+      "name": "libri360-0002.parquet",
+      "bytes": 508568925,
+      "sha256": "0156d271c5ebaf01534452c82d5bec9d5b8b01057f908da8c5590dd59260c4a6",
+      "url": "https://huggingface.co/datasets/openslr/librispeech_asr/resolve/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1/clean/train.360/0002.parquet",
+      "status": "publisher-verified",
+      "duration_s": 13.377986499923281
+    },
+    {
+      "source_path": "clean/train.360/0003.parquet",
+      "name": "libri360-0003.parquet",
+      "bytes": 480317707,
+      "sha256": "b96cccce1f2cfe43c0bab8c429b1078d9dcbdf35e66067d8f01303562bfc1021",
+      "url": "https://huggingface.co/datasets/openslr/librispeech_asr/resolve/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1/clean/train.360/0003.parquet",
+      "status": "publisher-verified",
+      "duration_s": 15.679073499981314
+    }
+  ],
+  "total_bytes": 1950348042,
+  "duration_s": 62.15411312505603,
+  "neural_calls": 0,
+  "audio_decodes": 0,
+  "scope": "Complete original corpus files verified by publisher SHA256. Not selected new speakers, decoded source qualification or model performance."
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-expressive-metadata-inventory/66",
+  "recordings": 432,
+  "declared_voices": 24,
+  "declared_scripts": 432,
+  "byte_unseen_candidates": 408,
+  "byte_and_text_unseen_candidates": 408,
+  "byte_text_voice_unseen_candidates": 0,
+  "novelty_strata": [
+    {
+      "recorded_bytes_seen": false,
+      "declared_text_seen": false,
+      "declared_voice_seen": true,
+      "recordings": 408
+    },
+    {
+      "recorded_bytes_seen": true,
+      "declared_text_seen": true,
+      "declared_voice_seen": true,
+      "recordings": 24
+    }
+  ],
+  "archives_verified": 17,
+  "archive_bytes_verified": 991109120,
+  "candidate_catalogue_sha256": "5c33b5e0496bcdaf02c4e78654ade71b454a2e61ea32c74adb2fb1dd0d88e72d",
+  "input_bindings_sha256": "7f074d57764ba98e867d11d0c642f780998f0b45e38c28c3ac992df48c7e5539",
+  "code_sha256": "83128aae90ffec8a8ffb598f04aaa31ecdb29121e14fe38feb7461ad750481f5",
+  "annotation_scores_used": false,
+  "roles_assigned": false,
+  "audio_decodes": 0,
+  "new_model_calls": 0,
+  "scope": "Metadata candidates only. Byte novelty needs decoded-PCM verification. Historical voice/text reuse is reported, not silently relabelled as unseen. No within-study role, source or calibrated-confidence qualification yet."
+}

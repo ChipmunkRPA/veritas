@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.image-scope-replay-execution/50",
+  "freeze_sha256": "1da61f2bad2f235c0ffb9b107b4d940d5c2dc63cdcddfc3146c122e83ec458d1",
+  "result_sha256": "2872071690d3efe961da763c9d30d421b58f438900a58620c971dfa900727d91",
+  "frozen_code_bindings_reverified": 485,
+  "profiles": [
+    {
+      "phase": "native-image-scope-replay-v50-preparation-profile",
+      "profile_sha256": "6696105f7bcb494abff4cad1d18ff6a8dc10b61f4b4d8ef5073d433626637542",
+      "duration_s": 1.045207625022158,
+      "sampled_tree_rss_bytes": 203620352
+    },
+    {
+      "phase": "phase-000-profile",
+      "profile_sha256": "98c6a4d403c7df75bd6b4ace14158780b94def2ee6148ccc1059e186fbe7aee4",
+      "duration_s": 13.270615500048734,
+      "sampled_tree_rss_bytes": 881098752
+    },
+    {
+      "phase": "phase-001-profile",
+      "profile_sha256": "e8829dcf8f2563fd6c9b69066bb92730eeca3b440602e783978565a77f61762d",
+      "duration_s": 14.062500083935447,
+      "sampled_tree_rss_bytes": 1108328448
+    },
+    {
+      "phase": "phase-002-profile",
+      "profile_sha256": "992823fcc1cc6caedd5eb130fa2e0251a58fabd8eab5cdfb9d0266666ca4287f",
+      "duration_s": 13.287425125017762,
+      "sampled_tree_rss_bytes": 1108557824
+    },
+    {
+      "phase": "phase-003-profile",
+      "profile_sha256": "659593b504e0fbe81374244e7c1a37666d73c55a3e9544e3ffe1a2b63cab7ded",
+      "duration_s": 17.485633750096895,
+      "sampled_tree_rss_bytes": 2076311552
+    },
+    {
+      "phase": "phase-004-profile",
+      "profile_sha256": "406b42ff5de0adab34f7cf309324ca8a0c691da595cefb9e9b43f05197c2138e",
+      "duration_s": 15.379493874963373,
+      "sampled_tree_rss_bytes": 1137541120
+    },
+    {
+      "phase": "seal-profile",
+      "profile_sha256": "e0fd066504d38abfb19bc372c58c9ed1d3e78d5525eb7a4d576463dfde07634f",
+      "duration_s": 0.784887042012997,
+      "sampled_tree_rss_bytes": 203046912
+    }
+  ],
+  "all_profiles_passed": true,
+  "new_model_calls": 0,
+  "old_decisions_masks_databases_pdfs_unchanged": true,
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false,
+  "model_defaults_changed": false,
+  "protected_audio_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf"
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "chipmunk.diffseg-validation-metadata-review/31",
+  "release_revision": "8049819755ff430dcf4701636b14e6f1df6c4542",
+  "scope": "Validation ZIP directory and named JSONL metadata only; training archive unreviewed. Not an image, generator, detector or quality evaluation.",
+  "archive_declared_bytes": 4875233472,
+  "declared_lfs_sha256": "32119d10c36b3101c0da5b4daec810113bc150ce0f8b0256412a463e6aa2acef",
+  "full_archive_sha256_verified": false,
+  "directory_entries": 12004,
+  "paired_image_mask_stems": 6001,
+  "sidecar_rows": 6001,
+  "sidecar_field_sets": [
+    {
+      "fields": [
+        "image_file_name",
+        "mask_file_name"
+      ],
+      "rows": 6001
+    }
+  ],
+  "sidecar_uncompressed_bytes": 492082,
+  "sidecar_crc32_verified": true,
+  "sidecar_sha256": "dbd141497fa860d0c4509c9918f2e2d08d4081d69c9a3dc873a10707099ab291",
+  "exact_archive_range_requests": 7,
+  "archive_metadata_bytes_read": 1380934,
+  "png_payload_bytes_read": 0,
+  "generator_weights_acquired": 0,
+  "neural_forwards": 0,
+  "media_admitted_for_fresh_testing": false,
+  "new_source_pairs_publicly_shared": 0,
+  "private_result_sha256": {
+    "directory": "5e3a94f21ca54a6040ae4babc6483175b3a6e8881b81ef873140ae97df0c8a41",
+    "cached_review": "fb3ebba3fe03dc479cf5c43c13aa0e2f737b820c4dc23061d350bae730603f5c",
+    "sidecar": "de2ce8779a01e701ef53ef05e34b5d081265b76496ac9c6c399687903f5f321b"
+  },
+  "resource_attempts": {
+    "directory_original": {
+      "child_exit_code": 0,
+      "guard": "monitor_or_live_sampling_error",
+      "sample_errors": 1,
+      "elapsed_s": 1.3449771669693291,
+      "sampled_tree_rss_lower_bound_bytes": 39845888,
+      "original_failure_preserved": true,
+      "profile_sha256": "dea7939f7d42bfdee67f3c39d33be21c3fbbaa14a09a74184c71b7738b4cd257"
+    },
+    "cached_review": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sample_errors": 0,
+      "elapsed_s": 0.26231204194482416,
+      "sampled_tree_rss_lower_bound_bytes": 5832704,
+      "original_failure_preserved": false,
+      "profile_sha256": "8ae1a9388e284adb36c44a2882a18c0bcee8820f39096643c91cf88a15d7531a"
+    },
+    "named_jsonl": {
+      "child_exit_code": 0,
+      "guard": null,
+      "sample_errors": 0,
+      "elapsed_s": 1.3096500829560682,
+      "sampled_tree_rss_lower_bound_bytes": 39960576,
+      "original_failure_preserved": false,
+      "profile_sha256": "4239cefd95a14d52a5329c37db69a327925398afaf9c66a2c16739649b0aaa21"
+    }
+  },
+  "source_urls": [
+    "https://huggingface.co/datasets/Chaos2629/Diffseg30k/tree/8049819755ff430dcf4701636b14e6f1df6c4542",
+    "https://arxiv.org/html/2511.19111v2",
+    "https://github.com/cocodataset/cocodataset.github.io/blob/master/dataset/termsofuse.htm"
+  ],
+  "outside_human_review": false,
+  "outreach_performed": false,
+  "serving_admitted": false
+}

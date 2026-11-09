@@ -1,0 +1,11 @@
+{
+  "schema": "chipmunk.audio-confidence-role-preparation-failure/70",
+  "stage": "metadata-only-clone-voice-support",
+  "reason": "The fixed ordering and globally distinct full/eight-word-prefix policy support21 new cloned voices with three utterances, not40. No roles plan, source decode or neural call completed. Preserve the original recipe.",
+  "supported_voices_with_three_utterances": 21,
+  "supported_voices_with_two_utterances": 41,
+  "required_voices": 40,
+  "code_sha256": "863344cc14b78b58f4d2219fee30126f92bf1d31e5a72f9d5e22b4aad8db8b55",
+  "new_model_calls": 0,
+  "successor": "v71 retains original seed/order and uses two distinct utterances per cloned voice"
+}

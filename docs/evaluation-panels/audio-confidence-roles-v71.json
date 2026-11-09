@@ -1,0 +1,63 @@
+{
+  "schema": "chipmunk.audio-confidence-source-role-summary/71",
+  "roles": {
+    "fusion_fit": {
+      "genuine": 56,
+      "clone": 20,
+      "expressive": 24,
+      "stock_generation": 16
+    },
+    "confidence_cal": {
+      "genuine": 56,
+      "clone": 20,
+      "expressive": 24,
+      "stock_generation": 16
+    },
+    "selection": {
+      "genuine": 56,
+      "clone": 20,
+      "expressive": 24,
+      "stock_generation": 16
+    },
+    "confirmation": {
+      "genuine": 56,
+      "clone": 20,
+      "expressive": 24,
+      "stock_generation": 16
+    }
+  },
+  "planned_foreground_sources": 464,
+  "planned_actual_source_voices": 136,
+  "historically_unseen_foreground_voices": 112,
+  "historically_seen_expressive_voices": 24,
+  "genuine_stock_matched_voice_pairs": 16,
+  "backgrounds": {
+    "fusion_fit": {
+      "speech": 4,
+      "noise": 4,
+      "music": 4
+    },
+    "confidence_cal": {
+      "speech": 4,
+      "noise": 4,
+      "music": 4
+    },
+    "selection": {
+      "speech": 4,
+      "noise": 4,
+      "music": 4
+    },
+    "confirmation": {
+      "speech": 4,
+      "noise": 4,
+      "music": 4
+    }
+  },
+  "rejected_clone_voice_pools_before_selection": 130,
+  "recipe_sha256": "3c45cdbb89b617fdda938bee6b0b7ca63aa516d1b42b73ffc7c85031428bd977",
+  "code_sha256": "450dd1b3c0a43cd0cbed6e1b865cafdd23fcad17f4d1d7c10373a407e83bbd08",
+  "production_source_qualification_complete": false,
+  "stock_generation_complete": false,
+  "new_model_calls": 0,
+  "scope": "Prospective source roles and deterministic candidate eligibility, not qualified source bytes, fitted confidence or model validation. Historical expressive-voice/music exposure is explicit. Exact selected source and prompt freeze remains required before generator/detector calls."
+}

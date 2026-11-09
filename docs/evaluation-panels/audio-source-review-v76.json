@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.audio-confidence-source-bfs-review/76",
+  "status": "complete",
+  "corrected_manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "original_manifest_sha256": "c222df9ea7fc5e201258600547707a454ef73394b0288f38dd64cccec2165755",
+  "reviewer_sha256": "d58c3cc71e190c6583553a41661639d9120b3d191aaed32ce492c0a45b005134",
+  "original_media_files_reverified": 448,
+  "pending_matched_prompts_preserved": 64,
+  "planned_source_nodes": 512,
+  "connected_source_components": 157,
+  "cross_role_components": 0,
+  "role_support": {
+    "confirmation": {
+      "foreground_groups": 28,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 18,
+      "background_groups": 12
+    },
+    "confidence_cal": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    },
+    "selection": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    },
+    "fusion_fit": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    }
+  },
+  "original_labels_content_and_bytes_preserved": true,
+  "new_model_calls": 0,
+  "scope": "Separate breadth-first source graph and immutable-content/physical-byte review, not a second decoding pass, biometric proof, model accuracy or outside human review.64 sources still require matched generation."
+}

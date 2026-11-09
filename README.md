@@ -108,6 +108,12 @@ cases incorrectly leaning original. Its coverage gain supports further combined-
 confidence calibration; the serving model and confidence remain unchanged. The
 report retains all methods, conditions, source limits and the interrupted run.
 
+The [next confidence-calibration source panel](docs/audio-confidence-source-qualification-v75.md)
+has 400 verified original speech files and 48 backgrounds; 64 matched synthetic
+files remain to generate. A pre-model ancestry audit corrected shared dialogue
+connections while retaining the selected recordings. No new confidence has
+been fitted or enabled from this panel.
+
 The historical cross-media study completed 288 analyses. It exposed missed local
 image edits and face swaps, noise-related audio uncertainty, and inconclusive
 article results. It is an evaluation of its frozen decision rules, not a universal

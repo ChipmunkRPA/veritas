@@ -1,0 +1,55 @@
+{
+  "schema": "chipmunk.audio-shared-fixed-monitor-profile/72",
+  "module": "scripts.audio_source_qualification_v72",
+  "arguments": [],
+  "child_started": true,
+  "child_exit_code": 0,
+  "guard": null,
+  "sample_errors": 0,
+  "sampling_error_events": [],
+  "terminal_observations": [
+    {
+      "pid": 76503,
+      "type": "NoSuchProcess",
+      "classification": "verified_descendant_exit_during_memory_sample"
+    },
+    {
+      "pid": 76870,
+      "type": "NoSuchProcess",
+      "classification": "verified_descendant_exit_during_memory_sample"
+    },
+    {
+      "pid": 76944,
+      "type": "NoSuchProcess",
+      "classification": "verified_descendant_exit_during_memory_sample"
+    },
+    {
+      "pid": 77265,
+      "type": "NoSuchProcess",
+      "classification": "verified_descendant_exit_during_memory_sample"
+    }
+  ],
+  "resource_limit_observations": [],
+  "last_observation": {
+    "elapsed_s": 83.0120634160703,
+    "tree_rss_bytes": 0,
+    "ram_available_bytes": 6726582272,
+    "disk_free_bytes": 9834790912,
+    "checkpoint_disk_free_bytes": 7855914090496,
+    "violations": []
+  },
+  "sampled_tree_rss_lower_bound_bytes": 892157952,
+  "minimum_observed_available_ram_bytes": 5913133056,
+  "minimum_observed_free_disk_bytes": 9831669760,
+  "resource_journal_sha256": "04b4445c9544b287fa3f08d89e8f97327a6f20cfa13565d7abf44e5c64e6a6b0",
+  "duration_s": 83.0136482079979,
+  "limits": {
+    "seconds": 900,
+    "sampled_tree_rss_bytes": 6442450944,
+    "ram_and_disk_reserve_bytes": 1610612736,
+    "initial_ram_headroom_bytes": 6442450944,
+    "initial_disk_headroom_bytes": 3221225472
+  },
+  "monitor_implementation_sha256": "dc1ad38327a2e4ed2f8f0d8f18853ceeb73825ea97b12d44a62e5da4b9d31e47",
+  "scope": "One explicit original-audio source qualification stage using fixed v71 roles and verified descendant-exit handling, with no model or VAD calls. Consumed parity must pass before fresh model calls. No retry, fallback or overwrite. Missing live workers and all resource violations remain failures. RSS is sampled, not a true peak guarantee."
+}

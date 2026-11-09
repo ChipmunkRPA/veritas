@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-source-adverse-review/76",
+  "original_corrected_manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "cases": [
+    {
+      "case": "cross_role_clone",
+      "rejected": true,
+      "reason": "Known ancestry crosses roles",
+      "altered_manifest_sha256": "684b85ebf42447711291954ae7dedc26067969d512ea682eaf33570d53bcd9d4"
+    },
+    {
+      "case": "changed_original_truth",
+      "rejected": true,
+      "reason": "Original source/label/content changed",
+      "altered_manifest_sha256": "e6aaaafecd64f57352a950200f985ef8a08983f57c6a8d120d10a258d6164d94"
+    },
+    {
+      "case": "changed_paired_prompt",
+      "rejected": true,
+      "reason": "Pending source prompt/profile/role changed",
+      "altered_manifest_sha256": "a83805578f496feec67f788d967e335706731dd1f7d8ce36e5823072f6f2557f"
+    }
+  ],
+  "new_model_calls": 0,
+  "original_files_modified": false
+}

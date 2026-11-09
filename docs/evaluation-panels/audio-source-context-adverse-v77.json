@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-primary-context-adverse-review/77",
+  "manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "cases": [
+    {
+      "case": "changed_clone_context",
+      "rejected": true,
+      "reason": "Source context differs from original provenance",
+      "altered_manifest_sha256": "1090b65f312c880bc0a24e7aa269c01345fdcad8edffddf424a6f736deeea606"
+    },
+    {
+      "case": "changed_expressive_context",
+      "rejected": true,
+      "reason": "Source context differs from original provenance",
+      "altered_manifest_sha256": "60c42316ae7061a805878022a7fd901e6e435ba7548bbb9b374fe00fd717da85"
+    },
+    {
+      "case": "changed_genuine_context",
+      "rejected": true,
+      "reason": "Source context differs from original provenance",
+      "altered_manifest_sha256": "d1734f9f175e8d65200d11b945b45267cba3df6ee2c131c2f4eedab918028128"
+    }
+  ],
+  "new_model_calls": 0,
+  "original_files_modified": false
+}

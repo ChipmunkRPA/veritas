@@ -1,0 +1,71 @@
+{
+  "schema": "chipmunk.audio-confidence-source-qualification-summary/72",
+  "qualified_original_foregrounds": 400,
+  "qualified_backgrounds": 48,
+  "pending_matched_synthetic_sources": 64,
+  "roles": {
+    "fusion_fit": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56
+      },
+      "backgrounds": {
+        "speech": 4,
+        "noise": 4,
+        "music": 4
+      },
+      "pending_stock_sources": 16
+    },
+    "confidence_cal": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56
+      },
+      "backgrounds": {
+        "speech": 4,
+        "noise": 4,
+        "music": 4
+      },
+      "pending_stock_sources": 16
+    },
+    "selection": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56
+      },
+      "backgrounds": {
+        "speech": 4,
+        "noise": 4,
+        "music": 4
+      },
+      "pending_stock_sources": 16
+    },
+    "confirmation": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56
+      },
+      "backgrounds": {
+        "speech": 4,
+        "noise": 4,
+        "music": 4
+      },
+      "pending_stock_sources": 16
+    }
+  },
+  "rejected_candidates": {
+    "shorter_than_frozen_minimum": 1
+  },
+  "source_recipe_sha256": "3c45cdbb89b617fdda938bee6b0b7ca63aa516d1b42b73ffc7c85031428bd977",
+  "manifest_sha256": "c222df9ea7fc5e201258600547707a454ef73394b0288f38dd64cccec2165755",
+  "qualification_journal_sha256": "dd7ae1d56f2db359ef568bcba9e6c053effd2271c0e3922bdbef528f4d78bca4",
+  "code_sha256": "6a0f1d02411454c8cb03e5e750f7c57227c5cf621735912c60dfc504df6b7c59",
+  "duration_s": 73.29561266710516,
+  "new_model_calls": 0,
+  "calibration_fitted": false,
+  "scope": "Complete original bytes and production PCM for role-bound sources, not detector quality.64 matched synthesis sources remain pending a separately published generator freeze. Source IDs/text/PCM hashes remain private. Four-second foreground scope; shorter natural utterances remain unqualified."
+}

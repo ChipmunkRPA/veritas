@@ -1,0 +1,74 @@
+{
+  "schema": "chipmunk.audio-confidence-ancestry-correction-summary/75",
+  "original_manifest_sha256": "c222df9ea7fc5e201258600547707a454ef73394b0288f38dd64cccec2165755",
+  "original_shared_dialogues_crossing_roles": 8,
+  "new_cross_role_components": 0,
+  "clone_voice_components": 29,
+  "clone_component_voice_sizes": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "clone_records_moved_before_any_model_call": 60,
+  "original_foregrounds_preserved": 400,
+  "original_backgrounds_preserved": 48,
+  "matched_synthesis_prompts_preserved": 64,
+  "connected_role_support_including_pending": {
+    "fusion_fit": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    },
+    "confidence_cal": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    },
+    "selection": {
+      "foreground_groups": 27,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 17,
+      "background_groups": 12
+    },
+    "confirmation": {
+      "foreground_groups": 28,
+      "genuine_groups": 14,
+      "ai_groups_including_pending": 18,
+      "background_groups": 12
+    }
+  },
+  "original_qualification_profile_sha256": "4e5c45facd72fd20e868bad8c54821ec0df057a8e4faf45517accb79ef2499db",
+  "corrected_manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "code_sha256": "e3354f9ca4519035202da9a6f8f31eac486e0d25017441e7d703e598fed8d53a",
+  "new_model_calls": 0,
+  "defaults_changed": false,
+  "scope": "Original decoding integrity remains valid; v71/v72 role independence is superseded for shared dialogue ancestry. All selected media/text retained. Corrected before any new generation, detector inference or confidence fitting. Pending synthesis still needs its own freeze and qualification."
+}

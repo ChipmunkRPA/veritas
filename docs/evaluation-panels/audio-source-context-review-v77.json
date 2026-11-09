@@ -1,0 +1,59 @@
+{
+  "schema": "chipmunk.audio-primary-context-and-role-review/77",
+  "status": "complete",
+  "manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "reviewer_sha256": "937b2358fcbe964bf6777f0d44a77aa5d488e43dd2755c775e1905942301b2f1",
+  "source_contexts_verified": 448,
+  "expressive_sidecars_verified": 96,
+  "clone_primary_parent_utterance_contexts_verified": 80,
+  "declared_permissions": {
+    "MIT (publisher PLN scenario declaration)": 80,
+    "CC-BY-4.0": 336,
+    "Public-domain": 16,
+    "CC-BY-3.0": 16
+  },
+  "permissions_are_publisher_declarations": true,
+  "source_graph_review": {
+    "schema": "chipmunk.audio-confidence-source-bfs-review/76",
+    "status": "complete",
+    "corrected_manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+    "original_manifest_sha256": "c222df9ea7fc5e201258600547707a454ef73394b0288f38dd64cccec2165755",
+    "reviewer_sha256": "d58c3cc71e190c6583553a41661639d9120b3d191aaed32ce492c0a45b005134",
+    "original_media_files_reverified": 448,
+    "pending_matched_prompts_preserved": 64,
+    "planned_source_nodes": 512,
+    "connected_source_components": 157,
+    "cross_role_components": 0,
+    "role_support": {
+      "confirmation": {
+        "foreground_groups": 28,
+        "genuine_groups": 14,
+        "ai_groups_including_pending": 18,
+        "background_groups": 12
+      },
+      "confidence_cal": {
+        "foreground_groups": 27,
+        "genuine_groups": 14,
+        "ai_groups_including_pending": 17,
+        "background_groups": 12
+      },
+      "selection": {
+        "foreground_groups": 27,
+        "genuine_groups": 14,
+        "ai_groups_including_pending": 17,
+        "background_groups": 12
+      },
+      "fusion_fit": {
+        "foreground_groups": 27,
+        "genuine_groups": 14,
+        "ai_groups_including_pending": 17,
+        "background_groups": 12
+      }
+    },
+    "original_labels_content_and_bytes_preserved": true,
+    "new_model_calls": 0,
+    "scope": "Separate breadth-first source graph and immutable-content/physical-byte review, not a second decoding pass, biometric proof, model accuracy or outside human review.64 sources still require matched generation."
+  },
+  "new_model_calls": 0,
+  "scope": "Primary metadata/context and declared-permission validation plus separate breadth-first role graph. Does not establish consent, biometric identity, pretrained independence or model quality. Noise license is inherited from its frozen source recipe, not silently invented on the decoded record."
+}

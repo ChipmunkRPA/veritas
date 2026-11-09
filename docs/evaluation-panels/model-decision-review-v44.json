@@ -1,0 +1,234 @@
+{
+  "schema": "chipmunk.owner-directed-model-decision-review/44",
+  "reviewed_studies": [
+    {
+      "modality": "image",
+      "source": "docs/image-iml-zoom-v16-result.md",
+      "source_sha256": "17643c74c9b1f2f8457ccec3e4c97a720f863c08feac7e566aa63c1e81f52c1c",
+      "revised_research_disposition": "Low-priority comparator; zero useful crop locations and the historical discrete numerical audit failure remain unchanged.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "image",
+      "source": "docs/image-relayformer-v18-result.md",
+      "source_sha256": "c94239c842fedb9c62eb5ea6609538481b4f79184f9b5f16ab338b9818aea54a",
+      "revised_research_disposition": "Reopen the architecture rather than treating one failed readout as universal rejection; its later adapted model is now a high-priority candidate.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "image",
+      "source": "docs/image-regional-calibration-v43-results.md",
+      "source_sha256": "086ca7c2e5eb8fd331c05207bd35955add43b61c3aabbe2a1287757631e055c0",
+      "revised_research_disposition": "Reopen the adapted native candidate under owner-directed tradeoff comparison; original per-control zero-increase failure remains historical.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-noise-view-v4-evaluation.md",
+      "source_sha256": "669f6062f8cc02162502cb19fb473d43c73fc4123912bf2ea76cb494fb8a69da",
+      "revised_research_disposition": "Retain as a second-view comparator: fewer false-original calls but more abstention; assess complementary cases.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-quality-v5-evaluation.md",
+      "source_sha256": "6c936bd38eecd088f4ed20538a8b8c928a601173ef725e63081563933e3efd23",
+      "revised_research_disposition": "Retain quality-conditioned calibration as a comparison; separate music gains from strong-noise losses.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-residual-v6-evaluation.md",
+      "source_sha256": "3d781ef6ad0414f4994acfa1c77f82c6c176d646ecfedfb33cbe330baf6183fc",
+      "revised_research_disposition": "Reopen near-baseline residual mapping: fewer false-original calls with modest loss of coverage; compare its full operating curve.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-guard-v7-evaluation.md",
+      "source_sha256": "7d82edd93fdd1d9a1571040bc483f822b11f855d82d3150ec3d609134e5af8b7",
+      "revised_research_disposition": "Retain the passing development result alongside the separate confirmation tradeoff; do not discard the decision-layer family.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-guard-v7-confirmation-evaluation.md",
+      "source_sha256": "005f3ea14c346e22483712a593e8e8599d6c9ca0caede7e77461fc9930e8ded6",
+      "revised_research_disposition": "Reopen: 823 versus 761 correct conclusions, with 38 versus 35 false AI and 52 versus 39 false-original calls. Keep the noisy-AI failure visible.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-identity-v9-development-evaluation.md",
+      "source_sha256": "1bb72117c24e814b9ff5c4fe35768a9e6d4637c3ff3bcd2d9565c72b637d7067",
+      "revised_research_disposition": "Reopen as a low-false-alarm and probability-score alternative; retain source/speaker grouping correction.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-conditional-v10-development-evaluation.md",
+      "source_sha256": "08e5b03c1dc491c88fe207bf818d1749d93db48c50e58dcdc2784098d28a95aa",
+      "revised_research_disposition": "Retain nonlinear and quality combinations for comparative calibration; quality-only remains low priority.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-full-representation-v11-development-evaluation.md",
+      "source_sha256": "cecd7c1d472c381c7e291ef467292274a626fc240cc47b6fa215da1c48e05829",
+      "revised_research_disposition": "Reopen full-vector calibration and its projection control; compare probability quality, coverage and new/lost cases.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-layer-v12-development-evaluation.md",
+      "source_sha256": "faeb64883035210048481fc8ad71c5126f33c2ac97efcc59ef1df6277cd1c766",
+      "revised_research_disposition": "Reopen multilayer features as a complementary view; lower proper-score error and fewer false alarms merit comparison despite missed calls.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-wavlm-v13-development-evaluation.md",
+      "source_sha256": "3239a7c45310c08f1a6b9b25d165cbf4bccc19fe229403c7195bf4d00813ea4e",
+      "revised_research_disposition": "Prioritize combined features for noise/music comparisons; overlapping-speech weakness must remain separately reported.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-separation-v14-development-evaluation.md",
+      "source_sha256": "a804861f9097ec57036892dceb9ba3b1af99b2014e0fb8acdd2c728d09ea8260",
+      "revised_research_disposition": "Keep combined separation as a cautious secondary comparator; standalone separation remains low priority because almost all calls abstain.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "audio",
+      "source": "docs/audio-specialists-v15-result.md",
+      "source_sha256": "098902ec93d32a6aa934b8ff1e4837644aa746793d45b68538abcd125ee0d745",
+      "revised_research_disposition": "Reopen pooled/context-specific variants together; fewer false alarms and fewer AI detections are a tradeoff, not an automatic rejection.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "text",
+      "source": "docs/writing-focus-v3-development-result.md",
+      "source_sha256": "8deca9202e1a46d9baf83f676e1c1f5e598196c91a260bbd309e8117e590a127",
+      "revised_research_disposition": "Retain both context/focus views as sensitivity comparators while exposing their large human-highlight burden.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "text",
+      "source": "docs/writing-modernbert-v4-development-evaluation.md",
+      "source_sha256": "cab88ce22aa9fbd16da9cf5cef4cf2c42bf8c0b3ab35d74846a264be7270ad7c",
+      "revised_research_disposition": "Lower priority in this panel because origin ranking and both error directions worsen; no architecture-wide rejection.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "text",
+      "source": "docs/writing-specialists-v5-result.md",
+      "source_sha256": "bfc19e0489479c14d8a02b310a287548e89fc4585ada22daa94c68494271b60f",
+      "revised_research_disposition": "Reopen length-specific/two-detector calibration: lower Brier and false alarms with more misses need a balanced comparison.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "text",
+      "source": "docs/scoped-writing-v6-result.md",
+      "source_sha256": "37ba5d0819d141143ef37847f22e5640662cc64e460c5a9214c3751c31b81952",
+      "revised_research_disposition": "Reopen all eight scoped alternatives; an extra useful detection with an extra false alarm is a tradeoff, not automatic failure.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "text",
+      "source": "docs/writing-spans-v7-result.md",
+      "source_sha256": "22565a4c243fa976451c997dc34507a8c12555b0f44ba67aaf40598c50b4befa",
+      "revised_research_disposition": "Prioritize the interval head as complementary evidence. Actual fixed two-model unions are measured in this review.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-upgrade-evaluation.md",
+      "source_sha256": "1469dc2d9df124e4c7b4640236fc0a9a64acdc4977f5a13dc1ee82fdbef9899f",
+      "revised_research_disposition": "Reopen AEGIS ranking and calibration under multi-domain comparison. CakeLens remains a runtime-qualified candidate needing a cohort test; licensing exclusions remain.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-sequence-v6-evaluation.md",
+      "source_sha256": "7f2b2bc611ba201d8a4650750071f4af2447366ca87c2a9b09c68ca3e16e41dc",
+      "revised_research_disposition": "Keep the qualified sequence method and normalized/raw alternatives in shared comparisons; preserve rollback.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-demamba-v13-result.md",
+      "source_sha256": "86cf2e5cea00a5d8191226dbca84bfbefd0c98be3550ff01793511740b17e1d2",
+      "revised_research_disposition": "Keep as a low-priority comparator; distinguish the measured all-inconclusive mapping from a universal architectural rejection.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/local-face-appearance-v17-rollout.md",
+      "source_sha256": "3811b968c299a2d479294e641b8fb10d5e5aa6500f731be195989f8e3557b8da",
+      "revised_research_disposition": "Keep the locally integrated appearance cue as a strong reference, with zero authorship-confidence weight until specific evidence supports it.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-face-specialists-v20-result.md",
+      "source_sha256": "7af64e0b1b03d998b2c988d0866b2c58719114ac442e8bb1b2447be485acef4e",
+      "revised_research_disposition": "Reopen calibrated combinations for complementary localization comparisons; compare against the strong raw appearance reference, not only crop-only.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-genuine-edits-v24-result.md",
+      "source_sha256": "5305b8525778200278a4083dd0f19a3a0119aa86d225c8d4c5d55afa782933ac",
+      "revised_research_disposition": "Retain the ordinary-edit limitation: detecting an appearance transition is not proof of AI authorship. Broaden controls rather than remove the cue.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/video-background-context-v25-result.md",
+      "source_sha256": "ea486134dd487c573c2bcca88a14edc8281a1f59e4967c9de964aea82a0a8195",
+      "revised_research_disposition": "Retain the small context gain as a candidate component; compare extra localized swaps, false flags and added cost rather than all-or-nothing adoption.",
+      "historical_result_rewritten": false
+    },
+    {
+      "modality": "video",
+      "source": "docs/mouth-audio-context-v14-result.md",
+      "source_sha256": "8cc32651dcb2b03da8af7e0bf1d22b751fee76cb1142236625ebc343253e8879",
+      "revised_research_disposition": "Reopen as a sensitive review cue: 31/32 versus 26/32 edits, with 24/56 versus 12/56 ordinary flags. Do not call audiovisual mismatch proof of AI.",
+      "historical_result_rewritten": false
+    }
+  ],
+  "reviewed_study_count": 28,
+  "modality_counts": {
+    "image": 3,
+    "audio": 12,
+    "text": 5,
+    "video": 8
+  },
+  "comparison_result_sha256": "5f994a20adeb04d0362efab4104d64b9cf0a0feb1aa85af5faa06e4f3770cfc5",
+  "code_and_tests_sha256": {
+    "backend/scripts/evaluation_tradeoffs_v44.py": "943e5318514f3c47b5736031420e20b807bd8f9d433517c2c8691bd019e08b7e",
+    "backend/scripts/review_multimodal_tradeoffs_v44.py": "ef9d1ebc438e14a9235aaae53b6c4e94a488a60e7cc96db674b0bd16f906e436",
+    "backend/tests/test_evaluation_tradeoffs_v44.py": "2012b3f906ee6e41a8f841be6aaabeff4646df788fc0f590c116c312be149889",
+    "backend/tests/test_review_multimodal_tradeoffs_v44.py": "d7bdc9ab5cd4360650cacc63e062be412e751dec1bced6c2e9e3cdf264844e62"
+  },
+  "focused_local_tests_passed": 42,
+  "ruff_passed": true,
+  "local_modes_observed": {
+    "audio_detector_mode": "candidate",
+    "video_face_review_mode": "appearance",
+    "text_detector_mode": "candidate"
+  },
+  "repository_defaults_changed": false,
+  "new_neural_forwards_for_this_review": 0,
+  "reused_writing_documents": 288,
+  "writing_standalone_masks_reproduced": 864,
+  "new_writing_combination_masks_evaluated": 864,
+  "historical_failed_review_attempt_retained": true,
+  "historical_failure_reason": "First new review expected a per-row ok status on a complete phase receipt; refused before output. Corrected validator requires actual complete phase status, exact count, role and freeze binding. Separate successful outputs retained.",
+  "fresh_source_validation": false,
+  "customer_confidence_changed": false,
+  "github_workflows_required": false,
+  "outreach_sent": false,
+  "scope": "Reconsider research dispositions, not rewrite old experiments or declare all candidates successful. Keep multiple candidates and complementary cases; no automatic rejection for a modest error increase. License, integrity, source grouping, unknown handling and an untouched final benchmark remain requirements."
+}

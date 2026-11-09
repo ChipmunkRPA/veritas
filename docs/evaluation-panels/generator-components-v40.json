@@ -1,0 +1,254 @@
+{
+  "schema": "chipmunk.generator-component-and-runtime-review/40",
+  "generator_candidates": [
+    {
+      "repository": "mlx-community/flux2-klein-4b-4bit",
+      "revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+      "card_license": "apache-2.0",
+      "public_ungated": true,
+      "model_card_url": "https://huggingface.co/mlx-community/flux2-klein-4b-4bit/blob/860e87183ceb29e39627c0612ebd66d8ea66e68c/README.md",
+      "selected_weight_file_count": 5,
+      "publisher_declared_weight_bytes": 4608176698,
+      "weight_file_hash_status": "Publisher-declared LFS OIDs only; no model weights downloaded or byte-verified",
+      "weight_files": [
+        {
+          "path": "text_encoder/0.safetensors",
+          "bytes": 2135435122,
+          "publisher_declared_sha256": "c2d90b9bcb81b6f4205033e592af5117b13bda0e2ef1e4c5d910920d20102234"
+        },
+        {
+          "path": "text_encoder/1.safetensors",
+          "bytes": 127582140,
+          "publisher_declared_sha256": "6f9fd41251913a84119daf7ddb3620f37f7ab65d1bcfdffcd33e858cb36774f7"
+        },
+        {
+          "path": "transformer/0.safetensors",
+          "bytes": 2145323732,
+          "publisher_declared_sha256": "3a75fc123a9ceb583b0d0202cc37166da3e1fc0ac8cd4a430987ceaf8e845b27"
+        },
+        {
+          "path": "transformer/1.safetensors",
+          "bytes": 34727761,
+          "publisher_declared_sha256": "06998c075c1d9543f17f1cc7ae7170c365cdb3c09a1f78056804a252bb168fd5"
+        },
+        {
+          "path": "vae/0.safetensors",
+          "bytes": 165107943,
+          "publisher_declared_sha256": "efd1802b013d6b17f30946574b1d23c89b8c8e8181876220c00089efac6a0a2c"
+        }
+      ]
+    },
+    {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+      "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "card_license": "creativeml-openrail-m",
+      "public_ungated": true,
+      "model_card_url": "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-inpainting/blob/8a4288a76071f7280aedbdb3253bdb9e9d5d84bb/README.md",
+      "selected_weight_file_count": 4,
+      "publisher_declared_weight_bytes": 2740652750,
+      "weight_file_hash_status": "Publisher-declared LFS OIDs only; no model weights downloaded or byte-verified",
+      "weight_files": [
+        {
+          "path": "safety_checker/model.fp16.safetensors",
+          "bytes": 608018440,
+          "publisher_declared_sha256": "08902f19b1cfebd7c989f152fc0507bef6898c706a91d666509383122324b511"
+        },
+        {
+          "path": "text_encoder/model.fp16.safetensors",
+          "bytes": 246144864,
+          "publisher_declared_sha256": "77795e2023adcf39bc29a884661950380bd093cf0750a966d473d1718dc9ef4e"
+        },
+        {
+          "path": "unet/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 1719154104,
+          "publisher_declared_sha256": "24b788b4a777748377cc20364eea4ae113c8c42f4468c16bc8c02fdae5492af9"
+        },
+        {
+          "path": "vae/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 167335342,
+          "publisher_declared_sha256": "4fbcf0ebe55a0984f5a5e00d8c4521d52359af7229bb4d81890039d2aa16dd7c"
+        }
+      ]
+    },
+    {
+      "repository": "kandinsky-community/kandinsky-2-2-prior",
+      "revision": "9fc51ad5732afc5d031724219d22e6c42179c5a8",
+      "card_license": "apache-2.0",
+      "public_ungated": true,
+      "model_card_url": "https://huggingface.co/kandinsky-community/kandinsky-2-2-prior/blob/9fc51ad5732afc5d031724219d22e6c42179c5a8/README.md",
+      "selected_weight_file_count": 3,
+      "publisher_declared_weight_bytes": 10573556608,
+      "weight_file_hash_status": "Publisher-declared LFS OIDs only; no model weights downloaded or byte-verified",
+      "weight_files": [
+        {
+          "path": "image_encoder/model.safetensors",
+          "bytes": 3689912664,
+          "publisher_declared_sha256": "657723e09f46a7c3957df651601029f66b1748afb12b419816330f16ed45d64d"
+        },
+        {
+          "path": "prior/diffusion_pytorch_model.safetensors",
+          "bytes": 4104940968,
+          "publisher_declared_sha256": "ab139b2df9e40ed0b1eda8dc6270a139a796c5fa3af76cd6b0573f620dca6dde"
+        },
+        {
+          "path": "text_encoder/model.safetensors",
+          "bytes": 2778702976,
+          "publisher_declared_sha256": "6eaafeea664d7ab87df17274d6114dfdf092c587c7cd56c13cf84aacdebc0332"
+        }
+      ]
+    },
+    {
+      "repository": "kandinsky-community/kandinsky-2-2-decoder-inpaint",
+      "revision": "db790ad5cbcabed886f069ef2710774657621702",
+      "card_license": "apache-2.0",
+      "public_ungated": true,
+      "model_card_url": "https://huggingface.co/kandinsky-community/kandinsky-2-2-decoder-inpaint/blob/db790ad5cbcabed886f069ef2710774657621702/README.md",
+      "selected_weight_file_count": 2,
+      "publisher_declared_weight_bytes": 5283759068,
+      "weight_file_hash_status": "Publisher-declared LFS OIDs only; no model weights downloaded or byte-verified",
+      "weight_files": [
+        {
+          "path": "movq/diffusion_pytorch_model.safetensors",
+          "bytes": 271380364,
+          "publisher_declared_sha256": "43a5860fea195a7116f2471396c5cc9535fade9b63c4857d8a192ffd924b7002"
+        },
+        {
+          "path": "unet/diffusion_pytorch_model.safetensors",
+          "bytes": 5012378704,
+          "publisher_declared_sha256": "098b846d2378b4b44a33e0bd47f89f2886b72a10200cbf9e96d5fae3c471543f"
+        }
+      ]
+    },
+    {
+      "repository": "diffusers/stable-diffusion-xl-1.0-inpainting-0.1",
+      "revision": "115134f363124c53c7d878647567d04daf26e41e",
+      "card_license": "openrail++",
+      "public_ungated": true,
+      "model_card_url": "https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1/blob/115134f363124c53c7d878647567d04daf26e41e/README.md",
+      "selected_weight_file_count": 4,
+      "publisher_declared_weight_bytes": 6938041649,
+      "weight_file_hash_status": "Publisher-declared LFS OIDs only; no model weights downloaded or byte-verified",
+      "weight_files": [
+        {
+          "path": "text_encoder/model.fp16.safetensors",
+          "bytes": 246144867,
+          "publisher_declared_sha256": "fc83cf401d930147807e7c44021c164bcc5508c9d4cc0ff35f4e354685ca9cd0"
+        },
+        {
+          "path": "text_encoder_2/model.fp16.safetensors",
+          "bytes": 1389382884,
+          "publisher_declared_sha256": "a8622bd41f8d359df484fdf9de091edb9337a2fd747f0a5c9c320a62e24d1fd3"
+        },
+        {
+          "path": "unet/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 5135178560,
+          "publisher_declared_sha256": "6470840731e98cc16713ddf3ac7ee458c9fdbcb881a98c6727cd4a938f227d3f"
+        },
+        {
+          "path": "vae/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 167335338,
+          "publisher_declared_sha256": "4ad62825e5c8b31eefb77355ba6693785619bf7d669d9b1a6fd9f19dec6d65b3"
+        }
+      ]
+    }
+  ],
+  "code_runtime": {
+    "mflux_version": "0.24.0",
+    "mflux_wheel_sha256": "682368f04a1b2b0871144a8d57b7f7866e84dd0fd2bc3a765d1d57918e21237e",
+    "packages_exactly_verified": 56,
+    "mflux_package_files_exactly_verified": 1059,
+    "mflux_notice_sha256": "4a232d09478519580a5c00d6eb9aa402ba4f672ac15fb80edd459ba863769064",
+    "private_lock_sha256": "fc202b3b4089d3aacb672933d45f869344852b0a280c0ef5aa0e1acc4c719ce6",
+    "public_lock_sha256": "7963b0a3baff27df29efd171be663ff98f002234d61201b6e0492987399e1ce3",
+    "public_lock_preserves_ordered_pins_and_hashes": true,
+    "backend_versions_unchanged": {
+      "numpy": "2.2.6",
+      "Pillow": "12.3.0",
+      "torch": "2.13.0",
+      "transformers": "5.15.1",
+      "huggingface-hub": "1.28.0",
+      "safetensors": "0.8.0"
+    },
+    "library_import_or_numerical_compatibility_qualified": false,
+    "hardware_or_generator_qualified": false,
+    "profiles": {
+      "runtime-resolution-profile": {
+        "profile_sha256": "5c27f52de3d1a462103c9fb4dcadcfdc81efe0f629e7fffdbf4a40ef420689ad",
+        "child_exit_code": 2,
+        "guard": null,
+        "sample_errors": 0,
+        "duration_s": 0.26516433292999864,
+        "sampled_tree_rss_lower_bound_bytes": 7094272
+      },
+      "runtime-resolution-v2-profile": {
+        "profile_sha256": "d1bf8bac2435ebe1547b319fc295bdf92b615755f515653802c60159908939a8",
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "duration_s": 0.7933863330399618,
+        "sampled_tree_rss_lower_bound_bytes": 83443712
+      },
+      "runtime-installation-profile": {
+        "profile_sha256": "c942f85996e81104388346f1335fa35dc37f97ec565fb51a7029dc7c79d72a84",
+        "child_exit_code": 1,
+        "guard": null,
+        "sample_errors": 0,
+        "duration_s": 18.642416916089132,
+        "sampled_tree_rss_lower_bound_bytes": 118833152
+      },
+      "runtime-qualification-profile": {
+        "profile_sha256": "beb21aa26f3bd5f5874ec0e70db52ad5d49f99e7cbba5e4bc065b9879025e69d",
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "duration_s": 0.5343282079556957,
+        "sampled_tree_rss_lower_bound_bytes": 29130752
+      }
+    }
+  },
+  "full_license_records": [
+    {
+      "name": "sd15-full-license",
+      "url": "https://huggingface.co/spaces/CompVis/stable-diffusion-license/resolve/14d42d09bffd871b1666a084fc954a50cff72ac0/license.txt",
+      "http_status": 200,
+      "bytes": 14385,
+      "sha256": "be351ebe7ac01bcdbb018639aadcfd38f136b7dc3f2a3d4d3a24db51d1b210ef"
+    },
+    {
+      "name": "sdxl-full-license",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+      "http_status": 200,
+      "bytes": 14109,
+      "sha256": "19b6998b569b53ac1fc2158a8a3202c8699a9a4605b47075715d9c96be7fb6d0"
+    },
+    {
+      "name": "qwen3-full-license",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B/resolve/1cfa9a7208912126459214e8b04321603b3df60c/LICENSE",
+      "http_status": 200,
+      "bytes": 11343,
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    },
+    {
+      "name": "flux2-klein-4b-full-license",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B/blob/e7b7dc27f91deacad38e78976d1f2b499d76a294/LICENSE.md",
+      "sha256": "ca02bc51900ab07789d1b70283329e7137f5af98f5161c23a1c81fc38a4af1fe"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mflux-community/mflux/17b47e9aa0fd4b65a3ec03b46db31c911e8ac18d/LICENSE",
+      "bytes": 1068,
+      "sha256": "4a232d09478519580a5c00d6eb9aa402ba4f672ac15fb80edd459ba863769064",
+      "git_blob_sha": "d0c42b14a08ce6212a1a72795659be90d9566459",
+      "earlier_copy_differs_only_by_added_final_newline": true,
+      "earlier_copy_unchanged": true
+    }
+  ],
+  "new_generator_weights_downloaded": false,
+  "generator_outputs": 0,
+  "serving_changed": false,
+  "failed_attempts_retained": [
+    "Initial dependency resolution rejected mutually exclusive redundant CLI options before resolution; separate corrected invocation passed.",
+    "Package installation and version checks completed, then saved MIT notice failed exact-byte check due solely to an added final newline. Original installer remains failed. Separate qualification verified all installed versions,1059 mflux package files against the pinned wheel,and exact upstream notice;no package reinstall."
+  ],
+  "scope": "Candidate generator/runtime source review,not detector validation or blanket commercial deployment admission. Resource RSS values are sampled lower bounds. Weights/metadata sizes do not prove Mac memory fit. No workflow,outreach,GCP or billing action.",
+  "generator_review_project_source_neural_calls": 0
+}

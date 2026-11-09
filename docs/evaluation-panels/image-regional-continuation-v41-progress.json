@@ -1,0 +1,32 @@
+{
+  "schema": "chipmunk.regional-continuation-first-batch-progress/41",
+  "stage": "first_repeated_batch_verified_remaining_suffix_running",
+  "public_continuation_freeze_commit": "1fbbc8a6380998e9d8f74ffb96e314f5254a2b37",
+  "public_continuation_freeze_remote_blob_sha": "dfa6dbc7f4d14234e0dfaec1e3d21ed28d8d7f80",
+  "review": {
+    "schema": "chipmunk.first-continuation-batch-review/41",
+    "accepted_updates": 1088,
+    "repeated_updates": 32,
+    "selected_tensors_exactly_equal": 246,
+    "all_optimizer_states_and_groups_exactly_equal": true,
+    "update_journal_exactly_equal": true,
+    "initial_parameter_chain_from_successful_prefix_exact": true,
+    "new_checkpoint_sha256": "cefb92077c7335f483c589c9ab55078d63f605abef2a68001c65fe5d06c9d72d",
+    "new_successful_profile_sha256": "85fa0b552aed2945fbd1977c9e4be6962cbc475e528f35bb8bcc6c818919c17e",
+    "discarded_original_checkpoint_used_as_training_predecessor": false,
+    "discarded_original_profile_relabelled": false,
+    "neural_forwards_in_this_readonly_review": 0,
+    "held_out_forward_count": 0
+  },
+  "private_review_sha256": "22de77ae389503b62c8266399c6b9128e1bf9d9b95795b19146ab8e3f0e3398b",
+  "private_review_profile_sha256": "6a1c27d5d4b6f3b0bf15c86a430cc225b6b752b22aeb3b202e6a1671093d1949",
+  "successful_fitting_phase_seconds": 302.12663158297073,
+  "successful_fitting_phase_sampled_tree_rss_lower_bound_bytes": 1754923008,
+  "readonly_review_seconds": 1.3395718750543892,
+  "readonly_review_sampled_tree_rss_lower_bound_bytes": 301580288,
+  "remaining_accepted_updates": 190,
+  "local_focused_tests_passed": 37,
+  "held_out_model_forwards": 0,
+  "serving_changed": false,
+  "scope": "Fitting integrity and deterministic restart evidence only,not detector accuracy. First repeated batch and readonly review terminal0/no guard/no sampling errors. Original guarded profile remains failed. Remaining phases run once sequentially; final chain audit and reserved evaluation still required."
+}

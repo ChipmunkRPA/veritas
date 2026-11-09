@@ -1,0 +1,481 @@
+# ruff: noqa
+# MIT, Copyright (c) 2025 WenOOI. See LICENSE-RelayFormer and ORIGINS.json.
+# Only offline construction/import paths changed; forward mathematics preserved.
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import timm
+import numpy as np
+from .GLoRA_vit import DecAttention, replace_vit_modules, build_4d_position_ids
+
+class GatedMaskDecoder(nn.Module):
+    """
+    A decoder module that generates masks using cross-attention, self-attention, and feed-forward networks.
+    """
+
+    def __init__(self, in_channels: int, num_queries: int, hidden_dim: int=256, num_heads: int=8, num_layers: int=1):
+        super().__init__()
+        self.in_channels = in_channels
+        self.hidden_dim = hidden_dim
+        self.num_queries = num_queries
+        self.num_layers = num_layers
+        self.input_proj = nn.Conv2d(in_channels, hidden_dim, kernel_size=3, padding=1)
+        self.gate_mlp = nn.Linear(hidden_dim, 1)
+        self.mask_embed = nn.Embedding(num_queries, hidden_dim)
+        self.layers = nn.ModuleList()
+        for _ in range(num_layers):
+            layer = nn.ModuleDict({'cross_attn': nn.MultiheadAttention(embed_dim=hidden_dim, num_heads=num_heads, dropout=0.1, batch_first=True), 'norm_cross': nn.LayerNorm(hidden_dim), 'self_attn': DecAttention(dim=hidden_dim, num_heads=num_heads, proj_drop=0.1), 'norm_self': nn.LayerNorm(hidden_dim), 'ffn': nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(inplace=True), nn.Linear(hidden_dim, hidden_dim)), 'norm_ffn': nn.LayerNorm(hidden_dim)})
+            self.layers.append(layer)
+        self.final_conv = nn.Sequential(nn.Conv2d(1, 1, kernel_size=3, padding=1))
+
+    def forward(self, x: torch.Tensor, num_patches=4) -> torch.Tensor:
+        B, C, H, W = x.shape
+        x_proj = self.input_proj(x)
+        mask_embed = self.mask_embed.weight.unsqueeze(0).expand(B, -1, -1).contiguous()
+        x_flat = x_proj.flatten(2).permute(0, 2, 1)
+        kv = x_flat
+        q = mask_embed
+        for layer in self.layers:
+            attn_cross, _ = layer['cross_attn'](query=q, key=kv, value=kv)
+            q = layer['norm_cross'](q + attn_cross)
+            attn_self = layer['self_attn'](x=(q, q, q))
+            q = layer['norm_self'](q + attn_self)
+            ffn_out = layer['ffn'](q)
+            q = layer['norm_ffn'](q + ffn_out)
+        mask_queries = q
+        mask_logits = torch.einsum('bnd,bdhw->bnhw', mask_queries, x_proj)
+        gates = self.gate_mlp(mask_queries).sigmoid()
+        final_mask = (mask_logits * gates.unsqueeze(-1)).sum(dim=1, keepdim=True)
+        return final_mask
+
+class RelayFormer(nn.Module):
+    """
+    RelayFormer: unified local-global attention framework for image & video manipulation localization.
+
+    Single `forward` serves three purposes:
+      - training: when `mask` is provided, returns an output dict with `backward_loss`.
+      - testing: same path (IMDLBenCo passes `mask`); the returned `pred_mask` is used by evaluators.
+      - pure inference: when `mask` is None, returns the predicted mask tensor directly.
+
+    Performance design highlights (numerically identical, mode-aware):
+      - Patch reconstruction picks the path that's cheapest for its mode:
+          * training: channels-last slice-add (cheap autograd via slice-grad).
+          * inference / eval: F.fold (one fused kernel, no backward needed).
+      - The global-attention position_ids and key padding mask are built once per forward
+        and reused across all 12 transformer blocks.
+      - Image samples with only one valid patch take an identity short-circuit.
+
+    Image-only / video-only / mixed training is handled entirely by the dataset; the model just
+    sees a flattened batch of frames described by `clip_len` and `origin_shape`.
+    """
+
+    def __init__(self, input_size: int=1024, vit_model_name: str='vit_base_patch16_224', vit_pretrain_path: str='', tokens_per_patch: int=3, edge_lambda: int=20, grid_size: int=0, patch_size: int=528, overlap: int=16, feature_patch_size: int=33, feature_overlap: int=1):
+        """
+        Args (auto-exposed as CLI flags by the IMDLBenCo argparser via type annotations):
+            input_size: model working resolution (must equal dataset image_size).
+            vit_model_name: timm ViT backbone name.
+            vit_pretrain_path: path to a ViT checkpoint (.bin/.pth). Empty -> timm auto-download.
+            tokens_per_patch: number of relay tokens per patch.
+            edge_lambda: weight for the edge-aware BCE loss term.
+            grid_size: max NxN tiling per image. 0 (default) -> derive as input_size // 512.
+                Set explicitly (e.g. 2) to reproduce a fixed tiling at a non-1024 resolution.
+            patch_size / overlap: image-space patch tiling.
+            feature_patch_size / feature_overlap: feature-space patch tiling.
+
+        Resolution presets (input_size : patch_size / feature_patch_size : grid_size):
+            1024 : 528 / 33 : 2   (default; grid auto-derived)
+            512  : 272 / 17 : 2   (pass --grid_size 2 explicitly)
+        """
+        if vit_pretrain_path != 'complete-local-state':
+            raise ValueError('Only a complete verified local state is supported')
+        super().__init__()
+        self.input_size = input_size
+        self.edge_lambda = edge_lambda
+        self.patch_size = patch_size
+        self.overlap = overlap
+        self.feature_patch_size = feature_patch_size
+        self.feature_overlap = feature_overlap
+        self.stride = self.patch_size - self.overlap * 2
+        self.feature_stride = self.feature_patch_size - self.feature_overlap * 2
+        use_timm_pretrained = False
+        vit = timm.create_model(vit_model_name, pretrained=False, num_classes=0, reg_tokens=max(tokens_per_patch - 1, 0), drop_path_rate=0.1, dynamic_img_size=True, no_embed_class=False)
+        pretrained_state = vit.state_dict() if use_timm_pretrained else None
+        self.vit = replace_vit_modules(vit, token_per_patch=tokens_per_patch)
+        self.feature_dim = self.vit.num_features
+        self.tpp = tokens_per_patch
+        if use_timm_pretrained:
+            missing, unexpected = self.vit.load_state_dict(pretrained_state, strict=False)
+            print(f'[RelayFormer] Loaded timm pretrained ViT. missing={len(missing)}, unexpected={len(unexpected)}')
+        else:
+            self._load_vit_checkpoint(vit_pretrain_path)
+        self.grid_size = grid_size if grid_size > 0 else input_size // 512
+        self.mask_decoder = GatedMaskDecoder(in_channels=self.feature_dim, num_queries=8, hidden_dim=256, num_layers=3)
+        self.BCE_loss = nn.BCEWithLogitsLoss()
+
+    def _load_vit_checkpoint(self, path: str):
+        if path != 'complete-local-state':
+            raise ValueError('A complete verified local state is required')
+
+    def merge_lora(self):
+        """Merge all LoRA weights for faster inference. Call before eval."""
+        for block in self.vit.blocks:
+            block.merge_lora()
+
+    def divide_patches(self, x):
+        """Divide input image into patches.
+
+        Training: Python loop with slice + stack — slice has cheap autograd whereas
+            unfold triggers a separate unfold_backward kernel during backward.
+        Inference: torch.unfold — a single fused kernel, no backward concerns.
+        """
+        ps = self.patch_size
+        if self.training:
+            B, C, H, W = x.shape
+            patches = []
+            for y in range(0, H - ps + 1, self.stride):
+                for x_pos in range(0, W - ps + 1, self.stride):
+                    patches.append(x[:, :, y:y + ps, x_pos:x_pos + ps])
+            return torch.stack(patches, dim=1)
+        patches = x.unfold(2, ps, self.stride).unfold(3, ps, self.stride)
+        B, C, n_h, n_w, ph, pw = patches.shape
+        return patches.permute(0, 2, 3, 1, 4, 5).reshape(B, n_h * n_w, C, ph, pw)
+
+    def _prepare_global_attn_context(self, sample_infos, device):
+        """
+        Build, once per forward, the padded position_ids and attn_mask shared by every
+        transformer block in the global stage.
+
+        Returns:
+            lengths    : list[int] (relay-token length per sample)
+            max_len    : int
+            position_ids : LongTensor [4, B, max_len] or None for the single-sample short path
+            attn_mask  : FloatTensor [B, 1, max_len, max_len] or None for the single-sample short path
+        """
+        tpp = self.tpp
+        num_samples = len(sample_infos)
+        lengths = [info['num_patches'] * tpp for info in sample_infos]
+        if num_samples == 1:
+            return (lengths, lengths[0], None, None)
+        max_len = max(lengths)
+        grid_size = self.grid_size
+        pid_np = np.zeros((4, num_samples, max_len), dtype=np.int64)
+        for i, info in enumerate(sample_infos):
+            T = info['clip_len']
+            valid = info['valid']
+            np_ = len(valid)
+            L = T * np_ * tpp
+            valid_arr = np.asarray(valid, dtype=np.int64)
+            r = valid_arr // grid_size
+            c = valid_arr % grid_size
+            h_ids = np.tile(np.repeat(r, tpp), T)
+            w_ids = np.tile(np.repeat(c, tpp), T)
+            t_ids = np.repeat(np.arange(T, dtype=np.int64), np_ * tpp)
+            tpp_ids = np.tile(np.tile(np.arange(tpp, dtype=np.int64), np_), T)
+            pid_np[0, i, :L] = t_ids
+            pid_np[1, i, :L] = tpp_ids
+            pid_np[2, i, :L] = h_ids
+            pid_np[3, i, :L] = w_ids
+        position_ids = torch.from_numpy(pid_np).to(device, non_blocking=True)
+        mask_np = np.zeros((num_samples, 1, max_len, max_len), dtype=np.float32)
+        neg_inf = np.float32('-inf')
+        for i, L in enumerate(lengths):
+            if L < max_len:
+                mask_np[i, 0, :, L:] = neg_inf
+        attn_mask = torch.from_numpy(mask_np).to(device, non_blocking=True)
+        return (lengths, max_len, position_ids, attn_mask)
+
+    def _batched_global_attention(self, relay_tokens_list, sample_infos, block, lengths=None, max_len=None, position_ids=None, attn_mask=None):
+        """
+        Run the global-attention block on relay tokens.
+
+        When called from `forward_features`, the caller passes pre-built `position_ids` and
+        `attn_mask` so they are constructed only once per forward (shared across blocks).
+        If they are not provided we fall back to per-call construction (kept for any
+        external caller that may still rely on the original API).
+
+        Returns a list of processed tensors, each [num_patches_i, tpp, C].
+        """
+        num_samples = len(relay_tokens_list)
+        tpp = self.tpp
+        if num_samples == 1:
+            info = sample_infos[0]
+            processed_flat = block(relay_tokens_list[0], use_lora=1, valid=info['valid'], grid_size=self.grid_size, clip_len=info['clip_len'])
+            return [processed_flat.view(info['num_patches'], tpp, -1)]
+        device = relay_tokens_list[0].device
+        dtype = relay_tokens_list[0].dtype
+        C = relay_tokens_list[0].shape[2]
+        if lengths is None or position_ids is None or attn_mask is None:
+            lengths, max_len, position_ids, attn_mask = self._prepare_global_attn_context(sample_infos, device)
+        padded = torch.zeros(num_samples, max_len, C, device=device, dtype=dtype)
+        for i, (r, l) in enumerate(zip(relay_tokens_list, lengths)):
+            padded[i, :l] = r[0]
+        if attn_mask.dtype != dtype:
+            attn_mask = attn_mask.to(dtype)
+        processed = block(padded, use_lora=1, attn_mask=attn_mask, position_ids_4d=position_ids)
+        return [processed[i, :lengths[i]].view(sample_infos[i]['num_patches'], tpp, C) for i in range(num_samples)]
+
+    def forward_features(self, patches_list, valid_patches_list, grid_hw_list, clip_len_list):
+        """Process patches through the ViT and reconstruct features."""
+        all_patches = []
+        patch_counts = []
+        for patches in patches_list:
+            all_patches.append(patches)
+            patch_counts.append(patches.shape[0])
+        x = torch.cat(all_patches, dim=0)
+        x = self.vit.patch_embed(x)
+        x = self.vit._pos_embed(x)
+        x = self.vit.patch_drop(x)
+        x = self.vit.norm_pre(x)
+        B, N, C = x.shape
+        tpp = self.tpp
+        features = []
+        device = x.device
+        layouts = []
+        start_idx = 0
+        batch_idx = 0
+        video_batch = 0
+        while start_idx < x.shape[0]:
+            clip_len = clip_len_list[batch_idx].item()
+            patch_count = patch_counts[video_batch]
+            num_patches = patch_count * clip_len
+            end_idx = start_idx + num_patches
+            layouts.append({'start': start_idx, 'end': end_idx, 'num_patches': num_patches, 'patch_count': patch_count, 'clip_len': clip_len, 'valid': valid_patches_list[video_batch], 'grid_hw': grid_hw_list[video_batch]})
+            start_idx = end_idx
+            batch_idx += 1
+            video_batch += clip_len
+        sample_infos = [{'num_patches': L['num_patches'], 'valid': L['valid'], 'clip_len': L['clip_len']} for L in layouts]
+        ga_lengths, ga_max_len, ga_pos_ids, ga_attn_mask = self._prepare_global_attn_context(sample_infos, device)
+        for i, blk in enumerate(self.vit.blocks):
+            x = blk(x, use_lora=0, grid_size=self.grid_size)
+            relay_tokens_list = []
+            loc_tokens_list = []
+            for L in layouts:
+                x_batch = x[L['start']:L['end']]
+                loc_x_i = x_batch[:, tpp:]
+                loc_reconstructed = self._reconstruct_multi_frame(loc_x_i, L['valid'], L['grid_hw'], L['clip_len'], L['patch_count'])
+                loc_tokens_list.append(loc_reconstructed)
+                relay = x_batch[:, :tpp].contiguous().view(1, L['num_patches'] * tpp, C)
+                relay_tokens_list.append(relay)
+            if i + 1 < len(self.vit.blocks):
+                processed_relays = self._batched_global_attention(relay_tokens_list, sample_infos, self.vit.blocks[i + 1], lengths=ga_lengths, max_len=ga_max_len, position_ids=ga_pos_ids, attn_mask=ga_attn_mask)
+            else:
+                processed_relays = [r.squeeze(0).view(info['num_patches'], tpp, C) for r, info in zip(relay_tokens_list, sample_infos)]
+            x_processed_list = []
+            for idx in range(len(sample_infos)):
+                x_batch_reshaped = torch.cat([processed_relays[idx], loc_tokens_list[idx]], dim=1)
+                x_processed_list.append(x_batch_reshaped)
+            x = torch.cat(x_processed_list, dim=0)
+        x = self.vit.norm(x)
+        for _ in range(4):
+            features.append(x[:, self.tpp:])
+        return (x, features)
+
+    def get_valid_patches_info(self, original_shapes, input_size=1036, grid_size=2, clip_len=None):
+        """Compute valid patch indices and grid information."""
+        shapes = np.array(original_shapes.cpu(), dtype=float)
+        scales = shapes / input_size
+        needed = np.ceil(scales * grid_size).astype(int)
+        needed = np.clip(needed, 1, grid_size)
+        cache = {}
+        for h in range(1, grid_size + 1):
+            for w in range(1, grid_size + 1):
+                cache[h, w] = [i * grid_size + j for i in range(h) for j in range(w)]
+        valid_patches_list = []
+        grid_hw_list = []
+        for (h, w), clip_l in zip(needed, clip_len):
+            valid_patches_list.extend([cache[h.item(), w.item()]] * clip_l)
+            grid_hw_list.extend([(h.item(), w.item())] * clip_l)
+        max_valid_patches = max((len(p) for p in valid_patches_list))
+        return (valid_patches_list, max_valid_patches, grid_hw_list)
+
+    @staticmethod
+    def select_valid_patches(valid, patches):
+        """Select valid patches based on indices."""
+        patches_list = []
+        for i in range(len(valid)):
+            valid_indices = valid[i]
+            if len(valid_indices) > 0:
+                selected_patches = patches[i, valid_indices]
+            else:
+                raise ValueError('Empty input image.')
+            patches_list.append(selected_patches)
+        return patches_list
+
+    def _get_recon_dims(self, grid_hw):
+        """Compute reconstructed feature map dimensions for a given grid layout."""
+        grid_h, grid_w = grid_hw
+        H = self.feature_patch_size if grid_h == 1 else grid_h * self.feature_stride + self.feature_overlap * 2
+        W = self.feature_patch_size if grid_w == 1 else grid_w * self.feature_stride + self.feature_overlap * 2
+        return (H, W)
+
+    def _get_count_tensor(self, grid_hw, patch_count, device, dtype):
+        """
+        Return (and cache) the count tensor used for averaging overlapping patches.
+        Shape: (1, H, W) so it broadcasts to (C, H, W) (slice-add path) and (1, 1, H, W)
+        (F.fold path).  Depends only on (grid_hw, patch_count, dtype).
+        """
+        cache = getattr(self, '_count_cache', None)
+        if cache is None:
+            cache = {}
+            self._count_cache = cache
+        key = (grid_hw, patch_count, dtype)
+        cached = cache.get(key)
+        if cached is not None and cached.device == device:
+            return cached
+        fp = self.feature_patch_size
+        H, W = self._get_recon_dims(grid_hw)
+        grid_h, grid_w = grid_hw
+        count = torch.zeros(1, H, W, device=device, dtype=dtype)
+        for k in range(patch_count):
+            row = k // grid_w
+            col = k % grid_w
+            y = row * self.feature_stride
+            x = col * self.feature_stride
+            count[0, y:y + fp, x:x + fp] += 1
+        count = torch.clamp(count, min=1.0)
+        cache[key] = count
+        return count
+
+    def reconstruct_from_overlap_patches(self, patches, valid_indices, grid_hw, for_decode=False):
+        """
+        Reconstruct feature map from overlapping patches.
+
+        Two code paths with identical numerics:
+          - training (self.training=True): slice-add.  Many small ops in fwd but autograd
+            uses cheap slice-grad in bwd.  Avoids F.fold's slow im2col backward kernel.
+          - inference: F.fold.  Single big kernel, no backward needed.
+        """
+        num_patches, N, C = patches.shape
+        fp = self.feature_patch_size
+        if num_patches == 1:
+            if for_decode:
+                return patches.view(1, fp, fp, C).permute(0, 3, 1, 2)
+            return patches
+        H, W = self._get_recon_dims(grid_hw)
+        if self.training:
+            recon = patches.new_zeros(H, W, C)
+            for k in range(num_patches):
+                row = valid_indices[k] // self.grid_size
+                col = valid_indices[k] % self.grid_size
+                y = row * self.feature_stride
+                x = col * self.feature_stride
+                recon[y:y + fp, x:x + fp, :] += patches[k].view(fp, fp, C)
+            count = self._get_count_tensor(grid_hw, num_patches, patches.device, patches.dtype)
+            recon = recon / count.squeeze(0).unsqueeze(-1)
+            recon_chw = recon.permute(2, 0, 1).unsqueeze(0)
+            if for_decode:
+                return recon_chw
+            patches_reconstructed = self.divide_feature_patches(recon_chw)
+            return patches_reconstructed.view(num_patches, C, N).permute(0, 2, 1)
+        fold_input = patches.view(num_patches, fp, fp, C).permute(3, 1, 2, 0).reshape(1, C * fp * fp, num_patches)
+        recon = F.fold(fold_input, output_size=(H, W), kernel_size=fp, stride=self.feature_stride)
+        recon = recon / self._get_count_tensor(grid_hw, num_patches, patches.device, patches.dtype).unsqueeze(0)
+        if for_decode:
+            return recon
+        patches_reconstructed = self.divide_feature_patches(recon)
+        return patches_reconstructed.view(num_patches, C, N).permute(0, 2, 1)
+
+    def _reconstruct_multi_frame(self, patches, valid_indices, grid_hw, clip_len, patch_count):
+        """Batched reconstruction sharing the same grid layout across frames.
+
+        Training: slice-add (cheap bwd).  Inference: F.fold (one kernel).
+        """
+        N, C = (patches.shape[1], patches.shape[2])
+        fp = self.feature_patch_size
+        if patch_count == 1:
+            return patches
+        H, W = self._get_recon_dims(grid_hw)
+        if self.training:
+            patches_5d = patches.view(clip_len, patch_count, fp, fp, C)
+            recon = patches.new_zeros(clip_len, H, W, C)
+            for k in range(patch_count):
+                row = valid_indices[k] // self.grid_size
+                col = valid_indices[k] % self.grid_size
+                y = row * self.feature_stride
+                x = col * self.feature_stride
+                recon[:, y:y + fp, x:x + fp, :] += patches_5d[:, k]
+            count = self._get_count_tensor(grid_hw, patch_count, patches.device, patches.dtype)
+            recon = recon / count.squeeze(0).unsqueeze(-1)
+            recon_chw = recon.permute(0, 3, 1, 2).contiguous()
+            patches_out = self.divide_feature_patches(recon_chw)
+            return patches_out.reshape(clip_len * patch_count, C, N).permute(0, 2, 1)
+        fold_input = patches.view(clip_len, patch_count, fp, fp, C).permute(0, 4, 2, 3, 1).reshape(clip_len, C * fp * fp, patch_count)
+        recon = F.fold(fold_input, output_size=(H, W), kernel_size=fp, stride=self.feature_stride)
+        recon = recon / self._get_count_tensor(grid_hw, patch_count, patches.device, patches.dtype).unsqueeze(0)
+        patches_out = self.divide_feature_patches(recon)
+        return patches_out.reshape(clip_len * patch_count, C, N).permute(0, 2, 1)
+
+    def divide_feature_patches(self, x):
+        """Divide feature map into feature patches.
+
+        Training: Python loop + slice + stack — slice's backward is cheap.
+        Inference: torch.unfold — one fused kernel; no autograd cost.
+        """
+        fp = self.feature_patch_size
+        if self.training:
+            B, C, H, W = x.shape
+            patches = []
+            for y in range(0, H - fp + 1, self.feature_stride):
+                for x_pos in range(0, W - fp + 1, self.feature_stride):
+                    patches.append(x[:, :, y:y + fp, x_pos:x_pos + fp])
+            return torch.stack(patches, dim=1)
+        patches = x.unfold(2, fp, self.feature_stride).unfold(3, fp, self.feature_stride)
+        B, C, n_h, n_w, ph, pw = patches.shape
+        return patches.permute(0, 2, 3, 1, 4, 5).reshape(B, n_h * n_w, C, ph, pw)
+
+    def assemble_and_decode(self, x, images, valid_patches_list, grid_hw_list, grid_size=2):
+        """Assemble patches and decode to generate masks. Returns logits (B, 1, input_size, input_size)."""
+        device = x.device
+        B = len(valid_patches_list)
+        full_masks = torch.zeros(B, 1, self.input_size, self.input_size, device=device) - 10.0
+        stx = 0
+        for i in range(B):
+            edy = stx + len(valid_patches_list[i])
+            ix = self.reconstruct_from_overlap_patches(x[stx:edy], valid_patches_list[i], grid_hw_list[i], for_decode=True)
+            h, w = grid_hw_list[i]
+            pred_mask = self.mask_decoder(ix)
+            h = h * self.input_size // self.grid_size
+            w = w * self.input_size // self.grid_size
+            pred_mask = F.interpolate(pred_mask, size=(int(h), int(w)), mode='bilinear', align_corners=False)
+            full_masks[i:i + 1, :, :h, :w] = pred_mask
+            stx = edy
+        return full_masks
+
+    def forward(self, image, clip=None, origin_shape=None, clip_len=None, mask=None, edge_mask=None, label=None, *args, **kwargs):
+        """
+        Args:
+            image:        (sum_T, C, H, W) flattened frame batch.  Same tensor as `clip`
+                          if the caller did not split image/clip.
+            clip:         (sum_T, C, H, W) frames flattened across the batch.  When None
+                          we alias it to `image` (cheap; no copy).  The collate_fn returns
+                          only `image` for memory & H2D efficiency.
+            origin_shape: (B, 2) original (H, W) per sample.
+            clip_len:     (num_samples,) frames-per-sample; 1 for images, T for video clips.
+            mask:         (sum_T, 1, H, W) ground-truth mask. If None -> pure inference mode.
+            edge_mask:    (sum_T, 1, H, W) optional edge weight map for the edge-aware loss.
+
+        Returns:
+            - dict (IMDLBenCo output interface) when `mask` is provided.
+            - predicted mask tensor (B, 1, H, W) when `mask` is None.
+        """
+        grid_size = self.grid_size
+        if clip is None:
+            clip = image
+        patches = self.divide_patches(clip)
+        valid_patches_list, max_valid_patches, grid_hw_list = self.get_valid_patches_info(origin_shape, self.input_size, grid_size, clip_len=clip_len)
+        patches = self.select_valid_patches(valid_patches_list, patches)
+        features, feature_list = self.forward_features(patches, valid_patches_list, grid_hw_list, clip_len_list=clip_len)
+        pred_logits = self.assemble_and_decode(features[:, self.tpp:], image, valid_patches_list, grid_hw_list, grid_size)
+        mask_pred = torch.sigmoid(pred_logits)
+        if mask is None:
+            return mask_pred
+        loss_bce = self.BCE_loss(pred_logits, mask)
+        if edge_mask is not None:
+            edge_loss = F.binary_cross_entropy_with_logits(input=pred_logits, target=mask, weight=edge_mask) * self.edge_lambda
+        else:
+            edge_loss = torch.zeros((), device=pred_logits.device)
+        combined_loss = loss_bce + edge_loss
+        output_dict = {'backward_loss': combined_loss, 'pred_mask': mask_pred, 'pred_label': None, 'visual_loss': {'bce_loss': loss_bce, 'edge_loss': edge_loss, 'combined_loss': combined_loss}, 'visual_image': {'pred_mask': mask_pred}}
+        if edge_mask is not None:
+            output_dict['visual_image']['edge_mask'] = edge_mask
+        return output_dict

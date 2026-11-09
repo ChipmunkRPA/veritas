@@ -1,0 +1,18 @@
+{
+  "graph_source": "https://github.com/WenOOI/RelayFormer/tree/23c973fc956195537d85148d124d6a146243f6c9",
+  "upstream_sha256": {
+    "RelayFormer.py": "c6dabe3c2ca692b8bce85090a668d2e2c8a75b154c02500b333965f51d418abc",
+    "GLoRA_vit.py": "f70a4a7880e092c68cebc472b55633ebb0c7f3e2b79df8f940f8e17b6e7ccd51"
+  },
+  "graph_license": "MIT",
+  "rotary_version": "0.8.9",
+  "rotary_source_sha256": "37c7560fd47121ff1bd51488f46e10cb399d62e6e439e6b18732902f526f59b6",
+  "rotary_license": "MIT",
+  "changes": [
+    "Remove external registry import/decorator and unused script entrypoint.",
+    "Require complete-local-state constructor; pretrained=False; remove unused pickle/base-download loader.",
+    "Use privately vendored rotary helper; no sys.path or process-global import/network monkeypatch."
+  ],
+  "weights_license_separate": true,
+  "production_forward_parity_pending": true
+}

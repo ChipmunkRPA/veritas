@@ -1,0 +1,63 @@
+{
+  "schema": "chipmunk.audio-generator-smoke-failure/55",
+  "status": "failed_before_generation",
+  "freeze_sha256": "4402fbbee180101ce8857edbd5c4b74c2c00af235c2745b9f04ae9d4332cc7ba",
+  "frozen_code_bindings_unchanged": true,
+  "preparation_passed": true,
+  "runtime_packages": 90,
+  "runtime_files": 25302,
+  "smoke_profile_sha256": "6c494975224ab0579386659489f6a997bd0f8a93c362f522b93dd879e6ccab5d",
+  "smoke_child_exit_code": 1,
+  "guard": null,
+  "sample_errors": 0,
+  "resource_violations": [],
+  "new_generator_forwards": 0,
+  "g2p_calls": 0,
+  "new_detector_forwards": 0,
+  "reason": "Strict key coverage rejected 140 extra InstanceNorm affine identity parameters deliberately created by upstream for its export path. Actual saved tensor values still require verification before generation.",
+  "static_inspection": [
+    {
+      "module": "bert",
+      "constructed_state_tensors": 25,
+      "checkpoint_state_tensors": 25,
+      "extra_normalization_parameters": 0
+    },
+    {
+      "module": "bert_encoder",
+      "constructed_state_tensors": 2,
+      "checkpoint_state_tensors": 2,
+      "extra_normalization_parameters": 0
+    },
+    {
+      "module": "predictor",
+      "constructed_state_tensors": 146,
+      "checkpoint_state_tensors": 122,
+      "extra_normalization_parameters": 24
+    },
+    {
+      "module": "text_encoder",
+      "constructed_state_tensors": 24,
+      "checkpoint_state_tensors": 24,
+      "extra_normalization_parameters": 0
+    },
+    {
+      "module": "decoder",
+      "constructed_state_tensors": 491,
+      "checkpoint_state_tensors": 375,
+      "extra_normalization_parameters": 116
+    }
+  ],
+  "static_inspection_generator_forwards": 0,
+  "static_inspection_completed_sha256": "6614b3f9b28a78035d917834f8e6fec73e286a534ae36d106c55cb8aef4a364f",
+  "static_inspection_profile_sha256": "bb54b7c725ec1e49fb994d92186230792e91f178a2f161e8a752c82c8e7da018",
+  "static_inspection_script_sha256": "fc59cbf85051038addb0c598f06ab995b6f7c0b96f564d3ca3282537bfb38cdf",
+  "retained_diagnostic_launch_failures": [
+    "Private observer import path unavailable before monitor/child start.",
+    "Private inspect.py shadowed stdlib inspect; bounded child exited before constructor/forward."
+  ],
+  "defaults_changed": false,
+  "protected_audio_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false
+}

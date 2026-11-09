@@ -1,0 +1,575 @@
+{
+  "schema": "chipmunk.native-regional-paid-flow-result/49",
+  "status": "automatic_checks_complete",
+  "cases": [
+    {
+      "case": "candidate-small",
+      "status": "complete",
+      "mode": "candidate",
+      "input_sha256": "c21976d54e8d6fa8f74349354f53b061616341218556c53d37b22e82b69e9eac",
+      "all_enabled_checks_recorded": true,
+      "checks": {
+        "prov.c2pa": {
+          "status": "not_applicable",
+          "reason": "no C2PA manifest"
+        },
+        "img.meta.generator": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.exif": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.consistency": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.qtables": {
+          "status": "not_applicable",
+          "reason": "not a JPEG file with quantisation tables"
+        },
+        "img.watermark.dwtdct": {
+          "status": "not_applicable",
+          "reason": "smaller than 256 \u00d7 256 pixels, the decoder's minimum"
+        },
+        "img.faces.yunet": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dda": {
+          "status": "not_applicable",
+          "reason": "image short side below 336 px (native crops only, no upscaling)"
+        },
+        "img.hf.ateeqq": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.dima806": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dfdc_b7": {
+          "status": "not_applicable",
+          "reason": "no face detected"
+        },
+        "loc.fused": {
+          "status": "not_applicable",
+          "reason": "A dedicated local editing check covers this file format"
+        },
+        "loc.splice": {
+          "status": "not_applicable",
+          "reason": "image below 64 px"
+        },
+        "loc.native_regional": {
+          "status": "not_applicable",
+          "reason": "image below 64 px"
+        },
+        "img.forensic.ela": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.noise": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.jpeg_dq": {
+          "status": "not_applicable",
+          "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels"
+        },
+        "img.forensic.copymove": {
+          "status": "not_applicable",
+          "reason": "image below 64 px"
+        }
+      },
+      "native_and_splice_calls": {
+        "regional": 0,
+        "splice": 0,
+        "weight_loads": 3
+      },
+      "payment_before_weight_load_and_inference": true,
+      "simulated_stripe_only": true,
+      "assessment": {
+        "direction": "unavailable",
+        "headline": "Inconclusive: this input is outside the verified scope",
+        "confidence_pct": null,
+        "probability_ai_pct": null,
+        "interval_pct": null
+      },
+      "decision": {
+        "code": "inconclusive",
+        "probability_ai_calibrated": 0.920568,
+        "probability_ai_uncalibrated": null,
+        "ci90": [
+          0.779923,
+          0.956357
+        ]
+      },
+      "packet_count": 0,
+      "assets_verified": 0,
+      "pdf_pages": 22,
+      "source_crop_mask_report_export_equality": true,
+      "model_names_hidden": true,
+      "browser_checked": false,
+      "new_accuracy_claim": false
+    },
+    {
+      "case": "legacy-ai",
+      "status": "complete",
+      "mode": "legacy",
+      "input_sha256": "894ef5665ae4cb3c3e44a2025da05d37ec0eac3f42fd87af7151a1886ae30331",
+      "all_enabled_checks_recorded": true,
+      "checks": {
+        "prov.c2pa": {
+          "status": "not_applicable",
+          "reason": "no C2PA manifest"
+        },
+        "img.meta.generator": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.exif": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.consistency": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.qtables": {
+          "status": "not_applicable",
+          "reason": "not a JPEG file with quantisation tables"
+        },
+        "img.watermark.dwtdct": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.faces.yunet": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dda": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.ateeqq": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.dima806": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dfdc_b7": {
+          "status": "not_applicable",
+          "reason": "no face detected"
+        },
+        "loc.fused": {
+          "status": "not_applicable",
+          "reason": "A dedicated local editing check covers this file format"
+        },
+        "loc.splice": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.ela": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.noise": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.jpeg_dq": {
+          "status": "not_applicable",
+          "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels"
+        },
+        "img.forensic.copymove": {
+          "status": "ok",
+          "reason": null
+        }
+      },
+      "native_and_splice_calls": {
+        "regional": 0,
+        "splice": 1,
+        "weight_loads": 5
+      },
+      "payment_before_weight_load_and_inference": true,
+      "simulated_stripe_only": true,
+      "assessment": {
+        "direction": "original",
+        "headline": "Leaning towards original content in the assessed scope",
+        "confidence_pct": 96.6,
+        "probability_ai_pct": 3.3,
+        "interval_pct": [
+          94.6,
+          97.8
+        ]
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "probability_ai_calibrated": 0.033704,
+        "probability_ai_uncalibrated": null,
+        "ci90": [
+          0.021393,
+          0.053275
+        ]
+      },
+      "packet_count": 4,
+      "assets_verified": 12,
+      "pdf_pages": 30,
+      "source_crop_mask_report_export_equality": true,
+      "model_names_hidden": true,
+      "browser_checked": false,
+      "new_accuracy_claim": false
+    },
+    {
+      "case": "legacy-original",
+      "status": "complete",
+      "mode": "legacy",
+      "input_sha256": "2630abb84e94fc3581e7fd95f0f8283f965854045e9d2a87423c9529e0625f55",
+      "all_enabled_checks_recorded": true,
+      "checks": {
+        "prov.c2pa": {
+          "status": "not_applicable",
+          "reason": "no C2PA manifest"
+        },
+        "img.meta.generator": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.exif": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.consistency": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.qtables": {
+          "status": "not_applicable",
+          "reason": "not a JPEG file with quantisation tables"
+        },
+        "img.watermark.dwtdct": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.faces.yunet": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dda": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.ateeqq": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.dima806": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dfdc_b7": {
+          "status": "not_applicable",
+          "reason": "no face detected"
+        },
+        "loc.fused": {
+          "status": "not_applicable",
+          "reason": "A dedicated local editing check covers this file format"
+        },
+        "loc.splice": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.ela": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.noise": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.jpeg_dq": {
+          "status": "not_applicable",
+          "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels"
+        },
+        "img.forensic.copymove": {
+          "status": "ok",
+          "reason": null
+        }
+      },
+      "native_and_splice_calls": {
+        "regional": 0,
+        "splice": 1,
+        "weight_loads": 5
+      },
+      "payment_before_weight_load_and_inference": true,
+      "simulated_stripe_only": true,
+      "assessment": {
+        "direction": "original",
+        "headline": "Leaning towards original content in the assessed scope",
+        "confidence_pct": 97.7,
+        "probability_ai_pct": 2.2,
+        "interval_pct": [
+          96.0,
+          98.0
+        ]
+      },
+      "decision": {
+        "code": "no_ai_indicators_strong",
+        "probability_ai_calibrated": 0.022377,
+        "probability_ai_uncalibrated": null,
+        "ci90": [
+          0.02,
+          0.039531
+        ]
+      },
+      "packet_count": 4,
+      "assets_verified": 12,
+      "pdf_pages": 30,
+      "source_crop_mask_report_export_equality": true,
+      "model_names_hidden": true,
+      "browser_checked": false,
+      "new_accuracy_claim": false
+    },
+    {
+      "case": "candidate-ai",
+      "status": "complete",
+      "mode": "candidate",
+      "input_sha256": "894ef5665ae4cb3c3e44a2025da05d37ec0eac3f42fd87af7151a1886ae30331",
+      "all_enabled_checks_recorded": true,
+      "checks": {
+        "prov.c2pa": {
+          "status": "not_applicable",
+          "reason": "no C2PA manifest"
+        },
+        "img.meta.generator": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.exif": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.consistency": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.qtables": {
+          "status": "not_applicable",
+          "reason": "not a JPEG file with quantisation tables"
+        },
+        "img.watermark.dwtdct": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.faces.yunet": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dda": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.ateeqq": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.dima806": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dfdc_b7": {
+          "status": "not_applicable",
+          "reason": "no face detected"
+        },
+        "loc.fused": {
+          "status": "not_applicable",
+          "reason": "A dedicated local editing check covers this file format"
+        },
+        "loc.splice": {
+          "status": "ok",
+          "reason": null
+        },
+        "loc.native_regional": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.ela": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.noise": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.jpeg_dq": {
+          "status": "not_applicable",
+          "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels"
+        },
+        "img.forensic.copymove": {
+          "status": "ok",
+          "reason": null
+        }
+      },
+      "native_and_splice_calls": {
+        "regional": 1,
+        "splice": 1,
+        "weight_loads": 6
+      },
+      "payment_before_weight_load_and_inference": true,
+      "simulated_stripe_only": true,
+      "assessment": {
+        "direction": "original",
+        "headline": "Leaning towards original content in the assessed scope",
+        "confidence_pct": 96.6,
+        "probability_ai_pct": 3.3,
+        "interval_pct": [
+          94.6,
+          97.8
+        ]
+      },
+      "decision": {
+        "code": "no_ai_indicators",
+        "probability_ai_calibrated": 0.033704,
+        "probability_ai_uncalibrated": null,
+        "ci90": [
+          0.021393,
+          0.053275
+        ]
+      },
+      "packet_count": 5,
+      "assets_verified": 16,
+      "pdf_pages": 34,
+      "source_crop_mask_report_export_equality": true,
+      "model_names_hidden": true,
+      "browser_checked": true,
+      "new_accuracy_claim": false
+    },
+    {
+      "case": "candidate-original",
+      "status": "complete",
+      "mode": "candidate",
+      "input_sha256": "2630abb84e94fc3581e7fd95f0f8283f965854045e9d2a87423c9529e0625f55",
+      "all_enabled_checks_recorded": true,
+      "checks": {
+        "prov.c2pa": {
+          "status": "not_applicable",
+          "reason": "no C2PA manifest"
+        },
+        "img.meta.generator": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.exif": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.consistency": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.meta.qtables": {
+          "status": "not_applicable",
+          "reason": "not a JPEG file with quantisation tables"
+        },
+        "img.watermark.dwtdct": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.faces.yunet": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dda": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.ateeqq": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.hf.dima806": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.dfdc_b7": {
+          "status": "not_applicable",
+          "reason": "no face detected"
+        },
+        "loc.fused": {
+          "status": "not_applicable",
+          "reason": "A dedicated local editing check covers this file format"
+        },
+        "loc.splice": {
+          "status": "ok",
+          "reason": null
+        },
+        "loc.native_regional": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.ela": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.noise": {
+          "status": "ok",
+          "reason": null
+        },
+        "img.forensic.jpeg_dq": {
+          "status": "not_applicable",
+          "reason": "not a readable 8-bit JPEG and no JPEG block grid in the pixels"
+        },
+        "img.forensic.copymove": {
+          "status": "ok",
+          "reason": null
+        }
+      },
+      "native_and_splice_calls": {
+        "regional": 1,
+        "splice": 1,
+        "weight_loads": 6
+      },
+      "payment_before_weight_load_and_inference": true,
+      "simulated_stripe_only": true,
+      "assessment": {
+        "direction": "original",
+        "headline": "Leaning towards original content in the assessed scope",
+        "confidence_pct": 97.7,
+        "probability_ai_pct": 2.2,
+        "interval_pct": [
+          96.0,
+          98.0
+        ]
+      },
+      "decision": {
+        "code": "no_ai_indicators_strong",
+        "probability_ai_calibrated": 0.022377,
+        "probability_ai_uncalibrated": null,
+        "ci90": [
+          0.02,
+          0.039531
+        ]
+      },
+      "packet_count": 4,
+      "assets_verified": 12,
+      "pdf_pages": 33,
+      "source_crop_mask_report_export_equality": true,
+      "model_names_hidden": true,
+      "browser_checked": false,
+      "new_accuracy_claim": false
+    }
+  ],
+  "paired_authorship_estimates_unchanged": true,
+  "pdf_visual_review_pending": true,
+  "default_changed": false,
+  "new_accuracy_claim": false,
+  "github_workflows_started": 0,
+  "simulated_stripe_only": true,
+  "outreach_sent": false,
+  "deployment_done": false,
+  "product_admitted": false,
+  "human_review_issue": "AI-edited source received a broad original headline with 96.6% from whole-image synthesis checks while native regional evidence flags an edit. Percentage must be scoped and must not imply all pixels are original."
+}

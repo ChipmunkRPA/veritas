@@ -1,0 +1,56 @@
+{
+  "frozen_files_verified": 475,
+  "all_profiles_passed": true,
+  "profiles": [
+    {
+      "phase": "native-regional-paid-flow-v49-preparation-profile",
+      "profile_sha256": "ee994757d5208a4915430f0391f607be8be9bb72a00b7002e4266388916230bb",
+      "duration_s": 4.288181749987416,
+      "sampled_tree_rss_bytes": 293961728
+    },
+    {
+      "phase": "phase-000-profile",
+      "profile_sha256": "e36e9439b9a78f1575ec83558bd4eacbe6be199066ff7090ec3948f03ae505ae",
+      "duration_s": 15.251224958105013,
+      "sampled_tree_rss_bytes": 1651916800
+    },
+    {
+      "phase": "phase-001-profile",
+      "profile_sha256": "0871e0a32829e146e5e6bec27751eff486928e3a3301237e799f9a0cfb9b68be",
+      "duration_s": 24.080244542099535,
+      "sampled_tree_rss_bytes": 3880550400
+    },
+    {
+      "phase": "phase-002-profile",
+      "profile_sha256": "6b91dc856b0df48b98ed4afccfbe3914d93f4f1f3546595bfa2b8987f8260337",
+      "duration_s": 24.10255612502806,
+      "sampled_tree_rss_bytes": 4348690432
+    },
+    {
+      "phase": "phase-003-profile",
+      "profile_sha256": "65d0c3272bc9bc932d7fe822d96a00fe8d25e4e36006c597f0abec98415f20a1",
+      "duration_s": 32.0514290840365,
+      "sampled_tree_rss_bytes": 4254842880
+    },
+    {
+      "phase": "phase-004-profile",
+      "profile_sha256": "b250dad0e52a80d878d4bf55f89d220ed9b5bd9aef1e31dc93927afc038c6c81",
+      "duration_s": 29.355863749980927,
+      "sampled_tree_rss_bytes": 4003446784
+    },
+    {
+      "phase": "seal-profile",
+      "profile_sha256": "2f82e8db92303545546e1bf25f86dc04baaff545b5a5624e948fe99735305d23",
+      "duration_s": 0.7979636669624597,
+      "sampled_tree_rss_bytes": 189972480
+    }
+  ],
+  "local_default_changed": false,
+  "automatic_success_is_not_product_admission": true,
+  "human_scope_issue": "AI-edited source received a broad original headline with 96.6% from whole-image synthesis checks while native regional evidence flags an edit. Percentage must be scoped and must not imply all pixels are original.",
+  "schema": "chipmunk.native-regional-paid-flow-execution/49",
+  "result_sha256": "9e529639bc5cf5f35402c5634a36b1119272d79afd464b9b82437dfa35b58a5f",
+  "github_workflows_started": 0,
+  "outreach_sent": false,
+  "deployment_done": false
+}

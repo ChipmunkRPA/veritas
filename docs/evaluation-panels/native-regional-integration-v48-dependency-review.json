@@ -1,0 +1,67 @@
+{
+  "missing_legacy_audit_helper": "backend/scripts/audit_summary.py",
+  "no_installs_or_upgrades": true,
+  "locks": {
+    "cpu": {
+      "sha256": "126816f819e1f6103e1134de378d55abf40db05a7fd80e143d1af69c44c86d4f",
+      "packages": 121,
+      "advisory_versions": "Exact package versions; Linux accelerator local suffix stripped only for library advisory matching. No binary/runtime compatibility claim."
+    },
+    "cu126": {
+      "sha256": "02ee982a0e0f689168119a6f6fa34e588eea6a212c9f72376faa46e431719b06",
+      "packages": 140,
+      "advisory_versions": "Exact package versions; Linux accelerator local suffix stripped only for library advisory matching. No binary/runtime compatibility claim."
+    }
+  },
+  "schema": "chipmunk.native-regional-integration-dependency-review/48",
+  "make_audit_exit_code": 2,
+  "make_audit_failure": "Required legacy backend/scripts/audit_summary.py absent from this checkout; no replacement success claimed.",
+  "no_dependency_installs_or_upgrades": true,
+  "results": {
+    "cpu": {
+      "exit_code": 1,
+      "dependencies_audited": 121,
+      "skipped": 0,
+      "advisory_occurrences": 57,
+      "affected_packages": [
+        "accelerate",
+        "brotli",
+        "certifi",
+        "filelock",
+        "pillow",
+        "setuptools"
+      ],
+      "added_einops_advisories": 0,
+      "private_report_sha256": "a6f61b0d0af8821f7856057c70f4ca0ceb09797713bb2998acc304c60254c8f3"
+    },
+    "cu126": {
+      "exit_code": 1,
+      "dependencies_audited": 140,
+      "skipped": 0,
+      "advisory_occurrences": 57,
+      "affected_packages": [
+        "accelerate",
+        "brotli",
+        "certifi",
+        "filelock",
+        "pillow",
+        "setuptools"
+      ],
+      "added_einops_advisories": 0,
+      "private_report_sha256": "1ac5b8900a4e04752690e3cb182f9ad70c1619b4a0d1798d000bca2091bf295a"
+    },
+    "frontend": {
+      "exit_code": 1,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 4,
+        "high": 2,
+        "critical": 0,
+        "total": 6
+      },
+      "private_report_sha256": "46a8c9b7ab04e7e8b0d80e36b0b59573c202c134b4e154aea530768729e87f45"
+    }
+  },
+  "security_gate_passed": false
+}

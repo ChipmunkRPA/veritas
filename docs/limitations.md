@@ -479,6 +479,13 @@ is `backend/app/engine/fusion/not_validated.yaml`, checked by `make final-gate`.
 - Binoculars uses a 1.5B-parameter model pair for laptop feasibility; the original paper's 7B pair is stronger.
 - The RoBERTa secondary detector was trained on HC3, so HC3 evaluation numbers for it are optimistic; it is weighted accordingly.
 
+Sensitive regional screening (AI authorship not established). The optional
+native PNG localizer improves region recovery in a limited, same-editing-family
+comparison while increasing false flags on untouched photographs. Ordinary
+spatial edits have not been ruled out as a cause. Its uncalibrated regional
+responses contribute no weight to overall authorship confidence. The older
+recompression check and its weights remain available for comparison and rollback.
+
 ## Data handling
 
 - Originals are stored write-once and re-hashed before reports, exports and downloads; the custody log is hash-chained.

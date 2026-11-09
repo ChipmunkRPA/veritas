@@ -459,6 +459,9 @@ def _storage_hold() -> str | None:
 
 
 def build_worker() -> Worker:
+    from app.core.inference_runtime import configure_worker
+
+    configure_worker()
     return Worker(get_queue(), {"analysis": _handle_analysis, "refusion": _handle_refusion, "report": _handle_report,
                                 "package": _handle_package, "batch_expand": _handle_batch_expand,
                                 "webhook_delivery": _handle_webhook_delivery},

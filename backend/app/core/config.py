@@ -212,6 +212,9 @@ class Settings(BaseSettings):
     video_min_frames: int = 16  # v0.3 video pipeline: fewest frames sampled from a video
     video_face_track_iou: float = 0.3  # overlap (IoU) from which face boxes of consecutive frames are one track
 
+    # Optional native PNG region evidence; old checks stay available for comparison/rollback.
+    image_region_mode: Literal["legacy", "candidate"] = "legacy"
+
     # --- audio (video sound track) ---
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers
     # Local rollout switch; the legacy weights/calibration remain installed for rollback.

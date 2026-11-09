@@ -49,6 +49,11 @@ entries:
     cap: not_fitted
     detectors: [img.spai, img.univfd]
     limitations: "The SPAI adapter is deferred (D-39): built, off."
+  - id: image.native_regional
+    goals: []
+    cap: not_fitted
+    detectors: [loc.native_regional]
+    limitations: "Sensitive regional screening (AI authorship not established)."
   - id: video.synthesis
     goals: [G9a]
     cap: disclosure

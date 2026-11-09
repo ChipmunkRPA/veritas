@@ -161,6 +161,22 @@ models:
     notes:
       - "CPU float32, one 384-square response map; ResNet-34 U-Net with decoder attention. Local-only weights_only=True loader, digest and size checked before deserialization."
 
+  - id: local.native_regional_v1
+    source:
+      type: local
+      path: weights/native-regional-v1
+      produced_by: "Pinned released base plus verified local regional adapter; full safe state, docs/native-regional-serving-v47-protocol.md"
+      files:
+        - {path: regional-model.safetensors, sha256: 587d553353ddab1c81f45e86fbc9ad2326dee9086c6b566d9abcacc221380590, bytes: 367679412}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "Released base weight card declares Apache-2.0; graph and vendored rotary are MIT with notices. Local adapted weights remain private. Training-source rights/provenance and serving admission are separate; see v26/v41 and v47 protocols."}
+    footprint: {params_m: 91.91, fp32_mb: 351, activation_mb_per_item: 1800, estimated: true}
+    devices: {cpu: ok, mps: unsupported, cuda: unsupported}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.regional:load_regional", pickle: false}
+    notes:
+      - "Complete 410-tensor local float32 safe state, digest/size/schema/value checks. No network, pickle, global import or factory patches, or LoRA merge. Qualified two-thread CPU envelope configured at worker startup only."
+      - "Experimental PNG region evidence, not an AI-authorship probability. Keep old recompression check/weights for comparison and rollback."
+
   - id: mesorch.full_98
     source:
       type: gdrive
@@ -966,6 +982,32 @@ detectors:
     fp_modes: ["Ordinary processing with local recompression differences; small edits may have insufficient map support"]
     citation: "Publisher's TIDAL vR.P.30.1 checkpoint and local matched evaluation in docs/image-localizer-upgrade.md."
     admission: {decision: pending, evidence: "Independent runtime parity and source-disjoint PNG splice evaluation are recorded in docs/image-localizer-upgrade.md."}
+
+  - id: loc.native_regional
+    adapter: app.detectors.image.adapters.regional:RegionalDetector
+    version: 0.1.0
+    name: Sensitive regional screening
+    modality: image
+    family: localiser
+    hypotheses: [H2_localised_manipulation]
+    models: [local.native_regional_v1]
+    profiles: [full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    calibration: {method: none}
+    known_limitations:
+      - "Regional editing cues, not AI-specific attribution; ordinary edits and untouched photographs can trigger highlights. Unmarked pixels are not confirmed original."
+      - "Only upright RGB PNG inputs, at least 64 px each side; 1024 canvas, preserved aspect, top-left source, padding excluded. JPEG and other devices/dtypes are not admitted."
+      - "The selected native gate is a response-area rule, not public confidence or a screening accuracy claim. Zero whole-file authorship-confidence weight."
+    source_url: https://github.com/WenOOI/RelayFormer/tree/23c973fc956195537d85148d124d6a146243f6c9
+    threat: [partial_edit]
+    lane: partial_edit
+    training_data: "Pinned released base plus local adaptation on 213 source-paired images in 168 creator/duplicate groups. Source rights/unknown aliases/pretraining overlap limits documented in v26/v41 studies; local weights not redistributed."
+    coverage_date: "November 2026 local same-editing-family confirmation and serving parity"
+    input_constraints: ["PNG, upright RGB, minimum side 64 px, CPU float32 with two CPU threads, one source per call"]
+    fp_modes: ["Untouched images, tone/blur processing, ordinary non-AI edits and unfamiliar sources; AI-specificity has not been established"]
+    citation: "Native confirmation docs/image-native-confirmation-v46-result.md; engineering parity docs/native-regional-serving-v47-protocol.md."
+    admission: {decision: pending, evidence: "45/59 useful edited regions versus 10/59 for old check, with 13/59 versus 3/59 original false flags. Optional local evidence only; product/export/payment-flow verification required before local default."}
 
   - id: loc.mesorch
     adapter: app.detectors.image.adapters.localisers:MesorchDetector

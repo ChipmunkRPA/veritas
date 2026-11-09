@@ -4,12 +4,12 @@ These contracts bind future **Linux amd64 / CPython 3.12** backend images to the
 
 | File | Purpose |
 |---|---|
-| `tested-versions.txt` | 119 installed version constraints from the reachable production/PostgreSQL dependency graph on Darwin arm64, plus build tooling. Linux-only torch dependencies were excluded from this initial snapshot and resolved from the selected wheel metadata. |
+| `tested-versions.txt` | 120 installed version constraints from the reachable production/PostgreSQL dependency graph on Darwin arm64, plus build tooling. Linux-only torch dependencies were excluded from this initial snapshot and resolved from the selected wheel metadata. |
 | `cpu.in`, `cu126.in` | Official torch 2.13.0 / torchvision 0.28.0 CPython 3.12 Linux wheel URLs, with upstream SHA256 fragments and explicit accelerator suffixes. |
-| `runtime-cpu.lock`, `runtime-cu126.lock` | Complete resolver outputs: 120 CPU / 139 CUDA packages, exact versions and published distribution hashes. |
+| `runtime-cpu.lock`, `runtime-cu126.lock` | Reviewed dependency graphs: 121 CPU / 140 CUDA packages, exact versions and published distribution hashes; initial resolver outputs plus the documented one-node extension. |
 | `build.in`, `build.lock` | Pinned pip 26.2.1, setuptools 84.0.0, wheel 0.48.0 and packaging 26.3, installed before source builds. |
 
-Both Linux graphs preserve all 119 tested package versions, except the intentional torch/torchvision accelerator suffixes. CPU adds greenlet 3.5.6, absent from the Darwin environment. CUDA additionally includes 19 dependencies resolved from the cu126 wheel. Those Linux-only packages are resolved and pinned, **not locally executed or model-validated**. Pytest is present because the installed c2pa-python package declares it as an unconditional dependency; it was not added as a Veritas development extra.
+Both Linux graphs preserve all 120 tested package versions, except the intentional torch/torchvision accelerator suffixes. CPU adds greenlet 3.5.6, absent from the Darwin environment. CUDA additionally includes 19 dependencies resolved from the cu126 wheel. Those Linux-only packages are resolved and pinned, **not locally executed or model-validated**. Pytest is present because the installed c2pa-python package declares it as an unconditional dependency; it was not added as a Veritas development extra.
 
 The Dockerfile installs hash-checked build tools, then the full runtime lock. Only Grad-CAM may build from source; every other package must have a compatible wheel. Grad-CAM 1.5.7 declares setuptools/wheel build requirements. `--no-build-isolation` prevents a second unpinned build environment. Installing the local project with `--no-deps --no-build-isolation` prevents its broad development constraints from replacing the locked runtime. The final `runtime_contract.py` check verifies every installed version, `pip check`, torch's compiled CUDA identity, and torchvision's native CPU NMS result. It does not require a GPU on the builder.
 
@@ -18,6 +18,8 @@ The Dockerfile installs hash-checked build tools, then the full runtime lock. On
 - **2026-10-02, urllib3 2.7.0 → 2.8.0** (N-15): pip-audit of both locks reported PYSEC-2026-4175, -4176 and -4177 against 2.7.0, all fixed in 2.8.0. Both variants were resolved again with the command below, the existing lock as constraints and that one pin moved: the output differs from the earlier lock in the three `urllib3` lines only (120 CPU / 139 CUDA packages as before). `tested-versions.txt` and the development environment carry 2.8.0, and the local regression ran on it. The Linux graphs remain **not executed** here, as before.
 
 Every change of a lock needs `make audit` afterwards: the suite compares the recorded audit (`docs/v2/qa/audit-run.json`) with the SHA-256 of each lock.
+
+- **2026-11-08, add einops 0.8.2:** promoted the already installed MIT helper from development to runtime for the vendored regional graph. Official PyPI 0.8.2 metadata declares no dependencies; both locks add exactly this one package with its published wheel and source hashes. Existing pins and hashes are unchanged. This is a one-node lock extension, not a rerun of Linux dependency resolution or Linux execution. The installed Darwin snapshot includes the same version; local serving parity is recorded separately in the v47 study.
 
 ## Recheck or deliberately refresh
 

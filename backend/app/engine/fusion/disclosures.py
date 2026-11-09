@@ -60,6 +60,10 @@ DISCLOSURES: tuple[Disclosure, ...] = (
     Disclosure("image.splice_regions", _ran("loc.splice"), "local editing regions",
                "The PNG region check looks for local recompression differences. It can flag ordinary processing, "
                "and small or weak edits can go unmarked. Region measurements carry no weight in the whole-image estimate."),
+    Disclosure("image.native_regional", _ran("loc.native_regional"), "sensitive regional screening",
+               "The sensitive regional check finds editing cues and can also highlight untouched images or ordinary edits. "
+               "AI authorship is inconclusive from this check alone. Its uncalibrated responses and regional highlights "
+               "carry no weight in the overall authorship confidence."),
     Disclosure("image.unadmitted_detectors", _ran("img.spai", "img.univfd"), "SPAI and UnivFD",
                "SPAI and UnivFD are not admitted: their scores are shown but carry no weight in the decision."),
     Disclosure("video.synthesis", _kind("video"), "fully generated video",
@@ -109,7 +113,7 @@ def for_result(result: Result) -> list[dict[str, str]]:
 
     The measured figures are those of the fusion that produced the result (D-68): a fallback result gets the one fallback
     disclosure, on the screen (the analysis API) and in the reports (since report template set r21)."""
-    from app.detectors.audio.calibration import SHA256, NOTE
+    from app.detectors.audio.calibration import NOTE, SHA256
 
     if (result.get("decision") or {}).get("fuser_sha256") == SHA256:
         return [{"id": "audio.local_screening", "label": "local speech calibration", "text": NOTE}]

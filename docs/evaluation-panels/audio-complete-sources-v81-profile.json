@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.audio-shared-fixed-monitor-profile/81",
+  "module": "scripts.audio_complete_sources_v81",
+  "arguments": [],
+  "child_started": true,
+  "child_exit_code": 0,
+  "guard": null,
+  "sample_errors": 0,
+  "sampling_error_events": [],
+  "terminal_observations": [
+    {
+      "pid": 79516,
+      "type": "NoSuchProcess",
+      "classification": "verified_descendant_exit_during_memory_sample"
+    }
+  ],
+  "resource_limit_observations": [],
+  "last_observation": {
+    "elapsed_s": 9.787423542002216,
+    "tree_rss_bytes": 0,
+    "ram_available_bytes": 8290205696,
+    "disk_free_bytes": 9590083584,
+    "checkpoint_disk_free_bytes": 7855684976640,
+    "violations": []
+  },
+  "sampled_tree_rss_lower_bound_bytes": 124928000,
+  "minimum_observed_available_ram_bytes": 8199389184,
+  "minimum_observed_free_disk_bytes": 9590083584,
+  "resource_journal_sha256": "bd5dc9483f9aa4a1c390dc9d39cc9dc25036df5d20841392eb8e5b69df1da997",
+  "duration_s": 9.788972083013505,
+  "limits": {
+    "seconds": 900,
+    "sampled_tree_rss_bytes": 6442450944,
+    "ram_and_disk_reserve_bytes": 1610612736,
+    "initial_ram_headroom_bytes": 6442450944,
+    "initial_disk_headroom_bytes": 3221225472
+  },
+  "monitor_implementation_sha256": "857e6dc6ccb3957a300b72ffbcbbe903342adcc4bc9a73c1ba020c5f77984b28",
+  "scope": "One explicit original-audio source qualification stage using complete v80 outputs and corrected v75 roles and verified descendant-exit handling, with no model or VAD calls. Consumed parity must pass before fresh model calls. No retry, fallback or overwrite. Missing live workers and all resource violations remain failures. RSS is sampled, not a true peak guarantee."
+}

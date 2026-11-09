@@ -24,6 +24,14 @@ accuracy scores. The [v44 review](model-selection-review-v44.md),
 [complete audio v64 result](audio-shared-confirmation-v64-result.md)
 retain the original denominators, methods and limitations.
 
+The next audio confidence study now has a
+[complete qualified source panel](audio-complete-sources-v81-result.md): 224
+genuine recordings, 240 AI recordings from three generator families and 48
+backgrounds. All 64 matched stock sources generated and decoded successfully.
+The four source roles remain separate across 157 known connected groups.
+This is source preparation; new detector comparisons and combined confidence
+fitting on that panel have not run yet.
+
 ## How the revised comparisons choose
 
 1. **Keep several plausible candidates.** Compare individual checks, wider

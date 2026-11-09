@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.audio-complete-source-summary/81",
+  "status": "complete",
+  "source_manifest_sha256": "217190341f0b49ed76a38d4282a3760e271db284031fdece6056d59bbda7e519",
+  "generation_freeze_sha256": "2726b50965edacda0e00b462b2d1eda63ca20baa24605836281588fb41d76b6c",
+  "generator_stages": {
+    "0": {
+      "profile_sha256": "27fecbf15fdf21f10fa5893211cc4d2ef9d8aeb916aa904342a62ba5f8eb5a9a",
+      "complete_sha256": "a8140dae579f455f275cff97dae35debe2c7f9066a0c05b9446958a0ae9b9a6e",
+      "source_journal_sha256": "2a5efff985f9ba9d25ad318fbbe2abe3454614dd9c5652fbe09f9cd39cf4d8fd"
+    },
+    "1": {
+      "profile_sha256": "ee67039f0cafc4da905aeff9b2f520ae7b2d81b974eb6eab67ad0a1cf98aa7af",
+      "complete_sha256": "aecf188ed58ee936b85b7608a7bab287be62658d06256a4a6a039c36552c1070",
+      "source_journal_sha256": "ace4e3655d30e1b84fad124916c44e1df9894de8c9f51abc710e4ae54f1d21b5"
+    },
+    "2": {
+      "profile_sha256": "496c3d04c7858235e32305024d676a7976694c8541a848b3752987eeb598728b",
+      "complete_sha256": "31bc445e2370787c52ebf2e90e64c0c60425cac53b6cd62c19fc14342bb52d92",
+      "source_journal_sha256": "2d4df74e353d7e13cd979f18e24102af3be95c66e180502367fe9111f9547e34"
+    },
+    "3": {
+      "profile_sha256": "1462374ea0ff9fb8ec86bf14e52224ed122bf2f18c955fe271087049c0b97428",
+      "complete_sha256": "ed6dd9be5d9df4f02821e7d923baf25f3f8873df5ca99aff3aaed4c9dbd79ce6",
+      "source_journal_sha256": "6b36288b29f335f9bcfb89e2e9b4a104e13fd27c920bcf0b5247a126513ce3a5"
+    }
+  },
+  "history_catalogue_sha256": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1",
+  "implementation_sha256": "8987b2b9846e6fcc1bfd55f9227b3402cea463bf1101bdcb6d40dc5df84e55f0",
+  "protocol_sha256": "ce56dc48a00e1e6a17d309923e6ccfe03c3f17b74cfbe50292a483c08a7992ac",
+  "decoder_sha256": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+  "manifest_sha256": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+  "qualification_journal_sha256": "cf3186370d431a3e80ef461a519f1c120ee0f6d7c1ec160b830bd9ee059fd3a8",
+  "generated_native_sources": 64,
+  "generator_forwards": 65,
+  "native_first_source_repeat_exact": true,
+  "original_source_files_reverified": 448,
+  "foregrounds_retained": 464,
+  "backgrounds_retained": 48,
+  "qualified_foregrounds": 464,
+  "ineligible_generated_sources": {},
+  "connected_source_components": 157,
+  "cross_role_components": 0,
+  "native_duration_s": {
+    "min": 5.05,
+    "max": 19.35,
+    "total": 820.075
+  },
+  "native_out_of_pcm16_range_samples": 0,
+  "roles": {
+    "fusion_fit": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56,
+        "stock": 16
+      },
+      "backgrounds": 12
+    },
+    "confidence_cal": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56,
+        "stock": 16
+      },
+      "backgrounds": 12
+    },
+    "selection": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56,
+        "stock": 16
+      },
+      "backgrounds": 12
+    },
+    "confirmation": {
+      "foregrounds": {
+        "clone": 20,
+        "expressive": 24,
+        "genuine": 56,
+        "stock": 16
+      },
+      "backgrounds": 12
+    }
+  },
+  "detector_calls": 0,
+  "confidence_fitting_calls": 0,
+  "defaults_changed": false,
+  "scope": "Complete source byte/sample/timeline and connected-role qualification. Four-second foreground study scope. No detector accuracy, listening review, exact spoken-word verification, model-training novelty or calibrated confidence is established. Generated media, transcripts, source identities, voice features and learned artifacts remain private."
+}

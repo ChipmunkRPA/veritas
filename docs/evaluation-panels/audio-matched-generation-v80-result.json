@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-matched-generation-result/80",
+  "status": "complete",
+  "sources": 64,
+  "generator_forwards": 65,
+  "native_first_source_repeat_exact": true,
+  "detector_calls": 0,
+  "state_unchanged_after_inference": true,
+  "network_attempts": 0,
+  "stages_passed": 4,
+  "guards": 0,
+  "sampling_errors": 0,
+  "resource_limit_observations": 0,
+  "duration_s": 160.35424187406898,
+  "maximum_sampled_tree_rss_lower_bound_bytes": 4497113088,
+  "minimum_observed_available_ram_bytes": 4207542272,
+  "profiles_sha256": {
+    "0": "27fecbf15fdf21f10fa5893211cc4d2ef9d8aeb916aa904342a62ba5f8eb5a9a",
+    "1": "ee67039f0cafc4da905aeff9b2f520ae7b2d81b974eb6eab67ad0a1cf98aa7af",
+    "2": "496c3d04c7858235e32305024d676a7976694c8541a848b3752987eeb598728b",
+    "3": "1462374ea0ff9fb8ec86bf14e52224ed122bf2f18c955fe271087049c0b97428"
+  },
+  "freeze_sha256": "2726b50965edacda0e00b462b2d1eda63ca20baa24605836281588fb41d76b6c",
+  "v79_dependency_failure_preserved": true,
+  "scope": "Source generation and native repeat/serialization qualification only. Not detector accuracy, spoken-word verification, a calibrated confidence or a serving change. Raw source media and identities remain private."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.audio-confidence-mixture-resource-summary/82",
+  "status": "complete",
+  "role_stages": 4,
+  "variant_count": 4176,
+  "variant_generation_duration_s": 408.01587662508246,
+  "finish_duration_s": 3.955881959060207,
+  "maximum_sampled_tree_rss_lower_bound_bytes": 582270976,
+  "minimum_observed_available_ram_bytes": 6660587520,
+  "maximum_absolute_measured_snr_error_db": 0.0003226726376972522,
+  "mean_absolute_measured_snr_error_db": 2.0147587184139245e-05,
+  "guards": 0,
+  "sampling_errors": 0,
+  "resource_limit_observations": 0,
+  "verified_descendant_exit_events": 38,
+  "finish_profile_sha256": "22b97f8534bb1b7677cca5bf761d2b2323af9a7e640a16256eed0a8e3896d9c6",
+  "detector_calls": 0,
+  "confidence_fitting_calls_on_panel": 0,
+  "protected_calibration_unchanged": true,
+  "scope": "Bounded non-neural dataset preparation and exact production PCM verification; sampled RSS is a lower bound, not a true peak guarantee. Not detector quality or calibrated confidence."
+}

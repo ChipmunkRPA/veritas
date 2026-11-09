@@ -31,6 +31,10 @@ backgrounds. All 64 matched stock sources generated and decoded successfully.
 The four source roles remain separate across 157 known connected groups.
 This is source preparation; new detector comparisons and combined confidence
 fitting on that panel have not run yet.
+Its [4,176 fixed clean/background variants](audio-confidence-mixtures-v82-result.md)
+are now fully decoded and verified. Two
+[small score-fusion candidates](audio-score-fusion-v83-method.md) have authored-
+data method checks; their performance on the new panel is still unmeasured.
 
 ## How the revised comparisons choose
 

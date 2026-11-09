@@ -1,0 +1,54 @@
+{
+  "schema": "chipmunk.audio-confidence-mixture-summary/82",
+  "status": "complete",
+  "freeze_sha256": "19c7101530a138f8d945064c2cc57c53d2c877d86b8201722da72c9232e5fe34",
+  "variants_manifest_sha256": "8411c76325bc4dcde649db08ed05747c5eb917df13d811d1068b7395ee562d24",
+  "source_manifest_sha256": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+  "stages_sha256": {
+    "0": {
+      "journal_sha256": "f05bf60f29781b0020364edc4f75df7722c2dafa46a9642d80b2c0ffca210821",
+      "profile_sha256": "a9e6182c9e3b9ab4c56ec66473c01eb155be766462c14b3bcf0bd3e4e5d270fb"
+    },
+    "1": {
+      "journal_sha256": "7c4b4437b6945f81111aa2592b71973ab67b34fb6ec8c6ab7aa7d0ebbbf6d28f",
+      "profile_sha256": "8f05b94666b4701333c60e67396065e1016daafd323011d7cf425607aa487790"
+    },
+    "2": {
+      "journal_sha256": "e3b5c38e045dac30c9a0aebdf66b5560339c203cb07d4618358e5c0d30aa09e1",
+      "profile_sha256": "8e7e9f1e589dea5ccd3798822d411d64d6454be921bcfb6ce15647430edac283"
+    },
+    "3": {
+      "journal_sha256": "03674280edc37496e1b937564f1a57f7f77513a63d6a33435da2c8d0ba476864",
+      "profile_sha256": "e55c9d300dadb3c3211cf17ea76d49e7d9d3e16dcf8bde2ca0f822bc006f1701"
+    }
+  },
+  "variants": 4176,
+  "foregrounds": 464,
+  "backgrounds": 48,
+  "conditions": {
+    "clean": 464,
+    "noise_0": 464,
+    "noise_5": 464,
+    "noise_15": 464,
+    "music_5": 464,
+    "music_15": 464,
+    "speech_0": 464,
+    "speech_5": 464,
+    "speech_15": 464
+  },
+  "role_counts": {
+    "fusion_fit": 1044,
+    "confidence_cal": 1044,
+    "selection": 1044,
+    "confirmation": 1044
+  },
+  "truth_counts": {
+    "1": 2160,
+    "0": 2016
+  },
+  "cross_role_byte_or_pcm_aliases": 0,
+  "detector_calls": 0,
+  "confidence_fitting_calls": 0,
+  "defaults_changed": false,
+  "scope": "Four-second controlled variants with fixed group roles, measured SNR and exact production PCM. Correlated variants/shared backgrounds, historical expressive profiles/music, intended-script control without independent word alignment. No detector performance or calibrated confidence established."
+}

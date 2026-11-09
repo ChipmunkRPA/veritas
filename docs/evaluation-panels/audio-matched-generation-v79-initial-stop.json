@@ -1,0 +1,49 @@
+{
+  "schema": "chipmunk.audio-shared-fixed-monitor-profile/79",
+  "module": "scripts.audio_matched_generation_v79",
+  "arguments": [
+    "prepare"
+  ],
+  "child_started": false,
+  "child_exit_code": null,
+  "guard": "initial_headroom_unavailable",
+  "sample_errors": 0,
+  "sampling_error_events": [],
+  "terminal_observations": [],
+  "resource_limit_observations": [
+    {
+      "elapsed_s": 0.00012049998622387648,
+      "tree_rss_bytes": 0,
+      "ram_available_bytes": 6382895104,
+      "disk_free_bytes": 9626144768,
+      "checkpoint_disk_free_bytes": 7855898886144,
+      "violations": [
+        "initial_ram_headroom"
+      ]
+    }
+  ],
+  "last_observation": {
+    "elapsed_s": 0.00012049998622387648,
+    "tree_rss_bytes": 0,
+    "ram_available_bytes": 6382895104,
+    "disk_free_bytes": 9626144768,
+    "checkpoint_disk_free_bytes": 7855898886144,
+    "violations": [
+      "initial_ram_headroom"
+    ]
+  },
+  "sampled_tree_rss_lower_bound_bytes": 0,
+  "minimum_observed_available_ram_bytes": 6382895104,
+  "minimum_observed_free_disk_bytes": 9626144768,
+  "resource_journal_sha256": "7a388b87e21525e2f8f99ae282251ac96376a70720f52f7be7a7e5ce2394bfba",
+  "duration_s": 0.0006808339385315776,
+  "limits": {
+    "seconds": 900,
+    "sampled_tree_rss_bytes": 6442450944,
+    "ram_and_disk_reserve_bytes": 1610612736,
+    "initial_ram_headroom_bytes": 6442450944,
+    "initial_disk_headroom_bytes": 3221225472
+  },
+  "monitor_implementation_sha256": "991804c59e61117e233c070e080a7b2ef4bf6e3948b832698fcdeaf1b02b844e",
+  "scope": "One fixed offline matched-source generation stage with v75 source roles and verified descendant-exit handling. No detector, VAD or confidence fitting calls. Consumed parity must pass before fresh model calls. No retry, fallback or overwrite. Missing live workers and all resource violations remain failures. RSS is sampled, not a true peak guarantee."
+}

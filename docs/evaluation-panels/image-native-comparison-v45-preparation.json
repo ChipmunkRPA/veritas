@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.native-multimodel-preparation-result/45",
+  "execution_freeze_sha256": "56e1cad738f3d81211fa619c82354685bda99fb4434123fb00858ca6b0d07d5e",
+  "successful_preparation_profile_sha256": "d54156d4137fb4fb822de6ecc62caa6e386529199e490914137260ed0e5ad604",
+  "preparation_child_exit_code": 0,
+  "preparation_guard": null,
+  "sampling_errors": 0,
+  "duration_s": 2.933707333053462,
+  "sampled_tree_rss_lower_bound_bytes": 204750848,
+  "focused_local_tests_passed": 47,
+  "ruff_passed": true,
+  "source_groups": 24,
+  "source_photos": 27,
+  "readouts": 7,
+  "neural_calls_planned": 327,
+  "neural_calls_completed": 0,
+  "confirmation_neural_calls": 0,
+  "serving_admitted": false,
+  "scope": "Exact prospective comparison, three detector paths, three candidate settings and actual fixed mask unions/intersections. Point sources are comparison/selection, not a final benchmark. Require remote verified freeze before any source call."
+}

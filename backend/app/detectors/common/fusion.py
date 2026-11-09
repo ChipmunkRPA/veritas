@@ -1,10 +1,10 @@
 """Evidence fusion.
 
-Statistical signals are combined as a weight-averaged log-odds (a calibrated ensemble that is
-robust to one over-confident member). Decisive provenance evidence (e.g. a C2PA manifest that
-names a generative-AI tool, or a Stable-Diffusion `parameters` chunk) overrides the statistical
-estimate because it is *documentary*, not inferential. Agreement between independent signal
-families drives the reported confidence.
+The legacy fallback averages statistical log-odds with hand-set weights. This is
+not an empirically calibrated ensemble, and different categories need not be
+independent. Metadata/provenance records do not enter the statistical score.
+Trusted explicit-AI provenance is handled by the staged provenance gate, which
+verifies trust and exact-file binding rather than accepting a Signal flag.
 """
 from __future__ import annotations
 
@@ -26,8 +26,8 @@ def _sigmoid(x: float) -> float:
 def fuse(signals: list[Signal], *, subject: str = "content", min_informative: int = 2) -> Verdict:
     # every weighted probability takes part in the log-odds average (a near-0.5 signal contributes ~0 logit);
     # strength only affects how the evidence is described, never whether it is counted
-    informative = [s for s in signals if s.ai_probability is not None and s.weight > 0]
-    decisive = [s for s in signals if s.decisive and s.ai_probability is not None]
+    informative = [s for s in signals if s.ai_probability is not None and s.weight > 0
+                   and s.category not in {"metadata", "provenance"}]
 
     if informative:
         num = sum(s.weight * _logit(s.ai_probability) for s in informative)
@@ -39,24 +39,13 @@ def fuse(signals: list[Signal], *, subject: str = "content", min_informative: in
     reasoning: list[str] = []
     caveats: list[str] = []
 
-    # --- decisive overrides ---
-    for s in decisive:
-        if s.ai_probability >= 0.5:
-            p = max(p, 0.97)
-            reasoning.append(f"Decisive: {s.name} — {s.reasoning}")
-        else:
-            p = min(p, 0.10)
-            reasoning.append(f"Decisive: {s.name} — {s.reasoning}")
-
     # --- agreement / confidence (near-neutral signals neither agree nor disagree) ---
     decided = [s for s in informative if s.strength != "none"]
     for_ai = [s for s in decided if s.direction == "supports_ai"]
     for_auth = [s for s in decided if s.direction == "supports_authentic"]
     families = {s.category for s in decided}
     n = len(decided)
-    if decisive:
-        confidence = "high"
-    elif n < min_informative:
+    if n < min_informative:
         confidence = "low"
     else:
         probs = [s.ai_probability for s in decided]
@@ -73,7 +62,7 @@ def fuse(signals: list[Signal], *, subject: str = "content", min_informative: in
     band = band_for(p)
 
     # --- reader-facing reasoning: a few sentences that add information; per-signal detail stays in signals[] ---
-    ranked = sorted(informative, key=lambda s: abs((s.ai_probability or 0.5) - 0.5) * s.weight, reverse=True)
+    ranked = sorted(informative, key=lambda s: abs(s.ai_probability - 0.5) * s.weight, reverse=True)
     strong_ai = [s for s in ranked if s.direction == "supports_ai" and s.strength in ("strong", "decisive")]
     strong_auth = [s for s in ranked if s.direction == "supports_authentic" and s.strength in ("strong", "decisive")]
 
@@ -100,19 +89,21 @@ def fuse(signals: list[Signal], *, subject: str = "content", min_informative: in
     if p < 0.5 and for_ai and not strong_ai:
         reasoning.append("The signals pointing to AI are weak and are outweighed by the authentic-leaning evidence.")
     if strong_ai and strong_auth:
-        reasoning.append(f"Strong signals disagree ({len(for_ai)} for AI, {len(for_auth)} for authentic); the estimate weights each by its evaluated reliability, so confidence is reduced.")
+        reasoning.append(f"Strong signals disagree ({len(for_ai)} for AI, {len(for_auth)} for authentic); the combined score uses declared weights, whose reliability has not been established for this setting.")
     if ranked and not (strong_ai or strong_auth):
         reasoning.append(f"No single detector is decisive; the estimate aggregates {n} moderate or weak signals, led by {_names(ranked, 2)}.")
-    if n < min_informative and not decisive:
-        caveats.append("Few informative signals were available; treat the probability as indicative only.")
+    if n < min_informative:
+        caveats.append("Few informative content checks were available; treat the score as indicative only.")
+    if any(s.category in {"metadata", "provenance"} for s in signals):
+        caveats.append("Metadata and parsed provenance records are advisory here; they do not change the content score or establish originality.")
     caveats.append(
-        "Probabilities are statistical estimates from open-source detectors: evidence subject to uncertainty and error, not a finding "
-        "of authorship or manipulation. Human review is required before any consequential decision."
+        "This combined score uses hand-set weights and is not a calibrated probability of AI authorship. "
+        "Its confidence label describes signal agreement, not measured accuracy. Human review is required before any consequential decision."
     )
 
     summary = (
         f"The {subject} is assessed as \u201c{BAND_LABELS[band]}\u201d "
-        f"(estimated probability of AI generation/manipulation {p:.0%}, confidence {confidence}). "
+        f"(uncalibrated screening score {p:.0%}, signal-agreement confidence {confidence}). "
         f"{len(for_ai)} of {n} informative signals support AI involvement; {len(for_auth)} {'supports' if len(for_auth) == 1 else 'support'} authenticity."
     )
     return Verdict(

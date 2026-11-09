@@ -79,6 +79,28 @@ and unknown training overlap. Only trusted, exact-file-bound explicit-AI
 provenance can justify stopping statistical checks; absent or unverifiable tags
 do not establish originality.
 
+## Earlier provenance and fusion assumptions corrected
+
+The optional older pipeline still treated editable generator fields as decisive,
+assigned arbitrary authenticity probabilities to camera fields and parsed
+credentials, and described its hand-weighted log-odds average as calibrated.
+Those assumptions are now removed. Its metadata reader preserves the observed
+fields and explanations without an authorship probability or statistical
+weight. The common fallback also excludes metadata/provenance records from its
+score, so old or independently supplied decisive flags cannot bypass the
+trusted provenance gate. The score copy identifies hand-set weighting and
+signal-agreement confidence without claiming empirical calibration or model
+independence. No neural weight or calibrated research method changed.
+
+Eighteen focused regressions cover actual PNG fields, copied camera fields,
+parsed credential states, tool names without AI actions, and forged decisive
+flags in both directions. The broader current provenance tests also passed,
+including actual signed-asset checks: the staged trusted explicit-AI gate keeps
+working while absent, unsigned, unbound or ambiguous records do not stop content
+checks. These are local software/correctness checks, not new detector accuracy
+measurements or an outside review. The current default staged pipeline remains
+selected, and the frozen audio study bindings were reverified unchanged.
+
 Customer-facing findings continue to name the checked scope and supporting
 evidence without model identities or a public threshold claim. Skipped and
 inconclusive checks cannot become an original-file verdict. The automated SaaS

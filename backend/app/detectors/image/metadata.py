@@ -1,12 +1,9 @@
 """Provenance and metadata evidence: C2PA Content Credentials, EXIF/XMP, PNG text chunks.
 
-Documentary evidence is treated differently from statistical evidence:
-- A C2PA manifest whose claim generator / actions declare generative AI is *decisive* (the file
-  itself attests to its synthetic origin).
-- Stable Diffusion / ComfyUI / Midjourney / DALL·E markers embedded in PNG text or XMP are
-  *decisive* unless contradicted (they are written by the generator at save time).
-- Absence of metadata is *neutral* (social platforms strip it); presence of coherent camera EXIF
-  is *weak* support for authenticity (trivially forgeable).
+This legacy reader reports metadata as advisory facts without authenticity
+probabilities. Editable fields, tool names and a parsed manifest are not proof
+of AI generation or originality. The staged provenance gate separately checks
+trusted, exact-file-bound explicit-AI credentials before permitting an early stop.
 """
 from __future__ import annotations
 
@@ -24,7 +21,8 @@ from PIL.ExifTags import TAGS
 from app.core.evidence import Signal
 
 # Generator identifiers. Matched with word boundaries; a hit in a STRUCTURED field (Software, CreatorTool,
-# claim_generator, DigitalSourceType, SD parameters) is decisive; a hit in FREE TEXT (captions, comments) is weak.
+# claim_generator, DigitalSourceType, SD parameters) identifies where a declaration occurs.
+# Both structured fields and free text remain advisory without verified provenance.
 GENERATOR_PATTERNS = [
     (r"\bstable[\s_-]?diffusion\b|\bsd(?:xl)?[\s_-]?(?:1\.5|2\.1|3(?:\.5)?|turbo)\b|\bstability\s*ai\b|\bcomfyui\b|\bautomatic1111\b|\binvokeai\b|\bfooocus\b|\bsd[\s_-]?webui\b", "Stable Diffusion / ComfyUI"),
     (r"\bmidjourney\b", "Midjourney"),
@@ -367,37 +365,34 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
     c2 = read_c2pa(path)
     meta = {"exif": exif, "png_text": {k: v[:300] for k, v in png_text.items()}, "xmp_present": bool(xmp), "c2pa": {k: v for k, v in c2.items() if k != "raw"}}
 
-    # --- C2PA ---
+    # This summary does not expose the staged gate's complete trust/binding
+    # validation. Never infer decisive provenance from its parser state or names.
     if c2.get("present"):
         hits, ai_dst = c2pa_declares_ai(c2)
         if hits or ai_dst:
             signals.append(
                 Signal(
-                    id="c2pa_ai_manifest", name="C2PA Content Credentials declare generative AI", category="provenance",
+                    id="c2pa_ai_manifest", name="C2PA manifest contains AI-related metadata", category="provenance",
                     observed=f"claim_generator='{c2.get('claim_generator','')}'; digitalSourceType={c2.get('digital_source_types')}",
-                    reference="Camera/editor manifests carry digitalCapture/edit actions, never trainedAlgorithmicMedia",
-                    ai_probability=0.98, weight=3.0, direction="supports_ai", strength="decisive", decisive=True,
-                    reasoning="The file carries a cryptographically bound C2PA manifest in which the producing tool itself declares the content as AI-generated (" + ", ".join(hits or ["trainedAlgorithmicMedia"]) + "). This is documentary evidence from the generator, not a statistical inference.",
+                    reference="A parsed declaration requires separate signer-trust, active-claim and exact-file-binding verification",
+                    ai_probability=None, weight=0.0, direction="neutral", strength="none",
+                    reasoning="The manifest contains AI-related declarations or tool names (" + ", ".join(hits or ["trainedAlgorithmicMedia"]) + "). This reader has not established the complete trusted provenance required for an origin conclusion. Tool names alone do not declare that these pixels were AI-generated; content checks must continue.",
                     details={"validation_state": c2.get("validation_state"), "actions": c2.get("actions")},
                 )
             )
         else:
-            state_ = str(c2.get("validation_state", "")).lower()
-            valid = state_ in ("valid", "trusted", "validationstate.valid", "validationstate.trusted")
             signals.append(
                 Signal(
-                    id="c2pa_manifest", name="C2PA Content Credentials present (non-AI)", category="provenance",
+                    id="c2pa_manifest", name="C2PA manifest without an identified AI declaration", category="provenance",
                     observed=f"claim_generator='{c2.get('claim_generator','')}', validation={c2.get('validation_state')}",
-                    reference="A valid capture/edit manifest binds the pixels to a signed provenance chain",
-                    ai_probability=0.15 if valid else 0.35, weight=1.5 if valid else 0.5,
-                    direction="supports_authentic" if valid else "neutral", strength="strong" if valid else "weak",
-                    reasoning="A C2PA manifest is present and does not declare generative AI. "
-                    + ("Its signature validates, so the pixels have not been altered since signing." if valid else "Its validation state is not confirmed, so it is only weak evidence."),
+                    reference="A signature or absence of an AI declaration does not establish original capture or exclude prior AI editing",
+                    ai_probability=None, weight=0.0, direction="neutral", strength="none",
+                    reasoning="A parsed C2PA manifest is present without an identified AI declaration. This does not establish originality or exclude AI-generated content before signing. Content checks must continue.",
                     details={"actions": c2.get("actions")},
                 )
             )
 
-    # --- generator markers: structured fields are decisive, free text is weak ---
+    # Structured and free-text markers can both be copied, edited or forged.
     # N-19n: one rule with the v2 check (`generator_markers`): the lists of structured fields stood here a second time
     markers = generator_markers(exif, png_text, xmp)
     structured_hits = [*markers["structured_hits"], *([SOURCE_TYPE_LABEL] if markers["source_type"] else [])]
@@ -407,9 +402,9 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
             Signal(
                 id="generator_metadata", name="Generative-AI tool named in structured metadata", category="provenance",
                 observed="; ".join(structured_hits) if structured_hits else "Stable-Diffusion style generation parameters",
-                reference="Camera/editor files name a camera or editor in these fields, never a generator",
-                ai_probability=0.97, weight=3.0, direction="supports_ai", strength="decisive", decisive=True,
-                reasoning="The file's structured provenance fields name a generative-AI tool or carry its generation parameters (" + "; ".join(where or ["structured field"]) + "). These fields are written by the producing software at save time.",
+                reference="Structured metadata is editable and can name a tool without proving the uploaded pixels were generated by it",
+                ai_probability=None, weight=0.0, direction="neutral", strength="none",
+                reasoning="Structured fields name a generative-AI tool or contain generation-style parameters (" + "; ".join(where or ["structured field"]) + "). These editable fields are advisory declarations, not a verified tool signature or a calibrated probability. Content checks must continue.",
                 details={"hits": structured_hits, "locations": where, "png_keys": list(png_text.keys())[:10]},
             )
         )
@@ -420,8 +415,8 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
                 Signal(
                     id="generator_mention_freetext", name="Generative-AI terms in free-text metadata (caption/comment)", category="metadata",
                     observed="; ".join(free_hits), reference="Captions and comments are user-editable and may mention AI tools without the image being synthetic",
-                    ai_probability=0.65, weight=0.5, direction="supports_ai", strength="weak",
-                    reasoning="A caption, description or comment field mentions a generative-AI tool or an 'AI generated' phrase. This is a user-written hint, not a tool signature, so it is weighted as weak evidence only.",
+                    ai_probability=None, weight=0.0, direction="neutral", strength="none",
+                    reasoning="A caption, description or comment mentions a generative-AI tool or an 'AI generated' phrase. This user-editable mention is advisory context, not a tool signature, and does not contribute to the authenticity score.",
                     details={"hits": free_hits},
                 )
             )
@@ -435,10 +430,9 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
             Signal(
                 id="camera_exif", name="Camera EXIF present" + (" and coherent" if coherent else ""), category="metadata",
                 observed=f"Make='{make}', Model='{model}', Software='{software}'" + (f", Exposure={exif.get('ExposureTime','')}, ISO={exif.get('ISOSpeedRatings', exif.get('PhotographicSensitivity',''))}" if exif.get("ExposureTime") else ""),
-                reference="Generated images have no capture device; EXIF is, however, trivially forgeable",
-                ai_probability=0.45 if edited else (0.22 if coherent else 0.30), weight=0.9 if coherent else 0.5,
-                direction="neutral" if edited else "supports_authentic", strength="moderate" if coherent else "weak",
-                reasoning="Capture-device metadata is consistent with a camera original" + (" — make, model, exposure and ISO are all present and no editing software is recorded, which generators and most re-encoders do not produce." if coherent else ".") + (f" The Software tag shows post-processing in '{software}', so the file was edited after capture." if edited else ""),
+                reference="Capture-device fields can survive edits, be copied to AI content, or be forged",
+                ai_probability=None, weight=0.0, direction="neutral", strength="none",
+                reasoning="The file contains capture-device fields" + (", including make, model, exposure and ISO." if coherent else ".") + (f" The Software field names an editor ('{software}')." if edited else "") + " These editable fields do not establish original capture or exclude AI editing and do not contribute to the authenticity score.",
                 details={"edited_with": software if edited else None},
             )
         )
@@ -447,7 +441,7 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
             Signal(
                 id="editor_software", name="Editing software tag without camera data", category="metadata",
                 observed=f"Software='{software}'", reference="Originals carry Make/Model; exported edits often do not",
-                ai_probability=0.5, weight=0.3, direction="neutral", strength="weak",
+                ai_probability=None, weight=0.0, direction="neutral", strength="none",
                 reasoning="The file was saved by an editing application and no capture-device metadata remains; this indicates processing but not its nature.",
             )
         )
@@ -455,7 +449,7 @@ def metadata_signals(path: Path, im: Image.Image) -> tuple[list[Signal], dict]:
         signals.append(
             Signal(
                 id="no_metadata", name="No capture metadata", category="metadata",
-                observed="No EXIF Make/Model, no C2PA, no generator markers",
+                observed="No EXIF Make/Model capture-device fields",
                 reference="Social-media and messaging apps strip metadata; generators usually write none",
                 ai_probability=None, weight=0.0, direction="inconclusive", strength="none",
                 reasoning="Absence of metadata is uninformative on its own: it is equally consistent with a re-shared photograph and with a synthetic image.",

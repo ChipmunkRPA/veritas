@@ -34,7 +34,7 @@ class Signal(BaseModel):
     reasoning: str = Field(description="Why this observation supports the direction stated")
     artifacts: list[str] = Field(default_factory=list, description="Artifact file names (heatmaps, plots, crops)")
     details: dict[str, Any] = Field(default_factory=dict)
-    decisive: bool = Field(default=False, description="Hard evidence that overrides statistical fusion")
+    decisive: bool = Field(default=False, description="Legacy marker retained for compatibility; it does not authorize a statistical override. Trusted provenance is verified separately.")
 
     @staticmethod
     def strength_from_prob(p: float) -> Strength:

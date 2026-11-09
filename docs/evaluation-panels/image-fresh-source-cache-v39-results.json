@@ -1,0 +1,88 @@
+{
+  "schema": "chipmunk.fresh-image-source-cache-summary/39",
+  "metadata_selected": 256,
+  "metadata_unresolved": 67,
+  "metadata_matched_prior_creator_excluded": 26,
+  "cache_planned": 163,
+  "cache_recorded": 163,
+  "cache_statuses": {
+    "qualified_native_reference": 161,
+    "unresolved": 2
+  },
+  "cache_unresolved_reasons": {
+    "Static reference unavailable": 2
+  },
+  "existing_inventory_sources": 705,
+  "qualified_new_sources": 161,
+  "new_components": 155,
+  "new_photos_in_prior_linked_components": 0,
+  "metadata_and_pixel_unlinked_sources": 161,
+  "metadata_and_pixel_unlinked_components": 155,
+  "unlinked_licence_ids": {
+    "4": 91,
+    "5": 70
+  },
+  "pairwise_link_reasons_all_sources": {
+    "same_attributed_profile": 236
+  },
+  "phase_profiles": [
+    {
+      "phase": 0,
+      "profile_sha256": "4c2b4bb6134ec34300de5013b2513d74ae3481c6214807a75a64b010944c4eb2",
+      "duration_s": 11.557129416032694,
+      "sampled_tree_rss_lower_bound_bytes": 112721920
+    },
+    {
+      "phase": 1,
+      "profile_sha256": "6792f6d68c4a07696109682df4896997f4ce8d8d678c2dcdf6c9bcec5c8abefa",
+      "duration_s": 11.607089791912585,
+      "sampled_tree_rss_lower_bound_bytes": 111984640
+    },
+    {
+      "phase": 2,
+      "profile_sha256": "1b78fb9232b9a6e7b05f5035110df9fec3c8a28ec82e2d7471fbda0322a04927",
+      "duration_s": 11.737348624970764,
+      "sampled_tree_rss_lower_bound_bytes": 122175488
+    },
+    {
+      "phase": 3,
+      "profile_sha256": "8a3c80a6bbe3a907aa7a5e79187eeb8e05b4f9620b68687035a35671113dd680",
+      "duration_s": 12.271721665980294,
+      "sampled_tree_rss_lower_bound_bytes": 122273792
+    },
+    {
+      "phase": 4,
+      "profile_sha256": "e18a653149545c373c469d9be84c1533b1f0af7006bdbed5b2095fee3d6772d4",
+      "duration_s": 11.82533954095561,
+      "sampled_tree_rss_lower_bound_bytes": 135217152
+    },
+    {
+      "phase": 5,
+      "profile_sha256": "ba2685a84d089d1f94cff9da146243bec939251a0dc1a0bd1be940860c93d8c9",
+      "duration_s": 2.13810266694054,
+      "sampled_tree_rss_lower_bound_bytes": 134692864
+    }
+  ],
+  "private_plan_sha256": "bba4cc565bfd6540d6054fe75931bb693e280472ac5591c0da698901c8834fc2",
+  "private_groups_sha256": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea",
+  "neural_forwards": 0,
+  "generator_outputs": 0,
+  "roles_assigned": false,
+  "evaluation_admitted": false,
+  "limitations": "Current JPEG reference pixels and conservative source/profile/exact-RGB/thumbnail components only. No camera-origin authentication, creator-alias resolution or assurance against transformed duplicates/pretraining overlap. Generator component rights and authored hardware/geometry probes remain necessary. No detector accuracy result, outside human review, workflow or outreach.",
+  "private_summary_sha256": "d313086682e19d5bbbea043a65a0db3b9e0a87dfe1d32a77b2c589bb7f90384a",
+  "seal_profile_sha256": "8c7fa3fdd01b27417bf80ebdcc52d87c648b3b0203a9ce2ee704a33de5fbc5c5",
+  "source_http_statuses": {
+    "200": 161,
+    "404": 2
+  },
+  "retained_encoded_body_bytes": 28659626,
+  "complete_source_graph_records": 866,
+  "seal_duration_s": 1.340594624984078,
+  "seal_sampled_tree_rss_lower_bound_bytes": 130531328,
+  "local_focused_tests_passed": 53,
+  "prospective_freeze_commit": "5c4c1b10effae33ab30b208aa95c5b98bd9949f7",
+  "prospective_freeze_remote_blob_sha": "6417fd4b6b9e8da918e12918313dd15b6c09594f",
+  "raw_source_media_published": false,
+  "source_sketches_or_pairings_published": false
+}

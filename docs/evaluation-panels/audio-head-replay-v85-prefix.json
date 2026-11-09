@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-head-replay-prefix-summary/85",
+  "status": "complete_for_fixed_first_seven_chunks",
+  "cases": 609,
+  "assessed_cases_replayed": 580,
+  "unassessed_cases_preserved": 29,
+  "maximum_probability_reconstruction_errors": {
+    "original_head": 8.74657717364613e-08,
+    "serving_calibration": 0.0,
+    "v7": 0.0,
+    "standalone": 0.0,
+    "complement": 0.0
+  },
+  "reviewer_sha256": "17f0d958d74aa0d6b2dffb796fcd50405ef2d8af35da65b6880441b0cd023d70",
+  "input_journals_sha256": {
+    "0": "234abc8afc62de32d9922baafed876b953213832141ca3bb242445bdf08bed9e",
+    "1": "d3201e317e1e0e605ffac6256afd2a2074ae6fdd9085d13df9cdc49c99e788fc",
+    "2": "c57900a393b12381136ddf771e1bbb880f7c27dce659b1fc156b7d76f679ffd0",
+    "3": "cbe1a28092d2dc2aafec1ba81e40804d72f4b18a9ed748abc8a0d4bdd85c494b",
+    "4": "d99b509e8f400640a76b63c858e07d5326b7b3c8fea247ee5dad3fd930fc0e70",
+    "5": "286ac3f3c5e38c9c02520fef4d5aea6deb1c8bacc809d8dc918c509a1d1bfb35",
+    "6": "9ddd4b68483c739185e24b032b2d4262bb75b72e4ec0d5219a2726f410f80f3e"
+  },
+  "new_neural_calls": 0,
+  "scope": "Separate numerical/feature-hash/clock replay on the first seven completed fitting chunks only, not the full study. No truth adjudication, accuracy, stability-decision review, outside human review or new confidence reliability is established."
+}

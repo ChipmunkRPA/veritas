@@ -1,0 +1,60 @@
+{
+  "schema": "chipmunk.fresh-image-source-cache-public-freeze/39",
+  "stage": "before_first_image_request",
+  "private_plan_sha256": "bba4cc565bfd6540d6054fe75931bb693e280472ac5591c0da698901c8834fc2",
+  "catalog_summary_sha256": "d52987951642ec2e96e554c0ab0db98c73a8633ee61c9fbd05483782d6f5dfb6",
+  "prior_groups_sha256": "380fa4c3685339c66b6b135edf032326532bdcd0fec5c1727b862cab80cd28e8",
+  "code_sha256": {
+    "backend/scripts/image_fresh_source_cache_v39.py": "0eec662b496c74aacd03c482326fd49c5424a6989c54842b3b30ab0904717e98",
+    "backend/scripts/image_fresh_source_cache_runtime_v39.py": "838e42297a860be55446f17ab5d0fa2b5affd37f9066341ff1927c7a4067031b",
+    "backend/tests/test_image_fresh_source_cache_v39.py": "e61bef996a31d35b797adb53ae0831c71f6b1254d6df3bbc6ea594995edf4ea5",
+    "backend/scripts/image_fresh_attribution_v37.py": "cfe42f79c745ce96ca41c6962bbbdd628e67e1531b902fee02c07f408bb8da48",
+    "backend/scripts/image_fresh_attribution_readout_v38.py": "7de430a6ac1602fe7ed7ff7dd469238876ad87fb8842be1d3d0000cb03e08302",
+    "backend/scripts/image_attribution_v20.py": "20f45e5db2c918a4ef293e9ca8c6ba81b1fdea7272cef98d372bd3016be572b9",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/scripts/image_source_rights_v19.py": "2faf2eb06f16440fbf0ccb0d005fed615299e3f51b3920e556abb16364c163c1",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae"
+  },
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "requests": "2.34.2",
+    "psutil": "7.2.2"
+  },
+  "metadata_selected": 256,
+  "metadata_unresolved_retained": 67,
+  "metadata_matched_known_creator_excluded": 26,
+  "selected_cache_references": 163,
+  "phase_sizes": [
+    32,
+    32,
+    32,
+    32,
+    32,
+    3
+  ],
+  "maximum_source_body_bytes": 5000000,
+  "request_connect_read_timeouts_s": [
+    10,
+    20
+  ],
+  "minimum_request_start_interval_s": 0.25,
+  "redirects_retries_or_replacements": false,
+  "source_geometry": "JPEG only,dimensions1..2048,upright EXIF1 or absent,no silent rotation",
+  "grouping": "Unmodified v22 source ID,canonical creator key,exact native RGB,and informative256bit dHash<=8 with aspect within2%;complete transitive components against every705 prior inventory record",
+  "prepare_profile_sha256": "f800b713b7c7bad88394dd05542f93e618bac3a99961e62a6234d7eec278b882",
+  "focused_local_tests_passed": 53,
+  "new_neural_forwards": 0,
+  "generator_outputs": 0,
+  "source_roles_assigned": false,
+  "evaluation_admitted": false,
+  "limits": {
+    "seconds_per_phase": 900,
+    "sampled_tree_rss_bytes": 6442450944,
+    "ram_internal_external_disk_reserves_bytes": 1610612736,
+    "initial_available_ram_bytes": 6442450944,
+    "initial_free_internal_external_disk_bytes": 3221225472
+  },
+  "privacy": "Raw JPEGs on authorized Seagate volume;identifiers,profiles,pairings,sketches and exact source graph remain private. Public counts and hashes only."
+}

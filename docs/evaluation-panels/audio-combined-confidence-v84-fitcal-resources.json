@@ -1,0 +1,16 @@
+{
+  "schema": "chipmunk.audio-combined-fitcal-resources/84",
+  "stages": 24,
+  "cases": 2088,
+  "extraction_duration_s": 2956.1438007500255,
+  "training_duration_s": 15.335564750013873,
+  "maximum_sampled_tree_rss_lower_bound_bytes": 4807589888,
+  "minimum_observed_available_ram_bytes": 3731980288,
+  "guards": 0,
+  "sample_errors": 0,
+  "resource_limit_observations": 0,
+  "verified_descendant_exit_events": 8,
+  "trained_sha256": "0aa21efdad351eebbc2390f241c49f1e40d55d188277db442f092c7b1ef668ae",
+  "training_profile_sha256": "abdbdcda9af097090493af8e4b35c995a22a33b01fbf41c142bffbecd89741e4",
+  "scope": "Bounded CPU extraction and fitting/calibration setup only; sampled RSS is a lower bound, not a true peak. No held-role prediction quality or default change."
+}

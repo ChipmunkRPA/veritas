@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.audio-head-replay-fitcal-summary/85",
+  "status": "complete",
+  "cases": 2088,
+  "assessed_cases_replayed": 2007,
+  "unassessed_cases_preserved": 81,
+  "maximum_probability_reconstruction_errors": {
+    "original_head": 8.74657717364613e-08,
+    "serving_calibration": 0.0,
+    "v7": 0.0,
+    "standalone": 0.0,
+    "complement": 0.0
+  },
+  "reviewer_sha256": "17f0d958d74aa0d6b2dffb796fcd50405ef2d8af35da65b6880441b0cd023d70",
+  "review_receipts_sha256": {
+    "0": "f4ffbe6f29667376a6a4e49de5df9c6a7ad162308d279f73e8d7ea8489ffa37c",
+    "1": "c21235baeda85bd28d119ac024f27713a7baecd2638b447d430740ab6a1fff19",
+    "2": "838536a73c40c61f292a3c1cdf8e7b1b88c3c2856d55492c12d81c4e4343fddf",
+    "3": "44b4535a32a3cbc038dc1120bdd866558fc639f91fd7ecffd5d14d5e6c9eec90",
+    "4": "636c844a81d328db3602ce2526653ad57b0f3ce137aa01691546e77e9f2ae4e0",
+    "5": "3293d4ed597d8227648267940ae07792c15aab3eff3a5eef84a01275be7d7ebb",
+    "6": "393e4a005cd76dd7cb231059c6a498e6f4dbb279238578458059b1acc673db91",
+    "7": "79922be336af6f159973d509de9f41b9e313e858dfd4ba771537b345871fb1a2",
+    "8": "343a4ecbda6abd7ddb79629f71710273bafe75f81b6af14debd4ba3e0ee52030",
+    "9": "789609c65ff6f5136b20f1806a25864e4b07dd2b4577614d133fb4baa4440aab",
+    "10": "b99a408d5a4a655dd9bc9efe79dc46dd03dc25942f9d63d6081fcc6735c3ed2f",
+    "11": "a2becf3a3fac602d12dfd38ec9bc13ffed99eb39d2e0f319ac00a373eb457faf",
+    "12": "5956b7933b5a4378b0a94099ac6c6e9371a84182b752b0af01d204bdd8fb93e6",
+    "13": "4431fb5334957a0bf7879becc92ec00053262d0e19da8b02bbcf388f27796e1e",
+    "14": "88be767a0f6583fab20a095b47496113f8e0c8ad1c39ab549143d102c6457a1d",
+    "15": "80debe5fff1741037809bbecf6397bd5c3aca58f07fb272d2c57f43b78933f35",
+    "16": "aa0ffa08bfa0a3da31b92a011819fe785ea6f5b1dc221215bcb87ec7563416c3",
+    "17": "22d0099412b8edcf5dfff92ec65f5b18f7c5411363cd81bc2ada6f3e02717337",
+    "18": "9e1a446ed3e5d6c5c86999ce1f457934902d31e829a93f109f5e4bf161892941",
+    "19": "c368859605abdad36f76ea69a67608414735b2b35817889c26fdc82126b55562",
+    "20": "a60a437809da9ba9879faa49bb2c3cca371529a3481c9bb9a59be74b79a335f3",
+    "21": "1cf9cf6736ec8bcc4d5d0a73ebb9d131d79066c720913564b1435cdc8e483b6a",
+    "22": "feda61953ea48d52a97e3d00948e18ec0d2ac0477419c309b0b7305012bfbdcb",
+    "23": "a18dad1b5a0c6826696c8b5683aea586e8dddb7aad5300d79b0f7a68f38d6ae8"
+  },
+  "new_neural_calls": 0,
+  "scope": "Separate numerical/feature-hash/input-clock review of both complete fitting/calibration roles. Not held-role accuracy, stability-decision review, outside human review or population confidence."
+}

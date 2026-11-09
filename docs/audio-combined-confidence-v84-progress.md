@@ -15,12 +15,29 @@ of 4,614,176,768 bytes and no guard, sampling error or resource-limit observatio
 This means eighteen reproducible responses, **not eighteen correct detections**.
 See the [parity receipt](evaluation-panels/audio-combined-confidence-v84-parity.json).
 
-New-source extraction is running sequentially through the fitting and calibration
-roles. The dispatcher stops at the first failed stage and does not retry or
-overwrite existing results. It cannot start selection or final-confirmation
-chunks. Both new combinations must finish independent fitting/calibration before
-selection, and the exact selected method must be published before final forwards.
-There is no completed fresh detection or new calibration-quality result yet.
+All **2,088 fitting/calibration cases have completed** across 24 bounded stages,
+with no guard, sampling error or resource-limit observation. Extraction took
+2,956.14 seconds total. Maximum sampled child-tree RSS was 4,807,589,888 bytes;
+minimum observed available RAM was 3,731,980,288 bytes. These are sampled limits,
+not guaranteed peak measurements. The
+[resource receipt](evaluation-panels/audio-combined-confidence-v84-fitcal-resources.json)
+retains the figures separately from any predictive-performance claim.
+
+The two new combinations finished fitting and their own separate calibration
+maps. The global method used 999 assessed fitting cases and 1,008 assessed
+calibration cases. Both measured contexts have calibration support: low context
+641 cases, high context 367 cases. The trained coefficients and group/source IDs
+remain private; the [training receipt](evaluation-panels/audio-combined-confidence-v84-training.json)
+publishes aggregate support and whole-artifact hashes only. A separate fitted-
+map arithmetic check reproduced all 2,007 assessed probabilities within 2.23e-16,
+kept 81 unassessed outputs missing, and verified predictions are unchanged when
+truth/provider/condition/source metadata are omitted. This
+[wiring check](evaluation-panels/audio-combined-confidence-v84-fitted-wiring.json)
+uses fitting/calibration data and does not establish held-role reliability.
+
+Selection and final-confirmation outcomes remain unused. The exact selected
+methods must be published before final forwards. There is no completed fresh
+selection/final detection or new calibration-quality result yet.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all
@@ -39,6 +56,12 @@ prefix of fitting data, not the full 4,176-case study. See the
 [aggregate replay receipt](evaluation-panels/audio-head-replay-v85-prefix.json)
 and [reviewer](../backend/scripts/replay_audio_scores_v85.py).
 
+The same reviewer subsequently completed all 24 fitting/calibration chunks:
+**2,007 assessed cases replayed, 81 unassessed cases preserved**. The
+[complete fit/cal replay receipt](evaluation-panels/audio-head-replay-v85-fitcal.json)
+extends the prefix result; it remains an arithmetic/data-integrity review,
+not an accuracy measurement or outside human participation.
+
 All 20 experiment/reviewer checks and lint passed locally. Raw audio, source
 IDs/pairings, individual fingerprints, compact/full response records, features
 and learned coefficients remain private. Aggregate metrics, errors, coverage
@@ -55,3 +78,12 @@ AI families. Also, class-only error/bin summaries must not be interpreted as
 standalone probability-calibration tests. Five additional checks verify joint
 counts, missing outcomes and background-role/exposure handling. These are
 secondary descriptive diagnostics, not a new performance or reliability result.
+
+A [parallel shared-reference calibration alternative](audio-common-reference-v87-protocol.md)
+was fixed after these development/calibration results and before any held-role
+forward. It preserves the existing context score fits and changes only whether
+reference weighting is balanced within each context or shared across contexts.
+It reuses development/calibration data rather than claiming new independent
+calibration data. Primary v84 selection stays intact; both fixed choices must
+precede final forwards. The same held recordings compare both analyses, so they
+are not two independent confirmation cohorts.

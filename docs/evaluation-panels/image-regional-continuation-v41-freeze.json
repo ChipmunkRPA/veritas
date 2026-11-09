@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.regional-continuation-freeze/41",
+  "private_plan_sha256": "de28d3672c387e7d73672f2bfc14663af59644710a9b07b2537cfecf1006a398",
+  "original_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+  "original_freeze_sha256": "15c9557d35ad5586f4170295e9e6800a5f60ff38586894edea42a6aeebddca99",
+  "prefix_chain_sha256": "c94dd2cc474594758065be384efc79df5d19bd19a0df7271c13e2eb2ca6cdea4",
+  "prefix_checkpoint_sha256": "981828309f496ad8a54b228f4987c89f029dd1e2843be797e19085c65b67ab98",
+  "accepted_prefix_phases": 33,
+  "accepted_prefix_updates": 1056,
+  "remaining_accepted_updates": 222,
+  "continuation_phases": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "total_accepted_training_updates": 1278,
+  "discarded_original_attempt_updates": 32,
+  "total_optimizer_updates_including_discarded_attempt": 1310,
+  "new_continuation_source_forwards_at_freeze": 0,
+  "held_out_source_forwards_at_freeze": 0,
+  "quarantined_original_batch": {
+    "profile_sha256": "29eef14bb9cfa112a6c8781b41d92db4ec4bed872992240c99471954d332e909",
+    "result_sha256": "8cd37fdc0fcac3a4b63f14f1a1408b3ad0f27c27c4482001ca9bcd24f2f97b77",
+    "checkpoint_sha256": "7459f62e580816a184cb764ef036c12ec0f63834d1522426a1e9509fb8cf04ab",
+    "updates_sha256": "b2303b6adb50c5ce0385cad958360c191635571eec3bc359c1781c07b7a1e51b",
+    "optimizer_updates": 32,
+    "source_forwards": 64,
+    "accepted_as_predecessor": false
+  },
+  "code_sha256": {
+    "backend/scripts/image_regional_training_v26.py": "55306d5d6b9664d2c9d60baa0ed36d54cea277435d3578896d8f35e1678f6a29",
+    "backend/scripts/image_regional_training_runtime_v26.py": "fe77eb8fe5bd86cd46c0337b9e57cce2fc886cd28659f6015c7b2757689f5d3c",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+    "backend/scripts/inspect_relayformer_v18.py": "43c0a628b8655d2a5765690572d646c612c3b9aae0430a3ae761876a2686a420",
+    "backend/scripts/prepare_relayformer_v18.py": "cde2fc5c2af3ad04608135b282be6a8bee5082b9a32f97fa7204504d8cf95678",
+    "backend/scripts/relayformer_learning_v23.py": "67b68e7a98bc4d537e4b834f4cc792f0313a180f14aa6232a8a118f220a270bc",
+    "backend/scripts/relayformer_checkpointing_v24.py": "7b7e8bdb3ff60c751497849f204825c7c0d60d835d06c7589042902afd53d002",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/scripts/image_regional_inference_v28.py": "d923496c02cdda98f952943447d952b835c27aed6aef7677aad2f228a93efc3f",
+    "backend/scripts/image_regional_continuation_v41.py": "484cff385e1bea0061a7e19775ae90fd27572157619ea8cbadde4cc9dfab77f1",
+    "backend/scripts/image_regional_continuation_runtime_v41.py": "1326b488e0b698956467d3cf60767d7552e1ec65409410c8fe7e476cd1224a5a",
+    "backend/tests/test_image_regional_continuation_v41.py": "3cb03c73078106e531a7da2a2000f8a394ad704a47011a85de6d10377ef41696"
+  },
+  "protected_voice_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "serving_admitted": false,
+  "selection": "Original six epochs, source roles, order, losses, optimizer and only-final-state selection unchanged. Resume from successful phase32; explicitly repeat unaccepted phase33 in a separate study. Never use or relabel the guarded original checkpoint. No held-out selection."
+}

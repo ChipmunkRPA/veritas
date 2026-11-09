@@ -87,3 +87,13 @@ It reuses development/calibration data rather than claiming new independent
 calibration data. Primary v84 selection stays intact; both fixed choices must
 precede final forwards. The same held recordings compare both analyses, so they
 are not two independent confirmation cohorts.
+
+The extra v87 map fit stopped before launching under an inherited neural-memory
+start limit. Its [v88 numerical-runtime successor](audio-numeric-runtime-v88-protocol.md)
+uses identical v87 mathematics with a 3-GiB initial RAM requirement and a tighter
+1.5-GiB worker cap; primary neural limits stay unchanged. Complete source/protocol
+binding checks rejected two engineering preparations before acceptance. Their
+[history receipt](evaluation-panels/audio-numeric-runtime-v88-history.json)
+preserves the stops and unpublished rejected draft. The accepted preparation
+sampled 544,849,920 bytes RSS with no resource violation. These are preparation
+results, not new calibration accuracy or held-role performance.

@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.audio-numeric-technical-history/88",
+  "v87_fit": {
+    "status": "stopped_before_child_launch",
+    "reason": "Initial available RAM below inherited neural-stage start limit",
+    "profile_sha256": "02e078272a5a7e8a8e2b5c04d1a58debe594a1be94641ae42cb7320ebb3a267c",
+    "worker_started": false,
+    "calibration_fit_calls": 0
+  },
+  "v88_preparation_a01": {
+    "status": "failed_before_freeze",
+    "reason": "Incorrect parent protocol filename",
+    "profile_sha256": "6440aae84ef05a7522fffa9f57f50f6999ad86422b6afd6ac9826cc7e28f11b6",
+    "calibration_fit_calls": 0
+  },
+  "v88_preparation_a02": {
+    "process_exit_code": 0,
+    "acceptance": "rejected_unpublished_draft",
+    "reason": "Binding validation detected omitted new wrapper/runtime/test/protocol files",
+    "profile_sha256": "ba6e80c421ccb7fef7a675849e2a6ba929590b478bc96b0f063e34dca3c3c7c9",
+    "preserved_draft_sha256": "006b013dcc1e34597e1aab185747c84c2200f28043e10bcbdd26fafcd3f73dca",
+    "calibration_fit_calls": 0
+  },
+  "v88_preparation_a03": {
+    "status": "complete",
+    "profile_sha256": "ae8c494c0ba7df5592cab8b33f332738fd9a5ec8aa53e29322b673780e55bf17",
+    "sampled_tree_rss_lower_bound_bytes": 544849920,
+    "guard": null,
+    "sample_errors": 0,
+    "complete_binding_test_passed": true
+  },
+  "neural_limits_unchanged": true,
+  "new_neural_calls": 0,
+  "held_role_forwards": 0,
+  "scope": "Resource/preparation history only. Published v84/v87 mathematics and completed outputs unchanged; rejected engineering drafts were not published or used for calibration."
+}

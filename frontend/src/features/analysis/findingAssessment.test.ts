@@ -39,3 +39,35 @@ it('explains retired marker prose without endorsing its old forced score', () =>
   expect(observed.join(' ')).not.toContain('85 out of 100')
   expect(JSON.stringify(finding)).toBe(before)
 })
+
+describe('specific local editing inferences', () => {
+  const finding = { id: 'F6', family: 'F4_localised_manipulation', evidence_ids: ['region-check'], direction: 'against', strength: 'strong' }
+  const signal = { id: 'region-check', family: 'localiser', category: 'forensic', status: 'ok', metrics: { regions: 1 },
+    details: { localisation: { schema: 'recorded-mask/1', candidate_eligibility: { eligible: true } } } }
+  it('explains the local clue and its source support without an AI probability', () => {
+    const result = { kind: 'image', status: 'done', signals: [signal] }
+    const before = JSON.stringify(result)
+    const got = findingAssessment(finding, result)
+    expect(got.label).toBe('Possible local editing')
+    expect(got.version).toBe('finding-interpretation/v2')
+    expect(got.direction).toBe('context')
+    expect(got.confidence_pct).toBeNull()
+    expect(got.interpretation).toContain('linked original crops, measured masks and excluded areas')
+    expect(got.interpretation).toContain('whether AI caused them is inconclusive')
+    expect(JSON.stringify(result)).toBe(before)
+  })
+  for (const status of ['failed', 'timeout', 'skipped', 'not_applicable']) it(`keeps ${status} inconclusive`, () => {
+    const got = findingAssessment(finding, { status: 'done', signals: [{ ...signal, status }] })
+    expect(got.direction).toBe('inconclusive')
+    expect(got.interpretation).toContain('incomplete or unavailable')
+  })
+  it('does not clear empty or withheld regions', () => {
+    const empty = findingAssessment(finding, { signals: [{ ...signal, metrics: { regions: 0 } }] })
+    expect(empty.interpretation).toContain('No region met')
+    expect(empty.direction).not.toBe('original')
+    const withheld = findingAssessment(finding, { signals: [{ ...signal,
+      details: { localisation: { schema: 'recorded-mask/1', candidate_eligibility: { eligible: false } } } }] })
+    expect(withheld.direction).toBe('inconclusive')
+    expect(withheld.interpretation).toContain('withheld')
+  })
+})

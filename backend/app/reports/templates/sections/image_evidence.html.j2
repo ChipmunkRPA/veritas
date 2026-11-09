@@ -7,6 +7,27 @@
 <p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
 <p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
 {% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if v.image_evidence.get('comparison') %}
+{% set comparison = v.image_evidence.comparison %}
+<div class="image-regional-comparison">
+<h3>Compare local editing cues</h3>
+<p>{{ comparison.interpretation }}</p>
+{% if comparison.status == 'unavailable' %}<p>A shared regional view is unavailable for this result. This does not establish that the image is unaltered.</p>
+{% else %}
+{% if comparison.status != 'ready' %}<p class="caption">Some eligible regions are not shown. This comparison covers the retained evidence cards only.</p>{% endif %}
+{% if not v.image_evidence.withheld %}
+<div class="evidence-plates evidence-plates-four">
+{% for image in comparison.images %}<figure><img src="{{ image.uri }}" alt="{{ image.label }}"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}
+</div>
+<p class="caption">Orange marks cells selected by either check; purple marks cells selected by both. White mask cells are selected; black cells are not verified original. A single shared cell is retained.</p>
+{% endif %}
+<p class="caption">Wider view: {{ comparison.counts.wider }} measured cells. Shared view: {{ comparison.counts.shared }} measured cells. Measured grid {{ comparison.map_grid | join(' × ') }}. Larger previews do not add pixel detail.{% if comparison.counts.shared == 0 %} No shared cells were selected; disagreement does not clear the file.{% endif %}</p>
+{% endif %}
+{% for member in comparison.members %}<p class="caption">{{ member.label }}: {{ {'measured': 'Measured', 'withheld': 'Candidate regions withheld', 'missing': 'Not available', 'failed': 'Check failed', 'skipped': 'Check skipped', 'unavailable': 'Evidence unavailable'}[member.status] }}.{% if member.packet_ids %} Retained regions: {% for id in member.packet_ids %}<a href="#image-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.{% endif %}</p>{% endfor %}
+{% for note in comparison.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
+{% for image in comparison.images %}<p class="caption evidence-asset-hashes">{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span></p>{% endfor %}
+</div>
+{% endif %}
 {% if v.image_evidence.get('inspection_checks') %}
 <div class="image-inspection-checks">
 <h3>How inspection regions were selected</h3>

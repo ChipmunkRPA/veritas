@@ -58,6 +58,11 @@ def finding_assessment(finding: dict, result: dict) -> dict:
             "scope_label": scope_label,
             "confidence_note": "A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.",
             "interpretation": "The recorded evidence does not establish an AI or original tendency for this finding."}
+    from app.engine.local_editing_assessment import local_editing_assessment
+
+    local = local_editing_assessment(finding, result, signals, base)
+    if local is not None:
+        return local
     learned = any(s.get("category") == "model" or str(s.get("family") or "").startswith("learned-")
                   or (family == "A1_voice" and (s.get("details") or {}).get("audio_screening")) for s in signals)
     if family in CONTEXT or (signals and not learned):

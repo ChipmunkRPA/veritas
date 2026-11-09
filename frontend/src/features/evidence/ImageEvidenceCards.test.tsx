@@ -41,6 +41,38 @@ const check = (overrides: Partial<ImageInspectionCheck> = {}): ImageInspectionCh
 })
 
 describe('image evidence cards', () => {
+  const comparison: NonNullable<ImageEvidenceSet['comparison']> = {
+    schema: 'retained-regional-comparison/1', status: 'ready', source_sha256: sourceHash,
+    map_grid: [16, 12], selection: 'retained_component_masks_no_refilter', authorship_confidence_contribution: 0,
+    members: [{ id: 'sensitive', label: 'Sensitive regional check', status: 'measured', packet_ids: ['E01'] },
+      { id: 'complementary', label: 'Complementary regional check', status: 'measured', packet_ids: [] }],
+    counts: { sensitive: 10, complementary: 18, wider: 27, shared: 1 },
+    artifacts: { wider_overlay: artifact('1'), shared_overlay: artifact('2'), wider_mask: artifact('3'), shared_mask: artifact('4') },
+    interpretation: 'Agreement does not establish AI origin or increase confidence.', limitations: ['Only retained components are compared.'],
+  }
+  it('shows actual wider and shared assets, toggles masks and links to retained cards', () => {
+    show({ ...evidence, version: 'image-evidence-4', comparison })
+    expect(screen.getByTestId('image-regional-comparison').textContent).toContain('Shared view: 1 measured cells')
+    expect(screen.getByAltText(/Shared view: both checks; flagged cells/).getAttribute('src')).toContain(`${'2'.repeat(64)}.png`)
+    expect(screen.getByRole('link', { name: 'E01' }).getAttribute('href')).toBe('/#image-evidence-E01')
+    fireEvent.click(screen.getByRole('button', { name: 'Show comparison masks' }))
+    expect(screen.getByAltText(/Shared view: both checks; white selected/).getAttribute('src')).toContain(`${'4'.repeat(64)}.png`)
+    expect(screen.getByText(/A single shared cell is preserved/)).toBeTruthy()
+  })
+  it('does not substitute a zero shared count when a check failed or withheld its candidates', () => {
+    show({ ...evidence, comparison: { ...comparison, status: 'unavailable', counts: null, artifacts: {},
+      members: [{ ...comparison.members[0] }, { ...comparison.members[1], status: 'withheld' }] } })
+    const text = screen.getByTestId('image-regional-comparison').textContent
+    expect(text).toContain('Candidate regions withheld')
+    expect(text).toContain('does not establish that the image is unaltered')
+    expect(text).not.toContain('Shared view: 0')
+    expect(screen.queryByRole('button', { name: 'Show comparison masks' })).toBeNull()
+  })
+  it('declares bounded coverage and does not clear a zero intersection', () => {
+    show({ ...evidence, comparison: { ...comparison, status: 'bounded', counts: { ...comparison.counts!, shared: 0, wider: 28 } } })
+    expect(screen.getByText(/Some eligible regions are not shown/)).toBeTruthy()
+    expect(screen.getByText(/disagreement does not clear the file/)).toBeTruthy()
+  })
   it('shows original crops and cautious regional evidence without requiring Expert view', () => {
     show()
     expect(screen.getByText('Inspection region')).toBeTruthy()

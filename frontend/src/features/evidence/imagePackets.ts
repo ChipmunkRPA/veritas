@@ -67,7 +67,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4'
   sha256: string | null
   analysis_id: string
   revision: number
@@ -77,6 +77,24 @@ export interface ImageEvidenceSet {
   limitations: string[]
   omitted_regions: number
   coverage?: { inspection_checks?: ImageInspectionCheck[] }
+  comparison?: ImageRegionalComparison
+}
+
+export interface ImageRegionalComparison {
+  schema: 'retained-regional-comparison/1'
+  status: 'ready' | 'bounded' | 'partial' | 'unavailable'
+  source_sha256: string
+  map_grid: [number, number] | null
+  selection: 'retained_component_masks_no_refilter'
+  authorship_confidence_contribution: 0
+  members: { id: 'sensitive' | 'complementary'; label: string
+    status: 'measured' | 'withheld' | 'missing' | 'failed' | 'skipped' | 'unavailable'
+    packet_ids: string[]; signal_refs?: { id: string; display_id: string | null }[]
+    selected_components?: number; eligible_components?: number; omitted_components?: number }[]
+  counts: { sensitive: number; complementary: number; wider: number; shared: number } | null
+  artifacts: Partial<Record<'sensitive_mask' | 'complementary_mask' | 'wider_mask' | 'shared_mask' | 'wider_overlay' | 'shared_overlay', EvidenceImage>>
+  interpretation: string
+  limitations: string[]
 }
 
 export async function getImageEvidence(analysisId: string): Promise<ImageEvidenceSet> {

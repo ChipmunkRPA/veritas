@@ -17,6 +17,7 @@ interface SignalInput {
   legacy?: { v1_id?: string | null; direction?: string } | null
   status?: string; scope?: string; observed?: string; calibrated_probability?: number | null
   calibration_ref?: string | null; reliability?: { factor?: number } | null; details?: Record<string, unknown>
+  metrics?: Record<string, unknown> | null
 }
 export interface FindingContext {
   signals?: readonly SignalInput[]; status?: string
@@ -86,6 +87,36 @@ export function findingAssessment(finding: FindingInput, result: FindingContext)
     scope_label: scopeLabel,
     confidence_note: 'A calibrated confidence percentage has not been established for this finding. Raw responses and contribution strengths are not AI probabilities.',
     interpretation: 'The recorded evidence does not establish an AI or original tendency for this finding.' }
+  if (finding.family === 'F4_localised_manipulation' && signals.length) {
+    const regional = signals.filter(s => s.family === 'localiser'
+      || (s.details?.localisation as Record<string, unknown> | undefined)?.schema === 'recorded-mask/1')
+    const physical = signals.filter(s => s.details?.display_mapping_version && ('ela_mean' in (s.metrics ?? {}) || 'noise_std' in (s.metrics ?? {})))
+    if (regional.length || physical.length) {
+      const answer: FindingAssessment = { ...base, version: 'finding-interpretation/v2', included_in_overall: false }
+      if ((result.status != null && result.status !== 'done') || signals.some(s => (s.status ?? 'ok') !== 'ok')) return {
+        ...answer, interpretation: 'The local editing checks for this finding are incomplete or unavailable. Missing evidence does not favour original content.' }
+      if (regional.length) {
+        let withheld = false
+        const eligible = regional.flatMap(s => {
+          const rule = s.details?.localisation as Record<string, unknown> | undefined
+          const gate = rule?.candidate_eligibility as Record<string, unknown> | undefined
+          if (gate && gate.eligible !== true) { withheld = true; return [] }
+          const count = s.metrics?.regions
+          return typeof count === 'number' && Number.isFinite(count) && count >= 0 && Number.isInteger(count) ? [count] : []
+        })
+        if (eligible.some(count => count > 0)) return { ...answer, direction: 'context', label: 'Possible local editing', scope_label: 'Selected image regions',
+          interpretation: 'Local editing cues were recorded in the selected regions. Inspect the linked original crops, measured masks and excluded areas. Ordinary processing can produce similar cues; whether AI caused them is inconclusive. The response is not an AI probability.' }
+        if (withheld) return { ...answer, scope_label: 'Local editing check coverage',
+          interpretation: "A selection rule withheld this check's candidate regions. The measured response is retained, but withheld regions are not cleared as original and do not establish an absence of editing." }
+        if (eligible.length !== regional.length) return { ...answer,
+          interpretation: 'The saved local editing evidence does not establish usable region coverage. It cannot support an AI or original conclusion.' }
+        return { ...answer, direction: 'context', label: 'No selected editing region',
+          interpretation: 'No region met the recorded local editing selection rules. This check can miss edits; it does not establish that the image is unaltered or original.' }
+      }
+      return { ...answer, direction: 'context', label: 'Compression and noise context',
+        interpretation: 'The linked maps measure compression differences or residual noise variation. Inspect the corresponding source regions. Texture, lighting, re-saving, sharpening and denoising can cause these differences without AI editing; these measurements do not establish AI origin.' }
+    }
+  }
   const learned = signals.some(s => s.category === 'model' || s.family?.startsWith('learned-')
     || (finding.family === 'A1_voice' && s.details?.audio_screening))
   if (CONTEXT.has(finding.family) || (signals.length > 0 && !learned)) return {
@@ -138,7 +169,7 @@ export function findingAssessment(finding: FindingInput, result: FindingContext)
 export function isFindingAssessment(value: unknown): value is FindingAssessment {
   if (!value || typeof value !== 'object') return false
   const row = value as Record<string, unknown>
-  return row.version === 'finding-interpretation/v1' && typeof row.finding_id === 'string'
+  return ['finding-interpretation/v1', 'finding-interpretation/v2'].includes(String(row.version)) && typeof row.finding_id === 'string'
     && (row.included_in_overall === null || typeof row.included_in_overall === 'boolean')
     && ['ai', 'original', 'inconclusive', 'context'].includes(String(row.direction))
     && (row.confidence_pct === null || (typeof row.confidence_pct === 'number' && row.confidence_pct >= 50 && row.confidence_pct < 100))

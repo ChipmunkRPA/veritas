@@ -47,7 +47,7 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
     """Read-only capture at report request; never create evidence or alter a stored result."""
     if analysis.kind != "image":
         return None
-    from app.evidence.image_packets import load_packet_set
+    from app.evidence.image_packets_v4 import load_packet_set
 
     store = store or default_store()
     document = load_packet_set(db, analysis, store)
@@ -66,7 +66,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
     document = snapshot.image_evidence
     if document is None:
         return None
-    from app.evidence.image_packets import validate_packet_set, validate_packet_source_mapping
+    from app.evidence.image_packets_v4 import validate_packet_set, validate_packet_source_mapping
 
     if snapshot.analysis.kind != "image":
         raise ValueError("image evidence is attached to a non-image report")
@@ -86,6 +86,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "An overall classification does not locate edited pixels."}
     store = store or default_store()
     store.verify(document["source"]["sha256"])
+    from app.evidence.image_packets_v4 import validate_comparison_assets
+
+    validate_comparison_assets(document, store)
     withheld = snapshot.report.profile == "newsroom" or snapshot.report.redacted
     packets = []
     for packet in document["packets"]:
@@ -98,10 +101,23 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         packets.append({**copy.deepcopy(packet), "images": images,
                         "eligibility_view": eligibility_view(packet["localisation"]["candidate_eligibility"])
                         if packet.get("localisation", {}).get("candidate_eligibility") else None})
+    comparison = copy.deepcopy(document.get("comparison"))
+    if comparison is not None:
+        comparison["images"] = []
+        for role, label in (("wider_overlay", "Wider view: selected by either check"),
+                            ("shared_overlay", "Shared view: selected by both checks"),
+                            ("wider_mask", "Wider mask on the measured grid"),
+                            ("shared_mask", "Shared mask on the measured grid")):
+            asset = comparison["artifacts"].get(role)
+            if asset is not None:
+                data = _asset_bytes(asset, store)
+                comparison["images"].append({"role": role, "label": label, "sha256": asset["sha256"],
+                    "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
     return {"available": True, "id": document["id"], "version": document["version"], "sha256": document["sha256"],
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": [inspection_check_view(check) for check in document.get("coverage", {}).get("inspection_checks", [])],
+            "comparison": comparison,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 

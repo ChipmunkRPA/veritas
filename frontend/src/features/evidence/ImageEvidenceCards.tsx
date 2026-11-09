@@ -24,6 +24,54 @@ function EvidencePicture({ set, artifact, token, ready, alt }: {
   )
 }
 
+function RegionalComparison({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const [showMasks, setShowMasks] = useState(false)
+  const comparison = set.comparison
+  if (!comparison) return null
+  const wider = showMasks ? comparison.artifacts.wider_mask : comparison.artifacts.wider_overlay
+  const shared = showMasks ? comparison.artifacts.shared_mask : comparison.artifacts.shared_overlay
+  const statuses = { measured: 'Measured', withheld: 'Candidate regions withheld', missing: 'Not available',
+    failed: 'Check failed', skipped: 'Check skipped', unavailable: 'Evidence unavailable' }
+  return <section data-testid="image-regional-comparison" className="mt-5 rounded-md border border-border p-4" aria-labelledby="regional-comparison-heading">
+    <div className="flex items-baseline justify-between gap-3 flex-wrap">
+      <h3 id="regional-comparison-heading" className="m-0 text-body font-medium text-text">Compare local editing cues</h3>
+      {comparison.status !== 'unavailable' && <button type="button" aria-pressed={showMasks}
+        onClick={() => setShowMasks(v => !v)} className="min-h-8 px-2.5 rounded-sm border border-border text-small text-text-muted hover:text-text">
+        {showMasks ? 'Show source overlays' : 'Show comparison masks'}
+      </button>}
+    </div>
+    <p className="mt-2 mb-0 text-small text-text-muted">{comparison.interpretation}</p>
+    {comparison.status === 'unavailable' ? <p className="mt-3 mb-0 text-small text-text" role="status">
+      A shared regional view is unavailable for this result. This does not establish that the image is unaltered.
+    </p> : <>
+      {comparison.status !== 'ready' && <p className="mt-3 mb-0 text-small text-text">Some eligible regions are not shown. This comparison covers the retained evidence cards only.</p>}
+      <div className="mt-4 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
+        {([['wider', 'Wider view: either check', wider], ['shared', 'Shared view: both checks', shared]] as const).map(([id, label, asset]) => asset &&
+          <figure key={id} className="m-0 min-w-0">
+            <figcaption className="mb-2 text-small font-medium text-text">{label}</figcaption>
+            <EvidencePicture key={`${id}:${asset.sha256}:${token}`} set={set} artifact={asset} token={token} ready={mediaReady}
+              alt={`${label}; ${showMasks ? 'white selected cells on the measured grid' : 'flagged cells over the submitted source image'}`} />
+          </figure>)}
+      </div>
+      <p className="mt-2 mb-0 text-caption text-text-muted">{showMasks
+        ? 'White marks retained cells; black means unselected, not verified original. A single shared cell is preserved.'
+        : 'Orange marks cells selected by either check; purple marks cells selected by both. These overlays locate inspection cues, not proven AI edits.'}</p>
+      {comparison.counts && <p className="mt-2 mb-0 text-small text-text-muted">
+        Wider view: {measurementValue(comparison.counts.wider)} measured cells. Shared view: {measurementValue(comparison.counts.shared)} measured cells.
+        {comparison.counts.shared === 0 && ' No shared cells were selected; disagreement does not clear the file.'}
+      </p>}
+    </>}
+    <ul className="mt-3 mb-0 pl-4 space-y-1 text-small text-text-muted list-disc">
+      {comparison.members.map(member => <li key={member.id}>{member.label}: {statuses[member.status]}.
+        {member.packet_ids.length > 0 && <> Retained regions: {member.packet_ids.map((id, i) => <span key={id}>{i > 0 && ', '}
+          <Link to={`#image-evidence-${encodeURIComponent(id)}`} className="underline underline-offset-[3px] hover:text-text">{id}</Link></span>)}.</>}
+      </li>)}
+      {comparison.limitations.map((line, i) => <li key={i}>{line}</li>)}
+    </ul>
+    {comparison.map_grid && <p className="mt-2 mb-0 text-caption text-text-muted">Measured grid {comparison.map_grid.join(' × ')}. Larger previews do not add pixel detail.</p>}
+  </section>
+}
+
 function EvidenceCard({ packet, set, token, mediaReady }: {
   packet: ImageEvidencePacket; set: ImageEvidenceSet; token: string; mediaReady: boolean
 }) {
@@ -131,6 +179,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
+      <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.
       </p> : set.packets.length === 0 ? <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">

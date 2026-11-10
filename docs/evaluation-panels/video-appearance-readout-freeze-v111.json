@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.video-appearance-readout-freeze/111",
+  "code_sha256": {
+    "backend/scripts/video_appearance_readout_v111.py": "a775e686a8f76e86b35406d1cb85c4d48929958a180fa857109d313773c030c8",
+    "backend/tests/test_video_appearance_readout_v111.py": "438be35b506bc4927c5ebdb5326e97991081aa91faa67d35ee1f1fa2c587d967",
+    "docs/video-appearance-readout-v111-method.md": "6eec9a7a8b08682fa337c6969e39ea99fb5f12a93baab0a6d7d1fd5015c78415"
+  },
+  "native_freeze_sha256": "b641d0588ff6ee3548aa3add4c9889ed98483ddad8d2809e230282b3b3ce49e0",
+  "prepared_plan_sha256": "1a238e8afbe7e68d4920de765c4c6f5d8eed5c7b7540ee28beb0fee844354848",
+  "fitted_models_sha256": "b9658a22d179d2eee5c1b8718be77de45e2f32c5f7b86a1039dc6c4475d46cae",
+  "local_heads_sha256": "38e7060fff5525e69d99a43755c8ecdd128d6abce744ab5ebf8e87b14a16886c",
+  "raw_point": 0.11243900750879454,
+  "candidate_point": {
+    "threshold": 0.24379932164053977,
+    "common_genuine_groups": 39,
+    "budget": 3,
+    "groups_flagged": 3,
+    "comparison": "strict_greater_than"
+  },
+  "planned_cases": 138,
+  "scope": "Implementation of predeclared v108 fixed-point counts and continuous sparse/bounding-support readout; no fitting, point selection or new local probability."
+}

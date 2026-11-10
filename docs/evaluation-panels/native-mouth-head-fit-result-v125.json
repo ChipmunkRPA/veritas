@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.native-mouth-head-fit/125",
+  "status": "complete",
+  "fitting_sources": 18,
+  "reference_original_points": 1347,
+  "fitting_labelled_points": 8082,
+  "positive_central_frame_labels": 720,
+  "negative_central_frame_labels": 7362,
+  "raw_heads_fitted": 3,
+  "dimensions": {
+    "visual_only": 16,
+    "concatenation": 32,
+    "interaction": 64
+  },
+  "iterations": {
+    "visual_only": 11,
+    "concatenation": 118,
+    "interaction": 127
+  },
+  "private_learned_artifact_sha256": "3fb77ee6d4fc95748c46b1aa43b59a0522c2029ff6cb323c61865656aebd0d6a",
+  "private_labels_coverage_sha256": "1e8ec92d43a0fa5568620d398a7cab63acf2ccdbdc6ef423d672599582b733d9",
+  "freeze_sha256": "3f31169c2ea18fe7d03ce8fa0763a97763d866fd3399f5a0c48d40c4256087dd",
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "Fitting groups only, including every available native centre; three separately learned raw margins. No calibration/held-out accuracy, comparison winner, operating point, probability or serving contribution.",
+  "source_commit": "ba7554e",
+  "resource_profile": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "duration_s": 10.015735583961941,
+    "sampled_tree_rss_lower_bound_bytes": 836321280,
+    "minimum_available_ram_bytes": 6926712832,
+    "resource_journal_sha256": "66e30a076400e00e5f6aa800fc0aa90f945d17e9e91464d1758b85e06c9a89af",
+    "worker_receipt_sha256": "5bac173d8065abfcfe96a2a4cb4aa1925d36bce2c5fde7229603c41422bedd92"
+  }
+}

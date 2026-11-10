@@ -1,0 +1,11 @@
+{
+  "schema": "chipmunk.native-mouth-clip-review-freeze/121",
+  "code_sha256": {
+    "backend/scripts/review_native_mouth_clips_v121.py": "c6ff761f0b236c44370747dca442b081c58fca337bd22a1cbb4db900b0ca3e26",
+    "backend/tests/test_review_native_mouth_clips_v121.py": "a88e6e37e8653f85fd89c76e9e1bafc92553673d5abf4161ed80b575e272450a",
+    "docs/native-mouth-clip-review-v121-method.md": "65f852d3339511d6d80279c813a3b55f8ebaeaca37e2e36ee94d4bfddfc456d9"
+  },
+  "generation_freeze_sha256": "9c78d3bda1a2f1e0661ec687e67732fbb9e24dc34b592a7dcfc6fcdccb6ad0d3",
+  "generation_plan_sha256": "66662e6c1e9358a5932d7169f0591c8d114fb4921dd4644be3c7771658bd056e",
+  "scope": "Separate data-only source-to-output pixel masks, source clocks, crop transforms and unchanged soundtrack replay. No independent face-alpha reconstruction, generator forward reproduction, achieved alignment or detector accuracy."
+}

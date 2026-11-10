@@ -1,0 +1,135 @@
+{
+  "schema": "chipmunk.native-mouth-clips-complete/120",
+  "status": "complete",
+  "sources": 48,
+  "planned_cases": 288,
+  "ready_cases": 283,
+  "unavailable_cases": 5,
+  "ready_ai_provenance_clips": 94,
+  "ready_original_or_ordinary_clips": 189,
+  "by_condition": {
+    "ai_aligned": {
+      "ready": 47,
+      "unavailable": 1
+    },
+    "ai_earlier_320ms": {
+      "ready": 47,
+      "unavailable": 1
+    },
+    "blur2": {
+      "ready": 47,
+      "unavailable": 1
+    },
+    "blur4": {
+      "ready": 47,
+      "unavailable": 1
+    },
+    "original": {
+      "ready": 48
+    },
+    "resample": {
+      "ready": 47,
+      "unavailable": 1
+    }
+  },
+  "by_role": {
+    "confidence_cal": {
+      "sources": 10,
+      "ready_cases": 55
+    },
+    "confirmation": {
+      "sources": 10,
+      "ready_cases": 60
+    },
+    "fusion_fit": {
+      "sources": 18,
+      "ready_cases": 108
+    },
+    "selection": {
+      "sources": 10,
+      "ready_cases": 60
+    }
+  },
+  "new_neural_inputs": 8680,
+  "ready_media_bytes": 1857724200,
+  "generation_freeze_sha256": "9c78d3bda1a2f1e0661ec687e67732fbb9e24dc34b592a7dcfc6fcdccb6ad0d3",
+  "batches": [
+    {
+      "batch": 0,
+      "result_sha256": "27e790a18d6236d654b18f6b701c3259913ae9c47726cf5a9fb4ee848e033cfd",
+      "profile_sha256": "4b2c821f3a0589d4682f481ba0e120a537b0fa8c77c5b619f47aae64d7528b7d",
+      "duration_s": 171.69309633399826,
+      "sampled_tree_rss_lower_bound_bytes": 1360379904,
+      "minimum_available_ram_bytes": 2122399744,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 1,
+      "result_sha256": "46e246eb558b173fb86c85bf25b3b69f4ba6d92250e423ab0d9ea8653f341977",
+      "profile_sha256": "fa5a3202462a33ac29921c30c84e5acd5b8cec71bf9d6ced6b16a01a91bafba9",
+      "duration_s": 175.9537929999642,
+      "sampled_tree_rss_lower_bound_bytes": 1116012544,
+      "minimum_available_ram_bytes": 2079686656,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 2,
+      "result_sha256": "34bf43488a999d10e1be011c41902a85a38dd94bd0d8882dd2dda9f815783954",
+      "profile_sha256": "e57eece4b6fab3dd44de0ed5717c6c5d33d62c0d0681e0cd0f212635fe260139",
+      "duration_s": 145.01096487499308,
+      "sampled_tree_rss_lower_bound_bytes": 1113407488,
+      "minimum_available_ram_bytes": 2093891584,
+      "new_neural_calls": 924
+    },
+    {
+      "batch": 3,
+      "result_sha256": "77e064dfeb95628f908cdf4e77f8a2911bf5898b773401a0ffc8f8793a16c96b",
+      "profile_sha256": "a0e641d1fd091190ed1e9017d702c1a1cd60f08c8e49efae63f5804883e246df",
+      "duration_s": 171.30527799995616,
+      "sampled_tree_rss_lower_bound_bytes": 1123287040,
+      "minimum_available_ram_bytes": 2359410688,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 4,
+      "result_sha256": "227d4341f2a4e1801d1727b900f988fd45e03520c138bb133ec8c52533ca1814",
+      "profile_sha256": "128ad9c93cc7a3f59b377a7daaec6634362ad883731ad3e1e419fab9a6f24d10",
+      "duration_s": 173.15990829106886,
+      "sampled_tree_rss_lower_bound_bytes": 1119289344,
+      "minimum_available_ram_bytes": 3313369088,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 5,
+      "result_sha256": "a140583c12f97836227da2d07beeb9b589f12dbf1c4235761dff5da48b9aac09",
+      "profile_sha256": "acaae942e65cd917997a33202dd481830a6fdd11220c7d7983085439bc14191c",
+      "duration_s": 172.1039686249569,
+      "sampled_tree_rss_lower_bound_bytes": 1122304000,
+      "minimum_available_ram_bytes": 3540090880,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 6,
+      "result_sha256": "a7f50e4af04364fee5b7a0a5028dd6d6f7d05672b8a612c8aea69d241cd5a015",
+      "profile_sha256": "31421d1f703e8117aa1dc73ca9199ff1ec048124db4ba761fdfc841ffdbb6aa3",
+      "duration_s": 172.60501470800955,
+      "sampled_tree_rss_lower_bound_bytes": 941244416,
+      "minimum_available_ram_bytes": 2320826368,
+      "new_neural_calls": 1108
+    },
+    {
+      "batch": 7,
+      "result_sha256": "554bb1cc036700c5f65564b708e18c6d283a6a9122f14d0167d0905c33882435",
+      "profile_sha256": "8dbe5d3c578df77f9a881ec5b1f658fb2f293612678ff62303cb8dba1ce5ccb9",
+      "duration_s": 169.80433962494135,
+      "sampled_tree_rss_lower_bound_bytes": 1132429312,
+      "minimum_available_ram_bytes": 2529034240,
+      "new_neural_calls": 1108
+    }
+  ],
+  "source_mask_audit_completed": true,
+  "detector_inference_executed": false,
+  "achieved_synchronization_qualified": false,
+  "defaults_changed": false,
+  "scope": "Complete native construction and separate source/mask replay only; no detector accuracy, fresh performance, generator naturalness, achieved phonetic synchronization or serving confidence. All AI edits are centered native20-picture constructions; placement/generator transfer still required."
+}

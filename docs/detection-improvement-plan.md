@@ -81,12 +81,22 @@ integration remains unfinished.
 
 ## Progress on 10 November
 
+- Completed all native mouth construction and separate mask replay: 283 ready
+  clips across 48 sources, five explicit short-source unavailable edits, 94 neural
+  mouth-edit clips and 189 original/ordinary controls. All 4,700 masks, 21,767 pictures
+  and 11,808,637 audio samples/clocks match. All 16 stages exit zero without guards
+  or sampling errors. The reference-interaction feature math adds 13 passing
+  authored checks but no real-media fit or detector accuracy claim. Full blind
+  feature extraction, separately calibrated comparisons, placement/generator
+  transfer and customer-flow tests remain open.
+  [Complete construction/replay result](native-mouth-clips-v120-complete.md).
 - Complete-clip construction is running under the frozen native mouth plan.
   The first three batches pass: 103 ready full clips and five unavailable edits
   for the short source, with 3,140 actual neural inputs. All ready files pass
   full decoded RGB/clock/PCM/origin checks. The separate source-to-mask replay
   is frozen and remains unexecuted at this partial snapshot. Detector scores,
   alignment quality and held-out accuracy remain open.
+  This is a historical partial snapshot; the full completion is recorded above.
   [Partial construction evidence](native-mouth-clips-v120-progress.md).
 - Lossless native audiovisual assembly passes two authored cases and one complete
   fitting-source rewrite: all 76 pictures and 43,912 audio samples/timestamps

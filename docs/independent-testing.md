@@ -13,6 +13,21 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [complete native mouth construction/replay](native-mouth-clips-v120-complete.md)
+now includes all 283 ready clips and 4,700 source-bound difference masks. Those
+private-media checks are internal lineage validation, not an outside review.
+For the next small cross-modal feature core, 13 authored checks need no media,
+weights or credentials in the project dev environment:
+
+```sh
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_mouth_articulation_core_v122.py
+```
+
+They cover exact native-time context, speech-layer order, gap/padding rejection,
+weighted projection/reconstruction and protection against learning the reference
+from calibration/confirmation or edited rows. They establish arithmetic/role
+contracts, not detection quality or a calibrated probability.
+
 For exact source/output mask correspondence, the seven authored checks in the
 [native clip replay](native-mouth-clip-review-v121-method.md) need no private
 media, model weights, credentials or network in the project dev environment:

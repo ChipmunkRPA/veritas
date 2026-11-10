@@ -1,0 +1,89 @@
+{
+  "schema": "chipmunk.native-mouth-clips-audit-complete/121",
+  "status": "complete",
+  "cases": 288,
+  "ready_cases": 283,
+  "retained_unavailable_cases": 5,
+  "pictures": 21767,
+  "edit_picture_masks": 4700,
+  "changed_pixels": 10797766,
+  "audio_samples": 11808637,
+  "new_neural_calls": 0,
+  "review_freeze_sha256": "373d047c29b5fd70560832fe0a869416c8f79d46df5527c7bed03e301ac83699",
+  "batches": [
+    {
+      "batch": 0,
+      "result_sha256": "b69a014aaad7c1e881852fba53d7ddd4bc6c9b77c6593b606b097ea8e483ebba",
+      "profile_sha256": "82530e26008d7e68f1bfbc505f4bdca005d2ec652f2e4a7ca6136df5619f9e1b",
+      "duration_s": 31.497171875089407,
+      "sampled_tree_rss_lower_bound_bytes": 328810496,
+      "minimum_available_ram_bytes": 3577511936,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 1,
+      "result_sha256": "4e7e3d760e879cbb91d6e25be008f3fb0df1dff485839ec44d41fd898a29a177",
+      "profile_sha256": "445014aea0f729f6b56937d00059b1c7c41bcc936408c7ed26747a3791f0bfb8",
+      "duration_s": 33.15180087496992,
+      "sampled_tree_rss_lower_bound_bytes": 322027520,
+      "minimum_available_ram_bytes": 3520200704,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 2,
+      "result_sha256": "768a0c9de018360968225a9e1ecd4866169e9e42359136ca298acc914e2d8db6",
+      "profile_sha256": "d753e7cf146cc423dbbf8238fd9407cd7efef9872bacc4947a9b5fc8cd1bc647",
+      "duration_s": 29.302611207938753,
+      "sampled_tree_rss_lower_bound_bytes": 336183296,
+      "minimum_available_ram_bytes": 3513696256,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 3,
+      "result_sha256": "dbf54b75a7b41b3751b9c66f258476a7a52106c018cb6f795eab7c8c823e91ba",
+      "profile_sha256": "6a37b5755fd5ef07eeb5af27ed52e12fec2ee1ebb4013656e4b51a72b91bfd32",
+      "duration_s": 32.47202416707296,
+      "sampled_tree_rss_lower_bound_bytes": 327499776,
+      "minimum_available_ram_bytes": 3599400960,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 4,
+      "result_sha256": "d2fb6663c7bf5b8d066743fc4f85fef8449d35b96cc24b32c923a6bd0679de87",
+      "profile_sha256": "7cdacbb9330cf96d22541c84db44c2929a80409693c5cf5cdc4903123e3841e2",
+      "duration_s": 32.494558791979216,
+      "sampled_tree_rss_lower_bound_bytes": 325844992,
+      "minimum_available_ram_bytes": 3588620288,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 5,
+      "result_sha256": "5d32894a16d7db94acd4a6eba02d0c85c8966cfff3ca1e58d3e9063e3558f0de",
+      "profile_sha256": "4050f777cb6740c23d360da34e756a0fcbb4d9370758e4eff4a1e0f6822b544a",
+      "duration_s": 28.692454874981195,
+      "sampled_tree_rss_lower_bound_bytes": 331087872,
+      "minimum_available_ram_bytes": 9471262720,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 6,
+      "result_sha256": "a1d6e6d71b2e13bebd4184b384c770d5174158adf2deda77dccb9c559247b9e7",
+      "profile_sha256": "8ee3274b6a047ff2894aa29f8bc092bd7bb4d7820c256e25061399f3c6b21270",
+      "duration_s": 27.438405791996047,
+      "sampled_tree_rss_lower_bound_bytes": 348798976,
+      "minimum_available_ram_bytes": 9443835904,
+      "new_neural_calls": 0
+    },
+    {
+      "batch": 7,
+      "result_sha256": "727841febe1c81722acaf19280fd2c6cebb8fdff05c561ced5384c093e636880",
+      "profile_sha256": "6f7a1ea0c5922885bd131dc9075513f1e509a0b5c050d3daa77e2705b300689d",
+      "duration_s": 23.185995750012808,
+      "sampled_tree_rss_lower_bound_bytes": 322650112,
+      "minimum_available_ram_bytes": 9474899968,
+      "new_neural_calls": 0
+    }
+  ],
+  "all_available_masks_clocks_context_and_soundtracks_match": true,
+  "scope": "Separate internal difference/count replay, not external human review, original-source authenticity, independent face-alpha/geometry reconstruction, neural-forward reproduction, achieved synchronization or detector accuracy."
+}

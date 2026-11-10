@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.native-video-insert-input-lock/95",
+  "identity": {
+    "schema": "chipmunk.native-video-insert-freeze/95",
+    "code_sha256": {
+      "backend/scripts/video_native_inserts_v95.py": "53a58114839b5775abff283b579bc4165b1b6895a7ec48d2beb70205548cc024",
+      "backend/scripts/video_insert_runtime_v95.py": "ed50703c858c8fe85f97219878255928d6b2975e0a7c5a8d2643824ff690056a",
+      "backend/tests/test_video_native_inserts_v95.py": "cf01e5ac4add3dbd3267f9d7c68c4194152f4370882511c9f4f5dcf8f459568a",
+      "docs/video-native-inserts-v95-method.md": "21962c8d5964c737d78496fb4f9a05dfc0cd5a03db69461c245e5f3751ad26d0"
+    },
+    "parent_freeze_sha256": "120ba30186c822f1898a580c50f59b621b42f79a85d9f28161b8402b34404fae",
+    "qualified_parent_plan_sha256": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+    "asset_plan_sha256": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "5.0.0.93",
+      "psutil": "7.2.2"
+    },
+    "binary_sha256": {
+      "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+      "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+    },
+    "conditions": [
+      "original",
+      "swap_a",
+      "swap_b",
+      "ordinary_light",
+      "ordinary_blur",
+      "ordinary_time_step"
+    ],
+    "center_time_cap_seconds": 6,
+    "new_neural_calls": 0,
+    "scope": "Controlled source inserts, not a detector result or exact AI-pixel truth. All original native assets retained; incompatible groups stay explicit. No source-role change, fitting, serving change or customer input."
+  },
+  "private_plan_sha256": "015abe0fb87cf7b8cff0552287d593e96a838b304c1b4b5aff1a113f1ee5e92b"
+}

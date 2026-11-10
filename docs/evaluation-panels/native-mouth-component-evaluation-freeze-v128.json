@@ -1,0 +1,32 @@
+{
+  "schema": "chipmunk.native-mouth-component-evaluation-freeze/128",
+  "code_sha256": {
+    "backend/scripts/native_mouth_components_v128.py": "5ce0e2030e218167a1362cb78aa87ba7fbce5ec6a6af8dba72f60a56569d6cfb",
+    "backend/tests/test_native_mouth_components_v128.py": "3ade39280acc2eae9d8dd973f3b0b866c467ca6f539be17fcfcf625b05f892a9",
+    "docs/native-mouth-component-evaluation-v128-method.md": "704697c1fdd460ebbd78d137371eaa03480f5338ec80a615fe8cc00f634b370c"
+  },
+  "original_unused_freeze_sha256": "32133d5dccaff8481c9a6bf44fba642fcb0014f7b4218f1cb0308d37dc6c4ef6",
+  "source_component_plan_sha256": "8abcd74217c8afa4d81167c5fd43aee1a95221f4705db337e43eacf7c5d140fa",
+  "private_calibrations_sha256": "9e669c19a28d0ab4f99cd9fc3f4990fb26367fe3f0dd81a6157fa9a8c1c0ee70",
+  "inventory": {
+    "fusion_fit": {
+      "sources": 18,
+      "connected_components": 4
+    },
+    "confidence_cal": {
+      "sources": 10,
+      "connected_components": 2
+    },
+    "selection": {
+      "sources": 10,
+      "connected_components": 3
+    },
+    "confirmation": {
+      "sources": 10,
+      "connected_components": 3
+    }
+  },
+  "minimum_component_count_for_interval_not_met": true,
+  "bootstrap_replicates": 0,
+  "scope": "Isolated corrected execution of unchanged v127 evaluator code object with full actor/sentence/ancestry component pairing, correct inventory and no misleading small-component CI. Original unused frozen v127 source/protocol remain untouched; classifiers, six calibrations and source-group research points are unchanged."
+}

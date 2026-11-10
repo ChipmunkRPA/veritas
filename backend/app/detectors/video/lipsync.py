@@ -6,7 +6,8 @@
   harmonic, noise is flat). Gaps under 0.3 s are closed, then runs under 0.2 s are dropped.
 - **Tick grid.** SyncNet works at 25 fps. Tick k is source time t0 + k / 25 (t0 is the first decoded audio sample) and audio
   samples k × 640 onwards. Each tick takes the nearest decoded frame, so a 24 or 30 fps video repeats or skips frames.
-  Source timestamps align the two streams. Ticks before video starts have no frame and cannot form a scoring window.
+  Source timestamps align the two streams. A tick without a picture within one grid period (40 ms) has no frame and
+  cannot form a scoring window, including ticks inside a source timestamp gap.
 - **Windows.** Per face track, the grid's consecutive 1 s windows (25 ticks) in which the track is present on every
   tick and at least half the ticks are speech; at most 30 per track, evenly thinned (VF §8.2).
 - **Active speaker.** Mouth motion is the mean absolute change of a 32 × 24 grey mouth patch between consecutive ticks.
@@ -40,6 +41,7 @@ import numpy as np
 SR = 16000
 FPS = 25.0
 HOP = int(SR / FPS)  # 640 samples: one tick
+MAX_PICTURE_SKEW_S = 1.0 / FPS  # input coverage tolerance, not a manipulation decision threshold
 VSHIFT = 15  # ± ticks searched (± 0.6 s)
 WINDOW_TICKS = 25  # 1 s windows (SAMPLING speaking_window_s)
 MAX_WINDOWS = 30  # per track (VF §8.2)
@@ -128,7 +130,7 @@ def vad(pcm: np.ndarray, sr: int = SR) -> Speech:
 @dataclass(frozen=True)
 class TickGrid:
     t0: float
-    frames: tuple[int, ...]  # frame-table index per tick (repeats allowed; -1 before video coverage)
+    frames: tuple[int, ...]  # frame-table index per tick (repeats allowed; -1 without nearby source picture coverage)
     audio_ticks: int
 
     @property
@@ -140,7 +142,11 @@ class TickGrid:
 
 
 def tick_grid(times: np.ndarray, duration: float, audio_samples: int, *, audio_start_s: float | None = None) -> TickGrid:
-    """The nearest frame per tick over the ticks both streams cover."""
+    """Nearest source picture within one grid period; uncovered ticks remain -1.
+
+    A source may hold a picture for longer, but that supplies no observed mouth
+    motion at the missing timestamps. Such ticks cannot support a lip-sync window.
+    """
     if len(times) == 0:
         return TickGrid(0.0, (), audio_samples // HOP)
     video_start = float(times.min())
@@ -152,11 +158,13 @@ def tick_grid(times: np.ndarray, duration: float, audio_samples: int, *, audio_s
     sorted_t = times[order]
     targets = t0 + np.arange(max(n, 0)) / FPS
     if len(sorted_t) == 1:
-        return TickGrid(t0, tuple(int(order[0]) if t >= video_start else -1 for t in targets), audio_ticks)
+        return TickGrid(t0, tuple(int(order[0]) if video_start <= t <= video_start + MAX_PICTURE_SKEW_S + 1e-9
+                                 else -1 for t in targets), audio_ticks)
     pos = np.clip(np.searchsorted(sorted_t, targets), 1, len(sorted_t) - 1)
     left, right = sorted_t[pos - 1], sorted_t[pos]
     choose = np.where(targets - left <= right - targets, pos - 1, pos)
-    return TickGrid(t0, tuple(int(i) if t >= video_start else -1 for t, i in zip(targets, order[choose], strict=True)), audio_ticks)
+    covered = (targets >= video_start) & (np.abs(targets - sorted_t[choose]) <= MAX_PICTURE_SKEW_S + 1e-9)
+    return TickGrid(t0, tuple(int(i) if ok else -1 for ok, i in zip(covered, order[choose], strict=True)), audio_ticks)
 
 
 @dataclass(frozen=True)

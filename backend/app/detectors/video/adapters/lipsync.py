@@ -41,7 +41,7 @@ SEGMENT_PEAK = 0.6  # VF §4.2 heuristic for a step or collapse; not calibrated
 AUDIO_REASONS = {"absent": "no audio track", "silent": "the sound track is silent", "unreadable": "the sound track could not be read",
                  "short": "the sound track is shorter than 1 s"}
 NO_SPEECH = "no speech detected in the sound track"
-NO_VISIBLE = "no face track visible for a full 1 s window of speech"
+NO_VISIBLE = "no face track with timestamp-matched video frames for a full 1 s window of speech"
 NO_SPEAKER = ("no face track whose mouth movement follows the speech (voice-over, off-screen speaker, occluded mouth, or no "
               "crop the embedder could align)")
 REFERENCE = ("SyncNet protocol per 1 s window of a speaking face track: the audio shift within ±15 frames at 25 fps with the "
@@ -156,7 +156,7 @@ class StableSyncNetDetector(Detector):
     spec = video_spec("vid.lipsync.stable_syncnet",
                       "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", model_ids=(MODEL,),
-                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.5.0")
+                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.5.1")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.MODEL, self.BATCH, "audio/visual window",

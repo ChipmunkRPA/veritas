@@ -37,7 +37,7 @@ from app.engine.detector import Applicability, Detector, DetectorResult, InputUn
 
 NO_SPEECH = "no speech detected in the sound track"
 SILENT = "the sound track is silent"
-NO_MOUTH = "no face track with a visible mouth (five landmarks) for a full 1 s window of speech"
+NO_MOUTH = "no face track with a visible mouth and timestamp-matched video frames for a full 1 s window of speech"
 NO_SPEAKER = ("no face track whose mouth movement follows the speech (occluded, turned or closed mouth, voice-over or an "
               "off-screen speaker)")
 MAX_SERIES_POINTS = 5000
@@ -102,7 +102,7 @@ class LandmarkXcorrDetector(Detector):
     spec = video_spec("vid.lipsync.landmark_xcorr",
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.1")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.2")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av

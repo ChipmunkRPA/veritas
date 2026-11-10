@@ -1,0 +1,61 @@
+{
+  "schema": "chipmunk.native-mouth-renderer-execution/118",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.native-mouth-renderer-result/117",
+    "status": "complete",
+    "device": "mps",
+    "fitting_sources": 1,
+    "render_calls": 4,
+    "seeded_repeat_bitwise": true,
+    "counterfactual_changed_crop_pixels": {
+      "earlier_320ms": 55123,
+      "zero": 58367
+    },
+    "changed_native_pixels": {
+      "aligned": 2697,
+      "repeat": 2697,
+      "earlier_320ms": 2689,
+      "zero": 2685
+    },
+    "native_module_forward_counts": {
+      "vae_encode": 8,
+      "vae_decode": 4,
+      "unet": 4,
+      "speech_encoder": 0
+    },
+    "face_detection_inputs": 1,
+    "new_neural_calls": 17,
+    "maximum_post_render_mps_driver_bytes": 4659937280,
+    "private_render_records_sha256": "2af3affdd9383ae6d2e3181477fe47ef9b5653e81f58c674344104a85677bbd5",
+    "freeze_sha256": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+    "renderer_response_qualified": true,
+    "achieved_mouth_synchronization_qualified": false,
+    "defaults_changed": false,
+    "scope": "One fitting-source native renderer/state response only. No generated-clip quality, phonetic alignment, authenticity detection, fitting or serving confidence claim."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "authored",
+    "batch": null,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 19.753237416036427,
+    "sampled_tree_rss_lower_bound_bytes": 1272889344,
+    "minimum_available_ram_bytes": 1922072576,
+    "resource_journal_sha256": "56ca24bc569c5b5dfdcad61aa9f8efda99a3f8a6a53ee7d4f14be7faf251841a",
+    "runtime_sha256": "394ead6b8b08239d468b55be6939dae83e3cf9d0f873059ac5c41f17754324f1",
+    "worker_receipt_sha256": "b3b06dc3518e1eb1810b324641d6a3c2bae6fbbcce13036adcec8bdd69bb2efc",
+    "new_neural_calls": 17,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "initial_available_ram_bytes": 7336427520,
+  "result_sha256": "b3b06dc3518e1eb1810b324641d6a3c2bae6fbbcce13036adcec8bdd69bb2efc",
+  "profile_sha256": "11c943e739e5c0abbd669805eeb02d96b9672e6497fbfa01d141cf688228c606",
+  "scope": "Actual one-fitting-source native response contract, separate from historical readiness denial. No achieved synchronization, generated-clip quality, new detector accuracy or serving promotion."
+}

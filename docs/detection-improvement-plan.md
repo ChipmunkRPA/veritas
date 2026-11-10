@@ -81,6 +81,16 @@ integration remains unfinished.
 
 ## Progress on 10 November
 
+- The frozen native renderer now executes successfully after the owner's fresh
+  RAM check: four renders, 17 actual neural inputs, exact seeded repeat and
+  changed output under earlier/zero conditioning. The historical readiness
+  snapshot remains unchanged. Achieved synchronization and detector accuracy
+  remain unqualified. [Actual native result](native-mouth-renderer-v118-result.md).
+- Fixed a production lip-sync coverage bug: ticks inside long source-picture
+  gaps could reuse pictures hundreds of milliseconds away. Such windows now
+  remain unassessed before crops/models, with regular 24/25/30/60-Hz routing
+  retained. The 39 timing/evidence and 79 assessment/export checks pass locally.
+  Model selection and confidence are unchanged. [Fix and evidence](video-lipsync-gap-coverage.md).
 - Completed the next native mouth-render input bank: all 48 recordings retained,
   with 1,128 exact RGB/timestamp-bound pictures for 47 planned edits and their
   before/after context. The short source stays unsupported. Eight decoder-only
@@ -88,8 +98,9 @@ integration remains unfinished.
   frozen in an explicit retained research runtime, with the initial missing-
   dependency preparation failure preserved. Native rendering, achieved alignment
   and articulation detection remain unqualified. Neural admission still requires
-  6 GiB available RAM; its actual read-only check found 2.84 GiB and started no
-  model stage. The 27 targeted input/renderer/runtime checks pass locally.
+  6 GiB available RAM; its earlier read-only check found 2.84 GiB and started no
+  model stage. A later owner-requested admission succeeded, as recorded above.
+  The 27 targeted input/renderer/runtime checks pass locally.
   [Input result](native-mouth-inputs-v116-result.md) and
   [actual pending admission](native-mouth-renderer-readiness-v118.md).
 - Completed the fixed native-video selection comparison: 138 clips across 23

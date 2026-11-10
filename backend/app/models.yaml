@@ -1593,7 +1593,7 @@ detectors:
 
   - id: vid.lipsync.stable_syncnet
     adapter: app.detectors.video.adapters.lipsync:StableSyncNetDetector
-    version: 0.5.0
+    version: 0.5.1
     name: "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track"
     modality: video
     family: av-sync
@@ -1603,6 +1603,7 @@ detectors:
     default_enabled: false
     legacy_weight: 0.0
     known_limitations:
+      - "input coverage: a 25 Hz tick requires a source picture within 40 ms; windows crossing uncovered timestamp gaps are unassessed, not evidence of manipulation or originality"
       - "research-only (D-37, 2026-09-12): the licence class stays unknown because the CreativeML Open RAIL++-M Attachment A use restrictions (administration of justice, law enforcement, immigration or asylum processes #11; fully automated decisions that adversely affect legal rights #6) conflict with the litigation and fraud journeys (PRD J2, J4); default off and used only in offline research comparisons (D-04 research preset). The default lip-sync lane is vid.lipsync.landmark_xcorr"
       - "one-directional by design (VF §4.2): generators optimise SyncNet agreement, so an in-sync track is informational and not evidence that the face is unmanipulated; only offset steps and confidence collapses are positive readings, reported uncalibrated as the fraction of a track's windows they cover (raw_kind score)"
       - "voice activity is an in-house energy and spectral-flatness rule, and speaker attribution correlates mouth-patch motion with the speech level; neither is validated on multi-speaker footage"
@@ -1623,7 +1624,7 @@ detectors:
 
   - id: vid.lipsync.landmark_xcorr
     adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
-    version: 0.5.1
+    version: 0.5.2
     name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
     modality: video
     family: av-sync
@@ -1633,6 +1634,7 @@ detectors:
     default_enabled: true
     legacy_weight: 0.0
     known_limitations:
+      - "input coverage: a 25 Hz tick requires a source picture within 40 ms; windows crossing uncovered timestamp gaps are unassessed, not evidence of manipulation or originality"
       - "lip-sync manipulation is checked only for audio–video misalignment; well-synchronised lip-sync deepfakes are not detected (D-37, D-02)"
       - "explanatory only (D-37, VF §4.2): an offset step or a correlation collapse gives a hand-set, uncalibrated score (0.55 collapse, 0.65 step, 0.70 both, outcome weight 0.4); in sync, a constant offset and no stable offset are informational and not evidence that the face is unmanipulated"
       - "the mouth signal is a proxy, not a landmark aperture: the darkness of the centre of a 32 × 24 grey patch placed by YuNet's two mouth corners (vid.tracks.yunet_dinov2, model yunet.2023mar, MIT); teeth, tongue, beards, lighting and head motion move it too. MediaPipe Face Landmarker is not used (ADR 0003): the Face Mesh V2 model card (model date 2022-09-15) states 'LICENSED UNDER Apache License, Version 2.0', but mediapipe 1.0.1 installs opencv-contrib-python 5.0.0.93 over the backend's opencv 5.0.0 (uv dry-run, 2026-09-13); the BlazeFace and Blendshape cards of the same bundle were not checked"

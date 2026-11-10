@@ -197,6 +197,13 @@ overlapping quantized audio-frame clock support. Native PCM and conditioning
 qualification, mouth generation and articulation-method tests remain pending;
 this metadata step does not implement or validate C-MIND.
 
+The subsequent [native waveform qualification](av-waveforms-v105-result.md)
+now passes on all 48 sources: decoded native sample counts, exact repeat hashes,
+unchanged mono-16-kHz content and 3,642 supported picture/sample coordinates.
+Ten authored impulse checks also pass the fixed phase allowance. Encoder feature
+timing, generator conditioning and achieved lip synchronization remain pending;
+this source-input result is not an articulation-detector accuracy result.
+
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a
 selected passage in ordinary evidence, PDF and JSON. Its helper passed a

@@ -1,0 +1,138 @@
+{
+  "schema": "chipmunk.native-authored-contract-results/113",
+  "status": "complete",
+  "successful_contracts": {
+    "video_alignment_and_repeat": {
+      "result": {
+        "schema": "chipmunk.video-appearance-authored/108",
+        "status": "complete",
+        "alignment_matches": true,
+        "feature_shape": [
+          128
+        ],
+        "feature_dtype": "float32",
+        "feature_repeat_bitwise": true,
+        "face_repeat_equal": true,
+        "native_input_counts": {
+          "face_detection_inputs": 2,
+          "appearance_inputs": 2
+        },
+        "new_neural_calls": 4,
+        "scope": "Authored CPU alignment/feature/repeat contract only, not source accuracy or a claim that an authored pattern is a face."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "authored",
+        "batch": null,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 0.7830632500117645,
+        "sampled_tree_rss_lower_bound_bytes": 92078080,
+        "minimum_available_ram_bytes": 8403582976,
+        "resource_journal_sha256": "07adbe5f25757ebebf6ce4693fce94bfbaf5214c4372c6d2d541f783346ce2c6",
+        "runtime_sha256": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+        "worker_receipt_sha256": "b17f92e5b18ebd15e059c0647b5b40f8ef09a1d9ece56c312dc9e171478722eb",
+        "new_neural_calls": 4,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "b17f92e5b18ebd15e059c0647b5b40f8ef09a1d9ece56c312dc9e171478722eb",
+      "profile_sha256": "85073c82fd6b53752d9739eee43c208b88456c492f03283ede53e7eed3cb57ac"
+    },
+    "speech_states_routing_and_context": {
+      "result": {
+        "schema": "chipmunk.av-speech-native-authored/110",
+        "status": "complete",
+        "native_forward_count": 3,
+        "hidden_shape": [
+          1500,
+          5,
+          384
+        ],
+        "native_layer_readout_matches": true,
+        "native_repeat_bitwise": true,
+        "legacy_25hz_chunks_equal": true,
+        "routed_canonical_frames": 50,
+        "authored_prefix_samples": 32000,
+        "counterfactual_tail_start_sample": 38400,
+        "prefix_deltas_after_suffix_change": [
+          {
+            "layer": 0,
+            "different_values": 0,
+            "maximum_abs_difference": 0.0
+          },
+          {
+            "layer": 1,
+            "different_values": 38399,
+            "maximum_abs_difference": 0.07457101345062256
+          },
+          {
+            "layer": 2,
+            "different_values": 38400,
+            "maximum_abs_difference": 0.11071324348449707
+          },
+          {
+            "layer": 3,
+            "different_values": 38400,
+            "maximum_abs_difference": 0.4716950058937073
+          },
+          {
+            "layer": 4,
+            "different_values": 38400,
+            "maximum_abs_difference": 2.1181297302246094
+          }
+        ],
+        "original_proof": {
+          "mel_sha256": "ca8b995664810021a852527514d4a45cfb44446afe946dc359d1d9d3a024c12f",
+          "full_hidden_sha256": "765458f912ecd766f0d8f7d572c768c231963f1bdc52959f406ebf328ae3eb2e",
+          "layer_readout_matches": true
+        },
+        "suffix_proof": {
+          "mel_sha256": "008dbb35ca2caf88dfe876bb5fa9e5967355aaa0ac5d894a10f3664668be8269",
+          "full_hidden_sha256": "a7b1cd59508f087bfdd50d47a654275edb8c72bdbe95358cdfe5164b86d373b4",
+          "layer_readout_matches": true
+        },
+        "new_neural_calls": 3,
+        "freeze_sha256": "96440435305a2959622a49d54c6929da1a281e6e9168271c43cd2b4b4f793e29",
+        "scope": "Authored execution/routing only. Suffix probe measures context dependence, not AI evidence, source timing, achieved mouth synchronization or detector accuracy."
+      },
+      "profile": {
+        "schema": "chipmunk.av-speech-resource-profile/110",
+        "command": "authored",
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "duration_s": 4.935369458980858,
+        "sampled_tree_rss_lower_bound_bytes": 755646464,
+        "minimum_available_ram_bytes": 7760723968,
+        "resource_limit_observations": [],
+        "resource_journal_sha256": "792a965ae6bdc98735960a32d6f11df0d70ad1fbc701de321b43cbd9ce21aeb5",
+        "worker_receipt_sha256": "0464c11bbcf2ea56eaef192a5738e32728e4a357adab4f91e7c190a57a8dc1d0",
+        "new_neural_calls": 3,
+        "scope": "Unchanged 900s/6-GiB sampled descendant RSS/6-GiB initial RAM/3-GiB initial disk/1.5-GiB running neural reserves. Monitor is data-only at 3-GiB initial RAM and 1.5-GiB RSS. No overwrite/retry; samples are not guaranteed peaks."
+      },
+      "result_sha256": "0464c11bbcf2ea56eaef192a5738e32728e4a357adab4f91e7c190a57a8dc1d0",
+      "profile_sha256": "e07679a6660f58df0bcd0b7dd7a67aa126e519c8bbca1c95849ea7df490832c7"
+    }
+  },
+  "successful_authored_neural_calls": 7,
+  "preserved_source_extraction_failure": {
+    "error": "TypeError: float compared with saved cutoff metadata record",
+    "completed_case_responses": 0,
+    "partial_neural_call_count": null,
+    "profile_sha256": "9892ef5be0774352d8189d62cb7f4380585c0351cca228b94d5e9a1f4b38f83d",
+    "worker_log_sha256": "f91b78015ea387dba043ea453ca83441fe1f4d0e475c87e45fd1922ea2d7c9fd",
+    "response_journal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "child_exit_code": 1,
+    "guard": null,
+    "sample_errors": 0
+  },
+  "scope": "Actual authored CPU contracts only. No real-source accuracy, generated mouth alignment, finite temporal evidence locality or serving promotion. Failed source-stage work is separate and not included in the seven successful authored calls."
+}

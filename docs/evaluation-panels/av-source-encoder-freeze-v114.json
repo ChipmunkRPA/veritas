@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.av-source-encoder-freeze/114",
+  "code_sha256": {
+    "backend/scripts/av_source_encoder_v114.py": "766c2cceb0b5e0a9bb5804b14197d8894f5d32621e86cc7c7e5844c19c16f1f6",
+    "backend/tests/test_av_source_encoder_v114.py": "a8f14b0f5a6474bc3c234abed7a07bb4927d555f993a6e30fc31cff7f3d7ff7f",
+    "docs/av-source-encoder-v114-method.md": "41e857a2dcb0d17f73e5e7fcff6274f4ccd76ea6906d23b2f906e609b8f3b5c6",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa"
+  },
+  "speech_contract_freeze_sha256": "96440435305a2959622a49d54c6929da1a281e6e9168271c43cd2b4b4f793e29",
+  "qualified_authored_result_sha256": "0464c11bbcf2ea56eaef192a5738e32728e4a357adab4f91e7c190a57a8dc1d0",
+  "qualified_monitor_result_sha256": "2604abdad90db783caf041a705c7571592b4815bc87599078e8c618c39b2d857",
+  "source_plan_sha256": "559dbd7f391017862901a2bc1b88aa70a1d56cba1f7e1d4af467cb9daa42887b",
+  "waveform_journal_sha256": "bcc7dfa91edbda471d1b17636383bb3e6b1293d9b48600d4b04ff1118229b4d3",
+  "sources": 48,
+  "frame_coordinates": 3642,
+  "role_counts": {
+    "fusion_fit": 18,
+    "selection": 10,
+    "confirmation": 10,
+    "confidence_cal": 10
+  },
+  "batches": 8,
+  "sources_per_batch": 6,
+  "planned_encoder_forwards": 56,
+  "scope": "All source states and clock routing only; no authenticity prediction, fitting, generated mouth alignment, finite evidence locality or serving change."
+}

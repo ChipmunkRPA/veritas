@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.video-native-source-freeze/92",
+  "asset_plan_sha256": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99",
+  "historical_rgb_journal_sha256": "21ce2999b0e378db360369a8429d70a59c92fbab83e0802eb8fcb509243f8c8d",
+  "code_sha256": {
+    "backend/scripts/video_native_sources_v92.py": "403f4a87e7ce1d3f289a64bc075660f191cd9183edf545b5f24d4d65475f27c9",
+    "backend/scripts/video_native_runtime_v92.py": "eb67f41205c252d3c4470cdd50669b935403bd8f20e1a7e1f63a90cf33015eb4",
+    "backend/scripts/video_common_sources_v89.py": "8307b0f7f4fac15eb732c7fcc73b8496039c9f224a1e4f231f747fd52cfc4e95",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/tests/test_video_native_sources_v92.py": "86dc76cd4de9da1ed5080a2752f7a48e08779409df476c70dc881a0db44bcd4a",
+    "docs/video-native-source-qualification-v92.md": "ef529a18cab8fa395747998df43f52698f98c47261e283ef0c41d0071cce55c0"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "psutil": "7.2.2"
+  },
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "assets": 336,
+  "batch_size": 28,
+  "batches": 12,
+  "new_neural_calls": 0,
+  "limits": {
+    "seconds": 900,
+    "initial_ram_bytes": 3221225472,
+    "tree_rss_bytes": 1610612736,
+    "running_ram_and_disk_reserve_bytes": 1610612736,
+    "initial_disk_bytes": 3221225472
+  },
+  "method": "Full native RGB decode with observed PTS, original audio frame/sample clocks, and canonical mono-16k PCM content hashes. Join exact full-video or informative three-frame/three-PCM-block aliases. Exclude components matching historical RGB sequences. No perceptual identity, historical-audio, arbitrary crop/transcode or unknown-source independence guarantee. No inference or serving change."
+}

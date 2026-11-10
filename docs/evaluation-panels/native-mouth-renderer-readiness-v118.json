@@ -1,0 +1,19 @@
+{
+  "schema": "chipmunk.native-mouth-renderer-readiness/118",
+  "status": "pending_headroom_no_stage_attempt",
+  "command": "authored",
+  "reasons": [
+    "initial_ram_headroom"
+  ],
+  "available_ram_bytes_at_admission": 3051831296,
+  "required_initial_available_ram_bytes": 6442450944,
+  "neural_stage_directory_exists": false,
+  "render_cache_exists": false,
+  "new_neural_calls": 0,
+  "freeze_sha256": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+  "native_input_bank_complete": true,
+  "native_source_pictures": 1128,
+  "software_tests_passed": 27,
+  "defaults_changed": false,
+  "scope": "Actual read-only denied admission after frozen context verification. No native renderer execution, new detector result, achieved alignment or serving qualification. Prior successful source/video tests remain separate."
+}

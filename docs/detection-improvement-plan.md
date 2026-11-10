@@ -88,7 +88,10 @@ integration remains unfinished.
   frozen in an explicit retained research runtime, with the initial missing-
   dependency preparation failure preserved. Native rendering, achieved alignment
   and articulation detection remain unqualified. Neural admission still requires
-  6 GiB available RAM. [Input result and next experiment](native-mouth-inputs-v116-result.md).
+  6 GiB available RAM; its actual read-only check found 2.84 GiB and started no
+  model stage. The 27 targeted input/renderer/runtime checks pass locally.
+  [Input result](native-mouth-inputs-v116-result.md) and
+  [actual pending admission](native-mouth-renderer-readiness-v118.md).
 - Completed the fixed native-video selection comparison: 138 clips across 23
   source groups, 9,244 actual neural calls. Raw and calibrated appearance arms
   both flag all 46 constructed swaps, with zero false flags among 92 controls

@@ -13,6 +13,20 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+For native mouth-edit support and counterfactual response arithmetic, the
+[new input bank](native-mouth-inputs-v116-result.md) and
+[renderer contract](native-mouth-renderer-v117-method.md) offer 24 authored
+checks in the project development environment. They require no source media,
+weights, credentials or network. These checks cover native context preservation,
+exact-time conditioning shifts, repeated-image equality and nonresponse failures;
+they do not establish neural accuracy. Three separate installed-runtime checks
+require the pinned v7 generator dependency overlay. The actual neural experiment
+is [pending RAM admission](native-mouth-renderer-readiness-v118.md).
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_native_mouth_inputs_v116.py backend/tests/test_native_mouth_renderer_v117.py
+```
+
 For the newest native speech-state/source routing contract, run the 21 authored
 checks in the [source encoder result](av-source-encoder-v115-result.md). They use
 NumPy, pytest and the project code, with no media, model download or credentials.

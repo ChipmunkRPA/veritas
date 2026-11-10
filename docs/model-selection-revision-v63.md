@@ -58,6 +58,12 @@ are still pending. The [recent research refresh](recent-detection-research-2026-
 adds October/November methods to the next-test plan, without retuning frozen
 experiments or treating published scores as app accuracy.
 
+The [text formatting input audit](text-format-audit-v93-preparation.md) now
+prepares all five paired views of 288 consumed controlled documents, preserving
+every original non-whitespace position and label. Actual extraction leaves
+800 distinct classifier inputs from 1,440 requests. The model-response comparison
+has not run; this is neither fresh-author accuracy nor new confidence calibration.
+
 ## How the revised comparisons choose
 
 1. **Keep several plausible candidates.** Compare individual checks, wider

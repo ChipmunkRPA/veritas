@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.text-format-input-freeze/93",
+  "code_sha256": {
+    "backend/scripts/text_format_views_v93.py": "ce94749f1d2364b604ab34933601177d745a1d6ac550156ffec9bfa3fea45950",
+    "backend/scripts/prepare_text_format_audit_v93.py": "2e56f955962a0be3fc58bf9581260d0ac9389b63bb8023a53e0874b7dee9d8d6",
+    "backend/app/detectors/text/extract.py": "c0d3c4704302c4084a4d35bbdeae1c6b75388e07cce07610aec83384011d222f",
+    "backend/tests/test_text_format_views_v93.py": "0b597d3863b83814ebaf7e418572269807aa99cde6944750106c341455055827",
+    "docs/text-format-audit-v93-method.md": "011f926af4062b9b0e76c2e2b6e9f39fca90c3ffd31e40ba7625744f06702b56"
+  },
+  "prior_freeze_sha256": "61dfe6aa86e6a07fc1a70c04394686b747790f746fca40bd3b5bd406d34ea68a",
+  "prior_inputs_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+  "prior_diagnostic_sha256": "2ebe8ec7c72bbbac252fb7080689c451caf4e44b5584ffb5814e610835c41170",
+  "prior_control_seal_sha256": "fde666390cdc232c9b3ae1ed684895c89494320476d8d360f7c7a7fc1af3973c",
+  "prior_artifacts_sha256": {
+    "freeze.json": "61dfe6aa86e6a07fc1a70c04394686b747790f746fca40bd3b5bd406d34ea68a",
+    "fit.json": "4b26f6f333ffbde4bd889a9605be561ee766cfe8bfed7d5e0ecf3d498697387c",
+    "cal.json": "fc831df17c34103dccf37b904a8805c222a1861f7be83f28f0f6b5ce8e896390",
+    "point.json": "4a3e91d1885d44f9d7902c30095238402e87e017ba8dd998509fe3d9fb9f0645",
+    "token-head.json": "c4aa149f94b3104e77dc1f78e7a88cbcd9b8df844845c240cf90d68b8cec94f2",
+    "interval-head.json": "701dc768a9fb5395881728b33f6c4bf91cb55efe74f6fca0b6b11e47424741f4",
+    "calibrators.json": "647c22dab5970995ec784631c01d1459d6a5d245ad1bd93d1830d75290a2cc5c",
+    "points.json": "1620675205260c941e97bb62daed4641bac052469d1c7cf6eabfa29cd8db8145",
+    "fit.jsonl": "c7ac93ec60bcb315e8db2dca63cea3069509448039ae87598569a1c5beafe498",
+    "cal.jsonl": "d3307600801f3058039a310469a7d0ea565adad96712625912212fd05f0e6fef",
+    "point.jsonl": "b47a3c0e44588101f0acb147a0c7bedbf449228c7cf5359662f92f68df7f0a92"
+  },
+  "input_packet_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+  "new_neural_calls": 0,
+  "scope": "Consumed diagnostic-source formatting stress preparation, not fresh authors, new detector accuracy or permission to retune/adopt old heads. Exact source text, per-character labels/mappings and record hashes remain private."
+}

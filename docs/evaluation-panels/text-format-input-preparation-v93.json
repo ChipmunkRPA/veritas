@@ -1,0 +1,39 @@
+{
+  "schema": "chipmunk.text-format-input-preparation/93",
+  "documents": 288,
+  "known_source_groups": 32,
+  "requested_views": 1440,
+  "unique_effective_classifier_texts": 800,
+  "equivalent_view_runs_avoided": 640,
+  "effective_text_changed_documents": {
+    "original": 0,
+    "horizontal_space_control": 0,
+    "single_spaces": 224,
+    "wrap_48": 224,
+    "paragraph_40_words": 288
+  },
+  "effective_texts_by_recipe": {
+    "human": 64,
+    "ai": 64,
+    "mixed-small": 96,
+    "mixed-large": 96,
+    "mixed-human-gap": 96,
+    "mixed-many": 96,
+    "human-small-matched": 96,
+    "human-large-matched": 96,
+    "human-many-matched": 96
+  },
+  "input_packet_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+  "freeze_sha256": "c5ac70584d5c913f196fccd1ce3a711583367cde287ed61a40ffd526ed70a8f8",
+  "exact_nonwhitespace_and_token_boundaries_preserved": true,
+  "source_character_labels_preserved": true,
+  "new_neural_calls": 0,
+  "model_response_comparison_complete": false,
+  "defaults_changed": false,
+  "scope": "Five paired formatting views of each already consumed160-word controlled document. Actual app extraction is measured before deduplicating identical effective text. This is input/provenance verification only, not detector stability or natural-document accuracy.",
+  "preparation_profile_sha256": "128053f4152852aa77fea7609efbbac80c0f61e20fcc56f96f426490e2432c83",
+  "duration_s": 1.641260665957816,
+  "maximum_per_case_observed_process_rss_bytes": 76709888,
+  "minimum_observed_available_ram_bytes": 5916098560,
+  "resource_scope": "Data-only per-case observations, not continuous sampling or guaranteed peaks."
+}

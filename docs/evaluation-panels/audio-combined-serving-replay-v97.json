@@ -1,0 +1,65 @@
+{
+  "result": {
+    "schema": "chipmunk.audio-combined-serving-replay/97",
+    "status": "complete",
+    "cases": 4176,
+    "assessed_replayed": 4028,
+    "unassessed_preserved": 148,
+    "maximum_absolute_probability_error": 2.220446049250313e-16,
+    "roles": {
+      "fusion_fit": {
+        "ok": 999,
+        "not_applicable": 45
+      },
+      "confidence_cal": {
+        "ok": 1008,
+        "not_applicable": 36
+      },
+      "selection": {
+        "ok": 1008,
+        "not_applicable": 36
+      },
+      "confirmation": {
+        "ok": 1013,
+        "not_applicable": 31
+      }
+    },
+    "freeze_sha256": "28eb3c29759a128c5840e9ceb6957dadc0a875bcb22088a646c3585988e31892",
+    "private_bundle_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+    "complete_input_binding_sha256": "19e9af15b6aaa118b852fdd8041c81d69eb9cd9dcb8d06a07684a5fce3a32272",
+    "new_neural_calls": 0,
+    "defaults_changed": false,
+    "scope": "Completed recorded-feature and score replay, not fresh model execution, full analysis/payment/export qualification, external review or new detector accuracy."
+  },
+  "resources": {
+    "preparation": {
+      "status": "complete",
+      "error_type": null,
+      "sample_errors": [],
+      "duration_s": 0.027128125075250864,
+      "maximum_sampled_rss_bytes": 75481088,
+      "minimum_available_ram_bytes": 6151651328,
+      "resource_journal_sha256": "c626b55e018e6dabc97d7e8dd97de1dae1fdbae2a0c9ad98ea8821b2d43d5066",
+      "new_neural_calls": 0,
+      "scope": "In-process numerical stage sampled every0.25s; no descendant worker.900s/1.5GiB RSS/3GiB initial RAM and disk/1.5GiB running reserves. Samples are not true peaks. Neural limits unchanged. No retry/overwrite."
+    },
+    "replay": {
+      "status": "complete",
+      "error_type": null,
+      "sample_errors": [],
+      "duration_s": 20.12575970799662,
+      "maximum_sampled_rss_bytes": 80904192,
+      "minimum_available_ram_bytes": 6338871296,
+      "resource_journal_sha256": "c70174ecc8db591d1953a241b9e46c75679600b69ea0c806b862da1ac4927075",
+      "new_neural_calls": 0,
+      "scope": "In-process numerical stage sampled every0.25s; no descendant worker.900s/1.5GiB RSS/3GiB initial RAM and disk/1.5GiB running reserves. Samples are not true peaks. Neural limits unchanged. No retry/overwrite."
+    }
+  },
+  "publication_verified_before_replay": {
+    "remote_freeze_blob_verified": true,
+    "remote_blob_sha": "cf4daa0ebccc3eb7fad4d95169ee42c492b586c0",
+    "publication_commit": "fde8ba40e66e5aa990fe0ce4c80d53bb6c8b494f",
+    "source": "GitHub connector fetch_file for main, matched local Git blob before replay",
+    "new_neural_calls": 0
+  }
+}

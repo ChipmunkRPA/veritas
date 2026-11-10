@@ -51,6 +51,13 @@ neither coverage alone nor a small added error decides adoption. These are
 correlated four-second controlled speech variants, not whole-file population
 probabilities. No serving default has changed.
 
+The [inference-only combined audio runtime](audio-combined-serving-v97-result.md)
+now passes 21 authored scope/failure tests and numerical replay of all 4,176
+completed records: 4,028 assessed scores agree within 2.23e-16, with all 148
+unassessed records retained. This is consumed-record arithmetic parity, not new
+model extraction or full serving qualification. The selected global map and
+protected current calibration remain unchanged.
+
 The [shared video source qualification](video-native-source-v92-result.md)
 decoded all 336 assets and 166,569 native frames, with 48 available audio streams.
 All technical clocks pass, but 288 assets are silent; six paired swap groups

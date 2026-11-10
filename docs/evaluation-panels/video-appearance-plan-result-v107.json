@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.video-appearance-plan-result/107",
+  "status": "complete",
+  "selection_groups": 23,
+  "cases": 138,
+  "manipulated_cases": 46,
+  "genuine_cases": 92,
+  "planned_windows": 690,
+  "planned_native_model_frames": 4554,
+  "manipulated_cases_without_positive_planned_unit": 0,
+  "unchanged_confirmation_groups": 24,
+  "unchanged_fitting_groups": 21,
+  "unchanged_calibration_groups": 22,
+  "planned_neural_batches": 8,
+  "private_plan_sha256": "1a238e8afbe7e68d4920de765c4c6f5d8eed5c7b7540ee28beb0fee844354848",
+  "freeze_sha256": "c39d4e30de71f29db7dac373d048f65dc3f5735e24cb1fb15a2641cb57b84ae7",
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "Source-only support preparation for fixed v106 appearance-map transfer. Existing source roles and 24 confirmation groups stay untouched; not native scoring or a full production pipeline. Constructed-byte/actual-clock binding, guarded native extraction and localization/false-alarm comparison remain pending."
+}

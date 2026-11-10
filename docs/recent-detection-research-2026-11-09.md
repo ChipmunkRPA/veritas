@@ -1,7 +1,7 @@
 # Recent detection research: methods and next tests
 
 Reviewed 9 November 2026. This targeted refresh includes October papers,
-3–4 November preprints/revisions, a 6–10 November conference paper, and two
+3–4 November preprints/revisions, 6–10 November conference papers, and two
 relevant June papers. It is not an exhaustive bibliography. Relevant method
 and evaluation sections were read; the BabelFake entry is based on its primary
 abstract. Repository inspection is identified separately from paper review.
@@ -22,6 +22,23 @@ regional candidate on new generators, ordinary edits and compression. Keep all
 related sources together across roles. Measure actual retained pixels and false
 highlighted area. A reconstruction difference is not automatically an AI mask.
 No PAL code, checkpoint or dataset has been adopted or cleared by this review.
+
+[Learning to Falsify, 3 November](https://arxiv.org/html/2611.04529v1)
+combines hierarchical patch/tile bags with gated attention. Its separate FATAS
+test-time method covers the image with tiles and averages the top-k tile
+probabilities, instead of averaging every tile. **Proposed local test:** compare
+full-coverage tiling and aggregation with our existing permitted detector.
+Freeze tile/count handling and report genuine false flags and false highlighted
+area as image size grows. High tile scores or attention are not verified
+AI-pixel masks; an image label does not make every patch synthetic.
+
+The authors' [README](https://github.com/HuiGuanLab/LTF),
+[NOTICE](https://github.com/HuiGuanLab/LTF/blob/main/NOTICE) and
+[reproduction notes](https://github.com/HuiGuanLab/LTF/blob/main/docs/reproduction.md)
+were inspected. Code advertises MIT; sample-image rights remain with source
+rightsholders. The released GenImage checkpoint does not claim reproduction of
+every paper setting. Complete weight/data commercial permissions remain
+unestablished here; no author assets were adopted or executed.
 
 [Inpainting Exchange, revision 4 November](https://arxiv.org/html/2602.00192v2)
 separates synthesized content from an autoencoder's image-wide processing
@@ -108,6 +125,23 @@ the actual [checkpoint license](https://github.com/nii-yamagishilab/AntiDeepfake
 is **CC-BY-NC-4.0**. Those released checkpoints are excluded from commercial use.
 No author code was executed or copied into the application.
 
+[VeriSpoof, 3 November](https://arxiv.org/html/2611.04634v1)
+uses structured rationales with statement-specific checkers. Waveform conditions
+are measured directly; synthesis-span and generator correctness need labelled
+spans and source metadata in evaluation. Its counterfactual training tests
+whether a decision follows an altered stated span, which alone does not verify
+the span. Matched channel transformations on both classes probe shortcuts;
+generated spans and the per-token head are evaluated separately.
+
+**Proposed local test:** bind each observation to its waveform interval, keep
+speech/background/condition fields distinct, and score span overlap and wrong
+genuine highlights separately from file detection. Noise or clipping is not
+proof of synthesis. Use new fitting and evaluation roles with matched channel
+controls. Relevant methods and ablations were read. The paper estimates 6–7 GiB
+GPU inference memory for its 2.85B-parameter model; this is not measured Mac
+usage. No implementation/checkpoint permissions were established or assets
+adopted, and the full model was not loaded locally.
+
 [The Watermark Shortcut, 22 June](https://arxiv.org/html/2606.23335v1)
 finds that detectors can learn watermark presence instead of synthesis evidence.
 Its paired clean/marked examples and augmentation of both truth classes test
@@ -167,6 +201,23 @@ were inspected: code is AGPL-3.0 and the Llama probes are gated. AGPL is not a
 non-commercial license; integration obligations and all checkpoint terms still
 need separate review. No source code or checkpoint was incorporated.
 
+[DeBERTa-ConPara, 6–10 November](https://aclanthology.org/2026.aacl-long.82.pdf)
+separately varies training/inference Unicode normalization. Its reported
+configuration trains on raw text and normalizes at inference; gains concentrate
+on homoglyph and zero-width-character attacks. The feature branch and
+contrastive/paraphrase additions did not improve its best configuration.
+Main text and appendix also differ on normalization placement; reproduction
+must resolve that against pinned code/records.
+
+**Proposed local test:** a separate English Unicode-sensitivity audit with
+original-to-transformed span mapping, untouched uploads, clean controls and
+frozen settings. Unlike our whitespace-only audit, this changes non-whitespace
+characters and requires a new mapping specification. Do not blindly remove
+directional/joining marks in other languages. Formatting sensitivity is not a
+watermark decoder or proof of AI authorship. Relevant method/ablation sections
+were read; no author code, datasets or weights were incorporated or cleared
+for commercial use here.
+
 ## What changes now
 
 The review defines concrete follow-up comparisons. It does not retune the v84/v88
@@ -214,6 +265,14 @@ same-case Brier than joint. A public-data refit reproduces the saved models and
 predictions exactly on the pinned runtime. This advances a calibrated reference
 for fresh native testing; it neither replaces a detector nor supplies fresh
 accuracy, localization or customer confidence.
+
+The [selection-source support plan](video-appearance-plan-v107-result.md) now
+prepares 690 fixed windows over 138 clips from 23 selection groups, using
+rational source clocks and distinct middle/context labels. The exact v106
+appearance map and research point stay fixed; 24 confirmation groups remain
+reserved. This is source preparation with zero neural calls. Actual constructed
+byte/clock binding and native scoring remain pending; it does not implement
+C-MIND, LoCC or the new image/audio methods above.
 
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a

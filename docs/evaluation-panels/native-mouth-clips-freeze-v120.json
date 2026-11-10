@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.native-mouth-clips-freeze/120",
+  "code_sha256": {
+    "backend/scripts/native_mouth_clips_v120.py": "9f501b2d560371bb8eea47a54aa46c085ac7ad7f172a199c3336398dd9c8644a",
+    "backend/tests/test_native_mouth_clips_v120.py": "91fbf8c83e5822cdbe98709927893da64d7dfb9edf8058b672fa1d9eb5f5f396",
+    "docs/native-mouth-clips-v120-method.md": "91da87a3ea61ab9cbd17a9de578f1c71f0fff0b2a418fce58e74711e97c7083c"
+  },
+  "private_plan_sha256": "66662e6c1e9358a5932d7169f0591c8d114fb4921dd4644be3c7771658bd056e",
+  "mux_freeze_sha256": "0b68203b457fb3c96fbaa51f9c6ba81583bd518fcfc9ee8b329be011331fe30d",
+  "mux_result_sha256": "b71a155c13dc1181b4091948364ebe7639257adab674e8623ab1b7f8e2c67059",
+  "renderer_freeze_sha256": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+  "sources": 48,
+  "planned_cases": 288,
+  "native20_edit_sources": 47,
+  "earlier_conditioning_available_sources": 47,
+  "role_counts": {
+    "fusion_fit": 18,
+    "selection": 10,
+    "confirmation": 10,
+    "confidence_cal": 10
+  },
+  "conditions": [
+    "original",
+    "resample",
+    "blur2",
+    "blur4",
+    "ai_aligned",
+    "ai_earlier_320ms"
+  ],
+  "batch_sources": 6,
+  "batches": 8,
+  "scope": "Complete source-clock-preserving generated clips and ordinary controls. Planned missing conditions remain unavailable, not negative detector results. No detector inference/fitting, achieved synchronization or serving promotion."
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "chipmunk.text-layout-review-freeze/102",
+  "new_neural_calls": 0,
+  "code_sha256": {
+    "backend/scripts/review_text_layout_v102.py": "3d96f38ace3cb52c2b2a733837b3cfafb79e606c9497b4fca38249e107bbf004",
+    "backend/tests/test_text_layout_review_v102.py": "c697162f23598751010e45f81bf14e59f5e2047c9a3db03672393604061c6079",
+    "backend/scripts/text_layout_review_runtime_v102.py": "829dff36dba61d96fa47c774fe232a4e8b8bb73badfe609b2bf5bc6c477bd59a",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "docs/text-layout-review-v102-protocol.md": "3a6354987f6707a1664ba80cc14e866dea1d0c0a6659d360f1cb6a6edfbb1ff7"
+  },
+  "comparison_result_sha256": "f5034c0532d4285e235f51ba98b32976af49d7f6feb82e0808519559818683b2",
+  "comparison_freeze_sha256": "f079dc065a08e74ded8694a4dfe68cae24af548e2b06cd8ca22a7b66b1080855",
+  "scope": "Separate post-result arithmetic/mapping implementation, not new inference, a second model, calibration refit, independent authorship truth or outside human review."
+}

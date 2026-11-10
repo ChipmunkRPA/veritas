@@ -1,0 +1,57 @@
+{
+  "schema": "chipmunk.native-mouth-calibration-freeze/126",
+  "code_sha256": {
+    "backend/scripts/native_mouth_readout_v126.py": "c9f56c1e5573fc906aec31d863980c03b37eab7f06fddf980a7802c13f50db96",
+    "backend/scripts/calibrate_native_mouth_v126.py": "a9eddaf2a3aea1268f2b259496b059dbefe45e1f063c3261f9be86437ea2a3e4",
+    "backend/tests/test_native_mouth_readout_v126.py": "1f9ad9268d1b132b7df23c33675566a5148d68f7bf85f6e22b909f4030260bb7",
+    "docs/native-mouth-calibration-v126-method.md": "b77856f37b6ee043c9e99b295d11d27e1360001f5f131b1e5dd900d6b67e7ba6",
+    "backend/app/detectors/video/adapters/lipsync_xcorr.py": "03e2f222600fad99a5d88891c188455798acbe7fb73ae972f9d8373947add116",
+    "backend/app/detectors/video/adapters/lipsync.py": "a0f889ac12b5a9b1e99c1704d16340c4fd7909047e38c5be0c25129be41dadf2",
+    "backend/app/detectors/video/lipsync.py": "b7dcaca92b182661b6e2c69c8c03f44cd2fb93ebfc1c58a934c7eb13e981a31d",
+    "backend/app/detectors/video/xcorr.py": "cc891a4e21a064552e441bb73db1e698ff90f18d273cdf74bacf6c165f8165cd",
+    "backend/app/detectors/video/av_evidence.py": "08f7a16b3fd2fe4e9fa091cfe39249458a0d324b89c62eb386a3b1d37e48a326",
+    "backend/app/detectors/video/sampling.py": "0eebbe9fe557891dce2cb87e3e92dd4d57a0fc4e40340811a40030033512dd98",
+    "backend/app/detectors/video/adapters/swap.py": "1006b67de993e3d481791c4b423877252b7e384f69566e37ceacff4d72ccbe99",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/engine/detector.py": "59cceb134fa2940ba05cfec9b495cbac667a8eaa7f4ca115b2c81990957f9ec9"
+  },
+  "fitting_result_sha256": "e3d583b6f33ca6f1601a4ea00d078ed30e51f193ac1c0ef02ce7a276e39c378c",
+  "learned_reference_heads_sha256": "3fb77ee6d4fc95748c46b1aa43b59a0522c2029ff6cb323c61865656aebd0d6a",
+  "calibration_groups": 10,
+  "planned_calibration_cases": 60,
+  "arms": [
+    "visual_only",
+    "concatenation",
+    "interaction"
+  ],
+  "study_calibration": {
+    "method": "positive-slope-balanced-study-logit/126",
+    "slope_bounds": [
+      0,
+      50
+    ],
+    "intercept_bounds": [
+      -50,
+      50
+    ],
+    "L2_penalty": 0.01,
+    "scale_floor": 0.05,
+    "max_iterations": 2000,
+    "ftol": 1e-12,
+    "gtol": 1e-08
+  },
+  "research_group_budgets": [
+    0,
+    1,
+    2
+  ],
+  "primary_research_group_budget": 2,
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "opencv-python-headless": "5.0.0.93",
+    "pillow": "12.3.0"
+  },
+  "scope": "Calibration-group vectors/labels only. Separate monotone point and clip study calibrations for every frozen head; frozen control-group research points and current correlation adapter on common recorded native faces. No selection/confirmation responses, customer probability or serving change."
+}

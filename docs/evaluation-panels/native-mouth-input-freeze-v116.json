@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.native-mouth-input-freeze/116",
+  "code_sha256": {
+    "backend/scripts/native_mouth_inputs_v116.py": "078d2998c8cf67f518fd6e7423c7934cd8287cd1cb1e6ccf9eec82611bf277e4",
+    "backend/tests/test_native_mouth_inputs_v116.py": "d122403687c82fd4420f3d0d9a3f4457c62a1db298d7fc6f1fb44642f3b2ec6e",
+    "docs/native-mouth-inputs-v116-method.md": "ef451cce417439010bfd1e6522036d04b04877da6a7665efa74713518f6ff830"
+  },
+  "plan_sha256": "602cb10ebb62aec4197ae55273282c225bf2f6c2a7f55d0cf3ffafb1169ce98c",
+  "source_state_freeze_sha256": "531a6200867e86592be94146313b15a281fc2beed00fbcaeaba1fba1d26d59a0",
+  "source_state_result_sha256": "8b5e032651721de3f8a4b799e0013f2ba92424d564f0bd259bbaca5198b2fdae",
+  "native_source_freeze_sha256": "120ba30186c822f1898a580c50f59b621b42f79a85d9f28161b8402b34404fae",
+  "native_qualified_plan_sha256": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+  "source_role_plan_sha256": "8abcd74217c8afa4d81167c5fd43aee1a95221f4705db337e43eacf7c5d140fa",
+  "sources": 48,
+  "eligible_sources": 47,
+  "retained_short_sources": 1,
+  "planned_pictures": 1128,
+  "new_neural_calls": 0,
+  "scope": "Native frame bytes, clocks and speech-state bindings only. No face eligibility, mouth render, achieved synchronization, authenticity prediction or serving change."
+}

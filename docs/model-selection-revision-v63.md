@@ -56,8 +56,12 @@ decoded all 336 assets and 166,569 native frames, with 48 available audio stream
 All technical clocks pass, but 288 assets are silent; six paired swap groups
 have mismatched native geometry/timestamps, and eleven spoken sentence types
 cross the current roles. Known-boundary correspondence and sentence-aware lip
-roles must address those issues before scoring. New lip manipulations, ordinary
-controls and the common comparison are still pending. The [recent research refresh](recent-detection-research-2026-11-09.md)
+roles must address those issues before scoring. A [known-boundary pilot](video-native-insert-pilot-v96-result.md)
+now contains six native-clock clips with two swap inserts and three ordinary
+edit controls. All 900 frames and 18 before/during/after PNGs passed construction
+and a second command-interface review; this qualifies inputs, not detection.
+Wider construction, new lip manipulations and the common detector comparison
+are still pending. The [recent research refresh](recent-detection-research-2026-11-09.md)
 adds October/November methods to the next-test plan, without retuning frozen
 experiments or treating published scores as app accuracy.
 

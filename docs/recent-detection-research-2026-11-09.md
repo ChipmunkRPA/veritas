@@ -172,6 +172,13 @@ any confidence contribution. Keep useful candidates and report gains alongside
 both wrong directions, coverage and cost; an added error is not an automatic
 rejection. No new method from this refresh is yet qualified in the app.
 
+The [known-boundary video pilot](video-native-insert-pilot-v96-result.md) has
+also completed input construction and a second command-interface review:
+six clips, 900 native frames and 18 timestamp-bound before/during/after PNGs.
+Two swap conditions share time support with three non-AI edit controls.
+This supports a controlled comparison; it does not implement C-MIND or LoCC,
+establish exact AI-pixel truth, or supply a new detector accuracy result.
+
 The existing commercial checkpoint restrictions, customer model-name filtering,
 prepayment and preliminary-report limits continue to apply. No restricted
 weights, raw customer data, outreach, workflow, real payment or GCP deployment

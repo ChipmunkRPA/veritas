@@ -1,0 +1,80 @@
+{
+  "schema": "chipmunk.native-video-insert-pilot/96",
+  "status": "complete",
+  "constructed_groups": 1,
+  "planned_compatible_groups": 90,
+  "planned_cases": 540,
+  "constructed_cases": 6,
+  "native_rgb_frames_verified": 900,
+  "native_pngs_verified": 18,
+  "width": 1920,
+  "height": 1080,
+  "frame_step_seconds": "1/25",
+  "edit_interval_seconds": [
+    "2",
+    "4"
+  ],
+  "edit_interval_frames_half_open": [
+    50,
+    100
+  ],
+  "changed_frames_by_condition": {
+    "original": 0,
+    "swap_a": 50,
+    "swap_b": 50,
+    "ordinary_light": 50,
+    "ordinary_blur": 50,
+    "ordinary_time_step": 50
+  },
+  "media_bytes": 928043512,
+  "constructor_freeze_sha256": "e621f5f20b3bf731de1a450e998cf69610b3a6109a10ff7597719eaf27e841f9",
+  "private_group_receipt_sha256": "72cbe423bd1a83e2af77ce5e045cbd8e17d2144851ea0be650f463939a50911a",
+  "construction_profile_sha256": "15982d84842dd972b7802f22d20f4e6b7b355d4815e40b87b3d69f3cf2387caf",
+  "construction": {
+    "duration_s": 129.3293913330417,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "sampled_tree_rss_lower_bound_bytes": 828817408,
+    "minimum_available_ram_bytes": 5708660736,
+    "resource_journal_sha256": "74e41ce423b6c976991a2f69f4481af2c706e6b646d2c63e1b15c1c69071e361"
+  },
+  "command_review": {
+    "schema": "chipmunk.native-insert-command-review/96",
+    "status": "complete",
+    "cases": 6,
+    "native_rgb_frames_verified": 900,
+    "native_pngs_verified": 18,
+    "constructor_freeze_sha256": "e621f5f20b3bf731de1a450e998cf69610b3a6109a10ff7597719eaf27e841f9",
+    "private_group_receipt_sha256": "72cbe423bd1a83e2af77ce5e045cbd8e17d2144851ea0be650f463939a50911a",
+    "constructor_profile_sha256": "15982d84842dd972b7802f22d20f4e6b7b355d4815e40b87b3d69f3cf2387caf",
+    "command_journal_sha256": "efb5b1ba2c888c355ddab70bb3063e0d50c77a114b320e564471b07b3774b34a",
+    "reviewer_sha256": "abb41943dc740e3992c0ceaeccbc75f45fc4034022e2842597cf0ec4da7b8948",
+    "sample_helper_sha256": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "new_neural_calls": 0,
+    "scope": "Second FFmpeg command-interface read of all output pixels/PTS/duration, all native PNG bindings and source/changed-frame correspondence. Same underlying codec library, not an independent decoder engine, outside human review, AI-pixel proof or detector accuracy. Source fingerprints and media remain private."
+  },
+  "command_review_result_sha256": "fe6d1ccb2ab242598d3999753fb564f5185b7c917ec9492e412dc0ac2c818737",
+  "command_review_profile": {
+    "status": "complete",
+    "error_type": null,
+    "duration_s": 20.523869583033957,
+    "maximum_observed_combined_rss_bytes": 638697472,
+    "minimum_observed_available_ram_bytes": 5979324416,
+    "sample_errors": 0,
+    "terminal_observations": [],
+    "new_neural_calls": 0,
+    "resource_journal_sha256": "8c576b05d69d6e1e226e384c4b8f7a72937bff936b6536d7745d6fd59280714b",
+    "scope": "Parent plus active command descendants sampled while commands run; before/after checks between commands.900s/1.5GiB RSS,3GiB initial RAM/disk,1.5GiB running reserves. Command timeout180s. Samples are not true peaks. No retry or overwrite."
+  },
+  "command_review_profile_sha256": "d14ea9b65f3c2a01fb60ed6bb00e40aff92777368eac0ba0fa6c42d07da3185b",
+  "review_code_sha256": {
+    "backend/scripts/review_video_native_inserts_v96.py": "abb41943dc740e3992c0ceaeccbc75f45fc4034022e2842597cf0ec4da7b8948",
+    "backend/tests/test_video_native_command_review_v96.py": "204856b93c764e2aef64a25731fb53b9b96a82b3985215ce2327dfa06e8ff43e"
+  },
+  "local_reviewer_tests_passed": 6,
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "detector_accuracy_measured": false,
+  "scope": "One controlled fitting-role silent-video input pilot. RGB differences are not AI-pixel truth. Second command interface shares the codec library; not outside review. Sampled memory is not a true peak. Raw media, source pairings and individual fingerprints stay private. Wider construction and detector/serving qualification remain unfinished."
+}

@@ -111,11 +111,19 @@ def _video_soundtrack(result: Mapping[str, Any]) -> dict[str, Any] | None:
     if result.get("kind") != "video" or result.get("status") not in (None, "done"):
         return None
     from app.detectors.audio.calibration import NOTE, SHA256
+    from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency, note
 
-    for signal in result.get("signals") or []:
+    signals = sorted(result.get("signals") or [], key=lambda s: s.get("calibration_ref") != COMBINED_SHA256)
+    for signal in signals:
         if signal.get("status") != "ok" or signal.get("modality") != "audio" or signal.get("scope") != "global":
             continue
         screen = (signal.get("details") or {}).get("audio_screening") or {}
+        if signal.get("calibration_ref") == COMBINED_SHA256:
+            p, direction = combined_tendency(screen)
+            confidence = min(99.9, _pct(p if direction == "ai" else 1-p)) if direction != "inconclusive" else None
+            headline = {"ai": "Leaning towards AI-generated speech", "original": "Leaning towards original speech"}.get(direction, "Inconclusive: no supported combined speech tendency")
+            return {"direction": direction, "headline": headline, "confidence_pct": confidence,
+                    "limitation": f"{note(COMBINED_SHA256)} The checked four-second speech window is separate from visual and audio-picture timing results."}
         if signal.get("calibration_ref") != SHA256 or screen.get("calibration_sha256") != SHA256:
             continue
         p = _probability(screen.get("probability_ai")) if screen.get("scope_supported") is True else None
@@ -205,6 +213,24 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
         return {**answer, "direction": "inconclusive", "headline": "Inconclusive: contributing checks could not complete",
                 "meaning": "A check required by this estimate failed or was unavailable. Review the recorded check coverage."}
     from app.detectors.audio.calibration import NOTE, SHA256
+    from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency, note
+
+    if result.get("kind") == "audio" and decision.get("fuser_sha256") == COMBINED_SHA256:
+        primary = next((s for s in result.get("signals") or [] if s.get("status") == "ok"
+                        and s.get("calibration_ref") == COMBINED_SHA256), {})
+        screen = (primary.get("details") or {}).get("audio_screening") or {}
+        p, direction = combined_tendency(screen)
+        if decision.get("code") != {"ai": "ai_supported", "original": "no_ai_indicators"}.get(direction):
+            direction = "inconclusive"
+        return {**answer, "direction": direction,
+                "headline": {"ai": "Leaning towards AI-generated speech", "original": "Leaning towards original speech"}.get(direction, "Inconclusive: no supported combined speech tendency"),
+                "confidence_pct": min(99.9, _pct(p if direction == "ai" else 1-p)) if direction != "inconclusive" else None,
+                "confidence_label": "Reference-calibrated speech estimate" if direction != "inconclusive" else None,
+                "probability_ai_pct": _pct(p) if p is not None else None,
+                "meaning": "The combined reference estimate applies only to the complete checked speech window; it is not the measured chance this upload is authentic or AI-generated.",
+                "limitation": note(COMBINED_SHA256), "scope_label": "Four-second speech assessment",
+                "scope_note": "The source-bound speech window was checked. Background authenticity and other edits were not established.",
+                "interval_note": "No per-file confidence interval has been established for this audio calibration."}
 
     if result.get("kind") == "audio" and decision.get("fuser_sha256") == SHA256:
         p = _probability(decision.get("probability_ai_calibrated"))

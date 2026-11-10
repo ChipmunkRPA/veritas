@@ -183,7 +183,7 @@ def _audio(path: Path, has_audio: bool, *, source_sha256: str, capture: Callable
         return AudioTrack("short", None, len(pcm)), mapping
     if is_mostly_silence(pcm):
         return AudioTrack("silent", None, len(pcm)), mapping
-    return AudioTrack("analysed", pcm, len(pcm)), mapping
+    return AudioTrack("analysed", pcm, len(pcm), source_mapping=mapping), mapping
 
 
 def decode(ctx: StageContext) -> dict[str, Any]:
@@ -545,7 +545,7 @@ SYNTHESIS_DETECTORS = {"vid.synth.d3_xclip": "temporal", "vid.synth.frames.commf
                        "vid.codec.ffprobe": "metadata"}  # whole-video v2 detectors publishing one global signal → signal category
 
 
-AUDIO_INSPECTION_DETECTORS = {"aud.pella_v2": "model"}
+AUDIO_INSPECTION_DETECTORS = {"aud.pella_v2": "model", "aud.combined_speech_v1": "model"}
 REVIEW_DETECTORS = {SEQUENCE_REVIEW: "temporal", APPEARANCE_REVIEW: "temporal"}
 
 

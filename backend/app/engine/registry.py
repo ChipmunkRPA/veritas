@@ -111,6 +111,9 @@ class DetectorRegistry:
         policy = self.policy
         reasons: list[str] = []
         text_candidate = settings.text_detector_mode == "candidate"
+        combined_audio = settings.audio_detector_mode == "candidate" and settings.audio_combined_enabled
+        if detector_id == "aud.combined_speech_v1" and not combined_audio:
+            reasons.append("combined speech inspection is not selected")
         if text_candidate and detector_id in {TEXT_FINETUNE_DETECTOR, "txt.desklib"}:
             reasons.append("retained for text rollback; local candidate is selected")
         if settings.audio_detector_mode == "candidate" and detector_id in {"aud.gustking_xlsr", "aud.mo_thecreator_w2v2"}:
@@ -129,7 +132,7 @@ class DetectorRegistry:
             elif not policy.allows_class(model.licence.class_) and not allow_listed:
                 reasons.append(f"model {model_id} has licence class {model.licence.class_}, denied by the "
                                f"{policy.label} licence policy")
-        if not det.default_enabled and not allow_listed and not sequence_review and not regional_review and not (text_candidate and detector_id == "txt.four_class"):
+        if not det.default_enabled and not allow_listed and not sequence_review and not regional_review and not (text_candidate and detector_id == "txt.four_class") and not (combined_audio and detector_id == "aud.combined_speech_v1"):
             reasons.append("not default-enabled and not in allow_detectors")
         if det.superseded_by and self._supersedes(det.superseded_by):
             reasons.append(f"superseded by {det.superseded_by}, which is enabled and installed")

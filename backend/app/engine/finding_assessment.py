@@ -91,14 +91,19 @@ def finding_assessment(finding: dict, result: dict) -> dict:
     audio = (signal.get("details") or {}).get("audio_screening")
     if family == "A1_voice" and isinstance(audio, dict):
         from app.detectors.audio.calibration import SHA256
+        from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency
 
-        supported = (audio.get("scope_supported") is True and ref == SHA256
-                     and audio.get("calibration_sha256") == SHA256)
-        audio_direction = audio.get("decision")
-        direction = audio_direction if audio_direction in {"ai", "original"} else None
-        if direction == "original" and audio.get("original_stability_veto") is not False:
-            direction = None
-        p = audio.get("probability_ai")
+        if ref == COMBINED_SHA256:
+            p, direction = combined_tendency(audio)
+            supported = direction in {"ai", "original"}
+        else:
+            supported = (audio.get("scope_supported") is True and ref == SHA256
+                         and audio.get("calibration_sha256") == SHA256)
+            audio_direction = audio.get("decision")
+            direction = audio_direction if audio_direction in {"ai", "original"} else None
+            if direction == "original" and audio.get("original_stability_veto") is not False:
+                direction = None
+            p = audio.get("probability_ai")
         if not direction or not supported:
             return {**base, "direction": "inconclusive", "label": LABELS["inconclusive"],
                     "interpretation": "The saved speech calibration does not support a reliable tendency for this recording."}
@@ -106,7 +111,7 @@ def finding_assessment(finding: dict, result: dict) -> dict:
         base["interpretation"] = ("The calibrated speech check leans AI within the assessed recording."
                                   if direction == "ai" else "The calibrated speech check leans original within the assessed recording.")
         calibrated = True
-        if result.get("kind") == "audio" and (result.get("decision") or {}).get("fuser_sha256") == SHA256:
+        if result.get("kind") == "audio" and (result.get("decision") or {}).get("fuser_sha256") == ref:
             base["included_in_overall"] = True
     else:
         subject = f"{signal.get('detector_id')}@{signal.get('detector_version')}"

@@ -12,7 +12,17 @@ from app.detectors.audio import combined_adapter as adapter
 
 
 def context(pcm):
-    return SimpleNamespace(outputs=SimpleNamespace(audio=SimpleNamespace(status="analysed", pcm=pcm)))
+    mapping = {
+        "sample_rate": 16000,
+        "samples": len(pcm),
+        "timeline_time_base": "1/16000",
+        "limit_samples": 9600000,
+        "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),
+        "timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 320}],
+    }
+    return SimpleNamespace(
+        outputs=SimpleNamespace(audio=SimpleNamespace(status="analysed", pcm=pcm, source_mapping=mapping))
+    )
 
 
 @pytest.mark.parametrize("samples", [0, 40000, 63999, 64001, 128000])
@@ -82,7 +92,16 @@ def test_actual_checked_window_is_linked_to_result_exhibit_and_source_pcm(monkey
     }
     assert result.exhibit_ids == ["exhibit-speech"]
     assert calls[0][0][0]["points"] == [(2.0, 0.7)] and calls[0][1]["media_ref"] == "audio"
-    assert result.details["audio_screening"] == screen
+    assert result.details["audio_screening"]["probability_ai"] == screen["probability_ai"]
+    assert result.details["audio_screening"]["checked_source_ranges"] == [
+        {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000",
+        }
+    ]
     assert (
         result.details["audio_input"]["pcm_sha256"] == hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()
     )
@@ -100,3 +119,23 @@ def test_skipped_runtime_result_creates_no_probability_or_exhibit(monkeypatch):
     result = adapter.CombinedSpeechDetector().run(ctx)
     assert result.status == "not_applicable"
     assert result.aggregate is None and result.unit_scores == [] and result.exhibit_ids == []
+
+
+@pytest.mark.parametrize("change", ["missing", "gap", "hash", "truncated"])
+def test_missing_discontinuous_or_truncated_source_mapping_is_refused(change):
+    ctx = context(np.zeros(64000, np.float32))
+    mapping = ctx.outputs.audio.source_mapping
+    if change == "missing":
+        ctx.outputs.audio.source_mapping = None
+    elif change == "gap":
+        mapping["timeline"] = [
+            {"start_sample": 0, "end_sample": 32000, "source_pts": 0},
+            {"start_sample": 32000, "end_sample": 64000, "source_pts": 33600},
+        ]
+    elif change == "hash":
+        mapping["pcm_sha256"] = "a" * 64
+    else:
+        mapping["limit_samples"] = 64000
+    assert not adapter.CombinedSpeechDetector().applicable(ctx).ok
+    result = adapter.CombinedSpeechDetector().run(ctx)
+    assert result.status == "not_applicable" and result.aggregate is None

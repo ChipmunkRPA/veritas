@@ -123,10 +123,33 @@ class CombinedSpeechDetector(Detector):
                 False,
                 "The combined speech reference requires exactly four seconds of decoded finite 16 kHz mono audio.",
             )
+        mapping = getattr(audio, "source_mapping", None) or {}
+        timeline = mapping.get("timeline") or []
+        if (
+            mapping.get("sample_rate") != 16000
+            or mapping.get("samples") != 64000
+            or mapping.get("pcm_sha256") != hashlib.sha256(np.asarray(audio.pcm, "<f4").tobytes()).hexdigest()
+            or mapping.get("timeline_time_base") != "1/16000"
+            or type(mapping.get("limit_samples")) is not int
+            or mapping["limit_samples"] <= 64000
+            or len(timeline) != 1
+            or timeline[0].get("start_sample") != 0
+            or timeline[0].get("end_sample") != 64000
+            or type(timeline[0].get("source_pts")) is not int
+        ):
+            return Applicability(
+                False,
+                "A complete continuous source sample mapping is required; gaps or truncated input cannot supply a combined confidence estimate.",
+            )
         return Applicability(True)
 
     def run(self, ctx):
+        from app.detectors.audio.decode import source_ranges
         from app.detectors.image.adapters.common import revisions
+
+        applicable = self.applicable(ctx)
+        if not applicable.ok:
+            return DetectorResult.not_applicable(applicable.reason)
 
         pcm = ctx.outputs.audio.pcm
         calibration = ctx.lease.get(CALIBRATION_ID).obj
@@ -136,6 +159,10 @@ class CombinedSpeechDetector(Detector):
         )
         if screening["status"] != "ok":
             return DetectorResult.not_applicable(screening["reason"])
+        screening = {
+            **screening,
+            "checked_source_ranges": source_ranges(ctx.outputs.audio.source_mapping, 0, 64000),
+        }
         p = screening["probability_ai"]
         quality = {"start_s": 0.0, "end_s": 4.0, "start_sample": 0.0, "end_sample": 64000.0}
         exhibit = ctx.exhibits.series(

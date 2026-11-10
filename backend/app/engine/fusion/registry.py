@@ -475,7 +475,11 @@ def fusion_status(registry: Any, profile: Profile | str) -> dict[str, str]:
 
         try:
             calibration.load()
-            detector = registry.manifest.detector("aud.pella_v2")
+            if settings.audio_combined_enabled:
+                from app.detectors.audio.combined_adapter import CalibrationReference
+
+                CalibrationReference().load()
+            detector = registry.manifest.detector("aud.combined_speech_v1" if settings.audio_combined_enabled else "aud.pella_v2")
             ready = registry.decision(detector.id).enabled and all(
                 installed(registry.manifest.model(mid)) for mid in registry.required_models(detector))
             status["audio"] = "artefact" if ready else "fallback"

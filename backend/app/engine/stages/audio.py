@@ -128,7 +128,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS)
     pcm = decoded.pcm
     ctx.check("audio decoding")
-    ctx.state["audio"] = AudioTrack("analysed", pcm, len(pcm))
+    ctx.state["audio"] = AudioTrack("analysed", pcm, len(pcm), source_mapping=decoded.mapping)
     with ctx.sessions() as db:
         wav = register_artefact(db, ctx.store, decoded.wav, media_type="audio/wav", role="working_copy",
                                created_by="audio-input/1", analysis_id=ctx.analysis_id)
@@ -268,17 +268,21 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     """Legacy voice fuser → uncalibrated fallback Decision (§4.4), `not_assessable` for music- or silence-dominated audio."""
     from app.core.config import settings
     from app.detectors.audio import calibration
+    from app.detectors.audio.combined_adapter import BUNDLE_SHA256, CalibrationReference
     from app.engine import provenance_gate
 
     if provenance_gate.stop(ctx):
         return provenance_gate.audio_documentary_result(ctx)
 
-    if settings.audio_detector_mode == "candidate" or ctx.state.get("fuser_pin") == calibration.SHA256:
-        if ctx.state.get("force_fallback") or ctx.state.get("fuser_pin") not in (None, calibration.SHA256):
+    pin = ctx.state.get("fuser_pin")
+    if settings.audio_detector_mode == "candidate" or pin in (calibration.SHA256, BUNDLE_SHA256):
+        if ctx.state.get("force_fallback") or pin not in (None, calibration.SHA256, BUNDLE_SHA256):
             raise ValueError("This saved analysis requires the legacy audio configuration; restore it before rerunning.")
         from app.engine.stages.audio_screening import fuse as screening_fuse
 
-        return screening_fuse(ctx)
+        samples = int((ctx.outputs.get("decode") or {}).get("samples") or 0)
+        combined = pin == BUNDLE_SHA256 or (pin is None and settings.audio_combined_enabled and samples == 64000)
+        return screening_fuse(ctx, configuration=CalibrationReference() if combined else calibration)
     selection = common.select_fusion(ctx, "audio")
     content = ctx.outputs["condition"]["content"]
     facts = ctx.outputs["probe"]["facts"]

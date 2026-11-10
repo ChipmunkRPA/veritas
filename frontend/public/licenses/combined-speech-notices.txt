@@ -1,0 +1,30 @@
+Optional combined speech inspection: component attribution
+
+Microsoft WavLM-Base-Plus, Sanyuan Chen and collaborators.
+Model revision: 4c66d4806a428f2e922ccfa1a962776e232d487b
+Model card: https://huggingface.co/microsoft/wavlm-base-plus/blob/4c66d4806a428f2e922ccfa1a962776e232d487b/README.md
+Paper: https://arxiv.org/abs/2110.13900
+
+The pinned model card links its license to UniSpeech's Attribution-ShareAlike
+3.0 Unported terms. These weight terms are distinct from the separate unilm
+inference source's MIT license.
+Weight license source: https://github.com/microsoft/UniSpeech/blob/6112826ac13a4327f4c9a7afa2a505e35b763514/LICENSE
+License deed: https://creativecommons.org/licenses/by-sa/3.0/
+Exact local copies: combined-speech-weight-license.txt and combined-speech-unilm-license.txt
+
+The pretrained encoder is unchanged. Chipmunk Verify adds layer-summary pooling,
+a separately learned complementary head, and a fixed two-score combination with
+its own reference calibration. No endorsement by Microsoft or the authors is
+implied. Attribution/share-alike terms are retained for associated learned
+parameters; the app's MIT license does not relicense pretrained weights.
+Our learned inference parameters are designated CC-BY-SA-4.0, retaining the
+version4 source terms recorded for Dictation Speech rather than downgrading
+them to the encoder's older license version.
+Learned-parameter terms: https://creativecommons.org/licenses/by-sa/4.0/
+Original source permission/attribution record: docs/audio-multisource-v8-development.md
+Combination source record: docs/audio-confidence-source-qualification-v75.md
+
+The existing voice backbone and speech activity components retain the notices
+in audio-model-notices.txt. No pretrained weights, learned arrays or research
+recordings are distributed with these notice files. This optional integration
+is disabled while local model and complete analysis qualification remain pending.

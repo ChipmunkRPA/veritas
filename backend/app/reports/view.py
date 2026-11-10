@@ -1642,6 +1642,9 @@ def unsupported_beside_record(decision: dict[str, Any], profile: dict[str, Any] 
 
 
 def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str, Any] | None = None) -> tuple[list[str], list[str]]:
+    from app.detectors.audio.reference import note
+
+    speech_reference = kind == "audio" and note(decision.get("fuser_sha256")) is not None
     one, _ = media(kind)
     confounders = CONFOUNDERS.get(kind, CONFOUNDERS["image"])
     if basis == "insufficient":
@@ -1657,7 +1660,7 @@ def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str
                 [f"It is not a finding of manipulation, and not a finding that the {one} is unaltered. Obtain the original file or another source."])
     band = CODE_BAND[decision["code"]]
     if (record_of(decision) or {}).get("kind") == "trusted_capture":  # N-19h (E-20, 2): the record decides, and what stands beside it
-        miss = [AUDIO_MISS] if kind == "audio" and decision.get("fuser_sha256") != "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf" else []
+        miss = [AUDIO_MISS] if kind == "audio" and not speech_reference else []
         return [f"{CAPTURE_MEANS} {statistical_sentence(decision, profile)}"], [CAPTURE_NOT, *miss]  # N-19m (D3-01)
     if band == "very_likely_ai":
         return (["The combined evidence strongly points toward AI generation or manipulation."],
@@ -1674,7 +1677,7 @@ def _guidance(kind: str, decision: dict[str, Any], basis: str, profile: dict[str
         return (["The combined evidence does not support a conclusive assessment.", *([outside] if outside else []),
                  *([levels] if levels else [])],
                 [f"It is not a finding of manipulation, and not a finding that the {one} is unaltered. Obtain the original file or another source."])
-    miss = [AUDIO_MISS] if kind == "audio" and decision.get("fuser_sha256") != "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf" else []  # L-3: `docs/limitations.md`, "Synthetic voice"
+    miss = [AUDIO_MISS] if kind == "audio" and not speech_reference else []  # L-3: `docs/limitations.md`, "Synthetic voice"
     if band == "likely_authentic":
         return (["The combined evidence does not show significant indications of AI generation or manipulation."],
                 [f"It does not confirm the {one} is authentic or unedited.", *miss])

@@ -638,6 +638,44 @@ models:
     load:
       adapter_loader: app.detectors.audio.upgraded:load_voice
       pickle: true
+  - id: microsoft.wavlm_base_plus
+    source:
+      type: local
+      path: weights/audio-combined/wavlm
+      revision: 4c66d4806a428f2e922ccfa1a962776e232d487b
+      produced_by: Previously reviewed pinned WavLM cache; docs/audio-combined-serving-v97-protocol.md
+      files:
+      - {path: pytorch_model.bin, sha256: 3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51, bytes: 377617425}
+      - {path: config.json, sha256: fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4, bytes: 2232}
+      - {path: preprocessor_config.json, sha256: 99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2, bytes: 215}
+      - {path: README.md, sha256: d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e, bytes: 3904}
+      - {path: UniSpeech-LICENSE, sha256: 74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91, bytes: 21153}
+      - {path: unilm-LICENSE, sha256: 904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe, bytes: 1104}
+    licence:
+      spdx: CC-BY-SA-3.0
+      class: commercial
+      notice: Model-card-linked UniSpeech weight terms require attribution and share-alike; separate unilm code is MIT. Pinned notices stay with the local assets.
+    footprint: {params_m: 94.381936, fp32_mb: 400, activation_mb_per_item: 256}
+    devices: {mps: fallback_cpu, cuda: fallback_cpu}
+    load:
+      adapter_loader: app.detectors.audio.combined_adapter:load_encoder
+      pickle: true
+  - id: chipmunk.audio_global_v1
+    source:
+      type: local
+      path: weights/audio-combined
+      produced_by: Fixed private inference export; docs/audio-combined-serving-v97-protocol.md
+      files:
+      - {path: serving-bundle.json, sha256: e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641, bytes: 384897}
+    depends_on: [pella.voice_v2, microsoft.wavlm_base_plus]
+    licence:
+      spdx: CC-BY-SA-4.0
+      class: commercial
+      notice: Original learned inference parameters retain attribution/share-alike under version4.0, including the original Dictation Speech CC-BY-SA-4.0 source terms and upstream model notices. No training records are distributed.
+    footprint: {params_m: 0.013831, fp32_mb: 1, activation_mb_per_item: 1}
+    devices: {mps: fallback_cpu, cuda: fallback_cpu}
+    load:
+      adapter_loader: app.detectors.audio.combined_adapter:load_calibration
   - id: panns.cnn10
     source:
       type: local
@@ -2190,6 +2228,35 @@ detectors:
       decision: pending
       date: '2026-10-31'
       evidence: Local experimental rollout with separate calibration; see docs/local-audio-rollout.md.
+
+  - id: aud.combined_speech_v1
+    adapter: app.detectors.audio.combined_adapter:CombinedSpeechDetector
+    version: 1.0.0
+    name: Combined speech inspection
+    modality: audio
+    family: voice
+    hypotheses: [H2_localised_manipulation]
+    models: [pella.voice_v2, silero.speech_activity, microsoft.wavlm_base_plus, chipmunk.audio_global_v1]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations:
+    - Explicit local option; actual extraction and complete app qualification are pending.
+    - Exactly four seconds of finite original 16 kHz mono audio with sufficient detected speech; no padding, truncation or averaged whole-file confidence.
+    - Correlated components and balanced-reference calibration do not establish population accuracy, speaker separation or background authenticity.
+    - Held controlled English results include noise and expressive-voice errors; unknown pretraining overlap remains possible.
+    source_url: https://github.com/ChipmunkRPA/veritas
+    threat: [voice]
+    lane: voice
+    training_data: Frozen complementary head, separate combination fitting/calibration and selected global map; see the v84/v97 records.
+    coverage_date: not established
+    input_constraints: [Exact finite float32 64000-sample mono16kHz source; CPU float32 eager inference]
+    contamination_sets: []
+    fp_modes: [Strong background noise, overlapping speech, expressive voices, unfamiliar generators and recording conditions]
+    citation: docs/audio-combined-confidence-v84-final.md and docs/audio-combined-serving-v97-result.md
+    admission:
+      decision: pending
+      evidence: Optional serving integration; not enabled until local extraction and full analysis qualification.
 
   - id: aud.sound_events
     adapter: app.detectors.video.adapters.audio:SoundEventsDetector

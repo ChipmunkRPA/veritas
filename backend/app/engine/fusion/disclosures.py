@@ -114,7 +114,10 @@ def for_result(result: Result) -> list[dict[str, str]]:
     The measured figures are those of the fusion that produced the result (D-68): a fallback result gets the one fallback
     disclosure, on the screen (the analysis API) and in the reports (since report template set r21)."""
     from app.detectors.audio.calibration import NOTE, SHA256
+    from app.detectors.audio.reference import COMBINED_SHA256, note
 
+    if (result.get("decision") or {}).get("fuser_sha256") == COMBINED_SHA256:
+        return [{"id": "audio.combined_screening", "label": "combined speech reference", "text": note(COMBINED_SHA256)}]
     if (result.get("decision") or {}).get("fuser_sha256") == SHA256:
         return [{"id": "audio.local_screening", "label": "local speech calibration", "text": NOTE}]
     if FALLBACK.applies(result):

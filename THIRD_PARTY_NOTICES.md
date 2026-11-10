@@ -110,6 +110,25 @@ The registry now also pins Silero speech activity (MIT), Pella v2 plus its W2v-B
 | `tidal.splice_v30_1` | [the-harsh-vardhan/TIDAL](https://huggingface.co/the-harsh-vardhan/TIDAL/tree/6bc4c3fd066f13d614949db64eb7f1abdc912ada) | Apache-2.0 | Publisher declaration; training-source provenance is separate. Local checkpoint is not bundled. |
 | `hf.wasitaigenerated.text_small` | [wasitaigeneratedcom/ai-text-detector-small](https://huggingface.co/wasitaigeneratedcom/ai-text-detector-small/tree/f1795c86806e6838d4afa33d0b1427f8430c9615) | Apache-2.0 | Publisher permits commercial use; upstream MIT attributions are in its pinned NOTICE. Weights are not bundled. |
 
+## Optional combined speech component prepared 2026-11-09
+
+Microsoft WavLM-Base-Plus, by Sanyuan Chen and collaborators, is pinned at
+`4c66d4806a428f2e922ccfa1a962776e232d487b`. Its
+[model card](https://huggingface.co/microsoft/wavlm-base-plus/blob/4c66d4806a428f2e922ccfa1a962776e232d487b/README.md)
+links to [UniSpeech CC-BY-SA-3.0](https://github.com/microsoft/UniSpeech/blob/6112826ac13a4327f4c9a7afa2a505e35b763514/LICENSE)
+for its license. The separate unilm code license is MIT; it does not replace
+the model-card-linked weight terms. The encoder weights are unchanged; our
+layer pooling, complementary head and global calibration are separate additions.
+The private learned parameters are designated CC-BY-SA-4.0, retaining the
+version4 source terms in the [original source record](docs/audio-multisource-v8-development.md)
+and the [combination source qualification](docs/audio-confidence-source-qualification-v75.md).
+
+The [public component notice](frontend/public/licenses/combined-speech-notices.txt)
+and adjacent exact license copies retain attribution and the source/weight
+distinction. This optional integration remains disabled pending qualification.
+Neither weights, learned arrays nor research recordings are bundled. The
+application's MIT license does not relicense those assets.
+
 ## Independent-evaluation metadata and offline candidates
 
 The source catalogues under [`docs/evaluation-panels`](docs/evaluation-panels/README.md)

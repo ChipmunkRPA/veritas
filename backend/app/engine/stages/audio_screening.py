@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import math
 
-from app.detectors.audio import calibration
+from app.detectors.audio import calibration as current_calibration
 from app.engine.fusion import decisive
 from app.engine.stages import common, video
 from app.schemas.evidence import Decision, SignalV2
@@ -11,11 +11,16 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import FuserRow
 
 
-def fuse(ctx):
+def fuse(ctx, *, configuration=None):
+    calibration = current_calibration if configuration is None else configuration
     calibration.load()  # fail closed if the pinned calibration is missing or changed
     signals = video.synthesis_signals(ctx, 1)
+    primary_id = getattr(calibration, 'DETECTOR_ID', 'aud.pella_v2')
+    # Retain comparator runs in the detection record. Publish only the selected
+    # speech calculation so one grouped finding cannot borrow another map.
+    signals = [s for s in signals if s.get('family') != 'voice' or s['detector_id'] == primary_id]
     video.attach_temporal(ctx, signals)
-    primary = next((s for s in signals if s['detector_id'] == 'aud.pella_v2'), None)
+    primary = next((s for s in signals if s['detector_id'] == primary_id), None)
     screen = (primary or {}).get('details', {}).get('audio_screening', {})
     if primary and not screen:
         raise ValueError('The saved speech response has no candidate calibration; run a fresh analysis in candidate mode.')
@@ -24,6 +29,17 @@ def fuse(ctx):
     p = screen.get('probability_ai')
     direction = screen.get('decision', 'inconclusive')
     reason = screen.get('reason', 'No usable speech response was available; no authenticity conclusion can be made.')
+    from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency
+
+    if calibration.SHA256 == COMBINED_SHA256:
+        p, direction = combined_tendency(screen)
+        reason = {'ai': 'Leaning towards AI-generated speech.', 'original': 'Leaning towards original speech.'}.get(
+            direction, 'The combined speech evidence does not support a usable directional conclusion in its source window.')
+        if primary:
+            primary['details']['audio_screening'] = {**screen, 'probability_ai': p, 'decision': direction,
+                                                       'reason': reason, 'limitation': calibration.NOTE}
+            primary.update(calibrated_probability=p, effective_weight=0.0, contribution_logit=None,
+                           contribution_pp=None, log_lr=None)
     code = {'ai': 'ai_supported', 'original': 'no_ai_indicators'}.get(direction, 'inconclusive' if primary else 'not_assessable')
     verbal = {'ai': 'Leaning towards AI-generated speech', 'original': 'Leaning towards original speech'}.get(direction, 'Inconclusive audio assessment')
     band = {'ai': 'likely_ai', 'original': 'likely_authentic'}.get(direction, 'uncertain')
@@ -40,7 +56,7 @@ def fuse(ctx):
                         fuser_sha256=calibration.SHA256, band=band, confidence='medium' if direction != 'inconclusive' else 'low',
                         driving_hypothesis='H2_localised_manipulation', reason=reason,
                         contributions=contributions).model_dump(mode='json')
-    caveats = [calibration.NOTE, 'This is a local experimental release. The stricter research admission criteria were not all met.']
+    caveats = [calibration.NOTE, getattr(calibration, 'EXTRA_CAVEAT', 'This is a local experimental release. The stricter research admission criteria were not all met.')]
     entries = common.entries(ctx, ('provenance',))
     overrides = [e for e in entries if e['status'] == 'ok' and e.get('provenance_override')]
     override = decisive.resolve(e['provenance_override'] for e in overrides)
@@ -68,14 +84,16 @@ def fuse(ctx):
         if override == 'self_declared_ai':
             caveats.append(decisive.marker_caveat(marker, 'audio'))
     # No new confidence interval or general-population accuracy claim is fabricated.
-    profile = {'slice_id': 'audio/local-speech-v3', 'duration_s': ctx.outputs['probe']['facts'].get('duration_s'),
+    profile = {'slice_id': getattr(calibration, 'SLICE_ID', 'audio/local-speech-v3'), 'duration_s': ctx.outputs['probe']['facts'].get('duration_s'),
                'within_validated_envelope': False, 'validation_support': 'unsupported',
                'limiting_conditions': [calibration.NOTE]}
     with ctx.sessions() as db:
-        artifact = register_artefact(db, ctx.store, calibration.PATH.read_bytes(), media_type='application/json',
+        payload = calibration.report_payload() if hasattr(calibration, 'report_payload') else calibration.PATH.read_bytes()
+        artifact = register_artefact(db, ctx.store, payload, media_type='application/json',
                                     role='stage_output', created_by='audio-confidence', analysis_id=ctx.analysis_id)
         if db.get(FuserRow, calibration.SHA256) is None:
-            db.add(FuserRow(sha256=calibration.SHA256, modality='audio', version=calibration.VERSION, bench_version='audio-v3'))
+            db.add(FuserRow(sha256=calibration.SHA256, modality='audio', version=calibration.VERSION,
+                            bench_version=getattr(calibration, 'BENCH_VERSION', 'audio-v3')))
         db.commit()
         artifact_ref = {'id': artifact.id, 'sha256': artifact.sha256, 'size_bytes': artifact.bytes,
                         'media_type': artifact.media_type, 'role': artifact.role, 'created_by': artifact.created_by}
@@ -89,8 +107,8 @@ def fuse(ctx):
                     'probability': p, 'note': reason + ' ' + calibration.NOTE}]
     return {'decision': decision, 'signals': signals, 'assessments': assessments,
             'condition_profile': profile, 'caveats': caveats,
-            'calibration': [{'subject': 'audio-local-screening', 'method': 'platt', 'artefact_sha256': calibration.SHA256,
-                             'bench_version': 'audio-v3'}],
+            'calibration': [{'subject': 'audio-local-screening', 'method': getattr(calibration, 'METHOD', 'platt'), 'artefact_sha256': calibration.SHA256,
+                             'bench_version': getattr(calibration, 'BENCH_VERSION', 'audio-v3')}],
             'fusion': {'mode': 'artefact', 'version': calibration.VERSION, 'sha256': calibration.SHA256},
             'v1': {'verdict': verdict, 'signals': [], 'audio': ctx.outputs['probe']['facts'], 'artifacts': [], 'timings': {}},
             'artefacts': [artifact_ref]}

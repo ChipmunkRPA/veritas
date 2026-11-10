@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.av-waveform-freeze/105",
+  "code_sha256": {
+    "backend/scripts/prepare_av_waveforms_v105.py": "d34e07af6e0b8b04068e89df67e6a0ce3178780dcfc7b8a941cd73d984f42312",
+    "backend/tests/test_av_waveforms_v105.py": "fb6652a714d4881dd0ecc9aa3341795b54e0c8fdf207b2ee71e1ba13b2374108",
+    "docs/av-waveforms-v105-method.md": "75c1c3db7f2168ba2037ac9803b8677b0be776575a2ec67dcb1977c7169e6bfa",
+    "backend/scripts/review_video_native_inserts_v96.py": "abb41943dc740e3992c0ceaeccbc75f45fc4034022e2842597cf0ec4da7b8948",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "input_sha256": {
+    "backend/data/independent-evaluation/av-sentence-support-v104/preparation/plan.json": "8abcd74217c8afa4d81167c5fd43aee1a95221f4705db337e43eacf7c5d140fa",
+    "backend/data/independent-evaluation/av-sentence-support-v104/preparation/result.json": "2aba56a3c344d19e73bf038144a616d092f7b0dd60ca137b6c251d96d0f921e2",
+    "backend/data/independent-evaluation/video-native-sources-v92/qualified-plan.json": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+    "backend/data/independent-evaluation/video-common-acquisition-v91/asset-plan.json": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99"
+  },
+  "ffmpeg_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+  "psutil_version": "7.2.2",
+  "phase_tolerance_output_samples": 1,
+  "sources": 48,
+  "new_neural_calls": 0,
+  "scope": "Native PCM sample counts, exact repeated source hash, unchanged mono16k content binding, authored resampling phase and source-time coordinates; not achieved phonetic synchronization, generator qualification or detector accuracy."
+}

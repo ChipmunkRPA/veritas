@@ -47,8 +47,10 @@ reverified both remote choices, the completed journal and its profile, then
 resumed only never-attempted chunks 37–47. It calls the same frozen v84 worker
 with unchanged neural budgets, maps and selection rules. Five regressions reject
 partial, changed or noncontiguous attempted results and preserve the completed
-prefix. Full final performance remains pending. The results below are selection
-evidence, not completed final confirmation or a serving change.
+prefix. All 1,044 final cases have now completed; both confirmation commands
+terminated successfully. The [final comparison](audio-combined-confidence-v84-final.md)
+reports errors, coverage and probability quality separately. The selection
+section below retains its original role and is not final-test evidence.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all
@@ -182,8 +184,36 @@ abstention; it is not the first table's current method. These internal research
 curves and selection margin are not public thresholds or confidence guarantees.
 
 No map, head, routing cutoff, reference rule or candidate pool was retuned on
-selection responses. Both exact fixed choices must be published before final
+selection responses. Both exact fixed choices were published before final
 forwards. All fourteen methods share that one final cohort; reporting two
 analyses does not create two independent confirmations. Serving, evidence/report
 consistency, prepayment and rollback qualification remain separate work. No
 default has changed.
+
+## Completed final confirmation
+
+The [primary result](evaluation-panels/audio-combined-confidence-v84-result.json)
+and [parallel reference result](evaluation-panels/audio-common-reference-v88-result.json)
+use 1,044 controlled variants of 116 foreground files across 28 known connected
+groups. Both selected arms remain global; no final-result reselection occurred.
+All twelve frozen neural extraction stages passed in 1,529.92 seconds total.
+Maximum sampled child-tree RSS was 4,781,047,808 bytes; minimum observed available
+RAM was 2,453,618,688 bytes. See the
+[resource receipt](evaluation-panels/audio-combined-confidence-v84-confirmation-resources.json)
+and [continuation result](evaluation-panels/audio-final-continuation-v90-result.json).
+The preserved earlier before-launch wait stop is separate from successful
+extraction time and remains part of the history.
+
+The [final arithmetic replay](evaluation-panels/audio-head-replay-v85-confirmation.json)
+checked all 1,013 assessed feature packets and preserved 31 unassessed cases.
+Raw-head reconstruction error was at most 8.55e-8; the four other scalar maps
+reproduced exactly. All 4,176 study variants now have this separate arithmetic
+review across fitting, calibration, selection and confirmation. It remains a
+recorded-feature integrity check, not outside human evaluation or accuracy.
+
+The selected global combination reduces balanced-reference squared probability
+error but produces more wrong directions when it assigns a tendency to every
+assessed input. Expressive AI voices and noisy mixtures remain material
+weaknesses. The final note shows those tradeoffs, including matched score-only
+comparisons. It does not claim a uniformly better detector or calibrated
+whole-recording/customer probability. Serving qualification is still pending.

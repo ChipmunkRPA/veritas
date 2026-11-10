@@ -29,22 +29,34 @@ The next audio confidence study now has a
 genuine recordings, 240 AI recordings from three generator families and 48
 backgrounds. All 64 matched stock sources generated and decoded successfully.
 The four source roles remain separate across 157 known connected groups.
-Its source preparation, combined confidence fitting and selection are complete;
-final-confirmation performance remains pending.
+Its source preparation, combined confidence fitting, selection and final
+confirmation are complete; serving qualification remains pending.
 Its [4,176 fixed clean/background variants](audio-confidence-mixtures-v82-result.md)
 are now fully decoded and verified. Two
 [small score-fusion candidates](audio-score-fusion-v83-method.md) have authored-
-data method checks. The [prospective comparison is now running](audio-combined-confidence-v84-progress.md):
+data method checks. The [prospective comparison has completed](audio-combined-confidence-v84-progress.md):
 all eighteen consumed native reproduction cases passed, all 2,088 fitting and
 calibration cases finished, and both new fusion methods have their own fitted
 calibration maps. A third, shared-reference calibration variant also finished
 fitting without changing the original score coefficients. Selection extraction
 on separate recordings has completed. The same held inputs compare fourteen
-screening variants; they are not fourteen independent backbones. The two-check
-method recovers 71 additional correct directions with one extra false AI and
-thirteen extra false-original directions. Both fixed score-combination selection
-procedures choose the global map. Final-confirmation performance remains
-unmeasured; the linked progress report records selection tradeoffs and limits.
+screening variants; they are not fourteen independent backbones. Both fixed
+score-combination selection procedures chose the global map before final calls.
+On the [1,044 final variants](audio-combined-confidence-v84-final.md), the pair
+adds 76 correct directions, one false AI and 35 false-original directions.
+Global adds 225 correct directions, 33 false AI and 90 false-original directions
+as it converts current assessed inconclusive cases to tendencies. Its average
+probability loss improves while AUROC decreases. Keep those tradeoffs visible;
+neither coverage alone nor a small added error decides adoption. These are
+correlated four-second controlled speech variants, not whole-file population
+probabilities. No serving default has changed.
+
+The [shared video sources](video-common-source-acquisition-v91.md) have all 336
+assets byte-verified, but native clocks, decoded aliases and final roles remain
+unqualified. New lip manipulations, ordinary controls and the common comparison
+are still pending. The [recent research refresh](recent-detection-research-2026-11-09.md)
+adds October/November methods to the next-test plan, without retuning frozen
+experiments or treating published scores as app accuracy.
 
 ## How the revised comparisons choose
 

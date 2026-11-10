@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.audio-final-continuation-result/90",
+  "status": "complete",
+  "cases": 1044,
+  "preserved_prefix_cases": 87,
+  "new_cases": 957,
+  "controller_sha256": "1612d08bf933594afab85923d92065a4ba0b00e5d7ffd2fcdb8b6d823567e485",
+  "start_receipt_sha256": "ec7e4f19d8f9ab826fc217f35464b8ab008a58867c9716c7654708bd79bf46f2",
+  "complete_receipt_sha256": "3dc9620b6ffc6fb8f600ec90721ebb52c59c32a78c037670bbf6d6cddbec4a2f",
+  "parent_stop_sha256": "fd5f5f7256db552b8551e57da60ece7cefef933d18b0d00a583d192758eb3f23",
+  "primary_selection_sha256": "25aa0c565e003b9b578046aa155be24e37d3667f75d7d8ebe09a94b52aa209e5",
+  "parallel_selection_sha256": "de5bf149ac230c2077f20d92a2e82fbfe20d91deb092a3976ab4f15a45c21071",
+  "reverified_remote_selection_blobs": {
+    "audio-combined-confidence-v84-selection.json": "77f207c382beac7041d417d36ffcecdbf5764220",
+    "audio-common-reference-v88-selection.json": "bea8c04e817c977cb9428f086ef25e4058078889"
+  },
+  "scientific_worker_and_neural_limits_unchanged": true,
+  "fixed_selection": {
+    "primary": "global",
+    "parallel": "global"
+  },
+  "numerical_confirmation_profiles": {
+    "primary": {
+      "profile_sha256": "e2e275d312bf907fde1b9d5d3d4926920e64f4dd029c20a943c59c1740580221",
+      "duration_s": 14.678489375044592,
+      "sampled_tree_rss_lower_bound_bytes": 575094784,
+      "child_exit_code": 0,
+      "guards": 0,
+      "sample_errors": 0
+    },
+    "parallel": {
+      "profile_sha256": "43822c9d7b2f39a686b7cd3772f51bdce7c034da06a5579f29fef18b48ea88d1",
+      "duration_s": 13.11120258399751,
+      "sampled_tree_rss_lower_bound_bytes": 578338816,
+      "child_exit_code": 0,
+      "guards": 0,
+      "sample_errors": 0
+    }
+  },
+  "defaults_changed": false,
+  "scope": "Owner-authorized continuation of never-attempted final chunks after RAM was freed. Original before-launch stop and completed prefix preserved; no retry, overwrite, map change or reselection. Both reports use one shared final cohort, not two independent confirmations."
+}

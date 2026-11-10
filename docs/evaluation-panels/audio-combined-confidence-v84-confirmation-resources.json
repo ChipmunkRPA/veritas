@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.audio-confirmation-resources/84",
+  "role": "confirmation",
+  "cases": 1044,
+  "stages": 12,
+  "passed_stages": 12,
+  "duration_s_sum": 1529.924084871891,
+  "maximum_sampled_tree_rss_bytes": 4781047808,
+  "minimum_available_ram_bytes": 2453618688,
+  "minimum_free_disk_bytes": 8687955968,
+  "guards": 0,
+  "sample_errors": 0,
+  "resource_limit_observations": 0,
+  "profile_sha256": [
+    "797585a14f6cf5a6973ddf43f8f0452dc9ca3e61b83ccc69e615ecffbc795486",
+    "289b2020252af18dfd996b27742ccd597980b7528b26f9802760faddfb6a1fb9",
+    "6d3a2fe97443bacbc507215691c0592caaf222e2589440465e05b93b16e9a12c",
+    "03da7a023e04755b79f494a454ca75ac7e4fa3c07125cfaa2badf4786f05ac3d",
+    "04990acb6c132b8ba146c40a3276de67a3f5aae24a88816a0ac229b9cdeaaf55",
+    "17728c016871537592414b5417ed70978ece72fdc6f18087b9ce4f2e54b69318",
+    "d7a073617504bc7c302baeb9071fa7a7df81bf0c1a70f9cddc8b26470811faf4",
+    "ae146f9511ffccf555178556df24e82bf3aac812133b1d3fac3ec4d9743ba4fb",
+    "36c74e0f43c26fbde5c35fe4607abe37c8db74abd004ba795b5e4a07852b1e00",
+    "aec0d027616c978a12b0b402360428bc10ad8e109105f9091d46bd1aa4edadd3",
+    "70adf2bddfab54ab4b25d01a9f893d9d29495e16c77fdc9eca6532fe9ec2f57b",
+    "86ca79db5cbd5d1169d8c13ac9fac1c730b602fde82fafd8cba3400bdafed379"
+  ],
+  "scope": "Successful frozen neural extraction stages, excluding the preserved earlier before-launch queue stop and admission waits. Resource execution measurements are not detection accuracy; sampled RSS is a lower bound, not a guaranteed peak."
+}

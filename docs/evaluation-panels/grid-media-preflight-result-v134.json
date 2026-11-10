@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.grid-media-preflight-execution/134",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.grid-media-preflight-result/134",
+    "status": "complete",
+    "selected_archives": 1,
+    "independently_verified_archive_bytes": 381061085,
+    "planned_clips": 2,
+    "recorded_clips": 2,
+    "availability": {
+      "native_video_and_audio_available": 2
+    },
+    "native_video_frames": 150,
+    "retained_native_pictures": 6,
+    "observed_mono16k_samples": 95296,
+    "private_records_sha256": "cda00e7b27f09299929b10612d1af2be04035520c9444e61f863791bf56b762a",
+    "freeze_sha256": "5b4f36bdf00c007200029cfb427de8735acb3d0af77dfea5b2ef66cafbc7bd6f",
+    "new_neural_calls": 0,
+    "defaults_changed": false,
+    "scope": "First-source checksum/decode/native clock availability only; not the complete sixteen-source transfer cohort, person/ancestry independence, generated-edit quality or detection accuracy. Missing audio/clock support retained, no replacement or inference."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 3.137187125044875,
+    "sampled_tree_rss_lower_bound_bytes": 99827712,
+    "minimum_available_ram_bytes": 5671944192,
+    "resource_journal_sha256": "e3079e226a23dbf70a9a4ff81f1f7474bceb248ecce86e2db4f4be1a9288698b",
+    "runtime_sha256": "0ca2c989bfb81cba5a4ee0bea06238ae39da77378dcb73cd2a390c67fcbfcaaf",
+    "worker_receipt_sha256": "97a8779c779f26f51c099e37b2f17ac365ceaaea124756f7345820c4b401d5df",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "97a8779c779f26f51c099e37b2f17ac365ceaaea124756f7345820c4b401d5df",
+  "profile_sha256": "b26781a15e3ebf0b30167d103575d432e36a33c5c1ba65bcdcfda4311bdbeff8"
+}

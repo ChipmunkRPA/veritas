@@ -1,0 +1,17 @@
+{
+  "schema": "chipmunk.portrait-native-readiness/133",
+  "status": "pending_headroom_no_stage_attempt",
+  "command": "authored",
+  "reasons": [
+    "initial_ram_headroom"
+  ],
+  "available_ram_bytes_at_admission": 5708480512,
+  "required_initial_available_ram_bytes": 6442450944,
+  "neural_stage_directory_exists": false,
+  "render_cache_exists": false,
+  "new_neural_calls": 0,
+  "freeze_sha256": "fbaa2989f9bd58a6aa8f9aa8132d79351826fc3437aa96497c6935ef65db1154",
+  "isolated_runtime_complete": true,
+  "defaults_changed": false,
+  "scope": "Actual admission response on 10 November 2026; no attempted neural stage, generated output, detector score or failed-model classification. Frozen 6-GiB initial RAM minimum unchanged."
+}

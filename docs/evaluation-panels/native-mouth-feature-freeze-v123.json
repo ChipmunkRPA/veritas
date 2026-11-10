@@ -1,0 +1,70 @@
+{
+  "schema": "chipmunk.native-mouth-feature-freeze/123",
+  "code_sha256": {
+    "backend/scripts/native_mouth_features_v123.py": "400354cd9cad063ba887c5b3774598d8975cabe39f7368f57eae20278fcb98e1",
+    "backend/tests/test_native_mouth_features_v123.py": "f32e5fd9f71e1ac237dec15a3c1cdab68ede7cc901aba5af3f1f85f317da5606",
+    "docs/native-mouth-features-v123-method.md": "e22ace7b39a9348f04c667b2e82a1eeef4230db32460a7b4cf3f48e329db630e",
+    "backend/scripts/mouth_probe_v6.py": "538673c7c0f3fd0fdf07d73a96007f0a614de4e09071dc9ad5ab761fbc95a87e",
+    "backend/scripts/mouth_articulation_core_v122.py": "fca2cb169967f36f4da3616764c1fdca9cafafdd53ab5f3dc2dadfa6608b4ad9",
+    "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea"
+  },
+  "construction_complete_sha256": "25d6c30f9e88f3dc0845f5d7fe46e15f3cfee91e8027641ef566e40c53ebb9a4",
+  "source_mask_audit_complete_sha256": "4a80351af444030778edbee0f077738d1354f177428aa492dcafc8719c5afee0",
+  "model_records": {
+    "dinov2.small": {
+      "license": {
+        "spdx": "Apache-2.0",
+        "class_": "commercial",
+        "notice": "HF model-card licence apache-2.0 (facebook/dinov2-small, not gated; checked 2026-09-13); github.com/facebookresearch/dinov2 LICENSE (GitHub licence API: Apache-2.0)"
+      },
+      "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+      "files": [
+        {
+          "name": "config.json",
+          "bytes": 547,
+          "sha256": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d"
+        },
+        {
+          "name": "preprocessor_config.json",
+          "bytes": 436,
+          "sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828"
+        },
+        {
+          "name": "model.safetensors",
+          "bytes": 88249960,
+          "sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+        }
+      ]
+    },
+    "yunet.2023mar": {
+      "license": {
+        "spdx": "MIT",
+        "class_": "commercial",
+        "notice": "opencv_zoo models/face_detection_yunet/LICENSE (MIT, Shiqi Yu)"
+      },
+      "revision": null,
+      "files": [
+        {
+          "name": "face_detection_yunet_2023mar.onnx",
+          "bytes": 232589,
+          "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+        }
+      ]
+    }
+  },
+  "packages": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "safetensors": "0.8.0",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93"
+  },
+  "image_device": "mps",
+  "image_dtype": "float32",
+  "attention": "eager",
+  "image_batch_size": 1,
+  "qualification_image_inputs": 5,
+  "qualification_face_inputs": 5,
+  "feature_kind": "768 image variables; 3840 cached speech summary variables; no probability",
+  "scope": "All native pictures, content-only per-source memoization and exact audio-source routes. No true edit interval/mask/label selects inputs or enters vectors. No classifier fit, detector accuracy or serving contribution."
+}

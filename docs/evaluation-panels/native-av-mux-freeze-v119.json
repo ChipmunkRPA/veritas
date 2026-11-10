@@ -1,0 +1,76 @@
+{
+  "schema": "chipmunk.native-av-mux-freeze/119",
+  "code_sha256": {
+    "backend/scripts/native_av_mux_v119.py": "624429787993fdacc529c4868bcec841cd32a5e8f5fc1a7d66d1068e63418efa",
+    "backend/tests/test_native_av_mux_v119.py": "86a1b654a9bb4c40d0122960528740974c361bb04d2ed423339f92b8608fbdae",
+    "docs/native-av-mux-v119-method.md": "ee0cfc3360c92d1b6e3c2a3b13626867db3bf1b20d970576210e7f7e4b9384b3",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074"
+  },
+  "renderer_freeze_sha256": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+  "renderer_result_sha256": "b3b06dc3518e1eb1810b324641d6a3c2bae6fbbcce13036adcec8bdd69bb2efc",
+  "native_input_freeze_sha256": "7124d4eb4cd9ff957860bff24b29cbb7f607b96b4ce26e4d636ae658c4d60624",
+  "private_native_plan_sha256": "602cb10ebb62aec4197ae55273282c225bf2f6c2a7f55d0cf3ffafb1169ce98c",
+  "waveform_journal_sha256": "bcc7dfa91edbda471d1b17636383bb3e6b1293d9b48600d4b04ff1118229b4d3",
+  "packages": {
+    "av": "19.0.2",
+    "numpy": "2.2.6",
+    "psutil": "7.2.2"
+  },
+  "isolated_av_runtime": {
+    "package": {
+      "name": "av",
+      "version": "19.0.2",
+      "license": "BSD-3-Clause",
+      "filename": "av-19.0.2-cp312-abi3-macosx_14_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/7c/42/067d0bcd2c07103f18cc23b510a8289dd80330e984c49d51ce0bafcee017/av-19.0.2-cp312-abi3-macosx_14_0_arm64.whl",
+      "bytes": 18556422,
+      "sha256": "b0dff6dfcc6ff9944fbbff15bc4ee2d90a2c1695d493bdea96e86f48823e9feb",
+      "purpose": "Isolated native AV benchmark assembly; app environment unchanged"
+    },
+    "installed_files": 247,
+    "installed_manifest_sha256": "80e701a23155229bd2c8da1698d6dfc17c29a3c464ff1b09f3adf63366622ca3",
+    "codec_libraries": {
+      "libavutil": [
+        61,
+        1,
+        102
+      ],
+      "libavcodec": [
+        63,
+        1,
+        102
+      ],
+      "libavformat": [
+        63,
+        1,
+        102
+      ],
+      "libavdevice": [
+        63,
+        1,
+        102
+      ],
+      "libavfilter": [
+        12,
+        1,
+        102
+      ],
+      "libswscale": [
+        10,
+        1,
+        102
+      ],
+      "libswresample": [
+        7,
+        1,
+        102
+      ]
+    },
+    "preserved_prefreeze_failure_sha256": "1cad524c062b299f3c260cde06de28aea4254cb5bfc7a6943e5d82e5fa298c96"
+  },
+  "authored_cases": 2,
+  "fitting_source_rewrites": 1,
+  "new_neural_calls": 0,
+  "scope": "Full decoded native picture clocks/RGB and mono16k sample/origin preservation only; final display duration is constructed from the upper median picture step. No new generation, detector score or achieved synchronization."
+}

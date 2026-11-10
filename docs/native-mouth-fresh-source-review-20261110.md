@@ -19,3 +19,9 @@ Freeze source/role/ancestry choices before inference, retain unavailability,
 keep pretrained heads/calibrations fixed for transfer, and distinguish a new
 placement/generator test from untouched source-content testing. Commercial
 model-weight checks remain separate from dataset research/redistribution terms.
+
+Subsequent full-metadata review found VidTIMIT's non-commercial/no-derivatives
+record terms. Its provisional disposition above is superseded by the
+[v130 rights check](av-transfer-rights-check-v130.md); its media was not acquired.
+GRID's official record, checked separately, declares CC-BY-4.0 and is the selected
+replacement source.

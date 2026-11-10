@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.grid-transfer-acquisition-freeze/130",
+  "code_sha256": {
+    "backend/scripts/acquire_grid_transfer_v130.py": "bee8f005af45576a614fec474a545b18c31106a7df6f0034773f8cffcfa6f090",
+    "backend/tests/test_acquire_grid_transfer_v130.py": "a2634b19abe6fd0ef0c020be072ea91942523144eb6a1fcfe5451db57c5a5040",
+    "docs/grid-transfer-acquisition-v130-method.md": "69778cdc24d9d06021d47f80af902ad8559ca7bc14c0b476f49bcdbfb5d50ed3",
+    "backend/scripts/grid_transfer_context_v131.py": "ef0a78f90b23ac261b8a8d9f7610b826485d61b5ffe5b3764428391392672cba",
+    "backend/tests/test_grid_transfer_context_v131.py": "80888ff739c411692872313cdded019af8073f4a98df85be5f0e577e10c1f980",
+    "docs/grid-transfer-context-v131-method.md": "22eb3eefb1dfa22efa96f775cd16d502200c0dd6e03c68a41dc731448dad9c7d"
+  },
+  "publisher_record_url": "https://zenodo.org/records/3625687",
+  "publisher_record_sha256": "3581a251fdc5f4237e4b9357eaa615122ed720542d5dd5e5e56b99408ff06709",
+  "private_plan_sha256": "b7e91093c5bab292486685a14199bb9b5c6efcb76204bfefee9c8babeb485c48",
+  "license": "CC-BY-4.0",
+  "available_source_archives": 33,
+  "selected_source_archives": 16,
+  "planned_archive_bytes": 6682836336,
+  "batch_count": 8,
+  "archives_per_batch": 2,
+  "scope": "One archive at a time; full publisher byte-count/MD5 and observed SHA-256, safe directory inventory only. No clip selected by content, decoding, inference, fitting or serving contribution. Individual names/checksums/media stay private.",
+  "execution_context_schema": "chipmunk.grid-transfer-record-url-context/131",
+  "preserved_prefreeze_failure_sha256": "e4314acc703fff634a4f8e4aaf762d6619b287d23d48ab9e812dffbc379223a9",
+  "context_change": "Exact record/file content URL namespace only; same source selection, checksums, counts, monitor and limits."
+}

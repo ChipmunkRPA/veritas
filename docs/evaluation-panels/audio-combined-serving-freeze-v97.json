@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.audio-combined-serving-freeze/97",
+  "source_bindings": {
+    "study_freeze_sha256": "5a6cefd6d09b7a78b5699f2a625aeaff3d0886d57621be916df04be134e31b17",
+    "selected_global_sha256": "25aa0c565e003b9b578046aa155be24e37d3667f75d7d8ebe09a94b52aa209e5",
+    "trained_fusion_sha256": "0aa21efdad351eebbc2390f241c49f1e40d55d188277db442f092c7b1ef668ae",
+    "complement_head_sha256": "23350d709c9dc4c968066e2ab36bb16792f5c18d2513408b5f5c3298a8f83ae9"
+  },
+  "code_sha256": {
+    "backend/app/detectors/audio/combined.py": "8b6c21cb6e6b2c8900ad2c863beca24c0d292da87977a7e362ff1fdae9c5f79b",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/scripts/qualify_audio_combined_v97.py": "5f8a253eab70a1d734464ddc527a22055828deee67f8f95c7a3c0753c6fb2bca",
+    "backend/scripts/audio_score_fusion_v83.py": "8ea03c68961273c464496634c56c6db5b66b4992e25d51e2ac1bf84eb0ab634b",
+    "backend/tests/test_audio_combined_serving.py": "4fee9e9a5d77c36f00b819fb7197f56aabcea8917b3d9c3214a21316468ceb8c",
+    "docs/audio-combined-serving-v97-protocol.md": "02d6dad31fa81fddc1fe8b81331683b434d1874d2045c4f28c676e60fda6f292"
+  },
+  "private_inference_bundle_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "psutil": "7.2.2"
+  },
+  "replay_chunks": 48,
+  "replay_inputs": 4176,
+  "maximum_absolute_probability_error": 1e-12,
+  "scope": "Inference-only numerical parity on completed controlled research inputs, not new inference, fresh accuracy, full serving integration or a default change. Selected global arm and own calibration remain fixed. Learned arrays and individual records stay private.",
+  "new_neural_calls": 0,
+  "defaults_changed": false
+}

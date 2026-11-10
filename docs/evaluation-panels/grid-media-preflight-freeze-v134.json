@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.grid-media-preflight-freeze/134",
+  "code_sha256": {
+    "backend/scripts/grid_media_preflight_v134.py": "0ca2c989bfb81cba5a4ee0bea06238ae39da77378dcb73cd2a390c67fcbfcaaf",
+    "backend/tests/test_grid_media_preflight_v134.py": "406df7d65ca47702707e7c4a971fd2b3ca132d1ba7bab61922acf909cd1eb014",
+    "docs/grid-media-preflight-v134-method.md": "66a227a6eea65867746ca2649fdd2f6e4f6f0d2005d6aa59869ed408699a8b41",
+    "backend/scripts/video_native_sources_v92.py": "403f4a87e7ce1d3f289a64bc075660f191cd9183edf545b5f24d4d65475f27c9",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02"
+  },
+  "private_plan_sha256": "17ae6a06e207298febbd0089509161e00b8e03ddd168192647cb87733df9e601",
+  "acquisition_freeze_sha256": "5031ed599aaf9f48978bd9109c340beb3c6f33b8e2a51fe9ffa5058b01c53fbe",
+  "stopped_acquisition_profile_sha256": "f1fb87f23688f411141dde468f75ca87a0bb880e95c0b45d1d961c68a3b103cf",
+  "private_archive_journal_sha256": "54df21ae35c78f9094d255371bc088a40a387ce6303886812177377e321a6449",
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93"
+  },
+  "selected_archives": 1,
+  "selected_clips": 2,
+  "source_license": "CC-BY-4.0",
+  "scope": "Independently recheck complete archive bytes/checksums and ZIP directory, then two fixed native video/PCM clocks. Partial second archive and all model outputs excluded. Private media/clock/individual fingerprints remain private."
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "chipmunk.grid-transfer-acquisition-partial/131",
+  "status": "stopped_elapsed_time_limit",
+  "guarded_batch": 0,
+  "planned_source_archives": 16,
+  "worker_journal_verified_archives": 1,
+  "worker_journal_verified_bytes": 381061085,
+  "real_video_members_inventoried": 1000,
+  "retained_partial_archive_count": 1,
+  "retained_partial_bytes": 337641472,
+  "remaining_batches_attempted": 0,
+  "profile_sha256": "f1fb87f23688f411141dde468f75ca87a0bb880e95c0b45d1d961c68a3b103cf",
+  "worker_log_sha256": "65dcbb2f845679be3a3153e432c8dcca4b26e73980fb944f8de55c77195e3a8b",
+  "private_archive_journal_sha256": "54df21ae35c78f9094d255371bc088a40a387ce6303886812177377e321a6449",
+  "freeze_sha256": "5031ed599aaf9f48978bd9109c340beb3c6f33b8e2a51fe9ffa5058b01c53fbe",
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": -15,
+    "guard": "resource_limit",
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [
+      {
+        "elapsed_s": 900.0369262499735,
+        "tree_rss_bytes": 36552704,
+        "ram_available_bytes": 5992038400,
+        "disk_free_bytes": 7522525184,
+        "violations": [
+          "elapsed_time_limit"
+        ],
+        "archive_free_disk_bytes": 7793918345216
+      },
+      {
+        "elapsed_s": 900.213823582977,
+        "tree_rss_bytes": 0,
+        "ram_available_bytes": 6020251648,
+        "disk_free_bytes": 7522435072,
+        "violations": [
+          "elapsed_time_limit"
+        ],
+        "archive_free_disk_bytes": 7793916248064
+      }
+    ],
+    "duration_s": 900.215282332967,
+    "sampled_tree_rss_lower_bound_bytes": 40173568,
+    "minimum_available_ram_bytes": 5425332224,
+    "resource_journal_sha256": "fc9cdb2c2ed5ed2040282958377b64d906433d4bcd34192f9e8dd67c185c8a98",
+    "runtime_sha256": "ef0a78f90b23ac261b8a8d9f7610b826485d61b5ffe5b3764428391392672cba",
+    "worker_receipt_sha256": null,
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "One full archive verified by worker against publisher size/MD5; safe directory inventory complete. Second download incomplete and not admitted. No media decoding, source-identity proof, detector performance or completed sixteen-source cohort. Failed attempt and partial download preserved; no retry or overwrite."
+}

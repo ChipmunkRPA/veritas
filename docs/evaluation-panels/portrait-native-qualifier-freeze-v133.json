@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.portrait-native-qualifier-freeze/133",
+  "code_sha256": {
+    "backend/scripts/portrait_native_qualifier_v133.py": "ecb74e2abb52fc5f36425ebac23f321a4f5d116d80840cb2e651eab4da7f6a6f",
+    "backend/tests/test_portrait_native_qualifier_v133.py": "67b40af484cdce78b49b4da354d2410bf9090fc4431e68b252ea4dd52cef9009",
+    "docs/portrait-native-qualifier-v133-method.md": "9c525adb752910588f7772c8d2a0270f27cba500ca1b5a9246068cb638f7ecfc",
+    "backend/scripts/liveportrait_mouth_benchmark.py": "72e9319c70d1c6da62493cc859d2e2e73c87ecf2ed826e6cd1e954e9c076ce04",
+    "backend/scripts/prepare_mouth_edit_v4.py": "2f93ca68fe798aba7e1c5d6b231d26c5225d2008a0a1acd4c862bf13ddc66d42",
+    "backend/scripts/fetch_mouth_benchmark_assets.py": "61bb5c777a5efc6c7d2f8c553b7490e5294df221f99477e08c47ba41c919aba9"
+  },
+  "private_selection_sha256": "e77bde94b07ff9b557955e9e39475766360a8b2a83146af9486f70a619f05aa0",
+  "source_bank_freeze_sha256": "7124d4eb4cd9ff957860bff24b29cbb7f607b96b4ce26e4d636ae658c4d60624",
+  "geometry_runtime_freeze_sha256": "6bb5f01b18f46050bf33513dfaf107f85d12cf572ce6392ee6e6c79f4808cbd8",
+  "geometry_runtime_result_sha256": "447ca70a549be7eacdfb569ab4e4472545c3b1b2c4af2f01d5d5e93e02378395",
+  "asset_catalogue_sha256": "f1448f43338ba4a8e47145b0ab56f8f8e5a0b2546a48dbdc6f5ea994da7766a3",
+  "face_task_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "source_license_sha256": "75fcad03ad21369e9eeb369b97b73fc0bba7f7f3243d0a661f968bd1478207bb",
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "PyYAML": "6.0.3"
+  },
+  "device": "cpu",
+  "precision": "float32",
+  "torch_threads": 1,
+  "interop_threads": 1,
+  "deterministic_algorithms": true,
+  "seed": 133,
+  "geometry": {
+    "running_mode": "IMAGE",
+    "delegate": "CPU",
+    "num_faces": 2,
+    "min_face_detection_confidence": 0.5,
+    "min_face_presence_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "output_face_blendshapes": false,
+    "output_facial_transformation_matrixes": false
+  },
+  "calls": {
+    "face_task_inputs": 3,
+    "renderer_inputs": 4,
+    "expected_top_module_forwards": 20
+  },
+  "conditions": [
+    "same_aperture",
+    "repeat",
+    "earlier_native_aperture",
+    "authored_aperture_0.5"
+  ],
+  "native_mapping": "256 to 512 pixel-centre affine: multiply matrix by 2, then add 0.5 to both translations. Invert that full matrix for warp to the original native image. Composite only fixed source-mouth feathered support.",
+  "scope": "One consumed fitting source; benchmark-generator response, exact strict state loading, stateless geometry repeat and native-coordinate containment only. No new-source detector accuracy or achieved audio/phonetic synchronization claim."
+}

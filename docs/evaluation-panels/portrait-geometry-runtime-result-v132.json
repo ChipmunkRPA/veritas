@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.portrait-geometry-runtime-execution/132",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.portrait-geometry-runtime-result/132",
+    "status": "complete",
+    "wheels_verified": 4,
+    "installed_files_verified": 192,
+    "private_installed_manifest_sha256": "824e75918eb226eb46129b525f1a6ad0d3840fd77c1bdb789df99ea5762f8971",
+    "isolated_versions": {
+      "mediapipe": "0.10.32",
+      "absl-py": "2.3.1",
+      "flatbuffers": "25.9.23",
+      "sounddevice": "0.5.3"
+    },
+    "existing_opencv_version": "5.0.0",
+    "application_packages_unchanged": true,
+    "freeze_sha256": "6bb5f01b18f46050bf33513dfaf107f85d12cf572ce6392ee6e6c79f4808cbd8",
+    "new_neural_calls": 0,
+    "defaults_changed": false,
+    "scope": "Publisher-verified isolated wheel bytes and import/API probe. No face task instance, model inference, microphone/device recording, detector response or customer-runtime change."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 2.369138833018951,
+    "sampled_tree_rss_lower_bound_bytes": 251330560,
+    "minimum_available_ram_bytes": 5759647744,
+    "resource_journal_sha256": "ad6d17f503201bbb0d04aef2457905ad12b785c3ab481a77e2a4362caf2d51d3",
+    "runtime_sha256": "42bf3db749f32a8620348ec4e3dd96b29289b0832a0725813c86bae66c0de959",
+    "worker_receipt_sha256": "447ca70a549be7eacdfb569ab4e4472545c3b1b2c4af2f01d5d5e93e02378395",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "447ca70a549be7eacdfb569ab4e4472545c3b1b2c4af2f01d5d5e93e02378395",
+  "profile_sha256": "a05d03d6566857f028abb62edc493c16cd219caeaf66ec5542eca0bf2e103e0c"
+}

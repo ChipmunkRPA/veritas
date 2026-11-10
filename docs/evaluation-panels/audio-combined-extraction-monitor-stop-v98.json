@@ -1,0 +1,66 @@
+{
+  "schema": "chipmunk.audio-extraction-monitor-stop/98",
+  "recorded_on": "2026-11-09",
+  "status": "stopped_without_qualification",
+  "frozen_inputs": 36,
+  "headroom_admission_passed": true,
+  "controller_wait_s": 10.006131083937362,
+  "worker_process_started": true,
+  "worker_exit_code": -15,
+  "guard": "monitor_failure",
+  "monitor_errors": [
+    "PermissionError"
+  ],
+  "monitor_duration_s": 0.005044792080298066,
+  "sampled_tree_rss_bytes": 0,
+  "minimum_observed_available_ram_bytes": 6895239168,
+  "saved_response_records": 0,
+  "result_document_created": false,
+  "neural_budget_changed": false,
+  "scope": "The worker was launched and terminated after a monitor PermissionError. No response record or result was produced; no extraction, accuracy or activation qualification is claimed. The frozen attempt is preserved and has not been retried.",
+  "permission_preflight": {
+    "status": "passed",
+    "owned_child_exit_code": 0,
+    "sampled_tree_rss_bytes": 475136,
+    "events": [],
+    "terminal_during_sample": false,
+    "new_neural_calls": 0,
+    "scope": "Permission preflight on one owned standard-library child, outside the sandbox; does not rerun or qualify the stopped extraction."
+  },
+  "artifact_hashes": [
+    {
+      "name": "freeze.json",
+      "sha256": "84c3be93fa12fa9395e4405b988904ffaf0559ea2868ffcfa00e8ba85649ed6c"
+    },
+    {
+      "name": "admission-v2/controller.py",
+      "sha256": "b03e687618e6fe85dd48f5a8a2526351493e3acc6dd2ab9e06d530849bdbec90"
+    },
+    {
+      "name": "admission-v2/admission.jsonl",
+      "sha256": "d0425b815a4e9c903e898b05ac39c95778158716dababec5a1fa73ecb21c2950"
+    },
+    {
+      "name": "admission-v2/launched.json",
+      "sha256": "916427bc6df1d978d359959386804242d6d21fda15da824b0dcb847528d1cc3d"
+    },
+    {
+      "name": "admission-v2/controller-terminal.json",
+      "sha256": "61454741cd27206a3934159c2fa347d33fb85664d79223c3965c92457d39d9c2"
+    },
+    {
+      "name": "run-profile/profile.json",
+      "sha256": "a288ef7f592406ccf535b952d48575a5813391cbf201a05d1de9f7ac2d5d6c39"
+    },
+    {
+      "name": "run-profile/resources.jsonl",
+      "sha256": "ae0080b057ea56c50935c7522759fbac6c829062af196a951e500d72e4ca33ad"
+    },
+    {
+      "name": "run-profile/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "permission_preflight_sha256": "a6c9b500859014c072086d70fcec2dc70ec4b0b41b6d91a1eb53d7cc39f82bc3",
+  "serving_decision": "The optional combined speech path remains disabled and unmerged; retain the current model and protected calibration."
+}

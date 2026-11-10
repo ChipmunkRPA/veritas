@@ -1,0 +1,96 @@
+{
+  "schema": "chipmunk.video-common-source-preparation/89",
+  "source_groups": 144,
+  "source_assets_planned": 336,
+  "families": {
+    "paired_face_swap": 96,
+    "recorded_audiovisual_speech": 48
+  },
+  "roles": {
+    "fusion_fit": {
+      "paired_face_swap": 24,
+      "recorded_audiovisual_speech": 12
+    },
+    "confidence_cal": {
+      "paired_face_swap": 24,
+      "recorded_audiovisual_speech": 12
+    },
+    "selection": {
+      "paired_face_swap": 24,
+      "recorded_audiovisual_speech": 12
+    },
+    "confirmation": {
+      "paired_face_swap": 24,
+      "recorded_audiovisual_speech": 12
+    }
+  },
+  "historical_rtfs_groups_excluded": 162,
+  "historical_crema_actors_excluded": 28,
+  "rtfs_metadata_pool_after_known_alias_exclusions": 460,
+  "remaining_crema_actor_codes": 63,
+  "new_media_downloads": 0,
+  "neural_calls": 0,
+  "portrait_source_urls_supplied": 0,
+  "role_assignment_provisional": true,
+  "defaults_changed": false,
+  "permission_scope": "RTFS publisher CC-BY-SA-4.0; CREMA-D ODbL1.0/DbCL1.0. Publisher provenance/rights are not independently guaranteed. No restricted generator weights are downloaded.",
+  "limits": "Metadata source plan only. Verify media, native clocks, decoded aliases, known edit boundaries and all selected weight-specific grants before any detector study. Pinned portrait CSV lacks the source URLs described by its card; donor grouping is filename-only when links are absent, with incomplete portrait attribution/identity linkage. No raw donor portraits are acquired. Actor/video/source-URL keys do not prove distinct people or unknown pretraining independence. Role assignments must be finalized after byte/decoded-identity checks. Silent clips cannot validate lip sync. No external reviewer participation.",
+  "private_plan_sha256": "c48ffa31a547df984b57f0253c60ae55a612d6081387e25c63ae0af8d40381ff",
+  "metadata_files": {
+    "rtfs-README.md": {
+      "sha256": "72f7a92dab5b5ec9c7a82b05fb2095513a6d7f7650088588ae1984132b4bb6ae",
+      "bytes": 4852,
+      "publisher_url": "https://huggingface.co/datasets/godmodes/rtfs-10k/resolve/bca865e675852666a426368b2f5614abf1c1926a/README.md"
+    },
+    "rtfs-videos.csv": {
+      "sha256": "f357c328896b92f595f0916b690d3c62b8a64dd686e480a460a1cd847c165a6c",
+      "bytes": 275123,
+      "publisher_url": "https://huggingface.co/datasets/godmodes/rtfs-10k/resolve/bca865e675852666a426368b2f5614abf1c1926a/videos.csv"
+    },
+    "rtfs-photos.csv": {
+      "sha256": "15d5c172772c893767943ef9ca9ca4a3feb225f0fc6035a7e37e92df78871242",
+      "bytes": 77554,
+      "publisher_url": "https://huggingface.co/datasets/godmodes/rtfs-10k/resolve/bca865e675852666a426368b2f5614abf1c1926a/photos.csv"
+    },
+    "rtfs-inswapper.csv": {
+      "sha256": "ca242086edf15675a86d3732953935db94043178da58ae2fd195a419f3c4caa9",
+      "bytes": 861060,
+      "publisher_url": "https://huggingface.co/datasets/godmodes/rtfs-10k/resolve/bca865e675852666a426368b2f5614abf1c1926a/inswapper.csv"
+    },
+    "rtfs-uniface.csv": {
+      "sha256": "d793b65edc524b5309005ae0b50a67e73fcc16f0476ea5fc7196cc6428af511a",
+      "bytes": 845304,
+      "publisher_url": "https://huggingface.co/datasets/godmodes/rtfs-10k/resolve/bca865e675852666a426368b2f5614abf1c1926a/uniface.csv"
+    },
+    "crema-LICENSE.txt": {
+      "sha256": "e76747a4efa4b338914bb3f930b5d3d3c3ac15b886bbabf897f6a19731f987f8",
+      "bytes": 312,
+      "publisher_url": "https://raw.githubusercontent.com/CheyneyComputerScience/CREMA-D/1658cd342dff90010aa843eaeebd53610a08b1dc/LICENSE.txt"
+    },
+    "crema-README.md": {
+      "sha256": "bf3d3a070bf3dfb8eaceb0378fdb007388796bd24924e71fb17d0f65564136da",
+      "bytes": 13316,
+      "publisher_url": "https://raw.githubusercontent.com/CheyneyComputerScience/CREMA-D/1658cd342dff90010aa843eaeebd53610a08b1dc/README.md"
+    },
+    "crema-VideoDemographics.csv": {
+      "sha256": "e33ddc8b60bedf98541735801127cbb67098b5957271adbdd5dea8a44294eec3",
+      "bytes": 4033,
+      "publisher_url": "https://raw.githubusercontent.com/CheyneyComputerScience/CREMA-D/1658cd342dff90010aa843eaeebd53610a08b1dc/VideoDemographics.csv"
+    },
+    "crema-SentenceFilenames.csv": {
+      "sha256": "d88cb50e84bbc30b2e159cdfc25e1cf87777ad97c7c41d6ab8f75d3383b8f740",
+      "bytes": 170087,
+      "publisher_url": "https://raw.githubusercontent.com/CheyneyComputerScience/CREMA-D/1658cd342dff90010aa843eaeebd53610a08b1dc/SentenceFilenames.csv"
+    }
+  },
+  "metadata_acquisition": {
+    "duration_s": 2.0260519579751417,
+    "maximum_per_download_observed_rss_bytes": 34799616,
+    "continuous_or_peak_monitoring": false
+  },
+  "implementation_sha256": {
+    "backend/scripts/video_common_sources_v89.py": "8307b0f7f4fac15eb732c7fcc73b8496039c9f224a1e4f231f747fd52cfc4e95",
+    "backend/tests/test_video_common_sources_v89.py": "2535156895676a4beea486a50bd75f640e47b3e106795e02c2ed681b989e268c",
+    "docs/video-common-source-preparation-v89.md": "49bca4989346bfa762de7f7c176bc71f4fd5a6a3c9bf48eac526f29467f1970a"
+  }
+}

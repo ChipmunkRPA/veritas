@@ -37,11 +37,18 @@ uses fitting/calibration data and does not establish held-role reliability.
 
 All 1,044 selection inputs have completed and both fixed selection procedures
 choose the global combination. Both exact receipts were published in f1c7682
-and their GitHub blob hashes verified before final forwards. Final confirmation
-has completed its first 87-case stage and is waiting for the original 6-GiB
-initial RAM headroom before attempting the next stage. No final performance
-summary has been calculated. The results below are selection evidence, not
-completed final confirmation or a serving change.
+and their GitHub blob hashes verified before final forwards. After the first
+87-case stage, the original dispatcher reached its 900-second initial-memory
+wait limit before attempting chunk 37. The
+[before-launch stop](evaluation-panels/audio-common-reference-v88-confirmation-queue-stop.json)
+is preserved. After the owner freed memory and explicitly requested continuation,
+the [continuation controller](../backend/scripts/audio_final_continuation_v90.py)
+reverified both remote choices, the completed journal and its profile, then
+resumed only never-attempted chunks 37–47. It calls the same frozen v84 worker
+with unchanged neural budgets, maps and selection rules. Five regressions reject
+partial, changed or noncontiguous attempted results and preserve the completed
+prefix. Full final performance remains pending. The results below are selection
+evidence, not completed final confirmation or a serving change.
 
 A separate numerical reviewer replays the first seven completed fitting chunks
 without neural model calls. Across **609 controlled cases**, it preserves all

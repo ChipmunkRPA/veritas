@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.audio-final-before-launch-stop/88",
+  "recorded_utc": "2026-11-09T14:53:30.411284+00:00",
+  "observed_dispatcher_session": 84920,
+  "observed_dispatcher_exit_code": 1,
+  "classification": "initial_neural_headroom_wait_expired_before_chunk_attempt",
+  "wait_limit_s": 900,
+  "required_initial_available_ram_bytes": 6442450944,
+  "completed_chunks": [
+    36
+  ],
+  "completed_final_cases": 87,
+  "not_attempted_chunks": [
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "pending_final_cases": 957,
+  "final_performance_summary_computed": false,
+  "completed_profile_sha256": "797585a14f6cf5a6973ddf43f8f0452dc9ca3e61b83ccc69e615ecffbc795486",
+  "controller_sha256": "620b55ce0e74146e6cc8e2b0aaf6d467b49982b478e07c605b89e82e88bed960",
+  "primary_selection_sha256": "25aa0c565e003b9b578046aa155be24e37d3667f75d7d8ebe09a94b52aa209e5",
+  "parallel_selection_sha256": "de5bf149ac230c2077f20d92a2e82fbfe20d91deb092a3976ab4f15a45c21071",
+  "scientific_methods_or_neural_limits_changed": false,
+  "defaults_changed": false,
+  "scope": "Confirmed terminal dispatcher stop; first completed batch retained. No model attempt or failed inference for chunk37; no automatic retry, overwrite or result-based retuning. Remaining final cases are pending, not omitted or counted as passed. No application was closed."
+}

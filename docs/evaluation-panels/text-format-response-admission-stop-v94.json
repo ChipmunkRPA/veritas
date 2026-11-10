@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.text-format-before-launch-stop/94",
+  "observed_dispatcher_exit_code": 1,
+  "classification": "initial_headroom_wait_expired_before_batch_attempt",
+  "batch_not_attempted": 0,
+  "all_response_batches_not_attempted": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "model_workers_started": 0,
+  "new_neural_calls": 0,
+  "observations": 91,
+  "elapsed_s": 900.6707475839648,
+  "minimum_available_ram_bytes": 5682561024,
+  "maximum_available_ram_bytes": 5977260032,
+  "required_initial_available_ram_bytes": 6442450944,
+  "admission_journal_sha256": "8075e27f387143f6145917c28c70cc615c13ec459164967bd7a859be26a72819",
+  "freeze_sha256": "bfb22d70366370b7a220c87290d34d482c9763eba207167d5da19960e4ee85f2",
+  "before_launch_stop_sha256": "111a9ffba5a038349947d4d8c73944b2efab7ebb410f15d6e80b7632a5c539dd",
+  "published_freeze_blob": "becabb4f736f538558dc32df7f6e7ba753479ecf",
+  "scope": "Observed terminal before-launch queue stop, not a model error or negative detection result. No source response consumed, worker profile or neural journal created. Frozen methods, maps, points and neural limits unchanged; no retry or overwrite."
+}

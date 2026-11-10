@@ -66,6 +66,11 @@ prepares all five paired views of 288 consumed controlled documents, preserving
 every original non-whitespace position and label. Actual extraction leaves
 800 distinct classifier inputs from 1,440 requests. The model-response comparison
 has not run; this is neither fresh-author accuracy nor new confidence calibration.
+Its [fixed-model response procedure](text-format-comparison-v94-progress.md)
+and 24 checks are now published. The queue stopped before attempting its first
+batch because the unchanged initial memory requirement was not met; zero new
+model calls or response results exist. Preserve that stop before continuing
+any never-attempted work after memory becomes available.
 
 ## How the revised comparisons choose
 

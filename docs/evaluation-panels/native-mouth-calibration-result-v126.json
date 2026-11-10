@@ -1,0 +1,110 @@
+{
+  "schema": "chipmunk.native-mouth-calibration-result/126",
+  "status": "complete",
+  "calibration_groups": 10,
+  "planned_cases": 60,
+  "ready_cases": 55,
+  "unavailable_cases": 5,
+  "eligible_native_centres": 4633,
+  "positive_point_targets": 360,
+  "calibrations_fitted": 6,
+  "arms": {
+    "visual_only": {
+      "point_calibration_targets": 4633,
+      "clip_calibration_targets": 55,
+      "point_iterations": 6,
+      "clip_iterations": 6,
+      "point_positive_slope": true,
+      "clip_positive_slope": true,
+      "point_calibration_fit_reliability": {
+        "n": 4633,
+        "brier": 0.2216338687781996,
+        "log_loss": 0.6344952966323247,
+        "ece_10": 0.06357654733617776
+      },
+      "clip_calibration_fit_reliability": {
+        "n": 55,
+        "brier": 0.24700692439821678,
+        "log_loss": 0.6869734440436737,
+        "ece_10": 0.06007485483034233
+      },
+      "calibration_genuine_groups_flagged": {
+        "0": 0,
+        "1": 1,
+        "2": 2
+      }
+    },
+    "concatenation": {
+      "point_calibration_targets": 4633,
+      "clip_calibration_targets": 55,
+      "point_iterations": 7,
+      "clip_iterations": 7,
+      "point_positive_slope": true,
+      "clip_positive_slope": true,
+      "point_calibration_fit_reliability": {
+        "n": 4633,
+        "brier": 0.1632014321718731,
+        "log_loss": 0.48921179827031414,
+        "ece_10": 0.08724436729218588
+      },
+      "clip_calibration_fit_reliability": {
+        "n": 55,
+        "brier": 0.24085674608323823,
+        "log_loss": 0.6705990496243097,
+        "ece_10": 0.10560074078346832
+      },
+      "calibration_genuine_groups_flagged": {
+        "0": 0,
+        "1": 1,
+        "2": 2
+      }
+    },
+    "interaction": {
+      "point_calibration_targets": 4633,
+      "clip_calibration_targets": 55,
+      "point_iterations": 7,
+      "clip_iterations": 8,
+      "point_positive_slope": true,
+      "clip_positive_slope": true,
+      "point_calibration_fit_reliability": {
+        "n": 4633,
+        "brier": 0.1769077798135337,
+        "log_loss": 0.5248844918551983,
+        "ece_10": 0.06596613972619894
+      },
+      "clip_calibration_fit_reliability": {
+        "n": 55,
+        "brier": 0.23956303910632082,
+        "log_loss": 0.6688191776344543,
+        "ece_10": 0.07512562569340717
+      },
+      "calibration_genuine_groups_flagged": {
+        "0": 0,
+        "1": 1,
+        "2": 2
+      }
+    }
+  },
+  "current_common_input": {
+    "assessed_cases": 41,
+    "flagged_cases": 0
+  },
+  "private_calibrations_sha256": "9e669c19a28d0ab4f99cd9fc3f4990fb26367fe3f0dd81a6157fa9a8c1c0ee70",
+  "private_calibration_case_journal_sha256": "0dddcea07261d4166e4a9ca034d49a4762d63b98d77e67b682cc1e9ba284850e",
+  "freeze_sha256": "1bf2908754f07064f7ce3538561342f27ea70ff777370330cf318ae27ae50549",
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "Calibration fitting, not held-out validation. Independent point/clip study calibrations and internal genuine-group research settings. Current adapter uses common recorded dense faces, not a serving-tracker parity claim. No customer confidence or serving contribution.",
+  "source_commit": "ea14f14",
+  "private_receipt_sha256": "1102dc92253d294879857e99fa376b1121a62f8ee0445a1f89b97b1e4354cefa",
+  "resource_profile": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "duration_s": 20.796713166986592,
+    "sampled_tree_rss_lower_bound_bytes": 477003776,
+    "minimum_available_ram_bytes": 6890979328,
+    "resource_journal_sha256": "328ce88b4d6ccca06d4f8de2c1042e6fa66ae139a2962d88c9994c40c263869d",
+    "worker_receipt_sha256": "1102dc92253d294879857e99fa376b1121a62f8ee0445a1f89b97b1e4354cefa"
+  }
+}

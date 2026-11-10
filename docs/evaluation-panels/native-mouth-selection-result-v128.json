@@ -1,0 +1,1920 @@
+{
+  "schema": "chipmunk.native-mouth-component-evaluation/128",
+  "status": "complete",
+  "role": "selection",
+  "planned_cases": 60,
+  "primary_research_budget": 2,
+  "arms": {
+    "visual_only": {
+      "research_budgets": {
+        "0": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 0,
+          "missed_assessed_ai": 20,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 20,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.0,
+          "false_alarm_rate_assessed_genuine": 0.0,
+          "false_alarm_rate_ready_genuine": 0.0,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": 0.0,
+          "outside_edit_flagged_seconds": 0.0,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2595055714228669,
+            "log_loss": 0.7122513234630276,
+            "ece_10": 0.205877392956764
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2506928238633064,
+            "log_loss": 0.694507632040348,
+            "ece_10": 0.08150631188346608
+          }
+        },
+        "1": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 2,
+          "missed_assessed_ai": 18,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 18,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 5,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.1,
+          "false_alarm_rate_assessed_genuine": 0.125,
+          "false_alarm_rate_ready_genuine": 0.125,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 2,
+          "ai_localized_iou_0_2": 2,
+          "mean_ai_temporal_union_iou": 0.03263457808424711,
+          "outside_edit_flagged_seconds": 1.435,
+          "flagged_ai_with_inspected_roi_mask_comparison": 2,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.434446925400397,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2595055714228669,
+            "log_loss": 0.7122513234630276,
+            "ece_10": 0.205877392956764
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2506928238633064,
+            "log_loss": 0.694507632040348,
+            "ece_10": 0.08150631188346608
+          }
+        },
+        "2": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 4,
+          "missed_assessed_ai": 16,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 16,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 5,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.2,
+          "false_alarm_rate_assessed_genuine": 0.125,
+          "false_alarm_rate_ready_genuine": 0.125,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 4,
+          "ai_localized_iou_0_2": 4,
+          "mean_ai_temporal_union_iou": 0.061752467113655604,
+          "outside_edit_flagged_seconds": 3.837,
+          "flagged_ai_with_inspected_roi_mask_comparison": 4,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.4318128259304802,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2595055714228669,
+            "log_loss": 0.7122513234630276,
+            "ece_10": 0.205877392956764
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2506928238633064,
+            "log_loss": 0.694507632040348,
+            "ece_10": 0.08150631188346608
+          }
+        }
+      },
+      "conditions_at_primary": {
+        "original": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.1,
+          "false_alarm_rate_ready_genuine": 0.1,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.634,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.2648489841372501,
+            "log_loss": 0.7230162056056088,
+            "ece_10": 0.512988484040771
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "resample": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.1,
+          "false_alarm_rate_ready_genuine": 0.1,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.634,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.26532802519528786,
+            "log_loss": 0.7239676020974524,
+            "ece_10": 0.513474956648816
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur2": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.1,
+          "false_alarm_rate_ready_genuine": 0.1,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.734,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.278660624368832,
+            "log_loss": 0.7508353280686384,
+            "ece_10": 0.526604952175394
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur4": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 2,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.2,
+          "false_alarm_rate_ready_genuine": 0.2,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 1.0,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.299686632466583,
+            "log_loss": 0.7931356894618473,
+            "ece_10": 0.5467748919704791
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_aligned": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 2,
+          "missed_assessed_ai": 8,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 8,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.2,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 2,
+          "ai_localized_iou_0_2": 2,
+          "mean_ai_temporal_union_iou": 0.05617977528089888,
+          "outside_edit_flagged_seconds": 0.401,
+          "flagged_ai_with_inspected_roi_mask_comparison": 2,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.43233049947164637,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.22588886232978708,
+            "log_loss": 0.644516719081691,
+            "ece_10": 0.4736600802192926
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_earlier_320ms": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 2,
+          "missed_assessed_ai": 8,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 8,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.2,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 2,
+          "ai_localized_iou_0_2": 2,
+          "mean_ai_temporal_union_iou": 0.06732515894641236,
+          "outside_edit_flagged_seconds": 0.434,
+          "flagged_ai_with_inspected_roi_mask_comparison": 2,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.43129515238931393,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.2226203000394616,
+            "log_loss": 0.6380363964629274,
+            "ece_10": 0.4705326719915681
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        }
+      },
+      "point_reliability_unweighted": {
+        "n": 4050,
+        "brier": 0.2879678000523614,
+        "log_loss": 0.7809815368231875,
+        "ece_10": 0.4402186864517031
+      },
+      "point_reliability_balanced": {
+        "n": 4050,
+        "brier": 0.22986539989836935,
+        "log_loss": 0.6540596511012089,
+        "ece_10": 0.08902053532398707
+      }
+    },
+    "concatenation": {
+      "research_budgets": {
+        "0": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 0,
+          "missed_assessed_ai": 20,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 20,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.0,
+          "false_alarm_rate_assessed_genuine": 0.0,
+          "false_alarm_rate_ready_genuine": 0.0,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": 0.0,
+          "outside_edit_flagged_seconds": 0.0,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.27382220095824716,
+            "log_loss": 0.741494661961714,
+            "ece_10": 0.22281967302856825
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2550613493896532,
+            "log_loss": 0.7035092470979044,
+            "ece_10": 0.08503669822140511
+          }
+        },
+        "1": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 10,
+          "missed_assessed_ai": 10,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 10,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 21,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.5,
+          "false_alarm_rate_assessed_genuine": 0.525,
+          "false_alarm_rate_ready_genuine": 0.525,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 10,
+          "ai_localized_iou_0_2": 10,
+          "mean_ai_temporal_union_iou": 0.2416878049364839,
+          "outside_edit_flagged_seconds": 8.204,
+          "flagged_ai_with_inspected_roi_mask_comparison": 10,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.4392767290196605,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.27382220095824716,
+            "log_loss": 0.741494661961714,
+            "ece_10": 0.22281967302856825
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2550613493896532,
+            "log_loss": 0.7035092470979044,
+            "ece_10": 0.08503669822140511
+          }
+        },
+        "2": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 13,
+          "missed_assessed_ai": 7,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 7,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 27,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.65,
+          "false_alarm_rate_assessed_genuine": 0.675,
+          "false_alarm_rate_ready_genuine": 0.675,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 13,
+          "ai_localized_iou_0_2": 13,
+          "mean_ai_temporal_union_iou": 0.3531980783988166,
+          "outside_edit_flagged_seconds": 18.481,
+          "flagged_ai_with_inspected_roi_mask_comparison": 13,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.43251767135207,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.27382220095824716,
+            "log_loss": 0.741494661961714,
+            "ece_10": 0.22281967302856825
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.2550613493896532,
+            "log_loss": 0.7035092470979044,
+            "ece_10": 0.08503669822140511
+          }
+        }
+      },
+      "conditions_at_primary": {
+        "original": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 6,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.6,
+          "false_alarm_rate_ready_genuine": 0.6,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 3.237,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.3028668789239264,
+            "log_loss": 0.8002813821013963,
+            "ece_10": 0.5483303041735954
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "resample": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 6,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.6,
+          "false_alarm_rate_ready_genuine": 0.6,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 3.2039999999999997,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.30202359521610433,
+            "log_loss": 0.7985365685093246,
+            "ece_10": 0.5476184882570081
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur2": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 7,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.7,
+          "false_alarm_rate_ready_genuine": 0.7,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 4.502,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.31824204318067906,
+            "log_loss": 0.8316248332443436,
+            "ece_10": 0.5623175234235387
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur4": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 8,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.8,
+          "false_alarm_rate_ready_genuine": 0.8,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 5.136,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.32224309906103143,
+            "log_loss": 0.8394191829022706,
+            "ece_10": 0.5661983232575377
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_aligned": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 7,
+          "missed_assessed_ai": 3,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 3,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.7,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 7,
+          "ai_localized_iou_0_2": 7,
+          "mean_ai_temporal_union_iou": 0.36911043481706407,
+          "outside_edit_flagged_seconds": 1.201,
+          "flagged_ai_with_inspected_roi_mask_comparison": 7,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.4337340832592318,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.19480213002741734,
+            "log_loss": 0.5812632634767193,
+            "ece_10": 0.4388009615183975
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_earlier_320ms": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 6,
+          "missed_assessed_ai": 4,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 4,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.6,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 6,
+          "ai_localized_iou_0_2": 6,
+          "mean_ai_temporal_union_iou": 0.3372857219805691,
+          "outside_edit_flagged_seconds": 1.201,
+          "flagged_ai_with_inspected_roi_mask_comparison": 6,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.43109852412704774,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.20275545934032463,
+            "log_loss": 0.5978427415362303,
+            "ece_10": 0.4487456394218728
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        }
+      },
+      "point_reliability_unweighted": {
+        "n": 4050,
+        "brier": 0.24628097609819055,
+        "log_loss": 0.6763545868238353,
+        "ece_10": 0.3671217578276049
+      },
+      "point_reliability_balanced": {
+        "n": 4050,
+        "brier": 0.1713000785632363,
+        "log_loss": 0.5136742676364761,
+        "ece_10": 0.09616704214138584
+      }
+    },
+    "interaction": {
+      "research_budgets": {
+        "0": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 3,
+          "missed_assessed_ai": 17,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 17,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.15,
+          "false_alarm_rate_assessed_genuine": 0.025,
+          "false_alarm_rate_ready_genuine": 0.025,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 3,
+          "ai_localized_iou_0_2": 3,
+          "mean_ai_temporal_union_iou": 0.08811836057720071,
+          "outside_edit_flagged_seconds": 0.233,
+          "flagged_ai_with_inspected_roi_mask_comparison": 3,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.42338415823602826,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2561304381671359,
+            "log_loss": 0.7052453695475815,
+            "ece_10": 0.22676055122108418
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.23811930048487034,
+            "log_loss": 0.668542979969299,
+            "ece_10": 0.10444122576624766
+          }
+        },
+        "1": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 7,
+          "missed_assessed_ai": 13,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 13,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 8,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.35,
+          "false_alarm_rate_assessed_genuine": 0.2,
+          "false_alarm_rate_ready_genuine": 0.2,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 7,
+          "ai_localized_iou_0_2": 7,
+          "mean_ai_temporal_union_iou": 0.19560772524818298,
+          "outside_edit_flagged_seconds": 1.867,
+          "flagged_ai_with_inspected_roi_mask_comparison": 7,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.4082297221830887,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2561304381671359,
+            "log_loss": 0.7052453695475815,
+            "ece_10": 0.22676055122108418
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.23811930048487034,
+            "log_loss": 0.668542979969299,
+            "ece_10": 0.10444122576624766
+          }
+        },
+        "2": {
+          "planned_cases": 60,
+          "ready_cases": 60,
+          "unavailable_cases": 0,
+          "assessed_cases": 60,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 20,
+          "assessed_ai": 20,
+          "ai_flags": 7,
+          "missed_assessed_ai": 13,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 13,
+          "ready_genuine": 40,
+          "assessed_genuine": 40,
+          "genuine_false_flags": 8,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.35,
+          "false_alarm_rate_assessed_genuine": 0.2,
+          "false_alarm_rate_ready_genuine": 0.2,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 7,
+          "ai_localized_iou_0_2": 7,
+          "mean_ai_temporal_union_iou": 0.20753629667675438,
+          "outside_edit_flagged_seconds": 1.867,
+          "flagged_ai_with_inspected_roi_mask_comparison": 7,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.4082297221830887,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 60,
+            "brier": 0.2561304381671359,
+            "log_loss": 0.7052453695475815,
+            "ece_10": 0.22676055122108418
+          },
+          "clip_reliability_balanced": {
+            "n": 60,
+            "brier": 0.23811930048487034,
+            "log_loss": 0.668542979969299,
+            "ece_10": 0.10444122576624766
+          }
+        }
+      },
+      "conditions_at_primary": {
+        "original": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.1,
+          "false_alarm_rate_ready_genuine": 0.1,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.2,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.29495343262857965,
+            "log_loss": 0.7840002134236291,
+            "ece_10": 0.540854308661808
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "resample": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 1,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.1,
+          "false_alarm_rate_ready_genuine": 0.1,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.2,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.2941532875711662,
+            "log_loss": 0.782455641013889,
+            "ece_10": 0.5402379624800621
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur2": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 4,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.4,
+          "false_alarm_rate_ready_genuine": 0.4,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.734,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.29218345017044395,
+            "log_loss": 0.7787868283466863,
+            "ece_10": 0.5375534537173652
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "blur4": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 0,
+          "assessed_ai": 0,
+          "ai_flags": 0,
+          "missed_assessed_ai": 0,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 0,
+          "ready_genuine": 10,
+          "assessed_genuine": 10,
+          "genuine_false_flags": 2,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": null,
+          "false_alarm_rate_assessed_genuine": 0.2,
+          "false_alarm_rate_ready_genuine": 0.2,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 0,
+          "ai_localized_iou_0_2": 0,
+          "mean_ai_temporal_union_iou": null,
+          "outside_edit_flagged_seconds": 0.533,
+          "flagged_ai_with_inspected_roi_mask_comparison": 0,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+          "mean_changed_pixel_coverage_on_flagged_ai": null,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.28732068375647835,
+            "log_loss": 0.7693579120323842,
+            "ece_10": 0.5324656626588556
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_aligned": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 4,
+          "missed_assessed_ai": 6,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 6,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.4,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 4,
+          "ai_localized_iou_0_2": 4,
+          "mean_ai_temporal_union_iou": 0.2125465382640778,
+          "outside_edit_flagged_seconds": 0.133,
+          "flagged_ai_with_inspected_roi_mask_comparison": 4,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.41950043719091584,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.1803847298035818,
+            "log_loss": 0.5505827670818308,
+            "ece_10": 0.419990415040288
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        },
+        "ai_earlier_320ms": {
+          "planned_cases": 10,
+          "ready_cases": 10,
+          "unavailable_cases": 0,
+          "assessed_cases": 10,
+          "inconclusive_ready_cases": 0,
+          "ready_ai": 10,
+          "assessed_ai": 10,
+          "ai_flags": 3,
+          "missed_assessed_ai": 7,
+          "unassessed_ready_ai": 0,
+          "ready_ai_without_flag": 7,
+          "ready_genuine": 0,
+          "assessed_genuine": 0,
+          "genuine_false_flags": 0,
+          "unassessed_ready_genuine": 0,
+          "ai_detection_rate_ready": 0.3,
+          "false_alarm_rate_assessed_genuine": null,
+          "false_alarm_rate_ready_genuine": null,
+          "inconclusive_rate_ready": 0.0,
+          "ai_flags_overlapping_edit": 3,
+          "ai_localized_iou_0_2": 3,
+          "mean_ai_temporal_union_iou": 0.20252605508943106,
+          "outside_edit_flagged_seconds": 0.067,
+          "flagged_ai_with_inspected_roi_mask_comparison": 3,
+          "mean_inspected_roi_pixel_iou_on_flagged_ai": 0.39320210217265245,
+          "mean_changed_pixel_coverage_on_flagged_ai": 1.0,
+          "clip_reliability_unweighted": {
+            "n": 10,
+            "brier": 0.18778704507256536,
+            "log_loss": 0.5662888553870702,
+            "ece_10": 0.4296417561086779
+          },
+          "clip_reliability_balanced": {
+            "n": 10,
+            "brier": null,
+            "log_loss": null,
+            "ece_10": null,
+            "reason": "Binary class-balanced reliability requires both classes; unweighted slice reliability is reported separately."
+          }
+        }
+      },
+      "point_reliability_unweighted": {
+        "n": 4050,
+        "brier": 0.26132312575091055,
+        "log_loss": 0.7116848020624611,
+        "ece_10": 0.40390726737468874
+      },
+      "point_reliability_balanced": {
+        "n": 4050,
+        "brier": 0.1806359236728159,
+        "log_loss": 0.5332714935985576,
+        "ece_10": 0.12228123956382206
+      }
+    }
+  },
+  "current_common_input": {
+    "overall": {
+      "planned_cases": 60,
+      "ready_cases": 60,
+      "unavailable_cases": 0,
+      "assessed_cases": 12,
+      "inconclusive_ready_cases": 48,
+      "ready_ai": 20,
+      "assessed_ai": 4,
+      "ai_flags": 0,
+      "missed_assessed_ai": 4,
+      "unassessed_ready_ai": 16,
+      "ready_ai_without_flag": 20,
+      "ready_genuine": 40,
+      "assessed_genuine": 8,
+      "genuine_false_flags": 0,
+      "unassessed_ready_genuine": 32,
+      "ai_detection_rate_ready": 0.0,
+      "false_alarm_rate_assessed_genuine": 0.0,
+      "false_alarm_rate_ready_genuine": 0.0,
+      "inconclusive_rate_ready": 0.8,
+      "ai_flags_overlapping_edit": 0,
+      "ai_localized_iou_0_2": 0,
+      "mean_ai_temporal_union_iou": 0.0,
+      "outside_edit_flagged_seconds": 0.0,
+      "flagged_ai_with_inspected_roi_mask_comparison": 0,
+      "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+      "mean_changed_pixel_coverage_on_flagged_ai": null,
+      "clip_reliability_unweighted": {
+        "n": 0,
+        "brier": null,
+        "log_loss": null,
+        "ece_10": null
+      },
+      "clip_reliability_balanced": {
+        "n": 0,
+        "brier": null,
+        "log_loss": null,
+        "ece_10": null
+      }
+    },
+    "conditions": {
+      "original": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 0,
+        "assessed_ai": 0,
+        "ai_flags": 0,
+        "missed_assessed_ai": 0,
+        "unassessed_ready_ai": 0,
+        "ready_ai_without_flag": 0,
+        "ready_genuine": 10,
+        "assessed_genuine": 2,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 8,
+        "ai_detection_rate_ready": null,
+        "false_alarm_rate_assessed_genuine": 0.0,
+        "false_alarm_rate_ready_genuine": 0.0,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": null,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      },
+      "resample": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 0,
+        "assessed_ai": 0,
+        "ai_flags": 0,
+        "missed_assessed_ai": 0,
+        "unassessed_ready_ai": 0,
+        "ready_ai_without_flag": 0,
+        "ready_genuine": 10,
+        "assessed_genuine": 2,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 8,
+        "ai_detection_rate_ready": null,
+        "false_alarm_rate_assessed_genuine": 0.0,
+        "false_alarm_rate_ready_genuine": 0.0,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": null,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      },
+      "blur2": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 0,
+        "assessed_ai": 0,
+        "ai_flags": 0,
+        "missed_assessed_ai": 0,
+        "unassessed_ready_ai": 0,
+        "ready_ai_without_flag": 0,
+        "ready_genuine": 10,
+        "assessed_genuine": 2,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 8,
+        "ai_detection_rate_ready": null,
+        "false_alarm_rate_assessed_genuine": 0.0,
+        "false_alarm_rate_ready_genuine": 0.0,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": null,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      },
+      "blur4": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 0,
+        "assessed_ai": 0,
+        "ai_flags": 0,
+        "missed_assessed_ai": 0,
+        "unassessed_ready_ai": 0,
+        "ready_ai_without_flag": 0,
+        "ready_genuine": 10,
+        "assessed_genuine": 2,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 8,
+        "ai_detection_rate_ready": null,
+        "false_alarm_rate_assessed_genuine": 0.0,
+        "false_alarm_rate_ready_genuine": 0.0,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": null,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      },
+      "ai_aligned": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 10,
+        "assessed_ai": 2,
+        "ai_flags": 0,
+        "missed_assessed_ai": 2,
+        "unassessed_ready_ai": 8,
+        "ready_ai_without_flag": 10,
+        "ready_genuine": 0,
+        "assessed_genuine": 0,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 0,
+        "ai_detection_rate_ready": 0.0,
+        "false_alarm_rate_assessed_genuine": null,
+        "false_alarm_rate_ready_genuine": null,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": 0.0,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      },
+      "ai_earlier_320ms": {
+        "planned_cases": 10,
+        "ready_cases": 10,
+        "unavailable_cases": 0,
+        "assessed_cases": 2,
+        "inconclusive_ready_cases": 8,
+        "ready_ai": 10,
+        "assessed_ai": 2,
+        "ai_flags": 0,
+        "missed_assessed_ai": 2,
+        "unassessed_ready_ai": 8,
+        "ready_ai_without_flag": 10,
+        "ready_genuine": 0,
+        "assessed_genuine": 0,
+        "genuine_false_flags": 0,
+        "unassessed_ready_genuine": 0,
+        "ai_detection_rate_ready": 0.0,
+        "false_alarm_rate_assessed_genuine": null,
+        "false_alarm_rate_ready_genuine": null,
+        "inconclusive_rate_ready": 0.8,
+        "ai_flags_overlapping_edit": 0,
+        "ai_localized_iou_0_2": 0,
+        "mean_ai_temporal_union_iou": 0.0,
+        "outside_edit_flagged_seconds": 0.0,
+        "flagged_ai_with_inspected_roi_mask_comparison": 0,
+        "mean_inspected_roi_pixel_iou_on_flagged_ai": null,
+        "mean_changed_pixel_coverage_on_flagged_ai": null,
+        "clip_reliability_unweighted": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        },
+        "clip_reliability_balanced": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null,
+          "ece_10": null
+        }
+      }
+    }
+  },
+  "paired_primary_vs_visual": {
+    "concatenation": {
+      "source_groups": 10,
+      "connected_components": 3,
+      "bootstrap_replicates": 0,
+      "common_assessed_cases": 60,
+      "additional_assessed_cases": 0,
+      "lost_assessed_cases": 0,
+      "additional_localized_ai": 9,
+      "lost_localized_ai": 0,
+      "additional_genuine_flags": 22,
+      "removed_genuine_flags": 0,
+      "rate_differences": {
+        "ai_detection_rate_ready": {
+          "candidate_minus_reference": 0.45,
+          "group_bootstrap_ci95": null
+        },
+        "ai_localization_rate_ready": {
+          "candidate_minus_reference": 0.45,
+          "group_bootstrap_ci95": null
+        },
+        "false_alarm_rate_ready_genuine": {
+          "candidate_minus_reference": 0.55,
+          "group_bootstrap_ci95": null
+        }
+      },
+      "component_aggregates": [
+        {
+          "anonymous_component_ordinal": 0,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.6666666666666666,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 1,
+          "source_groups": 4,
+          "planned_cases": 24,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.375,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.375,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.625,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 2,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.3333333333333333,
+              "group_bootstrap_ci95": null
+            }
+          }
+        }
+      ],
+      "scope": "Finite-panel paired differences. Only three independently reconstructed connected contexts in this held-out role; no bootstrap CI or population reliability bound is reported. All variants and sentence/actor/known-ancestry links stay together. Calibration weights/points remain source-group units."
+    },
+    "interaction": {
+      "source_groups": 10,
+      "connected_components": 3,
+      "bootstrap_replicates": 0,
+      "common_assessed_cases": 60,
+      "additional_assessed_cases": 0,
+      "lost_assessed_cases": 0,
+      "additional_localized_ai": 5,
+      "lost_localized_ai": 2,
+      "additional_genuine_flags": 6,
+      "removed_genuine_flags": 3,
+      "rate_differences": {
+        "ai_detection_rate_ready": {
+          "candidate_minus_reference": 0.15,
+          "group_bootstrap_ci95": null
+        },
+        "ai_localization_rate_ready": {
+          "candidate_minus_reference": 0.15,
+          "group_bootstrap_ci95": null
+        },
+        "false_alarm_rate_ready_genuine": {
+          "candidate_minus_reference": 0.075,
+          "group_bootstrap_ci95": null
+        }
+      },
+      "component_aggregates": [
+        {
+          "anonymous_component_ordinal": 0,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": -0.16666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": -0.16666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": -0.08333333333333333,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 1,
+          "source_groups": 4,
+          "planned_cases": 24,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.0,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.0,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.0625,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 2,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.6666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.6666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            }
+          }
+        }
+      ],
+      "scope": "Finite-panel paired differences. Only three independently reconstructed connected contexts in this held-out role; no bootstrap CI or population reliability bound is reported. All variants and sentence/actor/known-ancestry links stay together. Calibration weights/points remain source-group units."
+    }
+  },
+  "paired_primary_vs_current": {
+    "visual_only": {
+      "source_groups": 10,
+      "connected_components": 3,
+      "bootstrap_replicates": 0,
+      "common_assessed_cases": 12,
+      "additional_assessed_cases": 48,
+      "lost_assessed_cases": 0,
+      "additional_localized_ai": 4,
+      "lost_localized_ai": 0,
+      "additional_genuine_flags": 5,
+      "removed_genuine_flags": 0,
+      "rate_differences": {
+        "ai_detection_rate_ready": {
+          "candidate_minus_reference": 0.2,
+          "group_bootstrap_ci95": null
+        },
+        "ai_localization_rate_ready": {
+          "candidate_minus_reference": 0.2,
+          "group_bootstrap_ci95": null
+        },
+        "false_alarm_rate_ready_genuine": {
+          "candidate_minus_reference": 0.125,
+          "group_bootstrap_ci95": null
+        }
+      },
+      "component_aggregates": [
+        {
+          "anonymous_component_ordinal": 0,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.3333333333333333,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.3333333333333333,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.3333333333333333,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 1,
+          "source_groups": 4,
+          "planned_cases": 24,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.0,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 2,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.0,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.0,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.08333333333333333,
+              "group_bootstrap_ci95": null
+            }
+          }
+        }
+      ],
+      "scope": "Finite-panel paired differences. Only three independently reconstructed connected contexts in this held-out role; no bootstrap CI or population reliability bound is reported. All variants and sentence/actor/known-ancestry links stay together. Calibration weights/points remain source-group units."
+    },
+    "concatenation": {
+      "source_groups": 10,
+      "connected_components": 3,
+      "bootstrap_replicates": 0,
+      "common_assessed_cases": 12,
+      "additional_assessed_cases": 48,
+      "lost_assessed_cases": 0,
+      "additional_localized_ai": 13,
+      "lost_localized_ai": 0,
+      "additional_genuine_flags": 27,
+      "removed_genuine_flags": 0,
+      "rate_differences": {
+        "ai_detection_rate_ready": {
+          "candidate_minus_reference": 0.65,
+          "group_bootstrap_ci95": null
+        },
+        "ai_localization_rate_ready": {
+          "candidate_minus_reference": 0.65,
+          "group_bootstrap_ci95": null
+        },
+        "false_alarm_rate_ready_genuine": {
+          "candidate_minus_reference": 0.675,
+          "group_bootstrap_ci95": null
+        }
+      },
+      "component_aggregates": [
+        {
+          "anonymous_component_ordinal": 0,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.8333333333333334,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.8333333333333334,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 1.0,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 1,
+          "source_groups": 4,
+          "planned_cases": 24,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.625,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.625,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.625,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 2,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.5,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.4166666666666667,
+              "group_bootstrap_ci95": null
+            }
+          }
+        }
+      ],
+      "scope": "Finite-panel paired differences. Only three independently reconstructed connected contexts in this held-out role; no bootstrap CI or population reliability bound is reported. All variants and sentence/actor/known-ancestry links stay together. Calibration weights/points remain source-group units."
+    },
+    "interaction": {
+      "source_groups": 10,
+      "connected_components": 3,
+      "bootstrap_replicates": 0,
+      "common_assessed_cases": 12,
+      "additional_assessed_cases": 48,
+      "lost_assessed_cases": 0,
+      "additional_localized_ai": 7,
+      "lost_localized_ai": 0,
+      "additional_genuine_flags": 8,
+      "removed_genuine_flags": 0,
+      "rate_differences": {
+        "ai_detection_rate_ready": {
+          "candidate_minus_reference": 0.35,
+          "group_bootstrap_ci95": null
+        },
+        "ai_localization_rate_ready": {
+          "candidate_minus_reference": 0.35,
+          "group_bootstrap_ci95": null
+        },
+        "false_alarm_rate_ready_genuine": {
+          "candidate_minus_reference": 0.2,
+          "group_bootstrap_ci95": null
+        }
+      },
+      "component_aggregates": [
+        {
+          "anonymous_component_ordinal": 0,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.16666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.16666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 1,
+          "source_groups": 4,
+          "planned_cases": 24,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.25,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.0625,
+              "group_bootstrap_ci95": null
+            }
+          }
+        },
+        {
+          "anonymous_component_ordinal": 2,
+          "source_groups": 3,
+          "planned_cases": 18,
+          "rate_differences": {
+            "ai_detection_rate_ready": {
+              "candidate_minus_reference": 0.6666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "ai_localization_rate_ready": {
+              "candidate_minus_reference": 0.6666666666666666,
+              "group_bootstrap_ci95": null
+            },
+            "false_alarm_rate_ready_genuine": {
+              "candidate_minus_reference": 0.3333333333333333,
+              "group_bootstrap_ci95": null
+            }
+          }
+        }
+      ],
+      "scope": "Finite-panel paired differences. Only three independently reconstructed connected contexts in this held-out role; no bootstrap CI or population reliability bound is reported. All variants and sentence/actor/known-ancestry links stay together. Calibration weights/points remain source-group units."
+    }
+  },
+  "private_score_journal_sha256": "34251caaf3395366a3c8f7baa710522f43fd98926475b8f15cd62c4740e0b2e9",
+  "private_outcomes_sha256": "baeedbf5467ba2d6f16e59495dc2c2d50718a0f4bba78be8797e62dbc0b46090",
+  "freeze_sha256": "609ace54f212f58d4a8e19b81abfcf95e3bbf476d52663e48199f006c831cc0a",
+  "new_neural_calls": 0,
+  "new_head_or_calibration_fits": 0,
+  "defaults_changed": false,
+  "scope": "Locked connected-source outcomes on one centred construction generator. Common dense native faces for current adapter, not serving-pipeline parity. Study probabilities, ROI input rectangles and indexed speech support are not universal authenticity probabilities or pixel-edit masks. Fresh placement/generator transfer and full app verification remain required. Component inventory corrected before any held-out scoring; original v127 had no attempted held-out worker. Current comparison retains source-group calibration weights/points and reports actual finite-panel errors without overstating independent sample size.",
+  "source_groups": 10,
+  "connected_components": 3,
+  "component_inventory": {
+    "fusion_fit": {
+      "sources": 18,
+      "connected_components": 4
+    },
+    "confidence_cal": {
+      "sources": 10,
+      "connected_components": 2
+    },
+    "selection": {
+      "sources": 10,
+      "connected_components": 3
+    },
+    "confirmation": {
+      "sources": 10,
+      "connected_components": 3
+    }
+  },
+  "weighting_and_research_point_unit": "publisher source group; not an independent sentence/actor/ancestry component",
+  "uncertainty": "Three connected held-out contexts; no bootstrap CI or population error-rate bound claimed.",
+  "source_commit": "c232257",
+  "private_receipt_sha256": "7dd5d0e90ee42d27aaec6fc4ca4998fea83a6504bc3e62f7f50fb2674d17272c",
+  "resource_profile": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "duration_s": 20.007367540965788,
+    "sampled_tree_rss_lower_bound_bytes": 554893312,
+    "minimum_available_ram_bytes": 6731268096,
+    "resource_journal_sha256": "aa6276afba9f9400e2b5f8177d57190f6fcd53c4fd076f71462534eb0451c825",
+    "worker_receipt_sha256": "7dd5d0e90ee42d27aaec6fc4ca4998fea83a6504bc3e62f7f50fb2674d17272c"
+  }
+}

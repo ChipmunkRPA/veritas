@@ -1,0 +1,17 @@
+{
+  "schema": "chipmunk.text-format-independent-review-freeze/99",
+  "code_sha256": {
+    "backend/scripts/review_text_format_v99.py": "69e6b594a3cf4aa6095413bce6e91b6a1b72873980df771ab0129c6b0462ba8d",
+    "backend/scripts/text_review_runtime_v99.py": "350b331f9f312e4a521da37e87fa4b550bd1c1cbd3da46bc530435e28f94f6ed",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/tests/test_text_format_review_v99.py": "708ec076e8977b7687b1e7946de108bd8fdc86b71a7c6266cdea66e8256a59a9",
+    "docs/text-format-independent-review-v99-protocol.md": "927c24c9f8eba05adef22b857be7e02ba1cc7eed54257d868674348800fa7775"
+  },
+  "response_freeze_sha256": "bfb22d70366370b7a220c87290d34d482c9763eba207167d5da19960e4ee85f2",
+  "input_packet_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+  "original_response_journal_sha256": "9268ad66b39455240ff052d63c09ec441714c1ef21ed01e9492f095ab071c18a",
+  "fixed_research_points_sha256": "1620675205260c941e97bb62daed4641bac052469d1c7cf6eabfa29cd8db8145",
+  "arithmetic": "Integer counts/positions and reference responses exact; floating summaries abs1e-9/rel1e-12. Missing is never zero. Every requested view retained.",
+  "scope": "Separate local recorded-response/mapping/arithmetic review, not new inference, calibration reproduction, independent source truth or outside human review.",
+  "new_neural_calls": 0
+}

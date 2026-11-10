@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.text-layout-method-freeze/101",
+  "code_sha256": {
+    "backend/scripts/text_layout_methods_v101.py": "a8390cd25cf757df721b3144a5e7dbea6b82c76179ef8e72e572f860de2b28e2",
+    "backend/tests/test_text_layout_methods_v101.py": "fe6cadd94dfa042469bdda91e960f3eb17ff84cf07b309fa858c28b0b707dcd5",
+    "docs/text-layout-methods-v101-protocol.md": "01ae0e492ebd5a731d77b5ab1461d8cd4e7f1988791edb12b52066924dc09759"
+  },
+  "input_packet_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+  "response_result_sha256": "8d8b1ff7beb1eb82b65a0173f171aac48ebc74d1514aafe8f7047d063dcff13d",
+  "response_journal_sha256": [
+    "f6ecc6a75484a636714c04e2ac006a0b2f1e0a1e8899067eb560b9a0b7685204",
+    "866db2266f08488295be5db53983f1370d139b06176d88947bae02a5a5d8097c",
+    "64ac7793ac46d62e7490036494b929781e1bf967fc7a47cef60289fc93d4c901",
+    "0b99b41d5ff9fabeefb9d63fa85bef59b26e8a03bcf5472130c11b93c15d12c7",
+    "b29b4ecc36690ca206fa98102010c35587b34c3677949ccc73a638c6651d1f64",
+    "0926195f1df8625ecf28c49711abcbcda4fda6879a254be00d9f850046318b36",
+    "07006379d4c10b9a195439eddf730a74e2a6881c667c129f4610bb9db088f66c",
+    "65f4df8560dfc00e6ef974d2da0b473099da7b2d6f07f969946da49bf5676a9f"
+  ],
+  "research_points_sha256": "1620675205260c941e97bb62daed4641bac052469d1c7cf6eabfa29cd8db8145",
+  "methods": [
+    "baseline",
+    "canonical_current",
+    "canonical_union",
+    "baseline_plus_canonical_union"
+  ],
+  "scope": "Post-result development on 288 consumed controlled documents/32 groups. Previous formatting results are known. No blind confirmation, new inference, calibration, point tuning, combined probability or serving adoption.",
+  "new_neural_calls": 0
+}

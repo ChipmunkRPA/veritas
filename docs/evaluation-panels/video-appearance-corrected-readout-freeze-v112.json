@@ -1,0 +1,19 @@
+{
+  "schema": "chipmunk.video-appearance-readout-freeze/111",
+  "code_sha256": {
+    "backend/scripts/video_appearance_readout_v111.py": "a775e686a8f76e86b35406d1cb85c4d48929958a180fa857109d313773c030c8",
+    "backend/tests/test_video_appearance_readout_v111.py": "438be35b506bc4927c5ebdb5326e97991081aa91faa67d35ee1f1fa2c587d967",
+    "docs/video-appearance-readout-v111-method.md": "6eec9a7a8b08682fa337c6969e39ea99fb5f12a93baab0a6d7d1fd5015c78415",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/tests/test_video_appearance_corrected_v112.py": "da3edb437492550d5ed87ed325c726a9234de48cea079d4e84e6763e5b734a4f",
+    "docs/video-appearance-corrected-v112-method.md": "27d4ea8bfb39163c5002d891947bb3aa49d39d836b8be9444af25c41ffaaba41"
+  },
+  "native_freeze_sha256": "30d2ae73d9edf48e1f30a7b5e7f90b965fa0190d7f190098b9559f9647e46489",
+  "prepared_plan_sha256": "db09de0359c15ff4af8fe5420df511b7a1d0cb53ac85308a7c4f9d7dd18ebde1",
+  "fitted_models_sha256": "b9658a22d179d2eee5c1b8718be77de45e2f32c5f7b86a1039dc6c4475d46cae",
+  "local_heads_sha256": "38e7060fff5525e69d99a43755c8ecdd128d6abce744ab5ebf8e87b14a16886c",
+  "raw_point": 0.11243900750879454,
+  "candidate_point": 0.24379932164053977,
+  "planned_cases": 138,
+  "scope": "Implementation of predeclared v108 fixed-point counts and continuous sparse/bounding-support readout; no fitting, point selection or new local probability."
+}

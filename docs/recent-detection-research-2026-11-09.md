@@ -183,6 +183,12 @@ Two swap conditions share time support with three non-AI edit controls.
 This supports a controlled comparison; it does not implement C-MIND or LoCC,
 establish exact AI-pixel truth, or supply a new detector accuracy result.
 
+The [full known-boundary construction](video-native-construction-v103-progress.md)
+is now running sequentially on Seagate under that unchanged plan. At its start
+snapshot, three groups (18 clips, 2,880 native frames and 54 PNGs) passed both
+construction and the second command-interface review. The complete target is
+90 groups and 540 clips. Actual detector comparisons remain separate.
+
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a
 selected passage in ordinary evidence, PDF and JSON. Its helper passed a
@@ -196,9 +202,9 @@ noncommercial terms were rechecked against primary sources during this update.
 The [layout-consistent method comparison](text-layout-methods-v101-result.md)
 has now completed on those same consumed responses. Normalization alone loses
 useful localization. Keeping the original context and adding both canonical
-checks increases useful mixed locations from45/128 to58/128, while genuine
-flags rise from5/128 to10/128 and false highlighted human area grows. A separate
-standard-library review reproduces all5,760 observations and aggregates. This
+checks increases useful mixed locations from 45/128 to 58/128, while genuine
+flags rise from 5/128 to 10/128 and false highlighted human area grows. A separate
+standard-library review reproduces all 5,760 observations and aggregates. This
 advances a complementary candidate for separate calibration and fresh-data
 testing; short-insert detection and customer-confidence qualification remain
 unfinished. It is not an additional fresh accuracy experiment or serving change.

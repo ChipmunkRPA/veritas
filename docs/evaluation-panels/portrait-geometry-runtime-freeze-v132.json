@@ -1,0 +1,81 @@
+{
+  "schema": "chipmunk.portrait-geometry-runtime-freeze/132",
+  "code_sha256": {
+    "backend/scripts/portrait_geometry_runtime_v132.py": "42bf3db749f32a8620348ec4e3dd96b29289b0832a0725813c86bae66c0de959",
+    "backend/tests/test_portrait_geometry_runtime_v132.py": "4d9964f5b0b782a34ed9a9b68d8898e0304bdcc66216c2445ece1b66f69530ea",
+    "docs/portrait-geometry-runtime-v132-method.md": "521ce5b9734d48aebee886d53314779346e98c02ac3f3259924162ceb9b0d943"
+  },
+  "wheels": [
+    {
+      "package": "mediapipe",
+      "version": "0.10.32",
+      "filename": "mediapipe-0.10.32-py3-none-macosx_11_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/24/d9/ca1be234911c76ccd87a9e0d8210394153cb6ad9b5da65a231aff8769d6f/mediapipe-0.10.32-py3-none-macosx_11_0_arm64.whl",
+      "bytes": 19386286,
+      "sha256": "b62178b7585e0bb8789075c43bbb3e352fbc4a8f765797fded509f86a098b29b",
+      "md5": "3f72c5d675ae7d2497e8c98a7520e66f",
+      "publisher_metadata_sha256": "68a9de15e8721c3ef6838c33e6387dca4666159b1414b72b14ec052544a2b3d0"
+    },
+    {
+      "package": "absl-py",
+      "version": "2.3.1",
+      "filename": "absl_py-2.3.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/8f/aa/ba0014cc4659328dc818a28827be78e6d97312ab0cb98105a770924dc11e/absl_py-2.3.1-py3-none-any.whl",
+      "bytes": 135811,
+      "sha256": "eeecf07f0c2a93ace0772c92e596ace6d3d3996c042b2128459aaae2a76de11d",
+      "md5": "16b5962643a38d8c985c30a6ae88cf4c",
+      "publisher_metadata_sha256": "8fcdd7b376daf445eb94643213bfbc28f46321b71a73f569012f366a0ae7582d"
+    },
+    {
+      "package": "flatbuffers",
+      "version": "25.9.23",
+      "filename": "flatbuffers-25.9.23-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/ee/1b/00a78aa2e8fbd63f9af08c9c19e6deb3d5d66b4dda677a0f61654680ee89/flatbuffers-25.9.23-py2.py3-none-any.whl",
+      "bytes": 30869,
+      "sha256": "255538574d6cb6d0a79a17ec8bc0d30985913b87513a01cce8bcdb6b4c44d0e2",
+      "md5": "8b7b53238e787cdc980927725f60b031",
+      "publisher_metadata_sha256": "7bf6102c18584caf87c95b35f48bd345204d5d528f4235b0bf3e2e0123a80034"
+    },
+    {
+      "package": "sounddevice",
+      "version": "0.5.3",
+      "filename": "sounddevice-0.5.3-py3-none-macosx_10_6_x86_64.macosx_10_6_universal2.whl",
+      "url": "https://files.pythonhosted.org/packages/2f/39/714118f8413e0e353436914f2b976665161f1be2b6483ac15a8f61484c14/sounddevice-0.5.3-py3-none-macosx_10_6_x86_64.macosx_10_6_universal2.whl",
+      "bytes": 108306,
+      "sha256": "278dc4451fff70934a176df048b77d80d7ce1623a6ec9db8b34b806f3112f9c2",
+      "md5": "173bee0434bf1b293ed65bec1c083849",
+      "publisher_metadata_sha256": "8813224156c979768f80fc4a6218eec9c9dd68d3869b57400aa85027cedadb48"
+    }
+  ],
+  "existing_application_packages": {
+    "opencv-python-headless": {
+      "version": "5.0.0.93",
+      "metadata_sha256": "f8e9104b4dce58f708d4cc7af95ebd8a5d65a3e36209d42386eb61065ae50e1a"
+    },
+    "numpy": {
+      "version": "2.2.6",
+      "metadata_sha256": "91d66d0d60ad467c679555c0e12ac739bb395940dc22bc5a39d45780aba129ad"
+    },
+    "cffi": {
+      "version": "2.1.1",
+      "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918"
+    },
+    "protobuf": {
+      "version": "7.36.0",
+      "metadata_sha256": "a318aecdc5dbf73e6fa1377b1c3b7b8e3e439e17ebeb4cb37357c2eb6a2ef182"
+    },
+    "matplotlib": {
+      "version": "3.11.1",
+      "metadata_sha256": "e42a4867d0c790804bce9ccd38972e1e71e24a81f2dbc9633efc71e63ce69f59"
+    }
+  },
+  "install": "pip --no-deps --no-index --no-compile --target exclusive-research-site",
+  "opencv_policy": "Reuse pinned existing headless OpenCV; do not install declared contrib dependency or change the application environment. Actual used API imports are qualified separately; this is not a full dependency-solver/pip-check claim.",
+  "licenses": {
+    "mediapipe": "Apache-2.0",
+    "absl-py": "Apache-2.0",
+    "flatbuffers": "Apache-2.0",
+    "sounddevice": "MIT"
+  },
+  "new_neural_calls": 0
+}

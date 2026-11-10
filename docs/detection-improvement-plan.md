@@ -79,6 +79,30 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 10 November
+
+- Completed the fixed native-video selection comparison: 138 clips across 23
+  source groups, 9,244 actual neural calls. Raw and calibrated appearance arms
+  both flag all 46 constructed swaps, with zero false flags among 92 controls
+  and two inconclusive controls. Local support also ties; mean bounding-range
+  IoU is 0.551, with many unexamined source frames. Keep the current check and
+  retain the candidate for broader testing; this panel does not establish a
+  replacement gain or general accuracy. The original saved-record/scalar bug
+  and failed attempt are preserved; a new frozen context fixes only that
+  handoff. [Full outcomes and limitations](video-native-appearance-v112-result.md).
+- Passed the authored CPU video/speech contracts, then actually encoded all 48
+  existing speech sources in 56 forwards. Eight bitwise source repeats and all
+  3,642 native picture/audio routes pass, including explicit padding. A complete
+  data-only saved-state review passes. Voice-derived states stay private on
+  Seagate. This qualifies source inputs for future mouth rendering, not a new
+  lip-sync detector or customer confidence. Native rendering, achieved alignment,
+  articulation comparison and full-flow qualification remain unfinished.
+  [Executed source result and next stage](av-source-encoder-v115-result.md).
+- All 95 targeted software checks pass locally. Updates are pushed manually;
+  GitHub Actions remains disabled. No outside reviewer, outreach or production
+  deployment is claimed. The broader image/audio/writing and serving evaluation
+  requirements above remain open.
+
 ## Progress on 8 November
 
 - Completed photo attribution and native pixel lineage before image learning:

@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.native-video-execution-summary/112",
+  "status": "complete",
+  "batches": 8,
+  "cases": 138,
+  "new_neural_calls": 9244,
+  "all_profiles_successful": true,
+  "sample_errors": 0,
+  "duration_s": 359.7331031250069,
+  "maximum_sampled_tree_rss_lower_bound_bytes": 731512832,
+  "minimum_available_ram_bytes": 6656884736,
+  "selection_result_sha256": "c3c9a90917906297578697e728877bbf2ebb6181f9daacf84201873b993dd1bb",
+  "corrected_freeze_sha256": "30d2ae73d9edf48e1f30a7b5e7f90b965fa0190d7f190098b9559f9647e46489",
+  "readout_freeze_sha256": "1f2750079e22dbf43548879f149f34520bd5cf0e85380b0b1d01a3423a0e2ac4",
+  "preserved_failed_original_stage": true,
+  "partial_failed_stage_neural_calls": null,
+  "scope": "Successful corrected extraction calls only; excludes authored contracts and unknown unsaved original failed-stage work. Sampled RSS is not a peak. Readout is data-only."
+}

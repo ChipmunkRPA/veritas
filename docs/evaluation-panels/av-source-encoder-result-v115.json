@@ -1,0 +1,115 @@
+{
+  "schema": "chipmunk.av-source-encoder-review/115",
+  "status": "complete",
+  "sources": 48,
+  "role_counts": {
+    "fusion_fit": 18,
+    "selection": 10,
+    "confirmation": 10,
+    "confidence_cal": 10
+  },
+  "routed_frames": 3642,
+  "explicit_zero_tick_slots": 479,
+  "bitwise_source_repeat_pairs": 8,
+  "new_neural_calls_in_extraction": 56,
+  "new_neural_calls_in_review": 0,
+  "generator_conditioning_qualified_sources": 0,
+  "freeze_sha256": "531a6200867e86592be94146313b15a281fc2beed00fbcaeaba1fba1d26d59a0",
+  "batches": [
+    {
+      "batch": 0,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "0fa179141d792c73472e0a1d75da57649122e617aec4cc6303036a4b08d606d6",
+      "profile_sha256": "94ee32dcd72fd2a4613f679dfe8e8f8bde478f85f5c6455782a5beacd94e5cc0",
+      "source_journal_sha256": "7d7ad728a35e2fe77eeaf4efb3beb484a3cb2739232d854927660716a23507b6",
+      "duration_s": 6.315162125043571,
+      "sampled_tree_rss_lower_bound_bytes": 772784128,
+      "minimum_available_ram_bytes": 6778978304
+    },
+    {
+      "batch": 1,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "9c0a16eaa50c6b5b4d96e78354a40e2f1d9a51f66ca8414b5986c2da4ef97202",
+      "profile_sha256": "c8e5cc55c195d40994f01d5cbb964d29807bc17ea0d2389cf5294bfaa71e87c5",
+      "source_journal_sha256": "0f34bc392d3238045a9c604248e5e8e973734689a5744981ed9b04d101d0760a",
+      "duration_s": 5.517717250040732,
+      "sampled_tree_rss_lower_bound_bytes": 772898816,
+      "minimum_available_ram_bytes": 6696058880
+    },
+    {
+      "batch": 2,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "83ebe6869d3e727a13139b4b8484da4d9bb154a6fa9a19c0a5e47d37e7adbbee",
+      "profile_sha256": "140fbbdd89584e2d5e621412e767c929dbcf6005b1ba48f85da530c1d0de103d",
+      "source_journal_sha256": "60b766beb7783ce76820dee71bda3e26c1acd58be5e593e506c815b4c4bfeb6b",
+      "duration_s": 6.342072792002,
+      "sampled_tree_rss_lower_bound_bytes": 773865472,
+      "minimum_available_ram_bytes": 6764118016
+    },
+    {
+      "batch": 3,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "c25ad72b0f0a8108c0855fa1ab208298f00caea54c2a3d92360d40cbc27dc058",
+      "profile_sha256": "83a8173288594adedfffe04e4d777c720d3eac6227db07bb32435b2c8808bc28",
+      "source_journal_sha256": "447cf1f5ad6e2e6efec82ecf70bf0a20eaee9a4ef0e0df0a5bddba38ba7958b4",
+      "duration_s": 5.508210959029384,
+      "sampled_tree_rss_lower_bound_bytes": 774897664,
+      "minimum_available_ram_bytes": 6728105984
+    },
+    {
+      "batch": 4,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "5fc5e9e74409180d74c74b735611d01a55a5ae36c6165c2667e70ee23476dae3",
+      "profile_sha256": "8678eaa2377a71b51f8a1d4c7251e191c42c34353610f7737913f783150e3351",
+      "source_journal_sha256": "c741e661d8eb37ae25bcd4f6b53003a5220ff5ef0660c1682fe5d2247c64ed30",
+      "duration_s": 6.306542583042756,
+      "sampled_tree_rss_lower_bound_bytes": 774881280,
+      "minimum_available_ram_bytes": 6771376128
+    },
+    {
+      "batch": 5,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "aeb01db2e756447d4bb0975025bda330313f68f74396e87d8fbbdb64e96db626",
+      "profile_sha256": "910c8706b731f429084627de5bfbf05112a6a7cf7f7cf0058c00c9bc6fdca9a4",
+      "source_journal_sha256": "169c5013e43a3f4394dc90379573f710e6d9ecb31396080397b02a925314b8cf",
+      "duration_s": 6.566957292030565,
+      "sampled_tree_rss_lower_bound_bytes": 773488640,
+      "minimum_available_ram_bytes": 6724354048
+    },
+    {
+      "batch": 6,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "00faf96ee5c0b45c8f3b87c128d0be667bae910f331761164565cd99ee95d47a",
+      "profile_sha256": "b60059bc28021aa4ed37e0ace368e9b4a421822906dfc09dba4878fe0c2a089f",
+      "source_journal_sha256": "08d676c85b966ca5ab5ca2f3ddd7fa036566d38a9ff5b633cd9a91a69607c2c1",
+      "duration_s": 6.03405204101,
+      "sampled_tree_rss_lower_bound_bytes": 774275072,
+      "minimum_available_ram_bytes": 6683213824
+    },
+    {
+      "batch": 7,
+      "sources": 6,
+      "new_neural_calls": 7,
+      "result_sha256": "cbadbdf70360f3b940a955fdc7b15631bedd229bc3033979bbd902cad7c03e2f",
+      "profile_sha256": "f61086a41460365c8138229776afd2e141abdc4010eeda3e85eef3a29c5dcf82",
+      "source_journal_sha256": "6112dc7be778857f258e5bc35e59495be8d87cafc308e30edde949005fb95aae",
+      "duration_s": 6.318687584018335,
+      "sampled_tree_rss_lower_bound_bytes": 774225920,
+      "minimum_available_ram_bytes": 6749323264
+    }
+  ],
+  "private_review_journal_sha256": "b560133120c4fb6fd4b55d4edbd16cccc3faf585744c3ac5129dd05ab6d6b964",
+  "review_code_sha256": "152ef76bc070b0b2e8a7e2b924f912b121dff96a4803cdad7a5e638a8a833158",
+  "review_resource_journal_sha256": "3e073c145ef7ccc5fb5bcf86485e0376781bb869acf5e1b82d8d9210cdf3870f",
+  "review_duration_s": 1.1969636250287294,
+  "review_maximum_observed_self_rss_bytes": 95158272,
+  "defaults_changed": false,
+  "scope": "Data-only saved-state/source/role/routing review. It does not reproduce neural inference, establish finite temporal locality, measure achieved mouth alignment, evaluate authenticity or train a detector. Private voice-derived features are not published."
+}

@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+For the newest native speech-state/source routing contract, run the 21 authored
+checks in the [source encoder result](av-source-encoder-v115-result.md). They use
+NumPy, pytest and the project code, with no media, model download or credentials.
+The complete real-source state review requires separately retained private
+inputs. It verifies saved outputs and routing, not detector accuracy. The
+[native video selection result](video-native-appearance-v112-result.md) likewise
+separates zero false flags from two inconclusive controls and reports incomplete
+time support; it is not reserved confirmation or full production qualification.
+
 The [photo attribution/pixel-lineage review](image-source-lineage-v20-result.md)
 adds 49 authored local checks requiring no model, real photo, credentials or
 network request. Its actual private-panel run covers all 523 attribution records

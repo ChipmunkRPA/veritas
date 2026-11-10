@@ -1,0 +1,16 @@
+{
+  "schema": "chipmunk.native-mouth-arithmetic-review-freeze/129",
+  "code_sha256": {
+    "backend/scripts/review_native_mouth_v129.py": "ef6fef4070fac15e02680c98fd92c66f22095d9f8a570600b095005713073a30",
+    "backend/tests/test_review_native_mouth_v129.py": "85d5f4dab61a75c12c244d2b7312bbdcfe2391f864d203e86265e7e59674f29a",
+    "docs/native-mouth-arithmetic-review-v129-method.md": "0dcc769ce5fa10a3da1a5affa179439d85fc4ea3272bcbd9bf833fa6e9d2ca0a"
+  },
+  "evaluation_freeze_sha256": "609ace54f212f58d4a8e19b81abfcf95e3bbf476d52663e48199f006c831cc0a",
+  "role_result_sha256": {
+    "selection": "15132adeb54a747ab641fb2d55d0e1f91b81bae5a158963fb5989df7c7af80eb",
+    "confirmation": "d455d79e4f0db0dc30dbbcadb1a179c3141547c10388dd649c504fbc689d9815"
+  },
+  "numeric_rtol": 1e-09,
+  "numeric_atol": 1e-09,
+  "scope": "Separate native descriptors/projections/raw margins/sigmoids, whole-window input clocks, native-cell time union, confusion counts and saved actual current lag-curve arithmetic. No network forwards, refit, independent face/speech re-encoding, region-mask reconstruction or independent unavailability judgment."
+}

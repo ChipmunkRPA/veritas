@@ -18,11 +18,15 @@ selection, fusion, exports, payment-first flow and rollback integration remain
 unfinished. The [actual extraction protocol](audio-combined-extraction-v98-protocol.md)
 has 36 fixed consumed fitting inputs across four source families and nine
 conditions. Its [admission controller stopped before launch](evaluation-panels/audio-combined-extraction-admission-stop-v98.json)
-after 900.65 seconds without two sufficient headroom observations. No model-stage
-folder or response output exists, and all 36 inputs remain never attempted.
+after 900.65 seconds without two sufficient headroom observations. At that stop,
+no model-stage folder or response output existed.
 The controller allowed 128 MiB for the separate monitor above the unchanged
 6-GiB neural startup minimum. This is a resource wait, not a candidate failure.
-Keep the frozen extraction dependencies unchanged while that test is pending.
+The later [headroom-ready attempt stopped on a monitor permission error](audio-combined-extraction-monitor-stop-v98.md).
+Its worker was launched and terminated without a response record or result.
+That failed qualification is preserved without retry. The successful separate
+permission preflight ran no model. Keep the frozen extraction dependencies and
+serving default unchanged; actual extraction remains unqualified.
 
 Further app integration is being developed on `codex/combined-audio-serving`
 in a separate checkout. Its source-timestamp, calibration-selection and report

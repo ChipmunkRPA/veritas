@@ -1,0 +1,47 @@
+{
+  "schema": "chipmunk.video-native-construction-complete/103",
+  "status": "complete",
+  "groups": 90,
+  "cases": 540,
+  "native_rgb_frames_verified": 102312,
+  "native_pngs_verified": 1620,
+  "encoded_mp4_bytes": 45586897523,
+  "condition_counts": {
+    "original": 90,
+    "swap_a": 90,
+    "swap_b": 90,
+    "ordinary_light": 90,
+    "ordinary_blur": 90,
+    "ordinary_time_step": 90
+  },
+  "role_group_counts": {
+    "confirmation": 24,
+    "confidence_cal": 22,
+    "fusion_fit": 21,
+    "selection": 23
+  },
+  "source_step_group_counts": {
+    "1/30": 26,
+    "1/25": 38,
+    "1001/30000": 7,
+    "1/50": 13,
+    "1001/24000": 3,
+    "1001/60000": 2,
+    "1/60": 1
+  },
+  "native_dimension_group_counts": {
+    "1920x1080": 61,
+    "1280x720": 29
+  },
+  "constructor_freeze_sha256": "e621f5f20b3bf731de1a450e998cf69610b3a6109a10ff7597719eaf27e841f9",
+  "source_plan_sha256": "015abe0fb87cf7b8cff0552287d593e96a838b304c1b4b5aff1a113f1ee5e92b",
+  "queue_terminal_sha256": "9308468792e9a7e064542268330a85697c6834d149d7933b1ca8a76032cf20af",
+  "queue_events_sha256": "0001b770365c0102bb0971dde3cd1649bf789fa3e50e2076fc85cd3e0b983f6b",
+  "new_queue_duration_s": 8748.515472542029,
+  "preserved_prior_pilot_groups": 1,
+  "maximum_sampled_data_rss_lower_bound_bytes": 837746688,
+  "minimum_observed_available_ram_bytes": 4998889472,
+  "private_commitments_sha256": "f786bd00f013c2f30ae82a62c3bc54718aca9bc956deef9841ccbc2d4ec2d122",
+  "new_neural_calls": 0,
+  "scope": "Completed frozen construction and command-review receipts for silent native excerpts. No fresh finalizer decode, model accuracy, AI-pixel truth or outside human review; raw media and individual fingerprints remain private."
+}

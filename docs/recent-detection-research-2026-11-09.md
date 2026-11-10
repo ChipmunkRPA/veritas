@@ -293,6 +293,13 @@ reported insufficient initial RAM, so no authored or source model stage began.
 This advances input qualification only; it is not a detector accuracy result or
 an implementation of the proposed recent-paper architectures.
 
+The [complete native input qualification](video-native-inputs-complete-v108.md)
+now retains all 540 constructed clips and verifies all eight selection bindings
+for 138 clips. Recorded construction/command review covers 102,312 RGB pictures
+and 1,620 PNGs; selection binding covers 4,554 scheduled native frame inputs.
+The source job exited zero. Actual neural qualification/scoring is still
+waiting for unchanged RAM admission; no new detection accuracy is claimed.
+
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a
 selected passage in ordinary evidence, PDF and JSON. Its helper passed a

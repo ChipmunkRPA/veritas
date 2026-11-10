@@ -270,9 +270,17 @@ The [selection-source support plan](video-appearance-plan-v107-result.md) now
 prepares 690 fixed windows over 138 clips from 23 selection groups, using
 rational source clocks and distinct middle/context labels. The exact v106
 appearance map and research point stay fixed; 24 confirmation groups remain
-reserved. This is source preparation with zero neural calls. Actual constructed
+reserved. This is source preparation with zero neural calls. Complete constructed
 byte/clock binding and native scoring remain pending; it does not implement
 C-MIND, LoCC or the new image/audio methods above.
+
+The [first six native binding batches](video-appearance-binding-v108-progress.md)
+now match actual files, rational clocks, 3,564 scheduled RGB inputs and 324
+construction exhibits across 108 selection clips. Thirty clips remain to bind.
+The owned-process preflight and 63 local software checks passed. Neural admission
+reported insufficient initial RAM, so no authored or source model stage began.
+This advances input qualification only; it is not a detector accuracy result or
+an implementation of the proposed recent-paper architectures.
 
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a

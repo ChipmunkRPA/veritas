@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.video-joint-scalar-freeze/106",
+  "code_sha256": {
+    "backend/scripts/video_joint_scalar_v106.py": "386de3ec22b27e45b51251ad65f8b1bb0cca721ac14c5c5c06dee329ece314fe",
+    "backend/tests/test_video_joint_scalar_v106.py": "202a2ca0a0d1ccb8e71a5a95bcfb2605c04ea88b72b2c7b7e4728a87bb304e8b",
+    "backend/app/bench/specialists.py": "2f889a732aeaccdc93cab0c9f8ba10eea37e552619f98af63ef0eb4ea4190b4d",
+    "docs/video-joint-scalars-v106-protocol.md": "424f0739fa7248c8ec15c21e2f78657cebcabd86f7afa72515467325368f5472"
+  },
+  "input_sha256": {
+    "video-face-specialists-v20-release.json": "241c1b4fc86ad6c912bd807a126edffade21eaf44421b801c50ba8c8f44739fd",
+    "video-face-specialists-v20-manifests.json.gz": "7ba727765252e5d57b5b8800eeefaa960e051977ad446501aacc1aaa072d28f8",
+    "video-face-specialists-v20-all-artifact.json": "38e7060fff5525e69d99a43755c8ecdd128d6abce744ab5ebf8e87b14a16886c",
+    "video-face-specialists-v20-all-points.json": "b50bafc3d366db8606e655aaa5f749dd43962964e5fd99387aebc877e065f325",
+    "video-face-specialists-v20-result.json": "af9e444253d5a7c9a2f4cc2a50d2d0c84b11365ff9dd4b6767913251ebf7b5c8"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "psutil": "7.2.2"
+  },
+  "arms": {
+    "appearance_only": [
+      "face-appearance"
+    ],
+    "joint_views": [
+      "face-crop",
+      "face-appearance",
+      "face-feature-change"
+    ]
+  },
+  "genuine_calibration_group_budget": 3,
+  "minimum_groups_per_class": 25,
+  "new_neural_calls": 0,
+  "scope": "Post-result development on consumed public v20 scalar observations. Existing local heads unchanged; new per-view file response and separate calibration. Not fresh confirmation, localization validation, full-app accuracy or customer probability."
+}

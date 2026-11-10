@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.native-mouth-feature-contract/123",
+  "status": "complete",
+  "strict_encoder_tensor_count": 223,
+  "native_image_inputs": 5,
+  "face_inputs": 5,
+  "new_neural_calls": 10,
+  "repeat_face_crop_input_features_bitwise": true,
+  "visual_descriptor_shape": [
+    2304
+  ],
+  "speech_descriptor_shape": [
+    3840
+  ],
+  "private_proof_sha256": "e65b895302c4bdc9bff5848b3d5afafe45c10453d49214f2d4afdcd7d4168e15",
+  "freeze_sha256": "3b1b337983c412b9c5ddeb7cd2fd96e6d53fb3ef8e33c3bb2ffc6e883c3a0929",
+  "defaults_changed": false,
+  "scope": "One-fitting-source native encoder/crop/repeat/descriptor contract. Image response distance is not an AI score or detector accuracy. No head/calibration fitted.",
+  "resource_profile": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "duration_s": 10.718612083932385,
+    "sampled_tree_rss_lower_bound_bytes": 889651200,
+    "minimum_available_ram_bytes": 7466434560,
+    "resource_journal_sha256": "0a625cb5805f0ed2d4f87da59d23350e9e533a99b7dcbfcabe712161be86403d",
+    "worker_receipt_sha256": "54536efbcc57c50fa8765553f49d7281a5a5e944629ee0fb3983fa7e93c9a2f4"
+  },
+  "source_commit": "48c3929"
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "chipmunk.native-mouth-feature-review-freeze/124",
+  "code_sha256": {
+    "backend/scripts/review_native_mouth_features_v124.py": "d4e89aad13608c0421082f2aa13eb7555a24a355897b21bfd0f015f51355ba7b",
+    "backend/tests/test_review_native_mouth_features_v124.py": "b7139d9db59a5ee4e87560fb64a3096d62834a38202b9c023689d039db116080",
+    "docs/native-mouth-feature-review-v124-method.md": "0b464c4377757a3782e09cc85b75d1c0c0698f1bb51a2b6da25fe608a46eb0c2"
+  },
+  "feature_freeze_sha256": "3b1b337983c412b9c5ddeb7cd2fd96e6d53fb3ef8e33c3bb2ffc6e883c3a0929",
+  "scope": "Full native picture/crop/input hashes, array rows, cache identity and cached speech clocks/summaries. Data-only; no independent face or image/speech encoder forwards, detector scores or accuracy."
+}

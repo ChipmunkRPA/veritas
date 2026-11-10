@@ -51,10 +51,13 @@ neither coverage alone nor a small added error decides adoption. These are
 correlated four-second controlled speech variants, not whole-file population
 probabilities. No serving default has changed.
 
-The [shared video sources](video-common-source-acquisition-v91.md) have all 336
-assets byte-verified, but native clocks, decoded aliases and final roles remain
-unqualified. New lip manipulations, ordinary controls and the common comparison
-are still pending. The [recent research refresh](recent-detection-research-2026-11-09.md)
+The [shared video source qualification](video-native-source-v92-result.md)
+decoded all 336 assets and 166,569 native frames, with 48 available audio streams.
+All technical clocks pass, but 288 assets are silent; six paired swap groups
+have mismatched native geometry/timestamps, and eleven spoken sentence types
+cross the current roles. Known-boundary correspondence and sentence-aware lip
+roles must address those issues before scoring. New lip manipulations, ordinary
+controls and the common comparison are still pending. The [recent research refresh](recent-detection-research-2026-11-09.md)
 adds October/November methods to the next-test plan, without retuning frozen
 experiments or treating published scores as app accuracy.
 

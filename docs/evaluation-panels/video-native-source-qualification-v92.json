@@ -1,0 +1,110 @@
+{
+  "schema": "chipmunk.video-native-source-qualification/92",
+  "planned_assets": 336,
+  "decoded_assets": 336,
+  "failed_assets": 0,
+  "native_video_frames": 166569,
+  "qualified_video_clocks": 336,
+  "with_audio": 48,
+  "without_audio": 288,
+  "qualified_audio_clocks": 48,
+  "contiguous_audio_clocks": 48,
+  "components": 144,
+  "additional_exact_connections": {},
+  "components_crossing_provisional_roles": 0,
+  "all_roles_reassigned": false,
+  "historical_rgb_connected_groups": 0,
+  "eligible_source_groups": 144,
+  "excluded_source_groups": 0,
+  "roles_eligible_groups": {
+    "confirmation": 36,
+    "fusion_fit": 36,
+    "confidence_cal": 36,
+    "selection": 36
+  },
+  "freeze_sha256": "120ba30186c822f1898a580c50f59b621b42f79a85d9f28161b8402b34404fae",
+  "qualified_private_plan_sha256": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+  "new_neural_calls": 0,
+  "detector_study_ready": false,
+  "defaults_changed": false,
+  "scope": "Native source clocks and exact decoded-content links only. Silent clips do not test lip sync; audio presence does not prove speech. Near duplicates, historical audio overlap, unknown people/pretraining links and portrait attribution remain unverified. Edit-boundary preparation and detector comparison are separate pending work. No model accuracy or outside human review claim.",
+  "successful_decoder_stages": 12,
+  "successful_finalisation_stages": 1,
+  "decoder_duration_s_sum": 1884.8067581671057,
+  "maximum_sampled_decoder_tree_rss_bytes": 604143616,
+  "minimum_observed_available_ram_bytes": 5098389504,
+  "guards": 0,
+  "sample_errors": 0,
+  "profile_sha256": [
+    "3e54956cb66e1abc608651dc713e5852c0a55441d6d99d7c4b9b7c90df3f22a9",
+    "25053cfb3a6d79b98840fc7f1838302f7463ad2a43df1b4d3d354cc768e307e1",
+    "c39e94ae1e7dda436ef41acb29e8449301126eb7fe1b2bc368b8a2f8d8ea182f",
+    "dfc439aec639ed2a350665f28c3a6555544fe0efcedb8df952db1fe42f41423a",
+    "93aa6f36498f61d3002fd77bca669f202ad739390f6fd2d79119d6ffc585de8c",
+    "b410b306ca8b12d7ccba920e5c2c34d8fa7875e21b57d273eb5f83aa56995e4a",
+    "eddedda198aba2326fe56ae5782d621fc473017a83b8015ac48d8ae80369d869",
+    "eaf9b019973440ab8a8efc328d62085216ce05362d6c5a75b3f2d3fd44af2439",
+    "ef9e505966bdd3f61e6ec4453327fa6bbab19b5e1d90628f2b1351fdf836645a",
+    "0ace5c1b128c83de25ac7e7a5740491497185d5678694b9033cfe38c48a548fa",
+    "c00e7f3eb2581381446fa20035e5c45c1bb0434d80958a1e775a0d2e6cb18774",
+    "b8ba926344f6c90b7db942db3dd6c7b314e474a25fe06c62b4bfd58602025c5b"
+  ],
+  "finalisation_profile_sha256": "6cbe7243a0b3538d9efeeeaffdc69c91ba545816b9ae29fb5b29e22622cc9eb3",
+  "recorded_clock_and_sentence_review": {
+    "source_assets": 336,
+    "native_video_frames_recounted": 166569,
+    "audio_sample_clock_records_recomputed": 48,
+    "paired_swap_groups": 96,
+    "paired_groups_with_exact_shared_native_clock_and_dimensions": 90,
+    "decoded_time_extent_seconds_by_family": {
+      "paired_face_swap": {
+        "min": 9.96,
+        "max": 31.998633333333334
+      },
+      "recorded_audiovisual_speech": {
+        "min": 0.533,
+        "max": 4.471
+      }
+    },
+    "maximum_canonical_audio_sample_count_error": 0.6530612244897959,
+    "av_stock_sentence_types": 12,
+    "av_stock_sentence_types_crossing_current_roles": 11,
+    "av_stock_sentence_types_present_in_recorded_history": 4,
+    "historical_stock_sentence_types_recorded": 4,
+    "new_neural_calls": 0,
+    "scope": "Separate arithmetic on saved native clocks and source metadata, not fresh decoding or external human review. Shared stock sentence context needs explicit separation/limitation before a learned lip comparison; canonical content fingerprints are not evidence timing."
+  },
+  "recorded_review_sha256": "5311ad0979cc401c6fb957943eb5a588227d0d7cdda961d7dfbaedf1e3ca48e5",
+  "resource_scope": "Sampled descendant RSS is a lower bound, not a guaranteed peak. Recorded-clock arithmetic is not new decoding or outside human review.",
+  "common_av_extent_review": {
+    "schema": "chipmunk.video-recorded-common-extent-review/92",
+    "audiovisual_sources": 48,
+    "common_frame_center_extent_seconds_min": "533/1000",
+    "common_frame_center_extent_seconds_max": "4471/1000",
+    "counts": {
+      "under_0_8_seconds": 1,
+      "under_1_44_seconds": 1,
+      "under_2_5_seconds": 24,
+      "under_4_seconds": 47
+    },
+    "audio_minus_video_origin_seconds_min": "-27/1000",
+    "audio_minus_video_origin_seconds_max": "-1/40",
+    "new_neural_calls": 0,
+    "scope": "Separate rational arithmetic on saved native picture-center/audio sample clocks. Intersection ends at the last observed video frame center without extrapolating display duration. These are support measurements, not achieved lip sync, speech identity or AI detection."
+  },
+  "common_av_extent_review_sha256": "47d8ff71ba61921116aadd5335896713131d9e940deae717fcf3f34070befd4b",
+  "cached_generator_asset_check": {
+    "status": "complete",
+    "publisher_bound_files_verified": 7,
+    "bytes_verified": 3885968140,
+    "prior_asset_plan_sha256": "bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc",
+    "prior_acquisition_receipt_sha256": "cba84efa0e5b6f7c07c3e31f179a77523ecdb941c68f7940cd3cba85e3898ac4",
+    "verification_implementation_sha256": "377fb0ddfe9915fd575dee9499ed4d292daf40a0ecd0897cddfbe8f5ca34d17f",
+    "duration_s": 2.2129623329965398,
+    "maximum_per_file_observed_rss_bytes": 28360704,
+    "new_downloads": 0,
+    "new_neural_calls": 0,
+    "scope": "Read-only verification of the previously licensed adapted mouth-generator cache. No model loading, generated media or fresh detector result. Per-file resource observations are not continuous or true peaks."
+  },
+  "cached_generator_asset_check_sha256": "d2b3b83c6d923d57f5bdfd51a5c13e831e610db34bcc09cb790fbd328ddfca85"
+}

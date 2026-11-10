@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.video-joint-scalar-reproduction/106",
+  "status": "passed",
+  "evaluated_files": 160,
+  "compared_fields": [
+    "source_files",
+    "evaluated_files",
+    "known_evaluation_source_groups",
+    "results",
+    "common_genuine_calibration_groups",
+    "new_points",
+    "fitting_support"
+  ],
+  "expected_result_sha256": "70c1cf57a7cc60cac9733ad5696f98cdd3ac007d3e5e90e94ea6abf7ee0ac0d0",
+  "reproduced_result_sha256": "d59dea2fdeb75dde0de167e2a78a10bf7df34b58e5a837836ecb429575a79dd0",
+  "exact_fitted_artifact_hash": true,
+  "exact_prediction_journal_hash": true,
+  "driver_sha256": "e85f1547348a1ef62d002690f8ef9d75f782e79be8d2bd0f24e7b0f760ee4183",
+  "new_neural_calls": 0,
+  "scope": "Fresh-directory refit/calibration/evaluation using public scalar inputs and the same frozen fitter/runtime. Not fresh-source confirmation, native/model re-execution, independent fitting software or outside human review."
+}

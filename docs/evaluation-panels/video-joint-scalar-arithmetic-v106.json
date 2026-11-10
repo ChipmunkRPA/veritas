@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.video-joint-scalar-arithmetic-check/106",
+  "status": "passed",
+  "checked_file_arm_responses": 640,
+  "unassessed_responses": 28,
+  "maximum_absolute_probability_difference": 1.6653345369377348e-16,
+  "same_scored_case_comparison": {
+    "cases": 151,
+    "appearance_only_brier": 0.09455906420816033,
+    "joint_views_brier": 0.09556818507275111
+  },
+  "post_result_paired_changes": {
+    "appearance_only": {
+      "ai_gained_vs_raw": 2,
+      "ai_lost_vs_raw": 0,
+      "genuine_added_flags_vs_raw": 2,
+      "genuine_removed_flags_vs_raw": 0
+    },
+    "joint_views": {
+      "ai_gained_vs_raw": 2,
+      "ai_lost_vs_raw": 0,
+      "genuine_added_flags_vs_raw": 3,
+      "genuine_removed_flags_vs_raw": 0
+    }
+  },
+  "fitted_models_sha256": "b9658a22d179d2eee5c1b8718be77de45e2f32c5f7b86a1039dc6c4475d46cae",
+  "prediction_journal_sha256": "a177d521f0f9596a64441d5c3ab91a6307e2b561ba9a9a1ed13faca03c26f981",
+  "new_neural_calls": 0,
+  "scope": "Post-result separate scalar arithmetic using retained parameters and math.fsum, not independent fitting, a new model/decoder, fresh-source validation or outside human review. Common-case and paired analyses are secondary diagnostics."
+}

@@ -204,6 +204,17 @@ Ten authored impulse checks also pass the fixed phase allowance. Encoder feature
 timing, generator conditioning and achieved lip synchronization remain pending;
 this source-input result is not an articulation-detector accuracy result.
 
+The [per-view video scalar comparison](video-joint-scalars-v106-result.md)
+also tests the earlier score-pooling weakness on the already public, consumed
+v20 observations. Appearance-only and joint file calibrations each flag 64/80
+AI clips, versus 29/80 historical pooled combination and 62/80 existing raw
+appearance. Their genuine flags are three and four, versus five and one
+respectively. Appearance-only has fewer missing files and slightly lower
+same-case Brier than joint. A public-data refit reproduces the saved models and
+predictions exactly on the pinned runtime. This advances a calibrated reference
+for fresh native testing; it neither replaces a detector nor supplies fresh
+accuracy, localization or customer confidence.
+
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a
 selected passage in ordinary evidence, PDF and JSON. Its helper passed a

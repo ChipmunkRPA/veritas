@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.video-joint-scalar-result/106",
+  "status": "complete",
+  "source_files": 648,
+  "evaluated_files": 160,
+  "known_evaluation_source_groups": 40,
+  "results": {
+    "appearance_only": {
+      "assessed": 155,
+      "inconclusive": 5,
+      "ai": 80,
+      "genuine": 80,
+      "ai_flagged": 64,
+      "missed_ai_including_inconclusive": 16,
+      "false_ai": 3,
+      "planned": 160,
+      "false_ai_groups": 3,
+      "source_class_balanced_brier": 0.1016928679703947
+    },
+    "joint_views": {
+      "assessed": 151,
+      "inconclusive": 9,
+      "ai": 80,
+      "genuine": 80,
+      "ai_flagged": 64,
+      "missed_ai_including_inconclusive": 16,
+      "false_ai": 4,
+      "planned": 160,
+      "false_ai_groups": 4,
+      "source_class_balanced_brier": 0.09556818507275111
+    },
+    "old_family_max": {
+      "assessed": 151,
+      "inconclusive": 9,
+      "ai": 80,
+      "genuine": 80,
+      "ai_flagged": 29,
+      "missed_ai_including_inconclusive": 51,
+      "false_ai": 5,
+      "planned": 160,
+      "false_ai_groups": 4,
+      "source_class_balanced_brier": 0.2019775521043411
+    },
+    "raw_appearance": {
+      "assessed": 155,
+      "inconclusive": 5,
+      "ai": 80,
+      "genuine": 80,
+      "ai_flagged": 62,
+      "missed_ai_including_inconclusive": 18,
+      "false_ai": 1,
+      "planned": 160,
+      "false_ai_groups": 1
+    }
+  },
+  "common_genuine_calibration_groups": 39,
+  "new_points": {
+    "appearance_only": {
+      "threshold": 0.24379932164053977,
+      "common_genuine_groups": 39,
+      "budget": 3,
+      "groups_flagged": 3,
+      "comparison": "strict_greater_than"
+    },
+    "joint_views": {
+      "threshold": 0.29022665566816513,
+      "common_genuine_groups": 39,
+      "budget": 3,
+      "groups_flagged": 3,
+      "comparison": "strict_greater_than"
+    }
+  },
+  "fitting_support": {
+    "appearance_only": {
+      "fitting_files": 160,
+      "calibration_files": 156
+    },
+    "joint_views": {
+      "fitting_files": 152,
+      "calibration_files": 156
+    }
+  },
+  "freeze_sha256": "d620a77b6b3fd1de9284398610d0a649c264b93a8044e5dc3f3d7cd39ff47893",
+  "fitted_model_sha256": "b9658a22d179d2eee5c1b8718be77de45e2f32c5f7b86a1039dc6c4475d46cae",
+  "prediction_journal_sha256": "a177d521f0f9596a64441d5c3ab91a6307e2b561ba9a9a1ed13faca03c26f981",
+  "duration_s": 0.7056736670201644,
+  "maximum_observed_self_rss_bytes": 228704256,
+  "minimum_available_ram_bytes": 5651054592,
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "Post-result development on consumed public v20 scalar observations. Existing local heads unchanged; new per-view file response and separate calibration. Not fresh confirmation, localization validation, full-app accuracy or customer probability."
+}

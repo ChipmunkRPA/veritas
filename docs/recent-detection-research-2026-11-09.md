@@ -266,6 +266,14 @@ spectral normalization and unmasked encoder attention, so temporal indices are
 not finite local evidence of synthesis. Actual neural conditioning and achieved
 lip alignment remain unqualified; this does not implement C-MIND.
 
+The [native speech contract](av-speech-native-v110-readiness.md) now prepares
+the actual CPU encoder/state-capture/routing path and a fixed suffix-context
+probe. Forty-nine authored-array/runtime/clock tests and a new owned-process
+sampling preflight passed. Neural RAM admission still fails before stage
+creation, so no native encoder forward or new source feature qualification is
+claimed. This prepares the next required experiment rather than replacing the
+missing articulation detector with a metadata verdict.
+
 The [per-view video scalar comparison](video-joint-scalars-v106-result.md)
 also tests the earlier score-pooling weakness on the already public, consumed
 v20 observations. Appearance-only and joint file calibrations each flag 64/80

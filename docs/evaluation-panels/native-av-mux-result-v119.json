@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.native-av-mux-execution/119",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.native-av-mux-result/119",
+    "status": "complete",
+    "cases": 3,
+    "authored_cases": 2,
+    "fitting_source_rewrites": 1,
+    "pictures": 76,
+    "audio_samples": 43912,
+    "all_picture_clocks_rgb_pcm_audio_origins_exact": true,
+    "private_case_results_sha256": "631afb7130c1d3e3ddbb724af286263ec778b1b414992a2286aa727d11683bdf",
+    "freeze_sha256": "0b68203b457fb3c96fbaa51f9c6ba81583bd518fcfc9ee8b329be011331fe30d",
+    "new_neural_calls": 0,
+    "defaults_changed": false,
+    "scope": "Observed picture centers/RGB and mono16k PCM/origin only; constructed terminal display duration, not source exposure/duration proof. Same codec library through PyAV encoding and command decoding, not an independent implementation or detector accuracy."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 3.7197245840216056,
+    "sampled_tree_rss_lower_bound_bytes": 231325696,
+    "minimum_available_ram_bytes": 7513522176,
+    "resource_journal_sha256": "1acd89b051a3f497e4bb30ff48ed34ae02f94d1bcb44091142dd091ec3cb0421",
+    "runtime_sha256": "624429787993fdacc529c4868bcec841cd32a5e8f5fc1a7d66d1068e63418efa",
+    "worker_receipt_sha256": "b71a155c13dc1181b4091948364ebe7639257adab674e8623ab1b7f8e2c67059",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "b71a155c13dc1181b4091948364ebe7639257adab674e8623ab1b7f8e2c67059",
+  "profile_sha256": "8f81daf943daa4f30f5a3ebdd651bd7cd3896fd85032a23b6bfc3b64e9a9696d",
+  "scope": "Actual data-only codec qualification. PyAV bundled FFmpeg and system command FFmpeg are separate builds in the same codec lineage, not independent implementations. No neural accuracy or achieved lip synchronization."
+}

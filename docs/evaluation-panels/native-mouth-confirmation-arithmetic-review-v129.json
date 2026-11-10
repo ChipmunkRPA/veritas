@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.native-mouth-arithmetic-review/129",
+  "status": "complete",
+  "role": "confirmation",
+  "cases": 60,
+  "independent_eligible_centres": 3768,
+  "raw_margins_replayed": 11304,
+  "native_windows_replayed": 10944,
+  "research_outcomes_replayed": 540,
+  "current_lag_windows_replayed": 6,
+  "current_lag_coefficients_replayed": 186,
+  "private_review_journal_sha256": "92dc4fb557b71276a327bade000aff0b38fc23816df276a8b094c65de63a93bc",
+  "evaluated_result_sha256": "d455d79e4f0db0dc30dbbcadb1a179c3141547c10388dd649c504fbc689d9815",
+  "freeze_sha256": "a431385ef398cdab0afcf91dc7914d83a8d3b8e90a9b201860e6e15ec8d18dcc",
+  "new_neural_calls": 0,
+  "new_head_or_calibration_fits": 0,
+  "defaults_changed": false,
+  "scope": "Separate array/projection/margin/sigmoid, native-cell time-union and saved current lag arithmetic. No independent encoder/face/PCM rerun, mask reconstruction, unavailability judgment or outside human reviewer.",
+  "source_commit": "1bb5220",
+  "private_receipt_sha256": "a115bc3dc41435fd5aa1165098575d734f86ef4aac2a0cac07ed71e163727c5e",
+  "resource_profile": {
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "duration_s": 7.132662457996048,
+    "sampled_tree_rss_lower_bound_bytes": 287014912,
+    "minimum_available_ram_bytes": 6598049792,
+    "resource_journal_sha256": "83b6eead3e59cc5f75f46aa04811cdeb04948eb9840681408ad7b8fdd00c1e62",
+    "worker_receipt_sha256": "a115bc3dc41435fd5aa1165098575d734f86ef4aac2a0cac07ed71e163727c5e"
+  }
+}

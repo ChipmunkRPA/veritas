@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.native-mouth-evaluation-freeze/127",
+  "code_sha256": {
+    "backend/scripts/evaluate_native_mouth_v127.py": "2975f04e203c6f90474bd2fbc4a21677735abbe3a0d05b9bed85b85981573a84",
+    "backend/tests/test_evaluate_native_mouth_v127.py": "740bd95c9aeb455c765314075c9a98f09c8dd25fa8bbabe340c4df21110400a3",
+    "docs/native-mouth-evaluation-v127-method.md": "f3612bd7a5ccb96fdd24599351df335822b500c518f1b13caaf4464f7ba7cdb6"
+  },
+  "calibration_result_sha256": "fbf3b05b5ef511c8c8bb23fdb655c618401808c2b6337c72b59039e69f8e5a7c",
+  "private_calibrations_sha256": "9e669c19a28d0ab4f99cd9fc3f4990fb26367fe3f0dd81a6157fa9a8c1c0ee70",
+  "roles": [
+    "selection",
+    "confirmation"
+  ],
+  "planned_cases_per_role": 60,
+  "connected_groups_per_role": 10,
+  "research_budgets": [
+    0,
+    1,
+    2
+  ],
+  "primary_research_budget": 2,
+  "group_bootstrap_replicates": 1000,
+  "bootstrap_seed": 127,
+  "temporal_union_iou_localization_point": 0.2,
+  "scope": "All three locked heads, own point/clip calibrations and all frozen research settings; no learning, retuning or automatic winner/promotion. Actual current correlation adapter on common recorded dense native faces. Report missing scope separately from missed assessed AI."
+}

@@ -18,8 +18,8 @@ from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
-VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3'}, 'video': {'video-evidence-1', 'video-evidence-2', 'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'},
-            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2'}}
+VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3'}, 'video': {'video-evidence-1', 'video-evidence-2', 'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'},
+            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3', 'audio-evidence-4'}, 'document': {'document-evidence-1', 'document-evidence-2'}}
 
 
 def _require(condition: bool, detail: str) -> None:
@@ -39,6 +39,12 @@ def _document(archive, names, reference, expected_file):
 
 def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str]]:
     _require(bundle.get('reproduction_supported') is False, 'A public derivative cannot claim inference reproduction')
+    scope = bundle.get('verification_scope')
+    if scope is not None:  # Historical public packages retain their original format.
+        _require(isinstance(scope, dict) and set(scope) == {'type', 'inference_reproduced', 'confidence_recalculated', 'calibration_parameters_included'}
+                 and scope['type'] == 'document-integrity-only'
+                 and all(scope[key] is False for key in ('inference_reproduced', 'confidence_recalculated', 'calibration_parameters_included')),
+                 'A public derivative cannot claim calibration recalculation or included private parameters')
     analysis = bundle['analysis']
     _require(isinstance(analysis, dict) and analysis.get('kind') in {'image', 'video', 'audio', 'document'},
              'The public analysis identity is unsupported')
@@ -68,14 +74,18 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
-        if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'}:
+        if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'}:
             from app.evidence.audio_binding import validate_audio_channel
             from app.evidence.av_binding import validate_av_channel
 
             validate_audio_channel(evidence['audio'], source['sha256'])
-            if evidence['version'] in {'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'} and evidence['audio']['coverage'] is not None:
+            if evidence['version'] == 'video-evidence-8':
+                from app.evidence.audio_response_binding import validate as validate_responses
+
+                validate_responses(evidence['audio'], required=True)
+            if evidence['version'] in {'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'} and evidence['audio']['coverage'] is not None:
                 _require(bool(evidence['audio'].get('acoustic_context')), 'Video acoustic context is missing')
-            if evidence['version'] in {'video-evidence-5', 'video-evidence-6', 'video-evidence-7'} and evidence['audio']['coverage'] is not None:
+            if evidence['version'] in {'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'} and evidence['audio']['coverage'] is not None:
                 _require(evidence['audio']['acoustic_context']['schema'] == 'chipmunk.acoustic-context/2', 'Video continuity measurements are missing')
             validate_av_channel(evidence['av'], evidence['source'])
             packet_ids = [p['id'] for part in (evidence, evidence['audio'], evidence['av']) for p in part['packets']]
@@ -96,13 +106,17 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
     refs = {}
     parts = [evidence]
-    if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'}:
+    if evidence['version'] in {'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'}:
         parts.extend(evidence[key] for key in ('audio', 'av'))
     if analysis['kind'] == 'audio':
+        if evidence['version'] == 'audio-evidence-4':
+            from app.evidence.audio_response_binding import validate as validate_responses
+
+            validate_responses(evidence, required=True)
         acoustic = evidence.get('acoustic_context')
-        if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
+        if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3', 'audio-evidence-4'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')
-        if evidence['version'] == 'audio-evidence-3':
+        if evidence['version'] in {'audio-evidence-3', 'audio-evidence-4'}:
             _require(acoustic['schema'] == 'chipmunk.acoustic-context/2', 'Audio continuity measurements are missing')
         if acoustic is not None:
             from app.evidence.audio_background_binding import validate_acoustic_context
@@ -207,7 +221,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         previous = event['seq']
     return [('public evidence', True, f'{len(refs)} declared assets; source, result, version and report commitments agree'),
             ('custody commitments', True, f'{len(events)} ordered commitments; original event bodies and chain completeness are NOT verified'),
-            ('verification scope', True, 'Signed public derivative integrity only; no inference reproduction or AI-authorship proof')]
+            ('verification scope', True, 'Signed public derivative integrity only; confidence estimates and calibration are NOT recalculated; no inference reproduction or AI-authorship proof')]
 
 
 def checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str]]:

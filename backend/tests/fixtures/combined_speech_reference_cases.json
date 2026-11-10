@@ -1,0 +1,765 @@
+{
+  "description": "Authored cross-language presentation contracts, not measured model accuracy. Expected tendencies and confidence displays are specified independently of either implementation.",
+  "cases": [
+    {
+      "name": "AI tendency below former presentation point",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.55,
+        "direction": "ai",
+        "confidence_pct": 55.0
+      }
+    },
+    {
+      "name": "Original tendency below former presentation point",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.45,
+        "decision": "original",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.45,
+        "direction": "original",
+        "confidence_pct": 55.0
+      }
+    },
+    {
+      "name": "Equal evidence remains inconclusive",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.5,
+        "decision": "inconclusive",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.5,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Zero endpoint is bounded below certainty in display",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.0,
+        "decision": "original",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.0,
+        "direction": "original",
+        "confidence_pct": 99.9
+      }
+    },
+    {
+      "name": "One endpoint is bounded below certainty in display",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 1.0,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 1.0,
+        "direction": "ai",
+        "confidence_pct": 99.9
+      }
+    },
+    {
+      "name": "Conflicting recorded tendency has no confidence",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.75,
+        "decision": "original",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.75,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Skipped speech cannot become original",
+      "screen": {
+        "status": "not_applicable",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.01,
+        "decision": "original",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Missing source mapping withholds confidence",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Unsupported duration withholds confidence",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": false,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Unknown calibration cannot borrow confidence",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Boolean probability is invalid",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": true,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Probability outside range is invalid",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": -0.01,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Null probability is not zero",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": null,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Extra window fields cannot redefine its scope",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0,
+            "region": "other"
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Boolean sample index is not zero",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": false,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Boolean time coordinate is not zero",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": false,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Fractional sample index is not a source integer",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0.5,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Shortened source window cannot borrow whole confidence",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 63999,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Source gap invalidates the complete clock",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64400,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Incorrect timebase is rejected",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320,
+            "source_end_pts": 64320,
+            "time_base": "1/8000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Boolean source timestamp is not a position",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": false,
+            "source_end_pts": 64000,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Timestamp outside exact browser integers is unsupported",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 9007199254740993,
+            "source_end_pts": 9007199254804993,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": null,
+        "direction": "inconclusive",
+        "confidence_pct": null
+      }
+    },
+    {
+      "name": "Negative source origin is preserved",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": -320,
+            "source_end_pts": 63680,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.55,
+        "direction": "ai",
+        "confidence_pct": 55.0
+      }
+    },
+    {
+      "name": "Integer-valued JSON floats retain exact sample positions",
+      "screen": {
+        "status": "ok",
+        "calibration_sha256": "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641",
+        "scope_supported": true,
+        "probability_ai": 0.55,
+        "decision": "ai",
+        "checked_windows": [
+          {
+            "start_sample": 0.0,
+            "end_sample": 64000,
+            "start_s": 0.0,
+            "end_s": 4.0
+          }
+        ],
+        "checked_source_ranges": [
+          {
+            "start_sample": 0,
+            "end_sample": 64000,
+            "source_start_pts": 320.0,
+            "source_end_pts": 64320,
+            "time_base": "1/16000"
+          }
+        ]
+      },
+      "expected": {
+        "probability_ai": 0.55,
+        "direction": "ai",
+        "confidence_pct": 55.0
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Optional combined speech integration: backend phase
+# Optional combined speech: presentation and export checks
 
 Development branch: `codex/combined-audio-serving`. This branch is separate from
 the checkout serving the local app. Its new option defaults to false; no running
@@ -27,29 +27,78 @@ default or protected calibration has changed.
   distributing its learned arrays or provider identities. Preserve source and
   pretrained-weight notices separately from the application's MIT code.
 
-Targeted backend tests passed for these contracts, saved-pin routing, existing
-customer/finding/export behavior, the historical calibration fixture, billing
-preflight, Stripe checkout and the unpaid-worker gate. These are software and
-recorded-data checks, not actual new model extraction or a full paid analysis
-through the optional path. No live charge was made.
+## Customer presentation and evidence
+
+The browser now mirrors the backend's saved-reference and source-scope checks.
+Twenty-four authored cases are shared by the Python and TypeScript tests,
+including malformed, skipped, tied and contradictory responses, exact window
+coverage, source-clock correspondence and JavaScript-safe numeric coordinates.
+The new method uses its own relative tendency, including estimates between
+50% and 60%; the earlier method retains its own existing interpretation.
+
+Audio evidence v4 and nested video evidence v8 distinguish a calibrated speech
+reference estimate from raw inspection scores. A calibrated original-leaning or
+tied window also retains an inspectable packet. Packet observations, waveforms,
+clips and JSON coordinates use the same exact source interval. Score meanings
+are validated against the saved raw run, published signal and reference hash.
+Historical evidence versions remain supported without rewriting their bytes.
+Only published voice checks enter those evidence manifests; comparator runs
+remain private instead of supplying another finding's score or calibration.
+
+The standard PDF describes the actual separate global calibration and limited
+speech scope, rather than legacy per-context fusion, clamping or uncertainty
+band claims. Its packet inference follows the same calibrated direction.
+Background acoustic measurements and sound categories remain context; no new
+synthetic-background capability is claimed.
+
+Public ZIPs explicitly verify signed document integrity, not recalculation of
+confidence or reproduction of inference. The private parameters are excluded.
+Historical public packages without the new optional verification-scope block
+remain readable; a present block cannot claim those unsupported capabilities.
+
+## Local verification
+
+- 472 distinct relevant backend cases have passing latest results across the
+  broader run and corrective follow-ups. The broader run passed 471/472; its
+  remaining audio-report scaffold was corrected to use its actual published
+  run. The 98-case correction run and final 94-case report/export run passed.
+- The entire frontend suite passed: 295 tests in 28 files. Type checking and
+  production build passed. The bundler still notes large JavaScript chunks.
+  An obsolete navigation test was aligned with the existing plain view, which
+  already shows all findings; production navigation behavior was unchanged.
+- Actual decoding, PCM binding, evidence generation, JSON route export,
+  WeasyPrint PDF rendering and signed ZIP verification passed using an authored
+  four-second tone and explicitly authored scores. AI-leaning, original-leaning
+  and tied packets were checked. These are software tests, not accuracy tests.
+- The final 11-page PDF was rasterized and visually checked. Its software-QA
+  artifact SHA-256 is
+  `dd9a4111067db1e182e8ddd315898f66bba9ee379f4f9b07fa67d0eae08d6fd3`.
+  The fixture JSON route export SHA-256 is
+  `1ac3844a5b4e29909e50c535e310c282343d00162e853f6bc6bcb8a7f3baa819`.
+  The fixture assets and PDFs remain local and are not published as research
+  results. No neural inference occurs in these authored export tests.
+- Existing saved-pin routing, rollback, protected calibration, billing preflight,
+  Stripe checkout and the unpaid-worker gate were covered. Stripe is mocked;
+  no live payment was made. Checks found no provider names or private learned
+  arrays in the tested customer exports.
 
 ## Still required before adoption
 
 The [36-input actual extraction check](audio-combined-extraction-v98-protocol.md)
-has not started: its before-launch memory admission stop is preserved on main.
-All model inputs remain never attempted. The frozen canonical dependencies
-remain unchanged while this integration develops separately.
+remains unqualified. Its original before-launch memory stop is preserved. A
+later headroom-ready launch [stopped on a resource-monitor permission error](audio-combined-extraction-monitor-stop-v98.md),
+with no saved response or result. That failed attempt was preserved without
+retry. A separate owned-child permission preflight passed outside the sandbox;
+it ran no model and does not qualify extraction. The frozen canonical
+dependencies remain unchanged while this integration develops separately.
 
-Finish the browser's mirrored customer/finding reference handling, including
-scores between 50% and 60%, without changing the old reference's interpretation.
-Test the actual new PDF, JSON and verification-package exports. A hash descriptor
-is a calibration reference, not independent reproduction of its private arrays;
-package verification must state that limit. Then test checkout-before-inference,
-model leasing, a complete analysis, source playback alignment and rollback with
-the actual models. Longer recordings and independently calibrated aggregation
-remain separate unfinished work.
+Actual model extraction, model leasing, a complete prepaid analysis, browser
+playback alignment and rollback with the real models remain required. DOM tests
+and authored export fixtures are not that end-to-end qualification. Longer
+recordings, independently calibrated aggregation and synthetic-background
+detection remain separate unfinished work.
 
-This backend phase has not been merged or enabled in the running app. No new
+This integration has not been merged or enabled in the running app. No new
 accuracy, population confidence, outside human review, Actions workflow or GCP
 deployment is claimed. Do not use the branch's contract tests as evidence that
 the outstanding model, browser and complete paid-flow qualification passed.

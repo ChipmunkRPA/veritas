@@ -42,7 +42,8 @@ def public_result(result: dict) -> dict:
                      for f in public.get('findings') or []],
         'checks': [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                     'raw_score_kind', 'calibrated_probability') if k in s} for s in public.get('signals') or []],
-        'note': 'This public projection has its own hash. It does not reproduce or hash to the original internal result.',
+        'note': ('This public projection has its own hash. It does not reproduce or hash to the original internal result. '
+                 'Recorded confidence estimates are not independently recalculated from this package.'),
     }
 
 
@@ -122,6 +123,8 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     bundle = {
         'schema': legacy.PUBLIC_SCHEMA, 'bundle_id': package.id, 'package_id': package.id, 'kind': package.kind,
         'generated_at': legacy._ts(exported_at), 'reproduction_supported': False,
+        'verification_scope': {'type': 'document-integrity-only', 'inference_reproduced': False,
+                               'confidence_recalculated': False, 'calibration_parameters_included': False},
         'analysis': {'id': analysis.id, 'revision': analysis.revision, 'kind': analysis.kind,
                      'original_result_sha256': analysis.result_hash},
         'source_commitment': {'sha256': analysis.sha256, 'bytes': analysis.size_bytes},
@@ -137,7 +140,7 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     }
     files['bundle.json'] = canonical_json(bundle)
     files['instance_public_key.pem'] = key.public_pem()
-    files['reproduce.md'] = b'# Public evidence derivative\n\nThis package cannot reproduce model inference. Obtain the authorised internal analysis record separately. Adding the source does not change this limitation.\n'
+    files['reproduce.md'] = b'# Public evidence derivative\n\nThis package cannot reproduce model inference or independently recalculate its confidence estimates. Calibration parameters are not included. Obtain the authorised internal analysis record separately. Adding the source does not change this limitation.\n'
     files['README.txt'] = (
         'Chipmunk Verify public evidence package\n\n'
         f"Status: {package.kind.upper()}; report {report.display_id}.\n"
@@ -146,6 +149,7 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
         'result.json is a public projection with its own hash, not the original internal result.\n'
         'Source excerpts and crops are included. The optional source/ file is unredacted user content.\n'
         'No internal model registry, arbitrary internal artifacts, or original custody event bodies are included.\n'
+        'Calibration parameters are not included; verification does not independently recalculate confidence.\n'
         'Custody entries are commitments only; this export cannot prove the completeness of the original event chain.\n'
         'A valid signature proves integrity and signer identity against a separately obtained key; it does not prove an AI verdict.\n\n'
         'Offline verification (obtain the trusted key separately from the issuing instance):\n'

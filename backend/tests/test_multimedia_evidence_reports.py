@@ -38,6 +38,10 @@ def evidence_case(request):
     report_result = copy.deepcopy(snapshot.result)
     report_result["input"]["sha256"] = analysis.sha256
     report_result["manifest"]["sampling"] = copy.deepcopy(result["manifest"]["sampling"])
+    if kind == "audio":
+        # Current audio evidence also verifies its observations against the
+        # published run. Unrelated specimen signals cannot authorize that input.
+        report_result["signals"] = copy.deepcopy(result["signals"])
     frozen = copy.deepcopy(document)
     frozen["analysis_id"] = snapshot.analysis.id
     frozen["revision"] = snapshot.analysis.revision

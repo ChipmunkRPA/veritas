@@ -362,10 +362,13 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     binding = (ctx.outputs.get("decode") or {}).get("evidence_input")
     if binding is not None:
         records, sound_records = [], []
+        published_voice_ids = {s.detector_id for s in result.signals if s.family == "voice" and s.status == "ok"}
         with ctx.sessions() as db:
             for entry in common.entries(ctx, ("detect",)):
                 if entry.get("status") != "ok" or entry.get("family") not in {"voice", "acoustic-context"} or not entry.get("run_id"):
                     continue
+                if entry["family"] == "voice" and entry["detector_id"] not in published_voice_ids:
+                    continue  # Comparator runs remain private; they are not this published finding.
                 run = db.get(DetectorRun, entry["run_id"])
                 if run is None or run.analysis_id != ctx.analysis_id or not run.raw_output_artefact_id:
                     raise ValueError("A scored audio check has no stored input record")

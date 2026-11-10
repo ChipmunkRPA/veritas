@@ -3,6 +3,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-li
 import { Link, MemoryRouter } from 'react-router-dom'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import AudioEvidenceContent from './AudioEvidenceContent'
+import { COMBINED_SPEECH_REFERENCE } from '../analysis/speechReference'
 import type { AudioEvidencePacket, AudioEvidenceSet, EvidenceAsset } from './multimediaPackets'
 
 function fixture(): AudioEvidenceSet {
@@ -43,6 +44,26 @@ const show = (set: AudioEvidenceSet, entry = '/analysis', ready = true) => rende
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('audio interval inspection', () => {
+  it.each([.55, .45, .5])('labels the saved calibrated speech estimate at %s without calling it raw', (p) => {
+    const set = fixture()
+    set.version = 'audio-evidence-4'
+    set.source.sample_rate = 16000
+    set.source.samples = 64000
+    set.packets = [set.packets[0]]
+    set.packets[0].interval = { start_sample: 0, end_sample: 64000 }
+    set.coverage = { decoded_samples: 64000, scored_samples: 64000, unscored_samples: 0, decode_limit_reached: false,
+      selection_threshold: null, response_semantics: 'speech-window-responses/2',
+      windows: [{ start_sample: 0, end_sample: 64000, score: p, signal_refs: set.packets[0].signal_refs,
+        response_reference: { kind: 'balanced-reference-ai-estimate', calibration_sha256: COMBINED_SPEECH_REFERENCE,
+          reference_prior_ai: .5, scope: 'complete-4s-speech-window', direction: p > .5 ? 'ai' : p < .5 ? 'original' : 'inconclusive' } }] }
+    show(set)
+    const navigator = within(screen.getByRole('region', { name: 'Audio interval navigator' }))
+    expect(navigator.getByText(new RegExp(`AI reference estimate ${Math.round(p * 100)}%`))).toBeTruthy()
+    expect(navigator.getByText(/balanced AI\/original reference population/)).toBeTruthy()
+    expect(navigator.getByText(/do not assess background synthesis/)).toBeTruthy()
+    expect(navigator.queryByText(/Responses are uncalibrated/)).toBeNull()
+  })
+
   it('shows source-derived waveform and chronological saved intervals without turning gaps into negative findings', () => {
     const set = fixture(), original = structuredClone(set)
     show(set)

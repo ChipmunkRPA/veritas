@@ -64,6 +64,9 @@ def _validate(channel, source_sha256):
                 for row in source['timeline'] if max(a,row['start_sample']) < min(b,row['end_sample'])]
 
     coverage=channel['coverage']
+    from app.evidence.audio_response_binding import validate as validate_responses
+
+    validate_responses(channel)
     for window in coverage['windows']:
         interval(window)
         require(isinstance(window['score'], (float,int)) and not isinstance(window['score'],bool)

@@ -22,12 +22,13 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
+from app.evidence import audio_response_binding as responses
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
 SCHEMA = "chipmunk.audio-evidence/1"
-VERSION = "audio-evidence-3"
+VERSION = "audio-evidence-4"
 CREATOR = "audio-evidence-packets/1"
 MAX_PACKETS = 6
 THRESHOLD = 0.5
@@ -65,14 +66,14 @@ def _interval(value: Any, samples: int) -> tuple[int, int]:
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
-    if (document.get("schema") != SCHEMA or document.get("version") not in {"audio-evidence-1", "audio-evidence-2", VERSION} or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
+    if (document.get("schema") != SCHEMA or document.get("version") not in {"audio-evidence-1", "audio-evidence-2", "audio-evidence-3", VERSION} or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
         raise PacketIntegrityError("Audio evidence is not bound to its frozen result and source")
     validate_content(document)
-    if document.get("version") in {"audio-evidence-2", VERSION} and not document.get("acoustic_context"):
+    if document.get("version") in {"audio-evidence-2", "audio-evidence-3", VERSION} and not document.get("acoustic_context"):
         raise PacketIntegrityError("Current audio evidence lacks frozen acoustic context")
-    if document.get("version") == VERSION and document["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2":
+    if document.get("version") in {"audio-evidence-3", VERSION} and document["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2":
         raise PacketIntegrityError("Current audio evidence lacks continuity measurements")
 
 
@@ -103,6 +104,10 @@ def validate_content(document: dict[str, Any]) -> None:
             raise PacketIntegrityError("Unusable audio window response")
     for window in document["coverage"]["windows"]:
         _interval(window, samples)
+    try:
+        responses.validate(document, required=document.get("version") == VERSION)
+    except ValueError as error:
+        raise PacketIntegrityError(str(error)) from error
     if document.get("acoustic_context") is not None:
         from app.evidence.audio_background_binding import validate_acoustic_context
         try:
@@ -154,6 +159,25 @@ def _windows(store: ObjectStore, result: dict[str, Any], record: dict[str, Any],
         if not signals:
             raise PacketIntegrityError("An audio window has no successful published signal")
         refs = [{"id": alias_signal(s["id"]), "display_id": s.get("display_id")} for s in signals]
+        # This adapter's unit is already its final calibrated estimate. Require
+        # the saved source scope and published value; never apply a whole-file
+        # calibration to another detector's raw window responses.
+        reference_probability = None
+        if entry["detector_id"] == "aud.combined_speech_v1":
+            from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency
+
+            screen = entry.get("details", {}).get("audio_screening") or {}
+            reference_probability, direction = combined_tendency(screen)
+            mapping = json.loads(_verified(store, binding["mapping_sha256"]))
+            if (reference_probability is None or binding["samples"] != 64000
+                    or screen.get("checked_source_ranges") != source_ranges(mapping, 0, 64000)
+                    or direction != responses.reference_claim(reference_probability)["direction"]
+                    or len(entry.get("unit_scores", [])) != 1
+                    or any(s.get("calibration_ref") != COMBINED_SHA256
+                           or type(s.get("calibrated_probability")) not in (int, float)
+                           or not math.isfinite(s["calibrated_probability"])
+                           or abs(s["calibrated_probability"] - reference_probability) > 1e-12 for s in signals)):
+                raise PacketIntegrityError("Calibrated speech evidence lacks its matching source-bound reference")
         for unit in entry.get("unit_scores", []):
             if not str(unit.get("unit_ref", "")).startswith("window:") or unit.get("raw_kind") != "probability":
                 continue
@@ -166,9 +190,35 @@ def _windows(store: ObjectStore, result: dict[str, Any], record: dict[str, Any],
             a, b = _interval({"start_sample": int(a), "end_sample": int(b)}, binding["samples"])
             if abs(q.get("start_s", -1) - a / SAMPLE_RATE) > 1e-6 or abs(q.get("end_s", -1) - b / SAMPLE_RATE) > 1e-6:
                 raise PacketIntegrityError("Audio seconds and sample coordinates disagree")
+            if reference_probability is not None and (a != 0 or b != 64000 or abs(score - reference_probability) > 1e-12):
+                raise PacketIntegrityError("Calibrated speech unit differs from its saved reference estimate")
             out.append({"start_sample": a, "end_sample": b, "score": score, "signal_refs": refs,
-                        "unit_ref": unit["unit_ref"], "raw_output_sha256": reference["raw_output_sha256"]})
+                        "unit_ref": unit["unit_ref"], "raw_output_sha256": reference["raw_output_sha256"],
+                        **({"response_reference": responses.reference_claim(score)} if reference_probability is not None else {})})
     return out
+
+
+def verify_responses(document: dict, *, store: ObjectStore, result: dict, record: dict, binding: dict) -> None:
+    """Rebind score meanings and selected intervals to saved runs, without inference."""
+    windows = _windows(store, result, record, binding)
+    coverage = document["coverage"]
+    union = interval_union((w["start_sample"], w["end_sample"]) for w in windows)
+    intervals = [{"start_sample": a, "end_sample": b} for a, b in union]
+    if (canonical_hash(coverage["windows"]) != canonical_hash(windows)
+            or coverage["scored_intervals"] != intervals
+            or coverage["scored_samples"] != sum(b-a for a, b in union)
+            or coverage["unscored_samples"] != binding["samples"] - sum(b-a for a, b in union)):
+        raise PacketIntegrityError("Speech coverage differs from the actual saved responses")
+    selected = responses.candidates(windows)
+    if (len(document["packets"]) != min(len(selected), MAX_PACKETS)
+            or document["omitted_windows"] != max(0, len(selected) - MAX_PACKETS)):
+        raise PacketIntegrityError("Speech packet selection differs from the actual saved responses")
+    for packet, ((a, b), values) in zip(document["packets"], selected[:MAX_PACKETS], strict=True):
+        refs = {s["id"]: s for value in values for s in value["signal_refs"]}
+        if (packet["interval"] != {"start_sample": a, "end_sample": b}
+                or canonical_hash(packet["observations"]) != canonical_hash([responses.observation(w) for w in values])
+                or canonical_hash(packet["signal_refs"]) != canonical_hash(list(refs.values()))):
+            raise PacketIntegrityError("Speech packet differs from its actual saved response and score meaning")
 
 
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
@@ -180,7 +230,10 @@ def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: i
         return x0 + (sample - start) / (end - start) * (x1 - x0)
     if selected:
         draw.rectangle((px(selected[0]), y0, px(selected[1]), y1), fill=(255, 233, 195))
-    draw.text((x0, 12), "Recorded window responses (uncalibrated)" if scores else "Analysed mono waveform (context only)", fill=(30, 50, 40))
+    reference_count = sum(bool(w.get("response_reference")) for w in windows)
+    title = ("Calibrated speech reference estimate (AI tendency)" if reference_count == len(windows) and windows
+             else "Window responses (different score scales)" if reference_count else "Recorded window responses (uncalibrated)")
+    draw.text((x0, 12), title if scores else "Analysed mono waveform (context only)", fill=(30, 50, 40))
     draw.rectangle((x0, y0, x1, y1), outline=(135, 150, 135))
     if scores:
         threshold_y = y1 - THRESHOLD * (y1 - y0)
@@ -258,10 +311,11 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         "coverage": {"decoded_samples": len(pcm), "scored_samples": scored, "unscored_samples": len(pcm) - scored,
                      "decode_limit_reached": len(pcm) >= mapping["limit_samples"],
                      "scored_intervals": [{"start_sample": a, "end_sample": b} for a, b in union], "windows": windows,
-                     "selection_threshold": THRESHOLD, "threshold_kind": "uncalibrated_window_response"},
+                     "selection_threshold": THRESHOLD, "threshold_kind": "uncalibrated_window_response",
+                     "response_semantics": responses.SEMANTICS},
         "packets": [], "omitted_windows": 0,
         "limitations": ["A response applies to the complete scored window, not individual words or exact edit boundaries.",
-                        "Window responses are uncalibrated scores, not probabilities that a time range was altered.",
+                        "Each response states its own score meaning. Raw responses are uncalibrated; calibrated speech estimates use a balanced reference, not a per-file accuracy guarantee.",
                         "The mono input mixes source channels. Compression, noise, speakers and unfamiliar synthesis methods can affect responses.",
                         "Waveforms and exported audio are context for inspection; they are not independent evidence of synthesis.",
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
@@ -270,11 +324,11 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         doc_assets[name] = _asset(db, store, analysis, set_id,
             _chart(pcm, windows, start=0, end=len(pcm), selected=None, scores=scores), "image/png", width=960, height=280)
     document["overview"] = doc_assets
-    by_range: dict[tuple[int, int], list[dict[str, Any]]] = {}
-    for window in windows:
-        by_range.setdefault((window["start_sample"], window["end_sample"]), []).append(window)
-    candidates = [(key, values) for key, values in by_range.items() if max(v["score"] for v in values) >= THRESHOLD]
-    candidates.sort(key=lambda item: (-max(v["score"] for v in item[1]), item[0]))
+    calibrated = any(w.get("response_reference") for w in windows)
+    if calibrated:
+        document["coverage"].update(selection_threshold=None, threshold_kind="reference_directions_and_raw_inspection",
+            selection="Retain calibrated speech windows in either direction or without a direction; retain other raw responses at or above 0.5.")
+    candidates = responses.candidates(windows)
     document["omitted_windows"] = max(0, len(candidates) - MAX_PACKETS)
     for i, ((a, b), values) in enumerate(candidates[:MAX_PACKETS], 1):
         ca, cb = max(0, a - 2 * SAMPLE_RATE), min(len(pcm), b + 2 * SAMPLE_RATE)
@@ -289,20 +343,29 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
             artifacts[name] = _asset(db, store, analysis, set_id,
                 _chart(pcm, windows, start=ca, end=cb, selected=(a, b), scores=scores), "image/png", width=960, height=280)
         peak = max(v["score"] for v in values)
+        reference = next((v.get("response_reference") for v in values if v.get("response_reference")), None)
+        if reference:
+            p = next(v["score"] for v in values if v.get("response_reference"))
+            confidence = min(99.9, math.floor(round(max(p, 1-p) * 1000, 8)) / 10)
+            label = {"ai": "Leaning towards AI-generated speech", "original": "Leaning towards original speech"}.get(reference["direction"])
+            observation = f"{label} with {confidence:g}% reference confidence for the complete {a / SAMPLE_RATE:.3f}–{b / SAMPLE_RATE:.3f} s window." if label else "The calibrated speech evidence has no directional preference for this complete window."
+            interpretation = "The AI reference estimate uses a balanced AI/original reference population. It is not a probability that this particular recording is fake, does not assess background synthesis and does not locate an edit boundary."
+        else:
+            observation = f"A voice check returned {peak:.3f} for the complete {a / SAMPLE_RATE:.3f}–{b / SAMPLE_RATE:.3f} s window."
+            interpretation = "At least one recorded window response reaches the check's 0.5 inspection threshold. Listen to the exact scored input and its context; this does not locate a voice-replacement boundary."
         document["packets"].append({"id": f"A{i:02d}", "title": "Speech inspection window", "evidence_type": "statistical",
             "interval": {"start_sample": a, "end_sample": b}, "context_interval": {"start_sample": ca, "end_sample": cb},
             "start_s": a / SAMPLE_RATE, "end_s": b / SAMPLE_RATE, "finding_ids": findings, "signal_refs": list(refs.values()),
-            "observation": f"A voice check returned {peak:.3f} for the complete {a / SAMPLE_RATE:.3f}–{b / SAMPLE_RATE:.3f} s window.",
-            "interpretation": "At least one recorded window response reaches the check's 0.5 inspection threshold. Listen to the exact scored input and its context; this does not locate a voice-replacement boundary.",
-            "observations": [{"label": "Voice-check window response", "value": v["score"], "unit": "uncalibrated score",
-                              "signal_refs": v["signal_refs"], "unit_ref": v["unit_ref"], "raw_output_sha256": v["raw_output_sha256"]} for v in values],
+            "observation": observation,
+            "interpretation": interpretation,
+            "observations": [responses.observation(v) for v in values],
             "artifacts": artifacts, "limitations": ["Overlapping windows are correlated and do not count as independent confirmations.",
                 "A high window response does not identify a specific word, speaker identity or an exact edit boundary."],
             "anchor": {"original_sha256": analysis.sha256, "pcm_sha256": binding["pcm_sha256"],
                        "coordinate_space": "analysed-mono-pcm", "sample_rate": SAMPLE_RATE,
                        "source_timestamp_ranges": source_ranges(mapping, a, b)},
             "derivation": {"version": VERSION, "clip_encoding": "PCM signed 16-bit WAV, 16000 Hz mono, no further normalisation",
-                           "selection": "recorded window response >= 0.5; highest response first", "context_padding_samples": 2 * SAMPLE_RATE}})
+                           "selection": "calibrated reference window in either direction or without a direction; otherwise raw response >= 0.5; descending AI response order", "context_padding_samples": 2 * SAMPLE_RATE}})
     if not candidates:
         document["limitations"].append("No recorded window reached the inspection threshold. This does not establish authenticity."
                                        if windows else "No voice windows were scored; no local synthesis claim can be made.")

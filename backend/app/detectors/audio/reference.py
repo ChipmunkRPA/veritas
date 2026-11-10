@@ -9,27 +9,54 @@ from app.detectors.audio import calibration, combined
 COMBINED_SHA256 = "e7de202c42b80fc81d8ab7faa0ce3538c6af5a4c28a9830e4b9dfbcaa6b63641"
 
 
+def source_integer(value):
+    # JSON/JavaScript does not distinguish 0 from 0.0. Accept exact numeric
+    # integers, reject booleans/fractions and clocks the browser cannot retain.
+    return (
+        type(value) in (int, float)
+        and abs(value) <= 2**53 - 1
+        and math.isfinite(value)
+        and value == int(value)
+    )
+
+
 def combined_tendency(screen):
     """Use only a valid, scoped saved result from this exact calibrated method."""
     p = screen.get("probability_ai")
+    windows = screen.get("checked_windows")
+    window_bound = (
+        isinstance(windows, list)
+        and len(windows) == 1
+        and isinstance(windows[0], dict)
+        and set(windows[0]) == {"start_sample", "end_sample", "start_s", "end_s"}
+        and source_integer(windows[0].get("start_sample"))
+        and windows[0]["start_sample"] == 0
+        and source_integer(windows[0].get("end_sample"))
+        and windows[0]["end_sample"] == 64000
+        and type(windows[0].get("start_s")) in (int, float)
+        and windows[0]["start_s"] == 0
+        and type(windows[0].get("end_s")) in (int, float)
+        and windows[0]["end_s"] == 4
+    )
     ranges = screen.get("checked_source_ranges")
     bound = (
         isinstance(ranges, list)
         and len(ranges) == 1
         and isinstance(ranges[0], dict)
-        and ranges[0].get("start_sample") == 0
-        and ranges[0].get("end_sample") == 64000
+        and source_integer(ranges[0].get("start_sample"))
+        and ranges[0]["start_sample"] == 0
+        and source_integer(ranges[0].get("end_sample"))
+        and ranges[0]["end_sample"] == 64000
         and ranges[0].get("time_base") == "1/16000"
-        and type(ranges[0].get("source_start_pts")) is int
-        and type(ranges[0].get("source_end_pts")) is int
+        and source_integer(ranges[0].get("source_start_pts"))
+        and source_integer(ranges[0].get("source_end_pts"))
         and ranges[0]["source_end_pts"] - ranges[0]["source_start_pts"] == 64000
     )
     valid = (
         screen.get("calibration_sha256") == COMBINED_SHA256
         and screen.get("status") == "ok"
         and screen.get("scope_supported") is True
-        and screen.get("checked_windows")
-        == [{"start_sample": 0, "end_sample": 64000, "start_s": 0.0, "end_s": 4.0}]
+        and window_bound
         and bound
         and isinstance(p, (int, float))
         and not isinstance(p, bool)

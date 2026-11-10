@@ -163,7 +163,7 @@ def test_packet_clips_equal_the_complete_scored_samples_and_context(audio_fixtur
 def test_current_audio_requires_source_bound_acoustics_but_legacy_remains_readable(audio_fixture):
     db, store, analysis, result, pcm, _ = audio_fixture
     doc = build_packet_set(db, analysis, store, result)
-    assert doc['version']=='audio-evidence-3'
+    assert doc['version']=='audio-evidence-4'
     assert doc['acoustic_context']['source']['pcm_sha256']==doc['source']['pcm_sha256']
     assert doc['acoustic_context']['summary']['measured_samples']==len(pcm)
     missing = deepcopy(doc)

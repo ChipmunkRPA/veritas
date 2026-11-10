@@ -94,6 +94,10 @@ def test_public_package_matches_frozen_evidence_and_authenticates_only_with_pin(
         assert bundle['analysis']['original_result_sha256'] == canonical_hash(frozen.result)
         assert bundle['result']['sha256'] != bundle['analysis']['original_result_sha256']
         assert bundle['custody']['complete_event_chain_included'] is False
+        assert bundle['verification_scope'] == {'type': 'document-integrity-only', 'inference_reproduced': False,
+                                                'confidence_recalculated': False, 'calibration_parameters_included': False}
+        assert b'not included' in archive.read('README.txt')
+        assert b'independently recalculate' in archive.read('reproduce.md')
         assert len(bundle['reports']) == 1 and bundle['reports'][0]['sha256'] == report.sha256
         assert all(not n.startswith('source/') for n in archive.namelist())
         assert all('/img.' not in n and '/loc.' not in n for n in archive.namelist())
@@ -174,6 +178,51 @@ def test_public_projection_preserves_source_quotes_but_omits_internal_registry()
     assert projected['findings'][0]['statement'] == result['findings'][0]['statement']
     assert 'Mesorch' not in json.dumps(projected['checks']) and 'manifest' not in projected
     assert projected['original_result_sha256'] == canonical_hash(result)
+
+
+@pytest.mark.parametrize('field', ['inference_reproduced', 'confidence_recalculated', 'calibration_parameters_included'])
+def test_public_package_refuses_resigned_calibration_or_inference_claims(public_fixture, tmp_path, field):
+    built = build(public_fixture)
+    key = public_fixture[2]
+
+    def mutate(files):
+        bundle = json.loads(files['bundle.json'])
+        bundle['verification_scope'][field] = True
+        files['bundle.json'] = canonical_json(bundle)
+
+    altered = rewrite(built.path, tmp_path / 'overclaimed.zip', mutate, key)
+    verified = verify.verify_package(altered, public_key_pem=key.public_pem())
+    assert verified.outcome == 'not_verified'
+    assert any('recalculation' in check.detail for check in verified.checks)
+
+
+def test_historical_public_layout_without_optional_scope_block_still_verifies(public_fixture, tmp_path):
+    built = build(public_fixture)
+    key = public_fixture[2]
+
+    def mutate(files):
+        bundle = json.loads(files['bundle.json'])
+        bundle.pop('verification_scope')
+        files['bundle.json'] = canonical_json(bundle)
+
+    historical_layout = rewrite(built.path, tmp_path / 'compatible.zip', mutate, key)
+    assert verify.verify_package(historical_layout, public_key_pem=key.public_pem()).ok
+
+
+def test_combined_reference_projection_omits_learned_arrays_and_internal_names():
+    from app.detectors.audio.reference import COMBINED_SHA256
+
+    source = {'kind': 'audio', 'decision': {'code': 'ai_supported', 'probability_ai_calibrated': .55},
+              'signals': [{'id': 'aud.combined_speech_v1:global', 'status': 'ok', 'scope': 'global',
+                           'category': 'model', 'family': 'voice', 'name': 'Combined speech inspection',
+                           'calibrated_probability': .55, 'calibration_ref': COMBINED_SHA256,
+                           'details': {'coefficients': [1.,2.], 'wavlm': 'internal representation'},
+                           'model_revisions': {'microsoft.wavlm_base_plus': 'a'*40}}]}
+    projected = public_result(source)
+    assert projected['checks'][0]['calibrated_probability'] == .55
+    assert projected['original_result_sha256'] == canonical_hash(source)
+    assert all(word not in json.dumps(projected).lower() for word in ('wavlm', 'microsoft', 'coefficients', 'model_revisions'))
+    assert 'not independently recalculated' in projected['note']
 
 
 def test_existing_package_rows_default_to_legacy_format():

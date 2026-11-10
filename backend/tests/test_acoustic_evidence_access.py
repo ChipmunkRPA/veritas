@@ -14,7 +14,7 @@ def test_acoustic_charts_and_intervals_are_public_only_with_their_parent_case(ev
         _, evidence = _add_audio(db, f.store, "quiet-acoustics", "visible-case", 0)
         db.commit()
     acoustic = evidence["acoustic_context"]
-    assert evidence["version"] == "audio-evidence-3"
+    assert evidence["version"] == "audio-evidence-4"
     assert acoustic["events"][0]["category"] == "near_silence"
     assert acoustic["events"][0]["interval"] == {"start_sample": 0, "end_sample": 64000}
     collection = f.client.get("/api/v2/analyses/quiet-acoustics/evidence-packets", headers=f.viewer)

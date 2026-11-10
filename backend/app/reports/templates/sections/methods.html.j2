@@ -31,7 +31,7 @@
 {% elif m.headline_rule.note %}
 <p class="caption">{{ m.headline_rule.note }}</p>
 {% endif %}
-<h3 class="eyebrow">Strength words</h3>
+{% if m.strengths %}<h3 class="eyebrow">Strength words</h3>
 <table class="grid">
 <thead><tr><th>Word</th><th>Rule</th></tr></thead>
 <tbody>
@@ -41,6 +41,7 @@
 </tbody>
 </table>
 {% if m.strengths_note %}<p class="caption">{{ m.strengths_note }}</p>{% endif %}
+{% endif %}
 <h3 class="eyebrow">Validation</h3>
 <p class="envelope">{{ m.envelope }}</p>
 <dl class="facts">
@@ -68,6 +69,6 @@
 </tbody>
 </table>
 {% else %}
-<p class="muted">The reproducibility manifest names no detectors.</p>
+<p class="muted">{{ m.get('validation_note') or 'The reproducibility manifest names no detectors.' }}</p>
 {% endif %}
 </section>

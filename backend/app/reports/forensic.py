@@ -1089,6 +1089,19 @@ def historical_calibration(fuser: dict[str, Any] | None, decision: dict[str, Any
 
 def estimate_section(snapshot: ReportSnapshot, decision: dict[str, Any]) -> dict[str, Any]:
     result, kind = snapshot.result, snapshot.analysis.kind
+    from app.detectors.audio.reference import COMBINED_SHA256
+
+    if kind == "audio" and decision.get("fuser_sha256") == COMBINED_SHA256:
+        from app.detectors.audio.combined import NOTE
+        from app.engine.customer_assessment import customer_assessment
+
+        assessment = customer_assessment(result)
+        confidence = assessment.get("confidence_pct")
+        return {"none": None, "speech_reference": True, "title": "Speech reference estimate",
+                "headline": assessment["headline"],
+                "reference_confidence": f"{confidence:g}%" if confidence is not None else "Not established",
+                "meaning": assessment["meaning"], "statement": NOTE,
+                "calibration_commitment": COMBINED_SHA256}
     signals = list(result.get("signals") or [])
     check = integrity(decision)
     fuser = _fuser(result)
@@ -2038,9 +2051,48 @@ def admission_basis(ref: dict[str, Any], card: dict[str, Any] | None) -> tuple[s
     return NOT_RECORDED, None
 
 
+def combined_speech_methods(snapshot: ReportSnapshot) -> dict[str, Any]:
+    """Describe this separately calibrated speech path, without legacy fusion claims."""
+    from app.detectors.audio.combined import NOTE
+    from app.detectors.audio.reference import COMBINED_SHA256, combined_tendency
+
+    result = snapshot.result
+    saved = [s for s in result.get("signals", []) if s.get("status") == "ok"
+             and s.get("calibration_ref") == COMBINED_SHA256 and s.get("family") == "voice"]
+    checked = len(saved) == 1 and combined_tendency((saved[0].get("details") or {}).get("audio_screening") or {})[0] is not None
+    return {
+        "stages": ["Preserve the original file and its checksum.",
+                   "Decode the source to 16 kHz mono with its original timestamp mapping.",
+                   "Require one complete, continuous four-second window with sufficient speech; reject unsupported scope.",
+                   "Combine two fixed speech cues using the separately fitted score combination and global calibration.",
+                   "Save the selected estimate, exact source samples, listening copies and waveform together."],
+        "method": [_row("Scope", "One complete four-second speech window is recorded." if checked else "No usable complete speech window is recorded; no directional speech conclusion is supported."),
+                   _row("Combination", "Two fixed speech cues and one separately frozen global calibration. The current method does not average confidence over longer recordings or background sounds."),
+                   _row("Reference population", "Balanced AI/original English speech with controlled genuine backgrounds. This reference balance is not an estimate of how common AI files are among customer uploads."),
+                   _row("Calibration", "A separate final Platt mapping converts the combined score to a reference estimate. Its private parameters are bound by hash and are not included in the public report.")],
+        "formula": None, "speech_reference": True,
+        "headline_rule": {"sentences": ["The recorded reference estimate supports a relative AI or original tendency only within the checked speech window. A tied, skipped or unsupported check does not establish original content.",
+                                           "Directional confidence describes the selected side of the balanced reference estimate; it is not a measured accuracy rate or a probability that this particular file is fake."],
+                          "rates": [], "scope": None, "note": "No public accuracy threshold, exact edit boundary or per-file confidence interval is claimed."},
+        "strengths": [], "strengths_note": None,
+        "envelope": NOTE, "within": False,
+        "slice": [_row("Source coverage", "0–4 seconds, samples [0, 64000), with the original source clock retained." if checked else "Not established for this result."),
+                  _row("Background authenticity", "Not assessed by the speech estimate. Acoustic measurements and sound categories are context.")],
+        "factors": [_row("Error and transfer", "Strong noise, overlapping voices, unfamiliar generators and recording conditions can cause wrong or inconclusive results."),
+                    _row("Verification scope", "Report and package integrity checks do not rerun inference or independently recalculate the private calibration."),
+                    _row("Consequential use", "Automated screening does not establish authorship or court suitability. A private expert investigation requires a separate engagement.")],
+        "validation": [],
+        "validation_note": "The attached calibration descriptor records the method reference and its scope. It does not establish a population accuracy rate for this file.",
+    }
+
+
 def methods(snapshot: ReportSnapshot, decision: dict[str, Any]) -> dict[str, Any]:
     """RP-04 and UX §6.3 R9 (methods.ts): envelope, slice metrics, reliability factors, per-detector validation, method rows."""
     result, kind = snapshot.result, snapshot.analysis.kind
+    from app.detectors.audio.reference import COMBINED_SHA256
+
+    if kind == "audio" and decision.get("fuser_sha256") == COMBINED_SHA256:
+        return combined_speech_methods(snapshot)
     profile = result.get("condition_profile")
     if not profile:
         envelope = "No condition profile is recorded for this analysis, so no validation slice applies to it."

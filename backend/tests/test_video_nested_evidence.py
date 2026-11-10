@@ -204,7 +204,7 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.image_eligibility'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_response_binding','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.image_eligibility'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

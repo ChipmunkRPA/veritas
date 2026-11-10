@@ -72,7 +72,7 @@ class CalibrationReference:
     DETECTOR_ID = DETECTOR_ID
     SLICE_ID = "audio/combined-speech-v1"
     BENCH_VERSION = "audio-v84-held-role-confirmation"
-    METHOD = "monotone-logistic-and-platt"
+    METHOD = "platt"  # The separate final logistic calibration; combination is the upstream score model.
     EXTRA_CAVEAT = "The combined estimate has limited four-second English reference support; it is not a whole-recording authenticity guarantee."
 
     @property

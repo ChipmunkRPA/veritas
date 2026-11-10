@@ -617,6 +617,16 @@ def voice_signal_id(entries: Mapping[str, Mapping[str, Any]]) -> str:
     return common.signal_id(sole["detector_id"], sole["aggregate"]) if sole is not None else VOICE_SIGNAL_ID
 
 
+def select_speech_signals(ctx: StageContext, signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Choose by configured method and input scope, never by the returned score."""
+    from app.core.config import settings
+
+    samples = (ctx.outputs.get("decode") or {}).get("audio", {}).get("samples")
+    if settings.audio_detector_mode == "candidate" and settings.audio_combined_enabled and samples == 64000:
+        return [s for s in signals if s.get("family") != "voice" or s["detector_id"] == "aud.combined_speech_v1"]
+    return [s for s in signals if s["detector_id"] != "aud.combined_speech_v1"]
+
+
 def fuse(ctx: StageContext) -> dict[str, Any]:
     """Legacy fuser → uncalibrated fallback Decision (§4.4) plus the v1 video blocks. With a compatible fuser artefact the
     calibrated decision replaces the fallback decision (M-2); the per-frame view stays the legacy one until V-8."""
@@ -639,6 +649,7 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
         signals.append(c2pa_signal)
     signals += track_signals(ctx, len(signals) + 1)
     signals += synthesis_signals(ctx, len(signals) + 1)
+    signals = select_speech_signals(ctx, signals)
     attach_temporal(ctx, signals)
     informative = any(s["ai_probability"] is not None for s in legacy["signals"])
     decision = common.fallback_decision(legacy["verdict"], informative=informative, subject="video")
@@ -940,5 +951,5 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling["video_audio_mapping_sha256"] = canonical_hash(rendered["audio_mapping"])
     from app.evidence.video_audio import published_record
 
-    result.manifest.sampling["video_audio_evidence"] = published_record(ctx)
+    result.manifest.sampling["video_audio_evidence"] = published_record(ctx, result.model_dump(mode="json")["signals"])
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=SIGNAL_STAGES)

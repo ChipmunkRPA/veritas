@@ -2,6 +2,7 @@
  *  prints comes from a fixed template filled with values from the analysis (UX §7.3 rule 11). */
 import type { AnalysisDetail, Finding, Signoff } from '../../lib/api/queries'
 import { halfUp } from '../../lib/format'
+import { knownSpeechReference } from './speechReference'
 import { contextWords } from '../../lib/recordWords'
 import { ALONE_OTHER_WAY, CAPTURE_HEADLINE, CAPTURE_MEANS, CAPTURE_NOT, CAPTURE_STEP, CAPTURE_STEP_AGAINST, DECLARATION_HEADLINE, STEP_OF_CAPTURE, STEP_OF_CAPTURE_SHORT, STEP_OF_DECLARATION, aloneInconclusive, aloneOtherWay, aloneNumber, markerGuidance, markerHeadline, markerKindOf, markerOf, ofRecord, outsideValidated, recordAlone, recordOf, recordSetNumber, statisticalWithheld, type MarkerKind } from './record'
 import { AGREEMENT_NOT_WRITTEN, LEGACY_LITTLE, LN2, RUN_AGAIN, VOICE_STEP, direction, entered, littleOf, measuredFromNeutral, outsideWhy, type OutsideEstimate } from './vocabulary'
@@ -724,7 +725,7 @@ function baseGuidance(kind: string, d: Decision, basis: Basis, rateLine: string,
     // N-19m (D3-01): what it does not mean is said of the record, not of detectors; the line on error rates stays
     return {
       means: [`${CAPTURE_MEANS} ${statisticalSentence(d, profile)}`],
-      doesNotMean: [CAPTURE_NOT, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
+      doesNotMean: [CAPTURE_NOT, ...(kind === 'audio' && !knownSpeechReference(d.fuser_sha256) ? [AUDIO_MISS] : []), rateLine],
     }
   }
   switch (CODE_BAND[d.code as Exclude<DecisionCode, 'not_assessable'>]) {
@@ -750,12 +751,12 @@ function baseGuidance(kind: string, d: Decision, basis: Basis, rateLine: string,
     case 'likely_authentic':
       return {
         means: ['The combined evidence does not show significant indications of AI generation or manipulation.'],
-        doesNotMean: [`It does not confirm the ${one} is authentic or unedited.`, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
+        doesNotMean: [`It does not confirm the ${one} is authentic or unedited.`, ...(kind === 'audio' && !knownSpeechReference(d.fuser_sha256) ? [AUDIO_MISS] : []), rateLine],
       }
     default:
       return {
         means: ['The combined evidence does not indicate AI generation or manipulation.'],
-        doesNotMean: [`It does not confirm the ${one} is authentic or unedited. Detectors miss some AI content.`, ...(kind === 'audio' && d.fuser_sha256 !== '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf' ? [AUDIO_MISS] : []), rateLine],
+        doesNotMean: [`It does not confirm the ${one} is authentic or unedited. Detectors miss some AI content.`, ...(kind === 'audio' && !knownSpeechReference(d.fuser_sha256) ? [AUDIO_MISS] : []), rateLine],
       }
   }
 }

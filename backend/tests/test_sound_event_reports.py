@@ -26,6 +26,7 @@ def sound_report(audio_fixture):
     full = deepcopy(s.result)
     full['input']['sha256'] = analysis.sha256
     full['manifest']['sampling'] = deepcopy(result['manifest']['sampling'])
+    full['signals'] = deepcopy(result['signals'])
     document.update(analysis_id=s.analysis.id, revision=s.analysis.revision, original_result_hash=canonical_hash(full))
     document['sha256'] = service.packet_hash(document)
     s = s.model_copy(update={'result': full, 'evidence': document,

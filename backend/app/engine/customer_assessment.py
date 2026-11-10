@@ -217,10 +217,13 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
 
     if result.get("kind") == "audio" and decision.get("fuser_sha256") == COMBINED_SHA256:
         primary = next((s for s in result.get("signals") or [] if s.get("status") == "ok"
+                        and s.get("scope") == "global" and s.get("modality") == "audio"
                         and s.get("calibration_ref") == COMBINED_SHA256), {})
         screen = (primary.get("details") or {}).get("audio_screening") or {}
         p, direction = combined_tendency(screen)
-        if decision.get("code") != {"ai": "ai_supported", "original": "no_ai_indicators"}.get(direction):
+        recorded = _probability(decision.get("probability_ai_calibrated"))
+        if (decision.get("code") != {"ai": "ai_supported", "original": "no_ai_indicators"}.get(direction)
+                or p is None or recorded is None or abs(p - recorded) > 1e-12):
             direction = "inconclusive"
         return {**answer, "direction": direction,
                 "headline": {"ai": "Leaning towards AI-generated speech", "original": "Leaning towards original speech"}.get(direction, "Inconclusive: no supported combined speech tendency"),

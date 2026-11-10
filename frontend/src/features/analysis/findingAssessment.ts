@@ -1,3 +1,5 @@
+import { COMBINED_SPEECH_REFERENCE, CURRENT_SPEECH_REFERENCE, combinedSpeechTendency } from './speechReference'
+
 /** Mirrored by engine/finding_assessment.py; fixtures verify interpretation and calibration gates. */
 export interface FindingAssessment {
   version: string; finding_id: string | null
@@ -14,6 +16,7 @@ export interface FindingInput {
 }
 interface SignalInput {
   id: string; detector_id?: string | null; detector_version?: string; category?: string; family?: string
+  modality?: string | null
   legacy?: { v1_id?: string | null; direction?: string } | null
   status?: string; scope?: string; observed?: string; calibrated_probability?: number | null
   calibration_ref?: string | null; reliability?: { factor?: number } | null; details?: Record<string, unknown>
@@ -142,17 +145,23 @@ export function findingAssessment(finding: FindingInput, result: FindingContext)
   let calibrated = false
   const audio = signal.details?.audio_screening as Record<string, unknown> | undefined
   if (finding.family === 'A1_voice' && audio && typeof audio === 'object') {
-    const sha = '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf'
-    supported = audio.scope_supported === true && ref === sha && audio.calibration_sha256 === sha
-    direction = audio.decision === 'ai' || audio.decision === 'original' ? audio.decision : null
-    if (direction === 'original' && audio.original_stability_veto !== false) direction = null
-    p = audio.probability_ai
+    if (ref === COMBINED_SPEECH_REFERENCE) {
+      const [estimate, tendency] = combinedSpeechTendency(audio)
+      p = estimate
+      direction = tendency === 'inconclusive' ? null : tendency
+      supported = direction !== null
+    } else {
+      supported = audio.scope_supported === true && ref === CURRENT_SPEECH_REFERENCE && audio.calibration_sha256 === CURRENT_SPEECH_REFERENCE
+      direction = audio.decision === 'ai' || audio.decision === 'original' ? audio.decision : null
+      if (direction === 'original' && audio.original_stability_veto !== false) direction = null
+      p = audio.probability_ai
+    }
     if (!direction || !supported) return { ...base, direction: 'inconclusive', label: LABELS.inconclusive,
       interpretation: 'The saved speech calibration does not support a reliable tendency for this recording.' }
     Object.assign(base, { direction, label: LABELS[direction], interpretation: direction === 'ai'
       ? 'The calibrated speech check leans AI within the assessed recording.' : 'The calibrated speech check leans original within the assessed recording.' })
     calibrated = true
-    if (result.kind === 'audio' && result.decision?.fuser_sha256 === sha) base.included_in_overall = true
+    if (result.kind === 'audio' && result.decision?.fuser_sha256 === ref) base.included_in_overall = true
   } else {
     const subject = `${signal.detector_id}@${signal.detector_version}`
     calibrated = (result.calibration ?? []).some(c => c.subject === subject && ['platt', 'isotonic'].includes(c.method)

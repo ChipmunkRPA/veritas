@@ -9,7 +9,7 @@ import { useMultimediaEvidence, type EvidenceKind, type MultimediaEvidenceSet } 
 const labels = { video: 'Video evidence', audio: 'Audio evidence', document: 'Text and document evidence' }
 export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: MultimediaEvidenceSet; token: string; mediaReady: boolean }) {
   const omitted = 'omitted_candidates' in set ? set.omitted_candidates : set.omitted_windows
-  const video3 = set.schema === 'chipmunk.video-evidence/1' && ['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version)
+  const video3 = set.schema === 'chipmunk.video-evidence/1' && ['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'].includes(set.version)
   const nestedCandidates = video3 && ((set.audio?.packets.length ?? 0) + (set.av?.packets.length ?? 0) + (set.audio?.acoustic_context?.events.length ?? 0)) > 0
   return <div data-testid="multimedia-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
     {set.status !== 'ready' ? <p role="status" className="mt-3 text-small text-text-muted">

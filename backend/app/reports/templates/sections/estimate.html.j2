@@ -1,4 +1,16 @@
 {% set e = v.estimate %}
+{% if e.get('speech_reference') %}
+<section class="chapter-cont" id="section-estimate">
+<h2 class="chapter-title"><span class="n">{{ v.number.estimate }}</span>{{ e.title }}</h2>
+<p class="reader">{{ e.headline }}</p>
+<dl class="facts"><dt>Reference confidence</dt><dd>{{ e.reference_confidence }}</dd></dl>
+<p>{{ e.meaning }}</p>
+<p>{{ e.statement }}</p>
+<h3 class="eyebrow">Calibration reference</h3>
+<p>A separately frozen global Platt mapping calibrates the combined speech score. It does not supply a per-file confidence interval, background-authenticity result or whole-recording guarantee.</p>
+<p class="caption">Reference commitment: <span class="mono">{{ e.calibration_commitment | short_hash }}</span>. The public report and verification package do not contain the private calibration parameters and cannot independently recalculate this estimate.</p>
+</section>
+{% else %}
 <section class="chapter-cont" id="section-estimate">
 {% if e.none %}
 <h2 class="chapter-title"><span class="n">{{ v.number.estimate }}</span>How the result was reached</h2>
@@ -70,4 +82,5 @@
 <p>The saved evaluation does not record how often the combined assessment would wrongly flag an original file or miss an AI-generated file under comparable conditions. The displayed estimate is therefore not a verified accuracy rate for files like this one.</p>
 {% endif %}
 </section>
+{% endif %}
 {% endif %}

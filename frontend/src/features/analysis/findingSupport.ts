@@ -105,7 +105,7 @@ function documentLocation(packet: DocumentEvidencePacket, chars?: number): Locat
 /** Keep nested links aligned with the channels the evidence workspace can actually render. */
 function videoLocations(set: VideoEvidenceSet): (LocatedPacket | null)[] {
   const result = set.packets.map(videoLocation)
-  if (!['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version)) return result
+  if (!['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'].includes(set.version)) return result
   const audio = set.audio, av = set.av
   const audioCoverage = audio?.coverage, avCoverage = av?.coverage
   if (audio && audio.source.sha256 === set.source.sha256 && ['ready', 'not_assessed'].includes(audio.status)

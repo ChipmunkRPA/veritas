@@ -3,6 +3,7 @@ import { STANDARD_SERVICE_POLICY, type StandardServicePolicy } from './standardS
 import { ruleTaken, type Decision } from './answer'
 import { outsideValidated } from './record'
 import { imageAssessmentScope } from './imageAssessmentScope'
+import { COMBINED_SPEECH_NOTE, COMBINED_SPEECH_REFERENCE, CURRENT_SPEECH_REFERENCE, combinedSpeechTendency } from './speechReference'
 
 /** Mirrored by engine/customer_assessment.py; the parity fixtures test both implementations. */
 export interface CustomerAssessment {
@@ -18,6 +19,7 @@ export interface CustomerAssessment {
     probability_ai_pct: number | null; interval_pct: [number, number] | null; interval_label: string | null; scope_label: string }
 }
 type Signal = { id: string; detector_id?: string | null; family?: string | null; modality?: string | null; lane?: string | null
+  calibration_ref?: string | null; scope?: string | null
   hypothesis?: string | null; metrics?: Record<string, unknown> | null; details?: Record<string, unknown> | null
   legacy?: { v1_id?: string | null } | null; status?: string | null; outside_estimate?: unknown; effective_weight?: number | null }
 type Input = FindingContext & {
@@ -91,6 +93,30 @@ function unavailableContributor(result: Input): boolean {
   return rows.some(row => row.signal_id == null || !available.has(row.signal_id))
 }
 
+function videoSoundtrack(result: Input): CustomerAssessment['soundtrack'] {
+  if (result.kind !== 'video' || (result.status != null && result.status !== 'done')) return undefined
+  const signals = [...(result.signals ?? [])].sort((a, b) => Number(a.calibration_ref !== COMBINED_SPEECH_REFERENCE) - Number(b.calibration_ref !== COMBINED_SPEECH_REFERENCE))
+  for (const signal of signals) {
+    if (signal.status !== 'ok' || signal.modality !== 'audio' || signal.scope !== 'global') continue
+    const screen = signal.details?.audio_screening as Record<string, unknown> | undefined
+    if (signal.calibration_ref === COMBINED_SPEECH_REFERENCE) {
+      const [p, direction] = combinedSpeechTendency(screen)
+      return { direction, headline: direction === 'ai' ? 'Leaning towards AI-generated speech' : direction === 'original' ? 'Leaning towards original speech' : 'Inconclusive: no supported combined speech tendency',
+        confidence_pct: direction !== 'inconclusive' && p !== null ? Math.min(99.9, pct(direction === 'ai' ? p : 1 - p)) : null,
+        limitation: `${COMBINED_SPEECH_NOTE} The checked four-second speech window is separate from visual and audio-picture timing results.` }
+    }
+    if (signal.calibration_ref !== CURRENT_SPEECH_REFERENCE || screen?.calibration_sha256 !== CURRENT_SPEECH_REFERENCE) continue
+    const p = screen.scope_supported === true && probability(screen.probability_ai) ? screen.probability_ai : null
+    const direction = p !== null && screen.decision === 'ai' && p >= .6 ? 'ai'
+      : p !== null && screen.decision === 'original' && screen.original_stability_veto === false && p <= .4 + 1e-12 ? 'original' : 'inconclusive'
+    return { direction, headline: direction === 'ai' ? 'Leaning towards AI-generated speech' : direction === 'original' ? 'Leaning towards original speech'
+      : screen.scope_supported !== true ? 'No calibrated speech tendency for this soundtrack duration' : 'No reliable AI or original speech tendency',
+      confidence_pct: direction !== 'inconclusive' && p !== null ? Math.min(99.9, pct(direction === 'ai' ? p : 1 - p)) : null,
+      limitation: 'Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. The speech assessment is separate from the visual and audio-picture timing results.' }
+  }
+  return undefined
+}
+
 /** Prefer the API's shared presentation; old or mismatched servers use the tested local mirror. */
 export function presentedCustomerAssessment(result: Input & { customer_assessment?: unknown }): CustomerAssessment {
   const value = result.customer_assessment
@@ -100,6 +126,11 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
     const text = (x: unknown) => x === null || typeof x === 'string'
     const range = row.interval_pct
     const soundtrack = row.soundtrack as Record<string, unknown> | null | undefined
+    const recordedSpeech = videoSoundtrack(result)
+    const combinedSoundtrack = (result.signals ?? []).some(s => s.calibration_ref === COMBINED_SPEECH_REFERENCE)
+    const mainReference = result.kind === 'audio' && result.decision?.fuser_sha256 === COMBINED_SPEECH_REFERENCE ? customerAssessment(result) : null
+    const mainReferenceValid = !mainReference || (row.direction === mainReference.direction && row.confidence_pct === mainReference.confidence_pct
+      && row.probability_ai_pct === mainReference.probability_ai_pct)
     const component = row.component_estimate as Record<string, unknown> | null | undefined
     const componentValid = component === undefined || (result.kind === 'image' && component !== null && typeof component === 'object'
       && ['ai', 'original'].includes(String(component.direction)) && typeof component.confidence_pct === 'number'
@@ -108,7 +139,7 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
       && (component.interval_pct === null || (Array.isArray(component.interval_pct) && component.interval_pct.length === 2
         && component.interval_pct.every(x => typeof x === 'number' && percent(x)) && component.interval_pct[0] <= component.interval_pct[1])))
     if ((row.service_policy as StandardServicePolicy | undefined)?.version === STANDARD_SERVICE_POLICY.version
-      && row.rule === ASSESSMENT_RULE && componentValid && Array.isArray(row.finding_assessments) && row.finding_assessments.every(isFindingAssessment) && typeof row.applies === 'boolean'
+      && row.rule === ASSESSMENT_RULE && mainReferenceValid && componentValid && Array.isArray(row.finding_assessments) && row.finding_assessments.every(isFindingAssessment) && typeof row.applies === 'boolean'
       && ['ai', 'original', 'inconclusive', 'unavailable', 'record'].includes(String(row.direction))
       && text(row.headline) && text(row.confidence_label) && text(row.interval_label)
       && percent(row.confidence_pct) && percent(row.probability_ai_pct)
@@ -119,7 +150,8 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
         && ['ai', 'original', 'inconclusive'].includes(String(soundtrack.direction))
         && typeof soundtrack.headline === 'string' && typeof soundtrack.limitation === 'string'
         && (soundtrack.direction === 'inconclusive' ? soundtrack.confidence_pct === null
-          : typeof soundtrack.confidence_pct === 'number' && soundtrack.confidence_pct >= 60 && soundtrack.confidence_pct < 100)))
+          : typeof soundtrack.confidence_pct === 'number' && soundtrack.confidence_pct >= (combinedSoundtrack ? 50 : 60) && soundtrack.confidence_pct < 100
+            && (!combinedSoundtrack || (recordedSpeech?.direction === soundtrack.direction && recordedSpeech?.confidence_pct === soundtrack.confidence_pct)))))
       && ['meaning', 'limitation', 'interval_note'].every(key => typeof row[key] === 'string')) return row as unknown as CustomerAssessment
   }
   return customerAssessment(result)
@@ -158,6 +190,21 @@ function baseCustomerAssessment(result: Input): CustomerAssessment {
   if (unavailableContributor(result)) return { ...answer, direction: 'inconclusive',
     headline: 'Inconclusive: contributing checks could not complete',
     meaning: 'A check required by this estimate failed or was unavailable. Review the recorded check coverage.' }
+  if (result.kind === 'audio' && d.fuser_sha256 === COMBINED_SPEECH_REFERENCE) {
+    const primary = (result.signals ?? []).find(s => s.status === 'ok' && s.scope === 'global' && s.modality === 'audio' && s.calibration_ref === COMBINED_SPEECH_REFERENCE)
+    const [p, tendency] = combinedSpeechTendency(primary?.details?.audio_screening)
+    const direction = d.code === (tendency === 'ai' ? 'ai_supported' : tendency === 'original' ? 'no_ai_indicators' : null)
+      && p !== null && probability(d.probability_ai_calibrated) && Math.abs(p - d.probability_ai_calibrated) <= 1e-12 ? tendency : 'inconclusive'
+    return { ...answer, direction,
+      headline: direction === 'ai' ? 'Leaning towards AI-generated speech' : direction === 'original' ? 'Leaning towards original speech' : 'Inconclusive: no supported combined speech tendency',
+      confidence_pct: direction !== 'inconclusive' && p !== null ? Math.min(99.9, pct(direction === 'ai' ? p : 1 - p)) : null,
+      confidence_label: direction !== 'inconclusive' ? 'Reference-calibrated speech estimate' : null,
+      probability_ai_pct: p !== null ? pct(p) : null,
+      meaning: 'The combined reference estimate applies only to the complete checked speech window; it is not the measured chance this upload is authentic or AI-generated.',
+      limitation: COMBINED_SPEECH_NOTE, scope_label: 'Four-second speech assessment',
+      scope_note: 'The source-bound speech window was checked. Background authenticity and other edits were not established.',
+      interval_note: 'No per-file confidence interval has been established for this audio calibration.' }
+  }
   if (result.kind === 'audio' && d.fuser_sha256 === '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf') {
     const p = d.probability_ai_calibrated
     const direction = d.code === 'ai_supported' && probability(p) && p >= .6 ? 'ai'
@@ -244,5 +291,7 @@ function baseCustomerAssessment(result: Input): CustomerAssessment {
 }
 
 export function customerAssessment(result: Input): CustomerAssessment {
-  return imageAssessmentScope(result, baseCustomerAssessment(result))
+  const answer = imageAssessmentScope(result, baseCustomerAssessment(result))
+  const soundtrack = videoSoundtrack(result)
+  return soundtrack ? { ...answer, soundtrack } : answer
 }

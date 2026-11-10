@@ -168,6 +168,10 @@ def test_fuser_selects_one_reference_and_never_exports_private_parameters(monkey
         analysis_id="authored-test",
     )
     fused = audio_screening.fuse(ctx, configuration=cfg)
+    from app.schemas.evidence import CalibrationInfo
+
+    for calibration in fused["calibration"]:
+        assert CalibrationInfo.model_validate(calibration).method == "platt"
     assert all(s["detector_id"] != "aud.pella_v2" for s in fused["signals"])
     assert fused["decision"]["fuser_sha256"] == COMBINED_SHA256
     if case == "valid":

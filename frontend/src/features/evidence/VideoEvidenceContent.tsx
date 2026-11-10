@@ -61,9 +61,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   }
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
+      <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'].includes(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
         {' '}{set.coverage.window_check_count} window check(s) cover {set.coverage.window_frame_indices.length} distinct sampled frames.</p>
-      {['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version) && <p className="mt-2 mb-0">These counts cover visual checks only. Voice and audio/picture timing coverage appear in their separate sections.</p>}
+      {['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'].includes(set.version) && <p className="mt-2 mb-0">These counts cover visual checks only. Voice and audio/picture timing coverage appear in their separate sections.</p>}
       <p className="mt-2 mb-0">These counts may overlap. Decoded frames are not all scored; unscored frames and the gaps between samples have not been cleared.</p>
       {set.coverage.table_truncated && <p className="mt-2 mb-0">The frame table is truncated; this does not represent the entire video.</p>}
       {set.coverage.unmapped_observations > 0 && <p className="mt-2 mb-0">{set.coverage.unmapped_observations} observation(s) could not be mapped reliably and are omitted.</p>}

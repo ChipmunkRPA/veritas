@@ -24,7 +24,7 @@ if TYPE_CHECKING:
     from app.storage.db import Analysis
 
 KINDS = frozenset({"video", "audio", "document"})
-NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"})
+NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7", "video-evidence-8"})
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
@@ -215,6 +215,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             or any(mapping.get(key) != source.get(key) for key in ("pcm_sha256", "samples", "sample_rate", "channels", "timeline_time_base", "timeline"))):
         raise ObjectIntegrityError("Frozen audio no longer matches its analysed samples or source clock")
     source_ranges(mapping, 0, len(pcm))
+    if document.get("version") == "audio-evidence-4":
+        from app.evidence import audio_packets
+
+        frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        record = frozen.get("manifest", {}).get("sampling", {}).get("audio_evidence") or {}
+        audio_packets.verify_responses(document, store=store, result=frozen, record=record, binding=record["input"])
     for packet in document["packets"]:
         for role, span in (("selected_clip", packet["interval"]), ("context_clip", packet["context_interval"])):
             clip = read_wav(assets[packet["artifacts"][role]["sha256"]])

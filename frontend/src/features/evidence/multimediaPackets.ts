@@ -53,9 +53,13 @@ export interface VideoEvidenceSet extends SetBase {
   av?: VideoAVChannel
 }
 export interface SampleInterval { start_sample: number; end_sample: number }
+export interface SpeechResponseReference {
+  kind: 'balanced-reference-ai-estimate'; calibration_sha256: string; reference_prior_ai: number
+  scope: 'complete-4s-speech-window'; direction: 'ai' | 'original' | 'inconclusive'
+}
 export interface AudioEvidencePacket extends PacketBase {
   interval: SampleInterval; context_interval: SampleInterval; start_s: number; end_s: number
-  observations: (EvidenceMeasure & { signal_refs: EvidenceRef[]; unit_ref: string })[]
+  observations: (EvidenceMeasure & { signal_refs: EvidenceRef[]; unit_ref: string; response_reference?: SpeechResponseReference })[]
   anchor: { sample_rate: number; source_timestamp_ranges: (SampleInterval & {
     source_start_pts: number; source_end_pts: number; time_base: string })[] }
 }
@@ -93,7 +97,8 @@ export interface AudioEvidenceSet extends SetBase {
     source_duration_s?: number | null; transform?: string; timeline_time_base?: string;
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
-    selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[] }
+    selection_threshold: number | null; response_semantics?: string;
+    windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[]; response_reference?: SpeechResponseReference })[] }
   overview?: Record<string, EvidenceAsset>
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext

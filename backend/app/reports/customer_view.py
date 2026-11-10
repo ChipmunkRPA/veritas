@@ -93,6 +93,23 @@ def _packet_inference(packet: dict) -> str:
             return "Leaning towards AI-written text in the scored context. This is an inspection clue, not a calibrated probability or proof of authorship for the highlighted words."
         if directions == {False}:
             return "The recorded checks did not flag this scored context as AI-written. Human authorship is not established by a low response."
+    if kind == "audio":
+        from app.evidence.audio_response_binding import reference_claim
+
+        # Called only after source/response verification. Keep this calibrated
+        # value distinct from historical raw inspection responses.
+        references = [m for m in packet.get("measurements") or []
+                      if _number(m.get("value")) is not None and 0 <= m["value"] <= 1
+                      and m.get("response_reference") == reference_claim(m["value"])
+                      and m.get("unit") == "calibrated AI reference estimate"]
+        if len(references) == 1:
+            p = references[0]["value"]
+            if p == 0.5:
+                return "Inconclusive speech tendency in this complete window: the balanced reference estimate has no directional preference. Originality is not established."
+            direction = "AI-generated speech" if p > 0.5 else "original speech"
+            confidence = min(99.9, math.floor(round(max(p, 1-p) * 1000, 8)) / 10)
+            return (f"Leaning towards {direction} with {confidence:g}% reference confidence in this complete window. "
+                    "This is not a per-file accuracy guarantee, a background-authenticity result or an exact edit boundary.")
     if kind == "audio" and "reaches the check's 0.5 inspection threshold" in str(packet.get("interpretation")):
         return "Leaning towards a synthetic-voice pattern in this complete window. This is an uncalibrated inspection clue; it does not establish a replaced voice or an exact edit boundary."
     if kind == "video":
@@ -357,7 +374,7 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
                         "conformal bands for the headline.",
                         "uncertainty bands retained from the saved calculation. The customer assessment preserves evidence scope and the recorded uncertainty safeguards.")
         rule = out["methods"].get("headline_rule") or {}
-        if assessment["applies"]:
+        if assessment["applies"] and not out["methods"].get("speech_reference"):
             if (snapshot.result.get("condition_profile") or {}).get("slice_id") == EMAIL_REFERENCE_SLICE:
                 rule["sentences"] = ["The selected email body can receive an AI-writing tendency only when its calibrated check and recorded uncertainty safeguards support that interpretation.",
                                      "The point estimate controls this wording. The interval reflects uncertainty in the reference fit."]

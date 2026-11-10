@@ -31,11 +31,11 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = "video-evidence-7"
-CREATOR = "video-evidence-packets/7"
+VERSION = "video-evidence-8"
+CREATOR = "video-evidence-packets/8"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
-            "video-evidence-packets/5", "video-evidence-packets/6", CREATOR)
-NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", VERSION})
+            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", CREATOR)
+NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7", VERSION})
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -567,11 +567,15 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
 
         try:
             validate_channel(document["audio"], source_sha256=source_sha256)
+            if document["version"] == "video-evidence-8":
+                from app.evidence.audio_response_binding import validate as validate_responses
+
+                validate_responses(document["audio"], required=True)
             validate_av_channel(document["av"], source)
-            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
+            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7", "video-evidence-8"} and document["audio"]["coverage"] is not None
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")
-            if (document["version"] in {"video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
+            if (document["version"] in {"video-evidence-5", "video-evidence-6", "video-evidence-7", "video-evidence-8"} and document["audio"]["coverage"] is not None
                     and document["audio"]["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2"):
                 raise ValueError("Current video evidence omits continuity measurements")
         except (KeyError, TypeError, ValueError) as error:

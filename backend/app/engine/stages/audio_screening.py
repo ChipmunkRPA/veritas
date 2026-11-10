@@ -45,7 +45,8 @@ def fuse(ctx, *, configuration=None):
     band = {'ai': 'likely_ai', 'original': 'likely_authentic'}.get(direction, 'uncertain')
     contributions = []
     if primary and p is not None:
-        eta = math.log(p) - math.log1p(-p)
+        bounded = max(1e-12, min(1 - 1e-12, p))
+        eta = math.log(bounded) - math.log1p(-bounded)
         primary.update(calibrated_probability=p, calibration_ref=calibration.SHA256,
                        contribution_logit=eta, contribution_pp=100 * (p - .5), effective_weight=1.0,
                        outside_estimate=None, log_lr=eta)
@@ -107,7 +108,7 @@ def fuse(ctx, *, configuration=None):
                     'probability': p, 'note': reason + ' ' + calibration.NOTE}]
     return {'decision': decision, 'signals': signals, 'assessments': assessments,
             'condition_profile': profile, 'caveats': caveats,
-            'calibration': [{'subject': 'audio-local-screening', 'method': getattr(calibration, 'METHOD', 'platt'), 'artefact_sha256': calibration.SHA256,
+            'calibration': [{'subject': 'fuser-combined-speech' if calibration.SHA256 == COMBINED_SHA256 else 'audio-local-screening', 'method': getattr(calibration, 'METHOD', 'platt'), 'artefact_sha256': calibration.SHA256,
                              'bench_version': getattr(calibration, 'BENCH_VERSION', 'audio-v3')}],
             'fusion': {'mode': 'artefact', 'version': calibration.VERSION, 'sha256': calibration.SHA256},
             'v1': {'verdict': verdict, 'signals': [], 'audio': ctx.outputs['probe']['facts'], 'artifacts': [], 'timings': {}},

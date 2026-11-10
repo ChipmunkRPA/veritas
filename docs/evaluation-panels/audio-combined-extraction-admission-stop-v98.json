@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.audio-extraction-before-launch-stop/98",
+  "status": "headroom_wait_expired_before_model_stage",
+  "observations": 90,
+  "duration_s": 900.6540121659636,
+  "minimum_available_ram_bytes": 6057148416,
+  "maximum_available_ram_bytes": 6528679936,
+  "frozen_neural_initial_ram_bytes": 6442450944,
+  "controller_launch_ram_bytes": 6576668672,
+  "controller_reserve_reason": "Separate monitor import/startup room; the frozen neural initial requirement remains6GiB.",
+  "child_started": false,
+  "new_neural_calls": 0,
+  "model_inputs_attempted": 0,
+  "planned_inputs": 36,
+  "defaults_changed": false,
+  "freeze_sha256": "84c3be93fa12fa9395e4405b988904ffaf0559ea2868ffcfa00e8ba85649ed6c",
+  "admission_journal_sha256": "1081e63dcd503e63dbbbffcc4ba7b28a29608f3bd868cb6b2cdf9bd530ca52dd",
+  "controller_source_sha256": "56f69b14c515c476fa5e88c89abab1cadea699c74be039f8433186453118df70",
+  "controller_terminal_sha256": "e70a3720bc59f4ce9852172ef2d26a3c339918b6eb15a1d3cff2360d6fa86fa7",
+  "publication": {
+    "remote_freeze_blob_verified": true,
+    "remote_blob_sha": "1b1dc73a4502c177ff577489b436f7afdf07b038",
+    "publication_commit": "476f1a51fd779d8d4927930957885e24054dd481",
+    "source": "GitHub connector fetch_file main, exact local blob matched before inference"
+  },
+  "scope": "Before-launch resource wait only, not model execution, accuracy, failure of the candidate or permission to change the frozen budgets. No model-stage folder or response output exists. Original stop and all never-attempted inputs are preserved."
+}

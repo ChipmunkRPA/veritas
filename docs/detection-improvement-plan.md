@@ -81,6 +81,17 @@ integration remains unfinished.
 
 ## Progress on 10 November
 
+- Complete-clip construction is running under the frozen native mouth plan.
+  The first three batches pass: 103 ready full clips and five unavailable edits
+  for the short source, with 3,140 actual neural inputs. All ready files pass
+  full decoded RGB/clock/PCM/origin checks. The separate source-to-mask replay
+  is frozen and remains unexecuted at this partial snapshot. Detector scores,
+  alignment quality and held-out accuracy remain open.
+  [Partial construction evidence](native-mouth-clips-v120-progress.md).
+- Lossless native audiovisual assembly passes two authored cases and one complete
+  fitting-source rewrite: all 76 pictures and 43,912 audio samples/timestamps
+  reproduce exactly, with stream offsets preserved and zero neural calls.
+  [Actual codec result and limits](native-av-mux-v119-result.md).
 - The frozen native renderer now executes successfully after the owner's fresh
   RAM check: four renders, 17 actual neural inputs, exact seeded repeat and
   changed output under earlier/zero conditioning. The historical readiness

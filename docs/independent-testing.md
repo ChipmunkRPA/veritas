@@ -13,6 +13,19 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+For exact source/output mask correspondence, the seven authored checks in the
+[native clip replay](native-mouth-clip-review-v121-method.md) need no private
+media, model weights, credentials or network in the project dev environment:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_review_native_mouth_clips_v121.py
+```
+
+They reject wrong mask positions, nonbinary masks, extra changed pixels and
+incorrect pixel-edge transforms. The full real-source audit needs separately
+retained clips/source plans; its passing authored tests are not evidence of
+outside human review, achieved synchronization or detector accuracy.
+
 For native mouth-edit support and counterfactual response arithmetic, the
 [new input bank](native-mouth-inputs-v116-result.md) and
 [renderer contract](native-mouth-renderer-v117-method.md) offer 24 authored

@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.native-mouth-clips-progress/120",
+  "status": "first_three_batches_complete_remaining_generation_running",
+  "completed_batches": 3,
+  "planned_batches": 8,
+  "completed_sources": 18,
+  "planned_sources": 48,
+  "completed_condition_records": 108,
+  "ready_cases": 103,
+  "unavailable_cases": 5,
+  "unavailable_reason": "Five edit conditions for the single short source; original retained.",
+  "completed_batch_neural_inputs": 3140,
+  "batches": [
+    {
+      "batch": 0,
+      "ready_cases": 36,
+      "unavailable_cases": 0,
+      "new_neural_calls": 1108,
+      "result_sha256": "27e790a18d6236d654b18f6b701c3259913ae9c47726cf5a9fb4ee848e033cfd",
+      "profile_sha256": "4b2c821f3a0589d4682f481ba0e120a537b0fa8c77c5b619f47aae64d7528b7d",
+      "duration_s": 171.69309633399826,
+      "sampled_tree_rss_lower_bound_bytes": 1360379904,
+      "minimum_available_ram_bytes": 2122399744
+    },
+    {
+      "batch": 1,
+      "ready_cases": 36,
+      "unavailable_cases": 0,
+      "new_neural_calls": 1108,
+      "result_sha256": "46e246eb558b173fb86c85bf25b3b69f4ba6d92250e423ab0d9ea8653f341977",
+      "profile_sha256": "fa5a3202462a33ac29921c30c84e5acd5b8cec71bf9d6ced6b16a01a91bafba9",
+      "duration_s": 175.9537929999642,
+      "sampled_tree_rss_lower_bound_bytes": 1116012544,
+      "minimum_available_ram_bytes": 2079686656
+    },
+    {
+      "batch": 2,
+      "ready_cases": 31,
+      "unavailable_cases": 5,
+      "new_neural_calls": 924,
+      "result_sha256": "34bf43488a999d10e1be011c41902a85a38dd94bd0d8882dd2dda9f815783954",
+      "profile_sha256": "e57eece4b6fab3dd44de0ed5717c6c5d33d62c0d0681e0cd0f212635fe260139",
+      "duration_s": 145.01096487499308,
+      "sampled_tree_rss_lower_bound_bytes": 1113407488,
+      "minimum_available_ram_bytes": 2093891584
+    }
+  ],
+  "generation_freeze_sha256": "9c78d3bda1a2f1e0661ec687e67732fbb9e24dc34b592a7dcfc6fcdccb6ad0d3",
+  "separate_source_mask_review_executed": false,
+  "defaults_changed": false,
+  "scope": "Immutable partial construction snapshot of three completed batches only. Remaining generation and separate source/mask replay pending. No detector response, achieved synchronization, accuracy or serving confidence claim."
+}

@@ -81,6 +81,14 @@ integration remains unfinished.
 
 ## Progress on 10 November
 
+- Completed the next native mouth-render input bank: all 48 recordings retained,
+  with 1,128 exact RGB/timestamp-bound pictures for 47 planned edits and their
+  before/after context. The short source stays unsupported. Eight decoder-only
+  batches pass; no new model ran. The counterfactual renderer procedure is now
+  frozen in an explicit retained research runtime, with the initial missing-
+  dependency preparation failure preserved. Native rendering, achieved alignment
+  and articulation detection remain unqualified. Neural admission still requires
+  6 GiB available RAM. [Input result and next experiment](native-mouth-inputs-v116-result.md).
 - Completed the fixed native-video selection comparison: 138 clips across 23
   source groups, 9,244 actual neural calls. Raw and calibrated appearance arms
   both flag all 46 constructed swaps, with zero false flags among 92 controls

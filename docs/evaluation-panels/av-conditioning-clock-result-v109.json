@@ -1,0 +1,28 @@
+{
+  "schema": "chipmunk.av-conditioning-clock-result/109",
+  "status": "complete",
+  "sources": 48,
+  "role_counts": {
+    "fusion_fit": 18,
+    "selection": 10,
+    "confirmation": 10,
+    "confidence_cal": 10
+  },
+  "frame_coordinates": 3642,
+  "sample_supported_frames": 3642,
+  "different_from_video_zero_anchor": 3642,
+  "different_from_25hz_index_anchor": 3498,
+  "maximum_abs_25hz_anchor_error_ticks": 44,
+  "clock_anchor_ambiguous_frames": 767,
+  "frames_requiring_zero_tick_slots": 209,
+  "frames_with_full_nominal_convolution_support": 3364,
+  "native20_edit_sources": 47,
+  "native20_edit_frames_with_full_tick_prefix": 940,
+  "native20_edit_frames_with_inside_nominal_convolution": 940,
+  "generator_conditioning_qualified_sources": 0,
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "freeze_sha256": "c9276948a2469729319253cacdca8811f0693686935905c126a066c65e6c8f33",
+  "private_plan_sha256": "559dbd7f391017862901a2bc1b88aa70a1d56cba1f7e1d4af467cb9daa42887b",
+  "scope": "Exact native source-time routing and explicit padding/nominal geometry. No pretrained weight load, feature inference, achieved lip synchronization or detector accuracy. Token indices are temporal routing, not finite local support or proof of synthesis. Actual encoder/generator timing and output remain unqualified."
+}

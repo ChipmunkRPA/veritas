@@ -255,6 +255,17 @@ Ten authored impulse checks also pass the fixed phase allowance. Encoder feature
 timing, generator conditioning and achieved lip synchronization remain pending;
 this source-input result is not an articulation-detector accuracy result.
 
+The subsequent [native conditioning-clock preparation](av-conditioning-clock-v109-result.md)
+now routes all 3,642 picture/sample positions with actual audio/video origins,
+explicit prefix padding and retained clock ambiguity. Applying the older
+normalized 25-Hz index equation directly to this native panel would differ by
+up to 44 speech ticks. All 940 planned edit-frame centers have complete nominal
+convolution support. A separate integer/sample-coordinate review reproduces the
+recorded indices and counts. Installed-source inspection also exposes whole-input
+spectral normalization and unmasked encoder attention, so temporal indices are
+not finite local evidence of synthesis. Actual neural conditioning and achieved
+lip alignment remain unqualified; this does not implement C-MIND.
+
 The [per-view video scalar comparison](video-joint-scalars-v106-result.md)
 also tests the earlier score-pooling weakness on the already public, consumed
 v20 observations. Appearance-only and joint file calibrations each flag 64/80

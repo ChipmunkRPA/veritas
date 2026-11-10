@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.av-sentence-support-result/104",
+  "status": "complete",
+  "sources": 48,
+  "known_sentence_types": 12,
+  "historical_sentence_types": 4,
+  "historical_sentence_sources": 18,
+  "prior_cross_role_sentence_types": 11,
+  "new_cross_role_sentence_types": 0,
+  "historical_sentence_sources_in_reserved_roles": 0,
+  "roles": {
+    "fusion_fit": {
+      "sources": 18,
+      "sentence_types": 4,
+      "native20_edit_eligible": 18
+    },
+    "confidence_cal": {
+      "sources": 10,
+      "sentence_types": 2,
+      "native20_edit_eligible": 9
+    },
+    "selection": {
+      "sources": 10,
+      "sentence_types": 3,
+      "native20_edit_eligible": 10
+    },
+    "confirmation": {
+      "sources": 10,
+      "sentence_types": 3,
+      "native20_edit_eligible": 10
+    }
+  },
+  "native20_edit_eligible": 47,
+  "native20_edit_unavailable": 1,
+  "native_frames_with_missing_or_ambiguous_audio_frame_mappings": 129,
+  "role_changed_sources": 36,
+  "freeze_sha256": "c0ec7a6f11f76c47e84b2afa0eae90b19d8ac4e8c4c52c1d253c825f6992f29a",
+  "private_plan_sha256": "8abcd74217c8afa4d81167c5fd43aee1a95221f4705db337e43eacf7c5d140fa",
+  "duration_s": 0.561057832906954,
+  "maximum_observed_self_rss_bytes": 161202176,
+  "minimum_available_ram_bytes": 5803081728,
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "New metadata study view: sentence/known-actor/ancestry connections and historically observed sentences confined to fitting. No original role change, decoder pass, generated media, resampler parity, phonetic synchronization test, detector accuracy or population confidence. Only 12 known sentence contexts; unknown historical/pretraining links remain unknown."
+}

@@ -189,6 +189,14 @@ snapshot, three groups (18 clips, 2,880 native frames and 54 PNGs) passed both
 construction and the second command-interface review. The complete target is
 90 groups and 540 clips. Actual detector comparisons remain separate.
 
+The [AV sentence/timing preparation](av-sentence-support-v104-result.md) now
+retains all 48 speech sources in a separate connected study view with no known
+sentence overlap across roles. Recorded historical contexts are fitting-only.
+It preserves the 25–27 ms audio lead and exposes 129 picture centers with
+overlapping quantized audio-frame clock support. Native PCM and conditioning
+qualification, mouth generation and articulation-method tests remain pending;
+this metadata step does not implement or validate C-MIND.
+
 The [recorded-context display](document-context-comparison-v100.md) now makes
 the lowest/highest saved responses and exact source inputs visible for a
 selected passage in ordinary evidence, PDF and JSON. Its helper passed a

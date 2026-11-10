@@ -147,8 +147,12 @@ complete punctuation/profile protocol or a new detector accuracy result.
 The [whitespace-only input implementation](text-format-audit-v93-preparation.md)
 has since passed preparation on 288 consumed documents: 1,440 requested views,
 800 distinct effective texts and exact original-character correspondence.
-Detector responses have not yet been compared; no research method is qualified
-by these input checks alone.
+The [fixed-model response comparison](text-format-comparison-v94-result.md) has
+now completed all 800 effective inputs. The paragraph intervention changed
+current highlights in 91/288 documents; horizontal spacing changed none. A
+separate standard-library review reproduced the source-character and aggregate
+arithmetic. This measures controlled formatting sensitivity, not fresh-author
+accuracy, an exact reproduction of the paper or a qualified serving replacement.
 
 [PAWN++ in the Wild, 29 October](https://aclanthology.org/2026.wac-1.25.pdf)
 learns a small head over two frozen language models' token likelihood features

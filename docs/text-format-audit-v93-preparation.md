@@ -1,5 +1,10 @@
 # Formatting stress audit: input preparation completed
 
+The subsequent [fixed-model comparison and separate local review](text-format-comparison-v94-result.md)
+have now completed all 800 effective inputs. This preparation receipt below
+records the earlier non-neural stage; preparation alone did not establish
+detector stability.
+
 All **288 consumed diagnostic documents** from 32 known source/prompt components
 were prepared under the [fixed whitespace-only procedure](text-format-audit-v93-method.md).
 Five views per document give 1,440 requested views. After actual app extraction,
@@ -30,9 +35,8 @@ are not continuous measurements or guaranteed peaks. Twelve authored checks
 and lint passed locally, including changed-word refusal, Unicode correspondence,
 real extraction equivalence and source-provenance preservation.
 
-**No detector response was computed.** The unchanged current passage and
-interval methods still need their separately frozen response comparison, with
-the old heads, maps and research points fixed. Input equivalence after extraction
+**No detector response was computed by preparation.** The subsequent comparison
+kept the old heads, maps and research points fixed. Input equivalence after extraction
 is not detector robustness; a paragraph-sensitive response is not AI evidence
 or a provider watermark. These are reused controlled 160-word documents, not
 fresh authors, natural articles or email accuracy. No model, serving default,

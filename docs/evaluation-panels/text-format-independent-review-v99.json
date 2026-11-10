@@ -1,0 +1,84 @@
+{
+  "schema": "chipmunk.text-format-independent-review-publication/99",
+  "status": "passed",
+  "review": {
+    "schema": "chipmunk.text-format-independent-review/99",
+    "status": "passed",
+    "documents": 288,
+    "known_source_groups": 32,
+    "requested_views": 1440,
+    "method_view_pairs": 5760,
+    "effective_statuses": {
+      "ok": 800
+    },
+    "new_neural_calls": 0,
+    "response_result_sha256": "8d8b1ff7beb1eb82b65a0173f171aac48ebc74d1514aafe8f7047d063dcff13d",
+    "review_freeze_sha256": "62b03eab7083c87c661df539ef11c7832fe2bfdd3b5dd4836e8f391a25d72e01",
+    "profile_sha256": [
+      "9ef479a935b695a32b4dead3f06e5c56b3b8fd73aa8bee39e6334420c972eccb",
+      "9b5faed57adf0efc6bcf9bb9c861fda2cfa4864960a7ccf4737d890413d6e1e5",
+      "40634d33d8a6cb936f2dd10655d6e7efb94a71cca5e2df25ea9a434a46958c0f",
+      "799105a1cf11a26d617684801512728871336fd5665a3fcb051b1ab01f37d3c6",
+      "840c2f7c940c15f4c03f3838ad22f431db10723bd1d272313789661ba0dc7602",
+      "eda3a87ddf261b621b77c3b6e0f3cc2fc66219703858ee73d4c131605d1958bb",
+      "0fd494e557dd1818a85ace3b920d2a56e703fdf3fc813778a47da2e3654c9adb",
+      "7663a07924bd92122e5645e99193335574c03308607133b55200540397d38bb7"
+    ],
+    "journal_sha256": [
+      "f6ecc6a75484a636714c04e2ac006a0b2f1e0a1e8899067eb560b9a0b7685204",
+      "866db2266f08488295be5db53983f1370d139b06176d88947bae02a5a5d8097c",
+      "64ac7793ac46d62e7490036494b929781e1bf967fc7a47cef60289fc93d4c901",
+      "0b99b41d5ff9fabeefb9d63fa85bef59b26e8a03bcf5472130c11b93c15d12c7",
+      "b29b4ecc36690ca206fa98102010c35587b34c3677949ccc73a638c6651d1f64",
+      "0926195f1df8625ecf28c49711abcbcda4fda6879a254be00d9f850046318b36",
+      "07006379d4c10b9a195439eddf730a74e2a6881c667c129f4610bb9db088f66c",
+      "65f4df8560dfc00e6ef974d2da0b473099da7b2d6f07f969946da49bf5676a9f"
+    ],
+    "scope": "Separate local recorded-response/mapping/arithmetic review, not new inference, calibration reproduction, independent source truth or outside human review."
+  },
+  "review_profile": {
+    "schema": "chipmunk.text-format-review-resource-profile/99",
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": [],
+    "terminal_observations": [],
+    "duration_s": 2.1126897919457406,
+    "maximum_sampled_tree_rss_bytes": 113852416,
+    "minimum_available_ram_bytes": 6621888512,
+    "resource_journal_sha256": "cb51ada50e8486e94972c6b288b92d2cd3a85598b72de77a4192fd4bf41765bb",
+    "scope": "Separate non-neural arithmetic review: 900s,1.5GiB sampled tree RSS,3GiB initial RAM/disk,1.5GiB running reserves; samples are not true peaks. Existing neural budgets unchanged. No overwrite or retry."
+  },
+  "review_result_sha256": "52ec185e22b3fa3dd645f0bfcd22ec1ff0a48bcb386da43ab461c0bf15be14f7",
+  "review_profile_sha256": "dad4c0997ac607aa47f6caee5feb310aa4bfae02cefef4efc803657d5e1c5a49",
+  "review_execution_start_sha256": "305533e573911addc9a762e13fad1aaa29181649be6e4eac81c9be68554b40fb",
+  "remote_review_freeze_blob_verified": "e69785f6eaa0f37108371f7dfa12050eb169c7c7",
+  "controller_terminal": {
+    "status": "complete",
+    "completed_batches": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "exit_code": 0,
+    "duration_s": 823.5548832920613
+  },
+  "controller_sha256": "8b3d6d6fd459b979995d907de2143785facc1a7eaa33e4f033182fb129090d9c",
+  "controller_terminal_sha256": "ac4ec94efef6af35cf061f96c63a63ee1ceb045c12f9c0e82441c2886fd578de",
+  "permission_preflight": {
+    "status": "passed",
+    "owned_child_exit_code": 0,
+    "sampled_rss_bytes": 475136,
+    "events": [],
+    "terminal_during_sample": false,
+    "new_neural_calls": 0
+  },
+  "outside_human_reviewers": 0,
+  "serving_defaults_changed": false,
+  "scope": "Aggregate publication of a separate local recorded-response and character-arithmetic review; no raw source text, individual fingerprints, pairings, journals, hidden states or learned weights are included."
+}

@@ -26,7 +26,7 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
 SCHEMA = "chipmunk.document-evidence/1"
-VERSION = "document-evidence-2"
+VERSION = "document-evidence-3"
 CREATOR = "document-evidence-packets/1"
 MAX_PACKETS = 6
 MAX_PAGES_PER_PACKET = 3
@@ -287,7 +287,8 @@ def _pdf_plates(source: bytes, anchors: list[dict], store: ObjectStore | None = 
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
-    if (document.get("schema") != SCHEMA or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
+    if (document.get("schema") != SCHEMA or document.get("version") not in {"document-evidence-1", "document-evidence-2", VERSION}
+            or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or packet_hash(document) != document.get("sha256")):
         raise DocumentPacketIntegrityError("Document evidence does not match its source, result or hash")
@@ -308,6 +309,13 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for window in packet["supporting_windows"]:
             if text_hash(window["text"]) != window["input_sha256"]:
                 raise DocumentPacketIntegrityError("A scored context does not match its actual input")
+        if document["version"] == VERSION or "context_comparison" in packet:
+            from app.evidence.document_context import validate
+
+            try:
+                validate(packet["context_comparison"], focus=packet["focus"], chars=size)
+            except (ValueError, KeyError, TypeError) as error:
+                raise DocumentPacketIntegrityError("A document context comparison has invalid scope or measurements") from error
         for artifact in packet.get("artifacts", {}).values():
             if not _SHA.fullmatch(str(artifact.get("sha256", ""))) or artifact.get("media_type") != "image/png":
                 raise DocumentPacketIntegrityError("Invalid document evidence image")
@@ -466,6 +474,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["limitations"].append("Some local responses lack enough scored tokens or exceed the bounded input-proof record. These omissions are listed in check coverage and are not negative findings.")
     if opposing_total > opposing_shown:
         document["limitations"].append(f"{opposing_total - opposing_shown} recorded opposing local response(s) are outside the bounded displayed passages. Their omission is not agreement with an AI-authorship interpretation.")
+    document = json.loads(canonical_json(document))
+    from app.evidence.document_context import build as compare_contexts
+
+    for packet in document["packets"]:
+        packet["context_comparison"] = compare_contexts(result, text, packet["focus"])
     document = json.loads(canonical_json(document))
     for packet in document["packets"]:
         for window in packet["supporting_windows"]:

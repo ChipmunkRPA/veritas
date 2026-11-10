@@ -94,6 +94,24 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if packet.get('context_comparison') %}
+{% set comparison = packet.context_comparison %}
+<div class="document-context-comparison">
+<h4>How surrounding text affects this check</h4>
+{% if comparison.status == 'recorded' %}
+<p class="caption">{{ comparison.note }} Displayed responses are rounded; JSON retains the recorded values.</p>
+{% for check in comparison.checks %}
+<p><strong>{{ check.signal_ref.display_id or 'Recorded check' }}</strong>: response range {{ '%.3f' | format(check.lowest_response) }}-{{ '%.3f' | format(check.highest_response) }} across {{ check.distinct_inputs }} distinct saved inputs. Spread {{ '%.3f' | format(check.response_spread) }} on this check's response scale. No authorship confidence is assigned to this comparison.</p>
+{% for input in check.inputs %}
+<p class="caption">{{ 'Lowest' if loop.first else 'Highest' }} recorded response {{ '%.3f' | format(input.score) }}; source characters {% for span in input.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>
+{% if not evidence.withheld %}<blockquote>{{ input.text }}</blockquote>{% endif %}
+<p class="caption evidence-hash">Actual input SHA-256 <span class="mono">{{ input.input_sha256 }}</span>.</p>
+{% endfor %}
+{% if check.omitted_inputs %}<p class="caption">{{ check.omitted_inputs }} other saved input(s) are not repeated here; these endpoints show the full recorded response range.</p>{% endif %}
+{% endfor %}
+{% else %}<p class="caption">{{ comparison.reason }} Context dependence could not be assessed.</p>{% endif %}
+</div>
+{% endif %}
 {% if packet.measurements %}<dl class="evidence-measurements">{% for measure in packet.measurements %}<div><dt>{{ measure.label }}</dt><dd>{{ measure.value }}{% if measure.get('unit') %} {{ measure.unit }}{% endif %}</dd></div>{% endfor %}</dl>{% endif %}
 {% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
 {% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}

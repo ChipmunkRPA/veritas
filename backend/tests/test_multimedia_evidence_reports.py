@@ -38,6 +38,8 @@ def evidence_case(request):
     report_result = copy.deepcopy(snapshot.result)
     report_result["input"]["sha256"] = analysis.sha256
     report_result["manifest"]["sampling"] = copy.deepcopy(result["manifest"]["sampling"])
+    if kind == "document":
+        report_result["signals"] = copy.deepcopy(result["signals"])
     frozen = copy.deepcopy(document)
     frozen["analysis_id"] = snapshot.analysis.id
     frozen["revision"] = snapshot.analysis.revision
@@ -211,7 +213,7 @@ def test_source_excerpt_does_not_undergo_house_style_or_html_execution(packet_fa
     binding.update(decode_sha256=store.put_bytes(canonical_json(decoded)).sha256,
                    extracted_text_sha256=text_hash(text), source_map_sha256=canonical_hash(decoded["source_map"]))
     # Build a minimal valid frozen text packet directly to isolate report escaping.
-    doc = {"schema": document_packets.SCHEMA, "status": "ready", "id": "quoted-source-test", "version": document_packets.VERSION,
+    doc = {"schema": document_packets.SCHEMA, "status": "ready", "id": "quoted-source-test", "version": "document-evidence-2",
            "analysis_id": analysis.id, "revision": analysis.revision, "original_result_hash": canonical_hash(result),
            "source": {"sha256": analysis.sha256, "chars": len(text), "offset_unit": "unicode_codepoint",
                       **{k: binding[k] for k in ("decode_sha256", "extracted_text_sha256", "source_map_sha256")}},

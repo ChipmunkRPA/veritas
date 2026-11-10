@@ -1,0 +1,78 @@
+{
+  "schema": "chipmunk.document-context-recorded-model-check/100",
+  "status": "passed",
+  "counts": {
+    "focus_comparisons": 6286,
+    "recorded": 6282,
+    "nonzero_recorded_ranges": 6282,
+    "effective_inputs": 800,
+    "not_assessed": 4
+  },
+  "new_neural_calls": 0,
+  "neural_libraries_imported": false,
+  "source_model_result_sha256": "8d8b1ff7beb1eb82b65a0173f171aac48ebc74d1514aafe8f7047d063dcff13d",
+  "output_sha256": "146a782772740f04b5f5320125eda71cf9206603583b6efdba6b8c11289fc506",
+  "duration_s": 3.558370874961838,
+  "maximum_observed_self_rss_bytes": 153141248,
+  "minimum_observed_available_ram_bytes": 7478493184,
+  "code_sha256": {
+    "backend/scripts/check_document_context_v100.py": "dbd54e1556e7c695facf2660335d9b1f2933bc08c8819e10d5c3ea1eeff82db6",
+    "backend/app/evidence/document_context.py": "3bceb4b17d6a8ffa2353a857597119afab942d5811fa2875c0e6979f7171d76a"
+  },
+  "scope": "All 800 retained effective inputs, source focus geometry and raw current responses. Contexts are reconstructed using the prior reader recipe, not an independent token-input/model execution or fresh accuracy test. Per-input observations are not continuous RSS peaks. Source text and per-input records remain private.",
+  "software_verification": {
+    "backend_tests": 202,
+    "backend_failures": 0,
+    "backend_errors": 0,
+    "backend_skipped": 0,
+    "frontend_tests": 246,
+    "frontend_test_files": 28,
+    "production_build": "passed",
+    "pdfs": [
+      {
+        "name": "context-comparison-full",
+        "pages": 10,
+        "sha256": "86fa91f1918d96c8c196a46cb8f60801e7006a4a84ea2a69b60dba87641c605b",
+        "redacted": false,
+        "authored_scores": true,
+        "new_neural_calls": 0
+      },
+      {
+        "name": "context-comparison-redacted",
+        "pages": 9,
+        "sha256": "a6e2f7e52acb60294f6b010dc7424b6a3026da835060b45f8f038f6f8f7551f7",
+        "redacted": true,
+        "authored_scores": true,
+        "new_neural_calls": 0
+      }
+    ],
+    "browser": {
+      "status": "passed",
+      "authored_fixture": true,
+      "new_neural_calls": 0,
+      "page_errors": 0,
+      "receipts": [
+        {
+          "viewport": {
+            "width": 1366,
+            "height": 1050
+          },
+          "source_highlights": 2,
+          "horizontal_overflow": false,
+          "model_names_hidden": true
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "source_highlights": 2,
+          "horizontal_overflow": false,
+          "model_names_hidden": true
+        }
+      ]
+    },
+    "authored_component_only": true,
+    "outside_human_reviewers": 0
+  }
+}

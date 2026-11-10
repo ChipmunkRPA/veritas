@@ -10,7 +10,7 @@ vi.mock('../../lib/api/queries', () => ({ useModelCards: () => ({ data: [] }) })
 afterEach(cleanup)
 
 describe('evidence finding navigation', () => {
-  it('reveals a referenced finding once in plain view without requiring the evidence ledger', async () => {
+  it('keeps a referenced finding visible once in plain view and scrolls without the evidence ledger', async () => {
     const scroll = vi.fn()
     Element.prototype.scrollIntoView = scroll
     const finding = { id: 'F5', title: 'Compression difference', statement: 'A recompression comparison found an inspection region.',
@@ -25,11 +25,11 @@ describe('evidence finding navigation', () => {
       <KeyFindings analysis={analysis} query={query} signals={[]} exhibits={[]} token="" plain />
       <Link to="#finding-F5">Evidence reference F5</Link>
     </MemoryRouter></QueryClientProvider>)
-    expect(document.getElementById('finding-F5')).toBeNull()
+    expect(screen.getByRole('heading', { name: finding.title })).toBeTruthy()
     fireEvent.click(screen.getByRole('link', { name: 'Evidence reference F5' }))
-    expect(await screen.findByText(finding.statement)).toBeTruthy()
+    expect(await screen.findByRole('heading', { name: finding.title })).toBeTruthy()
     expect(document.querySelectorAll('#finding-F5')).toHaveLength(1)
-    expect(screen.getByRole('button', { name: 'Hide the full list' }).getAttribute('aria-expanded')).toBe('true')
+    expect(screen.queryByRole('button', { name: 'Hide the full list' })).toBeNull()
     expect(scroll).toHaveBeenCalledWith({ block: 'center' })
   })
 })

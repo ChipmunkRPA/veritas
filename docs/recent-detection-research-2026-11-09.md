@@ -183,6 +183,16 @@ Two swap conditions share time support with three non-AI edit controls.
 This supports a controlled comparison; it does not implement C-MIND or LoCC,
 establish exact AI-pixel truth, or supply a new detector accuracy result.
 
+The [recorded-context display](document-context-comparison-v100.md) now makes
+the lowest/highest saved responses and exact source inputs visible for a
+selected passage in ordinary evidence, PDF and JSON. Its helper passed a
+replay on all 800 retained inputs and 6,286 passage locations, with four
+unassessed locations and no new neural calls. This is a qualified software
+display improvement, not a formatting-invariant detector, independent
+authorship confirmation or an adoption of a paper's weights. The key image,
+lip-interaction and speech/background method sections and the audio checkpoint's
+noncommercial terms were rechecked against primary sources during this update.
+
 The existing commercial checkpoint restrictions, customer model-name filtering,
 prepayment and preliminary-report limits continue to apply. No restricted
 weights, raw customer data, outreach, workflow, real payment or GCP deployment

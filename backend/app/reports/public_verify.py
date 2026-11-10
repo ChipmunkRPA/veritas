@@ -19,7 +19,7 @@ SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3'}, 'video': {'video-evidence-1', 'video-evidence-2', 'video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'},
-            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2'}}
+            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2', 'document-evidence-3'}}
 
 
 def _require(condition: bool, detail: str) -> None:
@@ -93,6 +93,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.image_eligibility import validate_inspection_coverage
 
         validate_inspection_coverage(evidence)
+    if analysis['kind'] == 'document' and evidence['version'] == 'document-evidence-3':
+        from app.evidence.document_context import validate as validate_context_comparison
+
+        checks = {check['id'] for check in result.get('checks', [])}
+        for packet in evidence['packets']:
+            validate_context_comparison(packet['context_comparison'], focus=packet['focus'], chars=evidence['source']['chars'])
+            _require(all(row['signal_ref']['id'] in checks for row in packet['context_comparison']['checks']),
+                     'A context comparison refers to an unpublished classifier check')
 
     refs = {}
     parts = [evidence]

@@ -247,7 +247,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             raise ObjectIntegrityError("Frozen sound-category evidence differs from its recorded inputs") from error
 
 
-def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes]) -> None:
+def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
     from app.evidence.document_packets import _pdf_plates, _source_anchors, verify_context_window
 
@@ -267,6 +267,14 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             raise ObjectIntegrityError("A document source anchor differs from its recorded extraction mapping")
         for window in packet["supporting_windows"]:
             verify_context_window(window, text)
+        if document.get("version") == "document-evidence-3" or "context_comparison" in packet:
+            from app.evidence.document_context import build as compare_contexts
+            from app.evidence.document_context import validate as validate_comparison
+
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            validate_comparison(packet["context_comparison"], focus=focus, chars=len(text), text=text)
+            if canonical_hash(packet["context_comparison"]) != canonical_hash(compare_contexts(frozen, text, focus)):
+                raise ObjectIntegrityError("Context comparison differs from the actual published classifier inputs")
         if not any(anchor.get("extraction") == "ocr" for anchor in packet["anchors"]):
             continue
         # Historical frozen sets did not record integer crop bounds. Preserve
@@ -305,7 +313,7 @@ def verify_assets(document: dict[str, Any], store: ObjectStore, *, result: dict 
     elif kind == "audio":
         _verify_audio(document, store, assets, result=result)
     elif kind == "document":
-        _verify_document(document, store, assets)
+        _verify_document(document, store, assets, result=result)
     else:
         raise ObjectIntegrityError("Unsupported frozen evidence modality")
     return assets
@@ -339,7 +347,8 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
     return [text for packet in snapshot.evidence["packets"] for text in
-            [packet["focus"]["text"], packet["context"]["text"], *(w["text"] for w in packet["supporting_windows"])]]
+            [packet["focus"]["text"], packet["context"]["text"], *(w["text"] for w in packet["supporting_windows"]),
+             *(w["text"] for check in (packet.get("context_comparison") or {}).get("checks", []) for w in check["inputs"])]]
 
 
 def _coverage(kind: str, document: dict) -> str:
@@ -453,6 +462,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["images"] = [plate(role, asset, f"Page {asset.get('page', '?')} - {asset.get('role', role)}")
                              for role, asset in sorted(packet["artifacts"].items())]
             focus, context = packet["focus"], packet["context"]
+            if packet.get("context_comparison") is not None:
+                row["context_comparison"] = copy.deepcopy(packet["context_comparison"])
+                if withheld:
+                    for check in row["context_comparison"]["checks"]:
+                        for window in check["inputs"]:
+                            window["text"] = None
             row["focus_range"] = {"start": focus["start"], "end": focus["end"]}
             if not withheld:
                 row["context"] = {"start": context["start"], "end": context["end"],

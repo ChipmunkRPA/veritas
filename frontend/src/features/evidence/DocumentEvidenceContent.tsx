@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Button } from '../../components/ui'
 import { EvidenceLimits, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import DocumentInspectionMap, { passageLocation, RecordedPassage, windowSupportsInspection } from './DocumentInspectionMap'
+import DocumentContextComparison from './DocumentContextComparison'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow } from './multimediaPackets'
 
 function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; index: number }) {
@@ -126,6 +127,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           <h4 className="m-0 text-small font-medium">What each check actually read</h4>
           {packet.supporting_windows.map((window, index) => <ScoredContext key={`${window.signal_ref.id}:${index}`} window={window} index={index} />)}
         </div>
+        <DocumentContextComparison comparison={packet.context_comparison} focus={packet.focus} />
         <details className="mt-4 text-small text-text-muted"><summary className="cursor-pointer">Source anchors</summary>
           <ul className="pl-4 list-disc">{packet.anchors.map((anchor, index) => <li key={index}>
             {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null ? `Paragraph ${anchor.paragraph_index + 1}`

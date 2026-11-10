@@ -139,6 +139,16 @@ export interface DocumentAnchor {
 export interface DocumentEvidencePacket extends PacketBase {
   focus: TextSpan; context: TextSpan; anchors: DocumentAnchor[]; measurements: EvidenceMeasure[]
   supporting_windows: DocumentEvidenceWindow[]
+  context_comparison?: DocumentContextComparison
+}
+export interface DocumentContextComparison {
+  schema: 'chipmunk.document-context-comparison/1'; status: 'recorded' | 'not_assessed'; evidence_type: 'context'
+  authorship_confidence_pct: null; affects_overall_confidence: false; focus: { start: number; end: number }
+  note: string; reason: string | null; omitted_checks: number
+  checks: { signal_ref: EvidenceRef; score_kind: 'classifier_probability'; distinct_inputs: number
+    lowest_response: number; highest_response: number; response_spread: number; omitted_inputs: number
+    inputs: { spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number
+      token_coverage: Record<string, number> }[] }[]
 }
 export interface DocumentEvidenceWindow {
   signal_ref: EvidenceRef; spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number

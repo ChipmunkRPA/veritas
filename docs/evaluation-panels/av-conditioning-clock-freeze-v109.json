@@ -1,0 +1,76 @@
+{
+  "schema": "chipmunk.av-conditioning-clock-freeze/109",
+  "code_sha256": {
+    "backend/scripts/av_conditioning_clock_v109.py": "bcf96201cbe11c04f69f2d0d5b0468764a845f115c230b5ae654d1e5b860cfa1",
+    "backend/tests/test_av_conditioning_clock_v109.py": "d5e94605c56c0aa8e52302fc014fdd6c289f104a128cae4017e19e12e74f9c5a",
+    "docs/av-conditioning-clock-v109-method.md": "a2c145e47c2609f3606e387ef4ba5414c8b91dbda5b32dddaa83703bfce67bd8",
+    "backend/scripts/musetalk_benchmark_v7.py": "bc856716cce377ef3398afd8c88e64cde5f1f0da8f8bc3fd5818b18ec7837b2e",
+    "backend/scripts/fetch_mouth_generator_v7.py": "377fb0ddfe9915fd575dee9499ed4d292daf40a0ecd0897cddfbe8f5ca34d17f",
+    "backend/scripts/prepare_av_waveforms_v105.py": "d34e07af6e0b8b04068e89df67e6a0ce3178780dcfc7b8a941cd73d984f42312",
+    "backend/scripts/av_sentence_support_v104.py": "44ab82da60407eb8a5748b055ac36880fcc37e008fd1ba7644e73b169000145a",
+    "backend/scripts/review_video_native_inserts_v96.py": "abb41943dc740e3992c0ceaeccbc75f45fc4034022e2842597cf0ec4da7b8948",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "input_sha256": {
+    "backend/data/independent-evaluation/av-waveforms-v105/preparation/waveforms.jsonl": "bcc7dfa91edbda471d1b17636383bb3e6b1293d9b48600d4b04ff1118229b4d3",
+    "backend/data/independent-evaluation/av-waveforms-v105/preparation/result.json": "dba3bf2cfdca6743dfac60cd866eeda0c2a4a34c94c6603da9df324d2651d84c",
+    "backend/data/independent-evaluation/av-waveforms-v105/preparation/profile.json": "267412d428978a3ba5896c59f20bbb2e3a8ee2fd3ceaf90faf58c1940f1a694e",
+    "backend/data/independent-evaluation/av-sentence-support-v104/preparation/plan.json": "8abcd74217c8afa4d81167c5fd43aee1a95221f4705db337e43eacf7c5d140fa",
+    "backend/data/independent-evaluation/av-sentence-support-v104/preparation/result.json": "2aba56a3c344d19e73bf038144a616d092f7b0dd60ca137b6c251d96d0f921e2",
+    "docs/evaluation-panels/mouth-v7-generator-assets.json": "bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc"
+  },
+  "speech_config_records": [
+    {
+      "path": "speech/config.json",
+      "bytes": 1983,
+      "sha256": "ffdccec4f3211f4c63310f2b7098f309fe70f3952cedc5e4d11e43f5b2379b98"
+    },
+    {
+      "path": "speech/preprocessor_config.json",
+      "bytes": 184990,
+      "sha256": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666"
+    }
+  ],
+  "library_source": {
+    "sha256": {
+      "transformers/models/whisper/feature_extraction_whisper.py": "dcce2e7820be059e657a9e12a60e8a55cfd37b1a82ee202ca15fc7d0934374cb",
+      "transformers/models/whisper/modeling_whisper.py": "80a26fcfa0dd31b6c3ccfc46aa79574432f11aa131845f48b49a8aaf5f3647b4",
+      "torch/functional.py": "4a36b10e59119ea1e98d473d38ef9f4fd84082540f68971ed51f168a8c12de1a"
+    },
+    "feature_defaults": {
+      "feature_size": 80,
+      "sampling_rate": 16000,
+      "hop_length": 160,
+      "chunk_length": 30,
+      "n_fft": 400,
+      "padding_value": 0.0,
+      "dither": 0.0,
+      "return_attention_mask": false
+    },
+    "stft_center": true,
+    "stft_pad_mode": "reflect",
+    "convolutions": {
+      "conv1": {
+        "kernel_size": 3,
+        "padding": 1
+      },
+      "conv2": {
+        "kernel_size": 3,
+        "stride": 2,
+        "padding": 1
+      }
+    },
+    "encoder_attention_mask_used": false,
+    "spectral_global_floor_present": true,
+    "scope": "Static installed-source inspection, not measured model dependency or numerical output parity."
+  },
+  "packages": {
+    "transformers": "5.15.1",
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "psutil": "7.2.2"
+  },
+  "sources": 48,
+  "new_neural_calls": 0,
+  "scope": "Exact native source-time routing and explicit padding/nominal geometry. No pretrained weight load, feature inference, achieved lip synchronization or detector accuracy."
+}

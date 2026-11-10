@@ -193,6 +193,16 @@ authorship confirmation or an adoption of a paper's weights. The key image,
 lip-interaction and speech/background method sections and the audio checkpoint's
 noncommercial terms were rechecked against primary sources during this update.
 
+The [layout-consistent method comparison](text-layout-methods-v101-result.md)
+has now completed on those same consumed responses. Normalization alone loses
+useful localization. Keeping the original context and adding both canonical
+checks increases useful mixed locations from45/128 to58/128, while genuine
+flags rise from5/128 to10/128 and false highlighted human area grows. A separate
+standard-library review reproduces all5,760 observations and aggregates. This
+advances a complementary candidate for separate calibration and fresh-data
+testing; short-insert detection and customer-confidence qualification remain
+unfinished. It is not an additional fresh accuracy experiment or serving change.
+
 The existing commercial checkpoint restrictions, customer model-name filtering,
 prepayment and preliminary-report limits continue to apply. No restricted
 weights, raw customer data, outreach, workflow, real payment or GCP deployment

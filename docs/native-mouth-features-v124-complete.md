@@ -32,11 +32,11 @@ routes. No true mask or edit interval chose which pictures were forwarded.
 The five short-source edit conditions remain unavailable, without substituted
 inputs or originality conclusions.
 
-Extraction took249.905seconds summed across the eight guarded workers.
-The largest sampled descendant RSS was948,142,080bytes; the lowest sampled
-available RAM was6,699,909,120bytes. These are observed samples, not guaranteed
-peaks. The900-second/6-GiB neural limits and all initial/running reserves were
-unchanged. Qualification separately used10.719seconds and ten neural inputs.
+Extraction took 249.905 seconds summed across the eight guarded workers.
+The largest sampled descendant RSS was 948,142,080 bytes; the lowest sampled
+available RAM was 6,699,909,120 bytes. These are observed samples, not guaranteed
+peaks. The 900-second/6-GiB neural limits and all initial/running reserves were
+unchanged. Qualification separately used 10.719 seconds and ten neural inputs.
 
 The separate replay checked every native RGB, crop reconstruction, normalized
 image input, feature-array row, shared-pixel cache assignment and eligible

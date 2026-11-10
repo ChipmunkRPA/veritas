@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.native-mouth-head-fit-freeze/125",
+  "code_sha256": {
+    "backend/scripts/fit_native_mouth_heads_v125.py": "22f3e44bc600af07951c52d30e78df145398431aed6dca04465c928c37310382",
+    "backend/tests/test_fit_native_mouth_heads_v125.py": "2768636b41b6cb95cc3227305428f27c96d3d4e570363459749cbac1b5a47f76",
+    "docs/native-mouth-head-fit-v125-method.md": "7f1f855e3b951e67b1f20f01833415375ace0a8b0977af73bc853a926cda7cac"
+  },
+  "complete_feature_audit_sha256": "687fc6ba00445d0a36684c13ee9211197ef0c510a68e7990d65e1b66cce1c411",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "fitting_source_count": 18,
+  "arms": [
+    "visual_only",
+    "concatenation",
+    "interaction"
+  ],
+  "linear_C": 0.1,
+  "scale_floor": 0.05,
+  "max_iterations": 2000,
+  "tolerance": 1e-08,
+  "scope": "Fitting-only genuine reference and three independent raw-margin linear heads. All supported native centres; central-frame known edit labels enter supervised fitting only. No calibration, operating point, selection/confirmation outcome or customer probability."
+}

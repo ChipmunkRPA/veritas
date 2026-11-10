@@ -1,0 +1,51 @@
+{
+  "schema": "chipmunk.av-sentence-support-freeze/104",
+  "code_sha256": {
+    "backend/scripts/av_sentence_support_v104.py": "44ab82da60407eb8a5748b055ac36880fcc37e008fd1ba7644e73b169000145a",
+    "backend/tests/test_av_sentence_support_v104.py": "c0dbd2a0a080c2e791318871a0de0ca94fbfda92c60e4a7a4b462263172eee52",
+    "docs/av-sentence-support-v104-method.md": "e6be33c9c2a5e71186938c3b20bf67b23b7cfaf50fd8338bdf7f5d7fb6fdbc85"
+  },
+  "input_sha256": {
+    "backend/data/independent-evaluation/video-common-sources-v89/plan.json": "c48ffa31a547df984b57f0253c60ae55a612d6081387e25c63ae0af8d40381ff",
+    "backend/data/independent-evaluation/video-native-sources-v92/qualified-plan.json": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+    "backend/data/independent-evaluation/video-native-sources-v92/summary.json": "f89c1b988fa1e9397bf3b5989dd30ae9c2ea8d848a29db181cfde42e49b817b5",
+    "backend/data/independent-evaluation/video-common-acquisition-v91/asset-plan.json": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99"
+  },
+  "history_sha256": {
+    "lipsync-v10/calibration-inputs/manifest.json": "7dd19c67eabc1862c84ca4e5bcce12ab7de98945f92d8c7149c748f1b78f0996",
+    "lipsync-v10/calibration-inputs-v2/manifest.json": "6edcab13fdfbfa5dd270f44b3d80e621698f8d4d7ce0dd88d65fe82a7c1beeef",
+    "lipsync-v10/calibration-plan.json": "7b690d7ef83d2ffa3182749ef6790b4395673e952272bb49405bc744ab5a3cab",
+    "lipsync-v11/training-inputs/manifest.json": "68a4f963cfb4c3ce9baa62cb5f647a87066a59dddac9ba65ef41911cf037ce76",
+    "lipsync-v11/training-plan.json": "b16fc04782677ab719973bf8fe7b47ba8d5ce8c4440efb1df57fc202fef4ce89",
+    "lipsync-v4/development/inputs/manifest.json": "eccc734a18a805f3b73bdeeb0232739b41ecf7cd1fd9339596cad622265efe00",
+    "lipsync-v4/development/inputs-v2/manifest.json": "d652d3d67ff9bc670ed0e7b18eecc0958daf71fcd6a05c55f0dfd2c16b32a0b2",
+    "lipsync-v4/development/plan.json": "059560f57547c6e8621d2e93fcb142bc9bbb76958d210084de4b27c232ca1d26",
+    "lipsync-v6/training-inputs/manifest.json": "c0126feb234f4a4cd673204f8fa3c21b7a9e95fb5f57290dbd4f6af2f4379522",
+    "lipsync-v6/training-plan.json": "b6b7a98bbc148668a3ffcd4377c08568634f849a54cd0b61979c2f99381f8933",
+    "lipsync-v7/development-inputs/manifest.json": "1f8944a1512a926cda1a29a8b421fe58ca28bc239ffdbfd6fe1433920f67e80b",
+    "lipsync-v7/development-plan.json": "f4d5e1af69794b0ccf2251d5ffa87f28a55221e346ab2fe849ab1ea6ef56f390",
+    "lipsync-v7/runtime-package-plan.json": "7fb0fe3c309e4327efb2aae6cd365bac3712c744b54fff73675f4f4e461be2f0",
+    "lipsync-v8/training-inputs/manifest.json": "a707fb41de0cecd89c30195946f77f5a96af11992f77cf3d555faeb3ff1a3ed3",
+    "lipsync-v8/training-plan.json": "5758792737166080c04fbc9fa139d09f9c3a754a875767430c3bc40f2812a5a2",
+    "multimodal/video-manifest.json": "762c0c9774a06fe094ff21ddae054212967bacb3e637f5bfc0759d47c1e2f0b1",
+    "rule80-v1/video-manifest.json": "599a1715c7d1ac5f9c4d43694a712f959d658a3312f364f022daf43c2e28234b",
+    "video-v17-sface/intervals/manifest.json": "cc71debd8d1587089e2e28ca7c6e0775a6fc6a17af9df46a937fed166b9b311e",
+    "video-v17-sface/sources/manifest.json": "d1ea0edb5b1833506d0694b3625afad8061cd8fff82dcd70ac9ba15de379c2a3",
+    "video-v2/av-controls/manifest.json": "8e178406a2b4df843e54ac75801355a174e5ba7c4b298179e8df52e18351e969",
+    "video-v2/av-controls/short-synthetic/manifest.json": "4c0f540068e6053fb5532f95599b8b6cfd2a978ca62f2628792535b405145146",
+    "video-v2/deepaction/manifest.json": "3b5688815c31dab4111e00c33cc3de7f6928ca0576bbf321a52db8bba8a08030",
+    "video-v2/face-swap/manifest.json": "a86cc49c7b0a40815e0e5921fdf1ccb7260f174d6d937d4e6ed2d684223977eb",
+    "video-v2/genbuster/locked/manifest.json": "2780f76362c3a081e30cf6fc0eb63fb26a0168748d350b03d3d611f12f803cd6",
+    "video-v3/av/manifest.json": "55936efe0be93b3fbd80dc3ac824158273ab869c98883b430686483d12f74b40",
+    "video-v3/face-splice/manifest.json": "afc5435b1657ddcfd8b1cf84911bb80f280c4ece610d7af9d1bc390ca1f0350f",
+    "video-v3/face-swap/manifest.json": "b732512832ea90eb36db1c7255c2e6c05a78bf5d4b7f8fb1d78ccf87f32bf8b5",
+    "video-v4/face-sources/manifest.json": "a604addc29bc9efa9b5f88e9d6b6a6fc2355ddede85be26da7c362e4ff547a49",
+    "video-v4/intervals/manifest.json": "88d21ead5044c55722fa70d71da9bc411d90c8a60d6aeee56bdb90b08e43e732",
+    "video-v5/intervals/manifest.json": "82b7b77de9d8dbdd4e29ed72403828bc334643d997180be36fe62fc8b3fac341",
+    "video-v5/sources/manifest.json": "101876f69cf5b2abb4cc2355f45d4b8e8f200371bc543d3592ab5dffb53887f7",
+    "video-v6/intervals/manifest.json": "15758eb29000c9d5e2dab80334caa7190766bd839de85fa4c4ca6d26fdf59e58",
+    "video-v6/sources/manifest.json": "1607a5a935be65443572f8e9e43e4d1436015c6c57b1d0431d61401ea0eeb297"
+  },
+  "new_neural_calls": 0,
+  "scope": "Metadata-only new sentence-connected study roles and rational support. Previous inventories are immutable. No detector results, source truth adjudication, new media or model execution."
+}

@@ -1,0 +1,1974 @@
+{
+  "coverage": {
+    "long": {
+      "human_sentence": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      },
+      "human_whole": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      },
+      "original": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      },
+      "qwen": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 8,
+        "isolated_paragraphs_assessed": 2,
+        "isolated_paragraphs_support": 2,
+        "qualifying_current_paragraphs": 2
+      },
+      "smol2": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      }
+    },
+    "short": {
+      "short": {
+        "eligible_current_but_unassessed": 0,
+        "interior_paragraphs_present": 1,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      }
+    }
+  },
+  "freeze": {
+    "analysis_code_sha256": "e28d9c7751bd1f59d0960a307d41076c34e7ff01519ff68fb52c6e02804d9a7a",
+    "assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "code_sha256": "33cc37315d1f90633b9a6c65de9f217f892bc012de1ec1f777376c4573b36f29",
+    "confirmatory_prior_result_sha256": "95aa4bfccf503ec149357343ca5c467efae64dd1dc023f0fe8ea645b1fa346ad",
+    "exact_short_source_sha256": "445770b02bbc05e83d89db2926ec09ca1e6f78c8243b6ac975eeafc5cfe58e48",
+    "generator_runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "generator_settings": {
+      "qwen": {
+        "max_tokens": 384,
+        "seed": 56174,
+        "temp": 0.4,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 384,
+        "seed": 41873,
+        "temp": 0.72,
+        "top_p": 0.9
+      }
+    },
+    "genre_fit_sha256": "19de984048a8cad711915153c2c3e20720e7c9577c6c8f06a81cd04d1b5257e7",
+    "intake_code_sha256": "f4838e8761b905ae34ddf0e9377e07dc831e551b6d590f56784e77822ac37276",
+    "methods": {
+      "comparison": "Current 3-sentence context and fixed older points. Exact isolated paragraph scoring on the selected plain email body as a research-only projection; app .eml scope remains disabled for the opt-in option.",
+      "metric": "Use exact normalized source hashes and known edit intervals, non-whitespace IoU >=0.30, human-file/source-group flags and paired retained, lost or additional useful selections.",
+      "mime": "Synthetic quoted-printable multipart EML on local disk. App must select its exact text/plain body, preserve archive body Unicode codepoints, mark all selected source as body and exclude alternate HTML and dummy attachment.",
+      "native_points": "Same .5 raw check boundary and one-paragraph selection using first two interior paragraphs that pass current; no refit or change to any overall score.",
+      "scope": "Four authentic same-sender long bodies, two exact human-splice controls each, and one target-only rewrite attempt per source and family. Seven selected shorter original bodies have no fabricated positive, no paragraph review eligibility and a separate raw readout."
+    },
+    "original_comparison_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+    "original_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+    "previous_generator_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+    "prior_comparison_code_sha256": "458540b1f998a6ab85cdb626053d13c7720234dd98d9895694f0c9c6fbcba275",
+    "record_code_sha256": "25f40e3ba74d9cceb157a01657e5e70cb61fcf2259a4c1941b76b75a4e2db180",
+    "recovery_code_sha256": "f493956ac298c58b8d19495066f04366491f685bb6dbfc9d836a3f9d01765eb5",
+    "reference_points": {
+      "raw_review": 0.5,
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "schema": "chipmunk.workplace-mail-freeze/1",
+    "selected_points_hex": {
+      "fiction": "0x1.ccccccccccccdp-1",
+      "pooled": "0x1.feb851eb851ecp-1",
+      "practical": "0x1.b333333333333p-1",
+      "science": "0x1.feb851eb851ecp-1"
+    },
+    "source_groups": 4,
+    "source_sha256": "91f58e11b0f376980f1af2da5e40f7d4a2ec1b85441d634e8d27081337732e1b"
+  },
+  "human_flagged_source_groups": {
+    "long": {
+      "isolated": 0,
+      "paragraph": 0,
+      "pooled": 0,
+      "practical": 0,
+      "raw": 1,
+      "strict": 0
+    },
+    "short": {
+      "pooled": 0,
+      "practical": 0,
+      "raw": 0,
+      "strict": 0
+    }
+  },
+  "outcomes": {
+    "long": {
+      "human_sentence": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 2,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 2,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 2,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 1
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 4,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    },
+    "short": {
+      "short": {
+        "isolated": {
+          "assessed": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 7,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 7,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 7,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 7,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 7,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 7,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    }
+  },
+  "paired_transitions_relative_to_raw": {
+    "long": {
+      "human_sentence": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "original": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "0->0": 2,
+          "1->1": 2
+        },
+        "paragraph": {
+          "0->0": 2,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->0": 2,
+          "1->0": 2
+        },
+        "practical": {
+          "0->0": 2,
+          "1->0": 2
+        },
+        "raw": {
+          "0->0": 2,
+          "1->1": 2
+        },
+        "strict": {
+          "0->0": 2,
+          "1->0": 2
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "0->0": 4
+        },
+        "paragraph": {
+          "0->0": 4
+        },
+        "pooled": {
+          "0->0": 4
+        },
+        "practical": {
+          "0->0": 4
+        },
+        "raw": {
+          "0->0": 4
+        },
+        "strict": {
+          "0->0": 4
+        }
+      }
+    },
+    "short": {
+      "short": {
+        "isolated": {
+          "0->unassessed": 7
+        },
+        "paragraph": {
+          "0->unassessed": 7
+        },
+        "pooled": {
+          "0->0": 7
+        },
+        "practical": {
+          "0->0": 7
+        },
+        "raw": {
+          "0->0": 7
+        },
+        "strict": {
+          "0->0": 7
+        }
+      }
+    }
+  },
+  "positive_groups": {
+    "long": {
+      "any": 4,
+      "both_families": 4
+    }
+  },
+  "preparation": {
+    "case_sha256": "e5933fa3238cca286a257dd28dd49ed77a15929b664ba4af626a913845a63c3f",
+    "freeze_sha256": "e83c360ddbbf11536de0d5c84b954cdcfd604388c99a05c724b8805d5cae4451",
+    "generators": {
+      "qwen": {
+        "dispositions": {
+          "admitted_complete_response": 4
+        },
+        "receipt": {
+          "elapsed_seconds": 11.591,
+          "family": "qwen",
+          "freeze_sha256": "e83c360ddbbf11536de0d5c84b954cdcfd604388c99a05c724b8805d5cae4451",
+          "minimum_available_ram_bytes": 2261598208,
+          "sampled_worker_rss_bytes": 638877696,
+          "status": "complete",
+          "worker": {
+            "responses": 4,
+            "sha256": "6bfe77575d3c8244b1ce12210724204da21c504dd55adca9596f6a2295d31cd5",
+            "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+          }
+        }
+      },
+      "smol2": {
+        "dispositions": {
+          "admitted_complete_response": 3,
+          "longest_bounded_complete_sentence_prefix": 1
+        },
+        "receipt": {
+          "elapsed_seconds": 11.602,
+          "family": "smol2",
+          "freeze_sha256": "e83c360ddbbf11536de0d5c84b954cdcfd604388c99a05c724b8805d5cae4451",
+          "minimum_available_ram_bytes": 2166226944,
+          "sampled_worker_rss_bytes": 958660608,
+          "status": "complete",
+          "worker": {
+            "responses": 4,
+            "sha256": "db72e7eef3b7e6c4c38c671592aff225bfba54ea59de5e11c5c8acf3cd120517",
+            "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+          }
+        }
+      }
+    },
+    "status": "complete"
+  },
+  "publication_readout": {
+    "note": "Short-case paragraph transitions are labeled unassessed instead of zero and have no flag counts. Physical interior paragraph counts are labeled separately from qualifying inputs. Score, eligibility and terminal commitments are unchanged.",
+    "pre_display_adjustment_aggregate_sha256": "bf0d3505bad09f928b80de25f26643dc3d6d20f3d78e920fddd9eeeb92bc34f1"
+  },
+  "schema": "chipmunk.writing-workplace-email-transfer/1",
+  "scope": "Authentic archival workplace bodies in synthetic EML; fixed body-only paragraph projection is research-only. No email serving or confidence change.",
+  "source": {
+    "admitted": [
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/01-smart.pdf",
+            "archive_pdf_sha256": "4cd4f12d1ae2b0fc423f05509b32b6df608b024493ff222689ad460927a78e50",
+            "bbox": [
+              66.905,
+              123.24,
+              519.885,
+              159.618
+            ],
+            "block_index": 1,
+            "block_text_sha256": "a3625291af81e8472187b3cb3c4ed3d054c2592c69289b764f0a5ca3c4d74845",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              3
+            ],
+            "source_text_sha256": "a3625291af81e8472187b3cb3c4ed3d054c2592c69289b764f0a5ca3c4d74845"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/01-smart.pdf",
+            "archive_pdf_sha256": "4cd4f12d1ae2b0fc423f05509b32b6df608b024493ff222689ad460927a78e50",
+            "bbox": [
+              66.905,
+              169.093,
+              538.093,
+              251.54
+            ],
+            "block_index": 2,
+            "block_text_sha256": "21407226930cf8c4c7be16eb2a3c69a9537e6c3f8117d17cda30597f7181dcaf",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              7
+            ],
+            "source_text_sha256": "21407226930cf8c4c7be16eb2a3c69a9537e6c3f8117d17cda30597f7181dcaf"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/01-smart.pdf",
+            "archive_pdf_sha256": "4cd4f12d1ae2b0fc423f05509b32b6df608b024493ff222689ad460927a78e50",
+            "bbox": [
+              66.854,
+              261.24,
+              529.8,
+              321.379
+            ],
+            "block_index": 3,
+            "block_text_sha256": "f5a981a023a7b5aaddaf053d11fa2e4515c4edd1864dfc7778cef14ce2a2eb3f",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              5
+            ],
+            "source_text_sha256": "f5a981a023a7b5aaddaf053d11fa2e4515c4edd1864dfc7778cef14ce2a2eb3f"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/01-smart.pdf",
+            "archive_pdf_sha256": "4cd4f12d1ae2b0fc423f05509b32b6df608b024493ff222689ad460927a78e50",
+            "bbox": [
+              66.821,
+              330.837,
+              536.241,
+              389.77
+            ],
+            "block_index": 4,
+            "block_text_sha256": "ecfe0d09bab529e59bf87b4aa7261af3ab904fb20a35e1af221eb6550f7e4620",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              5
+            ],
+            "source_text_sha256": "ecfe0d09bab529e59bf87b4aa7261af3ab904fb20a35e1af221eb6550f7e4620"
+          }
+        ],
+        "date": "2009-11-02",
+        "group": "workplace-langbart",
+        "paragraph_count": 4,
+        "sentence_donor": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/03-smart-2.pdf",
+          "archive_pdf_sha256": "7eb922e58e67c1cf249390a7005ee0f8b528a74a4e5c742d0bcde58f7ba73d7a",
+          "bbox": [
+            66.175,
+            388.69,
+            535.701,
+            436.584
+          ],
+          "block_index": 6,
+          "block_text_sha256": "8a4ff95092e54263b6d2302d4a3104a7f43cf60eea9c97208b9310ffe228c805",
+          "pdf_page": 1,
+          "relative_codepoints": [
+            15,
+            141
+          ],
+          "source_text_lines": [
+            0,
+            4
+          ],
+          "source_text_sha256": "8a4ff95092e54263b6d2302d4a3104a7f43cf60eea9c97208b9310ffe228c805"
+        },
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/01-smart.pdf",
+          "archive_pdf_sha256": "4cd4f12d1ae2b0fc423f05509b32b6df608b024493ff222689ad460927a78e50",
+          "bbox": [
+            67.104,
+            64.213,
+            251.958,
+            113.54
+          ],
+          "block_index": 0,
+          "block_text_sha256": "f4f5c34d80d7ac058d03b6ae0a217e1f9b2d2b95f79e1325c008d923e31ed6c4",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            8
+          ],
+          "source_text_sha256": "f4f5c34d80d7ac058d03b6ae0a217e1f9b2d2b95f79e1325c008d923e31ed6c4"
+        },
+        "target_paragraph": 1,
+        "target_words": 123,
+        "whole_donors": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/03-smart-2.pdf",
+            "archive_pdf_sha256": "7eb922e58e67c1cf249390a7005ee0f8b528a74a4e5c742d0bcde58f7ba73d7a",
+            "bbox": [
+              66.62,
+              284.77,
+              534.577,
+              355.934
+            ],
+            "block_index": 4,
+            "block_text_sha256": "e294b4f35c46b4a82fe602a9d1e213bf7e0eebbfc18b5e92a699d7e1b2a58bf3",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              6
+            ],
+            "source_text_sha256": "e294b4f35c46b4a82fe602a9d1e213bf7e0eebbfc18b5e92a699d7e1b2a58bf3"
+          }
+        ],
+        "words": 328
+      },
+      {
+        "agency": "State Department",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              223.49,
+              513.926,
+              235.413
+            ],
+            "block_index": 7,
+            "block_text_sha256": "a5852b61d8e4a30c7905c1fccef3b9e5c01dcb7c1159665a91331dda968011e8",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "a5852b61d8e4a30c7905c1fccef3b9e5c01dcb7c1159665a91331dda968011e8"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              269.124,
+              731.689,
+              305.065
+            ],
+            "block_index": 9,
+            "block_text_sha256": "9947c6b9b88cf122e13c3bcc9dbfe1c128e69746677f0e7d341cf4cb2ec0748f",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              3
+            ],
+            "source_text_sha256": "9947c6b9b88cf122e13c3bcc9dbfe1c128e69746677f0e7d341cf4cb2ec0748f"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              338.776,
+              738.061,
+              374.717
+            ],
+            "block_index": 11,
+            "block_text_sha256": "bf202365afb43c04228c655cca3f6a8ae5d876f6b0499df09df8dde09a52270d",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              3
+            ],
+            "source_text_sha256": "bf202365afb43c04228c655cca3f6a8ae5d876f6b0499df09df8dde09a52270d"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              407.628,
+              741.264,
+              431.56
+            ],
+            "block_index": 13,
+            "block_text_sha256": "6f52100db5db3be19adff2883349daea79c381b1e4bd17190b938bf7b0eb6727",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              2
+            ],
+            "source_text_sha256": "6f52100db5db3be19adff2883349daea79c381b1e4bd17190b938bf7b0eb6727"
+          }
+        ],
+        "date": "2010-11-15",
+        "group": "workplace-haralampus",
+        "paragraph_count": 4,
+        "sentence_donor": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+          "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+          "bbox": [
+            48.212,
+            269.124,
+            579.575,
+            281.047
+          ],
+          "block_index": 10,
+          "block_text_sha256": "3b7b78c978020b7702718072508772f0c4baf1becfe013dd33b8ef3747f2d140",
+          "pdf_page": 3,
+          "relative_codepoints": [
+            0,
+            108
+          ],
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "3b7b78c978020b7702718072508772f0c4baf1becfe013dd33b8ef3747f2d140"
+        },
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+          "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+          "bbox": [
+            48.212,
+            200.057,
+            433.064,
+            212.996
+          ],
+          "block_index": 6,
+          "block_text_sha256": "224875eba82d9508556382df666c496bbd47b361d8996ee41615b64cf680838c",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "224875eba82d9508556382df666c496bbd47b361d8996ee41615b64cf680838c"
+        },
+        "target_paragraph": 2,
+        "target_words": 68,
+        "whole_donors": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              313.958,
+              731.689,
+              325.88
+            ],
+            "block_index": 12,
+            "block_text_sha256": "ba3382ecd43adf8c8c9ffa33ad8ed102ec1f1626f8762a16a87025d291acd438",
+            "pdf_page": 3,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "ba3382ecd43adf8c8c9ffa33ad8ed102ec1f1626f8762a16a87025d291acd438"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/05-nara-email-fwd-re-smart-tags.pdf",
+            "archive_pdf_sha256": "a8de9a1fe9ad4fb358db599e7ba8060aa682be7216c36e8c8f192f4dbc37f16c",
+            "bbox": [
+              48.212,
+              359.592,
+              659.635,
+              371.515
+            ],
+            "block_index": 14,
+            "block_text_sha256": "03d3af78f1797c168b7c2767736a93584fb0bf7f640a08a6e467dad57b69efd3",
+            "pdf_page": 3,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "03d3af78f1797c168b7c2767736a93584fb0bf7f640a08a6e467dad57b69efd3"
+          }
+        ],
+        "words": 196
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+            "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+            "bbox": [
+              35.408,
+              465.677,
+              572.503,
+              513.349
+            ],
+            "block_index": 16,
+            "block_text_sha256": "2307c199532e3fc3eac6d7d6dcef8b1861de221c01c31105f33540423be10c23",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              4
+            ],
+            "source_text_sha256": "2307c199532e3fc3eac6d7d6dcef8b1861de221c01c31105f33540423be10c23"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+            "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+            "bbox": [
+              35.408,
+              525.745,
+              563.602,
+              561.403
+            ],
+            "block_index": 17,
+            "block_text_sha256": "918879c65f2786b411b2771f25746cc8b7d8efed76e18da9e6987860de9feca9",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              3
+            ],
+            "source_text_sha256": "918879c65f2786b411b2771f25746cc8b7d8efed76e18da9e6987860de9feca9"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+            "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+            "bbox": [
+              35.408,
+              573.799,
+              568.99,
+              633.484
+            ],
+            "block_index": 18,
+            "block_text_sha256": "13ce151cd9d2b494b0b8c08fcc2331b3e174df88a80c3dc2ef470682399f62ca",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              5
+            ],
+            "source_text_sha256": "13ce151cd9d2b494b0b8c08fcc2331b3e174df88a80c3dc2ef470682399f62ca"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+            "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+            "bbox": [
+              35.408,
+              681.92,
+              571.702,
+              705.565
+            ],
+            "block_index": 20,
+            "block_text_sha256": "3e30fa312461aba3ffecd4e4d0cc1274e22d9e61993562b4c72d2752b4512013",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              2
+            ],
+            "source_text_sha256": "3e30fa312461aba3ffecd4e4d0cc1274e22d9e61993562b4c72d2752b4512013"
+          }
+        ],
+        "date": "2014-02-24",
+        "group": "workplace-sullivan",
+        "paragraph_count": 4,
+        "sentence_donor": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+          "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+          "bbox": [
+            35.408,
+            187.765,
+            558.579,
+            211.41
+          ],
+          "block_index": 6,
+          "block_text_sha256": "9547322b660d3d93cce51d026eb54b4c2875dbc34369ddab7b4aa00fd62978a1",
+          "pdf_page": 2,
+          "relative_codepoints": [
+            87,
+            181
+          ],
+          "source_text_lines": [
+            0,
+            2
+          ],
+          "source_text_sha256": "9547322b660d3d93cce51d026eb54b4c2875dbc34369ddab7b4aa00fd62978a1"
+        },
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+          "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+          "bbox": [
+            35.408,
+            144.124,
+            299.406,
+            158.315
+          ],
+          "block_index": 6,
+          "block_text_sha256": "1fc36ce8783135b63fe559e1faca033c45a056ed5b63d710264b224ed722a601",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "1fc36ce8783135b63fe559e1faca033c45a056ed5b63d710264b224ed722a601"
+        },
+        "target_paragraph": 1,
+        "target_words": 40,
+        "whole_donors": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/17-nara-email-state-capstone-approach.pdf",
+            "archive_pdf_sha256": "62771d1c2616abae21ea4aaefe862d611d86c1ea64445f89f7bed652df5d99eb",
+            "bbox": [
+              35.408,
+              187.765,
+              558.579,
+              211.41
+            ],
+            "block_index": 6,
+            "block_text_sha256": "9547322b660d3d93cce51d026eb54b4c2875dbc34369ddab7b4aa00fd62978a1",
+            "pdf_page": 2,
+            "source_text_lines": [
+              0,
+              2
+            ],
+            "source_text_sha256": "9547322b660d3d93cce51d026eb54b4c2875dbc34369ddab7b4aa00fd62978a1"
+          }
+        ],
+        "words": 212
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+            "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+            "bbox": [
+              33.007,
+              213.202,
+              579.465,
+              411.417
+            ],
+            "block_index": 11,
+            "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              1,
+              2
+            ],
+            "source_text_sha256": "280ff931f855e1ccb8dd104e8f4cff62746f0f9386944f6f11bdf6d90a0a6f2a"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+            "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+            "bbox": [
+              33.007,
+              213.202,
+              579.465,
+              411.417
+            ],
+            "block_index": 11,
+            "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              3,
+              7
+            ],
+            "source_text_sha256": "9c5911fa0741703b0dec69879893d137bef5358a80c2aa792aeb0a4b57bef2be"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+            "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+            "bbox": [
+              33.007,
+              213.202,
+              579.465,
+              411.417
+            ],
+            "block_index": 11,
+            "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              8,
+              11
+            ],
+            "source_text_sha256": "96f82cda586b1c287092d6a85b84b712aa7729ed7ca1780652efe7b8487ce3ad"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+            "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+            "bbox": [
+              33.007,
+              213.202,
+              579.465,
+              411.417
+            ],
+            "block_index": 11,
+            "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              12,
+              14
+            ],
+            "source_text_sha256": "15db443a980b07c8640e4bebb613eb8c9a13cdfdc4eda3bfd0c07ed44ceb7cb5"
+          }
+        ],
+        "date": "2011-07-01",
+        "group": "workplace-wester",
+        "paragraph_count": 4,
+        "sentence_donor": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+          "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+          "bbox": [
+            33.007,
+            213.202,
+            579.465,
+            411.417
+          ],
+          "block_index": 11,
+          "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+          "pdf_page": 1,
+          "relative_codepoints": [
+            296,
+            409
+          ],
+          "source_text_lines": [
+            15,
+            18
+          ],
+          "source_text_sha256": "41bb75439f0fc6b5905977917d623ff5a2ee3fb895720f05198aba4a8cb493e4"
+        },
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+          "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+          "bbox": [
+            33.007,
+            101.0,
+            97.764,
+            109.876
+          ],
+          "block_index": 6,
+          "block_text_sha256": "214e8c3823b3b9c483f8ad904e80400484ec948fa50d1f18a8d8cd5e3a1ff9fd",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "214e8c3823b3b9c483f8ad904e80400484ec948fa50d1f18a8d8cd5e3a1ff9fd"
+        },
+        "target_paragraph": 2,
+        "target_words": 65,
+        "whole_donors": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/09-smart.pdf",
+            "archive_pdf_sha256": "85cfc5b1e95687a902b2a60c6436745ded0c5baeb1d6e77a49dee830abdb7376",
+            "bbox": [
+              33.007,
+              213.202,
+              579.465,
+              411.417
+            ],
+            "block_index": 11,
+            "block_text_sha256": "979bd1ab3ba3215b4e8201422cf0cb901ce317ebe1b228798df937702d965b7c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              15,
+              18
+            ],
+            "source_text_sha256": "41bb75439f0fc6b5905977917d623ff5a2ee3fb895720f05198aba4a8cb493e4"
+          }
+        ],
+        "words": 229
+      }
+    ],
+    "code_sha256": "f4838e8761b905ae34ddf0e9377e07dc831e551b6d590f56784e77822ac37276",
+    "exposure_inventory": [
+      {
+        "matched_sources": 0,
+        "packet": "writing_v3_v4_exposed_contexts",
+        "source_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+        "text_entries": 674
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v5_selected_source_answers",
+        "source_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+        "text_entries": 256
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v7_prepared_exposures",
+        "source_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+        "text_entries": 992
+      },
+      {
+        "matched_sources": 0,
+        "packet": "text_layout_v93_v101",
+        "source_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+        "text_entries": 800
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_prepared_v193_v196",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "manifest.json",
+        "source_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+        "text_entries": 680
+      },
+      {
+        "matched_sources": 0,
+        "packet": "article-confirmation-manifest.json",
+        "source_sha256": "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+        "text_entries": 144
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals-v2.json",
+        "source_sha256": "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-explicit.json",
+        "source_sha256": "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+        "text_entries": 186
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-v2.json",
+        "source_sha256": "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+        "text_entries": 90
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals.json",
+        "source_sha256": "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-explicit.jsonl",
+        "source_sha256": "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+        "text_entries": 55
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-explicit.jsonl",
+        "source_sha256": "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+        "text_entries": 38
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-mlx.jsonl",
+        "source_sha256": "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+        "text_entries": 32
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-mlx.jsonl",
+        "source_sha256": "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+        "text_entries": 13
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_publisher_test",
+        "source_sha256": "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+        "text_entries": 508
+      },
+      {
+        "matched_sources": 0,
+        "packet": "aitdna_span_texts_v2_v4",
+        "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+        "text_entries": 362
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_archive-v205",
+        "source_sha256": "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+        "text_entries": 36
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_direct-v209",
+        "source_sha256": "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "iterater_v203_publisher_train",
+        "source_sha256": "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+        "text_entries": 962
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_v257_v260",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "goce_v249",
+        "source_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+        "text_entries": 4
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_classification_english_archive",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v272_publisher_bodies",
+        "source_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+        "text_entries": 9
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v273_constructed_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v286_licensed_publisher_bodies",
+        "source_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v289_v292_constructed_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "previous_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_controls",
+        "source_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+        "text_entries": 21
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_qwen",
+        "source_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_prefix",
+        "source_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+        "text_entries": 3
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_smol2",
+        "source_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+        "text_entries": 10
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_controls",
+        "source_sha256": "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+        "text_entries": 33
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_rewrites",
+        "source_sha256": "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notices_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notices_positives",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "correspondence_controls",
+        "source_sha256": "36117d37aa219dafb4a6f13959dfbecf3f8d0a02c81eb70f232d249b587768ec",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "correspondence_positives",
+        "source_sha256": "0caca63a72bd00864b1c069ee3776e24b83c0d0e0f3dee4489535888188a0fbc",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "bulletins_controls",
+        "source_sha256": "30d76269e14096222de528a3fd2c11c47928557b983cf706ed7f80c196573e3c",
+        "text_entries": 30
+      },
+      {
+        "matched_sources": 0,
+        "packet": "bulletins_positives",
+        "source_sha256": "f3db42f44c9dc5891d4f345ceac7a3bb7209dc1784b9aae30405778ba86c3a81",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "articles_controls",
+        "source_sha256": "dc4059f7e05a15fe47df3887c70260e669e7b87f2f9290b68f7f2971633ffbfe",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "articles_positives",
+        "source_sha256": "042ecaea92828aace974a844fd3fc0b29cd49850fb36d9e92ac5b88f981886f1",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opinions_and_speeches_controls",
+        "source_sha256": "056a571848a6ba8e6c63b54236da10eb73f49e1062f8dd38e741c0b98b215593",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opinions_and_speeches_positives",
+        "source_sha256": "3c67fe9301a5622637818880d16044a1349209dbf84188351ac8fdbd7c076188",
+        "text_entries": 11
+      }
+    ],
+    "policy": {
+      "author": "A documented NARA or State Department staff message in the official government work archive. Retain substantive body segments that clearly belong to the identified federal-duty sender. Repeated or forwarded full threads, personal correspondence, contact details, missing redactions, attachments and signatures stay outside inputs.",
+      "independence": "A selected sender appears once. Paragraph fingerprints check against known earlier project text and across this panel, including paired edits. Archives contain routine records work within two linked agencies, and pretraining exposure is unknown.",
+      "long": "Four preselected authentic email-body excerpts with exactly four surviving published paragraphs. A few salutation/signature/short or incomplete blocks were omitted. Whitespace and archive soft hyphens are normalized. No correction of the underlying OCR wording. Whole and single-sentence edits use only verified source text from the same employee.",
+      "rights": "U.S. government works under 17 U.S.C. §§ 101 and 105. Reuse is limited to verified employee prose created as part of official duties, excluding other material in these archive packets.",
+      "short": "Separately inspect authentic short body excerpts. Treat absent paragraph-only results as unassessed. No short mixed-authorship prevalence or extrapolation."
+    },
+    "private_controls_sha256": "d8bcccf2088fe2139cdbb87f8fd0461699f9592b9b8225fcc00c8a9c24cb047f",
+    "private_originals_sha256": "628b628d09f52c246613cfae265c14ce93bb52cbff82aa73b10d537133edfbc8",
+    "private_short_sha256": "445770b02bbc05e83d89db2926ec09ca1e6f78c8243b6ac975eeafc5cfe58e48",
+    "publisher_url": "https://www.archives.gov/foia/state-department-emails",
+    "rights_url": "https://www.copyright.gov/title17/92chap1.html",
+    "schema": "chipmunk.workplace-mail-intake/1",
+    "short": [
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/06-nara-email-re-states-smart-system.pdf",
+            "archive_pdf_sha256": "08ccee2586536f7254761c80f0c8b1c0526e4063ec3e1774e4f21ac093a0a280",
+            "bbox": [
+              48.212,
+              186.662,
+              742.684,
+              294.657
+            ],
+            "block_index": 5,
+            "block_text_sha256": "7ac568a28d08f6599f7a0af6918726c71f6c43d7273118622c81bcce75a0e539",
+            "pdf_page": 1,
+            "source_text_lines": [
+              2,
+              4
+            ],
+            "source_text_sha256": "054fe4c5086202d8e5c9e1ec48829869c295cf99c561628980997d5c5895f656"
+          }
+        ],
+        "date": "2010-11-16",
+        "group": "workplace-hawkins",
+        "paragraph_count": 1,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/06-nara-email-re-states-smart-system.pdf",
+          "archive_pdf_sha256": "08ccee2586536f7254761c80f0c8b1c0526e4063ec3e1774e4f21ac093a0a280",
+          "bbox": [
+            35.403,
+            138.065,
+            757.407,
+            173.71
+          ],
+          "block_index": 4,
+          "block_text_sha256": "856528089407e58da136a83f51c5b38eeca897c9d33120a1d7dedd423dcb956e",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            4
+          ],
+          "source_text_sha256": "856528089407e58da136a83f51c5b38eeca897c9d33120a1d7dedd423dcb956e"
+        },
+        "words": 30
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+            "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+            "bbox": [
+              48.223,
+              198.738,
+              564.568,
+              390.868
+            ],
+            "block_index": 5,
+            "block_text_sha256": "c6ff16bf0ee7328eb445242eae3624e8be77334b26f256a93b597d2d45fdf171",
+            "pdf_page": 1,
+            "source_text_lines": [
+              2,
+              4
+            ],
+            "source_text_sha256": "48ffd4cad398545cb75aef790c65e3a402a2f34e886075d219516064e0c29ec7"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+            "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+            "bbox": [
+              48.223,
+              198.738,
+              564.568,
+              390.868
+            ],
+            "block_index": 5,
+            "block_text_sha256": "c6ff16bf0ee7328eb445242eae3624e8be77334b26f256a93b597d2d45fdf171",
+            "pdf_page": 1,
+            "source_text_lines": [
+              5,
+              9
+            ],
+            "source_text_sha256": "675968da659d47229ee9bab8fe8dbeac6ff829dbae2fe743a022c56e0402c6a6"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+            "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+            "bbox": [
+              48.223,
+              198.738,
+              564.568,
+              390.868
+            ],
+            "block_index": 5,
+            "block_text_sha256": "c6ff16bf0ee7328eb445242eae3624e8be77334b26f256a93b597d2d45fdf171",
+            "pdf_page": 1,
+            "source_text_lines": [
+              10,
+              13
+            ],
+            "source_text_sha256": "e73cd9e35cded0d591e4db71259f961721474bdb26b141bc31aadcf2057fc62a"
+          }
+        ],
+        "date": "2012-01-06",
+        "group": "workplace-clavelli",
+        "paragraph_count": 3,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+          "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+          "bbox": [
+            35.408,
+            138.109,
+            577.481,
+            185.781
+          ],
+          "block_index": 4,
+          "block_text_sha256": "edc30d1f9043c922aa028f37bf69f6526d80cc6c57027e5682df151af8941166",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            5
+          ],
+          "source_text_sha256": "edc30d1f9043c922aa028f37bf69f6526d80cc6c57027e5682df151af8941166"
+        },
+        "words": 97
+      },
+      {
+        "agency": "State Department",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+            "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+            "bbox": [
+              48.223,
+              471.044,
+              558.16,
+              519.012
+            ],
+            "block_index": 9,
+            "block_text_sha256": "e30dc6dc1a640bdb05c474b14125961ebd8dfc0aa84855166b49a20e14c17a74",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              4
+            ],
+            "source_text_sha256": "e30dc6dc1a640bdb05c474b14125961ebd8dfc0aa84855166b49a20e14c17a74"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+            "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+            "bbox": [
+              48.223,
+              552.736,
+              553.322,
+              576.677
+            ],
+            "block_index": 11,
+            "block_text_sha256": "b56ee9903c3917d74cf90d225b8f2dd500b386534c4f5b26e3efd423650408c8",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              2
+            ],
+            "source_text_sha256": "b56ee9903c3917d74cf90d225b8f2dd500b386534c4f5b26e3efd423650408c8"
+          }
+        ],
+        "date": "2011-11-17",
+        "group": "workplace-thian",
+        "paragraph_count": 2,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/11-nara-email-re-annual-nara-state-meeting.pdf",
+          "archive_pdf_sha256": "31b5b533ed5bfaedbfe105d74a2841154556a7c03632dd4f6838aa74b790a0ae",
+          "bbox": [
+            48.223,
+            402.968,
+            387.632,
+            414.895
+          ],
+          "block_index": 6,
+          "block_text_sha256": "0184ca525d60ff17a9079a8ea1dcf8e5ca2a5fc1b69d5a217c138f5f38173118",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "0184ca525d60ff17a9079a8ea1dcf8e5ca2a5fc1b69d5a217c138f5f38173118"
+        },
+        "words": 94
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/16-department-of-state-everest-system-of-record.pdf",
+            "archive_pdf_sha256": "e65a0d8f1cf0579d703d419811f584fc8702fdebb5ee8800c00f556094916682",
+            "bbox": [
+              72.0,
+              229.143,
+              542.151,
+              368.481
+            ],
+            "block_index": 2,
+            "block_text_sha256": "6176ff46f2f9522c50244611ce5294c7c0bd27df929bd9c21b4a00a56bdbced2",
+            "pdf_page": 2,
+            "source_text_lines": [
+              2,
+              9
+            ],
+            "source_text_sha256": "db42a0a7d4db7fba14b1572dff4bb2637337083ec03f729611b9051b12a89b60"
+          }
+        ],
+        "date": "2013-06-17",
+        "group": "workplace-chalfant",
+        "paragraph_count": 1,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/16-department-of-state-everest-system-of-record.pdf",
+          "archive_pdf_sha256": "e65a0d8f1cf0579d703d419811f584fc8702fdebb5ee8800c00f556094916682",
+          "bbox": [
+            72.0,
+            147.159,
+            542.496,
+            217.14
+          ],
+          "block_index": 1,
+          "block_text_sha256": "718225749d33ebed46666f1396ccee76483877250273388d9092043c923d2f39",
+          "pdf_page": 2,
+          "source_text_lines": [
+            0,
+            6
+          ],
+          "source_text_sha256": "718225749d33ebed46666f1396ccee76483877250273388d9092043c923d2f39"
+        },
+        "words": 118
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/18-nara-email-state-focus-group.pdf",
+            "archive_pdf_sha256": "0809a3e767d218d31e73edd896485cb87a736c6c474c33294a48271408a6f267",
+            "bbox": [
+              35.408,
+              350.757,
+              431.841,
+              364.947
+            ],
+            "block_index": 13,
+            "block_text_sha256": "9bf4a14e2be382f00715dd2f7f1386466ea064158d833cc932742eb1bab90836",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "9bf4a14e2be382f00715dd2f7f1386466ea064158d833cc932742eb1bab90836"
+          },
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/18-nara-email-state-focus-group.pdf",
+            "archive_pdf_sha256": "0809a3e767d218d31e73edd896485cb87a736c6c474c33294a48271408a6f267",
+            "bbox": [
+              35.408,
+              379.589,
+              408.753,
+              393.78
+            ],
+            "block_index": 14,
+            "block_text_sha256": "fce763bcbf44152a465d5701e3feb366cbb4a9e87731188d90ebfcc30ee04cc8",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "fce763bcbf44152a465d5701e3feb366cbb4a9e87731188d90ebfcc30ee04cc8"
+          }
+        ],
+        "date": "2014-04-07",
+        "group": "workplace-curry",
+        "paragraph_count": 2,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/18-nara-email-state-focus-group.pdf",
+          "archive_pdf_sha256": "0809a3e767d218d31e73edd896485cb87a736c6c474c33294a48271408a6f267",
+          "bbox": [
+            35.408,
+            144.124,
+            261.632,
+            158.315
+          ],
+          "block_index": 6,
+          "block_text_sha256": "544078cfb60a5fb4e87145ac19e80908ff9e696dec28ac2e532fbd478b017706",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            1
+          ],
+          "source_text_sha256": "544078cfb60a5fb4e87145ac19e80908ff9e696dec28ac2e532fbd478b017706"
+        },
+        "words": 30
+      },
+      {
+        "agency": "State Department",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/23-nara-email-capstone.pdf",
+            "archive_pdf_sha256": "dffce10c919413985401f90eccd928adec1ee62edee51366fa83341a1a1e236a",
+            "bbox": [
+              45.019,
+              257.521,
+              549.816,
+              302.515
+            ],
+            "block_index": 7,
+            "block_text_sha256": "fe807ad47b26128778f93896ccc2b69419c241a5d4f03dbbb268cf1164a5160c",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              3
+            ],
+            "source_text_sha256": "fe807ad47b26128778f93896ccc2b69419c241a5d4f03dbbb268cf1164a5160c"
+          }
+        ],
+        "date": "2015-02-02",
+        "group": "workplace-fischer",
+        "paragraph_count": 1,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/23-nara-email-capstone.pdf",
+          "archive_pdf_sha256": "dffce10c919413985401f90eccd928adec1ee62edee51366fa83341a1a1e236a",
+          "bbox": [
+            35.408,
+            138.109,
+            577.481,
+            185.781
+          ],
+          "block_index": 4,
+          "block_text_sha256": "76a0e6813d8834a8c822665315c3271b7ce49657c57d31e523ddeff3141cb86d",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            5
+          ],
+          "source_text_sha256": "76a0e6813d8834a8c822665315c3271b7ce49657c57d31e523ddeff3141cb86d"
+        },
+        "words": 34
+      },
+      {
+        "agency": "National Archives",
+        "body_source": [
+          {
+            "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/24-nara-email-fwd-time-to-talk-redacted.pdf",
+            "archive_pdf_sha256": "3e3b78c4ec7ba5f2a52808a6cdce5a60e9d17f646b4e3634388d189a296c7b5a",
+            "bbox": [
+              45.019,
+              182.158,
+              507.63,
+              193.79
+            ],
+            "block_index": 5,
+            "block_text_sha256": "0c66b22ff182d8ed84432be1a4d3c15783e3f0e85b97fd4d0fded584bd0b5e65",
+            "pdf_page": 1,
+            "source_text_lines": [
+              0,
+              1
+            ],
+            "source_text_sha256": "0c66b22ff182d8ed84432be1a4d3c15783e3f0e85b97fd4d0fded584bd0b5e65"
+          }
+        ],
+        "date": "2015-02-25",
+        "group": "workplace-slaugh",
+        "paragraph_count": 1,
+        "source_header": {
+          "archive_pdf": "https://www.archives.gov/files/foia/state-department-emails/pdf/24-nara-email-fwd-time-to-talk-redacted.pdf",
+          "archive_pdf_sha256": "3e3b78c4ec7ba5f2a52808a6cdce5a60e9d17f646b4e3634388d189a296c7b5a",
+          "bbox": [
+            35.408,
+            138.109,
+            577.481,
+            161.754
+          ],
+          "block_index": 4,
+          "block_text_sha256": "4fe27b711c55d54eb382de934749e210fc85fe2d4da38d3083cbc571e5bb8a7c",
+          "pdf_page": 1,
+          "source_text_lines": [
+            0,
+            3
+          ],
+          "source_text_sha256": "4fe27b711c55d54eb382de934749e210fc85fe2d4da38d3083cbc571e5bb8a7c"
+        },
+        "words": 20
+      }
+    ],
+    "short_source_groups": 7,
+    "source_archives_screened": 17,
+    "source_groups": 4
+  },
+  "terminal": {
+    "assessed_views": 27,
+    "elapsed_s": 47.837,
+    "forwards": 115,
+    "freeze_sha256": "e83c360ddbbf11536de0d5c84b954cdcfd604388c99a05c724b8805d5cae4451",
+    "mime_receipts_sha256": "ec6463c934de28529597f7266869f2beddd7de2482b233e54c6e82cf3f11c67b",
+    "minimum_ram": 4795908096,
+    "peak_rss": 2072477696,
+    "planned_views": 27,
+    "responses_sha256": "ae0d615776e119c4f876018347bae6a112b3168919ebd7689e5130724db68633",
+    "status": "complete"
+  }
+}

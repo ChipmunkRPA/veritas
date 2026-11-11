@@ -17,7 +17,7 @@ from app.detectors.video import lipsync, sampling, xcorr
 from app.detectors.video.av_evidence import VERSION as INPUT_VERSION
 from app.detectors.video.decode import decode_frames
 from app.evidence import audio_packets
-from app.evidence.av_binding import validate_av_channel
+from app.evidence.av_binding import LEGACY_AUDIO_CLOCK_REASON, audio_clock_discontinuity, validate_av_channel
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _png
 from app.evidence.video_audio import unavailable
 from app.evidence.video_clips import ClipUnavailable, build_clip
@@ -166,8 +166,9 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
     if not binding:
         return unavailable(analysis.sha256, 'No frozen PCM and source timeline are available for audio/video evidence.')
     pcm, mapping = audio_packets._input(store, analysis, binding)
-    if len(source_ranges(mapping, 0, len(pcm))) != 1:
-        return unavailable(analysis.sha256, 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.')
+    audio_ranges = source_ranges(mapping, 0, len(pcm))
+    if len(audio_ranges) != 1:
+        return unavailable(analysis.sha256, audio_clock_discontinuity(mapping['timeline']))
     source = {**copy.deepcopy(audio_channel['source']), 'frame_table_sha256': video_source['frame_table_sha256'],
               'frame_anchor_sha256': video_source['frame_anchor_sha256'], 'video_time_base': video_source['time_base'],
               'tick_rate': 25, 'samples_per_tick': 640}
@@ -290,8 +291,11 @@ def verify_source_assets(channel, *, video_source, result, store, table, anchors
         elif record.get('input'):
             from types import SimpleNamespace
             pcm,mapping=audio_packets._input(store,SimpleNamespace(sha256=video_source['sha256']),record['input'])
-            if len(source_ranges(mapping,0,len(pcm))) == 1:
+            audio_ranges = source_ranges(mapping, 0, len(pcm))
+            if len(audio_ranges) == 1:
                 raise PacketIntegrityError('Frozen AV channel omits an available source timeline')
+            if channel['reason'] not in (LEGACY_AUDIO_CLOCK_REASON, audio_clock_discontinuity(mapping['timeline'])):
+                raise PacketIntegrityError('Frozen AV coverage differs from the decoded audio clock')
         return
     binding=record.get('input')
     if not binding or any(channel['source'].get(k)!=binding.get(k) for k in ('pcm_sha256','wav_sha256','mapping_sha256','samples','sample_rate')):

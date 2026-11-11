@@ -35,6 +35,7 @@ from app.engine.detector import (
     RunContext,
     UnitScore,
 )
+from app.evidence.av_binding import audio_clock_discontinuity
 
 LANE = "lip_sync"
 SEGMENT_PEAK = 0.6  # VF §4.2 heuristic for a step or collapse; not calibrated
@@ -82,7 +83,7 @@ def source_audio_origin(inputs: AVInputs) -> float | str:
     except (ValueError, KeyError, TypeError):
         return "audio-visual timing unavailable: invalid source audio timeline"
     if len(ranges) != 1:
-        return "audio-visual timing unavailable: discontinuous audio timestamps are not yet supported"
+        return audio_clock_discontinuity(mapping["timeline"])
     return ranges[0]["source_start_pts"] / lipsync.SR
 
 
@@ -156,7 +157,7 @@ class StableSyncNetDetector(Detector):
     spec = video_spec("vid.lipsync.stable_syncnet",
                       "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", model_ids=(MODEL,),
-                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.5.1")
+                      needs=("tracks", "audio"), timeout_s=300.0, profiles=FULL_DEEP, version="0.5.2")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.MODEL, self.BATCH, "audio/visual window",

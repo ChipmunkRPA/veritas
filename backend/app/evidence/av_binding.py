@@ -3,13 +3,44 @@ from __future__ import annotations
 
 import math
 import re
+from collections.abc import Mapping, Sequence
+from decimal import Decimal
 from fractions import Fraction
+from itertools import pairwise
 
 from app.evidence.mp4 import validate_clip_binding
+
+LEGACY_AUDIO_CLOCK_REASON = 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.'
 
 
 class InvalidAV(ValueError):
     pass
+
+
+def audio_clock_discontinuity(timeline: Sequence[Mapping[str, int]]) -> str:
+    """Describe the first discontinuity in a validated 16 kHz source timeline."""
+    for before, after in pairwise(timeline):
+        end = before['source_pts'] + before['end_sample'] - before['start_sample']
+        start = after['source_pts']
+        if end != start:
+            direction = 'forward' if start > end else 'backward'
+            return (f'Audio/video timing was unassessed. The decoded audio clock jumps {direction} '
+                    f'from {Decimal(end) / 16000:.7f} s to {Decimal(start) / 16000:.7f} s on the source clock.')
+    return 'Audio/video timing was unassessed because the decoded audio timeline has separate spans.'
+
+
+def validate_audio_clock_coverage(document: dict) -> None:
+    audio = document['audio']
+    if audio['coverage'] is None or len(audio['source']['timeline']) <= 1:
+        return
+    channel = document['av']
+    reason = audio_clock_discontinuity(audio['source']['timeline'])
+    if (channel['status'] != 'unavailable' or channel['coverage'] is not None
+            or channel['reason'] not in (LEGACY_AUDIO_CLOCK_REASON, reason)):
+        raise InvalidAV('Frozen AV coverage differs from the decoded audio clock')
+    summary = document['coverage']['channels'].get('av')
+    if summary != {'status': channel['status'], 'reason': channel['reason']}:
+        raise InvalidAV('Reported AV coverage differs from the decoded audio clock')
 
 
 def validate_av_channel(channel: dict, video_source: dict) -> None:

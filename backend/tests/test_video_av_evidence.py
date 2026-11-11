@@ -14,18 +14,24 @@ from PIL import Image
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from app.core.canonical import canonical_hash, canonical_json
 from app.api.public_projection import alias_signal
+from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.detectors.video import lipsync, sampling, xcorr
 from app.detectors.video.adapters.lipsync import AVInputs, source_audio_origin
+from app.detectors.video.adapters.lipsync_xcorr import LandmarkXcorrDetector
 from app.detectors.video.av_evidence import capture_correlation
 from app.detectors.video.decode import probe_frames
 from app.detectors.video.frame_store import FrameStore
 from app.evidence import video_audio, video_av
-from app.evidence.av_binding import InvalidAV, validate_av_channel
+from app.evidence.av_binding import (
+    LEGACY_AUDIO_CLOCK_REASON,
+    InvalidAV,
+    audio_clock_discontinuity,
+    validate_audio_clock_coverage,
+    validate_av_channel,
+)
 from app.evidence.image_packets import PacketIntegrityError
-from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Base
 from app.storage.objects import ObjectStore
 
@@ -204,6 +210,62 @@ def test_missing_research_feature_bindings_are_unavailable_not_successful(av_fix
     _,av=_channels(f)
     assert av['status']=='unavailable' and av['packets']==[]
     assert av['coverage']['unsupported_checks'][0]['reason']=='Measured windows lack a frozen supported input binding.'
+
+
+def test_decoded_audio_clock_gap_keeps_exact_source_times_without_av_findings(av_fixture, av_source, tmp_path):
+    f = av_fixture
+    original, table, _, _ = av_source
+    path = tmp_path / 'gap.mkv'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-copyts', '-i', str(original),
+                    '-map', '0:v:0', '-map', '0:a:0', '-c:v', 'copy', '-c:a', 'pcm_s16le',
+                    '-af', "asetnsamples=n=640:p=0,aselect='not(between(n,20,24))'", str(path)],
+                   check=True, timeout=20)
+    original_sha = f.store.put_file(path).sha256
+    decoded = decode_audio(path, source_sha256=original_sha, max_seconds=120)
+    assert probe_frames(path).to_json() == table.to_json()
+    assert decoded.mapping['timeline'] == [
+        {'start_sample': 0, 'end_sample': 12800, 'source_pts': 86400},
+        {'start_sample': 12800, 'end_sample': 54400, 'source_pts': 102400},
+    ]
+    expected = ('Audio/video timing was unassessed. The decoded audio clock jumps forward '
+                'from 6.2000000 s to 6.4000000 s on the source clock.')
+    inputs = AVInputs(table, f.inputs.tracks, f.inputs.frames,
+                      SimpleNamespace(pcm=decoded.pcm, status='analysed'), None, decoded.mapping)
+    detected = LandmarkXcorrDetector().run(SimpleNamespace(outputs=SimpleNamespace(av=inputs)))
+    assert detected.status == 'not_applicable' and detected.aggregate is None and detected.reason == expected
+    ctx = SimpleNamespace(sessions=lambda: Session(f.db.get_bind()), store=f.store, analysis_id=f.analysis.id)
+    binding = video_audio.freeze_input(ctx, decoded)['input']
+    record = {'source_audio_present': True, 'input': binding, 'voice_checks': [], 'av_checks': []}
+    result = {'manifest': {'sampling': {'video_audio_evidence': record}}}
+    source = {**f.source, 'sha256': original_sha}
+    channel = video_av.build_channel(f.db, SimpleNamespace(sha256=original_sha), f.store, result,
+                                     set_id='clock-gap', video_source=source, table=table, anchors={},
+                                     audio_channel={'status': 'not_assessed'})
+    assert channel['status'] == 'unavailable' and channel['reason'] == expected and channel['packets'] == []
+    kwargs = {'video_source': source, 'result': result, 'store': f.store, 'table': table, 'anchors': {}, 'assets': {}}
+    video_av.verify_source_assets(channel, **kwargs)
+    legacy = video_audio.unavailable(original_sha, LEGACY_AUDIO_CLOCK_REASON)
+    video_av.verify_source_assets(legacy, **kwargs)
+    changed = video_audio.unavailable(original_sha, expected.replace('6.4000000', '6.5000000'))
+    with pytest.raises(PacketIntegrityError, match='decoded audio clock'):
+        video_av.verify_source_assets(changed, **kwargs)
+    def evidence(av, reason):
+        return {'av': av, 'audio': {'coverage': {}, 'source': decoded.mapping},
+                'coverage': {'channels': {'av': {'status': 'unavailable', 'reason': reason}}}}
+
+    validate_audio_clock_coverage(evidence(channel, expected))
+    validate_audio_clock_coverage(evidence(legacy, LEGACY_AUDIO_CLOCK_REASON))
+    with pytest.raises(InvalidAV, match='decoded audio clock'):
+        validate_audio_clock_coverage(evidence(changed, changed['reason']))
+    with pytest.raises(InvalidAV, match='Reported AV coverage'):
+        validate_audio_clock_coverage(evidence(channel, changed['reason']))
+
+
+def test_audio_clock_message_preserves_sub_microsecond_precision_and_direction():
+    timeline = [{'start_sample': 0, 'end_sample': 4, 'source_pts': 0},
+                {'start_sample': 4, 'end_sample': 7, 'source_pts': 3}]
+    reason = audio_clock_discontinuity(timeline)
+    assert 'jumps backward from 0.0002500 s to 0.0001875 s' in reason
 
 
 def test_raw_av_input_tampering_is_detected_before_packet_creation(av_fixture):

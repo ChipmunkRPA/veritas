@@ -1,0 +1,726 @@
+{
+  "archived_high_false_replay": {
+    "comparison": [
+      {
+        "assessed": 0,
+        "cohort": "background",
+        "condition": "background_a_minus5db",
+        "consistency_withheld": 0,
+        "current_ai": 0,
+        "ordinary_withheld": 0,
+        "planned": 1
+      },
+      {
+        "assessed": 5,
+        "cohort": "genuine",
+        "condition": "background_a_minus5db",
+        "consistency_withheld": 2,
+        "current_ai": 4,
+        "ordinary_withheld": 1,
+        "planned": 6
+      },
+      {
+        "assessed": 6,
+        "cohort": "synthetic",
+        "condition": "background_a_minus5db",
+        "consistency_withheld": 1,
+        "current_ai": 5,
+        "ordinary_withheld": 1,
+        "planned": 11
+      },
+      {
+        "assessed": 0,
+        "cohort": "background",
+        "condition": "background_b_minus5db",
+        "consistency_withheld": 0,
+        "current_ai": 0,
+        "ordinary_withheld": 0,
+        "planned": 1
+      },
+      {
+        "assessed": 6,
+        "cohort": "genuine",
+        "condition": "background_b_minus5db",
+        "consistency_withheld": 0,
+        "current_ai": 1,
+        "ordinary_withheld": 0,
+        "planned": 6
+      },
+      {
+        "assessed": 10,
+        "cohort": "synthetic",
+        "condition": "background_b_minus5db",
+        "consistency_withheld": 0,
+        "current_ai": 10,
+        "ordinary_withheld": 0,
+        "planned": 11
+      },
+      {
+        "assessed": 6,
+        "cohort": "genuine",
+        "condition": "matched_clean",
+        "consistency_withheld": 0,
+        "current_ai": 0,
+        "ordinary_withheld": 0,
+        "planned": 6
+      },
+      {
+        "assessed": 10,
+        "cohort": "synthetic",
+        "condition": "matched_clean",
+        "consistency_withheld": 0,
+        "current_ai": 10,
+        "ordinary_withheld": 0,
+        "planned": 11
+      }
+    ],
+    "new_neural_forwards": 0,
+    "scope": "Retrospective model-free readout on the separate older English MUSAN panel after the prospective speech-background trial. Known prior baseline outcomes.",
+    "source_receipt_sha256": "9b1853fa2f9536d6a2405f9773ea803126636312c2e1d0f3fccb8aa1208c9071"
+  },
+  "cohorts": [
+    {
+      "assessed": 11,
+      "cohort": "rueg",
+      "condition": "clean",
+      "current": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 9,
+        "unassessed": 1
+      },
+      "groups": 12,
+      "planned": 12,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 9,
+          "unassessed": 1
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 9,
+          "unassessed": 1
+        }
+      }
+    },
+    {
+      "assessed": 14,
+      "cohort": "synthetic",
+      "condition": "clean",
+      "current": {
+        "ai": 13,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 9,
+      "planned": 14,
+      "with_veto": {
+        "consistency": {
+          "ai": 12,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 12,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 6,
+      "cohort": "alania",
+      "condition": "clean",
+      "current": {
+        "ai": 5,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6,
+      "with_veto": {
+        "consistency": {
+          "ai": 5,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 5,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "okur",
+      "condition": "clean",
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 4,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 3,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "drifting",
+      "condition": "clean",
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 2,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 3,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 4,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 12,
+      "cohort": "rueg",
+      "condition": "background_1",
+      "current": {
+        "ai": 0,
+        "inconclusive": 12,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 12,
+      "planned": 12,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 12,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 12,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 14,
+      "cohort": "synthetic",
+      "condition": "background_1",
+      "current": {
+        "ai": 2,
+        "inconclusive": 12,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 9,
+      "planned": 14,
+      "with_veto": {
+        "consistency": {
+          "ai": 1,
+          "inconclusive": 13,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 2,
+          "inconclusive": 12,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 6,
+      "cohort": "alania",
+      "condition": "background_1",
+      "current": {
+        "ai": 0,
+        "inconclusive": 6,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 6,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 6,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "okur",
+      "condition": "background_1",
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "drifting",
+      "condition": "background_1",
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 2,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 1,
+      "cohort": "isolated_background",
+      "condition": "background_1",
+      "current": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 1,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 12,
+      "cohort": "rueg",
+      "condition": "background_2",
+      "current": {
+        "ai": 0,
+        "inconclusive": 11,
+        "original": 1,
+        "unassessed": 0
+      },
+      "groups": 12,
+      "planned": 12,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 11,
+          "original": 1,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 11,
+          "original": 1,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 14,
+      "cohort": "synthetic",
+      "condition": "background_2",
+      "current": {
+        "ai": 5,
+        "inconclusive": 9,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 9,
+      "planned": 14,
+      "with_veto": {
+        "consistency": {
+          "ai": 4,
+          "inconclusive": 10,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 5,
+          "inconclusive": 9,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 6,
+      "cohort": "alania",
+      "condition": "background_2",
+      "current": {
+        "ai": 2,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6,
+      "with_veto": {
+        "consistency": {
+          "ai": 1,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 2,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "okur",
+      "condition": "background_2",
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 4,
+      "cohort": "drifting",
+      "condition": "background_2",
+      "current": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 2,
+      "planned": 4,
+      "with_veto": {
+        "consistency": {
+          "ai": 2,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 2,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "assessed": 1,
+      "cohort": "isolated_background",
+      "condition": "background_2",
+      "current": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 1,
+      "with_veto": {
+        "consistency": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "ordinary": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    }
+  ],
+  "commitments": {
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "private_admission_sha256": "cc6e5269894b54ba403c63d773efd178ca43e3f8f1bc6420ff5eb8bdca5d8e60",
+    "private_score_sha256": "8febabfd2f11fc7962e67ceb953b2facf0fdc4b38fc0047ed300c39bca2658b5",
+    "readout_sha256": "8a1ac0c29fe933f62fc206e373754333adc911fcedfe60fa247c08f7caffcde5",
+    "reference_sha256": {
+      "babble_baseline": "59391c1664acc081c9d40c5992d3f49d5e72ab9b380345493173680b37352942",
+      "babble_source": "368f743821c236da717a2a91ce56a4176e2c7105d03ad9a6bc1284e6557689bd",
+      "coherence": "51d305249b503c34cfbb17e4189e7e430f531a4a85ff140c4998a99e907fc941",
+      "component": "ccd0d46e075baf840bb64de2dc0494f0df8791e74070ee2776d8405e22fd7e1e",
+      "rueg_source": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792",
+      "spatial": "521e6d3b12db258b31160aeef90b2aa133e8465311479cf3ff96525e03c60a9e"
+    },
+    "roster_sha256": "753c809229d012aa626e28fc465fea342c4465fc1e062d4a4d2d34192038bb20",
+    "runner_sha256": "5e5cf7d3d965b3505c439f85a93fd9c2b11e061cedd171a4d84d4d927150de29",
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "transfer_preparation_sha256": [
+      "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792",
+      "eef1ffacc9de432d59b1336df16b3ffe8876664f87b20e56ef2c4836893ce155",
+      "33a41facabc915464c7d16ea435a9463b02e56c02fb30ed163bc2792a6f9abe8",
+      "c02fa71645bcb333b20bbd33b62ca769a23a29e699875951f512734ac680c461"
+    ]
+  },
+  "fit_sha256": "a959ffddd7f8c5214b991c9ebaddd87d634a4e69837aab2a0ac19a3989b73936",
+  "fitting": {
+    "consistency": {
+      "fit_groups": 34,
+      "fit_views": 102,
+      "matched_fit_pairs": 68,
+      "point_clean_ai": 8,
+      "point_clean_ai_retained": 8,
+      "point_existing_ai": 18,
+      "point_existing_ai_retained": 18,
+      "point_genuine_false_ai_withheld": 0,
+      "point_views": 54
+    },
+    "ordinary": {
+      "fit_groups": 34,
+      "fit_views": 102,
+      "matched_fit_pairs": 68,
+      "point_clean_ai": 8,
+      "point_clean_ai_retained": 8,
+      "point_existing_ai": 18,
+      "point_existing_ai_retained": 18,
+      "point_genuine_false_ai_withheld": 0,
+      "point_views": 54
+    }
+  },
+  "freeze_sha256": "f64d3b5485ff8060baacac9b5fb231e85a182ff1f01c8d3d138e33c94a1200cb",
+  "method": {
+    "ablation": "Fit the same head with zero same-source consistency penalty, select its point independently by the same rule.",
+    "advance": "At least two genuine false AI flags removed on at least two independent readers, at least one in each fresh background, with at most one lost synthetic AI flag across conditions and at least six assessed genuine views in each noisy scene.",
+    "descriptor": {
+      "dimension": 72,
+      "frequency_bands_hz": [
+        120,
+        480,
+        920,
+        1650,
+        2800,
+        4800,
+        7500
+      ],
+      "hann_scales": [
+        256,
+        1024
+      ],
+      "hop": "one quarter frame",
+      "method": "Log-magnitude STFT on full frames. Remove each frame broadband median and each frequency median. Per band summarize residual level variation and absolute time/frequency differences with median/80th percentile.",
+      "sample_rate": 16000,
+      "samples": 48000
+    },
+    "fit": "Weighted regularized logistic head, equal total weight per class and per source group within class. Fit on original v181 components except a fixed whole component, and on old stereo ICA genuine and designed Alania voices only.",
+    "penalty": {
+      "l2": 0.15,
+      "within_source_logit_difference": 0.18
+    },
+    "point": "Held v181 component plus prior coherence genuine and designed Alania only. Maximum cutoff preserving at least 90% of existing AI flags overall and at least 90% of existing clean AI flags. Points are diagnostic, without calibrated customer confidence.",
+    "policy": "Change an admitted current AI result to inconclusive only if the head is below its fixed threshold. Preserve original, inconclusive and unassessed.",
+    "transfer": "Twelve RUEG genuine Turkish readers, six distinct designed Alania voices, four stock Okur utterances and four Drifting utterances. New matched severe mono mixtures from two previously scored AMI sessions with disjoint original time ranges."
+  },
+  "outcome": {
+    "consistency": {
+      "distinct_readers_withheld": 0,
+      "genuine_false_flags_withheld": 0,
+      "genuine_false_flags_withheld_by_scene": {
+        "background_1": 0,
+        "background_2": 0
+      },
+      "isolated_background_flags_withheld": 0,
+      "met_frozen_advance": false,
+      "synthetic_true_flags_withheld": 3
+    },
+    "ordinary": {
+      "distinct_readers_withheld": 0,
+      "genuine_false_flags_withheld": 0,
+      "genuine_false_flags_withheld_by_scene": {
+        "background_1": 0,
+        "background_2": 0
+      },
+      "isolated_background_flags_withheld": 0,
+      "met_frozen_advance": false,
+      "synthetic_true_flags_withheld": 1
+    }
+  },
+  "rank_and_stability": [
+    {
+      "assessed_genuine": 11,
+      "assessed_synthetic": 14,
+      "auc_on_identical_assessed_inputs": {
+        "consistency": 0.5064935064935064,
+        "current_raw": 1.0,
+        "ordinary": 0.6493506493506493
+      },
+      "condition": "clean",
+      "paired_absolute_logit_change_from_clean": null,
+      "synthetic_above_highest_genuine_score_in_this_sample": {
+        "consistency": 1,
+        "current_raw": 14,
+        "ordinary": 0
+      }
+    },
+    {
+      "assessed_genuine": 12,
+      "assessed_synthetic": 14,
+      "auc_on_identical_assessed_inputs": {
+        "consistency": 0.7678571428571429,
+        "current_raw": 0.9642857142857143,
+        "ordinary": 0.7023809523809523
+      },
+      "condition": "background_1",
+      "paired_absolute_logit_change_from_clean": {
+        "consistency": 0.7343262346584902,
+        "ordinary": 0.5906184406448288
+      },
+      "synthetic_above_highest_genuine_score_in_this_sample": {
+        "consistency": 6,
+        "current_raw": 9,
+        "ordinary": 1
+      }
+    },
+    {
+      "assessed_genuine": 12,
+      "assessed_synthetic": 14,
+      "auc_on_identical_assessed_inputs": {
+        "consistency": 0.27976190476190477,
+        "current_raw": 1.0,
+        "ordinary": 0.25595238095238093
+      },
+      "condition": "background_2",
+      "paired_absolute_logit_change_from_clean": {
+        "consistency": 0.8891943742659624,
+        "ordinary": 0.7198026126339305
+      },
+      "synthetic_above_highest_genuine_score_in_this_sample": {
+        "consistency": 0,
+        "current_raw": 14,
+        "ordinary": 0
+      }
+    }
+  ],
+  "resources": {
+    "baseline_assessed": 79,
+    "baseline_peak_process_rss_bytes": 2921250816,
+    "baseline_run_seconds": 86.14,
+    "captured_pcm_bytes": 22656000,
+    "speech_gate_forwards": 7520,
+    "voice_classifier_forwards": 89
+  },
+  "schema": "chipmunk.audio.spectral-texture-comparison/1",
+  "scope": {
+    "distinct_held_foreground_recordings": 26,
+    "isolated_background_controls": 2,
+    "note": "Sources are disjoint across current roles. Both held rooms and some prepared voice families have earlier project exposure. Their mixed time cuts were not used in the three earlier stereo/overlap comparisons.",
+    "role_counts": {
+      "fit": 102,
+      "point": 54,
+      "transfer": 80
+    },
+    "transfer_backgrounds": 2,
+    "transfer_mixtures": 52
+  },
+  "serving_change": false,
+  "status": "complete"
+}

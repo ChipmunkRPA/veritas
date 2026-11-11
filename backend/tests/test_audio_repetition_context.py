@@ -67,7 +67,7 @@ def _stage_record(db, store, analysis_id, name, data):
     db.add(AnalysisStage(analysis_id=analysis_id, stage=name, status="done", output_artefact_id=asset.id))
 
 
-def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts):
+def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path):
     kind = analysis.kind
     clip = pair["artifacts"]["first_clip"]
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
@@ -134,6 +134,9 @@ print(json.dumps(result.as_dict()))
 sys.exit(0 if result.ok else 1)
 """, str(exported.path), str(trusted)], capture_output=True, text=True, timeout=20)
     assert offline.returncode == 0, offline.stdout + offline.stderr
+    verified = verify.verify_package(exported.path, public_key_pem=key.public_pem(), source_audio=source_path)
+    assert verified.ok, verified.as_dict()
+    assert "Verified 4 published playback intervals across 3 WAV assets" in verified.checks[-1].detail
 
     def change_pair(files, field):
         evidence, bundle = json.loads(files["evidence.json"]), json.loads(files["bundle.json"])
@@ -141,8 +144,15 @@ sys.exit(0 if result.ok else 1)
         altered_pair = body["repetition_context"]["pairs"][0]
         if field == "source_time":
             altered_pair["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
-        else:
+        elif field == "pcm":
             altered_pair["pcm_s16le_sha256"] = "f" * 64
+        else:
+            for side in ("first", "second"):
+                interval = altered_pair[side]
+                for key in ("start_sample", "end_sample"):
+                    interval[key] += 1
+                for key in ("start_sample", "end_sample", "source_start_pts", "source_end_pts"):
+                    interval["source_timestamp_ranges"][0][key] += 1
         evidence["sha256"] = service.packet_hash(evidence)
         files["evidence.json"] = canonical_json(evidence)
         bundle["evidence"].update(sha256=hashlib.sha256(files["evidence.json"]).hexdigest(), set_sha256=evidence["sha256"])
@@ -154,6 +164,10 @@ sys.exit(0 if result.ok else 1)
         failed = verify.verify_package(altered, public_key_pem=key.public_pem())
         assert failed.outcome == "not_verified"
         assert any(expected in check.detail for check in failed.checks)
+    shifted = rewrite(exported.path, tmp_path / "shifted-repetition.zip", partial(change_pair, field="coordinates"), key)
+    assert verify.verify_package(shifted, public_key_pem=key.public_pem()).ok
+    failed = verify.verify_package(shifted, public_key_pem=key.public_pem(), source_audio=source_path)
+    assert failed.outcome == "not_verified" and "differs from the samples at its recorded source interval" in failed.checks[-1].detail
 
 
 def test_serving_method_preserves_exact_historical_algorithm_bytes():
@@ -268,7 +282,7 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
                                                        "filename": analysis.filename, "content_type": analysis.content_type}),
             "report": snapshot.report.model_copy(update={"template_set": engine.TEMPLATE_SET}),
         })
-        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts)
+        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path)
 
 
 @pytest.mark.parametrize("mode,status,reason", [

@@ -1,0 +1,332 @@
+{
+  "all_gap_views": {
+    "baseline": {
+      "camera_session_groups": 2,
+      "cases": 32,
+      "cases_with_four_consecutive_measured_windows": 0,
+      "flagged_but_not_localized_cases": 0,
+      "flagged_cases": 0,
+      "flagged_ranges": 0,
+      "flagged_session_groups": 0,
+      "highest_iou": 0.0,
+      "localized_cases": 0,
+      "measured_cases": 0,
+      "measured_session_groups": 0,
+      "measured_spans": 0,
+      "measured_windows": 0
+    },
+    "candidate": {
+      "camera_session_groups": 2,
+      "cases": 32,
+      "cases_with_four_consecutive_measured_windows": 9,
+      "flagged_but_not_localized_cases": 1,
+      "flagged_cases": 4,
+      "flagged_ranges": 5,
+      "flagged_session_groups": 2,
+      "highest_iou": 0.148,
+      "localized_cases": 0,
+      "measured_cases": 19,
+      "measured_session_groups": 2,
+      "measured_spans": 22,
+      "measured_windows": 121
+    }
+  },
+  "all_search_windows_fully_inside_own_source_span": true,
+  "audio_gap_source_seconds": [
+    8.0,
+    8.64
+  ],
+  "audio_gap_source_ticks": [
+    128000,
+    138240
+  ],
+  "by_condition": {
+    "continuous_constant": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 27
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 27
+      }
+    },
+    "continuous_local": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_but_not_localized_cases": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "highest_iou": 0.0,
+        "localized_cases": 0,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 23
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_but_not_localized_cases": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "highest_iou": 0.0,
+        "localized_cases": 0,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 23
+      }
+    },
+    "continuous_original": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_cases": 1,
+        "flagged_ranges": 1,
+        "flagged_session_groups": 1,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 23
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_cases": 1,
+        "flagged_ranges": 1,
+        "flagged_session_groups": 1,
+        "measured_cases": 2,
+        "measured_session_groups": 1,
+        "measured_spans": 2,
+        "measured_windows": 23
+      }
+    },
+    "gap_constant": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "measured_cases": 0,
+        "measured_session_groups": 0,
+        "measured_spans": 0,
+        "measured_windows": 0
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 2,
+        "flagged_cases": 1,
+        "flagged_ranges": 1,
+        "flagged_session_groups": 1,
+        "measured_cases": 4,
+        "measured_session_groups": 1,
+        "measured_spans": 4,
+        "measured_windows": 26
+      }
+    },
+    "gap_local": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 0,
+        "flagged_but_not_localized_cases": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "highest_iou": 0.0,
+        "localized_cases": 0,
+        "measured_cases": 0,
+        "measured_session_groups": 0,
+        "measured_spans": 0,
+        "measured_windows": 0
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 3,
+        "flagged_but_not_localized_cases": 1,
+        "flagged_cases": 1,
+        "flagged_ranges": 2,
+        "flagged_session_groups": 1,
+        "highest_iou": 0.148,
+        "localized_cases": 0,
+        "measured_cases": 5,
+        "measured_session_groups": 2,
+        "measured_spans": 5,
+        "measured_windows": 32
+      }
+    },
+    "gap_offscreen": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "measured_cases": 0,
+        "measured_session_groups": 0,
+        "measured_spans": 0,
+        "measured_windows": 0
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 1,
+        "flagged_cases": 1,
+        "flagged_ranges": 1,
+        "flagged_session_groups": 1,
+        "measured_cases": 5,
+        "measured_session_groups": 2,
+        "measured_spans": 8,
+        "measured_windows": 33
+      }
+    },
+    "gap_original": {
+      "baseline": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 0,
+        "flagged_cases": 0,
+        "flagged_ranges": 0,
+        "flagged_session_groups": 0,
+        "measured_cases": 0,
+        "measured_session_groups": 0,
+        "measured_spans": 0,
+        "measured_windows": 0
+      },
+      "candidate": {
+        "camera_session_groups": 2,
+        "cases": 8,
+        "cases_with_four_consecutive_measured_windows": 3,
+        "flagged_cases": 1,
+        "flagged_ranges": 1,
+        "flagged_session_groups": 1,
+        "measured_cases": 5,
+        "measured_session_groups": 2,
+        "measured_spans": 5,
+        "measured_windows": 30
+      }
+    }
+  },
+  "commitments": {
+    "clock_spans.py": "a95d2e5c374c1abe1244230f9d4e969d07c94da1937130b8721cd9e286b0c08b",
+    "freeze.json": "c792cadfa023d1f54b455b92ac03217c10d1c475e416b586c3eb25876bb1b64b",
+    "readout.py": "7cff4559fe343a350a1dfb4dfaa8fb4ca32ba8e0f05fc0b30d5c339e4a415fb5",
+    "retry/clock_spans_retry.py": "54829c53ee552ea865cb1ef28140769484a502125e6a11e71a38d689862b6393",
+    "retry/freeze.json": "fae83c3fd0c86f49d176fcfc97f7f3b1825fba8201ebf5dcf6794740fa06a821",
+    "retry/scores.jsonl": "027f9b74a248eaef712b7071cd68020ff720e92bd366cb07f111bfe4780160e8",
+    "scores.jsonl": "059bf3b7bbad7dcec06eb73bff6c65cb9174c166d72d66fc009967c427365153"
+  },
+  "excluded_intake": {
+    "failed_cut_attempts": 1,
+    "reason": "The preselected 16-second interval extended past the verified camera or headset recording tail. The same annotation-only ranking was repeated on admissible source times for that cut only.",
+    "retained_first_run_views": 49,
+    "retry_views": 7
+  },
+  "fresh_intervals_gap_views": {
+    "baseline": {
+      "camera_session_groups": 2,
+      "cases": 8,
+      "cases_with_four_consecutive_measured_windows": 0,
+      "flagged_but_not_localized_cases": 0,
+      "flagged_cases": 0,
+      "flagged_ranges": 0,
+      "flagged_session_groups": 0,
+      "highest_iou": 0.0,
+      "localized_cases": 0,
+      "measured_cases": 0,
+      "measured_session_groups": 0,
+      "measured_spans": 0,
+      "measured_windows": 0
+    },
+    "candidate": {
+      "camera_session_groups": 2,
+      "cases": 8,
+      "cases_with_four_consecutive_measured_windows": 2,
+      "flagged_but_not_localized_cases": 0,
+      "flagged_cases": 0,
+      "flagged_ranges": 0,
+      "flagged_session_groups": 0,
+      "highest_iou": 0.0,
+      "localized_cases": 0,
+      "measured_cases": 6,
+      "measured_session_groups": 2,
+      "measured_spans": 7,
+      "measured_windows": 32
+    }
+  },
+  "gapped_hard_negative_views": {
+    "baseline": {
+      "camera_session_groups": 2,
+      "cases": 24,
+      "cases_with_four_consecutive_measured_windows": 0,
+      "flagged_cases": 0,
+      "flagged_ranges": 0,
+      "flagged_session_groups": 0,
+      "measured_cases": 0,
+      "measured_session_groups": 0,
+      "measured_spans": 0,
+      "measured_windows": 0
+    },
+    "candidate": {
+      "camera_session_groups": 2,
+      "cases": 24,
+      "cases_with_four_consecutive_measured_windows": 6,
+      "flagged_cases": 3,
+      "flagged_ranges": 3,
+      "flagged_session_groups": 2,
+      "measured_cases": 14,
+      "measured_session_groups": 2,
+      "measured_spans": 17,
+      "measured_windows": 89
+    }
+  },
+  "local_delay_ranges_seconds": [
+    [
+      3.0,
+      6.0
+    ],
+    [
+      10.0,
+      13.0
+    ]
+  ],
+  "local_delay_seconds": 0.32,
+  "localization_iou_minimum": 0.2,
+  "product": "Exact gap reason is source-verified. No separate-span anomaly result enters serving.",
+  "retry_elapsed_s": 27.6344918749528,
+  "schema": "chipmunk.video-audio-clock-gap-transfer/1",
+  "scope": "Two published AMI sessions, with six prior and two newly sampled time intervals. Timing and ordinary audio controls only.",
+  "source_audio_time_base": "1/16000",
+  "verified_matched_video_packet_positions": 22400,
+  "verified_pcm_sample_positions": 14008320,
+  "verified_video_picture_positions": 3200
+}

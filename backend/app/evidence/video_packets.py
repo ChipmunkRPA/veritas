@@ -704,12 +704,13 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
                     or not {f["anchor"]["frame_index"] for f in packet["frames"]}.issubset(indices)):
                 raise PacketIntegrityError("Video window evidence has invalid frame support")
     if document["version"] in NESTED_VERSIONS:
-        from app.evidence.av_binding import validate_av_channel
+        from app.evidence.av_binding import validate_audio_clock_coverage, validate_av_channel
         from app.evidence.video_audio import validate_channel
 
         try:
             validate_channel(document["audio"], source_sha256=source_sha256)
             validate_av_channel(document["av"], source)
+            validate_audio_clock_coverage(document)
             if (document["version"] in ACOUSTIC_VERSIONS and document["audio"]["coverage"] is not None
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")

@@ -165,7 +165,7 @@ def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(
         assert "Similar repeated audio" in html and all(clip["url"] not in html for clip in pair["artifacts"].values())
         assert "data:audio/" not in html and "<audio" not in html
         _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=snapshot, document=document),
-                          tmp_path, monkeypatch, rendered.pdf)
+                          tmp_path, monkeypatch, rendered.pdf, source_audio=source)
 
 
 @pytest.mark.parametrize("mode,status,reason", [

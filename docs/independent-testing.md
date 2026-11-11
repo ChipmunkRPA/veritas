@@ -387,6 +387,32 @@ When an earlier aligned image is available, the separate [reference comparison](
 can produce a full-size mask and unaltered crops from both files. It runs on the
 reviewer's machine and commits to both source hashes.
 
+## Verify audio clips and timestamps from a signed export
+
+Run the optional comparison with the local project environment, FFmpeg and
+FFprobe installed. Supply the exact uploaded file. For a video export, give
+the original video containing the soundtrack.
+
+```sh
+python -m app.cli verify evidence.zip --public-key instance-key.pem --source-audio original.mkv
+```
+
+The verifier checks the original SHA-256, re-decodes the first audio stream
+to the committed mono 16 kHz samples, and compares its source timeline and
+all published WAV intervals. This includes voice and lip-sync windows,
+background sound, acoustic events, and both sides of repeated-audio evidence
+when present. Timeline gaps stay visible in the comparison. The output counts
+each playback interval separately, even when two intervals share one WAV asset.
+The ordinary verifier also checks a reported audio clock discontinuity against
+the soundtrack timeline committed in a signed video export.
+The same file decoded with a different FFmpeg build can produce different samples.
+This check verifies source correspondence for independent listening. It does
+not rerun the detectors, recreate charts, or validate an AI authorship claim.
+
+```sh
+python -m pytest tests/test_audio_repetition_context.py tests/test_audio_similarity_context.py tests/test_video_nested_evidence.py
+```
+
 ## Choose a review to reproduce
 
 These are bounded entry points for contributors. Automated Linux reproduction

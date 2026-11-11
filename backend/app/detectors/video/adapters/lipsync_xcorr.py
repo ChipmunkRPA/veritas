@@ -162,7 +162,7 @@ class LandmarkXcorrDetector(Detector):
     spec = video_spec("vid.lipsync.landmark_xcorr",
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.5")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.6")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av

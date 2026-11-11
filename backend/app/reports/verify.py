@@ -28,12 +28,14 @@ The extract is the analysis's projection of the global chain, so seq gaps betwee
 whole chain is verified on the instance (`app.cli audit verify`).
 
 The optional `--source-image IMAGE` check uses Pillow to compare unannotated crops with the submitted original locally.
+The optional `--source-audio MEDIA` check uses FFmpeg to compare exact samples and source timestamps from an audio or video original.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import re
+import wave
 import zipfile
 import zlib
 from collections.abc import Mapping
@@ -131,7 +133,7 @@ def event_hash(prev_hash: str, event: Mapping[str, Any]) -> str:
 
 
 def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_key_id: str | None = None,
-                   source_image: Path | None = None) -> Verification:
+                   source_image: Path | None = None, source_audio: Path | None = None) -> Verification:
     """Check the package at `path`. `public_key_pem` and `expect_key_id` pin the signer; without either the best outcome is
     `self_consistent` (`ok` false). Raises `PinInvalid` for a key id of the wrong form and `PackageUnreadable` for a non-archive."""
     expected = None if expect_key_id is None else key_id_pin(expect_key_id)
@@ -146,6 +148,8 @@ def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_ke
             out = _verify(zf, public_key_pem, out, expected)
             if out.consistent and source_image is not None:
                 out.checks.append(_image_source(zf, out.bundle, source_image))
+            if out.consistent and source_audio is not None:
+                out.checks.append(_audio_source(zf, out.bundle, source_audio))
             return out
         except (zipfile.BadZipFile, zlib.error, EOFError, OSError, NotImplementedError) as e:  # a CRC failure or a damaged entry
             out.checks.append(Check("readable", False, f"an entry cannot be read ({type(e).__name__}: {e})"))
@@ -161,6 +165,18 @@ def _image_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Che
     try:
         return Check(name, True, verify_image_source.check(archive, bundle, original))
     except (ValueError, TypeError, KeyError, OSError, Image.DecompressionBombError) as error:
+        return Check(name, False, str(error))
+
+
+def _audio_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Check:
+    name = "original audio samples"
+    try:
+        from app.reports import verify_audio_source
+
+        return Check(name, True, verify_audio_source.check(archive, bundle, original))
+    except ImportError:
+        return Check(name, False, "Install NumPy and the project dependencies for local audio comparison.")
+    except (ValueError, TypeError, KeyError, OSError, RuntimeError, wave.Error, EOFError) as error:
         return Check(name, False, str(error))
 
 

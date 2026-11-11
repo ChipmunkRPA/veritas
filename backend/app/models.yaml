@@ -1651,7 +1651,7 @@ detectors:
 
   - id: vid.lipsync.stable_syncnet
     adapter: app.detectors.video.adapters.lipsync:StableSyncNetDetector
-    version: 0.5.1
+    version: 0.5.2
     name: "Lip-sync lane: audio-visual offset and confidence (LatentSync StableSyncNet) per speaking face track"
     modality: video
     family: av-sync
@@ -1682,7 +1682,7 @@ detectors:
 
   - id: vid.lipsync.landmark_xcorr
     adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
-    version: 0.5.5
+    version: 0.5.6
     name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
     modality: video
     family: av-sync
@@ -1693,6 +1693,7 @@ detectors:
     legacy_weight: 0.0
     known_limitations:
       - "input coverage: a 25 Hz tick requires a source picture within 40 ms; windows crossing uncovered timestamp gaps are unassessed, not evidence of manipulation or originality"
+      - "audio-clock coverage: the first discontinuity in decoded audio is reported on its source clock; timing remains unassessed for the track"
       - "input coverage: offset-change comparisons stop across any unmeasured window, including missing source pictures, insufficient speech, and flat mouth-opening measurements."
       - "timing-change coverage: fewer than four measured windows cannot support the change rules. A single measured window retains its exact source-clock interval."
       - "offset-change coverage: four consecutive measured windows are needed for two stable offset runs. Split coverage is described as unassessed for offset changes when neither measured run is long enough."

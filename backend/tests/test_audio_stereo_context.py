@@ -19,11 +19,11 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import decode as audio_decode
 from app.detectors.audio import stereo
-from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
+from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, source_ranges, wav_bytes
 from app.engine.stages import audio
 from app.evidence import audio_packets, stereo_binding
 from app.evidence.audio_binding import stereo_attenuation_overlaps, unscored_voice_intervals
-from app.reports import engine, multimedia_evidence, package, signing, verify
+from app.reports import engine, multimedia_evidence, package, signing, verify, verify_audio_source
 from app.reports import snapshot as report_snapshot
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -269,12 +269,54 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
             assert export.read("report.pdf") == rendered.pdf
         verified = verify.verify_package(built.path, public_key_pem=key.public_pem())
         assert verified.ok, verified.as_dict()
+        checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=path)
+        assert checked.ok and "32,000 decoded mono samples" in checked.checks[-1].detail, checked.as_dict()
+        wrong_source = tmp_path / "different.wav"
+        _source(wrong_source, seconds=2, mode="in_phase", rate=SAMPLE_RATE)
+        checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=wrong_source)
+        assert checked.outcome == "not_verified"
+        assert checked.checks[-1].name == "original audio samples" and "differs from the recorded original" in checked.checks[-1].detail
 
         forged = deepcopy(packet)
         forged["stereo_context"]["windows"][0]["correlation"] = 0.5
         forged["sha256"] = audio_packets.packet_hash(forged)
         with pytest.raises(ObjectIntegrityError, match="differs from the frozen audio input mapping"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged}))
+
+
+def test_source_audio_verifier_preserves_gap_inside_one_playback_interval(tmp_path):
+    wav = tmp_path / "input.wav"
+    _source(wav, seconds=2, mode="in_phase", rate=SAMPLE_RATE)
+    original = tmp_path / "with-gap.mka"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(wav),
+                    "-af", "asetpts=PTS+if(gte(T\\,1)\\,0.125/TB\\,0)",
+                    "-c:a", "pcm_s16le", str(original)], check=True, timeout=20)
+    digest = hashlib.sha256(original.read_bytes()).hexdigest()
+    decoded = decode_audio(original, source_sha256=digest)
+    assert len(decoded.mapping["timeline"]) == 2
+    start, end = 15000, 20000
+    timestamps = source_ranges(decoded.mapping, start, end)
+    assert len(timestamps) == 2 and timestamps[1]["source_start_pts"] - timestamps[0]["source_end_pts"] == 2000
+    clip = wav_bytes(decoded.pcm[start:end])
+    asset = {"sha256": hashlib.sha256(clip).hexdigest(), "media_type": "audio/wav"}
+    bundle = {"schema": package.PUBLIC_SCHEMA, "analysis": {"kind": "audio"}, "source_commitment": {"sha256": digest},
+              "artifacts": [asset]}
+    evidence = {
+        "source": {**decoded.mapping, "sha256": digest, "wav_sha256": hashlib.sha256(decoded.wav).hexdigest()},
+        "coverage": {"decode_limit_reached": False}, "packets": [],
+        "sound_events": {"windows": [{"id": "S01", "start_sample": start, "end_sample": end,
+                                      "source_timestamp_ranges": timestamps, "artifacts": {"selected_clip": asset}}]},
+    }
+    archive_path = tmp_path / "audio.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(archive_path) as archive:
+        assert "Verified 1 published playback interval across 1 WAV asset" in verify_audio_source.check(archive, bundle, original)
+    timestamps[1]["source_start_pts"] -= 2000
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(archive_path) as archive, pytest.raises(ValueError, match="recorded source timestamps"):
+        verify_audio_source.check(archive, bundle, original)
 
 
 def test_voice_gap_intersection_preserves_discontinuous_source_clock_and_excludes_touching_ranges():

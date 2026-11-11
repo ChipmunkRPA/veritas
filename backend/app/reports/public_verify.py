@@ -104,7 +104,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 validate_face_lighting(packet, evidence['source'])
         if evidence['version'] in NESTED_VERSIONS:
             from app.evidence.audio_binding import validate_audio_channel
-            from app.evidence.av_binding import validate_av_channel
+            from app.evidence.av_binding import validate_audio_clock_coverage, validate_av_channel
 
             validate_audio_channel(evidence['audio'], source['sha256'])
             if evidence['version'] in ACOUSTIC_VERSIONS and evidence['audio']['coverage'] is not None:
@@ -112,6 +112,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             if evidence['version'] in CONTINUITY_VERSIONS and evidence['audio']['coverage'] is not None:
                 _require(evidence['audio']['acoustic_context']['schema'] == 'chipmunk.acoustic-context/2', 'Video continuity measurements are missing')
             validate_av_channel(evidence['av'], evidence['source'])
+            validate_audio_clock_coverage(evidence)
             packet_ids = [p['id'] for part in (evidence, evidence['audio'], evidence['av']) for p in part['packets']]
             _require(len(packet_ids) == len(set(packet_ids)), 'Video evidence packet identifiers collide across channels')
             checks = {check['id'] for check in result.get('checks', [])}

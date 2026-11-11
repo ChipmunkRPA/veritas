@@ -336,7 +336,7 @@ def test_nested_public_zip_offline_verifier_without_runtime(nested_case, tmp_pat
     _check_public_zip(nested_case, tmp_path, monkeypatch, pdf_bytes)
 
 
-def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes):
+def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes, *, source_audio=None):
     monkeypatch.setattr(settings, 'data_dir', tmp_path/'data')
     key = signing.instance_key(tmp_path/'key.pem')
     pdf_art=register_artefact(f.db,f.store,pdf_bytes,media_type='application/pdf',role='report',created_by='fixture',analysis_id=f.analysis.id)
@@ -361,6 +361,14 @@ def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes):
         assert all(archive.read(a['file']) == f.store.read_bytes(a['sha256']) for a in bundle['artifacts'])
     trusted=tmp_path/'trusted.pem'
     trusted.write_bytes(key.public_pem())
+    if source_audio is not None:
+        checked = subprocess.run([sys.executable, '-m', 'app.cli', 'verify', str(built.path),
+                                  '--public-key', str(trusted), '--source-audio', str(source_audio), '--json'],
+                                 capture_output=True, text=True, timeout=30)
+        assert checked.returncode == 0, checked.stdout + checked.stderr
+        last = json.loads(checked.stdout)['checks'][-1]
+        assert last['name'] == 'original audio samples' and last['ok']
+        assert 'source timeline matched' in last['detail'] and 'Verified 0 published' not in last['detail']
     offline=subprocess.run([sys.executable,'-c', '''
 import importlib.abc,json,socket,sys
 from pathlib import Path
@@ -481,7 +489,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert 'Overlap 2.000–3.000 s of analyzed audio' in ' '.join(text.split())
         assert f'Video playback 2.400–{.4 + len(reference.pcm) / SAMPLE_RATE:.3f} s' in ' '.join(text.split())
         assert 'All 31 lag candidates' in text
-        _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf)
+        _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf, source_audio=path)
 
         forged = copy.deepcopy(f.document['audio'])
         forged['stereo_context']['windows'][2]['source_timestamp_ranges'][0]['source_start_pts'] += 1

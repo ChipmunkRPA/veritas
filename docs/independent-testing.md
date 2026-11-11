@@ -86,6 +86,8 @@ The [fresh camera qualification](video-vcd2-unseen-controls-v287-result.md)
 adds eight unused camera types with independently verified native clocks.
 The [matched ordinary controls](video-vcd2-matched-controls-v290-result.md)
 verify 24 unchanged, chroma-converted and recompressed views on those clocks.
+The [first current-app triplet](video-vcd2-current-app-v294-first-result.md)
+records measured appearance coverage and the separate frame-check budget skip.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

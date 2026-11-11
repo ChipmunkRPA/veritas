@@ -1,0 +1,417 @@
+{
+  "schema": "chipmunk.video-vcd2-current-app-result/294",
+  "status": "partial",
+  "freeze_sha256": "476e1e980ab0d6df14b437a96bcde4aca03482f196e6410344892cfccbdb02bd",
+  "sealed_cases": 3,
+  "archive_set_commitment_sha256": "2bb927d93d24c7f7c908915487804233e42e25129618117d743bf56069df650d",
+  "planned_source_groups": 8,
+  "complete_matched_source_groups": 1,
+  "source_groups_with_any_face_review_interval": 0,
+  "paired_any_face_review_interval_changes": {
+    "chroma_conversion_only": {
+      "clear_to_clear": 1,
+      "comparison_unavailable": 7
+    },
+    "recompression_only": {
+      "clear_to_clear": 1,
+      "comparison_unavailable": 7
+    }
+  },
+  "overall": {
+    "planned_negative_cases": 24,
+    "case_outcomes": {
+      "scored": 3,
+      "run_pending": 21
+    },
+    "customer_direction_counts": {
+      "ai": 0,
+      "original": 0,
+      "inconclusive": 0,
+      "unavailable": 3,
+      "record": 0
+    },
+    "customer_direction_unobserved": 21,
+    "full_app_evidence_verified_cases": 3,
+    "appearance_route_outcomes": {
+      "ok": 3
+    },
+    "appearance_check_outcomes": {
+      "ok": 3
+    },
+    "legacy_frame_route_outcomes": {
+      "skipped": 3
+    },
+    "appearance_measured_cases": 3,
+    "appearance_measured_windows": 36,
+    "appearance_selected_cases": 0,
+    "negative_cases_with_face_review_interval": 0,
+    "face_review_share_of_planned": 0.0,
+    "face_review_share_of_evidence_verified": 0.0,
+    "face_review_methods": {
+      "face-appearance-change/1": {
+        "negative_cases_flagged": 0,
+        "intervals": 0,
+        "interval_frame_totals": {
+          "covered_frames": 0,
+          "overlap_designated_frames": 0,
+          "overlap_changed_frames": 0,
+          "outside_changed_frames": 0,
+          "changed_frames_not_covered": 0
+        }
+      },
+      "face-sequence-change/1": {
+        "negative_cases_flagged": 0,
+        "intervals": 0,
+        "interval_frame_totals": {
+          "covered_frames": 0,
+          "overlap_designated_frames": 0,
+          "overlap_changed_frames": 0,
+          "outside_changed_frames": 0,
+          "changed_frames_not_covered": 0
+        }
+      },
+      "face-track-response/1": {
+        "negative_cases_flagged": 0,
+        "intervals": 0,
+        "interval_frame_totals": {
+          "covered_frames": 0,
+          "overlap_designated_frames": 0,
+          "overlap_changed_frames": 0,
+          "outside_changed_frames": 0,
+          "changed_frames_not_covered": 0
+        }
+      }
+    },
+    "refinement_statuses": {
+      "no_existing_appearance_interval": 3
+    },
+    "matched_refinement_intervals": 0,
+    "refinement_existing_frame_totals": {
+      "covered_frames": 0,
+      "overlap_designated_frames": 0,
+      "overlap_changed_frames": 0,
+      "outside_changed_frames": 0,
+      "changed_frames_not_covered": 0
+    },
+    "refinement_proposed_frame_totals": {
+      "covered_frames": 0,
+      "overlap_designated_frames": 0,
+      "overlap_changed_frames": 0,
+      "outside_changed_frames": 0,
+      "changed_frames_not_covered": 0
+    },
+    "refinement_additional_frames": 0,
+    "refinement_crop_forwards": 0,
+    "verified_sampled_frames": 120,
+    "verified_native_anchors": 361,
+    "verified_evidence_frames": 0,
+    "verified_evidence_assets": 0
+  },
+  "by_role": {
+    "unchanged": {
+      "planned_negative_cases": 8,
+      "case_outcomes": {
+        "scored": 1,
+        "run_pending": 7
+      },
+      "customer_direction_counts": {
+        "ai": 0,
+        "original": 0,
+        "inconclusive": 0,
+        "unavailable": 1,
+        "record": 0
+      },
+      "customer_direction_unobserved": 7,
+      "full_app_evidence_verified_cases": 1,
+      "appearance_route_outcomes": {
+        "ok": 1
+      },
+      "appearance_check_outcomes": {
+        "ok": 1
+      },
+      "legacy_frame_route_outcomes": {
+        "skipped": 1
+      },
+      "appearance_measured_cases": 1,
+      "appearance_measured_windows": 12,
+      "appearance_selected_cases": 0,
+      "negative_cases_with_face_review_interval": 0,
+      "face_review_share_of_planned": 0.0,
+      "face_review_share_of_evidence_verified": 0.0,
+      "face_review_methods": {
+        "face-appearance-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-sequence-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-track-response/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        }
+      },
+      "refinement_statuses": {
+        "no_existing_appearance_interval": 1
+      },
+      "matched_refinement_intervals": 0,
+      "refinement_existing_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_proposed_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_additional_frames": 0,
+      "refinement_crop_forwards": 0,
+      "verified_sampled_frames": 40,
+      "verified_native_anchors": 120,
+      "verified_evidence_frames": 0,
+      "verified_evidence_assets": 0
+    },
+    "chroma_conversion_only": {
+      "planned_negative_cases": 8,
+      "case_outcomes": {
+        "scored": 1,
+        "run_pending": 7
+      },
+      "customer_direction_counts": {
+        "ai": 0,
+        "original": 0,
+        "inconclusive": 0,
+        "unavailable": 1,
+        "record": 0
+      },
+      "customer_direction_unobserved": 7,
+      "full_app_evidence_verified_cases": 1,
+      "appearance_route_outcomes": {
+        "ok": 1
+      },
+      "appearance_check_outcomes": {
+        "ok": 1
+      },
+      "legacy_frame_route_outcomes": {
+        "skipped": 1
+      },
+      "appearance_measured_cases": 1,
+      "appearance_measured_windows": 12,
+      "appearance_selected_cases": 0,
+      "negative_cases_with_face_review_interval": 0,
+      "face_review_share_of_planned": 0.0,
+      "face_review_share_of_evidence_verified": 0.0,
+      "face_review_methods": {
+        "face-appearance-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-sequence-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-track-response/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        }
+      },
+      "refinement_statuses": {
+        "no_existing_appearance_interval": 1
+      },
+      "matched_refinement_intervals": 0,
+      "refinement_existing_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_proposed_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_additional_frames": 0,
+      "refinement_crop_forwards": 0,
+      "verified_sampled_frames": 40,
+      "verified_native_anchors": 120,
+      "verified_evidence_frames": 0,
+      "verified_evidence_assets": 0
+    },
+    "recompression_only": {
+      "planned_negative_cases": 8,
+      "case_outcomes": {
+        "scored": 1,
+        "run_pending": 7
+      },
+      "customer_direction_counts": {
+        "ai": 0,
+        "original": 0,
+        "inconclusive": 0,
+        "unavailable": 1,
+        "record": 0
+      },
+      "customer_direction_unobserved": 7,
+      "full_app_evidence_verified_cases": 1,
+      "appearance_route_outcomes": {
+        "ok": 1
+      },
+      "appearance_check_outcomes": {
+        "ok": 1
+      },
+      "legacy_frame_route_outcomes": {
+        "skipped": 1
+      },
+      "appearance_measured_cases": 1,
+      "appearance_measured_windows": 12,
+      "appearance_selected_cases": 0,
+      "negative_cases_with_face_review_interval": 0,
+      "face_review_share_of_planned": 0.0,
+      "face_review_share_of_evidence_verified": 0.0,
+      "face_review_methods": {
+        "face-appearance-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-sequence-change/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        },
+        "face-track-response/1": {
+          "negative_cases_flagged": 0,
+          "intervals": 0,
+          "interval_frame_totals": {
+            "covered_frames": 0,
+            "overlap_designated_frames": 0,
+            "overlap_changed_frames": 0,
+            "outside_changed_frames": 0,
+            "changed_frames_not_covered": 0
+          }
+        }
+      },
+      "refinement_statuses": {
+        "no_existing_appearance_interval": 1
+      },
+      "matched_refinement_intervals": 0,
+      "refinement_existing_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_proposed_frame_totals": {
+        "covered_frames": 0,
+        "overlap_designated_frames": 0,
+        "overlap_changed_frames": 0,
+        "outside_changed_frames": 0,
+        "changed_frames_not_covered": 0
+      },
+      "refinement_additional_frames": 0,
+      "refinement_crop_forwards": 0,
+      "verified_sampled_frames": 40,
+      "verified_native_anchors": 121,
+      "verified_evidence_frames": 0,
+      "verified_evidence_assets": 0
+    }
+  },
+  "all_face_swap_negatives": true,
+  "serving_defaults_changed": false,
+  "raw_upload_census": {
+    "planned_controls": 24,
+    "max_upload_bytes": 524288000,
+    "upload_eligible": 24,
+    "upload_ineligible": 0,
+    "complete_upload_eligible_triplets": 8,
+    "by_resolution": {
+      "1280x720": {
+        "controls": 15,
+        "maximum_bytes": 308693168,
+        "upload_eligible": 15,
+        "upload_ineligible": 0,
+        "triplets_with_ineligible_controls": 0
+      },
+      "1920x1080": {
+        "controls": 9,
+        "maximum_bytes": 491285602,
+        "upload_eligible": 9,
+        "upload_ineligible": 0,
+        "triplets_with_ineligible_controls": 0
+      }
+    }
+  },
+  "verified_sealed_uploads": 3,
+  "historical_cache_collision_signatures": 0,
+  "evidence_version_8_verified": 3,
+  "verified_alignment_context_packets": 0,
+  "observed_legacy_frame_route_statuses": {
+    "skipped": 3
+  },
+  "legacy_frame_budget_skips": 3,
+  "lab_batch_override": false,
+  "additional_edge_replay_enabled": false
+}

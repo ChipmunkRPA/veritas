@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.grid-portrait-frames-complete/146",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_inferred": 16,
+  "complete_guarded_stages": 16,
+  "planned_condition_frames": 640,
+  "executed_condition_frames": 640,
+  "skipped_condition_frames": 0,
+  "fixed_repeat_renders": 16,
+  "bitwise_equal_repeats": 16,
+  "top_level_generator_forwards": 3280,
+  "zero_effect_native_outputs": 0,
+  "source_earlier_response_pairs": 320,
+  "source_earlier_zero_pixel_responses": 0,
+  "bounded_spatial_convolutions": 24272,
+  "functional_convolution_tiles": 155472,
+  "outside_mask_changed_pixels": 0,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "maximum_sampled_descendant_rss_bytes": 2695266304,
+  "minimum_sampled_available_ram_bytes": 6766952448,
+  "worker_duration_seconds": {
+    "minimum": 139.20001104206312,
+    "maximum": 145.03840262501035,
+    "sum": 2256.7052415818907
+  },
+  "private_complete_execution_collection_sha256": "cbf605cb4054a41e4216c4ef68822d5268b42cd681f21b79985f9cc7818be52e",
+  "freeze_sha256": "ebbe441a9bc4ec10ebafb3d5eda5114f1b62ab3104cc1aa8d1420cf3358853ac",
+  "detector_calls": 0,
+  "defaults_changed": false,
+  "scope": "Actual full-expression benchmark construction on all fixed pilot clips. Producer checked native pixels and mask containment; metadata aggregation reconciled root/operator counters and resources without re-decoding images. No achieved motion, phonetic synchronization, face-swap, detector-accuracy or customer-confidence result. Samples are lower bounds; no media or per-input identifiers/fingerprints/clocks published."
+}

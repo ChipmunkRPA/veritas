@@ -1,0 +1,57 @@
+{
+  "schema": "chipmunk.grid-native-mouth-score-freeze/151",
+  "code_sha256": {
+    "backend/scripts/grid_native_mouth_scores_v151.py": "7f255d5bb3731f6d761eea61295df0ceed5cd99c30c7d47d1f2b7c13df550b57",
+    "backend/tests/test_grid_native_mouth_scores_v151.py": "117ad825eb72e4d55330e49e0f506248865ed22069543b0e41b368a53c56640a",
+    "docs/grid-native-mouth-scores-v151-method.md": "0237e70be5362d5ee196679c4dcbe9ce7caba36a0a1f3126703ab298525d03bf",
+    "backend/scripts/grid_transfer_plan_v143.py": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "backend/scripts/grid_native_clips_v149.py": "ba356f7655bd47facd9107cd86e2028513bf6f7ed5862e3a9d11aacd8ed0e5cc",
+    "backend/scripts/grid_native_mouth_features_v150.py": "e5dba3ca2a9e5571eed362fef3728db29819add8b1a7c557e85b05c70485d04d",
+    "backend/scripts/mouth_articulation_core_v122.py": "fca2cb169967f36f4da3616764c1fdca9cafafdd53ab5f3dc2dadfa6608b4ad9",
+    "backend/scripts/native_mouth_features_v123.py": "400354cd9cad063ba887c5b3774598d8975cabe39f7368f57eae20278fcb98e1",
+    "backend/scripts/review_native_mouth_features_v124.py": "d4e89aad13608c0421082f2aa13eb7555a24a355897b21bfd0f015f51355ba7b",
+    "backend/scripts/fit_native_mouth_heads_v125.py": "22f3e44bc600af07951c52d30e78df145398431aed6dca04465c928c37310382",
+    "backend/scripts/native_mouth_readout_v126.py": "c9f56c1e5573fc906aec31d863980c03b37eab7f06fddf980a7802c13f50db96",
+    "backend/scripts/evaluate_native_mouth_v127.py": "2975f04e203c6f90474bd2fbc4a21677735abbe3a0d05b9bed85b85981573a84",
+    "backend/scripts/review_native_mouth_v129.py": "ef6fef4070fac15e02680c98fd92c66f22095d9f8a570600b095005713073a30",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917"
+  },
+  "transfer_plan_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "private_transfer_plan_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+  "construction_freeze_sha256": "6677444fd0094d5e3ebd96e1b9dc0172103dc1f4ecf52862ab469a185ade234c",
+  "feature_freeze_sha256": "5d7673e8d3514b761fef5f9068de4986072971ba2bda8dc404ac135015db27c3",
+  "reference_and_heads_sha256": "3fb77ee6d4fc95748c46b1aa43b59a0522c2029ff6cb323c61865656aebd0d6a",
+  "calibrations_and_research_points_sha256": "9e669c19a28d0ab4f99cd9fc3f4990fb26367fe3f0dd81a6157fa9a8c1c0ee70",
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2",
+    "threadpoolctl": "3.6.0"
+  },
+  "pilot_clips": 16,
+  "planned_cases": 176,
+  "arms": [
+    "visual_only",
+    "concatenation",
+    "interaction"
+  ],
+  "settings": [
+    "0",
+    "1",
+    "2"
+  ],
+  "primary_setting": "2",
+  "comparison": "strict_greater_than",
+  "terminal_cell_policy": "exclude_unverified_terminal_cell",
+  "scope": "Frozen mouth-head transfer on the fixed pilot and separate dense common-input timing diagnostic. No complete serving baseline, reserve execution, refitting or confidence change."
+}

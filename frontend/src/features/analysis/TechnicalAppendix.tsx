@@ -90,11 +90,11 @@ export default function TechnicalAppendix({ analysis, runs, token, legacyMetadat
         <Disclosure label="Reproducibility manifest" summary={m ? m.pipeline_version : 'not recorded'} testId="appendix-manifest">
           {m ? <Dl rows={manifestRows} keyWidth={144} /> : <p className="m-0 text-small text-text-muted">This analysis carries no reproducibility manifest (v0.3 pipeline).</p>}
         </Disclosure>
-        <Disclosure label="Detectors and weights" summary={`${(m?.detectors ?? []).length}`} testId="appendix-detectors">
-          <Table testId="appendix-detector-table" head={['Check', 'Version', 'Weights / revision', 'Licence', 'Device', 'Status', 'Duration']}
+        <Disclosure label="Analysis checks" summary={`${(m?.detectors ?? []).length}`} testId="appendix-detectors">
+          <Table testId="appendix-detector-table" head={['Check', 'Version', 'Licence', 'Device', 'Status', 'Duration']}
             rows={(m?.detectors ?? []).map((x, i) => {
               const r = runOf(x.id)
-              return [`Check ${i + 1}`, mono(x.version), x.weights_sha256 ? hash(x.weights_sha256) : x.revision ? mono(shortHash(x.revision)) : or(null, 'model-free'), or(x.licence),
+              return [`Check ${i + 1}`, mono(x.version), or(x.licence),
                 or(deviceWords(x.device ?? r?.device, x.precision ?? r?.dtype)), r?.status ?? '—', r?.duration_ms != null ? mono(fmtSeconds(r.duration_ms / 1000, 2)) : '—']
             })} />
         </Disclosure>

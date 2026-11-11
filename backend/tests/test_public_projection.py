@@ -1,6 +1,33 @@
 from app.api.public_projection import alias_id, original_id, project, project_card
 
 
+def test_public_results_withhold_checkpoint_pins_and_preserve_source_identity():
+    import json
+    from copy import deepcopy
+
+    from app.api.v2_evidence import _json
+
+    checkpoint = 'sample-private-revision'
+    weights = 'b' * 64
+    row = {'id': 'vid.frames.dfdc_b7', 'version': '0.3.1', 'revision': checkpoint, 'weights_sha256': weights}
+    signal = {'detector_id': row['id'], 'model_revisions': {'dfdc.effnet_b7_555': checkpoint}}
+    payload = {
+        'revision': 3, 'result_hash': 'a' * 64,
+        'manifest': {'detectors': [row]}, 'signals': [signal],
+        'source_metadata': {'revision': 'Source revision'},
+    }
+    original = deepcopy(payload)
+    actual = json.loads(_json(payload).body)
+    assert actual['manifest']['detectors'] == [{
+        'id': alias_id(row['id']), 'version': '0.3.1', 'revision': None, 'weights_sha256': None,
+    }]
+    assert actual['signals'][0]['model_revisions'] == {}
+    assert actual['revision'] == 3 and actual['result_hash'] == 'a' * 64
+    assert actual['source_metadata'] == payload['source_metadata']
+    assert checkpoint not in str(actual) and weights not in str(actual)
+    assert payload == original
+
+
 def test_legacy_video_voice_scores_use_the_same_public_projection_as_recording_scores():
     from copy import deepcopy
 
@@ -153,7 +180,10 @@ def test_v1_export_audits_exact_delivered_bytes(monkeypatch):
     class FakeAnalysis:
         status = 'done'
         result = {'signals': [{'id': 'img.dda:global', 'name': 'DDA',
-                               'observed': 'user text says DDA', 'category': 'model'}],
+                               'observed': 'user text says DDA', 'category': 'model',
+                               'model_revisions': {'dda.dinov2_vitl14_lora': 'private-checkpoint'}}],
+                  'manifest': {'detectors': [{'id': 'img.dda', 'version': '1.0',
+                                              'revision': 'private-checkpoint', 'weights_sha256': 'b' * 64}]},
                   'metadata': {'Software': 'DDA'}, 'artifacts': ['gradcam_dima806.jpg']}
 
         def to_summary(self):
@@ -171,6 +201,8 @@ def test_v1_export_audits_exact_delivered_bytes(monkeypatch):
     assert data['result']['signals'][0]['id'] == alias_id('img.dda:global')
     assert data['result']['signals'][0]['name'] != 'DDA'
     assert data['result']['signals'][0]['observed'] == 'user text says DDA'
+    assert data['result']['signals'][0]['model_revisions'] == {}
+    assert 'private-checkpoint' not in str(data['result']) and 'b' * 64 not in str(data['result'])
     assert data['result']['metadata']['Software'] == 'DDA'
     assert data['filename'] == 'DDA photo.jpg'
     assert 'dima806' not in data['result']['artifacts'][0]

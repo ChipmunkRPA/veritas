@@ -270,6 +270,8 @@ def _project(value: Any, *, field: str, source_text: bool, candidates: tuple[str
 
     if field in _SOURCE_FIELDS:
         return value
+    if field == 'model_revisions':
+        return {}
     if isinstance(value, list):
         return [walk(item, field=field, source_text=source_text) for item in value]
     if isinstance(value, dict):
@@ -343,9 +345,10 @@ def _project(value: Any, *, field: str, source_text: bool, candidates: tuple[str
             elif key == 'scores' and field in {'finding_sentence', 'source_sentence'} and isinstance(item, dict):
                 out[key] = {_SENTENCE_SCORES.get(str(k), str(k) if k in _SENTENCE_SCORES.values() else alias_signal(str(k))): v
                             for k, v in item.items()}
-            elif key in {'model_revisions', 'scores'}:
-                out[key] = {(_model_alias(str(k)) if key == 'model_revisions' else alias_signal(str(k))): v
-                            for k, v in item.items()} if isinstance(item, dict) else item
+            elif field == 'detectors' and key in {'revision', 'weights_sha256'} and not is_source:
+                out[key] = None
+            elif key == 'scores':
+                out[key] = {alias_signal(str(k)): v for k, v in item.items()} if isinstance(item, dict) else item
             elif key == 'sentences' and isinstance(item, list):
                 out[key] = [walk(sentence, field=('source_sentence' if isinstance(sentence, dict)
                               and isinstance(sentence.get('start'), int) and isinstance(sentence.get('end'), int)

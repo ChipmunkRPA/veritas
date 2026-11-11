@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "slot-01-chroma_conversion_only": {
+      "archive_sha256": "775d7e36f07bd677015df88c2a999b2350ee81c66149fca70f92e269324918ef",
+      "receipt_sha256": "130259d2e69edff4b42b2af5c996103fec1a554a430ef3bb543c278e9caa0928",
+      "status": "archived"
+    },
+    "slot-01-recompression_only": {
+      "archive_sha256": "ca183987a18e53abd0842ddf89b3d92b8b645ed54fd44f3034bccca2dbc87e57",
+      "receipt_sha256": "2793f6cd35f480df2c10212d522d8c12958ef9287c7e297a012902ad1a2a425a",
+      "status": "archived"
+    },
+    "slot-01-unchanged": {
+      "archive_sha256": "2c5168424b103c67958c027b3524f5c6f59ae95c7eac974b662695838bafcb98",
+      "receipt_sha256": "5d986f5764359e9b814a40aa3f2e5b97abe8df2ef23336f0cd94faeb53b64af2",
+      "status": "archived"
+    }
+  },
+  "code_sha256": {
+    "backend/scripts/video_face_confound_v222.py": "ac8aa6af0f5b02b320fd891808fe075f06dd242dff3ff2efa53ffa832d286ee7",
+    "backend/scripts/video_webcam_confound_v224.py": "405021c859f3dacb2d491ea1740bf85deaa437703d01fc40ad12efe6de112941",
+    "backend/tests/test_video_face_confound_v222.py": "2c4db19dd4d652d3ed158d18a9fda42c2eeef59293916192177f27ff853044ea",
+    "backend/tests/test_video_webcam_confound_v224.py": "a8b27e67e70075850e94ff2983162584d21371b7901f0c5567ecdfe019248666",
+    "docs/video-webcam-confound-v224-method.md": "8e1299962cd7722fc9d602be1313ee94452a9fffe883b3385fe764aea7442428"
+  },
+  "ffmpeg_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+  "model_calls_permitted": false,
+  "schema": "chipmunk.video-webcam-confound-freeze/224",
+  "serving_change_permitted": false,
+  "v200_qualification_sha256": "05036bda0cccb7e88d044c3c4512bde43c2116bba14d39671ebdfc4d32e45b9f",
+  "v202_freeze_sha256": "0e63e032a3cae35590862ca43cf2eceeb29b7558d884fa9ce76124b3e06c5489"
+}

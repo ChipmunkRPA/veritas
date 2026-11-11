@@ -1,0 +1,55 @@
+{
+  "schema": "chipmunk.grid-audio-repetition-codecs-freeze/170",
+  "code_sha256": {
+    "backend/scripts/grid_audio_repetition_codecs_v170.py": "bad483ad53ec731abd178697c52f9ae076e872f3ea8685a68a3bf395b708a071",
+    "backend/scripts/audio_repetition_similarity.py": "9efa1e1280319a220db939a93215e40fd4a8f6120690618c574b384a5c5075cf",
+    "backend/tests/test_audio_repetition_similarity.py": "47404588f6edb3d8ddaf61c60b0bc2a57334e9f955bf20aa190e3b9f658b45a6",
+    "backend/scripts/audio_exact_repetition.py": "71d38ca03d1f5ce98887cdd213544299eac5e1b1c4a07218e21cfc2d3a3c5f58",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "docs/grid-audio-repetition-codecs-v170-method.md": "ff2c1ddc665b7ae491fad45141e1d43d3dfa989ce1cc6017345381d2322efdad"
+  },
+  "prior_source_freeze_sha256": "067cfe037148cbbc822f5b90d886dac4a7c04c8767ddd9a28bc48fbf5be6506b",
+  "prior_source_result_sha256": "cd4ce5abc592bde61e1d18f8221af384bb59f107884ccc2067feab41ca19a687",
+  "codec_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "fixed_channels": {
+    "pcm": [
+      ".wav",
+      []
+    ],
+    "aac_64k": [
+      ".m4a",
+      [
+        "-c:a",
+        "aac",
+        "-b:a",
+        "64k"
+      ]
+    ],
+    "mp3_64k": [
+      ".mp3",
+      [
+        "-c:a",
+        "libmp3lame",
+        "-b:a",
+        "64k"
+      ]
+    ],
+    "opus_48k": [
+      ".opus",
+      [
+        "-c:a",
+        "libopus",
+        "-b:a",
+        "48k"
+      ]
+    ]
+  },
+  "minimum_copy_witness_samples": 2400,
+  "maximum_similarity_copy_lag_error_samples": 32,
+  "planned_cases": 256,
+  "scope": "Consumed GRID waveform similarity engineering. No fitting, AI directions or customer change."
+}

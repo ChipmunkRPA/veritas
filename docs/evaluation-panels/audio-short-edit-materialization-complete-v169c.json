@@ -1,0 +1,72 @@
+{
+  "duration_s": 54.542580542038195,
+  "freeze_sha256": "de3c16a52066f7420c6292be0e63956c9ab670f454f5d06e61f546309fd1f512",
+  "holdout_scored": false,
+  "max_sampled_descendant_rss_bytes": 620969984,
+  "new_neural_calls": 0,
+  "private_attempt_journal_sha256": "7c39a42be206895a17a8872bd1b003c87ce39e9868d12eccae34d38965db2bf0",
+  "private_roster_sha256": "e04b97de73b8f82de00de5705a36dc84bd4f4002d3ce84381b06435d4e06336c",
+  "resource_profile_sha256": "b92ae432d3ced69eba0e9debfb88ee4208e0e0c1e0ac4063ae2e0b13fe12d540",
+  "roles": {
+    "development": {
+      "attempt_counts": {
+        "attempted": 41,
+        "clone_qualified": 5,
+        "expressive_qualified": 12,
+        "genuine_qualified": 14,
+        "noise_qualified": 4,
+        "stock_qualified": 6
+      },
+      "foregrounds": {
+        "clone": {
+          "qualified": 5
+        },
+        "expressive": {
+          "qualified": 12
+        },
+        "genuine": {
+          "qualified": 14
+        },
+        "stock": {
+          "qualified": 6
+        }
+      },
+      "noise": {
+        "qualified": 4
+      },
+      "private_manifest_sha256": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8"
+    },
+    "holdout": {
+      "attempt_counts": {
+        "attempted": 44,
+        "clone_qualified": 6,
+        "expressive_qualified": 12,
+        "genuine_qualified": 16,
+        "noise_qualified": 4,
+        "stock_qualified": 6
+      },
+      "foregrounds": {
+        "clone": {
+          "qualified": 6
+        },
+        "expressive": {
+          "qualified": 12
+        },
+        "genuine": {
+          "qualified": 16
+        },
+        "stock": {
+          "qualified": 6
+        }
+      },
+      "noise": {
+        "qualified": 4
+      },
+      "private_manifest_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+    }
+  },
+  "sample_rate": 16000,
+  "schema": "chipmunk.audio-short-edit-materialization-result/169c",
+  "source_samples": 48000,
+  "status": "complete"
+}

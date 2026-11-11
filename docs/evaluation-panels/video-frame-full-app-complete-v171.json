@@ -1,0 +1,73 @@
+{
+  "schema": "chipmunk.video-frame-full-app-readout/171",
+  "freeze_sha256": "d2934fecf1d29225a3c90dd0a3e978fff6c1c47b101f268fe6dee702f29241fb",
+  "arms": {
+    "reference": {
+      "pipeline_status": "done",
+      "analysis_status": "done",
+      "input": {
+        "clock_exact": true,
+        "rgb_exact": true,
+        "pcm_exact": true,
+        "sampled_frames": 24,
+        "faces": 24
+      },
+      "target_status": "skipped",
+      "target_scored_frames": 0,
+      "target_signal_published": false,
+      "target_series_published": false,
+      "packet_count": 1,
+      "packet_set_ready": true,
+      "run_status_counts": {
+        "not_applicable": 1,
+        "ok": 13,
+        "skipped": 1
+      },
+      "target_budget_skip": true,
+      "customer_direction": "unavailable",
+      "planned_activation_bytes": 6710886400,
+      "sampled_tree_rss_bytes": 4858970112,
+      "worker_duration_seconds": 40.604155333014205,
+      "private_arm_receipt_sha256": "c01c8178ec6a3a9e71c678b687c27f5a4ee98e9ac27b0d9fa28774dda81e67e2",
+      "private_resource_profile_sha256": "2992a0fb94ff4dfa5e0bc8ebaa600695ea84ac7fc82d18d4cacb1d9f2645756f"
+    },
+    "batch-one": {
+      "pipeline_status": "done",
+      "analysis_status": "done",
+      "input": {
+        "clock_exact": true,
+        "rgb_exact": true,
+        "pcm_exact": true,
+        "sampled_frames": 24,
+        "faces": 24
+      },
+      "target_status": "ok",
+      "target_scored_frames": 24,
+      "target_signal_published": true,
+      "target_series_published": true,
+      "packet_count": 1,
+      "packet_set_ready": true,
+      "run_status_counts": {
+        "not_applicable": 1,
+        "ok": 14
+      },
+      "target_budget_skip": false,
+      "customer_direction": "original",
+      "planned_activation_bytes": 838860800,
+      "sampled_tree_rss_bytes": 5441732608,
+      "worker_duration_seconds": 46.69137129106093,
+      "private_arm_receipt_sha256": "10416b210a1dbf8fbd00ab54cdd60a8354a19495b63ca61d8953d05ab8eb35f9",
+      "private_resource_profile_sha256": "3c100b0183ad3168a0c3162cfb2ab1eba9c68827e613f176c9270f87981a32d8"
+    }
+  },
+  "comparison": {
+    "both_full_analyses_published": true,
+    "both_exact_input_bindings": true,
+    "reference_budget_skip": true,
+    "candidate_scored_and_published": true,
+    "same_non_target_route_statuses": true,
+    "same_fuser": true
+  },
+  "engineering_passed": true,
+  "scope": "One genuine CRF24 HD control paired across full-app arms. No sensitivity or threshold claim."
+}

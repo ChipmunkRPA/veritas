@@ -1,0 +1,31 @@
+{
+  "schema": "chipmunk.grid-native-mouth-features-complete/150",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_used": 16,
+  "complete_guarded_stages": 16,
+  "planned_cases": 176,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "maximum_sampled_descendant_rss_bytes": 1020379136,
+  "worker_duration_seconds": {
+    "minimum": 24.44760212500114,
+    "maximum": 25.808266459032893,
+    "sum": 397.953289293102
+  },
+  "freeze_sha256": "5d7673e8d3514b761fef5f9068de4986072971ba2bda8dc404ac135015db27c3",
+  "defaults_changed": false,
+  "extracted_cases": 176,
+  "unavailable_cases": 0,
+  "native_pictures": 13200,
+  "assessed_mouth_pictures": 13200,
+  "exact_rgb_cache_hits": 9440,
+  "face_inputs": 3776,
+  "image_inputs": 3776,
+  "new_speech_encoder_calls": 0,
+  "speech_supported_positions": 12320,
+  "speech_unavailable_positions": 880,
+  "bitwise_equal_fixed_repeats": 16,
+  "scope": "Actual blind all-native feature extraction using each case\u2019s observed soundtrack and independent array arithmetic checks. No authenticity score, achieved phonetics, calibration fitting or serving change.",
+  "private_complete_execution_collection_sha256": "5b4c272e09413a4746c76d62c951684d55c76f1032dba127f9b4a8b5cd91c3b0"
+}

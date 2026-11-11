@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.grid-serving-baseline-storage-stop/153",
+  "status": "pipeline_storage_failed",
+  "planned_cases": 11,
+  "attempted_cases": 11,
+  "completed_analyses": 0,
+  "failed_at_ingest": 11,
+  "detector_run_records": 0,
+  "observed_neural_forward_count": null,
+  "resolved_device": "mps",
+  "failure": {
+    "type": "OSError",
+    "errno": 45,
+    "operation": "atomic object-store hard link",
+    "observed": "Operation not supported by the benchmark external filesystem"
+  },
+  "recorder_exit_code": 0,
+  "monitor_guard": null,
+  "monitor_sample_errors": 0,
+  "worker_duration_seconds": 18.242055541020818,
+  "sampled_descendant_rss_bytes": 883490816,
+  "private_worker_receipt_sha256": "ba99ee03256eb2e124d54c0da842eb91171848e6ac4e15f3c87c447190ca0b39",
+  "private_profile_sha256": "1c763bcffd397d13061f6e411550caa0fd3abe6c1efd94158836f0692488c606",
+  "private_worker_log_sha256": "802534e0d7605404a5466ea6ce1159d15e999a9be4ce775da79af72df239c2ff",
+  "private_case_journal_sha256": "45ea7d05b2fccea3aff816da599b0ac6191eaf38f4e2e5b81c43361b7d8c0218",
+  "freeze_sha256": "ffd0f829da9ba8658458c75d49271d1d05c624fbebf2ce115a1c114513fc69e9",
+  "defaults_changed": false,
+  "scope": "Isolated serving recorder finished and retained all eleven failed ingests. No detector stage was reached. This is a storage compatibility failure, not an inference, accuracy, model-coverage or originality result. Do not retry or overwrite this attempt."
+}

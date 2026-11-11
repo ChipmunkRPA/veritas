@@ -1,0 +1,405 @@
+{
+  "schema": "chipmunk.grid-audio-repetition-codecs-result/170",
+  "status": "complete",
+  "freeze_sha256": "bf7f04231b9d319d93be91be93372e6592cdff26163e55f4c7825397f75e53b2",
+  "private_observations_sha256": "6cbe7f34744404059029cecc43e58766f4202554d99979710af14440bf250458",
+  "planned_cases": 256,
+  "new_neural_calls": 0,
+  "channels": {
+    "pcm": {
+      "original": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        }
+      },
+      "hard_copy": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 16,
+          "matching_copy_support": 16
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 8,
+          "matching_copy_support": 8
+        }
+      },
+      "fade_20_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 16,
+          "matching_copy_support": 16
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 8,
+          "matching_copy_support": 8
+        }
+      },
+      "fade_50_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 16,
+          "matching_copy_support": 16
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 9,
+          "matching_copy_support": 9
+        }
+      }
+    },
+    "aac_64k": {
+      "original": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 480,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        }
+      },
+      "hard_copy": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 480,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 2,
+          "matching_copy_support": 2
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 9,
+          "matching_copy_support": 9
+        }
+      },
+      "fade_20_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 480,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 1,
+          "matching_copy_support": 1
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 9,
+          "matching_copy_support": 9
+        }
+      },
+      "fade_50_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 480,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 1,
+          "matching_copy_support": 1
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 10,
+          "matching_copy_support": 10
+        }
+      }
+    },
+    "mp3_64k": {
+      "original": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          1105
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        }
+      },
+      "hard_copy": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          1105
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 8,
+          "matching_copy_support": 8
+        }
+      },
+      "fade_20_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          1105
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 8,
+          "matching_copy_support": 8
+        }
+      },
+      "fade_50_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          1105
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 9,
+          "matching_copy_support": 8
+        }
+      }
+    },
+    "opus_48k": {
+      "original": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        }
+      },
+      "hard_copy": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 9,
+          "matching_copy_support": 9
+        }
+      },
+      "fade_20_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 10,
+          "matching_copy_support": 10
+        }
+      },
+      "fade_50_ms": {
+        "planned": 16,
+        "decode_status": {
+          "decoded": 16
+        },
+        "decoded_origins_16k_samples": [
+          0
+        ],
+        "maximum_decoded_tail_samples_excluded": 0,
+        "exact": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 0,
+          "matching_copy_support": 0
+        },
+        "similarity": {
+          "statuses": {
+            "measured": 16
+          },
+          "with_reported_spans": 10,
+          "matching_copy_support": 10
+        }
+      }
+    }
+  },
+  "private_resource_profile_sha256": "b09562049bad6585213a04bde1c0e2a99ca0b554229eaa8ad6d4a26e895d48a5",
+  "maximum_sampled_descendant_rss_bytes": 93749248,
+  "worker_duration_seconds": 33.75783845805563
+}

@@ -1,0 +1,424 @@
+{
+  "schema": "chipmunk.image-translation-transfer/1",
+  "main_source_groups": 16,
+  "hard_control_groups": 8,
+  "views": 176,
+  "freeze_sha256": "1f6bccd1a77bb1bde511846b7fb7476dc7cdb764feb3326cb7a86613b34f5d23",
+  "journal_sha256": "62bcb648f3cfea80d9bfca260ed1135fd9aa7277508ac60e6f8369b5dbd651ad",
+  "results": {
+    "png": {
+      "original": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 102.14
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 57.64
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 160.73
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "tone": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 109.86
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 57.91
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 168.57
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "blur": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 102.04
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 57.75
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 161.9
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "copy_96": {
+        "geometric": {
+          "views": 16,
+          "flagged": 7,
+          "useful": 4,
+          "unassessed": 0,
+          "median_ms": 102.4
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 14,
+          "useful": 13,
+          "unassessed": 0,
+          "median_ms": 27.24
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 14,
+          "useful": 13,
+          "unassessed": 0,
+          "median_ms": 27.91
+        },
+        "combined_vs_geometric": {
+          "gains": 9,
+          "losses": 0
+        }
+      },
+      "copy_144": {
+        "geometric": {
+          "views": 16,
+          "flagged": 9,
+          "useful": 5,
+          "unassessed": 0,
+          "median_ms": 104.66
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 15,
+          "useful": 15,
+          "unassessed": 0,
+          "median_ms": 24.92
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 15,
+          "useful": 15,
+          "unassessed": 0,
+          "median_ms": 26.72
+        },
+        "combined_vs_geometric": {
+          "gains": 10,
+          "losses": 0
+        }
+      },
+      "hard_control": {
+        "geometric": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 76.81
+        },
+        "native_patch": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 55.04
+        },
+        "combined": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 132.27
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      }
+    },
+    "jpeg90": {
+      "original": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 101.66
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 57.06
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 160.67
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "tone": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 109.33
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 59.58
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 173.67
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "blur": {
+        "geometric": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 101.45
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 56.91
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 160.81
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      },
+      "copy_96": {
+        "geometric": {
+          "views": 16,
+          "flagged": 5,
+          "useful": 3,
+          "unassessed": 0,
+          "median_ms": 105.57
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 10,
+          "useful": 9,
+          "unassessed": 0,
+          "median_ms": 35.87
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 11,
+          "useful": 10,
+          "unassessed": 0,
+          "median_ms": 56.87
+        },
+        "combined_vs_geometric": {
+          "gains": 7,
+          "losses": 0
+        }
+      },
+      "copy_144": {
+        "geometric": {
+          "views": 16,
+          "flagged": 9,
+          "useful": 4,
+          "unassessed": 0,
+          "median_ms": 106.37
+        },
+        "native_patch": {
+          "views": 16,
+          "flagged": 12,
+          "useful": 9,
+          "unassessed": 0,
+          "median_ms": 27.54
+        },
+        "combined": {
+          "views": 16,
+          "flagged": 13,
+          "useful": 9,
+          "unassessed": 0,
+          "median_ms": 28.54
+        },
+        "combined_vs_geometric": {
+          "gains": 5,
+          "losses": 0
+        }
+      },
+      "hard_control": {
+        "geometric": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 75.62
+        },
+        "native_patch": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 54.96
+        },
+        "combined": {
+          "views": 8,
+          "flagged": 0,
+          "useful": 0,
+          "unassessed": 0,
+          "median_ms": 132.35
+        },
+        "combined_vs_geometric": {
+          "gains": 0,
+          "losses": 0
+        }
+      }
+    }
+  },
+  "available_photo_groups_before_selection": 45,
+  "photo_license": "CC BY 2.0",
+  "locally_paired_useful": {
+    "combined_gains": 31,
+    "combined_losses": 0,
+    "distinct_groups_with_useful_combined": 15,
+    "distinct_groups_with_useful_geometric": 5
+  },
+  "development": {
+    "source_groups": 12,
+    "views": 96,
+    "counts": {
+      "png": {
+        "original": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        },
+        "copy": {
+          "views": 12,
+          "reported": 9,
+          "unassessed": 0,
+          "correct": 9
+        },
+        "tone": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        },
+        "blur": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        }
+      },
+      "jpeg90": {
+        "original": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        },
+        "copy": {
+          "views": 12,
+          "reported": 9,
+          "unassessed": 0,
+          "correct": 9
+        },
+        "tone": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        },
+        "blur": {
+          "views": 12,
+          "reported": 0,
+          "unassessed": 0,
+          "correct": 0
+        }
+      }
+    },
+    "plan_sha256": "4141711649a8f370851ffc270900bc278a60e69c8cada5b5419d1bf51396c87e",
+    "private_rows_sha256": "4f44559ba29a12a3492a24555f344522bb5ef7e9b39adab578ab156a9bc25909",
+    "median_ms": 43.0,
+    "max_ms": 64.1
+  },
+  "integration_repeat": {
+    "views": 176,
+    "freeze_sha256": "5098b279a3095faa53b9ebba8ca90703873b7f06bab4eaea5cb7db41d1e70a81",
+    "journal_sha256": "c21fbc6dfda54ad2ce323418f29dc74c486c311474c0d0cee7204185bd691cd3",
+    "production_decision_matches": 176,
+    "mirror_parity_matches": 176,
+    "selection_bases": {
+      "no_pair": 123,
+      "native_patch_alignment": 51,
+      "geometric_features": 2
+    },
+    "measured_repeat_sha256": "c21fbc6dfda54ad2ce323418f29dc74c486c311474c0d0cee7204185bd691cd3"
+  },
+  "decision": "Use dense matches as additional copy evidence, with the existing geometric method as the fallback. Weight in authorship estimate is zero.",
+  "image_boundaries": "Both native endpoints must reach IoU 0.50, order independent. Coordinates refer to pre-compression boxes on the same pixel grid.",
+  "weights_used": false
+}

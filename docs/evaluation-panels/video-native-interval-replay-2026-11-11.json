@@ -1,0 +1,198 @@
+{
+  "duration_comparison": {
+    "clips": 17,
+    "freeze_sha256": "c60127ec39f650c63da1d3b02462149e2c80211bd3cb255ce106dd7ff5cd5ed2",
+    "intervals": [
+      {
+        "before_during_after_s": [
+          "9/4",
+          "5/2",
+          "13/4"
+        ],
+        "core_size": 3,
+        "family": "photo_swap_075",
+        "outcome": "overlap_flag",
+        "start_end_s": [
+          "5/2",
+          "3"
+        ]
+      },
+      {
+        "before_during_after_s": [
+          "9/4",
+          "5/2",
+          "17/4"
+        ],
+        "core_size": 7,
+        "family": "photo_swap_150",
+        "outcome": "overlap_flag",
+        "start_end_s": [
+          "5/2",
+          "15/4"
+        ]
+      }
+    ],
+    "new_model_forwards": 0,
+    "results": {
+      "camera_chroma_conversion_only": {
+        "appearance": {
+          "below": 2
+        },
+        "fixed_short": {
+          "below": 2
+        },
+        "variable": {
+          "below": 2
+        }
+      },
+      "camera_recompression_only": {
+        "appearance": {
+          "below": 2
+        },
+        "fixed_short": {
+          "below": 2
+        },
+        "variable": {
+          "below": 2
+        }
+      },
+      "camera_unchanged": {
+        "appearance": {
+          "below": 2
+        },
+        "fixed_short": {
+          "below": 2
+        },
+        "variable": {
+          "below": 2
+        }
+      },
+      "photo_blur_075": {
+        "appearance": {
+          "below": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "below": 1
+        }
+      },
+      "photo_recode_150": {
+        "appearance": {
+          "below": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "below": 1
+        }
+      },
+      "photo_swap_075": {
+        "appearance": {
+          "overlap_flag": 1
+        },
+        "fixed_short": {
+          "overlap_flag": 1
+        },
+        "variable": {
+          "overlap_flag": 1
+        }
+      },
+      "photo_swap_150": {
+        "appearance": {
+          "overlap_flag": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "overlap_flag": 1
+        }
+      },
+      "photo_unchanged": {
+        "appearance": {
+          "below": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "below": 1
+        }
+      },
+      "publisher_partial_recompression": {
+        "appearance": {
+          "false_flag": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "below": 1
+        }
+      },
+      "publisher_partial_reference": {
+        "appearance": {
+          "false_flag": 1
+        },
+        "fixed_short": {
+          "below": 1
+        },
+        "variable": {
+          "below": 1
+        }
+      },
+      "publisher_swap": {
+        "appearance": {
+          "overlap_flag": 4
+        },
+        "fixed_short": {
+          "below": 4
+        },
+        "variable": {
+          "below": 4
+        }
+      }
+    },
+    "scope": "retrospective",
+    "variable_genuine_groups_flagged": 0
+  },
+  "native_interval_replay": {
+    "archived_png_exhibits_verified": 3,
+    "codecs": [
+      "h264"
+    ],
+    "files_verified": 9,
+    "freeze_sha256": "4342fe5cbc89741753e5de3507d364c4ef523b238aad36aef990c6944c598000",
+    "native_anchors_verified": 27,
+    "native_clock_positions_verified": 2513,
+    "negative_rejections": {
+      "animated_exhibit": "A PNG exhibit must contain exactly one still picture",
+      "bad_receipt_digest": "Receipt SHA-256 differs from the caller's commitment",
+      "end_role": "An anchor falls outside its half-open interval role",
+      "missing_context": "Three ordered before, during and after anchors are required",
+      "wrong_exhibit": "An exhibit differs from the committed native picture",
+      "wrong_rgb": "Decoded RGB differs from the committed native picture",
+      "wrong_source": "Source file does not match the receipt"
+    },
+    "nonzero_native_origin_offset_seconds": "57/8",
+    "source_groups": {
+      "genuine": 2,
+      "publisher_synthetic": 2
+    },
+    "time_bases": [
+      "1/1000",
+      "1/12288"
+    ],
+    "verification_script_sha256": "fa31f8da0797cab06ea38a7c64f3b811b233727f8ed43f4e047c106f5df9d150",
+    "verified_scopes": {
+      "genuine_delivery_control": 6,
+      "genuine_delivery_rebased_same_recording": 1,
+      "known_photo_sequence_insert": 1,
+      "known_publisher_video_insert": 1
+    }
+  },
+  "schema": "chipmunk.native-video-interval-replay-public/1"
+}

@@ -81,6 +81,14 @@ compares source-localized results with unedited originals and matched
 processing controls. Its exact precompression footprint is kept for both formats.
 The [two-editor background patch panel](image-background-patch-transfer-2026-11-11.md)
 tests PNG and JPEG75 with region-matched blur and processing controls.
+The [native copy comparison](image-translation-patch-transfer-2026-11-11.md)
+tests two crop sizes on 16 held-out source groups and reports hard controls
+with natural repetitions in both PNG and JPEG90.
+
+The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
+checks the source clock and exact before, during and after pixels with Python
+and FFmpeg. Its local receipt distinguishes native source verification from
+retrospective scoring.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

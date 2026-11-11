@@ -107,8 +107,11 @@ integration remains unfinished.
   A [short-window test](video-face-short-window-2026-11-11.md) localized one of
   two authored photo swaps and flagged none of 11 controls. It missed all four
   publisher-video variants. The current appearance check found all six edited
-  deliveries and flagged two synthetic controls. Keep the current check and
-  test a variable-duration candidate on a separate moving source.
+  deliveries and flagged two synthetic controls. The [wider-window replay](video-native-interval-replay-2026-11-11.md)
+  recovered the longer synthetic photo edit, with all four moving publisher
+  variants still missed. The same work adds a portable way to verify interval
+  endpoints and original before, during and after pixels. Keep the current
+  appearance check and seek an additional moving source.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -122,7 +125,9 @@ integration remains unfinished.
   the gate kept three useful PNG locations and flagged 23/48 controls. It found
   zero JPEG75 locations. The existing routes remain preferred. The app now
   presents [two source crops for non-mirrored copy matches](source-evidence-native-coverage-2026-11-11.md#automatic-copy-similarity-without-mirroring)
-  with zero weight in the AI estimate.
+  with zero weight in the AI estimate. The [native patch addition](image-translation-patch-transfer-2026-11-11.md)
+  raised correct source-pair localization from 9/32 to 28/32 for PNG and from
+  7/32 to 19/32 for JPEG90, with zero pairs on 56 controls in each format.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
@@ -132,13 +137,17 @@ integration remains unfinished.
   A [background corroboration replay](audio-background-corroboration-2026-11-11.md)
   reduced those five false flags to three and preserved all 25 existing synthetic
   flags. The fresh challenge had limited genuine-speech coverage under strong
-  noise, so a new real-error panel is needed before adoption.
+  noise. The [stronger frozen transfer](audio-frozen-corroboration-transfer-2026-11-11.md)
+  reproduced five false flags across two backgrounds and neither check removed
+  one. Each lost one synthetic detection. Keep both experimental.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
   generator families. The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md)
   localized 10/22 rewrites versus 13/22 for the strict rule. Both flagged zero
-  of 33 human controls. Keep the current writing check.
+  of 33 human controls. Keep the current writing check. The ordinary document
+  view and PDF now show the reason and coordinates when a hybrid PDF page was
+  only partly checked.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.video-faceswapai-edge-review-freeze/194",
+  "prior_freeze_sha256": "d957cf1743c5edd5eabea4c0ec2685d4ed72fbb31955c95e79095e97a32b41e5",
+  "prior_result_sha256": "838fdc56385e1ae1cec710fe849f8314584f5fa1aaea2450695a86038d9863a7",
+  "code_sha256": {
+    "video_faceswapai_edge_review_v194.py": "02c3d0ec33e4e19f15b106ad0a7eddfeb51ded3a93eb2fad89c1894d9e388c4a",
+    "test_video_faceswapai_edge_review_v194.py": "02d1db98f4476b691c7b94a2488c57dbb3c0c5e70326c0a1edba2e20856c243b",
+    "video-faceswapai-edge-review-v194-method.md": "c8a2b48c4d4016f17530764dc1453925f2c29bf3e5b5b18021d4e8db9ede590a",
+    "face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "face_interval_binding.py": "f5bceaf615f91a79367a89d829e2372f5d4f6e9ac1e78ba4a8fb369dd67c32e2",
+    "decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074"
+  },
+  "weight_sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+  "binary_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "sqlalchemy": "2.0.52"
+  },
+  "cases": {
+    "unchanged": {
+      "input_sha256": "eddd084afb51d70cf61fbbed46bff08787800564c917bbd27ff0e970c794aede",
+      "database_sha256": "2460e2e93d410b9845a006f082089d732c95bafdb68f0cedb5aa423103f1baca",
+      "case_sha256": "016f901dfaca5d7667421c2d2a4d8974f0ba94661fcad337089cb95b9ce38e3c"
+    },
+    "recompression_only": {
+      "input_sha256": "2a3fea1242762b49fb2bf531c9ad1ef54c360e532e16b56b2666afa828e8c09c",
+      "database_sha256": "af904f8bd5782923b1ae29b7c4ad64b13e4cfd57c43d31e6534b9ff40c3a020e",
+      "case_sha256": "03cd6ce066b3edf939650eec56ca4b8460425ffa35500c23585ce966b89bb5b5"
+    },
+    "swap_tv_bt601": {
+      "input_sha256": "04e4500fabb9c5241eb57f99322aef6a10e787f234ec8ce1bdaaaa2424b7aa0d",
+      "database_sha256": "ea0bd2baee9d132e0b5ae543a27643dd82e41e92777da74aa75f08b83107d965",
+      "case_sha256": "229db167ec04f16671f2ee5c43f26764cd76524765aeb3baa46dc9a03f7d5c1b"
+    },
+    "swap_pc_bt601": {
+      "input_sha256": "bd3ad48e2ba14f52c3cf7b1b1b8bb32f5fb101a0f65e7073a769593d84581a2e",
+      "database_sha256": "a16c127a33c596d10dbd072fc765324c4142056fece796bc2ebbe4609b26e434",
+      "case_sha256": "37a525a181a036ff1a16c7587fa2f0c338f3098e3841048070a2eaa969485ccd"
+    },
+    "swap_tv_bt709": {
+      "input_sha256": "96bd5bb81df358b5255c2d16f0a12c93f4f22e79a3aa0b96436034951ba8c873",
+      "database_sha256": "5663b1189bebccdfe513d2137a5ca7680b74d4978d809941a7ec5a63b23cdcae",
+      "case_sha256": "2628adc894657bc67ff8f01b0d6ffa615cc5b9bd323005a466c229311edf1cfb"
+    },
+    "swap_pc_bt709": {
+      "input_sha256": "f4e7df4f9dc104891d8e4515dadeebea7808f16284f5c5c2059b6b804d96a9c2",
+      "database_sha256": "eee4292fc5b90247269d3c34cb82f87f186e80a3ea0794cfb6d4bddeed5245b6",
+      "case_sha256": "80a1ec28cf0d2f8bcb8189cac517e86f4be5ed6249f124a1070e4e7b58cd56df"
+    }
+  },
+  "separation_point": 0.11243900750879454,
+  "appearance_replay_tolerance": 1e-06,
+  "scope": "One consumed synthetic source component. Same-track appearance context; no authenticity or serving claim."
+}

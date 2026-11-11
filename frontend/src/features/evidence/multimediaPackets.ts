@@ -191,14 +191,19 @@ export interface DocumentEvidencePacket extends PacketBase {
   inspection_scope?: { basis: 'scored_context' | 'ratio_reduction'; spans: Pick<TextSpan, 'start' | 'end'>[] }
   context_comparison?: DocumentContextComparison
 }
+export interface DocumentComparisonInput {
+  spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number
+  token_coverage: Record<string, number>
+}
 export interface DocumentContextComparison {
   schema: 'chipmunk.document-context-comparison/1'; status: 'recorded' | 'not_assessed'; evidence_type: 'context'
   authorship_confidence_pct: null; affects_overall_confidence: false; focus: { start: number; end: number }
   note: string; reason: string | null; omitted_checks: number
+  isolated_paragraph?: { signal_ref: EvidenceRef; context: DocumentComparisonInput; paragraph: DocumentComparisonInput
+    supports_inspection: boolean; note: string }
   checks: { signal_ref: EvidenceRef; score_kind: 'classifier_probability'; distinct_inputs: number
     lowest_response: number; highest_response: number; response_spread: number; omitted_inputs: number
-    inputs: { spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number
-      token_coverage: Record<string, number> }[] }[]
+    inputs: DocumentComparisonInput[] }[]
 }
 export interface DocumentEvidenceWindow {
   signal_ref: EvidenceRef; spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number

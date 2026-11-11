@@ -6,6 +6,7 @@ import io
 import json
 import math
 from copy import deepcopy
+from types import SimpleNamespace
 
 import numpy as np
 import pymupdf
@@ -137,6 +138,78 @@ def test_other_check_disagreement_is_retained_for_selected_context(packet_factor
     analysis.result_hash = canonical_hash(result)
     evidence = build_packet_set(db, analysis, store, result)
     assert [w["score"] for w in evidence["packets"][0]["supporting_windows"]] == [0.9, 0.1]
+
+
+def test_opt_in_paragraph_review_preserves_detector_scores_and_binds_both_inputs(packet_factory, monkeypatch):
+    from app.core.config import Settings, settings
+    from app.detectors.text.adapters.learned import FourClassTextDetector
+    from app.engine.boundary import Deadline
+    from app.evidence.document_context import validate
+
+    body = "\n\n".join((
+        "This opening paragraph has enough source words to describe the project and introduce the current report to local readers.",
+        "The review compares the supplied paragraph with its original published context so local readers can inspect the exact supporting input.",
+        "A second passage describes the relevant material and illustrates how paragraph boundaries preserve original source coordinates during document review.",
+        "The closing text gives the reviewer enough detail to understand the result and to check its limitations in context.",
+    ))
+    db, store, analysis, result, decoded, _ = packet_factory(".txt", scores=(0.1, 0.9, 0.2, 0.1), text=body)
+
+    class Classifier:
+        def __init__(self):
+            self.calls = []
+            self.incomplete = False
+
+        def tok(self, text, **kwargs):
+            return {"input_ids": list(range(len(text.split()) + 2))}
+
+        def predict(self, inputs, **kwargs):
+            self.calls.append(inputs)
+            self.last_coverage = [{"tokens": 18, "covered_tokens": 18, "token_windows": 1} for _ in inputs]
+            if self.incomplete and len(inputs) == 1 and kwargs.get("batch") == 2:
+                self.last_coverage[0].update(covered_tokens=17, omitted_tokens=1)
+            return [0.1, 0.9, 0.2, 0.1] if len(inputs) == 4 else [0.81]
+
+    classifier = Classifier()
+    monkeypatch.setattr(FourClassTextDetector, "backend", lambda self, ctx: classifier)
+    context = SimpleNamespace(outputs=SimpleNamespace(document=decoded), deadline=Deadline(),
+                              lease={FourClassTextDetector.MODEL_ID: SimpleNamespace(revision="test")})
+    assert Settings.model_fields["text_isolated_paragraph_review"].default is False
+    monkeypatch.setattr(settings, "text_isolated_paragraph_review", False)
+    ordinary = FourClassTextDetector().run(context)
+    assert len(classifier.calls) == 2 and "isolated_paragraph_review" not in ordinary.details["text_evidence"]
+    monkeypatch.setattr(settings, "text_isolated_paragraph_review", True)
+    enabled = FourClassTextDetector().run(context)
+    assert len(classifier.calls) == 5 and classifier.calls[-1] == [body.split("\n\n")[1]]
+    assert ordinary.unit_scores == enabled.unit_scores and ordinary.aggregate == enabled.aggregate
+    result["signals"][0]["details"] = enabled.details
+    analysis.result_hash = canonical_hash(result)
+    evidence = build_packet_set(db, analysis, store, result)
+    packet, = evidence["packets"]
+    comparison = packet["context_comparison"]
+    isolated = comparison["isolated_paragraph"]
+    assert isolated["supports_inspection"] is True and comparison["affects_overall_confidence"] is False
+    assert isolated["paragraph"]["text"] == classifier.calls[-1][0]
+    assert isolated["context"]["text"] == classifier.calls[2][1]
+    assert isolated["paragraph"]["spans"] == [{"start": decoded["paragraphs"][1][0], "end": decoded["paragraphs"][1][1]}]
+    validate(comparison, focus=packet["focus"], chars=len(decoded["text"]), text=decoded["text"])
+    for member in ("context", "paragraph"):
+        for mutation in ("range", "hash"):
+            forged = deepcopy(comparison)
+            item = forged["isolated_paragraph"][member]
+            if mutation == "range":
+                item["spans"][0]["start"] += 1
+            else:
+                item["input_sha256"] = "0" * 64
+            with pytest.raises(ValueError):
+                validate(forged, focus=packet["focus"], chars=len(decoded["text"]), text=decoded["text"])
+    forged = deepcopy(comparison)
+    forged["isolated_paragraph"]["paragraph"]["token_coverage"]["omitted_tokens"] = 1
+    with pytest.raises(ValueError, match="complete token coverage"):
+        validate(forged, focus=packet["focus"], chars=len(decoded["text"]), text=decoded["text"])
+    classifier.incomplete = True
+    uncovered = FourClassTextDetector().run(context)
+    assert "isolated_paragraph_review" not in uncovered.details["text_evidence"]
+    assert uncovered.unit_scores == ordinary.unit_scores and uncovered.aggregate == ordinary.aggregate
 
 
 def test_email_quote_can_be_in_forward_input_outside_highlighted_ratio(packet_factory):

@@ -7,6 +7,7 @@
     python -m app.cli models footprint [--manifest PATH]
     python -m app.cli models plan [--profile PROFILE] [--budget-mb MB] [--device cpu|mps|cuda] [--json]
     python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE] [--json]
+    python -m app.cli compare-image REFERENCE SUBMITTED [--evidence-dir DIRECTORY]
     python -m app.cli reproduce PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--tolerance 0.001] [--json]
     python -m app.cli custody export [--format jsonl|csv] [--case-id ID] [--out PATH] [--database-url URL]
     python -m app.cli audit verify [--jsonl PATH] [--database-url URL]
@@ -433,6 +434,21 @@ def _verify(args: argparse.Namespace) -> int:
         print(f"{'VERIFIED' if result.ok else 'NOT VERIFIED':<9} {args.package} (key {result.key_id or 'unknown'})"
               f"{verify.draft_note(result.bundle)}")
     return verify.EXIT[result.outcome]
+
+
+def _compare_image(args: argparse.Namespace) -> int:
+    from PIL import Image
+
+    from app.evidence import image_reference
+
+    try:
+        result = image_reference.inspect(Path(args.reference), Path(args.submitted),
+                                         evidence_dir=Path(args.evidence_dir) if args.evidence_dir else None)
+    except (OSError, ValueError, Image.DecompressionBombError) as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 2
+    print(json.dumps(result, indent=2, allow_nan=False))
+    return 0
 
 
 def _db_grants(args: argparse.Namespace) -> int:
@@ -1140,6 +1156,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_package_verify.add_argument("--source-image", metavar="IMAGE", help="compare crops in a public image package with a local original")
     p_package_verify.add_argument("--json", action="store_true")
     p_package_verify.set_defaults(func=_verify)
+
+    p_compare_image = commands.add_parser("compare-image", help="inspect local differences against a separately supplied aligned image")
+    p_compare_image.add_argument("reference", help="earlier reference image")
+    p_compare_image.add_argument("submitted", help="image to compare with the reference")
+    p_compare_image.add_argument("--evidence-dir", metavar="DIRECTORY", help="write the mask, source crops and JSON to a new folder")
+    p_compare_image.set_defaults(func=_compare_image)
 
     database = commands.add_parser("db", help="database administration")
     db_actions = database.add_subparsers(dest="action", required=True)

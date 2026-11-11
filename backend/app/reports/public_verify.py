@@ -161,6 +161,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_context_comparison(packet['context_comparison'], focus=packet['focus'], chars=evidence['source']['chars'])
             _require(all(row['signal_ref']['id'] in checks for row in packet['context_comparison']['checks']),
                      'A context comparison refers to an unpublished classifier check')
+            if isolated := packet['context_comparison'].get('isolated_paragraph'):
+                _require(isolated['signal_ref']['id'] in checks,
+                         'An isolated paragraph comparison refers to an unpublished classifier check')
 
     refs = {}
     parts = [evidence]

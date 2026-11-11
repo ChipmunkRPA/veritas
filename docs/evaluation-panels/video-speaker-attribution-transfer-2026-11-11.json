@@ -1,0 +1,228 @@
+{
+  "conditions": {
+    "constant_delay": {
+      "anatomy_raw_expected_lag_windows": 4,
+      "anatomy_speaker_attributed_views": 1,
+      "anatomy_speaker_attributed_windows": 2,
+      "baseline_attributed_views": 2,
+      "baseline_timing_flags": 0,
+      "baseline_views_with_four_measured_windows": 1,
+      "candidate_input_windows": 8,
+      "candidate_views_with_all_four_windows": 2,
+      "candidate_views_with_two_windows": 2,
+      "separator_complete_expected_patterns": 0,
+      "separator_local_delay_patterns": 0,
+      "separator_raw_expected_lag_windows": 3,
+      "separator_speaker_attributed_views": 0,
+      "separator_speaker_attributed_windows": 1,
+      "views": 6
+    },
+    "genuine": {
+      "anatomy_raw_expected_lag_windows": 4,
+      "anatomy_speaker_attributed_views": 0,
+      "anatomy_speaker_attributed_windows": 1,
+      "baseline_attributed_views": 2,
+      "baseline_timing_flags": 1,
+      "baseline_views_with_four_measured_windows": 1,
+      "candidate_input_windows": 7,
+      "candidate_views_with_all_four_windows": 1,
+      "candidate_views_with_two_windows": 2,
+      "separator_complete_expected_patterns": 0,
+      "separator_local_delay_patterns": 0,
+      "separator_raw_expected_lag_windows": 4,
+      "separator_speaker_attributed_views": 0,
+      "separator_speaker_attributed_windows": 1,
+      "views": 6
+    },
+    "local_delay": {
+      "anatomy_raw_expected_lag_windows": 4,
+      "anatomy_speaker_attributed_views": 1,
+      "anatomy_speaker_attributed_windows": 2,
+      "baseline_attributed_views": 2,
+      "baseline_timing_flags": 1,
+      "baseline_views_with_four_measured_windows": 1,
+      "candidate_input_windows": 8,
+      "candidate_views_with_all_four_windows": 2,
+      "candidate_views_with_two_windows": 2,
+      "separator_complete_expected_patterns": 0,
+      "separator_local_delay_patterns": 0,
+      "separator_raw_expected_lag_windows": 4,
+      "separator_speaker_attributed_views": 0,
+      "separator_speaker_attributed_windows": 1,
+      "views": 6
+    },
+    "offscreen_voice": {
+      "anatomy_speaker_attributed_views": 0,
+      "anatomy_speaker_attributed_windows": 1,
+      "baseline_attributed_views": 0,
+      "baseline_timing_flags": 0,
+      "baseline_views_with_four_measured_windows": 0,
+      "candidate_input_windows": 5,
+      "candidate_views_with_all_four_windows": 0,
+      "candidate_views_with_two_windows": 2,
+      "separator_local_delay_patterns": 0,
+      "separator_speaker_attributed_views": 0,
+      "separator_speaker_attributed_windows": 1,
+      "views": 6
+    },
+    "overlap_mixture": {
+      "anatomy_speaker_attributed_views": 0,
+      "anatomy_speaker_attributed_windows": 2,
+      "baseline_attributed_views": 1,
+      "baseline_timing_flags": 0,
+      "baseline_views_with_four_measured_windows": 0,
+      "candidate_input_windows": 6,
+      "candidate_views_with_all_four_windows": 0,
+      "candidate_views_with_two_windows": 2,
+      "separator_local_delay_patterns": 0,
+      "separator_speaker_attributed_views": 1,
+      "separator_speaker_attributed_windows": 2,
+      "views": 6,
+      "zero_shift_mixture_target_advantage_improved_windows": 5,
+      "zero_shift_mixture_target_advantage_median_db": 10.440972790446015
+    }
+  },
+  "date": "2026-11-11",
+  "fresh_continuous_baseline_replay": {
+    "local_audio_intervention_seconds": [
+      5,
+      10
+    ],
+    "outcomes": {
+      "constant_delay": {
+        "file_bound_raw_measurement_sha256": "46a16320e03c7031fdfa9efd8d6bf798241bf23a6f73ad12e4c28a62d742ae8a",
+        "flags_seconds": [],
+        "measured_windows": 24,
+        "timing_union_iou": null
+      },
+      "genuine": {
+        "file_bound_raw_measurement_sha256": "a6e06a1f98cb973461924addba0bb5af3786d4c1f261b90e1165a736d80bcbe5",
+        "flags_seconds": [
+          [
+            "537/50",
+            "12"
+          ]
+        ],
+        "measured_windows": 21,
+        "selected_replay": {
+          "anchor_seconds": {
+            "after": "12",
+            "before": "268/25",
+            "during": "284/25"
+          },
+          "codec": "ffv1",
+          "exhibit_pngs_verified": 3,
+          "frame_count": 400,
+          "interval_seconds": [
+            "537/50",
+            "12"
+          ],
+          "scope": "source bytes, presentation clock and three sampled RGB pictures",
+          "status": "verified",
+          "time_base": "1/1000"
+        },
+        "timing_union_iou": null
+      },
+      "local_delay": {
+        "file_bound_raw_measurement_sha256": "eb75df68300e84b5aa99d078ecc781349a9ba4bb12620bb33e06f5f1ab029142",
+        "flags_seconds": [
+          [
+            "537/50",
+            "12"
+          ]
+        ],
+        "measured_windows": 22,
+        "selected_replay": {
+          "anchor_seconds": {
+            "after": "12",
+            "before": "268/25",
+            "during": "284/25"
+          },
+          "codec": "ffv1",
+          "exhibit_pngs_verified": 3,
+          "frame_count": 400,
+          "interval_seconds": [
+            "537/50",
+            "12"
+          ],
+          "scope": "source bytes, presentation clock and three sampled RGB pictures",
+          "status": "verified",
+          "time_base": "1/1000"
+        },
+        "timing_union_iou": 0.0
+      }
+    },
+    "receipt_sha256": "595e1c506c8a973370b03af505ecbdef3e2ee02249749c86f35a365ead6af7e2",
+    "scope": "retrospective exact remux and independently verified native exhibits"
+  },
+  "known_camera_attribution_diagnostic": {
+    "anatomical_mouth_motion": {
+      "correlation": 0.1654243361853834,
+      "lag_ticks": -2
+    },
+    "automatic_attribution_gate": 0.2,
+    "candidate_windows_before_gate": 23,
+    "eye_aperture_control": {
+      "correlation": -0.038948674862932596,
+      "lag_ticks": -2
+    },
+    "mouth_opening": {
+      "correlation": 0.36310302944003603,
+      "lag_ticks": -2
+    },
+    "prior_attribution_sha256": "312b1ec9234ed333d4de3ced583cc06befcc727aa1c5d65f23da9062f75f19b0",
+    "prior_automatic_crop_motion_peak": 0.10704623834182242,
+    "stage": "exact rejected prior camera/headset pair diagnosis; no changes to pilot",
+    "window_scope": "middle 370 ticks, \u221215 to +15 audio shifts, earlier native cut, mean-subtracted correlation"
+  },
+  "media": {
+    "baseline_status_counts": {
+      "not_applicable": 23,
+      "ok": 7
+    },
+    "baseline_status_counts_by_source_role": {
+      "new_time_interval_in_retained_session": {
+        "not_applicable": 7,
+        "ok": 3
+      },
+      "previous_timing_cohort": {
+        "not_applicable": 16,
+        "ok": 4
+      }
+    },
+    "canonical_pcm_samples_checked": 1536000,
+    "continuous_cuts": 6,
+    "native_pictures_checked": 2400,
+    "new_intervals_in_same_sessions": 2,
+    "pictures_with_eligible_mesh": 1357,
+    "previous_cuts": 4,
+    "sessions": 2
+  },
+  "model_qualification": {
+    "cached_path_bitwise_parity": true,
+    "device": "cpu",
+    "mesh_task_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "parameters": 11724385,
+    "publisher_code_and_weights_license": "Apache-2.0",
+    "publisher_weights_bytes": 47156343,
+    "publisher_weights_sha256": "a1888b5a3484a38a68c42d1a0e73334b1f2e7924c6e6444b2cfdd27becce928c",
+    "upstream_inference_commit": "5c5d4ff6ce99a63742101a3a7992592068df496c"
+  },
+  "private_commitments": {
+    "freeze_sha256": "1beab53a5d4e9e8b31566ce3963027a91b0a5b1d52b507ac2420faa612a2db01",
+    "geometry_journal_sha256": "a3a2f0f28f3ffad532127fc1bdfa8f43501674e5bb4fb02e82390044da1c42b6",
+    "in_memory_proof_retry_freeze_sha256": "901e81c47ac719fbe2f945e3528749f9e9ca607ffad74a57c36083f0736f528d",
+    "runtime_sha256": "3785eec44ec8aa0aa8d388215b8a418cbe4ec04299ff36c2a6d22067f8993a75",
+    "score_serialization_retry_freeze_sha256": "ce95cf2a96e6ffa1eda3dbaf9c4e262589834bb7d064285bec27d9896a2dff95",
+    "scoring_sha256": "93371f073580fd7b79bd4fe43193aeb922841f214f30d7d91b7259a0e64b3fee"
+  },
+  "runtime": {
+    "elapsed_seconds": 93.0,
+    "measured_worker_forward_counts_excluding_runtime_warmup_and_parity_call": {
+      "audio": 170,
+      "video": 45
+    }
+  },
+  "schema": "chipmunk.video-speaker-attribution-transfer/1",
+  "scope": "Matched private offline pilot. Existing timing adapter with directly observed face track; no fusion or production-model promotion."
+}

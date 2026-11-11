@@ -132,6 +132,16 @@
 {% set comparison = packet.context_comparison %}
 <div class="document-context-comparison">
 <h4>How surrounding text affects this check</h4>
+{% if comparison.get('isolated_paragraph') %}
+{% set isolated = comparison.isolated_paragraph %}
+<h5>Paragraph read on its own</h5>
+<p>{% if isolated.supports_inspection %}The AI-like response persisted{% else %}The AI-like response did not persist{% endif %} when the check read the paragraph on its own. {{ isolated.note }}</p>
+{% for label, input in [('Sentence in context', isolated.context), ('Paragraph alone', isolated.paragraph)] %}
+<p class="caption">{{ label }}: raw response {{ '%.3f' | format(input.score) }}, source characters {% for span in input.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>
+{% if not evidence.withheld %}<blockquote>{{ input.text }}</blockquote>{% endif %}
+<p class="caption evidence-hash">Actual input SHA-256 <span class="mono">{{ input.input_sha256 }}</span>.</p>
+{% endfor %}
+{% endif %}
 {% if comparison.status == 'recorded' %}
 <p class="caption">{{ comparison.note }} Displayed responses are rounded; JSON retains the recorded values.</p>
 {% for check in comparison.checks %}

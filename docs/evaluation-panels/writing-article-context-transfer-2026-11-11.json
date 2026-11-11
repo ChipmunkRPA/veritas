@@ -1,0 +1,1284 @@
+{
+  "assessed_source_groups_by_arm": {
+    "human_sentence": 6,
+    "human_whole": 6,
+    "original": 6,
+    "qwen": 3,
+    "smol2": 5
+  },
+  "freeze": {
+    "analysis_code_sha256": "d0c0c1c03584b4fb09a98abf289a5ff1b105de1a3c6664089c8b9c67511190c3",
+    "assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "code_sha256": "6ecf8e54a6fd6258044b8197246e8ce9732e11716485836fa70c92095b60ae57",
+    "generator_runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "generator_settings": {
+      "qwen": {
+        "max_tokens": 384,
+        "seed": 56174,
+        "temp": 0.4,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 384,
+        "seed": 41873,
+        "temp": 0.72,
+        "top_p": 0.9
+      }
+    },
+    "genre_fit_sha256": "19de984048a8cad711915153c2c3e20720e7c9577c6c8f06a81cd04d1b5257e7",
+    "intake_code_sha256": "f097a9c526ddd790db39c943ed25504f9c56120a6817b06787a2399342a79816",
+    "methods": {
+      "generators": "Two Apache-2.0 families, one offline affine Q4 MLX attempt each on every fixed target. Existing complete-response, word bounds and source-copy gates. Fixed format/word-count recovery only, no detector-based selection.",
+      "human_controls": "Original, exact same-source paragraph substitution and one complete sentence substitution.",
+      "isolated": "The same single eligible paragraph must also reach .5 with an independent forward on the isolated paragraph. The weights are the same as current and responses are correlated.",
+      "metric": "Flagged human source groups and human files, plus non-whitespace IoU >= .30 for eligible rewrites, including paired current transitions and false alarms before fitting. No new point fit or serving change.",
+      "omission": "Also require the three-paragraph raw response to exceed the response with the current paragraph omitted, and removing the current paragraph must give a strictly lower response than either matched two-paragraph input formed by omitting one neighbor. The test also changes length, content, topic and transitions. It is a measured response perturbation with shared weights, not authorship probability.",
+      "paragraph": "Each interior paragraph needs a navigation focus with current raw >= .5. Choose the highest raw supporting focus, break ties by earliest source, and mark only the chosen entire paragraph.",
+      "raw": "Same current native classifier inputs and first six qualifying foci, score >= .5. Include consumed practical .85 and archived strict and pooled rules unchanged.",
+      "wide": "Also require >= .5 on the contiguous previous + current + next paragraph input."
+    },
+    "original_comparison_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+    "original_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+    "previous_generator_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+    "prior_comparison_code_sha256": "458540b1f998a6ab85cdb626053d13c7720234dd98d9895694f0c9c6fbcba275",
+    "recovery_code_sha256": "f493956ac298c58b8d19495066f04366491f685bb6dbfc9d836a3f9d01765eb5",
+    "reference_points": {
+      "raw_review": 0.5,
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "schema": "chipmunk.feature-context-freeze/1",
+    "selected_points_hex": {
+      "fiction": "0x1.ccccccccccccdp-1",
+      "pooled": "0x1.feb851eb851ecp-1",
+      "practical": "0x1.b333333333333p-1",
+      "science": "0x1.feb851eb851ecp-1"
+    },
+    "source_groups": 6,
+    "source_sha256": "75ebd346098cbbb6982b26290e5d38f1a66378a1e41450e7bd11bbfd6d46804f"
+  },
+  "human_flagged_source_groups": {
+    "isolated": 1,
+    "omission": 0,
+    "paragraph": 4,
+    "pooled": 1,
+    "practical": 4,
+    "raw": 5,
+    "strict": 2,
+    "wide": 0
+  },
+  "outcomes": {
+    "human_sentence": {
+      "isolated": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 1,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 424,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "omission": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "paragraph": {
+        "assessed": 6,
+        "flagged": 2,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 2,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 772,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "pooled": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 261,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "practical": {
+        "assessed": 6,
+        "flagged": 3,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 568,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "raw": {
+        "assessed": 6,
+        "flagged": 5,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 2,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1674,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "strict": {
+        "assessed": 6,
+        "flagged": 2,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 430,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "wide": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "human_whole": {
+      "isolated": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "omission": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "paragraph": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 1,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 447,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "pooled": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 261,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "practical": {
+        "assessed": 6,
+        "flagged": 4,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 2,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1436,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "raw": {
+        "assessed": 6,
+        "flagged": 5,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 2,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1839,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "strict": {
+        "assessed": 6,
+        "flagged": 2,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 430,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "wide": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "original": {
+      "isolated": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 445,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "omission": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "paragraph": {
+        "assessed": 6,
+        "flagged": 3,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1156,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "pooled": {
+        "assessed": 6,
+        "flagged": 1,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 261,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "practical": {
+        "assessed": 6,
+        "flagged": 3,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1013,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "raw": {
+        "assessed": 6,
+        "flagged": 5,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 2116,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "strict": {
+        "assessed": 6,
+        "flagged": 2,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 430,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "wide": {
+        "assessed": 6,
+        "flagged": 0,
+        "generated_chars_selected": 0,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "qwen": {
+      "isolated": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 1129,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1129,
+        "unavailable": 3,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "omission": {
+        "assessed": 3,
+        "flagged": 1,
+        "generated_chars_selected": 415,
+        "human_edit_overlap": 0,
+        "missed": 2,
+        "planned": 6,
+        "selected_chars": 415,
+        "unavailable": 3,
+        "useful": 1,
+        "wrong_location": 0
+      },
+      "paragraph": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 1129,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1129,
+        "unavailable": 3,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "pooled": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 784,
+        "human_edit_overlap": 0,
+        "missed": 1,
+        "planned": 6,
+        "selected_chars": 1215,
+        "unavailable": 3,
+        "useful": 2,
+        "wrong_location": 1
+      },
+      "practical": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 1129,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 2272,
+        "unavailable": 3,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "raw": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 1129,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 2272,
+        "unavailable": 3,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "strict": {
+        "assessed": 3,
+        "flagged": 3,
+        "generated_chars_selected": 784,
+        "human_edit_overlap": 0,
+        "missed": 1,
+        "planned": 6,
+        "selected_chars": 1337,
+        "unavailable": 3,
+        "useful": 2,
+        "wrong_location": 1
+      },
+      "wide": {
+        "assessed": 3,
+        "flagged": 2,
+        "generated_chars_selected": 784,
+        "human_edit_overlap": 0,
+        "missed": 1,
+        "planned": 6,
+        "selected_chars": 784,
+        "unavailable": 3,
+        "useful": 2,
+        "wrong_location": 0
+      }
+    },
+    "smol2": {
+      "isolated": {
+        "assessed": 5,
+        "flagged": 5,
+        "generated_chars_selected": 1921,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1921,
+        "unavailable": 1,
+        "useful": 5,
+        "wrong_location": 0
+      },
+      "omission": {
+        "assessed": 5,
+        "flagged": 3,
+        "generated_chars_selected": 1286,
+        "human_edit_overlap": 0,
+        "missed": 2,
+        "planned": 6,
+        "selected_chars": 1286,
+        "unavailable": 1,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "paragraph": {
+        "assessed": 5,
+        "flagged": 5,
+        "generated_chars_selected": 1921,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 1921,
+        "unavailable": 1,
+        "useful": 5,
+        "wrong_location": 0
+      },
+      "pooled": {
+        "assessed": 5,
+        "flagged": 2,
+        "generated_chars_selected": 1004,
+        "human_edit_overlap": 0,
+        "missed": 3,
+        "planned": 6,
+        "selected_chars": 1004,
+        "unavailable": 1,
+        "useful": 2,
+        "wrong_location": 0
+      },
+      "practical": {
+        "assessed": 5,
+        "flagged": 4,
+        "generated_chars_selected": 1559,
+        "human_edit_overlap": 0,
+        "missed": 1,
+        "planned": 6,
+        "selected_chars": 2247,
+        "unavailable": 1,
+        "useful": 4,
+        "wrong_location": 0
+      },
+      "raw": {
+        "assessed": 5,
+        "flagged": 5,
+        "generated_chars_selected": 1921,
+        "human_edit_overlap": 0,
+        "missed": 0,
+        "planned": 6,
+        "selected_chars": 3752,
+        "unavailable": 1,
+        "useful": 5,
+        "wrong_location": 0
+      },
+      "strict": {
+        "assessed": 5,
+        "flagged": 2,
+        "generated_chars_selected": 1004,
+        "human_edit_overlap": 0,
+        "missed": 3,
+        "planned": 6,
+        "selected_chars": 1343,
+        "unavailable": 1,
+        "useful": 2,
+        "wrong_location": 0
+      },
+      "wide": {
+        "assessed": 5,
+        "flagged": 3,
+        "generated_chars_selected": 1286,
+        "human_edit_overlap": 0,
+        "missed": 2,
+        "planned": 6,
+        "selected_chars": 1286,
+        "unavailable": 1,
+        "useful": 3,
+        "wrong_location": 0
+      }
+    }
+  },
+  "paired_transitions_relative_to_raw": {
+    "isolated": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "qwen": {
+        "1->1": 3
+      },
+      "smol2": {
+        "1->1": 5
+      }
+    },
+    "omission": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "qwen": {
+        "1->0": 2,
+        "1->1": 1
+      },
+      "smol2": {
+        "1->0": 2,
+        "1->1": 3
+      }
+    },
+    "paragraph": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 3,
+        "1->1": 2
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 2,
+        "1->1": 3
+      },
+      "qwen": {
+        "1->1": 3
+      },
+      "smol2": {
+        "1->1": 5
+      }
+    },
+    "pooled": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 4,
+        "1->1": 1
+      },
+      "qwen": {
+        "1->0": 1,
+        "1->1": 2
+      },
+      "smol2": {
+        "1->0": 3,
+        "1->1": 2
+      }
+    },
+    "practical": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 2,
+        "1->1": 3
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 1,
+        "1->1": 4
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 2,
+        "1->1": 3
+      },
+      "qwen": {
+        "1->1": 3
+      },
+      "smol2": {
+        "1->0": 1,
+        "1->1": 4
+      }
+    },
+    "raw": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->1": 5
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->1": 5
+      },
+      "original": {
+        "0->0": 1,
+        "1->1": 5
+      },
+      "qwen": {
+        "1->1": 3
+      },
+      "smol2": {
+        "1->1": 5
+      }
+    },
+    "strict": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 3,
+        "1->1": 2
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 3,
+        "1->1": 2
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 3,
+        "1->1": 2
+      },
+      "qwen": {
+        "1->0": 1,
+        "1->1": 2
+      },
+      "smol2": {
+        "1->0": 3,
+        "1->1": 2
+      }
+    },
+    "wide": {
+      "human_sentence": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "human_whole": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "original": {
+        "0->0": 1,
+        "1->0": 5
+      },
+      "qwen": {
+        "1->0": 1,
+        "1->1": 2
+      },
+      "smol2": {
+        "1->0": 2,
+        "1->1": 3
+      }
+    }
+  },
+  "preparation": {
+    "case_sha256": "042ecaea92828aace974a844fd3fc0b29cd49850fb36d9e92ac5b88f981886f1",
+    "freeze_sha256": "1ff418fd23257408c0d8863c555a277b7543842e1875721d7237f449939eb5f9",
+    "generators": {
+      "qwen": {
+        "dispositions": {
+          "admitted_complete_response": 3,
+          "source_copy": 3
+        },
+        "receipt": {
+          "elapsed_seconds": 9.149,
+          "family": "qwen",
+          "freeze_sha256": "1ff418fd23257408c0d8863c555a277b7543842e1875721d7237f449939eb5f9",
+          "minimum_available_ram_bytes": 5262999552,
+          "sampled_worker_rss_bytes": 3029598208,
+          "status": "complete",
+          "worker": {
+            "responses": 6,
+            "sha256": "fb3003b3768a9ca8fd3a8b44e696ad8550d719b4c35d0de2cc098abc87c663b7",
+            "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+          }
+        }
+      },
+      "smol2": {
+        "dispositions": {
+          "admitted_complete_response": 5,
+          "source_copy": 1
+        },
+        "receipt": {
+          "elapsed_seconds": 10.162,
+          "family": "smol2",
+          "freeze_sha256": "1ff418fd23257408c0d8863c555a277b7543842e1875721d7237f449939eb5f9",
+          "minimum_available_ram_bytes": 5103812608,
+          "sampled_worker_rss_bytes": 1715388416,
+          "status": "complete",
+          "worker": {
+            "responses": 6,
+            "sha256": "2fef691d60e7584cb0d74acca7c261fbe6abab866a8f616641b3b155b459b460",
+            "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+          }
+        }
+      }
+    },
+    "status": "complete"
+  },
+  "schema": "chipmunk.feature-context-transfer/1",
+  "scope": "2021 published English-language federal web features. Source-only splices and bounded synthetic paragraph rewrites. Scoring unchanged in the app.",
+  "source": {
+    "code_sha256": "f097a9c526ddd790db39c943ed25504f9c56120a6817b06787a2399342a79816",
+    "exposure_inventory": [
+      {
+        "matched_sources": 0,
+        "packet": "writing_v3_v4_exposed_contexts",
+        "source_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+        "text_entries": 674
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v5_selected_source_answers",
+        "source_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+        "text_entries": 256
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v7_prepared_exposures",
+        "source_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+        "text_entries": 992
+      },
+      {
+        "matched_sources": 0,
+        "packet": "text_layout_v93_v101",
+        "source_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+        "text_entries": 800
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_prepared_v193_v196",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "manifest.json",
+        "source_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+        "text_entries": 680
+      },
+      {
+        "matched_sources": 0,
+        "packet": "article-confirmation-manifest.json",
+        "source_sha256": "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+        "text_entries": 144
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals-v2.json",
+        "source_sha256": "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-explicit.json",
+        "source_sha256": "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+        "text_entries": 186
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-v2.json",
+        "source_sha256": "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+        "text_entries": 90
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals.json",
+        "source_sha256": "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-explicit.jsonl",
+        "source_sha256": "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+        "text_entries": 55
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-explicit.jsonl",
+        "source_sha256": "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+        "text_entries": 38
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-mlx.jsonl",
+        "source_sha256": "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+        "text_entries": 32
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-mlx.jsonl",
+        "source_sha256": "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+        "text_entries": 13
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_publisher_test",
+        "source_sha256": "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+        "text_entries": 508
+      },
+      {
+        "matched_sources": 0,
+        "packet": "aitdna_span_texts_v2_v4",
+        "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+        "text_entries": 362
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_archive-v205",
+        "source_sha256": "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+        "text_entries": 36
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_direct-v209",
+        "source_sha256": "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "iterater_v203_publisher_train",
+        "source_sha256": "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+        "text_entries": 962
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_v257_v260",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "goce_v249",
+        "source_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+        "text_entries": 4
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_classification_english_archive",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v272_publisher_bodies",
+        "source_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+        "text_entries": 9
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v273_constructed_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v286_licensed_publisher_bodies",
+        "source_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v289_v292_constructed_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "previous_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_controls",
+        "source_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+        "text_entries": 21
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_qwen",
+        "source_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_prefix",
+        "source_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+        "text_entries": 3
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_smol2",
+        "source_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+        "text_entries": 10
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_controls",
+        "source_sha256": "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+        "text_entries": 33
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_rewrites",
+        "source_sha256": "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "practical_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "practical_positives",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "historical_correspondence_controls",
+        "source_sha256": "36117d37aa219dafb4a6f13959dfbecf3f8d0a02c81eb70f232d249b587768ec",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "historical_correspondence_positives",
+        "source_sha256": "0caca63a72bd00864b1c069ee3776e24b83c0d0e0f3dee4489535888188a0fbc",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "modern_bulletins_controls",
+        "source_sha256": "30d76269e14096222de528a3fd2c11c47928557b983cf706ed7f80c196573e3c",
+        "text_entries": 30
+      },
+      {
+        "matched_sources": 0,
+        "packet": "modern_bulletins_positives",
+        "source_sha256": "f3db42f44c9dc5891d4f345ceac7a3bb7209dc1784b9aae30405778ba86c3a81",
+        "text_entries": 16
+      }
+    ],
+    "policy": {
+      "content": "Four publisher-authored body blocks in source order, omit third-party quotes, photo captions, navigation and links outside prose. Normalize visible whitespace. Staff/publisher attribution checked at source. Agency terms and federal government works under §§101 and 105; no third-party assets downloaded.",
+      "controls": "Whole paragraph and one sentence splices use exact source-linked material from the same feature. The part outside the target interval stays fixed. These are controlled substitutions, not independently collected editor revisions.",
+      "documents": "Six dated web feature source documents. One source group per article and no split between authors or source variants in development/confirmation. NASA and NOAA each provide two features; genre and publisher samples are clustered.",
+      "novelty": "Exact normalized 12-token history and within-holdout screening. Prior exposure and pretraining beyond available receipts is unknown."
+    },
+    "prior_overlap_groups": 0,
+    "private_controls_sha256": "dc4059f7e05a15fe47df3887c70260e669e7b87f2f9290b68f7f2971633ffbfe",
+    "private_originals_sha256": "b399beb67549992577bb3c0bdc6b9f79d2b898cf30ba0c4602b6ae454ec79c4f",
+    "rights_statute": "https://www.copyright.gov/title17/92chap1.html",
+    "schema": "chipmunk.feature-context-intake/1",
+    "source_groups": 6,
+    "sources": [
+      {
+        "body_nodes": [
+          3,
+          4,
+          5,
+          7
+        ],
+        "byline": "Kasha Patel",
+        "displayed_publication_date": "2021-06-16",
+        "html_bytes": 315383,
+        "html_sha256": "e8b43c2dc807fe198df0ba21bf11bfba3a98d2d1ab5003f37e581d02a0624d95",
+        "original_words": 232,
+        "publisher": "NASA Earth Observatory",
+        "publisher_rights_url": "https://science.nasa.gov/earth/faq/",
+        "sentence_donor": {
+          "block_sha256": "bfcd6bdc9c023b4e2967bd5c22b8f870fc4fdb7279a120f0b17da861daf80bb2",
+          "codepoints": [
+            156,
+            327
+          ],
+          "node": 8
+        },
+        "target_node": 5,
+        "target_words": 73,
+        "title": "Finding Gold Mining Hotspots in Peru",
+        "url": "https://science.nasa.gov/earth/earth-observatory/finding-gold-mining-hotspots-in-peru-148439/",
+        "whole_donor": {
+          "block_sha256": "87ef8c21a94d94f400a00ced9ba6a8e5431811c14944e503635cbdbce77f7c1a",
+          "codepoints": [
+            0,
+            392
+          ],
+          "node": 11
+        }
+      },
+      {
+        "body_nodes": [
+          4,
+          5,
+          6,
+          10
+        ],
+        "byline": "Adam Voiland",
+        "displayed_publication_date": "2021-06-10",
+        "html_bytes": 343719,
+        "html_sha256": "82fdeb5a328b2a93a5c095064adc63a0f5857275cee889d6acfb43344ea9a048",
+        "original_words": 312,
+        "publisher": "NASA Earth Observatory",
+        "publisher_rights_url": "https://science.nasa.gov/earth/faq/",
+        "sentence_donor": {
+          "block_sha256": "155e69256b7b6a93c40414366e8c8e026f65dd8f79ca3590b87f8b480e148da8",
+          "codepoints": [
+            436,
+            569
+          ],
+          "node": 8
+        },
+        "target_node": 5,
+        "target_words": 97,
+        "title": "Lake Victoria’s Rising Waters",
+        "url": "https://science.nasa.gov/earth/earth-observatory/lake-victorias-rising-waters-148414/",
+        "whole_donor": {
+          "block_sha256": "155e69256b7b6a93c40414366e8c8e026f65dd8f79ca3590b87f8b480e148da8",
+          "codepoints": [
+            0,
+            569
+          ],
+          "node": 8
+        }
+      },
+      {
+        "body_nodes": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "byline": "NIST newsroom",
+        "displayed_publication_date": "2021-01-27",
+        "html_bytes": 94016,
+        "html_sha256": "bdff8ba74b260e252372205e24f41c2fb3d0a76f4b73e4bd91ac11e6d2065153",
+        "original_words": 191,
+        "publisher": "NIST",
+        "publisher_rights_url": "https://www.nist.gov/copyrights-disclaimers",
+        "sentence_donor": {
+          "block_sha256": "b37b40fa0e39c89ae689163c408e9da252d0aeba5aeb50ba1fa300a5036ab96d",
+          "codepoints": [
+            0,
+            169
+          ],
+          "node": 24
+        },
+        "target_node": 10,
+        "target_words": 63,
+        "title": "New Report Charts Path Toward Superior Earthquake Recovery",
+        "url": "https://www.nist.gov/news-events/news/2021/01/new-report-charts-path-toward-superior-earthquake-recovery",
+        "whole_donor": {
+          "block_sha256": "0029d4f0167c96e418712d8c280434a82ab7953bab707b427f50ae60154eb8e1",
+          "codepoints": [
+            0,
+            520
+          ],
+          "node": 20
+        }
+      },
+      {
+        "body_nodes": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "byline": "West Coast Regional Office",
+        "displayed_publication_date": "2021-09-14",
+        "html_bytes": 145847,
+        "html_sha256": "9cda978ee2849169871da0368a879ee7650a236df28daee6d167e42c3bb99b04",
+        "original_words": 205,
+        "publisher": "NOAA Fisheries",
+        "publisher_rights_url": "https://repository.library.noaa.gov/Content%20and%20Copyright",
+        "sentence_donor": {
+          "block_sha256": "f94549ab6d58dab1e4545af11f94c2f9861f3f0056ce095bb70fd83e46956ac8",
+          "codepoints": [
+            116,
+            286
+          ],
+          "node": 6
+        },
+        "target_node": 3,
+        "target_words": 68,
+        "title": "Amended Plan Leaves More Salmon for Endangered Killer Whales in Low Return Years",
+        "url": "https://www.fisheries.noaa.gov/feature-story/amended-plan-leaves-more-salmon-endangered-killer-whales-low-return-years",
+        "whole_donor": {
+          "block_sha256": "f94549ab6d58dab1e4545af11f94c2f9861f3f0056ce095bb70fd83e46956ac8",
+          "codepoints": [
+            0,
+            286
+          ],
+          "node": 6
+        }
+      },
+      {
+        "body_nodes": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "byline": "NESDIS newsroom",
+        "displayed_publication_date": "2021-12-30",
+        "html_bytes": 108620,
+        "html_sha256": "6a36f7055626da0a85a692af1184cf27f2d082e575231b6490a90e3048c41e25",
+        "original_words": 168,
+        "publisher": "NOAA NESDIS",
+        "publisher_rights_url": "https://repository.library.noaa.gov/Content%20and%20Copyright",
+        "sentence_donor": {
+          "block_sha256": "1b61748aefc7027c5c3cb0c2a81467378529497216d5e4ef4da0cef050f47ddc",
+          "codepoints": [
+            0,
+            135
+          ],
+          "node": 13
+        },
+        "target_node": 7,
+        "target_words": 49,
+        "title": "The Top 10 of 2021: A Year from NOAA Satellites",
+        "url": "https://www.nesdis.noaa.gov/news/the-top-10-of-2021-year-noaa-satellites",
+        "whole_donor": {
+          "block_sha256": "9ed5ed3da123402ec5a746ce4354185bc68e41fefdfb8d8ef97faecd94eca9c1",
+          "codepoints": [
+            0,
+            337
+          ],
+          "node": 12
+        }
+      },
+      {
+        "body_nodes": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "byline": "ARS newsroom",
+        "displayed_publication_date": "2021-11-22",
+        "html_bytes": 33118,
+        "html_sha256": "53cf0074e7969e8224a33fbe0a75dce363107a6acf956dc0e84ae8b97fa4c833",
+        "original_words": 179,
+        "publisher": "USDA Agricultural Research Service",
+        "publisher_rights_url": "https://www.ars.usda.gov/news-events/news-archive/?year=2021",
+        "sentence_donor": {
+          "block_sha256": "878e4df87f2c6f8c6aeb6a4581d7d3bc73c78d74bf69c64eafba1126cc56d86b",
+          "codepoints": [
+            228,
+            333
+          ],
+          "node": 9
+        },
+        "target_node": 2,
+        "target_words": 65,
+        "title": "Making Air Travel More Sustainable with Soy-Fuel Innovations",
+        "url": "https://www.ars.usda.gov/news-events/news/research-news/2021/making-air-travel-more-sustainable-with-soy-fuel-innovations/",
+        "whole_donor": {
+          "block_sha256": "4fdc76d044b1d97a66202c5cc606076c4b76547fb7e0cedeaa25c226af83663e",
+          "codepoints": [
+            0,
+            397
+          ],
+          "node": 11
+        }
+      }
+    ],
+    "within_panel_overlap_groups": 0
+  },
+  "terminal": {
+    "actual_classifier_forwards": 161,
+    "assessed_views": 26,
+    "elapsed_seconds": 77.705,
+    "freeze_sha256": "1ff418fd23257408c0d8863c555a277b7543842e1875721d7237f449939eb5f9",
+    "minimum_available_ram_bytes": 6936576000,
+    "planned_views": 30,
+    "responses_sha256": "9a8276a48b357496392c0531d33e7bdbe4b0e4e23a89b9e55a722195ae08a277",
+    "sampled_rss_bytes": 2569601024,
+    "status": "complete"
+  }
+}

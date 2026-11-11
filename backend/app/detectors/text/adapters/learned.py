@@ -36,6 +36,7 @@ from app.detectors.text.classifier import (
 )
 from app.detectors.text.extract import text_hash
 from app.detectors.text.pipeline import PRIMARY_CHUNK_MAX_LEN, chunk_average, chunk_words, chunks_of, windows
+from app.engine.boundary import DetectorTimeout
 from app.engine.detector import (
     ActivationUse,
     Applicability,
@@ -54,6 +55,7 @@ class _SequenceClassifier(Detector):
     SCORE_KIND: ClassVar[str] = "sigmoid output"
     REFERENCE: ClassVar[str] = "Binary AI-text classifier; decision boundary at 0.5"
     AI_SIDE: ClassVar[str] = "LLM-written"
+    ISOLATED_PARAGRAPH_REVIEW: ClassVar[bool] = False
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.MODEL_ID, self.BATCH, "token window",
@@ -94,6 +96,24 @@ class _SequenceClassifier(Detector):
                                   "spans": [{"start": s.start, "end": s.end} for s in group],
                                   "input_sha256": text_hash(source), "score": score,
                                   "token_coverage": window_coverage[i]})
+        evidence = {"version": "scored-context/1", "offset_unit": "unicode_codepoint",
+                    "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
+                    "windows": input_windows}
+        if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_isolated_paragraph_review and settings.text_window_sentences == 3:
+            from app.detectors.text.paragraph_review import record
+
+            try:
+                paragraph_review = record(clf, doc, sents, input_windows, ctx.deadline)
+            except (DetectorTimeout, RuntimeError):
+                # Optional evidence can be unavailable without discarding the ordinary scores.
+                paragraph_review = None
+            if paragraph_review is not None:
+                paragraphs = [item["spans"][0] for item in paragraph_review["inputs"]]
+                for window in input_windows:
+                    focus = window["focus"]
+                    if any(span["start"] <= focus["start"] < focus["end"] <= span["end"] for span in paragraphs):
+                        window["score_exact_hex"] = window["score"].hex()
+                evidence["isolated_paragraph_review"] = paragraph_review
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"{self.SCORE_KIND} {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "
@@ -103,9 +123,7 @@ class _SequenceClassifier(Detector):
             reasoning=f"The classifier places the document on the {side} side of its decision boundary.",
             metrics={"chunks": float(len(chunks)), "sentences": float(len(sents)), "tokens": float(token_count),
                      "token_windows": float(token_windows)}, model_revisions=revisions(ctx, self.MODEL_ID),
-            details={"text_evidence": {"version": "scored-context/1", "offset_unit": "unicode_codepoint",
-                      "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
-                      "windows": input_windows}})
+            details={"text_evidence": evidence})
 
 
 class DesklibDetector(_SequenceClassifier):
@@ -131,6 +149,7 @@ class FourClassTextDetector(_SequenceClassifier):
     SCORE_KIND = "AI authorship or rewriting response"
     REFERENCE = "Combined response for generation and AI rewriting. The 0.5 reference separates raw score directions."
     AI_SIDE = "AI-written or AI-rewritten"
+    ISOLATED_PARAGRAPH_REVIEW = True
     spec = text_spec("txt.four_class", "Tropa Mini text classifier", InputUnit.SENTENCES,
                      model_ids=(MODEL_ID,), timeout_s=120.0, version="1.0.0")
 

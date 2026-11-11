@@ -60,6 +60,9 @@ uses separate archival sources and synthetic multipart email containers. It
 counts both useful paragraph locations and ordinary replacements flagged.
 The [modern bulletin holdout](writing-modern-bulletin-transfer-2026-11-11.md)
 includes exact quote and template variants across six separate publishers.
+The [article context holdout](writing-article-context-transfer-2026-11-11.md)
+compares a paragraph-only read with the usual surrounding input and a fixed
+paragraph-omission experiment on six source-disjoint web features.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -100,6 +103,9 @@ publisher point and two points fitted on disjoint controls.
 The [fine-detail comparison](image-wavelet-region-transfer-2026-11-11.md)
 adds 12 independently qualified photo groups and compares two sealed regional
 checks on exact sharp and feathered edits after PNG and JPEG delivery.
+The [semantic context comparison](image-semantic-context-transfer-2026-11-11.md)
+compares a forensic patch response with its response relative to distant,
+semantically similar patches on two licensed panels.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -114,6 +120,9 @@ exact and approximate picture holds on the same lossy and lossless deliveries.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.
+The [speaker-attribution comparison](video-speaker-attribution-transfer-2026-11-11.md)
+checks visual speech separation, lip geometry and existing timing on known
+voiceovers, timing interventions and continuous camera controls.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -156,6 +165,9 @@ comparing the outcomes under two additional background recordings.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.
+The [stereo component comparison](audio-stereo-component-transfer-2026-11-11.md)
+uses two other recorded meetings and explicitly counts admitted genuine false
+alarms after two fixed decision rules.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -370,6 +382,10 @@ and a signed crop whose declared position was shifted.
 ```sh
 python -m pytest tests/test_public_package_integration.py -k '(image and multimedia_zip) or native_source_verifier'
 ```
+
+When an earlier aligned image is available, the separate [reference comparison](image-reference-comparison-2026-11-11.md)
+can produce a full-size mask and unaltered crops from both files. It runs on the
+reviewer's machine and commits to both source hashes.
 
 ## Choose a review to reproduce
 

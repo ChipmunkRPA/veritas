@@ -19,15 +19,36 @@ NOTE = (
     "not a formatting-only test, independent confirmation or a calibrated authorship probability. "
     "It does not change the overall confidence."
 )
+ISOLATED_NOTE = (
+    "The same writing check read this paragraph by itself. Both responses share the same classifier "
+    "and do not establish who wrote the passage. The extra reading does not affect overall confidence."
+)
+
+
+def _input(window: dict, text: str) -> dict:
+    return {
+        "spans": copy.deepcopy(window["spans"]),
+        "text": " ".join(text[s["start"] : s["end"]] for s in window["spans"]),
+        "input_sha256": window["input_sha256"],
+        "score": window["score"],
+        "token_coverage": {
+            key: value
+            for key, value in window.get("token_coverage", {}).items()
+            if key in {"tokens", "covered_tokens", "token_windows", "context_limit", "omitted_tokens", "coverage_fraction"}
+            and type(value) in (int, float) and math.isfinite(value) and value >= 0
+        },
+    }
 
 
 def build(result: dict, text: str, focus: dict) -> dict:
     from app.api.public_projection import alias_signal
     from app.detectors.text.extract import text_hash
-    from app.evidence.document_packets import _range, verify_context_window
+    from app.detectors.text.paragraph_review import MAX_PARAGRAPHS, VERSION
+    from app.evidence.document_packets import _range, _raw_value, verify_context_window
 
     a, b = _range(focus, len(text))
     checks, seen = [], set()
+    isolated = None
     for signal in result.get("signals", []):
         evidence = (signal.get("details") or {}).get("text_evidence") or {}
         if signal.get("status") != "ok" or evidence.get("version") not in {
@@ -45,6 +66,7 @@ def build(result: dict, text: str, focus: dict) -> dict:
         ):
             raise ValueError("Context comparison refers to a different extracted source")
         unique, scores = {}, {}
+        centered = None
         for window in evidence.get("windows", []):
             if window.get("score_kind", "classifier_probability") != "classifier_probability":
                 continue  # Ratio reductions answer a different question; never pool their values.
@@ -56,31 +78,32 @@ def build(result: dict, text: str, focus: dict) -> dict:
             if digest in scores and not math.isclose(scores[digest], score, abs_tol=1.1e-6, rel_tol=0):
                 raise ValueError("The same recorded classifier input has inconsistent responses")
             scores[digest] = score
-            unique.setdefault(
-                digest,
-                {
-                    "spans": copy.deepcopy(spans),
-                    "text": " ".join(text[s["start"] : s["end"]] for s in spans),
-                    "input_sha256": digest,
-                    "score": score,
-                    "token_coverage": {
-                        key: value
-                        for key, value in window.get("token_coverage", {}).items()
-                        if key
-                        in {
-                            "tokens",
-                            "covered_tokens",
-                            "token_windows",
-                            "context_limit",
-                            "omitted_tokens",
-                            "coverage_fraction",
-                        }
-                        and type(value) in (int, float)
-                        and math.isfinite(value)
-                        and value >= 0
-                    },
-                },
-            )
+            unique.setdefault(digest, _input(window, text))
+            if window.get("focus") == {"start": a, "end": b}:
+                centered = window
+        if saved := evidence.get("isolated_paragraph_review"):
+            inputs = saved.get("inputs", [])
+            if saved.get("version") != VERSION or not 1 <= len(inputs) <= MAX_PARAGRAPHS:
+                raise ValueError("Invalid recorded paragraph review")
+            for paragraph in inputs:
+                verify_context_window(paragraph, text)
+                if len(paragraph["spans"]) != 1:
+                    raise ValueError("An isolated paragraph must have one exact source range")
+                start, end = _range(paragraph["spans"][0], len(text))
+                if start < 2 or end + 2 > len(text) or text[start - 2:start] != "\n\n" or text[end:end + 2] != "\n\n" or "\n\n" in text[start:end]:
+                    raise ValueError("An isolated response must cover one interior source paragraph")
+                if (centered is None or _raw_value(centered, "score") < 0.5 or not start <= a < b <= end
+                        or centered["input_sha256"] == paragraph["input_sha256"]):
+                    continue
+                if isolated is not None:
+                    raise ValueError("Multiple isolated paragraph responses refer to one focus")
+                isolated = {
+                    "signal_ref": {"id": alias_signal(signal["id"]), "display_id": signal.get("display_id")},
+                    "context": {**_input(centered, text), "score_exact_hex": centered["score_exact_hex"]},
+                    "paragraph": {**_input(paragraph, text), "score_exact_hex": paragraph["score_exact_hex"]},
+                    "supports_inspection": _raw_value(paragraph, "score") >= 0.5,
+                    "note": ISOLATED_NOTE,
+                }
         if len(unique) < 2:
             continue
         ordered = sorted(unique.values(), key=lambda w: (w["score"], w["input_sha256"]))
@@ -100,7 +123,7 @@ def build(result: dict, text: str, focus: dict) -> dict:
     checks.sort(
         key=lambda c: (-c["response_spread"], c["signal_ref"]["display_id"] or "", c["signal_ref"]["id"])
     )
-    return {
+    comparison = {
         "schema": SCHEMA,
         "status": "recorded" if checks else "not_assessed",
         "evidence_type": "context",
@@ -114,6 +137,9 @@ def build(result: dict, text: str, focus: dict) -> dict:
         if checks
         else "Fewer than two distinct compatible classifier inputs containing this passage were recorded.",
     }
+    if isolated is not None:
+        comparison["isolated_paragraph"] = isolated
+    return comparison
 
 
 def validate(block: dict, *, focus: dict, chars: int, text: str | None = None) -> None:
@@ -136,8 +162,24 @@ def validate(block: dict, *, focus: dict, chars: int, text: str | None = None) -
         return type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1
 
     a, b = interval(focus)
+
+    def input_ranges(window, *, exact=False):
+        fields = {"spans", "text", "input_sha256", "score", "token_coverage"}
+        require(set(window) == (fields | {"score_exact_hex"} if exact else fields) and number(window["score"]),
+                "Invalid context input fields or response")
+        spans = [interval(s) for s in window["spans"]]
+        require(spans and all(x[1] <= y[0] for x, y in zip(spans, spans[1:]))
+                and any(start <= a < b <= end for start, end in spans),
+                "A comparison input omits its selected passage")
+        actual = " ".join(text[start:end] for start, end in spans) if text is not None else window["text"]
+        require(len(actual) == sum(end - start for start, end in spans) + len(spans) - 1
+                and window["text"] == actual
+                and hashlib.sha256(actual.encode("utf-8", "surrogatepass")).hexdigest() == window["input_sha256"],
+                "Context-comparison input differs from its recorded source")
+        return spans
+
     require(
-        set(block)
+        set(block) - {"isolated_paragraph"}
         == {
             "schema",
             "status",
@@ -158,6 +200,34 @@ def validate(block: dict, *, focus: dict, chars: int, text: str | None = None) -
         and block["note"] == NOTE,
         "Context comparison claims unsupported authority or confidence",
     )
+    if "isolated_paragraph" in block:
+        review = block["isolated_paragraph"]
+        require(set(review) == {"signal_ref", "context", "paragraph", "supports_inspection", "note"}
+                and review["note"] == ISOLATED_NOTE
+                and set(review["signal_ref"]) == {"id", "display_id"}
+                and isinstance(review["signal_ref"]["id"], str),
+                "Invalid isolated paragraph comparison")
+        current, paragraph = review["context"], review["paragraph"]
+        input_ranges(current, exact=True)
+        spans = input_ranges(paragraph, exact=True)
+        current_raw = float.fromhex(current["score_exact_hex"])
+        require(len(spans) == 1 and number(current_raw) and current_raw >= 0.5
+                and abs(current_raw - current["score"]) <= 0.00000051
+                and current["input_sha256"] != paragraph["input_sha256"],
+                "An isolated comparison needs two different recorded inputs")
+        coverage = paragraph["token_coverage"]
+        tokens = coverage.get("tokens")
+        require(type(tokens) is int and tokens > 0 and coverage.get("covered_tokens") == tokens
+                and coverage.get("token_windows") == 1 and coverage.get("omitted_tokens") == 0,
+                "An isolated paragraph requires complete token coverage in one input window")
+        start, end = spans[0]
+        require(start >= 2 and end + 2 <= chars and "\n\n" not in paragraph["text"]
+                and (text is None or (text[start - 2:start] == "\n\n" and text[end:end + 2] == "\n\n")),
+                "The isolated input must be an interior source paragraph")
+        raw = float.fromhex(paragraph["score_exact_hex"])
+        require(number(raw) and abs(raw - paragraph["score"]) <= 0.00000051
+                and review["supports_inspection"] is (raw >= 0.5),
+                "An isolated response differs from its recorded direction")
     require(
         block["status"] in {"recorded", "not_assessed"}
         and (block["status"] == "recorded") == bool(block["checks"])
@@ -214,23 +284,4 @@ def validate(block: dict, *, focus: dict, chars: int, text: str | None = None) -
             "Selected context inputs do not match distinct range endpoints",
         )
         for window in check["inputs"]:
-            require(
-                set(window) == {"spans", "text", "input_sha256", "score", "token_coverage"}
-                and number(window["score"]),
-                "Invalid context input fields or response",
-            )
-            spans = [interval(s) for s in window["spans"]]
-            require(
-                spans
-                and all(x[1] <= y[0] for x, y in zip(spans, spans[1:]))
-                and any(start <= a < b <= end for start, end in spans),
-                "A comparison input omits its selected passage",
-            )
-            actual = " ".join(text[start:end] for start, end in spans) if text is not None else window["text"]
-            require(
-                len(actual) == sum(end - start for start, end in spans) + len(spans) - 1
-                and window["text"] == actual
-                and hashlib.sha256(actual.encode("utf-8", "surrogatepass")).hexdigest()
-                == window["input_sha256"],
-                "Context-comparison input differs from its recorded source",
-            )
+            input_ranges(window)

@@ -1,0 +1,1079 @@
+{
+  "commitments": {
+    "admission_sha256": "8a5df5e68ae524e2ad6c184fe1003ff75167a0c4dc1def8205fcddb697b24188",
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "previous_comparison_sha256": "51d305249b503c34cfbb17e4189e7e430f531a4a85ff140c4998a99e907fc941",
+    "readout_sha256": "dd5465825279b9d76c1b7fbc2b24226fe0e904bce3a2ae6c53f2a3e373d24923",
+    "roster_sha256": "cf2e0c7e5ea0f68f94b0a37749c3e753fcfaf65c41a41bafbd0351e1f22bd47a",
+    "runner_sha256": "2a3732dcf3aeb6a78657acd393071e41fbd74e9dd86b42a37332714e7b9a9adb",
+    "score_sha256": "82846815ad4d92888d3d068291c585683cdb238201e84d100be28cbd96c6f3ee",
+    "source_plan_sha256": "c3e30489a59c44afa1f83124fe9eb9fe8df41b44696b5ec433aeebb5d14e0610",
+    "source_receipt_sha256": "2a432f73a5963a7568f0004c072ecd045233d5668d8cb8b2a96ff62c1842cd87",
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "comparison": [
+    {
+      "center_and_other": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 8,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 8,
+        "unassessed": 0
+      },
+      "cohort": "genuine",
+      "condition": "matched_clean",
+      "declared_voice_groups": 8,
+      "mono": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 8,
+        "unassessed": 0
+      },
+      "planned": 8,
+      "projection_status": {
+        "rank_deficient": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 7,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 7,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "cohort": "synthetic",
+      "condition": "matched_clean",
+      "declared_voice_groups": 6,
+      "mono": {
+        "ai": 7,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "planned": 8,
+      "projection_status": {
+        "rank_deficient": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 5,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 5,
+        "unassessed": 0
+      },
+      "cohort": "english_genuine",
+      "condition": "matched_clean",
+      "declared_voice_groups": 5,
+      "mono": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 5,
+        "unassessed": 0
+      },
+      "planned": 5,
+      "projection_status": {
+        "rank_deficient": 5
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 5
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 5
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "cohort": "turkish_genuine",
+      "condition": "matched_clean",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "planned": 3,
+      "projection_status": {
+        "rank_deficient": 3
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 3
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 3
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "cohort": "alania",
+      "condition": "matched_clean",
+      "declared_voice_groups": 2,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "rank_deficient": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 2,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 2,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "okur",
+      "condition": "matched_clean",
+      "declared_voice_groups": 1,
+      "mono": {
+        "ai": 2,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "rank_deficient": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "drifting",
+      "condition": "matched_clean",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "projection_status": {
+        "rank_deficient": 4
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 4
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 4
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 2,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 1
+      },
+      "center_only": {
+        "ai": 2,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 1
+      },
+      "cohort": "genuine",
+      "condition": "recorded_1",
+      "declared_voice_groups": 8,
+      "mono": {
+        "ai": 2,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 1
+      },
+      "planned": 8,
+      "projection_status": {
+        "available": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 2,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 1
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 5,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 5,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "synthetic",
+      "condition": "recorded_1",
+      "declared_voice_groups": 6,
+      "mono": {
+        "ai": 5,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 8,
+      "projection_status": {
+        "available": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 5,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 1
+      },
+      "center_only": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 1
+      },
+      "cohort": "english_genuine",
+      "condition": "recorded_1",
+      "declared_voice_groups": 5,
+      "mono": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 1
+      },
+      "planned": 5,
+      "projection_status": {
+        "available": 5
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 2,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 1
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 5
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "turkish_genuine",
+      "condition": "recorded_1",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 3,
+      "projection_status": {
+        "available": 3
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 3
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "alania",
+      "condition": "recorded_1",
+      "declared_voice_groups": 2,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "available": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 1,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "okur",
+      "condition": "recorded_1",
+      "declared_voice_groups": 1,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "available": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 1,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 2
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "drifting",
+      "condition": "recorded_1",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "projection_status": {
+        "available": 4
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 3,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 4
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 6,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 6,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "genuine",
+      "condition": "recorded_2",
+      "declared_voice_groups": 8,
+      "mono": {
+        "ai": 6,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 8,
+      "projection_status": {
+        "available": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 6,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 8,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 4,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 4,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "synthetic",
+      "condition": "recorded_2",
+      "declared_voice_groups": 6,
+      "mono": {
+        "ai": 4,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 8,
+      "projection_status": {
+        "available": 8
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 4,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 2,
+          "inconclusive": 6,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 4,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 4,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "english_genuine",
+      "condition": "recorded_2",
+      "declared_voice_groups": 5,
+      "mono": {
+        "ai": 4,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 5,
+      "projection_status": {
+        "available": 5
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 4,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "turkish_genuine",
+      "condition": "recorded_2",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 3,
+      "projection_status": {
+        "available": 3
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 2,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "alania",
+      "condition": "recorded_2",
+      "declared_voice_groups": 2,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "available": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 1,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "okur",
+      "condition": "recorded_2",
+      "declared_voice_groups": 1,
+      "mono": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 2,
+      "projection_status": {
+        "available": 2
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "center_only": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "cohort": "drifting",
+      "condition": "recorded_2",
+      "declared_voice_groups": 3,
+      "mono": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "projection_status": {
+        "available": 4
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 3,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "other_projection": {
+          "ai": 2,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "cohort": "genuine",
+      "condition": "untouched_native",
+      "declared_voice_groups": 2,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "planned": 12,
+      "projection_status": {
+        "ambiguous_center": 1,
+        "available": 11
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 1,
+          "inconclusive": 2,
+          "original": 1,
+          "unassessed": 8
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 1,
+          "unassessed": 8
+        }
+      }
+    },
+    {
+      "center_and_other": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "center_only": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "cohort": "ami_genuine",
+      "condition": "untouched_native",
+      "declared_voice_groups": 2,
+      "mono": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 8
+      },
+      "planned": 12,
+      "projection_status": {
+        "ambiguous_center": 1,
+        "available": 11
+      },
+      "shadow_projection_only": {
+        "center_projection": {
+          "ai": 1,
+          "inconclusive": 2,
+          "original": 1,
+          "unassessed": 8
+        },
+        "other_projection": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 1,
+          "unassessed": 8
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "drifting_utterances_with_v217_exposure": 4,
+    "foregrounds": {
+      "alania": 2,
+      "drifting": 4,
+      "english_genuine": 5,
+      "okur": 2,
+      "turkish_genuine": 3
+    },
+    "genuine_ami_native_windows": 12,
+    "genuine_ami_sessions": 2,
+    "planned": 60,
+    "qualified_projections": 43,
+    "source_matched_mixture_windows": 32
+  },
+  "diagnostics": {
+    "center_and_other": {
+      "added_genuine_flags": 0,
+      "added_genuine_groups": 0,
+      "added_synthetic_flags": 0,
+      "added_synthetic_groups_by_condition": {
+        "recorded_1": 0,
+        "recorded_2": 0
+      },
+      "added_synthetic_views_by_condition": {},
+      "added_synthetic_voice_groups": 0
+    },
+    "center_only": {
+      "added_genuine_flags": 0,
+      "added_genuine_groups": 0,
+      "added_synthetic_flags": 0,
+      "added_synthetic_groups_by_condition": {
+        "recorded_1": 0,
+        "recorded_2": 0
+      },
+      "added_synthetic_views_by_condition": {},
+      "added_synthetic_voice_groups": 0
+    }
+  },
+  "freeze_sha256": "395c3558fd551a7800c1e3f1d2f674861416e2a7c8a2519314a7667df64c9284",
+  "genuine_false_flags_across_recorded_scenes": {
+    "distinct_readers": 6,
+    "readers_flagged_in_both": 2
+  },
+  "measurements": [
+    {
+      "center_projection_snr_gain_db": {
+        "count": 16,
+        "max": 0.006,
+        "median": 0.005,
+        "min": 0.004
+      },
+      "condition": "recorded_1",
+      "original_snr_db_range": [
+        -5.000057,
+        -4.999616
+      ]
+    },
+    {
+      "center_projection_snr_gain_db": {
+        "count": 16,
+        "max": -0.015,
+        "median": -0.133,
+        "min": -0.242
+      },
+      "condition": "recorded_2",
+      "original_snr_db_range": [
+        -5.000023,
+        -4.99997
+      ]
+    }
+  ],
+  "met_frozen_advance": false,
+  "method": {
+    "condition_snr_db": -5,
+    "diagnostic_policy": "Same recovery without requiring the other projection. Baseline AI, original and unassessed remain unchanged in both policy comparisons.",
+    "frozen_advance": "Primary policy recovers AI in at least two distinct synthetic voice groups with at least one in each scene, at most one added genuine flag overall, and at least six genuine baseline admissions per noisy scene.",
+    "method": {
+      "angular_steps": 90,
+      "clip_handling": "Reject nonfinite or out-of-range projected PCM rather than clip or replace source samples.",
+      "criterion": "Maximize sum of absolute excess kurtoses of two orthogonal whitened directions on the fixed angular grid.",
+      "maximum_absolute_target_coefficient": 1.5,
+      "minimum_alignment_gap": 0.05,
+      "minimum_eigenvalue_ratio": 0.0001,
+      "minimum_target_center_alignment": 0.9,
+      "other_projection": "Apply the other component to original channels with unit L1 norm. Its internal response is an ambiguity check, without reported authorship.",
+      "selection": "Choose the projected component with the higher absolute cosine alignment of its native mixing vector to [1,1].",
+      "spectral_processing": false,
+      "target_projection": "Normalize weights to unit response to a shared center signal, cap their absolute values. Apply once to original uncentered channels.",
+      "whitening": "2x2 zero-mean covariance over all samples"
+    },
+    "noise_selection": "Fixed 45+30*i-second native windows. First six audible mono windows at RMS >=0.002 per session are untouched controls. Highest normalized side RMS among these is the background for that session.",
+    "primary_policy": "Only recover a current inconclusive as AI when the center projection is admitted and leans AI, and the other projection is admitted with a response other than AI.",
+    "source_grid_s": [
+      45,
+      75,
+      105,
+      135,
+      165,
+      195,
+      225,
+      255,
+      285,
+      315
+    ]
+  },
+  "resources": {
+    "admitted_classifier_arms": 106,
+    "captured_pcm_bytes": 25536000,
+    "classifier_forwards": 118,
+    "classifier_peak_process_rss_bytes": 2910781440,
+    "classifier_seconds": 71.88,
+    "downloaded_original_bytes": 139932622,
+    "speech_activity_forwards": 13724
+  },
+  "schema": "chipmunk.audio.stereo-ica-comparison/1",
+  "serving_change": false,
+  "status": "complete"
+}

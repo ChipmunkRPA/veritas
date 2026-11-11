@@ -41,6 +41,17 @@ describe('recorded document context comparison', () => {
     expect(screen.getByText(/Context dependence could not be assessed/)).toBeTruthy()
     expect(document.querySelectorAll('blockquote')).toHaveLength(0)
   })
+  it('shows both actual inputs when the paragraph response loses support', () => {
+    const data = fixture(), check = data.checks[0]
+    data.isolated_paragraph = { signal_ref: check.signal_ref, context: check.inputs[1], paragraph: check.inputs[0],
+      supports_inspection: false, note: 'Both responses share the same classifier and do not change overall confidence.' }
+    render(<DocumentContextComparison comparison={data} focus={focus} />)
+    expect(screen.getByText('Paragraph read on its own')).toBeTruthy()
+    expect(screen.getByText(/AI-like response did not persist/)).toBeTruthy()
+    expect(screen.getByText(/Sentence in context · 0.900 raw response · source characters/)).toBeTruthy()
+    expect(screen.getByText(/Paragraph alone · 0.100 raw response · source characters/)).toBeTruthy()
+    expect(screen.queryByText(/Leaning towards original/)).toBeNull()
+  })
   it('keeps historical packets without this measurement unchanged', () => {
     const { container } = render(<DocumentContextComparison focus={focus} />)
     expect(container.textContent).toBe('')

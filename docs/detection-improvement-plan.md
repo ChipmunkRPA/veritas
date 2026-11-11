@@ -125,6 +125,10 @@ integration remains unfinished.
   unsupported comparison. Three of those four had overlapped the known redraw
   enough to count in the prior result. Continuous footage still needs better
   speaker attribution and timing sensitivity.
+  The [speaker-attribution test](video-speaker-attribution-transfer-2026-11-11.md)
+  improved target-voice separation in five of six measured mixtures but recovered
+  no complete local timing pattern. The existing check's latest flag fell at the
+  same unchanged time in the original and displaced clips.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -155,6 +159,12 @@ integration remains unfinished.
   Neither arm found a useful region on the 12 new source groups. The
   [offline source verifier](independent-testing.md#verify-image-crops-from-a-signed-export)
   compares the original pixels at each reported crop location.
+  The [semantic context test](image-semantic-context-transfer-2026-11-11.md)
+  reduced PNG highlights without finding any useful edit region. The
+  [offline reference comparison](image-reference-comparison-2026-11-11.md)
+  found all eight feathered edits in each delivery when the reviewer had an
+  aligned earlier image. Ordinary multiple compression and broad processing
+  can still produce local differences.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
@@ -176,6 +186,9 @@ integration remains unfinished.
   A [stereo filtering trial](audio-natural-stereo-coherence-2026-11-11.md) added
   nine synthetic flags across two recorded backgrounds and three genuine flags
   in one. Keep the current classifier and calibration.
+  A [stereo component comparison](audio-stereo-component-transfer-2026-11-11.md)
+  recovered no additional synthetic flags and reproduced severe false alarms
+  on two other recorded backgrounds.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
@@ -196,6 +209,10 @@ integration remains unfinished.
   the practical point, with ten of 30 human controls flagged under either rule.
   The app and exports now distinguish a mixed-role highlight from a supporting
   context that read a quote or signature outside the highlight.
+  The [article context test](writing-article-context-transfer-2026-11-11.md)
+  retained 8/8 useful locations and reduced ordinary flags from 15/18 to 2/18
+  when a paragraph-only read also supported inspection. An opt-in local article
+  view exposes those paired responses. The existing overall estimate stays in use.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

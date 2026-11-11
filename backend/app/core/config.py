@@ -230,6 +230,7 @@ class Settings(BaseSettings):
 
     # --- text detector ---
     text_detector_mode: Literal["legacy", "candidate"] = "legacy"
+    text_isolated_paragraph_review: bool = False
     text_classifier_id: str = "desklib/ai-text-detector-v1.01"  # base checkpoint (HF Hub)
     # fine-tuned on 2025-26 LLM output (scripts/finetune_text_detector.py); used automatically when present
     text_classifier_finetuned_path: Path = BACKEND_DIR / "data" / "weights" / "desklib-ft-v2"

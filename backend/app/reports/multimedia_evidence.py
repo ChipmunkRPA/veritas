@@ -427,7 +427,10 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
     repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
-    return [group["text"] for group in repeats] + [text for packet in snapshot.evidence["packets"] for text in
+    isolated = [input["text"] for packet in snapshot.evidence["packets"]
+                if (review := (packet.get("context_comparison") or {}).get("isolated_paragraph"))
+                for input in (review["context"], review["paragraph"])]
+    return [group["text"] for group in repeats] + isolated + [text for packet in snapshot.evidence["packets"] for text in
             [packet["focus"]["text"], packet["context"]["text"], *(w["text"] for w in packet["supporting_windows"]),
              *(w["text"] for check in (packet.get("context_comparison") or {}).get("checks", []) for w in check["inputs"])]]
 
@@ -593,6 +596,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     for check in row["context_comparison"]["checks"]:
                         for window in check["inputs"]:
                             window["text"] = None
+                    if isolated := row["context_comparison"].get("isolated_paragraph"):
+                        isolated["context"]["text"] = isolated["paragraph"]["text"] = None
             row["focus_range"] = {"start": focus["start"], "end": focus["end"]}
             scope = packet.get("inspection_scope") if part.get("version") in document_scope.SCOPE_VERSIONS else None
             if scope:

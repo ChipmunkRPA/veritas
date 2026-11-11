@@ -1,6 +1,6 @@
-import type { DocumentContextComparison as Comparison, TextSpan } from './multimediaPackets'
+import type { DocumentComparisonInput, DocumentContextComparison as Comparison, TextSpan } from './multimediaPackets'
 
-function Excerpt({ input, focus }: { input: Comparison['checks'][number]['inputs'][number]; focus: TextSpan }) {
+function Excerpt({ input, focus }: { input: DocumentComparisonInput; focus: TextSpan }) {
   const text = Array.from(input.text)
   let cursor = 0, start: number | null = null
   for (const span of input.spans) {
@@ -17,8 +17,24 @@ function Excerpt({ input, focus }: { input: Comparison['checks'][number]['inputs
 
 export default function DocumentContextComparison({ comparison, focus }: { comparison?: Comparison; focus: TextSpan }) {
   if (!comparison) return null
+  const isolated = comparison.isolated_paragraph
   return <section aria-label="Recorded context comparison" className="mt-5 rounded-md border border-border bg-surface-2 p-4">
     <h4 className="m-0 text-small font-medium">How surrounding text affects this check</h4>
+    {isolated && <div className="mt-3">
+      <h5 className="m-0 text-small font-medium">Paragraph read on its own</h5>
+      <p className="mt-2 mb-0 text-small">{isolated.supports_inspection
+        ? 'The AI-like response persisted when the check read the paragraph on its own.'
+        : 'The AI-like response did not persist when the check read the paragraph on its own.'}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">{isolated.note}</p>
+      <details className="mt-2 text-small"><summary className="cursor-pointer">Recorded inputs and source ranges</summary>
+        {[{ label: 'Sentence in context', input: isolated.context }, { label: 'Paragraph alone', input: isolated.paragraph }]
+          .map(({ label, input }) => <div key={label} className="mt-3">
+            <p className="m-0 text-caption">{label} · {input.score.toFixed(3)} raw response · source characters {input.spans.map((span) => `[${span.start}, ${span.end})`).join(', ')}</p>
+            <Excerpt input={input} focus={focus} />
+            <p className="m-0 text-caption font-mono break-all">SHA-256 {input.input_sha256}</p>
+          </div>)}
+      </details>
+    </div>}
     {comparison.status === 'not_assessed' ? <p className="mt-2 mb-0 text-small text-text-muted">{comparison.reason} Context dependence could not be assessed; this does not establish human authorship.</p> : <>
       <p className="mt-2 mb-0 text-small text-text-muted">{comparison.note} Displayed responses are rounded; JSON retains the recorded values.</p>
       <div className="space-y-4 mt-4">{comparison.checks.map((check) => <div key={check.signal_ref.id}>

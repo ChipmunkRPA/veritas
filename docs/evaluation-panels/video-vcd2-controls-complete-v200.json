@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.video-vcd2-controls-completion/200",
+  "status": "complete",
+  "private_freeze_sha256": "965a6f06906b22a29b31e9a325a605d1fd61b0b8201da89e82ba60075a774388",
+  "ordered_private_qualification_commitments_sha256": "719269f7055083d8887e9d996266c9e33beaca83dde09c44ff31a3832292ad10",
+  "source_recordings": 12,
+  "source_frames": 3386,
+  "prepared_controls": 36,
+  "verified_variant_frames": 10158,
+  "source_relative_intervention_seconds": [3, 6],
+  "changed_rgb_frames_by_role": {
+    "unchanged": 0,
+    "chroma_conversion_only": 999,
+    "recompression_only": 999
+  },
+  "normal_upload_limit_bytes": 524288000,
+  "within_upload_limit": 30,
+  "over_upload_limit": 6,
+  "smallest_control_bytes": 171598151,
+  "largest_control_bytes": 1004988893,
+  "new_neural_calls": 0
+}

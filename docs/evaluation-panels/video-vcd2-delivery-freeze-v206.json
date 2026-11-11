@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.video-vcd2-delivery/206",
+  "v200_freeze_sha256": "965a6f06906b22a29b31e9a325a605d1fd61b0b8201da89e82ba60075a774388",
+  "v200_publication_sha256": "bba4426b8227f7ca1618613428e59c6c505bb8a247b2747b0cdfbbf99f9c24ab",
+  "code_sha256": {
+    "backend/scripts/video_vcd2_delivery_v206.py": "42bac04312026df98b142cd2812d2c850c2d6dfd48be8b9d49161e25a34e3aa7",
+    "backend/tests/test_video_vcd2_delivery_v206.py": "61f18fc9c578d745e617484507e3d1b173bd0a9b3d08318d3e3bc8bece4a706b",
+    "docs/video-vcd2-delivery-v206-method.md": "4472d9a6e2a75d7cd46690fc43eac9fd7482479510080168c0329a3e36d7a7b8"
+  },
+  "tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "relative_interval_s": [
+    3,
+    6
+  ],
+  "max_upload_bytes": 524288000,
+  "encode": {
+    "codec": "libx264",
+    "pixel_format": "yuv420p",
+    "range": "tv",
+    "matrix": "bt709",
+    "qp": 18,
+    "preset": "veryfast",
+    "gop_size": 1,
+    "b_frames": 0,
+    "threads": 1,
+    "x264_params": "open-gop=0:scenecut=0:rc-lookahead=0:sync-lookahead=0:mbtree=0:aq-mode=0:ipratio=1"
+  },
+  "model_calls": 0,
+  "private_freeze_sha256": "f371315fe9566f05fe9f581a655fc39728c3c8ce0136e49818df3714b2914f1a",
+  "planned_recording_slots": 12,
+  "planned_controls": 36,
+  "source_outcomes": {
+    "prepared": 12
+  }
+}

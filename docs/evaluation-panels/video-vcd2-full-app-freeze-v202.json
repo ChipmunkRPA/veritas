@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.video-vcd2-full-app-freeze/202",
+  "planned_cases": 36,
+  "planned_slots": 12,
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "app_freeze_sha256": "d957cf1743c5edd5eabea4c0ec2685d4ed72fbb31955c95e79095e97a32b41e5",
+  "edge_freeze_sha256": "345369984c9a1c8a91b7e0f36559f5320ca70eda458405ff381600f0fec794b7",
+  "preparation_freeze_sha256": "965a6f06906b22a29b31e9a325a605d1fd61b0b8201da89e82ba60075a774388",
+  "roster_freeze_sha256": "6863b19519d9262485638e1ac6717de80b217b5bd1fc0594365bf262a0b813db",
+  "app_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "model_manager_budget_bytes": 4831838208,
+  "device": "mps",
+  "plan_sha256": "1f087ca0dc09b50a7732905ae0698988cae2b9ad6d19ba8343b58e6aa360fbc6",
+  "code_sha256": {
+    "backend/scripts/video_vcd2_full_app_v202.py": "91ad3fee438504d4e79180ee93c9feb43c3d0c7ebee44a53b582795e97dc237a",
+    "backend/scripts/video_vcd2_case_archive_v202.py": "914a7daf1e5f79d5b45e58c417ecb37e9d15a233f7e64d7c0a50294e5ffa146d",
+    "backend/tests/test_video_vcd2_full_app_v202.py": "4868db0cda339a3c7b19075e8f999d1093540d7e24cd5b53403d691b10c8e580",
+    "docs/video-vcd2-full-app-v202-method.md": "c8928be370f566d400e9d7fd57a3dc20dfd160350de58633f8a29f11384efbe4"
+  },
+  "max_app_video_bytes": 524288000,
+  "all_face_swap_negatives": true,
+  "serving_change_permitted": false
+}

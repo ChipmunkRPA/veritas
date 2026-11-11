@@ -1,0 +1,13 @@
+# Passage evidence from overlapping context shifts
+
+The current passage check scores three consecutive sentence foci at a time when a full context is available. Its score is associated with the middle focus. For a given focus, find the adjacent full contexts where it enters or leaves and the other two sentences stay the same. Subtract the raw response logit of the context without the focus from the response logit of the context with it. Take the smaller signed change when two comparisons exist. One comparison is sufficient at a boundary. Foci with neither comparison are unassessed by this method. Logits clip raw responses to the original calibration's `1e-6` bounds. The resulting contrast measures classifier response under a local sentence substitution. The incoming and outgoing sentence can both affect it. [Current scored-context procedure](text-opai-bench-score-v260-method.md) · [Prior focus comparison](writing-focus-v3-development-result.md)
+
+Set the contrast point only with the saved v7 genuine point split. Each of 32 prompt groups has four all-human compositions. Take the largest measured contrast in each group. Choose the next representable number above the second largest group maximum and above zero. This allows at most one of those groups to receive a highlight. Replay the original current point on the same groups. Compare the existing current mask, the contrast mask, and their union at their fixed points. Use the exact same source-coordinate metric for each mask. Report complete, partial and unavailable coverage. The rank comparison gives ties half credit on jointly covered edited and human positions within each input, averages related inputs within a source group and gives each source group equal weight. [Sealed v7 controls](evaluation-panels/writing-spans-v7-result.json)
+
+Freeze the method and point before computing the evaluation contrasts. Reuse all exact v260 report inputs, the separate v196 article-rewrite and insertion cohort, and the v249 human revision excerpts. Recheck their source and response commitments and reject shared normalized 12-token fragments across cohorts. Treat v249 as an all-human control. These previously scored sources support a retrospective comparison of the new arithmetic. The point split was used to choose the contrast cutoff. None of the three evaluation cohorts was used to choose it. This tests whether existing responses can localize publisher-labeled rewrites. It supplies no new source truth, probability of authorship, or serving change.
+
+```sh
+export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+backend/.venv/bin/python -B -m scripts.text_context_shift_v266 freeze
+backend/.venv/bin/python -B -m scripts.text_context_shift_v266 readout
+```

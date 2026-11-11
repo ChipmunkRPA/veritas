@@ -1,0 +1,41 @@
+{
+  "code_sha256": {
+    "backend/scripts/image_bg_real_detail_deficit_v265.py": "281faa130370595de887d844af0221418a0446e6cbc69f034b3954834945454b",
+    "backend/tests/test_image_bg_real_detail_deficit_v265.py": "9827015a4f9f092b929b1f2900275df9e6702c44581efa208f0bc5434a5d7205",
+    "docs/image-bg-real-detail-deficit-v265-method.md": "1dbea3a074893d331a731a5ffc2a9cba6f71e60887fff39907e9e92b85fd5f64"
+  },
+  "context_tiles_per_side": 5,
+  "encodings": [
+    "source",
+    "jpeg75",
+    "jpeg90"
+  ],
+  "fitted": false,
+  "gaussian_sigmas_pixels": [
+    0.8,
+    2.0
+  ],
+  "luma_weights": [
+    0.299,
+    0.587,
+    0.114
+  ],
+  "minimum_variance_regularizer": 0.25,
+  "new_neural_calls": 0,
+  "schema": "chipmunk.image-bg-real-detail-deficit-freeze/265",
+  "source_groups": 12,
+  "tile_pixels": 16,
+  "v264_input_freeze_sha256": "4db71eddb75033e8ac41d9716d2eb5cf7356a1d544a51b91de08657fd7ed44f9",
+  "v264_public_result_sha256": "438f754a667e90e5b42b977085a36725021cdb8180a3d6e9fca0a9206e267fc4",
+  "versions": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "views": [
+    "ai",
+    "original",
+    "tone",
+    "blur",
+    "copy_move"
+  ]
+}

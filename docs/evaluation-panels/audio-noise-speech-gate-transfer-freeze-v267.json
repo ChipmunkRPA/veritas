@@ -1,0 +1,58 @@
+{
+  "schema": "chipmunk.audio-noise-speech-gate-transfer-freeze/267",
+  "source_receipts_sha256": {
+    "audio-fresh-shared-noise-freeze-v217.json": "6217e14c017101a4ad7862c52f11daf2ccc65e62b0fa808ccb37beb2f8c38ecb",
+    "audio-fresh-shared-noise-complete-v217.json": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+    "audio-matched-background-panel-complete-v248.json": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792",
+    "audio-noise-speech-gate-freeze-v256.json": "a9da45b9baec98d3228bda6e765eddbe7e641ffc93292f8a34208938adc5804a",
+    "audio-noise-speech-gate-complete-v256.json": "7150fa192232b946caa541e4c6896d4160810a3c10b0d54868fb96b5ea4413b3"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_noise_speech_gate_transfer_v267.py": "1adba6df59be54707737d888188d1e093cea92e1a07b2ec1a790328c3440b5b6",
+    "backend/tests/test_audio_noise_speech_gate_transfer_v267.py": "1e9fa5473717d100e937f304e0d1b031adbf6ca2a36d539b57a8eafd0e6d8c66",
+    "docs/audio-noise-speech-gate-transfer-v267-method.md": "187162d2951e97a09d9d1728f6e19e621ad9aff3f42c527b0c3ed46154a73a4a"
+  },
+  "inherited_v256_code_sha256": {
+    "backend/scripts/audio_noise_speech_gate_v256.py": "90d0c303bb8e35c0249d8208403dda73ba9a706ec2ba719931319b056b86905b",
+    "backend/tests/test_audio_noise_speech_gate_v256.py": "b5f071f19d8ad38b036b357883a3fed519508f3c6f5d60ced492bb83bfef4621",
+    "docs/audio-noise-speech-gate-v256-method.md": "66ed48fa6c03439e4257c4ed070bdb612da7eb45c5cfde762544b964691a417a",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/video/adapters/audio.py": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/engine/profiles.py": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3",
+    "backend/scripts/audio_matched_background_score_v250.py": "eb9ef60a5dbec55cc224cc08cee40371f16b820a6069b93e71e94390d16842e7",
+    "backend/scripts/audio_commons_slice_screen_v247.py": "41497f01ccc272d168153894a24a397c0c735839a7893359f41e867f99b4fa83",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "vad_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+  "runtime_versions": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "demand_asset_record_sha256": "70473811ceefa9063977400b070b49870229256180ed9f586055bb0ea73d6705",
+  "foreground_planned_by_arm": {
+    "genuine": 16,
+    "alania": 16,
+    "drifting": 16
+  },
+  "prepared_foreground_groups_by_arm": {
+    "genuine": 11,
+    "alania": 16,
+    "drifting": 3
+  },
+  "matched_planned": 240,
+  "matched_prepared": 195,
+  "background_controls_by_environment": {
+    "kitchen": 51,
+    "traffic": 51
+  },
+  "mixture_offset_rule": "3s excerpts at 99 + 6 * ordinal seconds",
+  "background_rule": "every complete 3s cut starting at 99s, excluding mixture intervals",
+  "rescue_single_span_minimum_samples": 16000,
+  "speech_free_background_verified": false,
+  "authenticity_detector_calls_permitted": false,
+  "serving_change_permitted": false,
+  "private_plan_sha256": "45ea9e94d76e120e6182220959252643e5f7ad0f2ac12b17ec293fbdf88a7911"
+}

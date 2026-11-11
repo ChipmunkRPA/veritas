@@ -171,6 +171,9 @@ export interface DocumentEvidenceSet extends SetBase {
 }
 export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | DocumentEvidenceSet
 
+const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'])
+export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
+
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {
   const response = await fetch(`/api/v2/analyses/${encodeURIComponent(analysisId)}/evidence-packets`, { headers: authHeaders() })
   const body: unknown = await response.json().catch(() => null)

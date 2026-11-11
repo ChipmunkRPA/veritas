@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
 import zipfile
 from datetime import UTC, datetime
 
+import cv2
 import pymupdf
 import pytest
 from test_video_av_evidence import av_fixture as av_fixture
@@ -15,7 +17,10 @@ from test_video_av_evidence import av_source as av_source
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.detectors.video.adapters.face_appearance import DETECTOR, record
+from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.evidence import service, video_packets
+from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -87,6 +92,79 @@ def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, mon
     assert snapshot.dump(snapshot.load(snapshot.dump(f.frozen))) == snapshot.dump(f.frozen)
     monkeypatch.setattr(service, 'load_packet_set', lambda *a, **k: pytest.fail('render read mutable analysis'))
     multimedia_evidence.view(f.frozen, store=f.store)
+
+
+def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av_fixture):
+    f = av_fixture
+    centers = [36, 44, 52, 60, 68, 76, 84]
+    indices = {center + offset for center in centers for offset in (-1, 0, 1)}
+    during = {center + offset for center in centers[2:-2] for offset in (-1, 0, 1)}
+    pixels = f.inputs.store.get_many(indices)
+    anchors = f.inputs.store.native_anchors()
+    by_index = {row['frame_index']: row for row in anchors}
+    inputs = {}
+    for index in indices:
+        frame = f.by_frame[index]
+        landmarks = copy.deepcopy(frame['landmarks'])
+        if index in during:
+            landmarks[:2] = [[42, 22], [54, 22]]
+        alignment = cpp_alignment(landmarks)
+        aligned = cv2.warpAffine(pixels[index], alignment, (112, 112), flags=cv2.INTER_LINEAR)
+        inputs[index] = {
+            'frame_index': index, 'pts': f.table.pts[index], 'bbox': frame['bbox'], 'landmarks': landmarks,
+            'decoded_rgb_sha256': by_index[index]['decoded_rgb_sha256'],
+            'aligned_rgb_sha256': hashlib.sha256(aligned.tobytes()).hexdigest(),
+            'alignment_matrix': alignment.tolist(),
+            'alignment_matrix_hex': [[float(value).hex() for value in row] for row in alignment],
+            'alignment_side': 112, 'aligned_size': 112,
+        }
+    sequence = record({
+        'centers': centers, 'track_id': 'track:0', 'start_s': f.table.seconds(52), 'end_s': f.table.seconds(68),
+        'response': .2, 'middle_to_before': .235, 'middle_to_after': .3, 'flank_change': .1,
+    }, f.table, inputs)
+    f.result['signals'].append({
+        'id': DETECTOR + ':global', 'detector_id': DETECTOR, 'status': 'ok', 'display_id': 'S03',
+        'details': {'face_sequence_binding_version': METHOD, 'face_sequence': sequence},
+    })
+    f.result['manifest']['sampling'].update(
+        frame_anchor_version=video_packets.ANCHOR_VERSION, frame_anchor_sha256=canonical_hash(anchors),
+        frame_table_sha256=canonical_hash(f.table.to_json()), timeline_origin_s=5.,
+    )
+    for stage, data in (
+        ('probe', {'frame_table': f.table.to_json(), 'info': {'has_audio': True}}),
+        ('render', {'frame_anchor_version': video_packets.ANCHOR_VERSION, 'frame_anchors': anchors}),
+    ):
+        asset = register_artefact(f.db, f.store, canonical_json(data), media_type='application/json',
+                                  role='stage_output', created_by='appearance-fixture', analysis_id=f.analysis.id)
+        f.db.add(AnalysisStage(analysis_id=f.analysis.id, stage=stage, status='done', output_artefact_id=asset.id))
+    f.analysis.result_hash = canonical_hash(f.result)
+    f.store.put_bytes(canonical_json(f.result))
+    f.db.flush()
+    document = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
+    stored = service.load_packet_set(f.db, f.analysis, f.store)
+    assert stored == json.loads(canonical_json(document))
+    assert stored['version'] == 'video-evidence-8'
+    [face] = stored['packets']
+    assert face['finding_ids'] == [] and all(frame['score'] is None for frame in face['frames'])
+    assert [row['value'] for row in face['measurements'][-3:]] == [50., 16.67, 50.]
+    assert all(row['unit'] == '% of face-box width' for row in face['measurements'][-3:])
+
+    frozen = specimen('video', 'standard')
+    frozen = frozen.model_copy(update={
+        'result': json.loads(canonical_json(f.result)), 'evidence': stored,
+        'analysis': frozen.analysis.model_copy(update={'id': f.analysis.id, 'revision': f.analysis.revision}),
+        'media': frozen.media.model_copy(update={'sha256': f.analysis.sha256}),
+    })
+    report = multimedia_evidence.view(frozen, store=f.store)
+    assert report['packets'][0]['measurements'] == face['measurements']
+    html = engine._env.get_template('sections/multimedia_evidence.html.j2').render(v={'evidence': report}, s=frozen)
+    assert 'Median eye spacing during the range' in html and '16.67 % of face-box width' in html
+
+    face['measurements'][-2]['value'] = 90.
+    stored['sha256'] = video_packets.packet_hash(stored)
+    with pytest.raises(PacketIntegrityError, match='Face tracking context differs'):
+        video_packets.validate_packet_set(stored, analysis_id=f.analysis.id, revision=f.analysis.revision,
+                                         original_result_hash=f.analysis.result_hash, source_sha256=f.analysis.sha256)
 
 
 @pytest.mark.parametrize('redacted', [False, True])
@@ -204,7 +282,7 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.image_eligibility'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.video_packet_versions','app.evidence.image_eligibility'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

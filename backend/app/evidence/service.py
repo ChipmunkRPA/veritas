@@ -7,6 +7,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
+from app.evidence.video_packet_versions import NESTED_VERSIONS
 from app.storage.db import Analysis
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
@@ -82,7 +83,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     if document is None:
         return {}
     parts = [document]
-    if document.get("version") in {"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"}:
+    if document.get("version") in NESTED_VERSIONS:
         parts.extend(document[key] for key in ("audio", "av"))
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]

@@ -4,13 +4,13 @@ import DocumentEvidenceContent from './DocumentEvidenceContent'
 import VideoEvidenceContent from './VideoEvidenceContent'
 import VideoEvidenceWorkspace from './VideoEvidenceWorkspace'
 import { EvidenceLimits } from './EvidenceMedia'
-import { useMultimediaEvidence, type EvidenceKind, type MultimediaEvidenceSet } from './multimediaPackets'
+import { hasNestedVideoEvidence, useMultimediaEvidence, type EvidenceKind, type MultimediaEvidenceSet } from './multimediaPackets'
 
 const labels = { video: 'Video evidence', audio: 'Audio evidence', document: 'Text and document evidence' }
 export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: MultimediaEvidenceSet; token: string; mediaReady: boolean }) {
   const omitted = 'omitted_candidates' in set ? set.omitted_candidates : set.omitted_windows
-  const video3 = set.schema === 'chipmunk.video-evidence/1' && ['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version)
-  const nestedCandidates = video3 && ((set.audio?.packets.length ?? 0) + (set.av?.packets.length ?? 0) + (set.audio?.acoustic_context?.events.length ?? 0)) > 0
+  const nestedVideo = set.schema === 'chipmunk.video-evidence/1' && hasNestedVideoEvidence(set.version)
+  const nestedCandidates = nestedVideo && ((set.audio?.packets.length ?? 0) + (set.av?.packets.length ?? 0) + (set.audio?.acoustic_context?.events.length ?? 0)) > 0
   return <div data-testid="multimedia-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
     {set.status !== 'ready' ? <p role="status" className="mt-3 text-small text-text-muted">
       Detailed evidence has not been prepared for this result. Run a new analysis to capture the exact inputs and their source positions. Unavailable evidence does not establish authenticity.
@@ -19,7 +19,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
       {set.packets.length === 0 && !nestedCandidates && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
         No inspection candidate was selected from the recorded inputs. This does not establish authenticity; check the coverage and limitations below.
       </p>}
-      {set.schema === 'chipmunk.video-evidence/1' ? video3
+      {set.schema === 'chipmunk.video-evidence/1' ? nestedVideo
         ? <VideoEvidenceWorkspace set={set} token={token} mediaReady={mediaReady} />
         : <VideoEvidenceContent set={set} token={token} mediaReady={mediaReady} />
         : set.schema === 'chipmunk.audio-evidence/1' ? <AudioEvidenceContent set={set} token={token} mediaReady={mediaReady} />

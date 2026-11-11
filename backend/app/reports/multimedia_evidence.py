@@ -15,6 +15,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.evidence import service
+from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
 if TYPE_CHECKING:
@@ -24,7 +25,6 @@ if TYPE_CHECKING:
     from app.storage.db import Analysis
 
 KINDS = frozenset({"video", "audio", "document"})
-NESTED_VIDEO_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"})
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 

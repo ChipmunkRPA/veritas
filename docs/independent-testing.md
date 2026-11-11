@@ -13,6 +13,14 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [video tracking evidence fixture](video-face-tracking-context.md) exercises
+the same recorded values in a saved packet and report without downloading
+detector weights. The [matched image cue](image-bg-real-detail-deficit-v265-result.md)
+and [passage context replay](text-context-shift-v266-result.md) give reviewers
+two recent examples of what a failed localization candidate looks like, with
+frozen methods, exact aggregate results, and limitations. Full-media replay
+requires the separately obtained source inputs and retained local bindings.
+
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and
 caller-owned directories. It compares aggregate decisions and clean-to-noisy

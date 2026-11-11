@@ -1,0 +1,159 @@
+{
+  "schema": "chipmunk.audio-noise-speech-gate-transfer-result/267",
+  "status": "complete",
+  "freeze_sha256": "b59306f1c86729306d2f122eab60dd4a8d540211a95c3d31d49825d985d14d17",
+  "previous_rule_result_sha256": "7150fa192232b946caa541e4c6896d4160810a3c10b0d54868fb96b5ea4413b3",
+  "private_observation_journal_sha256": "b130a981d4b107cdd5565b4d4ca8e47f94f439391885c9f958097106a9ab0933",
+  "new_neural_calls": 27918,
+  "by_arm_and_condition": {
+    "genuine": {
+      "matched_clean": {
+        "planned": 16,
+        "prepared": 11,
+        "baseline_admitted": 11,
+        "candidate_admitted": 11,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "prepared": 11,
+        "baseline_admitted": 11,
+        "candidate_admitted": 11,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "prepared": 11,
+        "baseline_admitted": 11,
+        "candidate_admitted": 11,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "prepared": 11,
+        "baseline_admitted": 11,
+        "candidate_admitted": 11,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "prepared": 11,
+        "baseline_admitted": 11,
+        "candidate_admitted": 11,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "planned": 16,
+        "prepared": 16,
+        "baseline_admitted": 16,
+        "candidate_admitted": 16,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "prepared": 16,
+        "baseline_admitted": 16,
+        "candidate_admitted": 16,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "prepared": 16,
+        "baseline_admitted": 16,
+        "candidate_admitted": 16,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "prepared": 16,
+        "baseline_admitted": 16,
+        "candidate_admitted": 16,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "prepared": 16,
+        "baseline_admitted": 16,
+        "candidate_admitted": 16,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      }
+    },
+    "drifting": {
+      "matched_clean": {
+        "planned": 16,
+        "prepared": 12,
+        "baseline_admitted": 12,
+        "candidate_admitted": 12,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "prepared": 12,
+        "baseline_admitted": 12,
+        "candidate_admitted": 12,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "prepared": 12,
+        "baseline_admitted": 12,
+        "candidate_admitted": 12,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "prepared": 12,
+        "baseline_admitted": 12,
+        "candidate_admitted": 12,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "prepared": 12,
+        "baseline_admitted": 12,
+        "candidate_admitted": 12,
+        "additional_admissions": 0,
+        "source_groups_with_additional_admissions": 0
+      }
+    }
+  },
+  "background_controls_by_environment": {
+    "kitchen": {
+      "planned": 51,
+      "prepared": 51,
+      "baseline_admitted": 0,
+      "candidate_admitted": 0,
+      "additional_admissions": 0
+    },
+    "traffic": {
+      "planned": 51,
+      "prepared": 51,
+      "baseline_admitted": 0,
+      "candidate_admitted": 0,
+      "additional_admissions": 0
+    }
+  },
+  "background_recordings": 2,
+  "vad_frame_forwards": 27918,
+  "speech_free_background_verified": false,
+  "authenticity_detector_calls": 0,
+  "serving_changed": false,
+  "resource_profile_sha256": "c668a57f00794e9bbabf55c03656bd9cf2708d1ca0bbfac5493850d28018b5f0",
+  "worker_duration_seconds": 9.998262832988985
+}

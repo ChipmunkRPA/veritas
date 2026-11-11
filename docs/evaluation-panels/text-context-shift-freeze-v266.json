@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.text-context-shift-freeze/266",
+  "source_receipts": {
+    "writing-spans-v7-result.json": "eaf7ed4ef8cef0a8bc44a4d6d52e68a96ed1885223df9b03eee6e6e253cce5e1",
+    "text-opai-bench-score-complete-v260.json": "52ecd358f9832fc65727ac009079a9812ad7b635563114cad98ee1e7543b183e",
+    "text-gohumanize-transfer-complete-v196.json": "eff16a6244be6dcb3ee8b200b4fc55e1b157794372bf63300b5729003a45ea53",
+    "text-goce-span-complete-v249.json": "40ec9bfa79968064b27a39f5db5599a2d36283bb33cbd4b7788b8c08097e9790"
+  },
+  "code_sha256": {
+    "backend/scripts/text_context_shift_v266.py": "c8bb2fa319d4fe5517763472527942c010088d40db5720817d03eb40beceb356",
+    "backend/tests/test_text_context_shift_v266.py": "7362bc2cd5df0482e89ec958ef67f2bb6d314d84340ddb143be0bbcdcd6d4f1f",
+    "docs/text-context-shift-v266-method.md": "1ecaf60cfe61ee16c0bf7b81d6a85edc2947c0e4a3e3916d5d783698cff24fb6"
+  },
+  "rule": "Minimum available signed logit change when a focus replaces the outer sentence in an adjacent full triple",
+  "point": {
+    "source_groups": 32,
+    "inputs": 128,
+    "source_positions": 115060,
+    "shift_covered_positions": 113601,
+    "maximum_flagged_groups": 1,
+    "flagged_groups": 1,
+    "current_cut": 0.7735247837019479,
+    "shift_cut": 8.878995281714294,
+    "point_journal_sha256": "b47a3c0e44588101f0acb147a0c7bedbf449228c7cf5359662f92f68df7f0a92"
+  },
+  "scope": "Retrospective comparison on saved responses. No evaluation input used to choose the point.",
+  "new_neural_calls": 0,
+  "serving_changed": false
+}

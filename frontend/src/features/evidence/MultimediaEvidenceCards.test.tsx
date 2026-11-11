@@ -38,15 +38,20 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
-  it('shows a sequence review range with before/during/after frames and no invented frame confidence', () => {
+  it.each(['video-evidence-7', 'video-evidence-8'])('shows before/during/after review evidence in %s', (version) => {
     const set = structuredClone(video)
-    set.version = 'video-evidence-7'
+    set.version = version
     const item = set.packets[0]
     item.claim_scope = 'sampled_window'
     item.face_sequence = { start_stream_s: 12, end_stream_s: 13, response: .02,
       centers: { before: [1, 2], during: [3, 4, 5], after: [6, 7] }, frame_inputs: [] }
     item.frames = (['before', 'during', 'after'] as const).map((role, index) => ({ ...item.frames[0],
       id: `V01.${index+1}`, interval_role: role, score: null, is_peak: false }))
+    item.measurements = version === 'video-evidence-8' ? [
+      { label: 'Median eye spacing before the range', value: 50, unit: '% of face-box width' },
+      { label: 'Median eye spacing during the range', value: 16.67, unit: '% of face-box width' },
+      { label: 'Median eye spacing after the range', value: 50, unit: '% of face-box width' },
+    ] : []
     show(set)
     expect(screen.getByText(/Three consecutive crops support each of 3 centers/)).toBeTruthy()
     expect(screen.getAllByText(/before flagged range/i).length).toBeGreaterThan(0)
@@ -54,6 +59,12 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getAllByText(/after flagged range/i).length).toBeGreaterThan(0)
     expect(screen.queryByText(/response 0\.700/)).toBeNull()
     expect(screen.queryByText(/peak sample/)).toBeNull()
+    if (version === 'video-evidence-8') {
+      expect(screen.getByText('Median eye spacing during the range')).toBeTruthy()
+      expect(screen.getByText(/16\.670? % of face-box width/)).toBeTruthy()
+    } else {
+      expect(screen.queryByText('Median eye spacing during the range')).toBeNull()
+    }
   })
 
   it('plays exact audio windows and context while showing sample coverage, source offsets and precision limits', () => {

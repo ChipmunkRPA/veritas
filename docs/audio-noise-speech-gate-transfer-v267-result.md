@@ -1,0 +1,5 @@
+# Speech admission on a separate foreground cohort
+
+The current gate and one-second-span fallback both admitted all **195 prepared speech variants**. Those variants came from 39 utterances replayed clean and in four matched noise conditions. The available foregrounds were 11 genuine speakers and 28 synthetic utterances across two generator families. The 45 unavailable variants remained in the planned denominator. [Frozen method](audio-noise-speech-gate-transfer-v267-method.md) · [Exact aggregate](evaluation-panels/audio-noise-speech-gate-transfer-complete-v267.json)
+
+Neither rule admitted any of the 102 previously unused background cuts. They came from two recordings and have no per-cut listening labels. The 27,918 local model calls measured speech activity only. No prepared speech failed the current gate on this panel, so the test could not reproduce the six-clip coverage gain seen in development. It gives a separate check on admissions under these conditions. [Development coverage](audio-noise-speech-gate-v256-result.md)

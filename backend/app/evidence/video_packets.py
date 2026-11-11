@@ -22,20 +22,26 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.decode import FrameTable, decode_frames
-from app.evidence import face_interval_binding, face_intervals
+from app.evidence import face_alignment_context, face_interval_binding, face_intervals
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
 from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
+from app.evidence.video_packet_versions import (
+    ACOUSTIC_VERSIONS,
+    ALIGNMENT_CONTEXT_VERSION,
+    CONTINUITY_VERSIONS,
+    NESTED_VERSIONS,
+    VERSIONS,
+)
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = "video-evidence-7"
-CREATOR = "video-evidence-packets/7"
+VERSION = ALIGNMENT_CONTEXT_VERSION
+CREATOR = "video-evidence-packets/8"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
-            "video-evidence-packets/5", "video-evidence-packets/6", CREATOR)
-NESTED_VERSIONS = frozenset({"video-evidence-3", "video-evidence-4", "video-evidence-5", "video-evidence-6", VERSION})
+            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", CREATOR)
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -466,6 +472,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                        "The face crops shown here are source context, not pixel-level manipulation masks.",
                                        "This cue does not change overall confidence."],
                           derivation={**packet["derivation"], "selection": "highest_source_bound_face_sequence_change"})
+            if VERSION == ALIGNMENT_CONTEXT_VERSION and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
+                packet["measurements"].extend(face_alignment_context.measure(sequence))
+                packet["interpretation"] += (
+                    " Compare the eye spacing and the adjacent frames for changes in head angle or face visibility."
+                    " Eye spacing describes how the face was tracked in the sampled frames."
+                )
         if interval := candidate.get("face_interval"):
             start, end = interval["start_stream_s"], interval["end_stream_s"]
             packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
@@ -514,7 +526,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
-    if (document.get("schema") != SCHEMA or document.get("version") not in {"video-evidence-1", "video-evidence-2", *NESTED_VERSIONS}
+    if (document.get("schema") != SCHEMA or document.get("version") not in VERSIONS
             or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
@@ -536,6 +548,8 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
+            if document["version"] == ALIGNMENT_CONTEXT_VERSION:
+                face_alignment_context.validate(packet)
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
         if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:
@@ -568,10 +582,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_channel(document["audio"], source_sha256=source_sha256)
             validate_av_channel(document["av"], source)
-            if (document["version"] in {"video-evidence-4", "video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
+            if (document["version"] in ACOUSTIC_VERSIONS and document["audio"]["coverage"] is not None
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")
-            if (document["version"] in {"video-evidence-5", "video-evidence-6", "video-evidence-7"} and document["audio"]["coverage"] is not None
+            if (document["version"] in CONTINUITY_VERSIONS and document["audio"]["coverage"] is not None
                     and document["audio"]["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2"):
                 raise ValueError("Current video evidence omits continuity measurements")
         except (KeyError, TypeError, ValueError) as error:

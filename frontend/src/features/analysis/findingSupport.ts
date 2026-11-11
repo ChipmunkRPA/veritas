@@ -1,8 +1,8 @@
 import type { Finding, SignalV2 } from '../../lib/api/queries'
 import type { ImageEvidencePacket, ImageEvidenceSet } from '../evidence/imagePackets'
-import type {
-  AudioEvidencePacket, DocumentEvidencePacket, MultimediaEvidenceSet, PacketBase, SampleInterval,
-  VideoAVPacket, VideoEvidenceFrame, VideoEvidencePacket, VideoEvidenceSet,
+import {
+  hasNestedVideoEvidence, type AudioEvidencePacket, type DocumentEvidencePacket, type MultimediaEvidenceSet,
+  type PacketBase, type SampleInterval, type VideoAVPacket, type VideoEvidenceFrame, type VideoEvidencePacket, type VideoEvidenceSet,
 } from '../evidence/multimediaPackets'
 import { anchorOf } from '../signals/ledger'
 
@@ -105,7 +105,7 @@ function documentLocation(packet: DocumentEvidencePacket, chars?: number): Locat
 /** Keep nested links aligned with the channels the evidence workspace can actually render. */
 function videoLocations(set: VideoEvidenceSet): (LocatedPacket | null)[] {
   const result = set.packets.map(videoLocation)
-  if (!['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7'].includes(set.version)) return result
+  if (!hasNestedVideoEvidence(set.version)) return result
   const audio = set.audio, av = set.av
   const audioCoverage = audio?.coverage, avCoverage = av?.coverage
   if (audio && audio.source.sha256 === set.source.sha256 && ['ready', 'not_assessed'].includes(audio.status)

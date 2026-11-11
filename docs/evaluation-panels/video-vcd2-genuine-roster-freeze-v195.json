@@ -1,0 +1,51 @@
+{
+  "schema": "chipmunk.video-vcd2-genuine/195",
+  "metadata": {
+    "vcd2_metadata.csv": {
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/metadata/vcd2_metadata.csv",
+      "sha256": "4d3043d4963c780ca2653e1a3c0703f3aa7923d8f3a43044eff439cd987e6d56"
+    },
+    "benchmarking-set_metadata.csv": {
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/metadata/benchmarking-set_metadata.csv",
+      "sha256": "ac2aa2c59399a7701d8120b5905545884a7cf6296eb2bdcb2db2eae3f9830452"
+    },
+    "raw_mkv_list.txt": {
+      "url": "https://raw.githubusercontent.com/microsoft/VCD/3c87cbdbe68505da6d590cc4ed8c2af73bcc5c68/download/vcd2/raw_mkv_list.txt",
+      "sha256": "f2656d37685f91159478dbd569a9760164a394f1be31dd7a0424e93fbbfdb237"
+    },
+    "benchmarking_mkv_list.txt": {
+      "url": "https://raw.githubusercontent.com/microsoft/VCD/3c87cbdbe68505da6d590cc4ed8c2af73bcc5c68/download/vcd2/benchmarking_mkv_list.txt",
+      "sha256": "d8920e6f0a9508bb8b3dec89475e03b6e4f6003089ca6ffe3fa00f3beea43b52"
+    },
+    "LICENSE-DATA": {
+      "url": "https://raw.githubusercontent.com/microsoft/VCD/3c87cbdbe68505da6d590cc4ed8c2af73bcc5c68/LICENSE-DATA",
+      "sha256": "4531a67d443284d93ffed0803df5b10634aff21c3d77e381f2d48af01d875868"
+    }
+  },
+  "code_sha256": {
+    "backend/scripts/video_vcd2_genuine_v195.py": "4a192e96b294a39457fdd09f3f6372a012f8f7b9429f8f8d118271df83d80fcd",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "docs/video-vcd2-genuine-v195-method.md": "17ef35a9fb111a40898c8b06c430b4d7e0ed86560fe916ee5e96536e3e8975be"
+  },
+  "seed": "chipmunk-vcd2-genuine-20261110",
+  "sample_unit": "recording stem; participant identity is unavailable",
+  "declared_license": "CDLA-Permissive-2.0",
+  "source_origin": "genuine camera, Microsoft TH benchmark",
+  "relative_ordinary_interval_s": [
+    3,
+    6
+  ],
+  "private_roster_sha256": "525522cd539cd7fad5468177762405bea834673339bcba6b6d53d4be5ce798c9",
+  "recording_components": 12,
+  "camera_types": 12,
+  "by_resolution": {
+    "1280x720": 6,
+    "1920x1080": 6
+  },
+  "by_stratum": {
+    "High SI - High TI": 3,
+    "High SI - Low TI": 3,
+    "Low SI - High TI": 3,
+    "Low SI - Low TI": 3
+  }
+}

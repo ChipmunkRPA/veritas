@@ -230,7 +230,10 @@ def test_old_immutable_packets_remain_readable_without_regeneration(video_fixtur
     document = build_packet_set(db, analysis, store, result)
     document['id'] = str(uuid.uuid5(video_packets._NS, f'{analysis.id}:{analysis.result_hash}:video-evidence-1'))
     document['version'] = 'video-evidence-1'
-    document.pop('audio'); document.pop('av')
+    document.pop('audio')
+    document.pop('av')
+    document.pop('picture_hold')
+    document['source'].pop('picture_hold_sha256')
     document['coverage'].pop('channels')
     for packet in document['packets']:
         packet.pop('clip')

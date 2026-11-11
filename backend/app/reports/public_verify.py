@@ -21,7 +21,7 @@ from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
     ALIGNMENT_CONTEXT_VERSIONS,
     CONTINUITY_VERSIONS,
-    LIGHTING_CONTEXT_VERSION,
+    LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
 )
 from app.evidence.video_packet_versions import VERSIONS as VIDEO_VERSIONS
@@ -77,12 +77,15 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and evidence.get('source', {}).get('sha256') == source['sha256'] == binding.get('source_sha256'),
              'The evidence source/result/revision binding differs')
     if analysis['kind'] == 'video':
+        from app.evidence.picture_hold_binding import validate as validate_picture_hold
+
+        validate_picture_hold(evidence)
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
             if evidence['version'] in ALIGNMENT_CONTEXT_VERSIONS:
                 validate_face_alignment(packet)
-            if evidence['version'] == LIGHTING_CONTEXT_VERSION:
+            if evidence['version'] in LIGHTING_CONTEXT_VERSIONS:
                 validate_face_lighting(packet, evidence['source'])
         if evidence['version'] in NESTED_VERSIONS:
             from app.evidence.audio_binding import validate_audio_channel
@@ -129,12 +132,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                                  'Copy evidence search coverage is inconsistent')
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
+    if analysis['kind'] == 'document':
+        from app.evidence.document_repeat import validate as validate_repeated_passages
+
+        validate_repeated_passages(evidence)
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 
         checks = {check['id'] for check in result.get('checks', [])}
         for packet in evidence['packets']:
-            if evidence['version'] == document_scope.VERSION:
+            if evidence['version'] in document_scope.SCOPE_VERSIONS:
                 document_scope.validate(packet, evidence['source']['chars'])
             validate_context_comparison(packet['context_comparison'], focus=packet['focus'], chars=evidence['source']['chars'])
             _require(all(row['signal_ref']['id'] in checks for row in packet['context_comparison']['checks']),
@@ -156,6 +163,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_acoustic_context(acoustic, source=evidence['source'], voice_packets=evidence['packets'])
     groups = [group for part in parts for group in
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
+    repeat_pcm = {}
     for part in parts:
         if part.get('version') == 'image-evidence-7':
             groups.extend(pair['artifacts'] for pair in part['copy_similarity']['pairs'])
@@ -167,6 +175,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.sound_event_binding import validate as validate_sound_events
             validate_sound_events(sound, part['source'])
             groups.extend(window.get('artifacts') or {} for window in sound['windows'])
+        if (repeat := part.get('repetition_context')) is not None:
+            from app.evidence.audio_repetition_binding import validate as validate_repetition
+
+            validate_repetition(repeat, part['source'])
+            for pair in repeat['pairs']:
+                groups.append(pair['artifacts'])
+                digest = pair['artifacts']['first_clip']['sha256']
+                pcm_digest = pair['pcm_s16le_sha256']
+                _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                         'One repeated-audio clip has conflicting PCM commitments')
     for group in groups:
         _require(isinstance(group, dict), 'Invalid evidence assets')
         for asset in group.values():
@@ -207,6 +225,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(audio.getnframes() == asset.get('samples') and audio.getframerate() == asset.get('sample_rate')
                              and audio.getnchannels() == asset.get('channels') and audio.getsampwidth() == 2,
                              'A WAV asset does not match its frozen sample dimensions')
+                    if digest in repeat_pcm:
+                        _require(hashlib.sha256(audio.readframes(audio.getnframes())).hexdigest() == repeat_pcm[digest],
+                                 'A repeated-audio clip does not contain its committed samples')
             else:
                 dimensions = inspect_mp4(stream)
                 _require(all(canonical_hash(asset.get(k)) == canonical_hash(v) for k, v in dimensions.items()),

@@ -8,7 +8,7 @@
 </div>
 {% endif %}
 {% endmacro %}
-<section class="{% if evidence.packets or evidence.overview or evidence.acoustic_contexts %}chapter{% else %}chapter-cont{% endif %} multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
+<section class="{% if evidence.packets or evidence.overview or evidence.acoustic_contexts or evidence.get('repetition_context') or evidence.get('repeated_passages') %}chapter{% else %}chapter-cont{% endif %} multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
 <h2 class="chapter-title" id="multimedia-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}{{ evidence.title }}</h2>
 <p>{{ evidence.note }}</p>
 {% if evidence.available %}
@@ -27,6 +27,7 @@
 {% if evidence.get('stereo_context') %}
 {% include "sections/stereo_context.html.j2" %}
 {% endif %}
+{% include "sections/repetition_context.html.j2" %}
 {% for context in evidence.acoustic_contexts %}
 <div class="multimedia-acoustic-summary">
 <h3>Background and acoustic context</h3>
@@ -50,7 +51,7 @@
 {% if packet.face_sequence %}<p class="caption">The review range spans {{ '%.3f' | format(packet.face_sequence.start_stream_s) }}-{{ '%.3f' | format(packet.face_sequence.end_stream_s) }} s on the source clock. Three consecutive source crops support each of {{ packet.face_sequence.centers.during | length }} centers in this range. Before and after groups provide comparison context. The sequence response is not an individual-frame confidence.</p>{% endif %}
 {{ plates(packet.images, true) }}
 {% if packet.clip and packet.clip.status == 'ready' %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}
-{% if packet.clip and packet.clip.status == 'unavailable' %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
+{% if packet.clip and packet.clip.status == 'unavailable' and not packet.get('picture_hold') %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
 {% if packet.kind == 'av' %}<p class="caption">These 25 measurement ticks used the exact gray patches shown below. A source frame can repeat at multiple ticks; the three full-size frames are representatives.</p>{% elif packet.window %}<p class="caption">This window used {{ packet.window.frame_indices | length }} recorded input frames. The displayed frames are representatives; the window measurement is not a per-frame score.</p>{% endif %}
 {% for frame in packet.frames %}
 <div class="multimedia-frame">
@@ -128,7 +129,7 @@
 {% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
 {% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
 </article>
-{% else %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endfor %}
+{% else %}{% if not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

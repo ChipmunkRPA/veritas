@@ -39,7 +39,8 @@ def _validate(channel, source_sha256):
     require(channel['status'] in {'ready', 'not_assessed', 'absent', 'unavailable'}, 'Invalid video voice availability')
     if channel['coverage'] is None:
         require(channel['status'] in {'absent', 'unavailable'} and not channel['packets'] and not channel.get('overview')
-                and not channel.get('acoustic_context') and not {'stereo_context', 'stereo_context_sha256'}.intersection(channel)
+                and not channel.get('acoustic_context')
+                and not {'stereo_context', 'stereo_context_sha256', 'repetition_context'}.intersection(channel)
                 and bool(channel['reason']), 'Unavailable video voice contains unexplained assets')
         return
     samples = source['samples']
@@ -72,6 +73,11 @@ def _validate(channel, source_sha256):
         require(sha(channel['stereo_context_sha256']) and canonical_hash(stereo) == channel['stereo_context_sha256'],
                 'Video stereo context differs from its committed measurements')
         validate(stereo, source, ranges=ranges)
+
+    if channel.get('repetition_context') is not None:
+        from app.evidence.audio_repetition_binding import validate
+
+        validate(channel['repetition_context'], source)
 
     coverage=channel['coverage']
     for window in coverage['windows']:

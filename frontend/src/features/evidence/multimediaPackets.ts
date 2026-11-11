@@ -27,7 +27,10 @@ export interface VideoEvidenceFrame {
   context_region: { x: number; y: number; w: number; h: number } | null
 }
 export interface VideoEvidencePacket extends PacketBase {
-  claim_scope: 'sampled_frames' | 'sampled_window'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
+  claim_scope: 'sampled_frames' | 'sampled_window' | 'consecutive_frames'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
+  picture_hold?: { start_frame_index: number; end_frame_index: number; start_pts: number; end_pts: number; time_base: string;
+    start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
+    span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
@@ -45,6 +48,9 @@ export interface VideoEvidencePacket extends PacketBase {
 export interface VideoEvidenceSet extends SetBase {
   schema: 'chipmunk.video-evidence/1'; packets: VideoEvidencePacket[]; omitted_candidates: number
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }
+  picture_hold?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; frame_limit: number;
+    last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
+    reason: string | null; packet_id: string | null }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
     decoded_frame_indices: number[]; table_truncated: boolean; unmapped_observations: number;
     channels?: Partial<Record<'audio' | 'av_sync' | 'av', { status: string; reason: string | null; successful_check_count?: number }>> } | null
@@ -102,6 +108,13 @@ export interface StereoChannelContext {
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   })[]
 }
+export interface AudioRepetitionContext {
+  schema: 'chipmunk.audio-exact-repetition/1'; status: 'measured' | 'unavailable' | 'ambiguous'; reason: string | null
+  source_sha256: string; pcm_sha256: string; sample_rate: number; input_samples: number; searched_interval: SampleInterval | null
+  pairs: { id: string; first: SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] };
+    second: SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] };
+    sample_count: number; lag_samples: number; pcm_s16le_sha256: string; artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset> }[]
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
@@ -113,6 +126,7 @@ export interface AudioEvidenceSet extends SetBase {
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
+  repetition_context?: AudioRepetitionContext
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface VideoAudioChannel {
@@ -122,6 +136,7 @@ export interface VideoAudioChannel {
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
+  repetition_context?: AudioRepetitionContext
 }
 export interface VideoAVFrameInput {
   tick: number; frame_index: number; frame_pts: number; source_audio_pts: number; source_audio_time_base: string
@@ -181,6 +196,11 @@ export interface DocumentEvidenceWindow {
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
+  repeated_passages?: { schema: 'document-repeated-passages/1'; status: 'matched' | 'no_match' | 'not_assessed';
+    coverage: { compared_blocks: number; excluded_ocr_blocks: number; excluded_quoted_or_signature_blocks: number; omitted_groups: number };
+    groups: { id: string; text: string; text_sha256: string; word_count: number; total_occurrences: number;
+      occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
+        source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
@@ -189,7 +209,7 @@ export interface DocumentEvidenceSet extends SetBase {
 }
 export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | DocumentEvidenceSet
 
-const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9'])
+const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9', 'video-evidence-10'])
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

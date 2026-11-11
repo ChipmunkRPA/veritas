@@ -101,6 +101,12 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if not isinstance(sound, dict) or not isinstance(sound.get("windows"), list):
                 raise ObjectIntegrityError("The evidence has invalid sound categories")
             groups.extend(window.get("artifacts") or {} for window in sound["windows"])
+        repetition = part.get("repetition_context")
+        if repetition is not None:
+            audio_part = part.get("schema") == "chipmunk.audio-evidence/1" or part is document.get("audio")
+            if not audio_part or not isinstance(repetition, dict) or not isinstance(repetition.get("pairs"), list):
+                raise ObjectIntegrityError("The evidence has invalid repeated audio")
+            groups.extend(pair["artifacts"] for pair in repetition["pairs"])
     result: dict[str, dict[str, Any]] = {}
     for group in groups:
         if not isinstance(group, dict):

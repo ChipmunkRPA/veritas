@@ -60,6 +60,14 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
+    {set.picture_hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-picture-hold-heading" className="m-0 text-body font-medium">Identical consecutive frames</h3>
+      {set.picture_hold.status === 'unavailable' ? <p className="mt-2 mb-0 text-small text-text-muted">This check could not verify a sequence in the opening frames.</p>
+        : <p className="mt-2 mb-0 text-small">Checked {set.picture_hold.frames_scanned} consecutive opening frames{set.picture_hold.last_stream_time_s != null
+          && ` through ${seconds(set.picture_hold.last_stream_time_s)} on the source clock`}. {set.picture_hold.status === 'no_match'
+          ? 'No qualifying hold was found in that range.' : <a className="underline" href={`#media-evidence-${set.picture_hold.packet_id}`}>Inspect the recorded hold</a>}</p>}
+      <p className="mt-2 mb-0 text-caption text-text-muted">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight.</p>
+    </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
         {' '}{set.coverage.window_check_count} window check(s) cover {set.coverage.window_frame_indices.length} distinct sampled frames.</p>
@@ -86,8 +94,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <VideoFrameNavigator set={set} token={token} mediaReady={mediaReady} selected={selected} onSelect={chooseFrame} />
     <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
       <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
-      <p className="mt-2 mb-0 text-body">{packet.observation}</p>
-      <p className="mt-2 mb-0 text-small text-text-muted">{packet.face_sequence
+      {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
+      <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
+        ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
+        : packet.face_sequence
         ? <>Face-change review range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
         : packet.face_interval
         ? <>Flagged source range <strong>{seconds(packet.face_interval.start_stream_s)}–{seconds(packet.face_interval.end_stream_s)}</strong> across {packet.face_interval.samples.during.length} scored samples.</>
@@ -98,7 +108,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. Input frame indices: {packet.window.frame_indices.join(', ')}.</p>
         <p className="mt-2 mb-0">Only these frames were input to this window. This does not establish continuous coverage between them.</p>
       </details>}
-      <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />
+      {!packet.picture_hold && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       <div className="mt-5 space-y-5">{packet.frames.map((frame) => {
         const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
         const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
@@ -108,9 +118,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
           <div className={evidenceGrid}>
             <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
               <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
-            <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
+            {!packet.picture_hold && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
               alt={`${frame.id}: ${crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
-              <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>
+              <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
           </div>
           <p className="mt-3 mb-0 text-caption font-mono text-text-muted">Source {seconds(frame.anchor.stream_time_s)} · PTS {frame.anchor.pts} at {frame.anchor.time_base} · player {navigationKnown ? seconds(frame.anchor.playback_time_s!) : 'mapping unavailable'}</p>
           <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>

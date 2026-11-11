@@ -45,7 +45,7 @@ from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import prob_to_signal_fields
 from app.detectors.image.classifiers import specs as classifier_specs
 from app.detectors.image.scoring import dfdc_frame_weight, face_frame_weight, frame_weight, fuse_frame_scores
-from app.detectors.video import sampling
+from app.detectors.video import picture_hold, sampling
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.adapters import lipsync as lipsync_lane
 from app.detectors.video.adapters import lipsync_xcorr as xcorr_lane
@@ -74,7 +74,7 @@ from app.detectors.video.pipeline import (
 )
 from app.detectors.video.shots import METHOD as SHOT_METHOD
 from app.detectors.video.shots import detect_shots
-from app.engine import card_copy
+from app.engine import card_copy, provenance_gate
 from app.engine.boundary import DetectorTimeout
 from app.engine.detector import Lane, Modality, StageOutputs
 from app.engine.exhibits import exhibit_payload_hash
@@ -83,6 +83,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.profiles import SAMPLING
 from app.engine.runner import StageContext
 from app.engine.stages import common
+from app.evidence import picture_hold_binding
 from app.evidence.face_interval_binding import sequence_observation
 from app.schemas.evidence import AnalysisResultV2, Decision, SignalV2, TimeSegment
 from app.schemas.legacy import BAND_CODE, FALLBACK_CAVEAT
@@ -916,6 +917,16 @@ def render(ctx: StageContext) -> dict[str, Any]:
     artifacts, key_times = video_artifacts(common.legacy_artifact_dir(ctx), [f.rgb for f in frames], per_frame, [f.time_s for f in frames])
     frame_store = ctx.state.get("frame_store")
     anchors = frame_store.native_anchors() if frame_store is not None else []
+    hold = None
+    if frame_store is not None:
+        table = frame_store.table
+        if provenance_gate.stop(ctx):
+            limit = picture_hold_binding.frame_limit(len(table), table.width, table.height)
+            hold = {"coverage": picture_hold_binding.coverage("unavailable", picture_hold_binding.PROVENANCE, table.time_base,
+                                                              limit=limit), "match": None}
+        else:
+            hold = picture_hold.inspect(frame_store.path, table, origin=ctx.outputs["probe"]["info"].get("timeline_origin_s"),
+                                        check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining())
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")
@@ -924,6 +935,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
     return {**out, **stills, "legacy_artifacts": artifacts, "key_frame_times": key_times,
             "artefacts": stills["artefacts"] + stereo_objects,
             "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
+            "picture_hold": hold,
             "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
             "audio_stereo_context_sha256": stereo_sha}
 
@@ -947,6 +959,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                                          "exhibit_frame_pts_unit": "milliseconds"})
     if rendered.get("audio_mapping") is not None:
         result.manifest.sampling["video_audio_mapping_sha256"] = canonical_hash(rendered["audio_mapping"])
+    if rendered.get("picture_hold") is not None:
+        result.manifest.sampling["picture_hold_sha256"] = canonical_hash(rendered["picture_hold"])
     from app.evidence.video_audio import published_record
 
     result.manifest.sampling["video_audio_evidence"] = published_record(ctx)

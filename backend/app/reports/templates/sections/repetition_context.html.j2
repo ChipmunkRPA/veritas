@@ -1,0 +1,56 @@
+{% if evidence.get('picture_hold') %}
+{% set hold = evidence.picture_hold %}
+<h3>Identical consecutive frames</h3>
+{% if hold.status == 'unavailable' %}<p>{{ hold.reason }}</p>{% else %}
+<p>Checked {{ hold.frames_scanned }} consecutive opening frames{% if hold.last_stream_time_s is not none %} through {{ '%.3f' | format(hold.last_stream_time_s) }} s on the source clock{% endif %}. {% if hold.status == 'matched' %}<a href="#multimedia-evidence-{{ hold.packet_id }}">Inspect the recorded hold</a>.{% else %}No qualifying hold was found in that range.{% endif %}</p>
+{% endif %}
+<p class="caption">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold</span>.</p>
+{% endif %}
+{% if evidence.get('repetition_context') %}
+{% set context = evidence.repetition_context %}
+<h3>Exact repeated audio</h3>
+<p>This check compares samples in continuous 2.5–4 second mono inputs. Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+{% if context.status == 'ambiguous' %}<p>The search reached its comparison limit before it could establish a result.</p>
+{% elif context.status == 'unavailable' %}<p>This input could not be checked within the supported duration, source timing, and signal conditions.</p>
+{% elif not context.pairs %}<p>No exact active repeat of at least 0.15 seconds was found in the checked input.</p>{% endif %}
+{% for pair in context.pairs %}
+<article class="multimedia-evidence-packet" id="multimedia-evidence-{{ pair.id }}">
+<h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of identical samples</h4>
+{% for label in ['first', 'second'] %}
+{% set span = pair[label] %}
+<p>{{ label | capitalize }} occurrence, analyzed audio {{ '%.3f' | format(span.start_sample / context.sample_rate) }}–{{ '%.3f' | format(span.end_sample / context.sample_rate) }} s. Samples [{{ span.start_sample }}, {{ span.end_sample }}).</p>
+{% for range in span.source_timestamp_ranges %}
+<p class="caption">Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.
+{% set origin = evidence.stereo_context_video_origin_s %}
+{% set start = range.source_start_pts / context.sample_rate %}
+{% set end = range.source_end_pts / context.sample_rate %}
+{% if origin is not none and start >= origin %}Video playback {{ '%.3f' | format(start - origin) }}–{{ '%.3f' | format(end - origin) }} s.{% endif %}</p>
+{% endfor %}
+{% endfor %}
+<p class="caption evidence-hash">{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256 <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>
+</article>
+{% endfor %}
+<p class="caption">JSON pointer <span class="mono">{{ evidence.repetition_context_pointer }}</span>.</p>
+{% endif %}
+{% if evidence.get('repeated_passages') %}
+{% set repeated = evidence.repeated_passages %}
+<h3>Exact repeated passages</h3>
+<p>Compared {{ repeated.coverage.compared_blocks }} mapped text blocks of at least 30 words and at most 1,600 characters. Quotes, templates, and editorial duplication can repeat wording. Matches carry no AI confidence weight.</p>
+{% if repeated.coverage.excluded_ocr_blocks %}<p class="caption">Excluded {{ repeated.coverage.excluded_ocr_blocks }} blocks read from page images.</p>{% endif %}
+{% if repeated.coverage.excluded_quoted_or_signature_blocks %}<p class="caption">Excluded {{ repeated.coverage.excluded_quoted_or_signature_blocks }} blocks marked as email quotations or signatures.</p>{% endif %}
+{% if repeated.status == 'not_assessed' %}<p>There were too few eligible blocks to compare.</p>
+{% elif repeated.status == 'no_match' %}<p>No exact repeat was found among the compared blocks.</p>{% endif %}
+{% for group in repeated.groups %}
+<article class="multimedia-evidence-packet" id="multimedia-evidence-{{ group.id }}">
+<h4>{{ group.id }} · {{ group.word_count }} words repeated at {{ group.total_occurrences }} locations</h4>
+{% if not evidence.withheld %}<blockquote>{{ group.text }}</blockquote>{% endif %}
+<ul>{% for location in group.occurrences %}
+{% set anchor = location.anchor %}
+<li>{% if anchor.kind == 'pdf' %}Page {{ anchor.page }}{% if anchor.get('block') is not none %}, block {{ anchor.block + 1 }}{% endif %}. {% elif anchor.kind == 'docx' %}Paragraph {{ anchor.paragraph_index + 1 }}. {% elif anchor.kind == 'email' %}Email body. {% endif %}Extracted characters [{{ location.start }}, {{ location.end }}).{% if anchor.get('source_start') is not none %} Source characters [{{ anchor.source_start }}, {{ anchor.source_end }}).{% endif %}{% if anchor.get('bbox') %} Bounds [{% for value in anchor.bbox %}{{ '%.1f' | format(value) }}{% if not loop.last %}, {% endif %}{% endfor %}] on the unrotated page.{% endif %}</li>
+{% endfor %}</ul>
+{% if group.total_occurrences > group.occurrences | length %}<p class="caption">Showing the first {{ group.occurrences | length }} locations.</p>{% endif %}
+</article>
+{% endfor %}
+{% if repeated.coverage.omitted_groups %}<p class="caption">{{ repeated.coverage.omitted_groups }} additional repeat groups are outside the evidence display limit.</p>{% endif %}
+<p class="caption">JSON pointer <span class="mono">/repeated_passages</span>.</p>
+{% endif %}

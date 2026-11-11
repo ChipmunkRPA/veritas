@@ -22,7 +22,13 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.decode import FrameTable, decode_frames
-from app.evidence import face_alignment_context, face_interval_binding, face_intervals, face_lighting_context
+from app.evidence import (
+    face_alignment_context,
+    face_interval_binding,
+    face_intervals,
+    face_lighting_context,
+    picture_hold_binding,
+)
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
 from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
@@ -30,8 +36,9 @@ from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
     ALIGNMENT_CONTEXT_VERSIONS,
     CONTINUITY_VERSIONS,
-    LIGHTING_CONTEXT_VERSION,
+    LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
+    PICTURE_HOLD_VERSION,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -39,10 +46,11 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = LIGHTING_CONTEXT_VERSION
-CREATOR = "video-evidence-packets/9"
+VERSION = PICTURE_HOLD_VERSION
+CREATOR = "video-evidence-packets/10"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
-            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", "video-evidence-packets/8", CREATOR)
+            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", "video-evidence-packets/8",
+            "video-evidence-packets/9", CREATOR)
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -69,7 +77,7 @@ def _stage(db: Session, store: ObjectStore, analysis_id: str, name: str) -> tupl
     return json.loads(_verified(store, art.sha256)), art.sha256
 
 
-def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list]:
+def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None]:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     sampling = result.get("manifest", {}).get("sampling", {})
     if (probe is None or render is None or sampling.get("frame_anchor_version") != ANCHOR_VERSION
@@ -102,7 +110,13 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) 
               "width": table.width, "height": table.height, "frame_count": len(table),
               "timeline_origin_s": origin, "coordinate_space": "display-oriented-native-frame",
               "frame_table_sha256": sampling["frame_table_sha256"], "frame_anchor_sha256": sampling["frame_anchor_sha256"]}
-    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}]
+    hold = None
+    if VERSION == PICTURE_HOLD_VERSION:
+        hold = render[0].get("picture_hold")
+        source["picture_hold_sha256"] = sampling.get("picture_hold_sha256")
+        if (canonical_hash(hold) if hold is not None else None) != source["picture_hold_sha256"]:
+            raise PacketIntegrityError("Video picture hold differs from its published commitment")
+    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold
 
 
 def _signals(result: dict, exhibit: dict) -> list[dict]:
@@ -312,6 +326,45 @@ def _contact(images: list[Image.Image], labels: list[str]) -> Image.Image:
     return sheet
 
 
+def _packet_image(db: Session, store: ObjectStore, analysis: Analysis, set_id: str, image: Image.Image) -> dict:
+    asset = register_artefact(db, store, _png(image), media_type="image/png", role="preview", created_by=CREATOR,
+                              analysis_id=analysis.id)
+    return {"sha256": asset.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
+            "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{asset.sha256}.png"}
+
+
+def _picture_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
+                         source: dict, match: dict, decoded: dict) -> dict:
+    packet_id = picture_hold_binding.PACKET_ID
+    indices = (match["start_frame_index"], match["end_frame_index"])
+    frames = []
+    for position, (role, index) in enumerate(zip(("start", "end"), indices, strict=True), 1):
+        if index not in decoded or hashlib.sha256(decoded[index]).hexdigest() != match["decoded_rgb_sha256"]:
+            raise PacketIntegrityError("Picture hold endpoint differs from the native inspection")
+        frames.append({"id": f"{packet_id}.{position}", "anchor": {
+            "frame_index": index, "pts": match[f"{role}_pts"], "time_base": source["time_base"],
+            "decoded_rgb_sha256": match["decoded_rgb_sha256"], "original_sha256": source["sha256"],
+            "width": source["width"], "height": source["height"], "stream_selector": source["stream_selector"],
+            "coordinate_space": source["coordinate_space"], "stream_time_s": match[f"{role}_stream_s"],
+            "playback_time_s": match[f"{role}_playback_s"],
+        }, "score": None, "is_peak": False, "context_region": None, "region_meaning": "whole_frame_context",
+            "artifact_refs": {"original": "held_picture", "context": "held_picture"}})
+    image = Image.fromarray(decoded[indices[0]])
+    sheet = _contact([image, image], [f"First | frame {indices[0]}", f"Last | frame {indices[1]}"])
+    return {"id": packet_id, "title": "Repeated picture across consecutive frames", "evidence_type": "anomaly",
+            "claim_scope": "consecutive_frames", "semantics": picture_hold_binding.METHOD, "picture_hold": match,
+            "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames,
+            "observation": picture_hold_binding.observation(match),
+            "interpretation": picture_hold_binding.CONTEXT,
+            "limitations": ["The check covers a bounded opening sequence. Compression can change pixels even when a picture looks still."],
+            "measurements": picture_hold_binding.measurements(match),
+            "artifacts": {"held_picture": _packet_image(db, store, analysis, set_id, image),
+                          "contact_sheet": _packet_image(db, store, analysis, set_id, sheet)},
+            "clip": {"status": "unavailable", "reason": "Use the original video to inspect either measured endpoint"},
+            "derivation": {"version": VERSION, "selection": "longest_exact_hold_in_bounded_opening_prefix",
+                           "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
+
+
 def _channel_coverage(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> dict:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     has_audio = probe[0].get("info", {}).get("has_audio") if probe else None
@@ -343,7 +396,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Video result or original identity does not match")
     store.verify(analysis.sha256)
-    table, source, anchors, records = _records(db, store, analysis, result)
+    table, source, anchors, records, hold = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
@@ -367,8 +420,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
-    wanted = sorted({r["frame_index"] for c in chosen for r in c["rows"]})
-    decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, wanted)} if wanted else {}
+    if VERSION == PICTURE_HOLD_VERSION:
+        document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
+            "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
+    match = hold["match"] if hold is not None else None
+    wanted = {r["frame_index"] for c in chosen for r in c["rows"]}
+    endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
+    selected = sorted(wanted | endpoints)
+    decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, selected)} if selected else {}
     for i in wanted:
         if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:
             raise PacketIntegrityError("Video evidence pixels differ from the frame decoded during analysis")
@@ -378,10 +437,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         artifacts, frames, context_images, labels = {}, [], [], []
 
         def add(role: str, image: Image.Image, target: dict = artifacts) -> None:
-            art = register_artefact(db, store, _png(image), media_type="image/png", role="preview", created_by=CREATOR,
-                                    analysis_id=analysis.id)
-            target[role] = {"sha256": art.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
-                               "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{art.sha256}.png"}
+            target[role] = _packet_image(db, store, analysis, set_id, image)
 
         for pos, row in enumerate(candidate["rows"], 1):
             i = row["frame_index"]
@@ -478,7 +534,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     " Compare the eye spacing and the adjacent frames for changes in head angle or face visibility."
                     " Eye spacing describes how the face was tracked in the sampled frames."
                 )
-            if VERSION == LIGHTING_CONTEXT_VERSION and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
+            if VERSION in LIGHTING_CONTEXT_VERSIONS and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
                 lighting = face_lighting_context.record(packet, source, decoded)
                 packet["face_lighting"] = lighting
                 packet["measurements"].extend(face_lighting_context.measurements(lighting))
@@ -513,6 +569,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         except ClipUnavailable as error:
             packet["clip"] = {"status": "unavailable", "reason": str(error)}
         document["packets"].append(packet)
+    if match is not None:
+        document["packets"].append(_picture_hold_packet(db, store, analysis, set_id, source, match, decoded))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -528,6 +586,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     document["sha256"] = packet_hash(document)
     validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    try:
+        picture_hold_binding.validate_record(document, hold, table_pts=table.pts, interpolated=table.interpolated,
+                                             canonical_hash=canonical_hash)
+    except (KeyError, TypeError, ValueError) as error:
+        raise PacketIntegrityError(str(error)) from error
     register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",
                      created_by=CREATOR, analysis_id=analysis.id, artefact_id=set_id)
     return document
@@ -541,12 +604,16 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
         raise PacketIntegrityError("Video evidence differs from its source, result or recorded hash")
     source = document["source"]
+    try:
+        picture_hold_binding.validate(document)
+    except (KeyError, TypeError, ValueError) as error:
+        raise PacketIntegrityError(str(error)) from error
     table_base = FrameTable(time_base=source["time_base"], pts=(), key_frames=(), pict_types="", width=source["width"],
                             height=source["height"], coded_width=source["width"], coded_height=source["height"]).tb
     ids = set()
     for packet in document["packets"]:
         if (packet["id"] in ids or (packet.get("evidence_type"), packet.get("claim_scope"))
-                not in {("statistical", "sampled_frames"), ("anomaly", "sampled_window")}):
+                not in {("statistical", "sampled_frames"), ("anomaly", "sampled_window"), ("anomaly", "consecutive_frames")}):
             raise PacketIntegrityError("Video evidence has duplicate or misrepresented observations")
         ids.add(packet["id"])
         artifacts = packet["artifacts"]
@@ -559,7 +626,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             face_interval_binding.validate_packet(packet, source)
             if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
                 face_alignment_context.validate(packet)
-            if document["version"] == LIGHTING_CONTEXT_VERSION:
+            if document["version"] in LIGHTING_CONTEXT_VERSIONS:
                 face_lighting_context.validate(packet, source)
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error

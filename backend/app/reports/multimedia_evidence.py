@@ -82,6 +82,9 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
+        for pair in (part.get("repetition_context") or {}).get("pairs", []):
+            for role, asset in sorted(pair["artifacts"].items()):
+                yield pair["id"], role, asset
         acoustic = part.get("acoustic_context")
         if acoustic:
             for role, asset in sorted(acoustic.get("overview", {}).items()):
@@ -104,7 +107,8 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
                        for key in ("frame_table_sha256", "frame_anchor_sha256"))
-                or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")):
+                or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
+                or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
         binding = sampling.get("audio_evidence", {}).get("input", {})
@@ -129,7 +133,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.video.decode import FrameTable
-    from app.evidence import face_lighting_context
+    from app.evidence import face_lighting_context, picture_hold_binding
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
@@ -146,6 +150,11 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     by_index = {anchor["frame_index"]: anchor for anchor in anchors}
     if len(by_index) != len(anchors):
         raise ObjectIntegrityError("Frozen video frames have ambiguous identities")
+    try:
+        picture_hold_binding.validate_record(document, records["render"].get("picture_hold"), table_pts=table.pts,
+                                             interpolated=table.interpolated, canonical_hash=canonical_hash)
+    except (ValueError, KeyError, TypeError) as error:
+        raise ObjectIntegrityError("Picture hold differs from the recorded native inspection") from error
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
@@ -170,7 +179,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         for frame in packet["frames"]:
             anchor = frame["anchor"]
             recorded = by_index.get(anchor["frame_index"])
-            if not recorded or any(anchor.get(key) != value for key, value in recorded.items()) or table.pts[anchor["frame_index"]] != anchor["pts"]:
+            if (table.pts[anchor["frame_index"]] != anchor["pts"]
+                    or ("picture_hold" not in packet and (not recorded or any(anchor.get(key) != value for key, value in recorded.items())))):
                 raise ObjectIntegrityError("Displayed video frame differs from its recorded inference input")
             artifact = packet["artifacts"][frame["artifact_refs"]["original"]]
             with Image.open(io.BytesIO(assets[artifact["sha256"]])) as image:
@@ -264,6 +274,13 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                 source=source, pcm=pcm, mapping=mapping, waveform=audio_packets._chart)
         except (ValueError, KeyError) as error:
             raise ObjectIntegrityError("Frozen sound-category evidence differs from its recorded inputs") from error
+    if (repetition := document.get("repetition_context")) is not None:
+        from app.evidence.audio_repetition import verify
+
+        try:
+            verify(repetition, pcm=pcm, mapping=mapping, source=source, read_asset=lambda sha: assets[sha])
+        except (ValueError, KeyError) as error:
+            raise ObjectIntegrityError("Frozen repeated audio differs from its recorded samples") from error
 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
@@ -274,6 +291,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         _source_anchors,
         verify_context_window,
     )
+    from app.evidence.document_repeat import verify_source as verify_repeated_passages
 
     source = document["source"]
     decoded = json.loads(_bytes(source["decode_sha256"], store))
@@ -284,13 +302,17 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     partial_pages = (document.get("coverage") or {}).get("partially_checked_pages", [])
     if canonical_hash(partial_pages) != canonical_hash(decoded.get("meta", {}).get("partially_checked_pages", [])):
         raise ObjectIntegrityError("Frozen partial-page coverage differs from the recorded extraction")
+    try:
+        verify_repeated_passages(document, text, mapping)
+    except (ValueError, KeyError, TypeError) as error:
+        raise ObjectIntegrityError("Repeated passages differ from the recorded source extraction") from error
     for packet in document["packets"]:
         for key in ("focus", "context"):
             part = packet[key]
             if part["text"] != text[part["start"]:part["end"]]:
                 raise ObjectIntegrityError("A report excerpt differs from its recorded source range")
         focus = packet["focus"]
-        if document.get("version") == document_scope.VERSION:
+        if document.get("version") in document_scope.SCOPE_VERSIONS:
             try:
                 document_scope.validate(packet, len(text))
             except (ValueError, KeyError, TypeError) as error:
@@ -381,7 +403,8 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     """Verbatim submitted text is exempt from generated-prose vocabulary checks."""
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
-    return [text for packet in snapshot.evidence["packets"] for text in
+    repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
+    return [group["text"] for group in repeats] + [text for packet in snapshot.evidence["packets"] for text in
             [packet["focus"]["text"], packet["context"]["text"], *(w["text"] for w in packet["supporting_windows"]),
              *(w["text"] for check in (packet.get("context_comparison") or {}).get("checks", []) for w in check["inputs"])]]
 
@@ -463,7 +486,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                    assets=[{"role": role, "sha256": asset["sha256"], "media_type": asset["media_type"]}
                            for role, asset in sorted(packet.get("artifacts", {}).items())])
         if packet_kind in {"video", "av"}:
-            row["images"] = [plate("contact_sheet", packet["artifacts"]["contact_sheet"], "Sampled frames (not continuous playback)")]
+            hold = packet.get("picture_hold")
+            row["picture_hold"] = copy.deepcopy(hold)
+            if sheet := packet["artifacts"].get("contact_sheet"):
+                row["images"] = [plate("contact_sheet", sheet, "Endpoints of the verified hold" if hold else "Sampled frames (not continuous playback)")]
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
@@ -472,8 +498,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
                                       "interval_role": frame.get("interval_role"),
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
-                                                 for role in ("original", "context", "crop", "measured_patch") if role in frame["artifact_refs"]]})
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold else "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                                 for role in ("original", "context", "crop", "measured_patch")
+                                                 if role in frame["artifact_refs"] and (not hold or role == "original")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -509,7 +536,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         for window in check["inputs"]:
                             window["text"] = None
             row["focus_range"] = {"start": focus["start"], "end": focus["end"]}
-            scope = packet.get("inspection_scope") if part.get("version") == document_scope.VERSION else None
+            scope = packet.get("inspection_scope") if part.get("version") in document_scope.SCOPE_VERSIONS else None
             if scope:
                 row["inspection_scope"] = copy.deepcopy(scope)
             if not withheld:
@@ -559,10 +586,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            interval = row["face_sequence"] or row["face_interval"]
-            row["locator"] = (f"Face review range {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s"
-                              if interval else "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s"
-                                                         for f in packet["frames"]))
+            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"]
+            label = "Identical frames" if row["picture_hold"] else "Face review range"
+            row["locator"] = (f"{label} {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s" if interval else
+                              "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))
         else:
             locations = []
             for anchor in packet["anchors"]:
@@ -592,8 +619,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         packets.append(row)
     stereo_source = (document.get("audio") or {}) if kind == "video" else document
     stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
+    repeated_passages = copy.deepcopy(document.get("repeated_passages"))
+    if withheld and repeated_passages:
+        for group in repeated_passages["groups"]:
+            group.pop("text")
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "stereo_context": stereo_context,
+            "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
+            "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
+            "repeated_passages": repeated_passages,
+            "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "stereo_context_pointer": "/audio/stereo_context" if kind == "video" else "/stereo_context",
             "stereo_context_video_origin_s": document["source"].get("timeline_origin_s") if kind == "video" else None,
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],

@@ -38,6 +38,62 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows one exact picture per hold endpoint and locates it on the source clock', () => {
+    const set = structuredClone(video)
+    set.version = 'video-evidence-10'
+    set.picture_hold = { status: 'matched', frames_scanned: 120, frame_limit: 120, last_frame_index: 119,
+      last_stream_time_s: 14.76, last_pts: 14760, time_base: '1/1000', reason: null, packet_id: 'VPH01' }
+    const item = set.packets[0]
+    item.id = 'VPH01'
+    item.claim_scope = 'consecutive_frames'
+    item.picture_hold = { start_frame_index: 50, end_frame_index: 63, start_pts: 12000, end_pts: 12520,
+      start_stream_s: 12, end_stream_s: 12.52, start_playback_s: 2, end_playback_s: 2.52, span_s: 0.52,
+      time_base: '1/1000', frame_count: 14, decoded_rgb_sha256: 'b'.repeat(64), pts: [] }
+    item.frames = [50, 63].map((index, endpoint) => ({ ...item.frames[0], id: `VPH01.${endpoint + 1}`, score: null, is_peak: false,
+      context_region: null, artifact_refs: { original: 'original', context: 'original' },
+      anchor: { ...item.frames[0].anchor, frame_index: index, pts: 12000 + 520 * endpoint, stream_time_s: 12 + .52 * endpoint, playback_time_s: 2 + .52 * endpoint } }))
+    show(set)
+    expect(screen.getByRole('link', { name: 'Inspect the recorded hold' }).getAttribute('href')).toBe('#media-evidence-VPH01')
+    expect(screen.getByText(/14 consecutive decoded frames/)).toBeTruthy()
+    expect(screen.getAllByAltText(/exact original video frame/)).toHaveLength(2)
+    expect(screen.getByText(/PTS 12520 at 1\/1000/)).toBeTruthy()
+  })
+
+  it('shows two original time ranges and one identical recording in the video voice lane', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-10' }
+    const sample = (start_sample: number) => ({ start_sample, end_sample: start_sample + 4000,
+      source_timestamp_ranges: [{ start_sample, end_sample: start_sample + 4000,
+        source_start_pts: 176000 + start_sample, source_end_pts: 180000 + start_sample, time_base: '1/16000' }] })
+    set.audio = { status: 'not_assessed', reason: 'Voice model skipped this short input.', packets: [], limitations: [],
+      source: { ...set.source, pcm_sha256: 'a'.repeat(64), samples: 48000, sample_rate: 16000 },
+      coverage: { decoded_samples: 48000, scored_samples: 0, unscored_samples: 48000, windows: [], decode_limit_reached: false, selection_threshold: .5 },
+      repetition_context: { schema: 'chipmunk.audio-exact-repetition/1', status: 'measured', reason: null, source_sha256: set.source.sha256,
+        pcm_sha256: 'a'.repeat(64), sample_rate: 16000, input_samples: 48000, searched_interval: { start_sample: 0, end_sample: 48000 },
+        pairs: [{ id: 'R01', first: sample(3200), second: sample(19200), sample_count: 4000, lag_samples: 16000,
+          pcm_s16le_sha256: 'a'.repeat(64), artifacts: { first_clip: asset('9', 'audio/wav'), second_clip: asset('9', 'audio/wav') } }] } }
+    render(<MemoryRouter initialEntries={['/#media-evidence-R01']}><MultimediaEvidenceContent set={set} token="signed token" mediaReady /></MemoryRouter>)
+    expect(screen.getByRole('tab', { name: /Voice intervals/ }).getAttribute('aria-selected')).toBe('true')
+    const first = screen.getByLabelText('R01 · First occurrence').getAttribute('src')
+    expect(first).toContain(`/assets/${'9'.repeat(64)}.wav?token=signed%20token`)
+    expect(screen.getByLabelText('R01 · Second occurrence').getAttribute('src')).toBe(first)
+    expect(screen.getByText(/Video playback 1\.200 s–1\.450 s/)).toBeTruthy()
+    expect(screen.getByText(/Video playback 2\.200 s–2\.450 s/)).toBeTruthy()
+  })
+
+  it('shows exact repeated passages and original page locations without a writing score', () => {
+    const set = { ...structuredClone(document), version: 'document-evidence-5', packets: [] }
+    set.repeated_passages = { schema: 'document-repeated-passages/1', status: 'matched',
+      coverage: { compared_blocks: 2, excluded_ocr_blocks: 1, excluded_quoted_or_signature_blocks: 0, omitted_groups: 0 },
+      groups: [{ id: 'RP01', text: 'The same original words are printed on both pages.', text_sha256: 'a'.repeat(64), word_count: 31, total_occurrences: 2,
+        occurrences: [{ start: 0, end: 200, anchor: { kind: 'pdf', page: 1, block: 0, bbox: [40, 48, 200, 96] } },
+          { start: 202, end: 402, anchor: { kind: 'pdf', page: 2, block: 0 } }] }] }
+    show(set)
+    expect(screen.getByRole('heading', { name: 'Exact repeated passages' })).toBeTruthy()
+    expect(screen.getByText(/Page 1, block 1 · Extracted characters \[0, 200\)/)).toBeTruthy()
+    expect(screen.getByText(/Page 2, block 1 · Extracted characters \[202, 402\)/)).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it.each(['video-evidence-7', 'video-evidence-8', 'video-evidence-9'])('shows before/during/after review evidence in %s', (version) => {
     const set = structuredClone(video)
     set.version = version

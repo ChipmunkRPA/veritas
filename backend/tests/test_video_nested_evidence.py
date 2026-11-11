@@ -160,7 +160,8 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
     document = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
     stored = service.load_packet_set(f.db, f.analysis, f.store)
     assert stored == json.loads(canonical_json(document))
-    assert stored['version'] == 'video-evidence-9'
+    assert stored['version'] == video_packets.PICTURE_HOLD_VERSION
+    assert stored['picture_hold']['status'] == 'unavailable'
     [face] = stored['packets']
     assert face['finding_ids'] == [] and all(frame['score'] is None for frame in face['frames'])
     tracking = [row for row in face['measurements'] if row['label'].startswith('Median eye spacing')]
@@ -319,7 +320,11 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.image_eligibility','app.evidence.document_scope'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
+                        'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
+                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context',
+                        'app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
+                        'app.evidence.image_eligibility','app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

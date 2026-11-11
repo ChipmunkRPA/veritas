@@ -52,6 +52,7 @@ class DecodedFrame:
     index: int  # frame-table index
     pts: int
     rgb: np.ndarray  # uint8 (h, w, 3), display orientation
+    pts_verified: bool = True  # decoder supplied a timestamp and it was not inferred in the table
 
 
 @dataclass(frozen=True)
@@ -338,7 +339,8 @@ def decode_frames(path: Path, table: FrameTable, indices: Sequence[int] | None, 
             if index >= len(table):
                 break  # frames beyond a truncated table
             pts = _checked_pts(table, index, raw, time_bases)
-            yield DecodedFrame(index, pts, np.frombuffer(buf, dtype=np.uint8).reshape(h, w, 3))
+            yield DecodedFrame(index, pts, np.frombuffer(buf, dtype=np.uint8).reshape(h, w, 3),
+                               pts_verified=raw is not None and index not in table.interpolated)
             count += 1
             if check is not None:
                 check()

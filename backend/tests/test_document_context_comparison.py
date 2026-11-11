@@ -16,7 +16,7 @@ def test_actual_source_contexts_keep_extremes_without_an_authorship_probability(
     doc = build_packet_set(db, analysis, store, result)
     packet = doc["packets"][0]
     block = packet["context_comparison"]
-    assert doc["version"] == "document-evidence-4"
+    assert doc["version"] == "document-evidence-5"
     assert block["status"] == "recorded" and block["authorship_confidence_pct"] is None
     assert block["affects_overall_confidence"] is False
     check = block["checks"][0]
@@ -102,17 +102,19 @@ def test_rehashed_consistent_but_fabricated_score_still_fails_saved_result_bindi
         verify_assets(changed, store, result=result)
 
 
-@pytest.mark.parametrize("version", ["document-evidence-2", "document-evidence-3"])
+@pytest.mark.parametrize("version", ["document-evidence-2", "document-evidence-3", "document-evidence-4"])
 def test_historical_packet_keeps_its_supported_format_without_new_fields(packet_factory, version):
     db, store, analysis, result, decoded, _ = packet_factory()
     doc = build_packet_set(db, analysis, store, result)
     doc["version"] = version
+    del doc["repeated_passages"]
     for packet in doc["packets"]:
-        del packet["inspection_scope"]
+        if version != "document-evidence-4":
+            del packet["inspection_scope"]
+            focus = packet["focus"]
+            packet["anchors"] = _source_anchors(decoded["source_map"], focus["start"], focus["end"], len(decoded["text"]))
         if version == "document-evidence-2":
             del packet["context_comparison"]
-        focus = packet["focus"]
-        packet["anchors"] = _source_anchors(decoded["source_map"], focus["start"], focus["end"], len(decoded["text"]))
     doc["sha256"] = packet_hash(doc)
     validate_packet_set(
         doc,

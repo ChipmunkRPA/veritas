@@ -96,6 +96,8 @@ def _packet_inference(packet: dict) -> str:
     if kind == "audio" and "reaches the check's 0.5 inspection threshold" in str(packet.get("interpretation")):
         return "Leaning towards a synthetic-voice pattern in this complete window. This is an uncalibrated inspection clue; it does not establish a replaced voice or an exact edit boundary."
     if kind == "video":
+        if packet.get("picture_hold"):
+            return "The cause of the picture hold remains undetermined."
         measures = {m.get("label"): _number(m.get("value")) for m in packet.get("measurements") or []}
         boundary = measures.get("Recorded decision boundary")
         response = next((v for k, v in measures.items() if k in {"Frame detection score", "Window detection score"} and v is not None), None)

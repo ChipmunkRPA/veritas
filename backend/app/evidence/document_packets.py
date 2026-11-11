@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
-from app.evidence import document_scope
+from app.evidence import document_repeat, document_scope
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -303,6 +303,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     size = document["source"].get("chars")
     if not isinstance(size, int) or size < 0 or document["source"].get("offset_unit") != "unicode_codepoint":
         raise DocumentPacketIntegrityError("Document evidence has no valid text coordinate space")
+    try:
+        document_repeat.validate(document)
+    except (ValueError, KeyError, TypeError, AttributeError) as error:
+        raise DocumentPacketIntegrityError("Repeated passages have invalid source commitments or positions") from error
     ids = set()
     for packet in document.get("packets", []):
         if packet.get("id") in ids or packet.get("evidence_type") != "statistical":
@@ -317,7 +321,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for window in packet["supporting_windows"]:
             if text_hash(window["text"]) != window["input_sha256"]:
                 raise DocumentPacketIntegrityError("A scored context does not match its actual input")
-        if document["version"] == VERSION:
+        if document["version"] in document_scope.SCOPE_VERSIONS:
             try:
                 document_scope.validate(packet, size)
             except (ValueError, KeyError, TypeError) as error:
@@ -437,6 +441,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
     for index, (a, b) in enumerate(selected, 1):
         windows = groups[a, b]
         ca, cb = min(s["start"] for w in windows for s in w["spans"]), max(s["end"] for w in windows for s in w["spans"])
@@ -525,6 +530,13 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         raise DocumentPacketIntegrityError("Document evidence identity differs from its frozen object")
     validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    if document["version"] == VERSION:
+        result = json.loads(_verified(store, analysis.result_hash))
+        decoded = _decode(db, analysis, store, result)
+        try:
+            document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
+        except (ValueError, KeyError, TypeError, AttributeError) as error:
+            raise DocumentPacketIntegrityError("Repeated passages differ from the frozen text or source mapping") from error
     store.verify(analysis.sha256)
     return document
 

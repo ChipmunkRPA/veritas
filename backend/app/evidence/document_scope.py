@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-VERSION = "document-evidence-4"
-CONTEXT_VERSIONS = frozenset({"document-evidence-3", VERSION})
+VERSION = "document-evidence-5"
+SCOPE_VERSIONS = frozenset({"document-evidence-4", VERSION})
+CONTEXT_VERSIONS = frozenset({"document-evidence-3", *SCOPE_VERSIONS})
 VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VERSIONS})
 
 

@@ -1,0 +1,28 @@
+{
+  "arm_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "code_sha256": {
+    "test_video_faceswapai_full_app_v187.py": "97f4086999c4500b60faaf9a867b3f362b415cde05d9d95f908c0f437caea8b8",
+    "video-faceswapai-full-app-v187-method.md": "fc3d8bb3d014a1780a250a3cbb6b316897d49f980a7731e64c366a51dccbf517",
+    "video_faceswapai_full_app_v187.py": "616271d76ddb3a321bbbb05ca9f1ddae1a641bcecbe3038583b79559842e015f"
+  },
+  "conditions": [
+    "unchanged",
+    "recompression_only",
+    "swap_tv_bt601",
+    "swap_pc_bt601",
+    "swap_tv_bt709",
+    "swap_pc_bt709"
+  ],
+  "device": "mps",
+  "edit_frames_half_open": [
+    72,
+    144
+  ],
+  "model_manager_budget_bytes": 4831838208,
+  "prepared_receipt_sha256": "0544f58d3a54ca5f390e2a46b28d29a1f33430cecaf76be0e0dea729db2f2ca7",
+  "private_manifest_sha256": "521d11c3210fea01c7125a87647f7b824e2d12309f1e15027dcd371a3a723e7c",
+  "runtime_freeze_sha256": "d2934fecf1d29225a3c90dd0a3e978fff6c1c47b101f268fe6dee702f29241fb",
+  "schema": "chipmunk.video-faceswapai-full-app-freeze/187",
+  "scope": "Six matched renderings of one silent synthetic source. No independent-camera or lip-sync accuracy estimate.",
+  "time_base": "1/12288"
+}

@@ -1,0 +1,879 @@
+{
+  "schema": "chipmunk.image-bg-real-backup-jpeg-result/264",
+  "freeze_sha256": "4db71eddb75033e8ac41d9716d2eb5cf7356a1d544a51b91de08657fd7ed44f9",
+  "unique_model_calls": 240,
+  "repeat_model_calls": 4,
+  "unassessed_calls": 0,
+  "quality_results": {
+    "75": {
+      "quality": 75,
+      "photos": 12,
+      "source_groups": 12,
+      "methods": {
+        "current": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 1,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 11,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 1,
+              "flagged_groups": 1,
+              "group_mean_highlighted_area_fraction": 0.0008140733506944445,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 1,
+              "flagged_groups": 1,
+              "group_mean_highlighted_area_fraction": 0.0007915581597222223,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 1,
+              "flagged_groups": 1,
+              "group_mean_highlighted_area_fraction": 0.000703396267361111,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 1,
+              "flagged_groups": 1,
+              "group_mean_highlighted_area_fraction": 0.0009114583333333332,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            }
+          }
+        },
+        "sensitive": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 0,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 12,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 5,
+              "flagged_groups": 5,
+              "group_mean_highlighted_area_fraction": 0.013309069974922842,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 5,
+              "mean_iou_with_ordinary_edit_if_changed": 0.227831940030074,
+              "mean_ordinary_edit_recall_if_changed": 0.2586892726885428
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": -0.0008140733506944445,
+              "pointwise_95pct_interval": [
+                -0.0024422200520833335,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": -0.0007915581597222223,
+              "pointwise_95pct_interval": [
+                -0.0023746744791666666,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": -0.000703396267361111,
+              "pointwise_95pct_interval": [
+                -0.002110188802083333,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.3333333333333333,
+              "pointwise_95pct_interval": [
+                0.08333333333333333,
+                0.5833333333333334
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.012397611641589507,
+              "pointwise_95pct_interval": [
+                0.0027322048611111115,
+                0.02445393880208334
+              ]
+            }
+          }
+        },
+        "shared": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 0,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 12,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": -0.0008140733506944445,
+              "pointwise_95pct_interval": [
+                -0.0024422200520833335,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": -0.0007915581597222223,
+              "pointwise_95pct_interval": [
+                -0.0023746744791666666,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": -0.000703396267361111,
+              "pointwise_95pct_interval": [
+                -0.002110188802083333,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": -0.0009114583333333332,
+              "pointwise_95pct_interval": [
+                -0.0027343749999999994,
+                0.0
+              ]
+            }
+          }
+        }
+      }
+    },
+    "90": {
+      "quality": 90,
+      "photos": 12,
+      "source_groups": 12,
+      "methods": {
+        "current": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 3,
+          "edited_photos_with_any_overlap": 2,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 9,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.029806560562124367,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 2,
+              "flagged_groups": 2,
+              "group_mean_highlighted_area_fraction": 0.0034743650459948885,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 2,
+              "flagged_groups": 2,
+              "group_mean_highlighted_area_fraction": 0.003671599023136092,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 3,
+              "flagged_groups": 3,
+              "group_mean_highlighted_area_fraction": 0.004889853206681617,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 1,
+              "mean_iou_with_ordinary_edit_if_changed": 0.02499034655854812,
+              "mean_ordinary_edit_recall_if_changed": 0.0502426006792819
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.002114617618513696,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 1,
+              "mean_iou_with_ordinary_edit_if_changed": 0.009297453021672232,
+              "mean_ordinary_edit_recall_if_changed": 0.013771700126078944
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            }
+          }
+        },
+        "sensitive": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 3,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 9,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.008853375470196758,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.009741037627797067,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 3,
+              "flagged_groups": 3,
+              "group_mean_highlighted_area_fraction": 0.008486282913773147,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 1,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0001232832803215228,
+              "mean_ordinary_edit_recall_if_changed": 0.000244164469186444
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 8,
+              "flagged_groups": 8,
+              "group_mean_highlighted_area_fraction": 0.026187703638900942,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 8,
+              "mean_iou_with_ordinary_edit_if_changed": 0.326291048982061,
+              "mean_ordinary_edit_recall_if_changed": 0.434957687311386
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.029806560562124367,
+              "pointwise_95pct_interval": [
+                -0.07259526522692014,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.16666666666666666,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.5833333333333334
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.005379010424201872,
+              "pointwise_95pct_interval": [
+                -0.004319579512984665,
+                0.015733346703611772
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.16666666666666666,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.5833333333333334
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.006069438604660977,
+              "pointwise_95pct_interval": [
+                -0.004548013946156442,
+                0.01711642919940713
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                -0.4166666666666667,
+                0.4166666666666667
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0035964297070915324,
+              "pointwise_95pct_interval": [
+                -0.007430700608241705,
+                0.017258288866207897
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.3333333333333333,
+              "pointwise_95pct_interval": [
+                -0.08333333333333333,
+                0.75
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.02407308602038725,
+              "pointwise_95pct_interval": [
+                0.010437223151878075,
+                0.0384652742927457
+              ]
+            }
+          }
+        },
+        "shared": {
+          "edited_photos": 12,
+          "edited_photos_flagged": 0,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 12,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 12,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 12,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.029806560562124367,
+              "pointwise_95pct_interval": [
+                -0.07259526522692014,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": -0.16666666666666666,
+              "pointwise_95pct_interval": [
+                -0.4166666666666667,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": -0.0034743650459948885,
+              "pointwise_95pct_interval": [
+                -0.008313355622468172,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": -0.16666666666666666,
+              "pointwise_95pct_interval": [
+                -0.4166666666666667,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": -0.003671599023136092,
+              "pointwise_95pct_interval": [
+                -0.00868973908600984,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": -0.25,
+              "pointwise_95pct_interval": [
+                -0.5,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": -0.004889853206681617,
+              "pointwise_95pct_interval": [
+                -0.010584937201605903,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": -0.3333333333333333,
+              "pointwise_95pct_interval": [
+                -0.5833333333333334,
+                -0.08333333333333333
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": -0.002114617618513696,
+              "pointwise_95pct_interval": [
+                -0.004365788212528935,
+                -0.0004253472222222222
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "phase_profile_sha256": {
+    "prepare": "4247334bafc6007bb8f9a5140d8758ffdb1ac455851da8819288d07c546b663a",
+    "baseline-q75-00": "3b3f899a3d3b140480a5a587e1413ab9aa2864cb8acac84c4c1ba28cdc7ffb1f",
+    "candidate-q75-00": "236b27162bc18df14288f6c412e46a7970722d0cb1ad005fc84bc4138673484a",
+    "readout-q75-00": "2a3e7af0de7dc09ae77119a9411179bc2e7d3b768c9acf18e2d53d6280b7511d",
+    "baseline-q75-01": "9e8fb9a6573c93d7aaa86b73605bc6f0f102dd579e625b99a7e604bab86db687",
+    "candidate-q75-01": "59b33ccd14cd56978fa0b780ba086317f3dedb799b3281238ae053b846e2f28b",
+    "readout-q75-01": "37124eeb8573c38b3409981f6e455640332fa9f70ee5d06f9c11736228bb623a",
+    "baseline-q75-02": "36084ee569d370edd55c982095feec33f20bb7161f9c2d8eaa4a532e23cc0c8f",
+    "candidate-q75-02": "c76fd51e0c0468b72ef93269cd0038eee867009954371fd05bcb22317b9873ce",
+    "readout-q75-02": "64dee994425d3d9835ca19e7b0136c6bac06d513b507a0adba178a07adb26456",
+    "baseline-q90-00": "25a7a37158d6f444aafeb930cf16e125bad494ce6c048f1f646a7e9776b8819e",
+    "candidate-q90-00": "fb0d5a38ebe81621527627b1b6de767e73ca960c847938755d9f5142c0d376ea",
+    "readout-q90-00": "62ec602cfb812a4a072c66fa7e28f8f636bcc0f393b064b7ac8ec4f2b30693ca",
+    "baseline-q90-01": "92b1473fb2962aa9c26fc16e5dca34dcc258a2aea7275a467d8cf014a7d8f78b",
+    "candidate-q90-01": "a09fbdf7b549dace901fe9af270f11554801884ca3257df13c0eef6afb141fc5",
+    "readout-q90-01": "3655101176cc20f1271ba55f3a9204385be82caca91cf00cd84d67d90af8f285",
+    "baseline-q90-02": "13209d15ac1122327d350322fa4ad6e9af547337151cfa201024b0ba69067cb0",
+    "candidate-q90-02": "e556f8acd50f243b7b172cb01086d17b6112b0c2ee3044b842ef8c74e5419a65",
+    "readout-q90-02": "dc76febe4bda7aefcfc72bc6916b30d14bb6c55ef53c315c6acfb4a681b54f62"
+  },
+  "serving_admitted": false,
+  "calibration_performed": false,
+  "ordinary_controls_have_zero_ai_truth": true,
+  "scope": "Previously unopened BG-REAL LaMa groups. Both JPEG qualities reuse the same twelve source groups. Paired intervals are conditional and pointwise. Cue localization is separate from whole-file authorship confidence.",
+  "qualification_sha256": "74a07ec74a63e0e252904a37f915d1cb1d70d1b0cba01aae4be6a94f7412e51e",
+  "v189_policy_freeze_sha256": "cd0333f18623441dba7177e4f79db69a31174713bc823822d5112a07dd4bba5e",
+  "publisher_split_counts": {
+    "train": 10,
+    "val": 2
+  },
+  "phase_output_sha256": {
+    "readout-q90-02": {
+      "completed_sha256": "787bde2c3550313457e8f966b7051260ec0b6cfc89cb7368bfaef282cfd446e9",
+      "rows_sha256": "d1d3c0bfc33b22d99bb4f07a62e2324b67d43cf6f85f65f61e3e5b7b98959b18"
+    },
+    "candidate-q90-00": {
+      "completed_sha256": "cf2ad4d165e4450e7c4216736711ef23f393303e433a3c31cd9438660c99d635",
+      "rows_sha256": "a4983164723df44d51213acf898ab76a43c2ae17dc3cc194f5748867697bf0a9"
+    },
+    "readout-q90-00": {
+      "completed_sha256": "813cdd098d37fc80658f545d84fc214a8ebdebb0f92ddf6a1860590f48b41396",
+      "rows_sha256": "e56ae4dbbf83420d79a4f1ab686440d756c82c0ead4b47fc391189ebc6cb0c63"
+    },
+    "readout-q75-00": {
+      "completed_sha256": "e2a770d0903784edfcf5f6953e40f25dfb9ffb3c10f422e64632d6d5fa6d4b9c",
+      "rows_sha256": "c340ea4d9b0a1dfa7c7a78907bbda08cd9a070ea2308f484eba62c82ec48ca6f"
+    },
+    "readout-q75-02": {
+      "completed_sha256": "d7cfc5666eecac25f2c168e16052c0a0d74af5891caf8b7b6faffbf4c0db1dc1",
+      "rows_sha256": "e99bc7bd285c396452e16630afb6cdbefdc1f989d6c03dca1ba2c397ca70083f"
+    },
+    "baseline-q75-01": {
+      "completed_sha256": "655e05e6e8ee1de6b9413a915e0fdbca964a6959b38f7c7e8c0a41fee6929cef",
+      "rows_sha256": "c09a3661066f21d50d354068ed5a423ace3effc4c96b8962d26cb1809e37e4a3"
+    },
+    "candidate-q90-01": {
+      "completed_sha256": "5a1e322ddf653a59d15639082dfa1dcd3149ea483a1c69c7feb1f6d56aceaafc",
+      "rows_sha256": "91ea1b1cf792a5ae914b970f1253fadda9d96910842a8c655353677f673177fa"
+    },
+    "baseline-q90-02": {
+      "completed_sha256": "f35e29934110e0e87f5626da1befeea0a6e4de45bcf3759f57dc26425b0f9b89",
+      "rows_sha256": "da0f3f786c321ca74b7488e1090a21151794262b8361eb7ea635d48bf081674e"
+    },
+    "baseline-q90-00": {
+      "completed_sha256": "76d832020299860b36f7457ea8088ee9e52b397d23d1e84b2464a7f7354866dc",
+      "rows_sha256": "e7e8e8fbbebe03b9186df21810bc452b014e670bc00b57493b58191d66fb7212"
+    },
+    "readout-q90-01": {
+      "completed_sha256": "ebb73f8f2a812155c89ff4e64c04c7676bfc1ac0e500b87369f7e812ade7fa5f",
+      "rows_sha256": "e8f7b48ddd57c5c68f0368c8c9c535027f9a04874c4ce4e01b6d1cdfe0bba1af"
+    },
+    "candidate-q75-00": {
+      "completed_sha256": "2a28acb73a841919d8bae52f4afcd7b435604c8139335de4e26df5c5d9f994c5",
+      "rows_sha256": "910c11e7c7c6411d3cfb4788ff4afb9b7f3be85d4dc9582bd6db2e7975d18fe7"
+    },
+    "readout-q75-01": {
+      "completed_sha256": "e3164d75681e8e6ee7740bbdd1cf3be1dc2eacf98f13647bb0a44c275a2edb5e",
+      "rows_sha256": "2134f6a0b260dbb365180c5493957b15ea7192b1f7aa8d6703a818995300b61b"
+    },
+    "candidate-q75-01": {
+      "completed_sha256": "1b27e8f9110dfb5b3fb1339cc933a5c6b671baf2f6f2ba292a0024e5181b0746",
+      "rows_sha256": "7a907720693fcc43408f7419ba2542cc4d9dfa61b62a01cf67d5fa4357ad5bc7"
+    },
+    "candidate-q75-02": {
+      "completed_sha256": "5c4cd310cd40e7f024e84868dbd947ac85bfad5069c2606cce2fa001cfa4d442",
+      "rows_sha256": "e535c3a1c533e91eeafcc47cc5b89b25db926d43234c328b5af42665715b7b2e"
+    },
+    "baseline-q75-00": {
+      "completed_sha256": "99bbcbec65f805cddc08b8f0c4441410dba1dc783787101cc78381b2e0c2deea",
+      "rows_sha256": "000d5940f28fed9d119bdf05083ef4a0e548995a47263cdfb4ed930708132167"
+    },
+    "baseline-q90-01": {
+      "completed_sha256": "9bf8d90ea49b20e08cfc368ade07bc9edce1da7371b0abbe5d6c2cb9b2823ef1",
+      "rows_sha256": "305bc720375f42894019b4df573ab5220671fc60c37fcb2ba7046892622f2622"
+    },
+    "candidate-q90-02": {
+      "completed_sha256": "4b096c2838b7d1fe93876372f877da9f6b7ef1e2d956c2de9139f64dfa131d67",
+      "rows_sha256": "669dd30eb331cb1f8ffb3e85bc324a892653a92bac0b5d009822f626d382db69"
+    },
+    "baseline-q75-02": {
+      "completed_sha256": "1aff9c462ac55628dced272f225218c34499edb34524d88d334f744aa58eaba6",
+      "rows_sha256": "69c58b1da1bdc4fb9eece530101f085078dfb6d77b9cd20e345ad7b28d325bd1"
+    }
+  },
+  "previous_v229_result_sha256": "55a6c1aed3448056f4046c768102bf032064635c6a3a625cb98017a7356cb13d"
+}

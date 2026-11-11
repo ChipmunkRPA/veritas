@@ -1,0 +1,55 @@
+{
+  "schema": "chipmunk.grid-audio-splice-probe-freeze/167",
+  "code_sha256": {
+    "backend/scripts/grid_audio_splice_probe_v167.py": "ff9e28b43999e2e0a431753f899e6cb8c22d13db3a5108ef918070114c175637",
+    "backend/tests/test_grid_audio_splice_probe_v167.py": "1e25b1b4bfc7f0e29e8da10ad868d8febad920bb0a057b4defc567236720be02",
+    "backend/scripts/audio_exact_repetition.py": "71d38ca03d1f5ce98887cdd213544299eac5e1b1c4a07218e21cfc2d3a3c5f58",
+    "backend/tests/test_audio_exact_repetition.py": "ca1990fc3c23d0e3df256acbdb2db08d1c81d556116b7e1d28f5816a2258b1ec",
+    "docs/grid-audio-splice-probe-v167-method.md": "ce96bc8b867a217f33f1ccc68e4239c15e750c31951605bde776c2c5189f6e8e",
+    "backend/scripts/grid_source_speech_v147.py": "3f29aba7f7f674d01117200bbcd2778d5d1f68ab0a44e2460859fdba09618e9a",
+    "backend/scripts/grid_serving_baseline_v156.py": "9e54a27314619d09fb43bda2bc1ac2e3fe9ecfc96a8f346b447bdcf8b24585b7",
+    "backend/scripts/grid_transfer_plan_v143.py": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "backend/scripts/audio_calibration_v3_methods.py": "9f47f54d2386b637c025a9a1ef1acca447b406695e7f1efb7e585f11225e3b24",
+    "backend/scripts/prepare_audio_specialists_v15.py": "40342b9b975904b2723e4558ce0e9dbb58815623c6de97aa4212a77f3dee4176",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/app/detectors/audio/calibration.py": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/video/adapters/audio.py": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/engine/profiles.py": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3",
+    "backend/app/models.yaml": "a9a32472299578874a3663d38de29d72a8f2c289ec9f20f28a9330168caf312e"
+  },
+  "source_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "prior_serving_result_sha256": "8fffdb7914e11bdf1f22ad1d8d38fb5c24ccc9a54508b8292a9b31edb2485251",
+  "private_inputs_sha256": "b28d7d7e42838bbabd343e1868377aacda00643b51cc7d014de29453ede4b738",
+  "local_asset_commitments": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2"
+  },
+  "sample_rate": 16000,
+  "crossfade_samples_per_boundary": {
+    "original": null,
+    "hard_copy": 0,
+    "fade_20_ms": 320,
+    "fade_50_ms": 800
+  },
+  "planned_cases": 64,
+  "score_parity_absolute_tolerance": 1e-06,
+  "symmetric_stability_maximum_log_odds_change": 0.6931471805599453,
+  "new_fitting_permitted": false,
+  "scope": "Consumed genuine speech diagnostic only. No false-negative estimate, fresh confirmation or serving change."
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "chipmunk.grid-serving-baseline-freeze/153",
+  "code_sha256": {
+    "backend/scripts/grid_serving_baseline_v153.py": "63dd04a9e5d4f0c11ac6f26d0eaaa064756ea1f9589f6fd22149a5749245955d",
+    "backend/tests/test_grid_serving_baseline_v153.py": "fb9cde69c2921cd539e46c657cda0afe88f5a88d9dbea7b87a976761fe5cbb63",
+    "docs/grid-serving-baseline-v153-method.md": "c1c369b32089b7e0127c69c82a3de6233a8601197b7aaaaedea55c64555a0b1d",
+    "backend/scripts/grid_serving_baseline_v152.py": "cd71ed0a19b70eb1456d213419a685cd8e901f11b8db38bfa846a5418d120342"
+  },
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "baseline_private_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "baseline_asset_inventory_sha256": "717ee119513bc26dc5afd4977cfb6d89f952a0107c11229f4ad630f8828a9bac",
+  "configured_device": "auto",
+  "profile": "full",
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "cases_per_clip": 11,
+  "initial_policy": {
+    "version": 1,
+    "thresholds": {
+      "alpha_strong": 0.01,
+      "alpha_moderate": 0.05,
+      "min_slice_auc": 0.7
+    },
+    "sha256": "0a5bc5a47fb9f8d743e1d7759ecc6c17b686bc196a9f3af83c28e14ca1c2dd43"
+  },
+  "settings_bootstrap": "Initialize exclusive offline settings with dotenv disabled before recursive metadata.",
+  "scope": "Same frozen serving pipeline, commercial models and resource limits as v152. Separate execution context."
+}

@@ -1,0 +1,237 @@
+{
+  "schema": "chipmunk.audio-demand-transfer-result/208",
+  "status": "complete",
+  "freeze_sha256": "80a70de6a73913c6078bbbfc88afac06dbc96683c7f62e5f7070a4fa82b13948",
+  "new_neural_calls": 365,
+  "profile_sha256": [
+    "9515b4a654e2643f22802d2cffb830691f9a3a0386ad92f793502bf4ec0e2e41",
+    "fb89755d97b181eff692e30dd8b5b7530e63048b1a3ff230ff0a4bc51bfcbf4d",
+    "a4ebe602a684834ca350134ee6f5c3bc4355c09080d036d6d54c451de0a381a8",
+    "26dc65ef9406fb1654ef06ece6841817670add87d3cc35bdde52b360615c6dbd",
+    "2e86e56b2c40b084c2535605425d9bfd52c99f62d1237008883817b76120c246",
+    "485afdbe950d66cef93e23934126fdae7dfba20c90b586c2ea98fa5674a69a5a"
+  ],
+  "source_clean_replays": 48,
+  "results": {
+    "genuine": {
+      "source_clean": {
+        "planned": 24,
+        "scored": 19,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 19,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "transitions_from": null,
+        "paired_transitions": {}
+      },
+      "matched_clean": {
+        "planned": 24,
+        "scored": 19,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 19,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "transitions_from": "source_clean",
+        "paired_transitions": {
+          "original->original": 19,
+          "unavailable->unavailable": 5
+        }
+      },
+      "washing_room_0db": {
+        "planned": 24,
+        "scored": 18,
+        "speech_gate_rejected": 1,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 18,
+          "inconclusive": 0,
+          "unavailable": 6
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "original->original": 18,
+          "unavailable->unavailable": 5,
+          "original->unavailable": 1
+        }
+      },
+      "washing_room_5db": {
+        "planned": 24,
+        "scored": 19,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 19,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "original->original": 19,
+          "unavailable->unavailable": 5
+        }
+      },
+      "river_0db": {
+        "planned": 24,
+        "scored": 18,
+        "speech_gate_rejected": 1,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 8,
+          "unavailable": 6
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "original->original": 10,
+          "unavailable->unavailable": 5,
+          "original->inconclusive": 8,
+          "original->unavailable": 1
+        }
+      },
+      "river_5db": {
+        "planned": 24,
+        "scored": 18,
+        "speech_gate_rejected": 1,
+        "source_preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 15,
+          "inconclusive": 3,
+          "unavailable": 6
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "original->original": 15,
+          "unavailable->unavailable": 5,
+          "original->inconclusive": 3,
+          "original->unavailable": 1
+        }
+      }
+    },
+    "synthetic": {
+      "source_clean": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 21,
+          "original": 2,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "transitions_from": null,
+        "paired_transitions": {}
+      },
+      "matched_clean": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 21,
+          "original": 2,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "transitions_from": "source_clean",
+        "paired_transitions": {
+          "ai->ai": 21,
+          "original->original": 2,
+          "inconclusive->inconclusive": 1
+        }
+      },
+      "washing_room_0db": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "ai->ai": 15,
+          "ai->inconclusive": 6,
+          "original->inconclusive": 2,
+          "inconclusive->inconclusive": 1
+        }
+      },
+      "washing_room_5db": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 19,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "ai->ai": 19,
+          "original->inconclusive": 2,
+          "inconclusive->inconclusive": 1,
+          "ai->inconclusive": 2
+        }
+      },
+      "river_0db": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 0,
+          "original": 2,
+          "inconclusive": 22,
+          "unavailable": 0
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "ai->inconclusive": 20,
+          "original->inconclusive": 1,
+          "inconclusive->inconclusive": 1,
+          "ai->original": 1,
+          "original->original": 1
+        }
+      },
+      "river_5db": {
+        "planned": 24,
+        "scored": 24,
+        "speech_gate_rejected": 0,
+        "source_preparation_unavailable": 0,
+        "directions": {
+          "ai": 4,
+          "original": 2,
+          "inconclusive": 18,
+          "unavailable": 0
+        },
+        "transitions_from": "matched_clean",
+        "paired_transitions": {
+          "ai->inconclusive": 16,
+          "ai->ai": 4,
+          "original->original": 1,
+          "inconclusive->inconclusive": 1,
+          "ai->original": 1,
+          "original->inconclusive": 1
+        }
+      }
+    }
+  },
+  "scope": "Matched environmental perturbation on fixed Turkish foregrounds and two recordings. No new calibration or population estimate."
+}

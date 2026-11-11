@@ -4,15 +4,14 @@ from __future__ import annotations
 import math
 from fractions import Fraction
 
+from app.evidence.face_boundary_clock import COARSE_LIMIT, MAX_FRAMES, SCHEDULE_MARGIN, native_schedule
 from app.evidence.face_interval_binding import APPEARANCE_METHOD, face_context_box, validate_face_input
 from app.evidence.video_packet_versions import BOUNDARY_VERSION
 
 METHOD = "face-appearance-boundary/1"
-MAX_FRAMES = 30
 ROLES = ("before", "during", "after")
 EDGE_LIMIT = Fraction(3, 8)
 MAX_GAP = Fraction(1, 8)
-SCHEDULE_MARGIN = Fraction(5, 8)
 _INPUT_KEYS = frozenset({"frame_index", "pts", "decoded_rgb_sha256", "bbox", "landmarks", "alignment_matrix",
                          "alignment_matrix_hex", "alignment_side", "aligned_size", "aligned_rgb_sha256"})
 _RECORD_KEYS = frozenset({"method", "time_base", "track_id", "start_pts", "end_pts", "start_stream_s", "end_stream_s",
@@ -34,7 +33,7 @@ def validate_record(record: dict, coarse: dict, source: dict, *, table_pts=None,
     base = Fraction(source["time_base"])
     if (set(record) != _RECORD_KEYS or record["method"] != METHOD or record["time_base"] != source["time_base"]
             or coarse["method"] != APPEARANCE_METHOD or record["track_id"] != coarse["track_id"]
-            or not 0 < (coarse["end_pts"] - coarse["start_pts"]) * base <= 1):
+            or not 0 < (coarse["end_pts"] - coarse["start_pts"]) * base <= COARSE_LIMIT):
         raise ValueError("Refined boundaries require a matching short face appearance measurement")
 
     schedule = record["scheduled_frame_indices"]
@@ -42,6 +41,9 @@ def validate_record(record: dict, coarse: dict, source: dict, *, table_pts=None,
             or any(type(i) is not int or not 0 <= i < source["frame_count"] for i in schedule)
             or schedule != sorted(set(schedule))):
         raise ValueError("Refined boundary sample schedule is invalid")
+    if table_pts is not None and (len(table_pts) != source["frame_count"]
+                                 or schedule != sorted(native_schedule(table_pts, base, coarse["start_pts"], coarse["end_pts"]))):
+        raise ValueError("Refined boundary sample schedule differs from the source clock")
     inputs = record["frame_inputs"]
     if not isinstance(inputs, list) or not 4 <= len(inputs) <= len(schedule):
         raise ValueError("Refined boundary input coverage is invalid")

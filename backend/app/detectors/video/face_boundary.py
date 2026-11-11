@@ -2,27 +2,25 @@
 """Native timing estimates for the selected short face appearance range."""
 from __future__ import annotations
 
-from bisect import bisect_left
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
-from math import ceil, floor
 
 import numpy as np
 
 from app.detectors.image.faces import Face, iou
 from app.detectors.video import face_appearance
 from app.detectors.video.decode import FrameTable
+from app.evidence.face_boundary_clock import CADENCE as CADENCE
+from app.evidence.face_boundary_clock import MAX_FRAMES as MAX_FRAMES
+from app.evidence.face_boundary_clock import SCHEDULE_MARGIN as PROTOTYPE_FAR
+from app.evidence.face_boundary_clock import native_schedule
 
 METHOD = "face-appearance-boundary/1"
-CADENCE = 12
-COARSE_LIMIT = Fraction(1)
 SEARCH = Fraction(3, 8)
 PROTOTYPE_NEAR = Fraction(1, 4)
-PROTOTYPE_FAR = Fraction(5, 8)
 CORE_MARGIN = Fraction(1, 8)
 MAX_GAP = Fraction(1, 8)
-MAX_FRAMES = ceil((COARSE_LIMIT + 2 * PROTOTYPE_FAR) * CADENCE) + 3  # Grid endpoints and native rounding.
 
 
 @dataclass(frozen=True)
@@ -43,30 +41,7 @@ class Estimate:
 
 
 def schedule(table: FrameTable, start_pts: int, end_pts: int) -> dict[int, Fraction]:
-    """Use the stream-origin grid and native nearest-frame ties from the fixed study."""
-    time_base = table.tb
-    if (not table.pts or not 0 < (end_pts - start_pts) * time_base <= COARSE_LIMIT
-            or any(a > b for a, b in zip(table.pts, table.pts[1:]))):
-        return {}
-    origin = table.pts[0] * time_base
-    low = start_pts * time_base - PROTOTYPE_FAR
-    high = end_pts * time_base + PROTOTYPE_FAR
-    first = max(0, floor((low - origin) * CADENCE) - 1)
-    last = min(floor((table.pts[-1] * time_base - origin) * CADENCE), ceil((high - origin) * CADENCE) + 1)
-    samples = {}
-    for step in range(first, last + 1):
-        target = (origin + Fraction(step, CADENCE)) / time_base
-        right = bisect_left(table.pts, target)
-        neighbors = []
-        if right:
-            neighbors.append(bisect_left(table.pts, table.pts[right - 1]))
-        if right < len(table):
-            neighbors.append(right)
-        i = min(neighbors, key=lambda index: (abs(table.pts[index] - target), index))
-        instant = table.pts[i] * time_base
-        if low <= instant <= high:
-            samples[i] = instant
-    return samples if len(samples) <= MAX_FRAMES else {}
+    return native_schedule(table.pts, table.tb, start_pts, end_pts)
 
 
 def _prototype(pictures: Sequence[int], vectors: Mapping[int, np.ndarray], times: Mapping[int, Fraction],

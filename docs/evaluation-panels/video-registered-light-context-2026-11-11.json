@@ -1,0 +1,57 @@
+{
+  "advancement_rule_components": {
+    "at_least_four_camera_false_flags_withheld": false,
+    "both_camera_source_groups_improved": false,
+    "both_selected_cohorts_at_least_90_percent_measured": false,
+    "no_correct_swap_ranges_withheld": true
+  },
+  "by_cohort": {
+    "camera_controls": {
+      "baseline_assessed": 14,
+      "baseline_correct_swap_ranges": 0,
+      "baseline_flags": 14,
+      "context_measured": 7,
+      "unavailable_scene_registration": 7,
+      "views": 14,
+      "withheld_correct_swap_ranges": 0,
+      "withheld_flags": 0
+    },
+    "known_swaps": {
+      "baseline_assessed": 36,
+      "baseline_correct_swap_ranges": 36,
+      "baseline_flags": 36,
+      "context_measured": 12,
+      "unavailable_scene_registration": 24,
+      "views": 36,
+      "withheld_correct_swap_ranges": 0,
+      "withheld_flags": 0
+    },
+    "matched_controls": {
+      "baseline_assessed": 60,
+      "baseline_correct_swap_ranges": 0,
+      "baseline_flags": 0,
+      "context_measured": 0,
+      "views": 60,
+      "withheld_correct_swap_ranges": 0,
+      "withheld_flags": 0
+    }
+  },
+  "camera_source_groups_with_withheld_flags": 0,
+  "commitments": {
+    "freeze.json": "ca3979c891debe46fd4c7a11775df878d31a556e36aac4f5c704f546ee857ed4",
+    "run.json": "bad830f912835d7ea94f3558eb0e06a4cad2f0cd5943dad448ee9f211cbdd245",
+    "scored.jsonl": "01635f5c4d9733bdcdacc4092c4d0029a6c33282c8a1a8169bbde5a062c867be"
+  },
+  "passed_frozen_advancement_rule": false,
+  "run": {
+    "appearance_model_forwards": 0,
+    "existing_geometry_forwards": 226,
+    "native_pictures": 226,
+    "new_model_weights": 0,
+    "process_peak_rss_bytes_macos": 216956928,
+    "seconds": 149.54389858304057
+  },
+  "schema": "chipmunk.video-registered-light/1-result",
+  "serving_changed": false,
+  "source_groups": 8
+}

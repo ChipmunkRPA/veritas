@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import io
 import json
 import subprocess
 import sys
@@ -33,10 +34,10 @@ from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.detectors.video.frame_store import FrameStore
 from app.engine.stages import video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
-from app.evidence import service, video_audio, video_packets
+from app.evidence import face_boundary_binding, service, video_audio, video_packets
 from app.evidence.audio_binding import validate_audio_channel
 from app.evidence.image_packets import PacketIntegrityError
-from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify
+from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify, verify_video_source
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
 from app.storage.db import AnalysisStage, ReportRow
@@ -164,7 +165,8 @@ def test_appearance_evidence_records_the_same_measurements_in_json_and_reports(a
     centers = [36, 44, 52, 60, 68, 76, 84]
     indices = {center + offset for center in centers for offset in (-1, 0, 1)}
     during = {center + offset for center in centers[2:-2] for offset in (-1, 0, 1)}
-    dense = list(range(38, 82, 2))
+    # 12 Hz grid on the native 25 fps clock. Frame 37 wins the 37.5 tie.
+    dense = [37, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83]
     pixels = f.inputs.store.get_many(indices | (set(dense) if refine else set()))
     anchors = f.inputs.store.native_anchors()
     by_index = {row['frame_index']: row for row in anchors}
@@ -192,12 +194,12 @@ def test_appearance_evidence_records_the_same_measurements_in_json_and_reports(a
     if refine:
         details['face_boundary'] = {
             'method': 'face-appearance-boundary/1', 'time_base': f.table.time_base, 'track_id': 'track:0',
-            'start_pts': f.table.pts[50], 'end_pts': f.table.pts[70],
-            'start_stream_s': f.table.seconds(50), 'end_stream_s': f.table.seconds(70),
+            'start_pts': f.table.pts[50], 'end_pts': f.table.pts[69],
+            'start_stream_s': f.table.seconds(50), 'end_stream_s': f.table.seconds(69),
             'scheduled_frame_indices': dense, 'frame_inputs': [inputs[i] for i in dense],
-            'anchors': {'before': 48, 'during': 60, 'after': 70},
+            'anchors': {'before': 48, 'during': 60, 'after': 69},
             'edges': {edge: {'frame_indices': indices, 'signed_distance_hex': [float(value).hex() for value in (-.2, -.3, .3, .2)]}
-                      for edge, indices in (('entry', [46, 48, 50, 52]), ('exit', [66, 68, 70, 72]))},
+                      for edge, indices in (('entry', [46, 48, 50, 52]), ('exit', [65, 67, 69, 71]))},
         }
     f.result['signals'].append({
         'id': DETECTOR + ':global', 'detector_id': DETECTOR, 'status': 'ok', 'display_id': 'S03',
@@ -247,8 +249,8 @@ def test_appearance_evidence_records_the_same_measurements_in_json_and_reports(a
         assert face['face_boundary'] == json.loads(canonical_json(details['face_boundary']))
         assert face['affects_overall_confidence'] is False
         assert [(frame['interval_role'], frame['anchor']['frame_index']) for frame in face['face_boundary_frames']] == [
-            ('before', 48), ('during', 60), ('after', 70)]
-        assert 'Refined boundary estimate' in html and '7.000–7.800 s' in html
+            ('before', 48), ('during', 60), ('after', 69)]
+        assert 'Refined boundary estimate' in html and '7.000–7.760 s' in html
         assert 'Before refined range' in html and '7.080-7.720 s' in html
         replay = FrameStore(f.inputs.store.path, f.table)
         ctx = SimpleNamespace(outputs={'detect': {'detectors': [{'details': details}]}}, check=lambda *_: None)
@@ -263,10 +265,24 @@ def test_appearance_evidence_records_the_same_measurements_in_json_and_reports(a
         with pytest.raises(video.DecodeError, match='lacks a verified decoded timestamp'):
             video._native_render_anchors(ctx, unverified)
         bad_input = copy.deepcopy(details)
-        bad_input['face_boundary']['frame_inputs'][0]['decoded_rgb_sha256'] = 'f' * 64
+        # Use a dense-only index, so the stored coarse binding remains unchanged.
+        dense_only = next(row for row in bad_input['face_boundary']['frame_inputs'] if row['frame_index'] not in indices)
+        dense_only['decoded_rgb_sha256'] = 'f' * 64
         ctx.outputs['detect']['detectors'][0]['details'] = bad_input
         with pytest.raises(video.DecodeError, match='differs from the re-decoded source frames'):
             video._native_render_anchors(ctx, replay)
+        omitted = copy.deepcopy(stored)
+        altered_boundary = omitted['packets'][0]['face_boundary']
+        # Dropping one outer frame preserves the observed edge support and image references.
+        altered_boundary['scheduled_frame_indices'].pop(0)
+        altered_boundary['frame_inputs'].pop(0)
+        face_boundary_binding.validate_packet(omitted['packets'][0], omitted['source'], omitted['version'])
+        bundle = {'schema': package.PUBLIC_SCHEMA, 'analysis': {'kind': 'video'},
+                  'source_commitment': {'sha256': f.analysis.sha256}}
+        with zipfile.ZipFile(io.BytesIO(), 'w') as archive:
+            archive.writestr('evidence.json', canonical_json(omitted))
+            with pytest.raises(ValueError, match='sample schedule differs from the source clock'):
+                verify_video_source.check(archive, bundle, f.inputs.store.path)
         broken = copy.deepcopy(stored)
         broken['packets'][0]['face_boundary']['edges']['entry']['signed_distance_hex'][1] = .1.hex()
         broken['sha256'] = video_packets.packet_hash(broken)
@@ -443,7 +459,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
-                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_alignment_context',
+                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
             return None

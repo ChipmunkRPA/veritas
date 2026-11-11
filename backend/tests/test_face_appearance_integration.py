@@ -150,8 +150,12 @@ def boundary_table(pts=tuple(range(145)), time_base="1/24"):
     return FrameTable(time_base, pts, (0,), "I" + "P" * (len(pts) - 1), 64, 64, 64, 64)
 
 
-def test_boundary_grid_uses_native_times_and_earlier_ties():
-    table = boundary_table(tuple(11 + 3*i + (i % 4) for i in range(70)), "1/100")
+@pytest.mark.parametrize("pts", [
+    tuple(11 + 3*i + (i % 4) for i in range(70)),
+    tuple(-37 + 4 * (i // 2) for i in range(100)),
+])
+def test_boundary_grid_uses_native_times_and_earlier_ties(pts):
+    table = boundary_table(pts, "1/100")
     times = [tick * table.tb for tick in table.pts]
     first, last = table.pts[20], table.pts[50]
     start, end = first * table.tb, last * table.tb

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [standalone measurement reviewer](#recompute-selected-image-and-video-measurements)
+replays a PNG seam or video frame schedule directly from a supplied original
+and its signed evidence record. Start there to check those measurements on a
+local export.
+
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
 detector weights. The [matched image cue](image-bg-real-detail-deficit-v265-result.md)
@@ -461,6 +466,56 @@ Each channel reports its own result.
 ```sh
 python -m app.cli verify evidence.zip --public-key instance-key.pem \
   --source-video original.mkv --source-audio original.mkv
+```
+
+### Recompute selected image and video measurements
+
+After the trusted-key verification above, extract the signed `evidence.json`
+entry and run the standalone reviewer from `backend`. Use separate work files
+for different exports.
+
+```sh
+review_dir=$(mktemp -d)
+unzip -p image-evidence.zip evidence.json > "$review_dir/image.json"
+python -I scripts/review_evidence_measurements.py image original.png "$review_dir/image.json"
+
+unzip -p video-evidence.zip evidence.json > "$review_dir/video.json"
+python -I scripts/review_evidence_measurements.py video original.mkv "$review_dir/video.json"
+```
+
+The reviewer imports no application code and reads the original locally. The
+image path needs Pillow. It recomputes the four sharp seam responses from
+native color steps and checks their combined response. The output gives the
+largest absolute difference from the packet. The tolerance is 0.00005 for
+float32 accumulation and packet rounding. This reproduces the published
+rectangle's measurement. Whole-image candidate ranking is a separate test.
+
+The video path needs FFprobe and a complete native clock of at most 108,000
+frames. It reconstructs the 12 Hz schedule from the source presentation
+timestamps, checks the recorded input indices and ticks, and derives the two
+transition timestamps and the before, during, and after frame references from
+the recorded supports. Use the signed-source verifier above to verify the
+actual frame pixels and aligned crops. Face comparison scores and candidate
+ranking require detector re-execution.
+
+The output includes source and evidence digests, packet counts, and either
+`matched` or `no_measurement_recorded`. A mismatch exits with status 1. A
+source without a published seam or timing refinement yields
+`no_measurement_recorded`. Keep the JSON and the tool versions with a review.
+Share the output only if disclosure of those source commitments is permitted.
+
+Local replay of the existing paid-flow test fixtures reproduced all five seam
+responses in the pasted PNG and all 21 scheduled positions, 21 measured
+inputs, and three displayed frame roles in the known short swap. The original
+PNG, JPEG, and original video had no recorded measurement in this replay.
+On the 120-view [second PNG panel](image-boundary-prominence-holdout-2026-11-11.md),
+the reviewer checked all combined responses and the four side responses for
+25 highlighted rectangles. The largest absolute difference was 0.00000160.
+The authored regression tests reject altered values, schedule positions,
+source ticks, and displayed frame references.
+
+```sh
+python -m pytest tests/test_evidence_measurement_review.py
 ```
 
 ### Replay document evidence against the original

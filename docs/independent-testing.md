@@ -48,6 +48,9 @@ record the false-flag and recall trade-off from an archived writing replay
 and the separate acoustic geometry preflight.
 The [fresh editorial and mixed-passage test](text-editorial-transfer-2026-11-11.md)
 reports newly measured false highlights and source-localization results from two generator families.
+The [paragraph context transfer](writing-paragraph-context-transfer-2026-11-11.md)
+compares isolated and neighboring paragraph responses on 11 new source articles,
+with separate counts for originals, ordinary edits, and two generators.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a

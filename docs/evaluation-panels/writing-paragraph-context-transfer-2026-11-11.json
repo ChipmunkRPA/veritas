@@ -1,0 +1,1989 @@
+{
+  "fixed_comparison": {
+    "baseline_points": {
+      "raw_review": 0.5,
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "checkpoint": {
+      "assets": {
+        "NOTICE": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57",
+        "config.json": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3",
+        "model.safetensors": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087",
+        "serving_head.json": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab",
+        "tokenizer.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf",
+        "tokenizer_config.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+      },
+      "revision": "f1795c86806e6838d4afa33d0b1427f8430c9615"
+    },
+    "codes": {
+      "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+      "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+      "backend/app/detectors/text/extract.py": "48d6579200f2a6c6b8275d77fbb69a76c72d9449b48cd64fd48f9fd4ab568d44",
+      "backend/app/detectors/text/pipeline.py": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f",
+      "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+      "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+      "backend/scripts/writing_span_native_v7.py": "c7aa46f721ec27239ea9c434ee3073685dbf183ab0abc48d375ac281e1c75409"
+    },
+    "development_source_group_count": 13,
+    "generation_freeze_sha256": "e06c432f086258d7e56ff81cf54959d79a1292b63a873b3dea6910d491baabc2",
+    "method": {
+      "both": "Require both points on the same paragraph",
+      "development": "Only earlier source-disjoint v292 development originals, no mixed positives or new control responses",
+      "display": "One unique top qualifying paragraph, covering the paragraph-only classifier input. Retain existing six source-ordered context cap for baselines.",
+      "isolated": "Score entire paragraph as one classifier input with complete 512-token overflow coverage. Eligible if two adjacent paragraphs and all have at least 20 words.",
+      "metric": "At least 0.30 non-whitespace character IoU. Flag and overlap also counted. Local study only.",
+      "operating_point": "Strictly above second-largest file maximum among all 13 development originals for each of the two scores",
+      "two_sided": "Clipped natural log-odds of the paragraph minus the larger of its neighbors, with epsilon 1e-6"
+    },
+    "runtime": {
+      "batch": 4,
+      "device": "cpu",
+      "packages": {
+        "numpy": "2.2.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.22.2",
+        "torch": "2.13.0",
+        "transformers": "5.15.1"
+      },
+      "threads": 2
+    },
+    "schema": "chipmunk.paragraph-context-transfer/1",
+    "script_sha256": "458540b1f998a6ab85cdb626053d13c7720234dd98d9895694f0c9c6fbcba275",
+    "source_sha256": "4eea36f449a28f6054e97bb458ae53baeaee177ba49241138ca7d2e4dacaceeb"
+  },
+  "fixed_generation": {
+    "assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "code_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+    "method": {
+      "attempts_per_family": 11,
+      "device": "local offline MLX GPU",
+      "eligibility": "Actual EOS; existing v273 single paragraph, normalized word length, no wrapper/links/source-copy checks; exact human flanks and Unicode bounds; no cross-source normalized 12-token overlap",
+      "fixed_attempts_per_case": 1,
+      "planned_groups": 11,
+      "precision": "affine 4-bit groups of 64",
+      "settings": {
+        "max_tokens": 384,
+        "seed": 56174,
+        "temperature": 0.4,
+        "top_p": 0.9
+      }
+    },
+    "runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "schema": "chipmunk.text-passage-expansion-generation/1",
+    "source_gate_sha256": "2064ca09b35f0e5675a19fa0cf6b99ed581f4304d703d4012733d7ef2c22201a",
+    "source_sha256": "4eea36f449a28f6054e97bb458ae53baeaee177ba49241138ca7d2e4dacaceeb"
+  },
+  "paired_strict_to_paragraph_combination": {
+    "copyedit": {
+      "human_flag": {
+        "0->0": 1
+      }
+    },
+    "human_paragraph_splice": {
+      "human_flag": {
+        "0->0": 6,
+        "0->1": 1,
+        "1->0": 1,
+        "1->1": 1
+      }
+    },
+    "original": {
+      "human_flag": {
+        "0->0": 8,
+        "0->1": 1,
+        "1->0": 2
+      }
+    },
+    "qwen": {
+      "useful_ai_location": {
+        "0->0": 5,
+        "0->1": 1,
+        "1->1": 2
+      }
+    },
+    "smol2": {
+      "useful_ai_location": {
+        "0->0": 6,
+        "0->1": 2,
+        "1->0": 1,
+        "1->1": 1
+      }
+    }
+  },
+  "result": {
+    "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+    "confirmation_receipt": {
+      "classifier_forwards": 195,
+      "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+      "elapsed_seconds": 77.433,
+      "minimum_available_ram_bytes": 6449905664,
+      "point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+      "responses_sha256": "2d0d196339bc3f3381184f557d817ee496895868fc11ce36bb06a4a797af8aa8",
+      "sampled_worker_rss_bytes": 2349219840,
+      "status": "complete"
+    },
+    "development": {
+      "actual_forwards": 26,
+      "development_sha256": "e11234bac1eb4c180ffa656585f1b0ada35299fec140fdb5552382326319ccd0",
+      "freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+      "groups": 13,
+      "points_hex": {
+        "isolated": "0x1.f8d6820000000p-1",
+        "two_sided": "0x1.d6c840ddc477cp+2"
+      },
+      "schema": "chipmunk.paragraph-context-point/1"
+    },
+    "generator_receipts": {
+      "qwen": {
+        "counts": {
+          "constructed": 5,
+          "outside_word_bound": 4,
+          "source_copy": 1,
+          "wrapper_or_multiple_paragraphs": 1
+        },
+        "elapsed_seconds": 24.398,
+        "family": "qwen",
+        "freeze_sha256": "e06c432f086258d7e56ff81cf54959d79a1292b63a873b3dea6910d491baabc2",
+        "generated_tokens": 1780,
+        "minimum_available_ram_bytes": 4423532544,
+        "output_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+        "planned": 11,
+        "sampled_worker_rss_bytes": 2433974272,
+        "status": "complete"
+      },
+      "smol2": {
+        "counts": {
+          "outside_word_bound": 5,
+          "source_copy": 1,
+          "wrapper_or_multiple_paragraphs": 5
+        },
+        "elapsed_seconds": 32.517,
+        "family": "smol2",
+        "freeze_sha256": "e06c432f086258d7e56ff81cf54959d79a1292b63a873b3dea6910d491baabc2",
+        "generated_tokens": 1958,
+        "minimum_available_ram_bytes": 4221845504,
+        "output_sha256": "a701c6f8a210e35ef4c3426f4181995297a01204e767e9eca5942990d495013f",
+        "planned": 11,
+        "sampled_worker_rss_bytes": 3180199936,
+        "status": "complete"
+      }
+    },
+    "groups_with_two_eligible_generators": 0,
+    "outcomes": {
+      "copyedit": {
+        "both": {
+          "any_ai_overlap": 0,
+          "assessed": 1,
+          "flagged": 0,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 0,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 10,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "isolated": {
+          "any_ai_overlap": 0,
+          "assessed": 1,
+          "flagged": 0,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 0,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 10,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "raw_review": {
+          "any_ai_overlap": 0,
+          "assessed": 1,
+          "flagged": 0,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 0,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 10,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "strict_raw": {
+          "any_ai_overlap": 0,
+          "assessed": 1,
+          "flagged": 0,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 0,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 10,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "two_sided": {
+          "any_ai_overlap": 0,
+          "assessed": 1,
+          "flagged": 0,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 0,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 10,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        }
+      },
+      "human_paragraph_splice": {
+        "both": {
+          "any_ai_overlap": 0,
+          "assessed": 9,
+          "flagged": 2,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 1298,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 1,
+          "planned": 11,
+          "preparation_unavailable": 2,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "isolated": {
+          "any_ai_overlap": 0,
+          "assessed": 9,
+          "flagged": 4,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 2218,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 1,
+          "planned": 11,
+          "preparation_unavailable": 2,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "raw_review": {
+          "any_ai_overlap": 0,
+          "assessed": 9,
+          "flagged": 8,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 7468,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 5,
+          "planned": 11,
+          "preparation_unavailable": 2,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "strict_raw": {
+          "any_ai_overlap": 0,
+          "assessed": 9,
+          "flagged": 2,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 957,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 1,
+          "planned": 11,
+          "preparation_unavailable": 2,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "two_sided": {
+          "any_ai_overlap": 0,
+          "assessed": 9,
+          "flagged": 2,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 1298,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 1,
+          "planned": 11,
+          "preparation_unavailable": 2,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        }
+      },
+      "original": {
+        "both": {
+          "any_ai_overlap": 0,
+          "assessed": 11,
+          "flagged": 1,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 701,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "isolated": {
+          "any_ai_overlap": 0,
+          "assessed": 11,
+          "flagged": 3,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 1621,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "raw_review": {
+          "any_ai_overlap": 0,
+          "assessed": 11,
+          "flagged": 10,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 9622,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "strict_raw": {
+          "any_ai_overlap": 0,
+          "assessed": 11,
+          "flagged": 2,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 909,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        },
+        "two_sided": {
+          "any_ai_overlap": 0,
+          "assessed": 11,
+          "flagged": 1,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 701,
+          "missed_ai_location": 0,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "useful_ai_location": 0,
+          "wrong_ai_location": 0
+        }
+      },
+      "qwen": {
+        "both": {
+          "any_ai_overlap": 2,
+          "assessed": 5,
+          "flagged": 3,
+          "known_ai_characters": 3286,
+          "marked_ai_characters": 1339,
+          "marked_human_characters": 701,
+          "missed_ai_location": 3,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 6,
+          "useful_ai_location": 2,
+          "wrong_ai_location": 1
+        },
+        "isolated": {
+          "any_ai_overlap": 3,
+          "assessed": 5,
+          "flagged": 5,
+          "known_ai_characters": 3286,
+          "marked_ai_characters": 2035,
+          "marked_human_characters": 1209,
+          "missed_ai_location": 2,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 6,
+          "useful_ai_location": 3,
+          "wrong_ai_location": 2
+        },
+        "raw_review": {
+          "any_ai_overlap": 5,
+          "assessed": 5,
+          "flagged": 5,
+          "known_ai_characters": 3286,
+          "marked_ai_characters": 2228,
+          "marked_human_characters": 3428,
+          "missed_ai_location": 2,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 6,
+          "useful_ai_location": 3,
+          "wrong_ai_location": 0
+        },
+        "strict_raw": {
+          "any_ai_overlap": 2,
+          "assessed": 5,
+          "flagged": 2,
+          "known_ai_characters": 3286,
+          "marked_ai_characters": 458,
+          "marked_human_characters": 349,
+          "missed_ai_location": 4,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 6,
+          "useful_ai_location": 1,
+          "wrong_ai_location": 0
+        },
+        "two_sided": {
+          "any_ai_overlap": 2,
+          "assessed": 5,
+          "flagged": 3,
+          "known_ai_characters": 3286,
+          "marked_ai_characters": 1339,
+          "marked_human_characters": 701,
+          "missed_ai_location": 3,
+          "not_assessed": 0,
+          "ordinary_edit_overlap": 0,
+          "planned": 11,
+          "preparation_unavailable": 6,
+          "useful_ai_location": 2,
+          "wrong_ai_location": 1
+        }
+      },
+      "smol2": {
+        "both": {
+          "planned": 11,
+          "preparation_unavailable": 11
+        },
+        "isolated": {
+          "planned": 11,
+          "preparation_unavailable": 11
+        },
+        "raw_review": {
+          "planned": 11,
+          "preparation_unavailable": 11
+        },
+        "strict_raw": {
+          "planned": 11,
+          "preparation_unavailable": 11
+        },
+        "two_sided": {
+          "planned": 11,
+          "preparation_unavailable": 11
+        }
+      }
+    },
+    "unique_mixed_groups": 5
+  },
+  "schema": "chipmunk.writing-paragraph-context-transfer/1",
+  "scope": "Constructed science-explainer rewrites with matched publisher controls. New source IDs are independent of the checked project inventories; pretraining exposure unknown.",
+  "sentence_prefix_companion": {
+    "preparation": {
+      "freeze_sha256": "f0561ba91fb1abeb4ce6eaeda5b4588edea1a5b11d8008cd54ae66c16c52853a",
+      "outcomes": {
+        "qwen": {
+          "longest_bounded_complete_sentence_prefix": 3,
+          "not_recoverable_by_scope": 1,
+          "primary_eligible": 5,
+          "recovery_attempts": 5,
+          "still_unavailable": 2
+        },
+        "smol2": {
+          "not_recoverable_by_scope": 1,
+          "recovery_attempts": 10,
+          "still_unavailable": 10
+        }
+      },
+      "recovered_cases_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+      "status": "complete"
+    },
+    "preparation_freeze": {
+      "code_sha256": "f493956ac298c58b8d19495066f04366491f685bb6dbfc9d836a3f9d01765eb5",
+      "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+      "development_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+      "generation_freeze_sha256": "e06c432f086258d7e56ff81cf54959d79a1292b63a873b3dea6910d491baabc2",
+      "generator_commitments": {
+        "qwen": {
+          "primary_cases_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+          "raw_sha256": "aeb0d9e225e5288702a16e4b5cc059a8a13ba13f55d78840cdbc6dcaff835ed7"
+        },
+        "smol2": {
+          "primary_cases_sha256": "a701c6f8a210e35ef4c3426f4181995297a01204e767e9eca5942990d495013f",
+          "raw_sha256": "aa0a73e203cfabd42dba260fb56e626c72420181362dc105015f788bb4da13ed"
+        }
+      },
+      "policy": {
+        "choice": "In response order, try the first paragraph block admissible under the original gates. Remove one standalone trailing-colon wrapper heading. For overlong plain content, try the longest complete sentence prefix at or below the original word bound. No selection from detector responses.",
+        "goal": "Separate deterministic selection of complete sentences when a generator responds with formatting or excessive words",
+        "inputs": "All exact terminal generation outputs. Retain primary admitted cases. Consider only naturally ended outputs rejected for wrapper/multiple paragraphs or length; preserve source-copy exclusions.",
+        "quality": "Reapply the same source-copy, length, contact, wrapper, source overlaps, exact flanks and Unicode positions. Ignore complete blocks with a wrapper, contact or list-like syntax.",
+        "scoring": "Same frozen current, strict, isolated, two-sided, and corroborated points. Score recovered cases only, and combine with exact unchanged primary results."
+      },
+      "schema": "chipmunk.passage-sentence-prefix-preparation/1"
+    },
+    "readout_freeze": {
+      "code_sha256": "54872a2f6dc4f2afa498c894c919f31cd8371b15ff64b6fcc727a9ff904a67c4",
+      "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+      "development_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+      "earlier_observations_sha256": "2ee94143125ce244e1592365751498af5f8490a5bf4435cab94788bc414f3e40",
+      "inputs_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+      "prior_terminal_issue": "Standalone scorer stopped after writing all responses because its point file was absent from the output directory.",
+      "schema": "chipmunk.extra-paragraph-transfer-receipt/1"
+    },
+    "result": {
+      "byte_exact_response_replay": true,
+      "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+      "confirmation_receipt": {
+        "classifier_forwards": 47,
+        "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+        "elapsed_seconds": 13.797,
+        "minimum_available_ram_bytes": 5617696768,
+        "point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+        "responses_sha256": "2ee94143125ce244e1592365751498af5f8490a5bf4435cab94788bc414f3e40",
+        "sampled_worker_rss_bytes": 2232270848,
+        "status": "complete"
+      },
+      "development": {
+        "actual_forwards": 26,
+        "development_sha256": "e11234bac1eb4c180ffa656585f1b0ada35299fec140fdb5552382326319ccd0",
+        "freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+        "groups": 13,
+        "points_hex": {
+          "isolated": "0x1.f8d6820000000p-1",
+          "two_sided": "0x1.d6c840ddc477cp+2"
+        },
+        "schema": "chipmunk.paragraph-context-point/1"
+      },
+      "generator_receipts": {
+        "freeze_sha256": "f0561ba91fb1abeb4ce6eaeda5b4588edea1a5b11d8008cd54ae66c16c52853a",
+        "outcomes": {
+          "qwen": {
+            "longest_bounded_complete_sentence_prefix": 3,
+            "not_recoverable_by_scope": 1,
+            "primary_eligible": 5,
+            "recovery_attempts": 5,
+            "still_unavailable": 2
+          },
+          "smol2": {
+            "not_recoverable_by_scope": 1,
+            "recovery_attempts": 10,
+            "still_unavailable": 10
+          }
+        },
+        "recovered_cases_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+        "status": "complete"
+      },
+      "groups_with_two_eligible_generators": 0,
+      "outcomes": {
+        "qwen": {
+          "both": {
+            "any_ai_overlap": 1,
+            "assessed": 3,
+            "flagged": 1,
+            "known_ai_characters": 1617,
+            "marked_ai_characters": 526,
+            "marked_human_characters": 0,
+            "missed_ai_location": 2,
+            "not_assessed": 0,
+            "ordinary_edit_overlap": 0,
+            "planned": 3,
+            "useful_ai_location": 1,
+            "wrong_ai_location": 0
+          },
+          "isolated": {
+            "any_ai_overlap": 1,
+            "assessed": 3,
+            "flagged": 1,
+            "known_ai_characters": 1617,
+            "marked_ai_characters": 526,
+            "marked_human_characters": 0,
+            "missed_ai_location": 2,
+            "not_assessed": 0,
+            "ordinary_edit_overlap": 0,
+            "planned": 3,
+            "useful_ai_location": 1,
+            "wrong_ai_location": 0
+          },
+          "raw_review": {
+            "any_ai_overlap": 3,
+            "assessed": 3,
+            "flagged": 3,
+            "known_ai_characters": 1617,
+            "marked_ai_characters": 1218,
+            "marked_human_characters": 1942,
+            "missed_ai_location": 1,
+            "not_assessed": 0,
+            "ordinary_edit_overlap": 0,
+            "planned": 3,
+            "useful_ai_location": 2,
+            "wrong_ai_location": 0
+          },
+          "strict_raw": {
+            "any_ai_overlap": 1,
+            "assessed": 3,
+            "flagged": 1,
+            "known_ai_characters": 1617,
+            "marked_ai_characters": 257,
+            "marked_human_characters": 0,
+            "missed_ai_location": 2,
+            "not_assessed": 0,
+            "ordinary_edit_overlap": 0,
+            "planned": 3,
+            "useful_ai_location": 1,
+            "wrong_ai_location": 0
+          },
+          "two_sided": {
+            "any_ai_overlap": 1,
+            "assessed": 3,
+            "flagged": 1,
+            "known_ai_characters": 1617,
+            "marked_ai_characters": 526,
+            "marked_human_characters": 0,
+            "missed_ai_location": 2,
+            "not_assessed": 0,
+            "ordinary_edit_overlap": 0,
+            "planned": 3,
+            "useful_ai_location": 1,
+            "wrong_ai_location": 0
+          }
+        }
+      },
+      "unique_mixed_groups": 3
+    },
+    "terminal_result_sha256": "5e785062e682d9edec9d4cab2089a9f9e9326a70ced7df45f78ff649126edf9d"
+  },
+  "source_attribution": "Publisher works used as excerpts. Copyedits, same-work substitutions, and model-generated paragraph replacements were produced for evaluation. The aggregate includes no article excerpts, rewrites or customer data.",
+  "sources": {
+    "code_sha256": "5e960a5fecb28bbe37a1a3147cbec18670a6994868c2039274a6b1e221f77ffb",
+    "controls": {
+      "copyedit": {
+        "constructed": 1,
+        "unavailable": 10
+      },
+      "human_paragraph_splice": {
+        "constructed": 9,
+        "unavailable": 2
+      },
+      "original": {
+        "constructed": 11
+      }
+    },
+    "exposure_packets": [
+      {
+        "matched_sources": 0,
+        "packet": "writing_v3_v4_exposed_contexts",
+        "source_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+        "text_entries": 674
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v5_selected_source_answers",
+        "source_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+        "text_entries": 256
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v7_prepared_exposures",
+        "source_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+        "text_entries": 992
+      },
+      {
+        "matched_sources": 0,
+        "packet": "text_layout_v93_v101",
+        "source_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+        "text_entries": 800
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_prepared_v193_v196",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "manifest.json",
+        "source_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+        "text_entries": 680
+      },
+      {
+        "matched_sources": 0,
+        "packet": "article-confirmation-manifest.json",
+        "source_sha256": "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+        "text_entries": 144
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals-v2.json",
+        "source_sha256": "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-explicit.json",
+        "source_sha256": "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+        "text_entries": 186
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-v2.json",
+        "source_sha256": "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+        "text_entries": 90
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals.json",
+        "source_sha256": "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-explicit.jsonl",
+        "source_sha256": "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+        "text_entries": 55
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-explicit.jsonl",
+        "source_sha256": "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+        "text_entries": 38
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-mlx.jsonl",
+        "source_sha256": "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+        "text_entries": 32
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-mlx.jsonl",
+        "source_sha256": "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+        "text_entries": 13
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_publisher_test",
+        "source_sha256": "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+        "text_entries": 508
+      },
+      {
+        "matched_sources": 0,
+        "packet": "aitdna_span_texts_v2_v4",
+        "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+        "text_entries": 362
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_archive-v205",
+        "source_sha256": "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+        "text_entries": 36
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_direct-v209",
+        "source_sha256": "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "iterater_v203_publisher_train",
+        "source_sha256": "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+        "text_entries": 962
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_v257_v260",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "goce_v249",
+        "source_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+        "text_entries": 4
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_classification_english_archive",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v272_publisher_bodies",
+        "source_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+        "text_entries": 9
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v273_constructed_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v286_licensed_publisher_bodies",
+        "source_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v289_v292_constructed_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v301_publisher_bodies",
+        "source_sha256": "a6c83bad00eddb4844bd76ac78116f2b3e49e52ab148f7818906b4e3d3029d73",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v301_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v301_mixed_companion",
+        "source_sha256": "4e3e0a36ade2a51dd7a1b957aa78d6cb31696ae9798018be631ba1869a9f22c4",
+        "text_entries": 6
+      }
+    ],
+    "planned_works": 25,
+    "private_controls_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+    "private_originals_sha256": "b41c679913d3923041370d526eb1e6816acdecd92d19bd457349624afece7902",
+    "published_revision": "bdfb477443c50c8c7ca015ad19fb7b7874c672f5",
+    "roster_sha256": "14018de27b2d88dbd04c0b5ec7000ec2e86c52efcacb7c011b9fb5e83db4ae2d",
+    "schema": "chipmunk.text-passage-expansion-source/1",
+    "source_outcomes": {
+      "admitted": 11,
+      "no_eligible_excerpt": 14
+    },
+    "works": [
+      {
+        "article_url": "https://elifesciences.org/articles/74704",
+        "authors": [
+          "Gabriele Andreatta",
+          "Charles N Allen"
+        ],
+        "body_projection_sha256": "424cb1b843cc951bdde2e13fb7ca68da722879a65aed379e394f13f3462a23ed",
+        "doi": "10.7554/eLife.74704",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-11-30",
+        "related_research_dois": [
+          "10.7554/elife.68179"
+        ],
+        "source_id": "74704",
+        "status": "no_eligible_excerpt",
+        "title": "How neurons adjust to diurnality",
+        "xml_sha256": "c2a5de09c3e27b2d7f8338a85cd3cb9ef684f22dee512f3d340d0392a62da073",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74704-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74744",
+        "authors": [
+          "Michael A Taffe"
+        ],
+        "body_projection_sha256": "6f9cc9682a1a7dfdb35f709efc23bd61499ca191f36b0898e547c0159c5c435e",
+        "doi": "10.7554/eLife.74744",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-11-24",
+        "related_research_dois": [
+          "10.7554/elife.71368"
+        ],
+        "source_id": "74744",
+        "status": "no_eligible_excerpt",
+        "title": "Blinding peer review",
+        "xml_sha256": "d96dfd45871bae28b01a6cf9d1d38624ecd94d6d323ff434bd944a978cb052d9",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74744-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74551",
+        "authors": [
+          "Zhe Yang",
+          "Tongtong Wang",
+          "Yuki Oka"
+        ],
+        "body_projection_sha256": "e0768bf9a8ac3a40fd28a6f4421f24e4d7107bf8592ac2729e8278251dac7460",
+        "body_slots": [
+          2,
+          7
+        ],
+        "doi": "10.7554/eLife.74551",
+        "edit_target_codepoints": [
+          737,
+          1239
+        ],
+        "group": "elife-74551",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            735
+          ],
+          [
+            737,
+            1239
+          ],
+          [
+            1241,
+            1950
+          ],
+          [
+            1952,
+            2790
+          ],
+          [
+            2792,
+            3295
+          ]
+        ],
+        "publication_date": "2021-11-18",
+        "related_research_dois": [
+          "10.7554/elife.66609"
+        ],
+        "role": "confirmation",
+        "source_id": "74551",
+        "status": "admitted",
+        "text_sha256": "a864f4c49ab02793bc1f5a9951f71992dcb49c1e932d5d5943d59740f2a86178",
+        "title": "Predicting changes in osmolality",
+        "xml_sha256": "7144b03cf7f2c92a21e0ccfb9c512c37f0dee9d62016fe94918b29bb1d8ac995",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74551-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74331",
+        "authors": [
+          "Stephanie M Holm",
+          "John Balmes"
+        ],
+        "body_projection_sha256": "e912285b9d7f18fd402cb9862e5dcc10e0e29ece127845d1255b31aec108c788",
+        "doi": "10.7554/eLife.74331",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-11-17",
+        "related_research_dois": [
+          "10.7554/elife.69298"
+        ],
+        "source_id": "74331",
+        "status": "no_eligible_excerpt",
+        "title": "No fire without smoke (particles)",
+        "xml_sha256": "e158f3f78926d057af6812930cec9bfef4a7c5d692c45617507f454116233d97",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74331-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74096",
+        "authors": [
+          "Alexander J Werth",
+          "Joseph E Corbett"
+        ],
+        "body_projection_sha256": "bfe4422c4c8ef321c72b219c71a3e7f02cf8618217460f0209f4cddcd27ee1ac",
+        "doi": "10.7554/eLife.74096",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-11-05",
+        "related_research_dois": [
+          "10.7554/elife.68825"
+        ],
+        "source_id": "74096",
+        "status": "no_eligible_excerpt",
+        "title": "The brain limit",
+        "xml_sha256": "80e5559dc1e659ce4814a97fd6cac1d64049ad8da10e9c4ebc9f88d550f4967d",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74096-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74319",
+        "authors": [
+          "Harry Quon",
+          "Fred Bunz"
+        ],
+        "body_projection_sha256": "1776e382a38417682ecd511b680a465eefe3ada0bf61f7050866da0ab2d0fe3a",
+        "body_slots": [
+          2,
+          7
+        ],
+        "doi": "10.7554/eLife.74319",
+        "edit_target_codepoints": [
+          381,
+          812
+        ],
+        "group": "elife-74319",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            379
+          ],
+          [
+            381,
+            812
+          ],
+          [
+            814,
+            1199
+          ],
+          [
+            1201,
+            1678
+          ],
+          [
+            1680,
+            2530
+          ]
+        ],
+        "publication_date": "2021-11-02",
+        "related_research_dois": [
+          "10.7554/elife.70710"
+        ],
+        "role": "confirmation",
+        "source_id": "74319",
+        "status": "admitted",
+        "text_sha256": "949a982feea68a04c90be5ee43cd7f5ce9da533e607432ea05af9d654ec23005",
+        "title": "Preventing collateral damage",
+        "xml_sha256": "33f93659a13d4c9c7128ad43f323cbd6889921653fad1340cf665dbdd70ded25",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74319-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74135",
+        "authors": [
+          "Colby J Vorland"
+        ],
+        "body_projection_sha256": "346e2c47a106bafe0502db1e39e07b9f61bf428cf09d533543bf5d1cef00ee2c",
+        "doi": "10.7554/eLife.74135",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-11-02",
+        "related_research_dois": [
+          "10.7554/elife.70817"
+        ],
+        "source_id": "74135",
+        "status": "no_eligible_excerpt",
+        "title": "Sex difference analyses under scrutiny",
+        "xml_sha256": "043ac94be10d2d197eabe690015089bd974272f32c6be00cf83fe4f631e706e0",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74135-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75629",
+        "authors": [
+          "Timothy J Duerr",
+          "James R Monaghan"
+        ],
+        "body_projection_sha256": "6a6dedcf68444fb77eee7113be260cf36ab317e0fb346b7f0270ddb21ec43a0c",
+        "doi": "10.7554/eLife.75629",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-12-23",
+        "related_research_dois": [
+          "10.7554/elife.68584"
+        ],
+        "source_id": "75629",
+        "status": "no_eligible_excerpt",
+        "title": "A matter of nerves",
+        "xml_sha256": "6c7c5eab473866a8aaf49e0a4bd0dc39f50a74b00abc0f7c6c1954951bff9e3d",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75629-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75695",
+        "authors": [
+          "Britta Foerster"
+        ],
+        "body_projection_sha256": "678eae44d85db186701f2b4be54f79d0195a1fc2efb55b484922fb8a2cc9000a",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.75695",
+        "edit_target_codepoints": [
+          1871,
+          2508
+        ],
+        "group": "elife-75695",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            663
+          ],
+          [
+            665,
+            1488
+          ],
+          [
+            1490,
+            1869
+          ],
+          [
+            1871,
+            2508
+          ],
+          [
+            2510,
+            2921
+          ]
+        ],
+        "publication_date": "2021-12-22",
+        "related_research_dois": [
+          "10.7554/elife.67565"
+        ],
+        "role": "confirmation",
+        "source_id": "75695",
+        "status": "admitted",
+        "text_sha256": "0d0032ce48d8624a111122d1added1375dc8fae93b81a83c52b3b4c31750caca",
+        "title": "Oxygen overload",
+        "xml_sha256": "5f13525c4a48515805ec845e8e3d68f0eb5d90abd2dbecda63bde14a213f1e9f",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75695-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75469",
+        "authors": [
+          "Omid G Sani",
+          "Maryam M Shanechi"
+        ],
+        "body_projection_sha256": "630405ca092654a1130caae03b3af3d179fd5943cbccec9f3a066f42b39d803f",
+        "doi": "10.7554/eLife.75469",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-12-21",
+        "related_research_dois": [
+          "10.7554/elife.67256"
+        ],
+        "source_id": "75469",
+        "status": "no_eligible_excerpt",
+        "title": "Sensory feedback can give rise to neural rotations",
+        "xml_sha256": "4c732ad51745f81ff0c9c8ee99d53e484b9bee7f139d715bcd25f4c073362db0",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75469-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75243",
+        "authors": [
+          "Jos Kramer",
+          "Rolf Kümmerli"
+        ],
+        "body_projection_sha256": "04e2b2059ac15266390192fa421e90f2a40ba8f504b145e505cb0b8397c08283",
+        "body_slots": [
+          4,
+          9
+        ],
+        "doi": "10.7554/eLife.75243",
+        "edit_target_codepoints": [
+          591,
+          1188
+        ],
+        "group": "elife-75243",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            589
+          ],
+          [
+            591,
+            1188
+          ],
+          [
+            1190,
+            2156
+          ],
+          [
+            2158,
+            2748
+          ],
+          [
+            2750,
+            3253
+          ]
+        ],
+        "publication_date": "2021-12-17",
+        "related_research_dois": [
+          "10.7554/elife.71968"
+        ],
+        "role": "confirmation",
+        "source_id": "75243",
+        "status": "admitted",
+        "text_sha256": "b1e5fda94e3bc877e5ca56ca461a8d609fda5082d715f273ad2eeb992fd3707d",
+        "title": "Losing out to improve group fitness",
+        "xml_sha256": "d39ebc8bf362f53074a50c9443501579d5802019eeab69172b5a9aa080d90128",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75243-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75471",
+        "authors": [
+          "Bart Van Puyvelde",
+          "Maarten Dhaenens"
+        ],
+        "body_projection_sha256": "4459160a2b86a8d80904563ced61f2c37ef50692cd5ee93a2b3def05a6d6e026",
+        "doi": "10.7554/eLife.75471",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-12-10",
+        "related_research_dois": [
+          "10.7554/elife.70843"
+        ],
+        "source_id": "75471",
+        "status": "no_eligible_excerpt",
+        "title": "Add mass spectrometry to the pandemic toolbox",
+        "xml_sha256": "7f4b6f2c34bf3c24c3a87378c8cc6dff96aabac937ba1b746e8ce95e61515833",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75471-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74912",
+        "authors": [
+          "Jessica Shiu",
+          "Arthur D Lander"
+        ],
+        "body_projection_sha256": "0369aaac3f9b4d378ee0ce4abb5bea1500c2d6e94ec3716929170faa84147819",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.74912",
+        "edit_target_codepoints": [
+          1466,
+          1782
+        ],
+        "group": "elife-74912",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            398
+          ],
+          [
+            400,
+            810
+          ],
+          [
+            812,
+            1464
+          ],
+          [
+            1466,
+            1782
+          ],
+          [
+            1784,
+            2117
+          ]
+        ],
+        "publication_date": "2021-12-09",
+        "related_research_dois": [
+          "10.7554/elife.70385"
+        ],
+        "role": "confirmation",
+        "source_id": "74912",
+        "status": "admitted",
+        "text_sha256": "825c5f8932ff2954600d0c96eec2a0094034d3b0b3f1dac1b2d46e6d5c2f9ee1",
+        "title": "When oncogenes do not cause cancer",
+        "xml_sha256": "3627a434ecf675391e51bc963524540ad155e4a4156efd922c53ea07000e3622",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74912-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75174",
+        "authors": [
+          "Marc Fahrner",
+          "Christoph Romanin"
+        ],
+        "body_projection_sha256": "e34161187b935dd5625a42888a16c68f3503de2d372120ef924014f813dac959",
+        "doi": "10.7554/eLife.75174",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-12-07",
+        "related_research_dois": [
+          "10.7554/elife.66194"
+        ],
+        "source_id": "75174",
+        "status": "no_eligible_excerpt",
+        "title": "The many states of STIM1",
+        "xml_sha256": "0bafe641abb8e02a5d558f119d013e92f41f392a205bd8c5c51a7aca18b3f6a4",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75174-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/75171",
+        "authors": [
+          "Betina Ip",
+          "Holly Bridge"
+        ],
+        "body_projection_sha256": "b9e85fd63b1e75384a8fbfee0e5cab24291d9a321d42150abbaaff37050d19ea",
+        "doi": "10.7554/eLife.75171",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2021-12-03",
+        "related_research_dois": [
+          "10.7554/elife.67304"
+        ],
+        "source_id": "75171",
+        "status": "no_eligible_excerpt",
+        "title": "Mapping the visual world to the human brain",
+        "xml_sha256": "1e30d002e69f0e8afc3bb67a4839076aa0d8832d2a99df68dcd2cf9056a3cb60",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-75171-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/74935",
+        "authors": [
+          "Josette J Wlaschin",
+          "Sangeetha Hareendran",
+          "Claire E Le Pichon"
+        ],
+        "body_projection_sha256": "cb646f007b4f1e4a87209b42666f6ddc2d082b5afd87e64aed3c778298adfae2",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.74935",
+        "edit_target_codepoints": [
+          1379,
+          1971
+        ],
+        "group": "elife-74935",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            368
+          ],
+          [
+            370,
+            752
+          ],
+          [
+            754,
+            1377
+          ],
+          [
+            1379,
+            1971
+          ],
+          [
+            1973,
+            2757
+          ]
+        ],
+        "publication_date": "2021-12-02",
+        "related_research_dois": [
+          "10.7554/elife.69056"
+        ],
+        "role": "confirmation",
+        "source_id": "74935",
+        "status": "admitted",
+        "text_sha256": "2d5794666e770ef227c9ca3a4961687af2e83ee231880b7c55964e0f5109c5f0",
+        "title": "Why sex matters",
+        "xml_sha256": "e50c2b5b5c19099aa80130846d488034e327ba3c3b4ed0bf6c3a4520da92032a",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-74935-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/84142",
+        "authors": [
+          "James P Higham"
+        ],
+        "body_projection_sha256": "979e91bb037fdd46d6089ac040f6b78beb0f0c8027e15e0be6ce5e97d2f0af9a",
+        "doi": "10.7554/eLife.84142",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2022-11-24",
+        "related_research_dois": [
+          "10.7554/elife.79417"
+        ],
+        "source_id": "84142",
+        "status": "no_eligible_excerpt",
+        "title": "Kin selection spreads",
+        "xml_sha256": "af19c913313d1497c3aa5464e13163a75e7b488f4542399690e8bbb386d3ab2f",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-84142-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/84161",
+        "authors": [
+          "Bibi Nusreen Imambocus",
+          "Peter Soba"
+        ],
+        "body_projection_sha256": "a6bf35eaeb7862992528aa4c103dce8ea2dd007c62bd1a2966e093a6f2f38eaa",
+        "body_slots": [
+          5,
+          10
+        ],
+        "doi": "10.7554/eLife.84161",
+        "edit_target_codepoints": [
+          1263,
+          2061
+        ],
+        "group": "elife-84161",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            388
+          ],
+          [
+            390,
+            721
+          ],
+          [
+            723,
+            1261
+          ],
+          [
+            1263,
+            2061
+          ],
+          [
+            2063,
+            2617
+          ]
+        ],
+        "publication_date": "2022-11-21",
+        "related_research_dois": [
+          "10.7554/elife.76574"
+        ],
+        "role": "confirmation",
+        "source_id": "84161",
+        "status": "admitted",
+        "text_sha256": "7f35603d7134102aa574c9fd65145bf58d313127f28987c0ce80832d0103d2e6",
+        "title": "The elegance of prickly sensations",
+        "xml_sha256": "b36412793ce461dc0e2c9fb88dcc159100cef90f591d6077e302e61922b54b59",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-84161-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/84298",
+        "authors": [
+          "Aleksandra M Herman"
+        ],
+        "body_projection_sha256": "bcaa17175936907c5ae15f7b8f4390a0d5dcff720b1143820f2ed86eb84a5510",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.84298",
+        "edit_target_codepoints": [
+          1662,
+          2261
+        ],
+        "group": "elife-84298",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            443
+          ],
+          [
+            445,
+            980
+          ],
+          [
+            982,
+            1660
+          ],
+          [
+            1662,
+            2261
+          ],
+          [
+            2263,
+            2740
+          ]
+        ],
+        "publication_date": "2022-11-17",
+        "related_research_dois": [
+          "10.7554/elife.78126"
+        ],
+        "role": "confirmation",
+        "source_id": "84298",
+        "status": "admitted",
+        "text_sha256": "8f8b397723472fe8de96acd62b91dfd7b848baf9702b6b19fa149165ad4b87ae",
+        "title": "In sync with the heart",
+        "xml_sha256": "fc7eba98c05f817f5afeeb6e9136e1de802466a078c6f541feafda4d93e0d0ec",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-84298-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/84118",
+        "authors": [
+          "Thomas F Schilling",
+          "Pierre Le Pabic"
+        ],
+        "body_projection_sha256": "3b119714b46f6c4f4a8f4c80a02ac316b076057f1c49588da85974d60a91de95",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.84118",
+        "edit_target_codepoints": [
+          969,
+          1430
+        ],
+        "group": "elife-84118",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            328
+          ],
+          [
+            330,
+            967
+          ],
+          [
+            969,
+            1430
+          ],
+          [
+            1432,
+            1938
+          ],
+          [
+            1940,
+            2638
+          ]
+        ],
+        "publication_date": "2022-11-15",
+        "related_research_dois": [
+          "10.7554/elife.75749"
+        ],
+        "role": "confirmation",
+        "source_id": "84118",
+        "status": "admitted",
+        "text_sha256": "c9e4dcccd60c5602675b12dfc1b6f14a5f6a5fc6502fd9ecf57d95b81ddf98f9",
+        "title": "How vertebrates got their bite",
+        "xml_sha256": "2da436e8269bec0968cf96e35aff7dc49f90b7ecd01df03362e90dd3664cade6",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-84118-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/84025",
+        "authors": [
+          "Jiansong Fang",
+          "Dawei Wang",
+          "Xiude Fan"
+        ],
+        "body_projection_sha256": "afc32ba6a7a2e33476a330f36599842c2d6ed6622549b45ab6cc2181e4db64ee",
+        "body_slots": [
+          1,
+          6
+        ],
+        "doi": "10.7554/eLife.84025",
+        "edit_target_codepoints": [
+          708,
+          1275
+        ],
+        "group": "elife-84025",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            706
+          ],
+          [
+            708,
+            1275
+          ],
+          [
+            1277,
+            1656
+          ],
+          [
+            1658,
+            2374
+          ],
+          [
+            2376,
+            2807
+          ]
+        ],
+        "publication_date": "2022-11-11",
+        "related_research_dois": [
+          "10.7554/elife.81114"
+        ],
+        "role": "confirmation",
+        "source_id": "84025",
+        "status": "admitted",
+        "text_sha256": "e7e3f979dbcd64f49a0f8ca929d9b5018bbc1b42387dabe8d2fd96facd2dd76d",
+        "title": "Developing a taxonomy for colorectal cancer",
+        "xml_sha256": "2e13977b47c2777da4621978212286de54909636a4ab31809d494e7b6c4b6e3c",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-84025-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/83718",
+        "authors": [
+          "Bryan A Strange"
+        ],
+        "body_projection_sha256": "bd7823ac217318c959bf4607c757ba7afc33b41d6f72baa0b51d62918ab79b83",
+        "doi": "10.7554/eLife.83718",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2022-11-08",
+        "related_research_dois": [
+          "10.7554/elife.76143"
+        ],
+        "source_id": "83718",
+        "status": "no_eligible_excerpt",
+        "title": "Connecting to the long axis",
+        "xml_sha256": "ee20ef6c3fde8d6664741060d34fbd437eb4c1cfaa89d89dbe92b2daffbaa3aa",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-83718-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/83617",
+        "authors": [
+          "Rohan BH Williams"
+        ],
+        "body_projection_sha256": "b7a5ec156b005ba0a45700f02aa035dc6230b9de25d5ff1367626621e18041b3",
+        "body_slots": [
+          4,
+          9
+        ],
+        "doi": "10.7554/eLife.83617",
+        "edit_target_codepoints": [
+          609,
+          1295
+        ],
+        "group": "elife-83617",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "paragraph_codepoints": [
+          [
+            0,
+            607
+          ],
+          [
+            609,
+            1295
+          ],
+          [
+            1297,
+            1856
+          ],
+          [
+            1858,
+            2456
+          ],
+          [
+            2458,
+            2995
+          ]
+        ],
+        "publication_date": "2022-11-08",
+        "related_research_dois": [
+          "10.7554/elife.81196"
+        ],
+        "role": "confirmation",
+        "source_id": "83617",
+        "status": "admitted",
+        "text_sha256": "a224e4afcdc8aa1848747409f5bf7880766bd2470b8e6f457491066711e68f7c",
+        "title": "Adapt or perish",
+        "xml_sha256": "7a8e567b46e0dcd075aa3506d6e02c13249984fd13aee6fd068bd897b1df7c53",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-83617-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/83907",
+        "authors": [
+          "Olivia Ozguc",
+          "Sibylle Vonesch"
+        ],
+        "body_projection_sha256": "505c642d074c6c1c90d79f7facac2d2d98c06dd37602e621bdf9127e388e9ba8",
+        "doi": "10.7554/eLife.83907",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2022-11-03",
+        "related_research_dois": [
+          "10.7554/elife.79525"
+        ],
+        "source_id": "83907",
+        "status": "no_eligible_excerpt",
+        "title": "Finding abundance regulators",
+        "xml_sha256": "3071c3460de062945c155c78af43a534d3e8cffb86c911b802f3c64f77db408b",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-83907-v1.xml"
+      },
+      {
+        "article_url": "https://elifesciences.org/articles/83789",
+        "authors": [
+          "Teng Wang",
+          "Lingchong You"
+        ],
+        "body_projection_sha256": "50cbc4bed8513d89bf2fa7e254292df5de30d7a5cb011a641dbfcc61da7c8bf9",
+        "doi": "10.7554/eLife.83789",
+        "license_notice_sha256": "ebfce5979b3960101d30dc3989b8bc8b72eb53fcdb837289ea50859ac0c58ca7",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "publication_date": "2022-11-02",
+        "related_research_dois": [
+          "10.7554/elife.79780"
+        ],
+        "source_id": "83789",
+        "status": "no_eligible_excerpt",
+        "title": "Bringing cells to the edge",
+        "xml_sha256": "c42e415afa7ecbb99cf890f6d83cd66698a0483d58831b55ccc8a0c84f40e4c1",
+        "xml_url": "https://github.com/elifesciences/elife-article-xml/blob/bdfb477443c50c8c7ca015ad19fb7b7874c672f5/articles/elife-83789-v1.xml"
+      }
+    ]
+  },
+  "target_only_second_family": {
+    "comparison": {
+      "readout_freeze": {
+        "code_sha256": "54872a2f6dc4f2afa498c894c919f31cd8371b15ff64b6fcc727a9ff904a67c4",
+        "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+        "development_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+        "earlier_observations_sha256": null,
+        "inputs_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+        "prior_terminal_issue": null,
+        "schema": "chipmunk.extra-paragraph-transfer-receipt/1"
+      },
+      "result": {
+        "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+        "confirmation_receipt": {
+          "classifier_forwards": 89,
+          "comparison_freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+          "elapsed_seconds": 31.566,
+          "minimum_available_ram_bytes": 5882789888,
+          "point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+          "responses_sha256": "6425361f7c1022e49c44588c45441da49e39b6979dee58b8e5d62ca2783709a7",
+          "sampled_worker_rss_bytes": 2364768256,
+          "status": "complete"
+        },
+        "development": {
+          "actual_forwards": 26,
+          "development_sha256": "e11234bac1eb4c180ffa656585f1b0ada35299fec140fdb5552382326319ccd0",
+          "freeze_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+          "groups": 13,
+          "points_hex": {
+            "isolated": "0x1.f8d6820000000p-1",
+            "two_sided": "0x1.d6c840ddc477cp+2"
+          },
+          "schema": "chipmunk.paragraph-context-point/1"
+        },
+        "generator_receipts": {
+          "counts": {
+            "constructed": 10,
+            "source_copy": 1
+          },
+          "elapsed_seconds": 17.345,
+          "family": "smol2",
+          "freeze_sha256": "59744acbb4c57e6b42463f98928b1e292b09c2691ce9ffb4a24429e6a4c8045b",
+          "generated_tokens": 1129,
+          "minimum_available_ram_bytes": 6407241728,
+          "output_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+          "planned": 11,
+          "sampled_worker_rss_bytes": 3528835072,
+          "status": "complete"
+        },
+        "groups_with_two_eligible_generators": 0,
+        "outcomes": {
+          "smol2": {
+            "both": {
+              "any_ai_overlap": 3,
+              "assessed": 10,
+              "flagged": 4,
+              "known_ai_characters": 4877,
+              "marked_ai_characters": 1527,
+              "marked_human_characters": 701,
+              "missed_ai_location": 7,
+              "not_assessed": 0,
+              "ordinary_edit_overlap": 0,
+              "planned": 11,
+              "preparation_unavailable": 1,
+              "useful_ai_location": 3,
+              "wrong_ai_location": 1
+            },
+            "isolated": {
+              "any_ai_overlap": 5,
+              "assessed": 10,
+              "flagged": 6,
+              "known_ai_characters": 4877,
+              "marked_ai_characters": 2585,
+              "marked_human_characters": 701,
+              "missed_ai_location": 5,
+              "not_assessed": 0,
+              "ordinary_edit_overlap": 0,
+              "planned": 11,
+              "preparation_unavailable": 1,
+              "useful_ai_location": 5,
+              "wrong_ai_location": 1
+            },
+            "raw_review": {
+              "any_ai_overlap": 8,
+              "assessed": 10,
+              "flagged": 9,
+              "known_ai_characters": 4877,
+              "marked_ai_characters": 3609,
+              "marked_human_characters": 6965,
+              "missed_ai_location": 4,
+              "not_assessed": 0,
+              "ordinary_edit_overlap": 0,
+              "planned": 11,
+              "preparation_unavailable": 1,
+              "useful_ai_location": 6,
+              "wrong_ai_location": 1
+            },
+            "strict_raw": {
+              "any_ai_overlap": 2,
+              "assessed": 10,
+              "flagged": 3,
+              "known_ai_characters": 4877,
+              "marked_ai_characters": 717,
+              "marked_human_characters": 1157,
+              "missed_ai_location": 8,
+              "not_assessed": 0,
+              "ordinary_edit_overlap": 0,
+              "planned": 11,
+              "preparation_unavailable": 1,
+              "useful_ai_location": 2,
+              "wrong_ai_location": 1
+            },
+            "two_sided": {
+              "any_ai_overlap": 3,
+              "assessed": 10,
+              "flagged": 4,
+              "known_ai_characters": 4877,
+              "marked_ai_characters": 1527,
+              "marked_human_characters": 701,
+              "missed_ai_location": 7,
+              "not_assessed": 0,
+              "ordinary_edit_overlap": 0,
+              "planned": 11,
+              "preparation_unavailable": 1,
+              "useful_ai_location": 3,
+              "wrong_ai_location": 1
+            }
+          }
+        },
+        "unique_mixed_groups": 10
+      },
+      "terminal_result_sha256": "59d69da9c2be6429f58481c946c630f50315713fbb23b2b85f7cb47c6b2969c1"
+    },
+    "generation_freeze": {
+      "assets": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      },
+      "code_sha256": "08fa30482781d494506c2783148f10af83f0afcbaea4152e083287ac15e0744a",
+      "fixed_generation_sha256": "e06c432f086258d7e56ff81cf54959d79a1292b63a873b3dea6910d491baabc2",
+      "method": {
+        "attempts_per_family": 11,
+        "device": "local offline MLX GPU",
+        "eligibility": "Actual EOS; existing v273 single paragraph, normalized word length, no wrapper/links/source-copy checks; exact human flanks and Unicode bounds; no cross-source normalized 12-token overlap",
+        "fixed_attempts_per_case": 1,
+        "planned_groups": 11,
+        "precision": "affine 4-bit groups of 64",
+        "reason": "The initial preparation admitted zero second-family rewrites. All 14 normalized candidate blocks in the separate bounded recovery replay were copied or unchanged. Change prompt source to target-only and request shorter rewording without relaxing the gate.",
+        "settings": {
+          "max_tokens": 384,
+          "seed": 41873,
+          "temperature": 0.72,
+          "top_p": 0.9
+        }
+      },
+      "runtime": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.3",
+        "transformers": "5.22.1"
+      },
+      "schema": "chipmunk.text-target-only-rewrite/1",
+      "shared_code_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+      "source_sha256": "4eea36f449a28f6054e97bb458ae53baeaee177ba49241138ca7d2e4dacaceeb"
+    },
+    "generation_receipt": {
+      "counts": {
+        "constructed": 10,
+        "source_copy": 1
+      },
+      "elapsed_seconds": 17.345,
+      "family": "smol2",
+      "freeze_sha256": "59744acbb4c57e6b42463f98928b1e292b09c2691ce9ffb4a24429e6a4c8045b",
+      "generated_tokens": 1129,
+      "minimum_available_ram_bytes": 6407241728,
+      "output_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+      "planned": 11,
+      "sampled_worker_rss_bytes": 3528835072,
+      "status": "complete"
+    },
+    "initial_premodel_attempt": {
+      "freeze_sha256": "b82a20550baa2df2f08d09d38aae3ecb22b58aea90a73818b0f6fb2e36095a9d",
+      "reason": "The launcher imported a CPU-only dependency in the isolated MLX runtime. The retry corrected only the import.",
+      "status": "stopped before weight load or generation"
+    }
+  },
+  "totals": {
+    "eligible_files": 26,
+    "eligible_mixed": 5,
+    "extended_eligible_mixed": 18,
+    "extended_eligible_mixed_groups": 11,
+    "new_groups": 11,
+    "planned_files": 55,
+    "planned_mixed": 22,
+    "target_only_eligible": 10,
+    "target_only_planned": 11
+  }
+}

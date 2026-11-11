@@ -1,0 +1,88 @@
+{
+  "source_receipts_sha256": {
+    "audio-native-stereo-gate-freeze-v279.json": "6a80567c7767ef208450c70e92d4d06719a9dc1899d363c3affe6cfc5aa9ed1c",
+    "audio-rescued-speech-retry-freeze-v261.json": "a6e0f56f392f79b445d39117e68ba7c9421bbccaeba5a049bc464481d3c3c3c9",
+    "audio-rescued-speech-retry-complete-v261.json": "89656b3f98035b6429795094dac8d29c12fb00d58be14f2e32709d3b6a2c3bcc",
+    "audio-noise-speech-rescue-downstream-freeze-v270.json": "88e2a68eb60b6b9c88298ea7f800496fb946508887641f9ec238cd271d3c459c",
+    "audio-native-stereo-pair-holdout-complete-v277.json": "40bbdc73ad3110857926bd345952f3a918910b56cdcd49c45ef5fd99318d8b44",
+    "audio-native-stereo-pair-freeze-v277.json": "6a31cdf0b033330cec0d317f6c4d3dd99381f2f2d00eab85731535585ead9f0e",
+    "audio-native-stereo-gate-complete-v279.json": "a37dabab269d0fc9b22a8f2f8f364b44ff5b9ba3428ea101e390a714cb5a0976",
+    "audio-native-stereo-authenticity-freeze-v282.json": "0ba2fc44772795aa67756df6df747415e5c45e1d506f89850d72075f1aaa4e23",
+    "audio-native-stereo-authenticity-complete-v282.json": "4f40ca216a1c2a2ef7491c1a962e32fdd01d61afe1ae6a1556baec6c7d096269",
+    "audio-ai-only-rescue-freeze-v283.json": "49e16c82ffb35bd79bbb5f44052303ed9fec1053c44f54e08e1869023431a56f",
+    "audio-ai-only-rescue-complete-v283.json": "043ee77b8585aa1ea7e79e709e76e84d29062ccf2f9caaca9c0ef7db8b8a8430"
+  },
+  "serving_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "serving_asset_sha256": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "inherited_v261_code_sha256": {
+    "backend/scripts/audio_rescued_speech_shadow_v258.py": "7be4616ce59360ad0102a7e2cf6144e41368d6bf5f45bd44b4646223d9a9ec64",
+    "backend/tests/test_audio_rescued_speech_shadow_v258.py": "8da245f2865142da335810a0e797eeb48107398c9b02e29750387c9b2440c880",
+    "docs/audio-rescued-speech-shadow-v258-method.md": "2329df27effbb5efb01165086946504a45cd3910ef2a3fed431cceae8f70aa92",
+    "backend/scripts/audio_noise_speech_gate_v256.py": "90d0c303bb8e35c0249d8208403dda73ba9a706ec2ba719931319b056b86905b",
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/calibration.py": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/scripts/audio_rescued_speech_retry_v261.py": "05afa0f502f9a1f9ff004942cbcfe7939aadbea83bc7c7cbad7c3e468d1f8323",
+    "backend/tests/test_audio_rescued_speech_retry_v261.py": "e4e756111443f82d190c304744211922f68e7be7f4a312ab11d02be209d9397b",
+    "docs/audio-rescued-speech-retry-v261-method.md": "dd023cfa29d5aa6a9a9f2089f1441c221c5f50b6267b52ce14b8f4f3970cbf8b"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_native_stereo_holdout_v284.py": "0ef270ebcc7e81fca8f0808e2d9db8b0025762dc5d4391ee5156499c22ae73f1",
+    "backend/tests/test_audio_native_stereo_holdout_v284.py": "c1b352b76903a0b688994d8887004526599f11dad26451241aa905445b4eadd1",
+    "docs/audio-native-stereo-holdout-v284-method.md": "968c7610e8dda8420e1363f8282ec891eb3aee0606e3500c2e4c5017b03f7072",
+    "backend/scripts/audio_ai_only_rescue_v283.py": "50edc524a00f4dfe7c275c3fca629bf697b515ccb2f60b6e98adbe375a125e6a",
+    "backend/scripts/audio_native_stereo_gate_v279.py": "787da9f29a624f3ec391419c7023fdd5146d740eba0da62285aaf6d806b8657d",
+    "backend/scripts/audio_native_stereo_authenticity_v282.py": "a88d9d98fd5d9ee701d068afa7ea8543cf8bd4fcf58ac4d5e48dc0b033fa1c6f",
+    "backend/scripts/audio_noise_speech_rescue_downstream_v270.py": "30211cba41c7185b6ba86b99fb8ced69473155e748b12a656d734d6232b17860"
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "system": "Darwin",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.13.0",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "transformers": "5.15.1"
+    }
+  },
+  "sample_rate": 16000,
+  "samples_per_window": 48000,
+  "schema": "chipmunk.audio-native-stereo-holdout-freeze/284",
+  "role": "holdout",
+  "source_private_cases_sha256": "60aad305c2994160cdac4bcdbe02a047cab10a2d27d7287970c77c6776f0c4ba",
+  "source_profile_sha256": "7e88a13db4a81b3b7e07bcb881ed52c4462f27d8233f5bd069e2f32b5ac139d7",
+  "planned_cases": 200,
+  "conditions": [
+    "matched_clean",
+    "kitchen_equal_gain",
+    "kitchen_forced",
+    "traffic_equal_gain",
+    "traffic_forced"
+  ],
+  "foregrounds_by_family": {
+    "genuine": 16,
+    "clone": 6,
+    "expressive": 12,
+    "stock": 6
+  },
+  "connected_source_groups": 32,
+  "vad_frame_forwards": 56400,
+  "max_classifier_views": 400,
+  "max_classifier_forwards": 800,
+  "routes": [
+    "mono",
+    "ai_only_rescue",
+    "channel_priority"
+  ],
+  "gate_and_selection": "v279 without changes",
+  "policy": "Keep directional mono. Only admit selected-channel AI if mono is inconclusive or unassessed.",
+  "channel_priority_diagnostic": "Use eligible selected-channel direction when available, otherwise keep mono."
+}

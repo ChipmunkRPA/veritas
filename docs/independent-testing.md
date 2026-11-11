@@ -58,7 +58,9 @@ compares mono admission and a fixed acoustic channel choice without using
 authenticity scores for selection. The [downstream comparison](audio-native-stereo-authenticity-v282-result.md)
 reports correct, wrong and inconclusive directions on those recovered clips
 and on the comparison group. The [AI-only policy replay](audio-ai-only-rescue-v283-result.md)
-counts the directions that a fixed mono-plus-channel rule would change.
+counts the directions that a fixed mono-plus-channel rule would change. The
+[200-case holdout](audio-native-stereo-holdout-v284-result.md) compares that rule
+with mono on separate sources and reports the effects by noise condition.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

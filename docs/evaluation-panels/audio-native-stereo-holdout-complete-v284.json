@@ -1,0 +1,1517 @@
+{
+  "classifier": {
+    "assessed_views": 218,
+    "classifier_plan_sha256": "26f45b42776117719155875952aa90f8331335c04d9f001eec06a85f6f74b4db",
+    "freeze_sha256": "b0091e894198242e2ccf86ed779b5181964416491f5a0da36aa8c25bdfc59b23",
+    "new_neural_calls": 291,
+    "private_score_journal_sha256": "dff496975ca39bb5e109f3cfb6c9a2a0e51091438870f6ba9c1398dc5444bd68",
+    "resource_profile_sha256": "3fac3572968e1e47c2f6861987a074b848890903cb4f48fb668f021a5a6e3ac2",
+    "schema": "chipmunk.audio-native-stereo-holdout-classifier-result/284",
+    "stability_probe_counts": {
+      "computed": 73,
+      "not_required_for_decision": 145
+    },
+    "status": "complete",
+    "vad_forwards": 0,
+    "worker_duration_seconds": 186.63635875005275
+  },
+  "freeze_sha256": "b0091e894198242e2ccf86ed779b5181964416491f5a0da36aa8c25bdfc59b23",
+  "gate_coverage_by_condition": {
+    "kitchen_equal_gain": {
+      "additional_admission": 0,
+      "forced_assignment_matches": 0,
+      "forced_planned": 0,
+      "forced_selection_available": 0,
+      "mono_admitted": 35,
+      "mono_only_admitted": 35,
+      "mono_or_selected_admitted": 35,
+      "planned": 40,
+      "selected_admitted": 0,
+      "selection_available": 0,
+      "swap_invariant": 40
+    },
+    "kitchen_forced": {
+      "additional_admission": 0,
+      "forced_assignment_matches": 25,
+      "forced_planned": 40,
+      "forced_selection_available": 25,
+      "mono_admitted": 35,
+      "mono_only_admitted": 13,
+      "mono_or_selected_admitted": 35,
+      "planned": 40,
+      "selected_admitted": 22,
+      "selection_available": 25,
+      "swap_invariant": 40
+    },
+    "matched_clean": {
+      "additional_admission": 0,
+      "forced_assignment_matches": 0,
+      "forced_planned": 0,
+      "forced_selection_available": 0,
+      "mono_admitted": 37,
+      "mono_only_admitted": 37,
+      "mono_or_selected_admitted": 37,
+      "planned": 40,
+      "selected_admitted": 0,
+      "selection_available": 0,
+      "swap_invariant": 40
+    },
+    "traffic_equal_gain": {
+      "additional_admission": 0,
+      "forced_assignment_matches": 0,
+      "forced_planned": 0,
+      "forced_selection_available": 0,
+      "mono_admitted": 34,
+      "mono_only_admitted": 34,
+      "mono_or_selected_admitted": 34,
+      "planned": 40,
+      "selected_admitted": 0,
+      "selection_available": 0,
+      "swap_invariant": 40
+    },
+    "traffic_forced": {
+      "additional_admission": 3,
+      "forced_assignment_matches": 26,
+      "forced_planned": 40,
+      "forced_selection_available": 26,
+      "mono_admitted": 32,
+      "mono_only_admitted": 12,
+      "mono_or_selected_admitted": 35,
+      "planned": 40,
+      "selected_admitted": 23,
+      "selection_available": 26,
+      "swap_invariant": 40
+    }
+  },
+  "gate_profile_sha256": "e8a6dfdcfd8abfd022fa02409c9ab2f708495b428a38377624905b67862fa032",
+  "gate_result_sha256": "6b901e5fe8ba7681b8a4bbd5132f2e84b0dc1ff738a316583ab36f79e953843b",
+  "outcomes": {
+    "all": {
+      "all": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 7
+        },
+        "ai_only_rescue": {
+          "ai": 51,
+          "correct_ai": 49,
+          "correct_original": 47,
+          "inconclusive": 67,
+          "not_assessed": 27,
+          "original": 55,
+          "planned": 200,
+          "synthetic_without_ai": 71,
+          "wrong_ai": 2,
+          "wrong_original": 8
+        },
+        "channel_priority": {
+          "ai": 51,
+          "correct_ai": 49,
+          "correct_original": 51,
+          "inconclusive": 66,
+          "not_assessed": 24,
+          "original": 59,
+          "planned": 200,
+          "synthetic_without_ai": 71,
+          "wrong_ai": 2,
+          "wrong_original": 8
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 6,
+        "groups_with_added_false_ai": 1,
+        "mono": {
+          "ai": 44,
+          "correct_ai": 43,
+          "correct_original": 47,
+          "inconclusive": 74,
+          "not_assessed": 27,
+          "original": 55,
+          "planned": 200,
+          "synthetic_without_ai": 77,
+          "wrong_ai": 1,
+          "wrong_original": 8
+        }
+      }
+    },
+    "condition": {
+      "kitchen_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 9,
+          "correct_ai": 9,
+          "correct_original": 14,
+          "inconclusive": 9,
+          "not_assessed": 5,
+          "original": 17,
+          "planned": 40,
+          "synthetic_without_ai": 15,
+          "wrong_ai": 0,
+          "wrong_original": 3
+        },
+        "channel_priority": {
+          "ai": 9,
+          "correct_ai": 9,
+          "correct_original": 14,
+          "inconclusive": 9,
+          "not_assessed": 5,
+          "original": 17,
+          "planned": 40,
+          "synthetic_without_ai": 15,
+          "wrong_ai": 0,
+          "wrong_original": 3
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 9,
+          "correct_ai": 9,
+          "correct_original": 14,
+          "inconclusive": 9,
+          "not_assessed": 5,
+          "original": 17,
+          "planned": 40,
+          "synthetic_without_ai": 15,
+          "wrong_ai": 0,
+          "wrong_original": 3
+        }
+      },
+      "kitchen_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 5
+        },
+        "ai_only_rescue": {
+          "ai": 14,
+          "correct_ai": 13,
+          "correct_original": 11,
+          "inconclusive": 8,
+          "not_assessed": 5,
+          "original": 13,
+          "planned": 40,
+          "synthetic_without_ai": 11,
+          "wrong_ai": 1,
+          "wrong_original": 2
+        },
+        "channel_priority": {
+          "ai": 14,
+          "correct_ai": 13,
+          "correct_original": 12,
+          "inconclusive": 8,
+          "not_assessed": 5,
+          "original": 13,
+          "planned": 40,
+          "synthetic_without_ai": 11,
+          "wrong_ai": 1,
+          "wrong_original": 1
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 4,
+        "groups_with_added_false_ai": 1,
+        "mono": {
+          "ai": 9,
+          "correct_ai": 9,
+          "correct_original": 11,
+          "inconclusive": 13,
+          "not_assessed": 5,
+          "original": 13,
+          "planned": 40,
+          "synthetic_without_ai": 15,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        }
+      },
+      "matched_clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "traffic_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 4,
+          "correct_ai": 3,
+          "correct_original": 5,
+          "inconclusive": 23,
+          "not_assessed": 6,
+          "original": 7,
+          "planned": 40,
+          "synthetic_without_ai": 21,
+          "wrong_ai": 1,
+          "wrong_original": 2
+        },
+        "channel_priority": {
+          "ai": 4,
+          "correct_ai": 3,
+          "correct_original": 5,
+          "inconclusive": 23,
+          "not_assessed": 6,
+          "original": 7,
+          "planned": 40,
+          "synthetic_without_ai": 21,
+          "wrong_ai": 1,
+          "wrong_original": 2
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 4,
+          "correct_ai": 3,
+          "correct_original": 5,
+          "inconclusive": 23,
+          "not_assessed": 6,
+          "original": 7,
+          "planned": 40,
+          "synthetic_without_ai": 21,
+          "wrong_ai": 1,
+          "wrong_original": 2
+        }
+      },
+      "traffic_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 2
+        },
+        "ai_only_rescue": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 3,
+          "inconclusive": 23,
+          "not_assessed": 8,
+          "original": 4,
+          "planned": 40,
+          "synthetic_without_ai": 19,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "channel_priority": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 6,
+          "inconclusive": 22,
+          "not_assessed": 5,
+          "original": 8,
+          "planned": 40,
+          "synthetic_without_ai": 19,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 2,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 3,
+          "correct_ai": 3,
+          "correct_original": 3,
+          "inconclusive": 25,
+          "not_assessed": 8,
+          "original": 4,
+          "planned": 40,
+          "synthetic_without_ai": 21,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        }
+      }
+    },
+    "family": {
+      "clone": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 21,
+          "correct_ai": 21,
+          "correct_original": 0,
+          "inconclusive": 9,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 30,
+          "synthetic_without_ai": 9,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 21,
+          "correct_ai": 21,
+          "correct_original": 0,
+          "inconclusive": 9,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 30,
+          "synthetic_without_ai": 9,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 1,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 20,
+          "correct_ai": 20,
+          "correct_original": 0,
+          "inconclusive": 10,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 30,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "expressive": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 12,
+          "correct_ai": 12,
+          "correct_original": 0,
+          "inconclusive": 17,
+          "not_assessed": 25,
+          "original": 6,
+          "planned": 60,
+          "synthetic_without_ai": 48,
+          "wrong_ai": 0,
+          "wrong_original": 6
+        },
+        "channel_priority": {
+          "ai": 12,
+          "correct_ai": 12,
+          "correct_original": 0,
+          "inconclusive": 19,
+          "not_assessed": 22,
+          "original": 7,
+          "planned": 60,
+          "synthetic_without_ai": 48,
+          "wrong_ai": 0,
+          "wrong_original": 7
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 1,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 11,
+          "correct_ai": 11,
+          "correct_original": 0,
+          "inconclusive": 18,
+          "not_assessed": 25,
+          "original": 6,
+          "planned": 60,
+          "synthetic_without_ai": 49,
+          "wrong_ai": 0,
+          "wrong_original": 6
+        }
+      },
+      "genuine": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 0,
+          "correct_original": 47,
+          "inconclusive": 31,
+          "not_assessed": 0,
+          "original": 47,
+          "planned": 80,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 2,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 0,
+          "correct_original": 51,
+          "inconclusive": 27,
+          "not_assessed": 0,
+          "original": 51,
+          "planned": 80,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 2,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 1,
+        "mono": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 47,
+          "inconclusive": 32,
+          "not_assessed": 0,
+          "original": 47,
+          "planned": 80,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        }
+      },
+      "stock": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 4
+        },
+        "ai_only_rescue": {
+          "ai": 16,
+          "correct_ai": 16,
+          "correct_original": 0,
+          "inconclusive": 10,
+          "not_assessed": 2,
+          "original": 2,
+          "planned": 30,
+          "synthetic_without_ai": 14,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "channel_priority": {
+          "ai": 16,
+          "correct_ai": 16,
+          "correct_original": 0,
+          "inconclusive": 11,
+          "not_assessed": 2,
+          "original": 1,
+          "planned": 30,
+          "synthetic_without_ai": 14,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 4,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 12,
+          "correct_ai": 12,
+          "correct_original": 0,
+          "inconclusive": 14,
+          "not_assessed": 2,
+          "original": 2,
+          "planned": 30,
+          "synthetic_without_ai": 18,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        }
+      }
+    },
+    "family_condition": {
+      "clone/kitchen_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 1,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 1,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 1,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "clone/kitchen_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 1,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 1,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "clone/matched_clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "clone/traffic_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "clone/traffic_forced": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "expressive/kitchen_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        }
+      },
+      "expressive/kitchen_forced": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 5,
+          "original": 1,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 5,
+          "original": 1,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 5,
+          "original": 1,
+          "planned": 12,
+          "synthetic_without_ai": 10,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        }
+      },
+      "expressive/matched_clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 7,
+          "correct_ai": 7,
+          "correct_original": 0,
+          "inconclusive": 2,
+          "not_assessed": 3,
+          "original": 0,
+          "planned": 12,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 7,
+          "correct_ai": 7,
+          "correct_original": 0,
+          "inconclusive": 2,
+          "not_assessed": 3,
+          "original": 0,
+          "planned": 12,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 7,
+          "correct_ai": 7,
+          "correct_original": 0,
+          "inconclusive": 2,
+          "not_assessed": 3,
+          "original": 0,
+          "planned": 12,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "expressive/traffic_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "inconclusive": 5,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 12,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "channel_priority": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "inconclusive": 5,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 12,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "inconclusive": 5,
+          "not_assessed": 5,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 12,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        }
+      },
+      "expressive/traffic_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 7,
+          "original": 1,
+          "planned": 12,
+          "synthetic_without_ai": 11,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "channel_priority": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 5,
+          "not_assessed": 4,
+          "original": 2,
+          "planned": 12,
+          "synthetic_without_ai": 11,
+          "wrong_ai": 0,
+          "wrong_original": 2
+        },
+        "connected_source_groups": 12,
+        "groups_with_added_correct_ai": 1,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 7,
+          "original": 1,
+          "planned": 12,
+          "synthetic_without_ai": 12,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        }
+      },
+      "genuine/kitchen_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "genuine/kitchen_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 11,
+          "inconclusive": 4,
+          "not_assessed": 0,
+          "original": 11,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 12,
+          "inconclusive": 3,
+          "not_assessed": 0,
+          "original": 12,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 1,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 11,
+          "inconclusive": 5,
+          "not_assessed": 0,
+          "original": 11,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "genuine/matched_clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 14,
+          "inconclusive": 2,
+          "not_assessed": 0,
+          "original": 14,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "genuine/traffic_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 5,
+          "inconclusive": 10,
+          "not_assessed": 0,
+          "original": 5,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 5,
+          "inconclusive": 10,
+          "not_assessed": 0,
+          "original": 5,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 1,
+          "correct_ai": 0,
+          "correct_original": 5,
+          "inconclusive": 10,
+          "not_assessed": 0,
+          "original": 5,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 1,
+          "wrong_original": 0
+        }
+      },
+      "genuine/traffic_forced": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 3,
+          "inconclusive": 13,
+          "not_assessed": 0,
+          "original": 3,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 6,
+          "inconclusive": 10,
+          "not_assessed": 0,
+          "original": 6,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 8,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 0,
+          "correct_ai": 0,
+          "correct_original": 3,
+          "inconclusive": 13,
+          "not_assessed": 0,
+          "original": 3,
+          "planned": 16,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "stock/kitchen_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 0,
+          "original": 1,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 0,
+          "original": 1,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 0,
+          "original": 1,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        }
+      },
+      "stock/kitchen_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 3
+        },
+        "ai_only_rescue": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 1,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        },
+        "channel_priority": {
+          "ai": 5,
+          "correct_ai": 5,
+          "correct_original": 0,
+          "inconclusive": 1,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 1,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 3,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 0,
+          "original": 1,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 1
+        }
+      },
+      "stock/matched_clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 6,
+          "correct_ai": 6,
+          "correct_original": 0,
+          "inconclusive": 0,
+          "not_assessed": 0,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 0,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "stock/traffic_equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "stock/traffic_forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 2,
+          "correct_ai": 2,
+          "correct_original": 0,
+          "inconclusive": 3,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 4,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 6,
+        "groups_with_added_correct_ai": 1,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 1,
+          "correct_ai": 1,
+          "correct_original": 0,
+          "inconclusive": 4,
+          "not_assessed": 1,
+          "original": 0,
+          "planned": 6,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      }
+    },
+    "treatment": {
+      "clean": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "channel_priority": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 19,
+          "correct_ai": 19,
+          "correct_original": 14,
+          "inconclusive": 4,
+          "not_assessed": 3,
+          "original": 14,
+          "planned": 40,
+          "synthetic_without_ai": 5,
+          "wrong_ai": 0,
+          "wrong_original": 0
+        }
+      },
+      "equal_gain": {
+        "ai_only_changes": {},
+        "ai_only_rescue": {
+          "ai": 13,
+          "correct_ai": 12,
+          "correct_original": 19,
+          "inconclusive": 32,
+          "not_assessed": 11,
+          "original": 24,
+          "planned": 80,
+          "synthetic_without_ai": 36,
+          "wrong_ai": 1,
+          "wrong_original": 5
+        },
+        "channel_priority": {
+          "ai": 13,
+          "correct_ai": 12,
+          "correct_original": 19,
+          "inconclusive": 32,
+          "not_assessed": 11,
+          "original": 24,
+          "planned": 80,
+          "synthetic_without_ai": 36,
+          "wrong_ai": 1,
+          "wrong_original": 5
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 0,
+        "groups_with_added_false_ai": 0,
+        "mono": {
+          "ai": 13,
+          "correct_ai": 12,
+          "correct_original": 19,
+          "inconclusive": 32,
+          "not_assessed": 11,
+          "original": 24,
+          "planned": 80,
+          "synthetic_without_ai": 36,
+          "wrong_ai": 1,
+          "wrong_original": 5
+        }
+      },
+      "forced": {
+        "ai_only_changes": {
+          "inconclusive_to_ai": 7
+        },
+        "ai_only_rescue": {
+          "ai": 19,
+          "correct_ai": 18,
+          "correct_original": 14,
+          "inconclusive": 31,
+          "not_assessed": 13,
+          "original": 17,
+          "planned": 80,
+          "synthetic_without_ai": 30,
+          "wrong_ai": 1,
+          "wrong_original": 3
+        },
+        "channel_priority": {
+          "ai": 19,
+          "correct_ai": 18,
+          "correct_original": 18,
+          "inconclusive": 30,
+          "not_assessed": 10,
+          "original": 21,
+          "planned": 80,
+          "synthetic_without_ai": 30,
+          "wrong_ai": 1,
+          "wrong_original": 3
+        },
+        "connected_source_groups": 32,
+        "groups_with_added_correct_ai": 6,
+        "groups_with_added_false_ai": 1,
+        "mono": {
+          "ai": 12,
+          "correct_ai": 12,
+          "correct_original": 14,
+          "inconclusive": 38,
+          "not_assessed": 13,
+          "original": 17,
+          "planned": 80,
+          "synthetic_without_ai": 36,
+          "wrong_ai": 0,
+          "wrong_original": 3
+        }
+      }
+    }
+  },
+  "role": "holdout",
+  "schema": "chipmunk.audio-native-stereo-holdout-complete/284",
+  "serving_changed": false,
+  "status": "complete",
+  "vad_frame_forwards": 56400
+}

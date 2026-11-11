@@ -1,0 +1,93 @@
+{
+  "schema": "chipmunk.grid-mouth-observer-freeze/157",
+  "code_sha256": {
+    "backend/scripts/grid_mouth_observer_v157.py": "c520a4a3bb14ca31301813633e00b696c483bbfc857a58ccd1efa02de74d3b39",
+    "backend/tests/test_grid_mouth_observer_v157.py": "08b3cdd6cb671b4efd233f3da204a8b82195f08999782386843d1f1f15628677",
+    "docs/grid-mouth-observer-v157-method.md": "1c1ded163d9d9e0f0017dab67786fd21d4fc5257f41b6a9872b1e1ab07545a95",
+    "docs/grid-achieved-motion-validation-design.md": "1afdcaab143a9e31360d3e591396ae12b7672bc517bd85da3a1bc7e5a6975a5e",
+    "backend/scripts/grid_native_clips_v149.py": "ba356f7655bd47facd9107cd86e2028513bf6f7ed5862e3a9d11aacd8ed0e5cc",
+    "backend/scripts/grid_portrait_geometry_v144.py": "c6937a86d8db9105232d762d1e6cbce28536d673030f139b0f7e58c3b0da8fff",
+    "backend/scripts/grid_transfer_plan_v143.py": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917"
+  },
+  "transfer_plan_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "private_transfer_plan_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+  "construction_freeze_sha256": "6677444fd0094d5e3ebd96e1b9dc0172103dc1f4ecf52862ab469a185ade234c",
+  "construction_complete_sha256": "753964b09e20f37799d3175e30892c0175a8f3cfa26f04fd4d3f8ad9c0194975",
+  "original_observer_contract_sha256": "e155dcb4027e0c019c61bc4c6c7bac0380062d54c36272bd98132cc0a9d4fc4d",
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "observer_runtime": {
+    "runtime_freeze_sha256": "6bb5f01b18f46050bf33513dfaf107f85d12cf572ce6392ee6e6c79f4808cbd8",
+    "runtime_result_sha256": "447ca70a549be7eacdfb569ab4e4472545c3b1b2c4af2f01d5d5e93e02378395",
+    "runtime_profile_sha256": "a05d03d6566857f028abb62edc493c16cd219caeaf66ec5542eca0bf2e103e0c",
+    "installed_manifest_sha256": "824e75918eb226eb46129b525f1a6ad0d3840fd77c1bdb789df99ea5762f8971",
+    "asset_catalogue_sha256": "f1448f43338ba4a8e47145b0ab56f8f8e5a0b2546a48dbdc6f5ea994da7766a3",
+    "source_license_sha256": "75fcad03ad21369e9eeb369b97b73fc0bba7f7f3243d0a661f968bd1478207bb",
+    "face_task_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "bundled_face_model_cards": {
+      "blazeface-card.pdf": {
+        "sha256": "cd335c06fc0de7807cd815a0777a697932598bcdb28fa98adaaabf847485f758",
+        "reviewed_license": "Apache-2.0"
+      },
+      "facemesh-card.pdf": {
+        "sha256": "c6add060f4ebfb37b2690136b6c711c7e5fcb7038baa2649ae3338b83979565a",
+        "reviewed_license": "Apache-2.0"
+      },
+      "blendshape-card.pdf": {
+        "sha256": "c8e9cf60a39998f4b341740623917590e050d1c97004e2de4568d84e026445ae",
+        "reviewed_license": "Apache-2.0"
+      }
+    }
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2"
+  },
+  "observer_settings": {
+    "running_mode": "IMAGE",
+    "delegate": "CPU",
+    "num_faces": 2,
+    "min_face_detection_confidence": 0.5,
+    "min_face_presence_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "output_face_blendshapes": false,
+    "output_facial_transformation_matrixes": false
+  },
+  "pilot_clips": 16,
+  "cases_per_pilot": 11,
+  "reference_frames_half_open": [
+    15,
+    59
+  ],
+  "variant_frames_half_open": [
+    25,
+    49
+  ],
+  "fixed_original_repeat_frame": 27,
+  "planned_observations_per_pilot": 285,
+  "landmark_indices": [
+    1,
+    13,
+    14,
+    33,
+    78,
+    82,
+    87,
+    133,
+    263,
+    308,
+    312,
+    317,
+    362
+  ],
+  "eye_patch_side_px": 7,
+  "scope": "Fresh finished native picture geometry under the qualified observer. Independent trajectory interpretation follows in a separate context."
+}

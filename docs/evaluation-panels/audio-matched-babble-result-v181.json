@@ -1,0 +1,43 @@
+{
+  "babble_pool_outcomes": {
+    "constructed": 4
+  },
+  "case_outcomes": {
+    "constructed": 96
+  },
+  "condition_outcomes": {
+    "clean": {
+      "constructed": 32
+    },
+    "snr_0db": {
+      "constructed": 32
+    },
+    "snr_plus5db": {
+      "constructed": 32
+    }
+  },
+  "freeze_sha256": "4c49d0f673cdae6cc6769607c880f0d39f28f1538fa04c182a5d1637407b9f38",
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "new_neural_calls": 0,
+  "planned_cases": 96,
+  "private_case_journal_sha256": "f6d440157b290042eddbdf4d878b401a947eadd799a35f99e8ff7ac4cc431ffd",
+  "private_plan_sha256": "8832372e8884c03e8043424aebd3694df3346e0910e5d64bd4cc04eae39a1bb3",
+  "private_source_receipt_sha256": "7fccd8a0123cdeb0a2a0b611b4c64a905dbc82bc5c4d558ac199da64461d75e9",
+  "resource_profile_sha256": "6d3cb50b90ade7573c23b9ff444329de2448bbed8c993f6ccf8e5ca836182402",
+  "role": "development",
+  "schema": "chipmunk.audio-matched-babble-result/181",
+  "source_outcomes_by_kind": {
+    "babble": {
+      "qualified": 24
+    },
+    "genuine": {
+      "qualified": 16
+    },
+    "synthetic": {
+      "qualified": 16
+    }
+  },
+  "status": "complete",
+  "worker_duration_s": 5.489335541962646
+}

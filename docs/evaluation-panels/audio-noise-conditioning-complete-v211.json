@@ -1,0 +1,459 @@
+{
+  "schema": "chipmunk.audio-noise-conditioning-result/211",
+  "status": "complete",
+  "freeze_sha256": "4becd5c067b273ce964e9c248b513f6808500dd5d43cb8fbe1eff2eef41a8253",
+  "profile_sha256": [
+    "df650d0fd0fcb9a91a341c5746ccba39ddd022d5f4abf8a23b09fdcbd5a18904",
+    "b89065be9ceef0fbb57705d6b010523f5c1cc1d4a02f2086a5cf8bd7d7d7ff5a",
+    "6355c99709ba48400971b932a575678ead013deca516dea12397a0e1f543e01c",
+    "d1537ba738583ce17b575c6251cb4223ec2683de6efca34d2ad2c7895010954b"
+  ],
+  "private_journal_sha256": [
+    "1fe18f4e5e2449b9b9db0b006f34566ebd7ece61064c2b08aa4a32004cf6aac5",
+    "f6f9c606b3501512da0d7bfd3a354507503560d935b9aaf29aac848f3cd947a3",
+    "78f108117a2f7d6b39777c62f790da7f64a76bfd1328fcaee06257faca09b54f",
+    "2dda968b4586734b873e8f18a111843d4b79db951578908cc14dbf86c69d7596"
+  ],
+  "new_neural_calls": 177,
+  "post_hoc_simulation_only": true,
+  "holdout_scored": false,
+  "defaults_changed": false,
+  "results": {
+    "matched_clean": {
+      "raw_rank_on_common_assessed": {
+        "recorded": {
+          "synthetic_sources": 24,
+          "genuine_sources": 19,
+          "wins": 455,
+          "ties": 0,
+          "losses": 1,
+          "auc": 0.9978070175438597
+        },
+        "conditioned": {
+          "synthetic_sources": 24,
+          "genuine_sources": 19,
+          "wins": 452,
+          "ties": 0,
+          "losses": 4,
+          "auc": 0.9912280701754386
+        }
+      },
+      "by_origin": {
+        "genuine": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 19,
+            "preparation_unavailable": 5
+          },
+          "conditioned_assessed": 19,
+          "conditioned_unavailable_reasons": {
+            "preparation_unavailable": 5
+          },
+          "recorded_directions": {
+            "ai": 0,
+            "original": 19,
+            "inconclusive": 0,
+            "unavailable": 5
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 0,
+            "original": 19,
+            "inconclusive": 0,
+            "unavailable": 5
+          },
+          "diagnostic_initial_direction_transitions": {
+            "original->original": 19
+          },
+          "raw_response_movement": {
+            "up": 1,
+            "down": 18,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 0,
+            "original": 19,
+            "inconclusive": 0,
+            "unavailable": 5
+          },
+          "post_hoc_new_false_ai": 0,
+          "recorded_to_rescue_transitions": {
+            "original->original": 19,
+            "unavailable->unavailable": 5
+          }
+        },
+        "synthetic": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 24
+          },
+          "conditioned_assessed": 24,
+          "conditioned_unavailable_reasons": {},
+          "recorded_directions": {
+            "ai": 21,
+            "original": 2,
+            "inconclusive": 1,
+            "unavailable": 0
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 21,
+            "original": 3,
+            "inconclusive": 0,
+            "unavailable": 0
+          },
+          "diagnostic_initial_direction_transitions": {
+            "ai->ai": 21,
+            "original->original": 2,
+            "inconclusive->original": 1
+          },
+          "raw_response_movement": {
+            "up": 1,
+            "down": 23,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 21,
+            "original": 2,
+            "inconclusive": 1,
+            "unavailable": 0
+          },
+          "post_hoc_ai_recoveries": 0,
+          "recorded_to_rescue_transitions": {
+            "ai->ai": 21,
+            "original->original": 2,
+            "inconclusive->inconclusive": 1
+          }
+        }
+      }
+    },
+    "washing_room_0db": {
+      "raw_rank_on_common_assessed": {
+        "recorded": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 432,
+          "ties": 0,
+          "losses": 0,
+          "auc": 1.0
+        },
+        "conditioned": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 430,
+          "ties": 0,
+          "losses": 2,
+          "auc": 0.9953703703703703
+        }
+      },
+      "by_origin": {
+        "genuine": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 18,
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "conditioned_assessed": 18,
+          "conditioned_unavailable_reasons": {
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "recorded_directions": {
+            "ai": 0,
+            "original": 18,
+            "inconclusive": 0,
+            "unavailable": 6
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 0,
+            "original": 18,
+            "inconclusive": 0,
+            "unavailable": 6
+          },
+          "diagnostic_initial_direction_transitions": {
+            "original->original": 18
+          },
+          "raw_response_movement": {
+            "up": 1,
+            "down": 17,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 0,
+            "original": 18,
+            "inconclusive": 0,
+            "unavailable": 6
+          },
+          "post_hoc_new_false_ai": 0,
+          "recorded_to_rescue_transitions": {
+            "original->original": 18,
+            "unavailable->unavailable": 6
+          }
+        },
+        "synthetic": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 24
+          },
+          "conditioned_assessed": 24,
+          "conditioned_unavailable_reasons": {},
+          "recorded_directions": {
+            "ai": 15,
+            "original": 0,
+            "inconclusive": 9,
+            "unavailable": 0
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 14,
+            "original": 4,
+            "inconclusive": 6,
+            "unavailable": 0
+          },
+          "diagnostic_initial_direction_transitions": {
+            "ai->inconclusive": 1,
+            "inconclusive->inconclusive": 5,
+            "ai->ai": 14,
+            "inconclusive->original": 4
+          },
+          "raw_response_movement": {
+            "up": 0,
+            "down": 24,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 15,
+            "original": 0,
+            "inconclusive": 9,
+            "unavailable": 0
+          },
+          "post_hoc_ai_recoveries": 0,
+          "recorded_to_rescue_transitions": {
+            "ai->ai": 15,
+            "inconclusive->inconclusive": 9
+          }
+        }
+      }
+    },
+    "river_0db": {
+      "raw_rank_on_common_assessed": {
+        "recorded": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 362,
+          "ties": 0,
+          "losses": 70,
+          "auc": 0.8379629629629629
+        },
+        "conditioned": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 330,
+          "ties": 0,
+          "losses": 102,
+          "auc": 0.7638888888888888
+        }
+      },
+      "by_origin": {
+        "genuine": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 18,
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "conditioned_assessed": 18,
+          "conditioned_unavailable_reasons": {
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "recorded_directions": {
+            "ai": 0,
+            "original": 10,
+            "inconclusive": 8,
+            "unavailable": 6
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 0,
+            "original": 11,
+            "inconclusive": 7,
+            "unavailable": 6
+          },
+          "diagnostic_initial_direction_transitions": {
+            "original->original": 10,
+            "inconclusive->inconclusive": 7,
+            "inconclusive->original": 1
+          },
+          "raw_response_movement": {
+            "up": 12,
+            "down": 6,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 0,
+            "original": 10,
+            "inconclusive": 8,
+            "unavailable": 6
+          },
+          "post_hoc_new_false_ai": 0,
+          "recorded_to_rescue_transitions": {
+            "original->original": 10,
+            "unavailable->unavailable": 6,
+            "inconclusive->inconclusive": 8
+          }
+        },
+        "synthetic": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 24
+          },
+          "conditioned_assessed": 24,
+          "conditioned_unavailable_reasons": {},
+          "recorded_directions": {
+            "ai": 0,
+            "original": 2,
+            "inconclusive": 22,
+            "unavailable": 0
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 0,
+            "original": 5,
+            "inconclusive": 19,
+            "unavailable": 0
+          },
+          "diagnostic_initial_direction_transitions": {
+            "inconclusive->inconclusive": 19,
+            "inconclusive->original": 2,
+            "original->original": 3
+          },
+          "raw_response_movement": {
+            "up": 7,
+            "down": 17,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 0,
+            "original": 2,
+            "inconclusive": 22,
+            "unavailable": 0
+          },
+          "post_hoc_ai_recoveries": 0,
+          "recorded_to_rescue_transitions": {
+            "inconclusive->inconclusive": 22,
+            "original->original": 2
+          }
+        }
+      }
+    },
+    "river_5db": {
+      "raw_rank_on_common_assessed": {
+        "recorded": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 406,
+          "ties": 0,
+          "losses": 26,
+          "auc": 0.9398148148148148
+        },
+        "conditioned": {
+          "synthetic_sources": 24,
+          "genuine_sources": 18,
+          "wins": 388,
+          "ties": 0,
+          "losses": 44,
+          "auc": 0.8981481481481481
+        }
+      },
+      "by_origin": {
+        "genuine": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 18,
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "conditioned_assessed": 18,
+          "conditioned_unavailable_reasons": {
+            "preparation_unavailable": 5,
+            "not_applicable": 1
+          },
+          "recorded_directions": {
+            "ai": 0,
+            "original": 15,
+            "inconclusive": 3,
+            "unavailable": 6
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 0,
+            "original": 15,
+            "inconclusive": 3,
+            "unavailable": 6
+          },
+          "diagnostic_initial_direction_transitions": {
+            "original->original": 15,
+            "inconclusive->inconclusive": 3
+          },
+          "raw_response_movement": {
+            "up": 5,
+            "down": 13,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 0,
+            "original": 15,
+            "inconclusive": 3,
+            "unavailable": 6
+          },
+          "post_hoc_new_false_ai": 0,
+          "recorded_to_rescue_transitions": {
+            "original->original": 15,
+            "unavailable->unavailable": 6,
+            "inconclusive->inconclusive": 3
+          }
+        },
+        "synthetic": {
+          "planned": 24,
+          "original_route_outcomes": {
+            "ok": 24
+          },
+          "conditioned_assessed": 24,
+          "conditioned_unavailable_reasons": {},
+          "recorded_directions": {
+            "ai": 4,
+            "original": 2,
+            "inconclusive": 18,
+            "unavailable": 0
+          },
+          "conditioned_diagnostic_directions": {
+            "ai": 3,
+            "original": 6,
+            "inconclusive": 15,
+            "unavailable": 0
+          },
+          "diagnostic_initial_direction_transitions": {
+            "inconclusive->inconclusive": 14,
+            "inconclusive->original": 3,
+            "ai->ai": 3,
+            "ai->inconclusive": 1,
+            "original->original": 3
+          },
+          "raw_response_movement": {
+            "up": 4,
+            "down": 20,
+            "tie": 0
+          },
+          "post_hoc_one_way_ai_rescue_directions": {
+            "ai": 4,
+            "original": 2,
+            "inconclusive": 18,
+            "unavailable": 0
+          },
+          "post_hoc_ai_recoveries": 0,
+          "recorded_to_rescue_transitions": {
+            "inconclusive->inconclusive": 18,
+            "ai->ai": 4,
+            "original->original": 2
+          }
+        }
+      }
+    }
+  }
+}

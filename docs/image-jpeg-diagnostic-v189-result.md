@@ -8,6 +8,12 @@ pixel grid. A useful location covered at least half the known edited pixels
 and had at least 0.30 intersection over union with the edit.
 [Protocol](image-jpeg-diagnostic-v189-protocol.md) · [Sealed aggregate](evaluation-panels/image-jpeg-diagnostic-complete-v189.json)
 
+A separate local arithmetic review verified 74 phase receipts and 1,180
+producer row commitments. It reconstructed the paired statistics from all
+590 recorded mask measurements and matched the published aggregate. The
+review used the saved measurements and their hashes.
+[Review method](image-jpeg-aggregate-review-v207-method.md) · [Verified receipt](evaluation-panels/image-jpeg-aggregate-review-complete-v207.json)
+
 | JPEG quality | Check | Useful edit locations | Unedited flags | Tone-edit flags | Blur flags | Copy-move flags |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | 75 | Current | 2 | 1 | 5 | 6 | 8 |

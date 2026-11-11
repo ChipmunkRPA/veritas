@@ -1,0 +1,67 @@
+{
+  "schema": "chipmunk.audio-noise-conditioning-freeze/211",
+  "code_sha256": {
+    "backend/scripts/audio_noise_conditioning_v211.py": "faf2e43a02841d001b171e8d13f4cac1a41d8c9241655c4fd8aa0fe8d147fe30",
+    "backend/tests/test_audio_noise_conditioning_v211.py": "d0ec91a82882c903bfc0e2dc93cb6ce0e7d320fad191293beabcbcd0a772dca0",
+    "docs/audio-noise-conditioning-v211-method.md": "6aa7ab4c78c9e1622a796efd5604020c9bff3f6f4fffee52e931ec2d464ca453",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "v208_freeze_sha256": "80a70de6a73913c6078bbbfc88afac06dbc96683c7f62e5f7070a4fa82b13948",
+  "v208_result_sha256": "0ad060c925f985ae13e2a93f3d44f28d5cdaad64488bdc68087e5c074cef160b",
+  "v204_preparation_sha256": "15ac3a0efd9b7109e729bcd83dfc5c65cdfd4373eddef250e7ab480cf059e6ad",
+  "selected_v208_receipts": {
+    "matched_clean": {
+      "private_journal_sha256": "db7caadb45acb53190029d8b92497ff9f03e94a48ea7170ca54c5b3dcfcf2407",
+      "profile_sha256": "fb89755d97b181eff692e30dd8b5b7530e63048b1a3ff230ff0a4bc51bfcbf4d"
+    },
+    "washing_room_0db": {
+      "private_journal_sha256": "ff7166b7a26d6e283791223e1835fd1616f55eb008536d0669a43c7ef6ab0eb1",
+      "profile_sha256": "a4ebe602a684834ca350134ee6f5c3bc4355c09080d036d6d54c451de0a381a8"
+    },
+    "river_0db": {
+      "private_journal_sha256": "fae14598eb1303c43444fa6bd3969526ad0a40025de744a49d74dd63e747f897",
+      "profile_sha256": "2e86e56b2c40b084c2535605425d9bfd52c99f62d1237008883817b76120c246"
+    },
+    "river_5db": {
+      "private_journal_sha256": "54f1837811bd348e0f29a6fbb5c4698b743804d86260f766a522575ff14cd073",
+      "profile_sha256": "485afdbe950d66cef93e23934126fdae7dfba20c90b586c2ea98fa5674a69a5a"
+    }
+  },
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "numpy_version": "2.2.6",
+  "method": {
+    "sample_rate": 16000,
+    "sample_bounds": [
+      40000,
+      64000
+    ],
+    "fft": 512,
+    "hop": 128,
+    "window": "periodic_hann",
+    "boundary": "centered_reflection_with_right_hop_completion",
+    "noise_quantile": 0.2,
+    "noise_quantile_interpolation": "linear",
+    "minimum_gain": 0.5,
+    "power_epsilon": 1e-12,
+    "silence_rms": 1e-06,
+    "phase": "unmodified",
+    "output_dtype": "float32",
+    "post_normalization": false,
+    "post_clipping": false,
+    "gate_scope": "unchanged_recorded_v208",
+    "new_calibration": false
+  },
+  "conditions": [
+    "matched_clean",
+    "washing_room_0db",
+    "river_0db",
+    "river_5db"
+  ],
+  "planned_cases": 192,
+  "new_fitting_permitted": false,
+  "holdout_access_permitted": false
+}

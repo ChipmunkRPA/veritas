@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.audio-alania-fresh-freeze/213",
+  "publisher_revision": "277dfc8a2322014099ff72688bcaee12480c4605",
+  "shard_sha256": "72820d81a4080d2b5ddf29eb61e1d2518275537ce9df37886df30d5feb718949",
+  "publisher_records_sha256": {
+    "revision.json": "314a2f1582bdcf511e23ed172069a61ff0f5e292b79e0e947c9e33aded2f99d2",
+    "tree-page.json": "133f2fc57632ad0cdcc5fa7b4668e4861434d2879c9d514454eaa5da9d3c1b4a",
+    "README.md": "d2c0eba51cf31c27ad6e7b49b7e0b03d665b1f944cd121afe94f91c4ec7a21ad",
+    "LICENSE.md": "9a68e1c143494bf15af7692d6adb5e43b45b91e1829ac5b62f0e5511f1b62d18"
+  },
+  "prior_roster_freeze_sha256": "5d3adf8b1f0eeccfd2ffa738bf68a13baf1a2f0e87a539f8edd0f466d4aae13c",
+  "prior_preparation_sha256": "947afa81936d53c335869fe38402913e827d62d6e7480ab60da2688499a00169",
+  "prior_preparation_profile_sha256": "01d9968c0d42a69d824af273883e333dde874998389eded71db56447f6b5a6cb",
+  "code_sha256": {
+    "backend/scripts/audio_alania_fresh_v213.py": "ad336a3ea9da2e5b63cc5b268db1c58965ef79fa39cb5e46e530600af4b22351",
+    "backend/tests/test_audio_alania_fresh_v213.py": "c3b4d3552005a8c34c4de8bde5fed8184c6c1cd057f50f2088c41bfdf5392ffc",
+    "docs/audio-alania-fresh-v213-method.md": "5a5d661f5f2241b411444bbcbf88dfea7fe38776cf8c602ca1373be662c9e403",
+    "backend/scripts/audio_alania_roster_v178.py": "ec1d59f6f967f0f1d9ce84218ec1dbbc4fa295a348759aefedfff3595d5e3d25",
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074"
+  },
+  "decoder_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "pyarrow_version": "26.0.0",
+  "eligible_rows": 224,
+  "eligible_voice_groups": 96,
+  "eligible_text_documents": 224,
+  "excluded_previous_slots": 24,
+  "planned_cases": 16,
+  "planned_by_render_mode": {
+    "reference": 15,
+    "reference+instruction": 1
+  },
+  "language": "tr",
+  "license": "CC-BY-4.0",
+  "metadata_duration_bounds_seconds": [
+    3,
+    4
+  ],
+  "model_calls_permitted": false,
+  "private_roster_sha256": "5c0559f9e5b95483f125e44e2944755d5b08b859ff39de6b4a2029ca18c760c3"
+}

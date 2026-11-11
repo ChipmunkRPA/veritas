@@ -1,0 +1,86 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-genuine-freeze/212",
+  "publisher_index_url": "https://repository.voxforge1.org/downloads/tr/Trunk/Audio/Original/48kHz_16bit/",
+  "publisher_index_sha256": "b652b9add0ec4115d31a68610784ca4b1b3ac8dd1e9dda53f6a0ef74d7ddf854",
+  "prior_metadata_sha256": {
+    "v188_public_freeze": "bb09d2b66f49fb0296d9399c621fd560601b94db9d0e5e24464738ecf76cb18b",
+    "v188_private_plan": "88e29f4604a8da21470e1a43126664466a8dd33ced29b507a1af135cbeb4c269",
+    "v192_public_freeze": "4f080d3cc34612625b07ced7d942bb20bbd31a37ae812c29b1b294fdf3965980",
+    "v192_private_cases": "4c41fd262ad2d7abd637b8cdf193d6520fa33c54f745fd09a697af4deed708ed",
+    "v192_private_result": "3116d729dce7530ef092c4272cd87f44d821b6845831868d65e8faef7555968b",
+    "v199_public_freeze": "a91ce4a16280dbd477ec1dddc1271c7db5a1177c5cec45e132911d45778bbe8e",
+    "v199_public_result": "a80e34ced465d35cef960cf19f6d3c8a0c941030fadf4dc0b200192eed7cfc60",
+    "v199_private_plan": "3014dee26a0eda1b754133badb00a7947266d58006f15be7d370970544b98da7",
+    "v199_private_cases": "369b7ecf0f0061dd6878a99ad75f432d8dca058ef3e5f0fad6c67ccf994671c0",
+    "v199_private_result": "468c649ae1df6cea0fa6326b1480116dc9eb0854c9fa674b55c6766c58d2f4eb",
+    "v199_resource_profile": "7857dcab1dfea6ebab0a02790f8d6201193f86b9cc5746290f2644a4142d54fa",
+    "v58_private_history": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1"
+  },
+  "historical_identity_catalogue_sha256": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1",
+  "code_sha256": {
+    "backend/scripts/audio_voxforge_tr_genuine_v199.py": "207675576920ae678fd369c8f939663984cf4a32ae752192a5aeefc1e5697a67",
+    "backend/tests/test_audio_voxforge_tr_genuine_v199.py": "2bd4df7e8c2830257ee3e3d8b895ab5cfeae547d6e62437e024758c9f678562a",
+    "docs/audio-voxforge-tr-genuine-v199-method.md": "e5ba09e0ca8af2bcb47861a3f4e1731e43421907722309cdc640d874e81d1666",
+    "backend/scripts/audio_voxforge_tr_genuine_v188.py": "ee24cf0474bc61ede2bd0f1f6e7078e4d3a0870ed934a59a2b2d0757b47e0b59",
+    "backend/scripts/audio_voxforge_tr_genuine_v192.py": "7362fc3d2f5a164b46f62b7750240679962734a6f65eae6da4487213bba210ee",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/audio_history_v58.py": "5d95c44098b7e1ecf663f99f7b7ad5d9185d55e5629a64dac8f28bdf2c5d557c",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_voxforge_tr_genuine_v212.py": "dc69bf432b28cd26a2c2aae4017dad26a201aac62f59119ef33207d2ba473683",
+    "backend/tests/test_audio_voxforge_tr_genuine_v212.py": "97c06aa95c38cd94a4f5611da4e3387805e762b854a8c1165361100b50f149f2",
+    "docs/audio-voxforge-tr-genuine-v212-method.md": "6d6526a5530e2eca0247138d208a23557e41b4900314773d1e42825264c7d7bf"
+  },
+  "decoder_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "excluded_prior_v188_named_groups": 12,
+  "recorded_v58_voxforge_voice_keys": 0,
+  "named_groups_after_exclusions": 23,
+  "planned_cases": 16,
+  "planned_session_archives": 22,
+  "maximum_sessions_per_group": 2,
+  "maximum_clips_per_session": 24,
+  "maximum_archive_bytes": 8000000,
+  "maximum_unpacked_tar_bytes": 24000000,
+  "maximum_member_bytes": 2000000,
+  "native_rate_bounds": [
+    8000,
+    192000
+  ],
+  "maximum_native_duration_seconds": 20,
+  "production_sample_rate": 16000,
+  "prepared_sample_bounds": [
+    48000,
+    64000
+  ],
+  "crop_frame_samples": 320,
+  "crop_frame_counts_in_preference_order": [
+    175,
+    170,
+    180,
+    165,
+    185,
+    160,
+    190,
+    155,
+    195,
+    150,
+    200
+  ],
+  "activity_threshold_floor_dbfs": -48,
+  "activity_threshold_db_below_p90_frame_rms": 25,
+  "minimum_active_frame_percent": 60,
+  "quiet_frames_on_each_cut_side": 2,
+  "language": "tr",
+  "origin": "genuine",
+  "model_calls_permitted": false,
+  "holdout_access_permitted": false,
+  "excluded_prior_v199_named_groups": 24,
+  "excluded_prior_qualified_groups": {
+    "v192": 3,
+    "v199": 19
+  },
+  "private_plan_sha256": "3457be1670328e76c6cc6f567a2f43f4746bdbd969f769cefc33c79b3bf75c5e"
+}

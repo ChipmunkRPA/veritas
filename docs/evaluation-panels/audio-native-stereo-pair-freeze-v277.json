@@ -1,0 +1,102 @@
+{
+  "code_sha256": {
+    "backend/scripts/audio_native_stereo_pairs_v277.py": "f8b402bda87cea3d22849d1ac74f0eb293866181a7f2818a0db59ca03df3ee2d",
+    "backend/scripts/audio_shared_noise_v216.py": "7ab68ffff976588908af29b4871e5600fa1dfa88b8e6e819f7ca8e021612086a",
+    "backend/scripts/audio_short_edit_cases_v172.py": "b23a07cda0825275efab4bcebae20a4767657017f5261a35ba9934d5f302cf79",
+    "backend/scripts/audio_short_edit_materialize_v169c.py": "09f18f8d49c0f56f2f20c5ec9326a35adfe004837eb95ca7c8bd101bca6ac881",
+    "backend/scripts/audio_voxforge_tr_transfer_v201.py": "bf71c5544733404b8bb30424e64c18ee4c6715b841142611d080f0d50e49b63e",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/tests/test_audio_native_stereo_pairs_v277.py": "640a24edccfbffea2c54b1e5fdcc3ae31e355cf241550e976baaec26ca5bbac3",
+    "docs/audio-native-stereo-pairs-v277-method.md": "1ecf805d6ffaf810223a33f4d99fd1c362b43b87195b69d5d0c931cac1c25619"
+  },
+  "codec_binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "common_absolute_channel_sum_limit": 32760,
+  "conditions": {
+    "development": [
+      "matched_clean",
+      "river_equal_gain",
+      "river_forced",
+      "washing_room_equal_gain",
+      "washing_room_forced"
+    ],
+    "holdout": [
+      "matched_clean",
+      "kitchen_equal_gain",
+      "kitchen_forced",
+      "traffic_equal_gain",
+      "traffic_forced"
+    ]
+  },
+  "equal_gain_joint_snr_db": -5,
+  "forced_quieter_and_noisier_snr_db": [
+    5,
+    -10
+  ],
+  "max_quantized_snr_error_db": 0.1,
+  "model_calls": 0,
+  "numpy_version": "2.2.6",
+  "preflight_sha256": "118c2f4cea21d4481ca5280acb4e1eeb0c7fa17e362b72b8bafde133af5ad968",
+  "roles": {
+    "development": {
+      "planned_cases": 185,
+      "planned_foregrounds": 37,
+      "private_plan_sha256": "2e90f6a3cd25b4f74ec903dac39337dce6720db4565e95c16f1ab5cb3f086586",
+      "v172_private_plan_sha256": "803cf0e7adee70ab68d7f7b9501538e744b1ed92c2a9d56766567aa5cd504eaa",
+      "v172_private_source_manifest_sha256": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8"
+    },
+    "holdout": {
+      "planned_cases": 200,
+      "planned_foregrounds": 40,
+      "private_plan_sha256": "c1fdf3a948853891669c4dfbb0dd59f252cd91c5c0c5d6280cc4d865df041548",
+      "v172_private_plan_sha256": "c6dc327332e96089e0f1e279833588e2b8362cf68493aa3ac3a9a13690f19339",
+      "v172_private_source_manifest_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+    }
+  },
+  "schema": "chipmunk.audio-native-stereo-pair-freeze/277",
+  "source_freeze_sha256": "e911911a33dbc9419ddc7fc12cccd21cc33e13f2c96d415796c9fb8800eb6c3c",
+  "v274_window_plan": {
+    "assignment": "Zero-based v169c manifest order within each origin family and role; ordinal modulo 16 selects the window and ordinal modulo 2 selects the quieter channel for the future forced-imbalance condition.",
+    "foreground_slots_for_future_composition": {
+      "development": 37,
+      "holdout": 40
+    },
+    "members": [
+      "ch02.wav",
+      "ch16.wav"
+    ],
+    "roles": {
+      "development": {
+        "river": "NRIVER_16k.zip",
+        "washing_room": "DWASHING_16k.zip"
+      },
+      "holdout": {
+        "kitchen": "DKITCHEN_16k.zip",
+        "traffic": "STRAFFIC_16k.zip"
+      }
+    },
+    "sample_rate_hz": 16000,
+    "window_samples": 48000,
+    "window_starts_samples": [
+      3200000,
+      3296000,
+      3392000,
+      3488000,
+      3584000,
+      3680000,
+      3776000,
+      3872000,
+      3968000,
+      4064000,
+      4160000,
+      4256000,
+      4352000,
+      4448000,
+      4544000,
+      4640000
+    ]
+  }
+}

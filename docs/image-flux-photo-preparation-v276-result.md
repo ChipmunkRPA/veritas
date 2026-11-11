@@ -1,0 +1,5 @@
+# Exact edit footprints on two licensed photos
+
+Both frozen local reference edits produced valid source-coordinate composites. The interior edit changed **4,095 of 4,096** declared pixels. The edge edit changed **4,096 of 4,096**. The raw generator outputs changed more than 61,000 pixels outside the selection in each case. The final composites preserved every source pixel outside the mask. [Frozen method](image-flux-photo-preparation-v276-method.md) · [Exact aggregate](evaluation-panels/image-flux-photo-preparation-complete-v276.json)
+
+A separate readback verified all **22 PNGs** and reproduced the change masks for the two composites and all six ordinary controls. The controls use the same source geometry and boundary for tone, blur and copy changes. The sources are two distinct CC BY 2.0 groups selected before inference from the audited cache. The audit checks recorded exposure and retains attribution locally. These two cases establish exact construction geometry for a detector comparison. Semantic prompt success and detection performance remain unmeasured. [Authored geometry check](image-flux-reference-edit-v271-result.md)

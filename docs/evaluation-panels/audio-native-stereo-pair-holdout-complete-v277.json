@@ -1,0 +1,32 @@
+{
+  "by_condition": {
+    "kitchen_equal_gain": {
+      "prepared": 40
+    },
+    "kitchen_forced": {
+      "prepared": 40
+    },
+    "matched_clean": {
+      "prepared": 40
+    },
+    "traffic_equal_gain": {
+      "prepared": 40
+    },
+    "traffic_forced": {
+      "prepared": 40
+    }
+  },
+  "case_outcomes": {
+    "prepared": 200
+  },
+  "freeze_sha256": "6a31cdf0b033330cec0d317f6c4d3dd99381f2f2d00eab85731535585ead9f0e",
+  "holdout_scored": false,
+  "new_neural_calls": 0,
+  "planned_cases": 200,
+  "private_cases_sha256": "60aad305c2994160cdac4bcdbe02a047cab10a2d27d7287970c77c6776f0c4ba",
+  "raw_case_replay_count": 200,
+  "resource_profile_sha256": "7e88a13db4a81b3b7e07bcb881ed52c4462f27d8233f5bd069e2f32b5ac139d7",
+  "role": "holdout",
+  "schema": "chipmunk.audio-native-stereo-pair-result/277",
+  "status": "complete"
+}

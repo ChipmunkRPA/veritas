@@ -38,12 +38,19 @@ reports localization, coverage and raw position ranking separately.
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
 generator output is composed into a source region. A separate verifier checks
-the pinned bundle without running the model or accessing project photos.
+the pinned bundle without running the model or accessing project photos. The
+[licensed photo pilot](image-flux-photo-preparation-v276-result.md) carries the
+same geometry checks into two exact edits with six matched ordinary controls.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
 same tool can also verify the four publisher background archives and the
-fixed development and holdout windows for a future noisy-speech comparison.
+fixed development and holdout windows. The [paired stereo benchmark](audio-native-stereo-pairs-v277-result.md)
+records construction and exact readback of all 385 planned files.
+
+The [video brightness readout](video-luma-context-v278-result.md) uses the
+original selected appearance flags, known edit controls and exact native
+frame bindings to document where a luma change extended beyond the face.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

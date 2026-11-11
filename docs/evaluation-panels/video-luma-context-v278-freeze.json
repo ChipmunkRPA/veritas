@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.video-luma-context-freeze/278",
+  "saved_context_sha256": "7402d598c251158a6d4ec4b42b5e6b059f739e62acf8c46d015011aceab66021",
+  "code_sha256": {
+    "backend/scripts/video_luma_context_v278.py": "447c3333d62eb51852216463e8dfdd7f3a6566ca3610b08b9535331b5a033e7e",
+    "backend/scripts/video_saved_landmark_support_v254.py": "d5ce39968102585139b100786daadb384ffb19aa00f3e90f54ef4cd848543c9d",
+    "backend/scripts/video_webcam_confound_v224.py": "405021c859f3dacb2d491ea1740bf85deaa437703d01fc40ad12efe6de112941",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/app/evidence/face_interval_binding.py": "f5bceaf615f91a79367a89d829e2372f5d4f6e9ac1e78ba4a8fb369dd67c32e2",
+    "backend/tests/test_video_luma_context_v278.py": "2b84249c37415c06757c48f9c999cb8557618704f2b397727fb649783ddf0972",
+    "docs/video-luma-context-v278-method.md": "63907c6d39058eaf424f63c150086c99282f82def99ac136323b4695f016aa0e"
+  },
+  "decoder_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "grid_stride": 16,
+  "minimum_luma_shift_code_values": 12.0,
+  "minimum_face_sites_per_frame": 4,
+  "minimum_common_nonface_sites": 128,
+  "numpy_version": "2.2.6",
+  "selected_flags_only": true,
+  "model_calls_permitted": false,
+  "serving_change_permitted": false
+}

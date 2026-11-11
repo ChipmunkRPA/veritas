@@ -1,0 +1,87 @@
+{
+  "schema": "chipmunk.image-flux-photo-preparation-freeze/276",
+  "private_inputs_sha256": "9d2a4d0b5c3a25458eb76b259f3aef0a44b67cbc106dc6942ff516d6dc48dea2",
+  "exposure_receipts_sha256": {
+    "image-fresh-source-cache-v39-results.json": "f56c9290f190f3a8a29654b5781d1a233474b963429541cca93f706b6e18c537",
+    "image-bg-real-pixel-qualification-complete-v225.json": "3a46ad593be6a095f25e5998f7c51d9d592de6d413915348b57271111ec50306",
+    "image-bg-real-backup-intake-v262-complete.json": "74a07ec74a63e0e252904a37f915d1cb1d70d1b0cba01aae4be6a94f7412e51e",
+    "image-rawnind-phase-complete-v239.json": "7e75fab7c5e07ba479e2afe3f51f26cbfb3402b196b8208a37587db38e5e55fa",
+    "image-flux-reference-edit-smoke-freeze-v271.json": "ad88fb0eda60b9427536ea8a2a8ca049a603d48996fa44ce27f96e2512f0ceff",
+    "image-flux-reference-edit-complete-v271.json": "3f9f2b8b60326d423e4bf899c47204c3473bed8b4c6926c850ba9c201ab3efeb"
+  },
+  "code_sha256": {
+    "backend/scripts/image_flux_photo_preparation_v276.py": "29c84c19d861e1feb24f277ba08d995cb85c7be79928816d71a35b5e393f50c7",
+    "backend/tests/test_image_flux_photo_preparation_v276.py": "706b2ccadcd576eecc11fcea0ad0ed550d616120fccbb854ca8994d1b2815398",
+    "backend/scripts/image_flux_reference_edit_v271.py": "eb8f1bbf2a11d1132072429967b46f5073e7acb7f127112caf3a54e044c4d011",
+    "backend/scripts/image_fresh_source_cache_v39.py": "0eec662b496c74aacd03c482326fd49c5424a6989c54842b3b30ab0904717e98",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/scripts/image_rawnind_phase_v239.py": "f4719e6c04203911c9ed9f1ab06b2e5955223b3b23e46c239c7484537bc6e625",
+    "backend/scripts/image_jpeg_diagnostic_v189.py": "1dff54f6b47cec2f1a014d9082eeb1d4c6c8d3c7eef301f71053556a504a836d",
+    "backend/scripts/image_bg_real_roster_v218.py": "32f44463cb82b579fe31e83677dc736b62be749e9d8c0de662a2ea21e45f8c81",
+    "backend/scripts/image_pair_truth_v21.py": "d109da5984c695b60a8e7211d4767bdc43f8f0d5c99783048d84ec2c6f817c4b",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_native_v108.py": "fda0a05ea1741eb617a8445c2575c718307ce37e34804209b7aedc80fad547da",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "docs/image-flux-photo-preparation-v276-method.md": "9c85fa8686ab0f93ae9aa8299a4b4cfc8c5b9558eaf75c838585b47056675fac"
+  },
+  "audit": {
+    "v39_candidates_verified": 161,
+    "v39_prior_records": 705,
+    "bg_real_native_sources_verified": 36,
+    "rawnind_native_sources_verified": 4,
+    "v39_later_exposure_linked": 0,
+    "licenses": {
+      "4": 91,
+      "5": 70
+    },
+    "eligible_cc_by_2_0_groups": 89,
+    "scope": {
+      "v19_v22_v26_v39": "Original 705-record v39 graph, v19 cross-provider metadata and every v26 source",
+      "v41_v42_v45_v46_v47_v49_v50_v51_v189": "Regional and diagnostic panels reuse v26 sources; product replay also used an authored 16x16 image",
+      "v218_v221_v225_v229_v262_v264_v265": "All 36 qualified BG-REAL native originals; downstream probes derive from these",
+      "v239_v244": "Four RawNIND original captures decoded with the exact retained wheel",
+      "v271": "Two authored images without project-photo exposure"
+    }
+  },
+  "cases": [
+    {
+      "slot": "interior",
+      "mask_ltrb_exclusive": [
+        96,
+        96,
+        160,
+        160
+      ],
+      "prompt": "Add one small bright red square sticker in the exact center of the photo. Keep the framing and rest of the scene unchanged."
+    },
+    {
+      "slot": "edge",
+      "mask_ltrb_exclusive": [
+        0,
+        96,
+        64,
+        160
+      ],
+      "prompt": "Add one small bright yellow square sticker centered on the left edge of the photo, partially outside the frame. Keep the framing and rest of the scene unchanged."
+    }
+  ],
+  "planned_calls": 2,
+  "seed": 276004,
+  "model_revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+  "acquisition_sha256": "f27d41114e0853b407a794f683a9151566f2a415502cb91beea50c86c6b374b3",
+  "steps": 4,
+  "formats": [
+    "lossless PNG"
+  ],
+  "detector_calls": 0,
+  "guidance": 1.0,
+  "scheduler": "flow_match_euler_discrete",
+  "use_kv_cache": false,
+  "device": "mlx.gpu",
+  "initial_ram_bytes": 6442450944,
+  "max_sampled_tree_rss_bytes": 6442450944,
+  "seconds_limit": 900,
+  "scope": "Two licensed center crops for construction feasibility. Exact source-coordinate insertion; native reference-edit output is composed after generation. No detector outcome or training admission."
+}

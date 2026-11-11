@@ -1,0 +1,101 @@
+{
+  "schema": "chipmunk.video-luma-context-result/278",
+  "freeze_sha256": "58f3b3508d6fda49cd9dfe43780af7a5552a0956907f41a3f0857e142c224de6",
+  "cohorts": {
+    "genuine_webcam_renders": {
+      "source_groups": 2,
+      "selected_windows": 6,
+      "measured": 6,
+      "unavailable": {},
+      "decoded_frame_observations": 231,
+      "with_face_shift_at_least_12": 0,
+      "ranges": {
+        "context_sites": [
+          2923,
+          4944
+        ],
+        "minimum_face_sites": [
+          72,
+          437
+        ],
+        "face_shift": [
+          0.0,
+          6.363
+        ],
+        "context_median_absolute_shift": [
+          0.0,
+          0.4475
+        ],
+        "context_affected_fraction": [
+          0.002427,
+          0.160806
+        ],
+        "context_affected_in_face_direction_fraction": null
+      }
+    },
+    "known_swap_renders": {
+      "source_groups": 1,
+      "selected_windows": 4,
+      "measured": 4,
+      "unavailable": {},
+      "decoded_frame_observations": 180,
+      "with_face_shift_at_least_12": 0,
+      "ranges": {
+        "context_sites": [
+          1800,
+          1845
+        ],
+        "minimum_face_sites": [
+          391,
+          391
+        ],
+        "face_shift": [
+          0.0,
+          1.414
+        ],
+        "context_median_absolute_shift": [
+          0.049,
+          5.0
+        ],
+        "context_affected_fraction": [
+          0.0,
+          0.0
+        ],
+        "context_affected_in_face_direction_fraction": null
+      }
+    },
+    "matched_no_swap_renders": {
+      "source_groups": 1,
+      "selected_windows": 2,
+      "measured": 2,
+      "unavailable": {},
+      "decoded_frame_observations": 60,
+      "with_face_shift_at_least_12": 0,
+      "ranges": {
+        "context_sites": [
+          1845,
+          1845
+        ],
+        "minimum_face_sites": [
+          408,
+          408
+        ],
+        "face_shift": [
+          -9.16425,
+          -7.68675
+        ],
+        "context_median_absolute_shift": [
+          8.0815,
+          8.989
+        ],
+        "context_affected_fraction": [
+          0.0,
+          0.0
+        ],
+        "context_affected_in_face_direction_fraction": null
+      }
+    }
+  },
+  "model_calls": 0,
+  "serving_changed": false
+}

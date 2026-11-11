@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.image-flux-photo-generation-aggregate/276",
+  "status": "complete",
+  "freeze_sha256": "56fca6203ac581d4a5b6a290fc588d97483147fb47523d0b1dc41200939e112d",
+  "private_worker_receipt_sha256": "11fcb8a91b7e259554f88bf339ba2d377c0a15cbc49ff0cd8d46476c867d3ef6",
+  "resource_profile_sha256": "484080c8c351aba1ecd48fac84e57a840d40e6f72e1c2239b9343f5f26aeaebe",
+  "licensed_source_groups": 2,
+  "native_pngs_verified": 22,
+  "case_counts": {
+    "qualified_geometry": 2
+  },
+  "results": [
+    {
+      "position": "interior",
+      "declared_pixels": 4096,
+      "composite_changed_pixels": 4095,
+      "composite_outside_changes": 0,
+      "raw_outside_changes": 61437,
+      "ordinary_changed_pixels": {
+        "tone": 4096,
+        "blur": 4059,
+        "copy_move": 4096
+      }
+    },
+    {
+      "position": "edge",
+      "declared_pixels": 4096,
+      "composite_changed_pixels": 4096,
+      "composite_outside_changes": 0,
+      "raw_outside_changes": 61420,
+      "ordinary_changed_pixels": {
+        "tone": 4096,
+        "blur": 4041,
+        "copy_move": 4096
+      }
+    }
+  ],
+  "generator_calls": 2,
+  "detector_calls": 0,
+  "worker_duration_seconds": 56.71023112500552,
+  "mlx_peak_active_memory_bytes": 5761628350,
+  "semantic_success_measured": false
+}

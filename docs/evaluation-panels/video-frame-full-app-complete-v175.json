@@ -1,0 +1,93 @@
+{
+  "appearance_review_replay": {
+    "matching_intervals": true,
+    "range_seconds_rounded": [
+      1.268,
+      2.836
+    ],
+    "verified_evidence_assets_per_arm": 133,
+    "verified_frame_roles": [
+      "before",
+      "during",
+      "after"
+    ],
+    "verified_source_rgb_inputs_per_arm": 33
+  },
+  "arms": {
+    "batch-one": {
+      "analysis_status": "done",
+      "customer_direction": "original",
+      "input": {
+        "clock_exact": true,
+        "faces": 24,
+        "pcm_exact": true,
+        "rgb_exact": true,
+        "sampled_frames": 24
+      },
+      "packet_count": 1,
+      "packet_set_ready": true,
+      "pipeline_status": "done",
+      "planned_activation_bytes": 838860800,
+      "private_arm_receipt_sha256": "143d78d65909e565142feb609d4aa6516ed798bafb2a126f67da369f1dabd217",
+      "private_resource_profile_sha256": "e5dce9bb33f5885fd73ef34fb91fb5e6a0bf141e626537c6ff65f3a734a181fe",
+      "run_status_counts": {
+        "not_applicable": 1,
+        "ok": 14
+      },
+      "sampled_tree_rss_bytes": 4951113728,
+      "target_budget_skip": false,
+      "target_coverage": "scored_and_published",
+      "target_scored_frames": 24,
+      "target_series_published": true,
+      "target_signal_published": true,
+      "target_status": "ok",
+      "worker_duration_seconds": 48.261895291972905
+    },
+    "reference": {
+      "analysis_status": "done",
+      "customer_direction": "unavailable",
+      "input": {
+        "clock_exact": true,
+        "faces": 24,
+        "pcm_exact": true,
+        "rgb_exact": true,
+        "sampled_frames": 24
+      },
+      "packet_count": 1,
+      "packet_set_ready": true,
+      "pipeline_status": "done",
+      "planned_activation_bytes": 6710886400,
+      "private_arm_receipt_sha256": "83cac849bdcbf959e6f78082c2aabc9bce810a960def51b14cb9d77f8defcdf6",
+      "private_resource_profile_sha256": "4f4e98f76621ad68dea7fba92e22048886654f25ce11c214e8706a1cb21e2a3d",
+      "run_status_counts": {
+        "not_applicable": 1,
+        "ok": 13,
+        "skipped": 1
+      },
+      "sampled_tree_rss_bytes": 4752424960,
+      "target_budget_skip": true,
+      "target_coverage": "activation_budget_unavailable",
+      "target_scored_frames": 0,
+      "target_series_published": false,
+      "target_signal_published": false,
+      "target_status": "skipped",
+      "worker_duration_seconds": 44.16866104200017
+    }
+  },
+  "candidate_admitted_and_scored": true,
+  "comparison": {
+    "both_exact_input_bindings": true,
+    "both_full_analyses_published": true,
+    "candidate_disposition_verified": true,
+    "reference_disposition_verified": true,
+    "same_condition_profile": true,
+    "same_detected_face_coverage": true,
+    "same_fuser": true,
+    "same_non_target_route_statuses": true
+  },
+  "control_type": "genuine_face_occlusion",
+  "engineering_passed": true,
+  "freeze_sha256": "ce75f6d89f852be15548737f6713a36769ac380c65ff6b6d44320076d9a3c5d1",
+  "schema": "chipmunk.video-frame-full-app-readout/175",
+  "scope": "One genuine public-domain interview excerpt with a masked speaker. Full-app coverage and evidence only."
+}

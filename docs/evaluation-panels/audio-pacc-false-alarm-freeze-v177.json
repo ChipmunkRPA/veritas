@@ -1,0 +1,50 @@
+{
+  "schema": "chipmunk.audio-pacc-false-alarm-freeze/177",
+  "code_sha256": {
+    "backend/scripts/audio_pacc_false_alarm_v177.py": "c7cfe08a86da587c07ea6ffdea47ca39e0fb3be4830067c07a0bcdd0b29cac92",
+    "backend/tests/test_audio_pacc_false_alarm_v177.py": "a3a2b55d50e5ddb09f87ecf058ebe2989332c4511445ae0633bb3ad7e0d559f9",
+    "docs/audio-pacc-false-alarm-v177-method.md": "fe9a1626d4812fcb51a35d4e8697c0fdb549ae4e6f115c53f56bc75203d63617"
+  },
+  "v176_public_freeze_sha256": "e9aed0644d698d6e0fcd239520984565b1ed552e43d4666594a8bdc8daf2a073",
+  "v176_public_result_sha256": "dc24756e7305d8a975022bbbd27594101780386a0e4f36aaabfb5ebd811dda64",
+  "v174_public_freeze_sha256": "896d996b55b5dbb012dc075018f1c699503f49576f81241dee06a501c4923748",
+  "local_asset_commitments": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2"
+  },
+  "planned_cases": 98,
+  "planned_pairs": 84,
+  "planned_source_inputs": {
+    "AMI": 4,
+    "VCTK_mic1": 5,
+    "VCTK_mic2": 5
+  },
+  "publisher_full_clip_nominal_snr_db": {
+    "clean": null,
+    "babble_snr00": 0,
+    "babble_snr05": 5,
+    "env_noise_snr00": 0,
+    "env_noise_snr05": 5,
+    "music_instrumental_snr00": 0,
+    "music_instrumental_snr05": 5
+  },
+  "source_sample_range": {
+    "start_sample": 0,
+    "end_sample": 48000,
+    "source_start_pts": 0,
+    "source_end_pts": 48000,
+    "time_base": "1/16000"
+  },
+  "role": "genuine_external_stress_control",
+  "fitting_permitted": false,
+  "holdout_access_permitted": false
+}

@@ -51,7 +51,9 @@ fixed development and holdout windows. The [paired stereo benchmark](audio-nativ
 records construction and exact readback of all 385 planned files. The
 [development speech-gate comparison](audio-native-stereo-gate-v279-result.md)
 compares mono admission and a fixed acoustic channel choice without using
-authenticity scores for selection.
+authenticity scores for selection. The [downstream comparison](audio-native-stereo-authenticity-v282-result.md)
+reports correct, wrong and inconclusive directions on those recovered clips
+and on the comparison group.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

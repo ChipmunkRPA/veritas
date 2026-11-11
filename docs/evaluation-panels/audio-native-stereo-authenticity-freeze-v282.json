@@ -1,0 +1,110 @@
+{
+  "schema": "chipmunk.audio-native-stereo-authenticity-freeze/282",
+  "source_receipts_sha256": {
+    "audio-native-stereo-gate-freeze-v279.json": "6a80567c7767ef208450c70e92d4d06719a9dc1899d363c3affe6cfc5aa9ed1c",
+    "audio-rescued-speech-retry-freeze-v261.json": "a6e0f56f392f79b445d39117e68ba7c9421bbccaeba5a049bc464481d3c3c3c9",
+    "audio-rescued-speech-retry-complete-v261.json": "89656b3f98035b6429795094dac8d29c12fb00d58be14f2e32709d3b6a2c3bcc",
+    "audio-noise-speech-rescue-downstream-freeze-v270.json": "88e2a68eb60b6b9c88298ea7f800496fb946508887641f9ec238cd271d3c459c"
+  },
+  "serving_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "serving_asset_sha256": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "inherited_v261_code_sha256": {
+    "backend/scripts/audio_rescued_speech_shadow_v258.py": "7be4616ce59360ad0102a7e2cf6144e41368d6bf5f45bd44b4646223d9a9ec64",
+    "backend/tests/test_audio_rescued_speech_shadow_v258.py": "8da245f2865142da335810a0e797eeb48107398c9b02e29750387c9b2440c880",
+    "docs/audio-rescued-speech-shadow-v258-method.md": "2329df27effbb5efb01165086946504a45cd3910ef2a3fed431cceae8f70aa92",
+    "backend/scripts/audio_noise_speech_gate_v256.py": "90d0c303bb8e35c0249d8208403dda73ba9a706ec2ba719931319b056b86905b",
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/calibration.py": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/scripts/audio_rescued_speech_retry_v261.py": "05afa0f502f9a1f9ff004942cbcfe7939aadbea83bc7c7cbad7c3e468d1f8323",
+    "backend/tests/test_audio_rescued_speech_retry_v261.py": "e4e756111443f82d190c304744211922f68e7be7f4a312ab11d02be209d9397b",
+    "docs/audio-rescued-speech-retry-v261-method.md": "dd023cfa29d5aa6a9a9f2089f1441c221c5f50b6267b52ce14b8f4f3970cbf8b"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_native_stereo_authenticity_v282.py": "a88d9d98fd5d9ee701d068afa7ea8543cf8bd4fcf58ac4d5e48dc0b033fa1c6f",
+    "backend/tests/test_audio_native_stereo_authenticity_v282.py": "601364e71c177caa38e28a073badfe984c958e4be8b47ef5b41a00861c5e7f16",
+    "docs/audio-native-stereo-authenticity-v282-method.md": "06a9d698f68706308391a58fcd8a3d19daccd10ef8c8ffca41f50f5608ccfc61",
+    "backend/scripts/audio_native_stereo_gate_v279.py": "787da9f29a624f3ec391419c7023fdd5146d740eba0da62285aaf6d806b8657d",
+    "backend/scripts/audio_noise_speech_rescue_downstream_v270.py": "30211cba41c7185b6ba86b99fb8ced69473155e748b12a656d734d6232b17860"
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "system": "Darwin",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.13.0",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "transformers": "5.15.1"
+    }
+  },
+  "planned_variants": 84,
+  "conditions": [
+    "river_forced",
+    "washing_room_forced"
+  ],
+  "sample_rate": 16000,
+  "samples_per_window": 48000,
+  "maximum_classifier_forwards": 168,
+  "vad_forwards_permitted": false,
+  "second_opinion_permitted": false,
+  "serving_change_permitted": false,
+  "v279_gate_readout_sha256": "a37dabab269d0fc9b22a8f2f8f364b44ff5b9ba3428ea101e390a714cb5a0976",
+  "role": "development",
+  "unique_clean_by_family": {
+    "genuine": 7,
+    "expressive": 11
+  },
+  "planned_pairs_by_family_cohort_condition": [
+    {
+      "family": "genuine",
+      "cohort": "rescued",
+      "condition": "river_forced",
+      "pairs": 3
+    },
+    {
+      "family": "genuine",
+      "cohort": "admitted",
+      "condition": "river_forced",
+      "pairs": 4
+    },
+    {
+      "family": "genuine",
+      "cohort": "admitted",
+      "condition": "washing_room_forced",
+      "pairs": 6
+    },
+    {
+      "family": "expressive",
+      "cohort": "rescued",
+      "condition": "river_forced",
+      "pairs": 3
+    },
+    {
+      "family": "expressive",
+      "cohort": "rescued",
+      "condition": "washing_room_forced",
+      "pairs": 1
+    },
+    {
+      "family": "expressive",
+      "cohort": "admitted",
+      "condition": "river_forced",
+      "pairs": 7
+    },
+    {
+      "family": "expressive",
+      "cohort": "admitted",
+      "condition": "washing_room_forced",
+      "pairs": 9
+    }
+  ],
+  "private_plan_sha256": "27982c097f2e24e500e70c2cd3ec7e2a3ebcf22ea209002c5fd018ca1345bb4b"
+}

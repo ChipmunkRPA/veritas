@@ -1,0 +1,154 @@
+{
+  "schema": "chipmunk.audio-native-stereo-authenticity-result/282",
+  "status": "complete",
+  "freeze_sha256": "0ba2fc44772795aa67756df6df747415e5c45e1d506f89850d72075f1aaa4e23",
+  "v279_gate_readout_sha256": "a37dabab269d0fc9b22a8f2f8f364b44ff5b9ba3428ea101e390a714cb5a0976",
+  "private_observation_journal_sha256": "78a3f32dd930147453c151159447f98ee326534400845d099e1b24d209ab4a36",
+  "assessed_variants": 84,
+  "paired_direction_counts": [
+    {
+      "family": "genuine",
+      "cohort": "rescued",
+      "condition": "river_forced",
+      "mono_gate_respecting": {
+        "not_assessed": 3
+      },
+      "mono_counterfactual": {
+        "inconclusive": 3
+      },
+      "selected": {
+        "inconclusive": 1,
+        "original": 2
+      },
+      "matched_clean": {
+        "original": 3
+      }
+    },
+    {
+      "family": "genuine",
+      "cohort": "admitted",
+      "condition": "river_forced",
+      "mono_gate_respecting": {
+        "inconclusive": 2,
+        "original": 2
+      },
+      "mono_counterfactual": {},
+      "selected": {
+        "inconclusive": 2,
+        "original": 2
+      },
+      "matched_clean": {
+        "original": 4
+      }
+    },
+    {
+      "family": "genuine",
+      "cohort": "admitted",
+      "condition": "washing_room_forced",
+      "mono_gate_respecting": {
+        "original": 5,
+        "inconclusive": 1
+      },
+      "mono_counterfactual": {},
+      "selected": {
+        "original": 6
+      },
+      "matched_clean": {
+        "original": 6
+      }
+    },
+    {
+      "family": "expressive",
+      "cohort": "admitted",
+      "condition": "river_forced",
+      "mono_gate_respecting": {
+        "inconclusive": 7
+      },
+      "mono_counterfactual": {},
+      "selected": {
+        "inconclusive": 5,
+        "original": 2
+      },
+      "matched_clean": {
+        "ai": 6,
+        "inconclusive": 1
+      }
+    },
+    {
+      "family": "expressive",
+      "cohort": "admitted",
+      "condition": "washing_room_forced",
+      "mono_gate_respecting": {
+        "ai": 4,
+        "original": 3,
+        "inconclusive": 2
+      },
+      "mono_counterfactual": {},
+      "selected": {
+        "ai": 6,
+        "original": 1,
+        "inconclusive": 2
+      },
+      "matched_clean": {
+        "ai": 7,
+        "inconclusive": 2
+      }
+    },
+    {
+      "family": "expressive",
+      "cohort": "rescued",
+      "condition": "river_forced",
+      "mono_gate_respecting": {
+        "not_assessed": 3
+      },
+      "mono_counterfactual": {
+        "inconclusive": 3
+      },
+      "selected": {
+        "original": 1,
+        "inconclusive": 2
+      },
+      "matched_clean": {
+        "inconclusive": 1,
+        "ai": 2
+      }
+    },
+    {
+      "family": "expressive",
+      "cohort": "rescued",
+      "condition": "washing_room_forced",
+      "mono_gate_respecting": {
+        "not_assessed": 1
+      },
+      "mono_counterfactual": {
+        "inconclusive": 1
+      },
+      "selected": {
+        "ai": 1
+      },
+      "matched_clean": {
+        "ai": 1
+      }
+    }
+  ],
+  "unique_clean_direction_counts": {
+    "genuine": {
+      "original": 7
+    },
+    "expressive": {
+      "ai": 9,
+      "inconclusive": 2
+    }
+  },
+  "stability_probe_counts": {
+    "not_required_for_decision": 53,
+    "computed": 31
+  },
+  "new_neural_calls": 115,
+  "vad_forwards": 0,
+  "second_opinion_scored": false,
+  "holdout_scored": false,
+  "serving_changed": false,
+  "resource_profile_sha256": "e8220359bc910db222c166dbb63faad5ee8a6e295ce984c17d869465df27cf7e",
+  "worker_duration_seconds": 75.66763954202179
+}

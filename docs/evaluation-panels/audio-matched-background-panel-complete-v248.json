@@ -1,0 +1,177 @@
+{
+  "schema": "chipmunk.audio-matched-background-panel-result/248",
+  "status": "complete",
+  "freeze_sha256": "c2dbe8fe1784aa1865d739cf8552c7a6abc5c6c2d6844c25cfbb34afac57ca9d",
+  "private_cases_sha256": "afaabd863f01b3cf7aafb83352c206af6ea0d2de33c63f4c827a004c23f440ad",
+  "planned_cases": 360,
+  "foreground_coverage": {
+    "genuine": {
+      "planned_utterances": 24,
+      "available_utterances": 23,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 23,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v252": 24
+      }
+    },
+    "alania": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 24,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v236": 24
+      }
+    },
+    "okur": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 1,
+      "known_available_voice_groups": 1,
+      "maximum_utterances_per_group": 24,
+      "source_cohort_counts": {
+        "v240": 4,
+        "v245": 20
+      }
+    }
+  },
+  "background_coverage": {
+    "kitchen": {
+      "provisional_excerpts_available": 46,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 4,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 6
+    },
+    "traffic": {
+      "provisional_excerpts_available": 27,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 3,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 10
+    }
+  },
+  "background_evidence_type": "machine_screened_provisional",
+  "human_listening_reviewed": false,
+  "by_condition_and_arm": {
+    "matched_clean": {
+      "genuine": {
+        "prepared": 23,
+        "unavailable": 1
+      },
+      "alania": {
+        "prepared": 24,
+        "unavailable": 0
+      },
+      "okur": {
+        "prepared": 24,
+        "unavailable": 0
+      }
+    },
+    "kitchen_0db": {
+      "genuine": {
+        "prepared": 23,
+        "unavailable": 1
+      },
+      "alania": {
+        "prepared": 24,
+        "unavailable": 0
+      },
+      "okur": {
+        "prepared": 24,
+        "unavailable": 0
+      }
+    },
+    "kitchen_5db": {
+      "genuine": {
+        "prepared": 23,
+        "unavailable": 1
+      },
+      "alania": {
+        "prepared": 24,
+        "unavailable": 0
+      },
+      "okur": {
+        "prepared": 24,
+        "unavailable": 0
+      }
+    },
+    "traffic_0db": {
+      "genuine": {
+        "prepared": 23,
+        "unavailable": 1
+      },
+      "alania": {
+        "prepared": 24,
+        "unavailable": 0
+      },
+      "okur": {
+        "prepared": 24,
+        "unavailable": 0
+      }
+    },
+    "traffic_5db": {
+      "genuine": {
+        "prepared": 23,
+        "unavailable": 1
+      },
+      "alania": {
+        "prepared": 24,
+        "unavailable": 0
+      },
+      "okur": {
+        "prepared": 24,
+        "unavailable": 0
+      }
+    }
+  },
+  "pair_coverage": {
+    "matched_clean": {
+      "planned_triplets": 24,
+      "complete_triplets": 23,
+      "genuine_alania": 23,
+      "genuine_okur": 23,
+      "alania_okur": 24
+    },
+    "kitchen_0db": {
+      "planned_triplets": 24,
+      "complete_triplets": 23,
+      "genuine_alania": 23,
+      "genuine_okur": 23,
+      "alania_okur": 24
+    },
+    "kitchen_5db": {
+      "planned_triplets": 24,
+      "complete_triplets": 23,
+      "genuine_alania": 23,
+      "genuine_okur": 23,
+      "alania_okur": 24
+    },
+    "traffic_0db": {
+      "planned_triplets": 24,
+      "complete_triplets": 23,
+      "genuine_alania": 23,
+      "genuine_okur": 23,
+      "alania_okur": 24
+    },
+    "traffic_5db": {
+      "planned_triplets": 24,
+      "complete_triplets": 23,
+      "genuine_alania": 23,
+      "genuine_okur": 23,
+      "alania_okur": 24
+    }
+  },
+  "unavailable_reasons": {
+    "source_unavailable": 5
+  },
+  "new_neural_calls": 0,
+  "detector_calls": 0,
+  "holdout_scored": false,
+  "profile_sha256": "cf0110bd9c41a3b4b41b32acfc83edfbf0eece71097a933b709a82803f3b3f7e",
+  "scope": "One stock synthetic voice and reused background recordings limit independence. The background screen is provisional and no authenticity detector ran."
+}

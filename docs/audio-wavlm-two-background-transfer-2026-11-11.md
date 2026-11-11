@@ -1,0 +1,25 @@
+# Voice second opinion across two strong backgrounds
+
+The earlier −10 dB traffic test recovered three synthetic voices with a second opinion. On different English recordings and two other backgrounds, the same rule added **zero** detections. The current check falsely flagged four of five assessed genuine files with the first background and one of six with the second. The second opinion retained those false flags. [Earlier traffic study](audio-wavlm-strong-traffic-2026-11-11.md) · [Exact results](evaluation-panels/audio-wavlm-two-background-transfer-2026-11-11.json)
+
+## Frozen comparison
+
+Use 17 distinct three-second speech recordings, one per declared voice group. Six are genuine LibriSpeech recordings, three are voice clones, four are expressive synthetic voices, and four are stock synthetic voices. Test a gain-matched clean view and an overlay from each of two distinct MUSAN background recordings. Both overlays use a −5 dB full-window RMS target. Each speech recording has the same gain in all three views, and each mixed file preserves the known added noise as a quantized sample residual. Two isolated background recordings bring the total to 53 planned views. [Source qualifications and rights](audio-short-edit-source-plan-v169.md)
+
+The local roster matched the archived source receipts and excluded exact foreground overlaps with earlier WavLM transfer journals and known voice or source links in the Surrey/BBC room panels. The two background recordings were absent from those room panels. The source panel already excluded known fit-bank and historical source links. These 17 foreground recordings had previously been used by the current detector in a stereo study with other backgrounds. Expressive and stock voice families also had prior project exposure. The comparison supplies a new test of the frozen second opinion on these recordings and mixtures, with model pretraining overlap unknown. [Source preparation](audio-short-edit-materialization-v169c-result.md) · [Prior stereo study](audio-native-stereo-holdout-v284-result.md)
+
+Both models use identical decoded samples after the production full-profile speech gate. Use the current model’s original calibration and the same WavLM-assisted head, weights, and English diagnostic operating points as the traffic study. The combined rule changes a measured inconclusive result only when the second opinion leans AI. All other directions and coverage remain as recorded by the current check. Weights use CC BY-SA 3.0 and the code license is MIT. The experiment fitted no parameters and changed no confidence or serving behavior. [Pinned model card](https://huggingface.co/microsoft/wavlm-base-plus/blob/4c66d4806a428f2e922ccfa1a962776e232d487b/README.md) · [Publisher weight terms](https://github.com/microsoft/UniSpeech/blob/main/LICENSE)
+
+## Local results
+
+| Condition | Speech admitted / planned | Synthetic flagged / assessed | Genuine falsely flagged / assessed | Synthetic leaning original | Inconclusive among assessed |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Clean | 16/17 | 10/10 | 0/6 | 0 | 2 |
+| Background A, −5 dB | 11/17 | 5/6 | 4/5 | 0 | 2 |
+| Background B, −5 dB | 16/17 | 10/10 | 1/6 | 0 | 2 |
+
+The table applies to the current check and the combined rule. All five background A genuine recordings that passed speech admission also passed in clean audio. Three of them leaned original when clean and falsely leaned AI when mixed. A fourth went from inconclusive to a false AI flag. The five false AI views across both backgrounds came from four genuine recordings. Background A left one genuine and five synthetic files unassessed. Background B and clean audio each left one synthetic file unassessed. Neither isolated background passed the speech gate. The candidate alone removed the false AI direction on background B by returning inconclusive, kept all four false flags on A, and moved one clean genuine file from inconclusive to leaning original.
+
+The difference across the two backgrounds identifies a calibration problem with the current speech score under some noise. The fixed second opinion cannot correct an existing false AI verdict, and this test found no recovery benefit for it. The observations cover just two background recordings reused across the panel. Larger source-separated evaluation is needed to estimate noise-specific error rates or validate any new scoring rule.
+
+The speech gate made 4,982 actual frame forwards. The current scorer ran 50 classifier forwards over 43 admitted views in 34.58 seconds, with 2.94 GB peak process memory. The second opinion ran 44 encoder forwards, including an exact repeat, in 6.58 seconds with 1.25 GB peak memory. A launch retry corrected a waveform path before the first VAD forward and preserved the entire planned roster, scoring rule, and calibration. A separate audit checked all 53 waveform hashes, 34 overlay residuals, three earlier public source commitments, and the aggregate verdict counts. The result contains aggregate counts and whole-artifact hashes. Recordings, per-file scores, and source identifiers stayed local.

@@ -1,0 +1,335 @@
+{
+  "calibration_sha256": "8e893864f53857cd4fe49af937de693a2edf65eb8f4f8f676f92f89442cfa2a4",
+  "camera_group_outcomes": {
+    "pe_median": {
+      "groups_with_flag": 1,
+      "groups_with_unassessed_clip": 0
+    },
+    "reference_median": {
+      "groups_with_flag": 0,
+      "groups_with_unassessed_clip": 0
+    },
+    "reference_plus_pe": {
+      "groups_with_flag": 1,
+      "groups_with_unassessed_clip": 0
+    }
+  },
+  "camera_groups": 8,
+  "clips": 32,
+  "excluded_camera_groups": [],
+  "family_outcomes": {
+    "camera_chroma_conversion_only": {
+      "both_arm_samples": {
+        "after": 16,
+        "before": 16,
+        "during": 16
+      },
+      "native_samples": {
+        "after": 16,
+        "before": 16,
+        "during": 16
+      },
+      "pe_frame_support": {
+        "6": 8
+      },
+      "pe_median": {
+        "below": 7,
+        "flagged": 1
+      },
+      "reference_frame_support": {
+        "6": 8
+      },
+      "reference_median": {
+        "below": 8
+      },
+      "reference_plus_pe": {
+        "below": 7,
+        "flagged": 1
+      }
+    },
+    "camera_recompression_only": {
+      "both_arm_samples": {
+        "after": 16,
+        "before": 16,
+        "during": 16
+      },
+      "native_samples": {
+        "after": 16,
+        "before": 16,
+        "during": 16
+      },
+      "pe_frame_support": {
+        "6": 8
+      },
+      "pe_median": {
+        "below": 8
+      },
+      "reference_frame_support": {
+        "6": 8
+      },
+      "reference_median": {
+        "below": 8
+      },
+      "reference_plus_pe": {
+        "below": 8
+      }
+    },
+    "camera_unchanged": {
+      "both_arm_samples": {
+        "unmodified": 48
+      },
+      "native_samples": {
+        "unmodified": 48
+      },
+      "pe_frame_support": {
+        "6": 8
+      },
+      "pe_median": {
+        "below": 7,
+        "flagged": 1
+      },
+      "reference_frame_support": {
+        "6": 8
+      },
+      "reference_median": {
+        "below": 8
+      },
+      "reference_plus_pe": {
+        "below": 7,
+        "flagged": 1
+      }
+    },
+    "publisher_full_reference": {
+      "both_arm_samples": {
+        "unmodified": 6
+      },
+      "native_samples": {
+        "unmodified": 6
+      },
+      "pe_frame_support": {
+        "6": 1
+      },
+      "pe_median": {
+        "below": 1
+      },
+      "reference_frame_support": {
+        "6": 1
+      },
+      "reference_median": {
+        "below": 1
+      },
+      "reference_plus_pe": {
+        "below": 1
+      }
+    },
+    "publisher_full_swap": {
+      "both_arm_samples": {
+        "during": 6
+      },
+      "native_samples": {
+        "during": 6
+      },
+      "pe_frame_support": {
+        "6": 1
+      },
+      "pe_median": {
+        "below": 1
+      },
+      "reference_frame_support": {
+        "6": 1
+      },
+      "reference_median": {
+        "below": 1
+      },
+      "reference_plus_pe": {
+        "below": 1
+      }
+    },
+    "publisher_partial_recompression": {
+      "both_arm_samples": {
+        "after": 2,
+        "before": 2,
+        "during": 2
+      },
+      "native_samples": {
+        "after": 2,
+        "before": 2,
+        "during": 2
+      },
+      "pe_frame_support": {
+        "6": 1
+      },
+      "pe_median": {
+        "below": 1
+      },
+      "reference_frame_support": {
+        "6": 1
+      },
+      "reference_median": {
+        "below": 1
+      },
+      "reference_plus_pe": {
+        "below": 1
+      }
+    },
+    "publisher_partial_reference": {
+      "both_arm_samples": {
+        "unmodified": 6
+      },
+      "native_samples": {
+        "unmodified": 6
+      },
+      "pe_frame_support": {
+        "6": 1
+      },
+      "pe_median": {
+        "below": 1
+      },
+      "reference_frame_support": {
+        "6": 1
+      },
+      "reference_median": {
+        "below": 1
+      },
+      "reference_plus_pe": {
+        "below": 1
+      }
+    },
+    "publisher_partial_swap": {
+      "both_arm_samples": {
+        "after": 8,
+        "before": 8,
+        "during": 8
+      },
+      "native_samples": {
+        "after": 8,
+        "before": 8,
+        "during": 8
+      },
+      "pe_frame_support": {
+        "6": 4
+      },
+      "pe_median": {
+        "below": 4
+      },
+      "reference_frame_support": {
+        "6": 4
+      },
+      "reference_median": {
+        "below": 4
+      },
+      "reference_plus_pe": {
+        "below": 4
+      }
+    }
+  },
+  "independent_audit": {
+    "publisher_partial_flanks_exact": true,
+    "publisher_partial_sample_seconds_rational": [
+      "17/12",
+      "17/6",
+      "17/4",
+      "137/24",
+      "57/8",
+      "205/24"
+    ],
+    "sha256": "638063593a84661b048952bfba82c704642f79a545f60d4df5ac89d3c70dd79d",
+    "source_records_checked_per_arm": 192,
+    "status": "verified"
+  },
+  "native_frames_per_arm": 192,
+  "operating_points": {
+    "pe_median": 0.11348772048950195,
+    "reference_median": 0.43718233704566956,
+    "reference_plus_pe": 1.2940809706865464
+  },
+  "prior_confirmation_sha256": "c365595c68a593faa513fd48f3d87e1aa70aa0b8a7592737af428a567b4b3c20",
+  "receipt_sha256": {
+    "pe": "9fde4083a40688b4fa964d75225d86809ceb09df85364a7958402f578689fa45",
+    "reference": "cc1ba74c2d3a9852d8b29d273c8baf297ce53e07cd3ed1ccddb42402f63e0837"
+  },
+  "reference_to_paired": {
+    "camera_chroma_conversion_only": {
+      "below to below": 7,
+      "below to flagged": 1
+    },
+    "camera_recompression_only": {
+      "below to below": 8
+    },
+    "camera_unchanged": {
+      "below to below": 7,
+      "below to flagged": 1
+    },
+    "publisher_full_reference": {
+      "below to below": 1
+    },
+    "publisher_full_swap": {
+      "below to below": 1
+    },
+    "publisher_partial_recompression": {
+      "below to below": 1
+    },
+    "publisher_partial_reference": {
+      "below to below": 1
+    },
+    "publisher_partial_swap": {
+      "below to below": 4
+    }
+  },
+  "resources": {
+    "pe": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 8445493248,
+        "free_disk": 2759618560
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5045305344,
+      "peak_tree_rss": 1655947264,
+      "seconds": 508.387,
+      "stop": null
+    },
+    "reference": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 7209238528,
+        "free_disk": 2167046144
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5525602304,
+      "peak_tree_rss": 1124876288,
+      "seconds": 505.951,
+      "stop": null
+    }
+  },
+  "sample_rule": "Nearest native timestamps to six interior seventh-points with earlier ties",
+  "schema": "chipmunk.face-pe-publisher-transfer-result/1",
+  "source_freeze_sha256": "889bc2a1d6e0187a1cb4ee5f3b189532a3b8d915f476c3ac40a6148b54841a8a",
+  "source_receipts_sha256": {
+    "camera_qualification": "9b3e48b26eba46f1f1199efa60f41e716daaabc9d867093562e30fcb9f9c36b1",
+    "publisher_manifest": "e73ecc30c700b95246fa56977e6e596eb685035a16a0b19d72e9f14e76095e8c",
+    "publisher_preparation": "521d11c3210fea01c7125a87647f7b824e2d12309f1e15027dcd371a3a723e7c",
+    "publisher_preparation_freeze": "8836725e3f2d19271693c50346fdfa1f6a2c80859fa2041322ab672d6e7410d8"
+  },
+  "source_rights": {
+    "camera": "https://github.com/microsoft/VCD",
+    "camera_license": "https://github.com/microsoft/VCD/blob/main/LICENSE-DATA",
+    "publisher": "https://faceswapai.com/video-continuity-study-v1.json",
+    "publisher_license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "synthetic_publisher_groups": 1
+}

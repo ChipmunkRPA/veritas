@@ -110,6 +110,9 @@ filtering recovers synthetic or genuine speech windows.
 The [second voice representation](audio-wavlm-strong-traffic-2026-11-11.md)
 keeps the admission decisions fixed and compares clean and −10 dB traffic
 responses from two voice representations, with retained misses and exclusions.
+The [two-background transfer](audio-wavlm-two-background-transfer-2026-11-11.md)
+tests the same rule with distinct background recordings and records how each
+condition changes flags and unassessed coverage.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -140,6 +143,9 @@ frozen rule that selected a different check for each delivery.
 The [paired face-swap transfer](video-face-pe-transfer-2026-11-11.md) includes a
 standard-library score replay on 108 clips. The [prospective confirmation](video-face-pe-confirmation-2026-11-11.md)
 applies the frozen rule to separate source groups using identical native faces in both arms.
+The [outside publisher and camera transfer](video-face-pe-publisher-2026-11-11.md)
+checks known full and partial swaps and ordinary delivery changes. It reports
+the four partial variants as one source and camera outcomes by recording group.
 The [recorded-noise repetition comparison](audio-repeat-robustness-transfer-2026-11-11.md)
 checks exact and similar repeated audio across recorded backgrounds and four
 codecs, with matching ordinary controls and anonymized per-group results.

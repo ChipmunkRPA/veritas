@@ -100,8 +100,11 @@ integration remains unfinished.
 - The [six-frame paired face check](video-face-pe-confirmation-2026-11-11.md)
   found 45/48 whole-clip swaps versus 26/48 on separate source groups, with
   zero flags on 24 originals in both arms. An opt-in local app analysis now
-  exports the source clocks and crops. Partial edits, ordinary delivery
-  changes, and unrelated generators require separate checks.
+  exports the source clocks and crops. The [outside publisher test](video-face-pe-publisher-2026-11-11.md)
+  missed one full swap and all four deliveries of one short swap. It flagged
+  two of 24 camera controls from one of eight recording groups, versus zero
+  for the reference. The full-clip median hid an in-range response change.
+  The next comparison needs a separately calibrated short-window rule.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -115,7 +118,10 @@ integration remains unfinished.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
-  foregrounds. Keep the paired method experimental for independent transfer.
+  foregrounds. On a [separate two-background test](audio-wavlm-two-background-transfer-2026-11-11.md),
+  the paired method added zero flags. The current rule falsely leaned AI on
+  4/5 assessed genuine inputs under one background and 1/6 under the other.
+  Noise-specific false AI responses now take priority over additional recall.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two

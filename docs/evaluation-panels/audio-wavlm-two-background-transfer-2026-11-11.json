@@ -1,0 +1,865 @@
+{
+  "added_ai_results_by_lane_condition": [],
+  "all_planned": [
+    {
+      "baseline": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 4,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 5,
+        "unassessed": 0
+      },
+      "condition": "matched_clean",
+      "lane": "genuine",
+      "planned": 6,
+      "second_opinion": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 4,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "condition": "matched_clean",
+      "lane": "clone",
+      "planned": 3,
+      "second_opinion": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "candidate": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "condition": "matched_clean",
+      "lane": "expressive",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      }
+    },
+    {
+      "baseline": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "condition": "matched_clean",
+      "lane": "stock",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 4,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 1
+      },
+      "candidate": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 1,
+        "unassessed": 1
+      },
+      "condition": "background_a_minus5db",
+      "lane": "genuine",
+      "planned": 6,
+      "second_opinion": {
+        "ai": 4,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 1
+      }
+    },
+    {
+      "baseline": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "condition": "background_a_minus5db",
+      "lane": "clone",
+      "planned": 3,
+      "second_opinion": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 3
+      },
+      "candidate": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 3
+      },
+      "condition": "background_a_minus5db",
+      "lane": "expressive",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 1,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 3
+      }
+    },
+    {
+      "baseline": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 2
+      },
+      "candidate": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 2
+      },
+      "condition": "background_a_minus5db",
+      "lane": "stock",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 2
+      }
+    },
+    {
+      "baseline": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "candidate": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "condition": "background_a_minus5db",
+      "lane": "isolated_background",
+      "planned": 1,
+      "second_opinion": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      }
+    },
+    {
+      "baseline": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 3,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 5,
+        "unassessed": 0
+      },
+      "condition": "background_b_minus5db",
+      "lane": "genuine",
+      "planned": 6,
+      "second_opinion": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 3,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "condition": "background_b_minus5db",
+      "lane": "clone",
+      "planned": 3,
+      "second_opinion": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "candidate": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "condition": "background_b_minus5db",
+      "lane": "expressive",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      }
+    },
+    {
+      "baseline": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "candidate": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "condition": "background_b_minus5db",
+      "lane": "stock",
+      "planned": 4,
+      "second_opinion": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      }
+    },
+    {
+      "baseline": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "candidate": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      },
+      "condition": "background_b_minus5db",
+      "lane": "isolated_background",
+      "planned": 1,
+      "second_opinion": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 1
+      }
+    }
+  ],
+  "freeze_sha256": "f468356b955f1ae45a4cb4068c840fa53fd84ff3689913091ef70dcf34c5a9e0",
+  "isolated_backgrounds_admitted": 0,
+  "limitations": [
+    "Known source exclusions do not prove model pretraining separation.",
+    "The source bank was reused from earlier stereo studies. Foregrounds here exclude all measured-room source groups.",
+    "Expressive and stock model voice families have prior project exposure. New exact recordings do not guarantee unseen voices.",
+    "Backgrounds are additive, not new live room recordings. -5 dB is a full-window RMS target.",
+    "Rates are descriptive. Views reuse a foreground across conditions and both backgrounds across foregrounds.",
+    "Unassessed means insufficient production-admitted speech and is counted separately."
+  ],
+  "matched_clean_noisy_by_background": [
+    {
+      "condition": "background_a_minus5db",
+      "distinct_foregrounds": 11,
+      "table": [
+        {
+          "baseline": {
+            "ai": 0,
+            "inconclusive": 1,
+            "original": 4,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 5,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "genuine",
+          "planned": 5,
+          "second_opinion": {
+            "ai": 0,
+            "inconclusive": 1,
+            "original": 4,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "clone",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "expressive",
+          "planned": 1,
+          "second_opinion": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 2,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 2,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "stock",
+          "planned": 2,
+          "second_opinion": {
+            "ai": 2,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 4,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          },
+          "condition": "background_a_minus5db",
+          "lane": "genuine",
+          "planned": 5,
+          "second_opinion": {
+            "ai": 4,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_a_minus5db",
+          "lane": "clone",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_a_minus5db",
+          "lane": "expressive",
+          "planned": 1,
+          "second_opinion": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_a_minus5db",
+          "lane": "stock",
+          "planned": 2,
+          "second_opinion": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          }
+        }
+      ]
+    },
+    {
+      "condition": "background_b_minus5db",
+      "distinct_foregrounds": 16,
+      "table": [
+        {
+          "baseline": {
+            "ai": 0,
+            "inconclusive": 2,
+            "original": 4,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 0,
+            "inconclusive": 1,
+            "original": 5,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "genuine",
+          "planned": 6,
+          "second_opinion": {
+            "ai": 0,
+            "inconclusive": 2,
+            "original": 4,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "clone",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "expressive",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "matched_clean",
+          "lane": "stock",
+          "planned": 4,
+          "second_opinion": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 1,
+            "inconclusive": 2,
+            "original": 3,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 0,
+            "inconclusive": 1,
+            "original": 5,
+            "unassessed": 0
+          },
+          "condition": "background_b_minus5db",
+          "lane": "genuine",
+          "planned": 6,
+          "second_opinion": {
+            "ai": 1,
+            "inconclusive": 2,
+            "original": 3,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_b_minus5db",
+          "lane": "clone",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_b_minus5db",
+          "lane": "expressive",
+          "planned": 3,
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        {
+          "baseline": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "candidate": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "condition": "background_b_minus5db",
+          "lane": "stock",
+          "planned": 4,
+          "second_opinion": {
+            "ai": 4,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        }
+      ]
+    }
+  ],
+  "models_changed": false,
+  "overall_confidence_changed": false,
+  "protocol": {
+    "admission": "Production three-second full-profile window and original 50% speech gate; no rescue fallback.",
+    "background_isolated_controls": 2,
+    "coverage": "All frozen cases and admitted-only matched clean/noisy slices; no data-dependent stop or cutoff changes.",
+    "distinct_eligible_groups": {
+      "clone": 6,
+      "expressive": 10,
+      "genuine": 6,
+      "stock": 4
+    },
+    "earlier_recorded_source_exclusions": [
+      "v58",
+      "v81/v84",
+      "v217",
+      "v248",
+      "v269",
+      "Surrey/BBC role plan",
+      "32 GRID originals"
+    ],
+    "foreground_conditions": [
+      "matched_clean",
+      "background_a_minus5db",
+      "background_b_minus5db"
+    ],
+    "licences_by_lane": {
+      "clone": "MIT (publisher PLN scenario declaration)",
+      "expressive": "CC-BY-4.0",
+      "genuine": "CC-BY-4.0",
+      "stock": "CC-BY-SA-4.0"
+    },
+    "models": {
+      "baseline_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+      "candidate_points": {
+        "current": {
+          "ai_above": 0.8767672486703044,
+          "original_below": 0.07869087799389911
+        },
+        "paired_wavlm_raw": {
+          "ai_above": 0.6525272861441811,
+          "original_below": 0.4355485730182533
+        }
+      },
+      "english_points_sha256": "40c6a8ccd2665287fe76bcc5eacf7a4cc42ceced1f4bc199066649c88b830d80",
+      "stock_baseline_assets": {
+        "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+        "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+        "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+      },
+      "wavlm_checkpoint": {
+        "assets": {
+          "README.md": {
+            "bytes": 3904,
+            "sha256": "d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e"
+          },
+          "UniSpeech-LICENSE": {
+            "bytes": 21153,
+            "sha256": "74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91"
+          },
+          "config.json": {
+            "bytes": 2232,
+            "sha256": "fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4"
+          },
+          "preprocessor_config.json": {
+            "bytes": 215,
+            "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2"
+          },
+          "pytorch_model.bin": {
+            "bytes": 377617425,
+            "sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51"
+          },
+          "unilm-LICENSE": {
+            "bytes": 1104,
+            "sha256": "904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe"
+          }
+        },
+        "clock": {
+          "frames": 149,
+          "last_receptive_range": [
+            47360,
+            47760
+          ],
+          "receptive_field_samples": 400,
+          "stride_samples": 320
+        },
+        "installed_implementation_sha256": {
+          "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e",
+          "transformers.models.wavlm.configuration_wavlm": "2ab3a6662a0b2b3ac7e6963fc19df2fa8f75f9441164e0de7e6965bdfcb610b3",
+          "transformers.models.wavlm.modeling_wavlm": "b9607c8c9c94d6d8567f13246d1eb5b793e219419032cd8ee8cc9926ce80f145"
+        },
+        "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+        "runtime_packages": {
+          "numpy": "2.2.6",
+          "torch": "2.13.0",
+          "transformers": "5.15.1"
+        },
+        "v13_freeze_sha256": "34096f6cd001c27e217ba7ff8ee5f2ff6bae48d85c4d91b9424cb78e2ef3b4a1"
+      },
+      "wavlm_freeze_sha256": "bac0b9144a566522ad867f4bac20e3fadd6f52ef0b2a3ba03bad4c8209550e8b",
+      "wavlm_head_sha256": "68690eafe7050780d4861283adc281fbaff96a166b3b1c842cb8688095124252"
+    },
+    "noise_db_full_window_rms": -5,
+    "noise_license": "Public-domain for selected noise/free-sound records only",
+    "policy": "Only promote a measured inconclusive current result to AI when the frozen candidate says AI.",
+    "previous_model_freeze_sha256": "43380c24a99975768da7e91ceca6ebd685ae002a3900292678fc5bf0d62425e8",
+    "runner_sha256": "e354a1dbcc7af3f3396b26be3056cb6bb3bdc8bf7e1270aba5c61f3dd71bffca",
+    "selected_groups": {
+      "clone": 3,
+      "expressive": 4,
+      "genuine": 6,
+      "stock": 4
+    },
+    "selected_noise_recordings": 2,
+    "source_plan_sha256": "2566fa8c7c088ae5ca73ff374efbb87cca11abcea47a7afe85016d84acb7f229",
+    "source_public_sha256": "681389a3f959833de637a4e5f778e193b2e4bcecb62a437f3eede38c75896a1e"
+  },
+  "resources": {
+    "activity": {
+      "calls": 4982,
+      "elapsed_s": 3.5953579168999568,
+      "journal_sha256": "7b6c4a4677a97482710f29b290c82fc2d1316b1076a7ddaf3ba849f4e6cf2ebc",
+      "peak_rss_bytes_macos": 522616832,
+      "rows": 53,
+      "status": "complete"
+    },
+    "baseline": {
+      "calls": 50,
+      "elapsed_s": 34.579955540946685,
+      "journal_sha256": "241ac84ef962d66099d2e825c93a3a7d10a95194231662276dda802965dd23d2",
+      "peak_rss_bytes_macos": 2936160256,
+      "rows": 53,
+      "status": "complete"
+    },
+    "candidate": {
+      "calls": 44,
+      "elapsed_s": 6.5804394580191,
+      "journal_sha256": "cebfa31d0528d56e54a420b5086affe02e3e9042264547beef8624572b3342e9",
+      "peak_rss_bytes_macos": 1247199232,
+      "rows": 53,
+      "status": "complete"
+    }
+  },
+  "schema": "chipmunk.audio-wavlm-fresh-noise-result/1",
+  "scope": "Local exact-source and two-background transfer, no refit or app change.",
+  "unique_added_ai_foreground_groups": 0
+}

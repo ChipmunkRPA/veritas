@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.grid-serving-sound-cache-verified/156",
+  "status": "actual_first_batch_sound_cache_verified",
+  "planned_cases": 11,
+  "completed_analyses": 11,
+  "input_binding_checks_passed": {
+    "clock_exact": 11,
+    "sampled_rgb_exact": 11,
+    "audio_pcm_equal": 11,
+    "audio_samples_equal": 11,
+    "audio_origin_equal": 11
+  },
+  "sound_context_route_completed": 11,
+  "sound_context_route_historical_failures": 11,
+  "face_appearance_route_completed": 11,
+  "audio_picture_timing_route_completed": 11,
+  "frame_authenticity_route_skipped": 11,
+  "detector_run_status_counts": {
+    "not_applicable": 33,
+    "ok": 121,
+    "skipped": 11
+  },
+  "outside_frozen_validation_envelope": 11,
+  "overall_customer_direction_counts": {
+    "unavailable": 11
+  },
+  "monitor_guard": null,
+  "monitor_sample_errors": 0,
+  "sampled_descendant_rss_bytes": 5512216576,
+  "worker_duration_seconds": 151.69199791701976,
+  "observed_neural_forward_count": null,
+  "resolved_device": "mps",
+  "defaults_changed": false,
+  "freeze_sha256": "3e650f8d7c8b64165a61a9a6d05b691109c27c6f44d48bae435e0aa0e09c9320",
+  "numba_cache_smoke_sha256": "9ce222d37fb078c142a410b7c8b478978646e0370eddd0a992ec29135390ed44",
+  "private_profile_sha256": "3044d15c5f979e6950cc9c12bc8bbe811c7b0ac479a370421476a33789e5f86b",
+  "private_worker_receipt_sha256": "a556f538335a3582c0adaf450d596d1e0ca5c8e8fd556cb1213509c525fe18b9",
+  "private_case_journal_sha256": "bef39d4a06f8860f380f63471337ea347f409ce08cad976dc4d21bf25631a145",
+  "scope": "Same matched single-source serving engineering batch. Sound route load and execution verified; no sound-tag or authenticity accuracy claim."
+}

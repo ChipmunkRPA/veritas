@@ -60,6 +60,9 @@ checks whether a proposed region has a matching donor elsewhere in the image
 while retaining the original highlight.
 The [licensed photo comparison](image-copy-transfer-v298-result.md) measures
 donor recovery on fresh ordinary edits and unchanged controls in two formats.
+The [native copy follow-up](source-evidence-native-coverage-2026-11-11.md#images)
+compares the supplied-region and automatic proposal paths on the same images,
+with separate counts for translated and reflected copies.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -97,6 +100,10 @@ The [first current-app triplet](video-vcd2-current-app-v294-first-result.md)
 records measured appearance coverage and the separate frame-check budget skip.
 The [later reference snapshot](video-vcd2-current-app-v294-reference-snapshot.md)
 preserves all 20 completed controls and four cases pending resource admission.
+The [aligned face detail and motion comparison](video-aligned-face-detail-probe.md)
+reuses committed landmarks to evaluate two new measurements on separate
+development and confirmation groups. It includes the local replay command and
+reports the false alarms that kept both measurements experimental.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

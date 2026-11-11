@@ -1,0 +1,132 @@
+{
+  "status": "complete",
+  "freeze_sha256": "775bf567abd3eed251d3054959a67f4016d1ea94e0d1350218c212ade652778c",
+  "private_proposal_sha256": "3a15f6c142052260f3e491dda2e893fce329cc5adee43c1927d60b32a05a0a1c",
+  "inherited_source_freeze_sha256": "4c397fdce4bb242910cb6f14a03a008f74a02070fe66f826c5753829df964577",
+  "planned_source_groups": 4,
+  "planned_views": 40,
+  "checked_views": 40,
+  "counts": {
+    "native_png": {
+      "original": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "tone": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "blur": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "translated_copy": {
+        "checked": 4,
+        "any_clone_pair": 3,
+        "distinct_clone_pair": 3,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 2,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "reflected_copy": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      }
+    },
+    "jpeg90": {
+      "original": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "tone": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "blur": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "translated_copy": {
+        "checked": 4,
+        "any_clone_pair": 3,
+        "distinct_clone_pair": 3,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 2,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      },
+      "reflected_copy": {
+        "checked": 4,
+        "any_clone_pair": 0,
+        "distinct_clone_pair": 0,
+        "only_repetitive_pairs": 0,
+        "correct_distinct_pair": 0,
+        "exact_distinct_pair": 0,
+        "has_image_packet": 0,
+        "has_copy_donor_packet": 0,
+        "exact_packet_donor_recovery": 0
+      }
+    }
+  },
+  "proposal_peak_rss_bytes": 557629440,
+  "packet_peak_rss_bytes": 200916992,
+  "proposal_median_seconds": 0.7551,
+  "proposal_max_seconds": 1.8019,
+  "scope": "Production full/deep model-free clone adapter and v6 image evidence persistence. Separate processes; no other detectors or manual proposals.",
+  "errors": [],
+  "limitation": "Four photos previously used for the supplied-mask benchmark, with paired PNG/JPEG90 views. Learned localizers and full classification are outside this measurement."
+}

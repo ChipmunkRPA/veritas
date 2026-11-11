@@ -1,0 +1,324 @@
+{
+  "cases": 96,
+  "freeze_sha256": "b4ddf6f317cbd7d583bb00af54ff36c8954747a4435c933f2d70a7cf843bcffb",
+  "measurements": {
+    "inner_temporal": {
+      "development_point": 0.18232154487302582,
+      "outcomes": {
+        "confirmation": {
+          "inswapper": {
+            "above_point_inside_edit": 2,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 5,
+            "max_inside_edit": 5,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 2,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 6,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 4,
+            "max_inside_edit": 4,
+            "measured_frames": 132
+          }
+        },
+        "development": {
+          "inswapper": {
+            "above_point_inside_edit": 2,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 3,
+            "max_inside_edit": 2,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 5,
+            "cases": 5,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 55
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 1,
+            "cases": 1,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 11
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 1,
+            "max_inside_edit": 1,
+            "measured_frames": 132
+          }
+        }
+      }
+    },
+    "legacy_noise": {
+      "development_point": 0.8415671856782185,
+      "outcomes": {
+        "confirmation": {
+          "inswapper": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 1,
+            "max_inside_edit": 4,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 0,
+            "max_inside_edit": 1,
+            "measured_frames": 132
+          }
+        },
+        "development": {
+          "inswapper": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 0,
+            "max_inside_edit": 4,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 5,
+            "cases": 5,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 55
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 1,
+            "cases": 1,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 11
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 1,
+            "max_inside_edit": 3,
+            "measured_frames": 132
+          }
+        }
+      }
+    },
+    "rim_spatial": {
+      "development_point": 0.22801248172386054,
+      "outcomes": {
+        "confirmation": {
+          "inswapper": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 3,
+            "max_inside_edit": 4,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 3,
+            "cases": 3,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 33
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 3,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 1,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 3,
+            "max_inside_edit": 5,
+            "measured_frames": 132
+          }
+        },
+        "development": {
+          "inswapper": {
+            "above_point_inside_edit": 1,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 2,
+            "max_inside_edit": 2,
+            "measured_frames": 132
+          },
+          "jump-cut": {
+            "above_point_inside_edit": 0,
+            "assessed": 5,
+            "cases": 5,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 55
+          },
+          "lighting-change": {
+            "above_point_inside_edit": 0,
+            "assessed": 1,
+            "cases": 1,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 11
+          },
+          "original_videos": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 2,
+            "max_inside_edit": 0,
+            "measured_frames": 132
+          },
+          "recompression": {
+            "above_point_inside_edit": 0,
+            "assessed": 6,
+            "cases": 6,
+            "flags": 0,
+            "max_inside_edit": 0,
+            "measured_frames": 66
+          },
+          "uniface": {
+            "above_point_inside_edit": 0,
+            "assessed": 12,
+            "cases": 12,
+            "flags": 1,
+            "max_inside_edit": 2,
+            "measured_frames": 132
+          }
+        }
+      }
+    }
+  },
+  "native_frames_verified": 3168,
+  "neural_calls": 0,
+  "status": "complete"
+}

@@ -1,0 +1,258 @@
+{
+  "ami": {
+    "available_before_attribution_at_least_four": 4,
+    "case_roles": {
+      "known_mechanical_timing": {
+        "arms": {
+          "agreement": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "baseline": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "gap_safe": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "mouth_motion": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          }
+        },
+        "views": 4,
+        "views_with_any_measurement": 1,
+        "views_with_four_or_more_windows": 0
+      },
+      "ordinary_control": {
+        "arms": {
+          "agreement": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "baseline": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "gap_safe": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "mouth_motion": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          }
+        },
+        "views": 12,
+        "views_with_any_measurement": 3,
+        "views_with_four_or_more_windows": 0
+      }
+    },
+    "continuous_intervals": 4,
+    "freeze_sha256": "72465b1416cdc2397604025fa825ef27dc558f530effdbd70776e7d8b0b8a0ce",
+    "intake_receipt_sha256": "4522fdd473d35f00c68ac135200ed81b69bf0c61fc8b8ec8a90fd9b91f377c58",
+    "known_speaker_diagnostic": {
+      "constant_audio_offset": {
+        "automatic_attribution": 0.12301281005856035,
+        "baseline_flags": true,
+        "baseline_union_iou": 0.0,
+        "mouth_motion_flags": false,
+        "windows_before_gate": 23
+      },
+      "local_audio_displacement": {
+        "automatic_attribution": 0.07537756933858028,
+        "baseline_flags": true,
+        "baseline_union_iou": 0.17765042979942694,
+        "mouth_motion_flags": false,
+        "windows_before_gate": 23
+      },
+      "recorded": {
+        "automatic_attribution": 0.10704623834182242,
+        "baseline_flags": true,
+        "baseline_union_iou": 0.0,
+        "mouth_motion_flags": false,
+        "windows_before_gate": 23
+      }
+    },
+    "recording_sessions": 2,
+    "score_sha256": "521aed1513ac76fff21f88d74c35f1ab24cc7286639ae436df3dd19cd4e52501",
+    "verified_pcm_samples": 4096000,
+    "verified_pictures": 6400,
+    "views": 16
+  },
+  "date": "2026-11-11",
+  "example": {
+    "historical_flag": {
+      "anchor_seconds": {
+        "after": "5",
+        "before": "93/25",
+        "during": "109/25"
+      },
+      "codec": "ffv1",
+      "exhibit_pngs_verified": 3,
+      "frame_count": 150,
+      "interval_seconds": [
+        "187/50",
+        "5"
+      ],
+      "scope": "source bytes, presentation clock and three sampled RGB pictures",
+      "status": "verified",
+      "time_base": "1/1000"
+    },
+    "historical_flag_receipt_sha256": "ae09099b13bba0b51259c59466cc652ca4095470c445d35b6ecf99687c63d284",
+    "known_edit_receipt_sha256": "4bd84aa526711721e9a9793ef516b1855859a890ee0ba31fdbe4b9a3759a6896",
+    "overlapping_known_edit": {
+      "anchor_seconds": {
+        "after": "122/25",
+        "before": "101/25",
+        "during": "112/25"
+      },
+      "codec": "ffv1",
+      "exhibit_pngs_verified": 3,
+      "frame_count": 150,
+      "interval_seconds": [
+        "102/25",
+        "122/25"
+      ],
+      "scope": "source bytes, presentation clock and three sampled RGB pictures",
+      "status": "verified",
+      "time_base": "1/1000"
+    }
+  },
+  "gap_fix": {
+    "adapter_version": "0.5.5",
+    "freeze_sha256": "0eb4955a95e227239c549430c467a41019a9a3be1ec7b7f352a156089cd50bdc",
+    "neural_flags_removed": [
+      {
+        "old_flag_intervals_seconds": [
+          [
+            "187/50",
+            "5"
+          ]
+        ],
+        "old_met_overlap_rule": true,
+        "old_union_iou": 0.3883495145631068
+      },
+      {
+        "old_flag_intervals_seconds": [
+          [
+            "149/50",
+            "5"
+          ]
+        ],
+        "old_met_overlap_rule": true,
+        "old_union_iou": 0.28368794326241137
+      },
+      {
+        "old_flag_intervals_seconds": [
+          [
+            "81/25",
+            "5"
+          ]
+        ],
+        "old_met_overlap_rule": true,
+        "old_union_iou": 0.3125
+      },
+      {
+        "old_flag_intervals_seconds": [
+          [
+            "137/50",
+            "112/25"
+          ]
+        ],
+        "old_met_overlap_rule": false,
+        "old_union_iou": 0.1360544217687075
+      }
+    ],
+    "ordinary_flags_removed": 3,
+    "prior_unflagged_remained_unflagged": 15,
+    "replay_sha256": "ad55333d7a282bcbf64c32e858cdfd92d20174778ce69c0700aa3b949d6dbb8f",
+    "retrospective_views": 22,
+    "views_with_changed_measured_window_count": 0
+  },
+  "grid": {
+    "available_before_attribution_at_least_four": 104,
+    "case_roles": {
+      "known_mechanical_timing": {
+        "arms": {
+          "agreement": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "baseline": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "mouth_motion": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "seam_split_route": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          }
+        },
+        "views": 24,
+        "views_with_any_measurement": 21,
+        "views_with_four_or_more_windows": 21
+      },
+      "neural_redraw": {
+        "arms": {
+          "agreement": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "baseline": {
+            "flags": 4,
+            "localized_at_iou_one_fifth": 3
+          },
+          "mouth_motion": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "seam_split_route": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          }
+        },
+        "views": 32,
+        "views_with_any_measurement": 29,
+        "views_with_four_or_more_windows": 29
+      },
+      "ordinary_control": {
+        "arms": {
+          "agreement": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          },
+          "baseline": {
+            "flags": 3,
+            "localized_at_iou_one_fifth": 0
+          },
+          "mouth_motion": {
+            "flags": 1,
+            "localized_at_iou_one_fifth": 0
+          },
+          "seam_split_route": {
+            "flags": 0,
+            "localized_at_iou_one_fifth": 0
+          }
+        },
+        "views": 48,
+        "views_with_any_measurement": 43,
+        "views_with_four_or_more_windows": 43
+      }
+    },
+    "freeze_sha256": "0a37e009e31ba4d4fa84f3c216fd15f4dfb4e8cdb0542530276ac0373b5dfeee",
+    "known_neural_redraw_count": 32,
+    "same_authored_join_seconds": 3,
+    "score_sha256": "2e89505d54766dd2bf341e64a4694129469d301cea4ad1bf399ea12a83d8f7b7",
+    "source_components": 8,
+    "verified_pcm_samples": 9984000,
+    "verified_pictures": 15600,
+    "views": 104
+  },
+  "schema": "chipmunk.video-longer-timing-transfer/1",
+  "study_scope": "Actual local adapter measurement, no claims of whole serving or calibrated AI sensitivity."
+}

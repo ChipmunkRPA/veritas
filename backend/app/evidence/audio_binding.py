@@ -62,10 +62,70 @@ def unscored_voice_intervals(coverage: dict, source: dict) -> list[dict]:
     return gaps
 
 
-def validate_unscored_voice_coverage(coverage: dict, source: dict) -> None:
-    if ("unscored_intervals" in coverage
-            and canonical_hash(coverage["unscored_intervals"]) != canonical_hash(unscored_voice_intervals(coverage, source))):
+def stereo_attenuation_overlaps(gaps: list[dict], stereo: dict | None) -> list[dict]:
+    """Locate where a measured mono level drop and a voice-score gap coincide."""
+    from app.evidence.stereo_binding import SCHEMA
+
+    if not stereo or stereo.get("schema") != SCHEMA:
+        return []
+    overlaps = []
+    for window_index, window in enumerate(stereo["windows"]):
+        if not window["downmix"]["strong_attenuation"]:
+            continue
+        for gap_index, gap in enumerate(gaps):
+            start = max(gap["start_sample"], window["start_sample"])
+            end = min(gap["end_sample"], window["end_sample"])
+            if start >= end:
+                continue
+            ranges = []
+            for source_range in gap["source_timestamp_ranges"]:
+                left = max(start, source_range["start_sample"])
+                right = min(end, source_range["end_sample"])
+                if left < right:
+                    offset = source_range["source_start_pts"] - source_range["start_sample"]
+                    ranges.append({"start_sample": left, "end_sample": right,
+                                   "source_start_pts": left + offset, "source_end_pts": right + offset,
+                                   "time_base": source_range["time_base"]})
+            overlaps.append({"start_sample": start, "end_sample": end, "unscored_interval_index": gap_index,
+                             "stereo_window_index": window_index, "source_timestamp_ranges": ranges})
+    return overlaps
+
+
+def attach_stereo_attenuation_overlaps(channel: dict) -> None:
+    coverage = channel["coverage"]
+    overlaps = stereo_attenuation_overlaps(coverage["unscored_intervals"], channel.get("stereo_context"))
+    if overlaps:
+        coverage["stereo_attenuation_overlaps"] = overlaps
+
+
+def _timeline_ranges(source: dict, start: int, end: int) -> list[dict]:
+    output = []
+    for block in source["timeline"]:
+        a, b = max(start, block["start_sample"]), min(end, block["end_sample"])
+        if a < b:
+            offset = block["source_pts"] - block["start_sample"]
+            output.append({"start_sample": a, "end_sample": b, "source_start_pts": a + offset,
+                           "source_end_pts": b + offset, "time_base": source["timeline_time_base"]})
+    return output
+
+
+def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict | None = None) -> None:
+    if "unscored_intervals" not in coverage and "stereo_attenuation_overlaps" not in coverage:
+        return
+    gaps = unscored_voice_intervals(coverage, source)
+    if canonical_hash(coverage.get("unscored_intervals")) != canonical_hash(gaps):
         raise ValueError("Unscored voice intervals differ from their source clocks or recorded windows")
+    if "stereo_attenuation_overlaps" not in coverage:
+        return
+    from app.evidence.stereo_binding import SCHEMA, validate
+
+    if not stereo or stereo.get("schema") != SCHEMA:
+        raise ValueError("Unscored stereo overlaps lack their measured mono level drops")
+
+    validate(stereo, source, ranges=lambda a, b: _timeline_ranges(source, a, b))
+    expected = stereo_attenuation_overlaps(gaps, stereo)
+    if not expected or canonical_hash(coverage["stereo_attenuation_overlaps"]) != canonical_hash(expected):
+        raise ValueError("Unscored stereo overlaps differ from their measured windows or source clocks")
 
 
 def validate_audio_channel(channel: dict, source_sha256: str) -> None:
@@ -122,10 +182,7 @@ def _validate(channel, source_sha256):
         return a,b
 
     def ranges(a,b):
-        return [{'start_sample': max(a,row['start_sample']), 'end_sample': min(b,row['end_sample']),
-                 'source_start_pts': row['source_pts']+max(a,row['start_sample'])-row['start_sample'],
-                 'source_end_pts': row['source_pts']+min(b,row['end_sample'])-row['start_sample'], 'time_base':'1/16000'}
-                for row in source['timeline'] if max(a,row['start_sample']) < min(b,row['end_sample'])]
+        return _timeline_ranges(source, a, b)
 
     if {'stereo_context', 'stereo_context_sha256'}.intersection(channel):
         from app.evidence.stereo_binding import validate
@@ -153,7 +210,7 @@ def _validate(channel, source_sha256):
     require((channel['status']=='ready') == bool(coverage['windows']), 'Voice status differs from its actual windows')
     require(coverage['decoded_samples'] == samples and coverage['scored_samples']+coverage['unscored_samples']==samples,
             'Voice sample coverage does not balance')
-    validate_unscored_voice_coverage(coverage, source)
+    validate_unscored_voice_coverage(coverage, source, channel.get('stereo_context'))
     ids=set()
     for packet in channel['packets']:
         require(packet['id'].startswith('A') and packet['id'] not in ids and packet['evidence_type']=='statistical',

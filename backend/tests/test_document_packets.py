@@ -139,6 +139,20 @@ def test_other_check_disagreement_is_retained_for_selected_context(packet_factor
     assert [w["score"] for w in evidence["packets"][0]["supporting_windows"]] == [0.9, 0.1]
 
 
+def test_email_quote_can_be_in_forward_input_outside_highlighted_ratio(packet_factory):
+    body = "First sentence contains enough useful words. Second sentence adds more context.\n\n> This quotation completes the source."
+    db, store, analysis, result, decoded, _ = packet_factory(".eml", scores=(0.1, 0.2, 0.3), text=body)
+    _add_ratio(result, decoded, score=0.8)
+    analysis.result_hash = canonical_hash(result)
+    packet = build_packet_set(db, analysis, store, result)["packets"][1]
+    assert packet["inspection_scope"]["basis"] == "ratio_reduction"
+    assert {anchor["quote_role"] for anchor in packet["anchors"]} == {"body"}
+    ratio = next(window for window in packet["supporting_windows"] if window["score_kind"] == "perplexity_ratio")
+    assert "> This quotation" in ratio["text"]
+    assert "A recorded check read material marked as an email quote or signature outside the highlighted range. That surrounding text can influence the response." in packet["limitations"]
+    assert packet["focus"]["text"] == "Second sentence adds more context."
+
+
 def _add_ratio(result, decoded, score=1.4, threshold=0.9505):
     text = decoded["text"]
     token_ids = [0, *range(1, len(text) + 1)]

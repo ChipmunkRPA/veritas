@@ -132,7 +132,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     </div>
     <div className="mt-6 space-y-7">{set.packets.map((packet) => {
       const pages = [...new Set(Object.values(packet.artifacts).map((asset) => asset.page).filter((page): page is number => typeof page === 'number'))].sort((a, b) => a - b)
-      const roles = [...new Set(packet.anchors.map((anchor) => anchor.quote_role).filter(Boolean))]
+      const roles = new Set(packet.anchors.map((anchor) => anchor.quote_role))
+      const includesQuotedText = roles.has('quoted') || roles.has('signature')
       return <article key={packet.id} id={`media-evidence-${packet.id}`} tabIndex={-1}
         ref={(node) => { if (node) articles.current.set(packet.id, node); else articles.current.delete(packet.id) }}
         aria-label={`${packet.id}: source passage and reasons`} data-selected={selectedId === packet.id ? 'true' : undefined}
@@ -144,7 +145,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         <p className="mt-2 mb-0 text-caption font-mono text-text-muted">
           {packet.inspection_scope?.basis === 'scored_context' ? 'Navigation sentence' : 'Extracted text characters'} [{packet.focus.start}, {packet.focus.end}) · Unicode code points
         </p>
-        {roles.some((role) => role === 'quoted' || role === 'signature') && <p className="mt-2 mb-0 text-small text-text-muted">This passage is mapped to a quote or signature. Do not attribute its wording to the email sender.</p>}
+        {includesQuotedText && <p className="mt-2 mb-0 text-small text-text-muted">{roles.has('body')
+          ? 'Highlighted text includes message text and an email quote or signature.'
+          : 'The highlight covers an email quote or signature. Do not attribute its wording to the email sender.'}</p>}
         {pages.map((page) => <PagePlates key={page} set={set} packet={packet} page={page} token={token} mediaReady={mediaReady} />)}
         <div className="mt-5 space-y-3">
           <h4 className="m-0 text-small font-medium">What each check actually read</h4>

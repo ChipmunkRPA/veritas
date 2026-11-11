@@ -35,6 +35,7 @@ def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_fac
     report_result = deepcopy(snapshot.result)
     report_result["input"]["sha256"] = analysis.sha256
     report_result["manifest"]["sampling"] = deepcopy(result["manifest"]["sampling"])
+    report_result["signals"] = deepcopy(result["signals"])
     evidence.update(analysis_id=snapshot.analysis.id, revision=snapshot.analysis.revision,
                     original_result_hash=canonical_hash(report_result))
     evidence["sha256"] = packet_hash(evidence)

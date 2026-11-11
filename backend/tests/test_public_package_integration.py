@@ -22,6 +22,7 @@ import pytest
 from alembic import command
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from PIL import Image
 from sqlalchemy import MetaData, Table, create_engine, inspect, select
 from sqlalchemy.orm import Session
 from test_audio_evidence import _replace_entry
@@ -228,6 +229,40 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
 
     trusted_key = tmp_path / "trusted-public.pem"
     trusted_key.write_bytes(f.key.public_pem())
+    if f.analysis.kind == "image":
+        original = tmp_path / "submitted.png"
+        original.write_bytes(f.store.read_bytes(f.analysis.sha256))
+        check = subprocess.run([sys.executable, "-m", "app.cli", "verify", str(built.path), "--public-key", str(trusted_key),
+                                "--source-image", str(original), "--json"], cwd=Path(__file__).resolve().parents[1],
+                               capture_output=True, text=True, timeout=20)
+        assert check.returncode == 0, check.stdout + check.stderr
+        checks = {item["name"]: item for item in json.loads(check.stdout)["checks"]}
+        assert checks["original image crops"]["ok"]
+        assert "2 unannotated crops matched" in checks["original image crops"]["detail"]
+        if not include_original:
+            # A new valid signature and fresh commitments can bind a wrong crop location.
+            with zipfile.ZipFile(built.path) as archive:
+                files = {name: archive.read(name) for name in archive.namelist() if name not in verify.UNLISTED}
+            packet_set = json.loads(files["evidence.json"])
+            pair = next(record["pairs"][0] for field in ("copy_similarity", "copy_translation")
+                        if (record := packet_set[field])["pairs"])
+            pair["regions"]["area_a"]["x"] += 1
+            packet_set.pop("sha256")
+            packet_set["sha256"] = canonical_hash(packet_set)
+            files["evidence.json"] = canonical_json(packet_set)
+            bundle["evidence"].update(set_sha256=packet_set["sha256"], sha256=hashlib.sha256(files["evidence.json"]).hexdigest())
+            bundle["reports"][0]["evidence_set_sha256"] = packet_set["sha256"]
+            files["bundle.json"] = canonical_json(bundle)
+            manifest = "".join(f"{hashlib.sha256(files[name]).hexdigest()}  {name}\n" for name in sorted(files)).encode()
+            altered = tmp_path / "moved-crop.zip"
+            altered.write_bytes(_zip_bytes(files | {"manifest.sha256": manifest,
+                                                    "manifest.sha256.sig": f.key.sign(manifest).encode()}))
+            assert verify.verify_package(altered, public_key_pem=f.key.public_pem()).ok
+            result = verify.verify_package(altered, public_key_pem=f.key.public_pem(), source_image=original)
+            assert not result.ok and "differs from pixels" in result.checks[-1].detail
+            original.write_bytes(b"other source bytes")
+            result = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_image=original)
+            assert not result.ok and "differs from the committed original" in result.checks[-1].detail
     # A fresh process blocks runtime imports and networking: verification consumes
     # only the ZIP and independently supplied signing key, with no live API/DB/model.
     offline = subprocess.run([sys.executable, "-c", """
@@ -242,7 +277,8 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.face_lighting_context',
-                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.sound_event_binding'):
+                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.sound_event_binding',
+                        'app.evidence.stereo_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):
@@ -262,7 +298,39 @@ sys.exit(0 if result.ok else 1)
     assert leaked == [], f"Public derivative exposes internal check identities: {leaked}"
 
 
-@pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py', 'image_copy_similarity_binding.py'])
+def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tmp_path):
+    from app.reports import verify_image_source
+
+    original = tmp_path / "rotated.png"
+    with Image.new("RGB", (8, 6)) as image:
+        image.putdata([(i, 3 * i, 5 * i) for i in range(48)])
+        metadata = Image.Exif()
+        metadata[274] = 6
+        image.save(original, exif=metadata)
+        expected = image.transpose(Image.Transpose.ROTATE_270)
+    sha = hashlib.sha256(original.read_bytes()).hexdigest()
+    bundle = {"schema": package.PUBLIC_SCHEMA, "analysis": {"kind": "image"}, "source_commitment": {"sha256": sha}}
+    source = {"width": 6, "height": 8, "coordinate_space": "exif-oriented-original", "exif_orientation": 6}
+    assets = {}
+    for role, bounds in [("crop", (0, 1, 3, 4)), ("copy_donor", (3, 5, 6, 8))]:
+        with expected.crop(bounds) as crop:
+            data = io.BytesIO()
+            crop.save(data, format="PNG")
+        png = data.getvalue()
+        digest = hashlib.sha256(png).hexdigest()
+        assets[role] = {"sha256": digest}
+        assets[f"assets/{digest}.png"] = png
+    evidence = {"version": "image-evidence-5", "source": source, "packets": [{"id": "E01",
+                "crop_region": {"x": 0, "y": 1, "w": 3, "h": 3},
+                "copy_corroboration": {"donor": {"box": {"x": 3, "y": 5, "w": 3, "h": 3}}},
+                "artifacts": {role: assets[role] for role in ("crop", "copy_donor")}}]}
+    files = {path: png for path, png in assets.items() if path.startswith("assets/")}
+    with zipfile.ZipFile(io.BytesIO(_zip_bytes(files | {"evidence.json": canonical_json(evidence)}))) as archive:
+        assert "2 unannotated crops matched" in verify_image_source.check(archive, bundle, original)
+
+
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py',
+                                 'image_copy_similarity_binding.py', 'stereo_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

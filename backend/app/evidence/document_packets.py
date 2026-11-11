@@ -442,6 +442,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
+    quoted_roles = {"quoted", "signature"}
+    quoted_ranges = [_range(source, len(text)) for source in mapping if source.get("quote_role") in quoted_roles]
     for index, (a, b) in enumerate(selected, 1):
         windows = groups[a, b]
         ca, cb = min(s["start"] for w in windows for s in w["spans"]), max(s["end"] for w in windows for s in w["spans"])
@@ -467,8 +469,17 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                   "Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship."]
         if any(w["score_kind"] == "perplexity_ratio" for w in windows):
             limits.append("The raw language-pattern ratio is lower on its AI-like side and can exceed 1. It is not a probability. Its sentence reduction uses tokens predicted within the recorded rolling contexts; short sentences may include neighbouring sentences.")
-        if any(anchor.get("quote_role") in {"quoted", "signature"} for anchor in anchors):
-            limits.append("This span is in a heuristically identified quote or signature; it must not be attributed to the email sender.")
+        roles = {anchor.get("quote_role") for anchor in anchors}
+        if roles & quoted_roles:
+            if "body" in roles:
+                limits.append("The highlight includes message text and material marked as an email quote or signature. The response applies to the measured range and cannot identify who wrote either part.")
+            else:
+                limits.append("The highlight falls in material marked as an email quote or signature. The response does not establish whether the sender wrote it.")
+        elif quoted_ranges:
+            input_spans = (span for window in windows for context in (window.get("inference_contexts") or [window])
+                           for span in context["spans"])
+            if any(start < span["end"] and span["start"] < end for span in input_spans for start, end in quoted_ranges):
+                limits.append("A recorded check read material marked as an email quote or signature outside the highlighted range. That surrounding text can influence the response.")
         if any(anchor.get("kind") == "pdf" for anchor in anchors):
             limits.append("Page highlights locate intersecting words in the frozen extraction; they are not edits to the source PDF.")
         if any(anchor.get("extraction") == "ocr" for anchor in anchors):

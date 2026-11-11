@@ -169,7 +169,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'audio':
         from app.evidence.audio_binding import validate_unscored_voice_coverage
 
-        validate_unscored_voice_coverage(evidence['coverage'], evidence['source'])
+        validate_unscored_voice_coverage(evidence['coverage'], evidence['source'], evidence.get('stereo_context'))
         acoustic = evidence.get('acoustic_context')
         if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')

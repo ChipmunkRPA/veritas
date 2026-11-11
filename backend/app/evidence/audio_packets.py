@@ -22,7 +22,11 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
-from app.evidence.audio_binding import unscored_voice_intervals, validate_unscored_voice_coverage
+from app.evidence.audio_binding import (
+    attach_stereo_attenuation_overlaps,
+    unscored_voice_intervals,
+    validate_unscored_voice_coverage,
+)
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -105,7 +109,7 @@ def validate_content(document: dict[str, Any]) -> None:
     for window in document["coverage"]["windows"]:
         _interval(window, samples)
     try:
-        validate_unscored_voice_coverage(document["coverage"], source)
+        validate_unscored_voice_coverage(document["coverage"], source, document.get("stereo_context"))
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     if document.get("acoustic_context") is not None:
@@ -344,6 +348,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         document["sound_events"] = sound_context
     if analysis.kind == "audio" and "stereo_context" in mapping:
         document["stereo_context"] = mapping["stereo_context"]
+        attach_stereo_attenuation_overlaps(document)
     from app.evidence.audio_repetition import build as build_repetition
     from app.evidence.audio_similarity import build as build_similarity
 

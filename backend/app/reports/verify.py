@@ -26,6 +26,8 @@ the SHA-256 of the key: enough against a key made without a search, weaker than 
 
 The extract is the analysis's projection of the global chain, so seq gaps between events of other analyses are expected; the
 whole chain is verified on the instance (`app.cli audit verify`).
+
+The optional `--source-image IMAGE` check uses Pillow to compare unannotated crops with the submitted original locally.
 """
 from __future__ import annotations
 
@@ -128,7 +130,8 @@ def event_hash(prev_hash: str, event: Mapping[str, Any]) -> str:
     return hashlib.sha256(prev_hash.encode("ascii", "replace") + canonical_json({n: event[n] for n in BODY_FIELDS})).hexdigest()
 
 
-def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_key_id: str | None = None) -> Verification:
+def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_key_id: str | None = None,
+                   source_image: Path | None = None) -> Verification:
     """Check the package at `path`. `public_key_pem` and `expect_key_id` pin the signer; without either the best outcome is
     `self_consistent` (`ok` false). Raises `PinInvalid` for a key id of the wrong form and `PackageUnreadable` for a non-archive."""
     expected = None if expect_key_id is None else key_id_pin(expect_key_id)
@@ -140,10 +143,25 @@ def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_ke
         out = Verification(pinned=" and ".join(word for word, given in (("public key", public_key_pem), ("key id", expected))
                                                if given is not None) or None)
         try:
-            return _verify(zf, public_key_pem, out, expected)
+            out = _verify(zf, public_key_pem, out, expected)
+            if out.consistent and source_image is not None:
+                out.checks.append(_image_source(zf, out.bundle, source_image))
+            return out
         except (zipfile.BadZipFile, zlib.error, EOFError, OSError, NotImplementedError) as e:  # a CRC failure or a damaged entry
             out.checks.append(Check("readable", False, f"an entry cannot be read ({type(e).__name__}: {e})"))
             return out
+
+
+def _image_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Check:
+    from PIL import Image
+
+    from app.reports import verify_image_source
+
+    name = "original image crops"
+    try:
+        return Check(name, True, verify_image_source.check(archive, bundle, original))
+    except (ValueError, TypeError, KeyError, OSError, Image.DecompressionBombError) as error:
+        return Check(name, False, str(error))
 
 
 def _verify(zf: zipfile.ZipFile, public_key_pem: bytes | None, out: Verification | None = None,

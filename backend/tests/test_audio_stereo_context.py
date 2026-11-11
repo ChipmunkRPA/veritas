@@ -22,6 +22,7 @@ from app.detectors.audio import stereo
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.engine.stages import audio
 from app.evidence import audio_packets, stereo_binding
+from app.evidence.audio_binding import stereo_attenuation_overlaps, unscored_voice_intervals
 from app.reports import engine, multimedia_evidence, package, signing, verify
 from app.reports import snapshot as report_snapshot
 from app.reports.specimens import specimen
@@ -205,6 +206,19 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         mapping = json.loads(store.read_bytes(evidence_input["mapping_sha256"]))
         assert packet["stereo_context"] == mapping["stereo_context"]
         assert "model" not in json.dumps(packet["stereo_context"]).lower()
+        (overlap,) = packet["coverage"]["stereo_attenuation_overlaps"]
+        assert overlap == {
+            "start_sample": 16000, "end_sample": 32000, "unscored_interval_index": 0, "stereo_window_index": 1,
+            "source_timestamp_ranges": [{"start_sample": 16000, "end_sample": 32000,
+                                         "source_start_pts": 16000, "source_end_pts": 32000, "time_base": "1/16000"}],
+        }
+        legacy = deepcopy(packet)
+        del legacy["coverage"]["stereo_attenuation_overlaps"]
+        audio_packets.validate_content(legacy)
+        forged_overlap = deepcopy(packet)
+        forged_overlap["coverage"]["stereo_attenuation_overlaps"][0]["stereo_window_index"] = 0
+        with pytest.raises(audio_packets.PacketIntegrityError, match="Unscored stereo overlaps differ"):
+            audio_packets.validate_content(forged_overlap)
 
         monkeypatch.setattr(v2_evidence_packets, "get_session", lambda: Session(database))
         monkeypatch.setattr(v2_evidence_packets, "default_store", lambda: store)
@@ -223,6 +237,8 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert "/stereo_context" in words and "[16000, 32000)" in words
         assert "Strong level drop in the analyzed mono mix." in words
         assert "Mono is digitally silent" in words
+        assert "Unscored voice during a mono level drop" in words
+        assert "Overlap 1.000–2.000 s of analyzed audio" in words and "/coverage/stereo_attenuation_overlaps" in words
         assert [w["downmix"]["strong_attenuation"] for w in packet["stereo_context"]["windows"]] == [False, True]
 
         altered_mono = deepcopy(packet["stereo_context"])
@@ -259,3 +275,25 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         forged["sha256"] = audio_packets.packet_hash(forged)
         with pytest.raises(ObjectIntegrityError, match="differs from the frozen audio input mapping"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged}))
+
+
+def test_voice_gap_intersection_preserves_discontinuous_source_clock_and_excludes_touching_ranges():
+    source = {"samples": 32000, "sample_rate": 16000, "timeline_time_base": "1/16000", "timeline": [
+        {"start_sample": 0, "end_sample": 5000, "source_pts": 80000},
+        {"start_sample": 5000, "end_sample": 32000, "source_pts": 100000},
+    ]}
+    windows = [{"start_sample": 0, "end_sample": 3000}, {"start_sample": 7000, "end_sample": 16000}]
+    coverage = {"decoded_samples": 32000, "scored_samples": 12000, "unscored_samples": 20000,
+                "scored_intervals": windows, "windows": windows}
+    gaps = unscored_voice_intervals(coverage, source)
+    context = {"schema": stereo_binding.SCHEMA, "windows": [
+        {"start_sample": 0, "end_sample": 16000, "downmix": {"strong_attenuation": True}},
+        {"start_sample": 16000, "end_sample": 32000, "downmix": {"strong_attenuation": False}},
+    ]}
+    assert stereo_attenuation_overlaps(gaps, context) == [{
+        "start_sample": 3000, "end_sample": 7000, "unscored_interval_index": 0, "stereo_window_index": 0,
+        "source_timestamp_ranges": [
+            {"start_sample": 3000, "end_sample": 5000, "source_start_pts": 83000, "source_end_pts": 85000, "time_base": "1/16000"},
+            {"start_sample": 5000, "end_sample": 7000, "source_start_pts": 100000, "source_end_pts": 102000, "time_base": "1/16000"},
+        ],
+    }]

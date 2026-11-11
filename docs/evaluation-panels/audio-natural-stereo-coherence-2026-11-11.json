@@ -1,0 +1,711 @@
+{
+  "acoustic_measurement": [
+    {
+      "background_difference_over_mid_rms": 0.6843,
+      "condition": "recorded_background_1",
+      "conditioned_snr_gain_db": {
+        "max": 2.469,
+        "median": 2.167,
+        "min": 1.695
+      },
+      "measured_input_snr_db_range": [
+        -5.000023,
+        -4.999931
+      ],
+      "views": 18
+    },
+    {
+      "background_difference_over_mid_rms": 0.7754,
+      "condition": "recorded_background_2",
+      "conditioned_snr_gain_db": {
+        "max": 3.393,
+        "median": 3.226,
+        "min": 2.846
+      },
+      "measured_input_snr_db_range": [
+        -5.000029,
+        -4.999931
+      ],
+      "views": 18
+    }
+  ],
+  "comparison": [
+    {
+      "admitted_conditioned": 6,
+      "admitted_mono": 6,
+      "cohort": "genuine",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 6,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 6,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 6,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6
+    },
+    {
+      "admitted_conditioned": 12,
+      "admitted_mono": 12,
+      "cohort": "synthetic",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 8,
+      "planned": 12
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "english_genuine",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "turkish_genuine",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 0,
+        "inconclusive": 0,
+        "original": 3,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "alania",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 4,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "okur",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "drifting",
+      "condition": "clean",
+      "conditioned_only_shadow": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 6,
+      "admitted_mono": 6,
+      "cohort": "genuine",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 1,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 1,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 1,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6
+    },
+    {
+      "admitted_conditioned": 12,
+      "admitted_mono": 12,
+      "cohort": "synthetic",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 7,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 8,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 7,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 8,
+      "planned": 12
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "english_genuine",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "turkish_genuine",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "alania",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 4,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "okur",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "drifting",
+      "condition": "recorded_background_1",
+      "conditioned_only_shadow": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 6,
+      "admitted_mono": 6,
+      "cohort": "genuine",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 5,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 5,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 6,
+      "planned": 6
+    },
+    {
+      "admitted_conditioned": 12,
+      "admitted_mono": 12,
+      "cohort": "synthetic",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 11,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 5,
+        "inconclusive": 7,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 11,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 8,
+      "planned": 12
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "english_genuine",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 3,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 3,
+      "admitted_mono": 3,
+      "cohort": "turkish_genuine",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 2,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 3
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "alania",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 4,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "okur",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 1,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 4,
+      "admitted_mono": 4,
+      "cohort": "drifting",
+      "condition": "recorded_background_2",
+      "conditioned_only_shadow": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current_plus_ai_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "groups": 3,
+      "planned": 4
+    },
+    {
+      "admitted_conditioned": 5,
+      "admitted_mono": 6,
+      "cohort": "genuine",
+      "condition": "unchanged_native",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 3
+      },
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 2
+      },
+      "current_plus_ai_only": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 2
+      },
+      "groups": 2,
+      "planned": 8
+    },
+    {
+      "admitted_conditioned": 5,
+      "admitted_mono": 6,
+      "cohort": "ami_genuine",
+      "condition": "unchanged_native",
+      "conditioned_only_shadow": {
+        "ai": 0,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 3
+      },
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 2
+      },
+      "current_plus_ai_only": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 2
+      },
+      "groups": 2,
+      "planned": 8
+    }
+  ],
+  "diagnostics": {
+    "added_genuine_flags": 3,
+    "added_genuine_source_groups": 3,
+    "added_synthetic_utterances": 7,
+    "added_synthetic_views_by_generator": {
+      "alania": 2,
+      "drifting": 5,
+      "okur": 2
+    },
+    "added_synthetic_voice_groups": 6,
+    "conditioned_views_exactly_equal_to_clean_mono": 18,
+    "distinct_false_genuine_foregrounds": {
+      "current": 2,
+      "current_plus_ai_only": 5
+    },
+    "met_frozen_diagnostic": false,
+    "serving_change": false
+  },
+  "freeze_sha256": "8be65c4b515c697d8db132dadbf332df0c39794f8a9912d53363a961d9d93a9f",
+  "input_commitments": {
+    "additional_generator_receipt_sha256": "c02fa71645bcb333b20bbd33b62ca769a23a29e699875951f512734ac680c461",
+    "ami_source_receipt_sha256": "70b603a680b7fb6756ff0e9f9d0d1bb0ea83118e0f4f98a1a388235dfbc34312",
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "previous_drifting_mixture_receipt_sha256": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+    "previous_source_transfer_sha256": "0046f81254d9d65c87bcc58e61e90a9f6e24645da5dc7569f749249176a47a16",
+    "private_admission_sha256": "b246882e1e2ac37d13b6ddb3b28c8d204655ceacecc8f12c8bd8ae0cc7caa0c1",
+    "private_score_sha256": "396702dd03507d7da272924e33ca25521e5a40723ecfeaba1342d39d9f82adf4",
+    "readout_sha256": "43abecc825ee709807c8ac6ac01b6c7b9485dc42baafbc9cf57625c0f9c23332",
+    "rows_sha256": "1d7a0e7fa223ff69f71e4d07e4ed5b3b0f6a2564309e0494db5a56ea22e94f9e",
+    "runner_sha256": "a1349491d58a2e19238f2eb14cf016e4478419aa091ccca065f5daf23f2cc0f0",
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "method": {
+    "advance": "At least two added AI flags in distinct synthetic groups and zero added genuine or unchanged meeting flags.",
+    "filter": {
+      "fft_samples": 512,
+      "frequency_band_hz": [
+        150,
+        6400
+      ],
+      "gain": "minimum gain + (1-minimum gain)*positive coherence; unity outside analysis band",
+      "hop_samples": 128,
+      "measure": "2*smoothed real left/right cross-power / smoothed total channel power, clipped to [0,1]",
+      "minimum_amplitude_gain": 0.2,
+      "smoothing_frames": 7
+    },
+    "noise_nominal_mono_snr_db": -5,
+    "noise_scene": "Native AMI microphone pair, fixed unused 75+30*i second starts, two sessions. Highest side/mid RMS ratio among the first four time-ordered eligible captures per session, with mid RMS at least 0.002 in normalized PCM.",
+    "observations": "Three-second stereo source cuts. Mono is the FFmpeg production downmix. Model-free comparison transforms the same input on its sample clock.",
+    "policy": "Existing admitted inconclusive only; the conditioned PCM must pass the same speech gate and score AI at the fixed point."
+  },
+  "resources": {
+    "classifier_elapsed_s": 93.81,
+    "classifier_forwards": 133,
+    "classifier_peak_process_rss_bytes": 2921578496,
+    "scored_conditioned_views": 59,
+    "scored_current_views": 60,
+    "scratch_media_bytes": 23808000,
+    "speech_gate_forwards": 11656
+  },
+  "schema": "chipmunk.audio.natural-stereo-coherence-comparison/1",
+  "source_scope": {
+    "controlled_foregrounds_used_in_previous_temporal_score": 0,
+    "drifting_utterances_reused_from_v217": 4,
+    "duration_s": 3,
+    "foregrounds": {
+      "alania": 4,
+      "drifting": 4,
+      "english_genuine": 3,
+      "okur": 4,
+      "turkish_genuine": 3
+    },
+    "matched_source_mixture_views": 36,
+    "native_capture_sessions": 2,
+    "native_genuine_views": 8,
+    "planned_views": 62,
+    "scope": "Paired experimental mixtures and native meeting controls. Both AMI sessions and generator source banks have prior project exposure. Natural source geometry is not representative of all stereo or all severe noise."
+  },
+  "status": "complete"
+}

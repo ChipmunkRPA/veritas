@@ -1,0 +1,1342 @@
+{
+  "counts": {
+    "control_fit_groups": 8,
+    "fit_source_groups": 8,
+    "fresh_source_groups": 12,
+    "fresh_views": 192,
+    "learned_model_forwards": 0,
+    "paired_source_groups": 12,
+    "paired_views": 192
+  },
+  "decision": "retain_current_regional_routes",
+  "environment": {
+    "machine": "macOS arm64",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0",
+    "python": "3.12.6"
+  },
+  "independent_readback": {
+    "exact_region_arithmetic": 768,
+    "fresh_exact_truth_bindings": 192,
+    "matched_prior_panel_inputs": 192,
+    "reconstructed_delivery_hashes": 384
+  },
+  "points": {
+    "jpeg75": {
+      "controls": {
+        "fitted_wavelet": {
+          "group_maxima": [
+            0.48923428738838276,
+            0.5829972718196621,
+            0.3121053473992026,
+            0.4567294580177079,
+            0.5499397275366317,
+            0.3304883175480153,
+            0.6047258418238997,
+            0.47375301973664263
+          ],
+          "point": 0.5829972718196621
+        },
+        "luma_detail_deficit": {
+          "group_maxima": [
+            0.35261146237070745,
+            0.29426647990587207,
+            0.1581281878505692,
+            0.21984472157290347,
+            0.31916542206373477,
+            0.1927688320477804,
+            0.30468785266081494,
+            0.3753942101284684
+          ],
+          "point": 0.35261146237070745
+        }
+      },
+      "fit": {
+        "pairs": 96,
+        "source_groups": 8,
+        "weights": [
+          0.9338239230930123,
+          0.286198128729469,
+          -1.1242269465189356,
+          0.34530086989315106,
+          -0.7327798699464653,
+          -0.7570372726728433
+        ]
+      }
+    },
+    "png": {
+      "controls": {
+        "fitted_wavelet": {
+          "group_maxima": [
+            0.3908982506518014,
+            0.4281762311882028,
+            0.40187323835969313,
+            0.26746625673846103,
+            0.809673570402339,
+            0.2853727230515209,
+            0.23833136072779393,
+            0.4761057580651834
+          ],
+          "point": 0.4761057580651834
+        },
+        "luma_detail_deficit": {
+          "group_maxima": [
+            0.2777811598992257,
+            0.309639094030541,
+            0.2550817734815858,
+            0.2462931368070153,
+            0.3282767127430628,
+            0.24370486080420733,
+            0.3652758115666016,
+            0.3769322671794465
+          ],
+          "point": 0.3652758115666016
+        }
+      },
+      "fit": {
+        "pairs": 96,
+        "source_groups": 8,
+        "weights": [
+          0.12425692873519305,
+          0.2632395747947503,
+          -1.164070741334324,
+          0.4610105643465307,
+          -0.10041252273860456,
+          0.819092117483637
+        ]
+      }
+    }
+  },
+  "protocol": {
+    "arms": [
+      "luma_detail_deficit",
+      "fitted_wavelet"
+    ],
+    "cell": 16,
+    "composition_sha256": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+    "controls_sha256": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8",
+    "features": [
+      "luma_fine_mid",
+      "luma_mid_coarse",
+      "luma_fine_diagonal",
+      "luma_mid_diagonal",
+      "chroma_fine_mid",
+      "chroma_mid_coarse"
+    ],
+    "fit_sha256": "10f881655641006cb297e035e7a40b23cfc52b90eb9d9b9d40efa547f923a1b6",
+    "implementation_sha256": "cf86c593a840ab7b157055e88c041c07dcffb4dd237386ea8c7747a1d33b8585",
+    "intake_sha256": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731",
+    "paired_rows_sha256": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+    "point": "strictly above second largest group maximum",
+    "ridge": 1.0,
+    "scales": [
+      0.16666666666666666,
+      0.25,
+      0.3333333333333333
+    ],
+    "schema": "chipmunk.image-wavelet-region-transfer/1",
+    "separation": 1,
+    "surrounding_ring_extent": 3
+  },
+  "receipts": {
+    "fresh_intake": {
+      "attempts_sha256": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+      "detector_forwards": 0,
+      "excluded": {},
+      "plan_sha256": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+      "planned": 12,
+      "qualified": {
+        "kandinsky": 6,
+        "sdxl": 6
+      },
+      "schema": "chipmunk.background-patch-intake/1"
+    },
+    "fresh_outcomes_sha256": "be4fffd689162bc37c4691fc46128ca495d716e265d282a8ed3f449ac84473e0",
+    "fresh_score_sha256": "cd3a20791857eaa924737a08f3cd892943d4642fc3e3eaad1dadcf2597c618f9",
+    "paired_result_sha256": "4547d30f9c3f4e999a997f064e4a54e2004c130f487843bdf3490e2d965afcdb"
+  },
+  "results": {
+    "fresh": {
+      "jpeg75": {
+        "fitted_wavelet": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            }
+          }
+        },
+        "luma_detail_deficit": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          }
+        }
+      },
+      "png": {
+        "fitted_wavelet": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "mean_iou": 0.025636,
+              "mean_recall": 0.027777,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "mean_iou": 0.051273,
+              "mean_recall": 0.055553,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            }
+          }
+        },
+        "luma_detail_deficit": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.023585,
+              "mean_recall": 0.026042,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.017703,
+              "mean_recall": 0.020886,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.04717,
+              "mean_recall": 0.052083,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.035407,
+              "mean_recall": 0.041772,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            }
+          }
+        }
+      }
+    },
+    "paired": {
+      "jpeg75": {
+        "fitted_wavelet": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 8,
+              "flags": 8,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 7,
+              "flags": 7,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "views": 6
+            }
+          }
+        },
+        "luma_detail_deficit": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.047097,
+              "mean_recall": 0.058552,
+              "useful_localizations": 1,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.047405,
+              "mean_recall": 0.047673,
+              "useful_localizations": 1,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.094194,
+              "mean_recall": 0.117103,
+              "useful_localizations": 1,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.094811,
+              "mean_recall": 0.095346,
+              "useful_localizations": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          }
+        }
+      },
+      "png": {
+        "fitted_wavelet": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "mean_iou": 0.023879,
+              "mean_recall": 0.026175,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 5,
+              "flags": 5,
+              "mean_iou": 0.021462,
+              "mean_recall": 0.024234,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 4,
+              "flags": 4,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "mean_iou": 0.047758,
+              "mean_recall": 0.05235,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "mean_iou": 0.042924,
+              "mean_recall": 0.048468,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 3,
+              "flags": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 2,
+              "flags": 2,
+              "views": 6
+            }
+          }
+        },
+        "luma_detail_deficit": {
+          "all_sources": {
+            "blur": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 12
+            },
+            "edited": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.031604,
+              "mean_recall": 0.034736,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_edit": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.047405,
+              "mean_recall": 0.047673,
+              "useful_localizations": 1,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 12
+            }
+          },
+          "kandinsky": {
+            "blur": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          },
+          "sdxl": {
+            "blur": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "views": 6
+            },
+            "edited": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.063208,
+              "mean_recall": 0.069471,
+              "useful_localizations": 0,
+              "views": 6
+            },
+            "feathered_edit": {
+              "flagged_groups": 1,
+              "flags": 1,
+              "mean_iou": 0.094811,
+              "mean_recall": 0.095346,
+              "useful_localizations": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged_groups": 0,
+              "flags": 0,
+              "views": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-wavelet-region-transfer/1"
+}

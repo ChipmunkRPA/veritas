@@ -227,6 +227,11 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
   audio.status = 'not_assessed'
   audio.reason = 'No voice-check windows were scored.'
   audio.coverage = { ...audio.coverage!, scored_samples: 0, unscored_samples: audio.source.samples!, windows: [] }
+  audio.coverage.stereo_attenuation_overlaps = [{ start_sample: 34000, end_sample: 48000,
+    unscored_interval_index: 0, stereo_window_index: 0,
+    source_timestamp_ranges: [{ start_sample: 34000, end_sample: 48000, source_start_pts: 120400,
+      source_end_pts: 134400, time_base: '1/16000' }],
+  }]
   audio.packets = []
   audio.source = { ...audio.source, source_channels: 2, source_stream_index: 1, pcm_sha256: 'e'.repeat(64) }
   audio.stereo_context = {
@@ -253,4 +258,9 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
   expect(section.getByText('Video playback 2.400 s–3.400 s')).toBeTruthy()
   expect(section.getByText('[118400, 134400) at 1/16000')).toBeTruthy()
   expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+  const overlap = within(screen.getByRole('region', { name: 'Unscored voice during a mono level drop' }))
+  expect(overlap.getByText(/Overlap 2\.125 s–3\.000 s/)).toBeTruthy()
+  expect(overlap.getByText(/Source PTS \[120400, 134400\).*Video playback 2\.525 s–3\.400 s/)).toBeTruthy()
+  expect(overlap.getByText(/cause of the missing voice score is unknown/)).toBeTruthy()
+  expect(overlap.getByRole('link', { name: 'stereo measurements' }).getAttribute('href')).toBe('#media-evidence-stereo')
 })

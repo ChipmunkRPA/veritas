@@ -10,10 +10,29 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, E
 import { measurementValue } from './imagePackets'
 import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet } from './multimediaPackets'
 
+function SourceTimestamps({ ranges, videoOriginS }: {
+  ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']; videoOriginS?: number | null
+}) {
+  return <>{ranges.map((range) => {
+    const start = rationalSeconds(range.source_start_pts, range.time_base)
+    const end = rationalSeconds(range.source_end_pts, range.time_base)
+    return <p key={range.start_sample} className="m-0 text-caption">
+      Source PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}.
+      {videoOriginS != null && start != null && end != null && start >= videoOriginS
+        && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+    </p>
+  })}</>
+}
+
 export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS }: {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
 }) {
   const rate = set.source.sample_rate
+  const stereo = set.stereo_context
+  const stereoOverlaps = set.coverage?.stereo_attenuation_overlaps?.flatMap((overlap) => {
+    const measurement = stereo?.windows[overlap.stereo_window_index]?.downmix
+    return measurement?.strong_attenuation ? [{ overlap, measurement }] : []
+  }) ?? []
   const { hash } = useLocation()
   const [selection, setSelection] = useState(set.packets[0]?.id ?? null)
   const root = useRef<HTMLDivElement>(null)
@@ -59,18 +78,22 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">
           {set.coverage.unscored_intervals.map((gap) => <li key={gap.start_sample}>
             <p className="m-0">Analyzed audio {seconds(gap.start_sample / rate)}–{seconds(gap.end_sample / rate)}.</p>
-            {gap.source_timestamp_ranges.map((range) => {
-              const start = rationalSeconds(range.source_start_pts, range.time_base)
-              const end = rationalSeconds(range.source_end_pts, range.time_base)
-              return <p key={range.start_sample} className="m-0 text-caption">
-                Source PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}.
-                {videoOriginS != null && start != null && end != null && start >= videoOriginS
-                  && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
-              </p>
-            })}
+            <SourceTimestamps ranges={gap.source_timestamp_ranges} videoOriginS={videoOriginS} />
           </li>)}
         </ul>
       </details>}
+      {stereoOverlaps.length > 0 && <section aria-label="Unscored voice during a mono level drop" className="mt-3">
+        <p className="m-0 font-medium">Unscored voice during a mono level drop</p>
+        <p className="mt-2 mb-0">The <a className="underline" href="#media-evidence-stereo">stereo measurements</a> and unscored voice times overlap below. The cause of the missing voice score is unknown.</p>
+        <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">
+          {stereoOverlaps.map(({ overlap, measurement }) => <li key={overlap.start_sample}>
+            <p className="m-0">Overlap {seconds(overlap.start_sample / rate)}–{seconds(overlap.end_sample / rate)} of analyzed audio.</p>
+            <p className="m-0">{measurement.attenuation_db == null ? 'Mono was digitally silent in the overlapping stereo measurement.'
+              : `The overlapping one-second stereo measurement found mono ${measurement.attenuation_db} dB quieter than the louder channel.`}</p>
+            <SourceTimestamps ranges={overlap.source_timestamp_ranges} videoOriginS={videoOriginS} />
+          </li>)}
+        </ul>
+      </section>}
       {set.coverage.decode_limit_reached && <p className="mt-2 mb-0">The decoding limit was reached. Audio beyond this input was not examined.</p>}
       <p className="mt-2 mb-0">Clips reproduce the exact analyzed {measurementValue(rate)} Hz mono input. The source had {set.source.source_channels ?? 'unrecorded'} channel(s); this is a derived listening copy.</p>
     </div> : <p className="mt-3 text-small text-text-muted">Scored audio coverage is unavailable. Unexamined audio is not a negative finding.</p>}

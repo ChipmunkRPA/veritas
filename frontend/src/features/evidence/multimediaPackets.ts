@@ -134,7 +134,9 @@ export interface AudioEvidenceSet extends SetBase {
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];
-    unscored_intervals?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[] }
+    unscored_intervals?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[];
+    stereo_attenuation_overlaps?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
+      unscored_interval_index: number; stereo_window_index: number })[] }
   overview?: Record<string, EvidenceAsset>
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext

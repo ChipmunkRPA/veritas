@@ -110,6 +110,61 @@ def test_offset_change_does_not_compare_across_omitted_mouth_windows():
     assert tuple(len(run) for run in separated.runs) == (2, 2)
 
 
+@pytest.mark.parametrize("gap", ["missing_source_pictures", "insufficient_speech"])
+def test_adapter_does_not_bridge_windows_missing_before_mouth_admission(monkeypatch, gap):
+    frame_count = 130
+    missing = range(62, 75)
+    picture_ticks = [i for i in range(frame_count) if gap != "missing_source_pictures" or i not in missing]
+    pts = tuple(40 * i for i in picture_ticks)
+    table = FrameTable("1/1000", pts, (), "I" * len(pts), 80, 80, 80, 80)
+    face = {"bbox": {"x": 0, "y": 0, "w": 80, "h": 80},
+            "landmarks": [[26, 21], [44, 21], [35, 30], [25, 40], [43, 40]]}
+    frames = [{**face, "frame_index": i, "pts": point} for i, point in enumerate(pts)]
+    rng = np.random.default_rng(37)
+    pictures = []
+    for level in rng.integers(12, 86, len(pts)):
+        rgb = np.full((80, 80, 3), 100, dtype=np.uint8)
+        rgb[35:45, 26:43] = level
+        pictures.append(rgb)
+
+    activity = np.ones(frame_count, dtype=bool)
+    if gap == "insufficient_speech":
+        activity[list(missing)] = False
+    detected = lipsync.Speech(np.zeros(frame_count), np.ones(frame_count), np.zeros(frame_count), activity, -50.)
+    pcm = np.zeros(frame_count * lipsync.HOP, dtype=np.float32)
+    mapping = {"samples": len(pcm), "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),
+               "timeline_time_base": "1/16000",
+               "timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 0}]}
+    store = SimpleNamespace(iter_many=lambda indices: ((i, pictures[i]) for i in indices))
+    inputs = AVInputs(table, ({"track_id": "track:0"},), {"track:0": frames},
+                      SimpleNamespace(status="analysed", pcm=pcm), store, mapping)
+    exhibits = SimpleNamespace(series=lambda *args, **kwargs: "series", segments=lambda *args, **kwargs: "segments")
+    ctx = SimpleNamespace(outputs=SimpleNamespace(av=inputs), deadline=None, exhibits=exhibits)
+    monkeypatch.setattr(lipsync, "vad", lambda _pcm: detected)
+    monkeypatch.setattr(lipsync, "speaker_score", lambda *_: .9)
+    measured = []
+
+    def window_sync(window, *_):
+        offset = 0 if window.index < 4 else 6
+        distances = np.ones((1, 2 * lipsync.VSHIFT + 1))
+        distances[0, offset + lipsync.VSHIFT] = .1
+        row = lipsync.WindowSync(window, (window.start_tick,), distances, offset, .1, .9)
+        measured.append(row)
+        return row
+
+    monkeypatch.setattr(xcorr, "window_sync", window_sync)
+    result = LandmarkXcorrDetector().run(ctx)
+    assert [row.window.index for row in measured] == [2, 3, 6, 7]
+    assert lipsync.track_sync(measured, xcorr.SETTINGS).steps
+    assert result.status == "ok" and result.metrics["windows"] == 4
+    assert result.metrics["offset_steps"] == 0 and result.aggregate is None
+    track = next(u for u in result.unit_scores if u.unit_ref == "track:0")
+    assert track.quality["longest_measured_run"] == 2
+    assert "Offset changes unassessed" in result.observed
+    assert "longest measured run had 2 consecutive windows" in result.observed
+    assert "0 offset step" not in result.observed
+
+
 def test_attributed_track_omits_held_windows_without_reporting_a_collapse(monkeypatch):
     frame_count = 200
     pts = tuple(40 * i for i in range(frame_count))

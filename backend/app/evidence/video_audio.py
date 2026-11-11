@@ -5,6 +5,7 @@ import json
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import audio_packets
+from app.evidence.audio_binding import attach_stereo_attenuation_overlaps
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
@@ -76,6 +77,7 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
     if stereo_sha := record.get('stereo_context_sha256'):
         content['stereo_context'] = json.loads(audio_packets._verified(store, stereo_sha))
         content['stereo_context_sha256'] = stereo_sha
+        attach_stereo_attenuation_overlaps(content)
     assessed = bool(content['coverage']['windows'])
     return {'status': 'ready' if assessed else 'not_assessed',
             'reason': None if assessed else 'No voice-check windows were scored. Frozen audio context is not a synthesis finding.',

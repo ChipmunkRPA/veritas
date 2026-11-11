@@ -141,4 +141,14 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByRole('button', { name: 'Inspect passage T01: Email part 1.1 · quoted; Page 2' })).toBeTruthy()
     expect(screen.getByText(/Do not attribute its wording to the email sender/)).toBeTruthy()
   })
+
+  it('labels mixed email source roles without calling the entire highlight a quotation', () => {
+    const item = { ...packet, anchors: [
+      { kind: 'email', mime_part: '1.1', quote_role: 'body' },
+      { kind: 'email', mime_part: '1.1', quote_role: 'signature' },
+    ] }
+    show(evidence([item]))
+    expect(screen.getByText('Highlighted text includes message text and an email quote or signature.')).toBeTruthy()
+    expect(screen.queryByText(/The highlight covers an email quote or signature/)).toBeNull()
+  })
 })

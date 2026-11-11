@@ -58,6 +58,8 @@ binds both human and generated replacements to exact extracted paragraph positio
 The [correspondence holdout](writing-correspondence-transfer-2026-11-11.md)
 uses separate archival sources and synthetic multipart email containers. It
 counts both useful paragraph locations and ordinary replacements flagged.
+The [modern bulletin holdout](writing-modern-bulletin-transfer-2026-11-11.md)
+includes exact quote and template variants across six separate publishers.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -95,6 +97,9 @@ format-specific current checks against matched controls.
 The [noise-guided image comparison](image-noise-region-candidate-2026-11-11.md)
 matches the same input digests and evaluates a separate checkpoint at its
 publisher point and two points fitted on disjoint controls.
+The [fine-detail comparison](image-wavelet-region-transfer-2026-11-11.md)
+adds 12 independently qualified photo groups and compares two sealed regional
+checks on exact sharp and feathered edits after PNG and JPEG delivery.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -106,6 +111,9 @@ recompressed controls, with a separate authored false-collapse regression.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.
+The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
+tests native windows with actual timing-change opportunity and separately reports
+measured windows, redraw overlaps, ordinary controls, and unassessed inputs.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -145,6 +153,9 @@ condition changes flags and unassessed coverage.
 The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
 uses three native windows per track and holds the speech gate fixed when
 comparing the outcomes under two additional background recordings.
+The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
+compares score directions after a fixed filter with two recorded meeting
+backgrounds, six genuine readers and three synthetic generator families.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -336,6 +347,29 @@ real-world detector accuracy.
 The image arithmetic check passes while the [real-source exact-mask audit](image-iml-zoom-v16-result.md)
 fails at rounding boundaries. Its result and supplementary sensitivity remain
 explicit; passing continuous math does not establish discrete mask parity.
+
+## Verify image crops from a signed export
+
+From `backend`, with the project environment active and the instance key obtained
+separately, run the verifier against the evidence ZIP and your original image.
+
+```sh
+python -m app.cli verify evidence.zip --public-key instance-key.pem --source-image original.png
+```
+
+This optional Pillow check runs locally. It compares the original SHA-256 and
+then checks every unannotated inspection crop and both sides of a same-image
+match at their recorded EXIF-oriented coordinates. If the export contains no
+unannotated crops, it reports the source hash check alone. The ordinary archive
+verification remains available with only the ZIP and a key. The pixel check
+provides source evidence for a separate review of the detector’s interpretation.
+For a source-free setup check, run the project's authored fixture tests. They
+cover mirrored and translated pairs, EXIF rotation, an incorrect source file,
+and a signed crop whose declared position was shifted.
+
+```sh
+python -m pytest tests/test_public_package_integration.py -k '(image and multimedia_zip) or native_source_verifier'
+```
 
 ## Choose a review to reproduce
 

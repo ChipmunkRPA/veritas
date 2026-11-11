@@ -1660,7 +1660,7 @@ detectors:
 
   - id: vid.lipsync.landmark_xcorr
     adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
-    version: 0.5.4
+    version: 0.5.5
     name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
     modality: video
     family: av-sync
@@ -1671,8 +1671,9 @@ detectors:
     legacy_weight: 0.0
     known_limitations:
       - "input coverage: a 25 Hz tick requires a source picture within 40 ms; windows crossing uncovered timestamp gaps are unassessed, not evidence of manipulation or originality"
-      - "input coverage: flat mouth-opening measurements or missing mouth crops leave that speech window unassessed. Offset comparisons do not cross these omitted windows."
+      - "input coverage: offset-change comparisons stop across any unmeasured window, including missing source pictures, insufficient speech, and flat mouth-opening measurements."
       - "timing-change coverage: fewer than four measured windows cannot support the change rules. A single measured window retains its exact source-clock interval."
+      - "offset-change coverage: four consecutive measured windows are needed for two stable offset runs. Split coverage is described as unassessed for offset changes when neither measured run is long enough."
       - "lip-sync manipulation is checked only for audio–video misalignment; well-synchronised lip-sync deepfakes are not detected (D-37, D-02)"
       - "explanatory only (D-37, VF §4.2): an offset step or a correlation collapse gives a hand-set, uncalibrated score (0.55 collapse, 0.65 step, 0.70 both, outcome weight 0.4); in sync, a constant offset and no stable offset are informational and not evidence that the face is unmanipulated"
       - "the mouth signal is a proxy, not a landmark aperture: the darkness of the centre of a 32 × 24 grey patch placed by YuNet's two mouth corners (vid.tracks.yunet_dinov2, model yunet.2023mar, MIT); teeth, tongue, beards, lighting and head motion move it too. MediaPipe Face Landmarker is not used (ADR 0003): the Face Mesh V2 model card (model date 2022-09-15) states 'LICENSED UNDER Apache License, Version 2.0', but mediapipe 1.0.1 installs opencv-contrib-python 5.0.0.93 over the backend's opencv 5.0.0 (uv dry-run, 2026-09-13); the BlazeFace and Blendshape cards of the same bundle were not checked"

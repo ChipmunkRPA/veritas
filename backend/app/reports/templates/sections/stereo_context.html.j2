@@ -1,6 +1,6 @@
 {% set stereo = evidence.stereo_context %}
 {% set has_downmix = stereo.schema == 'chipmunk.stereo-channel-context/2' %}
-<div class="multimedia-acoustic-summary">
+<div class="multimedia-acoustic-summary" id="multimedia-stereo-context">
 <h3>{% if evidence.kind == 'video' %}Stereo soundtrack comparison{% else %}Stereo channel comparison{% endif %}</h3>
 {% if stereo.status == 'mono' %}<p>The first audio stream is mono. Channel comparison does not apply.</p>
 {% elif stereo.status == 'unsupported' %}<p>The first audio stream does not have a supported two-channel layout.</p>

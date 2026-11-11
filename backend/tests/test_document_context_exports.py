@@ -20,7 +20,8 @@ from app.storage.objects import ObjectIntegrityError
 
 
 def test_email_coverage_is_source_bound_in_pdf_and_json(packet_factory, monkeypatch):
-    db, store, analysis, result, decoded, _ = packet_factory(".eml")
+    body = "First sentence contains enough useful words. Second sentence adds more context.\n\n> This quotation completes the source."
+    db, store, analysis, result, decoded, _ = packet_factory(".eml", text=body)
     evidence = build_packet_set(db, analysis, store, result)
     assert evidence["coverage"]["email"] == decoded["meta"]["email"]
     assert evidence["coverage"]["email"]["body_part"] == "1.1.1"
@@ -43,11 +44,17 @@ def test_email_coverage_is_source_bound_in_pdf_and_json(packet_factory, monkeypa
         "media": snapshot.media.model_copy(update={"sha256": analysis.sha256, "filename": analysis.filename,
             "content_type": analysis.content_type, "size_bytes": analysis.size_bytes})})
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
-    assert public_package._evidence(snapshot)["coverage"]["email"] == evidence["coverage"]["email"]
+    exported = public_package._evidence(snapshot)
+    assert exported["coverage"]["email"] == evidence["coverage"]["email"]
+    packet = exported["packets"][0]
+    assert {anchor["quote_role"] for anchor in packet["anchors"]} == {"body", "quoted"}
+    scope = "The highlight includes message text and material marked as an email quote or signature."
+    assert any(line.startswith(scope) for line in packet["limitations"])
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
     assert not rendered.refused
     assert "The extracted plain-text body is MIME part 1.1.1. 1 attachment was outside the analysis." in text
+    assert scope in text
     assert "private-attachment-name.txt" not in text
     assert "source pages have no mapped text" not in text
 

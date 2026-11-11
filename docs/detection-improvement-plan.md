@@ -119,6 +119,12 @@ integration remains unfinished.
   timing-change decisions remained unassessed, and the app now says so at the
   measured source interval. The approximate picture-hold candidate found
   12/18 lossy holds and flagged 15/48 ordinary views. Keep the exact check.
+  A [longer timing replay](video-longer-timing-transfer-2026-11-11.md) exposed
+  timing flags formed across unmeasured gaps. Separating those windows cleared
+  three ordinary flags and four neural-view flags that depended on the same
+  unsupported comparison. Three of those four had overlapped the known redraw
+  enough to count in the prior result. Continuous footage still needs better
+  speaker attribution and timing sensitivity.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -144,6 +150,11 @@ integration remains unfinished.
   point, with 130/144 control highlights. The separate control-fit points found
   no useful feathered locations. Retain the current regional routes. The app
   and new PDFs show the exact reliability mask when the check recorded one.
+  The [fine-detail comparison](image-wavelet-region-transfer-2026-11-11.md)
+  found one useful feathered location in each delivery on the earlier panel.
+  Neither arm found a useful region on the 12 new source groups. The
+  [offline source verifier](independent-testing.md#verify-image-crops-from-a-signed-export)
+  compares the original pixels at each reported crop location.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
@@ -162,6 +173,9 @@ integration remains unfinished.
   head remains experimental. The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
   admitted clean and noisy speech from more genuine readers and agreed with the
   current check on all 60 selected views. The corroboration rule stays experimental.
+  A [stereo filtering trial](audio-natural-stereo-coherence-2026-11-11.md) added
+  nine synthetic flags across two recorded backgrounds and three genuine flags
+  in one. Keep the current classifier and calibration.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
@@ -177,6 +191,11 @@ integration remains unfinished.
   improved from 14/16 to 16/16 useful locations, but flagged 11/24 human files.
   Keep the current estimate and show the selected body part and omitted attachment
   count in the ordinary email report.
+  The [modern bulletin test](writing-modern-bulletin-transfer-2026-11-11.md)
+  found all eight eligible rewrites with the current review rule and six with
+  the practical point, with ten of 30 human controls flagged under either rule.
+  The app and exports now distinguish a mixed-role highlight from a supporting
+  context that read a quote or signature outside the highlight.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

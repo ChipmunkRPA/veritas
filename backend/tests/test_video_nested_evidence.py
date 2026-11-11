@@ -453,8 +453,12 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
             'start_sample': 32000, 'end_sample': 48000, 'source_start_pts': 118400, 'source_end_pts': 134400,
             'time_base': '1/16000',
         }]
-        assert f.document['audio']['coverage'] == ordinary['audio']['coverage']
-        (unscored,) = f.document['audio']['coverage']['unscored_intervals']
+        coverage = f.document['audio']['coverage']
+        assert {k: v for k, v in coverage.items() if k != 'stereo_attenuation_overlaps'} == ordinary['audio']['coverage']
+        (overlap,) = coverage['stereo_attenuation_overlaps']
+        assert overlap == {'start_sample': 32000, 'end_sample': 48000, 'unscored_interval_index': 0,
+                           'stereo_window_index': 2, 'source_timestamp_ranges': flagged['source_timestamp_ranges']}
+        (unscored,) = coverage['unscored_intervals']
         assert (unscored['start_sample'], unscored['end_sample']) == (32000, len(reference.pcm))
         assert unscored['source_timestamp_ranges'][0]['source_start_pts'] == 118400
         assert f.document['av']['packets']
@@ -473,6 +477,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert '[118400, 134400)' in text and '/audio/stereo_context' in text
         assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
         assert 'Unscored voice intervals' in text and '/audio/coverage/unscored_intervals' in text
+        assert 'Unscored voice during a mono level drop' in text and '/audio/coverage/stereo_attenuation_overlaps' in text
+        assert 'Overlap 2.000–3.000 s of analyzed audio' in ' '.join(text.split())
         assert f'Video playback 2.400–{.4 + len(reference.pcm) / SAMPLE_RATE:.3f} s' in ' '.join(text.split())
         assert 'All 31 lag candidates' in text
         _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf)
@@ -486,8 +492,13 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         forged['coverage']['unscored_intervals'][0]['start_sample'] += 1
         with pytest.raises(ValueError, match='Unscored voice intervals differ'):
             validate_audio_channel(forged, f.analysis.sha256)
+        forged = copy.deepcopy(f.document['audio'])
+        forged['coverage']['stereo_attenuation_overlaps'][0]['source_timestamp_ranges'][0]['source_start_pts'] += 1
+        with pytest.raises(ValueError, match='Unscored stereo overlaps differ'):
+            validate_audio_channel(forged, f.analysis.sha256)
         omitted = copy.deepcopy(f.document)
         del omitted['audio']['stereo_context'], omitted['audio']['stereo_context_sha256']
+        del omitted['audio']['coverage']['stereo_attenuation_overlaps']
         omitted['sha256'] = service.packet_hash(omitted)
         with pytest.raises(ObjectIntegrityError, match='differs from its published commitment'):
             multimedia_evidence.verify_assets(omitted, f.store, result=f.result)

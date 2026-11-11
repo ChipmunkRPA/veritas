@@ -25,6 +25,17 @@
 {% endfor %}
 <p class="caption">JSON pointer <span class="mono">{{ evidence.voice_gap_pointer }}</span>.{% if evidence.voice_gap_count > evidence.voice_gaps | length %} {{ evidence.voice_gap_count - (evidence.voice_gaps | length) }} additional intervals in JSON.{% endif %}</p>
 {% endif %}
+{% if evidence.get('voice_stereo_overlaps') %}
+<h3>Unscored voice during a mono level drop</h3>
+<p class="caption">The <a href="#multimedia-stereo-context">stereo measurements</a> and unscored voice times overlap below. The cause of the missing voice score is unknown.</p>
+{% for overlap in evidence.voice_stereo_overlaps %}
+<p class="caption">Overlap {{ '%.3f' | format(overlap.start_s) }}–{{ '%.3f' | format(overlap.end_s) }} s of analyzed audio.
+{% if overlap.attenuation_db is none %}Mono was digitally silent in the overlapping stereo measurement.{% else %}The overlapping one-second stereo measurement found mono {{ overlap.attenuation_db }} dB quieter than the louder channel.{% endif %}
+{% for range in overlap.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
+{% if overlap.omitted_ranges %} {{ overlap.omitted_ranges }} additional source-clock ranges in JSON.{% endif %}</p>
+{% endfor %}
+<p class="caption">JSON pointer <span class="mono">{{ evidence.voice_stereo_overlap_pointer }}</span>.{% if evidence.voice_stereo_overlap_count > evidence.voice_stereo_overlaps | length %} {{ evidence.voice_stereo_overlap_count - (evidence.voice_stereo_overlaps | length) }} additional overlaps in JSON.{% endif %}</p>
+{% endif %}
 {% if evidence.withheld %}<p class="caption evidence-withheld">Source media, page images and verbatim excerpts are withheld in this redacted copy. Evidence hashes, measured responses and non-content anchors remain.</p>{% endif %}
 {% if evidence.packets %}
 <h3>Evidence locator</h3>

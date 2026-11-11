@@ -52,6 +52,9 @@ reports the same edit footprints under PNG and JPEG75, including false highlight
 The [six-photo expansion](image-flux-photo-expansion-v285-result.md) extends
 that design to new licensed source groups. Its [format-specific comparison](image-flux-product-comparison-v288-result.md)
 uses the actual PNG and JPEG routes and checks the resulting masks against exact truth.
+The [copy corroboration fixture](image-copy-corroboration-v295-method.md)
+checks whether a proposed region has a matching donor elsewhere in the image
+while retaining the original highlight.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

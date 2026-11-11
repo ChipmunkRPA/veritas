@@ -1,0 +1,42 @@
+{
+  "authored_noncopy_overlap_views": 0,
+  "candidate_retained_views": 14,
+  "completed_views": 14,
+  "evaluated_views": 12,
+  "exact_authored_readout_sha256": "0c9308cb8cbec151d50ba626410a8806b3bc2a64009da5b30bd3f6a0059214c7",
+  "generator_calls": 0,
+  "ordinary_copy_corroborated": 6,
+  "outcomes": {
+    "ambiguous_repetition": 2,
+    "copy_consistent": 6,
+    "insufficient_texture": 2,
+    "no_donor": 4
+  },
+  "planned_views": 14,
+  "protocol": {
+    "border_pixels": 4,
+    "existing_copy_move_sha256": "e359773069999600f16cc2ec142d033d72a4938f577b888a2ecc83bee7fafd16",
+    "implementation_sha256": "7bc385f0c216832c469dbe3fb2f1045e860de3d291672ecef430ec63d3f62913",
+    "jpeg_codec": "6.2",
+    "jpeg_quality": 90,
+    "minimum_anchor_support_fraction": 0.6666666666666666,
+    "minimum_anchors": 4,
+    "minimum_correlation": 0.96,
+    "minimum_donor_margin": 0.03,
+    "minimum_luma_std": 8.0,
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "patch_side": 16,
+    "pillow": "12.3.0",
+    "schema": "chipmunk.image-copy-corroboration-protocol/295",
+    "scope": "Same-image copy compatibility only. The existing candidate remains an editing cue. No authenticity or authorship verdict.",
+    "side_limit": 512,
+    "transforms": [
+      "translation",
+      "horizontal_reflection"
+    ]
+  },
+  "schema": "chipmunk.image-copy-corroboration-authored-result/295",
+  "status": "complete",
+  "untouched_copy_supported": 0
+}

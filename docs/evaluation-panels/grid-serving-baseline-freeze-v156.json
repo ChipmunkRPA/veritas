@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.grid-serving-baseline-freeze/156",
+  "code_sha256": {
+    "backend/scripts/grid_serving_baseline_v156.py": "9e54a27314619d09fb43bda2bc1ac2e3fe9ecfc96a8f346b447bdcf8b24585b7",
+    "backend/tests/test_grid_serving_baseline_v156.py": "4d113c51706ce85c4e99e4218c6518560205ddb3e42e788d970d150ea23a577c",
+    "docs/grid-serving-baseline-v156-method.md": "10ec86eee078883e42dbba70237daaf9bb0ed76190e9dd0dc9b81f08c8380e9c",
+    "backend/scripts/grid_serving_baseline_v154.py": "77ab3215381566c3b67cef59658ad7213ceca06481363561d820a40d5f87f087"
+  },
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "storage_smoke_sha256": "c981a14014aa4123995c72aea5b1fc0fbb87e9a5dc8c49964af120aa0caed59a",
+  "configured_device": "auto",
+  "profile": "full",
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "cases_per_clip": 11,
+  "historical_v154_coverage": {
+    "v154_freeze_sha256": "3b692d830cbafdb22c5f511d77b3d5d1b0916f8dc32280c281b714c0e87d2140",
+    "v154_result_sha256": "24c742ecfbdbb90763544acc0b8b7cca548a024e348a155092ad8aedbdef6364",
+    "v154_profile_sha256": "d1c0622432c3fbabeddac41593faecf4ebd5237ddb186cf4c337b7241e4b1094",
+    "v154_resource_journal_sha256": "a9793c50790dca360af3b12651ab652fea645b02323bb685555dfdca8f52846c",
+    "v154_worker_log_sha256": "dda1f354d7f24b8a94cc7970d3836e40d331c14f4b94b6cab4c399f01cd2d61d",
+    "v154_case_journal_sha256": "7f074e73d30e39641a82961b55bd115cb55e282429dc55d7312264d57eec595f",
+    "completed_analyses": 11,
+    "sound_event_failures": 11,
+    "cause": "Numba could not use a permitted disk cache when the sound-event dependency loaded"
+  },
+  "numba_cache_smoke_sha256": "9ce222d37fb078c142a410b7c8b478978646e0370eddd0a992ec29135390ed44",
+  "dependency_versions": {
+    "numba": "0.68.1",
+    "llvmlite": "0.50.0",
+    "librosa": "1.0.0",
+    "torchlibrosa": "0.1.0",
+    "joblib": "1.5.3"
+  },
+  "scope": "Exact v154 serving pipeline and resource limits. Set NUMBA_CACHE_DIR on owned APFS before auxiliary imports."
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "chipmunk.text-elife-transfer-rewrites-freeze/289",
+  "v286_intake_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+  "v286_roster_sha256": "6d359711bcad0d96b71d6a90053af43a530e8c47a30ef564285b96b33eab6a8f",
+  "private_originals_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+  "v273_freeze_sha256": "3566e9a413d9671b0cd56517ceae711a9aaa8f90e0c2017f9309bf4f293d492d",
+  "code_sha256": {
+    "backend/scripts/text_elife_transfer_rewrites_v289.py": "6c341c6c30cffbb2fa5bc5c4881eee162a1c1c4bb8993e8b664c9b949ae44d60",
+    "docs/text-elife-transfer-rewrites-v289-method.md": "5f271ba7b717b1c67a4dbbc60155f84a02c6ee4b75c7359670b1b9f8b5e89c96",
+    "backend/tests/test_text_elife_transfer_rewrites_v289.py": "29573b7f999342311b9fdfcdcb815172cb9414b955e9fa439c7989fdd625d249"
+  },
+  "split_salt": "chipmunk-elife-v289-split-v1:",
+  "source_groups_by_role": {
+    "development": [
+      "elife-82635",
+      "elife-81077",
+      "elife-82028",
+      "elife-80416",
+      "elife-83296",
+      "elife-82221",
+      "elife-82391",
+      "elife-83076",
+      "elife-79310",
+      "elife-82453",
+      "elife-81520",
+      "elife-79813",
+      "elife-80030"
+    ],
+    "confirmation": [
+      "elife-82873",
+      "elife-83308",
+      "elife-80232",
+      "elife-79593",
+      "elife-81890",
+      "elife-81963",
+      "elife-79839",
+      "elife-79446",
+      "elife-80373",
+      "elife-78869",
+      "elife-82258",
+      "elife-79125",
+      "elife-79651"
+    ]
+  },
+  "source_admission_dispositions": {
+    "admitted": 26,
+    "no_eligible_excerpt": 8,
+    "license_not_cc_by_4": 1
+  },
+  "stages": [
+    "development:qwen",
+    "development:smol2",
+    "confirmation:qwen",
+    "confirmation:smol2"
+  ],
+  "planned_rewrites_per_stage": 13,
+  "planned_rewrites": 52,
+  "generators": {
+    "qwen": {
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+      "license": "Apache-2.0",
+      "local_config_sha256": {
+        "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "smol2": {
+      "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "license": "Apache-2.0",
+      "local_config_sha256": {
+        "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+        "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+        "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+        "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+        "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+      }
+    }
+  },
+  "runtime": {
+    "versions": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "device": "mps",
+    "precision": "mlx-affine-q4-g64",
+    "seed": 56174,
+    "temperature": 0.65,
+    "top_p": 0.9,
+    "max_new_tokens": 340,
+    "batch_size": 1
+  },
+  "new_detector_calls_permitted": false
+}

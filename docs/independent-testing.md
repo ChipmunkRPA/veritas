@@ -35,7 +35,9 @@ all nine dispositions and contains no excerpts. The [rewrite result](text-elife-
 records all four unavailable attempts. The [detector comparison](text-elife-passage-score-v275-result.md)
 reports localization, coverage and raw position ranking separately.
 The [fresh transfer roster](text-elife-transfer-intake-v286-result.md) adds 26
-groups with separately checked work licenses and fixed rewrite targets.
+groups with separately checked work licenses and fixed rewrite targets. The
+[transfer rewrite construction](text-elife-transfer-rewrites-v289-result.md)
+keeps the source roles and all 52 planned attempts in the record.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a

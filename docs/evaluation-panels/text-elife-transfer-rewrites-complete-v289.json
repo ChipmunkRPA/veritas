@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.text-elife-transfer-rewrites-result/289",
+  "status": "complete",
+  "freeze_sha256": "e63b6bee860917815cfde7c9fc28415562088a8c48526928aa11524c3e756cd6",
+  "source_groups_by_role": {
+    "development": 13,
+    "confirmation": 13
+  },
+  "source_admission_dispositions": {
+    "admitted": 26,
+    "no_eligible_excerpt": 8,
+    "license_not_cc_by_4": 1
+  },
+  "human_controls": 26,
+  "planned_rewrites": 52,
+  "generation_dispositions_by_stage": {
+    "development:qwen": {
+      "constructed": 8,
+      "outside_word_bound": 4,
+      "source_copy": 1
+    },
+    "development:smol2": {
+      "outside_word_bound": 4,
+      "constructed": 4,
+      "source_copy": 2,
+      "wrapper_or_multiple_paragraphs": 3
+    },
+    "confirmation:qwen": {
+      "constructed": 5,
+      "outside_word_bound": 6,
+      "source_copy": 2
+    },
+    "confirmation:smol2": {
+      "constructed": 5,
+      "outside_word_bound": 3,
+      "source_copy": 4,
+      "wrapper_or_multiple_paragraphs": 1
+    }
+  },
+  "private_cases_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+  "resource_profile_sha256": {
+    "development:qwen": "d0d5146f80481d2ca8826c26064191167b7de0d9d51492bf4a14b15bc5f063eb",
+    "development:smol2": "7fafa3a3806dfadb10a10073e1ad8b659173cebb0d1237e44427ebb4638227bb",
+    "confirmation:qwen": "90e3b3e57694ac5bb13b897082f8669af9d3a538989e6118959a158a1cd5b536",
+    "confirmation:smol2": "2bccf83721e7e599d2af5a6a9a92fceb753fc13baf24edebf3961fc76d24868a"
+  },
+  "new_detector_calls": 0
+}

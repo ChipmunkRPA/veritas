@@ -27,6 +27,7 @@ from app.core.logging import get_logger
 from app.detectors.common.fusion import fuse_probability, prob_to_signal_fields
 from app.detectors.common.registry import registry
 from app.detectors.video.decode import _input
+from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
 
 log = get_logger(__name__)
 SR = 16000
@@ -132,21 +133,41 @@ def chunk(pcm: np.ndarray) -> list[np.ndarray]:
     return [c for _, c in chunk_windows(pcm)]
 
 
+def continuous_audio_ranges(samples: int, clock_breaks: tuple[int, ...]) -> list[tuple[int, int]]:
+    """Partition the decoded input at material breaks on its original source clock."""
+    return list(zip((0, *clock_breaks), (*clock_breaks, samples), strict=True))
+
+
 def voice_windows(pcm: np.ndarray, hop_s: float, *, window_s: float = VOICE_WINDOW_S, max_windows: int = MAX_VOICE_WINDOWS,
-                  keep: Callable[[float, float], bool] | None = None) -> list[tuple[float, np.ndarray]]:
+                  keep: Callable[[float, float], bool] | None = None,
+                  clock_breaks: tuple[int, ...] = ()) -> list[tuple[float, np.ndarray]]:
     """(start seconds, samples) of ≤ `window_s` windows every `hop_s`, each of at least 1 s (V-7 voice lane, DC-05). A later
     window starts only while it reaches past the previous window's end, so the tail is covered once. `keep(start_s, end_s)`
     filters the windows first (A-1 speech gating). Above `max_windows` the windows with the most signal energy are kept, in
-    time order (quick scores one; a short tail window loses to a full window of the same level)."""
+    time order (quick scores one; a short tail window loses to a full window of the same level).
+    Start a new window grid after each source-clock break and apply one global cap."""
     n, hop = int(round(window_s * SR)), max(1, int(round(hop_s * SR)))
-    starts = [s for s in range(0, len(pcm), hop) if len(pcm) - s >= SR and (s == 0 or s - hop + n < len(pcm))]
+    windows = [(start, min(start + n, right))
+               for left, right in continuous_audio_ranges(len(pcm), clock_breaks)
+               for start in range(left, right, hop)
+               if right - start >= SR and (start == left or start - hop + n < right)]
     if keep is not None:
-        starts = [s for s in starts if keep(s / SR, min(len(pcm), s + n) / SR)]
-    if len(starts) > max_windows:
-        energy = [float(np.sum(np.square(pcm[s:s + n], dtype=np.float64))) for s in starts]
-        keep = sorted(sorted(range(len(starts)), key=lambda k: (-energy[k], k))[:max_windows])
-        starts = [starts[k] for k in keep]
-    return [(s / SR, pcm[s:s + n]) for s in starts]
+        windows = [(start, end) for start, end in windows if keep(start / SR, end / SR)]
+    if len(windows) > max_windows:
+        def ranking(window):
+            start, end = window
+            return -float(np.sum(np.square(pcm[start:end], dtype=np.float64))), start
+
+        windows = sorted(sorted(windows, key=ranking)[:max_windows])
+    return [(start / SR, pcm[start:end]) for start, end in windows]
+
+
+def limit_voice_signal(signal: Signal) -> Signal:
+    """Retain the voice observation but withhold a source-wide direction or weight."""
+    return signal.model_copy(update={"value": None, "ai_probability": None, "weight": 0.0,
+                                     "direction": "inconclusive", "strength": "none",
+                                     "observed": "Raw responses are available for the recorded voice windows.",
+                                     "reasoning": VOICE_CLOCK_LIMIT})
 
 
 def silent_signal(pcm_samples: int) -> tuple[Signal, dict]:

@@ -19,6 +19,9 @@
 {% set clock = evidence.audio_source_clock %}
 {% set rate = evidence.audio_source_clock_rate %}
 <h3>Audio source clock breaks</h3>
+{% if clock.get('recording_voice_estimate_withheld') %}
+<p>The source audio timestamps contain a gap or overlap. Voice checks use only continuous intervals, so the report gives no recording-wide voice estimate.</p>
+{% endif %}
 {% if clock.total_discontinuities %}
 <p class="caption">The decoded listening copy joins these source spans. {{ clock.scored_windows_crossing }} recorded voice {{ 'window crosses' if clock.scored_windows_crossing == 1 else 'windows cross' }} a source clock break. This timing check carries zero weight in the AI assessment.</p>
 {% for item in clock.breaks %}
@@ -30,7 +33,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% else %}
 <p class="caption">No source clock break of at least {{ '%.0f' | format(clock.minimum_jump_samples * 1000 / rate) }} ms was measured in {{ '%.3f' | format(clock.checked_samples / rate) }} s of decoded audio. This timing check carries zero weight in the AI assessment.</p>
 {% endif %}
-<p class="caption">JSON pointer <span class="mono">/coverage/source_clock_context</span>.</p>
+<p class="caption">JSON pointer <span class="mono">{{ evidence.audio_source_clock_pointer }}</span>.</p>
 {% endif %}
 {% if evidence.get('voice_gaps') %}
 <h3>Unscored voice intervals</h3>

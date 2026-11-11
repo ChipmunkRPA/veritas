@@ -23,6 +23,7 @@ from app.detectors.video.audio import (
     SR,
     VOICE_WINDOW_S,
     AudioClassifier,
+    continuous_audio_ranges,
     voice_windows,
 )
 from app.engine.detector import (
@@ -37,9 +38,11 @@ from app.engine.detector import (
     UnitScore,
 )
 from app.engine.profiles import SAMPLING
+from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
 
 NOT_ANALYSABLE = {"absent": "no audio track", "unreadable": "the sound track could not be decoded", "silent": "silent sound track",
                   "short": "the sound track is shorter than 1 s"}
+NO_CONTINUOUS_VOICE = "No continuous source interval of at least one second contains enough speech to score."
 
 
 class _VoiceClassifier(Detector):
@@ -67,10 +70,13 @@ class _VoiceClassifier(Detector):
         gate = audio.gate
         return voice_windows(audio.pcm, params.voice_hop_s or VOICE_WINDOW_S,
                              max_windows=params.audio_windows or audio.max_windows or MAX_VOICE_WINDOWS,
-                             keep=None if gate is None else functools.partial(window_in_speech, gate))
+                             keep=None if gate is None else functools.partial(window_in_speech, gate),
+                             clock_breaks=audio.clock_breaks)
 
     @staticmethod
     def _no_window(ctx: RunContext) -> str:
+        if ctx.outputs.audio.clock_breaks:
+            return NO_CONTINUOUS_VOICE
         return ("no window of at least 1 s is at least half speech" if ctx.outputs.audio.gate is not None
                 else "the sound track is shorter than 1 s")
 
@@ -105,6 +111,8 @@ class _VoiceClassifier(Detector):
             model_revisions=revisions(ctx, self.MODEL_ID),
             details={"audio_input": {"version": "audio-input/1", "sample_rate": SR, "samples": ctx.outputs.audio.samples,
                                      "pcm_sha256": hashlib.sha256(ctx.outputs.audio.pcm.astype("<f4").tobytes()).hexdigest()}})
+        if ctx.outputs.audio.clock_breaks:
+            result.reasoning = VOICE_CLOCK_LIMIT
         return self.finish(ctx, result, windows, clf)
 
     def finish(self, ctx, result, windows, classifier):
@@ -140,10 +148,12 @@ class PellaVoiceDetector(_VoiceClassifier):
 
         if settings.audio_detector_mode != "candidate":
             return result
-        screening = calibration.evaluate(result.aggregate.raw, ctx.outputs.audio.pcm, windows, classifier, ctx.deadline)
+        audio = ctx.outputs.audio
+        screening = calibration.evaluate(result.aggregate.raw, audio.pcm, windows, classifier, ctx.deadline,
+                                         source_clock_discontinuous=bool(audio.clock_breaks))
         result.details['audio_screening'] = screening
         result.reasoning = screening['reason'] + ' ' + screening['limitation']
-        result.reference = 'Frozen voice-specific calibration with an 80% tendency threshold and uncertainty checks.'
+        result.reference = 'Fixed voice-specific calibration with uncertainty checks.'
         return result
 
     def activation_plan(self, ctx):
@@ -155,13 +165,21 @@ class PellaVoiceDetector(_VoiceClassifier):
         # This independent candidate alone uses learned speech activity.
         params = SAMPLING[Profile(ctx.profile)]
         audio = ctx.outputs.audio
-        spans = None if ctx.lease is None else ctx.lease.get("silero.speech_activity").obj.spans(audio.pcm)
+        spans = None
+        if ctx.lease is not None:
+            vad = ctx.lease.get("silero.speech_activity").obj
+            spans = [(start / SR + a, start / SR + b)
+                     for start, end in continuous_audio_ranges(len(audio.pcm), audio.clock_breaks) if end - start >= SR
+                     for a, b in vad.spans(audio.pcm[start:end])]
         return voice_windows(audio.pcm, params.voice_hop_s or VOICE_WINDOW_S,
             max_windows=params.audio_windows or audio.max_windows or MAX_VOICE_WINDOWS,
-            keep=None if spans is None else functools.partial(window_in_speech, spans))
+            keep=None if spans is None else functools.partial(window_in_speech, spans),
+            clock_breaks=audio.clock_breaks)
 
     @staticmethod
     def _no_window(ctx):
+        if ctx.outputs.audio.clock_breaks:
+            return NO_CONTINUOUS_VOICE
         return "No source window of at least one second contains at least half detected speech."
 
     def classifier(self, ctx):

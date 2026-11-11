@@ -1,0 +1,199 @@
+{
+  "clock_boundary_sample": 24576,
+  "commitments": {
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "freeze_sha256": "9e1e59442af07a23e6080dc675686b3d201309e1a842546d5e21757d55de1c40",
+    "guarded_sha256": "9a07f554614300cf214d5f6dd8ddf9103888fdf423f245a2a032ec72a1eaffca",
+    "plan_sha256": "2907f0e7c0700bf3f958f92690fe82fea8430759ad6847e41cd3b244989428a2",
+    "prior_english_rights_receipt_sha256": "ccd0d46e075baf840bb64de2dc0494f0df8791e74070ee2776d8405e22fd7e1e",
+    "prior_transfer_sha256": "fe2cbc8961b1dd52c1459ba1c8151647620a7294f53e172b54ad2e33cd4a8a0a",
+    "roster_sha256": "450f2baa68d0b14996a2fa4c6df314b178b78b2116fee617b982ab56b06c38d1",
+    "runner_sha256": "58eec90fe0634f010c1b06fd96251b9b378624e9a4950794c69816a133a980fd",
+    "score_sha256": "b34ab8fd3d5a504c6e87a7030691c58cff97ffc25d886539344c8fe17e261664"
+  },
+  "experiment": "Same exact 16 kHz PCM after real Matroska timestamp remux, exercising the current voice adapter and shadow segmentation.",
+  "guarded_outcomes": {
+    "continuous": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 7,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 7,
+        "recorded_windows": 7,
+        "scored_windows_crossing": 0
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 6,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 6,
+        "recorded_windows": 6,
+        "scored_windows_crossing": 0
+      }
+    },
+    "gap": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 0,
+        "recorded_windows": 7,
+        "scored_windows_crossing": 0
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 6,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 0,
+        "recorded_windows": 6,
+        "scored_windows_crossing": 0
+      }
+    },
+    "overlap": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 0,
+        "recorded_windows": 7,
+        "scored_windows_crossing": 0
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 6,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 0,
+        "recorded_windows": 6,
+        "scored_windows_crossing": 0
+      }
+    }
+  },
+  "guarded_versions": {
+    "audio_pipeline": "aud-2.0-a32",
+    "report_template": "veritas-report-2.0.r85",
+    "video_pipeline": "vid-2.0-p47"
+  },
+  "outcomes": {
+    "continuous": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 7,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 7,
+        "scored_windows_crossing": 0,
+        "within_piece_shadow_scored_windows": null
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 6,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 6,
+        "scored_windows_crossing": 0,
+        "within_piece_shadow_scored_windows": null
+      }
+    },
+    "gap": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 7,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 7,
+        "scored_windows_crossing": 7,
+        "within_piece_shadow_scored_windows": 7
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 6,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 6,
+        "scored_windows_crossing": 6,
+        "within_piece_shadow_scored_windows": 6
+      }
+    },
+    "overlap": {
+      "genuine": {
+        "directions": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 7,
+          "unassessed": 1
+        },
+        "file_calibration_supported": 7,
+        "scored_windows_crossing": 7,
+        "within_piece_shadow_scored_windows": 7
+      },
+      "synthetic": {
+        "directions": {
+          "ai": 6,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "file_calibration_supported": 6,
+        "scored_windows_crossing": 6,
+        "within_piece_shadow_scored_windows": 6
+      }
+    }
+  },
+  "resources": {
+    "actual_classifier_forwards": 86,
+    "cpu_seconds_elapsed": 56.70043183397502,
+    "files": 42,
+    "guarded_actual_classifier_forwards": 46,
+    "guarded_cpu_seconds_elapsed": 29.580129542038776,
+    "guarded_peak_process_rss_bytes": 3093266432,
+    "paired_utterances": 14,
+    "peak_process_rss_bytes": 2992685056
+  },
+  "sample_rate": 16000,
+  "samples_per_case": 48000,
+  "schema": "chipmunk.audio-clock-replay/1",
+  "serving_change_in_evaluation": true,
+  "source_roles": {
+    "confirmation": {
+      "alania": 2,
+      "drifting": 2,
+      "english_genuine": 4,
+      "okur": 2,
+      "rueg_genuine": 4
+    },
+    "limitations": "Stored legal source banks exposed to earlier studies. Exact utterances differ from prior stereo confirmation; synthetic engine stock speakers may recur. Clock variants are paired, not additional independent examples.",
+    "prospective_development": "Generated tone only; no actual voice classifier"
+  },
+  "status": "verified_locally",
+  "timestamp_shift_samples": {
+    "continuous": 0,
+    "gap": 10240,
+    "overlap": -1024
+  }
+}

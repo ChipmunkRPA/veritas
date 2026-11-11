@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, read_wav, source_ranges, wav_bytes
 from app.detectors.video.adapters.audio import AudioClassifier, GustkingVoiceDetector
+from app.detectors.video.adapters.common import AudioTrack
 from app.engine.boundary import DetectorRunRecord
 from app.engine.detector import DetectorResult, Profile, UnitScore
 from app.engine.stages.common import DbRunStore
@@ -395,7 +396,7 @@ def test_real_window_adapter_records_the_same_input_sent_to_inference(monkeypatc
     monkeypatch.setattr(AudioClassifier, "from_parts", lambda *a, **kw: SimpleNamespace(predict=predict))
     leased = SimpleNamespace(obj=(None, None), revision="fixed-test-weights")
     ctx = SimpleNamespace(profile=Profile.FULL, device="cpu", lease=SimpleNamespace(get=lambda _: leased),
-                          outputs=SimpleNamespace(audio=SimpleNamespace(pcm=pcm, samples=len(pcm), gate=None, max_windows=300)),
+                          outputs=SimpleNamespace(audio=AudioTrack("analysed", pcm, len(pcm), max_windows=300)),
                           exhibits=SimpleNamespace(series=lambda *a, **kw: "audio-series"))
     result = GustkingVoiceDetector().run(ctx)
     assert result.details["audio_input"]["pcm_sha256"] == hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()

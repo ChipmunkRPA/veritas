@@ -207,6 +207,9 @@ codecs, with matching ordinary controls and anonymized per-group results.
 The [frequency-domain separation comparison](audio-frequency-separation-transfer-2026-11-11.md)
 keeps the production voice scores and calibrations fixed while measuring one
 stereo projection under two kinds of competing speech.
+The [voice timestamp replay](audio-clock-voice-window-replay-2026-11-11.md)
+holds decoded samples fixed while introducing timestamp breaks and checks the
+resulting voice coverage through the signed app report.
 
 The [active PNG transfer](image-active-png-transfer-2026-11-11.md) uses exact
 source-aligned masks to check which gains survive on small edited patches with

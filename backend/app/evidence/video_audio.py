@@ -5,7 +5,7 @@ import json
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import audio_packets
-from app.evidence.audio_binding import attach_stereo_attenuation_overlaps
+from app.evidence.audio_binding import VOICE_CLOCK_POLICY, attach_stereo_attenuation_overlaps
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
@@ -43,6 +43,8 @@ def published_record(ctx) -> dict:
     record = {'version': 'video-audio-inputs/1', 'decode_status': decoded.get('status'),
               'source_audio_present': (ctx.outputs.get('probe') or {}).get('info', {}).get('has_audio'),
               'input': decoded.get('evidence_input'), 'voice_checks': [], 'av_checks': [], 'sound_checks': []}
+    if (ctx.outputs.get('detect') or {}).get('voice_clock_policy') == VOICE_CLOCK_POLICY:
+        record['voice_clock_policy'] = VOICE_CLOCK_POLICY
     if stereo_sha := (ctx.outputs.get('render') or {}).get('audio_stereo_context_sha256'):
         record['stereo_context_sha256'] = stereo_sha
     with ctx.sessions() as db:
@@ -73,7 +75,8 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
     if not record.get('input'):
         return unavailable(analysis.sha256, 'The source audio could not be decoded and frozen with a verified timeline.')
     content = audio_packets.build_content(db, analysis, store, result,
-        record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', [])}, set_id=set_id)
+        record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', []),
+                'voice_clock_policy': record.get('voice_clock_policy')}, set_id=set_id)
     if stereo_sha := record.get('stereo_context_sha256'):
         content['stereo_context'] = json.loads(audio_packets._verified(store, stereo_sha))
         content['stereo_context_sha256'] = stereo_sha

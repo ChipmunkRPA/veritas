@@ -411,6 +411,58 @@ print(json.dumps(r.as_dict()));sys.exit(0 if r.ok else 1)
     assert offline.returncode==0, offline.stdout+offline.stderr
 
 
+def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture, av_source, tmp_path, monkeypatch):
+    f = av_fixture
+    original, _, decoded, _ = av_source
+    path = tmp_path / 'clock-gap.mkv'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-copyts', '-i', str(original),
+                    '-map', '0:v:0', '-map', '0:a:0', '-c:v', 'copy', '-c:a', 'pcm_s16le',
+                    '-af', r'asetnsamples=n=2048:p=0,asetpts=PTS+if(gte(N\,24576)\,10240\,0)',
+                    '-avoid_negative_ts', 'disabled', str(path)], check=True, timeout=30)
+    obj = f.store.put_file(path)
+    f.analysis.sha256, f.analysis.size_bytes = obj.sha256, obj.size_bytes
+    f.result['input']['sha256'] = obj.sha256
+    f.table = probe_frames(path)
+
+    def sessions():
+        return Session(f.db.get_bind())
+
+    ctx = SimpleNamespace(outputs={'ingest': {'sha256': obj.sha256}, 'probe': {
+        'frame_table': f.table.to_json(), 'plan': {'legacy': {'frames': [0, 8, 16]}}, 'info': {'has_audio': True}}},
+        state={'media': SimpleNamespace(path=path)}, store=f.store, check=lambda *a: None,
+        sessions=sessions, analysis_id=f.analysis.id)
+    stage = video.decode(ctx)['audio']
+    assert stage['source_clock_break_count'] == 1 and ctx.state['audio'].clock_breaks == (24576,)
+    assert stage['evidence_input']['pcm_sha256'] == decoded.mapping['pcm_sha256']
+    record = f.result['manifest']['sampling']['video_audio_evidence']
+    record.update(input=stage['evidence_input'], av_checks=[], voice_clock_policy='source-clock-split/1')
+    check = record['voice_checks'][0]
+    raw = json.loads(f.store.read_bytes(check['raw_output_sha256']))
+    raw['unit_scores'][0]['quality'].update(end_sample=24576, end_s=24576 / SAMPLE_RATE)
+    check['raw_output_sha256'] = f.store.put_bytes(canonical_json(raw)).sha256
+    _prepare_parent(f)
+    _freeze_parent(f)
+    f.result = _report_scaffold(f).result
+    f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+    _freeze_parent(f)
+    clock = f.document['audio']['coverage']['source_clock_context']
+    assert clock['total_discontinuities'] == 1 and clock['scored_windows_crossing'] == 0
+    assert clock['recording_voice_estimate_withheld'] is True
+    assert clock['breaks'][0]['jump_samples'] == 10240 and clock['breaks'][0]['boundary_sample'] == 24576
+    tampered = copy.deepcopy(f.document['audio'])
+    tampered['coverage']['source_clock_context']['breaks'][0]['jump_samples'] += 1
+    with pytest.raises(ValueError, match='Audio source clock observations differ'):
+        validate_audio_channel(tampered, obj.sha256)
+
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+    pdf = engine.render_pdf(f.frozen).pdf
+    report = ' '.join(engine.pdf_text(pdf).split())
+    assert 'Audio source clock breaks' in report and 'Source timestamp gap of 640.000 ms' in report
+    assert 'the report gives no recording-wide voice estimate' in report
+    assert '/audio/coverage/source_clock_context' in report
+    _check_public_zip(f, tmp_path, monkeypatch, pdf, source_audio=path)
+
+
 def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, tmp_path, monkeypatch):
     source, _, original, face = av_source
     stereo_path = tmp_path / 'stereo.wav'

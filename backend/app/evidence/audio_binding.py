@@ -9,6 +9,26 @@ from app.core.canonical import canonical_hash
 
 _CLOCK_BREAK_MIN_SAMPLES = 320
 _CLOCK_BREAK_MAX_ROWS = 8
+VOICE_CLOCK_LIMIT = (
+    "The source audio timestamps contain a gap or overlap. "
+    "A recording-wide voice estimate is unavailable."
+)
+VOICE_CLOCK_POLICY = "source-clock-split/1"
+
+
+def current_voice_detection_output(output) -> bool:
+    return isinstance(output, dict) and output.get("voice_clock_policy") == VOICE_CLOCK_POLICY
+
+
+def exclude_recording_voice(entries: list[dict]) -> list[dict]:
+    """Keep interval scores available for evidence and omit them from whole-file fusion."""
+    return [{**entry, "status": "not_applicable", "reason": VOICE_CLOCK_LIMIT, "aggregate": None, "unit_scores": []}
+            if entry.get("family") == "voice" and entry.get("status") == "ok" else entry for entry in entries]
+
+
+def limit_voice_screening(screening: dict) -> dict:
+    return {**screening, "probability_ai": None, "reference_estimate_ai": None, "decision": "inconclusive",
+            "scope_supported": False, "reason": VOICE_CLOCK_LIMIT}
 
 
 def unscored_voice_intervals(coverage: dict, source: dict) -> list[dict]:
@@ -101,8 +121,8 @@ def attach_stereo_attenuation_overlaps(channel: dict) -> None:
         coverage["stereo_attenuation_overlaps"] = overlaps
 
 
-def source_clock_context(coverage: dict, source: dict) -> dict:
-    """Measure material source timestamp jumps in the already validated PCM mapping."""
+def source_clock_breaks(source: dict) -> list[tuple[int, int, dict, dict]]:
+    """Return every material source timestamp jump in the validated PCM mapping."""
     blocks = source["timeline"]
     breaks = []
     for before, after in zip(blocks, blocks[1:]):
@@ -110,17 +130,26 @@ def source_clock_context(coverage: dict, source: dict) -> dict:
         delta = after["source_pts"] - previous_end
         if abs(delta) >= _CLOCK_BREAK_MIN_SAMPLES:
             breaks.append((after["start_sample"], delta, before, after))
+    return breaks
+
+
+def source_clock_context(coverage: dict, source: dict, *, guarded: bool = False) -> dict:
+    """Measure material source timestamp jumps in the already validated PCM mapping."""
+    breaks = source_clock_breaks(source)
     positions = [position for position, _, _, _ in breaks]
     windows = coverage["windows"]
     cross_count = sum(bisect_right(positions, row["start_sample"]) < bisect_left(positions, row["end_sample"])
                       for row in windows)
+    if guarded and cross_count:
+        raise ValueError("A clock-guarded voice window crosses a source timestamp break")
     strongest = sorted(breaks, key=lambda item: (-abs(item[1]), item[0]))[:_CLOCK_BREAK_MAX_ROWS]
 
     def span(block):
         start, end, pts = block["start_sample"], block["end_sample"], block["source_pts"]
         return {"start_sample": start, "end_sample": end, "source_start_pts": pts, "source_end_pts": pts + end - start}
 
-    return {"affects_overall_confidence": False, "time_base": source["timeline_time_base"],
+    return {**({"recording_voice_estimate_withheld": True} if guarded and breaks else {}),
+            "affects_overall_confidence": False, "time_base": source["timeline_time_base"],
             "minimum_jump_samples": _CLOCK_BREAK_MIN_SAMPLES, "checked_samples": source["samples"],
             "total_discontinuities": len(breaks),
             "scored_windows_crossing": cross_count,
@@ -147,8 +176,9 @@ def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict 
     if canonical_hash(coverage.get("unscored_intervals")) != canonical_hash(gaps):
         raise ValueError("Unscored voice intervals differ from their source clocks or recorded windows")
     if "source_clock_context" in coverage:
-        clock_context = source_clock_context(coverage, source)
-        if canonical_hash(coverage["source_clock_context"]) != canonical_hash(clock_context):
+        context = coverage["source_clock_context"]
+        guarded = isinstance(context, dict) and context.get("recording_voice_estimate_withheld") is True
+        if canonical_hash(context) != canonical_hash(source_clock_context(coverage, source, guarded=guarded)):
             raise ValueError("Audio source clock observations differ from the exact source timeline or recorded windows")
     if "stereo_attenuation_overlaps" not in coverage:
         return

@@ -159,12 +159,13 @@ def test_new_stability_uses_own_probability_mapping_and_shares_exact_probe(monke
 @pytest.mark.parametrize("spans", [[], [[0, 1.9]], [[0, 2.0]], [[1, 3]], [[0, 4]]])
 def test_source_windows_match_actual_production_adapter(spans):
     from app.detectors.video.adapters.audio import PellaVoiceDetector
+    from app.detectors.video.adapters.common import AudioTrack
 
     pcm = np.ones(64000, np.float32)
     activity = Activity(spans)
     ctx = SimpleNamespace(
         profile="full",
-        outputs=SimpleNamespace(audio=SimpleNamespace(pcm=pcm, max_windows=48)),
+        outputs=SimpleNamespace(audio=AudioTrack("analysed", pcm, len(pcm), max_windows=48)),
         lease=SimpleNamespace(get=lambda _key: SimpleNamespace(obj=activity)),
     )
     actual = PellaVoiceDetector()._windows(ctx)

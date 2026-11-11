@@ -9,10 +9,11 @@ import pytest
 
 from app.detectors.audio import combined
 from app.detectors.audio import combined_adapter as adapter
+from app.detectors.video.adapters.common import AudioTrack
 
 
 def context(pcm):
-    return SimpleNamespace(outputs=SimpleNamespace(audio=SimpleNamespace(status="analysed", pcm=pcm)))
+    return SimpleNamespace(outputs=SimpleNamespace(audio=AudioTrack("analysed", pcm, len(pcm))))
 
 
 @pytest.mark.parametrize("samples", [0, 40000, 63999, 64001, 128000])

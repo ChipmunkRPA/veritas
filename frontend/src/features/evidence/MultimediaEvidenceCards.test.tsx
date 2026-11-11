@@ -51,6 +51,15 @@ describe('ordinary multimedia evidence', () => {
     expect(clock.getByText('On the original timeline, the audio spans 0.000 s to 4.000 s before the break and 5.000 s to 11.000 s after it.')).toBeTruthy()
     expect(clock.getByText('1 recorded voice window crosses this break.')).toBeTruthy()
     expect(clock.getByText(/carries zero weight in the AI assessment/)).toBeTruthy()
+    expect(clock.queryByText(/a recording-wide voice estimate is unavailable/)).toBeNull()
+    const guarded = structuredClone(set)
+    const guardedClock = guarded.coverage!.source_clock_context!
+    guardedClock.recording_voice_estimate_withheld = true
+    guardedClock.scored_windows_crossing = 0
+    guardedClock.breaks[0].scored_windows_crossing = 0
+    cleanup()
+    show(guarded)
+    expect(screen.getByText(/a recording-wide voice estimate is unavailable/)).toBeTruthy()
   })
 
   it('shows checked duration when no source-clock break is recorded', () => {

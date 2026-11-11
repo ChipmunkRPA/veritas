@@ -29,6 +29,7 @@ from app.engine.stages import condition as cond
 from app.engine.stages import document as doc
 from app.engine.stages import image as img
 from app.engine.stages import video as vid
+from app.evidence.audio_binding import current_voice_detection_output
 from app.policy import thresholds as policy_thresholds
 from app.provenance import source_labels
 from app.storage.db import Analysis, get_session
@@ -186,6 +187,8 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
             stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d != "condition"))
                            if s.id == "detect" else s for s in stages)
         stages = tuple(dataclasses.replace(s, critical=True) if s.id in REFUSION_REUSED[kind] else s for s in stages)
+    elif kind in ("audio", "video"):
+        stages = tuple(dataclasses.replace(s, reuse_if=current_voice_detection_output) if s.id == "detect" else s for s in stages)
     state: dict[str, Any] = {"registry": active_registry, "run_store": common.DbRunStore(sessions, store),
                              "models": models, "kind": kind, "refusion": refusion, "fuser_pin": fuser_pin,
                              "force_fallback": force_fallback, "policy": policy.as_json()}

@@ -1,0 +1,85 @@
+{
+  "actual_detector_coverage": "production face tracker, per-frame face detection and current face appearance detector with pinned weights",
+  "all_input_native_rgb_pts_dts_and_display_duration_verified": true,
+  "cases": {
+    "original": {
+      "appearance_windows": 12,
+      "coarse_flagged": false,
+      "full_sample_count": 24,
+      "runtime_seconds": {
+        "face_appearance": 2.066,
+        "face_tracking": 2.632,
+        "frame_face_detection": 0.552
+      },
+      "shots": 1,
+      "track_context_verified": true,
+      "tracks": 1
+    },
+    "swap": {
+      "api_json_equal": true,
+      "appearance_windows": 12,
+      "bound_to_coarse_track": 21,
+      "candidate_status": "measured",
+      "coarse": [
+        "71/25",
+        "84/25"
+      ],
+      "coarse_evidence_and_signed_bytes_intact": true,
+      "coarse_flagged": true,
+      "coarse_signed_package_original_replay": true,
+      "coarse_span": "13/25",
+      "current_iou": 0.6842105263157895,
+      "full_sample_count": 24,
+      "known_range": [
+        "66/25",
+        "17/5"
+      ],
+      "native_positions_verified": 21,
+      "qualifies": true,
+      "refined": [
+        "67/25",
+        "17/5"
+      ],
+      "refined_anchor_seconds": [
+        "13/5",
+        "3",
+        "17/5"
+      ],
+      "refined_iou": 0.9473684210526315,
+      "refined_pngs_verified": 3,
+      "runtime_seconds": {
+        "face_appearance": 2.119,
+        "face_tracking": 2.629,
+        "frame_face_detection": 0.446
+      },
+      "score_unchanged": true,
+      "shots": 1,
+      "track_context_verified": true,
+      "tracks": 1
+    }
+  },
+  "checkout": {
+    "duplicate_paid_delivery_idempotent": true,
+    "no_job_before_verified_payment": true,
+    "provider_transport_stubbed": true
+  },
+  "commitments": {
+    "parity-initial.py": "8566977cc5efc10ac3cefdffca4a681d6b5a79c33ead7852cd02ff46975f4ea8",
+    "parity.json": "0a374792f5d5a542c05c73e04f0c9fa94cbac248ad5306cb1085fbfd5ffbb1be",
+    "parity.py": "a9d1ef3dbc2f3f007194255c240cd529c0fca60095adb3fd9518b87ef6883ed8",
+    "prepare.py": "cdad96d1481f36a6bc16f295aa8fe5765af6c8da4d13041239de1fcf88359369",
+    "projection-audit.json": "42aa8cbef5d90cff4e898936778808ac5e19573373361968a82d451137b9b943"
+  },
+  "device": "cpu",
+  "harness_correction": "The first pass stopped on an assertion for an optional overall-confidence field absent from the existing coarse packet schema. The review signal had zero weight. The report and evidence checks then resumed from the same completed analysis and the original control was run.",
+  "media_inputs": 2,
+  "native_pictures_per_media": 150,
+  "normal_fusion_coverage": "not evaluated by the restricted smoke",
+  "profile": "full",
+  "public_outputs": {
+    "model_identity_scan_passed": true,
+    "pdf_pages": 17
+  },
+  "schema": "chipmunk.video-face-short-boundary-app-parity/1",
+  "scope": "Actual Full probe, shot selection, sampling, tracking, native face detection and appearance review. Only three detector families were scheduled in the isolated scratch process. Refinement ran offline after generating the current app package."
+}

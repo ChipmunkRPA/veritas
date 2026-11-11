@@ -21,6 +21,7 @@ from app.engine.detector import (
     Modality,
     UnitScore,
 )
+from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
 
 DETECTOR_ID = "aud.combined_speech_v1"
 ENCODER_ID = "microsoft.wavlm_base_plus"
@@ -118,6 +119,8 @@ class CombinedSpeechDetector(Detector):
 
     def applicable(self, ctx):
         audio = ctx.outputs.audio
+        if audio is not None and audio.clock_breaks:
+            return Applicability(False, VOICE_CLOCK_LIMIT)
         if audio is None or audio.status != "analysed" or not combined.source_supported(audio.pcm):
             return Applicability(
                 False,
@@ -128,6 +131,9 @@ class CombinedSpeechDetector(Detector):
     def run(self, ctx):
         from app.detectors.image.adapters.common import revisions
 
+        applicable = self.applicable(ctx)
+        if not applicable.ok:
+            return DetectorResult.not_applicable(applicable.reason)
         pcm = ctx.outputs.audio.pcm
         calibration = ctx.lease.get(CALIBRATION_ID).obj
         runtime = combined.CombinedSpeechRuntime(calibration, ctx.lease.get(ENCODER_ID).obj)

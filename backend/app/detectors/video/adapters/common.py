@@ -52,6 +52,7 @@ class AudioTrack:
     samples: int = 0
     gate: tuple[tuple[float, float], ...] | None = None  # A-1: speech spans; voice windows at least half inside are scored
     max_windows: int | None = None  # A-1: window cap of a standalone recording (None: the sound-track cap)
+    clock_breaks: tuple[int, ...] = ()  # decoded sample offsets where source timestamps jump
 
 
 def video_spec(det_id: str, name: str, unit: InputUnit, hypotheses: tuple[Hypothesis, ...], produces: tuple[str, ...] = (), *,

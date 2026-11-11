@@ -23,7 +23,15 @@ Both arms flagged 0 of 60 moving-source controls and 14 of 14 genuine camera con
 
 In one example, the known range was **2.280–3.760 seconds**, the original range was **2.480–3.480 seconds**, and the refined range was **2.320–3.760 seconds**. Independent command replay checked the exact clock and verified nine PNGs. The before, during and after pictures for that example were at **2.240, 3.000 and 3.760 seconds**. All 110 views were assessed. The CPU run verified 2,553 native picture inputs in 321.2 seconds, with 332 MB maximum worker RSS. Media and individual measurements stay private.
 
-This result supports an opt-in local timing pilot after an actual app and report verification pass. The coarse measured range should remain available alongside any estimate. This experiment does not change a customer result or confidence contribution.
+## Local app parity
+
+An isolated prepaid Full-profile run used the actual app probe, shot selection, sampler, face tracker, native face detection and appearance adapter on one known 0.75-second swap and its matched original. It scheduled those three detector families only. The test used pinned CPU weights and a simulated payment provider. Both 150-picture inputs reproduced every native RGB frame, PTS, DTS and display duration. Each app run had one shot, one track, 24 sampled pictures and 12 appearance windows. The original had no flagged range.
+
+The swap's app-selected range was **2.840–3.360 seconds**, a measured duration of 0.520 seconds. The known range was **2.640–3.400 seconds**. All 21 additional native samples bound to the same app-selected track. Offline refinement estimated **2.680–3.400 seconds**, improving overlap from 0.684 to 0.947. Its before, during and after PNGs matched source RGB at **2.600, 3.000 and 3.400 seconds**. The appearance score stayed identical.
+
+The existing coarse packet matched the JSON export and verified in the signed package against the uploaded source. The package bytes and API evidence were unchanged after offline refinement. Its 17-page PDF and text exports passed the model-name scan. The initial harness expected an optional confidence-effect field missing from the coarse packet schema. The review signal had zero weight. Verification resumed from that completed analysis after correcting the assertion. [Aggregate app parity receipt](evaluation-panels/video-face-short-boundary-app-parity-2026-11-11.json)
+
+These results support an opt-in local timing pilot with a distinct estimated range alongside the existing measured range. Integration needs to preserve both frame sets and bind them to the same source track. The refinement remains offline.
 
 ## Local replay
 

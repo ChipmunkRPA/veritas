@@ -75,6 +75,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
       {clock && <section aria-label="Audio source clock breaks" className="mt-3">
         <h3 className="m-0 font-medium">Audio source clock breaks</h3>
+        {clock.recording_voice_estimate_withheld && <p className="mt-2 mb-0">The source audio timestamps contain a gap or overlap. Voice checks use only continuous intervals, so a recording-wide voice estimate is unavailable.</p>}
         {clock.total_discontinuities ? <>
           <p className="mt-2 mb-0">The decoded listening copy joins these source spans. {clock.scored_windows_crossing} recorded voice {clock.scored_windows_crossing === 1 ? 'window crosses' : 'windows cross'} a source clock break. This timing check carries zero weight in the AI assessment.</p>
           <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">

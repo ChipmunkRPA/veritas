@@ -13,6 +13,8 @@ from pathlib import Path
 import numpy as np
 from scipy.signal import butter, sosfiltfilt
 
+from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
+
 VERSION = 'local-speech-v3.1'
 SHA256 = '912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf'
 PATH = Path(__file__).with_name('calibrations') / 'local-speech-v3.json'
@@ -67,12 +69,12 @@ def initial_decision(p, bundle):
     return 'inconclusive'
 
 
-def evaluate(raw, pcm, windows, classifier, deadline) -> dict:
+def evaluate(raw, pcm, windows, classifier, deadline, *, source_clock_discontinuous=False) -> dict:
     bundle = load()
     p = probability(raw, bundle)
     direction = initial_decision(p, bundle)
     seconds = len(pcm) / 16000
-    supported = (bundle['min_seconds'] <= seconds <= bundle['max_seconds'] and len(windows) == 1
+    supported = (not source_clock_discontinuous and bundle['min_seconds'] <= seconds <= bundle['max_seconds'] and len(windows) == 1
                  and windows[0][0] == 0 and len(windows[0][1]) == len(pcm))
     probe_status, delta, veto = 'not_required_for_decision', None, False
     if direction == 'original' and supported:
@@ -94,7 +96,8 @@ def evaluate(raw, pcm, windows, classifier, deadline) -> dict:
             veto, probe_status = True, 'unavailable'
     if not supported:
         direction = 'inconclusive'
-        reason = ('The recording is outside the 2.5–4 second calibration scope. Individual speech windows were checked, '
+        reason = (VOICE_CLOCK_LIMIT if source_clock_discontinuous else
+                  'The recording is outside the 2.5–4 second calibration scope. Individual speech windows were checked, '
                   'but no calibrated whole-recording confidence is assigned.')
     elif veto:
         direction = 'inconclusive'
@@ -104,6 +107,7 @@ def evaluate(raw, pcm, windows, classifier, deadline) -> dict:
     else:
         reason = ('Leaning towards AI-generated speech.' if direction == 'ai' else 'Leaning towards original speech.')
     return {'version': VERSION, 'calibration_sha256': SHA256, 'probability_ai': p if supported else None,
-            'reference_estimate_ai': p, 'decision': direction, 'scope_supported': supported,
+            'reference_estimate_ai': None if source_clock_discontinuous else p,
+            'decision': direction, 'scope_supported': supported,
             'seconds': seconds, 'probe_status': probe_status, 'stability_log_odds_change': delta,
             'original_stability_veto': veto, 'reason': reason, 'limitation': NOTE}

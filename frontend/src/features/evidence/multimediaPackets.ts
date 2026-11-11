@@ -129,6 +129,7 @@ export interface AudioSimilarityContext extends AudioRepeatRecord {
 }
 type AudioClockSpan = SampleInterval & { source_start_pts: number; source_end_pts: number }
 export interface AudioSourceClockContext {
+  recording_voice_estimate_withheld?: true;
   affects_overall_confidence: false; time_base: string; minimum_jump_samples: number; checked_samples: number
   total_discontinuities: number; scored_windows_crossing: number
   breaks: { boundary_sample: number; jump_samples: number; before: AudioClockSpan; after: AudioClockSpan;

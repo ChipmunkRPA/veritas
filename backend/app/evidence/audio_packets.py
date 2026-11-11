@@ -23,6 +23,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
 from app.evidence.audio_binding import (
+    VOICE_CLOCK_POLICY,
     attach_stereo_attenuation_overlaps,
     source_clock_context,
     unscored_voice_intervals,
@@ -296,8 +297,9 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
                         "Waveforms and exported audio are context for inspection; they are not independent evidence of synthesis.",
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
     document["coverage"]["unscored_intervals"] = unscored_voice_intervals(document["coverage"], document["source"])
-    if analysis.kind == "audio":
-        document["coverage"]["source_clock_context"] = source_clock_context(document["coverage"], document["source"])
+    clock = source_clock_context(document["coverage"], document["source"], guarded=record.get("voice_clock_policy") == VOICE_CLOCK_POLICY)
+    if analysis.kind == "audio" or clock["total_discontinuities"]:
+        document["coverage"]["source_clock_context"] = clock
     doc_assets = {}
     for name, scores in (("waveform", False), ("scores", True)):
         doc_assets[name] = _asset(db, store, analysis, set_id,

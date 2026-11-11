@@ -1,6 +1,8 @@
 """Frozen audio inputs and voice presentation inside one parent video evidence set."""
 from __future__ import annotations
 
+import json
+
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import audio_packets
 from app.storage.artefacts import get_artefact, register_artefact
@@ -9,18 +11,27 @@ from app.storage.db import DetectorRun
 
 def freeze_input(ctx, decoded) -> dict:
     """Persist the already-decoded PCM once; never decode again to invent evidence."""
+    source_mapping = dict(decoded.mapping)
+    stereo_context = source_mapping.pop('stereo_context', None)
     with ctx.sessions() as db:
         wav = register_artefact(db, ctx.store, decoded.wav, media_type='audio/wav', role='working_copy',
                                created_by='video-audio-input/1', analysis_id=ctx.analysis_id)
-        mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type='application/json',
+        mapping = register_artefact(db, ctx.store, canonical_json(source_mapping), media_type='application/json',
                                    role='stage_output', created_by='video-audio-input/1', analysis_id=ctx.analysis_id)
         binding = {'version': 'audio-input/1', 'pcm_sha256': decoded.mapping['pcm_sha256'],
                    'wav_sha256': wav.sha256, 'mapping_sha256': mapping.sha256,
                    'sample_rate': decoded.mapping['sample_rate'], 'samples': len(decoded.pcm)}
-        objects = [{'id': a.id, 'sha256': a.sha256, 'size_bytes': a.bytes, 'media_type': a.media_type,
-                    'role': a.role, 'created_by': a.created_by} for a in (wav, mapping)]
+        objects = [wav, mapping]
+        output = {'input': binding}
+        if stereo_context is not None:
+            stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
+                                       role='stage_output', created_by='video-audio-stereo/1', analysis_id=ctx.analysis_id)
+            objects.append(stereo)
+            output['stereo_context_sha256'] = stereo.sha256
+        output['artefacts'] = [{'id': a.id, 'sha256': a.sha256, 'size_bytes': a.bytes, 'media_type': a.media_type,
+                                'role': a.role, 'created_by': a.created_by} for a in objects]
         db.commit()
-    return {'input': binding, 'artefacts': objects}
+    return output
 
 
 def published_record(ctx) -> dict:
@@ -31,6 +42,8 @@ def published_record(ctx) -> dict:
     record = {'version': 'video-audio-inputs/1', 'decode_status': decoded.get('status'),
               'source_audio_present': (ctx.outputs.get('probe') or {}).get('info', {}).get('has_audio'),
               'input': decoded.get('evidence_input'), 'voice_checks': [], 'av_checks': [], 'sound_checks': []}
+    if stereo_sha := (ctx.outputs.get('render') or {}).get('audio_stereo_context_sha256'):
+        record['stereo_context_sha256'] = stereo_sha
     with ctx.sessions() as db:
         for entry in common.entries(ctx, ('detect',)):
             family = entry.get('family')
@@ -60,6 +73,9 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
         return unavailable(analysis.sha256, 'The source audio could not be decoded and frozen with a verified timeline.')
     content = audio_packets.build_content(db, analysis, store, result,
         record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', [])}, set_id=set_id)
+    if stereo_sha := record.get('stereo_context_sha256'):
+        content['stereo_context'] = json.loads(audio_packets._verified(store, stereo_sha))
+        content['stereo_context_sha256'] = stereo_sha
     assessed = bool(content['coverage']['windows'])
     return {'status': 'ready' if assessed else 'not_assessed',
             'reason': None if assessed else 'No voice-check windows were scored. Frozen audio context is not a synthesis finding.',
@@ -101,6 +117,8 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
                           for key in ('pcm_sha256', 'wav_sha256', 'mapping_sha256', 'samples', 'sample_rate')):
         raise audio_packets.PacketIntegrityError('Video voice input differs from its published commitment')
     pcm, mapping = audio_packets._input(store, SimpleNamespace(sha256=source_sha256), binding)
+    if channel.get('stereo_context_sha256') != record.get('stereo_context_sha256'):
+        raise audio_packets.PacketIntegrityError('Video stereo context differs from its published commitment')
     if channel.get('sound_events') is not None:
         from app.evidence.sound_events import verify
         verify(channel['sound_events'], store=store, record=record, binding=binding,

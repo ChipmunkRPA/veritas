@@ -21,12 +21,13 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
+from app.evidence import document_scope
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
 SCHEMA = "chipmunk.document-evidence/1"
-VERSION = "document-evidence-3"
+VERSION = document_scope.VERSION
 CREATOR = "document-evidence-packets/1"
 MAX_PACKETS = 6
 MAX_PAGES_PER_PACKET = 3
@@ -199,6 +200,11 @@ def _source_anchors(mapping: list[dict], a: int, b: int, size: int) -> list[dict
     return anchors
 
 
+def _inspection_anchors(mapping: list[dict], scope: dict, size: int) -> list[dict]:
+    return [anchor for span in scope["spans"]
+            for anchor in _source_anchors(mapping, span["start"], span["end"], size)]
+
+
 def _rect(box: list, width: float, height: float) -> tuple[float, float, float, float]:
     if len(box) != 4 or any(not isinstance(v, int | float) or not math.isfinite(v) for v in box):
         raise DocumentPacketIntegrityError("A PDF source box is invalid")
@@ -289,7 +295,7 @@ def _pdf_plates(source: bytes, anchors: list[dict], store: ObjectStore | None = 
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
-    if (document.get("schema") != SCHEMA or document.get("version") not in {"document-evidence-1", "document-evidence-2", VERSION}
+    if (document.get("schema") != SCHEMA or document.get("version") not in document_scope.VERSIONS
             or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or packet_hash(document) != document.get("sha256")):
@@ -311,7 +317,12 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for window in packet["supporting_windows"]:
             if text_hash(window["text"]) != window["input_sha256"]:
                 raise DocumentPacketIntegrityError("A scored context does not match its actual input")
-        if document["version"] == VERSION or "context_comparison" in packet:
+        if document["version"] == VERSION:
+            try:
+                document_scope.validate(packet, size)
+            except (ValueError, KeyError, TypeError) as error:
+                raise DocumentPacketIntegrityError("A document packet has an invalid inspection scope") from error
+        if document["version"] in document_scope.CONTEXT_VERSIONS or "context_comparison" in packet:
             from app.evidence.document_context import validate
 
             try:
@@ -429,7 +440,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     for index, (a, b) in enumerate(selected, 1):
         windows = groups[a, b]
         ca, cb = min(s["start"] for w in windows for s in w["spans"]), max(s["end"] for w in windows for s in w["spans"])
-        anchors = _source_anchors(mapping, a, b, len(text))
+        focus = {"start": a, "end": b, "text": text[a:b]}
+        scope = document_scope.build(focus, windows, len(text))
+        ratio_scope = scope["basis"] == "ratio_reduction"
+        anchors = _inspection_anchors(mapping, scope, len(text))
         refs = {w["signal_ref"]["id"] for w in windows}
         original_refs = {s["id"] for s in result["signals"] if alias_signal(s["id"]) in refs}
         findings = [f["id"] for f in result.get("findings", []) if original_refs.intersection(f.get("evidence_ids", []))]
@@ -443,8 +457,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                               **metadata}
         supports = sum(w["direction"] == "supports_ai" for w in windows)
         opposing = len(windows) - supports
-        limits = ["This statistical response does not prove that a person used AI, or that every highlighted word was generated.",
-                  "The check scored the shown sentence together with its recorded context, not the highlighted words in isolation.",
+        limits = ["The recorded responses are inspection clues. They do not establish whether a person used AI.",
                   "Responses are uncalibrated. Templates, translation, editing and unfamiliar languages can trigger them.",
                   "Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship."]
         if any(w["score_kind"] == "perplexity_ratio" for w in windows):
@@ -455,13 +468,17 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             limits.append("Page highlights locate intersecting words in the frozen extraction; they are not edits to the source PDF.")
         if any(anchor.get("extraction") == "ocr" for anchor in anchors):
             limits.append("This excerpt was transcribed from the frozen page image. Recognition confidence measures transcription quality, not AI authorship; inspect the source crop for recognition mistakes.")
-        document["packets"].append({"id": f"T{index:02d}", "title": "Text and context worth reviewing", "evidence_type": "statistical",
+        interpretation = ("The highlighted range contains the tokens used for a writing-pattern ratio. Surrounding text can influence the response."
+                          if ratio_scope else
+                          "The highlight shows the measured context. The navigation sentence is a place to start reading, and the response does not locate generated words.")
+        document["packets"].append({"id": f"T{index:02d}", "title": "Measured writing-pattern range" if ratio_scope else "Scored context for inspection",
+                                    "evidence_type": "statistical",
                                     "finding_ids": findings, "signal_refs": [w["signal_ref"] for w in windows],
-                                    "focus": {"start": a, "end": b, "text": text[a:b]},
+                                    "focus": focus, "inspection_scope": scope,
                                     "context": {"start": ca, "end": cb, "text": text[ca:cb]},
                                     "supporting_windows": windows, "anchors": anchors, "artifacts": artifacts,
-                                    "observation": f"{supports} recorded check(s) are on their AI-like side; {opposing} are on the opposing side of their own operating threshold for this span.",
-                                    "interpretation": "Review supporting and opposing responses with their exact input contexts. Disagreement is retained; neither side proves who wrote the passage.",
+                                    "observation": f"Recorded responses on the AI-like side of their checks: {supports}. Opposing responses: {opposing}.",
+                                    "interpretation": interpretation,
                                     "measurements": [{"label": "Language-pattern ratio" if w["score_kind"] == "perplexity_ratio" else "Context response",
                                                       "value": w["score"], "unit": "raw ratio" if w["score_kind"] == "perplexity_ratio" else "uncalibrated score"} for w in windows],
                                     "limitations": limits})

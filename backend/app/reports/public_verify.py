@@ -12,6 +12,7 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
+from app.evidence import document_scope
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.face_lighting_context import validate as validate_face_lighting
@@ -30,7 +31,7 @@ _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6'}, 'video': VIDEO_VERSIONS,
-            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2', 'document-evidence-3'}}
+            'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
 
 
 def _require(condition: bool, detail: str) -> None:
@@ -126,11 +127,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                                  'Copy evidence search coverage is inconsistent')
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
-    if analysis['kind'] == 'document' and evidence['version'] == 'document-evidence-3':
+    if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 
         checks = {check['id'] for check in result.get('checks', [])}
         for packet in evidence['packets']:
+            if evidence['version'] == document_scope.VERSION:
+                document_scope.validate(packet, evidence['source']['chars'])
             validate_context_comparison(packet['context_comparison'], focus=packet['focus'], chars=evidence['source']['chars'])
             _require(all(row['signal_ref']['id'] in checks for row in packet['context_comparison']['checks']),
                      'A context comparison refers to an unpublished classifier check')

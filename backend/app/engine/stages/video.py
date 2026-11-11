@@ -174,12 +174,14 @@ def _audio(path: Path, has_audio: bool, *, source_sha256: str, capture: Callable
     if not has_audio:
         return AudioTrack("absent"), None
     try:
-        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=120)
+        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=120, inspect_stereo=capture is not None)
     except (ValueError, RuntimeError):
         return AudioTrack("unreadable"), None
     pcm, mapping = decoded.pcm, decoded.mapping
     if capture is not None:
         capture(decoded)
+        # AV raw proofs commit this exact mono mapping. Freeze stereo separately.
+        mapping = {key: value for key, value in mapping.items() if key != "stereo_context"}
     if len(pcm) < SR:
         return AudioTrack("short", None, len(pcm)), mapping
     if is_mostly_silence(pcm):
@@ -217,7 +219,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
                         "sha256": hashlib.sha256(f.rgb.tobytes()).hexdigest()} for f in frames],
             "missing_frames": [i for i in wanted if i not in decoded], "width": int(width), "height": int(height),
             "audio": {"status": audio.status, "samples": audio.samples, "seconds": round(audio.samples / SR, 3),
-                      "source_mapping": audio_mapping, "evidence_input": audio_evidence.get("input")},
+                      "source_mapping": audio_mapping, "evidence_input": audio_evidence.get("input"),
+                      "stereo_context_sha256": audio_evidence.get("stereo_context_sha256")},
             "artefacts": audio_evidence.get("artefacts", [])}
 
 
@@ -913,10 +916,16 @@ def render(ctx: StageContext) -> dict[str, Any]:
     artifacts, key_times = video_artifacts(common.legacy_artifact_dir(ctx), [f.rgb for f in frames], per_frame, [f.time_s for f in frames])
     frame_store = ctx.state.get("frame_store")
     anchors = frame_store.native_anchors() if frame_store is not None else []
+    decode_output = ctx.outputs.get("decode") or {}
+    decoded_audio = decode_output.get("audio") or {}
+    stereo_sha = decoded_audio.get("stereo_context_sha256")
+    # A reused historical render output must not acquire evidence on publication.
+    stereo_objects = [obj for obj in decode_output.get("artefacts", []) if obj["sha256"] == stereo_sha]
     return {**out, **stills, "legacy_artifacts": artifacts, "key_frame_times": key_times,
+            "artefacts": stills["artefacts"] + stereo_objects,
             "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
-            "audio_mapping": ctx.state.get("video_audio_mapping"),
-            "audio_status": (ctx.outputs.get("decode") or {}).get("audio", {}).get("status")}
+            "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
+            "audio_stereo_context_sha256": stereo_sha}
 
 
 def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:

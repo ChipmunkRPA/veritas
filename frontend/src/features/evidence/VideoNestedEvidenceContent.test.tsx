@@ -219,3 +219,38 @@ describe('video v3 nested source-bound evidence', () => {
     expect(screen.queryAllByRole('alert')).toHaveLength(0)
   })
 })
+
+
+it('shows soundtrack level loss in the voice lane with the original video clock', () => {
+  const set = fixture()
+  const audio = set.audio!
+  audio.status = 'not_assessed'
+  audio.reason = 'No voice-check windows were scored.'
+  audio.coverage = { ...audio.coverage!, scored_samples: 0, unscored_samples: audio.source.samples!, windows: [] }
+  audio.packets = []
+  audio.source = { ...audio.source, source_channels: 2, source_stream_index: 1, pcm_sha256: 'e'.repeat(64) }
+  audio.stereo_context = {
+    schema: 'chipmunk.stereo-channel-context/2', status: 'measured', evidence_type: 'context', affects_overall_confidence: false,
+    source_sha256: set.source.sha256, source_channel_count: 2, source_stream_index: 1,
+    sample_rate: 16000, max_seconds: 30, quiet_floor_dbfs: -50, strong_level_gap_db: 12, silence_floor_dbfs: -140,
+    mono_pcm_sha256: audio.source.pcm_sha256, strong_downmix_attenuation_db: 12,
+    windows: [{
+      start_sample: 32000, end_sample: 48000, status: 'measured', left_rms_dbfs: -12, right_rms_dbfs: -12,
+      level_gap_db: 0, correlation: -1, louder_channel: null,
+      downmix: { mono_rms_dbfs: -140, attenuation_db: null, strong_attenuation: true },
+      source_timestamp_ranges: [{ start_sample: 32000, end_sample: 48000,
+        source_start_pts: 118400, source_end_pts: 134400, time_base: '1/16000' }],
+    }],
+  }
+  render(<MemoryRouter initialEntries={['/media-evidence#media-evidence-stereo']}>
+    <MultimediaEvidenceContent set={set} token="" mediaReady={false} />
+  </MemoryRouter>)
+  expect(screen.getByRole('tab', { name: /Voice intervals.*1 mono level drop/ }).getAttribute('aria-selected')).toBe('true')
+  const section = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
+  expect(section.getByText(/Strong level drop in the analyzed mono mix/)).toBeTruthy()
+  expect(section.getByText(/Decoded audio 2.000 s–3.000 s/)).toBeTruthy()
+  expect(section.getByText('7.400 s–8.400 s')).toBeTruthy()
+  expect(section.getByText('Video playback 2.400 s–3.400 s')).toBeTruthy()
+  expect(section.getByText('[118400, 134400) at 1/16000')).toBeTruthy()
+  expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+})

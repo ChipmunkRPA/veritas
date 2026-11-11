@@ -9,7 +9,9 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, E
 import { measurementValue } from './imagePackets'
 import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet } from './multimediaPackets'
 
-export default function AudioEvidenceContent({ set, token, mediaReady }: { set: AudioEvidenceSet; token: string; mediaReady: boolean }) {
+export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS }: {
+  set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
+}) {
   const rate = set.source.sample_rate
   const { hash } = useLocation()
   const [selection, setSelection] = useState(set.packets[0]?.id ?? null)
@@ -43,7 +45,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady }: { set: 
   return <div ref={root} data-testid="audio-evidence-content">
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
-    <AudioStereoContext set={set} />
+    <AudioStereoContext set={set} videoOriginS={videoOriginS} />
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.

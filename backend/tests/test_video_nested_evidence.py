@@ -6,20 +6,29 @@ import hashlib
 import json
 import subprocess
 import sys
+import wave
 import zipfile
 from datetime import UTC, datetime
+from types import SimpleNamespace
 
 import cv2
+import numpy as np
 import pymupdf
 import pytest
+from sqlalchemy.orm import Session
 from test_video_av_evidence import av_fixture as av_fixture
 from test_video_av_evidence import av_source as av_source
 
+from app.api import v2_evidence_packets
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.detectors.video.adapters.face_appearance import DETECTOR, record
+from app.detectors.video.decode import probe_frames
 from app.detectors.video.face_appearance import METHOD, cpp_alignment
-from app.evidence import service, video_packets
+from app.engine.stages import video
+from app.evidence import service, video_audio, video_packets
+from app.evidence.audio_binding import validate_audio_channel
 from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify
 from app.reports.specimens import specimen
@@ -31,20 +40,7 @@ from app.storage.objects import ObjectIntegrityError
 @pytest.fixture(params=['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'])
 def nested_case(av_fixture, monkeypatch, request):
     f = av_fixture
-    anchors = list(f.anchors.values())
-    sampling = f.result['manifest']['sampling']
-    sampling.update(frame_anchor_version=video_packets.ANCHOR_VERSION,
-                    frame_anchor_sha256=canonical_hash(anchors), frame_table_sha256=canonical_hash(f.table.to_json()),
-                    timeline_origin_s=5.)
-    for stage, content in [('probe', {'frame_table': f.table.to_json(), 'info': {'has_audio': True}}),
-                           ('render', {'frame_anchor_version': video_packets.ANCHOR_VERSION, 'frame_anchors': anchors})]:
-        art = register_artefact(f.db, f.store, canonical_json(content), media_type='application/json', role='stage_output',
-                               created_by='av-fixture', analysis_id=f.analysis.id)
-        f.db.add(AnalysisStage(analysis_id=f.analysis.id, stage=stage, status='done', output_artefact_id=art.id))
-    f.result['exhibits'] = []
-    f.analysis.result_hash = canonical_hash(f.result)
-    f.store.put_bytes(canonical_json(f.result))
-    f.db.flush()
+    _prepare_parent(f)
     # Pin this fixture's writer independently of future versions; older sets
     # remain readable and are never retroactively enriched.
     monkeypatch.setattr(video_packets, 'VERSION', request.param)
@@ -65,6 +61,28 @@ def nested_case(av_fixture, monkeypatch, request):
             content.pop('acoustic_context')
             return content
         monkeypatch.setattr(audio_packets, 'build_content', historical_content)
+    _freeze_parent(f)
+    return f
+
+
+def _prepare_parent(f):
+    anchors = list(f.anchors.values())
+    sampling = f.result['manifest']['sampling']
+    sampling.update(frame_anchor_version=video_packets.ANCHOR_VERSION,
+                    frame_anchor_sha256=canonical_hash(anchors), frame_table_sha256=canonical_hash(f.table.to_json()),
+                    timeline_origin_s=5.)
+    for stage, content in [('probe', {'frame_table': f.table.to_json(), 'info': {'has_audio': True}}),
+                           ('render', {'frame_anchor_version': video_packets.ANCHOR_VERSION, 'frame_anchors': anchors})]:
+        art = register_artefact(f.db, f.store, canonical_json(content), media_type='application/json', role='stage_output',
+                               created_by='av-fixture', analysis_id=f.analysis.id)
+        f.db.add(AnalysisStage(analysis_id=f.analysis.id, stage=stage, status='done', output_artefact_id=art.id))
+    f.result['exhibits'] = []
+    f.analysis.result_hash = canonical_hash(f.result)
+    f.store.put_bytes(canonical_json(f.result))
+    f.db.flush()
+
+
+def _freeze_parent(f):
     f.document = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
     frozen = specimen('video', 'standard')
     f.frozen = frozen.model_copy(update={
@@ -73,7 +91,6 @@ def nested_case(av_fixture, monkeypatch, request):
         'media': frozen.media.model_copy(update={'sha256': f.analysis.sha256, 'size_bytes': f.analysis.size_bytes,
                                                 'filename': f.analysis.filename, 'content_type': f.analysis.content_type}),
         'report': frozen.report.model_copy(update={'template_set': engine.TEMPLATE_SET})})
-    return f
 
 
 def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, monkeypatch):
@@ -266,12 +283,15 @@ def test_old_video_sets_keep_their_bytes_and_remain_readable(nested_case):
 
 
 def test_nested_public_zip_offline_verifier_without_runtime(nested_case, tmp_path, monkeypatch):
-    f = nested_case
-    monkeypatch.setattr(settings, 'data_dir', tmp_path/'data')
-    key = signing.instance_key(tmp_path/'key.pem')
     with pymupdf.open() as pdf:
         pdf.new_page().insert_text((40,60), 'Controlled AV public export integrity fixture')
         pdf_bytes=pdf.tobytes()
+    _check_public_zip(nested_case, tmp_path, monkeypatch, pdf_bytes)
+
+
+def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes):
+    monkeypatch.setattr(settings, 'data_dir', tmp_path/'data')
+    key = signing.instance_key(tmp_path/'key.pem')
     pdf_art=register_artefact(f.db,f.store,pdf_bytes,media_type='application/pdf',role='report',created_by='fixture',analysis_id=f.analysis.id)
     snap_art=register_artefact(f.db,f.store,snapshot.dump(f.frozen),media_type='application/json',role='stage_output',created_by='fixture',analysis_id=f.analysis.id)
     report=ReportRow(id=f.frozen.report.id,display_id=f.frozen.report.display_id,revision=1,
@@ -288,6 +308,7 @@ def test_nested_public_zip_offline_verifier_without_runtime(nested_case, tmp_pat
     assert checked.ok, checked.as_dict()
     with zipfile.ZipFile(built.path) as archive:
         assert json.loads(archive.read('evidence.json')) == f.document
+        assert archive.read('report.pdf') == pdf_bytes
         bundle=json.loads(archive.read('bundle.json'))
         assert {a['sha256'] for a in bundle['artifacts']} == set(service.asset_refs(f.document))
         assert all(archive.read(a['file']) == f.store.read_bytes(a['sha256']) for a in bundle['artifacts'])
@@ -298,7 +319,7 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.image_eligibility'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.image_eligibility','app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)
@@ -310,3 +331,100 @@ r=verify_package(Path(sys.argv[1]),public_key_pem=Path(sys.argv[2]).read_bytes()
 print(json.dumps(r.as_dict()));sys.exit(0 if r.ok else 1)
 ''',str(built.path),str(trusted)],capture_output=True,text=True,timeout=20)
     assert offline.returncode==0, offline.stdout+offline.stderr
+
+
+def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, tmp_path, monkeypatch):
+    source, _, original, face = av_source
+    stereo_path = tmp_path / 'stereo.wav'
+    left = np.rint(original.pcm * 32768).astype('<i2')
+    right = left.copy()
+    right[2 * SAMPLE_RATE:3 * SAMPLE_RATE] *= -1
+    with wave.open(str(stereo_path), 'wb') as stereo_wav:
+        stereo_wav.setparams((2, 2, SAMPLE_RATE, 0, 'NONE', ''))
+        stereo_wav.writeframes(np.column_stack((left, right)).astype('<i2').tobytes())
+    path = tmp_path / 'stereo-offset.mkv'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-copyts', '-i', str(source), '-itsoffset', '5.4',
+                    '-i', str(stereo_path), '-map', '0:v:0', '-map', '1:a:0', '-c', 'copy',
+                    '-avoid_negative_ts', 'disabled', str(path)], check=True, timeout=30)
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    table = probe_frames(path)
+    reference = decode_audio(path, source_sha256=sha, max_seconds=120)
+    assert table.seconds(0) == 5 and reference.mapping['timeline'][0]['source_pts'] == 86400
+
+    fixture = av_fixture.__wrapped__(tmp_path, (path, table, reference, face))
+    try:
+        f = next(fixture)
+        _prepare_parent(f)
+        _freeze_parent(f)
+        ordinary = f.document
+        assert 'stereo_context' not in ordinary['audio']
+
+        def sessions():
+            return Session(f.db.get_bind())
+
+        ctx = SimpleNamespace(outputs={'ingest': {'sha256': sha}, 'probe': {
+            'frame_table': table.to_json(), 'plan': {'legacy': {'frames': [0, 8, 16]}}, 'info': {'has_audio': True}}},
+            state={'media': SimpleNamespace(path=path)}, store=f.store, check=lambda *a: None,
+            sessions=sessions, analysis_id=f.analysis.id)
+        ctx.outputs['decode'] = video.decode(ctx)
+        stage = ctx.outputs['decode']['audio']
+        binding = stage['evidence_input']
+        mapping = stage['source_mapping']
+        assert mapping == reference.mapping
+        assert binding['mapping_sha256'] == canonical_hash(reference.mapping)
+        assert binding['pcm_sha256'] == reference.mapping['pcm_sha256']
+        assert f.store.read_bytes(binding['wav_sha256']) == reference.wav
+        np.testing.assert_array_equal(ctx.state['audio'].pcm, reference.pcm)
+
+        stereo_sha = stage['stereo_context_sha256']
+        assert 'stereo_context_sha256' not in video_audio.published_record(ctx)
+        ctx.outputs['render'] = {'audio_stereo_context_sha256': stereo_sha}
+        committed = video_audio.published_record(ctx)
+        assert committed['stereo_context_sha256'] == stereo_sha and committed['input'] == binding
+        f.result['manifest']['sampling']['video_audio_evidence']['stereo_context_sha256'] = stereo_sha
+        f.result = _report_scaffold(f).result
+        f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+        _freeze_parent(f)
+        f.db.commit()
+        stereo = f.document['audio']['stereo_context']
+        assert canonical_hash(stereo) == stereo_sha
+        assert json.loads(f.store.read_bytes(stereo_sha)) == stereo
+        assert stereo['source_stream_index'] == 1 and stereo['affects_overall_confidence'] is False
+        assert [w['downmix']['strong_attenuation'] for w in stereo['windows']] == [False, False, True]
+        flagged = stereo['windows'][2]
+        assert flagged['downmix']['mono_rms_dbfs'] == stereo['silence_floor_dbfs']
+        assert flagged['source_timestamp_ranges'] == [{
+            'start_sample': 32000, 'end_sample': 48000, 'source_start_pts': 118400, 'source_end_pts': 134400,
+            'time_base': '1/16000',
+        }]
+        assert f.document['audio']['coverage'] == ordinary['audio']['coverage']
+        assert f.document['av']['packets']
+        assert [p['measurement'] for p in f.document['av']['packets']] == [p['measurement'] for p in ordinary['av']['packets']]
+        assert [p['anchor'] for p in f.document['av']['packets']] == [p['anchor'] for p in ordinary['av']['packets']]
+        assert 'gustking' not in json.dumps(stereo)
+
+        monkeypatch.setattr(v2_evidence_packets, 'get_session', sessions)
+        monkeypatch.setattr(v2_evidence_packets, 'default_store', lambda: f.store)
+        response = v2_evidence_packets.image_evidence(f.analysis.id)
+        assert json.loads(response.body) == f.document
+        monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+        rendered = engine.render_pdf(f.frozen)
+        text = engine.pdf_text(rendered.pdf)
+        assert 'Stereo soundtrack comparison' in text and 'Mono is digitally silent' in text
+        assert '[118400, 134400)' in text and '/audio/stereo_context' in text
+        assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
+        assert 'All 31 lag candidates' in text
+        _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf)
+
+        forged = copy.deepcopy(f.document['audio'])
+        forged['stereo_context']['windows'][2]['source_timestamp_ranges'][0]['source_start_pts'] += 1
+        forged['stereo_context_sha256'] = canonical_hash(forged['stereo_context'])
+        with pytest.raises(ValueError, match='source timestamps'):
+            validate_audio_channel(forged, f.analysis.sha256)
+        omitted = copy.deepcopy(f.document)
+        del omitted['audio']['stereo_context'], omitted['audio']['stereo_context_sha256']
+        omitted['sha256'] = service.packet_hash(omitted)
+        with pytest.raises(ObjectIntegrityError, match='differs from its published commitment'):
+            multimedia_evidence.verify_assets(omitted, f.store, result=f.result)
+    finally:
+        fixture.close()

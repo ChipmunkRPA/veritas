@@ -628,6 +628,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document[key]["coverage"] is not None:
                 for name in ("wav_sha256", "mapping_sha256"):
                     store.verify(document[key]["source"][name])
+        if stereo_sha := document["audio"].get("stereo_context_sha256"):
+            store.verify(stereo_sha)
     return document
 
 

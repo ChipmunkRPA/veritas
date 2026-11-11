@@ -333,14 +333,14 @@ def test_real_local_hybrid_ocr_preserves_text_geometry_and_frozen_evidence(
     )
     evidence = build_packet_set(db, analysis, packet_store, result)
     (packet,) = evidence["packets"]
-    (anchor,) = packet["anchors"]
-    assert anchor["extraction"] == "ocr" and anchor["ocr"]["image_box"] == list(SCAN_BOX)
+    assert {row["extraction"] for row in packet["anchors"]} == {"text_layer", "ocr"}
+    ocr_anchors = [row for row in packet["anchors"] if row["extraction"] == "ocr"]
+    assert all(row["ocr"]["image_box"] == list(SCAN_BOX) for row in ocr_anchors)
     assert packet["artifacts"]["page1_ocr_input"]["source_raster_sha256"] == raster_sha
     assert any("Authorship confidence has not been validated" in line for line in evidence["limitations"])
     assert packet["focus"]["text"] == saved["text"][packet["focus"]["start"] : packet["focus"]["end"]]
-    assert all(
-        saved["text"][word["start"] : word["end"]] == word["text"] for word in anchor["highlighted_words"]
-    )
+    assert all(saved["text"][word["start"]:word["end"]] == word["text"]
+               for anchor in ocr_anchors for word in anchor["highlighted_words"])
     multimedia_evidence.verify_assets(evidence, packet_store, result=result)
     anchors = _source_anchors(saved["source_map"], 0, len(saved["text"]), len(saved["text"]))
     assert {row["extraction"] for row in anchors} == {"text_layer", "ocr"}

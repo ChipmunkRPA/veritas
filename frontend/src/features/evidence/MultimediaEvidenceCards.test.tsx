@@ -195,7 +195,7 @@ describe('ordinary multimedia evidence', () => {
         token_ids_sha256: 'b'.repeat(64), anchor_token_count: 1, context_limit: 1024, stride: 768 }] }]
     show(set)
     expect(screen.getByText(/raw writing-pattern ratio/)).toBeTruthy()
-    expect(screen.getByText(/does not support the AI flag/)).toBeTruthy()
+    expect(screen.getByText(/Opposing response for this input/)).toBeTruthy()
     expect(screen.getByText(/Ratios below 0.9/)).toBeTruthy()
     expect(screen.getByText(/Actual token context \[0, 200\)/)).toBeTruthy()
     expect(screen.queryByText(/120%/)).toBeNull()

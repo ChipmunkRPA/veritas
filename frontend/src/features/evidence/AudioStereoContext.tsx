@@ -1,4 +1,4 @@
-import { seconds, type AudioEvidenceSet, type StereoChannelContext } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidenceSet, type StereoChannelContext } from './multimediaPackets'
 
 const unassessed = {
   mono: 'The first audio stream is mono. Channel comparison does not apply.',
@@ -7,7 +7,7 @@ const unassessed = {
   unavailable: 'The stereo measurements could not be aligned to the recorded source clock.',
 }
 
-export default function AudioStereoContext({ set }: { set: AudioEvidenceSet }) {
+export default function AudioStereoContext({ set, videoOriginS }: { set: AudioEvidenceSet; videoOriginS?: number | null }) {
   const context = set.stereo_context
   if (!context) return null
   const hasDownmix = context.schema === 'chipmunk.stereo-channel-context/2'
@@ -32,7 +32,7 @@ export default function AudioStereoContext({ set }: { set: AudioEvidenceSet }) {
           : <p className="mt-2 mb-0 text-small">{strong.length} {strong.length === 1 ? 'window had' : 'windows had'} a strong channel-level difference{strong.length === 0 ? '.' : <>. {strong.slice(0, 3).map((window) => range(window) + ' (' + window.louder_channel + ' louder)').join(', ')}{strong.length > 3 ? ', with more in the table.' : '.'}</>}</p>}
         {attenuated.length > 0 && <p className="mt-2 mb-0 text-small">
           <strong>Strong level drop in the analyzed mono mix.</strong>{' '}
-          {attenuated.slice(0, 3).map(range).join(', ')}{attenuated.length > 3 ? ', with more in the table.' : '.'}{' '}
+          Decoded audio {attenuated.slice(0, 3).map(range).join(', ')}{attenuated.length > 3 ? ', with more in the table.' : '.'}{' '}
           Sounds present in stereo may be harder to hear in the analyzed copy.
         </p>}
         <details className="mt-3 text-small text-text-muted">
@@ -42,7 +42,16 @@ export default function AudioStereoContext({ set }: { set: AudioEvidenceSet }) {
               <thead><tr><th scope="col">Decoded range</th><th scope="col">Source timestamps (PTS)</th><th scope="col">L / R{hasDownmix ? ' / mono' : ''} (dBFS)</th><th scope="col">Gap (dB)</th><th scope="col">Correlation</th><th scope="col">Observation</th></tr></thead>
               <tbody>{context.windows.map((window) => <tr className="border-t border-border" key={window.start_sample}>
                 <th scope="row" className="py-2 font-normal whitespace-nowrap">{range(window)}</th>
-                <td>{window.source_timestamp_ranges.map((item) => <div className="whitespace-nowrap" key={item.start_sample}>[{item.source_start_pts}, {item.source_end_pts}) at {item.time_base}</div>)}</td>
+                <td>{window.source_timestamp_ranges.map((item) => {
+                  const start = rationalSeconds(item.source_start_pts, item.time_base)
+                  const end = rationalSeconds(item.source_end_pts, item.time_base)
+                  return <div className="whitespace-nowrap" key={item.start_sample}>
+                    {start !== null && end !== null && <div>{seconds(start)}–{seconds(end)}</div>}
+                    <div>[{item.source_start_pts}, {item.source_end_pts}) at {item.time_base}</div>
+                    {typeof videoOriginS === 'number' && Number.isFinite(videoOriginS) && start !== null && end !== null
+                      && start >= videoOriginS && <div>Video playback {seconds(start - videoOriginS)}–{seconds(end - videoOriginS)}</div>}
+                  </div>
+                })}</td>
                 <td className="whitespace-nowrap">{window.left_rms_dbfs} / {window.right_rms_dbfs}{hasDownmix && window.downmix && ' / ' + window.downmix.mono_rms_dbfs}</td>
                 <td>{window.level_gap_db ?? '—'}</td>
                 <td>{window.correlation ?? '—'}</td>

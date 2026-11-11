@@ -1,7 +1,7 @@
 {% set stereo = evidence.stereo_context %}
 {% set has_downmix = stereo.schema == 'chipmunk.stereo-channel-context/2' %}
 <div class="multimedia-acoustic-summary">
-<h3>Stereo channel comparison</h3>
+<h3>{% if evidence.kind == 'video' %}Stereo soundtrack comparison{% else %}Stereo channel comparison{% endif %}</h3>
 {% if stereo.status == 'mono' %}<p>The first audio stream is mono. Channel comparison does not apply.</p>
 {% elif stereo.status == 'unsupported' %}<p>The first audio stream does not have a supported two-channel layout.</p>
 {% elif stereo.status == 'too_short' %}<p>The stereo input has less than one complete second of decoded audio.</p>
@@ -17,7 +17,13 @@
 <thead><tr><th>Decoded range</th><th>Source timestamps (PTS)</th><th>L / R{% if has_downmix %} / mono{% endif %} (dBFS)</th><th>Gap (dB)</th><th>Correlation</th><th>Observation</th></tr></thead>
 <tbody>{% for window in stereo.windows %}<tr>
 <td>{{ window.start_sample // stereo.sample_rate }}–{{ window.end_sample // stereo.sample_rate }} s</td>
-<td>{% for range in window.source_timestamp_ranges %}[{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+<td>{% for range in window.source_timestamp_ranges %}
+{% set start_s = range.source_start_pts / stereo.sample_rate %}
+{% set end_s = range.source_end_pts / stereo.sample_rate %}
+{{ '%.3f' | format(start_s) }}–{{ '%.3f' | format(end_s) }} s<br>[{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}
+{% set video_origin_s = evidence.get('stereo_context_video_origin_s') %}
+{% if video_origin_s is not none and start_s >= video_origin_s %}<br>Video playback {{ '%.3f' | format(start_s - video_origin_s) }}–{{ '%.3f' | format(end_s - video_origin_s) }} s{% endif %}
+{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
 <td>{{ window.left_rms_dbfs }} / {{ window.right_rms_dbfs }}{% if has_downmix %} / {{ window.downmix.mono_rms_dbfs }}{% endif %}</td>
 <td>{{ window.level_gap_db if window.level_gap_db is not none else '—' }}</td>
 <td>{{ window.correlation if window.correlation is not none else '—' }}</td>
@@ -26,5 +32,5 @@
 </table>
 <p class="caption">A gap of {{ stereo.strong_level_gap_db }} dB or more marks a strong difference for review. {{ stereo.silence_floor_dbfs }} dBFS represents digital silence. Correlation measures similarity between the two signals on a scale of −1 to +1.{% if has_downmix %} A strong mono level drop means the analyzed mono input is at least {{ stereo.strong_downmix_attenuation_db }} dB quieter than the louder stereo channel.{% endif %}</p>
 {% endif %}
-<p class="caption">JSON pointer <span class="mono">/stereo_context</span>.</p>
+<p class="caption">JSON pointer <span class="mono">{{ evidence.stereo_context_pointer }}</span>.</p>
 </div>

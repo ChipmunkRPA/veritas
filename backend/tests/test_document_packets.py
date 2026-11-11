@@ -101,6 +101,12 @@ def test_frozen_contexts_are_bound_to_source_and_input_with_no_model_names(packe
     assert packet["focus"]["text"].startswith("Second sentence")
     assert packet["context"]["text"] == decoded["text"]
     assert packet["supporting_windows"][0]["text"] == " ".join(s["text"] for s in decoded["sentences"])
+    ranges = [{"start": sentence["start"], "end": sentence["end"]} for sentence in decoded["sentences"]]
+    assert packet["inspection_scope"] == {"basis": "scored_context", "spans": ranges}
+    assert [(anchor["selected_start"], anchor["selected_end"]) for anchor in packet["anchors"]] == [
+        (span["start"], span["end"]) for span in ranges
+    ]
+    assert "navigation sentence" in packet["interpretation"]
     assert packet["finding_ids"] == ["F1"]
     assert packet["artifacts"] == {}
     assert packet["evidence_type"] == "statistical"
@@ -163,7 +169,7 @@ def test_raw_ratio_above_one_is_retained_as_opposing_actual_context(packet_facto
     assert ratio["score"] == 1.4 and ratio["direction"] == "opposes_ai"
     assert ratio["threshold"] == 0.9505 and not ratio["is_calibrated"]
     assert "raw ratio" in [m["unit"] for m in packet["measurements"]]
-    assert "1 are on the opposing side" in packet["observation"]
+    assert "Opposing responses: 1" in packet["observation"]
     assert ratio["text"] == decoded["text"]  # Exact input has more context than the highlighted sentence.
     assert ratio["scored_spans"] == [{"start": packet["focus"]["start"], "end": packet["focus"]["end"]}]
     assert "binoculars" not in json.dumps(evidence).lower()
@@ -178,6 +184,22 @@ def test_ratio_boundary_can_select_a_passage_even_when_classifier_opposes(packet
     evidence = build_packet_set(db, analysis, store, result)
     assert len(evidence["packets"]) == 3
     assert all([w["direction"] for w in packet["supporting_windows"]] == ["opposes_ai", "supports_ai"] for packet in evidence["packets"])
+    assert all(packet["inspection_scope"] == {
+        "basis": "ratio_reduction", "spans": [{"start": packet["focus"]["start"], "end": packet["focus"]["end"]}],
+    } for packet in evidence["packets"])
+
+
+def test_a_rehashed_narrower_classifier_highlight_is_rejected(packet_factory):
+    db, store, analysis, result, _, _ = packet_factory()
+    document = build_packet_set(db, analysis, store, result)
+    packet, = document["packets"]
+    packet["inspection_scope"]["spans"] = [
+        {"start": packet["focus"]["start"], "end": packet["focus"]["end"]},
+    ]
+    document["sha256"] = packet_hash(document)
+    with pytest.raises(DocumentPacketIntegrityError, match="invalid inspection scope"):
+        validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
+                            original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
 
 
 def test_six_card_bound_reserves_actual_disagreements_instead_of_hiding_them(packet_factory):

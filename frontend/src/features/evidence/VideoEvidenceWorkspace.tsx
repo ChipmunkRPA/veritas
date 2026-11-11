@@ -7,13 +7,13 @@ import type { VideoEvidenceSet } from './multimediaPackets'
 type Lane = 'visual' | 'voice' | 'timing' | 'all'
 const lanes: { id: Lane; title: string; description: string }[] = [
   { id: 'visual', title: 'Video frames', description: 'Inspect selected moments and original frame crops.' },
-  { id: 'voice', title: 'Voice intervals', description: 'Listen to voice intervals and inspect background and recording changes.' },
+  { id: 'voice', title: 'Voice intervals', description: 'Listen to voice intervals and inspect background and soundtrack measurements.' },
   { id: 'timing', title: 'Audio/picture timing', description: 'Compare recorded mouth inputs with the sound track.' },
   { id: 'all', title: 'All evidence', description: 'Read the complete evidence record in sequence.' },
 ]
 export function videoLaneForHash(hash: string): Lane | null {
   if (/^#media-evidence-(?:timing|AV\d+)/.test(hash)) return 'timing'
-  if (/^#media-evidence-(?:voice|background|sounds|A\d+|B\d+|C\d+)/.test(hash)) return 'voice'
+  if (/^#media-evidence-(?:voice|background|sounds|stereo|A\d+|B\d+|C\d+)/.test(hash)) return 'voice'
   if (/^#media-evidence-(?:visual|V\d+)/.test(hash)) return 'visual'
   if (hash === '#media-evidence-all') return 'all'
   return null
@@ -31,7 +31,16 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
   const counts = { visual: set.packets.length, voice: set.audio?.packets.length ?? 0, timing: set.av?.packets.length ?? 0, all: 0 }
   const status = (lane: Lane) => {
     if (lane === 'all') return 'Complete record'
-    if (lane === 'voice' && set.audio?.acoustic_context) return `${counts.voice} voice intervals · ${set.audio.acoustic_context.events.length} acoustic observations`
+    if (lane === 'voice') {
+      const acoustic = set.audio?.acoustic_context
+      const drops = set.audio?.stereo_context?.windows.filter((window) => window.downmix?.strong_attenuation).length ?? 0
+      if (acoustic || drops) {
+        const summary = [`${counts.voice} voice intervals`]
+        if (acoustic) summary.push(`${acoustic.events.length} acoustic observations`)
+        if (drops) summary.push(`${drops} mono level ${drops === 1 ? 'drop' : 'drops'}`)
+        return summary.join(' · ')
+      }
+    }
     if (counts[lane]) return `${counts[lane]} selected ${lane === 'voice' ? 'intervals' : lane === 'visual' ? 'frame groups' : 'windows'}`
     const channel = lane === 'voice' ? set.audio : lane === 'timing' ? set.av : null
     return channel?.status === 'absent' ? 'No audio stream' : channel?.status === 'unavailable' ? 'Unavailable' : 'No selected evidence'

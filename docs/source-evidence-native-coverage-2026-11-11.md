@@ -10,15 +10,23 @@ A separate local test fixed four previously unused licensed photo groups and the
 
 A follow-up ran the production model-free copy detector and saved the evidence from the same 40 views without supplying a region. In each format, both regions reached 0.5 intersection-over-union in two of four translated edits. The detector missed all four reflected copies. None of the 12 unchanged, tone and blur controls produced a distinct pair. The detector's approximate region pairs appear as exhibits and did not create donor-crop packets in this run. The comparison isolates the automatic proposal gap in this path. Learned localization was outside its scope. [Automatic proposal aggregate](evaluation-panels/image-copy-native-v6-automatic-proposals.json)
 
+An experimental reflection-aware proposal added one correctly located reflected copy in each format. It compared native SIFT descriptors in the original and flipped images, mapped the coordinates back, and required eight distinct correspondences supporting the same reflection offset within two pixels. All 12 ordinary controls remained clear in each format. Three of four reflected edits were still missed, and all four source groups had been used in the earlier tests. The prototype remains experimental. [Reflection development aggregate](evaluation-panels/image-copy-native-v6-reflection-development.json)
+
 ## Audio
 
 The standalone stereo check now compares the louder source channel with the actual mono signal supplied for analysis. One-second windows in the first 30 seconds flag a drop of at least 12 dB when the source channel has enough level for review. Known opposing-channel controls produced partial or full cancellation. Matching channels, quadrature and quiet controls produced no strong warning.
 
 The production decoder then rechecked all 24 qualified windows from two genuine AMI meetings. The mono samples and source clocks matched all 24 prior commitments. None of 72 one-second windows triggered a strong-loss warning. The largest measured loss was 4.055 dB, and 24 windows were below the review level. The cue describes a potential loss of audible content in the analysis input. [AMI intake and coverage](audio-ami-native-stereo-v291-result.md)
 
+Video soundtrack evidence now reports the same cue. A local encoded Matroska fixture showed the injected cancellation at 2.4–3.4 seconds of video playback and original audio PTS `[118400, 134400)` at `1/16000`. The app, PDF and signed JSON package carried the same observation. The test verified byte-identical mono WAV and timing records and reproduced every prior audio/picture measurement. A separate H.264/AAC smoke flagged both injected intervals. The observations describe level loss in the analyzed copy.
+
 ## Documents
 
 The PDF extractor applies local OCR to one dominant image area when that area is separate from native text and passes recognition checks. Readable OCR paragraphs retain word geometry and the exact frozen page raster. A rotated test PDF preserved the native caption, recovered three scanned sentences with one character error, and kept the recognized words inside the source image rectangle. The rendered PDF and signed evidence ZIP carried the source-bound excerpts. Unread areas remain marked as partial coverage. Mixed extraction is outside the validated authorship-confidence scope.
+
+Writing evidence now highlights the exact measured context. The sentence used for navigation can sit inside a larger input that the classifier scored together. A narrower highlight is reserved for a writing-pattern ratio whose scored tokens directly support that range. The app, PDF and signed package use the same measured ranges and PDF page geometry.
+
+A read-only replay of archived classifier responses exposed the scope mismatch. Applying the current card selection rule to the archived inputs would have displayed a focus outside the generated rewrite in five of ten eligible mixed confirmation articles, even though the scored input overlapped the rewrite. Twelve of thirteen genuine articles would have displayed at least one raw review card. Sixteen planned confirmation rewrites were unavailable. These counts describe the classifier-only card projection, with zero new model calls. They differ from the calibrated comparison in the original study. [Archived study and inputs](text-elife-relative-paragraph-v292-result.md)
 
 ## Video
 

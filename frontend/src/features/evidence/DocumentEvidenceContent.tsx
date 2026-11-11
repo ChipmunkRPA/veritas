@@ -13,7 +13,7 @@ function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; inde
   return <div className="rounded-md border border-border p-4">
     <p className="m-0 text-small"><span className="font-medium">{window.signal_ref.display_id ?? `Check ${index + 1}`}</span>
       {' '}· <span className="font-mono">{window.score.toFixed(3)}</span> {ratio ? 'raw writing-pattern ratio' : 'uncalibrated response'}
-      {' '}· {supports ? 'supports inspection at this check’s boundary' : 'does not support the AI flag at this check’s boundary'}</p>
+      {' '}· {supports ? 'AI-like response for this input' : 'Opposing response for this input'}</p>
     <p className="mt-2 mb-0 text-caption text-text-muted">{ratio ? `Ratios below ${threshold} support inspection; this is not a percentage or an authorship probability.`
       : `Responses at or above ${threshold} support inspection; the response is not a calibrated authorship probability.`}
       {' '}Displayed values are rounded; the direction uses the recorded full-precision response.
@@ -45,15 +45,17 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
   const context = assets.find((asset) => asset.role === 'context')
   const crop = assets.find((asset) => asset.role === (highlight ? 'overlay' : 'crop'))
   const ocrInput = assets.find((asset) => asset.role === 'ocr_input')
+  const area = packet.inspection_scope?.basis === 'scored_context' ? 'scored context'
+    : packet.inspection_scope?.basis === 'ratio_reduction' ? 'measured ratio range' : 'excerpt'
   if (!context || !crop) return null
   return <div className="mt-5">
     <div className="flex flex-wrap justify-between gap-2 items-center mb-2"><h4 className="m-0 text-small font-medium">Page {page}</h4>
       {assets.some((asset) => asset.role === 'overlay') && <Button variant="text" aria-pressed={highlight} onClick={() => setHighlight((value) => !value)}>
-        {highlight ? 'Show original page crop' : 'Show excerpt highlight'}</Button>}</div>
+        {highlight ? 'Show original page crop' : `Show ${area} highlight`}</Button>}</div>
     <div className={evidenceGrid}>
-      <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={context} token={token} ready={mediaReady} alt={`${packet.id}: page ${page} with the excerpt position marked`} />
-        <figcaption className="mt-2 text-caption text-text-muted">Source page with the excerpt position outlined.</figcaption></figure>
-      <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop} token={token} ready={mediaReady} alt={`${packet.id}: page ${page} ${highlight ? 'excerpt highlight' : 'original crop'}`} />
+      <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={context} token={token} ready={mediaReady} alt={`${packet.id}: page ${page} with the ${area} position marked`} />
+        <figcaption className="mt-2 text-caption text-text-muted">Source page with the {area} outlined.</figcaption></figure>
+      <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop} token={token} ready={mediaReady} alt={`${packet.id}: page ${page} ${highlight ? `${area} highlight` : 'original crop'}`} />
         <figcaption className="mt-2 text-caption text-text-muted">{highlight ? 'Highlights locate extracted words; they do not identify which words were generated.' : 'Original page crop. Its layout is source context, not an authorship signal.'}</figcaption></figure>
     </div>
     {ocrInput && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact page image used for text recognition</summary>
@@ -94,7 +96,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
-        {' '}A highlighted passage was scored with context. It is not a word-by-word authorship determination.</p>
+        {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {usesOcr && <p className="mt-2 mb-0">Some text was recognized from page images. Recognition errors can change a check’s input; compare the excerpt with the page image. Recognition confidence is not AI-detection confidence.</p>}
       {set.coverage?.checks?.some((check) => check.status !== 'recorded') && <details className="mt-3"><summary className="cursor-pointer">Checks with incomplete local evidence</summary>
@@ -120,7 +122,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         <p className="mt-2 mb-0 text-caption font-mono text-accent">{passageLocation(packet)}</p>
         <p className="mt-2 mb-0 text-body">{packet.observation}</p>
         <RecordedPassage packet={packet} />
-        <p className="mt-2 mb-0 text-caption font-mono text-text-muted">Extracted text characters [{packet.focus.start}, {packet.focus.end}) · Unicode code points</p>
+        <p className="mt-2 mb-0 text-caption font-mono text-text-muted">
+          {packet.inspection_scope?.basis === 'scored_context' ? 'Navigation sentence' : 'Extracted text characters'} [{packet.focus.start}, {packet.focus.end}) · Unicode code points
+        </p>
         {roles.some((role) => role === 'quoted' || role === 'signature') && <p className="mt-2 mb-0 text-small text-text-muted">This passage is mapped to a quote or signature. Do not attribute its wording to the email sender.</p>}
         {pages.map((page) => <PagePlates key={page} set={set} packet={packet} page={page} token={token} mediaReady={mediaReady} />)}
         <div className="mt-5 space-y-3">

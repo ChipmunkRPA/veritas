@@ -23,6 +23,7 @@ from typing import Any
 import numpy as np
 
 from app.detectors.video.decode import _input
+from app.evidence.stereo_binding import MAX_SECONDS as STEREO_MAX_SECONDS
 
 SAMPLE_RATE = 16_000
 VERSION = "audio-input/1"
@@ -137,7 +138,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             command = ["ffmpeg", "-nostdin", "-v", "info", "-y", "-protocol_whitelist", "file", "-copyts", "-i", _input(path)]
             mono_output = ["-vn", "-t", str(max_seconds), "-c:a", "pcm_s16le", "-f", "wav", str(output)]
             if capture_stereo:
-                limit = min(maximum, stereo.MAX_SECONDS * SAMPLE_RATE)
+                limit = min(maximum, STEREO_MAX_SECONDS * SAMPLE_RATE)
                 stereo_path = Path(temp) / "stereo.wav"
                 mono_filters = filters.replace("ashowinfo", "ashowinfo@mono")
                 graph = (f"[0:a:0]asplit=2[mix][channels];[mix]{mono_filters}[mono];"

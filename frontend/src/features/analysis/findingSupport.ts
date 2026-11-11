@@ -98,8 +98,15 @@ function documentLocation(packet: DocumentEvidencePacket, chars?: number): Locat
     else if (index(anchor.paragraph) && anchor.paragraph > 0) locations.add(`Paragraph ${anchor.paragraph}`)
   }
   const position = [...locations].join(', ')
-  return { packet, label: `${packet.id} · ${position ? `${position} · ` : ''}Characters [${focus.start}, ${focus.end})`, scope: 'text_passage',
-    note: 'Positions use Unicode code points in the extracted text. The passage and recorded responses provide context; a response is not proof of authorship.' }
+  const measured = packet.inspection_scope
+  if (measured && (!measured.spans.length || measured.spans.some(({ start, end }) =>
+    !index(start) || !index(end) || end <= start || (index(chars) && end > chars)))) return null
+  const ranges = (measured?.spans ?? [focus]).map(({ start, end }) => `[${start}, ${end})`).join(', ')
+  const label = measured?.basis === 'scored_context' ? 'Scored context' : measured?.basis === 'ratio_reduction' ? 'Measured ratio range' : 'Characters'
+  return { packet, label: `${packet.id} · ${position ? `${position} · ` : ''}${label} ${ranges}`, scope: 'text_passage',
+    note: measured
+      ? 'Positions use Unicode code points in the extracted text. The marked range records what a check measured. It does not establish authorship.'
+      : 'Positions use Unicode code points in the extracted text. The passage and recorded responses provide context. A response is not proof of authorship.' }
 }
 
 /** Keep nested links aligned with the channels the evidence workspace can actually render. */

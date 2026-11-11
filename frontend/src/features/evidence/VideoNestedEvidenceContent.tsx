@@ -52,7 +52,7 @@ export default function VideoNestedEvidenceContent({ set, token, mediaReady, cha
       <p className="mt-2 mb-0 text-small text-text-muted">Audio windows use the same original video and saved evidence record. Samples begin at decoded audio zero; original recording timestamps remain available below.</p>
       {showAudio && audio ? <>
         {audio.status === 'not_assessed' && <UnavailableChannel reason={audio.reason} />}
-        <AudioEvidenceContent set={videoAudioView(set, audio)} token={token} mediaReady={mediaReady} />
+        <AudioEvidenceContent set={videoAudioView(set, audio)} token={token} mediaReady={mediaReady} videoOriginS={set.source.timeline_origin_s} />
         {audio.packets.length === 0 && <SourceClock source={audio.source} />}
         {audio.packets.length === 0 && <p className="mt-3 text-small text-text-muted">No voice window was selected for inspection. Recorded coverage remains available; this does not establish a natural voice.</p>}
         {(audio.omitted_windows ?? 0) > 0 && <p className="mt-3 text-small text-text-muted">{audio.omitted_windows} additional voice window(s) are omitted from this bounded presentation.</p>}

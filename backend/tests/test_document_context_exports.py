@@ -121,6 +121,7 @@ def test_context_comparison_in_actual_full_and_redacted_pdf(evidence_case, monke
         text = engine.pdf_text(rendered.pdf)
         normalized = " ".join(text.split())
         assert "How surrounding text affects this check" in normalized
+        assert "Scored context ranges" in normalized and "Navigation sentence" in normalized
         assert "0.100" in normalized and "0.900" in normalized and "3 distinct saved inputs" in normalized
         assert "No authorship confidence is assigned" in normalized
         assert "AUTHORED SOFTWARE QA" in normalized
@@ -128,7 +129,12 @@ def test_context_comparison_in_actual_full_and_redacted_pdf(evidence_case, monke
         assert all(name not in text for name in ("PRIVATE MODEL NAME", "txt.desklib", "Local examiner"))
         assert not rendered.refused
         view = multimedia_evidence.view(current, store=store)
-        comparison = next(p for p in view["packets"] if p["id"] == "T01")["context_comparison"]
+        row = next(p for p in view["packets"] if p["id"] == "T01")
+        assert row["inspection_scope"] == evidence["packets"][0]["inspection_scope"]
+        if not redacted:
+            context = row["context"]
+            assert len([segment for segment in context["segments"] if segment["highlight"]]) == 3
+        comparison = row["context_comparison"]
         assert all((w["text"] is None) == redacted for c in comparison["checks"] for w in c["inputs"])
         name = "context-comparison-redacted" if redacted else "context-comparison-full"
         receipt = {

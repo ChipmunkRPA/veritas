@@ -30,6 +30,24 @@ const show = (set: DocumentEvidenceSet) => render(<MemoryRouter><DocumentEvidenc
 afterEach(cleanup)
 
 describe('ordinary document passage inspection', () => {
+  it('marks all three measured sentences and leaves the navigation focus separate', () => {
+    const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
+      spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }
+    render(<RecordedPassage packet={item} />)
+    const marks = screen.getAllByTestId('passage-highlight-T01')
+    expect(marks.map((mark) => mark.textContent)).toEqual(['Same sentence.', 'Same sentence.', 'end.'])
+    expect(marks[0].previousSibling?.textContent).toBe('🧪 lead. ')
+    expect(screen.getByText(/navigation sentence gives you a place to start reading/)).toBeTruthy()
+  })
+
+  it('keeps the separate measured ratio reduction narrow', () => {
+    const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'ratio_reduction',
+      spans: [{ start: packet.focus.start, end: packet.focus.end }] } }
+    render(<RecordedPassage packet={item} />)
+    expect(screen.getByTestId('passage-highlight-T01').textContent).toBe('Same sentence.')
+    expect(screen.getByText('Measured writing-pattern range')).toBeTruthy()
+  })
+
   it('highlights the recorded second occurrence after an emoji using nonzero source coordinates', () => {
     render(<RecordedPassage packet={packet} />)
     const highlight = screen.getByTestId('passage-highlight-T01')

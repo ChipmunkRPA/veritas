@@ -28,7 +28,7 @@ export default function DocumentContextComparison({ comparison, focus }: { compa
         <div className="grid grid-cols-1 gap-3 mt-3 lg:grid-cols-2">{check.inputs.map((input, index) => <div key={input.input_sha256} className="min-w-0 rounded-sm border border-border bg-surface p-3">
           <p className="m-0 text-caption font-medium">{index === 0 ? 'Lowest recorded response' : 'Highest recorded response'} · {input.score.toFixed(3)}</p>
           <Excerpt input={input} focus={focus} />
-          <p className="mt-2 mb-0 text-caption text-text-muted">Source characters {input.spans.map((span) => `[${span.start}, ${span.end})`).join(', ')}. The selected passage is marked within the actual input.</p>
+          <p className="mt-2 mb-0 text-caption text-text-muted">Source characters {input.spans.map((span) => `[${span.start}, ${span.end})`).join(', ')}. The mark locates the navigation sentence within the actual input.</p>
           <details className="mt-2 text-caption text-text-muted"><summary className="cursor-pointer">Input commitment</summary><p className="mb-0 font-mono break-all">SHA-256: {input.input_sha256}</p></details>
         </div>)}</div>
         {check.omitted_inputs > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">{check.omitted_inputs} other saved input(s) are not repeated here. The two endpoints show the full recorded response range for this passage.</p>}

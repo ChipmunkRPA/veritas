@@ -1,42 +1,23 @@
-"""Bounded channel-level measurements from the standalone audio input."""
+"""Bounded channel-level measurements before and after mono downmix."""
 
 from __future__ import annotations
 
 import hashlib
 import math
-import re
 from typing import Any
 
 import numpy as np
 
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges
-
-LEGACY_SCHEMA = "chipmunk.stereo-channel-context/1"
-SCHEMA = "chipmunk.stereo-channel-context/2"
-MAX_SECONDS = 30
-QUIET_DBFS = -50
-REVIEW_GAP_DB = 12
-REVIEW_DOWNMIX_DB = 12
-LEGACY_SILENCE_FLOOR_DBFS = -120
-# A one-sample, one-LSB pulse in one second of signed 16-bit PCM is about -132 dBFS.
-SILENCE_FLOOR_DBFS = -140
-_HASH = re.compile(r"[a-f0-9]{64}")
-
-
-def _status(channels: int, layout: str | None) -> str | None:
-    if channels == 1:
-        return "mono"
-    if channels != 2 or layout not in (None, "unknown", "stereo"):
-        return "unsupported"
-    return None
+from app.evidence import stereo_binding as binding
 
 
 def supports_stereo(channels: int, layout: str | None) -> bool:
-    return _status(channels, layout) is None
+    return binding.unsupported_status(channels, layout) is None
 
 
 def _level_dbfs(power: float) -> float:
-    return round(10 * math.log10(power), 3) if power else SILENCE_FLOOR_DBFS
+    return round(10 * math.log10(power), 3) if power else binding.SILENCE_FLOOR_DBFS
 
 
 def _mono_dbfs(pcm: np.ndarray) -> float:
@@ -57,34 +38,12 @@ def _metrics(window: np.ndarray) -> tuple[float, float, float | None]:
     return levels[0], levels[1], correlation
 
 
-def _classification(left: float, right: float) -> tuple[str, float | None, str | None]:
-    if max(left, right) < QUIET_DBFS:
-        return "quiet", None, None
-    gap = round(abs(left - right), 3)
-    if gap >= REVIEW_GAP_DB:
-        return "strong_imbalance", gap, "left" if left > right else "right"
-    return "measured", gap, None
-
-
-def _downmix(left: float, right: float, mono: float) -> dict[str, Any]:
-    louder = max(left, right)
-    audible = louder >= QUIET_DBFS
-    silent = mono == SILENCE_FLOOR_DBFS
-    attenuation = round(louder - mono, 3) if audible and not silent else None
-    strong = audible and (silent or (attenuation is not None and attenuation >= REVIEW_DOWNMIX_DB))
-    return {
-        "mono_rms_dbfs": mono,
-        "attenuation_db": attenuation,
-        "strong_attenuation": strong,
-    }
-
-
 def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo: np.ndarray | None,
           stereo_mapping: dict[str, Any] | None) -> dict[str, Any]:
     """Bind a bounded PCM prefix to the exact input and analysed source clock."""
-    count = min(mapping["samples"] // SAMPLE_RATE, MAX_SECONDS)
+    count = min(mapping["samples"] // SAMPLE_RATE, binding.MAX_SECONDS)
     context: dict[str, Any] = {
-        "schema": SCHEMA,
+        "schema": binding.SCHEMA,
         "evidence_type": "context",
         "affects_overall_confidence": False,
         "source_sha256": mapping["source_sha256"],
@@ -93,16 +52,16 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
         "source_channel_layout": layout,
         "sample_rate": SAMPLE_RATE,
         "window_seconds": 1,
-        "max_seconds": MAX_SECONDS,
-        "quiet_floor_dbfs": QUIET_DBFS,
-        "strong_level_gap_db": REVIEW_GAP_DB,
-        "strong_downmix_attenuation_db": REVIEW_DOWNMIX_DB,
-        "silence_floor_dbfs": SILENCE_FLOOR_DBFS,
+        "max_seconds": binding.MAX_SECONDS,
+        "quiet_floor_dbfs": binding.QUIET_DBFS,
+        "strong_level_gap_db": binding.REVIEW_GAP_DB,
+        "strong_downmix_attenuation_db": binding.REVIEW_DOWNMIX_DB,
+        "silence_floor_dbfs": binding.SILENCE_FLOOR_DBFS,
         "mono_pcm_sha256": mapping["pcm_sha256"],
         "stereo_pcm_sha256": None,
         "windows": [],
     }
-    status = _status(mapping["source_channels"], layout)
+    status = binding.unsupported_status(mapping["source_channels"], layout)
     if status or count == 0:
         context["status"] = status or "too_short"
         return context
@@ -115,7 +74,7 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
     for start in range(0, end, SAMPLE_RATE):
         stop = start + SAMPLE_RATE
         left, right, correlation = _metrics(stereo[start:stop])
-        status, gap, louder = _classification(left, right)
+        status, gap, louder = binding.classify(left, right)
         windows.append({
             "start_sample": start,
             "end_sample": stop,
@@ -126,7 +85,7 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
             "level_gap_db": gap,
             "louder_channel": louder,
             "correlation": None if status == "quiet" else correlation,
-            "downmix": _downmix(left, right, _mono_dbfs(mono[start:stop])),
+            "downmix": binding.downmix(left, right, _mono_dbfs(mono[start:stop])),
         })
     context["status"] = "measured" if any(w["status"] != "quiet" for w in windows) else "quiet"
     context["stereo_pcm_sha256"] = hashlib.sha256(stereo[:end].astype("<i2", copy=False).tobytes()).hexdigest()
@@ -134,82 +93,12 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
 
 
 def validate(context: dict[str, Any], source: dict[str, Any]) -> None:
-    """Check the displayed measurements' binding, ranges, units and disposition."""
-    schema = context.get("schema")
-    if schema not in (LEGACY_SCHEMA, SCHEMA):
-        raise ValueError("Stereo channel evidence uses an unsupported method")
-    silence_floor = SILENCE_FLOOR_DBFS if schema == SCHEMA else LEGACY_SILENCE_FLOOR_DBFS
-    expected = {
-        "evidence_type": "context",
-        "affects_overall_confidence": False,
-        "source_sha256": source.get("source_sha256", source.get("sha256")),
-        "source_stream_index": source["source_stream_index"],
-        "source_channel_count": source["source_channels"],
-        "sample_rate": SAMPLE_RATE,
-        "window_seconds": 1,
-        "max_seconds": MAX_SECONDS,
-        "quiet_floor_dbfs": QUIET_DBFS,
-        "strong_level_gap_db": REVIEW_GAP_DB,
-        "silence_floor_dbfs": silence_floor,
-    }
-    if schema == SCHEMA:
-        expected.update(mono_pcm_sha256=source["pcm_sha256"], strong_downmix_attenuation_db=REVIEW_DOWNMIX_DB)
-    elif "mono_pcm_sha256" in context or "strong_downmix_attenuation_db" in context:
-        raise ValueError("Legacy stereo context cannot contain downmix measurements")
-    if (context.get("affects_overall_confidence") is not False
-            or any(context.get(key) != value for key, value in expected.items())):
-        raise ValueError("Stereo channel evidence differs from the recorded source or method")
-    status = context.get("status")
-    layout = context["source_channel_layout"]
-    if layout is not None and not isinstance(layout, str):
-        raise ValueError("Stereo channel evidence has an invalid channel layout")
-    reason = _status(source["source_channels"], layout)
-    count = min(source["samples"] // SAMPLE_RATE, MAX_SECONDS)
-    windows = context["windows"]
-    pcm_sha = context["stereo_pcm_sha256"]
-    if reason or count == 0 or status == "unavailable":
-        if status != (reason or ("too_short" if count == 0 else "unavailable")) or windows != [] or pcm_sha is not None:
-            raise ValueError("Unassessed stereo evidence contains inconsistent measurements")
-        return
-    if not _HASH.fullmatch(str(pcm_sha)) or not isinstance(windows, list) or len(windows) != count:
-        raise ValueError("Stereo evidence does not cover its declared PCM prefix")
-    audible = False
-    for index, window in enumerate(windows):
-        start, stop = index * SAMPLE_RATE, (index + 1) * SAMPLE_RATE
-        if (window["start_sample"] != start or window["end_sample"] != stop
-                or window["source_timestamp_ranges"] != source_ranges(source, start, stop)):
-            raise ValueError("Stereo evidence differs from its recorded source timestamps")
-        left, right = window["left_rms_dbfs"], window["right_rms_dbfs"]
-        if not all(_valid_level(level, silence_floor) for level in (left, right)):
-            raise ValueError("Stereo evidence has invalid channel levels")
-        window_status, gap, louder = _classification(left, right)
-        correlation = window["correlation"]
-        if ((window["status"], window["level_gap_db"], window["louder_channel"]) != (window_status, gap, louder)
-                or correlation is not None and (
-                    window_status == "quiet" or not isinstance(correlation, (int, float))
-                    or isinstance(correlation, bool) or not -1 <= correlation <= 1)):
-            raise ValueError("Stereo evidence has inconsistent channel measurements")
-        if schema == SCHEMA:
-            downmix = window["downmix"]
-            mono = downmix["mono_rms_dbfs"]
-            if (not _valid_level(mono, silence_floor) or type(downmix["strong_attenuation"]) is not bool
-                    or downmix != _downmix(left, right, mono)):
-                raise ValueError("Stereo evidence has inconsistent downmix measurements")
-        elif "downmix" in window:
-            raise ValueError("Legacy stereo context cannot contain downmix measurements")
-        audible |= window_status != "quiet"
-    if status != ("measured" if audible else "quiet"):
-        raise ValueError("Stereo evidence summary differs from its measured windows")
-
-
-def _valid_level(value: Any, silence_floor: int) -> bool:
-    return (isinstance(value, (int, float)) and not isinstance(value, bool)
-            and silence_floor <= value <= 0)
+    binding.validate(context, source, ranges=lambda start, stop: source_ranges(source, start, stop))
 
 
 def verify_mono_levels(context: dict[str, Any], pcm: np.ndarray) -> None:
     """Replay the mono half of the comparison against the committed voice input."""
-    if context["schema"] != SCHEMA:
+    if context["schema"] != binding.SCHEMA:
         return
     for window in context["windows"]:
         level = _mono_dbfs(pcm[window["start_sample"]:window["end_sample"]])

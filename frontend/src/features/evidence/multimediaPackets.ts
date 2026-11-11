@@ -121,6 +121,7 @@ export interface VideoAudioChannel {
   coverage?: AudioEvidenceSet['coverage'] | null; overview?: Record<string, EvidenceAsset>
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
+  stereo_context?: StereoChannelContext
 }
 export interface VideoAVFrameInput {
   tick: number; frame_index: number; frame_pts: number; source_audio_pts: number; source_audio_time_base: string
@@ -155,6 +156,7 @@ export interface DocumentAnchor {
 export interface DocumentEvidencePacket extends PacketBase {
   focus: TextSpan; context: TextSpan; anchors: DocumentAnchor[]; measurements: EvidenceMeasure[]
   supporting_windows: DocumentEvidenceWindow[]
+  inspection_scope?: { basis: 'scored_context' | 'ratio_reduction'; spans: Pick<TextSpan, 'start' | 'end'>[] }
   context_comparison?: DocumentContextComparison
 }
 export interface DocumentContextComparison {

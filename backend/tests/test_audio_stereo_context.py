@@ -21,7 +21,7 @@ from app.detectors.audio import decode as audio_decode
 from app.detectors.audio import stereo
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.engine.stages import audio
-from app.evidence import audio_packets
+from app.evidence import audio_packets, stereo_binding
 from app.reports import engine, multimedia_evidence, package, signing, verify
 from app.reports import snapshot as report_snapshot
 from app.reports.specimens import specimen
@@ -123,7 +123,7 @@ def test_legacy_stereo_context_remains_readable_and_rejects_unversioned_downmix(
     sha = _source(path, seconds=2)
     decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
     legacy = deepcopy(decoded.mapping["stereo_context"])
-    legacy.update(schema=stereo.LEGACY_SCHEMA, silence_floor_dbfs=stereo.LEGACY_SILENCE_FLOOR_DBFS)
+    legacy.update(schema=stereo_binding.LEGACY_SCHEMA, silence_floor_dbfs=stereo_binding.LEGACY_SILENCE_FLOOR_DBFS)
     del legacy["mono_pcm_sha256"], legacy["strong_downmix_attenuation_db"]
     for row in legacy["windows"]:
         del row["downmix"]

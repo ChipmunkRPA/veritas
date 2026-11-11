@@ -5,7 +5,7 @@ from test_document_packets import packet_factory as packet_factory
 
 from app.core.canonical import canonical_hash
 from app.evidence.document_context import build, validate
-from app.evidence.document_packets import build_packet_set, packet_hash, validate_packet_set
+from app.evidence.document_packets import _source_anchors, build_packet_set, packet_hash, validate_packet_set
 from app.reports.multimedia_evidence import verify_assets
 from app.storage.objects import ObjectIntegrityError
 
@@ -16,7 +16,7 @@ def test_actual_source_contexts_keep_extremes_without_an_authorship_probability(
     doc = build_packet_set(db, analysis, store, result)
     packet = doc["packets"][0]
     block = packet["context_comparison"]
-    assert doc["version"] == "document-evidence-3"
+    assert doc["version"] == "document-evidence-4"
     assert block["status"] == "recorded" and block["authorship_confidence_pct"] is None
     assert block["affects_overall_confidence"] is False
     check = block["checks"][0]
@@ -102,12 +102,17 @@ def test_rehashed_consistent_but_fabricated_score_still_fails_saved_result_bindi
         verify_assets(changed, store, result=result)
 
 
-def test_historical_packet_keeps_its_supported_format_without_new_fields(packet_factory):
-    db, store, analysis, result, _, _ = packet_factory()
+@pytest.mark.parametrize("version", ["document-evidence-2", "document-evidence-3"])
+def test_historical_packet_keeps_its_supported_format_without_new_fields(packet_factory, version):
+    db, store, analysis, result, decoded, _ = packet_factory()
     doc = build_packet_set(db, analysis, store, result)
-    doc["version"] = "document-evidence-2"
+    doc["version"] = version
     for packet in doc["packets"]:
-        del packet["context_comparison"]
+        del packet["inspection_scope"]
+        if version == "document-evidence-2":
+            del packet["context_comparison"]
+        focus = packet["focus"]
+        packet["anchors"] = _source_anchors(decoded["source_map"], focus["start"], focus["end"], len(decoded["text"]))
     doc["sha256"] = packet_hash(doc)
     validate_packet_set(
         doc,

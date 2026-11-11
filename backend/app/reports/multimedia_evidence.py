@@ -13,8 +13,8 @@ from typing import TYPE_CHECKING, Any
 import numpy as np
 from PIL import Image
 
-from app.core.canonical import canonical_hash
-from app.evidence import service
+from app.core.canonical import canonical_hash, canonical_json
+from app.evidence import document_scope, service
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -222,7 +222,10 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         raise ObjectIntegrityError("Frozen audio no longer matches its analysed samples or source clock")
     source_ranges(mapping, 0, len(pcm))
     stereo_context = document.get("stereo_context")
-    if stereo_context != mapping.get("stereo_context"):
+    if stereo_sha := document.get("stereo_context_sha256"):
+        if canonical_json(stereo_context) != _bytes(stereo_sha, store):
+            raise ObjectIntegrityError("Stereo context differs from the frozen video soundtrack measurements")
+    elif stereo_context != mapping.get("stereo_context"):
         raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
@@ -265,7 +268,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
-    from app.evidence.document_packets import _pdf_plates, _source_anchors, verify_context_window
+    from app.evidence.document_packets import (
+        _inspection_anchors,
+        _pdf_plates,
+        _source_anchors,
+        verify_context_window,
+    )
 
     source = document["source"]
     decoded = json.loads(_bytes(source["decode_sha256"], store))
@@ -282,11 +290,19 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             if part["text"] != text[part["start"]:part["end"]]:
                 raise ObjectIntegrityError("A report excerpt differs from its recorded source range")
         focus = packet["focus"]
-        if packet["anchors"] != _source_anchors(mapping, focus["start"], focus["end"], len(text)):
+        if document.get("version") == document_scope.VERSION:
+            try:
+                document_scope.validate(packet, len(text))
+            except (ValueError, KeyError, TypeError) as error:
+                raise ObjectIntegrityError("Document inspection scope differs from the recorded inputs") from error
+            anchors = _inspection_anchors(mapping, packet["inspection_scope"], len(text))
+        else:
+            anchors = _source_anchors(mapping, focus["start"], focus["end"], len(text))
+        if packet["anchors"] != anchors:
             raise ObjectIntegrityError("A document source anchor differs from its recorded extraction mapping")
         for window in packet["supporting_windows"]:
             verify_context_window(window, text)
-        if document.get("version") == "document-evidence-3" or "context_comparison" in packet:
+        if document.get("version") in document_scope.CONTEXT_VERSIONS or "context_comparison" in packet:
             from app.evidence.document_context import build as compare_contexts
             from app.evidence.document_context import validate as validate_comparison
 
@@ -493,10 +509,21 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         for window in check["inputs"]:
                             window["text"] = None
             row["focus_range"] = {"start": focus["start"], "end": focus["end"]}
+            scope = packet.get("inspection_scope") if part.get("version") == document_scope.VERSION else None
+            if scope:
+                row["inspection_scope"] = copy.deepcopy(scope)
             if not withheld:
                 row["context"] = {"start": context["start"], "end": context["end"],
                                   "before": context["text"][:focus["start"] - context["start"]], "focus": focus["text"],
                                   "after": context["text"][focus["end"] - context["start"]:]}
+                if scope:
+                    segments, cursor = [], context["start"]
+                    for span in scope["spans"]:
+                        segments.append({"text": context["text"][cursor - context["start"]:span["start"] - context["start"]], "highlight": False})
+                        segments.append({"text": context["text"][span["start"] - context["start"]:span["end"] - context["start"]], "highlight": True})
+                        cursor = span["end"]
+                    segments.append({"text": context["text"][cursor - context["start"]:], "highlight": False})
+                    row["context"]["segments"] = segments
                 row["source_locations"] = copy.deepcopy(packet["anchors"])
             for window in packet["supporting_windows"]:
                 context_window = {"score": window["score"], "input_sha256": window["input_sha256"],
@@ -545,8 +572,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                          str(anchor["kind"]))
                 if label not in locations:
                     locations.append(label)
-            row["locator"] = (f"characters [{packet['focus']['start']}, {packet['focus']['end']})"
-                              + ("; " + ", ".join(locations) if locations else ""))
+            if scope := row.get("inspection_scope"):
+                label = "measured ratio range" if scope["basis"] == "ratio_reduction" else "scored context"
+                ranges = ", ".join(f"[{span['start']}, {span['end']})" for span in scope["spans"])
+                position = f"{label} characters {ranges}"
+            else:
+                position = f"characters [{packet['focus']['start']}, {packet['focus']['end']})"
+            row["locator"] = position + ("; " + ", ".join(locations) if locations else "")
         # Captions travel with their plate across a page break. Repeating the
         # stable ID and source coordinates makes a detached PDF page traceable
         # to the same JSON packet without relying on the previous page heading.
@@ -558,9 +590,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 image["label"] = (f"{frame['id']} - source {anchor['stream_time_s']:.6f} s; "
                                   f"frame {anchor['frame_index']}, PTS {anchor['pts']} at {anchor['time_base']} - {image['label']}")
         packets.append(row)
-    stereo_context = copy.deepcopy(document.get("stereo_context")) if kind == "audio" else None
+    stereo_source = (document.get("audio") or {}) if kind == "video" else document
+    stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "stereo_context": stereo_context,
+            "stereo_context_pointer": "/audio/stereo_context" if kind == "video" else "/stereo_context",
+            "stereo_context_video_origin_s": document["source"].get("timeline_origin_s") if kind == "video" else None,
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"

@@ -4,6 +4,8 @@ from __future__ import annotations
 import math
 import re
 
+from app.core.canonical import canonical_hash
+
 
 def validate_audio_channel(channel: dict, source_sha256: str) -> None:
     try:
@@ -37,7 +39,7 @@ def _validate(channel, source_sha256):
     require(channel['status'] in {'ready', 'not_assessed', 'absent', 'unavailable'}, 'Invalid video voice availability')
     if channel['coverage'] is None:
         require(channel['status'] in {'absent', 'unavailable'} and not channel['packets'] and not channel.get('overview')
-                and not channel.get('acoustic_context')
+                and not channel.get('acoustic_context') and not {'stereo_context', 'stereo_context_sha256'}.intersection(channel)
                 and bool(channel['reason']), 'Unavailable video voice contains unexplained assets')
         return
     samples = source['samples']
@@ -62,6 +64,14 @@ def _validate(channel, source_sha256):
                  'source_start_pts': row['source_pts']+max(a,row['start_sample'])-row['start_sample'],
                  'source_end_pts': row['source_pts']+min(b,row['end_sample'])-row['start_sample'], 'time_base':'1/16000'}
                 for row in source['timeline'] if max(a,row['start_sample']) < min(b,row['end_sample'])]
+
+    if {'stereo_context', 'stereo_context_sha256'}.intersection(channel):
+        from app.evidence.stereo_binding import validate
+
+        stereo = channel['stereo_context']
+        require(sha(channel['stereo_context_sha256']) and canonical_hash(stereo) == channel['stereo_context_sha256'],
+                'Video stereo context differs from its committed measurements')
+        validate(stereo, source, ranges=ranges)
 
     coverage=channel['coverage']
     for window in coverage['windows']:

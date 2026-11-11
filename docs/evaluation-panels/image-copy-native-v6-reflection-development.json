@@ -1,0 +1,73 @@
+{
+  "status": "complete",
+  "freeze_sha256": "b2937b2c0898e7451a26f5fca20e7ac36583262e115a7f5fcb524ffe2d1c828a",
+  "checked_views": 40,
+  "source_groups": 4,
+  "counts": {
+    "native_png": {
+      "original": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "tone": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "blur": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "translated_copy": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "reflected_copy": {
+        "checked": 4,
+        "no_pair": 3,
+        "correct_at_both_endpoints": 1,
+        "exact_at_both_endpoints": 0,
+        "supported_pair": 1
+      }
+    },
+    "jpeg90": {
+      "original": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "tone": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "blur": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "translated_copy": {
+        "checked": 4,
+        "no_pair": 4
+      },
+      "reflected_copy": {
+        "checked": 4,
+        "no_pair": 3,
+        "correct_at_both_endpoints": 1,
+        "exact_at_both_endpoints": 0,
+        "supported_pair": 1
+      }
+    }
+  },
+  "baseline_correct_pairs": {
+    "native_png": {
+      "translated_copy": 2,
+      "reflected_copy": 0
+    },
+    "jpeg90": {
+      "translated_copy": 2,
+      "reflected_copy": 0
+    }
+  },
+  "median_seconds": 0.2683,
+  "max_seconds": 0.3042,
+  "rss_bytes": 513572864,
+  "errors": [],
+  "scope": "Development replay on the four prior sources; paired formats. A pair does not establish which area was pasted or whether AI was involved."
+}

@@ -33,7 +33,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
         family=FAMILY, model_ids=(FaceSequenceReviewDetector.YUNET, FaceSequenceReviewDetector.DINO, APPEARANCE),
-        needs=('frames', 'faces'), profiles=FULL_DEEP, devices=CPU_ONLY, timeout_s=120., version='0.1.0')
+        needs=('frames', 'faces'), profiles=FULL_DEEP, devices=CPU_ONLY, timeout_s=120., version='0.1.1')
 
     def activation_plan(self, ctx):
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
@@ -48,9 +48,13 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
         check = ctx.deadline.check if ctx.deadline is not None else lambda *_: None
         features, bindings, decoded = {}, {}, set()
+        unverified = 0
         for i, rgb in inputs.store.iter_many(sorted(scheduled)):
             check('face appearance crops')
             decoded.add(i)
+            if not inputs.store.native_pts_verified(i):
+                unverified += 1
+                continue
             bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
             detected = detect_faces(bgr, detector=yunet, min_size=settings.face_min_size)
             if not detected:
@@ -99,7 +103,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                 if selected else 'The sampled face appearances supplied no additional range to review.'),
             reference='The middle time group differs from both neighboring groups, while the two neighbors resemble one another.',
             reasoning='Motion, expression, lighting, cuts and compression may cause similar changes. This inspection cue is not an AI or identity probability and does not change overall confidence.',
-            metrics={'scheduled_frames': float(len(scheduled)), 'face_frames': float(len(features)), 'windows': float(len(windows))},
+            metrics={'scheduled_frames': float(len(scheduled)), 'face_frames': float(len(features)), 'windows': float(len(windows)),
+                     'unverified_timestamp_frames': float(unverified)},
             details={'face_sequence_binding_version': method.METHOD, 'face_sequence': selected,
                 'face_sequence_windows': [record(w, table, bindings) for w in windows],
                 'input_frame_indices': sorted(features), 'review_only': True, 'appearance_check_status': 'ok'},

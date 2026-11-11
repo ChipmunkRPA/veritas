@@ -1,0 +1,1902 @@
+{
+  "coverage": {
+    "court": {
+      "human_sentence": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      },
+      "human_whole": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 1,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 1
+      },
+      "original": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 0,
+        "isolated_paragraphs_support": 0,
+        "qualifying_current_paragraphs": 0
+      },
+      "qwen": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 4,
+        "isolated_paragraphs_support": 3,
+        "qualifying_current_paragraphs": 4
+      },
+      "smol2": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 2,
+        "isolated_paragraphs_assessed": 1,
+        "isolated_paragraphs_support": 1,
+        "qualifying_current_paragraphs": 1
+      }
+    },
+    "speech": {
+      "human_sentence": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 6,
+        "isolated_paragraphs_support": 2,
+        "qualifying_current_paragraphs": 6
+      },
+      "human_whole": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 5,
+        "isolated_paragraphs_support": 4,
+        "qualifying_current_paragraphs": 5
+      },
+      "original": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 6,
+        "isolated_paragraphs_support": 4,
+        "qualifying_current_paragraphs": 6
+      },
+      "qwen": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 5,
+        "isolated_paragraphs_support": 4,
+        "qualifying_current_paragraphs": 5
+      },
+      "smol2": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 8,
+        "isolated_paragraphs_assessed": 7,
+        "isolated_paragraphs_support": 6,
+        "qualifying_current_paragraphs": 7
+      }
+    }
+  },
+  "freeze": {
+    "analysis_code_sha256": "05e1a7878f6927070e25c204c9ed8401b513e9edf1cea80414b5cc08e793d1e7",
+    "assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "code_sha256": "46b7b21ff7e999ded3e773cc6e05ac4960ad2c13f93395689e88b215bb8a0a48",
+    "confirmatory_prior_result_sha256": "95aa4bfccf503ec149357343ca5c467efae64dd1dc023f0fe8ea645b1fa346ad",
+    "generator_runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "generator_settings": {
+      "qwen": {
+        "max_tokens": 384,
+        "seed": 56174,
+        "temp": 0.4,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 384,
+        "seed": 41873,
+        "temp": 0.72,
+        "top_p": 0.9
+      }
+    },
+    "genre_fit_sha256": "19de984048a8cad711915153c2c3e20720e7c9577c6c8f06a81cd04d1b5257e7",
+    "intake_code_sha256": "5f10db62b6a77881e7abf13d93579096bfbb37ddc8a0a7ddefbc8e54a11707ba",
+    "methods": {
+      "actual_product": "Optional evidence review displays compared inputs without filtering existing findings or adding any fusion/confidence contribution. The study compares hypothetical evidence selections only.",
+      "baseline": "Previous exact 3-sentence current score >=0.5, first 6 qualifying source-ordered foci; compare .85, strict and pooled as unchanged secondary references.",
+      "eligible": "Use unchanged generator families, seeds, ordinary-control scope, complete EOS and copy/format/word gates. Explain missed, false and unassessed cases explicitly.",
+      "isolated": "Add exactly the existing optional production paragraph-only scoring helper with same checkpoint, configured CPU classifier, first two admitted interior paragraphs and complete <=512-token single-window coverage. A current plus isolated raw response >=0.5 is required on the same paragraph; rank by current, tie to earlier source. The two measurements share weights.",
+      "metric": "Non-whitespace IoU >= 0.30 to known generated paragraph; human-file and source-group flags, retained and lost useful locations, exact contextual scores and input commitments. Break out two genres and two generator families.",
+      "question": "Prospectively test the already chosen isolated-paragraph rule on independent genres: court majority opinions and prepared agency speeches. No parameter selection or fit.",
+      "scope_only": "Select the single highest-scoring eligible interior paragraph containing a current focus >=0.5, tie to earlier source. This isolates a smaller display extent from the added inference."
+    },
+    "original_comparison_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+    "original_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+    "previous_generator_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+    "prior_comparison_code_sha256": "458540b1f998a6ab85cdb626053d13c7720234dd98d9895694f0c9c6fbcba275",
+    "projection_sha256": "0060c0d2b7559550675522d387d645f5e5b8ee002487068e57fbc4fb9f167f46",
+    "record_code_sha256": "25f40e3ba74d9cceb157a01657e5e70cb61fcf2259a4c1941b76b75a4e2db180",
+    "recovery_code_sha256": "f493956ac298c58b8d19495066f04366491f685bb6dbfc9d836a3f9d01765eb5",
+    "reference_points": {
+      "raw_review": 0.5,
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "schema": "chipmunk.paragraph-replication-freeze/1",
+    "selected_points_hex": {
+      "fiction": "0x1.ccccccccccccdp-1",
+      "pooled": "0x1.feb851eb851ecp-1",
+      "practical": "0x1.b333333333333p-1",
+      "science": "0x1.feb851eb851ecp-1"
+    },
+    "source_groups": 8,
+    "source_sha256": "ecdc5a0a18f06935ffbfbdcdb4a3d4ebc33a726bc6d7e6ff314207c5247084d9"
+  },
+  "human_flagged_source_groups": {
+    "court": {
+      "isolated": 0,
+      "paragraph": 1,
+      "pooled": 0,
+      "practical": 1,
+      "raw": 1,
+      "strict": 0
+    },
+    "speech": {
+      "isolated": 4,
+      "paragraph": 4,
+      "pooled": 0,
+      "practical": 4,
+      "raw": 4,
+      "strict": 3
+    }
+  },
+  "outcomes": {
+    "court": {
+      "human_sentence": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 2,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 1,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 3,
+          "useful": 1,
+          "wrong_location": 0
+        }
+      }
+    },
+    "speech": {
+      "human_sentence": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 3,
+          "wrong_location": 1
+        },
+        "paragraph": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 3,
+          "wrong_location": 1
+        },
+        "pooled": {
+          "assessed": 4,
+          "flagged": 2,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 4,
+          "flagged": 4,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 4,
+          "flagged": 3,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 1
+        }
+      }
+    }
+  },
+  "paired_transitions_relative_to_raw": {
+    "court": {
+      "human_sentence": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "original": {
+        "isolated": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "paragraph": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "pooled": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 3,
+          "1->0": 1
+        },
+        "raw": {
+          "0->0": 3,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 3,
+          "1->0": 1
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "1->1": 3
+        },
+        "paragraph": {
+          "1->1": 3
+        },
+        "pooled": {
+          "1->0": 1,
+          "1->1": 2
+        },
+        "practical": {
+          "1->1": 3
+        },
+        "raw": {
+          "1->1": 3
+        },
+        "strict": {
+          "1->0": 1,
+          "1->1": 2
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "1->1": 1
+        },
+        "paragraph": {
+          "1->1": 1
+        },
+        "pooled": {
+          "1->1": 1
+        },
+        "practical": {
+          "1->1": 1
+        },
+        "raw": {
+          "1->1": 1
+        },
+        "strict": {
+          "1->1": 1
+        }
+      }
+    },
+    "speech": {
+      "human_sentence": {
+        "isolated": {
+          "1->0": 2,
+          "1->1": 2
+        },
+        "paragraph": {
+          "1->1": 4
+        },
+        "pooled": {
+          "1->0": 4
+        },
+        "practical": {
+          "1->1": 4
+        },
+        "raw": {
+          "1->1": 4
+        },
+        "strict": {
+          "1->0": 1,
+          "1->1": 3
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "1->0": 1,
+          "1->1": 3
+        },
+        "paragraph": {
+          "1->0": 1,
+          "1->1": 3
+        },
+        "pooled": {
+          "1->0": 4
+        },
+        "practical": {
+          "1->1": 4
+        },
+        "raw": {
+          "1->1": 4
+        },
+        "strict": {
+          "1->0": 1,
+          "1->1": 3
+        }
+      },
+      "original": {
+        "isolated": {
+          "1->0": 1,
+          "1->1": 3
+        },
+        "paragraph": {
+          "1->1": 4
+        },
+        "pooled": {
+          "1->0": 4
+        },
+        "practical": {
+          "1->1": 4
+        },
+        "raw": {
+          "1->1": 4
+        },
+        "strict": {
+          "1->0": 1,
+          "1->1": 3
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "0->1": 2,
+          "1->1": 1
+        },
+        "paragraph": {
+          "0->1": 2,
+          "1->1": 1
+        },
+        "pooled": {
+          "0->1": 2,
+          "1->1": 1
+        },
+        "practical": {
+          "0->0": 1,
+          "0->1": 1,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 2,
+          "1->1": 1
+        },
+        "strict": {
+          "0->1": 2,
+          "1->1": 1
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 2
+        },
+        "paragraph": {
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->1": 1,
+          "1->0": 2,
+          "1->1": 1
+        },
+        "practical": {
+          "0->0": 1,
+          "1->1": 3
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 3
+        },
+        "strict": {
+          "0->1": 1,
+          "1->0": 2,
+          "1->1": 1
+        }
+      }
+    }
+  },
+  "positive_groups": {
+    "court": {
+      "any": 3,
+      "both_families": 1
+    },
+    "speech": {
+      "any": 4,
+      "both_families": 3
+    }
+  },
+  "preparation": {
+    "case_sha256": "3c67fe9301a5622637818880d16044a1349209dbf84188351ac8fdbd7c076188",
+    "freeze_sha256": "1e6f4f29c2af74ad8ff7038bc5cbc5ff0dfecaefd14abdba80e5d3f143cfc4ae",
+    "generators": {
+      "qwen": {
+        "dispositions": {
+          "admitted_complete_response": 6,
+          "source_copy": 2
+        },
+        "receipt": {
+          "elapsed_seconds": 12.182,
+          "family": "qwen",
+          "freeze_sha256": "1e6f4f29c2af74ad8ff7038bc5cbc5ff0dfecaefd14abdba80e5d3f143cfc4ae",
+          "minimum_available_ram_bytes": 4506697728,
+          "sampled_worker_rss_bytes": 2814377984,
+          "status": "complete",
+          "worker": {
+            "responses": 8,
+            "sha256": "d2c34afedefb36c82ca9ba6792ea1bb5af3858f616b74b521afed7e5c2723634",
+            "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+          }
+        }
+      },
+      "smol2": {
+        "dispositions": {
+          "admitted_complete_response": 5,
+          "source_copy": 2,
+          "wrapper_or_multiple_paragraphs": 1
+        },
+        "receipt": {
+          "elapsed_seconds": 13.709,
+          "family": "smol2",
+          "freeze_sha256": "1e6f4f29c2af74ad8ff7038bc5cbc5ff0dfecaefd14abdba80e5d3f143cfc4ae",
+          "minimum_available_ram_bytes": 4172759040,
+          "sampled_worker_rss_bytes": 3578380288,
+          "status": "complete",
+          "worker": {
+            "responses": 8,
+            "sha256": "44648acbbe547e934cb4005442bc692289787ad97c897de8621c3880ad8204b7",
+            "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+          }
+        }
+      }
+    },
+    "status": "complete"
+  },
+  "schema": "chipmunk.writing-paragraph-replication/1",
+  "scope": "Independent local transfer of evidence-only paragraph comparison with unchanged scoring.",
+  "source": {
+    "code_sha256": "5f10db62b6a77881e7abf13d93579096bfbb37ddc8a0a7ddefbc8e54a11707ba",
+    "dispositions": {
+      "court-alston": "admitted",
+      "court-facebook": "no_eligible_four_paragraph_group",
+      "court-ford": "no_eligible_four_paragraph_group",
+      "court-google": "admitted",
+      "court-minerva": "admitted",
+      "court-penneast": "admitted",
+      "speech-bowman": "admitted",
+      "speech-brainard": "admitted",
+      "speech-clarida": "admitted",
+      "speech-powell": "admitted"
+    },
+    "exposure_inventory": [
+      {
+        "matched_sources": 0,
+        "packet": "writing_v3_v4_exposed_contexts",
+        "source_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+        "text_entries": 674
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v5_selected_source_answers",
+        "source_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+        "text_entries": 256
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v7_prepared_exposures",
+        "source_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+        "text_entries": 992
+      },
+      {
+        "matched_sources": 0,
+        "packet": "text_layout_v93_v101",
+        "source_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+        "text_entries": 800
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_prepared_v193_v196",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "manifest.json",
+        "source_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+        "text_entries": 680
+      },
+      {
+        "matched_sources": 0,
+        "packet": "article-confirmation-manifest.json",
+        "source_sha256": "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+        "text_entries": 144
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals-v2.json",
+        "source_sha256": "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-explicit.json",
+        "source_sha256": "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+        "text_entries": 186
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-v2.json",
+        "source_sha256": "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+        "text_entries": 90
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals.json",
+        "source_sha256": "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-explicit.jsonl",
+        "source_sha256": "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+        "text_entries": 55
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-explicit.jsonl",
+        "source_sha256": "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+        "text_entries": 38
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-mlx.jsonl",
+        "source_sha256": "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+        "text_entries": 32
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-mlx.jsonl",
+        "source_sha256": "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+        "text_entries": 13
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_publisher_test",
+        "source_sha256": "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+        "text_entries": 508
+      },
+      {
+        "matched_sources": 0,
+        "packet": "aitdna_span_texts_v2_v4",
+        "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+        "text_entries": 362
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_archive-v205",
+        "source_sha256": "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+        "text_entries": 36
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_direct-v209",
+        "source_sha256": "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "iterater_v203_publisher_train",
+        "source_sha256": "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+        "text_entries": 962
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_v257_v260",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "goce_v249",
+        "source_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+        "text_entries": 4
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_classification_english_archive",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v272_publisher_bodies",
+        "source_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+        "text_entries": 9
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v273_constructed_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v286_licensed_publisher_bodies",
+        "source_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v289_v292_constructed_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "previous_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_controls",
+        "source_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+        "text_entries": 21
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_qwen",
+        "source_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_prefix",
+        "source_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+        "text_entries": 3
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_smol2",
+        "source_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+        "text_entries": 10
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_controls",
+        "source_sha256": "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+        "text_entries": 33
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_rewrites",
+        "source_sha256": "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "practical_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "practical_positives",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "historical_correspondence_controls",
+        "source_sha256": "36117d37aa219dafb4a6f13959dfbecf3f8d0a02c81eb70f232d249b587768ec",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "historical_correspondence_positives",
+        "source_sha256": "0caca63a72bd00864b1c069ee3776e24b83c0d0e0f3dee4489535888188a0fbc",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "modern_bulletins_controls",
+        "source_sha256": "30d76269e14096222de528a3fd2c11c47928557b983cf706ed7f80c196573e3c",
+        "text_entries": 30
+      },
+      {
+        "matched_sources": 0,
+        "packet": "modern_bulletins_positives",
+        "source_sha256": "f3db42f44c9dc5891d4f345ceac7a3bb7209dc1784b9aae30405778ba86c3a81",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "features_controls",
+        "source_sha256": "dc4059f7e05a15fe47df3887c70260e669e7b87f2f9290b68f7f2971633ffbfe",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "features_positives",
+        "source_sha256": "042ecaea92828aace974a844fd3fc0b29cd49850fb36d9e92ac5b88f981886f1",
+        "text_entries": 8
+      }
+    ],
+    "genres": {
+      "court": 4,
+      "speech": 4
+    },
+    "policy": {
+      "case": "Four source-ordered eligible body blocks. Choose a 45–110-word interior target and source-only whole-paragraph and one-sentence donor replacements of similar length. Freeze all exact Unicode intervals, source bytes and control files before generation.",
+      "projection": "Use native PDF text, page/block coordinates and normalized whitespace for attributed majority prose, and agency HTML paragraph text for speeches. Syllabus, dissent, long quotations, headings, references and outside material are excluded. Some typesetting artifacts may remain in PDF text.",
+      "roster": "Take four qualifying 2021 source works with distinct official authors per genre in the fixed roster order. Original language is English. Majority opinions only and official prepared speeches only. Source family includes U.S. Supreme Court and Federal Reserve Board.",
+      "separation": "Check normalized exact 12-token overlap with known retained project sources and within the confirmation panel; model-pretraining exposure is unknown."
+    },
+    "private_controls_sha256": "056a571848a6ba8e6c63b54236da10eb73f49e1062f8dd38e741c0b98b215593",
+    "private_originals_sha256": "637ba4173ef6a0ccda042fd09104d279d09af6f18284913d51d17a558c19f10c",
+    "projection_sha256": "0060c0d2b7559550675522d387d645f5e5b8ee002487068e57fbc4fb9f167f46",
+    "schema": "chipmunk.writing-paragraph-replication-intake/1",
+    "source_groups": 8,
+    "sources": [
+      {
+        "author": "Stephen Breyer",
+        "body_blocks": [
+          {
+            "bbox": [
+              156.24,
+              169.489,
+              459.062,
+              301.655
+            ],
+            "block_index": 14,
+            "pdf_page": 19,
+            "text_sha256": "3ea0f74da24ca7384ddc005061fa9896a3a8058b2e09a3c4b91e71696e8bb345",
+            "words": 89
+          },
+          {
+            "bbox": [
+              156.24,
+              188.693,
+              458.889,
+              323.922
+            ],
+            "block_index": 15,
+            "pdf_page": 25,
+            "text_sha256": "60a0f9c9bc700a9eb3fe5cf88435d8376644f618ebb3652554326972360f15bf",
+            "words": 87
+          },
+          {
+            "bbox": [
+              156.24,
+              209.148,
+              458.908,
+              314.919
+            ],
+            "block_index": 15,
+            "pdf_page": 26,
+            "text_sha256": "b3e9e71243ad03cb03a01764b5e697e6a50ca0c263df91a4f1d165895701c82e",
+            "words": 74
+          },
+          {
+            "bbox": [
+              156.24,
+              314.93,
+              458.859,
+              447.162
+            ],
+            "block_index": 16,
+            "pdf_page": 26,
+            "text_sha256": "eeb809df22db88252c363fcaf3d0e925f88d041b019d6587acb4cf1fa309adb1",
+            "words": 91
+          }
+        ],
+        "download_bytes": 329629,
+        "genre": "court",
+        "key": "court-google",
+        "original_sha256": "44159d1c4bea93306be8eefdfa7d43d0aa918380b0b7a8abc22e6c10649079e9",
+        "projected_blocks": 26,
+        "published": "2021-04-05",
+        "rights_url": "https://www.copyright.gov/title17/92chap1.html",
+        "sentence_donor": {
+          "bbox": [
+            156.24,
+            169.489,
+            458.833,
+            354.578
+          ],
+          "block_index": 15,
+          "codepoints": [
+            397,
+            573
+          ],
+          "pdf_page": 27,
+          "text_sha256": "2aca2ee9357e1521d925134f1e143fa233d7835f8ef1b6387511a712fef484ac"
+        },
+        "target_paragraph_index": 1,
+        "target_words": 87,
+        "title": "Google LLC v. Oracle America, Inc.",
+        "url": "https://www.supremecourt.gov/opinions/20pdf/18-956_new_0e04.pdf",
+        "whole_donor": {
+          "bbox": [
+            156.24,
+            182.686,
+            458.816,
+            301.655
+          ],
+          "block_index": 15,
+          "codepoints": [
+            0,
+            514
+          ],
+          "pdf_page": 35,
+          "text_sha256": "f070e642e418377473ee6bee4c6e22efadc7042fca2d2818a6f1ae9550478e60"
+        }
+      },
+      {
+        "author": "Neil Gorsuch",
+        "body_blocks": [
+          {
+            "bbox": [
+              156.218,
+              387.057,
+              458.899,
+              522.287
+            ],
+            "block_index": 20,
+            "pdf_page": 19,
+            "text_sha256": "4e5d0ba6d991d17f25666a8f8ed3c1047817ea823864211c29b398b4f7ff7dde",
+            "words": 83
+          },
+          {
+            "bbox": [
+              156.24,
+              367.853,
+              458.942,
+              539.745
+            ],
+            "block_index": 15,
+            "pdf_page": 20,
+            "text_sha256": "24fffd90e1f9fdb7071dc7687a589f00b64ae22e7a1ca0af1337b812d9cc300a",
+            "words": 121
+          },
+          {
+            "bbox": [
+              156.24,
+              473.634,
+              458.878,
+              619.065
+            ],
+            "block_index": 15,
+            "pdf_page": 26,
+            "text_sha256": "662e498b53443817560e9983a6919190e6b0ef5b1d183a4b9dc5c8e8f0a32fca",
+            "words": 94
+          },
+          {
+            "bbox": [
+              156.24,
+              426.717,
+              458.923,
+              482.627
+            ],
+            "block_index": 18,
+            "pdf_page": 28,
+            "text_sha256": "cc9deb6c645691ea11d0a20703a8b5ae73a012d275afd3975ccd4f5223cced22",
+            "words": 32
+          }
+        ],
+        "download_bytes": 264141,
+        "genre": "court",
+        "key": "court-alston",
+        "original_sha256": "0990ee9c6f2c9f59ca68b301febcbf56d59cc3271e9def91da16074a9ce25f57",
+        "projected_blocks": 13,
+        "published": "2021-06-21",
+        "rights_url": "https://www.copyright.gov/title17/92chap1.html",
+        "sentence_donor": {
+          "bbox": [
+            156.248,
+            463.368,
+            458.862,
+            635.26
+          ],
+          "block_index": 16,
+          "codepoints": [
+            495,
+            711
+          ],
+          "pdf_page": 18,
+          "text_sha256": "2c7982becb30573466fd086e325b21744dbd62ac586f82a1c7977d9b9eab6953"
+        },
+        "target_paragraph_index": 2,
+        "target_words": 94,
+        "title": "National Collegiate Athletic Assn. v. Alston",
+        "url": "https://www.supremecourt.gov/opinions/20pdf/20-512_gfbh.pdf",
+        "whole_donor": {
+          "bbox": [
+            156.248,
+            463.368,
+            458.862,
+            635.26
+          ],
+          "block_index": 16,
+          "codepoints": [
+            0,
+            755
+          ],
+          "pdf_page": 18,
+          "text_sha256": "2c7982becb30573466fd086e325b21744dbd62ac586f82a1c7977d9b9eab6953"
+        }
+      },
+      {
+        "author": "John Roberts",
+        "body_blocks": [
+          {
+            "bbox": [
+              156.262,
+              241.605,
+              458.885,
+              429.692
+            ],
+            "block_index": 16,
+            "pdf_page": 14,
+            "text_sha256": "a587fa08d769b2c37bee0da9241556474fbf50465fd996510075889cb44490f3",
+            "words": 128
+          },
+          {
+            "bbox": [
+              156.24,
+              156.225,
+              458.902,
+              278.19
+            ],
+            "block_index": 14,
+            "pdf_page": 18,
+            "text_sha256": "fc2de92d478044eafbba4d6f25b090071f8be861a2547f7e88617ccb1d49ab58",
+            "words": 66
+          },
+          {
+            "bbox": [
+              156.24,
+              394.249,
+              458.849,
+              526.481
+            ],
+            "block_index": 15,
+            "pdf_page": 23,
+            "text_sha256": "ea021fd9875f1a645d1daaae376d1c42775b9047f7fdafc5933ed1832412be4a",
+            "words": 92
+          },
+          {
+            "bbox": [
+              156.24,
+              334.134,
+              458.863,
+              535.485
+            ],
+            "block_index": 15,
+            "pdf_page": 27,
+            "text_sha256": "d5c64f6fba5b7bd060cf0c173579a5a4e8fded831643fbd44454c8d616711982",
+            "words": 114
+          }
+        ],
+        "download_bytes": 216670,
+        "genre": "court",
+        "key": "court-penneast",
+        "original_sha256": "9e47e2b84cdeb5f5d895f3f1ca524cc26824263a0b07026bc0fc4a63d0005a2b",
+        "projected_blocks": 9,
+        "published": "2021-06-29",
+        "rights_url": "https://www.copyright.gov/title17/92chap1.html",
+        "sentence_donor": {
+          "bbox": [
+            156.229,
+            268.012,
+            458.831,
+            390.044
+          ],
+          "block_index": 15,
+          "codepoints": [
+            109,
+            248
+          ],
+          "pdf_page": 12,
+          "text_sha256": "22fadbd31fcfa0a3be63d7a10ba2f4de8ab31acd513220d6aee5d0c9c063d49f"
+        },
+        "target_paragraph_index": 1,
+        "target_words": 66,
+        "title": "PennEast Pipeline Co. v. New Jersey",
+        "url": "https://www.supremecourt.gov/opinions/20pdf/19-1039_8n5a.pdf",
+        "whole_donor": {
+          "bbox": [
+            156.229,
+            268.012,
+            458.831,
+            390.044
+          ],
+          "block_index": 15,
+          "codepoints": [
+            0,
+            415
+          ],
+          "pdf_page": 12,
+          "text_sha256": "22fadbd31fcfa0a3be63d7a10ba2f4de8ab31acd513220d6aee5d0c9c063d49f"
+        }
+      },
+      {
+        "author": "Elena Kagan",
+        "body_blocks": [
+          {
+            "bbox": [
+              155.189,
+              321.673,
+              456.439,
+              530.035
+            ],
+            "block_index": 4,
+            "pdf_page": 17,
+            "text_sha256": "a8e695ad7c2b08e6f50cffd59afeb67efd53e30b56b4601d8e21de4904233a6b",
+            "words": 145
+          },
+          {
+            "bbox": [
+              155.164,
+              406.624,
+              456.403,
+              575.505
+            ],
+            "block_index": 5,
+            "pdf_page": 19,
+            "text_sha256": "85da27a637cbb5ef8d1756e66382329b72a7f0f8725760a3e3cd85201ad7dfe8",
+            "words": 113
+          },
+          {
+            "bbox": [
+              155.189,
+              164.812,
+              456.483,
+              293.247
+            ],
+            "block_index": 2,
+            "pdf_page": 20,
+            "text_sha256": "ff469b4b7b855e630141c06a8cc253654b08c9022ae986478c717e071d760c38",
+            "words": 88
+          },
+          {
+            "bbox": [
+              155.189,
+              346.217,
+              456.45,
+              486.803
+            ],
+            "block_index": 3,
+            "pdf_page": 21,
+            "text_sha256": "18e44a23b0a941fc40a5c7b0ad3fd36b888b2f73cb42cb98fa641bb2478b56c6",
+            "words": 95
+          }
+        ],
+        "download_bytes": 305261,
+        "genre": "court",
+        "key": "court-minerva",
+        "original_sha256": "5a65e28396b2a936381123d98771ee5175e298b36196be235eda02d6f7ad895b",
+        "projected_blocks": 8,
+        "published": "2021-06-29",
+        "rights_url": "https://www.copyright.gov/title17/92chap1.html",
+        "sentence_donor": {
+          "bbox": [
+            155.189,
+            519.715,
+            456.428,
+            647.338
+          ],
+          "block_index": 5,
+          "codepoints": [
+            456,
+            585
+          ],
+          "pdf_page": 21,
+          "text_sha256": "0972670c94bb16394281dc84d911cfe78c5bd3a137e4c26218e138962a38480a"
+        },
+        "target_paragraph_index": 2,
+        "target_words": 88,
+        "title": "Minerva Surgical, Inc. v. Hologic, Inc.",
+        "url": "https://www.supremecourt.gov/opinions/20pdf/594us2r64_anbf.pdf",
+        "whole_donor": {
+          "bbox": [
+            155.189,
+            519.715,
+            456.428,
+            647.338
+          ],
+          "block_index": 5,
+          "codepoints": [
+            0,
+            585
+          ],
+          "pdf_page": 21,
+          "text_sha256": "0972670c94bb16394281dc84d911cfe78c5bd3a137e4c26218e138962a38480a"
+        }
+      },
+      {
+        "author": "Jerome Powell",
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 8,
+            "text_sha256": "167b8b01b66231c713ce947af8ad883eb14cc2c0b561e3b23cee48a4f675ae43",
+            "words": 44
+          },
+          {
+            "publisher_paragraph_index": 10,
+            "text_sha256": "723ac59e1b9d9fe53ac99bfe738ebc8c8fe8dca35c4a22480a0a0ada7709bbb1",
+            "words": 46
+          },
+          {
+            "publisher_paragraph_index": 12,
+            "text_sha256": "49a71c92db362b5829de4f775e34da9a0d60d481874eb5c5a854bed6a71f7116",
+            "words": 74
+          },
+          {
+            "publisher_paragraph_index": 13,
+            "text_sha256": "a3a3b266aaeb648308ac8b48eaddf091eda980d820b9b4e6b85c3ef01cdfc3e9",
+            "words": 40
+          }
+        ],
+        "download_bytes": 112056,
+        "genre": "speech",
+        "key": "speech-powell",
+        "original_sha256": "66b6ba6e0ce8d334c7e222a65ab70b44d9bb6d72df96f1aa4ce76ae5120f0097",
+        "projected_blocks": 16,
+        "published": "2021-08-27",
+        "rights_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "sentence_donor": {
+          "codepoints": [
+            119,
+            301
+          ],
+          "publisher_paragraph_index": 5,
+          "text_sha256": "4f8c13faef80cfe6bf9472239d62506a7208f8f77ed235a59e9edbd8e5c70688"
+        },
+        "target_paragraph_index": 2,
+        "target_words": 74,
+        "title": "Monetary Policy in the Time of COVID",
+        "url": "https://www.federalreserve.gov/newsevents/speech/powell20210827a.htm",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            460
+          ],
+          "publisher_paragraph_index": 17,
+          "text_sha256": "fcd0f1d333d56343eb69cae2270c938447f1e4b7c662309eb90e5526d86c9e6d"
+        }
+      },
+      {
+        "author": "Richard Clarida",
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 4,
+            "text_sha256": "f11fec9ad221fb28ca5ed635adfd1e20a349749e83a258a455871b21538f4b32",
+            "words": 54
+          },
+          {
+            "publisher_paragraph_index": 9,
+            "text_sha256": "c53ef96f60737603f1f11efb588f1868137f9b067bfc74bff9c73bdcd89ffddc",
+            "words": 111
+          },
+          {
+            "publisher_paragraph_index": 10,
+            "text_sha256": "256c87fa392ac34d3fae398d4398dac45cecc6b71bf4dc477b8c30f35593145f",
+            "words": 104
+          },
+          {
+            "publisher_paragraph_index": 13,
+            "text_sha256": "b376332d80980fa3466464988bf5608fde850f161c6521d62e7503a4b82a1106",
+            "words": 77
+          }
+        ],
+        "download_bytes": 116855,
+        "genre": "speech",
+        "key": "speech-clarida",
+        "original_sha256": "0943fff51045049ee46152b3109ea9e7c3bd3309474dbfeef083f7a01bcae7d1",
+        "projected_blocks": 10,
+        "published": "2021-11-30",
+        "rights_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "sentence_donor": {
+          "codepoints": [
+            144,
+            379
+          ],
+          "publisher_paragraph_index": 23,
+          "text_sha256": "eeec0631b1904a0181d7ccc29b3e084c863ce33ea996a602434da8c39cb58a35"
+        },
+        "target_paragraph_index": 2,
+        "target_words": 104,
+        "title": "Federal Reserve Independence: Foundations and Responsibilities",
+        "url": "https://www.federalreserve.gov/newsevents/speech/clarida20211130a.htm",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            719
+          ],
+          "publisher_paragraph_index": 22,
+          "text_sha256": "130c95a141e013fc1307715a9b9c8a065e24816ae5816775e41cd10973bfacea"
+        }
+      },
+      {
+        "author": "Lael Brainard",
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 11,
+            "text_sha256": "13fec901f22da623bc1d378e92f9a6ab4d07c831e4500a3b3702862ea521e0ab",
+            "words": 56
+          },
+          {
+            "publisher_paragraph_index": 13,
+            "text_sha256": "cf6cabceb6476288d3b05bd02a7b240c368ad9517aee0ddcc09a805003084b33",
+            "words": 99
+          },
+          {
+            "publisher_paragraph_index": 21,
+            "text_sha256": "152db01fffceaa29883ba3b252ce5a2d84226c2047e00d06c43389c1afccc85a",
+            "words": 97
+          },
+          {
+            "publisher_paragraph_index": 22,
+            "text_sha256": "e941340517e1c0f65a556d2a60a7d18c6427d230075db53f762adafb1d4ec8e0",
+            "words": 95
+          }
+        ],
+        "download_bytes": 108326,
+        "genre": "speech",
+        "key": "speech-brainard",
+        "original_sha256": "366ff48a99a1257a5a06b842e177afbb6bcafb8feb1e6c3ca748e8e4f301e36a",
+        "projected_blocks": 7,
+        "published": "2021-05-24",
+        "rights_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "sentence_donor": {
+          "codepoints": [
+            343,
+            560
+          ],
+          "publisher_paragraph_index": 7,
+          "text_sha256": "c4932769450b0c2c1ad49514a40537a2b34b28a461c3f5dfd2f18d986cefe02a"
+        },
+        "target_paragraph_index": 1,
+        "target_words": 99,
+        "title": "Private Money and Central Bank Money as Payments Go Digital: an Update on CBDCs",
+        "url": "https://www.federalreserve.gov/newsevents/speech/brainard20210524a.htm",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            662
+          ],
+          "publisher_paragraph_index": 8,
+          "text_sha256": "cc888469003ca8616d0c58fb11dfeb9ae6120ec5ac724835624e32516780b410"
+        }
+      },
+      {
+        "author": "Michelle Bowman",
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 6,
+            "text_sha256": "02cdf2cd6d9a5acdb56c7321d80d90600a3aff535daabf0a4e0b8f62474975d7",
+            "words": 128
+          },
+          {
+            "publisher_paragraph_index": 9,
+            "text_sha256": "6d41fdd845cc4f5b9880d006dcbf72d81b1311e08d816026f4f43f3c2ddaa568",
+            "words": 75
+          },
+          {
+            "publisher_paragraph_index": 11,
+            "text_sha256": "5ff6c7faac6fa02cc51394c4afd0b30627017ea9ae125f497a1c2f7ab248e67f",
+            "words": 63
+          },
+          {
+            "publisher_paragraph_index": 13,
+            "text_sha256": "c2e4997e23468cbb297d30c688c7d0080b0f1c9d6282df32369c3b968f94bdcc",
+            "words": 70
+          }
+        ],
+        "download_bytes": 97036,
+        "genre": "speech",
+        "key": "speech-bowman",
+        "original_sha256": "8f160d3589112baa11484b28b133c5c65d0ed158a17bed499587cd9e8580e66e",
+        "projected_blocks": 9,
+        "published": "2021-06-23",
+        "rights_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "sentence_donor": {
+          "codepoints": [
+            0,
+            214
+          ],
+          "publisher_paragraph_index": 4,
+          "text_sha256": "ce8e6e05068bcdc3c60b9f1b7206157098f64eced11ded0153acbfe20d00df53"
+        },
+        "target_paragraph_index": 1,
+        "target_words": 75,
+        "title": "The Pandemic’s Effect on the Economy and Banking",
+        "url": "https://www.federalreserve.gov/newsevents/speech/bowman20210623a.htm",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            591
+          ],
+          "publisher_paragraph_index": 4,
+          "text_sha256": "ce8e6e05068bcdc3c60b9f1b7206157098f64eced11ded0153acbfe20d00df53"
+        }
+      }
+    ]
+  },
+  "source_metadata_corrections": {
+    "speech-bowman": {
+      "note": "The frozen source receipt retains the local descriptive label. This attribution correction does not change the committed source bytes, excerpts, or scores.",
+      "publisher_title": "Building Economic Resilience in Communities",
+      "publisher_url": "https://www.federalreserve.gov/newsevents/speech/bowman20210623a.htm"
+    }
+  },
+  "terminal": {
+    "assessed_views": 35,
+    "elapsed_s": 67.275,
+    "forwards": 197,
+    "freeze_sha256": "1e6f4f29c2af74ad8ff7038bc5cbc5ff0dfecaefd14abdba80e5d3f143cfc4ae",
+    "minimum_ram": 7106314240,
+    "peak_rss": 2313240576,
+    "planned_views": 40,
+    "responses_sha256": "5dcef77b2532c7de11d3b153756c87677cca227d7dbc15787ae08148d5ee6c4f",
+    "status": "complete"
+  }
+}

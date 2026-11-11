@@ -1,0 +1,679 @@
+{
+  "commitments": {
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "development_sha256": "62bea0acecf177b6f18c331f19703c7d1a8c38668ff45862c9765a350eafdc3b",
+    "previous_audio_transfer_sha256": "ccd0d46e075baf840bb64de2dc0494f0df8791e74070ee2776d8405e22fd7e1e",
+    "private_gate_sha256": "d0023261ebe9608a5b8d18b5d0f45d2495780f0e19386b1d8b63f66a0d7c2d63",
+    "private_roster_sha256": "8c4c72b1f2bbae6bc4acbfe8935486f75b9e684c91c65d5197d04bf011696dd1",
+    "private_score_sha256": "3f1cae6ef8b1f9688aa4895606e6687584c174d6753b9d3ab41ef0972d898064",
+    "readout_sha256": "eb4913bd231294afc179f1b0267bf0b828bee5c42e398f310b94c404322d9b7f",
+    "runner_sha256": "3f7642b5c4f430e31c17a04c89df30287d76cb80a9901f5a2fde96da9a6945b1",
+    "source_plan_sha256": "040f52a7387094b90d4e28921a286fdac847d057c75018d2d933dc05f431d6fb",
+    "source_receipt_sha256": "1add5eff6db229b2670c8a6ec808b325de41aabe052f3c75833690e2c94a5ea1",
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "comparison": [
+    {
+      "cohort": "room_1_single",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 4
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 4
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 4
+      },
+      "planned": 8,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "room_1_overlap",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 1,
+        "unassessed": 6
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 1,
+        "unassessed": 6
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 1,
+        "original": 1,
+        "unassessed": 6
+      },
+      "planned": 8,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "room_2_single",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 3
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 3
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 2,
+        "unassessed": 3
+      },
+      "planned": 8,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "room_2_overlap",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 3,
+        "unassessed": 1
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 3,
+        "unassessed": 1
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 3,
+        "unassessed": 1
+      },
+      "planned": 8,
+      "spatial_cue": 3
+    },
+    {
+      "cohort": "room_1_all",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 2,
+        "unassessed": 10
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 2,
+        "unassessed": 10
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 2,
+        "unassessed": 10
+      },
+      "planned": 16,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "room_2_all",
+      "condition": "native",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 7,
+        "original": 5,
+        "unassessed": 4
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 7,
+        "original": 5,
+        "unassessed": 4
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 7,
+        "original": 5,
+        "unassessed": 4
+      },
+      "planned": 16,
+      "spatial_cue": 3
+    },
+    {
+      "cohort": "all_synthetic",
+      "condition": "matched_clean",
+      "context_and_channel_disagreement": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 12,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 12,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "alania",
+      "condition": "matched_clean",
+      "context_and_channel_disagreement": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "drifting",
+      "condition": "matched_clean",
+      "context_and_channel_disagreement": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "okur",
+      "condition": "matched_clean",
+      "context_and_channel_disagreement": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 0
+    },
+    {
+      "cohort": "all_synthetic",
+      "condition": "background_1",
+      "context_and_channel_disagreement": {
+        "ai": 4,
+        "inconclusive": 8,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 12,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 6,
+        "inconclusive": 6,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 12,
+      "spatial_cue": 12
+    },
+    {
+      "cohort": "alania",
+      "condition": "background_1",
+      "context_and_channel_disagreement": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 4
+    },
+    {
+      "cohort": "drifting",
+      "condition": "background_1",
+      "context_and_channel_disagreement": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 4
+    },
+    {
+      "cohort": "okur",
+      "condition": "background_1",
+      "context_and_channel_disagreement": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 4
+    },
+    {
+      "cohort": "all_synthetic",
+      "condition": "background_2",
+      "context_and_channel_disagreement": {
+        "ai": 7,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 2,
+        "inconclusive": 10,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 11,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 12,
+      "spatial_cue": 9
+    },
+    {
+      "cohort": "alania",
+      "condition": "background_2",
+      "context_and_channel_disagreement": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 3,
+        "inconclusive": 1,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 3
+    },
+    {
+      "cohort": "drifting",
+      "condition": "background_2",
+      "context_and_channel_disagreement": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 0,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 4
+    },
+    {
+      "cohort": "okur",
+      "condition": "background_2",
+      "context_and_channel_disagreement": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "context_only": {
+        "ai": 2,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "current": {
+        "ai": 4,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "planned": 4,
+      "spatial_cue": 2
+    }
+  ],
+  "decision_advance": false,
+  "development_spatial": [
+    {
+      "annotated_label": "single",
+      "evaluable": 0,
+      "meeting": 1,
+      "planned": 8,
+      "spatial_marker_count": 0
+    },
+    {
+      "annotated_label": "overlap",
+      "evaluable": 2,
+      "meeting": 1,
+      "planned": 8,
+      "spatial_marker_count": 2
+    },
+    {
+      "annotated_label": "single",
+      "evaluable": 2,
+      "meeting": 2,
+      "planned": 8,
+      "spatial_marker_count": 1
+    },
+    {
+      "annotated_label": "overlap",
+      "evaluable": 2,
+      "meeting": 2,
+      "planned": 8,
+      "spatial_marker_count": 2
+    }
+  ],
+  "freeze_sha256": "9ab281b844aad9c8664dfcd5df5ec62afc5e4584efd6dd1107cdaa52fea0a191",
+  "held_minimal_overlap_evaluable": 0,
+  "held_spatial": [
+    {
+      "annotated_label": "single",
+      "evaluable": 0,
+      "meeting": 1,
+      "planned": 8,
+      "spatial_marker_count": 0
+    },
+    {
+      "annotated_label": "overlap",
+      "evaluable": 0,
+      "meeting": 1,
+      "planned": 8,
+      "spatial_marker_count": 0
+    },
+    {
+      "annotated_label": "single",
+      "evaluable": 0,
+      "meeting": 2,
+      "planned": 8,
+      "spatial_marker_count": 0
+    },
+    {
+      "annotated_label": "overlap",
+      "evaluable": 3,
+      "meeting": 2,
+      "planned": 8,
+      "spatial_marker_count": 3
+    }
+  ],
+  "method": {
+    "context_advance": "New meetings: overlap recall at least 0.50 pooled and single-speaker specificity at least 0.75 in each meeting.",
+    "context_calibration": "Using old sessions only, choose threshold for greater or equal spatial fraction with maximum overlap recall then specificity, requiring at least 6/8 correct single controls in each meeting. Ties prefer the more specific higher threshold.",
+    "decision_advance": "Acoustic context meets its advance criterion, primary rule withholds at least two actual genuine false AI and at least one per new meeting, losing no more than one synthetic AI across noisy and matched clean.",
+    "diagnostic_policy": "Withhold current AI when the fixed spatial cue is present even if channel verification is missing.",
+    "feature": {
+      "bands_hz": [
+        300,
+        850,
+        1400,
+        2000,
+        2650,
+        3350,
+        4400
+      ],
+      "correlation_floor": 0.55,
+      "fft": 1024,
+      "formula": "Per frame count two groups of weighted PHAT subband-peak lags with at least two bands per group. Fraction of evaluable frames provides the spatial cue. No waveform modification.",
+      "hop": 512,
+      "lag_cluster_radius_samples": 1.25,
+      "lag_clusters_min_separation_samples": 3.5,
+      "lag_grid_samples": [
+        -10.0,
+        -9.5,
+        -9.0,
+        -8.5,
+        -8.0,
+        -7.5,
+        -7.0,
+        -6.5,
+        -6.0,
+        -5.5,
+        -5.0,
+        -4.5,
+        -4.0,
+        -3.5,
+        -3.0,
+        -2.5,
+        -2.0,
+        -1.5,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0
+      ],
+      "minimum_band_power_share": 0.05
+    },
+    "primary_policy": "Current AI may be withheld only when the fixed spatial cue is present, both untouched channels pass the same speech gate, and at least one is inconclusive or original under the fixed calibration.",
+    "selection": {
+      "holdout_synthetic_generator_count": 3,
+      "matched_noisy_snr_db": -5,
+      "overlap_min_s": 0.9,
+      "per_context_per_meeting": 8,
+      "same_speaker_word_gap_merge_ms": 80,
+      "single_overlap_max_s": 0.1,
+      "speech_union_min_s": 2.1,
+      "step_samples": 64000,
+      "synthetic_per_family": 4,
+      "window_samples": 48000
+    }
+  },
+  "method_lock_sha256": "9d956a626420dcdb04a11fd7f1b4dfe1c23969150dc6b71e746fc09f27a53b95",
+  "policy_effect": {
+    "context_and_channel_disagreement": {
+      "genuine_false_ai_withheld": 0,
+      "genuine_false_ai_withheld_per_meeting": [
+        0,
+        0
+      ],
+      "synthetic_true_ai_withheld": 6
+    },
+    "context_only": {
+      "genuine_false_ai_withheld": 0,
+      "genuine_false_ai_withheld_per_meeting": [
+        0,
+        0
+      ],
+      "synthetic_true_ai_withheld": 15
+    }
+  },
+  "resources": {
+    "classifier_inputs_scored": 84,
+    "downloaded_bytes": 107919075,
+    "elapsed_classifier_s": 60.59,
+    "gate_frame_forwards": 10904,
+    "peak_classifier_rss_bytes": 2921562112,
+    "prepared_pcm_bytes": 24192000,
+    "voice_classifier_forwards": 92
+  },
+  "retrospective_context_only": {
+    "conditions": [
+      {
+        "condition": "recorded_1",
+        "genuine": {
+          "current_ai": 2,
+          "current_ai_would_withhold": 0,
+          "evaluable": 2,
+          "planned": 8,
+          "spatial_marker": 1
+        },
+        "synthetic": {
+          "current_ai": 5,
+          "current_ai_would_withhold": 0,
+          "evaluable": 0,
+          "planned": 8,
+          "spatial_marker": 0
+        }
+      },
+      {
+        "condition": "recorded_2",
+        "genuine": {
+          "current_ai": 6,
+          "current_ai_would_withhold": 6,
+          "evaluable": 8,
+          "planned": 8,
+          "spatial_marker": 8
+        },
+        "synthetic": {
+          "current_ai": 4,
+          "current_ai_would_withhold": 4,
+          "evaluable": 8,
+          "planned": 8,
+          "spatial_marker": 8
+        }
+      }
+    ],
+    "new_voice_forwards": 0,
+    "previous_receipt_sha256": "ccd0d46e075baf840bb64de2dc0494f0df8791e74070ee2776d8405e22fd7e1e",
+    "role": "retrospective previously consumed stereo ICA panel; context-only arithmetic"
+  },
+  "schema": "chipmunk.stereo-speech-overlap-comparison/1",
+  "serving_change": false,
+  "source_qualification": {
+    "drifting_utterances_reused_from_v217": 4,
+    "matched_synthetic_clean_views": 12,
+    "native_confirmation_views": 32,
+    "native_meetings_confirmation": 2,
+    "native_meetings_development": 2,
+    "synthetic_groups": {
+      "alania": 4,
+      "drifting": 2,
+      "okur": 1
+    },
+    "synthetic_mixture_views": 24
+  },
+  "spatial_context_advance": false,
+  "spatial_threshold": 0.08,
+  "status": "complete"
+}

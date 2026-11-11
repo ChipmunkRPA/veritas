@@ -41,6 +41,7 @@ H1, H2, H3 = "H1_whole_content_synthesis", "H2_localised_manipulation", "H3_prov
 FAMILY_BY_DETECTOR = {"prov.c2pa": "F1_provenance", "prov.c2pa.video": "F1_provenance", "img.meta.generator": "F2_self_declared_metadata",
                       "img.meta.exif": "F8_metadata_consistency", "img.meta.consistency": "F8_metadata_consistency",
                       "img.meta.qtables": "F5_compression_history", "img.forensic.jpeg_dq": "F5_compression_history",
+                      "img.forensic.local_jpeg_grid": "F5_compression_history",
                       "img.forensic.copymove": "F7_duplication", "vid.meta.container": "V4_codec", "vid.codec.ffprobe": "V4_codec",
                       "vid.swap.gend_clip_l14": "V1_face_track"}
 FAMILY_BY_DETECTOR_FAMILY = {"learned-whole-image": "F3_whole_image_generation", "learned-face": "F10_face",
@@ -342,6 +343,10 @@ def _signal_work(inp: SynthesisInput, s: Mapping[str, Any], descriptive: list[st
         scope = "region"
     w.template = template_name(w.family, scope)
     w.view = {"s": _signal_view(s), "region": region_view}
+    if detector == "img.forensic.local_jpeg_grid":
+        w.title = "Local compression-grid difference"
+        w.template = "F5_compression_history/local_grid.j2"
+        w.benchmark = "In a local PNG test, this check located 10 of 48 constructed edits and flagged 0 of 120 matched control views."
     if w.variant == "self_declared":  # N-19h (E-21): the words of the marker's kind, from the signal's detector and metrics
         w.view["marker_carries"], w.view["marker_why"] = _marker_words(s, inp.kind)
         # N-19n (Q4-01): the IPTC source type has a sentence of its own, with the file's own value; where it is the marker
@@ -864,7 +869,7 @@ def synthesise(inp: SynthesisInput) -> list[dict[str, Any]]:
         outranked = _outranked(signal, decision)
         # N-19n (D3-07): a marker that the decision did not apply: a record outranks it, or the checks alone decide (Q, FF)
         unapplied = outranked or _checks_decide(signal, decision, fallback)
-        w.title = _marker_title(w, signal, inp.kind, unapplied is not None)
+        w.title = w.title or _marker_title(w, signal, inp.kind, unapplied is not None)
         _in_estimate(w, measured, uncounted)
         w.unshown = unshown
         w.priority = st.priority(w.family, w.strength, w.direction, c2pa_invalid=w.c2pa_invalid, region_on_face=w.on_face,

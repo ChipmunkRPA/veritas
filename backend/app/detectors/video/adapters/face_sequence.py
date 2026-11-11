@@ -55,7 +55,7 @@ class FaceSequenceReviewDetector(Detector):
     YUNET, DINO = "yunet.2023mar", "dinov2.small"
     spec = video_spec(DETECTOR, "Consecutive face-change review", InputUnit.FRAME_BATCH, (), ("series",),
                       family=FAMILY, model_ids=(YUNET, DINO), needs=("frames", "faces"),
-                      profiles=FULL_DEEP, timeout_s=120.0, version="0.1.0")
+                      profiles=FULL_DEEP, timeout_s=120.0, version="0.1.1")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return (ActivationUse(self.YUNET, 1, "frame", "One native frame for face detection"),
@@ -81,11 +81,15 @@ class FaceSequenceReviewDetector(Detector):
         centers = {i for i in inputs.centers if 0 < i < len(table)-1}
         scheduled = {i+k for i in centers for k in (-1, 0, 1)}
         crops, faces, bindings, decoded = {}, {}, {}, set()
+        unverified = 0
         yunet, dino = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.DINO).obj
         check = ctx.deadline.check if ctx.deadline is not None else lambda *_: None
         for i, rgb in inputs.store.iter_many(sorted(scheduled)):
             check("consecutive face crops")
             decoded.add(i)
+            if not inputs.store.native_pts_verified(i):
+                unverified += 1
+                continue
             detected = detect_faces(cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR), detector=yunet, min_size=settings.face_min_size)
             if not detected or (transform := align_transform(detected[0].landmarks)) is None:
                 continue
@@ -104,9 +108,13 @@ class FaceSequenceReviewDetector(Detector):
             {"region": {"kind": "bbox", "frame_pts": round(table.seconds(i)*1000), "bbox": binding["bbox"]}}
             for i, binding in bindings.items()]}
         tracks = bind_tracks([{"frame_index": i, "score": 0.} for i in crops], [observed, *inputs.exhibits], table)
-        windows = sequence_windows(centers, tracks, patch_features(crops, dino, check=check), table)
+        windows = sequence_windows(centers, tracks, patch_features(crops, dino, check=check), table) if crops else []
         if not windows:
-            return DetectorResult.not_applicable("no source-bound sequence has sufficient unambiguous tracked face context")
+            reason = ("verified decoder timestamps and tracked faces did not support a consecutive review range" if unverified
+                      else "no source-bound sequence has sufficient unambiguous tracked face context")
+            result = DetectorResult.not_applicable(reason)
+            result.metrics["unverified_timestamp_frames"] = float(unverified)
+            return result
         highest = windows[0]
         selected = record(highest, table, bindings) if highest["response"] >= REVIEW_POINT else None
         sid = f"{self.spec.id}:global"
@@ -119,7 +127,8 @@ class FaceSequenceReviewDetector(Detector):
                       if selected else "The sampled face sequences did not produce an additional change range to review."),
             reference="Compared with both surrounding time groups, discounting changes outside the inner face and between the surrounding groups.",
             reasoning="This is an uncalibrated inspection cue. Motion, lighting, expression and compression may produce similar changes. It does not establish AI editing and does not change overall confidence.",
-            metrics={"scheduled_frames": float(len(scheduled)), "face_frames": float(len(crops)), "windows": float(len(windows))},
+            metrics={"scheduled_frames": float(len(scheduled)), "face_frames": float(len(crops)), "windows": float(len(windows)),
+                     "unverified_timestamp_frames": float(unverified)},
             details={"face_sequence_binding_version": METHOD, "face_sequence": selected,
                      "face_sequence_windows": [record(window, table, bindings) for window in windows],
                      "input_frame_indices": sorted(crops), "review_only": True},

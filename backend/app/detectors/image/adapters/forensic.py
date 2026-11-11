@@ -9,8 +9,9 @@
 """
 from __future__ import annotations
 
-from app.detectors.image import copy_move, forensics, jpeg_dq, native_forensics
+from app.detectors.image import copy_move, forensics, jpeg_dq, local_jpeg_grid, native_forensics
 from app.detectors.image.adapters.common import (
+    ALL_PROFILES,
     CPU_ONLY,
     H1,
     H2,
@@ -202,6 +203,52 @@ class JpegDoubleCompressionDetector(Detector):
             observed=f"an 8 × 8 JPEG block grid in the pixels at offset ({grid.dx}, {grid.dy})",
             reasoning="The image was JPEG-compressed before it was saved in its current format"
                       + (", and cropped afterwards: the grid does not start at the corner." if cropped else "."))
+
+
+class LocalJpegGridDetector(Detector):
+    """Locate a different prior JPEG block alignment in a qualifying PNG."""
+
+    spec = image_spec(local_jpeg_grid.DETECTOR_ID, "Local compression-grid inspection", "forensic", InputUnit.IMAGE,
+                      (H2,), ("heatmap", "regions"), lane="cpu", devices=CPU_ONLY, profiles=ALL_PROFILES,
+                      timeout_s=10.0, version="0.1.0")
+
+    def run(self, ctx: RunContext) -> DetectorResult:
+        probe = ctx.outputs.probe or {}
+        width, height = probe.get("width", 0), probe.get("height", 0)
+        if (probe.get("format") != "PNG" or probe.get("mode") != "RGB" or probe.get("n_frames") != 1
+                or min(width, height) < 256 or width * height > 1_048_576):
+            return DetectorResult(status="not_applicable", reason="requires a single-frame RGB PNG, at least 256 pixels per side and at most 1 megapixel")
+        pixels = ctx.media.native_pixels()
+        height, width = pixels.shape[:2]
+        response = local_jpeg_grid.response(pixels)
+        if response["global_phase"] is None:
+            return DetectorResult(status="not_applicable", reason="no sufficiently clear prior JPEG grid for a local comparison")
+        values, boxes = local_jpeg_grid.pixel_map(response, local_jpeg_grid.PNG_ARM, local_jpeg_grid.PNG_REVIEW_POINT,
+                                                 (height, width))
+        reference = "A single prior JPEG save generally leaves the same block alignment throughout measurable areas."
+        if not boxes:
+            return DetectorResult(status="ok", observed="A prior JPEG grid was measured; no region met the local review rule.",
+                                  reference=reference, reasoning="Weak or erased compression traces can leave an edit undetected.")
+
+        space = {"width": width, "height": height, "scale_to_original": 1.0}
+        title = "Local compression-grid difference"
+        source_ids = [f"{self.spec.id}:global"]
+        heatmap = ctx.exhibits.heatmap(values, semantics="residual", title=title, value_range=(0.0, 1.0),
+                                      caption="Highlighted blocks have a different earlier JPEG alignment from the dominant grid.",
+                                      source_signal_ids=source_ids, coordinate_space=space, media_ref="original")
+        ordered = sorted(boxes, key=lambda box: (-box[4], box[1], box[0]))
+        regions = [{"region": {"kind": "bbox", "bbox": {"x": x, "y": y, "w": w, "h": h}}, "score": score}
+                   for x, y, w, h, score in ordered]
+        region_exhibit = ctx.exhibits.regions(regions, title=title, source_signal_ids=source_ids,
+                                              coordinate_space=space, media_ref="original")
+        aggregate = UnitScore("global", ordered[0][4], "score")
+        count = len(boxes)
+        return DetectorResult(
+            status="ok", aggregate=aggregate, unit_scores=[aggregate], exhibit_ids=[heatmap, region_exhibit],
+            observed=f"A different prior JPEG block alignment was measured in {count} local {'area' if count == 1 else 'areas'}.",
+            reference=reference, metrics={"regions_measured": float(count)},
+            reasoning="An area may have been saved or cropped separately before it was combined with the image. "
+                      "This evidence cannot identify AI generation and carries zero weight in AI confidence.")
 
 
 CM_VERSION = "0.4.0"

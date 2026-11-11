@@ -1,0 +1,413 @@
+{
+  "camera_holdout": {
+    "baseline": {
+      "assessed": 56,
+      "flagged": 28,
+      "flagged_by_condition": {
+        "chroma_conversion_only": 12,
+        "recompression_only": 12,
+        "unchanged": 4
+      },
+      "flagged_groups": 4,
+      "unassessed": 0
+    },
+    "cases": 56,
+    "motion": {
+      "assessed": 42,
+      "flagged": 10,
+      "flagged_by_condition": {
+        "chroma_conversion_only": 5,
+        "recompression_only": 4,
+        "unchanged": 1
+      },
+      "flagged_groups": 2,
+      "unassessed": 14
+    },
+    "pose_identity": {
+      "assessed": 56,
+      "flagged": 7,
+      "flagged_by_condition": {
+        "chroma_conversion_only": 3,
+        "recompression_only": 3,
+        "unchanged": 1
+      },
+      "flagged_groups": 1,
+      "unassessed": 0
+    },
+    "source_groups": 8
+  },
+  "camera_point_fit": {
+    "baseline": {
+      "assessed": 28,
+      "flagged": 7,
+      "flagged_by_condition": {
+        "chroma_conversion_only": 3,
+        "recompression_only": 3,
+        "unchanged": 1
+      },
+      "flagged_groups": 1,
+      "unassessed": 0
+    },
+    "cases": 28,
+    "motion": {
+      "assessed": 21,
+      "flagged": 0,
+      "flagged_by_condition": {},
+      "flagged_groups": 0,
+      "unassessed": 7
+    },
+    "pose_identity": {
+      "assessed": 28,
+      "flagged": 0,
+      "flagged_by_condition": {},
+      "flagged_groups": 0,
+      "unassessed": 0
+    },
+    "source_groups": 4
+  },
+  "commitments": {
+    "camera-scores.jsonl": "806ba1668f50ca5919e25dfafa340ebf844eaf84875ae2e58053df7dcc2c74a4",
+    "freeze.json": "91e1e70b6531db0a08de2ee8b48355ee025a71425d5fde885ad56dcec912b39e",
+    "native-witness.json": "1ef69201b3591c62f509330a779bfdee0c0dae0ff0ecc77ade5e5acc169bc431",
+    "points.json": "570cd58ceeb6c3ff1c51743837922881c99ff153c24ea42fd939b8232bfa0b01",
+    "production-route-proof.json": "32110b58e73179824f28d9496b738cdc89cfa027babd76fa7a3f27fb09dcf8c8",
+    "publisher-scores.jsonl": "60e23ae1aa52c1468a5b232347bab2478b07bd253f3702dac0bfa4ac0e671f11",
+    "readout.py": "55e7cfb66265b1af8670b951b7a9bae0da469d0132cc3dac36cdb3658e64be47",
+    "trial.py": "6e5c5f7c943fd01b49214e56a4345f8d98c783f118b3a1a789b75ed414fe1b0f",
+    "union.py": "505f068373dbb85d00555f3331c4b570cdc47d5196d96cd90096bcc99977565f",
+    "witness.py": "e85ceeaceac30506089360ff9b5029ae635ade295f3dcf023553aa0d48154e62"
+  },
+  "elapsed_s": {
+    "camera": 452.99648266704753,
+    "publisher": 58.67766537505668
+  },
+  "excluded_witness_attempts": [
+    {
+      "excluded_output_sha256": "433376b2ca840d71f418998a281fbc8c996676cb2fee189e3f2dbd0242de8d51",
+      "failure": "The initial encoding command lacked explicit passthrough, duplicating frames and stalling the streaming decode. Output clock was invalid and no exhibit or result used these bytes.",
+      "partial_bytes": 96025612,
+      "reported_frames": 36352,
+      "status": "excluded_invalid_clock"
+    },
+    {
+      "excluded_output_sha256": "55912101a72020440073b224e1a93281c858b6d1973ec63a9cb5e18c39d26875",
+      "failure": "All pictures and PTS matched but last display duration lacked its committed 512 native ticks. Exact duration bitstream metadata was added for the final attempt.",
+      "output_bytes": 23812635,
+      "reported_frames": 240,
+      "status": "excluded_invalid_display_duration"
+    }
+  ],
+  "localization_iou_minimum": 0.2,
+  "native_replay": {
+    "arm": "pose_identity",
+    "flagged": true,
+    "iou": 0.6666666666666666,
+    "native_changed_frames": 18,
+    "receipt_checks": {
+      "known": {
+        "anchor_seconds": {
+          "after": "5",
+          "before": "101/24",
+          "during": "55/12"
+        },
+        "codec": "h264",
+        "exhibit_pngs_verified": 3,
+        "frame_count": 240,
+        "interval_seconds": [
+          "17/4",
+          "5"
+        ],
+        "scope": "source bytes, presentation clock and three sampled RGB pictures",
+        "status": "verified",
+        "time_base": "1/12288"
+      },
+      "observed": {
+        "anchor_seconds": {
+          "after": "19/4",
+          "before": "101/24",
+          "during": "107/24"
+        },
+        "codec": "h264",
+        "exhibit_pngs_verified": 3,
+        "frame_count": 240,
+        "interval_seconds": [
+          "17/4",
+          "19/4"
+        ],
+        "scope": "source bytes, presentation clock and three sampled RGB pictures",
+        "status": "verified",
+        "time_base": "1/12288"
+      }
+    },
+    "scope": "independent reconstruction verified every exact source picture, native PTS and packet display duration",
+    "score": 0.26485246148063535
+  },
+  "points": {
+    "baseline": 0.11243900750879454,
+    "motion": 0.2667204439640045,
+    "pose_identity": 0.18061628799432844
+  },
+  "post_hoc_either_range": {
+    "camera_holdout": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 7,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 7,
+      "any_flagged_cases": 28,
+      "any_flagged_groups": 4,
+      "cases": 56,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0
+    },
+    "publisher_0.75s": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 2,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 4,
+      "any_flagged_cases": 4,
+      "any_flagged_groups": 1,
+      "cases": 4,
+      "extra_pose_ranges_missing_the_localization_criterion": 2,
+      "localized_cases_either_range": 2,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0,
+      "newly_localized_cases_from_pose": 2,
+      "newly_localized_groups_from_pose": 1
+    },
+    "publisher_1.50s": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 0,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 4,
+      "any_flagged_cases": 4,
+      "any_flagged_groups": 1,
+      "cases": 4,
+      "extra_pose_ranges_missing_the_localization_criterion": 0,
+      "localized_cases_either_range": 4,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0,
+      "newly_localized_cases_from_pose": 0,
+      "newly_localized_groups_from_pose": 0
+    },
+    "publisher_3.00s": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 4,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 4,
+      "any_flagged_cases": 4,
+      "any_flagged_groups": 1,
+      "cases": 4,
+      "extra_pose_ranges_missing_the_localization_criterion": 3,
+      "localized_cases_either_range": 4,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0,
+      "newly_localized_cases_from_pose": 0,
+      "newly_localized_groups_from_pose": 0
+    },
+    "publisher_all_swap_views": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 6,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 12,
+      "any_flagged_cases": 12,
+      "any_flagged_groups": 1,
+      "cases": 12,
+      "extra_pose_ranges_missing_the_localization_criterion": 5,
+      "localized_cases_either_range": 10,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0,
+      "newly_localized_cases_from_pose": 2,
+      "newly_localized_groups_from_pose": 1
+    },
+    "publisher_controls": {
+      "added_intervals_with_less_than_0_20_iou_to_current_on_previously_flagged_cases": 0,
+      "added_nonidentical_intervals_on_previously_flagged_cases": 0,
+      "any_flagged_cases": 4,
+      "any_flagged_groups": 1,
+      "cases": 4,
+      "newly_flagged_by_pose_cases": 0,
+      "newly_flagged_by_pose_groups": 0
+    }
+  },
+  "production_timestamp_omission_replay": {
+    "native_inputs": 117,
+    "omitted_picture_excluded": true,
+    "omitted_source_pts_seconds": 4.5,
+    "range_with_all_timestamps": [
+      3.25,
+      5.75
+    ],
+    "range_without_unverified_timestamp": [
+      3.25,
+      5.75
+    ],
+    "verified_windows": 12,
+    "with_one_timestamp_unverified_windows": 12
+  },
+  "production_timestamp_omission_scope": "same exact publisher swap file, one deliberately unverified decoder timestamp in the second run",
+  "publisher_all_swap_views": {
+    "baseline": {
+      "assessed": 12,
+      "flagged": 12,
+      "flagged_groups": 1,
+      "localized": 8,
+      "localized_groups": 1,
+      "maximum_iou_among_all_observed_ranges": 1.0,
+      "maximum_iou_among_flagged_ranges": 1.0,
+      "unassessed": 0
+    },
+    "cases": 12,
+    "motion": {
+      "assessed": 12,
+      "flagged": 1,
+      "flagged_groups": 1,
+      "localized": 1,
+      "localized_groups": 1,
+      "maximum_iou_among_all_observed_ranges": 0.4583333333333333,
+      "maximum_iou_among_flagged_ranges": 0.4583333333333333,
+      "unassessed": 0
+    },
+    "pose_identity": {
+      "assessed": 12,
+      "flagged": 12,
+      "flagged_groups": 1,
+      "localized": 7,
+      "localized_groups": 1,
+      "maximum_iou_among_all_observed_ranges": 0.8571428571428571,
+      "maximum_iou_among_flagged_ranges": 0.8571428571428571,
+      "unassessed": 0
+    },
+    "source_groups": 1
+  },
+  "publisher_by_duration_seconds": {
+    "0.75": {
+      "baseline": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 0,
+        "localized_groups": 0,
+        "maximum_iou_among_all_observed_ranges": 0.0,
+        "maximum_iou_among_flagged_ranges": 0.0,
+        "unassessed": 0
+      },
+      "cases": 4,
+      "motion": {
+        "assessed": 4,
+        "flagged": 0,
+        "flagged_groups": 0,
+        "localized": 0,
+        "localized_groups": 0,
+        "maximum_iou_among_all_observed_ranges": 0.35714285714285715,
+        "maximum_iou_among_flagged_ranges": null,
+        "unassessed": 0
+      },
+      "pose_identity": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 2,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 0.6666666666666666,
+        "maximum_iou_among_flagged_ranges": 0.6666666666666666,
+        "unassessed": 0
+      },
+      "source_groups": 1
+    },
+    "1.50": {
+      "baseline": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 4,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 1.0,
+        "maximum_iou_among_flagged_ranges": 1.0,
+        "unassessed": 0
+      },
+      "cases": 4,
+      "motion": {
+        "assessed": 4,
+        "flagged": 0,
+        "flagged_groups": 0,
+        "localized": 0,
+        "localized_groups": 0,
+        "maximum_iou_among_all_observed_ranges": 0.3888888888888889,
+        "maximum_iou_among_flagged_ranges": null,
+        "unassessed": 0
+      },
+      "pose_identity": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 4,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 0.8571428571428571,
+        "maximum_iou_among_flagged_ranges": 0.8571428571428571,
+        "unassessed": 0
+      },
+      "source_groups": 1
+    },
+    "3.00": {
+      "baseline": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 4,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 0.8333333333333334,
+        "maximum_iou_among_flagged_ranges": 0.8333333333333334,
+        "unassessed": 0
+      },
+      "cases": 4,
+      "motion": {
+        "assessed": 4,
+        "flagged": 1,
+        "flagged_groups": 1,
+        "localized": 1,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 0.4583333333333333,
+        "maximum_iou_among_flagged_ranges": 0.4583333333333333,
+        "unassessed": 0
+      },
+      "pose_identity": {
+        "assessed": 4,
+        "flagged": 4,
+        "flagged_groups": 1,
+        "localized": 1,
+        "localized_groups": 1,
+        "maximum_iou_among_all_observed_ranges": 0.2222222222222222,
+        "maximum_iou_among_flagged_ranges": 0.2222222222222222,
+        "unassessed": 0
+      },
+      "source_groups": 1
+    }
+  },
+  "publisher_controls": {
+    "baseline": {
+      "assessed": 4,
+      "flagged": 4,
+      "flagged_by_condition": {
+        "recompression_only": 3,
+        "unchanged": 1
+      },
+      "flagged_groups": 1,
+      "unassessed": 0
+    },
+    "cases": 4,
+    "motion": {
+      "assessed": 4,
+      "flagged": 0,
+      "flagged_by_condition": {},
+      "flagged_groups": 0,
+      "unassessed": 0
+    },
+    "pose_identity": {
+      "assessed": 4,
+      "flagged": 0,
+      "flagged_by_condition": {},
+      "flagged_groups": 0,
+      "unassessed": 0
+    },
+    "source_groups": 1
+  },
+  "schema": "chipmunk.video-face-motion-transfer/1",
+  "scope": {
+    "camera": "twelve publisher camera sources, each with one unchanged and six matched ordinary delivery views",
+    "candidate_policy": "both new review cues remain experimental",
+    "localization": "flagged highest response interval with time intersection-over-union at least 0.20 with known edit",
+    "status": "exploratory positive-source reuse, separate camera point fit and holdout",
+    "swap": "one publisher-rendered synthetic crossfade source, twelve correlated face-swap views, four matched unswapped controls",
+    "unassessed": "no fully measured candidate range"
+  }
+}

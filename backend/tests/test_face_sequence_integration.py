@@ -14,7 +14,8 @@ from app.detectors.video.adapters.face_sequence import (
     SequenceInputs,
     record,
 )
-from app.detectors.video.decode import FrameTable
+from app.detectors.video.decode import DecodedFrame, FrameTable
+from app.detectors.video.frame_store import FrameStore
 from app.engine.fusion.runtime import annotate
 from app.engine.registry import get_registry
 from app.evidence.face_interval_binding import (
@@ -172,6 +173,40 @@ def test_scope_and_budget_are_checked_before_model_acquisition():
     for centers in ((), (2, 10, 18), tuple(range(65))):
         ctx = SimpleNamespace(outputs=SimpleNamespace(face_review=SequenceInputs(source_table, None, centers, ({},))))
         assert not detector.applicable(ctx).ok
+
+
+def test_face_review_adapters_omit_unverified_decoder_timestamps(monkeypatch, tmp_path):
+    from app.detectors.video.adapters import face_appearance as appearance_adapter
+    from app.detectors.video.adapters import face_sequence as sequence_adapter
+
+    source_table = table()
+    centers = (2, 10, 18, 26, 34, 42, 50)
+    verified_index = 18
+    calls = []
+
+    def decoder(_path, frame_table, indices, **_):
+        for index in indices:
+            rgb = np.full((frame_table.height, frame_table.width, 3), index, dtype=np.uint8)
+            yield DecodedFrame(index, frame_table.pts[index], rgb, pts_verified=index == verified_index)
+
+    def detect(bgr, **_):
+        calls.append(int(bgr[0, 0, 0]))
+        return []
+
+    monkeypatch.setattr(sequence_adapter, "detect_faces", detect)
+    monkeypatch.setattr(appearance_adapter, "detect_faces", detect)
+    store = FrameStore(tmp_path / "not-read-by-fixture.mkv", source_table, decoder=decoder)
+    inputs = SequenceInputs(source_table, store, centers, ({},))
+    lease = SimpleNamespace(get=lambda _key: SimpleNamespace(obj=None, revision="fixture"))
+    ctx = SimpleNamespace(outputs=SimpleNamespace(face_review=inputs), lease=lease, deadline=None)
+    for detector, expected_calls in ((FaceSequenceReviewDetector(), 1),
+                                     (appearance_adapter.FaceAppearanceReviewDetector(), 2)):
+        calls.clear()
+        result = detector.run(ctx)
+        assert result.status == "not_applicable" and result.aggregate is None
+        assert result.metrics["unverified_timestamp_frames"] == 20
+        assert "verified decoder timestamps" in result.reason
+        assert calls == [verified_index] * expected_calls
 
 
 def test_sequence_requires_opt_in_and_keeps_legacy_available(monkeypatch):

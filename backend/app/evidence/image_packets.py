@@ -300,6 +300,11 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
 
 
 def _copy_for(semantics: str, creator: str) -> tuple[str, str, str, str]:
+    if creator == "img.forensic.local_jpeg_grid":
+        return ("Local compression-grid difference", "Earlier grid difference", "relative response",
+                "This area carries a different prior JPEG block alignment from the dominant grid. "
+                "Ordinary cropping, separate saves or compositing can produce this pattern. "
+                "The finding cannot identify AI generation and carries zero weight in AI confidence.")
     if semantics == "error_level":
         return ("Compression difference", "JPEG re-save difference", "channel levels",
                 "A JPEG re-save changes this region differently. Texture, sharp edges, earlier saves and ordinary editing can all cause this pattern; it does not identify AI-generated pixels.")

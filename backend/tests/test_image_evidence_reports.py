@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import io
+from contextlib import closing
 from types import SimpleNamespace
 
 import cv2
@@ -13,13 +14,22 @@ from test_image_packets import _bytes
 from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.image import local_jpeg_grid
+from app.engine.detector import Modality, Profile, StageOutputs
+from app.engine.exhibits import ExhibitWriter
+from app.engine.manifest import load_manifest
+from app.engine.media import StoredMedia
+from app.engine.registry import DetectorRegistry, parse_policy
+from app.engine.stages import common, image
 from app.evidence import service
 from app.evidence.image_packets import packet_hash
 from app.reports import engine, image_evidence
 from app.reports.public_view import public_manifest
 from app.reports.snapshot import dump, load, snapshot_hash
 from app.reports.specimens import specimen
+from app.storage.artefacts import index_object
 from app.storage.objects import ObjectIntegrityError, ObjectNotFound, ObjectStore
+from scripts.image_local_grid_transfer import jpeg_copy
 
 
 def packet_snapshot(tmp_path, profile="standard"):
@@ -207,6 +217,78 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     (redacted_pair,) = image_evidence.view(redacted, store=store)["copy_translation"]["pairs"]
     assert all(image["uri"] is None for image in redacted_pair["images"])
     assert redacted_pair["regions"] == pair["regions"]
+
+
+def test_png_prior_grid_uses_original_crops_and_is_outside_ai_confidence(packet_fixture, monkeypatch):
+    db, store, analysis, _, _ = packet_fixture
+    registry = DetectorRegistry(load_manifest(), parse_policy("commercial"))
+    detector_id = local_jpeg_grid.DETECTOR_ID
+    assert detector_id in registry.enabled(Modality.IMAGE, Profile.QUICK)
+    detector = registry.instance(detector_id)
+    rng = np.random.default_rng(817)
+    a, b = [cv2.GaussianBlur(rng.integers(0, 256, (512, 768, 3), dtype=np.uint8), (5, 5), 1.1)
+            for _ in range(2)]
+    control = jpeg_copy(a, 67, (3, 5))
+    pixels = jpeg_copy(a, 67)
+    pixels[155:381, 239:515] = jpeg_copy(b, 59, (3, 5))[155:381, 239:515]
+    writer = ExhibitWriter(analysis.id, store, created_by=detector_id)
+
+    def run(native, image_format):
+        obj = store.put_bytes(_bytes(Image.fromarray(native), format=image_format))
+        with closing(StoredMedia(obj.sha256, "image", store)) as media:
+            header = {"format": image_format, "mode": "RGB", "width": 768, "height": 512, "n_frames": 1}
+            return obj, detector.run(SimpleNamespace(media=media, outputs=StageOutputs(probe=header), exhibits=writer))
+
+    _, jpeg = run(pixels, "JPEG")
+    assert jpeg.status == "not_applicable"
+    _, uniform = run(control, "PNG")
+    assert uniform.status == "ok" and uniform.aggregate is None and not writer.exhibits
+    source, output = run(pixels, "PNG")
+    assert output.status == "ok" and output.aggregate.raw_kind == "score"
+    row = common.detector_entry(detector.spec, output, None)
+    context = SimpleNamespace(state={"registry": registry}, outputs={"detect": {"detectors": [row]}})
+    fused = image.legacy_fusion(context)
+    assert fused["decision"]["code"] == "not_assessable"
+    assert fused["signals"][0]["effective_weight"] == 0
+    assert fused["signals"][0]["calibrated_probability"] is None
+
+    analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
+    for asset in writer.artefacts:
+        index_object(db, asset.sha256, asset.size_bytes, media_type=asset.media_type, role=asset.role,
+                     created_by=asset.created_by, analysis_id=analysis.id, artefact_id=asset.id)
+    original = specimen("image", "summary")
+    result = copy.deepcopy(original.result)
+    result["input"]["sha256"] = source.sha256
+    result.update(decision=fused["decision"], signals=fused["signals"],
+                  exhibits=[item.model_dump(mode="json") for item in writer.exhibits])
+    context.outputs.update(fuse=fused, decode={"width": 768, "height": 512})
+    context.outputs["detect"]["exhibits"] = result["exhibits"]
+    result["findings"] = image.synthesise(context)["findings"]
+    finding, = [f for f in result["findings"] if f["title"] == "Local compression-grid difference"]
+    assert finding["direction"] == "neutral" and finding["probability"] is None
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = service.persist_packet_set(db, analysis, store, result=result)
+    packet, = evidence["packets"]
+    assert packet["finding_ids"] == [finding["id"]]
+    assert packet["region"] == {"x": 248, "y": 152, "w": 256, "h": 224}
+    crop = packet["crop_region"]
+    with Image.open(io.BytesIO(store.read_bytes(packet["artifacts"]["crop"]["sha256"]))) as stored:
+        np.testing.assert_array_equal(np.asarray(stored), pixels[crop["y"]:crop["y"]+crop["h"], crop["x"]:crop["x"]+crop["w"]])
+    snapshot = original.model_copy(update={
+        "result": result, "image_evidence": evidence,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": source.sha256}),
+    })
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    manifest = public_manifest(snapshot, "weasyprint test", engine.TEMPLATE_SET)["image_evidence"]
+    assert {"packet_id": packet["id"], "role": "crop", "sha256": packet["artifacts"]["crop"]["sha256"]} in manifest["artifacts"]
+    pdf = engine.render_pdf(snapshot)
+    report = " ".join(engine.pdf_text(pdf.pdf).split())
+    assert "Local compression-grid difference" in report
+    assert "Ordinary cropping, separate saves or compositing can produce this pattern." in report
+    assert "carries zero weight in AI confidence" in report
+    assert detector_id not in report
 
 
 @pytest.mark.parametrize("profile", ["standard", "forensic", "summary", "newsroom"])

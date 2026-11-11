@@ -1345,6 +1345,28 @@ detectors:
     citation: "clean-room implementation after Lin, He, Tang, Tang. Fast, automatic and fine-grained tampered JPEG image detection via DCT coefficient analysis. Pattern Recognition 2009; Bianchi, Piva. Image forgery localization via block-grained analysis of JPEG artifacts. IEEE TIFS 2012"
     admission: {decision: pending, evidence: "J-3c1 D-44 admission on vb-1.1 fit ∪ cal (docs/v2/bench/admissions/v2.1.1-admissions.md; union-fuser admission; the partial_edit lane is admitted separately (H-6, G8 on vb-1.1 edits)): rejected; A1 pass (no model: CPU only, parity not applicable); A2 AUC 0.5000; A3a -0.2 pts; A3b fail; A4 pass; A5 not established: jpeg75 – pts (n 0), social_ig – pts (n 0); A6 pass; automated record pending human review"}
 
+  - id: img.forensic.local_jpeg_grid
+    adapter: app.detectors.image.adapters.forensic:LocalJpegGridDetector
+    version: 0.1.0
+    name: Local compression-grid inspection
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations: ["Inspection only. Two local source-disjoint panels found 10 of 48 constructed prior-grid edits in PNG and no useful localization after JPEG delivery. Missing regions do not indicate originality."]
+    source_url: "this repository: backend/app/detectors/image/local_jpeg_grid.py"
+    threat: [partial_edit]
+    training_data: "No weights. An internal review point was fixed on eight disjoint control-source groups."
+    coverage_date: "2026-11-11 local matched source panels"
+    input_constraints: ["Single-frame RGB PNG, at least 256 pixels on both axes, at most 1,048,576 pixels. A measurable earlier JPEG grid is required."]
+    contamination_sets: []
+    fp_modes: ["Ordinary compositing, cropping or re-saving an area can introduce a different prior block alignment. Prior JPEG history cannot distinguish an AI edit from other edits."]
+    citation: "Clean-room implementation. For related JPEG grid work see IPOL articles 283 and 390."
+    admission: {decision: pending, evidence: "Native PNG inspection only, zero weight in AI confidence. Two local source-disjoint matched panels, with zero flags among 120 controlled non-target views."}
+
   - id: img.forensic.copymove
     adapter: app.detectors.image.adapters.forensic:CopyMoveDetector
     version: 0.4.0
@@ -1502,7 +1524,7 @@ detectors:
 
   - id: vid.review.face_sequence
     adapter: app.detectors.video.adapters.face_sequence:FaceSequenceReviewDetector
-    version: 0.1.0
+    version: 0.1.1
     name: "Consecutive face-change review"
     modality: video
     family: face-sequence-review
@@ -1516,7 +1538,7 @@ detectors:
     threat: [face_swap]
     training_data: "No detector fitting; DINOv2 LVD-142M self-supervised features. Internal review point selected on 30 consumed source groups."
     coverage_date: "2026-11-05 local v6 comparison"
-    input_constraints: ["112 px aligned RGB, float32, batches of at most 12", "At most 64 centers; at least 7 eligible centers, 2 flanks on each side, 3 core centers", "Native triplets span at most 0.13 s; center gaps at most 0.55 s; core range 0.52-2.6 s"]
+    input_constraints: ["112 px aligned RGB, float32, batches of at most 12", "At most 64 centers; at least 7 eligible centers, 2 flanks on each side, 3 core centers", "Native triplets require verified decoder timestamps, span at most 0.13 s, and have center gaps at most 0.55 s; core range 0.52-2.6 s"]
     contamination_sets: [LVD-142M, RTFS-10K]
     fp_modes: ["Fresh genuine/control review flags remained 21/60; this is not a whole-file false-positive rate"]
     citation: "Oquab et al. DINOv2. TMLR (2024). Wu, Peng, Yu. YuNet. Machine Intelligence Research (2023). Local method and evaluation: docs/video-sequence-v6-evaluation.md."
@@ -1524,7 +1546,7 @@ detectors:
 
   - id: vid.review.face_appearance
     adapter: app.detectors.video.adapters.face_appearance:FaceAppearanceReviewDetector
-    version: 0.1.0
+    version: 0.1.1
     name: "Face appearance transition review"
     modality: video
     family: face-sequence-review
@@ -1538,7 +1560,7 @@ detectors:
     threat: [face_swap]
     training_data: "No task-specific head fitted. Upstream facial representation training provenance not fully established. Review point selected on60 consumed genuine clips before AI development."
     coverage_date: "2026-11-07 source-disjoint local v17 confirmation"
-    input_constraints: ["Native aligned112 BGR input, float32 128-value output normalized in float64", "At most64 centers; three consecutive native frames per center", "Same tracked windows as v16: two flanks per side, at least three core centers, core0.52-2.6 seconds, center gaps at most0.55 seconds"]
+    input_constraints: ["Native aligned 112 px BGR input, float32 128-value output normalized in float64", "At most 64 centers; three consecutive native frames with verified decoder timestamps per center", "Same tracked windows as v16: two flanks per side, at least three core centers, core 0.52-2.6 seconds, center gaps at most 0.55 seconds"]
     contamination_sets: [RTFS-10K, "upstream face identities unknown"]
     fp_modes: ["Fresh combined genuine/control review flags26/60, all from shared fallback; not a whole-file false-positive rate"]
     citation: "OpenCV Zoo SFace model and Apache-2.0 directory notice. Frozen method/native contracts and development/confirmation: docs/video-v16-sface-development-evaluation.md and docs/video-v17-sface-confirmation-evaluation.md."

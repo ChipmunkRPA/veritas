@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.audio-alania-roster-freeze/178",
+  "publisher_revision": "277dfc8a2322014099ff72688bcaee12480c4605",
+  "shard": "data/cc-by/train-00000.parquet",
+  "shard_bytes": 827139749,
+  "shard_sha256": "72820d81a4080d2b5ddf29eb61e1d2518275537ce9df37886df30d5feb718949",
+  "publisher_records_sha256": {
+    "revision.json": "314a2f1582bdcf511e23ed172069a61ff0f5e292b79e0e947c9e33aded2f99d2",
+    "tree-page.json": "133f2fc57632ad0cdcc5fa7b4668e4861434d2879c9d514454eaa5da9d3c1b4a",
+    "README.md": "d2c0eba51cf31c27ad6e7b49b7e0b03d665b1f944cd121afe94f91c4ec7a21ad",
+    "LICENSE.md": "9a68e1c143494bf15af7692d6adb5e43b45b91e1829ac5b62f0e5511f1b62d18"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_alania_roster_v178.py": "ec1d59f6f967f0f1d9ce84218ec1dbbc4fa295a348759aefedfff3595d5e3d25",
+    "docs/audio-alania-roster-v178-method.md": "b7cd28daf6a1f15e5e1e975a41eba25587f1e70df26aed4674cc1b11e3f8c63b"
+  },
+  "shard_rows": 2513,
+  "shard_row_groups": 26,
+  "eligible_rows": 503,
+  "eligible_voice_groups": 123,
+  "eligible_text_documents": 503,
+  "selected_rows": 24,
+  "selected_voice_groups": 24,
+  "selected_text_documents": 24,
+  "selected_render_modes": {
+    "reference": 18,
+    "reference+instruction": 6
+  },
+  "scope": "Positive-only Turkish synthetic speech transfer. Exact audio decode and scoring pending.",
+  "decoded_audio_rows": 0,
+  "model_calls": 0,
+  "private_roster_sha256": "f3a3a9f1335ad1784ffc91eb4494aaf21e0a3b16771c21e1c0237c32adec5028"
+}

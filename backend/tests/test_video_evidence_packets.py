@@ -131,6 +131,43 @@ def test_vfr_nonzero_origin_and_exact_frame_crops(video_fixture):
     assert document["audio"]["status"] == document["av"]["status"] == "absent"
 
 
+def test_native_source_replay_checks_the_aligned_face_input(video_fixture, tmp_path):
+    import zipfile
+
+    import cv2
+
+    from app.evidence import service
+    from app.reports import public_verify, verify_video_source
+
+    db, store, analysis, result, table, pixels = video_fixture
+    document = build_packet_set(db, analysis, store, result)
+    matrix = [[1.0, 0.0, -5.0], [0.0, 1.0, -6.0]]
+    index = 2
+    expected = cv2.resize(pixels[index][6:38, 5:37], (112, 112), interpolation=cv2.INTER_AREA)
+    item = {"frame_index": index, "pts": table.pts[index], "decoded_rgb_sha256": hashlib.sha256(pixels[index]).hexdigest(),
+            "alignment_side": 32, "alignment_matrix_hex": [[value.hex() for value in row] for row in matrix],
+            "aligned_rgb_sha256": hashlib.sha256(expected).hexdigest()}
+    document["packets"][0]["face_sequence"] = {"frame_inputs": [item]}
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "video"}, "source_commitment": {"sha256": analysis.sha256}}
+    source = store.path_for(analysis.sha256)
+    path = tmp_path / "evidence.zip"
+
+    def write():
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(document))
+            for sha, asset in service.asset_refs(document).items():
+                if asset["media_type"] == "image/png":
+                    archive.writestr(f"assets/{sha}.png", store.read_bytes(sha))
+
+    write()
+    with zipfile.ZipFile(path) as archive:
+        assert "aligned face inputs (1)" in verify_video_source.check(archive, bundle, source)
+    item["aligned_rgb_sha256"] = "b" * 64
+    write()
+    with zipfile.ZipFile(path) as archive, pytest.raises(ValueError, match="aligned face differs"):
+        verify_video_source.check(archive, bundle, source)
+
+
 @pytest.mark.parametrize("change", ["failed", "negative", "milliseconds", "attribution"])
 def test_no_fabricated_frame_candidates(video_fixture, change):
     db, store, analysis, result, _, _ = video_fixture

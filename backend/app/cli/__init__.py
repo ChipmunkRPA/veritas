@@ -6,7 +6,7 @@
     python -m app.cli models pin MODEL_ID [--write] [--manifest PATH]
     python -m app.cli models footprint [--manifest PATH]
     python -m app.cli models plan [--profile PROFILE] [--budget-mb MB] [--device cpu|mps|cuda] [--json]
-    python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE | --source-audio MEDIA] [--json]
+    python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE | --source-audio MEDIA | --source-video VIDEO] [--json]
     python -m app.cli compare-image REFERENCE SUBMITTED [--evidence-dir DIRECTORY]
     python -m app.cli reproduce PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--tolerance 0.001] [--json]
     python -m app.cli custody export [--format jsonl|csv] [--case-id ID] [--out PATH] [--database-url URL]
@@ -420,7 +420,8 @@ def _verify(args: argparse.Namespace) -> int:
         result = verify.verify_package(Path(args.package), public_key_pem=_public_key(args.public_key),
                                        expect_key_id=args.expect_key_id,
                                        source_image=Path(args.source_image) if args.source_image else None,
-                                       source_audio=Path(args.source_audio) if args.source_audio else None)
+                                       source_audio=Path(args.source_audio) if args.source_audio else None,
+                                       source_video=Path(args.source_video) if args.source_video else None)
     except (verify.PackageUnreadable, verify.PinInvalid, OSError) as e:
         print(f"error: {e}", file=sys.stderr)
         return verify.EXIT_ERROR
@@ -1157,6 +1158,7 @@ def build_parser() -> argparse.ArgumentParser:
     source = p_package_verify.add_mutually_exclusive_group()
     source.add_argument("--source-image", metavar="IMAGE", help="compare crops in a public image package with a local original")
     source.add_argument("--source-audio", metavar="MEDIA", help="compare clip samples and timestamps with a local audio or video original")
+    source.add_argument("--source-video", metavar="VIDEO", help="compare frames, crops and mouth patches with a local video original")
     p_package_verify.add_argument("--json", action="store_true")
     p_package_verify.set_defaults(func=_verify)
 

@@ -26,6 +26,7 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence.image_eligibility import validate_gate, validate_inspection_coverage
+from app.evidence.source_geometry import pixel_bounds
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
@@ -101,15 +102,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
 
 
 def _bounds(box: Any, width: int, height: int) -> tuple[int, int, int, int]:
-    if not isinstance(box, dict):
-        raise PacketIntegrityError("A source region is missing")
-    values = [box.get(k) for k in ("x", "y", "w", "h")]
-    if any(not isinstance(v, int | float) or isinstance(v, bool) or not math.isfinite(v) for v in values):
-        raise PacketIntegrityError("A source region has invalid coordinates")
-    x, y, w, h = values
-    if x < 0 or y < 0 or w <= 0 or h <= 0 or x + w > width + 0.001 or y + h > height + 0.001:
-        raise PacketIntegrityError("A source region is outside the original image")
-    return math.floor(x), math.floor(y), min(width, math.ceil(x + w)), min(height, math.ceil(y + h))
+    try:
+        return pixel_bounds(box, width, height)
+    except ValueError as error:
+        raise PacketIntegrityError(str(error)) from error
 
 
 def _box(rect: tuple[int, int, int, int]) -> dict[str, int]:

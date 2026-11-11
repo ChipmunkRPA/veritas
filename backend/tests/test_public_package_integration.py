@@ -32,6 +32,7 @@ from test_document_packets import packet_factory as packet_factory
 from test_image_copy_similarity import reflected_result
 from test_image_evidence_access import evidence_http as evidence_http
 from test_image_packets import packet_fixture as packet_fixture
+from test_public_evidence_package import rewrite
 from test_video_evidence_packets import vfr_source as vfr_source
 from test_video_evidence_packets import video_fixture as video_fixture
 
@@ -262,6 +263,31 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
             assert not result.ok and "differs from pixels" in result.checks[-1].detail
             original.write_bytes(b"other source bytes")
             result = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_image=original)
+            assert not result.ok and "differs from the committed original" in result.checks[-1].detail
+    if f.analysis.kind == "video":
+        original = f.store.path_for(f.analysis.sha256)
+        result = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_video=original)
+        assert result.ok, result.as_dict()
+        assert "Verified native frames (3), original images or crops (6)" in result.checks[-1].detail
+        if not include_original:
+            def change_video_crop(files):
+                document = json.loads(files["evidence.json"])
+                document["packets"][0]["frames"][0]["context_region"]["x"] += 1
+                document["sha256"] = service.packet_hash(document)
+                files["evidence.json"] = canonical_json(document)
+                video_bundle = json.loads(files["bundle.json"])
+                video_bundle["evidence"].update(set_sha256=document["sha256"],
+                                                sha256=hashlib.sha256(files["evidence.json"]).hexdigest())
+                video_bundle["reports"][0]["evidence_set_sha256"] = document["sha256"]
+                files["bundle.json"] = canonical_json(video_bundle)
+
+            altered = rewrite(built.path, tmp_path / "moved-video-crop.zip", change_video_crop, f.key)
+            assert verify.verify_package(altered, public_key_pem=f.key.public_pem()).ok
+            result = verify.verify_package(altered, public_key_pem=f.key.public_pem(), source_video=original)
+            assert not result.ok and "crop differs from pixels" in result.checks[-1].detail
+            wrong = tmp_path / "unrelated.mkv"
+            wrong.write_bytes(b"different source bytes")
+            result = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_video=wrong)
             assert not result.ok and "differs from the committed original" in result.checks[-1].detail
     # A fresh process blocks runtime imports and networking: verification consumes
     # only the ZIP and independently supplied signing key, with no live API/DB/model.

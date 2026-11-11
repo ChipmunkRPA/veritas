@@ -413,6 +413,27 @@ not rerun the detectors, recreate charts, or validate an AI authorship claim.
 python -m pytest tests/test_audio_repetition_context.py tests/test_audio_similarity_context.py tests/test_video_nested_evidence.py
 ```
 
+## Verify video frames and crops from a signed export
+
+With the local project environment, FFmpeg and FFprobe installed, supply the
+exact original video and the separately obtained instance key.
+
+```sh
+python -m app.cli verify evidence.zip --public-key instance-key.pem --source-video original.mkv
+```
+
+This checks the source hash and native presentation timestamps, then compares
+unannotated frame PNGs and crops to the decoded pixels. When present, it also
+checks the measured mouth patches, the committed aligned face inputs and the
+source clock of saved context clips. It reports how many frames and inputs
+matched. An inferred timestamp cannot verify as a measured frame. Native
+replay accepts frames up to 16 megapixels. Different FFmpeg builds can produce
+different results, particularly for older exports.
+
+Review the report's interpretation separately. The verifier does not rerun the
+detectors or recreate annotations and context-clip pixels. Use `--source-audio`
+in a separate invocation to replay the soundtrack evidence from the same video.
+
 ## Choose a review to reproduce
 
 These are bounded entry points for contributors. Automated Linux reproduction

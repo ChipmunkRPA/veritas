@@ -6,7 +6,6 @@ import hashlib
 import io
 import json
 
-import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 
@@ -85,12 +84,6 @@ def _sources(record, result, store, source, table, anchors):
     return candidates, unsupported
 
 
-def _patch(rgb, region):
-    x, y, w, h = (region[k] for k in ('x', 'y', 'w', 'h'))
-    grey = cv2.cvtColor(np.ascontiguousarray(rgb[y:y+h, x:x+w]), cv2.COLOR_RGB2GRAY)
-    return cv2.resize(grey, (32, 24), interpolation=cv2.INTER_AREA).astype('<f4')
-
-
 def _patch_key(row):
     return (row['frame_index'], *(row['mouth_region'][key] for key in ('x','y','w','h')))
 
@@ -113,7 +106,8 @@ def _decoded_inputs(path, table, selected, anchors):
             originals[frame.index] = frame.rgb
         for row in rows[frame.index]:
             key = _patch_key(row)
-            patch = patches.setdefault(key, _patch(frame.rgb,row['mouth_region']))
+            bounds = _bounds(row['mouth_region'], table.width, table.height)
+            patch = patches.setdefault(key, lipsync.source_mouth_patch(frame.rgb, bounds))
             if (hashlib.sha256(patch.tobytes()).hexdigest() != row['mouth_patch_sha256']
                     or abs(xcorr.aperture(patch)-row['mouth_value']) > .000002):
                 raise PacketIntegrityError('AV measured mouth input differs from its exact source crop')

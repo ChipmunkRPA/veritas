@@ -1,0 +1,403 @@
+{
+  "schema": "chipmunk.short-email-scope-comparison/1",
+  "source_groups": 4,
+  "source_archive_packets": 3,
+  "source_agencies": 3,
+  "original_body_word_range": [
+    35,
+    56
+  ],
+  "known_previous_texts_checked": 45247,
+  "known_previous_packets_checked": 47,
+  "analysis_methods": {
+    "original": {
+      "current": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "body": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 0
+      },
+      "sentence": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 2,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "sentence_and_body": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "union": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 2,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      }
+    },
+    "human_sentence": {
+      "current": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "body": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 0
+      },
+      "sentence": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "sentence_and_body": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      },
+      "union": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 0,
+        "useful": 0,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0
+      }
+    },
+    "qwen": {
+      "current": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 2,
+        "useful": 0,
+        "missed_location": 2,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 2
+      },
+      "body": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 2,
+        "preparation_unavailable": 2
+      },
+      "sentence": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 2,
+        "missed_file": 0,
+        "useful": 2,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 2
+      },
+      "sentence_and_body": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 2,
+        "useful": 0,
+        "missed_location": 2,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 2
+      },
+      "union": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 2,
+        "missed_file": 0,
+        "useful": 2,
+        "missed_location": 0,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 2
+      }
+    },
+    "smol2": {
+      "current": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 0,
+        "missed_file": 3,
+        "useful": 0,
+        "missed_location": 3,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 1
+      },
+      "body": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 2,
+        "preparation_unavailable": 1
+      },
+      "sentence": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 3,
+        "missed_file": 0,
+        "useful": 2,
+        "missed_location": 1,
+        "wrong_location": 1,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 1
+      },
+      "sentence_and_body": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "missed_file": 2,
+        "useful": 1,
+        "missed_location": 2,
+        "wrong_location": 0,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 1
+      },
+      "union": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 3,
+        "missed_file": 0,
+        "useful": 2,
+        "missed_location": 1,
+        "wrong_location": 1,
+        "ordinary_overlap": 0,
+        "preparation_unavailable": 1
+      }
+    }
+  },
+  "paired_vs_current": {
+    "original": {
+      "body": {
+        "0->0": 3,
+        "0->1": 1
+      },
+      "sentence": {
+        "0->1": 2,
+        "0->0": 2
+      },
+      "sentence_and_body": {
+        "0->0": 4
+      },
+      "union": {
+        "0->1": 2,
+        "0->0": 2
+      }
+    },
+    "human_sentence": {
+      "body": {
+        "0->0": 3,
+        "0->1": 1
+      },
+      "sentence": {
+        "0->1": 1,
+        "0->0": 3
+      },
+      "sentence_and_body": {
+        "0->0": 4
+      },
+      "union": {
+        "0->1": 1,
+        "0->0": 3
+      }
+    },
+    "qwen": {
+      "body": {
+        "0->0": 2
+      },
+      "sentence": {
+        "0->1": 2
+      },
+      "sentence_and_body": {
+        "0->0": 2
+      },
+      "union": {
+        "0->1": 2
+      }
+    },
+    "smol2": {
+      "body": {
+        "0->0": 2,
+        "0->1": 1
+      },
+      "sentence": {
+        "0->0": 1,
+        "0->1": 2
+      },
+      "sentence_and_body": {
+        "0->0": 2,
+        "0->1": 1
+      },
+      "union": {
+        "0->0": 1,
+        "0->1": 2
+      }
+    }
+  },
+  "false_positive_groups": {
+    "current": 0,
+    "body": 1,
+    "sentence": 2,
+    "sentence_and_body": 0,
+    "union": 2
+  },
+  "useful_positive_groups": {
+    "current": 0,
+    "sentence": 3,
+    "sentence_and_body": 1,
+    "union": 3
+  },
+  "coverage": {
+    "decoded_bodies": 13,
+    "current_windows": 44,
+    "body_inputs": 13,
+    "sentence_inputs": 25,
+    "eligible_sentence_files": 13,
+    "positive_target_sentence_eligible": 5
+  },
+  "generator_admission": {
+    "qwen": {
+      "admitted": 2,
+      "not_one_sentence": 1,
+      "copied_target": 1
+    },
+    "smol2": {
+      "admitted": 3,
+      "word_geometry": 1
+    }
+  },
+  "counts": {
+    "original": {
+      "constructed": 4,
+      "unavailable": 0
+    },
+    "human_sentence": {
+      "constructed": 4,
+      "unavailable": 0
+    },
+    "qwen": {
+      "constructed": 2,
+      "unavailable": 2
+    },
+    "smol2": {
+      "constructed": 3,
+      "unavailable": 1
+    }
+  },
+  "commitments": {
+    "study_sha256": "d4d9b22959ed710ae6006d7911089e201631b97b23c4702b49b33d263e5e68b7",
+    "inputs_sha256": "21835eeac195b6c9273bd289837a9c358f8d10d0254a8ad4a1cd9c4d110cd85c",
+    "private_readout_sha256": "663572fa106f0036e2d0bb61de488b1352a4ef969251f05a5ec1f789c953d4c8",
+    "code_sha256": "e9341527abee303df4fa626b3ef3594b3a537d834244e0dc76de76df3474bde6",
+    "response_receipts": {
+      "current": {
+        "forwards": 17,
+        "response_sha256": "7a3e993473fc99a58dcb32d315f6984cdd258b23429c6555ada5af28b5c7d89d",
+        "cases": 16,
+        "seconds": 5.246
+      },
+      "candidate": {
+        "forwards": 13,
+        "response_sha256": "1afcb89d873508587e539d8e290781f8256a945832629520ced63a8621e6662b",
+        "cases": 16,
+        "seconds": 1.103
+      }
+    }
+  },
+  "current_calibrated_email_body_replay": {
+    "results": {
+      "original": {
+        "assessed": 2,
+        "flagged": 0,
+        "inconclusive": 2,
+        "outside_calibration_scope": 2
+      },
+      "human_sentence": {
+        "assessed": 2,
+        "flagged": 0,
+        "inconclusive": 2,
+        "outside_calibration_scope": 2
+      },
+      "qwen": {
+        "assessed": 1,
+        "flagged": 0,
+        "inconclusive": 1,
+        "preparation_unavailable": 2,
+        "outside_calibration_scope": 1
+      },
+      "smol2": {
+        "assessed": 2,
+        "flagged": 1,
+        "inconclusive": 1,
+        "preparation_unavailable": 1,
+        "outside_calibration_scope": 1
+      }
+    },
+    "forwards": 7,
+    "response_sha256": "f108b772f6db56b73f217ff8f1134a45866e77993be2c7ad5bc0c64c0f7298b2",
+    "freeze_sha256": "ae1c7a5b1d8ee73f0d52d00aa667ce0d2d777d154fa85d08de0b6e875a54645e",
+    "joint_with_sentence_and_body_on_eligible_mixed_cases": {
+      "both_flagged_and_usefully_localized": 1,
+      "headline_only": 0,
+      "localized_only": 0,
+      "neither": 2
+    }
+  },
+  "method_scope": {
+    "current": "Existing local three-sentence classifier evidence, raw operating point, with full displayed scored context counted as attributed coverage.",
+    "body": "Research candidate on the exact decoded body, evaluated for whole-body flags only.",
+    "sentence": "Research candidate on each exact eligible source sentence independently, evaluated for local selection.",
+    "sentence_and_body": "Keep a raw candidate sentence selection when the same research candidate also flags the exact whole body.",
+    "union": "Combine current supported context and research candidate sentence coverage, without mixing response scales."
+  },
+  "production_decision": "No change. Sentence-only localization gained sensitivity and added false alarms. Whole-body corroboration recovered one specific location in a file already flagged by the eligible local app headline, on a small archive panel.",
+  "methods_frozen_before_generation": true,
+  "case_content_published": false
+}

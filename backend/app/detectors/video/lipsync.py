@@ -224,8 +224,13 @@ def mouth_patch(rgb: np.ndarray, frame: Mapping[str, Any]) -> np.ndarray:
     x, y, w, h = mouth_box(frame)
     x0, y0 = int(np.clip(np.floor(x), 0, width - 1)), int(np.clip(np.floor(y), 0, height - 1))
     x1, y1 = int(np.clip(np.ceil(x + w), x0 + 1, width)), int(np.clip(np.ceil(y + h), y0 + 1, height))
+    return source_mouth_patch(rgb, (x0, y0, x1, y1))
+
+
+def source_mouth_patch(rgb: np.ndarray, bounds: tuple[int, int, int, int]) -> np.ndarray:
+    x0, y0, x1, y1 = bounds
     grey = cv2.cvtColor(np.ascontiguousarray(rgb[y0:y1, x0:x1]), cv2.COLOR_RGB2GRAY)
-    return cv2.resize(grey, PATCH, interpolation=cv2.INTER_AREA).astype(np.float32)
+    return cv2.resize(grey, PATCH, interpolation=cv2.INTER_AREA).astype("<f4")
 
 
 def _pearson(a: np.ndarray, b: np.ndarray) -> float:

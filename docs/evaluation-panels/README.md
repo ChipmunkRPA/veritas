@@ -8,6 +8,24 @@ terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 
+## Cross-media checks from 11 November 2026
+
+- [Source replay guide](../independent-testing.md#verify-video-frames-and-crops-from-a-signed-export)
+  explains how to check a signed video export against the original frames, crops
+  and measured mouth patches. Audio and image replay are documented alongside it.
+- [Image segmenter transfer](../image-independent-segmenter-transfer-2026-11-11.md)
+  compares a new checkpoint with existing regional evidence on paired PNG and
+  JPEG files, including sharp and feathered edits and ordinary processing.
+- [Audio condition calibration](../audio-condition-calibration-2026-11-11.md)
+  measures how a frozen change to voice confidence transfers across distinct
+  speakers, generators and competing speech.
+- [Speech-aware video timing](../video-lip-spectral-timing-transfer-2026-11-11.md)
+  compares source-bound lip timing on held-out actors, ordinary edits and
+  off-screen speech.
+- [Short workplace email comparison](../writing-short-email-comparison-2026-11-11.md)
+  reports exact sentence locations, source-separated human controls and both
+  generator families on short email bodies.
+
 ## Latest review entry points (8 November 2026)
 
 - [Photo attribution and exact source pixels](../image-source-lineage-v20-result.md):

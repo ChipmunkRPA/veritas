@@ -1,0 +1,161 @@
+{
+  "schema": "chipmunk.audio-noise-speech-gate-result/256",
+  "status": "complete",
+  "freeze_sha256": "a9da45b9baec98d3228bda6e765eddbe7e641ffc93292f8a34208938adc5804a",
+  "matched_result_sha256": "738fb00f42781ef2afe45af72b8ab61747e7de7431000dfc6f72b78becba58e8",
+  "private_observation_journal_sha256": "deb3b1b2db5f88a031200087141318cfe3c99122daa4dab08c548eb1a23f1ba0",
+  "new_neural_calls": 44556,
+  "by_arm_and_condition": {
+    "genuine": {
+      "matched_clean": {
+        "planned": 24,
+        "prepared": 23,
+        "baseline_admitted": 22,
+        "candidate_admitted": 22,
+        "additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "prepared": 23,
+        "baseline_admitted": 13,
+        "candidate_admitted": 15,
+        "additional_admissions": 2
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "prepared": 23,
+        "baseline_admitted": 19,
+        "candidate_admitted": 20,
+        "additional_admissions": 1
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "prepared": 23,
+        "baseline_admitted": 12,
+        "candidate_admitted": 15,
+        "additional_admissions": 3
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "prepared": 23,
+        "baseline_admitted": 18,
+        "candidate_admitted": 18,
+        "additional_admissions": 0
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      }
+    },
+    "okur": {
+      "matched_clean": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "prepared": 24,
+        "baseline_admitted": 24,
+        "candidate_admitted": 24,
+        "additional_admissions": 0
+      }
+    }
+  },
+  "clean_admitted_genuine_to_noise": {
+    "baseline": {
+      "clean_baseline_admitted_groups": 22,
+      "groups_with_any_noisy_exclusion": 11,
+      "groups_with_all_four_noisy_excluded": 2,
+      "noisy_variants_excluded": 26
+    },
+    "rescue": {
+      "clean_baseline_admitted_groups": 22,
+      "groups_with_any_noisy_exclusion": 9,
+      "groups_with_all_four_noisy_excluded": 1,
+      "noisy_variants_excluded": 20
+    }
+  },
+  "unscreened_background_by_environment": {
+    "kitchen": {
+      "planned": 91,
+      "prepared": 91,
+      "baseline_admitted": 0,
+      "candidate_admitted": 0,
+      "additional_admissions": 0,
+      "recordings": 4,
+      "recordings_with_additional_admissions": 0
+    },
+    "traffic": {
+      "planned": 28,
+      "prepared": 28,
+      "baseline_admitted": 0,
+      "candidate_admitted": 0,
+      "additional_admissions": 0,
+      "recordings": 1,
+      "recordings_with_additional_admissions": 0
+    }
+  },
+  "vad_frame_forwards": 44556,
+  "authenticity_detector_calls": 0,
+  "human_background_listening_reviewed": false,
+  "serving_changed": false,
+  "resource_profile_sha256": "9f6daf30cc8e8d3b6568fa0efec9b3e936137aaf31cb534e301f24b364d2c738",
+  "worker_duration_seconds": 12.646597916027531
+}

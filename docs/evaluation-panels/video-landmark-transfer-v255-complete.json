@@ -1,0 +1,1488 @@
+{
+  "schema": "chipmunk.video-landmark-transfer-result/255",
+  "status": "complete",
+  "freeze_sha256": "0bc2ad8114de2345e491c0c9eceea2a4f6f781bad63b13761f38a11a91c8da1e",
+  "source_split": "v112_selection",
+  "source_groups": 23,
+  "variants": 138,
+  "windows": 690,
+  "by_condition": {
+    "original": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 115,
+        "geometry_measured_windows": 115,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.41962242072370515,
+            "q25": 0.4550018906206001,
+            "median": 0.4619540160928144,
+            "q75": 0.47503668323324805,
+            "maximum": 0.4872272028751201
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.4269233919126352,
+            "q25": 0.45547981652576774,
+            "median": 0.462904541736295,
+            "q75": 0.4774273563293604,
+            "maximum": 0.4903949928116737
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.43180918499532733,
+            "q25": 0.4498617453027936,
+            "median": 0.4620821115677136,
+            "q75": 0.47490548994456555,
+            "maximum": 0.4935392210800458
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.4004199478325595,
+            "q25": 0.4386924276364027,
+            "median": 0.4493410742885199,
+            "q75": 0.46245174773912967,
+            "maximum": 0.4775277118709427
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.007846118917157363,
+            "q25": -7.652057970014559e-05,
+            "median": 0.0024317466604516502,
+            "q75": 0.003872844027032918,
+            "maximum": 0.0063793920930583226
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.013157997149835192,
+            "q25": 0.022818058310341234,
+            "median": 0.027213445329696342,
+            "q75": 0.03146224296184212,
+            "maximum": 0.045506659468878
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.019499884800489118,
+            "q25": 0.022502934974780824,
+            "median": 0.028801363288901295,
+            "q75": 0.033807751083883286,
+            "maximum": 0.05718668847787546
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.01939219426345919,
+            "q25": 0.02469874758194774,
+            "median": 0.03539604769005889,
+            "q75": 0.044814412026142295,
+            "maximum": 0.07324722359093562
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 0,
+        "groups_with_geometry": 0,
+        "groups_with_geometry_for_all_windows": 0,
+        "planned_windows": 0,
+        "current_appearance_measured_windows": 0,
+        "geometry_measured_windows": 0,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": null,
+          "during_median_eye_box_width": null,
+          "after_median_eye_box_width": null,
+          "during_minimum_eye_box_width": null,
+          "during_minus_flank_eye_box_width": null,
+          "before_to_during_geometry_rms_eye_units": null,
+          "after_to_during_geometry_rms_eye_units": null,
+          "before_to_after_geometry_rms_eye_units": null
+        }
+      }
+    },
+    "swap_a": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 115,
+        "geometry_measured_windows": 115,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.42113752958172634,
+            "q25": 0.4561167912321345,
+            "median": 0.4636701861017853,
+            "q75": 0.4741204930250035,
+            "maximum": 0.4870152005618753
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.43231803556605025,
+            "q25": 0.4540038890908532,
+            "median": 0.46048790959491476,
+            "q75": 0.4715735070098891,
+            "maximum": 0.4824875738022281
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.4360906400486072,
+            "q25": 0.44881766476496826,
+            "median": 0.4573848746964858,
+            "q75": 0.4721855418051365,
+            "maximum": 0.4881190143180518
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.418653910265917,
+            "q25": 0.43401534270970077,
+            "median": 0.4443025464415626,
+            "q75": 0.4611203450103242,
+            "maximum": 0.473230122635599
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.016613431462997597,
+            "q25": -0.002799548836097121,
+            "median": -0.001119514639320307,
+            "q75": 0.003438930655967065,
+            "maximum": 0.01725924187394462
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.021940840759104036,
+            "q25": 0.027528743174985548,
+            "median": 0.029700115410530477,
+            "q75": 0.03824216403691806,
+            "maximum": 0.07291974027433482
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.017865439875167317,
+            "q25": 0.024282460759575922,
+            "median": 0.028456813519748447,
+            "q75": 0.043678604140978586,
+            "maximum": 0.06619182662459873
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.020239475756352716,
+            "q25": 0.030559458556692398,
+            "median": 0.04536471740563397,
+            "q75": 0.047915738332664604,
+            "maximum": 0.11434577110047743
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 23,
+        "current_appearance_measured_windows": 23,
+        "geometry_measured_windows": 23,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.4188962205339134,
+            "q25": 0.4480034898216353,
+            "median": 0.46147013499712985,
+            "q75": 0.4793199264662067,
+            "maximum": 0.4897817268475688
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.42927015990374034,
+            "q25": 0.45324195692330915,
+            "median": 0.45938899847558334,
+            "q75": 0.4716716434183611,
+            "maximum": 0.4833604360075879
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.43344903066397855,
+            "q25": 0.44881766476496826,
+            "median": 0.4570481858424602,
+            "q75": 0.470925685816881,
+            "maximum": 0.4937730960048577
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.418653910265917,
+            "q25": 0.43594768319371174,
+            "median": 0.44582738872087646,
+            "q75": 0.4611203450103242,
+            "maximum": 0.473230122635599
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.028345733152725427,
+            "q25": -0.004941766075265974,
+            "median": 0.002418577548166989,
+            "q75": 0.004783451260856497,
+            "maximum": 0.024259161944250374
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.008708566082389516,
+            "q25": 0.028361993681039768,
+            "median": 0.03724591956280887,
+            "q75": 0.045650474034371565,
+            "maximum": 0.07804482703290028
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.009830836643927738,
+            "q25": 0.01780775046609099,
+            "median": 0.03267540361179577,
+            "q75": 0.052759331232437034,
+            "maximum": 0.09554390542499099
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.0093350797550203,
+            "q25": 0.02533789955189382,
+            "median": 0.03408635927576317,
+            "q75": 0.04058646810011746,
+            "maximum": 0.07922069593489073
+          }
+        }
+      }
+    },
+    "swap_b": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 115,
+        "geometry_measured_windows": 115,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.42113752958172634,
+            "q25": 0.4527784445356501,
+            "median": 0.4628974807341007,
+            "q75": 0.47184879576953465,
+            "maximum": 0.48842375805909144
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.43477570281291855,
+            "q25": 0.44931955563949866,
+            "median": 0.4621553220533968,
+            "q75": 0.470907635139749,
+            "maximum": 0.4884385823960054
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.4360906400486072,
+            "q25": 0.4505512828870241,
+            "median": 0.4591718960827972,
+            "q75": 0.47114531669475557,
+            "maximum": 0.4840757486046585
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.413514897063313,
+            "q25": 0.4357295967633753,
+            "median": 0.44507130446574283,
+            "q75": 0.4594608283866594,
+            "maximum": 0.4760943180669424
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.014293820225444176,
+            "q25": -0.0026068214959420466,
+            "median": 0.000331420333474608,
+            "q75": 0.0037452745392548836,
+            "maximum": 0.008099489834895501
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.009964524151841424,
+            "q25": 0.021766395517060125,
+            "median": 0.02548571892658664,
+            "q75": 0.03187240497973506,
+            "maximum": 0.050079195312857296
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.018507792066741847,
+            "q25": 0.02699849050079217,
+            "median": 0.030602776133523305,
+            "q75": 0.037684650456133645,
+            "maximum": 0.07778586813992791
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.018082357277145276,
+            "q25": 0.029316070867679282,
+            "median": 0.03782302633209602,
+            "q75": 0.04516175326706773,
+            "maximum": 0.08765740839743771
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 23,
+        "current_appearance_measured_windows": 23,
+        "geometry_measured_windows": 23,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.4188962205339134,
+            "q25": 0.44986379705857327,
+            "median": 0.46219210234560626,
+            "q75": 0.4769558957801506,
+            "maximum": 0.4854513341099704
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.43477570281291855,
+            "q25": 0.4484091111994909,
+            "median": 0.46374018450733184,
+            "q75": 0.470907635139749,
+            "maximum": 0.4884385823960054
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.4350448096267207,
+            "q25": 0.4505512828870241,
+            "median": 0.4570481858424602,
+            "q75": 0.4701269251721099,
+            "maximum": 0.4840757486046585
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.413514897063313,
+            "q25": 0.43622847257040837,
+            "median": 0.4513352202074393,
+            "q75": 0.4608452889267549,
+            "maximum": 0.4832719659780423
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.02950271116508124,
+            "q25": -0.003472772105870381,
+            "median": 0.001986297566900719,
+            "q75": 0.005934167425773879,
+            "maximum": 0.01172822769966042
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.00965550371005617,
+            "q25": 0.02041076350761987,
+            "median": 0.025777815649623413,
+            "q75": 0.05258270667094074,
+            "maximum": 0.0906784014888806
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.007389389783512166,
+            "q25": 0.021176392115360855,
+            "median": 0.029212273702839554,
+            "q75": 0.04359026620364037,
+            "maximum": 0.09826198473533473
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.00908733793873337,
+            "q25": 0.022703448050807904,
+            "median": 0.03203176921439154,
+            "q75": 0.040331336035423104,
+            "maximum": 0.0792166097482869
+          }
+        }
+      }
+    },
+    "ordinary_light": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 23,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 115,
+        "geometry_measured_windows": 115,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.41936948375898053,
+            "q25": 0.4551030070572781,
+            "median": 0.4630350440374922,
+            "q75": 0.47281672902091504,
+            "maximum": 0.486611456204249
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.4309461404610711,
+            "q25": 0.4549085954449036,
+            "median": 0.4655953675761012,
+            "q75": 0.4742980164183195,
+            "maximum": 0.4891716314533716
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.43173895365434134,
+            "q25": 0.4505512828870241,
+            "median": 0.4620821115677136,
+            "q75": 0.4745639117602045,
+            "maximum": 0.49327547557106716
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.4024012987893644,
+            "q25": 0.43974032588655176,
+            "median": 0.4489568877893594,
+            "q75": 0.4610064972305565,
+            "maximum": 0.47730767507146554
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.00805879100700485,
+            "q25": -0.001191001181798601,
+            "median": 0.0018701603657334531,
+            "q75": 0.004489248332616075,
+            "maximum": 0.01190555038863117
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.013137873813192731,
+            "q25": 0.022672798119355415,
+            "median": 0.02657597440365496,
+            "q75": 0.03209153474355188,
+            "maximum": 0.04119422556095329
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.016241093564865052,
+            "q25": 0.02315732642456727,
+            "median": 0.029009813233863466,
+            "q75": 0.037072418619839745,
+            "maximum": 0.0569105785329689
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.01960490953806587,
+            "q25": 0.02927013142889317,
+            "median": 0.03737397717687117,
+            "q75": 0.04627451279129145,
+            "maximum": 0.07365705557305537
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 0,
+        "groups_with_geometry": 0,
+        "groups_with_geometry_for_all_windows": 0,
+        "planned_windows": 0,
+        "current_appearance_measured_windows": 0,
+        "geometry_measured_windows": 0,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": null,
+          "during_median_eye_box_width": null,
+          "after_median_eye_box_width": null,
+          "during_minimum_eye_box_width": null,
+          "during_minus_flank_eye_box_width": null,
+          "before_to_during_geometry_rms_eye_units": null,
+          "after_to_during_geometry_rms_eye_units": null,
+          "before_to_after_geometry_rms_eye_units": null
+        }
+      }
+    },
+    "ordinary_blur": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 23,
+        "groups_with_geometry_for_all_windows": 22,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 111,
+        "geometry_measured_windows": 111,
+        "unavailable_windows_by_reason": {
+          "v112_window_unassessed": 4
+        },
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.42070573790122,
+            "q25": 0.45280002780869455,
+            "median": 0.46291504694333285,
+            "q75": 0.47242186380913187,
+            "maximum": 0.48804685299521056
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.41761217519700394,
+            "q25": 0.4524204560312274,
+            "median": 0.45971606966740847,
+            "q75": 0.47506447275407027,
+            "maximum": 0.49327453810384175
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.43252667693441804,
+            "q25": 0.4512277648836627,
+            "median": 0.46141897575323687,
+            "q75": 0.4732180620664963,
+            "maximum": 0.4935392210800458
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.4027744833271799,
+            "q25": 0.4389699788368254,
+            "median": 0.44736881844731113,
+            "q75": 0.45505686255396754,
+            "maximum": 0.48247930012392176
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.010953146730419416,
+            "q25": -0.0014230181580833778,
+            "median": 0.0007877323710380191,
+            "q75": 0.0038058080692251195,
+            "maximum": 0.00857442641374273
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.014756234534524282,
+            "q25": 0.021827395152120836,
+            "median": 0.026454432625140713,
+            "q75": 0.034268282933574326,
+            "maximum": 0.04797726644603447
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.019752702535830776,
+            "q25": 0.02337160027145952,
+            "median": 0.030020591586124017,
+            "q75": 0.037325346892597144,
+            "maximum": 0.05449443568224322
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.01880421023242549,
+            "q25": 0.02462651767775732,
+            "median": 0.04010280766260288,
+            "q75": 0.052091848900653076,
+            "maximum": 0.0824487920343297
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 0,
+        "groups_with_geometry": 0,
+        "groups_with_geometry_for_all_windows": 0,
+        "planned_windows": 0,
+        "current_appearance_measured_windows": 0,
+        "geometry_measured_windows": 0,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": null,
+          "during_median_eye_box_width": null,
+          "after_median_eye_box_width": null,
+          "during_minimum_eye_box_width": null,
+          "during_minus_flank_eye_box_width": null,
+          "before_to_during_geometry_rms_eye_units": null,
+          "after_to_during_geometry_rms_eye_units": null,
+          "before_to_after_geometry_rms_eye_units": null
+        }
+      }
+    },
+    "ordinary_time_step": {
+      "all": {
+        "source_groups": 23,
+        "groups_with_geometry": 22,
+        "groups_with_geometry_for_all_windows": 22,
+        "planned_windows": 115,
+        "current_appearance_measured_windows": 110,
+        "geometry_measured_windows": 110,
+        "unavailable_windows_by_reason": {
+          "v112_window_unassessed": 5
+        },
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": {
+            "minimum": 0.42113752958172634,
+            "q25": 0.4561883989912526,
+            "median": 0.46022934899372736,
+            "q75": 0.4727466583944634,
+            "maximum": 0.48549456803939783
+          },
+          "during_median_eye_box_width": {
+            "minimum": 0.4227731474555536,
+            "q25": 0.456331704804141,
+            "median": 0.4608843871903823,
+            "q75": 0.4748933437090269,
+            "maximum": 0.4862621214205202
+          },
+          "after_median_eye_box_width": {
+            "minimum": 0.43238461783088283,
+            "q25": 0.4504541052020016,
+            "median": 0.45835516985687424,
+            "q75": 0.471845624045283,
+            "maximum": 0.4808761380950398
+          },
+          "during_minimum_eye_box_width": {
+            "minimum": 0.4004199478325595,
+            "q25": 0.4410269725100106,
+            "median": 0.45028163486997685,
+            "q75": 0.4559055037035674,
+            "maximum": 0.4760943180669424
+          },
+          "during_minus_flank_eye_box_width": {
+            "minimum": -0.008250651484342453,
+            "q25": -0.0008905699183307386,
+            "median": 0.0009147010464817806,
+            "q75": 0.0043713462833326056,
+            "maximum": 0.008237285257107985
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "minimum": 0.01658073241063816,
+            "q25": 0.022463131974580774,
+            "median": 0.028431179135342422,
+            "q75": 0.03545233444146778,
+            "maximum": 0.04720836578451216
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "minimum": 0.01683164833300313,
+            "q25": 0.022895377142747857,
+            "median": 0.027641205774009074,
+            "q75": 0.03505325290427743,
+            "maximum": 0.05574084051751819
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "minimum": 0.012907174889316779,
+            "q25": 0.026014592931082974,
+            "median": 0.03928415536237577,
+            "q75": 0.04816328536370218,
+            "maximum": 0.0715183159094611
+          }
+        }
+      },
+      "existing_flags": {
+        "source_groups": 0,
+        "groups_with_geometry": 0,
+        "groups_with_geometry_for_all_windows": 0,
+        "planned_windows": 0,
+        "current_appearance_measured_windows": 0,
+        "geometry_measured_windows": 0,
+        "unavailable_windows_by_reason": {},
+        "metrics_across_group_medians": {
+          "before_median_eye_box_width": null,
+          "during_median_eye_box_width": null,
+          "after_median_eye_box_width": null,
+          "during_minimum_eye_box_width": null,
+          "during_minus_flank_eye_box_width": null,
+          "before_to_during_geometry_rms_eye_units": null,
+          "after_to_during_geometry_rms_eye_units": null,
+          "before_to_after_geometry_rms_eye_units": null
+        }
+      }
+    }
+  },
+  "paired_at_existing_swap_flags": {
+    "swap_a": {
+      "original": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 23,
+        "matched_source_groups": 23,
+        "missing_endpoints": {},
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 6,
+            "zero": 4,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.0056514622978824924,
+              "q25": -0.00010519823850654864,
+              "median": 0.0009851025192257334,
+              "q75": 0.002140981552580218,
+              "maximum": 0.0063399025863355996
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.028711592160366617,
+              "q25": -0.012578644870083894,
+              "median": -0.002177026016831285,
+              "q75": 0.005787211949806054,
+              "maximum": 0.022105077460916944
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 6,
+            "zero": 7,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.009987098512341086,
+              "q25": -6.247429785213865e-05,
+              "median": 0.0,
+              "q75": 0.0024559198948847782,
+              "maximum": 0.009017869593567485
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.03491129779631219,
+              "q25": -0.007126201460006004,
+              "median": -0.0035266169138409853,
+              "q75": 0.005408656597725853,
+              "maximum": 0.022605368075168553
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.030011523610261603,
+              "q25": -0.012887260003996093,
+              "median": -0.004931069680427336,
+              "q75": 0.0067226259829848145,
+              "maximum": 0.018245046479968052
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 14,
+            "distribution": {
+              "minimum": -0.02186072456170325,
+              "q25": -0.004022828310628595,
+              "median": 0.0026305593257674037,
+              "q75": 0.017911972924265572,
+              "maximum": 0.045908285337596146
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 7,
+            "zero": 0,
+            "positive": 16,
+            "distribution": {
+              "minimum": -0.018501176181775776,
+              "q25": -0.0040043445464078035,
+              "median": 0.0022915795201994098,
+              "q75": 0.014202599994818564,
+              "maximum": 0.05806595126925644
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.015338649196681133,
+              "q25": -0.003413386177308922,
+              "median": -0.00019737259626596837,
+              "q75": 0.002052222430315137,
+              "maximum": 0.02634435014706063
+            }
+          }
+        }
+      },
+      "ordinary_light": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 23,
+        "matched_source_groups": 23,
+        "missing_endpoints": {},
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 7,
+            "zero": 3,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.008092854486720813,
+              "q25": -0.0009913884267170325,
+              "median": 0.00034539036125136313,
+              "q75": 0.0025972558089692177,
+              "maximum": 0.00553016090402908
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.022283608774605668,
+              "q25": -0.009237304840398836,
+              "median": -0.002195799785229824,
+              "q75": 0.005244508862846636,
+              "maximum": 0.022245540142888875
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 5,
+            "zero": 7,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.010968420299643622,
+              "q25": 0.0,
+              "median": 0.0,
+              "q75": 0.002163004528251661,
+              "maximum": 0.010747960960246605
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.030081246948366447,
+              "q25": -0.01048062954731352,
+              "median": -0.0034992957735530683,
+              "q75": 0.007885866868187291,
+              "maximum": 0.022092959623325248
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.020130742318452632,
+              "q25": -0.010872962504780925,
+              "median": -0.004748958942279113,
+              "q75": 0.003176237253337655,
+              "maximum": 0.018385509161939984
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 14,
+            "distribution": {
+              "minimum": -0.02195057134489682,
+              "q25": -0.004056699815135539,
+              "median": 0.0029769916043140554,
+              "q75": 0.010280464752547168,
+              "maximum": 0.04634376587067986
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 8,
+            "zero": 0,
+            "positive": 15,
+            "distribution": {
+              "minimum": -0.02101511939456273,
+              "q25": -0.005977050766995309,
+              "median": 0.0022000787391700805,
+              "q75": 0.013160838668797468,
+              "maximum": 0.056455797625384385
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.01933014469237951,
+              "q25": -0.006478546768402246,
+              "median": -0.0027083742143054444,
+              "q75": 0.0013623208336384258,
+              "maximum": 0.02557267569502244
+            }
+          }
+        }
+      },
+      "ordinary_blur": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 22,
+        "matched_source_groups": 22,
+        "missing_endpoints": {
+          "control_geometry_unavailable": 1
+        },
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 8,
+            "zero": 4,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.0047356753688758135,
+              "q25": -0.0013062916363462962,
+              "median": 0.0,
+              "q75": 0.003035997855658182,
+              "maximum": 0.0070666188267137775
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.023327820613445294,
+              "q25": -0.010460232262978264,
+              "median": -0.0031588384736706276,
+              "q75": 0.007911358165610227,
+              "maximum": 0.02112118557051912
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 6,
+            "zero": 8,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.010873838049808737,
+              "q25": -0.0012331834633244332,
+              "median": 0.0,
+              "q75": 0.0018912674676658109,
+              "maximum": 0.010050694059457355
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.01985149199446079,
+              "q25": -0.009727488761921116,
+              "median": -0.002800944170408326,
+              "q75": 0.00888590952095944,
+              "maximum": 0.022178442408634313
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.021295055540608288,
+              "q25": -0.010409328624022218,
+              "median": -0.004189890227994597,
+              "q75": 0.009340039033228012,
+              "maximum": 0.021425076445459157
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.021692454572592265,
+              "q25": -0.005212429859714263,
+              "median": 0.006670290483403892,
+              "q75": 0.012026222326777653,
+              "maximum": 0.04829475406169732
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 6,
+            "zero": 0,
+            "positive": 16,
+            "distribution": {
+              "minimum": -0.01057853241796302,
+              "q25": -0.00035305788596038355,
+              "median": 0.003987106166687922,
+              "q75": 0.010530367865726201,
+              "maximum": 0.041049469742747764
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.012910850075249655,
+              "q25": -0.0033860582159729756,
+              "median": -0.000635459915954031,
+              "q75": 0.0025613511691042774,
+              "maximum": 0.01820908824345398
+            }
+          }
+        }
+      },
+      "ordinary_time_step": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 22,
+        "matched_source_groups": 22,
+        "missing_endpoints": {
+          "control_geometry_unavailable": 1
+        },
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 8,
+            "zero": 3,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.006837307398840253,
+              "q25": -0.0018686640115583159,
+              "median": 0.0001352348380653512,
+              "q75": 0.0021093856456620153,
+              "maximum": 0.0070666188267137775
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.02579904619559681,
+              "q25": -0.007795523798106357,
+              "median": -0.0014137014727707842,
+              "q75": 0.0038097166495228846,
+              "maximum": 0.022663863845592214
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 7,
+            "zero": 9,
+            "positive": 6,
+            "distribution": {
+              "minimum": -0.011353310637556291,
+              "q25": -0.0011711327774874825,
+              "median": 0.0,
+              "q75": 0.0010224109137807191,
+              "maximum": 0.012896957909817874
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.026682509857987702,
+              "q25": -0.010512060931236425,
+              "median": -0.0015032155463060581,
+              "q75": 0.00885802088152303,
+              "maximum": 0.01925281849585625
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 11,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.026920674788402543,
+              "q25": -0.009643948127412788,
+              "median": -0.002132546470623997,
+              "q75": 0.004823487880770819,
+              "maximum": 0.02518568138109295
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 7,
+            "zero": 0,
+            "positive": 15,
+            "distribution": {
+              "minimum": -0.046147253874691124,
+              "q25": -0.0020160049738657555,
+              "median": 0.0031577965218248308,
+              "q75": 0.0209842003021543,
+              "maximum": 0.04570023479675939
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 10,
+            "zero": 0,
+            "positive": 12,
+            "distribution": {
+              "minimum": -0.048118891126697164,
+              "q25": -0.007908860340955072,
+              "median": 0.0009917176701873202,
+              "q75": 0.008674089141001259,
+              "maximum": 0.0598625779066306
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.01490902474336444,
+              "q25": -0.005312272927502546,
+              "median": -0.00040703933884627536,
+              "q75": 0.002495990011600944,
+              "maximum": 0.026264836410792608
+            }
+          }
+        }
+      }
+    },
+    "swap_b": {
+      "original": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 23,
+        "matched_source_groups": 23,
+        "missing_endpoints": {},
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 11,
+            "zero": 2,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.006059076477069603,
+              "q25": -0.0018510039692319624,
+              "median": 0.0,
+              "q75": 0.0018179253564101494,
+              "maximum": 0.0038466627306477097
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.03215663304556765,
+              "q25": -0.008011047343477878,
+              "median": -0.003876291941994403,
+              "q75": 0.003168042207914945,
+              "maximum": 0.015986521639260176
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 6,
+            "zero": 9,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.00839131954959893,
+              "q25": -6.247429785213865e-05,
+              "median": 0.0,
+              "q75": 0.0011301866811401495,
+              "maximum": 0.007508179286108252
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 10,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.03680887083796053,
+              "q25": -0.008816046998296329,
+              "median": 0.0033934833883134674,
+              "q75": 0.008913977861391253,
+              "maximum": 0.01929097079868053
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.031334510736684695,
+              "q25": -0.007706930122111627,
+              "median": -0.003173194918489497,
+              "q75": 0.003245202886711568,
+              "maximum": 0.015806072697619356
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 14,
+            "distribution": {
+              "minimum": -0.02178961847056739,
+              "q25": -0.004785232338262483,
+              "median": 0.0042135405320237185,
+              "q75": 0.014550371379219447,
+              "maximum": 0.039826687602669684
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 10,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.03352676303558699,
+              "q25": -0.005436532820474518,
+              "median": 0.0016759893892730852,
+              "q75": 0.015714633919684744,
+              "maximum": 0.03051971837208699
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.014640552964440202,
+              "q25": -0.00445702891187383,
+              "median": -0.0006396271170879611,
+              "q75": 0.003380185907001362,
+              "maximum": 0.017509001483485616
+            }
+          }
+        }
+      },
+      "ordinary_light": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 23,
+        "matched_source_groups": 23,
+        "missing_endpoints": {},
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 9,
+            "zero": 3,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.007862645299198112,
+              "q25": -0.002211831438175993,
+              "median": 0.0,
+              "q75": 0.0015231967708152772,
+              "maximum": 0.0038466627306477097
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.030758446536815642,
+              "q25": -0.008469482448850985,
+              "median": -0.004840457721229485,
+              "q75": 0.0034446361508472245,
+              "maximum": 0.015072835729712963
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 5,
+            "zero": 9,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.009189524744192268,
+              "q25": 0.0,
+              "median": 0.0,
+              "q75": 0.0010591201622739133,
+              "maximum": 0.0076779321037276915
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 14,
+            "distribution": {
+              "minimum": -0.0359137126248848,
+              "q25": -0.008206250645320629,
+              "median": 0.0026045699448628,
+              "q75": 0.00795717447596131,
+              "maximum": 0.01910814515001341
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 15,
+            "zero": 0,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.030758446536815642,
+              "q25": -0.00844330172119695,
+              "median": -0.003586672746360653,
+              "q75": 0.0031663757114642477,
+              "maximum": 0.015881101434226608
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 10,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.019318799691045205,
+              "q25": -0.00545838131804922,
+              "median": 0.002763796176955012,
+              "q75": 0.011559984737571237,
+              "maximum": 0.03640174569617848
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.02297533451203822,
+              "q25": -0.006306235846863204,
+              "median": -0.0007237903922688166,
+              "q75": 0.013275362770472834,
+              "maximum": 0.02944955523758803
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.01441473397397193,
+              "q25": -0.0061792985440742,
+              "median": -0.0024657657628434047,
+              "q75": 0.0029695011149024793,
+              "maximum": 0.011559670220442103
+            }
+          }
+        }
+      },
+      "ordinary_blur": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 22,
+        "matched_source_groups": 22,
+        "missing_endpoints": {
+          "control_geometry_unavailable": 1
+        },
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 8,
+            "zero": 5,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.00605646138196414,
+              "q25": -0.0011359287662654344,
+              "median": 0.0,
+              "q75": 0.0007841928513376978,
+              "maximum": 0.0038466627306477097
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 10,
+            "zero": 0,
+            "positive": 12,
+            "distribution": {
+              "minimum": -0.030498140851003164,
+              "q25": -0.006589681935961961,
+              "median": 0.0011982488655267742,
+              "q75": 0.0043192052856432656,
+              "maximum": 0.020574591776981677
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 5,
+            "zero": 8,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.004870453795324747,
+              "q25": 0.0,
+              "median": 0.0,
+              "q75": 0.0008890567381898418,
+              "maximum": 0.0076779321037276915
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 8,
+            "zero": 0,
+            "positive": 14,
+            "distribution": {
+              "minimum": -0.024160349817802684,
+              "q25": -0.004193329356441178,
+              "median": 0.003148853025940729,
+              "q75": 0.008409489352409219,
+              "maximum": 0.026723944102312103
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 11,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.02967601854212021,
+              "q25": -0.007044209785763339,
+              "median": 0.000542652750678746,
+              "q75": 0.004180053840468115,
+              "maximum": 0.018504138943118253
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.022121881282924208,
+              "q25": -0.011287560737275007,
+              "median": 0.005682205058617475,
+              "q75": 0.013499661075996483,
+              "maximum": 0.03418276297364543
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.03458173199981206,
+              "q25": -0.008749761328636658,
+              "median": 0.0032144649836864,
+              "q75": 0.011402615314087663,
+              "maximum": 0.03493638721296473
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 16,
+            "zero": 0,
+            "positive": 6,
+            "distribution": {
+              "minimum": -0.012258733676590257,
+              "q25": -0.004829779565285157,
+              "median": -0.0020954241936196336,
+              "q75": 0.00041374252514803523,
+              "maximum": 0.01782746327387645
+            }
+          }
+        }
+      },
+      "ordinary_time_step": {
+        "existing_flag_windows_planned_for_pairing": 23,
+        "matched_geometry_windows": 22,
+        "matched_source_groups": 22,
+        "missing_endpoints": {
+          "control_geometry_unavailable": 1
+        },
+        "swap_minus_control": {
+          "before_median_eye_box_width": {
+            "negative": 11,
+            "zero": 3,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.007686806372630528,
+              "q25": -0.0019811464076555513,
+              "median": -0.00018194796182727235,
+              "q75": 0.000979071768677356,
+              "maximum": 0.0038466627306477097
+            }
+          },
+          "during_median_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.03215663304556765,
+              "q25": -0.007005575047075191,
+              "median": -0.002958941273018989,
+              "q75": 0.004115079547897207,
+              "maximum": 0.015450247749419443
+            }
+          },
+          "after_median_eye_box_width": {
+            "negative": 8,
+            "zero": 10,
+            "positive": 4,
+            "distribution": {
+              "minimum": -0.009757531674814135,
+              "q25": -0.0011711327774874825,
+              "median": 0.0,
+              "q75": 0.0,
+              "maximum": 0.0076779321037276915
+            }
+          },
+          "during_minimum_eye_box_width": {
+            "negative": 11,
+            "zero": 0,
+            "positive": 11,
+            "distribution": {
+              "minimum": -0.021841720411956922,
+              "q25": -0.00509412416232137,
+              "median": -1.3791454767903e-05,
+              "q75": 0.007743230166260634,
+              "maximum": 0.018386657356198932
+            }
+          },
+          "during_minus_flank_eye_box_width": {
+            "negative": 12,
+            "zero": 0,
+            "positive": 10,
+            "distribution": {
+              "minimum": -0.03184634122527702,
+              "q25": -0.007676203423408273,
+              "median": -0.003303809215078335,
+              "q75": 0.005623122972879105,
+              "maximum": 0.015632195711246688
+            }
+          },
+          "before_to_during_geometry_rms_eye_units": {
+            "negative": 9,
+            "zero": 0,
+            "positive": 13,
+            "distribution": {
+              "minimum": -0.01626440755085612,
+              "q25": -0.006094790745701016,
+              "median": 0.00648436528453456,
+              "q75": 0.01651936253542579,
+              "maximum": 0.04001650627327768
+            }
+          },
+          "after_to_during_geometry_rms_eye_units": {
+            "negative": 14,
+            "zero": 0,
+            "positive": 8,
+            "distribution": {
+              "minimum": -0.03653310078208996,
+              "q25": -0.00841566580588768,
+              "median": -0.003485949982792771,
+              "q75": 0.00603434569126398,
+              "maximum": 0.027627836866690302
+            }
+          },
+          "before_to_after_geometry_rms_eye_units": {
+            "negative": 13,
+            "zero": 0,
+            "positive": 9,
+            "distribution": {
+              "minimum": -0.01421092851112351,
+              "q25": -0.006454242051050646,
+              "median": -0.0011759663686262724,
+              "q75": 0.003075388913585499,
+              "maximum": 0.01405155545445478
+            }
+          }
+        }
+      }
+    }
+  },
+  "new_neural_calls": 0,
+  "reserved_confirmation_groups_accessed": 0,
+  "serving_change": false
+}

@@ -1,0 +1,9 @@
+# Local landmark support comparison on constructed swaps
+
+The saved-packet replay verified 138 clips from 23 selection groups and measured geometry on 681 of 690 scheduled windows. Four blur windows and five time-step windows remained unassessed under the original appearance eligibility checks. The replay decoded no new media and made zero model calls. [Frozen method](video-landmark-transfer-v255-method.md) · [Exact aggregate](evaluation-panels/video-landmark-transfer-v255-complete.json)
+
+All 46 previously flagged swap windows had measurable landmark support. Across these flagged windows, the median during-phase eye separation ranged from 42.9% to 48.8% of face-box width. The smallest individual sampled ratio in any flagged swap window was 41.4%. Median during-minus-flank spacing was +0.24 percentage points in the first swap condition and +0.20 points in the second.
+
+The same-window comparison against unchanged footage, lighting, blur and time-step controls measured both sides in 180 of 184 pairs. The four missing pairs came from blur and time-step controls. At the same scheduled windows, signed eye-spacing changes and eye-normalized facial shape differences varied in both directions across sources. The controls had zero pre-existing flags, so these saved packets can test whether known swap flags have usable landmark support but cannot measure a reduction in false flags.
+
+The severe eye-spacing collapse observed in some genuine webcam false flags remains a candidate for identifying unreliable face evidence. A production test needs fresh real swaps and webcam controls, including cases with weak landmark support, before using it to suppress or replace an interval. This split contains constructed inserts and repeated variants from the same 23 sources. The 24 confirmation groups were outside the replay. [Webcam controls](video-vcd2-remaining-webcams-v253-result.md) · [Historical selection coverage](video-native-appearance-v112-result.md)

@@ -1,0 +1,396 @@
+{
+  "code_sha256": {
+    "video_face_confound_v222.py": "ac8aa6af0f5b02b320fd891808fe075f06dd242dff3ff2efa53ffa832d286ee7",
+    "video_landmark_support.py": "c55a93688d30852fefd0b1a5c802b5fbcff62203ac02e066e7569c4ded76e945",
+    "video_saved_landmark_support_v254.py": "d5ce39968102585139b100786daadb384ffb19aa00f3e90f54ef4cd848543c9d"
+  },
+  "cohorts": {
+    "genuine_webcam_renders": {
+      "other_retained": {
+        "during_minus_flank_eye_box_width_range": [
+          -0.352111,
+          0.394813
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.211448,
+            5.943877
+          ],
+          "before_to_after": [
+            0.030184,
+            9.95224
+          ],
+          "before_to_during": [
+            0.210362,
+            6.673499
+          ]
+        },
+        "measured": 66,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.035917,
+              0.476271
+            ],
+            "eye_box_width_minimum_range": [
+              0.006804,
+              0.47273
+            ],
+            "frame_observations": 396,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.050646,
+              0.47722
+            ],
+            "eye_box_width_minimum_range": [
+              0.006804,
+              0.463233
+            ],
+            "frame_observations": 396,
+            "out_of_box_observations": 32
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.100396,
+              0.464879
+            ],
+            "eye_box_width_minimum_range": [
+              0.006804,
+              0.404802
+            ],
+            "frame_observations": 1548,
+            "out_of_box_observations": 197
+          }
+        },
+        "unavailable": {},
+        "windows": 66
+      },
+      "renders": 6,
+      "selected": {
+        "during_minus_flank_eye_box_width_range": [
+          -0.217099,
+          -0.198003
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.420936,
+            5.500308
+          ],
+          "before_to_after": [
+            0.059369,
+            0.162076
+          ],
+          "before_to_during": [
+            0.407857,
+            5.539483
+          ]
+        },
+        "measured": 6,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.301688,
+              0.476271
+            ],
+            "eye_box_width_minimum_range": [
+              0.175015,
+              0.47273
+            ],
+            "frame_observations": 36,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.297138,
+              0.47722
+            ],
+            "eye_box_width_minimum_range": [
+              0.146818,
+              0.457647
+            ],
+            "frame_observations": 36,
+            "out_of_box_observations": 0
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.084169,
+              0.278743
+            ],
+            "eye_box_width_minimum_range": [
+              0.006804,
+              0.196831
+            ],
+            "frame_observations": 159,
+            "out_of_box_observations": 27
+          }
+        },
+        "unavailable": {},
+        "windows": 6
+      },
+      "source_groups": 2
+    },
+    "known_swap_renders": {
+      "other_retained": {
+        "during_minus_flank_eye_box_width_range": [
+          -0.013697,
+          0.020083
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.006848,
+            0.094258
+          ],
+          "before_to_after": [
+            0.01558,
+            0.084701
+          ],
+          "before_to_during": [
+            0.008305,
+            0.076778
+          ]
+        },
+        "measured": 44,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.436405,
+              0.479071
+            ],
+            "eye_box_width_minimum_range": [
+              0.425256,
+              0.4694
+            ],
+            "frame_observations": 264,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.446701,
+              0.482891
+            ],
+            "eye_box_width_minimum_range": [
+              0.425256,
+              0.477403
+            ],
+            "frame_observations": 264,
+            "out_of_box_observations": 0
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.445121,
+              0.477574
+            ],
+            "eye_box_width_minimum_range": [
+              0.425256,
+              0.454056
+            ],
+            "frame_observations": 699,
+            "out_of_box_observations": 0
+          }
+        },
+        "unavailable": {},
+        "windows": 44
+      },
+      "renders": 4,
+      "selected": {
+        "during_minus_flank_eye_box_width_range": [
+          0.010951,
+          0.013941
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.020986,
+            0.026427
+          ],
+          "before_to_after": [
+            0.013851,
+            0.013921
+          ],
+          "before_to_during": [
+            0.031709,
+            0.036687
+          ]
+        },
+        "measured": 4,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.463675,
+              0.465269
+            ],
+            "eye_box_width_minimum_range": [
+              0.425256,
+              0.428192
+            ],
+            "frame_observations": 24,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.436405,
+              0.436405
+            ],
+            "eye_box_width_minimum_range": [
+              0.432053,
+              0.432053
+            ],
+            "frame_observations": 24,
+            "out_of_box_observations": 0
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.461788,
+              0.463981
+            ],
+            "eye_box_width_minimum_range": [
+              0.44176,
+              0.445939
+            ],
+            "frame_observations": 132,
+            "out_of_box_observations": 0
+          }
+        },
+        "unavailable": {},
+        "windows": 4
+      },
+      "source_groups": 1
+    },
+    "matched_no_swap_renders": {
+      "other_retained": {
+        "during_minus_flank_eye_box_width_range": [
+          -0.020519,
+          0.03263
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.016293,
+            0.081486
+          ],
+          "before_to_after": [
+            0.010295,
+            0.09366
+          ],
+          "before_to_during": [
+            0.005899,
+            0.0519
+          ]
+        },
+        "measured": 22,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.440477,
+              0.473452
+            ],
+            "eye_box_width_minimum_range": [
+              0.435294,
+              0.473098
+            ],
+            "frame_observations": 132,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.4412,
+              0.484577
+            ],
+            "eye_box_width_minimum_range": [
+              0.432053,
+              0.4663
+            ],
+            "frame_observations": 132,
+            "out_of_box_observations": 0
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.449226,
+              0.477574
+            ],
+            "eye_box_width_minimum_range": [
+              0.432053,
+              0.465197
+            ],
+            "frame_observations": 519,
+            "out_of_box_observations": 0
+          }
+        },
+        "unavailable": {},
+        "windows": 22
+      },
+      "renders": 2,
+      "selected": {
+        "during_minus_flank_eye_box_width_range": [
+          0.024122,
+          0.024337
+        ],
+        "geometry_rms_eye_units_ranges": {
+          "after_to_during": [
+            0.045341,
+            0.045341
+          ],
+          "before_to_after": [
+            0.020689,
+            0.022117
+          ],
+          "before_to_during": [
+            0.047877,
+            0.052759
+          ]
+        },
+        "measured": 2,
+        "roles": {
+          "after": {
+            "eye_box_width_median_range": [
+              0.457452,
+              0.457452
+            ],
+            "eye_box_width_minimum_range": [
+              0.435294,
+              0.435294
+            ],
+            "frame_observations": 12,
+            "out_of_box_observations": 0
+          },
+          "before": {
+            "eye_box_width_median_range": [
+              0.448821,
+              0.449251
+            ],
+            "eye_box_width_minimum_range": [
+              0.440643,
+              0.44215
+            ],
+            "frame_observations": 12,
+            "out_of_box_observations": 0
+          },
+          "during": {
+            "eye_box_width_median_range": [
+              0.477474,
+              0.477474
+            ],
+            "eye_box_width_minimum_range": [
+              0.454056,
+              0.454056
+            ],
+            "frame_observations": 36,
+            "out_of_box_observations": 0
+          }
+        },
+        "unavailable": {},
+        "windows": 2
+      },
+      "source_groups": 1
+    }
+  },
+  "decoded_frames": 0,
+  "independent_known_swap_interventions": 1,
+  "model_calls": 0,
+  "schema": "chipmunk.video-saved-landmark-support/254",
+  "serving_changed": false,
+  "status": "complete",
+  "v190_result_sha256": "838fdc56385e1ae1cec710fe849f8314584f5fa1aaea2450695a86038d9863a7",
+  "v194_database_freeze_sha256": "345369984c9a1c8a91b7e0f36559f5320ca70eda458405ff381600f0fec794b7",
+  "v253_result_sha256": "d8410ea6b3b9d7775b3a689125290a42eb22bd3ffc7b9a2aee5d5ba7303ea7fe"
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.audio-noise-speech-gate-freeze/256",
+  "matched_result_sha256": "738fb00f42781ef2afe45af72b8ab61747e7de7431000dfc6f72b78becba58e8",
+  "prior_background_grid_freeze_sha256": "0a36ae61d0bd62e9612261f3177a85ffad8c2190ed1066ff90d78cabc07f28c5",
+  "code_sha256": {
+    "backend/scripts/audio_noise_speech_gate_v256.py": "90d0c303bb8e35c0249d8208403dda73ba9a706ec2ba719931319b056b86905b",
+    "backend/tests/test_audio_noise_speech_gate_v256.py": "b5f071f19d8ad38b036b357883a3fed519508f3c6f5d60ced492bb83bfef4621",
+    "docs/audio-noise-speech-gate-v256-method.md": "66ed48fa6c03439e4257c4ed070bdb612da7eb45c5cfde762544b964691a417a",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/video/adapters/audio.py": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/engine/profiles.py": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3",
+    "backend/scripts/audio_matched_background_score_v250.py": "eb9ef60a5dbec55cc224cc08cee40371f16b820a6069b93e71e94390d16842e7",
+    "backend/scripts/audio_commons_slice_screen_v247.py": "41497f01ccc272d168153894a24a397c0c735839a7893359f41e867f99b4fa83",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "vad_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+  "runtime_versions": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "matched_planned": 360,
+  "matched_prepared": 355,
+  "unscreened_controls_by_environment": {
+    "kitchen": 91,
+    "traffic": 28
+  },
+  "unscreened_recordings_by_environment": {
+    "kitchen": 4,
+    "traffic": 1
+  },
+  "sample_rate": 16000,
+  "samples_per_window": 48000,
+  "vad_frame_samples": 512,
+  "rescue_single_span_minimum_samples": 16000,
+  "authenticity_detector_calls_permitted": false,
+  "serving_change_permitted": false,
+  "private_plan_sha256": "e580ca5ad49c8d6eb099c42394354b67c92ec747948f8dd23ec85a7ea2d4b5c1"
+}

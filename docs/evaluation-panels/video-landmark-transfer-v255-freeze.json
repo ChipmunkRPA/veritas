@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.video-landmark-transfer-freeze/255",
+  "source_receipts": {
+    "docs/evaluation-panels/video-appearance-corrected-freeze-v112.json": "30d2ae73d9edf48e1f30a7b5e7f90b965fa0190d7f190098b9559f9647e46489",
+    "docs/evaluation-panels/video-appearance-corrected-readout-freeze-v112.json": "1f2750079e22dbf43548879f149f34520bd5cf0e85380b0b1d01a3423a0e2ac4",
+    "docs/evaluation-panels/video-appearance-corrected-v112/execution-summary-v112.json": "f7319c36332b07cfaefb077822a945d530419fe5175467e4e032e32dfea15245",
+    "docs/evaluation-panels/video-appearance-corrected-v112/video-appearance-selection-result-v111.json": "c3c9a90917906297578697e728877bbf2ebb6181f9daacf84201873b993dd1bb"
+  },
+  "code_sha256": {
+    "backend/scripts/video_landmark_transfer_v255.py": "45fa87db366717a2c2752783ad0a9c7c6c198096090673ae8973447286d73bbd",
+    "backend/scripts/video_landmark_support.py": "c55a93688d30852fefd0b1a5c802b5fbcff62203ac02e066e7569c4ded76e945",
+    "backend/scripts/video_face_confound_v222.py": "ac8aa6af0f5b02b320fd891808fe075f06dd242dff3ff2efa53ffa832d286ee7",
+    "backend/scripts/video_appearance_readout_v111.py": "a775e686a8f76e86b35406d1cb85c4d48929958a180fa857109d313773c030c8",
+    "backend/tests/test_video_landmark_transfer_v255.py": "84779ce2b503e4cb38188e12054f250f8861c479319ad4f9bd89c69aea2028e8",
+    "docs/video-landmark-transfer-v255-method.md": "75ac91cb5c2f988acda3c4d0f5ed04a030a65eedc8b9aae718c4fb9f5b0baeec"
+  },
+  "source_split": "v112_selection",
+  "planned_source_groups": 23,
+  "planned_variants": 138,
+  "planned_windows": 690,
+  "metrics": [
+    "before_median_eye_box_width",
+    "during_median_eye_box_width",
+    "after_median_eye_box_width",
+    "during_minimum_eye_box_width",
+    "during_minus_flank_eye_box_width",
+    "before_to_during_geometry_rms_eye_units",
+    "after_to_during_geometry_rms_eye_units",
+    "before_to_after_geometry_rms_eye_units"
+  ],
+  "paired_comparison": "existing_raw_swap_flag_minus_same_group_and_window_control",
+  "new_threshold_or_fit_permitted": false,
+  "new_neural_calls_permitted": false,
+  "reserved_confirmation_access_permitted": false
+}

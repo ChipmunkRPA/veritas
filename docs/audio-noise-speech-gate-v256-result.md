@@ -1,0 +1,7 @@
+# A speech-span fallback recovered six genuine noisy clips
+
+The local replay reproduced every recorded speech admission decision for the 355 prepared clips. A fixed fallback admitted a previously skipped three-second clip when the existing activity check found one span of at least one second. Among 92 prepared genuine noisy variants, coverage rose from **62 to 68**. The six recoveries were two at kitchen 0 dB, one at kitchen +5 dB, and three at traffic 0 dB. All 240 synthetic variants were already admitted. [Frozen method](audio-noise-speech-gate-v256-method.md) · [Exact aggregate](evaluation-panels/audio-noise-speech-gate-complete-v256.json)
+
+Of the 22 genuine speakers who passed on clean audio, nine still lost coverage in at least one noisy condition with the fallback, down from 11. Neither rule admitted any of the 119 previously unscreened background cuts. Those cuts came from four kitchen recordings and one traffic recording already represented in the research collection, and their speech content has not been checked by listening.
+
+The worker finished 44,556 speech-activity calls in 13 seconds with zero authenticity classifier calls. This result measures input coverage. The six recovered clips still need authenticity scoring, and the fallback needs testing against separate background recordings before a serving change. [Original scoring comparison](audio-matched-background-score-v250-result.md)

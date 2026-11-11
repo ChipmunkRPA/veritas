@@ -1,0 +1,675 @@
+{
+  "schema": "chipmunk.short-context-focus-publisher-transfer-public/1",
+  "primary": {
+    "schema": "chipmunk.short-context-focus-publisher-transfer/1",
+    "source_groups": 5,
+    "known_prior_texts": 45294,
+    "original_word_range": [
+      56,
+      68
+    ],
+    "publisher_source": "https://www.nasa.gov/wp-content/uploads/static/history/columbia/reports/CAIBreportv1.pdf",
+    "methods": {
+      "source": "Authentic NASA federal employee correspondence excerpts, five different writers and message threads in a public 2003 board report. Each includes one ordinary human donor by the same writer. No private, third-party or identifier-only material enters scoring.",
+      "comparison": "Fixed previous window-only fitted log-odds and both cutoff points reused unchanged. Compare current .5 and each frozen fitted point with both exact focus and full joined contextual spans. Only the calibrated variants exclude foci shorter than 12 words. Raw-focus counterpart keeps all current qualifying foci to separate range narrowing from score selection.",
+      "selection": "Source-ordered first six qualifying foci. Mark the actual measured windows for context arms. Focus arms mark the exact navigation sentence and do not treat it as the sole classifier input.",
+      "metrics": "File flags, source-group false flags, wrong-only location and useful localization by non-whitespace character IoU at least .30. Score admitted controls and both generator families, retain unassessed or generation exclusion. No fit or public confidence change."
+    },
+    "coverage": {
+      "exact_eml": 14,
+      "context_windows": 42,
+      "eligible_foci": 31,
+      "target_foci": 4
+    },
+    "generator_admission": {
+      "qwen": {
+        "copied_target": 1,
+        "admitted": 4
+      },
+      "smol2": {
+        "copied_target": 2,
+        "not_one_sentence": 3
+      }
+    },
+    "counts": {
+      "original": {
+        "raw_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        }
+      },
+      "human_sentence": {
+        "raw_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "strict_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "one_source_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "one_source_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        }
+      },
+      "qwen": {
+        "raw_context": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 2,
+          "wrong_location": 0,
+          "missed_if_assessed": 2,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 1,
+          "wrong_location": 1,
+          "missed_if_assessed": 3,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 3,
+          "useful": 3,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_focus": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 3,
+          "useful": 3,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_context": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 3,
+          "useful": 3,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_focus": {
+          "unavailable_generation": 1,
+          "assessed": 4,
+          "unassessed": 0,
+          "flagged": 3,
+          "useful": 3,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        }
+      },
+      "smol2": {
+        "raw_context": {
+          "unavailable_generation": 5
+        },
+        "raw_focus": {
+          "unavailable_generation": 5
+        },
+        "strict_context": {
+          "unavailable_generation": 5
+        },
+        "strict_focus": {
+          "unavailable_generation": 5
+        },
+        "one_source_context": {
+          "unavailable_generation": 5
+        },
+        "one_source_focus": {
+          "unavailable_generation": 5
+        }
+      }
+    },
+    "paired_vs_current": {
+      "original": {
+        "raw_focus": {
+          "0->0": 5
+        },
+        "strict_context": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "strict_focus": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "one_source_context": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "one_source_focus": {
+          "0->0": 3,
+          "0->1": 2
+        }
+      },
+      "human_sentence": {
+        "raw_focus": {
+          "0->0": 5
+        },
+        "strict_context": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "strict_focus": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "one_source_context": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "one_source_focus": {
+          "0->0": 4,
+          "0->1": 1
+        }
+      },
+      "qwen": {
+        "raw_focus": {
+          "0->0": 2,
+          "1->1": 1,
+          "1->0": 1
+        },
+        "strict_context": {
+          "0->0": 1,
+          "0->1": 1,
+          "1->1": 2
+        },
+        "strict_focus": {
+          "0->0": 1,
+          "0->1": 1,
+          "1->1": 2
+        },
+        "one_source_context": {
+          "0->0": 1,
+          "0->1": 1,
+          "1->1": 2
+        },
+        "one_source_focus": {
+          "0->0": 1,
+          "0->1": 1,
+          "1->1": 2
+        }
+      },
+      "smol2": {
+        "raw_focus": {},
+        "strict_context": {},
+        "strict_focus": {},
+        "one_source_context": {},
+        "one_source_focus": {}
+      }
+    },
+    "false_positive_groups": {
+      "raw_context": 0,
+      "raw_focus": 0,
+      "strict_context": 2,
+      "strict_focus": 2,
+      "one_source_context": 2,
+      "one_source_focus": 2
+    },
+    "useful_positive_groups": {
+      "raw_context": 2,
+      "raw_focus": 1,
+      "strict_context": 3,
+      "strict_focus": 3,
+      "one_source_context": 3,
+      "one_source_focus": 3
+    },
+    "commitments": {
+      "exact_geometry_sha256": "6241498dc3a9a1ea88541ded88b48cff71343cae8bddb2f00ad5dceec4e8ee1b",
+      "freeze_sha256": "6902928a6e08541937a90d228b932a078245ffb507821b8764636f09a407ee45",
+      "source_sha256": "6a1aebcd9c5795558eaa0cbb4afc14394aea8089133c2d6263bd007f5c215eb1",
+      "fixed_fit_sha256": "c6b3b50c85a94fbf2f3acd4b9ba7e362ce4cbefa6c7b4660063524b0ffde0367",
+      "inference": {
+        "response_sha256": "a729fe7e1d4d8c05ef776a667698647a7a598494f307557c5ed1dd7c03d2e739",
+        "cases": 20,
+        "native_forwards": 15,
+        "maximum_reduction_delta": 4.76837158203125e-06,
+        "minimum_available_ram": 7292141568,
+        "seconds": 4.298
+      }
+    }
+  },
+  "second_generator_companion": {
+    "schema": "chipmunk.short-context-focus-publisher-transfer/1",
+    "source_groups": 5,
+    "known_prior_texts": 45294,
+    "original_word_range": [
+      56,
+      68
+    ],
+    "publisher_source": "https://www.nasa.gov/wp-content/uploads/static/history/columbia/reports/CAIBreportv1.pdf",
+    "methods": {
+      "source": "Authentic NASA federal employee correspondence excerpts, five different writers and message threads in a public 2003 board report. Each includes one ordinary human donor by the same writer. No private, third-party or identifier-only material enters scoring.",
+      "comparison": "Fixed previous window-only fitted log-odds and both cutoff points reused unchanged. Compare current .5 and each frozen fitted point with both exact focus and full joined contextual spans. Only the calibrated variants exclude foci shorter than 12 words. Raw-focus counterpart keeps all current qualifying foci to separate range narrowing from score selection.",
+      "selection": "Source-ordered first six qualifying foci. Mark the actual measured windows for context arms. Focus arms mark the exact navigation sentence and do not treat it as the sole classifier input.",
+      "metrics": "File flags, source-group false flags, wrong-only location and useful localization by non-whitespace character IoU at least .30. Score admitted controls and both generator families, retain unassessed or generation exclusion. No fit or public confidence change."
+    },
+    "coverage": {
+      "exact_eml": 12,
+      "context_windows": 36,
+      "eligible_foci": 26,
+      "target_foci": 2
+    },
+    "generator_admission": {
+      "smol2": {
+        "copied_target": 3,
+        "admitted": 2
+      }
+    },
+    "counts": {
+      "original": {
+        "raw_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 2,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        }
+      },
+      "human_sentence": {
+        "raw_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "strict_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "one_source_context": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        },
+        "one_source_focus": {
+          "assessed": 5,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 0,
+          "ordinary_edit_overlap": 1
+        }
+      },
+      "smol2": {
+        "raw_context": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 2,
+          "ordinary_edit_overlap": 0
+        },
+        "raw_focus": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 0,
+          "useful": 0,
+          "wrong_location": 0,
+          "missed_if_assessed": 2,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_context": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 1,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "strict_focus": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 1,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_context": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 1,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        },
+        "one_source_focus": {
+          "unavailable_generation": 3,
+          "assessed": 2,
+          "unassessed": 0,
+          "flagged": 1,
+          "useful": 1,
+          "wrong_location": 0,
+          "missed_if_assessed": 1,
+          "ordinary_edit_overlap": 0
+        }
+      }
+    },
+    "paired_vs_current": {
+      "original": {
+        "raw_focus": {
+          "0->0": 5
+        },
+        "strict_context": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "strict_focus": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "one_source_context": {
+          "0->0": 3,
+          "0->1": 2
+        },
+        "one_source_focus": {
+          "0->0": 3,
+          "0->1": 2
+        }
+      },
+      "human_sentence": {
+        "raw_focus": {
+          "0->0": 5
+        },
+        "strict_context": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "strict_focus": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "one_source_context": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "one_source_focus": {
+          "0->0": 4,
+          "0->1": 1
+        }
+      },
+      "smol2": {
+        "raw_focus": {
+          "0->0": 2
+        },
+        "strict_context": {
+          "0->0": 1,
+          "0->1": 1
+        },
+        "strict_focus": {
+          "0->0": 1,
+          "0->1": 1
+        },
+        "one_source_context": {
+          "0->0": 1,
+          "0->1": 1
+        },
+        "one_source_focus": {
+          "0->0": 1,
+          "0->1": 1
+        }
+      }
+    },
+    "false_positive_groups": {
+      "raw_context": 0,
+      "raw_focus": 0,
+      "strict_context": 2,
+      "strict_focus": 2,
+      "one_source_context": 2,
+      "one_source_focus": 2
+    },
+    "useful_positive_groups": {
+      "raw_context": 0,
+      "raw_focus": 0,
+      "strict_context": 1,
+      "strict_focus": 1,
+      "one_source_context": 1,
+      "one_source_focus": 1
+    },
+    "commitments": {
+      "exact_geometry_sha256": "842186c9902853f21a5f0bd87863df4b819efad9a99ab6e5a69404f161fd2706",
+      "freeze_sha256": "afb26337aa267ef426771b75f8dfdbe2d7faceceabb267cea4302514cdf18bb5",
+      "source_sha256": "6a1aebcd9c5795558eaa0cbb4afc14394aea8089133c2d6263bd007f5c215eb1",
+      "fixed_fit_sha256": "c6b3b50c85a94fbf2f3acd4b9ba7e362ce4cbefa6c7b4660063524b0ffde0367",
+      "inference": {
+        "response_sha256": "12f90e7f762b0eb64f07e2e11aee05085b5c06047842b7ab3fc5d6eddd1447b6",
+        "cases": 15,
+        "native_forwards": 13,
+        "maximum_reduction_delta": 4.291534423828125e-06,
+        "minimum_available_ram": 8024981504,
+        "seconds": 3.806
+      }
+    }
+  },
+  "combined": {
+    "unique_human_files": 10,
+    "unique_mixed_files": 6,
+    "unique_eml_bodies": 16,
+    "native_forwards": 28,
+    "usefully_localized": {
+      "raw_context": 2,
+      "raw_focus": 1,
+      "strict_context": 4,
+      "strict_focus": 4,
+      "one_source_context": 4,
+      "one_source_focus": 4
+    },
+    "wrong_location_only": {
+      "raw_context": 0,
+      "raw_focus": 1,
+      "strict_context": 0,
+      "strict_focus": 0,
+      "one_source_context": 0,
+      "one_source_focus": 0
+    },
+    "human_files_flagged": {
+      "raw_context": 0,
+      "raw_focus": 0,
+      "strict_context": 3,
+      "strict_focus": 3,
+      "one_source_context": 3,
+      "one_source_focus": 3
+    },
+    "human_geometry_identical_on_both_runs": true
+  },
+  "independent_readout": {
+    "outcome_cells_per_run": 72,
+    "reducer_sha256": "bd1890f8684d717561dd8e23d10d4ebb99c2c5bd47b3acde37249c9f6876c625"
+  },
+  "production_decision": "Keep the current app passage checks. The frozen calibrated arms added two useful locations and three human flags on this source-separated publisher transfer. Focus-only display of unchanged raw selections lost a useful location. No public confidence or selection change.",
+  "case_content_published": false
+}

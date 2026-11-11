@@ -12,6 +12,7 @@ import json
 import math
 import re
 import uuid
+from contextlib import closing
 from copy import deepcopy
 from typing import Any
 
@@ -460,11 +461,17 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
-    wanted = {r["frame_index"] for c in chosen for r in c["rows"]}
-    wanted.update(i for c in chosen for i in c.get("face_boundary", {}).get("anchors", {}).values())
+    boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
+    wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     selected = sorted(wanted | endpoints)
-    decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, selected)} if selected else {}
+    decoded = {}
+    if selected:
+        with closing(decode_frames(store.path_for(analysis.sha256), table, selected)) as source_frames:
+            for frame in source_frames:
+                if frame.index in boundary_indices and (not frame.pts_verified or frame.pts != anchors[frame.index]["pts"]):
+                    raise PacketIntegrityError("Refined face evidence image lacks a verified decoded timestamp")
+                decoded[frame.index] = frame.rgb
     for i in wanted:
         if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:
             raise PacketIntegrityError("Video evidence pixels differ from the frame decoded during analysis")

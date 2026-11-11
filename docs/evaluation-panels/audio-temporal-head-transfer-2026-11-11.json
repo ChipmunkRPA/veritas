@@ -1,0 +1,518 @@
+{
+  "added_false_groups": {
+    "block": 2,
+    "raw": 2
+  },
+  "added_false_views": {
+    "block": 2,
+    "raw": 2
+  },
+  "added_true_groups": {
+    "block": 0,
+    "raw": 0
+  },
+  "added_true_views": {
+    "block": 0,
+    "raw": 0
+  },
+  "advance_rule": "On confirmation, recover at least two distinct synthetic groups, at least one per noisy scene, and outperform the directly adjusted ordinary raw point in true added flags. Add at most one genuine false flag, change no clean directions, and assess at least six genuine views per noisy scene. This would support a larger panel only.",
+  "arms_changed_identical_views": true,
+  "commitments": {
+    "admission_sha256": "8abe02f8cf1a9514ea581f173aeceddb3b0e8c0e6156e5c26368cf7ecf2cf6e2",
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "fit_sha256": "f7af4d9359c379cab6fcc2160b54ff88bb7711fe12d9ace8533dffdd8fecb6ea",
+    "freeze_sha256": "9d085bf4c3fcf82644a8378538afe1b214c89e189043be4e2d40b982063784ee",
+    "implementation_sha256": "d766f2d048121b6ca49afdf27752698d440708e045a494bd00421935b8816299",
+    "plan_sha256": "1c3963d8a6d9b52d94215031f4b81bc8599b636a45a3fefce67bfd4af655c73f",
+    "point_sha256": "4275776b8539a96bfa20accdcb49aa1719a582c57880c0930b9114446237200d",
+    "roster_sha256": "5363cdd986c08630b1a28720d50aa30cf1d9002f9f962bc6a0aba8f21f5508c8",
+    "runner_sha256": "3f6fb749fd94c29fbf5ce7fadc8dcc65c553a57dc4ca414ede8a3f8f90deb4b9",
+    "score_sha256": "cb6623b673b9e2b71ceb1ea4391cfe7a8db4d1c8c78a93d5b7528b7691a9bb32",
+    "source_receipts_sha256": {
+      "alania": "eef1ffacc9de432d59b1336df16b3ffe8876664f87b20e56ef2c4836893ce155",
+      "drifting": "c02fa71645bcb333b20bbd33b62ca769a23a29e699875951f512734ac680c461",
+      "okur": "33a41facabc915464c7d16ea435a9463b02e56c02fb30ed163bc2792a6f9abe8",
+      "previous_frequency": "fe2cbc8961b1dd52c1459ba1c8151647620a7294f53e172b54ad2e33cd4a8a0a",
+      "previous_ica": "ccd0d46e075baf840bb64de2dc0494f0df8791e74070ee2776d8405e22fd7e1e",
+      "previous_spectral": "5ff5a35b1f28bc066b00cec84c7fa8db8b3e93eef0cf2cda476fbfe9a46c445d",
+      "rueg": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792"
+    },
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "confirmation": {
+    "clean": {
+      "admitted_rank_auc": {
+        "block": 1.0,
+        "raw": 1.0
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {
+            "rueg": 1
+          },
+          "raw": {
+            "rueg": 1
+          }
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 2,
+            "original": 8,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 8,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 2,
+            "original": 8,
+            "unassessed": 0
+          }
+        },
+        "planned": 11
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 8,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 8,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 8,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 8
+      }
+    },
+    "scene_1": {
+      "admitted_rank_auc": {
+        "block": 0.910714,
+        "raw": 0.910714
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 3,
+            "unassessed": 4
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 3,
+            "unassessed": 4
+          },
+          "raw": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 3,
+            "unassessed": 4
+          }
+        },
+        "planned": 11
+      },
+      "noise_only": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 1
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 1
+          },
+          "raw": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 0,
+            "unassessed": 1
+          }
+        },
+        "planned": 1
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 7,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 1,
+            "inconclusive": 7,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 7,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 8
+      }
+    },
+    "scene_2": {
+      "admitted_rank_auc": {
+        "block": 0.977273,
+        "raw": 0.977273
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {
+            "rueg": 1
+          },
+          "raw": {
+            "rueg": 1
+          }
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 10,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 11,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 10,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 11
+      },
+      "noise_only": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          }
+        },
+        "planned": 1
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 8
+      }
+    }
+  },
+  "fit": {
+    "clean": {
+      "admitted_rank_auc": {
+        "block": 1.0,
+        "raw": 1.0
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 8,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 8,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 8,
+            "unassessed": 0
+          }
+        },
+        "planned": 8
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 0,
+            "original": 1,
+            "unassessed": 0
+          }
+        },
+        "planned": 2
+      }
+    },
+    "scene_1": {
+      "admitted_rank_auc": {
+        "block": 0.642857,
+        "raw": 0.642857
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 2,
+            "inconclusive": 5,
+            "original": 0,
+            "unassessed": 1
+          },
+          "current": {
+            "ai": 2,
+            "inconclusive": 5,
+            "original": 0,
+            "unassessed": 1
+          },
+          "raw": {
+            "ai": 2,
+            "inconclusive": 5,
+            "original": 0,
+            "unassessed": 1
+          }
+        },
+        "planned": 8
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 2
+      }
+    },
+    "scene_2": {
+      "admitted_rank_auc": {
+        "block": 0.5625,
+        "raw": 0.5625
+      },
+      "genuine": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 6,
+            "inconclusive": 2,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 8
+      },
+      "synthetic": {
+        "added_ai_by_lane": {
+          "block": {},
+          "raw": {}
+        },
+        "directions": {
+          "block": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "current": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          },
+          "raw": {
+            "ai": 1,
+            "inconclusive": 1,
+            "original": 0,
+            "unassessed": 0
+          }
+        },
+        "planned": 2
+      }
+    }
+  },
+  "fit_rule": "Use previously consumed ICA matched clean and two natural room backgrounds, containing eight genuine groups and two Alania voice groups. For each feature take the maximum among admitted genuine current-inconclusive views. Threshold comparison is strict greater than. Lock points from these responses before opening confirmation inference.",
+  "met_frozen_advance": false,
+  "method": {
+    "alternative": "Use the ordinary raw response directly as a separate fitted-point diagnostic to distinguish temporal pooling from moving the point.",
+    "block_steps": 20,
+    "local": "Take the existing weighted affine voice head at every valid encoder time step of the same forward. Validate that sigmoid(mean(logits)) reconstructs the original score. Take the second-highest mean of the nonoverlapping complete 20-step blocks from the start. Any partial final block is excluded.",
+    "ordinary": "Same serving classifier and calibration on each admitted exact three-second mono view",
+    "required_high_blocks": 2,
+    "scope": "The encoder states can attend to the entire input; block scores are not independent windows, local authorship decisions or boundaries."
+  },
+  "posthoc_block_to_raw_spearman": {
+    "clean": 0.994737,
+    "scene_1": 1.0,
+    "scene_2": 0.996992
+  },
+  "resources": {
+    "actual_voice_forwards": 104,
+    "confirmation_valid_encoder_steps": {
+      "149": 54
+    },
+    "confirmation_voice_forwards": 66,
+    "cpu_seconds_elapsed": 63.705893332953565,
+    "extra_classifier_forwards_for_block_arm": 0,
+    "fit_valid_encoder_steps": {
+      "149": 29
+    },
+    "fit_voice_forwards": 38,
+    "max_reconstructed_probability_error": 8.18926048085089e-08,
+    "peak_process_rss_bytes": 2916466688,
+    "planned_views": 89,
+    "vad_frame_forwards": 8366
+  },
+  "scenes": {
+    "scene_1": {
+      "annotated_overlap_cells": 2,
+      "annotated_voice_cells": 300
+    },
+    "scene_2": {
+      "annotated_overlap_cells": 95,
+      "annotated_voice_cells": 300
+    }
+  },
+  "schema": "chipmunk.audio-temporal-head-transfer/1",
+  "serving_change": false,
+  "source_roles": {
+    "confirmation": "Use every one of the 11 retained RUEG reader groups excluded from the previous spectral and separation panels. Add four Alania, two Okur and two Drifting utterances with exact commitments outside the previous spectral foreground and fit; no declared voice group overlaps fit. Recordings and stock voices may have older project exposure. Each foreground gets matched clean and two noisy conditions with fixed -5 dB mono SNR. Two isolated background recordings serve as genuine controls.",
+    "fit": "Use previously consumed ICA matched clean and two natural room backgrounds, containing eight genuine groups and two Alania voice groups. For each feature take the maximum among admitted genuine current-inconclusive views. Threshold comparison is strict greater than. Lock points from these responses before opening confirmation inference.",
+    "rooms": "Held AMI meetings ES2005a and IS1006a differ from fit ES2002a and IS1003a. Choose the first cut in new salted order from the previous time-and-annotation geometry selector, omitting all exact clock intervals ever selected in previous spatial, condition and frequency-separation panels. New cuts, not newly acquired rooms."
+  },
+  "status": "evaluated_locally"
+}

@@ -1,0 +1,131 @@
+{
+  "article_groups": 30,
+  "article_groups_with_constructed_case_by_arm": {
+    "full_ai": 30,
+    "human": 30,
+    "long_ai": 30,
+    "long_format": 30,
+    "short_ai": 16,
+    "short_format": 16
+  },
+  "by_arm": {
+    "full_ai": {
+      "constructed": 54,
+      "unavailable": 0
+    },
+    "human": {
+      "constructed": 54,
+      "unavailable": 0
+    },
+    "long_ai": {
+      "constructed": 54,
+      "unavailable": 0
+    },
+    "long_format": {
+      "constructed": 54,
+      "unavailable": 0
+    },
+    "short_ai": {
+      "constructed": 23,
+      "unavailable": 31
+    },
+    "short_format": {
+      "constructed": 23,
+      "unavailable": 31
+    }
+  },
+  "by_generator": {
+    "deepseek-chat": {
+      "full_ai": {
+        "constructed": 15,
+        "unavailable": 0
+      },
+      "human": {
+        "constructed": 15,
+        "unavailable": 0
+      },
+      "long_ai": {
+        "constructed": 15,
+        "unavailable": 0
+      },
+      "long_format": {
+        "constructed": 15,
+        "unavailable": 0
+      },
+      "short_ai": {
+        "constructed": 4,
+        "unavailable": 11
+      },
+      "short_format": {
+        "constructed": 4,
+        "unavailable": 11
+      }
+    },
+    "gpt-4o-mini": {
+      "full_ai": {
+        "constructed": 39,
+        "unavailable": 0
+      },
+      "human": {
+        "constructed": 39,
+        "unavailable": 0
+      },
+      "long_ai": {
+        "constructed": 39,
+        "unavailable": 0
+      },
+      "long_format": {
+        "constructed": 39,
+        "unavailable": 0
+      },
+      "short_ai": {
+        "constructed": 19,
+        "unavailable": 20
+      },
+      "short_format": {
+        "constructed": 19,
+        "unavailable": 20
+      }
+    }
+  },
+  "constructed_cases": 262,
+  "freeze_sha256": "38d1fe216efba900392f01ad8998c3813c97fcb48ee088e1f4cd78a7763ef264",
+  "historical_writing_exposure_audit": {
+    "writing_v3_v4_exposed_contexts": {
+      "at_least_one_normalized_12_word_match": {},
+      "exact_normalized_document_matches": {},
+      "historical_texts_compared": 674,
+      "pairs_with_any_match": 0,
+      "status": "checked"
+    },
+    "writing_v5_selected_source_answers": {
+      "at_least_one_normalized_12_word_match": {},
+      "exact_normalized_document_matches": {},
+      "historical_texts_compared": 256,
+      "pairs_with_any_match": 0,
+      "status": "checked"
+    },
+    "writing_v7_prepared_exposures": {
+      "at_least_one_normalized_12_word_match": {},
+      "exact_normalized_document_matches": {},
+      "historical_texts_compared": 992,
+      "pairs_with_any_match": 0,
+      "status": "checked"
+    }
+  },
+  "new_model_calls": 0,
+  "pairs_by_agency": {
+    "Department of Energy": 3,
+    "Federal Reserve": 28,
+    "National Institute of Standards and Technology": 23
+  },
+  "planned_cases": 324,
+  "planned_pairs": 54,
+  "private_cases_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+  "rights_verified_pairs": 54,
+  "schema": "chipmunk.text-gohumanize-preparation-result/193",
+  "source_text_published": false,
+  "status": "complete",
+  "training_started": false,
+  "unavailable_cases": 62
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.text-gohumanize-transfer-freeze/196",
+  "preparation_receipt_sha256": "6889ccce9325c41c3c6d3167b1a809905238d64602299cf18602b8d4acddef95",
+  "private_cases_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+  "reference_sha256": "bfb22d70366370b7a220c87290d34d482c9763eba207167d5da19960e4ee85f2",
+  "code_sha256": {
+    "backend/scripts/text_gohumanize_transfer_v196.py": "bf9bdf1a9adf1fcd3b48de4b7bdc45fe97ed2cb20a795d8c714c7da1b097d8a6",
+    "backend/tests/test_text_gohumanize_transfer_v196.py": "1062e209ed9acaef7c8ce80d04d3f7a5ab6d222a9017bd6a072b91f2c4241884",
+    "docs/text-gohumanize-transfer-v196-method.md": "2a77aab990284e254904c8e0a249fce6c98aec69563620ba86b60d04250bb76d",
+    "backend/scripts/text_layout_methods_v101.py": "a8390cd25cf757df721b3144a5e7dbea6b82c76179ef8e72e572f860de2b28e2",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/grid_source_speech_v147.py": "3f29aba7f7f674d01117200bbcd2778d5d1f68ab0a44e2460859fdba09618e9a"
+  },
+  "batches": 6,
+  "pairs_per_batch": 9,
+  "methods": [
+    "baseline",
+    "canonical_current",
+    "canonical_union",
+    "baseline_plus_canonical_union"
+  ],
+  "scope": "Federal publication excerpts and matched authored rewrites from two generators. Constructed replacements test source-aligned evidence, with unchanged internal research points."
+}

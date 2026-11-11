@@ -1,0 +1,3 @@
+# Seven recorded backgrounds passed mechanical preparation
+
+All four kitchen recordings and all three traffic recordings matched the publisher's original file lengths and checksums. All seven produced the expected 16 kHz mono PCM and a verified source-time mapping. A second local readout reproduced the exact aggregate. The recordings are ready for listening review for intelligible speech, music and scene fit. That review is required before using any interval in the benchmark. [Method](audio-commons-background-v234-method.md) · [Verified aggregate](evaluation-panels/audio-commons-background-complete-v234.json)

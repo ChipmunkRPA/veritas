@@ -23,3 +23,9 @@ uploads remain. [Verified three-triplet counts](evaluation-panels/video-vcd2-ful
 ## Fourth matched recording
 
 All three versions of the fourth recording leaned original and had no face appearance flag. Across the four recordings, both ordinary treatments preserved the flag state in every matched group. The 12 completed analyses now cover 480 sampled pictures and 1,446 native anchors. Eighteen eligible raw uploads remain. [Verified four-triplet counts](evaluation-panels/video-vcd2-full-app-four-triplets-v202.json)
+
+## Fifth and sixth matched recordings
+
+All six new uploads leaned original. The fifth recording had the same false 32-frame appearance flag in all three versions. In each edited version, 28 of those frames overlapped the conventional treatment and four fell outside it. The sixth recording had no face appearance flag in any version. Across all 18 completed uploads, two of six genuine recordings produced face appearance flags. The overall direction leaned original on all 18. [Verified six-triplet counts](evaluation-panels/video-vcd2-full-app-six-triplets-v202.json)
+
+The app evidence audit has now verified 720 sampled frames, 2,153 native anchors, 246 evidence frames and 74 assets. Twelve eligible raw uploads remain. The six raw files above the upload cap are represented separately in the delivered-control study. [Delivered controls](video-vcd2-delivery-app-v232-first-triplet.md)

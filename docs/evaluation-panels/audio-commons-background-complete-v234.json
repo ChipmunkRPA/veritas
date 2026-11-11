@@ -1,0 +1,28 @@
+{
+  "acquisition_rejection_counts": {},
+  "admitted_for_model_evaluation": 0,
+  "auditory_reviewed": 0,
+  "counts_by_environment": {
+    "kitchen": {
+      "planned": 4,
+      "verified_original": 4,
+      "verified_pcm": 4
+    },
+    "traffic": {
+      "planned": 3,
+      "verified_original": 3,
+      "verified_pcm": 3
+    }
+  },
+  "freeze_sha256": "c81898ac74bd5fd5da1c1e283b06862cfd56b687e67a12b05a9ea058353b73db",
+  "model_calls": 0,
+  "receipt_set_sha256": {
+    "acquisition": "779195658d273afd88ed13ffce0613c783dfa38fcbe2fa6ae75cf1ac0eb053f6",
+    "qualification": "258422197b69b84f94ba0ffd759b4861a7260367bd23f1839aac843a9b276ce9"
+  },
+  "schema": "chipmunk.audio-commons-background-result/234",
+  "terminal_stages": {
+    "acquisition": true,
+    "qualification": true
+  }
+}

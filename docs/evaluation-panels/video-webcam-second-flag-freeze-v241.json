@@ -1,0 +1,21 @@
+{
+  "schema": "chipmunk.video-webcam-second-flag-freeze/241",
+  "six_group_aggregate_sha256": "f47ae53d706ba27ef18f7d8b57fb1da8363fcb5f169c90736a33d416171d95bb",
+  "first_flag_geometry_sha256": "99d12d00f6c6679987380513812cd4e578b2e92110e5e615ada039762258c513",
+  "published_archive_commitment_sha256": "85ba9eb64776c0b64726da5b3c8aa58f4e275d1b5f589a7bedac7e25d65976e0",
+  "selected_archive_set_sha256": "362275c6445118862dc8b330dfc1bc057e48c6f031c595ed6251773c175bb58d",
+  "code_sha256": {
+    "backend/scripts/video_webcam_second_flag_v241.py": "2b897ebb12967247aa569396af1530192a8fcda16e52109110ff9c6c84c4ca80",
+    "backend/scripts/video_webcam_source_geometry_v231.py": "eb7804e1c4242b74b8bde1852a27a1c1b1edd65ac7a6dc0dcec737951da89055",
+    "backend/scripts/video_webcam_confound_resume_v227.py": "b08b15726cc90d25995b1570876e759c929497f6926fb61221c14901894e950d",
+    "backend/scripts/video_webcam_confound_v224.py": "405021c859f3dacb2d491ea1740bf85deaa437703d01fc40ad12efe6de112941",
+    "backend/scripts/video_face_confound_v222.py": "ac8aa6af0f5b02b320fd891808fe075f06dd242dff3ff2efa53ffa832d286ee7",
+    "docs/video-webcam-second-flag-v241-method.md": "6561f64e92144572cc2d4f90c52bf50552ed9c85889308abc34fce2e4ed5e5b7"
+  },
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "new_neural_calls_permitted": false
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.audio-demand-crossover-result/210",
+  "status": "complete",
+  "freeze_sha256": "8de2916ed669df889cc50973b27cbae58d2523a184016f4b9f3d21b94fb3efbe",
+  "private_cases_sha256": "282fe7dca5939d52dc63445fabbb23d2fa4b77e59ae3afeae7a63bfbbf873b8f",
+  "outcomes": {
+    "prepared": 114,
+    "unavailable": 30
+  },
+  "planned_pairs": 24,
+  "planned_cases": 144,
+  "new_neural_calls": 0,
+  "by_origin_and_condition": {
+    "genuine": {
+      "matched_clean": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_early_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_late_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      }
+    },
+    "synthetic": {
+      "matched_clean": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_early_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_late_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      }
+    }
+  },
+  "profile_sha256": "63b7524709888416b263b9086dfb44ec072d39f59b4412dcaa2d1a01b30dfda7",
+  "scope": "Consumed Turkish development foregrounds and one river tape; no new detector outputs or population claim."
+}

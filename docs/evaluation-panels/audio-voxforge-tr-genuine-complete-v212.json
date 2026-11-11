@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-genuine-result/212",
+  "status": "complete",
+  "freeze_sha256": "72c9801168df0c670943ffe49572d066d7d5790b6a84da8576a698fcc8b8ddbd",
+  "private_acquisition_sha256": "5bded48240419dbc3acacba4855dd23143faaff1e74ecadb1508ae0dd6da0ce1",
+  "private_cases_sha256": "a9a788ae70d2f3cd5531129676f3c0ba81cc4b693324c0b3e2d4d1e1816ce422",
+  "private_attempts_sha256": "956b84eaa3c8fbce1f754eb430fe0807c6acd2cde767c70cafef23af0c92a685",
+  "planned_cases": 16,
+  "case_outcomes": {
+    "unavailable": 5,
+    "qualified": 11
+  },
+  "attempt_outcomes": {
+    "session_qualified": 17,
+    "clip_unavailable": 27,
+    "prompt_unavailable_or_duplicate": 65,
+    "selected": 11
+  },
+  "selection_outcomes": {
+    "pause_bounded_crop": 11
+  },
+  "qualified_licenses": {
+    "GPL-3.0-or-later": 11
+  },
+  "language": "tr",
+  "origin": "genuine",
+  "new_neural_calls": 0,
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "archive_outcomes": {
+    "downloaded": 22
+  },
+  "resource_profile_sha256": "6a3f813969b4e62bb1310a0fc6f6fb5e07cc75980aeba15dc106ea6fc824862e",
+  "maximum_sampled_descendant_rss_bytes": 180649984,
+  "worker_duration_seconds": 4.447758499998599
+}

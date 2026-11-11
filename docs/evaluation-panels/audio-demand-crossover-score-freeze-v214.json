@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.audio-demand-crossover-score-freeze/214",
+  "v210_preparation_sha256": "3c0fb314dc869c19822a2257af4a42de865d71695d94cdc82027910bc3760a3a",
+  "v210_freeze_sha256": "8de2916ed669df889cc50973b27cbae58d2523a184016f4b9f3d21b94fb3efbe",
+  "route_freeze_sha256": "869e64d5a6f4727ef08d27a19361d70564da5168a79d3726084b72426b110714",
+  "asset_set_commitment_sha256": "4a882fbaf3fe5965faf4e318ff38d54195e4aaf1fe7238dd965aca9e29571597",
+  "code_sha256": {
+    "backend/scripts/audio_demand_crossover_score_v214.py": "6ec59e8017977f93cdd380cecc975a7d6ebab50b4116eba9faa901dc8c10fc98",
+    "backend/tests/test_audio_demand_crossover_score_v214.py": "29ff0a6a6a0be4486781d1bcf5dfb6566184ce902107aade2dc4ecfe1c8e4cf1",
+    "docs/audio-demand-crossover-score-v214-method.md": "e092c4fa3a645caea01b1ec66000c16e4580dd2f61ac4b9babc57088ae415442",
+    "backend/scripts/audio_demand_crossover_v210.py": "4322e1d5bad20505e276cf273e1bac2b895478cf0756c6850c1f2b0a02b18af5",
+    "backend/scripts/audio_demand_transfer_v208.py": "ae2f36b1455d710d1ff794ae98edb6cf697f46a1e8cce2ae86c2d5530d1949d6",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "planned_pairs": 24,
+  "planned_cases": 144,
+  "conditions": [
+    "matched_clean",
+    "river_early_0db",
+    "river_late_0db"
+  ],
+  "scoring_batches": 3,
+  "calibration_change_permitted": false,
+  "holdout_access_permitted": false
+}

@@ -1,0 +1,81 @@
+{
+  "status": "complete",
+  "hard_freeze_sha256": "d608c4c158b36b6afc4f586a1752b4087b7d7beb606b44885b60d7e578561c5d",
+  "licensed_groups": 8,
+  "authored_groups": 4,
+  "measured_views": 24,
+  "outcomes": {
+    "licensed:repetition:native_png": {
+      "supported_pair": 0,
+      "no_pair": 4,
+      "unassessed_match_budget": 0
+    },
+    "licensed:repetition:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 4,
+      "unassessed_match_budget": 0
+    },
+    "licensed:symmetry:native_png": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    },
+    "licensed:symmetry:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    },
+    "licensed:both:native_png": {
+      "supported_pair": 0,
+      "no_pair": 3,
+      "unassessed_match_budget": 0
+    },
+    "licensed:both:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 3,
+      "unassessed_match_budget": 0
+    },
+    "authored:two_symmetric_motifs:native_png": {
+      "supported_pair": 1,
+      "no_pair": 0,
+      "unassessed_match_budget": 0
+    },
+    "authored:two_symmetric_motifs:jpeg90": {
+      "supported_pair": 1,
+      "no_pair": 0,
+      "unassessed_match_budget": 0
+    },
+    "authored:repeated_tiles:native_png": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    },
+    "authored:repeated_tiles:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    },
+    "authored:global_mirror:native_png": {
+      "supported_pair": 0,
+      "no_pair": 0,
+      "unassessed_match_budget": 1
+    },
+    "authored:global_mirror:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 0,
+      "unassessed_match_budget": 1
+    },
+    "authored:repeated_mirrored_tiles:native_png": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    },
+    "authored:repeated_mirrored_tiles:jpeg90": {
+      "supported_pair": 0,
+      "no_pair": 1,
+      "unassessed_match_budget": 0
+    }
+  },
+  "peak_rss_bytes": 227704832,
+  "scope": "Scene qualification from thumbnail content before detector outputs; no introduced edits on licensed inputs. Authored graphics contain natural-layout-like symmetric or repeated motifs by construction."
+}

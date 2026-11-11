@@ -1,0 +1,76 @@
+{
+  "elapsed_s": 9.452,
+  "geometry_qualifies": false,
+  "model_calls": 0,
+  "plan_sha256": "c8d3f779af273ad6cfbcde008257bf74fc9782d73869e550c52fefb13fb161ee",
+  "private_cases_sha256": "85ee911bf780ba529259d65576e93ae8afc70b1a0bf8cbee606b6a1836ff1452",
+  "roles": {
+    "development": {
+      "by_origin": {
+        "expressive": {
+          "prepared": 6
+        },
+        "genuine": {
+          "prepared": 6
+        },
+        "stock": {
+          "prepared": 6
+        }
+      },
+      "joint_snr_db_range": [
+        -9.999927029268944,
+        -9.99868436857021
+      ],
+      "outcomes": {
+        "prepared": 18
+      },
+      "planned_pairs": 6,
+      "prepared": 18,
+      "reversed_cleaner_channel_pairs_at_3db": 0,
+      "right_minus_left_channel_snr_db_ranges": {
+        "noise_left": [
+          0.8672783446799617,
+          3.805187001978604
+        ],
+        "noise_right": [
+          -2.586442057456397,
+          0.8374310939506859
+        ]
+      }
+    },
+    "holdout": {
+      "by_origin": {
+        "expressive": {
+          "prepared": 6
+        },
+        "genuine": {
+          "prepared": 6
+        },
+        "stock": {
+          "prepared": 6
+        }
+      },
+      "joint_snr_db_range": [
+        -10.000047757958272,
+        -9.999955872113528
+      ],
+      "outcomes": {
+        "prepared": 18
+      },
+      "planned_pairs": 6,
+      "prepared": 18,
+      "reversed_cleaner_channel_pairs_at_3db": 3,
+      "right_minus_left_channel_snr_db_ranges": {
+        "noise_left": [
+          1.1208188615756107,
+          9.127315937396325
+        ],
+        "noise_right": [
+          -8.807072288395483,
+          -0.5116021604327621
+        ]
+      }
+    }
+  },
+  "status": "complete"
+}

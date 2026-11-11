@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.audio-wavlm-three-second-result/226",
+  "status": "complete",
+  "freeze_sha256": "26f5ffcb3249db0177dc3b57d6a0423ee4142418afd9ea9afe029915527a1142",
+  "private_features_sha256": "b789f2a2d1a9a3208fffa5a699aa5dd4d03d75edc04faab9da82d52292fe8079",
+  "new_neural_calls": 4,
+  "repeated_exact": true,
+  "resource_profile_sha256": "3c4a9316384db2d94f468a9f525ac7bec849f4d8f9f96c043f9b1e214675d2db",
+  "worker_duration_s": 7.1558562910649925,
+  "maximum_sampled_descendant_rss_bytes": 1257062400,
+  "condition": "traffic_0db",
+  "arms_qualified": [
+    "genuine",
+    "alania",
+    "drifting"
+  ],
+  "input_samples": 48000,
+  "feature_frames": 149,
+  "feature_dimensions": 4608,
+  "candidate_scores": 0,
+  "new_fitting": false,
+  "defaults_changed": false
+}

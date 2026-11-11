@@ -1,0 +1,38 @@
+{
+  "affected_routes_recovered": true,
+  "customer_settings_changed": false,
+  "freeze_sha256": "af4762c3962c9a5be0344ce0e837c4528267b57f0cf2820dbfb880ccc0c8b432",
+  "historical": {
+    "appearance_check_status": "failed",
+    "appearance_measured_windows": 0,
+    "appearance_route_status": "failed",
+    "customer_direction": "unavailable",
+    "legacy_frame_status": "failed",
+    "status": "scored",
+    "verified_evidence_assets": 0,
+    "verified_evidence_frames": 0,
+    "verified_native_anchors": 48,
+    "verified_sampled_frames": 40
+  },
+  "historical_aggregate_replaced": false,
+  "historical_cache_collision": true,
+  "historical_case_receipt_sha256": "360648cf7b7c0bba72106c798fd8bdd2f6757ef2d2239c83034dc8e8f44640f5",
+  "historical_sealed_cases": 24,
+  "replay": {
+    "appearance_check_status": "ok",
+    "appearance_measured_windows": 12,
+    "appearance_route_status": "ok",
+    "customer_direction": "original",
+    "legacy_frame_status": "ok",
+    "status": "scored",
+    "verified_evidence_assets": 0,
+    "verified_evidence_frames": 0,
+    "verified_native_anchors": 121,
+    "verified_sampled_frames": 40
+  },
+  "replay_cache_collision": false,
+  "replay_receipt_sha256": "799463a90b262017486e9fbb6a7345c03135bf659af03da6fa588d49fc83b064",
+  "same_sealed_input": true,
+  "schema": "chipmunk.video-vcd2-verify-cache-replay-result/251",
+  "status": "verified_sealed_replay"
+}

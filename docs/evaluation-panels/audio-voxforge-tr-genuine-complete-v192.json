@@ -1,0 +1,29 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-genuine-result/192",
+  "status": "complete",
+  "freeze_sha256": "4f080d3cc34612625b07ced7d942bb20bbd31a37ae812c29b1b294fdf3965980",
+  "private_cases_sha256": "4c41fd262ad2d7abd637b8cdf193d6520fa33c54f745fd09a697af4deed708ed",
+  "private_attempts_sha256": "bb9fc96dedb2b3343119509645f03e6b74725d65331d3e85503585d8017b1916",
+  "planned_cases": 12,
+  "case_outcomes": {
+    "qualified": 3,
+    "unavailable": 9
+  },
+  "attempt_outcomes": {
+    "session_qualified": 15,
+    "clip_unavailable": 114,
+    "selected": 3,
+    "prompt_unavailable_or_duplicate": 6
+  },
+  "qualified_licenses": {
+    "GPL-3.0-or-later": 3
+  },
+  "language": "tr",
+  "origin": "genuine",
+  "new_neural_calls": 0,
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "resource_profile_sha256": "21291d3cbc10e9df241942e4acd128f95ed26b7a2598a67c02fd3ab7e145e2ea",
+  "maximum_sampled_descendant_rss_bytes": 116260864,
+  "worker_duration_seconds": 0.7882235000142828
+}

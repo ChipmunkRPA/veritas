@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-transfer-result/191",
+  "status": "complete",
+  "freeze_sha256": "5f2990dbc56841cbf52360d74b641a650b2b929bb3eb65e422fce1c91320b4ac",
+  "private_observations_sha256": "7256d656adddc916256e10a8915df7c974144afa3a924e34c9d25853e698f1c8",
+  "comparison": {
+    "genuine_voxforge": {
+      "planned_slots": 12,
+      "qualified_slots": 3,
+      "unqualified_source_slots": 9,
+      "speech_gate_rejections": 2,
+      "scored_slots": 1,
+      "directions_over_planned": {
+        "ai": 0,
+        "original": 1,
+        "inconclusive": 0,
+        "unavailable": 11
+      },
+      "directions_over_qualified": {
+        "ai": 0,
+        "original": 1,
+        "inconclusive": 0,
+        "unavailable": 2
+      },
+      "wrong_ai": 0,
+      "wrong_ai_share_of_qualified": 0.0,
+      "scored_coverage_over_planned": 0.08333333333333333,
+      "scored_coverage_over_qualified": 0.3333333333333333
+    },
+    "synthetic_alania_prior_result": {
+      "planned_clips": 24,
+      "scored_clips": 24,
+      "directions_over_planned": {
+        "ai": 21,
+        "inconclusive": 1,
+        "original": 2,
+        "unavailable": 0
+      },
+      "missed_ai": 3,
+      "wrong_original": 2,
+      "by_render_mode": {
+        "reference": {
+          "ai_flag_rate_over_planned": 0.8333333333333334,
+          "directions": {
+            "ai": 15,
+            "inconclusive": 1,
+            "original": 2,
+            "unavailable": 0
+          },
+          "inconclusive_rate_over_planned": 0.05555555555555555,
+          "missed_ai": 3,
+          "missed_ai_rate_over_planned": 0.16666666666666666,
+          "planned_positives": 18,
+          "route_statuses": {
+            "ok": 18
+          },
+          "scored": 18,
+          "scored_coverage_over_planned": 1.0,
+          "unavailable_rate_over_planned": 0.0
+        },
+        "reference+instruction": {
+          "ai_flag_rate_over_planned": 1.0,
+          "directions": {
+            "ai": 6,
+            "inconclusive": 0,
+            "original": 0,
+            "unavailable": 0
+          },
+          "inconclusive_rate_over_planned": 0.0,
+          "missed_ai": 0,
+          "missed_ai_rate_over_planned": 0.0,
+          "planned_positives": 6,
+          "route_statuses": {
+            "ok": 6
+          },
+          "scored": 6,
+          "scored_coverage_over_planned": 1.0,
+          "unavailable_rate_over_planned": 0.0
+        }
+      }
+    }
+  },
+  "new_neural_calls": 2,
+  "serving_raw_forwards": 1,
+  "serving_stability_forwards": 1,
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "defaults_changed": false,
+  "resource_profile_sha256": "1f0df318d44dfd23ede6b37a37525f12309e6c8bd656d6275cf807cc64397720",
+  "maximum_sampled_descendant_rss_bytes": 2966601728,
+  "worker_duration_seconds": 6.837491665966809
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.grid-native-mouth-scores-monitor-stop/151",
+  "status": "monitor_unavailable",
+  "previously_completed_guarded_stages": 1,
+  "attempted_stage_case_results": 0,
+  "child_started": true,
+  "child_exit_code": -15,
+  "monitor_sample_errors": 1,
+  "monitor_error_type": "PermissionError",
+  "minimum_observed_available_ram_bytes": 8048295936,
+  "worker_receipt_present": false,
+  "defaults_changed": false,
+  "freeze_sha256": "de4dd47f58260203df0217c21fc7d1fa8eff8eed7164401199782f592ae53737",
+  "private_profile_sha256": "18c7c05107984fc6c72a3372c279bd5fe9c201651969de8bb57ac280d7491ea6",
+  "private_resource_journal_sha256": "13a8fc907027f789e8e39594d664d76c88e0216857a37f1dc1f121f66901522d",
+  "private_worker_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "scope": "Actual local data-only worker stopped by its process monitor before a scoring receipt. This is an execution failure, not a detector outcome."
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "chipmunk.portrait-expression-qualifier-execution/140",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.portrait-expression-qualifier-result/140",
+    "status": "complete",
+    "device": "cpu",
+    "precision": "float32",
+    "strict_exact_checkpoint_loads": 5,
+    "renderer_inputs": 3,
+    "new_face_task_inputs": 0,
+    "cached_qualified_mesh_records_checked": 3,
+    "cached_meshes_used_for_cropping": 2,
+    "top_level_module_forwards_started": {
+      "appearance_feature_extractor": 3,
+      "motion_extractor": 6,
+      "warping_module": 3,
+      "spade_generator": 3,
+      "lip": 0
+    },
+    "top_level_module_forwards_completed": {
+      "appearance_feature_extractor": 3,
+      "motion_extractor": 6,
+      "warping_module": 3,
+      "spade_generator": 3,
+      "lip": 0
+    },
+    "new_neural_calls": 15,
+    "neural_counter_scope": "Fifteen hooked top-level generator forwards; zero new face-task calls. Functional convolution tile calls are separate units.",
+    "renderer_repeat_bitwise": true,
+    "earlier_expression_changed_crop_pixels": 220718,
+    "bounded_convolutions": {
+      "spatial_convolutions": 111,
+      "functional_tile_calls": 711,
+      "maximum_estimated_tile_columns_bytes": 133890048
+    },
+    "scalar_comparison": {
+      "scalar_earlier_changed_crop_pixels": 127314,
+      "expression_earlier_changed_crop_pixels": 220718,
+      "between_path_source_changed_crop_pixels": 16184,
+      "between_path_earlier_changed_crop_pixels": 206064,
+      "interpretation": "Pixel response magnitudes only; neither method is ranked for achieved speech/motion alignment or detection accuracy."
+    },
+    "native_coordinate_containment_qualified": true,
+    "renderer_response_qualified": true,
+    "achieved_motion_assessed": false,
+    "achieved_phonetic_alignment_qualified": false,
+    "driver_requested_offset_seconds": "-8/25",
+    "driver_actual_offset_seconds": "-167/500",
+    "changed_native_pixels": {
+      "source_expression": 1805,
+      "current_repeat": 1805,
+      "earlier_expression": 1856
+    },
+    "render_seconds": {
+      "source_expression": 3.25184158293996,
+      "current_repeat": 3.2138460830319673,
+      "earlier_expression": 3.1842817909782752
+    },
+    "private_render_records_sha256": "e470f01a097af374c003817282cee9a098d226e1f4ecca615d605345f960f3c2",
+    "private_input_files_sha256": "b3ec0835fe431a228e8d98ea0315b2b6f210769377b2d49672afc355199cdf84",
+    "private_render_journal_sha256": "0277c7b0e4c2c97b2a77639ae7202d846ec8362e071f108a4521436efb053726",
+    "private_forward_progress_sha256": "efae03e0ea2e326b7ea1181fd2707c8ecf8d011dd4611f0b2e3576e6d807cd86",
+    "freeze_sha256": "dc27637174232d028d3a3531b0e17db7acaee1860f07977de0e45fb80482f738",
+    "defaults_changed": false,
+    "scope": "One consumed source and two bound pictures. Full-expression response, repeat and native-mouth containment only. Pixel differences are not measured lip trajectories, phonetic retiming, fresh detector accuracy or customer confidence."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "authored",
+    "batch": null,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 24.40017825004179,
+    "sampled_tree_rss_lower_bound_bytes": 2486992896,
+    "minimum_available_ram_bytes": 7210467328,
+    "resource_journal_sha256": "eec19e8d7d212a1e5528f7af223b3cc405e30c04bb02c1b5f0042ac6b42e4c02",
+    "runtime_sha256": "e7ad03974226c01e10e394bf83bea8efb9a7d5b9339159bd5a51c1e7d9b0a677",
+    "worker_receipt_sha256": "56ba946c2ef63a576181147d39bd8f94358217b5e07bbfdd43e7a6b83639778c",
+    "new_neural_calls": 15,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "56ba946c2ef63a576181147d39bd8f94358217b5e07bbfdd43e7a6b83639778c",
+  "profile_sha256": "49c063cd89b6dabbdcc64bc539148c4e4df425f9424763c49d63abcc59f6c5bd",
+  "scope": "Full-expression construction runtime on one consumed fitting source. Not achieved lip motion, phonetic synchronization, fresh transfer accuracy or a serving/default change."
+}

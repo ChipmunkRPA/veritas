@@ -104,7 +104,11 @@ integration remains unfinished.
   missed one full swap and all four deliveries of one short swap. It flagged
   two of 24 camera controls from one of eight recording groups, versus zero
   for the reference. The full-clip median hid an in-range response change.
-  The next comparison needs a separately calibrated short-window rule.
+  A [short-window test](video-face-short-window-2026-11-11.md) localized one of
+  two authored photo swaps and flagged none of 11 controls. It missed all four
+  publisher-video variants. The current appearance check found all six edited
+  deliveries and flagged two synthetic controls. Keep the current check and
+  test a variable-duration candidate on a separate moving source.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -114,18 +118,27 @@ integration remains unfinished.
   The [separate remote-context holdout](image-bg-real-insertions-2026-11-11.md#separate-holdout-for-shared-processing-artifacts)
   removed all three processing-control flags and retained two useful locations
   on eight other PNG sources. This result remains specific to one generator and
-  one matched processing control.
+  one matched processing control. On the [two-editor panel](image-background-patch-transfer-2026-11-11.md),
+  the gate kept three useful PNG locations and flagged 23/48 controls. It found
+  zero JPEG75 locations. The existing routes remain preferred. The app now
+  presents [two source crops for non-mirrored copy matches](source-evidence-native-coverage-2026-11-11.md#automatic-copy-similarity-without-mirroring)
+  with zero weight in the AI estimate.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
   foregrounds. On a [separate two-background test](audio-wavlm-two-background-transfer-2026-11-11.md),
   the paired method added zero flags. The current rule falsely leaned AI on
   4/5 assessed genuine inputs under one background and 1/6 under the other.
-  Noise-specific false AI responses now take priority over additional recall.
+  A [background corroboration replay](audio-background-corroboration-2026-11-11.md)
+  reduced those five false flags to three and preserved all 25 existing synthetic
+  flags. The fresh challenge had limited genuine-speech coverage under strong
+  noise, so a new real-error panel is needed before adoption.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
-  generator families. The result supports further transfer before app adoption.
+  generator families. The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md)
+  localized 10/22 rewrites versus 13/22 for the strict rule. Both flagged zero
+  of 33 human controls. Keep the current writing check.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

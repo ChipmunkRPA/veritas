@@ -212,11 +212,54 @@ def test_fixed_comparison_preserves_all_cases_and_does_not_inflate_source_groups
         if row["response"] == .8:
             row.update(status="not_applicable", response=None, reason="No usable input")
     comparison = review.compare(manifest, old, old_lock, new, new_lock, iterations=100)
+    assert "paired_localization_differences" not in comparison
     for row in comparison["paired_differences"]:
         assert row["source_groups"] == 1  # Not two independent sources because of variants.
         assert row["group_bootstrap_95_percent"] is None
         expected = -1 if row["metric"] == "ai_alert_rate" else 0
         assert row["candidate_minus_baseline"] == expected
+
+
+def test_paired_localization_averages_variants_and_counts_assessment_losses():
+    manifest, receipt = fixture()
+    edited = next(row for row in manifest["cases"] if (row["modality"], row["split"], row["condition"], row["label"])
+                  == ("image", "confirmation", "clean", 1))
+    edited["localization_truth"] = {"unit": "pixels", "source_units": 100, "target_units": 20}
+    for suffix in ("jpeg", "resize"):
+        variant = deepcopy(edited)
+        variant.update(id=f"variant-{suffix}", input_sha256=review.digest({"variant": suffix}))
+        manifest["cases"].append(variant)
+    other = deepcopy(edited)
+    other.update(id="other", group="other", lineage=["other"], source_sha256="a" * 64, input_sha256="b" * 64)
+    manifest["cases"].append(other)
+    planned = {edited["id"], "variant-jpeg", "variant-resize", "other"}
+
+    points = dict.fromkeys(review.MEDIA, .5)
+    old_lock = review.freeze(manifest, receipt("development"), thresholds=points)
+    new_lock = review.freeze(manifest, receipt("development", "candidate"), thresholds=points)
+    old, new = receipt("confirmation"), receipt("confirmation", "candidate")
+    for result in (old, new):
+        for row in result["predictions"]:
+            if row["id"] in planned:
+                row["localization"] = {"status": "ok", "reported_units": 0, "overlap_units": 0}
+    for row in old["predictions"]:
+        if row["id"] == "other":
+            row["localization"].update(reported_units=20, overlap_units=20)
+    for row in new["predictions"]:
+        if row["id"] in {edited["id"], "variant-jpeg"}:
+            row["localization"].update(reported_units=10, overlap_units=10)
+        if row["id"] == "other":
+            row["localization"] = {"status": "failed", "reason": "Lost source mapping"}
+    result = review.compare(manifest, old, old_lock, new, new_lock, iterations=100)
+    comparisons = {row["metric"]: row for row in result["paired_localization_differences"]}
+    iou = comparisons["positive_iou"]
+    assert (iou["planned"], iou["source_groups"]) == (4, 2)
+    assert iou["candidate_minus_baseline"] == pytest.approx(-1 / 3)
+    assert iou["case_transitions"] == {"increased": 2, "decreased": 1, "tied": 1}
+    assert iou["group_bootstrap_95_percent"] == [-1, pytest.approx(1 / 3)]
+    coverage = comparisons["localization_coverage"]
+    assert coverage["candidate_minus_baseline"] == -.5
+    assert coverage["case_transitions"] == {"increased": 0, "decreased": 1, "tied": 3}
 
 
 def test_raw_response_auc_handles_ties_and_omits_no_cases_from_counts():

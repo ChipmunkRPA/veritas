@@ -1,0 +1,230 @@
+{
+  "appearance_comparison": {
+    "archived_app_deliveries": 12,
+    "current_kernel_fixed_track_deliveries": 5
+  },
+  "cases": 17,
+  "control_deliveries": 11,
+  "detected_photo_short": {
+    "before_during_after_seconds": [
+      2.25,
+      2.5,
+      3.25
+    ],
+    "detected_sample_interval": [
+      2.5,
+      3.0
+    ]
+  },
+  "false_group_counts": {
+    "appearance": 1,
+    "short": 0,
+    "whole": 0
+  },
+  "freeze_sha256": "da0db718af08d58194ad61d0dae9f7abb04252419b4115fd48c874e49e11360a",
+  "genuine_camera_source_components": 2,
+  "independent_audit": {
+    "checked_frame_pairs": 609,
+    "clips": 17,
+    "guarded_unique_model_calls": {
+      "pe": 250,
+      "reference": 250
+    },
+    "status": "verified"
+  },
+  "known_boundaries": {
+    "exposed_publisher_video": [
+      3.0,
+      6.0
+    ],
+    "separate_photo_long": [
+      2.5,
+      4.0
+    ],
+    "separate_photo_short": [
+      2.5,
+      3.25
+    ]
+  },
+  "matched_native_scored_positions_per_arm": 609,
+  "outcomes": {
+    "camera_chroma_conversion_only": {
+      "appearance": {
+        "below": 2
+      },
+      "short": {
+        "below": 2
+      },
+      "whole": {
+        "below": 2
+      }
+    },
+    "camera_recompression_only": {
+      "appearance": {
+        "below": 2
+      },
+      "short": {
+        "below": 2
+      },
+      "whole": {
+        "below": 2
+      }
+    },
+    "camera_unchanged": {
+      "appearance": {
+        "below": 2
+      },
+      "short": {
+        "below": 2
+      },
+      "whole": {
+        "below": 2
+      }
+    },
+    "photo_blur_075": {
+      "appearance": {
+        "below": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "photo_recode_150": {
+      "appearance": {
+        "below": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "photo_swap_075": {
+      "appearance": {
+        "overlap_flag": 1
+      },
+      "short": {
+        "overlap_flag": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "photo_swap_150": {
+      "appearance": {
+        "overlap_flag": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "photo_unchanged": {
+      "appearance": {
+        "below": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "publisher_partial_recompression": {
+      "appearance": {
+        "false_flag": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "publisher_partial_reference": {
+      "appearance": {
+        "false_flag": 1
+      },
+      "short": {
+        "below": 1
+      },
+      "whole": {
+        "below": 1
+      }
+    },
+    "publisher_swap": {
+      "appearance": {
+        "overlap_flag": 4
+      },
+      "short": {
+        "below": 4
+      },
+      "whole": {
+        "below": 4
+      }
+    }
+  },
+  "positive_source_components": 2,
+  "private_native_pngs_verified": 21,
+  "receipts": {
+    "pe": "128e5d5cf256ea006591c369b13c0f7abb38ab0e69cca879a61c40411f670e2f",
+    "reference": "27ef3b46455189810b374fd9da25de4d5812ebce2d8f6c03b64ec226cfadabc2"
+  },
+  "resources": {
+    "pe": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 8023359488,
+        "free_disk": 3460820992
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5293883392,
+      "peak_tree_rss": 1655799808,
+      "seconds": 69.218,
+      "stop": null
+    },
+    "reference": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 6423838720,
+        "free_disk": 3430440960
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5317640192,
+      "peak_tree_rss": 1422999552,
+      "seconds": 72.184,
+      "stop": null
+    }
+  },
+  "schema": "chipmunk.short-face-window-result/1",
+  "source_receipts_sha256": {
+    "photo": "ccc50ad1dad812646ccb5ffdd8d248a037e3ad2d960b0a3c757c742d874be51a",
+    "photo_manifest": "4a6cc7c97d7abba92c666d4176c96fccdfd4c371ea50331884b04516dbc6c8b0",
+    "publisher": "521d11c3210fea01c7125a87647f7b824e2d12309f1e15027dcd371a3a723e7c",
+    "publisher_appearance": "838fdc56385e1ae1cec710fe849f8314584f5fa1aaea2450695a86038d9863a7"
+  },
+  "unique_model_calls": {
+    "pe": 250,
+    "reference": 250
+  }
+}

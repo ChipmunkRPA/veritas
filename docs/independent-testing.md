@@ -51,6 +51,8 @@ reports newly measured false highlights and source-localization results from two
 The [paragraph context transfer](writing-paragraph-context-transfer-2026-11-11.md)
 compares isolated and neighboring paragraph responses on 11 new source articles,
 with separate counts for originals, ordinary edits, and two generators.
+The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md) applies
+the same frozen rule to a new genre and counts ordinary human replacements.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -77,6 +79,8 @@ when the edit generator and source groups change.
 The [small-insertion transfer](image-bg-real-insertions-2026-11-11.md)
 compares source-localized results with unedited originals and matched
 processing controls. Its exact precompression footprint is kept for both formats.
+The [two-editor background patch panel](image-background-patch-transfer-2026-11-11.md)
+tests PNG and JPEG75 with region-matched blur and processing controls.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -451,6 +455,12 @@ outcome. An assessed input with no region has zero reported and overlapping
 units. The summary reports per-condition counts, control highlights, and
 positive IoU, F1, and recall, including misses and unassessed cases in the
 positive means. File response and localization may have different coverage.
+The comparison command also reports paired localization differences by media
+type, condition and truth label. It averages related variants within each
+declared source group and resamples source groups for its intervals. It reports
+individual case transition counts alongside the group-weighted difference.
+Read the coverage difference with overlap and false regions so a missing
+source mapping cannot be mistaken for an improvement.
 For an image with 1,000 source pixels and a 100-pixel truth mask, a report
 covering 80 pixels with 60 pixels inside the mask contributes an IoU of
 60 / 120. Keep the exact region geometry in your private evaluation records.

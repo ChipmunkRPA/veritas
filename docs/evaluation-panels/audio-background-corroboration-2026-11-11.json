@@ -1,0 +1,754 @@
+{
+  "audit": "Recomputed all 102 PCM hashes, 14 source nonoverlaps, each fixed direction, VAD admission, policy arithmetic and classifier call count.",
+  "audit_code_sha256": "d11beb57c07fdeb23bf598b6923eb96c60d89be0287b55cfa9e45312d0be5c52",
+  "challenge": [
+    {
+      "band_available": 0,
+      "class": "genuine",
+      "condition": "matched_clean",
+      "inputs": 6,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 3,
+          "unassessed": 1
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 3,
+          "unassessed": 1
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 3,
+          "unassessed": 1
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 8,
+      "class": "synthetic",
+      "condition": "matched_clean",
+      "inputs": 8,
+      "outputs": {
+        "band": {
+          "ai": 8,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 8,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 8,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 8
+    },
+    {
+      "band_available": 5,
+      "class": "alania",
+      "condition": "matched_clean",
+      "inputs": 5,
+      "outputs": {
+        "band": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 5
+    },
+    {
+      "band_available": 3,
+      "class": "okur",
+      "condition": "matched_clean",
+      "inputs": 3,
+      "outputs": {
+        "band": {
+          "ai": 3,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 3,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 3,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 3
+    },
+    {
+      "band_available": 0,
+      "class": "genuine",
+      "condition": "kitchen_minus5db",
+      "inputs": 6,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 2,
+          "unassessed": 3
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 2,
+          "unassessed": 3
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 2,
+          "unassessed": 3
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 1,
+      "class": "synthetic",
+      "condition": "kitchen_minus5db",
+      "inputs": 8,
+      "outputs": {
+        "band": {
+          "ai": 1,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 1,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 1,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 1,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 1,
+      "class": "alania",
+      "condition": "kitchen_minus5db",
+      "inputs": 5,
+      "outputs": {
+        "band": {
+          "ai": 1,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 1,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 1,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 1,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 0,
+      "class": "okur",
+      "condition": "kitchen_minus5db",
+      "inputs": 3,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 0,
+      "class": "genuine",
+      "condition": "traffic_minus5db",
+      "inputs": 6,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 6
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 6
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 6
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 0,
+      "class": "synthetic",
+      "condition": "traffic_minus5db",
+      "inputs": 8,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 8,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 8,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 8,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 0,
+      "class": "alania",
+      "condition": "traffic_minus5db",
+      "inputs": 5,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    },
+    {
+      "band_available": 0,
+      "class": "okur",
+      "condition": "traffic_minus5db",
+      "inputs": 3,
+      "outputs": {
+        "band": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "baseline": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "quiet": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "quiet_available": 0,
+      "quiet_unavailable_after_positive": 0
+    }
+  ],
+  "challenge_gate_forwards": 3948,
+  "diagnostic_background_stats": [
+    {
+      "background": "background_a_minus5db",
+      "genuine_assessed_minus5db": 5,
+      "genuine_clean_raw_median": 0.0008327381801791489,
+      "genuine_minus5db_raw_median": 0.9958749413490295,
+      "median_background_crest_db": 19.34054227888089,
+      "median_background_power_share_100_3800hz": 0.6755609241553673,
+      "saved_minus5db_genuine_false_ai": 4
+    },
+    {
+      "background": "background_b_minus5db",
+      "genuine_assessed_minus5db": 6,
+      "genuine_clean_raw_median": 0.0009126529621426016,
+      "genuine_minus5db_raw_median": 0.004022780398372561,
+      "median_background_crest_db": 19.65821754096239,
+      "median_background_power_share_100_3800hz": 0.14218260232496632,
+      "saved_minus5db_genuine_false_ai": 1
+    }
+  ],
+  "diagnostic_dose_and_ablations": [
+    {
+      "background": "background_a_minus5db",
+      "content_label_totals_seconds": {
+        "music": 14.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 4.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 4,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 4,
+      "prior_false_ai_reproduced_initial": 3,
+      "prior_false_ai_source_score_median": 0.9971842765808105,
+      "raw_median": 0.9971842765808105,
+      "view": "inside_band_only"
+    },
+    {
+      "background": "background_a_minus5db",
+      "content_label_totals_seconds": {
+        "music": 12.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 6.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 4,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 4,
+      "prior_false_ai_reproduced_initial": 0,
+      "prior_false_ai_source_score_median": 0.001151836069766432,
+      "raw_median": 0.001151836069766432,
+      "view": "outside_band_only"
+    },
+    {
+      "background": "background_a_minus5db",
+      "content_label_totals_seconds": {
+        "music": 12.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 6.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 6,
+        "inconclusive": 0,
+        "original": 0,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 4,
+      "prior_false_ai_reproduced_initial": 4,
+      "prior_false_ai_source_score_median": 0.9985679090023041,
+      "raw_median": 0.9985549747943878,
+      "view": "residual_only"
+    },
+    {
+      "background": "background_a_minus5db",
+      "content_label_totals_seconds": {
+        "music": 14.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 4.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 2,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 4,
+      "prior_false_ai_reproduced_initial": 1,
+      "prior_false_ai_source_score_median": 0.5517898872494698,
+      "raw_median": 0.5517898872494698,
+      "view": "snr_0db"
+    },
+    {
+      "background": "background_a_minus5db",
+      "content_label_totals_seconds": {
+        "music": 12.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 6.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 2,
+        "inconclusive": 4,
+        "original": 0,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 4,
+      "prior_false_ai_reproduced_initial": 1,
+      "prior_false_ai_source_score_median": 0.01985359378159046,
+      "raw_median": 0.01985359378159046,
+      "view": "snr_plus5db"
+    },
+    {
+      "background": "background_b_minus5db",
+      "content_label_totals_seconds": {
+        "music": 0.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 18.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 1,
+        "inconclusive": 2,
+        "original": 3,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 1,
+      "prior_false_ai_reproduced_initial": 1,
+      "prior_false_ai_source_score_median": 0.996539831161499,
+      "raw_median": 0.016453294549137354,
+      "view": "inside_band_only"
+    },
+    {
+      "background": "background_b_minus5db",
+      "content_label_totals_seconds": {
+        "music": 2.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 16.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 1,
+        "inconclusive": 1,
+        "original": 4,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 1,
+      "prior_false_ai_reproduced_initial": 0,
+      "prior_false_ai_source_score_median": 0.0011063615093007684,
+      "raw_median": 0.0010105202673003078,
+      "view": "outside_band_only"
+    },
+    {
+      "background": "background_b_minus5db",
+      "content_label_totals_seconds": {
+        "music": 0.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 18.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 0,
+        "inconclusive": 6,
+        "original": 0,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 1,
+      "prior_false_ai_reproduced_initial": 0,
+      "prior_false_ai_source_score_median": 0.021796531975269318,
+      "raw_median": 0.021604245528578758,
+      "view": "residual_only"
+    },
+    {
+      "background": "background_b_minus5db",
+      "content_label_totals_seconds": {
+        "music": 1.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 17.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 3,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 1,
+      "prior_false_ai_reproduced_initial": 0,
+      "prior_false_ai_source_score_median": 0.4045228958129883,
+      "raw_median": 0.0038106071297079325,
+      "view": "snr_0db"
+    },
+    {
+      "background": "background_b_minus5db",
+      "content_label_totals_seconds": {
+        "music": 0.0,
+        "noise": 0.0,
+        "silence": 0.0,
+        "speech": 18.0
+      },
+      "genuine_sources": 6,
+      "initial_directions_diagnostic_only": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 3,
+        "unassessed": 0
+      },
+      "previous_false_ai_source_count": 1,
+      "prior_false_ai_reproduced_initial": 0,
+      "prior_false_ai_source_score_median": 0.0017309528775513172,
+      "raw_median": 0.0013787359930574894,
+      "view": "snr_plus5db"
+    }
+  ],
+  "diagnostic_replay_audit": "All prior waveform commitments, unchanged directions, exact policy arithmetic and new forward counts checked.",
+  "diagnostic_replay_audit_code_sha256": "d1bb2a532ffcd5d9f30e97d8758f8e47ed42f233de3024ea247f8c046d985a2a",
+  "diagnostic_replay_counts": [
+    {
+      "assessed": 5,
+      "band_ai": 3,
+      "band_scored": 4,
+      "band_unavailable": 0,
+      "class": "genuine",
+      "condition": "background_a_minus5db",
+      "current_ai": 4,
+      "planned": 6,
+      "quiet_ai": 4,
+      "quiet_scored": 4,
+      "quiet_unavailable": 0
+    },
+    {
+      "assessed": 0,
+      "band_ai": 0,
+      "band_scored": 0,
+      "band_unavailable": 0,
+      "class": "isolated_background",
+      "condition": "background_a_minus5db",
+      "current_ai": 0,
+      "planned": 1,
+      "quiet_ai": 0,
+      "quiet_scored": 0,
+      "quiet_unavailable": 0
+    },
+    {
+      "assessed": 6,
+      "band_ai": 5,
+      "band_scored": 5,
+      "band_unavailable": 0,
+      "class": "synthetic",
+      "condition": "background_a_minus5db",
+      "current_ai": 5,
+      "planned": 11,
+      "quiet_ai": 5,
+      "quiet_scored": 3,
+      "quiet_unavailable": 2
+    },
+    {
+      "assessed": 6,
+      "band_ai": 0,
+      "band_scored": 1,
+      "band_unavailable": 0,
+      "class": "genuine",
+      "condition": "background_b_minus5db",
+      "current_ai": 1,
+      "planned": 6,
+      "quiet_ai": 1,
+      "quiet_scored": 0,
+      "quiet_unavailable": 1
+    },
+    {
+      "assessed": 0,
+      "band_ai": 0,
+      "band_scored": 0,
+      "band_unavailable": 0,
+      "class": "isolated_background",
+      "condition": "background_b_minus5db",
+      "current_ai": 0,
+      "planned": 1,
+      "quiet_ai": 0,
+      "quiet_scored": 0,
+      "quiet_unavailable": 0
+    },
+    {
+      "assessed": 10,
+      "band_ai": 10,
+      "band_scored": 10,
+      "band_unavailable": 0,
+      "class": "synthetic",
+      "condition": "background_b_minus5db",
+      "current_ai": 10,
+      "planned": 11,
+      "quiet_ai": 10,
+      "quiet_scored": 7,
+      "quiet_unavailable": 3
+    },
+    {
+      "assessed": 6,
+      "band_ai": 0,
+      "band_scored": 0,
+      "band_unavailable": 0,
+      "class": "genuine",
+      "condition": "matched_clean",
+      "current_ai": 0,
+      "planned": 6,
+      "quiet_ai": 0,
+      "quiet_scored": 0,
+      "quiet_unavailable": 0
+    },
+    {
+      "assessed": 10,
+      "band_ai": 10,
+      "band_scored": 10,
+      "band_unavailable": 0,
+      "class": "synthetic",
+      "condition": "matched_clean",
+      "current_ai": 10,
+      "planned": 11,
+      "quiet_ai": 10,
+      "quiet_scored": 8,
+      "quiet_unavailable": 2
+    }
+  ],
+  "diagnostic_replay_freeze_sha256": "cd3e7e879ab0b347701e51384f158a4153a4284a2485444ca5153502a47d1fcc",
+  "diagnostic_replay_prior_waveform_count": 53,
+  "diagnostic_replay_private_journal_sha256": "dbeacfa716e66956c0ee4f74660e43a10410931c85cd569bc5831ccd6e05751d",
+  "diagnostic_replay_resources": {
+    "elapsed_s": 44.01302045804914,
+    "forwards": 52,
+    "peak_rss_bytes_macos": 2909356032
+  },
+  "freeze_sha256": "08cd81e7d6d578ba46036a89dd76a7d4502276d8073101fc64bae6ca24ab9c07",
+  "limitations": [
+    "The exact earlier English v169 sources were consumed before this diagnostic.",
+    "Turkish v248 speech sources had earlier current-model exposure at milder noise. Their fixed guard and stronger mixtures are new; this is not independent accuracy confirmation.",
+    "The two roles have separate known source inputs and backgrounds. Cross-role language and synthesis-family differences are confounded.",
+    "Noise-only and counterfactual directions bypass serving admission and are diagnostic. Some noise may contain speech that was not reliably labelled.",
+    "Views repeat voices and background recordings. The stock generator supplies three recordings of one voice. Model pretraining overlap is unknown.",
+    "No fit, serving change, customer confidence change or rights to republish source media."
+  ],
+  "production_changed": false,
+  "protocol": {
+    "band_hz": [
+      100,
+      3800
+    ],
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "challenge_background_groups": {
+      "kitchen": 3,
+      "traffic": 3
+    },
+    "challenge_dose_db": -5,
+    "challenge_quotas": {
+      "alania": 5,
+      "genuine": 6,
+      "okur": 3
+    },
+    "challenge_voice_groups": {
+      "alania": 5,
+      "genuine": 6,
+      "okur": 1
+    },
+    "policy": "An existing positive becomes inconclusive if a corroboration view is below the frozen AI decision point and its AI log odds fall by more than ln(2). Insufficient quiet remains unavailable and preserves baseline.",
+    "quiet_guard_samples": 640,
+    "quiet_minimum_amplitude": 0.5,
+    "quiet_minimum_frames": 25,
+    "quiet_stft": [
+      512,
+      128
+    ],
+    "roles": [
+      "retrospective_v169_mechanism",
+      "different_source_v248_fixed_guard_challenge"
+    ],
+    "runner_sha256": "543276d525c271ee9ae931e58a6a27409b12c26f7c9392de19523c9e4d3b28fb",
+    "source_group_disjoint": "Known source hashes, source families for genuine speech, and noise recording ancestry; unknown model pretraining; earlier baseline exposure in each role.",
+    "v169_probe_sha256": "9b1853fa2f9536d6a2405f9773ea803126636312c2e1d0f3fccb8aa1208c9071",
+    "v248_source_result_sha256": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792"
+  },
+  "resources": {
+    "challenge": {
+      "elapsed_s": 30.227790999924764,
+      "forwards": 47,
+      "peak_rss_bytes_macos": 2909683712,
+      "private_journal_sha256": "d484eb33476be4ab655352590cf664b26174e8a9cbcdc724f582c0564467d2da"
+    },
+    "diagnostic": {
+      "elapsed_s": 37.53069600008894,
+      "forwards": 60,
+      "peak_rss_bytes_macos": 2908012544,
+      "private_journal_sha256": "81919830c846f9fc17fec55ce9a7a1d1fb064c0423aa7f65ce5f11af96bd7786"
+    }
+  },
+  "schema": "chipmunk.voice-background-corroboration/1"
+}

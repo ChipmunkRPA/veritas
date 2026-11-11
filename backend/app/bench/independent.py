@@ -211,6 +211,56 @@ def _region_summary(rows: list[dict]) -> dict:
             "mean_positive_recall": mean(recall) if recall else None}
 
 
+def _region_pair_values(case: dict) -> dict[str, float]:
+    measured = case["localization"]
+    assessed = measured["status"] == "ok"
+    reported, overlap = (measured["reported_units"], measured["overlap_units"]) if assessed else (0, 0)
+    target = case["localization_truth"]["target_units"]
+    values = {"localization_coverage": float(assessed)}
+    if target:
+        values.update(positive_iou=overlap / (reported + target - overlap),
+                      positive_f1=2 * overlap / (reported + target), positive_recall=overlap / target)
+    else:
+        values["control_region_rate"] = float(bool(reported))
+    return values
+
+
+def _group_interval(values: list[float], randomizer: random.Random, iterations: int) -> list[float] | None:
+    if len(values) < 2:
+        return None
+    draws = sorted(mean(randomizer.choices(values, k=len(values))) for _ in range(iterations))
+    return [draws[math.floor(.025 * (iterations-1))], draws[math.ceil(.975 * (iterations-1))]]
+
+
+def _paired_regions(strata: dict, prior: dict, *, iterations: int, seed: int) -> list[dict]:
+    """Use identical cases and source-group weighting for overlap and coverage."""
+    randomizer = random.Random(seed)
+    differences = []
+    for (modality, condition, label), rows in sorted(strata.items()):
+        grouped = defaultdict(lambda: defaultdict(list))
+        transitions = defaultdict(Counter)
+        pairs = 0
+        for after in rows:
+            if "localization_truth" not in after:
+                continue
+            before = _region_pair_values(prior[after["id"]])
+            pairs += 1
+            for metric, value in _region_pair_values(after).items():
+                delta = value - before[metric]
+                grouped[metric][after["group"]].append(delta)
+                transitions[metric]["increased" if delta > 0 else "decreased" if delta < 0 else "tied"] += 1
+        for metric, changes in sorted(grouped.items()):
+            values = [mean(changes[group]) for group in sorted(changes)]
+            differences.append({"modality": modality, "condition": condition, "label": label,
+                                "unit": LOCALIZATION_UNITS[modality], "metric": metric,
+                                "planned": pairs, "source_groups": len(values),
+                                "candidate_minus_baseline": mean(values),
+                                "group_bootstrap_95_percent": _group_interval(values, randomizer, iterations),
+                                "case_transitions": {key: transitions[metric][key]
+                                                     for key in ("increased", "decreased", "tied")}})
+    return differences
+
+
 def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
     rows = audit_receipt(manifest, confirmation, "confirmation")
     if lock.get("manifest_sha256") != digest(manifest) or lock.get("schema") != SCHEMA:
@@ -280,16 +330,16 @@ def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict
             grouped[row["group"]].append(int(new_flag) - int(old_flag))
         # Equal source-group weight; repeated variants do not create extra groups.
         values = [mean(group) for group in grouped.values()]
-        interval = None
-        if len(values) >= 2:
-            draws = sorted(mean(randomizer.choices(values, k=len(values))) for _ in range(iterations))
-            interval = [draws[math.floor(.025 * (iterations-1))], draws[math.ceil(.975 * (iterations-1))]]
         differences.append({"modality": modality, "condition": condition,
                             "metric": "ai_alert_rate" if label else "false_alert_rate",
                             "planned": len(rows), "source_groups": len(values),
-                            "candidate_minus_baseline": mean(values), "group_bootstrap_95_percent": interval})
-    return {"baseline": old, "candidate": new, "paired_differences": differences,
+                            "candidate_minus_baseline": mean(values),
+                            "group_bootstrap_95_percent": _group_interval(values, randomizer, iterations)})
+    result = {"baseline": old, "candidate": new, "paired_differences": differences,
             "bootstrap": {"iterations": iterations, "seed": seed, "unit": "declared source group",
                           "weight": "equal source groups within modality, condition, and true class"},
             "interpretation": "AI without an alert includes unassessed cases; it does not mean an original verdict. "
                               "Intervals describe this source panel and do not resolve unknown training overlap or domain shift."}
+    if regional := _paired_regions(strata, prior, iterations=iterations, seed=seed):
+        result["paired_localization_differences"] = regional
+    return result

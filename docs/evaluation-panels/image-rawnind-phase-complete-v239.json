@@ -1,0 +1,80 @@
+{
+  "captures": 4,
+  "libraw_version": [
+    0,
+    22,
+    2
+  ],
+  "measured_views": 24,
+  "new_neural_calls": 0,
+  "roster_sha256": "9df5cd01077ed209d5138798f1b2d6b06711b3fabe06698346eae4f04afbcfa8",
+  "status": "complete",
+  "views": {
+    "crop_odd": {
+      "available_tiles": 11981,
+      "capture_median_of_score_quantiles": [
+        0.017119312299264344,
+        0.04244166898604597,
+        0.1605573795383555,
+        0.3280222008769053
+      ],
+      "mean_held_out_support": 0.8838463243638361,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    },
+    "jpeg75": {
+      "available_tiles": 12117,
+      "capture_median_of_score_quantiles": null,
+      "mean_held_out_support": 0.0033086800457214375,
+      "status_counts": {
+        "phase_not_supported": 4
+      }
+    },
+    "jpeg90": {
+      "available_tiles": 12094,
+      "capture_median_of_score_quantiles": null,
+      "mean_held_out_support": 0.0368497229487434,
+      "status_counts": {
+        "phase_not_supported": 4
+      }
+    },
+    "native": {
+      "available_tiles": 11983,
+      "capture_median_of_score_quantiles": [
+        0.017470350268789854,
+        0.04246093666330045,
+        0.16438992831402577,
+        0.3569039207172753
+      ],
+      "mean_held_out_support": 0.8839562704046544,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    },
+    "resize_075": {
+      "available_tiles": 6915,
+      "capture_median_of_score_quantiles": null,
+      "mean_held_out_support": 0.0,
+      "status_counts": {
+        "phase_not_supported": 4
+      }
+    },
+    "sharpen": {
+      "available_tiles": 11936,
+      "capture_median_of_score_quantiles": [
+        0.016120960347519933,
+        0.040671073471739996,
+        0.16443645985050212,
+        0.3740702843589989
+      ],
+      "mean_held_out_support": 0.8819732205043793,
+      "status_counts": {
+        "scored": 4
+      }
+    }
+  },
+  "wheel_sha256": "60e4c82d2dbce6ae20f95d0894bcacf355d32b783cd017c374c800dfc4a0d9b3"
+}

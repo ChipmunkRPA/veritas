@@ -1,0 +1,239 @@
+{
+  "audit": {
+    "committed_files_verified": 4,
+    "exhibit": {
+      "status": "no candidate localization with qualified anchors"
+    },
+    "external_rows_and_counts_exact": true,
+    "fit_point_exact": true,
+    "sha256": "d15c74dd5c409f5f4216fa4f42a8acba27f53582d030f706f6c554d558d65ee1",
+    "source_groups_with_status": {
+      "appearance_false": 0,
+      "appearance_localized": 6,
+      "appearance_wrong_range": 0,
+      "texture_false": 0,
+      "texture_localized": 0,
+      "texture_wrong_range": 0
+    },
+    "timing_and_anchor_roles_exact": true,
+    "union_counts_exact": true,
+    "unique_native_source_groups": 10,
+    "view_counts_exact": true
+  },
+  "by_condition_duration": {
+    "ordinary_blur/3/2": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "ordinary_blur/3/4": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "ordinary_light/3/2": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "ordinary_light/3/4": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "ordinary_time_step/3/2": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "ordinary_time_step/3/4": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "original/none": {
+      "appearance": {
+        "cases": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "swap_a/3/2": {
+      "appearance": {
+        "cases": 6,
+        "flagged": 6,
+        "localized": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 2
+      }
+    },
+    "swap_a/3/4": {
+      "appearance": {
+        "cases": 6,
+        "flagged": 6,
+        "localized": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "swap_b/3/2": {
+      "appearance": {
+        "cases": 6,
+        "flagged": 6,
+        "localized": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    },
+    "swap_b/3/4": {
+      "appearance": {
+        "cases": 6,
+        "flagged": 6,
+        "localized": 6
+      },
+      "texture": {
+        "cases": 6,
+        "unassessed": 3
+      }
+    }
+  },
+  "commitments": {
+    "fit.jsonl": "0d45527b9c3edf9acad9fc514d294a6ec7c95d4ee779c9b91c2f80a8bc75d00f",
+    "freeze.json": "71f782f89c6ab940ae68ab1b9ce48d3da7462ccfdae1a466c4046ac25deb553e",
+    "held.jsonl": "8fb54383fdec0c134d0342c6097fdcf4c5172dd10695548a6abe48f11db110e6",
+    "point.json": "456f17509004bf88cf07dfd87941ad3dd2e8da3496740584f6fa678bfe303440"
+  },
+  "current_appearance_boundary_precision": {
+    "3/2": {
+      "cases": 12,
+      "median_absolute_end_error_seconds": 0.03333333333333333,
+      "median_absolute_onset_error_seconds": 0.03666666666666667,
+      "median_intersection_over_union": 0.9565217391304348,
+      "overlap_at_least_half": 12,
+      "overlap_at_least_three_quarters": 8
+    },
+    "3/4": {
+      "cases": 12,
+      "median_absolute_end_error_seconds": 0.11,
+      "median_absolute_onset_error_seconds": 0.12,
+      "median_intersection_over_union": 0.7530454042081949,
+      "overlap_at_least_half": 12,
+      "overlap_at_least_three_quarters": 6
+    }
+  },
+  "decision": "Research only. No new serving output or score contribution.",
+  "external": {
+    "cohorts": {
+      "camera": {
+        "appearance": {
+          "control_cases": 10,
+          "false_control_flags": 5
+        },
+        "texture": {
+          "control_cases": 10
+        }
+      },
+      "publisher": {
+        "appearance": {
+          "control_cases": 3,
+          "false_control_flags": 3,
+          "localized": 4,
+          "swap_cases": 8,
+          "wrong_range": 4
+        },
+        "texture": {
+          "control_cases": 3,
+          "swap_cases": 8
+        }
+      }
+    },
+    "control_false_flag_groups": {
+      "camera": {
+        "appearance": 1,
+        "texture": 0
+      },
+      "publisher": {
+        "appearance": 1,
+        "texture": 0
+      }
+    },
+    "freeze_sha256": "1d3533dd82aec55f6638a2b55ed6495f5a87d3601bc7eea3de9bc8a64619e1e9",
+    "max_self_rss_bytes": 332824576,
+    "native_samples": 698,
+    "raw_results_sha256": "543d5ce694524e0aef934fadcc31cf311d57e02ec677028f726c72b26f43314a",
+    "seconds": 38.349420374957845,
+    "source_groups": {
+      "camera": 2,
+      "publisher": 1
+    }
+  },
+  "fit": {
+    "assessed": 14,
+    "fit_cases": 28,
+    "fit_sha256": "0d45527b9c3edf9acad9fc514d294a6ec7c95d4ee779c9b91c2f80a8bc75d00f",
+    "point": 0.7187467801621625
+  },
+  "held_groups": 6,
+  "held_source_groups_with_outcome": {
+    "appearance_localized": 6,
+    "positive_views": 6
+  },
+  "points": {
+    "appearance": 0.11243900750879454,
+    "texture": 0.7187467801621625
+  },
+  "runs": {
+    "fit": {
+      "groups": 4,
+      "max_self_rss_bytes": 334954496,
+      "native_samples": 664,
+      "seconds": 77.47096858301666
+    },
+    "held": {
+      "groups": 6,
+      "max_self_rss_bytes": 330235904,
+      "native_samples": 1269,
+      "seconds": 142.71626687503885
+    }
+  },
+  "schema": "chipmunk.video-face-texture-return-result/1",
+  "union": {
+    "added_false_views": 0,
+    "added_localized": 0,
+    "additional_wrong_ranges": 0,
+    "union_false_views": 0,
+    "union_localized": 24
+  }
+}

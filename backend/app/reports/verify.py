@@ -30,6 +30,7 @@ whole chain is verified on the instance (`app.cli audit verify`).
 The optional `--source-image IMAGE` check uses Pillow to compare unannotated crops with the submitted original locally.
 The optional `--source-audio MEDIA` check uses FFmpeg to compare exact samples and source timestamps from an audio or video original.
 The optional `--source-video VIDEO` check compares native frames, crops, and measurement inputs with the video original.
+Use both audio and video source flags to check both parts of a video package in one run.
 The optional `--source-document DOCUMENT` check compares exact extracted text, source positions, and native PDF images.
 """
 from __future__ import annotations
@@ -150,14 +151,12 @@ def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_ke
                                                if given is not None) or None)
         try:
             out = _verify(zf, public_key_pem, out, expected)
-            if out.consistent and source_image is not None:
-                out.checks.append(_image_source(zf, out.bundle, source_image))
-            if out.consistent and source_audio is not None:
-                out.checks.append(_audio_source(zf, out.bundle, source_audio))
-            if out.consistent and source_video is not None:
-                out.checks.append(_video_source(zf, out.bundle, source_video))
-            if out.consistent and source_document is not None:
-                out.checks.append(_document_source(zf, out.bundle, source_document))
+            if out.consistent:
+                sources = ((_image_source, source_image), (_audio_source, source_audio),
+                           (_video_source, source_video), (_document_source, source_document))
+                for compare, original in sources:
+                    if original is not None:
+                        out.checks.append(compare(zf, out.bundle, original))
             return out
         except (zipfile.BadZipFile, zlib.error, EOFError, OSError, NotImplementedError) as e:  # a CRC failure or a damaged entry
             out.checks.append(Check("readable", False, f"an entry cannot be read ({type(e).__name__}: {e})"))

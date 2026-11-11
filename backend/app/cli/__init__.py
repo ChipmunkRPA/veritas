@@ -6,7 +6,8 @@
     python -m app.cli models pin MODEL_ID [--write] [--manifest PATH]
     python -m app.cli models footprint [--manifest PATH]
     python -m app.cli models plan [--profile PROFILE] [--budget-mb MB] [--device cpu|mps|cuda] [--json]
-    python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE | --source-audio MEDIA | --source-video VIDEO] [--json]
+    python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE | --source-document DOCUMENT | --source-audio MEDIA | --source-video VIDEO] [--json]
+    For video with frozen soundtrack evidence, pass both --source-video and --source-audio.
     python -m app.cli compare-image REFERENCE SUBMITTED [--evidence-dir DIRECTORY]
     python -m app.cli reproduce PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--tolerance 0.001] [--json]
     python -m app.cli custody export [--format jsonl|csv] [--case-id ID] [--out PATH] [--database-url URL]
@@ -416,6 +417,10 @@ def _verify(args: argparse.Namespace) -> int:
     1 not verified, 2 unreadable or a pin of the wrong form, 3 consistent with the key it carries and no key pinned (N-11)."""
     from app.reports import verify
 
+    sources = (args.source_image, args.source_audio, args.source_video, args.source_document)
+    if (args.source_image or args.source_document) and sum(source is not None for source in sources) > 1:
+        print("error: image and document source checks each require a separate verification command", file=sys.stderr)
+        return verify.EXIT_ERROR
     try:
         result = verify.verify_package(Path(args.package), public_key_pem=_public_key(args.public_key),
                                        expect_key_id=args.expect_key_id,
@@ -1156,9 +1161,9 @@ def build_parser() -> argparse.ArgumentParser:
                                                           "completeness, signatures, custody")
     p_package_verify.add_argument("package", help="veritas-evidence-….zip")
     _pin_arguments(p_package_verify)
-    source = p_package_verify.add_mutually_exclusive_group()
+    source = p_package_verify.add_argument_group("optional original-source replay")
     source.add_argument("--source-image", metavar="IMAGE", help="compare crops in a public image package with a local original")
-    source.add_argument("--source-audio", metavar="MEDIA", help="compare clip samples and timestamps with a local audio or video original")
+    source.add_argument("--source-audio", metavar="MEDIA", help="compare clip samples and timestamps with a local audio or video original; can be combined with --source-video")
     source.add_argument("--source-video", metavar="VIDEO", help="compare frames, crops and mouth patches with a local video original")
     source.add_argument("--source-document", metavar="DOCUMENT", help="compare excerpts, positions and native PDF images with a local original")
     p_package_verify.add_argument("--json", action="store_true")

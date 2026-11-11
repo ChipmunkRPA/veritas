@@ -1,0 +1,288 @@
+{
+  "acoustic_development": {
+    "recorded_1": {
+      "available": 10,
+      "maximum_component_reconstruction_error": 2.9802322387695312e-08,
+      "maximum_snr_gain_db": 2.097,
+      "median_foreground_level_change_db": -0.52,
+      "median_snr_gain_db": 1.281,
+      "minimum_snr_gain_db": 0.46,
+      "positive_snr_gain": 10
+    },
+    "recorded_2": {
+      "available": 10,
+      "maximum_component_reconstruction_error": 1.4901161193847656e-08,
+      "maximum_snr_gain_db": 3.707,
+      "median_foreground_level_change_db": -0.536,
+      "median_snr_gain_db": 2.681,
+      "minimum_snr_gain_db": 2.208,
+      "positive_snr_gain": 10
+    }
+  },
+  "acoustic_diagnostics": {
+    "overlapping_interfering_voices": {
+      "available": 16,
+      "maximum_component_reconstruction_error": 5.960464477539063e-08,
+      "maximum_snr_gain_db": 4.745,
+      "median_foreground_level_change_db": -0.354,
+      "median_snr_gain_db": 3.995,
+      "minimum_snr_gain_db": 1.163,
+      "positive_snr_gain": 16
+    },
+    "single_interfering_voice": {
+      "available": 16,
+      "maximum_component_reconstruction_error": 5.960464477539063e-08,
+      "maximum_snr_gain_db": 2.828,
+      "median_foreground_level_change_db": -0.24,
+      "median_snr_gain_db": 1.542,
+      "minimum_snr_gain_db": 0.071,
+      "positive_snr_gain": 16
+    }
+  },
+  "added_genuine_false_flags": 0,
+  "commitments": {
+    "admission_sha256": "06ddad6962ce22c7895ac97daeaf295a61598357ec9f7ac4cac6b781eed2c40e",
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "exact_repeat_projections_sha256": "b31cada127f67ed90d303999fe54e55d44b2c79862d776bb9310ce5b0b3fd4c7",
+    "exact_repeat_roster_sha256": "8935d1f5faa66eeb94bf9b1b46ca99b596dd8258a17e4eeb7d3a1a4ed86afefb",
+    "freeze_sha256": "665a574afa724c37076b167bf67c1eba7e9de232ba23ac078c79d74002b9f7e1",
+    "implementation_sha256": "2676730bbd88bf4fe8906145814e9dea561d9ab836f25d07bce0551fc71ba979",
+    "plan_sha256": "ed56cdb640d23baccac56d1b9bc81110f2e7f996b05eeaa223d35ac87a7be27e",
+    "projections_sha256": "25202080808efee2e727b1508c951b3514e9a6c21765275b019f5e2c4292147d",
+    "roster_sha256": "8935d1f5faa66eeb94bf9b1b46ca99b596dd8258a17e4eeb7d3a1a4ed86afefb",
+    "runner_sha256": "30a4b310e1e6241869ee7cd4f7a7d45b16a999e5f830f924b31ae4c9c023a290",
+    "score_sha256": "5b59ae3d0eed71e8a430d598ac778143ea62acf3bc614dab1928da6ef71eadf6",
+    "source_receipt_sha256": "1add5eff6db229b2670c8a6ec808b325de41aabe052f3c75833690e2c94a5ea1",
+    "speech_gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "confirmation": {
+    "clean": {
+      "genuine": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 6,
+          "unassessed": 0
+        },
+        "current": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 6,
+          "unassessed": 0
+        },
+        "planned": 8,
+        "projection_status": {
+          "rank_deficient": 8
+        },
+        "second_opinion": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      },
+      "synthetic": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 7,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "current": {
+          "ai": 7,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "planned": 8,
+        "projection_status": {
+          "rank_deficient": 8
+        },
+        "second_opinion": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 8
+        }
+      }
+    },
+    "overlapping_interfering_voices": {
+      "genuine": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 5,
+          "unassessed": 1
+        },
+        "current": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 5,
+          "unassessed": 1
+        },
+        "planned": 8,
+        "projection_status": {
+          "available": 8
+        },
+        "second_opinion": {
+          "ai": 0,
+          "inconclusive": 4,
+          "original": 1,
+          "unassessed": 3
+        }
+      },
+      "synthetic": {
+        "added_ai_by_source_lane": {
+          "drifting": 1
+        },
+        "combined": {
+          "ai": 5,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "current": {
+          "ai": 4,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        },
+        "planned": 8,
+        "projection_status": {
+          "available": 8
+        },
+        "second_opinion": {
+          "ai": 5,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    "single_interfering_voice": {
+      "genuine": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 0,
+          "inconclusive": 4,
+          "original": 1,
+          "unassessed": 3
+        },
+        "current": {
+          "ai": 0,
+          "inconclusive": 4,
+          "original": 1,
+          "unassessed": 3
+        },
+        "planned": 8,
+        "projection_status": {
+          "available": 8
+        },
+        "second_opinion": {
+          "ai": 0,
+          "inconclusive": 5,
+          "original": 1,
+          "unassessed": 2
+        }
+      },
+      "synthetic": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 5,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "current": {
+          "ai": 5,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "planned": 8,
+        "projection_status": {
+          "available": 8
+        },
+        "second_opinion": {
+          "ai": 4,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 0
+        }
+      }
+    },
+    "untouched_native": {
+      "genuine": {
+        "added_ai_by_source_lane": {},
+        "combined": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 3,
+          "unassessed": 2
+        },
+        "current": {
+          "ai": 0,
+          "inconclusive": 3,
+          "original": 3,
+          "unassessed": 2
+        },
+        "planned": 8,
+        "projection_status": {
+          "ambiguous_center": 1,
+          "available": 7
+        },
+        "second_opinion": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 6
+        }
+      }
+    }
+  },
+  "frozen_advance": "At least two distinct synthetic voice groups recovered overall with at least one per noisy scene, at most one added genuine false AI across all views, and at least six genuine mono-admitted controls per noisy scene. Passing warrants a larger independent panel only.",
+  "frozen_policy": "Preserve mono AI, original and unassessed. Only change mono inconclusive to AI if its candidate passes the same VAD and leans AI under the unchanged point. No score for unsupported projections or for the transform itself.",
+  "met_frozen_advance": false,
+  "method": {
+    "algorithm": "18 iterations of two-source complex AuxIVA using regularized weighted covariance, iterative projection and a shared speech-band radius",
+    "fft_samples": 512,
+    "hop_samples": 128,
+    "input": "exact stereo s16, 16 kHz, three seconds",
+    "minimum_alignment_margin": 0.03,
+    "minimum_center_alignment": 0.8,
+    "minimum_projected_rms": 0.001,
+    "minimum_stereo_eigenvalue_ratio": 0.0001,
+    "ridge_ratio": 0.0001,
+    "selection": "One average-microphone projected component with greater speech-band, source-image-energy-weighted alignment to the center. Reject weak stereo, ambiguous center and invalid output.",
+    "speech_band_hz": [
+      250.0,
+      5000.0
+    ]
+  },
+  "recovered_synthetic_groups": 1,
+  "resources": {
+    "actual_mono_classifier_inputs": 50,
+    "actual_separated_classifier_inputs": 29,
+    "actual_vad_forwards": 8930,
+    "actual_voice_forwards": 96,
+    "cpu_seconds_elapsed": 61.302071125013754,
+    "peak_process_rss_bytes": 2925658112,
+    "planned_views": 56
+  },
+  "scene_notes": {
+    "overlapping_interfering_voices": {
+      "annotated_overlap_cells": 176,
+      "annotated_voice_cells": 300
+    },
+    "single_interfering_voice": {
+      "annotated_overlap_cells": 9,
+      "annotated_voice_cells": 300
+    }
+  },
+  "schema": "chipmunk.audio.frequency-separation-transfer/1",
+  "serving_change": false,
+  "status": "evaluated_locally"
+}

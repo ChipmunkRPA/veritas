@@ -204,6 +204,18 @@ the four partial variants as one source and camera outcomes by recording group.
 The [recorded-noise repetition comparison](audio-repeat-robustness-transfer-2026-11-11.md)
 checks exact and similar repeated audio across recorded backgrounds and four
 codecs, with matching ordinary controls and anonymized per-group results.
+The [frequency-domain separation comparison](audio-frequency-separation-transfer-2026-11-11.md)
+keeps the production voice scores and calibrations fixed while measuring one
+stereo projection under two kinds of competing speech.
+
+The [active PNG transfer](image-active-png-transfer-2026-11-11.md) uses exact
+source-aligned masks to check which gains survive on small edited patches with
+untouched backgrounds. The [color-residual comparison](image-color-residual-transfer-2026-11-11.md)
+shows how many misses come from region selection before a review point is applied.
+The [short face texture comparison](video-face-texture-return-2026-11-11.md)
+checks appearance and texture on native video clocks with ordinary camera edits.
+The [short email contrast study](writing-short-email-contrast-transfer-2026-11-11.md)
+compares individual sentences and matched context with exact MIME positions.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and
@@ -431,8 +443,14 @@ replay accepts frames up to 16 megapixels. Different FFmpeg builds can produce
 different results, particularly for older exports.
 
 Review the report's interpretation separately. The verifier does not rerun the
-detectors or recreate annotations and context-clip pixels. Use `--source-audio`
-in a separate invocation to replay the soundtrack evidence from the same video.
+detectors or recreate annotations and context-clip pixels. When the package has
+frozen soundtrack evidence, run both checks together against the same original.
+Each channel reports its own result.
+
+```sh
+python -m app.cli verify evidence.zip --public-key instance-key.pem \
+  --source-video original.mkv --source-audio original.mkv
+```
 
 ### Replay document evidence against the original
 

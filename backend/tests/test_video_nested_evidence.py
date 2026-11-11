@@ -361,23 +361,32 @@ def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes, *, source_audio=None,
         assert all(archive.read(a['file']) == f.store.read_bytes(a['sha256']) for a in bundle['artifacts'])
     trusted=tmp_path/'trusted.pem'
     trusted.write_bytes(key.public_pem())
+    if source_audio is not None or source_video is not None:
+        command = [sys.executable, '-m', 'app.cli', 'verify', str(built.path), '--public-key', str(trusted), '--json']
+        source_args = []
+        if source_audio is not None:
+            source_args.extend(('--source-audio', str(source_audio)))
+        if source_video is not None:
+            source_args.extend(('--source-video', str(source_video)))
+        checked = subprocess.run(command + source_args, capture_output=True, text=True, timeout=30)
+        assert checked.returncode == 0, checked.stdout + checked.stderr
+        checks = {check['name']: check for check in json.loads(checked.stdout)['checks']}
     if source_audio is not None:
-        checked = subprocess.run([sys.executable, '-m', 'app.cli', 'verify', str(built.path),
-                                  '--public-key', str(trusted), '--source-audio', str(source_audio), '--json'],
-                                 capture_output=True, text=True, timeout=30)
-        assert checked.returncode == 0, checked.stdout + checked.stderr
-        last = json.loads(checked.stdout)['checks'][-1]
-        assert last['name'] == 'original audio samples' and last['ok']
-        assert 'source timeline matched' in last['detail'] and 'Verified 0 published' not in last['detail']
+        audio_check = checks['original audio samples']
+        assert audio_check['ok']
+        assert 'source timeline matched' in audio_check['detail'] and 'Verified 0 published' not in audio_check['detail']
     if source_video is not None:
-        checked = subprocess.run([sys.executable, '-m', 'app.cli', 'verify', str(built.path),
-                                  '--public-key', str(trusted), '--source-video', str(source_video), '--json'],
+        video_check = checks['original video frames']
+        assert video_check['ok'] and 'source frame clock matched' in video_check['detail']
+        assert f"mouth patches ({25 * len(f.document['av']['packets'])})" in video_check['detail']
+    if source_audio is not None and source_video is not None:
+        wrong_source = tmp_path / 'unrelated-original.bin'
+        wrong_source.write_bytes(b'unrelated original')
+        checked = subprocess.run(command + ['--source-audio', str(wrong_source), '--source-video', str(source_video)],
                                  capture_output=True, text=True, timeout=30)
-        assert checked.returncode == 0, checked.stdout + checked.stderr
-        last = json.loads(checked.stdout)['checks'][-1]
-        assert last['name'] == 'original video frames' and last['ok']
-        assert 'source frame clock matched' in last['detail']
-        assert f"mouth patches ({25 * len(f.document['av']['packets'])})" in last['detail']
+        assert checked.returncode == 1, checked.stdout + checked.stderr
+        checks = {check['name']: check for check in json.loads(checked.stdout)['checks']}
+        assert not checks['original audio samples']['ok'] and checks['original video frames']['ok']
     offline=subprocess.run([sys.executable,'-c', '''
 import importlib.abc,json,socket,sys
 from pathlib import Path

@@ -1,0 +1,411 @@
+{
+  "schema": "chipmunk.short-email-contrast-comparison/1",
+  "source_groups": 6,
+  "known_previous_texts_checked": 45260,
+  "source_publications": 2,
+  "original_word_range": [
+    45,
+    94
+  ],
+  "methods": {
+    "human_source": "Independently attributed, previously unused federal-duty correspondence excerpts, one per writer and distinct subject; no surrounding private material or unresolved redactions. Group selection, inputs and expected ranges frozen before generators and detectors. Genuine human donor same writer or one other official in the same workplace, with one same-author omitted follow-up sentence and no donor in another panel group.",
+    "generators": "Same two pinned Apache-2.0 weight families and exact source splice as earlier. One EOS attempt per family and group, identical generation admission policy. No output recovery or scoring before admission.",
+    "current": "Three-sentence current context classifier, raw >=.5, first six source-ordered supports, union of actual context spans.",
+    "candidate": "Pinned binary model at its publisher temperature. Full body and individual eligible sentences use exact native EML source. Eligible sentence has at least 12 segmenter words. An omission input keeps all other sentence spans in order joined with one space, including short spans, at least 12 words remaining; counterfactual inputs are diagnostic only.",
+    "methods": "Compare candidate sentence flags (.5), and previous sentence plus body flags (.5 each), separately with new contrast rules. Relative rule requires candidate .5 and at least ln(2) log-odds above the strongest other eligible exact sentence; omit rule requires candidate .5, positive drop of at least ln(2) in full body log-odds from its omission, and strictly largest drop among qualifying size-matched foils. Combined rule requires both. A size-matched foil is any other eligible sentence with .5\u20132.0 target word count and a complete omission input. A passing rule marks only its exact original sentence, no expansion or public score.",
+    "outcomes": "Evaluate all admitted human and mixed files, by source group and family. Count any flags, useful overlap >=.30 non-whitespace character IoU, wrong region, missed local edits and unassessed scope. Thresholds are fixed before outcomes. No product integration or calibration claims.",
+    "motivation": "Local evidence and context variation motivate comparing exact local responses and adding paired contextual sensitivity. Own bounded heuristic, not an implementation of LA-CPD."
+  },
+  "readout": {
+    "original": {
+      "current": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "sentence": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 4,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "sentence_and_body": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "relative": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 3,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "omission": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "relative_and_omission": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      }
+    },
+    "human_sentence": {
+      "current": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "sentence": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 3,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 3
+      },
+      "sentence_and_body": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 1
+      },
+      "relative": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 2,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "omission": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "relative_and_omission": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      }
+    },
+    "qwen": {
+      "current": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 1,
+        "missed_if_assessed": 5,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "sentence": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 5,
+        "useful": 5,
+        "missed_if_assessed": 1,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "sentence_and_body": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 1,
+        "missed_if_assessed": 5,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "relative": {
+        "assessed": 6,
+        "unassessed": 0,
+        "flagged": 4,
+        "useful": 3,
+        "missed_if_assessed": 3,
+        "wrong_location": 1,
+        "ordinary_edit_overlap": 0
+      },
+      "omission": {
+        "assessed": 5,
+        "unassessed": 1,
+        "flagged": 1,
+        "useful": 1,
+        "missed_if_assessed": 4,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "relative_and_omission": {
+        "assessed": 5,
+        "unassessed": 1,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 5,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0
+      }
+    },
+    "smol2": {
+      "current": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 2,
+        "useful": 2,
+        "missed_if_assessed": 1,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      },
+      "sentence": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 3,
+        "useful": 3,
+        "missed_if_assessed": 0,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      },
+      "sentence_and_body": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 1,
+        "missed_if_assessed": 2,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      },
+      "relative": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 3,
+        "useful": 2,
+        "missed_if_assessed": 1,
+        "wrong_location": 1,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      },
+      "omission": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 3,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      },
+      "relative_and_omission": {
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "missed_if_assessed": 3,
+        "wrong_location": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 3
+      }
+    }
+  },
+  "paired_vs_current": {
+    "original": {
+      "sentence": {
+        "0->0": 2,
+        "0->1": 4
+      },
+      "sentence_and_body": {
+        "0->0": 5,
+        "0->1": 1
+      },
+      "relative": {
+        "0->0": 3,
+        "0->1": 3
+      },
+      "omission": {
+        "0->0": 6
+      },
+      "relative_and_omission": {
+        "0->0": 6
+      }
+    },
+    "human_sentence": {
+      "sentence": {
+        "0->0": 3,
+        "0->1": 3
+      },
+      "sentence_and_body": {
+        "0->0": 5,
+        "0->1": 1
+      },
+      "relative": {
+        "0->0": 4,
+        "0->1": 2
+      },
+      "omission": {
+        "0->0": 6
+      },
+      "relative_and_omission": {
+        "0->0": 6
+      }
+    },
+    "qwen": {
+      "sentence": {
+        "0->0": 1,
+        "0->1": 4,
+        "1->1": 1
+      },
+      "sentence_and_body": {
+        "0->0": 4,
+        "1->0": 1,
+        "0->1": 1
+      },
+      "relative": {
+        "0->0": 2,
+        "0->1": 3,
+        "1->0": 1
+      },
+      "omission": {
+        "0->0": 3,
+        "1->0": 1,
+        "0->1": 1,
+        "unassessed": 1
+      },
+      "relative_and_omission": {
+        "0->0": 4,
+        "1->0": 1,
+        "unassessed": 1
+      }
+    },
+    "smol2": {
+      "sentence": {
+        "0->1": 1,
+        "1->1": 2
+      },
+      "sentence_and_body": {
+        "0->0": 1,
+        "1->0": 1,
+        "1->1": 1
+      },
+      "relative": {
+        "0->1": 1,
+        "1->1": 1,
+        "1->0": 1
+      },
+      "omission": {
+        "0->0": 1,
+        "1->0": 2
+      },
+      "relative_and_omission": {
+        "0->0": 1,
+        "1->0": 2
+      }
+    }
+  },
+  "false_positive_groups": {
+    "current": 0,
+    "sentence": 4,
+    "sentence_and_body": 1,
+    "relative": 4,
+    "omission": 0,
+    "relative_and_omission": 0
+  },
+  "useful_positive_groups": {
+    "current": 2,
+    "sentence": 6,
+    "sentence_and_body": 1,
+    "relative": 5,
+    "omission": 1,
+    "relative_and_omission": 0
+  },
+  "coverage": {
+    "exact_eml": 21,
+    "current_input_windows": 73,
+    "candidate_body_inputs": 21,
+    "candidate_sentence_inputs": 64,
+    "candidate_omission_inputs": 64,
+    "eligible_matched_omission_files": 20,
+    "positive_targets_eligible": 9,
+    "positive_targets_with_matched_omission": 8
+  },
+  "generation": {
+    "qwen": {
+      "admitted": 6
+    },
+    "smol2": {
+      "admitted": 3,
+      "copied_target": 1,
+      "not_one_sentence": 1,
+      "word_geometry": 1
+    }
+  },
+  "commitments": {
+    "source_sha256": "827041029d3a1953548bf8d28e916f874051cc2ade69e79ba53603365cdab9ef",
+    "freeze_sha256": "b51aeb1c77dcc8f8b3b585a8167e7ad923d7ccc5369087c5d0452c1b72fb03d7",
+    "study_code_sha256": "64d83551612b50e50d1b167ce1b5f3f7923b86e57bed9a6511559c697a4c014b",
+    "readout_geometry_sha256": "4fb424f0adf40b1ffedcc4aecb6e6950a590d487d4b8bd9d9de29285822c65ad",
+    "current": {
+      "forwards": 24,
+      "response_sha256": "98fb9e7b50df886027ba8b80df3a238bf14fc864dfda783e8a03105c50ff4a63",
+      "cases": 24,
+      "minimum_ram": 6773506048,
+      "sampled_rss": 2084421632,
+      "seconds": 12.398
+    },
+    "candidate": {
+      "cases": 24,
+      "forwards": 49,
+      "sha256": "49d690a59cc0cb68ae65aa45156eb70243fafc99427c9429cbb1326fb4396fe3",
+      "peak_rss": 1219706880,
+      "minimum_ram": 7863648256,
+      "seconds": 4.089
+    }
+  },
+  "independent_arithmetic": {
+    "matched_outcome_counts": 96,
+    "reducer_sha256": "c3daabce73a39a7017fe5d6208a84e48c9eb61291d2a8df303146f2632668ed6"
+  },
+  "production_decision": "Retain current passage selection. Sentence and relative checks increase false flags. Matched omission suppresses false flags and loses useful edits. Combined support does not localize an admitted edit.",
+  "methods_frozen_before_generation": true,
+  "case_content_published": false
+}

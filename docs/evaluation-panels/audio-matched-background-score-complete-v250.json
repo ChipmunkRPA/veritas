@@ -1,0 +1,1901 @@
+{
+  "schema": "chipmunk.audio-matched-background-score-result/250",
+  "status": "complete",
+  "freeze_sha256": "a4fd5189cb88989598019cbbef678f41aef10adc58e43701643461308a4b1943",
+  "planned_cases": 360,
+  "baseline_classifier_calls": 404,
+  "candidate_encoder_calls": 324,
+  "baseline_profile_sha256": [
+    "06524b32dea390f41156aaecdc2e4a4138614ed7d8f58b97c371b041127e276a",
+    "c211e71d9466b4f51f99b7b96e03fcef2233fe15d1a615d6587dd39cb7b60cdc",
+    "f638a33058c634fb1e74287b43e0d06cd2763d018c30be88d8a5c077ca4a0d77",
+    "3bc85520d75570ecd5b2a79c17dc8efa24a85378b74cdc00983f8b2ba91de432",
+    "b7bac216b337a87476afdea582a6b6cc4ad2b7ccd74cd0460346aa90b76582bd"
+  ],
+  "candidate_profile_sha256": [
+    "6d720fa91dc689a79f78c64e80c42a4b66444bc6f3b93984d9623a9f34639f41",
+    "d0f5174b37548ac29a554bb6a3720ad92920dd344a42d160e6fb3ea51bbb5507",
+    "9c49cd07ac23b19b0a27bc6b702cdb2d5a361fb6df3dffbf2b1c894ed5d11ce9",
+    "d61b60fcdf419ceb775cf875aeb0fee5f98a7e1b49bd22b1222694c7be516818",
+    "bb659a6ff12eb11270fb411db507a3c89fe5aeb50ce022e44307171969734b99"
+  ],
+  "foreground_coverage": {
+    "genuine": {
+      "planned_utterances": 24,
+      "available_utterances": 23,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 23,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v252": 24
+      }
+    },
+    "alania": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 24,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v236": 24
+      }
+    },
+    "okur": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 1,
+      "known_available_voice_groups": 1,
+      "maximum_utterances_per_group": 24,
+      "source_cohort_counts": {
+        "v240": 4,
+        "v245": 20
+      }
+    }
+  },
+  "background_coverage": {
+    "kitchen": {
+      "provisional_excerpts_available": 46,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 4,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 6
+    },
+    "traffic": {
+      "provisional_excerpts_available": 27,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 3,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 10
+    }
+  },
+  "background_evidence_type": "machine_screened_provisional",
+  "human_listening_reviewed": false,
+  "by_condition": {
+    "matched_clean": {
+      "planned": 72,
+      "preparation_unavailable": 1,
+      "speech_gate_rejected": 1,
+      "assessed_by_both": 70,
+      "baseline_directions": {
+        "ai": 45,
+        "original": 18,
+        "inconclusive": 7,
+        "unavailable": 2
+      },
+      "candidate_english_diagnostic_directions": {
+        "ai": 45,
+        "original": 22,
+        "inconclusive": 3,
+        "unavailable": 2
+      },
+      "second_opinion_directions": {
+        "ai": 45,
+        "original": 18,
+        "inconclusive": 7,
+        "unavailable": 2
+      },
+      "recovered_synthetic_variants": 0,
+      "recovered_synthetic_voice_groups": 0,
+      "added_false_ai_variants": 0,
+      "added_false_ai_genuine_groups": 0,
+      "baseline_false_ai_variants": 0,
+      "second_opinion_false_ai_variants": 0,
+      "baseline_synthetic_wrong_original_variants": 1,
+      "second_opinion_synthetic_wrong_original_variants": 1
+    },
+    "kitchen_0db": {
+      "planned": 72,
+      "preparation_unavailable": 1,
+      "speech_gate_rejected": 10,
+      "assessed_by_both": 61,
+      "baseline_directions": {
+        "ai": 17,
+        "original": 18,
+        "inconclusive": 26,
+        "unavailable": 11
+      },
+      "candidate_english_diagnostic_directions": {
+        "ai": 21,
+        "original": 28,
+        "inconclusive": 12,
+        "unavailable": 11
+      },
+      "second_opinion_directions": {
+        "ai": 21,
+        "original": 18,
+        "inconclusive": 22,
+        "unavailable": 11
+      },
+      "recovered_synthetic_variants": 4,
+      "recovered_synthetic_voice_groups": 4,
+      "added_false_ai_variants": 0,
+      "added_false_ai_genuine_groups": 0,
+      "baseline_false_ai_variants": 0,
+      "second_opinion_false_ai_variants": 0,
+      "baseline_synthetic_wrong_original_variants": 10,
+      "second_opinion_synthetic_wrong_original_variants": 10
+    },
+    "kitchen_5db": {
+      "planned": 72,
+      "preparation_unavailable": 1,
+      "speech_gate_rejected": 4,
+      "assessed_by_both": 67,
+      "baseline_directions": {
+        "ai": 23,
+        "original": 22,
+        "inconclusive": 22,
+        "unavailable": 5
+      },
+      "candidate_english_diagnostic_directions": {
+        "ai": 26,
+        "original": 28,
+        "inconclusive": 13,
+        "unavailable": 5
+      },
+      "second_opinion_directions": {
+        "ai": 26,
+        "original": 22,
+        "inconclusive": 19,
+        "unavailable": 5
+      },
+      "recovered_synthetic_variants": 3,
+      "recovered_synthetic_voice_groups": 3,
+      "added_false_ai_variants": 0,
+      "added_false_ai_genuine_groups": 0,
+      "baseline_false_ai_variants": 1,
+      "second_opinion_false_ai_variants": 1,
+      "baseline_synthetic_wrong_original_variants": 8,
+      "second_opinion_synthetic_wrong_original_variants": 8
+    },
+    "traffic_0db": {
+      "planned": 72,
+      "preparation_unavailable": 1,
+      "speech_gate_rejected": 11,
+      "assessed_by_both": 60,
+      "baseline_directions": {
+        "ai": 10,
+        "original": 8,
+        "inconclusive": 42,
+        "unavailable": 12
+      },
+      "candidate_english_diagnostic_directions": {
+        "ai": 16,
+        "original": 23,
+        "inconclusive": 21,
+        "unavailable": 12
+      },
+      "second_opinion_directions": {
+        "ai": 18,
+        "original": 8,
+        "inconclusive": 34,
+        "unavailable": 12
+      },
+      "recovered_synthetic_variants": 8,
+      "recovered_synthetic_voice_groups": 5,
+      "added_false_ai_variants": 0,
+      "added_false_ai_genuine_groups": 0,
+      "baseline_false_ai_variants": 0,
+      "second_opinion_false_ai_variants": 0,
+      "baseline_synthetic_wrong_original_variants": 2,
+      "second_opinion_synthetic_wrong_original_variants": 2
+    },
+    "traffic_5db": {
+      "planned": 72,
+      "preparation_unavailable": 1,
+      "speech_gate_rejected": 5,
+      "assessed_by_both": 66,
+      "baseline_directions": {
+        "ai": 24,
+        "original": 14,
+        "inconclusive": 28,
+        "unavailable": 6
+      },
+      "candidate_english_diagnostic_directions": {
+        "ai": 26,
+        "original": 23,
+        "inconclusive": 17,
+        "unavailable": 6
+      },
+      "second_opinion_directions": {
+        "ai": 27,
+        "original": 14,
+        "inconclusive": 25,
+        "unavailable": 6
+      },
+      "recovered_synthetic_variants": 3,
+      "recovered_synthetic_voice_groups": 3,
+      "added_false_ai_variants": 0,
+      "added_false_ai_genuine_groups": 0,
+      "baseline_false_ai_variants": 0,
+      "second_opinion_false_ai_variants": 0,
+      "baseline_synthetic_wrong_original_variants": 4,
+      "second_opinion_synthetic_wrong_original_variants": 4
+    }
+  },
+  "by_arm_and_condition": {
+    "genuine": {
+      "matched_clean": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 1,
+        "assessed_by_both": 22,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 17,
+          "inconclusive": 5,
+          "unavailable": 2
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 20,
+          "inconclusive": 2,
+          "unavailable": 2
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 17,
+          "inconclusive": 5,
+          "unavailable": 2
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 10,
+        "assessed_by_both": 13,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 8,
+          "inconclusive": 5,
+          "unavailable": 11
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 12,
+          "inconclusive": 1,
+          "unavailable": 11
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 8,
+          "inconclusive": 5,
+          "unavailable": 11
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 4,
+        "assessed_by_both": 19,
+        "baseline_directions": {
+          "ai": 1,
+          "original": 14,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 1,
+          "original": 16,
+          "inconclusive": 2,
+          "unavailable": 5
+        },
+        "second_opinion_directions": {
+          "ai": 1,
+          "original": 14,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 1,
+        "second_opinion_false_ai_variants": 1,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 11,
+        "assessed_by_both": 12,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 6,
+          "inconclusive": 6,
+          "unavailable": 12
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 12,
+          "inconclusive": 0,
+          "unavailable": 12
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 6,
+          "inconclusive": 6,
+          "unavailable": 12
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 5,
+        "assessed_by_both": 18,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 8,
+          "unavailable": 6
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 16,
+          "inconclusive": 2,
+          "unavailable": 6
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 8,
+          "unavailable": 6
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 21,
+          "original": 1,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 21,
+          "original": 2,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 21,
+          "original": 1,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 1,
+        "second_opinion_synthetic_wrong_original_variants": 1
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 2,
+          "original": 8,
+          "inconclusive": 14,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 5,
+          "original": 10,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 5,
+          "original": 8,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 3,
+        "recovered_synthetic_voice_groups": 3,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 8,
+        "second_opinion_synthetic_wrong_original_variants": 8
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 3,
+          "original": 8,
+          "inconclusive": 13,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 6,
+          "original": 9,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 6,
+          "original": 8,
+          "inconclusive": 10,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 3,
+        "recovered_synthetic_voice_groups": 3,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 8,
+        "second_opinion_synthetic_wrong_original_variants": 8
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 1,
+          "original": 2,
+          "inconclusive": 21,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 5,
+          "original": 8,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 5,
+          "original": 2,
+          "inconclusive": 17,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 4,
+        "recovered_synthetic_voice_groups": 4,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 2,
+        "second_opinion_synthetic_wrong_original_variants": 2
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 2,
+          "original": 4,
+          "inconclusive": 18,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 4,
+          "original": 7,
+          "inconclusive": 13,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 4,
+          "original": 4,
+          "inconclusive": 16,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 2,
+        "recovered_synthetic_voice_groups": 2,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 4,
+        "second_opinion_synthetic_wrong_original_variants": 4
+      }
+    },
+    "okur": {
+      "matched_clean": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 24,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 24,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 24,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 15,
+          "original": 2,
+          "inconclusive": 7,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 16,
+          "original": 6,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 16,
+          "original": 2,
+          "inconclusive": 6,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 1,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 2,
+        "second_opinion_synthetic_wrong_original_variants": 2
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 19,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 19,
+          "original": 3,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 19,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 9,
+          "original": 0,
+          "inconclusive": 15,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 11,
+          "original": 3,
+          "inconclusive": 10,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 13,
+          "original": 0,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 4,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 22,
+          "original": 0,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 22,
+          "original": 0,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 23,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 1,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      }
+    }
+  },
+  "by_source_cohort_and_condition": {
+    "v236": {
+      "matched_clean": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 21,
+          "original": 1,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 21,
+          "original": 2,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 21,
+          "original": 1,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 1,
+        "second_opinion_synthetic_wrong_original_variants": 1
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 2,
+          "original": 8,
+          "inconclusive": 14,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 5,
+          "original": 10,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 5,
+          "original": 8,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 3,
+        "recovered_synthetic_voice_groups": 3,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 8,
+        "second_opinion_synthetic_wrong_original_variants": 8
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 3,
+          "original": 8,
+          "inconclusive": 13,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 6,
+          "original": 9,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 6,
+          "original": 8,
+          "inconclusive": 10,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 3,
+        "recovered_synthetic_voice_groups": 3,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 8,
+        "second_opinion_synthetic_wrong_original_variants": 8
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 1,
+          "original": 2,
+          "inconclusive": 21,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 5,
+          "original": 8,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 5,
+          "original": 2,
+          "inconclusive": 17,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 4,
+        "recovered_synthetic_voice_groups": 4,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 2,
+        "second_opinion_synthetic_wrong_original_variants": 2
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 24,
+        "baseline_directions": {
+          "ai": 2,
+          "original": 4,
+          "inconclusive": 18,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 4,
+          "original": 7,
+          "inconclusive": 13,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 4,
+          "original": 4,
+          "inconclusive": 16,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 2,
+        "recovered_synthetic_voice_groups": 2,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 4,
+        "second_opinion_synthetic_wrong_original_variants": 4
+      }
+    },
+    "v240": {
+      "matched_clean": {
+        "planned": 4,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 4,
+        "baseline_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_0db": {
+        "planned": 4,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 4,
+        "baseline_directions": {
+          "ai": 3,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 3,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 3,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_5db": {
+        "planned": 4,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 4,
+        "baseline_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_0db": {
+        "planned": 4,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 4,
+        "baseline_directions": {
+          "ai": 2,
+          "original": 0,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 3,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 3,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 1,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_5db": {
+        "planned": 4,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 4,
+        "baseline_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 4,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      }
+    },
+    "v245": {
+      "matched_clean": {
+        "planned": 20,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 20,
+        "baseline_directions": {
+          "ai": 20,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 20,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 20,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_0db": {
+        "planned": 20,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 20,
+        "baseline_directions": {
+          "ai": 12,
+          "original": 2,
+          "inconclusive": 6,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 13,
+          "original": 6,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 13,
+          "original": 2,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 1,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 2,
+        "second_opinion_synthetic_wrong_original_variants": 2
+      },
+      "kitchen_5db": {
+        "planned": 20,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 20,
+        "baseline_directions": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 15,
+          "original": 3,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_0db": {
+        "planned": 20,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 20,
+        "baseline_directions": {
+          "ai": 7,
+          "original": 0,
+          "inconclusive": 13,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 8,
+          "original": 3,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 10,
+          "original": 0,
+          "inconclusive": 10,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 3,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_5db": {
+        "planned": 20,
+        "preparation_unavailable": 0,
+        "speech_gate_rejected": 0,
+        "assessed_by_both": 20,
+        "baseline_directions": {
+          "ai": 18,
+          "original": 0,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 18,
+          "original": 0,
+          "inconclusive": 2,
+          "unavailable": 0
+        },
+        "second_opinion_directions": {
+          "ai": 19,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "recovered_synthetic_variants": 1,
+        "recovered_synthetic_voice_groups": 1,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      }
+    },
+    "v252": {
+      "matched_clean": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 1,
+        "assessed_by_both": 22,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 17,
+          "inconclusive": 5,
+          "unavailable": 2
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 20,
+          "inconclusive": 2,
+          "unavailable": 2
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 17,
+          "inconclusive": 5,
+          "unavailable": 2
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_0db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 10,
+        "assessed_by_both": 13,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 8,
+          "inconclusive": 5,
+          "unavailable": 11
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 12,
+          "inconclusive": 1,
+          "unavailable": 11
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 8,
+          "inconclusive": 5,
+          "unavailable": 11
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "kitchen_5db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 4,
+        "assessed_by_both": 19,
+        "baseline_directions": {
+          "ai": 1,
+          "original": 14,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 1,
+          "original": 16,
+          "inconclusive": 2,
+          "unavailable": 5
+        },
+        "second_opinion_directions": {
+          "ai": 1,
+          "original": 14,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 1,
+        "second_opinion_false_ai_variants": 1,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_0db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 11,
+        "assessed_by_both": 12,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 6,
+          "inconclusive": 6,
+          "unavailable": 12
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 12,
+          "inconclusive": 0,
+          "unavailable": 12
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 6,
+          "inconclusive": 6,
+          "unavailable": 12
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      },
+      "traffic_5db": {
+        "planned": 24,
+        "preparation_unavailable": 1,
+        "speech_gate_rejected": 5,
+        "assessed_by_both": 18,
+        "baseline_directions": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 8,
+          "unavailable": 6
+        },
+        "candidate_english_diagnostic_directions": {
+          "ai": 0,
+          "original": 16,
+          "inconclusive": 2,
+          "unavailable": 6
+        },
+        "second_opinion_directions": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 8,
+          "unavailable": 6
+        },
+        "recovered_synthetic_variants": 0,
+        "recovered_synthetic_voice_groups": 0,
+        "added_false_ai_variants": 0,
+        "added_false_ai_genuine_groups": 0,
+        "baseline_false_ai_variants": 0,
+        "second_opinion_false_ai_variants": 0,
+        "baseline_synthetic_wrong_original_variants": 0,
+        "second_opinion_synthetic_wrong_original_variants": 0
+      }
+    }
+  },
+  "rank_by_generator_and_condition": {
+    "matched_clean": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 1056,
+            "wins": 1047,
+            "ties": 0,
+            "losses": 9,
+            "concordance": 0.9914772727272727
+          },
+          "within_triplet": {
+            "comparisons": 44,
+            "wins": 43,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9772727272727273
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 1056,
+            "wins": 1031,
+            "ties": 0,
+            "losses": 25,
+            "concordance": 0.9763257575757576
+          },
+          "within_triplet": {
+            "comparisons": 44,
+            "wins": 43,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9772727272727273
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 528,
+            "wins": 519,
+            "ties": 0,
+            "losses": 9,
+            "concordance": 0.9829545454545454
+          },
+          "within_triplet": {
+            "comparisons": 22,
+            "wins": 21,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9545454545454546
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 528,
+            "wins": 503,
+            "ties": 0,
+            "losses": 25,
+            "concordance": 0.9526515151515151
+          },
+          "within_triplet": {
+            "comparisons": 22,
+            "wins": 21,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9545454545454546
+          }
+        }
+      },
+      "okur": {
+        "current_raw": {
+          "all": {
+            "comparisons": 528,
+            "wins": 528,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 22,
+            "wins": 22,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 528,
+            "wins": 528,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 22,
+            "wins": 22,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "kitchen_0db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 624,
+            "wins": 518,
+            "ties": 0,
+            "losses": 106,
+            "concordance": 0.8301282051282052
+          },
+          "within_triplet": {
+            "comparisons": 26,
+            "wins": 22,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.8461538461538461
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 624,
+            "wins": 519,
+            "ties": 0,
+            "losses": 105,
+            "concordance": 0.8317307692307693
+          },
+          "within_triplet": {
+            "comparisons": 26,
+            "wins": 22,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.8461538461538461
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 312,
+            "wins": 231,
+            "ties": 0,
+            "losses": 81,
+            "concordance": 0.7403846153846154
+          },
+          "within_triplet": {
+            "comparisons": 13,
+            "wins": 11,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8461538461538461
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 312,
+            "wins": 245,
+            "ties": 0,
+            "losses": 67,
+            "concordance": 0.7852564102564102
+          },
+          "within_triplet": {
+            "comparisons": 13,
+            "wins": 11,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8461538461538461
+          }
+        }
+      },
+      "okur": {
+        "current_raw": {
+          "all": {
+            "comparisons": 312,
+            "wins": 287,
+            "ties": 0,
+            "losses": 25,
+            "concordance": 0.9198717948717948
+          },
+          "within_triplet": {
+            "comparisons": 13,
+            "wins": 11,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8461538461538461
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 312,
+            "wins": 274,
+            "ties": 0,
+            "losses": 38,
+            "concordance": 0.8782051282051282
+          },
+          "within_triplet": {
+            "comparisons": 13,
+            "wins": 11,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8461538461538461
+          }
+        }
+      }
+    },
+    "kitchen_5db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 912,
+            "wins": 787,
+            "ties": 0,
+            "losses": 125,
+            "concordance": 0.8629385964912281
+          },
+          "within_triplet": {
+            "comparisons": 38,
+            "wins": 34,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.8947368421052632
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 912,
+            "wins": 808,
+            "ties": 0,
+            "losses": 104,
+            "concordance": 0.8859649122807017
+          },
+          "within_triplet": {
+            "comparisons": 38,
+            "wins": 34,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.8947368421052632
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 456,
+            "wins": 346,
+            "ties": 0,
+            "losses": 110,
+            "concordance": 0.7587719298245614
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 15,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.7894736842105263
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 456,
+            "wins": 374,
+            "ties": 0,
+            "losses": 82,
+            "concordance": 0.8201754385964912
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 15,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.7894736842105263
+          }
+        }
+      },
+      "okur": {
+        "current_raw": {
+          "all": {
+            "comparisons": 456,
+            "wins": 441,
+            "ties": 0,
+            "losses": 15,
+            "concordance": 0.9671052631578947
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 19,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 456,
+            "wins": 434,
+            "ties": 0,
+            "losses": 22,
+            "concordance": 0.9517543859649122
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 19,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "traffic_0db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 576,
+            "wins": 493,
+            "ties": 0,
+            "losses": 83,
+            "concordance": 0.8559027777777778
+          },
+          "within_triplet": {
+            "comparisons": 24,
+            "wins": 23,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9583333333333334
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 576,
+            "wins": 531,
+            "ties": 0,
+            "losses": 45,
+            "concordance": 0.921875
+          },
+          "within_triplet": {
+            "comparisons": 24,
+            "wins": 22,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.9166666666666666
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 288,
+            "wins": 224,
+            "ties": 0,
+            "losses": 64,
+            "concordance": 0.7777777777777778
+          },
+          "within_triplet": {
+            "comparisons": 12,
+            "wins": 11,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9166666666666666
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 288,
+            "wins": 256,
+            "ties": 0,
+            "losses": 32,
+            "concordance": 0.8888888888888888
+          },
+          "within_triplet": {
+            "comparisons": 12,
+            "wins": 10,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8333333333333334
+          }
+        }
+      },
+      "okur": {
+        "current_raw": {
+          "all": {
+            "comparisons": 288,
+            "wins": 269,
+            "ties": 0,
+            "losses": 19,
+            "concordance": 0.9340277777777778
+          },
+          "within_triplet": {
+            "comparisons": 12,
+            "wins": 12,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 288,
+            "wins": 275,
+            "ties": 0,
+            "losses": 13,
+            "concordance": 0.9548611111111112
+          },
+          "within_triplet": {
+            "comparisons": 12,
+            "wins": 12,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "traffic_5db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 864,
+            "wins": 746,
+            "ties": 0,
+            "losses": 118,
+            "concordance": 0.8634259259259259
+          },
+          "within_triplet": {
+            "comparisons": 36,
+            "wins": 32,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.8888888888888888
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 864,
+            "wins": 808,
+            "ties": 0,
+            "losses": 56,
+            "concordance": 0.9351851851851852
+          },
+          "within_triplet": {
+            "comparisons": 36,
+            "wins": 33,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.9166666666666666
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 432,
+            "wins": 316,
+            "ties": 0,
+            "losses": 116,
+            "concordance": 0.7314814814814815
+          },
+          "within_triplet": {
+            "comparisons": 18,
+            "wins": 14,
+            "ties": 0,
+            "losses": 4,
+            "concordance": 0.7777777777777778
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 432,
+            "wins": 377,
+            "ties": 0,
+            "losses": 55,
+            "concordance": 0.8726851851851852
+          },
+          "within_triplet": {
+            "comparisons": 18,
+            "wins": 15,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.8333333333333334
+          }
+        }
+      },
+      "okur": {
+        "current_raw": {
+          "all": {
+            "comparisons": 432,
+            "wins": 430,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.9953703703703703
+          },
+          "within_triplet": {
+            "comparisons": 18,
+            "wins": 18,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 432,
+            "wins": 431,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9976851851851852
+          },
+          "within_triplet": {
+            "comparisons": 18,
+            "wins": 18,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    }
+  },
+  "new_fitting": false,
+  "target_language_calibration": false,
+  "serving_changed": false,
+  "holdout_scored": false
+}

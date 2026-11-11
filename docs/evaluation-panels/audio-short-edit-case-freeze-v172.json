@@ -1,0 +1,55 @@
+{
+  "code_sha256": {
+    "backend/scripts/audio_short_edit_cases_v172.py": "b23a07cda0825275efab4bcebae20a4767657017f5261a35ba9934d5f302cf79",
+    "backend/scripts/audio_short_edit_controls.py": "3124865172114acc07d0bc9aca581645827a5092fd49f7c5102aa3cd4f189bb7",
+    "backend/scripts/audio_short_edit_materialize_v169c.py": "09f18f8d49c0f56f2f20c5ec9326a35adfe004837eb95ca7c8bd101bca6ac881",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/tests/test_audio_short_edit_cases_v172.py": "bd1518b5865558dd4a80ed7f7e9bcf9b57c3aa3a424d5f75b81dfa9f17be9c69",
+    "docs/audio-short-edit-cases-v172.md": "ec3007e7a6caf13dc31d3bd83d5aeb734ed2ef5dc023da31bc8961383e2e5c7b"
+  },
+  "donor_samples": [
+    12160,
+    24960
+  ],
+  "holdout_scored": false,
+  "joins_ms": [
+    0,
+    20,
+    50
+  ],
+  "model_calls": 0,
+  "noise_snr_db": [
+    0,
+    5
+  ],
+  "roles": {
+    "development": {
+      "comparisons": {
+        "ai": 23,
+        "genuine": 14
+      },
+      "planned_cases": 651,
+      "private_plan_sha256": "803cf0e7adee70ab68d7f7b9501538e744b1ed92c2a9d56766567aa5cd504eaa",
+      "private_source_manifest_sha256": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8"
+    },
+    "holdout": {
+      "comparisons": {
+        "ai": 24,
+        "genuine": 16
+      },
+      "planned_cases": 696,
+      "private_plan_sha256": "c6dc327332e96089e0f1e279833588e2b8362cf68493aa3ac3a9a13690f19339",
+      "private_source_manifest_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+    }
+  },
+  "sample_rate": 16000,
+  "samples_per_case": 48000,
+  "schema": "chipmunk.audio-short-edit-case-freeze/172",
+  "target_samples": [
+    17280,
+    30080
+  ],
+  "v169c_private_result_sha256": "fe9ca1abb9c0c80bb1b27b478e3f754baa091c5651a20f7882d2d60752268402",
+  "v169c_public_freeze_sha256": "de3c16a52066f7420c6292be0e63956c9ab670f454f5d06e61f546309fd1f512",
+  "v169c_resource_profile_sha256": "b92ae432d3ced69eba0e9debfb88ee4208e0e0c1e0ac4063ae2e0b13fe12d540"
+}

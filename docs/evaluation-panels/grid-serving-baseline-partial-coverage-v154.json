@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.grid-serving-baseline-partial-coverage/154",
+  "status": "actual_first_batch_complete_partial_detector_coverage",
+  "planned_cases": 11,
+  "completed_analyses": 11,
+  "monitored_stages_completed": 1,
+  "input_binding_checks_passed": {
+    "clock_exact": 11,
+    "sampled_rgb_exact": 11,
+    "audio_pcm_equal": 11,
+    "audio_samples_equal": 11,
+    "audio_origin_equal": 11
+  },
+  "detector_run_status_counts": {
+    "not_applicable": 33,
+    "ok": 110,
+    "skipped": 11,
+    "failed": 11
+  },
+  "face_appearance_route_ok": 11,
+  "audio_picture_timing_route_ok": 11,
+  "sound_context_route_failed_cache_locator": 11,
+  "frame_authenticity_route_skipped_activation_budget": 11,
+  "outside_frozen_validation_envelope": 11,
+  "overall_customer_direction_counts": {
+    "unavailable": 11
+  },
+  "resolved_device": "mps",
+  "worker_duration_seconds": 140.19673920900095,
+  "sampled_descendant_rss_bytes": 5563744256,
+  "monitor_guard": null,
+  "monitor_sample_errors": 0,
+  "observed_neural_forward_count": null,
+  "defaults_changed": false,
+  "freeze_sha256": "3b692d830cbafdb22c5f511d77b3d5d1b0916f8dc32280c281b714c0e87d2140",
+  "private_profile_sha256": "d1c0622432c3fbabeddac41593faecf4ebd5237ddb186cf4c337b7241e4b1094",
+  "private_worker_receipt_sha256": "24c742ecfbdbb90763544acc0b8b7cca548a024e348a155092ad8aedbdef6364",
+  "private_case_journal_sha256": "7f074e73d30e39641a82961b55bd115cb55e282429dc55d7312264d57eec595f",
+  "private_worker_log_sha256": "dda1f354d7f24b8a94cc7970d3836e40d331c14f4b94b6cab4c399f01cd2d61d",
+  "scope": "Single matched-source serving engineering batch, partial detector coverage. No detector accuracy, calibration, customer direction or candidate adoption conclusion."
+}

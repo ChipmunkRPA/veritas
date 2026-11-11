@@ -1,0 +1,98 @@
+{
+  "backup_planned": 12,
+  "backup_planned_by_split": {
+    "train": 10,
+    "val": 2
+  },
+  "code_commitments": {
+    "backend/scripts/image_bg_real_roster_v218.py": "32f44463cb82b579fe31e83677dc736b62be749e9d8c0de662a2ea21e45f8c81",
+    "backend/tests/test_image_bg_real_roster_v218.py": "f0f3595ca27b0a53d4a4c08a817459c178b6b061bab627d012d15a7ba896c0b0",
+    "docs/image-bg-real-roster-v218-method.md": "7f999951f9fabd8ff009fe08db3528a345ee7a7ddb15d3938451c8f63022b0f2"
+  },
+  "component_exclusions": {
+    "prior_exposure_component": 2,
+    "shared_recipient_component": 3
+  },
+  "eligible_but_outside_bounded_pool": 31,
+  "exact_rgb_and_perceptual_duplicate_checks_pending": true,
+  "exposure_reference_commitments": {
+    "image-fresh-source-cache-v39-results.json": "f56c9290f190f3a8a29654b5781d1a233474b963429541cca93f706b6e18c537",
+    "image-jpeg-diagnostic-freeze-v189.json": "cd0333f18623441dba7177e4f79db69a31174713bc823822d5112a07dd4bba5e",
+    "image-legacy-authors-v25-freeze.json": "5a8f2c444f4a7451c0278e3b0362effdaf2d626cbb8d3c90fd46517d932306b1"
+  },
+  "known_exposure_commitments": {
+    "v189_inputs": "8cbbbde2d27e717773f88990b7cb96decfb41db3350c111c21cb38745a0a6223",
+    "v19_inventory": "9a5c817102ff81cf7825becc5107762d7b6bcddc03eceecf2a18601a55ec5f7c",
+    "v26_plan": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+    "v39_graph": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea"
+  },
+  "maximum_backups": 12,
+  "maximum_primary": 24,
+  "media_opened": false,
+  "metadata_commitments": {
+    "README.md": {
+      "bytes": 8264,
+      "repo_path": "README.md",
+      "sha256": "b33ed5d0e41c33876fedf528940e12d0a26f99d7525195ef54f1e0786e8758d0"
+    },
+    "attribution.csv": {
+      "bytes": 1078451,
+      "repo_path": "v2/meta/attribution.csv",
+      "sha256": "9d7b9019055f689d656312c457cab464066167d02b9fe56b8dcf89921832423f"
+    },
+    "manifest_v2.csv": {
+      "bytes": 12922417,
+      "repo_path": "v2/manifest_v2.csv",
+      "sha256": "773548c9aa03011f308059b87ac47fe72110783b8d70804dc6d4f837372cf5f4"
+    },
+    "model_revisions.csv": {
+      "bytes": 967,
+      "repo_path": "v2/meta/model_revisions.csv",
+      "sha256": "e7d970bfeeb8126c6b07059b9423f71055c5ebc9834bd89a41e665dd305e7bf6"
+    },
+    "recipients.csv": {
+      "bytes": 405123,
+      "repo_path": "v2/meta/recipients.csv",
+      "sha256": "a833fafa06243a6138c46a7858112f30e42640072c028c6d5736909860dedeef"
+    },
+    "splits_v2.yaml": {
+      "bytes": 693311,
+      "repo_path": "v2/splits_v2.yaml",
+      "sha256": "e9fe9ddcbf04c5b36905c5006d797d5b9fa0e304a8de7b28ecb82c96faecb0da"
+    }
+  },
+  "metadata_eligible_components": 67,
+  "metadata_rejections": {
+    "Unresolved photo or owner alias": 1
+  },
+  "neural_calls": 0,
+  "paper_repo": "NoirZangetsu/bg-real",
+  "paper_repo_revision": "87f209e3196df622972bf7e66de50a1d2847a733",
+  "primary_planned": 24,
+  "primary_planned_by_split": {
+    "test_background_ood": 7,
+    "test_id": 7,
+    "test_subject_ood": 5,
+    "val": 5
+  },
+  "private_roster_sha256": "a5f5e7267806f0ecbe1b65ba37a2b9a45cc0dc98a98e5aba01b389b94fc665b7",
+  "publisher_candidates_by_split": {
+    "test_background_ood": 7,
+    "test_id": 7,
+    "test_subject_ood": 6,
+    "train": 46,
+    "val": 7
+  },
+  "publisher_generator_record": {
+    "key": "lama",
+    "license": "apache-2.0",
+    "repo": "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt",
+    "revision": "v0.1.0"
+  },
+  "publisher_repo": "anush-123/bg-real",
+  "publisher_revision": "aaba6cd1ced4ce3c846be9641fed092adb4919d1",
+  "rank": "Publisher test splits first, then validation, then training. Fixed salted SHA-256 within each tier.",
+  "schema": "chipmunk.image-bg-real-metadata-roster/218",
+  "serving_admitted": false,
+  "source_photo_licence": "https://creativecommons.org/licenses/by/2.0/"
+}

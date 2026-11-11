@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.video-vcd2-genuine-qualification-result/197",
+  "status": "complete",
+  "freeze_sha256": "6863b19519d9262485638e1ac6717de80b217b5bd1fc0594365bf262a0b813db",
+  "recording_components_planned": 12,
+  "recording_components_qualified": 12,
+  "by_resolution": {
+    "1280x720": 6,
+    "1920x1080": 6
+  },
+  "verified_source_bytes": 1947033862,
+  "verified_native_frames": 3386,
+  "native_frame_count_range": [
+    171,
+    307
+  ],
+  "planned_ordinary_edit_frames": 999,
+  "source_time_bases": {
+    "1/1000": 12
+  },
+  "source_receipt_bundle_sha256": "ca67b07fa4fb9446a86f402e8d70a7781551de88ac062cc569edbdd5cd85edf9",
+  "new_neural_calls": 0,
+  "scope": "Source qualification only, measured camera footage and exact native clock. Paired ordinary edits and detector tests remain separate."
+}

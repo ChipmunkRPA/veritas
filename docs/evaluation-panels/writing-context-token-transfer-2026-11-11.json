@@ -1,0 +1,429 @@
+{
+  "schema": "chipmunk.contextual-token-short-email-transfer/1",
+  "methods": {
+    "unit": "Complete exact decoded EML sentence of at least 12 segmenter words; current context joins previous, focus and next sentences by spaces.",
+    "training": "Fit on six previously consumed short email groups. A known rewritten sentence is positive; unchanged sentences, original files and genuine human-replacement files are negative. Standardize columns and fit L2 C=.5 logistic with balanced source weights per class.",
+    "calibration": "Different four previously consumed groups. In each, take the largest human response across both files. Strictly exceed highest (zero reference-group flags) or second highest (at most one reference-group flag). These are empirical review cutoffs, not probabilities or rate guarantees.",
+    "arms": "Current raw three-sentence support; separately calibrated existing window odds versus contextual focus token margins with the same fitting method; compare native window and focus score AUC plus paired localization.",
+    "scope": "Reuse the native encoder and its linear classification head. Use token positions to reduce logits for exact focus codepoints; exclude special tokens and require complete non-whitespace coverage. Verify the average over all actual attention-valid token logits reconstructs native logits. Context still informs every focus hidden state, so this is not independent word authorship evidence.",
+    "measure": "Any positive highlight, human variant/source flags, missed edits, wrong location and useful edit at non-whitespace IoU at least .30. All groups and thresholds frozen before fresh model outcomes."
+  },
+  "fixed_fit": {
+    "schema": "chipmunk.short-context-token-head/1",
+    "policy_sha256": "cc83c5ab5cd22382b8dd41b1bf257d6766f30e489f3b70b8e29c4a5b2cabe788",
+    "methods": {
+      "window": {
+        "mean": [
+          -5.069790757116483
+        ],
+        "scale": [
+          2.132923906250219
+        ],
+        "coefficient": [
+          0.037494472095486134
+        ],
+        "intercept": 8.164421963028905e-06,
+        "strict_raw_log_odds": 0.040164234370887696,
+        "one_source_raw_log_odds": 0.035737089698019656
+      },
+      "token": {
+        "mean": [
+          -5.069790757116483,
+          -5.270266510561985,
+          -8.577146109409664,
+          -6.553150900339637,
+          -6.067455864775911
+        ],
+        "scale": [
+          2.132923906250219,
+          2.2185688961616896,
+          0.7602441158812175,
+          2.4240815938352522,
+          1.9045150536958741
+        ],
+        "coefficient": [
+          -0.37601119075563827,
+          -0.2826068015922972,
+          0.4763115498033218,
+          0.45712668569705356,
+          -0.017522476181521602
+        ],
+        "intercept": -0.006940047124973985,
+        "strict_raw_log_odds": 0.9590111962371104,
+        "one_source_raw_log_odds": 0.7866932091128824
+      }
+    },
+    "fit_groups": 6,
+    "calibration_groups": 4,
+    "fit_spans": 64,
+    "fit_positive_spans": 9,
+    "fit_receipt_sha256": "6383c55f7371a99751b114d14ea8e36685be37e133a45b38ddb30a32abf87213",
+    "calibration_receipt_sha256": "9c16eb8921112830f1f9a69a8a2bd1d27cf29ce1fd5c41c3c7a2dc042d81e34c"
+  },
+  "source_groups": 4,
+  "rights_qualified_source_word_range": [
+    55,
+    88
+  ],
+  "known_previous_texts_checked": 45281,
+  "counts": {
+    "original": {
+      "current": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "window_strict": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "token_strict": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "window_one_source": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "token_one_source": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      }
+    },
+    "human_sentence": {
+      "current": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1
+      },
+      "window_strict": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1
+      },
+      "token_strict": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0
+      },
+      "window_one_source": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1
+      },
+      "token_one_source": {
+        "assessed": 4,
+        "unassessed": 0,
+        "flagged": 3,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1
+      }
+    },
+    "qwen": {
+      "current": {
+        "unavailable_generation": 1,
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0
+      },
+      "window_strict": {
+        "unavailable_generation": 1,
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0
+      },
+      "token_strict": {
+        "unavailable_generation": 1,
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0
+      },
+      "window_one_source": {
+        "unavailable_generation": 1,
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0
+      },
+      "token_one_source": {
+        "unavailable_generation": 1,
+        "assessed": 3,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 0,
+        "wrong_location": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0
+      }
+    },
+    "smol2": {
+      "current": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 2
+      },
+      "window_strict": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 2,
+        "useful": 2,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 2
+      },
+      "token_strict": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "wrong_location": 0,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 2
+      },
+      "window_one_source": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 2,
+        "useful": 2,
+        "wrong_location": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 2
+      },
+      "token_one_source": {
+        "assessed": 2,
+        "unassessed": 0,
+        "flagged": 1,
+        "useful": 1,
+        "wrong_location": 0,
+        "missed_if_assessed": 1,
+        "ordinary_edit_overlap": 0,
+        "unavailable_generation": 2
+      }
+    }
+  },
+  "coverage": {
+    "admitted_cases": 13,
+    "window_inputs": 35,
+    "exact_focus_inputs": 26,
+    "scored_target_spans": 5
+  },
+  "false_positive_groups": {
+    "current": 2,
+    "window_strict": 2,
+    "token_strict": 1,
+    "window_one_source": 2,
+    "token_one_source": 3
+  },
+  "useful_positive_groups": {
+    "current": 0,
+    "window_strict": 2,
+    "token_strict": 0,
+    "window_one_source": 2,
+    "token_one_source": 1
+  },
+  "paired_vs_current": {
+    "original": {
+      "window_strict": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "token_strict": {
+        "0->0": 2,
+        "0->1": 1,
+        "1->0": 1
+      },
+      "window_one_source": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "token_one_source": {
+        "0->0": 2,
+        "0->1": 1,
+        "1->0": 1
+      }
+    },
+    "human_sentence": {
+      "window_strict": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "token_strict": {
+        "0->0": 3,
+        "1->0": 1
+      },
+      "window_one_source": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "token_one_source": {
+        "0->0": 1,
+        "1->1": 1,
+        "0->1": 2
+      }
+    },
+    "qwen": {
+      "window_strict": {
+        "0->0": 3
+      },
+      "token_strict": {
+        "0->0": 3
+      },
+      "window_one_source": {
+        "0->0": 3
+      },
+      "token_one_source": {
+        "0->0": 3
+      }
+    },
+    "smol2": {
+      "window_strict": {
+        "0->1": 2
+      },
+      "token_strict": {
+        "0->0": 2
+      },
+      "window_one_source": {
+        "0->1": 2
+      },
+      "token_one_source": {
+        "0->0": 1,
+        "0->1": 1
+      }
+    }
+  },
+  "holdout_focus_auroc": {
+    "window": 0.6285714285714286,
+    "token": 0.5523809523809524,
+    "focus_any_raw": 0.6476190476190476,
+    "window_any_raw": 0.6285714285714286
+  },
+  "generator_admission": {
+    "qwen": {
+      "not_one_sentence": 1,
+      "admitted": 3
+    },
+    "smol2": {
+      "admitted": 2,
+      "copied_target": 1,
+      "not_one_sentence": 1
+    }
+  },
+  "commitments": {
+    "private_geometry_sha256": "2f0530d14291ed018deac0ff90f3c8988e6f02ba1fd2d176a0efa5d4a18f908b",
+    "source_sha256": "fdef5285fbdfac8748f9497f4421761f3728d79cbf5bf59122a357c7c3bce13c",
+    "holdout_freeze_sha256": "ac1029d55b9111363eb9cdd54352477c5c0dbc5a4f2902184b315ee166e0afea",
+    "calibration_fit_sha256": "c6b3b50c85a94fbf2f3acd4b9ba7e362ce4cbefa6c7b4660063524b0ffde0367",
+    "code_sha256": "c5a2d7707f727c55223739c5f923d11e1247b266b0a3bac1b3e74de730076b6d",
+    "receipts": {
+      "fit": {
+        "forwards": 22,
+        "minimum_available_ram": 7078412288,
+        "sampled_worker_rss": 2098151424,
+        "seconds": 7.648,
+        "max_logit_reduction_error": 6.67572021484375e-06,
+        "cases_sha256": {
+          "private-controls.jsonl": "fbad8d0024d657d3a03f9146e2409a82553b4bb24a99af6e0d3c3f9e60d3e27d",
+          "private-positives.jsonl": "e675b4b2a7efb2d1b0735fd32dcd0fc5d7f2b43660f0e5e7c8cdd803ecccd090"
+        },
+        "response_sha256": "4378db6636079a22442a294808355823d6a9f54347a24fa4b50d9bfbcd2a817f"
+      },
+      "calibration": {
+        "forwards": 14,
+        "minimum_available_ram": 7061782528,
+        "sampled_worker_rss": 2024767488,
+        "seconds": 4.6,
+        "max_logit_reduction_error": 8.106231689453125e-06,
+        "cases_sha256": {
+          "private-controls.jsonl": "b8491dd965316384a4acdd7f64a9210553c4fd93f98e04475fe7cb19182c6ef3",
+          "private-positives.jsonl": "3326bf5d022b3b54ede968d536fe59da29a98eb1fa3fe93de1b788611023c2ef"
+        },
+        "response_sha256": "9a4ebd4833877383d8570e4bdded4f5e25ae2b311820787a9f389d0abd159f5d"
+      },
+      "holdout": {
+        "forwards": 14,
+        "minimum_available_ram": 7911374848,
+        "sampled_worker_rss": 2025881600,
+        "seconds": 3.788,
+        "max_logit_reduction_error": 1.430511474609375e-06,
+        "cases_sha256": {
+          "private-controls.jsonl": "a009332eca312b775a7b5615388d3f4aeb87fa3a5f8f58bcf587cfaa424bf5cd",
+          "private-positives.jsonl": "37e57423fb0a6c27d32b7b23be6243e251adaa14b5f51a68e1f3308f94016dd3"
+        },
+        "response_sha256": "3a562e08e9511c3fef2edb1268d78a30bf53304d0ffad50bb506c8cc3d316ee8"
+      }
+    }
+  },
+  "independent_arithmetic": {
+    "outcome_cells": 80,
+    "focus_auc_values": 4,
+    "per_case_exact_selections_recomputed": true,
+    "reducer_sha256": "dc55a7376e896ad65dc918dfd7a103595d8b244d2b4642e3b9ae9990fe28f480"
+  },
+  "production_decision": "Keep the existing passage check. The fitted context-only review selection found two previously missed rewrites with unchanged human flags on this holdout. The fitted token margins did not improve transfer. Replicate context-only selection on larger diverse groups before changing serving.",
+  "case_content_published": false
+}

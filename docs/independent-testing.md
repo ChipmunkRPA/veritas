@@ -218,8 +218,12 @@ The [short face texture comparison](video-face-texture-return-2026-11-11.md)
 checks appearance and texture on native video clocks with ordinary camera edits.
 The [denser timing comparison](video-face-native-boundary-2026-11-11.md) measures
 boundary error on a different set of recordings while preserving the existing flags.
+The [fixed one-second rule](video-face-short-boundary-confirmation-2026-11-11.md)
+tests the resulting timing rule prospectively on separate moving faces and camera controls.
 The [short email contrast study](writing-short-email-contrast-transfer-2026-11-11.md)
 compares individual sentences and matched context with exact MIME positions.
+The [contextual token study](writing-context-token-transfer-2026-11-11.md)
+checks whether exact sentence features improve selection on source-separated emails.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

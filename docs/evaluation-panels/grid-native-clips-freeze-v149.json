@@ -1,0 +1,85 @@
+{
+  "schema": "chipmunk.grid-native-clips-freeze/149",
+  "code_sha256": {
+    "backend/scripts/grid_native_clips_v149.py": "ba356f7655bd47facd9107cd86e2028513bf6f7ed5862e3a9d11aacd8ed0e5cc",
+    "backend/tests/test_grid_native_clips_v149.py": "66125d8cbfc03216f4c5885425c95b458de4b7f86b5febf4eb2cc153d87fdea5",
+    "docs/grid-native-clips-v149-method.md": "834a1ffe31041f9e2c977cb7082ba066f2b0b91275e7b2ca976f31dc0cc54d39",
+    "backend/scripts/grid_transfer_plan_v143.py": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "backend/scripts/review_grid_native_inputs_v142.py": "d6794ea8979d2c22dc14b1bca66646422d26762f54d348af28f433cd38b3e984",
+    "backend/scripts/native_av_mux_v119.py": "624429787993fdacc529c4868bcec841cd32a5e8f5fc1a7d66d1068e63418efa",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "completed_metadata_sha256": {
+    "docs/evaluation-panels/grid-transfer-plan-freeze-v143.json": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/result.json": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/profile.json": "d30df50457eea75364eff087d9e6cdacfa4cd6e5519dbb089f770c7383dc95aa",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/private-plan.json": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+    "docs/evaluation-panels/grid-native-inputs-freeze-v137.json": "b323b9080b2748c9e8fdf722e02b297225117f2d1fedaaab00918dce5de69555",
+    "backend/data/independent-evaluation/grid-portrait-geometry-v144/freeze.json": "e155dcb4027e0c019c61bc4c6c7bac0380062d54c36272bd98132cc0a9d4fc4d",
+    "docs/evaluation-panels/grid-portrait-geometry-freeze-v144.json": "e155dcb4027e0c019c61bc4c6c7bac0380062d54c36272bd98132cc0a9d4fc4d",
+    "backend/data/independent-evaluation/grid-portrait-frames-v146/freeze.json": "ebbe441a9bc4ec10ebafb3d5eda5114f1b62ab3104cc1aa8d1420cf3358853ac",
+    "docs/evaluation-panels/grid-portrait-frames-freeze-v146.json": "ebbe441a9bc4ec10ebafb3d5eda5114f1b62ab3104cc1aa8d1420cf3358853ac",
+    "backend/data/independent-evaluation/grid-source-speech-v147/freeze.json": "2f42a4cd58b4d02c0270b428fa689ea16b580e457b9eef2b6789523b92da2611",
+    "docs/evaluation-panels/grid-source-speech-freeze-v147.json": "2f42a4cd58b4d02c0270b428fa689ea16b580e457b9eef2b6789523b92da2611",
+    "backend/data/independent-evaluation/grid-musetalk-frames-v148/freeze.json": "753c2768bc9ae4f3df9cb7aff6c7162fb3cd2ad155b5b363cf23ebc29791110a",
+    "docs/evaluation-panels/grid-musetalk-frames-freeze-v148.json": "753c2768bc9ae4f3df9cb7aff6c7162fb3cd2ad155b5b363cf23ebc29791110a",
+    "backend/data/independent-evaluation/native-av-mux-v119/freeze.json": "0b68203b457fb3c96fbaa51f9c6ba81583bd518fcfc9ee8b329be011331fe30d",
+    "docs/evaluation-panels/native-av-mux-freeze-v119.json": "0b68203b457fb3c96fbaa51f9c6ba81583bd518fcfc9ee8b329be011331fe30d",
+    "backend/data/independent-evaluation/native-av-mux-v119/bind-00/output/result.json": "b71a155c13dc1181b4091948364ebe7639257adab674e8623ab1b7f8e2c67059",
+    "backend/data/independent-evaluation/native-av-mux-v119/bind-00/profile.json": "8f81daf943daa4f30f5a3ebdd651bd7cd3896fd85032a23b6bfc3b64e9a9696d",
+    "backend/data/independent-evaluation/native-av-mux-v119/bind-00/resources.jsonl": "1acd89b051a3f497e4bb30ff48ed34ae02f94d1bcb44091142dd091ec3cb0421",
+    "docs/evaluation-panels/native-av-mux-result-v119.json": "bdc518c1541e4c4d615ae47741c19c546608b99a7a05ccb12c6ce2e8225b2261",
+    "backend/data/independent-evaluation/native-av-mux-v119/bind-00/output/private-cases.json": "631afb7130c1d3e3ddbb724af286263ec778b1b414992a2286aa727d11683bdf"
+  },
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "planned_cases_per_clip": 11,
+  "source_pictures_per_complete_case": 75,
+  "planned_picture_range": [
+    27,
+    47
+  ],
+  "case_order": [
+    "original",
+    "musetalk_source_time",
+    "musetalk_earlier_320ms",
+    "liveportrait_source_time",
+    "liveportrait_earlier_320ms",
+    "resample_musetalk",
+    "resample_liveportrait",
+    "brightness_musetalk",
+    "brightness_liveportrait",
+    "genuine_frame_retime",
+    "audio_delay_320ms"
+  ],
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2"
+  },
+  "scope": "Fixed native FFV1 and PCM construction with exact source clocks, verified masks and lossless decode parity. Achieved motion and detector accuracy remain unassessed."
+}

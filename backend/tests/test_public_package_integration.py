@@ -27,7 +27,9 @@ from sqlalchemy.orm import Session
 from test_audio_evidence import audio_fixture as audio_fixture
 from test_document_hybrid_pdf_coverage import hybrid_pdf
 from test_document_packets import packet_factory as packet_factory
+from test_image_copy_similarity import reflected_result
 from test_image_evidence_access import evidence_http as evidence_http
+from test_image_packets import packet_fixture as packet_fixture
 from test_video_evidence_packets import vfr_source as vfr_source
 from test_video_evidence_packets import video_fixture as video_fixture
 
@@ -102,11 +104,15 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "hybrid_document"])
+@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     kind = "document" if hybrid else request.param
-    if kind == "video":
+    if kind == "image":
+        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"))
+        document = service.persist_packet_set(db, analysis, store, result=result)
+        assert document["copy_similarity"]["pairs"]
+    elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)
     elif kind == "audio":
@@ -135,7 +141,8 @@ def multimedia_package(request, tmp_path, monkeypatch):
     # Only the report scaffolding and its small signed PDF are synthetic.
     frozen = specimen(kind, "standard")
     frozen = frozen.model_copy(update={
-        "result": copy.deepcopy(result), "evidence": copy.deepcopy(document),
+        "result": copy.deepcopy(result),
+        ("image_evidence" if kind == "image" else "evidence"): copy.deepcopy(document),
         "analysis": frozen.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
         "media": frozen.media.model_copy(update={"sha256": analysis.sha256, "size_bytes": analysis.size_bytes,
                                                  "filename": analysis.filename, "content_type": analysis.content_type}),
@@ -181,7 +188,7 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
     with zipfile.ZipFile(built.path) as archive:
         frozen = json.loads(archive.read("evidence.json"))
         bundle = json.loads(archive.read("bundle.json"))
-        assert frozen == f.frozen.evidence
+        assert frozen == (f.frozen.image_evidence if f.analysis.kind == "image" else f.frozen.evidence)
         assert bundle["evidence"]["set_sha256"] == frozen["sha256"]
         assert bundle["analysis"]["original_result_sha256"] == f.analysis.result_hash
         assert bundle["reports"][0]["snapshot_sha256"] == snapshot.snapshot_hash(f.frozen)
@@ -218,7 +225,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
-        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.face_lighting_context', 'app.evidence.video_packet_versions', 'app.evidence.sound_event_binding'):
+        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding', 'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.face_lighting_context', 'app.evidence.video_packet_versions', 'app.evidence.sound_event_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):
@@ -238,7 +245,7 @@ sys.exit(0 if result.ok else 1)
     assert leaked == [], f"Public derivative exposes internal check identities: {leaked}"
 
 
-@pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py'])
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py', 'image_copy_similarity_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

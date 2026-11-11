@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { afterEach, describe, expect, it } from 'vitest'
-import { ImageEvidenceContent } from './ImageEvidenceCards'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import ImageEvidenceCards, { ImageEvidenceContent } from './ImageEvidenceCards'
 import { evidenceImageUrl, evidenceSourceUrl, type CandidateEligibility, type ImageEvidenceSet, type ImageInspectionCheck } from './imagePackets'
 import { parseViewerState, serialiseViewerState } from '../viewer/viewerState'
 
@@ -26,7 +27,20 @@ const evidence: ImageEvidenceSet = {
 }
 
 const show = (value = evidence, token = 'signed token') => render(<MemoryRouter><ImageEvidenceContent set={value} token={token} mediaReady /></MemoryRouter>)
-afterEach(cleanup)
+afterEach(() => {
+  cleanup()
+  vi.unstubAllGlobals()
+})
+
+const reflected: NonNullable<ImageEvidenceSet['copy_similarity']> = {
+  schema: 'same-image-reflection-similarity/1', status: 'supported_pair',
+  interpretation: 'Copying, intentional symmetry, reflections and repeated patterns can all produce this result. The comparison cannot identify which area came first or establish that the image was edited or made with AI.',
+  pairs: [{ id: 'R01', transform: 'horizontal_reflection',
+    regions: { area_a: { x: 108, y: 168, w: 192, h: 128 }, area_b: { x: 594, y: 324, w: 192, h: 128 } },
+    artifacts: { area_a: { ...artifact('1'), width: 192, height: 128 }, area_b: { ...artifact('2'), width: 192, height: 128 } },
+  }],
+}
+const copyOnly: ImageEvidenceSet = { ...evidence, version: 'image-evidence-7', packets: [], copy_similarity: reflected }
 
 const gate = (score: number, eligible = score >= .5): CandidateEligibility => ({
   schema: 'image-candidate-eligibility/1', status: 'evaluated', scope: 'whole_image', comparison: 'greater_or_equal',
@@ -72,6 +86,67 @@ describe('image evidence cards', () => {
     show({ ...evidence, comparison: { ...comparison, status: 'bounded', counts: { ...comparison.counts!, shared: 0, wider: 28 } } })
     expect(screen.getByText(/Some eligible regions are not shown/)).toBeTruthy()
     expect(screen.getByText(/disagreement does not clear the file/)).toBeTruthy()
+  })
+
+  it('loads the reflected pair in the ordinary image section without any regional maps', async () => {
+    const fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => copyOnly })
+    vi.stubGlobal('fetch', fetch)
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false, gcTime: 0 } } })
+    render(<QueryClientProvider client={client}><MemoryRouter initialEntries={['/analyses/analysis-1/image-evidence?view=plain']}>
+      <ImageEvidenceCards analysisId={copyOnly.analysis_id} token="signed token" mediaReady />
+    </MemoryRouter></QueryClientProvider>)
+
+    const pairSection = await screen.findByRole('region', { name: 'Same-image copy similarity' })
+    expect(fetch).toHaveBeenCalledWith('/api/v2/analyses/analysis-1/evidence-packets', expect.anything())
+    const pair = within(pairSection)
+    expect(pair.getByRole('heading', { name: 'R01 · Reflected pair' })).toBeTruthy()
+    expect(pairSection.textContent).toContain('Similar areas were found after horizontal reflection.')
+    expect(pairSection.textContent).toContain('Coordinates use native pixels in the oriented original.')
+    expect(pairSection.textContent).toContain('cannot identify which area came first or establish that the image was edited or made with AI')
+    const figures = pair.getAllByRole('figure')
+    expect(figures).toHaveLength(2)
+    for (const [index, role] of (['area_a', 'area_b'] as const).entries()) {
+      const label = index === 0 ? 'Area A' : 'Area B'
+      const { x, y, w, h } = reflected.pairs[0].regions[role]
+      const crop = within(figures[index]).getByRole('img', { name: `R01: ${label} cropped from the submitted image` })
+      const link = within(figures[index]).getByRole('link', {
+        name: `${label} in the original image`, description: `x ${x}, y ${y}, ${w} × ${h} px`,
+      })
+      expect(crop.getAttribute('src')).toBe(`/api/v2/analyses/analysis-1/evidence-packets/evidence-set-1/images/${reflected.pairs[0].artifacts[role].sha256}.png?token=signed%20token`)
+      expect(crop.getAttribute('width')).toBe(String(w))
+      expect(crop.getAttribute('height')).toBe(String(h))
+      const source = new URL(link.getAttribute('href')!, 'https://local.invalid')
+      expect(source.pathname).toBe('/analyses/analysis-1/evidence')
+      expect(parseViewerState(source.searchParams)).toMatchObject({ focus: { x, y, w, h }, layers: { map: null, marks: [] } })
+    }
+    expect(screen.queryByTestId('image-regional-comparison')).toBeNull()
+    expect(screen.queryByTestId('image-evidence-card')).toBeNull()
+    expect(screen.getByTestId('image-evidence-empty').textContent).toContain('No other local editing regions were recorded.')
+  })
+
+  it.each([
+    ['no_pair', 'This check found no qualifying reflected pair.'],
+    ['unsupported_geometry', 'This check requires native dimensions'],
+    ['unassessed_match_budget', 'The check found too many candidate matches'],
+  ] as const)('describes %s without fabricating a pair or clearing the image', (status, message) => {
+    show({ ...copyOnly, copy_similarity: { ...reflected, status, pairs: [] } })
+    const summary = screen.getByRole('region', { name: 'Same-image copy similarity' })
+    expect(summary.textContent).toContain(message)
+    expect(within(summary).queryAllByRole('img')).toHaveLength(0)
+    expect(within(summary).queryAllByRole('link')).toHaveLength(0)
+    expect(summary.textContent).not.toContain('Similar areas were found after horizontal reflection.')
+    expect(screen.getByTestId('image-evidence-empty').textContent).toContain('does not establish that the image is unaltered')
+  })
+
+  it('keeps the other reflected crop and native coordinates available when a crop fails', () => {
+    const { rerender } = show(copyOnly)
+    fireEvent.error(screen.getByRole('img', { name: /Area A cropped/ }))
+    expect(screen.getByRole('alert').textContent).toContain('could not be loaded')
+    expect(screen.getByRole('link', { name: 'Area A in the original image', description: 'x 108, y 168, 192 × 128 px' })).toBeTruthy()
+    expect(screen.getByRole('img', { name: /Area B cropped/ })).toBeTruthy()
+    rerender(<MemoryRouter><ImageEvidenceContent set={copyOnly} token="renewed" mediaReady /></MemoryRouter>)
+    expect(screen.queryByRole('alert')).toBeNull()
+    expect(screen.getByRole('img', { name: /Area A cropped/ }).getAttribute('src')).toContain('?token=renewed')
   })
   it('shows original crops and cautious regional evidence without requiring Expert view', () => {
     show()

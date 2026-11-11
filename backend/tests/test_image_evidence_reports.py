@@ -75,13 +75,13 @@ def test_historical_snapshots_keep_canonical_bytes_without_added_key():
 def test_capture_freezes_set_despite_later_loader_mutation(tmp_path, monkeypatch):
     snapshot, store = packet_snapshot(tmp_path)
     mutable = copy.deepcopy(snapshot.image_evidence)
-    monkeypatch.setattr("app.evidence.image_packets_v5.load_packet_set", lambda *a, **k: mutable)
+    monkeypatch.setattr("app.evidence.image_packets_v7.load_packet_set", lambda *a, **k: mutable)
     frozen = image_evidence.capture(None, SimpleNamespace(kind="image"), store=store)
     mutable["packets"][0]["observation"] = "A later version has a different observation."
     assert frozen["packets"][0]["observation"] == snapshot.image_evidence["packets"][0]["observation"]
     loaded = load(dump(snapshot.model_copy(update={"image_evidence": frozen})))
     assert snapshot_hash(loaded) == snapshot_hash(snapshot)
-    monkeypatch.setattr("app.evidence.image_packets_v5.load_packet_set", lambda *a, **k: pytest.fail("Render queried mutable state"))
+    monkeypatch.setattr("app.evidence.image_packets_v7.load_packet_set", lambda *a, **k: pytest.fail("Render queried mutable state"))
     assert image_evidence.view(loaded, store=store)["sha256"] == frozen["sha256"]
 
 

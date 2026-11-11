@@ -1,12 +1,36 @@
 {% if v.get('image_evidence') and not v.image_evidence.available %}<p class="caption evidence-unavailable">{{ v.image_evidence.note }}</p>{% endif %}
 {% if v.get('image_evidence') and v.image_evidence.available %}
-<section class="{% if v.image_evidence.packets or v.image_evidence.get('inspection_checks') %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and (v.image_evidence.packets or v.image_evidence.get('inspection_checks')) %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
+{% set similarity = v.image_evidence.get('copy_similarity') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) %}
+<section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
 {% if v.image_evidence.available %}
 <p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
 <p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
 {% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if similarity %}
+<div class="image-regional-comparison">
+<h3>Same-image copy similarity</h3>
+<p>{{ similarity.observation }}</p>
+<p class="caption">{{ similarity.interpretation }}</p>
+{% for pair in similarity.pairs %}
+<article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">
+<h4>{{ pair.id }} · Reflected pair</h4>
+<div class="evidence-plates evidence-plates-pair">
+{% for image in pair.images %}
+{% set region = pair.regions[image.role] %}
+<figure>
+{% if image.uri %}<img src="{{ image.uri }}" alt="{{ image.label }} cropped from the submitted image">{% endif %}
+<figcaption>{{ image.label }} · x {{ region.x }}, y {{ region.y }}, {{ region.w }} × {{ region.h }} px</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% for image in pair.images %}<p class="caption evidence-asset-hashes">{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span></p>{% endfor %}
+</article>
+{% endfor %}
+</div>
+{% endif %}
 {% if v.image_evidence.get('comparison') %}
 {% set comparison = v.image_evidence.comparison %}
 <div class="image-regional-comparison">
@@ -84,7 +108,7 @@
 <p class="caption evidence-asset-hashes">{% for image in packet.images %}{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
 </article>
 {% else %}
-<p>{% if v.image_evidence.get('inspection_checks') %}No candidate regions are shown in this report. The coverage above explains what was measured and withheld.{% else %}No usable local inspection regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
+<p>{% if v.image_evidence.get('inspection_checks') %}No local editing candidates are shown. The coverage above explains what was measured and withheld.{% else %}No separate local editing regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
 {% endfor %}
 {% if v.image_evidence.omitted_regions %}<p class="caption">{{ v.image_evidence.omitted_regions }} additional candidate regions were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in v.image_evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}

@@ -67,7 +67,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7'
   sha256: string | null
   analysis_id: string
   revision: number
@@ -78,6 +78,14 @@ export interface ImageEvidenceSet {
   omitted_regions: number
   coverage?: { inspection_checks?: ImageInspectionCheck[] }
   comparison?: ImageRegionalComparison
+  copy_similarity?: {
+    schema: 'same-image-reflection-similarity/1'
+    status: 'supported_pair' | 'no_pair' | 'unsupported_geometry' | 'unassessed_match_budget'
+    interpretation: string
+    pairs: { id: string; transform: 'horizontal_reflection'
+      regions: Record<'area_a' | 'area_b', Box>
+      artifacts: Record<'area_a' | 'area_b', EvidenceImage> }[]
+  }
 }
 
 export interface ImageRegionalComparison {
@@ -126,7 +134,7 @@ export function evidenceImageUrl(set: ImageEvidenceSet, artifact: EvidenceImage,
 }
 
 /** Frame the exact source coordinates, with lenses switched off so the original stays visible. */
-export function evidenceSourceUrl(analysisId: string, packet: ImageEvidencePacket): string {
+export function evidenceSourceUrl(analysisId: string, packet: Pick<ImageEvidencePacket, 'region'>): string {
   const { x, y, w, h } = packet.region
   const query = new URLSearchParams({ layers: '', focus: [x, y, w, h].join(',') })
   return `/analyses/${encodeURIComponent(analysisId)}/evidence?${query.toString()}`

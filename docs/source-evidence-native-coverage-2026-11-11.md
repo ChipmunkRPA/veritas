@@ -16,6 +16,8 @@ A separate native patch method improved reflected-copy coverage on eight disjoin
 
 A second test used eight licensed photos visually selected for symmetry, mirrors, or repeated detail before scoring. None of their 16 PNG and JPEG views produced a pair. A deliberately mirrored graphic produced a genuine pixel-similarity match in both formats. A whole-image mirror exceeded the search budget in both formats. These controls illustrate why the evidence describes similar pixels and leaves their origin open. [Hard-control aggregate](evaluation-panels/image-copy-native-reflection-hard-controls.json)
 
+The app now presents an automatic reflected pair as two original crops with native coordinates. Either crop opens its location in the submitted image. The PDF and signed JSON package carry the same pair and pixel crops. The check covers images at least 384 pixels on both sides with a long side of 513–1,024 pixels. Results describe similarity, with copying, intentional symmetry, reflections and repetition as possible explanations. The check carries no authorship-confidence weight.
+
 ## Audio
 
 The standalone stereo check now compares the louder source channel with the actual mono signal supplied for analysis. One-second windows in the first 30 seconds flag a drop of at least 12 dB when the source channel has enough level for review. Known opposing-channel controls produced partial or full cancellation. Matching channels, quadrature and quiet controls produced no strong warning.

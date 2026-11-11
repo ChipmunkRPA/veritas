@@ -18,7 +18,7 @@ ASSET_TYPES = {"png": "image/png", "wav": "audio/wav", "mp4": "video/mp4"}
 def module_for_kind(kind: str) -> ModuleType | None:
     if kind not in KINDS:
         return None
-    name = "app.evidence.image_packets_v5" if kind == "image" else f"app.evidence.{kind}_packets"
+    name = "app.evidence.image_packets_v7" if kind == "image" else f"app.evidence.{kind}_packets"
     try:
         return import_module(name)
     except ModuleNotFoundError as exc:
@@ -88,6 +88,8 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
+        if part.get("version") == "image-evidence-7":
+            groups.extend(pair["artifacts"] for pair in part["copy_similarity"]["pairs"])
         context = part.get("acoustic_context")
         if context is not None:
             if not isinstance(context, dict):

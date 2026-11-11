@@ -30,7 +30,7 @@ SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
-                      'image-evidence-6'}, 'video': VIDEO_VERSIONS,
+                      'image-evidence-6', 'image-evidence-7'}, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
 
 
@@ -106,11 +106,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         else:
             _require(not {'audio', 'av'}.intersection(evidence), 'Historical video evidence has unexpected nested channels')
     if analysis['kind'] == 'image':
+        from app.evidence.image_copy_similarity_binding import validate_similarity
         from app.evidence.image_eligibility import validate_inspection_coverage
 
+        validate_similarity(evidence, canonical_hash)
         validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}
-                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} else evidence)
-        if evidence['version'] in {'image-evidence-5', 'image-evidence-6'}:
+                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6', 'image-evidence-7'} else evidence)
+        if evidence['version'] in {'image-evidence-5', 'image-evidence-6', 'image-evidence-7'}:
             for packet in evidence['packets']:
                 cue = packet.get('copy_corroboration')
                 assets = packet['artifacts']
@@ -120,7 +122,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and cue.get('highlight_asset_sha256') == assets.get('mask', {}).get('sha256')
                              and (cue.get('status') == 'copy_consistent') == ('copy_donor' in assets),
                              'Copy evidence differs from its committed highlight or matching patch')
-                    if evidence['version'] == 'image-evidence-6':
+                    if evidence['version'] in {'image-evidence-6', 'image-evidence-7'}:
                         _require('search_strategy' in cue and cue['search_strategy'] in {None, 'native_dense', 'native_anchor_shortlist'}
                                  and (cue['search_strategy'] is None) == (cue.get('status') == 'unsupported_geometry')
                                  and (cue.get('status') != 'unassessed_candidate_budget' or cue['search_strategy'] == 'native_anchor_shortlist'),
@@ -155,6 +157,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     groups = [group for part in parts for group in
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
     for part in parts:
+        if part.get('version') == 'image-evidence-7':
+            groups.extend(pair['artifacts'] for pair in part['copy_similarity']['pairs'])
         acoustic = part.get('acoustic_context')
         if acoustic:
             groups.extend([acoustic.get('overview') or {}, *(event.get('artifacts') or {} for event in acoustic.get('events', []))])

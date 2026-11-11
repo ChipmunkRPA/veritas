@@ -1,0 +1,106 @@
+{
+  "schema": "chipmunk.audio-measured-bbc-coverage-result/1",
+  "status": "complete",
+  "freeze_sha256": "aedf822f6d64d7c0cce28e57d6909ae66a1a408b44d6e527a4e391b51807d139",
+  "private_observations_sha256": "95c3e24ca2b7492e5be9e79517561081e5e81c274dc339e40f230980b8234d9c",
+  "speech_activity_cases": 18,
+  "vad_frame_forwards": 5076,
+  "new_neural_calls": 5076,
+  "authenticity_forwards": 0,
+  "counts": {
+    "all": {
+      "planned": 18,
+      "mono_admitted": 12,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 12,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "condition/matched_room_clean": {
+      "planned": 6,
+      "mono_admitted": 4,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 4,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "origin/genuine": {
+      "planned": 6,
+      "mono_admitted": 6,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 6,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "geometry/other": {
+      "planned": 12,
+      "mono_admitted": 8,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 8,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "condition/noise_left": {
+      "planned": 6,
+      "mono_admitted": 4,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 4,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "geometry/gap_at_least_3db": {
+      "planned": 6,
+      "mono_admitted": 4,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 4,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "condition/noise_right": {
+      "planned": 6,
+      "mono_admitted": 4,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 4,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "origin/expressive": {
+      "planned": 6,
+      "mono_admitted": 3,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 3,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    },
+    "origin/stock": {
+      "planned": 6,
+      "mono_admitted": 3,
+      "selected": 0,
+      "selected_admitted": 0,
+      "combined_admitted": 3,
+      "additional_admission": 0,
+      "clearer_side_available": 0,
+      "chose_clearer_side": 0
+    }
+  },
+  "selection_reasons": {
+    "contrast_gap_below_minimum": 15,
+    "insufficient_active_or_quiet_support": 3
+  }
+}

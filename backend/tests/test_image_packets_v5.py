@@ -16,7 +16,8 @@ from test_image_packets_v4 import paired
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import image_packets_v4 as prior
 from app.evidence import image_packets_v5 as packets
-from app.evidence.service import asset_refs, load_packet_set, persist_packet_set
+from app.evidence.image_packets_v5 import persist_packet_set
+from app.evidence.service import asset_refs, load_packet_set
 
 TARGET = (31, 33, 64, 64)
 DONOR = (151, 138, 64, 64)

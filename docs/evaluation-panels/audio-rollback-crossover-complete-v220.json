@@ -1,0 +1,296 @@
+{
+  "schema": "chipmunk.audio-rollback-crossover-result/220",
+  "status": "complete",
+  "freeze_sha256": "7405630ef6ee67f327075216f564b9f9956c924d141dbfa3f17ee22718fff60b",
+  "profile_sha256": [
+    "389ab0600b2495608895f031e16f8973ea178920560c51fefb5537a74b4f43ba",
+    "8860b9ba8c730627452bc3f05949edba1e2356f94d41234a455e618e554fd943",
+    "b5cd3e3e0650869d9a2067704812da8b9ea7896db570d0d6309a568ef04fe5a5"
+  ],
+  "private_journal_sha256": [
+    "91f3f8aec7d1cbdb71dd680bbfc4d2a59f01e0fb974b0ca30e784f763a6dce86",
+    "bfa5df8104a59c5cb3462121fbcb79701ccb1187c33f8681d482ef834ef1f036",
+    "36be06fbff070190f3235aa40abccf3c6aad4cd8b2c3b9a26e5b890122088457"
+  ],
+  "new_neural_calls": 112,
+  "raw_comparison_point": 0.5,
+  "condition_results": {
+    "matched_clean": {
+      "planned": 48,
+      "common_assessed": {
+        "genuine": 19,
+        "synthetic": 19
+      },
+      "route_outcomes": {
+        "genuine": {
+          "ok": 19,
+          "preparation_unavailable": 5
+        },
+        "synthetic": {
+          "ok": 19,
+          "preparation_unavailable": 5
+        }
+      },
+      "recorded_directions": {
+        "genuine": {
+          "original": 19,
+          "unavailable": 5
+        },
+        "synthetic": {
+          "ai": 16,
+          "unavailable": 5,
+          "original": 2,
+          "inconclusive": 1
+        }
+      },
+      "comparison": {
+        "recorded_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 361,
+            "synthetic_higher": 358,
+            "ties": 0,
+            "genuine_higher": 3,
+            "concordance": 0.9916897506925207
+          },
+          "same_pair_rank": {
+            "comparisons": 19,
+            "synthetic_higher": 18,
+            "ties": 0,
+            "genuine_higher": 1,
+            "concordance": 0.9473684210526315
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 0,
+            "synthetic": 16
+          }
+        },
+        "rollback_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 361,
+            "synthetic_higher": 343,
+            "ties": 0,
+            "genuine_higher": 18,
+            "concordance": 0.9501385041551247
+          },
+          "same_pair_rank": {
+            "comparisons": 19,
+            "synthetic_higher": 18,
+            "ties": 0,
+            "genuine_higher": 1,
+            "concordance": 0.9473684210526315
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 1,
+            "synthetic": 15
+          }
+        }
+      }
+    },
+    "river_early_0db": {
+      "planned": 48,
+      "common_assessed": {
+        "genuine": 18,
+        "synthetic": 19
+      },
+      "route_outcomes": {
+        "genuine": {
+          "ok": 18,
+          "preparation_unavailable": 5,
+          "not_applicable": 1
+        },
+        "synthetic": {
+          "ok": 19,
+          "preparation_unavailable": 5
+        }
+      },
+      "recorded_directions": {
+        "genuine": {
+          "original": 11,
+          "unavailable": 6,
+          "inconclusive": 7
+        },
+        "synthetic": {
+          "inconclusive": 15,
+          "unavailable": 5,
+          "original": 3,
+          "ai": 1
+        }
+      },
+      "comparison": {
+        "recorded_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 342,
+            "synthetic_higher": 271,
+            "ties": 0,
+            "genuine_higher": 71,
+            "concordance": 0.7923976608187134
+          },
+          "same_pair_rank": {
+            "comparisons": 18,
+            "synthetic_higher": 13,
+            "ties": 0,
+            "genuine_higher": 5,
+            "concordance": 0.7222222222222222
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 0,
+            "synthetic": 2
+          }
+        },
+        "rollback_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 342,
+            "synthetic_higher": 173,
+            "ties": 0,
+            "genuine_higher": 169,
+            "concordance": 0.5058479532163743
+          },
+          "same_pair_rank": {
+            "comparisons": 18,
+            "synthetic_higher": 8,
+            "ties": 0,
+            "genuine_higher": 10,
+            "concordance": 0.4444444444444444
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 0,
+            "synthetic": 0
+          }
+        }
+      }
+    },
+    "river_late_0db": {
+      "planned": 48,
+      "common_assessed": {
+        "genuine": 18,
+        "synthetic": 19
+      },
+      "route_outcomes": {
+        "genuine": {
+          "ok": 18,
+          "preparation_unavailable": 5,
+          "not_applicable": 1
+        },
+        "synthetic": {
+          "ok": 19,
+          "preparation_unavailable": 5
+        }
+      },
+      "recorded_directions": {
+        "genuine": {
+          "inconclusive": 9,
+          "unavailable": 6,
+          "original": 8,
+          "ai": 1
+        },
+        "synthetic": {
+          "inconclusive": 17,
+          "unavailable": 5,
+          "original": 2
+        }
+      },
+      "comparison": {
+        "recorded_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 342,
+            "synthetic_higher": 247,
+            "ties": 0,
+            "genuine_higher": 95,
+            "concordance": 0.7222222222222222
+          },
+          "same_pair_rank": {
+            "comparisons": 18,
+            "synthetic_higher": 11,
+            "ties": 0,
+            "genuine_higher": 7,
+            "concordance": 0.6111111111111112
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 1,
+            "synthetic": 1
+          }
+        },
+        "rollback_raw": {
+          "all_cross_class_rank": {
+            "comparisons": 342,
+            "synthetic_higher": 216,
+            "ties": 0,
+            "genuine_higher": 126,
+            "concordance": 0.631578947368421
+          },
+          "same_pair_rank": {
+            "comparisons": 18,
+            "synthetic_higher": 11,
+            "ties": 0,
+            "genuine_higher": 7,
+            "concordance": 0.6111111111111112
+          },
+          "raw_fake_side_at_legacy_point": {
+            "genuine": 0,
+            "synthetic": 0
+          }
+        }
+      }
+    }
+  },
+  "movements_from_matched_clean": {
+    "river_early_0db": {
+      "genuine": {
+        "planned_pairs": 24,
+        "both_assessed": 18,
+        "score_movements": {
+          "recorded_raw": {
+            "up": 18
+          },
+          "rollback_raw": {
+            "down": 15,
+            "up": 3
+          }
+        }
+      },
+      "synthetic": {
+        "planned_pairs": 24,
+        "both_assessed": 19,
+        "score_movements": {
+          "recorded_raw": {
+            "down": 17,
+            "up": 2
+          },
+          "rollback_raw": {
+            "down": 19
+          }
+        }
+      }
+    },
+    "river_late_0db": {
+      "genuine": {
+        "planned_pairs": 24,
+        "both_assessed": 18,
+        "score_movements": {
+          "recorded_raw": {
+            "up": 18
+          },
+          "rollback_raw": {
+            "down": 15,
+            "up": 3
+          }
+        }
+      },
+      "synthetic": {
+        "planned_pairs": 24,
+        "both_assessed": 19,
+        "score_movements": {
+          "recorded_raw": {
+            "down": 18,
+            "up": 1
+          },
+          "rollback_raw": {
+            "down": 19
+          }
+        }
+      }
+    }
+  },
+  "fresh_panel_scored": false,
+  "defaults_changed": false
+}

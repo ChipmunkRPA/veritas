@@ -448,6 +448,18 @@ def _coverage(kind: str, document: dict) -> str:
     return summary
 
 
+def _document_coverage_details(coverage: dict) -> list[str]:
+    notes = [
+        f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
+        + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
+        for check in coverage.get("checks", []) if check["status"] != "recorded"
+    ]
+    for page in coverage.get("partially_checked_pages", []):
+        boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["image_boxes"])
+        notes.append(f"Page {page['page']}. {page['reason']} Unchecked bounds in unrotated PDF points {boxes}.")
+    return notes
+
+
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
     if snapshot.analysis.kind not in KINDS:
         if snapshot.evidence is not None:
@@ -658,9 +670,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else
-                                 [f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
-                                  + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
-                                  for check in document.get("coverage", {}).get("checks", []) if check["status"] != "recorded"]
+                                 _document_coverage_details(document.get("coverage") or {})
                                  if kind == "document" else []),
             "overview": [{**plate(role, asset, overview_label(pk, part, role)),
                           "anchor": "multimedia-evidence-voice-waveform" if pk == "audio" and role == "waveform" else None}

@@ -216,6 +216,8 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    partially_checked_pages?: { page: number; image_boxes: [number, number, number, number][];
+      coordinate_space: 'unrotated-page-points'; reason: string }[];
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null

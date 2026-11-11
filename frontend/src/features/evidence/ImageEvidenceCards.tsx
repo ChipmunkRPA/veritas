@@ -72,6 +72,11 @@ function RegionalComparison({ set, token, mediaReady }: { set: ImageEvidenceSet;
   </section>
 }
 
+const copyBasisText = {
+  native_patch_alignment: 'The match aligns patches on the original pixel grid.',
+  geometric_features: 'The match uses corresponding features in both areas.',
+}
+
 function CopySimilarity({ set, field, token, mediaReady }: {
   set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation'; token: string; mediaReady: boolean
 }) {
@@ -80,7 +85,8 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const reflected = field === 'copy_similarity'
   const heading = reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = reflected ? 'image-copy-similarity' : 'image-copy-translation'
-  const wide = reflected && (set.version === 'image-evidence-9' || set.version === 'image-evidence-10')
+  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11'].includes(set.version)
+  const basis = !reflected && set.copy_translation?.basis
   const statusText = {
     supported_pair: reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
     no_pair: reflected ? 'This check found no qualifying reflected pair.' : 'This check found no qualifying non-mirrored pair.',
@@ -94,6 +100,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text">{statusText[check.status]}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
+    {check.pairs.length > 0 && basis && <p className="mt-2 mb-0 text-caption text-text-muted">{copyBasisText[basis]}</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
       <h4 className="m-0 text-small font-medium text-text">{pair.id} · {reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>

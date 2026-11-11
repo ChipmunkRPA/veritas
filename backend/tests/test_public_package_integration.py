@@ -113,7 +113,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
         db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=not translated,
                                                           reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == "image-evidence-10"
+        assert document["version"] == "image-evidence-11"
         assert document["source"]["width"] == (768 if translated else 1408)
         assert document["copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":

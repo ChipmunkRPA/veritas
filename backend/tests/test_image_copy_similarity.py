@@ -18,7 +18,7 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
-from app.evidence.image_copy_similarity_binding import V7, V8, V9, VERSION, supported_size
+from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, VERSION, supported_size
 from app.reports import engine, image_evidence, snapshot
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -150,14 +150,18 @@ def test_automatic_pair_persists_both_original_crops_without_manual_highlight(pa
     (V7, "image-evidence-packets/5", False),
     (V8, "image-evidence-packets/6", True),
     (V9, "image-evidence-packets/7", True),
+    (V10, "image-evidence-packets/8", False),
 ])
 def test_historical_reflection_remains_readable_after_writing_latest(packet_fixture, monkeypatch, version, creator, large):
     db, store, analysis, result, _ = reflected_result(packet_fixture, large=large)
     historical = service.build_packet_set(db, analysis, store, result)
-    historical.pop("copy_translation")
+    if version == V10:
+        historical["copy_translation"].pop("basis")
+    else:
+        historical.pop("copy_translation")
     historical["version"] = version
     historical["id"] = image_packets_v5.current_set_id(analysis, version)
-    if large and version != V9:
+    if large and version == V8:
         historical["copy_similarity"].update(status="unsupported_geometry", pairs=[])
     for pair in historical["copy_similarity"]["pairs"]:
         for asset in pair["artifacts"].values():
@@ -192,9 +196,11 @@ def test_no_pair_keeps_explicit_coverage_and_no_assets(packet_fixture):
 
 def test_translated_pair_budget_is_disclosed_as_unassessed(packet_fixture, monkeypatch):
     db, store, analysis, result, _ = reflected_result(packet_fixture, reflected=False, translated=True)
+    monkeypatch.setattr(copy_similarity, "analyse_translation", lambda _: ("no_pair", []))
     monkeypatch.setattr(image_packets_v7, "MAX_COPY_CANDIDATES", 1)
     document = service.persist_packet_set(db, analysis, store, result=result)
     assert document["copy_translation"]["status"] == "unassessed_match_budget"
+    assert document["copy_translation"]["basis"] is None
     assert document["copy_translation"]["pairs"] == []
     assert service.asset_refs(document) == {}
 
@@ -237,6 +243,7 @@ def test_translated_pair_is_saved_without_changing_assessment_and_serves_both_so
         assert document["original_result_hash"] == analysis.result_hash
         check = document["copy_translation"]
         assert check["status"] == "supported_pair" and check["authorship_confidence_contribution"] == 0
+        assert check["basis"] == "native_patch_alignment"
         assert document["copy_similarity"]["status"] == "no_pair"
         pair, = check["pairs"]
         assert pair["id"] == "T01" and pair["transform"] == "same_orientation"
@@ -244,6 +251,11 @@ def test_translated_pair_is_saved_without_changing_assessment_and_serves_both_so
         wrong["copy_translation"]["pairs"][0]["transform"] = "horizontal_reflection"
         wrong["sha256"] = image_packets_v5.packet_hash(wrong)
         with pytest.raises(image_packets_v7.PacketIntegrityError, match="malformed paired areas"):
+            image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
+        wrong = copy.deepcopy(document)
+        wrong["copy_translation"]["basis"] = None
+        wrong["sha256"] = image_packets_v5.packet_hash(wrong)
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="invalid matching basis"):
             image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
         db.commit()
     response = fixture.client.get(f"/api/v2/analyses/{analysis_id}/evidence-packets", headers=fixture.viewer)

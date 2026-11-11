@@ -232,6 +232,8 @@ def test_partial_page_binds_to_public_evidence_and_pdf(packet_factory, tmp_path,
     text = " ".join(engine.pdf_text(rendered.pdf).split())
     assert not rendered.refused and WARNING in text
     assert "mapped text and unchecked image areas" in text
+    assert "Page 1. OCR unavailable in fixture." in text
+    assert "Unchecked bounds in unrotated PDF points [40.0, 150.0, 570.0, 735.0]." in text
 
 
 def test_native_ocr_does_not_raise_the_recognition_quality_of_the_image_region(tmp_path, monkeypatch):

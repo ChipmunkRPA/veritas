@@ -16,6 +16,7 @@
 <p>{{ check.observation }}</p>
 <p class="caption">{{ check.interpretation }}</p>
 {% if check.schema == 'same-image-copy-similarity/1' %}<p class="caption">This check carries zero weight in AI authorship confidence.</p>{% endif %}
+{% if check.get('basis_text') %}<p class="caption">{{ check.basis_text }}</p>{% endif %}
 {% for pair in check.pairs %}
 <article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">
 <h4>{{ pair.id }} · {{ label }}</h4>

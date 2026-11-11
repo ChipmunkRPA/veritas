@@ -29,6 +29,10 @@ TRANSLATION_STATUS = {
     ),
     "unassessed_match_budget": "The check found too many candidate matches to show a distinct comparison.",
 }
+TRANSLATION_BASIS_TEXT = {
+    "native_patch_alignment": "The match aligns patches on the original pixel grid.",
+    "geometric_features": "The match uses corresponding features in both areas.",
+}
 
 
 def roles(packet: dict):
@@ -122,6 +126,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         status = check["status"]
         check["observation"] = (status_text(status, version=document["version"]) if field == "copy_similarity"
                                 else TRANSLATION_STATUS[status])
+        if field == "copy_translation" and check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
+            check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
         for pair in check["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

@@ -55,12 +55,13 @@ LOW_TEXTURE_PLAN = MappingProxyType({
 MISSING = "unassessed_match_budget"
 
 
-def _components(pairs, plan):
+def _components(pairs, plan, *, reflected=True):
     minimum = plan["min_consensus_pairs"]
     if len(pairs) < minimum:
         return []
     first, second = pairs[:, 0], pairs[:, 1]
-    parameters = np.column_stack((first[:, 0] + second[:, 0], second[:, 1] - first[:, 1]))
+    parameters = np.column_stack((second[:, 0] + first[:, 0] if reflected else second[:, 0] - first[:, 0],
+                                  second[:, 1] - first[:, 1]))
     offsets = np.abs(parameters[:, None] - parameters)
     link = plan["consensus_link_radius_px"]
     tolerance = plan["offset_tolerance_px"]
@@ -111,13 +112,13 @@ def keypoint_descriptors(gray, p):
     return positions[keep], np.ascontiguousarray(values[keep] / lengths[keep, None, None])
 
 
-def proposal_matches(positions, values, p):
+def proposal_matches(positions, values, p, *, reflected=True):
     n = len(values)
     if n < p["min_consensus_pairs"]:
         return np.empty((0, 2, 2))
     flat = np.ascontiguousarray(values.reshape(n, -1))
-    mirrored = np.ascontiguousarray(values[:, :, ::-1].reshape(n, -1))
-    matches = cv2.BFMatcher(cv2.NORM_L2).knnMatch(flat, mirrored, k=min(n, p["nearest_neighbors"]))
+    comparison = np.ascontiguousarray(values[:, :, ::-1].reshape(n, -1)) if reflected else flat
+    matches = cv2.BFMatcher(cv2.NORM_L2).knnMatch(flat, comparison, k=min(n, p["nearest_neighbors"]))
     accepted = {}
     for row in matches:
         good = [
@@ -188,22 +189,25 @@ def tighten_equal(bounds, exact, plan):
     return left + cols[0], top + rows[0], left + cols[-1] + 1, top + rows[-1] + 1
 
 
-def refine(rgb, gray, inliers, p):
+def refine(rgb, gray, inliers, p, *, reflected=True):
     height, width = gray.shape
     a, b = inliers[:, 0], inliers[:, 1]
-    intercept = int(np.rint(np.median(a[:, 0] + b[:, 0])))
+    intercept = int(np.rint(np.median(b[:, 0] + a[:, 0] if reflected else b[:, 0] - a[:, 0])))
     dy = int(np.rint(np.median(b[:, 1] - a[:, 1])))
     pad = p["refine_halo_px"]
-    left = max(0, intercept - (width - 1), int(a[:, 0].min()) - pad)
-    right = min(width, intercept + 1, int(a[:, 0].max()) + pad + 1)
+    mapped_left, mapped_right = ((intercept - (width - 1), intercept + 1) if reflected else
+                                 (-intercept, width - intercept))
+    left = max(0, mapped_left, int(a[:, 0].min()) - pad)
+    right = min(width, mapped_right, int(a[:, 0].max()) + pad + 1)
     top = max(0, -dy, int(a[:, 1].min()) - pad)
     bottom = min(height, height - dy, int(a[:, 1].max()) + pad + 1)
     if right - left <= p["refine_corr_side"] or bottom - top <= p["refine_corr_side"]:
         return None
-    other_left, other_right = intercept - (right - 1), intercept - left + 1
+    other_left = _mapped_left(left, right - left, intercept, reflected)
     r0 = np.s_[top:bottom, left:right]
-    r1 = np.s_[top + dy : bottom + dy, other_left:other_right]
-    aligned = local_corr(gray[r0].astype(np.float32), gray[r1][:, ::-1].astype(np.float32), p)
+    r1 = np.s_[top + dy : bottom + dy, other_left:other_left + right - left]
+    order = -1 if reflected else 1
+    aligned = local_corr(gray[r0].astype(np.float32), gray[r1][:, ::order].astype(np.float32), p)
     kernel = np.ones((p["refine_close_side"],) * 2, dtype=np.uint8)
     closed = cv2.morphologyEx(aligned.astype(np.uint8), cv2.MORPH_CLOSE, kernel)
     n, labels, stats, _ = cv2.connectedComponentsWithStats(closed, connectivity=8)
@@ -229,20 +233,25 @@ def refine(rgb, gray, inliers, p):
         min(right - left, x + w + half),
         min(bottom - top, y + h + half),
     )
-    equal = np.all(rgb[r0] == rgb[r1][:, ::-1], axis=2)
+    equal = np.all(rgb[r0] == rgb[r1][:, ::order], axis=2)
     x0, y0, x1, y1 = tighten_equal(bounds, equal, p)
     a_box = tuple(int(v) for v in (left + x0, top + y0, x1 - x0, y1 - y0))
-    b_box = tuple(int(v) for v in (intercept - (left + x1 - 1), top + y0 + dy, x1 - x0, y1 - y0))
+    b_box = tuple(int(v) for v in (_mapped_left(left + x0, x1 - x0, intercept, reflected), top + y0 + dy, x1 - x0, y1 - y0))
     return (a_box, b_box) if copy_move.iou(a_box, b_box) == 0 else None
 
 
-def _offset(pair):
+def _mapped_left(left, width, intercept, reflected):
+    return intercept - (left + width - 1) if reflected else left + intercept
+
+
+def _offset(pair, reflected):
     first, second = pair
-    return first[0] + second[0] + first[2] - 1, second[1] - first[1]
+    dx = second[0] + first[0] + first[2] - 1 if reflected else second[0] - first[0]
+    return dx, second[1] - first[1]
 
 
-def _merge_strips(left, right):
-    if _offset(left) != _offset(right) or copy_move.iou(left[0], right[0]) <= 0:
+def _merge_strips(left, right, reflected):
+    if _offset(left, reflected) != _offset(right, reflected) or copy_move.iou(left[0], right[0]) <= 0:
         return None
     ax, ay, aw, ah = left[0]
     bx, by, bw, bh = right[0]
@@ -250,16 +259,16 @@ def _merge_strips(left, right):
         return None
     x, y = min(ax, bx), min(ay, by)
     w, h = max(ax + aw, bx + bw) - x, max(ay + ah, by + bh) - y
-    intercept, dy = _offset(left)
-    first, second = (x, y, w, h), (intercept - (x + w - 1), y + dy, w, h)
+    intercept, dy = _offset(left, reflected)
+    first, second = (x, y, w, h), (_mapped_left(x, w, intercept, reflected), y + dy, w, h)
     return (first, second) if copy_move.iou(first, second) == 0 else None
 
 
-def _consolidate(pairs):
+def _consolidate(pairs, reflected):
     retained = []
     for candidate in pairs:
         for index, earlier in enumerate(retained):
-            merged = _merge_strips(earlier, candidate)
+            merged = _merge_strips(earlier, candidate, reflected)
             if merged is not None:
                 retained[index] = merged
                 break
@@ -268,21 +277,21 @@ def _consolidate(pairs):
     return retained
 
 
-def _search(rgb, gray, plan):
+def _search(rgb, gray, plan, *, reflected=True):
     positions, descriptors = keypoint_descriptors(gray, plan)
-    matches = proposal_matches(positions, descriptors, plan)
+    matches = proposal_matches(positions, descriptors, plan, reflected=reflected)
     if matches is None:
         return MISSING, []
-    pairs = _consolidate(
-        [pair for group in _components(matches, plan) if (pair := refine(rgb, gray, matches[group], plan)) is not None]
-    )
+    groups = _components(matches, plan, reflected=reflected)
+    pairs = _consolidate([pair for group in groups
+                          if (pair := refine(rgb, gray, matches[group], plan, reflected=reflected)) is not None], reflected)
     if len(pairs) > PAIR_LIMIT:
         return MISSING, []
     return ("supported_pair" if pairs else "no_pair"), pairs
 
 
-def _corroborates(rgb, pair):
-    """Require agreement across the entire proposed lower-texture pair."""
+def _corroborates(rgb, pair, *, reflected=True):
+    """Require agreement across the entire proposed pair."""
     first, second = pair
     if min(first[2:]) < 24:
         return False
@@ -291,7 +300,7 @@ def _corroborates(rgb, pair):
         x, y, width, height = box
         return rgb[y:y + height, x:x + width]
 
-    first, second = pixels(first), pixels(second)[:, ::-1]
+    first, second = pixels(first), pixels(second)[:, ::-1 if reflected else 1]
     if np.mean(np.all(first == second, axis=2)) >= 0.85:
         return True
 
@@ -316,3 +325,15 @@ def analyse(rgb: np.ndarray) -> tuple[str, list[tuple[copy_move.Box, copy_move.B
         return status, pairs
     verified = [pair for pair in pairs if _corroborates(rgb, pair)]
     return ("supported_pair" if verified else "no_pair"), verified
+
+
+def analyse_translation(rgb: np.ndarray) -> tuple[str, list[tuple[copy_move.Box, copy_move.Box]]]:
+    """Propose translated patches and verify their original pixels after alignment."""
+    gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
+    for plan in (PLAN, LOW_TEXTURE_PLAN):
+        status, pairs = _search(rgb, gray, plan, reflected=False)
+        if status == MISSING:
+            return status, []
+        if verified := [pair for pair in pairs if _corroborates(rgb, pair, reflected=False)]:
+            return "supported_pair", verified
+    return "no_pair", []

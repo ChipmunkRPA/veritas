@@ -91,6 +91,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   }
   const email = !!set.coverage?.email || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.kind === 'email'))
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
+  const partialPages = set.coverage?.partially_checked_pages ?? []
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
@@ -100,6 +101,16 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
         {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
+      {partialPages.length > 0 && <>
+        <p className="mt-2 mb-0">{partialPages.length === 1 ? 'Page' : 'Pages'} {partialPages.map((page) => page.page).join(', ')} {partialPages.length === 1 ? 'has' : 'have'} mapped text and unchecked image areas.</p>
+        <details className="mt-3">
+          <summary className="cursor-pointer">Unchecked image areas</summary>
+          <ul className="pl-4 list-disc">{partialPages.map((page) => <li key={page.page}>
+            <strong>Page {page.page}.</strong> {page.reason}{' '}
+            <span>Bounds in unrotated PDF points {page.image_boxes.map((box) => `[${box.join(', ')}]`).join(', ')}.</span>
+          </li>)}</ul>
+        </details>
+      </>}
       {usesOcr && <p className="mt-2 mb-0">Some text was recognized from page images. Recognition errors can change a check’s input; compare the excerpt with the page image. Recognition confidence is not AI-detection confidence.</p>}
       {set.coverage?.checks?.some((check) => check.status !== 'recorded') && <details className="mt-3"><summary className="cursor-pointer">Checks with incomplete local evidence</summary>
         <ul className="pl-4 list-disc">{set.coverage.checks.filter((check) => check.status !== 'recorded').map((check) => <li key={check.signal_ref.id}>

@@ -9,8 +9,11 @@ V7 = "image-evidence-7"
 V8 = "image-evidence-8"
 V9 = "image-evidence-9"
 V10 = "image-evidence-10"
-VERSION = V10
-REFLECTION_VERSIONS = frozenset({V7, V8, V9, V10})
+V11 = "image-evidence-11"
+VERSION = V11
+TRANSLATION_VERSIONS = frozenset({V10, V11})
+REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
+LARGE_IMAGE_VERSIONS = TRANSLATION_VERSIONS | {V9}
 SCHEMA = "same-image-reflection-similarity/1"
 TRANSLATION_SCHEMA = "same-image-copy-similarity/1"
 TRANSLATION_NOTE = (
@@ -48,11 +51,11 @@ def supported_size(width: int, height: int, *, version: str = VERSION) -> bool:
     short, long = sorted((width, height))
     if long <= MAX_SIDE:
         return short >= MIN_SIDE and long >= MIN_LONG_SIDE
-    return version in {V9, V10} and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
+    return version in LARGE_IMAGE_VERSIONS and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
 
 
 def status_text(status: str, *, version: str) -> str:
-    if status == "unsupported_geometry" and version in {V9, V10}:
+    if status == "unsupported_geometry" and version in LARGE_IMAGE_VERSIONS:
         return LARGE_COVERAGE_TEXT
     return STATUS_TEXT[status]
 
@@ -86,7 +89,7 @@ def prior_evidence(document: dict) -> dict:
 def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -> None:
     """Validate standalone public structure and both exact native-crop references."""
     version = document.get("version")
-    if ("copy_translation" in document) != (version == V10):
+    if ("copy_translation" in document) != (version in TRANSLATION_VERSIONS):
         raise ValueError("The same-orientation copy check differs from the evidence version")
     if version not in REFLECTION_VERSIONS:
         if {"copy_similarity", "prior_image_evidence"} & document.keys():
@@ -107,19 +110,20 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
     source = document["source"]
     size = source["width"], source["height"]
     _validate_check(document, document.get("copy_similarity"), size, supported_size(*size, version=version), reflected=True)
-    if version == V10:
+    if version in TRANSLATION_VERSIONS:
         _validate_check(document, document["copy_translation"], size, supported_size(*size, version=V8), reflected=False)
 
 
 def copy_records(document: dict) -> Iterator[dict]:
     if document.get("version") in REFLECTION_VERSIONS:
         yield document["copy_similarity"]
-    if document.get("version") == V10:
+    if document.get("version") in TRANSLATION_VERSIONS:
         yield document["copy_translation"]
 
 
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
-    if not isinstance(record, dict) or set(record) != {
+    has_basis = not reflected and document["version"] == V11
+    fields = {
         "schema",
         "source_sha256",
         "coordinate_space",
@@ -127,7 +131,10 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         "authorship_confidence_contribution",
         "pairs",
         "interpretation",
-    }:
+    }
+    if has_basis:
+        fields.add("basis")
+    if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
     if (
@@ -144,6 +151,11 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or bool(pairs) != (status == "supported_pair")
     ):
         raise ValueError("Copy similarity has an inconsistent source, result or coverage")
+    if has_basis:
+        basis = record["basis"]
+        expected = ("native_patch_alignment", "geometric_features") if pairs else (None,)
+        if basis not in expected:
+            raise ValueError("Copy similarity has an invalid matching basis")
     for index, pair in enumerate(pairs, 1):
         if (
             not isinstance(pair, dict)
@@ -172,5 +184,6 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        if overlaps or (reflected and (aw, ah) != (bw, bh)):
-            raise ValueError("The paired areas must be separate and reflected areas must share a native size")
+        equal_size = reflected or record.get("basis") == "native_patch_alignment"
+        if overlaps or (equal_size and (aw, ah) != (bw, bh)):
+            raise ValueError("The paired areas must be separate and aligned areas must share a native size")

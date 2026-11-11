@@ -25,6 +25,7 @@ from app.evidence.image_copy_similarity_binding import (
     V7,
     V8,
     V9,
+    V10,
     VERSION,
     box_bounds,
     copy_records,
@@ -37,8 +38,9 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-CREATOR = "image-evidence-packets/8"
-_CREATORS = {VERSION: CREATOR, V9: "image-evidence-packets/7", V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
+CREATOR = "image-evidence-packets/9"
+_CREATORS = {VERSION: CREATOR, V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
+             V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
 MAX_COPY_CANDIDATES = 1024  # Each pair adds two orientations to the neighbor graph.
 legacy = prior.legacy
 PacketIntegrityError = prior.PacketIntegrityError
@@ -120,6 +122,14 @@ def translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[tuple[int, ...],
     return ("supported_pair" if pairs else "no_pair"), pairs[:PAIR_LIMIT]
 
 
+def selected_translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[copy_move.Box, copy_move.Box]], str | None]:
+    status, pairs = copy_similarity.analyse_translation(rgb)
+    if status != "no_pair":
+        return status, pairs, "native_patch_alignment" if pairs else None
+    status, pairs = translation_pairs(rgb)
+    return status, pairs, "geometric_features" if pairs else None
+
+
 def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict, source: Image.Image | None,
                  status: str, boxes: list, *, reflected: bool) -> dict:
     pairs = []
@@ -162,16 +172,17 @@ def build_packet_set(
     }
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
-    translation_status, translations, source = "unsupported_geometry", [], None
+    translation_status, translations, basis, source = "unsupported_geometry", [], None, None
     if copy_similarity.supported_size(*size):
         source = _source(document, store)
         rgb = np.asarray(source)
         status, boxes = copy_similarity.analyse(rgb)
         if supported_size(*size, version=V8):
-            translation_status, translations = translation_pairs(rgb)
+            translation_status, translations, basis = selected_translation_pairs(rgb)
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
+    document["copy_translation"]["basis"] = basis
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)
     validate_packet_set(document, **prior._binding(analysis))

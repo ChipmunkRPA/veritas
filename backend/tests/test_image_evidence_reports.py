@@ -145,8 +145,14 @@ def test_measured_mask_is_frozen_rendered_and_committed(tmp_path, monkeypatch):
         image_evidence.view(snapshot, store=store)
 
 
-def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch):
+@pytest.mark.parametrize(("basis", "explanation"), [
+    ("native_patch_alignment", "The match aligns patches on the original pixel grid."),
+    ("geometric_features", "The match uses corresponding features in both areas."),
+])
+def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch, basis, explanation):
     db, store, analysis, _, _ = packet_fixture
+    if basis == "geometric_features":
+        monkeypatch.setattr("app.detectors.image.copy_similarity.analyse_translation", lambda _: ("no_pair", []))
     pixels = np.random.default_rng(812).integers(0, 256, (512, 768, 3), dtype=np.uint8)
     pixels = cv2.GaussianBlur(pixels, (3, 3), 0.65)
     pixels[61:189, 31:159] = pixels[301:429, 527:655]
@@ -159,9 +165,10 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
     document = service.persist_packet_set(db, analysis, store, result=result)
-    assert document["version"] == "image-evidence-10"
+    assert document["version"] == "image-evidence-11"
     assert document["copy_similarity"]["pairs"] == []
     assert document["packets"] == []
+    assert document["copy_translation"]["basis"] == basis
     (pair,) = document["copy_translation"]["pairs"]
     snapshot = original.model_copy(update={
         "result": result,
@@ -180,6 +187,7 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
     assert "T01 · Non-mirrored pair" in text
+    assert explanation in text
     assert "This check carries zero weight in AI authorship confidence." in text
     expected_pixels = set()
     for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

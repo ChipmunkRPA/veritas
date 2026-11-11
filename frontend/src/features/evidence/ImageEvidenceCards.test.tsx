@@ -153,7 +153,7 @@ describe('image evidence cards', () => {
     const { rerender } = show({ ...unsupported, version: 'image-evidence-8' })
     const summary = screen.getByRole('region', { name: 'Same-image copy similarity' })
     expect(summary.textContent).toContain('long side of 513–1,024 px.')
-    for (const version of ['image-evidence-9', 'image-evidence-10'] as const) {
+    for (const version of ['image-evidence-9', 'image-evidence-10', 'image-evidence-11'] as const) {
       rerender(<MemoryRouter><ImageEvidenceContent set={{ ...unsupported, version }} token="signed token" mediaReady /></MemoryRouter>)
       expect(summary.textContent).toContain('a long side of 1,025–2,048 px and a short side of at least 768 px')
     }
@@ -165,6 +165,7 @@ describe('image evidence cards', () => {
     expect(pair.getByRole('heading', { name: 'T01 · Non-mirrored pair' })).toBeTruthy()
     expect(pair.getByText(translated.interpretation)).toBeTruthy()
     expect(pair.getByText('This check carries zero weight in AI authorship confidence.')).toBeTruthy()
+    expect(pair.queryByText(/^The match/)).toBeNull()
     expect(screen.getByRole('heading', { name: 'R01 · Reflected pair' })).toBeTruthy()
     for (const [role, label] of [['area_a', 'Area A'], ['area_b', 'Area B']] as const) {
       const region = translated.pairs[0].regions[role]
@@ -177,13 +178,25 @@ describe('image evidence cards', () => {
     }
   })
 
+  it.each([
+    ['native_patch_alignment', 'The match aligns patches on the original pixel grid.'],
+    ['geometric_features', 'The match uses corresponding features in both areas.'],
+  ] as const)('shows the stored %s basis next to the new pair', (basis, explanation) => {
+    show({ ...copyOnly, version: 'image-evidence-11', copy_translation: { ...translated, basis } })
+    const translation = within(screen.getByRole('region', { name: 'Copy similarity without mirroring' }))
+    const reflection = within(screen.getByRole('region', { name: 'Same-image copy similarity' }))
+    expect(translation.getByText(explanation)).toBeTruthy()
+    expect(reflection.queryByText(explanation)).toBeNull()
+  })
+
   it('keeps the non-mirrored search coverage bounded when the wider reflected search applies', () => {
-    show({ ...copyOnly, version: 'image-evidence-10',
-      copy_translation: { ...translated, status: 'unsupported_geometry', pairs: [] } })
+    show({ ...copyOnly, version: 'image-evidence-11',
+      copy_translation: { ...translated, status: 'unsupported_geometry', basis: null, pairs: [] } })
     const section = screen.getByRole('region', { name: 'Copy similarity without mirroring' })
     expect(section.textContent).toContain('a long side of 513–1,024 px')
     expect(section.textContent).not.toContain('2,048')
     expect(within(section).queryByRole('img')).toBeNull()
+    expect(within(section).queryByText(/^The match/)).toBeNull()
   })
 
   it('keeps the other reflected crop and native coordinates available when a crop fails', () => {

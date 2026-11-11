@@ -98,6 +98,20 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText(/Pages without mapped text: 3/)).toBeTruthy()
   })
 
+  it('shows partially checked pages and their frozen image bounds separately from unmapped pages', () => {
+    const set = evidence()
+    show({ ...set, coverage: { ...set.coverage, partially_checked_pages: [
+      { page: 2, reason: 'Recognition quality was too low.', coordinate_space: 'unrotated-page-points', image_boxes: [[40, 150, 570, 735]] },
+      { page: 5, reason: 'The image overlaps mapped text.', coordinate_space: 'unrotated-page-points', image_boxes: [[15, 20, 500, 680]] },
+    ] } })
+    expect(screen.getByText('Pages 2, 5 have mapped text and unchecked image areas.')).toBeTruthy()
+    expect(screen.getByText(/Pages without mapped text: 3/)).toBeTruthy()
+    const details = screen.getByText('Unchecked image areas').closest('details')!
+    expect(within(details).getByText(/Recognition quality was too low/)).toBeTruthy()
+    expect(within(details).getByText('Bounds in unrotated PDF points [40, 150, 570, 735].')).toBeTruthy()
+    expect(within(details).getByText('Bounds in unrotated PDF points [15, 20, 500, 680].')).toBeTruthy()
+  })
+
   it('shows the frozen PDF highlight first and switches to its unmodified original crop', () => {
     const item = { ...packet, artifacts: { context: asset('1', 'context'), crop: asset('2', 'crop'), overlay: asset('3', 'overlay') } }
     show(evidence([item]))

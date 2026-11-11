@@ -1,0 +1,223 @@
+{
+  "schema": "chipmunk.video-webcam-second-flag-resume-result/242",
+  "freeze_sha256": "2c29b04dfc87c68fa5d7dac9ff1c19d4f8f255d94e75ac53c4ecf6a3a00002da",
+  "same_flag_bounds_across_roles": true,
+  "roles": {
+    "unchanged": {
+      "status": "measured",
+      "role_frame_counts": {
+        "before": 6,
+        "during": 24,
+        "after": 6
+      },
+      "minimum_face_pixels": 220304,
+      "minimum_nonface_pixels": 982800,
+      "comparisons": {
+        "before_to_during": {
+          "geometry_rms_eye_units": 0.08751587914675536,
+          "face_shift": {
+            "luma": -11.920500000000004,
+            "blue_chroma": 2.414201999999996,
+            "red_chroma": -0.8613040000000041
+          },
+          "nonface_shift": {
+            "luma": -51.51299999999999,
+            "blue_chroma": 3.132737999999998,
+            "red_chroma": -5.948024250000001
+          },
+          "face_minus_nonface_shift": {
+            "luma": 39.59249999999999,
+            "blue_chroma": -0.7185360000000021,
+            "red_chroma": 5.086720249999997
+          },
+          "face_nonface_shift_cosine": 0.9894610394760094
+        },
+        "after_to_during": {
+          "geometry_rms_eye_units": 0.11176184098880716,
+          "face_shift": {
+            "luma": -19.068000000000012,
+            "blue_chroma": 1.3180680000000002,
+            "red_chroma": -1.9543330000000054
+          },
+          "nonface_shift": {
+            "luma": -58.199499999999986,
+            "blue_chroma": 2.8202820000000024,
+            "red_chroma": -6.325914250000007
+          },
+          "face_minus_nonface_shift": {
+            "luma": 39.131499999999974,
+            "blue_chroma": -1.5022140000000022,
+            "red_chroma": 4.371581250000002
+          },
+          "face_nonface_shift_cosine": 0.9997707682162206
+        },
+        "before_to_after": {
+          "geometry_rms_eye_units": 0.04066818696097135,
+          "face_shift": {
+            "luma": 7.147500000000008,
+            "blue_chroma": 1.0961339999999957,
+            "red_chroma": 1.0930290000000014
+          },
+          "nonface_shift": {
+            "luma": 6.686499999999995,
+            "blue_chroma": 0.3124559999999956,
+            "red_chroma": 0.37789000000000605
+          },
+          "face_minus_nonface_shift": {
+            "luma": 0.46100000000001273,
+            "blue_chroma": 0.7836780000000001,
+            "red_chroma": 0.7151389999999953
+          },
+          "face_nonface_shift_cosine": 0.9901336199971479
+        }
+      },
+      "interpretation": "Descriptive only: geometry, light, scene and processing can all affect these measurements; no edit or origin decision."
+    },
+    "chroma_conversion_only": {
+      "status": "measured",
+      "role_frame_counts": {
+        "before": 6,
+        "during": 24,
+        "after": 6
+      },
+      "minimum_face_pixels": 220696,
+      "minimum_nonface_pixels": 984960,
+      "comparisons": {
+        "before_to_during": {
+          "geometry_rms_eye_units": 0.08995467821545305,
+          "face_shift": {
+            "luma": -12.444500000000005,
+            "blue_chroma": 2.523336000000004,
+            "red_chroma": -0.841340000000006
+          },
+          "nonface_shift": {
+            "luma": -51.358000000000004,
+            "blue_chroma": 3.6820740000000054,
+            "red_chroma": -6.554609000000006
+          },
+          "face_minus_nonface_shift": {
+            "luma": 38.9135,
+            "blue_chroma": -1.1587380000000014,
+            "red_chroma": 5.713269
+          },
+          "face_nonface_shift_cosine": 0.9900143772018986
+        },
+        "after_to_during": {
+          "geometry_rms_eye_units": 0.11219764079143799,
+          "face_shift": {
+            "luma": -21.41625000000002,
+            "blue_chroma": 1.0428360000000048,
+            "red_chroma": -2.3001380000000005
+          },
+          "nonface_shift": {
+            "luma": -59.81099999999999,
+            "blue_chroma": 3.188574000000001,
+            "red_chroma": -7.2169860000000075
+          },
+          "face_minus_nonface_shift": {
+            "luma": 38.39474999999997,
+            "blue_chroma": -2.145737999999996,
+            "red_chroma": 4.916848000000007
+          },
+          "face_nonface_shift_cosine": 0.9999044052041398
+        },
+        "before_to_after": {
+          "geometry_rms_eye_units": 0.039234868344623544,
+          "face_shift": {
+            "luma": 8.971750000000014,
+            "blue_chroma": 1.4804999999999993,
+            "red_chroma": 1.4587979999999945
+          },
+          "nonface_shift": {
+            "luma": 8.452999999999989,
+            "blue_chroma": 0.4935000000000045,
+            "red_chroma": 0.6623770000000011
+          },
+          "face_minus_nonface_shift": {
+            "luma": 0.5187500000000256,
+            "blue_chroma": 0.9869999999999948,
+            "red_chroma": 0.7964209999999934
+          },
+          "face_nonface_shift_cosine": 0.9912758416485465
+        }
+      },
+      "interpretation": "Descriptive only: geometry, light, scene and processing can all affect these measurements; no edit or origin decision."
+    },
+    "recompression_only": {
+      "status": "measured",
+      "role_frame_counts": {
+        "before": 6,
+        "during": 24,
+        "after": 6
+      },
+      "minimum_face_pixels": 220133,
+      "minimum_nonface_pixels": 1010880,
+      "comparisons": {
+        "before_to_during": {
+          "geometry_rms_eye_units": 0.08729642306690222,
+          "face_shift": {
+            "luma": -11.808000000000007,
+            "blue_chroma": 2.6045520000000018,
+            "red_chroma": -0.6017719999999898
+          },
+          "nonface_shift": {
+            "luma": -51.51049999999999,
+            "blue_chroma": 3.6882780000000057,
+            "red_chroma": -6.741414999999995
+          },
+          "face_minus_nonface_shift": {
+            "luma": 39.702499999999986,
+            "blue_chroma": -1.083726000000004,
+            "red_chroma": 6.139643000000005
+          },
+          "face_nonface_shift_cosine": 0.9863136333716624
+        },
+        "after_to_during": {
+          "geometry_rms_eye_units": 0.11142699163592365,
+          "face_shift": {
+            "luma": -20.422250000000005,
+            "blue_chroma": 1.2238800000000047,
+            "red_chroma": -1.9161874999999924
+          },
+          "nonface_shift": {
+            "luma": -60.22449999999999,
+            "blue_chroma": 3.2759940000000007,
+            "red_chroma": -7.153885500000008
+          },
+          "face_minus_nonface_shift": {
+            "luma": 39.80224999999999,
+            "blue_chroma": -2.052113999999996,
+            "red_chroma": 5.237698000000016
+          },
+          "face_nonface_shift_cosine": 0.9996806274082488
+        },
+        "before_to_after": {
+          "geometry_rms_eye_units": 0.039071601954638276,
+          "face_shift": {
+            "luma": 8.614249999999998,
+            "blue_chroma": 1.380671999999997,
+            "red_chroma": 1.3144155000000026
+          },
+          "nonface_shift": {
+            "luma": 8.713999999999999,
+            "blue_chroma": 0.412284000000005,
+            "red_chroma": 0.41247050000001373
+          },
+          "face_minus_nonface_shift": {
+            "luma": -0.09975000000000023,
+            "blue_chroma": 0.968387999999992,
+            "red_chroma": 0.9019449999999889
+          },
+          "face_nonface_shift_cosine": 0.9886228350276813
+        }
+      },
+      "interpretation": "Descriptive only: geometry, light, scene and processing can all affect these measurements; no edit or origin decision."
+    }
+  },
+  "paired_window_comparability": {
+    "chroma_conversion_only": "same_role_frame_indices",
+    "recompression_only": "same_role_frame_indices"
+  },
+  "model_calls": 0,
+  "v241_unavailable_sha256": "14c472679fa8f3516bd507241cb65ab1533fbc6d04194374b124797983a235b9"
+}

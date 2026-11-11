@@ -1,0 +1,272 @@
+{
+  "schema": "chipmunk.image-flux-product-comparison-aggregate/288",
+  "freeze_sha256": "74737eb4624484009b76577e9328289544f9714c1703323cffd60247882cf821",
+  "unique_model_calls": 120,
+  "repeat_model_calls": 4,
+  "unassessed_calls": 0,
+  "phase_profile_sha256": {
+    "prepare": "8f9a9eba68c281491e3ec9785eab3293d6fac118b4e5b9cba16d1485dfea15de",
+    "baseline-q0-00": "df3b95cb083cc5b2fe58fb17001566f75834cb9e19e639be62964f96519f34e5",
+    "candidate-q0-00": "179d360f648d375cdf7a950265da1f8af87c01d5717940f490a6718353edc4f4",
+    "readout-q0-00": "b46782d06661c1aba2d67d1ca24f854bdc46dc32745f027f923da7cab6a93f17",
+    "baseline-q0-01": "b948a73fb47e4c130389ec880611c05e90c12922c53ffaa604328639f88f210b",
+    "candidate-q0-01": "70aa748468efcabcbfb438e3039e1012f4522a9aa27c2e2219c6417f978d9ea0",
+    "readout-q0-01": "3e9b20c41ad352717b15b97629ab03cf48cf8a4301a0301800b2fb1d4f32d2f5",
+    "baseline-q0-02": "d546a919ec85080f968ff0362686e1c5b376f16cba6dcec9e72eff27f3f27580",
+    "candidate-q0-02": "e4df55c244b3e7b91624f09d69b0dcd8ba5c13e65e86b0a99c4067538238d3e7",
+    "readout-q0-02": "de7d3712644725369bdf7fe8835db71705bdb91edca56cf4b66301ec0c912168",
+    "baseline-q75-00": "45135b3dc1d98f49d57edcc20cb931c987ebc8d9aee1773eb8b437a2c4abefce",
+    "candidate-q75-00": "87287f04dc0e3184dbc8f3c5ad8ac7868c519eda9a4c4f352b24b9cd1807b77a",
+    "readout-q75-00": "8b5f1e618ba63ac7c31c6b7428794ca980a00c2a715a98232e88f7184f6752fe",
+    "baseline-q75-01": "5a758a4e408aedfb1fac1f9e640eaa8c5e8ef78ff54a3a6e9191378d4285f3ce",
+    "candidate-q75-01": "ac90c97916c6fda247592c73e6cebf071059e76340e9808f8f8be2bad27e4ef6",
+    "readout-q75-01": "00c47d1747da19029dd876e4d22715cb3459c75d2cf199edc5cd2996e9dd76ae",
+    "baseline-q75-02": "3509cedfcc7585c2c7eefd4501b6d15928215d8b8bba0c50a8a43bb14a1c35d6",
+    "candidate-q75-02": "c7ee30ee4bf06ba1d6b7c5dbd28a1a1887f54f79858c9397cdabde7f9b30e87e",
+    "readout-q75-02": "874c91a15321cd17b00f16b037368ab7597fde41e01b538c214e270004553079"
+  },
+  "serving_admitted": false,
+  "calibration_performed": false,
+  "ordinary_controls_have_zero_ai_truth": true,
+  "scope": "Six paired source groups. Format-matched current product routes and one frozen sensitive rule. JPEG75 sensitive is offline only. Exact native RGB truth in both formats. No fitting, population intervals or serving admission.",
+  "format_results": {
+    "native_png": {
+      "format": "native_png",
+      "source_groups": 6,
+      "methods": {
+        "current": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 2,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 2,
+              "groups_with_ordinary_footprint_overlap": 2
+            }
+          },
+          "mean_positive_iou": 0.02014743949370577,
+          "mean_positive_recall": 0.16666666666666666
+        },
+        "sensitive": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 5,
+          "positive_groups_with_overlap": 3,
+          "useful_positive_groups": 1,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 5
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 5,
+              "groups_with_ordinary_footprint_overlap": 3
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 4,
+              "groups_with_ordinary_footprint_overlap": 2
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 4,
+              "groups_with_ordinary_footprint_overlap": 3
+            }
+          },
+          "mean_positive_iou": 0.11219576744531039,
+          "mean_positive_recall": 0.4187811208730256
+        },
+        "shared": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            }
+          },
+          "mean_positive_iou": 0.02902881228708355,
+          "mean_positive_recall": 0.1637355479563589
+        }
+      },
+      "current_product_detector": "loc.splice",
+      "sensitive_scope": "optional PNG product policy"
+    },
+    "jpeg75": {
+      "format": "jpeg75",
+      "source_groups": 6,
+      "methods": {
+        "current": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 4,
+          "positive_groups_with_overlap": 4,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 3,
+              "groups_with_ordinary_footprint_overlap": 3
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 4,
+              "groups_with_ordinary_footprint_overlap": 4
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 5,
+              "groups_with_ordinary_footprint_overlap": 5
+            }
+          },
+          "mean_positive_iou": 0.10116441422014082,
+          "mean_positive_recall": 0.4948067540086611
+        },
+        "sensitive": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 2,
+              "groups_with_ordinary_footprint_overlap": 2
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 3,
+              "groups_with_ordinary_footprint_overlap": 3
+            }
+          },
+          "mean_positive_iou": 0.01857258718572587,
+          "mean_positive_recall": 0.018636067708333332
+        },
+        "shared": {
+          "positive_groups": 6,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 6,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "blur": {
+              "groups": 6,
+              "flagged_groups": 1,
+              "groups_with_ordinary_footprint_overlap": 1
+            },
+            "copy_move": {
+              "groups": 6,
+              "flagged_groups": 3,
+              "groups_with_ordinary_footprint_overlap": 3
+            }
+          },
+          "mean_positive_iou": 0.01857258718572587,
+          "mean_positive_recall": 0.018636067708333332
+        }
+      },
+      "current_product_detector": "loc.fused",
+      "sensitive_scope": "offline JPEG75 transfer probe"
+    }
+  },
+  "transport_changes_outside_native_footprint": {
+    "native_png": {
+      "ai": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "original": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tone": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "blur": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "copy_move": {
+        "minimum": 0,
+        "maximum": 0
+      }
+    },
+    "jpeg75": {
+      "ai": {
+        "minimum": 143,
+        "maximum": 254
+      },
+      "original": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tone": {
+        "minimum": 41,
+        "maximum": 246
+      },
+      "blur": {
+        "minimum": 69,
+        "maximum": 345
+      },
+      "copy_move": {
+        "minimum": 57,
+        "maximum": 272
+      }
+    }
+  },
+  "status": "complete",
+  "private_summary_sha256": "51d0fff94d79c9701e03774445a575a7c7aac49eb2419548c69700077005ea66"
+}

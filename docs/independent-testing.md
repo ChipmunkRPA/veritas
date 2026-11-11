@@ -46,7 +46,8 @@ same geometry checks into two exact edits with six matched ordinary controls.
 The [paired detector comparison](image-flux-detector-comparison-v280-result.md)
 reports the same edit footprints under PNG and JPEG75, including false highlights.
 The [six-photo expansion](image-flux-photo-expansion-v285-result.md) extends
-that comparison design to new licensed source groups.
+that design to new licensed source groups. Its [format-specific comparison](image-flux-product-comparison-v288-result.md)
+uses the actual PNG and JPEG routes and checks the resulting masks against exact truth.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

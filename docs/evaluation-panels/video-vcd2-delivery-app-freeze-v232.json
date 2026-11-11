@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.video-vcd2-delivery-app-freeze/232",
+  "planned_cases": 9,
+  "planned_slots": 3,
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "v202_freeze_sha256": "0e63e032a3cae35590862ca43cf2eceeb29b7558d884fa9ce76124b3e06c5489",
+  "v202_raw_anchor_sha256": "f502678422a90737214d94be58023a772228271378c0baef99186ac56985e5dd",
+  "v206_freeze_sha256": "a6b180f7781489b4080011c3fe7fd16be644f3fc5946ce2630d21d5452854d27",
+  "v206_complete_sha256": "850c88cd2c004e3d385e3133e48f2ac9b09c40834a123e2e268b9795ad51b81d",
+  "raw_anchors_sha256": "3f820197fe923eb678bbdc525f08293ac47c951e87662e869e564d594ee1cceb",
+  "plan_sha256": "1253793dafd8650d797d52aed8faf7487f366bc3be3ddfa34d25c9bf87fc339d",
+  "code_sha256": {
+    "backend/scripts/video_vcd2_delivery_app_v232.py": "36f11530a921520015fc5196fff79df26b51349168e9060f5dd00c3006ce8f8b",
+    "backend/tests/test_video_vcd2_delivery_app_v232.py": "10769476d60916346159f76beb1f4714c2f0e270a5dfe6077fcfaccd7bdd59d0",
+    "docs/video-vcd2-delivery-app-v232-method.md": "fb9dade6d1762cebb1ce70579b7be6c4504b89432c10c312a77eda9e3c8cbc18"
+  },
+  "app_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "model_manager_budget_bytes": 4831838208,
+  "device": "mps",
+  "all_face_swap_negatives": true,
+  "serving_change_permitted": false
+}

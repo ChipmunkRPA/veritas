@@ -18,6 +18,7 @@
 """
 from __future__ import annotations
 
+import fcntl
 import hashlib
 import hmac
 import html
@@ -27,7 +28,7 @@ import re
 import secrets
 import shutil
 import tarfile
-import threading
+import tempfile
 import zipfile
 from collections.abc import Callable, Iterable
 from datetime import UTC, datetime
@@ -160,7 +161,6 @@ class VerifyRecord:
     def __init__(self, path: Path | None = None, key_path: Path | None = None):
         self.path = path or settings.weights_dir / ".veritas-verified.json"
         self.key_path = key_path or settings.data_dir / "keys" / "verify_hmac.key"
-        self._lock = threading.Lock()
 
     def _key(self) -> bytes:
         self.key_path.parent.mkdir(parents=True, exist_ok=True)
@@ -195,16 +195,29 @@ class VerifyRecord:
         return entry.get("sha256") == sha256 and entry.get("size") == st.st_size and entry.get("mtime_ns") == st.st_mtime_ns
 
     def record(self, file: Path, sha256: str) -> None:
-        with self._lock:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        # The sidecar inode stays stable across record replacements.
+        lock_path = self.path.with_name(self.path.name + ".lock")
+        fd = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o600)
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX)
             entries = self._load()
             st = file.stat()
             entries[str(file.resolve())] = {"sha256": sha256, "size": st.st_size, "mtime_ns": st.st_mtime_ns,
                                             "verified_at": datetime.now(UTC).isoformat(timespec="seconds")}
-            self.path.parent.mkdir(parents=True, exist_ok=True)
-            tmp = self.path.with_name(self.path.name + ".tmp")
-            tmp.write_text(json.dumps({"entries": entries, "hmac": self._sign(entries)}, indent=2, sort_keys=True),
-                           encoding="utf-8")
-            os.replace(tmp, self.path)
+            document = {"entries": entries, "hmac": self._sign(entries)}
+            tmp_path = None
+            try:
+                with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.path.parent,
+                                                 prefix=self.path.name + ".", suffix=".tmp", delete=False) as tmp:
+                    tmp_path = Path(tmp.name)
+                    json.dump(document, tmp, indent=2, sort_keys=True)
+                os.replace(tmp_path, self.path)
+            finally:
+                if tmp_path is not None:
+                    tmp_path.unlink(missing_ok=True)
+        finally:
+            os.close(fd)
 
 
 class NoRecord(VerifyRecord):

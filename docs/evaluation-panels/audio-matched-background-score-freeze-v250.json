@@ -1,0 +1,166 @@
+{
+  "schema": "chipmunk.audio-matched-background-score-freeze/250",
+  "v248_freeze_sha256": "c2dbe8fe1784aa1865d739cf8552c7a6abc5c6c2d6844c25cfbb34afac57ca9d",
+  "v248_result_sha256": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792",
+  "v248_case_journal_sha256": "afaabd863f01b3cf7aafb83352c206af6ea0d2de33c63f4c827a004c23f440ad",
+  "background_evidence_type": "machine_screened_provisional",
+  "human_listening_reviewed": false,
+  "foreground_coverage": {
+    "genuine": {
+      "planned_utterances": 24,
+      "available_utterances": 23,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 23,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v252": 24
+      }
+    },
+    "alania": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 24,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v236": 24
+      }
+    },
+    "okur": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 1,
+      "known_available_voice_groups": 1,
+      "maximum_utterances_per_group": 24,
+      "source_cohort_counts": {
+        "v240": 4,
+        "v245": 20
+      }
+    }
+  },
+  "background_coverage": {
+    "kitchen": {
+      "provisional_excerpts_available": 46,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 4,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 6
+    },
+    "traffic": {
+      "provisional_excerpts_available": 27,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 3,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 10
+    }
+  },
+  "planned_cases": 360,
+  "planned_rows_per_batch": 72,
+  "batch_order": {
+    "baseline": [
+      "matched_clean",
+      "kitchen_0db",
+      "kitchen_5db",
+      "traffic_0db",
+      "traffic_5db"
+    ],
+    "candidate_after_all_baseline": [
+      "matched_clean",
+      "kitchen_0db",
+      "kitchen_5db",
+      "traffic_0db",
+      "traffic_5db"
+    ]
+  },
+  "route_bindings": {
+    "v219_freeze_sha256": "f7152a254aa0fde752442798d67de5bd4a0eba298fa0adf6df03081a3fcb6793",
+    "serving_route_freeze_sha256": "869e64d5a6f4727ef08d27a19361d70564da5168a79d3726084b72426b110714",
+    "serving_asset_set_sha256": "4a882fbaf3fe5965faf4e318ff38d54195e4aaf1fe7238dd965aca9e29571597",
+    "v230_freeze_sha256": "bac0b9144a566522ad867f4bac20e3fadd6f52ef0b2a3ba03bad4c8209550e8b",
+    "v230_result_sha256": "fc02578c5f5e3c12ad982c0606bcb540607fffa1def3b8fd72fb0f829b9b516a",
+    "v223_freeze_sha256": "5cd9d066775239ba7152ae94f49cafa2edef703d20032da8fe44cd032d99ac4a",
+    "v223_result_sha256": "2642bb263991fb0bd8bf9ca03bbfa8595fba1e647d255b9af106b48d1c1dc9eb",
+    "v223_fit_sha256": "68690eafe7050780d4861283adc281fbaff96a166b3b1c842cb8688095124252",
+    "v223_calibration_sha256": "40c6a8ccd2665287fe76bcc5eacf7a4cc42ceced1f4bc199066649c88b830d80",
+    "v226_freeze_sha256": "26f5ffcb3249db0177dc3b57d6a0423ee4142418afd9ea9afe029915527a1142",
+    "v226_result_sha256": "2c0af24150434692438f54c0a0d324baf8964a131537f5f40f82ed6586f30989",
+    "candidate_head": "paired_wavlm_raw",
+    "diagnostic_english_points": {
+      "current": {
+        "ai_above": 0.8767672486703044,
+        "original_below": 0.07869087799389911
+      },
+      "paired_wavlm_raw": {
+        "ai_above": 0.6525272861441811,
+        "original_below": 0.4355485730182533
+      }
+    },
+    "native_checkpoint": {
+      "v13_freeze_sha256": "34096f6cd001c27e217ba7ff8ee5f2ff6bae48d85c4d91b9424cb78e2ef3b4a1",
+      "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+      "assets": {
+        "pytorch_model.bin": {
+          "sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+          "bytes": 377617425
+        },
+        "config.json": {
+          "sha256": "fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4",
+          "bytes": 2232
+        },
+        "preprocessor_config.json": {
+          "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2",
+          "bytes": 215
+        },
+        "README.md": {
+          "sha256": "d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e",
+          "bytes": 3904
+        },
+        "UniSpeech-LICENSE": {
+          "sha256": "74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91",
+          "bytes": 21153
+        },
+        "unilm-LICENSE": {
+          "sha256": "904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe",
+          "bytes": 1104
+        }
+      },
+      "runtime_packages": {
+        "torch": "2.13.0",
+        "transformers": "5.15.1",
+        "numpy": "2.2.6"
+      },
+      "installed_implementation_sha256": {
+        "transformers.models.wavlm.modeling_wavlm": "b9607c8c9c94d6d8567f13246d1eb5b793e219419032cd8ee8cc9926ce80f145",
+        "transformers.models.wavlm.configuration_wavlm": "2ab3a6662a0b2b3ac7e6963fc19df2fa8f75f9441164e0de7e6965bdfcb610b3",
+        "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e"
+      },
+      "clock": {
+        "frames": 149,
+        "stride_samples": 320,
+        "receptive_field_samples": 400,
+        "last_receptive_range": [
+          47360,
+          47760
+        ]
+      }
+    }
+  },
+  "second_opinion": "promote_only_baseline_inconclusive_when_candidate_english_diagnostic_direction_is_ai",
+  "target_language_calibration_permitted": false,
+  "new_fitting_permitted": false,
+  "serving_change_permitted": false,
+  "holdout_access_permitted": false,
+  "code_sha256": {
+    "backend/scripts/audio_matched_background_score_v250.py": "eb9ef60a5dbec55cc224cc08cee40371f16b820a6069b93e71e94390d16842e7",
+    "backend/tests/test_audio_matched_background_score_v250.py": "80751f0f43796fe79c3ee14abd4125b9b8298f39f0a294091e3e535af37dcbd8",
+    "docs/audio-matched-background-score-v250-method.md": "bf4fa383060ea95aa64c6cf6ce685c530ae34a072b9b62177050e91671d2d5ff",
+    "backend/scripts/audio_matched_background_panel_v248.py": "0c77c4be4efc3b72a9998d45dadcde61fefc7faf858b43a9f25cf278364f422e",
+    "backend/scripts/audio_fresh_shared_noise_score_v219.py": "bae0bd97b4dfebdd6b60c59bbee71c5fbb18a7f0a3bf70f977530a24eae7069f",
+    "backend/scripts/audio_paired_transfer_v230.py": "3cf9f822d563d0bf91522045b141dbd2a12966f85b6f19bb4a8d017fe1fc33ad",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "private_input_index_sha256": "28524520000aab7c50253d2c4a460066951a95c8565a0096aeefbad64e89814c"
+}

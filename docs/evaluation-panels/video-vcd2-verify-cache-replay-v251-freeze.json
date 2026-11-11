@@ -1,0 +1,37 @@
+{
+  "schema": "chipmunk.video-vcd2-verify-cache-replay-freeze/251",
+  "historical_result_sha256": "66a91b0e09ec8c3a317acd17ad576b6b580deb1c5efee6e9079631d262cedd5a",
+  "historical_freeze_sha256": "0e63e032a3cae35590862ca43cf2eceeb29b7558d884fa9ce76124b3e06c5489",
+  "historical_sealed_cases": 24,
+  "historical_archive_set_sha256": "1ba0f559bea966a25312d8f1b2f5d29e07ca3bbe7d1079c285795864736f8a5e",
+  "historical_case_receipt_sha256": "360648cf7b7c0bba72106c798fd8bdd2f6757ef2d2239c83034dc8e8f44640f5",
+  "historical_case_archive_sha256": "3b7132bbc1a9599d8985d47259b91e7e1cc13f47d1adf215e01ea2101b5490d4",
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "historical_app_freeze_sha256": "d957cf1743c5edd5eabea4c0ec2685d4ed72fbb31955c95e79095e97a32b41e5",
+  "historical_frame_runtime_sha256": "d2934fecf1d29225a3c90dd0a3e978fff6c1c47b101f268fe6dee702f29241fb",
+  "model_inventory_sha256": "717ee119513bc26dc5afd4977cfb6d89f952a0107c11229f4ad630f8828a9bac",
+  "model_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "edge_freeze_sha256": "345369984c9a1c8a91b7e0f36559f5320ca70eda458405ff381600f0fec794b7",
+  "device": "mps",
+  "model_manager_budget_bytes": 4831838208,
+  "resource_limits": {
+    "wall_seconds": 900,
+    "initial_ram_bytes": 6442450944,
+    "sampled_tree_rss_bytes": 6442450944,
+    "initial_disk_bytes": 3221225472,
+    "ongoing_reserve_bytes": 1610612736
+  },
+  "planned_cases": 1,
+  "private_input_record_sha256": "b3d50e3439da887326414e64989950bf99820250de55d8e7e45df15fc310db20",
+  "only_application_source_change": {
+    "path": "backend/app/engine/fetchers.py",
+    "before_sha256": "e83fa48fef53026f30930b71feb57b114b9c5fcdf307bb47a0b75ae8e3fba366",
+    "after_sha256": "02b01adbab53261c33c98cd83fdde607dd4d9f6941536fa8123b79a334560c09"
+  },
+  "code_sha256": {
+    "backend/scripts/video_vcd2_verify_cache_replay_v251.py": "880e99edf0b96964d30a322ae629b35c93d3f2d1cca57b1cc2edb90246c7f17e",
+    "backend/tests/test_video_vcd2_verify_cache_replay_v251.py": "ffa1f86455b05b5868c72552b721b7f21fe4d83c26e8b56d2027f10f07d5dde0",
+    "docs/video-vcd2-verify-cache-replay-v251-method.md": "48443aed8f5e9cc6f62800669423f2b2c2607cfa303b9975543fcf9287c417de"
+  },
+  "customer_settings_changed": false
+}

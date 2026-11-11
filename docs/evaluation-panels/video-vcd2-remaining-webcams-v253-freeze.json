@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.video-vcd2-remaining-webcams-freeze/253",
+  "historical_result_sha256": "66a91b0e09ec8c3a317acd17ad576b6b580deb1c5efee6e9079631d262cedd5a",
+  "historical_freeze_sha256": "0e63e032a3cae35590862ca43cf2eceeb29b7558d884fa9ce76124b3e06c5489",
+  "historical_sealed_cases": 24,
+  "historical_archive_set_sha256": "1ba0f559bea966a25312d8f1b2f5d29e07ca3bbe7d1079c285795864736f8a5e",
+  "historical_case_receipt_sha256": "360648cf7b7c0bba72106c798fd8bdd2f6757ef2d2239c83034dc8e8f44640f5",
+  "historical_case_archive_sha256": "3b7132bbc1a9599d8985d47259b91e7e1cc13f47d1adf215e01ea2101b5490d4",
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "historical_app_freeze_sha256": "d957cf1743c5edd5eabea4c0ec2685d4ed72fbb31955c95e79095e97a32b41e5",
+  "historical_frame_runtime_sha256": "d2934fecf1d29225a3c90dd0a3e978fff6c1c47b101f268fe6dee702f29241fb",
+  "model_inventory_sha256": "717ee119513bc26dc5afd4977cfb6d89f952a0107c11229f4ad630f8828a9bac",
+  "edge_freeze_sha256": "345369984c9a1c8a91b7e0f36559f5320ca70eda458405ff381600f0fec794b7",
+  "device": "mps",
+  "model_manager_budget_bytes": 4831838208,
+  "resource_limits": {
+    "wall_seconds": 900,
+    "initial_ram_bytes": 6442450944,
+    "sampled_tree_rss_bytes": 6442450944,
+    "initial_disk_bytes": 3221225472,
+    "ongoing_reserve_bytes": 1610612736
+  },
+  "app_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "cache_fix_result_sha256": "d44ac65d3e2c92efa7e435194e475c07b544fc2566ac98ec5212b130795c2f83",
+  "patched_fetchers_sha256": "02b01adbab53261c33c98cd83fdde607dd4d9f6941536fa8123b79a334560c09",
+  "planned_cases": 6,
+  "planned_slots": 2,
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "plan_sha256": "39a0812d19eaaa91f7e72c91012f27ad5dce022c028030ae2b422174430d2a06",
+  "code_sha256": {
+    "backend/scripts/video_vcd2_remaining_webcams_v253.py": "06c907e286f0530abf28f1d5b71d255edc099a7847706f541df06f61ea0568d1",
+    "backend/tests/test_video_vcd2_remaining_webcams_v253.py": "b4f6fc10c409344c2ed9562b802346ab77a1c1fac8f78d3a8e9b3720009d2fe7",
+    "docs/video-vcd2-remaining-webcams-v253-method.md": "7fde0e6e7b5611bdf9a61fce409afb5845e8a31fba1ab1734611b0f2bdce726b",
+    "backend/scripts/video_vcd2_verify_cache_replay_v251.py": "880e99edf0b96964d30a322ae629b35c93d3f2d1cca57b1cc2edb90246c7f17e"
+  },
+  "all_face_swap_negatives": true,
+  "serving_change_permitted": false
+}

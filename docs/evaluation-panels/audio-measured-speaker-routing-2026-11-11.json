@@ -1,0 +1,245 @@
+{
+  "case_total": 146,
+  "commitments": {
+    "freeze_sha256": "799fa698f3b20b8d0916092faa960778641b1ec6e05ffdc92206bc612d803b43",
+    "manifest_sha256": "509034819fb11ba344d5616173d97f6cae0d9413d3647276b9921e312da0e95c",
+    "measured_sha256": "11118e315499846f715e348f7f7a83cd198ee789c065d914b21369271cc25638",
+    "portable-audio-review_sha256": "ff1b09b029ee0c7f47ead9cf294f2f04d4778018cb7b85dff076ea83bf8204ad"
+  },
+  "controlled_triplets_misrouted_as_two": 6,
+  "evaluation": {
+    "calls": 292,
+    "decisions": {
+      "room_point_selection_replay": {
+        "background_only_mostly_single_interferer": {
+          "incumbent_genuine_original": 1
+        },
+        "background_only_overlapping_interferers": {
+          "incumbent_genuine_inconclusive": 1
+        },
+        "clean": {
+          "incumbent_genuine_inconclusive": 3,
+          "incumbent_genuine_original": 8,
+          "incumbent_synthetic_ai": 8
+        },
+        "mostly_single_interferer": {
+          "corroborated:raw_point:added_synthetic": 1,
+          "corroborated:relation_unpaired:added_synthetic": 1,
+          "incumbent_genuine_inconclusive": 7,
+          "incumbent_genuine_original": 4,
+          "incumbent_synthetic_ai": 4,
+          "incumbent_synthetic_inconclusive": 4,
+          "nominal:raw_point:added_synthetic": 1,
+          "nominal:relation_unpaired:added_synthetic": 1,
+          "oracle:raw_point:added_synthetic": 1,
+          "oracle:relation_unpaired:added_synthetic": 1
+        },
+        "overlapping_interferers": {
+          "incumbent_genuine_inconclusive": 11,
+          "incumbent_synthetic_ai": 6,
+          "incumbent_synthetic_inconclusive": 2
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "background_only_mostly_single_interferer": {
+          "incumbent_genuine_unassessed": 1
+        },
+        "background_only_overlapping_interferers": {
+          "incumbent_genuine_inconclusive": 1
+        },
+        "clean": {
+          "incumbent_genuine_inconclusive": 1,
+          "incumbent_genuine_original": 9,
+          "incumbent_genuine_unassessed": 1,
+          "incumbent_synthetic_ai": 7,
+          "incumbent_synthetic_original": 1
+        },
+        "mostly_single_interferer": {
+          "corroborated:raw_point:added_synthetic": 5,
+          "corroborated:relation_unpaired:added_synthetic": 7,
+          "incumbent_genuine_inconclusive": 8,
+          "incumbent_genuine_original": 1,
+          "incumbent_genuine_unassessed": 2,
+          "incumbent_synthetic_ai": 1,
+          "incumbent_synthetic_inconclusive": 7,
+          "nominal:raw_point:added_synthetic": 5,
+          "nominal:relation_unpaired:added_genuine": 1,
+          "nominal:relation_unpaired:added_synthetic": 7,
+          "oracle:raw_point:added_synthetic": 5,
+          "oracle:relation_unpaired:added_genuine": 1,
+          "oracle:relation_unpaired:added_synthetic": 7
+        },
+        "overlapping_interferers": {
+          "incumbent_genuine_ai": 1,
+          "incumbent_genuine_inconclusive": 10,
+          "incumbent_synthetic_ai": 1,
+          "incumbent_synthetic_inconclusive": 7,
+          "nominal:raw_point:added_genuine": 1,
+          "nominal:relation_unpaired:added_genuine": 1
+        }
+      }
+    },
+    "elapsed_s": 11.045016124960966,
+    "freeze_sha256": "799fa698f3b20b8d0916092faa960778641b1ec6e05ffdc92206bc612d803b43",
+    "measurement_sha256": "11118e315499846f715e348f7f7a83cd198ee789c065d914b21369271cc25638",
+    "routes": {
+      "constructed_count_controls": {
+        "one_source_control": {
+          "corroborated:unassessed": 7,
+          "nominal:unassessed": 7
+        },
+        "three_balanced_source_control": {
+          "corroborated:overlap_detected": 4,
+          "corroborated:single_interferer": 3,
+          "nominal:overlap_detected": 2,
+          "nominal:single_interferer": 5
+        },
+        "three_quiet_third_source_control": {
+          "corroborated:overlap_detected": 3,
+          "corroborated:single_interferer": 3,
+          "corroborated:unassessed": 1,
+          "nominal:overlap_detected": 2,
+          "nominal:single_interferer": 4,
+          "nominal:unassessed": 1
+        },
+        "two_source_control": {
+          "corroborated:single_interferer": 5,
+          "corroborated:unassessed": 2,
+          "nominal:single_interferer": 5,
+          "nominal:unassessed": 2
+        }
+      },
+      "room_point_selection_replay": {
+        "background_only_mostly_single_interferer": {
+          "corroborated:unassessed": 1,
+          "nominal:unassessed": 1
+        },
+        "background_only_overlapping_interferers": {
+          "corroborated:single_interferer": 1,
+          "nominal:single_interferer": 1
+        },
+        "clean": {
+          "corroborated:unassessed": 19,
+          "nominal:unassessed": 19
+        },
+        "mostly_single_interferer": {
+          "corroborated:overlap_detected": 3,
+          "corroborated:single_interferer": 16,
+          "nominal:single_interferer": 18,
+          "nominal:unassessed": 1
+        },
+        "overlapping_interferers": {
+          "corroborated:overlap_detected": 17,
+          "corroborated:unassessed": 2,
+          "nominal:overlap_detected": 7,
+          "nominal:single_interferer": 3,
+          "nominal:unassessed": 9
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "background_only_mostly_single_interferer": {
+          "corroborated:unassessed": 1,
+          "nominal:unassessed": 1
+        },
+        "background_only_overlapping_interferers": {
+          "corroborated:overlap_detected": 1,
+          "nominal:overlap_detected": 1
+        },
+        "clean": {
+          "corroborated:unassessed": 19,
+          "nominal:unassessed": 19
+        },
+        "mostly_single_interferer": {
+          "corroborated:overlap_detected": 1,
+          "corroborated:single_interferer": 18,
+          "nominal:single_interferer": 19
+        },
+        "overlapping_interferers": {
+          "corroborated:overlap_detected": 19,
+          "nominal:overlap_detected": 17,
+          "nominal:single_interferer": 2
+        }
+      }
+    },
+    "synthetic_groups_added": {
+      "room_point_selection_replay:corroborated:raw_point": 1,
+      "room_point_selection_replay:corroborated:relation_unpaired": 1,
+      "room_point_selection_replay:nominal:raw_point": 1,
+      "room_point_selection_replay:nominal:relation_unpaired": 1,
+      "separate_room_confirmation_replay:corroborated:raw_point": 5,
+      "separate_room_confirmation_replay:corroborated:relation_unpaired": 7,
+      "separate_room_confirmation_replay:nominal:raw_point": 5,
+      "separate_room_confirmation_replay:nominal:relation_unpaired": 7
+    }
+  },
+  "freeze": {
+    "binary_sha256": "11976a265dd137b65227436e9372a8d0822650482089403d51a3de59fb8e73a7",
+    "code_sha256": "235e8c5a31e7deb883014b7efb3742f95f344ac21ddc46cb1d6e1367865b0b8e",
+    "manifest_sha256": "509034819fb11ba344d5616173d97f6cae0d9413d3647276b9921e312da0e95c",
+    "method": {
+      "advance": "On the separate room panel recover at least two additional distinct synthetic source groups over the same routed raw arm, add at most one genuine false flag across the two noisy scenes, and route at least half the assessed single-interferer views. On the controlled count panel no three-track mixture may route as two.",
+      "corroborated": "Both points must support the single-interferer route; either point can show overlap",
+      "license": "OpenMDW-1.1 weights; upstream release runtime",
+      "mode": "One full-attention pass on each exact three-second mono PCM input per point",
+      "model": "nvidia/Nemotron-3-Diarization q8_0, v0.3.0 official Apple Silicon CPU runtime",
+      "overlap": "Three or more simultaneous tracks for at least 160 ms total",
+      "single": "Exactly two tracks lasting at least 160 ms, with two co-active for at least 240 ms total and 180 ms continuously",
+      "speaker_points": {
+        "nominal": ".50",
+        "sensitive": ".30"
+      },
+      "supplement": "Only an incumbent inconclusive voice window may be promoted. Uses the previously frozen raw or unpaired relation room point."
+    },
+    "model_sha256": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+    "planned_cases": 146,
+    "runtime_archive_sha256": "2c3a7a719b778daeb14f147e011891f16e4b2ac62388d8b8d8b365cc2eebdf15",
+    "schema": "chipmunk.audio-measured-speaker-routing/1"
+  },
+  "inference_calls": 292,
+  "input_roles": {
+    "constructed_count_controls": {
+      "exact_source_groups": 22,
+      "included_triads": 7,
+      "planned_nonoverlapping_triads": 7,
+      "recipe": "Salted groups from retained genuine clean source inputs. Fixed disjoint triplets, admit only with 400 ms joint speech on separate original channels; compare clean, 2 speakers, 3 balanced and 3 with quiet third at common -5 dB foreground/background level.",
+      "source_activity_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+    },
+    "room_point_selection_replay": {
+      "mixture_type": "exact retained 3-second mono mixtures; reference from source annotation",
+      "native_freeze_sha256": "d105a66987bca67cff9a3e486f8255f77c5d746bd95f705320b951c67d9ac2c2",
+      "source_manifest_sha256": "990c5f3ba1194b931aaa97f19cc0b710949d7e5e650ba7db8561af23118a9a1a",
+      "voice_observations_sha256": "e166727ae46f2fb8fb83cbbc27bbe6b8094df76555023fc9986e1410e6b81600"
+    },
+    "separate_room_confirmation_replay": {
+      "mixture_type": "exact retained 3-second mono mixtures; reference from source annotation",
+      "native_freeze_sha256": "d6bfd7774d9cc301a94c9935871bc183ad621faba0ed2ab877b1b3dd50d3ec74",
+      "source_manifest_sha256": "23c8c404bd6049da82a9c117fac802cc23f7ec0d7059028641801bf997af2bd5",
+      "voice_observations_sha256": "08e3ec44c49a7847d4f22f4838a31162ecd7cd3b31c1f1f4dc9cc535aacc7f73"
+    }
+  },
+  "native_app_controls": {
+    "controlled_case_count": 28,
+    "prior_room_case_count": 59,
+    "separate_room_case_count": 59
+  },
+  "provenance_hardened_replay": {
+    "forward_calls": 292,
+    "freeze_sha256": "0acb32c251fd94409d6bb5038bce87b6733dc0dcf58db217b056f62b135b7841",
+    "identical_aggregate_counts": true,
+    "identical_segments_after_excluding_local_path": true,
+    "implementation_sha256": "2144f2806a95fbc65665ddd01129bea545acb4f5b3534fe5c01b44457c22fb90"
+  },
+  "schema": "chipmunk.measured-speaker-routing-evaluation/1",
+  "scope": "Two saved rights-reviewed room panels and controlled mixes with 7 disjoint triplets within the constructed panel.",
+  "separate_replay": {
+    "pcm_digests_checked": 146,
+    "portable_review": {
+      "genuine_added_flags": 0,
+      "overlap_references_routed_single": 0,
+      "synthetic_added_flags": 7
+    },
+    "timing_outputs_recomputed": 292
+  },
+  "serving_eligible": false,
+  "weights_shipped": false
+}

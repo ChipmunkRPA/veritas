@@ -1,0 +1,75 @@
+{
+  "cohorts": {
+    "genuine_camera_native": {
+      "groups_with_correct_range_loss": 0,
+      "groups_with_withheld_flags": 0,
+      "source_groups": 1,
+      "views": {
+        "baseline_flags": 0,
+        "baseline_unassessed": 3,
+        "views": 3
+      }
+    },
+    "genuine_camera_saved": {
+      "groups_with_correct_range_loss": 0,
+      "groups_with_withheld_flags": 0,
+      "source_groups": 1,
+      "views": {
+        "baseline_flags": 3,
+        "flag_retained": 3,
+        "views": 3
+      }
+    },
+    "known_swap": {
+      "groups_with_correct_range_loss": 0,
+      "groups_with_withheld_flags": 0,
+      "source_groups": 6,
+      "views": {
+        "baseline_flags": 36,
+        "baseline_iou_at_least_half": 36,
+        "flag_retained": 36,
+        "retained_iou_at_least_half": 36,
+        "views": 36
+      }
+    },
+    "matched_rtfs": {
+      "groups_with_correct_range_loss": 0,
+      "groups_with_withheld_flags": 0,
+      "source_groups": 6,
+      "views": {
+        "baseline_flags": 0,
+        "no_baseline_flag": 60,
+        "views": 60
+      }
+    }
+  },
+  "freeze_sha256": "256428a093d6883a03e4b55bb895e1f91f1b59e52816e379b53f1288ea1729fc",
+  "native_runtime": {
+    "elapsed_s": 440.5636717909947,
+    "native_samples": 1494,
+    "peak_rss_bytes": 333316096,
+    "scored_sha256": "abd6821160315338a253e8a0b7c275ee58293de8d515317df1cb863a2d0a8c76"
+  },
+  "pilot_advancement": "Pilot only: withhold at least two of three historically false selected flags from the held saved camera group, lose no swap location at 0.50 IoU and measure at least 90% of all selected flags.",
+  "pilot_advances": false,
+  "policy": "Apply frozen v259 60% ratio to the original top flag only; unavailable support retains the original flag with unavailable geometry.",
+  "saved_camera_during_over_flank_ratio": 1.0038882598833068,
+  "saved_camera_range_seconds": [
+    7.0,
+    8.3
+  ],
+  "schema": "chipmunk.video-selected-landmark-reliability/1",
+  "selected_flags_measured": 39,
+  "selected_flags_total": 39,
+  "separate_local_audit": {
+    "audit_sha256": "fa92dbd85a9abd49b7005214257bf1df1b0668081226f6bebbf1e5b03402bda7",
+    "cases_recomputed": 102,
+    "metrics_recomputed": "frozen cutoff, coverage, selected-clock intersection, IoU, status and cohort counts",
+    "score_journal_sha256": "abd6821160315338a253e8a0b7c275ee58293de8d515317df1cb863a2d0a8c76",
+    "selected_flags_recomputed": 39,
+    "selected_with_measurable_geometry": 39,
+    "source_groups": 8,
+    "status": "complete"
+  },
+  "serving_changed": false
+}

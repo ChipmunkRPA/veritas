@@ -18,6 +18,10 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
+uses authored scores to show how an acoustic routing error can add a genuine
+false flag.
+
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
 detector weights. The [matched image cue](image-bg-real-detail-deficit-v265-result.md)
@@ -662,6 +666,68 @@ unassessed inputs; it must not be described as a genuine-content verdict.
 Paired comparisons resample declared source groups and report each media type and
 condition separately. A small bootstrap interval describes this panel, not future
 customers or unknown generators. Report all original/edit counts alongside rates.
+
+## Review an audio supplement by acoustic condition
+
+The standard-library reviewer replays the effect of adding a second audio
+response only where the current check was inconclusive. The authored example
+uses fictional source groups, score values and routes. It reproduces the
+counting logic without model weights or audio files.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -I backend/scripts/review_audio_supplement.py demo "$review_dir/example"
+cat "$review_dir/example/summary.json"
+```
+
+The example recovers one synthetic input. Two extra genuine flags in the
+mostly-single-interferer stratum belong to one source group. A third genuine
+flag comes from a source annotated as overlapping speech that the router
+classified as mostly one interfering voice. The summary counts source groups,
+individual inputs, routing, and assessment coverage separately.
+
+For your own evaluation, use the [portable manifest](#portable-evaluation-contract)
+with audio cases only. Use `clean`, `mostly_single_interferer`,
+`overlapping_interferers`, or `unknown` for the reference `condition`. Put
+known foreground speaker and background recording or meeting links in
+`lineage` so that they stay in one split. Use the foreground identity for
+the parent `source_sha256` when a mix has a separate background recording.
+Labeling and source permission remain the contributor's responsibility.
+
+Use portable development and confirmation receipts with two additional
+top-level fields. `incumbent_sha256` and `router_sha256` identify the incumbent
+and routing implementations and their pinned configuration. Add
+`incumbent_direction` and `observed_condition` to every prediction. Use
+`ai`, `original`, `inconclusive`, or `unassessed` for the incumbent. Use the
+four acoustic condition values for the measured route. Obtain that route
+from the candidate's measurement and record an unavailable route as `unknown`.
+
+Choose the internal operating point for each enabled noisy route on
+development data. Use a JSON object such as the generated example's
+`{"mostly_single_interferer": 0.6}`. Freeze it before running confirmation.
+
+```sh
+freeze_sha256=$(python3 -I backend/scripts/review_audio_supplement.py freeze \
+  manifest.json development.json points.json frozen.json)
+```
+
+Put the printed digest in the confirmation receipt's top-level `freeze_sha256`.
+Keep the freeze and its recorded time with the study. The replay validates
+matching content, and the study log establishes when the freeze was made.
+
+```sh
+python3 -I backend/scripts/review_audio_supplement.py compare \
+  manifest.json confirmation.json frozen.json summary.json
+```
+
+A scored response strictly above the frozen point can promote an incumbent
+inconclusive result to an AI flag when the measured route is enabled. The
+summary evaluates the result by reference condition and includes all planned
+cases. For a genuine stratum, compare the `ai` count with `planned` and
+`incumbent_assessed` to see false flags and coverage together. The aggregate
+contains counts and whole-receipt digests. Review the aggregate before sharing
+it, especially small groups, and keep media, per-case scores and private
+manifests local.
 
 ## Evidence localization
 

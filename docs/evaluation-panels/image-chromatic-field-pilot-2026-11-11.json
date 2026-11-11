@@ -1,0 +1,128 @@
+{
+  "advance_to_archived_positive_comparison": false,
+  "archived_positive_comparison_scored": false,
+  "authored_channel_shift": {
+    "exact_changed_pixels": 9727,
+    "measured_tiles_per_channel": 36,
+    "source_extent": [
+      768,
+      576
+    ],
+    "target_after_px": 1.3480319677898382,
+    "target_before_px": 0.00885833153743902,
+    "target_rank": 1,
+    "target_tile_px": 72
+  },
+  "freeze_sha256": "9b3cfbacf023732246d72fa087407ade39d03780f2b9ee6815162d05c4e0130b",
+  "full_local_receipt_sha256": "1d85ff711b6cc536e44f3bc09fdea1da0ddc9ec787ef0ea0513a8f42dc4cfe76",
+  "native_sources": 4,
+  "new_neural_calls": 0,
+  "repeated_local_receipt_sha256": "42fe95d0fe55ae81790576b6ce20a05227ded894f1a5cf4b71813056cc32dc4d",
+  "same_runtime_repeat": {
+    "all_non_elapsed_results_exact": true,
+    "elapsed_s": [
+      7.895551332971081,
+      7.026869958033785
+    ]
+  },
+  "schema": "chipmunk.image-chromatic-field-native-pilot-aggregate/1",
+  "view_count": 12,
+  "view_coverage": {
+    "jpeg75": {
+      "channels": {
+        "blue": {
+          "insufficient_tiles": 3,
+          "measurable": 1
+        },
+        "red": {
+          "insufficient_tiles": 3,
+          "measurable": 1
+        }
+      },
+      "measurable": 1,
+      "measured_tile_counts": {
+        "blue": [
+          5,
+          7,
+          9,
+          22
+        ],
+        "red": [
+          4,
+          7,
+          9,
+          26
+        ]
+      },
+      "planned": 4,
+      "tile_sizes_px": [
+        257,
+        503
+      ]
+    },
+    "jpeg90": {
+      "channels": {
+        "blue": {
+          "insufficient_tiles": 3,
+          "measurable": 1
+        },
+        "red": {
+          "insufficient_tiles": 3,
+          "measurable": 1
+        }
+      },
+      "measurable": 1,
+      "measured_tile_counts": {
+        "blue": [
+          6,
+          9,
+          9,
+          22
+        ],
+        "red": [
+          4,
+          9,
+          9,
+          26
+        ]
+      },
+      "planned": 4,
+      "tile_sizes_px": [
+        257,
+        503
+      ]
+    },
+    "native": {
+      "channels": {
+        "blue": {
+          "insufficient_tiles": 2,
+          "measurable": 2
+        },
+        "red": {
+          "insufficient_tiles": 3,
+          "measurable": 1
+        }
+      },
+      "measurable": 2,
+      "measured_tile_counts": {
+        "blue": [
+          4,
+          10,
+          13,
+          13
+        ],
+        "red": [
+          3,
+          9,
+          10,
+          23
+        ]
+      },
+      "planned": 4,
+      "tile_sizes_px": [
+        257,
+        503
+      ]
+    }
+  }
+}

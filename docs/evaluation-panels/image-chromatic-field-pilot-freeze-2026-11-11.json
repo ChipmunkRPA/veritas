@@ -1,0 +1,57 @@
+{
+  "decoder_implementation_sha256": "f4719e6c04203911c9ed9f1ab06b2e5955223b3b23e46c239c7484537bc6e625",
+  "implementation_sha256": "b59ff0ac9d114cecbaba21569b20b97e6017e57ae96bac712b74858adbd9dee4",
+  "profile": {
+    "bandpass_sigmas_px": [
+      0.8,
+      2.4
+    ],
+    "ecc_epsilon": 1e-05,
+    "grid": [
+      0.15,
+      0.29,
+      0.43,
+      0.57,
+      0.71,
+      0.85
+    ],
+    "intensity_interval": [
+      12,
+      242
+    ],
+    "maximum_ecc_iterations": 25,
+    "maximum_median_error_to_extent": 0.7,
+    "maximum_translation_px": 2.5,
+    "minimum_alignment_correlation": 0.65,
+    "minimum_field_extent_px": 0.1,
+    "minimum_fold_quadrants": 3,
+    "minimum_fold_tiles": 6,
+    "minimum_jpeg75_captures_for_transfer": 2,
+    "minimum_masked_gradient_mean": 2.0,
+    "minimum_native_captures_for_transfer": 3,
+    "minimum_neutral_support_fraction": 0.2,
+    "minimum_null_fractional_gain": 0.12,
+    "minimum_null_gain_px": 0.015,
+    "neutral_range": 32,
+    "robust_scale_floor_px": 0.04,
+    "tile_short_side_fraction": 0.125
+  },
+  "rawpy_wheel_sha256": "60e4c82d2dbce6ae20f95d0894bcacf355d32b783cd017c374c800dfc4a0d9b3",
+  "schema": "chipmunk.image-chromatic-field-native-pilot/1",
+  "source_receipt_sha256": "7e75fab7c5e07ba479e2afe3f51f26cbfb3402b196b8208a37587db38e5e55fa",
+  "source_roster_sha256": "9df5cd01077ed209d5138798f1b2d6b06711b3fabe06698346eae4f04afbcfa8",
+  "synthetic_seed": 611,
+  "synthetic_shift_px": [
+    1.1,
+    -0.8
+  ],
+  "synthetic_target_tile": [
+    3,
+    3
+  ],
+  "views": [
+    "native",
+    "jpeg90",
+    "jpeg75"
+  ]
+}

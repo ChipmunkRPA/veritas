@@ -1,0 +1,747 @@
+{
+  "advancement": {
+    "criterion": "At least two extra useful edits over current, no extra human source groups flagged, and at least one useful-location gain over matched fitted window.",
+    "matched_window_paired_comparison": {
+      "current_human_flags": 6,
+      "current_useful_locations": 4,
+      "matched_human_flags": 3,
+      "matched_useful_locations": 5,
+      "new_human_flags": 0,
+      "retained_current_useful_locations": 4
+    },
+    "two_sided_human_group_delta_vs_current": -1,
+    "two_sided_passes": false,
+    "two_sided_useful_delta_vs_current": 0,
+    "two_sided_useful_delta_vs_fitted_window": -1
+  },
+  "commitments": {
+    "admission": "ec1abebe5dcadc867f273fb7c5daf8abcc2caee666911f4ec222e63f3b57d7ab",
+    "fit": "7ecab534f10c7701810a237828f00079e81861282ade9034909ea64477f84054",
+    "freeze": "a6d841f674361a083dae47c66965425590e616801a5fcbbd25123bc6981b58d0",
+    "generation": "8bcf57043956ab98ee3057d6248aba7ff99bed8faf99726d5ead6543e45361a6",
+    "native": "895a5d1f20946218317e7d7f359df2cd5647b750da2d0761ad3e5fa82877003a",
+    "prior_public_comparison": "cef7982606dbf0ee5ca02a71154a665c30a3ef4e6d327ac2d6c38fd22a5facf9",
+    "separate_replay_implementation": "3d7524492d41e4472306f515295ec0ca51f83173ba3b8c2231fb70c6d64d93c5",
+    "source": "85943a593b3fb3c0c4a84ad6773024c1f110c5e45ce62d62f0bb1d6bb58721db",
+    "source_intake_implementation": "8f9e3c0b0bba73e0505e48cf030cacbbc5ca2b4010fefef669cd9048842af0b7"
+  },
+  "counts": {
+    "human_sentence": {
+      "current_focus": {
+        "assessed": 7,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "current_window": {
+        "assessed": 7,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 7,
+        "flagged": 1,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 1,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 7,
+        "flagged": 3,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "original": {
+      "current_focus": {
+        "assessed": 7,
+        "flagged": 4,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "current_window": {
+        "assessed": 7,
+        "flagged": 4,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 7,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 7,
+        "flagged": 3,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "qwen": {
+      "current_focus": {
+        "assessed": 4,
+        "flagged": 2,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 1,
+        "wrong_location": 1
+      },
+      "current_window": {
+        "assessed": 4,
+        "flagged": 2,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 1,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 4,
+        "flagged": 2,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 2,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 4,
+        "flagged": 2,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 2,
+        "wrong_location": 0
+      }
+    },
+    "smol2": {
+      "current_focus": {
+        "assessed": 5,
+        "flagged": 3,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 2,
+        "useful": 2,
+        "wrong_location": 1
+      },
+      "current_window": {
+        "assessed": 5,
+        "flagged": 3,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 2,
+        "useful": 3,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 5,
+        "flagged": 4,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 2,
+        "useful": 3,
+        "wrong_location": 1
+      },
+      "two_sided": {
+        "assessed": 5,
+        "flagged": 3,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 2,
+        "useful": 2,
+        "wrong_location": 1
+      }
+    }
+  },
+  "coverage": {
+    "current_contexts": 92,
+    "eligible_foci": 46,
+    "exact_ai_targets_eligible": 9,
+    "native_context_inputs": 276,
+    "verified_decoded_bodies": 23
+  },
+  "cross_group_12_token_hits": 0,
+  "descriptive_two_publisher_totals": {
+    "current_focus": {
+      "human_assessed": 26,
+      "human_flags": 12,
+      "rewrite_assessed": 15,
+      "useful": 4
+    },
+    "current_window": {
+      "human_assessed": 26,
+      "human_flags": 12,
+      "rewrite_assessed": 15,
+      "useful": 5
+    },
+    "fitted_window": {
+      "human_assessed": 26,
+      "human_flags": 5,
+      "rewrite_assessed": 15,
+      "useful": 7
+    },
+    "two_sided": {
+      "human_assessed": 26,
+      "human_flags": 11,
+      "rewrite_assessed": 15,
+      "useful": 7
+    }
+  },
+  "elapsed_seconds": 19.691,
+  "fitted": {
+    "arms": {
+      "fitted_window": {
+        "coefficient": [
+          0.16764671212110518
+        ],
+        "intercept": 0.0009003075900099412,
+        "mean": [
+          -5.2738908547691015
+        ],
+        "point": 0.27759856955436335,
+        "scale": [
+          2.4031803482622403
+        ]
+      },
+      "two_sided": {
+        "coefficient": [
+          -0.3126104400767546,
+          0.609605384156765,
+          1.0043448310254952
+        ],
+        "intercept": -0.05016904742352113,
+        "mean": [
+          -5.273890854769101,
+          -5.3118353830713305,
+          -0.940701318757165
+        ],
+        "point": 0.6436056874399746,
+        "scale": [
+          2.40318034826224,
+          1.4081132734886064,
+          1.812285785675523
+        ]
+      }
+    },
+    "calibration_groups": 7,
+    "calibration_unassessed_groups": 6,
+    "fit_counts": {
+      "0": 22,
+      "1": 9
+    },
+    "fit_source_groups": {
+      "0": 6,
+      "1": 6
+    }
+  },
+  "generation": {
+    "admission": "One attempt per author and family; require EOS, no wrappers or line breaks, one exact app-segmented sentence, 0.60–1.50 target words and at least 12, no more than .25 eight-token target copy, no prior or other source normalized 12-token overlap.",
+    "generators": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "prompts": {
+      "qwen": "Rewrite ONLY the target sentence from a science feature in fresh language and with a different sentence structure. Preserve all claims, relationships, technical names, and qualifiers. Write EXACTLY one sentence that fits the context, around {words} words. Output only the replacement sentence. End after its final punctuation.\n\nBefore: {left}\nTarget: {target}\nAfter: {right}",
+      "smol2": "Say the same thing in a different way. Return only one complete sentence, without quotation marks, labels or commentary. Use between {minimum} and {maximum} words. Preserve the facts and technical terms.\n\n{target}"
+    },
+    "runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "settings": {
+      "qwen": {
+        "max_tokens": 144,
+        "seed": 737141,
+        "temp": 0.35,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 144,
+        "seed": 604391,
+        "temp": 0.5,
+        "top_p": 0.9
+      }
+    }
+  },
+  "generation_admission": {
+    "qwen": {
+      "admitted": 4,
+      "not_one_sentence": 1,
+      "word_geometry": 2
+    },
+    "smol2": {
+      "admitted": 5,
+      "copied_target": 1,
+      "word_geometry": 1
+    }
+  },
+  "human_source_flags": {
+    "current_focus": 4,
+    "current_window": 4,
+    "fitted_window": 2,
+    "two_sided": 3
+  },
+  "known_prior_12_token_hits": 0,
+  "known_prior_texts": 45325,
+  "model_forward_calls": 18,
+  "paired_vs_current": {
+    "human_sentence": {
+      "current_focus": {
+        "0->0": 5,
+        "1->1": 2
+      },
+      "current_window": {
+        "0->0": 5,
+        "1->1": 2
+      },
+      "fitted_window": {
+        "0->0": 5,
+        "1->0": 1,
+        "1->1": 1
+      },
+      "two_sided": {
+        "0->0": 3,
+        "0->1": 2,
+        "1->0": 1,
+        "1->1": 1
+      }
+    },
+    "original": {
+      "current_focus": {
+        "0->0": 3,
+        "1->1": 4
+      },
+      "current_window": {
+        "0->0": 3,
+        "1->1": 4
+      },
+      "fitted_window": {
+        "0->0": 3,
+        "1->0": 2,
+        "1->1": 2
+      },
+      "two_sided": {
+        "0->0": 2,
+        "0->1": 1,
+        "1->0": 2,
+        "1->1": 2
+      }
+    },
+    "qwen": {
+      "current_focus": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "current_window": {
+        "0->0": 3,
+        "1->1": 1
+      },
+      "fitted_window": {
+        "0->0": 2,
+        "0->1": 1,
+        "1->1": 1
+      },
+      "two_sided": {
+        "0->0": 2,
+        "0->1": 1,
+        "1->1": 1
+      }
+    },
+    "smol2": {
+      "current_focus": {
+        "0->0": 2,
+        "1->0": 1,
+        "1->1": 2
+      },
+      "current_window": {
+        "0->0": 2,
+        "1->1": 3
+      },
+      "fitted_window": {
+        "0->0": 2,
+        "1->1": 3
+      },
+      "two_sided": {
+        "0->0": 2,
+        "1->0": 1,
+        "1->1": 2
+      }
+    }
+  },
+  "pdf_extractor": "1.28.2",
+  "schema": "chipmunk.writing-two-sided-transfer/1",
+  "separate_local_replay": {
+    "exact_rewrite_foci": 9,
+    "exact_txt_files": 23,
+    "human_group_counts": 4,
+    "metric_counts": 120,
+    "native_context_geometry": 276,
+    "publisher_text_locations": 14
+  },
+  "source_extraction": "Zero-based PDF PyMuPDF text block or HTML //p. Strip PDF soft-hyphen line breaks and collapse whitespace to a single space. Exact half-open codepoint ranges in the resulting paragraphs.",
+  "source_groups": 7,
+  "source_rights": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+  "source_roster": [
+    {
+      "authors": [
+        "Steven M. Young"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 2,
+        "page_index": 2,
+        "paragraph_codepoints": [
+          589,
+          728
+        ],
+        "paragraph_sha256": "db53e702f911d8eb0654940d7666c1c6003acf1e4edaf7d8e81e3b320b9e0e04",
+        "raw_text_sha256": "d2cb67b31e88a1ae10040cbdc37468304d360223f45abbd458d93fafef93229b",
+        "sha256": "52a8563bc854fcbdbe54eb2239e92b0ea730581cec0bad3df2f402b46bfdf40f"
+      },
+      "donor_words": 22,
+      "group": "young",
+      "original": {
+        "block_or_paragraph_index": 26,
+        "body_sha256": "191b65c249d20c757fbf389d3aef7301f3e1ab85ae623dcdf4e6380fab53e1e1",
+        "page_index": 0,
+        "paragraph_codepoints": [
+          0,
+          578
+        ],
+        "paragraph_sha256": "191b65c249d20c757fbf389d3aef7301f3e1ab85ae623dcdf4e6380fab53e1e1",
+        "raw_text_sha256": "95b0d2d1cc53221023c81ba168733308638fafc8a66f835a54420c10cbb493b7",
+        "target_codepoints": [
+          91,
+          265
+        ],
+        "target_sentence": 1
+      },
+      "original_words": 82,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs20203034",
+      "source_bytes_sha256": "577cf4410b06201df5f86c040259eca0f9e71563596e4d5b0a74a551dc300e1a",
+      "source_url": "https://pubs.usgs.gov/fs/2020/3034/fs20203034.pdf",
+      "target_words": 25,
+      "year": 2020
+    },
+    {
+      "authors": [
+        "Caitlyn Florentine"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 18,
+        "page_index": 0,
+        "paragraph_codepoints": [
+          133,
+          250
+        ],
+        "paragraph_sha256": "3c0a9347293cb7509ed5868e3e289be3b1b1e10c7c8a9d5ee8598dd25e2cb0b7",
+        "raw_text_sha256": "0ab2d1b156609735e3fc25fa8ce083be2d51eb2abed896d8319486d9adebfc3f",
+        "sha256": "ba55d579defe2b8256bc2bf00d2b40ff5c6af5717d6e08ce420abbc71ef20e1b"
+      },
+      "donor_words": 15,
+      "group": "glacier",
+      "original": {
+        "block_or_paragraph_index": 19,
+        "body_sha256": "f24d6d6a80440431ae1db3ffbb4b995ec0256cb2e4709f5a303ad1ac7221b83c",
+        "page_index": 0,
+        "paragraph_codepoints": [
+          0,
+          479
+        ],
+        "paragraph_sha256": "73470a4a42c39ebc77718a6c2df41d3eb1110d11d9481a9f41b929cb22a58fb7",
+        "raw_text_sha256": "45109a717511348ec366c4e60eb8b30d8f919cc2e9691feaf622a0c3b1844d01",
+        "target_codepoints": [
+          225,
+          330
+        ],
+        "target_sentence": 2
+      },
+      "original_words": 78,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs20193068",
+      "source_bytes_sha256": "eb34731fe2d8fc1c587b2d6e9a2215a69ef22450ea2d13129d4f0df950f9a4e0",
+      "source_url": "https://pubs.usgs.gov/fs/2019/3068/fs20193068.pdf",
+      "target_words": 15,
+      "year": 2019
+    },
+    {
+      "authors": [
+        "William L. Cunningham"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 6,
+        "page_index": null,
+        "paragraph_codepoints": [
+          68,
+          188
+        ],
+        "paragraph_sha256": "5a333fb550082930fccbdcd129a32eeedaaefb774b82013a06f5c1ea82be641c",
+        "raw_text_sha256": "bebb883dfc5f7815f175a13c48b92e1ac6ce43ef1fa76c3e1fd79a6e2895114d",
+        "sha256": "a89cf94bb94d01e98d60728f7decae263aae6e61ef9303e19b816eb03ddfe73a"
+      },
+      "donor_words": 17,
+      "group": "wells",
+      "original": {
+        "block_or_paragraph_index": 4,
+        "body_sha256": "f4661e6deee040824a7b07f0ecd47026f8b632e36ae24290f9637a27006e1913",
+        "page_index": null,
+        "paragraph_codepoints": [
+          0,
+          481
+        ],
+        "paragraph_sha256": "f4661e6deee040824a7b07f0ecd47026f8b632e36ae24290f9637a27006e1913",
+        "raw_text_sha256": "458414a9341986e6c56b2d0db6842f2d2cc3c50bcc2eed59921c570265f65774",
+        "target_codepoints": [
+          123,
+          239
+        ],
+        "target_sentence": 1
+      },
+      "original_words": 72,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs09001",
+      "source_bytes_sha256": "06cc4cfef4a8822bc35b50d094fed2fd5967576aead284b0498ef994a6ab2b94",
+      "source_url": "https://pubs.usgs.gov/fs//fs-090-01/",
+      "target_words": 18,
+      "year": 2001
+    },
+    {
+      "authors": [
+        "Richard J. Huizinga",
+        "David C. Heimann"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 4,
+        "page_index": 0,
+        "paragraph_codepoints": [
+          0,
+          196
+        ],
+        "paragraph_sha256": "9f303cc7ec16f1058112c9b500eb49446f3482a9ef1842fc2039cffde6d9847c",
+        "raw_text_sha256": "39ff945c1f0cdf55ff3c7e6c95d8a13033883a9ed98fcb5707e29d11ac8bc95a",
+        "sha256": "7980356c8122851a84f79f394a468651823570a76188687b282c516e1947b323"
+      },
+      "donor_words": 26,
+      "group": "sonar",
+      "original": {
+        "block_or_paragraph_index": 17,
+        "body_sha256": "4e64b9614e8236f957fa4700f090c5fde5b22e772e1fe277bc637a6f29aef71e",
+        "page_index": 2,
+        "paragraph_codepoints": [
+          0,
+          895
+        ],
+        "paragraph_sha256": "4e64b9614e8236f957fa4700f090c5fde5b22e772e1fe277bc637a6f29aef71e",
+        "raw_text_sha256": "6a71ab6bf63b59a9a9a4ee44952bda25432b289a8008755472c5bab829eb124f",
+        "target_codepoints": [
+          133,
+          333
+        ],
+        "target_sentence": 1
+      },
+      "original_words": 131,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs20183021",
+      "source_bytes_sha256": "479fea1b90eeb5124cfd704565530514aac67644a09d389db27d6247c0f82ba8",
+      "source_url": "https://pubs.usgs.gov/fs/2018/3021/fs20183021.pdf",
+      "target_words": 28,
+      "year": 2018
+    },
+    {
+      "authors": [
+        "Mark E. Reid",
+        "Richard G. LaHusen",
+        "Rex L. Baum",
+        "Jason W. Kean",
+        "William H. Schulz",
+        "Lynn M. Highland"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 7,
+        "page_index": 1,
+        "paragraph_codepoints": [
+          0,
+          134
+        ],
+        "paragraph_sha256": "4445d0ba1628dffdf2b30a0b4ee81e2683c90b5de8a25b8078a22db5231fa257",
+        "raw_text_sha256": "becfbaf4aee7a17f35f29667cb76ae118b1dc7d20e54fb274281b5addca300cf",
+        "sha256": "2b9bc63dae130011b70ccad4d4994f36557e56f14a365ef5998072d53f378371"
+      },
+      "donor_words": 20,
+      "group": "landslides",
+      "original": {
+        "block_or_paragraph_index": 7,
+        "body_sha256": "e96ead4217dbd718de7ea18dc510c477479c71c950e9abe819c327a50508ad73",
+        "page_index": 0,
+        "paragraph_codepoints": [
+          0,
+          582
+        ],
+        "paragraph_sha256": "e96ead4217dbd718de7ea18dc510c477479c71c950e9abe819c327a50508ad73",
+        "raw_text_sha256": "3f5f5b8c4a2f0836e3c9998349177e056da317931df10bffee78fca92d8a59cd",
+        "target_codepoints": [
+          71,
+          222
+        ],
+        "target_sentence": 1
+      },
+      "original_words": 74,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs20123008",
+      "source_bytes_sha256": "b233e63cc8229d79aa81ed18ff96890ce84c0db6f4fa495a1cb303fd58ce0927",
+      "source_url": "https://pubs.usgs.gov/fs/2012/3008/contents/FS12-3008.pdf",
+      "target_words": 21,
+      "year": 2012
+    },
+    {
+      "authors": [
+        "Gerald W. Bawden",
+        "Michelle Sneed",
+        "Sylvia V. Stork",
+        "Devin L. Galloway"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 65,
+        "page_index": 1,
+        "paragraph_codepoints": [
+          87,
+          280
+        ],
+        "paragraph_sha256": "43c5466624a3da38c700375d0f1d8d1738ac2db345ff0dc2b05ed5e20dd11cba",
+        "raw_text_sha256": "957158048fbbb3b51944a5b90dec21d2a60a8cacdf02a4e6039b56fb6ca27c5f",
+        "sha256": "f3897fc6bb939c08e4d1f85a1b2a6264c29810dd4ef69723532188218938c42f"
+      },
+      "donor_words": 33,
+      "group": "subsidence",
+      "original": {
+        "block_or_paragraph_index": 47,
+        "body_sha256": "6cc9cc960db617d44ed9a58c1268789b7cf315b75f23bb6f51f1e786a2564801",
+        "page_index": 0,
+        "paragraph_codepoints": [
+          0,
+          885
+        ],
+        "paragraph_sha256": "6cc9cc960db617d44ed9a58c1268789b7cf315b75f23bb6f51f1e786a2564801",
+        "raw_text_sha256": "7835dde4edcfc56d728be2ef9b97ad8329618637e742e473fe0ae01bab9a881a",
+        "target_codepoints": [
+          438,
+          680
+        ],
+        "target_sentence": 2
+      },
+      "original_words": 134,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs06903",
+      "source_bytes_sha256": "67053fbed916a6fb91a34fb724a1d70f59ee8e52ae7b18fa71e9e482711e9679",
+      "source_url": "https://pubs.usgs.gov/fs/fs06903/pdf/fs06903.pdf",
+      "target_words": 33,
+      "year": 2003
+    },
+    {
+      "authors": [
+        "Brandon T. Forbes",
+        "Claire E. Bunch",
+        "Geoffrey DeBenedetto",
+        "Corey J. Shaw",
+        "Bruce Gungle"
+      ],
+      "donor": {
+        "block_or_paragraph_index": 2,
+        "page_index": 1,
+        "paragraph_codepoints": [
+          0,
+          184
+        ],
+        "paragraph_sha256": "1d76c2a5dbbae22c5048dc98e17922ba54cb5b3d37e1fd73a16d55b0cc8ef2fa",
+        "raw_text_sha256": "5d180dfe26461fd532a7f189467dce082b25b1db70f8d78f64abcb0986629758",
+        "sha256": "1f3ac998eaa9e0323b33b0e865a67824ecc14f2296627cb2f6823e74c59cbb9a"
+      },
+      "donor_words": 28,
+      "group": "river",
+      "original": {
+        "block_or_paragraph_index": 1,
+        "body_sha256": "8787c39546fbaa36bf65fd517107cefd7dc09cb7b0810b545e2cf34c7794664f",
+        "page_index": 5,
+        "paragraph_codepoints": [
+          0,
+          831
+        ],
+        "paragraph_sha256": "2c9759576a94b1034397c9a49d568b502f5eb2a6c28b385d9755e5b7589887c2",
+        "raw_text_sha256": "c079db52be9e4d168e95c5068326ec94aadc915b35d48554875869551b654536",
+        "target_codepoints": [
+          445,
+          660
+        ],
+        "target_sentence": 2
+      },
+      "original_words": 116,
+      "publisher_catalogue_url": "https://pubs.usgs.gov/publication/fs20193073",
+      "source_bytes_sha256": "2a0edf8adb705152d28f20bde10281ba5eec3d9b7aff976cd3ddfd44694ec282",
+      "source_url": "https://pubs.usgs.gov/fs/2019/3073/fs20193073.pdf",
+      "target_words": 28,
+      "year": 2019
+    }
+  ],
+  "useful_source_groups": {
+    "current_focus": 2,
+    "current_window": 3,
+    "fitted_window": 4,
+    "two_sided": 3
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.audio-alania-transfer-freeze/179",
+  "code_sha256": {
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/tests/test_audio_alania_transfer_v179.py": "700620fe8e1ed0a83ae7abe77c4c67f1157eb2a5093b29a15b47a9030332d20e",
+    "docs/audio-alania-transfer-v179-method.md": "013fb046f855d0350b1ed5a982e001857fca78f186808008eddbf41c18e0b26b"
+  },
+  "roster_freeze_sha256": "5d3adf8b1f0eeccfd2ffa738bf68a13baf1a2f0e87a539f8edd0f466d4aae13c",
+  "private_roster_sha256": "f3a3a9f1335ad1784ffc91eb4494aaf21e0a3b16771c21e1c0237c32adec5028",
+  "voice_route_freeze_sha256": "896d996b55b5dbb012dc075018f1c699503f49576f81241dee06a501c4923748",
+  "local_asset_commitments": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2",
+    "pyarrow": "26.0.0"
+  },
+  "decoder_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "planned_cases": 24,
+  "planned_by_render_mode": {
+    "reference": 18,
+    "reference+instruction": 6
+  },
+  "input_rate": 48000,
+  "production_rate": 16000,
+  "production_sample_count_bounds": [
+    40000,
+    64000
+  ],
+  "positive_only_language": "tr",
+  "fitting_permitted": false,
+  "holdout_access_permitted": false
+}

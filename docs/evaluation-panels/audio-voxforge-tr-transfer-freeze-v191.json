@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-transfer-freeze/191",
+  "code_sha256": {
+    "backend/scripts/audio_voxforge_tr_transfer_v191.py": "11852c258ce4583c78afbdcf581ea28a629722d030d2d51dff156b51a94c54b0",
+    "backend/tests/test_audio_voxforge_tr_transfer_v191.py": "c5b67345f1be5762bc602997362fa1a632f6ab6ddb37529a7ae072d54b3b0647",
+    "docs/audio-voxforge-tr-transfer-v191-method.md": "009dc06a198c42a97818a57861accfa3a2a318f286701012eff684d1151a1c7b"
+  },
+  "preparation_freeze_sha256": "4f080d3cc34612625b07ced7d942bb20bbd31a37ae812c29b1b294fdf3965980",
+  "preparation_result_sha256": "3116d729dce7530ef092c4272cd87f44d821b6845831868d65e8faef7555968b",
+  "preparation_profile_sha256": "21291d3cbc10e9df241942e4acd128f95ed26b7a2598a67c02fd3ab7e145e2ea",
+  "private_genuine_cases_sha256": "4c41fd262ad2d7abd637b8cdf193d6520fa33c54f745fd09a697af4deed708ed",
+  "synthetic_result_sha256": "29b4cdd53d761b6f3ba13c030a9b661dbbf1de3104fec2b602e5e7aa81fc1fa0",
+  "synthetic_freeze_sha256": "6ddf0988a592c4f67f02656f7c1d4f01fb455e331cbd35a51d33d912b3a476f3",
+  "voice_route_freeze_sha256": "896d996b55b5dbb012dc075018f1c699503f49576f81241dee06a501c4923748",
+  "local_asset_commitments": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2",
+    "pyarrow": "26.0.0"
+  },
+  "planned_genuine_slots": 12,
+  "qualified_genuine_slots": 3,
+  "published_synthetic_cases": 24,
+  "language": "tr",
+  "route_reference_language": "en",
+  "new_fitting_permitted": false,
+  "holdout_access_permitted": false
+}

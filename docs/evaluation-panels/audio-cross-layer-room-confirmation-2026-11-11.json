@@ -1,0 +1,291 @@
+{
+  "arms": {
+    "concatenated": {
+      "added_genuine_groups": 10,
+      "conditions": {
+        "mostly_single_interferer": {
+          "added_genuine": 1,
+          "added_synthetic": 5,
+          "auc": 0.888889,
+          "genuine_candidate_ai": 1,
+          "genuine_candidate_inconclusive": 7,
+          "genuine_candidate_original": 1,
+          "genuine_candidate_unassessed": 3,
+          "genuine_current_inconclusive": 8,
+          "genuine_current_original": 1,
+          "genuine_current_unassessed": 3,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 6,
+          "synthetic_candidate_inconclusive": 2,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        },
+        "overlapping_interferers": {
+          "added_genuine": 10,
+          "added_synthetic": 7,
+          "auc": 0.5625,
+          "genuine_candidate_ai": 11,
+          "genuine_candidate_inconclusive": 1,
+          "genuine_current_ai": 1,
+          "genuine_current_inconclusive": 11,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 8,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        }
+      },
+      "rescued_synthetic_groups": 8
+    },
+    "raw_point": {
+      "added_genuine_groups": 8,
+      "conditions": {
+        "mostly_single_interferer": {
+          "added_synthetic": 5,
+          "auc": 0.916667,
+          "genuine_candidate_inconclusive": 8,
+          "genuine_candidate_original": 1,
+          "genuine_candidate_unassessed": 3,
+          "genuine_current_inconclusive": 8,
+          "genuine_current_original": 1,
+          "genuine_current_unassessed": 3,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 6,
+          "synthetic_candidate_inconclusive": 2,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        },
+        "overlapping_interferers": {
+          "added_genuine": 8,
+          "added_synthetic": 7,
+          "auc": 0.770833,
+          "genuine_candidate_ai": 9,
+          "genuine_candidate_inconclusive": 3,
+          "genuine_current_ai": 1,
+          "genuine_current_inconclusive": 11,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 8,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        }
+      },
+      "rescued_synthetic_groups": 8
+    },
+    "relation": {
+      "added_genuine_groups": 12,
+      "conditions": {
+        "mostly_single_interferer": {
+          "added_genuine": 2,
+          "added_synthetic": 7,
+          "auc": 0.972222,
+          "genuine_candidate_ai": 2,
+          "genuine_candidate_inconclusive": 6,
+          "genuine_candidate_original": 1,
+          "genuine_candidate_unassessed": 3,
+          "genuine_current_inconclusive": 8,
+          "genuine_current_original": 1,
+          "genuine_current_unassessed": 3,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 8,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        },
+        "overlapping_interferers": {
+          "added_genuine": 11,
+          "added_synthetic": 6,
+          "auc": 0.635417,
+          "genuine_candidate_ai": 12,
+          "genuine_current_ai": 1,
+          "genuine_current_inconclusive": 11,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 7,
+          "synthetic_candidate_inconclusive": 1,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        }
+      },
+      "rescued_synthetic_groups": 8
+    },
+    "relation_unpaired": {
+      "added_genuine_groups": 9,
+      "conditions": {
+        "mostly_single_interferer": {
+          "added_genuine": 1,
+          "added_synthetic": 7,
+          "auc": 0.972222,
+          "genuine_candidate_ai": 1,
+          "genuine_candidate_inconclusive": 7,
+          "genuine_candidate_original": 1,
+          "genuine_candidate_unassessed": 3,
+          "genuine_current_inconclusive": 8,
+          "genuine_current_original": 1,
+          "genuine_current_unassessed": 3,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 8,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        },
+        "overlapping_interferers": {
+          "added_genuine": 9,
+          "added_synthetic": 4,
+          "auc": 0.552083,
+          "genuine_candidate_ai": 10,
+          "genuine_candidate_inconclusive": 2,
+          "genuine_current_ai": 1,
+          "genuine_current_inconclusive": 11,
+          "genuine_planned": 12,
+          "synthetic_candidate_ai": 5,
+          "synthetic_candidate_inconclusive": 3,
+          "synthetic_current_ai": 1,
+          "synthetic_current_inconclusive": 7,
+          "synthetic_planned": 8
+        }
+      },
+      "rescued_synthetic_groups": 7
+    }
+  },
+  "case_counts": {
+    "assessed": 55,
+    "background_only_controls": 2,
+    "clean_controls": 19,
+    "disjoint_ami_participants": 8,
+    "foreground_groups": 19,
+    "genuine_foreground_groups": 11,
+    "planned": 59,
+    "source_disjoint_from_room_point_selection": true,
+    "synthetic_families": 2,
+    "synthetic_foreground_groups": 8
+  },
+  "commitments": {
+    "fitted_sha256": "36bd0518d4100b0b9dda894b5b29b4862639863250bea369a1bd576685af103f",
+    "native-freeze_sha256": "d6bfd7774d9cc301a94c9935871bc183ad621faba0ed2ab877b1b3dd50d3ec74",
+    "native-manifest_sha256": "23c8c404bd6049da82a9c117fac802cc23f7ec0d7059028641801bf997af2bd5",
+    "native-scores_sha256": "08e3ec44c49a7847d4f22f4838a31162ecd7cd3b31c1f1f4dc9cc535aacc7f73",
+    "room-readout_sha256": "79decfcc314d0e3be9a461ee69235f7228b97e9ea6cda38eae7a2c3a24caa62b",
+    "room_points_sha256": "ef25b28790a70cd1c1808e0ff255d6aab8bb22df909e50d694ae8f646547441b",
+    "source-plan_sha256": "df2e87064a77488ab83995bc5935b1374fb5606e443c19d1e6cf9740d5152bac"
+  },
+  "elapsed_s": 39.072992917033844,
+  "incumbent_counts": [
+    {
+      "condition": "clean",
+      "count": 1,
+      "direction": "inconclusive",
+      "truth": "genuine"
+    },
+    {
+      "condition": "clean",
+      "count": 9,
+      "direction": "original",
+      "truth": "genuine"
+    },
+    {
+      "condition": "clean",
+      "count": 1,
+      "direction": "unassessed",
+      "truth": "genuine"
+    },
+    {
+      "condition": "clean",
+      "count": 7,
+      "direction": "ai",
+      "truth": "synthetic"
+    },
+    {
+      "condition": "clean",
+      "count": 1,
+      "direction": "original",
+      "truth": "synthetic"
+    },
+    {
+      "condition": "mostly_single_interferer",
+      "count": 8,
+      "direction": "inconclusive",
+      "truth": "genuine"
+    },
+    {
+      "condition": "mostly_single_interferer",
+      "count": 1,
+      "direction": "original",
+      "truth": "genuine"
+    },
+    {
+      "condition": "mostly_single_interferer",
+      "count": 3,
+      "direction": "unassessed",
+      "truth": "genuine"
+    },
+    {
+      "condition": "mostly_single_interferer",
+      "count": 1,
+      "direction": "ai",
+      "truth": "synthetic"
+    },
+    {
+      "condition": "mostly_single_interferer",
+      "count": 7,
+      "direction": "inconclusive",
+      "truth": "synthetic"
+    },
+    {
+      "condition": "overlapping_interferers",
+      "count": 1,
+      "direction": "ai",
+      "truth": "genuine"
+    },
+    {
+      "condition": "overlapping_interferers",
+      "count": 11,
+      "direction": "inconclusive",
+      "truth": "genuine"
+    },
+    {
+      "condition": "overlapping_interferers",
+      "count": 1,
+      "direction": "ai",
+      "truth": "synthetic"
+    },
+    {
+      "condition": "overlapping_interferers",
+      "count": 7,
+      "direction": "inconclusive",
+      "truth": "synthetic"
+    }
+  ],
+  "meets_advancement_criteria": false,
+  "method": {
+    "advance": "Recover at least two synthetic groups overall with a gain in both noisy scenes, retain at least six assessed genuine views per scene, add at most one genuine flag, and exceed both direct raw and concatenated arm recovery.",
+    "calibration": "One maximum per genuine source group over assessed, incumbent-inconclusive noisy views. Use the second highest maximum. A strict excess can flag at most one fitting group.",
+    "policy": "Supplement only assessed incumbent-inconclusive results under known noisy conditions. Clean controls retain the incumbent direction.",
+    "source_separation": "Exclude exact foreground commitments, declared groups, and original natural meeting IDs used for point selection. Reuse the frozen model heads without refitting."
+  },
+  "peak_rss_bytes": 2969960448,
+  "point_selection_genuine_groups": 12,
+  "scene_word_activity_seconds": [
+    {
+      "active": 3.0,
+      "overlap": 0.0
+    },
+    {
+      "active": 3.0,
+      "overlap": 2.04
+    }
+  ],
+  "schema": "chipmunk.audio-cross-layer-room-confirmation/1",
+  "scope": "Frozen voice heads, disjoint foreground groups and AMI meeting participants relative to room point selection. Local acoustic mixes with retained rights-reviewed source banks.",
+  "separate_local_audit": {
+    "all_counts_and_auc_reproduced": true,
+    "calibration_points_recomputed": 4,
+    "no_exact_shared_group_source_pcm_or_room": true,
+    "outside_review_performed": false,
+    "point_setting_and_confirmation_pcm_bindings": 118
+  },
+  "speech_gate_forwards": 5546,
+  "voice_forwards": 66
+}

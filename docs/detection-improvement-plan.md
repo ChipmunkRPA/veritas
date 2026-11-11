@@ -101,7 +101,11 @@ integration remains unfinished.
   improved AUC from 0.917 to 0.958 and from 0.948 to 0.979 on two new competing-speech
   mixtures of retained foregrounds. The frozen operating points recovered zero of
   six missed synthetic clips. The comparison ran the original speech gate and
-  serving calibration and supports a separate natural-room point-selection study.
+  serving calibration. The separate-room confirmation with frozen room points
+  detected all eight synthetic clips in the mostly-single-interferer scene with
+  one added false alarm for the unpaired relation head. The same head flagged
+  ten of twelve genuine controls with overlapping speakers. A new acoustic
+  condition check needs independent validation before scoped adoption.
 - The [two-sided writing check](writing-two-sided-context-2026-11-11.md)
   located three of six edited sentences versus one with the current check on
   six fresh NIST authors, with five versus six human false flags. The matched

@@ -43,3 +43,26 @@ python -m scripts.audio_cross_layer_native readout "$review_dir"
 ## Natural-room point selection
 
 The 59 cases above then supplied point selection for a distinct confirmation trial. The frozen rule uses the second highest genuine-source maximum across noisy views where the incumbent was inconclusive. It uses 12 eligible genuine groups and permits a strict excess for at most one point-setting group. The same rule applies independently to all four scores. This second study reuses the fitted heads and prepares different speakers and natural rooms for confirmation. [Room point tool](../backend/scripts/audio_cross_layer_room_points.py)
+
+### Confirmation with separate speakers and rooms
+
+The confirmation used 11 other genuine RUEG reader groups, seven Alania voice groups and one Drifting voice group. Each foreground had a clean control and two exact −5 dB mixes. The new AMI sessions provided two three-second cuts with 0 and 2.04 seconds of annotated overlap, plus an isolated control per cut. All eight participants had distinct publisher speaker IDs from those of the four previously used natural-room sessions. The declared foreground groups and exact source hashes were disjoint from the point-setting panel. The source banks have previous project exposure. [Natural-room source receipts and terms](audio-ami-native-stereo-v291-method.md) · [Confirmed aggregate](evaluation-panels/audio-cross-layer-room-confirmation-2026-11-11.json)
+
+| Rule | Mostly one voice, synthetic AI flags | Mostly one voice, genuine false flags | Overlapping voices, synthetic AI flags | Overlapping voices, genuine false flags |
+| --- | ---: | ---: | ---: | ---: |
+| Incumbent | 1/8 | 0/9 | 1/8 | 1/12 |
+| Direct raw score, room point | 6/8 | 0/9 | 8/8 | 9/12 |
+| Concatenated layers, room point | 6/8 | 1/9 | 8/8 | 11/12 |
+| Layer relation, paired penalty | 8/8 | 2/9 | 7/8 | 12/12 |
+| Layer relation, no paired penalty | 8/8 | 1/9 | 5/8 | 10/12 |
+
+Three genuine inputs in the mostly-single-voice scene and one genuine clean control were unassessed. All 24 synthetic inputs were assessed. The 19 clean controls kept their incumbent outcomes under the scoped policy, including one synthetic control incorrectly leaning original. The run completed all 59 cases, with 5,546 gate forwards and 66 voice forwards in 39.1 seconds. The early/late relation ranked better than the raw score in the mostly-single-voice scene, AUC 0.972 versus 0.917. Both relation arms ranked worse in overlapping speech, with AUC 0.635 and 0.552 versus 0.771 for the raw score.
+
+The two-scene rule failed its false-alarm condition. The useful next comparison is a predeclared single-interferer trial with additional meetings and synthetic families. It also needs a measured way to identify that acoustic condition without using benchmark labels. The current test’s condition comes from source annotations.
+
+From `backend`, create room points from the completed initial panel and bind their digest into the prepared confirmation manifest as `room_points_sha256`. After running the native `freeze` and `score` commands on the confirmation folder, read the fixed comparison.
+
+```sh
+python -m scripts.audio_cross_layer_room_points freeze "$point_selection_dir" "$points_file"
+python -m scripts.audio_cross_layer_room_points readout "$point_selection_dir" "$confirmation_dir" "$result_file" "$points_file"
+```

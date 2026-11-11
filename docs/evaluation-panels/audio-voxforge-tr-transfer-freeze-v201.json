@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-transfer-freeze/201",
+  "code_sha256": {
+    "backend/scripts/audio_voxforge_tr_transfer_v201.py": "bf71c5544733404b8bb30424e64c18ee4c6715b841142611d080f0d50e49b63e",
+    "backend/tests/test_audio_voxforge_tr_transfer_v201.py": "b31661b7089d16dbca1d23d7ba2c8f4efb0ad6d4058dc33318601f40ff0e99ad",
+    "docs/audio-voxforge-tr-transfer-v201-method.md": "72afdc265d9c5ee05fd1816cc8324e6a54fa97b84b35ed1e5d5384c8ef4bb1c1"
+  },
+  "prepared_genuine_receipt_sha256": {
+    "freeze_sha256": "a91ce4a16280dbd477ec1dddc1271c7db5a1177c5cec45e132911d45778bbe8e",
+    "resource_profile_sha256": "7857dcab1dfea6ebab0a02790f8d6201193f86b9cc5746290f2644a4142d54fa",
+    "private_cases_sha256": "369b7ecf0f0061dd6878a99ad75f432d8dca058ef3e5f0fad6c67ccf994671c0",
+    "private_attempts_sha256": "4f2ec01cfcb50dd779019bfbeeec431a65ec5dafbecd439021c87dfe1e84af77",
+    "private_acquisition_sha256": "29146ad559a45d71cac34d92d5cf2f2c0f7753628994c112f70a4e716a7a93b6",
+    "worker_receipt_sha256": "468c649ae1df6cea0fa6326b1480116dc9eb0854c9fa674b55c6766c58d2f4eb",
+    "acquisition_receipt_sha256": "aefe6c9e25caf99d19d39a369e2e6d59933206e83da97b265fc9d4ae367fc3ac"
+  },
+  "v191_freeze_sha256": "5f2990dbc56841cbf52360d74b641a650b2b929bb3eb65e422fce1c91320b4ac",
+  "v191_result_sha256": "4f183062c0bc29df07779e41257e6a4872d2ed38f74c3fc23387a1358de044dc",
+  "v179_result_sha256": "29b4cdd53d761b6f3ba13c030a9b661dbbf1de3104fec2b602e5e7aa81fc1fa0",
+  "voice_route_freeze_sha256": "896d996b55b5dbb012dc075018f1c699503f49576f81241dee06a501c4923748",
+  "local_asset_commitments": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "pyloudnorm": "0.1.1",
+    "psutil": "7.2.2",
+    "pyarrow": "26.0.0"
+  },
+  "planned_genuine_slots": 24,
+  "eligible_genuine_slots": 19,
+  "eligible_selection_counts": {
+    "pause_bounded_crop": 18,
+    "natural_short_full": 1
+  },
+  "language": "tr",
+  "route_reference_language": "en",
+  "new_fitting_permitted": false,
+  "holdout_access_permitted": false
+}

@@ -89,6 +89,10 @@ earlier [readiness receipt](evaluation-panels/portrait-native-readiness-v133.jso
 remains historical. The [bounded-convolution context](portrait-tiled-runtime-v139-method.md)
 preserves that failed attempt and tests an explicit memory implementation change
 at the same weights, precision, resolution and resource limits.
+The new [actual bounded CPU run passed](portrait-tiled-runtime-v139-result.md),
+including exact own repeats and byte-identical first-crop comparison with the
+preserved partial original. This is construction-runtime qualification, not fresh
+detector accuracy or achieved phonetic alignment.
 
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_native_mouth_inputs_v116.py backend/tests/test_native_mouth_renderer_v117.py

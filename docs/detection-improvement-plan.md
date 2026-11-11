@@ -115,6 +115,10 @@ integration remains unfinished.
   qualifier passed RAM admission but was stopped by the unchanged 6-GiB sampled
   RSS limit; its failed attempt remains preserved. The new bounded-convolution
   context keeps the same inputs/weights/precision/resolution and resource limits.
+  Its actual run now passes in 25.63 seconds at 2.37 GiB maximum sampled RSS,
+  with byte-identical comparison to the preserved first original crop and exact
+  own repeats. This qualifies the runtime, not fresh detection or achieved lip
+  timing. [Actual bounded CPU result](portrait-tiled-runtime-v139-result.md).
   A richer expression-driving
   bridge has passing public arithmetic checks but remains neurally unqualified.
   No new prediction result or default follows from these data/software checks.

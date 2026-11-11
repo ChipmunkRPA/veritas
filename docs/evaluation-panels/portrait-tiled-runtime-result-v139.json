@@ -1,0 +1,83 @@
+{
+  "schema": "chipmunk.portrait-tiled-runtime-execution/139",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.portrait-native-qualifier-result/133",
+    "status": "complete",
+    "device": "cpu",
+    "strict_exact_checkpoint_loads": 5,
+    "stateless_geometry_repeat_bitwise": true,
+    "face_task_inputs": 3,
+    "renderer_inputs": 4,
+    "renderer_repeat_bitwise": true,
+    "top_level_module_forwards": {
+      "appearance_feature_extractor": 4,
+      "motion_extractor": 4,
+      "warping_module": 4,
+      "spade_generator": 4,
+      "lip": 4
+    },
+    "new_neural_calls": 23,
+    "neural_counter_scope": "3 face-task API inputs plus 20 hooked top-level generator module forwards; internal face-task graph invocations are not independently instrumented.",
+    "counterfactual_changed_crop_pixels": {
+      "earlier_native_aperture": 127314,
+      "authored_aperture_0.5": 91279
+    },
+    "changed_native_pixels": {
+      "same_aperture": 1804,
+      "repeat": 1804,
+      "earlier_native_aperture": 1846,
+      "authored_aperture_0.5": 1824
+    },
+    "render_seconds": {
+      "same_aperture": 3.08689245802816,
+      "repeat": 3.0519069590372965,
+      "earlier_native_aperture": 3.077541916980408,
+      "authored_aperture_0.5": 3.0648863749811426
+    },
+    "private_render_records_sha256": "acebece81f5714a318b9a4d025c7864c484383e203fd54ecb398a2ddc669a43a",
+    "freeze_sha256": "65653d3622fa451dd30843322a57fd0f2fb266306e66e9833c60ceb60463917f",
+    "native_coordinate_containment_qualified": true,
+    "achieved_audio_synchronization_qualified": false,
+    "defaults_changed": false,
+    "scope": "One previously consumed fitting source, not new-source transfer or detector performance. CPU generator aperture response and native support containment only; earlier aperture does not establish phonetic retiming.",
+    "execution_context_schema": "chipmunk.portrait-tiled-cpu-result/139",
+    "bounded_convolutions": {
+      "spatial_convolutions": 148,
+      "functional_tile_calls": 948,
+      "maximum_estimated_tile_columns_bytes": 133890048
+    },
+    "partial_reference_fidelity": {
+      "maximum_abs_rgb_byte_difference": 0,
+      "mean_abs_rgb_byte_difference": 0.0,
+      "changed_channel_values": 0,
+      "within_frozen_tolerance": true
+    },
+    "private_forward_progress_sha256": "455360c2b0eb5b4bb6db963242e1ee78d41ef048232dd3216acfb67a97716a27",
+    "preserved_original_failure_profile_sha256": "271b18ce7a4e64169d3e7db479f2d70e0397a96e8704c5941d0d2cd682e5884a",
+    "original_failure_remains_failed": true
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "authored",
+    "batch": null,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 25.626211958006024,
+    "sampled_tree_rss_lower_bound_bytes": 2546991104,
+    "minimum_available_ram_bytes": 7803650048,
+    "resource_journal_sha256": "efde2691f7ddc25cdcb7765305ad3e6273ffa712c1fd98eae33b6d5030446172",
+    "runtime_sha256": "9b1b116d6063290490c4d6330e3e1749477ce69885f25f554d1005fdc2479fce",
+    "worker_receipt_sha256": "c5103fbb468100508cc971fb9b371557cda740b1b4c266aa7fba6ea978fa0c5e",
+    "new_neural_calls": 23,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "c5103fbb468100508cc971fb9b371557cda740b1b4c266aa7fba6ea978fa0c5e",
+  "profile_sha256": "754489a9e34d65ffa815c150318dddc163152514bcab4f19d3ba5712f49f165c",
+  "scope": "Single consumed fitting-source construction runtime: bounded CPU convolutions at full precision/resolution and byte-identical partial-original reference. Not achieved phonetic synchronization, fresh detector accuracy, population calibration or serving/default adoption. Original v133 failure remains failed."
+}

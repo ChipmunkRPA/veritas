@@ -1,0 +1,45 @@
+{
+  "schema": "chipmunk.audio-language-scope-freeze/184",
+  "planned": {
+    "tr_synthetic": 24,
+    "en_genuine": 14
+  },
+  "independent_groups": {
+    "tr_synthetic": 24,
+    "en_genuine": 7
+  },
+  "assets": {
+    "config.json": "ffdccec4f3211f4c63310f2b7098f309fe70f3952cedc5e4d11e43f5b2379b98",
+    "preprocessor_config.json": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666",
+    "model.safetensors": "7ebd0e69e78190ffe1438491fa05cc1f5c1aa3a4c4db3bc1723adbb551ea2395",
+    "generation_config.json": "a5d5325911f16e74001a72fa13d6e208eee51548f994646de1f4b4cc8b35b512",
+    "tokenizer.json": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566"
+  },
+  "source_receipt_sha256": {
+    "v169c": "681389a3f959833de637a4e5f778e193b2e4bcecb62a437f3eede38c75896a1e",
+    "v179": "6489997be462146a434cb3853d59b2a5f1c5c79ed65638a19443d5ac10a50276"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_language_scope_v184.py": "a14c65982c10b1fad997362d0961fc4793657e53815cea693f9e07f77284e62a",
+    "backend/tests/test_audio_language_scope_v184.py": "02673bd03026c4e391493482219893502172fd5f873eb4c6b5198a10b641880f",
+    "docs/audio-language-scope-v184-method.md": "b000b83cd2851835cda7b2afab514fbb20ac6b8adf9324659fd8b6a8550f8800"
+  },
+  "runtime_packages": {
+    "numpy": "2.2.6",
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "safetensors": "0.8.0",
+    "psutil": "7.2.2"
+  },
+  "method": "first decoder position over all publisher language tokens; no transcription or generation",
+  "margin_bins": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "fitting_permitted": false,
+  "holdout_access_permitted": false,
+  "private_inputs_sha256": "f5ee4db69389b56d9ba778d6d6ebd720f05ce8f3ee2eb5f2b827a78565ad59f5"
+}

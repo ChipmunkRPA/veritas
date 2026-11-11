@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.grid-acquisition-continuation-execution/135",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.grid-acquisition-continuation-result/135",
+    "status": "complete",
+    "archives": 1,
+    "verified_archive_bytes": 387242110,
+    "new_network_bytes": 49600638,
+    "used_preserved_prefix": true,
+    "real_video_members_inventoried": 1000,
+    "private_archive_journal_sha256": "52d98631ab775f5403d74aa34c577673630fb543b6eb1b1a08cf7901d7a95d3f",
+    "freeze_sha256": "4833a9c29110c0b8fb947738c119cdfa9214e59748df9310096ee03fc14c1350",
+    "new_neural_calls": 0,
+    "defaults_changed": false,
+    "scope": "One original selected source archive; complete size/publisher MD5, observed SHA-256 and safe directory. No media decoding, detector response, completed-cohort or original failed-stage success claim. Raw assets and individual fingerprints stay private."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 64.92971587495413,
+    "sampled_tree_rss_lower_bound_bytes": 68370432,
+    "minimum_available_ram_bytes": 5878611968,
+    "resource_journal_sha256": "889ca001b7164df71e293c8c139672f2dd7b14a94a95a90b325853857d399de7",
+    "runtime_sha256": "fa72f713ec4fdfde47fbd1758b044b98a4737e2751456a1b7920616a2358955e",
+    "worker_receipt_sha256": "09bf3b3df631da0ef121d940a55f8ce4bbafe6f378dc6a71c6a89b9585c59c21",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "09bf3b3df631da0ef121d940a55f8ce4bbafe6f378dc6a71c6a89b9585c59c21",
+  "profile_sha256": "6deefe8492e1221d911ae55acbfade34c9b1d5f0baf15c45e5ebbc49a778b380",
+  "original_stopped_stage_unchanged": true,
+  "scope": "First continuation only. Together with original complete archive, two of sixteen selected archives available; fourteen remain unacquired. The original elapsed-limit failure remains a failure."
+}

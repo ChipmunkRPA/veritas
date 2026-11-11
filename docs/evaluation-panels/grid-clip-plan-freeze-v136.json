@@ -1,0 +1,18 @@
+{
+  "schema": "chipmunk.grid-clip-plan-freeze/136",
+  "code_sha256": {
+    "backend/scripts/grid_clip_plan_v136.py": "1a758dc5d0c71f6940f1110b3a7d2b32a662c88083e960f30060ec9240604cef",
+    "backend/tests/test_grid_clip_plan_v136.py": "df2e56bd25310db82adae47153efdb794fe753440a6885aa9341f7858a1d420a",
+    "docs/grid-clip-plan-v136-method.md": "48953b16d48793e2d156038c7d5c506de6b5237a737bfec5f74dfbdf1e06914f",
+    "backend/scripts/grid_media_preflight_v134.py": "0ca2c989bfb81cba5a4ee0bea06238ae39da77378dcb73cd2a390c67fcbfcaaf"
+  },
+  "acquisition_freeze_sha256": "4833a9c29110c0b8fb947738c119cdfa9214e59748df9310096ee03fc14c1350",
+  "private_source_plan_sha256": "873c403b9839ceb6c79a62cc631b24c6b409dcf960edc6c0b57a5d81bcca5f8d",
+  "source_archives": 16,
+  "directory_batches": 2,
+  "archives_per_directory_batch": 8,
+  "selected_clips_per_archive": 2,
+  "planned_clips": 32,
+  "selection": "Original source order. For each source, v134 fixed salted SHA order of utterance stems, excluding globally used stems; no content, face, audio or detector response.",
+  "scope": "Directory metadata only; full archive checksums, video/audio clocks, geometry, generation and detector transfer remain separate. All source/utterance identities and per-media CRC/fingerprints private. No raw media entry is opened."
+}

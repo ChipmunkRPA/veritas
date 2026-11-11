@@ -1,0 +1,34 @@
+{
+  "arm_manifest_sha256": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61",
+  "code_sha256": {
+    "test_video_faceswapai_full_app_v190.py": "4687641f705add5f5015502916571c8ac0fba50cf3c2fcb94468ba968b249892",
+    "video-faceswapai-full-app-v190-method.md": "782f5541b7402648329b4b2c78eb7a9942bea689c6c6bd93c8b590433c018605",
+    "video_faceswapai_full_app_v187.py": "616271d76ddb3a321bbbb05ca9f1ddae1a641bcecbe3038583b79559842e015f",
+    "video_faceswapai_full_app_v190.py": "b1436fa6f500165df693d95ecef23c49608bde37cb292c6432215fee974cb3b6"
+  },
+  "conditions": [
+    "unchanged",
+    "recompression_only",
+    "swap_tv_bt601",
+    "swap_pc_bt601",
+    "swap_tv_bt709",
+    "swap_pc_bt709"
+  ],
+  "device": "mps",
+  "edit_frames_half_open": [
+    72,
+    144
+  ],
+  "model_manager_budget_bytes": 4831838208,
+  "prepared_receipt_sha256": "0544f58d3a54ca5f390e2a46b28d29a1f33430cecaf76be0e0dea729db2f2ca7",
+  "previous_startup_stop": {
+    "log_sha256": "f05be0420c9cf56817b28b586be9b45ed4f6afb0a6a65b4ec4bb22c99ffae68f",
+    "previous_freeze_sha256": "a0887b38f94e7296ea0c59c2b5fbce2fb7d2b73e89045a043c30d861ae90f65a",
+    "profile_sha256": "23fd77e62c2cd8fc47ec86dd87ab50bf722b50a7d9865fcba6ef8004fbc3de4e"
+  },
+  "private_manifest_sha256": "521d11c3210fea01c7125a87647f7b824e2d12309f1e15027dcd371a3a723e7c",
+  "runtime_freeze_sha256": "d2934fecf1d29225a3c90dd0a3e978fff6c1c47b101f268fe6dee702f29241fb",
+  "schema": "chipmunk.video-faceswapai-full-app-freeze/190",
+  "scope": "Six matched renderings of one silent synthetic source. No independent-camera or lip-sync accuracy estimate.",
+  "time_base": "1/12288"
+}

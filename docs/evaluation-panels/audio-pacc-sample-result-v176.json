@@ -1,0 +1,64 @@
+{
+  "declared_source_contexts": {
+    "AMI": 4,
+    "VCTK": 5
+  },
+  "freeze_sha256": "e9aed0644d698d6e0fcd239520984565b1ed552e43d4666594a8bdc8daf2a073",
+  "inputs_with_historical_voice_match": 10,
+  "maximum_sampled_descendant_rss_bytes": 81723392,
+  "new_neural_calls": 0,
+  "outcomes_by_source_family_and_condition": {
+    "AMI": {
+      "babble_snr00": {
+        "qualified": 4
+      },
+      "babble_snr05": {
+        "qualified": 4
+      },
+      "clean": {
+        "qualified": 4
+      },
+      "env_noise_snr00": {
+        "qualified": 4
+      },
+      "env_noise_snr05": {
+        "qualified": 4
+      },
+      "music_instrumental_snr00": {
+        "qualified": 4
+      },
+      "music_instrumental_snr05": {
+        "qualified": 4
+      }
+    },
+    "VCTK": {
+      "babble_snr00": {
+        "qualified": 10
+      },
+      "babble_snr05": {
+        "qualified": 10
+      },
+      "clean": {
+        "qualified": 10
+      },
+      "env_noise_snr00": {
+        "qualified": 10
+      },
+      "env_noise_snr05": {
+        "qualified": 10
+      },
+      "music_instrumental_snr00": {
+        "qualified": 10
+      },
+      "music_instrumental_snr05": {
+        "qualified": 10
+      }
+    }
+  },
+  "private_observations_sha256": "5f1eaf259417a36b1aca778fe4b6cb2042db2c32cd03a074eca631b9215e245b",
+  "resource_profile_sha256": "5d6fa73805c7a414a1f08e99137f850f389c0895e9dd50c49ad163080a6f6ad3",
+  "schema": "chipmunk.audio-pacc-sample-result/176",
+  "source_inputs": 14,
+  "status": "complete",
+  "worker_duration_seconds": 7.907845958019607
+}

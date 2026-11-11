@@ -1,0 +1,25 @@
+{
+  "schema": "chipmunk.grid-source-speech-complete/147",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_encoded": 16,
+  "complete_guarded_batches": 8,
+  "encoded_original_waveforms": 16,
+  "encoded_locally_delayed_waveforms": 16,
+  "encoded_whole_waveforms": 32,
+  "bitwise_equal_fixed_repeats": 8,
+  "actual_encoder_forwards": 40,
+  "verified_source_clock_chunks": 1280,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "maximum_sampled_descendant_rss_bytes": 773488640,
+  "worker_duration_seconds": {
+    "minimum": 7.182374333962798,
+    "maximum": 9.268852874985896,
+    "sum": 63.8533142489614
+  },
+  "private_complete_execution_collection_sha256": "20525f54f98e4efa94f2817e5ed9e7229acfa494cc9c8e4c40bdbe2d4e4ceda0",
+  "freeze_sha256": "2f42a4cd58b4d02c0270b428fa689ea16b580e457b9eef2b6789523b92da2611",
+  "defaults_changed": false,
+  "scope": "Actual whole-waveform CPU speech encoding for the fixed original and audio-delay construction inputs. No reuse of original states for edited audio, no finite temporal dependency, detection accuracy, achieved sync or customer-confidence claim. Media, clocks, states and individual fingerprints remain private."
+}

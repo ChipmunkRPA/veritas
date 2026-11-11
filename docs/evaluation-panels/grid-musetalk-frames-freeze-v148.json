@@ -1,0 +1,83 @@
+{
+  "schema": "chipmunk.grid-musetalk-frames-freeze/148",
+  "code_sha256": {
+    "backend/scripts/grid_musetalk_frames_v148.py": "dcdbca8405d8dfdff51a44ea75ab449087dd3ae11e2399e14f7a03e74984d5b5",
+    "backend/tests/test_grid_musetalk_frames_v148.py": "aaedf2c6b807e64955e645199d08a3c950ab2e31509a8e7bacb7ca753610d12f",
+    "docs/grid-musetalk-frames-v148-method.md": "b7e8c38964bbab643cdfe782f29b5b40b0bedf9573001eb65c08be90145676d1",
+    "backend/scripts/grid_portrait_frames_v146.py": "3d7dfa4d519610ddc8c102a9d0fb573fdd125a3fc72a0b9ad8523f5992747c4c",
+    "backend/scripts/grid_source_speech_v147.py": "3f29aba7f7f674d01117200bbcd2778d5d1f68ab0a44e2460859fdba09618e9a",
+    "backend/scripts/av_conditioning_clock_v109.py": "bcf96201cbe11c04f69f2d0d5b0468764a845f115c230b5ae654d1e5b860cfa1",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "baseline_bindings_sha256": {
+    "backend/data/independent-evaluation/native-mouth-renderer-v118/freeze.json": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+    "backend/data/independent-evaluation/native-mouth-renderer-v118/authored/profile.json": "11c943e739e5c0abbd669805eeb02d96b9672e6497fbfa01d141cf688228c606",
+    "backend/data/independent-evaluation/native-mouth-renderer-v118/authored/resources.jsonl": "56ca24bc569c5b5dfdcad61aa9f8efda99a3f8a6a53ee7d4f14be7faf251841a",
+    "backend/data/independent-evaluation/native-mouth-renderer-v118/authored/output/result.json": "b3b06dc3518e1eb1810b324641d6a3c2bae6fbbcce13036adcec8bdd69bb2efc",
+    "backend/data/independent-evaluation/native-mouth-renderer-v118/authored/output/private-render-records.json": "2af3affdd9383ae6d2e3181477fe47ef9b5653e81f58c674344104a85677bbd5",
+    "docs/evaluation-panels/mouth-v7-generator-assets.json": "bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc",
+    "docs/evaluation-panels/native-mouth-renderer-freeze-v118.json": "cdae060917a71877114ce0ecc09e58ad7c8142539038f60514f762e4900ce482",
+    "docs/evaluation-panels/native-mouth-renderer-result-v118.json": "0ad3a3fb047c4d8d79277353a4a9d68d34aa2f480d8a9cd8f38fe41355c0c156",
+    "docs/evaluation-panels/native-mouth-clips-freeze-v120.json": "9c78d3bda1a2f1e0661ec687e67732fbb9e24dc34b592a7dcfc6fcdccb6ad0d3",
+    "docs/evaluation-panels/mouth-v7-runtime.json": "7fb0fe3c309e4327efb2aae6cd365bac3712c744b54fff73675f4f4e461be2f0",
+    "docs/evaluation-panels/mouth-v7-runtime.lock": "d408851f1688f2bc4024f958dc5fc5b151b2652a706346cf8d990c8e58a316c7",
+    "backend/data/independent-evaluation/lipsync-v7/assets/verified-assets.json": "cba84efa0e5b6f7c07c3e31f179a77523ecdb941c68f7940cd3cba85e3898ac4"
+  },
+  "plan_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "plan_private_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+  "speech_freeze_sha256": "2f42a4cd58b4d02c0270b428fa689ea16b580e457b9eef2b6789523b92da2611",
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "source_frames_half_open": [
+    27,
+    47
+  ],
+  "conditions": [
+    "source_time",
+    "earlier_320ms"
+  ],
+  "speech_waveform_id": "original_pcm",
+  "planned_condition_frames_per_clip": 40,
+  "planned_fixed_render_repeat": 1,
+  "planned_face_inputs_per_clip": 21,
+  "maximum_render_root_units_per_clip": 164,
+  "device": "mps",
+  "precision": "float32",
+  "mps_memory_fraction": 0.65,
+  "torch_interop_opencv_threads": [
+    1,
+    1,
+    1
+  ],
+  "deterministic_algorithms": true,
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0",
+    "diffusers": "0.42.1",
+    "transformers": "5.15.1",
+    "safetensors": "0.8.0",
+    "accelerate": "1.14.0"
+  },
+  "seed_rule": "SHA256(chipmunk.grid-musetalk-frames/148:original_clip_ordinal:source_frame), first8bytes big-endian modulo2**63, shared across driver conditions",
+  "scope": "Fixed-pilot per-pair neural construction with native YuNet branch geometry, original whole speech only; unavailable/zero-effect retained. No achieved synchronization, phonetics, face swapping, detection accuracy or default change."
+}

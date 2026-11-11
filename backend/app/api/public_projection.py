@@ -12,6 +12,7 @@ from typing import Any
 
 from app.core.config import settings
 from app.engine.registry import get_registry
+from app.engine.service_policy import EMAIL_REFERENCE_CONTEXT
 
 
 @lru_cache(maxsize=1)
@@ -271,6 +272,11 @@ def _project(value: Any, *, field: str, source_text: bool, candidates: tuple[str
     if field in _SOURCE_FIELDS:
         return value
     if isinstance(value, list):
+        if field == 'error_rates':
+            # This reference's operating point is internal; older records also
+            # mislabeled its saved counts with the general service boundary.
+            value = [row for row in value if not (isinstance(row, dict)
+                     and row.get('context') == EMAIL_REFERENCE_CONTEXT)]
         return [walk(item, field=field, source_text=source_text) for item in value]
     if isinstance(value, dict):
         is_source = source_text or value.get('family') in _SOURCE_FAMILIES or value.get('category') == 'provenance'

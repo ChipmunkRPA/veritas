@@ -12,7 +12,7 @@ from typing import Any
 
 from app.engine.finding_assessment import finding_assessments
 from app.engine.fusion import abstain
-from app.engine.service_policy import RULE, THRESHOLD, standard_service_policy
+from app.engine.service_policy import EMAIL_REFERENCE_THRESHOLD, RULE, THRESHOLD, standard_service_policy
 
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
@@ -230,7 +230,7 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
     email_reference = result.get("kind") == "document" and profile.get("slice_id") == EMAIL_REFERENCE_SLICE
     if email_reference:
         ci = decision.get("ci90")
-        ai = decision.get("code") == "ai_supported" and p is not None and p >= THRESHOLD
+        ai = decision.get("code") == "ai_supported" and p is not None and p >= EMAIL_REFERENCE_THRESHOLD
         valid_interval = (ai and isinstance(ci, (list, tuple)) and len(ci) == 2
                           and all(_probability(x) is not None for x in ci) and ci[0] <= ci[1])
         return {**answer, "direction": "ai" if ai else "inconclusive",

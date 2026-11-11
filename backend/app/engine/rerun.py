@@ -28,6 +28,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.engine import fetchers
 from app.engine.fusion.registry import select_for_registry
+from app.engine.service_policy import EMAIL_REFERENCE_CONTEXT
 from app.reports.reproduce import diff
 from app.storage.db import Analysis, AuditEvent, MediaObject, PolicyThresholdsRow, get_session
 from app.storage.files import safe_filename
@@ -149,6 +150,13 @@ def check(db: Session, registry: Any, source: Analysis, result: Mapping[str, Any
             if pin == document_screening.RETIRED_ARTICLE_PIN:
                 return document_screening.RETIRED_ARTICLE_REASON
             if pin == document_screening.EMAIL_SHA256:
+                for calibration in result.get("calibration") or []:
+                    if not isinstance(calibration, Mapping) or calibration.get("artefact_sha256") != pin:
+                        continue
+                    if any(isinstance(row, Mapping) and row.get("context") == EMAIL_REFERENCE_CONTEXT
+                           and row.get("threshold") == 0.6 for row in calibration.get("error_rates") or []):
+                        return ("The saved email result used an earlier decision rule that cannot be reproduced by this version; "
+                                "start a normal reanalysis for a current result")
                 try:
                     document_screening.load()
                 except (OSError, ValueError) as exc:

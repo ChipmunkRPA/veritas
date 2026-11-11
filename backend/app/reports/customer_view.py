@@ -223,6 +223,16 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     # Repeating it below findings can create an otherwise empty extra page.
     out["closing"] = ""
     assessment = customer_assessment({**snapshot.result, "kind": snapshot.analysis.kind})
+    if (snapshot.result.get("condition_profile") or {}).get("slice_id") == EMAIL_REFERENCE_SLICE:
+        # Do not print the internal reference operating point or historically
+        # mislabeled transfer counts in a customer report.
+        estimate_view = out.get("estimate")
+        if isinstance(estimate_view, dict):
+            estimate_view["rates"] = []
+            decision = snapshot.result.get("decision") or {}
+            p = _number(decision.get("probability_ai_calibrated"))
+            if assessment["direction"] == "inconclusive" and decision.get("code") == "ai_supported" and p is not None:
+                estimate_view["none"] = "The saved check does not support a reliable email authorship tendency."
     text_rate = text_reference_rate(snapshot.analysis.kind, snapshot.result.get("condition_profile"),
                                           snapshot.result.get("calibration") or [])
     out["customer_assessment"] = assessment

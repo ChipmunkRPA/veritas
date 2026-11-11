@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from types import SimpleNamespace
 
 import pytest
 
+from app.api.public_projection import project
 from app.detectors.text.extract import from_string
 from app.engine import customer_assessment
 from app.engine.stages import document_screening as screening
@@ -56,3 +58,31 @@ def test_email_fit_is_one_sided_and_bound_to_the_message_body(monkeypatch):
             assert public["headline"] == "Inconclusive: no reliable AI-writing tendency"
     doc.source_map[0]["quote_role"] = "quoted"
     assert screening.apply(ctx, doc, fallback) is fallback
+
+
+@pytest.mark.parametrize("p,direction", [(0.59, "inconclusive"), (0.60, "inconclusive"),
+                                         (0.79, "inconclusive"), (0.80, "ai"), (0.81, "ai")])
+def test_email_reference_boundary_and_historical_customer_readout(monkeypatch, p, direction):
+    _, artifact = screening.load()
+    monkeypatch.setattr(screening, "_commit", lambda *args: {"sha256": screening.EMAIL_SHA256})
+    monkeypatch.setattr(screening, "estimate", lambda *args: (p, (0.5, 0.9), 0.0))
+    doc = from_string(TEXT)
+    doc.meta.update(method="email", email={"body_content_type": "text/plain"})
+    doc.source_map[0]["quote_role"] = "body"
+    fallback = {"signals": [response(0.5, artifact)], "caveats": [], "v1": {"verdict": {}}}
+    saved = screening.apply(SimpleNamespace(state={}), doc, fallback)
+    assert saved["calibration"][0]["error_rates"][0]["threshold"] == 0.8
+    assert customer_assessment.customer_assessment({**saved, "kind": "document"})["direction"] == direction
+
+    # Old records were saved under the service-wide 0.60 rule. Interpret the
+    # original record without changing the bytes that are signed or hashed.
+    historic = deepcopy(saved)
+    historic["decision"].update(code="ai_supported", probability_ai_calibrated=p, ci90=[0.5, 0.9])
+    before = deepcopy(historic)
+    presentation = customer_assessment.customer_assessment({**historic, "kind": "document"})
+    assert presentation["direction"] == direction
+    if direction == "inconclusive":
+        assert presentation["confidence_pct"] is None and presentation["interval_pct"] is None
+    assert historic == before
+    assert project(historic)["calibration"][0]["error_rates"] == []
+    assert historic == before

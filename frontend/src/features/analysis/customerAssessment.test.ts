@@ -67,7 +67,9 @@ describe('local speech calibration', () => {
 
 describe('email headline fallback', () => {
   for (const [code, p, direction] of [
-    ['ai_supported', .92, 'ai'], ['inconclusive', .08, 'inconclusive'], ['no_ai_indicators', .08, 'inconclusive'],
+    ['ai_supported', .59, 'inconclusive'], ['ai_supported', .60, 'inconclusive'],
+    ['ai_supported', .79, 'inconclusive'], ['ai_supported', .80, 'ai'], ['ai_supported', .92, 'ai'],
+    ['inconclusive', .08, 'inconclusive'], ['no_ai_indicators', .08, 'inconclusive'],
   ] as const) it(`keeps the saved email policy for ${code}`, () => {
     const input = { kind: 'document', status: 'done', condition_profile: {
       slice_id: 'document/local-email-v1', within_validated_envelope: true },
@@ -80,6 +82,8 @@ describe('email headline fallback', () => {
     if (direction === 'inconclusive') {
       expect(result.headline).toBe('Inconclusive: no reliable AI-writing tendency')
       expect(result.confidence_pct).toBeNull()
+      const stale = { ...result, direction: 'ai', confidence_pct: 70 }
+      expect(presentedCustomerAssessment({ ...input, customer_assessment: stale }).direction).toBe('inconclusive')
     }
   })
 })

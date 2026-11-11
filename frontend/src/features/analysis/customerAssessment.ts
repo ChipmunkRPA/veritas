@@ -27,6 +27,7 @@ type Input = FindingContext & {
   caveats?: readonly string[]
 }
 export const ASSESSMENT_RULE = 'evidence-led-assessment/v6'
+const EMAIL_REFERENCE_THRESHOLD = .8
 const INTERVAL_NOTE = 'This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.'
 const ESTIMATE_NOTE = "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited."
 const probability = (p: unknown): p is number => typeof p === 'number' && Number.isFinite(p) && p >= 0 && p <= 1
@@ -107,7 +108,11 @@ export function presentedCustomerAssessment(result: Input & { customer_assessmen
       && ['headline', 'confidence_label', 'scope_label'].every(k => typeof component[k] === 'string') && text(component.interval_label)
       && (component.interval_pct === null || (Array.isArray(component.interval_pct) && component.interval_pct.length === 2
         && component.interval_pct.every(x => typeof x === 'number' && percent(x)) && component.interval_pct[0] <= component.interval_pct[1])))
-    if ((row.service_policy as StandardServicePolicy | undefined)?.version === STANDARD_SERVICE_POLICY.version
+    const emailDecision = result.kind === 'document' && result.condition_profile?.slice_id === 'document/local-email-v1'
+    const emailP = result.decision?.probability_ai_calibrated
+    // Older API presentations may have applied the general service boundary to this reference.
+    const emailPresentationValid = !emailDecision || row.direction !== 'ai' || (probability(emailP) && emailP >= EMAIL_REFERENCE_THRESHOLD)
+    if (emailPresentationValid && (row.service_policy as StandardServicePolicy | undefined)?.version === STANDARD_SERVICE_POLICY.version
       && row.rule === ASSESSMENT_RULE && componentValid && Array.isArray(row.finding_assessments) && row.finding_assessments.every(isFindingAssessment) && typeof row.applies === 'boolean'
       && ['ai', 'original', 'inconclusive', 'unavailable', 'record'].includes(String(row.direction))
       && text(row.headline) && text(row.confidence_label) && text(row.interval_label)
@@ -181,7 +186,7 @@ function baseCustomerAssessment(result: Input): CustomerAssessment {
   }
   const p = d.probability_ai_calibrated
   if (result.kind === 'document' && profile?.slice_id === 'document/local-email-v1') {
-    const ai = d.code === 'ai_supported' && probability(p) && p >= .6
+    const ai = d.code === 'ai_supported' && probability(p) && p >= EMAIL_REFERENCE_THRESHOLD
     const ci = d.ci90
     const validInterval = ai && ci?.length === 2 && probability(ci[0]) && probability(ci[1]) && ci[0] <= ci[1]
     return { ...answer, direction: ai ? 'ai' : 'inconclusive',

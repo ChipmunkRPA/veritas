@@ -2,6 +2,9 @@
 
 RULE = "evidence-led-assessment/v6"
 THRESHOLD = 0.6
+# The local email reference was evaluated with this one-sided decision rule.
+EMAIL_REFERENCE_THRESHOLD = 0.8
+EMAIL_REFERENCE_CONTEXT = "Held-out plain-text business email"
 CONTACT = "sales@chipmunkrpa.com"
 
 

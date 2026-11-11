@@ -243,6 +243,24 @@ def test_partial_document_main_limitation_uses_the_same_public_prose_as_its_list
     assert raw['summary']['limitation'] == 'Main limitation: ' + generated
 
 
+def test_historical_email_report_uses_current_customer_readout_without_changing_snapshot():
+    original = specimen('document', 'forensic')
+    result = deepcopy(original.result)
+    result['condition_profile'] = {'slice_id': 'document/local-email-v1', 'within_validated_envelope': True}
+    result['decision'].update(code='ai_supported', probability_ai_calibrated=0.7, fusion_mode='artefact',
+                              provenance_record=None, contributions=[], ci90=[0.6, 0.8])
+    frozen = original.model_copy(update={'result': result})
+    before = snapshot_hash(frozen)
+    raw = {'header_left': '', 'summary': {}, 'estimate': {'rates': [{'context': 'Held-out plain-text business email',
+                                                    'threshold': 'fixed · 0.60'}]}, 'sections': []}
+    shown = public_view(frozen, raw)
+    assert shown['customer_assessment']['direction'] == 'inconclusive'
+    assert shown['customer_assessment']['confidence_pct'] is None
+    assert shown['estimate']['rates'] == []
+    assert 'does not support a reliable' in shown['estimate']['none']
+    assert snapshot_hash(frozen) == before and raw['estimate']['rates']
+
+
 def test_calibration_component_is_private_even_without_a_run_or_manifest_entry():
     frozen = specimen('video', 'standard')
     frozen.result['calibration'] = [{'subject': 'aud.retired_private@unknown', 'method': 'platt'}]

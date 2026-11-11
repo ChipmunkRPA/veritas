@@ -13,8 +13,9 @@ from sqlalchemy.exc import IntegrityError
 
 from app.bench.metrics import wilson
 from app.detectors.text.extract import Document, _ocr_language
-from app.engine.customer_assessment import EMAIL_REFERENCE_SLICE, THRESHOLD
+from app.engine.customer_assessment import EMAIL_REFERENCE_SLICE
 from app.engine.fusion.runtime import annotate
+from app.engine.service_policy import EMAIL_REFERENCE_CONTEXT, EMAIL_REFERENCE_THRESHOLD
 from app.engine.stages import common
 from app.schemas.evidence import Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
@@ -107,7 +108,7 @@ def apply(ctx, doc: Document, fallback: dict) -> dict:
     p, interval, x = estimate(primary["raw_score"], calibration)
     intercept, slope = calibration["estimate"]
     start = float(expit(intercept))
-    if p >= THRESHOLD:
+    if p >= EMAIL_REFERENCE_THRESHOLD:
         code, band = "ai_supported", "likely_ai"
         headline = "Leaning towards AI-written or AI-rewritten email text"
     else:
@@ -142,8 +143,8 @@ def apply(ctx, doc: Document, fallback: dict) -> dict:
         "bench_version": calibration["bench_version"],
         "bench_manifest_sha256": calibration["transfer_manifest_sha256"],
         "brier": tested["brier"], "error_rates": [
-            {"context": "Held-out plain-text business email",
-             "threshold_kind": "fixed", "threshold": THRESHOLD,
+            {"context": EMAIL_REFERENCE_CONTEXT,
+             "threshold_kind": "fixed", "threshold": EMAIL_REFERENCE_THRESHOLD,
              "tpr": ai_correct / n_ai, "fpr": ai_false / n_human, "tpr_ci95": wilson(ai_correct, n_ai),
              "fpr_ci95": wilson(ai_false, n_human), "n_pos": n_ai, "n_neg": n_human,
              "bench_version": calibration["bench_version"]},

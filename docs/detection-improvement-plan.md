@@ -97,6 +97,26 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [independent audio speaker count](audio-independent-overlap-count-2026-11-11.md)
+  withheld two of six retained three-voice routing errors while keeping all seven
+  synthetic flags recovered in the separate-room test. A consumed diagnostic
+  normalized the recording level and withheld uncertain zero counts. It left
+  one of the six routing errors and kept five recovered flags. New disjoint
+  triplets exposed zero baseline errors. Seek another panel that contains
+  difficult overlapping speech before adopting the change.
+- The [shifted JPEG likelihood check](image-shifted-jpeg-likelihood-2026-11-11.md)
+  located 8/48 edits at quality 90 and flagged 11/120 controls. The existing
+  aligned check found 46/48 and flagged 60/120. The candidate found no new useful
+  locations and no useful quality-75 regions. Keep it experimental.
+- The [cheek and jaw boundary replay](video-selected-face-boundary-2026-11-11.md)
+  could measure four of 39 incumbent flags and corroborated none. All three
+  genuine stress views were unmeasured. Reliable patch correspondence and texture
+  coverage are the next requirements for testing this cue.
+- The [journalism transfer](writing-editorial-transfer-2026-11-11.md) located
+  3/6 known rewrites versus 2/6 for the current check. Both flagged the same
+  9/16 human documents. The two methods found different edit locations. Keep
+  the existing local opt-in and test new genres before extending coverage.
+
 - The [matched short-passage check](writing-two-sided-usgs-transfer-2026-11-11.md)
   located 7/15 edited passages across the NIST and USGS panels versus 5/15 with
   the current passage check. It flagged 5/26 human documents versus 12/26. The

@@ -1,0 +1,72 @@
+{
+  "arc_observation_statuses": {
+    "measured": 289,
+    "patch_unmeasured": 1761
+  },
+  "center_statuses": {
+    "eligible_geometry": 410
+  },
+  "cohorts": {
+    "genuine_camera_native": {
+      "source_groups": 1,
+      "source_groups_with_support": 0,
+      "views": {
+        "baseline_unassessed": 3
+      }
+    },
+    "genuine_camera_saved": {
+      "source_groups": 1,
+      "source_groups_with_support": 0,
+      "views": {
+        "unmeasured": 3
+      }
+    },
+    "known_swap": {
+      "source_groups": 6,
+      "source_groups_with_support": 0,
+      "views": {
+        "measured_no_support": 4,
+        "unmeasured": 32
+      }
+    },
+    "matched_rtfs": {
+      "source_groups": 6,
+      "source_groups_with_support": 0,
+      "views": {
+        "no_baseline_flag": 60
+      }
+    }
+  },
+  "freeze_sha256": "461df0dd3d039914c6ad020da9528c5cdd561d33ec7624a73813f9147ed3d661",
+  "known_swap_by_duration": {
+    "3/2": {
+      "measured_no_support": 1,
+      "unmeasured": 11
+    },
+    "3/4": {
+      "measured_no_support": 2,
+      "unmeasured": 10
+    },
+    "native_long": {
+      "measured_no_support": 1,
+      "unmeasured": 11
+    }
+  },
+  "locations": {
+    "baseline_iou_at_least_half": 36,
+    "supported_iou_at_least_half": 0
+  },
+  "native_runtime": {
+    "elapsed_s": 274.0299281249754,
+    "native_samples": 558,
+    "peak_rss_bytes": 245874688,
+    "private_crop_bytes": 0,
+    "scored_sha256": "a8b232e0f7dfc2dc8b9d960dbd7a6db51c9484fb2c6a20c2614a512dfa06df08"
+  },
+  "pilot_advancement": "Research replication only if at least 18 of 36 matched swaps in at least four source groups have local support, at least 80% of selected flags are measured, and none of the saved genuine stress views has support.",
+  "pilot_advances": false,
+  "policy": "Positive corroboration only on the exact selected interval. Preserve baseline flags and endpoints. Missing or unsupported residuals supply no originality inference.",
+  "schema": "chipmunk.video-selected-face-boundary/1",
+  "selected_flags_measured": 4,
+  "selected_flags_total": 39
+}

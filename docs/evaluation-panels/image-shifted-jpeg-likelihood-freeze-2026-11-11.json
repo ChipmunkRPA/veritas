@@ -1,0 +1,160 @@
+{
+  "implementation_sha256": {
+    "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+    "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+    "image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+    "image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d",
+    "image_local_grid_transfer.py": "df9dfc479c23c041d964d8918eebdfca7ef5ecf1735490fcbd904dbafc22dabd",
+    "image_shifted_jpeg_likelihood.py": "e877bf6d6a8d6e9802eb29915617de379faaed4f46984ae7014210478849d4a6"
+  },
+  "method": {
+    "authorship_confidence_contribution": 0,
+    "candidate_sizes_cells_hw": [
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        6,
+        6
+      ]
+    ],
+    "cell_pixels": 32,
+    "control_roles": [
+      "original",
+      "global_shift",
+      "contrast",
+      "blur",
+      "aligned_patch"
+    ],
+    "deliveries": {
+      "jpeg75": 75,
+      "jpeg90": 90
+    },
+    "edit_roles": [
+      "sharp_shift",
+      "feathered_shift"
+    ],
+    "frequencies_yx": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "known_nonzero_phase_xy": [
+      5,
+      3
+    ],
+    "minimum_magnitude_periods": 0.7,
+    "minimum_observations_per_cell": 8,
+    "minimum_period_to_noise_ratio": 2.0,
+    "minimum_point": 0.0,
+    "pilot_rule": "Per delivery, more useful shifted edit locations than the aligned comparison in total, no loss in either source panel, and no more control flags or flagged control groups in either panel.",
+    "point_rule": "Second-highest source maximum among the eight development sources per final delivery. Strict greater-than flag.",
+    "prior_quality_grid": [
+      50,
+      59,
+      67,
+      75,
+      85
+    ],
+    "ring_width_cells": 2,
+    "rounding_sigma": 0.75,
+    "searched_nonzero_phases": 63,
+    "useful": {
+      "minimum_iou": 0.3,
+      "minimum_recall": 0.5
+    }
+  },
+  "previous_comparisons": {
+    "phase": {
+      "confirmation_journals_sha256": {
+        "earlier": "247481fb6a79c07833cc1cbde2d7c369ccee0275b521585217ba7c3c03dc1b0b",
+        "later": "55b391d88fd135a54f2800faf364660923f404123aebf7a17a042dac98411aaa"
+      },
+      "freeze_sha256": "616ea2ef43c16bd2863d3a0feb691e1f884e2c0e085687006dad6d8586eb145a",
+      "public_report_sha256": "4853dd4c9bdb81551d2778872839c4002c741dd4b69a6862f4006d977d294c98"
+    },
+    "recompression": {
+      "confirmation_journals_sha256": {
+        "earlier": "b1f5d1b2dc3572ff95f5adeab03ea56eeac77f83bdfd56a1d7935b33adc73740",
+        "later": "034067deee40c492e987af14486c1d5f7dbb424c5ddcbf97ba485cf3d528fbbf"
+      },
+      "freeze_sha256": "ad14ba62b46584a2c3b4cc7b67191a6f3b4cf2bc9acaf4e75a38fb8f370a06a0",
+      "public_report_sha256": "561f5bd38431d287ad6d74d0a2d9b1b5b675daf3975adfe8d879b698b3beaf27"
+    }
+  },
+  "runtime": {
+    "libjpeg": "6.2",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0"
+  },
+  "schema": "chipmunk.image-shifted-jpeg-likelihood/1",
+  "source_group_counts": [
+    8,
+    12,
+    12
+  ],
+  "sources": {
+    "development": {
+      "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+      "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+      "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+    },
+    "earlier": {
+      "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+      "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+      "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+    },
+    "later": {
+      "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+      "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+      "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+    }
+  }
+}

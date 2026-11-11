@@ -1,0 +1,776 @@
+{
+  "counts_plan": {
+    "assets": {
+      "5_speakers.wav": "d9ba22bb9cfa3493b8e0cbe85174d0a859558cee828f239433cc5688f8014e65",
+      "CRNN.h5": "00f67eb2aa2749bae9d45f3642b9d031b16f372aff929f74699b5a04a266c98d",
+      "LICENSE": "ff823d0ff3dadd8e59572a9c825c598993673e3bba34ae7f78181cae56e45ca5",
+      "scaler.npz": "90ec0061d27ef224687598e715562933a6ba0849dc9aab447cafad6f0259a7a7"
+    },
+    "code_sha256": "3f05d9943d831115a6cc8dda0307895e3431c98e033892c9aabe8dc134af0d19",
+    "fresh_manifest_sha256": "6a65c818a3a2f3e057120a0ad0bece6f0e4ccf7589dad759cb9bfad5a6eb2638",
+    "method": {
+      "advance": "Eliminate controlled three-voice leaks on both the retained and disjoint-reader panels, retain at least half of fresh two-voice controls, and keep at least five of seven added true flags with zero added false flags in separate-room confirmation.",
+      "candidate": "Author-released CountNet CRNN, read original HDF5 weights as arrays; explicit CPU inference",
+      "disjoint_reader_controls": "Salted groups from older English and Turkish source banks absent from the prior routing panels. Use three-second center cuts and disjoint mixed-language triads with at least 400 ms of joint separate-source speech. Include one, two, and two third-voice levels at fixed minus 5 dB foreground/background SNR.",
+      "features": "5 s mono 16 kHz, 400-sample periodic Hann, 160-sample hop and reflect STFT boundary, first 500 magnitude frames, exact published scaler, mean frame L2 normalization",
+      "left_pad_samples": {
+        "center": 16000,
+        "left": 8000,
+        "right": 24000
+      },
+      "overlap": "Argmax count of at least three; center-only and at least two of three views tested separately",
+      "route": "Withhold the existing corroborated two-voice route on a counted overlap. Never promote a route.",
+      "views": "One unchanged 3-second PCM input surrounded by digital silence in each of three positions"
+    },
+    "planned_rows": 182,
+    "prior": {
+      "previous-freeze.json": "799fa698f3b20b8d0916092faa960778641b1ec6e05ffdc92206bc612d803b43",
+      "previous-manifest.json": "509034819fb11ba344d5616173d97f6cae0d9413d3647276b9921e312da0e95c",
+      "previous-measured.json": "11118e315499846f715e348f7f7a83cd198ee789c065d914b21369271cc25638"
+    },
+    "schema": "chipmunk.independent-overlap-count-freeze/1",
+    "upstream_revision": "ae15e1ac096862667a7bfdedf0b67a70a7543edd"
+  },
+  "fresh_diarization": {
+    "forwards": 72,
+    "freeze_sha256": "c7d86bdb5a20b6bf6b1cbed26335e39eac343e0d5f31ec15dfc59ada84819db0"
+  },
+  "independent_count": {
+    "count_results": {
+      "constructed_count_controls": {
+        "one_source_control": {
+          "center_count_0": 2,
+          "center_count_1": 5,
+          "repeated_count_ge_3": 0
+        },
+        "three_balanced_source_control": {
+          "center_count_0": 5,
+          "center_count_3": 1,
+          "center_count_5": 1,
+          "repeated_count_ge_3": 2
+        },
+        "three_quiet_third_source_control": {
+          "center_count_0": 5,
+          "center_count_3": 1,
+          "center_count_5": 1,
+          "repeated_count_ge_3": 2
+        },
+        "two_source_control": {
+          "center_count_0": 3,
+          "center_count_2": 1,
+          "center_count_3": 2,
+          "center_count_5": 1,
+          "repeated_count_ge_3": 3
+        }
+      },
+      "disjoint_reader_count_controls": {
+        "one_source_control": {
+          "center_count_1": 9,
+          "repeated_count_ge_3": 0
+        },
+        "three_balanced_source_control": {
+          "center_count_2": 5,
+          "center_count_3": 4,
+          "repeated_count_ge_3": 4
+        },
+        "three_quiet_third_source_control": {
+          "center_count_2": 6,
+          "center_count_3": 3,
+          "repeated_count_ge_3": 3
+        },
+        "two_source_control": {
+          "center_count_1": 2,
+          "center_count_2": 7,
+          "repeated_count_ge_3": 0
+        }
+      },
+      "room_point_selection_replay": {
+        "background_only_mostly_single_interferer": {
+          "center_count_0": 1,
+          "repeated_count_ge_3": 0
+        },
+        "background_only_overlapping_interferers": {
+          "center_count_0": 1,
+          "repeated_count_ge_3": 0
+        },
+        "clean": {
+          "center_count_0": 5,
+          "center_count_1": 13,
+          "center_count_3": 1,
+          "repeated_count_ge_3": 1
+        },
+        "mostly_single_interferer": {
+          "center_count_0": 19,
+          "repeated_count_ge_3": 0
+        },
+        "overlapping_interferers": {
+          "center_count_0": 5,
+          "center_count_2": 2,
+          "center_count_3": 12,
+          "repeated_count_ge_3": 11
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "background_only_mostly_single_interferer": {
+          "center_count_0": 1,
+          "repeated_count_ge_3": 0
+        },
+        "background_only_overlapping_interferers": {
+          "center_count_2": 1,
+          "repeated_count_ge_3": 0
+        },
+        "clean": {
+          "center_count_0": 6,
+          "center_count_1": 12,
+          "center_count_2": 1,
+          "repeated_count_ge_3": 0
+        },
+        "mostly_single_interferer": {
+          "center_count_0": 16,
+          "center_count_2": 3,
+          "repeated_count_ge_3": 0
+        },
+        "overlapping_interferers": {
+          "center_count_0": 4,
+          "center_count_2": 1,
+          "center_count_3": 14,
+          "repeated_count_ge_3": 14
+        }
+      }
+    },
+    "effects": {
+      "room_point_selection_replay": {
+        "mostly_single_interferer": {
+          "center_veto": {
+            "raw_point:added_synthetic": 1,
+            "relation_unpaired:added_synthetic": 1
+          },
+          "diarization": {
+            "raw_point:added_synthetic": 1,
+            "relation_unpaired:added_synthetic": 1
+          },
+          "repeat_veto": {
+            "raw_point:added_synthetic": 1,
+            "relation_unpaired:added_synthetic": 1
+          }
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "mostly_single_interferer": {
+          "center_veto": {
+            "raw_point:added_synthetic": 5,
+            "relation_unpaired:added_synthetic": 7
+          },
+          "diarization": {
+            "raw_point:added_synthetic": 5,
+            "relation_unpaired:added_synthetic": 7
+          },
+          "repeat_veto": {
+            "raw_point:added_synthetic": 5,
+            "relation_unpaired:added_synthetic": 7
+          }
+        }
+      }
+    },
+    "elapsed_s": 16.287725459085777,
+    "forwards": 546,
+    "freeze_sha256": "1656d5335c3051f5a835b0659313071f1d6f8b8d3f319f474081eb7e17d33cdf",
+    "frozen_inputs": 182,
+    "qualification_demonstration_count": 5,
+    "response_commitment": "575ee69a7337ae705f0a693abc2383a61095b5e72823defd18bdb5bc938e7976",
+    "routes": {
+      "constructed_count_controls": {
+        "one_source_control": {
+          "center_veto:unassessed": 7,
+          "diarization:unassessed": 7,
+          "repeat_veto:unassessed": 7
+        },
+        "three_balanced_source_control": {
+          "center_veto:overlap_detected": 4,
+          "center_veto:overlap_withheld": 1,
+          "center_veto:single_interferer": 2,
+          "diarization:overlap_detected": 4,
+          "diarization:single_interferer": 3,
+          "repeat_veto:overlap_detected": 4,
+          "repeat_veto:overlap_withheld": 1,
+          "repeat_veto:single_interferer": 2
+        },
+        "three_quiet_third_source_control": {
+          "center_veto:overlap_detected": 3,
+          "center_veto:overlap_withheld": 1,
+          "center_veto:single_interferer": 2,
+          "center_veto:unassessed": 1,
+          "diarization:overlap_detected": 3,
+          "diarization:single_interferer": 3,
+          "diarization:unassessed": 1,
+          "repeat_veto:overlap_detected": 3,
+          "repeat_veto:overlap_withheld": 1,
+          "repeat_veto:single_interferer": 2,
+          "repeat_veto:unassessed": 1
+        },
+        "two_source_control": {
+          "center_veto:overlap_withheld": 1,
+          "center_veto:single_interferer": 4,
+          "center_veto:unassessed": 2,
+          "diarization:single_interferer": 5,
+          "diarization:unassessed": 2,
+          "repeat_veto:overlap_withheld": 1,
+          "repeat_veto:single_interferer": 4,
+          "repeat_veto:unassessed": 2
+        }
+      },
+      "disjoint_reader_count_controls": {
+        "one_source_control": {
+          "center_veto:unassessed": 9,
+          "diarization:unassessed": 9,
+          "repeat_veto:unassessed": 9
+        },
+        "three_balanced_source_control": {
+          "center_veto:overlap_detected": 9,
+          "diarization:overlap_detected": 9,
+          "repeat_veto:overlap_detected": 9
+        },
+        "three_quiet_third_source_control": {
+          "center_veto:overlap_detected": 9,
+          "diarization:overlap_detected": 9,
+          "repeat_veto:overlap_detected": 9
+        },
+        "two_source_control": {
+          "center_veto:single_interferer": 9,
+          "diarization:single_interferer": 9,
+          "repeat_veto:single_interferer": 9
+        }
+      },
+      "room_point_selection_replay": {
+        "background_only_mostly_single_interferer": {
+          "center_veto:unassessed": 1,
+          "diarization:unassessed": 1,
+          "repeat_veto:unassessed": 1
+        },
+        "background_only_overlapping_interferers": {
+          "center_veto:single_interferer": 1,
+          "diarization:single_interferer": 1,
+          "repeat_veto:single_interferer": 1
+        },
+        "clean": {
+          "center_veto:unassessed": 19,
+          "diarization:unassessed": 19,
+          "repeat_veto:unassessed": 19
+        },
+        "mostly_single_interferer": {
+          "center_veto:overlap_detected": 3,
+          "center_veto:single_interferer": 16,
+          "diarization:overlap_detected": 3,
+          "diarization:single_interferer": 16,
+          "repeat_veto:overlap_detected": 3,
+          "repeat_veto:single_interferer": 16
+        },
+        "overlapping_interferers": {
+          "center_veto:overlap_detected": 17,
+          "center_veto:unassessed": 2,
+          "diarization:overlap_detected": 17,
+          "diarization:unassessed": 2,
+          "repeat_veto:overlap_detected": 17,
+          "repeat_veto:unassessed": 2
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "background_only_mostly_single_interferer": {
+          "center_veto:unassessed": 1,
+          "diarization:unassessed": 1,
+          "repeat_veto:unassessed": 1
+        },
+        "background_only_overlapping_interferers": {
+          "center_veto:overlap_detected": 1,
+          "diarization:overlap_detected": 1,
+          "repeat_veto:overlap_detected": 1
+        },
+        "clean": {
+          "center_veto:unassessed": 19,
+          "diarization:unassessed": 19,
+          "repeat_veto:unassessed": 19
+        },
+        "mostly_single_interferer": {
+          "center_veto:overlap_detected": 1,
+          "center_veto:single_interferer": 18,
+          "diarization:overlap_detected": 1,
+          "diarization:single_interferer": 18,
+          "repeat_veto:overlap_detected": 1,
+          "repeat_veto:single_interferer": 18
+        },
+        "overlapping_interferers": {
+          "center_veto:overlap_detected": 19,
+          "diarization:overlap_detected": 19,
+          "repeat_veto:overlap_detected": 19
+        }
+      }
+    },
+    "synthetic_groups_added": {
+      "room_point_selection_replay:center_veto:raw_point": 1,
+      "room_point_selection_replay:center_veto:relation_unpaired": 1,
+      "room_point_selection_replay:diarization:raw_point": 1,
+      "room_point_selection_replay:diarization:relation_unpaired": 1,
+      "room_point_selection_replay:repeat_veto:raw_point": 1,
+      "room_point_selection_replay:repeat_veto:relation_unpaired": 1,
+      "separate_room_confirmation_replay:center_veto:raw_point": 5,
+      "separate_room_confirmation_replay:center_veto:relation_unpaired": 7,
+      "separate_room_confirmation_replay:diarization:raw_point": 5,
+      "separate_room_confirmation_replay:diarization:relation_unpaired": 7,
+      "separate_room_confirmation_replay:repeat_veto:raw_point": 5,
+      "separate_room_confirmation_replay:repeat_veto:relation_unpaired": 7
+    }
+  },
+  "level_replay": {
+    "counts": {
+      "constructed_count_controls": {
+        "one_source_control": {
+          "minus18_dbfs": {
+            "count_0": 3,
+            "count_1": 3,
+            "count_2": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 2,
+            "count_1": 5,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 2,
+            "count_1": 5,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "three_balanced_source_control": {
+          "minus18_dbfs": {
+            "count_0": 6,
+            "count_3": 1,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 2,
+            "peak_limited": 1
+          },
+          "minus24_dbfs": {
+            "count_0": 5,
+            "count_2": 2,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 3,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 1
+          },
+          "original_center": {
+            "count_0": 5,
+            "count_3": 1,
+            "count_5": 1,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 2,
+            "peak_limited": 0
+          }
+        },
+        "three_quiet_third_source_control": {
+          "minus18_dbfs": {
+            "count_0": 5,
+            "count_3": 1,
+            "count_5": 1,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 2,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 6,
+            "count_2": 1,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 3,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 5,
+            "count_3": 1,
+            "count_5": 1,
+            "diarization_two_voices": 3,
+            "overlap_only:routed": 2,
+            "peak_limited": 0
+          }
+        },
+        "two_source_control": {
+          "minus18_dbfs": {
+            "count_0": 3,
+            "count_2": 3,
+            "count_5": 1,
+            "diarization_two_voices": 5,
+            "overlap_only:routed": 5,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 2
+          },
+          "minus24_dbfs": {
+            "count_0": 4,
+            "count_2": 3,
+            "diarization_two_voices": 5,
+            "overlap_only:routed": 5,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 2
+          },
+          "original_center": {
+            "count_0": 3,
+            "count_2": 1,
+            "count_3": 2,
+            "count_5": 1,
+            "diarization_two_voices": 5,
+            "overlap_only:routed": 4,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 1
+          }
+        }
+      },
+      "disjoint_reader_count_controls": {
+        "one_source_control": {
+          "minus18_dbfs": {
+            "count_1": 9,
+            "diarization_two_voices": 0,
+            "peak_limited": 2
+          },
+          "minus24_dbfs": {
+            "count_1": 9,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_1": 9,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "three_balanced_source_control": {
+          "minus18_dbfs": {
+            "count_2": 5,
+            "count_3": 4,
+            "diarization_two_voices": 0,
+            "peak_limited": 2
+          },
+          "minus24_dbfs": {
+            "count_2": 6,
+            "count_3": 3,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_2": 5,
+            "count_3": 4,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "three_quiet_third_source_control": {
+          "minus18_dbfs": {
+            "count_2": 6,
+            "count_3": 3,
+            "diarization_two_voices": 0,
+            "peak_limited": 5
+          },
+          "minus24_dbfs": {
+            "count_2": 7,
+            "count_3": 2,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_2": 6,
+            "count_3": 3,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "two_source_control": {
+          "minus18_dbfs": {
+            "count_1": 2,
+            "count_2": 7,
+            "diarization_two_voices": 9,
+            "overlap_only:routed": 9,
+            "peak_limited": 6,
+            "zero_or_overlap:routed": 9
+          },
+          "minus24_dbfs": {
+            "count_1": 2,
+            "count_2": 7,
+            "diarization_two_voices": 9,
+            "overlap_only:routed": 9,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 9
+          },
+          "original_center": {
+            "count_1": 2,
+            "count_2": 7,
+            "diarization_two_voices": 9,
+            "overlap_only:routed": 9,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 9
+          }
+        }
+      },
+      "room_point_selection_replay": {
+        "background_only_mostly_single_interferer": {
+          "minus18_dbfs": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "background_only_overlapping_interferers": {
+          "minus18_dbfs": {
+            "count_0": 1,
+            "diarization_two_voices": 1,
+            "overlap_only:routed": 1,
+            "peak_limited": 1
+          },
+          "minus24_dbfs": {
+            "count_2": 1,
+            "diarization_two_voices": 1,
+            "overlap_only:routed": 1,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 1
+          },
+          "original_center": {
+            "count_0": 1,
+            "diarization_two_voices": 1,
+            "overlap_only:routed": 1,
+            "peak_limited": 0
+          }
+        },
+        "clean": {
+          "minus18_dbfs": {
+            "count_0": 2,
+            "count_1": 12,
+            "count_2": 4,
+            "count_3": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 2
+          },
+          "minus24_dbfs": {
+            "count_0": 1,
+            "count_1": 15,
+            "count_2": 2,
+            "count_3": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 5,
+            "count_1": 13,
+            "count_3": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "mostly_single_interferer": {
+          "minus18_dbfs": {
+            "count_0": 19,
+            "diarization_two_voices": 16,
+            "overlap_only:added_synthetic": 1,
+            "overlap_only:routed": 16,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 18,
+            "count_2": 1,
+            "diarization_two_voices": 16,
+            "overlap_only:added_synthetic": 1,
+            "overlap_only:routed": 16,
+            "peak_limited": 0,
+            "zero_or_overlap:routed": 1
+          },
+          "original_center": {
+            "count_0": 19,
+            "diarization_two_voices": 16,
+            "overlap_only:added_synthetic": 1,
+            "overlap_only:routed": 16,
+            "peak_limited": 0
+          }
+        },
+        "overlapping_interferers": {
+          "minus18_dbfs": {
+            "count_0": 4,
+            "count_2": 2,
+            "count_3": 12,
+            "count_5": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 15
+          },
+          "minus24_dbfs": {
+            "count_0": 2,
+            "count_2": 3,
+            "count_3": 14,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 5,
+            "count_2": 2,
+            "count_3": 12,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        }
+      },
+      "separate_room_confirmation_replay": {
+        "background_only_mostly_single_interferer": {
+          "minus18_dbfs": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "background_only_overlapping_interferers": {
+          "minus18_dbfs": {
+            "count_3": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_2": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_2": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "clean": {
+          "minus18_dbfs": {
+            "count_0": 4,
+            "count_1": 13,
+            "count_2": 2,
+            "diarization_two_voices": 0,
+            "peak_limited": 4
+          },
+          "minus24_dbfs": {
+            "count_0": 3,
+            "count_1": 15,
+            "count_2": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 6,
+            "count_1": 12,
+            "count_2": 1,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        },
+        "mostly_single_interferer": {
+          "minus18_dbfs": {
+            "count_0": 14,
+            "count_2": 5,
+            "diarization_two_voices": 18,
+            "overlap_only:added_synthetic": 7,
+            "overlap_only:routed": 18,
+            "peak_limited": 0,
+            "zero_or_overlap:added_synthetic": 4,
+            "zero_or_overlap:routed": 5
+          },
+          "minus24_dbfs": {
+            "count_0": 11,
+            "count_2": 8,
+            "diarization_two_voices": 18,
+            "overlap_only:added_synthetic": 7,
+            "overlap_only:routed": 18,
+            "peak_limited": 0,
+            "zero_or_overlap:added_synthetic": 5,
+            "zero_or_overlap:routed": 7
+          },
+          "original_center": {
+            "count_0": 16,
+            "count_2": 3,
+            "diarization_two_voices": 18,
+            "overlap_only:added_synthetic": 7,
+            "overlap_only:routed": 18,
+            "peak_limited": 0,
+            "zero_or_overlap:added_synthetic": 3,
+            "zero_or_overlap:routed": 3
+          }
+        },
+        "overlapping_interferers": {
+          "minus18_dbfs": {
+            "count_0": 4,
+            "count_3": 15,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "minus24_dbfs": {
+            "count_0": 4,
+            "count_3": 15,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          },
+          "original_center": {
+            "count_0": 4,
+            "count_2": 1,
+            "count_3": 14,
+            "diarization_two_voices": 0,
+            "peak_limited": 0
+          }
+        }
+      }
+    },
+    "freeze_sha256": "2ae258420bfcbfa88867b5b66dd7827ade77e6f88531e77d19bfb367f2e49d63",
+    "plan": {
+      "implementation_sha256": "222655d25791f10736885753f189578ec18dc2fb48d32b30cd728422ae51f901",
+      "method": {
+        "inputs": "Consumed 182 exact recordings from the independent overlap-count comparison",
+        "level_targets_dbfs_rms": {
+          "minus18_dbfs": -18,
+          "minus24_dbfs": -24
+        },
+        "method": "Multiply the entire original signal by one scalar before centered silence padding. No clipping or waveform dynamics. Compare an explicit three-or-more prediction and a variant that also withholds an implausible zero count.",
+        "peak_limit": 0.95
+      },
+      "new_count_forwards": 364,
+      "original_freeze_sha256": "1656d5335c3051f5a835b0659313071f1d6f8b8d3f319f474081eb7e17d33cdf",
+      "original_responses_sha256": "575ee69a7337ae705f0a693abc2383a61095b5e72823defd18bdb5bc938e7976",
+      "schema": "chipmunk.overlap-level-replay/1"
+    },
+    "response_sha256": "2ef23c8118e935065741a7a2a1bddd66e503e79ee5e9a9056c57070235a8f61e"
+  },
+  "numerical_qualification": [
+    {
+      "argmax": 5,
+      "max_response_difference": 1.4901161193847656e-08,
+      "name": "publisher_demonstration"
+    },
+    {
+      "argmax": 0,
+      "max_response_difference": 1.262177448353619e-29,
+      "name": "authored_silence"
+    }
+  ],
+  "schema": "chipmunk.independent-audio-overlap-comparison/1",
+  "scope": "Development comparisons of acoustic routing. No detector or customer confidence change.",
+  "source_group_qualification": {
+    "planned_triads": 9,
+    "qualified_triads": 9
+  }
+}

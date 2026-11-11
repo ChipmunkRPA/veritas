@@ -669,6 +669,13 @@ customers or unknown generators. Report all original/edit counts alongside rates
 
 ## Review an audio supplement by acoustic condition
 
+The [independent speaker-count comparison](audio-independent-overlap-count-2026-11-11.md)
+includes a fixed acoustic routing replay with recorded input hashes, the author
+checkpoint and scaler commitments, and separate controlled and natural-room
+counts. An evaluator can replay the original five-second count and the two
+level-normalized variants with the published method and locally held source
+permissions. The decision review below works from a receipt without these weights.
+
 The standard-library reviewer replays the effect of adding a second audio
 response only where the current check was inconclusive. The authored example
 uses fictional source groups, score values and routes. It reproduces the

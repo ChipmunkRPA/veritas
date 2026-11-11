@@ -1,0 +1,24 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-genuine-freeze/192",
+  "code_sha256": {
+    "backend/scripts/audio_voxforge_tr_genuine_v192.py": "7362fc3d2f5a164b46f62b7750240679962734a6f65eae6da4487213bba210ee",
+    "backend/tests/test_audio_voxforge_tr_genuine_v192.py": "87696ee0a626a6c963cf3352fbb406fa149cabe19149446d0d83749d735ff4d8",
+    "docs/audio-voxforge-tr-genuine-v192-method.md": "613d6425b5ed5f54001d1451632250a494376f0be779c11d18606e846479ddb9"
+  },
+  "prior_preparation_freeze_sha256": "bb09d2b66f49fb0296d9399c621fd560601b94db9d0e5e24464738ecf76cb18b",
+  "prior_preparation_result_sha256": "f105c6b33be8ae5342bb0c89669b5ff278623a55ea9639de41550c0bca386050",
+  "prior_preparation_profile_sha256": "ac442c9acd860f5fdea72c291eef6eac4503965240da3c221704fb7484f8305a",
+  "prior_private_attempts_sha256": "358dc0cd20d60f710634d3608dd556ae92aea1d2e1710b37f32e159850b48526",
+  "private_acquisition_sha256": "7ae5cd6f5071780eef120dc805ccf794b52353aba7f3b2c5c02cab85b61481ff",
+  "stock_gpl_reference_sha256": [
+    "38cb1cce91733ded27d417c5d58862ed7e3785847878de213afa43e34e35eaf1",
+    "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  ],
+  "stock_gpl_normalized_sha256": "13e61ba5071e671e299fb8dec45a6786c3c6aa4efef1dc3c7c772f16dfb69cf3",
+  "planned_cases": 12,
+  "planned_session_archives": 15,
+  "language": "tr",
+  "origin": "genuine",
+  "model_calls_permitted": false,
+  "holdout_access_permitted": false
+}

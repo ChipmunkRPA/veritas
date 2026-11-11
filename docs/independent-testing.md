@@ -66,6 +66,8 @@ counts the directions that a fixed mono-plus-channel rule would change. The
 with mono on separate sources and reports the effects by noise condition.
 The [AMI intake](audio-ami-native-stereo-v291-result.md) adds 24 naturally
 recorded two-microphone windows for a separate genuine-audio test.
+Its [stereo transfer comparison](audio-ami-stereo-transfer-v293-result.md)
+reports identical decisions and unchanged coverage across both rules.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

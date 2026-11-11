@@ -1,0 +1,104 @@
+{
+  "by_session": {
+    "ES2004a": {
+      "ai_only_rescue": {
+        "assessed": 2,
+        "false_ai": 0,
+        "inconclusive": 0,
+        "original": 2,
+        "planned": 12,
+        "unassessed": 10
+      },
+      "mono": {
+        "assessed": 2,
+        "false_ai": 0,
+        "inconclusive": 0,
+        "original": 2,
+        "planned": 12,
+        "unassessed": 10
+      }
+    },
+    "IS1009a": {
+      "ai_only_rescue": {
+        "assessed": 7,
+        "false_ai": 0,
+        "inconclusive": 4,
+        "original": 3,
+        "planned": 12,
+        "unassessed": 5
+      },
+      "mono": {
+        "assessed": 7,
+        "false_ai": 0,
+        "inconclusive": 4,
+        "original": 3,
+        "planned": 12,
+        "unassessed": 5
+      }
+    }
+  },
+  "classifier": {
+    "assessed_views": 10,
+    "classifier_plan_sha256": "11ed19d56ad51b3babf4df0dfaea53e2da159d0465c61c79d8a86d58d6192c52",
+    "freeze_sha256": "919885c792e4128f51646ad0fc803fa0020c6aeddb414969b802ab12c761e76e",
+    "new_neural_calls": 16,
+    "private_score_journal_sha256": "20fa54698df935e631f2486ec4ac8f94ebaa658ea063f17e96d0bc8b72cb9248",
+    "resource_profile_sha256": "d05086f259f2ce01d667bbaecffca3c135fc58f9dd8bcdb35398d3305e915a2b",
+    "schema": "chipmunk.audio-ami-stereo-transfer-classifier-result/293",
+    "stability_probe_counts": {
+      "computed": 6,
+      "not_required_for_decision": 4
+    },
+    "status": "complete",
+    "vad_forwards": 0,
+    "worker_duration_seconds": 20.396190666942857
+  },
+  "freeze_sha256": "919885c792e4128f51646ad0fc803fa0020c6aeddb414969b802ab12c761e76e",
+  "gate_by_session": {
+    "ES2004a": {
+      "additional_admission": 0,
+      "mono_admitted": 2,
+      "mono_or_selected_admitted": 2,
+      "planned": 12,
+      "selected_admitted": 0,
+      "selection_available": 0,
+      "swap_invariant": 12
+    },
+    "IS1009a": {
+      "additional_admission": 0,
+      "mono_admitted": 7,
+      "mono_or_selected_admitted": 7,
+      "planned": 12,
+      "selected_admitted": 1,
+      "selection_available": 1,
+      "swap_invariant": 12
+    }
+  },
+  "gate_profile_sha256": "3f7af480d8e53f067c2226196cd4f6833be20bb0156a0875cda589421ad276a5",
+  "gate_result_sha256": "82615a4edb2faad8ea744834dcd2600afb3a5609c70a97589748a357c79388ca",
+  "overall": {
+    "ai_only_rescue": {
+      "assessed": 9,
+      "false_ai": 0,
+      "inconclusive": 4,
+      "original": 5,
+      "planned": 24,
+      "unassessed": 15
+    },
+    "mono": {
+      "assessed": 9,
+      "false_ai": 0,
+      "inconclusive": 4,
+      "original": 5,
+      "planned": 24,
+      "unassessed": 15
+    }
+  },
+  "planned_cases": 24,
+  "schema": "chipmunk.audio-ami-stereo-transfer-complete/293",
+  "serving_changed": false,
+  "sessions": 2,
+  "source": "v291 AMI genuine-only natural stereo",
+  "status": "complete",
+  "vad_frame_forwards": 6768
+}

@@ -21,7 +21,7 @@ from app.detectors.video.adapters.audio import AudioClassifier, GustkingVoiceDet
 from app.engine.boundary import DetectorRunRecord
 from app.engine.detector import DetectorResult, Profile, UnitScore
 from app.engine.stages.common import DbRunStore
-from app.evidence.audio_binding import unscored_voice_intervals
+from app.evidence.audio_binding import source_clock_context, unscored_voice_intervals
 from app.evidence.audio_packets import (
     PacketIntegrityError,
     build_packet_set,
@@ -108,16 +108,25 @@ def test_timestamp_discontinuity_remains_two_ranges():
 
 
 @pytest.fixture
-def audio_fixture(tmp_path):
+def audio_fixture(tmp_path, request):
     source_path = tmp_path / "source.wav"
-    _write_source(source_path)
+    if getattr(request, "param", None) == "clock_gap":
+        _write_source(source_path, rate=16000, channels=1)
+        shifted = tmp_path / "clock-gap.mka"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(source_path),
+                        "-af", r"asetnsamples=n=1600:p=0,asetpts=PTS+if(gte(N\,64000)\,16000\,0)",
+                        "-c:a", "pcm_s16le", str(shifted)], check=True, capture_output=True, timeout=20)
+        source_path = shifted
+    else:
+        _write_source(source_path)
     store = ObjectStore(tmp_path / "objects")
     source = store.put_file(source_path)
     decoded = decode_audio(source_path, source_sha256=source.sha256)
     engine = create_engine("sqlite://")
     Base.metadata.create_all(engine)
     with Session(engine) as db:
-        analysis = Analysis(id="audio-evidence-test", kind="audio", filename="source.wav", content_type="audio/wav",
+        content_type = "audio/x-matroska" if source_path.suffix == ".mka" else "audio/wav"
+        analysis = Analysis(id="audio-evidence-test", kind="audio", filename=source_path.name, content_type=content_type,
                             size_bytes=source.size_bytes, sha256=source.sha256, status="done", revision=1)
         db.add(analysis)
         db.flush()
@@ -154,6 +163,10 @@ def test_packet_clips_equal_the_complete_scored_samples_and_context(audio_fixtur
     assert doc["coverage"]["scored_samples"] == len(pcm)  # overlapping windows are counted only once
     assert doc["coverage"]["unscored_samples"] == 0
     assert doc["coverage"]["unscored_intervals"] == []
+    assert doc["coverage"]["source_clock_context"] == {
+        "affects_overall_confidence": False, "time_base": "1/16000", "minimum_jump_samples": 320,
+        "checked_samples": len(pcm), "total_discontinuities": 0, "scored_windows_crossing": 0, "breaks": [],
+    }
     assert len(doc["packets"]) == 1
     packet = doc["packets"][0]
     assert packet["interval"] == {"start_sample": 32000, "end_sample": 96000}
@@ -166,6 +179,70 @@ def test_packet_clips_equal_the_complete_scored_samples_and_context(audio_fixtur
     for name in ("waveform", "scores"):
         assert Image.open(io.BytesIO(store.read_bytes(packet["artifacts"][name]["sha256"]))).size == (960, 280)
     assert result == before and analysis.result_hash == canonical_hash(before)
+
+
+def test_audio_clock_context_keeps_large_backwards_and_forward_breaks_with_one_window_count():
+    source = {"samples": 32000, "timeline_time_base": "1/16000", "timeline": [
+        {"start_sample": 0, "end_sample": 8000, "source_pts": 0},
+        {"start_sample": 8000, "end_sample": 16000, "source_pts": 8016},
+        {"start_sample": 16000, "end_sample": 24000, "source_pts": 15200},
+        {"start_sample": 24000, "end_sample": 32000, "source_pts": 26200},
+    ]}
+    coverage = {"windows": [{"start_sample": 0, "end_sample": 32000}, {"start_sample": 16000, "end_sample": 24000}]}
+    measured = source_clock_context(coverage, source)
+    assert measured["total_discontinuities"] == 2 and measured["scored_windows_crossing"] == 1
+    assert [(row["boundary_sample"], row["jump_samples"], row["scored_windows_crossing"]) for row in measured["breaks"]] == [
+        (16000, -816, 1), (24000, 3000, 1),
+    ]
+
+
+@pytest.mark.parametrize("audio_fixture", ["clock_gap"], indirect=True)
+def test_source_clock_context_matches_a_real_gap_in_json_and_pdf(audio_fixture, tmp_path, monkeypatch):
+    from test_video_nested_evidence import _check_public_zip
+
+    from app.reports import engine, multimedia_evidence
+    from app.reports.specimens import specimen
+
+    db, store, analysis, result, pcm, _ = audio_fixture
+    original = specimen("audio", "standard")
+    result = {**original.result, **result}
+    analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
+    document = build_packet_set(db, analysis, store, result)
+    measured = document["coverage"]["source_clock_context"]
+    assert measured == {"affects_overall_confidence": False, "time_base": "1/16000", "minimum_jump_samples": 320,
+                        "checked_samples": len(pcm), "total_discontinuities": 1, "scored_windows_crossing": 1,
+                        "breaks": [{"boundary_sample": 64000, "jump_samples": 16000, "scored_windows_crossing": 1,
+                                    "before": {"start_sample": 0, "end_sample": 64000, "source_start_pts": 0, "source_end_pts": 64000},
+                                    "after": {"start_sample": 64000, "end_sample": 128000,
+                                              "source_start_pts": 80000, "source_end_pts": 144000}}]}
+    assert document["coverage"]["scored_samples"] == len(pcm)
+    assert len(document["coverage"]["windows"]) == 3
+    forged = deepcopy(document)
+    forged["coverage"]["source_clock_context"]["breaks"][0]["jump_samples"] += 1
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(PacketIntegrityError, match="Audio source clock observations differ"):
+        validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
+                            original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    legacy = deepcopy(document)
+    del legacy["coverage"]["source_clock_context"]
+    legacy["sha256"] = packet_hash(legacy)
+    validate_packet_set(legacy, analysis_id=analysis.id, revision=analysis.revision,
+                        original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+
+    snapshot = original.model_copy(update={"result": result, "evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": analysis.sha256, "size_bytes": analysis.size_bytes,
+                                                    "filename": analysis.filename, "content_type": analysis.content_type}),
+        "report": original.report.model_copy(update={"template_set": engine.TEMPLATE_SET})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(snapshot)
+    text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Audio source clock breaks" in text and "At 4.000 s of analyzed audio" in text
+    assert "On the original timeline, the audio spans 0.000 s to 4.000 s before the break and 5.000 s to 9.000 s after it." in text
+    assert "1 recorded voice window crosses this break." in text and "/coverage/source_clock_context" in text
+    assert "carries zero weight" in text
+    _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=snapshot, document=document),
+                      tmp_path, monkeypatch, rendered.pdf, source_audio=tmp_path / analysis.filename)
 
 
 def test_current_audio_requires_source_bound_acoustics_but_legacy_remains_readable(audio_fixture):

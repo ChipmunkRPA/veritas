@@ -267,10 +267,12 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
         out["custody"]["actor_note"] = "This customer log identifies the service that recorded each event. Original account identities and signed event bytes remain in the internal audit record."
     # Empty human-review workflows do not belong in automated customer reports.
     out["sections"] = [s for s in out.get("sections", []) if s.get("key") not in {"appendix-c", "signoff"}]
-    if out["sections"] and (out.get("evidence") or out.get("image_evidence")):
+    has_image_evidence = (out.get("image_evidence") or {}).get("available")
+    has_multimedia_evidence = (out.get("evidence") or {}).get("available")
+    if out["sections"] and (has_image_evidence or has_multimedia_evidence):
         position = next((i + 1 for i, s in enumerate(out["sections"]) if s.get("key") == "findings"), 0)
         out["sections"].insert(position, {"key": "source-evidence", "number": "2A", "title": "Source evidence",
-                                         "href": "#image-evidence-heading" if out.get("image_evidence") else "#multimedia-evidence-heading"})
+                                         "href": "#image-evidence-heading" if has_image_evidence else "#multimedia-evidence-heading"})
         out.setdefault("number", {})["source-evidence"] = "2A"
     for section in out["sections"]:
         if section.get("key") == "detectors":

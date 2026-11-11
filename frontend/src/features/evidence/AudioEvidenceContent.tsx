@@ -28,6 +28,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
 }) {
   const rate = set.source.sample_rate
+  const clock = set.coverage?.source_clock_context
   const stereo = set.stereo_context
   const stereoOverlaps = set.coverage?.stereo_attenuation_overlaps?.flatMap((overlap) => {
     const measurement = stereo?.windows[overlap.stereo_window_index]?.downmix
@@ -72,6 +73,21 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
+      {clock && <section aria-label="Audio source clock breaks" className="mt-3">
+        <h3 className="m-0 font-medium">Audio source clock breaks</h3>
+        {clock.total_discontinuities ? <>
+          <p className="mt-2 mb-0">The decoded listening copy joins these source spans. {clock.scored_windows_crossing} recorded voice {clock.scored_windows_crossing === 1 ? 'window crosses' : 'windows cross'} a source clock break. This timing check carries zero weight in the AI assessment.</p>
+          <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">
+            {clock.breaks.map((item) => <li key={item.boundary_sample}>
+              <p className="m-0">At {seconds(item.boundary_sample / rate)} of analyzed audio. Source timestamp {item.jump_samples > 0 ? 'gap' : 'overlap'} of {measurementValue(Math.abs(item.jump_samples) * 1000 / rate)} ms.</p>
+              <p className="m-0 text-caption">On the original timeline, the audio spans {seconds(item.before.source_start_pts / rate)} to {seconds(item.before.source_end_pts / rate)} before the break and {seconds(item.after.source_start_pts / rate)} to {seconds(item.after.source_end_pts / rate)} after it.</p>
+              <p className="m-0">{item.scored_windows_crossing} recorded voice {item.scored_windows_crossing === 1 ? 'window crosses' : 'windows cross'} this break.</p>
+            </li>)}
+          </ul>
+          <p className="mt-2 mb-0">This check lists jumps of at least {measurementValue(clock.minimum_jump_samples * 1000 / rate)} ms.
+            {clock.total_discontinuities > clock.breaks.length && ` Showing the ${clock.breaks.length} largest of ${clock.total_discontinuities} breaks. The full source timeline is in JSON.`}</p>
+        </> : <p className="mt-2 mb-0">No source clock break of at least {measurementValue(clock.minimum_jump_samples * 1000 / rate)} ms was measured in {seconds(clock.checked_samples / rate)} of decoded audio. This timing check carries zero weight in the AI assessment.</p>}
+      </section>}
       {!!set.coverage.unscored_intervals?.length && <details className="mt-3">
         <summary className="cursor-pointer font-medium">Unscored voice intervals</summary>
         <p className="mt-2 mb-0">These times have no recorded voice response. Background sound can affect coverage, and the gap alone does not establish its cause.</p>

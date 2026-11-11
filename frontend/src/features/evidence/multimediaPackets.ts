@@ -127,6 +127,13 @@ export interface AudioSimilarityContext extends AudioRepeatRecord {
     first: AudioRepeatSpan & { pcm_s16le_sha256: string }; second: AudioRepeatSpan & { pcm_s16le_sha256: string };
     support_windows: number })[]
 }
+type AudioClockSpan = SampleInterval & { source_start_pts: number; source_end_pts: number }
+export interface AudioSourceClockContext {
+  affects_overall_confidence: false; time_base: string; minimum_jump_samples: number; checked_samples: number
+  total_discontinuities: number; scored_windows_crossing: number
+  breaks: { boundary_sample: number; jump_samples: number; before: AudioClockSpan; after: AudioClockSpan;
+    scored_windows_crossing: number }[]
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
@@ -134,6 +141,7 @@ export interface AudioEvidenceSet extends SetBase {
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];
+    source_clock_context?: AudioSourceClockContext;
     unscored_intervals?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[];
     stereo_attenuation_overlaps?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
       unscored_interval_index: number; stereo_window_index: number })[] }

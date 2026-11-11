@@ -65,6 +65,13 @@ def test_reports_using_the_old_headline_rule_require_a_new_copy(kind):
         assert check(v2_reports.engine.TEMPLATE_SET, kind)
 
 
+def test_previous_public_safe_report_stays_downloadable_after_clock_evidence_update():
+    from app.reports.public_policy import downloadable_template, package_template
+
+    assert downloadable_template('veritas-report-2.0.r83', 'audio')
+    assert package_template('veritas-report-2.0.r83', 'audio')
+
+
 def test_r60_report_with_private_contribution_prose_is_preserved_but_withheld(monkeypatch):
     from app.reports.public_policy import downloadable_template, package_template
 

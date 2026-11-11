@@ -421,7 +421,8 @@ def _verify(args: argparse.Namespace) -> int:
                                        expect_key_id=args.expect_key_id,
                                        source_image=Path(args.source_image) if args.source_image else None,
                                        source_audio=Path(args.source_audio) if args.source_audio else None,
-                                       source_video=Path(args.source_video) if args.source_video else None)
+                                       source_video=Path(args.source_video) if args.source_video else None,
+                                       source_document=Path(args.source_document) if args.source_document else None)
     except (verify.PackageUnreadable, verify.PinInvalid, OSError) as e:
         print(f"error: {e}", file=sys.stderr)
         return verify.EXIT_ERROR
@@ -1159,6 +1160,7 @@ def build_parser() -> argparse.ArgumentParser:
     source.add_argument("--source-image", metavar="IMAGE", help="compare crops in a public image package with a local original")
     source.add_argument("--source-audio", metavar="MEDIA", help="compare clip samples and timestamps with a local audio or video original")
     source.add_argument("--source-video", metavar="VIDEO", help="compare frames, crops and mouth patches with a local video original")
+    source.add_argument("--source-document", metavar="DOCUMENT", help="compare excerpts, positions and native PDF images with a local original")
     p_package_verify.add_argument("--json", action="store_true")
     p_package_verify.set_defaults(func=_verify)
 

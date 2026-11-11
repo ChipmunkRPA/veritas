@@ -122,6 +122,7 @@ def test_summary_pdf_shows_exact_unscored_voice_times(audio_fixture, monkeypatch
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "No source clock break of at least 20 ms was measured in 8.000 s of decoded audio." in text
     assert "Unscored voice intervals" in text
     assert "the gap alone does not establish its cause" in text
     assert "Analyzed audio 6.000–8.000 s. Source PTS [96000, 128000) at 1/16000." in text

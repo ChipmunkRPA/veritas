@@ -11,6 +11,23 @@
 | Air-gapped | on a connected host `VERITAS_BAKE_MODELS=full make up` (or `docker build --platform linux/amd64 --build-arg VERITAS_BUILD_COMMIT=$(git rev-parse HEAD) --build-arg BAKE_MODELS=full ./backend`), `docker save`, then `docker load` on the target | the build fetches and verifies the weights into `/models`; on the target `models-init` finds every file installed and only re-hashes |
 | Single process, no container | build the frontend (`make build`) and start `uvicorn` from `backend/` ("A prod start without a container", below); the API serves `frontend/dist` at `/` when present | in-process worker (`VERITAS_RUN_WORKER=true`, the default). No image holds both the page and the API: in Docker they are the `web` and `api` containers |
 
+### Supplemental local checks
+
+These options use pinned local weights and affect new analyses. For local development,
+set them in `backend/.env` and restart the API and worker while the queue is idle.
+Check capacity with `python -m app.cli models plan` from the backend directory.
+
+| Setting | Where it runs | What the evidence shows |
+|---|---|---|
+| `VERITAS_IMAGE_REGION_MODE=candidate` | Full or Deep, supported upright RGB PNGs. The region check runs on CPU. | Source crops, masks and the exact area flagged by either or both eligible region checks. The sensitive check found 45/59 known edited areas versus 10/59, with flags on 13/59 untouched inputs versus 3/59 on that panel. [Confirmation](image-native-confirmation-v46-result.md) · [App evidence](native-regional-evidence-replay-v51-result.md) |
+| `VERITAS_VIDEO_WHOLE_FACE_REVIEW=true` | Quick, Full or Deep, supported videos with a verified native frame clock. | A face-swap cue across six sampled frames with representative original frames and crops. The paired check flagged 45/48 whole-clip swaps versus 26/48, with 0/24 original flags in both arms on that panel. A separate transfer missed the outside publisher's swap and flagged two variants of one camera recording. [Confirmation](video-face-pe-confirmation-2026-11-11.md) · [Outside transfer](video-face-pe-publisher-2026-11-11.md) |
+| `VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW=true` | Eligible plain-text articles with the local candidate text mode selected. | Additional readings of up to two complete paragraphs without their surrounding context. The same classifier supplies both readings, and some genres produced frequent human-writing flags in evaluation. [Replication](writing-paragraph-replication-2026-11-11.md) |
+
+These checks have zero overall confidence weight. The image evidence does not attribute
+an edit to AI, and six video samples cannot establish the boundaries of a short swap.
+The rollback values are `VERITAS_IMAGE_REGION_MODE=legacy`,
+`VERITAS_VIDEO_WHOLE_FACE_REVIEW=false` and `VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW=false`.
+
 **A prod start without a container.** The command line of the row "Single process, no container", from `backend/`,
 with the flags of the image's own command and the loopback address (put a TLS proxy in front: "TLS"):
 

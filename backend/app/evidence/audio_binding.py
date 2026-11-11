@@ -3,9 +3,12 @@ from __future__ import annotations
 
 import math
 import re
-from bisect import bisect_right
+from bisect import bisect_left, bisect_right
 
 from app.core.canonical import canonical_hash
+
+_CLOCK_BREAK_MIN_SAMPLES = 320
+_CLOCK_BREAK_MAX_ROWS = 8
 
 
 def unscored_voice_intervals(coverage: dict, source: dict) -> list[dict]:
@@ -98,6 +101,34 @@ def attach_stereo_attenuation_overlaps(channel: dict) -> None:
         coverage["stereo_attenuation_overlaps"] = overlaps
 
 
+def source_clock_context(coverage: dict, source: dict) -> dict:
+    """Measure material source timestamp jumps in the already validated PCM mapping."""
+    blocks = source["timeline"]
+    breaks = []
+    for before, after in zip(blocks, blocks[1:]):
+        previous_end = before["source_pts"] + before["end_sample"] - before["start_sample"]
+        delta = after["source_pts"] - previous_end
+        if abs(delta) >= _CLOCK_BREAK_MIN_SAMPLES:
+            breaks.append((after["start_sample"], delta, before, after))
+    positions = [position for position, _, _, _ in breaks]
+    windows = coverage["windows"]
+    cross_count = sum(bisect_right(positions, row["start_sample"]) < bisect_left(positions, row["end_sample"])
+                      for row in windows)
+    strongest = sorted(breaks, key=lambda item: (-abs(item[1]), item[0]))[:_CLOCK_BREAK_MAX_ROWS]
+
+    def span(block):
+        start, end, pts = block["start_sample"], block["end_sample"], block["source_pts"]
+        return {"start_sample": start, "end_sample": end, "source_start_pts": pts, "source_end_pts": pts + end - start}
+
+    return {"affects_overall_confidence": False, "time_base": source["timeline_time_base"],
+            "minimum_jump_samples": _CLOCK_BREAK_MIN_SAMPLES, "checked_samples": source["samples"],
+            "total_discontinuities": len(breaks),
+            "scored_windows_crossing": cross_count,
+            "breaks": [{"boundary_sample": position, "jump_samples": delta, "before": span(before), "after": span(after),
+                        "scored_windows_crossing": sum(row["start_sample"] < position < row["end_sample"] for row in windows)}
+                       for position, delta, before, after in sorted(strongest, key=lambda item: item[0])]}
+
+
 def _timeline_ranges(source: dict, start: int, end: int) -> list[dict]:
     output = []
     for block in source["timeline"]:
@@ -110,11 +141,15 @@ def _timeline_ranges(source: dict, start: int, end: int) -> list[dict]:
 
 
 def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict | None = None) -> None:
-    if "unscored_intervals" not in coverage and "stereo_attenuation_overlaps" not in coverage:
+    if not {"unscored_intervals", "stereo_attenuation_overlaps", "source_clock_context"}.intersection(coverage):
         return
     gaps = unscored_voice_intervals(coverage, source)
     if canonical_hash(coverage.get("unscored_intervals")) != canonical_hash(gaps):
         raise ValueError("Unscored voice intervals differ from their source clocks or recorded windows")
+    if "source_clock_context" in coverage:
+        clock_context = source_clock_context(coverage, source)
+        if canonical_hash(coverage["source_clock_context"]) != canonical_hash(clock_context):
+            raise ValueError("Audio source clock observations differ from the exact source timeline or recorded windows")
     if "stereo_attenuation_overlaps" not in coverage:
         return
     from app.evidence.stereo_binding import SCHEMA, validate

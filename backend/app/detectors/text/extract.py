@@ -424,7 +424,7 @@ def hybrid_ocr_notice(ocr_pages: list[dict]) -> str:
     return f"{subject} mapped text with text transcribed from image areas. Authorship confidence has not been validated for this mixed extraction."
 
 
-def extract_pdf(path: Path) -> Document:
+def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     import pymupdf
 
     page_parts: list[list[tuple[str, dict]]] = []
@@ -437,6 +437,8 @@ def extract_pdf(path: Path) -> Document:
 
     def recognize(page, image_box=None):
         nonlocal runtime, raster_bytes
+        if not allow_ocr:
+            raise ValueError("Original-document replay supports native PDF text only. This PDF requires OCR.")
         scope = "image area" if image_box is not None else "page"
         if len(ocr_pages) >= OCR_MAX_PAGES or raster_bytes >= OCR_MAX_RASTER_BYTES:
             parts, info, raster = [], {"page": page.number + 1, "status": "unchecked",
@@ -701,10 +703,10 @@ def extract_eml(path: Path) -> Document:
     return document
 
 
-def extract(path: Path, ext: str) -> Document:
+def extract(path: Path, ext: str, *, allow_ocr: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
-        d = extract_pdf(path)
+        d = extract_pdf(path, allow_ocr=allow_ocr)
     elif ext == ".docx":
         d = extract_docx(path)
     elif ext == ".eml":

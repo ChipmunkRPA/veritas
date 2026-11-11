@@ -30,6 +30,7 @@ whole chain is verified on the instance (`app.cli audit verify`).
 The optional `--source-image IMAGE` check uses Pillow to compare unannotated crops with the submitted original locally.
 The optional `--source-audio MEDIA` check uses FFmpeg to compare exact samples and source timestamps from an audio or video original.
 The optional `--source-video VIDEO` check compares native frames, crops, and measurement inputs with the video original.
+The optional `--source-document DOCUMENT` check compares exact extracted text, source positions, and native PDF images.
 """
 from __future__ import annotations
 
@@ -135,7 +136,8 @@ def event_hash(prev_hash: str, event: Mapping[str, Any]) -> str:
 
 
 def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_key_id: str | None = None,
-                   source_image: Path | None = None, source_audio: Path | None = None, source_video: Path | None = None) -> Verification:
+                   source_image: Path | None = None, source_audio: Path | None = None, source_video: Path | None = None,
+                   source_document: Path | None = None) -> Verification:
     """Check the package at `path`. `public_key_pem` and `expect_key_id` pin the signer; without either the best outcome is
     `self_consistent` (`ok` false). Raises `PinInvalid` for a key id of the wrong form and `PackageUnreadable` for a non-archive."""
     expected = None if expect_key_id is None else key_id_pin(expect_key_id)
@@ -154,6 +156,8 @@ def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_ke
                 out.checks.append(_audio_source(zf, out.bundle, source_audio))
             if out.consistent and source_video is not None:
                 out.checks.append(_video_source(zf, out.bundle, source_video))
+            if out.consistent and source_document is not None:
+                out.checks.append(_document_source(zf, out.bundle, source_document))
             return out
         except (zipfile.BadZipFile, zlib.error, EOFError, OSError, NotImplementedError) as e:  # a CRC failure or a damaged entry
             out.checks.append(Check("readable", False, f"an entry cannot be read ({type(e).__name__}: {e})"))
@@ -197,6 +201,22 @@ def _video_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Che
         return Check(name, True, verify_video_source.check(archive, bundle, original))
     except (ImageTransformError, SubprocessError):
         return Check(name, False, "The local decoder could not finish the video source comparison.")
+    except (ValueError, TypeError, KeyError, IndexError, OSError, RuntimeError, Image.DecompressionBombError) as error:
+        return Check(name, False, str(error))
+
+
+def _document_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Check:
+    name = "original document text and positions"
+    try:
+        from PIL import Image
+
+        from app.reports import verify_document_source
+    except ImportError:
+        return Check(name, False, "Install the project dependencies for local document comparison.")
+    try:
+        return Check(name, True, verify_document_source.check(archive, bundle, original))
+    except ImportError:
+        return Check(name, False, "Install the project dependencies for this document format.")
     except (ValueError, TypeError, KeyError, IndexError, OSError, RuntimeError, Image.DecompressionBombError) as error:
         return Check(name, False, str(error))
 

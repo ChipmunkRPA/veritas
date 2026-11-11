@@ -27,7 +27,7 @@ def sample():
                         {'id': 'F2', 'title': 'Uninformative'}, {'id': 'F3', 'title': 'Coverage', 'sentences': ['Two checks ran.']}],
            'summary': {'reasons': [{'id': 'F1'}], 'testing': 'Known error rates are not established.'},
            'sections': [{'key': 'signoff'}, {'key': 'appendix-c'}, {'key': 'findings'}],
-           'evidence': {'packets': [{'id': 'A01', 'kind': 'audio', 'finding_ids': ['F2', 'F3'], 'signal_refs': [{'id': 'voice'}],
+           'evidence': {'available': True, 'packets': [{'id': 'A01', 'kind': 'audio', 'finding_ids': ['F2', 'F3'], 'signal_refs': [{'id': 'voice'}],
                                     'locator': 'PCM 4-8 s', 'observation': '0.917 on 4-8 s',
                                     'interpretation': "At least one recorded window response reaches the check's 0.5 inspection threshold."}]}}
     return frozen, out
@@ -60,6 +60,14 @@ def test_customer_service_attribution_and_error_rate_explanation():
     assert [s['key'] for s in shown['sections']] == ['findings', 'source-evidence']
     assert not any(r['key'] == 'Review' for r in shown['cover'])
     assert shown['examiner'] is None
+
+
+def test_unavailable_evidence_has_no_report_contents_link():
+    frozen, out = sample()
+    out['evidence'] = {'available': False, 'note': 'Source evidence is unavailable.'}
+    shown = customer_view(frozen, out, lambda x: x)
+    assert [section['key'] for section in shown['sections']] == ['findings']
+    assert shown['evidence']['note'] == 'Source evidence is unavailable.'
 
 
 def test_customer_packet_inferences_keep_mixed_text_and_acoustics_uncertain():

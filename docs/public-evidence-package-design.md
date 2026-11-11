@@ -15,6 +15,8 @@ The customer export uses `chipmunk.public-evidence/1`, a separately signed deriv
 
 `python -m app.cli verify package.zip --public-key trusted-instance.pem` verifies the archive, manifest, signed report, supported evidence version, exact asset membership, source/result/revision bindings, PNG dimensions, WAV sample dimensions, and MP4 frame counts/timestamps/track format. Missing, altered, extra or mismatched files are refused. Without a separately trusted key the outcome is only `self_consistent`, never authenticated verification.
 
+Add `--source-document original.pdf` to verify the recorded excerpts, input ranges, source positions, repeated passages and native PDF evidence images against a local original. This optional replay supports TXT, DOCX, EML with a plain-text body, and native-text PDFs up to 25 MiB. For OCR-dependent documents, inspect the signed frozen evidence. The replay checks source correspondence without scoring authorship.
+
 `reproduce` explicitly refuses this public format, even if the optional original is present. The package does not include the internal inputs needed to repeat inference. A valid signature is not proof of AI authorship or manipulation.
 
 ## Local validation

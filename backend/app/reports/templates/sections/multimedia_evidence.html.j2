@@ -15,6 +15,23 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption">{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('audio_source_clock') %}
+{% set clock = evidence.audio_source_clock %}
+{% set rate = evidence.audio_source_clock_rate %}
+<h3>Audio source clock breaks</h3>
+{% if clock.total_discontinuities %}
+<p class="caption">The decoded listening copy joins these source spans. {{ clock.scored_windows_crossing }} recorded voice {{ 'window crosses' if clock.scored_windows_crossing == 1 else 'windows cross' }} a source clock break. This timing check carries zero weight in the AI assessment.</p>
+{% for item in clock.breaks %}
+<p class="caption">At {{ '%.3f' | format(item.boundary_sample / rate) }} s of analyzed audio. Source timestamp {{ 'gap' if item.jump_samples > 0 else 'overlap' }} of {{ '%.3f' | format((item.jump_samples | abs) * 1000 / rate) }} ms.
+On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_start_pts / rate) }} s to {{ '%.3f' | format(item.before.source_end_pts / rate) }} s before the break and {{ '%.3f' | format(item.after.source_start_pts / rate) }} s to {{ '%.3f' | format(item.after.source_end_pts / rate) }} s after it.
+{{ item.scored_windows_crossing }} recorded voice {{ 'window crosses' if item.scored_windows_crossing == 1 else 'windows cross' }} this break.</p>
+{% endfor %}
+<p class="caption">This check lists jumps of at least {{ '%.0f' | format(clock.minimum_jump_samples * 1000 / rate) }} ms. {% if clock.total_discontinuities > clock.breaks | length %}Showing the {{ clock.breaks | length }} largest of {{ clock.total_discontinuities }} breaks. The full source timeline is in JSON.{% endif %}</p>
+{% else %}
+<p class="caption">No source clock break of at least {{ '%.0f' | format(clock.minimum_jump_samples * 1000 / rate) }} ms was measured in {{ '%.3f' | format(clock.checked_samples / rate) }} s of decoded audio. This timing check carries zero weight in the AI assessment.</p>
+{% endif %}
+<p class="caption">JSON pointer <span class="mono">/coverage/source_clock_context</span>.</p>
+{% endif %}
 {% if evidence.get('voice_gaps') %}
 <h3>Unscored voice intervals</h3>
 <p class="caption">These times have no recorded voice response. Background sound can affect coverage, and the gap alone does not establish its cause.</p>

@@ -434,6 +434,19 @@ Review the report's interpretation separately. The verifier does not rerun the
 detectors or recreate annotations and context-clip pixels. Use `--source-audio`
 in a separate invocation to replay the soundtrack evidence from the same video.
 
+### Replay document evidence against the original
+
+```sh
+python -m app.cli verify evidence.zip --public-key instance-key.pem --source-document original.pdf
+```
+
+With the project dependencies installed, this compares the original's SHA-256,
+re-extracted text and source mapping with the signed record. It checks the exact
+excerpts, positions, supporting input ranges, repeated passages and any native PDF
+page images in the package. It supports plain text, DOCX, plain-body EML and
+native-text PDF. OCR-dependent files can still use signature and package integrity
+verification. The replay does not score authorship.
+
 ## Choose a review to reproduce
 
 These are bounded entry points for contributors. Automated Linux reproduction

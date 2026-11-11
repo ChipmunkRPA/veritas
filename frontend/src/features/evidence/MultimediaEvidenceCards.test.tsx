@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, describe, expect, it } from 'vitest'
 import { MultimediaEvidenceContent } from './MultimediaEvidenceCards'
@@ -38,6 +38,30 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows a source-clock gap and its affected voice window in ordinary audio evidence', () => {
+    const set = structuredClone(audio)
+    set.coverage!.source_clock_context = { affects_overall_confidence: false, time_base: '1/16000',
+      minimum_jump_samples: 320, checked_samples: 160000, total_discontinuities: 1, scored_windows_crossing: 1,
+      breaks: [{ boundary_sample: 64000, jump_samples: 16000, scored_windows_crossing: 1,
+        before: { start_sample: 0, end_sample: 64000, source_start_pts: 0, source_end_pts: 64000 },
+        after: { start_sample: 64000, end_sample: 160000, source_start_pts: 80000, source_end_pts: 176000 } }] }
+    show(set)
+    const clock = within(screen.getByRole('region', { name: 'Audio source clock breaks' }))
+    expect(clock.getByText('At 4.000 s of analyzed audio. Source timestamp gap of 1,000 ms.')).toBeTruthy()
+    expect(clock.getByText('On the original timeline, the audio spans 0.000 s to 4.000 s before the break and 5.000 s to 11.000 s after it.')).toBeTruthy()
+    expect(clock.getByText('1 recorded voice window crosses this break.')).toBeTruthy()
+    expect(clock.getByText(/carries zero weight in the AI assessment/)).toBeTruthy()
+  })
+
+  it('shows checked duration when no source-clock break is recorded', () => {
+    const set = structuredClone(audio)
+    set.coverage!.source_clock_context = { affects_overall_confidence: false, time_base: '1/16000',
+      minimum_jump_samples: 320, checked_samples: 160000, total_discontinuities: 0, scored_windows_crossing: 0, breaks: [] }
+    show(set)
+    const clock = within(screen.getByRole('region', { name: 'Audio source clock breaks' }))
+    expect(clock.getByText(/No source clock break of at least 20 ms was measured in 10\.000 s/)).toBeTruthy()
+  })
+
   it('shows the whole-clip face review as six positions and three source examples', () => {
     const set = structuredClone(video)
     const item = set.packets[0]

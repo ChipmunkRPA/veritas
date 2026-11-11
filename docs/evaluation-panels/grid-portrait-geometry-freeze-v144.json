@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.grid-portrait-geometry-freeze/144",
+  "code_sha256": {
+    "backend/scripts/grid_portrait_geometry_v144.py": "c6937a86d8db9105232d762d1e6cbce28536d673030f139b0f7e58c3b0da8fff",
+    "backend/tests/test_grid_portrait_geometry_v144.py": "1dcb779d6a23c2e690569fdbdd828d4dba32d25d9318440e44fb35e48f58197b",
+    "docs/grid-portrait-geometry-v144-method.md": "8bac89965eae8b6dd7eebc3e15d7a91c96ae60c5110afa1baa93be46b9028049",
+    "backend/scripts/portrait_geometry_runtime_v132.py": "42bf3db749f32a8620348ec4e3dd96b29289b0832a0725813c86bae66c0de959",
+    "backend/scripts/fetch_mouth_benchmark_assets.py": "61bb5c777a5efc6c7d2f8c553b7490e5294df221f99477e08c47ba41c919aba9",
+    "backend/scripts/liveportrait_mouth_benchmark.py": "72e9319c70d1c6da62493cc859d2e2e73c87ecf2ed826e6cd1e954e9c076ce04",
+    "backend/scripts/prepare_mouth_edit_v4.py": "2f93ca68fe798aba7e1c5d6b231d26c5225d2008a0a1acd4c862bf13ddc66d42",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa"
+  },
+  "private_plan_sha256": "6c8e6b2ff6917790e3410fe1fd0605377afefa508af9ca6f6bf2733691205419",
+  "transfer_plan_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "transfer_plan_result_sha256": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+  "private_transfer_plan_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+  "runtime_freeze_sha256": "6bb5f01b18f46050bf33513dfaf107f85d12cf572ce6392ee6e6c79f4808cbd8",
+  "runtime_result_sha256": "447ca70a549be7eacdfb569ab4e4472545c3b1b2c4af2f01d5d5e93e02378395",
+  "runtime_profile_sha256": "a05d03d6566857f028abb62edc493c16cd219caeaf66ec5542eca0bf2e103e0c",
+  "installed_manifest_sha256": "824e75918eb226eb46129b525f1a6ad0d3840fd77c1bdb789df99ea5762f8971",
+  "asset_catalogue_sha256": "f1448f43338ba4a8e47145b0ab56f8f8e5a0b2546a48dbdc6f5ea994da7766a3",
+  "source_license_sha256": "75fcad03ad21369e9eeb369b97b73fc0bba7f7f3243d0a661f968bd1478207bb",
+  "face_task_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "bundled_face_model_cards": {
+    "blazeface-card.pdf": {
+      "sha256": "cd335c06fc0de7807cd815a0777a697932598bcdb28fa98adaaabf847485f758",
+      "reviewed_license": "Apache-2.0"
+    },
+    "facemesh-card.pdf": {
+      "sha256": "c6add060f4ebfb37b2690136b6c711c7e5fcb7038baa2649ae3338b83979565a",
+      "reviewed_license": "Apache-2.0"
+    },
+    "blendshape-card.pdf": {
+      "sha256": "c8e9cf60a39998f4b341740623917590e050d1c97004e2de4568d84e026445ae",
+      "reviewed_license": "Apache-2.0"
+    }
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2"
+  },
+  "geometry": {
+    "running_mode": "IMAGE",
+    "delegate": "CPU",
+    "num_faces": 2,
+    "min_face_detection_confidence": 0.5,
+    "min_face_presence_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "output_face_blendshapes": false,
+    "output_facial_transformation_matrixes": false
+  },
+  "pilot_clips": 16,
+  "distinct_frame_inputs_per_ready_clip": 28,
+  "face_task_inputs_per_ready_clip": 29,
+  "frame_indices": [
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "repeat_frame_index": 27,
+  "stage_policy": "One exclusive neural authored stage per original pilot;900s,6GiB initial available RAM/sampled descendant RSS,3GiB initial project/archive disk,1.5GiB running reserves;no retries or substitutions.",
+  "scope": "Face placement/crop/support geometry only;no generator,encoder,detector,achieved motion,identity recognition or confidence change. Missing/ambiguous/invalid observations retained unavailable;all individual vectors and media private."
+}

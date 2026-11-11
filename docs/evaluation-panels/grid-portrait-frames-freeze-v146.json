@@ -1,0 +1,74 @@
+{
+  "schema": "chipmunk.grid-portrait-frames-freeze/146",
+  "code_sha256": {
+    "backend/scripts/grid_portrait_frames_v146.py": "3d7dfa4d519610ddc8c102a9d0fb573fdd125a3fc72a0b9ad8523f5992747c4c",
+    "backend/tests/test_grid_portrait_frames_v146.py": "56088dab9f7344d396742591e5fb2470a38bb185e6183bd6cc426e24488dc117",
+    "docs/grid-portrait-frames-v146-method.md": "098e606b6f83260348676abe8bcb535615878e4e2f49891d63125af2fd63b4e0",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa"
+  },
+  "renderer_bindings_sha256": {
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/output/private-render-records.json": "e470f01a097af374c003817282cee9a098d226e1f4ecca615d605345f960f3c2",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/output/private-input-files.json": "b3ec0835fe431a228e8d98ea0315b2b6f210769377b2d49672afc355199cdf84",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/output/render-records.jsonl": "0277c7b0e4c2c97b2a77639ae7202d846ec8362e071f108a4521436efb053726",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/output/forward-progress.jsonl": "efae03e0ea2e326b7ea1181fd2707c8ecf8d011dd4611f0b2e3576e6d807cd86",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/freeze.json": "dc27637174232d028d3a3531b0e17db7acaee1860f07977de0e45fb80482f738",
+    "docs/evaluation-panels/portrait-expression-qualifier-freeze-v140.json": "dc27637174232d028d3a3531b0e17db7acaee1860f07977de0e45fb80482f738",
+    "docs/evaluation-panels/portrait-expression-qualifier-result-v140.json": "8f8ec0a9c96d80a0c4fd5bf9d3d642eb77cd3be6b22d44f4b8b32df3075936c0",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/output/result.json": "56ba946c2ef63a576181147d39bd8f94358217b5e07bbfdd43e7a6b83639778c",
+    "backend/data/independent-evaluation/portrait-expression-qualifier-v140/authored/profile.json": "49c063cd89b6dabbdcc64bc539148c4e4df425f9424763c49d63abcc59f6c5bd"
+  },
+  "plan_freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+  "plan_private_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+  "geometry_freeze_sha256": "e155dcb4027e0c019c61bc4c6c7bac0380062d54c36272bd98132cc0a9d4fc4d",
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "per_clip_planned_condition_frames": 40,
+  "per_clip_planned_repeat_frames": 1,
+  "per_clip_maximum_renders": 41,
+  "per_clip_maximum_top_module_forward_units": 205,
+  "conditions": [
+    "source_time",
+    "earlier_320ms"
+  ],
+  "source_frames_half_open": [
+    27,
+    47
+  ],
+  "earlier_native_frame_offset": -8,
+  "required_earlier_time_offset_seconds": "-8/25",
+  "device": "cpu",
+  "precision": "float32",
+  "seed": "146 + original clip ordinal",
+  "threads": {
+    "torch": 1,
+    "interop": 1,
+    "opencv": 1
+  },
+  "deterministic_algorithms": true,
+  "packages": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0",
+    "PyYAML": "6.0.3"
+  },
+  "scope": "Fixed pilot frame construction only; per-pair unavailable geometry retained. No new face/speech inputs, activation caches, achieved phonetic timing, face-swap accuracy, detector score or serving change."
+}

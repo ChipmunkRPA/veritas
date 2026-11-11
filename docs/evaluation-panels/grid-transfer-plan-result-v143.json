@@ -1,0 +1,52 @@
+{
+  "schema": "chipmunk.grid-transfer-plan-execution/143",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.grid-transfer-plan-result/143",
+    "status": "complete",
+    "source_slots": 16,
+    "original_clips": 32,
+    "pilot_clips": 16,
+    "reserve_clips": 16,
+    "pilot_source_slots": 8,
+    "pilot_cases": 176,
+    "planned_cases_all_roles": 352,
+    "pilot_ready_cases": 176,
+    "pilot_unavailable_cases": 0,
+    "pilot_neural_cases": 64,
+    "pilot_original_and_ordinary_cases": 112,
+    "pilot_unique_geometry_pictures": 448,
+    "pilot_availability": {
+      "native_video_and_audio_available": 16
+    },
+    "private_plan_sha256": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+    "freeze_sha256": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+    "new_neural_calls": 0,
+    "new_media_reads": 0,
+    "defaults_changed": false,
+    "scope": "Only metadata/source-clock planning. Reserve remains unscored; unavailable retained. No changed picture, achieved motion/sync, detector response or customer confidence result."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 0.797215792001225,
+    "sampled_tree_rss_lower_bound_bytes": 54493184,
+    "minimum_available_ram_bytes": 8854519808,
+    "resource_journal_sha256": "5d04621138e04229203b0605863fa57f2982e52a2848e069e287e5f8c2812654",
+    "runtime_sha256": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "worker_receipt_sha256": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+  "profile_sha256": "d30df50457eea75364eff087d9e6cdacfa4cd6e5519dbb089f770c7383dc95aa",
+  "scope": "Executed metadata/clock planning only. Sixteen pilot and sixteen reserve clips; no media read, geometry, generated edit or detector score."
+}

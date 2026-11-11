@@ -1,0 +1,33 @@
+{
+  "schema": "chipmunk.grid-native-clips-complete/149",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_constructed": 16,
+  "complete_guarded_stages": 16,
+  "planned_cases": 176,
+  "availability": {
+    "ready": 176
+  },
+  "ready_case_categories": {
+    "original": 16,
+    "neural": 64,
+    "ordinary": 96
+  },
+  "verified_decoded_picture_rows": 13200,
+  "verified_decoded_pcm_samples": 8386048,
+  "verified_native_edit_masks": 2880,
+  "audio_only_identical_picture_and_clock_controls": 16,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "new_neural_calls": 0,
+  "maximum_sampled_descendant_rss_bytes": 406929408,
+  "worker_duration_seconds": {
+    "minimum": 17.660471791983582,
+    "maximum": 19.82339704199694,
+    "sum": 290.7735548331402
+  },
+  "private_complete_execution_collection_sha256": "44091397c84ccb933d0b1dd1691d4035710165eab347f7df9c0a93d526a97026",
+  "freeze_sha256": "6677444fd0094d5e3ebd96e1b9dc0172103dc1f4ecf52862ab469a185ade234c",
+  "defaults_changed": false,
+  "scope": "Actual matched lossless pilot construction and decoded picture/PCM verification. Original is unchanged decoded content in the matched format. Terminal display duration is assigned by the mux; no achieved motion, timing accuracy, authenticity or detector performance claim. Media, masks, case paths, individual hashes and clocks remain private."
+}

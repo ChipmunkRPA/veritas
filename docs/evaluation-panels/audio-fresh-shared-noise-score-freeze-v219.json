@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.audio-fresh-shared-noise-score-freeze/219",
+  "v217_preparation_sha256": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+  "v217_freeze_sha256": "6217e14c017101a4ad7862c52f11daf2ccc65e62b0fa808ccb37beb2f8c38ecb",
+  "route_freeze_sha256": "869e64d5a6f4727ef08d27a19361d70564da5168a79d3726084b72426b110714",
+  "asset_set_commitment_sha256": "4a882fbaf3fe5965faf4e318ff38d54195e4aaf1fe7238dd965aca9e29571597",
+  "code_sha256": {
+    "backend/scripts/audio_fresh_shared_noise_score_v219.py": "bae0bd97b4dfebdd6b60c59bbee71c5fbb18a7f0a3bf70f977530a24eae7069f",
+    "backend/tests/test_audio_fresh_shared_noise_score_v219.py": "437a4b3ef4294ef66c0a00e6b1a1308c49612943618264983d1e436bdf216980",
+    "docs/audio-fresh-shared-noise-score-v219-method.md": "f3c9f4d51a4d0f4dad1b81d7f1f5d92733308dde324359778cc5307560b2658b",
+    "backend/scripts/audio_fresh_shared_noise_v217.py": "dbf4870c4905d65d2ce20e1c9e169509728bc64619a5b4bf2ac1dc7918845ae6",
+    "backend/scripts/audio_demand_transfer_v208.py": "ae2f36b1455d710d1ff794ae98edb6cf697f46a1e8cce2ae86c2d5530d1949d6",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "planned_triplets": 16,
+  "planned_cases": 240,
+  "conditions": [
+    "matched_clean",
+    "kitchen_0db",
+    "kitchen_5db",
+    "traffic_0db",
+    "traffic_5db"
+  ],
+  "scoring_batches": 5,
+  "calibration_change_permitted": false,
+  "holdout_access_permitted": false
+}

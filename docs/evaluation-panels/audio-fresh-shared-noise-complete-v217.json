@@ -1,0 +1,115 @@
+{
+  "schema": "chipmunk.audio-fresh-shared-noise-result/217",
+  "status": "complete",
+  "freeze_sha256": "6217e14c017101a4ad7862c52f11daf2ccc65e62b0fa808ccb37beb2f8c38ecb",
+  "private_cases_sha256": "91960b8ccb2ba31e55d281f1a344747d3f0a3c891398ed98f8273a0b1a51e0f1",
+  "planned_cases": 240,
+  "by_arm_and_condition": {
+    "genuine": {
+      "matched_clean": {
+        "unavailable": 5,
+        "prepared": 11
+      },
+      "kitchen_0db": {
+        "unavailable": 5,
+        "prepared": 11
+      },
+      "kitchen_5db": {
+        "unavailable": 5,
+        "prepared": 11
+      },
+      "traffic_0db": {
+        "unavailable": 5,
+        "prepared": 11
+      },
+      "traffic_5db": {
+        "unavailable": 5,
+        "prepared": 11
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "prepared": 16
+      },
+      "kitchen_0db": {
+        "prepared": 16
+      },
+      "kitchen_5db": {
+        "prepared": 16
+      },
+      "traffic_0db": {
+        "prepared": 16
+      },
+      "traffic_5db": {
+        "prepared": 16
+      }
+    },
+    "drifting": {
+      "matched_clean": {
+        "unavailable": 4,
+        "prepared": 12
+      },
+      "kitchen_0db": {
+        "unavailable": 4,
+        "prepared": 12
+      },
+      "kitchen_5db": {
+        "unavailable": 4,
+        "prepared": 12
+      },
+      "traffic_0db": {
+        "unavailable": 4,
+        "prepared": 12
+      },
+      "traffic_5db": {
+        "unavailable": 4,
+        "prepared": 12
+      }
+    }
+  },
+  "pair_coverage": {
+    "matched_clean": {
+      "planned_triplets": 16,
+      "complete_triplets": 8,
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12
+    },
+    "kitchen_0db": {
+      "planned_triplets": 16,
+      "complete_triplets": 8,
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12
+    },
+    "kitchen_5db": {
+      "planned_triplets": 16,
+      "complete_triplets": 8,
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12
+    },
+    "traffic_0db": {
+      "planned_triplets": 16,
+      "complete_triplets": 8,
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12
+    },
+    "traffic_5db": {
+      "planned_triplets": 16,
+      "complete_triplets": 8,
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12
+    }
+  },
+  "unavailable_reasons": {
+    "source_unavailable": 45
+  },
+  "new_neural_calls": 0,
+  "detector_calls": 0,
+  "holdout_scored": false,
+  "profile_sha256": "f89377676cf7de0d9dc1c11fa5fb5d66115884a75f31a5482c0a4c4aab96b0ab",
+  "scope": "Three prepared Turkish source cohorts and two recorded noise tapes. No detector output or population claim."
+}

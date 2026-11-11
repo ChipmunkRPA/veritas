@@ -1,0 +1,56 @@
+{
+  "schema": "chipmunk.audio-fresh-shared-noise-freeze/217",
+  "planned_triplets": 16,
+  "planned_cases": 240,
+  "arms": [
+    "genuine",
+    "alania",
+    "drifting"
+  ],
+  "conditions": [
+    "matched_clean",
+    "kitchen_0db",
+    "kitchen_5db",
+    "traffic_0db",
+    "traffic_5db"
+  ],
+  "source_range": [
+    0,
+    48000
+  ],
+  "tape_start_seconds": 4,
+  "tape_step_seconds": 6,
+  "sample_rate": 16000,
+  "source_receipts_sha256": {
+    "genuine": "930834fbf7581dc75ec769253403be1d80401e2d618e040ff8b814f946307b5a",
+    "alania": "2ebd0909a160502073ce01c6059333e955450fb7411e4bb3ec0e6bdf34dc71ab",
+    "drifting": "c02fa71645bcb333b20bbd33b62ca769a23a29e699875951f512734ac680c461"
+  },
+  "demand_asset_record_sha256": "70473811ceefa9063977400b070b49870229256180ed9f586055bb0ea73d6705",
+  "publisher_record": "https://zenodo.org/records/1227121",
+  "noise_license": "CC-BY-SA-3.0",
+  "code_sha256": {
+    "backend/scripts/audio_fresh_shared_noise_v217.py": "dbf4870c4905d65d2ce20e1c9e169509728bc64619a5b4bf2ac1dc7918845ae6",
+    "backend/tests/test_audio_fresh_shared_noise_v217.py": "b40c99c24c80d2166c1ee2e7e3590c2b6ebef7d1cc7a7c54a16feeb5c5632cee",
+    "docs/audio-fresh-shared-noise-v217-method.md": "f212b4df5410c2c44e091d27b66994b8cbb39ff84ad771576b753eea0df6cd44",
+    "backend/scripts/audio_shared_noise_v216.py": "7ab68ffff976588908af29b4871e5600fa1dfa88b8e6e819f7ca8e021612086a",
+    "backend/scripts/audio_short_edit_controls.py": "3124865172114acc07d0bc9aca581645827a5092fd49f7c5102aa3cd4f189bb7",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "source_dispositions": {
+    "genuine": {
+      "unavailable": 5,
+      "qualified": 11
+    },
+    "alania": {
+      "qualified": 16
+    },
+    "drifting": {
+      "unavailable": 4,
+      "qualified": 12
+    }
+  },
+  "model_calls_permitted": false,
+  "detector_calls_permitted": false,
+  "holdout_access_permitted": false
+}

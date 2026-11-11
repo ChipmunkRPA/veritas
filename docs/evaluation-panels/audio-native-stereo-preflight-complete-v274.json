@@ -1,0 +1,202 @@
+{
+  "archive_license": "CC-BY-SA-3.0",
+  "authored_native_16khz": {
+    "opposite_phase": {
+      "channel_pcm_sha256": [
+        "ef09e1854788410db5fa01ea5fe03461b058b2ca850c0705abce9c20fabeafcb",
+        "9a7da26bd52cc47c50b72e1c32d4419a484e20bc1e71c66c6779f4efd472e38e"
+      ],
+      "mixed_pcm_sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ]
+    },
+    "signed_impulses": {
+      "channel_pcm_sha256": [
+        "ef09e1854788410db5fa01ea5fe03461b058b2ca850c0705abce9c20fabeafcb",
+        "932f6f2a8fa908618924d2b5f89250f73bf6db7342a7736e5202e6ea9f45c2ab"
+      ],
+      "mixed_pcm_sha256": "e73cc07e00d4ff5ff3ab31ae7ba882025364fee4ba58ea4ca1e3601c8d421acb",
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ]
+    },
+    "silent_left": {
+      "channel_pcm_sha256": [
+        "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+        "ef09e1854788410db5fa01ea5fe03461b058b2ca850c0705abce9c20fabeafcb"
+      ],
+      "mixed_pcm_sha256": "6078369348c06ff484da015608980393250e29524dba9ffd3ca552b3796d9fa3",
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ]
+    },
+    "silent_right": {
+      "channel_pcm_sha256": [
+        "ef09e1854788410db5fa01ea5fe03461b058b2ca850c0705abce9c20fabeafcb",
+        "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0"
+      ],
+      "mixed_pcm_sha256": "6078369348c06ff484da015608980393250e29524dba9ffd3ca552b3796d9fa3",
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ]
+    },
+    "swapped_channels": {
+      "channel_pcm_sha256": [
+        "932f6f2a8fa908618924d2b5f89250f73bf6db7342a7736e5202e6ea9f45c2ab",
+        "ef09e1854788410db5fa01ea5fe03461b058b2ca850c0705abce9c20fabeafcb"
+      ],
+      "mixed_pcm_sha256": "e73cc07e00d4ff5ff3ab31ae7ba882025364fee4ba58ea4ca1e3601c8d421acb",
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ]
+    }
+  },
+  "code_sha256": {
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_demand_controls_v204.py": "ea040c77c5b666a777bc9a5e4fb16b42b052d39fc84f51c34ccf07012197cae0",
+    "backend/scripts/audio_fresh_shared_noise_v217.py": "dbf4870c4905d65d2ce20e1c9e169509728bc64619a5b4bf2ac1dc7918845ae6",
+    "backend/scripts/audio_native_stereo_preflight_v274.py": "94c03246cf132f138c561e959d80f215972831599c9046334e2fbcc40f666176",
+    "backend/tests/test_audio_native_stereo_preflight_v274.py": "2689c401e31060f51eb09fb6e9d0d3c778c84716e54cb3bbec4a31d3c670fdba",
+    "docs/audio-native-stereo-preflight-v274-method.md": "22dc923615b9ab7a368655b47a7a3e1753fbf69de08f35476acb6f327afcf1ea"
+  },
+  "codec_binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "foreground_files_opened": 0,
+  "model_calls": 0,
+  "plan": {
+    "assignment": "Zero-based v169c manifest order within each origin family and role; ordinal modulo 16 selects the window and ordinal modulo 2 selects the quieter channel for the future forced-imbalance condition.",
+    "foreground_slots_for_future_composition": {
+      "development": 37,
+      "holdout": 40
+    },
+    "members": [
+      "ch02.wav",
+      "ch16.wav"
+    ],
+    "roles": {
+      "development": {
+        "river": "NRIVER_16k.zip",
+        "washing_room": "DWASHING_16k.zip"
+      },
+      "holdout": {
+        "kitchen": "DKITCHEN_16k.zip",
+        "traffic": "STRAFFIC_16k.zip"
+      }
+    },
+    "sample_rate_hz": 16000,
+    "window_samples": 48000,
+    "window_starts_samples": [
+      3200000,
+      3296000,
+      3392000,
+      3488000,
+      3584000,
+      3680000,
+      3776000,
+      3872000,
+      3968000,
+      4064000,
+      4160000,
+      4256000,
+      4352000,
+      4448000,
+      4544000,
+      4640000
+    ]
+  },
+  "prior_receipts_sha256": {
+    "audio-demand-controls-freeze-v204.json": "200b773bb3aaff134465a989da93c495fd35a398bdfaf7d1afa2069072f63801",
+    "audio-demand-kitchen-traffic-assets-v212.json": "70473811ceefa9063977400b070b49870229256180ed9f586055bb0ea73d6705",
+    "audio-short-edit-cases-result-v172.json": "9df9facc4dd63586ec8c24bafdce048b96ec2df731a397cf689d3692b6c25a61",
+    "audio-short-edit-materialization-complete-v169c.json": "681389a3f959833de637a4e5f778e193b2e4bcecb62a437f3eede38c75896a1e"
+  },
+  "publisher_record": "https://zenodo.org/records/1227121",
+  "schema": "chipmunk.audio-native-stereo-preflight/274",
+  "status": "complete",
+  "tapes": {
+    "development": {
+      "river": {
+        "archive": "NRIVER_16k.zip",
+        "members": {
+          "ch02.wav": {
+            "pcm_sha256": "46acfc32393c217eb264ba29560dc36eff84a5d25365e86b85243d1c0ce352ab",
+            "windows_sha256": "edef2e9e49ac83507e977fd61c1139906ad509a7a70913adccce0eb11b7c51d2"
+          },
+          "ch16.wav": {
+            "pcm_sha256": "82430570c1a8fca9e9f657aaee3d8a08cfff71eb4f0259647b51c7a080852b6e",
+            "windows_sha256": "7fb4155ec6a6829132c7d70c7e9d09492c1b455908a46ca922f30f1ed450a24b"
+          }
+        },
+        "samples_per_channel": 4800064
+      },
+      "washing_room": {
+        "archive": "DWASHING_16k.zip",
+        "members": {
+          "ch02.wav": {
+            "pcm_sha256": "10772d270ebba68ab12069375f0b4926d2c391109951af2c11371e2a940e4e77",
+            "windows_sha256": "92aad53675f5f24389a7187427ca350e738d92b658d2a9a78fb3b8c95879e8e8"
+          },
+          "ch16.wav": {
+            "pcm_sha256": "177de7c0f6151bea9130ff34a5aa3332c9c90da9e418581b8f52d1e74e2beb6f",
+            "windows_sha256": "21f7703bc7f4beae44587060a3ab46ec63ee018086540276014bafcba4c202b5"
+          }
+        },
+        "samples_per_channel": 4800064
+      }
+    },
+    "holdout": {
+      "kitchen": {
+        "archive": "DKITCHEN_16k.zip",
+        "members": {
+          "ch02.wav": {
+            "pcm_sha256": "80dfde19e9ad78423e49ae273c4ee55d97999193a5c60c13bb5927da133739a2",
+            "windows_sha256": "19feef1e62a6b343d3900f9c38ec6434e97fc1d687e242326eb93c1a9b8a0a5c"
+          },
+          "ch16.wav": {
+            "pcm_sha256": "d8421fcf62b50a4862754ed31fe6ae5ce8d6c7c442e1c464a4b0ddf9de26fb8a",
+            "windows_sha256": "9c07b6a76e0853dbc86bd97d236194d81f435bfba3597a8fd60f8625cb24653e"
+          }
+        },
+        "samples_per_channel": 4800064
+      },
+      "traffic": {
+        "archive": "STRAFFIC_16k.zip",
+        "members": {
+          "ch02.wav": {
+            "pcm_sha256": "2ec5e9e733ac55ce550492ec7bf352fa4f738674cd8d3a56e7ed104cec7f8bd5",
+            "windows_sha256": "ad810490c7e2ba6dda49e96c8361d2e4bc108841959033e64a0f50f83b86313e"
+          },
+          "ch16.wav": {
+            "pcm_sha256": "7740decf167dd314f1c6fd85665e7e91de1571b01e8ea9053e69b198276da4f4",
+            "windows_sha256": "5fe6b5c3bf5ca5703dbf74cd8c7ff8bdab8dea2fbfe17f48b85a1810e49e61ba"
+          }
+        },
+        "samples_per_channel": 4800064
+      }
+    }
+  }
+}

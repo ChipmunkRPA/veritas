@@ -38,6 +38,11 @@ uses public, authored RGB fixtures to verify exactly which pixels change when a
 generator output is composed into a source region. A separate verifier checks
 the pinned bundle without running the model or accessing project photos.
 
+The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
+checks exact channel recovery and source clocks on five authored WAVs. The
+same tool can also verify the four publisher background archives and the
+fixed development and holdout windows for a future noisy-speech comparison.
+
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and
 caller-owned directories. It compares aggregate decisions and clean-to-noisy

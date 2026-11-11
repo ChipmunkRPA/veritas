@@ -1,0 +1,70 @@
+{
+  "aws_transport": {
+    "host": "us.aws.cdn.hf.co",
+    "path_regex": "/xet-bridge-us/[0-9a-f]{24}/[0-9a-f]{64}",
+    "requires_linked_sha256_and_size": true,
+    "requires_signed_query": true,
+    "terminal_only": true
+  },
+  "backup": 0,
+  "code_commitments": {
+    "backend/scripts/image_bg_real_acquisition_v221.py": "0906a1b9c8d2cd85e09f6452fac4b009a0cd54802db5992543bffa314341e3b1",
+    "backend/scripts/image_bg_real_roster_v218.py": "32f44463cb82b579fe31e83677dc736b62be749e9d8c0de662a2ea21e45f8c81",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/tests/test_image_bg_real_acquisition_v221.py": "5711094b0834bf0914d89116d772092cc073626d702917c95085221999abda17",
+    "docs/image-bg-real-acquisition-v221-method.md": "8b1c9a92c4404c27d24f356a891f1ea9240abe2649d76d0a884208ace48eaee1"
+  },
+  "intake_code_commitments": {
+    "backend/scripts/image_bg_real_backup_intake_v262.py": "df7f8c84f9bc157bd1b9c90eaa32e360dda5996f6d16332f4115f12c74f9831a",
+    "backend/tests/test_image_bg_real_backup_intake_v262.py": "5bad504855b14cd33b772e86798ee0b5c4174eb6a6bada24e5c36368591891b8",
+    "docs/image-bg-real-backup-intake-v262-method.md": "14963d956f5ac101cb82d5339c8a890d8e65e62a775d0c8abe6c9f8a5ad63548"
+  },
+  "max_bytes_per_file": 4000000,
+  "max_redirects_per_file": 3,
+  "maximum_encoded_bytes": 144000000,
+  "primary": 12,
+  "prior_v221_failed_receipts_sha256": {
+    "acquired.json": "9e4db67da8326593fc868b6cd3401ef62614b55920a6b195890a4815da3d985a",
+    "attempts.jsonl": "4a9d4b174e094f77330500ee3b8b85c8441daa0023e21e49be96fcb9ac31de91",
+    "plan.json": "61668d30878fc8ebf72aa2a9030e0ba8f2349baf802de0f1c1b4a0cd23dee2f2",
+    "qualified-private.json": "ade10c31c42e3ccc477e06b1383fbe2c6ee2438b87500ecd775cdfa66c4060ea",
+    "summary.json": "d33a4a70ce4ce88a36ba3778178e01df6a3b628d14bcf54f0f11f360090b1054"
+  },
+  "prior_v221_public_freeze_sha256": "6ad677b87095a16da6745ac04c33801a47087a81d10dc7a0da2c52c4854e1cd1",
+  "prior_v225_png_fingerprints": 48,
+  "prior_v229_jpeg_views": 240,
+  "private_plan_sha256": "875b6850bf09ecd48cd42a009efcd5040dfca544e6265c6be37f51e0ce2916a8",
+  "private_roster_sha256": "a5f5e7267806f0ecbe1b65ba37a2b9a45cc0dc98a98e5aba01b389b94fc665b7",
+  "published_v218_sha256": "4a3665f23821adcec8f48eece8f4a8b36f34cd8d066c3b5183cc02f0222a350d",
+  "publisher_mask_commitment_required": true,
+  "publisher_split_counts": {
+    "train": 10,
+    "val": 2
+  },
+  "requested_asset_roles": [
+    "original",
+    "edited",
+    "semantic_mask"
+  ],
+  "runtime_versions": {
+    "Pillow": "12.3.0",
+    "numpy": "2.2.6",
+    "requests": "2.34.2"
+  },
+  "schema": "chipmunk.image-bg-real-backup-intake-plan/262",
+  "scoring_permitted": false,
+  "source_receipts": {
+    "image-bg-real-jpeg-complete-v229.json": "55a6c1aed3448056f4046c768102bf032064635c6a3a625cb98017a7356cb13d",
+    "image-bg-real-pixel-qualification-complete-v225.json": "3a46ad593be6a095f25e5998f7c51d9d592de6d413915348b57271111ec50306",
+    "image-bg-real-transport-freeze-v225.json": "d3c239bfad6a332ef027dd991ffc2fa1ee016d1c788f245853e29c88735863c4"
+  },
+  "successor_code_commitments": {
+    "backend/scripts/image_bg_real_transport_v225.py": "b684ffb0833c9bf9972b156a1d34251784a21b673fa325e1468eab460a331e7c",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/tests/test_image_bg_real_transport_v225.py": "20b33698bc78be79e3e309047280ace8a49e1547650afd3e025e1d8191b59bf0",
+    "docs/image-bg-real-transport-v225-method.md": "2e7355f07cea16419ecf41ffc89d330bab6233e40c55d73bda979a2afca3cb5f"
+  },
+  "time_budget_s": 900,
+  "v218_backup_count": 12,
+  "v26_edit_commitment_sha256": "c4ae1c532f4db1f26eb5165754c3591a87fc2c82a6ecb421c9cee9c523028489"
+}

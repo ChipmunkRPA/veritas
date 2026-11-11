@@ -114,9 +114,38 @@ USGS files. Nairobi has 150 pictures and native audio sample indices
 decoded audio origin spans 0 through 0.5 ms under closed nearest rounding.
 USGS has 180 pictures and sample indices `[1691290, 1979578)` on an exact
 zero-origin lattice. Both audio boundaries are 1/120000 second later than
-their corresponding picture boundary. The source-to-output maps, soundtrack
-checks, overlap review, and detector runs remain pending.
+their corresponding picture boundary.
 [Clock helper](../backend/scripts/hd_excerpt_clock.py)
+
+## Prepared genuine cases
+
+Local preparation completed for both admitted clock intervals. Each source
+produced an H.264 lossless reference and an ordinary H.264 recompression
+at CRF 24, both with signed 24-bit stereo ALAC audio. The reference kept
+every decoded YUV420 picture byte. The recompression changed all pictures,
+and both arms preserved the exact selected audio bytes after conversion
+to the common 24-bit format.
+
+| Group | Pictures per case | Verified 48 kHz stereo samples per channel | Native video time base |
+| --- | ---: | ---: | --- |
+| 01 | 150 | 288,000 | 1/1000 |
+| 03 | 180 | 288,288 | 1/30000 |
+
+The first preparation attempt omitted the final video packet's duration
+in the Nairobi MP4. It stored 150 packets but exposed only 149 decoded
+frames. The corrected attempt sets every packet duration to the verified
+native step and checks the stored packet and decoded picture clocks
+independently. It retained all 330 source pictures in the references and
+all 660 expected pictures across the four outputs. Source rebasing kept
+the audio samples intact and moved the USGS audio start 1/120000 second
+earlier relative to the video. Nairobi's original compatible origin
+uncertainty remains 0 to 0.5 ms.
+
+The prior failed attempt and the four prepared files stay on the local
+archive. The completed preparation receipt has SHA-256
+`89f204be932f136aee8e2c487ce17c0a14725218b675d61ddda8df4bc8487d77`.
+The files are ready for the next independent serving test after the
+remaining soundtrack and content-overlap checks.
 
 To reproduce acquisition, run from the repository root and set
 `CHIPMUNK_HD_SOURCE_DIR` to the chosen private holding directory. The command

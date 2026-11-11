@@ -1,0 +1,2169 @@
+{
+  "complete_guarded_batches": 16,
+  "families": {
+    "audio_delay": {
+      "analysis_stages": {
+        "condition_done": 16,
+        "decode_done": 16,
+        "detect_done": 16,
+        "faces_done": 16,
+        "fuse_done": 16,
+        "ingest_done": 16,
+        "probe_done": 16,
+        "provenance_done": 16,
+        "provenance_gate_done": 16,
+        "publish_done": 16,
+        "render_done": 16,
+        "second_pass_skipped": 16,
+        "shots_done": 16,
+        "source_labels_done": 16,
+        "synthesise_done": 16,
+        "temporal_done": 16,
+        "tracks_done": 16
+      },
+      "appearance_review": {
+        "appearance": {
+          "assessed": 16,
+          "flagged": 0,
+          "returned": 16
+        },
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "bracketed_known_edit": 0,
+        "changed_picture_input_coverage": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "counts": {},
+        "displayed_changed_picture": 0,
+        "displayed_flag_windows": 0,
+        "displayed_windows": 0,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "fallback": {
+          "assessed": 0,
+          "flagged": 0,
+          "returned": 0
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 192,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "measured_no_flag": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "verified_picture_inputs": 669,
+        "windows": 192
+      },
+      "attempted": 16,
+      "completed": 16,
+      "constructed": 16,
+      "contributing_planned_components": 8,
+      "customer_direction": {
+        "counts": {
+          "engine_returned_unavailable": 16,
+          "excluded_audio_picture_timing": 16,
+          "excluded_voice": 16,
+          "scope_assessed_components": 16,
+          "separate_soundtrack_ai": 12,
+          "separate_soundtrack_inconclusive": 2,
+          "unavailable": 16
+        },
+        "directional": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution_directional_only": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_neural": {}
+      },
+      "detectors": {
+        "attempted": 240,
+        "detect_attempted": 176,
+        "detect_expected": 176,
+        "detect_not_applicable": 34,
+        "detect_skipped": 16,
+        "detect_successful": 126,
+        "expected": 240,
+        "faces_attempted": 16,
+        "faces_expected": 16,
+        "faces_successful": 16,
+        "model_unavailable": 16,
+        "not_applicable": 50,
+        "profile_not_scheduled": 192,
+        "provenance_attempted": 32,
+        "provenance_expected": 32,
+        "provenance_not_applicable": 16,
+        "provenance_successful": 16,
+        "skipped": 16,
+        "successful": 174,
+        "tracks_attempted": 16,
+        "tracks_expected": 16,
+        "tracks_successful": 16
+      },
+      "effects": {
+        "observable": 16
+      },
+      "outcomes": {
+        "done": 16
+      },
+      "planned": 16,
+      "raw_timing_binding_verified": 16,
+      "raw_timing_review": {
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "changed_picture_input_coverage": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "counts": {
+          "tracks_without_stable_offset": 16
+        },
+        "descriptive_visual_iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "displayed_flag_windows": 0,
+        "displayed_windows": 16,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "measured_seconds": {
+          "component_weighted_mean": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "16"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "omitted_windows": 0,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "states": {
+          "no_stable_offset": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 400,
+        "windows": 16
+      },
+      "sampling": {
+        "counts": {
+          "legacy_decoded": 256,
+          "legacy_face_detected": 256,
+          "legacy_face_measured": 256,
+          "legacy_planned": 256,
+          "native_pictures": 1200,
+          "tracked_native_pictures": 1200
+        },
+        "decoded_legacy_with_detected_face": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        },
+        "native_frames_tracked": {
+          "denominator": 1200,
+          "numerator": 1200,
+          "rate": "1"
+        },
+        "planned_legacy_decoded": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        }
+      },
+      "timing_input_verified": 16,
+      "visual_input_verified": 16
+    },
+    "genuine_frame_retime": {
+      "analysis_stages": {
+        "condition_done": 16,
+        "decode_done": 16,
+        "detect_done": 16,
+        "faces_done": 16,
+        "fuse_done": 16,
+        "ingest_done": 16,
+        "probe_done": 16,
+        "provenance_done": 16,
+        "provenance_gate_done": 16,
+        "publish_done": 16,
+        "render_done": 16,
+        "second_pass_skipped": 16,
+        "shots_done": 16,
+        "source_labels_done": 16,
+        "synthesise_done": 16,
+        "temporal_done": 16,
+        "tracks_done": 16
+      },
+      "appearance_review": {
+        "appearance": {
+          "assessed": 16,
+          "flagged": 0,
+          "returned": 16
+        },
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "bracketed_known_edit": 0,
+        "changed_picture_input_coverage": {
+          "denominator": 320,
+          "numerator": 192,
+          "rate": "3/5"
+        },
+        "counts": {},
+        "displayed_changed_picture": 0,
+        "displayed_flag_windows": 0,
+        "displayed_windows": 0,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "fallback": {
+          "assessed": 0,
+          "flagged": 0,
+          "returned": 0
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "omitted_windows": 192,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "states": {
+          "measured_no_flag": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 672,
+        "windows": 192
+      },
+      "attempted": 16,
+      "completed": 16,
+      "constructed": 16,
+      "contributing_planned_components": 8,
+      "customer_direction": {
+        "counts": {
+          "engine_returned_unavailable": 16,
+          "excluded_audio_picture_timing": 16,
+          "excluded_voice": 16,
+          "scope_assessed_components": 16,
+          "separate_soundtrack_inconclusive": 3,
+          "separate_soundtrack_original": 9,
+          "unavailable": 16
+        },
+        "directional": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution_directional_only": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_neural": {}
+      },
+      "detectors": {
+        "attempted": 240,
+        "detect_attempted": 176,
+        "detect_expected": 176,
+        "detect_not_applicable": 36,
+        "detect_skipped": 16,
+        "detect_successful": 124,
+        "expected": 240,
+        "faces_attempted": 16,
+        "faces_expected": 16,
+        "faces_successful": 16,
+        "model_unavailable": 16,
+        "not_applicable": 52,
+        "profile_not_scheduled": 192,
+        "provenance_attempted": 32,
+        "provenance_expected": 32,
+        "provenance_not_applicable": 16,
+        "provenance_successful": 16,
+        "skipped": 16,
+        "successful": 172,
+        "tracks_attempted": 16,
+        "tracks_expected": 16,
+        "tracks_successful": 16
+      },
+      "effects": {
+        "observable": 16
+      },
+      "outcomes": {
+        "done": 16
+      },
+      "planned": 16,
+      "raw_timing_binding_verified": 16,
+      "raw_timing_review": {
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "changed_picture_input_coverage": {
+          "denominator": 320,
+          "numerator": 320,
+          "rate": "1"
+        },
+        "counts": {
+          "tracks_without_stable_offset": 16
+        },
+        "descriptive_visual_iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "displayed_flag_windows": 0,
+        "displayed_windows": 16,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "measured_seconds": {
+          "component_weighted_mean": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "16"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 0,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "no_stable_offset": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 400,
+        "windows": 16
+      },
+      "sampling": {
+        "counts": {
+          "legacy_decoded": 256,
+          "legacy_face_detected": 256,
+          "legacy_face_measured": 256,
+          "legacy_planned": 256,
+          "native_pictures": 1200,
+          "tracked_native_pictures": 1200
+        },
+        "decoded_legacy_with_detected_face": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        },
+        "native_frames_tracked": {
+          "denominator": 1200,
+          "numerator": 1200,
+          "rate": "1"
+        },
+        "planned_legacy_decoded": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        }
+      },
+      "timing_input_verified": 16,
+      "visual_input_verified": 16
+    },
+    "neural_redraw": {
+      "analysis_stages": {
+        "condition_done": 64,
+        "decode_done": 64,
+        "detect_done": 64,
+        "faces_done": 64,
+        "fuse_done": 64,
+        "ingest_done": 64,
+        "probe_done": 64,
+        "provenance_done": 64,
+        "provenance_gate_done": 64,
+        "publish_done": 64,
+        "render_done": 64,
+        "second_pass_skipped": 64,
+        "shots_done": 64,
+        "source_labels_done": 64,
+        "synthesise_done": 64,
+        "temporal_done": 64,
+        "tracks_done": 64
+      },
+      "appearance_review": {
+        "appearance": {
+          "assessed": 64,
+          "flagged": 0,
+          "returned": 64
+        },
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 64,
+          "rate": "1"
+        },
+        "bracketed_known_edit": 0,
+        "changed_picture_input_coverage": {
+          "denominator": 1280,
+          "numerator": 768,
+          "rate": "3/5"
+        },
+        "counts": {},
+        "displayed_changed_picture": 0,
+        "displayed_flag_windows": 0,
+        "displayed_windows": 0,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "fallback": {
+          "assessed": 0,
+          "flagged": 0,
+          "returned": 0
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 64,
+          "rate": "1"
+        },
+        "omitted_windows": 768,
+        "ordinary_control_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "states": {
+          "measured_no_flag": 64
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 2679,
+        "windows": 768
+      },
+      "attempted": 64,
+      "completed": 64,
+      "constructed": 64,
+      "contributing_planned_components": 8,
+      "customer_direction": {
+        "counts": {
+          "engine_returned_unavailable": 64,
+          "excluded_audio_picture_timing": 64,
+          "excluded_voice": 64,
+          "scope_assessed_components": 64,
+          "separate_soundtrack_inconclusive": 12,
+          "separate_soundtrack_original": 36,
+          "unavailable": 64
+        },
+        "directional": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "false_ai_attribution_directional_only": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_neural": {
+          "unavailable": 64
+        }
+      },
+      "detectors": {
+        "attempted": 960,
+        "detect_attempted": 704,
+        "detect_expected": 704,
+        "detect_not_applicable": 146,
+        "detect_skipped": 64,
+        "detect_successful": 494,
+        "expected": 960,
+        "faces_attempted": 64,
+        "faces_expected": 64,
+        "faces_successful": 64,
+        "model_unavailable": 64,
+        "not_applicable": 210,
+        "profile_not_scheduled": 768,
+        "provenance_attempted": 128,
+        "provenance_expected": 128,
+        "provenance_not_applicable": 64,
+        "provenance_successful": 64,
+        "skipped": 64,
+        "successful": 686,
+        "tracks_attempted": 64,
+        "tracks_expected": 64,
+        "tracks_successful": 64
+      },
+      "effects": {
+        "observable": 64
+      },
+      "outcomes": {
+        "done": 64
+      },
+      "planned": 64,
+      "raw_timing_binding_verified": 62,
+      "raw_timing_review": {
+        "assessed": {
+          "component_weighted_rate": "31/32",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 62,
+          "rate": "31/32"
+        },
+        "changed_picture_input_coverage": {
+          "denominator": 1280,
+          "numerator": 1240,
+          "rate": "31/32"
+        },
+        "counts": {
+          "tracks_without_stable_offset": 62
+        },
+        "descriptive_visual_iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 62,
+          "sum": "0"
+        },
+        "displayed_flag_windows": 0,
+        "displayed_windows": 62,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 62,
+          "sum": "0"
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 62,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 62,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "measured_seconds": {
+          "component_weighted_mean": "1",
+          "contributing_components": 8,
+          "denominator": 62,
+          "sum": "62"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 0,
+        "ordinary_control_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "no_stable_offset": 62,
+          "not_applicable": 2
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 1550,
+        "windows": 62
+      },
+      "sampling": {
+        "counts": {
+          "legacy_decoded": 1024,
+          "legacy_face_detected": 1024,
+          "legacy_face_measured": 1024,
+          "legacy_planned": 1024,
+          "native_pictures": 4800,
+          "tracked_native_pictures": 4800
+        },
+        "decoded_legacy_with_detected_face": {
+          "denominator": 1024,
+          "numerator": 1024,
+          "rate": "1"
+        },
+        "native_frames_tracked": {
+          "denominator": 4800,
+          "numerator": 4800,
+          "rate": "1"
+        },
+        "planned_legacy_decoded": {
+          "denominator": 1024,
+          "numerator": 1024,
+          "rate": "1"
+        }
+      },
+      "timing_input_verified": 64,
+      "visual_input_verified": 64
+    },
+    "original": {
+      "analysis_stages": {
+        "condition_done": 16,
+        "decode_done": 16,
+        "detect_done": 16,
+        "faces_done": 16,
+        "fuse_done": 16,
+        "ingest_done": 16,
+        "probe_done": 16,
+        "provenance_done": 16,
+        "provenance_gate_done": 16,
+        "publish_done": 16,
+        "render_done": 16,
+        "second_pass_skipped": 16,
+        "shots_done": 16,
+        "source_labels_done": 16,
+        "synthesise_done": 16,
+        "temporal_done": 16,
+        "tracks_done": 16
+      },
+      "appearance_review": {
+        "appearance": {
+          "assessed": 16,
+          "flagged": 0,
+          "returned": 16
+        },
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "bracketed_known_edit": 0,
+        "changed_picture_input_coverage": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "counts": {},
+        "displayed_changed_picture": 0,
+        "displayed_flag_windows": 0,
+        "displayed_windows": 0,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "fallback": {
+          "assessed": 0,
+          "flagged": 0,
+          "returned": 0
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 192,
+        "ordinary_control_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "measured_no_flag": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "verified_picture_inputs": 669,
+        "windows": 192
+      },
+      "attempted": 16,
+      "completed": 16,
+      "constructed": 16,
+      "contributing_planned_components": 8,
+      "customer_direction": {
+        "counts": {
+          "engine_returned_unavailable": 16,
+          "excluded_audio_picture_timing": 16,
+          "excluded_voice": 16,
+          "scope_assessed_components": 16,
+          "separate_soundtrack_inconclusive": 3,
+          "separate_soundtrack_original": 9,
+          "unavailable": 16
+        },
+        "directional": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution_directional_only": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_neural": {}
+      },
+      "detectors": {
+        "attempted": 240,
+        "detect_attempted": 176,
+        "detect_expected": 176,
+        "detect_not_applicable": 36,
+        "detect_skipped": 16,
+        "detect_successful": 124,
+        "expected": 240,
+        "faces_attempted": 16,
+        "faces_expected": 16,
+        "faces_successful": 16,
+        "model_unavailable": 16,
+        "not_applicable": 52,
+        "profile_not_scheduled": 192,
+        "provenance_attempted": 32,
+        "provenance_expected": 32,
+        "provenance_not_applicable": 16,
+        "provenance_successful": 16,
+        "skipped": 16,
+        "successful": 172,
+        "tracks_attempted": 16,
+        "tracks_expected": 16,
+        "tracks_successful": 16
+      },
+      "effects": {
+        "original": 16
+      },
+      "outcomes": {
+        "done": 16
+      },
+      "planned": 16,
+      "raw_timing_binding_verified": 16,
+      "raw_timing_review": {
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 16,
+          "rate": "1"
+        },
+        "changed_picture_input_coverage": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "counts": {
+          "tracks_without_stable_offset": 16
+        },
+        "descriptive_visual_iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "displayed_flag_windows": 0,
+        "displayed_windows": 16,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "measured_seconds": {
+          "component_weighted_mean": "1",
+          "contributing_components": 8,
+          "denominator": 16,
+          "sum": "16"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 0,
+        "ordinary_control_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "no_stable_offset": 16
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 16,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "verified_picture_inputs": 400,
+        "windows": 16
+      },
+      "sampling": {
+        "counts": {
+          "legacy_decoded": 256,
+          "legacy_face_detected": 256,
+          "legacy_face_measured": 256,
+          "legacy_planned": 256,
+          "native_pictures": 1200,
+          "tracked_native_pictures": 1200
+        },
+        "decoded_legacy_with_detected_face": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        },
+        "native_frames_tracked": {
+          "denominator": 1200,
+          "numerator": 1200,
+          "rate": "1"
+        },
+        "planned_legacy_decoded": {
+          "denominator": 256,
+          "numerator": 256,
+          "rate": "1"
+        }
+      },
+      "timing_input_verified": 16,
+      "visual_input_verified": 16
+    },
+    "resample_brightness": {
+      "analysis_stages": {
+        "condition_done": 64,
+        "decode_done": 64,
+        "detect_done": 64,
+        "faces_done": 64,
+        "fuse_done": 64,
+        "ingest_done": 64,
+        "probe_done": 64,
+        "provenance_done": 64,
+        "provenance_gate_done": 64,
+        "publish_done": 64,
+        "render_done": 64,
+        "second_pass_skipped": 64,
+        "shots_done": 64,
+        "source_labels_done": 64,
+        "synthesise_done": 64,
+        "temporal_done": 64,
+        "tracks_done": 64
+      },
+      "appearance_review": {
+        "appearance": {
+          "assessed": 64,
+          "flagged": 0,
+          "returned": 64
+        },
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 64,
+          "rate": "1"
+        },
+        "bracketed_known_edit": 0,
+        "changed_picture_input_coverage": {
+          "denominator": 1280,
+          "numerator": 768,
+          "rate": "3/5"
+        },
+        "counts": {},
+        "displayed_changed_picture": 0,
+        "displayed_flag_windows": 0,
+        "displayed_windows": 0,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "fallback": {
+          "assessed": 0,
+          "flagged": 0,
+          "returned": 0
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 64,
+          "rate": "1"
+        },
+        "omitted_windows": 768,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "states": {
+          "measured_no_flag": 64
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 2673,
+        "windows": 768
+      },
+      "attempted": 64,
+      "completed": 64,
+      "constructed": 64,
+      "contributing_planned_components": 8,
+      "customer_direction": {
+        "counts": {
+          "engine_returned_unavailable": 64,
+          "excluded_audio_picture_timing": 64,
+          "excluded_voice": 64,
+          "scope_assessed_components": 64,
+          "separate_soundtrack_inconclusive": 12,
+          "separate_soundtrack_original": 36,
+          "unavailable": 64
+        },
+        "directional": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "false_ai_attribution_directional_only": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "observable_neural": {}
+      },
+      "detectors": {
+        "attempted": 960,
+        "detect_attempted": 704,
+        "detect_expected": 704,
+        "detect_not_applicable": 144,
+        "detect_skipped": 64,
+        "detect_successful": 496,
+        "expected": 960,
+        "faces_attempted": 64,
+        "faces_expected": 64,
+        "faces_successful": 64,
+        "model_unavailable": 64,
+        "not_applicable": 208,
+        "profile_not_scheduled": 768,
+        "provenance_attempted": 128,
+        "provenance_expected": 128,
+        "provenance_not_applicable": 64,
+        "provenance_successful": 64,
+        "skipped": 64,
+        "successful": 688,
+        "tracks_attempted": 64,
+        "tracks_expected": 64,
+        "tracks_successful": 64
+      },
+      "effects": {
+        "observable": 64
+      },
+      "outcomes": {
+        "done": 64
+      },
+      "planned": 64,
+      "raw_timing_binding_verified": 64,
+      "raw_timing_review": {
+        "assessed": {
+          "component_weighted_rate": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 64,
+          "rate": "1"
+        },
+        "changed_picture_input_coverage": {
+          "denominator": 1280,
+          "numerator": 1280,
+          "rate": "1"
+        },
+        "counts": {
+          "tracks_without_stable_offset": 64
+        },
+        "descriptive_visual_iou": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "displayed_flag_windows": 0,
+        "displayed_windows": 64,
+        "excluded_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "flag_delivered": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "flagged": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "flagged_seconds": {
+          "component_weighted_mean": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "0"
+        },
+        "iou": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "localized_assessed_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "localized_planned_iou_at_least_one_fifth": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "measured_seconds": {
+          "component_weighted_mean": "1",
+          "contributing_components": 8,
+          "denominator": 64,
+          "sum": "64"
+        },
+        "observable_edits_assessed": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "omitted_windows": 0,
+        "ordinary_control_flags": {
+          "component_weighted_rate": "0",
+          "contributing_components": 8,
+          "denominator": 64,
+          "numerator": 0,
+          "rate": "0"
+        },
+        "outside_edit_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "overlap_seconds": {
+          "component_weighted_mean": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "sum": null
+        },
+        "states": {
+          "no_stable_offset": 64
+        },
+        "truncated_spans": 0,
+        "unchanged_stream_flags": {
+          "component_weighted_rate": null,
+          "contributing_components": 0,
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "verified_picture_inputs": 1600,
+        "windows": 64
+      },
+      "sampling": {
+        "counts": {
+          "legacy_decoded": 1024,
+          "legacy_face_detected": 1024,
+          "legacy_face_measured": 1024,
+          "legacy_planned": 1024,
+          "native_pictures": 4800,
+          "tracked_native_pictures": 4800
+        },
+        "decoded_legacy_with_detected_face": {
+          "denominator": 1024,
+          "numerator": 1024,
+          "rate": "1"
+        },
+        "native_frames_tracked": {
+          "denominator": 4800,
+          "numerator": 4800,
+          "rate": "1"
+        },
+        "planned_legacy_decoded": {
+          "denominator": 1024,
+          "numerator": 1024,
+          "rate": "1"
+        }
+      },
+      "timing_input_verified": 64,
+      "visual_input_verified": 64
+    }
+  },
+  "max_sampled_descendant_rss_bytes": 5662949376,
+  "ordered_private_artifact_commitments_sha256": "d6a28518feee2dba8f0b00e91d713227f85162001b311a85c24763cc25f90ce6",
+  "outside_validated_envelope": 176,
+  "overall": {
+    "analysis_stages": {
+      "condition_done": 176,
+      "decode_done": 176,
+      "detect_done": 176,
+      "faces_done": 176,
+      "fuse_done": 176,
+      "ingest_done": 176,
+      "probe_done": 176,
+      "provenance_done": 176,
+      "provenance_gate_done": 176,
+      "publish_done": 176,
+      "render_done": 176,
+      "second_pass_skipped": 176,
+      "shots_done": 176,
+      "source_labels_done": 176,
+      "synthesise_done": 176,
+      "temporal_done": 176,
+      "tracks_done": 176
+    },
+    "appearance_review": {
+      "appearance": {
+        "assessed": 176,
+        "flagged": 0,
+        "returned": 176
+      },
+      "assessed": {
+        "component_weighted_rate": "1",
+        "contributing_components": 8,
+        "denominator": 176,
+        "numerator": 176,
+        "rate": "1"
+      },
+      "bracketed_known_edit": 0,
+      "changed_picture_input_coverage": {
+        "denominator": 2880,
+        "numerator": 1728,
+        "rate": "3/5"
+      },
+      "counts": {},
+      "displayed_changed_picture": 0,
+      "displayed_flag_windows": 0,
+      "displayed_windows": 0,
+      "excluded_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 176,
+        "sum": "0"
+      },
+      "fallback": {
+        "assessed": 0,
+        "flagged": 0,
+        "returned": 0
+      },
+      "flag_delivered": {
+        "component_weighted_rate": null,
+        "contributing_components": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "rate": null
+      },
+      "flagged": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 176,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "flagged_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 176,
+        "sum": "0"
+      },
+      "iou": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 144,
+        "sum": "0"
+      },
+      "localized_assessed_iou_at_least_one_fifth": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 144,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "localized_planned_iou_at_least_one_fifth": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 144,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "observable_edits_assessed": {
+        "component_weighted_rate": "1",
+        "contributing_components": 8,
+        "denominator": 144,
+        "numerator": 144,
+        "rate": "1"
+      },
+      "omitted_windows": 2112,
+      "ordinary_control_flags": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 96,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "outside_edit_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 144,
+        "sum": "0"
+      },
+      "overlap_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 144,
+        "sum": "0"
+      },
+      "states": {
+        "measured_no_flag": 176
+      },
+      "truncated_spans": 0,
+      "unchanged_stream_flags": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 32,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "verified_picture_inputs": 7362,
+      "windows": 2112
+    },
+    "attempted": 176,
+    "completed": 176,
+    "constructed": 176,
+    "contributing_planned_components": 8,
+    "customer_direction": {
+      "counts": {
+        "engine_returned_unavailable": 176,
+        "excluded_audio_picture_timing": 176,
+        "excluded_voice": 176,
+        "scope_assessed_components": 176,
+        "separate_soundtrack_ai": 12,
+        "separate_soundtrack_inconclusive": 32,
+        "separate_soundtrack_original": 90,
+        "unavailable": 176
+      },
+      "directional": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 176,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "false_ai_attribution": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 112,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "false_ai_attribution_directional_only": {
+        "component_weighted_rate": null,
+        "contributing_components": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "rate": null
+      },
+      "observable_neural": {
+        "unavailable": 64
+      }
+    },
+    "detectors": {
+      "attempted": 2640,
+      "detect_attempted": 1936,
+      "detect_expected": 1936,
+      "detect_not_applicable": 396,
+      "detect_skipped": 176,
+      "detect_successful": 1364,
+      "expected": 2640,
+      "faces_attempted": 176,
+      "faces_expected": 176,
+      "faces_successful": 176,
+      "model_unavailable": 176,
+      "not_applicable": 572,
+      "profile_not_scheduled": 2112,
+      "provenance_attempted": 352,
+      "provenance_expected": 352,
+      "provenance_not_applicable": 176,
+      "provenance_successful": 176,
+      "skipped": 176,
+      "successful": 1892,
+      "tracks_attempted": 176,
+      "tracks_expected": 176,
+      "tracks_successful": 176
+    },
+    "effects": {
+      "observable": 160,
+      "original": 16
+    },
+    "outcomes": {
+      "done": 176
+    },
+    "planned": 176,
+    "raw_timing_binding_verified": 174,
+    "raw_timing_review": {
+      "assessed": {
+        "component_weighted_rate": "87/88",
+        "contributing_components": 8,
+        "denominator": 176,
+        "numerator": 174,
+        "rate": "87/88"
+      },
+      "changed_picture_input_coverage": {
+        "denominator": 2880,
+        "numerator": 2840,
+        "rate": "71/72"
+      },
+      "counts": {
+        "tracks_without_stable_offset": 174
+      },
+      "descriptive_visual_iou": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 142,
+        "sum": "0"
+      },
+      "displayed_flag_windows": 0,
+      "displayed_windows": 174,
+      "excluded_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 174,
+        "sum": "0"
+      },
+      "flag_delivered": {
+        "component_weighted_rate": null,
+        "contributing_components": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "rate": null
+      },
+      "flagged": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 174,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "flagged_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 174,
+        "sum": "0"
+      },
+      "iou": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "sum": "0"
+      },
+      "localized_assessed_iou_at_least_one_fifth": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "localized_planned_iou_at_least_one_fifth": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "measured_seconds": {
+        "component_weighted_mean": "1",
+        "contributing_components": 8,
+        "denominator": 174,
+        "sum": "174"
+      },
+      "observable_edits_assessed": {
+        "component_weighted_rate": "1",
+        "contributing_components": 8,
+        "denominator": 16,
+        "numerator": 16,
+        "rate": "1"
+      },
+      "omitted_windows": 0,
+      "ordinary_control_flags": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 96,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "outside_edit_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "sum": "0"
+      },
+      "overlap_seconds": {
+        "component_weighted_mean": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "sum": "0"
+      },
+      "states": {
+        "no_stable_offset": 174,
+        "not_applicable": 2
+      },
+      "truncated_spans": 0,
+      "unchanged_stream_flags": {
+        "component_weighted_rate": "0",
+        "contributing_components": 8,
+        "denominator": 16,
+        "numerator": 0,
+        "rate": "0"
+      },
+      "verified_picture_inputs": 4350,
+      "windows": 174
+    },
+    "sampling": {
+      "counts": {
+        "legacy_decoded": 2816,
+        "legacy_face_detected": 2816,
+        "legacy_face_measured": 2816,
+        "legacy_planned": 2816,
+        "native_pictures": 13200,
+        "tracked_native_pictures": 13200
+      },
+      "decoded_legacy_with_detected_face": {
+        "denominator": 2816,
+        "numerator": 2816,
+        "rate": "1"
+      },
+      "native_frames_tracked": {
+        "denominator": 13200,
+        "numerator": 13200,
+        "rate": "1"
+      },
+      "planned_legacy_decoded": {
+        "denominator": 2816,
+        "numerator": 2816,
+        "rate": "1"
+      }
+    },
+    "timing_input_verified": 176,
+    "visual_input_verified": 176
+  },
+  "paired_soundtrack": {
+    "matched_counts": {
+      "ordinary_delay_direction_changed": 14,
+      "same_pcm_both_assessments_present": 108,
+      "same_pcm_full_assessment_equal": 144,
+      "verified_ordinary_delay_pairs": 16,
+      "verified_same_pcm_pairs": 144
+    },
+    "ordinary_delay_directions": {
+      "ai": 12,
+      "inconclusive": 2,
+      "unavailable": 2
+    },
+    "original_directions": {
+      "inconclusive": 3,
+      "original": 9,
+      "unavailable": 4
+    },
+    "scope": "Separate soundtrack outcomes on genuine audio and a non-neural 320 ms audio copy control."
+  },
+  "schema": "chipmunk.grid-serving-completion/156",
+  "selected_detector_route_counts": {
+    "audio_picture_timing": {
+      "memory_budget_skips": 0,
+      "statuses": {
+        "not_applicable": 2,
+        "ok": 174
+      }
+    },
+    "background_sound": {
+      "memory_budget_skips": 0,
+      "statuses": {
+        "ok": 176
+      }
+    },
+    "face_appearance": {
+      "memory_budget_skips": 0,
+      "statuses": {
+        "ok": 176
+      }
+    },
+    "frame_authenticity": {
+      "memory_budget_skips": 176,
+      "statuses": {
+        "skipped": 176
+      }
+    }
+  },
+  "serving_freeze_sha256": "3e650f8d7c8b64165a61a9a6d05b691109c27c6f44d48bae435e0aa0e09c9320",
+  "status": "complete_guarded_pilot",
+  "sum_worker_duration_seconds": 2324.548,
+  "timing_change_opportunity": {
+    "cases_meeting_minimum_before_picture_speech_and_attribution_gates": 0,
+    "full_search_windows_possible_per_track_from_audio_extent": {
+      "1": 176
+    },
+    "minimum_windows_for_either_change_rule": 4,
+    "scope": "The raw timing readout counts a bound lag measurement as assessed. This ceiling measures opportunity to detect a timing change, before further coverage gates."
+  }
+}

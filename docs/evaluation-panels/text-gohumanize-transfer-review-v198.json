@@ -1,0 +1,20 @@
+{
+  "schema": "chipmunk.text-gohumanize-transfer-review/198",
+  "status": "complete",
+  "published_readout_sha256": "eff16a6244be6dcb3ee8b200b4fc55e1b157794372bf63300b5729003a45ea53",
+  "transfer_freeze_sha256": "bcdea8d8dd81bd5f5dc934c546d60ea03ee256b29a557d67996146281fad5475",
+  "verified_batch_count": 6,
+  "verified_case_count": 324,
+  "verified_source_pairs": 54,
+  "verified_article_groups": 30,
+  "methods": [
+    "baseline",
+    "canonical_current",
+    "canonical_union",
+    "baseline_plus_canonical_union"
+  ],
+  "exact_readout_match": true,
+  "new_model_calls": 0,
+  "source_text_published": false,
+  "scope": "Independent Unicode and arithmetic replay over committed model responses; no tokenizer or model rerun."
+}

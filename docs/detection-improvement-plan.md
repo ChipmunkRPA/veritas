@@ -108,10 +108,18 @@ integration remains unfinished.
   found 4/8 useful PNG regions for relative crops versus 0/8 current, with zero
   unchanged-original flags in both arms. It also flagged 4/8 processing controls
   and localized zero JPEG75 edits, so the candidate remains experimental.
+  The [separate remote-context holdout](image-bg-real-insertions-2026-11-11.md#separate-holdout-for-shared-processing-artifacts)
+  removed all three processing-control flags and retained two useful locations
+  on eight other PNG sources. This result remains specific to one generator and
+  one matched processing control.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
   foregrounds. Keep the paired method experimental for independent transfer.
+- The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
+  localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
+  3/21 human controls versus 4/21. The test used 11 new source articles and two
+  generator families. The result supports further transfer before app adoption.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

@@ -1,0 +1,146 @@
+{
+  "audit": {
+    "acquisition_exit_code": 0,
+    "held_out_views": 24,
+    "region_arm_measurements": 48,
+    "scoring_exit_code": 0
+  },
+  "intake": {
+    "acquisition_journal_sha256": "772e801e4dcaafefdb82a71e74316ad8fcf0d377f852222ed5b91d501ed28342",
+    "asset_count": 32,
+    "exact_ai_pixel_area_range": [
+      0.022549099392361112,
+      0.055277506510416664
+    ],
+    "exact_changed_pixels_outside_semantic_mask": 0,
+    "excluded_reasons": {},
+    "forwards": 0,
+    "plan_sha256": "fc51e6a4d39908e9988549dd9f0f42bbd8b216d239a7ce1c3f2c93b1151613ac",
+    "planned": 8,
+    "processing_changed_pixels_range": [
+      207059,
+      465825
+    ],
+    "qualified": 8,
+    "qualified_by_area_band": {
+      "0.02-0.05": 4,
+      "0.05-0.1": 4
+    },
+    "schema": "chipmunk.image-bg-real-insertion-intake/1"
+  },
+  "points": {
+    "eligible_fit_controls": 4,
+    "fit_group_count": 8,
+    "relative": 8.313690900802614,
+    "remote_upper_strict": -4.78482723236084
+  },
+  "schema": "chipmunk.image-crop-remote-study/1",
+  "scoring": {
+    "assessed_groups": 8,
+    "elapsed_s": 42.823,
+    "freeze_sha256": "aa1ddd87e04e702420a41134dc103635c149380a73ba17e74653948026bece6d",
+    "input_crops": 800,
+    "paired_region_flags": {
+      "edited": {
+        "0_to_0": 5,
+        "1_to_1": 3
+      },
+      "original": {
+        "0_to_0": 8
+      },
+      "processed": {
+        "0_to_0": 5,
+        "1_to_0": 3
+      }
+    },
+    "peak_rss_bytes_mac": 619118592,
+    "planned_groups": 8,
+    "points_sha256": "7de6ed718c1819b4d027640053244e834b09dc1a62ea74e44e3704335985ca85",
+    "results": {
+      "png": {
+        "relative_crop": {
+          "edited": {
+            "mean_iou": 0.13563839126085747,
+            "mean_recall": 0.3046177825185522,
+            "region_flags": 3,
+            "useful_localizations": 2,
+            "views": 8
+          },
+          "original": {
+            "region_flags": 0,
+            "views": 8
+          },
+          "processed": {
+            "region_flags": 3,
+            "views": 8
+          }
+        },
+        "remote_control": {
+          "edited": {
+            "mean_iou": 0.13563839126085747,
+            "mean_recall": 0.3046177825185522,
+            "region_flags": 3,
+            "useful_localizations": 2,
+            "views": 8
+          },
+          "original": {
+            "region_flags": 0,
+            "views": 8
+          },
+          "processed": {
+            "region_flags": 0,
+            "views": 8
+          }
+        }
+      }
+    },
+    "rows_sha256": "9553a68e31948fb4476bdc9925bd00c13202b53341bb1538f8b6b9eec964f5c9",
+    "schema": "chipmunk.image-crop-remote-context/1",
+    "serving_admitted": false
+  },
+  "scoring_freeze": {
+    "held_out_inputs_sha256": "10f881655641006cb297e035e7a40b23cfc52b90eb9d9b9d40efa547f923a1b6",
+    "previous_inputs_sha256": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8",
+    "relative_point": 8.313690900802614,
+    "remote_point_rule": "strictly below the second lowest remote median among prior flagged processing controls",
+    "schema": "chipmunk.image-crop-remote-context/1",
+    "study_sha256": "44b5d597ebddce5eeda7feddef6cf7151f9a99de5732ffd980e5f61db8eccdd5",
+    "weight_sha256": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387"
+  },
+  "selection": {
+    "components_excluded": {
+      "prior_exposure_component": 18,
+      "shared_recipient_component": 1
+    },
+    "dataset_revision": "aaba6cd1ced4ce3c846be9641fed092adb4919d1",
+    "eligible_by_area_band": {
+      "0.02-0.05": 105,
+      "0.05-0.1": 7,
+      "0.1-0.15": 0
+    },
+    "exposure_sha256": {
+      "image-bg-real-acquisition-v225": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7",
+      "image-bg-real-backup-intake-v262": "2fd9fdbbb156182fc0c5234c29de799daf5c0f2746cbc53c55aeba6fe0acaa00",
+      "prior_insertion_qualification": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8",
+      "prior_insertion_roster": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+      "v189_inputs": "8cbbbde2d27e717773f88990b7cb96decfb41db3350c111c21cb38745a0a6223",
+      "v19_inventory": "9a5c817102ff81cf7825becc5107762d7b6bcddc03eceecf2a18601a55ec5f7c",
+      "v26_plan": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a",
+      "v39_graph": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea"
+    },
+    "generator_revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+    "metadata_rejected": {
+      "Unrecognized attribution URL": 1,
+      "Unresolved photo or owner alias": 3
+    },
+    "metadata_sha256": {
+      "README.md": "b33ed5d0e41c33876fedf528940e12d0a26f99d7525195ef54f1e0786e8758d0",
+      "attribution.csv": "9d7b9019055f689d656312c457cab464066167d02b9fe56b8dcf89921832423f",
+      "manifest_v2.csv": "773548c9aa03011f308059b87ac47fe72110783b8d70804dc6d4f837372cf5f4",
+      "model_revisions.csv": "e7d970bfeeb8126c6b07059b9423f71055c5ebc9834bd89a41e665dd305e7bf6",
+      "recipients.csv": "a833fafa06243a6138c46a7858112f30e42640072c028c6d5736909860dedeef",
+      "splits_v2.yaml": "e9fe9ddcbf04c5b36905c5006d797d5b9fa0e304a8de7b28ecb82c96faecb0da"
+    },
+    "script_sha256": "44b5d597ebddce5eeda7feddef6cf7151f9a99de5732ffd980e5f61db8eccdd5"
+  }
+}

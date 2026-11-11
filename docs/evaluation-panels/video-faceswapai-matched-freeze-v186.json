@@ -1,0 +1,71 @@
+{
+  "schema": "chipmunk.video-faceswapai-matched-freeze/186",
+  "publisher_manifest_sha256": "e73ecc30c700b95246fa56977e6e596eb685035a16a0b19d72e9f14e76095e8c",
+  "publisher_asset_sha256": {
+    "original": "3a8cefeb1e69d433ff171f2639c15c9d45e9d87932dba8c046c4105653af7f1f",
+    "swap": "8cd3b9ac4dfdc62c635d5bf0e00cb01b3c6ecd23cc08efdb0ec1dccd1592ad77",
+    "donor": "5f6aa1a771c4940ed053d2dce3932f5c360840511e80893e72b507c5eaa05b59"
+  },
+  "code_sha256": {
+    "backend/scripts/video_faceswapai_matched_v186.py": "48e36c6811fb5f74399560ae28941d5f7ef96cad50658ded93b2e12609fb8d1e",
+    "backend/tests/test_video_faceswapai_matched_v186.py": "6191b7867e45fd100c940f7cfdbdaddd9e0623e1581c26468ff687c170c40ca9",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/video_native_inserts_v95.py": "53a58114839b5775abff283b579bc4165b1b6895a7ec48d2beb70205548cc024",
+    "backend/scripts/video_native_sources_v92.py": "403f4a87e7ce1d3f289a64bc075660f191cd9183edf545b5f24d4d65475f27c9",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "docs/video-faceswapai-source-v185.md": "4c1f4fb7d0857819dc3adf4a46ada0ff1263ead7c170cca49cf44c3de363c90b",
+    "docs/video-faceswapai-matched-v186-method.md": "e7aab727cd77b10cb04a8db52904fe54e8f23ff4059e1461c9a5449431c62ec1"
+  },
+  "binary_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "psutil": "7.2.2"
+  },
+  "conditions": {
+    "unchanged": "unswapped_synthetic_reference",
+    "recompression_only": "ordinary_recompression_control",
+    "swap_tv_bt601": "publisher_swap_insertion",
+    "swap_pc_bt601": "publisher_swap_insertion",
+    "swap_tv_bt709": "publisher_swap_insertion",
+    "swap_pc_bt709": "publisher_swap_insertion"
+  },
+  "source_color_assumptions": {
+    "swap_tv_bt601": [
+      "tv",
+      "bt601"
+    ],
+    "swap_pc_bt601": [
+      "pc",
+      "bt601"
+    ],
+    "swap_tv_bt709": [
+      "tv",
+      "bt709"
+    ],
+    "swap_pc_bt709": [
+      "pc",
+      "bt709"
+    ]
+  },
+  "edit_frame_range": [
+    72,
+    144
+  ],
+  "edit_pts_range": [
+    36864,
+    73728
+  ],
+  "native_clock": {
+    "time_base": "1/12288",
+    "step": 512,
+    "frames": 240
+  },
+  "new_neural_calls": 0,
+  "scope": "One synthetic source component, controlled timing and codec evidence only."
+}

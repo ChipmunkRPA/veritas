@@ -14,3 +14,9 @@ Both checks finished all 480 planned local forwards and four exact repeats. The 
 Each count is out of 24 source views in its column. A useful region covered at least half the known edited pixels and reached at least 0.30 intersection over union. The sensitive check flagged more of every conventional control at both JPEG qualities. The intersection reduced copy-move flags and returned empty regions for all AI edits. This differs from the earlier JPEG 75 result, where the sensitive check found 14 useful locations and the current check found two. [Earlier editing-family comparison](image-jpeg-diagnostic-v189-result.md)
 
 The sensitive check remains a development candidate. The two benchmarks show that its localization benefit depends on editing family. The same 24 source groups recur at both JPEG qualities. These measurements apply to pixel evidence, and no calibration or serving change followed.
+
+## Saved-map diagnosis
+
+A model-free replay reproduced all 240 stock current masks and measurements. Bypassing only the image-level gate kept the same JPEG reliability, quantization and component rules. At JPEG 75 it added 81 flags across the 96 matched control views and zero useful AI locations. At JPEG 90 it added 72 control flags and one useful AI location. More proposed masks touched the edit at both qualities, but nearly all those extra masks missed the useful-localization criteria.
+
+The sensitive map's pixels above its frozen cutoff had zero overlap with the edit across all 24 photos at each quality, before image gating or component selection. This distinguishes a missing high-score cue from suppression at the image gate. The saved-map comparison supports keeping the current gate and evaluating a different regional cue on fresh removal edits.

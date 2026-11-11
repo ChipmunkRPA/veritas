@@ -16,7 +16,7 @@ from scripts import audio_commons_background_v234 as background
 from scripts import audio_fresh_shared_noise_v217 as prior
 from scripts import audio_okur_turkish_followup_v245 as okur_followup
 from scripts import audio_okur_turkish_v240 as okur
-from scripts import audio_rueg_genuine_v246 as genuine
+from scripts import audio_rueg_activity_crop_v252 as genuine
 from scripts import audio_shared_noise_v216 as shared
 from scripts.audio_voxforge_tr_transfer_v201 import verify_data_guard
 from scripts.video_appearance_corrected_v112 import scoped
@@ -33,7 +33,7 @@ RESULTS = {
     "alania": PANEL / "audio-alania-followup-complete-v236.json",
     "okur_pilot": PANEL / "audio-okur-turkish-complete-v240.json",
     "okur_followup": PANEL / "audio-okur-turkish-followup-complete-v245.json",
-    "genuine": PANEL / "audio-rueg-genuine-complete-v246.json",
+    "genuine": PANEL / "audio-rueg-activity-crop-complete-v252.json",
     "screen": PANEL / "audio-commons-slice-screen-complete-v247.json",
 }
 PINNED_RESULTS = {
@@ -115,7 +115,7 @@ def foregrounds(results):
                 digest(wav) == row["wav_sha256"] and len(pcm) == row["samples"],
                 "Qualified genuine WAV differs",
             )
-        sources["genuine"].append(source_record("v246", slot, member.participant, row, pcm))
+        sources["genuine"].append(source_record("v252", slot, member.participant, row, pcm))
 
     rows, receipt = alania.verified_preparation()
     require(

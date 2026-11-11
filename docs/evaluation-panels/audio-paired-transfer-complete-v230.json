@@ -1,0 +1,1157 @@
+{
+  "schema": "chipmunk.audio-paired-transfer-result/230",
+  "status": "complete",
+  "freeze_sha256": "bac0b9144a566522ad867f4bac20e3fadd6f52ef0b2a3ba03bad4c8209550e8b",
+  "new_neural_calls": 195,
+  "profile_sha256": [
+    "aeef3a4d75b8476ec28b37754b364a70fb697c0c7849b980e47c6b65e1f9290c",
+    "9787d43c51bbbaec0e79a05820c1fec0fa82ba05d90d505ad58dc423d754894c",
+    "993f08c73d03a51cf6619e510636cc82bd2b629906ba97e516d588cf5df3ff62",
+    "a65f0f0ebead7d70bba1f902a8099dc36c8d3eccd16a26f3c565b993be51f3e3",
+    "33ec52c94e9820325f7746e1c097ef19ac971d057d29ba52e3e526de8dcc37ec"
+  ],
+  "planned": 240,
+  "assessed": 195,
+  "coverage_and_directions": {
+    "genuine": {
+      "matched_clean": {
+        "planned": 16,
+        "assessed": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        }
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "assessed": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        }
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "assessed": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        }
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "assessed": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 7,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 7,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 9,
+          "inconclusive": 2,
+          "unavailable": 5
+        }
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "assessed": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 9,
+          "inconclusive": 2,
+          "unavailable": 5
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 9,
+          "inconclusive": 2,
+          "unavailable": 5
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        }
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "planned": 16,
+        "assessed": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "recorded_v219": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 16,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 0
+        }
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "assessed": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "recorded_v219": {
+          "ai": 3,
+          "original": 4,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 3,
+          "original": 4,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 4,
+          "original": 7,
+          "inconclusive": 5,
+          "unavailable": 0
+        }
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "assessed": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "recorded_v219": {
+          "ai": 5,
+          "original": 4,
+          "inconclusive": 7,
+          "unavailable": 0
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 5,
+          "original": 4,
+          "inconclusive": 7,
+          "unavailable": 0
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 6,
+          "original": 6,
+          "inconclusive": 4,
+          "unavailable": 0
+        }
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "assessed": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "recorded_v219": {
+          "ai": 0,
+          "original": 4,
+          "inconclusive": 12,
+          "unavailable": 0
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 0,
+          "original": 5,
+          "inconclusive": 11,
+          "unavailable": 0
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 1,
+          "original": 5,
+          "inconclusive": 10,
+          "unavailable": 0
+        }
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "assessed": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "recorded_v219": {
+          "ai": 2,
+          "original": 5,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 2,
+          "original": 5,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 4,
+          "original": 5,
+          "inconclusive": 7,
+          "unavailable": 0
+        }
+      }
+    },
+    "drifting": {
+      "matched_clean": {
+        "planned": 16,
+        "assessed": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "recorded_v219": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        }
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "assessed": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "recorded_v219": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        }
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "assessed": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "recorded_v219": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        }
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "assessed": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "recorded_v219": {
+          "ai": 7,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 4
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 7,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 4
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 8,
+          "original": 0,
+          "inconclusive": 4,
+          "unavailable": 4
+        }
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "assessed": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "recorded_v219": {
+          "ai": 11,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 4
+        },
+        "current_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "candidate_at_english_diagnostic_point": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        }
+      }
+    }
+  },
+  "raw_ranking": {
+    "matched_clean": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 308,
+            "wins": 308,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 19,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 308,
+            "wins": 308,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 19,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 176,
+            "wins": 176,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 11,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 176,
+            "wins": 176,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 11,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      },
+      "drifting": {
+        "current_raw": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "kitchen_0db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 308,
+            "wins": 303,
+            "ties": 0,
+            "losses": 5,
+            "concordance": 0.9837662337662337
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 18,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9473684210526315
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 308,
+            "wins": 280,
+            "ties": 0,
+            "losses": 28,
+            "concordance": 0.9090909090909091
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 17,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8947368421052632
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 176,
+            "wins": 171,
+            "ties": 0,
+            "losses": 5,
+            "concordance": 0.9715909090909091
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 10,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9090909090909091
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 176,
+            "wins": 148,
+            "ties": 0,
+            "losses": 28,
+            "concordance": 0.8409090909090909
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 9,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8181818181818182
+          }
+        }
+      },
+      "drifting": {
+        "current_raw": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "kitchen_5db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 308,
+            "wins": 305,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.9902597402597403
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 18,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9473684210526315
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 308,
+            "wins": 284,
+            "ties": 0,
+            "losses": 24,
+            "concordance": 0.922077922077922
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 17,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8947368421052632
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 176,
+            "wins": 173,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.9829545454545454
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 10,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9090909090909091
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 176,
+            "wins": 152,
+            "ties": 0,
+            "losses": 24,
+            "concordance": 0.8636363636363636
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 9,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8181818181818182
+          }
+        }
+      },
+      "drifting": {
+        "current_raw": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "traffic_0db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 308,
+            "wins": 256,
+            "ties": 0,
+            "losses": 52,
+            "concordance": 0.8311688311688312
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 16,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.8421052631578947
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 308,
+            "wins": 270,
+            "ties": 0,
+            "losses": 38,
+            "concordance": 0.8766233766233766
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 17,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8947368421052632
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 176,
+            "wins": 131,
+            "ties": 0,
+            "losses": 45,
+            "concordance": 0.7443181818181818
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 8,
+            "ties": 0,
+            "losses": 3,
+            "concordance": 0.7272727272727273
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 176,
+            "wins": 140,
+            "ties": 0,
+            "losses": 36,
+            "concordance": 0.7954545454545454
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 9,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.8181818181818182
+          }
+        }
+      },
+      "drifting": {
+        "current_raw": {
+          "all": {
+            "comparisons": 132,
+            "wins": 125,
+            "ties": 0,
+            "losses": 7,
+            "concordance": 0.946969696969697
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 132,
+            "wins": 130,
+            "ties": 0,
+            "losses": 2,
+            "concordance": 0.9848484848484849
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    },
+    "traffic_5db": {
+      "all_synthetic": {
+        "current_raw": {
+          "all": {
+            "comparisons": 308,
+            "wins": 289,
+            "ties": 0,
+            "losses": 19,
+            "concordance": 0.9383116883116883
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 19,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 308,
+            "wins": 286,
+            "ties": 0,
+            "losses": 22,
+            "concordance": 0.9285714285714286
+          },
+          "within_triplet": {
+            "comparisons": 19,
+            "wins": 18,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9473684210526315
+          }
+        }
+      },
+      "alania": {
+        "current_raw": {
+          "all": {
+            "comparisons": 176,
+            "wins": 157,
+            "ties": 0,
+            "losses": 19,
+            "concordance": 0.8920454545454546
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 11,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 176,
+            "wins": 154,
+            "ties": 0,
+            "losses": 22,
+            "concordance": 0.875
+          },
+          "within_triplet": {
+            "comparisons": 11,
+            "wins": 10,
+            "ties": 0,
+            "losses": 1,
+            "concordance": 0.9090909090909091
+          }
+        }
+      },
+      "drifting": {
+        "current_raw": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        },
+        "candidate_score": {
+          "all": {
+            "comparisons": 132,
+            "wins": 132,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          },
+          "within_triplet": {
+            "comparisons": 8,
+            "wins": 8,
+            "ties": 0,
+            "losses": 0,
+            "concordance": 1.0
+          }
+        }
+      }
+    }
+  },
+  "paired_clean_to_noise_score_drift": {
+    "genuine": {
+      "kitchen_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.00011857730251821604,
+          "mean_absolute_bounded_logit_change": 0.13978394660904508,
+          "up": 9,
+          "down": 2,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.032605121945379546,
+          "mean_absolute_bounded_logit_change": 0.17609941865070758,
+          "up": 6,
+          "down": 5,
+          "tie": 0
+        }
+      },
+      "kitchen_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 7.045382252809677e-05,
+          "mean_absolute_bounded_logit_change": 0.0857921913584912,
+          "up": 8,
+          "down": 3,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.0348030184581819,
+          "mean_absolute_bounded_logit_change": 0.17929137711038673,
+          "up": 6,
+          "down": 5,
+          "tie": 0
+        }
+      },
+      "traffic_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.006390678050758486,
+          "mean_absolute_bounded_logit_change": 1.0440113849879031,
+          "up": 11,
+          "down": 0,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.08305682390989906,
+          "mean_absolute_bounded_logit_change": 0.3922307713701006,
+          "up": 11,
+          "down": 0,
+          "tie": 0
+        }
+      },
+      "traffic_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.00026046434967693955,
+          "mean_absolute_bounded_logit_change": 0.2565040461426062,
+          "up": 9,
+          "down": 2,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 11,
+          "mean_absolute_score_change": 0.03780345497346023,
+          "mean_absolute_bounded_logit_change": 0.1887963341234314,
+          "up": 11,
+          "down": 0,
+          "tie": 0
+        }
+      }
+    },
+    "alania": {
+      "kitchen_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.7130360757400922,
+          "mean_absolute_bounded_logit_change": 9.752308992752466,
+          "up": 0,
+          "down": 16,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.3019526475075913,
+          "mean_absolute_bounded_logit_change": 1.3893418499922598,
+          "up": 1,
+          "down": 15,
+          "tie": 0
+        }
+      },
+      "kitchen_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.610351771589194,
+          "mean_absolute_bounded_logit_change": 8.289388924286529,
+          "up": 0,
+          "down": 16,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.24853509978600968,
+          "mean_absolute_bounded_logit_change": 1.1480378181779831,
+          "up": 3,
+          "down": 13,
+          "tie": 0
+        }
+      },
+      "traffic_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.964287131850142,
+          "mean_absolute_bounded_logit_change": 12.42708637644909,
+          "up": 0,
+          "down": 16,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.30438983770360234,
+          "mean_absolute_bounded_logit_change": 1.4363537791973076,
+          "up": 0,
+          "down": 16,
+          "tie": 0
+        }
+      },
+      "traffic_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.7425681993481703,
+          "mean_absolute_bounded_logit_change": 10.455310777430988,
+          "up": 0,
+          "down": 16,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 16,
+          "mean_absolute_score_change": 0.26860464731360606,
+          "mean_absolute_bounded_logit_change": 1.2596626574407424,
+          "up": 2,
+          "down": 14,
+          "tie": 0
+        }
+      }
+    },
+    "drifting": {
+      "kitchen_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 6.367762883504231e-05,
+          "mean_absolute_bounded_logit_change": 0.11072392744290756,
+          "up": 0,
+          "down": 12,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.031643598135837725,
+          "mean_absolute_bounded_logit_change": 0.21671108368940914,
+          "up": 11,
+          "down": 1,
+          "tie": 0
+        }
+      },
+      "kitchen_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 3.711382548014323e-05,
+          "mean_absolute_bounded_logit_change": 0.06694784423725893,
+          "up": 0,
+          "down": 12,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.02724412976545511,
+          "mean_absolute_bounded_logit_change": 0.18440754064344225,
+          "up": 11,
+          "down": 1,
+          "tie": 0
+        }
+      },
+      "traffic_0db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.33239684546909604,
+          "mean_absolute_bounded_logit_change": 4.819988239820391,
+          "up": 0,
+          "down": 12,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.11893298848348967,
+          "mean_absolute_bounded_logit_change": 0.6514509355416477,
+          "up": 7,
+          "down": 5,
+          "tie": 0
+        }
+      },
+      "traffic_5db": {
+        "current_raw": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.0009989291429519653,
+          "mean_absolute_bounded_logit_change": 0.6566100443409453,
+          "up": 0,
+          "down": 12,
+          "tie": 0
+        },
+        "candidate_score": {
+          "planned_pairs": 16,
+          "both_assessed": 12,
+          "mean_absolute_score_change": 0.052313325137450045,
+          "mean_absolute_bounded_logit_change": 0.38367517738019336,
+          "up": 12,
+          "down": 0,
+          "tie": 0
+        }
+      }
+    }
+  },
+  "scope": "Observed transfer on the consumed v219 cohorts and two shared recorded tapes. English score directions are diagnostic only, without target-language or duration calibration.",
+  "new_fitting": false,
+  "defaults_changed": false,
+  "holdout_scored": false
+}

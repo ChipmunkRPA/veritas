@@ -107,6 +107,9 @@ The [aligned face detail and motion comparison](video-aligned-face-detail-probe.
 reuses committed landmarks to evaluate two new measurements on separate
 development and confirmation groups. It includes the local replay command and
 reports the false alarms that kept both measurements experimental.
+The [whole-clip face-swap comparison](video-full-clip-face-swap-transfer.md)
+uses pinned crop classifiers on exact common frame inputs, with genuine paired
+and camera controls and a separate publisher swap.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

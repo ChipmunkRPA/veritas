@@ -1,0 +1,211 @@
+{
+  "cases": 66,
+  "freeze_sha256": "e5c1c73171639c13ea41aa893a601be4434489436e78ced51f2d8b9504eaa251",
+  "native_frames_per_arm": 396,
+  "paired_transitions": {
+    "confirmation/inswapper": {
+      "below to below": 8,
+      "below to flagged": 1,
+      "flagged to below": 1
+    },
+    "confirmation/original_videos": {
+      "below to below": 9,
+      "flagged to below": 1
+    },
+    "confirmation/uniface": {
+      "below to below": 8,
+      "below to flagged": 2
+    },
+    "development/inswapper": {
+      "below to below": 4,
+      "below to flagged": 3,
+      "flagged to below": 2,
+      "flagged to flagged": 1
+    },
+    "development/original_videos": {
+      "below to below": 8,
+      "below to flagged": 1,
+      "flagged to below": 1
+    },
+    "development/uniface": {
+      "below to below": 6,
+      "below to flagged": 1,
+      "flagged to below": 1,
+      "flagged to flagged": 2
+    },
+    "transfer/camera": {
+      "below to below": 4
+    },
+    "transfer/synthetic_original": {
+      "below to below": 1
+    },
+    "transfer/synthetic_swap": {
+      "below to below": 1
+    }
+  },
+  "resources": {
+    "gend": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 4483907584,
+        "free_disk": 2707513344
+      },
+      "limits": {
+        "initial_available_ram": 4026531840,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 2415919104,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 2509078528,
+      "peak_tree_rss": 1700577280,
+      "seconds": 128.362,
+      "stop": null
+    },
+    "reference": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 5742526464,
+        "free_disk": 2695376896
+      },
+      "limits": {
+        "initial_available_ram": 4026531840,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 2415919104,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 2845278208,
+      "peak_tree_rss": 1044135936,
+      "seconds": 137.791,
+      "stop": null
+    }
+  },
+  "results": {
+    "gend": {
+      "groups": {
+        "confirmation/inswapper": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 1,
+          "valid_face_frames": 60
+        },
+        "confirmation/original_videos": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 0,
+          "valid_face_frames": 60
+        },
+        "confirmation/uniface": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 2,
+          "valid_face_frames": 60
+        },
+        "development/inswapper": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 4,
+          "valid_face_frames": 60
+        },
+        "development/original_videos": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 1,
+          "valid_face_frames": 60
+        },
+        "development/uniface": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 3,
+          "valid_face_frames": 60
+        },
+        "transfer/camera": {
+          "assessed": 4,
+          "cases": 4,
+          "flags": 0,
+          "valid_face_frames": 24
+        },
+        "transfer/synthetic_original": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "valid_face_frames": 6
+        },
+        "transfer/synthetic_swap": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "valid_face_frames": 6
+        }
+      },
+      "maximum_observed_mps_driver_bytes": 2194358272
+    },
+    "reference": {
+      "groups": {
+        "confirmation/inswapper": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 1,
+          "valid_face_frames": 60
+        },
+        "confirmation/original_videos": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 1,
+          "valid_face_frames": 60
+        },
+        "confirmation/uniface": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 0,
+          "valid_face_frames": 60
+        },
+        "development/inswapper": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 3,
+          "valid_face_frames": 60
+        },
+        "development/original_videos": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 1,
+          "valid_face_frames": 60
+        },
+        "development/uniface": {
+          "assessed": 10,
+          "cases": 10,
+          "flags": 3,
+          "valid_face_frames": 60
+        },
+        "transfer/camera": {
+          "assessed": 4,
+          "cases": 4,
+          "flags": 0,
+          "valid_face_frames": 24
+        },
+        "transfer/synthetic_original": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "valid_face_frames": 6
+        },
+        "transfer/synthetic_swap": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "valid_face_frames": 6
+        }
+      },
+      "maximum_observed_mps_driver_bytes": 1693450240
+    }
+  },
+  "status": "complete",
+  "thresholds": {
+    "gend": 2.9821131229400635,
+    "reference": 0.43718233704566956
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "chipmunk.video-frame-full-app-freeze/171",
+  "code_sha256": {
+    "video_frame_full_app_v168.py": "b9e3edfe204b497366e0df4b1f0f9a954d65e129b16d3576fa225695d73dc965",
+    "grid_serving_baseline_v156.py": "9e54a27314619d09fb43bda2bc1ac2e3fe9ecfc96a8f346b447bdcf8b24585b7",
+    "video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "video_frame_check_batch_one.py": "59d41579d83fc61cc338c22dc8e7669b8c652673f1cc835d3052bdba78d619df",
+    "test_video_frame_full_app_v168.py": "e754549648023007bb8192441c27a53d4f03f07e7a20ffdec47a49f178e0f0fb",
+    "video-frame-full-app-v168-method.md": "59f55893b17cc33218361b89a5114c0db486de295ae89ecef713a6517e50109d"
+  },
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "prior_runtime_sha256": "a87bd69aa664b37d59fa57563ec86bb3998e39e6764bb4a6a63b58ddf9cc7994",
+  "prior_parity_sha256": "2b69e0f12bb6d2c0c7cb70e23a9e477d43c1d689d98a0502011b8a1ce6cdc398",
+  "preparation_sha256": "89f204be932f136aee8e2c487ce17c0a14725218b675d61ddda8df4bc8487d77",
+  "private_case_receipt_sha256": "b809042e326d15371b0dd1392b94f9549b9245e29ebffd16c9290d702449c12c",
+  "private_inputs_sha256": "afc3448f6c94aac941733b58d2449bc58b2ec9e6d3e0bd2cd5d5574f036ed088",
+  "arm_manifest_sha256": {
+    "reference": "a9a32472299578874a3663d38de29d72a8f2c289ec9f20f28a9330168caf312e",
+    "batch-one": "3c69ba8f96f986d62a2154398043c01f5b1acf199a19bf9da14d3c88e6732e61"
+  },
+  "arm_adapter_specs": {
+    "reference": [
+      "0.3.0",
+      "app.detectors.video.adapters.frames:FrameDFDCB7Detector",
+      8
+    ],
+    "batch-one": [
+      "0.3.1-lab.1",
+      "scripts.video_frame_check_batch_one:FrameDFDCB7BatchOneDetector",
+      1
+    ]
+  },
+  "model_manager_budget_bytes": 4831838208,
+  "device": "mps",
+  "resource_limits": {
+    "wall_seconds": 900,
+    "initial_ram_bytes": 6442450944,
+    "sampled_tree_rss_bytes": 6442450944,
+    "initial_disk_bytes": 3221225472,
+    "ongoing_reserve_bytes": 1610612736
+  },
+  "scope": "One genuine CRF24 HD control paired across full-app arms. No sensitivity or threshold claim.",
+  "v168_freeze_sha256": "755d8f7891623b5d70d4bf992c5d6b5c8618433b848d1102ee0b9cfa6413945d",
+  "preserved_failure": {
+    "profile_sha256": "9c3a2a17e2b653864e4ba4e2491f80164550338ef480b27128a5feed682c31d0",
+    "worker_log_sha256": "0dbec835d29644e2986797a6dff8f67bd9b817a84859dbd1b7c8392996e3d8e8",
+    "runtime_sha256": "7f638eb3ff4ab62e31d9fda63fed3bf534db4fdcdad3a16a8a5303421ab078aa"
+  },
+  "correction_code_sha256": {
+    "video_frame_full_app_v171.py": "4c28414805cce243676ce1af2481dfe00cf31b1e300e062464985db42d07ec6e",
+    "test_video_frame_full_app_v171.py": "bfb37941f1abdf1f3acccaea802c2fd439f2b618e3c3842bade3c3cc002c0708",
+    "video-frame-full-app-v171-method.md": "c730ca063282fa9903d38e22b1649d71a9dab9e33adbc27bffe1f3b1ed991dae"
+  },
+  "dependency_sources": {
+    "opencv-python-headless": {
+      "version": "5.0.0.93",
+      "source_sha256": {
+        "cv2/__init__.py": "69192904dead3ada37c8b305ee850ac7474924730881a9d5e0b2390944eb5aae",
+        "cv2/config.py": "1db3463a96f58a82123a847d1507228d9e8a80006de67401ae835917658ebe87"
+      }
+    },
+    "torch": {
+      "version": "2.13.0",
+      "source_sha256": {
+        "torch/_inductor/runtime/cache_dir_utils.py": "e009cb55b15513c48d84e02d1d3b498cce90f8b33cc000697dbbbc751d92e24b"
+      }
+    },
+    "scikit-learn": {
+      "version": "1.9.0",
+      "source_sha256": {
+        "sklearn/__init__.py": "ce663dfdb31bdbd4292166527e43a4f861b31b445d2ee894e725e82c1e738f78"
+      }
+    },
+    "open-clip-torch": {
+      "version": "3.3.0",
+      "source_sha256": {
+        "open_clip/tokenizer.py": "90d743e462d051f4c921e652e0aa8af06c40ee7ac38dfdc7bb5ede6381024734"
+      }
+    }
+  },
+  "environment_correction": "Compare every inherited key and the five exact dependency defaults before inference."
+}

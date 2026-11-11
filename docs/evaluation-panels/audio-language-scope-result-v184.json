@@ -1,0 +1,57 @@
+{
+  "defaults_changed": false,
+  "freeze_sha256": "c478246699b437ee3f42cef388d29cd3aa3eaef6604ebf3c3dee68c63da07274",
+  "holdout_scored": false,
+  "maximum_sampled_descendant_rss_bytes": 846675968,
+  "new_neural_calls": 38,
+  "private_observations_sha256": "b33b5b30858a2e69d01c46b9ea97b84fb3a6e963559674aed85d27bb72afe87d",
+  "resource_profile_sha256": "c976a09a0be1529e9ef2924e98386e75a922708f7ae6d200facaac566b3575b4",
+  "same_input_language_of_prior_false_original": {
+    "matched_turkish": 2,
+    "planned": 2
+  },
+  "schema": "chipmunk.audio-language-scope-result/184",
+  "scope": "Turkish synthetic clips and English genuine clips differ in language, source and origin; differences cannot be attributed to language alone. No service policy is validated.",
+  "status": "complete",
+  "summary": {
+    "en": {
+      "groups": 7,
+      "groups_with_any_english": 7,
+      "groups_with_any_non_english": 0,
+      "groups_with_unavailable": 0,
+      "labels": {
+        "english": 14,
+        "other": 0,
+        "turkish": 0,
+        "unavailable": 0
+      },
+      "margin_bins": {
+        ".1-.25": 0,
+        ".25-.5": 0,
+        ".5-1": 14,
+        "0-.1": 0
+      },
+      "planned": 14
+    },
+    "tr": {
+      "groups": 24,
+      "groups_with_any_english": 0,
+      "groups_with_any_non_english": 24,
+      "groups_with_unavailable": 0,
+      "labels": {
+        "english": 0,
+        "other": 0,
+        "turkish": 24,
+        "unavailable": 0
+      },
+      "margin_bins": {
+        ".1-.25": 0,
+        ".25-.5": 0,
+        ".5-1": 24,
+        "0-.1": 0
+      },
+      "planned": 24
+    }
+  },
+  "worker_duration_seconds": 9.203335625003092
+}

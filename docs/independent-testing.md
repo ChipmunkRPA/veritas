@@ -64,6 +64,8 @@ and on the comparison group. The [AI-only policy replay](audio-ai-only-rescue-v2
 counts the directions that a fixed mono-plus-channel rule would change. The
 [200-case holdout](audio-native-stereo-holdout-v284-result.md) compares that rule
 with mono on separate sources and reports the effects by noise condition.
+The [AMI intake](audio-ami-native-stereo-v291-result.md) adds 24 naturally
+recorded two-microphone windows for a separate genuine-audio test.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

@@ -1,0 +1,5 @@
+# Natural stereo audio from two AMI meetings
+
+The local intake qualified **24 genuine-origin stereo windows** across two AMI meeting sessions. It verified all four source microphone WAVs and retained 120,857,554 source bytes on Seagate. Each three-second window preserves the same 48,000 sample positions from both physical microphones. The independent readback verified the exact channel bytes and the production mono downmix. [Frozen method](audio-ami-native-stereo-v291-method.md) · [Exact aggregate](evaluation-panels/audio-ami-native-stereo-complete-v291.json)
+
+The windows use the publisher's synchronized tabletop-array recordings under its CC BY 4.0 release. The only construction was interleaving the two microphone channels. The fixed grid includes quiet and overlapping speech and carries no injected noise or generated voice. These two sessions are a genuine-origin pilot for testing false AI flags and coverage on natural stereo. A matched natural or physical-replay positive cohort remains separate. [AMI license](https://groups.inf.ed.ac.uk/ami/corpus/license.shtml) · [Capture notes](https://groups.inf.ed.ac.uk/ami/corpus/signals.shtml)

@@ -1,0 +1,122 @@
+{
+  "schema": "chipmunk.image-bg-real-jpeg-comparison-freeze/229",
+  "source_family": "BG-REAL v2 LaMa object removal",
+  "photos": 24,
+  "source_groups": 24,
+  "qualification_sha256": "3a46ad593be6a095f25e5998f7c51d9d592de6d413915348b57271111ec50306",
+  "qualified_private_sha256": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7",
+  "qualification_transport_freeze_sha256": "d3c239bfad6a332ef027dd991ffc2fa1ee016d1c788f245853e29c88735863c4",
+  "v189_policy_freeze_sha256": "cd0333f18623441dba7177e4f79db69a31174713bc823822d5112a07dd4bba5e",
+  "publisher_split_counts": {
+    "test_background_ood": 7,
+    "test_id": 7,
+    "test_subject_ood": 5,
+    "val": 5
+  },
+  "inherited_code_sha256": {
+    "backend/scripts/image_jpeg_diagnostic_v189.py": "1dff54f6b47cec2f1a014d9082eeb1d4c6c8d3c7eef301f71053556a504a836d",
+    "backend/scripts/image_jpeg_diagnostic_runtime_v189.py": "963277e53faf921c58208f2d092292a8218aaf624e3e6b8c50e9c4dc8da48022",
+    "backend/scripts/image_regional_training_v26.py": "55306d5d6b9664d2c9d60baa0ed36d54cea277435d3578896d8f35e1678f6a29",
+    "backend/scripts/image_regional_inference_v28.py": "d923496c02cdda98f952943447d952b835c27aed6aef7677aad2f228a93efc3f",
+    "backend/scripts/image_regional_readout_v27.py": "0f324a53969bea756e7d1e1cad1855e032be922980345d125112e6b481110a73",
+    "backend/scripts/image_native_comparison_readout_v45.py": "4374c24d39fe2cf23fe15603342b075ff723110bc20b35ea98018ee7aa4ce433",
+    "backend/scripts/relayformer_native_v18.py": "5d98d32a2f04804352e42d93f2d7e692634c26d93bc2e8f3b20ddde9b4952baf",
+    "backend/scripts/relayformer_learning_v23.py": "67b68e7a98bc4d537e4b834f4cc792f0313a180f14aa6232a8a118f220a270bc",
+    "backend/scripts/inspect_relayformer_v18.py": "43c0a628b8655d2a5765690572d646c612c3b9aae0430a3ae761876a2686a420",
+    "backend/scripts/prepare_relayformer_v18.py": "cde2fc5c2af3ad04608135b282be6a8bee5082b9a32f97fa7204504d8cf95678",
+    "backend/scripts/replay_regional_calibration_v43.py": "2e1623f348f8d9537008f8c56f6079ac79922276ff1f2429550da549411265a4",
+    "backend/scripts/audit_fused_production_grid.py": "951e763942e511630c48797bc87f37c55d28df3f10be4ae0718ab53c98a889c2",
+    "backend/scripts/score_splice_localizers.py": "760278ed8a036832420b224c89b970449f03edd98de2f53c2127ac5448f36d4c",
+    "backend/scripts/localization_benchmark.py": "ea5d826524bd89df2327448ffbd6343cd1e528e6750bcf45844670e72e912be6",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/data_resource_guard_v21.py": "102b4adb63b262ad1a5900c7e9fad84e4ec8a7ddf89fabd31ce1cb8c1320c7ae",
+    "backend/scripts/image_regional_continuation_runtime_v41.py": "1326b488e0b698956467d3cf60767d7552e1ec65409410c8fe7e476cd1224a5a",
+    "backend/scripts/prepare_regional_calibration_v29.py": "92bce9a2fc0a13587b7d4ec86a257b8764588196b2e8af4c1fa429d37be7591e",
+    "backend/app/detectors/image/fused.py": "958964f69d9f1a17b989a0ed9a823242c5052c53f3e651598e36d71499b686bb",
+    "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+    "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+    "docs/evaluation-panels/relayformer-v18-acquisition-v2.json": "3c958b094f0b0e81ac1f67a64ddd0315d3c267a6baf6560fc62c7f64a0de3120",
+    "docs/image-jpeg-diagnostic-v189-protocol.md": "9cd0cabf9b93367943cbcef80e2172a005b950ea32965619f8c2cf58bf92b231",
+    "backend/scripts/image_bg_real_acquisition_v221.py": "0906a1b9c8d2cd85e09f6452fac4b009a0cd54802db5992543bffa314341e3b1",
+    "backend/scripts/image_bg_real_roster_v218.py": "32f44463cb82b579fe31e83677dc736b62be749e9d8c0de662a2ea21e45f8c81",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/tests/test_image_bg_real_acquisition_v221.py": "5711094b0834bf0914d89116d772092cc073626d702917c95085221999abda17",
+    "docs/image-bg-real-acquisition-v221-method.md": "8b1c9a92c4404c27d24f356a891f1ea9240abe2649d76d0a884208ace48eaee1",
+    "backend/scripts/image_bg_real_transport_v225.py": "b684ffb0833c9bf9972b156a1d34251784a21b673fa325e1468eab460a331e7c",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/tests/test_image_bg_real_transport_v225.py": "20b33698bc78be79e3e309047280ace8a49e1547650afd3e025e1d8191b59bf0",
+    "docs/image-bg-real-transport-v225-method.md": "2e7355f07cea16419ecf41ffc89d330bab6233e40c55d73bda979a2afca3cb5f"
+  },
+  "code_sha256": {
+    "backend/scripts/image_bg_real_jpeg_v229.py": "6ad48638f45779dc58a845396b8b3c854e84d0d6a22c7d6def5ed66257fca8b0",
+    "backend/scripts/image_bg_real_jpeg_runtime_v229.py": "370b9a2675190e99ce6988e477a9b6da61a2761d9e00b7b9ab3af87dfd4840e5",
+    "backend/tests/test_image_bg_real_jpeg_v229.py": "863c9383812bdabef56f7929e5dcc527d3c5325fa15b437b6f4edcc3e8451584",
+    "docs/image-bg-real-jpeg-v229-method.md": "65d620c4a566ec5a85579a9e16355b0d12cdb3119f200b3519204990e2a52070"
+  },
+  "batches": 5,
+  "views_per_batch": 25,
+  "views_per_arm_quality": 120,
+  "unique_model_calls": 480,
+  "exact_first_input_repeats": 4,
+  "neural_calls_during_preparation": 0,
+  "serving_admitted": false,
+  "qualities": [
+    75,
+    90
+  ],
+  "kinds": [
+    "ai",
+    "original",
+    "tone",
+    "blur",
+    "copy_move"
+  ],
+  "arms": [
+    "baseline",
+    "candidate"
+  ],
+  "methods": [
+    "current",
+    "sensitive",
+    "shared"
+  ],
+  "sensitive_policy": "p0.90-a0.01000",
+  "useful_iou": 0.3,
+  "useful_recall": 0.5,
+  "bootstrap_draws": 10000,
+  "bootstrap_seed": 20261108,
+  "device": {
+    "baseline": "mps",
+    "candidate": "cpu"
+  },
+  "dtype": "float32",
+  "cpu_threads": 2,
+  "asset_sha256": {
+    "models/research/image-v18-relayformer-v2/image-only.pth": "00a0f145ae4a98e66cad95aa79d2ce470d77821ee4262d6b803b3705c11c2090",
+    "models/weights/fused/fused_opensdi.pth": "7e527d49080a773641cf96915b4b3fa12d571c5b87f35c527f13ab82f148364c",
+    "models/weights/fused/convnext.safetensors": "1ddf6dbc7f0753fc4dfec5db5fa474acfd1ac6f67f466d6a976780c30b3a1b23"
+  },
+  "candidate_checkpoint_sha256": "09ef907f347896eda95226b6e95ab75872bd3820a5a5bc9f9bf1daefda425300",
+  "v42_freeze_sha256": "e676d45328e4b99b7ef84ff82efdf610b7877855fd80d20b8e9c9019f4eb578f",
+  "v46_freeze_sha256": "5638ae5813774d0e4beecd9d76f1f46fab2a42412ae1406a70588b62c266d9b7",
+  "training_chain_sha256": "ca2663dc4ddd86f1ee1e699d2fc3c3586d9043bea0c5732af72a1c829a61f350",
+  "versions": {
+    "python": "3.12.6",
+    "machine": "arm64",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "timm": "1.0.28",
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "opencv-python": null,
+    "opencv-contrib-python": null,
+    "jpeg": "6.2",
+    "libjpeg_turbo": "3.1.4.1"
+  },
+  "rotary_source_sha256": {
+    "rotary_embedding_torch/__init__.py": "8ec84018dc9d8df95d94d8b8ba1b16579706cbd159ce719c2faca2bed1550d67",
+    "rotary_embedding_torch/rotary_embedding_torch.py": "37c7560fd47121ff1bd51488f46e10cb399d62e6e439e6b18732902f526f59b6"
+  },
+  "private_input_bindings_sha256": "1a17e75dfc3f81d0fe59979409d5799bfaaa2ad702ffe9f5bdf31a1f3ca3859a"
+}

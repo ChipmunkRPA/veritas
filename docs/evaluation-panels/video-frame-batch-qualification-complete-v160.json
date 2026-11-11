@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.video-frame-batch-qualification-complete/160",
+  "status": "complete",
+  "freeze_sha256": "d8e1420f1b7006a9d65db7665b5021e93a04c1aae04e40cebd5571d4275bce6d",
+  "device": "mps",
+  "arms": {
+    "reference": {
+      "sampled_descendant_rss_bytes": 1349664768,
+      "worker_duration_seconds": 9.21672008302994,
+      "maximum_forward_batch": 8,
+      "mps_driver_allocated_bytes_end": 1651818496,
+      "private_profile_sha256": "fd389e2f658079e12fce1d31a2eb8295f77f76c508d576d9e1cf02370127f8ec",
+      "private_worker_receipt_sha256": "684724657cc2e3ad96fecd872614f66f2498c9dffe8c9eeb3fe2b79d2076918d"
+    },
+    "batch-one": {
+      "sampled_descendant_rss_bytes": 1271463936,
+      "worker_duration_seconds": 8.714719249983318,
+      "maximum_forward_batch": 1,
+      "mps_driver_allocated_bytes_end": 1693450240,
+      "private_profile_sha256": "2d32252cdbe790e5f5e1a1b76870dcb47e1a7fd9105ab2c98508147f7c3a483b",
+      "private_worker_receipt_sha256": "d63195f1c264dc4859f87a45c0b0ca298d414dbdbb12bd6f3f1662dcde2f54a1"
+    }
+  },
+  "paired_frames": 15,
+  "same_ordered_frames": true,
+  "same_actual_float32_crops": true,
+  "same_evidence_scope_and_times": true,
+  "same_raw_boundary_decisions": true,
+  "same_highest_frame": true,
+  "maximum_absolute_logit_error": 0.0,
+  "maximum_absolute_probability_error": 0.0,
+  "absolute_aggregate_error": 0.0,
+  "parity_within_frozen_tolerances": true,
+  "defaults_changed": false,
+  "scope": "Exact same-device numerical parity on one locked original. Peak GPU memory and detector accuracy were not measured."
+}

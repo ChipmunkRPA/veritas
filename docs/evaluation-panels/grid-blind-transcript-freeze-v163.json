@@ -1,0 +1,91 @@
+{
+  "schema": "chipmunk.grid-blind-transcript-freeze/163",
+  "code_sha256": {
+    "backend/scripts/grid_blind_transcript_v163.py": "b3c841862bd05f6d21ff06382dc5b3d46c9a3f66048f9bd96c1a775f9d5872c3",
+    "backend/tests/test_grid_blind_transcript_v163.py": "2af84769ad9df7ad246924a6721bc60c290b79230e402a820f4ee97392600d69",
+    "docs/grid-blind-transcript-v163-method.md": "e1d8b74c2e26c4b3d9e7bdb391d90efe93242cf8a56d24369112916ca557d187",
+    "backend/scripts/grid_phone_alignment_v162.py": "a676ec2f2ab34557f5669e87f80cace51053c4a201dd79d46a8487bc6c83a452",
+    "backend/scripts/grid_phone_alignment_v161.py": "39334f424d731054d46b384537846e7de2b8d3d3cd855853d6d31afaa0fc2ea8",
+    "backend/scripts/av_speech_native_v110.py": "4b6e16af72b4ebd014a0c11d31e2e31143aa79120fe588c008f8a8b4c4f3db76",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "source_artifact_sha256": {
+    "docs/evaluation-panels/grid-phone-alignment-freeze-v162.json": "82d7dcea86ce551acf2992a79ed1107c383a751b6f2b6ed347de1d12b7142426",
+    "backend/data/independent-evaluation/grid-phone-alignment-v162/freeze.json": "82d7dcea86ce551acf2992a79ed1107c383a751b6f2b6ed347de1d12b7142426",
+    "backend/data/independent-evaluation/grid-phone-alignment-v162/private-inputs.json": "e5377c0965a4988bc5614a02973a7a18263fbcf4d68ba9f67798ef0f627301c6",
+    "backend/data/independent-evaluation/grid-phone-alignment-v162/run/result.json": "f2ae04cafeefd7c9721ac6d0ac64ec7cb788d6ed2819c116aa4fa68884540b22",
+    "backend/data/independent-evaluation/grid-phone-alignment-v162/run/observations.jsonl": "0f32407150bb04e0207e7408155b5b1f258182eb661e0186008a84fe96b43b0f",
+    "docs/evaluation-panels/grid-phone-alignment-complete-v162.json": "f2ae04cafeefd7c9721ac6d0ac64ec7cb788d6ed2819c116aa4fa68884540b22"
+  },
+  "native_preprocessor_freeze_sha256": "96440435305a2959622a49d54c6929da1a281e6e9168271c43cd2b4b4f793e29",
+  "publisher_assets": {
+    "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+    "tree_url": "https://huggingface.co/api/models/openai/whisper-tiny/tree/169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+    "tree_sha256": "7d6ebe3bf45e6b27d1fa2fc44fef2eb690716d4480335445ce5978a3e92c7ce2",
+    "files": [
+      {
+        "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/generation_config.json",
+        "bytes": 3747,
+        "git_blob": "4b26dd66b8f7bca37d851d259fdc118315cacc62",
+        "sha256": "a5d5325911f16e74001a72fa13d6e208eee51548f994646de1f4b4cc8b35b512"
+      },
+      {
+        "url": "https://huggingface.co/openai/whisper-tiny/resolve/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/tokenizer.json",
+        "bytes": 2480466,
+        "git_blob": "1e95340ff836fad1b5932e800fb7b8c5e6d78a74",
+        "sha256": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566"
+      }
+    ],
+    "license": "apache-2.0"
+  },
+  "runtime_packages": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "tokenizers": "0.22.2",
+    "numpy": "2.2.6",
+    "safetensors": "0.8.0",
+    "psutil": "7.2.2"
+  },
+  "runtime_source_sha256": {
+    "generation/utils.py": "c45e19eb4534a2478f8e4825dc35a28fb5efe5a2f8d09695e4b2ea532b4dbd82",
+    "generation/configuration_utils.py": "20cb20f05f1867617e859c6105505fd5d8c81ae91e0810ad8cda997c37c10727",
+    "generation/logits_process.py": "c5b5d5666576b19e19a09b99b55806ea009dd8e999892f7a8d2d7876dbfc2002",
+    "models/whisper/generation_whisper.py": "67935b8501f18e05184160405824df5624baa0f25c935f1b24b54f0222cc29f1",
+    "models/whisper/modeling_whisper.py": "80a26fcfa0dd31b6c3ccfc46aa79574432f11aa131845f48b49a8aaf5f3647b4",
+    "models/whisper/feature_extraction_whisper.py": "dcce2e7820be059e657a9e12a60e8a55cfd37b1a82ee202ca15fc7d0934374cb"
+  },
+  "planned_originals": 16,
+  "matched_word_references": 8,
+  "maximum_encoder_forwards": 8,
+  "decode_options": {
+    "language": "en",
+    "task": "transcribe",
+    "return_timestamps": false,
+    "return_token_timestamps": false,
+    "return_dict_in_generate": true,
+    "force_unique_generate_call": true,
+    "condition_on_prev_tokens": false,
+    "temperature": 0.0,
+    "prompt_ids": null,
+    "compression_ratio_threshold": null,
+    "logprob_threshold": null,
+    "no_speech_threshold": null
+  },
+  "generation_options": {
+    "num_beams": 1,
+    "num_return_sequences": 1,
+    "do_sample": false,
+    "max_new_tokens": 64
+  },
+  "decoder_prefix_ids": [
+    50258,
+    50259,
+    50359,
+    50363
+  ],
+  "word_rules": "Lowercase word tokens, remove punctuation, preserve numeric tokens in primary; isolated ASCII digits to English words in secondary.",
+  "scope": "Offline same-roster blind ASR word comparison only. No phone timing, new detector or default change."
+}

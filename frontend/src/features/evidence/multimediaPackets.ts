@@ -88,15 +88,17 @@ export interface SoundEventContext {
   limitations: string[]
 }
 export interface StereoChannelContext {
-  schema: 'chipmunk.stereo-channel-context/1'
+  schema: 'chipmunk.stereo-channel-context/1' | 'chipmunk.stereo-channel-context/2'
   evidence_type: 'context'; affects_overall_confidence: false
   status: 'measured' | 'quiet' | 'mono' | 'unsupported' | 'too_short' | 'unavailable'
   source_sha256: string; source_stream_index: number; source_channel_count: number
   sample_rate: number; max_seconds: number; quiet_floor_dbfs: number; strong_level_gap_db: number; silence_floor_dbfs: number
+  mono_pcm_sha256?: string; strong_downmix_attenuation_db?: number
   windows: (SampleInterval & {
     status: 'strong_imbalance' | 'measured' | 'quiet'
     left_rms_dbfs: number; right_rms_dbfs: number; level_gap_db: number | null; correlation: number | null
     louder_channel: 'left' | 'right' | null
+    downmix?: { mono_rms_dbfs: number; attenuation_db: number | null; strong_attenuation: boolean }
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   })[]
 }
@@ -179,7 +181,7 @@ export interface DocumentEvidenceSet extends SetBase {
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
-    ocr?: { status?: string; pages?: { page: number; status: string; reason?: string | null; mean_recognition_confidence?: number;
+    ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: Record<string, unknown> | boolean | null }
 }

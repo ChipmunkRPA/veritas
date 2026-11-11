@@ -104,7 +104,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         </li>)}</ul>
       </details>}
       {ocrPages.length > 0 && <details className="mt-3"><summary className="cursor-pointer">Scanned-page reading coverage</summary>
-        <ul className="pl-4 list-disc">{ocrPages.map((page) => <li key={page.page}>Page {page.page}: {page.status === 'extracted' ? 'text extracted for analysis' : 'not checked'}.
+        <ul className="pl-4 list-disc">{ocrPages.map((page) => <li key={page.page}>Page {page.page}{page.coverage_scope === 'image_region' && ' image area'}: {page.status === 'extracted' ? 'text extracted for analysis' : 'not checked'}.
           {page.reason && ` ${page.reason}`}{typeof page.mean_recognition_confidence === 'number' && ` Recognition quality: ${page.mean_recognition_confidence.toFixed(1)} out of 100; this is not an AI score.`}</li>)}</ul>
       </details>}
       {email && <p className="mt-2 mb-0">Email quotations and signatures can belong to someone else. Quote boundaries are heuristic; headers and writing scores do not authenticate a sender.</p>}

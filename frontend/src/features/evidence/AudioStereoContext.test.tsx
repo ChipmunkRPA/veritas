@@ -55,3 +55,37 @@ it('reports mono and suppresses mismatched or historical context', () => {
   rerender(<MemoryRouter><AudioEvidenceContent set={changed} token="" mediaReady={false} /></MemoryRouter>)
   expect(screen.queryByRole('region', { name: 'Stereo channel comparison' })).toBeNull()
 })
+
+
+it('shows mono level loss at the matching source interval without marking it as AI evidence', () => {
+  const set = fixture()
+  set.source.pcm_sha256 = 'd'.repeat(64)
+  const original = set.stereo_context!
+  set.stereo_context = {
+    ...original,
+    schema: 'chipmunk.stereo-channel-context/2',
+    silence_floor_dbfs: -140,
+    mono_pcm_sha256: set.source.pcm_sha256,
+    strong_downmix_attenuation_db: 12,
+    windows: [{
+      ...original.windows[0],
+      status: 'measured',
+      right_rms_dbfs: -12,
+      level_gap_db: 0,
+      louder_channel: null,
+      correlation: -1,
+      downmix: { mono_rms_dbfs: -140, attenuation_db: null, strong_attenuation: true },
+    }],
+  }
+  const { rerender } = renderAudio(set)
+  const section = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
+  expect(section.getByText(/Strong level drop in the analyzed mono mix/)).toBeTruthy()
+  expect(section.getByText('[32000, 48000) at 1/16000')).toBeTruthy()
+  expect(section.getByText('Mono is digitally silent')).toBeTruthy()
+  expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+
+  const changed = { ...set, source: { ...set.source, pcm_sha256: 'e'.repeat(64) } }
+  rerender(<MemoryRouter><AudioEvidenceContent set={changed} token="" mediaReady={false} /></MemoryRouter>)
+  expect(section.getByRole('alert')).toBeTruthy()
+  expect(section.queryByText('Mono is digitally silent')).toBeNull()
+})

@@ -25,6 +25,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import MetaData, Table, create_engine, inspect, select
 from sqlalchemy.orm import Session
 from test_audio_evidence import audio_fixture as audio_fixture
+from test_document_hybrid_pdf_coverage import hybrid_pdf
 from test_document_packets import packet_factory as packet_factory
 from test_image_evidence_access import evidence_http as evidence_http
 from test_video_evidence_packets import vfr_source as vfr_source
@@ -101,15 +102,30 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document"])
+@pytest.fixture(params=["video", "audio", "document", "hybrid_document"])
 def multimedia_package(request, tmp_path, monkeypatch):
-    kind = request.param
+    hybrid = request.param == "hybrid_document"
+    kind = "document" if hybrid else request.param
     if kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)
     elif kind == "audio":
         db, store, analysis, result, *_ = request.getfixturevalue("audio_fixture")
         document = audio_packets.build_packet_set(db, analysis, store, result)
+    elif hybrid:
+        from app.detectors.text.extract import _ocr_runtime
+
+        if not _ocr_runtime().get("available"):
+            pytest.skip("Verified local OCR runtime is unavailable")
+        source_pdf = tmp_path / "hybrid.pdf"
+        hybrid_pdf(source_pdf, rotation=90)
+        db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(
+            ".pdf", source_pdf=source_pdf, scores=(0.1, 0.1, 0.1, 0.93))
+        document = document_packets.build_packet_set(db, analysis, store, result)
+        assert document["coverage"]["ocr"]["pages"][0]["status"] == "extracted"
+        packet, = document["packets"]
+        assert packet["anchors"][0]["ocr"]["coverage_scope"] == "image_region"
+        assert "page1_ocr_input" in packet["artifacts"]
     else:
         db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".pdf")
         document = document_packets.build_packet_set(db, analysis, store, result)

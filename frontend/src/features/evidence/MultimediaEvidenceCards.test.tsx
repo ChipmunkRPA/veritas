@@ -220,10 +220,13 @@ describe('ordinary multimedia evidence', () => {
     set.coverage.ocr = { status: 'partial', unchecked_pages: [4], pages: [
       { page: 2, status: 'extracted', mean_recognition_confidence: 92 },
       { page: 4, status: 'unchecked', reason: 'Unsupported language; page not checked.', mean_recognition_confidence: 65 },
+      { page: 5, status: 'unchecked', coverage_scope: 'image_region', reason: 'The image area could not be read.' },
     ] }
     set.packets[0].artifacts.page2_ocr_input = { ...asset('4'), page: 2, role: 'ocr_input' }
     show(set)
     expect(screen.getByText(/Page 4: not checked/)).toBeTruthy()
+    expect(screen.getByText(/Page 5 image area: not checked/)).toBeTruthy()
+    expect(screen.queryByText(/Page 5: not checked/)).toBeNull()
     expect(screen.getByText(/Pages without mapped text: 4/)).toBeTruthy()
     expect(screen.getByText(/92.0 out of 100; this is not an AI score/)).toBeTruthy()
     expect(screen.getByAltText('P01: page 2 exact frozen text-recognition input').getAttribute('src')).toContain(`${'4'.repeat(64)}.png`)

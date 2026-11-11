@@ -58,6 +58,17 @@ APPEARANCE_REVIEW_POINT = 0.11243900750879454
 SEQUENCE_METHODS = frozenset({SEQUENCE_METHOD, APPEARANCE_METHOD})
 
 
+def sequence_observation(record: dict) -> str:
+    start, end = record["start_stream_s"], record["end_stream_s"]
+    if record["method"] == APPEARANCE_METHOD:
+        observation = "The sampled face appearance differed from both surrounding time groups"
+    elif record["method"] == SEQUENCE_METHOD:
+        observation = "The inner face changed relative to the neighboring time groups after accounting for changes near its edges"
+    else:
+        raise ValueError("Unknown face sequence measurement")
+    return f"{observation} from {start:.3f} to {end:.3f} s."
+
+
 def validate_sequence_record(record: dict, source: dict, *, table_pts=None, interpolated=(), require_flag=True) -> None:
     """Check window inputs and arithmetic without importing inference dependencies."""
     import math

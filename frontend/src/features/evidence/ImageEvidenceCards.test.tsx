@@ -86,9 +86,9 @@ describe('image evidence cards', () => {
     expect(screen.getByRole('link', { name: 'F5' }).getAttribute('href')).toBe('/#finding-F5')
   })
 
-  it('shows the bound matching patch with the existing image highlight in a v5 record', () => {
+  it('shows the bound matching patch with the existing image highlight in a v6 record', () => {
     const packet = evidence.packets[0]
-    show({ ...evidence, version: 'image-evidence-5', packets: [{ ...packet, evidence_type: 'localisation',
+    show({ ...evidence, version: 'image-evidence-6', packets: [{ ...packet, evidence_type: 'localisation',
       interpretation: 'This pixel similarity is compatible with copying or repeated detail.',
       artifacts: { ...packet.artifacts, mask: artifact('e'), copy_donor: artifact('1') },
     }] })

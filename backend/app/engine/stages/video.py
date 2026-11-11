@@ -83,6 +83,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.profiles import SAMPLING
 from app.engine.runner import StageContext
 from app.engine.stages import common
+from app.evidence.face_interval_binding import sequence_observation
 from app.schemas.evidence import AnalysisResultV2, Decision, SignalV2, TimeSegment
 from app.schemas.legacy import BAND_CODE, FALLBACK_CAVEAT
 
@@ -873,9 +874,8 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
         for finding in out["findings"]:
             if signal["id"] not in finding["evidence_ids"]:
                 continue
-            first = (f"Review a possible face edit from {sequence['start_stream_s']:.3f} to {sequence['end_stream_s']:.3f} s: "
-                     "the face appearance changed relative to both surrounding time groups."
-                     if sequence else "The sampled face sequences supplied no additional change range to review. This does not establish an original file.")
+            first = (sequence_observation(sequence) if sequence else
+                     "The sampled face sequences supplied no additional change range to review. The result covers the measured windows.")
             second = "Motion, expression, lighting and compression may cause similar changes. This inspection cue has no calibrated AI probability and does not change overall confidence."
             finding.update(title="Possible face-change range" if sequence else "No additional face-change range",
                            statement=first+" "+second, probability=None, direction="neutral", strength="none",

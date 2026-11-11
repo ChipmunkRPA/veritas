@@ -221,8 +221,16 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             or any(mapping.get(key) != source.get(key) for key in ("pcm_sha256", "samples", "sample_rate", "channels", "timeline_time_base", "timeline"))):
         raise ObjectIntegrityError("Frozen audio no longer matches its analysed samples or source clock")
     source_ranges(mapping, 0, len(pcm))
-    if document.get("stereo_context") != mapping.get("stereo_context"):
+    stereo_context = document.get("stereo_context")
+    if stereo_context != mapping.get("stereo_context"):
         raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
+    if stereo_context is not None:
+        from app.detectors.audio.stereo import verify_mono_levels
+
+        try:
+            verify_mono_levels(stereo_context, pcm)
+        except ValueError as error:
+            raise ObjectIntegrityError(str(error)) from error
     for packet in document["packets"]:
         for role, span in (("selected_clip", packet["interval"]), ("context_clip", packet["context_interval"])):
             clip = read_wav(assets[packet["artifacts"][role]["sha256"]])

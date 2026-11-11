@@ -18,6 +18,7 @@ from app.api import v2_evidence_packets
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import decode as audio_decode
+from app.detectors.audio import stereo
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.engine.stages import audio
 from app.evidence import audio_packets
@@ -35,6 +36,20 @@ def _source(path, *, seconds, rate=48000, channels=2, mode="left"):
     quiet = loud // 16
     if mode == "balanced":
         values = np.column_stack((loud, -loud))
+    elif mode == "partial":
+        values = np.column_stack((loud, (-0.8 * loud).astype("<i2")))
+    elif mode == "in_phase":
+        values = np.column_stack((loud, loud))
+    elif mode == "quadrature":
+        delayed = (12000 * np.cos(2 * np.pi * 237 * ticks / rate)).astype("<i2")
+        values = np.column_stack((loud, delayed))
+    elif mode == "first_left_then_balanced":
+        right = np.where(ticks < rate, quiet, -loud)
+        values = np.column_stack((loud, right))
+    elif mode == "sparse":
+        tiny = np.zeros_like(loud)
+        tiny[100] = 1
+        values = np.column_stack((tiny, tiny))
     elif mode == "quiet":
         values = np.column_stack((quiet // 16, quiet // 16))
     elif mode == "right":
@@ -62,16 +77,61 @@ def test_stereo_context_preserves_mono_pcm_and_source_clock(tmp_path, mode, loud
     assert {k: v for k, v in decoded.mapping.items() if k != "stereo_context"} == reference.mapping
     assert context["status"] == "measured" and context["affects_overall_confidence"] is False
     assert context["source_sha256"] == sha and len(context["windows"]) == 2
+    assert context["mono_pcm_sha256"] == reference.mapping["pcm_sha256"]
+    stereo.validate(context, decoded.mapping)
+    stereo.verify_mono_levels(context, reference.pcm)
     for index, row in enumerate(context["windows"]):
         assert row["start_sample"] == index * SAMPLE_RATE
         assert row["louder_channel"] == louder and row["correlation"] == corr
         expected_gap = pytest.approx(24.08, abs=0.01) if louder else 0
         assert row["level_gap_db"] == expected_gap
+        downmix = row["downmix"]
+        assert downmix["strong_attenuation"] is (mode == "balanced")
+        if mode == "balanced":
+            assert downmix["mono_rms_dbfs"] == context["silence_floor_dbfs"]
+            assert downmix["attenuation_db"] is None
         assert row["source_timestamp_ranges"] == [{
             "start_sample": index * SAMPLE_RATE, "end_sample": (index + 1) * SAMPLE_RATE,
             "source_start_pts": index * SAMPLE_RATE, "source_end_pts": (index + 1) * SAMPLE_RATE,
             "time_base": "1/16000",
         }]
+
+
+@pytest.mark.parametrize("mode,attenuation,marked", [
+    ("in_phase", 0.0, False), ("quadrature", 3.01, False), ("partial", 19.998, True),
+    ("quiet", None, False), ("sparse", None, False),
+])
+def test_downmix_distinguishes_phase_loss_from_controls(tmp_path, mode, attenuation, marked):
+    path = tmp_path / "source.wav"
+    sha = _source(path, seconds=1, mode=mode, rate=SAMPLE_RATE if mode == "sparse" else 48000)
+    decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
+    context = decoded.mapping["stereo_context"]
+    stereo.validate(context, decoded.mapping)
+    window = context["windows"][0]
+    assert window["downmix"]["strong_attenuation"] is marked
+    if attenuation is None:
+        assert window["downmix"]["attenuation_db"] is None
+    else:
+        assert window["downmix"]["attenuation_db"] == pytest.approx(attenuation, abs=0.015)
+    if mode == "sparse":
+        assert window["downmix"]["mono_rms_dbfs"] == pytest.approx(-132.35, abs=0.02)
+        assert window["left_rms_dbfs"] == window["right_rms_dbfs"] == window["downmix"]["mono_rms_dbfs"]
+
+
+def test_legacy_stereo_context_remains_readable_and_rejects_unversioned_downmix(tmp_path):
+    path = tmp_path / "source.wav"
+    sha = _source(path, seconds=2)
+    decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
+    legacy = deepcopy(decoded.mapping["stereo_context"])
+    legacy.update(schema=stereo.LEGACY_SCHEMA, silence_floor_dbfs=stereo.LEGACY_SILENCE_FLOOR_DBFS)
+    del legacy["mono_pcm_sha256"], legacy["strong_downmix_attenuation_db"]
+    for row in legacy["windows"]:
+        del row["downmix"]
+    stereo.validate(legacy, decoded.mapping)
+    stereo.verify_mono_levels(legacy, decoded.pcm)
+    legacy["windows"][0]["downmix"] = {"strong_attenuation": True}
+    with pytest.raises(ValueError, match="Legacy stereo context"):
+        stereo.validate(legacy, decoded.mapping)
 
 
 @pytest.mark.parametrize("channels,seconds,mode,status", [
@@ -122,7 +182,7 @@ def test_stereo_windows_use_real_source_pts_and_stop_after_30_seconds(tmp_path):
 
 def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch):
     path = tmp_path / "source.wav"
-    sha = _source(path, seconds=2)
+    sha = _source(path, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
     store = ObjectStore(tmp_path / "objects")
     stored = store.put_file(path)
     database = create_engine("sqlite://")
@@ -158,8 +218,18 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert multimedia_evidence.view(snapshot)["stereo_context"] == packet["stereo_context"]
         rendered = engine.render_pdf(snapshot)
         words = engine.pdf_text(rendered.pdf)
-        assert "Stereo channel comparison" in words and "Left louder" in words and "24.083" in words
+        gap = packet["stereo_context"]["windows"][0]["level_gap_db"]
+        assert "Stereo channel comparison" in words and "Left louder" in words and str(gap) in words
         assert "/stereo_context" in words and "[16000, 32000)" in words
+        assert "Strong level drop in the analyzed mono mix." in words
+        assert "Mono is digitally silent" in words
+        assert [w["downmix"]["strong_attenuation"] for w in packet["stereo_context"]["windows"]] == [False, True]
+
+        altered_mono = deepcopy(packet["stereo_context"])
+        altered_mono["windows"][1]["downmix"]["mono_rms_dbfs"] = -60.0
+        with pytest.raises(ValueError, match="differs from the analyzed mono samples"):
+            stereo.verify_mono_levels(altered_mono, context.state["audio"].pcm)
+
 
         key = signing.instance_key(tmp_path / "test-key.pem")
         pdf_artefact = register_artefact(db, store, rendered.pdf, media_type="application/pdf", role="report",

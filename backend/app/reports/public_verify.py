@@ -28,7 +28,8 @@ from app.evidence.video_packet_versions import VERSIONS as VIDEO_VERSIONS
 SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
-VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5'}, 'video': VIDEO_VERSIONS,
+VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
+                      'image-evidence-6'}, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': {'document-evidence-1', 'document-evidence-2', 'document-evidence-3'}}
 
 
@@ -107,8 +108,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.image_eligibility import validate_inspection_coverage
 
         validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}
-                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5'} else evidence)
-        if evidence['version'] == 'image-evidence-5':
+                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} else evidence)
+        if evidence['version'] in {'image-evidence-5', 'image-evidence-6'}:
             for packet in evidence['packets']:
                 cue = packet.get('copy_corroboration')
                 assets = packet['artifacts']
@@ -118,6 +119,11 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and cue.get('highlight_asset_sha256') == assets.get('mask', {}).get('sha256')
                              and (cue.get('status') == 'copy_consistent') == ('copy_donor' in assets),
                              'Copy evidence differs from its committed highlight or matching patch')
+                    if evidence['version'] == 'image-evidence-6':
+                        _require('search_strategy' in cue and cue['search_strategy'] in {None, 'native_dense', 'native_anchor_shortlist'}
+                                 and (cue['search_strategy'] is None) == (cue.get('status') == 'unsupported_geometry')
+                                 and (cue.get('status') != 'unassessed_candidate_budget' or cue['search_strategy'] == 'native_anchor_shortlist'),
+                                 'Copy evidence search coverage is inconsistent')
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     if analysis['kind'] == 'document' and evidence['version'] == 'document-evidence-3':

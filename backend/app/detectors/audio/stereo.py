@@ -11,11 +11,15 @@ import numpy as np
 
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges
 
-SCHEMA = "chipmunk.stereo-channel-context/1"
+LEGACY_SCHEMA = "chipmunk.stereo-channel-context/1"
+SCHEMA = "chipmunk.stereo-channel-context/2"
 MAX_SECONDS = 30
 QUIET_DBFS = -50
 REVIEW_GAP_DB = 12
-SILENCE_FLOOR_DBFS = -120
+REVIEW_DOWNMIX_DB = 12
+LEGACY_SILENCE_FLOOR_DBFS = -120
+# A one-sample, one-LSB pulse in one second of signed 16-bit PCM is about -132 dBFS.
+SILENCE_FLOOR_DBFS = -140
 _HASH = re.compile(r"[a-f0-9]{64}")
 
 
@@ -31,12 +35,18 @@ def supports_stereo(channels: int, layout: str | None) -> bool:
     return _status(channels, layout) is None
 
 
+def _level_dbfs(power: float) -> float:
+    return round(10 * math.log10(power), 3) if power else SILENCE_FLOOR_DBFS
+
+
+def _mono_dbfs(pcm: np.ndarray) -> float:
+    values = pcm.astype(np.float64)
+    return _level_dbfs(float(np.mean(values * values)))
+
+
 def _metrics(window: np.ndarray) -> tuple[float, float, float | None]:
     values = window.astype(np.float64) / 32768.0
-    levels = [
-        round(10 * math.log10(power), 3) if power else SILENCE_FLOOR_DBFS
-        for power in np.mean(values * values, axis=0)
-    ]
+    levels = [_level_dbfs(power) for power in np.mean(values * values, axis=0)]
     centered = values - np.mean(values, axis=0)
     power = np.sum(centered * centered, axis=0)
     denominator = math.sqrt(float(power[0] * power[1]))
@@ -56,7 +66,20 @@ def _classification(left: float, right: float) -> tuple[str, float | None, str |
     return "measured", gap, None
 
 
-def build(mapping: dict[str, Any], layout: str | None, stereo: np.ndarray | None,
+def _downmix(left: float, right: float, mono: float) -> dict[str, Any]:
+    louder = max(left, right)
+    audible = louder >= QUIET_DBFS
+    silent = mono == SILENCE_FLOOR_DBFS
+    attenuation = round(louder - mono, 3) if audible and not silent else None
+    strong = audible and (silent or (attenuation is not None and attenuation >= REVIEW_DOWNMIX_DB))
+    return {
+        "mono_rms_dbfs": mono,
+        "attenuation_db": attenuation,
+        "strong_attenuation": strong,
+    }
+
+
+def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo: np.ndarray | None,
           stereo_mapping: dict[str, Any] | None) -> dict[str, Any]:
     """Bind a bounded PCM prefix to the exact input and analysed source clock."""
     count = min(mapping["samples"] // SAMPLE_RATE, MAX_SECONDS)
@@ -73,7 +96,9 @@ def build(mapping: dict[str, Any], layout: str | None, stereo: np.ndarray | None
         "max_seconds": MAX_SECONDS,
         "quiet_floor_dbfs": QUIET_DBFS,
         "strong_level_gap_db": REVIEW_GAP_DB,
+        "strong_downmix_attenuation_db": REVIEW_DOWNMIX_DB,
         "silence_floor_dbfs": SILENCE_FLOOR_DBFS,
+        "mono_pcm_sha256": mapping["pcm_sha256"],
         "stereo_pcm_sha256": None,
         "windows": [],
     }
@@ -101,6 +126,7 @@ def build(mapping: dict[str, Any], layout: str | None, stereo: np.ndarray | None
             "level_gap_db": gap,
             "louder_channel": louder,
             "correlation": None if status == "quiet" else correlation,
+            "downmix": _downmix(left, right, _mono_dbfs(mono[start:stop])),
         })
     context["status"] = "measured" if any(w["status"] != "quiet" for w in windows) else "quiet"
     context["stereo_pcm_sha256"] = hashlib.sha256(stereo[:end].astype("<i2", copy=False).tobytes()).hexdigest()
@@ -109,8 +135,11 @@ def build(mapping: dict[str, Any], layout: str | None, stereo: np.ndarray | None
 
 def validate(context: dict[str, Any], source: dict[str, Any]) -> None:
     """Check the displayed measurements' binding, ranges, units and disposition."""
+    schema = context.get("schema")
+    if schema not in (LEGACY_SCHEMA, SCHEMA):
+        raise ValueError("Stereo channel evidence uses an unsupported method")
+    silence_floor = SILENCE_FLOOR_DBFS if schema == SCHEMA else LEGACY_SILENCE_FLOOR_DBFS
     expected = {
-        "schema": SCHEMA,
         "evidence_type": "context",
         "affects_overall_confidence": False,
         "source_sha256": source.get("source_sha256", source.get("sha256")),
@@ -121,8 +150,12 @@ def validate(context: dict[str, Any], source: dict[str, Any]) -> None:
         "max_seconds": MAX_SECONDS,
         "quiet_floor_dbfs": QUIET_DBFS,
         "strong_level_gap_db": REVIEW_GAP_DB,
-        "silence_floor_dbfs": SILENCE_FLOOR_DBFS,
+        "silence_floor_dbfs": silence_floor,
     }
+    if schema == SCHEMA:
+        expected.update(mono_pcm_sha256=source["pcm_sha256"], strong_downmix_attenuation_db=REVIEW_DOWNMIX_DB)
+    elif "mono_pcm_sha256" in context or "strong_downmix_attenuation_db" in context:
+        raise ValueError("Legacy stereo context cannot contain downmix measurements")
     if (context.get("affects_overall_confidence") is not False
             or any(context.get(key) != value for key, value in expected.items())):
         raise ValueError("Stereo channel evidence differs from the recorded source or method")
@@ -147,8 +180,7 @@ def validate(context: dict[str, Any], source: dict[str, Any]) -> None:
                 or window["source_timestamp_ranges"] != source_ranges(source, start, stop)):
             raise ValueError("Stereo evidence differs from its recorded source timestamps")
         left, right = window["left_rms_dbfs"], window["right_rms_dbfs"]
-        if any(not isinstance(level, (int, float)) or isinstance(level, bool)
-               or not SILENCE_FLOOR_DBFS <= level <= 0 for level in (left, right)):
+        if not all(_valid_level(level, silence_floor) for level in (left, right)):
             raise ValueError("Stereo evidence has invalid channel levels")
         window_status, gap, louder = _classification(left, right)
         correlation = window["correlation"]
@@ -157,6 +189,29 @@ def validate(context: dict[str, Any], source: dict[str, Any]) -> None:
                     window_status == "quiet" or not isinstance(correlation, (int, float))
                     or isinstance(correlation, bool) or not -1 <= correlation <= 1)):
             raise ValueError("Stereo evidence has inconsistent channel measurements")
+        if schema == SCHEMA:
+            downmix = window["downmix"]
+            mono = downmix["mono_rms_dbfs"]
+            if (not _valid_level(mono, silence_floor) or type(downmix["strong_attenuation"]) is not bool
+                    or downmix != _downmix(left, right, mono)):
+                raise ValueError("Stereo evidence has inconsistent downmix measurements")
+        elif "downmix" in window:
+            raise ValueError("Legacy stereo context cannot contain downmix measurements")
         audible |= window_status != "quiet"
     if status != ("measured" if audible else "quiet"):
         raise ValueError("Stereo evidence summary differs from its measured windows")
+
+
+def _valid_level(value: Any, silence_floor: int) -> bool:
+    return (isinstance(value, (int, float)) and not isinstance(value, bool)
+            and silence_floor <= value <= 0)
+
+
+def verify_mono_levels(context: dict[str, Any], pcm: np.ndarray) -> None:
+    """Replay the mono half of the comparison against the committed voice input."""
+    if context["schema"] != SCHEMA:
+        return
+    for window in context["windows"]:
+        level = _mono_dbfs(pcm[window["start_sample"]:window["end_sample"]])
+        if window["downmix"]["mono_rms_dbfs"] != level:
+            raise ValueError("Stereo downmix level differs from the analyzed mono samples")

@@ -30,7 +30,7 @@ class Document:
 
 
 SOURCE_MAP_VERSION = "document-source/1"
-EXTRACTION_VERSION = "document-extraction/3"
+EXTRACTION_VERSION = "document-extraction/4"
 OCR_VERSION = "local-ocr/1"
 OCR_MIN_MEAN_CONFIDENCE = 75.0
 OCR_MAX_PAGES = 12
@@ -235,22 +235,49 @@ def _ocr_call(runtime: dict, raster: bytes, *, osd=False, timeout=10.0) -> str:
         return completed.stdout.decode("utf-8", "replace")
 
 
-def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, dict]], dict, bytes | None]:
+def _intersects(first, second) -> bool:
+    return (max(first[0], second[0]) < min(first[2], second[2])
+            and max(first[1], second[1]) < min(first[3], second[3]))
+
+
+def _ocr_image_words(words: list[dict], image_box: list[float]) -> list[dict] | None:
+    """Keep intact OCR paragraphs inside the image. Do not splice partial text."""
+    paragraphs: dict[tuple[int, int], list[dict]] = {}
+    for word in words:
+        paragraphs.setdefault(tuple(word["paragraph"]), []).append(word)
+    selected = []
+    for group in paragraphs.values():
+        if not any(_intersects(word["bbox"], image_box) for word in group):
+            continue
+        if not all(image_box[0] <= x0 < x1 <= image_box[2] and image_box[1] <= y0 < y1 <= image_box[3]
+                   for x0, y0, x1, y1 in (word["bbox"] for word in group)):
+            return None
+        selected.extend(group)
+    return selected
+
+
+def _ocr_page(page, runtime: dict, remaining: float, *,
+              image_box: list[float] | None = None) -> tuple[list[tuple[str, dict]], dict, bytes | None]:
     import pymupdf
     from PIL import Image
 
     info = {"page": page.number + 1, "status": "unchecked", "version": OCR_VERSION,
             "page_rotation": page.rotation, "confidence_semantics": "OCR recognition quality, not AI-generation confidence"}
+    scope = "image area" if image_box is not None else "page"
+    if image_box is not None:
+        info.update(coverage_scope="image_region", image_box=image_box)
     if not runtime.get("available"):
         return [], {**info, "reason": runtime["reason"]}, None
     if remaining < 2:
-        return [], {**info, "reason": "Local OCR time budget exhausted; this page was not checked."}, None
+        return [], {**info, "reason": f"Local OCR time budget exhausted. This {scope} was not checked."}, None
     rotation = page.rotation
     try:
         page.set_rotation(0)
         width, height = page.rect.width, page.rect.height
         scale = min(200 / 72, math.sqrt(OCR_MAX_PIXELS / (width * height)))
         pixmap = page.get_pixmap(matrix=pymupdf.Matrix(scale, scale), colorspace=pymupdf.csGRAY, alpha=False)
+    except (RuntimeError, ValueError):
+        return [], {**info, "reason": f"Local OCR could not render its source. This {scope} was not checked."}, None
     finally:
         page.set_rotation(rotation)
     original = Image.frombytes("L", (pixmap.width, pixmap.height), pixmap.samples)
@@ -304,8 +331,13 @@ def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, di
                           "bbox": [min(p[0] for p in points), min(p[1] for p in points), max(p[0] for p in points), max(p[1] for p in points)],
                           "paragraph": [int(row["block_num"]), int(row["par_num"])], "line": int(row["line_num"])})
     except (ValueError, KeyError, subprocess.SubprocessError):
-        return [], {**info, "reason": "Local OCR failed or exceeded its per-page time limit; this page was not checked."}, raster
-    # Preserve all recognized words, including rejected pages, in the frozen decode.
+        return [], {**info, "reason": f"Local OCR failed or exceeded its per-page time limit. This {scope} was not checked."}, raster
+    if image_box is not None:
+        selected = _ocr_image_words(words, image_box)
+        if selected is None:
+            return [], {**info, "reason": "A recognized paragraph crosses the image boundary. The image area remains unchecked."}, raster
+        words = selected
+    # Preserve recognized words in the requested source scope even when quality is too low.
     cursor, recognized = 0, []
     for word in words:
         if recognized:
@@ -321,12 +353,16 @@ def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, di
                 mean_recognition_confidence=mean, low_confidence_word_fraction=low_fraction,
                 quality_policy={"mean_minimum": OCR_MIN_MEAN_CONFIDENCE, "low_word_threshold": 50, "maximum_low_word_fraction": 0.15})
     if not words or len(recognized_text.strip()) < 25:
-        return [], {**info, "reason": "Too little readable OCR text; this page remains unchecked."}, raster
+        return [], {**info, "reason": f"Too little readable OCR text. This {scope} remains unchecked."}, raster
     if mean < OCR_MIN_MEAN_CONFIDENCE or low_fraction > 0.15:
-        return [], {**info, "reason": "OCR recognition quality is too low; this page remains unchecked."}, raster
+        return [], {**info, "reason": f"OCR recognition quality is too low. This {scope} remains unchecked."}, raster
     if language["status"] != "supported":
-        return [], {**info, "reason": language["reason"] + " This page remains unchecked."}, raster
+        return [], {**info, "reason": language["reason"] + f" This {scope} remains unchecked."}, raster
     parts = []
+    ocr = {"raster": raster_info, "language": language, "mean_recognition_confidence": mean,
+           "confidence_semantics": info["confidence_semantics"]}
+    if image_box is not None:
+        ocr.update(coverage_scope="image_region", image_box=image_box)
     groups: dict[tuple, list[dict]] = {}
     for word in words:
         groups.setdefault(tuple(word["paragraph"]), []).append(word)
@@ -346,15 +382,15 @@ def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, di
                       "page_rotation": rotation, "page_width": width, "page_height": height,
                       "coordinate_space": "unrotated-page-points", "glyphs": glyphs, "ocr_words": mapped,
                       "bbox": [min(x[0] for x in boxes), min(x[1] for x in boxes), max(x[2] for x in boxes), max(x[3] for x in boxes)],
-                      "ocr": {"raster": raster_info, "language": language,
-                              "mean_recognition_confidence": mean, "confidence_semantics": info["confidence_semantics"]}}))
+                      "ocr": ocr}))
     return parts, {**info, "status": "extracted", "reason": None}, raster
 
 
 def _unread_pdf_image_boxes(blocks: list[dict], width: float, height: float,
-                           text_centres: list[tuple[float, float]]) -> list[list[float]]:
+                           native_lines: list[list[float]]) -> list[list[float]]:
     """Locate dominant raster areas with too little mapped text to cover them."""
     boxes = set()
+    centres = [((a + c) / 2, (b + d) / 2) for a, b, c, d in native_lines]
     for block in blocks:
         if block["type"] != 1:
             continue
@@ -364,7 +400,7 @@ def _unread_pdf_image_boxes(blocks: list[dict], width: float, height: float,
             continue
         # A caption, page number or very sparse overlay cannot establish text
         # coverage for the rest of the raster. Avoid flagging ordinary small figures.
-        covered_rows = {round(y / 5) for x, y in text_centres if x0 <= x <= x1 and y0 <= y <= y1}
+        covered_rows = {round(y / 5) for x, y in centres if x0 <= x <= x1 and y0 <= y <= y1}
         if len(covered_rows) < 3:
             boxes.add(box)
     return [list(box) for box in sorted(boxes)]
@@ -379,23 +415,57 @@ def partial_pdf_notice(pages: list[dict]) -> str:
     return ""
 
 
+def hybrid_ocr_notice(ocr_pages: list[dict]) -> str:
+    pages = [str(page["page"]) for page in ocr_pages
+             if page.get("coverage_scope") == "image_region" and page["status"] == "extracted"]
+    if not pages:
+        return ""
+    subject = f"Page {pages[0]} combines" if len(pages) == 1 else f"Pages {', '.join(pages)} combine"
+    return f"{subject} mapped text with text transcribed from image areas. Authorship confidence has not been validated for this mixed extraction."
+
+
 def extract_pdf(path: Path) -> Document:
     import pymupdf
 
-    parts: list[tuple[str, dict]] = []
+    page_parts: list[list[tuple[str, dict]]] = []
     empty_pages: list[int] = []
     partial_pages: list[dict] = []
+    hybrid_pages: list[dict] = []
     ocr_pages, rasters, raster_bytes = [], {}, 0
     runtime = None
     started = time.monotonic()
-    pages = 0
+
+    def recognize(page, image_box=None):
+        nonlocal runtime, raster_bytes
+        scope = "image area" if image_box is not None else "page"
+        if len(ocr_pages) >= OCR_MAX_PAGES or raster_bytes >= OCR_MAX_RASTER_BYTES:
+            parts, info, raster = [], {"page": page.number + 1, "status": "unchecked",
+                "reason": f"Local OCR page or raster budget exhausted. This {scope} was not checked."}, None
+        else:
+            if runtime is None:
+                runtime = _ocr_runtime()
+            parts, info, raster = _ocr_page(page, runtime, OCR_BUDGET_SECONDS - (time.monotonic() - started),
+                                            image_box=image_box)
+        if raster is not None:
+            if raster_bytes + len(raster) > OCR_MAX_RASTER_BYTES:
+                parts, info = [], {"page": page.number + 1, "status": "unchecked",
+                    "reason": f"OCR raster storage budget exhausted. This {scope} was not checked."}
+            else:
+                rasters[hashlib.sha256(raster).hexdigest()] = base64.b64encode(raster).decode("ascii")
+                raster_bytes += len(raster)
+        if image_box is not None:
+            info.update(coverage_scope="image_region", image_box=image_box)
+        ocr_pages.append(info)
+        return parts, info
+
     with pymupdf.open(path) as doc:
         for page in doc:
-            pages += 1
+            parts = []
+            page_parts.append(parts)
             blocks = page.get_text("rawdict")["blocks"]
             blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
             page_chars = 0
-            text_centres = []
+            native_lines = []
             for b in blocks:
                 if b["type"] != 0:
                     continue
@@ -407,8 +477,7 @@ def extract_pdf(path: Path) -> Document:
                             chars.append(char["c"])
                             glyphs.extend([list(char["bbox"])] * len(char["c"]))
                     if sum(ch.isalnum() for ch in "".join(chars[line_start:])) >= 2:
-                        x0, y0, x1, y1 = line["bbox"]
-                        text_centres.append(((x0 + x1) / 2, (y0 + y1) / 2))
+                        native_lines.append(list(line["bbox"]))
                     chars.append("\n")
                     glyphs.append(None)
                 raw = "".join(chars)
@@ -419,41 +488,48 @@ def extract_pdf(path: Path) -> Document:
                                         "page_width": page.cropbox.width, "page_height": page.cropbox.height,
                                         "coordinate_space": "unrotated-page-points", "extraction": "text_layer", "glyphs": glyphs}))
             if page_chars < 2:
-                if runtime is None:
-                    runtime = _ocr_runtime()
-                if len(ocr_pages) >= OCR_MAX_PAGES or raster_bytes >= OCR_MAX_RASTER_BYTES:
-                    local_parts, info, raster = [], {"page": page.number + 1, "status": "unchecked", "reason": "Local OCR page or raster budget exhausted; this page was not checked."}, None
-                else:
-                    local_parts, info, raster = _ocr_page(page, runtime, OCR_BUDGET_SECONDS - (time.monotonic() - started))
-                if raster is not None:
-                    if raster_bytes + len(raster) > OCR_MAX_RASTER_BYTES:
-                        local_parts, raster = [], None
-                        info = {"page": page.number + 1, "status": "unchecked", "reason": "OCR raster storage budget exhausted; this page was not checked."}
-                    else:
-                        rasters[hashlib.sha256(raster).hexdigest()] = base64.b64encode(raster).decode("ascii")
-                        raster_bytes += len(raster)
-                ocr_pages.append(info)
+                local_parts, info = recognize(page)
                 parts.extend(local_parts)
                 if info["status"] != "extracted":
                     empty_pages.append(page.number + 1)
             else:
-                boxes = _unread_pdf_image_boxes(blocks, page.cropbox.width, page.cropbox.height, text_centres)
+                boxes = _unread_pdf_image_boxes(blocks, page.cropbox.width, page.cropbox.height, native_lines)
                 if boxes:
-                    partial_pages.append({"page": page.number + 1, "image_boxes": boxes,
-                                          "coordinate_space": "unrotated-page-points"})
-    d = _join_mapped(parts, dehyphenate=True)
+                    review = {"page": page.number + 1, "image_boxes": boxes,
+                              "coordinate_space": "unrotated-page-points"}
+                    if len(boxes) == 1 and not any(_intersects(boxes[0], line) for line in native_lines):
+                        hybrid_pages.append(review)
+                    else:
+                        partial_pages.append({**review, "reason": "OCR requires one dominant image area separate from mapped text."})
+        # Preserve the existing OCR budget for pages with no native text before
+        # spending any remaining capacity on supplemental hybrid-page text.
+        for review in hybrid_pages:
+            index = review["page"] - 1
+            local_parts, info = recognize(doc[index], review["image_boxes"][0])
+            if info["status"] != "extracted":
+                partial_pages.append({**review, "reason": info["reason"]})
+                continue
+            parts = page_parts[index]
+            parts.extend(local_parts)
+            parts.sort(key=lambda part: (round(part[1]["bbox"][1] / 5), part[1]["bbox"][0]))
+    pages = len(page_parts)
+    partial_pages.sort(key=lambda page: page["page"])
+    ocr_pages.sort(key=lambda page: page["page"])
+    d = _join_mapped([part for parts in page_parts for part in parts], dehyphenate=True)
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
               "partially_checked_pages": partial_pages,
               "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
-                      "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages], "unchecked_pages": empty_pages,
+                      "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,
                       "confidence_semantics": "OCR recognition quality, not AI-generation confidence",
                       "max_pages": OCR_MAX_PAGES, "max_pixels_per_page": OCR_MAX_PIXELS}}
     warnings = []
     if empty_pages:
         warnings.append(f"Pages {', '.join(map(str, empty_pages))} could not be reliably extracted. They were not checked and must not be treated as human-authored.")
-    elif ocr_pages:
+    elif any(page["status"] == "extracted" for page in ocr_pages):
         warnings.append("Scanned pages were transcribed locally. OCR recognition quality is not AI-generation confidence; language identification is heuristic. Compare all excerpts with their frozen page images.")
+    if hybrid_warning := hybrid_ocr_notice(ocr_pages):
+        warnings.append(hybrid_warning)
     if partial_warning := partial_pdf_notice(partial_pages):
         warnings.append(partial_warning)
         d.meta["warning"] = partial_warning

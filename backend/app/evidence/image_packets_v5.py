@@ -23,8 +23,10 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-VERSION = "image-evidence-5"
-CREATOR = "image-evidence-packets/3"
+V5 = "image-evidence-5"
+VERSION = "image-evidence-6"
+CREATOR = "image-evidence-packets/4"
+_CREATORS = {VERSION: CREATOR, V5: "image-evidence-packets/3"}
 SCHEMA = prior.SCHEMA
 PacketIntegrityError = prior.PacketIntegrityError
 packet_hash = prior.packet_hash
@@ -38,12 +40,21 @@ _STATUSES = frozenset(
         "insufficient_texture",
         "unsupported_geometry",
         "empty_source_projection",
+        "unassessed_candidate_budget",
     }
 )
 
 
-def current_set_id(analysis: Analysis) -> str:
-    return str(uuid.uuid5(_NS, f"{analysis.id}:{analysis.result_hash}:{VERSION}"))
+def current_set_id(analysis: Analysis, version: str = VERSION) -> str:
+    return str(uuid.uuid5(_NS, f"{analysis.id}:{analysis.result_hash}:{version}"))
+
+
+def _search_strategy(size: tuple[int, int], version: str) -> str | None:
+    if copy_donor.supports_size(*size):
+        return "native_dense"
+    if version == VERSION and copy_donor.supports_native_size(*size):
+        return "native_anchor_shortlist"
+    return None
 
 
 def _v4(document: dict) -> dict:
@@ -66,7 +77,7 @@ def _coordinates(box: list[int]) -> dict[str, int]:
     return dict(zip(("x", "y", "w", "h"), box, strict=True))
 
 
-def _describe(cue: dict) -> str:
+def _describe(cue: dict, version: str) -> str:
     status = cue["status"]
     if status == "copy_consistent":
         donor = cue["donor"]
@@ -82,19 +93,23 @@ def _describe(cue: dict) -> str:
             "This pixel similarity is compatible with copying or repeated detail. The direction and origin of any edit remain unknown."
         )
     if status == "unsupported_geometry":
+        side = copy_donor.SIDE_LIMIT if version == V5 else copy_donor.NATIVE_SIDE_LIMIT
         return (
             f"Same-image copy check skipped. This native-pixel check requires an image at least "
-            f"{copy_donor.MIN_SIDE} px across each side and no larger than {copy_donor.SIDE_LIMIT} px per side."
+            f"{copy_donor.MIN_SIDE} px across each side and no larger than {side} px per side."
         )
     return {
         "insufficient_texture": "Same-image copy check was inconclusive. The selected pixels had too few textured blocks to compare.",
         "empty_source_projection": "Same-image copy check skipped. The selected map cells did not project to any native source pixels.",
         "ambiguous_repetition": "Same-image copy check found similarly strong matches in multiple locations. Repeated detail makes the match ambiguous.",
+        "unassessed_candidate_budget": "Same-image copy check was inconclusive. Too many similar areas were found to verify a unique match within the search limit.",
         "no_donor": "Same-image copy check found no qualifying shifted or horizontally reflected patch. Other edits remain possible.",
     }[status]
 
 
-def _cue(store: ObjectStore, packet: dict, size: tuple[int, int], source: Image.Image | None) -> dict:
+def _cue(
+    store: ObjectStore, packet: dict, size: tuple[int, int], source: Image.Image | None, version: str
+) -> dict:
     evidence = {
         "schema": "same-image-copy-corroboration/1",
         "source_size": list(size),
@@ -108,13 +123,18 @@ def _cue(store: ObjectStore, packet: dict, size: tuple[int, int], source: Image.
         "donor": None,
         "authorship_confidence_contribution": 0,
     }
+    strategy = _search_strategy(size, version)
+    if version == VERSION:
+        evidence["search_strategy"] = strategy
     if source is None:
         return evidence
     mask = _source_mask(store, packet, size)
     if not mask.any():
         evidence["status"] = "empty_source_projection"
         return evidence
-    match = copy_donor.corroborate(np.asarray(source), mask)
+    match = (
+        copy_donor.corroborate_native if strategy == "native_anchor_shortlist" else copy_donor.corroborate
+    )(np.asarray(source), mask)
     donor = match["donor"]
     evidence.update(
         status=match["status"],
@@ -144,6 +164,8 @@ def _check_cue(document: dict, packet: dict) -> None:
             raise PacketIntegrityError("Copy evidence requires a stored component mask")
         return
     width, height = (document["source"][axis] for axis in ("width", "height"))
+    version = document["version"]
+    strategy = _search_strategy((width, height), version)
     if (
         not isinstance(cue, dict)
         or cue.get("schema") != "same-image-copy-corroboration/1"
@@ -159,7 +181,9 @@ def _check_cue(document: dict, packet: dict) -> None:
     if (
         type(anchors) is not int
         or not 0 <= anchors <= 9
-        or (status == "unsupported_geometry") == copy_donor.supports_size(width, height)
+        or (status == "unsupported_geometry") != (strategy is None)
+        or (status == "unassessed_candidate_budget" and strategy != "native_anchor_shortlist")
+        or (version == VERSION and ("search_strategy" not in cue or cue["search_strategy"] != strategy))
         or (anchors < copy_donor.MIN_ANCHORS)
         != (status in {"unsupported_geometry", "empty_source_projection", "insufficient_texture"})
     ):
@@ -221,7 +245,7 @@ def _integer_box(box: dict, width: int, height: int) -> tuple[int, int, int, int
 
 
 def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
-    if document.get("version") != VERSION:
+    if document.get("version") not in _CREATORS:
         prior.validate_packet_set(document, **binding)
         return
     if document.get("sha256") != packet_hash(document):
@@ -233,12 +257,12 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
 
 def validate_packet_source_mapping(document: dict, result: dict) -> None:
     prior.validate_packet_source_mapping(
-        _v4(document) if document.get("version") == VERSION else document, result
+        _v4(document) if document.get("version") in _CREATORS else document, result
     )
 
 
 def validate_assets(document: dict, store: ObjectStore) -> None:
-    if document.get("version") != VERSION:
+    if document.get("version") not in _CREATORS:
         prior.validate_comparison_assets(document, store)
         return
     prior.validate_comparison_assets(_v4(document), store)
@@ -281,7 +305,7 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
 
 
 def build_packet_set(
-    db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any]
+    db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any], *, version: str = VERSION
 ) -> dict[str, Any]:
     if (
         canonical_hash(result) != analysis.result_hash
@@ -291,24 +315,25 @@ def build_packet_set(
     base = prior.persist_packet_set(db, analysis, store, result=result)
     if base is None:
         raise ValueError("Image evidence needs a published image result")
+    creator = _CREATORS[version]
     document = copy.deepcopy(base)
     document.update(
-        id=current_set_id(analysis),
-        version=VERSION,
+        id=current_set_id(analysis, version),
+        version=version,
         derived_from={key: base[key] for key in ("id", "version", "sha256")},
     )
     packets = document["packets"]
     localised = [packet for packet in packets if packet["evidence_type"] == "localisation"]
     size = (document["source"]["width"], document["source"]["height"])
     source = None
-    if localised and copy_donor.supports_size(*size):
+    if localised and _search_strategy(size, version):
         source, orientation = legacy._source(legacy._verified(store, analysis.sha256))
         if source.size != size or orientation != document["source"]["exif_orientation"]:
             raise PacketIntegrityError("Copy check uses different source geometry")
     for packet in localised:
-        cue = _cue(store, packet, size, source)
+        cue = _cue(store, packet, size, source, version)
         packet["copy_corroboration"] = cue
-        packet["interpretation"] += " " + _describe(cue)
+        packet["interpretation"] += " " + _describe(cue, version)
         donor = cue["donor"]
         if donor is not None and source is not None:
             crop = source.crop(_integer_box(donor["box"], *source.size))
@@ -318,7 +343,7 @@ def build_packet_set(
                 legacy._png(crop),
                 media_type="image/png",
                 role="preview",
-                created_by=CREATOR,
+                created_by=creator,
                 analysis_id=analysis.id,
             )
             packet["artifacts"][_ASSET] = {
@@ -335,7 +360,7 @@ def build_packet_set(
                 }
             )
     for packet in packets:
-        packet["derivation"]["version"] = VERSION
+        packet["derivation"]["version"] = version
     for asset in [
         *document["overview"].values(),
         *document["comparison"]["artifacts"].values(),
@@ -355,7 +380,7 @@ def build_packet_set(
         canonical_json(document),
         media_type="application/json",
         role="exhibit_payload",
-        created_by=CREATOR,
+        created_by=creator,
         analysis_id=analysis.id,
         artefact_id=document["id"],
     )
@@ -374,19 +399,29 @@ def _binding(analysis: Analysis) -> dict:
 def load_packet_set(
     db: Session, analysis: Analysis, store: ObjectStore, *, set_id: str | None = None
 ) -> dict[str, Any] | None:
+    ids = (
+        (set_id,) if set_id is not None else tuple(current_set_id(analysis, version) for version in _CREATORS)
+    )
     row = db.scalars(
-        select(Artefact).where(
+        select(Artefact)
+        .where(
             Artefact.analysis_id == analysis.id,
-            Artefact.created_by == CREATOR,
+            Artefact.created_by.in_(tuple(_CREATORS.values())),
             Artefact.role == "exhibit_payload",
             Artefact.media_type == "application/json",
-            Artefact.id == (set_id or current_set_id(analysis)),
+            Artefact.id.in_(ids),
         )
+        .order_by(Artefact.created_by.desc())
     ).first()
     if row is None:
         return prior.load_packet_set(db, analysis, store, set_id=set_id)
     document = json.loads(legacy._verified(store, row.sha256))
-    if document.get("id") != row.id or document.get("version") != VERSION:
+    version = document.get("version")
+    if (
+        document.get("id") != row.id
+        or _CREATORS.get(version) != row.created_by
+        or row.id != current_set_id(analysis, version)
+    ):
         raise PacketIntegrityError("Copy evidence differs from its indexed identity")
     validate_packet_set(document, **_binding(analysis))
     validate_packet_source_mapping(document, json.loads(legacy._verified(store, analysis.result_hash)))

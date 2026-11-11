@@ -20,7 +20,7 @@ from typing import Any
 from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
-from app.detectors.text.extract import EXTRACTION_VERSION, Document, partial_pdf_notice
+from app.detectors.text.extract import EXTRACTION_VERSION, Document, hybrid_ocr_notice, partial_pdf_notice
 from app.detectors.text.pipeline import (
     DocumentScores,
     assemble_document,
@@ -38,7 +38,7 @@ from app.engine.stages import common, document_screening
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p28"  # p28: explicit coverage for mixed text-layer and raster PDF pages; p23: email calibration and passage evidence, without pilot article confidence; p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
+PIPELINE_VERSION = "doc-2.0-p29"  # p29: source-bound OCR for a disjoint image area on a hybrid PDF page; p28: explicit coverage for mixed text-layer and raster PDF pages; p23: email calibration and passage evidence, without pilot article confidence; p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -197,22 +197,29 @@ def not_run_on_server(detected: dict[str, Any]) -> str | None:
 
 
 def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str, Any]:
-    """Keep measured excerpts and withhold a whole-file verdict for unread areas."""
+    """Keep measured excerpts and withhold unvalidated whole-document judgments."""
     unchecked = doc.meta.get("unmapped_pages") or []
     partial_notice = partial_pdf_notice(doc.meta.get("partially_checked_pages") or [])
-    if not unchecked and not partial_notice:
+    hybrid_notice = hybrid_ocr_notice((doc.meta.get("ocr") or {}).get("pages") or [])
+    if not unchecked and not partial_notice and not hybrid_notice:
         return output
     notices = []
     if unchecked:
         notices.append(f"Pages {', '.join(map(str, unchecked))} were not reliably extracted and were not checked.")
     if partial_notice:
         notices.append(partial_notice)
-    else:
+    elif unchecked:
         notices.append("The recorded scores and excerpts apply only to extracted text.")
+    if hybrid_notice:
+        notices.append(hybrid_notice)
     notices.append("No whole-document authorship conclusion is available.")
     scope = " ".join(notices)
-    headline = ("Partially assessed: some document text remains unchecked" if partial_notice
-                else "Partially assessed: some document pages remain unchecked")
+    if partial_notice:
+        headline = "Partially assessed: some document text remains unchecked"
+    elif unchecked:
+        headline = "Partially assessed: some document pages remain unchecked"
+    else:
+        headline = "Mixed PDF text available for inspection"
     before = output["decision"]
     decision = Decision.model_validate({**before, "code": "not_assessable",
         "verbal": headline, "reason": scope,
@@ -220,13 +227,13 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         "band": "uncertain", "confidence": "low", "driving_hypothesis": None, "provenance_record": None,
         "statistical_alone": None, "statistical_estimate_before_provenance": None, "contributions": []}).model_dump(mode="json")
     output = {**output, "decision": decision, "caveats": [*output.get("caveats", []), scope]}
-    if partial_notice:
+    if partial_notice or hybrid_notice:
         profile = output.get("condition_profile")
         if profile is not None:
             output["condition_profile"] = {
                 **profile, "within_validated_envelope": False, "validation_support": "unsupported",
                 "validation_measured_at": None,
-                "limiting_conditions": [*profile.get("limiting_conditions", []), partial_notice],
+                "limiting_conditions": [*profile.get("limiting_conditions", []), *filter(None, (partial_notice, hybrid_notice))],
             }
         # Keep exact raw passage inputs and responses. Whole-document calibration
         # must also be withheld on individual aggregate writing checks.

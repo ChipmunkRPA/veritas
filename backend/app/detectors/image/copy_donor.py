@@ -1,8 +1,4 @@
-"""Bounded same-image matching on an existing source-coordinate highlight.
-
-The fixed v295/v298 method compares native luminance blocks under one
-translation or horizontal reflection. It supplies pixel evidence only.
-"""
+"""Same-image matching of native luminance blocks in an existing highlight."""
 
 from __future__ import annotations
 
@@ -16,6 +12,8 @@ from app.detectors.image import copy_move
 
 MIN_SIDE = copy_move.MIN_INPUT_SIDE
 SIDE_LIMIT = 512
+NATIVE_SIDE_LIMIT = 1024
+MAX_CANDIDATE_ORIGINS = 4096
 PATCH = 16
 BORDER = 4
 MIN_TEXTURE_STD = 8.0
@@ -28,6 +26,10 @@ TRANSFORMS = ("translation", "horizontal_reflection")
 
 def supports_size(width: int, height: int) -> bool:
     return min(width, height) >= MIN_SIDE and max(width, height) <= SIDE_LIMIT
+
+
+def supports_native_size(width: int, height: int) -> bool:
+    return min(width, height) >= MIN_SIDE and max(width, height) <= NATIVE_SIDE_LIMIT
 
 
 def _bounds(mask):
@@ -105,8 +107,7 @@ def _competing_donor(maps, origin, width, height):
     return best
 
 
-def corroborate(rgb: np.ndarray, selection: np.ndarray) -> dict:
-    """Evaluate one existing source-coordinate Boolean mask without modifying it."""
+def _record(rgb: np.ndarray, selection: np.ndarray) -> tuple[dict, tuple[int, int, int, int]]:
     if (
         rgb.dtype != np.uint8
         or rgb.ndim != 3
@@ -125,22 +126,36 @@ def corroborate(rgb: np.ndarray, selection: np.ndarray) -> dict:
         "status": "unsupported_geometry",
         "donor": None,
     }
-    if not supports_size(*rgb.shape[:2]):
-        return record
+    return record, box
+
+
+def _native_anchors(rgb, selection, box):
     luma, xscale, yscale = copy_move._luma(rgb)
     if xscale != 1 or yscale != 1:
         raise ValueError("Native coordinates must be retained")
-    patches = _anchors(luma, selection, box)
+    return luma, _anchors(luma, selection, box)
+
+
+def corroborate(rgb: np.ndarray, selection: np.ndarray) -> dict:
+    """Evaluate an existing source-coordinate mask with the historical dense search."""
+    record, box = _record(rgb, selection)
+    if not supports_size(*rgb.shape[:2]):
+        return record
+    luma, patches = _native_anchors(rgb, selection, box)
     record.update(anchor_count=len(patches), status="insufficient_texture")
     if len(patches) < MIN_ANCHORS:
         return record
     maps = [_candidate_donors(luma, patches, box, reflected) for reflected in (False, True)]
     best = _strongest(maps)
+    width, height = box[2:]
+    second = _competing_donor(maps, best["origin"], width, height) if best else None
+    return _finish(record, best, second, width, height)
+
+
+def _finish(record, best, second, width, height):
     record["status"] = "no_donor"
     if best is None:
         return record
-    width, height = box[2:]
-    second = _competing_donor(maps, best["origin"], width, height)
     margin = best["correlation"] - second if second is not None else None
     record["competing_correlation"] = second
     record["donor_margin"] = margin
@@ -157,3 +172,82 @@ def corroborate(rgb: np.ndarray, selection: np.ndarray) -> dict:
         },
     )
     return record
+
+
+def _candidate_origins(luma, patches, box, minimum_support):
+    left, top, width, height = box
+    rows, cols = luma.shape[0] - height + 1, luma.shape[1] - width + 1
+    possible = np.zeros((rows, cols), dtype=bool)
+    # A qualifying location must match at least one of these anchors. Allow
+    # small numerical differences between the dense and single-patch calls.
+    for x, y, patch in patches[: len(patches) - minimum_support + 1]:
+        response = cv2.matchTemplate(luma, patch, cv2.TM_CCOEFF_NORMED)
+        possible |= response[y : y + rows, x : x + cols] >= MIN_CORRELATION - 0.0001
+    possible[max(0, top - height + 1) : top + height, max(0, left - width + 1) : left + width] = False
+    return possible
+
+
+def _native_matches(luma, patches, box):
+    width = box[2]
+    minimum_support = math.ceil(len(patches) * MIN_SUPPORT_FRACTION)
+    eligible = []
+    total = 0
+    for transform in TRANSFORMS:
+        templates = patches
+        if transform == "horizontal_reflection":
+            templates = [
+                (width - PATCH - x, y, np.ascontiguousarray(patch[:, ::-1])) for x, y, patch in patches
+            ]
+        possible = _candidate_origins(luma, templates, box, minimum_support)
+        total += int(possible.sum())
+        if total > MAX_CANDIDATE_ORIGINS:
+            return None
+        for y, x in zip(*np.nonzero(possible), strict=True):
+            scores = [
+                float(
+                    cv2.matchTemplate(
+                        luma[y + dy : y + dy + PATCH, x + dx : x + dx + PATCH], patch, cv2.TM_CCOEFF_NORMED
+                    )[0, 0]
+                )
+                for dx, dy, patch in templates
+            ]
+            support = sum(score >= MIN_CORRELATION for score in scores)
+            if support >= minimum_support:
+                eligible.append(
+                    {
+                        "origin": (int(x), int(y)),
+                        "transform": transform,
+                        "correlation": float(np.median(scores)),
+                        "supporting_anchors": support,
+                    }
+                )
+    return eligible
+
+
+def corroborate_native(rgb: np.ndarray, selection: np.ndarray) -> dict:
+    """Verify same-size copy candidates in original pixels through a 1024px side."""
+    if rgb.ndim >= 2 and supports_size(*rgb.shape[:2]):
+        return corroborate(rgb, selection)
+    record, box = _record(rgb, selection)
+    if not supports_native_size(*rgb.shape[:2]):
+        return record
+    luma, patches = _native_anchors(rgb, selection, box)
+    record.update(anchor_count=len(patches), status="insufficient_texture")
+    if len(patches) < MIN_ANCHORS:
+        return record
+    matches = _native_matches(luma, patches, box)
+    if matches is None:
+        record["status"] = "unassessed_candidate_budget"
+        return record
+    width, height = box[2:]
+    best = max(matches, key=lambda match: match["correlation"], default=None)
+    second = None
+    if best is not None:
+        x, y = best["origin"]
+        for match in matches:
+            other_x, other_y = match["origin"]
+            overlap = max(0, width - abs(x - other_x)) * max(0, height - abs(y - other_y))
+            score = match["correlation"]
+            if overlap * 3 < 2 * width * height and (second is None or score > second):
+                second = score
+    return _finish(record, best, second, width, height)

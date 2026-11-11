@@ -186,7 +186,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "limit_samples": maximum,
         }
         if inspect_stereo:
-            mapping["stereo_context"] = stereo.build(mapping, layout, stereo_pcm, stereo_clock)
+            mapping["stereo_context"] = stereo.build(mapping, pcm, layout, stereo_pcm, stereo_clock)
         return DecodedAudio(pcm, wav_bytes(pcm), mapping)
     except (subprocess.SubprocessError, json.JSONDecodeError, KeyError, IndexError, OSError) as exc:
         raise ValueError("The audio stream could not be decoded with a verified sample timeline") from exc

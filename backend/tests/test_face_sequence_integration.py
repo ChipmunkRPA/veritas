@@ -17,7 +17,12 @@ from app.detectors.video.adapters.face_sequence import (
 from app.detectors.video.decode import FrameTable
 from app.engine.fusion.runtime import annotate
 from app.engine.registry import get_registry
-from app.evidence.face_interval_binding import SEQUENCE_METHOD, validate_packet, validate_sequence_record
+from app.evidence.face_interval_binding import (
+    APPEARANCE_METHOD,
+    SEQUENCE_METHOD,
+    validate_packet,
+    validate_sequence_record,
+)
 from app.evidence.image_packets import PacketIntegrityError
 from app.evidence.video_packets import _sequence_observations
 from scripts.score_face_sequence_candidates import sequence_windows as reference_windows
@@ -224,10 +229,15 @@ def test_small_sequence_check_does_not_depend_on_the_large_classifier_running(mo
     assert calls[-1]["outputs"].face_review.centers == (2, 18)
 
 
-def test_review_finding_is_explicit_and_linked_without_authorship_probability(monkeypatch):
+@pytest.mark.parametrize(("method", "observation"), [
+    (SEQUENCE_METHOD, "after accounting for changes near its edges"),
+    (APPEARANCE_METHOD, "differed from both surrounding time groups"),
+])
+def test_review_finding_is_explicit_and_linked_without_authorship_probability(monkeypatch, method, observation):
     from app.engine.stages import video
 
     _, sequence, _ = sample()
+    sequence["method"] = method
     sid = DETECTOR+":global"
     generated = {"findings": [{"id": "F1", "evidence_ids": [sid, "face-series"]}], "template_set": "test"}
     monkeypatch.setattr(video.common, "synthesise_findings", lambda *_, **__: deepcopy(generated))
@@ -236,6 +246,7 @@ def test_review_finding_is_explicit_and_linked_without_authorship_probability(mo
     [finding] = video.synthesise(ctx)["findings"]
     assert finding["title"] == "Possible face-change range"
     assert "5.720 to 6.360 s" in finding["statement"]
+    assert observation in finding["statement"]
     assert "overall confidence" in finding["statement"]
     assert finding["probability"] is None and finding["direction"] == "neutral"
     assert all(s["evidence_ids"] == [sid, "face-series"] for s in finding["sentences"])

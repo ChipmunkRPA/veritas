@@ -461,10 +461,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                             "The contact sheet contains representative input frames. The listed input frames establish actual sample coverage."],
                            "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
         if sequence := candidate.get("face_sequence"):
-            start, end = sequence["start_stream_s"], sequence["end_stream_s"]
             packet.update(title="Face-change range to review", semantics=sequence['method'],
                           face_sequence=sequence,
-                          observation=f"Face appearance changed relative to both surrounding time groups from {start:.3f} to {end:.3f} s.",
+                          observation=face_interval_binding.sequence_observation(sequence),
                           interpretation="This pattern supports reviewing a possible face edit. Head motion, expression, lighting and compression can also cause it. The displayed frames show before, during and after context; none has an individual AI confidence score.",
                           measurements=[{"label": "Face-sequence change", "value": sequence["response"], "unit": "uncalibrated feature distance"},
                                         {"label": "Input frames in this window", "value": len(sequence["frame_inputs"]), "unit": "frames"}],

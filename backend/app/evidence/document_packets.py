@@ -241,9 +241,11 @@ def _pdf_plates(source: bytes, anchors: list[dict], store: ObjectStore | None = 
                 boxes.extend(_rect(box, width, height) for box in anchor["highlight_boxes"])
             bounding = (max(0, min(b[0] for b in boxes) - 18), max(0, min(b[1] for b in boxes) - 18),
                         min(width, max(b[2] for b in boxes) + 18), min(height, max(b[3] for b in boxes) + 18))
-            frozen = grouped[number][0].get("ocr", {}).get("raster")
-            if frozen:
-                if store is None or any(a.get("ocr", {}).get("raster") != frozen for a in grouped[number]):
+            rasters = [anchor.get("ocr", {}).get("raster") for anchor in grouped[number]
+                       if anchor.get("extraction") == "ocr" or anchor.get("ocr")]
+            frozen = rasters[0] if rasters else None
+            if rasters:
+                if store is None or frozen is None or any(raster != frozen for raster in rasters):
                     raise DocumentPacketIntegrityError("An OCR page has inconsistent frozen input rasters")
                 raster_bytes = _verified(store, frozen["sha256"])
                 with Image.open(io.BytesIO(raster_bytes)) as opened:

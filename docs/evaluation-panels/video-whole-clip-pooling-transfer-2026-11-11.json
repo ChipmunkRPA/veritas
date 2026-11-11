@@ -1,0 +1,291 @@
+{
+  "cases": 60,
+  "frozen_points": {
+    "control_quantile": 0.9,
+    "development_false_flags": {
+      "candidate_median": 1,
+      "candidate_top_two": 1,
+      "paired_max_median": 1,
+      "reference_median": 1
+    },
+    "development_originals": 10,
+    "points": {
+      "candidate_median": 2.9821131229400635,
+      "candidate_top_two": 3.9102537631988525,
+      "paired_max_median": 1.1360871956155003,
+      "reference_median": 0.43718233704566956
+    },
+    "scales": {
+      "candidate_median": {
+        "median": -1.1797963380813599,
+        "upper_point": 2.9821131229400635
+      },
+      "reference_median": {
+        "median": 0.024325260892510414,
+        "upper_point": 0.43718233704566956
+      }
+    },
+    "schema": "chipmunk.video-face-pooling/1",
+    "strict_exceedance": true
+  },
+  "inputs": {
+    "calibration_lock": "5e1d7b75412853e64dcbea8358cc9bdfea570b838da4e6326c87e6cf2b99a910",
+    "candidate": "aec9a5997222657f6626ec89dbd148adafdf1f680f560b0f7b2bc4b4ea9c1eb2",
+    "comparator_code": "314e972680e8289060e86e7d020d4dd6f7cd651f4292b0a248e126ace507d843",
+    "plan": "26eb02275281a87c685a1f6aa385a113df1d68b00291f54a7702cb6cf4bd4399",
+    "reference": "b7660b839dc900c1f62b095c975a907610ae6058a8fe6234f9bb0179c537b285"
+  },
+  "native_comparison": {
+    "frozen_calibration_sha256": "5e1d7b75412853e64dcbea8358cc9bdfea570b838da4e6326c87e6cf2b99a910",
+    "native_frames_per_model": 360,
+    "native_runner_sha256": "c60e55265fe13bb0edd16e60de813aafa336eb7a3cab77d644094ab88e57bf49",
+    "unique_source_groups": {
+      "matched_delivery": 12,
+      "native_hd": 8
+    },
+    "verified_pair_sha256": "21ffccce27fc8c42fbfd7a9da40f6914175bc52b083036585fa358a8ea02afeb",
+    "workers": {
+      "gend": {
+        "exit_code": 0,
+        "initial": {
+          "available_ram": 6292832256,
+          "free_disk": 2727317504
+        },
+        "limits": {
+          "initial_available_ram": 4026531840,
+          "initial_free_disk": 2147483648,
+          "maximum_seconds": 700,
+          "maximum_tree_rss": 2415919104,
+          "minimum_available_ram": 1610612736,
+          "minimum_free_disk": 1610612736
+        },
+        "minimum_available_ram": 4035887104,
+        "peak_tree_rss": 1683832832,
+        "seconds": 94.512,
+        "stop": null
+      },
+      "reference": {
+        "exit_code": 0,
+        "initial": {
+          "available_ram": 7654047744,
+          "free_disk": 2726805504
+        },
+        "limits": {
+          "initial_available_ram": 4026531840,
+          "initial_free_disk": 2147483648,
+          "maximum_seconds": 700,
+          "maximum_tree_rss": 2415919104,
+          "minimum_available_ram": 1610612736,
+          "minimum_free_disk": 1610612736
+        },
+        "minimum_available_ram": 4819501056,
+        "peak_tree_rss": 1349533696,
+        "seconds": 96.221,
+        "stop": null
+      }
+    }
+  },
+  "negative_flag_groups": {
+    "matched_delivery": {
+      "candidate_median": 0,
+      "candidate_top_two": 0,
+      "paired_max_median": 1,
+      "reference_median": 1
+    },
+    "native_hd": {
+      "candidate_median": 0,
+      "candidate_top_two": 0,
+      "paired_max_median": 0,
+      "reference_median": 0
+    }
+  },
+  "paired_transitions": {
+    "matched_delivery/inswapper": {
+      "below to below": 6,
+      "flagged to flagged": 6
+    },
+    "matched_delivery/original_videos": {
+      "below to below": 11,
+      "flagged to flagged": 1
+    },
+    "matched_delivery/uniface": {
+      "below to below": 9,
+      "flagged to flagged": 3
+    },
+    "native_hd/inswapper": {
+      "below to below": 4,
+      "below to flagged": 2,
+      "flagged to below": 1,
+      "flagged to flagged": 1
+    },
+    "native_hd/original_videos": {
+      "below to below": 8
+    },
+    "native_hd/uniface": {
+      "below to below": 6,
+      "below to flagged": 1,
+      "flagged to flagged": 1
+    }
+  },
+  "portable_scalar_file_sha256": "0b28fca3545e83ffd2144aae09f755cda0d8a238b21811d4ffd2b7a61d4162ac",
+  "results": {
+    "matched_delivery/inswapper": {
+      "candidate_median": {
+        "below": 12,
+        "cases": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 12,
+        "cases": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 6,
+        "cases": 12,
+        "flagged": 6,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "cases": 12,
+        "flagged": 6,
+        "unassessed": 0
+      }
+    },
+    "matched_delivery/original_videos": {
+      "candidate_median": {
+        "below": 12,
+        "cases": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 12,
+        "cases": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 11,
+        "cases": 12,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 11,
+        "cases": 12,
+        "flagged": 1,
+        "unassessed": 0
+      }
+    },
+    "matched_delivery/uniface": {
+      "candidate_median": {
+        "below": 10,
+        "cases": 12,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 10,
+        "cases": 12,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 9,
+        "cases": 12,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 9,
+        "cases": 12,
+        "flagged": 3,
+        "unassessed": 0
+      }
+    },
+    "native_hd/inswapper": {
+      "candidate_median": {
+        "below": 4,
+        "cases": 8,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 5,
+        "cases": 8,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 5,
+        "cases": 8,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "cases": 8,
+        "flagged": 2,
+        "unassessed": 0
+      }
+    },
+    "native_hd/original_videos": {
+      "candidate_median": {
+        "below": 8,
+        "cases": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 8,
+        "cases": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 8,
+        "cases": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "cases": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "native_hd/uniface": {
+      "candidate_median": {
+        "below": 4,
+        "cases": 8,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 4,
+        "cases": 8,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 6,
+        "cases": 8,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 7,
+        "cases": 8,
+        "flagged": 1,
+        "unassessed": 0
+      }
+    }
+  },
+  "schema": "chipmunk.video-face-pooling/1",
+  "support": "six frozen native-frame inputs per case per arm"
+}

@@ -110,6 +110,14 @@ reports the false alarms that kept both measurements experimental.
 The [whole-clip face-swap comparison](video-full-clip-face-swap-transfer.md)
 uses pinned crop classifiers on exact common frame inputs, with genuine paired
 and camera controls and a separate publisher swap.
+The [whole-clip pooling transfer](video-whole-clip-pooling-transfer-2026-11-11.md)
+compares four frozen rules across two source-disjoint delivery cohorts. Its
+anonymized scalar replay reproduces every operating point and paired count
+using only Python. The [facial color-step comparison](video-face-chroma-transfer-2026-11-11.md)
+tests a separate native-region measurement on the same verified source inputs.
+The [recorded-noise repetition comparison](audio-repeat-robustness-transfer-2026-11-11.md)
+checks exact and similar repeated audio across recorded backgrounds and four
+codecs, with matching ordinary controls and anonymized per-group results.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

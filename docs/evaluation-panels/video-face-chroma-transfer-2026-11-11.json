@@ -1,0 +1,297 @@
+{
+  "authored_scores": {
+    "chroma_bilateral": 17.0,
+    "chroma_opposing": 0.0,
+    "flat": 0.0,
+    "luma_only": 0.0,
+    "smooth": 0.0
+  },
+  "configuration": {
+    "clip_summary": "median of measured frame maxima",
+    "geometry": "box-centered horizontal outward rays follow the ellipse around 0.53 relative height",
+    "local_measurement": "componentwise median inner-to-outer step minus average of both flank differences; coherent chroma direction and both cheek sides required",
+    "luma_reduction_knee": 4.0,
+    "minimum_face_side": 64,
+    "minimum_frames": 4,
+    "minimum_rows_per_side": 8,
+    "name": "bilateral cheek chroma step / 1",
+    "offsets_box_width": [
+      -0.077,
+      -0.026,
+      0.026,
+      0.077
+    ],
+    "patch_width": "nearest-native pixel with three horizontal neighbors",
+    "point": "90th percentile nearest-rank of development original clip scores, strict exceedance",
+    "sample_input": "previous face study native RGB, PTS, and largest-face boxes",
+    "sampling_radii_box_width": [
+      0.25,
+      0.32,
+      0.39,
+      0.46
+    ],
+    "sampling_rows_box_height": [
+      0.43,
+      0.72,
+      11
+    ],
+    "transfer_scope": "whole-clip presence only, no generalization claim"
+  },
+  "inspection_point": 0.8329082034198929,
+  "new_neural_calls": 0,
+  "phases": {
+    "development": {
+      "grouped": {
+        "originals": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "unassessed": 1,
+          "verified_frames": 60
+        },
+        "swaps": {
+          "assessed": 18,
+          "cases": 20,
+          "flags": 1,
+          "measured_frames": 108,
+          "unassessed": 2,
+          "verified_frames": 120
+        }
+      },
+      "outcomes": {
+        "development/inswapper": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 1,
+          "measured_frames": 54,
+          "verified_frames": 60
+        },
+        "development/original_videos": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "verified_frames": 60
+        },
+        "development/uniface": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "verified_frames": 60
+        }
+      },
+      "source_groups": 10
+    },
+    "historical": {
+      "grouped": {
+        "originals": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "unassessed": 1,
+          "verified_frames": 60
+        },
+        "swaps": {
+          "assessed": 18,
+          "cases": 20,
+          "flags": 0,
+          "measured_frames": 108,
+          "unassessed": 2,
+          "verified_frames": 120
+        }
+      },
+      "outcomes": {
+        "confirmation/inswapper": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "verified_frames": 60
+        },
+        "confirmation/original_videos": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "verified_frames": 60
+        },
+        "confirmation/uniface": {
+          "assessed": 9,
+          "cases": 10,
+          "flags": 0,
+          "measured_frames": 54,
+          "verified_frames": 60
+        },
+        "transfer/camera": {
+          "assessed": 4,
+          "cases": 4,
+          "flags": 0,
+          "measured_frames": 24,
+          "verified_frames": 24
+        },
+        "transfer/synthetic_original": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "measured_frames": 6,
+          "verified_frames": 6
+        },
+        "transfer/synthetic_swap": {
+          "assessed": 1,
+          "cases": 1,
+          "flags": 0,
+          "measured_frames": 6,
+          "verified_frames": 6
+        }
+      },
+      "resources": {
+        "camera_probe_timeout_s": 70,
+        "main_process_max_rss_bytes": 89964544,
+        "original_probe_timeout_s": 25,
+        "worker_seconds": 82.946
+      },
+      "source_groups": 10
+    },
+    "prospective": {
+      "additional_flags_over_individual_crop_union": {
+        "originals": 3,
+        "swaps": 2
+      },
+      "grouped": {
+        "matched_delivery": {
+          "originals": {
+            "assessed": 12,
+            "cases": 12,
+            "flags": 2,
+            "measured_frames": 72,
+            "unassessed": 0,
+            "verified_frames": 72
+          },
+          "swaps": {
+            "assessed": 24,
+            "cases": 24,
+            "flags": 4,
+            "measured_frames": 144,
+            "unassessed": 0,
+            "verified_frames": 144
+          }
+        },
+        "native_hd": {
+          "originals": {
+            "assessed": 8,
+            "cases": 8,
+            "flags": 1,
+            "measured_frames": 48,
+            "unassessed": 0,
+            "verified_frames": 48
+          },
+          "swaps": {
+            "assessed": 16,
+            "cases": 16,
+            "flags": 2,
+            "measured_frames": 96,
+            "unassessed": 0,
+            "verified_frames": 96
+          }
+        }
+      },
+      "outcomes": {
+        "matched_delivery/inswapper": {
+          "assessed": 12,
+          "candidate_and_crop_flags": 2,
+          "candidate_only_flags": 1,
+          "cases": 12,
+          "flags": 3,
+          "gend_flags": 0,
+          "measured_frames": 72,
+          "reference_flags": 6,
+          "verified_frames": 72
+        },
+        "matched_delivery/original_videos": {
+          "assessed": 12,
+          "candidate_and_crop_flags": 0,
+          "candidate_only_flags": 2,
+          "cases": 12,
+          "flags": 2,
+          "gend_flags": 0,
+          "measured_frames": 72,
+          "reference_flags": 1,
+          "verified_frames": 72
+        },
+        "matched_delivery/uniface": {
+          "assessed": 12,
+          "candidate_and_crop_flags": 0,
+          "candidate_only_flags": 1,
+          "cases": 12,
+          "flags": 1,
+          "gend_flags": 2,
+          "measured_frames": 72,
+          "reference_flags": 3,
+          "verified_frames": 72
+        },
+        "native_hd/inswapper": {
+          "assessed": 8,
+          "candidate_and_crop_flags": 0,
+          "candidate_only_flags": 0,
+          "cases": 8,
+          "flags": 0,
+          "gend_flags": 4,
+          "measured_frames": 48,
+          "reference_flags": 2,
+          "verified_frames": 48
+        },
+        "native_hd/original_videos": {
+          "assessed": 8,
+          "candidate_and_crop_flags": 0,
+          "candidate_only_flags": 1,
+          "cases": 8,
+          "flags": 1,
+          "gend_flags": 0,
+          "measured_frames": 48,
+          "reference_flags": 0,
+          "verified_frames": 48
+        },
+        "native_hd/uniface": {
+          "assessed": 8,
+          "candidate_and_crop_flags": 2,
+          "candidate_only_flags": 0,
+          "cases": 8,
+          "flags": 2,
+          "gend_flags": 4,
+          "measured_frames": 48,
+          "reference_flags": 1,
+          "verified_frames": 48
+        }
+      },
+      "resources": {
+        "main_process_max_rss_bytes": 111378432,
+        "worker_seconds": 36.173
+      },
+      "source_groups_by_cohort": {
+        "matched_delivery": 12,
+        "native_hd": 8
+      }
+    }
+  },
+  "prior_whole_clip_comparator_points": {
+    "gend": 2.9821131229400635,
+    "reference": 0.43718233704566956
+  },
+  "private_receipt_sha256": {
+    "development_aggregate": "278b2bccb3b223b31e158abbcda650fa470b58782c931220560b8e81ba672123",
+    "development_freeze": "2c3dfdf972dcf3c0b5f19641f216ade19b18ce66552b482e13fc4f15dc3629ae",
+    "historical_aggregate": "7237729903ea524859ed62e07b00b5cc48c2408b9638501daf2f9077a69a71a3",
+    "method": "c357f6dd72d483b2b0c88a71cd7c2b562b880ea480fb7fe9bce69a5960a3f1d7",
+    "prospective_aggregate": "d8fd302e90451aa0b5536e9054935137315638c3e2cb0158ef2be833a5f16069",
+    "prospective_freeze": "bd76bf0aae422f7f3cec9ed0d1fca337b9e50113d4804d50cc7c1f62f3108b1a",
+    "prospective_paired_receipts": "21ffccce27fc8c42fbfd7a9da40f6914175bc52b083036585fa358a8ea02afeb",
+    "prospective_source_plan": "26eb02275281a87c685a1f6aa385a113df1d68b00291f54a7702cb6cf4bd4399"
+  },
+  "reproduction_scope": "Aggregate review only. Private source files, source identities, face boxes, frame timestamps, image hashes, and per-case records are excluded.",
+  "schema": "chipmunk.video-face-chroma-transfer/1",
+  "serving_admission": "not_admitted",
+  "status": "complete"
+}

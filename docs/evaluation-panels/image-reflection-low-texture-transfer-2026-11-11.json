@@ -1,0 +1,443 @@
+{
+  "benchmark_iou_both_endpoints": 0.5,
+  "candidate_parameters": {
+    "blur_sigma": 0.75,
+    "consensus_link_radius_px": 32.0,
+    "corner_floor": 2e-06,
+    "corners_per_tile": 60,
+    "dedup_radius_px": 3.0,
+    "descriptor_radius": 8,
+    "descriptor_step": 2,
+    "match_cap": 256,
+    "max_normalized_distance": 0.43,
+    "min_consensus_pairs": 6,
+    "min_patch_std": 3.5,
+    "min_separation_px": 32,
+    "nearest_neighbors": 6,
+    "nms_side": 7,
+    "offset_tolerance_px": 2.0,
+    "ratio": 0.8,
+    "refine_close_side": 7,
+    "refine_corr": 0.985,
+    "refine_corr_side": 9,
+    "refine_exact_row_column_support": 0.95,
+    "refine_halo_px": 48,
+    "refine_min_area": 256,
+    "refine_seed_overlap": 4,
+    "refine_std": 2.75,
+    "tile_px": 128
+  },
+  "development": {
+    "candidate": {
+      "median_ms": 77.515,
+      "strata": {
+        "jpeg90/interior/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 2,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 1,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 2,
+          "localized_exactly": 2,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 2,
+          "localized_exactly": 1,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        }
+      },
+      "views": 80
+    },
+    "current": {
+      "median_ms": 27.368,
+      "strata": {
+        "jpeg90/interior/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 1,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 2,
+          "localized_exactly": 2,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 1,
+          "localized_exactly": 1,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 2,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 8,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        }
+      },
+      "views": 80
+    }
+  },
+  "hard_controls": {
+    "candidate": [
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "global_mirror",
+        "status": "unassessed_match_budget"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "global_mirror",
+        "status": "unassessed_match_budget"
+      },
+      {
+        "count": 8,
+        "format": "jpeg90",
+        "kind": "licensed",
+        "status": "no_pair"
+      },
+      {
+        "count": 8,
+        "format": "native_png",
+        "kind": "licensed",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "repeated_mirrored_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "repeated_mirrored_tiles",
+        "status": "supported_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "repeated_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "repeated_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "two_symmetric_motifs",
+        "status": "supported_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "two_symmetric_motifs",
+        "status": "supported_pair"
+      }
+    ],
+    "current": [
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "global_mirror",
+        "status": "unassessed_match_budget"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "global_mirror",
+        "status": "unassessed_match_budget"
+      },
+      {
+        "count": 8,
+        "format": "jpeg90",
+        "kind": "licensed",
+        "status": "no_pair"
+      },
+      {
+        "count": 8,
+        "format": "native_png",
+        "kind": "licensed",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "repeated_mirrored_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "repeated_mirrored_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "repeated_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "repeated_tiles",
+        "status": "no_pair"
+      },
+      {
+        "count": 1,
+        "format": "jpeg90",
+        "kind": "two_symmetric_motifs",
+        "status": "supported_pair"
+      },
+      {
+        "count": 1,
+        "format": "native_png",
+        "kind": "two_symmetric_motifs",
+        "status": "supported_pair"
+      }
+    ]
+  },
+  "heldout": {
+    "candidate": {
+      "median_ms": 86.504,
+      "strata": {
+        "jpeg90/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 3,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 6,
+          "localized_at_both_ends": 6,
+          "localized_exactly": 1,
+          "ordinary_controls": 24,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 3,
+          "localized_exactly": 2,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 6,
+          "localized_at_both_ends": 6,
+          "localized_exactly": 4,
+          "ordinary_controls": 24,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        }
+      },
+      "views": 120
+    },
+    "current": {
+      "median_ms": 30.555,
+      "strata": {
+        "jpeg90/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 3,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "jpeg90/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 6,
+          "localized_at_both_ends": 3,
+          "localized_exactly": 1,
+          "ordinary_controls": 24,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/interior/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 3,
+          "localized_exactly": 2,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/aligned": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 3,
+          "localized_at_both_ends": 0,
+          "localized_exactly": 0,
+          "ordinary_controls": 12,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        },
+        "native_png/left_edge/shifted": {
+          "extra_or_wrong_pairs": 0,
+          "known_copies": 6,
+          "localized_at_both_ends": 4,
+          "localized_exactly": 3,
+          "ordinary_controls": 24,
+          "ordinary_with_pair": 0,
+          "unassessed": 0
+        }
+      },
+      "views": 120
+    }
+  },
+  "licensed_sources": 12,
+  "private_development_sha256": "66d5064d1259efa3d66f5ca1276571ef1ef3966731d4549f642514e07f529fb3",
+  "private_freeze_sha256": "5b5850dc9e0219d2de4954727622e590bae6a092e70f6ef38a205f6c5c30ebd2",
+  "private_hard_controls_sha256": "f70d1ab4fff949f4eade12383a8bbca674c3d42047c583a61fccd792b19b88fc",
+  "private_heldout_sha256": "cb9df92209dbb5bbb5493a576cbf912f61c9dfd9ce408b8f3bfda97cc2de88ef",
+  "private_probe_code_sha256": "7e58652fe8a29d2d17aad5d836af0a3fe7abd3dbee49083eaced97979e5f5175",
+  "schema": "chipmunk.native-reflected-low-texture-transfer/1"
+}

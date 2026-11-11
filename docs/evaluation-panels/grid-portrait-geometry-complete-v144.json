@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.grid-portrait-geometry-complete/144",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_inferred": 16,
+  "complete_guarded_stages": 16,
+  "distinct_native_picture_inputs": 448,
+  "fixed_repeat_inputs": 16,
+  "face_task_api_inputs": 464,
+  "available_geometry_records_including_repeats": {
+    "geometry_available": 464
+  },
+  "bitwise_equal_own_repeats": 16,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "stage_durations_seconds": {
+    "minimum": 3.184331541066058,
+    "maximum": 13.455919166910462,
+    "sum": 64.94160129292868
+  },
+  "maximum_sampled_descendant_rss_bytes": 505233408,
+  "minimum_sampled_available_ram_bytes": 7467204608,
+  "private_complete_execution_collection_sha256": "b5be0f5f44ea75f2f80d3fc2bb3fb1c8284430fd8812ab927c59c2d8ce33db2e",
+  "freeze_sha256": "e155dcb4027e0c019c61bc4c6c7bac0380062d54c36272bd98132cc0a9d4fc4d",
+  "generator_calls": 0,
+  "encoder_calls": 0,
+  "detector_calls": 0,
+  "defaults_changed": false,
+  "scope": "Fresh-pilot native face placement, crop/support and stateless-repeat qualification only. Face-task API units, not independently counted internal graph calls. No achieved motion, phonetic alignment, identity recognition, detection accuracy or customer confidence result. Sampled RSS is a lower bound, not a peak guarantee. Raw media, per-media fingerprints, source pairings, individual clocks and face vectors remain private."
+}

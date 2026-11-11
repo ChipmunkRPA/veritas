@@ -62,6 +62,12 @@ a favorable lag, detector setting or source after seeing the curves. Publish
 the exact normalization, landmark indices, support requirements and numerical
 rules in that stage's frozen contract before execution.
 
+The 0.8-second edited interval alone cannot supply equal support for every lag.
+Predeclare sufficient genuine context on both sides and one common overlap rule
+for all compared lags, so changing support cannot manufacture a favorable peak.
+Any later fusion fitting or calibration must use separate development data;
+the untouched reserve is for confirmation, never for choosing those parameters.
+
 Blind local visual review can separately describe teeth/lip instability,
 boundary discontinuities and visible redraw artifacts. It is not outside expert
 review or proof of realism. Visible trajectory transfer supports a limited motion

@@ -1,0 +1,35 @@
+{
+  "code_sha256": {
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_commons_background_v234.py": "dbb879397f25979b00f2a69f2456049d85d78dd2ba185e20c5819cd376eb4efd",
+    "backend/tests/test_audio_commons_background_v234.py": "181a9a20ac46b3280364a8e68787c12de7724d2491a2ac557b8ceacc520a9d3b",
+    "docs/audio-commons-background-v234-method.md": "9afb4db460df3f74280b53124d676630ae5e00f0eb17be29fcbd451f149b38a5"
+  },
+  "decoder_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "expected_publisher_bytes": 224211679,
+  "expected_speech_or_music_review": "pending",
+  "maximum_file_bytes": 125000000,
+  "maximum_requests": 7,
+  "maximum_run_bytes": 225000000,
+  "maximum_run_seconds": 600,
+  "minimum_request_interval_seconds": 3,
+  "model_calls_permitted": false,
+  "numpy_version": "2.2.6",
+  "planned_by_environment": {
+    "kitchen": 4,
+    "traffic": 3
+  },
+  "planned_by_license": {
+    "CC-BY-SA-4.0": 3,
+    "CC0-1.0": 2,
+    "Public domain": 2
+  },
+  "private_roster_sha256": "8b8dc7da941618e5ff7ce6ac47625cc8635684bc1f9f8aabe961e57366d6fbcf",
+  "production_decode_maximum_seconds": 120,
+  "schema": "chipmunk.audio-commons-background-freeze/234",
+  "socket_timeout_seconds": 20
+}

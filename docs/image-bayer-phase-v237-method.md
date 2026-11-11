@@ -9,3 +9,7 @@ The fixed model-free BG-REAL replay measures coverage on an already observed ben
 ```sh
 PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.image_bayer_phase_bg_v238
 ```
+
+## Replay on resized photos
+
+Both local replays produced identical aggregate bytes. All 360 views across the 24 source groups lacked distributed phase support, including untouched originals, LaMa edits and ordinary controls at source PNG, JPEG 75 and JPEG 90. The cue returned no maps, so there was no regional concordance to measure. This confines the next comparison to verified native camera renders and their ordinary processing variants. [Verified replay aggregate](evaluation-panels/image-bayer-phase-bg-real-complete-v238.json)

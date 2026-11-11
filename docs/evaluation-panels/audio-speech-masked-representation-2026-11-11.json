@@ -1,0 +1,545 @@
+{
+  "all_planned_transfer_outcomes": [
+    {
+      "condition": "clean",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 6,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 1,
+          "original": 6,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 7,
+          "unassessed": 0
+        }
+      },
+      "lane": "all_genuine",
+      "planned": 7
+    },
+    {
+      "condition": "clean",
+      "counts": {
+        "current": {
+          "ai": 9,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 6,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 9,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "lane": "all_synthetic",
+      "planned": 9
+    },
+    {
+      "condition": "clean",
+      "counts": {
+        "current": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 5,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "lane": "alania",
+      "planned": 5
+    },
+    {
+      "condition": "clean",
+      "counts": {
+        "current": {
+          "ai": 4,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 4,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 0
+        }
+      },
+      "lane": "okur",
+      "planned": 4
+    },
+    {
+      "condition": "noise_1",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 5
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 2,
+          "unassessed": 5
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 2,
+          "unassessed": 5
+        }
+      },
+      "lane": "all_genuine",
+      "planned": 7
+    },
+    {
+      "condition": "noise_1",
+      "counts": {
+        "current": {
+          "ai": 4,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 3,
+          "inconclusive": 5,
+          "original": 0,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 3,
+          "inconclusive": 3,
+          "original": 2,
+          "unassessed": 1
+        }
+      },
+      "lane": "all_synthetic",
+      "planned": 9
+    },
+    {
+      "condition": "noise_1",
+      "counts": {
+        "current": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 2,
+          "inconclusive": 2,
+          "original": 0,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 2,
+          "inconclusive": 1,
+          "original": 1,
+          "unassessed": 1
+        }
+      },
+      "lane": "alania",
+      "planned": 5
+    },
+    {
+      "condition": "noise_1",
+      "counts": {
+        "current": {
+          "ai": 3,
+          "inconclusive": 1,
+          "original": 0,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 1,
+          "inconclusive": 2,
+          "original": 1,
+          "unassessed": 0
+        }
+      },
+      "lane": "okur",
+      "planned": 4
+    },
+    {
+      "condition": "noise_1",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        }
+      },
+      "lane": "background",
+      "planned": 1
+    },
+    {
+      "condition": "noise_2",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 7
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 7
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 7
+        }
+      },
+      "lane": "all_genuine",
+      "planned": 7
+    },
+    {
+      "condition": "noise_2",
+      "counts": {
+        "current": {
+          "ai": 1,
+          "inconclusive": 7,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 8,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 8,
+          "unassessed": 1
+        }
+      },
+      "lane": "all_synthetic",
+      "planned": 9
+    },
+    {
+      "condition": "noise_2",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 4,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 4,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 4,
+          "unassessed": 1
+        }
+      },
+      "lane": "alania",
+      "planned": 5
+    },
+    {
+      "condition": "noise_2",
+      "counts": {
+        "current": {
+          "ai": 1,
+          "inconclusive": 3,
+          "original": 0,
+          "unassessed": 0
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 4,
+          "unassessed": 0
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 4,
+          "unassessed": 0
+        }
+      },
+      "lane": "okur",
+      "planned": 4
+    },
+    {
+      "condition": "noise_2",
+      "counts": {
+        "current": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        },
+        "full": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        },
+        "speech": {
+          "ai": 0,
+          "inconclusive": 0,
+          "original": 0,
+          "unassessed": 1
+        }
+      },
+      "lane": "background",
+      "planned": 1
+    }
+  ],
+  "audit": "Separate implementation checked all input PCM hashes, pooled feature hashes and clocks, the split, fixed calibration points, and direction arithmetic.",
+  "fit_before_test_sha256": "774f6b6d00a3654d2ccd0b34b083ec4c06f412beab8d72f2e3fe0893509f0cff",
+  "fit_summary": {
+    "full": {
+      "fit_groups": {
+        "0": 10,
+        "1": 15
+      },
+      "fit_pairs": 49,
+      "fit_views": 78,
+      "points": {
+        "ai_above": 0.5841317095719679,
+        "original_below": 0.4956752136178467,
+        "point_views": 24
+      }
+    },
+    "speech": {
+      "fit_groups": {
+        "0": 10,
+        "1": 15
+      },
+      "fit_pairs": 49,
+      "fit_views": 78,
+      "points": {
+        "ai_above": 0.5539857193471974,
+        "original_below": 0.528708479346423,
+        "point_views": 24
+      }
+    }
+  },
+  "freeze_sha256": "2c09c37ca48f330f8dfcca68dc4a704e40146b02c19167b26315abc07b463322",
+  "limits": [
+    "Development uses earlier noisy examples plus distinct Alania development sources; prior background failures were development only.",
+    "Transfer clips are held separate from fit and point groups. They come from earlier source banks, and pretraining overlap is unknown.",
+    "Stock-generator test utterances share one voice profile. Generator and recording source are correlated with class.",
+    "The same two additive noises and the same speech clips repeat across conditions. Noise selection used the recorded in-band power and quiet floor.",
+    "The empirical diagnostic points are not deployment calibration or per-file probabilities."
+  ],
+  "method": {
+    "advance": "compare held-separate noisy ranking and measured directional error counts; no serving adoption from this diagnostic panel",
+    "baseline_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "counts": {
+      "fit": 87,
+      "point": 27,
+      "test": 50
+    },
+    "dev_transfer_sha256": "74ce1bec57cc866c0852514a08384b988b74bf8ea1ddd0fbefb965a594472174",
+    "encoder": {
+      "assets": {
+        "README.md": {
+          "bytes": 3904,
+          "sha256": "d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e"
+        },
+        "UniSpeech-LICENSE": {
+          "bytes": 21153,
+          "sha256": "74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91"
+        },
+        "config.json": {
+          "bytes": 2232,
+          "sha256": "fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4"
+        },
+        "preprocessor_config.json": {
+          "bytes": 215,
+          "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2"
+        },
+        "pytorch_model.bin": {
+          "bytes": 377617425,
+          "sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51"
+        },
+        "unilm-LICENSE": {
+          "bytes": 1104,
+          "sha256": "904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe"
+        }
+      },
+      "clock": {
+        "frames": 149,
+        "last_receptive_range": [
+          47360,
+          47760
+        ],
+        "receptive_field_samples": 400,
+        "stride_samples": 320
+      },
+      "installed_implementation_sha256": {
+        "torch.nn.functional": "990a8b717645fa603b0dd2957b7b3ed68c5fb937fa205048c096ac8bb532510e",
+        "transformers.models.wavlm.configuration_wavlm": "2ab3a6662a0b2b3ac7e6963fc19df2fa8f75f9441164e0de7e6965bdfcb610b3",
+        "transformers.models.wavlm.modeling_wavlm": "b9607c8c9c94d6d8567f13246d1eb5b793e219419032cd8ee8cc9926ce80f145"
+      },
+      "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+      "runtime_packages": {
+        "numpy": "2.2.6",
+        "torch": "2.13.0",
+        "transformers": "5.15.1"
+      },
+      "v13_freeze_sha256": "34096f6cd001c27e217ba7ff8ee5f2ff6bae48d85c4d91b9424cb78e2ef3b4a1"
+    },
+    "frames": {
+      "count": 149,
+      "first_centre_sample": 200,
+      "minimum_voiced_centres": 60,
+      "step": 320
+    },
+    "gate_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "later_noise_exposure": "Selected by physical spectrum and continuity before any detector forward.",
+    "licensed_noise_candidates_checked": 3,
+    "methods": {
+      "full": "Layer 4, 8 and 12 mean and standard deviation of all 149 frames",
+      "inputs": "same exact speech-gated waveform in every arm",
+      "no_original_detector_inputs": true,
+      "pair_penalty": 0.15,
+      "points": "AI strictly above maximum calibration genuine score; original below minimum calibration synthetic score, capped at AI point",
+      "ridge": 0.01,
+      "speech": "same hidden states pooled only at frame centers within saved production speech spans",
+      "training": "group/class-weighted logistic loss; fitted feature standardization; ridge plus within-source raw-logit pairing"
+    },
+    "noise_inventory_sha256": "1f92d5696f8d9f16d4b43c3e41d0fcbf18778f96dbb9fb8d634e3369ab60cfec",
+    "noise_snr_db": -5,
+    "roles": "group-disjoint fitting and diagnostic point selection; held-separate foregrounds and backgrounds for transfer",
+    "roster_sha256": "239390a932b9b268f3af21606e6de0d3f5963aaf60a6a35946a92c1f50a0e99d",
+    "runner_sha256": "1062d82dbb04be56aacef0fd652d4e0f904284b374fa7ad69b73b55f15dcd3d2",
+    "schema": "chipmunk.audio.speech-masked-noise-representation-freeze/1",
+    "score_window_seconds": 3,
+    "source_roles_sha256": "e60d6139ad0a0cb1439424b579764edf0de96648a93a571c4a1ed2e2f931909e",
+    "test_background_source_commitment": "ff63c6c307e93618a2a8e529de668e0fd020228216e75795a0e0e324f2a3ddbf",
+    "test_noise_in_band_power_share": [
+      0.9308654031969811,
+      0.8386203182330916
+    ],
+    "v248_source_journal_sha256": "afaabd863f01b3cf7aafb83352c206af6ea0d2de33c63f4c827a004c23f440ad",
+    "v248_source_result_sha256": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792"
+  },
+  "production_changed": false,
+  "ranking_common_assessed": [
+    {
+      "auc": {
+        "current": 1.0,
+        "full": 1.0,
+        "speech": 1.0
+      },
+      "condition": "clean",
+      "genuine": 7,
+      "synthetic": 9
+    },
+    {
+      "auc": {
+        "current": 1.0,
+        "full": 1.0,
+        "speech": 1.0
+      },
+      "condition": "noise_1",
+      "genuine": 2,
+      "synthetic": 8
+    },
+    {
+      "auc": {
+        "current": null,
+        "full": null,
+        "speech": null
+      },
+      "condition": "noise_2",
+      "genuine": 0,
+      "synthetic": 8
+    }
+  ],
+  "resources": {
+    "current": {
+      "elapsed_s": 27.864007249940187,
+      "forward_count": 40,
+      "peak_rss_bytes_macos": 2912403456,
+      "private_journal_sha256": "2cb6bbeb489263a8f2a98df15ae5267f7fc813772424bea93c56602862aa4f4a"
+    },
+    "development": {
+      "elapsed_s": 6.917469666921534,
+      "forward_count": 102,
+      "peak_rss_bytes_macos": 1329823744,
+      "private_journal_sha256": "039ccaefbfba6d6369e18147598d63d5724ac080bb0d8007d7f4a3cb007136fc"
+    },
+    "test": {
+      "elapsed_s": 2.2407785420073196,
+      "forward_count": 34,
+      "peak_rss_bytes_macos": 1317896192,
+      "private_journal_sha256": "d8f2ad5226dda756ef59d964e1ea4fffd6aa95d7970e4d23c88d2912396e4b65"
+    }
+  },
+  "role_distinct_groups": {
+    "fit": 25,
+    "point": 8,
+    "test": 13
+  },
+  "schema": "chipmunk.audio.speech-masked-noise-representation-result/1",
+  "speech_admission_frame_forwards": 15416
+}

@@ -111,7 +111,9 @@ integration remains unfinished.
   recovered the longer synthetic photo edit, with all four moving publisher
   variants still missed. The same work adds a portable way to verify interval
   endpoints and original before, during and after pixels. Keep the current
-  appearance check and seek an additional moving source.
+  appearance check and seek an additional moving source. The [lip-sync coverage fix](video-lipsync-mouth-coverage-2026-11-11.md)
+  excludes unchanged-mouth windows that could create a false timing collapse.
+  The moving portions of the local test retained their eligible coverage.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -128,6 +130,11 @@ integration remains unfinished.
   with zero weight in the AI estimate. The [native patch addition](image-translation-patch-transfer-2026-11-11.md)
   raised correct source-pair localization from 9/32 to 28/32 for PNG and from
   7/32 to 19/32 for JPEG90, with zero pairs on 56 controls in each format.
+  The [boundary blend comparison](image-boundary-blend-transfer-2026-11-11.md)
+  found zero useful locations on 12 feathered edits in each format for both
+  the boundary candidate and current routes. The same candidate found five
+  sharp PNG patches and six sharp JPEG patches, with 36/72 control highlights
+  under JPEG. Keep the boundary check experimental.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
@@ -140,6 +147,10 @@ integration remains unfinished.
   noise. The [stronger frozen transfer](audio-frozen-corroboration-transfer-2026-11-11.md)
   reproduced five false flags across two backgrounds and neither check removed
   one. Each lost one synthetic detection. Keep both experimental.
+  A [separate speech-frame representation](audio-speech-masked-representation-2026-11-11.md)
+  assigned an incorrect original direction to eight synthetic recordings under
+  one held-out background, where the current check assigned zero. The separate
+  head remains experimental.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
@@ -147,7 +158,10 @@ integration remains unfinished.
   localized 10/22 rewrites versus 13/22 for the strict rule. Both flagged zero
   of 33 human controls. Keep the current writing check. The ordinary document
   view and PDF now show the reason and coordinates when a hybrid PDF page was
-  only partly checked.
+  only partly checked. The [practical DOCX panel](writing-practical-notice-transfer-2026-11-11.md)
+  recovered six of eight rewrites with broad review and flagged five of 18 human
+  controls. The stricter and paragraph rules recovered none. All 26 files
+  retained their exact text and source positions through normal extraction.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

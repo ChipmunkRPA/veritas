@@ -53,6 +53,8 @@ compares isolated and neighboring paragraph responses on 11 new source articles,
 with separate counts for originals, ordinary edits, and two generators.
 The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md) applies
 the same frozen rule to a new genre and counts ordinary human replacements.
+The [practical DOCX comparison](writing-practical-notice-transfer-2026-11-11.md)
+binds both human and generated replacements to exact extracted paragraph positions.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -84,11 +86,17 @@ tests PNG and JPEG75 with region-matched blur and processing controls.
 The [native copy comparison](image-translation-patch-transfer-2026-11-11.md)
 tests two crop sizes on 16 held-out source groups and reports hard controls
 with natural repetitions in both PNG and JPEG90.
+The [boundary blend comparison](image-boundary-blend-transfer-2026-11-11.md)
+reconstructs the exact masks for sharp and feathered edits and verifies the
+format-specific current checks against matched controls.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
 and FFmpeg. Its local receipt distinguishes native source verification from
 retrospective scoring.
+The [lip-sync coverage comparison](video-lipsync-mouth-coverage-2026-11-11.md)
+checks held mouth frames on real moving footage, matched to original and
+recompressed controls, with a separate authored false-collapse regression.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

@@ -1,0 +1,25 @@
+# Speech-frame pooling under strong background noise
+
+A separate frozen speech encoder did not improve on the current detector across two new −5 dB backgrounds. Pooling only frames inside the original speech activity spans matched clean synthetic detection, but caused synthetic recordings to lean original under noise. The current model, serving rules and confidence stay in place. [Exact results and freeze commitments](evaluation-panels/audio-speech-masked-representation-2026-11-11.json)
+
+## Fixed comparison
+
+Use the pinned WavLM checkpoint on exactly the same three-second mono inputs admitted by the current speech gate. For each input, a single encoder forward produces 149 time frames. One head uses means and standard deviations from all frames. The other uses the same measures from frames whose centers fall inside the saved speech spans. Both use layers 4, 8 and 12, with identical group and class weighting, ridge regularization and a penalty on score differences between a source's clean and noisy versions. Neither head receives the current detector's score. The encoder stays frozen. [Pinned model card and terms](https://huggingface.co/microsoft/wavlm-base-plus/blob/4c66d4806a428f2e922ccfa1a962776e232d487b/README.md) · [Native input qualification](audio-wavlm-three-second-v226-method.md)
+
+The development partition reuses the prior two-background test and adds eight distinct Alania sources. It plans 87 fitting views from 25 groups and 27 point-selection views from eight separate groups. The heads use 78 admitted fitting views, 49 clean/noisy pairs, and 24 admitted point-selection views. The fixed diagnostic points come from the highest genuine score and the lowest synthetic score among the point-selection groups. The fitted heads and points were committed before transfer feature extraction. These small development groups establish a fixed comparison rule without supplying a calibrated customer probability. [Earlier background failures](audio-frozen-corroboration-transfer-2026-11-11.md)
+
+The transfer has 50 planned views. Seven genuine RUEG clips, five Alania clips and four Okur clips supply clean and two strong background versions. Two isolated background clips serve as controls. Transfer source groups are separate from fitting and point selection. The four Okur utterances share a stock voice used in earlier work and absent from fitting. The two noise recordings were selected from the licensed MUSAN subset by source commitment, continuous time, a minimum quiet floor, and high in-band power before any model forward. They have 93.1% and 83.9% of their measured power in the 100–3,800 Hz band. The known speech sources had earlier baseline use, and pretraining overlap is unmeasured. [RUEG rights](audio-rueg-genuine-v246-method.md) · [Alania rights](audio-alania-roster-v178-method.md) · [Okur rights](audio-okur-turkish-v240-method.md) · [Noise terms](audio-short-edit-source-plan-v169.md)
+
+## Transfer results
+
+| Condition | Genuine assessed / planned | Synthetic assessed / planned | Synthetic flagged AI, current / full / speech frames | Synthetic leaning original, current / full / speech frames |
+| --- | ---: | ---: | ---: | ---: |
+| Clean | 7/7 | 9/9 | 9 / 6 / 9 | 0 / 0 / 0 |
+| Background 1, −5 dB | 2/7 | 8/9 | 4 / 3 / 3 | 0 / 0 / 2 |
+| Background 2, −5 dB | 0/7 | 8/9 | 1 / 0 / 0 | 0 / 8 / 8 |
+
+No assessed genuine clip received an AI flag in any arm. In clean audio, seven genuine recordings leaned original with speech pooling versus six with either the current check or full pooling. The two admitted noisy genuine clips leaned original under both new heads and remained inconclusive with the current check. The 12 unassessed noisy genuine views provide no false-alarm measurement. Both isolated backgrounds remained unassessed. All three arms achieved AUC 1.0 on the shared clean and first-background assessed samples. The first noisy rank uses two genuine clips. The second background has no assessed genuine clip, so ranking discrimination cannot be measured there.
+
+The noisy transfer shows both a speech-coverage bottleneck and a score-distribution shift among synthetic clips that the gate admitted. Restricting pooling to speech centers recovered clean detections relative to the full-frame head and failed to restore noisy detections. The fixed points assigned an incorrect original direction to synthetic speech under the second background. Fitting data, test speech families, and only two distinct backgrounds limit broader comparisons.
+
+The local run completed 15,416 speech-gate frame forwards, 102 development encoder forwards, 34 transfer encoder forwards and 40 current-model forwards. The development and transfer encoder stages used at most 1.33 GB process memory. The separate current-model run peaked at 2.91 GB. An independent readout checked exact input and feature hashes, speech clocks, role separation, point arithmetic and reported directions. The public artifact includes aggregate measurements and whole-artifact hashes. Individual recordings, features and scores stayed local.

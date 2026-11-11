@@ -1,0 +1,444 @@
+{
+  "recreated_views": 192,
+  "matched_regional_observations": 384,
+  "current_archived_views": 120,
+  "current_fresh_forwards": 72,
+  "counts": {
+    "png": {
+      "original": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "edited": {
+        "boundary": {
+          "flags": 6,
+          "useful": 5,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "local_processing": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "global_processing": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "blur": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "feathered_edit": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "feathered_processing": {
+        "boundary": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "local_contrast": {
+        "boundary": {
+          "flags": 3,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      }
+    },
+    "jpeg75": {
+      "original": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "edited": {
+        "boundary": {
+          "flags": 8,
+          "useful": 6,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 1,
+          "views": 12
+        }
+      },
+      "local_processing": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "global_processing": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "blur": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "feathered_edit": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "feathered_processing": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0,
+          "views": 12
+        }
+      },
+      "local_contrast": {
+        "boundary": {
+          "flags": 6,
+          "useful": 0,
+          "views": 12
+        },
+        "current": {
+          "flags": 2,
+          "useful": 0,
+          "views": 12
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-boundary-blend-report/1",
+  "source_groups": 12,
+  "point_source_groups": 8,
+  "candidate": {
+    "feathered": {
+      "jpeg75": {
+        "boundary_prominence": {
+          "edited": {
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "region_flags": 6,
+            "useful_localizations": 0,
+            "views": 12
+          }
+        }
+      },
+      "png": {
+        "boundary_prominence": {
+          "edited": {
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "region_flags": 2,
+            "useful_localizations": 0,
+            "views": 12
+          }
+        }
+      }
+    },
+    "freeze_sha256": "2e9af3070c1fbcc0fcc6068edb20d5f9ee5ef8fdc5ba1f8b344b9af2a664ba0f",
+    "hard_and_controls": {
+      "kandinsky": {
+        "jpeg75": {
+          "boundary_prominence": {
+            "blur": {
+              "flags": 3,
+              "views": 6
+            },
+            "edited": {
+              "flags": 5,
+              "mean_iou": 0.49956597222222215,
+              "useful": 4,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "global_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flags": 3,
+              "views": 6
+            },
+            "local_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "original": {
+              "flags": 3,
+              "views": 6
+            }
+          }
+        },
+        "png": {
+          "boundary_prominence": {
+            "blur": {
+              "flags": 1,
+              "views": 6
+            },
+            "edited": {
+              "flags": 4,
+              "mean_iou": 0.49956597222222215,
+              "useful": 4,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flags": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "original": {
+              "flags": 1,
+              "views": 6
+            }
+          }
+        }
+      },
+      "sdxl": {
+        "jpeg75": {
+          "boundary_prominence": {
+            "blur": {
+              "flags": 3,
+              "views": 6
+            },
+            "edited": {
+              "flags": 3,
+              "mean_iou": 0.2222222222222222,
+              "useful": 2,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "global_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flags": 3,
+              "views": 6
+            },
+            "local_processing": {
+              "flags": 3,
+              "views": 6
+            },
+            "original": {
+              "flags": 3,
+              "views": 6
+            }
+          }
+        },
+        "png": {
+          "boundary_prominence": {
+            "blur": {
+              "flags": 1,
+              "views": 6
+            },
+            "edited": {
+              "flags": 2,
+              "mean_iou": 0.1111111111111111,
+              "useful": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flags": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flags": 1,
+              "views": 6
+            },
+            "original": {
+              "flags": 1,
+              "views": 6
+            }
+          }
+        }
+      }
+    },
+    "journal_sha256": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+    "points_sha256": "ec1ef7308266631980233917df3127c3b4e6a463542ed9195af2be0011c9900e",
+    "schema": "chipmunk.image-boundary-blend/1",
+    "views": 192
+  },
+  "current_new_views": {
+    "png": {
+      "elapsed_s": 7.98,
+      "forwards": 36,
+      "freeze_sha256": "f289eecbcf4829a3579174b7a6374a0efd767668542289dcc8d166688c1d027b",
+      "journal_sha256": "5f99b5854d27fbe310937157e6a61ae7d9f9136c0927ab43753ded6689961d2f",
+      "peak_rss_bytes": 1070006272,
+      "results": {
+        "png": {
+          "current": {
+            "edited": {
+              "mean_iou": 0.0,
+              "mean_recall": 0.0,
+              "region_flags": 1,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "region_flags": 2,
+              "views": 12
+            },
+            "local_contrast": {
+              "region_flags": 2,
+              "views": 12
+            }
+          }
+        }
+      },
+      "schema": "chipmunk.image-boundary-blend-reference/1",
+      "views": 36
+    },
+    "jpeg75": {
+      "elapsed_s": 28.87,
+      "forwards": 36,
+      "freeze_sha256": "ef361d6f52bb2347f8e6e836d3bcf444b2df3792b0ffea07ed35ba162fffaf84",
+      "journal_sha256": "abbca1720b113580bc983f57f16505c7727eb9899916a552fb48e69ac75a63cc",
+      "peak_rss_bytes": 480968704,
+      "results": {
+        "jpeg75": {
+          "current": {
+            "edited": {
+              "mean_iou": 0.023096098708824443,
+              "mean_recall": 0.052974835419531435,
+              "region_flags": 2,
+              "useful_localizations": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "region_flags": 1,
+              "views": 12
+            },
+            "local_contrast": {
+              "region_flags": 2,
+              "views": 12
+            }
+          }
+        }
+      },
+      "schema": "chipmunk.image-boundary-blend-reference/1",
+      "views": 36
+    }
+  },
+  "audit_sha256": "88d229b733a94177c555be596c4817872b02478ba917fba40dc0a14efeba3280",
+  "scope": "Known copied publisher-derived generated pixels, plus deterministic 12-pixel feathered variants. Source groups already used on the hard-boundary image panel. No serving adoption."
+}

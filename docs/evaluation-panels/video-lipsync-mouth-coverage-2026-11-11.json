@@ -1,0 +1,97 @@
+{
+  "authored_regression": {
+    "current_path_reported_collapse": false,
+    "fixed_speaker_attribution": true,
+    "prior_path_reported_collapse": true,
+    "unchanged_windows_omitted": 5
+  },
+  "by_condition": {
+    "held_all_once": {
+      "clips": 1,
+      "clips_with_a_directional_aggregate": 0,
+      "current_scored_windows": 0,
+      "eligible_speech_windows": 0,
+      "old_scored_windows": 0,
+      "omitted_by_reason": {},
+      "status": {
+        "not_applicable": 1
+      }
+    },
+    "held_segment": {
+      "clips": 3,
+      "clips_with_a_directional_aggregate": 0,
+      "current_scored_windows": 1,
+      "eligible_speech_windows": 5,
+      "old_scored_windows": 3,
+      "omitted_by_reason": {
+        "unchanged_mouth_pixels": 4
+      },
+      "status": {
+        "not_applicable": 2,
+        "ok": 1
+      }
+    },
+    "recompressed": {
+      "clips": 3,
+      "clips_with_a_directional_aggregate": 0,
+      "current_scored_windows": 5,
+      "eligible_speech_windows": 5,
+      "old_scored_windows": 5,
+      "omitted_by_reason": {},
+      "status": {
+        "not_applicable": 1,
+        "ok": 2
+      }
+    },
+    "recorded": {
+      "clips": 3,
+      "clips_with_a_directional_aggregate": 0,
+      "current_scored_windows": 5,
+      "eligible_speech_windows": 5,
+      "old_scored_windows": 5,
+      "omitted_by_reason": {},
+      "status": {
+        "not_applicable": 1,
+        "ok": 2
+      }
+    }
+  },
+  "freeze_sha256": "9e5bf4e46cf3152d8d15baf73753b88e4d38def9b8af1d62c104eba0de2fad21",
+  "hold_half_open_seconds": [
+    1.0,
+    2.52
+  ],
+  "normalized_fps": 25,
+  "omitted_measured_window_intervals": [
+    {
+      "end_s": 2.0,
+      "start_s": 1.0,
+      "windows": 2
+    },
+    {
+      "end_s": 2.48,
+      "start_s": 1.48,
+      "windows": 2
+    }
+  ],
+  "planned_clip_views": 10,
+  "private_result_sha256": "f6e8c937add86b0a90bcdd540ff3a7c5ddfdc37436efd57fa0a76a7644661634",
+  "schema": "chipmunk.video-lipsync-mouth-coverage-result/1",
+  "scope": "measurement availability for the default mouth/audio timing check",
+  "source_groups": 3,
+  "source_pcm_same_within_group": true,
+  "source_pins": {
+    "acquisition": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99",
+    "qualification": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38"
+  },
+  "verified_exhibit_triplet": {
+    "before_during_after_seconds_rational": {
+      "after": "63/25",
+      "before": "24/25",
+      "during": "44/25"
+    },
+    "native_pngs": 3,
+    "native_time_base": "1/1000"
+  },
+  "verified_native_frames": 979
+}

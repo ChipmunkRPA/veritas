@@ -1,0 +1,942 @@
+{
+  "anonymous_medians_sha256": "95bb2c9e935ba13e5b83aa231d409c09d5600f12f35ef51461f18d8e6daf4cac",
+  "arm_sha256": "0f9daa8b5115b9ee643304c3dd932af2c8b7fecc507f798cd9d4d2fcceb36253",
+  "calibration": {
+    "arm_sha256": "0f9daa8b5115b9ee643304c3dd932af2c8b7fecc507f798cd9d4d2fcceb36253",
+    "development_clips": 10,
+    "development_false_flags": {
+      "clip_median": 1,
+      "pe_median": 1,
+      "reference_clip_pe": 1,
+      "reference_median": 1,
+      "reference_plus_clip": 1,
+      "reference_plus_pe": 1
+    },
+    "development_receipt_sha256": "538ff87b02c2acc8fd3346b8b5a0c9e39a4750417dc5214c6db69c4482bba26d",
+    "points": {
+      "clip_median": 2.9821131229400635,
+      "pe_median": 0.11348772048950195,
+      "reference_clip_pe": 1.2940809706865464,
+      "reference_median": 0.43718233704566956,
+      "reference_plus_clip": 1.1360871956155003,
+      "reference_plus_pe": 1.2940809706865464
+    },
+    "scales": {
+      "clip": {
+        "median": -1.1797963380813599,
+        "point": 2.9821131229400635
+      },
+      "pe": {
+        "median": -3.6829073429107666,
+        "point": 0.11348772048950195
+      },
+      "reference": {
+        "median": 0.024325260892510414,
+        "point": 0.43718233704566956
+      }
+    },
+    "schema": "chipmunk.face-pe-calibration/1"
+  },
+  "calibration_sha256": "8e893864f53857cd4fe49af937de693a2edf65eb8f4f8f676f92f89442cfa2a4",
+  "clips": 108,
+  "distinct_original_groups_flagged": {
+    "cohort_transfer": {
+      "clip_median": 0,
+      "pe_median": 1,
+      "reference_clip_pe": 1,
+      "reference_median": 1,
+      "reference_plus_clip": 1,
+      "reference_plus_pe": 1
+    },
+    "delivery_transfer": {
+      "clip_median": 0,
+      "pe_median": 2,
+      "reference_clip_pe": 0,
+      "reference_median": 0,
+      "reference_plus_clip": 0,
+      "reference_plus_pe": 0
+    }
+  },
+  "distinct_transfer_groups": 28,
+  "frames_per_arm": 648,
+  "from_reference": {
+    "cohort_transfer/matched_delivery/inswapper": {
+      "clip_median": {
+        "below to below": 6,
+        "flagged to below": 6
+      },
+      "pe_median": {
+        "below to below": 4,
+        "below to flagged": 2,
+        "flagged to below": 5,
+        "flagged to flagged": 1
+      },
+      "reference_clip_pe": {
+        "below to below": 4,
+        "below to flagged": 2,
+        "flagged to flagged": 6
+      },
+      "reference_median": {
+        "below to below": 6,
+        "flagged to flagged": 6
+      },
+      "reference_plus_clip": {
+        "below to below": 6,
+        "flagged to flagged": 6
+      },
+      "reference_plus_pe": {
+        "below to below": 4,
+        "below to flagged": 2,
+        "flagged to flagged": 6
+      }
+    },
+    "cohort_transfer/matched_delivery/original_videos": {
+      "clip_median": {
+        "below to below": 11,
+        "flagged to below": 1
+      },
+      "pe_median": {
+        "below to below": 10,
+        "below to flagged": 1,
+        "flagged to below": 1
+      },
+      "reference_clip_pe": {
+        "below to below": 11,
+        "flagged to flagged": 1
+      },
+      "reference_median": {
+        "below to below": 11,
+        "flagged to flagged": 1
+      },
+      "reference_plus_clip": {
+        "below to below": 11,
+        "flagged to flagged": 1
+      },
+      "reference_plus_pe": {
+        "below to below": 11,
+        "flagged to flagged": 1
+      }
+    },
+    "cohort_transfer/matched_delivery/uniface": {
+      "clip_median": {
+        "below to below": 8,
+        "below to flagged": 1,
+        "flagged to below": 2,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 6,
+        "below to flagged": 3,
+        "flagged to below": 2,
+        "flagged to flagged": 1
+      },
+      "reference_clip_pe": {
+        "below to below": 7,
+        "below to flagged": 2,
+        "flagged to below": 1,
+        "flagged to flagged": 2
+      },
+      "reference_median": {
+        "below to below": 9,
+        "flagged to flagged": 3
+      },
+      "reference_plus_clip": {
+        "below to below": 9,
+        "flagged to flagged": 3
+      },
+      "reference_plus_pe": {
+        "below to below": 7,
+        "below to flagged": 2,
+        "flagged to below": 1,
+        "flagged to flagged": 2
+      }
+    },
+    "cohort_transfer/native_hd/inswapper": {
+      "clip_median": {
+        "below to below": 3,
+        "below to flagged": 3,
+        "flagged to below": 1,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      },
+      "reference_clip_pe": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      },
+      "reference_median": {
+        "below to below": 6,
+        "flagged to flagged": 2
+      },
+      "reference_plus_clip": {
+        "below to below": 4,
+        "below to flagged": 2,
+        "flagged to below": 1,
+        "flagged to flagged": 1
+      },
+      "reference_plus_pe": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      }
+    },
+    "cohort_transfer/native_hd/original_videos": {
+      "clip_median": {
+        "below to below": 8
+      },
+      "pe_median": {
+        "below to below": 8
+      },
+      "reference_clip_pe": {
+        "below to below": 8
+      },
+      "reference_median": {
+        "below to below": 8
+      },
+      "reference_plus_clip": {
+        "below to below": 8
+      },
+      "reference_plus_pe": {
+        "below to below": 8
+      }
+    },
+    "cohort_transfer/native_hd/uniface": {
+      "clip_median": {
+        "below to below": 3,
+        "below to flagged": 4,
+        "flagged to below": 1
+      },
+      "pe_median": {
+        "below to flagged": 7,
+        "flagged to flagged": 1
+      },
+      "reference_clip_pe": {
+        "below to flagged": 7,
+        "flagged to below": 1
+      },
+      "reference_median": {
+        "below to below": 7,
+        "flagged to flagged": 1
+      },
+      "reference_plus_clip": {
+        "below to below": 6,
+        "below to flagged": 1,
+        "flagged to flagged": 1
+      },
+      "reference_plus_pe": {
+        "below to flagged": 7,
+        "flagged to below": 1
+      }
+    },
+    "delivery_transfer/matched_delivery/inswapper": {
+      "clip_median": {
+        "below to below": 5,
+        "flagged to below": 1,
+        "flagged to flagged": 2
+      },
+      "pe_median": {
+        "below to below": 4,
+        "below to flagged": 1,
+        "flagged to flagged": 3
+      },
+      "reference_clip_pe": {
+        "below to below": 4,
+        "below to flagged": 1,
+        "flagged to flagged": 3
+      },
+      "reference_median": {
+        "below to below": 5,
+        "flagged to flagged": 3
+      },
+      "reference_plus_clip": {
+        "below to below": 5,
+        "flagged to flagged": 3
+      },
+      "reference_plus_pe": {
+        "below to below": 4,
+        "below to flagged": 1,
+        "flagged to flagged": 3
+      }
+    },
+    "delivery_transfer/matched_delivery/original_videos": {
+      "clip_median": {
+        "below to below": 8
+      },
+      "pe_median": {
+        "below to below": 6,
+        "below to flagged": 2
+      },
+      "reference_clip_pe": {
+        "below to below": 8
+      },
+      "reference_median": {
+        "below to below": 8
+      },
+      "reference_plus_clip": {
+        "below to below": 8
+      },
+      "reference_plus_pe": {
+        "below to below": 8
+      }
+    },
+    "delivery_transfer/matched_delivery/uniface": {
+      "clip_median": {
+        "below to below": 5,
+        "flagged to below": 2,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 3,
+        "below to flagged": 2,
+        "flagged to below": 1,
+        "flagged to flagged": 2
+      },
+      "reference_clip_pe": {
+        "below to below": 3,
+        "below to flagged": 2,
+        "flagged to flagged": 3
+      },
+      "reference_median": {
+        "below to below": 5,
+        "flagged to flagged": 3
+      },
+      "reference_plus_clip": {
+        "below to below": 5,
+        "flagged to flagged": 3
+      },
+      "reference_plus_pe": {
+        "below to below": 3,
+        "below to flagged": 2,
+        "flagged to flagged": 3
+      }
+    },
+    "delivery_transfer/native_hd/inswapper": {
+      "clip_median": {
+        "below to below": 4,
+        "flagged to below": 3,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 1,
+        "below to flagged": 3,
+        "flagged to flagged": 4
+      },
+      "reference_clip_pe": {
+        "below to below": 1,
+        "below to flagged": 3,
+        "flagged to flagged": 4
+      },
+      "reference_median": {
+        "below to below": 4,
+        "flagged to flagged": 4
+      },
+      "reference_plus_clip": {
+        "below to below": 4,
+        "flagged to below": 1,
+        "flagged to flagged": 3
+      },
+      "reference_plus_pe": {
+        "below to below": 1,
+        "below to flagged": 3,
+        "flagged to flagged": 4
+      }
+    },
+    "delivery_transfer/native_hd/original_videos": {
+      "clip_median": {
+        "below to below": 8
+      },
+      "pe_median": {
+        "below to below": 8
+      },
+      "reference_clip_pe": {
+        "below to below": 8
+      },
+      "reference_median": {
+        "below to below": 8
+      },
+      "reference_plus_clip": {
+        "below to below": 8
+      },
+      "reference_plus_pe": {
+        "below to below": 8
+      }
+    },
+    "delivery_transfer/native_hd/uniface": {
+      "clip_median": {
+        "below to below": 6,
+        "flagged to below": 1,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      },
+      "reference_clip_pe": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      },
+      "reference_median": {
+        "below to below": 6,
+        "flagged to flagged": 2
+      },
+      "reference_plus_clip": {
+        "below to below": 6,
+        "flagged to flagged": 2
+      },
+      "reference_plus_pe": {
+        "below to below": 1,
+        "below to flagged": 5,
+        "flagged to flagged": 2
+      }
+    }
+  },
+  "independent_audit_sha256": "3c79d49d21922c9ba939f97392277350183637ce58829a9b2083d12615b80442",
+  "methods": {
+    "clip_median": [
+      "clip"
+    ],
+    "pe_median": [
+      "pe"
+    ],
+    "reference_clip_pe": [
+      "reference",
+      "clip",
+      "pe"
+    ],
+    "reference_median": [
+      "reference"
+    ],
+    "reference_plus_clip": [
+      "reference",
+      "clip"
+    ],
+    "reference_plus_pe": [
+      "reference",
+      "pe"
+    ]
+  },
+  "native_to_matched": {
+    "inswapper": {
+      "clip_median": {
+        "below to below": 6,
+        "below to flagged": 1,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 1,
+        "flagged to below": 3,
+        "flagged to flagged": 4
+      },
+      "reference_clip_pe": {
+        "below to below": 1,
+        "flagged to below": 3,
+        "flagged to flagged": 4
+      },
+      "reference_median": {
+        "below to below": 2,
+        "below to flagged": 2,
+        "flagged to below": 3,
+        "flagged to flagged": 1
+      },
+      "reference_plus_clip": {
+        "below to below": 3,
+        "below to flagged": 2,
+        "flagged to below": 2,
+        "flagged to flagged": 1
+      },
+      "reference_plus_pe": {
+        "below to below": 1,
+        "flagged to below": 3,
+        "flagged to flagged": 4
+      }
+    },
+    "original_videos": {
+      "clip_median": {
+        "below to below": 8
+      },
+      "pe_median": {
+        "below to below": 6,
+        "below to flagged": 2
+      },
+      "reference_clip_pe": {
+        "below to below": 8
+      },
+      "reference_median": {
+        "below to below": 8
+      },
+      "reference_plus_clip": {
+        "below to below": 8
+      },
+      "reference_plus_pe": {
+        "below to below": 8
+      }
+    },
+    "uniface": {
+      "clip_median": {
+        "below to below": 7,
+        "flagged to flagged": 1
+      },
+      "pe_median": {
+        "below to below": 1,
+        "flagged to below": 3,
+        "flagged to flagged": 4
+      },
+      "reference_clip_pe": {
+        "below to below": 1,
+        "flagged to below": 2,
+        "flagged to flagged": 5
+      },
+      "reference_median": {
+        "below to below": 5,
+        "below to flagged": 1,
+        "flagged to flagged": 2
+      },
+      "reference_plus_clip": {
+        "below to below": 5,
+        "below to flagged": 1,
+        "flagged to flagged": 2
+      },
+      "reference_plus_pe": {
+        "below to below": 1,
+        "flagged to below": 2,
+        "flagged to flagged": 5
+      }
+    }
+  },
+  "resources": {
+    "development": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 9179365376,
+        "free_disk": 2765258752
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5806227456,
+      "peak_tree_rss": 1654996992,
+      "seconds": 19.643,
+      "stop": null
+    },
+    "transfer": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 9322987520,
+        "free_disk": 2720526336
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5763760128,
+      "peak_tree_rss": 1655177216,
+      "seconds": 145.126,
+      "stop": null
+    }
+  },
+  "role": "transfer; prior comparison cohorts, independent of calibration",
+  "schema": "chipmunk.face-pe-transfer-result/1",
+  "source_freeze_sha256": "a8d5992e4a4253ce28fdd02b32facbd5077bb59c321bda5723a9ae4fe20aefff",
+  "states": {
+    "cohort_transfer/matched_delivery/inswapper": {
+      "clip_median": {
+        "below": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 9,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 4,
+        "flagged": 8,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "flagged": 6,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 6,
+        "flagged": 6,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 4,
+        "flagged": 8,
+        "unassessed": 0
+      }
+    },
+    "cohort_transfer/matched_delivery/original_videos": {
+      "clip_median": {
+        "below": 12,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 11,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 11,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 11,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 11,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 11,
+        "flagged": 1,
+        "unassessed": 0
+      }
+    },
+    "cohort_transfer/matched_delivery/uniface": {
+      "clip_median": {
+        "below": 10,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 8,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 8,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 9,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 9,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 8,
+        "flagged": 4,
+        "unassessed": 0
+      }
+    },
+    "cohort_transfer/native_hd/inswapper": {
+      "clip_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      }
+    },
+    "cohort_transfer/native_hd/original_videos": {
+      "clip_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "cohort_transfer/native_hd/uniface": {
+      "clip_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 0,
+        "flagged": 8,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/matched_delivery/inswapper": {
+      "clip_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/matched_delivery/original_videos": {
+      "clip_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/matched_delivery/uniface": {
+      "clip_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 3,
+        "flagged": 5,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 3,
+        "flagged": 5,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/native_hd/inswapper": {
+      "clip_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/native_hd/original_videos": {
+      "clip_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "delivery_transfer/native_hd/uniface": {
+      "clip_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "pe_median": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_clip_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_plus_clip": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_plus_pe": {
+        "below": 1,
+        "flagged": 7,
+        "unassessed": 0
+      }
+    }
+  },
+  "transfer_receipt_sha256": "49cb3007616c43b4c2ca24a8126af46d7d11f0a38ff104faf79ad7f0968bf711"
+}

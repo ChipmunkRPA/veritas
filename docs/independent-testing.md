@@ -46,6 +46,8 @@ the coverage shortfall that stopped the study before scoring.
 The [writing and measured-room transfer checks](writing-and-room-transfer-2026-11-11.md)
 record the false-flag and recall trade-off from an archived writing replay
 and the separate acoustic geometry preflight.
+The [fresh editorial and mixed-passage test](text-editorial-transfer-2026-11-11.md)
+reports newly measured false highlights and source-localization results from two generator families.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -91,6 +93,8 @@ The [measured room intake](audio-room-assets-v299-result.md) qualifies the
 documented Surrey source positions and records the open second-room geometry.
 The [BBC holdout intake](audio-bbc-room-assets-v303-result.md) verifies a
 separate room with documented front and lateral positions.
+The [matched Surrey and BBC comparison](audio-measured-surrey-activity-transfer-2026-11-11.md)
+reports speech-window admission on the same foregrounds and strong background noise.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -118,6 +122,9 @@ tests a separate native-region measurement on the same verified source inputs.
 The [same-source delivery comparison](video-face-delivery-transfer-2026-11-11.md)
 holds the source pictures and times fixed across two deliveries and tests the
 frozen rule that selected a different check for each delivery.
+The [paired face-swap transfer](video-face-pe-transfer-2026-11-11.md) includes a
+standard-library score replay on 108 clips. The [prospective confirmation](video-face-pe-confirmation-2026-11-11.md)
+applies the frozen rule to separate source groups using identical native faces in both arms.
 The [recorded-noise repetition comparison](audio-repeat-robustness-transfer-2026-11-11.md)
 checks exact and similar repeated audio across recorded backgrounds and four
 codecs, with matching ordinary controls and anonymized per-group results.

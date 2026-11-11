@@ -1,0 +1,697 @@
+{
+  "early_alternate_render": {
+    "elapsed_s": 7.249,
+    "freeze_sha256": "7040f6d6723f1b577072c1f897b4ece3a585fa5846086b5ef96bc46bdfecc75d",
+    "model_calls": 0,
+    "prepared": 30,
+    "prior_side_and_clean_exact_replays": 18,
+    "private_cases_sha256": "c82fc295d175ea68acd196368fa1094bd152e3cbeaa028d7f8a43ed7641c6f33",
+    "rear_geometry_qualifies": false,
+    "roles": {
+      "rear": {
+        "joint_snr_db_range": [
+          -10.000141507159764,
+          -9.998805904429828
+        ],
+        "reversed_pairs_at_3db": 0,
+        "right_minus_left_snr_db_ranges": {
+          "left": [
+            1.3377865728134797,
+            3.820802453185861
+          ],
+          "right": [
+            -2.8566070866030273,
+            1.4300851467255917
+          ]
+        }
+      },
+      "side": {
+        "joint_snr_db_range": [
+          -9.999927029268944,
+          -9.99868436857021
+        ],
+        "reversed_pairs_at_3db": 0,
+        "right_minus_left_snr_db_ranges": {
+          "left": [
+            0.8672783446799617,
+            3.805187001978604
+          ],
+          "right": [
+            -2.586442057456397,
+            0.8374310939506859
+          ]
+        }
+      }
+    },
+    "schema": "chipmunk.audio-surrey-rear-pair-preflight/1",
+    "status": "complete"
+  },
+  "first_gate_attempt": {
+    "child_exit_code": 1,
+    "independent_study": false,
+    "journal_sha256": "8a28e045622850958f21226c503a672ed99c10ff34637e7483c3212fc29ebe78",
+    "observation_rows": 36,
+    "profile_sha256": "a10bc3d48a1b08d3c06b2e6e69b06765774ca1240f3dc6bb0d7978c9254d9d37",
+    "retry_change": "Corrected inherited summary freeze pointer. Same prepared cases, model, and worker.",
+    "stage": "aggregation_after_complete_observation_journal"
+  },
+  "focused_existing_unit_tests_passed": 19,
+  "four_geometry_roles": {
+    "choice_qualifies_held_out_source_role": true,
+    "development_choice": "front_wide",
+    "distinct_angle_pairs": 4,
+    "freeze_sha256": "5db3a67e1b27a1a7b5772255324e7a0a7e710cb961acdfbf664f86f95e8e5292",
+    "geometry": {
+      "development": {
+        "front_inner": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000144747570186,
+            -9.998706764868764
+          ],
+          "reversals_by_origin": {
+            "expressive": 0,
+            "genuine": 0,
+            "stock": 0
+          },
+          "reversed_pairs_at_3db": 0,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.4507211626182439,
+              2.793800618069387
+            ],
+            "noise_right": [
+              -2.623042260851898,
+              0.9036276008590871
+            ]
+          }
+        },
+        "front_wide": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000162408108482,
+            -9.9985790148323
+          ],
+          "reversals_by_origin": {
+            "expressive": 1,
+            "genuine": 1,
+            "stock": 1
+          },
+          "reversed_pairs_at_3db": 3,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              1.2611011758634199,
+              4.616663537925343
+            ],
+            "noise_right": [
+              -3.698322868814265,
+              1.214314000635449
+            ]
+          }
+        },
+        "rear": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000141507159764,
+            -9.998805904429828
+          ],
+          "reversals_by_origin": {
+            "expressive": 0,
+            "genuine": 0,
+            "stock": 0
+          },
+          "reversed_pairs_at_3db": 0,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              1.3377865728134797,
+              3.820802453185861
+            ],
+            "noise_right": [
+              -2.8566070866030273,
+              1.4300851467255917
+            ]
+          }
+        },
+        "side": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -9.999927029268944,
+            -9.99868436857021
+          ],
+          "reversals_by_origin": {
+            "expressive": 0,
+            "genuine": 0,
+            "stock": 0
+          },
+          "reversed_pairs_at_3db": 0,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.8672783446799617,
+              3.805187001978604
+            ],
+            "noise_right": [
+              -2.586442057456397,
+              0.8374310939506859
+            ]
+          }
+        }
+      },
+      "holdout": {
+        "front_inner": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -9.999980511571522,
+            -9.99817976835571
+          ],
+          "reversals_by_origin": {
+            "expressive": 1,
+            "genuine": 1,
+            "stock": 1
+          },
+          "reversed_pairs_at_3db": 3,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.17557756636346866,
+              5.808525754421157
+            ],
+            "noise_right": [
+              -6.944365971189892,
+              0.08209685525078214
+            ]
+          }
+        },
+        "front_wide": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000068031303904,
+            -9.99813938643599
+          ],
+          "reversals_by_origin": {
+            "expressive": 1,
+            "genuine": 1,
+            "stock": 1
+          },
+          "reversed_pairs_at_3db": 3,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.44637954531187773,
+              9.855306590087197
+            ],
+            "noise_right": [
+              -10.147680844781341,
+              0.44372404683361744
+            ]
+          }
+        },
+        "rear": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000064242040319,
+            -9.997905231163923
+          ],
+          "reversals_by_origin": {
+            "expressive": 0,
+            "genuine": 1,
+            "stock": 1
+          },
+          "reversed_pairs_at_3db": 2,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.630243809778742,
+              6.536062508797903
+            ],
+            "noise_right": [
+              -3.3314333493303083,
+              0.6835296866023928
+            ]
+          }
+        },
+        "side": {
+          "groups": 6,
+          "joint_snr_db_range": [
+            -10.000069948798966,
+            -9.99841056988535
+          ],
+          "reversals_by_origin": {
+            "expressive": 1,
+            "genuine": 1,
+            "stock": 1
+          },
+          "reversed_pairs_at_3db": 3,
+          "right_minus_left_snr_db_ranges": {
+            "noise_left": [
+              0.7418653455802247,
+              11.50039051171884
+            ],
+            "noise_right": [
+              -9.898280435402622,
+              0.26431923230084564
+            ]
+          }
+        }
+      }
+    },
+    "model_calls": 0,
+    "private_gaps_sha256": "21bdde45658acc9ed555a31d8e889658811c45ea3ecc98c900f94ab071aaeecb",
+    "schema": "chipmunk.audio-surrey-angle-pair-preflight-result/1",
+    "status": "complete"
+  },
+  "native_only_admission_diagnostic": {
+    "absolute_physical_channel_snr_gap_db_range": [
+      9.157433414566487,
+      10.147680844781341
+    ],
+    "absolute_selector_contrast_gap_db_range": [
+      0.136574059168586,
+      1.6926629483297777
+    ],
+    "admitted_on_physically_clearer_channel": 2,
+    "conditions": 2,
+    "origin": "genuine",
+    "selected_by_frozen_rule": 0,
+    "source_groups": 1,
+    "source_role": "holdout"
+  },
+  "publisher_geometry": {
+    "asset": {
+      "bytes": 14282074,
+      "filename": "angle_0.0.mat",
+      "git_blob_sha1": "9214e19a94dca7609c9e8aad4805bc277f5b33a6",
+      "sha256": "d944089e3c872b27dc9dcbf9112978b7fa170c483c3b240a8a3d62a3293c994a",
+      "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat"
+    },
+    "creator": "Jon Francombe",
+    "doi": "10.15126/surreydata.00813511",
+    "ear_order": [
+      "left",
+      "right"
+    ],
+    "guide": {
+      "bytes": 3161503,
+      "sha256": "43322c46336dc3720e24603f9031e75b5a3e9c451251ef6d0af05c7f3d623754",
+      "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIR.pdf"
+    },
+    "license": "CC-BY-4.0",
+    "positions": {
+      "BL": {
+        "azimuth_degrees_left_positive": 135,
+        "channel_one_based": 5,
+        "coefficients_sha256": "c6a6e388a478f620357b7ef327b015523d3ad24796a9e85d78fd4e593b92207a",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "elevation_degrees": 0,
+        "first_20ms_from_earlier_peak_left_minus_right_db": 8.08836009364227,
+        "peak_right_minus_left_samples": 20,
+        "position": "BL",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "BR": {
+        "azimuth_degrees_left_positive": -135,
+        "channel_one_based": 6,
+        "coefficients_sha256": "e9da9ffb8e4b214c7218d9c25ee4b69e1fb8b43bbdb337f06ccac1eedffc0561",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "elevation_degrees": 0,
+        "first_20ms_from_earlier_peak_left_minus_right_db": -7.4926797768188145,
+        "peak_right_minus_left_samples": -17,
+        "position": "BR",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "FC": {
+        "azimuth_degrees_left_positive": 0,
+        "channel_one_based": 3,
+        "coefficients_sha256": "7592e1078f9a512e994d0cac69d49d7b2534c6a9353604d53fe31f9a34431da4",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "elevation_degrees": 0,
+        "first_20ms_from_earlier_peak_left_minus_right_db": -0.8025810207616084,
+        "peak_right_minus_left_samples": -2,
+        "position": "FC",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "SiL": {
+        "azimuth_degrees_left_positive": 90,
+        "channel_one_based": 11,
+        "coefficients_sha256": "41aba7ac7053b11f12fc9e353be114fc1807585f810f0cf83900bf16c5845210",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "elevation_degrees": 0,
+        "first_20ms_from_earlier_peak_left_minus_right_db": 10.212281726202178,
+        "peak_right_minus_left_samples": 32,
+        "position": "SiL",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "SiR": {
+        "azimuth_degrees_left_positive": -90,
+        "channel_one_based": 12,
+        "coefficients_sha256": "024394918ef874883871018765c3f1606bcdf1087175c7a95cec7370b28cd207",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "elevation_degrees": 0,
+        "first_20ms_from_earlier_peak_left_minus_right_db": -12.411317640146034,
+        "peak_right_minus_left_samples": -39,
+        "position": "SiR",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      }
+    },
+    "publisher": "University of Surrey",
+    "source_table": "Table 2, page 7; axes and ear order in \u00a73.2, page 8"
+  },
+  "schema": "chipmunk.audio-measured-surrey-transfer/1",
+  "scope": "Simulated speech/noise in two measured impulse-response rooms, with a repeated matched holdout source role. Speech activity admission only. No synthetic-origin result, new confidence, or serving change.",
+  "speech_gate": {
+    "authenticity_forwards": 0,
+    "by_role": {
+      "development": {
+        "counts": {
+          "added_admissions": 0,
+          "both_native_rejected_mono_rejection": 15,
+          "combined_admitted": 3,
+          "mono_admitted": 3,
+          "noisy_cases": 12,
+          "noisy_combined_admitted": 0,
+          "noisy_mono_admitted": 0,
+          "one_or_both_native_rescued_mono": 0,
+          "planned": 18,
+          "selection_available": 0
+        },
+        "reasons": {
+          "contrast_gap_below_minimum": 5,
+          "insufficient_active_or_quiet_support": 13
+        }
+      },
+      "holdout": {
+        "counts": {
+          "added_admissions": 0,
+          "both_native_rejected_mono_rejection": 8,
+          "combined_admitted": 8,
+          "mono_admitted": 8,
+          "noisy_cases": 12,
+          "noisy_combined_admitted": 4,
+          "noisy_mono_admitted": 4,
+          "one_or_both_native_rescued_mono": 2,
+          "planned": 18,
+          "selection_available": 0
+        },
+        "reasons": {
+          "contrast_gap_below_minimum": 12,
+          "insufficient_active_or_quiet_support": 6
+        }
+      }
+    },
+    "changes_from_matched_clean": {
+      "noise_left": {
+        "combined_gain_from_clean": 0,
+        "combined_loss_from_clean": 5,
+        "mono_gain_from_clean": 0,
+        "mono_loss_from_clean": 5,
+        "planned": 12
+      },
+      "noise_right": {
+        "combined_gain_from_clean": 0,
+        "combined_loss_from_clean": 5,
+        "mono_gain_from_clean": 0,
+        "mono_loss_from_clean": 5,
+        "planned": 12
+      }
+    },
+    "counts": {
+      "all": {
+        "additional_admissions": 0,
+        "any_native_admitted": 13,
+        "any_native_mono_rejections": 2,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 4,
+        "clearer_side_available": 12,
+        "combined_admitted": 11,
+        "mono_admitted": 11,
+        "planned": 36,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "condition/matched_room_clean": {
+        "additional_admissions": 0,
+        "any_native_admitted": 7,
+        "any_native_mono_rejections": 0,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 0,
+        "clearer_side_available": 0,
+        "combined_admitted": 7,
+        "mono_admitted": 7,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "condition/noise_left": {
+        "additional_admissions": 0,
+        "any_native_admitted": 3,
+        "any_native_mono_rejections": 1,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 2,
+        "clearer_side_available": 6,
+        "combined_admitted": 2,
+        "mono_admitted": 2,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "condition/noise_right": {
+        "additional_admissions": 0,
+        "any_native_admitted": 3,
+        "any_native_mono_rejections": 1,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 2,
+        "clearer_side_available": 6,
+        "combined_admitted": 2,
+        "mono_admitted": 2,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "geometry/gap_at_least_3db": {
+        "additional_admissions": 0,
+        "any_native_admitted": 4,
+        "any_native_mono_rejections": 2,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 4,
+        "clearer_side_available": 12,
+        "combined_admitted": 2,
+        "mono_admitted": 2,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "geometry/gap_under_3db": {
+        "additional_admissions": 0,
+        "any_native_admitted": 2,
+        "any_native_mono_rejections": 0,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 0,
+        "clearer_side_available": 0,
+        "combined_admitted": 2,
+        "mono_admitted": 2,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "origin/expressive": {
+        "additional_admissions": 0,
+        "any_native_admitted": 1,
+        "any_native_mono_rejections": 0,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 0,
+        "clearer_side_available": 4,
+        "combined_admitted": 1,
+        "mono_admitted": 1,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "origin/genuine": {
+        "additional_admissions": 0,
+        "any_native_admitted": 7,
+        "any_native_mono_rejections": 2,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 2,
+        "clearer_side_available": 4,
+        "combined_admitted": 5,
+        "mono_admitted": 5,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      },
+      "origin/stock": {
+        "additional_admissions": 0,
+        "any_native_admitted": 5,
+        "any_native_mono_rejections": 0,
+        "chose_clearer_side": 0,
+        "clearer_side_admitted": 2,
+        "clearer_side_available": 4,
+        "combined_admitted": 5,
+        "mono_admitted": 5,
+        "planned": 12,
+        "selected": 0,
+        "selected_admitted": 0,
+        "selected_when_clearer_side_available": 0
+      }
+    },
+    "freeze_sha256": "1b530483c2e76e5a4c011d23ca3b158977210b2adef5c66c7cb68f7309baabb0",
+    "independent_stereo_and_production_mono_replays": 36,
+    "initial_summary_failed": true,
+    "mono_rejected_native_outcomes": {
+      "both_native_rejected": 23,
+      "one_or_both_native_admitted": 2
+    },
+    "prior_bbc_to_surrey_paired_holdout": {
+      "combined": {
+        "bbc_admitted_surrey_admitted": 8,
+        "bbc_admitted_surrey_rejected": 4,
+        "bbc_rejected_surrey_rejected": 6
+      },
+      "mono": {
+        "bbc_admitted_surrey_admitted": 8,
+        "bbc_admitted_surrey_rejected": 4,
+        "bbc_rejected_surrey_rejected": 6
+      }
+    },
+    "private_observations_sha256": "8a28e045622850958f21226c503a672ed99c10ff34637e7483c3212fc29ebe78",
+    "resources": {
+      "child_exit_code": 0,
+      "child_peak_rss_bytes_macos": 537362432,
+      "elapsed_s": 8.042,
+      "result_sha256": "2f00a5f464fdde07ae56284cdfb070798f4ef35b6ecd14ff279e03d856740e64",
+      "status": "complete"
+    },
+    "retry_observations_match_first_attempt": true,
+    "schema": "chipmunk.audio-surrey-front-wide-gate-result/1",
+    "selection_reasons": {
+      "all": {
+        "contrast_gap_below_minimum": 17,
+        "insufficient_active_or_quiet_support": 19
+      },
+      "condition/matched_room_clean": {
+        "contrast_gap_below_minimum": 10,
+        "insufficient_active_or_quiet_support": 2
+      },
+      "condition/noise_left": {
+        "contrast_gap_below_minimum": 3,
+        "insufficient_active_or_quiet_support": 9
+      },
+      "condition/noise_right": {
+        "contrast_gap_below_minimum": 4,
+        "insufficient_active_or_quiet_support": 8
+      },
+      "geometry/gap_at_least_3db": {
+        "contrast_gap_below_minimum": 4,
+        "insufficient_active_or_quiet_support": 8
+      },
+      "geometry/gap_under_3db": {
+        "contrast_gap_below_minimum": 3,
+        "insufficient_active_or_quiet_support": 9
+      },
+      "origin/expressive": {
+        "contrast_gap_below_minimum": 3,
+        "insufficient_active_or_quiet_support": 9
+      },
+      "origin/genuine": {
+        "contrast_gap_below_minimum": 8,
+        "insufficient_active_or_quiet_support": 4
+      },
+      "origin/stock": {
+        "contrast_gap_below_minimum": 6,
+        "insufficient_active_or_quiet_support": 6
+      }
+    },
+    "speech_activity_cases": 36,
+    "status": "complete",
+    "vad_frame_forwards": 10152
+  },
+  "status": "complete",
+  "tested_noise_pair_angles": {
+    "front_inner": {
+      "elevation_degrees": 0,
+      "left": {
+        "azimuth_degrees_left_positive": 30,
+        "channel_one_based": 7,
+        "speaker": "FLc"
+      },
+      "right": {
+        "azimuth_degrees_left_positive": -30,
+        "channel_one_based": 8,
+        "speaker": "FRc"
+      }
+    },
+    "front_wide": {
+      "elevation_degrees": 0,
+      "left": {
+        "azimuth_degrees_left_positive": 60,
+        "channel_one_based": 1,
+        "speaker": "FL"
+      },
+      "right": {
+        "azimuth_degrees_left_positive": -60,
+        "channel_one_based": 2,
+        "speaker": "FR"
+      }
+    },
+    "rear": {
+      "elevation_degrees": 0,
+      "left": {
+        "azimuth_degrees_left_positive": 135,
+        "channel_one_based": 5,
+        "speaker": "BL"
+      },
+      "right": {
+        "azimuth_degrees_left_positive": -135,
+        "channel_one_based": 6,
+        "speaker": "BR"
+      }
+    },
+    "side": {
+      "elevation_degrees": 0,
+      "left": {
+        "azimuth_degrees_left_positive": 90,
+        "channel_one_based": 11,
+        "speaker": "SiL"
+      },
+      "right": {
+        "azimuth_degrees_left_positive": -90,
+        "channel_one_based": 12,
+        "speaker": "SiR"
+      }
+    }
+  }
+}

@@ -1,0 +1,1108 @@
+{
+  "archived_federal": {
+    "cross_cohort_exact_12_token_matches": 0,
+    "frozen_plan_sha256": "bc4cfd0ccae58fead7484d2ea452989a09ef80da92a56e74e1bb8eb8d7096d5b",
+    "new_model_calls": 0,
+    "outcomes": {
+      "full_ai": {
+        "lexical_only": {
+          "assessed": 36,
+          "flagged": 4,
+          "known_ai_characters": 93758,
+          "marked_ai_characters": 1143,
+          "marked_human_characters": 0,
+          "planned": 54,
+          "unassessed": 18,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_0_5": {
+          "assessed": 54,
+          "flagged": 53,
+          "known_ai_characters": 93758,
+          "marked_ai_characters": 65824,
+          "marked_human_characters": 0,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 51,
+          "wrong_location": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 54,
+          "flagged": 1,
+          "known_ai_characters": 93758,
+          "marked_ai_characters": 617,
+          "marked_human_characters": 0,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "strict_raw": {
+          "assessed": 54,
+          "flagged": 39,
+          "known_ai_characters": 93758,
+          "marked_ai_characters": 31833,
+          "marked_human_characters": 0,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 27,
+          "wrong_location": 0
+        }
+      },
+      "human": {
+        "lexical_only": {
+          "assessed": 41,
+          "flagged": 9,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 3296,
+          "planned": 54,
+          "unassessed": 13,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_0_5": {
+          "assessed": 54,
+          "flagged": 43,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 30277,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 54,
+          "flagged": 1,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 336,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict_raw": {
+          "assessed": 54,
+          "flagged": 14,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 5382,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "long_ai": {
+        "lexical_only": {
+          "assessed": 39,
+          "flagged": 7,
+          "known_ai_characters": 15772,
+          "marked_ai_characters": 705,
+          "marked_human_characters": 1731,
+          "planned": 54,
+          "unassessed": 15,
+          "useful": 3,
+          "wrong_location": 4
+        },
+        "raw_0_5": {
+          "assessed": 54,
+          "flagged": 45,
+          "known_ai_characters": 15772,
+          "marked_ai_characters": 10685,
+          "marked_human_characters": 24166,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 22,
+          "wrong_location": 7
+        },
+        "raw_plus_lexical": {
+          "assessed": 54,
+          "flagged": 1,
+          "known_ai_characters": 15772,
+          "marked_ai_characters": 236,
+          "marked_human_characters": 340,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "strict_raw": {
+          "assessed": 54,
+          "flagged": 14,
+          "known_ai_characters": 15772,
+          "marked_ai_characters": 2121,
+          "marked_human_characters": 3748,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 7,
+          "wrong_location": 7
+        }
+      },
+      "long_format": {
+        "lexical_only": {
+          "assessed": 41,
+          "flagged": 9,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 3296,
+          "planned": 54,
+          "unassessed": 13,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_0_5": {
+          "assessed": 54,
+          "flagged": 43,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 30277,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 54,
+          "flagged": 1,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 336,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict_raw": {
+          "assessed": 54,
+          "flagged": 14,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 5382,
+          "planned": 54,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "short_ai": {
+        "lexical_only": {
+          "assessed": 21,
+          "flagged": 2,
+          "known_ai_characters": 1937,
+          "marked_ai_characters": 101,
+          "marked_human_characters": 843,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 2,
+          "useful": 0,
+          "wrong_location": 1
+        },
+        "raw_0_5": {
+          "assessed": 23,
+          "flagged": 20,
+          "known_ai_characters": 1937,
+          "marked_ai_characters": 1193,
+          "marked_human_characters": 12232,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 1,
+          "wrong_location": 7
+        },
+        "raw_plus_lexical": {
+          "assessed": 23,
+          "flagged": 1,
+          "known_ai_characters": 1937,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 336,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 1
+        },
+        "strict_raw": {
+          "assessed": 23,
+          "flagged": 6,
+          "known_ai_characters": 1937,
+          "marked_ai_characters": 277,
+          "marked_human_characters": 1965,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 3
+        }
+      },
+      "short_format": {
+        "lexical_only": {
+          "assessed": 21,
+          "flagged": 5,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 1680,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_0_5": {
+          "assessed": 23,
+          "flagged": 20,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 12765,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 23,
+          "flagged": 1,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 336,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict_raw": {
+          "assessed": 23,
+          "flagged": 7,
+          "known_ai_characters": 0,
+          "marked_ai_characters": 0,
+          "marked_human_characters": 2360,
+          "planned": 54,
+          "preparation_unavailable": 31,
+          "unassessed": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    },
+    "protocol": {
+      "code_sha256": "f2b8936e5e1fbd4c3f1c060fab5ebf1878f1a94fb9b3f09990ec2aee0c7fb987",
+      "federal_independent_prior_review_sha256": "c62ec3f53aafdb99ada33b596497f03414d2c41f595adfe97473af6c5c281390",
+      "federal_source_receipt_sha256": "eff16a6244be6dcb3ee8b200b4fc55e1b157794372bf63300b5729003a45ea53",
+      "lexical_transfer_protocol_sha256": "0b0ac6ddfc5cf6b5cfaae8cd1d25e07947b0233cdd948f26f617c0597256125f",
+      "prior_archive_replay_code_sha256": "10dc1684229bdf4bc84c13e5bdac8d3797c085c0e73c9747f37ca1522d7b68b9",
+      "scope": "Previously scored federal articles. Fixed lexical point, no new detector inference."
+    },
+    "schema": "chipmunk.text-federal-lexical-transfer/1",
+    "source_groups": 30
+  },
+  "archived_mixed_and_original": {
+    "false_flag_source_groups": {
+      "original": {
+        "lexical_only": 2,
+        "raw_0_5": 12,
+        "raw_plus_lexical": 2,
+        "strict_raw": 2
+      }
+    },
+    "freeze_sha256": "033a105bb134b87617e4c605ae36c14f7619f3ac299c920ff607068ae14501bf",
+    "new_model_calls": 0,
+    "outcomes": {
+      "original": {
+        "lexical_only": {
+          "assessed": 13,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 31557,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 600,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 600,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 13,
+          "flagged_files": 12,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 31557,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 10047,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 10047,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 13,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 31557,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 892,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 892,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 13,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 31557,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 819,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 819,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        }
+      },
+      "qwen": {
+        "lexical_only": {
+          "assessed": 5,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 2752,
+          "known_nonspace_characters": 12300,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 5,
+          "flagged_files": 5,
+          "generated_overlap_files": 4,
+          "known_generated_characters": 2752,
+          "known_nonspace_characters": 12300,
+          "marked_generated_characters": 1659,
+          "marked_nonspace_characters": 2999,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 1340,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 3,
+          "wrong_ai_locations": 1
+        },
+        "raw_plus_lexical": {
+          "assessed": 5,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 2752,
+          "known_nonspace_characters": 12300,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 5,
+          "flagged_files": 2,
+          "generated_overlap_files": 1,
+          "known_generated_characters": 2752,
+          "known_nonspace_characters": 12300,
+          "marked_generated_characters": 112,
+          "marked_nonspace_characters": 765,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 653,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 1
+        }
+      },
+      "smol2": {
+        "lexical_only": {
+          "assessed": 5,
+          "flagged_files": 1,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 2757,
+          "known_nonspace_characters": 12165,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 289,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 289,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 1
+        },
+        "raw_0_5": {
+          "assessed": 5,
+          "flagged_files": 5,
+          "generated_overlap_files": 5,
+          "known_generated_characters": 2757,
+          "known_nonspace_characters": 12165,
+          "marked_generated_characters": 2420,
+          "marked_nonspace_characters": 4632,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 2212,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 4,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 5,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 2757,
+          "known_nonspace_characters": 12165,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 5,
+          "flagged_files": 4,
+          "generated_overlap_files": 4,
+          "known_generated_characters": 2757,
+          "known_nonspace_characters": 12165,
+          "marked_generated_characters": 1759,
+          "marked_nonspace_characters": 2475,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 716,
+          "ordinary_span_overlap_files": 0,
+          "planned": 13,
+          "preparation_unavailable": 8,
+          "unassessed": 0,
+          "useful_ai_locations": 4,
+          "wrong_ai_locations": 0
+        }
+      }
+    },
+    "plan": {
+      "archive_aggregate_sha256": "3c0ce5847abbf0d37812a574e8daef0b3d7e2c08973016e5d9d5f5e76d35c877",
+      "code_sha256": "6cd0e5fc19cf81e5fcd00bd97dfa9dc2c1f012e0ca750f1ba367c2eb80f9273a",
+      "cohort": "v292 confirmation only",
+      "frozen_lexical_protocol_sha256": "0b0ac6ddfc5cf6b5cfaae8cd1d25e07947b0233cdd948f26f617c0597256125f",
+      "scope": "Fixed lexical gate over saved source-disjoint eLife confirmation. Already evaluated for prior rules. Zero model inference."
+    },
+    "prepared_mixed_positives": 10,
+    "schema": "chipmunk.text-editorial-archived-positive-check/1",
+    "source_groups": 13,
+    "unavailable_mixed_rewrites": 16
+  },
+  "fresh_all_human": {
+    "admitted_groups": 12,
+    "false_flag_source_groups": {
+      "copyedit": {
+        "lexical_only": 0,
+        "raw_0_5": 3,
+        "raw_plus_lexical": 0,
+        "strict_raw": 1
+      },
+      "human_paragraph_splice": {
+        "lexical_only": 2,
+        "raw_0_5": 9,
+        "raw_plus_lexical": 2,
+        "strict_raw": 4
+      },
+      "original": {
+        "lexical_only": 2,
+        "raw_0_5": 12,
+        "raw_plus_lexical": 0,
+        "strict_raw": 4
+      }
+    },
+    "frozen_plan_sha256": "0b0ac6ddfc5cf6b5cfaae8cd1d25e07947b0233cdd948f26f617c0597256125f",
+    "outcomes": {
+      "copyedit": {
+        "lexical_only": {
+          "assessed": 3,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 6979,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 9,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 3,
+          "flagged_files": 3,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 6979,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 1361,
+          "marked_ordinary_characters": 6,
+          "marked_unchanged_characters": 1355,
+          "ordinary_span_overlap_files": 1,
+          "planned": 12,
+          "preparation_unavailable": 9,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 3,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 6979,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 9,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 3,
+          "flagged_files": 1,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 6979,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 646,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 646,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 9,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        }
+      },
+      "human_paragraph_splice": {
+        "lexical_only": {
+          "assessed": 10,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 23109,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 828,
+          "marked_ordinary_characters": 313,
+          "marked_unchanged_characters": 515,
+          "ordinary_span_overlap_files": 1,
+          "planned": 12,
+          "preparation_unavailable": 2,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 10,
+          "flagged_files": 9,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 23109,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 8830,
+          "marked_ordinary_characters": 1227,
+          "marked_unchanged_characters": 7603,
+          "ordinary_span_overlap_files": 3,
+          "planned": 12,
+          "preparation_unavailable": 2,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 10,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 23109,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 872,
+          "marked_ordinary_characters": 433,
+          "marked_unchanged_characters": 439,
+          "ordinary_span_overlap_files": 2,
+          "planned": 12,
+          "preparation_unavailable": 2,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 10,
+          "flagged_files": 4,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 23109,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 1907,
+          "marked_ordinary_characters": 510,
+          "marked_unchanged_characters": 1397,
+          "ordinary_span_overlap_files": 1,
+          "planned": 12,
+          "preparation_unavailable": 2,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        }
+      },
+      "original": {
+        "lexical_only": {
+          "assessed": 12,
+          "flagged_files": 2,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 27662,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 958,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 958,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 12,
+          "flagged_files": 12,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 27662,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 10148,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 10148,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 12,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 27662,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 12,
+          "flagged_files": 4,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 0,
+          "known_nonspace_characters": 27662,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 1700,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 1700,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        }
+      }
+    },
+    "paired_original_to_control": {
+      "copyedit": {
+        "lexical_only": {
+          "0->0": 3
+        },
+        "raw_0_5": {
+          "1->1": 3
+        },
+        "raw_plus_lexical": {
+          "0->0": 3
+        },
+        "strict_raw": {
+          "0->0": 2,
+          "1->1": 1
+        }
+      },
+      "human_paragraph_splice": {
+        "lexical_only": {
+          "0->0": 7,
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "raw_0_5": {
+          "1->0": 1,
+          "1->1": 9
+        },
+        "raw_plus_lexical": {
+          "0->0": 8,
+          "0->1": 2
+        },
+        "strict_raw": {
+          "0->0": 6,
+          "0->1": 1,
+          "1->1": 3
+        }
+      }
+    },
+    "points": {
+      "lexical_hex": "0x1.7ce895cc8aecbp-1",
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "response_receipt": {
+      "classifier_calls": 129,
+      "elapsed_seconds": 52.866,
+      "minimum_available_ram_bytes": 5784846336,
+      "observations_sha256": "7cbaa2dffbce570e7f88b4e0245167cdc499a815e08febf64fcd7c960b80eab1",
+      "plan_sha256": "0b0ac6ddfc5cf6b5cfaae8cd1d25e07947b0233cdd948f26f617c0597256125f",
+      "sampled_worker_rss_bytes": 2287517696,
+      "status": "complete"
+    },
+    "rules": [
+      "raw_0_5",
+      "strict_raw",
+      "lexical_only",
+      "raw_plus_lexical"
+    ],
+    "schema": "chipmunk.text-editorial-transfer-result/1",
+    "scope": "New CPU detector forwards on licensed unscored v301 editorial controls. No new generated inputs.",
+    "source_groups": 12,
+    "upstream_source_exclusions": 14
+  },
+  "fresh_mixed": {
+    "cohort": {
+      "constructed": 6,
+      "planned_inputs": 24,
+      "preparation_unavailable": 18,
+      "source_groups": 12,
+      "unique_groups_with_both_families_eligible": 1,
+      "unique_groups_with_eligible_mixed": 5
+    },
+    "false_flag_source_groups": {},
+    "frozen_generation_sha256": "855d95eb192abb25d01fd5d7b6dc659a780c94a0b0cd44323fb657bfe1e86915",
+    "frozen_score_sha256": "e1655e42992f7365c9133bfacb6af1cc18dc3363b2c1c9c3aafd525c2be1b948",
+    "generation": {
+      "qwen": {
+        "attempts": 12,
+        "dispositions": {
+          "constructed": 5,
+          "generation_limit_without_eos": 3,
+          "outside_word_bound": 3,
+          "source_copy": 1
+        },
+        "elapsed_seconds": 614.401,
+        "family": "qwen",
+        "freeze_sha256": "855d95eb192abb25d01fd5d7b6dc659a780c94a0b0cd44323fb657bfe1e86915",
+        "generated_tokens": 1776,
+        "minimum_available_ram_bytes": 5223923712,
+        "private_cases_sha256": "03a63683ce6cf281b20a04b71932da896dff7a91e8ed8ef6aa1ec821380e349f",
+        "sampled_worker_rss_bytes": 3698950144,
+        "status": "complete",
+        "weight_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "attempts": 12,
+        "decoder": "offline Apple MLX GPU, affine 4-bit weights in groups of 64, batch one, no draft",
+        "dispositions": {
+          "constructed": 1,
+          "generation_limit_without_eos": 6,
+          "outside_word_bound": 5
+        },
+        "elapsed_seconds": 30.466,
+        "family": "smol2",
+        "freeze_sha256": "0561a1d7236f7b1072c98ee8527decbc371e6e94d0409fa0a481d484fef560c3",
+        "generated_tokens": 1975,
+        "minimum_available_ram_bytes": 4552835072,
+        "private_cases_sha256": "a4b2df8dd0c049ce31a295a6ac90dbe5aa69b26e8079af334cacdd768b1933ac",
+        "sampled_worker_rss_bytes": 3082698752,
+        "status": "complete",
+        "weight_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "method": {
+      "arm": "One independent paragraph rewrite attempt per source per family",
+      "companion_freeze_sha256": "0561a1d7236f7b1072c98ee8527decbc371e6e94d0409fa0a481d484fef560c3",
+      "decoder": {
+        "qwen": "offline CPU PyTorch bfloat16, one thread, batch one",
+        "smol2": "offline Apple MLX GPU, affine 4-bit weights in groups of 64, batch one, no draft"
+      },
+      "generator_settings": {
+        "max_new_tokens": 200,
+        "seed": 56174,
+        "temperature": 0.65,
+        "top_p": 0.9
+      },
+      "quality": "Use existing v273 paragraph, length, wrapper, and source-copy checks; require actual EOS within the fixed token limit",
+      "role": "external transfer only, all 12 v301 admitted source groups",
+      "score_policy": "Retain the frozen raw, strict and lexical reference points. Score measured context extent only.",
+      "serving_change": false,
+      "source_overlap": "Hold a mixed case whose generated paragraph shares any normalized 12-token fragment with a development original or different transfer source"
+    },
+    "outcomes": {
+      "qwen": {
+        "lexical_only": {
+          "assessed": 5,
+          "flagged_files": 1,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 2953,
+          "known_nonspace_characters": 12548,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 515,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 515,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 7,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 1
+        },
+        "raw_0_5": {
+          "assessed": 5,
+          "flagged_files": 5,
+          "generated_overlap_files": 5,
+          "known_generated_characters": 2953,
+          "known_nonspace_characters": 12548,
+          "marked_generated_characters": 2779,
+          "marked_nonspace_characters": 6276,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 3497,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 7,
+          "unassessed": 0,
+          "useful_ai_locations": 5,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 5,
+          "flagged_files": 1,
+          "generated_overlap_files": 1,
+          "known_generated_characters": 2953,
+          "known_nonspace_characters": 12548,
+          "marked_generated_characters": 205,
+          "marked_nonspace_characters": 517,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 312,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 7,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 5,
+          "flagged_files": 4,
+          "generated_overlap_files": 3,
+          "known_generated_characters": 2953,
+          "known_nonspace_characters": 12548,
+          "marked_generated_characters": 769,
+          "marked_nonspace_characters": 2259,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 1490,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 7,
+          "unassessed": 0,
+          "useful_ai_locations": 2,
+          "wrong_ai_locations": 1
+        }
+      },
+      "smol2": {
+        "lexical_only": {
+          "assessed": 1,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 363,
+          "known_nonspace_characters": 2165,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 11,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "raw_0_5": {
+          "assessed": 1,
+          "flagged_files": 1,
+          "generated_overlap_files": 1,
+          "known_generated_characters": 363,
+          "known_nonspace_characters": 2165,
+          "marked_generated_characters": 363,
+          "marked_nonspace_characters": 993,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 630,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 11,
+          "unassessed": 0,
+          "useful_ai_locations": 1,
+          "wrong_ai_locations": 0
+        },
+        "raw_plus_lexical": {
+          "assessed": 1,
+          "flagged_files": 0,
+          "generated_overlap_files": 0,
+          "known_generated_characters": 363,
+          "known_nonspace_characters": 2165,
+          "marked_generated_characters": 0,
+          "marked_nonspace_characters": 0,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 0,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 11,
+          "unassessed": 0,
+          "useful_ai_locations": 0,
+          "wrong_ai_locations": 0
+        },
+        "strict_raw": {
+          "assessed": 1,
+          "flagged_files": 1,
+          "generated_overlap_files": 1,
+          "known_generated_characters": 363,
+          "known_nonspace_characters": 2165,
+          "marked_generated_characters": 363,
+          "marked_nonspace_characters": 600,
+          "marked_ordinary_characters": 0,
+          "marked_unchanged_characters": 237,
+          "ordinary_span_overlap_files": 0,
+          "planned": 12,
+          "preparation_unavailable": 11,
+          "unassessed": 0,
+          "useful_ai_locations": 1,
+          "wrong_ai_locations": 0
+        }
+      }
+    },
+    "paired_original_to_control": {
+      "qwen": {
+        "lexical_only": {
+          "0->0": 4,
+          "1->1": 1
+        },
+        "raw_0_5": {
+          "1->1": 5
+        },
+        "raw_plus_lexical": {
+          "0->0": 4,
+          "0->1": 1
+        },
+        "strict_raw": {
+          "0->0": 1,
+          "0->1": 2,
+          "1->1": 2
+        }
+      },
+      "smol2": {
+        "lexical_only": {
+          "0->0": 1
+        },
+        "raw_0_5": {
+          "1->1": 1
+        },
+        "raw_plus_lexical": {
+          "0->0": 1
+        },
+        "strict_raw": {
+          "0->1": 1
+        }
+      }
+    },
+    "points": {
+      "lexical_hex": "0x1.7ce895cc8aecbp-1",
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "score_receipt": {
+      "classifier_calls": 28,
+      "elapsed_seconds": 12.96,
+      "minimum_available_ram_bytes": 6658998272,
+      "observations_sha256": "3742aa7fe0c149e57a3833e895652c1455474ed8602e1b360871bc1ddb3fd69c",
+      "plan_sha256": "e1655e42992f7365c9133bfacb6af1cc18dc3363b2c1c9c3aafd525c2be1b948",
+      "sampled_worker_rss_bytes": 2317205504,
+      "status": "complete"
+    }
+  },
+  "fresh_mixed_protocol": {
+    "corrected_freeze_sha256": "855d95eb192abb25d01fd5d7b6dc659a780c94a0b0cd44323fb657bfe1e86915",
+    "mlx_companion_freeze_sha256": "0561a1d7236f7b1072c98ee8527decbc371e6e94d0409fa0a481d484fef560c3",
+    "mlx_sandbox_attempt": {
+      "reason": "Metal device unavailable inside the sandbox. The same frozen decoder then completed offline with access to the local Metal device.",
+      "terminal_status": "stopped before loading weights or generating"
+    },
+    "original_attempt": {
+      "freeze_sha256": "81f696c3ed8f5b24b01afc1d1e0659ea8f643123225c034d1f112141c768937c",
+      "reason": "Local variable shadowed the input validation helper.",
+      "terminal_status": "stopped before loading weights or generating"
+    },
+    "planned_attempts": 24,
+    "source_groups": 12,
+    "status": "complete_with_preparation_shortfall"
+  },
+  "initial_archive_replay": {
+    "freeze_sha256": "2556db308614804f5fb2e0b8851afacb55b3aa289d7b4d42c1c968bafa69f0cf",
+    "reason": "A legacy source-verification path required an earlier extraction module hash. The corrected replay checked exact committed source, response, calibration and resource receipts directly.",
+    "terminal_status": "stopped before prediction readout"
+  },
+  "schema": "chipmunk.text-editorial-transfer-with-archived-replay/1"
+}

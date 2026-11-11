@@ -1,0 +1,1421 @@
+{
+  "cases": [
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 1,
+      "pair": 1,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 1.7319572865962982,
+        "pe": -0.02648836374282837,
+        "reference": 0.022262070327997208
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 2,
+      "pair": 2,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.1260427236557007,
+        "pe": -3.8865524530410767,
+        "reference": 0.0184724573045969
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 3,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -3.724081873893738,
+        "pe": -5.76286244392395,
+        "reference": 0.008181210607290268
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 4,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.182189702987671,
+        "pe": -3.923871695995331,
+        "reference": 0.04927591048181057
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 5,
+      "pair": 3,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.834683418273926,
+        "pe": 2.434291422367096,
+        "reference": 0.38726015388965607
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 6,
+      "pair": 4,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.3552656173706055,
+        "pe": -3.141406238079071,
+        "reference": 0.015836010687053204
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 7,
+      "pair": 5,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.240921378135681,
+        "pe": -4.587106227874756,
+        "reference": 0.05434468947350979
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 1,
+      "pair": 6,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -3.74433171749115,
+        "pe": -5.04864227771759,
+        "reference": 0.008426821324974298
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 1,
+      "pair": 6,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -3.314634323120117,
+        "pe": -3.8411571383476257,
+        "reference": 0.009903280064463615
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 8,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.462160110473633,
+        "pe": 0.7607067227363586,
+        "reference": 0.08162821177393198
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 9,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -0.48213037848472595,
+        "pe": 3.62686550617218,
+        "reference": 0.9369399547576904
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 10,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.6779875755310059,
+        "pe": -4.6591280698776245,
+        "reference": 0.008599796332418919
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 11,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 0.4275517463684082,
+        "pe": -0.2566138803958893,
+        "reference": 0.9573127925395966
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 12,
+      "pair": 7,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.4510166049003601,
+        "pe": 3.9312620759010315,
+        "reference": 0.017754521686583757
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 13,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.9795256853103638,
+        "pe": 2.7415496110916138,
+        "reference": 0.4771408587694168
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 14,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.9439988136291504,
+        "pe": -4.125256419181824,
+        "reference": 0.014562037773430347
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 15,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.1819533705711365,
+        "pe": -1.0393020659685135,
+        "reference": 0.013101679738610983
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 16,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -1.2467817068099976,
+        "pe": -3.514917016029358,
+        "reference": 0.006269343197345734
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 5,
+      "pair": 3,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 3.0655840635299683,
+        "pe": 2.6347222328186035,
+        "reference": 0.8060129880905151
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 9,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.401642680168152,
+        "pe": 0.39701858162879944,
+        "reference": 0.01784625928848982
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 17,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.2592355012893677,
+        "pe": -0.18805968016386032,
+        "reference": 0.019583413377404213
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 18,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": 3.5484957098960876,
+        "pe": 1.380701094865799,
+        "reference": 0.02288573794066906
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 2,
+      "pair": 2,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -3.3974545001983643,
+        "pe": -5.644763708114624,
+        "reference": 0.009404612705111504
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 19,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.8488231301307678,
+        "pe": -5.2395325899124146,
+        "reference": 0.9147967100143433
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 5,
+      "pair": 8,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.6577174663543701,
+        "pe": -3.4390980005264282,
+        "reference": 0.010743514634668827
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 9,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.852838158607483,
+        "pe": 4.823991298675537,
+        "reference": 0.04268086887896061
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 20,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.074462801218033,
+        "pe": -4.099276065826416,
+        "reference": 0.02559044398367405
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 15,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.664443850517273,
+        "pe": 1.7403998672962189,
+        "reference": 0.011037351563572884
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 21,
+      "pair": 9,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 4.681016445159912,
+        "pe": 7.051541805267334,
+        "reference": 0.9718606472015381
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 10,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.2623339891433716,
+        "pe": 5.568798303604126,
+        "reference": 0.010881706606596708
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 17,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.770183801651001,
+        "pe": 2.527960777282715,
+        "reference": 0.1256820596754551
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 22,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": 1.7884818613529205,
+        "pe": -2.9735236167907715,
+        "reference": 0.010605166666209698
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 19,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.8773255944252014,
+        "pe": -5.457467555999756,
+        "reference": 0.3071761727333069
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 1,
+      "pair": 1,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.2486493289470673,
+        "pe": 6.227651953697205,
+        "reference": 0.012826553080230951
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 12,
+      "pair": 10,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.8131848573684692,
+        "pe": -0.6497739404439926,
+        "reference": 0.42675934731960297
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 23,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -2.2636040449142456,
+        "pe": -5.2144657373428345,
+        "reference": 0.040544748306274414
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 7,
+      "pair": 11,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.9246535003185272,
+        "pe": -3.683064877986908,
+        "reference": 0.15727325528860092
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 20,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.790983200073242,
+        "pe": -5.518483996391296,
+        "reference": 0.7188136279582977
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 24,
+      "pair": 12,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.8819069862365723,
+        "pe": 6.385303020477295,
+        "reference": 0.014764956198632717
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 7,
+      "pair": 13,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -3.459975004196167,
+        "pe": -5.383230209350586,
+        "reference": 0.01070011267438531
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 6,
+      "pair": 14,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.596888780593872,
+        "pe": 3.5752546787261963,
+        "reference": 0.042450545355677605
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 21,
+      "pair": 15,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 3.5945738554000854,
+        "pe": 4.366410255432129,
+        "reference": 0.9647381007671356
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 19,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.588979125022888,
+        "pe": -5.66194224357605,
+        "reference": 0.023097329773008823
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 8,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.568219840526581,
+        "pe": 0.029487110674381256,
+        "reference": 0.021472426131367683
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 25,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.3588868975639343,
+        "pe": 0.9286996275186539,
+        "reference": 0.5036319494247437
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 11,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -3.396498918533325,
+        "pe": -2.4074061512947083,
+        "reference": 0.16816577687859535
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 26,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.2142527103424072,
+        "pe": -5.18787944316864,
+        "reference": 0.029105693101882935
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 27,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.073134422302246,
+        "pe": -4.567200541496277,
+        "reference": 0.023860390298068523
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 28,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -3.0535624027252197,
+        "pe": -5.100656747817993,
+        "reference": 0.43718233704566956
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 13,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.9092352390289307,
+        "pe": 2.809647262096405,
+        "reference": 0.008257761597633362
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 29,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.9509525001049042,
+        "pe": -5.58181893825531,
+        "reference": 0.008556126151233912
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 30,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.2701289057731628,
+        "pe": -1.7220008373260498,
+        "reference": 0.12343014776706696
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 5,
+      "pair": 16,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.5864996910095215,
+        "pe": 6.0091142654418945,
+        "reference": 0.9841431975364685
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 31,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 0.8757228255271912,
+        "pe": 5.443748116493225,
+        "reference": 0.019443364813923836
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 14,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 0.017646491527557373,
+        "pe": -2.89920711517334,
+        "reference": 0.7478958964347839
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 7,
+      "pair": 11,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.557308793067932,
+        "pe": -5.1293113231658936,
+        "reference": 0.030422577634453773
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 32,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -0.29752305150032043,
+        "pe": -2.2807923555374146,
+        "reference": 0.13162153586745262
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 15,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 4.503201365470886,
+        "pe": 4.000849008560181,
+        "reference": 0.013667869381606579
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 4,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.8867453038692474,
+        "pe": -0.989491943269968,
+        "reference": 0.9528485238552094
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 26,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -0.0904771089553833,
+        "pe": -1.4037749022245407,
+        "reference": 0.5647554397583008
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 33,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": 2.9821131229400635,
+        "pe": -3.8508976697921753,
+        "reference": 0.3252236843109131
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 27,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.4698039889335632,
+        "pe": -2.1973081678152084,
+        "reference": 0.5583077669143677
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 13,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.1664672493934631,
+        "pe": -4.751997232437134,
+        "reference": 0.01430378295481205
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 2,
+      "pair": 17,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.1185969710350037,
+        "pe": 4.023729205131531,
+        "reference": 0.04833822138607502
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 32,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -0.9964784979820251,
+        "pe": -3.621175706386566,
+        "reference": 0.8940351903438568
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 21,
+      "pair": 15,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 3.959608793258667,
+        "pe": 7.13107168674469,
+        "reference": 0.9885902106761932
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 6,
+      "pair": 4,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.18331116437912,
+        "pe": -4.88178563117981,
+        "reference": 0.011694854125380516
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 6,
+      "pair": 14,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.3432356119155884,
+        "pe": 1.639173373579979,
+        "reference": 0.021556643769145012
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 29,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.9980585277080536,
+        "pe": 2.037120997905731,
+        "reference": 0.016074311919510365
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 2,
+      "pair": 18,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.2362290322780609,
+        "pe": 3.737412989139557,
+        "reference": 0.1426868475973606
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 1,
+      "pair": 19,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.2985485941171646,
+        "pe": -2.0717431902885437,
+        "reference": 0.38652144372463226
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 3,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 1.836480587720871,
+        "pe": 5.413382053375244,
+        "reference": 0.386334091424942
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 30,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.399795889854431,
+        "pe": -5.34375262260437,
+        "reference": 0.014539169147610664
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 32,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.20434033870697,
+        "pe": -4.997687458992004,
+        "reference": 0.06963175907731056
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 6,
+      "pair": 20,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -0.6244860291481018,
+        "pe": 1.0094592198729515,
+        "reference": 0.568926215171814
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 2,
+      "pair": 17,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.4955585300922394,
+        "pe": 5.414198160171509,
+        "reference": 0.017979995347559452
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 6,
+      "pair": 20,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.262746214866638,
+        "pe": -0.9958853200078011,
+        "reference": 0.26056569814682007
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 24,
+      "pair": 21,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.636846125125885,
+        "pe": 6.427312612533569,
+        "reference": 0.27992041409015656
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 31,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.2848314046859741,
+        "pe": -3.2908578515052795,
+        "reference": 0.010555834043771029
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 7,
+      "pair": 5,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.9776935279369354,
+        "pe": -0.9345148056745529,
+        "reference": 0.023474710062146187
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 12,
+      "pair": 22,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.2091246843338013,
+        "pe": -1.793124943971634,
+        "reference": 0.025932314805686474
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 34,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.234368681907654,
+        "pe": 4.795221328735352,
+        "reference": 0.07434718310832977
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 11,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.266819655895233,
+        "pe": 2.8220285177230835,
+        "reference": 0.985908567905426
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 27,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.012787401676178,
+        "pe": -4.556898832321167,
+        "reference": 0.15228825062513351
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 35,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -1.1128109693527222,
+        "pe": 0.11348772048950195,
+        "reference": 0.020341284573078156
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 24,
+      "pair": 23,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.929217219352722,
+        "pe": -4.7394572496414185,
+        "reference": 0.01260596327483654
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 5,
+      "pair": 16,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.668050229549408,
+        "pe": 6.284273982048035,
+        "reference": 0.8556285500526428
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 36,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": 1.7865104973316193,
+        "pe": -0.11299397796392441,
+        "reference": 0.5585957467556
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 7,
+      "pair": 13,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -3.2730880975723267,
+        "pe": -5.367275714874268,
+        "reference": 0.015961632132530212
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 37,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -2.0057821571826935,
+        "pe": -3.851574957370758,
+        "reference": 0.02576478384435177
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 29,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.403724193572998,
+        "pe": 6.5961527824401855,
+        "reference": 0.015584837179630995
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 3,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 2.8855742812156677,
+        "pe": 6.162390470504761,
+        "reference": 0.012589551508426666
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 21,
+      "pair": 9,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 3.6858702898025513,
+        "pe": 5.667013883590698,
+        "reference": 0.8563288450241089
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 4,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -0.19161082804203033,
+        "pe": 2.544021248817444,
+        "reference": 0.32992538809776306
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 1,
+      "pair": 19,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.6808464527130127,
+        "pe": 6.819465637207031,
+        "reference": 0.5170284509658813
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 25,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.4873859882354736,
+        "pe": 3.9848153591156006,
+        "reference": 0.9923605918884277
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 17,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.8141851425170898,
+        "pe": -4.618106722831726,
+        "reference": 0.1848952379077673
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 5,
+      "pair": 8,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.8950274288654327,
+        "pe": 0.4359225630760193,
+        "reference": 0.03511812165379524
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 26,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 0.09855660796165466,
+        "pe": -3.0601404905319214,
+        "reference": 0.42222923040390015
+      }
+    },
+    {
+      "cohort": "development",
+      "family": "original_videos",
+      "group": 38,
+      "pair": null,
+      "partition": "development",
+      "scores": {
+        "clip": -2.9109373092651367,
+        "pe": -5.378947377204895,
+        "reference": 0.01628779899328947
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 2,
+      "pair": 18,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.195848524570465,
+        "pe": 5.639076471328735,
+        "reference": 0.010088454000651836
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 12,
+      "pair": 10,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.701960802078247,
+        "pe": 3.0220812261104584,
+        "reference": 0.4617878794670105
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "inswapper",
+      "group": 10,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.616566777229309,
+        "pe": 6.507447242736816,
+        "reference": 0.04710087925195694
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 21,
+      "pair": 24,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 2.641403079032898,
+        "pe": 0.4458966553211212,
+        "reference": 0.16397377103567123
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "inswapper",
+      "group": 24,
+      "pair": 21,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.9456892311573029,
+        "pe": 0.9919730499386787,
+        "reference": 0.8947972357273102
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 20,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.341581702232361,
+        "pe": -4.078206121921539,
+        "reference": 0.029615513049066067
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 24,
+      "pair": 12,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 1.3383425325155258,
+        "pe": -0.7686985582113266,
+        "reference": 0.730433315038681
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 34,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.2136759757995605,
+        "pe": 6.086138725280762,
+        "reference": 0.02535451017320156
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 31,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.4917253851890564,
+        "pe": -4.436024188995361,
+        "reference": 0.012984523084014654
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 8,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 0.9649780094623566,
+        "pe": -0.47210127487778664,
+        "reference": 0.018754330463707447
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 25,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -2.6009135246276855,
+        "pe": -5.692167639732361,
+        "reference": 0.030845454894006252
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 12,
+      "pair": 7,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -1.5171079635620117,
+        "pe": -2.572933077812195,
+        "reference": 0.035610709339380264
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "uniface",
+      "group": 30,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": 3.1717047691345215,
+        "pe": 2.742331385612488,
+        "reference": 0.4267204850912094
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "original_videos",
+      "group": 24,
+      "pair": 23,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.0983182191848755,
+        "pe": -4.681254029273987,
+        "reference": 0.039057303220033646
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 34,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.7430325746536255,
+        "pe": -4.770290493965149,
+        "reference": 0.01724621932953596
+      }
+    },
+    {
+      "cohort": "matched_delivery",
+      "family": "uniface",
+      "group": 14,
+      "pair": null,
+      "partition": "cohort_transfer",
+      "scores": {
+        "clip": -1.7107602953910828,
+        "pe": -4.057060658931732,
+        "reference": 0.1937149502336979
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 12,
+      "pair": 22,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": -2.4890549182891846,
+        "pe": -5.092854380607605,
+        "reference": 0.008592992555350065
+      }
+    },
+    {
+      "cohort": "native_hd",
+      "family": "original_videos",
+      "group": 21,
+      "pair": 24,
+      "partition": "delivery_transfer",
+      "scores": {
+        "clip": 0.8349714875221252,
+        "pe": -0.7751998230814934,
+        "reference": 0.20012659579515457
+      }
+    }
+  ],
+  "schema": "chipmunk.face-pe-transfer-medians/1"
+}

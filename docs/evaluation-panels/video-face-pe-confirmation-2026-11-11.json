@@ -1,0 +1,187 @@
+{
+  "both_arms_all_six_scores": 72,
+  "calibration_sha256": "8e893864f53857cd4fe49af937de693a2edf65eb8f4f8f676f92f89442cfa2a4",
+  "clips": 72,
+  "family_outcomes": {
+    "inswapper": {
+      "pe_frame_support": {
+        "6": 24
+      },
+      "pe_median": {
+        "flagged": 24
+      },
+      "reference_frame_support": {
+        "6": 24
+      },
+      "reference_median": {
+        "below": 9,
+        "flagged": 15
+      },
+      "reference_plus_pe": {
+        "below": 1,
+        "flagged": 23
+      }
+    },
+    "original_videos": {
+      "pe_frame_support": {
+        "6": 24
+      },
+      "pe_median": {
+        "below": 23,
+        "flagged": 1
+      },
+      "reference_frame_support": {
+        "6": 24
+      },
+      "reference_median": {
+        "below": 24
+      },
+      "reference_plus_pe": {
+        "below": 24
+      }
+    },
+    "uniface": {
+      "pe_frame_support": {
+        "6": 24
+      },
+      "pe_median": {
+        "below": 2,
+        "flagged": 22
+      },
+      "reference_frame_support": {
+        "6": 24
+      },
+      "reference_median": {
+        "below": 13,
+        "flagged": 11
+      },
+      "reference_plus_pe": {
+        "below": 2,
+        "flagged": 22
+      }
+    }
+  },
+  "independent_audit_sha256": "3304b51b22fd15f5dab05edb893fea8c0feac69a5ccdf2d1e4111c6efe0274c5",
+  "independent_coverage": {
+    "both_arms_all_six_scores": 72,
+    "both_assessed_with_partial_frame_support": 0,
+    "frames_without_scores": {
+      "pe": 0,
+      "reference": 0
+    },
+    "outcomes_by_resolution": {
+      "1280x720": {
+        "inswapper": {
+          "pe_median/flagged": 7,
+          "reference_median/below": 2,
+          "reference_median/flagged": 5,
+          "reference_plus_pe/flagged": 7
+        },
+        "original_videos": {
+          "pe_median/below": 7,
+          "reference_median/below": 7,
+          "reference_plus_pe/below": 7
+        },
+        "uniface": {
+          "pe_median/below": 1,
+          "pe_median/flagged": 6,
+          "reference_median/below": 4,
+          "reference_median/flagged": 3,
+          "reference_plus_pe/below": 1,
+          "reference_plus_pe/flagged": 6
+        }
+      },
+      "1920x1080": {
+        "inswapper": {
+          "pe_median/flagged": 17,
+          "reference_median/below": 7,
+          "reference_median/flagged": 10,
+          "reference_plus_pe/below": 1,
+          "reference_plus_pe/flagged": 16
+        },
+        "original_videos": {
+          "pe_median/below": 16,
+          "pe_median/flagged": 1,
+          "reference_median/below": 17,
+          "reference_plus_pe/below": 17
+        },
+        "uniface": {
+          "pe_median/below": 1,
+          "pe_median/flagged": 16,
+          "reference_median/below": 9,
+          "reference_median/flagged": 8,
+          "reference_plus_pe/below": 1,
+          "reference_plus_pe/flagged": 16
+        }
+      }
+    }
+  },
+  "native_frames_per_arm": 432,
+  "operating_points": {
+    "pe_median": 0.11348772048950195,
+    "reference_median": 0.43718233704566956,
+    "reference_plus_pe": 1.2940809706865464
+  },
+  "receipt_sha256": {
+    "pe": "79157b69077fa0ce2251ee2eb8ba1a2fc1a307f6cb55d2e892c8c2ff4945939f",
+    "reference": "3674ed74c9fcf63f183584242c867385d460c175a6c5a4e184adfca68765e301"
+  },
+  "reference_to_paired": {
+    "inswapper": {
+      "below to below": 1,
+      "below to flagged": 8,
+      "flagged to flagged": 15
+    },
+    "original_videos": {
+      "below to below": 24
+    },
+    "uniface": {
+      "below to below": 2,
+      "below to flagged": 11,
+      "flagged to flagged": 11
+    }
+  },
+  "resources": {
+    "pe": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 9010855936,
+        "free_disk": 2973884416
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 5012619264,
+      "peak_tree_rss": 1657765888,
+      "seconds": 157.656,
+      "stop": null
+    },
+    "reference": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 9020882944,
+        "free_disk": 2982060032
+      },
+      "limits": {
+        "initial_available_ram": 4831838208,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 3758096384,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 6001262592,
+      "peak_tree_rss": 1347403776,
+      "seconds": 147.746,
+      "stop": null
+    }
+  },
+  "schema": "chipmunk.face-pe-prospective-result/1",
+  "source_freeze_sha256": "c365595c68a593faa513fd48f3d87e1aa70aa0b8a7592737af428a567b4b3c20",
+  "sources": 24
+}

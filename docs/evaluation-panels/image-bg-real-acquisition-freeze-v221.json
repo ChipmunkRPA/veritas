@@ -1,0 +1,30 @@
+{
+  "backup": 12,
+  "code_commitments": {
+    "backend/scripts/image_bg_real_acquisition_v221.py": "0906a1b9c8d2cd85e09f6452fac4b009a0cd54802db5992543bffa314341e3b1",
+    "backend/scripts/image_bg_real_roster_v218.py": "32f44463cb82b579fe31e83677dc736b62be749e9d8c0de662a2ea21e45f8c81",
+    "backend/scripts/image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "backend/tests/test_image_bg_real_acquisition_v221.py": "5711094b0834bf0914d89116d772092cc073626d702917c95085221999abda17",
+    "docs/image-bg-real-acquisition-v221-method.md": "8b1c9a92c4404c27d24f356a891f1ea9240abe2649d76d0a884208ace48eaee1"
+  },
+  "max_bytes_per_file": 4000000,
+  "max_redirects_per_file": 3,
+  "primary": 24,
+  "private_roster_sha256": "a5f5e7267806f0ecbe1b65ba37a2b9a45cc0dc98a98e5aba01b389b94fc665b7",
+  "published_v218_sha256": "4a3665f23821adcec8f48eece8f4a8b36f34cd8d066c3b5183cc02f0222a350d",
+  "requested_asset_roles": [
+    "original",
+    "edited",
+    "semantic_mask"
+  ],
+  "runtime_versions": {
+    "Pillow": "12.3.0",
+    "numpy": "2.2.6",
+    "requests": "2.34.2"
+  },
+  "schema": "chipmunk.image-bg-real-acquisition-plan/221",
+  "scoring_permitted": false,
+  "time_budget_s": 900,
+  "v26_edit_commitment_sha256": "c4ae1c532f4db1f26eb5165754c3591a87fc2c82a6ecb421c9cee9c523028489",
+  "private_plan_sha256": "61668d30878fc8ebf72aa2a9030e0ba8f2349baf802de0f1c1b4a0cd23dee2f2"
+}

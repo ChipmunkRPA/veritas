@@ -125,25 +125,32 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 <p class="caption">The PDF is static. Selected and context WAV clips are identified by the same hashes as the JSON evidence assets; the plots provide inspection context and cannot independently establish synthesis.</p>
 {% elif packet.kind == 'document' %}
 {% set scope = packet.get('inspection_scope') %}
+{% set matched_review = packet.get('matched_context_review') %}
 {% if scope %}
-<p class="caption">{% if scope.basis == 'ratio_reduction' %}Measured ratio range{% else %}Scored context ranges{% endif %}: {% for span in scope.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %} in extracted Unicode code points. {% if scope.basis != 'ratio_reduction' %}Navigation sentence [{{ packet.focus_range.start }}, {{ packet.focus_range.end }}).{% endif %}</p>
+<p class="caption">{% if scope.basis == 'ratio_reduction' %}Measured ratio range{% else %}Scored context ranges{% endif %}: {% for span in scope.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %} in extracted Unicode code points. {% if scope.basis != 'ratio_reduction' %}{{ 'Selected review sentence' if matched_review else 'Navigation sentence' }} [{{ packet.focus_range.start }}, {{ packet.focus_range.end }}).{% endif %}</p>
 {% else %}
 <p class="caption">Highlighted range [{{ packet.focus_range.start }}, {{ packet.focus_range.end }}) in extracted Unicode codepoints. A context response is not a word-level authorship probability.</p>
 {% endif %}
 {% if not evidence.withheld %}
 {% if scope %}
-<div class="multimedia-source-context"><h4>Measured text in its source context</h4><blockquote>{% for segment in packet.context.segments %}{% if segment.highlight %}<mark>{{ segment.text }}</mark>{% else %}{{ segment.text }}{% endif %}{% endfor %}</blockquote><p class="caption">Source context [{{ packet.context.start }}, {{ packet.context.end }}). The highlight locates the measurement. It does not identify generated words.</p></div>
+<div class="multimedia-source-context"><h4>{{ 'Selected sentence and scored context' if matched_review else 'Measured text in its source context' }}</h4><blockquote>{% for segment in packet.context.segments %}{% if matched_review and segment.highlight and not segment.get('review_focus') %}<span class="document-scored-neighbor">{{ segment.text }}</span>{% elif segment.highlight %}<mark>{{ segment.text }}</mark>{% else %}{{ segment.text }}{% endif %}{% endfor %}</blockquote><p class="caption">Source context [{{ packet.context.start }}, {{ packet.context.end }}). {% if matched_review %}The shaded sentence is the review location. Underlines mark its scored neighbors. The check read all three sentences together and carries zero weight in the overall assessment.{% else %}The highlight locates the measurement. It does not identify generated words.{% endif %}</p></div>
 {% else %}
 <div class="multimedia-source-context"><h4>Original text and surrounding context</h4><blockquote>{{ packet.context.before }}<mark>{{ packet.context.focus }}</mark>{{ packet.context.after }}</blockquote><p class="caption">Source context [{{ packet.context.start }}, {{ packet.context.end }}). Highlighting identifies the selected passage; it does not prove those words were generated.</p></div>
 {% endif %}
+{% if matched_review %}<p class="caption">Source is the original plain-text file. Positions above use extracted Unicode code points.</p>{% else %}
 {% for anchor in packet.source_locations %}
 <p class="caption">Source: {% if anchor.kind == 'pdf' %}PDF page {{ anchor.page }}{% if anchor.get('extraction') == 'ocr' %}, OCR text{% endif %}; coordinates refer to the unrotated page.{% elif anchor.kind == 'docx' %}DOCX paragraph {{ anchor.paragraph_index + 1 }}, body path {{ anchor.body_path | join(' / ') }}.{% elif anchor.kind in ['email', 'markup'] %}MIME part {{ anchor.get('mime_part', 'body') }}, role {{ anchor.get('quote_role', 'unknown') }}.{% else %}{{ anchor.kind }} text{% if anchor.get('source_start') is not none %}, source offset {{ anchor.source_start }}{% endif %}.{% endif %}</p>
 {% endfor %}
+{% endif %}
 {{ plates(packet.images) }}
 {% endif %}
 {% for window in packet.windows %}
 <div class="multimedia-scored-context"><h4>Actual scored input {{ loop.index }}</h4>
+{% if 'matched_context_selected' in window %}
+<p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }}. Uncalibrated response {{ '%.4f' | format(window.score) }}. {% if window.matched_context_selected %}This AI-like context response selected its middle sentence for review.{% elif window.get('matched_context_eligible') %}This context response did not select its middle sentence for review.{% else %}This input was outside short-passage review coverage.{% endif %} The response describes writing patterns across the full input.</p>
+{% else %}
 <p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }} - {% if window.score_kind == 'perplexity_ratio' %}raw writing-pattern ratio{% else %}uncalibrated response{% endif %} {{ '%.4f' | format(window.score) }}. Inspection boundary: {% if window.ai_when == 'lt' %}below{% else %}at or above{% endif %} {{ window.threshold }}. {% if window.supports_ai %}This response supports inspection at that boundary.{% else %}This response does not support the AI flag at that boundary; disagreement is retained.{% endif %} This is not a calibrated authorship probability.</p>
+{% endif %}
 <p class="caption">{% if window.score_kind == 'perplexity_ratio' %}Source envelope{% else %}Input ranges{% endif %} {% for span in window.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}{% if window.score_kind == 'perplexity_ratio' %}. The excerpt covers the actual recorded token contexts; exact token sequences and selected-token ranges are retained in JSON.{% else %}; these ranges were joined with a space.{% endif %}</p>
 {% if not evidence.withheld %}<blockquote>{{ window.text }}</blockquote>{% endif %}
 <p class="caption evidence-hash">{% if window.score_kind == 'perplexity_ratio' %}Source envelope{% else %}Actual input{% endif %} SHA-256 <span class="mono">{{ window.input_sha256 }}</span>{% if window.token_coverage.get('tokens') is not none %}; {{ window.token_coverage.tokens }} content token(s){% if window.token_coverage.get('token_windows') is not none %} across {{ window.token_coverage.token_windows }} input window(s){% endif %}{% if window.token_coverage.get('covered_tokens') is not none %}; {{ window.token_coverage.covered_tokens }} token(s) included in the response{% endif %}.{% endif %}</p>

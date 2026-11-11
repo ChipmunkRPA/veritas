@@ -31,6 +31,12 @@ Across the two small technical-publisher panels, both fitted arms found **7 of 1
 
 The local classifier executed 18 forwards for 143 unique complete inputs. A separate local replay checked all 23 decoded TXT fixtures, all 14 original and donor source locations, nine exact rewrite foci, 276 context geometries, 120 outcome counts and four human-group counts. The public aggregate includes commitments and measured outcomes. Raw source text and generated replacements stay in the local trial directory.
 
+## Local app verification
+
+Enable `VERITAS_TEXT_MATCHED_CONTEXT_REVIEW=true` in a development instance running the candidate text check. The rule covers mapped English plain text with one paragraph, four sentences and 68–134 words. A selected sentence must have at least 12 words and an entirely measured three-sentence context. The rule reuses the existing response and carries zero weight in the whole-document assessment. Other passage checks retain their own responses. This mode is disabled by default and is limited to development instances.
+
+An isolated Full-profile smoke used two already evaluated versions of one USGS passage, with the feature off and on. The check recovered the known edited sentence at extracted code points `[133, 305)` and selected neither eligible sentence in the human original. The analysis decisions and underlying model scores matched with the feature off and on. The flow queued zero analyses before a valid simulated Stripe payment. API evidence, JSON export and the signed package matched, and the package verifier reproduced the source positions and exact context commitments from the original file. This smoke checks the serving path on known inputs. The two-panel comparison above measures detection performance.
+
 ## Reproduce the holdout comparison
 
 The [transfer runner](../backend/scripts/writing_two_sided_transfer.py) accepts the locally prepared `source.json`, `private-holdout.jsonl`, `generation-freeze.json` and `admission.json`. The holdout uses the [prior runner's row format](writing-two-sided-context-2026-11-11.md). Supply source-author lists in the new roster. The runner checks the exact published fit and method before freezing the comparison and uses the existing pinned local classifier.

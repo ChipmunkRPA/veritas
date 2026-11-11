@@ -157,9 +157,11 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     if analysis['kind'] == 'document':
+        from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_repeat import validate as validate_repeated_passages
 
         validate_repeated_passages(evidence)
+        validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 

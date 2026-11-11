@@ -11,14 +11,20 @@ function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; inde
   const ratio = window.score_kind === 'perplexity_ratio'
   const threshold = window.threshold ?? 0.5
   const supports = windowSupportsInspection(window)
+  const matched = typeof window.matched_context_selected === 'boolean'
+  const eligible = typeof window.score_exact_hex === 'string'
   return <div className="rounded-md border border-border p-4">
     <p className="m-0 text-small"><span className="font-medium">{window.signal_ref.display_id ?? `Check ${index + 1}`}</span>
       {' '}· <span className="font-mono">{window.score.toFixed(3)}</span> {ratio ? 'raw writing-pattern ratio' : 'uncalibrated response'}
-      {' '}· {supports ? 'AI-like response for this input' : 'Opposing response for this input'}</p>
-    <p className="mt-2 mb-0 text-caption text-text-muted">{ratio ? `Ratios below ${threshold} support inspection; this is not a percentage or an authorship probability.`
+      {' '}· {matched ? (supports ? 'AI-like context selected for review' : eligible ? 'Context did not select this sentence' : 'Outside short-passage review coverage')
+        : supports ? 'AI-like response for this input' : 'Opposing response for this input'}</p>
+    <p className="mt-2 mb-0 text-caption text-text-muted">{matched ? (eligible
+      ? 'The check read three sentences together and uses the middle sentence as a review location. The response is an uncalibrated writing-pattern measurement.'
+      : 'This response was recorded for the original writing check. Short-passage review covers only eligible middle sentences.')
+      : ratio ? `Ratios below ${threshold} support inspection; this is not a percentage or an authorship probability.`
       : `Responses at or above ${threshold} support inspection; the response is not a calibrated authorship probability.`}
       {' '}Displayed values are rounded; the direction uses the recorded full-precision response.
-      {!supports && ' Disagreement is retained.'}</p>
+      {!supports && !matched && ' Disagreement is retained.'}</p>
     {ratio && <p className="mt-3 mb-0 text-caption text-text-muted">Source text covering the actual token contexts is shown below. The recorded token sequences and scored token ranges are preserved in JSON; the excerpt alone does not reproduce the token input.</p>}
     {ratio ? <details className="mt-3 text-small"><summary className="cursor-pointer text-text-muted">Full source text for the recorded token contexts ({Array.from(window.text).length.toLocaleString()} characters)</summary>
       <blockquote className="m-0 mt-3 pl-3 border-l border-border whitespace-pre-wrap break-words">{window.text}</blockquote>
@@ -97,6 +103,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const ocrPages = set.coverage?.ocr?.pages ?? []
+  const matched = set.coverage?.matched_context_review
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     <DocumentRepeatedPassages result={set.repeated_passages} />
@@ -104,6 +111,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
         {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>
+      {matched && <p className="mt-2 mb-0">Short-passage review selected {matched.selected_sentences} of {matched.eligible_sentences} eligible sentences. This evidence has zero weight in the overall assessment.</p>}
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {partialPages.length > 0 && <>
         <p className="mt-2 mb-0">{partialPages.length === 1 ? 'Page' : 'Pages'} {partialPages.map((page) => page.page).join(', ')} {partialPages.length === 1 ? 'has' : 'have'} mapped text and unchecked image areas.</p>
@@ -143,7 +151,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         <p className="mt-2 mb-0 text-body">{packet.observation}</p>
         <RecordedPassage packet={packet} />
         <p className="mt-2 mb-0 text-caption font-mono text-text-muted">
-          {packet.inspection_scope?.basis === 'scored_context' ? 'Navigation sentence' : 'Extracted text characters'} [{packet.focus.start}, {packet.focus.end}) · Unicode code points
+          {packet.matched_context_review ? 'Selected review sentence' : packet.inspection_scope?.basis === 'scored_context' ? 'Navigation sentence' : 'Extracted text characters'} [{packet.focus.start}, {packet.focus.end}) · Unicode code points
         </p>
         {includesQuotedText && <p className="mt-2 mb-0 text-small text-text-muted">{roles.has('body')
           ? 'Highlighted text includes message text and an email quote or signature.'

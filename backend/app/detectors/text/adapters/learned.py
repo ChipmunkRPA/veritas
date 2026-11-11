@@ -99,6 +99,15 @@ class _SequenceClassifier(Detector):
         evidence = {"version": "scored-context/1", "offset_unit": "unicode_codepoint",
                     "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
                     "windows": input_windows}
+        model_revisions = revisions(ctx, self.MODEL_ID)
+        if (settings.environment == "dev" and settings.text_matched_context_review and settings.text_detector_mode == "candidate"
+                and settings.text_window_sentences == 3):
+            from app.evidence import document_matched_context
+
+            if document_matched_context.matches(self.spec.id, self.spec.version, model_revisions):
+                record = document_matched_context.capture(doc, sents, input_windows)
+                if record is not None:
+                    evidence["matched_context_review"] = record
         if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_isolated_paragraph_review and settings.text_window_sentences == 3:
             from app.detectors.text.paragraph_review import record
 
@@ -122,7 +131,7 @@ class _SequenceClassifier(Detector):
             reference=self.REFERENCE,
             reasoning=f"The classifier places the document on the {side} side of its decision boundary.",
             metrics={"chunks": float(len(chunks)), "sentences": float(len(sents)), "tokens": float(token_count),
-                     "token_windows": float(token_windows)}, model_revisions=revisions(ctx, self.MODEL_ID),
+                     "token_windows": float(token_windows)}, model_revisions=model_revisions,
             details={"text_evidence": evidence})
 
 

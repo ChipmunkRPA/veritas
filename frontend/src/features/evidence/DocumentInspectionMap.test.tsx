@@ -40,6 +40,24 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText(/navigation sentence gives you a place to start reading/)).toBeTruthy()
   })
 
+  it('shades only the selected review sentence and preserves the measured neighbors', () => {
+    const ref = packet.supporting_windows[0].signal_ref
+    const review = { schema: 'document-matched-context-review/1' as const, signal_ref: ref, authorship_confidence_contribution: 0 as const }
+    const spans = [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }]
+    const item: DocumentEvidencePacket = { ...packet, matched_context_review: review, inspection_scope: { basis: 'scored_context', spans },
+      supporting_windows: [{ ...packet.supporting_windows[0], spans, direction: 'opposes_ai', score: 0.3155,
+        score_exact_hex: '0x1.43126e978d4fep-2', matched_context_selected: true }] }
+    const set = evidence([item])
+    show({ ...set, version: 'document-evidence-6', coverage: { ...set.coverage,
+      matched_context_review: { ...review, eligible_sentences: 2, selected_sentences: 1 } } })
+    const marks = screen.getAllByTestId('passage-highlight-T01')
+    expect(marks.map((mark) => mark.textContent)).toEqual(['Same sentence.', 'Same sentence.', 'end.'])
+    expect(marks.map((mark) => mark.getAttribute('data-review-focus'))).toEqual([null, 'true', null])
+    expect(screen.getByText(/Short-passage review selected 1 of 2 eligible sentences/)).toBeTruthy()
+    expect(screen.getByText(/AI-like context selected for review/)).toBeTruthy()
+    expect(screen.queryByText(/Responses at or above/)).toBeNull()
+  })
+
   it('keeps the separate measured ratio reduction narrow', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'ratio_reduction',
       spans: [{ start: packet.focus.start, end: packet.focus.end }] } }

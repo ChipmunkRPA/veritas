@@ -101,10 +101,11 @@ function documentLocation(packet: DocumentEvidencePacket, chars?: number): Locat
   const measured = packet.inspection_scope
   if (measured && (!measured.spans.length || measured.spans.some(({ start, end }) =>
     !index(start) || !index(end) || end <= start || (index(chars) && end > chars)))) return null
-  const ranges = (measured?.spans ?? [focus]).map(({ start, end }) => `[${start}, ${end})`).join(', ')
-  const label = measured?.basis === 'scored_context' ? 'Scored context' : measured?.basis === 'ratio_reduction' ? 'Measured ratio range' : 'Characters'
+  const matched = !!packet.matched_context_review
+  const ranges = (matched ? [focus] : measured?.spans ?? [focus]).map(({ start, end }) => `[${start}, ${end})`).join(', ')
+  const label = matched ? 'Selected sentence' : measured?.basis === 'scored_context' ? 'Scored context' : measured?.basis === 'ratio_reduction' ? 'Measured ratio range' : 'Characters'
   return { packet, label: `${packet.id} · ${position ? `${position} · ` : ''}${label} ${ranges}`, scope: 'text_passage',
-    note: measured
+    note: matched ? 'Positions use Unicode code points. Open the evidence to see the selected sentence and the three sentences read together.' : measured
       ? 'Positions use Unicode code points in the extracted text. The marked range records what a check measured. It does not establish authorship.'
       : 'Positions use Unicode code points in the extracted text. The passage and recorded responses provide context. A response is not proof of authorship.' }
 }

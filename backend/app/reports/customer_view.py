@@ -86,7 +86,13 @@ def _packet_inference(packet: dict) -> str:
     if kind in {"av", "acoustic", "sound"}:
         return "No AI/original conclusion from this measurement. It describes timing or recording conditions, which can also occur in ordinary material."
     if kind == "document":
-        directions = {w.get("supports_ai") for w in packet.get("windows") or []}
+        directions = {w.get("matched_context_selected", w.get("supports_ai")) for w in packet.get("windows") or []
+                      if "matched_context_selected" not in w or w.get("matched_context_eligible")}
+        if packet.get("matched_context_review"):
+            inference = "The short-passage check found an AI-like writing pattern across the three-sentence context."
+            if False in directions:
+                inference += " Another recorded response did not corroborate this clue."
+            return inference + " Review the marked sentence in context. This clue carries zero weight in the overall assessment."
         if directions == {True, False}:
             return "Mixed evidence for this passage: the recorded checks disagree. No reliable AI/original conclusion can be assigned to these words."
         if directions == {True}:

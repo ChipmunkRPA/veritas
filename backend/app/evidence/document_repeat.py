@@ -187,7 +187,7 @@ def _validate_anchor(anchor: dict, size: int) -> None:
 
 def validate(document: dict) -> None:
     """Offline check of shape, bounds and commitments without a parser or source text."""
-    if document.get("version") != document_scope.VERSION:
+    if document.get("version") not in document_scope.REPEAT_VERSIONS:
         _require(
             "repeated_passages" not in document,
             "Historical documents cannot contain repeated-passage evidence",
@@ -278,7 +278,7 @@ def validate(document: dict) -> None:
 def verify_source(document: dict, text: str, mapping: list[dict]) -> None:
     """Verify actual excerpts and anchors against the immutable extraction."""
     validate(document)
-    if document.get("version") == document_scope.VERSION:
+    if document.get("version") in document_scope.REPEAT_VERSIONS:
         _require(
             document["repeated_passages"] == build(document["source"], text, mapping),
             "Repeated passages differ from the frozen text or source mapping",

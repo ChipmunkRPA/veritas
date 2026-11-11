@@ -201,6 +201,10 @@ export interface DocumentEvidencePacket extends PacketBase {
   supporting_windows: DocumentEvidenceWindow[]
   inspection_scope?: { basis: 'scored_context' | 'ratio_reduction'; spans: Pick<TextSpan, 'start' | 'end'>[] }
   context_comparison?: DocumentContextComparison
+  matched_context_review?: DocumentMatchedContextReview
+}
+interface DocumentMatchedContextReview {
+  schema: 'document-matched-context-review/1'; signal_ref: EvidenceRef; authorship_confidence_contribution: 0
 }
 export interface DocumentComparisonInput {
   spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number
@@ -220,6 +224,7 @@ export interface DocumentEvidenceWindow {
   signal_ref: EvidenceRef; spans: { start: number; end: number }[]; text: string; input_sha256: string; score: number
   score_kind?: 'classifier_probability' | 'perplexity_ratio'; is_calibrated?: false; threshold?: number; ai_when?: 'lt' | 'gte'
   direction?: 'supports_ai' | 'opposes_ai'; direction_semantics?: string; input_semantics?: string
+  matched_context_selected?: boolean; score_exact_hex?: string
   token_coverage: { tokens?: number; token_windows?: number; [key: string]: unknown }
   scored_spans?: { start: number; end: number }[]; tokens_scored?: number; neighbor_expansion?: boolean
   inference_contexts?: { id: string; source_token_range: [number, number]; scored_token_range: [number, number];
@@ -235,6 +240,7 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    matched_context_review?: DocumentMatchedContextReview & { eligible_sentences: number; selected_sentences: number };
     partially_checked_pages?: { page: number; image_boxes: [number, number, number, number][];
       coordinate_space: 'unrotated-page-points'; reason: string }[];
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];

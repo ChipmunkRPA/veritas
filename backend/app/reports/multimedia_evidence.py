@@ -325,6 +325,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
+    from app.evidence import document_matched_context
     from app.evidence.document_packets import (
         _inspection_anchors,
         _pdf_plates,
@@ -348,8 +349,11 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
     try:
         verify_repeated_passages(document, text, mapping)
+        if document["version"] == document_scope.MATCHED_VERSION:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_matched_context.verify_source(document, text, mapping, result=frozen)
     except (ValueError, KeyError, TypeError) as error:
-        raise ObjectIntegrityError("Repeated passages differ from the recorded source extraction") from error
+        raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
         for key in ("focus", "context"):
             part = packet[key]
@@ -483,6 +487,9 @@ def _document_coverage_details(coverage: dict) -> list[str]:
         + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
         for check in coverage.get("checks", []) if check["status"] != "recorded"
     ]
+    if review := coverage.get("matched_context_review"):
+        notes.append(f"Short-passage review selected {review['selected_sentences']} of {review['eligible_sentences']} "
+                     "eligible sentences. This evidence has zero weight in the overall assessment.")
     for page in coverage.get("partially_checked_pages", []):
         boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["image_boxes"])
         notes.append(f"Page {page['page']}. {page['reason']} Unchecked bounds in unrotated PDF points {boxes}.")
@@ -614,6 +621,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["images"] = [plate(role, asset, f"Page {asset.get('page', '?')} - {asset.get('role', role)}")
                              for role, asset in sorted(packet["artifacts"].items())]
             focus, context = packet["focus"], packet["context"]
+            matched_review = bool(packet.get("matched_context_review"))
+            if matched_review:
+                row["matched_context_review"] = True
             if packet.get("context_comparison") is not None:
                 row["context_comparison"] = copy.deepcopy(packet["context_comparison"])
                 if withheld:
@@ -634,7 +644,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     segments, cursor = [], context["start"]
                     for span in scope["spans"]:
                         segments.append({"text": context["text"][cursor - context["start"]:span["start"] - context["start"]], "highlight": False})
-                        segments.append({"text": context["text"][span["start"] - context["start"]:span["end"] - context["start"]], "highlight": True})
+                        segment = {"text": context["text"][span["start"] - context["start"]:span["end"] - context["start"]], "highlight": True}
+                        if matched_review and span["start"] == focus["start"] and span["end"] == focus["end"]:
+                            segment["review_focus"] = True
+                        segments.append(segment)
                         cursor = span["end"]
                     segments.append({"text": context["text"][cursor - context["start"]:], "highlight": False})
                     row["context"]["segments"] = segments
@@ -653,6 +666,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                             window["score"] < context_window["threshold"] if context_window["ai_when"] == "lt"
                             else window["score"] >= context_window["threshold"])
                 context_window["supports_ai"] = supports
+                if "matched_context_selected" in window:
+                    context_window["matched_context_selected"] = window["matched_context_selected"]
+                    context_window["matched_context_eligible"] = "score_exact_hex" in window
                 context_window["contexts"] = [{key: copy.deepcopy(context[key]) for key in
                     ("id", "source_token_range", "scored_token_range", "token_ids_sha256", "input_sha256", "anchor_token_count")}
                     for context in window.get("inference_contexts", [])]
@@ -686,7 +702,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                          str(anchor["kind"]))
                 if label not in locations:
                     locations.append(label)
-            if scope := row.get("inspection_scope"):
+            if row.get("matched_context_review"):
+                position = f"selected sentence [{packet['focus']['start']}, {packet['focus']['end']})"
+            elif scope := row.get("inspection_scope"):
                 label = "measured ratio range" if scope["basis"] == "ratio_reduction" else "scored context"
                 ranges = ", ".join(f"[{span['start']}, {span['end']})" for span in scope["spans"])
                 position = f"{label} characters {ranges}"

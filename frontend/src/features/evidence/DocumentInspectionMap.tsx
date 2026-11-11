@@ -2,11 +2,16 @@ import { Fragment, useState } from 'react'
 import { Button } from '../../components/ui'
 import type { DocumentEvidencePacket, DocumentEvidenceWindow } from './multimediaPackets'
 
-export function windowSupportsInspection(window: DocumentEvidenceWindow): boolean {
+function windowInspectionDirection(window: DocumentEvidenceWindow): boolean | null {
+  if (typeof window.matched_context_selected === 'boolean') return window.score_exact_hex ? window.matched_context_selected : null
   if (window.direction) return window.direction === 'supports_ai'
   const boundary = window.threshold ?? 0.5
   const lowerSupports = window.ai_when === 'lt' || (!window.ai_when && window.score_kind === 'perplexity_ratio')
   return lowerSupports ? window.score < boundary : window.score >= boundary
+}
+
+export function windowSupportsInspection(window: DocumentEvidenceWindow): boolean {
+  return windowInspectionDirection(window) === true
 }
 
 export function passageLocation(packet: DocumentEvidencePacket): string {
@@ -17,7 +22,8 @@ export function passageLocation(packet: DocumentEvidencePacket): string {
     const email = anchor.mime_part ? `Email part ${anchor.mime_part}` : null
     return [place, email, anchor.quote_role].filter(Boolean).join(' · ')
   }).filter(Boolean)
-  const ranges = (packet.inspection_scope?.spans ?? [packet.focus]).map(({ start, end }) => `${start}–${end}`).join(', ')
+  const spans = packet.matched_context_review ? [packet.focus] : packet.inspection_scope?.spans ?? [packet.focus]
+  const ranges = spans.map(({ start, end }) => `${start}–${end}`).join(', ')
   return [...new Set(locations)].join('; ') || `Characters ${ranges}`
 }
 
@@ -54,7 +60,8 @@ export function RecordedPassage({ packet }: { packet: DocumentEvidencePacket }) 
   const last = expanded ? match.characters.length : Math.min(match.characters.length, match.end + 180)
   const shortened = first > 0 || last < match.characters.length
   const basis = packet.inspection_scope?.basis
-  const label = basis === 'ratio_reduction' ? 'Measured writing-pattern range'
+  const matched = !!packet.matched_context_review
+  const label = matched ? 'Selected sentence and scored context' : basis === 'ratio_reduction' ? 'Measured writing-pattern range'
     : basis === 'scored_context' ? 'Scored text in its source context' : 'Selected passage in its source context'
   return <div className="mt-4" data-testid={`source-passage-${packet.id}`}>
     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -65,15 +72,22 @@ export function RecordedPassage({ packet }: { packet: DocumentEvidencePacket }) 
     </div>
     <blockquote className="m-0 rounded-md border border-border bg-surface-2 p-4 text-body leading-relaxed whitespace-pre-wrap break-words">
       {first > 0 && <span aria-label="Earlier saved context not displayed">… </span>}
-      {match.ranges.map((range, i) => <Fragment key={range.start}>
-        {match.characters.slice(match.ranges[i - 1]?.end ?? first, range.start).join('')}
-        <mark className={basis === 'scored_context' ? 'bg-surface text-text border-b-2 border-accent rounded-xs' : 'bg-hl-ai text-text border-b-2 border-hl-ai-rule rounded-xs'}
-          data-testid={`passage-highlight-${packet.id}`}>{match.characters.slice(range.start, range.end).join('')}</mark>
-      </Fragment>)}
+      {match.ranges.map((range, i) => {
+        const focus = matched && range.start === packet.focus.start - packet.context.start
+          && range.end === packet.focus.end - packet.context.start
+        return <Fragment key={range.start}>
+          {match.characters.slice(match.ranges[i - 1]?.end ?? first, range.start).join('')}
+          <mark className={basis === 'scored_context' && !focus ? 'bg-surface text-text border-b-2 border-accent rounded-xs' : 'bg-hl-ai text-text border-b-2 border-hl-ai-rule rounded-xs'}
+            data-review-focus={focus || undefined}
+            data-testid={`passage-highlight-${packet.id}`}>{match.characters.slice(range.start, range.end).join('')}</mark>
+        </Fragment>
+      })}
       {match.characters.slice(match.end, last).join('')}
       {last < match.characters.length && <span aria-label="Later saved context not displayed"> …</span>}
     </blockquote>
-    <p className="mt-2 mb-0 text-caption text-text-muted">{basis === 'scored_context'
+    <p className="mt-2 mb-0 text-caption text-text-muted">{matched
+      ? 'The shaded sentence is the review location. Underlines mark the three sentences the check read together. This is a passage-level clue with zero weight in the overall assessment.'
+      : basis === 'scored_context'
       ? 'The highlight covers the measured context. The navigation sentence gives you a place to start reading. The response does not identify generated words.'
       : basis === 'ratio_reduction'
         ? 'The highlight covers the tokens used for the writing-pattern ratio. Surrounding text can influence that response.'
@@ -92,12 +106,12 @@ export default function DocumentInspectionMap({ packets, selectedId, onSelect }:
     <ol className="m-0 mt-4 p-0 list-none grid gap-2 min-[960px]:grid-cols-2">
       {packets.map((packet) => {
         const supporting = packet.supporting_windows.filter(windowSupportsInspection).length
-        const opposing = packet.supporting_windows.length - supporting
+        const opposing = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === false).length
         const basis = packet.inspection_scope?.basis
         const reading = supporting && opposing ? 'Responses disagree' : supporting
           ? basis === 'scored_context' ? 'Context response' : basis === 'ratio_reduction' ? 'Measured ratio' : 'Inspection flag'
           : 'Recorded comparison'
-        const match = basis === 'scored_context' ? sourceHighlight(packet) : null
+        const match = basis === 'scored_context' && !packet.matched_context_review ? sourceHighlight(packet) : null
         const characters = match ? match.characters.slice(match.start, match.end) : Array.from(packet.focus.text)
         const snippet = characters.slice(0, 160).join('') + (characters.length > 160 ? '…' : '')
         return <li key={packet.id}>

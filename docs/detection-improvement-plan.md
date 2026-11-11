@@ -97,6 +97,24 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [matched short-passage check](writing-two-sided-usgs-transfer-2026-11-11.md)
+  located 7/15 edited passages across the NIST and USGS panels versus 5/15 with
+  the current passage check. It flagged 5/26 human documents versus 12/26. The
+  local opt-in uses the existing classifier response, selects only an eligible
+  middle sentence, and retains the three measured sentences for inspection.
+- The [selected-window video landmark check](video-selected-landmark-reliability-2026-11-11.md)
+  retained all 36 correct face-swap ranges and cleared zero of three genuine
+  camera false flags. The 60 matched controls stayed unflagged. Three other
+  camera deliveries remained unassessed.
+- The [image lens-displacement pilot](image-chromatic-field-pilot-2026-11-11.md)
+  could measure the lens field in two of four native images and one of four
+  images after either JPEG re-encode. That coverage ended the trial before
+  localization on the held-out edited images.
+- The [measured speaker-count test](audio-measured-speaker-routing-2026-11-11.md)
+  recovered seven missed synthetic voice clips with no additional false flag
+  in the separate-room panel. Six of 14 controlled three-voice mixtures
+  incorrectly qualified for the two-voice route. The supplement remains experimental.
+
 - The [cross-layer voice head](audio-cross-layer-room-transfer-2026-11-11.md)
   improved AUC from 0.917 to 0.958 and from 0.948 to 0.979 on two new competing-speech
   mixtures of retained foregrounds. The frozen operating points recovered zero of

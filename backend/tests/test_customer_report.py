@@ -83,6 +83,25 @@ def test_customer_packet_inferences_keep_mixed_text_and_acoustics_uncertain():
         assert 'No AI/original conclusion' in packets[key]['customer_inference']
 
 
+def test_matched_passage_inference_uses_selection_and_keeps_other_check_disagreement():
+    frozen, out = sample()
+    out['evidence']['packets'] += [
+        {'id': 'T01', 'kind': 'document', 'matched_context_review': True,
+         'windows': [{'supports_ai': False, 'matched_context_selected': True, 'matched_context_eligible': True}, {'supports_ai': False}]},
+        {'id': 'T02', 'kind': 'document',
+         'windows': [{'supports_ai': True, 'matched_context_selected': False}, {'supports_ai': True}]},
+        {'id': 'T03', 'kind': 'document',
+         'windows': [{'supports_ai': False, 'matched_context_selected': False, 'matched_context_eligible': True}, {'supports_ai': True}]},
+    ]
+    shown = customer_view(frozen, out, lambda x: x)
+    packets = {p['id']: p for p in shown['evidence']['packets']}
+    matched = packets['T01']['customer_inference']
+    assert 'AI-like writing pattern across the three-sentence context' in matched
+    assert 'did not corroborate' in matched and 'zero weight' in matched
+    assert 'Leaning towards AI-written text' in packets['T02']['customer_inference']
+    assert 'Mixed evidence' in packets['T03']['customer_inference']
+
+
 def test_customer_partial_views_are_not_rewritten():
     frozen, _ = sample()
     out = {'findings': [{'id': 'F1', 'sentences': ['Preserved projection test.']}]}

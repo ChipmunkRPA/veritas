@@ -388,6 +388,7 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .multimedia-wide img { height: auto; max-height: 48mm; }
 .multimedia-evidence blockquote { white-space: pre-wrap; overflow-wrap: anywhere; margin: 1.5mm 0 2mm; padding: 2mm 3mm; border-left: 2pt solid #bd8a30; background: #f7f6f1; font: 9pt/13pt var(--font-sans); }
 .multimedia-evidence mark { background: #f4dda1; color: inherit; }
+.document-scored-neighbor { text-decoration: underline; text-decoration-color: #8a7347; }
 .multimedia-evidence .evidence-hash { overflow-wrap: anywhere; word-break: break-all; font-size: 7pt; line-height: 10pt; }
 .multimedia-asset-list { margin: 2mm 0 3mm; }
 .multimedia-asset-list summary { font-size: 8pt; font-weight: 500; }

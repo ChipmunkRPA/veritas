@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
-from app.evidence import document_repeat, document_scope
+from app.evidence import document_matched_context, document_repeat, document_scope
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -72,7 +72,7 @@ def _raw_value(window: dict, key: str, default: float | None = None) -> float:
         return value
     try:
         raw = float.fromhex(exact)
-    except (TypeError, ValueError) as exc:
+    except (TypeError, ValueError, OverflowError) as exc:
         raise DocumentPacketIntegrityError("Invalid exact text-response value") from exc
     if not math.isfinite(raw) or not _number(value) or abs(raw - value) > 0.00000051:
         raise DocumentPacketIntegrityError("Exact text-response value differs from its display value")
@@ -305,8 +305,9 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         raise DocumentPacketIntegrityError("Document evidence has no valid text coordinate space")
     try:
         document_repeat.validate(document)
+        document_matched_context.validate(document)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
-        raise DocumentPacketIntegrityError("Repeated passages have invalid source commitments or positions") from error
+        raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
     ids = set()
     for packet in document.get("packets", []):
         if packet.get("id") in ids or packet.get("evidence_type") != "statistical":
@@ -353,6 +354,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored = 0
     check_coverage = []
     seen_checks = set()
+    matched_review = None
     for signal in result.get("signals", []):
         evidence = signal.get("details", {}).get("text_evidence") or {}
         if signal.get("status") != "ok":
@@ -370,6 +372,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             continue
         if evidence.get("extracted_text_sha256") != text_hash(text) or evidence.get("offset_unit") != "unicode_codepoint":
             raise DocumentPacketIntegrityError("A text check refers to a different extracted document")
+        try:
+            review = document_matched_context.from_signal(signal, ref)
+        except (ValueError, KeyError, TypeError) as error:
+            raise DocumentPacketIntegrityError("Matched writing review has an invalid check binding") from error
+        if review is not None:
+            if matched_review is not None:
+                raise DocumentPacketIntegrityError("Matched writing review refers to more than one check")
+            matched_review = review
         context_lookup = {c["id"]: c for c in evidence.get("contexts", [])}
         if len(context_lookup) != len(evidence.get("contexts", [])):
             raise DocumentPacketIntegrityError("The paired text check repeated a context identity")
@@ -399,6 +409,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     if field in window:
                         output_window[field] = copy.deepcopy(window[field])
                 output_window["shared_tokenization_verified"] = evidence.get("shared_tokenization_verified", False)
+            if review is not None:
+                try:
+                    document_matched_context.apply_to_window(output_window, window["focus"], review)
+                except (ValueError, KeyError, TypeError) as error:
+                    raise DocumentPacketIntegrityError("Matched writing review differs from the frozen input") from error
             verify_context_window(output_window, text)
             spans = [_range(span, len(text)) for span in window["spans"]]
             if ((kind == "classifier_probability" and (a, b) not in spans)
@@ -413,19 +428,22 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             output_window["direction_semantics"] = "Side of this check's raw operating threshold only; not validated proof of authorship."
             scored += 1
             groups.setdefault((a, b), []).append(output_window)
-    candidates = [key for key, values in groups.items() if any(w["direction"] == "supports_ai" for w in values)]
+    candidates = [key for key, values in groups.items() if any(document_scope.supports_inspection(w) for w in values)]
+    matched = sorted(key for key in candidates if document_matched_context.packet_record(groups[key]) is not None)
     # Ratios and classifier outputs are not commensurate. Reserve half the
     # bounded display for disagreement so selecting corroborated passages does
     # not systematically hide real opposing observations elsewhere in the file.
-    conflicts = sorted(key for key in candidates if any(w["direction"] == "opposes_ai" for w in groups[key]))
-    agreed = sorted(key for key in candidates if key not in conflicts)
-    selected = conflicts[:MAX_PACKETS // 2]
+    remaining = set(candidates).difference(matched)
+    conflicts = sorted(key for key in remaining if any(document_scope.inspection_direction(w) is False for w in groups[key]))
+    agreed = sorted(remaining.difference(conflicts))
+    selected = matched + conflicts[:MAX_PACKETS // 2]
     selected += agreed[:MAX_PACKETS - len(selected)]
     selected += conflicts[MAX_PACKETS // 2:MAX_PACKETS // 2 + MAX_PACKETS - len(selected)]
     selected.sort()
-    opposing_total = sum(w["direction"] == "opposes_ai" for values in groups.values() for w in values)
-    opposing_shown = sum(w["direction"] == "opposes_ai" for key in selected for w in groups[key])
-    document = {"schema": SCHEMA, "status": "ready", "id": current_set_id(analysis), "version": VERSION,
+    opposing_total = sum(document_scope.inspection_direction(w) is False for values in groups.values() for w in values)
+    opposing_shown = sum(document_scope.inspection_direction(w) is False for key in selected for w in groups[key])
+    document = {"schema": SCHEMA, "status": "ready", "id": current_set_id(analysis),
+                "version": document_scope.MATCHED_VERSION if matched_review is not None else VERSION,
                 "analysis_id": analysis.id, "revision": analysis.revision, "original_result_hash": analysis.result_hash,
                 "source": {"sha256": analysis.sha256, "extracted_text_sha256": text_hash(text), "chars": len(text),
                            "method": decoded["meta"].get("method"), "offset_unit": "unicode_codepoint",
@@ -439,6 +457,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                               "unmapped_pages": decoded["meta"].get("unmapped_pages", []),
                                               "ocr": public_ocr, "email": decoded["meta"].get("email")},
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
+    if matched_review is not None:
+        document["coverage"][document_matched_context.KEY] = matched_review
+        document["coverage"]["selection_policy"] = (
+            "Sentences selected by the short-passage review are prioritized for inclusion. Other passages follow the standard "
+            "disagreement and source-order policy. Each check keeps its own recorded response."
+        )
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
@@ -462,8 +486,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             artifacts[key] = {"sha256": art.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
                               "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{document['id']}/assets/{art.sha256}.png",
                               **metadata}
-        supports = sum(w["direction"] == "supports_ai" for w in windows)
-        opposing = len(windows) - supports
+        supports = sum(document_scope.supports_inspection(w) for w in windows)
+        opposing = sum(document_scope.inspection_direction(w) is False for w in windows)
         limits = ["The recorded responses are inspection clues. They do not establish whether a person used AI.",
                   "Responses are uncalibrated. Templates, translation, editing and unfamiliar languages can trigger them.",
                   "Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship."]
@@ -487,7 +511,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         interpretation = ("The highlighted range contains the tokens used for a writing-pattern ratio. Surrounding text can influence the response."
                           if ratio_scope else
                           "The highlight shows the measured context. The navigation sentence is a place to start reading, and the response does not locate generated words.")
-        document["packets"].append({"id": f"T{index:02d}", "title": "Measured writing-pattern range" if ratio_scope else "Scored context for inspection",
+        review_marker = document_matched_context.packet_record(windows)
+        title = "Measured writing-pattern range" if ratio_scope else "Scored context for inspection"
+        if review_marker is not None:
+            title = "Sentence to review"
+            interpretation = ("The selected sentence is a review location. The recorded writing check read it with "
+                              "both neighboring sentences. The response does not identify the author or generated words.")
+        packet = {"id": f"T{index:02d}", "title": title,
                                     "evidence_type": "statistical",
                                     "finding_ids": findings, "signal_refs": [w["signal_ref"] for w in windows],
                                     "focus": focus, "inspection_scope": scope,
@@ -497,7 +527,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                     "interpretation": interpretation,
                                     "measurements": [{"label": "Language-pattern ratio" if w["score_kind"] == "perplexity_ratio" else "Context response",
                                                       "value": w["score"], "unit": "raw ratio" if w["score_kind"] == "perplexity_ratio" else "uncalibrated score"} for w in windows],
-                                    "limitations": limits})
+                                    "limitations": limits}
+        if review_marker is not None:
+            packet[document_matched_context.KEY] = review_marker
+            packet["observation"] = ("The recorded response on this three-sentence context selected its middle "
+                                     "sentence for review.")
+        document["packets"].append(packet)
     warning = decoded["meta"].get("coverage_warning")
     if warning:
         document["limitations"].append(warning)
@@ -523,6 +558,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     document["sha256"] = packet_hash(document)
     validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    if matched_review is not None:
+        try:
+            document_matched_context.verify_source(document, text, mapping)
+        except (ValueError, KeyError, TypeError, AttributeError) as error:
+            raise DocumentPacketIntegrityError("Matched writing review differs from the frozen source") from error
     register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",
                      created_by=CREATOR, analysis_id=analysis.id, artefact_id=document["id"])
     return document
@@ -541,13 +581,14 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         raise DocumentPacketIntegrityError("Document evidence identity differs from its frozen object")
     validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
-    if document["version"] == VERSION:
+    if document["version"] in document_scope.REPEAT_VERSIONS:
         result = json.loads(_verified(store, analysis.result_hash))
         decoded = _decode(db, analysis, store, result)
         try:
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
+            document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
         except (ValueError, KeyError, TypeError, AttributeError) as error:
-            raise DocumentPacketIntegrityError("Repeated passages differ from the frozen text or source mapping") from error
+            raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)
     return document
 

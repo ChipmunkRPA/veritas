@@ -1,0 +1,18 @@
+# Paired passage evidence on historical human copy-edits
+
+The prospective comparison uses the two exact v243 admitted source groups. Each supplies a clean human excerpt and its historical human copy-edit, for four related 32–33-word inputs. The archive establishes the exact lexical replacement and matched target envelope in each version. Both versions carry all-human study labels. Five unresolved windows stay outside the input set. [Source admission](text-goce-source-admission-v243-method.md) · [Admitted aggregate](evaluation-panels/text-goce-source-admission-complete-v243.json)
+
+Compare the local current passage backbone at the fixed v7 research point with the three frozen v196 alternatives. These are the canonical current view, canonical current plus the interval head, and the union with the original current view. The current backbone is the one selected by the local candidate route. Research points and unions apply to passage evidence. The customer report and authorship verdict are outside the experiment. Identical effective texts share their current native forward as in v196. [Frozen comparison](text-gohumanize-transfer-v196-method.md) · [Research points](writing-spans-v7-protocol.md)
+
+Project every highlight back to exact non-whitespace Unicode positions in the archived source excerpt. Count false-flagged windows and characters separately in the lexical replacement locus, matched target padding, and outside the target. Report coverage for each region, fully or partly assessed inputs, and unavailable inputs. For fully assessed pairs, count false flags on the clean version, the copy-edit, both or neither. Compare new and removed flags on unchanged characters with exact correspondence and coverage in both versions. Private position receipts retain the original excerpt offset and the exact covered and highlighted positions. Public readouts carry aggregate counts and commitments.
+
+The separate historical reference uses the exact v196 short AI inserts, previously scored under the same methods. There were 23 assessed inputs from 16 article groups and 31 unavailable constructions. The assessed excerpts contain 202–302 words. Both cohorts clear the exact project 12-word overlap comparison against each other. The lengths, source designs, and prior exposure differ, so the historical reference stays separate from the four human inputs. This study has no new synthetic positive, sensitivity estimate, tuning, or serving change. [Historical results](text-gohumanize-transfer-v196-result.md)
+
+Preflight reads the sealed v243 sidecars, replays the exact v228 roster, validates the v196 runtime and reference commitments, and checks local checkpoint availability. It runs zero model forwards. Freeze writes the local prospective commitment before inference. Run only the owned v108 guard on one serial CPU stage, with the established 6 GiB initial RAM and sampled RSS limits, 3 GiB initial project and archive disk, 1.5 GiB running reserves, and 900-second limit. The worker validates cached checkpoint bytes and preserves complete source-position receipts. Readout checks the successful guard, exact response journal and projected positions before aggregating. [Guard procedure](text-gohumanize-transfer-v196-method.md)
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.text_goce_span_v249 preflight
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.text_goce_span_v249 freeze
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.text_goce_span_v249 run
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.text_goce_span_v249 readout
+```

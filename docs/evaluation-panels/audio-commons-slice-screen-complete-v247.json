@@ -1,0 +1,32 @@
+{
+  "schema": "chipmunk.audio-commons-slice-screen-result/247",
+  "status": "complete",
+  "freeze_sha256": "0a36ae61d0bd62e9612261f3177a85ffad8c2190ed1066ff90d78cabc07f28c5",
+  "background_result_sha256": "3d5a702131268cf65217a163404ddc6095eefb6b199d1ed5ea97487df0a98149",
+  "human_listening_reviewed": false,
+  "private_screen_sha256": "61148169e7c0de297b667d7edaf6aa2637be404b96851e60a16b7909e90ca11e",
+  "private_admitted_slices_sha256": "efc2283c887c4094d7dfc22b2887f2c64f7a728180bc4c652e14b06ee8d5018a",
+  "window_outcomes_by_environment": {
+    "kitchen": {
+      "machine_screened_provisional": 46,
+      "voice_signal_detected": 1,
+      "music_signal_detected": 1
+    },
+    "traffic": {
+      "machine_screened_provisional": 27
+    }
+  },
+  "provisional_recordings_by_environment": {
+    "kitchen": 4,
+    "traffic": 3
+  },
+  "candidate_windows": 75,
+  "provisional_windows": 73,
+  "sound_tag_forwards": 75,
+  "voice_frame_forwards": 7050,
+  "new_neural_calls": 7125,
+  "authenticity_detector_calls": 0,
+  "resource_profile_sha256": "d9a4a36bc91993c3127098cf5e76e5956e60dd73272e9a9454e28f78952290a2",
+  "worker_duration_seconds": 4.747057499946095,
+  "maximum_sampled_descendant_rss_bytes": 549879808
+}

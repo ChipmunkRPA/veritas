@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.text-goce-span-freeze/249",
+  "admission_public_sha256": "c31b9ef25fc1b8cb43d7bd476f1e110d6ea960e44d917e2ef9d6aea331e2bc33",
+  "private_source_commitment_sha256": "cbcb256345f81aee062ecd2881e615d62ca4273e79a48dd1442c0a316396b1b8",
+  "private_inputs_sha256": "d32908795378a2cf149685da84a5aeb1388a1c46862339ca66356816000d0989",
+  "native_reference_sha256": "bcdea8d8dd81bd5f5dc934c546d60ea03ee256b29a557d67996146281fad5475",
+  "code_sha256": {
+    "backend/scripts/text_goce_span_v249.py": "ae2138f0370311f536dfff4b069e6e51f925d16d4288c317941b2aaef7b24e5a",
+    "backend/tests/test_text_goce_span_v249.py": "8f6460d96817c13c96749c4e355b5ca3cd440c25f8c249fac1123fcc92fdf711",
+    "docs/text-goce-span-v249-method.md": "27110ab9fdb5e6137f3c33bcec568d579b13a00dbca621c01e42014372cdc0e5",
+    "backend/scripts/text_goce_source_admission_v243.py": "f76abd5cab1694ae9af0d45b0cf973f9d4bd63998b2a94b2560490ce8955148f",
+    "backend/scripts/text_goce_intake_v228.py": "935233d773441dc296327e5f6bdb1d0ad4ae4c83a2bd516a254c380b3cc32f36",
+    "backend/scripts/text_goce_source_evidence_v233.py": "1942e92eb174a05530d71e59b2b7f46b3d65792f2e9dd7674be49e4d70daa997",
+    "backend/app/models.yaml": "a9a32472299578874a3663d38de29d72a8f2c289ec9f20f28a9330168caf312e"
+  },
+  "source_groups": 2,
+  "planned_inputs": 4,
+  "inputs_with_identical_effective_views": 4,
+  "word_range": [
+    32,
+    33
+  ],
+  "methods": [
+    "baseline",
+    "canonical_current",
+    "canonical_union",
+    "baseline_plus_canonical_union"
+  ],
+  "position_regions": [
+    "replacement_locus",
+    "target_padding",
+    "outside_target"
+  ],
+  "historical_positive_reference": {
+    "public_result_sha256": "eff16a6244be6dcb3ee8b200b4fc55e1b157794372bf63300b5729003a45ea53",
+    "planned": 54,
+    "assessed": 23,
+    "preparation_unavailable": 31,
+    "article_groups_assessed": 16,
+    "assessed_word_range": [
+      202,
+      302
+    ],
+    "useful_ai_locations": {
+      "baseline": 0,
+      "canonical_current": 0,
+      "canonical_union": 0,
+      "baseline_plus_canonical_union": 0
+    },
+    "scope": "Previously scored v196 short AI inserts in longer passages, separate from the new human controls."
+  },
+  "scope": "Two distinct archived human copy-edits, four related inputs and no new synthetic positives."
+}

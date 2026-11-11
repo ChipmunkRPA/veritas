@@ -1,0 +1,76 @@
+{
+  "status": "complete",
+  "freeze_sha256": "4c397fdce4bb242910cb6f14a03a008f74a02070fe66f826c5753829df964577",
+  "product_version": "image-evidence-6",
+  "independent_source_groups": 4,
+  "planned_groups": 4,
+  "planned_views": 40,
+  "checked_views": 40,
+  "native_long_side_range": [
+    1024,
+    1024
+  ],
+  "status_counts": {
+    "native_png": {
+      "original": {
+        "no_donor": 4
+      },
+      "tone": {
+        "no_donor": 4
+      },
+      "blur": {
+        "no_donor": 3,
+        "unassessed_candidate_budget": 1
+      },
+      "translated_copy": {
+        "copy_consistent": 4
+      },
+      "reflected_copy": {
+        "copy_consistent": 4
+      }
+    },
+    "jpeg90": {
+      "original": {
+        "no_donor": 4
+      },
+      "tone": {
+        "no_donor": 4
+      },
+      "blur": {
+        "no_donor": 3,
+        "unassessed_candidate_budget": 1
+      },
+      "translated_copy": {
+        "copy_consistent": 4
+      },
+      "reflected_copy": {
+        "copy_consistent": 4
+      }
+    }
+  },
+  "known_copy_exact_recovery": {
+    "native_png": {
+      "translated_copy": {
+        "exact": 4
+      },
+      "reflected_copy": {
+        "exact": 4
+      }
+    },
+    "jpeg90": {
+      "translated_copy": {
+        "exact": 4
+      },
+      "reflected_copy": {
+        "exact": 4
+      }
+    }
+  },
+  "paired_status_agreement": 20,
+  "paired_known_copy_recovery_agreement": 8,
+  "elapsed_cue_seconds_median": 0.1038,
+  "elapsed_cue_seconds_max": 0.2409,
+  "peak_rss_bytes": 229163008,
+  "errors": [],
+  "limitations": "Four fresh licensed photo components with one prespecified recipient each. Formats are paired views. No generative provenance or end-to-end localization evaluated."
+}

@@ -64,14 +64,14 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
     baseline = q.get("baseline_offset")
     short_support = 0 < windows < MIN_TIMING_CHANGE_WINDOWS and not (steps or collapses)
     window_label = "window" if windows == 1 else "windows"
-    observed = f"{windows} eligible 1-second speech {window_label}; "
-    observed += (f"baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)" if baseline is not None
-                 else "no stable offset")
-    observed += f", median peak correlation {q.get('peak_median', 0.0):.2f}; "
+    observed = f"{windows} eligible 1-second speech {window_label}. "
+    observed += (f"Baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)." if baseline is not None
+                 else "Baseline offset unresolved.")
+    observed += f" Median peak correlation {q.get('peak_median', 0.0):.2f}."
     if short_support:
-        observed += "too few eligible speech windows to assess timing changes"
+        observed += " Too few eligible speech windows to assess timing changes."
     else:
-        observed += f"{steps} offset step(s), {collapses} correlation collapse(s)"
+        observed += f" Recorded {steps} offset step(s) and {collapses} correlation collapse(s)."
     parts = []
     if steps:
         parts.append(f"The audio-visual offset of {name} changes from {int(baseline):+d} to {int(q['step_offset']):+d} frames at "

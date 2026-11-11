@@ -69,8 +69,8 @@ def result_and_signal(offset_peaks):
 def test_short_support_preserves_measured_lag_and_shows_coverage(window_count, offset):
     result, signal, exhibits = result_and_signal([(offset, 0.8)] * window_count)
 
-    assert "too few eligible speech windows to assess timing changes" in signal["observed"]
-    assert "median peak correlation 0.80" in signal["observed"]
+    assert "Too few eligible speech windows to assess timing changes." in signal["observed"]
+    assert "Median peak correlation 0.80." in signal["observed"]
     assert "Too few eligible speech windows" in signal["reasoning"]
     assert "only the sampled windows" in signal["reasoning"]
     assert "0 offset step(s)" not in signal["observed"]
@@ -93,7 +93,7 @@ def test_unstable_lags_can_have_clear_correlations():
     _, signal, _ = result_and_signal([(offset, 0.8) for offset in (0, 4, -4, 8)])
     assert "baseline offset unresolved" in signal["reasoning"]
     assert "do not correlate clearly" not in signal["reasoning"]
-    assert "too few eligible speech windows" not in signal["observed"]
+    assert "Too few eligible speech windows" not in signal["observed"]
     assert signal["metrics"]["no_stable_offset"] == 1.0
 
 

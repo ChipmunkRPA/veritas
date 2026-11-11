@@ -1,0 +1,64 @@
+{
+  "code_sha256": {
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_expressive_inventory_v66.py": "83128aae90ffec8a8ffb598f04aaa31ecdb29121e14fe38feb7461ad750481f5",
+    "backend/scripts/audio_short_edit_materialize_v169c.py": "09f18f8d49c0f56f2f20c5ec9326a35adfe004837eb95ca7c8bd101bca6ac881",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/tests/test_audio_short_edit_materialize_v169c.py": "68fc04c9e646c9b78d9e12eb0a839e642118037a7c546db4ab631e26c547e361",
+    "docs/audio-short-edit-materialization-v169c.md": "8ee13f7bb812c5e9c6721d72c592736e42c847e14faef78388b38d904aa7da74"
+  },
+  "ffmpeg_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "grid_prefix_samples_for_exclusion": 47648,
+  "holdout_scored": false,
+  "model_calls": 0,
+  "planned_roles": {
+    "development": {
+      "components": {
+        "clone": 5,
+        "expressive": 12,
+        "genuine": 7,
+        "stock": 6
+      },
+      "noise_parents": 4,
+      "planned_foregrounds": {
+        "clone": 5,
+        "expressive": 12,
+        "genuine": 14,
+        "stock": 6
+      },
+      "seen_provider_voices_in_pending_groups": {
+        "expressive": 12,
+        "stock": 6
+      }
+    },
+    "holdout": {
+      "components": {
+        "clone": 6,
+        "expressive": 12,
+        "genuine": 8,
+        "stock": 6
+      },
+      "noise_parents": 4,
+      "planned_foregrounds": {
+        "clone": 6,
+        "expressive": 12,
+        "genuine": 16,
+        "stock": 6
+      },
+      "seen_provider_voices_in_pending_groups": {
+        "expressive": 12,
+        "stock": 6
+      }
+    }
+  },
+  "private_roster_sha256": "e04b97de73b8f82de00de5705a36dc84bd4f4002d3ce84381b06435d4e06336c",
+  "sample_rate": 16000,
+  "schema": "chipmunk.audio-short-edit-materialization-freeze/169c",
+  "scope": "One bounded production decode and WAV materialization. No analysis, scoring, model, or fitting calls.",
+  "source_public_plan_sha256": "1de0ec86b35ca1397bb2d8515ec0bcc7771699502141417b38a0b97bd979d49e",
+  "source_samples": 48000
+}

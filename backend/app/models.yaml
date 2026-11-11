@@ -1849,8 +1849,8 @@ detectors:
     admission: {decision: pending, evidence: "video face-strata admission due with V-3"}
 
   - id: vid.frames.dfdc_b7
-    adapter: app.detectors.video.adapters.frames:FrameDFDCB7Detector
-    version: 0.3.0
+    adapter: app.detectors.video.adapters.frames_batch:FrameDFDCB7BatchOneDetector
+    version: 0.3.1
     name: DFDC EfficientNet-B7 on face frames (selimsef, two-checkpoint ensemble)
     modality: video
     family: learned-face

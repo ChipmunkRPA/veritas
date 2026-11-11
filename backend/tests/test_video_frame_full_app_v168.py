@@ -5,9 +5,19 @@ import yaml
 
 from scripts import video_frame_full_app_v168 as study
 
+REFERENCE_MANIFEST = b"""models: []
+detectors:
+  - id: vid.frames.dfdc_b7
+    adapter: app.detectors.video.adapters.frames:FrameDFDCB7Detector
+    version: 0.3.0
+    models: [dfdc.effnet_b7_555, dfdc.effnet_b7_999]
+  - id: unrelated
+    version: 1.0.0
+"""
+
 
 def test_private_manifest_changes_only_the_one_adapter_and_version():
-    source = study.baseline.MANIFEST.read_bytes()
+    source = REFERENCE_MANIFEST
     candidate = study.candidate_manifest(source)
     original, changed = (yaml.safe_load(value) for value in (source, candidate))
     target = next(row for row in original["detectors"] if row["id"] == study.DETECTOR)

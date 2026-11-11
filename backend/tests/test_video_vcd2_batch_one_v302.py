@@ -1,12 +1,13 @@
 import pytest
 import yaml
+from test_video_frame_full_app_v168 import REFERENCE_MANIFEST
 
 from scripts import video_vcd2_batch_one_v302 as study
 
 
 def test_candidate_manifest_changes_only_the_intended_video_adapter():
-    reference = yaml.safe_load(study.current.MANIFEST.read_bytes())
-    candidate = yaml.safe_load(study.current.APP.candidate_manifest(study.current.MANIFEST.read_bytes()))
+    reference = yaml.safe_load(REFERENCE_MANIFEST)
+    candidate = yaml.safe_load(study.current.APP.candidate_manifest(REFERENCE_MANIFEST))
     target = next(row for row in reference["detectors"] if row["id"] == study.current.APP.DETECTOR)
     target["adapter"] = study.current.APP.ARMS["batch-one"][1]
     target["version"] = study.current.APP.ARMS["batch-one"][0]

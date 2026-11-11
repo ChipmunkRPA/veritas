@@ -1,0 +1,187 @@
+{
+  "by_condition": {
+    "matched_clean": {
+      "alania": {
+        "admissions": {
+          "admitted": 15,
+          "gate_rejected": 1
+        },
+        "directions": {
+          "baseline": {
+            "ai": 14,
+            "inconclusive": 1,
+            "unassessed": 1
+          },
+          "candidate": {
+            "ai": 15,
+            "unassessed": 1
+          },
+          "second_opinion": {
+            "ai": 15,
+            "unassessed": 1
+          }
+        },
+        "planned": 16,
+        "rank_auc": {
+          "baseline_raw": 1.0,
+          "candidate_raw": 1.0
+        }
+      },
+      "drifting": {
+        "admissions": {
+          "admitted": 12,
+          "preparation_unavailable": 4
+        },
+        "directions": {
+          "baseline": {
+            "ai": 12,
+            "unassessed": 4
+          },
+          "candidate": {
+            "ai": 12,
+            "unassessed": 4
+          },
+          "second_opinion": {
+            "ai": 12,
+            "unassessed": 4
+          }
+        },
+        "planned": 16,
+        "rank_auc": {
+          "baseline_raw": 1.0,
+          "candidate_raw": 1.0
+        }
+      },
+      "genuine": {
+        "admissions": {
+          "admitted": 8,
+          "gate_rejected": 3,
+          "preparation_unavailable": 5
+        },
+        "directions": {
+          "baseline": {
+            "original": 8,
+            "unassessed": 8
+          },
+          "candidate": {
+            "original": 8,
+            "unassessed": 8
+          },
+          "second_opinion": {
+            "original": 8,
+            "unassessed": 8
+          }
+        },
+        "planned": 16
+      }
+    },
+    "traffic_-10db": {
+      "alania": {
+        "admissions": {
+          "admitted": 15,
+          "gate_rejected": 1
+        },
+        "directions": {
+          "baseline": {
+            "inconclusive": 14,
+            "original": 1,
+            "unassessed": 1
+          },
+          "candidate": {
+            "ai": 1,
+            "inconclusive": 12,
+            "original": 2,
+            "unassessed": 1
+          },
+          "second_opinion": {
+            "ai": 1,
+            "inconclusive": 13,
+            "original": 1,
+            "unassessed": 1
+          }
+        },
+        "planned": 16,
+        "rank_auc": {
+          "baseline_raw": 0.7333333333333333,
+          "candidate_raw": 0.7666666666666667
+        }
+      },
+      "drifting": {
+        "admissions": {
+          "admitted": 12,
+          "preparation_unavailable": 4
+        },
+        "directions": {
+          "baseline": {
+            "ai": 1,
+            "inconclusive": 11,
+            "unassessed": 4
+          },
+          "candidate": {
+            "ai": 3,
+            "inconclusive": 7,
+            "original": 2,
+            "unassessed": 4
+          },
+          "second_opinion": {
+            "ai": 3,
+            "inconclusive": 9,
+            "unassessed": 4
+          }
+        },
+        "planned": 16,
+        "rank_auc": {
+          "baseline_raw": 0.8020833333333334,
+          "candidate_raw": 0.8020833333333334
+        }
+      },
+      "genuine": {
+        "admissions": {
+          "admitted": 8,
+          "gate_rejected": 3,
+          "preparation_unavailable": 5
+        },
+        "directions": {
+          "baseline": {
+            "inconclusive": 8,
+            "unassessed": 8
+          },
+          "candidate": {
+            "inconclusive": 3,
+            "original": 5,
+            "unassessed": 8
+          },
+          "second_opinion": {
+            "inconclusive": 8,
+            "unassessed": 8
+          }
+        },
+        "planned": 16
+      }
+    }
+  },
+  "freeze_sha256": "43380c24a99975768da7e91ceca6ebd685ae002a3900292678fc5bf0d62425e8",
+  "new_authenticity_forwards": 95,
+  "new_vad_forwards": 0,
+  "profiles": {
+    "baseline": {
+      "classifier_forwards": 24,
+      "elapsed_s": 19.09060512506403,
+      "journal_sha256": "34b00e7fe867b89c81c8f2976316bec1ee0477d3aa3b2a020164194e2d4ceca8",
+      "peak_rss_bytes_macos": 2925281280,
+      "scored": 24,
+      "status": "complete"
+    },
+    "candidate": {
+      "elapsed_s": 8.911454292014241,
+      "encoder_forwards": 71,
+      "journal_sha256": "d19210673e56f28dbff57a7e2ad790b8725f303ab25cb195570cd41854b38d6d",
+      "peak_rss_bytes_macos": 1304707072,
+      "scored": 70,
+      "status": "complete"
+    }
+  },
+  "schema": "chipmunk.wavlm-strong-traffic-transfer-result/1",
+  "serving_changed": false,
+  "status": "complete"
+}

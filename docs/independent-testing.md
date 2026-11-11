@@ -71,6 +71,9 @@ with separate counts for translated and reflected copies.
 The [regional patch response comparison](image-relative-patch-transfer-2026-11-11.md)
 reports a compact paired-feature method's localization and false highlights
 when the edit generator and source groups change.
+The [small-insertion transfer](image-bg-real-insertions-2026-11-11.md)
+compares source-localized results with unedited originals and matched
+processing controls. Its exact precompression footprint is kept for both formats.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -101,6 +104,9 @@ reports speech-window admission on the same foregrounds and strong background no
 The [stereo suppression test](audio-stereo-reference-suppression-2026-11-11.md)
 adds 36 matched noise-only controls and measures whether channel-difference
 filtering recovers synthetic or genuine speech windows.
+The [second voice representation](audio-wavlm-strong-traffic-2026-11-11.md)
+keeps the admission decisions fixed and compares clean and −10 dB traffic
+responses from two voice representations, with retained misses and exclusions.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

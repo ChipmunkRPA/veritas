@@ -95,6 +95,28 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 11 November
+
+- The [six-frame paired face check](video-face-pe-confirmation-2026-11-11.md)
+  found 45/48 whole-clip swaps versus 26/48 on separate source groups, with
+  zero flags on 24 originals in both arms. An opt-in local app analysis now
+  exports the source clocks and crops. Partial edits, ordinary delivery
+  changes, and unrelated generators require separate checks.
+- The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
+  each completed inference. Neither localized a useful region on the held-out
+  generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
+  found 4/8 useful PNG regions for relative crops versus 0/8 current, with zero
+  unchanged-original flags in both arms. It also flagged 4/8 processing controls
+  and localized zero JPEG75 edits, so the candidate remains experimental.
+- The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
+  raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
+  flags on eight assessed originals. It used one noise recording and earlier
+  foregrounds. Keep the paired method experimental for independent transfer.
+- The [portable evaluation contract](independent-testing.md#evidence-localization)
+  now checks region, frame, sample and passage overlap counts separately from
+  file-level directions. Reviewers can report model-free checks and share
+  coverage and overlap aggregates without publishing private source material.
+
 ## Progress on 10 November
 
 - Completed native feature extraction, three compact heads, six separate study

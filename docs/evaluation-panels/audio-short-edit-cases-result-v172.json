@@ -1,0 +1,41 @@
+{
+  "roles": {
+    "development": {
+      "case_outcomes": {
+        "constructed": 651
+      },
+      "freeze_sha256": "e911911a33dbc9419ddc7fc12cccd21cc33e13f2c96d415796c9fb8800eb6c3c",
+      "holdout_scored": false,
+      "new_neural_calls": 0,
+      "private_case_journal_sha256": "9bd8a1f2d7129cd2c04dcd3dae894c79b48b8f1ace9f4a008a1987ed6493db73",
+      "private_plan_sha256": "803cf0e7adee70ab68d7f7b9501538e744b1ed92c2a9d56766567aa5cd504eaa",
+      "private_unavailable_inputs_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "resource_profile_sha256": "80bbfe5c83b56eebaa8c9b963c101d0690ffa7535436b33c8b94e5e5fa55c080",
+      "role": "development",
+      "schema": "chipmunk.audio-short-edit-case-result/172",
+      "status": "complete",
+      "unavailable_input_count": 0,
+      "unavailable_or_failed_reasons": {},
+      "worker_duration_s": 4.506265833973885
+    },
+    "holdout": {
+      "case_outcomes": {
+        "constructed": 696
+      },
+      "freeze_sha256": "e911911a33dbc9419ddc7fc12cccd21cc33e13f2c96d415796c9fb8800eb6c3c",
+      "holdout_scored": false,
+      "new_neural_calls": 0,
+      "private_case_journal_sha256": "274358619884ac07758db38ea6162e1bc801842e80bed5eceea8781a7f4388a8",
+      "private_plan_sha256": "c6dc327332e96089e0f1e279833588e2b8362cf68493aa3ac3a9a13690f19339",
+      "private_unavailable_inputs_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "resource_profile_sha256": "232e06f467d9b65779501680b4f0a2e4eb94429f9fff606eb374c79586c60f01",
+      "role": "holdout",
+      "schema": "chipmunk.audio-short-edit-case-result/172",
+      "status": "complete",
+      "unavailable_input_count": 0,
+      "unavailable_or_failed_reasons": {},
+      "worker_duration_s": 5.051354750059545
+    }
+  },
+  "schema": "chipmunk.audio-short-edit-case-aggregate/172"
+}

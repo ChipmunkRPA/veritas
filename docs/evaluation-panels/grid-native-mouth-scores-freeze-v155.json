@@ -1,0 +1,54 @@
+{
+  "schema": "chipmunk.grid-native-mouth-score-continuation-freeze/155",
+  "code_sha256": {
+    "backend/scripts/grid_native_mouth_scores_v155.py": "8593a702533adb66c46c59ac88047c49b24bbc325b06a9886c168fb15f55c8f7",
+    "backend/tests/test_grid_native_mouth_scores_v155.py": "4e425aac64048c4ebd0d8e58a060804f16c29ff5475f8ac0fe3f08a066cf9bf1",
+    "docs/grid-native-mouth-scores-v155-method.md": "e2db56cde60c46fc8e6f9fcc8f6a666c81127e444c572808bfa23149cf5fa1af"
+  },
+  "v151_freeze_sha256": "de4dd47f58260203df0217c21fc7d1fa8eff8eed7164401199782f592ae53737",
+  "retained_v151_clip0": {
+    "result_sha256": "e2a3629521806a20a5264c2ee5597fc8b3de185df1338b8cef49b5958d39d3c1",
+    "profile_sha256": "7c79e0ef1d1a86d3103f061530385bd224dbe3f2759a23f8e0d63749c8d9c449",
+    "resource_journal_sha256": "08998c187ee11ee9d7dea0252e2df6cb5c9dfd298b511cab10aff32c011d16ed",
+    "worker_log_sha256": "52ba42f2576d62436829ec9b06c3f10134a8a16756eedd0b85aee76615b1f989",
+    "private_score_journal_sha256": "7ea7ba4eb6c469a01c0a7a1529ceeb62df41b1470e18a20077d2cc2471fa1b45",
+    "private_input_binding_sha256": "befb248bdfbc2edcebc3fca6d883e53f2a1995a0e1c58d13c958e350a6eba794",
+    "private_visual_invariance_sha256": "1fee8d3eb8363acb36373c92ff0939d236911f79b238c2e19b4d530e226f7a86"
+  },
+  "retained_v151_clip1_monitor_failure": {
+    "clip_ordinal": 1,
+    "guard": "monitor_unavailable",
+    "error_types": [
+      "PermissionError"
+    ],
+    "child_exit_code": -15,
+    "worker_receipt_present": false,
+    "profile_sha256": "18c7c05107984fc6c72a3372c279bd5fe9c201651969de8bb57ac280d7491ea6",
+    "resource_journal_sha256": "13a8fc907027f789e8e39594d664d76c88e0216857a37f1dc1f121f66901522d",
+    "worker_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tail_clip_ordinals": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "planned_cases": 176,
+  "new_tail_cases": 165,
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "scope": "Unchanged v151 scoring, inputs, learned assets, settings and data-stage monitor. Clip 0 uses its completed v151 receipt. Clips 1 through 15 use new result and score journal paths."
+}

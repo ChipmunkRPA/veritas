@@ -83,7 +83,7 @@ def run(root):
         try:
             rawpy = importlib.import_module("rawpy")
             prior.require(
-                Path(rawpy.__file__).resolve().is_relative_to(Path(directory)),
+                Path(rawpy.__file__).resolve().is_relative_to(Path(directory).resolve(strict=True)),
                 "Exact isolated decoder required",
             )
             for ordinal, source in enumerate(captures):

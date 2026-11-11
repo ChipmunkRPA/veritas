@@ -1,0 +1,53 @@
+{
+  "all_edits_conventional": true,
+  "captures": 4,
+  "implementation_sha256": "615802b515a3b628330f206f5cc25b58bfeaa4a6403325445837662923f22e01",
+  "new_neural_calls": 0,
+  "ordinary_views": 16,
+  "paired_copy_odd_rank_higher": 3,
+  "paired_copy_ranked_captures": 3,
+  "schema": "chipmunk.image-rawnind-local-edits-result/244",
+  "v239_public_result_sha256": "7e75fab7c5e07ba479e2afe3f51f26cbfb3402b196b8208a37587db38e5e55fa",
+  "views": {
+    "blur": {
+      "matched_captures": 3,
+      "mean_footprint_concordance": 0.8537774281733704,
+      "mean_target_median_score_change": 0.026720860754067797,
+      "ranked_captures": 3,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    },
+    "even_copy": {
+      "matched_captures": 3,
+      "mean_footprint_concordance": 0.4181459742377463,
+      "mean_target_median_score_change": -0.06552284516477078,
+      "ranked_captures": 3,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    },
+    "odd_copy": {
+      "matched_captures": 3,
+      "mean_footprint_concordance": 0.9936780842287828,
+      "mean_target_median_score_change": 0.1757286438308156,
+      "ranked_captures": 3,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    },
+    "tone": {
+      "matched_captures": 3,
+      "mean_footprint_concordance": 0.6220742720748798,
+      "mean_target_median_score_change": 0.002624515088076968,
+      "ranked_captures": 3,
+      "status_counts": {
+        "phase_not_supported": 1,
+        "scored": 3
+      }
+    }
+  }
+}

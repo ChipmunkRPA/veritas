@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.text-opai-bench-score-freeze/260",
+  "intake_sha256": "ad4193bb430e5c3c68f973e4a8edd80ad6c1c98a841b95cf575c6ef768ed6369",
+  "private_cases_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+  "native_reference_sha256": "bcdea8d8dd81bd5f5dc934c546d60ea03ee256b29a557d67996146281fad5475",
+  "code_sha256": {
+    "backend/scripts/text_opai_bench_score_v260.py": "768f7d426a42425a134a9d0d0213a2d75e305b73a8b4dd8a1a63abedfca80b8b",
+    "docs/text-opai-bench-score-v260-method.md": "38dc9e99cdb8613a34849d19e548108b87cd25ccaa4dc98255f933b6b78a4642"
+  },
+  "source_groups": 12,
+  "planned_inputs": 60,
+  "roles": [
+    [
+      "shared_human",
+      "human"
+    ],
+    [
+      "qwen3-8b",
+      "polish_ai"
+    ],
+    [
+      "qwen3-8b",
+      "compress_ai"
+    ],
+    [
+      "gpt-5.4-nano",
+      "polish_ai"
+    ],
+    [
+      "gpt-5.4-nano",
+      "compress_ai"
+    ]
+  ],
+  "batches": 4,
+  "batch_max_inputs": 15,
+  "methods": [
+    "baseline",
+    "canonical_current",
+    "canonical_union",
+    "baseline_plus_canonical_union"
+  ],
+  "serving_change_permitted": false
+}

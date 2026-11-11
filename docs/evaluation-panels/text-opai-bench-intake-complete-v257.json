@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.text-opai-bench-intake/257",
+  "status": "complete_intake",
+  "publisher_revision": "072c03c7051409346aaba05168d183cf6d863ee9",
+  "publisher_files": {
+    "qwen3-8b": {
+      "bytes": 5919856,
+      "sha256": "23e2b29270910b2a54d1ae2859e9e2b1e89cee1dd179f16d2ea2b39c7e60af25"
+    },
+    "gpt-5.4-nano": {
+      "bytes": 53589036,
+      "sha256": "912d90f2f22b2ea97bdf69930f6891584112381f5b811aedcac390bbdf1da064"
+    }
+  },
+  "publisher_report_groups_by_generator": {
+    "qwen3-8b": 35,
+    "gpt-5.4-nano": 300
+  },
+  "common_report_groups": 30,
+  "publisher_rows_validated": 180,
+  "rewrites_with_untagged_prose_bound_to_seed": 120,
+  "common_cases_with_non_ascii_text": 65,
+  "known_exposure_packets": 20,
+  "known_exposure_texts": 6364,
+  "known_exposure_fragments": 649552,
+  "known_exposure_index_sha256": "4f95c3715166cda4f83b8d17355b516b1ed0474c2e65018ea34c2a85e6e5c489",
+  "known_seed_fragment_matches": 0,
+  "known_family_fragment_matches": 0,
+  "novel_groups": 30,
+  "selected_source_pairs_sharing_fragment": 0,
+  "selected_source_pairs_compared": 66,
+  "selected_groups": 12,
+  "selected_human_seeds": 12,
+  "selected_rewrite_counts_by_generator": {
+    "qwen3-8b": 24,
+    "gpt-5.4-nano": 24
+  },
+  "selected_cases": 60,
+  "independent_source_receipt_sha256": "d56f54e50f87b719e5b2a360e75da04c7534b440cf672dcdb2037c3db25ec9db",
+  "common_seeds_with_exact_normalized_govreport_match": 30,
+  "selected_seeds_with_exact_normalized_govreport_match": 12,
+  "direct_individual_gao_report_verification": false,
+  "private_plan_sha256": "484fbedf13bcbe1cbccf6d3ae39a5a0e1d2204a39f4da3d41044920213af5afd",
+  "private_cases_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+  "new_neural_calls": 0
+}

@@ -1,0 +1,14 @@
+# Local intake for OpAI-Bench report rewrites
+
+Use the two pinned reports test exports at the recorded OpAI-Bench revision. Intersect source groups across the Qwen and GPT exports. For each common report, check one unchanged and two rewritten versions per export. Both copies of the human source must agree exactly. Reconstruct the complete untagged text from the publisher markers and compare every half-open Unicode character interval with the publisher’s `ai_spans_char` field. Each rewrite must retain some human text. Each nonempty untagged block must occur in order in the unchanged source after whitespace normalization. [Pinned exports](https://huggingface.co/datasets/OpAI-Bench1/OpAI-Bench/tree/072c03c7051409346aaba05168d183cf6d863ee9) · [Paper](https://arxiv.org/html/2606.06481v1)
+
+Bind each common unchanged source to the independently published GovReport source records. The acquisition receipt records a complete hash-verified upstream train stream and the hash of its 30 retained rows. The replay verifies the retained rows and compares every seed with the original GovReport plain-text highlight extraction after whitespace normalization. This verifies the upstream source passage. Direct review of each individual GAO publication was outside this comparison. [GovReport authors](https://gov-report-data.github.io/) · [Publisher extraction](https://huggingface.co/datasets/launch/gov_report/blob/main/gov_report.py) · [GAO copyright policy](https://www.gao.gov/copyright)
+
+Rebuild the exact 20-packet v243 writing exposure index and compare normalized 12-token fragments from the unchanged source and all four rewrites. Select up to 12 groups without matches, ordered by a deterministic hash of the private report ID. Retain one unchanged seed and four rewrites per group in an owner-only scoring journal. Keep exact source IDs and source URLs in a separate private attribution file. Report the observed overlap between selected groups. This screen covers known project evaluation inputs and does not establish absence from model training. [Previous exposure inventory](text-goce-source-admission-v243-method.md)
+
+The OpAI-Bench dataset card lists Apache-2.0 for its evaluation release. The GovReport authors provide the source compilation under CC BY 4.0. Preserve source attribution and publish only aggregate counts and whole-artifact commitments from the intake. The intake uses publisher span labels and copies no code or model weights from those projects. It makes no model calls and does not change serving. [OpAI-Bench reuse terms](https://huggingface.co/datasets/OpAI-Bench1/OpAI-Bench#licensing-and-reuse) · [GovReport terms](https://gov-report-data.github.io/)
+
+```sh
+export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+backend/.venv/bin/python -B -m scripts.text_opai_bench_intake_v257 /path/to/pinned/gohumanize/test.jsonl --retain
+```

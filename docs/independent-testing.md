@@ -78,6 +78,8 @@ reports identical decisions and unchanged coverage across both rules.
 The [room-transfer preflight](audio-room-transfer-preflight-v296-method.md)
 verifies a renderer for asymmetric background noise and confirms the archive
 inventory for a future paired comparison with two voice generators.
+The [measured room intake](audio-room-assets-v299-result.md) qualifies the
+documented Surrey source positions and records the open second-room geometry.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

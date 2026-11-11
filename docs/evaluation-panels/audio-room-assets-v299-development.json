@@ -1,0 +1,162 @@
+{
+  "code_sha256": {
+    "backend/scripts/audio_room_assets_v299.py": "f96c6d991044585c964fae812149cf1bad924bb802c190f68da588699622e408",
+    "backend/tests/test_audio_room_assets_v299.py": "e943301f88aa9e8aab59c1b762f37deb5dde8c1cd30c3be22fef38a00dd7f035",
+    "docs/audio-room-assets-v299-method.md": "c470cfc42326417b49cd0c0f98cbed94b18fc82bfe022d0b62964a5e1a13e938"
+  },
+  "foreground_files_opened": 0,
+  "libsndfile_version": "1.2.2",
+  "model_calls": 0,
+  "numpy_version": "2.2.6",
+  "publisher_plan": {
+    "development": {
+      "asset": {
+        "bytes": 14282074,
+        "git_blob_sha1": "9214e19a94dca7609c9e8aad4805bc277f5b33a6",
+        "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat"
+      },
+      "ear_order": [
+        "left",
+        "right"
+      ],
+      "license": "CC-BY-4.0",
+      "positions": {
+        "FC": {
+          "azimuth_degrees_left_positive": 0,
+          "channel_one_based": 3,
+          "elevation_degrees": 0
+        },
+        "SiL": {
+          "azimuth_degrees_left_positive": 90,
+          "channel_one_based": 11,
+          "elevation_degrees": 0
+        },
+        "SiR": {
+          "azimuth_degrees_left_positive": -90,
+          "channel_one_based": 12,
+          "elevation_degrees": 0
+        }
+      },
+      "release": "https://doi.org/10.15126/surreydata.00813511",
+      "sample_rate_hz": 48000
+    },
+    "holdout": {
+      "array": "360StageArrays/KU100-0deg",
+      "assets": {
+        "S01": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "1a6469467a7b4fc54ca51a8479471443e6a5808e",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S01_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "011790072b4634f1a816041bd3a2333cc9a606e5",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S01_R.wav"
+          }
+        ],
+        "S03": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "57c432e5cde33664f018a90548cebd159d4a3466",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S03_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "c26c16605bb14eb73ec3c6375f2885c4b3fa29d9",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S03_R.wav"
+          }
+        ],
+        "S07": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "788ed202dc80cc6fa8c3facb713a9d488c7b1adf",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S07_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "c4d1b91517284dd6e5ca34cffac1cb0f91a5b1e7",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S07_R.wav"
+          }
+        ]
+      },
+      "ear_order": [
+        "left",
+        "right"
+      ],
+      "license": "CC-BY-4.0",
+      "release": "https://zenodo.org/records/2639677",
+      "sample_rate_hz": 44100,
+      "speaker_id_angle_mapping": null
+    },
+    "publisher_guides": {
+      "huddersfield": {
+        "bytes": 1460525,
+        "sha256": "105e20e1400d632366be0195a9b4c0337d2092fd37c56e1d257a0681a5b04a1d",
+        "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/MAIR%20Technical%20Descriptions%20and%20User%20Guide.pdf"
+      },
+      "huddersfield_circular_layout": {
+        "bytes": 827317,
+        "sha256": "f829a5f2df9a8592d108193fdd362f97a0a88eccd4a7e7410cb9d57394f92621",
+        "url": "https://pure.hud.ac.uk/ws/portalfiles/portal/14022860/AAM_AES2018_Millns_and_Lee.pdf"
+      },
+      "surrey": {
+        "bytes": 3161503,
+        "sha256": "43322c46336dc3720e24603f9031e75b5a3e9c451251ef6d0af05c7f3d623754",
+        "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIR.pdf"
+      }
+    }
+  },
+  "result": {
+    "asset": {
+      "bytes": 14282074,
+      "filename": "angle_0.0.mat",
+      "git_blob_sha1": "9214e19a94dca7609c9e8aad4805bc277f5b33a6",
+      "sha256": "d944089e3c872b27dc9dcbf9112978b7fa170c483c3b240a8a3d62a3293c994a",
+      "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat"
+    },
+    "positions": {
+      "FC": {
+        "coefficients_sha256": "7592e1078f9a512e994d0cac69d49d7b2534c6a9353604d53fe31f9a34431da4",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "position": "FC",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "SiL": {
+        "coefficients_sha256": "41aba7ac7053b11f12fc9e353be114fc1807585f810f0cf83900bf16c5845210",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "position": "SiL",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      },
+      "SiR": {
+        "coefficients_sha256": "024394918ef874883871018765c3f1606bcdf1087175c7a95cec7370b28cd207",
+        "delay_samples": [
+          0,
+          0
+        ],
+        "position": "SiR",
+        "rig": "surrey-iosr-angle-0.0",
+        "sample_rate_hz": 48000,
+        "samples_per_channel": 65536,
+        "unit": "linear_amplitude_per_unit_input"
+      }
+    },
+    "status": "documented_positions_qualified"
+  },
+  "role": "development",
+  "schema": "chipmunk.audio-room-assets/299",
+  "scipy_version": "1.18.1",
+  "v296_authored_receipt_sha256": "32c31d286c99f33fa25933452e9d21411ec2e457f5f55f807ded67b6924f2215"
+}

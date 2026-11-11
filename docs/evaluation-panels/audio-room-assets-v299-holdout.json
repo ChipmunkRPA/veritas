@@ -1,0 +1,198 @@
+{
+  "code_sha256": {
+    "backend/scripts/audio_room_assets_v299.py": "f96c6d991044585c964fae812149cf1bad924bb802c190f68da588699622e408",
+    "backend/tests/test_audio_room_assets_v299.py": "e943301f88aa9e8aab59c1b762f37deb5dde8c1cd30c3be22fef38a00dd7f035",
+    "docs/audio-room-assets-v299-method.md": "c470cfc42326417b49cd0c0f98cbed94b18fc82bfe022d0b62964a5e1a13e938"
+  },
+  "foreground_files_opened": 0,
+  "libsndfile_version": "1.2.2",
+  "model_calls": 0,
+  "numpy_version": "2.2.6",
+  "publisher_plan": {
+    "development": {
+      "asset": {
+        "bytes": 14282074,
+        "git_blob_sha1": "9214e19a94dca7609c9e8aad4805bc277f5b33a6",
+        "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat"
+      },
+      "ear_order": [
+        "left",
+        "right"
+      ],
+      "license": "CC-BY-4.0",
+      "positions": {
+        "FC": {
+          "azimuth_degrees_left_positive": 0,
+          "channel_one_based": 3,
+          "elevation_degrees": 0
+        },
+        "SiL": {
+          "azimuth_degrees_left_positive": 90,
+          "channel_one_based": 11,
+          "elevation_degrees": 0
+        },
+        "SiR": {
+          "azimuth_degrees_left_positive": -90,
+          "channel_one_based": 12,
+          "elevation_degrees": 0
+        }
+      },
+      "release": "https://doi.org/10.15126/surreydata.00813511",
+      "sample_rate_hz": 48000
+    },
+    "holdout": {
+      "array": "360StageArrays/KU100-0deg",
+      "assets": {
+        "S01": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "1a6469467a7b4fc54ca51a8479471443e6a5808e",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S01_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "011790072b4634f1a816041bd3a2333cc9a606e5",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S01_R.wav"
+          }
+        ],
+        "S03": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "57c432e5cde33664f018a90548cebd159d4a3466",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S03_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "c26c16605bb14eb73ec3c6375f2885c4b3fa29d9",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S03_R.wav"
+          }
+        ],
+        "S07": [
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "788ed202dc80cc6fa8c3facb713a9d488c7b1adf",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S07_L.wav"
+          },
+          {
+            "bytes": 529280,
+            "git_blob_sha1": "c4d1b91517284dd6e5ca34cffac1cb0f91a5b1e7",
+            "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S07_R.wav"
+          }
+        ]
+      },
+      "ear_order": [
+        "left",
+        "right"
+      ],
+      "license": "CC-BY-4.0",
+      "release": "https://zenodo.org/records/2639677",
+      "sample_rate_hz": 44100,
+      "speaker_id_angle_mapping": null
+    },
+    "publisher_guides": {
+      "huddersfield": {
+        "bytes": 1460525,
+        "sha256": "105e20e1400d632366be0195a9b4c0337d2092fd37c56e1d257a0681a5b04a1d",
+        "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/MAIR%20Technical%20Descriptions%20and%20User%20Guide.pdf"
+      },
+      "huddersfield_circular_layout": {
+        "bytes": 827317,
+        "sha256": "f829a5f2df9a8592d108193fdd362f97a0a88eccd4a7e7410cb9d57394f92621",
+        "url": "https://pure.hud.ac.uk/ws/portalfiles/portal/14022860/AAM_AES2018_Millns_and_Lee.pdf"
+      },
+      "surrey": {
+        "bytes": 3161503,
+        "sha256": "43322c46336dc3720e24603f9031e75b5a3e9c451251ef6d0af05c7f3d623754",
+        "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIR.pdf"
+      }
+    }
+  },
+  "result": {
+    "candidate_pairs": {
+      "S01": [
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "ea0f8c798f3a9029d55b9b7d2b463a4b21a14e3cb9f5f3be946a46a92239cb57",
+          "ear": "left",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M01_S01_L.wav",
+          "git_blob_sha1": "1a6469467a7b4fc54ca51a8479471443e6a5808e",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "305e28f4779560c6b0a7002013871a74ed854710248832ab700f926063a3443b",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S01_L.wav"
+        },
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "eec2092f51f87f9acecbeb975348f353633d4d8c32597fa8e253c60130a16400",
+          "ear": "right",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M02_S01_R.wav",
+          "git_blob_sha1": "011790072b4634f1a816041bd3a2333cc9a606e5",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "42f63e7ca7f69eea8e65a3128710bc540baae0a9e0acfc919673fd5b81d8093e",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S01_R.wav"
+        }
+      ],
+      "S03": [
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "a76e5d2c4507964ed4e8f7f68ab59c97cbe050ff6b60d203012519a1f5fbdf03",
+          "ear": "left",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M01_S03_L.wav",
+          "git_blob_sha1": "57c432e5cde33664f018a90548cebd159d4a3466",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "09c96110643359a4f6626db33a85b6e152c1147860d9d43f54e7248af12c56ef",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S03_L.wav"
+        },
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "a8c0b4cc4f734168e102111b9949da92e702a8cc7a8ab8fd5627263b83cbbcf2",
+          "ear": "right",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M02_S03_R.wav",
+          "git_blob_sha1": "c26c16605bb14eb73ec3c6375f2885c4b3fa29d9",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "fc1ea2b7b7c9d325810197c42ea70e42a1d1f46aea98e3d05da8bd5050826574",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S03_R.wav"
+        }
+      ],
+      "S07": [
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "bb3c3e44daa94f0016191c51e0ad58461e2d6374268b5e96b3a13c2e4b7b857d",
+          "ear": "left",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M01_S07_L.wav",
+          "git_blob_sha1": "788ed202dc80cc6fa8c3facb713a9d488c7b1adf",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "5dc2621f3a5d5ca2f06bd8fcc25b221717f4b1e3be376e81b3e2a0cd8663d574",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M01_S07_L.wav"
+        },
+        {
+          "bytes": 529280,
+          "coefficients_sha256": "8947fae299fdaf259568858f23eda15def50b494d260921fda09bb150680b58f",
+          "ear": "right",
+          "encoding": "FLOAT",
+          "filename": "VR_0DegKU100_M02_S07_R.wav",
+          "git_blob_sha1": "c4d1b91517284dd6e5ca34cffac1cb0f91a5b1e7",
+          "sample_rate_hz": 44100,
+          "samples": 132300,
+          "sha256": "6b30f7eac5777a5497fa4fd89ee59f985b94c0eae6341266d291f2378f08fdaa",
+          "url": "https://raw.githubusercontent.com/APL-Huddersfield/MAIR-Library-and-Renderer/ef37a42552e6b17d94611856cbd3404e308e10f5/360StageArrays/KU100-0deg/VR_0DegKU100_M02_S07_R.wav"
+        }
+      ]
+    },
+    "positions": {},
+    "status": "bytes_and_format_verified_angles_unassigned"
+  },
+  "role": "holdout",
+  "schema": "chipmunk.audio-room-assets/299",
+  "scipy_version": "1.18.1",
+  "v296_authored_receipt_sha256": "32c31d286c99f33fa25933452e9d21411ec2e457f5f55f807ded67b6924f2215"
+}

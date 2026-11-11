@@ -97,6 +97,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
       <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
+        : packet.whole_face_review
+        ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
         ? <>Face-change review range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
         : packet.face_interval
@@ -105,10 +107,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? 'One response for a sampled window. Representative frames do not have individual scores.'
         : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
-        <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. Input frame indices: {packet.window.frame_indices.join(', ')}.</p>
-        <p className="mt-2 mb-0">Only these frames were input to this window. This does not establish continuous coverage between them.</p>
+        <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
+        <p className="mt-2 mb-0">{packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.' : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
-      {!packet.picture_hold && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       <div className="mt-5 space-y-5">{packet.frames.map((frame) => {
         const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
         const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0

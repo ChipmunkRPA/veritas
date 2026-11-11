@@ -316,6 +316,20 @@ models:
       - "A1 parity in float32 (I-9, 2026-09-12): CPU vs MPS on 50 vb image items with a scorable face (58 items without one skipped) max |Δp| 1.28e-05, mean 1.84e-06; fp16 not evaluated (the loader keeps float32)"
       - "latency, float32 (I-9, 2026-09-12): fixture 543×724 with one face, warm median 166 ms CPU and 48 ms MPS, including YuNet on the CPU and the alignment"
 
+  - id: gend.pe_large
+    source:
+      type: hf
+      repo: yermandy/GenD_PE_L
+      revision: 4fd5a38cf071af2640d314110826ed5cd25cab88
+      files:
+        - {path: model.safetensors, sha256: e2367f8db3a6b76f8d5cc5857f1ed0ea0993b33c9e1f428d3b06e5ca95de2213, bytes: 1264456640}
+    licence: {spdx: MIT, class: commercial, notice: "Pinned GenD PE checkpoint card MIT. Meta Perception Encoder parent LICENSE.PE Apache-2.0."}
+    footprint: {params_m: 316.1, fp32_mb: 1206, activation_mb_per_item: 480, estimated: true}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.image.adapters.loaders:load_gend_pe"}
+    notes:
+      - "The frozen checkpoint loads strictly offline as float32 with a dynamic 224-pixel input, pooled pre-projection features and an L2-normalized binary head. Authored CPU versus MPS parity passed on three crops."
+
   - id: siglip2.so400m_p14_384
     source:
       type: hf
@@ -1529,6 +1543,28 @@ detectors:
     fp_modes: ["Fresh combined genuine/control review flags26/60, all from shared fallback; not a whole-file false-positive rate"]
     citation: "OpenCV Zoo SFace model and Apache-2.0 directory notice. Frozen method/native contracts and development/confirmation: docs/video-v16-sface-development-evaluation.md and docs/video-v17-sface-confirmation-evaluation.md."
     admission: {decision: pending, evidence: "Fresh unchanged combined method located60/60 vs25/60 at the same26/60 genuine flags; new cue supplied58 edit ranges and declared current fallback two. Local inspection integration only; no AI confidence admission."}
+
+  - id: vid.review.whole_face
+    adapter: app.detectors.video.adapters.whole_face:WholeFaceReviewDetector
+    version: 0.1.0
+    name: "Face-swap review across sampled frames"
+    modality: video
+    family: whole-face-review
+    hypotheses: []
+    models: [yunet.2023mar, dfdc.effnet_b7_555, dfdc.effnet_b7_999, gend.pe_large]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["A bounded face-swap review of six native samples. The internal point is an inspection rule, carries zero weight in overall confidence, and does not identify editing boundaries or a person's identity."]
+    source_url: https://huggingface.co/yermandy/GenD_PE_L
+    threat: [face_swap]
+    training_data: "No training in this application. Released upstream checkpoints have separate training sources and coverage; unseen source status applies to the local comparison, not upstream training."
+    coverage_date: "2026-11-11 local RTFS transfer"
+    input_constraints: ["Largest face at six interior native timestamps, minimum 48 px, at least four usable observations per arm; maximum native long side 1920 px."]
+    contamination_sets: [RTFS-10K, "upstream face identities unknown"]
+    fp_modes: ["Image compression, lighting, appearance changes, multiple subjects and domain shift can change face-crop scores."]
+    citation: "Yermakov et al., Deepfake Detection that Generalizes Across Benchmarks, WACV 2026. Selim Seferbekov DFDC reference ensemble."
+    admission: {decision: pending, evidence: "Local face-swap inspection only, opt-in and no authenticity fusion."}
 
   - id: vid.swap.gend_clip_l14
     adapter: app.detectors.video.adapters.swap:GenDTrackDetector

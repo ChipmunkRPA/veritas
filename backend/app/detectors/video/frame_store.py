@@ -28,6 +28,7 @@ class FrameStore:
         self._check, self._decoder = check, decoder
         self._cache: OrderedDict[tuple[int, int | None], np.ndarray] = OrderedDict()
         self._native_anchors: dict[int, dict] = {}
+        self._verified_native_pts: set[int] = set()
         self._lock = threading.Lock()
         self.bytes = 0
         self.hits = self.misses = self.evictions = self.decode_passes = 0
@@ -79,6 +80,8 @@ class FrameStore:
                         if previous is not None and previous != anchor:
                             raise DecodeError("Video could not be decoded consistently: a repeated frame changed")
                         self._native_anchors[frame.index] = anchor
+                        if frame.pts_verified:
+                            self._verified_native_pts.add(frame.index)
                     self._put((frame.index, max_side), frame.rgb)
                 yield frame.index, frame.rgb
         finally:
@@ -104,3 +107,8 @@ class FrameStore:
         """
         with self._lock:
             return [dict(self._native_anchors[i]) for i in sorted(self._native_anchors)]
+
+    def native_pts_verified(self, index: int) -> bool:
+        """Whether the decoder supplied a timestamp for this native frame."""
+        with self._lock:
+            return index in self._verified_native_pts

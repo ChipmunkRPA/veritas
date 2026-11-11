@@ -134,7 +134,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.video.decode import FrameTable
-    from app.evidence import face_lighting_context, picture_hold_binding
+    from app.evidence import face_lighting_context, picture_hold_binding, whole_face_binding
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
@@ -159,6 +159,17 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
+        if whole := packet.get("whole_face_review"):
+            from app.api.public_projection import alias_signal
+
+            whole_face_binding.validate_packet(packet, source, pts=table.pts)
+            if any(i not in by_index or i in table.interpolated for i in packet["window"]["frame_indices"]):
+                raise ObjectIntegrityError("Paired face samples lack native source anchors")
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            if not any((signal.get("details") or {}).get("whole_face_review") == whole
+                       and signal.get("effective_weight") == 0.0 and alias_signal(signal["id"]) == packet["signal_refs"][0]["id"]
+                       for signal in frozen.get("signals", [])):
+                raise ObjectIntegrityError("Paired face evidence differs from the frozen analysis measurement")
         if sequence := packet.get("face_sequence"):
             for item in sequence["frame_inputs"]:
                 committed = by_index.get(item["frame_index"])
@@ -501,6 +512,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
+            row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             for frame in packet["frames"]:
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
@@ -594,8 +606,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"]
-            label = "Identical frames" if row["picture_hold"] else "Face review range"
+            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"] or (row["window"] if row["whole_face_review"] else None)
+            label = "Identical frames" if row["picture_hold"] else "Sampled face positions" if row["whole_face_review"] else "Face review range"
             row["locator"] = (f"{label} {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s" if interval else
                               "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))
         else:

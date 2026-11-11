@@ -220,6 +220,7 @@ class Settings(BaseSettings):
     # Local rollout switch; the legacy weights/calibration remain installed for rollback.
     audio_detector_mode: Literal["legacy", "candidate"] = "legacy"
     video_face_review_mode: Literal["legacy", "sequence", "appearance"] = "legacy"
+    video_whole_face_review: bool = False  # Add six native face observations for local review without changing the estimate.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"
         "Gustking/wav2vec2-large-xlsr-deepfake-audio-classification|fake|1.0",  # AUC 0.917 overall / 0.974 ASVspoof-DF

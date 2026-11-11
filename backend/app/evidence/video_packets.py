@@ -28,6 +28,7 @@ from app.evidence import (
     face_intervals,
     face_lighting_context,
     picture_hold_binding,
+    whole_face_binding,
 )
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
@@ -219,6 +220,26 @@ def _face_context(result: dict, track_id: str | None, index: int, table: FrameTa
     return _box(_bounds(matches[0].get("bbox"), width, height))
 
 
+def _whole_face_candidate(result: dict, table: FrameTable, source: dict, anchors: dict) -> list[dict]:
+    matches = [(signal, (signal.get("details") or {}).get("whole_face_review")) for signal in result.get("signals", [])
+               if signal.get("status", "ok") == "ok" and (signal.get("details") or {}).get("whole_face_review") is not None]
+    if not matches:
+        return []
+    if len(matches) != 1:
+        raise PacketIntegrityError("Expected one paired face review")
+    signal, record = matches[0]
+    indices = whole_face_binding.validate(record, source, pts=table.pts)
+    if (signal.get("effective_weight") != 0.0 or set(indices) & set(table.interpolated)
+            or any(index not in anchors for index in indices)):
+        raise PacketIntegrityError("Paired face review lacks the committed native inputs or inspection-only scope")
+    samples = whole_face_binding.representatives(record)
+    return [{"signals": [signal], "exhibit": {"id": None}, "series_name": "paired_face_review", "track_id": None,
+             "whole_face_review": record, "window": {"frame_indices": list(indices)},
+             "rows": [{"frame_index": row["frame_index"], "score": None, "box": row["box"]} for row in samples],
+             "peak": {"frame_index": samples[1]["frame_index"], "score": float.fromhex(record["score_hex"])},
+             "scored_frame_count": len(indices), "threshold": whole_face_binding.REVIEW_POINT}]
+
+
 def _window_observations(result: dict, table: FrameTable, anchors: dict) -> tuple[list[dict], set[int]]:
     """Temporal feature statistics must cite every frame used by that window.
 
@@ -400,23 +421,26 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
+    whole_candidates = _whole_face_candidate(result, table, source, anchors)
+    window_frames.update(row["frame_index"] for candidate in whole_candidates for row in candidate["whole_face_review"]["samples"]
+                         if any(value is not None for value in row["responses_hex"]))
     window_frames |= sequence_frames
     sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
                           and (signal.get("details") or {}).get("face_sequence_binding_version") in face_interval_binding.SEQUENCE_METHODS
                           and ((signal.get("details") or {}).get("face_sequence_windows") or (signal.get("details") or {}).get("face_sequence")))
     face_candidates = [item for item in candidates if "face_interval" in item]
     existing = window_candidates + [item for item in candidates if "face_interval" not in item]
-    chosen = sequence_candidates[:1] + face_candidates[:2-len(sequence_candidates[:1])] + existing[:MAX_PACKETS]
+    chosen = whole_candidates + sequence_candidates[:1] + face_candidates[:2-len(sequence_candidates[:1])] + existing[:MAX_PACKETS]
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     document = {"schema": SCHEMA, "version": VERSION, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
                              "scored_frame_indices": sorted(scored_frames), "scored_frame_count": len(scored_frames),
-                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks,
+                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks + len(whole_candidates),
                              "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
                              "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
-                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) + len(sequence_candidates) - len(chosen),
+                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) + len(sequence_candidates) + len(whole_candidates) - len(chosen),
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
@@ -447,6 +471,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             if sequence := candidate.get("face_sequence"):
                 measured = next(row for row in sequence["frame_inputs"] if row["frame_index"] == i)
                 region = _box(_bounds(measured["bbox"], table.width, table.height))
+            if candidate.get("whole_face_review"):
+                region = row["box"]
             stream_s = table.seconds(i)
             player_s = None if source["timeline_origin_s"] is None else stream_s - source["timeline_origin_s"]
             label = f"{packet_id}.{pos} - frame {i}, {stream_s:.3f} s"
@@ -494,7 +520,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                    "derivation": {"version": VERSION, "selection": "highest_recorded_point_and_adjacent_samples",
                                                   "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
                                                   "source_pixels": "exact_native_rgb", "contact_sheet": "sampled_sequence"}}
-        if "window" in candidate:
+        if "window" in candidate and "whole_face_review" not in candidate:
             window = candidate["window"]
             indices = window["frame_indices"]
             origin = source["timeline_origin_s"]
@@ -516,6 +542,29 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                             "No individual-window decision threshold is established here; the lowest observed variation is selected for inspection.",
                                             "The contact sheet contains representative input frames. The listed input frames establish actual sample coverage."],
                            "derivation": {**packet["derivation"], "selection": "lowest_observed_temporal_variation"}})
+        if whole := candidate.get("whole_face_review"):
+            indices = candidate["window"]["frame_indices"]
+            origin = source["timeline_origin_s"]
+            start, end = table.seconds(indices[0]), table.seconds(indices[-1])
+            packet.update(title="Sampled faces to review" if whole["flagged"] else "Sampled face review",
+                          evidence_type="anomaly", claim_scope="sampled_window", semantics=whole_face_binding.METHOD,
+                          whole_face_review=whole, affects_overall_confidence=False,
+                          observation=candidate["signals"][0]["observed"],
+                          interpretation="The source frames show the faces at sampled positions. The check compares responses across the clip and carries no weight in overall AI confidence.",
+                          measurements=[{"label": "Planned face-check positions", "value": len(indices), "unit": "frames"},
+                                        *[{"label": f"Usable positions for check {arm + 1}",
+                                           "value": sum(row["responses_hex"][arm] is not None for row in whole["samples"]),
+                                           "unit": "frames"} for arm in range(2)]],
+                          window={"frame_indices": indices, "time_base": table.time_base,
+                                  "start_pts": table.pts[indices[0]], "end_pts": table.pts[indices[-1]],
+                                  "start_stream_s": start, "end_stream_s": end,
+                                  "start_playback_s": None if origin is None else start - origin,
+                                  "end_playback_s": None if origin is None else end - origin},
+                          limitations=["The check assesses the largest detected face at each sampled position. These samples provide neither a continuous edit range nor an identity comparison."],
+                          derivation={**packet["derivation"], "selection": "representative_paired_face_samples"},
+                          clip={"status": "unavailable", "reason": "Use the original video for playback at the sampled positions"})
+            document["packets"].append(packet)
+            continue
         if sequence := candidate.get("face_sequence"):
             packet.update(title="Face-change range to review", semantics=sequence['method'],
                           face_sequence=sequence,
@@ -624,6 +673,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
+            whole_face_binding.validate_packet(packet, source)
             if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
                 face_alignment_context.validate(packet)
             if document["version"] in LIGHTING_CONTEXT_VERSIONS:

@@ -84,6 +84,15 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
+            if packet.get('whole_face_review') is not None or packet.get('semantics') == 'paired-whole-face-samples/1':
+                from app.evidence.whole_face_binding import validate_packet as validate_whole_face
+
+                validate_whole_face(packet, evidence['source'])
+                measurement = canonical_hash(packet['whole_face_review'])
+                _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                             and check.get('paired_face_measurement_sha256') == measurement
+                             for check in result.get('checks', [])),
+                         'Paired face evidence differs from its corresponding public check')
             if evidence['version'] in ALIGNMENT_CONTEXT_VERSIONS:
                 validate_face_alignment(packet)
             if evidence['version'] in LIGHTING_CONTEXT_VERSIONS:

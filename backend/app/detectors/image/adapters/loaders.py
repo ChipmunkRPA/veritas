@@ -78,6 +78,13 @@ def load_pe_core(model_id: str, device: str, dtype: str) -> LoadedModel:
     return LoadedModel(model.to(device).eval(), _revision(entry))
 
 
+def load_gend_pe(model_id: str, device: str, dtype: str) -> LoadedModel:
+    from app.detectors.image.gend_pe import load_model
+
+    entry = _entry(model_id)
+    return LoadedModel(load_model(_file(entry, "model.safetensors"), device), _revision(entry))
+
+
 def load_univfd_probe(model_id: str, device: str, dtype: str) -> LoadedModel:
     from app.detectors.image.univfd import load_probe
 

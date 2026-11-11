@@ -16,7 +16,7 @@ from pathlib import Path
 
 from sqlalchemy import and_, or_, select
 
-from app.api.public_projection import project
+from app.api.public_projection import alias_signal, project
 from app.audit import chain as audit
 from app.cases import review
 from app.core.canonical import canonical_hash, canonical_json
@@ -33,6 +33,14 @@ def public_result(result: dict) -> dict:
     """A bounded customer view; no registry, model cards, internal details or arbitrary exhibits."""
     public = project(result)
     decision = public.get('decision') or {}
+    checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
+                                'raw_score_kind', 'calibrated_probability') if k in s}
+              for s in public.get('signals') or []]
+    paired = {alias_signal(s['id']): canonical_hash(record) for s in result.get('signals') or []
+              if s.get('effective_weight') == 0.0 and (record := (s.get('details') or {}).get('whole_face_review'))}
+    for check in checks:
+        if digest := paired.get(check['id']):
+            check['paired_face_measurement_sha256'] = digest
     return {
         'schema': 'chipmunk.public-result/1', 'is_projection': True,
         'original_result_sha256': canonical_hash(result),
@@ -40,8 +48,7 @@ def public_result(result: dict) -> dict:
                      'probability_ai_calibrated', 'probability_ai_uncalibrated') if k in decision},
         'findings': [{k: f[k] for k in ('id', 'family', 'title', 'statement', 'evidence_ids') if k in f}
                      for f in public.get('findings') or []],
-        'checks': [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
-                    'raw_score_kind', 'calibrated_probability') if k in s} for s in public.get('signals') or []],
+        'checks': checks,
         'note': 'This public projection has its own hash. It does not reproduce or hash to the original internal result.',
     }
 

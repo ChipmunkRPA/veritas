@@ -96,6 +96,10 @@ def _packet_inference(packet: dict) -> str:
     if kind == "audio" and "reaches the check's 0.5 inspection threshold" in str(packet.get("interpretation")):
         return "Leaning towards a synthetic-voice pattern in this complete window. This is an uncalibrated inspection clue; it does not establish a replaced voice or an exact edit boundary."
     if kind == "video":
+        if (review := packet.get("whole_face_review")) is not None:
+            if review["flagged"]:
+                return "The paired response warrants review for a possible face swap."
+            return "The paired response supplied no additional face-swap clue at the sampled positions."
         if packet.get("picture_hold"):
             return "The cause of the picture hold remains undetermined."
         measures = {m.get("label"): _number(m.get("value")) for m in packet.get("measurements") or []}

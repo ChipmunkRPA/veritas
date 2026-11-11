@@ -24,6 +24,10 @@ ESTIMATE_NOTE = (
     "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. "
     "An original-file tendency does not establish that every part of the file is unedited."
 )
+SHORT_TIMING_NOTE = (
+    "Audio/picture timing measurements are available. Every measured face track had too few eligible "
+    "speech windows to assess timing changes."
+)
 
 
 def _signal_refs(signal: Mapping[str, Any]) -> set[str]:
@@ -37,6 +41,17 @@ def _counted(row: Mapping[str, Any]) -> bool:
                                         and not isinstance(value, bool) and math.isfinite(value) and abs(value) > 1e-9)
 
 
+def _short_timing_track(signal: Mapping[str, Any]) -> bool:
+    metrics = signal.get("metrics") or {}
+    windows, peak = metrics.get("windows"), metrics.get("peak_median")
+    # The correlation route records peak_median and needs at least four windows.
+    return (signal.get("scope") == "track" and not signal.get("segments")
+            and type(peak) in (int, float) and math.isfinite(peak)
+            and type(windows) in (int, float) and windows in (1, 2, 3)
+            and all(type(metrics.get(key)) in (int, float) and metrics[key] == 0
+                    for key in ("flagged", "steps", "collapses")))
+
+
 def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
     scope = {"scope": "whole_file", "scope_label": "Assessed content", "scope_note": "The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.", "excluded_channels": []}
     if result.get("kind") != "video":
@@ -45,6 +60,7 @@ def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
     rows = [r for r in (result.get("decision") or {}).get("contributions") or [] if r.get("kind") == "detector"]
     included: set[str] = set()
     statuses: dict[str, set[str]] = {channel: set() for channel in ("visual", "voice", "audio_picture_timing")}
+    timing_checks = []
     for signal in result.get("signals") or []:
         refs = _signal_refs(signal)
         families = {f.get("family") for f in findings if refs.intersection(f.get("evidence_ids") or [])}
@@ -61,6 +77,8 @@ def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
             continue
         status = signal.get("status") or "unknown"
         statuses[channel].add(status)
+        if channel == "audio_picture_timing" and status == "ok":
+            timing_checks.append(signal)
         matched = [r for r in rows if r.get("signal_id") in refs]
         omitted = (bool(signal.get("outside_estimate")) or signal.get("effective_weight") == 0
                    or any(r.get("counted") is False for r in matched))
@@ -73,7 +91,9 @@ def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
              "The saved result does not establish which content checks contributed to the main assessment."]
     for channel, states in statuses.items():
         label = labels[channel]
-        if "ok" in states and channel not in included:
+        if channel == "audio_picture_timing" and timing_checks and all(map(_short_timing_track, timing_checks)):
+            notes.append(SHORT_TIMING_NOTE)
+        elif "ok" in states and channel not in included:
             notes.append(f"{label} was checked separately from the main assessment.")
         if states.intersection({"failed", "timeout", "timed_out"}):
             notes.append(f"Some {label.lower()} checks could not complete.")

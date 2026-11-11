@@ -41,6 +41,8 @@ NO_MOUTH = "no face track with a visible mouth and timestamp-matched video frame
 NO_SPEAKER = ("no face track whose mouth movement follows the speech (occluded, turned or closed mouth, voice-over or an "
               "off-screen speaker)")
 MAX_SERIES_POINTS = 5000
+# This route uses only the track-relative collapse threshold.
+MIN_TIMING_CHANGE_WINDOWS = min(2 * lipsync.MIN_RUN_WINDOWS, lipsync.COLLAPSE_MIN_TRACK_WINDOWS)
 REFERENCE = ("Mouth-opening proxy of a speaking face track (the darkness of the mouth centre between the two mouth corners) "
              "against the speech level at 25 Hz: per 1 s window every 0.5 s, the audio shift within ±15 frames with the "
              "highest correlation. A constant offset is consistent with a mux delay; a change of offset or a collapse of the "
@@ -60,11 +62,16 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
     q, name = unit["quality"], track_name(track)
     windows, steps, collapses = int(q.get("windows", 0)), int(q.get("steps", 0)), int(q.get("collapses", 0))
     baseline = q.get("baseline_offset")
-    observed = f"{windows} 1 s window(s) of speech every 0.5 s; "
+    short_support = 0 < windows < MIN_TIMING_CHANGE_WINDOWS and not (steps or collapses)
+    window_label = "window" if windows == 1 else "windows"
+    observed = f"{windows} eligible 1-second speech {window_label}; "
     observed += (f"baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)" if baseline is not None
                  else "no stable offset")
-    observed += (f", median peak correlation {q.get('peak_median', 0.0):.2f}; {steps} offset step(s), "
-                 f"{collapses} correlation collapse(s)")
+    observed += f", median peak correlation {q.get('peak_median', 0.0):.2f}; "
+    if short_support:
+        observed += "too few eligible speech windows to assess timing changes"
+    else:
+        observed += f"{steps} offset step(s), {collapses} correlation collapse(s)"
     parts = []
     if steps:
         parts.append(f"The audio-visual offset of {name} changes from {int(baseline):+d} to {int(q['step_offset']):+d} frames at "
@@ -76,14 +83,19 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
                      "This is consistent with a dubbed or re-synthesised segment, but equally with an occluded or turned mouth, "
                      "or speech from someone off screen.")
     if not parts:
-        if baseline is None:
-            parts.append(f"No stable offset could be established for {name}: the mouth opening and the speech level do not "
-                         "correlate clearly in any window.")
+        if short_support:
+            parts.append(f"Too few eligible speech windows to assess changes in audio and picture timing for {name}. "
+                         "The offset and correlation measurements describe only the sampled windows.")
+        elif baseline is None:
+            parts.append(f"The measured speech windows for {name} leave the baseline offset unresolved.")
         elif abs(baseline) >= lipsync.BENIGN_OFFSET_TICKS:
             side = "later" if baseline > 0 else "earlier"
-            parts.append(f"The sound is {abs(_ms(baseline))} ms {side} than the picture throughout for {name}: {lipsync.BENIGN}.")
+            parts.append(f"The estimated baseline for {name} places the sound {abs(_ms(baseline))} ms {side} than the "
+                         "picture in the stable measured speech windows. A steady offset can come from how the audio "
+                         "and picture were combined.")
         else:
-            parts.append(f"Sound and picture are in sync for {name}.")
+            parts.append(f"The estimated baseline for {name} is within {_ms(lipsync.BENIGN_OFFSET_TICKS - 1)} ms "
+                         "in the stable measured speech windows.")
         parts.append("Lip-sync generators produce well-synchronised mouths, so this is informational and not evidence that the "
                      "face is unmanipulated.")
     if q.get("small_face", 0.0) >= 0.5:

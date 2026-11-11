@@ -28,6 +28,41 @@ def test_customer_assessment(case):
         assert got["excluded_channels"] == ["voice", "audio_picture_timing"]
 
 
+def _video_with_short_timing():
+    case = next(c for c in CASES if c["name"] == "real video excludes checked voice and timing from visual percentage")
+    result = copy.deepcopy(case["input"])
+    track = result["signals"][-1]
+    track.update(scope="track", metrics={"windows": 1, "peak_median": 0.8, "flagged": 0, "steps": 0, "collapses": 0})
+    result["signals"].append({**track, "id": "check.timing:track:1", "metrics": {**track["metrics"], "windows": 3}})
+    return result, customer_assessment(case["input"])
+
+
+def test_short_timing_scope_preserves_visual_assessment():
+    result, original = _video_with_short_timing()
+    got = customer_assessment(result)
+    assert got == {
+        **original,
+        "scope_note": (
+            "The main assessment uses sampled visual content. Voice/audio was checked separately from the main assessment. "
+            "Audio/picture timing measurements are available. Every measured face track had too few eligible speech "
+            "windows to assess timing changes."
+        ),
+    }
+
+
+@pytest.mark.parametrize("override", [
+    {"metrics": {"windows": 4, "peak_median": 0.8, "flagged": 0, "steps": 0, "collapses": 0}},
+    {"metrics": {"windows": 4, "peak_median": 0.8, "flagged": 1, "steps": 1, "collapses": 0}},
+    {"segments": [{"start_s": 1, "end_s": 2}]},
+    {"metrics": {"windows": 2, "confidence_median": 0.2, "flagged": 0, "steps": 0, "collapses": 0}},
+    {"metrics": {"windows": 2, "peak_median": 0.8}},
+])
+def test_short_timing_note_requires_all_measured_tracks_to_be_insufficient(override):
+    result, original = _video_with_short_timing()
+    result["signals"][-1].update(override)
+    assert customer_assessment(result) == original
+
+
 @pytest.mark.parametrize("p", [float("inf"), float("nan"), True, "0.9"])
 def test_rejects_non_probability(p):
     result = {"decision": {"code": "ai_supported", "fusion_mode": "artefact", "probability_ai_calibrated": p},

@@ -46,6 +46,34 @@ describe('evidence-led customer interpretation, shared report/API cases', () => 
   })
 })
 
+describe('short video timing coverage', () => {
+  const original = cases.find(c => c.name === 'real video excludes checked voice and timing from visual percentage')!.input
+  const existingTrack = original.signals!.at(-1)!
+  const shortTrack = { ...existingTrack, scope: 'track', metrics: { windows: 1, peak_median: .8, flagged: 0, steps: 0, collapses: 0 } }
+  const otherTrack = { ...shortTrack, id: 'check.timing:track:1', metrics: { ...shortTrack.metrics, windows: 3 } }
+  const withTracks = (track: typeof existingTrack = otherTrack) => ({
+    ...original, signals: [...original.signals!.slice(0, -1), shortTrack, track],
+  })
+
+  it('uses aliased track metrics in the fallback while retaining the visual estimate', () => {
+    expect(presentedCustomerAssessment(withTracks())).toEqual({
+      ...customerAssessment(original),
+      scope_note: 'The main assessment uses sampled visual content. Voice/audio was checked separately from the main assessment. '
+        + 'Audio/picture timing measurements are available. Every measured face track had too few eligible speech windows to assess timing changes.',
+    })
+  })
+
+  for (const [name, override] of [
+    ['a longer track', { metrics: { ...otherTrack.metrics, windows: 4 } }],
+    ['a timing flag', { metrics: { ...otherTrack.metrics, windows: 4, flagged: 1, steps: 1 } }],
+    ['a saved timing segment', { segments: [{ start_s: 1, end_s: 2 }] }],
+    ['a different timing method', { metrics: { windows: 2, confidence_median: .2, flagged: 0, steps: 0, collapses: 0 } }],
+    ['missing flag metrics', { metrics: { windows: 2, peak_median: .8 } }],
+  ] as const) it(`keeps general timing wording for ${name}`, () => {
+    expect(customerAssessment(withTracks({ ...otherTrack, ...override }))).toEqual(customerAssessment(original))
+  })
+})
+
 describe('local speech calibration', () => {
   for (const [code, p, direction, confidence] of [
     ['ai_supported', .92, 'ai', 92], ['no_ai_indicators', .08, 'original', 92],

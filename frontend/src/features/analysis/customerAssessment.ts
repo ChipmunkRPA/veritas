@@ -18,6 +18,7 @@ export interface CustomerAssessment {
     probability_ai_pct: number | null; interval_pct: [number, number] | null; interval_label: string | null; scope_label: string }
 }
 type Signal = { id: string; detector_id?: string | null; family?: string | null; modality?: string | null; lane?: string | null
+  scope?: string | null; segments?: readonly unknown[] | null
   hypothesis?: string | null; metrics?: Record<string, unknown> | null; details?: Record<string, unknown> | null
   legacy?: { v1_id?: string | null } | null; status?: string | null; outside_estimate?: unknown; effective_weight?: number | null }
 type Input = FindingContext & {
@@ -29,6 +30,7 @@ type Input = FindingContext & {
 export const ASSESSMENT_RULE = 'evidence-led-assessment/v6'
 const INTERVAL_NOTE = 'This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.'
 const ESTIMATE_NOTE = "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited."
+const SHORT_TIMING_NOTE = 'Audio/picture timing measurements are available. Every measured face track had too few eligible speech windows to assess timing changes.'
 const probability = (p: unknown): p is number => typeof p === 'number' && Number.isFinite(p) && p >= 0 && p <= 1
 const pct = (p: number) => Math.floor(Number((p * 1000).toFixed(8))) / 10
 
@@ -45,12 +47,23 @@ function counted(row: { counted?: boolean | null; logit?: number | null }): bool
 
 type AssessmentScope = Pick<CustomerAssessment, 'scope' | 'scope_label' | 'scope_note' | 'excluded_channels'>
 
+function shortTimingTrack(signal: Signal): boolean {
+  const metrics = signal.metrics ?? {}
+  const windows = metrics.windows, peak = metrics.peak_median
+  // The correlation route records peak_median and needs at least four windows.
+  return signal.scope === 'track' && !signal.segments?.length
+    && typeof peak === 'number' && Number.isFinite(peak)
+    && typeof windows === 'number' && [1, 2, 3].includes(windows)
+    && ['flagged', 'steps', 'collapses'].every(key => metrics[key] === 0)
+}
+
 function videoScope(result: Input): [AssessmentScope, boolean] {
   const scope = { scope: 'whole_file' as const, scope_label: 'Assessed content', scope_note: 'The overall estimate covers only the checks included in it. Findings assessed separately do not enter this percentage; unassessed regions and types of editing remain unresolved.', excluded_channels: [] }
   if (result.kind !== 'video') return [scope, true]
   const rows = result.decision?.contributions?.filter(r => r.kind === 'detector') ?? []
   const included = new Set<string>()
   const statuses = { visual: new Set<string>(), voice: new Set<string>(), audio_picture_timing: new Set<string>() }
+  const timingChecks: Signal[] = []
   for (const signal of result.signals ?? []) {
     const refs = signalRefs(signal)
     const families = new Set((result.findings ?? []).filter(f => f.evidence_ids?.some(id => refs.has(id))).map(f => f.family))
@@ -62,6 +75,7 @@ function videoScope(result: Input): [AssessmentScope, boolean] {
     if (channel === null) continue
     const status = signal.status || 'unknown'
     statuses[channel].add(status)
+    if (channel === 'audio_picture_timing' && status === 'ok') timingChecks.push(signal)
     const matched = rows.filter(r => r.signal_id != null && refs.has(r.signal_id))
     const omitted = !!signal.outside_estimate || signal.effective_weight === 0 || matched.some(r => r.counted === false)
     if (status === 'ok' && !omitted && matched.some(counted)) included.add(channel)
@@ -73,7 +87,8 @@ function videoScope(result: Input): [AssessmentScope, boolean] {
     : 'The saved result does not establish which content checks contributed to the main assessment.']
   for (const channel of ['visual', 'voice', 'audio_picture_timing'] as const) {
     const states = statuses[channel], label = labels[channel]
-    if (states.has('ok') && !included.has(channel)) notes.push(`${label} was checked separately from the main assessment.`)
+    if (channel === 'audio_picture_timing' && timingChecks.length && timingChecks.every(shortTimingTrack)) notes.push(SHORT_TIMING_NOTE)
+    else if (states.has('ok') && !included.has(channel)) notes.push(`${label} was checked separately from the main assessment.`)
     if (['failed', 'timeout', 'timed_out'].some(status => states.has(status))) notes.push(`Some ${label.toLowerCase()} checks could not complete.`)
     if (states.has('skipped')) notes.push(`Some ${label.toLowerCase()} checks were skipped.`)
     if (states.has('not_applicable')) notes.push(`Some ${label.toLowerCase()} checks were unavailable or not applicable.`)

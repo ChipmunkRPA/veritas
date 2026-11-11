@@ -102,6 +102,130 @@ def test_report_presentation_matches_api_headline_and_preserves_evidence(name):
     assert snapshot_hash(snapshot) == before
 
 
+def test_short_video_timing_coverage_survives_json_html_and_signed_zip(tmp_path, monkeypatch):
+    import zipfile
+
+    import pymupdf
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import Session
+
+    from app.core.canonical import canonical_hash, canonical_json
+    from app.core.config import settings
+    from app.detectors.video.decode import FrameTable
+    from app.evidence.service import packet_hash
+    from app.reports import engine, package, signing, snapshot, verify
+    from app.storage.artefacts import register_artefact
+    from app.storage.db import Analysis, Base, ReportRow
+    from app.storage.objects import default_store
+
+    frozen, expected = headline_snapshot("real video excludes checked voice and timing from visual percentage")
+    result = frozen.result
+    result["decision"].update(verbal=expected["headline"], reason="The recorded visual checks supply the estimate.",
+                              band="likely_real")
+    result["findings"] = []
+    detector = "vid.lipsync.landmark_xcorr"
+    result["signals"][-1].update(
+        id=f"{detector}:track:0", detector_id=detector, scope="track", raw_score=0.0, raw_kind="score",
+        metrics={"windows": 1, "peak_median": 0.8, "flagged": 0, "steps": 0, "collapses": 0},
+        model_revisions={"private-timing-model": "private-checkpoint"},
+    )
+    monkeypatch.setattr(settings, "data_dir", tmp_path / "data")
+    store = default_store()
+    source = store.put_bytes(b"Authored video export fixture")
+    table = FrameTable("1/25", tuple(range(74)), (0,), "I" + "P" * 73, 32, 24, 32, 24)
+    frame_table = table.to_json()
+    probe = store.put_bytes(canonical_json({"frame_table": frame_table}))
+    render = store.put_bytes(canonical_json({"frame_anchors": []}))
+    bindings = {"frame_table_sha256": canonical_hash(frame_table), "frame_anchor_sha256": canonical_hash([]),
+                "timeline_origin_s": 0.0}
+    result["manifest"]["sampling"].update(frame_anchor_version="stream-pts-rgb24/1", **bindings)
+    result["input"].update(sha256=source.sha256, size_bytes=source.size_bytes)
+    original_hash = canonical_hash(result)
+    evidence = {
+        "schema": "chipmunk.video-evidence/1", "version": "video-evidence-2", "status": "ready",
+        "id": "timing-export-evidence", "analysis_id": frozen.analysis.id, "revision": frozen.analysis.revision,
+        "original_result_hash": original_hash,
+        "source": {"sha256": source.sha256, "time_base": table.time_base, "frame_count": len(table),
+                   "width": table.width, "height": table.height, **bindings},
+        "source_records": [{"stage": "probe", "sha256": probe.sha256}, {"stage": "render", "sha256": render.sha256}],
+        "packets": [],
+    }
+    evidence["sha256"] = packet_hash(evidence)
+    frozen = frozen.model_copy(update={
+        "evidence": evidence,
+        "media": frozen.media.model_copy(update={"sha256": source.sha256, "size_bytes": source.size_bytes}),
+    })
+    original_snapshot_hash = snapshot.snapshot_hash(frozen)
+    database = create_engine("sqlite://")
+    Base.metadata.create_all(database)
+    key = signing.instance_key(tmp_path / "test-key.pem")
+    expected_note = "Every measured face track had too few eligible speech windows to assess timing changes."
+
+    with Session(database) as db:
+        analysis = Analysis(id=frozen.analysis.id, kind="video", filename=frozen.media.filename, content_type="video/mp4",
+                            size_bytes=source.size_bytes, sha256=source.sha256, status="done",
+                            revision=frozen.analysis.revision, result_schema_version=2, result_hash=original_hash,
+                            result_json=json.dumps({"verdict": {"p_ai": 0.99}}))
+        db.add(analysis)
+        db.flush()
+        register_artefact(db, store, canonical_json(result), media_type="application/json", role="stage_output",
+                          created_by="publish-result", analysis_id=analysis.id)
+        register_artefact(db, store, canonical_json(evidence), media_type="application/json", role="exhibit_payload",
+                          created_by="video-evidence-packets/2", analysis_id=analysis.id, artefact_id=evidence["id"])
+
+        @contextmanager
+        def sessions():
+            yield db
+
+        monkeypatch.setattr(routes, "get_session", sessions)
+        monkeypatch.setattr(routes, "_verified", lambda *_: store.verify(source.sha256))
+        monkeypatch.setattr(routes.audit, "record", lambda *args, **kwargs: None)
+        request = SimpleNamespace(state=SimpleNamespace(principal=SimpleNamespace(id="local")))
+        exported = json.loads(routes.export_json(analysis.id, request).body)
+        assessment = exported["customer_assessment"]
+        assert expected_note in assessment["scope_note"]
+        assert assessment["direction"] == expected["direction"]
+        assert assessment["confidence_pct"] == expected["confidence_pct"]
+        assert exported["result_hash"] == original_hash and exported["evidence"] == evidence
+        html = engine.render_html(frozen, embed_fonts=False)
+        assert expected_note in html and assessment["headline"] in html
+
+        with pymupdf.open() as pdf:
+            pdf.new_page().insert_text((50, 70), "Chipmunk Verify test report")
+            pdf_bytes = pdf.tobytes()
+        pdf_art = register_artefact(db, store, pdf_bytes, media_type="application/pdf", role="report",
+                                    created_by="report-fixture", analysis_id=analysis.id)
+        snap_art = register_artefact(db, store, snapshot.dump(frozen), media_type="application/json", role="stage_output",
+                                     created_by="report-snapshot", analysis_id=analysis.id)
+        report = ReportRow(
+            id=frozen.report.id, display_id=frozen.report.display_id, revision=frozen.report.revision,
+            analysis_id=analysis.id, analysis_revision=analysis.revision, profile=frozen.report.profile, redacted=False,
+            review_state="machine", issuable=False, template_set=frozen.report.template_set, engine="test", status="done",
+            snapshot_hash=original_snapshot_hash, snapshot_artefact_id=snap_art.id, artefact_id=pdf_art.id,
+            sha256=pdf_art.sha256, signature=key.sign(pdf_bytes), signing_key_id=key.key_id,
+            requested_by="test", requested_at=frozen.report.requested_at, page_count=1,
+        )
+        db.add(report)
+        row = package.prepare(db, analysis, report, kind="draft", include_original=False, created_by="test",
+                              schema_id=package.PUBLIC_SCHEMA)
+        built = package.build(db, row, store=store, key=key, exported_at=frozen.report.requested_at)
+        verified = verify.verify_package(built.path, public_key_pem=key.public_pem())
+        assert verified.ok, verified.as_dict()
+        with zipfile.ZipFile(built.path) as archive:
+            public = json.loads(archive.read("result.json"))
+            assert public["schema"] == "chipmunk.public-result/1"
+            assert expected_note in public["note"]
+            assert public["original_result_sha256"] == original_hash
+            assert public["decision"]["probability_ai_calibrated"] == result["decision"]["probability_ai_calibrated"]
+            assert archive.read("evidence.json") == canonical_json(evidence)
+            assert archive.read("report.pdf") == pdf_bytes
+            for private in ("private-timing-model", "private-checkpoint"):
+                assert private not in json.dumps(public)
+        assert snapshot.snapshot_hash(frozen) == original_snapshot_hash
+        assert canonical_hash(result) == original_hash
+        assert store.read_bytes(original_hash) == canonical_json(result)
+
+
 @pytest.mark.parametrize("kind", ["image", "video", "audio", "document"])
 @pytest.mark.parametrize("profile", ["summary", "standard", "forensic", "newsroom"])
 def test_every_standard_report_discloses_screening_scope_and_private_engagement(kind, profile):

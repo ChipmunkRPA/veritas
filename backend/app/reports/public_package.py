@@ -33,6 +33,14 @@ def public_result(result: dict) -> dict:
     """A bounded customer view; no registry, model cards, internal details or arbitrary exhibits."""
     public = project(result)
     decision = public.get('decision') or {}
+    # The offline verifier admits a fixed set of result.json keys, including this note.
+    note = 'This public projection has its own hash. It does not reproduce or hash to the original internal result.'
+    if result.get('kind') == 'video':
+        from app.engine.customer_assessment import SHORT_TIMING_NOTE, customer_assessment
+
+        scope_note = customer_assessment(result)['scope_note'] or ''
+        if SHORT_TIMING_NOTE in scope_note:
+            note += ' ' + SHORT_TIMING_NOTE
     return {
         'schema': 'chipmunk.public-result/1', 'is_projection': True,
         'original_result_sha256': canonical_hash(result),
@@ -42,7 +50,7 @@ def public_result(result: dict) -> dict:
                      for f in public.get('findings') or []],
         'checks': [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                     'raw_score_kind', 'calibrated_probability') if k in s} for s in public.get('signals') or []],
-        'note': 'This public projection has its own hash. It does not reproduce or hash to the original internal result.',
+        'note': note,
     }
 
 

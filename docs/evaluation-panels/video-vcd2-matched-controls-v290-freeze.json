@@ -1,0 +1,40 @@
+{
+  "schema": "chipmunk.video-vcd2-matched-controls/290",
+  "source_freeze_sha256": "e7a7c400330dd22c1e9cd6d43d4ae91fbe5f3648657fb7c0c0877f103b44cc76",
+  "code_sha256": {
+    "backend/scripts/video_vcd2_controls_v200.py": "f110504017c2e5565b00cdb81b2647f1a55c671fddf3c173480a5080ef5b6e12",
+    "backend/tests/test_video_vcd2_controls_v200.py": "239f9f26b4b8c2d10ac1b2aabf407241bcfc93569264b7c8c99952ab1b20c283",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "docs/video-vcd2-controls-v200-method.md": "407bf06f66edacc7de6caceff39e991d3d427e83177a2dcf56361b27f21d382b",
+    "backend/scripts/video_vcd2_matched_controls_v290.py": "a4d1c8d23a7d9c9d03785be5b35e0d3a2c5de11c21be6913defc06f908be34c8",
+    "backend/scripts/video_vcd2_delivery_v206.py": "42bac04312026df98b142cd2812d2c850c2d6dfd48be8b9d49161e25a34e3aa7",
+    "backend/tests/test_video_vcd2_matched_controls_v290.py": "a23e20355ab276f4da1d259b4f8a5d62142de744d074607d4fcc18e040428e41",
+    "docs/video-vcd2-matched-controls-v290-method.md": "194c63cdb719e58b34e3cc28e8b6998b59d935c3c3263cf64fb775ddbf49af3f"
+  },
+  "tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "roles": [
+    "unchanged",
+    "chroma_conversion_only",
+    "recompression_only"
+  ],
+  "relative_interval_s": [
+    3,
+    6
+  ],
+  "model_calls": 0,
+  "source_result_sha256": "386e619b9e2bde56cc35919ff5ffa5bd16a6adc4955cfb9997e75749cac8a1df",
+  "source_private_freeze_sha256": "a2433130969594927c5e9c56e933206d09c0eaccc7b53c9dbf7f200c0f0e0bb8",
+  "source_qualification_bundle_sha256": "302624f98b7b7843b38dfa4353e502113b9dce15e1a18f54449357331a497eb2",
+  "v200_recipe_freeze_sha256": "bba4426b8227f7ca1618613428e59c6c505bb8a247b2747b0cdfbbf99f9c24ab",
+  "source_groups": 8,
+  "planned_controls": 24,
+  "source_frames": 1790,
+  "storage_projection": {
+    "retained_rgb_equivalent_bytes": 21762432000,
+    "largest_slot_workspace_estimate_bytes": 7614259200
+  },
+  "private_freeze_sha256": "24cab58bea3ac4efbe9cf8a3b85a96fcbdc6e1f7573afb23fdc0f9375f45001e"
+}

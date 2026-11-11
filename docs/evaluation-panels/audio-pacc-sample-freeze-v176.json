@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.audio-pacc-sample-freeze/176",
+  "publisher_revision": "b6c9e5f2ff0e3d60f90ade6d37d79245207a4f64",
+  "sample_sha256": "878caa7fbc67c06380f99c2e165fd8d306c7c0229ce00e03c475e35076c14b99",
+  "publisher_metadata_sha256": {
+    "README.md": "ba8b6fcfc4cb29f391331ce40f7c36e6ed244b4cca3f1605427a31dcdeac3b93",
+    "SHA256SUMS": "73156c273548629f6a2ee14403ecd51c70381ddaea3642935c516df23225a1f2",
+    "TARBALL_INDEX.csv": "4eabe65ff1c6fc581043bd545ec0215258f5d7985a4f47c7157c65a85f46c2f4",
+    "attribution.csv": "aac7b3ee9d82455fb123eb0bc6f79771f26eaf2ae523517456600cac2ee2c59d",
+    "condition_index.csv": "81e4a87849a4da9f5930ae89ee7c38590a6fda0a995622431402306c4cb71bcd"
+  },
+  "declared_history_sha256": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1",
+  "code_sha256": {
+    "backend/scripts/audio_pacc_sample_v176.py": "51432fbbb35ae7a21cc5afbd62c2de488adcd1fd57516db121a3cd855672ddbd",
+    "docs/audio-pacc-sample-v176-method.md": "aea762225978b95c709286f26704b6e40a87dc6be40df0b6247cc6ed92fad792",
+    "backend/tests/test_audio_pacc_sample_v176.py": "047df134f0ee0e9a46859f886ddc15f72aa1fbf76f1567da7cb1088c7e0ccec7",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "ffmpeg_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "planned_source_inputs": {
+    "AMI": 4,
+    "VCTK_mic1": 5,
+    "VCTK_mic2": 5
+  },
+  "conditions": {
+    "clean": null,
+    "babble_snr00": 0,
+    "babble_snr05": 5,
+    "env_noise_snr00": 0,
+    "env_noise_snr05": 5,
+    "music_instrumental_snr00": 0,
+    "music_instrumental_snr05": 5
+  },
+  "planned_cases": 98,
+  "source_sample_range": [
+    0,
+    48000
+  ],
+  "production_sample_rate": 16000,
+  "new_neural_calls": 0,
+  "private_plan_sha256": "d2da3174baf60a12f072dc73fa725b80409de27464529d595c0da136bfedbc48"
+}

@@ -1,0 +1,186 @@
+{
+  "schema": "chipmunk.grid-native-first-eight/137",
+  "status": "partial_cohort_progress",
+  "planned_sources": 16,
+  "completed_sources": 4,
+  "planned_clips": 32,
+  "completed_selected_clips": 8,
+  "availability": {
+    "native_video_and_audio_available": 8
+  },
+  "retained_native_pictures": 600,
+  "observed_mono16k_samples": 381184,
+  "stages": [
+    {
+      "measurement": {
+        "schema": "chipmunk.grid-native-inputs-result/137",
+        "status": "complete",
+        "source_archives": 1,
+        "planned_clips": 2,
+        "retained_clips": 2,
+        "availability": {
+          "native_video_and_audio_available": 2
+        },
+        "native_video_frames": 150,
+        "retained_native_pictures": 150,
+        "observed_mono16k_samples": 95296,
+        "private_native_inputs_sha256": "5fb015bd707fe0026b20010247c446055b53b61dbda2c5e606e2976faebc1976",
+        "freeze_sha256": "b323b9080b2748c9e8fdf722e02b297225117f2d1fedaaab00918dce5de69555",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "One source's two original selected clips; full native frames/PNG round trips and canonical PCM/source clocks. Not full cohort completion, independent identity/ancestry proof, geometry, generation or detection accuracy. All media/individual fingerprints private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 0,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 4.430952916969545,
+        "sampled_tree_rss_lower_bound_bytes": 130859008,
+        "minimum_available_ram_bytes": 5822496768,
+        "resource_journal_sha256": "6c8e3aeef504991eb28197e2f5c0266f074bb61787af02c95fc23c3fed14e0ab",
+        "runtime_sha256": "a5aa6bec2a12e2cb3eb27e0a265dcff4ff779fb852e42727c3d17e4d87e9e08c",
+        "worker_receipt_sha256": "8d16905381edfaa03f9b768c5602a9df841ae2555955cef943a38bb1d87fe5c4",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "8d16905381edfaa03f9b768c5602a9df841ae2555955cef943a38bb1d87fe5c4",
+      "profile_sha256": "ff4f17d39f8187b351ca26db3c87cf9bc30f8db99a04da22593c14ab2a6325ea"
+    },
+    {
+      "measurement": {
+        "schema": "chipmunk.grid-native-inputs-result/137",
+        "status": "complete",
+        "source_archives": 1,
+        "planned_clips": 2,
+        "retained_clips": 2,
+        "availability": {
+          "native_video_and_audio_available": 2
+        },
+        "native_video_frames": 150,
+        "retained_native_pictures": 150,
+        "observed_mono16k_samples": 95296,
+        "private_native_inputs_sha256": "d15fdb2c15edde695e23e37380510ef80870dbee5f0cc585693b50e300182314",
+        "freeze_sha256": "b323b9080b2748c9e8fdf722e02b297225117f2d1fedaaab00918dce5de69555",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "One source's two original selected clips; full native frames/PNG round trips and canonical PCM/source clocks. Not full cohort completion, independent identity/ancestry proof, geometry, generation or detection accuracy. All media/individual fingerprints private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 0,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 4.427192416973412,
+        "sampled_tree_rss_lower_bound_bytes": 130383872,
+        "minimum_available_ram_bytes": 5820907520,
+        "resource_journal_sha256": "da3250cbe30aea84f3d85fafd00c9538e86281e0bc8b6d7b2989c25381432785",
+        "runtime_sha256": "a5aa6bec2a12e2cb3eb27e0a265dcff4ff779fb852e42727c3d17e4d87e9e08c",
+        "worker_receipt_sha256": "3b486d7994a0bf6d3d8270fad2d7266a70564d655d400af4fc5c5d44f190a47c",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "3b486d7994a0bf6d3d8270fad2d7266a70564d655d400af4fc5c5d44f190a47c",
+      "profile_sha256": "2e24f246f8f496f69346c03e2732bfc931ceb4c3554e0c655506e232299a7958"
+    },
+    {
+      "measurement": {
+        "schema": "chipmunk.grid-native-inputs-result/137",
+        "status": "complete",
+        "source_archives": 1,
+        "planned_clips": 2,
+        "retained_clips": 2,
+        "availability": {
+          "native_video_and_audio_available": 2
+        },
+        "native_video_frames": 150,
+        "retained_native_pictures": 150,
+        "observed_mono16k_samples": 95296,
+        "private_native_inputs_sha256": "6500f2cae0cac6a05b21542f6f538bf09397fc6b84f7dd4a80496e8916d1856a",
+        "freeze_sha256": "b323b9080b2748c9e8fdf722e02b297225117f2d1fedaaab00918dce5de69555",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "One source's two original selected clips; full native frames/PNG round trips and canonical PCM/source clocks. Not full cohort completion, independent identity/ancestry proof, geometry, generation or detection accuracy. All media/individual fingerprints private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 0,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 4.17890262498986,
+        "sampled_tree_rss_lower_bound_bytes": 129122304,
+        "minimum_available_ram_bytes": 5833621504,
+        "resource_journal_sha256": "f6f2fdd58d6e0aa5e4c2aa243559ca173e8b9decbb4de96db404b86db2a48f9f",
+        "runtime_sha256": "a5aa6bec2a12e2cb3eb27e0a265dcff4ff779fb852e42727c3d17e4d87e9e08c",
+        "worker_receipt_sha256": "bcfc4beaac10df0ea2009b4e04f85f163390522e6914439422a81cb22d5e49eb",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "bcfc4beaac10df0ea2009b4e04f85f163390522e6914439422a81cb22d5e49eb",
+      "profile_sha256": "ec8b6b0d1647be339e4766bfb0cd4b26929147aeedc4c87f5fb0325a28887482"
+    },
+    {
+      "measurement": {
+        "schema": "chipmunk.grid-native-inputs-result/137",
+        "status": "complete",
+        "source_archives": 1,
+        "planned_clips": 2,
+        "retained_clips": 2,
+        "availability": {
+          "native_video_and_audio_available": 2
+        },
+        "native_video_frames": 150,
+        "retained_native_pictures": 150,
+        "observed_mono16k_samples": 95296,
+        "private_native_inputs_sha256": "633d181421404dbf6bd0af0af5a3a65fb15bbf63aa53944ef503160e4f6470bc",
+        "freeze_sha256": "b323b9080b2748c9e8fdf722e02b297225117f2d1fedaaab00918dce5de69555",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "One source's two original selected clips; full native frames/PNG round trips and canonical PCM/source clocks. Not full cohort completion, independent identity/ancestry proof, geometry, generation or detection accuracy. All media/individual fingerprints private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 0,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 4.694120957981795,
+        "sampled_tree_rss_lower_bound_bytes": 130056192,
+        "minimum_available_ram_bytes": 5958828032,
+        "resource_journal_sha256": "63bd7bc6c87ab882a300fbb9d217f70cdf5a4e67120fe250f40651ebc68ee89e",
+        "runtime_sha256": "a5aa6bec2a12e2cb3eb27e0a265dcff4ff779fb852e42727c3d17e4d87e9e08c",
+        "worker_receipt_sha256": "0f7005c64160058c4ff07bb8bda31ed269e5d50ea0f7cc2e0dd3d4b348af86d2",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "0f7005c64160058c4ff07bb8bda31ed269e5d50ea0f7cc2e0dd3d4b348af86d2",
+      "profile_sha256": "6a72b1880dddd98e078b499691cbc6ee941ff003025530c54f12bb773be414f2"
+    }
+  ],
+  "new_neural_calls": 0,
+  "defaults_changed": false,
+  "scope": "Snapshot of first four original sources. Full native frame/PNG and PCM clocks only. Twelve source acquisitions/native banks remain at snapshot time; no completed cohort, inferred authenticity, generator validation or detector accuracy claim. Private identities/individual fingerprints/media are not published."
+}

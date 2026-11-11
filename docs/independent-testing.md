@@ -31,6 +31,18 @@ and [full clip planning method](grid-clip-plan-v136-method.md) before interpreti
 their receipts. Raw source identities/media and individual fingerprints remain
 private. No outside reviewer is claimed.
 
+The [expression-driving prototype](portrait-expression-drive-v138-design.md)
+also has nine NumPy/pytest checks for the independent displacement equation,
+unchanged source expression, invalid inputs and model-free imports:
+
+```sh
+PYTHONPATH=backend python -m pytest -q -o addopts='' backend/tests/test_portrait_expression_drive_v138.py
+```
+
+Those checks do not run pretrained networks or qualify generated motion. The
+CPU bridge is unqualified and is not part of serving confidence. Its model
+execution, native composite checks and achieved-motion comparison remain open.
+
 The [complete native mouth construction/replay](native-mouth-clips-v120-complete.md)
 now includes all 283 ready clips and 4,700 source-bound difference masks. Those
 private-media checks are internal lineage validation, not an outside review.

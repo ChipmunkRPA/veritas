@@ -1,0 +1,2501 @@
+{
+  "schema": "chipmunk.grid-mouth-motion-readout-result/158",
+  "status": "complete",
+  "freeze_sha256": "95ab38aa52c4608482efae94c1bc6bc638df6d0e5872ef7f6498e644ff9df02a",
+  "complete_guarded_clip_stages": 16,
+  "private_clip_artifact_manifest_sha256": "e6cd547b0dc8ce3efc22e224e91514ba9e359e62721d5feef926b7dfd3aa1ec2",
+  "exact_observer_control_checks": {
+    "fixed_repeat": {
+      "planned_pairs": 16,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 16,
+      "matching_unavailable_geometry_pairs": 0
+    },
+    "genuine_frame_retime": {
+      "planned_pairs": 384,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 384,
+      "matching_unavailable_geometry_pairs": 0
+    },
+    "audio_delay_320ms": {
+      "planned_pairs": 384,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 384,
+      "matching_unavailable_geometry_pairs": 0
+    }
+  },
+  "planned_cases": 176,
+  "planned_pairs": 96,
+  "source_components": 8,
+  "by_condition": {
+    "original": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7100959320128593,
+          "median": 1.1430389853672873,
+          "q3": 2.3862949985901687
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.2010976817849431,
+          "median": 0.5576426539465207,
+          "q3": 1.7815434367773582
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 704
+      },
+      "eye_patch_observations": {},
+      "unchanged_eye_patch_drift_px": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      }
+    },
+    "musetalk_source_time": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 16,
+      "observable_neural_cases": 16,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 0,
+        "earlier_compatible": 0,
+        "search_boundary": 6,
+        "ambiguous": 6,
+        "other_or_poor_match": 4
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.968773538249332,
+          "median": 1.2714074767886467,
+          "q3": 1.8129215530875822
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.44575003502883775,
+          "median": 0.8395302493512302,
+          "q3": 2.761393503720088
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.7079520128500625,
+          "median": 0.15337380584874244,
+          "q3": 0.7046638325486491
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.09487441250415261,
+          "median": 0.12851433869907294,
+          "q3": 0.47774555229114557
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.14499447160705153,
+        "median": 0.21671720929691743,
+        "q3": 0.2937843132454915
+      }
+    },
+    "musetalk_earlier_320ms": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 16,
+      "observable_neural_cases": 16,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 0,
+        "earlier_compatible": 0,
+        "search_boundary": 10,
+        "ambiguous": 5,
+        "other_or_poor_match": 1
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.961072432949158,
+          "median": 1.6217481799061613,
+          "q3": 1.9747237342951909
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 1.3115017725314546,
+          "median": 1.9142153934980544,
+          "q3": 2.5476121981584474
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.8993949499944045,
+          "median": 0.13315665137117544,
+          "q3": 0.801619150015761
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.06413197744336346,
+          "median": 1.092362841210822,
+          "q3": 2.088775293996203
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.15972475821248577,
+        "median": 0.23615594931784983,
+        "q3": 0.31817709347424494
+      }
+    },
+    "liveportrait_source_time": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 16,
+      "observable_neural_cases": 16,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.6947804047288179,
+          "median": 1.144056380949495,
+          "q3": 2.216005951201649
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.20402448943403428,
+          "median": 0.6141370841182949,
+          "q3": 1.7132080023890106
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.044859683849226756,
+          "median": -0.01077924232798376,
+          "q3": 0.023832085088063115
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.04214566871827197,
+          "median": -0.0116894185292713,
+          "q3": 0.040256729006721614
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.018757250719563624,
+        "median": 0.03524011746604719,
+        "q3": 0.054138537905959044
+      }
+    },
+    "liveportrait_earlier_320ms": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 16,
+      "observable_neural_cases": 16,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 1,
+        "source_time_compatible": 0,
+        "earlier_compatible": 10,
+        "search_boundary": 2,
+        "ambiguous": 3,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 10,
+            "components": 7,
+            "q1": -8.75,
+            "median": -8.0,
+            "q3": -8.0
+          },
+          "last": {
+            "observations": 10,
+            "components": 7,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -7.0
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 1.1740165374815874,
+          "median": 1.607855405848367,
+          "q3": 2.134788797934397
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 1.0236925294661399,
+          "median": 2.458380071737664,
+          "q3": 3.3304694754633415
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.3745848092180162,
+          "median": 0.4366676657561488,
+          "q3": 0.8302010237625116
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.0617480236371985,
+          "median": 0.7313461144118595,
+          "q3": 2.4102140206733393
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.06961048473448446,
+        "median": 0.15685211002199972,
+        "q3": 0.23191478461276616
+      }
+    },
+    "resample_musetalk": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7223522091544363,
+          "median": 1.1569713926165286,
+          "q3": 2.389784344983677
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.188830078414154,
+          "median": 0.5401967495431335,
+          "q3": 1.7710852437064748
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.01078706639387006,
+          "median": 0.004300283065623356,
+          "q3": 0.02148957238169555
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.01732927245984009,
+          "median": -0.004377013023878253,
+          "q3": 0.006894749420194812
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.009091801045335787,
+        "median": 0.014576269959840425,
+        "q3": 0.02136306709305409
+      }
+    },
+    "resample_liveportrait": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 14,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 2,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7882455159948394,
+          "median": 1.1671402714621872,
+          "q3": 2.2757775704558494
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.21380214215955073,
+          "median": 0.5647724598627182,
+          "q3": 1.809179981398935
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.07797523167822279,
+          "median": -0.020107409000962084,
+          "q3": 0.032655710842422914
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.034773016665376084,
+          "median": 0.02128551723626787,
+          "q3": 0.053649475157616415
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.02378873027113543,
+        "median": 0.04103869770454695,
+        "q3": 0.05681554994976593
+      }
+    },
+    "brightness_musetalk": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 14,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 2,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7536115621363222,
+          "median": 1.2249929283176213,
+          "q3": 2.362244950326872
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.2750583641336567,
+          "median": 0.6060291677469167,
+          "q3": 1.7643621052118086
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.044071393020661764,
+          "median": 0.023890843340447776,
+          "q3": 0.07916903154704003
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.02224026539943961,
+          "median": 0.03031331020307121,
+          "q3": 0.047397727509165294
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.06507588338700333,
+        "median": 0.1109756351997101,
+        "q3": 0.17258466116472504
+      }
+    },
+    "brightness_liveportrait": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 14,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 2,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 14,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7997740506125935,
+          "median": 1.2597701256418832,
+          "q3": 2.4900107407708356
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.3220420313354437,
+          "median": 0.6695182839076439,
+          "q3": 1.9711947475275868
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": -0.08206027525393897,
+          "median": 0.09564028214097336,
+          "q3": 0.1405736464021998
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.009903690516227026,
+          "median": 0.0702574957604945,
+          "q3": 0.15845973842727534
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.0557679976791477,
+        "median": 0.10139829083062069,
+        "q3": 0.14883927725055862
+      }
+    },
+    "genuine_frame_retime": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 0,
+        "earlier_compatible": 16,
+        "search_boundary": 0,
+        "ambiguous": 0,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 16,
+            "components": 8,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -8.0
+          },
+          "last": {
+            "observations": 16,
+            "components": 8,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -8.0
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 1.8752412613294145,
+          "median": 2.7494068344574174,
+          "q3": 3.598342127474942
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 3.926567500881917,
+          "median": 5.017348652234847,
+          "q3": 6.210242305588716
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.1764640998276839,
+          "median": 1.4017379357801594,
+          "q3": 2.4755075472900976
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 2.4290886097446065,
+          "median": 4.471935802846793,
+          "q3": 6.027962739095711
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "different_eye_pixels": 320,
+        "identical_eye_pixels": 64
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 64,
+        "components": 8,
+        "q1": 0.0,
+        "median": 0.0,
+        "q3": 0.0
+      }
+    },
+    "audio_delay_320ms": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7100959320128593,
+          "median": 1.1430389853672873,
+          "q3": 2.3862949985901687
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.2010976817849431,
+          "median": 0.5576426539465207,
+          "q3": 1.7815434367773582
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.0,
+        "median": 0.0,
+        "q3": 0.0
+      }
+    }
+  },
+  "by_family": {
+    "original": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7100959320128593,
+          "median": 1.1430389853672873,
+          "q3": 2.3862949985901687
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.2010976817849431,
+          "median": 0.5576426539465207,
+          "q3": 1.7815434367773582
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 704
+      },
+      "eye_patch_observations": {},
+      "unchanged_eye_patch_drift_px": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      }
+    },
+    "musetalk": {
+      "planned_cases": 32,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 32,
+      "observable_neural_cases": 32,
+      "full_curves_measured": 32,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 32,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 32,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 32,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 0,
+        "earlier_compatible": 0,
+        "search_boundary": 16,
+        "ambiguous": 11,
+        "other_or_poor_match": 5
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.968773538249332,
+          "median": 1.3218601539183321,
+          "q3": 1.9603518798051247
+        },
+        "exit_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.7387481576520143,
+          "median": 1.5186246490394104,
+          "q3": 2.7084432417251043
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.8993949499944045,
+          "median": 0.15337380584874244,
+          "q3": 0.7661427119687518
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.09487441250415261,
+          "median": 0.29754636079053753,
+          "q3": 1.3281623309950634
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 768
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 768
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 768,
+        "components": 8,
+        "q1": 0.14894038120679012,
+        "median": 0.2246808604155018,
+        "q3": 0.306313697662569
+      }
+    },
+    "liveportrait": {
+      "planned_cases": 32,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 32,
+      "observable_neural_cases": 32,
+      "full_curves_measured": 32,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 32,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 32,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 32,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 1,
+        "source_time_compatible": 15,
+        "earlier_compatible": 10,
+        "search_boundary": 2,
+        "ambiguous": 4,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 10,
+            "components": 7,
+            "q1": -8.75,
+            "median": -8.0,
+            "q3": -8.0
+          },
+          "last": {
+            "observations": 10,
+            "components": 7,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -7.0
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.9028936656358466,
+          "median": 1.3584993503559495,
+          "q3": 2.216005951201649
+        },
+        "exit_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.28788903612975725,
+          "median": 1.3305025267335646,
+          "q3": 2.988510644074703
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.14835708229062966,
+          "median": 0.003652619453461292,
+          "q3": 0.40767906777006946
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.04214566871827197,
+          "median": 0.041763856999524895,
+          "q3": 0.5686773024995214
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 768
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 768
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 768,
+        "components": 8,
+        "q1": 0.0258758689601734,
+        "median": 0.05746225611972948,
+        "q3": 0.15820356121877535
+      }
+    },
+    "resample": {
+      "planned_cases": 32,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 32,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 32,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 32,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 32,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 29,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 3,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 29,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 29,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.7223522091544363,
+          "median": 1.1671402714621872,
+          "q3": 2.363575962980894
+        },
+        "exit_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.188830078414154,
+          "median": 0.5616910288882097,
+          "q3": 1.7979003755396799
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.04342614379784446,
+          "median": -0.0022215107976291115,
+          "q3": 0.027128290832614005
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.018844133884720754,
+          "median": -0.0013872590637021842,
+          "q3": 0.030045367186244898
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 768
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 768
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 768,
+        "components": 8,
+        "q1": 0.011112010767894729,
+        "median": 0.021962461586453375,
+        "q3": 0.04404845476835752
+      }
+    },
+    "brightness": {
+      "planned_cases": 32,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 32,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 32,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 32,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 32,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 28,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 4,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 28,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 28,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.7813863193690326,
+          "median": 1.2389293547679048,
+          "q3": 2.451567260153851
+        },
+        "exit_velocity_norm": {
+          "observations": 32,
+          "components": 8,
+          "q1": 0.2869186167356129,
+          "median": 0.6273588864791315,
+          "q3": 1.8570895743156073
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.05815204261089646,
+          "median": 0.050158123155067486,
+          "q3": 0.12976330580209444
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 32,
+          "components": 8,
+          "q1": -0.009465893765001244,
+          "median": 0.035547308809819364,
+          "q3": 0.08314497453383463
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 768
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 768
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 768,
+        "components": 8,
+        "q1": 0.0591279762842073,
+        "median": 0.10479912480553892,
+        "q3": 0.1616890462276544
+      }
+    },
+    "genuine_frame_retime": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 0,
+        "earlier_compatible": 16,
+        "search_boundary": 0,
+        "ambiguous": 0,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 16,
+            "components": 8,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -8.0
+          },
+          "last": {
+            "observations": 16,
+            "components": 8,
+            "q1": -8.0,
+            "median": -8.0,
+            "q3": -8.0
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 1.8752412613294145,
+          "median": 2.7494068344574174,
+          "q3": 3.598342127474942
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 3.926567500881917,
+          "median": 5.017348652234847,
+          "q3": 6.210242305588716
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.1764640998276839,
+          "median": 1.4017379357801594,
+          "q3": 2.4755075472900976
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 2.4290886097446065,
+          "median": 4.471935802846793,
+          "q3": 6.027962739095711
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "different_eye_pixels": 320,
+        "identical_eye_pixels": 64
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 64,
+        "components": 8,
+        "q1": 0.0,
+        "median": 0.0,
+        "q3": 0.0
+      }
+    },
+    "audio_delay": {
+      "planned_cases": 16,
+      "components": 8,
+      "construction_unavailable": 0,
+      "neural_provenance_cases": 0,
+      "observable_neural_cases": 0,
+      "full_curves_measured": 16,
+      "component_weighted_full_curve_rate": 1.0,
+      "full_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "full_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "target_contrasts_measured": 16,
+      "target_only_measured_without_full_curve": 0,
+      "target_only_weak_reference": 0,
+      "target_only_earlier_preference": {
+        "observations": 0,
+        "components": 0,
+        "q1": null,
+        "median": null,
+        "q3": null
+      },
+      "states": {
+        "unavailable": 0,
+        "weak_reference": 0,
+        "static_output": 0,
+        "source_time_compatible": 15,
+        "earlier_compatible": 0,
+        "search_boundary": 0,
+        "ambiguous": 1,
+        "other_or_poor_match": 0
+      },
+      "unavailable_reasons": {},
+      "compatible_lag_bounds_frames": {
+        "source_time_compatible": {
+          "first": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          },
+          "last": {
+            "observations": 15,
+            "components": 8,
+            "q1": 0.0,
+            "median": 0.0,
+            "q3": 0.0
+          }
+        },
+        "earlier_compatible": {
+          "first": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          },
+          "last": {
+            "observations": 0,
+            "components": 0,
+            "q1": null,
+            "median": null,
+            "q3": null
+          }
+        }
+      },
+      "boundaries": {
+        "entry_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.7100959320128593,
+          "median": 1.1430389853672873,
+          "q3": 2.3862949985901687
+        },
+        "exit_velocity_norm": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.2010976817849431,
+          "median": 0.5576426539465207,
+          "q3": 1.7815434367773582
+        },
+        "entry_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        },
+        "exit_velocity_delta_vs_original": {
+          "observations": 16,
+          "components": 8,
+          "q1": 0.0,
+          "median": 0.0,
+          "q3": 0.0
+        }
+      },
+      "geometry_observations": {
+        "geometry_available": 384
+      },
+      "eye_patch_observations": {
+        "identical_eye_pixels": 384
+      },
+      "unchanged_eye_patch_drift_px": {
+        "observations": 384,
+        "components": 8,
+        "q1": 0.0,
+        "median": 0.0,
+        "q3": 0.0
+      }
+    }
+  },
+  "paired_comparisons": [
+    {
+      "earlier": "musetalk_earlier_320ms",
+      "comparator": "musetalk_source_time",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 15,
+        "loss": 0,
+        "within_dead_band": 1
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.03741097270326429,
+        "median": 0.04610799009910655,
+        "q3": 0.0722728554892019
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.04467637139718717,
+        "median": 0.05596144750851463,
+        "q3": 0.05961791729094923
+      }
+    },
+    {
+      "earlier": "musetalk_earlier_320ms",
+      "comparator": "resample_musetalk",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 16,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.08676680854657187,
+        "median": 0.10874749771938336,
+        "q3": 0.1306108900268685
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.09103298220347537,
+        "median": 0.10649315630743181,
+        "q3": 0.13384101831027406
+      }
+    },
+    {
+      "earlier": "musetalk_earlier_320ms",
+      "comparator": "brightness_musetalk",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 16,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.08176519875611954,
+        "median": 0.10533929221911395,
+        "q3": 0.12671224039665038
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.08634937893542947,
+        "median": 0.10192761914950782,
+        "q3": 0.1282740696796645
+      }
+    },
+    {
+      "earlier": "liveportrait_earlier_320ms",
+      "comparator": "liveportrait_source_time",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 16,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.10482288443741873,
+        "median": 0.13781448053692405,
+        "q3": 0.17255337398735404
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.11825247461671783,
+        "median": 0.1374747830537221,
+        "q3": 0.15955223872907423
+      }
+    },
+    {
+      "earlier": "liveportrait_earlier_320ms",
+      "comparator": "resample_liveportrait",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 16,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.10354080048805933,
+        "median": 0.13679858172917295,
+        "q3": 0.17099877866027352
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.1179165570477302,
+        "median": 0.13657657832944745,
+        "q3": 0.1574877028385998
+      }
+    },
+    {
+      "earlier": "liveportrait_earlier_320ms",
+      "comparator": "brightness_liveportrait",
+      "planned_pairs": 16,
+      "measured_pairs": 16,
+      "statuses": {
+        "unavailable": 0,
+        "gain": 16,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "weak_reference_measured_pairs": 0,
+      "weak_reference_statuses": {
+        "gain": 0,
+        "loss": 0,
+        "within_dead_band": 0
+      },
+      "shared_support_positions": {
+        "observations": 16,
+        "components": 8,
+        "q1": 20.0,
+        "median": 20.0,
+        "q3": 20.0
+      },
+      "shared_support_adjacent_pairs": {
+        "observations": 16,
+        "components": 8,
+        "q1": 19.0,
+        "median": 19.0,
+        "q3": 19.0
+      },
+      "earlier_preference_difference": {
+        "observations": 16,
+        "components": 8,
+        "q1": 0.09678057066476577,
+        "median": 0.13492817377631636,
+        "q3": 0.1672421023823885
+      },
+      "component_medians": {
+        "observations": 8,
+        "components": 8,
+        "q1": 0.1114745811188709,
+        "median": 0.13312225071189668,
+        "q3": 0.1545305187724499
+      }
+    }
+  ],
+  "new_neural_calls": 0,
+  "new_media_reads": 0,
+  "defaults_changed": false,
+  "scope": "Pilot visible trajectory compatibility and control measurements under one observer. Phonetic alignment and detector performance remain unassessed.",
+  "summary_monitor_sample_errors": 0,
+  "summary_monitor_guard": null,
+  "summary_worker_duration_seconds": 2.115974999964237,
+  "summary_sampled_descendant_rss_bytes": 75464704,
+  "private_summary_profile_sha256": "8fb8043b605b23f742c288269b8011fab2b94052bf422aa512232b50196d04ec",
+  "private_summary_result_sha256": "6e1db9625c7a03ce33682f27d6b3cb694ddacd09ed8812dc578e4ead9efded46"
+}

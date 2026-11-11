@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.grid-mouth-observer-complete/157",
+  "status": "complete",
+  "pilot_clips": 16,
+  "reserve_clips_not_used": 16,
+  "planned_cases": 176,
+  "planned_observations": 4560,
+  "actual_face_task_inputs": 4560,
+  "observation_availability": {
+    "geometry_available": 4560
+  },
+  "eye_patch_drift_availability": {
+    "identical_eye_pixels": 3520,
+    "different_eye_pixels": 320
+  },
+  "exact_control_checks": {
+    "fixed_repeat": {
+      "planned_pairs": 16,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 16,
+      "matching_unavailable_geometry_pairs": 0
+    },
+    "audio_delay_320ms": {
+      "planned_pairs": 384,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 384,
+      "matching_unavailable_geometry_pairs": 0
+    },
+    "genuine_frame_retime": {
+      "planned_pairs": 384,
+      "unavailable_pairs": 0,
+      "mismatched_pairs": 0,
+      "matching_geometry_pairs": 384,
+      "matching_unavailable_geometry_pairs": 0
+    }
+  },
+  "complete_guarded_stages": 16,
+  "guard_violations": 0,
+  "monitor_sample_errors": 0,
+  "maximum_sampled_descendant_rss_bytes": 416350208,
+  "worker_duration_seconds": 239.65944416704588,
+  "freeze_sha256": "6ff39194f84eb45ff0f3338c6071852a546eb2702159bc9151c4f4c898835682",
+  "private_complete_execution_collection_sha256": "98a6f9e35e4c987e1d865020c00dc096ccb3644c2916eb75de07e4a315b695df",
+  "defaults_changed": false,
+  "scope": "Fresh observer on verified finished native video pictures. No achieved phonetic timing, detector accuracy, identity swap or serving adoption claim."
+}

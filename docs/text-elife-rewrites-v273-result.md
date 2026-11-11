@@ -1,0 +1,5 @@
+# Mixed-authorship science-explainer inputs
+
+Two local generators completed all ten planned paragraph-rewrite attempts across five eLife Insights. Six rewrites met the frozen rules. The first family produced five eligible rewrites. The second produced one, with four outside the prescribed word bounds. No attempts were repeated. The benchmark now has **five matched human originals and six constructed mixed articles**, plus four explicit unavailable cases. [Frozen method](text-elife-rewrites-v273-method.md) · [Exact aggregate](evaluation-panels/text-elife-rewrites-complete-v273.json)
+
+A second readout reproduced the result byte for byte and rechecked the recorded Unicode offsets against the original and replacement text. The accepted examples are weighted toward one generator family. Each mixed article has one known replacement interval, and the rest of the excerpt reconstructs the original exactly. No detector ran. The benchmark measures localization on these constructed examples once scored. [Source attribution and intake](text-elife-source-intake-v272-result.md)

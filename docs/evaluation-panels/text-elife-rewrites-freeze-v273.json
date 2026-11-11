@@ -1,0 +1,70 @@
+{
+  "schema": "chipmunk.text-elife-rewrites-freeze/273",
+  "v272_receipt_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+  "originals_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+  "groups": [
+    "elife-81108",
+    "elife-80609",
+    "elife-80718",
+    "elife-80699",
+    "elife-80392"
+  ],
+  "expected_generated_attempts": 10,
+  "code_sha256": {
+    "backend/scripts/text_elife_rewrites_v273.py": "2064ca09b35f0e5675a19fa0cf6b99ed581f4304d703d4012733d7ef2c22201a",
+    "backend/scripts/generate_email_upgrade.py": "a8d4a91045131cdea340e099231352b1b8c8ab4961128076b12569775572a5d6",
+    "backend/scripts/video_appearance_native_v108.py": "fda0a05ea1741eb617a8445c2575c718307ce37e34804209b7aedc80fad547da",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/grid_source_speech_v147.py": "3f29aba7f7f674d01117200bbcd2778d5d1f68ab0a44e2460859fdba09618e9a",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "docs/text-elife-rewrites-v273-method.md": "6c869a39b3f1634e6440d7705a4d579f573461a8a86ac9838a2f147b9f762fc7",
+    "backend/tests/test_text_elife_rewrites_v273.py": "98c199a10d8b740e5c2a23c1a962f8f8f3035e364d790a008784ac8f57ed3cb6"
+  },
+  "generators": {
+    "qwen": {
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+      "license": "Apache-2.0",
+      "local_config_sha256": {
+        "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "smol2": {
+      "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "license": "Apache-2.0",
+      "local_config_sha256": {
+        "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+        "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+        "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+        "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+        "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+      }
+    }
+  },
+  "runtime": {
+    "versions": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "device": "mps",
+    "precision": "mlx-affine-q4-g64",
+    "seed": 56174,
+    "temperature": 0.65,
+    "top_p": 0.9,
+    "max_new_tokens": 340,
+    "batch_size": 1
+  }
+}

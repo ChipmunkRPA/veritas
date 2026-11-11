@@ -31,7 +31,8 @@ their own clean versions.
 The [science-explainer intake](text-elife-source-intake-v272-result.md) gives
 reviewers a new five-source writing cohort with work-level attribution, an
 immutable publisher revision and exact replacement targets. The receipt records
-all nine dispositions and contains no excerpts.
+all nine dispositions and contains no excerpts. The [rewrite result](text-elife-rewrites-v273-result.md)
+adds the measured generation coverage and preserves all four unavailable attempts.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a

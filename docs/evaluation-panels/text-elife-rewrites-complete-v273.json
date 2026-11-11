@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.text-elife-rewrites-result/273",
+  "status": "complete",
+  "freeze_sha256": "3566e9a413d9671b0cd56517ceae711a9aaa8f90e0c2017f9309bf4f293d492d",
+  "source_groups": 5,
+  "human_controls": 5,
+  "planned_rewrites": 10,
+  "generation_dispositions": {
+    "qwen": {
+      "constructed": 5
+    },
+    "smol2": {
+      "outside_word_bound": 4,
+      "constructed": 1
+    }
+  },
+  "private_cases_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+  "resource_profile_sha256": {
+    "qwen": "e0692c32d2696a743520e067ae589536a2dfe5e2793838dae09eb9a49c10fd8f",
+    "smol2": "25155560ad79fae62ff75d46ffcfecb49b29304f00e56856a3a38968d3b7ed28"
+  },
+  "new_detector_calls": 0
+}

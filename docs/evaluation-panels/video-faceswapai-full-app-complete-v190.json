@@ -1,0 +1,418 @@
+{
+  "cases": [
+    {
+      "actual_changed_frames": 0,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "unchanged",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {},
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.530992,
+          "mean": 0.068815
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 177,
+          "core_start_frame": 147,
+          "last_supported_seconds": 7.375,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 140,
+              "role": "before",
+              "time_seconds": 5.833333333333333
+            },
+            {
+              "native_frame": 165,
+              "role": "during",
+              "time_seconds": 6.875
+            },
+            {
+              "native_frame": 183,
+              "role": "after",
+              "time_seconds": 7.625
+            }
+          ],
+          "start_seconds": 6.125,
+          "verified_native_rgb_inputs": 30
+        }
+      ],
+      "role": "unswapped_synthetic_reference",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3450306560,
+      "verified_evidence_assets": 29,
+      "worker_seconds": 37.90577716694679
+    },
+    {
+      "actual_changed_frames": 72,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "recompression_only",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {},
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.524967,
+          "mean": 0.059211
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 177,
+          "core_start_frame": 147,
+          "last_supported_seconds": 7.375,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 140,
+              "role": "before",
+              "time_seconds": 5.833333333333333
+            },
+            {
+              "native_frame": 165,
+              "role": "during",
+              "time_seconds": 6.875
+            },
+            {
+              "native_frame": 183,
+              "role": "after",
+              "time_seconds": 7.625
+            }
+          ],
+          "start_seconds": 6.125,
+          "verified_native_rgb_inputs": 30
+        }
+      ],
+      "role": "ordinary_recompression_control",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3448324096,
+      "verified_evidence_assets": 30,
+      "worker_seconds": 38.940877375076525
+    },
+    {
+      "actual_changed_frames": 72,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "swap_tv_bt601",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {
+        "face-appearance-change/1": {
+          "intersection_frames": 62,
+          "iou": 0.861111,
+          "union_frames": 72
+        }
+      },
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.011172,
+          "mean": 0.008843
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 134,
+          "core_start_frame": 73,
+          "last_supported_seconds": 5.583333333333333,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 67,
+              "role": "before",
+              "time_seconds": 2.7916666666666665
+            },
+            {
+              "native_frame": 104,
+              "role": "during",
+              "time_seconds": 4.333333333333333
+            },
+            {
+              "native_frame": 140,
+              "role": "after",
+              "time_seconds": 5.833333333333333
+            }
+          ],
+          "start_seconds": 3.0416666666666665,
+          "verified_native_rgb_inputs": 45
+        }
+      ],
+      "role": "publisher_swap_insertion",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3394600960,
+      "verified_evidence_assets": 30,
+      "worker_seconds": 39.56813725002576
+    },
+    {
+      "actual_changed_frames": 72,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "swap_pc_bt601",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {
+        "face-appearance-change/1": {
+          "intersection_frames": 62,
+          "iou": 0.861111,
+          "union_frames": 72
+        }
+      },
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.010131,
+          "mean": 0.00814
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 134,
+          "core_start_frame": 73,
+          "last_supported_seconds": 5.583333333333333,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 67,
+              "role": "before",
+              "time_seconds": 2.7916666666666665
+            },
+            {
+              "native_frame": 104,
+              "role": "during",
+              "time_seconds": 4.333333333333333
+            },
+            {
+              "native_frame": 140,
+              "role": "after",
+              "time_seconds": 5.833333333333333
+            }
+          ],
+          "start_seconds": 3.0416666666666665,
+          "verified_native_rgb_inputs": 45
+        }
+      ],
+      "role": "publisher_swap_insertion",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3323936768,
+      "verified_evidence_assets": 36,
+      "worker_seconds": 40.81759916699957
+    },
+    {
+      "actual_changed_frames": 72,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "swap_tv_bt709",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {
+        "face-appearance-change/1": {
+          "intersection_frames": 62,
+          "iou": 0.861111,
+          "union_frames": 72
+        }
+      },
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.01085,
+          "mean": 0.00872
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 134,
+          "core_start_frame": 73,
+          "last_supported_seconds": 5.583333333333333,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 67,
+              "role": "before",
+              "time_seconds": 2.7916666666666665
+            },
+            {
+              "native_frame": 104,
+              "role": "during",
+              "time_seconds": 4.333333333333333
+            },
+            {
+              "native_frame": 140,
+              "role": "after",
+              "time_seconds": 5.833333333333333
+            }
+          ],
+          "start_seconds": 3.0416666666666665,
+          "verified_native_rgb_inputs": 45
+        }
+      ],
+      "role": "publisher_swap_insertion",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3144794112,
+      "verified_evidence_assets": 30,
+      "worker_seconds": 39.83554016693961
+    },
+    {
+      "actual_changed_frames": 72,
+      "appearance_review_coverage": {
+        "appearance_status": "ok",
+        "measured_windows": 12,
+        "route_status": "ok",
+        "selected_window": true,
+        "window_method": "face-appearance-change/1"
+      },
+      "condition": "swap_pc_bt709",
+      "customer_direction": "inconclusive",
+      "face_frames": 40,
+      "frame_route_status": "ok",
+      "interval_overlap": {
+        "face-appearance-change/1": {
+          "intersection_frames": 62,
+          "iou": 0.861111,
+          "union_frames": 72
+        }
+      },
+      "raw_frame_response": {
+        "after": {
+          "frames": 16,
+          "maximum": 0.165086,
+          "mean": 0.018905
+        },
+        "before": {
+          "frames": 12,
+          "maximum": 0.589209,
+          "mean": 0.05725
+        },
+        "inside": {
+          "frames": 12,
+          "maximum": 0.00945,
+          "mean": 0.007876
+        }
+      },
+      "review_intervals": [
+        {
+          "core_last_frame": 134,
+          "core_start_frame": 73,
+          "last_supported_seconds": 5.583333333333333,
+          "method": "face-appearance-change/1",
+          "representatives": [
+            {
+              "native_frame": 67,
+              "role": "before",
+              "time_seconds": 2.7916666666666665
+            },
+            {
+              "native_frame": 104,
+              "role": "during",
+              "time_seconds": 4.333333333333333
+            },
+            {
+              "native_frame": 140,
+              "role": "after",
+              "time_seconds": 5.833333333333333
+            }
+          ],
+          "start_seconds": 3.0416666666666665,
+          "verified_native_rgb_inputs": 45
+        }
+      ],
+      "role": "publisher_swap_insertion",
+      "sampled_frames": 40,
+      "sampled_peak_rss_bytes": 3622961152,
+      "verified_evidence_assets": 36,
+      "worker_seconds": 40.67544549994636
+    }
+  ],
+  "freeze_sha256": "0fe81e6c5f5d427ef76c66267c7f21b49600afc378ffaa0dbc539759841d1185",
+  "independent_source_components": 1,
+  "same_legacy_frame_score_positions": true,
+  "schema": "chipmunk.video-faceswapai-full-app-readout/190",
+  "scope": "Six matched renderings of one silent synthetic source. No independent-camera or lip-sync accuracy estimate.",
+  "status": "complete"
+}

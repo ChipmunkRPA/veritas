@@ -115,6 +115,9 @@ compares four frozen rules across two source-disjoint delivery cohorts. Its
 anonymized scalar replay reproduces every operating point and paired count
 using only Python. The [facial color-step comparison](video-face-chroma-transfer-2026-11-11.md)
 tests a separate native-region measurement on the same verified source inputs.
+The [same-source delivery comparison](video-face-delivery-transfer-2026-11-11.md)
+holds the source pictures and times fixed across two deliveries and tests the
+frozen rule that selected a different check for each delivery.
 The [recorded-noise repetition comparison](audio-repeat-robustness-transfer-2026-11-11.md)
 checks exact and similar repeated audio across recorded backgrounds and four
 codecs, with matching ordinary controls and anonymized per-group results.

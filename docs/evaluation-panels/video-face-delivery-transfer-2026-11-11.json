@@ -1,0 +1,329 @@
+{
+  "false_flag_distinct_source_groups": {
+    "candidate_median": 0,
+    "candidate_top_two": 0,
+    "delivery_routing": 0,
+    "paired_max_median": 0,
+    "reference_median": 0
+  },
+  "frozen_case_plan_sha256": "4ac1ddec5aeea9b80bc97f45a6cac9f09b36851829fc408e89acaa92c65b28fa",
+  "inputs": {
+    "clips": 48,
+    "pairs": 24,
+    "sampled_frames_per_arm": 288,
+    "source_groups": 8
+  },
+  "native_to_matched": {
+    "inswapper": {
+      "candidate_median": {
+        "below to below": 6,
+        "below to flagged": 1,
+        "flagged to flagged": 1
+      },
+      "candidate_top_two": {
+        "below to below": 7,
+        "flagged to flagged": 1
+      },
+      "delivery_routing": {
+        "below to below": 5,
+        "below to flagged": 2,
+        "flagged to flagged": 1
+      },
+      "paired_max_median": {
+        "below to below": 3,
+        "below to flagged": 2,
+        "flagged to below": 2,
+        "flagged to flagged": 1
+      },
+      "reference_median": {
+        "below to below": 2,
+        "below to flagged": 2,
+        "flagged to below": 3,
+        "flagged to flagged": 1
+      }
+    },
+    "original_videos": {
+      "candidate_median": {
+        "below to below": 8
+      },
+      "candidate_top_two": {
+        "below to below": 8
+      },
+      "delivery_routing": {
+        "below to below": 8
+      },
+      "paired_max_median": {
+        "below to below": 8
+      },
+      "reference_median": {
+        "below to below": 8
+      }
+    },
+    "uniface": {
+      "candidate_median": {
+        "below to below": 7,
+        "flagged to flagged": 1
+      },
+      "candidate_top_two": {
+        "below to below": 6,
+        "flagged to below": 1,
+        "flagged to flagged": 1
+      },
+      "delivery_routing": {
+        "below to below": 5,
+        "below to flagged": 2,
+        "flagged to flagged": 1
+      },
+      "paired_max_median": {
+        "below to below": 5,
+        "below to flagged": 1,
+        "flagged to flagged": 2
+      },
+      "reference_median": {
+        "below to below": 5,
+        "below to flagged": 1,
+        "flagged to flagged": 2
+      }
+    }
+  },
+  "operating_point_sha256": "5e1d7b75412853e64dcbea8358cc9bdfea570b838da4e6326c87e6cf2b99a910",
+  "pair_receipt_sha256": "4068acd895f6e3eb2896d245a712017d76c0e889c0151d579de15194abc02fe4",
+  "pre_score_design_sha256": "6e22914c365d45feeabdbbb48995eb78ce336071171b889e8114f0e117cb1282",
+  "readout_code_sha256": "82c8f4bc7aafbe5f2a38f69299659bc0eed89414970f56cf058fbc573028bed4",
+  "reference_to_routing": {
+    "matched_delivery/inswapper": {
+      "below to below": 5,
+      "flagged to flagged": 3
+    },
+    "matched_delivery/original_videos": {
+      "below to below": 8
+    },
+    "matched_delivery/uniface": {
+      "below to below": 5,
+      "flagged to flagged": 3
+    },
+    "native_hd/inswapper": {
+      "below to below": 4,
+      "flagged to below": 3,
+      "flagged to flagged": 1
+    },
+    "native_hd/original_videos": {
+      "below to below": 8
+    },
+    "native_hd/uniface": {
+      "below to below": 6,
+      "flagged to below": 1,
+      "flagged to flagged": 1
+    }
+  },
+  "resources": {
+    "gend": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 6475038720,
+        "free_disk": 2603417600
+      },
+      "limits": {
+        "initial_available_ram": 4026531840,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 2415919104,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 3842260992,
+      "peak_tree_rss": 1672478720,
+      "seconds": 76.735,
+      "stop": null
+    },
+    "reference": {
+      "exit_code": 0,
+      "initial": {
+        "available_ram": 7424163840,
+        "free_disk": 2904674304
+      },
+      "limits": {
+        "initial_available_ram": 4026531840,
+        "initial_free_disk": 2147483648,
+        "maximum_seconds": 700,
+        "maximum_tree_rss": 2415919104,
+        "minimum_available_ram": 1610612736,
+        "minimum_free_disk": 1610612736
+      },
+      "minimum_available_ram": 3581984768,
+      "peak_tree_rss": 1349582848,
+      "seconds": 81.244,
+      "stop": null
+    }
+  },
+  "sampled_gpu_driver_max_bytes": {
+    "gend": 2194358272,
+    "reference": 1693450240
+  },
+  "schema": "chipmunk.same-source-face-delivery-transfer/1",
+  "scope": "Same first-six-second native picture samples, paired with downscaled and re-encoded delivery. Effects apply to the combined change and this evaluation roster.",
+  "summary": {
+    "matched_delivery/inswapper": {
+      "candidate_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      }
+    },
+    "matched_delivery/original_videos": {
+      "candidate_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "matched_delivery/uniface": {
+      "candidate_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      }
+    },
+    "native_hd/inswapper": {
+      "candidate_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 5,
+        "flagged": 3,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 4,
+        "flagged": 4,
+        "unassessed": 0
+      }
+    },
+    "native_hd/original_videos": {
+      "candidate_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 8,
+        "flagged": 0,
+        "unassessed": 0
+      }
+    },
+    "native_hd/uniface": {
+      "candidate_median": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "candidate_top_two": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "delivery_routing": {
+        "below": 7,
+        "flagged": 1,
+        "unassessed": 0
+      },
+      "paired_max_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      },
+      "reference_median": {
+        "below": 6,
+        "flagged": 2,
+        "unassessed": 0
+      }
+    }
+  }
+}

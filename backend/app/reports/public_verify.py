@@ -16,7 +16,12 @@ from app.evidence import document_scope
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.face_lighting_context import validate as validate_face_lighting
-from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS, copy_records, validate_similarity
+from app.evidence.image_copy_similarity_binding import (
+    REFLECTION_VERSIONS,
+    copy_records,
+    validate_copy_scope,
+    validate_similarity,
+)
 from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
@@ -122,6 +127,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.image_eligibility import validate_inspection_coverage
 
         validate_similarity(evidence, canonical_hash)
+        validate_copy_scope(evidence, (result.get('decision') or {}).get('image_copy_coverage'))
         validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}
                                      if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS else evidence)
         if evidence['version'] in {'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS:
@@ -161,6 +167,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if evidence['version'] in NESTED_VERSIONS:
         parts.extend(evidence[key] for key in ('audio', 'av'))
     if analysis['kind'] == 'audio':
+        from app.evidence.audio_binding import validate_unscored_voice_coverage
+
+        validate_unscored_voice_coverage(evidence['coverage'], evidence['source'])
         acoustic = evidence.get('acoustic_context')
         if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')

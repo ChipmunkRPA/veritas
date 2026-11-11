@@ -10,6 +10,9 @@
 <p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
 <p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
 {% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if similarity and similarity.status == 'skipped_trusted_ai_credentials' %}
+<p>{{ similarity.observation }}</p>
+{% else %}
 {% for check, title, label in [(similarity, 'Same-image copy similarity', 'Reflected pair'), (translation, 'Copy similarity without mirroring', 'Non-mirrored pair')] if check %}
 <div class="image-regional-comparison">
 <h3>{{ title }}</h3>
@@ -34,6 +37,7 @@
 {% endfor %}
 </div>
 {% endfor %}
+{% endif %}
 {% if v.image_evidence.get('comparison') %}
 {% set comparison = v.image_evidence.comparison %}
 <div class="image-regional-comparison">

@@ -18,7 +18,7 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
-from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, VERSION, supported_size
+from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, V11, VERSION, supported_size
 from app.reports import engine, image_evidence, snapshot
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -151,13 +151,14 @@ def test_automatic_pair_persists_both_original_crops_without_manual_highlight(pa
     (V8, "image-evidence-packets/6", True),
     (V9, "image-evidence-packets/7", True),
     (V10, "image-evidence-packets/8", False),
+    (V11, "image-evidence-packets/9", False),
 ])
 def test_historical_reflection_remains_readable_after_writing_latest(packet_fixture, monkeypatch, version, creator, large):
     db, store, analysis, result, _ = reflected_result(packet_fixture, large=large)
     historical = service.build_packet_set(db, analysis, store, result)
     if version == V10:
         historical["copy_translation"].pop("basis")
-    else:
+    elif version != V11:
         historical.pop("copy_translation")
     historical["version"] = version
     historical["id"] = image_packets_v5.current_set_id(analysis, version)

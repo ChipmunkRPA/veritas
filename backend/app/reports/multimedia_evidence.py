@@ -460,6 +460,24 @@ def _document_coverage_details(coverage: dict) -> list[str]:
     return notes
 
 
+def _voice_coverage_gaps(audio: dict, *, video_origin_s: float | None) -> list[dict]:
+    gaps = (audio.get("coverage") or {}).get("unscored_intervals") or []
+    if not gaps:
+        return []
+    rate = audio["source"]["sample_rate"]
+    rows = []
+    for gap in gaps[:8]:
+        ranges = []
+        for recorded in gap["source_timestamp_ranges"][:8]:
+            start, end = recorded["source_start_pts"] / rate, recorded["source_end_pts"] / rate
+            ranges.append({**recorded,
+                           "playback": (start - video_origin_s, end - video_origin_s)
+                           if video_origin_s is not None and start >= video_origin_s else None})
+        rows.append({"start_s": gap["start_sample"] / rate, "end_s": gap["end_sample"] / rate,
+                     "ranges": ranges, "omitted_ranges": len(gap["source_timestamp_ranges"]) - len(ranges)})
+    return rows
+
+
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
     if snapshot.analysis.kind not in KINDS:
         if snapshot.evidence is not None:
@@ -651,6 +669,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         packets.append(row)
     stereo_source = (document.get("audio") or {}) if kind == "video" else document
     stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
+    video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
+    voice_gaps = _voice_coverage_gaps(stereo_source, video_origin_s=video_origin_s) if kind in {"audio", "video"} else []
     repeated_passages = copy.deepcopy(document.get("repeated_passages"))
     if withheld and repeated_passages:
         for group in repeated_passages["groups"]:
@@ -663,8 +683,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
+            "voice_gaps": voice_gaps,
+            "voice_gap_count": len((stereo_source.get("coverage") or {}).get("unscored_intervals") or []) if voice_gaps else 0,
+            "voice_gap_pointer": "/audio/coverage/unscored_intervals" if kind == "video" else "/coverage/unscored_intervals",
             "stereo_context_pointer": "/audio/stereo_context" if kind == "video" else "/stereo_context",
-            "stereo_context_video_origin_s": document["source"].get("timeline_origin_s") if kind == "video" else None,
+            "stereo_context_video_origin_s": video_origin_s,
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"

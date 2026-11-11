@@ -81,11 +81,11 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation'; token: string; mediaReady: boolean
 }) {
   const check = set[field]
-  if (!check) return null
+  if (!check || check.status === 'skipped_trusted_ai_credentials') return null
   const reflected = field === 'copy_similarity'
   const heading = reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = reflected ? 'image-copy-similarity' : 'image-copy-translation'
-  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11'].includes(set.version)
+  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12'].includes(set.version)
   const basis = !reflected && set.copy_translation?.basis
   const statusText = {
     supported_pair: reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
@@ -235,20 +235,22 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
     article.scrollIntoView?.({ block: 'start' })
   }, [hash, key, set.id, set.packets, set.status, showAll])
   const localised = set.packets.some((p) => p.evidence_type === 'localisation')
+  const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
   const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
+      {copySkipped && <p className="mt-3 mb-0 text-small">Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped.</p>}
       <CopySimilarity set={set} field="copy_similarity" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.
-      </p> : set.packets.length === 0 ? <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">
+      </p> : set.packets.length === 0 ? (!copySkipped && <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">
         {set.coverage?.inspection_checks?.length ? 'No local editing candidates are shown. The coverage below explains what was measured and withheld.'
           : hasCopyPair ? 'No other local editing regions were recorded.' : 'No separate local editing regions were recorded.'}
         {' '}A whole-image score cannot identify which pixels were edited, and this does not establish that the image is unaltered.
-      </p> : <>
+      </p>) : <>
         <p className="mt-3 mb-0 text-body text-text-muted max-w-[80ch]">
           {localised ? 'Inspect the areas identified by local checks alongside their source crops and limitations.'
             : 'These areas contain diagnostic differences worth inspecting. They are not confirmed edits, and do not establish that AI was used.'}

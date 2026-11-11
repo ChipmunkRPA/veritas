@@ -18,6 +18,7 @@ the face tracker's YuNet landmarks.
 """
 from __future__ import annotations
 
+from collections import Counter
 from typing import Any
 
 import numpy as np
@@ -38,6 +39,8 @@ from app.engine.detector import Applicability, Detector, DetectorResult, InputUn
 NO_SPEECH = "no speech detected in the sound track"
 SILENT = "the sound track is silent"
 NO_MOUTH = "no face track with a visible mouth and timestamp-matched video frames for a full 1 s window of speech"
+FLAT_MOUTH = "available speech windows had no varying mouth-opening measurement for timing comparison"
+UNCHANGED_MOUTH = "the available speech windows had unchanged mouth crops, so timing could not be measured"
 NO_SPEAKER = ("no face track whose mouth movement follows the speech (occluded, turned or closed mouth, voice-over or an "
               "off-screen speaker)")
 MAX_SERIES_POINTS = 5000
@@ -55,19 +58,33 @@ def _ms(ticks: float) -> int:
     return round(ticks * 1000.0 / lipsync.FPS)
 
 
+def _mouth_status(window: lipsync.Window, patches: dict[int, np.ndarray], apertures: dict[int, float]) -> str:
+    if any(tick not in apertures for tick in window.ticks):
+        return "missing_mouth_input"
+    values = np.asarray([apertures[tick] for tick in window.ticks], dtype=np.float64)
+    if not np.isfinite(values).all():
+        return "missing_mouth_input"
+    if values.std() >= lipsync.CORRELATION_VARIATION_MIN:
+        return "measurable"
+    first = patches[window.start_tick]
+    return ("unchanged_mouth_pixels" if all(np.array_equal(patches[tick], first) for tick in window.ticks[1:])
+            else "flat_mouth_proxy")
+
+
 def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
     """(observed, reasoning) of a lip-sync track signal from its `track:<k>` unit."""
     q, name = unit["quality"], track_name(track)
     windows, steps, collapses = int(q.get("windows", 0)), int(q.get("steps", 0)), int(q.get("collapses", 0))
     baseline = q.get("baseline_offset")
-    observed = f"{windows} 1 s window(s) of speech every 0.5 s; "
+    observed = f"{windows} measured 1 s speech window(s). "
     observed += (f"baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)" if baseline is not None
                  else "no stable offset")
     observed += (f", median peak correlation {q.get('peak_median', 0.0):.2f}; {steps} offset step(s), "
                  f"{collapses} correlation collapse(s)")
     parts = []
     if steps:
-        parts.append(f"The audio-visual offset of {name} changes from {int(baseline):+d} to {int(q['step_offset']):+d} frames at "
+        step_baseline = q.get("step_baseline", baseline)
+        parts.append(f"The audio-visual offset of {name} changes from {int(step_baseline):+d} to {int(q['step_offset']):+d} frames at "
                      f"{q['step_start_s']:.1f} s. This is consistent with an inserted, re-dubbed or re-timed segment, but "
                      "equally with frame drops or timestamp jitter in variable frame-rate recordings.")
     if collapses:
@@ -81,13 +98,19 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
                          "correlate clearly in any window.")
         elif abs(baseline) >= lipsync.BENIGN_OFFSET_TICKS:
             side = "later" if baseline > 0 else "earlier"
-            parts.append(f"The sound is {abs(_ms(baseline))} ms {side} than the picture throughout for {name}: {lipsync.BENIGN}.")
+            parts.append(f"The measured sound offset is {abs(_ms(baseline))} ms {side} than the picture for {name}: {lipsync.BENIGN}.")
         else:
-            parts.append(f"Sound and picture are in sync for {name}.")
+            parts.append(f"The measured windows show a near-zero sound and picture offset for {name}.")
         parts.append("Lip-sync generators produce well-synchronised mouths, so this is informational and not evidence that the "
                      "face is unmanipulated.")
     if q.get("small_face", 0.0) >= 0.5:
         parts.append(f"The face is below {lipsync.SMALL_FACE_PX:.0f} px in most windows, where the mouth region is unreliable.")
+    excluded = int(q.get("unmeasured_mouth_windows", 0))
+    if excluded:
+        frozen = int(q.get("unchanged_mouth_pixels", 0))
+        observed += f". {excluded} additional speech window(s) lacked measurable mouth input"
+        if frozen:
+            parts.append(f"The measured mouth crops stayed unchanged in {frozen} of the omitted windows.")
     return observed, " ".join(parts)
 
 
@@ -102,7 +125,7 @@ class LandmarkXcorrDetector(Detector):
     spec = video_spec("vid.lipsync.landmark_xcorr",
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.2")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.3")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av
@@ -145,25 +168,56 @@ class LandmarkXcorrDetector(Detector):
             for k in sorted({k for w in windows for k in w.ticks}):
                 needed.setdefault(grid.frames[k], []).append((tid, k))
         patches: dict[str, dict[int, np.ndarray]] = {tid: {} for tid in candidates}
+        native_verified = getattr(inputs.store, "native_pts_verified", None)
         for index, rgb in inputs.store.iter_many(sorted(needed)):
+            if index in inputs.table.interpolated or (native_verified is not None and not native_verified(index)):
+                continue
             for tid, k in needed[index]:
                 patches[tid][k] = lipsync.mouth_patch(rgb, by_track[tid][index])
         if ctx.deadline is not None:
             ctx.deadline.check("lip-sync frames")
-        scores = {tid: lipsync.speaker_score(w, patches[tid], speech.level) for tid, w in candidates.items()}
-        kept = lipsync.attribute(candidates, scores)
-        if not kept:
-            return DetectorResult.not_applicable(NO_SPEAKER)
-        results, apertures = {}, {}
-        for tid, ws in kept.items():
-            apertures[tid] = {k: xcorr.aperture(patch) for k, patch in patches[tid].items()}
-            results[tid] = lipsync.track_sync([xcorr.window_sync(w, apertures[tid], speech.level) for w in ws], xcorr.SETTINGS)
-        result = self._result(ctx, inputs, grid, speech, scores, results, apertures, len(candidates))
-        result.details['av_input'] = capture_correlation(inputs, grid, speech, results, patches, apertures, by_track, scores)
+        apertures = {tid: {tick: xcorr.aperture(patch) for tick, patch in rows.items()} for tid, rows in patches.items()}
+        coverage = {tid: {} for tid in candidates}
+        measurable = {}
+        omitted = []
+        for tid, windows in candidates.items():
+            scored = []
+            for window in windows:
+                status = _mouth_status(window, patches[tid], apertures[tid])
+                if status == "measurable":
+                    scored.append(window)
+                else:
+                    coverage[tid][window.index] = status
+                    omitted.append({"track_id": tid, "start_s": grid.seconds(window.start_tick),
+                                    "end_s": grid.seconds(window.start_tick + lipsync.WINDOW_TICKS), "status": status})
+            if scored:
+                measurable[tid] = scored
+        counts = Counter(row["status"] for row in omitted)
+        if not measurable:
+            reason = NO_MOUTH
+            if counts["unchanged_mouth_pixels"] + counts["flat_mouth_proxy"]:
+                reason = UNCHANGED_MOUTH if counts["unchanged_mouth_pixels"] == len(omitted) else FLAT_MOUTH
+            result = DetectorResult.not_applicable(reason)
+        else:
+            scores = {tid: lipsync.speaker_score(w, patches[tid], speech.level) for tid, w in measurable.items()}
+            kept = lipsync.attribute(measurable, scores)
+            if not kept:
+                result = DetectorResult.not_applicable(NO_SPEAKER)
+            else:
+                results = {tid: lipsync.track_sync([xcorr.window_sync(w, apertures[tid], speech.level) for w in windows],
+                                                   xcorr.SETTINGS, unmeasured_indices=tuple(coverage[tid]))
+                           for tid, windows in kept.items()}
+                result = self._result(ctx, inputs, grid, speech, scores, results, apertures, len(candidates), coverage)
+                result.details["av_input"] = capture_correlation(inputs, grid, speech, results, patches, apertures, by_track, scores)
+        result.metrics.update({"unmeasured_mouth_windows": float(len(omitted)),
+                               **{key: float(count) for key, count in counts.items()}})
+        if omitted:
+            result.details["unmeasured_mouth_windows"] = omitted
         return result
 
     def _result(self, ctx: RunContext, inputs: AVInputs, grid: lipsync.TickGrid, speech: lipsync.Speech, scores: dict[str, float],
-                results: dict[str, lipsync.TrackSync], apertures: dict[str, dict[int, float]], candidates: int) -> DetectorResult:
+                results: dict[str, lipsync.TrackSync], apertures: dict[str, dict[int, float]], candidates: int,
+                coverage: dict[str, dict[int, str]]) -> DetectorResult:
         tracks = {t["track_id"]: t for t in inputs.tracks}
         units: list[UnitScore] = []
         window_units: list[UnitScore] = []
@@ -182,7 +236,9 @@ class LandmarkXcorrDetector(Detector):
                        "no_stable_offset": float(sync.reading == "no_stable_offset"),
                        "start_s": grid.seconds(sync.windows[0].start_tick), "end_s": grid.seconds(sync.windows[-1].end_tick),
                        "median_face_px": float(np.median([w.window.face_px for w in sync.windows])),
-                       "speech_fraction": float(np.mean([w.window.speech_fraction for w in sync.windows]))}
+                       "speech_fraction": float(np.mean([w.window.speech_fraction for w in sync.windows])),
+                       "unmeasured_mouth_windows": float(len(coverage[tid])),
+                       "unchanged_mouth_pixels": float(sum(s == "unchanged_mouth_pixels" for s in coverage[tid].values()))}
             quality["small_face"] = float(quality["median_face_px"] < lipsync.SMALL_FACE_PX)
             if sync.baseline is not None:
                 quality["baseline_offset"] = float(sync.baseline)
@@ -191,7 +247,7 @@ class LandmarkXcorrDetector(Detector):
             if sync.steps:
                 step = sync.steps[0]
                 quality |= {"step_start_s": grid.seconds(step.start_tick), "step_end_s": grid.seconds(step.end_tick),
-                            "step_offset": float(step.offset)}
+                            "step_offset": float(step.offset), "step_baseline": float(step.baseline)}
             if sync.collapses:
                 collapse = sync.collapses[0]
                 quality |= {"collapse_start_s": grid.seconds(collapse.start_tick), "collapse_end_s": grid.seconds(collapse.end_tick),

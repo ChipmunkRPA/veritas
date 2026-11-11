@@ -65,7 +65,7 @@ export interface ImageEvidencePacket {
 
 interface ImageCopyEvidence<Schema, Transform> {
   schema: Schema
-  status: 'supported_pair' | 'no_pair' | 'unsupported_geometry' | 'unassessed_match_budget'
+  status: 'supported_pair' | 'no_pair' | 'unsupported_geometry' | 'unassessed_match_budget' | 'skipped_trusted_ai_credentials'
   source_sha256: string
   coordinate_space: 'exif-oriented-original'
   authorship_confidence_contribution: 0
@@ -79,7 +79,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12'
   sha256: string | null
   analysis_id: string
   revision: number

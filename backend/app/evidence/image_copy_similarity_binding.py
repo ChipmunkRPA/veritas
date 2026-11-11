@@ -10,12 +10,16 @@ V8 = "image-evidence-8"
 V9 = "image-evidence-9"
 V10 = "image-evidence-10"
 V11 = "image-evidence-11"
-VERSION = V11
-TRANSLATION_VERSIONS = frozenset({V10, V11})
+V12 = "image-evidence-12"
+VERSION = V12
+TRANSLATION_VERSIONS = frozenset({V10, V11, V12})
+BASIS_VERSIONS = frozenset({V11, V12})
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
 LARGE_IMAGE_VERSIONS = TRANSLATION_VERSIONS | {V9}
 SCHEMA = "same-image-reflection-similarity/1"
 TRANSLATION_SCHEMA = "same-image-copy-similarity/1"
+SKIPPED_CREDENTIALS = "skipped_trusted_ai_credentials"
+SKIPPED_CREDENTIALS_TEXT = "Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped."
 TRANSLATION_NOTE = (
     "The two crops show similar image detail without mirroring. Copies and naturally repeated detail can both produce "
     "a match. The crop boundaries enclose the matched detail. The origin of either area and AI involvement remain undetermined."
@@ -30,6 +34,7 @@ STATUS_TEXT = {
     "no_pair": "This check found no qualifying reflected pair.",
     "unsupported_geometry": "This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.",
     "unassessed_match_budget": "The check found too many candidate matches to show a distinct comparison.",
+    SKIPPED_CREDENTIALS: SKIPPED_CREDENTIALS_TEXT,
 }
 LARGE_COVERAGE_TEXT = (
     "This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, "
@@ -58,6 +63,34 @@ def status_text(status: str, *, version: str) -> str:
     if status == "unsupported_geometry" and version in LARGE_IMAGE_VERSIONS:
         return LARGE_COVERAGE_TEXT
     return STATUS_TEXT[status]
+
+
+def credential_skip(source_sha256: str) -> dict:
+    return {"status": SKIPPED_CREDENTIALS, "source_sha256": source_sha256}
+
+
+def result_skip(result: dict) -> dict | None:
+    """Read only the explicit, source-bound scope committed by the verified gate."""
+    scope = ((result.get("manifest") or {}).get("sampling") or {}).get("image_copy_coverage")
+    if scope is None:
+        return None
+    source = (result.get("input") or {}).get("sha256")
+    decision = (result.get("decision") or {}).get("provenance_record") or {}
+    if not isinstance(source, str) or not _SHA.fullmatch(source) or scope != credential_skip(source) or decision.get("kind") != "decisive_ai":
+        raise ValueError("Copy check coverage has no source-bound signed AI declaration")
+    return scope
+
+
+def validate_copy_scope(document: dict, scope: dict | None) -> None:
+    """Bind the presented skip to the result and require both checks to agree."""
+    if document.get("version") != V12:
+        if scope is not None:
+            raise ValueError("Earlier image evidence has no recorded copy check coverage")
+        return
+    if scope is not None and scope != credential_skip(document["source"]["sha256"]):
+        raise ValueError("Copy check coverage differs from the source-bound result")
+    if any((record["status"] == SKIPPED_CREDENTIALS) != (scope is not None) for record in copy_records(document)):
+        raise ValueError("Copy check coverage differs from the source-bound result")
 
 
 def box_bounds(box: dict, width: int, height: int) -> tuple[int, int, int, int]:
@@ -112,6 +145,10 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
     _validate_check(document, document.get("copy_similarity"), size, supported_size(*size, version=version), reflected=True)
     if version in TRANSLATION_VERSIONS:
         _validate_check(document, document["copy_translation"], size, supported_size(*size, version=V8), reflected=False)
+    if version == V12:
+        records = tuple(copy_records(document))
+        if (records[0]["status"] == SKIPPED_CREDENTIALS) != (records[1]["status"] == SKIPPED_CREDENTIALS):
+            raise ValueError("The two copy checks have different signed credential coverage")
 
 
 def copy_records(document: dict) -> Iterator[dict]:
@@ -122,7 +159,7 @@ def copy_records(document: dict) -> Iterator[dict]:
 
 
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
-    has_basis = not reflected and document["version"] == V11
+    has_basis = not reflected and document["version"] in BASIS_VERSIONS
     fields = {
         "schema",
         "source_sha256",
@@ -137,6 +174,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
+    skipped = status == SKIPPED_CREDENTIALS
     if (
         record["schema"] != (SCHEMA if reflected else TRANSLATION_SCHEMA)
         or record["source_sha256"] != document["source"]["sha256"]
@@ -145,7 +183,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or record["authorship_confidence_contribution"] != 0
         or record["interpretation"] != (NOTE if reflected else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
-        or (status == "unsupported_geometry") == supported
+        or (skipped and document["version"] != V12)
+        or (not skipped and (status == "unsupported_geometry") == supported)
         or not isinstance(pairs, list)
         or len(pairs) > PAIR_LIMIT
         or bool(pairs) != (status == "supported_pair")

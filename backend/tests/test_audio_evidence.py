@@ -21,6 +21,7 @@ from app.detectors.video.adapters.audio import AudioClassifier, GustkingVoiceDet
 from app.engine.boundary import DetectorRunRecord
 from app.engine.detector import DetectorResult, Profile, UnitScore
 from app.engine.stages.common import DbRunStore
+from app.evidence.audio_binding import unscored_voice_intervals
 from app.evidence.audio_packets import (
     PacketIntegrityError,
     build_packet_set,
@@ -95,6 +96,12 @@ def test_timestamp_discontinuity_remains_two_ranges():
     assert intervals == [
         {"start_sample": 8000, "end_sample": 16000, "source_start_pts": 8000, "source_end_pts": 16000, "time_base": "1/16000"},
         {"start_sample": 16000, "end_sample": 24000, "source_start_pts": 48000, "source_end_pts": 56000, "time_base": "1/16000"}]
+    coverage = {"windows": [{"start_sample": 24000, "end_sample": 32000}, {"start_sample": 0, "end_sample": 8000},
+                            {"start_sample": 2000, "end_sample": 5000}],
+                "scored_intervals": [{"start_sample": 0, "end_sample": 8000}, {"start_sample": 24000, "end_sample": 32000}],
+                "decoded_samples": 32000, "scored_samples": 16000, "unscored_samples": 16000}
+    assert unscored_voice_intervals(coverage, {**mapping, "sample_rate": 16000}) == [
+        {"start_sample": 8000, "end_sample": 24000, "source_timestamp_ranges": intervals}]
     mapping["timeline"][1]["start_sample"] = 15000
     with pytest.raises(ValueError, match="partition"):
         source_ranges(mapping, 0, 32000)
@@ -146,6 +153,7 @@ def test_packet_clips_equal_the_complete_scored_samples_and_context(audio_fixtur
     assert doc["sha256"] == packet_hash(doc)
     assert doc["coverage"]["scored_samples"] == len(pcm)  # overlapping windows are counted only once
     assert doc["coverage"]["unscored_samples"] == 0
+    assert doc["coverage"]["unscored_intervals"] == []
     assert len(doc["packets"]) == 1
     packet = doc["packets"][0]
     assert packet["interval"] == {"start_sample": 32000, "end_sample": 96000}
@@ -192,6 +200,17 @@ def test_unscored_spans_and_below_threshold_do_not_invent_regions(audio_fixture)
     assert doc["packets"] == []
     assert doc["coverage"]["scored_samples"] == 64000
     assert doc["coverage"]["unscored_samples"] == len(pcm) - 64000
+    assert doc["coverage"]["unscored_intervals"] == [
+        {"start_sample": 64000, "end_sample": 128000, "source_timestamp_ranges": [
+            {"start_sample": 64000, "end_sample": 128000, "source_start_pts": 64000,
+             "source_end_pts": 128000, "time_base": "1/16000"}]}
+    ]
+    forged = deepcopy(doc)
+    forged["coverage"]["unscored_intervals"][0]["source_timestamp_ranges"][0]["source_start_pts"] += 1
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(PacketIntegrityError, match="Unscored voice intervals differ"):
+        validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
+                            original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
     assert any("does not establish authenticity" in s for s in doc["limitations"])
 
 
@@ -206,6 +225,7 @@ def test_silence_decodes_but_no_successful_windows_means_no_claim(audio_fixture,
     doc = build_packet_set(db, analysis, store, result)
     assert doc["packets"] == [] and doc["coverage"]["scored_samples"] == 0
     assert doc["coverage"]["unscored_samples"] == len(pcm)
+    assert [(span["start_sample"], span["end_sample"]) for span in doc["coverage"]["unscored_intervals"]] == [(0, len(pcm))]
 
 
 @pytest.mark.parametrize("mutation", ["input", "outside", "seconds", "failed", "family", "unlinked"])

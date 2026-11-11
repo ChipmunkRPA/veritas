@@ -31,8 +31,10 @@
 """
 from __future__ import annotations
 
+from bisect import bisect_left
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
+from itertools import groupby
 from typing import Any, Protocol
 
 import cv2
@@ -62,6 +64,7 @@ VAD_MIN_DBFS = -50.0
 VAD_MAX_FLATNESS = 0.4
 VAD_CLOSE_GAP_S = 0.3
 VAD_MIN_RUN_S = 0.2
+CORRELATION_VARIATION_MIN = 1e-9
 BENIGN = "constant offset: consistent with mux delay (benign)"
 
 
@@ -226,7 +229,7 @@ def mouth_patch(rgb: np.ndarray, frame: Mapping[str, Any]) -> np.ndarray:
 
 
 def _pearson(a: np.ndarray, b: np.ndarray) -> float:
-    if len(a) < 3 or np.std(a) < 1e-9 or np.std(b) < 1e-9:
+    if len(a) < 3 or np.std(a) < CORRELATION_VARIATION_MIN or np.std(b) < CORRELATION_VARIATION_MIN:
         return 0.0
     return float(np.corrcoef(a, b)[0, 1])
 
@@ -383,7 +386,8 @@ def change_tick(before: WindowSync, after: WindowSync, old: int, new: int, frame
     return starts[k] + frames / 2.0
 
 
-def track_sync(windows: Sequence[WindowSync], embedder: SyncEmbedder) -> TrackSync:
+def track_sync(windows: Sequence[WindowSync], embedder: SyncEmbedder, *,
+               unmeasured_indices: Sequence[int] = ()) -> TrackSync:
     ordered = sorted(windows, key=lambda w: w.start_tick)
     confidences = np.asarray([w.confidence for w in ordered])
     median = float(np.median(confidences)) if len(ordered) else 0.0
@@ -404,21 +408,27 @@ def track_sync(windows: Sequence[WindowSync], embedder: SyncEmbedder) -> TrackSy
         run = [w] if down else []
 
     confident = [w for w, down in zip(ordered, collapsed, strict=True) if not down and w.confidence >= embedder.min_confidence]
-    runs = offset_runs(confident)
+    gaps = sorted(unmeasured_indices)
+    run_groups = [offset_runs(list(group)) for _, group in groupby(
+        confident, key=lambda w: bisect_left(gaps, w.window.index))]
+    runs = [run for group in run_groups for run in group]
     baseline = _median_offset(max(runs, key=len)) if runs else None  # max keeps the earliest on a tie
     steps = []
-    if baseline is not None:
-        for i, r in enumerate(runs):
+    flagged_ids = set()
+    for local in run_groups:
+        if not local:
+            continue
+        local_baseline = _median_offset(max(local, key=len))
+        for i, r in enumerate(local):
             median_offset = _median_offset(r)
-            if abs(median_offset - baseline) < STEP_TICKS:
+            if abs(median_offset - local_baseline) < STEP_TICKS:
                 continue
-            start = (change_tick(runs[i - 1][-1], r[0], _median_offset(runs[i - 1]), median_offset, embedder.frames)
+            start = (change_tick(local[i - 1][-1], r[0], _median_offset(local[i - 1]), median_offset, embedder.frames)
                      if i > 0 else r[0].start_tick)
-            end = (change_tick(r[-1], runs[i + 1][0], median_offset, _median_offset(runs[i + 1]), embedder.frames)
-                   if i + 1 < len(runs) else r[-1].end_tick)
-            steps.append(Segment("offset_step", start, end, len(r), offset=median_offset, baseline=baseline))
-
-    flagged_ids = {id(w) for seg_run in runs for w in seg_run if baseline is not None and abs(_median_offset(seg_run) - baseline) >= STEP_TICKS}
+            end = (change_tick(r[-1], local[i + 1][0], median_offset, _median_offset(local[i + 1]), embedder.frames)
+                   if i + 1 < len(local) else r[-1].end_tick)
+            steps.append(Segment("offset_step", start, end, len(r), offset=median_offset, baseline=local_baseline))
+            flagged_ids.update(id(w) for w in r)
     flagged_ids |= {id(w) for w, down in zip(ordered, collapsed, strict=True) if down and any(
         s.start_tick <= w.start_tick < s.end_tick for s in collapses)}
     if steps and collapses:

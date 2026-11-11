@@ -15,6 +15,16 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption">{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('voice_gaps') %}
+<h3>Unscored voice intervals</h3>
+<p class="caption">These times have no recorded voice response. Background sound can affect coverage, and the gap alone does not establish its cause.</p>
+{% for gap in evidence.voice_gaps %}
+<p class="caption">Analyzed audio {{ '%.3f' | format(gap.start_s) }}–{{ '%.3f' | format(gap.end_s) }} s.
+{% for range in gap.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
+{% if gap.omitted_ranges %} {{ gap.omitted_ranges }} additional source-clock ranges in JSON.{% endif %}</p>
+{% endfor %}
+<p class="caption">JSON pointer <span class="mono">{{ evidence.voice_gap_pointer }}</span>.{% if evidence.voice_gap_count > evidence.voice_gaps | length %} {{ evidence.voice_gap_count - (evidence.voice_gaps | length) }} additional intervals in JSON.{% endif %}</p>
+{% endif %}
 {% if evidence.withheld %}<p class="caption evidence-withheld">Source media, page images and verbatim excerpts are withheld in this redacted copy. Evidence hashes, measured responses and non-content anchors remain.</p>{% endif %}
 {% if evidence.packets %}
 <h3>Evidence locator</h3>

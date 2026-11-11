@@ -20,26 +20,30 @@ from app.evidence.image_copy_similarity_binding import (
     REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
+    SKIPPED_CREDENTIALS,
     TRANSLATION_NOTE,
     TRANSLATION_SCHEMA,
     V7,
     V8,
     V9,
     V10,
+    V11,
     VERSION,
     box_bounds,
     copy_records,
     prior_evidence,
+    result_skip,
     supported_size,
     url,
+    validate_copy_scope,
     validate_similarity,
 )
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-CREATOR = "image-evidence-packets/9"
-_CREATORS = {VERSION: CREATOR, V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
+CREATOR = "image-evidence-packets/10"
+_CREATORS = {VERSION: CREATOR, V11: "image-evidence-packets/9", V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
              V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
 MAX_COPY_CANDIDATES = 1024  # Each pair adds two orientations to the neighbor graph.
 legacy = prior.legacy
@@ -64,6 +68,11 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
 
 
 def validate_packet_source_mapping(document: dict, result: dict) -> None:
+    if document.get("version") == VERSION:
+        try:
+            validate_copy_scope(document, result_skip(result))
+        except ValueError as exc:
+            raise PacketIntegrityError(str(exc)) from exc
     prior.validate_packet_source_mapping(
         prior_evidence(document) if document.get("version") in REFLECTION_VERSIONS else document, result
     )
@@ -173,7 +182,9 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    if copy_similarity.supported_size(*size):
+    if result_skip(result):
+        status = translation_status = SKIPPED_CREDENTIALS
+    elif copy_similarity.supported_size(*size):
         source = _source(document, store)
         rgb = np.asarray(source)
         status, boxes = copy_similarity.analyse(rgb)

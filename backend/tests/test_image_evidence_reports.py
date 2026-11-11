@@ -165,7 +165,7 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
     document = service.persist_packet_set(db, analysis, store, result=result)
-    assert document["version"] == "image-evidence-11"
+    assert document["version"] == "image-evidence-12"
     assert document["copy_similarity"]["pairs"] == []
     assert document["packets"] == []
     assert document["copy_translation"]["basis"] == basis

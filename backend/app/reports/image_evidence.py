@@ -102,7 +102,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "An overall classification does not locate edited pixels."}
     store = store or default_store()
     store.verify(document["source"]["sha256"])
-    from app.evidence.image_copy_similarity_binding import status_text
+    from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, status_text
     from app.evidence.image_packets_v7 import validate_assets
 
     validate_assets(document, store)
@@ -124,7 +124,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if check is None:
             continue
         status = check["status"]
-        check["observation"] = (status_text(status, version=document["version"]) if field == "copy_similarity"
+        check["observation"] = (status_text(status, version=document["version"])
+                                if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                 else TRANSLATION_STATUS[status])
         if field == "copy_translation" and check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
             check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]

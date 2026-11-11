@@ -3,8 +3,69 @@ from __future__ import annotations
 
 import math
 import re
+from bisect import bisect_right
 
 from app.core.canonical import canonical_hash
+
+
+def unscored_voice_intervals(coverage: dict, source: dict) -> list[dict]:
+    """Take the exact complement of recorded voice windows on the decoded and original clocks."""
+    samples = source["samples"]
+    if (type(samples) is not int or not 0 < samples <= 600 * 16000
+            or source["sample_rate"] != 16000 or source["timeline_time_base"] != "1/16000"):
+        raise ValueError("Invalid unscored voice coverage clock")
+
+    spans = []
+    for window in coverage["windows"]:
+        start, end = window["start_sample"], window["end_sample"]
+        if type(start) is not int or type(end) is not int or not 0 <= start < end <= samples:
+            raise ValueError("A recorded voice window is outside the analysed input")
+        spans.append((start, end))
+    union = []
+    for start, end in sorted(spans):
+        if union and start <= union[-1][1]:
+            union[-1] = (union[-1][0], max(end, union[-1][1]))
+        else:
+            union.append((start, end))
+
+    scored = sum(end - start for start, end in union)
+    if (coverage["scored_intervals"] != [{"start_sample": a, "end_sample": b} for a, b in union]
+            or any(type(coverage[key]) is not int or coverage[key] != value for key, value in
+                   (("decoded_samples", samples), ("scored_samples", scored), ("unscored_samples", samples - scored)))):
+        raise ValueError("Voice coverage totals differ from the recorded windows")
+
+    blocks = source["timeline"]
+    ends = []
+    cursor = 0
+    for block in blocks:
+        start, end, pts = (block[key] for key in ("start_sample", "end_sample", "source_pts"))
+        if any(type(value) is not int for value in (start, end, pts)) or not start == cursor < end <= samples:
+            raise ValueError("Unscored voice coverage has an invalid source timeline")
+        ends.append(end)
+        cursor = end
+    if cursor != samples:
+        raise ValueError("Unscored voice coverage source timeline is incomplete")
+
+    gaps = []
+    cursor = 0
+    for start, end in [*union, (samples, samples)]:
+        if cursor < start:
+            ranges = []
+            for index in range(bisect_right(ends, cursor), bisect_right(ends, start - 1) + 1):
+                block = blocks[index]
+                a, b = max(cursor, block["start_sample"]), min(start, block["end_sample"])
+                offset = block["source_pts"] - block["start_sample"]
+                ranges.append({"start_sample": a, "end_sample": b, "source_start_pts": offset + a,
+                               "source_end_pts": offset + b, "time_base": "1/16000"})
+            gaps.append({"start_sample": cursor, "end_sample": start, "source_timestamp_ranges": ranges})
+        cursor = end
+    return gaps
+
+
+def validate_unscored_voice_coverage(coverage: dict, source: dict) -> None:
+    if ("unscored_intervals" in coverage
+            and canonical_hash(coverage["unscored_intervals"]) != canonical_hash(unscored_voice_intervals(coverage, source))):
+        raise ValueError("Unscored voice intervals differ from their source clocks or recorded windows")
 
 
 def validate_audio_channel(channel: dict, source_sha256: str) -> None:
@@ -92,6 +153,7 @@ def _validate(channel, source_sha256):
     require((channel['status']=='ready') == bool(coverage['windows']), 'Voice status differs from its actual windows')
     require(coverage['decoded_samples'] == samples and coverage['scored_samples']+coverage['unscored_samples']==samples,
             'Voice sample coverage does not balance')
+    validate_unscored_voice_coverage(coverage, source)
     ids=set()
     for packet in channel['packets']:
         require(packet['id'].startswith('A') and packet['id'] not in ids and packet['evidence_type']=='statistical',

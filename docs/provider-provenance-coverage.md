@@ -21,6 +21,13 @@ a hard binding to the current file, no validation failures and no unresolved
 remote reference. The result records the declaration and skipped checks,
 without inventing a statistical confidence score.
 
+Image evidence also skips its reflected and non-mirrored copy searches when
+that verified gate closes. The ordinary evidence view and PDF explain the
+skipped coverage, and the signed export binds both statuses to the result and
+the source hash. Local tests signed an eligible 768 × 512 PNG and verified
+the full Quick, Full and Deep paths, including zero calls to either matcher.
+The Quick test also rendered the PDF and verified the signed ZIP offline.
+
 The audio adapter now checks **WAV, M4A, MP3 and FLAC**. Dispatch recognizes FLAC
 with a leading ID3 credential tag as well as ordinary FLAC and MP3 with/without
 ID3. This is format routing; actual SDK signature and content-binding validation

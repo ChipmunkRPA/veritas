@@ -22,6 +22,7 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
+from app.evidence.audio_binding import unscored_voice_intervals, validate_unscored_voice_coverage
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -103,6 +104,10 @@ def validate_content(document: dict[str, Any]) -> None:
             raise PacketIntegrityError("Unusable audio window response")
     for window in document["coverage"]["windows"]:
         _interval(window, samples)
+    try:
+        validate_unscored_voice_coverage(document["coverage"], source)
+    except (KeyError, TypeError, ValueError) as error:
+        raise PacketIntegrityError(str(error)) from error
     if document.get("acoustic_context") is not None:
         from app.evidence.audio_background_binding import validate_acoustic_context
         try:
@@ -285,6 +290,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
                         "The mono input mixes source channels. Compression, noise, speakers and unfamiliar synthesis methods can affect responses.",
                         "Waveforms and exported audio are context for inspection; they are not independent evidence of synthesis.",
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
+    document["coverage"]["unscored_intervals"] = unscored_voice_intervals(document["coverage"], document["source"])
     doc_assets = {}
     for name, scores in (("waveform", False), ("scores", True)):
         doc_assets[name] = _asset(db, store, analysis, set_id,

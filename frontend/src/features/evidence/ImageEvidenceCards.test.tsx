@@ -153,10 +153,20 @@ describe('image evidence cards', () => {
     const { rerender } = show({ ...unsupported, version: 'image-evidence-8' })
     const summary = screen.getByRole('region', { name: 'Same-image copy similarity' })
     expect(summary.textContent).toContain('long side of 513–1,024 px.')
-    for (const version of ['image-evidence-9', 'image-evidence-10', 'image-evidence-11'] as const) {
+    for (const version of ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12'] as const) {
       rerender(<MemoryRouter><ImageEvidenceContent set={{ ...unsupported, version }} token="signed token" mediaReady /></MemoryRouter>)
       expect(summary.textContent).toContain('a long side of 1,025–2,048 px and a short side of at least 768 px')
     }
+  })
+
+  it('describes both signed-credential skips once and shows no copy crops', () => {
+    const status = 'skipped_trusted_ai_credentials'
+    show({ ...copyOnly, version: 'image-evidence-12',
+      copy_similarity: { ...reflected, status, pairs: [] }, copy_translation: { ...translated, status, basis: null, pairs: [] } })
+    expect(screen.getAllByText(/Trusted Content Credentials cover this image/)).toHaveLength(1)
+    expect(screen.queryByRole('region', { name: /copy similarity/i })).toBeNull()
+    expect(screen.queryByTestId('image-evidence-empty')).toBeNull()
+    expect(screen.queryByRole('img')).toBeNull()
   })
 
   it('shows both original non-mirrored crops with their own locations alongside the reflected check', () => {

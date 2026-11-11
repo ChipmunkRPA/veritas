@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 from PIL import Image
+from test_audio_evidence import _replace_entry
 from test_audio_evidence import audio_fixture as audio_fixture
 from test_document_packets import packet_factory as packet_factory
 from test_video_evidence_packets import vfr_source as vfr_source
@@ -105,6 +106,26 @@ def test_every_plate_caption_carries_its_json_packet_and_source_location(evidenc
             assert all(image["label"].startswith(prefix) for image in frame["images"])
     for image in view["overview"]:
         assert "overview - " in image["label"]
+
+
+def test_summary_pdf_shows_exact_unscored_voice_times(audio_fixture, monkeypatch):
+    db, store, analysis, result, _, entry = audio_fixture
+    entry["unit_scores"] = [entry["unit_scores"][1]]
+    _replace_entry(store, analysis, result, entry)
+    document = audio_packets.build_packet_set(db, analysis, store, result)
+    original = specimen("audio", "summary")
+    snapshot = original.model_copy(update={
+        "result": result, "evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": analysis.sha256}),
+    })
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(snapshot)
+    text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Unscored voice intervals" in text
+    assert "the gap alone does not establish its cause" in text
+    assert "Analyzed audio 6.000–8.000 s. Source PTS [96000, 128000) at 1/16000." in text
+    assert "/coverage/unscored_intervals" in text
 
 
 @pytest.mark.parametrize("profile,redacted", [("summary", False), ("standard", False), ("forensic", False),

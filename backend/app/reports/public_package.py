@@ -33,6 +33,12 @@ def public_result(result: dict) -> dict:
     """A bounded customer view; no registry, model cards, internal details or arbitrary exhibits."""
     public = project(result)
     decision = public.get('decision') or {}
+    copy_coverage = {}
+    if result.get('kind') == 'image':
+        from app.evidence.image_copy_similarity_binding import result_skip
+
+        if scope := result_skip(result):
+            copy_coverage['image_copy_coverage'] = scope
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                                 'raw_score_kind', 'calibrated_probability') if k in s}
               for s in public.get('signals') or []]
@@ -45,7 +51,7 @@ def public_result(result: dict) -> dict:
         'schema': 'chipmunk.public-result/1', 'is_projection': True,
         'original_result_sha256': canonical_hash(result),
         'decision': {k: decision[k] for k in ('code', 'verbal', 'reason', 'confidence', 'band',
-                     'probability_ai_calibrated', 'probability_ai_uncalibrated') if k in decision},
+                     'probability_ai_calibrated', 'probability_ai_uncalibrated') if k in decision} | copy_coverage,
         'findings': [{k: f[k] for k in ('id', 'family', 'title', 'statement', 'evidence_ids') if k in f}
                      for f in public.get('findings') or []],
         'checks': checks,

@@ -24,6 +24,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from sqlalchemy import MetaData, Table, create_engine, inspect, select
 from sqlalchemy.orm import Session
+from test_audio_evidence import _replace_entry
 from test_audio_evidence import audio_fixture as audio_fixture
 from test_document_hybrid_pdf_coverage import hybrid_pdf
 from test_document_packets import packet_factory as packet_factory
@@ -35,7 +36,7 @@ from test_video_evidence_packets import video_fixture as video_fixture
 
 from app.api import auth, security, tokens, v2_evidence_packets, v2_reports
 from app.api.v2 import install_problem_handlers
-from app.core.canonical import canonical_hash
+from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import audio_packets, document_packets, service, video_packets
 from app.reports import engine, package, signing, snapshot, verify
@@ -113,14 +114,17 @@ def multimedia_package(request, tmp_path, monkeypatch):
         db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=not translated,
                                                           reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == "image-evidence-11"
+        assert document["version"] == "image-evidence-12"
         assert document["source"]["width"] == (768 if translated else 1408)
         assert document["copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)
     elif kind == "audio":
-        db, store, analysis, result, *_ = request.getfixturevalue("audio_fixture")
+        db, store, analysis, result, _, entry = request.getfixturevalue("audio_fixture")
+        entry["unit_scores"] = [entry["unit_scores"][1]]
+        _replace_entry(store, analysis, result, entry)
+        store.put_bytes(canonical_json(result))
         document = audio_packets.build_packet_set(db, analysis, store, result)
     elif hybrid:
         from app.detectors.text.extract import _ocr_runtime
@@ -193,6 +197,10 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         frozen = json.loads(archive.read("evidence.json"))
         bundle = json.loads(archive.read("bundle.json"))
         assert frozen == (f.frozen.image_evidence if f.analysis.kind == "image" else f.frozen.evidence)
+        if f.analysis.kind == "audio":
+            assert [(gap["start_sample"], gap["end_sample"]) for gap in frozen["coverage"]["unscored_intervals"]] == [
+                (0, 32000), (96000, 128000),
+            ]
         assert bundle["evidence"]["set_sha256"] == frozen["sha256"]
         assert bundle["analysis"]["original_result_sha256"] == f.analysis.result_hash
         assert bundle["reports"][0]["snapshot_sha256"] == snapshot.snapshot_hash(f.frozen)

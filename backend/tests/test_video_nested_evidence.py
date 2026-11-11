@@ -360,6 +360,10 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
     fixture = av_fixture.__wrapped__(tmp_path, (path, table, reference, face))
     try:
         f = next(fixture)
+        voice_ref = f.result['manifest']['sampling']['video_audio_evidence']['voice_checks'][0]
+        voice = json.loads(f.store.read_bytes(voice_ref['raw_output_sha256']))
+        voice['unit_scores'][0]['quality'].update(end_sample=32000, end_s=2)
+        voice_ref['raw_output_sha256'] = f.store.put_bytes(canonical_json(voice)).sha256
         _prepare_parent(f)
         _freeze_parent(f)
         ordinary = f.document
@@ -404,6 +408,9 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
             'time_base': '1/16000',
         }]
         assert f.document['audio']['coverage'] == ordinary['audio']['coverage']
+        (unscored,) = f.document['audio']['coverage']['unscored_intervals']
+        assert (unscored['start_sample'], unscored['end_sample']) == (32000, len(reference.pcm))
+        assert unscored['source_timestamp_ranges'][0]['source_start_pts'] == 118400
         assert f.document['av']['packets']
         assert [p['measurement'] for p in f.document['av']['packets']] == [p['measurement'] for p in ordinary['av']['packets']]
         assert [p['anchor'] for p in f.document['av']['packets']] == [p['anchor'] for p in ordinary['av']['packets']]
@@ -419,6 +426,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert 'Stereo soundtrack comparison' in text and 'Mono is digitally silent' in text
         assert '[118400, 134400)' in text and '/audio/stereo_context' in text
         assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
+        assert 'Unscored voice intervals' in text and '/audio/coverage/unscored_intervals' in text
+        assert f'Video playback 2.400–{.4 + len(reference.pcm) / SAMPLE_RATE:.3f} s' in ' '.join(text.split())
         assert 'All 31 lag candidates' in text
         _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf)
 
@@ -426,6 +435,10 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         forged['stereo_context']['windows'][2]['source_timestamp_ranges'][0]['source_start_pts'] += 1
         forged['stereo_context_sha256'] = canonical_hash(forged['stereo_context'])
         with pytest.raises(ValueError, match='source timestamps'):
+            validate_audio_channel(forged, f.analysis.sha256)
+        forged = copy.deepcopy(f.document['audio'])
+        forged['coverage']['unscored_intervals'][0]['start_sample'] += 1
+        with pytest.raises(ValueError, match='Unscored voice intervals differ'):
             validate_audio_channel(forged, f.analysis.sha256)
         omitted = copy.deepcopy(f.document)
         del omitted['audio']['stereo_context'], omitted['audio']['stereo_context_sha256']

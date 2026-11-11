@@ -53,6 +53,24 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
+      {!!set.coverage.unscored_intervals?.length && <details className="mt-3">
+        <summary className="cursor-pointer font-medium">Unscored voice intervals</summary>
+        <p className="mt-2 mb-0">These times have no recorded voice response. Background sound can affect coverage, and the gap alone does not establish its cause.</p>
+        <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">
+          {set.coverage.unscored_intervals.map((gap) => <li key={gap.start_sample}>
+            <p className="m-0">Analyzed audio {seconds(gap.start_sample / rate)}–{seconds(gap.end_sample / rate)}.</p>
+            {gap.source_timestamp_ranges.map((range) => {
+              const start = rationalSeconds(range.source_start_pts, range.time_base)
+              const end = rationalSeconds(range.source_end_pts, range.time_base)
+              return <p key={range.start_sample} className="m-0 text-caption">
+                Source PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}.
+                {videoOriginS != null && start != null && end != null && start >= videoOriginS
+                  && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+              </p>
+            })}
+          </li>)}
+        </ul>
+      </details>}
       {set.coverage.decode_limit_reached && <p className="mt-2 mb-0">The decoding limit was reached. Audio beyond this input was not examined.</p>}
       <p className="mt-2 mb-0">Clips reproduce the exact analyzed {measurementValue(rate)} Hz mono input. The source had {set.source.source_channels ?? 'unrecorded'} channel(s); this is a derived listening copy.</p>
     </div> : <p className="mt-3 text-small text-text-muted">Scored audio coverage is unavailable. Unexamined audio is not a negative finding.</p>}

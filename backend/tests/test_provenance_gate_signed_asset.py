@@ -5,6 +5,7 @@ The deliberately declared test claim is not AI-authorship ground truth.
 """
 import hashlib
 import io
+import json
 import subprocess
 import uuid
 import wave
@@ -75,7 +76,7 @@ def sign(data, mime, signer):
 @pytest.fixture(scope='module')
 def signed_asset(signing_material):
     signer, bundle = signing_material
-    pixels = np.random.default_rng(71).integers(0, 256, (48, 64, 3), dtype=np.uint8)
+    pixels = np.random.default_rng(71).integers(0, 256, (512, 768, 3), dtype=np.uint8)
     original = io.BytesIO()
     Image.fromarray(pixels).save(original, format='PNG')
     return sign(original.getvalue(), 'image/png', signer), pixels, bundle
@@ -249,7 +250,15 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     from sqlalchemy.orm import Session
 
     from app.core.config import settings
+    from app.detectors.image import copy_similarity
     from app.engine import pipelines
+    from app.evidence import image_packets_v7, service
+    from app.evidence.image_copy_similarity_binding import (
+        SKIPPED_CREDENTIALS,
+        credential_skip,
+        validate_copy_scope,
+    )
+    from app.reports.public_package import public_result
     from app.storage.artefacts import register_artefact
     from app.storage.db import Analysis, Base, MediaObject
     from app.storage.objects import ObjectStore
@@ -259,6 +268,10 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     elif kind == 'image':
         data, _, bundle = request.getfixturevalue('signed_asset')
         mime = 'image/png'
+        reflected = Mock(side_effect=AssertionError('Signed record must bypass the reflection matcher'))
+        translated = Mock(side_effect=AssertionError('Signed record must bypass the translation matcher'))
+        monkeypatch.setattr(copy_similarity, 'analyse', reflected)
+        monkeypatch.setattr(image_packets_v7, 'selected_translation_pairs', translated)
     else:
         data, bundle = request.getfixturevalue('signed_' + kind)
         mime = {'audio': 'audio/wav', 'video': 'video/mp4'}[kind]
@@ -307,3 +320,32 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     with sessions() as db:
         result = db.get(Analysis, analysis_id)
         assert result.result_hash and result.status == 'done'
+        if kind == 'image':
+            reflected.assert_not_called()
+            translated.assert_not_called()
+            document = service.load_packet_set(db, result, store)
+            assert (document['source']['width'], document['source']['height']) == (768, 512)
+            assert all(document[key]['status'] == SKIPPED_CREDENTIALS and not document[key]['pairs']
+                       for key in ('copy_similarity', 'copy_translation'))
+            assert document['copy_translation']['basis'] is None
+            raw = json.loads(store.read_bytes(result.result_hash))
+            scope = public_result(raw)['decision']['image_copy_coverage']
+            assert scope == credential_skip(digest)
+            validate_copy_scope(document, scope)
+            with pytest.raises(ValueError, match='differs from the source-bound result'):
+                validate_copy_scope(document, None)
+            if profile == 'quick':
+                from test_video_nested_evidence import _check_public_zip
+
+                from app.reports import engine, image_evidence, snapshot
+
+                frozen = snapshot.build(db, result, raw, report_id=str(uuid.uuid4()), revision=1, profile='standard',
+                                        redacted=False, supersedes_report_id=None, revision_reason=None,
+                                        requested_at=datetime.now(UTC), requested_by='authored-local-test',
+                                        template_set=engine.TEMPLATE_SET, veritas_version=settings.version, store=store)
+                monkeypatch.setattr(image_evidence, 'default_store', lambda: store)
+                pdf = engine.render_pdf(frozen)
+                text = ' '.join(engine.pdf_text(pdf.pdf).split())
+                assert text.count('The two copy checks were skipped.') == 1
+                _check_public_zip(SimpleNamespace(db=db, store=store, analysis=result, frozen=frozen, document=document),
+                                  tmp_path, monkeypatch, pdf.pdf)

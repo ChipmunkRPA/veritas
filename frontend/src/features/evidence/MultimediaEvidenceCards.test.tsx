@@ -88,7 +88,10 @@ describe('ordinary multimedia evidence', () => {
         source_start_pts: 176000 + start_sample, source_end_pts: 180000 + start_sample, time_base: '1/16000' }] })
     set.audio = { status: 'not_assessed', reason: 'Voice model skipped this short input.', packets: [], limitations: [],
       source: { ...set.source, pcm_sha256: 'a'.repeat(64), samples: 48000, sample_rate: 16000 },
-      coverage: { decoded_samples: 48000, scored_samples: 0, unscored_samples: 48000, windows: [], decode_limit_reached: false, selection_threshold: .5 },
+      coverage: { decoded_samples: 48000, scored_samples: 0, unscored_samples: 48000, windows: [], decode_limit_reached: false, selection_threshold: .5,
+        unscored_intervals: [{ start_sample: 0, end_sample: 48000, source_timestamp_ranges: [
+          { start_sample: 0, end_sample: 48000, source_start_pts: 176000, source_end_pts: 224000, time_base: '1/16000' },
+        ] }] },
       repetition_context: { schema: 'chipmunk.audio-exact-repetition/1', status: 'measured', reason: null, source_sha256: set.source.sha256,
         pcm_sha256: 'a'.repeat(64), sample_rate: 16000, input_samples: 48000, searched_interval: { start_sample: 0, end_sample: 48000 },
         pairs: [{ id: 'R01', first: sample(3200), second: sample(19200), sample_count: 4000, lag_samples: 16000,
@@ -100,6 +103,8 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByLabelText('R01 · Second occurrence').getAttribute('src')).toBe(first)
     expect(screen.getByText(/Video playback 1\.200 s–1\.450 s/)).toBeTruthy()
     expect(screen.getByText(/Video playback 2\.200 s–2\.450 s/)).toBeTruthy()
+    expect(screen.getByText('Unscored voice intervals')).toBeTruthy()
+    expect(screen.getByText(/Source PTS \[176000, 224000\).*Video playback 1\.000 s–4\.000 s/)).toBeTruthy()
   })
 
   it('plays the two distinct originals for a similar-audio pair without claiming exact samples', () => {

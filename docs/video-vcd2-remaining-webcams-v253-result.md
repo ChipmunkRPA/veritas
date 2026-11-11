@@ -1,0 +1,7 @@
+# Local webcam false-flag controls
+
+All six uploads completed on the patched runtime with both video checks available. The runs covered two genuine webcam recordings, each uploaded unchanged, with a chroma conversion, and with recompression. The appearance check measured 12 windows per upload, and the audit verified 240 sampled frames across the six uploads. The exact uploaded bytes and the evidence archives were verified before the temporary workspaces were released. [Frozen method](video-vcd2-remaining-webcams-v253-method.md) · [Exact aggregate](evaluation-panels/video-vcd2-remaining-webcams-v253-complete.json)
+
+All six overall results leaned original. All six still included a false face-appearance review interval, including both unchanged uploads. One upload also produced a false face-track review interval. Both transformations preserved the presence of a flag for each recording. The six variants represent two source recordings, so the paired result shows that the false flags can persist across ordinary processing. It gives no sensitivity estimate for actual swaps or lip-sync edits.
+
+The prior same-input replay verified recovery from a concurrent weight-cache failure. These new controls show the separate localization error that remains after the checks run successfully. The evaluation used the existing customer settings and preserved the earlier results. [Cache-fix replay](video-vcd2-verify-cache-replay-v251-result.md) · [Earlier webcam controls](evaluation-panels/video-vcd2-full-app-eight-triplets-v202.json)

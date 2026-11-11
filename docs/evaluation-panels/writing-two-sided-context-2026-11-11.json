@@ -1,0 +1,544 @@
+{
+  "advancement": {
+    "decision": "Further source-disjoint research. No serving promotion.",
+    "minimum_additional_useful_current": 2,
+    "minimum_additional_useful_fitted_window": 1,
+    "no_extra_human_source_groups": true,
+    "passed": true
+  },
+  "commitments": {
+    "arithmetic_replay_implementation": "648da80a9e4324ddd39a17f7c34bbca90b414c9e0ec8a74f506baf1701d7188d",
+    "companion_generation": "b9b121fb81772778ab9019f221229f14a8146c7829d19d274bb012660337b306",
+    "fit": "7ecab534f10c7701810a237828f00079e81861282ade9034909ea64477f84054",
+    "freeze": "7c87a1515a987e190812b2ffe76a894374ce6e78c6c93154b92db5fb346679f6",
+    "model_policy": "67844425de4758e8901c2adb6de843e178a1a8f0d9b34d0219997787e1568a36",
+    "native": "930016fd123d43ed6350f785a7a48f30d01f0cb00a7d793c59ca0a9586c7ebb9",
+    "original_generation": "62150defe302b921791bf353181fc45632369de91631162e9f9a080428236988",
+    "source": "52f6a8796ea273bfa88b1d5d93b42b3edd152756fe3434c38ddf29a2f754b951"
+  },
+  "counts": {
+    "human_sentence": {
+      "current_focus": {
+        "assessed": 6,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "current_window": {
+        "assessed": 6,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 6,
+        "flagged": 0,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 6,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "original": {
+      "current_focus": {
+        "assessed": 6,
+        "flagged": 4,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "current_window": {
+        "assessed": 6,
+        "flagged": 4,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 6,
+        "flagged": 2,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 6,
+        "flagged": 3,
+        "missed_if_assessed": 0,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "qwen": {
+      "current_focus": {
+        "assessed": 3,
+        "flagged": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 0,
+        "wrong_location": 1
+      },
+      "current_window": {
+        "assessed": 3,
+        "flagged": 1,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 3,
+        "flagged": 0,
+        "missed_if_assessed": 3,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 3,
+        "flagged": 1,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 1,
+        "wrong_location": 0
+      }
+    },
+    "smol2": {
+      "current_focus": {
+        "unavailable_generation": 6
+      },
+      "current_window": {
+        "unavailable_generation": 6
+      },
+      "fitted_window": {
+        "unavailable_generation": 6
+      },
+      "two_sided": {
+        "unavailable_generation": 6
+      }
+    },
+    "smol2_companion": {
+      "current_focus": {
+        "assessed": 3,
+        "flagged": 2,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 1,
+        "wrong_location": 0
+      },
+      "current_window": {
+        "assessed": 3,
+        "flagged": 2,
+        "missed_if_assessed": 2,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 1,
+        "wrong_location": 0
+      },
+      "fitted_window": {
+        "assessed": 3,
+        "flagged": 2,
+        "missed_if_assessed": 1,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 2,
+        "wrong_location": 0
+      },
+      "two_sided": {
+        "assessed": 3,
+        "flagged": 2,
+        "missed_if_assessed": 1,
+        "ordinary_edit_overlap": 0,
+        "unassessed": 0,
+        "unavailable_generation": 3,
+        "useful": 2,
+        "wrong_location": 0
+      }
+    }
+  },
+  "coverage": {
+    "current_contexts": 72,
+    "eligible_foci": 36,
+    "exact_ai_targets_eligible": 6,
+    "native_context_inputs": 216,
+    "verified_decoded_bodies": 18
+  },
+  "elapsed_seconds": 26.81,
+  "fitted": {
+    "arms": {
+      "fitted_window": {
+        "coefficient": [
+          0.16764671212110518
+        ],
+        "intercept": 0.0009003075900099412,
+        "mean": [
+          -5.2738908547691015
+        ],
+        "point": 0.27759856955436335,
+        "scale": [
+          2.4031803482622403
+        ]
+      },
+      "two_sided": {
+        "coefficient": [
+          -0.3126104400767546,
+          0.609605384156765,
+          1.0043448310254952
+        ],
+        "intercept": -0.05016904742352113,
+        "mean": [
+          -5.273890854769101,
+          -5.3118353830713305,
+          -0.940701318757165
+        ],
+        "point": 0.6436056874399746,
+        "scale": [
+          2.40318034826224,
+          1.4081132734886064,
+          1.812285785675523
+        ]
+      }
+    },
+    "calibration_groups": 7,
+    "calibration_unassessed_groups": 6,
+    "fit_counts": {
+      "0": 22,
+      "1": 9
+    },
+    "fit_source_groups": {
+      "0": 6,
+      "1": 6
+    }
+  },
+  "generation_admission": {
+    "companion": {
+      "admitted": 3,
+      "copied_target": 2,
+      "word_geometry": 1
+    },
+    "primary": {
+      "qwen": {
+        "admitted": 3,
+        "not_one_sentence": 1,
+        "word_geometry": 2
+      },
+      "smol2": {
+        "not_one_sentence": 2,
+        "word_geometry": 4
+      }
+    }
+  },
+  "human_source_flags": {
+    "current_focus": 4,
+    "current_window": 4,
+    "fitted_window": 2,
+    "two_sided": 4
+  },
+  "independent_replay": {
+    "exact_rewrite_foci": 6,
+    "exact_txt_files": 18,
+    "human_group_counts": 4,
+    "metric_counts": 124,
+    "native_context_geometry": 216
+  },
+  "known_prior_texts": 45307,
+  "method": {
+    "advance": "At least two extra useful edits over current, no extra human source groups flagged, and at least one useful-location gain over matched fitted window.",
+    "comparison": "One fixed point per fit, no fresh recalibration. Same classifier and exact native token coverage throughout.",
+    "current_focus": "Same current raw selected foci, displayed as their exact sentences.",
+    "current_window": "Current raw three-sentence response, including edge windows. Keep the first six qualifying foci and show full contexts.",
+    "fit": "Balanced by source and class, standardized L2 logistic regression with C=.5. One strict point above every human calibration group maximum.",
+    "fitted_window": "Matched fit on the unchanged full-window response with the same eligible interior foci as the new arm.",
+    "geometry": "First six source-ordered qualifiers. A useful range overlaps the known rewrite with at least .30 non-whitespace IoU.",
+    "split": "Separate consumed fit and calibration source groups. Freeze their data and prospective holdout before scoring.",
+    "two_sided": "Add the weaker two-sentence response and the weaker focus contrast against the corresponding individual flank."
+  },
+  "minimum_available_bytes": 7623819264,
+  "model_forward_calls": {
+    "fit_and_calibration": 24,
+    "holdout": 15
+  },
+  "paired_vs_current": {
+    "human_sentence": {
+      "current_focus": {
+        "0->0": 4,
+        "1->1": 2
+      },
+      "current_window": {
+        "0->0": 4,
+        "1->1": 2
+      },
+      "fitted_window": {
+        "0->0": 4,
+        "1->0": 2
+      },
+      "two_sided": {
+        "0->0": 4,
+        "1->1": 2
+      }
+    },
+    "original": {
+      "current_focus": {
+        "0->0": 2,
+        "1->1": 4
+      },
+      "current_window": {
+        "0->0": 2,
+        "1->1": 4
+      },
+      "fitted_window": {
+        "0->0": 2,
+        "1->0": 2,
+        "1->1": 2
+      },
+      "two_sided": {
+        "0->0": 2,
+        "1->0": 1,
+        "1->1": 3
+      }
+    },
+    "qwen": {
+      "current_focus": {
+        "0->0": 3
+      },
+      "current_window": {
+        "0->0": 3
+      },
+      "fitted_window": {
+        "0->0": 3
+      },
+      "two_sided": {
+        "0->0": 2,
+        "0->1": 1
+      }
+    },
+    "smol2_companion": {
+      "current_focus": {
+        "0->0": 2,
+        "1->1": 1
+      },
+      "current_window": {
+        "0->0": 2,
+        "1->1": 1
+      },
+      "fitted_window": {
+        "0->0": 1,
+        "0->1": 1,
+        "1->1": 1
+      },
+      "two_sided": {
+        "0->0": 1,
+        "0->1": 1,
+        "1->1": 1
+      }
+    }
+  },
+  "schema": "chipmunk.writing-two-sided-context/1",
+  "source_groups": 6,
+  "source_roster": [
+    {
+      "author": "Catherine Cooksey",
+      "date": "2020-12-09",
+      "donor": {
+        "body_paragraph": 11,
+        "paragraph_codepoints": [
+          0,
+          142
+        ],
+        "sha256": "bebb8decf0f5665a948e66f9e42318e41814b244f3d6f9b0bdf3df62fb04a041"
+      },
+      "donor_words": 23,
+      "group": "cooksey",
+      "html_sha256": "dff3e553917ca0ad7c7a060d9286eb611517386e3b8080ce94368f6ac8016ee5",
+      "original": {
+        "body_paragraph": 12,
+        "body_sha256": "202cdc10b860600182fc45c0cd9a8416a6c257a51b96c910fcf267bb8257ca9b",
+        "paragraph_codepoints": [
+          0,
+          471
+        ],
+        "target_sentence": 2
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/key-comparisons-transmitting-correct-measures-all-around-world",
+      "target_words": 22,
+      "word_count": 78
+    },
+    {
+      "author": "Mark Esser",
+      "date": "2021-03-03",
+      "donor": {
+        "body_paragraph": 5,
+        "paragraph_codepoints": [
+          72,
+          211
+        ],
+        "sha256": "2e40df998ff2573db3ce643708dd3e6d6531b93a2eac67fc42f020d1e4f0e951"
+      },
+      "donor_words": 20,
+      "group": "history",
+      "html_sha256": "05e002631399188d4617b0dc88098ef3db0c1cefdad3f0619fc21d57a9ed84e6",
+      "original": {
+        "body_paragraph": 4,
+        "body_sha256": "773088489add21286144f56017d1ce411cdd388a07d5b3c316ab36631bf3330f",
+        "paragraph_codepoints": [
+          0,
+          652
+        ],
+        "target_sentence": 1
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/1901-2021-measurements-then-and-now",
+      "target_words": 20,
+      "word_count": 100
+    },
+    {
+      "author": "James K. Olthoff",
+      "date": "2018-11-27",
+      "donor": {
+        "body_paragraph": 12,
+        "paragraph_codepoints": [
+          24,
+          205
+        ],
+        "sha256": "49810dbd526051633954c5cd86559ee6619324cee20ee8f6844486dbe848719b"
+      },
+      "donor_words": 31,
+      "group": "kilogram",
+      "html_sha256": "9d56ee97af7b51101449e3b3dceac59656b08a0ee5e85d6eef785368de182f0f",
+      "original": {
+        "body_paragraph": 6,
+        "body_sha256": "320fe32833aeafc43d47d10553d459507178ebf7367f67bc945b1bebf9913ba4",
+        "paragraph_codepoints": [
+          0,
+          546
+        ],
+        "target_sentence": 1
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/all-times-all-peoples-how-replacing-kilogram-empowers-industry",
+      "target_words": 31,
+      "word_count": 92
+    },
+    {
+      "author": "Bala Muralikrishnan",
+      "date": "2020-03-24",
+      "donor": {
+        "body_paragraph": 3,
+        "paragraph_codepoints": [
+          446,
+          550
+        ],
+        "sha256": "3ff41583be86a38c68aefe0d4c15daa76259accad1b3f39f0378e89b1fb9c085"
+      },
+      "donor_words": 18,
+      "group": "muralikrishnan",
+      "html_sha256": "08da0ad3f48168acc3cca6b52ac46cb072f6243b82d3ac3d620d56af626737a0",
+      "original": {
+        "body_paragraph": 2,
+        "body_sha256": "61c87518518fc41647c4b4372f6fb8f013559c84d5122c84e29f82dbf401744f",
+        "paragraph_codepoints": [
+          0,
+          527
+        ],
+        "target_sentence": 2
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/journeying-laboratory-research-documentary-standards",
+      "target_words": 18,
+      "word_count": 89
+    },
+    {
+      "author": "George Orji",
+      "date": "2019-04-02",
+      "donor": {
+        "body_paragraph": 0,
+        "paragraph_codepoints": [
+          33,
+          170
+        ],
+        "sha256": "b43c83d4ecf207fd905b5f97da254907ed6dc7c27510236b2860d610ce65fc91"
+      },
+      "donor_words": 21,
+      "group": "orji",
+      "html_sha256": "a3af2c6129604b2fe6cb6c9ad2a0ac27f832a7ced40b13f5ad91e870c8269833",
+      "original": {
+        "body_paragraph": 4,
+        "body_sha256": "b0e605706e84233de4006b3498bfcb64e18746ac1abf5cb578a57bf12a67aa51",
+        "paragraph_codepoints": [
+          0,
+          531
+        ],
+        "target_sentence": 1
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/what-do-when-measurement-methods-produce-different-answers",
+      "target_words": 21,
+      "word_count": 77
+    },
+    {
+      "author": "Adam Pintar",
+      "date": "2019-04-09",
+      "donor": {
+        "body_paragraph": 20,
+        "paragraph_codepoints": [
+          285,
+          396
+        ],
+        "sha256": "d147131c26e974f108afe8003f246966de1bb2f75a79268abfd3422eec1edbf3"
+      },
+      "donor_words": 17,
+      "group": "pintar",
+      "html_sha256": "c1cdd7b9d96a6343afee6dd4d4d5ddbf662c81ac3dd9449fde37570d5a0c2bb5",
+      "original": {
+        "body_paragraph": 2,
+        "body_sha256": "4313f6b60cfa6da7e6daaf1df84017b9a87bc308f09b94e0151ea1690447be3e",
+        "paragraph_codepoints": [
+          0,
+          466
+        ],
+        "target_sentence": 1
+      },
+      "source_url": "https://www.nist.gov/blogs/taking-measure/one-statistical-paradigm-rule-them-all",
+      "target_words": 17,
+      "word_count": 92
+    }
+  ],
+  "useful_source_groups": {
+    "current_focus": 1,
+    "current_window": 1,
+    "fitted_window": 2,
+    "two_sided": 3
+  }
+}

@@ -97,6 +97,24 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [cross-layer voice head](audio-cross-layer-room-transfer-2026-11-11.md)
+  improved AUC from 0.917 to 0.958 and from 0.948 to 0.979 on two new competing-speech
+  mixtures of retained foregrounds. The frozen operating points recovered zero of
+  six missed synthetic clips. The comparison ran the original speech gate and
+  serving calibration and supports a separate natural-room point-selection study.
+- The [two-sided writing check](writing-two-sided-context-2026-11-11.md)
+  located three of six edited sentences versus one with the current check on
+  six fresh NIST authors, with five versus six human false flags. The matched
+  full-window candidate found two edits and flagged two human files. This
+  comparison advances to a different technical publisher.
+- The [registered video exposure comparison](video-registered-light-context-2026-11-11.md)
+  retained all 36 correct swap ranges and cleared zero of 14 genuine camera flags.
+  Registration was unavailable in 31 of 50 flagged views.
+- The [independent measurement reviewer](independent-testing.md#recompute-selected-image-and-video-measurements)
+  recomputes the sharp PNG seam arithmetic and the short-swap sampling schedule
+  from supplied originals. The reviewer reproduced the existing signed examples
+  and supports local testing without the detector models.
+
 - The [six-frame paired face check](video-face-pe-confirmation-2026-11-11.md)
   found 45/48 whole-clip swaps versus 26/48 on separate source groups, with
   zero flags on 24 originals in both arms. An opt-in local app analysis now

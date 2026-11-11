@@ -1,0 +1,62 @@
+{
+  "cases": {
+    "original": {
+      "api_json_equal": true,
+      "coarse_and_decision_exact_match_to_disabled": true,
+      "coarse_flagged": false,
+      "no_refined_heading": true,
+      "no_refinement": true,
+      "public_model_name_scan_passed": true,
+      "public_pdf_pages": 15,
+      "runtime_seconds": {
+        "vid.faces.yunet": 0.567,
+        "vid.review.face_appearance": 2.494,
+        "vid.tracks.yunet_dinov2": 2.775
+      },
+      "signed_original_replay_verified": true,
+      "version": "video-evidence-11"
+    },
+    "swap": {
+      "api_json_equal": true,
+      "coarse_and_decision_exact_match_to_disabled": true,
+      "coarse_flagged": true,
+      "exact_pdf_image_matches": 6,
+      "known_range_s": [
+        2.64,
+        3.4
+      ],
+      "measured_range_s": [
+        2.84,
+        3.36
+      ],
+      "native_original_and_crop_images": 6,
+      "native_support_frames": 21,
+      "public_model_name_scan_passed": true,
+      "public_packet_is_confidence_neutral": true,
+      "public_pdf_pages": 19,
+      "refined": [
+        2.68,
+        3.4
+      ],
+      "representative_frame_times_s": [
+        2.6,
+        3.0,
+        3.4
+      ],
+      "runtime_seconds": {
+        "vid.faces.yunet": 0.543,
+        "vid.review.face_appearance": 3.363,
+        "vid.tracks.yunet_dinov2": 2.745
+      },
+      "same_track": true,
+      "signed_original_replay_verified": true,
+      "version": "video-evidence-11"
+    }
+  },
+  "duplicate_paid_delivery_idempotent": true,
+  "full_profiles": 2,
+  "provider_transport_stub_only": true,
+  "report_template": "veritas-report-2.0.r86",
+  "restricted_detector_schedule": "real face tracking, face detection and appearance; unrelated lanes omitted in isolation",
+  "unpaid_checkout_did_not_queue_analysis": true
+}

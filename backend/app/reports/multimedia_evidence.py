@@ -134,7 +134,12 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.video.decode import FrameTable
-    from app.evidence import face_lighting_context, picture_hold_binding, whole_face_binding
+    from app.evidence import (
+        face_boundary_binding,
+        face_lighting_context,
+        picture_hold_binding,
+        whole_face_binding,
+    )
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
@@ -159,6 +164,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
+        face_boundary_binding.validate_packet(packet, source, document["version"], table_pts=table.pts,
+                                             interpolated=table.interpolated)
         if whole := packet.get("whole_face_review"):
             from app.api.public_projection import alias_signal
 
@@ -178,6 +185,18 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             if not any((s.get("details") or {}).get("face_sequence") == sequence for s in frozen.get("signals", [])):
                 raise ObjectIntegrityError("Face sequence differs from the frozen analysis measurement")
+        if boundary := packet.get("face_boundary"):
+            from app.api.public_projection import alias_signal
+
+            for item in boundary["frame_inputs"]:
+                committed = by_index.get(item["frame_index"])
+                if committed is None or any(item[key] != committed[key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise ObjectIntegrityError("Refined face timing differs from committed decoded source frames")
+            if not any((signal.get("details") or {}).get("face_sequence") == packet["face_sequence"]
+                       and (signal.get("details") or {}).get("face_boundary") == boundary
+                       and signal.get("effective_weight") == 0.0 and alias_signal(signal["id"]) == packet["signal_refs"][0]["id"]
+                       for signal in frozen.get("signals", [])):
+                raise ObjectIntegrityError("Refined face timing differs from the frozen review check")
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -188,7 +207,9 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             if end < len(table) and clip["last_frame_duration"]["ticks"] != (table.pts[end] - table.pts[end - 1]) * table.tb.numerator:
                 raise ObjectIntegrityError("Video context final duration differs from the next source frame")
         brightness_inputs = {}
-        for frame in packet["frames"]:
+        coarse_frames = len(packet["frames"])
+        for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
+            refined = position >= coarse_frames
             anchor = frame["anchor"]
             recorded = by_index.get(anchor["frame_index"])
             if (table.pts[anchor["frame_index"]] != anchor["pts"]
@@ -199,9 +220,9 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 rgb = image.convert("RGB")
                 if hashlib.sha256(rgb.tobytes()).hexdigest() != anchor["decoded_rgb_sha256"]:
                     raise ObjectIntegrityError("Displayed video pixels differ from the analysed frame")
-                if packet.get("face_lighting"):
+                if not refined and packet.get("face_lighting"):
                     brightness_inputs[anchor["frame_index"]] = np.asarray(rgb)
-                if sequence := packet.get("face_sequence"):
+                if sequence := packet.get("face_boundary" if refined else "face_sequence"):
                     import cv2
 
                     item = next(row for row in sequence["frame_inputs"] if row["frame_index"] == anchor["frame_index"])
@@ -553,12 +574,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
+            row["face_boundary"] = copy.deepcopy(packet.get("face_boundary"))
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
-            for frame in packet["frames"]:
+            coarse_count = len(packet["frames"])
+            for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
-                                      "interval_role": frame.get("interval_role"),
+                                      "interval_role": frame.get("interval_role"), "refined": position >= coarse_count,
+                                      "first_refined": position == coarse_count,
                                       "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold else "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not hold or role == "original")]})

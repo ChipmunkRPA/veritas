@@ -14,6 +14,7 @@ import wave
 from app.core.canonical import canonical_hash
 from app.evidence import document_scope
 from app.evidence.face_alignment_context import validate as validate_face_alignment
+from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.face_lighting_context import validate as validate_face_lighting
 from app.evidence.image_copy_similarity_binding import (
@@ -89,6 +90,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
+            validate_face_boundary(packet, evidence['source'], evidence['version'])
+            if boundary := packet.get('face_boundary'):
+                measurement = canonical_hash(boundary)
+                _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                             and check.get('face_boundary_measurement_sha256') == measurement
+                             for check in result.get('checks', [])),
+                         'Refined face timing differs from its corresponding public check')
             if packet.get('whole_face_review') is not None or packet.get('semantics') == 'paired-whole-face-samples/1':
                 from app.evidence.whole_face_binding import validate_packet as validate_whole_face
 

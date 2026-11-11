@@ -28,8 +28,9 @@ from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.detectors.video import lipsync
 from app.detectors.video.adapters.face_appearance import DETECTOR, record
 from app.detectors.video.adapters.lipsync_xcorr import LandmarkXcorrDetector
-from app.detectors.video.decode import probe_frames
+from app.detectors.video.decode import decode_frames, probe_frames
 from app.detectors.video.face_appearance import METHOD, cpp_alignment
+from app.detectors.video.frame_store import FrameStore
 from app.engine.stages import video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
 from app.evidence import service, video_audio, video_packets
@@ -157,16 +158,18 @@ def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, mon
     multimedia_evidence.view(f.frozen, store=f.store)
 
 
-def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av_fixture):
+@pytest.mark.parametrize("refine", [False, True])
+def test_appearance_evidence_records_the_same_measurements_in_json_and_reports(av_fixture, refine):
     f = av_fixture
     centers = [36, 44, 52, 60, 68, 76, 84]
     indices = {center + offset for center in centers for offset in (-1, 0, 1)}
     during = {center + offset for center in centers[2:-2] for offset in (-1, 0, 1)}
-    pixels = f.inputs.store.get_many(indices)
+    dense = list(range(38, 82, 2))
+    pixels = f.inputs.store.get_many(indices | (set(dense) if refine else set()))
     anchors = f.inputs.store.native_anchors()
     by_index = {row['frame_index']: row for row in anchors}
     inputs = {}
-    for index in indices:
+    for index in pixels:
         frame = f.by_frame[index]
         landmarks = copy.deepcopy(frame['landmarks'])
         if index in during:
@@ -185,9 +188,20 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
         'centers': centers, 'track_id': 'track:0', 'start_s': f.table.seconds(52), 'end_s': f.table.seconds(68),
         'response': .2, 'middle_to_before': .235, 'middle_to_after': .3, 'flank_change': .1,
     }, f.table, inputs)
+    details = {'face_sequence_binding_version': METHOD, 'face_sequence': sequence}
+    if refine:
+        details['face_boundary'] = {
+            'method': 'face-appearance-boundary/1', 'time_base': f.table.time_base, 'track_id': 'track:0',
+            'start_pts': f.table.pts[50], 'end_pts': f.table.pts[70],
+            'start_stream_s': f.table.seconds(50), 'end_stream_s': f.table.seconds(70),
+            'scheduled_frame_indices': dense, 'frame_inputs': [inputs[i] for i in dense],
+            'anchors': {'before': 48, 'during': 60, 'after': 70},
+            'edges': {edge: {'frame_indices': indices, 'signed_distance_hex': [float(value).hex() for value in (-.2, -.3, .3, .2)]}
+                      for edge, indices in (('entry', [46, 48, 50, 52]), ('exit', [66, 68, 70, 72]))},
+        }
     f.result['signals'].append({
         'id': DETECTOR + ':global', 'detector_id': DETECTOR, 'status': 'ok', 'display_id': 'S03',
-        'details': {'face_sequence_binding_version': METHOD, 'face_sequence': sequence},
+        'details': details, 'effective_weight': 0.,
     })
     f.result['manifest']['sampling'].update(
         frame_anchor_version=video_packets.ANCHOR_VERSION, frame_anchor_sha256=canonical_hash(anchors),
@@ -206,7 +220,7 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
     document = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
     stored = service.load_packet_set(f.db, f.analysis, f.store)
     assert stored == json.loads(canonical_json(document))
-    assert stored['version'] == video_packets.PICTURE_HOLD_VERSION
+    assert stored['version'] == video_packets.VERSION
     assert stored['picture_hold']['status'] == 'unavailable'
     [face] = stored['packets']
     assert face['finding_ids'] == [] and all(frame['score'] is None for frame in face['frames'])
@@ -227,6 +241,40 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
     html = engine._env.get_template('sections/multimedia_evidence.html.j2').render(v={'evidence': report}, s=frozen)
     assert 'Median eye spacing during the range' in html and '16.67 % of face-box width' in html
     assert 'Scene outside the face brightness change from before' in html
+
+    if refine:
+        assert face['face_sequence'] == json.loads(canonical_json(sequence))
+        assert face['face_boundary'] == json.loads(canonical_json(details['face_boundary']))
+        assert face['affects_overall_confidence'] is False
+        assert [(frame['interval_role'], frame['anchor']['frame_index']) for frame in face['face_boundary_frames']] == [
+            ('before', 48), ('during', 60), ('after', 70)]
+        assert 'Refined boundary estimate' in html and '7.000–7.800 s' in html
+        assert 'Before refined range' in html and '7.080-7.720 s' in html
+        replay = FrameStore(f.inputs.store.path, f.table)
+        ctx = SimpleNamespace(outputs={'detect': {'detectors': [{'details': details}]}}, check=lambda *_: None)
+        restored = video._native_render_anchors(ctx, replay)
+        assert {row['frame_index']: row for row in restored} == {index: by_index[index] for index in pixels}
+
+        def unverified_decoder(*args, **kwargs):
+            for frame in decode_frames(*args, **kwargs):
+                yield replace(frame, pts_verified=False) if frame.index == dense[0] else frame
+
+        unverified = FrameStore(f.inputs.store.path, f.table, decoder=unverified_decoder)
+        with pytest.raises(video.DecodeError, match='lacks a verified decoded timestamp'):
+            video._native_render_anchors(ctx, unverified)
+        bad_input = copy.deepcopy(details)
+        bad_input['face_boundary']['frame_inputs'][0]['decoded_rgb_sha256'] = 'f' * 64
+        ctx.outputs['detect']['detectors'][0]['details'] = bad_input
+        with pytest.raises(video.DecodeError, match='differs from the re-decoded source frames'):
+            video._native_render_anchors(ctx, replay)
+        broken = copy.deepcopy(stored)
+        broken['packets'][0]['face_boundary']['edges']['entry']['signed_distance_hex'][1] = .1.hex()
+        broken['sha256'] = video_packets.packet_hash(broken)
+        with pytest.raises(PacketIntegrityError, match='lack measured change'):
+            video_packets.validate_packet_set(broken, analysis_id=f.analysis.id, revision=f.analysis.revision,
+                                             original_result_hash=f.analysis.result_hash, source_sha256=f.analysis.sha256)
+    else:
+        assert 'face_boundary' not in face and 'Refined boundary estimate' not in html
 
     from app.evidence import face_lighting_context
 
@@ -395,7 +443,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
-                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context',
+                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
             return None

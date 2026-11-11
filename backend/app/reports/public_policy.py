@@ -2,7 +2,7 @@
 from app.reports import engine
 
 # These generations already used the public-safe headline and check labels.
-_PREVIOUS_PUBLIC_TEMPLATES = {"veritas-report-2.0.r83", "veritas-report-2.0.r84"}
+_PREVIOUS_PUBLIC_TEMPLATES = {"veritas-report-2.0.r83", "veritas-report-2.0.r84", "veritas-report-2.0.r85"}
 
 
 def downloadable_template(template: str, kind: str | None = None) -> bool:

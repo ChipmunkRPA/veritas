@@ -31,7 +31,11 @@ The swap's app-selected range was **2.840–3.360 seconds**, a measured duration
 
 The existing coarse packet matched the JSON export and verified in the signed package against the uploaded source. The package bytes and API evidence were unchanged after offline refinement. Its 17-page PDF and text exports passed the model-name scan. The initial harness expected an optional confidence-effect field missing from the coarse packet schema. The review signal had zero weight. Verification resumed from that completed analysis after correcting the assertion. [Aggregate app parity receipt](evaluation-panels/video-face-short-boundary-app-parity-2026-11-11.json)
 
-These results support an opt-in local timing pilot with a distinct estimated range alongside the existing measured range. Integration needs to preserve both frame sets and bind them to the same source track. The refinement remains offline.
+## Opt-in app integration
+
+The app now runs the same refinement on qualifying new Full and Deep analyses when `VERITAS_VIDEO_FACE_BOUNDARY_REFINEMENT=true` and the appearance review is selected. The ordinary evidence view, PDF and JSON keep the measured review range and show the refined estimate with its own exact before, during and after frame images and face-context crops. The timing estimate carries zero weight in the overall AI confidence. If both transitions cannot be measured within the bounded pass, the original range is retained. The deployment setting defaults to off.
+
+The isolated prepaid Full replay again used the actual local tracking, face and appearance checks. Its known swap produced the same **2.840–3.360 s** measured range and confidence decision as the disabled run, and the app itself estimated **2.680–3.400 s** from 21 native inputs. All six corresponding frame and crop images matched both the native source pixels and PDF images. The API, JSON export and signed ZIP agreed, and offline verification decoded the original again. The matched original produced no flag or refinement. The harness simulated Stripe transport, and analysis remained unqueued until a valid paid event. [App integration receipt](evaluation-panels/video-face-short-boundary-app-integration-2026-11-11.json)
 
 ## Local replay
 

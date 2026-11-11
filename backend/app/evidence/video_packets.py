@@ -24,6 +24,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.decode import FrameTable, decode_frames
 from app.evidence import (
     face_alignment_context,
+    face_boundary_binding,
     face_interval_binding,
     face_intervals,
     face_lighting_context,
@@ -36,10 +37,11 @@ from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
 from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
     ALIGNMENT_CONTEXT_VERSIONS,
+    BOUNDARY_VERSION,
     CONTINUITY_VERSIONS,
     LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
-    PICTURE_HOLD_VERSION,
+    PICTURE_HOLD_VERSIONS,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -47,11 +49,11 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = PICTURE_HOLD_VERSION
-CREATOR = "video-evidence-packets/10"
+VERSION = BOUNDARY_VERSION
+CREATOR = "video-evidence-packets/11"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
             "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", "video-evidence-packets/8",
-            "video-evidence-packets/9", CREATOR)
+            "video-evidence-packets/9", "video-evidence-packets/10", CREATOR)
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -112,7 +114,7 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) 
               "timeline_origin_s": origin, "coordinate_space": "display-oriented-native-frame",
               "frame_table_sha256": sampling["frame_table_sha256"], "frame_anchor_sha256": sampling["frame_anchor_sha256"]}
     hold = None
-    if VERSION == PICTURE_HOLD_VERSION:
+    if VERSION in PICTURE_HOLD_VERSIONS:
         hold = render[0].get("picture_hold")
         source["picture_hold_sha256"] = sampling.get("picture_hold_sha256")
         if (canonical_hash(hold) if hold is not None else None) != source["picture_hold_sha256"]:
@@ -332,6 +334,16 @@ def _sequence_observations(result: dict, table: FrameTable, source: dict, anchor
                            "peak": {"frame_index": shown[1][1], "score": record["response"]},
                            "threshold": None, "scored_frame_count": len(indices)})
         scored.update(indices)
+        if boundary := details.get("face_boundary"):
+            face_boundary_binding.validate_record(boundary, record, source, table_pts=table.pts, interpolated=table.interpolated)
+            if signal.get("effective_weight") != 0.0:
+                raise PacketIntegrityError("Refined face timing is limited to a confidence-neutral review check")
+            for item in boundary["frame_inputs"]:
+                index = item["frame_index"]
+                if index not in anchors or any(item[key] != anchors[index][key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise PacketIntegrityError("Refined face timing differs from committed decoded source frames")
+                scored.add(index)
+            candidates[-1]["face_boundary"] = boundary
     return candidates, scored
 
 
@@ -444,11 +456,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
-    if VERSION == PICTURE_HOLD_VERSION:
+    if VERSION in PICTURE_HOLD_VERSIONS:
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     wanted = {r["frame_index"] for c in chosen for r in c["rows"]}
+    wanted.update(i for c in chosen for i in c.get("face_boundary", {}).get("anchors", {}).values())
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     selected = sorted(wanted | endpoints)
     decoded = {f.index: f.rgb for f in decode_frames(store.path_for(analysis.sha256), table, selected)} if selected else {}
@@ -463,37 +476,44 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         def add(role: str, image: Image.Image, target: dict = artifacts) -> None:
             target[role] = _packet_image(db, store, analysis, set_id, image)
 
-        for pos, row in enumerate(candidate["rows"], 1):
-            i = row["frame_index"]
+        def write_frame(i: int, region: dict | None, frame_id: str, key: str, *,
+                        score: float | None, is_peak: bool, role: str | None) -> tuple[dict, Image.Image]:
             image = Image.fromarray(decoded[i])
-            region = _face_context(result, candidate["track_id"], i, table,
-                                   face_check=any(s.get("family") == "learned-face" for s in candidate["signals"]))
-            if sequence := candidate.get("face_sequence"):
-                measured = next(row for row in sequence["frame_inputs"] if row["frame_index"] == i)
-                region = _box(_bounds(measured["bbox"], table.width, table.height))
-            if candidate.get("whole_face_review"):
-                region = row["box"]
             stream_s = table.seconds(i)
             player_s = None if source["timeline_origin_s"] is None else stream_s - source["timeline_origin_s"]
-            label = f"{packet_id}.{pos} - frame {i}, {stream_s:.3f} s"
-            context = _context(image, region, label)
-            original_key, context_key = f"frame_{pos}_original", f"frame_{pos}_context"
+            context = _context(image, region, f"{frame_id} - frame {i}, {stream_s:.3f} s")
+            original_key, context_key = f"{key}_original", f"{key}_context"
             add(original_key, image)
             add(context_key, context)
             refs = {"original": original_key, "context": context_key}
             if region:
-                crop_key = f"frame_{pos}_crop"
+                crop_key = f"{key}_crop"
                 add(crop_key, image.crop(_bounds(region, table.width, table.height)))
                 refs["crop"] = crop_key
-            frames.append({"id": f"{packet_id}.{pos}", "anchor": {**anchors[i], "original_sha256": analysis.sha256,
-                           "stream_selector": "v:0", "stream_time_s": stream_s, "playback_time_s": player_s,
-                           "coordinate_space": "display-oriented-native-frame"}, "score": row["score"],
-                           "is_peak": "window" not in candidate and i == candidate["peak"]["frame_index"], "context_region": region,
-                           "region_meaning": "detected_face_context" if region else "whole_frame_context",
-                           "artifact_refs": refs})
-            if role := row.get("interval_role"):
-                frames[-1]["interval_role"] = role
+            frame = {"id": frame_id, "anchor": {**anchors[i], "original_sha256": analysis.sha256,
+                     "stream_selector": "v:0", "stream_time_s": stream_s, "playback_time_s": player_s,
+                     "coordinate_space": "display-oriented-native-frame"}, "score": score,
+                     "is_peak": is_peak, "context_region": region,
+                     "region_meaning": "detected_face_context" if region else "whole_frame_context", "artifact_refs": refs}
+            if role:
+                frame["interval_role"] = role
+            return frame, context
+
+        for pos, row in enumerate(candidate["rows"], 1):
+            i = row["frame_index"]
+            region = _face_context(result, candidate["track_id"], i, table,
+                                   face_check=any(s.get("family") == "learned-face" for s in candidate["signals"]))
+            if sequence := candidate.get("face_sequence"):
+                measured = next(row for row in sequence["frame_inputs"] if row["frame_index"] == i)
+                region = face_interval_binding.face_context_box(measured["bbox"], source)
+            if candidate.get("whole_face_review"):
+                region = row["box"]
+            role = row.get("interval_role")
+            frame, context = write_frame(i, region, f"{packet_id}.{pos}", f"frame_{pos}", score=row["score"],
+                                         is_peak="window" not in candidate and i == candidate["peak"]["frame_index"], role=role)
+            frames.append(frame)
             context_images.append(context)
+            stream_s = frame["anchor"]["stream_time_s"]
             labels.append(f"{role.title()} | {stream_s:.3f} s | frame {i}" if role else
                           f"Frame {i}; score {row['score']:.3f}" if row["score"] is not None else f"Frame {i}; window context")
         add("contact_sheet", _contact(context_images, labels))
@@ -592,6 +612,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     packet["limitations"].append(
                         "Brightness uses three displayed frames. Camera motion can change the scene pixels being compared."
                     )
+        if boundary := candidate.get("face_boundary"):
+            boundary_frames = []
+            inputs = {row["frame_index"]: row for row in boundary["frame_inputs"]}
+            for position, role in enumerate(face_boundary_binding.ROLES, 1):
+                i = boundary["anchors"][role]
+                region = face_interval_binding.face_context_box(inputs[i]["bbox"], source)
+                frame, _ = write_frame(i, region, f"{packet_id}.B{position}", f"boundary_frame_{position}",
+                                       score=None, is_peak=False, role=role)
+                boundary_frames.append(frame)
+            packet.update(face_boundary=boundary, face_boundary_frames=boundary_frames, affects_overall_confidence=False)
         if interval := candidate.get("face_interval"):
             start, end = interval["start_stream_s"], interval["end_stream_s"]
             packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
@@ -673,6 +703,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
+            face_boundary_binding.validate_packet(packet, source, document["version"])
             whole_face_binding.validate_packet(packet, source)
             if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
                 face_alignment_context.validate(packet)
@@ -682,7 +713,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             raise PacketIntegrityError(str(error)) from error
         if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:
             raise PacketIntegrityError("Video evidence omits its context-clip availability")
-        for frame in packet["frames"]:
+        for frame in (*packet["frames"], *packet.get("face_boundary_frames", ())):
             anchor = frame["anchor"]
             if (anchor.get("original_sha256") != source_sha256 or anchor.get("time_base") != source["time_base"]
                     or not 0 <= anchor.get("frame_index", -1) < source["frame_count"]

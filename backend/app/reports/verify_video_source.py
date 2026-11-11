@@ -16,6 +16,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.lipsync import source_mouth_patch
+from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.source_geometry import pixel_bounds
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
@@ -106,13 +107,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     for packet in packets:
         _verify_clip_clock(packet, table, interpolated)
-        for item in packet["frames"]:
+        validate_face_boundary(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
+        for item in (*packet["frames"], *packet.get("face_boundary_frames", ())):
             pictures[item["anchor"]["frame_index"]].append((packet, item))
         if packet.get("semantics") == "mouth_audio_correlation":
             for row in packet["window"]["frame_inputs"]:
                 mouths[row["frame_index"]].append((packet, row))
-        for row in (packet.get("face_sequence") or {}).get("frame_inputs", []):
-            faces[row["frame_index"]].append(row)
+        for key in ("face_sequence", "face_boundary"):
+            for row in (packet.get(key) or {}).get("frame_inputs", []):
+                if row not in faces[row["frame_index"]]:
+                    faces[row["frame_index"]].append(row)
     indices = set(pictures) | set(mouths) | set(faces)
     found = set()
     images = patches = alignments = 0

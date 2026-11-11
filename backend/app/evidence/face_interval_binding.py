@@ -1,6 +1,8 @@
 """Validate the public interval evidence without loading detector dependencies."""
 from __future__ import annotations
 
+import math
+import re
 from fractions import Fraction
 from statistics import mean
 
@@ -69,11 +71,30 @@ def sequence_observation(record: dict) -> str:
     return f"{observation} from {start:.3f} to {end:.3f} s."
 
 
+def validate_face_input(item: dict, source: dict, *, appearance: bool) -> None:
+    box = item["bbox"]
+    matrix = item["alignment_matrix"]
+    exact_matrix = [[float.fromhex(value) for value in row] for row in item["alignment_matrix_hex"]]
+    landmarks = item["landmarks"]
+    if (not all(re.fullmatch(r"[a-f0-9]{64}", str(item.get(key, ""))) for key in ("decoded_rgb_sha256", "aligned_rgb_sha256"))
+            or item.get("aligned_size") != 112 or type(item.get("alignment_side")) is not int or item["alignment_side"] <= 0
+            or (appearance and item['alignment_side'] != 112)
+            or len(matrix) != 2 or any(len(row) != 3 for row in matrix)
+            or len(exact_matrix) != 2 or any(len(row) != 3 for row in exact_matrix)
+            or any(not math.isfinite(exact) or abs(exact-approx) > .000001
+                   for raw, approximate in zip(exact_matrix, matrix, strict=True)
+                   for exact, approx in zip(raw, approximate, strict=True))
+            or len(landmarks) != 5 or any(len(row) != 2 for row in landmarks)
+            or any(not isinstance(value, int | float) or isinstance(value, bool) or not math.isfinite(value)
+                   for row in [*matrix, *landmarks] for value in row)
+            or any(not isinstance(box[k], int | float) or isinstance(box[k], bool) or not math.isfinite(box[k]) for k in ("x", "y", "w", "h"))
+            or min(box["x"], box["y"]) < 0 or min(box["w"], box["h"]) <= 0
+            or box["x"]+box["w"] > source["width"] or box["y"]+box["h"] > source["height"]):
+        raise ValueError("Face sequence has invalid source crop commitments")
+
+
 def validate_sequence_record(record: dict, source: dict, *, table_pts=None, interpolated=(), require_flag=True) -> None:
     """Check window inputs and arithmetic without importing inference dependencies."""
-    import math
-    import re
-
     if record.get("method") not in SEQUENCE_METHODS or record.get("time_base") != source["time_base"]:
         raise ValueError("Face sequence has an invalid method or source clock")
     groups = record["centers"]
@@ -95,25 +116,7 @@ def validate_sequence_record(record: dict, source: dict, *, table_pts=None, inte
             or (table_pts is not None and any(table_pts[i] != p for i, p in zip(indices, pts, strict=True)))):
         raise ValueError("Face sequence input timestamps differ from the source")
     for item in inputs:
-        box = item["bbox"]
-        matrix = item["alignment_matrix"]
-        exact_matrix = [[float.fromhex(value) for value in row] for row in item["alignment_matrix_hex"]]
-        landmarks = item["landmarks"]
-        if (not all(re.fullmatch(r"[a-f0-9]{64}", str(item.get(key, ""))) for key in ("decoded_rgb_sha256", "aligned_rgb_sha256"))
-                or item.get("aligned_size") != 112 or type(item.get("alignment_side")) is not int or item["alignment_side"] <= 0
-                or (record['method'] == APPEARANCE_METHOD and item['alignment_side'] != 112)
-                or len(matrix) != 2 or any(len(row) != 3 for row in matrix)
-                or len(exact_matrix) != 2 or any(len(row) != 3 for row in exact_matrix)
-                or any(not math.isfinite(exact) or abs(exact-approx) > .000001
-                       for raw, approximate in zip(exact_matrix, matrix, strict=True)
-                       for exact, approx in zip(raw, approximate, strict=True))
-                or len(landmarks) != 5 or any(len(row) != 2 for row in landmarks)
-                or any(not isinstance(value, int | float) or isinstance(value, bool) or not math.isfinite(value)
-                       for row in [*matrix, *landmarks] for value in row)
-                or any(not isinstance(box[k], int | float) or isinstance(box[k], bool) or not math.isfinite(box[k]) for k in ("x", "y", "w", "h"))
-                or min(box["x"], box["y"]) < 0 or min(box["w"], box["h"]) <= 0
-                or box["x"]+box["w"] > source["width"] or box["y"]+box["h"] > source["height"]):
-            raise ValueError("Face sequence has invalid source crop commitments")
+        validate_face_input(item, source, appearance=record["method"] == APPEARANCE_METHOD)
     stamps = [by_index[i]["pts"] for i in centers]
     if (any(not 0 < float((b-a)*base) <= .55+1e-6 for a, b in zip(stamps, stamps[1:]))
             or any(float((by_index[i+1]["pts"]-by_index[i-1]["pts"])*base) > .13+1e-6 for i in centers)):
@@ -150,8 +153,6 @@ def validate_sequence_record(record: dict, source: dict, *, table_pts=None, inte
 
 
 def validate_sequence_packet(packet: dict, source: dict, *, table_pts=None, interpolated=()) -> None:
-    import math
-
     record = packet.get("face_sequence")
     if record is None and packet.get("semantics") not in SEQUENCE_METHODS:
         return
@@ -168,11 +169,14 @@ def validate_sequence_packet(packet: dict, source: dict, *, table_pts=None, inte
         raise ValueError("Face sequence omits source coverage or representative frames")
     for frame, (role, index) in zip(packet["frames"], expected, strict=True):
         item = by_index[index]
-        box = item["bbox"]
-        x, y = math.floor(box["x"]), math.floor(box["y"])
-        expected_box = {"x": x, "y": y, "w": min(source["width"], math.ceil(box["x"]+box["w"]))-x,
-                        "h": min(source["height"], math.ceil(box["y"]+box["h"]))-y}
+        expected_box = face_context_box(item["bbox"], source)
         if (frame.get("interval_role") != role or frame.get("score") is not None or frame.get("is_peak") is not False
                 or frame["anchor"]["frame_index"] != index or frame["anchor"]["pts"] != item["pts"]
                 or frame["anchor"]["decoded_rgb_sha256"] != item["decoded_rgb_sha256"] or frame.get("context_region") != expected_box):
             raise ValueError("Face sequence image differs from its measured role")
+
+
+def face_context_box(box: dict, source: dict) -> dict:
+    x, y = math.floor(box["x"]), math.floor(box["y"])
+    return {"x": x, "y": y, "w": min(source["width"], math.ceil(box["x"] + box["w"])) - x,
+            "h": min(source["height"], math.ceil(box["y"] + box["h"])) - y}

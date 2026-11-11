@@ -42,11 +42,16 @@ def public_result(result: dict) -> dict:
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                                 'raw_score_kind', 'calibrated_probability') if k in s}
               for s in public.get('signals') or []]
-    paired = {alias_signal(s['id']): canonical_hash(record) for s in result.get('signals') or []
-              if s.get('effective_weight') == 0.0 and (record := (s.get('details') or {}).get('whole_face_review'))}
-    for check in checks:
-        if digest := paired.get(check['id']):
-            check['paired_face_measurement_sha256'] = digest
+    checks_by_id = {check["id"]: check for check in checks}
+    for signal in result.get("signals") or []:
+        check = checks_by_id.get(alias_signal(signal["id"]))
+        if check is None or signal.get("effective_weight") != 0.0:
+            continue
+        details = signal.get("details") or {}
+        for key, commitment in (("whole_face_review", "paired_face_measurement_sha256"),
+                                ("face_boundary", "face_boundary_measurement_sha256")):
+            if record := details.get(key):
+                check[commitment] = canonical_hash(record)
     return {
         'schema': 'chipmunk.public-result/1', 'is_projection': True,
         'original_result_sha256': canonical_hash(result),

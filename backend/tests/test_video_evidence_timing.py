@@ -83,9 +83,14 @@ def test_ambiguous_audio_clock_is_unavailable_before_scoring(offset_source, dama
                                {"start_sample": n // 2, "end_sample": n, "source_pts": start + n // 2 + 1600}]
     inputs = AVInputs(table, (), {}, audio, None, mapping)
     reason = StableSyncNetDetector._windows(inputs)
-    assert isinstance(reason, str) and reason.startswith("audio-visual timing unavailable:")
+    assert isinstance(reason, str)
     if damage == "discontinuous":
-        assert "discontinuous" in reason
+        before = (start + n // 2) / lipsync.SR
+        after = (start + n // 2 + 1600) / lipsync.SR
+        assert reason == ("Audio/video timing was unassessed. The decoded audio clock jumps forward "
+                          f"from {before:.7f} s to {after:.7f} s on the source clock.")
+    else:
+        assert reason.startswith("audio-visual timing unavailable:")
 
 
 def test_absent_audio_remains_absent(tmp_path):

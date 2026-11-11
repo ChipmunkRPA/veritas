@@ -59,6 +59,26 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     setSelected(frame)
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
+  const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
+    <div className="mt-5 space-y-5">{frames.map((frame) => {
+      const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
+      const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
+      return <div key={frame.id} className="rounded-md border border-border p-3">
+        <p className="m-0 mb-3 text-small font-medium">{frame.interval_role && <span className="capitalize">{frame.interval_role} {refined ? 'refined' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+          {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
+        <div className={evidenceGrid}>
+          <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
+            <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
+          {!packet.picture_hold && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
+            alt={`${frame.id}: ${crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
+            <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
+        </div>
+        <p className="mt-3 mb-0 text-caption font-mono text-text-muted">Source {seconds(frame.anchor.stream_time_s)} · PTS {frame.anchor.pts} at {frame.anchor.time_base} · player {navigationKnown ? seconds(frame.anchor.playback_time_s!) : 'mapping unavailable'}</p>
+        <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>
+        {!navigationKnown && <p className="mt-1 mb-0 text-caption text-text-muted">Playback timing is not verified for this frame. Use the exact source image above.</p>}
+      </div>
+    })}</div>
+
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {set.picture_hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-hold-heading" className="m-0 text-body font-medium">Identical consecutive frames</h3>
@@ -100,7 +120,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : packet.whole_face_review
         ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
-        ? <>Face-change review range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
+        ? <>Measured face-change range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
         : packet.face_interval
         ? <>Flagged source range <strong>{seconds(packet.face_interval.start_stream_s)}–{seconds(packet.face_interval.end_stream_s)}</strong> across {packet.face_interval.samples.during.length} scored samples.</>
         : packet.claim_scope === 'sampled_window'
@@ -111,24 +131,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-2 mb-0">{packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.' : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
       {!packet.picture_hold && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
-      <div className="mt-5 space-y-5">{packet.frames.map((frame) => {
-        const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
-        const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
-        return <div key={frame.id} className="rounded-md border border-border p-3">
-          <p className="m-0 mb-3 text-small font-medium">{frame.interval_role && <span className="capitalize">{frame.interval_role} flagged range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
-            {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
-          <div className={evidenceGrid}>
-            <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
-              <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
-            {!packet.picture_hold && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
-              alt={`${frame.id}: ${crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
-              <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
-          </div>
-          <p className="mt-3 mb-0 text-caption font-mono text-text-muted">Source {seconds(frame.anchor.stream_time_s)} · PTS {frame.anchor.pts} at {frame.anchor.time_base} · player {navigationKnown ? seconds(frame.anchor.playback_time_s!) : 'mapping unavailable'}</p>
-          <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>
-          {!navigationKnown && <p className="mt-1 mb-0 text-caption text-text-muted">Playback timing is not verified for this frame. Use the exact source image above.</p>}
-        </div>
-      })}</div>
+      {packet.face_boundary && packet.face_boundary_frames && <section className="mt-5 rounded-md border border-border p-3">
+        <h4 className="m-0 text-small font-medium">Refined boundary estimate</h4>
+        <p className="mt-2 mb-0 text-small text-text-muted"><strong>{seconds(packet.face_boundary.start_stream_s)}–{seconds(packet.face_boundary.end_stream_s)}</strong> on the source clock.
+          {' '}{packet.face_boundary.frame_inputs.length} denser samples on the same tracked face support this estimate. It carries no weight in overall AI confidence.</p>
+        {renderFrames(packet, packet.face_boundary_frames, true)}
+      </section>}
+      {renderFrames(packet, packet.frames, false)}
       <p className="mt-4 mb-0 text-small">{packet.interpretation}</p><EvidenceMeasurements values={packet.measurements} />
       <EvidenceLimits lines={packet.limitations} /><EvidenceReferences packet={packet} />
     </article>)}</div>

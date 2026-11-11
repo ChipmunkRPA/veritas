@@ -93,6 +93,29 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByText(/response 0\.700|flagged range/)).toBeNull()
   })
 
+  it('shows measured and refined ranges with source crops and playback navigation', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-11' }
+    const item = set.packets[0]
+    item.claim_scope = 'sampled_window'
+    item.frames[0].score = null
+    item.face_sequence = { start_stream_s: 12, end_stream_s: 12.52, response: .2,
+      centers: { before: [1, 2], during: [6, 8, 10], after: [12, 14] }, frame_inputs: [] }
+    item.face_boundary = { start_stream_s: 11.84, end_stream_s: 12.56,
+      frame_inputs: [{ frame_index: 4 }, { frame_index: 8 }, { frame_index: 11 }] }
+    item.face_boundary_frames = (['before', 'during', 'after'] as const).map((role, i) => ({
+      ...item.frames[0], id: `V01.B${i + 1}`, interval_role: role, is_peak: false,
+      anchor: { frame_index: 4 + 3 * i, pts: 11760 + 400 * i, time_base: '1/1000',
+        stream_time_s: 11.76 + .4 * i, playback_time_s: 1.76 + .4 * i },
+    }))
+    show(set)
+    expect(screen.getByText('12.000 s–12.520 s')).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Refined boundary estimate' })).toBeTruthy()
+    expect(screen.getByText('11.840 s–12.560 s')).toBeTruthy()
+    expect(screen.getAllByAltText(/V01\.B\d: source face crop for context/)).toHaveLength(3)
+    fireEvent.click(screen.getByRole('button', { name: 'Go to frame 4 in playback' }))
+    expect(screen.getByText(/Selected frame 4 · source 11\.760 s · player 1\.760 s/)).toBeTruthy()
+  })
+
   it('shows one exact picture per hold endpoint and locates it on the source clock', () => {
     const set = structuredClone(video)
     set.version = 'video-evidence-10'

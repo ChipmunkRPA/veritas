@@ -7,7 +7,7 @@ from collections.abc import Callable, Sequence
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
-from app.evidence.video_packet_versions import PICTURE_HOLD_VERSION
+from app.evidence.video_packet_versions import PICTURE_HOLD_VERSIONS
 
 METHOD = "exact-native-picture-hold/1"
 PACKET_ID = "VPH01"
@@ -117,7 +117,7 @@ def validate(document: dict) -> None:
     packets = [p for p in document["packets"] if p.get("id") == PACKET_ID or "picture_hold" in p
                or p.get("claim_scope") == "consecutive_frames" or p.get("semantics") == METHOD]
     source = document["source"]
-    if document["version"] != PICTURE_HOLD_VERSION:
+    if document["version"] not in PICTURE_HOLD_VERSIONS:
         _require("picture_hold" not in document and "picture_hold_sha256" not in source and not packets,
                  "Historical video evidence includes an undeclared picture hold")
         return
@@ -157,7 +157,7 @@ def validate_record(document: dict, record: dict | None, *, table_pts: Sequence[
                     canonical_hash: Callable[[dict], str]) -> None:
     """Compare the package to the native check frozen in the render stage and result."""
     validate(document)
-    if document["version"] != PICTURE_HOLD_VERSION:
+    if document["version"] not in PICTURE_HOLD_VERSIONS:
         return
     commitment = document["source"]["picture_hold_sha256"]
     if commitment is None:

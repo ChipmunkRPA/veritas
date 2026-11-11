@@ -36,6 +36,8 @@ export interface VideoEvidencePacket extends PacketBase {
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
     centers: Record<'before' | 'during' | 'after', number[]>;
     frame_inputs: { frame_index: number; pts: number; decoded_rgb_sha256: string; aligned_rgb_sha256: string }[] }
+  face_boundary?: { start_stream_s: number; end_stream_s: number; frame_inputs: { frame_index: number }[] }
+  face_boundary_frames?: VideoEvidenceFrame[]
   whole_face_review?: { flagged: boolean; time_base: string;
     samples: { frame_index: number; pts: number; responses_hex: [string | null, string | null] }[] }
   clip?: { status: 'unavailable'; reason: string } | { status: 'ready'; artifact_ref: string;
@@ -242,7 +244,7 @@ export interface DocumentEvidenceSet extends SetBase {
 }
 export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | DocumentEvidenceSet
 
-const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9', 'video-evidence-10'])
+const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9', 'video-evidence-10', 'video-evidence-11'])
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

@@ -46,10 +46,11 @@ class FrameStore:
         self._cache[key] = rgb
         self.bytes += rgb.nbytes
 
-    def iter_many(self, indices: Iterable[int], *, max_side: int | None = None) -> Iterator[tuple[int, np.ndarray]]:
+    def iter_many(self, indices: Iterable[int], *, max_side: int | None = None,
+                  timeout_s: float | None = None) -> Iterator[tuple[int, np.ndarray]]:
         """(table index, frame) pairs: cached frames first, then the uncached ones from one decoder pass as they are
         decoded. A consumer that keeps only crops holds one decoded frame at a time. Frames the decoder cannot deliver are
-        absent."""
+        absent. An optional timeout applies to the uncached decoder pass."""
         wanted = sorted({int(i) for i in indices})
         cached: list[tuple[int, np.ndarray]] = []
         missing: list[int] = []
@@ -67,7 +68,8 @@ class FrameStore:
         if not missing:
             return
         self.decode_passes += 1
-        frames = self._decoder(self.path, self.table, missing, max_side=max_side, check=self._check)
+        options = {} if timeout_s is None else {"timeout_s": timeout_s}
+        frames = self._decoder(self.path, self.table, missing, max_side=max_side, check=self._check, **options)
         try:
             for frame in frames:
                 frame.rgb.setflags(write=False)

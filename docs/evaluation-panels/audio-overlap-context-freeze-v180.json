@@ -1,0 +1,26 @@
+{
+  "schema": "chipmunk.audio-overlap-context-freeze/180",
+  "prior_serving_receipt_sha256": "048d96cd24cd834d95186ac325358234e50c564deddf1e913ba858a6999a95ad",
+  "prior_serving_freeze_sha256": "eb36498738dcb9d95189ac6a7eeaf3c8c3938c867223ea100249a8a18bfc76b8",
+  "assets": {
+    "sherpa-onnx-pyannote-segmentation-3-0.tar.bz2": "24615ee884c897d9d2ba09bb4d30da6bb1b15e685065962db5b02e76e4996488",
+    "model.onnx": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+    "LICENSE": "14d7016ad68e7394d6e6b78d96cc2ae431c905287b89674cfdf021e79e62b8ba"
+  },
+  "runtime_wheel": "onnxruntime-1.23.2-cp312-cp312-macosx_13_0_arm64.whl",
+  "runtime_wheel_sha256": "b8f029a6b98d3cf5be564d52802bb50a8489ab73409fa9db0bf583eabb7c2321",
+  "code_sha256": {
+    "backend/scripts/audio_overlap_context_v180.py": "eaa909d12303a3d16cb5b0314603a4a0c8d8af9a4758b1504658eaea6a1e3086",
+    "docs/audio-overlap-context-v180-method.md": "f092cbec30b402cc995ca49c3705d78e528d5c2a87d4360241717b3b0ffb675f",
+    "backend/tests/test_audio_overlap_context_v180.py": "398030bc174b650daa18317981e930f06a8257eafca5ee274972d22d83483c6d"
+  },
+  "planned_cases": 98,
+  "input_sample_rate": 16000,
+  "model_window_samples": 160000,
+  "receptive_field_samples": 991,
+  "receptive_field_shift_samples": 270,
+  "minimum_contiguous_overlap_samples": 4000,
+  "model_calls_per_case": 1,
+  "holdout_access_permitted": false,
+  "scope": "Retrospective competing-speech context on previously evaluated genuine PACC-P inputs only."
+}

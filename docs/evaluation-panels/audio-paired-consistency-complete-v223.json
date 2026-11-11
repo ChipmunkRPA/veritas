@@ -1,0 +1,963 @@
+{
+  "schema": "chipmunk.audio-paired-consistency-result/223",
+  "status": "complete",
+  "freeze_sha256": "5cd9d066775239ba7152ae94f49cafa2edef703d20032da8fe44cd032d99ac4a",
+  "private_fit_sha256": "68690eafe7050780d4861283adc281fbaff96a166b3b1c842cb8688095124252",
+  "private_calibration_sha256": "40c6a8ccd2665287fe76bcc5eacf7a4cc42ceced1f4bc199066649c88b830d80",
+  "fit_coverage": {
+    "raw_only": {
+      "fitting_assessed": 324,
+      "paired_fitting_deltas": 214,
+      "optimizer_iterations": 14
+    },
+    "wavlm_raw": {
+      "fitting_assessed": 324,
+      "paired_fitting_deltas": 214,
+      "optimizer_iterations": 31
+    },
+    "paired_wavlm_raw": {
+      "fitting_assessed": 324,
+      "paired_fitting_deltas": 214,
+      "optimizer_iterations": 38
+    }
+  },
+  "calibration_group_budgets": {
+    "current_false_ai_group_budget": 1,
+    "current_wrong_original_group_budget": 6
+  },
+  "consumed_selection": {
+    "recorded_current_directions": {
+      "clean": {
+        "genuine": {
+          "planned": 56,
+          "directions": {
+            "ai": 0,
+            "original": 54,
+            "inconclusive": 1,
+            "unavailable": 1
+          },
+          "wrong_direction_groups": 0
+        },
+        "synthetic": {
+          "planned": 60,
+          "directions": {
+            "ai": 55,
+            "original": 0,
+            "inconclusive": 1,
+            "unavailable": 4
+          },
+          "wrong_direction_groups": 0
+        }
+      },
+      "noise_0": {
+        "genuine": {
+          "planned": 56,
+          "directions": {
+            "ai": 9,
+            "original": 22,
+            "inconclusive": 25,
+            "unavailable": 0
+          },
+          "wrong_direction_groups": 7
+        },
+        "synthetic": {
+          "planned": 60,
+          "directions": {
+            "ai": 33,
+            "original": 1,
+            "inconclusive": 15,
+            "unavailable": 11
+          },
+          "wrong_direction_groups": 1
+        }
+      },
+      "noise_5": {
+        "genuine": {
+          "planned": 56,
+          "directions": {
+            "ai": 3,
+            "original": 29,
+            "inconclusive": 23,
+            "unavailable": 1
+          },
+          "wrong_direction_groups": 2
+        },
+        "synthetic": {
+          "planned": 60,
+          "directions": {
+            "ai": 41,
+            "original": 1,
+            "inconclusive": 13,
+            "unavailable": 5
+          },
+          "wrong_direction_groups": 1
+        }
+      },
+      "noisy_combined": {
+        "genuine": {
+          "planned": 112,
+          "directions": {
+            "ai": 12,
+            "original": 51,
+            "inconclusive": 48,
+            "unavailable": 1
+          },
+          "wrong_direction_groups": 7
+        },
+        "synthetic": {
+          "planned": 120,
+          "directions": {
+            "ai": 74,
+            "original": 2,
+            "inconclusive": 28,
+            "unavailable": 16
+          },
+          "wrong_direction_groups": 1
+        }
+      }
+    },
+    "current": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 54,
+              "inconclusive": 1,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 55,
+              "original": 0,
+              "inconclusive": 1,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 10,
+              "original": 23,
+              "inconclusive": 23,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 35,
+              "original": 1,
+              "inconclusive": 13,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 1
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 29,
+              "inconclusive": 23,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 41,
+              "original": 1,
+              "inconclusive": 13,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 1
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 13,
+              "original": 52,
+              "inconclusive": 46,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 76,
+              "original": 2,
+              "inconclusive": 26,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 1
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2352,
+          "ties": 0,
+          "auc": 0.8571428571428571
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2829,
+          "ties": 0,
+          "auc": 0.935206611570248
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 10367,
+          "ties": 0,
+          "auc": 0.898042273042273
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.5915249537286109
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.4716657493310681
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.23681666695290726
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.24051960941380335
+          }
+        }
+      }
+    },
+    "v13_complement": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 55,
+              "inconclusive": 0,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 54,
+              "original": 0,
+              "inconclusive": 2,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 11,
+              "original": 18,
+              "inconclusive": 27,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 37,
+              "original": 3,
+              "inconclusive": 9,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 29,
+              "inconclusive": 23,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 38,
+              "original": 4,
+              "inconclusive": 13,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 14,
+              "original": 47,
+              "inconclusive": 50,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 75,
+              "original": 7,
+              "inconclusive": 22,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 3
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2309,
+          "ties": 0,
+          "auc": 0.8414723032069971
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2680,
+          "ties": 0,
+          "auc": 0.8859504132231405
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 9968,
+          "ties": 0,
+          "auc": 0.8634788634788635
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.8845145053019339
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.3777549986959978
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.6076505060373867
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.2791012594800679
+          }
+        }
+      }
+    },
+    "v83_global": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 55,
+              "inconclusive": 0,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 55,
+              "original": 0,
+              "inconclusive": 1,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 10,
+              "original": 20,
+              "inconclusive": 26,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 37,
+              "original": 3,
+              "inconclusive": 9,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 31,
+              "inconclusive": 21,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 40,
+              "original": 4,
+              "inconclusive": 11,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 13,
+              "original": 51,
+              "inconclusive": 47,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 77,
+              "original": 7,
+              "inconclusive": 20,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 3
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2318,
+          "ties": 0,
+          "auc": 0.8447521865889213
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2696,
+          "ties": 0,
+          "auc": 0.8912396694214876
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 10009,
+          "ties": 0,
+          "auc": 0.867030492030492
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.734128061890549
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.2841367908878323
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.46484125051247194
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.21518693608830874
+          }
+        }
+      }
+    },
+    "raw_only": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 54,
+              "inconclusive": 1,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 55,
+              "original": 0,
+              "inconclusive": 1,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 10,
+              "original": 23,
+              "inconclusive": 23,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 35,
+              "original": 1,
+              "inconclusive": 13,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 1
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 29,
+              "inconclusive": 23,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 41,
+              "original": 1,
+              "inconclusive": 13,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 1
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 13,
+              "original": 52,
+              "inconclusive": 46,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 8
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 76,
+              "original": 2,
+              "inconclusive": 26,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 1
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2352,
+          "ties": 0,
+          "auc": 0.8571428571428571
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2829,
+          "ties": 0,
+          "auc": 0.935206611570248
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 10367,
+          "ties": 0,
+          "auc": 0.898042273042273
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.6916875970095865
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.5515326896863284
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.2769167222176525
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.281246682190635
+          }
+        }
+      }
+    },
+    "wavlm_raw": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 55,
+              "inconclusive": 0,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 55,
+              "original": 0,
+              "inconclusive": 1,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 13,
+              "original": 33,
+              "inconclusive": 10,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 10
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 38,
+              "original": 3,
+              "inconclusive": 8,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 47,
+              "inconclusive": 5,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 42,
+              "original": 6,
+              "inconclusive": 7,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 4
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 16,
+              "original": 80,
+              "inconclusive": 15,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 10
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 80,
+              "original": 9,
+              "inconclusive": 15,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 4
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2454,
+          "ties": 0,
+          "auc": 0.8943148688046647
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2909,
+          "ties": 0,
+          "auc": 0.9616528925619835
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 10732,
+          "ties": 0,
+          "auc": 0.9296604296604296
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 1.115778257910838
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.48182263712633233
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.6907086361434192
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.38516610443135235
+          }
+        }
+      }
+    },
+    "paired_wavlm_raw": {
+      "matched_calibration_point_directions": {
+        "clean": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 0,
+              "original": 55,
+              "inconclusive": 0,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 0
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 56,
+              "original": 0,
+              "inconclusive": 0,
+              "unavailable": 4
+            },
+            "wrong_direction_groups": 0
+          }
+        },
+        "noise_0": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 11,
+              "original": 39,
+              "inconclusive": 6,
+              "unavailable": 0
+            },
+            "wrong_direction_groups": 9
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 40,
+              "original": 1,
+              "inconclusive": 8,
+              "unavailable": 11
+            },
+            "wrong_direction_groups": 1
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "planned": 56,
+            "directions": {
+              "ai": 3,
+              "original": 51,
+              "inconclusive": 1,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 2
+          },
+          "synthetic": {
+            "planned": 60,
+            "directions": {
+              "ai": 44,
+              "original": 4,
+              "inconclusive": 7,
+              "unavailable": 5
+            },
+            "wrong_direction_groups": 3
+          }
+        },
+        "noisy_combined": {
+          "genuine": {
+            "planned": 112,
+            "directions": {
+              "ai": 14,
+              "original": 90,
+              "inconclusive": 7,
+              "unavailable": 1
+            },
+            "wrong_direction_groups": 9
+          },
+          "synthetic": {
+            "planned": 120,
+            "directions": {
+              "ai": 84,
+              "original": 5,
+              "inconclusive": 15,
+              "unavailable": 16
+            },
+            "wrong_direction_groups": 3
+          }
+        }
+      },
+      "raw_ranks": {
+        "clean": {
+          "comparisons": 3080,
+          "wins": 3080,
+          "ties": 0,
+          "auc": 1.0
+        },
+        "noise_0": {
+          "comparisons": 2744,
+          "wins": 2540,
+          "ties": 0,
+          "auc": 0.9256559766763849
+        },
+        "noise_5": {
+          "comparisons": 3025,
+          "wins": 2937,
+          "ties": 0,
+          "auc": 0.9709090909090909
+        },
+        "noisy_combined": {
+          "comparisons": 11544,
+          "wins": 10917,
+          "ties": 0,
+          "auc": 0.9456860706860707
+        }
+      },
+      "score_drift": {
+        "noise_0": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.5995899708984633
+          },
+          "synthetic": {
+            "pairs": 49,
+            "median_absolute_logit_drift": 0.4025639087766002
+          }
+        },
+        "noise_5": {
+          "genuine": {
+            "pairs": 55,
+            "median_absolute_logit_drift": 0.31644103318869177
+          },
+          "synthetic": {
+            "pairs": 53,
+            "median_absolute_logit_drift": 0.3761130428564792
+          }
+        }
+      }
+    }
+  },
+  "new_neural_calls": 0,
+  "confirmation_feature_or_media_read": false,
+  "serving_admitted": false
+}

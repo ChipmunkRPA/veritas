@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.text-elife-passage-score-freeze/275",
+  "v273_result_sha256": "5437db6e274c3fc87eab1aa6424e7ed17f4d2a84a243dde84045fc16e40e7b7f",
+  "private_cases_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+  "v260_freeze_sha256": "67f3d2f204d3da6503be9edf6ba2be5f0b3f8e20605fa148379c21db90473c7c",
+  "native_reference_sha256": "bcdea8d8dd81bd5f5dc934c546d60ea03ee256b29a557d67996146281fad5475",
+  "research_points_sha256": "1620675205260c941e97bb62daed4641bac052469d1c7cf6eabfa29cd8db8145",
+  "code_sha256": {
+    "backend/scripts/text_elife_passage_score_v275.py": "17d640a22e680d779abbb060d376e1785ac9595a49964a4dd5d0ebdd13955fe2",
+    "backend/tests/test_text_elife_passage_score_v275.py": "4e17067483275d8d8f86f2c54b5af56aa9348900ab594e56914bca9f1880b643",
+    "docs/text-elife-passage-score-v275-method.md": "a0e4ddc0f97d0caece687fb7c99c94c88eddf8d2525a090bb2601045112746a9"
+  },
+  "source_groups": 5,
+  "planned_inputs": 15,
+  "constructible_inputs": 11,
+  "batches": 2,
+  "batch_max_inputs": 9,
+  "methods": [
+    "current",
+    "interval"
+  ],
+  "serving_change_permitted": false
+}

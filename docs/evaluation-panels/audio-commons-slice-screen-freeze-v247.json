@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.audio-commons-slice-screen-freeze/247",
+  "background_result_sha256": "3d5a702131268cf65217a163404ddc6095eefb6b199d1ed5ea97487df0a98149",
+  "code_sha256": {
+    "backend/scripts/audio_commons_slice_screen_v247.py": "41497f01ccc272d168153894a24a397c0c735839a7893359f41e867f99b4fa83",
+    "backend/tests/test_audio_commons_slice_screen_v247.py": "6ed9bb80a7cd2275f2b56195a855f50a05f1406ee5f765010dbb99e04ce226e4",
+    "backend/scripts/audio_commons_background_v234.py": "dbb879397f25979b00f2a69f2456049d85d78dd2ba185e20c5819cd376eb4efd",
+    "backend/scripts/audio_drifting_turkish_v215.py": "fc1f3e987ba795ef7b664f243a109fcbd985243554db848486455ff7c9421ca4",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/third_party/panns/cnn10.py": "909f010e1b23e1ea9cd606279263e33e211b136ffb900ed6aac551aa6e5da4ac",
+    "docs/audio-commons-slice-screen-v247-method.md": "333f55ea0e8e075e2fa82ab925e8ff4411794b6928a52fefd85c4c779d5b0673"
+  },
+  "asset_sha256": {
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "panns-Cnn10.pth": "5240bdc47444e331bbeb54fd741d2b3f933a4526e84b0c17bf3593df94b13962",
+    "class_labels_indices.csv": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429"
+  },
+  "runtime_versions": {
+    "torch": "2.13.0",
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "planned_by_environment": {
+    "traffic": 27,
+    "kitchen": 48
+  },
+  "maximum_windows_per_recording": 12,
+  "samples_per_window": 48000,
+  "sound_tag_screen_point": 0.3,
+  "speech_tags": [
+    "Speech",
+    "Male speech, man speaking",
+    "Female speech, woman speaking",
+    "Child speech, kid speaking",
+    "Conversation",
+    "Narration, monologue",
+    "Babbling",
+    "Speech synthesizer",
+    "Whispering"
+  ],
+  "music_tags": [
+    "Music",
+    "Musical instrument",
+    "Singing",
+    "Choir",
+    "Rapping",
+    "Humming"
+  ],
+  "human_listening_reviewed": false,
+  "authenticity_detector_calls_permitted": false,
+  "private_plan_sha256": "1e4873e58809eae9f609fc2ddb0942dacd0870292cf2b7fba261b89c1ce0afac"
+}

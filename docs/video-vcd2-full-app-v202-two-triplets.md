@@ -33,3 +33,7 @@ The app evidence audit has now verified 720 sampled frames, 2,153 native anchors
 ## Seventh matched recording
 
 The seventh recording produced the same 40-frame false appearance flag in all three versions. The flags fell outside the exact conventional edit frames. The unchanged and recompressed uploads leaned original. The chroma-converted upload was inconclusive. Across seven recordings and 21 uploads, three source groups had false face appearance flags. Twenty uploads leaned original and one was inconclusive. Nine eligible raw uploads remain. [Verified seven-triplet counts](evaluation-panels/video-vcd2-full-app-seven-triplets-v202.json)
+
+## Eighth matched recording
+
+The unchanged and recompressed versions leaned original and completed the appearance check without a flag. The chroma-converted version had an unavailable customer direction after a model verification-cache write failed. Its appearance route recorded zero measured windows, so this arm cannot establish a no-flag outcome. All three runs were sealed with their actual evidence. Across 24 uploads, 22 leaned original, one was inconclusive and one was unavailable. Six eligible raw uploads remain. [Verified eight-triplet counts](evaluation-panels/video-vcd2-full-app-eight-triplets-v202.json)

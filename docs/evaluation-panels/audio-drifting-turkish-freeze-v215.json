@@ -1,0 +1,86 @@
+{
+  "schema": "chipmunk.audio-drifting-turkish-freeze/215",
+  "publisher_model_revision": "0906c46992410a2032c6f5777b887f8f1780a6fd",
+  "upstream_code_commit": "b8cbe55d1614e2c79f3e7f997985c3144f1fbb4d",
+  "model_license": "CC-BY-4.0",
+  "code_and_upstream_vocoder_license": "MIT",
+  "graph_bytes_and_sha256": {
+    "text_encoder": {
+      "bytes": 15442631,
+      "sha256": "5dd17e02a910d1431dd0ebfbd954c2d6fedf20b70e8db192569d277f54dcc1f5"
+    },
+    "generator": {
+      "bytes": 120568346,
+      "sha256": "1aeff1c87e677b254f4b3ee047069341766ef7871ebe486ed4f1265148a71e77"
+    },
+    "vocoder": {
+      "bytes": 233310687,
+      "sha256": "b7f8277cc4562bdbb6dbf9872b5840b48f095565555a446f79b7b1f442148721"
+    }
+  },
+  "publisher_metadata_sha256": {
+    "LICENSE": "86f750defa962604d2d78ae55afb1863d8f7ab58cec688a9ddee3df627fdb900",
+    "README.md": "ac2f207731e3c03014f02eac81cb8e30d98410de13c55e32336e63405e7cf48f",
+    "voices.json": "6d328bfa656f8587b315e2444b242dd497b3768287921a0f4970118634cd6010",
+    "onnx/config.json": "ef16cfe370f495ecc25443ba741cd9268ccc140aceac95a02d66e41b698606f1",
+    "model.json": "9c0d9ae36ff8299018fc0f086e5422f4639c3aa05464b1869a8ec9aa4d6ea3dd",
+    "code-commit.json": "97d0fc745dca3f0da986e65704e1df35f426c2d7acbd2a3ef0de400a44e0e1cd",
+    "upstream-tts.js": "95caf5a336842496b4b6ece8bd3957da239e82c2ede0c1502f4a01cf79077749",
+    "upstream-text.js": "63926a2de334d7e82bafe71d4937a14a20d5222bbb8af63e3b1e6125340fb6a1",
+    "upstream-text.py": "a8a3779bc295d93d6dde1e13dddc3263f368b3ad390a112dfc8d6a38b2f7241f",
+    "upstream-export_onnx.py": "a524f0a9b17af8a817db80a419575b9a0ee568be1ee7cc5decb23e195de5c778"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_drifting_turkish_v215.py": "fc1f3e987ba795ef7b664f243a109fcbd985243554db848486455ff7c9421ca4",
+    "backend/scripts/licenses/Drifting-TTS-MIT.txt": "86f750defa962604d2d78ae55afb1863d8f7ab58cec688a9ddee3df627fdb900",
+    "backend/tests/test_audio_drifting_turkish_v215.py": "57f80e0073e6c29077875be59b29164147e1359177a0dd44502be869e14d7582",
+    "docs/audio-drifting-turkish-v215-method.md": "2622733a13617f3c7c09d638c0dbf286360d02ea843492b1c183ec7849c00bf8",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_voxforge_tr_genuine_v199.py": "207675576920ae678fd369c8f939663984cf4a32ae752192a5aeefc1e5697a67"
+  },
+  "ffmpeg_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "optional_cpu_runtime": {
+    "version": "1.23.2",
+    "package_sha256": "65dd608dbcf91c67f745fcccc206b155ea170ba82fed5d9d7516fde1736e2c65"
+  },
+  "numpy_version": "2.2.6",
+  "python_version": "3.12.6",
+  "architecture": "arm64",
+  "provider": "CPUExecutionProvider",
+  "temperature": 0.3,
+  "guidance_scale": 2.0,
+  "length_scale": 1.0,
+  "native_sample_rate": 24000,
+  "native_hop_samples": 256,
+  "production_sample_rate": 16000,
+  "native_sample_bounds": [
+    72000,
+    96000
+  ],
+  "production_sample_bounds": [
+    48000,
+    64000
+  ],
+  "private_authored_phrases_sha256": "c153a2d70bc5839e29759e77dea1354b27f0b7b8a8253d6820f39c8084cb75e3",
+  "planned_slots": 16,
+  "planned_slots_by_stock_voice": {
+    "studio": 6,
+    "male": 5,
+    "female": 5
+  },
+  "stock_voice_duration_scales": {
+    "389": 1.1495339830027282,
+    "323": 1.1942789034564958,
+    "722": 0.9346768610399232
+  },
+  "role": "independent_synthetic_source_preparation",
+  "detector_calls_permitted": false,
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "private_plan_sha256": "df7c2c8d320a44088f9047d5077ca5d809d4732a069c2d38c364675d07df8c41"
+}

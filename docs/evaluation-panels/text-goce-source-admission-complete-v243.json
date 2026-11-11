@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.text-goce-source-admission/243",
+  "status": "complete",
+  "review_method": "assistant_assisted_source_inspection",
+  "external_human_review": false,
+  "ready_witnesses": 2,
+  "held_witnesses": 5,
+  "held_reasons": {
+    "earlier_prose_boundary_unseen": 3,
+    "template_in_retouch": 1,
+    "credited_revision_words_in_full_context": 1
+  },
+  "known_exposure_packets": 20,
+  "known_exposure_text_entries": 6364,
+  "known_exposure_unique_fragments": 649552,
+  "reviewed_witnesses_with_known_fragment_matches": 0,
+  "rights_admitted_pages": 2,
+  "private_artifacts_commitment_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+  "model_calls": 0,
+  "reviewed_windows": 2,
+  "pending_windows": 5,
+  "rights_exclusions": {}
+}

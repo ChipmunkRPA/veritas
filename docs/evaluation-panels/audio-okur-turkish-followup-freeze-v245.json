@@ -1,0 +1,114 @@
+{
+  "schema": "chipmunk.audio-okur-turkish-followup-freeze/245",
+  "publisher_model_revision": "0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70",
+  "publisher_code_revision": "0889eda23a3eaeda33f8c0af3af729261907bcab",
+  "model_license": "CC-BY-4.0",
+  "code_license": "Apache-2.0",
+  "source_assets": {
+    "README.md": {
+      "url": "https://huggingface.co/ahakan/okur-tts/raw/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/README.md",
+      "bytes": 5496,
+      "sha256": "475e7cd53bcffa70c06863563681e721d9a5dd3c296bf03243ce38fea1e6ee2c"
+    },
+    "NOTICE": {
+      "url": "https://huggingface.co/ahakan/okur-tts/raw/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/NOTICE",
+      "bytes": 1882,
+      "sha256": "98892e78692055ffff295ffdf7f32079ee25fdac9cce5c87e6f87817901a5531"
+    },
+    "acoustic.json": {
+      "url": "https://huggingface.co/ahakan/okur-tts/raw/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/acoustic.json",
+      "bytes": 426,
+      "sha256": "3614ad54aa6070f7bd4c2239b6858422a6a5a941d19edc09ed552dd722ba927b"
+    },
+    "onnx/config.json": {
+      "url": "https://huggingface.co/ahakan/okur-tts/raw/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/onnx/config.json",
+      "bytes": 742,
+      "sha256": "7b62f4383f4d0ed0fd5f0087bdb078e9cfb9516e36a4e3e61530bf037b663860"
+    },
+    "upstream/LICENSE": {
+      "url": "https://raw.githubusercontent.com/ahmethakanbesel/okur-tts/0889eda23a3eaeda33f8c0af3af729261907bcab/LICENSE",
+      "bytes": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    "upstream/export_web.py": {
+      "url": "https://raw.githubusercontent.com/ahmethakanbesel/okur-tts/0889eda23a3eaeda33f8c0af3af729261907bcab/src/okur/export_web.py",
+      "bytes": 12306,
+      "sha256": "c607509c828d35b8a3518b737882b90d4695bab3741f70314b7764a204df5bfc"
+    },
+    "upstream/timeline.ts": {
+      "url": "https://raw.githubusercontent.com/ahmethakanbesel/okur-tts/0889eda23a3eaeda33f8c0af3af729261907bcab/web/src/core/timeline.ts",
+      "bytes": 2166,
+      "sha256": "b9cd7f0926340f70f35a09f6cc1fd9279a456e4fd1fddbdfd9c68675b0da4b43"
+    },
+    "onnx/text.6a21984ac693.onnx": {
+      "url": "https://huggingface.co/ahakan/okur-tts/resolve/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/onnx/text.6a21984ac693.onnx",
+      "bytes": 5114579,
+      "sha256": "6a21984ac693d07ec0096fcfbc0bffebe23255891523090eaf24f232782a94c2"
+    },
+    "onnx/sample.3c2a91ee5faa.onnx": {
+      "url": "https://huggingface.co/ahakan/okur-tts/resolve/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/onnx/sample.3c2a91ee5faa.onnx",
+      "bytes": 10987695,
+      "sha256": "3c2a91ee5faa5601ae53193c203fa558a28f7e031b82103af28ee3cf366a6c63"
+    },
+    "onnx/decoder.8f42fa31155e.onnx": {
+      "url": "https://huggingface.co/ahakan/okur-tts/resolve/0c1ae1a9c5e7bcaa46bdff732bc7182c9ae7bd70/onnx/decoder.8f42fa31155e.onnx",
+      "bytes": 7102508,
+      "sha256": "8f42fa31155e459e62f3cb2830d53c7c014e5c614b583b17440120d7fa7120c4"
+    }
+  },
+  "code_sha256": {
+    "backend/scripts/audio_okur_turkish_v240.py": "5b37f464af83f4a6a3f7abaf3a667ded514b9b1c59fe8402d5b6a43c32d0b8b6",
+    "backend/tests/test_audio_okur_turkish_v240.py": "90193516f2516633d48a354690b1eeba637198c553d1c1a19ec9de0bb07fcf1a",
+    "backend/scripts/audio_drifting_turkish_v215.py": "fc1f3e987ba795ef7b664f243a109fcbd985243554db848486455ff7c9421ca4",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "docs/audio-okur-turkish-v240-method.md": "2edf2f3f1a2079e479b9a850cd59af6a36259d341338b753a2aff6bf424e584d",
+    "backend/scripts/audio_okur_turkish_followup_v245.py": "8ef792e3fb8ded2d7876586fd7b561ac6ac497ab6e01a1e1d9753ac2745c8d40",
+    "backend/tests/test_audio_okur_turkish_followup_v245.py": "b77d7feb4deafcc80be6e8caa2f5b35b513346465dd72db343371121b0549e0f",
+    "docs/audio-okur-turkish-followup-v245-method.md": "79971a02d3c3125446bf9f260ad503ed21e2d6ce51d0acc79b35683751897626"
+  },
+  "decoder_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "optional_cpu_runtime": {
+    "version": "1.23.2",
+    "package_sha256": "65dd608dbcf91c67f745fcccc206b155ea170ba82fed5d9d7516fde1736e2c65"
+  },
+  "numpy_version": "2.2.6",
+  "python_version": "3.12.6",
+  "architecture": "arm64",
+  "native_sample_rate": 48000,
+  "native_hop_samples": 1920,
+  "native_frame_bounds": [
+    75,
+    100
+  ],
+  "fixed_sampler_times": [
+    0.0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "planned_slots": 24,
+  "stock_voice_groups": 1,
+  "detector_calls_permitted": false,
+  "previous_freeze_sha256": "73fdfbbe4e7d081ed85119accfc37ddd2cbefeece5d0eae495c178cfc5209549",
+  "previous_result_sha256": "37e697d698ff4be034aa8631505c081e83185aa2a39e1ed32f8cf9ae1e11b6f8",
+  "previous_private_plan_sha256": "5a86b2404970e80f27af52f777e527cbe229a3cc925a7443a99d2000a42e01ad",
+  "previous_resource_profile_sha256": "247603930b1e815a7e8d1a0795005f8ef4ca9d8a48db081adb97220e34cfb21b",
+  "previous_private_journal_sha256": "ed0d8bd847f712a153cb4dc6b9f99820d101dfc8e3a6e12f7a218f14fdc59d30",
+  "previous_private_repeat_sha256": "a00114dac7b63ae9107a558b3aec12ef350ae85cbfc5e966dc7b2d3d1135d734",
+  "shared_acquisition_sha256": "760f526560ddcda400a48a506c2b9fc035193236c868e65722c93abe905247ee",
+  "authored_character_bounds": [
+    50,
+    56
+  ],
+  "authored_word_count_bounds": [
+    7,
+    8
+  ],
+  "private_plan_sha256": "2b468b050977216b352b0e27c7610b130e44754440d4984f5957fd9d19abdc8f"
+}

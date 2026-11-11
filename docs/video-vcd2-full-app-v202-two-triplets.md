@@ -29,3 +29,7 @@ All three versions of the fourth recording leaned original and had no face appea
 All six new uploads leaned original. The fifth recording had the same false 32-frame appearance flag in all three versions. In each edited version, 28 of those frames overlapped the conventional treatment and four fell outside it. The sixth recording had no face appearance flag in any version. Across all 18 completed uploads, two of six genuine recordings produced face appearance flags. The overall direction leaned original on all 18. [Verified six-triplet counts](evaluation-panels/video-vcd2-full-app-six-triplets-v202.json)
 
 The app evidence audit has now verified 720 sampled frames, 2,153 native anchors, 246 evidence frames and 74 assets. Twelve eligible raw uploads remain. The six raw files above the upload cap are represented separately in the delivered-control study. [Delivered controls](video-vcd2-delivery-app-v232-first-triplet.md)
+
+## Seventh matched recording
+
+The seventh recording produced the same 40-frame false appearance flag in all three versions. The flags fell outside the exact conventional edit frames. The unchanged and recompressed uploads leaned original. The chroma-converted upload was inconclusive. Across seven recordings and 21 uploads, three source groups had false face appearance flags. Twenty uploads leaned original and one was inconclusive. Nine eligible raw uploads remain. [Verified seven-triplet counts](evaluation-panels/video-vcd2-full-app-seven-triplets-v202.json)

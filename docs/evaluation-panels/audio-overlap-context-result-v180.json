@@ -1,0 +1,367 @@
+{
+  "defaults_changed": false,
+  "freeze_sha256": "67f16588f9afa1bc1db2f9a056e69e39ad9af9c3fd6efc108865b3db6514492a",
+  "genuine_controls": {
+    "AMI": {
+      "babble_snr00": {
+        "directions_with_overlap_context": {
+          "inconclusive": 4
+        },
+        "median_overlap_fraction": 0.9857142857142858,
+        "median_overlap_mass": 0.7234931579728896,
+        "original_serving_directions": {
+          "inconclusive": 4
+        },
+        "overlap_context": 4,
+        "planned": 4
+      },
+      "babble_snr05": {
+        "directions_with_overlap_context": {
+          "inconclusive": 3
+        },
+        "median_overlap_fraction": 0.6285714285714286,
+        "median_overlap_mass": 0.5989987074112042,
+        "original_serving_directions": {
+          "inconclusive": 3,
+          "unavailable": 1
+        },
+        "overlap_context": 3,
+        "planned": 4
+      },
+      "clean": {
+        "directions_with_overlap_context": {
+          "unavailable": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.02592619717907815,
+        "original_serving_directions": {
+          "original": 2,
+          "unavailable": 2
+        },
+        "overlap_context": 1,
+        "planned": 4
+      },
+      "env_noise_snr00": {
+        "directions_with_overlap_context": {
+          "inconclusive": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.053107378008257516,
+        "original_serving_directions": {
+          "inconclusive": 3,
+          "unavailable": 1
+        },
+        "overlap_context": 1,
+        "planned": 4
+      },
+      "env_noise_snr05": {
+        "directions_with_overlap_context": {
+          "inconclusive": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.11325522682609337,
+        "original_serving_directions": {
+          "inconclusive": 3,
+          "unavailable": 1
+        },
+        "overlap_context": 1,
+        "planned": 4
+      },
+      "music_instrumental_snr00": {
+        "directions_with_overlap_context": {
+          "unavailable": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.17956571215680814,
+        "original_serving_directions": {
+          "inconclusive": 2,
+          "unavailable": 2
+        },
+        "overlap_context": 1,
+        "planned": 4
+      },
+      "music_instrumental_snr05": {
+        "directions_with_overlap_context": {
+          "unavailable": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.15137332795524963,
+        "original_serving_directions": {
+          "inconclusive": 1,
+          "original": 1,
+          "unavailable": 2
+        },
+        "overlap_context": 1,
+        "planned": 4
+      }
+    },
+    "VCTK": {
+      "babble_snr00": {
+        "directions_with_overlap_context": {
+          "ai": 5,
+          "inconclusive": 3
+        },
+        "median_overlap_fraction": 0.8457142857142858,
+        "median_overlap_mass": 0.5975396712309746,
+        "original_serving_directions": {
+          "ai": 7,
+          "inconclusive": 3
+        },
+        "overlap_context": 8,
+        "planned": 10
+      },
+      "babble_snr05": {
+        "directions_with_overlap_context": {
+          "ai": 4,
+          "inconclusive": 4
+        },
+        "median_overlap_fraction": 0.7742857142857142,
+        "median_overlap_mass": 0.6885849907511727,
+        "original_serving_directions": {
+          "ai": 4,
+          "inconclusive": 6
+        },
+        "overlap_context": 8,
+        "planned": 10
+      },
+      "clean": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.0036126809412657572,
+        "original_serving_directions": {
+          "original": 10
+        },
+        "overlap_context": 0,
+        "planned": 10
+      },
+      "env_noise_snr00": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.035035549318903014,
+        "original_serving_directions": {
+          "inconclusive": 9,
+          "original": 1
+        },
+        "overlap_context": 0,
+        "planned": 10
+      },
+      "env_noise_snr05": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.0323950056850757,
+        "original_serving_directions": {
+          "inconclusive": 7,
+          "original": 3
+        },
+        "overlap_context": 0,
+        "planned": 10
+      },
+      "music_instrumental_snr00": {
+        "directions_with_overlap_context": {
+          "inconclusive": 2
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.04891731902944094,
+        "original_serving_directions": {
+          "ai": 1,
+          "inconclusive": 9
+        },
+        "overlap_context": 2,
+        "planned": 10
+      },
+      "music_instrumental_snr05": {
+        "directions_with_overlap_context": {
+          "original": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.028839071646636155,
+        "original_serving_directions": {
+          "inconclusive": 7,
+          "original": 3
+        },
+        "overlap_context": 1,
+        "planned": 10
+      }
+    },
+    "VCTK_mic1": {
+      "babble_snr00": {
+        "directions_with_overlap_context": {
+          "ai": 3,
+          "inconclusive": 1
+        },
+        "median_overlap_fraction": 0.9657142857142857,
+        "median_overlap_mass": 0.675630059885892,
+        "original_serving_directions": {
+          "ai": 4,
+          "inconclusive": 1
+        },
+        "overlap_context": 4,
+        "planned": 5
+      },
+      "babble_snr05": {
+        "directions_with_overlap_context": {
+          "ai": 3
+        },
+        "median_overlap_fraction": 0.7828571428571428,
+        "median_overlap_mass": 0.7293460397148548,
+        "original_serving_directions": {
+          "ai": 3,
+          "inconclusive": 2
+        },
+        "overlap_context": 3,
+        "planned": 5
+      },
+      "clean": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.0034820747582130895,
+        "original_serving_directions": {
+          "original": 5
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "env_noise_snr00": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.03276590592777233,
+        "original_serving_directions": {
+          "inconclusive": 5
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "env_noise_snr05": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.04908751294787775,
+        "original_serving_directions": {
+          "inconclusive": 4,
+          "original": 1
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "music_instrumental_snr00": {
+        "directions_with_overlap_context": {
+          "inconclusive": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.05311753373114395,
+        "original_serving_directions": {
+          "inconclusive": 5
+        },
+        "overlap_context": 1,
+        "planned": 5
+      },
+      "music_instrumental_snr05": {
+        "directions_with_overlap_context": {
+          "original": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.051446359775481565,
+        "original_serving_directions": {
+          "inconclusive": 3,
+          "original": 2
+        },
+        "overlap_context": 1,
+        "planned": 5
+      }
+    },
+    "VCTK_mic2": {
+      "babble_snr00": {
+        "directions_with_overlap_context": {
+          "ai": 2,
+          "inconclusive": 2
+        },
+        "median_overlap_fraction": 0.7257142857142858,
+        "median_overlap_mass": 0.5194492825760574,
+        "original_serving_directions": {
+          "ai": 3,
+          "inconclusive": 2
+        },
+        "overlap_context": 4,
+        "planned": 5
+      },
+      "babble_snr05": {
+        "directions_with_overlap_context": {
+          "ai": 1,
+          "inconclusive": 4
+        },
+        "median_overlap_fraction": 0.7657142857142857,
+        "median_overlap_mass": 0.6478239417874907,
+        "original_serving_directions": {
+          "ai": 1,
+          "inconclusive": 4
+        },
+        "overlap_context": 5,
+        "planned": 5
+      },
+      "clean": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.004883816531546559,
+        "original_serving_directions": {
+          "original": 5
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "env_noise_snr00": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.037305192710033706,
+        "original_serving_directions": {
+          "inconclusive": 4,
+          "original": 1
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "env_noise_snr05": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.015702498422273656,
+        "original_serving_directions": {
+          "inconclusive": 3,
+          "original": 2
+        },
+        "overlap_context": 0,
+        "planned": 5
+      },
+      "music_instrumental_snr00": {
+        "directions_with_overlap_context": {
+          "inconclusive": 1
+        },
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.03416123243017514,
+        "original_serving_directions": {
+          "ai": 1,
+          "inconclusive": 4
+        },
+        "overlap_context": 1,
+        "planned": 5
+      },
+      "music_instrumental_snr05": {
+        "directions_with_overlap_context": {},
+        "median_overlap_fraction": 0.0,
+        "median_overlap_mass": 0.02258924464861789,
+        "original_serving_directions": {
+          "inconclusive": 4,
+          "original": 1
+        },
+        "overlap_context": 0,
+        "planned": 5
+      }
+    }
+  },
+  "holdout_wavs_read": 0,
+  "maximum_sampled_descendant_rss_bytes": 152256512,
+  "new_neural_calls": 98,
+  "planned_cases": 98,
+  "private_observations_sha256": "0626e53c22e50dcd593e3c33484dafe018238f893bd5cd8a2d44d16a98b413df",
+  "resource_profile_sha256": "27f8994f1146c02ef2a2674907124c1ab04fcd1716966c4599868bb9e8820cfd",
+  "schema": "chipmunk.audio-overlap-context-result/180",
+  "status": "complete",
+  "worker_duration_seconds": 4.745015833992511
+}

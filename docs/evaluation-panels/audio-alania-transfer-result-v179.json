@@ -1,0 +1,76 @@
+{
+  "all_positive_cases": {
+    "ai_flag_rate_over_planned": 0.875,
+    "directions": {
+      "ai": 21,
+      "inconclusive": 1,
+      "original": 2,
+      "unavailable": 0
+    },
+    "inconclusive_rate_over_planned": 0.041666666666666664,
+    "missed_ai": 3,
+    "missed_ai_rate_over_planned": 0.125,
+    "planned_positives": 24,
+    "route_statuses": {
+      "ok": 24
+    },
+    "scored": 24,
+    "scored_coverage_over_planned": 1.0,
+    "unavailable_rate_over_planned": 0.0
+  },
+  "by_render_mode": {
+    "reference": {
+      "ai_flag_rate_over_planned": 0.8333333333333334,
+      "directions": {
+        "ai": 15,
+        "inconclusive": 1,
+        "original": 2,
+        "unavailable": 0
+      },
+      "inconclusive_rate_over_planned": 0.05555555555555555,
+      "missed_ai": 3,
+      "missed_ai_rate_over_planned": 0.16666666666666666,
+      "planned_positives": 18,
+      "route_statuses": {
+        "ok": 18
+      },
+      "scored": 18,
+      "scored_coverage_over_planned": 1.0,
+      "unavailable_rate_over_planned": 0.0
+    },
+    "reference+instruction": {
+      "ai_flag_rate_over_planned": 1.0,
+      "directions": {
+        "ai": 6,
+        "inconclusive": 0,
+        "original": 0,
+        "unavailable": 0
+      },
+      "inconclusive_rate_over_planned": 0.0,
+      "missed_ai": 0,
+      "missed_ai_rate_over_planned": 0.0,
+      "planned_positives": 6,
+      "route_statuses": {
+        "ok": 6
+      },
+      "scored": 6,
+      "scored_coverage_over_planned": 1.0,
+      "unavailable_rate_over_planned": 0.0
+    }
+  },
+  "defaults_changed": false,
+  "freeze_sha256": "6ddf0988a592c4f67f02656f7c1d4f01fb455e331cbd35a51d33d912b3a476f3",
+  "holdout_scored": false,
+  "language": "tr",
+  "maximum_sampled_descendant_rss_bytes": 3124445184,
+  "new_neural_calls": 26,
+  "preparation_profile_sha256": "01d9968c0d42a69d824af273883e333dde874998389eded71db56447f6b5a6cb",
+  "private_observations_sha256": "bbea41d82f7feb12f3dbd955454e5f99f2f96d7ac0fbed337abc96d3c2ecb170",
+  "resource_profile_sha256": "3bd078e1241f2b60ef73d327a89e7964f2386a7966b840a761318f1b3cbc8950",
+  "schema": "chipmunk.audio-alania-transfer-result/179",
+  "scope": "Positive-only transfer of an English-calibrated route to clean, publisher-filtered Turkish speech from one generator.",
+  "serving_raw_forwards": 24,
+  "serving_stability_forwards": 2,
+  "status": "complete",
+  "worker_duration_seconds": 20.592935624998063
+}

@@ -1,0 +1,5 @@
+# Science-explainer sources for passage localization
+
+Five of the nine fixed July 2022 eLife Insights qualified as human originals for a constructed mixed-authorship study. All nine publisher XML files were available and passed work identity and CC BY 4.0 checks. Four lacked a contiguous excerpt that met the frozen paragraph and length rules. Those four remain in the denominator. Each admitted work has one predetermined interior paragraph for a future replacement and exact source offsets for the surrounding text. [Method](text-elife-source-intake-v272-method.md) · [Aggregate with attribution](evaluation-panels/text-elife-source-intake-complete-v272.json)
+
+The overlap screen found no matching normalized 12-token fragment against 44,857 text entries in 23 retained exposure packets. The receipt includes publisher attribution, selection and file commitments. A second local intake reproduced it byte for byte. This check covers the recorded exposure inventory. Paraphrases and model pretraining exposure remain unmeasured. No generators or detectors ran. [Publisher archive](https://elifesciences.org/archive/2022/july)

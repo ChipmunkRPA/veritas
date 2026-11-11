@@ -28,6 +28,11 @@ coverage at two noise levels. The [downstream comparison](audio-noise-speech-res
 scores the rescued clips and the already admitted comparison group against
 their own clean versions.
 
+The [science-explainer intake](text-elife-source-intake-v272-result.md) gives
+reviewers a new five-source writing cohort with work-level attribution, an
+immutable publisher revision and exact replacement targets. The receipt records
+all nine dispositions and contains no excerpts.
+
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and
 caller-owned directories. It compares aggregate decisions and clean-to-noisy

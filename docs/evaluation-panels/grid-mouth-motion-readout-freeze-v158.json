@@ -1,0 +1,110 @@
+{
+  "schema": "chipmunk.grid-mouth-motion-readout-freeze/158",
+  "code_sha256": {
+    "backend/scripts/grid_mouth_motion_readout_v158.py": "d3b2b03eaf3b316c352afd29b145be79ce4d64604779d9f04966bd39e0f96fc9",
+    "backend/scripts/grid_mouth_motion_arithmetic_v158.py": "d285ead9dd04cce26bd01f223f817c014134f803c503af87d65e38f837d687e8",
+    "backend/tests/test_grid_mouth_motion_readout_v158.py": "00a93bf2cf4ff507b27b8c21aebf0db36e056cbe622a2c96b7239cfc4ced84bf",
+    "backend/tests/test_grid_mouth_motion_arithmetic_v158.py": "f4b6fc60c401d41c3288ebe19ace330fcbb5185903fa2a3ee2d49ce7bb5ef2c1",
+    "docs/grid-mouth-motion-readout-v158-method.md": "408586872929246979c0688b16357db7ce569f8a7379c76e97bcd242bd497085",
+    "docs/grid-achieved-motion-validation-design.md": "1afdcaab143a9e31360d3e591396ae12b7672bc517bd85da3a1bc7e5a6975a5e",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "completed_context_metadata_sha256": {
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/freeze.json": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+    "docs/evaluation-panels/grid-transfer-plan-freeze-v143.json": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/result.json": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/profile.json": "d30df50457eea75364eff087d9e6cdacfa4cd6e5519dbb089f770c7383dc95aa",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/resources.jsonl": "5d04621138e04229203b0605863fa57f2982e52a2848e069e287e5f8c2812654",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/private-plan.json": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+    "backend/data/independent-evaluation/grid-mouth-observer-v157/freeze.json": "6ff39194f84eb45ff0f3338c6071852a546eb2702159bc9151c4f4c898835682",
+    "docs/evaluation-panels/grid-mouth-observer-freeze-v157.json": "6ff39194f84eb45ff0f3338c6071852a546eb2702159bc9151c4f4c898835682",
+    "backend/data/independent-evaluation/grid-native-clips-v149/freeze.json": "6677444fd0094d5e3ebd96e1b9dc0172103dc1f4ecf52862ab469a185ade234c",
+    "docs/evaluation-panels/grid-native-clips-freeze-v149.json": "6677444fd0094d5e3ebd96e1b9dc0172103dc1f4ecf52862ab469a185ade234c",
+    "docs/evaluation-panels/grid-native-clips-complete-v149.json": "753964b09e20f37799d3175e30892c0175a8f3cfa26f04fd4d3f8ad9c0194975",
+    "backend/data/independent-evaluation/video-appearance-native-v108/monitor/output/result.json": "3ce66470d637320ecfecd41adde13dfe530bca4b1cc7380bddf5f1520cf03022",
+    "backend/data/independent-evaluation/video-appearance-native-v108/monitor/profile.json": "d7631262fb70c1d8ad561be4976646067c3bd6421561801f5efbd15f40b9394c",
+    "backend/data/independent-evaluation/video-appearance-native-v108/monitor/resources.jsonl": "5ef87d0813378440a1212c68470b1c56454a5fa070045506928aa769293a386d"
+  },
+  "pilot_clips": 16,
+  "pilot_components": 8,
+  "planned_cases": 176,
+  "pairs_per_clip": 6,
+  "paired_comparisons": [
+    [
+      "musetalk_earlier_320ms",
+      "musetalk_source_time"
+    ],
+    [
+      "musetalk_earlier_320ms",
+      "resample_musetalk"
+    ],
+    [
+      "musetalk_earlier_320ms",
+      "brightness_musetalk"
+    ],
+    [
+      "liveportrait_earlier_320ms",
+      "liveportrait_source_time"
+    ],
+    [
+      "liveportrait_earlier_320ms",
+      "resample_liveportrait"
+    ],
+    [
+      "liveportrait_earlier_320ms",
+      "brightness_liveportrait"
+    ]
+  ],
+  "case_order": [
+    "original",
+    "musetalk_source_time",
+    "musetalk_earlier_320ms",
+    "liveportrait_source_time",
+    "liveportrait_earlier_320ms",
+    "resample_musetalk",
+    "resample_liveportrait",
+    "brightness_musetalk",
+    "brightness_liveportrait",
+    "genuine_frame_retime",
+    "audio_delay_320ms"
+  ],
+  "native_lags_frames": [
+    -12,
+    -11,
+    -10,
+    -9,
+    -8,
+    -7,
+    -6,
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "edit_frames_half_open": [
+    27,
+    47
+  ],
+  "minimum_supported_positions": 16,
+  "minimum_adjacent_pairs": 12,
+  "minimum_public_components_for_quartiles": 5,
+  "numpy_version": "2.2.6",
+  "scope": "Saved verified geometry and exact rational source-clock arithmetic only. No media, weights, detector scores, reserve scoring or phonetic claim."
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "chipmunk.text-elife-paragraph-rank-rule/281",
+  "v275_result_sha256": "4058cca94716819cca2302b80cc29f36d37e28c9b2f259b24414f4f91c32efea",
+  "v275_freeze_sha256": "6c11cb1bf13ceccf6ad7c6851eacee58d4992c8475701a25bf855145745eb141",
+  "code_sha256": "3f4da4df56c4d81ce446364b79c76104cdf1cec6bd4f9f809897dc36e4e6a754",
+  "rule": "At each non-whitespace source position take the maximum raw current response covering it. Rank the frozen target's exact mean against all paragraph means only with full source coverage. Equal means tie, so the target wins only when its mean is strictly highest.",
+  "exploratory_saved_cohort": true
+}

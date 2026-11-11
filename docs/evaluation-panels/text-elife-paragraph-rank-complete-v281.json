@@ -1,0 +1,42 @@
+{
+  "schema": "chipmunk.text-elife-paragraph-rank-aggregate/281",
+  "status": "complete",
+  "private_readout_sha256": "6db8d4ac1e647a8a61d1f0bf83452b2d54b9d1abbadb6afc177f80893c1fd64f",
+  "coverage": {
+    "full": 11,
+    "preparation_unavailable": 4
+  },
+  "originals_with_top_target": 1,
+  "originals": 5,
+  "distinct_sources_with_new_top_target": 1,
+  "by_family": {
+    "qwen": {
+      "planned_rewrites": 5,
+      "paired_ranks": 5,
+      "preparation_unavailable": 0,
+      "mixed_target_unique_highest": 2,
+      "same_original_target_unique_highest": 1,
+      "mixed_target_top_ties": 0,
+      "same_original_target_top_ties": 0,
+      "new_unique_highest": 1,
+      "ranks_improved": 3,
+      "ranks_unchanged": 2,
+      "ranks_declined": 0
+    },
+    "smol2": {
+      "planned_rewrites": 5,
+      "paired_ranks": 1,
+      "preparation_unavailable": 4,
+      "mixed_target_unique_highest": 1,
+      "same_original_target_unique_highest": 0,
+      "mixed_target_top_ties": 0,
+      "same_original_target_top_ties": 0,
+      "new_unique_highest": 1,
+      "ranks_improved": 1,
+      "ranks_unchanged": 0,
+      "ranks_declined": 0
+    }
+  },
+  "new_neural_calls": 0,
+  "serving_changed": false
+}

@@ -1,0 +1,238 @@
+{
+  "schema": "chipmunk.image-flux-detector-comparison-aggregate/280",
+  "freeze_sha256": "0729d5b3ed70eefbb7ae743a494e39e43670ec0b98e1dd0dcaa595e5c55d9ca0",
+  "unique_model_calls": 40,
+  "repeat_model_calls": 4,
+  "unassessed_calls": 0,
+  "phase_profile_sha256": {
+    "prepare": "f940d6e1f288ea8a26633043a152c6762f73b96e2f76c8a8f381ff3b92751281",
+    "baseline-q0-00": "58b53da0e6cf409bfb44afde0dd4044529e26cf772a564ed6db7cd72cb12a186",
+    "candidate-q0-00": "218d48a9ce32b3cbfff3c3f2abf16a8e6b97e0fdb367709b44656ac2bd9905b9",
+    "readout-q0-00": "f0c9a5d96914fb8100fdea60bd2e94fcb52a53795c9d76c85c410286622dc084",
+    "baseline-q75-00": "ff52e6f0d93c5cdc17b234807df18999ae7f9888faf2bbce648691184875f322",
+    "candidate-q75-00": "539cc9a0117d914f2e085d01c4c100747ebba005a8d5e48f5a9910f3764684a8",
+    "readout-q75-00": "a9c108e215b6ce831131a3a92d04b79fe149053598cc6b8b55b07dfc69caabe7"
+  },
+  "serving_admitted": false,
+  "calibration_performed": false,
+  "ordinary_controls_have_zero_ai_truth": true,
+  "scope": "Two source groups. Native observed RGB footprints shared by PNG and JPEG75. Descriptive transfer pilot without population intervals, fit or serving admission.",
+  "format_results": {
+    "native_png": {
+      "format": "native_png",
+      "source_groups": 2,
+      "methods": {
+        "current": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 0,
+          "positive_groups_with_overlap": 0,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 1
+            }
+          },
+          "mean_positive_iou": 0,
+          "mean_positive_recall": 0
+        },
+        "sensitive": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 2,
+          "positive_groups_with_overlap": 2,
+          "useful_positive_groups": 1,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 2
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 1
+            }
+          },
+          "mean_positive_iou": 0.3334465041653857,
+          "mean_positive_recall": 0.7595065497653388
+        },
+        "shared": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 0,
+          "positive_groups_with_overlap": 0,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 0
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 1
+            }
+          },
+          "mean_positive_iou": 0,
+          "mean_positive_recall": 0
+        }
+      }
+    },
+    "jpeg75": {
+      "format": "jpeg75",
+      "source_groups": 2,
+      "methods": {
+        "current": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 1
+            }
+          },
+          "mean_positive_iou": 0.03266921640131638,
+          "mean_positive_recall": 0.4484737484737485
+        },
+        "sensitive": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 2,
+          "positive_groups_with_overlap": 2,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 2
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 2
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 2
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 2
+            }
+          },
+          "mean_positive_iou": 0.02251717991877096,
+          "mean_positive_recall": 0.08009004884004883
+        },
+        "shared": {
+          "positive_groups": 2,
+          "positive_groups_with_a_region": 1,
+          "positive_groups_with_overlap": 1,
+          "useful_positive_groups": 0,
+          "controls": {
+            "original": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "tone": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "blur": {
+              "groups": 2,
+              "flagged_groups": 1
+            },
+            "copy_move": {
+              "groups": 2,
+              "flagged_groups": 1
+            }
+          },
+          "mean_positive_iou": 0.01356300013563,
+          "mean_positive_recall": 0.04884004884004884
+        }
+      }
+    }
+  },
+  "transport_changes_outside_native_footprint": {
+    "native_png": {
+      "ai": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "original": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tone": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "blur": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "copy_move": {
+        "minimum": 0,
+        "maximum": 0
+      }
+    },
+    "jpeg75": {
+      "ai": {
+        "minimum": 174,
+        "maximum": 228
+      },
+      "original": {
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tone": {
+        "minimum": 163,
+        "maximum": 214
+      },
+      "blur": {
+        "minimum": 105,
+        "maximum": 157
+      },
+      "copy_move": {
+        "minimum": 194,
+        "maximum": 250
+      }
+    }
+  },
+  "status": "complete",
+  "private_summary_sha256": "ce03388052ea86691b0d8c829bc34b8e018f2a47b040c80801452920f7bf6d42"
+}

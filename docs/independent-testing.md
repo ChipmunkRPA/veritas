@@ -41,6 +41,8 @@ generator output is composed into a source region. A separate verifier checks
 the pinned bundle without running the model or accessing project photos. The
 [licensed photo pilot](image-flux-photo-preparation-v276-result.md) carries the
 same geometry checks into two exact edits with six matched ordinary controls.
+The [paired detector comparison](image-flux-detector-comparison-v280-result.md)
+reports the same edit footprints under PNG and JPEG75, including false highlights.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

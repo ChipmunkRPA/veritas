@@ -1,4 +1,4 @@
-# First JPEG75 and JPEG90 model batches verified
+# JPEG compression diagnostic progress
 
 The guarded data preparation froze 59 source photos in 48 known
 source groups, each with five views at both JPEG qualities. The first
@@ -20,3 +20,14 @@ passed. Each model has scored 125 of 295 JPEG75 views and 25 of 295
 JPEG90 views. The combined coverage is 300 of 1,180 planned unique
 forwards and four repeats. Seven JPEG75 and eleven JPEG90 batch pairs
 remain under the original freeze.
+
+## JPEG75 coverage complete
+
+All 295 JPEG75 views have now passed both model runs and independent mask
+readout. Each model has also scored 25 JPEG90 views. The combined coverage
+is 640 of 1,180 planned unique forwards and four repeats. Eleven JPEG90
+batch pairs remain before the full aggregate can be sealed.
+
+The JPEG75 batch 6 candidate initially stopped at the 6 GiB RAM admission
+check, before the worker launched. The original receipt was retained. The
+same frozen batch passed after available memory recovered.

@@ -1,0 +1,21 @@
+# Bounded official Wikinews source witness pilot
+
+IteraTeR Appendix A describes starting in July 2021 and tracing back five recent updated versions per Wikimedia article. It gives no specific day in July. The authors collected raw Wikinews revisions, used `mwparserfromhell` for text extraction and removed references and external links. The archive search uses the last UTC instant of that reported month as its latest date and searches earlier revisions. It keeps the v203 excerpt, date, registered editor, revert and rights rules. [IteraTeR Appendix A](https://aclanthology.org/2022.acl-long.250.pdf#page=11) · [v203 source intake](text-short-insert-intake-v203-method.md)
+
+The pilot selects the first 12 of the 62 mechanically eligible pages in ascending numeric page ID order. Some of these overlap the earlier small connectivity checks. This is a fixed engineering sample with no sampling-based corpus estimate. It retrieves at most 24 official revisions before the cutoff for each page and considers visible, registered, non-revert revisions whose recorded parents appear in the same history. It ranks pairs using literal original, target and changed-word strings from raw wikitext after lightweight markup removal. It asks the official API to render the top two pairs per page. A witness requires both complete excerpts to appear exactly once in their respective rendered main-body prose, allowing only whitespace normalization. Raw hints cannot qualify a source. A page without a witness may have a pair outside the bounded history or render budget, or may differ between the publisher’s extraction and the official rendering. [Revision API](https://www.mediawiki.org/wiki/API:Revisions) · [Parse API](https://www.mediawiki.org/wiki/API:Parsing_wikitext)
+
+The collector uses at most 60 sequential requests, waits at least one second from the previous request’s completion and sets the MediaWiki `maxlag` parameter. It stops on the first rejected or failed request, API error, or unexpected warning. It permits no redirect or automatic retry. Successful official responses are saved exactly in an owner-only cache and existing files are never replaced. All article and editor identifiers, raw revision bodies and per-file commitments stay in the private cache. The command prints counts only. A source witness does not substitute for the separate rights and project-overlap reviews. [MediaWiki API etiquette](https://www.mediawiki.org/wiki/API:Etiquette) · [Wikinews terms](https://en.wikinews.org/wiki/Wikinews:Copyright)
+
+```sh
+python3 -B backend/scripts/text_wikinews_archive_v205.py \
+  /private/tmp/veritas-iterater-train-v203.json \
+  /private/tmp/veritas-wikinews-archive-v205
+```
+
+Add `--offline` after a complete collection to check that the retained responses reconstruct the exact private witness receipt. A stopped collection retains its successful responses for inspection. No model or generator runs in either mode.
+
+## Local result
+
+The collector completed all 12 selected pages with 48 requests and no rejection. The 12 histories yielded 86 visible registered adjacent pairs. It checked official rendered prose for 22 pairs. Three adjacent pairs on three pages contained both exact excerpts, covering four candidate windows. The offline replay reproduced the counts and private witness receipt with zero new requests. No source has passed rights and historical overlap review.
+
+The fixed intake needs 48 distinct pages. Continuing the same exact join would require at least 45 of the remaining 50 mechanically eligible pages to pass even before rights and overlap checks. A different pilot can draw directly from the 2018–2019 Wikinews chronological archive and published category. Use a fixed monthly source pool and separate stories. Compute short retouches on the adjacent official rendered prose itself and use those same revisions for the source coordinates and proof. Retain the date, recorded parent, registered editor, revision history, rights and project-overlap checks. A direct source pilot would remove the extra requirement to reproduce a third-party text extraction. [Chronological archive](https://en.wikinews.org/wiki/Wikinews:Archives/Date/2019) · [Published category](https://en.wikinews.org/wiki/Category:Published) · [Editorial review policy](https://en.wikinews.org/wiki/Wikinews:Reviewing_articles)

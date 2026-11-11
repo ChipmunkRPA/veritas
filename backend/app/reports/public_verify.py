@@ -16,7 +16,7 @@ from app.evidence import document_scope
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.face_lighting_context import validate as validate_face_lighting
-from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS, validate_similarity
+from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS, copy_records, validate_similarity
 from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
@@ -174,8 +174,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
     repeat_pcm = {}
     for part in parts:
-        if part.get('version') in REFLECTION_VERSIONS:
-            groups.extend(pair['artifacts'] for pair in part['copy_similarity']['pairs'])
+        groups.extend(pair['artifacts'] for record in copy_records(part) for pair in record['pairs'])
         acoustic = part.get('acoustic_context')
         if acoustic:
             groups.extend([acoustic.get('overview') or {}, *(event.get('artifacts') or {} for event in acoustic.get('events', []))])

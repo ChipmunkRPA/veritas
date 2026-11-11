@@ -3,14 +3,20 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 
 V7 = "image-evidence-7"
 V8 = "image-evidence-8"
 V9 = "image-evidence-9"
-VERSION = V9
-REFLECTION_VERSIONS = frozenset({V7, V8, V9})
+V10 = "image-evidence-10"
+VERSION = V10
+REFLECTION_VERSIONS = frozenset({V7, V8, V9, V10})
 SCHEMA = "same-image-reflection-similarity/1"
+TRANSLATION_SCHEMA = "same-image-copy-similarity/1"
+TRANSLATION_NOTE = (
+    "The two crops show similar image detail without mirroring. Copies and naturally repeated detail can both produce "
+    "a match. The crop boundaries enclose the matched detail. The origin of either area and AI involvement remain undetermined."
+)
 NOTE = (
     "Two areas may have similar detail after a horizontal reflection. Copying, intentional symmetry, reflections "
     "and repeated patterns can all produce this result. The comparison cannot identify which area came first "
@@ -42,11 +48,11 @@ def supported_size(width: int, height: int, *, version: str = VERSION) -> bool:
     short, long = sorted((width, height))
     if long <= MAX_SIDE:
         return short >= MIN_SIDE and long >= MIN_LONG_SIDE
-    return version == V9 and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
+    return version in {V9, V10} and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
 
 
 def status_text(status: str, *, version: str) -> str:
-    if status == "unsupported_geometry" and version == V9:
+    if status == "unsupported_geometry" and version in {V9, V10}:
         return LARGE_COVERAGE_TEXT
     return STATUS_TEXT[status]
 
@@ -71,6 +77,7 @@ def url(document: dict, digest: str) -> str:
 def prior_evidence(document: dict) -> dict:
     base = dict(document)
     base.pop("copy_similarity", None)
+    base.pop("copy_translation", None)
     lineage = base.pop("prior_image_evidence")
     base.update(lineage)
     return base
@@ -79,6 +86,8 @@ def prior_evidence(document: dict) -> dict:
 def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -> None:
     """Validate standalone public structure and both exact native-crop references."""
     version = document.get("version")
+    if ("copy_translation" in document) != (version == V10):
+        raise ValueError("The same-orientation copy check differs from the evidence version")
     if version not in REFLECTION_VERSIONS:
         if {"copy_similarity", "prior_image_evidence"} & document.keys():
             raise ValueError("Earlier image evidence cannot contain automatic copy similarity")
@@ -97,8 +106,19 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
         raise ValueError("Copy similarity changes the frozen prior evidence")
     source = document["source"]
     size = source["width"], source["height"]
-    supported = supported_size(*size, version=version)
-    record = document.get("copy_similarity")
+    _validate_check(document, document.get("copy_similarity"), size, supported_size(*size, version=version), reflected=True)
+    if version == V10:
+        _validate_check(document, document["copy_translation"], size, supported_size(*size, version=V8), reflected=False)
+
+
+def copy_records(document: dict) -> Iterator[dict]:
+    if document.get("version") in REFLECTION_VERSIONS:
+        yield document["copy_similarity"]
+    if document.get("version") == V10:
+        yield document["copy_translation"]
+
+
+def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
     if not isinstance(record, dict) or set(record) != {
         "schema",
         "source_sha256",
@@ -111,12 +131,12 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
     if (
-        record["schema"] != SCHEMA
-        or record["source_sha256"] != source["sha256"]
+        record["schema"] != (SCHEMA if reflected else TRANSLATION_SCHEMA)
+        or record["source_sha256"] != document["source"]["sha256"]
         or record["coordinate_space"] != "exif-oriented-original"
         or type(record["authorship_confidence_contribution"]) is not int
         or record["authorship_confidence_contribution"] != 0
-        or record["interpretation"] != NOTE
+        or record["interpretation"] != (NOTE if reflected else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
         or (status == "unsupported_geometry") == supported
         or not isinstance(pairs, list)
@@ -128,8 +148,8 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
         if (
             not isinstance(pair, dict)
             or set(pair) != {"id", "transform", "regions", "artifacts"}
-            or pair["id"] != f"R{index:02d}"
-            or pair["transform"] != "horizontal_reflection"
+            or pair["id"] != f"{'R' if reflected else 'T'}{index:02d}"
+            or pair["transform"] != ("horizontal_reflection" if reflected else "same_orientation")
             or not isinstance(pair["regions"], dict)
             or not isinstance(pair["artifacts"], dict)
             or set(pair["regions"]) != set(ROLES)
@@ -152,5 +172,5 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        if (aw, ah) != (bw, bh) or overlaps:
-            raise ValueError("The paired areas must be separate and share a native size")
+        if overlaps or (reflected and (aw, ah) != (bw, bh)):
+            raise ValueError("The paired areas must be separate and reflected areas must share a native size")

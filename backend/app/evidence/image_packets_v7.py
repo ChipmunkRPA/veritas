@@ -1,9 +1,10 @@
-"""Append automatic, undirected copy similarity to a frozen v6 image evidence set."""
+"""Append source-bound copy similarity checks to a frozen v6 image evidence set."""
 
 from __future__ import annotations
 
 import io
 import json
+import math
 from typing import Any
 
 import numpy as np
@@ -11,18 +12,24 @@ from PIL import Image
 from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.detectors.image import copy_similarity
+from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     NOTE,
+    PAIR_LIMIT,
     REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
+    TRANSLATION_NOTE,
+    TRANSLATION_SCHEMA,
     V7,
     V8,
+    V9,
     VERSION,
     box_bounds,
+    copy_records,
     prior_evidence,
+    supported_size,
     url,
     validate_similarity,
 )
@@ -30,8 +37,9 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-CREATOR = "image-evidence-packets/7"
-_CREATORS = {VERSION: CREATOR, V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
+CREATOR = "image-evidence-packets/8"
+_CREATORS = {VERSION: CREATOR, V9: "image-evidence-packets/7", V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
+MAX_COPY_CANDIDATES = 1024  # Each pair adds two orientations to the neighbor graph.
 legacy = prior.legacy
 PacketIntegrityError = prior.PacketIntegrityError
 
@@ -74,7 +82,7 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
         prior.validate_assets(document, store)
         return
     prior.validate_assets(prior_evidence(document), store)
-    pairs = document["copy_similarity"]["pairs"]
+    pairs = [pair for record in copy_records(document) for pair in record["pairs"]]
     if not pairs:
         return
     source = _source(document, store)
@@ -89,6 +97,50 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
                     or crop.tobytes() != expected.tobytes()
                 ):
                     raise PacketIntegrityError("Copy similarity crop pixels differ from the submitted image")
+
+
+def _crop_box(box: copy_move.Box, width: int, height: int) -> tuple[int, int, int, int]:
+    x, y, w, h = box
+    left, top = math.floor(x), math.floor(y)
+    return left, top, min(width, math.ceil(x + w)) - left, min(height, math.ceil(y + h)) - top
+
+
+def translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[tuple[int, ...], tuple[int, ...]]]]:
+    height, width = rgb.shape[:2]
+    try:
+        result = copy_move.analyse(rgb, max_candidate_pairs=MAX_COPY_CANDIDATES)
+    except copy_move.CandidateBudgetExceeded:
+        return "unassessed_match_budget", []
+    pairs = []
+    for pair in result.distinct:
+        first = _crop_box(pair.box_a, width, height)
+        second = _crop_box(pair.box_b, width, height)
+        if not pair.affine.reflected and min(*first[2:], *second[2:]) > 0 and copy_move.iou(first, second) == 0:
+            pairs.append((first, second))
+    return ("supported_pair" if pairs else "no_pair"), pairs[:PAIR_LIMIT]
+
+
+def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict, source: Image.Image | None,
+                 status: str, boxes: list, *, reflected: bool) -> dict:
+    pairs = []
+    for index, areas in enumerate(boxes, 1):
+        if source is None:
+            raise PacketIntegrityError("Copy similarity evidence is missing its source image")
+        regions, artifacts = {}, {}
+        for role, box in zip(ROLES, areas, strict=True):
+            region = prior._coordinates(box)
+            crop = source.crop(box_bounds(region, *source.size))
+            art = register_artefact(db, store, legacy._png(crop), media_type="image/png", role="preview",
+                                    created_by=CREATOR, analysis_id=analysis.id)
+            regions[role] = region
+            artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
+                               "height": crop.height, "url": url(document, art.sha256)}
+        pairs.append({"id": f"{'R' if reflected else 'T'}{index:02d}",
+                      "transform": "horizontal_reflection" if reflected else "same_orientation",
+                      "regions": regions, "artifacts": artifacts})
+    return {"schema": SCHEMA if reflected else TRANSLATION_SCHEMA,
+            "source_sha256": analysis.sha256, "coordinate_space": "exif-oriented-original", "status": status,
+            "authorship_confidence_contribution": 0, "pairs": pairs, "interpretation": NOTE if reflected else TRANSLATION_NOTE}
 
 
 def build_packet_set(
@@ -109,49 +161,17 @@ def build_packet_set(
         "prior_image_evidence": {key: base[key] for key in ("id", "version", "sha256")},
     }
     size = document["source"]["width"], document["source"]["height"]
-    status, pairs = "unsupported_geometry", []
+    status, boxes = "unsupported_geometry", []
+    translation_status, translations, source = "unsupported_geometry", [], None
     if copy_similarity.supported_size(*size):
         source = _source(document, store)
-        status, boxes = copy_similarity.analyse(np.asarray(source))
-        for index, areas in enumerate(boxes, 1):
-            regions, artifacts = {}, {}
-            for role, box in zip(ROLES, areas, strict=True):
-                region = prior._coordinates(box)
-                crop = source.crop(box_bounds(region, *size))
-                art = register_artefact(
-                    db,
-                    store,
-                    legacy._png(crop),
-                    media_type="image/png",
-                    role="preview",
-                    created_by=CREATOR,
-                    analysis_id=analysis.id,
-                )
-                regions[role] = region
-                artifacts[role] = {
-                    "sha256": art.sha256,
-                    "media_type": "image/png",
-                    "width": crop.width,
-                    "height": crop.height,
-                    "url": url(document, art.sha256),
-                }
-            pairs.append(
-                {
-                    "id": f"R{index:02d}",
-                    "transform": "horizontal_reflection",
-                    "regions": regions,
-                    "artifacts": artifacts,
-                }
-            )
-    document["copy_similarity"] = {
-        "schema": SCHEMA,
-        "source_sha256": analysis.sha256,
-        "coordinate_space": "exif-oriented-original",
-        "status": status,
-        "authorship_confidence_contribution": 0,
-        "pairs": pairs,
-        "interpretation": NOTE,
-    }
+        rgb = np.asarray(source)
+        status, boxes = copy_similarity.analyse(rgb)
+        if supported_size(*size, version=V8):
+            translation_status, translations = translation_pairs(rgb)
+    document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
+    document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
+                                                translations, reflected=False)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)
     validate_packet_set(document, **prior._binding(analysis))

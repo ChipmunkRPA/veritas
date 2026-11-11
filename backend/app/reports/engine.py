@@ -335,6 +335,7 @@ def render_pdf(snapshot: ReportSnapshot) -> RenderResult:
     if (snapshot.report.profile not in FULL_PROFILES and not (v.get("image_evidence") or {}).get("packets")
             and not (v.get("image_evidence") or {}).get("inspection_checks")
             and not ((v.get("image_evidence") or {}).get("copy_similarity") or {}).get("pairs")
+            and not ((v.get("image_evidence") or {}).get("copy_translation") or {}).get("pairs")
             and not (v.get("evidence") or {}).get("packets")):
         # N-19k (browser QA Q2-05): a one-page report fits its page. One that runs over (an issued revision with a departing
         # opinion, its justification, the custodian's line and a miniature ran to a second page of two lines) is set again,

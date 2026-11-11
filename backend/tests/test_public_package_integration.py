@@ -104,15 +104,18 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image"])
+@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image", "image_translation"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
-    kind = "document" if hybrid else request.param
+    translated = request.param == "image_translation"
+    kind = "document" if hybrid else "image" if translated else request.param
     if kind == "image":
-        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=True)
+        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=not translated,
+                                                          reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == "image-evidence-9" and document["source"]["width"] == 1408
-        assert document["copy_similarity"]["pairs"]
+        assert document["version"] == "image-evidence-10"
+        assert document["source"]["width"] == (768 if translated else 1408)
+        assert document["copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)

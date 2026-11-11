@@ -57,6 +57,10 @@ MAX_PAIRS = 10
 Box = tuple[float, float, float, float]  # x, y, w, h
 
 
+class CandidateBudgetExceeded(ValueError):
+    """Too many candidate matches to allocate a bounded pair graph."""
+
+
 @dataclass(frozen=True)
 class Affine:
     """Area a → area b in native px: x_b = A x_a + t."""
@@ -190,12 +194,14 @@ def _fit(src: np.ndarray, dst: np.ndarray) -> tuple[np.ndarray, np.ndarray] | No
     return matrix, mask.ravel().astype(bool)
 
 
-def analyse(pixels: np.ndarray) -> CopyMoveResult:
+def analyse(pixels: np.ndarray, *, max_candidate_pairs: int | None = None) -> CopyMoveResult:
     height, width = int(pixels.shape[0]), int(pixels.shape[1])
     gray, sx, sy = _luma(pixels)
     positions, sizes, descriptors = _keypoints(gray)
     matches, crowded = g2nn(descriptors)
     pairs = [(i, j) for i, j in matches if np.hypot(*(positions[i] - positions[j])) >= MIN_PAIR_DISTANCE]
+    if max_candidate_pairs is not None and len(pairs) > max_candidate_pairs:
+        raise CandidateBudgetExceeded("Candidate pairs exceed the evidence search budget")
     partners = np.zeros(len(positions), np.int64)
     for i, j in pairs:
         partners[i] += 1

@@ -20,6 +20,15 @@ if TYPE_CHECKING:
 
 
 ROLES = (("context", "Position in the original"), ("crop", "Original crop"), ("overlay", "Diagnostic overlay"))
+COPY_CHECKS = ("copy_similarity", "copy_translation")
+TRANSLATION_STATUS = {
+    "supported_pair": "Similar image detail was found without mirroring.",
+    "no_pair": "This check found no qualifying non-mirrored pair.",
+    "unsupported_geometry": (
+        "This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px."
+    ),
+    "unassessed_match_budget": "The check found too many candidate matches to show a distinct comparison.",
+}
 
 
 def roles(packet: dict):
@@ -106,10 +115,14 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "eligibility_view": eligibility_view(packet["localisation"]["candidate_eligibility"])
                         if packet.get("localisation", {}).get("candidate_eligibility") else None})
     comparison = copy.deepcopy(document.get("comparison"))
-    similarity = copy.deepcopy(document.get("copy_similarity"))
-    if similarity is not None:
-        similarity["observation"] = status_text(similarity["status"], version=document["version"])
-        for pair in similarity["pairs"]:
+    copy_checks = {field: copy.deepcopy(document.get(field)) for field in COPY_CHECKS}
+    for field, check in copy_checks.items():
+        if check is None:
+            continue
+        status = check["status"]
+        check["observation"] = (status_text(status, version=document["version"]) if field == "copy_similarity"
+                                else TRANSLATION_STATUS[status])
+        for pair in check["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):
                 asset = pair["artifacts"][role]
@@ -131,7 +144,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": [inspection_check_view(check) for check in document.get("coverage", {}).get("inspection_checks", [])],
-            "comparison": comparison, "copy_similarity": similarity,
+            "comparison": comparison, **copy_checks,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 
@@ -140,7 +153,7 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
     document = verified_set(snapshot)
     if document is None:
         return None
-    similarity = document.get("copy_similarity")
+    copy_checks = {field: copy.deepcopy(document[field]) for field in COPY_CHECKS if field in document}
     result = {"schema": document["schema"], "id": document["id"], "version": document["version"],
             "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "original_result_hash": document["original_result_hash"],
@@ -149,7 +162,7 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
                          [{"packet_id": packet["id"], "role": role, "sha256": packet["artifacts"][role]["sha256"]}
                           for packet in document["packets"] for role, _ in roles(packet)] +
                          [{"packet_id": pair["id"], "role": role, "sha256": asset["sha256"]}
-                          for pair in (similarity or {}).get("pairs", []) for role, asset in pair["artifacts"].items()]}
-    if similarity is not None:
-        result["copy_similarity"] = copy.deepcopy(similarity)
+                          for check in copy_checks.values() for pair in check["pairs"]
+                          for role, asset in pair["artifacts"].items()],
+              **copy_checks}
     return result

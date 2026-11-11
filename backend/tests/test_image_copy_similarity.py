@@ -18,7 +18,7 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
-from app.evidence.image_copy_similarity_binding import V7, V8, supported_size
+from app.evidence.image_copy_similarity_binding import V7, V8, V9, VERSION, supported_size
 from app.reports import engine, image_evidence, snapshot
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -52,12 +52,14 @@ def large_source(*, reflected: bool) -> Image.Image:
     return Image.fromarray(pixels)
 
 
-def reflected_result(packet_fixture, *, reflected=True, low_texture=False, large=False):
+def reflected_result(packet_fixture, *, reflected=True, low_texture=False, large=False, translated=False):
     db, store, analysis, _, _ = packet_fixture
     make_source = low_texture_source if low_texture else authored_source
     if large:
         make_source = large_source
     source = make_source(reflected=reflected)
+    if translated:
+        source.paste(source.crop((527, 301, 655, 429)), (31, 61))
     obj = store.put_bytes(_bytes(source, format="PNG"))
     analysis.sha256, analysis.size_bytes = obj.sha256, obj.size_bytes
     result = copy.deepcopy(specimen("image", "standard").result)
@@ -147,13 +149,15 @@ def test_automatic_pair_persists_both_original_crops_without_manual_highlight(pa
 @pytest.mark.parametrize(("version", "creator", "large"), [
     (V7, "image-evidence-packets/5", False),
     (V8, "image-evidence-packets/6", True),
+    (V9, "image-evidence-packets/7", True),
 ])
 def test_historical_reflection_remains_readable_after_writing_latest(packet_fixture, monkeypatch, version, creator, large):
     db, store, analysis, result, _ = reflected_result(packet_fixture, large=large)
     historical = service.build_packet_set(db, analysis, store, result)
+    historical.pop("copy_translation")
     historical["version"] = version
     historical["id"] = image_packets_v5.current_set_id(analysis, version)
-    if large:
+    if large and version != V9:
         historical["copy_similarity"].update(status="unsupported_geometry", pairs=[])
     for pair in historical["copy_similarity"]["pairs"]:
         for asset in pair["artifacts"].values():
@@ -170,7 +174,7 @@ def test_historical_reflection_remains_readable_after_writing_latest(packet_fixt
         context.setattr(copy_similarity, "analyse", lambda _: pytest.fail("A historical read must not rerun the detector"))
         assert service.load_packet_set(db, analysis, store) == historical
     latest = service.persist_packet_set(db, analysis, store, result=result)
-    assert latest["version"] == "image-evidence-9" and latest["id"] != historical["id"]
+    assert latest["version"] == VERSION and latest["id"] != historical["id"]
     assert latest["copy_similarity"]["status"] == "supported_pair"
     assert service.load_packet_set(db, analysis, store) == latest
     assert service.load_packet_set(db, analysis, store, set_id=historical["id"]) == historical
@@ -182,6 +186,16 @@ def test_no_pair_keeps_explicit_coverage_and_no_assets(packet_fixture):
     document = service.persist_packet_set(db, analysis, store, result=result)
     assert document["copy_similarity"]["status"] == "no_pair"
     assert document["copy_similarity"]["pairs"] == []
+    assert document["copy_translation"]["status"] == "no_pair"
+    assert service.asset_refs(document) == {}
+
+
+def test_translated_pair_budget_is_disclosed_as_unassessed(packet_fixture, monkeypatch):
+    db, store, analysis, result, _ = reflected_result(packet_fixture, reflected=False, translated=True)
+    monkeypatch.setattr(image_packets_v7, "MAX_COPY_CANDIDATES", 1)
+    document = service.persist_packet_set(db, analysis, store, result=result)
+    assert document["copy_translation"]["status"] == "unassessed_match_budget"
+    assert document["copy_translation"]["pairs"] == []
     assert service.asset_refs(document) == {}
 
 
@@ -208,6 +222,40 @@ def test_authenticated_image_api_serves_both_pair_crops(evidence_http, large):
         with Image.open(io.BytesIO(plate.content)) as crop:
             bounds = image_packets_v7.box_bounds(pair["regions"][role], *source.size)
             assert crop.tobytes() == source.crop(bounds).tobytes()
+
+
+def test_translated_pair_is_saved_without_changing_assessment_and_serves_both_source_crops(evidence_http):
+    fixture = evidence_http
+    analysis_id = "image-unprepared"
+    with Session(fixture.engine) as db:
+        analysis = db.get(Analysis, analysis_id)
+        db, store, analysis, result, source = reflected_result((db, fixture.store, analysis, None, None),
+                                                               reflected=False, translated=True)
+        previous = store.read_bytes(analysis.result_hash)
+        document = service.persist_packet_set(db, analysis, store, result=result)
+        assert store.read_bytes(analysis.result_hash) == previous
+        assert document["original_result_hash"] == analysis.result_hash
+        check = document["copy_translation"]
+        assert check["status"] == "supported_pair" and check["authorship_confidence_contribution"] == 0
+        assert document["copy_similarity"]["status"] == "no_pair"
+        pair, = check["pairs"]
+        assert pair["id"] == "T01" and pair["transform"] == "same_orientation"
+        wrong = copy.deepcopy(document)
+        wrong["copy_translation"]["pairs"][0]["transform"] = "horizontal_reflection"
+        wrong["sha256"] = image_packets_v5.packet_hash(wrong)
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="malformed paired areas"):
+            image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
+        db.commit()
+    response = fixture.client.get(f"/api/v2/analyses/{analysis_id}/evidence-packets", headers=fixture.viewer)
+    assert response.status_code == 200 and response.json() == document
+    for (role, asset), truth in zip(pair["artifacts"].items(), ((31, 61, 128, 128), (527, 301, 128, 128)), strict=True):
+        region = pair["regions"][role]
+        assert copy_move.iou(tuple(region[k] for k in "xywh"), truth) > 0.8
+        assert fixture.client.get(asset["url"], headers=fixture.outsider).status_code == 404
+        plate = fixture.client.get(asset["url"], headers=fixture.viewer)
+        assert plate.status_code == 200
+        with Image.open(io.BytesIO(plate.content)) as crop:
+            assert crop.tobytes() == source.crop(image_packets_v7.box_bounds(region, *source.size)).tobytes()
 
 
 @pytest.mark.parametrize("large", [False, True])

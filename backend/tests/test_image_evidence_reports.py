@@ -4,10 +4,16 @@ import copy
 import io
 from types import SimpleNamespace
 
+import cv2
+import numpy as np
+import pymupdf
 import pytest
 from PIL import Image, ImageDraw
+from test_image_packets import _bytes
+from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.evidence import service
 from app.evidence.image_packets import packet_hash
 from app.reports import engine, image_evidence
 from app.reports.public_view import public_manifest
@@ -137,6 +143,62 @@ def test_measured_mask_is_frozen_rendered_and_committed(tmp_path, monkeypatch):
     store.path_for(sha).unlink()
     with pytest.raises(ObjectNotFound):
         image_evidence.view(snapshot, store=store)
+
+
+def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch):
+    db, store, analysis, _, _ = packet_fixture
+    pixels = np.random.default_rng(812).integers(0, 256, (512, 768, 3), dtype=np.uint8)
+    pixels = cv2.GaussianBlur(pixels, (3, 3), 0.65)
+    pixels[61:189, 31:159] = pixels[301:429, 527:655]
+    source = store.put_bytes(_bytes(Image.fromarray(pixels), format="PNG"))
+    analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
+    original = specimen("image", "summary")
+    result = copy.deepcopy(original.result)
+    result.update(exhibits=[], signals=[], findings=[])
+    result["input"]["sha256"] = source.sha256
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    document = service.persist_packet_set(db, analysis, store, result=result)
+    assert document["version"] == "image-evidence-10"
+    assert document["copy_similarity"]["pairs"] == []
+    assert document["packets"] == []
+    (pair,) = document["copy_translation"]["pairs"]
+    snapshot = original.model_copy(update={
+        "result": result,
+        "image_evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": source.sha256}),
+    })
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    assert load(dump(snapshot)).image_evidence == document
+    commitment = public_manifest(snapshot, "weasyprint test", engine.TEMPLATE_SET)["image_evidence"]
+    assert commitment["copy_translation"] == document["copy_translation"]
+    assert commitment["artifacts"] == [
+        {"packet_id": "T01", "role": role, "sha256": asset["sha256"]}
+        for role, asset in pair["artifacts"].items()
+    ]
+    rendered = engine.render_pdf(snapshot)
+    text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "T01 · Non-mirrored pair" in text
+    assert "This check carries zero weight in AI authorship confidence." in text
+    expected_pixels = set()
+    for role, label in (("area_a", "Area A"), ("area_b", "Area B")):
+        region = pair["regions"][role]
+        assert f"{label} · x {region['x']}, y {region['y']}, {region['w']} × {region['h']} px" in text
+        with Image.open(io.BytesIO(store.read_bytes(pair["artifacts"][role]["sha256"]))) as crop:
+            expected_pixels.add((crop.size, crop.convert("RGB").tobytes()))
+    with pymupdf.open(stream=rendered.pdf, filetype="pdf") as pdf:
+        actual_pixels = {
+            ((width, height), pymupdf.Pixmap(pdf, xref).samples)
+            for page in pdf
+            for xref, _, width, height, *_ in page.get_images()
+            if (width, height) in {size for size, _ in expected_pixels}
+        }
+    assert expected_pixels <= actual_pixels
+    redacted = snapshot.model_copy(update={"report": snapshot.report.model_copy(update={"redacted": True})})
+    (redacted_pair,) = image_evidence.view(redacted, store=store)["copy_translation"]["pairs"]
+    assert all(image["uri"] is None for image in redacted_pair["images"])
+    assert redacted_pair["regions"] == pair["regions"]
 
 
 @pytest.mark.parametrize("profile", ["standard", "forensic", "summary", "newsroom"])

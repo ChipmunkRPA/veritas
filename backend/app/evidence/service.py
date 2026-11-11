@@ -7,7 +7,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS
+from app.evidence.image_copy_similarity_binding import copy_records
 from app.evidence.video_packet_versions import NESTED_VERSIONS
 from app.storage.db import Analysis
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -89,8 +89,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
-        if part.get("version") in REFLECTION_VERSIONS:
-            groups.extend(pair["artifacts"] for pair in part["copy_similarity"]["pairs"])
+        groups.extend(pair["artifacts"] for record in copy_records(part) for pair in record["pairs"])
         context = part.get("acoustic_context")
         if context is not None:
             if not isinstance(context, dict):

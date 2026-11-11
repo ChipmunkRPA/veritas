@@ -34,6 +34,7 @@ afterEach(() => {
 
 const reflected: NonNullable<ImageEvidenceSet['copy_similarity']> = {
   schema: 'same-image-reflection-similarity/1', status: 'supported_pair',
+  source_sha256: sourceHash, coordinate_space: 'exif-oriented-original', authorship_confidence_contribution: 0,
   interpretation: 'Copying, intentional symmetry, reflections and repeated patterns can all produce this result. The comparison cannot identify which area came first or establish that the image was edited or made with AI.',
   pairs: [{ id: 'R01', transform: 'horizontal_reflection',
     regions: { area_a: { x: 108, y: 168, w: 192, h: 128 }, area_b: { x: 594, y: 324, w: 192, h: 128 } },
@@ -41,6 +42,15 @@ const reflected: NonNullable<ImageEvidenceSet['copy_similarity']> = {
   }],
 }
 const copyOnly: ImageEvidenceSet = { ...evidence, version: 'image-evidence-7', packets: [], copy_similarity: reflected }
+const translated: NonNullable<ImageEvidenceSet['copy_translation']> = {
+  schema: 'same-image-copy-similarity/1', status: 'supported_pair',
+  source_sha256: sourceHash, coordinate_space: 'exif-oriented-original', authorship_confidence_contribution: 0,
+  interpretation: 'Copies and naturally repeated detail can both produce a match.',
+  pairs: [{ id: 'T01', transform: 'same_orientation',
+    regions: { area_a: { x: 89, y: 154, w: 193, h: 124 }, area_b: { x: 514, y: 319, w: 189, h: 120 } },
+    artifacts: { area_a: { ...artifact('5'), width: 193, height: 124 }, area_b: { ...artifact('6'), width: 189, height: 120 } },
+  }],
+}
 
 const gate = (score: number, eligible = score >= .5): CandidateEligibility => ({
   schema: 'image-candidate-eligibility/1', status: 'evaluated', scope: 'whole_image', comparison: 'greater_or_equal',
@@ -143,8 +153,37 @@ describe('image evidence cards', () => {
     const { rerender } = show({ ...unsupported, version: 'image-evidence-8' })
     const summary = screen.getByRole('region', { name: 'Same-image copy similarity' })
     expect(summary.textContent).toContain('long side of 513–1,024 px.')
-    rerender(<MemoryRouter><ImageEvidenceContent set={{ ...unsupported, version: 'image-evidence-9' }} token="signed token" mediaReady /></MemoryRouter>)
-    expect(summary.textContent).toContain('a long side of 1,025–2,048 px and a short side of at least 768 px')
+    for (const version of ['image-evidence-9', 'image-evidence-10'] as const) {
+      rerender(<MemoryRouter><ImageEvidenceContent set={{ ...unsupported, version }} token="signed token" mediaReady /></MemoryRouter>)
+      expect(summary.textContent).toContain('a long side of 1,025–2,048 px and a short side of at least 768 px')
+    }
+  })
+
+  it('shows both original non-mirrored crops with their own locations alongside the reflected check', () => {
+    show({ ...copyOnly, version: 'image-evidence-10', copy_translation: translated })
+    const pair = within(screen.getByRole('region', { name: 'Copy similarity without mirroring' }))
+    expect(pair.getByRole('heading', { name: 'T01 · Non-mirrored pair' })).toBeTruthy()
+    expect(pair.getByText(translated.interpretation)).toBeTruthy()
+    expect(pair.getByText('This check carries zero weight in AI authorship confidence.')).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'R01 · Reflected pair' })).toBeTruthy()
+    for (const [role, label] of [['area_a', 'Area A'], ['area_b', 'Area B']] as const) {
+      const region = translated.pairs[0].regions[role]
+      const { x, y, w, h } = region
+      const crop = pair.getByRole('img', { name: `T01: ${label} cropped from the submitted image` })
+      expect(crop.getAttribute('src')).toContain(`/${translated.pairs[0].artifacts[role].sha256}.png?token=signed%20token`)
+      const link = pair.getByRole('link', { name: `${label} in the original image`, description: `x ${x}, y ${y}, ${w} × ${h} px` })
+      const source = new URL(link.getAttribute('href')!, 'https://local.invalid')
+      expect(parseViewerState(source.searchParams)).toMatchObject({ focus: region, layers: { map: null, marks: [] } })
+    }
+  })
+
+  it('keeps the non-mirrored search coverage bounded when the wider reflected search applies', () => {
+    show({ ...copyOnly, version: 'image-evidence-10',
+      copy_translation: { ...translated, status: 'unsupported_geometry', pairs: [] } })
+    const section = screen.getByRole('region', { name: 'Copy similarity without mirroring' })
+    expect(section.textContent).toContain('a long side of 513–1,024 px')
+    expect(section.textContent).not.toContain('2,048')
+    expect(within(section).queryByRole('img')).toBeNull()
   })
 
   it('keeps the other reflected crop and native coordinates available when a crop fails', () => {

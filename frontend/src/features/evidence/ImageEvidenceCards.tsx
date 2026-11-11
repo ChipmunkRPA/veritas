@@ -72,29 +72,36 @@ function RegionalComparison({ set, token, mediaReady }: { set: ImageEvidenceSet;
   </section>
 }
 
-function CopySimilarity({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
-  const check = set.copy_similarity
+function CopySimilarity({ set, field, token, mediaReady }: {
+  set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation'; token: string; mediaReady: boolean
+}) {
+  const check = set[field]
   if (!check) return null
+  const reflected = field === 'copy_similarity'
+  const heading = reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
+  const sectionId = reflected ? 'image-copy-similarity' : 'image-copy-translation'
+  const wide = reflected && (set.version === 'image-evidence-9' || set.version === 'image-evidence-10')
   const statusText = {
-    supported_pair: 'Similar areas were found after horizontal reflection.',
-    no_pair: 'This check found no qualifying reflected pair.',
-    unsupported_geometry: set.version === 'image-evidence-9'
+    supported_pair: reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
+    no_pair: reflected ? 'This check found no qualifying reflected pair.' : 'This check found no qualifying non-mirrored pair.',
+    unsupported_geometry: wide
       ? 'This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, or a long side of 1,025–2,048 px and a short side of at least 768 px.'
       : 'This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.',
     unassessed_match_budget: 'The check found too many candidate matches to show a distinct comparison.',
   }
-  return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby="image-copy-similarity-heading">
-    <h3 id="image-copy-similarity-heading" className="m-0 text-body font-medium text-text">Same-image copy similarity</h3>
+  return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
+    <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
     <p className="mt-2 mb-0 text-small text-text">{statusText[check.status]}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
+    {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · Reflected pair</h4>
+      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
       <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
         {(['area_a', 'area_b'] as const).map((role, index) => {
           const region = pair.regions[role]
           const label = index === 0 ? 'Area A' : 'Area B'
-          const coordinatesId = `image-copy-similarity-${pair.id}-${role}-coordinates`
+          const coordinatesId = `${sectionId}-${pair.id}-${role}-coordinates`
           return <figure key={role} className="m-0 min-w-0">
             <EvidencePicture key={`${pair.artifacts[role].sha256}:${token}`} set={set} artifact={pair.artifacts[role]} token={token} ready={mediaReady}
               alt={`${pair.id}: ${label} cropped from the submitted image`} />
@@ -221,16 +228,18 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
     article.scrollIntoView?.({ block: 'start' })
   }, [hash, key, set.id, set.packets, set.status, showAll])
   const localised = set.packets.some((p) => p.evidence_type === 'localisation')
+  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
-      <CopySimilarity set={set} token={token} mediaReady={mediaReady} />
+      <CopySimilarity set={set} field="copy_similarity" token={token} mediaReady={mediaReady} />
+      <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.
       </p> : set.packets.length === 0 ? <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">
         {set.coverage?.inspection_checks?.length ? 'No local editing candidates are shown. The coverage below explains what was measured and withheld.'
-          : set.copy_similarity?.pairs.length ? 'No other local editing regions were recorded.' : 'No separate local editing regions were recorded.'}
+          : hasCopyPair ? 'No other local editing regions were recorded.' : 'No separate local editing regions were recorded.'}
         {' '}A whole-image score cannot identify which pixels were edited, and this does not establish that the image is unaltered.
       </p> : <>
         <p className="mt-3 mb-0 text-body text-text-muted max-w-[80ch]">

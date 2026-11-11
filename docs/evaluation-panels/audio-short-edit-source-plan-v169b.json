@@ -1,0 +1,88 @@
+{
+  "candidate_counts_before_cross_lane_connections": {
+    "clone": 140,
+    "expressive": 312,
+    "genuine": 1528,
+    "stock": 280
+  },
+  "grid_originals_bound": 32,
+  "grid_publisher_word_references_bound": 8,
+  "holdout_scored": false,
+  "implementation_sha256": "fd0c4139dc5bc7b6ef49188110918aaa01150a49935405e7ad2ccf39253a35f0",
+  "input_metadata_sha256": {
+    "clone_candidates": "1a24b5c8548535623a45487fe039ec6519db9fcb2512f4d3ebbef441a2f898db",
+    "clone_receipt": "8f49338d761592e333888c95c06aa18ad0e826a77a4a8cf254200a97d6a0b56e",
+    "consumed_v81": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+    "expressive_candidates": "5c33b5e0496bcdaf02c4e78654ade71b454a2e61ea32c74adb2fb1dd0d88e72d",
+    "grid_original_plan": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+    "grid_publisher_word_matches": "e5377c0965a4988bc5614a02973a7a18263fbcf4d68ba9f67798ef0f627301c6",
+    "historical_identity_catalogue": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1",
+    "libri100_plan": "ff2ca57b83cb0d18cc12238d3d6157da35e7202896e6324e712c817b3a9ad3cd",
+    "libri100_receipt": "1e601d1dc1c27e626434e193dafd351a113c85ef032990fb4081daf976f1fe99",
+    "libri360_candidates": "c448e12ec319539bd93fd89eaa33db9865cb9065edf928825c1ed09366983786",
+    "libri360_receipt": "0791f6d74432076dcc9e66cbd898bf9b94a976538898a410e15dd8e2fd3a6c21",
+    "noise_inventory": "1f92d5696f8d9f16d4b43c3e41d0fcbf18778f96dbb9fb8d634e3369ab60cfec",
+    "noise_plan": "d2c4ede58ea8f628879dd9c2f123bb111ccf4a0f4cd7874cc254f14ed6611e7c",
+    "noise_receipt": "fe65df76f5da54d8ae0ceda4d369e4424be3c32cccab6e2385cfc8c421d0ddd9",
+    "production_calibration": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "stock_expressive_plan": "18fd77b5a67a898e2498f298886fd3816b95db4d00937981b590f92286c9484c",
+    "stock_expressive_receipt": "7340f51732a1590023cc01b0b48319c5597af2a523687f2ad6a4db40af4a0b0c",
+    "v3_historical_calibration": "914f34e21f9aa670d800aec1a055d9b6f9e7a5734de3fed6cf886c1dd246c15b"
+  },
+  "method_sha256": "1fe7d70512c0ba7ce6bff601ecaca47ab356c954e6ec9e07684ef9a67023df96",
+  "model_calls": 0,
+  "noise_snr_db": [
+    0,
+    5
+  ],
+  "non_stock_roles_reproduced": true,
+  "prior_implementation_sha256": "da42f5c22872d14dfc3325e6a34d43a7b15825d4a9f2782faa929114444763ae",
+  "prior_private_roster_sha256": "642fcddc822c7484b1d31d4235d1bb1b41ca538a150cd212ad295ba8d7af6df9",
+  "prior_public_plan_sha256": "2566fa8c7c088ae5ca73ff374efbb87cca11abcea47a7afe85016d84acb7f229",
+  "private_roster_sha256": "e04b97de73b8f82de00de5705a36dc84bd4f4002d3ce84381b06435d4e06336c",
+  "roles": {
+    "development": {
+      "components": {
+        "clone": 5,
+        "expressive": 12,
+        "genuine": 7,
+        "stock": 6
+      },
+      "noise_parents": 4,
+      "planned_foregrounds": {
+        "clone": 5,
+        "expressive": 12,
+        "genuine": 14,
+        "stock": 6
+      },
+      "seen_provider_voices_in_pending_groups": {
+        "expressive": 12,
+        "stock": 6
+      }
+    },
+    "holdout": {
+      "components": {
+        "clone": 6,
+        "expressive": 12,
+        "genuine": 8,
+        "stock": 6
+      },
+      "noise_parents": 4,
+      "planned_foregrounds": {
+        "clone": 6,
+        "expressive": 12,
+        "genuine": 16,
+        "stock": 6
+      },
+      "seen_provider_voices_in_pending_groups": {
+        "expressive": 12,
+        "stock": 6
+      }
+    }
+  },
+  "sample_rate": 16000,
+  "schema": "chipmunk.audio-short-edit-source-plan/169b",
+  "source_samples": 47648,
+  "status": "metadata_frozen_exact_decode_pending",
+  "stock_pending_candidates": 72
+}

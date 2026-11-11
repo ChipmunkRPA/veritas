@@ -40,6 +40,9 @@ groups with separately checked work licenses and fixed rewrite targets. The
 keeps the source roles and all 52 planned attempts in the record.
 The [relative paragraph comparison](text-elife-relative-paragraph-v292-result.md)
 reports recovered edit locations and false highlights on separate confirmation articles.
+The [editorial-control intake](text-elife-editorial-controls-v301-result.md)
+reports exact source and offset checks for a new set of ordinary edits, including
+the coverage shortfall that stopped the study before scoring.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a

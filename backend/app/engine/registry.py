@@ -123,6 +123,7 @@ class DetectorRegistry:
                            or detector_id == "vid.review.whole_face" and settings.video_whole_face_review)
         regional_review = (detector_id in {"loc.native_regional", "loc.splice"}
                            and settings.image_region_mode == "candidate")
+        boundary_review = detector_id == "img.forensic.sharp_boundary" and settings.image_sharp_boundary_enabled
         for model_id in self.required_models(det):
             model = self.manifest.model(model_id)
             if model is None:
@@ -130,7 +131,8 @@ class DetectorRegistry:
             elif not policy.allows_class(model.licence.class_) and not allow_listed:
                 reasons.append(f"model {model_id} has licence class {model.licence.class_}, denied by the "
                                f"{policy.label} licence policy")
-        if not det.default_enabled and not allow_listed and not sequence_review and not regional_review and not (text_candidate and detector_id == "txt.four_class"):
+        if (not det.default_enabled and not allow_listed and not sequence_review and not regional_review
+                and not boundary_review and not (text_candidate and detector_id == "txt.four_class")):
             reasons.append("not default-enabled and not in allow_detectors")
         if det.superseded_by and self._supersedes(det.superseded_by):
             reasons.append(f"superseded by {det.superseded_by}, which is enabled and installed")

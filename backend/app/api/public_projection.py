@@ -21,7 +21,7 @@ def _identities() -> tuple[dict[str, str], tuple[str, ...]]:
     names: set[str] = set()
     for detector in registry.manifest.detectors:
         if not detector.models:
-            if detector.id == 'img.forensic.local_jpeg_grid':
+            if detector.id in {'img.forensic.local_jpeg_grid', 'img.forensic.sharp_boundary'}:
                 ids[detector.id] = _check_alias(detector.id)
             continue
         ids[detector.id] = 'check.' + hashlib.sha256(detector.id.encode()).hexdigest()[:16]

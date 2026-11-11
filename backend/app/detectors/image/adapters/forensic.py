@@ -9,7 +9,14 @@
 """
 from __future__ import annotations
 
-from app.detectors.image import copy_move, forensics, jpeg_dq, local_jpeg_grid, native_forensics
+from app.detectors.image import (
+    copy_move,
+    forensics,
+    jpeg_dq,
+    local_jpeg_grid,
+    native_forensics,
+    sharp_boundary,
+)
 from app.detectors.image.adapters.common import (
     ALL_PROFILES,
     CPU_ONLY,
@@ -249,6 +256,47 @@ class LocalJpegGridDetector(Detector):
             reference=reference, metrics={"regions_measured": float(count)},
             reasoning="An area may have been saved or cropped separately before it was combined with the image. "
                       "This evidence cannot identify AI generation and carries zero weight in AI confidence.")
+
+
+class SharpBoundaryDetector(Detector):
+    """Record the native sides of an abrupt rectangular boundary."""
+
+    spec = image_spec(sharp_boundary.DETECTOR_ID, "Sharp image boundary inspection", "forensic", InputUnit.IMAGE,
+                      (H2,), ("heatmap", "regions"), lane="cpu", devices=CPU_ONLY, profiles=ALL_PROFILES,
+                      timeout_s=10.0, version="0.1.0")
+
+    def run(self, ctx: RunContext) -> DetectorResult:
+        probe = ctx.outputs.probe or {}
+        if (probe.get("format") != "PNG" or probe.get("mode") != "RGB" or probe.get("n_frames") != 1
+                or not sharp_boundary.supported_size(probe.get("width", 0), probe.get("height", 0))):
+            return DetectorResult.not_applicable("Requires a single-frame RGB PNG with both dimensions between 512 and 768 pixels.")
+        pixels = ctx.media.native_pixels()
+        height, width = pixels.shape[:2]
+        boundary = sharp_boundary.measure(pixels)
+        reference = "The check compares color steps along each side of a rectangle with parallel steps three pixels away."
+        if boundary.score <= sharp_boundary.REVIEW_POINT:
+            return DetectorResult(status="ok", observed="No abrupt rectangular boundary met the inspection rule.",
+                                  reference=reference, reasoning="The check can miss smooth blends and other edits.")
+
+        left, top, right, bottom = boundary.box
+        space = {"width": width, "height": height, "scale_to_original": 1.0}
+        title = "Abrupt rectangular boundary"
+        sources = [f"{self.spec.id}:global"]
+        heatmap = ctx.exhibits.heatmap(
+            boundary.contour, semantics="residual", title=title, value_range=(0.0, sharp_boundary.MAX_STEP_RESPONSE),
+            caption="Colored pixels mark measured color steps along the four selected sides.",
+            source_signal_ids=sources, coordinate_space=space, media_ref="original")
+        region = {"region": {"kind": "bbox", "bbox": {"x": left, "y": top, "w": right - left, "h": bottom - top}},
+                  "score": boundary.score}
+        regions = ctx.exhibits.regions([region], title=title, source_signal_ids=sources,
+                                      coordinate_space=space, media_ref="original")
+        aggregate = UnitScore("global", boundary.score, "score")
+        return DetectorResult(
+            status="ok", aggregate=aggregate, unit_scores=[aggregate], exhibit_ids=[heatmap, regions],
+            observed="A sharp rectangular boundary was measured on four sides.", reference=reference,
+            reasoning="Ordinary pasting or a local tone adjustment can create this boundary. It carries zero weight in AI confidence.",
+            metrics={"regions_measured": 1.0},
+            details={"sharp_boundary": {"schema": sharp_boundary.SCHEMA, "sides": boundary.sides}})
 
 
 CM_VERSION = "0.4.0"

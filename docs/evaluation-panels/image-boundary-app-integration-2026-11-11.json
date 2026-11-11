@@ -1,0 +1,68 @@
+{
+  "cases": {
+    "jpeg": {
+      "api_equals_json": true,
+      "detector_status": "not_applicable",
+      "exact_crop": false,
+      "model_name_scan_passed": true,
+      "model_weights_used": false,
+      "named_sharp_boundary_packet": false,
+      "overall_assessment_direction": "unavailable",
+      "overall_probability": null,
+      "pdf_pages": 9,
+      "raw_score": null,
+      "runtime_seconds": 0.0,
+      "scoring_call_after_paid": false,
+      "signed_original_verification": true,
+      "source_check": "Original SHA-256 matched. No unannotated crops were recorded."
+    },
+    "original": {
+      "api_equals_json": true,
+      "detector_status": "ok",
+      "exact_crop": false,
+      "model_name_scan_passed": true,
+      "model_weights_used": false,
+      "named_sharp_boundary_packet": false,
+      "overall_assessment_direction": "unavailable",
+      "overall_probability": null,
+      "pdf_pages": 9,
+      "raw_score": null,
+      "runtime_seconds": 0.059,
+      "scoring_call_after_paid": true,
+      "signed_original_verification": true,
+      "source_check": "Original SHA-256 matched. No unannotated crops were recorded."
+    },
+    "seam": {
+      "api_equals_json": true,
+      "detector_status": "ok",
+      "exact_crop": true,
+      "model_name_scan_passed": true,
+      "model_weights_used": false,
+      "named_sharp_boundary_packet": true,
+      "overall_assessment_direction": "unavailable",
+      "overall_probability": null,
+      "pdf_pages": 12,
+      "raw_score": 3.0,
+      "runtime_seconds": 0.063,
+      "scoring_call_after_paid": true,
+      "selected_region": {
+        "h": 160,
+        "w": 160,
+        "x": 190,
+        "y": 239
+      },
+      "signed_original_verification": true,
+      "source_check": "Original SHA-256 and 1 unannotated crops matched at their recorded EXIF-oriented coordinates."
+    }
+  },
+  "duplicate_payment_idempotent": true,
+  "format_scope": "single-frame native RGB PNG, 512\u2013768 pixels on each axis",
+  "known_changed_pixels": 25600,
+  "no_detector_before_verified_payment": true,
+  "pipeline_version": "img-2.0-p50",
+  "price_usd": 9.99,
+  "report_template": "veritas-report-2.0.r86",
+  "scope": "isolated paid Quick image app with sharp-boundary detector only; real measurement and exports",
+  "seam_contributes_to_overall_confidence": false,
+  "simulated_provider_transport_only": true
+}

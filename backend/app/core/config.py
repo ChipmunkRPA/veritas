@@ -214,6 +214,7 @@ class Settings(BaseSettings):
 
     # Optional native PNG region evidence; old checks stay available for comparison/rollback.
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
+    image_sharp_boundary_enabled: bool = False
 
     # --- audio (video sound track) ---
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers

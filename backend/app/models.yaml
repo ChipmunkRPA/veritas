@@ -1367,6 +1367,28 @@ detectors:
     citation: "Clean-room implementation. For related JPEG grid work see IPOL articles 283 and 390."
     admission: {decision: pending, evidence: "Native PNG inspection only, zero weight in AI confidence. Two local source-disjoint matched panels, with zero flags among 120 controlled non-target views."}
 
+  - id: img.forensic.sharp_boundary
+    adapter: app.detectors.image.adapters.forensic:SharpBoundaryDetector
+    version: 0.1.0
+    name: Sharp image boundary inspection
+    modality: image
+    family: forensic
+    hypotheses: [H2_localised_manipulation]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["Inspection of abrupt rectangular PNG boundaries only. Smooth blends can leave no cue. The response supplies no authorship direction or confidence."]
+    source_url: "this repository: backend/app/detectors/image/sharp_boundary.py"
+    threat: [partial_edit]
+    training_data: "No weights. The PNG point was fixed on eight separate control groups."
+    coverage_date: "2026-11-11 local matched source panels"
+    input_constraints: ["Single-frame RGB PNG, each native dimension 512–768 pixels."]
+    contamination_sets: []
+    fp_modes: ["Ordinary same-image pasting, compositing with another photograph, and local tone changes can leave a sharp boundary."]
+    citation: "Native boundary prominence comparison and second-panel confirmation in docs/image-boundary-prominence-holdout-2026-11-11.md."
+    admission: {decision: pending, evidence: "Optional native inspection only, zero weight. Seven of twelve sharp PNG locations, one of 72 ordinary control highlights, and no feathered locations in the fixed second panel."}
+
   - id: img.forensic.copymove
     adapter: app.detectors.image.adapters.forensic:CopyMoveDetector
     version: 0.4.0

@@ -23,7 +23,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.public_projection import alias_signal
-from app.core.canonical import canonical_hash, canonical_json
+from app.core.canonical import FLOAT_DP, canonical_hash, canonical_json
+from app.detectors.image import sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence.image_eligibility import validate_gate, validate_inspection_coverage
 from app.evidence.source_geometry import pixel_bounds
@@ -296,6 +297,11 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
 
 
 def _copy_for(semantics: str, creator: str) -> tuple[str, str, str, str]:
+    if creator == sharp_boundary.DETECTOR_ID:
+        return ("Sharp boundary to review", "Boundary contrast", "relative response",
+                "The four sides of this rectangle have abrupt color steps compared with nearby parallel steps. "
+                "Pastes, local adjustments and ordinary rectangular edges can produce this pattern. "
+                "This evidence carries zero weight in AI confidence.")
     if creator == "img.forensic.local_jpeg_grid":
         return ("Local compression-grid difference", "Earlier grid difference", "relative response",
                 "This area carries a different prior JPEG block alignment from the dominant grid. "
@@ -312,6 +318,26 @@ def _copy_for(semantics: str, creator: str) -> tuple[str, str, str, str]:
                 "This map compares compression traces across the image. Different save histories or smooth and saturated areas can explain a difference; it is not specific to AI editing.")
     return ("Local editing candidate", "Localisation response", "uncalibrated score",
             "A local editing check marked this region. The response is not a calibrated pixel probability, and ordinary edits or unfamiliar images may also trigger it.")
+
+
+def _sharp_boundary_measurements(signals: list[dict]) -> list[dict]:
+    if len(signals) != 1:
+        raise PacketIntegrityError("Sharp boundary evidence requires one supporting check")
+    signal = signals[0]
+    details = (signal.get("details") or {}).get("sharp_boundary") or {}
+    sides = details.get("sides") or {}
+    order = ("left", "top", "right", "bottom")
+    score = signal.get("raw_score")
+    minimum = round(sharp_boundary.REVIEW_POINT, FLOAT_DP)
+    maximum = sharp_boundary.MAX_STEP_RESPONSE + .00001  # Native float32 accumulation.
+    if (signal.get("detector_id") != sharp_boundary.DETECTOR_ID or signal.get("effective_weight") != 0
+            or signal.get("raw_kind") != "score" or details.get("schema") != sharp_boundary.SCHEMA
+            or set(sides) != set(order) or any(type(sides[key]) not in (int, float) or not 0 < sides[key] <= maximum for key in order)
+            or type(score) not in (int, float) or not minimum <= score <= maximum
+            or abs(score - math.prod(sides[key] for key in order) ** .25) > .000002):
+        raise PacketIntegrityError("Sharp boundary evidence differs from its recorded four-side response")
+    return [{"label": "Combined boundary response", "value": score, "unit": "relative response"},
+            *[{"label": f"{key.title()} side", "value": sides[key], "unit": "relative response"} for key in order]]
 
 
 def _signals_for(result: dict[str, Any], heat: dict[str, Any]) -> list[dict[str, Any]]:
@@ -383,8 +409,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     eligible = [e for e in exhibits if e.get("kind") == "heatmap" and e.get("semantics") in {"error_level", "residual", "p_manipulated"}
                 and e.get("frame_pts") is None and e.get("media_ref") in {"original", "analysis_copy"}]
     diagnostics = []
-    for heat in sorted(eligible, key=lambda e: (0 if e.get("created_by", "").startswith("loc.") else 1,
-                                               e.get("semantics", ""), e["id"])):
+    def priority(heat: dict) -> tuple[int, str, str]:
+        creator = heat.get("created_by", "")
+        rank = 0 if creator.startswith("loc.") else 1 if creator == sharp_boundary.DETECTOR_ID else 2
+        return rank, heat.get("semantics", ""), heat["id"]
+
+    for heat in sorted(eligible, key=priority):
         signals = _signals_for(result, heat)
         if not signals:
             diagnostics.append("A map without a successful supporting check was omitted.")
@@ -512,6 +542,15 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     observation += f", compared with {nearby:.3f} in the surrounding crop"
                     limits.append("The surrounding crop is context, not a matched control; texture and lighting may differ.")
                 observation += "."
+                boundary_cue = heat.get("created_by") == sharp_boundary.DETECTOR_ID
+                if boundary_cue:
+                    if (gw, gh, sx, sy) != (width, height, 1.0, 1.0):
+                        raise PacketIntegrityError("Sharp boundary evidence must use native source coordinates")
+                    measurements = _sharp_boundary_measurements(signals)
+                    observation = (f"The combined boundary response was {measurements[0]['value']:.3f}. "
+                                   "Each side showed a stronger color step than the nearby comparison lines.")
+                    limits = ["The check measures abrupt, roughly rectangular seams. Soft edges and irregular edits can be missed.",
+                              "An ordinary object edge or a conventional edit can produce the same evidence."]
                 refs = signal_ids | {heat["id"], regions["id"]}
                 findings = [f["id"] for f in result.get("findings", [])
                             if f.get("family") not in {"coverage", "F9_distribution_conditions"}
@@ -537,6 +576,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                           "derivation": {"version": VERSION, "selection": "relative_top_5_percent" if relative else "recorded_region",
                                          "overlay": "relative_orange_nearest_neighbour", "max_alpha": 150 / 255,
                                          "crop_padding": "12% of region long side, minimum 24 source pixels"}}
+                if boundary_cue:
+                    packet["overlay_legend"] = "Orange shows the recorded four sides and their relative contrast. The outlined interior gives location context."
                 if localisation:
                     packet["localisation"] = localisation
                     packet["derivation"]["selection"] = "recorded_connected_component"

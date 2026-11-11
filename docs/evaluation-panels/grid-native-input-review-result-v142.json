@@ -1,0 +1,49 @@
+{
+  "schema": "chipmunk.grid-native-input-review-execution/142",
+  "status": "complete",
+  "measurement": {
+    "schema": "chipmunk.grid-native-input-review-result/142",
+    "status": "complete",
+    "source_slots": 16,
+    "planned_clips": 32,
+    "reviewed_clips": 32,
+    "availability": {
+      "native_video_and_audio_available": 32
+    },
+    "verified_pngs": 2400,
+    "verified_mono16k_samples": 1524736,
+    "exact_full_video_duplicate_groups": 0,
+    "exact_pcm_duplicate_groups": 0,
+    "source_and_exact_content_components": 16,
+    "private_reviewed_inputs_sha256": "e6f8c5994909535d6ccd6b82697ac69f39ccfb84b3349ffe53081504f33f8704",
+    "private_components_sha256": "468148e2829ebde8063ab03b8e2b94279339bbf8ad6ef9cebd9c0f760c55a705",
+    "freeze_sha256": "2668be9eab8e04530b93fddc18b352b6978f6d34961b541856b59830ed7277b4",
+    "new_neural_calls": 0,
+    "mpg_decoder_calls": 0,
+    "defaults_changed": false,
+    "scope": "Independent saved-bank file/RGB/PCM/CRC and rational-clock consistency only. Prior acquisition checks are receipt-bound, not whole-ZIP replayed; original MPG is not decoded. Unavailable stays unavailable, not original. No source-authenticity, people/unknown-ancestry/pretraining independence or detection-accuracy claim."
+  },
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "bind",
+    "batch": 0,
+    "child_started": true,
+    "child_exit_code": 0,
+    "guard": null,
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [],
+    "duration_s": 8.456646332982928,
+    "sampled_tree_rss_lower_bound_bytes": 54067200,
+    "minimum_available_ram_bytes": 9088548864,
+    "resource_journal_sha256": "04260a45540497de9fb51837cf8435633d7ced789fdcb3e21b8544c209fb5bac",
+    "runtime_sha256": "d6794ea8979d2c22dc14b1bca66646422d26762f54d348af28f433cd38b3e984",
+    "worker_receipt_sha256": "f1490afc4168a89ec9fa28fc6a853b75fde726d147e9fed83405745131e03b25",
+    "new_neural_calls": 0,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "result_sha256": "f1490afc4168a89ec9fa28fc6a853b75fde726d147e9fed83405745131e03b25",
+  "profile_sha256": "6136b9043a39f7839318a529ae5363d574ce466b31550ea32a0596629b180f73",
+  "scope": "Full32 saved-input byte/pixel/PCM and rational-clock replay only; no source authenticity, distinct-person, pretraining-independence or detection-performance claim."
+}

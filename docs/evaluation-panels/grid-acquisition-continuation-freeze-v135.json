@@ -1,0 +1,23 @@
+{
+  "schema": "chipmunk.grid-acquisition-continuation-freeze/135",
+  "code_sha256": {
+    "backend/scripts/grid_acquisition_continuation_v135.py": "fa72f713ec4fdfde47fbd1758b044b98a4737e2751456a1b7920616a2358955e",
+    "backend/tests/test_grid_acquisition_continuation_v135.py": "87e10c932022e2859438d68365d8c39f99ba438e56c2622c7f60d0636f751dc7",
+    "docs/grid-acquisition-continuation-v135-method.md": "9d9dcea709d8dd743d61a1ae9ad711fc6f9bda24c9fa54836d632a71802cfb26"
+  },
+  "private_plan_sha256": "873c403b9839ceb6c79a62cc631b24c6b409dcf960edc6c0b57a5d81bcca5f8d",
+  "original_acquisition_freeze_sha256": "5031ed599aaf9f48978bd9109c340beb3c6f33b8e2a51fe9ffa5058b01c53fbe",
+  "original_stopped_profile_sha256": "f1fb87f23688f411141dde468f75ca87a0bb880e95c0b45d1d961c68a3b103cf",
+  "original_archive_journal_sha256": "54df21ae35c78f9094d255371bc088a40a387ce6303886812177377e321a6449",
+  "independent_first_source_preflight_sha256": "97a8779c779f26f51c099e37b2f17ac365ceaaea124756f7345820c4b401d5df",
+  "original_source_archives": 16,
+  "retained_complete_archives": 1,
+  "new_stages": 15,
+  "assets_per_new_stage": 1,
+  "preserved_prefix_bytes": 337641472,
+  "missing_tail_bytes": 49600638,
+  "license": "CC-BY-4.0",
+  "transport_change": "First new stage requests only the missing publisher byte range, then copies the frozen prefix and new tail into a NEW archive for full size/MD5 verification. Later unattempted sources use one full archive per new bounded stage, rather than two. Original failed stage, prefix and first complete archive remain read-only; no source substitution or neural result selection.",
+  "limits": "Per data stage unchanged: 900s, 1.5GiB sampled descendant RSS, 3GiB initial RAM/project/archive disk, 1.5GiB running reserves. More acquisition stages are explicitly planned; this is not a claim of the original eight-batch procedure passing.",
+  "new_neural_calls": 0
+}

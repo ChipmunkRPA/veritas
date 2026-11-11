@@ -8,4 +8,4 @@ Use the CLI to verify an existing snapshot locally. Add `--download` to retrieve
 PYTHONPATH=backend python -m scripts.fetch_image_flux_klein_assets_v271 /path/to/snapshot
 ```
 
-The model uses a reference image to generate a new image. A regional localization evaluation must verify the generated output and apply a predetermined source-coordinate composition. The separate geometry check will determine whether that procedure can produce useful benchmark inputs. No detector score or real-source edit follows from asset verification. [Runtime and license review](generator-components-and-runtime-v40-review.md)
+The model uses a reference image to generate a new image. A regional localization evaluation must verify the generated output and apply a predetermined source-coordinate composition. The separate authored geometry check verified that construction on two inputs. Detector scoring and real-source generation are separate stages. [Geometry result](image-flux-reference-edit-v271-result.md) · [Runtime and license review](generator-components-and-runtime-v40-review.md)

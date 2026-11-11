@@ -1,0 +1,118 @@
+{
+  "schema": "chipmunk.image-flux-reference-edit-freeze/271",
+  "code_sha256": {
+    "backend/scripts/image_flux_reference_edit_v271.py": "eb8f1bbf2a11d1132072429967b46f5073e7acb7f127112caf3a54e044c4d011",
+    "backend/scripts/image_pair_truth_v21.py": "d109da5984c695b60a8e7211d4767bdc43f8f0d5c99783048d84ec2c6f817c4b",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_native_v108.py": "fda0a05ea1741eb617a8445c2575c718307ce37e34804209b7aedc80fad547da",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/tests/test_image_flux_reference_edit_v271.py": "6283200af96b68b7f8a7de491e48fece9a5ddfe87fea4695dea4d8f5de6dc570"
+  },
+  "repo": "mlx-community/flux2-klein-4b-4bit",
+  "revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+  "publisher_response_sha256": "e7c45af4cba93e8f6c27fdbd2194de7ce126b753bd9593388b7e3e41086bc086",
+  "assets": {
+    "text_encoder/0.safetensors": {
+      "bytes": 2135435122,
+      "lfs_sha256": "c2d90b9bcb81b6f4205033e592af5117b13bda0e2ef1e4c5d910920d20102234",
+      "git_blob": "edb5b4767121eb1a297220343238e2f9fd3e134f"
+    },
+    "text_encoder/1.safetensors": {
+      "bytes": 127582140,
+      "lfs_sha256": "6f9fd41251913a84119daf7ddb3620f37f7ab65d1bcfdffcd33e858cb36774f7",
+      "git_blob": "09e27c971548d7a36ac422356698c112e64c2d14"
+    },
+    "text_encoder/model.safetensors.index.json": {
+      "bytes": 51369,
+      "lfs_sha256": null,
+      "git_blob": "a6695de5146c5ccb4f3ffcb103693f015220a2e4"
+    },
+    "tokenizer/chat_template.jinja": {
+      "bytes": 4168,
+      "lfs_sha256": null,
+      "git_blob": "01be9b307daa2d425f7c168c9fb145a286e0afb4"
+    },
+    "tokenizer/tokenizer.json": {
+      "bytes": 11422650,
+      "lfs_sha256": "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506",
+      "git_blob": "c7afbed2efcdf019f88ab0572ec29d3bf595dfe2"
+    },
+    "tokenizer/tokenizer_config.json": {
+      "bytes": 703,
+      "lfs_sha256": null,
+      "git_blob": "3ee05b3fdc8db76babb37dbc3730682c4b080b87"
+    },
+    "transformer/0.safetensors": {
+      "bytes": 2145323732,
+      "lfs_sha256": "3a75fc123a9ceb583b0d0202cc37166da3e1fc0ac8cd4a430987ceaf8e845b27",
+      "git_blob": "73b535e7ecd0407334ba75657e096b15cddf3fca"
+    },
+    "transformer/1.safetensors": {
+      "bytes": 34727761,
+      "lfs_sha256": "06998c075c1d9543f17f1cc7ae7170c365cdb3c09a1f78056804a252bb168fd5",
+      "git_blob": "ec1b147b6dfd2b13c24387fe875508aeec31642b"
+    },
+    "transformer/model.safetensors.index.json": {
+      "bytes": 26945,
+      "lfs_sha256": null,
+      "git_blob": "ab03c374ccf768ba3f5950d370a1e2c29e53b13c"
+    },
+    "vae/0.safetensors": {
+      "bytes": 165107943,
+      "lfs_sha256": "efd1802b013d6b17f30946574b1d23c89b8c8e8181876220c00089efac6a0a2c",
+      "git_blob": "4c03deb80666ff451a3ebbd77a5794fc4b86b0f7"
+    },
+    "vae/model.safetensors.index.json": {
+      "bytes": 17584,
+      "lfs_sha256": null,
+      "git_blob": "034182fb9bdf2c7da9c7fe8798d1a99bb4eb3884"
+    }
+  },
+  "acquisition_receipt_sha256": "f27d41114e0853b407a794f683a9151566f2a415502cb91beea50c86c6b374b3",
+  "mflux_version": "0.24.0",
+  "mflux_wheel_sha256": "682368f04a1b2b0871144a8d57b7f7866e84dd0fd2bc3a765d1d57918e21237e",
+  "mflux_notice_sha256": "4a232d09478519580a5c00d6eb9aa402ba4f672ac15fb80edd459ba863769064",
+  "runtime_lock_sha256": "7963b0a3baff27df29efd171be663ff98f002234d61201b6e0492987399e1ce3",
+  "size": [
+    256,
+    256
+  ],
+  "fixtures": {
+    "interior": {
+      "bounds_ltrb_exclusive": [
+        82,
+        96,
+        146,
+        160
+      ],
+      "source_rgb_sha256": "75473eb1e2ba436a999e60e66acccc6b7ef7feae5f94cc2be9941ec4475419f4",
+      "mask_sha256": "0ba569fc3a2ad7c9ab4be1cf9e5e892354e7e17ac8dfc99842793d61049ff4ae"
+    },
+    "edge": {
+      "bounds_ltrb_exclusive": [
+        0,
+        104,
+        64,
+        168
+      ],
+      "source_rgb_sha256": "978222af6ebc65a23832b146975718fc519d99d1764542ed045f9f30ef553a5c",
+      "mask_sha256": "76c04b38c5ccb2e1f75a6172ed3bf5cb69c97392803ba1af3ab06c2504784851"
+    }
+  },
+  "seed": 271004,
+  "prompt": "Remove the bright orange rectangle and fill the gap with the surrounding blue patterned background. Keep the framing and other objects unchanged.",
+  "steps": 4,
+  "guidance": 1.0,
+  "scheduler": "flow_match_euler_discrete",
+  "use_kv_cache": false,
+  "device": "mlx.gpu",
+  "max_generator_calls": 3,
+  "conditional_repeat_max_elapsed_seconds": 600,
+  "conditional_repeat_max_mlx_peak_bytes": 5368709120,
+  "initial_ram_bytes": 6442450944,
+  "max_sampled_tree_rss_bytes": 6442450944,
+  "seconds_limit": 900,
+  "scope": "Authored RGB geometry and runtime only. The generator takes a reference image. The mask is applied in a separate source-coordinate composition. No project photos, detector calls, or performance claim."
+}

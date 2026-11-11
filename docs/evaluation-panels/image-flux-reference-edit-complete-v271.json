@@ -1,0 +1,94 @@
+{
+  "schema": "chipmunk.image-flux-reference-edit-result/271",
+  "status": "complete",
+  "freeze_sha256": "ad88fb0eda60b9427536ea8a2a8ca049a603d48996fa44ce27f96e2512f0ceff",
+  "attempt_journal_sha256": "e4783b9ef2644d4da7843c274ad74a752ceb53f2728fa1552cef07e46314c870",
+  "runtime": {
+    "python": "3.12.6",
+    "architecture": "arm64",
+    "packages": 56,
+    "mflux_wheel_files_exact": 1059
+  },
+  "cases": [
+    {
+      "slot": "interior",
+      "case": "interior",
+      "status": "qualified_geometry",
+      "png_sha256": {
+        "source": "510e1841b2f0ab5c5b1af7d1e05fda0b691d72c7038866f374857ee31d13f1c5",
+        "mask": "d872c5392eb9df202804fa225d1197f07f9d3506b889d810b785c38b86642b0f",
+        "raw": "cdf678dd00d851f3c0441d2f6228d497a792411de2585d224d51db5dedeb6d65",
+        "composite": "d854cfaca40aed68791f2cb15f09f1ed025e44617b5569d1e3d130ab00722e97",
+        "changed": "d872c5392eb9df202804fa225d1197f07f9d3506b889d810b785c38b86642b0f"
+      },
+      "changed_pixels": 4096,
+      "support_pixels": 4096,
+      "outside_support_changes": 0,
+      "truth_mask_sha256": "913af37646a3a5cf2357df541e0e238767626c9a3219b7d5db9ad33c9ce7f7a0",
+      "ordinary_controls": {
+        "tone": {
+          "rgb_sha256": "336d2bf7d1aede914be5a3e3d2c58a5bb81826aa5cf3126697a7c27832785742",
+          "changed_pixels": 4096,
+          "ai_generation_used": false
+        },
+        "blur": {
+          "rgb_sha256": "578bb5bcd0a45fd934147eced5ac62f3171acd5b148595cd4f92b9a61290d47c",
+          "changed_pixels": 732,
+          "ai_generation_used": false
+        }
+      },
+      "scope": "Observed RGB changes after an explicit source-coordinate composition of a raw reference-edit output.",
+      "raw_changes_inside": 4096,
+      "raw_changes_outside": 61440,
+      "source_rgb_sha256": "75473eb1e2ba436a999e60e66acccc6b7ef7feae5f94cc2be9941ec4475419f4",
+      "raw_rgb_sha256": "51facd4e724cb2a9a76851b6bcfac2a795b5733924689c01b9234a59ccce7f5c",
+      "declared_mask_sha256": "0ba569fc3a2ad7c9ab4be1cf9e5e892354e7e17ac8dfc99842793d61049ff4ae",
+      "composite_rgb_sha256": "21931b79663dd9f0f48c8bb08afa7cdc8c819c9860d6bde1e6e41e34d1d390d2",
+      "outside_source_rgb_sha256": "114fe18b0aead6e550974d968495e1f4f87d057b810063b78fb506e799a9a5b0",
+      "outside_composite_rgb_sha256": "114fe18b0aead6e550974d968495e1f4f87d057b810063b78fb506e799a9a5b0"
+    },
+    {
+      "slot": "edge",
+      "case": "edge",
+      "status": "qualified_geometry",
+      "png_sha256": {
+        "source": "5397a9ca6687c551b2ebb70539f150271f421e7a740636f3ced65956a1e91ee3",
+        "mask": "6014fa80db976268631806ee6c9d6cec9e468cc0a1900723000401d403594520",
+        "raw": "e60daddae0ebf3f13f94813209a04ec3e04f663042dfef5a2e46adc9c1e718b3",
+        "composite": "44d319792ec516d7e77c8f2dc5fb495e7b14223fa225a794b7b207eaff358307",
+        "changed": "6014fa80db976268631806ee6c9d6cec9e468cc0a1900723000401d403594520"
+      },
+      "changed_pixels": 4096,
+      "support_pixels": 4096,
+      "outside_support_changes": 0,
+      "truth_mask_sha256": "37759a3acf480b8f8bec1b739ab09897ed62ff78b2c937315982cd75a6228fd8",
+      "ordinary_controls": {
+        "tone": {
+          "rgb_sha256": "a67f305f0c57e2e0ad3e95b66e2eed9677bc18eb0a2425a44760b0f0ca21a4db",
+          "changed_pixels": 4096,
+          "ai_generation_used": false
+        },
+        "blur": {
+          "rgb_sha256": "16336d839ca81a6202cffed469290f0e120cdf4b4d15a98e833cc2891a737637",
+          "changed_pixels": 558,
+          "ai_generation_used": false
+        }
+      },
+      "scope": "Observed RGB changes after an explicit source-coordinate composition of a raw reference-edit output.",
+      "raw_changes_inside": 4096,
+      "raw_changes_outside": 61440,
+      "source_rgb_sha256": "978222af6ebc65a23832b146975718fc519d99d1764542ed045f9f30ef553a5c",
+      "raw_rgb_sha256": "26d6941a9f290098fa41b80a2c2c32c46485ac67ebe729b8722bb8b5b9f83050",
+      "declared_mask_sha256": "76c04b38c5ccb2e1f75a6172ed3bf5cb69c97392803ba1af3ab06c2504784851",
+      "composite_rgb_sha256": "90d3b13534f07198eebcd0a3f4bc6c79b9ff097d2c9965fbc80800e050024ee0",
+      "outside_source_rgb_sha256": "5f4893786be670ab90617e5e60c1ce92aa30ea8cce7603501cd547516e22eeea",
+      "outside_composite_rgb_sha256": "5f4893786be670ab90617e5e60c1ce92aa30ea8cce7603501cd547516e22eeea"
+    }
+  ],
+  "new_neural_calls": 2,
+  "detector_calls": 0,
+  "repeat_exact_raw_rgb": null,
+  "mlx_peak_active_memory_bytes": 5761646782,
+  "network_attempts": 0,
+  "project_photos_used": 0
+}

@@ -33,6 +33,11 @@ reviewers a new five-source writing cohort with work-level attribution, an
 immutable publisher revision and exact replacement targets. The receipt records
 all nine dispositions and contains no excerpts.
 
+The [image edit construction check](image-flux-reference-edit-v271-result.md)
+uses public, authored RGB fixtures to verify exactly which pixels change when a
+generator output is composed into a source region. A separate verifier checks
+the pinned bundle without running the model or accessing project photos.
+
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and
 caller-owned directories. It compares aggregate decisions and clean-to-noisy

@@ -55,6 +55,9 @@ The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md) applies
 the same frozen rule to a new genre and counts ordinary human replacements.
 The [practical DOCX comparison](writing-practical-notice-transfer-2026-11-11.md)
 binds both human and generated replacements to exact extracted paragraph positions.
+The [correspondence holdout](writing-correspondence-transfer-2026-11-11.md)
+uses separate archival sources and synthetic multipart email containers. It
+counts both useful paragraph locations and ordinary replacements flagged.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -89,6 +92,9 @@ with natural repetitions in both PNG and JPEG90.
 The [boundary blend comparison](image-boundary-blend-transfer-2026-11-11.md)
 reconstructs the exact masks for sharp and feathered edits and verifies the
 format-specific current checks against matched controls.
+The [noise-guided image comparison](image-noise-region-candidate-2026-11-11.md)
+matches the same input digests and evaluates a separate checkpoint at its
+publisher point and two points fitted on disjoint controls.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -97,6 +103,9 @@ retrospective scoring.
 The [lip-sync coverage comparison](video-lipsync-mouth-coverage-2026-11-11.md)
 checks held mouth frames on real moving footage, matched to original and
 recompressed controls, with a separate authored false-collapse regression.
+The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
+records when a single timing window leaves change unassessed and compares
+exact and approximate picture holds on the same lossy and lossless deliveries.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -133,6 +142,9 @@ responses from two voice representations, with retained misses and exclusions.
 The [two-background transfer](audio-wavlm-two-background-transfer-2026-11-11.md)
 tests the same rule with distinct background recordings and records how each
 condition changes flags and unassessed coverage.
+The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
+uses three native windows per track and holds the speech gate fixed when
+comparing the outcomes under two additional background recordings.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

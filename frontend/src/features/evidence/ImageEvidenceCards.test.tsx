@@ -333,6 +333,23 @@ describe('image evidence cards', () => {
     expect(screen.getByTestId('image-evidence-empty').textContent).toContain('does not establish that the image is unaltered')
   })
 
+  it('shows only the frozen reliability mask matching the measured grid', () => {
+    const mask = { ...artifact('d'), width: 512, height: 320 }
+    const value = { ...evidence, packets: [], overview: { inspection_01_reliability: mask },
+      coverage: { inspection_checks: [check({ reliability_mask_sha256: mask.sha256 })] } }
+    const { rerender } = show(value)
+    fireEvent.click(screen.getByText('Show which areas were checked'))
+    const image = screen.getByAltText('Reliability mask on the measured image grid')
+    expect(image.getAttribute('src')).toBe(evidenceImageUrl(value, mask, 'signed token'))
+    expect(image.getAttribute('width')).toBe('512')
+    expect(screen.getByText(/Black marks cells excluded from region selection/)).toBeTruthy()
+
+    const wrongGrid = { ...value, overview: { inspection_01_reliability: { ...mask, width: 511 } } }
+    rerender(<MemoryRouter><ImageEvidenceContent set={wrongGrid} token="signed token" mediaReady /></MemoryRouter>)
+    expect(screen.queryByText('Show which areas were checked')).toBeNull()
+    expect(screen.getByText(/12.5% of the measured grid was excluded/)).toBeTruthy()
+  })
+
   it('separates image eligibility from bounded display and keeps exact near-threshold responses', () => {
     const rounded = { ...gate(.49999999999999994, false), score: .5, score_hex: '0x1.fffffffffffffp-2' }
     const { unmount } = show({ ...evidence, packets: [], coverage: { inspection_checks: [check({ candidate_eligibility: rounded })] } })

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { eligibilityView, inspectionCheckLabel, inspectionCounts } from './imageEligibility'
 import { measurementValue, type CandidateEligibility, type ImageInspectionCheck } from './imagePackets'
 
@@ -14,7 +15,9 @@ export function CandidateEligibilityNote({ gate }: { gate: CandidateEligibility 
   </div>
 }
 
-export default function ImageInspectionChecks({ checks }: { checks: ImageInspectionCheck[] }) {
+export default function ImageInspectionChecks({ checks, coverageMap }: {
+  checks: ImageInspectionCheck[]; coverageMap: (check: ImageInspectionCheck) => ReactNode
+}) {
   if (!checks.length) return null
   return <section className="mt-5 rounded-md border border-border p-4" aria-label="Image inspection coverage" data-testid="image-inspection-checks">
     <h3 className="m-0 text-body font-medium text-text">How inspection regions were selected</h3>
@@ -42,6 +45,7 @@ export default function ImageInspectionChecks({ checks }: { checks: ImageInspect
         </> : <p className="mt-3 mb-0 text-small text-text-muted">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>}
         {check.map_grid && <p className="mt-3 mb-0 text-caption text-text-muted">Measured grid {check.map_grid.join(' × ')}. Displaying a larger image does not add detection detail.</p>}
         {typeof exclusion === 'number' && Number.isFinite(exclusion) && exclusion >= 0 && exclusion <= 1 && <p className="mt-2 mb-0 text-caption text-text-muted">{measurementValue(exclusion * 100)}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>}
+        {coverageMap(check)}
       </article>
     })}</div>
     <p className="mt-4 mb-0 text-caption text-text-muted">This coverage lists checks with recorded maps. Skipped, failed or unavailable checks remain in the analysis check record; their absence here is not a negative finding.</p>

@@ -261,7 +261,22 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
           {showAll ? 'Show first 3 regions' : `Show all ${set.packets.length} recorded regions`}
         </Button>}
       </>}
-      <ImageInspectionChecks checks={set.coverage?.inspection_checks ?? []} />
+      <ImageInspectionChecks checks={set.coverage?.inspection_checks ?? []} coverageMap={check => {
+        const grid = check.map_grid
+        const sha = check.reliability_mask_sha256
+        if (!grid || !sha) return null
+        const asset = Object.values(set.overview ?? {}).find(item => item.sha256 === sha && item.media_type === 'image/png'
+          && item.width === grid[0] && item.height === grid[1])
+        if (!asset) return null
+        return <details className="mt-3 max-w-sm text-small text-text-muted">
+          <summary className="cursor-pointer">Show which areas were checked</summary>
+          <figure className="m-0 mt-2">
+            <EvidencePicture key={`${sha}:${token}`} set={set} artifact={asset} token={token} ready={mediaReady}
+              alt="Reliability mask on the measured image grid" />
+            <figcaption className="mt-2 text-caption">White marks cells that passed this check’s reliability filter. Black marks cells excluded from region selection.</figcaption>
+          </figure>
+        </details>
+      }} />
       {set.omitted_regions > 0 && <p className="mt-4 mb-0 text-small text-text-muted">{set.omitted_regions} additional candidate {set.omitted_regions === 1 ? 'region is' : 'regions are'} not included in these evidence cards.</p>}
       {set.limitations.length > 0 && <ul className="mt-4 mb-0 pl-4 space-y-1 text-small text-text-muted list-disc">
         {set.limitations.map((line, i) => <li key={i}>{line}</li>)}

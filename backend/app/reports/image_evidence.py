@@ -147,10 +147,23 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 data = _asset_bytes(asset, store)
                 comparison["images"].append({"role": role, "label": label, "sha256": asset["sha256"],
                     "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
+    inspection_checks = []
+    overview = (document.get("overview") or {}).values()
+    for check in (document.get("coverage") or {}).get("inspection_checks", []):
+        display = inspection_check_view(check)
+        sha = check.get("reliability_mask_sha256")
+        if sha and display["map_grid"] and not withheld:
+            for asset in overview:
+                if (asset["sha256"] == sha and asset["media_type"] == "image/png"
+                        and [asset["width"], asset["height"]] == list(display["map_grid"])):
+                    data = _asset_bytes(asset, store)
+                    display["coverage_map"] = "data:image/png;base64," + base64.b64encode(data).decode("ascii")
+                    break
+        inspection_checks.append(display)
     return {"available": True, "id": document["id"], "version": document["version"], "sha256": document["sha256"],
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
-            "inspection_checks": [inspection_check_view(check) for check in document.get("coverage", {}).get("inspection_checks", [])],
+            "inspection_checks": inspection_checks,
             "comparison": comparison, **copy_checks,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}

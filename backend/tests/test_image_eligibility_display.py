@@ -1,10 +1,14 @@
 """Display regressions; source/gate binding validation is tested by packet tests."""
 from __future__ import annotations
 
+import base64
 import copy
+import io
 import math
 
+import pymupdf
 import pytest
+from PIL import Image
 from test_image_evidence_reports import packet_snapshot
 
 from app.reports import engine, image_evidence
@@ -65,8 +69,40 @@ def test_no_packet_report_still_displays_gate_and_incomplete_coverage(tmp_path, 
     assert "12.5% of the measured grid was excluded" in html
     assert "not a region or pixel probability" in html
     assert "absence here is not a negative finding" in html
-    assert "No candidate regions are shown in this report" in html
+    assert "No local editing candidates are shown. The coverage above explains what was measured and withheld." in html
     assert "Private implementation" not in html and "loc.private" not in html
     if profile in ("summary", "newsroom"):
         assert "image-evidence evidence-appendix" in html
     assert snapshot_hash(snapshot) == before
+
+
+@pytest.mark.parametrize("profile, redacted", [("standard", False), ("standard", True), ("newsroom", False)])
+def test_report_displays_only_exact_recorded_reliability_mask(tmp_path, monkeypatch, profile, redacted):
+    snapshot, store = packet_snapshot(tmp_path, profile)
+    mask = Image.new("L", (8, 4), 255)
+    mask.paste(0, (0, 0, 1, 4))
+    buffer = io.BytesIO()
+    mask.save(buffer, format="PNG")
+    data = buffer.getvalue()
+    sha = store.put_bytes(data).sha256
+    frozen = copy.deepcopy(snapshot.image_evidence)
+    frozen.update(version="image-evidence-3", packets=[],
+                  coverage={"inspection_checks": [{**check(), "map_grid": [8, 4], "reliability_mask_sha256": sha}]},
+                  overview={"inspection_01_reliability": {"sha256": sha, "width": 8, "height": 4,
+                                                          "media_type": "image/png"}})
+    snapshot = snapshot.model_copy(update={"image_evidence": frozen,
+                                           "report": snapshot.report.model_copy(update={"redacted": redacted})})
+    monkeypatch.setattr(image_evidence, "verified_set", lambda value: value.image_evidence)
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    html = engine.render_html(snapshot, embed_fonts=False)
+    uri = "data:image/png;base64," + base64.b64encode(data).decode("ascii")
+    expected = not redacted and profile != "newsroom"
+    assert (uri in html) is expected
+    assert ("Black marks cells excluded from region selection" in html) is expected
+    assert "12.5% of the measured grid was excluded" in html
+    assert {"packet_id": None, "role": "inspection_01_reliability", "sha256": sha} in image_evidence.manifest(snapshot)["artifacts"]
+    if expected:
+        rendered = engine.render_pdf(snapshot)
+        with pymupdf.open(stream=rendered.pdf, filetype="pdf") as pdf:
+            embedded = [pymupdf.Pixmap(pdf, image[0]) for page in pdf for image in page.get_images()]
+            assert any((item.width, item.height) == mask.size and item.samples == mask.tobytes() for item in embedded)

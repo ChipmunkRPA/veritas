@@ -53,6 +53,14 @@ def packet_factory(tmp_path):
                 page.set_rotation(90)
                 pdf.save(path)
                 pdf.close()
+            elif ext == ".eml":
+                from email.message import EmailMessage
+
+                message = EmailMessage()
+                message.set_content("😀 " + text)
+                message.add_alternative("<p>Alternate fixture body.</p>", subtype="html")
+                message.add_attachment("Excluded fixture attachment.", filename="private-attachment-name.txt")
+                path.write_bytes(message.as_bytes())
             elif ext != ".pdf":
                 path.write_text("😀 " + text)
             source = store.put_bytes(path.read_bytes())
@@ -62,7 +70,8 @@ def packet_factory(tmp_path):
             sents = segment(doc)
             decoded = {"text": doc.text, "paragraphs": doc.paragraphs, "source_map": doc.source_map,
                        "meta": doc.meta, "sentences": [dataclasses.asdict(s) for s in sents], "words": sum(s.n_words for s in sents)}
-            analysis = Analysis(id="document-fixture", kind="document", filename=path.name, content_type="application/pdf" if ext == ".pdf" else "text/plain",
+            content_type = {".pdf": "application/pdf", ".eml": "message/rfc822"}.get(ext, "text/plain")
+            analysis = Analysis(id="document-fixture", kind="document", filename=path.name, content_type=content_type,
                                 size_bytes=source.size_bytes, sha256=source.sha256, status="done", revision=1, result_schema_version=2)
             db.add(analysis)
             db.flush()

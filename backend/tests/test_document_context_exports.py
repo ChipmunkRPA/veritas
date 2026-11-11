@@ -12,8 +12,44 @@ from test_document_packets import packet_factory as packet_factory
 from test_multimedia_evidence_reports import evidence_case as evidence_case
 
 from app.core.canonical import canonical_hash
-from app.reports import engine, multimedia_evidence
+from app.evidence.document_packets import build_packet_set, packet_hash
+from app.reports import engine, multimedia_evidence, public_package
 from app.reports.snapshot import SnapshotCoverage
+from app.reports.specimens import specimen
+from app.storage.objects import ObjectIntegrityError
+
+
+def test_email_coverage_is_source_bound_in_pdf_and_json(packet_factory, monkeypatch):
+    db, store, analysis, result, decoded, _ = packet_factory(".eml")
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["coverage"]["email"] == decoded["meta"]["email"]
+    assert evidence["coverage"]["email"]["body_part"] == "1.1.1"
+    assert len(evidence["coverage"]["email"]["attachments"]) == 1
+    forged = copy.deepcopy(evidence)
+    forged["coverage"]["email"]["body_part"] = "1.2"
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(ObjectIntegrityError, match="email coverage"):
+        multimedia_evidence.verify_assets(forged, store)
+
+    snapshot = specimen("document", "standard")
+    report_result = {**copy.deepcopy(snapshot.result), "signals": result["signals"]}
+    report_result["input"].update(sha256=analysis.sha256, filename=analysis.filename,
+                                 mime_sniffed=analysis.content_type, size_bytes=analysis.size_bytes)
+    report_result["manifest"]["sampling"] = copy.deepcopy(result["manifest"]["sampling"])
+    evidence.update(analysis_id=snapshot.analysis.id, revision=snapshot.analysis.revision,
+                    original_result_hash=canonical_hash(report_result))
+    evidence["sha256"] = packet_hash(evidence)
+    snapshot = snapshot.model_copy(update={"result": report_result, "evidence": evidence,
+        "media": snapshot.media.model_copy(update={"sha256": analysis.sha256, "filename": analysis.filename,
+            "content_type": analysis.content_type, "size_bytes": analysis.size_bytes})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    assert public_package._evidence(snapshot)["coverage"]["email"] == evidence["coverage"]["email"]
+    rendered = engine.render_pdf(snapshot)
+    text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert not rendered.refused
+    assert "The extracted plain-text body is MIME part 1.1.1. 1 attachment was outside the analysis." in text
+    assert "private-attachment-name.txt" not in text
+    assert "source pages have no mapped text" not in text
 
 
 @pytest.mark.parametrize("evidence_case", ["document"], indirect=True)

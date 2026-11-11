@@ -112,6 +112,15 @@ describe('ordinary document passage inspection', () => {
     expect(within(details).getByText('Bounds in unrotated PDF points [15, 20, 500, 680].')).toBeTruthy()
   })
 
+  it('shows the selected email body part and omitted attachment count without attachment names', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, email: { body_part: '1.1.1', body_content_type: 'text/plain',
+      attachments: [{ filename: 'private-attachment-name.txt' }, { filename: 'another.txt' }] } } })
+    expect(screen.getByText('The extracted plain-text body is MIME part 1.1.1. 2 attachments were outside the analysis.')).toBeTruthy()
+    expect(screen.queryByText(/private-attachment-name/)).toBeNull()
+    expect(screen.getByText(/headers and writing scores do not authenticate a sender/)).toBeTruthy()
+  })
+
   it('shows the frozen PDF highlight first and switches to its unmodified original crop', () => {
     const item = { ...packet, artifacts: { context: asset('1', 'context'), crop: asset('2', 'crop'), overlay: asset('3', 'overlay') } }
     show(evidence([item]))

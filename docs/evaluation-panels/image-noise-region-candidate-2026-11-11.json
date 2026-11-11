@@ -1,0 +1,1450 @@
+{
+  "comparison": {
+    "jpeg75": {
+      "boundary_prominence": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 6,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 6,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 6,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 6,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 6,
+              "views": 12
+            },
+            "original": {
+              "flagged": 6,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 36,
+            "flagged_source_groups": 6,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 8,
+            "flagged_source_groups": 8,
+            "mean_iou": 0.360894,
+            "mean_recall": 0.360894,
+            "useful_localizations": 6,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 3,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 3,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "original": {
+              "flagged": 3,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 18,
+            "flagged_source_groups": 3,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 3,
+            "flagged_source_groups": 3,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 3,
+            "flagged_source_groups": 3,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "mean_iou": 0.499566,
+            "mean_recall": 0.499566,
+            "useful_localizations": 4,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 3,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 3,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 3,
+              "views": 6
+            },
+            "original": {
+              "flagged": 3,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 18,
+            "flagged_source_groups": 3,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 3,
+            "flagged_source_groups": 3,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 3,
+            "flagged_source_groups": 3,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 3,
+            "flagged_source_groups": 3,
+            "mean_iou": 0.222222,
+            "mean_recall": 0.222222,
+            "useful_localizations": 2,
+            "views": 6
+          }
+        }
+      },
+      "current": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 1,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 12
+            },
+            "original": {
+              "flagged": 1,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 7,
+            "flagged_source_groups": 2,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.023096,
+            "mean_recall": 0.052975,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.063628,
+            "mean_recall": 0.092936,
+            "useful_localizations": 1,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged": 0,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.037761,
+            "mean_recall": 0.039495,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged": 1,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 7,
+            "flagged_source_groups": 2,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.008431,
+            "mean_recall": 0.066455,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.127257,
+            "mean_recall": 0.185872,
+            "useful_localizations": 1,
+            "views": 6
+          }
+        }
+      },
+      "format_control_point": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 3,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "original": {
+              "flagged": 2,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 13,
+            "flagged_source_groups": 3,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.034278,
+            "mean_recall": 0.034278,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.04551,
+            "mean_recall": 0.04551,
+            "useful_localizations": 1,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 2,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged": 1,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 7,
+            "flagged_source_groups": 2,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged": 1,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 6,
+            "flagged_source_groups": 1,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.068557,
+            "mean_recall": 0.068557,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.091019,
+            "mean_recall": 0.091019,
+            "useful_localizations": 1,
+            "views": 6
+          }
+        }
+      },
+      "half_point": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 11,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 9,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 10,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 9,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 9,
+              "views": 12
+            },
+            "original": {
+              "flagged": 10,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 58,
+            "flagged_source_groups": 11,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 10,
+            "flagged_source_groups": 10,
+            "mean_iou": 0.041907,
+            "mean_recall": 0.058651,
+            "useful_localizations": 1,
+            "views": 12
+          },
+          "original": {
+            "flagged": 10,
+            "flagged_source_groups": 10,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 10,
+            "flagged_source_groups": 10,
+            "mean_iou": 0.063241,
+            "mean_recall": 0.080918,
+            "useful_localizations": 1,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 6,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 4,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 5,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 4,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 4,
+              "views": 6
+            },
+            "original": {
+              "flagged": 5,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 28,
+            "flagged_source_groups": 6,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "mean_iou": 0.002247,
+            "mean_recall": 0.002774,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "mean_iou": 0.020128,
+            "mean_recall": 0.020315,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 5,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 5,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 5,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 5,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 5,
+              "views": 6
+            },
+            "original": {
+              "flagged": 5,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 30,
+            "flagged_source_groups": 5,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "mean_iou": 0.081568,
+            "mean_recall": 0.114529,
+            "useful_localizations": 1,
+            "views": 6
+          },
+          "original": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 5,
+            "flagged_source_groups": 5,
+            "mean_iou": 0.106354,
+            "mean_recall": 0.14152,
+            "useful_localizations": 1,
+            "views": 6
+          }
+        }
+      }
+    },
+    "png": {
+      "boundary_prominence": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 2,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 3,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "original": {
+              "flagged": 2,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 13,
+            "flagged_source_groups": 3,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.305339,
+            "mean_recall": 0.305339,
+            "useful_localizations": 5,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged": 1,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 7,
+            "flagged_source_groups": 2,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 4,
+            "flagged_source_groups": 4,
+            "mean_iou": 0.499566,
+            "mean_recall": 0.499566,
+            "useful_localizations": 4,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 1,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "original": {
+              "flagged": 1,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 6,
+            "flagged_source_groups": 1,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.111111,
+            "mean_recall": 0.111111,
+            "useful_localizations": 1,
+            "views": 6
+          }
+        }
+      },
+      "current": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 2,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 2,
+              "views": 12
+            },
+            "original": {
+              "flagged": 2,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 11,
+            "flagged_source_groups": 2,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged": 0,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 2,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 2,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 1,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 2,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 2,
+              "views": 6
+            },
+            "original": {
+              "flagged": 2,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 11,
+            "flagged_source_groups": 2,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 1,
+            "flagged_source_groups": 1,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 2,
+            "flagged_source_groups": 2,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        }
+      },
+      "format_control_point": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 0,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 0,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 0,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 0,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 0,
+              "views": 12
+            },
+            "original": {
+              "flagged": 0,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          },
+          "original": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged": 0,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 0,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 0,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 0,
+              "views": 6
+            },
+            "original": {
+              "flagged": 0,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 0,
+            "flagged_source_groups": 0,
+            "mean_iou": 0.0,
+            "mean_recall": 0.0,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        }
+      },
+      "half_point": {
+        "all_sources": {
+          "control_roles": {
+            "blur": {
+              "flagged": 12,
+              "views": 12
+            },
+            "feathered_processing": {
+              "flagged": 12,
+              "views": 12
+            },
+            "global_processing": {
+              "flagged": 12,
+              "views": 12
+            },
+            "local_contrast": {
+              "flagged": 12,
+              "views": 12
+            },
+            "local_processing": {
+              "flagged": 12,
+              "views": 12
+            },
+            "original": {
+              "flagged": 12,
+              "views": 12
+            }
+          },
+          "controls": {
+            "flagged": 72,
+            "flagged_source_groups": 12,
+            "views": 72
+          },
+          "feathered": {
+            "flagged": 12,
+            "flagged_source_groups": 12,
+            "mean_iou": 0.154727,
+            "mean_recall": 0.164639,
+            "useful_localizations": 2,
+            "views": 12
+          },
+          "original": {
+            "flagged": 12,
+            "flagged_source_groups": 12,
+            "views": 12
+          },
+          "sharp": {
+            "flagged": 12,
+            "flagged_source_groups": 12,
+            "mean_iou": 0.143252,
+            "mean_recall": 0.159099,
+            "useful_localizations": 2,
+            "views": 12
+          }
+        },
+        "kandinsky": {
+          "control_roles": {
+            "blur": {
+              "flagged": 6,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 6,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "original": {
+              "flagged": 6,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 36,
+            "flagged_source_groups": 6,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.093023,
+            "mean_recall": 0.101963,
+            "useful_localizations": 0,
+            "views": 6
+          },
+          "original": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.056516,
+            "mean_recall": 0.065377,
+            "useful_localizations": 0,
+            "views": 6
+          }
+        },
+        "sdxl": {
+          "control_roles": {
+            "blur": {
+              "flagged": 6,
+              "views": 6
+            },
+            "feathered_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "global_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "local_contrast": {
+              "flagged": 6,
+              "views": 6
+            },
+            "local_processing": {
+              "flagged": 6,
+              "views": 6
+            },
+            "original": {
+              "flagged": 6,
+              "views": 6
+            }
+          },
+          "controls": {
+            "flagged": 36,
+            "flagged_source_groups": 6,
+            "views": 36
+          },
+          "feathered": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.216431,
+            "mean_recall": 0.227315,
+            "useful_localizations": 2,
+            "views": 6
+          },
+          "original": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "views": 6
+          },
+          "sharp": {
+            "flagged": 6,
+            "flagged_source_groups": 6,
+            "mean_iou": 0.229988,
+            "mean_recall": 0.252821,
+            "useful_localizations": 2,
+            "views": 6
+          }
+        }
+      }
+    }
+  },
+  "decision": "retain_current_regional_routes",
+  "delivery_formats": [
+    "png",
+    "jpeg75"
+  ],
+  "elapsed_s": 132.22,
+  "forward_counts": {
+    "additional_current_route": 0,
+    "paired_comparison": 192,
+    "separate_control_fit": 64
+  },
+  "freeze": {
+    "code_revision": "9cf1535e050e97490e11634ae2faa6ae55c8611d",
+    "development_sha256": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8",
+    "implementation_sha256": "fc713c39a685e1823d50110b5e8224b78e8dd62a5d176fd485ee1e6349378202",
+    "intake_sha256": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731",
+    "model_revision": "027d6f86b7761eafd0e237cc52a8e1070f05339e",
+    "paired_journal_sha256": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+    "point_grid": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      0.98,
+      1.000001
+    ],
+    "preparation": "full aspect-preserved view, cap short side at 448, no central crop, FP32 CPU",
+    "rule": "smallest point flagging at most one of eight separate control groups per format",
+    "schema": "chipmunk.image-noise-region-candidate/1",
+    "upstream_code_sha256": "5cb7a6a91257635e5bdcdb452d72f091b1de2e39971f86f1d62c2854df97b27f",
+    "weights_sha256": "1906e0d51a0a284008b847a4a2a3835f4263616ce6e7423915b97f46395e7112"
+  },
+  "minimum_useful_overlap": {
+    "iou": 0.3,
+    "recall": 0.5
+  },
+  "peak_rss_bytes": 2300821504,
+  "points": {
+    "jpeg75": {
+      "flagged_source_groups": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        5,
+        3,
+        0,
+        0,
+        0
+      ],
+      "point": 0.95,
+      "point_grid": [
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        0.98,
+        1.000001
+      ],
+      "source_groups": 8
+    },
+    "png": {
+      "flagged_source_groups": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        4,
+        0
+      ],
+      "point": 1.000001,
+      "point_grid": [
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        0.98,
+        1.000001
+      ],
+      "source_groups": 8
+    }
+  },
+  "receipts": {
+    "control_journal_sha256": "d09fdff686d4b6bfa5576bcca9d0b54cbd9b1b10f255e9c85dafccbd3be6d62a",
+    "freeze_sha256": "f6d5811c85c75a1ffef1967af3c2d4d9397c98eb4201d3fb8818b82f56e68192",
+    "points_sha256": "4cbf121632e39eaadca27b51d2003a1b1e855616e82c59794ba2637a2eb2aaa4",
+    "results_sha256": "b10be688950c923d84bd120634fa5e7d37d860bc8ae67b87578e6222896c7d5e"
+  },
+  "runtime": {
+    "epoch": 14,
+    "normalization": "imagenet",
+    "torch": "2.13.0"
+  },
+  "schema": "chipmunk.image-noise-region-candidate/1",
+  "source_groups": {
+    "control_fit": 8,
+    "paired_comparison": 12
+  },
+  "verification": {
+    "current_and_boundary_outcomes_replayed_from_sealed_journals": 384,
+    "matched_inputs_by_exact_sha256": 192,
+    "overlap_and_recall_readbacks": 768
+  }
+}

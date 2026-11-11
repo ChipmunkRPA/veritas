@@ -80,6 +80,12 @@
 {% else %}<p class="caption">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>{% endif %}
 {% if check.map_grid %}<p class="caption">Measured grid {{ check.map_grid | join(' × ') }}. Displaying a larger image does not add detection detail.</p>{% endif %}
 {% if check.excluded_percent is not none %}<p class="caption">{{ check.excluded_percent }}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>{% endif %}
+{% if check.get('coverage_map') %}
+<figure class="inspection-coverage-map">
+<img src="{{ check.coverage_map }}" alt="{{ check.label }} reliability mask on the measured image grid">
+<figcaption class="caption">White marks cells that passed this check’s reliability filter. Black marks cells excluded from region selection.</figcaption>
+</figure>
+{% endif %}
 </article>
 {% endfor %}
 <p class="caption">This coverage lists checks with recorded maps. Skipped, failed or unavailable checks remain in the analysis check record; their absence here is not a negative finding.</p>

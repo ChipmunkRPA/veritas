@@ -318,9 +318,13 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     if (text_hash(text) != source["extracted_text_sha256"] or canonical_hash(mapping) != source["source_map_sha256"]
             or decoded.get("meta", {}).get("original_sha256") != source["sha256"] or len(text) != source["chars"]):
         raise ObjectIntegrityError("Frozen text no longer matches its extraction source")
-    partial_pages = (document.get("coverage") or {}).get("partially_checked_pages", [])
+    coverage = document.get("coverage") or {}
+    partial_pages = coverage.get("partially_checked_pages", [])
     if canonical_hash(partial_pages) != canonical_hash(decoded.get("meta", {}).get("partially_checked_pages", [])):
         raise ObjectIntegrityError("Frozen partial-page coverage differs from the recorded extraction")
+    email = coverage.get("email")
+    if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
+        raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
     try:
         verify_repeated_passages(document, text, mapping)
     except (ValueError, KeyError, TypeError) as error:
@@ -439,8 +443,9 @@ def _coverage(kind: str, document: dict) -> str:
         return (f"{coverage.get('scored_samples', 0)} uniquely scored samples of {source['samples']} decoded samples at {rate} Hz; "
                 f"{coverage.get('unscored_samples', 0)} unscored samples. "
                 + ("The decoding limit was reached; later audio was not checked." if coverage.get("decode_limit_reached") else ""))
-    summary = (f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages. "
-               f"{len(coverage.get('unmapped_pages') or [])} source pages have no mapped text.")
+    summary = f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages."
+    if not coverage.get("email"):
+        summary += f" {len(coverage.get('unmapped_pages') or [])} source pages have no mapped text."
     partial_count = len(coverage.get("partially_checked_pages") or [])
     if partial_count:
         page_count = "1 source page has" if partial_count == 1 else f"{partial_count} source pages have"
@@ -457,6 +462,16 @@ def _document_coverage_details(coverage: dict) -> list[str]:
     for page in coverage.get("partially_checked_pages", []):
         boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["image_boxes"])
         notes.append(f"Page {page['page']}. {page['reason']} Unchecked bounds in unrotated PDF points {boxes}.")
+    email = coverage.get("email")
+    if isinstance(email, dict):
+        body_format = {"text/plain": "plain-text", "text/html": "HTML"}.get(email.get("body_content_type"))
+        if body_format and email.get("body_part"):
+            note = f"The extracted {body_format} body is MIME part {email['body_part']}."
+            count = len(email.get("attachments") or [])
+            if count:
+                phrase = "attachment was" if count == 1 else "attachments were"
+                note += f" {count} {phrase} outside the analysis."
+            notes.append(note)
     return notes
 
 

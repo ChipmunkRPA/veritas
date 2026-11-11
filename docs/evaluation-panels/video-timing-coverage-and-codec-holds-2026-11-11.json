@@ -1,0 +1,302 @@
+{
+  "app_change": "Source interval and unassessed timing-change scope for short speaking face tracks.",
+  "codec_hold_comparison": {
+    "by_panel_delivery_condition": [
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "long_hold",
+        "delivery": "h264_crf23",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 1,
+        "condition": "recorded",
+        "delivery": "h264_crf23",
+        "exact_flags": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "source_groups_with_approximate_flags": 1,
+        "views": 3
+      },
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "short_hold",
+        "delivery": "h264_crf23",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 2,
+        "approximate_localized": 2,
+        "condition": "long_hold",
+        "delivery": "h264_crf37",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 0,
+        "condition": "recorded",
+        "delivery": "h264_crf37",
+        "exact_flags": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "source_groups_with_approximate_flags": 0,
+        "views": 3
+      },
+      {
+        "approximate_flags": 2,
+        "approximate_localized": 2,
+        "condition": "short_hold",
+        "delivery": "h264_crf37",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "long_hold",
+        "delivery": "lossless_rgb",
+        "exact_flags": 3,
+        "exact_localized": 3,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 1,
+        "condition": "recorded",
+        "delivery": "lossless_rgb",
+        "exact_flags": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "source_groups_with_approximate_flags": 1,
+        "views": 3
+      },
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "short_hold",
+        "delivery": "lossless_rgb",
+        "exact_flags": 3,
+        "exact_localized": 3,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "long_hold",
+        "delivery": "vp9_crf42",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 1,
+        "condition": "recorded",
+        "delivery": "vp9_crf42",
+        "exact_flags": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "source_groups_with_approximate_flags": 1,
+        "views": 3
+      },
+      {
+        "approximate_flags": 3,
+        "approximate_localized": 2,
+        "condition": "short_hold",
+        "delivery": "vp9_crf42",
+        "exact_flags": 0,
+        "exact_localized": 0,
+        "panel": "crema",
+        "source_groups": 3,
+        "views": 3
+      },
+      {
+        "approximate_flags": 4,
+        "condition": "chroma_conversion_only",
+        "delivery": "retained_webcam",
+        "exact_flags": 0,
+        "panel": "vcd2",
+        "source_groups": 12,
+        "source_groups_with_approximate_flags": 4,
+        "views": 12
+      },
+      {
+        "approximate_flags": 4,
+        "condition": "recompression_only",
+        "delivery": "retained_webcam",
+        "exact_flags": 0,
+        "panel": "vcd2",
+        "source_groups": 12,
+        "source_groups_with_approximate_flags": 4,
+        "views": 12
+      },
+      {
+        "approximate_flags": 4,
+        "condition": "unchanged",
+        "delivery": "retained_webcam",
+        "exact_flags": 0,
+        "panel": "vcd2",
+        "source_groups": 12,
+        "source_groups_with_approximate_flags": 4,
+        "views": 12
+      }
+    ],
+    "decision": "Keep approximate cue research-only. Keep exact native hold as an inspection cue.",
+    "decoded_prefix_frames": 6780,
+    "first_recovered_interval_replay": {
+      "anchor_seconds": {
+        "after": "8/5",
+        "before": "17/25",
+        "during": "6/5"
+      },
+      "codec": "h264",
+      "exhibit_pngs_verified": 3,
+      "frame_count": 94,
+      "interval_seconds": [
+        "21/25",
+        "8/5"
+      ],
+      "scope": "source bytes, presentation clock and three sampled RGB pictures",
+      "status": "verified",
+      "time_base": "1/1000"
+    },
+    "lossy_approximate_localized": 12,
+    "lossy_authored_views": 18,
+    "lossy_exact_localized": 0,
+    "ordinary_approximate_flags": 15,
+    "ordinary_exact_flags": 0,
+    "ordinary_groups": 15,
+    "ordinary_groups_with_approximate_flags": 5,
+    "ordinary_views": 48,
+    "private_commitments": {
+      "first_recovered_png_verification_sha256": "dd18f97a1ce31941782deb1332122a53e7a027ceb559d8ca58577f41ff730bfd",
+      "first_recovered_receipt_sha256": "c1871d9c0e5b4c127422c423b3172a541c143403da25c934b3806fbeac69afa5",
+      "freeze_sha256": "b0ed2d1dd87c1412c91f997b5f57430f18de954f3f2fcc9161eebe466e5e55d2",
+      "results_sha256": "f8d72d8cf698704a54a9c4355a619caa14d139ad449f3909f3066ef0f003769a"
+    },
+    "views": 72
+  },
+  "date": "2026-11-11",
+  "grid_timing_coverage": {
+    "by_condition": {
+      "audio_delay_320ms": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 15
+      },
+      "brightness_liveportrait": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 16
+      },
+      "brightness_musetalk": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 16
+      },
+      "genuine_frame_retime": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 15
+      },
+      "liveportrait_earlier_320ms": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 15
+      },
+      "liveportrait_source_time": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 14
+      },
+      "musetalk_earlier_320ms": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 16
+      },
+      "musetalk_source_time": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 16
+      },
+      "original": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 14
+      },
+      "resample_liveportrait": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 14
+      },
+      "resample_musetalk": {
+        "source_components": 8,
+        "timing_flags": 0,
+        "views": 16,
+        "views_with_timing_change_capacity": 0,
+        "views_with_timing_window": 15
+      }
+    },
+    "decoded_rgb_frames": 13200,
+    "decoded_signed_16_samples": 8386048,
+    "maximum_full_search_windows_in_any_view": 1,
+    "minimum_windows_for_change_assessment": 4,
+    "private_commitments": {
+      "counts": {
+        "not_applicable": 10,
+        "ok": 166
+      },
+      "freeze_sha256": "3cd297ed44e5f49be2b0134c1a54a7eaf7da79cb8e1efb252638375dc5bf96f5",
+      "outcomes_sha256": "5055975ff8caf9cec0da2cf9efdbae4dc189e8f4d1a80b713f878979a27c223e"
+    },
+    "recordings": 16,
+    "role": "previously observed retained cohort, coverage replay",
+    "source_components": 8,
+    "timing_flags": 0,
+    "views": 176,
+    "views_unassessed": 10,
+    "views_with_timing_change_capacity": 0,
+    "views_with_timing_windows": 166
+  },
+  "schema": "chipmunk.video-timing-coverage-and-codec-holds/1"
+}

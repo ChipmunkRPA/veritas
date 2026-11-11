@@ -76,11 +76,21 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
     q, name = unit["quality"], track_name(track)
     windows, steps, collapses = int(q.get("windows", 0)), int(q.get("steps", 0)), int(q.get("collapses", 0))
     baseline = q.get("baseline_offset")
-    observed = f"{windows} measured 1 s speech window(s). "
-    observed += (f"baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)" if baseline is not None
-                 else "no stable offset")
-    observed += (f", median peak correlation {q.get('peak_median', 0.0):.2f}; {steps} offset step(s), "
-                 f"{collapses} correlation collapse(s)")
+    minimum = min(2 * lipsync.MIN_RUN_WINDOWS, lipsync.COLLAPSE_MIN_TRACK_WINDOWS)
+    short_track = 0 < windows < minimum and not (steps or collapses)
+    if windows == 1 and q.get("start_s") is not None and q.get("end_s") is not None:
+        observed = f"Measured one 1-second speech window ({q['start_s']:.3f}–{q['end_s']:.3f} s on the source clock)."
+    else:
+        observed = f"{windows} measured 1 s speech window(s)."
+    if short_track:
+        observed += f" Timing change unassessed. This check needs at least {minimum} measured windows to assess a change."
+        if baseline is not None:
+            observed += f" Measured baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)."
+    else:
+        offset = (f"Baseline offset {int(baseline):+d} frame(s) ({_ms(baseline):+d} ms)" if baseline is not None
+                  else "No stable offset")
+        observed += (f" {offset}, median peak correlation {q.get('peak_median', 0.0):.2f}. "
+                     f"{steps} offset step(s), {collapses} correlation collapse(s).")
     parts = []
     if steps:
         step_baseline = q.get("step_baseline", baseline)
@@ -92,7 +102,10 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
                      f"{int(q['collapse_windows'])} consecutive windows ({q['collapse_start_s']:.1f}–{q['collapse_end_s']:.1f} s). "
                      "This is consistent with a dubbed or re-synthesised segment, but equally with an occluded or turned mouth, "
                      "or speech from someone off screen.")
-    if not parts:
+    if short_track:
+        parts.append("The available measurements describe local voice and mouth timing only. "
+                     "A well-synchronized mouth can occur in recorded or edited video.")
+    elif not parts:
         if baseline is None:
             parts.append(f"No stable offset could be established for {name}: the mouth opening and the speech level do not "
                          "correlate clearly in any window.")
@@ -108,7 +121,7 @@ def track_text(track: dict[str, Any], unit: dict[str, Any]) -> tuple[str, str]:
     excluded = int(q.get("unmeasured_mouth_windows", 0))
     if excluded:
         frozen = int(q.get("unchanged_mouth_pixels", 0))
-        observed += f". {excluded} additional speech window(s) lacked measurable mouth input"
+        observed += f" {excluded} additional speech window(s) lacked measurable mouth input."
         if frozen:
             parts.append(f"The measured mouth crops stayed unchanged in {frozen} of the omitted windows.")
     return observed, " ".join(parts)
@@ -125,7 +138,7 @@ class LandmarkXcorrDetector(Detector):
     spec = video_spec("vid.lipsync.landmark_xcorr",
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.3")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.4")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av

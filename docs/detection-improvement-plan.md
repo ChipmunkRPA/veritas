@@ -113,7 +113,12 @@ integration remains unfinished.
   endpoints and original before, during and after pixels. Keep the current
   appearance check and seek an additional moving source. The [lip-sync coverage fix](video-lipsync-mouth-coverage-2026-11-11.md)
   excludes unchanged-mouth windows that could create a false timing collapse.
-  The moving portions of the local test retained their eligible coverage.
+  The moving portions of the local test retained their eligible coverage. The
+  [short-clip follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
+  found 166 single-window timing measurements across 176 retained views. All
+  timing-change decisions remained unassessed, and the app now says so at the
+  measured source interval. The approximate picture-hold candidate found
+  12/18 lossy holds and flagged 15/48 ordinary views. Keep the exact check.
 - The [image patch and crop comparisons](image-relative-patch-transfer-2026-11-11.md)
   each completed inference. Neither localized a useful region on the held-out
   generator's six small edits. The [separate insertion transfer](image-bg-real-insertions-2026-11-11.md)
@@ -134,7 +139,11 @@ integration remains unfinished.
   found zero useful locations on 12 feathered edits in each format for both
   the boundary candidate and current routes. The same candidate found five
   sharp PNG patches and six sharp JPEG patches, with 36/72 control highlights
-  under JPEG. Keep the boundary check experimental.
+  under JPEG. Keep the boundary check experimental. The [noise-guided model](image-noise-region-candidate-2026-11-11.md)
+  added three useful feathered locations across the two formats at its publisher
+  point, with 130/144 control highlights. The separate control-fit points found
+  no useful feathered locations. Retain the current regional routes. The app
+  and new PDFs show the exact reliability mask when the check recorded one.
 - The [strong-traffic voice comparison](audio-wavlm-strong-traffic-2026-11-11.md)
   raised noisy synthetic flags from 1/27 to 4/27 on admitted inputs, with zero
   flags on eight assessed originals. It used one noise recording and earlier
@@ -150,7 +159,9 @@ integration remains unfinished.
   A [separate speech-frame representation](audio-speech-masked-representation-2026-11-11.md)
   assigned an incorrect original direction to eight synthetic recordings under
   one held-out background, where the current check assigned zero. The separate
-  head remains experimental.
+  head remains experimental. The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
+  admitted clean and noisy speech from more genuine readers and agreed with the
+  current check on all 60 selected views. The corroboration rule stays experimental.
 - The [paragraph context comparison](writing-paragraph-context-transfer-2026-11-11.md)
   localized 6/18 rewrites versus 4/18 for the strict raw rule and flagged
   3/21 human controls versus 4/21. The test used 11 new source articles and two
@@ -161,7 +172,11 @@ integration remains unfinished.
   only partly checked. The [practical DOCX panel](writing-practical-notice-transfer-2026-11-11.md)
   recovered six of eight rewrites with broad review and flagged five of 18 human
   controls. The stricter and paragraph rules recovered none. All 26 files
-  retained their exact text and source positions through normal extraction.
+  retained their exact text and source positions through normal extraction. The
+  [correspondence holdout](writing-correspondence-transfer-2026-11-11.md)
+  improved from 14/16 to 16/16 useful locations, but flagged 11/24 human files.
+  Keep the current estimate and show the selected body part and omitted attachment
+  count in the ordinary email report.
 - The [portable evaluation contract](independent-testing.md#evidence-localization)
   now checks region, frame, sample and passage overlap counts separately from
   file-level directions. Reviewers can report model-free checks and share

@@ -36,6 +36,7 @@ export interface ImageInspectionCheck {
   candidate_eligibility?: CandidateEligibility
   map_grid?: [number, number]
   excluded_area_fraction?: number
+  reliability_mask_sha256?: string | null
   raw_components: number
   eligible_components: number
   selected_components: number
@@ -88,6 +89,7 @@ export interface ImageEvidenceSet {
   packets: ImageEvidencePacket[]
   limitations: string[]
   omitted_regions: number
+  overview?: Record<string, EvidenceImage>
   coverage?: { inspection_checks?: ImageInspectionCheck[] }
   comparison?: ImageRegionalComparison
   copy_similarity?: ImageCopyEvidence<'same-image-reflection-similarity/1', 'horizontal_reflection'>

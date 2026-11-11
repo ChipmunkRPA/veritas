@@ -2,6 +2,8 @@
 
 ## Images
 
+Standard image evidence now opens each recorded reliability mask from the normal analysis. White grid cells passed the check’s reliability filter. Black grid cells were excluded from region selection. PDFs embed the same recorded mask when image evidence is visible. The signed JSON already commits to its hash and dimensions. Results without a recorded mask retain the measured coverage text.
+
 The app now searches for a matching same-size patch on images up to 1,024 pixels per side. The highlighted region and a matching crop retain their original image coordinates. Large searches use textured blocks to shortlist candidate locations, then verify the matches at native resolution. A search that exceeds the candidate limit reports inconclusive coverage.
 
 The native-size replay used the eight existing v298 photos at their recorded 800–1,024 pixel long sides. Each source supplied an unchanged image, a tone change, a blur, a translation copy and a reflected copy, each in lossless and JPEG90 delivery. The known edited region was supplied as the search target. The app recovered the exact location and transformation in 24 of 32 copy views. The eight remaining views had insufficient texture. One blur control produced a copy-compatible match in both formats, and one unchanged control produced ambiguous matches in both formats. These observations measure matching within a supplied region. They provide no estimate of how often the app initially locates an unknown edit. [Original source panel and test method](image-copy-transfer-v298-method.md)

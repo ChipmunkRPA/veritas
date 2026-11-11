@@ -40,4 +40,17 @@ describe('readable evidence-led findings', () => {
     expect(screen.getByTestId('finding-interpretation').textContent).toContain('Assessed separately')
     expect(screen.getByTestId('finding-interpretation').textContent).toContain('86%')
   })
+  it('shows the measured source window and unavailable timing-change assessment', () => {
+    const observed = 'Measured one 1-second speech window (6.400–7.400 s on the source clock). Timing change unassessed. This check needs at least 4 measured windows to assess a change.'
+    const finding = { id: 'F01', family: 'V2_lip_sync', title: 'Voice and mouth timing', statement: observed,
+      rank: 1, review_priority: 'low', reference_range: '', direction: 'neutral', strength: 'none',
+      evidence_ids: ['check:track:0'] } as Finding
+    const signal = { id: 'check:track:0', display_id: 'S01', name: 'Voice and mouth timing', status: 'ok',
+      scope: 'track', observed } as SignalV2
+    render(<MemoryRouter><FindingSupportPanel finding={finding}
+      data={{ analysisId: 'analysis-one', kind: 'video', signals: [signal] }} /></MemoryRouter>)
+    expect(screen.getByText(observed)).toBeTruthy()
+    expect(screen.getByTestId('finding-interpretation').textContent).toContain('Not established for this finding')
+    expect(screen.getByTestId('finding-check-support').getAttribute('href')).toContain('/analyses/analysis-one/ledger')
+  })
 })

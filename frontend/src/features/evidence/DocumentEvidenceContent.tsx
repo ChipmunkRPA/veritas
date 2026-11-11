@@ -90,6 +90,10 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     article?.scrollIntoView?.({ block: 'start' })
   }
   const email = !!set.coverage?.email || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.kind === 'email'))
+  const emailCoverage = typeof set.coverage?.email === 'object' ? set.coverage.email : null
+  const bodyFormat = emailCoverage?.body_content_type === 'text/plain' ? 'plain-text'
+    : emailCoverage?.body_content_type === 'text/html' ? 'HTML' : null
+  const attachmentCount = emailCoverage?.attachments?.length ?? 0
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const ocrPages = set.coverage?.ocr?.pages ?? []
@@ -122,6 +126,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         <ul className="pl-4 list-disc">{ocrPages.map((page) => <li key={page.page}>Page {page.page}{page.coverage_scope === 'image_region' && ' image area'}: {page.status === 'extracted' ? 'text extracted for analysis' : 'not checked'}.
           {page.reason && ` ${page.reason}`}{typeof page.mean_recognition_confidence === 'number' && ` Recognition quality: ${page.mean_recognition_confidence.toFixed(1)} out of 100; this is not an AI score.`}</li>)}</ul>
       </details>}
+      {bodyFormat && emailCoverage?.body_part && <p className="mt-2 mb-0">The extracted {bodyFormat} body is MIME part {emailCoverage.body_part}.
+        {attachmentCount > 0 && ` ${attachmentCount} ${attachmentCount === 1 ? 'attachment was' : 'attachments were'} outside the analysis.`}</p>}
       {email && <p className="mt-2 mb-0">Email quotations and signatures can belong to someone else. Quote boundaries are heuristic; headers and writing scores do not authenticate a sender.</p>}
     </div>
     <div className="mt-6 space-y-7">{set.packets.map((packet) => {

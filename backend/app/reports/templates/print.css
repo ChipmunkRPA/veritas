@@ -346,6 +346,8 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .image-inspection-check h4 { margin: 0 0 1mm; font: 600 9pt/12pt var(--font-sans); }
 .image-inspection-check .evidence-measurements { gap: 2mm 4mm; }
 .image-inspection-check .evidence-measurements div { flex: 0 0 47%; min-width: 0; }
+.inspection-coverage-map { margin: 2mm 0 0; }
+.inspection-coverage-map img { display: block; max-width: 75mm; max-height: 38mm; border: .5pt solid var(--color-border); image-rendering: pixelated; }
 .image-eligibility-note { border-left: 2pt solid var(--color-border); padding-left: 2mm; }
 .evidence-appendix { break-before: page; }
 .image-evidence-packet { margin-top: 5mm; padding-top: 3mm; border-top: 0.5pt solid var(--color-border); break-inside: avoid; }

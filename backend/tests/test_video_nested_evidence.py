@@ -8,6 +8,7 @@ import subprocess
 import sys
 import wave
 import zipfile
+from dataclasses import asdict, replace
 from datetime import UTC, datetime
 from types import SimpleNamespace
 
@@ -20,13 +21,17 @@ from test_video_av_evidence import av_fixture as av_fixture
 from test_video_av_evidence import av_source as av_source
 
 from app.api import v2_evidence_packets
+from app.api.public_projection import project
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
+from app.detectors.video import lipsync
 from app.detectors.video.adapters.face_appearance import DETECTOR, record
+from app.detectors.video.adapters.lipsync_xcorr import LandmarkXcorrDetector
 from app.detectors.video.decode import probe_frames
 from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.engine.stages import video
+from app.engine.synthesis.engine import SynthesisInput, synthesise
 from app.evidence import service, video_audio, video_packets
 from app.evidence.audio_binding import validate_audio_channel
 from app.evidence.image_packets import PacketIntegrityError
@@ -35,6 +40,47 @@ from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
 from app.storage.db import AnalysisStage, ReportRow
 from app.storage.objects import ObjectIntegrityError
+
+
+def test_one_source_bound_timing_window_discloses_missing_change_coverage_in_json_and_pdf(av_fixture, monkeypatch):
+    f = av_fixture
+    window = f.sync.windows[0].window
+    used = {f.grid.frames[tick] for tick in window.ticks}
+    track = {'track_id': 'track:0', 'exhibit_id': 'source-face'}
+    inputs = replace(f.inputs, tracks=(track,), frames={'track:0': [f.by_frame[i] for i in sorted(used)]})
+    exhibits = SimpleNamespace(series=lambda *args, **kwargs: 'series', segments=lambda *args, **kwargs: 'segments')
+    ctx = SimpleNamespace(outputs=SimpleNamespace(av=inputs), exhibits=exhibits, deadline=None)
+    monkeypatch.setattr(lipsync, 'vad', lambda pcm: f.speech)
+    monkeypatch.setattr(lipsync, 'speaker_score', lambda *args: .9)
+    detector = LandmarkXcorrDetector()
+    result = detector.run(ctx)
+    assert result.status == 'ok' and result.aggregate is None
+    proof = result.details['av_input']
+    assert proof['status'] == 'ready' and proof['audio_origin_pts'] == 86400
+    (track_proof,) = proof['tracks']
+    (window_proof,) = track_proof['windows']
+    assert window_proof['start_tick'] == 25 and window_proof['end_tick'] == 50
+    measured = '6.400–7.400 s on the source clock'
+    assert measured in result.observed and 'Timing change unassessed' in result.observed
+
+    entry = {**asdict(result), 'detector_id': detector.spec.id, 'version': detector.spec.version,
+             'name': detector.spec.name, 'family': 'av-sync', 'modality': 'video',
+             'hypotheses': ['H2_localised_manipulation']}
+    stage = SimpleNamespace(state={}, outputs={'tracks': {'tracks': [track]}, 'detect': {'detectors': [entry]}})
+    (signal,) = video.track_signals(stage, 1)
+    (public,) = project([signal])
+    assert measured in public['observed'] and 'Timing change unassessed' in public['observed']
+    assert public['model_revisions'] == {}
+
+    report = specimen('video', 'standard')
+    payload = copy.deepcopy(report.result)
+    findings = synthesise(SynthesisInput('video', payload['decision'], [signal]))
+    (finding,) = [row for row in findings if row['family'] == 'V2_lip_sync']
+    assert finding['direction'] == 'neutral' and signal['id'] in finding['evidence_ids']
+    payload.update(signals=[signal], findings=findings, exhibits=[])
+    rendered = engine.render_pdf(report.model_copy(update={'result': payload}))
+    text = ' '.join(engine.pdf_text(rendered.pdf).split())
+    assert measured in text and 'Timing change unassessed' in text
 
 
 @pytest.fixture(params=['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'])

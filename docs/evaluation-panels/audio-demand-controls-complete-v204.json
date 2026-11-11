@@ -1,0 +1,61 @@
+{
+  "schema": "chipmunk.audio-demand-controls-result/204",
+  "status": "complete",
+  "freeze_sha256": "200b773bb3aaff134465a989da93c495fd35a398bdfaf7d1afa2069072f63801",
+  "private_cases_sha256": "5675f3a9a20f6122e44114cbc21beba61f4a944e62fba0dc991f8bdf043dff46",
+  "outcomes": {
+    "prepared": 258,
+    "unavailable": 30
+  },
+  "new_neural_calls": 0,
+  "by_origin_and_condition": {
+    "genuine": {
+      "source_clean": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "matched_clean": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "washing_room_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "washing_room_5db": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_0db": {
+        "prepared": 19,
+        "unavailable": 5
+      },
+      "river_5db": {
+        "prepared": 19,
+        "unavailable": 5
+      }
+    },
+    "synthetic": {
+      "source_clean": {
+        "prepared": 24
+      },
+      "matched_clean": {
+        "prepared": 24
+      },
+      "washing_room_0db": {
+        "prepared": 24
+      },
+      "washing_room_5db": {
+        "prepared": 24
+      },
+      "river_0db": {
+        "prepared": 24
+      },
+      "river_5db": {
+        "prepared": 24
+      }
+    }
+  },
+  "profile_sha256": "4b6461c25e1b6d2b868419ed2de087fc28c9cd7b54fa88a0c18f52b9a7dd764b",
+  "scope": "Two recorded environments on fixed Turkish foregrounds. No detector outputs or noisy recording population estimate."
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.audio-demand-transfer-freeze/208",
+  "preparation_result_sha256": "15ac3a0efd9b7109e729bcd83dfc5c65cdfd4373eddef250e7ab480cf059e6ad",
+  "serving_freeze_sha256": "869e64d5a6f4727ef08d27a19361d70564da5168a79d3726084b72426b110714",
+  "code_sha256": {
+    "backend/scripts/audio_demand_transfer_v208.py": "ae2f36b1455d710d1ff794ae98edb6cf697f46a1e8cce2ae86c2d5530d1949d6",
+    "backend/tests/test_audio_demand_transfer_v208.py": "3b6283aa589888095180260432496efdcf5c949c7aad8d7aa47f829807a00a2e",
+    "docs/audio-demand-transfer-v208-method.md": "1e49e464fd703d5489e0af8f283e8a20674c40a3e1c1a2b5ea64e16a9bf9060d",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "planned_cases": 288,
+  "conditions": [
+    "source_clean",
+    "matched_clean",
+    "washing_room_0db",
+    "washing_room_5db",
+    "river_0db",
+    "river_5db"
+  ],
+  "route_reference_language": "en",
+  "calibration_change_permitted": false
+}

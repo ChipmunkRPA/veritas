@@ -1,0 +1,43 @@
+{
+  "schema": "chipmunk.portrait-native-resource-stop/133",
+  "status": "stopped_sampled_rss_limit",
+  "profile": {
+    "schema": "chipmunk.video-appearance-resource-profile/108",
+    "command": "authored",
+    "batch": null,
+    "child_started": true,
+    "child_exit_code": -15,
+    "guard": "resource_limit",
+    "sample_errors": 0,
+    "error_types": [],
+    "terminal_observations": [],
+    "resource_limit_observations": [
+      {
+        "elapsed_s": 18.347547249984927,
+        "tree_rss_bytes": 8480178176,
+        "ram_available_bytes": 5650694144,
+        "disk_free_bytes": 7213584384,
+        "violations": [
+          "tree_rss_limit"
+        ],
+        "archive_free_disk_bytes": 7790339555328
+      }
+    ],
+    "duration_s": 18.481022416963242,
+    "sampled_tree_rss_lower_bound_bytes": 8480178176,
+    "minimum_available_ram_bytes": 3154264064,
+    "resource_journal_sha256": "7366ba02fff8e489c0c5d64608d8142891c0dcc142f3703ad03c7a22bd9de6c2",
+    "runtime_sha256": "ecb74e2abb52fc5f36425ebac23f321a4f5d116d80840cb2e651eab4da7f6a6f",
+    "worker_receipt_sha256": null,
+    "new_neural_calls": null,
+    "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+  },
+  "profile_sha256": "271b18ce7a4e64169d3e7db479f2d70e0397a96e8704c5941d0d2cd682e5884a",
+  "worker_log_sha256": "c45ee15db958faf878ff10babe5ad573dfeec67038642928bbdad00d6cccd58d",
+  "resource_journal_sha256": "7366ba02fff8e489c0c5d64608d8142891c0dcc142f3703ad03c7a22bd9de6c2",
+  "completed_worker_receipt": false,
+  "new_neural_calls": null,
+  "partial_render_conditions_with_files": 1,
+  "defaults_changed": false,
+  "scope": "Original frozen CPU model stage passed initial admission but was terminated at the6GiB sampled descendant RSS limit. One partial first-condition crop/native/mask exists; total forwards/repeat/fidelity not certified because no completion receipt or durable model counter journal. Original failure/code/outputs preserved; no detector/accuracy or successful qualification claim."
+}

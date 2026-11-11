@@ -83,8 +83,12 @@ require the pinned v7 generator dependency overlay. The actual v118 native
 the earlier admission denial remains historical. That success qualifies response
 and containment, not achieved phonetic alignment or detector accuracy. The
 separate [CPU second-generator qualification](portrait-native-qualifier-v133-method.md)
-has not started because its actual admission check was below the unchanged RAM
-minimum; see the [readiness receipt](evaluation-panels/portrait-native-readiness-v133.json).
+later started after RAM admission, but hit its sampled RSS limit; see the
+[actual stop](evaluation-panels/portrait-native-resource-stop-v133.json). Its
+earlier [readiness receipt](evaluation-panels/portrait-native-readiness-v133.json)
+remains historical. The [bounded-convolution context](portrait-tiled-runtime-v139-method.md)
+preserves that failed attempt and tests an explicit memory implementation change
+at the same weights, precision, resolution and resource limits.
 
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_native_mouth_inputs_v116.py backend/tests/test_native_mouth_renderer_v117.py

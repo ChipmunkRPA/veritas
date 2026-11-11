@@ -42,7 +42,23 @@ software smoke does not complete any modality's real-data calibration or release
    publish customer uploads or imply independent reviewers have participated
    before they have done so.
 
-## First new image comparison: predeclared design
+## Current decision policy
+
+The owner's later instruction is to reconsider earlier rejections when a
+substantial detection gain accompanies a modest false-alarm increase. Do not
+treat every additional false flag as an automatic veto. Compare complete paired
+gains/losses, misses, ordinary-input flags, assessed coverage and uncertainty;
+keep complementary checks and rollback when their errors differ. An improved
+candidate still needs its own calibration, fresh transfer evidence and local
+customer-flow verification before becoming a default.
+
+Preserve the original frozen thresholds, gates and outcomes below and in past
+capsules as historical evidence. Report their original pass/fail separately from
+the current adopt/retain/defer judgment; do not retrospectively tune consumed
+test cases or rewrite a failure as a pass. Internal predeclared research settings
+are not public screening promises or calibrated population probabilities.
+
+## First new image comparison: original predeclared design
 
 - Candidate: official IML-ViT checkpoint, subject to source, checkpoint, and
   commercial-license verification. Preserve original files and pin SHA-256.
@@ -81,6 +97,29 @@ integration remains unfinished.
 
 ## Progress on 10 November
 
+- Completed native feature extraction, three compact heads, six separate study
+  calibrations, both locked held-out roles and a separate arithmetic replay.
+  Across the two held-out roles, interaction localized 9/40 edits versus 4/40
+  visual-only, with 9/80 ordinary-input flags versus 7/80. Keep interaction and
+  complementary visual evidence for transfer; 31/40 edits still missed by
+  interaction. These consumed, narrowly connected source contexts do not qualify
+  deployment or customer probabilities. The remaining work in the earlier
+  construction snapshot below is superseded for these completed stages.
+  [Complete calibrated comparison and limitations](native-mouth-calibration-and-transfer-v129-results.md).
+- Fixed a new 32-clip, sixteen-source GRID transfer selection from publisher
+  directory metadata before media/detector response selection. Full archive
+  acquisition and complete native RGB/PCM banks are running sequentially, with
+  partial snapshots clearly separated from cohort completion. VidTIMIT media
+  remains excluded by its full NC-ND metadata. The same MIT human generator
+  assets and an isolated geometry runtime are retained. The separate CPU neural
+  qualifier passed RAM admission but was stopped by the unchanged 6-GiB sampled
+  RSS limit; its failed attempt remains preserved. The new bounded-convolution
+  context keeps the same inputs/weights/precision/resolution and resource limits.
+  A richer expression-driving
+  bridge has passing public arithmetic checks but remains neurally unqualified.
+  No new prediction result or default follows from these data/software checks.
+  [Current preparation report](grid-transfer-progress-v138.md) and
+  [model-free contribution entry points](independent-testing.md).
 - Completed all native mouth construction and separate mask replay: 283 ready
   clips across 48 sources, five explicit short-source unavailable edits, 94 neural
   mouth-edit clips and 189 original/ordinary controls. All 4,700 masks, 21,767 pictures

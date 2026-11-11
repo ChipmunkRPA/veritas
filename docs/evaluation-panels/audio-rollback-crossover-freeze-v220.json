@@ -1,0 +1,61 @@
+{
+  "schema": "chipmunk.audio-rollback-crossover-freeze/220",
+  "v210_freeze_sha256": "8de2916ed669df889cc50973b27cbae58d2523a184016f4b9f3d21b94fb3efbe",
+  "v210_result_sha256": "3c0fb314dc869c19822a2257af4a42de865d71695d94cdc82027910bc3760a3a",
+  "v214_freeze_sha256": "758ffbb54c8201c0d356c447ae66a1e5e18449fa7b9cf322c8807bb0be656f33",
+  "v214_result_sha256": "3e4e3aa4fe305606ce4a38395db0d2443d15858fa487c7559a1e5d9800be1294",
+  "baseline_batches": {
+    "matched_clean": {
+      "profile_sha256": "f7cebde829a06702922bb6f0b4f0250edf760ec0cc11c6db00650c28138b043b",
+      "private_journal_sha256": "6ce05a434b8834fcc6bf8e3947fe8cd93e1beb4b9b6684fc25e0f9b7da9cee83"
+    },
+    "river_early_0db": {
+      "profile_sha256": "f15aacd0e79e6631199450c4016ffb8ecbc60fbf69bc7b8e584e8b6fa67fa028",
+      "private_journal_sha256": "29d66e470c05eab01ed80f2fd467b59c83205edaad9ae27cefda3dfdf4b37a37"
+    },
+    "river_late_0db": {
+      "profile_sha256": "260434f95234ba85b80071d98792c30a6f843b614b6109e8a534c29b3fc722d8",
+      "private_journal_sha256": "c96c3264285ede567e5f71b4ab78b71e5b86962dfde5bf43a8597f2690715fd7"
+    }
+  },
+  "model_manifest_sha256": "a9a32472299578874a3663d38de29d72a8f2c289ec9f20f28a9330168caf312e",
+  "rollback": {
+    "revision": "f7050b586236dc910d1157f430def2d0647b02b4",
+    "weight_license": "Apache-2.0",
+    "asset_sha256": {
+      "config.json": "bc86d455d78aa7c256844038e342e2beea9399bf0efc48e1748fdd918ddf3934",
+      "preprocessor_config.json": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335",
+      "model.safetensors": "8bff7244579a5c0f22f9994848c7eee2e038a07358bfebfbe75b38bd11d39b90"
+    },
+    "positive_index": 1,
+    "positive_label": "fake",
+    "raw_comparison_point": 0.5
+  },
+  "runtime_packages": {
+    "torch": "2.13.0",
+    "transformers": "5.15.1",
+    "numpy": "2.2.6",
+    "safetensors": "0.8.0"
+  },
+  "runtime_device": "cpu",
+  "runtime_dtype": "float32",
+  "runtime_torch_threads": 4,
+  "code_sha256": {
+    "backend/scripts/audio_rollback_crossover_v220.py": "8606a5a74a8f4ae6717d3cb50097a7bd1dce303228895286eccf99494f2b5bfe",
+    "backend/tests/test_audio_rollback_crossover_v220.py": "0738bbdf71210c56c67d8fa563f379b4cf10f4cab36a7b5fdc8fb5d47f48d6f7",
+    "docs/audio-rollback-crossover-v220-method.md": "eb489a70a1cbe2b1e56c5ec65d55105f50c491a0350cd246c2104b1d62b55a53",
+    "backend/app/detectors/video/audio.py": "e8ab18233cb614f7b16ef132bb4edbd76c51d8e98b92a96355b789ae37d40211",
+    "backend/app/detectors/video/adapters/audio.py": "e8a74fad422f73d03f5ee6e03443e3d3326c684d3629c9c1b05021a0404b1468",
+    "backend/app/detectors/video/adapters/loaders.py": "37342d9c6a1086012cb0119fe09737da13e5ce08108ba36c5d96fae5bd580955",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "conditions": [
+    "matched_clean",
+    "river_early_0db",
+    "river_late_0db"
+  ],
+  "planned_cases": 144,
+  "original_gate_only": true,
+  "new_calibration_permitted": false,
+  "fresh_panel_access_permitted": false
+}

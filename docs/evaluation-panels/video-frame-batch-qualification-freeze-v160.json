@@ -1,0 +1,22 @@
+{
+  "schema": "chipmunk.video-frame-batch-qualification-freeze/160",
+  "code_sha256": {
+    "backend/scripts/video_frame_batch_qualification_v160.py": "e63810d248dce46be11c1095b3b48c4e58684b0082324324ec6023f13682cf08",
+    "backend/scripts/video_frame_check_batch_one.py": "59d41579d83fc61cc338c22dc8e7669b8c652673f1cc835d3052bdba78d619df",
+    "backend/tests/test_video_frame_batch_qualification_v160.py": "a31b76195c11d87336dc46adb2ca87e4fc537db1e3a19223de7d4c74a1640373",
+    "backend/tests/test_video_frame_check_batch_one.py": "7542b22d2d965fe9671530941fe2ae64bd4ddfb158a9c7fd396537f33b177e0c",
+    "docs/video-frame-batch-qualification-v160-method.md": "8ba60ddd67f87c9d6990dd9711169472c4096db84b14a4d92403fdf9bd5b6aa6"
+  },
+  "serving_freeze_sha256": "3e650f8d7c8b64165a61a9a6d05b691109c27c6f44d48bae435e0aa0e09c9320",
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "private_inputs_sha256": "140189c2f38cfd1c4136d20e43dfc54356432a8909eb65e0ad32ee3a5afcdc3b",
+  "manifest_sha256": "a9a32472299578874a3663d38de29d72a8f2c289ec9f20f28a9330168caf312e",
+  "sampled_face_crops": 15,
+  "batch_sizes": {
+    "reference": 8,
+    "batch-one": 1
+  },
+  "logit_absolute_tolerance": 0.001,
+  "probability_absolute_tolerance": 0.0001,
+  "scope": "Same-device adapter parity on observed original crops and a partial reference batch."
+}

@@ -55,6 +55,8 @@ uses the actual PNG and JPEG routes and checks the resulting masks against exact
 The [copy corroboration fixture](image-copy-corroboration-v295-method.md)
 checks whether a proposed region has a matching donor elsewhere in the image
 while retaining the original highlight.
+The [licensed photo comparison](image-copy-transfer-v298-result.md) measures
+donor recovery on fresh ordinary edits and unchanged controls in two formats.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The

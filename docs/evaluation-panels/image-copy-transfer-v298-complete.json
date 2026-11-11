@@ -1,0 +1,341 @@
+{
+  "schema": "chipmunk.image-copy-transfer-aggregate/298",
+  "status": "complete",
+  "planned_groups": 8,
+  "planned_views": 80,
+  "scored_views": 80,
+  "source_unavailable_groups": 0,
+  "cue_evaluated_views": 64,
+  "detector_unassessed_views": 80,
+  "generated_edits": 0,
+  "generator_calls": 0,
+  "detector_calls": 0,
+  "by_format": {
+    "native_png": {
+      "original": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 1,
+          "insufficient_texture": 1,
+          "no_donor": 6
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "no_donor": 1
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 1,
+        "unchanged_native_controls": 8,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      },
+      "tone": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "insufficient_texture": 1,
+          "no_donor": 7
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "no_donor": 2
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      },
+      "blur": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "insufficient_texture": 2,
+          "no_donor": 6
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      },
+      "translated_copy": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 6,
+          "insufficient_texture": 2
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "interior_shifted": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "edge_aligned": {
+            "copy_consistent": 2
+          },
+          "edge_shifted": {
+            "copy_consistent": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 6,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      },
+      "reflected_copy": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 6,
+          "insufficient_texture": 2
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "interior_shifted": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "edge_aligned": {
+            "copy_consistent": 2
+          },
+          "edge_shifted": {
+            "copy_consistent": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 6,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      }
+    },
+    "jpeg90": {
+      "original": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 1,
+          "insufficient_texture": 1,
+          "no_donor": 6
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "no_donor": 1
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 1,
+        "unchanged_native_controls": 8,
+        "encoded_changes_outside_native_truth_range": [
+          0,
+          0
+        ]
+      },
+      "tone": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "insufficient_texture": 1,
+          "no_donor": 7
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "no_donor": 2
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          108,
+          235
+        ]
+      },
+      "blur": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "insufficient_texture": 2,
+          "no_donor": 6
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "interior_shifted": {
+            "insufficient_texture": 1,
+            "no_donor": 1
+          },
+          "edge_aligned": {
+            "no_donor": 2
+          },
+          "edge_shifted": {
+            "no_donor": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 0,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          83,
+          596
+        ]
+      },
+      "translated_copy": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 6,
+          "insufficient_texture": 2
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "interior_shifted": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "edge_aligned": {
+            "copy_consistent": 2
+          },
+          "edge_shifted": {
+            "copy_consistent": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 6,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          117,
+          259
+        ]
+      },
+      "reflected_copy": {
+        "planned": 8,
+        "scored": 8,
+        "source_unavailable": 0,
+        "outcomes": {
+          "copy_consistent": 6,
+          "insufficient_texture": 2
+        },
+        "by_placement_and_jpeg_phase": {
+          "interior_aligned": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "interior_shifted": {
+            "copy_consistent": 1,
+            "insufficient_texture": 1
+          },
+          "edge_aligned": {
+            "copy_consistent": 2
+          },
+          "edge_shifted": {
+            "copy_consistent": 2
+          }
+        },
+        "exact_ordinary_donors_recovered": 6,
+        "copy_supported_without_exact_ordinary_donor": 0,
+        "unchanged_native_controls": 0,
+        "encoded_changes_outside_native_truth_range": [
+          107,
+          258
+        ]
+      }
+    }
+  },
+  "freeze_sha256": "3e31ef323002875d6f3ef4261e4867e5926fb4a3bce4656a60ff2f8c7957d8a9",
+  "private_result_sha256": "663fad4f6f4f59fbece46fcb8272e76ad963e4f0617d8d8b749859970c33a2ec"
+}

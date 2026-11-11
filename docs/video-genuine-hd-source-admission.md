@@ -39,7 +39,7 @@ tested coverage and false flags by group. The source and control counts support
 no inference about detection sensitivity or model-training independence.
 [Serving scope](video-in-envelope-transfer-design.md)
 
-## First acquisition
+## Local acquisition and prefix clocks
 
 Group 01 is held locally on the external drive. Its 115,172,735-byte length
 and publisher SHA-1 matched. The recorded whole-file SHA-256 is
@@ -56,8 +56,67 @@ subsequent intervals in the prefix match the 960-sample increments.
 Seeking to timestamp zero before probing returned a first decoded audio
 frame at 21 ms, so the candidate preflight must distinguish the source's
 decoded audio origin from a seek-dependent packet or stream timestamp.
-This prefix check leaves the selected speaking interval and its sample
-mapping to be verified. Groups 02 and 03 remain prospective.
+
+Group 02 matched its 143,370,279-byte length and publisher SHA-1. Its local
+SHA-256 is `df0bf6f5e9129b844610e1b8cfe41a2eb115c9b796acb7efb6707ce5ac73a600`.
+The prefix has 300 decoded 1920 × 1080 pictures. Their 1/1000 PTS increments
+are 33 or 34 ms. The first two decoded 44.1 kHz Vorbis audio frames start at
+13 and 36 ms and contain 576 and 1,024 samples. The first PTS increment
+exceeds the first frame's extent by about 10 ms. Other increments have
+positive and negative residuals beyond millisecond quantization. The full
+decoded audio track has 5,637 frames. Its longest contiguous run consistent
+with a single sample origin under the 1-ms timestamp precision spans 155,648
+samples, about 3.529 seconds. Group 02 remains in the planned denominator
+with audio timing unavailable under this preflight. It can still provide a
+visual-only control once its shot is verified.
+
+Group 03 matched its 282,426,173-byte length and full-object CRC64NVME. Its
+local SHA-256 is
+`b0fe1ca1d257d27fa6898db48b06b4e58640699a9fbd247e63e04cb8af4bc527`.
+The prefix has 299 decoded 1920 × 1080 H.264 pictures with constant 1,001-tick
+increments on a 1/30000 clock. The first decoded 48 kHz AAC audio frame starts
+at zero on a 1/48000 clock. All 453 observed audio frame increments match the
+preceding frame's exact sample extent.
+
+The production audio decoder independently processed the first ten seconds
+of all three source files with the source SHA-256 verified first. Each
+produced 160,000 mono 16-kHz samples. Its recorded source mapping contains
+one continuous range starting at zero for groups 01 and 03, and 83 separate
+ranges for group 02. The app therefore has a measured reason to keep group
+02's timing check unavailable while retaining independent audio and visual
+checks.
+
+## Candidate speaking intervals
+
+Sparse single-threaded picture inspection places the first plausible
+single-speaker Nairobi shot at `[11.000, 17.000)` seconds on the source
+clock. Burned-in captions advance during the shot. A lower-third appears
+by 14.560 seconds and a light flash at 16.520 seconds leaves the surrounding
+camera composition intact. These ordinary source events remain in the
+candidate.
+
+The USGS candidate is `[1057056, 1237236)` on the 1/30000 video clock,
+or `[35.235200, 41.241200)` seconds. It contains 180 pictures on the native
+1,001-tick cadence. The lead speaker wears a mask, making this a genuine
+occlusion control. Publisher captions cover the interval continuously.
+The picture start lies between two native audio sample starts. Retain the
+two clocks and record the measured offset when constructing the excerpt.
+[Publisher caption file](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/%5BSubtitleTools.com%5D%20CenterVideo_11-5.vtt)
+
+An authored 29.97 fps codec smoke used an MP4 video track time scale of
+30,000 and lossless ALAC audio. A local H.264 recompression preserved all
+180 decoded picture timestamps and all 288,288 decoded 48-kHz audio samples
+exactly.
+
+The clock helper replayed decoded metadata from the original Nairobi and
+USGS files. Nairobi has 150 pictures and native audio sample indices
+`[528000, 816000)` on the conditional zero-origin lattice. The compatible
+decoded audio origin spans 0 through 0.5 ms under closed nearest rounding.
+USGS has 180 pictures and sample indices `[1691290, 1979578)` on an exact
+zero-origin lattice. Both audio boundaries are 1/120000 second later than
+their corresponding picture boundary. The source-to-output maps, soundtrack
+checks, overlap review, and detector runs remain pending.
+[Clock helper](../backend/scripts/hd_excerpt_clock.py)
 
 To reproduce acquisition, run from the repository root and set
 `CHIPMUNK_HD_SOURCE_DIR` to the chosen private holding directory. The command

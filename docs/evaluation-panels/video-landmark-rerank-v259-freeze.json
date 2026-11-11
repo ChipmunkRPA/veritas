@@ -1,0 +1,20 @@
+{
+  "appearance_review_point": 0.11243900750879454,
+  "code_sha256": {
+    "backend/app/evidence/face_interval_binding.py": "f5bceaf615f91a79367a89d829e2372f5d4f6e9ac1e78ba4a8fb369dd67c32e2",
+    "backend/scripts/video_landmark_rerank_v259.py": "89efbd719c6787657ae1012b48308e1b8cb3b6a3372ba01be61bb6016e0a4874",
+    "backend/tests/test_video_landmark_rerank_v259.py": "5ff87d8558d96a128cadf61adc0c9142dbed442cb2361f9db618bb436a2a56b3",
+    "docs/video-landmark-rerank-v259-method.md": "c4f435982cac6816f403998d2b69daceb0f3d83e17d6c4c6b8fb61bba67f8a60"
+  },
+  "cutoff_basis": "exploratory_after_observing_v254_webcam_results",
+  "minimum_during_over_mean_flank_eye_box_ratio": 0.6,
+  "new_neural_calls_permitted": false,
+  "retained_windows_per_upload_cap": 12,
+  "schema": "chipmunk.video-landmark-rerank-freeze/259",
+  "serving_change_permitted": false,
+  "source_receipts": {
+    "docs/evaluation-panels/video-landmark-transfer-v255-complete.json": "6b85af0a22f2a78073064d5458281e9f912d9ed26f0bff9e88c961b78f983c32",
+    "docs/evaluation-panels/video-landmark-transfer-v255-freeze.json": "0bc2ad8114de2345e491c0c9eceea2a4f6f781bad63b13761f38a11a91c8da1e",
+    "docs/evaluation-panels/video-saved-landmark-support-v254-complete.json": "7402d598c251158a6d4ec4b42b5e6b059f739e62acf8c46d015011aceab66021"
+  }
+}

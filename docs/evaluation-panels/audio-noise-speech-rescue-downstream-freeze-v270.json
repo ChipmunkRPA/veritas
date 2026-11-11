@@ -1,0 +1,68 @@
+{
+  "schema": "chipmunk.audio-noise-speech-rescue-downstream-freeze/270",
+  "source_receipts_sha256": {
+    "audio-noise-speech-gate-strong-noise-freeze-v269.json": "b7559aaa1c11c56eb92fbd4699ca1ab83f4f2648fe274625840c70adbb80cea5",
+    "audio-noise-speech-gate-strong-noise-complete-v269.json": "40d7b661032db949d00b4d3cd524d53ac12bb7d7db9c9276b46ec35b3a2c8139",
+    "audio-rescued-speech-retry-freeze-v261.json": "a6e0f56f392f79b445d39117e68ba7c9421bbccaeba5a049bc464481d3c3c3c9",
+    "audio-rescued-speech-retry-complete-v261.json": "89656b3f98035b6429795094dac8d29c12fb00d58be14f2e32709d3b6a2c3bcc"
+  },
+  "serving_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+  "serving_asset_sha256": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "inherited_v261_code_sha256": {
+    "backend/scripts/audio_rescued_speech_shadow_v258.py": "7be4616ce59360ad0102a7e2cf6144e41368d6bf5f45bd44b4646223d9a9ec64",
+    "backend/tests/test_audio_rescued_speech_shadow_v258.py": "8da245f2865142da335810a0e797eeb48107398c9b02e29750387c9b2440c880",
+    "docs/audio-rescued-speech-shadow-v258-method.md": "2329df27effbb5efb01165086946504a45cd3910ef2a3fed431cceae8f70aa92",
+    "backend/scripts/audio_noise_speech_gate_v256.py": "90d0c303bb8e35c0249d8208403dda73ba9a706ec2ba719931319b056b86905b",
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/calibration.py": "f34a42c589d078b389d5e431cb04855f593024ef3104088e19ad27964873daee",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/scripts/audio_rescued_speech_retry_v261.py": "05afa0f502f9a1f9ff004942cbcfe7939aadbea83bc7c7cbad7c3e468d1f8323",
+    "backend/tests/test_audio_rescued_speech_retry_v261.py": "e4e756111443f82d190c304744211922f68e7be7f4a312ab11d02be209d9397b",
+    "docs/audio-rescued-speech-retry-v261-method.md": "dd023cfa29d5aa6a9a9f2089f1441c221c5f50b6267b52ce14b8f4f3970cbf8b"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_noise_speech_rescue_downstream_v270.py": "30211cba41c7185b6ba86b99fb8ced69473155e748b12a656d734d6232b17860",
+    "backend/tests/test_audio_noise_speech_rescue_downstream_v270.py": "cf73f1b3d8e7bd618a38a057f8a62f04b9bef8b8de7157dc222b4c387d93862d",
+    "docs/audio-noise-speech-rescue-downstream-v270-method.md": "367c88f0cfde8518dfd206a889d5d7058960f4b2203d179126425fe3b5b544d5"
+  },
+  "runtime": {
+    "python": "3.12.6",
+    "system": "Darwin",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.13.0",
+      "numpy": "2.2.6",
+      "scipy": "1.18.1",
+      "transformers": "5.15.1"
+    }
+  },
+  "planned_variants": 46,
+  "planned_source_groups_by_arm_and_cohort": {
+    "genuine": {
+      "rescued": 1,
+      "admitted": 7
+    },
+    "alania": {
+      "rescued": 2,
+      "admitted": 13
+    }
+  },
+  "conditions": [
+    "matched_clean",
+    "traffic_-10db"
+  ],
+  "sample_rate": 16000,
+  "samples_per_window": 48000,
+  "maximum_classifier_forwards": 92,
+  "vad_forwards_permitted": false,
+  "second_opinion_permitted": false,
+  "serving_change_permitted": false,
+  "private_plan_sha256": "cfb9d5ea5a8d2716a792ade7a32b30a03e21f58858041327cd93deaf8900a04a"
+}

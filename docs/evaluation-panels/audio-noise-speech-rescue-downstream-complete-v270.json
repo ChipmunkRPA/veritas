@@ -1,0 +1,96 @@
+{
+  "schema": "chipmunk.audio-noise-speech-rescue-downstream-result/270",
+  "status": "complete",
+  "freeze_sha256": "88e2a68eb60b6b9c88298ea7f800496fb946508887641f9ec238cd271d3c459c",
+  "gate_result_sha256": "40d7b661032db949d00b4d3cd524d53ac12bb7d7db9c9276b46ec35b3a2c8139",
+  "private_observation_journal_sha256": "b379ffd054f8d6bb1f6899d693950cf58fd878da270d051868bd08f60b7cd646",
+  "assessed_variants": 46,
+  "by_arm_cohort_and_condition": {
+    "genuine": {
+      "rescued": {
+        "matched_clean": {
+          "assessed": 1,
+          "directions": {
+            "ai": 0,
+            "original": 1,
+            "inconclusive": 0
+          }
+        },
+        "traffic_-10db": {
+          "assessed": 1,
+          "directions": {
+            "ai": 0,
+            "original": 0,
+            "inconclusive": 1
+          }
+        }
+      },
+      "admitted": {
+        "matched_clean": {
+          "assessed": 7,
+          "directions": {
+            "ai": 0,
+            "original": 7,
+            "inconclusive": 0
+          }
+        },
+        "traffic_-10db": {
+          "assessed": 7,
+          "directions": {
+            "ai": 0,
+            "original": 0,
+            "inconclusive": 7
+          }
+        }
+      }
+    },
+    "alania": {
+      "rescued": {
+        "matched_clean": {
+          "assessed": 2,
+          "directions": {
+            "ai": 2,
+            "original": 0,
+            "inconclusive": 0
+          }
+        },
+        "traffic_-10db": {
+          "assessed": 2,
+          "directions": {
+            "ai": 0,
+            "original": 0,
+            "inconclusive": 2
+          }
+        }
+      },
+      "admitted": {
+        "matched_clean": {
+          "assessed": 13,
+          "directions": {
+            "ai": 12,
+            "original": 0,
+            "inconclusive": 1
+          }
+        },
+        "traffic_-10db": {
+          "assessed": 13,
+          "directions": {
+            "ai": 0,
+            "original": 1,
+            "inconclusive": 12
+          }
+        }
+      }
+    }
+  },
+  "stability_probe_counts": {
+    "not_required_for_decision": 36,
+    "computed": 10
+  },
+  "new_neural_calls": 56,
+  "vad_forwards": 0,
+  "second_opinion_scored": false,
+  "serving_changed": false,
+  "resource_profile_sha256": "570393df5708599d53b3602936f44176030278b2bc364358d977128866d5e845",
+  "worker_duration_seconds": 42.745882291928865
+}

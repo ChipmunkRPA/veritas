@@ -24,7 +24,9 @@ requires the separately obtained source inputs and retained local bindings.
 The [strong-background speech test](audio-noise-speech-gate-strong-noise-v269-result.md)
 documents how to reproduce a comparison between the current speech admission
 rule and a fixed fallback. Its aggregate distinguishes genuine and synthetic
-coverage at two noise levels. Authenticity classification is outside that test.
+coverage at two noise levels. The [downstream comparison](audio-noise-speech-rescue-downstream-v270-result.md)
+scores the rescued clips and the already admitted comparison group against
+their own clean versions.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

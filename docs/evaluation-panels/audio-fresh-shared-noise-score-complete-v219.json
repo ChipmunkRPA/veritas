@@ -1,0 +1,438 @@
+{
+  "schema": "chipmunk.audio-fresh-shared-noise-score-result/219",
+  "status": "complete",
+  "freeze_sha256": "f7152a254aa0fde752442798d67de5bd4a0eba298fa0adf6df03081a3fcb6793",
+  "new_neural_calls": 262,
+  "profile_sha256": [
+    "5d184991e4bf4d37c512ccc09e622b8d1d12c934bf902d165456ff7882e298da",
+    "202ee4ecaab47e9f154f5b2a9ccaf80d4e7b4dafdfe1514ed39309ee0b213419",
+    "f595c0a301637fade16d9dd53bda4517559feea829542e42da0acf45f20cb0f8",
+    "f9768307872a8fa94485d9a6305ad8db47e2dd4ba61bed0dbf0472c38271513b",
+    "7e29eae6047c5e530633ca7359287a0e397277f552a7b8f54efd8d92b6f02efd"
+  ],
+  "outcomes": {
+    "genuine": {
+      "matched_clean": {
+        "planned": 16,
+        "scored": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "false_ai": 0,
+        "missed_ai_over_planned": null,
+        "wrong_original": null
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "scored": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "false_ai": 0,
+        "missed_ai_over_planned": null,
+        "wrong_original": null
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "scored": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 11,
+          "inconclusive": 0,
+          "unavailable": 5
+        },
+        "false_ai": 0,
+        "missed_ai_over_planned": null,
+        "wrong_original": null
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "scored": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 7,
+          "inconclusive": 4,
+          "unavailable": 5
+        },
+        "false_ai": 0,
+        "missed_ai_over_planned": null,
+        "wrong_original": null
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "scored": 11,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 5,
+        "directions": {
+          "ai": 0,
+          "original": 9,
+          "inconclusive": 2,
+          "unavailable": 5
+        },
+        "false_ai": 0,
+        "missed_ai_over_planned": null,
+        "wrong_original": null
+      }
+    },
+    "alania": {
+      "matched_clean": {
+        "planned": 16,
+        "scored": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "directions": {
+          "ai": 15,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 0
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 1,
+        "wrong_original": 0
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "scored": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "directions": {
+          "ai": 3,
+          "original": 4,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 13,
+        "wrong_original": 4
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "scored": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "directions": {
+          "ai": 5,
+          "original": 4,
+          "inconclusive": 7,
+          "unavailable": 0
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 11,
+        "wrong_original": 4
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "scored": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "directions": {
+          "ai": 0,
+          "original": 4,
+          "inconclusive": 12,
+          "unavailable": 0
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 16,
+        "wrong_original": 4
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "scored": 16,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 0,
+        "directions": {
+          "ai": 2,
+          "original": 5,
+          "inconclusive": 9,
+          "unavailable": 0
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 14,
+        "wrong_original": 5
+      }
+    },
+    "drifting": {
+      "matched_clean": {
+        "planned": 16,
+        "scored": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "directions": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 4,
+        "wrong_original": 0
+      },
+      "kitchen_0db": {
+        "planned": 16,
+        "scored": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "directions": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 4,
+        "wrong_original": 0
+      },
+      "kitchen_5db": {
+        "planned": 16,
+        "scored": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "directions": {
+          "ai": 12,
+          "original": 0,
+          "inconclusive": 0,
+          "unavailable": 4
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 4,
+        "wrong_original": 0
+      },
+      "traffic_0db": {
+        "planned": 16,
+        "scored": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "directions": {
+          "ai": 7,
+          "original": 0,
+          "inconclusive": 5,
+          "unavailable": 4
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 9,
+        "wrong_original": 0
+      },
+      "traffic_5db": {
+        "planned": 16,
+        "scored": 12,
+        "speech_gate_rejected": 0,
+        "preparation_unavailable": 4,
+        "directions": {
+          "ai": 11,
+          "original": 0,
+          "inconclusive": 1,
+          "unavailable": 4
+        },
+        "false_ai": null,
+        "missed_ai_over_planned": 5,
+        "wrong_original": 0
+      }
+    }
+  },
+  "clean_to_noise_transitions": {
+    "genuine": {
+      "matched_clean_to_kitchen_0db": {
+        "planned_pairs": 16,
+        "both_scored": 11,
+        "directions": {
+          "unavailable->unavailable": 5,
+          "original->original": 11
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 5,
+          "ok->ok": 11
+        }
+      },
+      "matched_clean_to_kitchen_5db": {
+        "planned_pairs": 16,
+        "both_scored": 11,
+        "directions": {
+          "unavailable->unavailable": 5,
+          "original->original": 11
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 5,
+          "ok->ok": 11
+        }
+      },
+      "matched_clean_to_traffic_0db": {
+        "planned_pairs": 16,
+        "both_scored": 11,
+        "directions": {
+          "unavailable->unavailable": 5,
+          "original->original": 7,
+          "original->inconclusive": 4
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 5,
+          "ok->ok": 11
+        }
+      },
+      "matched_clean_to_traffic_5db": {
+        "planned_pairs": 16,
+        "both_scored": 11,
+        "directions": {
+          "unavailable->unavailable": 5,
+          "original->original": 9,
+          "original->inconclusive": 2
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 5,
+          "ok->ok": 11
+        }
+      }
+    },
+    "alania": {
+      "matched_clean_to_kitchen_0db": {
+        "planned_pairs": 16,
+        "both_scored": 16,
+        "directions": {
+          "ai->original": 3,
+          "ai->inconclusive": 9,
+          "ai->ai": 3,
+          "inconclusive->original": 1
+        },
+        "route_statuses": {
+          "ok->ok": 16
+        }
+      },
+      "matched_clean_to_kitchen_5db": {
+        "planned_pairs": 16,
+        "both_scored": 16,
+        "directions": {
+          "ai->original": 3,
+          "ai->inconclusive": 7,
+          "ai->ai": 5,
+          "inconclusive->original": 1
+        },
+        "route_statuses": {
+          "ok->ok": 16
+        }
+      },
+      "matched_clean_to_traffic_0db": {
+        "planned_pairs": 16,
+        "both_scored": 16,
+        "directions": {
+          "ai->inconclusive": 11,
+          "ai->original": 4,
+          "inconclusive->inconclusive": 1
+        },
+        "route_statuses": {
+          "ok->ok": 16
+        }
+      },
+      "matched_clean_to_traffic_5db": {
+        "planned_pairs": 16,
+        "both_scored": 16,
+        "directions": {
+          "ai->inconclusive": 9,
+          "ai->original": 4,
+          "ai->ai": 2,
+          "inconclusive->original": 1
+        },
+        "route_statuses": {
+          "ok->ok": 16
+        }
+      }
+    },
+    "drifting": {
+      "matched_clean_to_kitchen_0db": {
+        "planned_pairs": 16,
+        "both_scored": 12,
+        "directions": {
+          "unavailable->unavailable": 4,
+          "ai->ai": 12
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 4,
+          "ok->ok": 12
+        }
+      },
+      "matched_clean_to_kitchen_5db": {
+        "planned_pairs": 16,
+        "both_scored": 12,
+        "directions": {
+          "unavailable->unavailable": 4,
+          "ai->ai": 12
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 4,
+          "ok->ok": 12
+        }
+      },
+      "matched_clean_to_traffic_0db": {
+        "planned_pairs": 16,
+        "both_scored": 12,
+        "directions": {
+          "unavailable->unavailable": 4,
+          "ai->ai": 7,
+          "ai->inconclusive": 5
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 4,
+          "ok->ok": 12
+        }
+      },
+      "matched_clean_to_traffic_5db": {
+        "planned_pairs": 16,
+        "both_scored": 12,
+        "directions": {
+          "unavailable->unavailable": 4,
+          "ai->ai": 11,
+          "ai->inconclusive": 1
+        },
+        "route_statuses": {
+          "preparation_unavailable->preparation_unavailable": 4,
+          "ok->ok": 12
+        }
+      }
+    }
+  },
+  "scored_pair_coverage": {
+    "matched_clean": {
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12,
+      "complete_triplets": 8
+    },
+    "kitchen_0db": {
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12,
+      "complete_triplets": 8
+    },
+    "kitchen_5db": {
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12,
+      "complete_triplets": 8
+    },
+    "traffic_0db": {
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12,
+      "complete_triplets": 8
+    },
+    "traffic_5db": {
+      "genuine_alania": 11,
+      "genuine_drifting": 8,
+      "alania_drifting": 12,
+      "complete_triplets": 8
+    }
+  },
+  "scope": "Fresh Turkish source cohorts and two recorded noise tapes. Differences cannot isolate source class or establish population performance; no calibration or defaults changed."
+}

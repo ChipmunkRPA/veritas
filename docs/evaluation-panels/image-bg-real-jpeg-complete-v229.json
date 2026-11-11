@@ -1,0 +1,940 @@
+{
+  "schema": "chipmunk.image-bg-real-jpeg-comparison-result/229",
+  "freeze_sha256": "1d4d0161226ebfc5a1236e88a194b06dac6dbd58139a0b0ee917c1c662ba226d",
+  "unique_model_calls": 480,
+  "repeat_model_calls": 4,
+  "unassessed_calls": 0,
+  "quality_results": {
+    "75": {
+      "quality": 75,
+      "photos": 24,
+      "source_groups": 24,
+      "methods": {
+        "current": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 3,
+          "edited_photos_with_any_overlap": 3,
+          "edited_photos_usefully_localized": 1,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 21,
+          "group_mean_useful_fraction": 0.041666666666666664,
+          "group_mean_edited_iou": 0.02855575845730388,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 7,
+              "flagged_groups": 7,
+              "group_mean_highlighted_area_fraction": 0.04004745597076092,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 5,
+              "mean_iou_with_ordinary_edit_if_changed": 0.032845275976600107,
+              "mean_ordinary_edit_recall_if_changed": 0.12516243466958712
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            }
+          }
+        },
+        "sensitive": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 3,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 1,
+          "edited_photos_without_a_region": 21,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.0026167999079198014,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.0026365327246395155,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 1,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0007207007428761504,
+              "mean_ordinary_edit_recall_if_changed": 0.001208627742655262
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 3,
+              "flagged_groups": 3,
+              "group_mean_highlighted_area_fraction": 0.0020903599115065586,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 10,
+              "flagged_groups": 10,
+              "group_mean_highlighted_area_fraction": 0.0160251950460767,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 10,
+              "mean_iou_with_ordinary_edit_if_changed": 0.15576708996202956,
+              "mean_ordinary_edit_recall_if_changed": 0.2420845657497054
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": -0.041666666666666664,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.02855575845730388,
+              "pointwise_95pct_interval": [
+                -0.08010965466410867,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.16666666666666666,
+              "pointwise_95pct_interval": [
+                0.041666666666666664,
+                0.3333333333333333
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0026167999079198014,
+              "pointwise_95pct_interval": [
+                0.0004568217713155864,
+                0.005278020140565468
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.16666666666666666,
+              "pointwise_95pct_interval": [
+                0.041666666666666664,
+                0.3333333333333333
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0026365327246395155,
+              "pointwise_95pct_interval": [
+                0.0003576396424093364,
+                0.005449930826822917
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.125,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.25
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0020903599115065586,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.004545553230944975
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.125,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.375
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": -0.02402226092468421,
+              "pointwise_95pct_interval": [
+                -0.08174127310954878,
+                0.011500173594361052
+              ]
+            }
+          }
+        },
+        "shared": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 0,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 1,
+          "edited_photos_without_a_region": 24,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 2,
+              "flagged_groups": 2,
+              "group_mean_highlighted_area_fraction": 0.003361183920024354,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 2,
+              "mean_iou_with_ordinary_edit_if_changed": 0.05107861383214209,
+              "mean_ordinary_edit_recall_if_changed": 0.056434137392956475
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": -0.041666666666666664,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.02855575845730388,
+              "pointwise_95pct_interval": [
+                -0.08010965466410867,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": -0.20833333333333334,
+              "pointwise_95pct_interval": [
+                -0.375,
+                -0.08333333333333333
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": -0.03668627205073656,
+              "pointwise_95pct_interval": [
+                -0.09236263605623664,
+                -0.00460034829598886
+              ]
+            }
+          }
+        }
+      }
+    },
+    "90": {
+      "quality": 90,
+      "photos": 24,
+      "source_groups": 24,
+      "methods": {
+        "current": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 5,
+          "edited_photos_with_any_overlap": 3,
+          "edited_photos_usefully_localized": 1,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 0,
+          "edited_photos_without_a_region": 19,
+          "group_mean_useful_fraction": 0.041666666666666664,
+          "group_mean_edited_iou": 0.03007733052043848,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 2,
+              "flagged_groups": 2,
+              "group_mean_highlighted_area_fraction": 0.0011429963288483796,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 2,
+              "flagged_groups": 2,
+              "group_mean_highlighted_area_fraction": 0.0012024302541473765,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.002916159453215422,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 3,
+              "mean_iou_with_ordinary_edit_if_changed": 0.013383230211594906,
+              "mean_ordinary_edit_recall_if_changed": 0.03143836808047396
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 11,
+              "flagged_groups": 11,
+              "group_mean_highlighted_area_fraction": 0.015886747263603486,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 7,
+              "mean_iou_with_ordinary_edit_if_changed": 0.039754098347479276,
+              "mean_ordinary_edit_recall_if_changed": 0.07238965180362783
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.0,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.0
+              ]
+            }
+          }
+        },
+        "sensitive": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 6,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 1,
+          "edited_photos_without_a_region": 18,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 6,
+              "flagged_groups": 6,
+              "group_mean_highlighted_area_fraction": 0.012868570062008275,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 7,
+              "flagged_groups": 7,
+              "group_mean_highlighted_area_fraction": 0.013185240394013689,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 1,
+              "mean_iou_with_ordinary_edit_if_changed": 0.020110402182963654,
+              "mean_ordinary_edit_recall_if_changed": 0.027337410847004598
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 5,
+              "flagged_groups": 5,
+              "group_mean_highlighted_area_fraction": 0.009972822939487572,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 19,
+              "flagged_groups": 19,
+              "group_mean_highlighted_area_fraction": 0.030659317107543688,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 16,
+              "mean_iou_with_ordinary_edit_if_changed": 0.22041188011672885,
+              "mean_ordinary_edit_recall_if_changed": 0.3770062305373867
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": -0.041666666666666664,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.03007733052043848,
+              "pointwise_95pct_interval": [
+                -0.08101011366438256,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": 0.16666666666666666,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.375
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": 0.011725573733159892,
+              "pointwise_95pct_interval": [
+                0.002924251556396484,
+                0.021934568062030448
+              ]
+            },
+            "tone_false_group": {
+              "difference": 0.20833333333333334,
+              "pointwise_95pct_interval": [
+                0.0,
+                0.4166666666666667
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": 0.011982810139866315,
+              "pointwise_95pct_interval": [
+                0.0035294897762345677,
+                0.02205165269303364
+              ]
+            },
+            "blur_false_group": {
+              "difference": 0.041666666666666664,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.20833333333333334
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": 0.00705666348627215,
+              "pointwise_95pct_interval": [
+                -0.0007809297538097994,
+                0.016367140228365672
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": 0.3333333333333333,
+              "pointwise_95pct_interval": [
+                0.08333333333333333,
+                0.5833333333333334
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": 0.0147725698439402,
+              "pointwise_95pct_interval": [
+                -0.0018724254569179092,
+                0.02855635944860141
+              ]
+            }
+          }
+        },
+        "shared": {
+          "edited_photos": 24,
+          "edited_photos_flagged": 0,
+          "edited_photos_with_any_overlap": 0,
+          "edited_photos_usefully_localized": 0,
+          "new_useful_locations": 0,
+          "lost_useful_locations": 1,
+          "edited_photos_without_a_region": 24,
+          "group_mean_useful_fraction": 0.0,
+          "group_mean_edited_iou": 0.0,
+          "controls": {
+            "original": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 0,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": null,
+              "mean_ordinary_edit_recall_if_changed": null
+            },
+            "tone": {
+              "photos": 24,
+              "flagged_photos": 0,
+              "flagged_groups": 0,
+              "group_mean_highlighted_area_fraction": 0.0,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "blur": {
+              "photos": 24,
+              "flagged_photos": 1,
+              "flagged_groups": 1,
+              "group_mean_highlighted_area_fraction": 2.002716064453125e-05,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 0,
+              "mean_iou_with_ordinary_edit_if_changed": 0.0,
+              "mean_ordinary_edit_recall_if_changed": 0.0
+            },
+            "copy_move": {
+              "photos": 24,
+              "flagged_photos": 4,
+              "flagged_groups": 4,
+              "group_mean_highlighted_area_fraction": 0.0015235002013458605,
+              "ordinary_footprints_with_changed_pixels": 24,
+              "ordinary_footprints_overlapped": 4,
+              "mean_iou_with_ordinary_edit_if_changed": 0.02006166609989658,
+              "mean_ordinary_edit_recall_if_changed": 0.022156810755333795
+            }
+          },
+          "paired_against_current": {
+            "useful": {
+              "difference": -0.041666666666666664,
+              "pointwise_95pct_interval": [
+                -0.125,
+                0.0
+              ]
+            },
+            "edited_iou": {
+              "difference": -0.03007733052043848,
+              "pointwise_95pct_interval": [
+                -0.08101011366438256,
+                0.0
+              ]
+            },
+            "original_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.20833333333333334,
+                0.0
+              ]
+            },
+            "original_highlighted_area": {
+              "difference": -0.0011429963288483796,
+              "pointwise_95pct_interval": [
+                -0.003117596661603009,
+                0.0
+              ]
+            },
+            "tone_false_group": {
+              "difference": -0.08333333333333333,
+              "pointwise_95pct_interval": [
+                -0.20833333333333334,
+                0.0
+              ]
+            },
+            "tone_highlighted_area": {
+              "difference": -0.0012024302541473765,
+              "pointwise_95pct_interval": [
+                -0.0032163078402295524,
+                0.0
+              ]
+            },
+            "blur_false_group": {
+              "difference": -0.125,
+              "pointwise_95pct_interval": [
+                -0.25,
+                0.0
+              ]
+            },
+            "blur_highlighted_area": {
+              "difference": -0.0028961322925708907,
+              "pointwise_95pct_interval": [
+                -0.005911956598729263,
+                -0.00035074022081163194
+              ]
+            },
+            "copy_move_false_group": {
+              "difference": -0.2916666666666667,
+              "pointwise_95pct_interval": [
+                -0.4583333333333333,
+                -0.125
+              ]
+            },
+            "copy_move_highlighted_area": {
+              "difference": -0.014363247062257625,
+              "pointwise_95pct_interval": [
+                -0.03165259361267091,
+                -0.003890753949434517
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "phase_profile_sha256": {
+    "prepare": "6ba2dd898c035cbe4b8e2a859c602d898fffbbe9e0a1ca6be0c77cf99bccc27a",
+    "baseline-q75-00": "d2e243a62fe299a9e63f91b519c3127b1cb6ca05484ce4895360f4389ec7982e",
+    "candidate-q75-00": "bee5dd2e4434e528d034111b999513688b2d53710dc6a20da190b8265e2911ea",
+    "readout-q75-00": "7d5749ec7dfde2fe77141e0982a984a65a9e65bbd057f4776eb02dfff5650f94",
+    "baseline-q75-01": "362ce01866b924579be404d5c322147770f1020f8db150262bc4942bdf540760",
+    "candidate-q75-01": "c25a0e5d177bbd4c581f9aa5364e0cba1077ca38f68f2437a00ec713c770e3dd",
+    "readout-q75-01": "3c6447b90f2538eaef87d60416224f4d5456b3aa0c60fec2ab1db09ee5e93adc",
+    "baseline-q75-02": "86ba422893a402609447d28f702be3a333c30418fb64c7cd94d520d13118df8e",
+    "candidate-q75-02": "3c454a45b3314a6c57cee6d0447f950872ab611c12211ead2ffa569e3cad27e7",
+    "readout-q75-02": "1c5d1edefc895f201ce9fc161f1c43d34e2c98d88811eff6ad046ce0fb49e3bd",
+    "baseline-q75-03": "0b0df42ad561c000109aa0606e7ef59f27acf911a9cafd5b3d4631eefe8b098c",
+    "candidate-q75-03": "bd3086554333e43b0e0d9279311367dba7589e0fba5206d1970544626e79dea2",
+    "readout-q75-03": "ccf745ec2a44bf7828327a6ee80fe7588d7e15e98db1e72832d1ab95d22933d1",
+    "baseline-q75-04": "70bc02cbe8591e4f46960e18b9b6f46de523eb7d71096cabe8d96863f6c101c6",
+    "candidate-q75-04": "e1a22f992f6ae6c322718dff4fbbbd4274c3a435e3c12f4baa067298bc30080f",
+    "readout-q75-04": "0977e7c74bcbb0698d8007b531902b550946ef38c6db742b182ab61dd0f082bd",
+    "baseline-q90-00": "ef15354169efdb18029cc9777a91621fd4fcd38cabfe6086889e7450453f7181",
+    "candidate-q90-00": "a442d0f249ddce8edd373fbcfadbc28a4e54994b5a4622b844e0d38ab9f22f19",
+    "readout-q90-00": "5a922a7091c520d3be1660964a7b9e36a5bc4564fb1a30d85e5a766daef2d240",
+    "baseline-q90-01": "0ec6ce3568e4b6b56cea72130cfb89cd3b2ccb59c972df549074f8a75fafbfb1",
+    "candidate-q90-01": "44081f302ee94b8e64eb748939ae805e06945eb0fc8dcb4df83b6c01211eee67",
+    "readout-q90-01": "b3118a0e210adcda6d7325fc5bbe0bfe5e7b24152ff14e28961a90e358c037ed",
+    "baseline-q90-02": "d9aa7957775cf4cf935e46d1f7df59bd685a8a39b00e76f5e4ec31ffe719d107",
+    "candidate-q90-02": "e39bc34587994b1ca59bab36dac4ae8471bc97e118bbf9d365d81ef05b6cbd67",
+    "readout-q90-02": "5dadf2cceba1d3daf8a463330939703ff82f0ef58602e13651c9a06f08c6260f",
+    "baseline-q90-03": "41c4ac407d9da988c6177a8420b6292b85f41c57bb8f6c8469ee68768560839f",
+    "candidate-q90-03": "bf245b5fcdb7802c4b2ac790458c50aaca03629fa3a887b0a80d2d172a81c375",
+    "readout-q90-03": "b444eb3c57ffb575817a9b4c564ff0f35540f58ae8324c606c4fc4ec593440d5",
+    "baseline-q90-04": "a285e57e51c5fa165bf83120d40ddeabfd3095a25728cdecbe3cb61e41bd9f0a",
+    "candidate-q90-04": "0d7573e36fdfea3dbb6da855fd63a4f6c878dcdd8c5995472bbcf5ead6d850fe",
+    "readout-q90-04": "ca4d43a8de1890bbdde15908e4db34b51ff20f1e4d5aeb3b61f4609c3e1a1f41"
+  },
+  "serving_admitted": false,
+  "calibration_performed": false,
+  "ordinary_controls_have_zero_ai_truth": true,
+  "scope": "BG-REAL v2 LaMa object removal. Both qualities reuse the same 24 deduplicated source groups. Paired group bootstrap intervals are conditional and pointwise. Cue localization is separate from whole-file authorship confidence.",
+  "qualification_sha256": "3a46ad593be6a095f25e5998f7c51d9d592de6d413915348b57271111ec50306",
+  "v189_policy_freeze_sha256": "cd0333f18623441dba7177e4f79db69a31174713bc823822d5112a07dd4bba5e",
+  "publisher_split_counts": {
+    "test_background_ood": 7,
+    "test_id": 7,
+    "test_subject_ood": 5,
+    "val": 5
+  },
+  "phase_output_sha256": {
+    "candidate-q75-00": {
+      "completed_sha256": "eafe44bdfba858793375e1ba620d4c56e8d68318809747345ecf6b0d69a208b3",
+      "rows_sha256": "0744ac1b13b6ddf3824f35253e8bc18ca64522862fa03f181d4411b6a8a7be88"
+    },
+    "baseline-q90-00": {
+      "completed_sha256": "d34923822cbadd3104612c2fc57a347e3b68e22650cebb1496db183ce0a7bf8a",
+      "rows_sha256": "822d5ba1f713048fd5ef8c3ed628c1f49893fc602397b77e2ed3a5fd2a2a2d57"
+    },
+    "readout-q90-04": {
+      "completed_sha256": "8910a693046b5792dd5106b6b4a6449ab30d4db7ce76d1d6226d14a4ff0d4b63",
+      "rows_sha256": "e7b5aa9b98c9f379bcc53f4bd26a5f741df3ccd0a188017ff3dff799ac00e90d"
+    },
+    "readout-q75-04": {
+      "completed_sha256": "3f232d3e36d9d83229058f436af01c8a0102899796df57664611dd9a0aecfb2f",
+      "rows_sha256": "1386c15156a2abaf911d975d8ae4f9d439f3e82990449538a8b3a8c79a4e2095"
+    },
+    "baseline-q90-03": {
+      "completed_sha256": "e07b83f13f3b1182b16180723de32c2e9d1af077e17cf37b94db26a8aebdbce1",
+      "rows_sha256": "6adc9d989d5f52edfcf35ce3295edb14fdc9cf3e15ff4564f0bb02f6114be90d"
+    },
+    "readout-q90-03": {
+      "completed_sha256": "40ea240f1b7bc665be29262471f90341ea831cb88878ff90eca6a76b56f4acb6",
+      "rows_sha256": "e43eeb396b757e28caf3a2ef7660844db07410b77aee89d0b2c5e442e0a52213"
+    },
+    "candidate-q90-01": {
+      "completed_sha256": "ad27fb256befd486b528204bcc47761eaa45bf4f4a5ad04355d25a2293bfd8e4",
+      "rows_sha256": "05d031ee8c36ed2bf51bdaea1973ba26d92204d691e2b8042d7f65fb25f60340"
+    },
+    "readout-q90-00": {
+      "completed_sha256": "be33801398844e389fda0e222980f055b1ea261f62bfb822b5bb2f987fa8b8c5",
+      "rows_sha256": "05b19a3a0e1b4ca784d3d19d92ba8e78a763e3648f10d3bdb4f7582c7fce4431"
+    },
+    "candidate-q75-04": {
+      "completed_sha256": "2f3e0d3681b886baf5c98cabcd330c3054cf61d6938f9aa6b2441b4528249035",
+      "rows_sha256": "0ea30901702ff2946fe204f3a88fdf1d2f8bb02ec21e6a17536ceed3bd0aa032"
+    },
+    "baseline-q75-02": {
+      "completed_sha256": "4cd282f8533c5e66ec4e98f4dfc0973ff78805762968e377a69e662b671015b9",
+      "rows_sha256": "c9d1369741cb11edc83631a6a717ffbdbb584c70ca64be6df78f4f927763fc72"
+    },
+    "baseline-q90-01": {
+      "completed_sha256": "e892dc52a14e658dbb875ea5413fc44246a9383e51e10e007ab57f55b88d05c0",
+      "rows_sha256": "e29d025b26dbe8617d2fb28c52e20424b80272d773fe370f39ee4c17b411ab05"
+    },
+    "baseline-q75-00": {
+      "completed_sha256": "285e95944c8796e341b202f6988c8c2dfb1b97a8fa50ee45c98d449c41fdef80",
+      "rows_sha256": "b55344a9865249a0c3e854a3f3c9451cd96b4853952adea03bf994e7551c9ad4"
+    },
+    "candidate-q90-02": {
+      "completed_sha256": "7f5554f52e0a483e29bf0b39524968b43e61c6215319710c25173374a88d8ab5",
+      "rows_sha256": "109f4fa586d0274e52bc60875615eb3bb931e89a8e3dd85905bf501d2f978b08"
+    },
+    "baseline-q75-01": {
+      "completed_sha256": "44efea239edc22c85779a51ed8b675e252031d6d6e89cd0c366f5a475e7f03d3",
+      "rows_sha256": "d06aee48d701118c9a48c8792f6eac37ccf6a12d08daf106a11d580f449e47e4"
+    },
+    "readout-q90-02": {
+      "completed_sha256": "364fa08f3862003428e364ba3da12cc1c4b9bc8c3d36305e73f4a1533ec8feaa",
+      "rows_sha256": "c4c3acd28b64e33a0afd4b4818dfdf0360708c202c3ac01a1d9b824ae7eca8cf"
+    },
+    "readout-q75-01": {
+      "completed_sha256": "b105cdae36032e574dc201171f689a4caf6747c17eafc6d6caa4b7c200f627ae",
+      "rows_sha256": "147f17163f6c0f2d95ed263d3eabedb229d752fddf38b14e166283b09b0d2886"
+    },
+    "candidate-q90-04": {
+      "completed_sha256": "2a2085487b97550a9f5273b0a9b06313ae20f8c33a77a668092fa940cd42c656",
+      "rows_sha256": "967887118f19e6e602e0cf385f2a1b1a51ebe8461a67042ac5e35aa6e16fd2de"
+    },
+    "candidate-q90-00": {
+      "completed_sha256": "b22f6cb8b502764478d3eb97291579c1dd406f8be28025c0e3fd1ad13b5caf83",
+      "rows_sha256": "5a2d9a579699dc0eba95b866b014030cfcbe1687f83ac240898e76b57a160b18"
+    },
+    "candidate-q75-01": {
+      "completed_sha256": "1de3a2e4e76af8b01044a3b0b0a6146d1f19fa39ead61df00e9f9c68ee6f26b4",
+      "rows_sha256": "98487df33c889a4f1d6c22cca6e6200c0d568de2cbc8a93199b0e936d9de9b43"
+    },
+    "baseline-q75-03": {
+      "completed_sha256": "b6c446d52e8a1e35108f3f7de79812c685d386642ff38e2b1c65dc6b06c37307",
+      "rows_sha256": "87c3da2c6d562e29048d6f7307ac7899928eadf78097a043665fbeb540a479e0"
+    },
+    "candidate-q75-03": {
+      "completed_sha256": "d9866f07078dbb1d38de1b350d41597db43c8e860c84abe7cdaaa43a5a2f2285",
+      "rows_sha256": "72a96016305fb81a29f50712370b3765642f08fbc4569fac8de70bae19107492"
+    },
+    "candidate-q90-03": {
+      "completed_sha256": "a824724e4a2524a1ba1243491e8bfcd6e3adc3ff8857e06689121cd3850401e7",
+      "rows_sha256": "0bf4e3592713a92486f6f06dad94dd257dc7ac589e8c1e15a4a74d20083e8971"
+    },
+    "baseline-q90-04": {
+      "completed_sha256": "c9f28513aad4bcb9703cdd716f3eda382f5a0ba2be316f3a1c305e870423f8e9",
+      "rows_sha256": "62c803a46a4b54af30757d6a375f9f0a74ab5ba090f3d92de857ebc186dbafee"
+    },
+    "baseline-q75-04": {
+      "completed_sha256": "6705fc12e4ea461cfd35a4c32ca3813216f8fc899930127e4e3ea49db8eaeb5d",
+      "rows_sha256": "f00abf9ad7cab7f5aa7d2eece5c539ade70bb42d28d6fef99937586c081ae2c2"
+    },
+    "readout-q75-03": {
+      "completed_sha256": "50f22594594e9ab3e9baf1cce2266b0f9e017dd6588377fb2f9218f8f33b084d",
+      "rows_sha256": "e25f38eb1448f0bfe6df1c68aa0d8932d0dcfb3edcb8aaa2bc9dcedac6946ddb"
+    },
+    "readout-q90-01": {
+      "completed_sha256": "ccecf7e3176fe79dfe46d177e02b493f4457d29872b6dedb1e663ce6edd77119",
+      "rows_sha256": "5fb27fa8ef45077faaa032f0093ec29617e4d31839946793e0cf9bb7cc959eba"
+    },
+    "baseline-q90-02": {
+      "completed_sha256": "82f6eed40cf69a2faa42b875432ef2f9cabe5184004f58e7f5a336cb856adfc0",
+      "rows_sha256": "5d2e4d9efd48573b00ee729f4ed91b0f13e8df4264cd4878f2f44ea658dc88a5"
+    },
+    "readout-q75-02": {
+      "completed_sha256": "e99d341f228acc512a55b8aecabeb0246e303433769a73f31b27cfc434ede232",
+      "rows_sha256": "57a162998f5363c297f867c8019772dd2aaaeb82b36a9702b5806c82e0256f96"
+    },
+    "readout-q75-00": {
+      "completed_sha256": "3dc4064ee0a2bb2da205af20eebdd51bf30a5f314500fef62f674dee47b1ceaa",
+      "rows_sha256": "a52066097c30c408b201be38828cf54ee3861f209966850d2de6f07ff92efdca"
+    },
+    "candidate-q75-02": {
+      "completed_sha256": "1039255454fa6bf08c683c5bcc5cb6aa423a7c192991fb65a18894fd18761cb0",
+      "rows_sha256": "b75104b45953843162b647027edfbe05892999cefbf742c34ba608226f18feef"
+    }
+  }
+}

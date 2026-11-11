@@ -6,8 +6,10 @@ import re
 from collections.abc import Callable
 
 V7 = "image-evidence-7"
-VERSION = "image-evidence-8"
-REFLECTION_VERSIONS = frozenset({V7, VERSION})
+V8 = "image-evidence-8"
+V9 = "image-evidence-9"
+VERSION = V9
+REFLECTION_VERSIONS = frozenset({V7, V8, V9})
 SCHEMA = "same-image-reflection-similarity/1"
 NOTE = (
     "Two areas may have similar detail after a horizontal reflection. Copying, intentional symmetry, reflections "
@@ -20,17 +22,33 @@ STATUS_TEXT = {
     "unsupported_geometry": "This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.",
     "unassessed_match_budget": "The check found too many candidate matches to show a distinct comparison.",
 }
+LARGE_COVERAGE_TEXT = (
+    "This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, "
+    "or a long side of 1,025–2,048 px and a short side of at least 768 px."
+)
 _SHA = re.compile(r"[a-f0-9]{64}")
 ROLES = ("area_a", "area_b")
 
 MIN_SIDE = 384
 MIN_LONG_SIDE = 513
 MAX_SIDE = 1024
+LARGE_MIN_SIDE = 768
+LARGE_MAX_SIDE = 2048
+LARGE_MAX_PIXELS = 4_194_304
 PAIR_LIMIT = 3
 
 
-def supported_size(width: int, height: int) -> bool:
-    return min(width, height) >= MIN_SIDE and MIN_LONG_SIDE <= max(width, height) <= MAX_SIDE
+def supported_size(width: int, height: int, *, version: str = VERSION) -> bool:
+    short, long = sorted((width, height))
+    if long <= MAX_SIDE:
+        return short >= MIN_SIDE and long >= MIN_LONG_SIDE
+    return version == V9 and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
+
+
+def status_text(status: str, *, version: str) -> str:
+    if status == "unsupported_geometry" and version == V9:
+        return LARGE_COVERAGE_TEXT
+    return STATUS_TEXT[status]
 
 
 def box_bounds(box: dict, width: int, height: int) -> tuple[int, int, int, int]:
@@ -60,7 +78,8 @@ def prior_evidence(document: dict) -> dict:
 
 def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -> None:
     """Validate standalone public structure and both exact native-crop references."""
-    if document.get("version") not in REFLECTION_VERSIONS:
+    version = document.get("version")
+    if version not in REFLECTION_VERSIONS:
         if {"copy_similarity", "prior_image_evidence"} & document.keys():
             raise ValueError("Earlier image evidence cannot contain automatic copy similarity")
         return
@@ -78,7 +97,7 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
         raise ValueError("Copy similarity changes the frozen prior evidence")
     source = document["source"]
     size = source["width"], source["height"]
-    supported = supported_size(*size)
+    supported = supported_size(*size, version=version)
     record = document.get("copy_similarity")
     if not isinstance(record, dict) or set(record) != {
         "schema",

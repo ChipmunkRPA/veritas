@@ -89,7 +89,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "An overall classification does not locate edited pixels."}
     store = store or default_store()
     store.verify(document["source"]["sha256"])
-    from app.evidence.image_copy_similarity_binding import STATUS_TEXT
+    from app.evidence.image_copy_similarity_binding import status_text
     from app.evidence.image_packets_v7 import validate_assets
 
     validate_assets(document, store)
@@ -108,7 +108,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     comparison = copy.deepcopy(document.get("comparison"))
     similarity = copy.deepcopy(document.get("copy_similarity"))
     if similarity is not None:
-        similarity["observation"] = STATUS_TEXT[similarity["status"]]
+        similarity["observation"] = status_text(similarity["status"], version=document["version"])
         for pair in similarity["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

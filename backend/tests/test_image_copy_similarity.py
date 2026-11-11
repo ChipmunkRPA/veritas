@@ -7,6 +7,7 @@ import io
 
 import cv2
 import numpy as np
+import pymupdf
 import pytest
 from PIL import Image
 from sqlalchemy.orm import Session
@@ -17,6 +18,7 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
+from app.evidence.image_copy_similarity_binding import V7, V8, supported_size
 from app.reports import engine, image_evidence, snapshot
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -41,9 +43,20 @@ def low_texture_source(*, reflected: bool) -> Image.Image:
     return Image.fromarray(gray).convert("RGB")
 
 
-def reflected_result(packet_fixture, *, reflected=True, low_texture=False):
+def large_source(*, reflected: bool) -> Image.Image:
+    rng = np.random.default_rng(8812)
+    pixels = rng.integers(0, 256, (896, 1408, 3), dtype=np.uint8)
+    pixels = cv2.GaussianBlur(pixels, (3, 3), 0.65)
+    if reflected:
+        pixels[117:245, :128] = pixels[525:653, 1093:1221][:, ::-1]
+    return Image.fromarray(pixels)
+
+
+def reflected_result(packet_fixture, *, reflected=True, low_texture=False, large=False):
     db, store, analysis, _, _ = packet_fixture
     make_source = low_texture_source if low_texture else authored_source
+    if large:
+        make_source = large_source
     source = make_source(reflected=reflected)
     obj = store.put_bytes(_bytes(source, format="PNG"))
     analysis.sha256, analysis.size_bytes = obj.sha256, obj.size_bytes
@@ -53,6 +66,22 @@ def reflected_result(packet_fixture, *, reflected=True, low_texture=False):
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
     return db, store, analysis, result, source
+
+
+@pytest.mark.parametrize(("width", "height", "old", "latest"), [
+    (512, 512, False, False),
+    (513, 384, True, True),
+    (1024, 384, True, True),
+    (1025, 767, False, False),
+    (1025, 768, False, True),
+    (768, 2048, False, True),
+    (2048, 2048, False, True),
+    (2049, 2048, False, False),
+])
+def test_large_geometry_gate_preserves_old_scope(width, height, old, latest):
+    for version in (V7, V8):
+        assert supported_size(width, height, version=version) is old
+    assert supported_size(width, height) is latest
 
 
 @pytest.mark.parametrize("image_format", ["PNG", "JPEG"])
@@ -115,18 +144,24 @@ def test_automatic_pair_persists_both_original_crops_without_manual_highlight(pa
         image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
 
 
-def test_historical_v7_remains_readable_after_writing_v8(packet_fixture, monkeypatch):
-    db, store, analysis, result, _ = reflected_result(packet_fixture)
+@pytest.mark.parametrize(("version", "creator", "large"), [
+    (V7, "image-evidence-packets/5", False),
+    (V8, "image-evidence-packets/6", True),
+])
+def test_historical_reflection_remains_readable_after_writing_latest(packet_fixture, monkeypatch, version, creator, large):
+    db, store, analysis, result, _ = reflected_result(packet_fixture, large=large)
     historical = service.build_packet_set(db, analysis, store, result)
-    historical["version"] = image_packets_v7.V7
-    historical["id"] = image_packets_v5.current_set_id(analysis, image_packets_v7.V7)
+    historical["version"] = version
+    historical["id"] = image_packets_v5.current_set_id(analysis, version)
+    if large:
+        historical["copy_similarity"].update(status="unsupported_geometry", pairs=[])
     for pair in historical["copy_similarity"]["pairs"]:
         for asset in pair["artifacts"].values():
             asset["url"] = image_packets_v7.url(historical, asset["sha256"])
     historical["sha256"] = image_packets_v5.packet_hash(historical)
     historical_row = register_artefact(
         db, store, canonical_json(historical), media_type="application/json", role="exhibit_payload",
-        created_by="image-evidence-packets/5", analysis_id=analysis.id, artefact_id=historical["id"],
+        created_by=creator, analysis_id=analysis.id, artefact_id=historical["id"],
     )
     newest = db.get(type(historical_row), service.current_set_id(analysis))
     db.delete(newest)
@@ -135,7 +170,8 @@ def test_historical_v7_remains_readable_after_writing_v8(packet_fixture, monkeyp
         context.setattr(copy_similarity, "analyse", lambda _: pytest.fail("A historical read must not rerun the detector"))
         assert service.load_packet_set(db, analysis, store) == historical
     latest = service.persist_packet_set(db, analysis, store, result=result)
-    assert latest["version"] == "image-evidence-8" and latest["id"] != historical["id"]
+    assert latest["version"] == "image-evidence-9" and latest["id"] != historical["id"]
+    assert latest["copy_similarity"]["status"] == "supported_pair"
     assert service.load_packet_set(db, analysis, store) == latest
     assert service.load_packet_set(db, analysis, store, set_id=historical["id"]) == historical
     assert store.read_bytes(historical_row.sha256) == canonical_json(historical)
@@ -149,27 +185,34 @@ def test_no_pair_keeps_explicit_coverage_and_no_assets(packet_fixture):
     assert service.asset_refs(document) == {}
 
 
-def test_authenticated_image_api_serves_both_pair_crops(evidence_http):
+@pytest.mark.parametrize("large", [False, True])
+def test_authenticated_image_api_serves_both_pair_crops(evidence_http, large):
     fixture = evidence_http
     analysis_id = "image-unprepared"
     with Session(fixture.engine) as db:
         analysis = db.get(Analysis, analysis_id)
-        db, store, analysis, result, _ = reflected_result((db, fixture.store, analysis, None, None), low_texture=True)
+        db, store, analysis, result, source = reflected_result(
+            (db, fixture.store, analysis, None, None), low_texture=not large, large=large,
+        )
         expected = service.persist_packet_set(db, analysis, store, result=result)
         db.commit()
     response = fixture.client.get(f"/api/v2/analyses/{analysis_id}/evidence-packets", headers=fixture.viewer)
     assert response.status_code == 200 and response.json() == expected
     (pair,) = expected["copy_similarity"]["pairs"]
     assert pair["regions"]["area_a"]["x"] == 0
-    for asset in pair["artifacts"].values():
+    for role, asset in pair["artifacts"].items():
         assert fixture.client.get(asset["url"], headers=fixture.outsider).status_code == 404
         plate = fixture.client.get(asset["url"], headers=fixture.viewer)
         assert plate.status_code == 200
         assert plate.content == fixture.store.read_bytes(asset["sha256"])
+        with Image.open(io.BytesIO(plate.content)) as crop:
+            bounds = image_packets_v7.box_bounds(pair["regions"][role], *source.size)
+            assert crop.tobytes() == source.crop(bounds).tobytes()
 
 
-def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, monkeypatch):
-    db, store, analysis, result, _ = reflected_result(packet_fixture)
+@pytest.mark.parametrize("large", [False, True])
+def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, monkeypatch, large):
+    db, store, analysis, result, _ = reflected_result(packet_fixture, large=large)
     document = service.persist_packet_set(db, analysis, store, result=result)
     original = specimen("image", "standard")
     frozen = original.model_copy(
@@ -192,8 +235,25 @@ def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, m
     assert manifest["copy_similarity"] == document["copy_similarity"]
     assert {a["role"] for a in manifest["artifacts"]} == {"area_a", "area_b"}
     html = engine.render_html(frozen, embed_fonts=False)
-    assert "Same-image copy similarity" in html and "Area B · x 527, y 301, 128 × 128 px" in html
+    x, y = (1093, 525) if large else (527, 301)
+    assert "Same-image copy similarity" in html and f"Area B · x {x}, y {y}, 128 × 128 px" in html
     assert "which area came first" in html
+    if large:
+        rendered_pdf = engine.render_pdf(frozen)
+        pdf_text = " ".join(engine.pdf_text(rendered_pdf.pdf).split())
+        assert f"Area B · x {x}, y {y}, 128 × 128 px" in pdf_text
+        expected_pixels = set()
+        for asset in document["copy_similarity"]["pairs"][0]["artifacts"].values():
+            with Image.open(io.BytesIO(store.read_bytes(asset["sha256"]))) as crop:
+                expected_pixels.add(crop.convert("RGB").tobytes())
+        with pymupdf.open(stream=rendered_pdf.pdf, filetype="pdf") as pdf:
+            actual_pixels = set()
+            for page in pdf:
+                for xref, _, width, height, *_ in page.get_images():
+                    if (width, height) == (128, 128):
+                        pixmap = pymupdf.Pixmap(pdf, xref)
+                        actual_pixels.add(pixmap.samples)
+            assert expected_pixels <= actual_pixels
     redacted = frozen.model_copy(update={"report": frozen.report.model_copy(update={"redacted": True})})
     assert all(
         image["uri"] is None

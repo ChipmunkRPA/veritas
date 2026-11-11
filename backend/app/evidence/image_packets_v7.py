@@ -19,6 +19,7 @@ from app.evidence.image_copy_similarity_binding import (
     ROLES,
     SCHEMA,
     V7,
+    V8,
     VERSION,
     box_bounds,
     prior_evidence,
@@ -29,8 +30,8 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-CREATOR = "image-evidence-packets/6"
-_CREATORS = {VERSION: CREATOR, V7: "image-evidence-packets/5"}
+CREATOR = "image-evidence-packets/7"
+_CREATORS = {VERSION: CREATOR, V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
 legacy = prior.legacy
 PacketIntegrityError = prior.PacketIntegrityError
 

@@ -109,8 +109,9 @@ def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     kind = "document" if hybrid else request.param
     if kind == "image":
-        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), low_texture=True)
+        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=True)
         document = service.persist_packet_set(db, analysis, store, result=result)
+        assert document["version"] == "image-evidence-9" and document["source"]["width"] == 1408
         assert document["copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")

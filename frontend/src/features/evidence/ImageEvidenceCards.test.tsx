@@ -138,6 +138,15 @@ describe('image evidence cards', () => {
     expect(screen.getByTestId('image-evidence-empty').textContent).toContain('does not establish that the image is unaltered')
   })
 
+  it('uses the supported sizes recorded by each reflection evidence version', () => {
+    const unsupported = { ...copyOnly, copy_similarity: { ...reflected, status: 'unsupported_geometry' as const, pairs: [] } }
+    const { rerender } = show({ ...unsupported, version: 'image-evidence-8' })
+    const summary = screen.getByRole('region', { name: 'Same-image copy similarity' })
+    expect(summary.textContent).toContain('long side of 513–1,024 px.')
+    rerender(<MemoryRouter><ImageEvidenceContent set={{ ...unsupported, version: 'image-evidence-9' }} token="signed token" mediaReady /></MemoryRouter>)
+    expect(summary.textContent).toContain('a long side of 1,025–2,048 px and a short side of at least 768 px')
+  })
+
   it('keeps the other reflected crop and native coordinates available when a crop fails', () => {
     const { rerender } = show(copyOnly)
     fireEvent.error(screen.getByRole('img', { name: /Area A cropped/ }))

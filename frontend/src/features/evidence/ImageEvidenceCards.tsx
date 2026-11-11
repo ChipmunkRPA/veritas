@@ -78,7 +78,9 @@ function CopySimilarity({ set, token, mediaReady }: { set: ImageEvidenceSet; tok
   const statusText = {
     supported_pair: 'Similar areas were found after horizontal reflection.',
     no_pair: 'This check found no qualifying reflected pair.',
-    unsupported_geometry: 'This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.',
+    unsupported_geometry: set.version === 'image-evidence-9'
+      ? 'This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, or a long side of 1,025–2,048 px and a short side of at least 768 px.'
+      : 'This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.',
     unassessed_match_budget: 'The check found too many candidate matches to show a distinct comparison.',
   }
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby="image-copy-similarity-heading">

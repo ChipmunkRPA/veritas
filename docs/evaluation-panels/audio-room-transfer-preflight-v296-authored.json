@@ -1,0 +1,207 @@
+{
+  "authored_conditions": {
+    "matched_room_clean": {
+      "background": null,
+      "background_source_gain": 0.0,
+      "background_stereo_pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "channel_pcm_sha256": [
+        "c5b82cda3223a2ef678ae978786a80eb05e511d65629ea33c30c5b4d9b35bfa3",
+        "dfc9e43e3f752e794b769eb892d9ba37e7bb1e7e529089b78a41c5fd0d622697"
+      ],
+      "common_headroom_gain": 1.0,
+      "foreground": {
+        "impulse": {
+          "coefficients_sha256": "d001c19fef635b99c9d2359fd662a8a621820f01dc68e76831ef6898e8d9ee52",
+          "delay_samples": [
+            0,
+            2
+          ],
+          "position": "front",
+          "rig": "authored",
+          "sample_rate_hz": 16000,
+          "samples_per_channel": 2,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "source_pcm_sha256": "58b2dda82e30cae467001cee670813f002bd74dc6cac042e11980368fbb0de7c"
+      },
+      "foreground_source_gain": 1.0,
+      "foreground_stereo_pcm_sha256": "60b4973ee992702df8d4d67edbb19ec8037a415cba00a31af4f025dfd7334406",
+      "mixed_pcm_sha256": "386c2ede1c20e01eaf530031fb4e947e1777d6e8e6c97cdc8464e8ca28c180cb",
+      "snr_db": null,
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ],
+      "status": "prepared",
+      "stereo_pcm_sha256": "60b4973ee992702df8d4d67edbb19ec8037a415cba00a31af4f025dfd7334406",
+      "wav_sha256": "ddc3e8f3b1587d938a73d36510b645ecaf0b41c488905a070ae87c0a63fb0588"
+    },
+    "noise_left": {
+      "background": {
+        "impulse": {
+          "coefficients_sha256": "c4a6542c9ec392d4f42df5cfb54f3860c3b0144e82ad8b313f71a89fad2ce803",
+          "delay_samples": [
+            1,
+            4
+          ],
+          "position": "left",
+          "rig": "authored",
+          "sample_rate_hz": 16000,
+          "samples_per_channel": 2,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "source_pcm_sha256": "c0d12b406e2f168309e1c0ef5069f9380920df7591ac557f6057e88d9548fed1"
+      },
+      "background_source_gain": 4.6297515220709355,
+      "background_stereo_pcm_sha256": "7632c4215f5e5efa2a5048deed9fa806a3c9d97662802b5d7d28fcdd0b9aa3e0",
+      "channel_pcm_sha256": [
+        "e66506e325cbac88cb9c0521b78f00213e5f424dd7e7fab7e76ddfb32759f0ff",
+        "e67b88630d9bd60182225ff4eb9f409b30a717943e0e66d00b090e4e8f1be6c1"
+      ],
+      "common_headroom_gain": 1.0,
+      "foreground": {
+        "impulse": {
+          "coefficients_sha256": "d001c19fef635b99c9d2359fd662a8a621820f01dc68e76831ef6898e8d9ee52",
+          "delay_samples": [
+            0,
+            2
+          ],
+          "position": "front",
+          "rig": "authored",
+          "sample_rate_hz": 16000,
+          "samples_per_channel": 2,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "source_pcm_sha256": "58b2dda82e30cae467001cee670813f002bd74dc6cac042e11980368fbb0de7c"
+      },
+      "foreground_source_gain": 1.0,
+      "foreground_stereo_pcm_sha256": "60b4973ee992702df8d4d67edbb19ec8037a415cba00a31af4f025dfd7334406",
+      "mixed_pcm_sha256": "c632a459e70eb25139b65b0b480f431ad9c79b0a4be94804255379f4b09e5e26",
+      "snr_db": {
+        "channels": [
+          -11.632579948246955,
+          1.159568981193258
+        ],
+        "joint": -10.000114950114806
+      },
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ],
+      "status": "prepared",
+      "stereo_pcm_sha256": "96303d047d21a005ddfd9a69074cdedc37845749536e15f117e99157ef0fdb6c",
+      "wav_sha256": "4a261cc6fe3c6e462151d83ef0ac9e022ce00d37c50d18549892992024f5a60e"
+    },
+    "noise_right": {
+      "background": {
+        "impulse": {
+          "coefficients_sha256": "a5999f7630a83debdf9bf6f681e6a50726c9de3f0177ce699f6107c7942e64ce",
+          "delay_samples": [
+            4,
+            1
+          ],
+          "position": "right",
+          "rig": "authored",
+          "sample_rate_hz": 16000,
+          "samples_per_channel": 2,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "source_pcm_sha256": "c0d12b406e2f168309e1c0ef5069f9380920df7591ac557f6057e88d9548fed1"
+      },
+      "background_source_gain": 4.6297515220709355,
+      "background_stereo_pcm_sha256": "060a7baa609aee293dfa1bc839d8b5fca3ebde511c19befcd7fbfa5c5e8f4650",
+      "channel_pcm_sha256": [
+        "fdea6d2a599edf719b80e72737c4f9779cd5520e3d1086fd07477586e09384ec",
+        "1bb800a67f39c95f249c4f6ad571ef2c26ec9c729c542affced688c4bd6cf9d1"
+      ],
+      "common_headroom_gain": 1.0,
+      "foreground": {
+        "impulse": {
+          "coefficients_sha256": "d001c19fef635b99c9d2359fd662a8a621820f01dc68e76831ef6898e8d9ee52",
+          "delay_samples": [
+            0,
+            2
+          ],
+          "position": "front",
+          "rig": "authored",
+          "sample_rate_hz": 16000,
+          "samples_per_channel": 2,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "source_pcm_sha256": "58b2dda82e30cae467001cee670813f002bd74dc6cac042e11980368fbb0de7c"
+      },
+      "foreground_source_gain": 1.0,
+      "foreground_stereo_pcm_sha256": "60b4973ee992702df8d4d67edbb19ec8037a415cba00a31af4f025dfd7334406",
+      "mixed_pcm_sha256": "c632a459e70eb25139b65b0b480f431ad9c79b0a4be94804255379f4b09e5e26",
+      "snr_db": {
+        "channels": [
+          4.221265334357181,
+          -14.694276301410877
+        ],
+        "joint": -10.000114950114806
+      },
+      "source_timeline": [
+        {
+          "end_sample": 48000,
+          "source_pts": 0,
+          "start_sample": 0
+        }
+      ],
+      "status": "prepared",
+      "stereo_pcm_sha256": "204a752ba474a7d33d4c22de91e1722fc7a1fe656c6e5151312c8bead3fdba6d",
+      "wav_sha256": "33ae9a29ec0e1a8baf94f10ab0c575487b63a6db7eb5438757540d520bb2c510"
+    }
+  },
+  "code_sha256": {
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/audio_native_stereo_pairs_v277.py": "f8b402bda87cea3d22849d1ac74f0eb293866181a7f2818a0db59ca03df3ee2d",
+    "backend/scripts/audio_native_stereo_preflight_v274.py": "94c03246cf132f138c561e959d80f215972831599c9046334e2fbcc40f666176",
+    "backend/scripts/audio_room_transfer_preflight_v296.py": "c537a54b17ad4f4e0d742e7d04bc80028f3269caaa70f5e81d24ec9585e2ad58",
+    "backend/scripts/audio_shared_noise_v216.py": "7ab68ffff976588908af29b4871e5600fa1dfa88b8e6e819f7ca8e021612086a",
+    "backend/tests/test_audio_room_transfer_preflight_v296.py": "75e9362e5916cda27fa9a6ba16385f5dceefffcdc96d58cc7fc3cbdc88dfcdd2",
+    "docs/audio-room-transfer-preflight-v296-method.md": "6fe7ea44d4b84fa3eaa58f010c4014e1b4e927aff4ff8a67061cef1483e380d8"
+  },
+  "codec_binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "external_audio_opened": 0,
+  "future_room_plan": {
+    "development": {
+      "doi": "10.15126/surreydata.00813511",
+      "member": "IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat",
+      "room": "University of Surrey IoSR Listening Room"
+    },
+    "holdout": {
+      "doi": "10.5281/zenodo.2639677",
+      "member": "One documented two-channel stage-audience microphone pair",
+      "room": "St Paul's Hall, University of Huddersfield"
+    },
+    "joint_noise_snr_db": -10,
+    "license": "CC-BY-4.0",
+    "positions": {
+      "foreground": "nearest horizontal 0 degrees",
+      "noise_left": "nearest horizontal 90 degrees left",
+      "noise_right": "nearest horizontal 90 degrees right"
+    }
+  },
+  "measured_responses_opened": 0,
+  "model_calls": 0,
+  "numpy_version": "2.2.6",
+  "output_sample_range": [
+    0,
+    48000
+  ],
+  "room_delay_units": "whole samples on the native measured clock, including zero if embedded",
+  "sample_rate_hz": 16000,
+  "schema": "chipmunk.audio-room-transfer-preflight/296",
+  "scipy_version": "1.18.1",
+  "status": "complete"
+}

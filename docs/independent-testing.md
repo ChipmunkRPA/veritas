@@ -73,6 +73,9 @@ The [AMI intake](audio-ami-native-stereo-v291-result.md) adds 24 naturally
 recorded two-microphone windows for a separate genuine-audio test.
 Its [stereo transfer comparison](audio-ami-stereo-transfer-v293-result.md)
 reports identical decisions and unchanged coverage across both rules.
+The [room-transfer preflight](audio-room-transfer-preflight-v296-method.md)
+verifies a renderer for asymmetric background noise and confirms the archive
+inventory for a future paired comparison with two voice generators.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

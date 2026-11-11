@@ -1,0 +1,131 @@
+{
+  "schema": "chipmunk.grid-clip-plan-execution/136",
+  "status": "complete",
+  "source_archives": 16,
+  "selected_clips": 32,
+  "unique_utterance_stems": 32,
+  "stages": [
+    {
+      "batch": 0,
+      "measurement": {
+        "schema": "chipmunk.grid-directory-result/136",
+        "status": "complete",
+        "batch": 0,
+        "source_archives": 8,
+        "real_video_members_inventoried": 8000,
+        "range_requests": 24,
+        "metadata_range_network_bytes": 1239726,
+        "private_directory_journal_sha256": "5f20f4dfb2cd575f087540580c106861d1d379d2fa0f8dcdc2985ec11cbe6582",
+        "freeze_sha256": "b1cfbdb5db7ba916b2aaceba83e31b48cef53923e7b3cf6539f15a2778ce971d",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "Publisher ZIP directory-range metadata only, not full-body checksum, media decoding, input qualification or detector performance. No archive member opened. All directory details remain private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 0,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 17.792275499901734,
+        "sampled_tree_rss_lower_bound_bytes": 66699264,
+        "minimum_available_ram_bytes": 6082723840,
+        "resource_journal_sha256": "bfbda27ddc26407068f79d7c5e5b8749404d6ab69a155d7dd197dcc850be4708",
+        "runtime_sha256": "1a758dc5d0c71f6940f1110b3a7d2b32a662c88083e960f30060ec9240604cef",
+        "worker_receipt_sha256": "fe5a8aa3b99651db170c0339afc03084d24fa8295a697d5c58a4c8ea657369e4",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "fe5a8aa3b99651db170c0339afc03084d24fa8295a697d5c58a4c8ea657369e4",
+      "profile_sha256": "6437f66f54d50213ac46273c8e773318be60025eeae3b74578d4c0109a68c1b9"
+    },
+    {
+      "batch": 1,
+      "measurement": {
+        "schema": "chipmunk.grid-directory-result/136",
+        "status": "complete",
+        "batch": 1,
+        "source_archives": 8,
+        "real_video_members_inventoried": 8000,
+        "range_requests": 24,
+        "metadata_range_network_bytes": 1235716,
+        "private_directory_journal_sha256": "bb71865abd8637083b6bf98827388abef729c58c1c4bafe7ee3236afe827507b",
+        "freeze_sha256": "b1cfbdb5db7ba916b2aaceba83e31b48cef53923e7b3cf6539f15a2778ce971d",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "Publisher ZIP directory-range metadata only, not full-body checksum, media decoding, input qualification or detector performance. No archive member opened. All directory details remain private."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 1,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 17.002245208015665,
+        "sampled_tree_rss_lower_bound_bytes": 66830336,
+        "minimum_available_ram_bytes": 6130614272,
+        "resource_journal_sha256": "eb0a37b698b30ace9f05be5af6efbfd560bbdf5af357661a5d9edc7c77ef853b",
+        "runtime_sha256": "1a758dc5d0c71f6940f1110b3a7d2b32a662c88083e960f30060ec9240604cef",
+        "worker_receipt_sha256": "567c2d42089a712991c594a5b50f9b4c5aa1aaf56d47580cef8053b507920eb3",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "567c2d42089a712991c594a5b50f9b4c5aa1aaf56d47580cef8053b507920eb3",
+      "profile_sha256": "c65a70b9f30248dcef7fc0e4bae8738352b919c8c1c17c4086dfd5c2487dbc5b"
+    },
+    {
+      "batch": 2,
+      "measurement": {
+        "schema": "chipmunk.grid-selected-clips-result/136",
+        "status": "complete",
+        "source_archives": 16,
+        "selected_clips": 32,
+        "unique_utterance_stems": 32,
+        "study_role": "external_transfer",
+        "previous_first_source_choices_unchanged": true,
+        "private_selected_clip_plan_sha256": "665daea35ec83043459dfdace4f64fe5261a36b735bb70536e3f9813052f9c70",
+        "private_directory_journal_sha256": [
+          "5f20f4dfb2cd575f087540580c106861d1d379d2fa0f8dcdc2985ec11cbe6582",
+          "bb71865abd8637083b6bf98827388abef729c58c1c4bafe7ee3236afe827507b"
+        ],
+        "freeze_sha256": "b1cfbdb5db7ba916b2aaceba83e31b48cef53923e7b3cf6539f15a2778ce971d",
+        "new_neural_calls": 0,
+        "defaults_changed": false,
+        "scope": "All original source/utterance choices fixed without media content or detector responses. Not full archive acquisition, independent people/ancestry proof, video/audio/face qualification or detector performance. Existing heads/calibrations remain fixed for external transfer."
+      },
+      "profile": {
+        "schema": "chipmunk.video-appearance-resource-profile/108",
+        "command": "bind",
+        "batch": 2,
+        "child_started": true,
+        "child_exit_code": 0,
+        "guard": null,
+        "sample_errors": 0,
+        "error_types": [],
+        "terminal_observations": [],
+        "resource_limit_observations": [],
+        "duration_s": 0.527392250020057,
+        "sampled_tree_rss_lower_bound_bytes": 57032704,
+        "minimum_available_ram_bytes": 6194151424,
+        "resource_journal_sha256": "b15540a68d95455dfabd75e139325e6cce7b73616cbbca5ebc3a2883d3b5708b",
+        "runtime_sha256": "1a758dc5d0c71f6940f1110b3a7d2b32a662c88083e960f30060ec9240604cef",
+        "worker_receipt_sha256": "4e283d72d6c066cbe2d948806322fad8b5454a79e501ebae96164ac0b905efb5",
+        "new_neural_calls": 0,
+        "scope": "Unchanged neural limits: 900s, 6-GiB sampled descendant RSS, 6-GiB initial RAM, 3-GiB initial disk, 1.5-GiB running reserves. Monitor/binding are data-only: 1.5-GiB RSS and 3-GiB initial RAM. Sequential explicit stages, no retries or overwrites; samples are not guaranteed peaks."
+      },
+      "result_sha256": "4e283d72d6c066cbe2d948806322fad8b5454a79e501ebae96164ac0b905efb5",
+      "profile_sha256": "723f0b07dc09bfbb0b0d0bc105c09a81e6a39d2c6314e1f8129188e5b10cbf7e"
+    }
+  ],
+  "scope": "All sixteen source directories and fixed 32-clip plan; not full media acquisition, model inference, complete native clock qualification, independent-person proof or detection accuracy."
+}

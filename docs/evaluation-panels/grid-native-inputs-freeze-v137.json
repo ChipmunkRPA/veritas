@@ -1,0 +1,30 @@
+{
+  "schema": "chipmunk.grid-native-inputs-freeze/137",
+  "code_sha256": {
+    "backend/scripts/grid_native_inputs_v137.py": "a5aa6bec2a12e2cb3eb27e0a265dcff4ff779fb852e42727c3d17e4d87e9e08c",
+    "backend/tests/test_grid_native_inputs_v137.py": "2a9556aeb771d04266ff7a930644eb7194d1a27c53e4f8c2b3949a34334a4312",
+    "docs/grid-native-inputs-v137-method.md": "ba7c3a9c5bbe04cc90a61e3d4d174830a0e373e19029610c5824195f34ccc8ac",
+    "backend/scripts/grid_media_preflight_v134.py": "0ca2c989bfb81cba5a4ee0bea06238ae39da77378dcb73cd2a390c67fcbfcaaf",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02"
+  },
+  "clip_planning_freeze_sha256": "b1cfbdb5db7ba916b2aaceba83e31b48cef53923e7b3cf6539f15a2778ce971d",
+  "clip_planning_result_sha256": "4e283d72d6c066cbe2d948806322fad8b5454a79e501ebae96164ac0b905efb5",
+  "private_selected_clips_sha256": "665daea35ec83043459dfdace4f64fe5261a36b735bb70536e3f9813052f9c70",
+  "original_acquisition_continuation_freeze_sha256": "4833a9c29110c0b8fb947738c119cdfa9214e59748df9310096ee03fc14c1350",
+  "source_archives": 16,
+  "clips_per_source": 2,
+  "planned_clips": 32,
+  "stages": 16,
+  "binaries_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "Pillow": "12.3.0",
+    "psutil": "7.2.2"
+  },
+  "scope": "Full selected native RGB and canonical PCM/source clocks only after actual full archive acquisition passes. Unavailable sources/decodes/clocks retained; no substitution, face eligibility, inference, fitting, generator quality or detection claim."
+}

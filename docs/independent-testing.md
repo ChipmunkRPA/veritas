@@ -13,6 +13,24 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [fresh GRID transfer preparation](native-mouth-transfer-progress-v134.md)
+separates publisher metadata, complete archive checksums, native video/audio
+clocks and neural qualification. Fifteen new authored transport/selection checks
+use synthetic bytes/ZIPs and mocked requests in the project dev environment;
+they need no media, model weights, credentials or actual network requests:
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_grid_acquisition_continuation_v135.py backend/tests/test_grid_clip_plan_v136.py
+```
+
+These check missing-range boundaries, unchanged-prefix assembly, rejected short/
+ignored responses, bounded ZIP-directory reads and complete source/utterance
+selection. They do not measure detection quality or establish the complete fresh
+cohort's input eligibility. Read the [explicit acquisition continuation](grid-acquisition-continuation-v135-method.md)
+and [full clip planning method](grid-clip-plan-v136-method.md) before interpreting
+their receipts. Raw source identities/media and individual fingerprints remain
+private. No outside reviewer is claimed.
+
 The [complete native mouth construction/replay](native-mouth-clips-v120-complete.md)
 now includes all 283 ready clips and 4,700 source-bound difference masks. Those
 private-media checks are internal lineage validation, not an outside review.
@@ -48,8 +66,13 @@ checks in the project development environment. They require no source media,
 weights, credentials or network. These checks cover native context preservation,
 exact-time conditioning shifts, repeated-image equality and nonresponse failures;
 they do not establish neural accuracy. Three separate installed-runtime checks
-require the pinned v7 generator dependency overlay. The actual neural experiment
-is [pending RAM admission](native-mouth-renderer-readiness-v118.md).
+require the pinned v7 generator dependency overlay. The actual v118 native
+[renderer response experiment completed](native-mouth-renderer-v118-result.md);
+the earlier admission denial remains historical. That success qualifies response
+and containment, not achieved phonetic alignment or detector accuracy. The
+separate [CPU second-generator qualification](portrait-native-qualifier-v133-method.md)
+has not started because its actual admission check was below the unchanged RAM
+minimum; see the [readiness receipt](evaluation-panels/portrait-native-readiness-v133.json).
 
 ```sh
 PYTHONPATH=backend backend/.venv/bin/pytest -q -o addopts='' backend/tests/test_native_mouth_inputs_v116.py backend/tests/test_native_mouth_renderer_v117.py

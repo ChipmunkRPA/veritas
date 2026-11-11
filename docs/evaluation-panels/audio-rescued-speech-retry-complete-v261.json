@@ -1,0 +1,44 @@
+{
+  "schema": "chipmunk.audio-rescued-speech-retry-result/261",
+  "status": "complete",
+  "freeze_sha256": "a6e0f56f392f79b445d39117e68ba7c9421bbccaeba5a049bc464481d3c3c3c9",
+  "gate_result_sha256": "7150fa192232b946caa541e4c6896d4160810a3c10b0d54868fb96b5ea4413b3",
+  "private_observation_journal_sha256": "5ebc6c6c3882858c02d5b895ab18e2b88ebcdf073a09d34e371e66e3fdc3e7f3",
+  "assessed_variants": 6,
+  "genuine_groups": 5,
+  "directions": {
+    "ai": 0,
+    "original": 2,
+    "inconclusive": 4
+  },
+  "directions_by_condition": {
+    "kitchen_0db": {
+      "ai": 0,
+      "original": 1,
+      "inconclusive": 1
+    },
+    "kitchen_5db": {
+      "ai": 0,
+      "original": 0,
+      "inconclusive": 1
+    },
+    "traffic_0db": {
+      "ai": 0,
+      "original": 1,
+      "inconclusive": 2
+    }
+  },
+  "groups_with_false_ai": 0,
+  "stability_probe_counts": {
+    "not_required_for_decision": 4,
+    "computed": 2
+  },
+  "new_neural_calls": 8,
+  "vad_forwards": 0,
+  "second_opinion_scored": false,
+  "holdout_scored": false,
+  "serving_changed": false,
+  "failed_profile_sha256": "0e06d0f28f6cc99b862e85604b4cbcbc9c0c917827b48f60a5015c0848cdc293",
+  "resource_profile_sha256": "e43fc99fffea0799c95ff0fe858f350aa38b9c9634f3cb1a9b8a9330c6d80874",
+  "worker_duration_seconds": 13.998220833018422
+}

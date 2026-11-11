@@ -1,0 +1,145 @@
+{
+  "audit": {
+    "aggregate_recomputed": true,
+    "evidence": {
+      "anchor_seconds": {
+        "current": {
+          "after": "94/25",
+          "before": "56/25",
+          "during": "3"
+        },
+        "known": {
+          "after": "94/25",
+          "before": "56/25",
+          "during": "3"
+        },
+        "refined": {
+          "after": "94/25",
+          "before": "56/25",
+          "during": "3"
+        }
+      },
+      "current_range": [
+        "62/25",
+        "87/25"
+      ],
+      "known_range": [
+        "57/25",
+        "94/25"
+      ],
+      "native_pngs_verified": 9,
+      "refined_range": [
+        "58/25",
+        "94/25"
+      ],
+      "selected_by": "largest absolute IoU gain, then fixed roster index and condition",
+      "status": "verified"
+    },
+    "native_receipts_and_sample_roles_checked": true,
+    "sha256": "301ab4a57126a2834b98b000ac87f0cd8be6417489f0fda0b9f0641de28aeb14"
+  },
+  "commitments": {
+    "freeze.json": "4d530431870631c86dff27eb1a7117d645e09bd48c361d208edb79ecc5175bbd",
+    "run.json": "a5013a496f3c1c0323d8a6a97af840dbfbd8db7c7efcd2c38e8565677cc9b69b",
+    "scored.jsonl": "224b3de48f84999c8ba2d070d0c24704c35ccf0bbda83db5ac25ef629eb867e3"
+  },
+  "controls": {
+    "flagged_identically": 0,
+    "refined_false_ranges": 0,
+    "unassessed": 0,
+    "views": 42
+  },
+  "decision": "Research only. Refine neither serving ranges nor scores without a prospective short-span test.",
+  "exploratory_coarse_span_breakdown": {
+    "by_nominal_edit_duration_s": {
+      "3/2": {
+        "1": 2,
+        "3/2": 10
+      },
+      "3/4": {
+        "11/15": 8,
+        "18/25": 2,
+        "19/25": 1,
+        "37/50": 1
+      }
+    },
+    "by_observed_coarse_span": {
+      "coarse_at_most_one_second": {
+        "improved": 14,
+        "unchanged": 0,
+        "views": 14,
+        "worsened": 0
+      },
+      "coarse_over_one_second": {
+        "improved": 0,
+        "unchanged": 0,
+        "views": 10,
+        "worsened": 10
+      }
+    },
+    "scope": "Post-hoc after opening held results. This split must be frozen and retested independently before product use."
+  },
+  "held_source_groups": 6,
+  "run": {
+    "max_self_rss_bytes": 333463552,
+    "native_samples": 1603,
+    "seconds": 212.95391500007827
+  },
+  "schema": "chipmunk.video-face-native-boundary-result/1",
+  "source_groups_with_change": {
+    "improved_overlap": 6,
+    "worsened_overlap": 5
+  },
+  "swap_views_by_duration": {
+    "3/2": {
+      "current_iou_at_least_1/2": 12,
+      "current_iou_at_least_1/5": 12,
+      "current_iou_at_least_3/4": 10,
+      "dense_iou_at_least_1/2": 12,
+      "dense_iou_at_least_1/5": 12,
+      "dense_iou_at_least_3/4": 12,
+      "flagged_identically": 12,
+      "improved_overlap": 2,
+      "refined": 12,
+      "unassessed": 0,
+      "views": 12,
+      "worsened_overlap": 10
+    },
+    "3/4": {
+      "current_iou_at_least_1/2": 12,
+      "current_iou_at_least_1/5": 12,
+      "current_iou_at_least_3/4": 2,
+      "dense_iou_at_least_1/2": 12,
+      "dense_iou_at_least_1/5": 12,
+      "dense_iou_at_least_3/4": 12,
+      "flagged_identically": 12,
+      "improved_overlap": 12,
+      "refined": 12,
+      "unassessed": 0,
+      "views": 12,
+      "worsened_overlap": 0
+    }
+  },
+  "timing": {
+    "3/2/current": {
+      "median_end_error_s": 0.03333333333333333,
+      "median_iou": 0.9565217391304348,
+      "median_onset_error_s": 0.03333333333333333
+    },
+    "3/2/dense": {
+      "median_end_error_s": 0.06666666666666667,
+      "median_iou": 0.9148936170212766,
+      "median_onset_error_s": 0.06666666666666667
+    },
+    "3/4/current": {
+      "median_end_error_s": 0.16666666666666666,
+      "median_iou": 0.6666666666666666,
+      "median_onset_error_s": 0.13333333333333333
+    },
+    "3/4/dense": {
+      "median_end_error_s": 0.0,
+      "median_iou": 0.9565217391304348,
+      "median_onset_error_s": 0.03333333333333333
+    }
+  }
+}

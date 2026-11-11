@@ -214,6 +214,8 @@ untouched backgrounds. The [color-residual comparison](image-color-residual-tran
 shows how many misses come from region selection before a review point is applied.
 The [short face texture comparison](video-face-texture-return-2026-11-11.md)
 checks appearance and texture on native video clocks with ordinary camera edits.
+The [denser timing comparison](video-face-native-boundary-2026-11-11.md) measures
+boundary error on a different set of recordings while preserving the existing flags.
 The [short email contrast study](writing-short-email-contrast-transfer-2026-11-11.md)
 compares individual sentences and matched context with exact MIME positions.
 

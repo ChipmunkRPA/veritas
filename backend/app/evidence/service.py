@@ -18,7 +18,7 @@ ASSET_TYPES = {"png": "image/png", "wav": "audio/wav", "mp4": "video/mp4"}
 def module_for_kind(kind: str) -> ModuleType | None:
     if kind not in KINDS:
         return None
-    name = "app.evidence.image_packets_v4" if kind == "image" else f"app.evidence.{kind}_packets"
+    name = "app.evidence.image_packets_v5" if kind == "image" else f"app.evidence.{kind}_packets"
     try:
         return import_module(name)
     except ModuleNotFoundError as exc:

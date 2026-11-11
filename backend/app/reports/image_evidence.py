@@ -23,7 +23,10 @@ ROLES = (("context", "Position in the original"), ("crop", "Original crop"), ("o
 
 
 def roles(packet: dict):
-    return ROLES + ((("mask", "Selected component on the measured grid"),) if "mask" in packet["artifacts"] else ())
+    mask = (("mask", "Selected component on the measured grid"),) if "mask" in packet["artifacts"] else ()
+    if "copy_donor" in packet["artifacts"]:
+        return (*ROLES[:2], ("copy_donor", "Matching patch from the original image"), ROLES[2], *mask)
+    return ROLES + mask
 
 
 def _asset_bytes(asset: dict[str, Any], store: ObjectStore) -> bytes:
@@ -47,7 +50,7 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
     """Read-only capture at report request; never create evidence or alter a stored result."""
     if analysis.kind != "image":
         return None
-    from app.evidence.image_packets_v4 import load_packet_set
+    from app.evidence.image_packets_v5 import load_packet_set
 
     store = store or default_store()
     document = load_packet_set(db, analysis, store)
@@ -66,7 +69,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
     document = snapshot.image_evidence
     if document is None:
         return None
-    from app.evidence.image_packets_v4 import validate_packet_set, validate_packet_source_mapping
+    from app.evidence.image_packets_v5 import validate_packet_set, validate_packet_source_mapping
 
     if snapshot.analysis.kind != "image":
         raise ValueError("image evidence is attached to a non-image report")
@@ -86,9 +89,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "An overall classification does not locate edited pixels."}
     store = store or default_store()
     store.verify(document["source"]["sha256"])
-    from app.evidence.image_packets_v4 import validate_comparison_assets
+    from app.evidence.image_packets_v5 import validate_assets
 
-    validate_comparison_assets(document, store)
+    validate_assets(document, store)
     withheld = snapshot.report.profile == "newsroom" or snapshot.report.redacted
     packets = []
     for packet in document["packets"]:

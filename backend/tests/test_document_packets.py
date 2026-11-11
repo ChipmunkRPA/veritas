@@ -37,10 +37,10 @@ def packet_factory(tmp_path):
     Base.metadata.create_all(engine)
     store = ObjectStore(tmp_path / "objects")
     with Session(engine) as db:
-        def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None):
-            path = tmp_path / ("source" + ext)
+        def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None):
+            path = source_pdf if source_pdf is not None else tmp_path / ("source" + ext)
             text = text or "First sentence contains enough useful words. Second sentence adds more context to this test. Third sentence completes the source."
-            if ext == ".pdf":
+            if ext == ".pdf" and source_pdf is None:
                 pdf = pymupdf.open()
                 page = pdf.new_page()
                 page.insert_textbox(pymupdf.Rect(50, 50, 400, 300), text, fontsize=14)
@@ -53,7 +53,7 @@ def packet_factory(tmp_path):
                 page.set_rotation(90)
                 pdf.save(path)
                 pdf.close()
-            else:
+            elif ext != ".pdf":
                 path.write_text("😀 " + text)
             source = store.put_bytes(path.read_bytes())
             doc = extract(path, ext)

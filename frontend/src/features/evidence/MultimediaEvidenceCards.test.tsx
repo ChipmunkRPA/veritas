@@ -38,7 +38,7 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
-  it.each(['video-evidence-7', 'video-evidence-8'])('shows before/during/after review evidence in %s', (version) => {
+  it.each(['video-evidence-7', 'video-evidence-8', 'video-evidence-9'])('shows before/during/after review evidence in %s', (version) => {
     const set = structuredClone(video)
     set.version = version
     const item = set.packets[0]
@@ -47,11 +47,15 @@ describe('ordinary multimedia evidence', () => {
       centers: { before: [1, 2], during: [3, 4, 5], after: [6, 7] }, frame_inputs: [] }
     item.frames = (['before', 'during', 'after'] as const).map((role, index) => ({ ...item.frames[0],
       id: `V01.${index+1}`, interval_role: role, score: null, is_peak: false }))
-    item.measurements = version === 'video-evidence-8' ? [
+    item.measurements = version !== 'video-evidence-7' ? [
       { label: 'Median eye spacing before the range', value: 50, unit: '% of face-box width' },
       { label: 'Median eye spacing during the range', value: 16.67, unit: '% of face-box width' },
       { label: 'Median eye spacing after the range', value: 50, unit: '% of face-box width' },
     ] : []
+    if (version === 'video-evidence-9') {
+      item.measurements.push({ label: 'Scene outside the face brightness change from before', value: -2.42,
+        unit: 'points on a 0–100 scale' })
+    }
     show(set)
     expect(screen.getByText(/Three consecutive crops support each of 3 centers/)).toBeTruthy()
     expect(screen.getAllByText(/before flagged range/i).length).toBeGreaterThan(0)
@@ -59,11 +63,14 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getAllByText(/after flagged range/i).length).toBeGreaterThan(0)
     expect(screen.queryByText(/response 0\.700/)).toBeNull()
     expect(screen.queryByText(/peak sample/)).toBeNull()
-    if (version === 'video-evidence-8') {
+    if (version !== 'video-evidence-7') {
       expect(screen.getByText('Median eye spacing during the range')).toBeTruthy()
       expect(screen.getByText(/16\.670? % of face-box width/)).toBeTruthy()
     } else {
       expect(screen.queryByText('Median eye spacing during the range')).toBeNull()
+    }
+    if (version === 'video-evidence-9') {
+      expect(screen.getByText('Scene outside the face brightness change from before')).toBeTruthy()
     }
   })
 

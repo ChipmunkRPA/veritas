@@ -129,6 +129,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.video.decode import FrameTable
+    from app.evidence import face_lighting_context
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
@@ -165,6 +166,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 raise ObjectIntegrityError("Video context contains an inferred source timestamp")
             if end < len(table) and clip["last_frame_duration"]["ticks"] != (table.pts[end] - table.pts[end - 1]) * table.tb.numerator:
                 raise ObjectIntegrityError("Video context final duration differs from the next source frame")
+        brightness_inputs = {}
         for frame in packet["frames"]:
             anchor = frame["anchor"]
             recorded = by_index.get(anchor["frame_index"])
@@ -175,6 +177,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 rgb = image.convert("RGB")
                 if hashlib.sha256(rgb.tobytes()).hexdigest() != anchor["decoded_rgb_sha256"]:
                     raise ObjectIntegrityError("Displayed video pixels differ from the analysed frame")
+                if packet.get("face_lighting"):
+                    brightness_inputs[anchor["frame_index"]] = np.asarray(rgb)
                 if sequence := packet.get("face_sequence"):
                     import cv2
 
@@ -191,6 +195,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                         expected = rgb.crop(_bounds(frame["context_region"], rgb.width, rgb.height))
                         if crop.size != expected.size or crop.convert("RGB").tobytes() != expected.tobytes():
                             raise ObjectIntegrityError("Video crop is not from its recorded source region")
+        if packet.get("face_lighting") and face_lighting_context.record(packet, source, brightness_inputs) != packet["face_lighting"]:
+            raise ObjectIntegrityError("Video brightness differs from the displayed source pixels")
     if document.get("version") in NESTED_VIDEO_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -215,6 +221,8 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             or any(mapping.get(key) != source.get(key) for key in ("pcm_sha256", "samples", "sample_rate", "channels", "timeline_time_base", "timeline"))):
         raise ObjectIntegrityError("Frozen audio no longer matches its analysed samples or source clock")
     source_ranges(mapping, 0, len(pcm))
+    if document.get("stereo_context") != mapping.get("stereo_context"):
+        raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
     for packet in document["packets"]:
         for role, span in (("selected_clip", packet["interval"]), ("context_clip", packet["context_interval"])):
             clip = read_wav(assets[packet["artifacts"][role]["sha256"]])
@@ -257,6 +265,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     if (text_hash(text) != source["extracted_text_sha256"] or canonical_hash(mapping) != source["source_map_sha256"]
             or decoded.get("meta", {}).get("original_sha256") != source["sha256"] or len(text) != source["chars"]):
         raise ObjectIntegrityError("Frozen text no longer matches its extraction source")
+    partial_pages = (document.get("coverage") or {}).get("partially_checked_pages", [])
+    if canonical_hash(partial_pages) != canonical_hash(decoded.get("meta", {}).get("partially_checked_pages", [])):
+        raise ObjectIntegrityError("Frozen partial-page coverage differs from the recorded extraction")
     for packet in document["packets"]:
         for key in ("focus", "context"):
             part = packet[key]
@@ -362,8 +373,13 @@ def _coverage(kind: str, document: dict) -> str:
         return (f"{coverage.get('scored_samples', 0)} uniquely scored samples of {source['samples']} decoded samples at {rate} Hz; "
                 f"{coverage.get('unscored_samples', 0)} unscored samples. "
                 + ("The decoding limit was reached; later audio was not checked." if coverage.get("decode_limit_reached") else ""))
-    return (f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages. "
-            f"{len(coverage.get('unmapped_pages') or [])} source pages have no mapped text.")
+    summary = (f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages. "
+               f"{len(coverage.get('unmapped_pages') or [])} source pages have no mapped text.")
+    partial_count = len(coverage.get("partially_checked_pages") or [])
+    if partial_count:
+        page_count = "1 source page has" if partial_count == 1 else f"{partial_count} source pages have"
+        summary += f" {page_count} mapped text and unchecked image areas."
+    return summary
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
@@ -534,7 +550,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 image["label"] = (f"{frame['id']} - source {anchor['stream_time_s']:.6f} s; "
                                   f"frame {anchor['frame_index']}, PTS {anchor['pts']} at {anchor['time_base']} - {image['label']}")
         packets.append(row)
+    stereo_context = copy.deepcopy(document.get("stereo_context")) if kind == "audio" else None
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
+            "stereo_context": stereo_context,
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"

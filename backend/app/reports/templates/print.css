@@ -354,6 +354,9 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .evidence-plates figure { flex: 1; width: 54mm; margin: 0; min-width: 0; }
 .evidence-plates-four { flex-wrap: wrap; }
 .evidence-plates-four figure { flex: 0 0 48%; width: 48%; }
+.evidence-plates-copy { flex-wrap: wrap; }
+.evidence-plates-copy figure { flex: 0 0 31%; width: 31%; }
+.evidence-plates.evidence-plates-copy img { height: 34mm; }
 .evidence-plates img { display: block; width: 100%; height: 42mm; object-fit: contain; background: var(--color-heat-ground); }
 .evidence-plates figcaption { margin-top: 1mm; font-size: 7.6pt; line-height: 10pt; }
 .evidence-plates figure:nth-child(n+2) img { image-rendering: pixelated; }

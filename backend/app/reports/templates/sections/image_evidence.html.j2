@@ -60,7 +60,7 @@
 {% if packet.get('customer_inference') %}<p class="finding-inference"><strong>Inference:</strong> {{ packet.customer_inference }}</p>{% endif %}
 <p class="caption">{% if packet.evidence_type == 'localisation' %}Localisation candidate{% else %}Inspection region{% endif %}{% if packet.finding_ids %} · Findings {{ packet.finding_ids | join(', ') }}{% endif %}{% if packet.signal_refs %} · Checks {% for ref in packet.signal_refs %}{{ ref.display_id }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
 {% if not v.image_evidence.withheld %}
-<div class="evidence-plates{% if packet.images | length > 3 %} evidence-plates-four{% endif %}">
+<div class="evidence-plates{% if packet.artifacts.get('copy_donor') %} evidence-plates-copy{% elif packet.images | length > 3 %} evidence-plates-four{% endif %}">
 {% for image in packet.images %}
 <figure>
 <img src="{{ image.uri }}" alt="{{ packet.id }}: {{ image.label }}">

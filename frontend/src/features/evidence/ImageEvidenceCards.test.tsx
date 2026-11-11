@@ -86,6 +86,22 @@ describe('image evidence cards', () => {
     expect(screen.getByRole('link', { name: 'F5' }).getAttribute('href')).toBe('/#finding-F5')
   })
 
+  it('shows the bound matching patch with the existing image highlight in a v5 record', () => {
+    const packet = evidence.packets[0]
+    show({ ...evidence, version: 'image-evidence-5', packets: [{ ...packet, evidence_type: 'localisation',
+      interpretation: 'This pixel similarity is compatible with copying or repeated detail.',
+      artifacts: { ...packet.artifacts, mask: artifact('e'), copy_donor: artifact('1') },
+    }] })
+    const match = screen.getByAltText('E01: matching patch elsewhere in the submitted image')
+    expect(match.getAttribute('src')).toContain(`${'1'.repeat(64)}.png?token=signed%20token`)
+    expect(screen.getByText(/Cropped from the submitted image for comparison/)).toBeTruthy()
+    expect(screen.getByText(/compatible with copying or repeated detail/)).toBeTruthy()
+    expect(screen.getByAltText(/full source image with the inspection region outlined/)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Show measured mask for E01' }))
+    expect(screen.getByAltText(/selected connected region on the full measured grid/)).toBeTruthy()
+    expect(screen.getByAltText('E01: matching patch elsewhere in the submitted image')).toBe(match)
+  })
+
   it('switches only the crop display while preserving the same observation and region', () => {
     show()
     const toggle = screen.getByRole('button', { name: 'Show diagnostic overlay for E01' })

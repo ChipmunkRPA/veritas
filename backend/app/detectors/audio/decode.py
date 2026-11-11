@@ -91,7 +91,24 @@ def _mapping(log: str, samples: int) -> list[dict[str, int]]:
     return merged
 
 
-def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0) -> DecodedAudio:
+def _named_timeline(log: str, name: str) -> str:
+    return "\n".join(line for line in log.splitlines() if line.startswith(f"[ashowinfo@{name} "))
+
+
+def _read_stereo(path: Path, limit: int) -> np.ndarray:
+    with wave.open(str(path), "rb") as wav:
+        count = wav.getnframes()
+        if ((wav.getnchannels(), wav.getsampwidth(), wav.getframerate(), wav.getcomptype())
+                != (2, 2, SAMPLE_RATE, "NONE") or not 0 < count <= limit):
+            raise ValueError("The stereo evidence PCM format or duration is invalid")
+        frames = wav.readframes(count)
+        if len(frames) != 4 * count:
+            raise ValueError("The stereo evidence PCM is truncated")
+    return np.frombuffer(frames, dtype="<i2").reshape(-1, 2)
+
+
+def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
+                 inspect_stereo: bool = False) -> DecodedAudio:
     if not (0 < max_seconds <= 600):
         raise ValueError("Audio decoding is bounded to 600 seconds")
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
@@ -109,16 +126,49 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0) 
             raise ValueError("The file has no audio stream")
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
+        layout = stream.get("channel_layout")
+        stereo_pcm, stereo_clock = None, None
+        capture_stereo = False
+        if inspect_stereo:
+            from app.detectors.audio import stereo
+            capture_stereo = maximum >= SAMPLE_RATE and stereo.supports_stereo(int(stream["channels"]), layout)
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "decoded.wav"
-            run = subprocess.run(["ffmpeg", "-nostdin", "-v", "info", "-y", "-protocol_whitelist", "file", "-copyts",
-                                  "-i", _input(path), "-map", "0:a:0", "-vn", "-af", filters, "-t", str(max_seconds),
-                                  "-c:a", "pcm_s16le", "-f", "wav", str(output)],
-                                 capture_output=True, text=True, timeout=180, check=True, stdin=subprocess.DEVNULL)
-            pcm = read_wav(output.read_bytes())
-        if not len(pcm):
-            raise ValueError("The audio stream contains no decoded samples")
-        timeline = _mapping(run.stderr, len(pcm))
+            command = ["ffmpeg", "-nostdin", "-v", "info", "-y", "-protocol_whitelist", "file", "-copyts", "-i", _input(path)]
+            mono_output = ["-vn", "-t", str(max_seconds), "-c:a", "pcm_s16le", "-f", "wav", str(output)]
+            if capture_stereo:
+                limit = min(maximum, stereo.MAX_SECONDS * SAMPLE_RATE)
+                stereo_path = Path(temp) / "stereo.wav"
+                mono_filters = filters.replace("ashowinfo", "ashowinfo@mono")
+                graph = (f"[0:a:0]asplit=2[mix][channels];[mix]{mono_filters}[mono];"
+                         f"[channels]aresample={SAMPLE_RATE},atrim=end_sample={limit},"
+                         "ashowinfo@stereo,asetpts=N/SR/TB[stereo]")
+                run = subprocess.run(
+                    command + ["-filter_complex", graph, "-map", "[mono]"] + mono_output
+                    + ["-map", "[stereo]", "-vn", "-c:a", "pcm_s16le", "-f", "wav", str(stereo_path)],
+                    capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL,
+                )
+                if run.returncode == 0:
+                    try:
+                        stereo_pcm = _read_stereo(stereo_path, limit)
+                        stereo_clock = {"samples": len(stereo_pcm), "timeline_time_base": f"1/{SAMPLE_RATE}",
+                                        "timeline": _mapping(_named_timeline(run.stderr, "stereo"), len(stereo_pcm))}
+                    except (OSError, ValueError, wave.Error, EOFError):
+                        stereo_pcm = None
+                else:
+                    capture_stereo = False
+            if capture_stereo:
+                try:
+                    pcm = read_wav(output.read_bytes())
+                    timeline = _mapping(_named_timeline(run.stderr, "mono"), len(pcm))
+                except (OSError, ValueError, wave.Error, EOFError):
+                    capture_stereo = False
+                    stereo_pcm, stereo_clock = None, None
+            if not capture_stereo:
+                run = subprocess.run(command + ["-map", "0:a:0", "-af", filters] + mono_output,
+                                     capture_output=True, text=True, timeout=180, check=True, stdin=subprocess.DEVNULL)
+                pcm = read_wav(output.read_bytes())
+                timeline = _mapping(run.stderr, len(pcm))
         fmt = info.get("format") or {}
         mapping = {
             "version": VERSION, "source_sha256": source_sha256,
@@ -135,6 +185,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0) 
             "source_timing_precision_s": 1 / SAMPLE_RATE,
             "limit_samples": maximum,
         }
+        if inspect_stereo:
+            mapping["stereo_context"] = stereo.build(mapping, layout, stereo_pcm, stereo_clock)
         return DecodedAudio(pcm, wav_bytes(pcm), mapping)
     except (subprocess.SubprocessError, json.JSONDecodeError, KeyError, IndexError, OSError) as exc:
         raise ValueError("The audio stream could not be decoded with a verified sample timeline") from exc

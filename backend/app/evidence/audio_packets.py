@@ -112,6 +112,12 @@ def validate_content(document: dict[str, Any]) -> None:
     if document.get("sound_events") is not None:
         from app.evidence.sound_event_binding import validate
         validate(document["sound_events"], source)
+    if document.get("stereo_context") is not None:
+        from app.detectors.audio.stereo import validate
+        try:
+            validate(document["stereo_context"], source)
+        except (KeyError, TypeError, ValueError) as error:
+            raise PacketIntegrityError("Invalid source-bound stereo channel context") from error
 
 
 def _input(store: ObjectStore, analysis: Analysis, binding: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
@@ -316,6 +322,8 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart)
     if sound_context is not None:
         document["sound_events"] = sound_context
+    if analysis.kind == "audio" and "stereo_context" in mapping:
+        document["stereo_context"] = mapping["stereo_context"]
     return document
 
 
@@ -334,7 +342,9 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
     store.verify(analysis.sha256)
     store.verify(document["source"]["wav_sha256"])
-    store.verify(document["source"]["mapping_sha256"])
+    mapping = json.loads(_verified(store, document["source"]["mapping_sha256"]))
+    if document.get("stereo_context") != mapping.get("stereo_context"):
+        raise PacketIntegrityError("Stereo context differs from the frozen audio input mapping")
     return document
 
 

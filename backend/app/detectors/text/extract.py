@@ -30,7 +30,7 @@ class Document:
 
 
 SOURCE_MAP_VERSION = "document-source/1"
-EXTRACTION_VERSION = "document-extraction/2"
+EXTRACTION_VERSION = "document-extraction/3"
 OCR_VERSION = "local-ocr/1"
 OCR_MIN_MEAN_CONFIDENCE = 75.0
 OCR_MAX_PAGES = 12
@@ -351,11 +351,40 @@ def _ocr_page(page, runtime: dict, remaining: float) -> tuple[list[tuple[str, di
     return parts, {**info, "status": "extracted", "reason": None}, raster
 
 
+def _unread_pdf_image_boxes(blocks: list[dict], width: float, height: float,
+                           text_centres: list[tuple[float, float]]) -> list[list[float]]:
+    """Locate dominant raster areas with too little mapped text to cover them."""
+    boxes = set()
+    for block in blocks:
+        if block["type"] != 1:
+            continue
+        x0, y0, x1, y1 = block["bbox"]
+        box = x0, y0, x1, y1 = max(0, x0), max(0, y0), min(width, x1), min(height, y1)
+        if x1 <= x0 or y1 <= y0 or (x1 - x0) * (y1 - y0) < width * height / 2:
+            continue
+        # A caption, page number or very sparse overlay cannot establish text
+        # coverage for the rest of the raster. Avoid flagging ordinary small figures.
+        covered_rows = {round(y / 5) for x, y in text_centres if x0 <= x <= x1 and y0 <= y <= y1}
+        if len(covered_rows) < 3:
+            boxes.add(box)
+    return [list(box) for box in sorted(boxes)]
+
+
+def partial_pdf_notice(pages: list[dict]) -> str:
+    if len(pages) == 1:
+        return f"Page {pages[0]['page']} was partially checked. Only its mapped text was retained for analysis. Large image areas were not checked for text."
+    if pages:
+        numbers = ", ".join(str(page["page"]) for page in pages)
+        return f"Pages {numbers} were partially checked. Only their mapped text was retained for analysis. Large image areas were not checked for text."
+    return ""
+
+
 def extract_pdf(path: Path) -> Document:
     import pymupdf
 
     parts: list[tuple[str, dict]] = []
     empty_pages: list[int] = []
+    partial_pages: list[dict] = []
     ocr_pages, rasters, raster_bytes = [], {}, 0
     runtime = None
     started = time.monotonic()
@@ -366,15 +395,20 @@ def extract_pdf(path: Path) -> Document:
             blocks = page.get_text("rawdict")["blocks"]
             blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
             page_chars = 0
+            text_centres = []
             for b in blocks:
                 if b["type"] != 0:
                     continue
                 chars, glyphs = [], []
                 for line in b["lines"]:
+                    line_start = len(chars)
                     for span in line["spans"]:
                         for char in span["chars"]:
                             chars.append(char["c"])
                             glyphs.extend([list(char["bbox"])] * len(char["c"]))
+                    if sum(ch.isalnum() for ch in "".join(chars[line_start:])) >= 2:
+                        x0, y0, x1, y1 = line["bbox"]
+                        text_centres.append(((x0 + x1) / 2, (y0 + y1) / 2))
                     chars.append("\n")
                     glyphs.append(None)
                 raw = "".join(chars)
@@ -402,19 +436,31 @@ def extract_pdf(path: Path) -> Document:
                 parts.extend(local_parts)
                 if info["status"] != "extracted":
                     empty_pages.append(page.number + 1)
+            else:
+                boxes = _unread_pdf_image_boxes(blocks, page.cropbox.width, page.cropbox.height, text_centres)
+                if boxes:
+                    partial_pages.append({"page": page.number + 1, "image_boxes": boxes,
+                                          "coordinate_space": "unrotated-page-points"})
     d = _join_mapped(parts, dehyphenate=True)
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
-              "ocr": {"version": OCR_VERSION, "status": "not_needed" if not ocr_pages else "partial" if empty_pages else "complete",
+              "partially_checked_pages": partial_pages,
+              "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages], "unchecked_pages": empty_pages,
                       "confidence_semantics": "OCR recognition quality, not AI-generation confidence",
                       "max_pages": OCR_MAX_PAGES, "max_pixels_per_page": OCR_MAX_PIXELS}}
+    warnings = []
     if empty_pages:
-        d.meta["coverage_warning"] = f"Pages {', '.join(map(str, empty_pages))} could not be reliably extracted. They were not checked and must not be treated as human-authored."
+        warnings.append(f"Pages {', '.join(map(str, empty_pages))} could not be reliably extracted. They were not checked and must not be treated as human-authored.")
     elif ocr_pages:
-        d.meta["coverage_warning"] = "Scanned pages were transcribed locally. OCR recognition quality is not AI-generation confidence; language identification is heuristic. Compare all excerpts with their frozen page images."
-    if len(d.text.split()) < 5 and pages:
+        warnings.append("Scanned pages were transcribed locally. OCR recognition quality is not AI-generation confidence; language identification is heuristic. Compare all excerpts with their frozen page images.")
+    if partial_warning := partial_pdf_notice(partial_pages):
+        warnings.append(partial_warning)
+        d.meta["warning"] = partial_warning
+    elif len(d.text.split()) < 5 and pages:
         d.meta["warning"] = "The PDF contains little or no reliably extracted text. Unreadable pages remain unchecked."
+    if warnings:
+        d.meta["coverage_warning"] = " ".join(warnings)
     return d
 
 

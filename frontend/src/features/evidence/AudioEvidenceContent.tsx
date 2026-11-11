@@ -4,6 +4,7 @@ import { Button } from '../../components/ui'
 import AudioInspectionTimeline from './AudioInspectionTimeline'
 import AudioBackgroundContext from './AudioBackgroundContext'
 import AudioSoundEvents from './AudioSoundEvents'
+import AudioStereoContext from './AudioStereoContext'
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { measurementValue } from './imagePackets'
 import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet } from './multimediaPackets'
@@ -42,6 +43,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady }: { set: 
   return <div ref={root} data-testid="audio-evidence-content">
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
+    <AudioStereoContext set={set} />
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.

@@ -78,6 +78,7 @@ function EvidenceCard({ packet, set, token, mediaReady }: {
   const [overlay, setOverlay] = useState(false)
   const [mask, setMask] = useState(false)
   const { x, y, w, h } = packet.region
+  const donor = packet.artifacts.copy_donor
   const coordinates = `x ${measurementValue(x)}, y ${measurementValue(y)}, ${measurementValue(w)} × ${measurementValue(h)} px`
   return (
     <article id={`image-evidence-${packet.id}`} tabIndex={-1} data-testid="image-evidence-card" data-evidence-id={packet.id}
@@ -88,7 +89,7 @@ function EvidenceCard({ packet, set, token, mediaReady }: {
         <span className="text-caption text-text-muted">{packet.evidence_type === 'localisation' ? 'Localisation candidate' : 'Inspection region'}</span>
       </div>
       <p className="mt-2 mb-0 text-body text-text max-w-[80ch]">{packet.observation}</p>
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-4 max-[639px]:grid-cols-1">
+      <div className={cx('mt-4 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1', donor && 'min-[960px]:grid-cols-3')}>
         <figure className="m-0 min-w-0">
           <div className="mb-2 min-h-8 flex items-center text-small font-medium text-text">Position in the source</div>
           <EvidencePicture key={`context:${token}`} set={set} artifact={packet.artifacts.context} token={token} ready={mediaReady}
@@ -117,6 +118,12 @@ function EvidenceCard({ packet, set, token, mediaReady }: {
               : overlay ? packet.overlay_legend : 'Cropped from the submitted image. This is not a reconstructed “before” image.'}
           </figcaption>
         </figure>
+        {donor && <figure className="m-0 min-w-0">
+          <div className="mb-2 min-h-8 flex items-center text-small font-medium text-text">Matching patch</div>
+          <EvidencePicture key={`copy-donor:${token}`} set={set} artifact={donor} token={token} ready={mediaReady}
+            alt={`${packet.id}: matching patch elsewhere in the submitted image`} />
+          <figcaption className="mt-2 text-caption text-text-muted">Cropped from the submitted image for comparison with the outlined region.</figcaption>
+        </figure>}
       </div>
       <div className="mt-5 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-8 gap-y-4 max-[639px]:grid-cols-1">
         <div>

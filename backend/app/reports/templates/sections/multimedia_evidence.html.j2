@@ -24,6 +24,9 @@
 </tbody></table>
 {% endif %}
 {{ plates(evidence.overview, true) }}
+{% if evidence.get('stereo_context') %}
+{% include "sections/stereo_context.html.j2" %}
+{% endif %}
 {% for context in evidence.acoustic_contexts %}
 <div class="multimedia-acoustic-summary">
 <h3>Background and acoustic context</h3>

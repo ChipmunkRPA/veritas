@@ -57,7 +57,7 @@ export interface ImageEvidencePacket {
   measurements: { label: string; value: number; unit: string }[]
   signal_refs: { id: string; display_id: string | null }[]
   exhibit_refs: string[]
-  artifacts: { context: EvidenceImage; crop: EvidenceImage; overlay: EvidenceImage; mask?: EvidenceImage }
+  artifacts: { context: EvidenceImage; crop: EvidenceImage; overlay: EvidenceImage; mask?: EvidenceImage; copy_donor?: EvidenceImage }
   localisation?: { threshold: number; grid: [number, number]; region_cells: number; region_area_fraction: number;
     reliable_area_fraction: number; source_pixels_per_cell: [number, number]; validation_status: string;
     candidate_eligibility?: CandidateEligibility }
@@ -67,7 +67,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5'
   sha256: string | null
   analysis_id: string
   revision: number

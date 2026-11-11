@@ -22,14 +22,15 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.decode import FrameTable, decode_frames
-from app.evidence import face_alignment_context, face_interval_binding, face_intervals
+from app.evidence import face_alignment_context, face_interval_binding, face_intervals, face_lighting_context
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
 from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
 from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
-    ALIGNMENT_CONTEXT_VERSION,
+    ALIGNMENT_CONTEXT_VERSIONS,
     CONTINUITY_VERSIONS,
+    LIGHTING_CONTEXT_VERSION,
     NESTED_VERSIONS,
     VERSIONS,
 )
@@ -38,10 +39,10 @@ from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectStore
 
 SCHEMA = "chipmunk.video-evidence/1"
-VERSION = ALIGNMENT_CONTEXT_VERSION
-CREATOR = "video-evidence-packets/8"
+VERSION = LIGHTING_CONTEXT_VERSION
+CREATOR = "video-evidence-packets/9"
 CREATORS = ("video-evidence-packets/1", "video-evidence-packets/2", "video-evidence-packets/3", "video-evidence-packets/4",
-            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", CREATOR)
+            "video-evidence-packets/5", "video-evidence-packets/6", "video-evidence-packets/7", "video-evidence-packets/8", CREATOR)
 ANCHOR_VERSION = "stream-pts-rgb24/1"
 MAX_PACKETS = 6
 MAX_FRAMES_PER_PACKET = 3
@@ -472,12 +473,21 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                        "The face crops shown here are source context, not pixel-level manipulation masks.",
                                        "This cue does not change overall confidence."],
                           derivation={**packet["derivation"], "selection": "highest_source_bound_face_sequence_change"})
-            if VERSION == ALIGNMENT_CONTEXT_VERSION and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
+            if VERSION in ALIGNMENT_CONTEXT_VERSIONS and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
                 packet["measurements"].extend(face_alignment_context.measure(sequence))
                 packet["interpretation"] += (
                     " Compare the eye spacing and the adjacent frames for changes in head angle or face visibility."
                     " Eye spacing describes how the face was tracked in the sampled frames."
                 )
+            if VERSION == LIGHTING_CONTEXT_VERSION and sequence["method"] == face_interval_binding.APPEARANCE_METHOD:
+                lighting = face_lighting_context.record(packet, source, decoded)
+                packet["face_lighting"] = lighting
+                packet["measurements"].extend(face_lighting_context.measurements(lighting))
+                packet["interpretation"] += face_lighting_context.explanation(lighting)
+                if lighting["status"] == "measured":
+                    packet["limitations"].append(
+                        "Brightness uses three displayed frames. Camera motion can change the scene pixels being compared."
+                    )
         if interval := candidate.get("face_interval"):
             start, end = interval["start_stream_s"], interval["end_stream_s"]
             packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
@@ -548,8 +558,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         try:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
-            if document["version"] == ALIGNMENT_CONTEXT_VERSION:
+            if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
                 face_alignment_context.validate(packet)
+            if document["version"] == LIGHTING_CONTEXT_VERSION:
+                face_lighting_context.validate(packet, source)
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
         if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:

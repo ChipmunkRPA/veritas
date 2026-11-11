@@ -422,6 +422,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                               "unmapped_pages": decoded["meta"].get("unmapped_pages", []),
                                               "ocr": public_ocr, "email": decoded["meta"].get("email")},
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
+    if partially_checked := decoded["meta"].get("partially_checked_pages"):
+        document["coverage"]["partially_checked_pages"] = partially_checked
     for index, (a, b) in enumerate(selected, 1):
         windows = groups[a, b]
         ca, cb = min(s["start"] for w in windows for s in w["spans"]), max(s["end"] for w in windows for s in w["spans"])

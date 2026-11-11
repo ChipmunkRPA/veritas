@@ -143,11 +143,14 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
     document = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
     stored = service.load_packet_set(f.db, f.analysis, f.store)
     assert stored == json.loads(canonical_json(document))
-    assert stored['version'] == 'video-evidence-8'
+    assert stored['version'] == 'video-evidence-9'
     [face] = stored['packets']
     assert face['finding_ids'] == [] and all(frame['score'] is None for frame in face['frames'])
-    assert [row['value'] for row in face['measurements'][-3:]] == [50., 16.67, 50.]
-    assert all(row['unit'] == '% of face-box width' for row in face['measurements'][-3:])
+    tracking = [row for row in face['measurements'] if row['label'].startswith('Median eye spacing')]
+    assert [row['value'] for row in tracking] == [50., 16.67, 50.]
+    assert all(row['unit'] == '% of face-box width' for row in tracking)
+    assert face['face_lighting']['status'] == 'measured'
+    assert [row['frame_index'] for row in face['face_lighting']['frames']] == [44, 60, 76]
 
     frozen = specimen('video', 'standard')
     frozen = frozen.model_copy(update={
@@ -159,8 +162,21 @@ def test_appearance_evidence_records_the_same_eye_spacing_in_json_and_reports(av
     assert report['packets'][0]['measurements'] == face['measurements']
     html = engine._env.get_template('sections/multimedia_evidence.html.j2').render(v={'evidence': report}, s=frozen)
     assert 'Median eye spacing during the range' in html and '16.67 % of face-box width' in html
+    assert 'Scene outside the face brightness change from before' in html
 
-    face['measurements'][-2]['value'] = 90.
+    from app.evidence import face_lighting_context
+
+    altered = copy.deepcopy(stored)
+    changed = altered['packets'][0]
+    item = changed['face_lighting']['frames'][1]
+    item['scene'] = 99 if item['scene'] != 99 else 1
+    changed['measurements'] = [row for row in changed['measurements'] if row['label'] not in face_lighting_context.LABELS]
+    changed['measurements'].extend(face_lighting_context.measurements(changed['face_lighting']))
+    altered['sha256'] = video_packets.packet_hash(altered)
+    with pytest.raises(ObjectIntegrityError, match='brightness differs from the displayed source pixels'):
+        multimedia_evidence.view(frozen.model_copy(update={'evidence': altered}), store=f.store)
+
+    tracking[1]['value'] = 90.
     stored['sha256'] = video_packets.packet_hash(stored)
     with pytest.raises(PacketIntegrityError, match='Face tracking context differs'):
         video_packets.validate_packet_set(stored, analysis_id=f.analysis.id, revision=f.analysis.revision,
@@ -282,7 +298,7 @@ import importlib.abc,json,socket,sys
 from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.video_packet_versions','app.evidence.image_eligibility'):
+        if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.audio_background_binding','app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context','app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.image_eligibility'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

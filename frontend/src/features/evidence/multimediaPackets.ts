@@ -87,16 +87,30 @@ export interface SoundEventContext {
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset> })[]
   limitations: string[]
 }
+export interface StereoChannelContext {
+  schema: 'chipmunk.stereo-channel-context/1'
+  evidence_type: 'context'; affects_overall_confidence: false
+  status: 'measured' | 'quiet' | 'mono' | 'unsupported' | 'too_short' | 'unavailable'
+  source_sha256: string; source_stream_index: number; source_channel_count: number
+  sample_rate: number; max_seconds: number; quiet_floor_dbfs: number; strong_level_gap_db: number; silence_floor_dbfs: number
+  windows: (SampleInterval & {
+    status: 'strong_imbalance' | 'measured' | 'quiet'
+    left_rms_dbfs: number; right_rms_dbfs: number; level_gap_db: number | null; correlation: number | null
+    louder_channel: 'left' | 'right' | null
+    source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  })[]
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
-    source_duration_s?: number | null; transform?: string; timeline_time_base?: string;
+    source_duration_s?: number | null; source_stream_index?: number; transform?: string; timeline_time_base?: string;
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[] }
   overview?: Record<string, EvidenceAsset>
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
+  stereo_context?: StereoChannelContext
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface VideoAudioChannel {
@@ -171,7 +185,7 @@ export interface DocumentEvidenceSet extends SetBase {
 }
 export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | DocumentEvidenceSet
 
-const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8'])
+const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9'])
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

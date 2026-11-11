@@ -202,7 +202,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
-        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.document_context', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.video_packet_versions', 'app.evidence.sound_event_binding'):
+        if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.document_context', 'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.face_lighting_context', 'app.evidence.video_packet_versions', 'app.evidence.sound_event_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):

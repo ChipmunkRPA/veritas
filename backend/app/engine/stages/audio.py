@@ -3,7 +3,8 @@ ingest → probe → provenance → decode → condition → detect → temporal
 
 - **probe** reads the first audio stream with ffprobe (container, codec, sample rate, channels, duration, bit rate, tags).
   A file without an audio stream fails the analysis. Persisted.
-- **decode** extracts up to 600 s of 16 kHz mono PCM with ffmpeg into run state. Not persisted: re-derived on resume.
+- **decode** extracts up to 600 s of 16 kHz mono PCM with ffmpeg into run state and freezes its evidence input.
+  On supported stereo sources, it also records channel context for up to 30 s before the mono mix.
 - **condition** labels every second speech, music, noise or silence (`detectors/audio/content.py`): shares, the speech spans
   that gate the voice windows, the slice id and the limiting conditions. A recording with less than 1 s of speech, or with
   more music than speech, is not assessable.
@@ -125,7 +126,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     from app.detectors.video.adapters.common import AudioTrack
 
     source_sha = ctx.outputs["ingest"]["sha256"]
-    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS)
+    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS, inspect_stereo=True)
     pcm = decoded.pcm
     ctx.check("audio decoding")
     ctx.state["audio"] = AudioTrack("analysed", pcm, len(pcm))

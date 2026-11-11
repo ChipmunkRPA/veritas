@@ -1,0 +1,3 @@
+# The fixed genuine panel now has 23 qualified speakers
+
+The fallback qualified 14 of the 15 previously unavailable recordings and kept all nine earlier crops byte-for-byte. It used the same 24 publisher participant groups and retained one unavailable slot. Both readouts reproduced the same aggregate. The recovered crops retain the existing activity requirement and can cut through continuous speech. The serving speech gate will still decide whether a test clip is assessable. [Method](audio-rueg-activity-crop-v252-method.md) · [Verified result](evaluation-panels/audio-rueg-activity-crop-complete-v252.json)

@@ -1,0 +1,99 @@
+{
+  "schema": "chipmunk.audio-matched-background-panel-freeze/248",
+  "planned_triplets": 24,
+  "planned_cases": 360,
+  "arms": [
+    "genuine",
+    "alania",
+    "okur"
+  ],
+  "conditions": [
+    "matched_clean",
+    "kitchen_0db",
+    "kitchen_5db",
+    "traffic_0db",
+    "traffic_5db"
+  ],
+  "sample_rate": 16000,
+  "source_prefix_samples": 48000,
+  "maximum_quantized_snr_error_db": 0.1,
+  "source_results_sha256": {
+    "previous_panel": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+    "background": "3d5a702131268cf65217a163404ddc6095eefb6b199d1ed5ea97487df0a98149",
+    "alania": "eef1ffacc9de432d59b1336df16b3ffe8876664f87b20e56ef2c4836893ce155",
+    "okur_pilot": "37e697d698ff4be034aa8631505c081e83185aa2a39e1ed32f8cf9ae1e11b6f8",
+    "okur_followup": "33a41facabc915464c7d16ea435a9463b02e56c02fb30ed163bc2792a6f9abe8",
+    "genuine": "c35803a686fd470f15c411a9849d37b0e9eea426eda9037481d9c637150bf4b4",
+    "screen": "ba7b38b7cdbb285c59d02c54ee72355c5db9dc108e5b35869296b3d84f895956"
+  },
+  "known_exposure_journal_sha256": "91960b8ccb2ba31e55d281f1a344747d3f0a3c891398ed98f8273a0b1a51e0f1",
+  "provisional_slice_packet_sha256": "efc2283c887c4094d7dfc22b2887f2c64f7a728180bc4c652e14b06ee8d5018a",
+  "foreground_coverage": {
+    "genuine": {
+      "planned_utterances": 24,
+      "available_utterances": 23,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 23,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v252": 24
+      }
+    },
+    "alania": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 24,
+      "known_available_voice_groups": 24,
+      "maximum_utterances_per_group": 1,
+      "source_cohort_counts": {
+        "v236": 24
+      }
+    },
+    "okur": {
+      "planned_utterances": 24,
+      "available_utterances": 24,
+      "known_planned_voice_groups": 1,
+      "known_available_voice_groups": 1,
+      "maximum_utterances_per_group": 24,
+      "source_cohort_counts": {
+        "v240": 4,
+        "v245": 20
+      }
+    }
+  },
+  "background_coverage": {
+    "kitchen": {
+      "provisional_excerpts_available": 46,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 4,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 6
+    },
+    "traffic": {
+      "provisional_excerpts_available": 27,
+      "assigned_excerpts": 24,
+      "assigned_distinct_recordings": 3,
+      "assigned_distinct_cuts": 24,
+      "assigned_distinct_excerpt_pcm": 24,
+      "maximum_assignments_per_recording": 10
+    }
+  },
+  "background_evidence_type": "machine_screened_provisional",
+  "human_listening_reviewed": false,
+  "genuine_age_scope": "unverified",
+  "detector_calls_permitted": false,
+  "fitting_permitted": false,
+  "code_sha256": {
+    "backend/scripts/audio_matched_background_panel_v248.py": "0c77c4be4efc3b72a9998d45dadcde61fefc7faf858b43a9f25cf278364f422e",
+    "backend/tests/test_audio_matched_background_panel_v248.py": "d0d8c809c7a5d8a830a276bc721c7384043093178d05817b99d2761f2a137d08",
+    "docs/audio-matched-background-panel-v248-method.md": "c1d7bea6aa845f6afcd6e2e9732037a25e214ac0485d6985aa2f97176f1001e7",
+    "backend/scripts/audio_fresh_shared_noise_v217.py": "dbf4870c4905d65d2ce20e1c9e169509728bc64619a5b4bf2ac1dc7918845ae6",
+    "backend/scripts/audio_shared_noise_v216.py": "7ab68ffff976588908af29b4871e5600fa1dfa88b8e6e819f7ca8e021612086a",
+    "backend/scripts/audio_short_edit_controls.py": "3124865172114acc07d0bc9aca581645827a5092fd49f7c5102aa3cd4f189bb7",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/audio_voxforge_tr_transfer_v201.py": "bf71c5544733404b8bb30424e64c18ee4c6715b841142611d080f0d50e49b63e"
+  },
+  "private_plan_sha256": "efc07f777ec93bb512698c003b70f815cc5d0c197835e76f0378320d72653d67"
+}

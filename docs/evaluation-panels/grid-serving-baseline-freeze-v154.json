@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.grid-serving-baseline-freeze/154",
+  "code_sha256": {
+    "backend/scripts/grid_serving_baseline_v154.py": "77ab3215381566c3b67cef59658ad7213ceca06481363561d820a40d5f87f087",
+    "backend/tests/test_grid_serving_baseline_v154.py": "f5fe534fe41fdb5082af44c51748a321acf5ab24501e96faf1f4307a41791622",
+    "docs/grid-serving-baseline-v154-method.md": "411558b5f411f20ea520d751502f2755f64c61e352b398b04a94adb5fd2747f7"
+  },
+  "baseline_freeze_sha256": "ec9032d3b79daad0997cb9c64a2a4d39522f7a4f34ae01f9abfe10a786467194",
+  "baseline_asset_inventory_sha256": "717ee119513bc26dc5afd4977cfb6d89f952a0107c11229f4ad630f8828a9bac",
+  "historical_v153_failure": {
+    "v153_freeze_sha256": "ffd0f829da9ba8658458c75d49271d1d05c624fbebf2ce115a1c114513fc69e9",
+    "v153_result_sha256": "ba99ee03256eb2e124d54c0da842eb91171848e6ac4e15f3c87c447190ca0b39",
+    "v153_profile_sha256": "1c763bcffd397d13061f6e411550caa0fd3abe6c1efd94158836f0692488c606",
+    "v153_resource_journal_sha256": "ab1b0fe31a37135ac32f65337246ad85e1b0a2445d679566886246e10d3e6fe7",
+    "v153_worker_log_sha256": "802534e0d7605404a5466ea6ce1159d15e999a9be4ce775da79af72df239c2ff",
+    "v153_case_journal_sha256": "45ea7d05b2fccea3aff816da599b0ac6191eaf38f4e2e5b81c43361b7d8c0218",
+    "failed_ingest_cases": 11,
+    "detector_runs": 0,
+    "cause": "Seagate exFAT does not support the ObjectStore hard link",
+    "null_case_labels_after_field_collision": 11
+  },
+  "storage_smoke_sha256": "c981a14014aa4123995c72aea5b1fc0fbb87e9a5dc8c49964af120aa0caed59a",
+  "work_filesystem": "apfs",
+  "configured_device": "auto",
+  "profile": "full",
+  "pilot_clip_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "cases_per_clip": 11,
+  "scope": "Same frozen detectors, assets, early offline settings and resource monitor. Isolated app working storage is on system APFS."
+}

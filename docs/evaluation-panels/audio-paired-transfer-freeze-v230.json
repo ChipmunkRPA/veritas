@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.audio-paired-transfer-freeze/230",
+  "code_sha256": {
+    "backend/scripts/audio_paired_transfer_v230.py": "3cf9f822d563d0bf91522045b141dbd2a12966f85b6f19bb4a8d017fe1fc33ad",
+    "backend/tests/test_audio_paired_transfer_v230.py": "72e7db2f75e0fab053d31a69707333e8c5e6d832560b06f30644d6da19e70a53",
+    "docs/audio-paired-transfer-v230-method.md": "bcdb90dc734afaa8f2f29d6754ae1a58e3d63103ef8706ee3f2ef0bf90a3f390"
+  },
+  "v217_freeze_sha256": "6217e14c017101a4ad7862c52f11daf2ccc65e62b0fa808ccb37beb2f8c38ecb",
+  "v217_result_sha256": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+  "v219_freeze_sha256": "f7152a254aa0fde752442798d67de5bd4a0eba298fa0adf6df03081a3fcb6793",
+  "v219_result_sha256": "6dcc1ca38d86744bba2d06711a95908b4e2adc6572d9eca4362bdc312feea84f",
+  "v223_freeze_sha256": "5cd9d066775239ba7152ae94f49cafa2edef703d20032da8fe44cd032d99ac4a",
+  "v223_result_sha256": "2642bb263991fb0bd8bf9ca03bbfa8595fba1e647d255b9af106b48d1c1dc9eb",
+  "v223_fit_sha256": "68690eafe7050780d4861283adc281fbaff96a166b3b1c842cb8688095124252",
+  "v223_calibration_sha256": "40c6a8ccd2665287fe76bcc5eacf7a4cc42ceced1f4bc199066649c88b830d80",
+  "v226_freeze_sha256": "26f5ffcb3249db0177dc3b57d6a0423ee4142418afd9ea9afe029915527a1142",
+  "v226_result_sha256": "2c0af24150434692438f54c0a0d324baf8964a131537f5f40f82ed6586f30989",
+  "batches": [
+    "matched_clean",
+    "kitchen_0db",
+    "kitchen_5db",
+    "traffic_0db",
+    "traffic_5db"
+  ],
+  "planned_by_batch": [
+    48,
+    48,
+    48,
+    48,
+    48
+  ],
+  "admitted_by_batch": [
+    39,
+    39,
+    39,
+    39,
+    39
+  ],
+  "candidate_head": "paired_wavlm_raw",
+  "diagnostic_english_points": {
+    "current": {
+      "ai_above": 0.8767672486703044,
+      "original_below": 0.07869087799389911
+    },
+    "paired_wavlm_raw": {
+      "ai_above": 0.6525272861441811,
+      "original_below": 0.4355485730182533
+    }
+  },
+  "new_fitting_permitted": false,
+  "serving_change_permitted": false,
+  "holdout_access_permitted": false
+}

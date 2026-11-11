@@ -1,0 +1,994 @@
+{
+  "authenticity_forwards": 0,
+  "freeze_sha256": "475a728c290f6ccb0d0568ef42113c7dce7a982c689fc0409eb3b4c98c25edc2",
+  "method_sha256": "f4953d13e155e505b853e9866990f05e01d36e48c52396231e1d081e39f1130f",
+  "model_result_scope": "speech admission on matched simulated stereo inputs, no synthetic-authenticity inference",
+  "planned_cases": 90,
+  "roles": {
+    "development": {
+      "authenticity_forwards": 0,
+      "completed_cases": 30,
+      "elapsed_s": 4.396,
+      "process_peak_rss_bytes_macos": 546734080,
+      "results": {
+        "Surrey/development/background_only": {
+          "cases": 12,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 0,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/clean_speech": {
+          "cases": 6,
+          "mono": 3,
+          "prior_mono_or_selected": 3,
+          "prior_mono_or_selected_available": 6,
+          "quiet_third": {
+            "admitted": 3,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 3,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 3,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 3,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/clean_speech/expressive": {
+          "cases": 2,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/clean_speech/genuine": {
+          "cases": 2,
+          "mono": 1,
+          "prior_mono_or_selected": 1,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/clean_speech/stock": {
+          "cases": 2,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/noisy_speech": {
+          "cases": 12,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 12,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.2407352407203724,
+            "median_speech_gain_db": -0.09643096044836572,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -0.03264736505842514,
+              1.9233369202194472
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.1089667624041675,
+            "median_speech_gain_db": -0.2009868441470671,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -0.3333776848664183,
+              1.7449211099301891
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/noisy_speech/expressive": {
+          "cases": 4,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.215376414084914,
+            "median_speech_gain_db": 0.010283505886140923,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              0.29456589670588507,
+              1.9233369202194472
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.6159017898447954,
+            "median_speech_gain_db": -0.574297260406907,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -0.3333776848664183,
+              1.588418682311401
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/noisy_speech/genuine": {
+          "cases": 4,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.070232752659849,
+            "median_speech_gain_db": -0.13538972489263573,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -0.03264736505842514,
+              1.7844415875225055
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.8962359595641844,
+            "median_speech_gain_db": -0.3173735248484431,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -0.1508702419815915,
+              1.742234804002
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/noisy_speech/stock": {
+          "cases": 4,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.2407352407203724,
+            "median_speech_gain_db": 0.005686309122526864,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              0.49876364725981404,
+              1.8019763188208353
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.2057087132233097,
+            "median_speech_gain_db": -0.04780855035007238,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              0.5754530608549722,
+              1.7449211099301891
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/development/overall": {
+          "cases": 30,
+          "mono": 3,
+          "prior_mono_or_selected": 3,
+          "prior_mono_or_selected_available": 18,
+          "quiet_third": {
+            "admitted": 3,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.2407352407203724,
+            "median_speech_gain_db": -0.09643096044836572,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 3,
+            "snr_gain_db_range": [
+              -0.03264736505842514,
+              1.9233369202194472
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 3,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.1089667624041675,
+            "median_speech_gain_db": -0.2009868441470671,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 3,
+            "snr_gain_db_range": [
+              -0.3333776848664183,
+              1.7449211099301891
+            ],
+            "source_groups_added": 0
+          }
+        }
+      },
+      "schema": "chipmunk.stereo-reference-speech-admission-role/1",
+      "sha256": "b47677f9af15bdb166c619e23faadadf22c24e32bc273b9a6ab6848b2614968e",
+      "vad_forwards": 8460
+    },
+    "holdout": {
+      "authenticity_forwards": 0,
+      "completed_cases": 60,
+      "elapsed_s": 8.827,
+      "process_peak_rss_bytes_macos": 549093376,
+      "results": {
+        "BBC/holdout/background_only": {
+          "cases": 12,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 0,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/clean_speech": {
+          "cases": 6,
+          "mono": 4,
+          "prior_mono_or_selected": 4,
+          "prior_mono_or_selected_available": 6,
+          "quiet_third": {
+            "admitted": 5,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 5,
+            "snr_gain_db_range": null,
+            "source_groups_added": 1
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 5,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 5,
+            "snr_gain_db_range": null,
+            "source_groups_added": 1
+          }
+        },
+        "BBC/holdout/clean_speech/expressive": {
+          "cases": 2,
+          "mono": 1,
+          "prior_mono_or_selected": 1,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/clean_speech/genuine": {
+          "cases": 2,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/clean_speech/stock": {
+          "cases": 2,
+          "mono": 1,
+          "prior_mono_or_selected": 1,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 1
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 1
+          }
+        },
+        "BBC/holdout/noisy_speech": {
+          "cases": 12,
+          "mono": 8,
+          "prior_mono_or_selected": 8,
+          "prior_mono_or_selected_available": 12,
+          "quiet_third": {
+            "admitted": 8,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.18702797325131426,
+            "median_speech_gain_db": -0.2017192181699549,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 8,
+            "snr_gain_db_range": [
+              -0.21860250969459827,
+              1.8866098289626763
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 8,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.10633347551747,
+            "median_speech_gain_db": -0.2350577704052151,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 8,
+            "snr_gain_db_range": [
+              -0.03256422324899333,
+              2.602583812254287
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/noisy_speech/expressive": {
+          "cases": 4,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.046134036913282994,
+            "median_speech_gain_db": -0.23568749944439799,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              -0.17254136612853266,
+              1.2475338233994435
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.1013790084516843,
+            "median_speech_gain_db": -0.2390434209881557,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              -0.03256422324899333,
+              2.602583812254287
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/noisy_speech/genuine": {
+          "cases": 4,
+          "mono": 4,
+          "prior_mono_or_selected": 4,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 4,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.7269600209670233,
+            "median_speech_gain_db": -0.22415923920206843,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 4,
+            "snr_gain_db_range": [
+              -0.21860250969459827,
+              1.8866098289626763
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 4,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.0669640657990005,
+            "median_speech_gain_db": -0.2350577704052151,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 4,
+            "snr_gain_db_range": [
+              -0.01835341858947359,
+              2.5918271227891054
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/noisy_speech/stock": {
+          "cases": 4,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.6283274394254037,
+            "median_speech_gain_db": -0.08941556382142986,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              0.030123656246734853,
+              1.86391164177574
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.10633347551747,
+            "median_speech_gain_db": -0.1771914897224127,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              0.15284455609021563,
+              2.544385420463481
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "BBC/holdout/overall": {
+          "cases": 30,
+          "mono": 12,
+          "prior_mono_or_selected": 12,
+          "prior_mono_or_selected_available": 18,
+          "quiet_third": {
+            "admitted": 13,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.18702797325131426,
+            "median_speech_gain_db": -0.2017192181699549,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 13,
+            "snr_gain_db_range": [
+              -0.21860250969459827,
+              1.8866098289626763
+            ],
+            "source_groups_added": 1
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 13,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.10633347551747,
+            "median_speech_gain_db": -0.2350577704052151,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 13,
+            "snr_gain_db_range": [
+              -0.03256422324899333,
+              2.602583812254287
+            ],
+            "source_groups_added": 1
+          }
+        },
+        "Surrey/holdout/background_only": {
+          "cases": 12,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 0,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/clean_speech": {
+          "cases": 6,
+          "mono": 4,
+          "prior_mono_or_selected": 4,
+          "prior_mono_or_selected_available": 6,
+          "quiet_third": {
+            "admitted": 4,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 4,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 4,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 4,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/clean_speech/expressive": {
+          "cases": 2,
+          "mono": 1,
+          "prior_mono_or_selected": 1,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/clean_speech/genuine": {
+          "cases": 2,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/clean_speech/stock": {
+          "cases": 2,
+          "mono": 1,
+          "prior_mono_or_selected": 1,
+          "prior_mono_or_selected_available": 2,
+          "quiet_third": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 1,
+            "clipped_samples": 0,
+            "median_snr_gain_db": null,
+            "median_speech_gain_db": null,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 1,
+            "snr_gain_db_range": null,
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/noisy_speech": {
+          "cases": 12,
+          "mono": 4,
+          "prior_mono_or_selected": 4,
+          "prior_mono_or_selected_available": 12,
+          "quiet_third": {
+            "admitted": 4,
+            "clipped_samples": 0,
+            "median_snr_gain_db": -0.2494436765917305,
+            "median_speech_gain_db": -0.3234941142483093,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 4,
+            "snr_gain_db_range": [
+              -1.5799534154965649,
+              1.6793579432874566
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 5,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.8116762277400063,
+            "median_speech_gain_db": -0.31593411487095846,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 5,
+            "snr_gain_db_range": [
+              -1.511491350042565,
+              2.526434379988154
+            ],
+            "source_groups_added": 1
+          }
+        },
+        "Surrey/holdout/noisy_speech/expressive": {
+          "cases": 4,
+          "mono": 0,
+          "prior_mono_or_selected": 0,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": -0.9073333884588295,
+            "median_speech_gain_db": -1.2431770065328254,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -1.5799534154965649,
+              -0.0729446586017799
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 0,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.21646139335770131,
+            "median_speech_gain_db": -1.0441306375805046,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 0,
+            "snr_gain_db_range": [
+              -1.511491350042565,
+              2.526434379988154
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/noisy_speech/genuine": {
+          "cases": 4,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.37759279935301704,
+            "median_speech_gain_db": -0.25929636755695595,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              -0.31813835258551393,
+              0.9886483003843809
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 3,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 1.061019103083098,
+            "median_speech_gain_db": -0.2179028306774728,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 3,
+            "snr_gain_db_range": [
+              -0.23649314922526088,
+              2.450469373745186
+            ],
+            "source_groups_added": 1
+          }
+        },
+        "Surrey/holdout/noisy_speech/stock": {
+          "cases": 4,
+          "mono": 2,
+          "prior_mono_or_selected": 2,
+          "prior_mono_or_selected_available": 4,
+          "quiet_third": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.47024809480948626,
+            "median_speech_gain_db": -0.25068820214418597,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              -0.38608268655205613,
+              1.6793579432874566
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 2,
+          "whole_clip": {
+            "admitted": 2,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.950092486435294,
+            "median_speech_gain_db": -0.31593411487095846,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 2,
+            "snr_gain_db_range": [
+              -0.3136214606478802,
+              2.5032054750944477
+            ],
+            "source_groups_added": 0
+          }
+        },
+        "Surrey/holdout/overall": {
+          "cases": 30,
+          "mono": 8,
+          "prior_mono_or_selected": 8,
+          "prior_mono_or_selected_available": 18,
+          "quiet_third": {
+            "admitted": 8,
+            "clipped_samples": 0,
+            "median_snr_gain_db": -0.2494436765917305,
+            "median_speech_gain_db": -0.3234941142483093,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 0,
+            "mono_or_admitted": 8,
+            "snr_gain_db_range": [
+              -1.5799534154965649,
+              1.6793579432874566
+            ],
+            "source_groups_added": 0
+          },
+          "source_groups": 6,
+          "whole_clip": {
+            "admitted": 9,
+            "clipped_samples": 0,
+            "median_snr_gain_db": 0.8116762277400063,
+            "median_speech_gain_db": -0.31593411487095846,
+            "mono_admitted_candidate_missed": 0,
+            "mono_missed_candidate_admitted": 1,
+            "mono_or_admitted": 9,
+            "snr_gain_db_range": [
+              -1.511491350042565,
+              2.526434379988154
+            ],
+            "source_groups_added": 1
+          }
+        }
+      },
+      "schema": "chipmunk.stereo-reference-speech-admission-role/1",
+      "sha256": "839226ac85e5c0954a8dda48cafa3f907d8cecad79851f78f0cd2758499650a7",
+      "vad_forwards": 16920
+    }
+  },
+  "schema": "chipmunk.stereo-reference-speech-admission-result/1",
+  "status": "complete",
+  "vad_forwards": 25380
+}

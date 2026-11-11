@@ -1,0 +1,161 @@
+{
+  "development_freeze": {
+    "adapter_sha256": "91e329f031c846f82b9c15e0754215ba4c2e438e53bdc28934a75430713347f4",
+    "checkpoint": "OwensLab/commfor-model-384@6076002bf0d9dd37537f965ee2f06f826c333b61",
+    "fit_groups": [
+      0,
+      1,
+      3,
+      4,
+      6,
+      7,
+      9,
+      10
+    ],
+    "formats": [
+      "source",
+      "jpeg75"
+    ],
+    "inputs": {
+      "baseline": "26feef3b938bca091a3e84d48c8f5d52fcd0921d425c7dcfc8c0a742ff2225ba",
+      "flux": "a2abc11b2b9937dfcda8dc46d141412e25abefc148549152ad798f7c6e7660bb",
+      "lama": "438f754a667e90e5b42b977085a36725021cdb8180a3d6e9fca0a9206e267fc4"
+    },
+    "point_groups": [
+      2,
+      5,
+      8,
+      11
+    ],
+    "region_grid": 24,
+    "region_scales": [
+      4,
+      6,
+      8
+    ],
+    "ridge": 4.0,
+    "schema": "chipmunk.image-relative-patch-transfer/1",
+    "study_sha256": "861c88e2168b3d05f1408bc79b1430b664dee8e66f2cd702d7b3550a8ca4d541",
+    "versions": {
+      "numpy": "2.2.6",
+      "pillow": "12.3.0",
+      "safetensors": "0.8.0",
+      "scipy": "1.18.1",
+      "timm": "1.0.28",
+      "torch": "2.13.0"
+    },
+    "weight_sha256": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387"
+  },
+  "elapsed_s": 12.316,
+  "forwards": 180,
+  "freeze_sha256": "16d4cc45679955133f2624c23841bdf7bbb50e881c01be17597f2b9c7c1d3b32",
+  "operating_points": {
+    "classifier_projection": {
+      "control_group_maxima": [
+        1.2552914550830798,
+        1.986186839264773,
+        1.0281540138395489,
+        1.0215289586272127
+      ],
+      "direction_sha256": "e9aeffc94456c95ff5ffb3009d24874bcdc47ed081aa91fa51d3043676c97a23",
+      "point": 1.2552914550830798
+    },
+    "relative_pair_fit": {
+      "control_group_maxima": [
+        0.8233272579983199,
+        0.825128091334555,
+        1.0215366168880795,
+        0.7959775658186782
+      ],
+      "direction_sha256": "4517ad8e1f5935a523a7b5964c0ba3b72272faac1eb5ff64b808d88170798650",
+      "point": 0.825128091334555
+    }
+  },
+  "points_sha256": "d4ef1fc440109a73f8c53d774049b166e1af6c5197a5dc8c6988b8bb1adad8e1",
+  "replication": {
+    "first_aggregate_sha256": "50533f4e2584864b81589c522df65c4ac9f5b03c5cf06cc549436ee153935df2",
+    "first_run_forwards": 180,
+    "first_timing_wrapper_exit": 1,
+    "first_timing_wrapper_issue": "BSD time reported a denied kern.clockrate query after outputs were written.",
+    "repeat_exit": 0,
+    "same_points_and_aggregate_except_elapsed": true
+  },
+  "schema": "chipmunk.image-relative-patch-result/1",
+  "serving_admitted": false,
+  "source_groups": {
+    "fit": 8,
+    "point": 4,
+    "transfer": 6
+  },
+  "status": "complete",
+  "transfer": {
+    "classifier_projection": {
+      "jpeg75": {
+        "ai_flagged": 0,
+        "ai_tested": 6,
+        "blur_flagged": 0,
+        "blur_tested": 6,
+        "copy_move_flagged": 0,
+        "copy_move_tested": 6,
+        "groups": 6,
+        "localized": 0,
+        "mean_iou": 0.0,
+        "mean_recall": 0.0,
+        "original_flagged": 0,
+        "original_tested": 6,
+        "tone_flagged": 0,
+        "tone_tested": 6
+      },
+      "source": {
+        "ai_flagged": 1,
+        "ai_tested": 6,
+        "blur_flagged": 0,
+        "blur_tested": 6,
+        "copy_move_flagged": 2,
+        "copy_move_tested": 6,
+        "groups": 6,
+        "localized": 0,
+        "mean_iou": 0.07523600260416667,
+        "mean_recall": 0.07523600260416667,
+        "original_flagged": 1,
+        "original_tested": 6,
+        "tone_flagged": 1,
+        "tone_tested": 6
+      }
+    },
+    "relative_pair_fit": {
+      "jpeg75": {
+        "ai_flagged": 4,
+        "ai_tested": 6,
+        "blur_flagged": 4,
+        "blur_tested": 6,
+        "copy_move_flagged": 5,
+        "copy_move_tested": 6,
+        "groups": 6,
+        "localized": 0,
+        "mean_iou": 0.0,
+        "mean_recall": 0.0,
+        "original_flagged": 4,
+        "original_tested": 6,
+        "tone_flagged": 4,
+        "tone_tested": 6
+      },
+      "source": {
+        "ai_flagged": 4,
+        "ai_tested": 6,
+        "blur_flagged": 4,
+        "blur_tested": 6,
+        "copy_move_flagged": 3,
+        "copy_move_tested": 6,
+        "groups": 6,
+        "localized": 0,
+        "mean_iou": 0.0,
+        "mean_recall": 0.0,
+        "original_flagged": 3,
+        "original_tested": 6,
+        "tone_flagged": 3,
+        "tone_tested": 6
+      }
+    }
+  }
+}

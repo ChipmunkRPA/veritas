@@ -121,6 +121,60 @@ def test_failure_cannot_contain_a_negative_authenticity_response():
         review.audit_receipt(manifest, rows, "confirmation")
 
 
+def test_model_free_receipt_keeps_its_declared_kind_after_freeze():
+    manifest, receipt = fixture()
+    development = receipt("development")
+    confirmation = receipt("confirmation")
+    for record in (development, confirmation):
+        record.update(method_kind="model_free", weight_sha256=[])
+    lock = review.freeze(manifest, development, thresholds=dict.fromkeys(review.MEDIA, .5))
+    assert lock["method_kind"] == "model_free"
+    assert len(review.summarize(manifest, confirmation, lock)["strata"]) == 8
+    confirmation.pop("method_kind")
+    with pytest.raises(ValueError, match="Pinned model weight"):
+        review.summarize(manifest, confirmation, lock)
+
+
+def test_localization_includes_misses_and_control_regions_at_all_four_scales():
+    manifest, receipt = fixture()
+    for case in manifest["cases"]:
+        case["localization_truth"] = {"unit": review.LOCALIZATION_UNITS[case["modality"]], "source_units": 100,
+                                      "target_units": 20 if case["label"] else 0}
+    development, confirmation = receipt("development"), receipt("confirmation")
+    cases = {case["id"]: case for case in manifest["cases"]}
+    for record in (development, confirmation):
+        for outcome in record["predictions"]:
+            case = cases[outcome["id"]]
+            outcome["localization"] = {"status": "ok", "reported_units": 16, "overlap_units": 12 if case["label"] else 0}
+            if case["label"] and case["condition"] == "processed":
+                outcome["localization"] = {"status": "not_applicable", "reason": "No valid source mapping"}
+    lock = review.freeze(manifest, development, thresholds=dict.fromkeys(review.MEDIA, .5))
+    summary = review.summarize(manifest, confirmation, lock)
+    for row in summary["strata"]:
+        regions = row["localization"]
+        assert regions["unit"] == review.LOCALIZATION_UNITS[row["modality"]]
+        assert regions["control_inputs"] == regions["control_regions"] == regions["positive_inputs"] == 1
+        expected = (0.5, 2 / 3, 0.6) if row["condition"] == "clean" else (0.0, 0.0, 0.0)
+        assert (regions["mean_positive_iou"], regions["mean_positive_f1"], regions["mean_positive_recall"]) == expected
+        assert row["ai_alerts"] == 1  # a ranked response and an unassessed location can coexist
+        assert regions["status_counts"] == ({"ok": 2} if row["condition"] == "clean" else {"ok": 1, "not_applicable": 1})
+
+
+@pytest.mark.parametrize("outcome", [None, {"status": "ok", "reported_units": 95, "overlap_units": 0},
+                                     {"status": "ok", "reported_units": 12, "overlap_units": 13},
+                                     {"status": "failed", "reported_units": 0, "reason": "No source map"}])
+def test_impossible_or_missing_localization_is_rejected(outcome):
+    manifest, receipt = fixture()
+    target = next(case for case in manifest["cases"] if case["split"] == "confirmation" and case["label"] == 1)
+    target["localization_truth"] = {"unit": review.LOCALIZATION_UNITS[target["modality"]], "source_units": 100,
+                                    "target_units": 20}
+    record = receipt("confirmation")
+    row = next(row for row in record["predictions"] if row["id"] == target["id"])
+    row["localization"] = outcome
+    with pytest.raises(ValueError, match="localization"):
+        review.audit_receipt(manifest, record, "confirmation")
+
+
 @pytest.mark.parametrize("key,value", [("implementation_sha256", "0"*64), ("weight_sha256", ["0"*64]),
                                        ("system", "changed"), ("score_kind", "calibrated")])
 def test_confirmation_cannot_change_frozen_system(key, value):

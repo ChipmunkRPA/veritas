@@ -19,6 +19,7 @@ SCHEMA = "chipmunk.independent-evaluation/1"
 MEDIA = {"image", "video", "audio", "text"}
 SPLITS = {"development", "confirmation"}
 STATUSES = {"ok", "inconclusive", "not_applicable", "failed"}
+LOCALIZATION_UNITS = {"image": "pixels", "video": "frames", "audio": "samples", "text": "unicode_codepoints"}
 
 
 def digest(document: dict) -> str:
@@ -28,6 +29,31 @@ def digest(document: dict) -> str:
 
 def _hash(value) -> bool:
     return isinstance(value, str) and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+
+
+def _extent(value, modality: str, label: int) -> None:
+    if not isinstance(value, dict) or value.keys() != {"unit", "source_units", "target_units"}:
+        raise ValueError("Localization truth needs a unit, source extent and target extent")
+    source, target = value["source_units"], value["target_units"]
+    if (value["unit"] != LOCALIZATION_UNITS[modality] or type(source) is not int or type(target) is not int
+            or source <= 0 or not 0 <= target <= source or bool(target) != bool(label)):
+        raise ValueError("Invalid source-bound localization truth extent")
+
+
+def _localization(value, truth: dict) -> None:
+    if not isinstance(value, dict) or value.get("status") not in STATUSES:
+        raise ValueError("Every planned localization needs an explicit outcome")
+    status = value["status"]
+    reported, overlap = value.get("reported_units"), value.get("overlap_units")
+    if status != "ok":
+        if (reported is not None or overlap is not None or not isinstance(value.get("reason"), str)
+                or not value["reason"].strip()):
+            raise ValueError("Unassessed localization needs a reason and no measured extent")
+        return
+    target, source = truth["target_units"], truth["source_units"]
+    if (type(reported) is not int or type(overlap) is not int or not 0 <= overlap <= min(reported, target)
+            or reported + target - overlap > source):
+        raise ValueError("Impossible localization overlap or reported extent")
 
 
 def audit_manifest(manifest: dict) -> dict:
@@ -49,6 +75,8 @@ def audit_manifest(manifest: dict) -> dict:
                 raise ValueError(f"Missing declared {key}")
         if not _hash(case.get("input_sha256")) or not _hash(case.get("source_sha256")):
             raise ValueError("Input and parent-source SHA-256 are required")
+        if "localization_truth" in case:
+            _extent(case["localization_truth"], case["modality"], case["label"])
         terms = case.get("license", {})
         if not isinstance(terms, dict) or not terms.get("id") or terms.get("evaluation_permitted") is not True:
             raise ValueError("Each case needs declared evaluation permission and license identity")
@@ -83,8 +111,13 @@ def audit_receipt(manifest: dict, receipt: dict, split: str) -> list[dict]:
     if not isinstance(receipt.get("response_units"), str) or not receipt["response_units"].strip():
         raise ValueError("Response units must distinguish raw measurements from calibrated estimates")
     weights = receipt.get("weight_sha256")
-    if not isinstance(weights, list) or not weights or any(not _hash(x) for x in weights):
-        raise ValueError("Pinned model weight digests are required")
+    method = receipt.get("method_kind", "weighted")
+    if method not in {"weighted", "model_free"} or not isinstance(weights, list):
+        raise ValueError("Declare a weighted or model-free method and its weight list")
+    if method == "weighted" and (not weights or any(not _hash(x) for x in weights)):
+        raise ValueError("Pinned model weight digests are required for weighted methods")
+    if method == "model_free" and weights:
+        raise ValueError("Model-free methods must declare an empty model weight list")
     if receipt["score_kind"] == "calibrated" and not _hash(receipt.get("calibration_sha256")):
         raise ValueError("Calibrated responses need their own calibration digest")
     expected = {c["id"]: c for c in manifest["cases"] if c["split"] == split}
@@ -107,7 +140,13 @@ def audit_receipt(manifest: dict, receipt: dict, split: str) -> list[dict]:
             raise ValueError("Unassessed and failed cases cannot carry authenticity responses")
         if row["status"] != "ok" and not row.get("reason"):
             raise ValueError("Unassessed and failed cases need reasons")
-        result.append({**case, "status": row["status"], "response": response})
+        measured = {**case, "status": row["status"], "response": response}
+        if "localization_truth" in case:
+            _localization(row.get("localization"), case["localization_truth"])
+            measured["localization"] = row["localization"]
+        elif "localization" in row:
+            raise ValueError("Unexpected localization outcome without planned truth extent")
+        result.append(measured)
     return result
 
 
@@ -123,11 +162,14 @@ def freeze(manifest: dict, development: dict, *, thresholds: dict[str, float]) -
                                            or (development["score_kind"] == "calibrated" and not 0 <= x <= 1)
                                            for x in thresholds.values()):
         raise ValueError("Every planned modality needs a finite frozen operating point")
-    return deepcopy({"schema": SCHEMA, "manifest_sha256": digest(manifest),
-            "development_receipt_sha256": digest(development),
-            "development_cases": len(rows), "thresholds": thresholds,
-            **{k: development.get(k) for k in ("system", "implementation_sha256", "weight_sha256",
-                                               "score_kind", "calibration_sha256", "response_units")}})
+    locked = {"schema": SCHEMA, "manifest_sha256": digest(manifest),
+              "development_receipt_sha256": digest(development),
+              "development_cases": len(rows), "thresholds": thresholds,
+              **{k: development.get(k) for k in ("system", "implementation_sha256", "weight_sha256",
+                                                "score_kind", "calibration_sha256", "response_units")}}
+    if "method_kind" in development:
+        locked["method_kind"] = development["method_kind"]
+    return deepcopy(locked)
 
 
 def _auc(rows: list[dict]) -> float | None:
@@ -145,6 +187,30 @@ def _auc(rows: list[dict]) -> float | None:
     return wins / (positives * negatives)
 
 
+def _region_summary(rows: list[dict]) -> dict:
+    statuses, iou, f1, recall = Counter(), [], [], []
+    original_regions, edited_regions = 0, 0
+    for case in rows:
+        measured = case["localization"]
+        status = measured["status"]
+        statuses[status] += 1
+        target = case["localization_truth"]["target_units"]
+        reported, overlap = (measured["reported_units"], measured["overlap_units"]) if status == "ok" else (0, 0)
+        if target:
+            iou.append(overlap / (reported + target - overlap))
+            f1.append(2 * overlap / (reported + target))
+            recall.append(overlap / target)
+            edited_regions += bool(reported)
+        else:
+            original_regions += bool(reported)
+    return {"unit": rows[0]["localization_truth"]["unit"], "planned": len(rows),
+            "status_counts": dict(statuses), "positive_inputs": len(iou), "control_inputs": len(rows) - len(iou),
+            "control_regions": original_regions, "positive_regions": edited_regions,
+            "mean_positive_iou": mean(iou) if iou else None,
+            "mean_positive_f1": mean(f1) if f1 else None,
+            "mean_positive_recall": mean(recall) if recall else None}
+
+
 def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
     rows = audit_receipt(manifest, confirmation, "confirmation")
     if lock.get("manifest_sha256") != digest(manifest) or lock.get("schema") != SCHEMA:
@@ -152,6 +218,8 @@ def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
     for key in ("system", "implementation_sha256", "weight_sha256", "score_kind", "calibration_sha256", "response_units"):
         if confirmation.get(key) != lock.get(key):
             raise ValueError(f"Confirmation changed frozen system field: {key}")
+    if confirmation.get("method_kind", "weighted") != lock.get("method_kind", "weighted"):
+        raise ValueError("Confirmation changed the frozen method kind")
     groups = defaultdict(list)
     for row in rows:
         groups[(row["modality"], row["condition"])].append(row)
@@ -168,7 +236,7 @@ def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
             return row["status"] == "ok" and row["response"] >= point
         statuses = dict(Counter(r["status"] for r in cases))
         # Missing responses count as AI not alerted, but never as original verdicts.
-        summaries.append({"modality": modality, "condition": condition, "planned": len(cases),
+        summary = {"modality": modality, "condition": condition, "planned": len(cases),
                           "source_groups": len({r["group"] for r in cases}), "scored": len(scored),
                           "status_counts": statuses, "originals": len(real), "ai_inputs": len(edited),
                           "false_alerts": sum(flags(r) for r in real),
@@ -178,7 +246,10 @@ def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
                           "unassessed": sum(r["status"] != "ok" for r in cases),
                           "assessable_auc": _auc(scored),
                           "assessable_brier": (mean((r["response"] - r["label"]) ** 2 for r in scored)
-                                                if scored and confirmation["score_kind"] == "calibrated" else None)})
+                                                if scored and confirmation["score_kind"] == "calibrated" else None)}
+        if planned := [row for row in cases if "localization_truth" in row]:
+            summary["localization"] = _region_summary(planned)
+        summaries.append(summary)
     return {"schema": SCHEMA, "manifest_sha256": digest(manifest), "lock_sha256": digest(lock),
             "receipt_sha256": digest(confirmation), "system": confirmation["system"], "strata": summaries,
             "limits": "Aggregate declared-source results; AUC/Brier cover scored cases only. No proof of authorship, "

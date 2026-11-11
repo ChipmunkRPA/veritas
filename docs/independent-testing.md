@@ -68,6 +68,9 @@ donor recovery on fresh ordinary edits and unchanged controls in two formats.
 The [native copy follow-up](source-evidence-native-coverage-2026-11-11.md#images)
 compares the supplied-region and automatic proposal paths on the same images,
 with separate counts for translated and reflected copies.
+The [regional patch response comparison](image-relative-patch-transfer-2026-11-11.md)
+reports a compact paired-feature method's localization and false highlights
+when the edit generator and source groups change.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -95,6 +98,9 @@ The [BBC holdout intake](audio-bbc-room-assets-v303-result.md) verifies a
 separate room with documented front and lateral positions.
 The [matched Surrey and BBC comparison](audio-measured-surrey-activity-transfer-2026-11-11.md)
 reports speech-window admission on the same foregrounds and strong background noise.
+The [stereo suppression test](audio-stereo-reference-suppression-2026-11-11.md)
+adds 36 matched noise-only controls and measures whether channel-difference
+filtering recovers synthetic or genuine speech windows.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -384,9 +390,15 @@ Keep source families and transformed copies together. Explain any unknown overla
 
 Each system receipt records `manifest_sha256` (canonical JSON digest from the
 audit), `split`, `system`, `implementation_sha256`, a nonempty `weight_sha256`
-array, `score_kind` (`raw` or `calibrated`), `response_units`, and `predictions`. Calibrated receipts
-also require `calibration_sha256`. Every planned case appears exactly once with
-its `id`, `input_sha256`, and `status`:
+array, `score_kind` (`raw` or `calibrated`), `response_units`, and `predictions`.
+Calibrated receipts also require `calibration_sha256`.
+
+For checks based on direct measurements, set `method_kind: "model_free"` and
+`weight_sha256: []`. The freeze records the method and implementation digest.
+Existing weighted receipts use their pinned weight digests.
+
+Every planned case appears exactly once with its `id`, `input_sha256`, and
+`status`.
 
 - `ok`: a finite `response`, oriented towards the declared positive class. Raw
   measurements retain their actual units, including signed responses. Calibrated
@@ -412,8 +424,24 @@ customers or unknown generators. Report all original/edit counts alongside rates
 
 ## Evidence localization
 
-The portable receipt assesses input-level responses. It does not certify masks,
-lip-sync offsets, or source positions. Include a separate localization audit:
+The portable receipt can also count localization outcomes without carrying source
+media, coordinates, or private text. To include them, add `localization_truth`
+to each planned case with `unit`, `source_units`, and `target_units`. Use
+`pixels` for images, `frames` for videos, `samples` for audio, and
+`unicode_codepoints` for writing. Use zero target units for controls and the
+exact union of affected units for positive inputs. In the corresponding
+prediction, add a `localization` object with its own `status`, plus measured
+`reported_units` and `overlap_units` for `ok`, or a reason for an unassessed
+outcome. An assessed input with no region has zero reported and overlapping
+units. The summary reports per-condition counts, control highlights, and
+positive IoU, F1, and recall, including misses and unassessed cases in the
+positive means. File response and localization may have different coverage.
+For an image with 1,000 source pixels and a 100-pixel truth mask, a report
+covering 80 pixels with 60 pixels inside the mask contributes an IoU of
+60 / 120. Keep the exact region geometry in your private evaluation records.
+
+The receipt checks arithmetic bounds. A separate audit should verify the
+underlying masks, clocks, and text positions:
 
 - Images: original dimensions and orientation, reference-mask hash, exact scoring
   grid and projection, displayed-region policy, IoU/pixel F1 including misses,

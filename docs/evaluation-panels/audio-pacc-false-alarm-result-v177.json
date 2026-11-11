@@ -1,0 +1,1370 @@
+{
+  "defaults_changed": false,
+  "freeze_sha256": "eb36498738dcb9d95189ac6a7eeaf3c8c3938c867223ea100249a8a18bfc76b8",
+  "genuine_controls": {
+    "AMI": {
+      "by_condition": {
+        "babble_snr00": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 1.0,
+          "planned": 4,
+          "route_statuses": {
+            "ok": 4
+          },
+          "scored": 4,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "babble_snr05": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 0,
+            "unavailable": 1
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.75,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 1,
+            "ok": 3
+          },
+          "scored": 3,
+          "scored_coverage": 0.75,
+          "unavailable_rate": 0.25
+        },
+        "clean": {
+          "decided": 2,
+          "decided_coverage": 0.5,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 2,
+            "unavailable": 2
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.0,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 2,
+            "ok": 2
+          },
+          "scored": 2,
+          "scored_coverage": 0.5,
+          "unavailable_rate": 0.5
+        },
+        "env_noise_snr00": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 0,
+            "unavailable": 1
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.75,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 1,
+            "ok": 3
+          },
+          "scored": 3,
+          "scored_coverage": 0.75,
+          "unavailable_rate": 0.25
+        },
+        "env_noise_snr05": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 0,
+            "unavailable": 1
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.75,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 1,
+            "ok": 3
+          },
+          "scored": 3,
+          "scored_coverage": 0.75,
+          "unavailable_rate": 0.25
+        },
+        "music_instrumental_snr00": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 2,
+            "original": 0,
+            "unavailable": 2
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.5,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 2,
+            "ok": 2
+          },
+          "scored": 2,
+          "scored_coverage": 0.5,
+          "unavailable_rate": 0.5
+        },
+        "music_instrumental_snr05": {
+          "decided": 1,
+          "decided_coverage": 0.25,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 1,
+            "original": 1,
+            "unavailable": 2
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.25,
+          "planned": 4,
+          "route_statuses": {
+            "not_applicable": 2,
+            "ok": 2
+          },
+          "scored": 2,
+          "scored_coverage": 0.5,
+          "unavailable_rate": 0.5
+        }
+      },
+      "declared_source_contexts": 4,
+      "known_historical_voice_inputs": 0,
+      "microphone_inputs": 4,
+      "paired_vs_clean": {
+        "babble_snr00": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 2,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 2,
+              "noisy": "ok"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "babble_snr05": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "unavailable"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "not_applicable"
+            },
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "ok"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr00": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "unavailable"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "not_applicable"
+            },
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "ok"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr05": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 1,
+              "noisy": "unavailable"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "not_applicable"
+            },
+            {
+              "clean": "not_applicable",
+              "count": 1,
+              "noisy": "ok"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr00": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "unavailable",
+              "count": 2,
+              "noisy": "unavailable"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 2,
+              "noisy": "not_applicable"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr05": {
+          "both_scored": 2,
+          "both_scored_coverage": 0.5,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "original"
+            },
+            {
+              "clean": "unavailable",
+              "count": 2,
+              "noisy": "unavailable"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 4,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "not_applicable",
+              "count": 2,
+              "noisy": "not_applicable"
+            },
+            {
+              "clean": "ok",
+              "count": 2,
+              "noisy": "ok"
+            }
+          ]
+        }
+      }
+    },
+    "VCTK": {
+      "by_condition": {
+        "babble_snr00": {
+          "decided": 7,
+          "decided_coverage": 0.7,
+          "directions": {
+            "ai": 7,
+            "inconclusive": 3,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 7,
+          "false_ai_rate": 0.7,
+          "inconclusive_rate": 0.3,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "babble_snr05": {
+          "decided": 4,
+          "decided_coverage": 0.4,
+          "directions": {
+            "ai": 4,
+            "inconclusive": 6,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 4,
+          "false_ai_rate": 0.4,
+          "inconclusive_rate": 0.6,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "clean": {
+          "decided": 10,
+          "decided_coverage": 1.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 10,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.0,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr00": {
+          "decided": 1,
+          "decided_coverage": 0.1,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 9,
+            "original": 1,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.9,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr05": {
+          "decided": 3,
+          "decided_coverage": 0.3,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 7,
+            "original": 3,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.7,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr00": {
+          "decided": 1,
+          "decided_coverage": 0.1,
+          "directions": {
+            "ai": 1,
+            "inconclusive": 9,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 1,
+          "false_ai_rate": 0.1,
+          "inconclusive_rate": 0.9,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr05": {
+          "decided": 3,
+          "decided_coverage": 0.3,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 7,
+            "original": 3,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.7,
+          "planned": 10,
+          "route_statuses": {
+            "ok": 10
+          },
+          "scored": 10,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        }
+      },
+      "declared_source_contexts": 5,
+      "known_historical_voice_inputs": 10,
+      "microphone_inputs": 10,
+      "paired_vs_clean": {
+        "babble_snr00": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 7,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.7,
+          "new_false_ai": 7,
+          "new_false_ai_rate": 0.7,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "babble_snr05": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 6,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.4,
+          "new_false_ai": 4,
+          "new_false_ai_rate": 0.4,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr00": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 9,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr05": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 7,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr00": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 9,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.1,
+          "new_false_ai": 1,
+          "new_false_ai_rate": 0.1,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr05": {
+          "both_scored": 10,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 7,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 10,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 10,
+              "noisy": "ok"
+            }
+          ]
+        }
+      }
+    },
+    "VCTK_mic1": {
+      "by_condition": {
+        "babble_snr00": {
+          "decided": 4,
+          "decided_coverage": 0.8,
+          "directions": {
+            "ai": 4,
+            "inconclusive": 1,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 4,
+          "false_ai_rate": 0.8,
+          "inconclusive_rate": 0.2,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "babble_snr05": {
+          "decided": 3,
+          "decided_coverage": 0.6,
+          "directions": {
+            "ai": 3,
+            "inconclusive": 2,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 3,
+          "false_ai_rate": 0.6,
+          "inconclusive_rate": 0.4,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "clean": {
+          "decided": 5,
+          "decided_coverage": 1.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 5,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.0,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr00": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 5,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 1.0,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr05": {
+          "decided": 1,
+          "decided_coverage": 0.2,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 1,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.8,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr00": {
+          "decided": 0,
+          "decided_coverage": 0.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 5,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 1.0,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr05": {
+          "decided": 2,
+          "decided_coverage": 0.4,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 2,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.6,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        }
+      },
+      "declared_source_contexts": 5,
+      "known_historical_voice_inputs": 5,
+      "microphone_inputs": 5,
+      "paired_vs_clean": {
+        "babble_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.8,
+          "new_false_ai": 4,
+          "new_false_ai_rate": 0.8,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "babble_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.6,
+          "new_false_ai": 3,
+          "new_false_ai_rate": 0.6,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 5,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 5,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        }
+      }
+    },
+    "VCTK_mic2": {
+      "by_condition": {
+        "babble_snr00": {
+          "decided": 3,
+          "decided_coverage": 0.6,
+          "directions": {
+            "ai": 3,
+            "inconclusive": 2,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 3,
+          "false_ai_rate": 0.6,
+          "inconclusive_rate": 0.4,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "babble_snr05": {
+          "decided": 1,
+          "decided_coverage": 0.2,
+          "directions": {
+            "ai": 1,
+            "inconclusive": 4,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 1,
+          "false_ai_rate": 0.2,
+          "inconclusive_rate": 0.8,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "clean": {
+          "decided": 5,
+          "decided_coverage": 1.0,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 0,
+            "original": 5,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.0,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr00": {
+          "decided": 1,
+          "decided_coverage": 0.2,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 1,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.8,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "env_noise_snr05": {
+          "decided": 2,
+          "decided_coverage": 0.4,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 3,
+            "original": 2,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.6,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr00": {
+          "decided": 1,
+          "decided_coverage": 0.2,
+          "directions": {
+            "ai": 1,
+            "inconclusive": 4,
+            "original": 0,
+            "unavailable": 0
+          },
+          "false_ai": 1,
+          "false_ai_rate": 0.2,
+          "inconclusive_rate": 0.8,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        },
+        "music_instrumental_snr05": {
+          "decided": 1,
+          "decided_coverage": 0.2,
+          "directions": {
+            "ai": 0,
+            "inconclusive": 4,
+            "original": 1,
+            "unavailable": 0
+          },
+          "false_ai": 0,
+          "false_ai_rate": 0.0,
+          "inconclusive_rate": 0.8,
+          "planned": 5,
+          "route_statuses": {
+            "ok": 5
+          },
+          "scored": 5,
+          "scored_coverage": 1.0,
+          "unavailable_rate": 0.0
+        }
+      },
+      "declared_source_contexts": 5,
+      "known_historical_voice_inputs": 5,
+      "microphone_inputs": 5,
+      "paired_vs_clean": {
+        "babble_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.6,
+          "new_false_ai": 3,
+          "new_false_ai_rate": 0.6,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "babble_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.2,
+          "new_false_ai": 1,
+          "new_false_ai_rate": 0.2,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "env_noise_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 3,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 2,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr00": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "ai"
+            },
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "inconclusive"
+            }
+          ],
+          "net_false_ai_rate_change": 0.2,
+          "new_false_ai": 1,
+          "new_false_ai_rate": 0.2,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        },
+        "music_instrumental_snr05": {
+          "both_scored": 5,
+          "both_scored_coverage": 1.0,
+          "direction_transitions": [
+            {
+              "clean": "original",
+              "count": 4,
+              "noisy": "inconclusive"
+            },
+            {
+              "clean": "original",
+              "count": 1,
+              "noisy": "original"
+            }
+          ],
+          "net_false_ai_rate_change": 0.0,
+          "new_false_ai": 0,
+          "new_false_ai_rate": 0.0,
+          "planned_pairs": 5,
+          "resolved_false_ai": 0,
+          "resolved_false_ai_rate": 0.0,
+          "route_status_transitions": [
+            {
+              "clean": "ok",
+              "count": 5,
+              "noisy": "ok"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "holdout_wavs_read": 0,
+  "maximum_sampled_descendant_rss_bytes": 2958639104,
+  "new_neural_calls": 109,
+  "planned_cases": 98,
+  "private_observations_sha256": "0b1a54911106a974dab1815765da6225f11156a48151f2c6166e8b43d5b740f6",
+  "private_resource_profile_sha256": "5a9c4e5957895492c4af301c048125261d7352c89a238a5a781f904581c8c28f",
+  "schema": "chipmunk.audio-pacc-false-alarm-result/177",
+  "serving_raw_forwards": 89,
+  "serving_stability_forwards": 20,
+  "status": "complete",
+  "worker_duration_seconds": 69.15456504095346
+}

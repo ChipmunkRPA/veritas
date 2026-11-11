@@ -1,0 +1,62 @@
+{
+  "schema": "chipmunk.audio-demand-controls-freeze/204",
+  "publisher_record": "https://zenodo.org/records/1227121",
+  "publisher_assets": {
+    "DWASHING_16k.zip": {
+      "publisher_md5": "7e5ee9437ce9409c5f9a779b6212a240",
+      "sha256": "f687c0806b0e9731b71a9c01c6134a21330efc5fa4aa7ee97cf4df276ad1dae1",
+      "bytes": 102343250
+    },
+    "NRIVER_16k.zip": {
+      "publisher_md5": "54264db61d3fe073fb81f2e40e0d19b5",
+      "sha256": "98e3a3f05a7234ea07619d965bafeea68a100bbce5c9269b7487393e3b559660",
+      "bytes": 98689565
+    },
+    "DEMAND.pdf": {
+      "publisher_md5": "a513afe131e08cdacf7c1854b174d5ab",
+      "sha256": "debec0d9de603c800a062108a065efb61d87b56cd1718b0b61566e2fed6b4800",
+      "bytes": 87837
+    }
+  },
+  "environment_license": "CC-BY-SA-3.0",
+  "foreground_results_sha256": {
+    "audio-voxforge-tr-transfer-complete-v201.json": "15e25d5ad95758226ac3153e604751466dd0efc07f6271aec1de400f7d9eb9e6",
+    "audio-alania-transfer-result-v179.json": "29b4cdd53d761b6f3ba13c030a9b661dbbf1de3104fec2b602e5e7aa81fc1fa0"
+  },
+  "private_preparation_sha256": {
+    "genuine": "369b7ecf0f0061dd6878a99ad75f432d8dca058ef3e5f0fad6c67ccf994671c0",
+    "synthetic": "947afa81936d53c335869fe38402913e827d62d6e7480ab60da2688499a00169"
+  },
+  "code_sha256": {
+    "backend/scripts/audio_demand_controls_v204.py": "ea040c77c5b666a777bc9a5e4fb16b42b052d39fc84f51c34ccf07012197cae0",
+    "backend/tests/test_audio_demand_controls_v204.py": "7d60f0f3dfc840451432529419c4160415e0edf07cd1e7714b379301abdc5496",
+    "docs/audio-demand-controls-v204-method.md": "5e5a79a30f153cadd90282127d2783f9be06a18c515ec8106e6961bc085eb5e7",
+    "backend/scripts/audio_short_edit_controls.py": "3124865172114acc07d0bc9aca581645827a5092fd49f7c5102aa3cd4f189bb7",
+    "backend/scripts/audio_voxforge_tr_transfer_v201.py": "bf71c5544733404b8bb30424e64c18ee4c6715b841142611d080f0d50e49b63e",
+    "backend/scripts/audio_alania_transfer_v179.py": "fe047fd62b30cb6504589e9fd94b2a88abb99158772a3c4f04342b567f635cdb",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "source_slots": 48,
+  "cases_planned": 288,
+  "source_outcomes": {
+    "genuine_qualified": 19,
+    "genuine_unavailable": 5,
+    "synthetic_qualified": 24
+  },
+  "conditions": [
+    "source_clean",
+    "matched_clean",
+    "washing_room_0db",
+    "washing_room_5db",
+    "river_0db",
+    "river_5db"
+  ],
+  "channel": 1,
+  "nominal_snr_db": [
+    0,
+    5
+  ],
+  "window_start_seconds": 4,
+  "window_step_seconds": 6,
+  "model_calls_permitted": false
+}

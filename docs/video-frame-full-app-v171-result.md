@@ -14,13 +14,19 @@ independent frame clock, sampled RGB and mono PCM.
 | Scored frames from the target route | 0 | 24 |
 | Maximum sampled process-tree RSS | 4,858,970,112 bytes | 5,441,732,608 bytes |
 | Guarded worker elapsed | 40.60 s | 46.69 s |
-| App overall tendency for this genuine control | Unavailable | Leaning original |
+| App overall tendency for this genuine control | Unavailable | Leaning original for visual content |
 
 The complete app used more sampled process memory with the additional
 route active. Both arms completed under the same resource monitor.
 The candidate's committed detector output, linked signal and frame
 series agreed. The other route statuses and saved fuser identity
 matched, and both evidence sets passed their asset checks.
+An independent replay verified both committed result hashes and found that
+the public projection exposed checkpoint pins. The corrective branch
+withholds those fields in the API, JSON exports and technical appendix.
+Replaying the same two results through it found zero matches among 77
+registered model identifiers and recorded checkpoint pins.
+[Public projection fix](https://github.com/ChipmunkRPA/veritas/tree/codex/public-model-revision-redaction)
 
 The first v168 reference stopped before inference when application
 imports added five known dependency defaults to the environment. The

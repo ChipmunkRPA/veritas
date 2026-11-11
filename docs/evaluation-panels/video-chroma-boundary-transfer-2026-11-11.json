@@ -1,0 +1,80 @@
+{
+  "development": {
+    "all_controls": 31,
+    "assessed_controls": 31,
+    "development_journal_sha256": "617aa665d2ff0278a703d7d653def075830e1aee291cc826aab60d03eb87c521",
+    "freeze_sha256": "915dfc4ec886520ad11c34553097c3ec3fe85c3ab5fe8969a180d5846803977d",
+    "point": 1.9002143144607544,
+    "schema": "chipmunk.video-chroma-boundary-point/1"
+  },
+  "freeze_sha256": "915dfc4ec886520ad11c34553097c3ec3fe85c3ab5fe8969a180d5846803977d",
+  "groups_with_false_flags": 0,
+  "groups_with_localization": 0,
+  "held": {
+    "camera": {
+      "measured_no_flag": 6
+    },
+    "known_swap": {
+      "measured_no_flag": 24
+    },
+    "rtfs": {
+      "measured_no_flag": 42
+    }
+  },
+  "held_by_condition": {
+    "chroma_conversion_only": {
+      "measured_no_flag": 2
+    },
+    "ordinary_blur": {
+      "measured_no_flag": 12
+    },
+    "ordinary_light": {
+      "measured_no_flag": 12
+    },
+    "ordinary_time_step": {
+      "measured_no_flag": 12
+    },
+    "original": {
+      "measured_no_flag": 6
+    },
+    "recompression_only": {
+      "measured_no_flag": 2
+    },
+    "swap_a": {
+      "measured_no_flag": 12
+    },
+    "swap_b": {
+      "measured_no_flag": 12
+    },
+    "unchanged": {
+      "measured_no_flag": 2
+    }
+  },
+  "pilot_advancement": "Replicate only with at least 12 of 24 correctly localized swaps (IoU >= 0.50) across four held sources, at most two false flags across all held genuine views, and at least 80% assessed coverage in swaps and controls separately.",
+  "pilot_advances": false,
+  "policy": "Standalone research localization. A non-flagged or unassessed interval carries no originality inference. No overall confidence contribution.",
+  "runtime": {
+    "development": {
+      "elapsed_s": 251.03763725003228,
+      "journal_sha256": "617aa665d2ff0278a703d7d653def075830e1aee291cc826aab60d03eb87c521",
+      "peak_rss_bytes": 229097472,
+      "verified_frames": 315
+    },
+    "held": {
+      "elapsed_s": 241.92871837504208,
+      "journal_sha256": "bc8daf0d0270d2e10698b18f3e83cfc2c25bda2db94306ae57669119f27e94d2",
+      "peak_rss_bytes": 233734144,
+      "verified_frames": 630
+    }
+  },
+  "schema": "chipmunk.video-chroma-boundary-transfer/1",
+  "sealed_point_sha256": "f014021d95b6e3b2dca0eecbb1ef0a07bba905d44cb473385eef145c2cb9d00e",
+  "swap_by_duration": {
+    "3/4": {
+      "measured_no_flag": 12
+    },
+    "native_long": {
+      "measured_no_flag": 12
+    }
+  }
+}

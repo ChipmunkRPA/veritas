@@ -669,6 +669,13 @@ customers or unknown generators. Report all original/edit counts alongside rates
 
 ## Review an audio supplement by acoustic condition
 
+The [hard-overlap source panel](audio-hard-overlap-transfer-2026-11-11.md)
+is reconstructible from pinned public VoxPopuli test partitions and the
+commercially reviewed model assets. It includes a separate standard-library
+verifier for the saved local audio hashes, interval grids, count distributions
+and route totals. The method and aggregates are public. Keep native source audio
+and per-recording responses in the evaluator's local workspace.
+
 The [independent speaker-count comparison](audio-independent-overlap-count-2026-11-11.md)
 includes a fixed acoustic routing replay with recorded input hashes, the author
 checkpoint and scaler commitments, and separate controlled and natural-room

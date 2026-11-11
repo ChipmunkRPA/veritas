@@ -97,6 +97,30 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [similar-voice audio transfer](audio-hard-overlap-transfer-2026-11-11.md)
+  tested 504 new mixtures from 63 distinct VoxPopuli speakers. The strongest
+  prior normalized rule reduced mistaken three-voice routes from 181 to 163 of
+  378. It retained all 124 correct baseline routes, while 20 of 21 source
+  triplets still had a routing error. The independent verifier can compare the
+  exact PCM hashes, frame arithmetic and decision to the public aggregate.
+- The [three-stream separation pilot](audio-separation-third-voice-pilot-2026-11-11.md)
+  recovered 14/16 quieter and 12/16 fainter third voices. All 16 two-voice
+  controls produced a substantial unmatched output. A separate voice-presence
+  check is required before those streams can be interpreted independently.
+- The [image edge-spread check](image-edge-spread-transfer-2026-11-11.md) added
+  a feathered PNG location and two feathered JPEG75 locations beyond the
+  wavelet check. The opposing-flank method flagged 32/144 PNG controls and
+  63/144 JPEG75 controls. It failed the advancement rule in both deliveries.
+- The [spatial video color-boundary check](video-chroma-boundary-transfer-2026-11-11.md)
+  measured all 24 known swaps and 48 controls in its transfer panel. It flagged
+  zero swaps and zero controls at the frozen point. Only five top windows
+  overlapped a known edit by at least half when ignoring the point.
+- The [shared-anchor writing study](writing-shared-anchor-ranking-2026-11-11.md)
+  put 8/9 AI rewrites and 7/10 genuine human revisions first in a forced
+  ranking. Using agreement as an evidence filter removed the only useful AI
+  location along with two human flags. Keep selection and authorship confidence
+  outside that agreement rule.
+
 - The [independent audio speaker count](audio-independent-overlap-count-2026-11-11.md)
   withheld two of six retained three-voice routing errors while keeping all seven
   synthetic flags recovered in the separate-room test. A consumed diagnostic

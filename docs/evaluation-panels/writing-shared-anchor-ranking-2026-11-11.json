@@ -1,0 +1,2117 @@
+{
+  "commitments": {
+    "fresh_generation_admission": "201ff3e2e2213621c32e94e31992523a78880ea753aeae57b06bbf9bbc9d3cae",
+    "fresh_holdout": "c6e3b2fdd0280012726eba6fd720683363577960fd77c9ec8eb62f0800ad580a",
+    "independent_replay_implementation": "148a2d8d65ab31293dd760a92e50b308a1f93947d8391105825d7818d672e3e2",
+    "protocol": "e0bab4f6de77ce73c80229b92a8c8b9857199bca262bec38f8bb056dc3473122",
+    "public_runner": "884e72799580c312530be91208fff9a187561e2bc6338c64377f73769674d95c"
+  },
+  "decision": {
+    "agreement_filter_result": "Reduced human marks and removed the single useful fresh matched mark.",
+    "confidence_change": false,
+    "production_change": false,
+    "shared_anchor_result": "Prioritizes likely edited text in this fresh panel. Genuine human revisions also rank first."
+  },
+  "development": {
+    "agreement_vs_matched_top_one": {
+      "human_sentence": {
+        "0->0": 16,
+        "1->0": 2,
+        "1->1": 3
+      },
+      "original": {
+        "0->0": 12,
+        "1->0": 3,
+        "1->1": 6
+      },
+      "qwen": {
+        "0->0": 7,
+        "1->1": 3
+      },
+      "smol2": {
+        "0->0": 4,
+        "1->0": 1,
+        "1->1": 3
+      },
+      "smol2_companion": {
+        "0->0": 1,
+        "1->0": 1,
+        "1->1": 1
+      }
+    },
+    "commitments": {
+      "freeze": "8af0d5e866e46ccc18c07362e1810a29590cb36d42d71b66f2e463dca3b458e0",
+      "matched_fit": "7ecab534f10c7701810a237828f00079e81861282ade9034909ea64477f84054",
+      "native": "232e8b3b8688c5bd115a8813782df7db0e951247d63e8be654575cceb813915a"
+    },
+    "counts": {
+      "human_sentence": {
+        "agreement_rank": {
+          "locations": 12,
+          "selected": 12,
+          "target_selected": 8,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 21,
+          "different_first": 9,
+          "same_first": 12
+        },
+        "matched": {
+          "locations": 9,
+          "selected": 5,
+          "target_selected": 5,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 5,
+          "selected": 5,
+          "target_selected": 4,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 21,
+          "selected": 21,
+          "target_selected": 14,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "shared_rank": {
+          "locations": 21,
+          "selected": 21,
+          "target_selected": 11,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "agreement_rank": {
+          "locations": 12,
+          "selected": 12,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 21,
+          "different_first": 9,
+          "same_first": 12
+        },
+        "matched": {
+          "locations": 12,
+          "selected": 9,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 6,
+          "selected": 6,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 9,
+          "selected": 9,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 21,
+          "selected": 21,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "shared_rank": {
+          "locations": 21,
+          "selected": 21,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "agreement_rank": {
+          "locations": 6,
+          "selected": 6,
+          "target_selected": 6,
+          "useful": 6,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 10,
+          "different_first": 4,
+          "generation_unavailable": 11,
+          "same_first": 6
+        },
+        "matched": {
+          "locations": 7,
+          "selected": 4,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 4,
+          "selected": 4,
+          "target_selected": 3,
+          "useful": 3,
+          "wrong_location": 1
+        },
+        "native_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 7,
+          "useful": 7,
+          "wrong_location": 3
+        },
+        "shared_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 9,
+          "useful": 9,
+          "wrong_location": 1
+        }
+      },
+      "smol2": {
+        "agreement_rank": {
+          "locations": 6,
+          "selected": 6,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 2
+        },
+        "coverage": {
+          "assessed": 8,
+          "different_first": 2,
+          "generation_unavailable": 13,
+          "same_first": 6
+        },
+        "matched": {
+          "locations": 6,
+          "selected": 5,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 1
+        },
+        "matched_agreement": {
+          "locations": 4,
+          "selected": 4,
+          "target_selected": 3,
+          "useful": 3,
+          "wrong_location": 1
+        },
+        "matched_top_one": {
+          "locations": 5,
+          "selected": 5,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 1
+        },
+        "native_rank": {
+          "locations": 8,
+          "selected": 8,
+          "target_selected": 5,
+          "useful": 5,
+          "wrong_location": 3
+        },
+        "shared_rank": {
+          "locations": 8,
+          "selected": 8,
+          "target_selected": 5,
+          "useful": 5,
+          "wrong_location": 3
+        }
+      },
+      "smol2_companion": {
+        "agreement_rank": {
+          "locations": 1,
+          "selected": 1,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 3,
+          "different_first": 2,
+          "generation_unavailable": 3,
+          "same_first": 1
+        },
+        "matched": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 2,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 1,
+          "selected": 1,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 2,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "shared_rank": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 2
+        }
+      }
+    },
+    "elapsed_seconds": 28.618,
+    "human_source_groups_marked": {
+      "matched": 9,
+      "matched_agreement": 6,
+      "matched_top_one": 9
+    },
+    "model_forward_calls": 27,
+    "unique_inputs": 209
+  },
+  "fresh": {
+    "agreement_vs_matched_top_one": {
+      "human_sentence": {
+        "0->0": 7,
+        "1->0": 1,
+        "1->1": 2
+      },
+      "original": {
+        "0->0": 9,
+        "1->0": 1
+      },
+      "qwen": {
+        "0->0": 4
+      },
+      "smol2": {
+        "0->0": 4,
+        "1->0": 1
+      }
+    },
+    "commitments": {
+      "freeze": "210ac10bc6edfb711cab1acbf96c144dae0565b4c1a495b4115f227a1b23c0e7",
+      "matched_fit": "7ecab534f10c7701810a237828f00079e81861282ade9034909ea64477f84054",
+      "native": "b23813381dd60ae6533b261ffb4ea2a4d13f6e7cb42ae3dad5e2be50aaed3677"
+    },
+    "counts": {
+      "human_sentence": {
+        "agreement_rank": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 10,
+          "different_first": 7,
+          "same_first": 3
+        },
+        "matched": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 3,
+          "selected": 3,
+          "target_selected": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 6,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "shared_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 7,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "agreement_rank": {
+          "locations": 4,
+          "selected": 4,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 10,
+          "different_first": 6,
+          "same_first": 4
+        },
+        "matched": {
+          "locations": 1,
+          "selected": 1,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 1,
+          "selected": 1,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "shared_rank": {
+          "locations": 10,
+          "selected": 10,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "agreement_rank": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 2,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 4,
+          "different_first": 2,
+          "generation_unavailable": 6,
+          "same_first": 2
+        },
+        "matched": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_agreement": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_rank": {
+          "locations": 4,
+          "selected": 4,
+          "target_selected": 2,
+          "useful": 2,
+          "wrong_location": 2
+        },
+        "shared_rank": {
+          "locations": 4,
+          "selected": 4,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "agreement_rank": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "coverage": {
+          "assessed": 5,
+          "different_first": 5,
+          "generation_unavailable": 5
+        },
+        "matched": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 1
+        },
+        "matched_agreement": {
+          "locations": 0,
+          "selected": 0,
+          "target_selected": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "matched_top_one": {
+          "locations": 2,
+          "selected": 2,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 1
+        },
+        "native_rank": {
+          "locations": 5,
+          "selected": 5,
+          "target_selected": 1,
+          "useful": 1,
+          "wrong_location": 4
+        },
+        "shared_rank": {
+          "locations": 5,
+          "selected": 5,
+          "target_selected": 4,
+          "useful": 4,
+          "wrong_location": 1
+        }
+      }
+    },
+    "elapsed_seconds": 13.443,
+    "human_source_groups_marked": {
+      "matched": 3,
+      "matched_agreement": 2,
+      "matched_top_one": 3
+    },
+    "model_forward_calls": 13,
+    "schema": "chipmunk.writing-shared-anchor-ranking/1",
+    "source_outcomes": {
+      "forum-01": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "status": "generation_unavailable"
+        }
+      },
+      "forum-02": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "smol2": {
+          "status": "generation_unavailable"
+        }
+      },
+      "forum-03": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "smol2": {
+          "status": "generation_unavailable"
+        }
+      },
+      "forum-04": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        }
+      },
+      "forum-05": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "same_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "smol2": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        }
+      },
+      "forum-06": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "status": "generation_unavailable"
+        }
+      },
+      "forum-07": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        }
+      },
+      "forum-08": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        }
+      },
+      "forum-09": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "smol2": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": true
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": true,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        }
+      },
+      "forum-10": {
+        "human_sentence": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": true,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "original": {
+          "methods": {
+            "agreement_rank": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_agreement": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "matched_top_one": {
+              "locations": 0,
+              "selected": false,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "native_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            },
+            "shared_rank": {
+              "locations": 1,
+              "selected": true,
+              "target_selected": false,
+              "useful": false,
+              "wrong_location": false
+            }
+          },
+          "rank": "different_first",
+          "status": "assessed"
+        },
+        "qwen": {
+          "status": "generation_unavailable"
+        },
+        "smol2": {
+          "status": "generation_unavailable"
+        }
+      }
+    },
+    "unique_inputs": 97
+  },
+  "generation": {
+    "admission": {
+      "qwen": {
+        "admitted": 4,
+        "copied_target": 3,
+        "not_one_sentence": 1,
+        "word_geometry": 2
+      },
+      "smol2": {
+        "admitted": 5,
+        "copied_target": 1,
+        "word_geometry": 4
+      }
+    },
+    "checkpoint_provenance": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "freeze_sha256": "7c85e78ec9bf361d26ff0933af769079ed3c13ac5b74af5fdf31117a9679b457",
+    "generator_policies": {
+      "qwen": {
+        "max_tokens": 144,
+        "seed": 427587,
+        "temp": 0.35,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 144,
+        "seed": 898237,
+        "temp": 0.5,
+        "top_p": 0.9
+      }
+    },
+    "prompts": {
+      "qwen": "Rewrite ONLY the target sentence from an ordinary cooking discussion in fresh language and with a different sentence structure. Preserve all claims, relationships, technical names, and qualifiers. Write EXACTLY one sentence that fits the context, around {words} words. Output only the replacement sentence. End after its final punctuation.\n\nBefore: {left}\nTarget: {target}\nAfter: {right}",
+      "smol2": "Say the same thing in a different way. Return only one complete sentence, without quotation marks, labels or commentary. Use between {minimum} and {maximum} words. Preserve the facts and technical terms.\n\n{target}"
+    }
+  },
+  "independent_replay": {
+    "development": {
+      "counter_cells": 168,
+      "exact_contexts": 252,
+      "fixture_ranks": 63
+    },
+    "fresh": {
+      "counter_cells": 133,
+      "exact_contexts": 116,
+      "fixture_ranks": 29,
+      "generated_sentence_replacements": 9,
+      "paired_genuine_revisions": 10,
+      "publisher_sentence_locations": 80
+    }
+  },
+  "protocol": {
+    "evaluation_policy": "Previous NIST, USGS, and Global Voices confirmations are development-only sanity cases for this comparison. The same protocol and arithmetic are applied to the fresh panel with no fitting, threshold tuning, or method selection. Show changes relative to both existing matched marks and the one-location cap. Shared model weights make the two rankings correlated. Customer confidence and production logic remain outside this experiment.",
+    "generation_policy": "Two previously pinned Apache-2.0 local generator families make one offline attempt each per group. Apply the earlier EOS, source-copy, sentence, word-length, exact source alignment and prior-overlap rules. Retain only one exact replacement with both interior foci in the serving scope. Track unavailable attempts separately.",
+    "methods": {
+      "agreement_rank": "Rank a sentence first only when the two methods have the same unique top. An exact tie or disagreement leaves it unranked.",
+      "matched": "Existing frozen matched full-window marks on the two native focuses. Unchanged fit, operating point and directions.",
+      "matched_agreement": "Keep the existing matched top-one location only when the shared-anchor rank agrees. No new cutoff.",
+      "matched_top_one": "Keep only the unique native winner when it is already marked by the matched method. This comparator isolates the one-location cap.",
+      "native_rank": "Compare the existing native left-three and right-three context responses, each associated with its middle sentence.",
+      "shared_rank": "Score the first and fourth sentence with each interior focus independently between them. Compare two raw responses using the same outer sentences in the same order."
+    },
+    "metrics": "For ranking, exact first-position hits, disagreements, ties, and admitted file totals. For matched mark variants, useful rewrite localization is at least 0.30 non-whitespace intersection over union with the known edit, flagged human originals and genuine revisions, edited human locations selected, and paired retained/lost flags by source. No ranking-only human result is an AI flag. Report development and fresh results separately.",
+    "schema": "chipmunk.writing-shared-anchor-ranking-protocol/1",
+    "scope": "English plain TXT, one paragraph, exactly four sentences, 68–134 whitespace words, both interior sentences with at least 12 model segmentation words. Controls join only adjacent direct HTML paragraphs, if needed, with one space. Require complete native token coverage; no clipping or rescaling of scores.",
+    "source_policy": "Seasoned Advice public Q&A with original posts and both named public revision records dated May 2018 through December 2021, all carrying CC BY-SA 4.0; one original owner and thread per group. Require same-source body pairs with one exact changed interior sentence in a four-sentence excerpt and three unmodified neighboring sentences. Exclude personal health, bereavement, known external prose, quotations, images and markup from scored excerpts. Choose only from text geometry, distinct sources and edit variety before generation. The normalized exact 12-token exposure check excludes prior or cross-group overlap."
+  },
+  "schema": "chipmunk.writing-shared-anchor-ranking/1",
+  "scratch_bytes": 3941389,
+  "sources": {
+    "distinct_original_authors": 10,
+    "distinct_revision_editors": 10,
+    "license": "CC BY-SA 4.0",
+    "license_policy": "https://cooking.stackexchange.com/help/licensing",
+    "normalized_exact_12_token_cross_group_hits": 0,
+    "normalized_exact_12_token_dedup_text_entries": 45370,
+    "normalized_exact_12_token_history_hits": 0,
+    "old_and_new_revision_years": [
+      2018,
+      2019,
+      2020,
+      2021
+    ],
+    "ordinary_edit_categories": {
+      "copyedit": 1,
+      "duplicate_word": 1,
+      "explanatory_rewrite": 1,
+      "punctuation": 3,
+      "reference_clarification": 2,
+      "spelling_correction": 2
+    },
+    "original_author_revision_count": 6,
+    "post_types": {
+      "answer": 8,
+      "question": 2
+    },
+    "private_roster_sha256": "a27d34a296b8d729755fe33906876361b51e77f56f11064af5e8a3757a9303fa",
+    "publisher": "Seasoned Advice (Cooking Stack Exchange)",
+    "revision_api": "https://api.stackexchange.com/docs/revisions-by-ids",
+    "source_groups": 10
+  },
+  "study": "Rank agreement and exact localization on practical forum revisions"
+}

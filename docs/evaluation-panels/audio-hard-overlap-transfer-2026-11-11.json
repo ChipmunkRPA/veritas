@@ -1,0 +1,544 @@
+{
+  "advance": false,
+  "count_forwards": 1008,
+  "count_receipt_sha256": "447b92a50682fecf48d7b5d216bd8ae660a2269766e8fbc6078daecd55086968",
+  "counts": {
+    "diarization/all": {
+      "correct_two_routes": 124,
+      "count_vetoes": 0,
+      "diarization_unassessed": 5,
+      "incorrect_three_routes": 181,
+      "planned_three": 378,
+      "planned_two": 126,
+      "recorded_diarization_overlap": 194
+    },
+    "diarization/dry:three_balanced": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 23,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "diarization/dry:three_faint": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 37,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 26
+    },
+    "diarization/dry:three_quiet": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 2,
+      "incorrect_three_routes": 24,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 37
+    },
+    "diarization/dry:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "diarization/language:et": {
+      "correct_two_routes": 6,
+      "count_vetoes": 0,
+      "diarization_unassessed": 4,
+      "incorrect_three_routes": 14,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 0
+    },
+    "diarization/language:fi": {
+      "correct_two_routes": 48,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 69,
+      "planned_three": 144,
+      "planned_two": 48,
+      "recorded_diarization_overlap": 75
+    },
+    "diarization/language:lt": {
+      "correct_two_routes": 6,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 1,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 17
+    },
+    "diarization/language:nl": {
+      "correct_two_routes": 52,
+      "count_vetoes": 0,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 76,
+      "planned_three": 162,
+      "planned_two": 54,
+      "recorded_diarization_overlap": 87
+    },
+    "diarization/language:sl": {
+      "correct_two_routes": 12,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 21,
+      "planned_three": 36,
+      "planned_two": 12,
+      "recorded_diarization_overlap": 15
+    },
+    "diarization/reflective:three_balanced": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 24,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "diarization/reflective:three_faint": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 43,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 19
+    },
+    "diarization/reflective:three_quiet": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 30,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 32
+    },
+    "diarization/reflective:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "normalized_overlap_veto/all": {
+      "correct_two_routes": 124,
+      "count_vetoes": 18,
+      "diarization_unassessed": 5,
+      "incorrect_three_routes": 163,
+      "planned_three": 378,
+      "planned_two": 126,
+      "recorded_diarization_overlap": 194
+    },
+    "normalized_overlap_veto/dry:three_balanced": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 21,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "normalized_overlap_veto/dry:three_faint": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 37,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 26
+    },
+    "normalized_overlap_veto/dry:three_quiet": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 2,
+      "incorrect_three_routes": 22,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 37
+    },
+    "normalized_overlap_veto/dry:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "normalized_overlap_veto/language:et": {
+      "correct_two_routes": 6,
+      "count_vetoes": 11,
+      "diarization_unassessed": 4,
+      "incorrect_three_routes": 3,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 0
+    },
+    "normalized_overlap_veto/language:fi": {
+      "correct_two_routes": 48,
+      "count_vetoes": 3,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 66,
+      "planned_three": 144,
+      "planned_two": 48,
+      "recorded_diarization_overlap": 75
+    },
+    "normalized_overlap_veto/language:lt": {
+      "correct_two_routes": 6,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 1,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 17
+    },
+    "normalized_overlap_veto/language:nl": {
+      "correct_two_routes": 52,
+      "count_vetoes": 4,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 72,
+      "planned_three": 162,
+      "planned_two": 54,
+      "recorded_diarization_overlap": 87
+    },
+    "normalized_overlap_veto/language:sl": {
+      "correct_two_routes": 12,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 21,
+      "planned_three": 36,
+      "planned_two": 12,
+      "recorded_diarization_overlap": 15
+    },
+    "normalized_overlap_veto/reflective:three_balanced": {
+      "count_vetoes": 5,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 19,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "normalized_overlap_veto/reflective:three_faint": {
+      "count_vetoes": 4,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 39,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 19
+    },
+    "normalized_overlap_veto/reflective:three_quiet": {
+      "count_vetoes": 5,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 25,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 32
+    },
+    "normalized_overlap_veto/reflective:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "normalized_zero_or_overlap_veto/all": {
+      "correct_two_routes": 124,
+      "count_vetoes": 18,
+      "diarization_unassessed": 5,
+      "incorrect_three_routes": 163,
+      "planned_three": 378,
+      "planned_two": 126,
+      "recorded_diarization_overlap": 194
+    },
+    "normalized_zero_or_overlap_veto/dry:three_balanced": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 21,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "normalized_zero_or_overlap_veto/dry:three_faint": {
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 37,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 26
+    },
+    "normalized_zero_or_overlap_veto/dry:three_quiet": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 2,
+      "incorrect_three_routes": 22,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 37
+    },
+    "normalized_zero_or_overlap_veto/dry:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "normalized_zero_or_overlap_veto/language:et": {
+      "correct_two_routes": 6,
+      "count_vetoes": 11,
+      "diarization_unassessed": 4,
+      "incorrect_three_routes": 3,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 0
+    },
+    "normalized_zero_or_overlap_veto/language:fi": {
+      "correct_two_routes": 48,
+      "count_vetoes": 3,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 66,
+      "planned_three": 144,
+      "planned_two": 48,
+      "recorded_diarization_overlap": 75
+    },
+    "normalized_zero_or_overlap_veto/language:lt": {
+      "correct_two_routes": 6,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 1,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 17
+    },
+    "normalized_zero_or_overlap_veto/language:nl": {
+      "correct_two_routes": 52,
+      "count_vetoes": 4,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 72,
+      "planned_three": 162,
+      "planned_two": 54,
+      "recorded_diarization_overlap": 87
+    },
+    "normalized_zero_or_overlap_veto/language:sl": {
+      "correct_two_routes": 12,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 21,
+      "planned_three": 36,
+      "planned_two": 12,
+      "recorded_diarization_overlap": 15
+    },
+    "normalized_zero_or_overlap_veto/reflective:three_balanced": {
+      "count_vetoes": 5,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 19,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "normalized_zero_or_overlap_veto/reflective:three_faint": {
+      "count_vetoes": 4,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 39,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 19
+    },
+    "normalized_zero_or_overlap_veto/reflective:three_quiet": {
+      "count_vetoes": 5,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 25,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 32
+    },
+    "normalized_zero_or_overlap_veto/reflective:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "raw_overlap_veto/all": {
+      "correct_two_routes": 122,
+      "count_vetoes": 39,
+      "diarization_unassessed": 5,
+      "incorrect_three_routes": 144,
+      "planned_three": 378,
+      "planned_two": 126,
+      "recorded_diarization_overlap": 194
+    },
+    "raw_overlap_veto/dry:three_balanced": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 21,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "raw_overlap_veto/dry:three_faint": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 35,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 26
+    },
+    "raw_overlap_veto/dry:three_quiet": {
+      "count_vetoes": 2,
+      "diarization_unassessed": 2,
+      "incorrect_three_routes": 22,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 37
+    },
+    "raw_overlap_veto/dry:two": {
+      "correct_two_routes": 62,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    },
+    "raw_overlap_veto/language:et": {
+      "correct_two_routes": 5,
+      "count_vetoes": 14,
+      "diarization_unassessed": 4,
+      "incorrect_three_routes": 1,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 0
+    },
+    "raw_overlap_veto/language:fi": {
+      "correct_two_routes": 47,
+      "count_vetoes": 8,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 62,
+      "planned_three": 144,
+      "planned_two": 48,
+      "recorded_diarization_overlap": 75
+    },
+    "raw_overlap_veto/language:lt": {
+      "correct_two_routes": 6,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 1,
+      "planned_three": 18,
+      "planned_two": 6,
+      "recorded_diarization_overlap": 17
+    },
+    "raw_overlap_veto/language:nl": {
+      "correct_two_routes": 52,
+      "count_vetoes": 17,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 59,
+      "planned_three": 162,
+      "planned_two": 54,
+      "recorded_diarization_overlap": 87
+    },
+    "raw_overlap_veto/language:sl": {
+      "correct_two_routes": 12,
+      "count_vetoes": 0,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 21,
+      "planned_three": 36,
+      "planned_two": 12,
+      "recorded_diarization_overlap": 15
+    },
+    "raw_overlap_veto/reflective:three_balanced": {
+      "count_vetoes": 12,
+      "diarization_unassessed": 0,
+      "incorrect_three_routes": 12,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 39
+    },
+    "raw_overlap_veto/reflective:three_faint": {
+      "count_vetoes": 9,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 34,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 19
+    },
+    "raw_overlap_veto/reflective:three_quiet": {
+      "count_vetoes": 10,
+      "diarization_unassessed": 1,
+      "incorrect_three_routes": 20,
+      "planned_three": 63,
+      "recorded_diarization_overlap": 32
+    },
+    "raw_overlap_veto/reflective:two": {
+      "correct_two_routes": 60,
+      "count_vetoes": 2,
+      "diarization_unassessed": 0,
+      "planned_two": 63,
+      "recorded_diarization_overlap": 1
+    }
+  },
+  "coverage": {
+    "et": {
+      "planned_speakers": 6,
+      "qualified_speakers": 6,
+      "used_triplets": 1
+    },
+    "fi": {
+      "planned_speakers": 27,
+      "qualified_speakers": 26,
+      "used_triplets": 8
+    },
+    "lt": {
+      "planned_speakers": 7,
+      "qualified_speakers": 7,
+      "used_triplets": 1
+    },
+    "nl": {
+      "planned_speakers": 72,
+      "qualified_speakers": 70,
+      "used_triplets": 9
+    },
+    "sl": {
+      "planned_speakers": 10,
+      "qualified_speakers": 10,
+      "used_triplets": 2
+    }
+  },
+  "diarization_forwards": 1008,
+  "diarization_freeze_sha256": "3c5d94396d6a54d24eac57869db552e95f097ad8c2ba286fd51fde0a24468efb",
+  "diarization_receipt_sha256": "e3753d9e5b9f4ff35e13f07a08966ed6d1ddeec71c2f7ee8081a97a7fce7ec7d",
+  "freeze_sha256": "75ad528155fdf66154623e2fd9f0c603ef37f503d9076464508fa1ca119d085b",
+  "groups_with_correct_two_route": {
+    "diarization": 21,
+    "normalized_overlap_veto": 21,
+    "normalized_zero_or_overlap_veto": 21,
+    "raw_overlap_veto": 21
+  },
+  "groups_with_incorrect_three_route": {
+    "diarization": 20,
+    "normalized_overlap_veto": 20,
+    "normalized_zero_or_overlap_veto": 20,
+    "raw_overlap_veto": 19
+  },
+  "independent_verification": {
+    "minimum_shared_speech_samples": 24960,
+    "mixtures_reconstructed_byte_exact": 504,
+    "portable": {
+      "sha256": {
+        "count_plan": "75ad528155fdf66154623e2fd9f0c603ef37f503d9076464508fa1ca119d085b",
+        "counts": "447b92a50682fecf48d7b5d216bd8ae660a2269766e8fbc6078daecd55086968",
+        "diarization_plan": "3c5d94396d6a54d24eac57869db552e95f097ad8c2ba286fd51fde0a24468efb",
+        "manifest": "207f2084f1dd036f197c404c5b727f7740266b6eaa2037cb6488da33c954399a",
+        "measurements": "e3753d9e5b9f4ff35e13f07a08966ed6d1ddeec71c2f7ee8081a97a7fce7ec7d"
+      },
+      "verified_advancement_outcome": false,
+      "verified_condition_rollups": 56,
+      "verified_count_distributions": 1008,
+      "verified_interval_grids": 1008,
+      "verified_pcm": 504,
+      "verified_source_group_totals": 8
+    },
+    "source_members_verified": 63
+  },
+  "plan": {
+    "count_assets": {
+      "5_speakers.wav": "d9ba22bb9cfa3493b8e0cbe85174d0a859558cee828f239433cc5688f8014e65",
+      "CRNN.h5": "00f67eb2aa2749bae9d45f3642b9d031b16f372aff929f74699b5a04a266c98d",
+      "LICENSE": "ff823d0ff3dadd8e59572a9c825c598993673e3bba34ae7f78181cae56e45ca5",
+      "scaler.npz": "90ec0061d27ef224687598e715562933a6ba0849dc9aab447cafad6f0259a7a7"
+    },
+    "diarization_model_sha256": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+    "diarization_runtime_sha256": "2c3a7a719b778daeb14f147e011891f16e4b2ac62388d8b8d8b365cc2eebdf15",
+    "implementation_sha256": "65f7c1173db68a9bc4fff3b4d3b346f1dc9f1db6252e418463e175c0db7f1489",
+    "manifest_sha256": "207f2084f1dd036f197c404c5b727f7740266b6eaa2037cb6488da33c954399a",
+    "method": {
+      "advance": "Require baseline mistakes from at least five independent triplets. Keep at least 80% of the two-voice controls that baseline routed, reduce three-voice mistaken routes by half, and permit at most one triplet with a remaining three-voice mistake.",
+      "conditioning": "\u22125 dB foreground-to-total-interference energy, center placement, compare dry and fixed linear short reflections, rotate the source roles within each triplet",
+      "corpus": "VoxPopuli CC0 test splits from one pinned official parquet conversion",
+      "decisions": "Corroborated diarization. Compare its two-voice route with the raw count veto and frozen \u221224 dBFS zero-or-overlap veto from the prior room work.",
+      "eligibility": "Same language and declared gender with median periodic pitch spread <=4 semitones and >=0.8 s simultaneous activity on separate dry tracks",
+      "limit": "Controlled speech counting only. No authenticity score is measured or changed.",
+      "roles": "One 3-second admitted source per publisher speaker ID, no reused speakers across source triplets or languages"
+    },
+    "planned_rows": 504,
+    "revision": "db0a600a0776f910769e9dc1fdd7f218e8f78a45",
+    "schema": "chipmunk.hard-overlap-transfer-freeze/1",
+    "sources": {
+      "et": "af1b3ddd1cef8a5ad08541290ae8ac06a2c30b0f965055b96aba04faeb701b6f",
+      "fi": "f8e787913bd2fe762e23e2fddac8a9fcbb85243bb2badb04b349035cd384ab7c",
+      "lt": "bc2ffaafd891f2e7754ae4a30b1f3fc8ed690b5fda9c0a1171e7bb82d7384a11",
+      "nl": "b6025d406cef5869e6279b90aba7ee0702ce6b7dfac23695a0a77dd7eda3cb3d",
+      "sl": "53acd23b3fe876b930001811874550bffcb3459867a313f9247e67777ccdc06f"
+    }
+  },
+  "portable_verifier_sha256": "52aca191b5f5068a41fa940b49fcfccd76ae241efe0ee3fed4666506e0df512a",
+  "schema": "chipmunk.hard-overlap-transfer/1",
+  "source_intake_sha256": "cd48bd65bc8a8ead164debc6c9fe08a438ba3831225e209ac9d9611b2eae7707"
+}

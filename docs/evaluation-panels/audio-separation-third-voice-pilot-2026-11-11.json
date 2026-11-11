@@ -1,0 +1,73 @@
+{
+  "advance": false,
+  "delivery_breakdown": {
+    "three_faint/dry": {
+      "measured_views": 8,
+      "median_gain_db": 20.636349619575412,
+      "median_third_si_sdr_db": 3.7676256807277384,
+      "third_recovered": 7
+    },
+    "three_faint/reflective": {
+      "measured_views": 8,
+      "median_gain_db": 17.387335240381965,
+      "median_third_si_sdr_db": 0.3458361179981439,
+      "third_recovered": 5
+    },
+    "three_quiet/dry": {
+      "measured_views": 8,
+      "median_gain_db": 18.278948940866997,
+      "median_third_si_sdr_db": 7.8831012527808975,
+      "third_recovered": 8
+    },
+    "three_quiet/reflective": {
+      "measured_views": 8,
+      "median_gain_db": 15.33384356002969,
+      "median_third_si_sdr_db": 4.700332370872015,
+      "third_recovered": 6
+    }
+  },
+  "forwards": 48,
+  "freeze_sha256": "7cb1c286b2a01d9bfb483a1fb23054a677e28aa62d20f4694c6ce01aa5f5da95",
+  "private_result_sha256": "6323a862d67f4eff534f78eb3a9762fdd17543d04f9129a136dc2dbfdd81021b",
+  "protocol": {
+    "advance": "Recover the third reference at >=0 dB SI-SDR and >=3 dB above the mixture in at least 12 of 16 views at each level. At most 2 of 16 two-voice controls may have an unmatched channel at or above 10% of mixture RMS.",
+    "assets": {
+      "decoder.ckpt": "9afdda4e4ecb9eefb5d49329193c7a9215ae7443aab206f2fe4eb0f50988ca53",
+      "encoder.ckpt": "e949e80c1a96965b723460209bb155eac1fdb2f6d2cf4e7b3e1d3152716f38d0",
+      "hyperparams.yaml": "4f0ae05600c66d7f8cf1269f54fd32dad576d4d473ad7169ef6ab26190658233",
+      "masknet.ckpt": "416af7b09d912c486261dd824788dd92d3b21373c8ec4d029209792522f4dbcb"
+    },
+    "groups": 8,
+    "implementation_sha256": "7895a4ff1c9818b200463e5d9a4f5b6265d8da57e24c8b369fffa8e85c681f5b",
+    "inputs_sha256": "cb59ea29b89f38e08dc88deaa6a4475de16e3954ad7b269a9ad0730e645c3af3",
+    "parent_manifest_sha256": "207f2084f1dd036f197c404c5b727f7740266b6eaa2037cb6488da33c954399a",
+    "revision": "1f2d824e2333aec9e60d0030fb144885c1afc426",
+    "schema": "chipmunk.third-voice-separation-pilot/1",
+    "views": 48
+  },
+  "runtime_versions": {
+    "speechbrain": "1.0.3",
+    "torch": "2.8.0",
+    "torchaudio": "2.8.0"
+  },
+  "seconds": 37.96594345907215,
+  "separate_arithmetic_replay": {
+    "verified_groups": 8,
+    "verified_input_hashes": 48,
+    "verified_saved_score_decisions": 48
+  },
+  "summary": {
+    "three_faint": {
+      "measured_views": 16,
+      "third_recovered": 12
+    },
+    "three_quiet": {
+      "measured_views": 16,
+      "third_recovered": 14
+    },
+    "two": {
+      "extra_output_over_10_pct_mixture_rms": 16,
+      "measured_views": 16
+    }
+  }
+}

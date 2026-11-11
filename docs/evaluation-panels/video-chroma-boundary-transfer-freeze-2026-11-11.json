@@ -1,0 +1,91 @@
+{
+  "arcs": {
+    "chin": 90,
+    "left_cheek": 160,
+    "left_jaw": 130,
+    "right_cheek": 20,
+    "right_jaw": 50
+  },
+  "bindings": {
+    "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+    "backend/app/detectors/video/decode.py": "b65658633320817f574e1dc739fb630179af4cbf95bca0a39e9c8360e2e4fc57",
+    "backend/app/detectors/video/face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "backend/scripts/video_face_short_boundary_confirmation.py": "154a0867ea03726ce0c93b661cb351b06fcc4f6936808146571735d35c8e1274",
+    "backend/scripts/video_face_texture_return.py": "516e3d0320ce01b20b2e3371c99f3c9ee6605b5fd174fb995a092f5c2a07731f",
+    "backend/scripts/video_selected_face_boundary.py": "0201492a5361ccd5d30041e3234f3745a7a0dc2f17033d5ecd385ae4b9631424",
+    "backend/scripts/video_selected_landmark_reliability.py": "1204c81e947e34705c89c6ec994334a3e51080cbc9b06d3f3e8ee5a8fbaaeae5",
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae",
+    "models/weights/face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "models/weights/face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "worker_sha256": "a330c68fd87e6280719b2c601c71cf4b7d0aef00193781f177a0834b9395f7c2"
+  },
+  "freeze_sha256": "915dfc4ec886520ad11c34553097c3ec3fe85c3ab5fe8969a180d5846803977d",
+  "localization": "Independently scan fixed native-clock ranges and report the highest same-arc change above both flanks. Evaluate half-open edit IoU separately from flagging.",
+  "offsets": [
+    -0.08,
+    0.0,
+    0.08
+  ],
+  "pilot_advancement": "Replicate only with at least 12 of 24 correctly localized swaps (IoU >= 0.50) across four held sources, at most two false flags across all held genuine views, and at least 80% assessed coverage in swaps and controls separately.",
+  "policy": "Standalone research localization. A non-flagged or unassessed interval carries no originality inference. No overall confidence contribution.",
+  "prior_localization_freezes": [
+    "71f782f89c6ab940ae68ab1b9ce48d3da7462ccfdae1a466c4046ac25deb553e",
+    "4d530431870631c86dff27eb1a7117d645e09bd48c361d208edb79ecc5175bbd",
+    "18ef0d33646e69bc2e154d2b38b4018a73fe5cc58aa6afc605806497d6224e8d",
+    "256428a093d6883a03e4b55bb895e1f91f1b59e52816e379b53f1288ea1729fc"
+  ],
+  "private_source_commitment_sha256": "65f122d957d634611516015864e830b2f9340ad907636544cadb0c955f3b7954",
+  "roster_selection": "Previously scored RTFS selection-role sources, smallest archived bytes first, excluding known localization sources and donor aliases. Fixed camera slots in archive order, excluding prior tested source IDs and coverage slot08.",
+  "schema": "chipmunk.video-chroma-boundary-transfer-freeze-public/1",
+  "source_group_counts": {
+    "development": {
+      "camera": 1,
+      "rtfs": 4
+    },
+    "held": {
+      "camera": 2,
+      "rtfs": 6
+    }
+  },
+  "source_metadata_sha256": [
+    "c48ffa31a547df984b57f0253c60ae55a612d6081387e25c63ae0af8d40381ff",
+    "f357c328896b92f595f0916b690d3c62b8a64dd686e480a460a1cd847c165a6c"
+  ],
+  "specification": {
+    "angular_site_degrees": [
+      -6,
+      -4,
+      -2,
+      0,
+      2,
+      4,
+      6
+    ],
+    "cadence_hz": 4,
+    "chroma_stabilizer": 1.5,
+    "core_centers": [
+      3,
+      5,
+      7,
+      8
+    ],
+    "core_quorum": 0.6,
+    "flank_centers_per_side": 2,
+    "max_face_center_step": 0.65,
+    "max_face_sample_gap_seconds": 0.55,
+    "minimum_direction_cosine": 0.5,
+    "minimum_scale_pixels": [
+      3.0,
+      5.0
+    ],
+    "native_scales": [
+      0.025,
+      0.05
+    ],
+    "spatial_quorum": 4
+  },
+  "threshold": "Maximum assessed development-control score, strictly greater than, sealed before holdout."
+}

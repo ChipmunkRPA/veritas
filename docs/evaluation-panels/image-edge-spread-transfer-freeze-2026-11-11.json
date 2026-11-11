@@ -1,0 +1,133 @@
+{
+  "confirmation_journals_sha256": {
+    "earlier": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+    "later": "be4fffd689162bc37c4691fc46128ca495d716e265d282a8ed3f449ac84473e0"
+  },
+  "earlier_wavelet_journal_sha256": "fa4c56f9ef78899135acccb836a43c9623f5375d571bfce8530c1a9051a15249",
+  "implementation_sha256": {
+    "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+    "backend/scripts/image_background_patch_transfer.py": "da6ba064bc850d7bbc59b605c29305251d317cfc186ccb3d652cf713080f9dfe",
+    "backend/scripts/image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+    "backend/scripts/image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+    "backend/scripts/image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+    "backend/scripts/image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d"
+  },
+  "method": {
+    "arms": [
+      "matched_ring",
+      "opposed_flanks"
+    ],
+    "candidate_height_width_cells": [
+      [
+        6,
+        6
+      ],
+      [
+        6,
+        9
+      ],
+      [
+        9,
+        6
+      ],
+      [
+        8,
+        8
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        12,
+        8
+      ],
+      [
+        10,
+        10
+      ],
+      [
+        12,
+        12
+      ]
+    ],
+    "confidence_contribution": 0,
+    "confirmation_roles": [
+      "edited",
+      "feathered_edit",
+      "original",
+      "local_processing",
+      "global_processing",
+      "blur",
+      "feathered_processing",
+      "local_contrast"
+    ],
+    "contrast_bins": [
+      40.0,
+      90.0
+    ],
+    "development_roles": [
+      "original",
+      "global_processing",
+      "local_processing",
+      "blurred",
+      "local_contrast",
+      "sharpened"
+    ],
+    "edge_sampling_cell_pixels": 4,
+    "flank_gap_cells": 1,
+    "flank_outer_cells": 3,
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "inside_margin_cells": 1,
+    "minimum_common_strata": 2,
+    "minimum_edge_contrast": 18.0,
+    "minimum_edges_per_stratum": 3,
+    "minimum_matched_edges": 12,
+    "minimum_point": 0.08,
+    "native_cell_pixels": 16,
+    "normal_radius_pixels": 6,
+    "orientation_bins": 4,
+    "pilot_rule": "Opposed flanks needs at least two additional useful feathered locations beyond wavelet detail in each panel, with at most 10 control flags on at most six source groups per panel. Compare separately by delivery.",
+    "point_rule": "Strictly above the second-highest of the eight development control-source maxima per format and arm.",
+    "tangent_offsets_pixels": [
+      -1.5,
+      0.0,
+      1.5
+    ],
+    "useful": {
+      "minimum_iou": 0.3,
+      "minimum_recall": 0.5
+    },
+    "width_quantiles": [
+      0.2,
+      0.8
+    ]
+  },
+  "native_panel_sources": {
+    "development": {
+      "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+      "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+      "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+    },
+    "earlier": {
+      "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+      "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+      "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+    },
+    "later": {
+      "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+      "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+      "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+    }
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0",
+    "scipy": "1.18.1"
+  },
+  "schema": "chipmunk.image-edge-spread-transfer/1"
+}

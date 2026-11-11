@@ -1,0 +1,227 @@
+{
+  "schema": "chipmunk.text-goce-span-readout/249",
+  "status": "complete",
+  "scope": "Two distinct archived human copy-edits, four related inputs and no new synthetic positives.",
+  "freeze_sha256": "f317f0025e7c3184492cb9fc0cf0419dddbed4cca5f36f24d7b4ea2ae76b86cd",
+  "resource_profile_sha256": "d0934ad01d9942cf7be8a1376cdd1990074673a6216d410eb80c36c4626c9b1b",
+  "source_groups": 2,
+  "planned_inputs": 4,
+  "actual_forwards": {
+    "encoder": 5,
+    "current_classifier": 7
+  },
+  "historical_positive_reference": {
+    "public_result_sha256": "eff16a6244be6dcb3ee8b200b4fc55e1b157794372bf63300b5729003a45ea53",
+    "planned": 54,
+    "assessed": 23,
+    "preparation_unavailable": 31,
+    "article_groups_assessed": 16,
+    "assessed_word_range": [
+      202,
+      302
+    ],
+    "useful_ai_locations": {
+      "baseline": 0,
+      "canonical_current": 0,
+      "canonical_union": 0,
+      "baseline_plus_canonical_union": 0
+    },
+    "scope": "Previously scored v196 short AI inserts in longer passages, separate from the new human controls."
+  },
+  "by_arm_and_method": {
+    "baseline": {
+      "clean_human": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 0,
+        "replacement_locus_characters": 19,
+        "replacement_locus_covered_characters": 19,
+        "replacement_locus_false_flagged_characters": 0,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 0,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 0
+      },
+      "human_retouch": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 0,
+        "replacement_locus_characters": 14,
+        "replacement_locus_covered_characters": 14,
+        "replacement_locus_false_flagged_characters": 0,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 0,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 0
+      }
+    },
+    "canonical_current": {
+      "clean_human": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 0,
+        "replacement_locus_characters": 19,
+        "replacement_locus_covered_characters": 19,
+        "replacement_locus_false_flagged_characters": 0,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 0,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 0
+      },
+      "human_retouch": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 0,
+        "replacement_locus_characters": 14,
+        "replacement_locus_covered_characters": 14,
+        "replacement_locus_false_flagged_characters": 0,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 0,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 0
+      }
+    },
+    "canonical_union": {
+      "clean_human": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 1,
+        "replacement_locus_characters": 19,
+        "replacement_locus_covered_characters": 19,
+        "replacement_locus_false_flagged_characters": 5,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 32,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 126
+      },
+      "human_retouch": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 1,
+        "replacement_locus_characters": 14,
+        "replacement_locus_covered_characters": 14,
+        "replacement_locus_false_flagged_characters": 5,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 32,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 126
+      }
+    },
+    "baseline_plus_canonical_union": {
+      "clean_human": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 1,
+        "replacement_locus_characters": 19,
+        "replacement_locus_covered_characters": 19,
+        "replacement_locus_false_flagged_characters": 5,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 32,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 126
+      },
+      "human_retouch": {
+        "planned": 2,
+        "fully_assessed": 2,
+        "partially_assessed": 0,
+        "unassessed": 0,
+        "false_flagged_windows": 1,
+        "replacement_locus_characters": 14,
+        "replacement_locus_covered_characters": 14,
+        "replacement_locus_false_flagged_characters": 5,
+        "target_padding_characters": 60,
+        "target_padding_covered_characters": 60,
+        "target_padding_false_flagged_characters": 32,
+        "outside_target_characters": 234,
+        "outside_target_covered_characters": 234,
+        "outside_target_false_flagged_characters": 126
+      }
+    }
+  },
+  "paired_false_flags_and_shared_context": {
+    "baseline": {
+      "planned_pairs": 2,
+      "fully_assessed_pairs": 2,
+      "partially_assessed_pairs": 0,
+      "unassessed_pairs": 0,
+      "known_unchanged_characters": 294,
+      "jointly_covered_unchanged_characters": 294,
+      "unchanged_characters_with_new_false_flag": 0,
+      "unchanged_characters_with_removed_false_flag": 0,
+      "neither_false_flagged": 2,
+      "before_only_false_flagged": 0,
+      "retouch_only_false_flagged": 0,
+      "both_false_flagged": 0
+    },
+    "canonical_current": {
+      "planned_pairs": 2,
+      "fully_assessed_pairs": 2,
+      "partially_assessed_pairs": 0,
+      "unassessed_pairs": 0,
+      "known_unchanged_characters": 294,
+      "jointly_covered_unchanged_characters": 294,
+      "unchanged_characters_with_new_false_flag": 0,
+      "unchanged_characters_with_removed_false_flag": 0,
+      "neither_false_flagged": 2,
+      "before_only_false_flagged": 0,
+      "retouch_only_false_flagged": 0,
+      "both_false_flagged": 0
+    },
+    "canonical_union": {
+      "planned_pairs": 2,
+      "fully_assessed_pairs": 2,
+      "partially_assessed_pairs": 0,
+      "unassessed_pairs": 0,
+      "known_unchanged_characters": 294,
+      "jointly_covered_unchanged_characters": 294,
+      "unchanged_characters_with_new_false_flag": 0,
+      "unchanged_characters_with_removed_false_flag": 0,
+      "neither_false_flagged": 1,
+      "before_only_false_flagged": 0,
+      "retouch_only_false_flagged": 0,
+      "both_false_flagged": 1
+    },
+    "baseline_plus_canonical_union": {
+      "planned_pairs": 2,
+      "fully_assessed_pairs": 2,
+      "partially_assessed_pairs": 0,
+      "unassessed_pairs": 0,
+      "known_unchanged_characters": 294,
+      "jointly_covered_unchanged_characters": 294,
+      "unchanged_characters_with_new_false_flag": 0,
+      "unchanged_characters_with_removed_false_flag": 0,
+      "neither_false_flagged": 1,
+      "before_only_false_flagged": 0,
+      "retouch_only_false_flagged": 0,
+      "both_false_flagged": 1
+    }
+  }
+}

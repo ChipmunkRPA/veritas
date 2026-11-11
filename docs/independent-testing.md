@@ -46,7 +46,10 @@ The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
 same tool can also verify the four publisher background archives and the
 fixed development and holdout windows. The [paired stereo benchmark](audio-native-stereo-pairs-v277-result.md)
-records construction and exact readback of all 385 planned files.
+records construction and exact readback of all 385 planned files. The
+[development speech-gate comparison](audio-native-stereo-gate-v279-result.md)
+compares mono admission and a fixed acoustic channel choice without using
+authenticity scores for selection.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native

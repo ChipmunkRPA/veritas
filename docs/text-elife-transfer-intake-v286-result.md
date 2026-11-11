@@ -1,0 +1,5 @@
+# Fresh science-explainer sources for passage transfer
+
+The frozen five-month roster supplied **26 eligible source groups out of 35**. Eight works lacked an excerpt meeting the fixed rules, and one work did not meet the explicit CC BY 4.0 requirement. The 26 admitted works come from May, June, August, September, and October 2022. Each has a fixed interior rewrite target with exact Unicode offsets. [Frozen method](text-elife-transfer-intake-v286-method.md) · [Aggregate and attribution](evaluation-panels/text-elife-transfer-intake-complete-v286.json)
+
+The intake checked 44,872 text records across 25 prior exposure packets, with zero matching normalized fragments. It also checked author and linked-work overlap with the earlier eLife cohort and among eligible candidates. A second local readout reproduced the receipt byte for byte. This screen covers the recorded project exposure. It leaves paraphrase and pretraining exposure unmeasured. The 26 groups are ready to split before generation and scoring. [Earlier source intake](text-elife-source-intake-v272-result.md)

@@ -1,0 +1,34 @@
+{
+  "prior_result_sha256": "059da339e788edf6c4b43018e05afc467f2000c2e163357e4f1023bddd07da4b",
+  "publisher_revision": "3c87cbdbe68505da6d590cc4ed8c2af73bcc5c68",
+  "publisher_pins": {
+    "vcd2_metadata.csv": "4d3043d4963c780ca2653e1a3c0703f3aa7923d8f3a43044eff439cd987e6d56",
+    "benchmarking-set_metadata.csv": "ac2aa2c59399a7701d8120b5905545884a7cf6296eb2bdcb2db2eae3f9830452",
+    "raw_mkv_list.txt": "f2656d37685f91159478dbd569a9760164a394f1be31dd7a0424e93fbbfdb237",
+    "benchmarking_mkv_list.txt": "d8920e6f0a9508bb8b3dec89475e03b6e4f6003089ca6ffe3fa00f3beea43b52",
+    "LICENSE-DATA": "4531a67d443284d93ffed0803df5b10634aff21c3d77e381f2d48af01d875868"
+  },
+  "code_sha256": {
+    "backend/scripts/video_vcd2_unseen_controls_v287.py": "6ed7d13010afb942bc04f0c7e063de17531dc8c13dc229595513bc2521059285",
+    "backend/scripts/video_vcd2_genuine_v195.py": "4a192e96b294a39457fdd09f3f6372a012f8f7b9429f8f8d118271df83d80fcd",
+    "backend/scripts/video_vcd2_genuine_v197.py": "62268f2e7a0604fc3dbe084b2ac9dc832319361e32a408ed6c88abf8ec14e513",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/tests/test_video_vcd2_unseen_controls_v287.py": "809260e50c4acd4d02647fd1601cc4fb878b05be8081e0e756f11f0c6af5e881",
+    "docs/video-vcd2-unseen-controls-v287-method.md": "0073bcb4542aeb879a6038411891267dcda9409b0f7235fd5c7d6ca4866372b0"
+  },
+  "decoder_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "relative_ordinary_interval_s": [
+    3,
+    6
+  ],
+  "schema": "chipmunk.video-vcd2-unseen-controls-freeze/287",
+  "private_freeze_sha256": "a2433130969594927c5e9c56e933206d09c0eaccc7b53c9dbf7f200c0f0e0bb8",
+  "planned_groups": 8,
+  "recordings_per_stratum": 2,
+  "selection_seed": "chipmunk-vcd2-unseen-controls-v287",
+  "camera_types_excluded_from_prior": 12,
+  "new_neural_calls": 0
+}

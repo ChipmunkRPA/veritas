@@ -34,6 +34,8 @@ immutable publisher revision and exact replacement targets. The receipt records
 all nine dispositions and contains no excerpts. The [rewrite result](text-elife-rewrites-v273-result.md)
 records all four unavailable attempts. The [detector comparison](text-elife-passage-score-v275-result.md)
 reports localization, coverage and raw position ranking separately.
+The [fresh transfer roster](text-elife-transfer-intake-v286-result.md) adds 26
+groups with separately checked work licenses and fixed rewrite targets.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -43,6 +45,8 @@ the pinned bundle without running the model or accessing project photos. The
 same geometry checks into two exact edits with six matched ordinary controls.
 The [paired detector comparison](image-flux-detector-comparison-v280-result.md)
 reports the same edit footprints under PNG and JPEG75, including false highlights.
+The [six-photo expansion](image-flux-photo-expansion-v285-result.md) extends
+that comparison design to new licensed source groups.
 
 The [stereo audio preflight](audio-native-stereo-preflight-v274-result.md)
 checks exact channel recovery and source clocks on five authored WAVs. The
@@ -59,6 +63,8 @@ counts the directions that a fixed mono-plus-channel rule would change.
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
 frame bindings to document where a luma change extended beyond the face.
+The [fresh camera qualification](video-vcd2-unseen-controls-v287-result.md)
+adds eight unused camera types with independently verified native clocks.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

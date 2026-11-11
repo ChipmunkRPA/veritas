@@ -7,7 +7,28 @@ cd backend
 python -m app.cli compare-image earlier.png submitted.jpg --evidence-dir comparison
 ```
 
-The destination must be a new directory. Omitting it prints JSON only. The two images need the same EXIF-oriented dimensions and measurable alignment. The tool refuses a global shift without moving the source pixels. It checks images up to about 16 megapixels. The displayed pixels indicate localized differences that survive the modeled processing. The earlier file's authenticity, the origin of an edit and the full chain of custody require separate evidence.
+The destination must be a new directory. Omitting it prints JSON only. The standard comparison needs the same EXIF-oriented dimensions and measurable alignment. It checks images up to about 16 megapixels. The displayed pixels indicate localized differences that survive the modeled processing. The earlier file's authenticity, the origin of an edit and the full chain of custody require separate evidence.
+
+## Integer crops and translations
+
+```sh
+python -m app.cli compare-image earlier.png submitted.jpg --allow-integer-alignment --evidence-dir comparison
+```
+
+This option requires corroborated whole-pixel alignment for changed inputs. It measures repeated local agreement before comparing the shared area. JSON records the offset, each image's overlap, and the measured tile locations. The full-size mask uses the submitted image's coordinates. Each paired crop uses its own original coordinates and pixels. Areas outside the overlap stay unassessed. The option supports verified crops covering at least 80% of each image and partial-overlap PNG translations. A JPEG with exposed pixels outside the overlap stays unassessed because its delivery grid cannot be reproduced from the reference alone. Resizing, rotation and fractional shifts may fail the alignment check. [Feature matching method](https://ieeexplore.ieee.org/document/6126544/)
+
+The frozen transfer measured 180 views from 12 rights-qualified source photos already used in unrelated project tests. The crop, shift and control transformations were fixed before scoring. The two formats reuse the same source groups. The prior comparison could not assess the cropped or integer-shifted views in this test. The new option measured 109 exact offsets, with zero incorrect offsets. It declined all 48 fractional shift, rotation, resize and different-photo controls. [Source rights and exact patch construction](image-background-patch-transfer-2026-11-11.md) · [Aggregate](evaluation-panels/image-reference-alignment-transfer-2026-11-11.json)
+
+| Condition | PNG useful locations or highlights | JPEG75 useful locations or highlights |
+| --- | ---: | ---: |
+| Cropped sharp generated insert | 9/12 | 8/12 |
+| Cropped feathered generated insert | 9/12 | 9/12 |
+| Cropped original | 0/12 | 0/12 |
+| Crop after prior JPEG-only processing | 2/12 | 3/12 |
+| Integer shift, sharp generated insert | 9/12 | — |
+| Integer shift, original | 0/12 | 0/12, all unassessed |
+
+A useful location overlaps at least 30% of the union with the edited area and covers at least half the known changed pixels. Ten of 12 unchanged crops in each format were comparable. A prior lossy encode can still create an ordinary difference worth checking. The source replay runner freezes input receipts, both implementation digests and the same geometric rule for every view. [Transfer runner](../backend/scripts/image_reference_alignment_transfer.py)
 
 ## Fixed comparison
 

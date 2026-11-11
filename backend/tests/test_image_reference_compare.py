@@ -64,3 +64,47 @@ def test_original_jpeg_orientation_matches_and_shift_is_unassessed(tmp_path):
     assert result["jpeg_delivery_modeled"] is True
     Image.fromarray(np.roll(source, 3, axis=1)).save(shifted)
     assert image_reference.inspect(reference, shifted)["status"] == "unaligned"
+
+
+def test_cli_integer_crop_uses_both_native_coordinate_spaces(tmp_path):
+    reference, submitted = tmp_path / "earlier.png", tmp_path / "later.jpg"
+    source = _scene()
+    Image.fromarray(source).save(reference)
+    view = source[11:241, 16:372].copy()
+    view[65:142, 118:207] = (210, 52, 119)
+    Image.fromarray(view).save(submitted, quality=75, subsampling=2)
+    evidence = tmp_path / "evidence"
+    call = subprocess.run([sys.executable, "-m", "app.cli", "compare-image", str(reference), str(submitted),
+                           "--allow-integer-alignment", "--evidence-dir", str(evidence)],
+                          cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True, timeout=20)
+    assert call.returncode == 0, call.stderr
+    result = json.loads(call.stdout)
+    assert result == json.loads((evidence / "comparison.json").read_text())
+    assert result["status"] == "comparable" and result["jpeg_delivery_modeled"]
+    assert result["schema"] == "chipmunk.image-reference-comparison/2"
+    assert result["alignment"]["reference_minus_submitted"] == {"x": 16, "y": 11}
+    region, = result["regions"]
+    assert region["reference_region"] == {"x": region["x"] + 16, "y": region["y"] + 11,
+                                          "w": region["w"], "h": region["h"]}
+    for key, path, bounds in (("reference_crop", reference, region["reference_region"]),
+                              ("submitted_crop", submitted, region)):
+        x, y, w, h = (bounds[key] for key in ("x", "y", "w", "h"))
+        with Image.open(path) as full, Image.open(evidence / region[key]["file"]) as crop:
+            assert crop.tobytes() == full.convert("RGB").crop((x, y, x+w, y+h)).tobytes()
+    with Image.open(evidence / result["mask"]["file"]) as mask:
+        assert mask.size == (356, 230) and np.asarray(mask)[75:133, 130:197].min() == 255
+
+
+def test_integer_shift_excludes_unmatched_pixels_and_refuses_fractional_translation(tmp_path):
+    reference, shifted = tmp_path / "earlier.png", tmp_path / "later.png"
+    source = _scene()
+    Image.fromarray(source).save(reference)
+    Image.fromarray(np.roll(source, 8, axis=1)).save(shifted)
+    result = image_reference.inspect(reference, shifted, allow_integer_alignment=True)
+    assert result["status"] == "comparable" and result["regions"] == []
+    assert result["alignment"]["reference_minus_submitted"] == {"x": -8, "y": 0}
+    assert result["alignment"]["submitted_overlap"] == {"x": 8, "y": 0, "w": 376, "h": 256}
+    affine = np.float32([[1, 0, 8.5], [0, 1, 3.5]])
+    Image.fromarray(cv2.warpAffine(source, affine, (384, 256))).save(shifted)
+    result = image_reference.inspect(reference, shifted, allow_integer_alignment=True)
+    assert result["status"] == "integer_alignment_unresolved" and result["regions"] == []

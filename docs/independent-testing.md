@@ -212,6 +212,8 @@ The [active PNG transfer](image-active-png-transfer-2026-11-11.md) uses exact
 source-aligned masks to check which gains survive on small edited patches with
 untouched backgrounds. The [color-residual comparison](image-color-residual-transfer-2026-11-11.md)
 shows how many misses come from region selection before a review point is applied.
+The [integer image reference comparison](image-reference-comparison-2026-11-11.md#integer-crops-and-translations)
+preserves both original coordinate spaces for a corroborated crop or translation.
 The [short face texture comparison](video-face-texture-return-2026-11-11.md)
 checks appearance and texture on native video clocks with ordinary camera edits.
 The [denser timing comparison](video-face-native-boundary-2026-11-11.md) measures

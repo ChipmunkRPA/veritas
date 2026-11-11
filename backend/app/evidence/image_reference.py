@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageOps
 
-from app.detectors.image import reference_compare
+from app.detectors.image import reference_alignment, reference_compare
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
 
@@ -40,17 +40,18 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
         if mask is not None and mask.any():
             comparison["mask"] = _png(staged / "difference-mask.png", mask.astype(np.uint8) * 255)
             for i, region in enumerate(comparison["regions"], 1):
-                x, y, w, h = (region[key] for key in ("x", "y", "w", "h"))
-                crop = np.s_[y:y+h, x:x+w]
-                region["reference_crop"] = _png(staged / f"reference-{i:02d}.png", reference[crop])
-                region["submitted_crop"] = _png(staged / f"submitted-{i:02d}.png", submitted[crop])
+                for label, pixels, bounds in (("reference", reference, region.get("reference_region", region)),
+                                              ("submitted", submitted, region)):
+                    x, y, w, h = (bounds[key] for key in ("x", "y", "w", "h"))
+                    region[f"{label}_crop"] = _png(staged / f"{label}-{i:02d}.png", pixels[y:y+h, x:x+w])
         (staged / "comparison.json").write_text(json.dumps(comparison, indent=2, allow_nan=False) + "\n")
         if directory.exists() or directory.is_symlink():
             raise FileExistsError(f"Evidence directory already exists: {directory}")
         staged.rename(directory)
 
 
-def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None) -> dict:
+def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
+            allow_integer_alignment: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -59,8 +60,13 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
         with ImageOps.exif_transpose(original) as oriented_before, ImageOps.exif_transpose(questioned) as oriented_after:
             reference = np.array(oriented_before.convert("RGB"))
             submitted = np.array(oriented_after.convert("RGB"))
-        result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
-    output = {"schema": "chipmunk.image-reference-comparison/1", "coordinate_space": "exif-oriented-original",
+        if allow_integer_alignment and not np.array_equal(reference, submitted):
+            result, mask = reference_alignment.compare(reference, submitted, questioned)
+        else:
+            result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
+    aligned = "alignment" in result
+    output = {"schema": f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
+              "coordinate_space": "exif-oriented-submitted" if aligned else "exif-oriented-original",
               "reference": {"sha256": hashlib.sha256(before).hexdigest(), "width": reference.shape[1], "height": reference.shape[0]},
               "submitted": {"sha256": hashlib.sha256(after).hexdigest(), "width": submitted.shape[1], "height": submitted.shape[0]},
               **result, "interpretation": "Regions show differences that survived the comparison settings. Ordinary processing can produce differences. The earlier file's authenticity and the cause of changes require separate evidence."}

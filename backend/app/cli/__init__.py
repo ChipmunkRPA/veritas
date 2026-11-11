@@ -8,7 +8,7 @@
     python -m app.cli models plan [--profile PROFILE] [--budget-mb MB] [--device cpu|mps|cuda] [--json]
     python -m app.cli verify PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--source-image IMAGE | --source-document DOCUMENT | --source-audio MEDIA | --source-video VIDEO] [--json]
     For video with frozen soundtrack evidence, pass both --source-video and --source-audio.
-    python -m app.cli compare-image REFERENCE SUBMITTED [--evidence-dir DIRECTORY]
+    python -m app.cli compare-image REFERENCE SUBMITTED [--allow-integer-alignment] [--evidence-dir DIRECTORY]
     python -m app.cli reproduce PACKAGE.zip (--public-key PEM | --expect-key-id ID) [--tolerance 0.001] [--json]
     python -m app.cli custody export [--format jsonl|csv] [--case-id ID] [--out PATH] [--database-url URL]
     python -m app.cli audit verify [--jsonl PATH] [--database-url URL]
@@ -451,7 +451,8 @@ def _compare_image(args: argparse.Namespace) -> int:
 
     try:
         result = image_reference.inspect(Path(args.reference), Path(args.submitted),
-                                         evidence_dir=Path(args.evidence_dir) if args.evidence_dir else None)
+                                         evidence_dir=Path(args.evidence_dir) if args.evidence_dir else None,
+                                         allow_integer_alignment=args.allow_integer_alignment)
     except (OSError, ValueError, Image.DecompressionBombError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 2
@@ -1173,6 +1174,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_compare_image.add_argument("reference", help="earlier reference image")
     p_compare_image.add_argument("submitted", help="image to compare with the reference")
     p_compare_image.add_argument("--evidence-dir", metavar="DIRECTORY", help="write the mask, source crops and JSON to a new folder")
+    p_compare_image.add_argument("--allow-integer-alignment", action="store_true",
+                                 help="compare a verified integer crop or translation in original coordinates")
     p_compare_image.set_defaults(func=_compare_image)
 
     database = commands.add_parser("db", help="database administration")

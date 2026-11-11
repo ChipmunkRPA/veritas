@@ -1,0 +1,16 @@
+{
+  "schema": "chipmunk.audio-ai-only-rescue-freeze/283",
+  "source_comparison_sha256": "4f40ca216a1c2a2ef7491c1a962e32fdd01d61afe1ae6a1556baec6c7d096269",
+  "source_freeze_sha256": "0ba2fc44772795aa67756df6df747415e5c45e1d506f89850d72075f1aaa4e23",
+  "code_sha256": {
+    "backend/scripts/audio_ai_only_rescue_v283.py": "50edc524a00f4dfe7c275c3fca629bf697b515ccb2f60b6e98adbe375a125e6a",
+    "backend/tests/test_audio_ai_only_rescue_v283.py": "2874aade47d4c69669baeacfca044bf11857618925af4a68f9376faf5df4643b",
+    "docs/audio-ai-only-rescue-v283-method.md": "450096fe8ac48c1d99e38f6481f555eaa8b436bb11efed2deb17f4862a54b080"
+  },
+  "rule": "Preserve mono. Add selected-channel AI only when mono is inconclusive or not assessed.",
+  "selected_only_comparator": "The selected channel alone on the v282 eligible forced-imbalance cases.",
+  "planned_paired_cases": 33,
+  "holdout_access_permitted": false,
+  "model_calls_permitted": false,
+  "serving_change_permitted": false
+}

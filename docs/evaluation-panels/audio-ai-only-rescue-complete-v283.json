@@ -1,0 +1,94 @@
+{
+  "schema": "chipmunk.audio-ai-only-rescue-result/283",
+  "status": "complete",
+  "freeze_sha256": "49e16c82ffb35bd79bbb5f44052303ed9fec1053c44f54e08e1869023431a56f",
+  "source_comparison_sha256": "4f40ca216a1c2a2ef7491c1a962e32fdd01d61afe1ae6a1556baec6c7d096269",
+  "by_family": {
+    "genuine": {
+      "paired_cases": 13,
+      "by_policy": {
+        "mono": {
+          "ai": 0,
+          "original": 7,
+          "inconclusive": 3,
+          "not_assessed": 3
+        },
+        "selected_only": {
+          "ai": 0,
+          "original": 10,
+          "inconclusive": 3,
+          "not_assessed": 0
+        },
+        "ai_only_rescue": {
+          "ai": 0,
+          "original": 7,
+          "inconclusive": 3,
+          "not_assessed": 3
+        }
+      },
+      "transitions_from_mono": {
+        "selected_only": {
+          "not_assessed_to_inconclusive": 1,
+          "inconclusive_to_inconclusive": 2,
+          "original_to_original": 7,
+          "not_assessed_to_original": 2,
+          "inconclusive_to_original": 1
+        },
+        "ai_only_rescue": {
+          "not_assessed_to_not_assessed": 3,
+          "inconclusive_to_inconclusive": 3,
+          "original_to_original": 7
+        }
+      },
+      "source_groups_with_added_ai_direction": 0
+    },
+    "expressive": {
+      "paired_cases": 20,
+      "by_policy": {
+        "mono": {
+          "ai": 4,
+          "original": 3,
+          "inconclusive": 9,
+          "not_assessed": 4
+        },
+        "selected_only": {
+          "ai": 7,
+          "original": 4,
+          "inconclusive": 9,
+          "not_assessed": 0
+        },
+        "ai_only_rescue": {
+          "ai": 7,
+          "original": 3,
+          "inconclusive": 7,
+          "not_assessed": 3
+        }
+      },
+      "transitions_from_mono": {
+        "selected_only": {
+          "inconclusive_to_inconclusive": 5,
+          "ai_to_ai": 4,
+          "not_assessed_to_original": 1,
+          "original_to_original": 1,
+          "inconclusive_to_original": 2,
+          "inconclusive_to_ai": 2,
+          "original_to_inconclusive": 2,
+          "not_assessed_to_inconclusive": 2,
+          "not_assessed_to_ai": 1
+        },
+        "ai_only_rescue": {
+          "inconclusive_to_inconclusive": 7,
+          "ai_to_ai": 4,
+          "not_assessed_to_not_assessed": 3,
+          "original_to_original": 3,
+          "inconclusive_to_ai": 2,
+          "not_assessed_to_ai": 1
+        }
+      },
+      "source_groups_with_added_ai_direction": 3
+    }
+  },
+  "new_neural_calls": 0,
+  "holdout_cases_opened": 0,
+  "serving_changed": false
+}

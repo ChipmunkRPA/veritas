@@ -1,0 +1,3 @@
+# Thirty-two additional synthetic voice groups qualified locally
+
+All 32 planned sources qualified, with 32 distinct publisher voice groups and 32 distinct text documents. The guarded local worker verified complete decoded waveforms and found no exact overlap with either earlier cohort. It made zero model calls. The sources are ready for assignment to the matched-noise experiment. All 32 share the same synthesis family, so new generator and genuine source groups are still needed. [Method](audio-alania-followup-v236-method.md) · [Verified preparation](evaluation-panels/audio-alania-followup-complete-v236.json)

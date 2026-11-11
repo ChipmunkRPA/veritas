@@ -19,3 +19,7 @@ appearance checks completed without a face interval. Across nine scored
 uploads and three recordings, the two ordinary treatments
 preserved the flag state in every matched group. Twenty-one eligible
 uploads remain. [Verified three-triplet counts](evaluation-panels/video-vcd2-full-app-three-triplets-v202.json)
+
+## Fourth matched recording
+
+All three versions of the fourth recording leaned original and had no face appearance flag. Across the four recordings, both ordinary treatments preserved the flag state in every matched group. The 12 completed analyses now cover 480 sampled pictures and 1,446 native anchors. Eighteen eligible raw uploads remain. [Verified four-triplet counts](evaluation-panels/video-vcd2-full-app-four-triplets-v202.json)

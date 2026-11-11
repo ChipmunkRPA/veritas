@@ -376,7 +376,7 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .multimedia-evidence-packet { margin-top: 5mm; padding-top: 3mm; border-top: .6pt solid var(--color-border); }
 .multimedia-evidence-packet h3, .multimedia-evidence-packet h4 { break-after: avoid; }
 .multimedia-evidence-packet h4 { font-size: 8.6pt; margin: 2mm 0 1mm; }
-.multimedia-frame, .multimedia-plates, .multimedia-scored-context { break-inside: avoid; }
+.multimedia-frame, .multimedia-plates, .multimedia-scored-context, .multimedia-repeat-pair { break-inside: avoid; }
 .multimedia-plates { display: flex; gap: 3mm; margin: 2mm 0 3mm; }
 .multimedia-plates figure { flex: 1; min-width: 0; margin: 0; }
 .multimedia-plates img { width: 100%; height: 52mm; object-fit: contain; background: #f5f6f3; }

@@ -13,7 +13,7 @@ const lanes: { id: Lane; title: string; description: string }[] = [
 ]
 export function videoLaneForHash(hash: string): Lane | null {
   if (/^#media-evidence-(?:timing|AV\d+)/.test(hash)) return 'timing'
-  if (/^#media-evidence-(?:voice|background|sounds|stereo|repetition|[ABCR]\d+)/.test(hash)) return 'voice'
+  if (/^#media-evidence-(?:voice|background|sounds|stereo|repetition|similar-audio|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
   if (/^#media-evidence-(?:visual|V(?:PH)?\d+)/.test(hash)) return 'visual'
   if (hash === '#media-evidence-all') return 'all'
   return null
@@ -34,7 +34,7 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
     if (lane === 'voice') {
       const acoustic = set.audio?.acoustic_context
       const drops = set.audio?.stereo_context?.windows.filter((window) => window.downmix?.strong_attenuation).length ?? 0
-      const repeats = set.audio?.repetition_context?.pairs.length ?? 0
+      const repeats = (set.audio?.repetition_context?.pairs.length ?? 0) + (set.audio?.similarity_context?.pairs.length ?? 0)
       if (acoustic || drops || repeats) {
         const summary = [`${counts.voice} voice intervals`]
         if (acoustic) summary.push(`${acoustic.events.length} acoustic observations`)

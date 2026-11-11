@@ -80,6 +80,25 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Video playback 2\.200 s–2\.450 s/)).toBeTruthy()
   })
 
+  it('plays the two distinct originals for a similar-audio pair without claiming exact samples', () => {
+    const set = { ...structuredClone(audio), packets: [], source: { ...audio.source, samples: 48000, pcm_sha256: 'a'.repeat(64) } }
+    const span = (start_sample: number, sha: string) => ({ start_sample, end_sample: start_sample + 4000, pcm_s16le_sha256: sha.repeat(64),
+      source_timestamp_ranges: [{ start_sample, end_sample: start_sample + 4000,
+        source_start_pts: 16000 + start_sample, source_end_pts: 20000 + start_sample, time_base: '1/16000' }] })
+    set.similarity_context = { schema: 'chipmunk.audio-repeat-similarity/1', status: 'measured', reason: null,
+      source_sha256: set.source.sha256, pcm_sha256: set.source.pcm_sha256, sample_rate: 16000, input_samples: 48000,
+      searched_interval: { start_sample: 0, end_sample: 48000 }, pairs: [{ id: 'RS01', first: span(1600, 'b'), second: span(17600, 'c'),
+        sample_count: 4000, lag_samples: 16000, support_windows: 21,
+        artifacts: { first_clip: asset('b', 'audio/wav'), second_clip: asset('c', 'audio/wav') } }] }
+    show(set)
+    expect(screen.getByRole('heading', { name: 'Similar repeated audio' })).toBeTruthy()
+    expect(screen.getByLabelText('RS01 · First occurrence').getAttribute('src')).toContain(`${'b'.repeat(64)}.wav`)
+    expect(screen.getByLabelText('RS01 · Second occurrence').getAttribute('src')).toContain(`${'c'.repeat(64)}.wav`)
+    expect(screen.getByText(/Source PTS \[33600, 37600\) at 1\/16000/)).toBeTruthy()
+    expect(screen.queryByText(/of identical samples/)).toBeNull()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('shows exact repeated passages and original page locations without a writing score', () => {
     const set = { ...structuredClone(document), version: 'document-evidence-5', packets: [] }
     set.repeated_passages = { schema: 'document-repeated-passages/1', status: 'matched',

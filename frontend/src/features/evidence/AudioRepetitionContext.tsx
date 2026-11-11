@@ -1,23 +1,28 @@
 import { EvidenceAudio, evidenceGrid } from './EvidenceMedia'
-import { rationalSeconds, seconds, type AudioEvidenceSet } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidenceSet, type AudioRepetitionContext as ExactContext, type AudioSimilarityContext } from './multimediaPackets'
 
-export default function AudioRepetitionContext({ set, token, mediaReady, videoOriginS }: {
+type Props = {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
-}) {
-  const context = set.repetition_context
+}
+
+function RepeatCheck({ set, token, mediaReady, videoOriginS, context }: Props & { context?: ExactContext | AudioSimilarityContext }) {
   if (!context || context.source_sha256 !== set.source.sha256 || context.pcm_sha256 !== set.source.pcm_sha256
     || context.sample_rate !== set.source.sample_rate || context.input_samples !== set.source.samples) return null
-  return <section id="media-evidence-repetition" aria-labelledby="media-evidence-repetition-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
-    <h3 id="media-evidence-repetition-heading" className="m-0 text-body font-medium">Exact repeated audio</h3>
-    <p className="mt-2 mb-0 text-small text-text-muted">This check compares samples in continuous 2.5–4 second mono inputs. Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+  const similar = context.schema === 'chipmunk.audio-repeat-similarity/1'
+  const id = similar ? 'media-evidence-similar-audio' : 'media-evidence-repetition'
+  return <section id={id} aria-labelledby={`${id}-heading`} className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id={`${id}-heading`} className="m-0 text-body font-medium">{similar ? 'Similar repeated audio' : 'Exact repeated audio'}</h3>
+    <p className="mt-2 mb-0 text-small text-text-muted">{similar
+      ? 'This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.'
+      : 'This check compares samples in continuous 2.5–4 second mono inputs.'} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
     {context.status !== 'measured'
       ? <p className="mt-2 mb-0 text-small">{context.status === 'ambiguous'
         ? 'The search reached its comparison limit before it could establish a result.'
         : 'This input could not be checked within the supported duration, source timing, and signal conditions.'}</p>
       : context.pairs.length === 0
-        ? <p className="mt-2 mb-0 text-small">No exact active repeat of at least 0.15 seconds was found in the checked input.</p>
+        ? <p className="mt-2 mb-0 text-small">No {similar ? 'similar' : 'exact active'} repeat of at least 0.15 seconds was found in the checked input.</p>
         : <div className="mt-3 space-y-4">{context.pairs.map((pair) => <article key={pair.id} id={`media-evidence-${pair.id}`} className="border-t border-border pt-3 scroll-mt-20">
-          <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of identical samples</h4>
+          <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of {similar ? 'similar sound' : 'identical samples'}</h4>
           <div className={`${evidenceGrid} mt-3`}>{(['first', 'second'] as const).map((side) => {
             const span = pair[side]
             return <div key={side}>
@@ -37,4 +42,9 @@ export default function AudioRepetitionContext({ set, token, mediaReady, videoOr
           })}</div>
         </article>)}</div>}
   </section>
+}
+
+export default function AudioRepetitionContext(props: Props) {
+  return <><RepeatCheck {...props} context={props.set.repetition_context} />
+    <RepeatCheck {...props} context={props.set.similarity_context} /></>
 }

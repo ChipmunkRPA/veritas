@@ -13,14 +13,15 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const nestedCandidates = nestedVideo && ((set.audio?.packets.length ?? 0) + (set.av?.packets.length ?? 0) + (set.audio?.acoustic_context?.events.length ?? 0)) > 0
   const stereo = nestedVideo ? set.audio?.stereo_context : set.schema === 'chipmunk.audio-evidence/1' ? set.stereo_context : undefined
   const monoLevelDrop = stereo?.windows.some((window) => window.downmix?.strong_attenuation)
-  const repeatedAudio = set.schema === 'chipmunk.video-evidence/1' ? set.audio?.repetition_context : set.schema === 'chipmunk.audio-evidence/1' ? set.repetition_context : undefined
+  const audio = set.schema === 'chipmunk.video-evidence/1' ? set.audio : set.schema === 'chipmunk.audio-evidence/1' ? set : undefined
+  const repeatedAudio = audio?.repetition_context?.pairs.length || audio?.similarity_context?.pairs.length
   const repeatedText = set.schema === 'chipmunk.document-evidence/1' && set.repeated_passages?.status === 'matched'
   return <div data-testid="multimedia-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
     {set.status !== 'ready' ? <p role="status" className="mt-3 text-small text-text-muted">
       Detailed evidence has not been prepared for this result. Run a new analysis to capture the exact inputs and their source positions. Unavailable evidence does not establish authenticity.
     </p> : <>
       <p className="mt-3 mb-0 text-body text-text-muted">Inspect the exact inputs behind the recorded responses, with their source context and limits. These observations do not prove that AI was used.</p>
-      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio?.pairs.length && !repeatedText && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
+      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio && !repeatedText && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
         No inspection candidate was selected from the recorded inputs. This does not establish authenticity; check the coverage and limitations below.
       </p>}
       {set.schema === 'chipmunk.video-evidence/1' ? nestedVideo

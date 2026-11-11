@@ -108,12 +108,22 @@ export interface StereoChannelContext {
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   })[]
 }
-export interface AudioRepetitionContext {
-  schema: 'chipmunk.audio-exact-repetition/1'; status: 'measured' | 'unavailable' | 'ambiguous'; reason: string | null
+type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
+interface AudioRepeatPair {
+  id: string; first: AudioRepeatSpan; second: AudioRepeatSpan; sample_count: number; lag_samples: number
+  artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset>
+}
+interface AudioRepeatRecord {
+  status: 'measured' | 'unavailable' | 'ambiguous'; reason: string | null
   source_sha256: string; pcm_sha256: string; sample_rate: number; input_samples: number; searched_interval: SampleInterval | null
-  pairs: { id: string; first: SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] };
-    second: SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] };
-    sample_count: number; lag_samples: number; pcm_s16le_sha256: string; artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset> }[]
+}
+export interface AudioRepetitionContext extends AudioRepeatRecord {
+  schema: 'chipmunk.audio-exact-repetition/1'; pairs: (AudioRepeatPair & { pcm_s16le_sha256: string })[]
+}
+export interface AudioSimilarityContext extends AudioRepeatRecord {
+  schema: 'chipmunk.audio-repeat-similarity/1'; pairs: (AudioRepeatPair & {
+    first: AudioRepeatSpan & { pcm_s16le_sha256: string }; second: AudioRepeatSpan & { pcm_s16le_sha256: string };
+    support_windows: number })[]
 }
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
@@ -127,6 +137,7 @@ export interface AudioEvidenceSet extends SetBase {
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
   repetition_context?: AudioRepetitionContext
+  similarity_context?: AudioSimilarityContext
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface VideoAudioChannel {
@@ -137,6 +148,7 @@ export interface VideoAudioChannel {
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
   repetition_context?: AudioRepetitionContext
+  similarity_context?: AudioSimilarityContext
 }
 export interface VideoAVFrameInput {
   tick: number; frame_index: number; frame_pts: number; source_audio_pts: number; source_audio_time_base: string

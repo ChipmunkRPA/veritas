@@ -82,9 +82,10 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
-        for pair in (part.get("repetition_context") or {}).get("pairs", []):
-            for role, asset in sorted(pair["artifacts"].items()):
-                yield pair["id"], role, asset
+        for key in ("repetition_context", "similarity_context"):
+            for pair in (part.get(key) or {}).get("pairs", []):
+                for role, asset in sorted(pair["artifacts"].items()):
+                    yield pair["id"], role, asset
         acoustic = part.get("acoustic_context")
         if acoustic:
             for role, asset in sorted(acoustic.get("overview", {}).items()):
@@ -281,6 +282,13 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             verify(repetition, pcm=pcm, mapping=mapping, source=source, read_asset=lambda sha: assets[sha])
         except (ValueError, KeyError) as error:
             raise ObjectIntegrityError("Frozen repeated audio differs from its recorded samples") from error
+    if (similarity := document.get("similarity_context")) is not None:
+        from app.evidence.audio_similarity import verify
+
+        try:
+            verify(similarity, pcm=pcm, mapping=mapping, source=source, read_asset=lambda sha: assets[sha])
+        except (ValueError, KeyError, TypeError) as error:
+            raise ObjectIntegrityError("Frozen audio similarity differs from its recorded samples") from error
 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
@@ -627,6 +635,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "stereo_context": stereo_context,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
+            "similarity_context": copy.deepcopy(stereo_source.get("similarity_context")),
+            "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "stereo_context_pointer": "/audio/stereo_context" if kind == "video" else "/stereo_context",

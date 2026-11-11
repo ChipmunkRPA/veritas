@@ -6,6 +6,8 @@ correlation. A pair is undirected and can occur in naturally symmetric content.
 
 from __future__ import annotations
 
+from types import MappingProxyType
+
 import cv2
 import numpy as np
 from scipy.sparse import csr_matrix
@@ -14,7 +16,7 @@ from scipy.sparse.csgraph import connected_components
 from app.detectors.image import copy_move
 from app.evidence.image_copy_similarity_binding import PAIR_LIMIT, supported_size
 
-PLAN = {
+PLAN = MappingProxyType({
     "tile_px": 128,
     "corners_per_tile": 40,
     "nms_side": 7,
@@ -40,19 +42,28 @@ PLAN = {
     "refine_seed_overlap": 4,
     "refine_min_area": 256,
     "refine_exact_row_column_support": 0.95,
-}
+})
+LOW_TEXTURE_PLAN = MappingProxyType({
+    **PLAN,
+    "corner_floor": 0.000002,
+    "corners_per_tile": 60,
+    "min_patch_std": 3.5,
+    "min_consensus_pairs": 6,
+    "refine_std": 2.75,
+    "refine_corr": 0.985,
+})
 MISSING = "unassessed_match_budget"
 
 
-def _components(pairs):
-    minimum = PLAN["min_consensus_pairs"]
+def _components(pairs, plan):
+    minimum = plan["min_consensus_pairs"]
     if len(pairs) < minimum:
         return []
     first, second = pairs[:, 0], pairs[:, 1]
     parameters = np.column_stack((first[:, 0] + second[:, 0], second[:, 1] - first[:, 1]))
     offsets = np.abs(parameters[:, None] - parameters)
-    link = PLAN["consensus_link_radius_px"]
-    tolerance = PLAN["offset_tolerance_px"]
+    link = plan["consensus_link_radius_px"]
+    tolerance = plan["offset_tolerance_px"]
     near = (
         (np.linalg.norm(first[:, None] - first, axis=2) <= link)
         & (np.linalg.norm(second[:, None] - second, axis=2) <= link)
@@ -71,8 +82,7 @@ def _components(pairs):
     return sorted(found, key=lambda group: (-len(group), int(group[0])))
 
 
-def keypoint_descriptors(gray):
-    p = PLAN
+def keypoint_descriptors(gray, p):
     radius, tile = p["descriptor_radius"], p["tile_px"]
     response = cv2.cornerMinEigenVal(gray, blockSize=5, ksize=3)
     maxima = (response == cv2.dilate(response, np.ones((p["nms_side"],) * 2, dtype=np.uint8))) & (
@@ -101,8 +111,7 @@ def keypoint_descriptors(gray):
     return positions[keep], np.ascontiguousarray(values[keep] / lengths[keep, None, None])
 
 
-def proposal_matches(positions, values):
-    p = PLAN
+def proposal_matches(positions, values, p):
     n = len(values)
     if n < p["min_consensus_pairs"]:
         return np.empty((0, 2, 2))
@@ -141,8 +150,8 @@ def proposal_matches(positions, values):
     return np.asarray(pairs, dtype=np.float64).reshape(-1, 2, 2)
 
 
-def local_corr(left, right):
-    n = PLAN["refine_corr_side"]
+def local_corr(left, right, plan):
+    n = plan["refine_corr_side"]
 
     def average(pixels):
         return cv2.boxFilter(pixels, -1, (n, n), normalize=True)
@@ -152,18 +161,18 @@ def local_corr(left, right):
     var_r = np.maximum(0, average(right * right) - mu_r * mu_r)
     cov = average(left * right) - mu_l * mu_r
     corr = cov / np.sqrt(np.maximum(1, var_l * var_r))
-    min_var = PLAN["refine_std"] ** 2
-    valid = (corr >= PLAN["refine_corr"]) & (var_l >= min_var) & (var_r >= min_var)
+    min_var = plan["refine_std"] ** 2
+    valid = (corr >= plan["refine_corr"]) & (var_l >= min_var) & (var_r >= min_var)
     pad = n // 2
     valid[:pad] = valid[-pad:] = False
     valid[:, :pad] = valid[:, -pad:] = False
     return valid
 
 
-def tighten_equal(bounds, exact):
+def tighten_equal(bounds, exact, plan):
     """Use matching RGB in a locally supported rectangle when it delineates the edge."""
     left, top, right, bottom = bounds
-    threshold = PLAN["refine_exact_row_column_support"]
+    threshold = plan["refine_exact_row_column_support"]
     patch = exact[top:bottom, left:right]
     rows = np.flatnonzero(patch.mean(axis=1) >= threshold)
     cols = np.flatnonzero(patch.mean(axis=0) >= threshold)
@@ -179,8 +188,7 @@ def tighten_equal(bounds, exact):
     return left + cols[0], top + rows[0], left + cols[-1] + 1, top + rows[-1] + 1
 
 
-def refine(rgb, gray, inliers):
-    p = PLAN
+def refine(rgb, gray, inliers, p):
     height, width = gray.shape
     a, b = inliers[:, 0], inliers[:, 1]
     intercept = int(np.rint(np.median(a[:, 0] + b[:, 0])))
@@ -195,7 +203,7 @@ def refine(rgb, gray, inliers):
     other_left, other_right = intercept - (right - 1), intercept - left + 1
     r0 = np.s_[top:bottom, left:right]
     r1 = np.s_[top + dy : bottom + dy, other_left:other_right]
-    aligned = local_corr(gray[r0].astype(np.float32), gray[r1][:, ::-1].astype(np.float32))
+    aligned = local_corr(gray[r0].astype(np.float32), gray[r1][:, ::-1].astype(np.float32), p)
     kernel = np.ones((p["refine_close_side"],) * 2, dtype=np.uint8)
     closed = cv2.morphologyEx(aligned.astype(np.uint8), cv2.MORPH_CLOSE, kernel)
     n, labels, stats, _ = cv2.connectedComponentsWithStats(closed, connectivity=8)
@@ -222,7 +230,7 @@ def refine(rgb, gray, inliers):
         min(bottom - top, y + h + half),
     )
     equal = np.all(rgb[r0] == rgb[r1][:, ::-1], axis=2)
-    x0, y0, x1, y1 = tighten_equal(bounds, equal)
+    x0, y0, x1, y1 = tighten_equal(bounds, equal, p)
     a_box = tuple(int(v) for v in (left + x0, top + y0, x1 - x0, y1 - y0))
     b_box = tuple(int(v) for v in (intercept - (left + x1 - 1), top + y0 + dy, x1 - x0, y1 - y0))
     return (a_box, b_box) if copy_move.iou(a_box, b_box) == 0 else None
@@ -260,17 +268,51 @@ def _consolidate(pairs):
     return retained
 
 
-def analyse(rgb: np.ndarray) -> tuple[str, list[tuple[copy_move.Box, copy_move.Box]]]:
-    if not supported_size(rgb.shape[1], rgb.shape[0]):
-        return "unsupported_geometry", []
-    gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
-    positions, descriptors = keypoint_descriptors(gray)
-    matches = proposal_matches(positions, descriptors)
+def _search(rgb, gray, plan):
+    positions, descriptors = keypoint_descriptors(gray, plan)
+    matches = proposal_matches(positions, descriptors, plan)
     if matches is None:
         return MISSING, []
     pairs = _consolidate(
-        [pair for group in _components(matches) if (pair := refine(rgb, gray, matches[group])) is not None]
+        [pair for group in _components(matches, plan) if (pair := refine(rgb, gray, matches[group], plan)) is not None]
     )
     if len(pairs) > PAIR_LIMIT:
         return MISSING, []
     return ("supported_pair" if pairs else "no_pair"), pairs
+
+
+def _corroborates(rgb, pair):
+    """Require agreement across the entire proposed lower-texture pair."""
+    first, second = pair
+    if min(first[2:]) < 24:
+        return False
+
+    def pixels(box):
+        x, y, width, height = box
+        return rgb[y:y + height, x:x + width]
+
+    first, second = pixels(first), pixels(second)[:, ::-1]
+    if np.mean(np.all(first == second, axis=2)) >= 0.85:
+        return True
+
+    def interior_luma(crop):
+        luma = cv2.cvtColor(crop, cv2.COLOR_RGB2GRAY).astype(np.float32)
+        return cv2.GaussianBlur(luma, (5, 5), 1.0)[3:-3, 3:-3].ravel()
+
+    a, b = interior_luma(first), interior_luma(second)
+    return min(np.std(a), np.std(b)) >= 3 and np.corrcoef(a, b)[0, 1] >= 0.988
+
+
+def analyse(rgb: np.ndarray) -> tuple[str, list[tuple[copy_move.Box, copy_move.Box]]]:
+    if not supported_size(rgb.shape[1], rgb.shape[0]):
+        return "unsupported_geometry", []
+    gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
+    status, pairs = _search(rgb, gray, PLAN)
+    if status != "no_pair":
+        return status, pairs
+
+    status, pairs = _search(rgb, gray, LOW_TEXTURE_PLAN)
+    if status != "supported_pair":
+        return status, pairs
+    verified = [pair for pair in pairs if _corroborates(rgb, pair)]
+    return ("supported_pair" if verified else "no_pair"), verified

@@ -119,6 +119,13 @@ def validate_content(document: dict[str, Any]) -> None:
             validate(document["repetition_context"], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
+    if "similarity_context" in document:
+        from app.evidence.audio_similarity_binding import validate
+
+        try:
+            validate(document["similarity_context"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
     if document.get("stereo_context") is not None:
         from app.detectors.audio.stereo import validate
         try:
@@ -332,8 +339,13 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     if analysis.kind == "audio" and "stereo_context" in mapping:
         document["stereo_context"] = mapping["stereo_context"]
     from app.evidence.audio_repetition import build as build_repetition
+    from app.evidence.audio_similarity import build as build_similarity
 
     document["repetition_context"] = build_repetition(
+        pcm, mapping, document["source"],
+        lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+    )
+    document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
     )

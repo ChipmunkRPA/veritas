@@ -16,6 +16,7 @@ from app.evidence import document_scope
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
 from app.evidence.face_lighting_context import validate as validate_face_lighting
+from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS, validate_similarity
 from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 from app.evidence.video_packet_versions import (
     ACOUSTIC_VERSIONS,
@@ -30,7 +31,7 @@ SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
-                      'image-evidence-6', 'image-evidence-7'}, 'video': VIDEO_VERSIONS,
+                      'image-evidence-6'} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
 
 
@@ -109,13 +110,12 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         else:
             _require(not {'audio', 'av'}.intersection(evidence), 'Historical video evidence has unexpected nested channels')
     if analysis['kind'] == 'image':
-        from app.evidence.image_copy_similarity_binding import validate_similarity
         from app.evidence.image_eligibility import validate_inspection_coverage
 
         validate_similarity(evidence, canonical_hash)
         validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}
-                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6', 'image-evidence-7'} else evidence)
-        if evidence['version'] in {'image-evidence-5', 'image-evidence-6', 'image-evidence-7'}:
+                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS else evidence)
+        if evidence['version'] in {'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS:
             for packet in evidence['packets']:
                 cue = packet.get('copy_corroboration')
                 assets = packet['artifacts']
@@ -125,7 +125,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and cue.get('highlight_asset_sha256') == assets.get('mask', {}).get('sha256')
                              and (cue.get('status') == 'copy_consistent') == ('copy_donor' in assets),
                              'Copy evidence differs from its committed highlight or matching patch')
-                    if evidence['version'] in {'image-evidence-6', 'image-evidence-7'}:
+                    if evidence['version'] in {'image-evidence-6'} | REFLECTION_VERSIONS:
                         _require('search_strategy' in cue and cue['search_strategy'] in {None, 'native_dense', 'native_anchor_shortlist'}
                                  and (cue['search_strategy'] is None) == (cue.get('status') == 'unsupported_geometry')
                                  and (cue.get('status') != 'unassessed_candidate_budget' or cue['search_strategy'] == 'native_anchor_shortlist'),
@@ -165,7 +165,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
     repeat_pcm = {}
     for part in parts:
-        if part.get('version') == 'image-evidence-7':
+        if part.get('version') in REFLECTION_VERSIONS:
             groups.extend(pair['artifacts'] for pair in part['copy_similarity']['pairs'])
         acoustic = part.get('acoustic_context')
         if acoustic:
@@ -185,6 +185,19 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 pcm_digest = pair['pcm_s16le_sha256']
                 _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
                          'One repeated-audio clip has conflicting PCM commitments')
+        if (similarity := part.get('similarity_context')) is not None:
+            from app.evidence.audio_similarity_binding import validate as validate_similarity_context
+
+            _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
+                     'Audio similarity is outside the audio evidence')
+            validate_similarity_context(similarity, part['source'])
+            for pair in similarity['pairs']:
+                groups.append(pair['artifacts'])
+                for side in ('first', 'second'):
+                    digest = pair['artifacts'][side + '_clip']['sha256']
+                    pcm_digest = pair[side]['pcm_s16le_sha256']
+                    _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                             'One repeated-audio clip has conflicting PCM commitments')
     for group in groups:
         _require(isinstance(group, dict), 'Invalid evidence assets')
         for asset in group.values():

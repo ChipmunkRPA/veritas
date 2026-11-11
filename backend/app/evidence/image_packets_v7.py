@@ -15,8 +15,10 @@ from app.detectors.image import copy_similarity
 from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     NOTE,
+    REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
+    V7,
     VERSION,
     box_bounds,
     prior_evidence,
@@ -27,7 +29,8 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
-CREATOR = "image-evidence-packets/5"
+CREATOR = "image-evidence-packets/6"
+_CREATORS = {VERSION: CREATOR, V7: "image-evidence-packets/5"}
 legacy = prior.legacy
 PacketIntegrityError = prior.PacketIntegrityError
 
@@ -41,7 +44,7 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
         validate_similarity(document, canonical_hash)
     except (KeyError, TypeError, ValueError) as exc:
         raise PacketIntegrityError(str(exc)) from exc
-    if document.get("version") != VERSION:
+    if document.get("version") not in REFLECTION_VERSIONS:
         prior.validate_packet_set(document, **binding)
         return
     if document.get("sha256") != prior.packet_hash(document):
@@ -51,7 +54,7 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
 
 def validate_packet_source_mapping(document: dict, result: dict) -> None:
     prior.validate_packet_source_mapping(
-        prior_evidence(document) if document.get("version") == VERSION else document, result
+        prior_evidence(document) if document.get("version") in REFLECTION_VERSIONS else document, result
     )
 
 
@@ -66,7 +69,7 @@ def _source(document: dict, store: ObjectStore) -> Image.Image:
 
 
 def validate_assets(document: dict, store: ObjectStore) -> None:
-    if document.get("version") != VERSION:
+    if document.get("version") not in REFLECTION_VERSIONS:
         prior.validate_assets(document, store)
         return
     prior.validate_assets(prior_evidence(document), store)
@@ -169,25 +172,29 @@ def build_packet_set(
 def load_packet_set(
     db: Session, analysis: Analysis, store: ObjectStore, *, set_id: str | None = None
 ) -> dict[str, Any] | None:
-    expected = current_set_id(analysis)
-    row = db.get(Artefact, expected) if set_id is None or set_id == expected else None
-    if row is None:
-        return prior.load_packet_set(db, analysis, store, set_id=set_id)
-    if (
-        row.analysis_id != analysis.id
-        or row.created_by != CREATOR
-        or row.role != "exhibit_payload"
-        or row.media_type != "application/json"
-    ):
-        raise PacketIntegrityError("Copy similarity evidence has a different indexed identity")
-    document = json.loads(legacy._verified(store, row.sha256))
-    if document.get("id") != expected or document.get("version") != VERSION:
-        raise PacketIntegrityError("Copy similarity evidence has a different immutable identity")
-    validate_packet_set(document, **prior._binding(analysis))
-    validate_packet_source_mapping(document, json.loads(legacy._verified(store, analysis.result_hash)))
-    validate_assets(document, store)
-    store.verify(analysis.sha256)
-    return document
+    for version, creator in _CREATORS.items():
+        expected = prior.current_set_id(analysis, version)
+        if set_id is not None and set_id != expected:
+            continue
+        row = db.get(Artefact, expected)
+        if row is None:
+            continue
+        if (
+            row.analysis_id != analysis.id
+            or row.created_by != creator
+            or row.role != "exhibit_payload"
+            or row.media_type != "application/json"
+        ):
+            raise PacketIntegrityError("Copy similarity evidence has a different indexed identity")
+        document = json.loads(legacy._verified(store, row.sha256))
+        if document.get("id") != expected or document.get("version") != version:
+            raise PacketIntegrityError("Copy similarity evidence has a different immutable identity")
+        validate_packet_set(document, **prior._binding(analysis))
+        validate_packet_source_mapping(document, json.loads(legacy._verified(store, analysis.result_hash)))
+        validate_assets(document, store)
+        store.verify(analysis.sha256)
+        return document
+    return prior.load_packet_set(db, analysis, store, set_id=set_id)
 
 
 def persist_packet_set(

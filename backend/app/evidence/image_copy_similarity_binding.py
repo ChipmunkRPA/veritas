@@ -5,7 +5,9 @@ from __future__ import annotations
 import re
 from collections.abc import Callable
 
-VERSION = "image-evidence-7"
+V7 = "image-evidence-7"
+VERSION = "image-evidence-8"
+REFLECTION_VERSIONS = frozenset({V7, VERSION})
 SCHEMA = "same-image-reflection-similarity/1"
 NOTE = (
     "Two areas may have similar detail after a horizontal reflection. Copying, intentional symmetry, reflections "
@@ -58,7 +60,7 @@ def prior_evidence(document: dict) -> dict:
 
 def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -> None:
     """Validate standalone public structure and both exact native-crop references."""
-    if document.get("version") != VERSION:
+    if document.get("version") not in REFLECTION_VERSIONS:
         if {"copy_similarity", "prior_image_evidence"} & document.keys():
             raise ValueError("Earlier image evidence cannot contain automatic copy similarity")
         return

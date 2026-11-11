@@ -15,10 +15,11 @@ from test_image_packets import _bytes
 from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.detectors.image import copy_similarity
+from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
 from app.reports import engine, image_evidence, snapshot
 from app.reports.specimens import specimen
+from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis
 
 
@@ -31,9 +32,19 @@ def authored_source(*, reflected: bool) -> Image.Image:
     return Image.fromarray(pixels)
 
 
-def reflected_result(packet_fixture, *, reflected=True):
+def low_texture_source(*, reflected: bool) -> Image.Image:
+    rng = np.random.default_rng(917)
+    noise = cv2.GaussianBlur(rng.normal(0, 1, (400, 600)).astype(np.float32), (15, 15), 1.3)
+    gray = np.rint(128 + noise * 8 / noise.std()).astype(np.uint8)
+    if reflected:
+        gray[80:176, :96] = gray[271:367, 491:587][:, ::-1]
+    return Image.fromarray(gray).convert("RGB")
+
+
+def reflected_result(packet_fixture, *, reflected=True, low_texture=False):
     db, store, analysis, _, _ = packet_fixture
-    source = authored_source(reflected=reflected)
+    make_source = low_texture_source if low_texture else authored_source
+    source = make_source(reflected=reflected)
     obj = store.put_bytes(_bytes(source, format="PNG"))
     analysis.sha256, analysis.size_bytes = obj.sha256, obj.size_bytes
     result = copy.deepcopy(specimen("image", "standard").result)
@@ -42,6 +53,24 @@ def reflected_result(packet_fixture, *, reflected=True):
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
     return db, store, analysis, result, source
+
+
+@pytest.mark.parametrize("image_format", ["PNG", "JPEG"])
+def test_lower_texture_pass_finds_an_edge_pair_after_the_first_pass(image_format):
+    def roundtrip(reflected):
+        data = _bytes(low_texture_source(reflected=reflected), format=image_format, quality=90)
+        with Image.open(io.BytesIO(data)) as image:
+            return np.asarray(image)
+
+    rgb = roundtrip(True)
+    gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
+    assert copy_similarity._search(rgb, gray, copy_similarity.PLAN) == ("no_pair", [])
+    status, pairs = copy_similarity.analyse(rgb)
+    assert status == "supported_pair"
+    (first, second), = pairs
+    assert copy_move.iou(first, (0, 80, 96, 96)) >= 0.8
+    assert copy_move.iou(second, (491, 271, 96, 96)) >= 0.8
+    assert copy_similarity.analyse(roundtrip(False)) == ("no_pair", [])
 
 
 def test_automatic_pair_persists_both_original_crops_without_manual_highlight(packet_fixture, monkeypatch):
@@ -86,6 +115,32 @@ def test_automatic_pair_persists_both_original_crops_without_manual_highlight(pa
         image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
 
 
+def test_historical_v7_remains_readable_after_writing_v8(packet_fixture, monkeypatch):
+    db, store, analysis, result, _ = reflected_result(packet_fixture)
+    historical = service.build_packet_set(db, analysis, store, result)
+    historical["version"] = image_packets_v7.V7
+    historical["id"] = image_packets_v5.current_set_id(analysis, image_packets_v7.V7)
+    for pair in historical["copy_similarity"]["pairs"]:
+        for asset in pair["artifacts"].values():
+            asset["url"] = image_packets_v7.url(historical, asset["sha256"])
+    historical["sha256"] = image_packets_v5.packet_hash(historical)
+    historical_row = register_artefact(
+        db, store, canonical_json(historical), media_type="application/json", role="exhibit_payload",
+        created_by="image-evidence-packets/5", analysis_id=analysis.id, artefact_id=historical["id"],
+    )
+    newest = db.get(type(historical_row), service.current_set_id(analysis))
+    db.delete(newest)
+    db.flush()
+    with monkeypatch.context() as context:
+        context.setattr(copy_similarity, "analyse", lambda _: pytest.fail("A historical read must not rerun the detector"))
+        assert service.load_packet_set(db, analysis, store) == historical
+    latest = service.persist_packet_set(db, analysis, store, result=result)
+    assert latest["version"] == "image-evidence-8" and latest["id"] != historical["id"]
+    assert service.load_packet_set(db, analysis, store) == latest
+    assert service.load_packet_set(db, analysis, store, set_id=historical["id"]) == historical
+    assert store.read_bytes(historical_row.sha256) == canonical_json(historical)
+
+
 def test_no_pair_keeps_explicit_coverage_and_no_assets(packet_fixture):
     db, store, analysis, result, _ = reflected_result(packet_fixture, reflected=False)
     document = service.persist_packet_set(db, analysis, store, result=result)
@@ -99,12 +154,13 @@ def test_authenticated_image_api_serves_both_pair_crops(evidence_http):
     analysis_id = "image-unprepared"
     with Session(fixture.engine) as db:
         analysis = db.get(Analysis, analysis_id)
-        db, store, analysis, result, _ = reflected_result((db, fixture.store, analysis, None, None))
+        db, store, analysis, result, _ = reflected_result((db, fixture.store, analysis, None, None), low_texture=True)
         expected = service.persist_packet_set(db, analysis, store, result=result)
         db.commit()
     response = fixture.client.get(f"/api/v2/analyses/{analysis_id}/evidence-packets", headers=fixture.viewer)
     assert response.status_code == 200 and response.json() == expected
     (pair,) = expected["copy_similarity"]["pairs"]
+    assert pair["regions"]["area_a"]["x"] == 0
     for asset in pair["artifacts"].values():
         assert fixture.client.get(asset["url"], headers=fixture.outsider).status_code == 404
         plate = fixture.client.get(asset["url"], headers=fixture.viewer)

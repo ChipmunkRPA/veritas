@@ -6,16 +6,15 @@
 {% endif %}
 <p class="caption">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold</span>.</p>
 {% endif %}
-{% if evidence.get('repetition_context') %}
-{% set context = evidence.repetition_context %}
-<h3>Exact repeated audio</h3>
-<p>This check compares samples in continuous 2.5–4 second mono inputs. Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+{% for context, similar in [(evidence.get('repetition_context'), false), (evidence.get('similarity_context'), true)] if context %}
+<h3>{{ 'Similar repeated audio' if similar else 'Exact repeated audio' }}</h3>
+<p>{% if similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
 {% if context.status == 'ambiguous' %}<p>The search reached its comparison limit before it could establish a result.</p>
 {% elif context.status == 'unavailable' %}<p>This input could not be checked within the supported duration, source timing, and signal conditions.</p>
-{% elif not context.pairs %}<p>No exact active repeat of at least 0.15 seconds was found in the checked input.</p>{% endif %}
+{% elif not context.pairs %}<p>No {{ 'similar' if similar else 'exact active' }} repeat of at least 0.15 seconds was found in the checked input.</p>{% endif %}
 {% for pair in context.pairs %}
-<article class="multimedia-evidence-packet" id="multimedia-evidence-{{ pair.id }}">
-<h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of identical samples</h4>
+<article class="multimedia-evidence-packet multimedia-repeat-pair" id="multimedia-evidence-{{ pair.id }}">
+<h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of {{ 'similar sound' if similar else 'identical samples' }}</h4>
 {% for label in ['first', 'second'] %}
 {% set span = pair[label] %}
 <p>{{ label | capitalize }} occurrence, analyzed audio {{ '%.3f' | format(span.start_sample / context.sample_rate) }}–{{ '%.3f' | format(span.end_sample / context.sample_rate) }} s. Samples [{{ span.start_sample }}, {{ span.end_sample }}).</p>
@@ -26,12 +25,13 @@
 {% set end = range.source_end_pts / context.sample_rate %}
 {% if origin is not none and start >= origin %}Video playback {{ '%.3f' | format(start - origin) }}–{{ '%.3f' | format(end - origin) }} s.{% endif %}</p>
 {% endfor %}
+{% if similar %}<p class="caption evidence-hash">WAV SHA-256 <span class="mono">{{ pair.artifacts[label ~ '_clip'].sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ span.pcm_s16le_sha256 }}</span>.</p>{% endif %}
 {% endfor %}
-<p class="caption evidence-hash">{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256 <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>
+{% if not similar %}<p class="caption evidence-hash">{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256 <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>{% endif %}
 </article>
 {% endfor %}
-<p class="caption">JSON pointer <span class="mono">{{ evidence.repetition_context_pointer }}</span>.</p>
-{% endif %}
+<p class="caption">JSON pointer <span class="mono">{{ evidence.similarity_context_pointer if similar else evidence.repetition_context_pointer }}</span>.</p>
+{% endfor %}
 {% if evidence.get('repeated_passages') %}
 {% set repeated = evidence.repeated_passages %}
 <h3>Exact repeated passages</h3>

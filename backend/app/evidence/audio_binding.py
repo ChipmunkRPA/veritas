@@ -40,7 +40,7 @@ def _validate(channel, source_sha256):
     if channel['coverage'] is None:
         require(channel['status'] in {'absent', 'unavailable'} and not channel['packets'] and not channel.get('overview')
                 and not channel.get('acoustic_context')
-                and not {'stereo_context', 'stereo_context_sha256', 'repetition_context'}.intersection(channel)
+                and not {'stereo_context', 'stereo_context_sha256', 'repetition_context', 'similarity_context'}.intersection(channel)
                 and bool(channel['reason']), 'Unavailable video voice contains unexplained assets')
         return
     samples = source['samples']
@@ -78,6 +78,10 @@ def _validate(channel, source_sha256):
         from app.evidence.audio_repetition_binding import validate
 
         validate(channel['repetition_context'], source)
+    if 'similarity_context' in channel:
+        from app.evidence.audio_similarity_binding import validate
+
+        validate(channel['similarity_context'], source)
 
     coverage=channel['coverage']
     for window in coverage['windows']:

@@ -7,6 +7,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
+from app.evidence.image_copy_similarity_binding import REFLECTION_VERSIONS
 from app.evidence.video_packet_versions import NESTED_VERSIONS
 from app.storage.db import Analysis
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -88,7 +89,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
-        if part.get("version") == "image-evidence-7":
+        if part.get("version") in REFLECTION_VERSIONS:
             groups.extend(pair["artifacts"] for pair in part["copy_similarity"]["pairs"])
         context = part.get("acoustic_context")
         if context is not None:
@@ -101,12 +102,13 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if not isinstance(sound, dict) or not isinstance(sound.get("windows"), list):
                 raise ObjectIntegrityError("The evidence has invalid sound categories")
             groups.extend(window.get("artifacts") or {} for window in sound["windows"])
-        repetition = part.get("repetition_context")
-        if repetition is not None:
-            audio_part = part.get("schema") == "chipmunk.audio-evidence/1" or part is document.get("audio")
-            if not audio_part or not isinstance(repetition, dict) or not isinstance(repetition.get("pairs"), list):
-                raise ObjectIntegrityError("The evidence has invalid repeated audio")
-            groups.extend(pair["artifacts"] for pair in repetition["pairs"])
+        for key in ("repetition_context", "similarity_context"):
+            repetition = part.get(key)
+            if repetition is not None:
+                audio_part = part.get("schema") == "chipmunk.audio-evidence/1" or part is document.get("audio")
+                if not audio_part or not isinstance(repetition, dict) or not isinstance(repetition.get("pairs"), list):
+                    raise ObjectIntegrityError("The evidence has invalid repeated audio")
+                groups.extend(pair["artifacts"] for pair in repetition["pairs"])
     result: dict[str, dict[str, Any]] = {}
     for group in groups:
         if not isinstance(group, dict):

@@ -109,7 +109,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     kind = "document" if hybrid else request.param
     if kind == "image":
-        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"))
+        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), low_texture=True)
         document = service.persist_packet_set(db, analysis, store, result=result)
         assert document["copy_similarity"]["pairs"]
     elif kind == "video":
@@ -228,7 +228,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
-                        'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition',
+                        'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_alignment_context', 'app.evidence.face_lighting_context',
                         'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.sound_event_binding'):
             return None

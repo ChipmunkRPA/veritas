@@ -322,9 +322,10 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
+                        'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
-                        'app.evidence.image_eligibility','app.evidence.document_scope'):
+                        'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

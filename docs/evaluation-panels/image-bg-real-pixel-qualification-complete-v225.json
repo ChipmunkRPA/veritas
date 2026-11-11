@@ -1,0 +1,32 @@
+{
+  "accepted_mask_bindings": {
+    "publisher_asset_commitment": 24
+  },
+  "acquisition_journal_sha256": "13eaae18d20353a6c9481fe0f781652395757e50c9762d7ed1aef07d03191517",
+  "attempted": 24,
+  "backup_attempted": 0,
+  "neural_calls": 0,
+  "plan_sha256": "9b916c45fae2fb8aa97bcd5d5a565a5059b74a44d56eaf09d832dbf0291114e5",
+  "prior_v221_failed_summary_sha256": "d33a4a70ce4ce88a36ba3778178e01df6a3b628d14bcf54f0f11f360090b1054",
+  "prior_v221_public_freeze_sha256": "6ad677b87095a16da6745ac04c33801a47087a81d10dc7a0da2c52c4854e1cd1",
+  "published_v218_sha256": "4a3665f23821adcec8f48eece8f4a8b36f34cd8d066c3b5183cc02f0222a350d",
+  "qualified": 24,
+  "qualified_by_publisher_split": {
+    "test_background_ood": 7,
+    "test_id": 7,
+    "test_subject_ood": 5,
+    "val": 5
+  },
+  "qualified_private_sha256": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7",
+  "saved_assets_by_host": {
+    "us.aws.cdn.hf.co": 72
+  },
+  "schema": "chipmunk.image-bg-real-pixel-qualification/225",
+  "serving_admitted": false,
+  "status_counts": {
+    "qualified": 24
+  },
+  "target_shortfall": 0,
+  "transport_base_summary_sha256": "088c7391a30280087e23fa6118093e0a2d9729de255d4013654f6286504d229b",
+  "unattempted_backups": 12
+}

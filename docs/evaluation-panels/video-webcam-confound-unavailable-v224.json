@@ -1,0 +1,27 @@
+{
+  "schema": "chipmunk.video-webcam-confound-result/224",
+  "status": "complete",
+  "freeze_sha256": "41bd53de8ff9a7b8a0519f8fb1f5dc54d693fc4328c012fb0d20e57766507b68",
+  "source_groups": 1,
+  "roles": {
+    "unchanged": {
+      "status": "unavailable",
+      "reason": "source_or_archive_binding_failed"
+    },
+    "chroma_conversion_only": {
+      "status": "unavailable",
+      "reason": "source_or_archive_binding_failed"
+    },
+    "recompression_only": {
+      "status": "unavailable",
+      "reason": "source_or_archive_binding_failed"
+    }
+  },
+  "paired_window_comparability": {
+    "chroma_conversion_only": "measurement_unavailable",
+    "recompression_only": "measurement_unavailable"
+  },
+  "model_calls": 0,
+  "serving_defaults_changed": false,
+  "scope": "One consumed matched webcam source. Descriptive measurements are not edit or origin decisions."
+}

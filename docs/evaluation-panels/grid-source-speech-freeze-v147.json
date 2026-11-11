@@ -1,0 +1,295 @@
+{
+  "schema": "chipmunk.grid-source-speech-freeze/147",
+  "code_sha256": {
+    "backend/scripts/grid_source_speech_v147.py": "3f29aba7f7f674d01117200bbcd2778d5d1f68ab0a44e2460859fdba09618e9a",
+    "backend/tests/test_grid_source_speech_v147.py": "ef0a1a1ee8c1f8e77de15df03bfc31ac8a1a0465840bc84d28fac7d6e9124aa0",
+    "docs/grid-source-speech-v147-method.md": "8b8e54ebdab060d22e43886b27148573bc88d6480c1ecedc1973b991ed0c2cc7",
+    "backend/scripts/grid_transfer_plan_v143.py": "6f18862147ce159e5d25563696ff7c2e631ddb9cc297b7ed621b0515a6116cf8",
+    "backend/scripts/review_grid_native_inputs_v142.py": "d6794ea8979d2c22dc14b1bca66646422d26762f54d348af28f433cd38b3e984",
+    "backend/scripts/av_speech_native_v110.py": "4b6e16af72b4ebd014a0c11d31e2e31143aa79120fe588c008f8a8b4c4f3db76",
+    "backend/scripts/av_source_encoder_v114.py": "766c2cceb0b5e0a9bb5804b14197d8894f5d32621e86cc7c7e5844c19c16f1f6",
+    "backend/scripts/av_conditioning_clock_v109.py": "bcf96201cbe11c04f69f2d0d5b0468764a845f115c230b5ae654d1e5b860cfa1",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/scripts/video_appearance_corrected_v112.py": "3f6a90a36dca97dd16c337bcff9c9027c3e19c37c5afe19c1b6190ac10a742aa",
+    "backend/scripts/local_probe_limits_v24.py": "763fc520d62c991bc33ecb6e8068c8a64440056a7f30125ffbc67c4dbc23d917",
+    "backend/scripts/audio_tree_sampler_v64.py": "4ec4153d5c8922343a0ff7b2f4795beced7687b1db3cf1be421394b673fb611a"
+  },
+  "completed_metadata_sha256": {
+    "docs/evaluation-panels/grid-transfer-plan-freeze-v143.json": "80069b42d58d48b8080a4aa491fe0c2bc77689b717240c5c23d29c752efb784d",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/result.json": "f546745f79e493d4de34081b3f36dc3287a497134694d44498ea6149b05d6ce3",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/profile.json": "d30df50457eea75364eff087d9e6cdacfa4cd6e5519dbb089f770c7383dc95aa",
+    "backend/data/independent-evaluation/grid-transfer-plan-v143/bind-00/output/private-plan.json": "b708b1354aae9caa7d107e9e97cc81079b8f4c1626087be9ca3f4622343cfdee",
+    "backend/data/independent-evaluation/av-speech-native-v110/freeze.json": "96440435305a2959622a49d54c6929da1a281e6e9168271c43cd2b4b4f793e29",
+    "docs/evaluation-panels/av-speech-native-freeze-v110.json": "96440435305a2959622a49d54c6929da1a281e6e9168271c43cd2b4b4f793e29",
+    "backend/data/independent-evaluation/av-source-encoder-v114/freeze.json": "531a6200867e86592be94146313b15a281fc2beed00fbcaeaba1fba1d26d59a0",
+    "docs/evaluation-panels/av-source-encoder-freeze-v114.json": "531a6200867e86592be94146313b15a281fc2beed00fbcaeaba1fba1d26d59a0",
+    "docs/evaluation-panels/mouth-v7-generator-assets.json": "bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc",
+    "backend/data/independent-evaluation/lipsync-v7/assets/verified-assets.json": "cba84efa0e5b6f7c07c3e31f179a77523ecdb941c68f7940cd3cba85e3898ac4",
+    "backend/data/independent-evaluation/lipsync-v7/assets/speech/config.json": "ffdccec4f3211f4c63310f2b7098f309fe70f3952cedc5e4d11e43f5b2379b98",
+    "backend/data/independent-evaluation/lipsync-v7/assets/speech/preprocessor_config.json": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666",
+    "backend/data/independent-evaluation/av-speech-native-v110/monitor/output/result.json": "2604abdad90db783caf041a705c7571592b4815bc87599078e8c618c39b2d857",
+    "backend/data/independent-evaluation/av-speech-native-v110/monitor/profile.json": "e399dd76b58d09af74998cf9c911d9711257dd66b3d9489cfdf762ca4c7bd717",
+    "backend/data/independent-evaluation/av-speech-native-v110/monitor/resources.jsonl": "6ebcf77e6749c5751f79bc7d8fa4779475f9786c403fab94a7bf6f39bac409bf",
+    "backend/data/independent-evaluation/av-speech-native-v110/authored/output/result.json": "0464c11bbcf2ea56eaef192a5738e32728e4a357adab4f91e7c190a57a8dc1d0",
+    "backend/data/independent-evaluation/av-speech-native-v110/authored/profile.json": "e07679a6660f58df0bcd0b7dd7a67aa126e519c8bbca1c95849ea7df490832c7",
+    "backend/data/independent-evaluation/av-speech-native-v110/authored/resources.jsonl": "792a965ae6bdc98735960a32d6f11df0d70ad1fbc701de321b43cbd9ce21aeb5",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-00/output/result.json": "0fa179141d792c73472e0a1d75da57649122e617aec4cc6303036a4b08d606d6",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-00/profile.json": "94ee32dcd72fd2a4613f679dfe8e8f8bde478f85f5c6455782a5beacd94e5cc0",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-00/resources.jsonl": "1228a9738c54af060ec7a1251503c4646d13614d2999c2e5df5eef5ecd523fb2",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-00/output/source-states.jsonl": "7d7ad728a35e2fe77eeaf4efb3beb484a3cb2739232d854927660716a23507b6",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-01/output/result.json": "9c0a16eaa50c6b5b4d96e78354a40e2f1d9a51f66ca8414b5986c2da4ef97202",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-01/profile.json": "c8e5cc55c195d40994f01d5cbb964d29807bc17ea0d2389cf5294bfaa71e87c5",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-01/resources.jsonl": "da8865612d9997cd854935aa8996276e45dacd452005f9c3aa47e1dd9c6c0c3d",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-01/output/source-states.jsonl": "0f34bc392d3238045a9c604248e5e8e973734689a5744981ed9b04d101d0760a",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-02/output/result.json": "83ebe6869d3e727a13139b4b8484da4d9bb154a6fa9a19c0a5e47d37e7adbbee",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-02/profile.json": "140fbbdd89584e2d5e621412e767c929dbcf6005b1ba48f85da530c1d0de103d",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-02/resources.jsonl": "d4dc628f91d0089b7d67ea959244f83d98e58d192c89118d97387a15c2f93370",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-02/output/source-states.jsonl": "60b766beb7783ce76820dee71bda3e26c1acd58be5e593e506c815b4c4bfeb6b",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-03/output/result.json": "c25ad72b0f0a8108c0855fa1ab208298f00caea54c2a3d92360d40cbc27dc058",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-03/profile.json": "83a8173288594adedfffe04e4d777c720d3eac6227db07bb32435b2c8808bc28",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-03/resources.jsonl": "2584e5a4480b8c72c2881453844c23dafcd67169a3f88769455d887439053b76",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-03/output/source-states.jsonl": "447cf1f5ad6e2e6efec82ecf70bf0a20eaee9a4ef0e0df0a5bddba38ba7958b4",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-04/output/result.json": "5fc5e9e74409180d74c74b735611d01a55a5ae36c6165c2667e70ee23476dae3",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-04/profile.json": "8678eaa2377a71b51f8a1d4c7251e191c42c34353610f7737913f783150e3351",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-04/resources.jsonl": "4302abc7af83190adfcb548cb4df5fbb84405dbaf5991c150b4938404eec23ac",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-04/output/source-states.jsonl": "c741e661d8eb37ae25bcd4f6b53003a5220ff5ef0660c1682fe5d2247c64ed30",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-05/output/result.json": "aeb01db2e756447d4bb0975025bda330313f68f74396e87d8fbbdb64e96db626",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-05/profile.json": "910c8706b731f429084627de5bfbf05112a6a7cf7f7cf0058c00c9bc6fdca9a4",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-05/resources.jsonl": "2c8c710a4c0336a3b4e9e19fd5614f1407dd581cec778953194bac1a0fa4baa5",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-05/output/source-states.jsonl": "169c5013e43a3f4394dc90379573f710e6d9ecb31396080397b02a925314b8cf",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-06/output/result.json": "00faf96ee5c0b45c8f3b87c128d0be667bae910f331761164565cd99ee95d47a",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-06/profile.json": "b60059bc28021aa4ed37e0ace368e9b4a421822906dfc09dba4878fe0c2a089f",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-06/resources.jsonl": "470536e8aaaa822fa321d6f085c651493468cea0cd5a1d53fe08dc7653bdfeda",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-06/output/source-states.jsonl": "08d676c85b966ca5ab5ca2f3ddd7fa036566d38a9ff5b633cd9a91a69607c2c1",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-07/output/result.json": "cbadbdf70360f3b940a955fdc7b15631bedd229bc3033979bbd902cad7c03e2f",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-07/profile.json": "f61086a41460365c8138229776afd2e141abdc4010eeda3e85eef3a29c5dcf82",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-07/resources.jsonl": "09139b033ca8b9d4b6507e884e10227e6cabdb9a83addacf74ba8c293aa74026",
+    "backend/data/independent-evaluation/av-source-encoder-v114/extract-07/output/source-states.jsonl": "6112dc7be778857f258e5bc35e59495be8d87cafc308e30edde949005fb95aae"
+  },
+  "pilot_clips": 16,
+  "batches": 8,
+  "clips_per_batch": 2,
+  "waveforms_per_clip": [
+    "original_pcm",
+    "delayed_audio_control"
+  ],
+  "fixed_repeat": "Original waveform of first ordered clip in each batch; never replace unavailable repeat",
+  "planned_inputs": [
+    [
+      {
+        "source_ordinal": 0,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 0,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 1,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 1,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 2,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 2,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 3,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 3,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 4,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 4,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 5,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 5,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 6,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 6,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 7,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 7,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 8,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 8,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 9,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 9,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 10,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 10,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 11,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 11,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 12,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 12,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 13,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 13,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ],
+    [
+      {
+        "source_ordinal": 14,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 14,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 15,
+        "waveform_id": "original_pcm",
+        "status": "planned",
+        "unavailable_reason": null
+      },
+      {
+        "source_ordinal": 15,
+        "waveform_id": "delayed_audio_control",
+        "status": "planned",
+        "unavailable_reason": null
+      }
+    ]
+  ],
+  "fully_available_batch_encoder_forwards": 5,
+  "fully_available_total_encoder_forwards": 40,
+  "hidden_shape": [
+    1500,
+    5,
+    384
+  ],
+  "scope": "Whole original and local-delay waveforms encoded independently with unchanged qualified CPUfloat32 NativeEncoder; source-clock routing, not local evidence or detector accuracy."
+}

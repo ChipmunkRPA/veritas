@@ -1,0 +1,35 @@
+{
+  "schema": "chipmunk.audio-voxforge-tr-genuine-freeze/188",
+  "publisher_index_url": "https://repository.voxforge1.org/downloads/tr/Trunk/Audio/Original/48kHz_16bit/",
+  "publisher_index_sha256": "b652b9add0ec4115d31a68610784ca4b1b3ac8dd1e9dda53f6a0ef74d7ddf854",
+  "historical_identity_catalogue_sha256": "530df71b6f6443a71233bb56ccd5ed9743f4874d34fccc50a7172f2bf050d2c1",
+  "code_sha256": {
+    "backend/scripts/audio_voxforge_tr_genuine_v188.py": "ee24cf0474bc61ede2bd0f1f6e7078e4d3a0870ed934a59a2b2d0757b47e0b59",
+    "docs/audio-voxforge-tr-genuine-v188-method.md": "e57f434b3ce7e987145fcaec053b2dddfb0f2fba0d5911050732bf3d271415e8",
+    "backend/tests/test_audio_voxforge_tr_genuine_v188.py": "5b71dcd4bf1893ddee8c1b61b3cef892ce5b63b114fb0903178518feaa9a1180",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718"
+  },
+  "decoder_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "language": "tr",
+  "speech_origin": "genuine",
+  "named_contributor_groups_in_plan_pool": 59,
+  "planned_contributor_slots": 12,
+  "planned_session_archives": 15,
+  "maximum_sessions_per_group": 3,
+  "maximum_archive_bytes": 8000000,
+  "maximum_unpacked_tar_bytes": 24000000,
+  "native_rate": 48000,
+  "production_rate": 16000,
+  "production_sample_count_bounds": [
+    40000,
+    64000
+  ],
+  "holdout_media_access_permitted": false,
+  "model_calls_permitted": false,
+  "private_plan_sha256": "88e29f4604a8da21470e1a43126664466a8dd33ced29b507a1af135cbeb4c269"
+}

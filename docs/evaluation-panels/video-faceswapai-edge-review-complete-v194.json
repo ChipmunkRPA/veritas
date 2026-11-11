@@ -1,0 +1,528 @@
+{
+  "schema": "chipmunk.video-faceswapai-edge-review/194",
+  "freeze_sha256": "345369984c9a1c8a91b7e0f36559f5320ca70eda458405ff381600f0fec794b7",
+  "status": "complete",
+  "scope": "One consumed synthetic source component. Same-track appearance context; no authenticity or serving claim.",
+  "independent_source_components": 1,
+  "crop_forwards": 240,
+  "cases": [
+    {
+      "condition": "unchanged",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 147,
+          "pts": 75264,
+          "time_seconds": 6.125
+        },
+        "last_supported": {
+          "native_frame": 177,
+          "pts": 90624,
+          "time_seconds": 7.375
+        },
+        "covered_native_positions": 31,
+        "overlap_native_positions": 0,
+        "missed_native_positions": 0,
+        "outside_native_positions": 31,
+        "iou": 0.0
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 147,
+          "pts": 75264,
+          "time_seconds": 6.125
+        },
+        "last_supported": {
+          "native_frame": 184,
+          "pts": 94208,
+          "time_seconds": 7.666666666666667
+        },
+        "covered_native_positions": 38,
+        "overlap_native_positions": 0,
+        "missed_native_positions": 0,
+        "outside_native_positions": 38,
+        "iou": 0.0
+      },
+      "first_measured_return": {
+        "native_frame": 188,
+        "pts": 96256,
+        "time_seconds": 7.833333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 3,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 178,
+          "pts": 91136,
+          "time_seconds": 7.416666666666667
+        },
+        {
+          "native_frame": 182,
+          "pts": 93184,
+          "time_seconds": 7.583333333333333
+        },
+        {
+          "native_frame": 183,
+          "pts": 93696,
+          "time_seconds": 7.625
+        },
+        {
+          "native_frame": 184,
+          "pts": 94208,
+          "time_seconds": 7.666666666666667
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "ordinary_changes_only",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "role": "during",
+          "native_frame": 165,
+          "time_seconds": 6.875
+        },
+        {
+          "role": "after",
+          "native_frame": 183,
+          "time_seconds": 7.625
+        }
+      ],
+      "crop_forwards": 30
+    },
+    {
+      "condition": "recompression_only",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 147,
+          "pts": 75264,
+          "time_seconds": 6.125
+        },
+        "last_supported": {
+          "native_frame": 177,
+          "pts": 90624,
+          "time_seconds": 7.375
+        },
+        "covered_native_positions": 31,
+        "overlap_native_positions": 0,
+        "missed_native_positions": 72,
+        "outside_native_positions": 31,
+        "iou": 0.0
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 147,
+          "pts": 75264,
+          "time_seconds": 6.125
+        },
+        "last_supported": {
+          "native_frame": 184,
+          "pts": 94208,
+          "time_seconds": 7.666666666666667
+        },
+        "covered_native_positions": 38,
+        "overlap_native_positions": 0,
+        "missed_native_positions": 72,
+        "outside_native_positions": 38,
+        "iou": 0.0
+      },
+      "first_measured_return": {
+        "native_frame": 188,
+        "pts": 96256,
+        "time_seconds": 7.833333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 3,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 178,
+          "pts": 91136,
+          "time_seconds": 7.416666666666667
+        },
+        {
+          "native_frame": 182,
+          "pts": 93184,
+          "time_seconds": 7.583333333333333
+        },
+        {
+          "native_frame": 183,
+          "pts": 93696,
+          "time_seconds": 7.625
+        },
+        {
+          "native_frame": 184,
+          "pts": 94208,
+          "time_seconds": 7.666666666666667
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "ordinary_changes_only",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "role": "during",
+          "native_frame": 165,
+          "time_seconds": 6.875
+        },
+        {
+          "role": "after",
+          "native_frame": 183,
+          "time_seconds": 7.625
+        }
+      ],
+      "crop_forwards": 30
+    },
+    {
+      "condition": "swap_tv_bt601",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 134,
+          "pts": 68608,
+          "time_seconds": 5.583333333333333
+        },
+        "covered_native_positions": 62,
+        "overlap_native_positions": 62,
+        "missed_native_positions": 10,
+        "outside_native_positions": 0,
+        "iou": 0.861111
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        },
+        "covered_native_positions": 69,
+        "overlap_native_positions": 69,
+        "missed_native_positions": 3,
+        "outside_native_positions": 0,
+        "iou": 0.958333
+      },
+      "first_measured_return": {
+        "native_frame": 146,
+        "pts": 74752,
+        "time_seconds": 6.083333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 4,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 135,
+          "pts": 69120,
+          "time_seconds": 5.625
+        },
+        {
+          "native_frame": 139,
+          "pts": 71168,
+          "time_seconds": 5.791666666666667
+        },
+        {
+          "native_frame": 140,
+          "pts": 71680,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "publisher_swap",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 67,
+          "time_seconds": 2.7916666666666665
+        },
+        {
+          "role": "during",
+          "native_frame": 104,
+          "time_seconds": 4.333333333333333
+        },
+        {
+          "role": "after",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        }
+      ],
+      "crop_forwards": 45
+    },
+    {
+      "condition": "swap_pc_bt601",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 134,
+          "pts": 68608,
+          "time_seconds": 5.583333333333333
+        },
+        "covered_native_positions": 62,
+        "overlap_native_positions": 62,
+        "missed_native_positions": 10,
+        "outside_native_positions": 0,
+        "iou": 0.861111
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        },
+        "covered_native_positions": 69,
+        "overlap_native_positions": 69,
+        "missed_native_positions": 3,
+        "outside_native_positions": 0,
+        "iou": 0.958333
+      },
+      "first_measured_return": {
+        "native_frame": 146,
+        "pts": 74752,
+        "time_seconds": 6.083333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 4,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 135,
+          "pts": 69120,
+          "time_seconds": 5.625
+        },
+        {
+          "native_frame": 139,
+          "pts": 71168,
+          "time_seconds": 5.791666666666667
+        },
+        {
+          "native_frame": 140,
+          "pts": 71680,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "publisher_swap",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 67,
+          "time_seconds": 2.7916666666666665
+        },
+        {
+          "role": "during",
+          "native_frame": 104,
+          "time_seconds": 4.333333333333333
+        },
+        {
+          "role": "after",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        }
+      ],
+      "crop_forwards": 45
+    },
+    {
+      "condition": "swap_tv_bt709",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 134,
+          "pts": 68608,
+          "time_seconds": 5.583333333333333
+        },
+        "covered_native_positions": 62,
+        "overlap_native_positions": 62,
+        "missed_native_positions": 10,
+        "outside_native_positions": 0,
+        "iou": 0.861111
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        },
+        "covered_native_positions": 69,
+        "overlap_native_positions": 69,
+        "missed_native_positions": 3,
+        "outside_native_positions": 0,
+        "iou": 0.958333
+      },
+      "first_measured_return": {
+        "native_frame": 146,
+        "pts": 74752,
+        "time_seconds": 6.083333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 4,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 135,
+          "pts": 69120,
+          "time_seconds": 5.625
+        },
+        {
+          "native_frame": 139,
+          "pts": 71168,
+          "time_seconds": 5.791666666666667
+        },
+        {
+          "native_frame": 140,
+          "pts": 71680,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "publisher_swap",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 67,
+          "time_seconds": 2.7916666666666665
+        },
+        {
+          "role": "during",
+          "native_frame": 104,
+          "time_seconds": 4.333333333333333
+        },
+        {
+          "role": "after",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        }
+      ],
+      "crop_forwards": 45
+    },
+    {
+      "condition": "swap_pc_bt709",
+      "status": "measured_return_bracket",
+      "existing": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 134,
+          "pts": 68608,
+          "time_seconds": 5.583333333333333
+        },
+        "covered_native_positions": 62,
+        "overlap_native_positions": 62,
+        "missed_native_positions": 10,
+        "outside_native_positions": 0,
+        "iou": 0.861111
+      },
+      "proposed": {
+        "start": {
+          "native_frame": 73,
+          "pts": 37376,
+          "time_seconds": 3.0416666666666665
+        },
+        "last_supported": {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        },
+        "covered_native_positions": 69,
+        "overlap_native_positions": 69,
+        "missed_native_positions": 3,
+        "outside_native_positions": 0,
+        "iou": 0.958333
+      },
+      "first_measured_return": {
+        "native_frame": 146,
+        "pts": 74752,
+        "time_seconds": 6.083333333333333
+      },
+      "unmeasured_positions_in_return_bracket": 4,
+      "appended_directly_measured_core_like": [
+        {
+          "native_frame": 135,
+          "pts": 69120,
+          "time_seconds": 5.625
+        },
+        {
+          "native_frame": 139,
+          "pts": 71168,
+          "time_seconds": 5.791666666666667
+        },
+        {
+          "native_frame": 140,
+          "pts": 71680,
+          "time_seconds": 5.833333333333333
+        },
+        {
+          "native_frame": 141,
+          "pts": 72192,
+          "time_seconds": 5.875
+        }
+      ],
+      "appended_unmeasured_positions": 3,
+      "comparison_target": "publisher_swap",
+      "existing_representatives": [
+        {
+          "role": "before",
+          "native_frame": 67,
+          "time_seconds": 2.7916666666666665
+        },
+        {
+          "role": "during",
+          "native_frame": 104,
+          "time_seconds": 4.333333333333333
+        },
+        {
+          "role": "after",
+          "native_frame": 140,
+          "time_seconds": 5.833333333333333
+        }
+      ],
+      "crop_forwards": 45
+    }
+  ],
+  "private_complete_readout_sha256": "74cd5da8801f6a5a0119fa74625a2225eff207cbf6993681a41bb069cace3118",
+  "repeat_exact": true
+}

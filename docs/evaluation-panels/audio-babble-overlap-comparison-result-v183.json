@@ -1,0 +1,1904 @@
+{
+  "defaults_changed": false,
+  "freeze_sha256": "3b8f18cca1687919bba8649c98581e696ca5ba89b8e8d6739665e75e6635bbae",
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "maximum_sampled_descendant_rss_bytes": 3050274816,
+  "new_neural_calls": 204,
+  "overlap_forwards": 96,
+  "planned_cases": 96,
+  "private_observations_sha256": "e58925e7fc070dfc451c17a12ea1c94707082cb6c8fe0317f79010d80a383027",
+  "research_comparison": {
+    "by_connected_component": {
+      "component_01": {
+        "by_condition": {
+          "clean": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 4,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 4,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 4,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 4,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.9987252431164961,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_0db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.004535108804702759,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 1,
+                "baseline": {
+                  "ai": 1,
+                  "ai_flag_rate_over_planned": 0.25,
+                  "decided": 1,
+                  "false_ai": 1,
+                  "inconclusive": 3,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 1,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 3
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.18729278445243835,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          }
+        },
+        "overlap_only": {
+          "clean": {
+            "genuine": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.006780809339891546,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.002142669861349294,
+              "planned": 4
+            }
+          },
+          "snr_0db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7628571428571429,
+              "median_overlap_mass": 0.7651538756298042,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7342857142857142,
+              "median_overlap_mass": 0.733202034763446,
+              "planned": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7514285714285714,
+              "median_overlap_mass": 0.7376200831042423,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7171428571428571,
+              "median_overlap_mass": 0.7161214612865234,
+              "planned": 4
+            }
+          }
+        },
+        "paired_vs_clean": {
+          "snr_0db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          }
+        }
+      },
+      "component_02": {
+        "by_condition": {
+          "clean": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 3,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 3,
+                  "unavailable": 1
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 3,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 3,
+                  "unavailable": 1
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "not_applicable": 1,
+                  "ok": 3
+                },
+                "scored": 3
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "both_scored": 3,
+              "median_raw_synthetic_minus_genuine": 0.998724392557051,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_0db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.003984987735748291,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.0034945011138916016,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          }
+        },
+        "overlap_only": {
+          "clean": {
+            "genuine": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.006267643465730511,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.008246783659459784,
+              "planned": 4
+            }
+          },
+          "snr_0db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7428571428571429,
+              "median_overlap_mass": 0.7407597444589358,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7285714285714285,
+              "median_overlap_mass": 0.7420009856194952,
+              "planned": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.7285714285714286,
+              "median_overlap_mass": 0.7449241482207349,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6971428571428572,
+              "median_overlap_mass": 0.6721292516701329,
+              "planned": 4
+            }
+          }
+        },
+        "paired_vs_clean": {
+          "snr_0db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 2,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 2,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          }
+        }
+      },
+      "component_03": {
+        "by_condition": {
+          "clean": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 4,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 4,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 4,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 4,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.9987307999981567,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_0db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "false_ai": 4,
+                  "inconclusive": 0,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 4,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 0
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.0015214085578918457,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.003844916820526123,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          }
+        },
+        "overlap_only": {
+          "clean": {
+            "genuine": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.0030681104956291876,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.0073219761542479556,
+              "planned": 4
+            }
+          },
+          "snr_0db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6914285714285714,
+              "median_overlap_mass": 0.658632586305337,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6885714285714286,
+              "median_overlap_mass": 0.6940792622218135,
+              "planned": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6914285714285715,
+              "median_overlap_mass": 0.6579076035077818,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6942857142857143,
+              "median_overlap_mass": 0.7024722612049973,
+              "planned": 4
+            }
+          }
+        },
+        "paired_vs_clean": {
+          "snr_0db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          }
+        }
+      },
+      "component_04": {
+        "by_condition": {
+          "clean": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 3,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 3,
+                  "unavailable": 1
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 3,
+                  "false_ai": 0,
+                  "inconclusive": 0,
+                  "original": 3,
+                  "unavailable": 1
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "not_applicable": 1,
+                  "ok": 3
+                },
+                "scored": 3
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 0,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "both_scored": 3,
+              "median_raw_synthetic_minus_genuine": 0.9986383945215493,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 4
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_0db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 4,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "inconclusive": 4,
+                  "missed_ai": 4,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.0012088119983673096,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 4,
+                "synthetic_only_ai": 0
+              },
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "arms": {
+              "genuine": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 3,
+                  "ai_flag_rate_over_planned": 0.75,
+                  "decided": 3,
+                  "false_ai": 3,
+                  "inconclusive": 1,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "overlap_abstention": {
+                  "ai": 0,
+                  "ai_flag_rate_over_planned": 0.0,
+                  "decided": 0,
+                  "false_ai": 0,
+                  "inconclusive": 4,
+                  "original": 0,
+                  "unavailable": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              },
+              "synthetic": {
+                "ai_to_inconclusive": 3,
+                "baseline": {
+                  "ai": 4,
+                  "ai_flag_rate_over_planned": 1.0,
+                  "decided": 4,
+                  "inconclusive": 0,
+                  "missed_ai": 0,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "overlap_abstention": {
+                  "ai": 1,
+                  "ai_flag_rate_over_planned": 0.25,
+                  "decided": 1,
+                  "inconclusive": 3,
+                  "missed_ai": 3,
+                  "original": 0,
+                  "unavailable": 0,
+                  "wrong_original": 0
+                },
+                "planned": 4,
+                "route_statuses": {
+                  "ok": 4
+                },
+                "scored": 4
+              }
+            },
+            "paired_foreground_sensitivity": {
+              "baseline": {
+                "both_ai": 3,
+                "genuine_only_ai": 0,
+                "neither_ai": 0,
+                "synthetic_only_ai": 1
+              },
+              "both_scored": 4,
+              "median_raw_synthetic_minus_genuine": 0.0016932785511016846,
+              "overlap_abstention": {
+                "both_ai": 0,
+                "genuine_only_ai": 0,
+                "neither_ai": 3,
+                "synthetic_only_ai": 1
+              },
+              "planned_pairs": 4
+            }
+          }
+        },
+        "overlap_only": {
+          "clean": {
+            "genuine": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.013096096701663075,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 0,
+              "measured": 4,
+              "median_overlap_fraction": 0.0,
+              "median_overlap_mass": 0.0036973433906670444,
+              "planned": 4
+            }
+          },
+          "snr_0db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6914285714285714,
+              "median_overlap_mass": 0.6672273833911392,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6857142857142857,
+              "median_overlap_mass": 0.6768403786075362,
+              "planned": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "marker": 4,
+              "measured": 4,
+              "median_overlap_fraction": 0.6799999999999999,
+              "median_overlap_mass": 0.6422954974873778,
+              "planned": 4
+            },
+            "synthetic": {
+              "marker": 3,
+              "measured": 4,
+              "median_overlap_fraction": 0.5485714285714286,
+              "median_overlap_mass": 0.5924768599755752,
+              "planned": 4
+            }
+          }
+        },
+        "paired_vs_clean": {
+          "snr_0db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 2,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          },
+          "snr_plus5db": {
+            "genuine": {
+              "baseline": [
+                {
+                  "clean": "original",
+                  "count": 2,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "original",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "original",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                },
+                {
+                  "clean": "unavailable",
+                  "count": 1,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            },
+            "synthetic": {
+              "baseline": [
+                {
+                  "clean": "ai",
+                  "count": 4,
+                  "noisy": "ai"
+                }
+              ],
+              "overlap_abstention": [
+                {
+                  "clean": "ai",
+                  "count": 1,
+                  "noisy": "ai"
+                },
+                {
+                  "clean": "ai",
+                  "count": 3,
+                  "noisy": "inconclusive"
+                }
+              ],
+              "planned_pairs": 4
+            }
+          }
+        }
+      }
+    },
+    "combined_panel": {
+      "by_condition": {
+        "clean": {
+          "arms": {
+            "genuine": {
+              "ai_to_inconclusive": 0,
+              "baseline": {
+                "ai": 0,
+                "ai_flag_rate_over_planned": 0.0,
+                "decided": 14,
+                "false_ai": 0,
+                "inconclusive": 0,
+                "original": 14,
+                "unavailable": 2
+              },
+              "overlap_abstention": {
+                "ai": 0,
+                "ai_flag_rate_over_planned": 0.0,
+                "decided": 14,
+                "false_ai": 0,
+                "inconclusive": 0,
+                "original": 14,
+                "unavailable": 2
+              },
+              "planned": 16,
+              "route_statuses": {
+                "not_applicable": 2,
+                "ok": 14
+              },
+              "scored": 14
+            },
+            "synthetic": {
+              "ai_to_inconclusive": 0,
+              "baseline": {
+                "ai": 16,
+                "ai_flag_rate_over_planned": 1.0,
+                "decided": 16,
+                "inconclusive": 0,
+                "missed_ai": 0,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "overlap_abstention": {
+                "ai": 16,
+                "ai_flag_rate_over_planned": 1.0,
+                "decided": 16,
+                "inconclusive": 0,
+                "missed_ai": 0,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "planned": 16,
+              "route_statuses": {
+                "ok": 16
+              },
+              "scored": 16
+            }
+          },
+          "paired_foreground_sensitivity": {
+            "baseline": {
+              "both_ai": 0,
+              "genuine_only_ai": 0,
+              "neither_ai": 0,
+              "synthetic_only_ai": 16
+            },
+            "both_scored": 14,
+            "median_raw_synthetic_minus_genuine": 0.9987212019041181,
+            "overlap_abstention": {
+              "both_ai": 0,
+              "genuine_only_ai": 0,
+              "neither_ai": 0,
+              "synthetic_only_ai": 16
+            },
+            "planned_pairs": 16
+          }
+        },
+        "snr_0db": {
+          "arms": {
+            "genuine": {
+              "ai_to_inconclusive": 13,
+              "baseline": {
+                "ai": 13,
+                "ai_flag_rate_over_planned": 0.8125,
+                "decided": 13,
+                "false_ai": 13,
+                "inconclusive": 3,
+                "original": 0,
+                "unavailable": 0
+              },
+              "overlap_abstention": {
+                "ai": 0,
+                "ai_flag_rate_over_planned": 0.0,
+                "decided": 0,
+                "false_ai": 0,
+                "inconclusive": 16,
+                "original": 0,
+                "unavailable": 0
+              },
+              "planned": 16,
+              "route_statuses": {
+                "ok": 16
+              },
+              "scored": 16
+            },
+            "synthetic": {
+              "ai_to_inconclusive": 16,
+              "baseline": {
+                "ai": 16,
+                "ai_flag_rate_over_planned": 1.0,
+                "decided": 16,
+                "inconclusive": 0,
+                "missed_ai": 0,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "overlap_abstention": {
+                "ai": 0,
+                "ai_flag_rate_over_planned": 0.0,
+                "decided": 0,
+                "inconclusive": 16,
+                "missed_ai": 16,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "planned": 16,
+              "route_statuses": {
+                "ok": 16
+              },
+              "scored": 16
+            }
+          },
+          "paired_foreground_sensitivity": {
+            "baseline": {
+              "both_ai": 13,
+              "genuine_only_ai": 0,
+              "neither_ai": 0,
+              "synthetic_only_ai": 3
+            },
+            "both_scored": 16,
+            "median_raw_synthetic_minus_genuine": 0.002403438091278076,
+            "overlap_abstention": {
+              "both_ai": 0,
+              "genuine_only_ai": 0,
+              "neither_ai": 16,
+              "synthetic_only_ai": 0
+            },
+            "planned_pairs": 16
+          }
+        },
+        "snr_plus5db": {
+          "arms": {
+            "genuine": {
+              "ai_to_inconclusive": 10,
+              "baseline": {
+                "ai": 10,
+                "ai_flag_rate_over_planned": 0.625,
+                "decided": 10,
+                "false_ai": 10,
+                "inconclusive": 6,
+                "original": 0,
+                "unavailable": 0
+              },
+              "overlap_abstention": {
+                "ai": 0,
+                "ai_flag_rate_over_planned": 0.0,
+                "decided": 0,
+                "false_ai": 0,
+                "inconclusive": 16,
+                "original": 0,
+                "unavailable": 0
+              },
+              "planned": 16,
+              "route_statuses": {
+                "ok": 16
+              },
+              "scored": 16
+            },
+            "synthetic": {
+              "ai_to_inconclusive": 15,
+              "baseline": {
+                "ai": 16,
+                "ai_flag_rate_over_planned": 1.0,
+                "decided": 16,
+                "inconclusive": 0,
+                "missed_ai": 0,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "overlap_abstention": {
+                "ai": 1,
+                "ai_flag_rate_over_planned": 0.0625,
+                "decided": 1,
+                "inconclusive": 15,
+                "missed_ai": 15,
+                "original": 0,
+                "unavailable": 0,
+                "wrong_original": 0
+              },
+              "planned": 16,
+              "route_statuses": {
+                "ok": 16
+              },
+              "scored": 16
+            }
+          },
+          "paired_foreground_sensitivity": {
+            "baseline": {
+              "both_ai": 10,
+              "genuine_only_ai": 0,
+              "neither_ai": 0,
+              "synthetic_only_ai": 6
+            },
+            "both_scored": 16,
+            "median_raw_synthetic_minus_genuine": 0.0034945011138916016,
+            "overlap_abstention": {
+              "both_ai": 0,
+              "genuine_only_ai": 0,
+              "neither_ai": 15,
+              "synthetic_only_ai": 1
+            },
+            "planned_pairs": 16
+          }
+        }
+      },
+      "overlap_only": {
+        "clean": {
+          "genuine": {
+            "marker": 0,
+            "measured": 16,
+            "median_overlap_fraction": 0.0,
+            "median_overlap_mass": 0.0060747233371677405,
+            "planned": 16
+          },
+          "synthetic": {
+            "marker": 0,
+            "measured": 16,
+            "median_overlap_fraction": 0.0,
+            "median_overlap_mass": 0.004890011627507256,
+            "planned": 16
+          }
+        },
+        "snr_0db": {
+          "genuine": {
+            "marker": 16,
+            "measured": 16,
+            "median_overlap_fraction": 0.74,
+            "median_overlap_mass": 0.7143526534182563,
+            "planned": 16
+          },
+          "synthetic": {
+            "marker": 16,
+            "measured": 16,
+            "median_overlap_fraction": 0.7171428571428571,
+            "median_overlap_mass": 0.7071105406865519,
+            "planned": 16
+          }
+        },
+        "snr_plus5db": {
+          "genuine": {
+            "marker": 16,
+            "measured": 16,
+            "median_overlap_fraction": 0.7142857142857143,
+            "median_overlap_mass": 0.7077472824447928,
+            "planned": 16
+          },
+          "synthetic": {
+            "marker": 15,
+            "measured": 16,
+            "median_overlap_fraction": 0.6942857142857143,
+            "median_overlap_mass": 0.68120878554714,
+            "planned": 16
+          }
+        }
+      },
+      "paired_vs_clean": {
+        "snr_0db": {
+          "genuine": {
+            "baseline": [
+              {
+                "clean": "original",
+                "count": 11,
+                "noisy": "ai"
+              },
+              {
+                "clean": "original",
+                "count": 3,
+                "noisy": "inconclusive"
+              },
+              {
+                "clean": "unavailable",
+                "count": 2,
+                "noisy": "ai"
+              }
+            ],
+            "overlap_abstention": [
+              {
+                "clean": "original",
+                "count": 14,
+                "noisy": "inconclusive"
+              },
+              {
+                "clean": "unavailable",
+                "count": 2,
+                "noisy": "inconclusive"
+              }
+            ],
+            "planned_pairs": 16
+          },
+          "synthetic": {
+            "baseline": [
+              {
+                "clean": "ai",
+                "count": 16,
+                "noisy": "ai"
+              }
+            ],
+            "overlap_abstention": [
+              {
+                "clean": "ai",
+                "count": 16,
+                "noisy": "inconclusive"
+              }
+            ],
+            "planned_pairs": 16
+          }
+        },
+        "snr_plus5db": {
+          "genuine": {
+            "baseline": [
+              {
+                "clean": "original",
+                "count": 8,
+                "noisy": "ai"
+              },
+              {
+                "clean": "original",
+                "count": 6,
+                "noisy": "inconclusive"
+              },
+              {
+                "clean": "unavailable",
+                "count": 2,
+                "noisy": "ai"
+              }
+            ],
+            "overlap_abstention": [
+              {
+                "clean": "original",
+                "count": 14,
+                "noisy": "inconclusive"
+              },
+              {
+                "clean": "unavailable",
+                "count": 2,
+                "noisy": "inconclusive"
+              }
+            ],
+            "planned_pairs": 16
+          },
+          "synthetic": {
+            "baseline": [
+              {
+                "clean": "ai",
+                "count": 16,
+                "noisy": "ai"
+              }
+            ],
+            "overlap_abstention": [
+              {
+                "clean": "ai",
+                "count": 1,
+                "noisy": "ai"
+              },
+              {
+                "clean": "ai",
+                "count": 15,
+                "noisy": "inconclusive"
+              }
+            ],
+            "planned_pairs": 16
+          }
+        }
+      }
+    }
+  },
+  "resource_profile_sha256": "6e1f632f10a30af231608dba460ed45939dca7cfa93b9414e52d7f0ecba99d15",
+  "schema": "chipmunk.audio-babble-overlap-comparison-result/183",
+  "serving_raw_forwards": 94,
+  "serving_stability_forwards": 14,
+  "status": "complete",
+  "worker_duration_seconds": 72.0060284580104
+}

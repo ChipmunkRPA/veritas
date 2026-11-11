@@ -31,3 +31,10 @@ batch pairs remain before the full aggregate can be sealed.
 The JPEG75 batch 6 candidate initially stopped at the 6 GiB RAM admission
 check, before the worker launched. The original receipt was retained. The
 same frozen batch passed after available memory recovered.
+
+## Both qualities sealed
+
+The remaining JPEG90 phases and terminal seal passed. Both checks scored
+295 views per quality. The seal verified 1,180 unique forwards, four exact
+repeats and 73 preparation, scoring and mask-readout profiles.
+[Complete aggregate](evaluation-panels/image-jpeg-diagnostic-complete-v189.json)

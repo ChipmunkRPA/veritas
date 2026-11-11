@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.text-elife-relative-paragraph-freeze/292",
+  "v289_result_sha256": "d4e13615a3f080ed03d159a2c4219f2cc67e907559c7929db0fb6a6b78da8580",
+  "v289_freeze_sha256": "e63b6bee860917815cfde7c9fc28415562088a8c48526928aa11524c3e756cd6",
+  "private_cases_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+  "v275_current_freeze_sha256": "6c11cb1bf13ceccf6ad7c6851eacee58d4992c8475701a25bf855145745eb141",
+  "code_sha256": {
+    "backend/scripts/text_elife_relative_paragraph_v292.py": "eef18a6f641b427e6c675796686793aa7343fc6ee730b1cc44c38b976e40d2bb",
+    "backend/scripts/text_elife_paragraph_rank_v281.py": "3f4da4df56c4d81ce446364b79c76104cdf1cec6bd4f9f809897dc36e4e6a754",
+    "backend/scripts/text_elife_passage_score_v275.py": "17d640a22e680d779abbb060d376e1785ac9595a49964a4dd5d0ebdd13955fe2",
+    "docs/text-elife-relative-paragraph-v292-method.md": "5c168879328b38909c9558d311e40b82dcaab57d01e8f56439e419f4a96ec712",
+    "backend/tests/test_text_elife_relative_paragraph_v292.py": "8e09407f7c8c2384abef58c3cce3e9f5743a263aef874e88ed6f51f00abf3e97"
+  },
+  "source_groups_by_role": {
+    "development": 13,
+    "confirmation": 13
+  },
+  "role_batches_planned": [
+    15,
+    15,
+    9
+  ],
+  "planned_cases_by_role": {
+    "development": 39,
+    "confirmation": 39
+  },
+  "prepared_cases_by_role": {
+    "development": 25,
+    "confirmation": 23
+  },
+  "cross_role_12_token_matches": 0,
+  "point": "Strictly above second-largest raw paragraph lead among fully covered development originals only",
+  "candidate": "On full coverage, add one uniquely leading paragraph only when existing findings are empty",
+  "criteria": {
+    "minimum_development_originals_fully_assessed": 12,
+    "minimum_confirmation_originals_fully_assessed": 12,
+    "minimum_confirmation_mixed_fully_assessed": 9,
+    "minimum_added_useful_cases": 3,
+    "minimum_added_useful_source_groups": 2,
+    "minimum_added_useful_cases_per_family": 1,
+    "maximum_added_original_flags": 1,
+    "maximum_wrong_added_mixed_paragraphs": 2,
+    "maximum_added_unchanged_character_share": 0.05
+  },
+  "serving_changed": false
+}

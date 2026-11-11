@@ -38,6 +38,8 @@ The [fresh transfer roster](text-elife-transfer-intake-v286-result.md) adds 26
 groups with separately checked work licenses and fixed rewrite targets. The
 [transfer rewrite construction](text-elife-transfer-rewrites-v289-result.md)
 keeps the source roles and all 52 planned attempts in the record.
+The [relative paragraph comparison](text-elife-relative-paragraph-v292-result.md)
+reports recovered edit locations and false highlights on separate confirmation articles.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a

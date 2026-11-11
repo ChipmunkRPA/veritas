@@ -1,0 +1,176 @@
+{
+  "code_sha256": {
+    "backend/scripts/audio_bbc_room_assets_v303.py": "0e4f4f24626cc5fd53006655ee0ef447f8351b5d995698be77ecb8e72839ea0c",
+    "backend/scripts/audio_room_assets_v299.py": "f96c6d991044585c964fae812149cf1bad924bb802c190f68da588699622e408",
+    "backend/tests/test_audio_bbc_room_assets_v303.py": "a441f04be50d00fa7caf0fabec0005a362786a6ad255383414ddcc7fa4da64bc",
+    "docs/audio-bbc-room-assets-v303-method.md": "01a8f6b1949e358ce4d38911c717b7ea92b13c2ac21bb67e49fb38808e8665e6"
+  },
+  "libsndfile_version": "1.2.2",
+  "model_calls": 0,
+  "numpy_version": "2.2.6",
+  "publisher_plan": {
+    "delay_samples_added": [
+      0,
+      0
+    ],
+    "ear_order": [
+      "left",
+      "right"
+    ],
+    "license": "CC-BY-SA-4.0",
+    "license_scope": "Pinned static WAV files in the BBC repository",
+    "native_range": [
+      0,
+      16384
+    ],
+    "positions": {
+      "front": {
+        "asset": {
+          "bytes": 131160,
+          "git_blob_sha1": "0fc8a92eb335e372d91eeb28f00e23dd5eac5d43",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+000.wav"
+        },
+        "azimuth_degrees_left_positive": 0,
+        "elevation_degrees": 0,
+        "physical_distance_m": 1.99,
+        "speaker": "M+000"
+      },
+      "left": {
+        "asset": {
+          "bytes": 131160,
+          "git_blob_sha1": "a5307acc7f13da3c24a85487262e59adcb58995b",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+090.wav"
+        },
+        "azimuth_degrees_left_positive": 90,
+        "elevation_degrees": 0,
+        "physical_distance_m": 2.28,
+        "speaker": "M+090"
+      },
+      "right": {
+        "asset": {
+          "bytes": 131160,
+          "git_blob_sha1": "650f383bfac67c7bdf93c5454c4aaf1d005dbb2b",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M-090.wav"
+        },
+        "azimuth_degrees_left_positive": -90,
+        "elevation_degrees": 0,
+        "physical_distance_m": 2.28,
+        "speaker": "M-090"
+      }
+    },
+    "publisher_sources": {
+      "geometry": "https://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP382.pdf",
+      "geometry_scene": {
+        "git_blob_sha1": "f45bbd350b71953d0e69378eda31440a3a611356",
+        "path": "ssr-scenes/BBCRDLR_BRS_SystemH.asd"
+      },
+      "licence": {
+        "git_blob_sha1": "3b7b82d0da2db857eda1a798dbd908ea136f07b5",
+        "path": "LICENSE"
+      },
+      "licence_correction": "https://github.com/bbc/bbcrd-brirs/commit/c88a293ed81f4aa820bcbc4138f951552819e001",
+      "static_wav_description": {
+        "git_blob_sha1": "25bf32dc960acd5d7665725307faf96f479b283d",
+        "path": "README.md"
+      },
+      "static_wav_routing": {
+        "git_blob_sha1": "e1b2ac439d9b1b121cd89110ebb31a42f8779918",
+        "path": "ambix-configs/BBCRD_LR_FULL.config"
+      }
+    },
+    "receiver": "Neumann KU100, centred, frontal orientation",
+    "room": "BBC Research & Development listening room, Salford",
+    "sample_rate_hz": 48000,
+    "samples_per_channel": 16384,
+    "source_commit": "c88a293ed81f4aa820bcbc4138f951552819e001",
+    "source_repository": "bbc/bbcrd-brirs"
+  },
+  "result": {
+    "positions": {
+      "front": {
+        "asset": {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M+000.wav",
+          "git_blob_sha1": "0fc8a92eb335e372d91eeb28f00e23dd5eac5d43",
+          "sha256": "711ca5d7388310148d5b7b25e00739060cc143ffcc8ac63a405657b6bcaebb7a",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+000.wav"
+        },
+        "encoding": "FLOAT",
+        "impulse": {
+          "coefficients_sha256": "f749ffd94451bc60de175bf447b22f4206d930b5114bb4df349635a553b2be12",
+          "delay_samples": [
+            0,
+            0
+          ],
+          "position": "front",
+          "rig": "bbc-rd-salford-ku100-frontal",
+          "sample_rate_hz": 48000,
+          "samples_per_channel": 16384,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "peak_sample_left_right": [
+          293,
+          293
+        ]
+      },
+      "left": {
+        "asset": {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M+090.wav",
+          "git_blob_sha1": "a5307acc7f13da3c24a85487262e59adcb58995b",
+          "sha256": "765cde5f7a0c2784fdab640f9a95cdfa811200efe2478d0375c34746ff1e4325",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+090.wav"
+        },
+        "encoding": "FLOAT",
+        "impulse": {
+          "coefficients_sha256": "09c854e775dabc5142a6501dcf1522d0b5b07faa54072143b4a047077252a9d0",
+          "delay_samples": [
+            0,
+            0
+          ],
+          "position": "left",
+          "rig": "bbc-rd-salford-ku100-frontal",
+          "sample_rate_hz": 48000,
+          "samples_per_channel": 16384,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "peak_sample_left_right": [
+          283,
+          320
+        ]
+      },
+      "right": {
+        "asset": {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M-090.wav",
+          "git_blob_sha1": "650f383bfac67c7bdf93c5454c4aaf1d005dbb2b",
+          "sha256": "ffb81d6fe73cdd450b58e48b7dd8191818404b46d064fc6db17559e1f55ad718",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M-090.wav"
+        },
+        "encoding": "FLOAT",
+        "impulse": {
+          "coefficients_sha256": "c497672e5e59de34990c5bc76104c529c0432f7f7eb15294326fb5fb33eea284",
+          "delay_samples": [
+            0,
+            0
+          ],
+          "position": "right",
+          "rig": "bbc-rd-salford-ku100-frontal",
+          "sample_rate_hz": 48000,
+          "samples_per_channel": 16384,
+          "unit": "linear_amplitude_per_unit_input"
+        },
+        "peak_sample_left_right": [
+          320,
+          285
+        ]
+      }
+    },
+    "status": "documented_positions_qualified"
+  },
+  "role": "holdout",
+  "schema": "chipmunk.audio-bbc-room-assets/303",
+  "speech_files_opened": 0,
+  "v296_authored_receipt_sha256": "32c31d286c99f33fa25933452e9d21411ec2e457f5f55f807ded67b6924f2215",
+  "v299_development_receipt_sha256": "e25e34aa57f80e38a552067d57abf7cff2b1a066de7da3e65aea456115942008"
+}

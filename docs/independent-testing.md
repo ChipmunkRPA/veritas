@@ -83,6 +83,8 @@ verifies a renderer for asymmetric background noise and confirms the archive
 inventory for a future paired comparison with two voice generators.
 The [measured room intake](audio-room-assets-v299-result.md) qualifies the
 documented Surrey source positions and records the open second-room geometry.
+The [BBC holdout intake](audio-bbc-room-assets-v303-result.md) verifies a
+separate room with documented front and lateral positions.
 
 The [video brightness readout](video-luma-context-v278-result.md) uses the
 original selected appearance flags, known edit controls and exact native
@@ -93,6 +95,8 @@ The [matched ordinary controls](video-vcd2-matched-controls-v290-result.md)
 verify 24 unchanged, chroma-converted and recompressed views on those clocks.
 The [first current-app triplet](video-vcd2-current-app-v294-first-result.md)
 records measured appearance coverage and the separate frame-check budget skip.
+The [later reference snapshot](video-vcd2-current-app-v294-reference-snapshot.md)
+preserves all 20 completed controls and four cases pending resource admission.
 
 The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
 speech controls using publisher files, separately obtained model assets and

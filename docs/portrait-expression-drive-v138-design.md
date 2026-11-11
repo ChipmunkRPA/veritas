@@ -1,7 +1,10 @@
 # Stronger second-generator construction: full expression driving
 
-Status: implemented arithmetic/CPU bridge with authored checks, **not yet
-qualified by actual neural execution**. It is not imported into the customer
+Historical pre-execution design: implemented arithmetic/CPU bridge with authored
+checks, **not yet qualified by actual neural execution at this design stage**.
+See the later [v140 qualification method](portrait-expression-qualifier-v140-method.md)
+for the subsequent contract; actual results must be reported separately.
+It is not imported into the customer
 application, included in confidence or used for benchmark generation. The
 unchanged frozen v133 CPU aperture-response qualification remains separate.
 

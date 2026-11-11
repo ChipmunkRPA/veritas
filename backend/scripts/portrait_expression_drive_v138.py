@@ -1,4 +1,4 @@
-"""Research-only same-person expression driving; not a qualified detector/generator.
+"""Research-only same-person expression driving; no detector or timing guarantee.
 
 Uses the retained MIT human animation modules. No additional weights or face
 recognition are loaded. Native cropping/compositing and actual neural response
@@ -29,7 +29,7 @@ def expression_points(source_points, source_expression, driving_expression, sour
 
 
 class ExpressionRenderer:
-    """Unqualified CPU float32 benchmark bridge over the existing human loader."""
+    """CPU float32 benchmark bridge; caller qualification is separately scoped."""
 
     def __init__(self, assets):
         import torch

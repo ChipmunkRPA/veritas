@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [portable PACC-P replay](audio-pacc-portable-replay.md) runs the 98 genuine
+speech controls using publisher files, separately obtained model assets and
+caller-owned directories. It compares aggregate decisions and clean-to-noisy
+transitions against the published result. Qualification runs without model
+weights, and the aggregate comparison can be shared without sharing recordings
+or individual scores.
+
 The [fresh GRID transfer preparation](native-mouth-transfer-progress-v134.md)
 separates publisher metadata, complete archive checksums, native video/audio
 clocks and neural qualification. Fifteen new authored transport/selection checks

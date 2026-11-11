@@ -1,0 +1,53 @@
+{
+  "schema": "chipmunk.audio-matched-babble-freeze/181",
+  "role": "development",
+  "source_metadata_sha256": "4c88e2c36c8dc57d4c48e23fd50a69fe85353ce9d7056e5e074613cdfff3c345",
+  "source_metadata_records": 372,
+  "v81_manifest_sha256": "8b667675a803bd03851c27251e08a63b040b2bd29474462f9f0a4e3af9108ea6",
+  "v172_holdout_plan_sha256": "c6dc327332e96089e0f1e279833588e2b8362cf68493aa3ac3a9a13690f19339",
+  "v177_input_observations_sha256": "5f1eaf259417a36b1aca778fe4b6cb2042db2c32cd03a074eca631b9215e245b",
+  "code_sha256": {
+    "backend/scripts/audio_matched_babble_v181.py": "777b249c782027742870860037986c7e96181c7d22e068f39a42df54c55a190c",
+    "backend/tests/test_audio_matched_babble_v181.py": "262a39054c557d19ed02fab77b59d221ecf3d18c7405f5e36bacba9449a3cf59",
+    "docs/audio-matched-babble-v181.md": "6b4234168c74bb2cd2a407c3c2b4d3ecba4456aef3efb151f15f8f17a3b34473",
+    "backend/scripts/audio_short_edit_controls.py": "3124865172114acc07d0bc9aca581645827a5092fd49f7c5102aa3cd4f189bb7",
+    "backend/scripts/audio_short_edit_cases_v172.py": "b23a07cda0825275efab4bcebae20a4767657017f5261a35ba9934d5f302cf79",
+    "backend/scripts/video_appearance_runtime_v108.py": "ad3f6211de04bf8f17027bafe94ce70bedd0b31e4661bfa6b80d350557f39718",
+    "backend/app/detectors/audio/decode.py": "bad01c465e6ef4a99d4d5a6483ee129c3cb7955407df896c2111733bf5c61f02",
+    "backend/app/detectors/video/decode.py": "ef2632f299123c2566543b21ca747b31318dcd15e9af29cab0793095fc30d074"
+  },
+  "ffmpeg_tool_sha256": {
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae"
+  },
+  "planned_cases": 96,
+  "planned_pairs": 16,
+  "foreground_components": 4,
+  "foregrounds_by_arm": {
+    "genuine": 16,
+    "synthetic": 16
+  },
+  "cases_by_condition": {
+    "clean": 32,
+    "snr_0db": 32,
+    "snr_plus5db": 32
+  },
+  "nominal_snr_db": {
+    "clean": null,
+    "snr_0db": 0,
+    "snr_plus5db": 5
+  },
+  "babble_pools": 4,
+  "talkers_per_pool": 6,
+  "eligible_vctk_recordings": 104,
+  "eligible_vctk_declared_voices": 26,
+  "babble_voices_previously_recorded": 24,
+  "sample_rate": 16000,
+  "samples_per_case": 48000,
+  "input_decode_limit_seconds": 30,
+  "overlap_scope": "Declared voices and available original/production PCM receipts for v172 holdout and v177 inputs. VCTK babble parents also exclude v58 byte/PCM hits.",
+  "new_neural_calls": 0,
+  "holdout_media_opened": false,
+  "holdout_scored": false,
+  "private_plan_sha256": "8832372e8884c03e8043424aebd3694df3346e0910e5d64bd4cc04eae39a1bb3"
+}

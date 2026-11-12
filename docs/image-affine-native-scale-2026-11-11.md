@@ -17,14 +17,16 @@ The 456 views include a rotated and resized sharp copy, a feathered copy, the un
 
 Both recipes assessed every view and passed the frozen coverage and false-flag criteria. Ordinary flags came from one source group, including its unmodified view in both formats. The selected recipe preserves the prior source-resolution smoothing. Scaling that smoothing to match the reduced image lost five useful localizations and removed no ordinary flags. These figures measure ordinary copying, including feathered blending. Neither the copied regions nor the flagged ordinary views establish AI involvement.
 
-The local CPU run took 227 seconds. The separate standard-library reviewer checked all 38 acquired source files, 456 view records, and 564 mask-side overlap records. The browser, PDF, signed package, and original-file replay use the same saved matrices and native masks. Older image evidence remains readable.
+The local CPU run took 227 seconds. A second run reproduced all 456 measurement records byte for byte. The separate standard-library reviewer checked all 38 acquired source files, 456 view records, and 564 mask-side overlap records.
+
+Four local app replays used simulated payment before analysis. The two feathered copies produced useful native masks and the matched originals produced no pair. The API, PDF, JSON, and signed package agreed. Original-file verification recomputed both masks for each positive. Older image evidence remains readable.
 
 ## Reproduce
 
 The public aggregate supplies the exact roster and intake. Copy each bound source to the corresponding `name` from the acquisition list and check its SHA-256. Use `thumb_url` or `original_url` from the corresponding roster slot according to the recorded delivery. Recreate the two JSON inputs with sorted keys, two-space indentation and a final newline.
 
 ```sh
-python - path/to/image-affine-native-scale-2026-11-11.json "$run_dir" <<'PY'
+python3 - path/to/image-affine-native-scale-2026-11-11.json "$run_dir" <<'PY'
 import json
 import sys
 from pathlib import Path

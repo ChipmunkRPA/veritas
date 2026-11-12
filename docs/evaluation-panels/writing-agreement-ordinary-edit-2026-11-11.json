@@ -1,0 +1,1500 @@
+{
+  "admission": {
+    "granite": {
+      "admitted": 7,
+      "rejected": 1
+    },
+    "tiny": {
+      "admitted": 0,
+      "rejected": 8
+    }
+  },
+  "checkpoints": {
+    "current": [
+      {
+        "file": "NOTICE",
+        "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+      },
+      {
+        "file": "config.json",
+        "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+      },
+      {
+        "file": "serving_head.json",
+        "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+      }
+    ],
+    "second": [
+      {
+        "file": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      {
+        "file": "config.json",
+        "sha256": "dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703"
+      },
+      {
+        "file": "detector-config.json",
+        "sha256": "e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+      }
+    ]
+  },
+  "files": 23,
+  "generation_sha256": "a9b4e76935ff34a27be7fe63323c5081c437b30912b2e697c1f60c46a5017197",
+  "generators": {
+    "prior_result_sha256": "4aa69d2df55a8a1db9080992272e370c827368337fae0a7469528e39724b38f7",
+    "runtime": {
+      "huggingface_hub": "2.4.0",
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "tokenizers": "0.23.3",
+      "transformers": "5.22.1"
+    },
+    "weights": {
+      "granite": {
+        "assets": [
+          {
+            "file": "README.md",
+            "sha256": "9e4fa0f08ae1b0675d6372ea1a226798b46e0b4e14fd09797ec287d618fe68db"
+          },
+          {
+            "file": "added_tokens.json",
+            "sha256": "bb33d55934aa82d29cc62f3d19cdbc60f315763f6ccee21bdfd8b3bde2f33d3b"
+          },
+          {
+            "file": "config.json",
+            "sha256": "ff28d67485d1a40022f0eb0c19b983c2680e90c25b690032e59e645f604f67d1"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "303127a244b0078878156c17229f36d11b7a3a3f8e47b7cfdbb304ff46be5030"
+          },
+          {
+            "file": "model.safetensors",
+            "sha256": "f37ff14b14f2db07b4fc476e57e619b038b264fcc9f0681bc13274772698ac93"
+          },
+          {
+            "file": "model.safetensors.index.json",
+            "sha256": "3fe2357794653e58654f56c0378e78e2a34bd6c9eac6b37563bc7896ccb54906"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "21ce694081bb9ae1bd4bc64549e72e0799ebb74705e6b650e3585d85b71ebdc1"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "91168e938f05796aa6dcca7e485e4b30ab52785320c7a6391ecef86e6c84681e"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "042af89a5a0e0a183ebd104a875b1bf4435a091b19f2b62aaa58af1c5ea97600"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "80ab859339a2525fdfbda14bc39df02dffb824aefdaf86426217bbb146d17e01"
+          }
+        ],
+        "license": "Apache-2.0",
+        "loader_aliases": {},
+        "quantized": "mlx-community/granite-3.3-2b-instruct-4bit",
+        "revision": "58246c5498495c14599525c852cfadb66c9f3084",
+        "typed_config_overrides": {},
+        "upstream": "ibm-granite/granite-3.3-2b-instruct",
+        "upstream_revision": "707f574c62054322f6b5b04b6d075f0a8f05e0f0"
+      },
+      "tiny": {
+        "assets": [
+          {
+            "file": "README.md",
+            "sha256": "e60b860e1802ed509ad287bb727012fddf79a02bab45d72cb8ef6150665a7145"
+          },
+          {
+            "file": "config.json",
+            "sha256": "cedb0e772aa0d6dcdb4bf3fcd6f2814ef3b103a12e6586ea553aeb812b3b2be2"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "82d96d7a9e6ced037f12394b7ea6a5b02e6ca87e0d11edaa8d60d9be857ce7db"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "5030b57187ef621d5e9f63cdd2e3531a9004f579326c0df62bc15ca9107582c3"
+          },
+          {
+            "file": "weights.00.safetensors",
+            "sha256": "5e84abc79956b48bb6e4a6c319bb6313aa6c0cbab34288e9f50d063854c486a6"
+          }
+        ],
+        "license": "Apache-2.0",
+        "loader_aliases": {
+          "weights.00.safetensors": "model.00.safetensors"
+        },
+        "quantized": "mlx-community/TinyLlama-1.1B-Chat-v1.0-4bit",
+        "revision": "01a708812690b4685ab18e3b0a27848f92c50746",
+        "typed_config_overrides": {},
+        "upstream": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        "upstream_revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6"
+      }
+    }
+  },
+  "independent_replay": {
+    "exact_windows": 92,
+    "source_versions_checked": 16,
+    "unique_inputs": 77,
+    "verified_files": 23,
+    "verified_scope_arms": 15
+  },
+  "method": {
+    "agreement": "Keep a current positive only if the second response on exactly the same native input is at or above .5.",
+    "current": "Use the first six source-ordered current responses at or above .5.",
+    "generation": "Replace only the original edited-position sentence. Attempt one rewrite per model. Require completed output, unchanged 4-sentence scope, and a valid non-copy rewrite.",
+    "human": "Use a pre-2020 revision pair with the same three surrounding sentences in the selected excerpt. Both versions are ordinary writing controls. The edited focus is the complete changed sentence.",
+    "second": "Use the first six source-ordered second responses at or above .5.",
+    "useful": "Use .30 non-whitespace character IoU between a selected full context and the exact replaced sentence. Also count exact focus selection separately, and distinguish wrong locations from unflagged positives.",
+    "validation": "No fitted point. Report both versions and paired flips separately. A default-policy transfer would need both generator families, no loss of useful positives and cleared human source groups in at least two publisher communities."
+  },
+  "outcomes": {
+    "academia": {
+      "agreement": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 2,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 1,
+            "flagged": 0,
+            "lost_useful": 1,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "current": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 2,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 1,
+            "files": 1,
+            "flagged": 1,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 1,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "second": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 2,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 1,
+            "flagged": 0,
+            "lost_useful": 1,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      }
+    },
+    "all": {
+      "agreement": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 8,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 8,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 8,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 7,
+            "flagged": 0,
+            "lost_useful": 1,
+            "unflagged": 7,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "current": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 1,
+          "no_flag_either": 7,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 1,
+        "roles": {
+          "before": {
+            "files": 8,
+            "flagged": 1
+          },
+          "edited": {
+            "files": 8,
+            "flagged": 1,
+            "human_edit_overlapped": 1
+          },
+          "granite": {
+            "exact_focus": 1,
+            "files": 7,
+            "flagged": 2,
+            "lost_useful": 0,
+            "unflagged": 5,
+            "useful": 1,
+            "wrong_location": 1
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "second": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 8,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 8,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 8,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 7,
+            "flagged": 0,
+            "lost_useful": 1,
+            "unflagged": 7,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      }
+    },
+    "history": {
+      "agreement": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 1,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 1,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 1,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 1,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "current": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 1,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 1,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 1,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 1,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "second": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 1,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 1,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 1,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 1,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      }
+    },
+    "workplace": {
+      "agreement": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 3,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 3,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 3,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 3,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 3,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "current": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 3,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 3,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 3,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 3,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 3,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "second": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 3,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 3,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 3,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 3,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 3,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      }
+    },
+    "writers": {
+      "agreement": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 2,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 2,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 2,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "current": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 1,
+          "no_flag_either": 1,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 1,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 1
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 1,
+            "human_edit_overlapped": 1
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 2,
+            "flagged": 1,
+            "lost_useful": 0,
+            "unflagged": 1,
+            "useful": 0,
+            "wrong_location": 1
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      },
+      "second": {
+        "human_before_to_after": {
+          "added": 0,
+          "flagged_both": 0,
+          "no_flag_either": 2,
+          "removed": 0
+        },
+        "human_source_groups_flagged": 0,
+        "roles": {
+          "before": {
+            "files": 2,
+            "flagged": 0
+          },
+          "edited": {
+            "files": 2,
+            "flagged": 0,
+            "human_edit_overlapped": 0
+          },
+          "granite": {
+            "exact_focus": 0,
+            "files": 2,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 2,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "tiny": {
+            "exact_focus": 0,
+            "files": 0,
+            "flagged": 0,
+            "lost_useful": 0,
+            "unflagged": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        }
+      }
+    }
+  },
+  "publisher_controls": {
+    "cases": 14,
+    "checkpoints": {
+      "current": [
+        {
+          "file": "NOTICE",
+          "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+        },
+        {
+          "file": "config.json",
+          "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+        },
+        {
+          "file": "serving_head.json",
+          "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+        }
+      ],
+      "second": [
+        {
+          "file": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "file": "config.json",
+          "sha256": "dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703"
+        },
+        {
+          "file": "detector-config.json",
+          "sha256": "e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+        }
+      ]
+    },
+    "code_sha256": "94e14d0541fd33e82797952cb03eab303f3fc1efb1327c819004cfe146438656",
+    "freeze_sha256": "de5167063baa5e1d7d17d3469f7ee66f2a90e101fb5aedeeaac2197583b790a9",
+    "independent_replay": {
+      "exact_windows": 172,
+      "unique_inputs": 115,
+      "verified_files": 14,
+      "verified_scope_arms": 12
+    },
+    "inputs": 115,
+    "method": "Confirmation-role eLife v301 inputs, previously unscored. Select four of the retained five paragraphs around the target, keeping both adjacent paragraphs. Measure exact current and second native contexts at the already fixed .5 point. Agreement keeps current responses when the same input is positive in the second check. Human cases only; report original, constructed copyedit and paragraph splice separately.",
+    "outcomes": {
+      "all": {
+        "arms": {
+          "agreement": {
+            "flagged_files": 7,
+            "flagged_groups": 3
+          },
+          "current": {
+            "flagged_files": 11,
+            "flagged_groups": 5
+          },
+          "second": {
+            "flagged_files": 14,
+            "flagged_groups": 7
+          }
+        },
+        "human_files": 14,
+        "human_groups": 7
+      },
+      "copyedit": {
+        "arms": {
+          "agreement": {
+            "flagged_files": 1,
+            "flagged_groups": 1
+          },
+          "current": {
+            "flagged_files": 1,
+            "flagged_groups": 1
+          },
+          "second": {
+            "flagged_files": 1,
+            "flagged_groups": 1
+          }
+        },
+        "human_files": 1,
+        "human_groups": 1
+      },
+      "human_paragraph_splice": {
+        "arms": {
+          "agreement": {
+            "flagged_files": 3,
+            "flagged_groups": 3
+          },
+          "current": {
+            "flagged_files": 5,
+            "flagged_groups": 5
+          },
+          "second": {
+            "flagged_files": 6,
+            "flagged_groups": 6
+          }
+        },
+        "human_files": 6,
+        "human_groups": 6
+      },
+      "original": {
+        "arms": {
+          "agreement": {
+            "flagged_files": 3,
+            "flagged_groups": 3
+          },
+          "current": {
+            "flagged_files": 5,
+            "flagged_groups": 5
+          },
+          "second": {
+            "flagged_files": 7,
+            "flagged_groups": 7
+          }
+        },
+        "human_files": 7,
+        "human_groups": 7
+      }
+    },
+    "prior_controls_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+    "prior_receipt_sha256": "a6c83bad00eddb4844bd76ac78116f2b3e49e52ab148f7818906b4e3d3029d73",
+    "readout_sha256": "727cb2b156043785ddb5b54b7128e9bf0cc356a6d5789a099daae1c4e80e6129",
+    "schema": "chipmunk.writing-agreement-elife-controls/1",
+    "scope_unavailable": {
+      "copyedit": 6,
+      "human_paragraph_splice": 1
+    },
+    "score_receipts": {
+      "current": {
+        "forwards": 29,
+        "seconds": 15.79,
+        "sha256": "15c0d79ff17dff9f47293f8077eb5bdd73965e5dbc48fe7a5b3beaf842a6a203"
+      },
+      "second": {
+        "forwards": 29,
+        "seconds": 101.828,
+        "sha256": "5ddff90ca29a411297cf2bb0f818516ebe05b10ac67d3841c2d63de13780a83b"
+      }
+    },
+    "windows": 172
+  },
+  "readout_sha256": "3e14882b942881d09f34131c1f710e852e0bb45695ded5eae9dd5149f714036c",
+  "schema": "chipmunk.writing-agreement-revision-transfer/1",
+  "score_receipts": {
+    "current": {
+      "forwards": 20,
+      "seconds": 9.106,
+      "sha256": "3338429f2ea545b048c0e303367b3a43a752deeacb6a4e6d42c3bee963460d7d"
+    },
+    "second": {
+      "forwards": 20,
+      "seconds": 50.974,
+      "sha256": "84b549c0efc4e36d76dad05252677dec1d6360ef675287199387c2727793d1e3"
+    }
+  },
+  "scoring_sha256": "63dcf6e1a9ceb40048228184a96185d666f5da8c7d5a831fa3af28b75a72637c",
+  "sources": {
+    "dispositions": {
+      "18F": {
+        "no_disjoint_qualifying_revision": 8
+      },
+      "academia": {
+        "admitted": 2,
+        "no_disjoint_qualifying_revision": 36
+      },
+      "history": {
+        "admitted": 1,
+        "no_disjoint_qualifying_revision": 35
+      },
+      "workplace": {
+        "admitted": 3,
+        "no_disjoint_qualifying_revision": 14,
+        "quota": 22
+      },
+      "writers": {
+        "admitted": 2,
+        "no_disjoint_qualifying_revision": 32
+      }
+    },
+    "exposure_packets": [
+      {
+        "matched_sources": 0,
+        "packet": "previous-agreement",
+        "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+        "text_entries": 100
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v301",
+        "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+        "text_entries": 12
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v286",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v272",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai-v257",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      }
+    ],
+    "groups": [
+      {
+        "after_sentence_index": 7,
+        "after_sentences_sha256": [
+          "9e03b86cc299816d4239b83277f336e52a817cfbbd307648fa95c666d9405f06",
+          "6dd9695d7fb0b5aab7576a1778ee041cdb13b5c8aa6ca2503346fbf2c98e6369",
+          "99bdd9882dec8f5460f472a8354e3b5a1ea32bd0fec72a21f4a5aabcaa05bfd0",
+          "fea4b762a5b35423e2dc618dcc4eb6cb533f8cc619bf36732e82b61c754e5a61"
+        ],
+        "before_sentence_index": 7,
+        "before_sentences_sha256": [
+          "9e03b86cc299816d4239b83277f336e52a817cfbbd307648fa95c666d9405f06",
+          "6dd9695d7fb0b5aab7576a1778ee041cdb13b5c8aa6ca2503346fbf2c98e6369",
+          "492e588b8463daeadbfaa635b5824d39de36ff284d938631ba4180ed53be5968",
+          "fea4b762a5b35423e2dc618dcc4eb6cb533f8cc619bf36732e82b61c754e5a61"
+        ],
+        "group": "academia-77540",
+        "publisher": "academia",
+        "revisions": {
+          "after": {
+            "attribution": "Sana",
+            "body_sha256": "bb23110d0dc12d6d533678cfacf4bfc17f986d879f856c571641f158951f5a0c",
+            "contributor_url": "https://academia.stackexchange.com/users/62354/sana",
+            "date": "2016-09-29T04:24:17+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "68d05b02f80d54e7c73474b23c28d2fee66d49d07f314295babffedbcc59843f",
+            "record": "academia-30-1.json",
+            "revision": "DD27F849-D35B-4323-A879-E66E2E4AFC09",
+            "url": "https://academia.stackexchange.com/revisions/77540/2"
+          },
+          "before": {
+            "attribution": "Sana",
+            "body_sha256": "b83535a9850872032f652daf333b5830062caa3814867161f3b1cebd31dc4c48",
+            "contributor_url": "https://academia.stackexchange.com/users/62354/sana",
+            "date": "2016-09-29T04:13:35+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "68d05b02f80d54e7c73474b23c28d2fee66d49d07f314295babffedbcc59843f",
+            "record": "academia-30-1.json",
+            "revision": "C89F09EB-A347-440B-9087-39E727D8FAA8",
+            "url": "https://academia.stackexchange.com/revisions/77540/1"
+          }
+        },
+        "target": 2,
+        "url": "https://academia.stackexchange.com/questions/77540"
+      },
+      {
+        "after_sentence_index": 1,
+        "after_sentences_sha256": [
+          "dce6d9a324c4c6efbc590681d12e82ff25f2b1d23919726f8c4e5d2b18c27626",
+          "c14a76cf25de6a392b011d2724b796e4a7ee48f28dd72ad93335c90e56767037",
+          "82854ef9fea75799b1e8f0fbe346dd52e5d7fc1e31b3ab53fc5d6e0b3da604c6",
+          "286133294b2c05e7dd41c8bcbddd59d6b176d0f9cbb8366e6dcb2f72e6ab11d9"
+        ],
+        "before_sentence_index": 1,
+        "before_sentences_sha256": [
+          "dce6d9a324c4c6efbc590681d12e82ff25f2b1d23919726f8c4e5d2b18c27626",
+          "c14a76cf25de6a392b011d2724b796e4a7ee48f28dd72ad93335c90e56767037",
+          "8518d81c242bb5aacd01bcf30df58465bcbbe2c84fb48c98e5e4fd0c62ec3cfc",
+          "286133294b2c05e7dd41c8bcbddd59d6b176d0f9cbb8366e6dcb2f72e6ab11d9"
+        ],
+        "group": "academia-98176",
+        "publisher": "academia",
+        "revisions": {
+          "after": {
+            "attribution": "psmears",
+            "body_sha256": "2921e9979be9ade38a6405ecfc128094d37005b80177193f5d243b50d26436c1",
+            "contributor_url": "https://academia.stackexchange.com/users/39551/psmears",
+            "date": "2017-11-06T14:09:34+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "35e359c55515a30363f9b3812d3a30c3b82b2c1bdbff9dfcc3d3124142edace4",
+            "record": "academia-0-1.json",
+            "revision": "965A6309-587F-4B5D-A251-34FAE62C50BA",
+            "url": "https://academia.stackexchange.com/revisions/98176/11"
+          },
+          "before": {
+            "attribution": "apetros85",
+            "body_sha256": "fe2572f1fea9a76e972a6926696d4145ab3f45235d77ddc7f9da6e382450d612",
+            "contributor_url": "https://academia.stackexchange.com/users/42952/apetros85",
+            "date": "2017-11-06T07:59:59+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "35e359c55515a30363f9b3812d3a30c3b82b2c1bdbff9dfcc3d3124142edace4",
+            "record": "academia-0-1.json",
+            "revision": "27A0E4EA-7E2A-4043-8155-026A45709AF0",
+            "url": "https://academia.stackexchange.com/revisions/98176/10"
+          }
+        },
+        "target": 2,
+        "url": "https://academia.stackexchange.com/questions/98176"
+      },
+      {
+        "after_sentence_index": 4,
+        "after_sentences_sha256": [
+          "2545aa1f725835643e1e4f37c32ca4ca48242029cb0ab0009063cd82963430e7",
+          "d605136071646d27738548959c70ee7c9dd3aadd511ce570d7c07202a696c612",
+          "17f952ce7e1aedcd62df2741395cd090070841e675ce2b3a0cd77006aae40274",
+          "10fc6a46c1285c18a9ef42344e8f2952c933e6c4409eda59531545bc8575d4c5"
+        ],
+        "before_sentence_index": 4,
+        "before_sentences_sha256": [
+          "2545aa1f725835643e1e4f37c32ca4ca48242029cb0ab0009063cd82963430e7",
+          "d605136071646d27738548959c70ee7c9dd3aadd511ce570d7c07202a696c612",
+          "f45de46b48851a82f0a6702092d159a1caf3966f9ca6d405d7255ef45ad5e0bf",
+          "10fc6a46c1285c18a9ef42344e8f2952c933e6c4409eda59531545bc8575d4c5"
+        ],
+        "group": "history-48634",
+        "publisher": "history",
+        "revisions": {
+          "after": {
+            "attribution": "ed.hank",
+            "body_sha256": "2ccf36da3be7e957b659b0ae68a11d5d76c5ecc480ecccdb3e647dd5bdb61e20",
+            "contributor_url": "https://history.stackexchange.com/users/15901/ed-hank",
+            "date": "2018-10-11T17:59:44+00:00",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "publisher_record_sha256": "60b39924aee9d8bf52a6bba0a89e921a9d8b98ecf3ebaec222a8a0aaa8233bc3",
+            "record": "history-20-1.json",
+            "revision": "C265BFBD-6D70-43F9-9207-633F8AC54E06",
+            "url": "https://history.stackexchange.com/revisions/48634/5"
+          },
+          "before": {
+            "attribution": "ed.hank",
+            "body_sha256": "2abe47a595c9cbb2f9c8f0052997f786be3586c2be39efc154bc386558ec8f26",
+            "contributor_url": "https://history.stackexchange.com/users/15901/ed-hank",
+            "date": "2018-10-11T15:46:31+00:00",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "publisher_record_sha256": "60b39924aee9d8bf52a6bba0a89e921a9d8b98ecf3ebaec222a8a0aaa8233bc3",
+            "record": "history-20-1.json",
+            "revision": "55BC478D-6AF1-4405-B476-C666D65122AE",
+            "url": "https://history.stackexchange.com/revisions/48634/4"
+          }
+        },
+        "target": 2,
+        "url": "https://history.stackexchange.com/questions/48634"
+      },
+      {
+        "after_sentence_index": 3,
+        "after_sentences_sha256": [
+          "5843990ee5a8e36175f324d4a5cea6581b896ac7e84d49979be07ee907a6a681",
+          "9a109568b346015167e637e8e6275b33fad003e8e37b9b9fcd615324a9c877a8",
+          "d3aa3109b062abbb934a78024d2a4a459208f6885da9f972ae80c6bd5dd7fed8",
+          "f19f69353a9590bcbb9f99ac1750ee2fc4c9096fcdebd859352a9177828c92b3"
+        ],
+        "before_sentence_index": 3,
+        "before_sentences_sha256": [
+          "5843990ee5a8e36175f324d4a5cea6581b896ac7e84d49979be07ee907a6a681",
+          "85446e541eb64ae7b9719c340cdae9949194820e84ffc571b8d19abcce92cb85",
+          "d3aa3109b062abbb934a78024d2a4a459208f6885da9f972ae80c6bd5dd7fed8",
+          "f19f69353a9590bcbb9f99ac1750ee2fc4c9096fcdebd859352a9177828c92b3"
+        ],
+        "group": "workplace-62879",
+        "publisher": "workplace",
+        "revisions": {
+          "after": {
+            "attribution": "Sergey",
+            "body_sha256": "42d0eeed0458b3e66f91fc2ea9e5febc6122ae16adaa631f41afdf0eda01340a",
+            "contributor_url": "https://workplace.stackexchange.com/users/47409/sergey",
+            "date": "2016-03-01T18:04:13+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "3d7ab86bc19d888a18460d6f2a7c022e8f063ee9db39439369fe91698deb55e3",
+            "record": "workplace-20-2.json",
+            "revision": "C0EC4DCC-2192-47D6-B409-E980D67FF364",
+            "url": "https://workplace.stackexchange.com/revisions/62879/4"
+          },
+          "before": {
+            "attribution": "Sergey",
+            "body_sha256": "98b3c34a574d51a544e2e0542cc2ed29e47c54b0193fb3d34ff413da08ed8f8f",
+            "contributor_url": "https://workplace.stackexchange.com/users/47409/sergey",
+            "date": "2016-03-01T18:00:10+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "3d7ab86bc19d888a18460d6f2a7c022e8f063ee9db39439369fe91698deb55e3",
+            "record": "workplace-20-2.json",
+            "revision": "F4B10F54-6E0D-4C12-8D8A-E9D2D5CA5369",
+            "url": "https://workplace.stackexchange.com/revisions/62879/3"
+          }
+        },
+        "target": 1,
+        "url": "https://workplace.stackexchange.com/questions/62879"
+      },
+      {
+        "after_sentence_index": 13,
+        "after_sentences_sha256": [
+          "f45ab88474f98be8b6fdbd80493ecf8fada105739795710f5f30ff5bb4a7ee75",
+          "b7ed75231f82f2f38520da710a52795d28c40506d90ae0d7659dcd4e92b5a7e3",
+          "493dd161113794d8273031e605af9caa39634b5dcdcbb810785aca6ab4e38b9a",
+          "98e93c736acce1ff00acb66a6ce7e509d7366986d4e4476fb527f70521d6edc3"
+        ],
+        "before_sentence_index": 13,
+        "before_sentences_sha256": [
+          "f45ab88474f98be8b6fdbd80493ecf8fada105739795710f5f30ff5bb4a7ee75",
+          "b7ed75231f82f2f38520da710a52795d28c40506d90ae0d7659dcd4e92b5a7e3",
+          "a805c58e5160c59660ee3d1fd9da65f755abf0a5dcc9809d61c8685273110d14",
+          "98e93c736acce1ff00acb66a6ce7e509d7366986d4e4476fb527f70521d6edc3"
+        ],
+        "group": "workplace-84746",
+        "publisher": "workplace",
+        "revisions": {
+          "after": {
+            "attribution": "Anoplexian",
+            "body_sha256": "456da1fc72c78bc3cc8266afb8bdde8a93d559581059cc82721ea3115de39134",
+            "contributor_url": "https://workplace.stackexchange.com/users/47407/anoplexian",
+            "date": "2017-02-09T16:08:06+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "1b139c7a90d59f61c9501f5ab5c016721d1a2e27ec5738480aebb49160f37d5b",
+            "record": "workplace-20-1.json",
+            "revision": "940F88F0-02FB-4812-9926-337EEA120399",
+            "url": "https://workplace.stackexchange.com/revisions/84746/3"
+          },
+          "before": {
+            "attribution": "David K",
+            "body_sha256": "492fd923a1916f191ec2c58220390f1c3567df6c040955c57ee4b653c4abd44d",
+            "contributor_url": "https://workplace.stackexchange.com/users/16983/david-k",
+            "date": "2017-02-09T12:56:22+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "1b139c7a90d59f61c9501f5ab5c016721d1a2e27ec5738480aebb49160f37d5b",
+            "record": "workplace-20-1.json",
+            "revision": "E6DBC2FF-29E3-4273-A463-7F25B4E29C4F",
+            "url": "https://workplace.stackexchange.com/revisions/84746/2"
+          }
+        },
+        "target": 2,
+        "url": "https://workplace.stackexchange.com/questions/84746"
+      },
+      {
+        "after_sentence_index": 0,
+        "after_sentences_sha256": [
+          "2a24817363fae934228d41f509b7f28b5db3e02dcd9286ff144497eb248129e2",
+          "719067dbc7e6f4252140fc739f5c7710177edc26450ee244f6e3d4b96deab6a6",
+          "fa227485d64439a5b152eccad21deb80a9667b86a8bb5278bc8bfb736c17887b",
+          "d0cbfaabfc6dbf7173bbfd4434c380ea8e1e6202bcac83a87b2ab5f33f64fbd3"
+        ],
+        "before_sentence_index": 0,
+        "before_sentences_sha256": [
+          "2a24817363fae934228d41f509b7f28b5db3e02dcd9286ff144497eb248129e2",
+          "719067dbc7e6f4252140fc739f5c7710177edc26450ee244f6e3d4b96deab6a6",
+          "9e4c47bff65a2262688b9f4a2c1452b2ba2a08e920fc9ec25a7ae279d7a3ccfb",
+          "d0cbfaabfc6dbf7173bbfd4434c380ea8e1e6202bcac83a87b2ab5f33f64fbd3"
+        ],
+        "group": "workplace-90692",
+        "publisher": "workplace",
+        "revisions": {
+          "after": {
+            "attribution": "Lightness Races in Orbit",
+            "body_sha256": "6b3c88d0829c7e1e338a2104e64211342b3e103ac38148f9eab83e2aeae2d40c",
+            "contributor_url": "https://workplace.stackexchange.com/users/7260/lightness-races-in-orbit",
+            "date": "2017-05-12T13:55:49+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "110343d726dcf155af240117bc2c5e6653d4d66cba7d010bca72906cf07f2c8f",
+            "record": "workplace-0-1.json",
+            "revision": "67F39E18-304F-4365-A208-D923ABB52AD2",
+            "url": "https://workplace.stackexchange.com/revisions/90692/2"
+          },
+          "before": {
+            "attribution": "Kevin Xu",
+            "body_sha256": "10245376fe0b2c9c6d24b0b98699953a4a38a9becd4145aaeb6365625fdd2563",
+            "contributor_url": "https://workplace.stackexchange.com/users/37216/kevin-xu",
+            "date": "2017-05-09T20:30:43+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "110343d726dcf155af240117bc2c5e6653d4d66cba7d010bca72906cf07f2c8f",
+            "record": "workplace-0-1.json",
+            "revision": "73AE03A8-886F-44B4-9E16-0FC7EF7BEEDC",
+            "url": "https://workplace.stackexchange.com/revisions/90692/1"
+          }
+        },
+        "target": 2,
+        "url": "https://workplace.stackexchange.com/questions/90692"
+      },
+      {
+        "after_sentence_index": 0,
+        "after_sentences_sha256": [
+          "dbb5a40bc15767b4f0e45888b9613af73630fc46432c03cc7a3838542a85e0a0",
+          "22ed924d5163bef44fc14b4288e4d429c916aa22eb4d27eece7de0fe3e3746f4",
+          "7ce8142c0e706e1ceb005536c613af863f63f84ed0c0667a0dcf7e8ceab78809",
+          "033a9c7ce66d70d0b97d8d609bdeda543a468916a6aca5bee5efb0da46ec5e7c"
+        ],
+        "before_sentence_index": 0,
+        "before_sentences_sha256": [
+          "dbb5a40bc15767b4f0e45888b9613af73630fc46432c03cc7a3838542a85e0a0",
+          "562a385028169580773ebf8cd9a7fac01aa18d4eb612634e26c7891e76f0ec6b",
+          "7ce8142c0e706e1ceb005536c613af863f63f84ed0c0667a0dcf7e8ceab78809",
+          "033a9c7ce66d70d0b97d8d609bdeda543a468916a6aca5bee5efb0da46ec5e7c"
+        ],
+        "group": "writers-32135",
+        "publisher": "writers",
+        "revisions": {
+          "after": {
+            "attribution": "iiRosie1",
+            "body_sha256": "2720bd879369d02be8296e35533bb3006adf60376c62fd1aab6668cb0d51475c",
+            "contributor_url": "https://writing.stackexchange.com/users/28488/iirosie1",
+            "date": "2017-12-31T14:23:16+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "191dc65fc85fcf70fe5cb126e081eac096949d07d48bf06d92cdf0d5eae56bb3",
+            "record": "writers-10-1.json",
+            "revision": "049E66D0-F0AF-436D-8D02-0214FFBE779A",
+            "url": "https://writing.stackexchange.com/revisions/32135/10"
+          },
+          "before": {
+            "attribution": "iiRosie1",
+            "body_sha256": "1bc889d60cef538f3b033be3e5c38c532e71c0f8e9a859a1a89ab944f5639739",
+            "contributor_url": "https://writing.stackexchange.com/users/28488/iirosie1",
+            "date": "2017-12-31T00:23:27+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "191dc65fc85fcf70fe5cb126e081eac096949d07d48bf06d92cdf0d5eae56bb3",
+            "record": "writers-10-1.json",
+            "revision": "5E8E6AC6-88B8-4BA8-B9C2-E7A307D0EEB9",
+            "url": "https://writing.stackexchange.com/revisions/32135/9"
+          }
+        },
+        "target": 1,
+        "url": "https://writing.stackexchange.com/questions/32135"
+      },
+      {
+        "after_sentence_index": 3,
+        "after_sentences_sha256": [
+          "bc6cfbd2084cd68ab75614f200a4ae2bc4def14faf076cf022a0ccbf07a496bf",
+          "b17f88d24ae5445765fc43e3a2791f32ee470fb6e60ec786525a909d0cb1a499",
+          "f3ad6f6bcba12004fb37762f12c61451ceaf1cf0e0af81d5467ba6e515af725a",
+          "e9b8b6f39980b9bd0a93cc7b44172560dca10b43a5d537150a6d6502305d2cbb"
+        ],
+        "before_sentence_index": 3,
+        "before_sentences_sha256": [
+          "bc6cfbd2084cd68ab75614f200a4ae2bc4def14faf076cf022a0ccbf07a496bf",
+          "b17f88d24ae5445765fc43e3a2791f32ee470fb6e60ec786525a909d0cb1a499",
+          "5572024dec0fd6f01b3043c06d9e1049cdf6bea19b82b9497a9fe811c8d31451",
+          "e9b8b6f39980b9bd0a93cc7b44172560dca10b43a5d537150a6d6502305d2cbb"
+        ],
+        "group": "writers-32608",
+        "publisher": "writers",
+        "revisions": {
+          "after": {
+            "attribution": "Sweet_Cherry",
+            "body_sha256": "99204153ad351efcc688ed7da01e4862c89a02bb97f9a3f18278f0e6c7bb2bed",
+            "contributor_url": "https://writing.stackexchange.com/users/28618/sweet-cherry",
+            "date": "2018-01-18T05:03:35+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "191dc65fc85fcf70fe5cb126e081eac096949d07d48bf06d92cdf0d5eae56bb3",
+            "record": "writers-10-1.json",
+            "revision": "6A0E3164-7B58-47D9-852F-3336746452B5",
+            "url": "https://writing.stackexchange.com/revisions/32608/3"
+          },
+          "before": {
+            "attribution": "GGx",
+            "body_sha256": "3a983b48ac1bfe7261aec297103d18078fb71e6d20fd4529b454c33dd5db38aa",
+            "contributor_url": "https://writing.stackexchange.com/users/28942/ggx",
+            "date": "2018-01-17T13:40:18+00:00",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+            "publisher_record_sha256": "191dc65fc85fcf70fe5cb126e081eac096949d07d48bf06d92cdf0d5eae56bb3",
+            "record": "writers-10-1.json",
+            "revision": "7F368262-19E5-4F24-BA1C-692B9DD1C9BB",
+            "url": "https://writing.stackexchange.com/revisions/32608/1"
+          }
+        },
+        "target": 2,
+        "url": "https://writing.stackexchange.com/questions/32608"
+      }
+    ],
+    "originals_sha256": "126a3724c34ce40ac149d220c813651aceb8be61822163e57a2fb841fd46723c",
+    "selected": {
+      "academia": 2,
+      "history": 1,
+      "workplace": 3,
+      "writers": 2
+    },
+    "source_code_sha256": "95a173cf6c2b571a523563f468c817ed41db07c05adedeb623fadd9973b68825",
+    "source_plan_sha256": "2ce4fb864f29d68708d094bda017d5b4e1b6d84d5ae275e0b64b63b7ffba744f"
+  },
+  "third_generator": {
+    "admitted": 3,
+    "cases_sha256": "cd1399748f95a0f2249836bf204f33aded373222e59fcd4f6011338d70b018e7",
+    "code_sha256": "e8d33ed1e68c2a0bf925727a6bef7f19c73e2b852b8e83e6d46653f7d956d75e",
+    "freeze_sha256": "0b80ad241ac79d2aa92f2679d105d4306d93b341b73f21c635bbc0db5dac4ddc",
+    "generated_sha256": "da600b93aa182bfc4cddc66ab626b5d314eaa40a47ff96aa6f8de6d7a847a19d",
+    "independent_replay": {
+      "unique_inputs": 12,
+      "verified_attempts": 8,
+      "verified_files": 3
+    },
+    "initial_result_sha256": "71544c207b3e11ef188a3233fe8ea15a15caacc64b5a00e31e96a2ad700dd5ac",
+    "method": "Add one frozen OLMo rewrite attempt per original revision target after the initial TinyLlama failures. Retain the completed initial study and every target. Use the same generation admission and exact-window comparison. This measures another family on the same known sources and supplies no fresh publisher replication.",
+    "model": {
+      "assets": [
+        {
+          "file": "README.md",
+          "sha256": "47770c83c8b55a3df787804cefdab1be8534b0966340078b35a397981530d33a"
+        },
+        {
+          "file": "config.json",
+          "sha256": "9b29aa9ff2372207aee4a6ef36e39d439df10518b172401f12c320334140f9cc"
+        },
+        {
+          "file": "generation_config.json",
+          "sha256": "437b97826bb4430c205083a0986fbe31f4959cffbe445e47fb7c5192fdcb8d58"
+        },
+        {
+          "file": "merges.txt",
+          "sha256": "b6fe424e334903f7fb84d3a106d9730455f4744b9fe3c21ee136d97a00e72502"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "bd4ee5b47150d425258009e43d1e69d224d95b67bdee9d846c71780c4bed078d"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "sha256": "78afb564e81264029b25f9caf24bda2521d5bdaeff5cd3fdbc01d3da2e8ce2f2"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "73fd5254624f39a88e3faac6a8e11300fc3c735ed37880d4f4f08db898eaecca"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "50c412c57d832057a3d5db42064c741f751e570f7c8788f037bfb0d2dd6e5f49"
+        },
+        {
+          "file": "vocab.json",
+          "sha256": "9e14712c91b37c7aab74b1306baa46ac342d620637a4b44523cdc3aec7d24195"
+        }
+      ],
+      "license": "Apache-2.0",
+      "loader_aliases": {},
+      "quantized": "ekryski/OLMo-2-0425-1B-Instruct-4bit",
+      "revision": "bb6c2410107c9b1d0f50126955378bc0aa2237cb",
+      "typed_config_overrides": {
+        "attention_bias": false,
+        "tie_word_embeddings": false,
+        "use_cache": false
+      },
+      "upstream": "allenai/OLMo-2-0425-1B-Instruct",
+      "upstream_revision": "48d788eca847d4d7548f375ad03d3c9312f6139e"
+    },
+    "originals_sha256": "126a3724c34ce40ac149d220c813651aceb8be61822163e57a2fb841fd46723c",
+    "outcomes": {
+      "agreement": {
+        "exact_focus": 0,
+        "flagged": 0,
+        "lost_useful": 1,
+        "unflagged": 3,
+        "useful": 0,
+        "wrong_location": 0
+      },
+      "current": {
+        "exact_focus": 0,
+        "flagged": 2,
+        "lost_useful": 0,
+        "unflagged": 1,
+        "useful": 1,
+        "wrong_location": 1
+      },
+      "second": {
+        "exact_focus": 0,
+        "flagged": 0,
+        "lost_useful": 1,
+        "unflagged": 3,
+        "useful": 0,
+        "wrong_location": 0
+      }
+    },
+    "planned": 8,
+    "prompt": "Rewrite this sentence in different words, preserving all facts, names and numbers. Return only one complete replacement sentence between {minimum} and {maximum} words. Use no labels, quotations or extra lines.\n\n{sentence}",
+    "readout_sha256": "862d9b87c1c27eee5865b264a5d91a50c4b82d914264b39b08644c13572260d0",
+    "runtime": {
+      "huggingface_hub": "2.4.0",
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "tokenizers": "0.23.3",
+      "transformers": "5.22.1"
+    },
+    "schema": "chipmunk.writing-agreement-revision-olmo/1",
+    "score_receipts": {
+      "current": {
+        "forwards": 3,
+        "seconds": 2.072,
+        "sha256": "74a8c1c13a1a5362d12ebdb2557fecc52dbe1954fc091f0331830dc538eb1924"
+      },
+      "second": {
+        "forwards": 3,
+        "seconds": 7.998,
+        "sha256": "9a0bd09b19165355cd404a1408968c98ba63887755d2bca8240c7c376ceaa813"
+      }
+    },
+    "seed": 280061,
+    "settings": {
+      "max_tokens": 96,
+      "temperature": 0.6,
+      "top_p": 0.9
+    },
+    "unique_inputs": 12
+  },
+  "unique_inputs": 77,
+  "windows": 92
+}

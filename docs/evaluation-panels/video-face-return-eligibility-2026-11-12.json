@@ -1,0 +1,204 @@
+{
+  "aggregate": {
+    "arms": {
+      "dense_after_sparse_unassessed": {
+        "added_source_groups": 0,
+        "added_useful": 0,
+        "advances": false,
+        "cut_flags": 0,
+        "cut_useful": 0,
+        "ordinary_flags": 0,
+        "ordinary_useful": 0,
+        "swap_flags": 0,
+        "swap_useful": 0
+      },
+      "eligible_before_rank": {
+        "added_source_groups": 0,
+        "added_useful": 0,
+        "advances": false,
+        "cut_flags": 0,
+        "cut_useful": 0,
+        "ordinary_flags": 0,
+        "ordinary_useful": 0,
+        "swap_flags": 0,
+        "swap_useful": 0
+      }
+    },
+    "baseline": {
+      "cut_cases": 10,
+      "cut_flags": 0,
+      "cut_useful": 0,
+      "ordinary_cases": 40,
+      "ordinary_flags": 4,
+      "ordinary_useful": 0,
+      "swap_cases": 30,
+      "swap_flags": 28,
+      "swap_useful": 28
+    },
+    "protocol": {
+      "arms": {
+        "dense_after_sparse_unassessed": "When the 8 Hz pass completed exact measurements but no guarded context existed, attempt the unchanged 12.5 Hz method. Do not run after missing native clocks, multiple faces, partial decode, or a selected result.",
+        "eligible_before_rank": "When production selected no short interval, rank the already measured candidates that first satisfy the same duration, point and coarse non-duplication criteria. Try the measured sparse pass before the measured dense pass. Keep all production ranges."
+      },
+      "controls": {
+        "cut": [
+          77,
+          87
+        ],
+        "jump": [
+          63,
+          69
+        ],
+        "light": [
+          60,
+          70
+        ],
+        "original": null,
+        "recompressed": null
+      },
+      "gate": {
+        "maximum_new_cut_flags": 0,
+        "maximum_new_ordinary_flags": 1,
+        "minimum_new_useful": 3,
+        "minimum_source_groups": 2
+      },
+      "localization": "Native half-open IoU at least one half. Count each transformed delivery and each group separately. These review ranges carry zero AI-confidence weight.",
+      "positives": {
+        "medium": [
+          46,
+          62
+        ],
+        "six_even": [
+          50,
+          56
+        ],
+        "six_odd": [
+          63,
+          69
+        ],
+        "ten_odd": [
+          77,
+          87
+        ]
+      },
+      "profile": "exact upright 640x360 H.264 yuv420p at 25 fps, 120 pictures",
+      "schema": "chipmunk.video-face-return-eligibility/1",
+      "source_exactness": "Before any scoring, try the named interval with its assigned publisher variant then the other variant. If a native picture is identical, try intervals shifted by +2 then -2 pictures with the same variant order. Retain unmatched planned cases as source-unavailable.",
+      "sources": "Use every complete remaining native recording outside the 77 documented source and donor groups in earlier localization studies, excluding aliases. Previous general archive exposure is possible."
+    },
+    "score_seal": {
+      "cases": 80,
+      "elapsed_s": 376.1041469160009,
+      "freeze_sha256": "13e3c903ace039b837c66f3c09d5ba0b4f57c8fde5f2dbcf15cd944bb4ab8e59",
+      "journal_sha256": "cd94291733b3ec1c2a195baa566a3701891333367837cecf4e06128bebdd2efc"
+    },
+    "serving_change": false,
+    "source_unavailable_cases": [
+      {
+        "condition": "medium",
+        "group": 0,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 1,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 2,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 3,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 4,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 5,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 6,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 7,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 8,
+        "nominal": [
+          46,
+          62
+        ]
+      },
+      {
+        "condition": "medium",
+        "group": 9,
+        "nominal": [
+          46,
+          62
+        ]
+      }
+    ]
+  },
+  "coarse_input_pictures_verified": 363,
+  "coverage": {
+    "dense/localized": 18,
+    "dense/no_distinct_range": 61,
+    "dense/not_run": 1,
+    "expanded/insufficient_same_shot_context": 1,
+    "expanded/not_run": 79,
+    "sparse/insufficient_same_shot_context": 1,
+    "sparse/localized": 18,
+    "sparse/no_distinct_range": 61
+  },
+  "decisions_replayed": 80,
+  "independent_authoring": {
+    "counts": {
+      "authored_intervals": 60,
+      "byte_identical_mp4s": 80,
+      "native_original_pictures": 1200,
+      "native_publisher_swap_pictures": 220,
+      "source_unavailable": 10
+    },
+    "media_sha256": "f3eebf77318d49fd149e1f0ed5b7d04c00d6805cbba4947ee7f6148a21d24fa3",
+    "status": "verified"
+  },
+  "recovered_range_source_pictures_verified": 0,
+  "selected_ranges": []
+}

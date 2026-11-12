@@ -1,0 +1,763 @@
+{
+  "app_measurement_preview": {
+    "n": 2,
+    "results": [
+      {
+        "dense_range_s": null,
+        "elapsed_seconds": 2.643,
+        "measurement_status": "no_distinct_range",
+        "role": "genuine_original"
+      },
+      {
+        "dense_range_s": [
+          2.16,
+          2.4
+        ],
+        "elapsed_seconds": 2.707,
+        "measurement_status": "localized",
+        "role": "selected_swap_retained"
+      }
+    ],
+    "status": "verified"
+  },
+  "development": {
+    "current": {
+      "advances": false,
+      "correct_swap_sources": 1,
+      "counts": {
+        "camera_punch": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "jump_cut": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "light": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "original": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "recompressed": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 2
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 4,
+          "correct": 2,
+          "dense_ranges": 2,
+          "exact_range_losses": 0,
+          "flagged": 2,
+          "measured_dense": 2,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": false,
+        "minimum_useful_swaps": false,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    },
+    "lower_quartile": {
+      "advances": false,
+      "correct_swap_sources": 1,
+      "counts": {
+        "camera_punch": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "jump_cut": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "light": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "original": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "recompressed": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 2
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 4,
+          "correct": 2,
+          "dense_ranges": 2,
+          "exact_range_losses": 0,
+          "flagged": 2,
+          "measured_dense": 2,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": false,
+        "minimum_useful_swaps": false,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    },
+    "median": {
+      "advances": false,
+      "correct_swap_sources": 1,
+      "counts": {
+        "camera_punch": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "jump_cut": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "light": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "original": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 1
+        },
+        "recompressed": {
+          "cases": 2,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 2
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 4,
+          "correct": 2,
+          "dense_ranges": 2,
+          "exact_range_losses": 0,
+          "flagged": 2,
+          "measured_dense": 2,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": false,
+        "minimum_useful_swaps": false,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    }
+  },
+  "eligible_source_groups": 13,
+  "excluded_prior_source_groups": 41,
+  "freeze_sha256": "bc8001b9525767a62ca75d4256ab7e882626893fea8f67cd1b37cb1608eb0198",
+  "held": {
+    "current": {
+      "advances": false,
+      "correct_swap_sources": 5,
+      "counts": {
+        "camera_punch": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "distinct_cross_cut": {
+          "cases": 8,
+          "dense_ranges": 0,
+          "flagged": 4,
+          "measured_dense": 8
+        },
+        "jump_cut": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "light": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "original": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "recompressed": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 1,
+          "measured_dense": 5
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 12,
+          "correct": 10,
+          "dense_ranges": 10,
+          "exact_range_losses": 0,
+          "flagged": 10,
+          "measured_dense": 10,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": true,
+        "minimum_useful_swaps": true,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    },
+    "lower_quartile": {
+      "advances": false,
+      "correct_swap_sources": 5,
+      "counts": {
+        "camera_punch": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "distinct_cross_cut": {
+          "cases": 8,
+          "dense_ranges": 0,
+          "flagged": 4,
+          "measured_dense": 8
+        },
+        "jump_cut": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "light": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "original": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "recompressed": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 1,
+          "measured_dense": 5
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 12,
+          "correct": 10,
+          "dense_ranges": 10,
+          "exact_range_losses": 0,
+          "flagged": 10,
+          "measured_dense": 10,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": true,
+        "minimum_useful_swaps": true,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    },
+    "median": {
+      "advances": false,
+      "correct_swap_sources": 5,
+      "counts": {
+        "camera_punch": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "distinct_cross_cut": {
+          "cases": 8,
+          "dense_ranges": 0,
+          "flagged": 4,
+          "measured_dense": 8
+        },
+        "jump_cut": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "light": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "original": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 0,
+          "measured_dense": 5
+        },
+        "recompressed": {
+          "cases": 6,
+          "dense_ranges": 0,
+          "flagged": 1,
+          "measured_dense": 5
+        },
+        "similar_cross_cut": {
+          "cases": 4,
+          "dense_ranges": 0,
+          "flagged": 2,
+          "measured_dense": 2
+        },
+        "swap": {
+          "cases": 12,
+          "correct": 10,
+          "dense_ranges": 10,
+          "exact_range_losses": 0,
+          "flagged": 10,
+          "measured_dense": 10,
+          "useful_losses": 0
+        }
+      },
+      "cut_case_removals": 0,
+      "gate": {
+        "minimum_false_cut_fraction": false,
+        "minimum_false_cut_pair_sources": false,
+        "minimum_false_cut_suppression": false,
+        "minimum_swap_sources": true,
+        "minimum_useful_swaps": true,
+        "zero_useful_swap_losses": true
+      },
+      "removed_false_cross_cut_pairs": 0,
+      "removed_false_source_groups": 0
+    }
+  },
+  "held_motion_tagged_sources": 6,
+  "held_routing_coverage": {
+    "camera_punch": {
+      "dense_candidate_measured": 5,
+      "earlier_short_check_has_no_eligible_candidate": 1
+    },
+    "distinct_cross_cut": {
+      "dense_candidate_measured": 8
+    },
+    "jump_cut": {
+      "dense_candidate_measured": 5,
+      "earlier_short_check_has_no_eligible_candidate": 1
+    },
+    "light": {
+      "dense_candidate_measured": 5,
+      "earlier_short_check_has_no_eligible_candidate": 1
+    },
+    "original": {
+      "dense_candidate_measured": 5,
+      "earlier_short_check_has_no_eligible_candidate": 1
+    },
+    "recompressed": {
+      "dense_candidate_measured": 5,
+      "earlier_short_check_has_no_eligible_candidate": 1
+    },
+    "similar_cross_cut": {
+      "dense_candidate_measured": 2,
+      "earlier_short_check_has_no_eligible_candidate": 2
+    },
+    "swap": {
+      "dense_candidate_measured": 10,
+      "earlier_short_check_has_no_eligible_candidate": 2
+    }
+  },
+  "held_sampled_positions": 5346,
+  "held_scene_pair_distances": [
+    0.023284313725490193,
+    0.2863970588235294,
+    0.398733660130719
+  ],
+  "held_similar_pairs": 1,
+  "independent_replay": {
+    "aggregate_sha256": "71d9db4ea7fe90fb0ee25b86910fff7091f1e43e1602bfc1745bc328524ee086",
+    "counts": {
+      "byte_identical_reconstructions": 54,
+      "decoded_held_pictures": 6480,
+      "verified_authored_intervals": 42,
+      "verified_decisions": 162,
+      "verified_face_crops": 30,
+      "verified_scene_boundary_pictures": 40,
+      "verified_source_pictures": 792
+    },
+    "examples": {
+      "swap": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "authored_s": [
+          "54/25",
+          "12/5"
+        ],
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      }
+    },
+    "status": "verified"
+  },
+  "known_source_key_overlap_with_prior_or_between_roles": 0,
+  "protocol": {
+    "advancement": {
+      "minimum_false_cut_fraction": 0.5,
+      "minimum_false_cut_pair_sources": 2,
+      "minimum_false_cut_suppression": 2,
+      "minimum_swap_sources": 4,
+      "minimum_useful_swaps": 8,
+      "zero_useful_swap_losses": true
+    },
+    "controls": {
+      "crfs": [
+        23,
+        36
+      ],
+      "crop_each_edge_px": 8,
+      "light_gain": 1.2,
+      "time_jump_output_pictures": 22
+    },
+    "incumbent_scene_point": 0.55,
+    "method": "After incumbent and fallback range selection, suppress only an existing dense range when its weaker entry or exit falls below the candidate point. Keep all incumbent ranges and never select a different winner.",
+    "pairing": "Use only genuine source pictures 0, 60, and 118 in 640x360 output numbering. Resize to 8x6 gray and omit center 4x4 tiles. Pair minimum total mean absolute outer intensity difference within each role. A mean of at most .15 qualifies as similar by this proxy. Both directions and both spans are included. Same-source jumps provide independent same-background controls.",
+    "points": {
+      "lower_quartile": 0.6,
+      "median": 0.83
+    },
+    "rank_point": 0.1,
+    "role_rule": "Two prior selection-role sources for development, and six sources outside development; prioritize prior confirmation roles, then include prior fusion or confidence roles. Fixed SHA order within each priority. Exclude all known prior localization source URLs and donor keys.",
+    "schema": "chipmunk.video-face-scene-continuity/1",
+    "scope": "120 exact 640x360 H.264/yuv420p frames at 25 fps, sourced from even decoded pictures on a verified 50 fps clock",
+    "spans": {
+      "cross_cuts": [
+        [
+          54,
+          60
+        ],
+        [
+          67,
+          75
+        ]
+      ],
+      "publisher_swaps": [
+        [
+          54,
+          60
+        ],
+        [
+          67,
+          73
+        ]
+      ],
+      "same_recording_controls": [
+        67,
+        73
+      ]
+    }
+  },
+  "retrospective_existing_shot_stage": {
+    "cases": 54,
+    "content_threshold": 27.0,
+    "counts": {
+      "camera_punch": {
+        "any_shot_boundary": 0,
+        "at_least_one_exact_authored_edge": 0,
+        "both_exact_authored_edges": 0,
+        "cases": 6,
+        "exact_authored_entry": 0,
+        "exact_authored_exit": 0
+      },
+      "distinct_cross_cut": {
+        "any_shot_boundary": 8,
+        "at_least_one_exact_authored_edge": 8,
+        "both_exact_authored_edges": 0,
+        "cases": 8,
+        "exact_authored_entry": 8,
+        "exact_authored_exit": 0
+      },
+      "jump_cut": {
+        "any_shot_boundary": 0,
+        "at_least_one_exact_authored_edge": 0,
+        "both_exact_authored_edges": 0,
+        "cases": 6,
+        "exact_authored_entry": 0,
+        "exact_authored_exit": 0
+      },
+      "light": {
+        "any_shot_boundary": 2,
+        "at_least_one_exact_authored_edge": 2,
+        "both_exact_authored_edges": 0,
+        "cases": 6,
+        "exact_authored_entry": 2,
+        "exact_authored_exit": 0
+      },
+      "original": {
+        "any_shot_boundary": 0,
+        "cases": 6
+      },
+      "recompressed": {
+        "any_shot_boundary": 0,
+        "cases": 6
+      },
+      "research_coarse_false_flag": {
+        "any_shot_boundary": 4,
+        "at_least_one_exact_authored_edge": 4,
+        "both_exact_authored_edges": 0,
+        "cases": 7,
+        "cross_cut_cases": 6,
+        "cross_cuts_with_an_exact_edge": 4,
+        "exact_authored_entry": 4,
+        "exact_authored_exit": 0
+      },
+      "similar_cross_cut": {
+        "any_shot_boundary": 0,
+        "at_least_one_exact_authored_edge": 0,
+        "both_exact_authored_edges": 0,
+        "cases": 4,
+        "exact_authored_entry": 0,
+        "exact_authored_exit": 0
+      },
+      "swap": {
+        "any_shot_boundary": 0,
+        "at_least_one_exact_authored_edge": 0,
+        "both_exact_authored_edges": 0,
+        "cases": 12,
+        "exact_authored_entry": 0,
+        "exact_authored_exit": 0
+      }
+    },
+    "exact_production_shot_measurement_only": true,
+    "histogram_threshold": 0.35,
+    "minimum_shot_spacing_s": 0.5,
+    "posthoc": true,
+    "shot_method_sha256": "158a18f264ced9bc6838db914a8fc1fc5ede5b6170b858ec09ed486a3a8556b3",
+    "status": "verified"
+  },
+  "runtime": {
+    "elapsed_s": 151.04657945800136,
+    "journal_sha256": "c563a2305a3bcdcecfcd216520a589ab1cebdd5dc4720bfac2914be7d852a3b2",
+    "media_sha256": "3553ac71a786922d06079fb0d99a8b3ff3b2550798f16179b8e9ab213b3a1ce7",
+    "peak_rss_bytes": 279199744
+  },
+  "selected_false_cut_ranges": {
+    "current": [
+      {
+        "category": "distinct_cross_cut",
+        "count": 4,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      },
+      {
+        "category": "similar_cross_cut",
+        "count": 2,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      }
+    ],
+    "lower_quartile": [
+      {
+        "category": "distinct_cross_cut",
+        "count": 4,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      },
+      {
+        "category": "similar_cross_cut",
+        "count": 2,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      }
+    ],
+    "median": [
+      {
+        "category": "distinct_cross_cut",
+        "count": 4,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      },
+      {
+        "category": "similar_cross_cut",
+        "count": 2,
+        "selected_s": [
+          "62/25",
+          "3"
+        ]
+      }
+    ]
+  },
+  "selected_useful_ranges": {
+    "current": [
+      {
+        "authored_s": [
+          "54/25",
+          "12/5"
+        ],
+        "count": 5,
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      },
+      {
+        "authored_s": [
+          "67/25",
+          "73/25"
+        ],
+        "count": 5,
+        "selected_s": [
+          "68/25",
+          "74/25"
+        ]
+      }
+    ],
+    "lower_quartile": [
+      {
+        "authored_s": [
+          "54/25",
+          "12/5"
+        ],
+        "count": 5,
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      },
+      {
+        "authored_s": [
+          "67/25",
+          "73/25"
+        ],
+        "count": 5,
+        "selected_s": [
+          "68/25",
+          "74/25"
+        ]
+      }
+    ],
+    "median": [
+      {
+        "authored_s": [
+          "54/25",
+          "12/5"
+        ],
+        "count": 5,
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      },
+      {
+        "authored_s": [
+          "67/25",
+          "73/25"
+        ],
+        "count": 5,
+        "selected_s": [
+          "68/25",
+          "74/25"
+        ]
+      }
+    ]
+  },
+  "serving_change": false
+}

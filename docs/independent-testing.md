@@ -977,6 +977,29 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Replay four measured panels from a clean checkout
+
+Run these commands from the repository root with Python 3.11 or later. They use
+public scalar receipts from local experiments. The commands need only the
+standard library, with no media, model downloads, accounts, or running app.
+
+```sh
+python3 -B -IS backend/scripts/review_image_matched_detail_transfer.py docs/evaluation-panels/image-matched-detail-transfer-2026-11-12.json
+python3 -B -IS backend/scripts/review_video_lossy_sequence_transfer.py docs/evaluation-panels/video-lossy-sequence-transfer-2026-11-12.json
+python3 -B -IS backend/scripts/review_audio_communication_serving_grid.py
+python3 -B -IS backend/scripts/review_writing_adaptive_word_transfer.py docs/evaluation-panels/writing-adaptive-word-transfer-2026-11-12.json
+```
+
+The checks recalculate [image region overlap and decisions](image-matched-detail-transfer-2026-11-12.md),
+[video copy ranges and false flags](video-lossy-sequence-transfer-2026-11-12.md),
+[audio timing and false-alarm groups](audio-communication-serving-grid-2026-11-12.md),
+and [writing span overlap and decisions](writing-adaptive-word-transfer-2026-11-12.md).
+Each linked method explains the extra inputs required to replay source media.
+For an independent result, use the issue form below and include the commit,
+command, output, and the claim you verified or challenged.
+
+### Choose a source or method audit
+
 These are bounded entry points for contributors. Automated Linux reproduction
 is separate from an outside person's review. A reproduced calculation does not
 establish source truth, neural input correspondence or detection quality.

@@ -1,0 +1,298 @@
+{
+  "clean_scratch_checkout": true,
+  "confidence_weight": 0,
+  "freeze_sha256": "69fec5437f52d669f96e9a6fdf916a1591af95396a256c74ca4cd40b46a36504",
+  "independent_native_replay": {
+    "move_tamper_rejected_by_basis": [
+      "geometric_features",
+      "jpeg_brightness_blocks",
+      "jpeg_offgrid_texture",
+      "native_patch_alignment"
+    ],
+    "offgrid_color_measurement_tamper_rejected": true,
+    "status": "matched"
+  },
+  "private_cache_required": false,
+  "public_acquisition": {
+    "publisher_originals": 1,
+    "publisher_thumbnails": 7,
+    "status": "verified"
+  },
+  "replay_output_sha256": "1086daaa336ae788393db7511f9f9711dffb7d333fd8ca8e4944cb595d0d495f",
+  "result_sha256": "e1e212ad904ab0078f087ee4a020107e470cc1a12ee061f1698294fd027bb398",
+  "roster_receipt_sha256": "e30981fd296d9cf2cd9ba417a24b5aec58b917697dbc8239f5a8f29ed0efe7d3",
+  "rows_sha256": "b076625df6327797128a2999cf920a65d46a42d327bf0f2b715ec4a677214701",
+  "runner_sha256": "e11367d0a3390515e88262a1b93981c2df943e000bd4e5a95fa09537b1ed6215",
+  "runtime": {
+    "jpeg": "6.2",
+    "jpeglib": "1.0.2",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0"
+  },
+  "schema": "chipmunk.public-jpeg-copy-receipt/1",
+  "source_download_bytes": 9162735,
+  "source_revision": "e4a6a5bea774901a2e3b390ba99ecec85c7da817",
+  "sources": [
+    {
+      "author": "Bernard Gagnon",
+      "category": "architecture",
+      "delivery": "original",
+      "file": "photo-00.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "e58c8cbe72f0dd2a5acc946ce29a35365cf7bb74",
+      "page": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg",
+      "slot": 0,
+      "source_dimensions": [
+        4196,
+        2797
+      ],
+      "source_sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+      "title": "File:Simtokha Dzong, Bhutan 07.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Simtokha_Dzong%2C_Bhutan_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "working_rgb_sha256": "144d7a8ceeebbdabd199a135d097cc5272ff82c230d75e7b057854f92e900b96"
+    },
+    {
+      "author": "Basile Morin",
+      "category": "cityscapes",
+      "delivery": "thumb",
+      "file": "photo-02.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "69e7fda8f3c8e6a5d897a40db4e3a3ad19462437",
+      "page": "https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg",
+      "slot": 2,
+      "source_dimensions": [
+        6404,
+        4269
+      ],
+      "source_sha256": "dc545220b3df10c0e8a08e76cb2833e5da99ea6dc8696d8feadace8f72b678d0",
+      "title": "File:Bukchon-ro 11-gil street with hanok houses at blue hour in Bukchon Hanok Village Seoul.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg/1920px-Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "7a054e0cc69199dc8b9a1f509a3a1f1adbd62c11adcca2ba591f6f73a8f68c63"
+    },
+    {
+      "author": "Agnes Monkelbaan",
+      "category": "lakes",
+      "delivery": "thumb",
+      "file": "photo-04.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "43d15d693109540f676f1ae33e4dc5b4fe7b54d2",
+      "page": "https://commons.wikimedia.org/wiki/File:Delleboersterheide,_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._(actm.)_30.jpg",
+      "slot": 4,
+      "source_dimensions": [
+        5184,
+        3456
+      ],
+      "source_sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+      "title": "File:Delleboersterheide, natuurgebied van het It Fryske Gea. 25-12-2019. (actm.) 30.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Delleboersterheide%2C_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._%28actm.%29_30.jpg/1920px-Delleboersterheide%2C_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._%28actm.%29_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "4519762d4cb10f2c1d105fca2b3252adc0e0a6ae7f58cc1f4c73e1ccb521a141"
+    },
+    {
+      "author": "Vyacheslav Argenberg",
+      "category": "forests",
+      "delivery": "thumb",
+      "file": "photo-05.jpg",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "original_sha1": "ebf22555337b40984ea7bbe8191357aea5d96923",
+      "page": "https://commons.wikimedia.org/wiki/File:Mae_Hong_Son,_Forested_hills_2,_Thailand.jpg",
+      "slot": 5,
+      "source_dimensions": [
+        4032,
+        2688
+      ],
+      "source_sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+      "title": "File:Mae Hong Son, Forested hills 2, Thailand.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Mae_Hong_Son%2C_Forested_hills_2%2C_Thailand.jpg/1920px-Mae_Hong_Son%2C_Forested_hills_2%2C_Thailand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "fee2b116c4bf0941dd0de376f98c296d9fca7e0bb24429c01d92f299a97c67ba"
+    },
+    {
+      "author": "Moheen Reeyad",
+      "category": "architecture",
+      "delivery": "thumb",
+      "file": "photo-06.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "6080195c7e7caab6bcc3af4516f32c52e26eb7a8",
+      "page": "https://commons.wikimedia.org/wiki/File:Chittagong_University_Railway_station_(04).jpg",
+      "slot": 6,
+      "source_dimensions": [
+        6016,
+        4000
+      ],
+      "source_sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+      "title": "File:Chittagong University Railway station (04).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Chittagong_University_Railway_station_%2804%29.jpg/1920px-Chittagong_University_Railway_station_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "5382ef5435dea2a63ce9fc3847e670d3ebff6770c04ccc081054072b4128d23d"
+    },
+    {
+      "author": "Diego Delso",
+      "category": "cityscapes",
+      "delivery": "thumb",
+      "file": "photo-08.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "dbed73745689c32ae3e323fe6b32c6fdb56a45ef",
+      "page": "https://commons.wikimedia.org/wiki/File:Ariza,_Zaragoza,_Espa%C3%B1a,_2015-12-29,_DD_104.JPG",
+      "slot": 8,
+      "source_dimensions": [
+        6034,
+        4148
+      ],
+      "source_sha256": "70b3fede67290fda1d7f898606d6c6b60c282135f8506abefc2439093d50d739",
+      "title": "File:Ariza, Zaragoza, Espa\u00f1a, 2015-12-29, DD 104.JPG",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Ariza%2C_Zaragoza%2C_Espa%C3%B1a%2C_2015-12-29%2C_DD_104.JPG/1920px-Ariza%2C_Zaragoza%2C_Espa%C3%B1a%2C_2015-12-29%2C_DD_104.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "7e7a0d82e1ab09842f0a157c2ecfc192126674abeb392a16c053c4e5b473bbbe"
+    },
+    {
+      "author": "CEphoto, Uwe Aranas",
+      "category": "lakes",
+      "delivery": "thumb",
+      "file": "photo-10.jpg",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "original_sha1": "10b94023d9bc30c9aad8b5eaf7f765d9f69d1870",
+      "page": "https://commons.wikimedia.org/wiki/File:Babagon_Sabah_Babagon-Dam-02.jpg",
+      "slot": 10,
+      "source_dimensions": [
+        5760,
+        3840
+      ],
+      "source_sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+      "title": "File:Babagon Sabah Babagon-Dam-02.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Babagon_Sabah_Babagon-Dam-02.jpg/1920px-Babagon_Sabah_Babagon-Dam-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "dcae9256144b1b66513bcc137ced943451d64f29c8592a49cd6e33cdfd710629"
+    },
+    {
+      "author": "Thomas Bresson",
+      "category": "forests",
+      "delivery": "thumb",
+      "file": "photo-11.jpg",
+      "licence": "CC BY 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by/3.0",
+      "original_sha1": "e3961ddcc8668c9bc7821a6014b2fc593ceb3410",
+      "page": "https://commons.wikimedia.org/wiki/File:2013-04-01_15-02-43-bois.jpg",
+      "slot": 11,
+      "source_dimensions": [
+        3647,
+        2733
+      ],
+      "source_sha256": "994f2718ebb0b049c468e69892b8c589a891aa7b33ddefdf04a31cd6927a4da2",
+      "title": "File:2013-04-01 15-02-43-bois.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/2013-04-01_15-02-43-bois.jpg/1920px-2013-04-01_15-02-43-bois.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "working_rgb_sha256": "44cf2ed655e6490206ef80177de9a5c18045e03a74d0805f39be8f5980bce2ad"
+    }
+  ],
+  "strata": {
+    "75/aligned_64": {
+      "baseline_useful": 5,
+      "flagged": 8,
+      "jpeg_brightness_blocks": 3,
+      "native_patch_alignment": 5,
+      "serving_useful": 8,
+      "verified_crop_assets": 16,
+      "views": 8
+    },
+    "75/blur": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    },
+    "75/contrast": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    },
+    "75/offgrid_40x48": {
+      "baseline_useful": 0,
+      "flagged": 2,
+      "jpeg_offgrid_texture": 2,
+      "serving_useful": 2,
+      "verified_crop_assets": 4,
+      "views": 8
+    },
+    "75/offgrid_64": {
+      "baseline_useful": 1,
+      "flagged": 5,
+      "geometric_features": 2,
+      "jpeg_offgrid_texture": 3,
+      "serving_useful": 4,
+      "verified_crop_assets": 10,
+      "views": 8
+    },
+    "75/ordinary": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    },
+    "90/aligned_64": {
+      "baseline_useful": 5,
+      "flagged": 8,
+      "jpeg_brightness_blocks": 3,
+      "native_patch_alignment": 5,
+      "serving_useful": 8,
+      "verified_crop_assets": 16,
+      "views": 8
+    },
+    "90/blur": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    },
+    "90/contrast": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    },
+    "90/offgrid_40x48": {
+      "baseline_useful": 0,
+      "flagged": 2,
+      "jpeg_offgrid_texture": 2,
+      "serving_useful": 2,
+      "verified_crop_assets": 4,
+      "views": 8
+    },
+    "90/offgrid_64": {
+      "baseline_useful": 2,
+      "flagged": 6,
+      "geometric_features": 2,
+      "jpeg_offgrid_texture": 1,
+      "native_patch_alignment": 3,
+      "serving_useful": 3,
+      "verified_crop_assets": 12,
+      "views": 8
+    },
+    "90/ordinary": {
+      "baseline_useful": 0,
+      "flagged": 0,
+      "serving_useful": 0,
+      "verified_crop_assets": 0,
+      "views": 8
+    }
+  },
+  "totals": {
+    "baseline_useful": 13,
+    "edited": 48,
+    "ordinary": 48,
+    "ordinary_flagged": 0,
+    "serving_useful": 27,
+    "verified_crop_assets": 62,
+    "wrong_existing_translation_locations": 4,
+    "wrong_jpeg_fallback_locations": 0
+  },
+  "views": 96
+}

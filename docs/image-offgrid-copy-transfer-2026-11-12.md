@@ -42,6 +42,8 @@ The normal Full analysis processed a held positive and a matched unchanged JPEG 
 
 ## Reproduce
 
+For a fresh checkout with public sources, use the [eight-photo JPEG replay](image-jpeg-public-replay-2026-11-12.md). The instructions below reconstruct this study's original cohorts from its archived source ledgers.
+
 Use the existing source cache and the archived licensed photo ledgers. Set `cache` to the v39 private groups JSON, `blocks` to the previous JPEG block freeze, `translation` to the earlier translation freeze, `transfer` to the v298 private freeze, `expansion` to the v285 private inputs, and `controls` to the Wikimedia architecture intake folder containing the bound plan, acquisition receipt and source JPEGs. Set `first_run` and `confirmation_run` to two unused scratch paths. The photo bytes remain in the evaluator's workspace. The confirmation validates the exact original first-trial source, truth and mask commitments, allowing it to use an equivalent first-trial freeze generated with the current runner.
 
 ```sh

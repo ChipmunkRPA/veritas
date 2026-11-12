@@ -31,6 +31,8 @@ The isolated local Full worker ran one held positive and its matched unchanged J
 
 ## Reproduce
 
+For a clean checkout with public sources, use the [eight-photo JPEG replay](image-jpeg-public-replay-2026-11-12.md). It checks both JPEG fallbacks and their native crop evidence on its own public panel.
+
 Set `cache` to the retained `image-fresh-source-cache-v39/private-groups.json` and `previous` to the archived earlier translation `panel/freeze.json`. Set `run` to an unused directory for the first stage. The runner freezes source and delivery hashes before testing both methods. Review reproduced all 330 exact input deliveries, paired regions and coefficient commitments.
 
 ```sh

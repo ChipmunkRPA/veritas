@@ -28,6 +28,10 @@ for the PNG and JPEG localization and ordinary-control results.
 The [between-block JPEG copy comparison](image-offgrid-copy-transfer-2026-11-12.md)
 provides a source-separated confirmation and tests whether the signed
 evidence can reproduce both crop positions and their color measurements.
+The [eight-photo public JPEG replay](image-jpeg-public-replay-2026-11-12.md)
+starts from a clean checkout and pinned public downloads. It reproduces
+both shipped JPEG fallback checks and verifies native crops without the
+original study's source cache.
 
 The [earlier-image orientation comparison](image-reference-orientation-transfer-2026-11-12.md)
 reconstructs right-angle rotations and reflections. Its Pillow-only reader

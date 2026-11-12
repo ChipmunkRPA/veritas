@@ -218,6 +218,7 @@ class Settings(BaseSettings):
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
+    audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.

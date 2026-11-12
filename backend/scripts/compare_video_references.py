@@ -11,12 +11,13 @@ from app.core.canonical import canonical_json
 from app.evidence.video_reference import compare
 
 
-def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
+def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
     record, assets = compare(earlier, submitted)
     files = {**assets, "comparison.json": canonical_json(record) + b"\n"}
     if verify and output.is_file():
         exported = json.loads(output.read_bytes())
-        if (canonical_json(exported["comparison"]) != canonical_json(record)
+        if (not isinstance(exported, dict) or not isinstance(exported.get("assets"), dict)
+                or canonical_json(exported.get("comparison")) != canonical_json(record)
                 or {name: base64.b64decode(data, validate=True) for name, data in exported["assets"].items()} != assets):
             raise ValueError("The exported JSON or media differs from the re-decoded sources.")
     elif verify:
@@ -32,15 +33,19 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -
     return record
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
+    return replay(compare, earlier, submitted, output, verify=verify)
+
+
+def main(*, description=__doc__, runner=run):
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("earlier", type=Path)
     parser.add_argument("submitted", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--verify", action="store_true")
     args = parser.parse_args()
     try:
-        result = run(args.earlier, args.submitted, args.output, verify=args.verify)
+        result = runner(args.earlier, args.submitted, args.output, verify=args.verify)
     except (KeyError, TypeError, ValueError, OSError) as error:
         parser.exit(1, f"{error}\n")
     print(f"{'Verified' if args.verify else 'Saved'} comparison. Status {result['status']}.")

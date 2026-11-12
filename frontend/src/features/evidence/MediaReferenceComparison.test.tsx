@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { saveBlob } from '../../lib/api/reports'
-import VideoReferenceComparison from './VideoReferenceComparison'
+import MediaReferenceComparison from './MediaReferenceComparison'
 
 vi.mock('../../lib/api/reports', () => ({ saveBlob: vi.fn() }))
 
@@ -13,9 +13,9 @@ afterEach(() => {
   vi.resetAllMocks()
 })
 
-function show() {
+function show(kind: 'audio' | 'video' = 'video') {
   return render(<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
-    <VideoReferenceComparison analysisId="test/video" />
+    <MediaReferenceComparison analysisId="test/video" kind={kind} />
   </QueryClientProvider>)
 }
 
@@ -59,4 +59,32 @@ it('shows matching source times and waveform previews and exports their JSON and
   expect(vi.mocked(saveBlob).mock.calls.map(([blob]) => blob.type)).toEqual(['application/json', 'application/pdf'])
   page.unmount()
   expect(revokeObjectURL).toHaveBeenCalledTimes(2)
+})
+
+it('shows and exports the standalone audio difference waveform on the recording timeline', async () => {
+  const clip = { file: 'earlier.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
+  const waveform = { low: [-0.4], high: [0.2] }
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/1', status: 'measured', interpretation: 'Decoded audio differences.',
+    audio: { status: 'measured', changed_samples: 140, submitted: { samples: 32000 }, ranges: [{
+      id: 'A01', start_s: .2, end_s: .24, changed_samples: 140, difference: { peak: 1.5, rms: .3 },
+      preview: { end_s: .24, waveforms: { earlier: waveform, submitted: waveform },
+        difference_waveform: { low: [-1.5], high: [.1] }, assets: { earlier: clip, submitted: clip } },
+    }] },
+  }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' }))
+  vi.stubGlobal('fetch', fetch)
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  expect(await screen.findByRole('img', { name: 'Difference waveform' })).toBeTruthy()
+  expect(screen.getByText('A01 · 0.200–0.240 s')).toBeTruthy()
+  expect(screen.getByText('Full range difference: peak 1.500000, RMS 0.300000 of full scale.')).toBeTruthy()
+  expect(fetch.mock.calls[1][0]).toBe('/api/v2/analyses/test%2Fvideo/audio-reference-comparison')
+  fireEvent.click(screen.getByRole('button', { name: 'Download JSON evidence' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Download PDF' }))
+  expect(vi.mocked(saveBlob).mock.calls.map(([, name]) => name)).toEqual([
+    'chipmunk-verify-audio-comparison.json', 'chipmunk-verify-audio-comparison.pdf',
+  ])
 })

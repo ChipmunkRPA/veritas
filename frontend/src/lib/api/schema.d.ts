@@ -412,6 +412,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/analyses/{aid}/audio-reference-comparison": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Availability */
+        get: operations["availability_api_v2_analyses__aid__audio_reference_comparison_get"];
+        put?: never;
+        /** Comparison */
+        post: operations["comparison_api_v2_analyses__aid__audio_reference_comparison_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/analyses/{aid}/cancel": {
         parameters: {
             query?: never;
@@ -4016,6 +4034,24 @@ export interface components {
             /** Size Bytes */
             size_bytes: number;
         };
+        /** MediaReferenceAvailability */
+        MediaReferenceAvailability: {
+            /** Available */
+            available: boolean;
+        };
+        /** MediaReferenceResponse */
+        MediaReferenceResponse: {
+            /** Assets */
+            assets: {
+                [key: string]: string;
+            };
+            /** Comparison */
+            comparison: {
+                [key: string]: unknown;
+            };
+            /** Pdf */
+            pdf?: string | null;
+        };
         /** MemberCandidate */
         MemberCandidate: {
             /** Display Name */
@@ -5594,24 +5630,6 @@ export interface components {
             dossier_version: string;
             slice_metrics?: components["schemas"]["SliceMetrics"] | null;
         };
-        /** VideoReferenceAvailability */
-        VideoReferenceAvailability: {
-            /** Available */
-            available: boolean;
-        };
-        /** VideoReferenceResponse */
-        VideoReferenceResponse: {
-            /** Assets */
-            assets: {
-                [key: string]: string;
-            };
-            /** Comparison */
-            comparison: {
-                [key: string]: unknown;
-            };
-            /** Pdf */
-            pdf?: string | null;
-        };
         /** WebhookCreate */
         WebhookCreate: {
             /**
@@ -6453,6 +6471,164 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    availability_api_v2_analyses__aid__audio_reference_comparison_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaReferenceAvailability"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    comparison_api_v2_analyses__aid__audio_reference_comparison_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description Earlier copy with the same timing.
+                     */
+                    earlier: string;
+                    /**
+                     * @default false
+                     * @enum {string}
+                     */
+                    include_pdf?: "true" | "false";
+                };
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaReferenceResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -8422,7 +8598,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["VideoReferenceAvailability"];
+                    "application/json": components["schemas"]["MediaReferenceAvailability"];
                 };
             };
             /** @description Unauthorized */
@@ -8470,7 +8646,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier video with the same native picture timeline.
+                     * @description Earlier copy with the same timing.
                      */
                     earlier: string;
                     /**
@@ -8488,7 +8664,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["VideoReferenceResponse"];
+                    "application/json": components["schemas"]["MediaReferenceResponse"];
                 };
             };
             /** @description Unauthorized */

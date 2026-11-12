@@ -30,21 +30,21 @@ ENVELOPE_TITLE = "Waveform of the analysed signal"
 SPECTROGRAM_TITLE = "Spectrogram of the analysed signal"
 
 
-def envelope(pcm: np.ndarray, sr: int = SR) -> dict[str, Any]:
-    """{"bin_s", "t", "low", "high", "rms"}: bin centres in seconds and the three levels per bin, rounded to 4 decimals."""
+def envelope(pcm: np.ndarray, sr: int = SR, *, amplitude_limit: float = 1.0, decimals: int = 4) -> dict[str, Any]:
+    """{"bin_s", "t", "low", "high", "rms"}: bin centres in seconds and the three levels per bin, rounded to the requested precision."""
     n = int(len(pcm))
     if n == 0:
         return {"bin_s": ENVELOPE_MIN_BIN_S, "t": [], "low": [], "high": [], "rms": []}
     size = max(int(round(ENVELOPE_MIN_BIN_S * sr)), -(-n // ENVELOPE_MAX_BINS))
     bins = -(-n // size)
     padded = np.full(bins * size, np.nan, dtype=np.float64)
-    padded[:n] = np.clip(np.asarray(pcm, dtype=np.float64), -1.0, 1.0)
+    padded[:n] = np.clip(np.asarray(pcm, dtype=np.float64), -amplitude_limit, amplitude_limit)
     frames = padded.reshape(bins, size)
     counts = np.minimum(size, n - np.arange(bins) * size)
     low, high = np.nanmin(frames, axis=1), np.nanmax(frames, axis=1)
     rms = np.sqrt(np.nansum(frames ** 2, axis=1) / counts)
     centres = (np.arange(bins) * size + counts / 2.0) / sr
-    rounded = lambda a: [round(float(v), 4) for v in a]  # noqa: E731
+    rounded = lambda a: [round(float(v), decimals) for v in a]  # noqa: E731
     return {"bin_s": round(size / sr, 6), "t": [round(float(v), 4) for v in centres], "low": rounded(low), "high": rounded(high), "rms": rounded(rms)}
 
 

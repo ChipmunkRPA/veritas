@@ -1,9 +1,11 @@
-"""Supplemental PDF for a comparison of two source videos."""
+"""Supplemental PDF for a comparison of two source recordings."""
 
 from __future__ import annotations
 
 import pymupdf
 
+from app.evidence.audio_reference import AUDIO_RATE, MAX_SECONDS
+from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
 from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
 
 TITLE = "Earlier video comparison"
@@ -18,6 +20,12 @@ AUDIO_STATUS = {
     "no_stream": "Neither clip has a soundtrack.",
     "audio_unassessed": "Both soundtracks need a decodable continuous sample clock.",
     "audio_timelines_differ": "The soundtracks have different start times or sample counts.",
+}
+AUDIO_ONLY_STATUS = {
+    "comparison_limit": f"At least one recording exceeds {MAX_SECONDS} seconds of decoded audio.",
+    "no_stream": "The files have no readable audio track.",
+    "audio_unassessed": "Both recordings need a readable, continuous audio sample clock.",
+    "audio_timelines_differ": "The recordings have different start times or decoded sample counts.",
 }
 
 
@@ -66,6 +74,31 @@ def _summary(document, record):
     _text(page, MARGIN, 526, "Soundtrack ranges group 20 ms bins containing different samples.", color=MUTED)
 
 
+def _audio_summary(document, record):
+    page = _page(document, "Earlier audio comparison")
+    page.insert_textbox((MARGIN, 125, RIGHT, 198), record["interpretation"], fontsize=11, fontname="helv", color=INK)
+    audio = record["audio"]
+    for y, (side, label) in zip((221, 281), LABELS.items(), strict=True):
+        _text(page, MARGIN, y, label, font="hebo")
+        _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
+    if record["status"] != "measured":
+        _text(page, MARGIN, 346, "Comparison unassessed", size=16, font="hebo")
+        _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
+        return
+    _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
+    total = audio["submitted"]["samples"]
+    changed = audio["changed_samples"]
+    count = len(audio["ranges"])
+    _text(page, MARGIN, 370, f"{changed:,} of {total:,} mono samples differ across {count} {'range' if count == 1 else 'ranges'}.")
+    if count == 1 and audio["ranges"][0]["start_sample"] == 0 and audio["ranges"][0]["end_sample"] == total:
+        _text(page, MARGIN, 391, "Differences span the whole recording. Encoding or gain changes can cause this.", color=MUTED)
+    elif changed == 0:
+        _text(page, MARGIN, 391, "The decoded mono samples match exactly.", color=MUTED)
+    _text(page, MARGIN, 442, "Times start at the first decoded sample. The source clocks use 16 kHz ticks.", color=MUTED)
+    _text(page, MARGIN, 462, "Ranges group adjacent 20 ms bins containing at least one differing sample.", color=MUTED)
+    _text(page, MARGIN, 482, "The JSON export includes aligned playable excerpts and their checksums.", color=MUTED)
+
+
 def _picture_page(document, span, assets, source):
     page = _page(document, f"{span['id']}  Picture differences")
     _text(page, MARGIN, 124, _range(span), color=MUTED)
@@ -93,33 +126,49 @@ def _picture_page(document, span, assets, source):
         y += 168
 
 
+def _draw_waveform(page, wave, y, maximum, duration):
+    page.draw_line((MARGIN, y), (RIGHT, y), color=RULE)
+    shape = page.new_shape()
+    for tick, low, high in zip(wave["t"], wave["low"], wave["high"], strict=True):
+        x = MARGIN + min(1, tick / duration) * (RIGHT - MARGIN)
+        shape.draw_line((x, y - high / maximum * 44), (x, y - low / maximum * 44))
+    shape.finish(color=(.18, .39, .31), width=.7)
+    shape.commit()
+
+
 def _sound_page(document, span):
-    page = _page(document, f"{span['id']}  Soundtrack differences")
+    difference = span.get("difference")
+    title = "Audio differences" if difference is not None else "Soundtrack differences"
+    page = _page(document, f"{span['id']}  {title}")
     _text(page, MARGIN, 126, _range(span), color=MUTED)
     _text(page, MARGIN, 149, f"{span['changed_samples']:,} differing samples in the selected range.")
     preview = span["preview"]
     _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
-    maximum = max(.01, *(abs(level) for values in preview["waveforms"].values() for field in ("low", "high") for level in values[field]))
-    duration = (preview["end_sample"] - preview["start_sample"]) / 16000
-    for y, (side, label) in zip((282, 448), LABELS.items(), strict=True):
-        _text(page, MARGIN, y - 69, label, font="hebo")
-        page.draw_line((MARGIN, y), (RIGHT, y), color=RULE)
-        wave = preview["waveforms"][side]
-        shape = page.new_shape()
-        for tick, low, high in zip(wave["t"], wave["low"], wave["high"], strict=True):
-            x = MARGIN + min(1, tick / duration) * (RIGHT - MARGIN)
-            shape.draw_line((x, y - high / maximum * 55), (x, y - low / maximum * 55))
-        shape.finish(color=(.18, .39, .31), width=.7)
-        shape.commit()
+    waveforms = preview["waveforms"]
+    residual = preview.get("difference_waveform")
+    maximum = max(.01, *(abs(level) for values in waveforms.values() for field in ("low", "high") for level in values[field]))
+    count = preview["end_sample"] - preview["start_sample"]
+    duration = count / AUDIO_RATE
+    for y, (side, label) in zip((268, 422), LABELS.items(), strict=True):
+        _text(page, MARGIN, y - 59, label, font="hebo")
+        _draw_waveform(page, waveforms[side], y, maximum, duration)
         pts = span["source_ranges"][side]["start_pts"]
-        _text(page, MARGIN, y + 75, f"Source samples [{pts}, {pts + preview['end_sample'] - preview['start_sample']}) at 16 kHz.",
+        _text(page, MARGIN, y + 58, f"Source ticks [{pts}, {pts + count}) at 16 kHz.", size=9, color=MUTED)
+    if residual is not None:
+        _text(page, MARGIN, 517, "Difference waveform", font="hebo")
+        residual_scale = max(1 / 32768, *(abs(level) for field in ("low", "high") for level in residual[field]))
+        _draw_waveform(page, residual, 576, residual_scale, duration)
+        _text(page, MARGIN, 632, f"Analyzed minus earlier samples. This plot uses a separate scale of +/-{residual_scale:.6f}.",
+              size=9, color=MUTED)
+        _text(page, MARGIN, 650, f"Full range difference: peak {difference['peak']:.6f}, RMS {difference['rms']:.6f} of full scale.",
               size=9, color=MUTED)
 
 
 def render(record, assets):
     with pymupdf.open() as document:
-        document.set_metadata({"title": TITLE, "author": "Chipmunk Verify"})
-        _summary(document, record)
+        is_audio = record["schema"] == AUDIO_SCHEMA
+        document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
+        (_audio_summary if is_audio else _summary)(document, record)
         remaining = []
         for span in record.get("picture", {}).get("ranges", []):
             if span["previews"]:
@@ -130,7 +179,8 @@ def render(record, assets):
             if span.get("preview"):
                 _sound_page(document, span)
             else:
-                remaining.append((span["id"], _range(span)))
+                note = f" - {span['changed_samples']:,} differing samples" if is_audio else ""
+                remaining.append((span["id"], _range(span) + note))
         for start in range(0, len(remaining), 30):
             page = _page(document, "Additional measured ranges")
             for i, (label, value) in enumerate(remaining[start:start + 30]):

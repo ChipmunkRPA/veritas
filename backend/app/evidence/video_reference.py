@@ -14,10 +14,8 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash
-from app.detectors.audio.decode import SAMPLE_RATE as AUDIO_RATE
-from app.detectors.audio.decode import AudioStreamUnavailable, decode_audio, wav_bytes
-from app.detectors.audio.waveform import envelope
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
+from app.evidence.audio_reference import compare_tracks, marked_ranges, read_track
 from app.storage.files import VIDEO_MIMES, sniff
 
 SCHEMA = "chipmunk.video-reference-comparison/1"
@@ -26,8 +24,6 @@ MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
 MAX_SECONDS = 12
 MAX_PRESENTED_RANGES = 3
-AUDIO_BIN_SAMPLES = AUDIO_RATE // 50
-AUDIO_PREVIEW_SAMPLES = 2 * AUDIO_RATE
 PREVIEW_SIDE = 420
 
 INTERPRETATION = (
@@ -73,11 +69,6 @@ def _comparison_issue(tables: tuple[FrameTable, FrameTable]) -> str | None:
     if clocks[0] != clocks[1]:
         return "picture_timelines_differ"
     return None
-
-
-def _runs(marked):
-    edges = np.flatnonzero(np.diff(np.r_[False, marked, False]))
-    return [(int(start), int(end)) for start, end in zip(edges[::2], edges[1::2], strict=True)]
 
 
 def _asset(assets, filename, content, media_type):
@@ -128,7 +119,7 @@ def _picture(paths, tables, assets):
         raise DecodeError("Video could not be decoded with every recorded picture.")
 
     sizes = [row["changed_pixels"] for row in measurements]
-    ranges = _runs(np.asarray(sizes) > 0)
+    ranges = marked_ranges(np.asarray(sizes) > 0)
     top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
     output, needed = [], set()
     clock = _elapsed(tables[1])
@@ -167,61 +158,6 @@ def _picture(paths, tables, assets):
             "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
 
 
-def _audio_source(path, source, table):
-    try:
-        decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=MAX_SECONDS + 1)
-    except AudioStreamUnavailable:
-        return "no_stream", None, None
-    except (ValueError, RuntimeError):
-        return "unverified_audio_clock", None, None
-    mapping = decoded.mapping
-    if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
-        return "unverified_audio_clock", None, None
-    pts = mapping["timeline"][0]["source_pts"]
-    relative = Fraction(pts, AUDIO_RATE) - table.pts[0] * table.tb
-    return "measured", decoded.pcm, {"pcm_sha256": mapping["pcm_sha256"], "source_pts": pts,
-                                    "relative_start": str(relative), "samples": len(decoded.pcm)}
-
-
-def _audio(paths, sources, tables, assets):
-    first, second = [_audio_source(path, source, table) for path, source, table in zip(paths, sources, tables, strict=True)]
-    if first[0] == second[0] == "no_stream":
-        return {"status": "no_stream"}
-    if first[0] != "measured" or second[0] != "measured":
-        return {"status": "audio_unassessed", "earlier": first[0], "submitted": second[0]}
-    left, right = first[2], second[2]
-    if (left["relative_start"], left["samples"]) != (right["relative_start"], right["samples"]):
-        return {"status": "audio_timelines_differ", "earlier": left, "submitted": right, "sample_rate": AUDIO_RATE}
-
-    difference = first[1] != second[1]
-    changed_per_bin = np.add.reduceat(difference, np.arange(0, len(difference), AUDIO_BIN_SAMPLES), dtype=np.int64)
-    ranges = _runs(changed_per_bin > 0)
-    top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
-    result = []
-    origin = Fraction(right["relative_start"])
-    for number, (first_bin, after_bin) in enumerate(ranges, 1):
-        start, end = first_bin * AUDIO_BIN_SAMPLES, min(after_bin * AUDIO_BIN_SAMPLES, len(difference))
-        item = {"id": f"A{number:02d}", "start_sample": start, "end_sample": end,
-                "start_s": float(origin + Fraction(start, AUDIO_RATE)), "end_s": float(origin + Fraction(end, AUDIO_RATE)),
-                "changed_samples": int(np.sum(changed_per_bin[first_bin:after_bin])),
-                "source_ranges": {
-                    side: {"start_pts": details["source_pts"] + start, "end_exclusive_pts": details["source_pts"] + end}
-                    for side, details in (("earlier", left), ("submitted", right))
-                }}
-        if (first_bin, after_bin) in top:
-            preview_end = min(end, start + AUDIO_PREVIEW_SAMPLES)
-            excerpts = {"earlier": first[1][start:preview_end], "submitted": second[1][start:preview_end]}
-            item["preview"] = {"start_sample": start, "end_sample": preview_end,
-                               "end_s": float(origin + Fraction(preview_end, AUDIO_RATE)),
-                               "waveforms": {label: envelope(pcm) for label, pcm in excerpts.items()},
-                               "assets": {label: _asset(assets, f"{label}-audio-{number:02d}.wav", wav_bytes(pcm), "audio/wav")
-                                          for label, pcm in excerpts.items()}}
-        result.append(item)
-    return {"status": "measured", "earlier": left, "submitted": right, "sample_rate": AUDIO_RATE,
-            "bin_samples": AUDIO_BIN_SAMPLES, "changed_samples": int(np.count_nonzero(difference)),
-            "bin_counts_sha256": canonical_hash(changed_per_bin.tolist()), "ranges": result}
-
-
 def compare(earlier: Path, submitted: Path) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
@@ -234,7 +170,9 @@ def compare(earlier: Path, submitted: Path) -> tuple[dict, dict[str, bytes]]:
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets)
-        record["audio"] = _audio(paths, sources, tables, assets)
+        tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb)
+                  for path, source, table in zip(paths, sources, tables, strict=True)]
+        record["audio"] = compare_tracks(*tracks, assets)
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

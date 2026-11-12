@@ -4,6 +4,7 @@ import { Button } from '../../components/ui'
 import { authHeaders, unwrap } from '../../lib/api/client'
 import { saveBlob } from '../../lib/api/reports'
 
+type Kind = 'audio' | 'video'
 type Side = 'earlier' | 'submitted'
 const sides = ['earlier', 'submitted'] as const
 const names = { earlier: 'Earlier clip', submitted: 'Analyzed clip' }
@@ -14,18 +15,26 @@ type PictureRange = Extent & {
   previews: Record<string, { time_s: number; assets: Record<Side, Asset> }>
 }
 type Waveform = { low: number[]; high: number[] }
+type PictureDimensions = { width: number; height: number }
 type AudioRange = Extent & {
   changed_samples: number
-  preview?: { end_s: number; waveforms: Record<Side, Waveform>; assets: Record<Side, Asset> }
+  start_sample?: number
+  end_sample?: number
+  difference?: { peak: number; rms: number }
+  preview?: { end_s: number; waveforms: Record<Side, Waveform>; assets: Record<Side, Asset>; difference_waveform?: Waveform }
 }
 type Comparison = {
-  schema: 'chipmunk.video-reference-comparison/1'
   status: string
   interpretation: string
-  submitted: { width: number; height: number }
+  audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
+} & ({
+  schema: 'chipmunk.video-reference-comparison/1'
+  submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[] }
-  audio?: { status: string; changed_samples?: number; ranges?: AudioRange[] }
-}
+} | {
+  schema: 'chipmunk.audio-reference-comparison/1'
+  picture?: never
+})
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 
 const unassessed: Record<string, string> = {
@@ -38,8 +47,15 @@ const unassessed: Record<string, string> = {
   audio_timelines_differ: 'The soundtracks have different start times or sample counts.',
 }
 
-function route(analysisId: string) {
-  return '/api/v2/analyses/' + encodeURIComponent(analysisId) + '/video-reference-comparison'
+const audioUnassessed: Record<string, string> = {
+  comparison_limit: 'At least one recording exceeds 30 seconds of decoded audio.',
+  no_stream: 'The files have no readable audio track.',
+  audio_unassessed: 'Both recordings need a readable, continuous audio sample clock.',
+  audio_timelines_differ: 'The recordings have different start times or decoded sample counts.',
+}
+
+function route(analysisId: string, kind: Kind) {
+  return '/api/v2/analyses/' + encodeURIComponent(analysisId) + '/' + kind + '-reference-comparison'
 }
 
 async function request<T>(url: string, init: RequestInit): Promise<T> {
@@ -82,7 +98,7 @@ function Playback({ body, name }: { body?: string; name: string }) {
   return url ? <audio className="mt-1 block w-full max-w-80" controls preload="none" src={url} aria-label={name} /> : null
 }
 
-function PictureEvidence({ span, assets, dimensions }: { span: PictureRange; assets: Result['assets']; dimensions: Comparison['submitted'] }) {
+function PictureEvidence({ span, assets, dimensions }: { span: PictureRange; assets: Result['assets']; dimensions: PictureDimensions }) {
   const frame = span.strongest_frame
   const box = frame.difference_bounds
   return <details open={Object.keys(span.previews).length > 0} className="border-t border-border pt-3">
@@ -114,11 +130,14 @@ function PictureEvidence({ span, assets, dimensions }: { span: PictureRange; ass
 
 function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['assets'] }) {
   const preview = span.preview
-  const peak = preview ? Math.max(.01, ...sides.flatMap(side =>
-    [...preview.waveforms[side].low, ...preview.waveforms[side].high].map(Math.abs))) : .01
+  const residual = preview?.difference_waveform
+  const waves = preview ? Object.values(preview.waveforms) : []
+  const peak = Math.max(.01, ...waves.flatMap(wave => [...wave.low, ...wave.high].map(Math.abs)))
+  const residualScale = residual ? Math.max(1 / 32768, ...[...residual.low, ...residual.high].map(Math.abs)) : 1
   return <details open={!!preview} className="border-t border-border pt-3">
     <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}</summary>
     <p className="mt-2 mb-0 text-small text-text-muted">{span.changed_samples.toLocaleString()} differing samples in this range.</p>
+    {span.difference && <p className="mt-2 mb-0 text-caption text-text-muted">Full range difference: peak {span.difference.peak.toFixed(6)}, RMS {span.difference.rms.toFixed(6)} of full scale.</p>}
     {preview && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Waveforms and playback cover {span.start_s.toFixed(3)}–{preview.end_s.toFixed(3)} s.</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -128,6 +147,11 @@ function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['ass
           <Playback body={assetBody(assets, preview.assets[side], 'audio/wav')} name={'Play ' + names[side].toLowerCase()} />
         </div>)}
       </div>
+      {residual && <div className="mt-3">
+        <p className="mt-0 mb-1 text-small font-medium">Difference waveform</p>
+        <ClipWaveform wave={residual} maximum={residualScale} name="Difference" />
+        <p className="mt-1 mb-0 text-caption text-text-muted">Analyzed minus earlier samples. This plot uses a separate scale of ±{residualScale.toFixed(6)}.</p>
+      </div>}
     </>}
   </details>
 }
@@ -135,33 +159,43 @@ function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['ass
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
+  const isAudio = comparison.schema === 'chipmunk.audio-reference-comparison/1'
+  const downloadName = 'chipmunk-verify-' + (isAudio ? 'audio' : 'video') + '-comparison'
+  const notes = isAudio ? audioUnassessed : unassessed
+  const firstAudioRange = audio?.ranges?.[0]
+  const wholeRecording = audio?.ranges?.length === 1 && firstAudioRange?.start_sample === 0
+    && firstAudioRange.end_sample === audio.submitted?.samples
   return <div className="mt-5 space-y-4 border-t border-border pt-4">
     <div className="flex flex-wrap gap-2">
       <Button onClick={() => saveBlob(new Blob([JSON.stringify({ comparison, assets }, null, 2) + '\n'],
-        { type: 'application/json' }), 'chipmunk-verify-video-comparison.json')}>Download JSON evidence</Button>
+        { type: 'application/json' }), downloadName + '.json')}>Download JSON evidence</Button>
       {pdf && <Button onClick={() => saveBlob(new Blob([Uint8Array.from(atob(pdf), c => c.charCodeAt(0))],
-        { type: 'application/pdf' }), 'chipmunk-verify-video-comparison.pdf')}>Download PDF</Button>}
+        { type: 'application/pdf' }), downloadName + '.pdf')}>Download PDF</Button>}
     </div>
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
-    {comparison.status !== 'measured' && <p className="m-0 text-small">{unassessed[comparison.status] ?? 'The clips could not be compared.'}</p>}
-    {picture && <>
+    {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
+    {!isAudio && picture && <>
       <h3 className="m-0 text-small font-medium">Pictures</h3>
       <p className="m-0 text-small">{picture.matching_frames} exact matches and {picture.changed_frames} changed decoded pictures.</p>
       {!picture.matching_frames && <p className="m-0 text-small text-text-muted">Every picture differs. Re-encoding can produce this pattern.</p>}
       {picture.ranges.map(span => <PictureEvidence key={span.id} span={span} assets={assets} dimensions={comparison.submitted} />)}
     </>}
-    {audio && <>
-      <h3 className="m-0 text-small font-medium">Soundtrack</h3>
+    {audio && (!isAudio || comparison.status === 'measured') && <>
+      <h3 className="m-0 text-small font-medium">{isAudio ? 'Decoded audio' : 'Soundtrack'}</h3>
       <p className="m-0 text-small">{audio.status === 'measured'
         ? (audio.changed_samples ?? 0).toLocaleString() + ' decoded mono samples differ.'
-        : unassessed[audio.status] ?? 'Soundtrack comparison unavailable.'}</p>
+        : notes[audio.status] ?? 'Soundtrack comparison unavailable.'}</p>
+      {isAudio && wholeRecording && <p className="m-0 text-caption text-text-muted">Differences span the whole recording. Encoding or gain changes can cause this.</p>}
       {audio.ranges?.map(span => <SoundEvidence key={span.id} span={span} assets={assets} />)}
     </>}
-    {comparison.status === 'measured' && <p className="m-0 text-caption text-text-muted">Times are relative to the first picture. Soundtrack ranges group 20 ms bins containing different samples.</p>}
+    {comparison.status === 'measured' && <p className="m-0 text-caption text-text-muted">{isAudio
+      ? 'Times start at the first decoded sample. Ranges group adjacent 20 ms bins containing differing samples.'
+      : 'Times are relative to the first picture. Soundtrack ranges group 20 ms bins containing different samples.'}</p>}
+
   </div>
 }
 
-function VideoReferenceForm({ analysisId }: { analysisId: string }) {
+function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Kind }) {
   const heading = useId()
   const input = useId()
   const [file, setFile] = useState<File | null>(null)
@@ -183,11 +217,11 @@ function VideoReferenceForm({ analysisId }: { analysisId: string }) {
     body.append('earlier', file)
     body.append('include_pdf', 'true')
     try {
-      const response = await request<Result>(route(analysisId), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
-      if (response?.comparison?.schema !== 'chipmunk.video-reference-comparison/1') throw new Error('The comparison response is incomplete.')
+      const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
+      if (response?.comparison?.schema !== 'chipmunk.' + kind + '-reference-comparison/1') throw new Error('The comparison response is incomplete.')
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {
-      if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not compare the clips.')
+      if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not compare the files.')
     } finally {
       if (!controller.signal.aborted && active.current === controller) {
         active.current = null
@@ -197,26 +231,28 @@ function VideoReferenceForm({ analysisId }: { analysisId: string }) {
   }
 
   return <section aria-labelledby={heading} className="rounded-md border border-border p-4">
-    <h2 id={heading} className="m-0 text-body font-medium">Compare with an earlier video</h2>
-    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier copy with matching picture dimensions and timing. Each clip can have up to 12 seconds of picture timestamps, 360 frames, and 48 MiB.</p>
+    <h2 id={heading} className="m-0 text-body font-medium">Compare with an earlier {kind === 'audio' ? 'audio recording' : 'video'}</h2>
+    <p className="mt-2 mb-0 text-small text-text-muted">{kind === 'audio'
+      ? 'Choose an earlier recording with the same start time and sample count. Each file can have up to 30 seconds of decoded audio and 48 MiB.'
+      : 'Choose an earlier copy with matching picture dimensions and timing. Each clip can have up to 12 seconds of picture timestamps, 360 frames, and 48 MiB.'}</p>
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
-        <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier video</label>
-        <input id={input} type="file" accept="video/*,.mov,.mkv,.mp4,.webm" className="block max-w-full text-small" disabled={pending}
+        <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier {kind}</label>
+        <input id={input} type="file" accept={kind === 'audio' ? 'audio/*,.wav,.mp3,.m4a,.flac,.ogg,.opus' : 'video/*,.mov,.mkv,.mp4,.webm'} className="block max-w-full text-small" disabled={pending}
           onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setResult(null); setError('') }} />
       </div>
-      <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : 'Compare videos'}</Button>
+      <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
     </form>
-    {pending && <p role="status" className="mt-3 mb-0 text-small text-text-muted">Comparing pictures and soundtracks…</p>}
+    {pending && <p role="status" className="mt-3 mb-0 text-small text-text-muted">{kind === 'audio' ? 'Comparing decoded audio…' : 'Comparing pictures and soundtracks…'}</p>}
     {error && <p role="alert" className="mt-3 mb-0 text-small text-danger">{error}</p>}
     {result && <ResultView result={result} />}
   </section>
 }
 
-export default function VideoReferenceComparison({ analysisId }: { analysisId: string }) {
-  const availability = useQuery({ queryKey: ['analysis', analysisId, 'video-reference-comparison'],
-    queryFn: ({ signal }) => request<{ available: boolean }>(route(analysisId), { headers: authHeaders(), signal }),
+export default function MediaReferenceComparison({ analysisId, kind }: { analysisId: string; kind: Kind }) {
+  const availability = useQuery({ queryKey: ['analysis', analysisId, kind + '-reference-comparison'],
+    queryFn: ({ signal }) => request<{ available: boolean }>(route(analysisId, kind), { headers: authHeaders(), signal }),
     refetchOnMount: 'always', refetchOnWindowFocus: false, retry: false })
   return availability.isFetchedAfterMount && availability.data?.available && !availability.isError
-    ? <VideoReferenceForm key={analysisId} analysisId={analysisId} /> : null
+    ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind} /> : null
 }

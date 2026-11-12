@@ -14,7 +14,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from test_image_reference_access import reference_http as reference_http
 
-from app.api import v2_video_reference
+from app.api import v2_media_reference
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
@@ -124,8 +124,8 @@ def test_authenticated_video_comparison_exports_exact_evidence_without_new_analy
         with Session(f.engine) as db:
             yield db
 
-    monkeypatch.setattr(v2_video_reference, "get_session", sessions)
-    monkeypatch.setattr(v2_video_reference, "default_store", lambda: f.store)
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
     with sessions() as db:
         analysis = db.get(Analysis, "other-kind")
         analysis.filename, analysis.content_type = "submitted.mov", "video/quicktime"

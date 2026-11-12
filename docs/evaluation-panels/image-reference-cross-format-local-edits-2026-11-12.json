@@ -1,0 +1,399 @@
+{
+  "confidence_weight": 0,
+  "original_trial": {
+    "exact_replay_passed": true,
+    "exploratory_all_kernel_rgb_gate": {
+      "feathered_useful_retained": 10,
+      "local_blur_highlighted": 0,
+      "minimum_rgb_residual_each_kernel": 10,
+      "nuisance_highlighted": 0,
+      "sharp_useful_retained": 10,
+      "smooth_color_useful_retained": 11
+    },
+    "freeze_sha256": "0587cc5816fd293bf767dc1897106de1cb1930bfb320646f4751cfd856c0a7c2",
+    "nuisance_detail": [
+      {
+        "role": "untouched_crop",
+        "selected_pixels": 8177
+      },
+      {
+        "role": "prior_jpeg",
+        "selected_pixels": 4490
+      },
+      {
+        "role": "contrast",
+        "selected_pixels": 742
+      },
+      {
+        "role": "untouched_crop",
+        "selected_pixels": 364
+      },
+      {
+        "role": "prior_jpeg",
+        "selected_pixels": 765
+      }
+    ],
+    "replay_sha256": "807da41d014eea3dc8895ac89f7ff9fe85ee982eb3c779de01c2e6d7148efd5f",
+    "result_sha256": "bb139f3990b2f4dc91be3474b0a64a340d7e6d6a73e7934419cc1b3559769737",
+    "summary": {
+      "counts": {
+        "added_feathered": 10,
+        "added_smooth_tone": 11,
+        "exact_matched_earlier": 11,
+        "extra_nuisance_groups": 3,
+        "extra_nuisance_views": 5,
+        "wrong_or_incompatible_crops": 0
+      },
+      "scope_gate_passed": false,
+      "strata": {
+        "contrast": {
+          "added_useful": 0,
+          "candidate_compared": 11,
+          "candidate_exact_crop": 11,
+          "candidate_exact_no_difference": 10,
+          "candidate_highlighted": 1,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "different_photo": {
+          "added_useful": 0,
+          "candidate_compared": 0,
+          "candidate_exact_crop": 0,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 0,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "feathered": {
+          "added_useful": 10,
+          "candidate_compared": 10,
+          "candidate_exact_crop": 10,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 10,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 10,
+          "views": 12
+        },
+        "fractional": {
+          "added_useful": 0,
+          "candidate_compared": 0,
+          "candidate_exact_crop": 0,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 0,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "local_blur": {
+          "added_useful": 0,
+          "candidate_compared": 10,
+          "candidate_exact_crop": 10,
+          "candidate_exact_no_difference": 2,
+          "candidate_highlighted": 8,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "matched_earlier": {
+          "added_useful": 0,
+          "candidate_compared": 3,
+          "candidate_exact_crop": 3,
+          "candidate_exact_no_difference": 3,
+          "candidate_highlighted": 0,
+          "current_compared": 8,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "nonproportional": {
+          "added_useful": 0,
+          "candidate_compared": 0,
+          "candidate_exact_crop": 0,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 0,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "prior_jpeg": {
+          "added_useful": 0,
+          "candidate_compared": 11,
+          "candidate_exact_crop": 11,
+          "candidate_exact_no_difference": 9,
+          "candidate_highlighted": 2,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "rotation": {
+          "added_useful": 0,
+          "candidate_compared": 0,
+          "candidate_exact_crop": 0,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 0,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        },
+        "sharp": {
+          "added_useful": 10,
+          "candidate_compared": 10,
+          "candidate_exact_crop": 10,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 10,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 10,
+          "views": 12
+        },
+        "smooth_tone": {
+          "added_useful": 11,
+          "candidate_compared": 11,
+          "candidate_exact_crop": 11,
+          "candidate_exact_no_difference": 0,
+          "candidate_highlighted": 11,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 11,
+          "views": 12
+        },
+        "untouched_crop": {
+          "added_useful": 0,
+          "candidate_compared": 11,
+          "candidate_exact_crop": 11,
+          "candidate_exact_no_difference": 9,
+          "candidate_highlighted": 2,
+          "current_compared": 0,
+          "current_highlighted": 0,
+          "current_useful": 0,
+          "proposed_useful": 0,
+          "views": 12
+        }
+      },
+      "verified_native_overlays": 59,
+      "verified_source_crops": 118,
+      "views": 144
+    }
+  },
+  "schema": "chipmunk.image-reference-cross-format-local-edits/1",
+  "stability_confirmation": {
+    "corrected_freeze_sha256": "9311010be4f09d6f26e8fa0e3803ff958bcb5139a887c32b5b30e9151e7aaa09",
+    "corrected_reproduced_120_input_and_result_rows": true,
+    "corrected_result_sha256": "1fc86380b3d8a0f427e8c8c53a93c261deddb7cd87da6c804c0844ac5c35b93e",
+    "first_printed_conditions": {
+      "max_nuisance_highlights": true,
+      "max_wrong_crops": true,
+      "min_ai_feathered_added": false,
+      "min_ai_sharp_added": false,
+      "min_ordinary_smooth_added": false
+    },
+    "original_exact_replay_passed": true,
+    "original_freeze_sha256": "73d8f0f11aa19f6dca19789322da4bd546e3fe3a76290fdcfa77174672478db3",
+    "original_replay_sha256": "d1d5b4197f73326c4b2e894147bbdbe5597056fe7191cf9bd54833d88ddb95bf",
+    "original_result_sha256": "df53816f23c5bd9661fc74f5e9a6b6097aa662dfca6a476add3e03a30931db4d",
+    "scope": "Paired changes only; no serving or overall confidence change.",
+    "summary": {
+      "conditions": {
+        "max_nuisance_highlights": true,
+        "max_wrong_crops": true,
+        "min_ai_feathered_added": false,
+        "min_ai_sharp_added": false,
+        "min_ordinary_smooth_added": true
+      },
+      "counts": {
+        "ai_sharp_added": 2,
+        "ai_smooth_tone_added": 4,
+        "ordinary_smooth_added": 6,
+        "ordinary_smooth_tone_added": 6
+      },
+      "passed": false,
+      "strata": {
+        "ai/contrast": {
+          "exact": 5,
+          "raw_highlighted": 2,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/different_photo": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/feathered": {
+          "exact": 4,
+          "raw_highlighted": 4,
+          "raw_useful": 3,
+          "stable_highlighted": 3,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/fractional": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/local_blur": {
+          "exact": 4,
+          "raw_highlighted": 4,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/nonproportional": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/prior_jpeg": {
+          "exact": 4,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/rotation": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ai/sharp": {
+          "exact": 4,
+          "raw_highlighted": 4,
+          "raw_useful": 4,
+          "stable_highlighted": 3,
+          "stable_useful": 2,
+          "views": 6
+        },
+        "ai/smooth_tone": {
+          "exact": 4,
+          "raw_highlighted": 4,
+          "raw_useful": 4,
+          "stable_highlighted": 4,
+          "stable_useful": 4,
+          "views": 6
+        },
+        "ai/untouched_crop": {
+          "exact": 4,
+          "raw_highlighted": 1,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/contrast": {
+          "exact": 6,
+          "raw_highlighted": 1,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/different_photo": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/fractional": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/local_blur": {
+          "exact": 5,
+          "raw_highlighted": 4,
+          "raw_useful": 0,
+          "stable_highlighted": 1,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/nonproportional": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/prior_jpeg": {
+          "exact": 5,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/rotation": {
+          "exact": 0,
+          "raw_highlighted": 0,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        },
+        "ordinary/smooth_tone": {
+          "exact": 6,
+          "raw_highlighted": 6,
+          "raw_useful": 6,
+          "stable_highlighted": 6,
+          "stable_useful": 6,
+          "views": 6
+        },
+        "ordinary/untouched_crop": {
+          "exact": 6,
+          "raw_highlighted": 1,
+          "raw_useful": 0,
+          "stable_highlighted": 0,
+          "stable_useful": 0,
+          "views": 6
+        }
+      },
+      "verified_overlays": 17,
+      "verified_source_crops": 34,
+      "views": 120
+    },
+    "summary_label_correction": "The ordinary smooth-tone count is 6 and meets the frozen minimum of 4. Both AI gates still fail."
+  }
+}

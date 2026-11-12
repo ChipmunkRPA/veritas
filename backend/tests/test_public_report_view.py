@@ -210,6 +210,31 @@ def test_generated_localiser_limitation_hides_names_preserving_benchmark_and_sou
     assert snapshot_hash(snapshot) == before and view['summary']['limitation'] == generated
 
 
+def test_stored_face_scope_caveat_renders_without_the_model_name():
+    from app.engine.fusion.runtime import FACE_SCOPE_CAVEAT
+    from app.reports import engine
+
+    original = specimen('image', 'standard')
+    identity = 'dima806 deepfake_vs_real_image_detection (ViT-B/16)'
+    caveat = FACE_SCOPE_CAVEAT.format(name=identity)
+    source_quote = f'The source note reads “{identity}”.'
+    result = deepcopy(original.result)
+    result['caveats'] = [caveat, source_quote]
+    frozen = original.model_copy(update={'result': result})
+    before = snapshot_hash(frozen)
+    raw = engine.view_of(frozen, version='test')
+    assert raw['limitations'][0]['text'] == caveat
+    assert raw['summary']['limitation'] == 'Main limitation: ' + caveat
+    public = public_view(frozen, raw)
+    limitation = public['limitations'][0]['text']
+    assert public['summary']['limitation'] == 'Main limitation: ' + limitation
+    assert 'no face was detected' in limitation and 'images with and without faces' in limitation
+    assert identity not in limitation and public['limitations'][1]['text'] == source_quote
+    html = engine.render_html(frozen, embed_fonts=False)
+    assert limitation in html and caveat not in html and source_quote in html
+    assert snapshot_hash(frozen) == before
+
+
 @pytest.mark.parametrize('profile', ['standard', 'forensic'])
 def test_partial_document_main_limitation_uses_the_same_public_prose_as_its_list(profile):
     from app.engine.stages.document import enforce_extraction_scope

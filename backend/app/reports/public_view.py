@@ -8,6 +8,7 @@ from typing import Any
 from app.api.public_projection import localisation_reference, neutral_text, project
 from app.core.canonical import canonical_hash
 from app.engine.fusion import disclosures
+from app.engine.fusion.runtime import FACE_SCOPE_CAVEAT
 from app.reports.snapshot import ReportSnapshot, snapshot_hash
 
 _SOURCE_FAMILIES = {'F1_provenance', 'F2_self_declared_metadata', 'F8_metadata_consistency'}
@@ -15,6 +16,16 @@ _MODEL_ALIASES = {'DFDC', 'DDA', 'YuNet', 'Community Forensics', 'Binoculars', '
                   'Qwen2.5-1.5B', 'Qwen2.5-1.5B-Instruct', 'desklib-ft-v2', 'DINOv2-small',
                   'DeBERTa-v3-large', 'DeBERTa', 'Qwen2.5-3B', 'ChatGPT-2022', 'Veritas fine-tune',
                   'Mesorch', 'RADAR', 'SPAI', 'UnivFD', 'FUSED', 'OpenSDI'}
+_FACE_SCOPE_SUFFIX = FACE_SCOPE_CAVEAT.split('{name}', 1)[1]
+_PUBLIC_FACE_SCOPE = ('A face-oriented check examined the whole image because no face was detected. '
+                      'Its stand-alone evidence covers AI-generated faces. Its response contributed only through '
+                      'the combined estimate, whose weights were fitted on images with and without faces.')
+
+
+def is_named_face_scope_limitation(value: object) -> bool:
+    """Recognize the exact generated face-scope caveat on a stored result."""
+    return (isinstance(value, str) and value.endswith(_FACE_SCOPE_SUFFIX)
+            and bool(value[:-len(_FACE_SCOPE_SUFFIX)].strip()))
 
 
 def _identities(snapshot: ReportSnapshot) -> tuple[dict[str, str], list[str]]:
@@ -161,6 +172,9 @@ def public_view(snapshot: ReportSnapshot, original: dict[str, Any]) -> dict[str,
         # Recognize the same generated limitation with or without that heading;
         # arbitrary source caveats still do not enter the prose replacement path.
         content = text.removeprefix('Main limitation: ') if isinstance(text, str) else text
+        if isinstance(content, str) and is_named_face_scope_limitation(content):
+            prefix = text[:len(text) - len(content)]
+            return prefix + _PUBLIC_FACE_SCOPE
         if isinstance(content, str) and (content in generated_limitations or content.startswith((
                 'Text classifier that scored this document:', 'allowlisted component with unreviewed training-data terms:',
                 'A check that this analysis depends on did not run:', 'Requested full profile reduced:',

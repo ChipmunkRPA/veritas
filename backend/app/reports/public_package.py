@@ -24,7 +24,7 @@ from app.core.config import settings
 from app.evidence.service import ASSET_TYPES, asset_refs
 from app.reports import package as legacy
 from app.reports import signing, snapshot
-from app.reports.public_policy import package_template
+from app.reports.public_policy import legacy_face_scope_safe, package_template
 from app.storage.db import Analysis, Artefact, AuditEvent, ReportRow
 from app.storage.objects import CHUNK
 
@@ -97,6 +97,8 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
             or frozen.report.id != report.id or frozen.report.template_set != report.template_set
             or frozen.report.profile != report.profile):
         raise legacy.PackageError('The report snapshot does not match its analysis and stored identity.')
+    if not legacy_face_scope_safe(frozen):
+        raise legacy.PackageError('Generate a current, signed, unredacted report before exporting its evidence package.')
     evidence = _evidence(frozen)
     if analysis.kind != 'image':
         from app.reports.multimedia_evidence import verify_assets

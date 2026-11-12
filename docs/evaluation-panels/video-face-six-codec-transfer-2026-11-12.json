@@ -1,0 +1,496 @@
+{
+  "app_measurement_preview": {
+    "n": 6,
+    "results": [
+      {
+        "codec": "vp9",
+        "elapsed_seconds": 2.668,
+        "measurement_status": "localized",
+        "range_s": [
+          2.16,
+          2.4
+        ],
+        "role": "known_swap"
+      },
+      {
+        "codec": "vp9",
+        "elapsed_seconds": 2.657,
+        "measurement_status": "no_distinct_range",
+        "range_s": null,
+        "role": "genuine_original"
+      },
+      {
+        "codec": "vp9",
+        "elapsed_seconds": 2.627,
+        "measurement_status": "localized",
+        "range_s": [
+          2.16,
+          2.4
+        ],
+        "role": "whole_picture_cut"
+      },
+      {
+        "codec": "hevc",
+        "elapsed_seconds": 2.636,
+        "measurement_status": "localized",
+        "range_s": [
+          2.16,
+          2.4
+        ],
+        "role": "known_swap"
+      },
+      {
+        "codec": "hevc",
+        "elapsed_seconds": 2.655,
+        "measurement_status": "no_distinct_range",
+        "range_s": null,
+        "role": "genuine_original"
+      },
+      {
+        "codec": "hevc",
+        "elapsed_seconds": 2.579,
+        "measurement_status": "localized",
+        "range_s": [
+          2.16,
+          2.4
+        ],
+        "role": "whole_picture_cut"
+      }
+    ],
+    "status": "verified"
+  },
+  "carrier_verification": {
+    "video/mp4": 32,
+    "webm": 32
+  },
+  "decision": "Both held codecs failed the frozen whole-picture cut gate. Serving scope remains H.264.",
+  "development": {
+    "hevc": {
+      "added_groups": 2,
+      "advances": false,
+      "counts": {
+        "cut": {
+          "cases": 2,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 2,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "ordinary": {
+          "cases": 10,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 10,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "swap": {
+          "cases": 4,
+          "combined_located": 4,
+          "fallback_flags": 4,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 4,
+          "misplaced_fallback": 0,
+          "new_located": 4
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "ordinary": true,
+        "source_groups": false,
+        "swap_locations": true
+      }
+    },
+    "vp9": {
+      "added_groups": 2,
+      "advances": false,
+      "counts": {
+        "cut": {
+          "cases": 2,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 2,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "ordinary": {
+          "cases": 10,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 10,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "swap": {
+          "cases": 4,
+          "combined_located": 4,
+          "fallback_flags": 4,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 4,
+          "misplaced_fallback": 0,
+          "new_located": 4
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "ordinary": true,
+        "source_groups": false,
+        "swap_locations": true
+      }
+    }
+  },
+  "endpoint_summary": {
+    "hevc": {
+      "exact_intervals": 4,
+      "intervals_with_both_endpoints_40ms_late": 4,
+      "maximum_absolute_endpoint_error_ms": 40,
+      "median_iou": "6/7",
+      "minimum_iou": "5/7"
+    },
+    "vp9": {
+      "exact_intervals": 4,
+      "intervals_with_both_endpoints_40ms_late": 4,
+      "maximum_absolute_endpoint_error_ms": 40,
+      "median_iou": "6/7",
+      "minimum_iou": "5/7"
+    }
+  },
+  "freeze_sha256": "fede67ae6aa28cd00565e2ebbd01f1ee6af9479713b2a4df35ee97b19abd545e",
+  "held": {
+    "hevc": {
+      "added_groups": 4,
+      "advances": false,
+      "counts": {
+        "cut": {
+          "cases": 4,
+          "combined_located": 0,
+          "fallback_flags": 2,
+          "incumbent_flags": 1,
+          "incumbent_located": 0,
+          "measured_fallback": 4,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "ordinary": {
+          "cases": 20,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 2,
+          "incumbent_located": 0,
+          "measured_fallback": 20,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "swap": {
+          "cases": 8,
+          "combined_located": 8,
+          "fallback_flags": 8,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 8,
+          "misplaced_fallback": 0,
+          "new_located": 8
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": false,
+        "ordinary": true,
+        "source_groups": true,
+        "swap_locations": true
+      }
+    },
+    "vp9": {
+      "added_groups": 4,
+      "advances": false,
+      "counts": {
+        "cut": {
+          "cases": 4,
+          "combined_located": 0,
+          "fallback_flags": 2,
+          "incumbent_flags": 1,
+          "incumbent_located": 0,
+          "measured_fallback": 4,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "ordinary": {
+          "cases": 20,
+          "combined_located": 0,
+          "fallback_flags": 0,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 20,
+          "misplaced_fallback": 0,
+          "new_located": 0
+        },
+        "swap": {
+          "cases": 8,
+          "combined_located": 8,
+          "fallback_flags": 8,
+          "incumbent_flags": 0,
+          "incumbent_located": 0,
+          "measured_fallback": 8,
+          "misplaced_fallback": 0,
+          "new_located": 8
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": false,
+        "ordinary": true,
+        "source_groups": true,
+        "swap_locations": true
+      }
+    }
+  },
+  "independent_replay": {
+    "aggregate_sha256": "5fcc0344a13f9169d97794fbd5c59116c6f52088ec2e9b38f22affe792df5c2a",
+    "byte_identical_reconstructions": 64,
+    "decoded_held_pictures": {
+      "hevc": 3840,
+      "vp9": 3840
+    },
+    "exact_face_crops": 60,
+    "examples": {
+      "hevc": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "iou": "1",
+        "known_s": [
+          "54/25",
+          "12/5"
+        ],
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      },
+      "vp9": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "iou": "1",
+        "known_s": [
+          "54/25",
+          "12/5"
+        ],
+        "selected_s": [
+          "54/25",
+          "12/5"
+        ]
+      }
+    },
+    "held_files": 64,
+    "native_source_pictures": 600,
+    "status": "verified",
+    "timing_decisions": 128,
+    "verified_cuts": 8,
+    "verified_swap_or_ordinary_intervals": 40
+  },
+  "posthoc_cut_diagnostic": {
+    "all_codecs_flag_the_same_cuts": true,
+    "h264_journal_sha256": "e6435939dc4c78101bc1d079dfba61838933cd47233bbba37b539d7f90e1ba49",
+    "h264_original_flags": 0,
+    "h264_views": 16,
+    "matched_h264_counts": {
+      "cut": {
+        "cases": 4,
+        "fallback_flags": 2,
+        "incumbent_flags": 0
+      },
+      "original": {
+        "cases": 4,
+        "fallback_flags": 0,
+        "incumbent_flags": 0
+      },
+      "swap": {
+        "cases": 8,
+        "fallback_flags": 8,
+        "incumbent_flags": 0
+      }
+    },
+    "matched_h264_crf": 23,
+    "native_boundary_frames_replayed": 120,
+    "posthoc": true,
+    "scene_correlation_bounds": {
+      "h264": {
+        "cut": {
+          "minimum_edge_lower_quartile": [
+            0.2916683256626129,
+            0.2962528467178345
+          ],
+          "minimum_edge_median": [
+            0.7136982679367065,
+            0.7269307374954224
+          ],
+          "n": 2
+        },
+        "swap": {
+          "minimum_edge_lower_quartile": [
+            0.9129118323326111,
+            0.9917743802070618
+          ],
+          "minimum_edge_median": [
+            0.9375826716423035,
+            0.9975225925445557
+          ],
+          "n": 8
+        }
+      },
+      "hevc": {
+        "cut": {
+          "minimum_edge_lower_quartile": [
+            0.2764073610305786,
+            0.2899065315723419
+          ],
+          "minimum_edge_median": [
+            0.6635075807571411,
+            0.6830158233642578
+          ],
+          "n": 2
+        },
+        "swap": {
+          "minimum_edge_lower_quartile": [
+            0.913020133972168,
+            0.9936200380325317
+          ],
+          "minimum_edge_median": [
+            0.9416953325271606,
+            0.9973317980766296
+          ],
+          "n": 8
+        }
+      },
+      "vp9": {
+        "cut": {
+          "minimum_edge_lower_quartile": [
+            0.2649923861026764,
+            0.2909461557865143
+          ],
+          "minimum_edge_median": [
+            0.6739036440849304,
+            0.7109071016311646
+          ],
+          "n": 2
+        },
+        "swap": {
+          "minimum_edge_lower_quartile": [
+            0.91415935754776,
+            0.9931017160415649
+          ],
+          "minimum_edge_median": [
+            0.9398808479309082,
+            0.9972577095031738
+          ],
+          "n": 8
+        }
+      }
+    },
+    "source_boundary_journal_sha256": "61d40117387fab50815e2b87e25d718ae456858bbede5aad80d2d9e47bb572ac",
+    "status": "verified",
+    "threshold_changed": false
+  },
+  "protocol": {
+    "codec_recipes": {
+      "hevc": {
+        "options": [
+          "-c:v",
+          "libx265",
+          "-preset",
+          "ultrafast",
+          "-tag:v",
+          "hvc1",
+          "-video_track_timescale",
+          "25000",
+          "-x265-params",
+          "pools=1:frame-threads=1:keyint=25:min-keyint=25:scenecut=0:log-level=error"
+        ],
+        "primary": 26,
+        "suffix": "mp4",
+        "tandem": 38
+      },
+      "vp9": {
+        "options": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "7",
+          "-b:v",
+          "0",
+          "-g",
+          "25",
+          "-row-mt",
+          "1",
+          "-lag-in-frames",
+          "0"
+        ],
+        "primary": 32,
+        "suffix": "webm",
+        "tandem": 44
+      }
+    },
+    "dedupe_iou": "1/2",
+    "dimensions": [
+      640,
+      360
+    ],
+    "fps": 25,
+    "frames": 120,
+    "gate_per_codec": {
+      "added_correct": 4,
+      "added_groups": 3,
+      "coverage_min": 0.9,
+      "cut_extra_max": 0,
+      "ordinary_extra_max": 1
+    },
+    "methods": "Retain coarse and 8 Hz flags. Test every second native picture only after 8 Hz measures a winner and emits no distinct range. Freeze the deployed rank, guards, point and duplicate suppression.",
+    "point": 0.1,
+    "schema": "chipmunk.video-face-six-codec-transfer/1",
+    "spans": [
+      [
+        54,
+        60
+      ],
+      [
+        67,
+        73
+      ]
+    ]
+  },
+  "role_separation": {
+    "earlier_localization_groups_compared": 37,
+    "held_groups": 4,
+    "known_held_group_overlaps_by_source_or_donor_key": 0,
+    "limitation": "Some recordings had other project exposure. Separation covers documented source links and donor keys.",
+    "reused_development_groups": 2
+  },
+  "runtime": {
+    "elapsed_s": 178.11228416599988,
+    "journal_sha256": "0f0646e223f3b58fdd639c89c0f8298a2f6eeeb6b086130601838232fc3cc45c",
+    "media_sha256": "6fd49736738ea4c6eca8a64d014d8374a7b63c1edf66b82191190c2101356f3a",
+    "peak_rss_bytes": 285999104
+  },
+  "sampled_native_pictures": 6336,
+  "serving_change": false
+}

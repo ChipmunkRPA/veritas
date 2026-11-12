@@ -252,6 +252,9 @@ with the additional consecutive support rule.
 The [six-picture duration transfer](video-face-six-duration-transfer-2026-11-12.md)
 rebuilds 64 held H.264 deliveries byte for byte and verifies native ranges and
 source crops at two additional clip lengths.
+The [six-picture codec comparison](video-face-six-codec-transfer-2026-11-12.md)
+audits VP9 and HEVC deliveries and replays the same false cut ranges against
+matched H.264 inputs and native background pixels.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

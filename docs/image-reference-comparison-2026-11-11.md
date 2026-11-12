@@ -12,6 +12,8 @@ The app can also compare same-framing copies at different pixel dimensions when 
 
 A single-frame RGB PNG can also be compared after a whole-image right-angle rotation or reflection. The app requires a unique orientation supported by distributed exact pixel matches. The result gives the matched orientation and keeps each crop in its source orientation. [Orientation evaluation and replay](image-reference-orientation-transfer-2026-11-12.md)
 
+When those comparisons leave a pair unassessed, the app can verify a crop taken after a right-angle rotation or reflection. This path supports a single-frame RGB PNG and an earlier image with a longest side of up to 1,024 pixels. The submitted crop must retain 55–90% of the earlier area. The result shows the earlier overlap in native pixels and keeps both evidence crops in their own source orientation. The app measures differences inside the overlap. [Oriented crop evaluation](image-reference-oriented-crop-2026-11-12.md)
+
 For the tested color JPEG delivery profile, the app can also compare a submitted crop that was subsequently resized. It shows the matched earlier area in its native coordinates and leaves earlier pixels outside that area unassessed. [Crop-and-resize evaluation](image-reference-crop-resize-transfer-2026-11-11.md)
 
 The earlier-copy feature also supports a cropped and resized single-frame RGB PNG when a tested resize reproduces the unchanged pixels exactly across textured areas. This fallback covers earlier images up to 768 pixels on the longest side, submitted images up to 845 pixels, and proportional resizing from 0.72× to 1.17× after rounding. The report shows the matched earlier area and exact pixel and tile counts. Sparse texture, ambiguous geometry, and widespread differences can leave the pair unassessed. The downloaded JSON includes the resize method and a hash of the reconstructed RGB grid so the offline reviewer can reproduce the comparison. [PNG evaluation and replay](image-png-exact-crop-resize-2026-11-11.md)
@@ -19,6 +21,12 @@ The earlier-copy feature also supports a cropped and resized single-frame RGB PN
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
 The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values. When the overlay is present, it verifies every marked and transparent pixel against the mask at the submitted crop's coordinates.
+
+For a rotated and cropped comparison, use the [oriented crop reviewer](../backend/scripts/review_image_reference_oriented_crop_export.py). It also opens earlier comparison formats.
+
+```sh
+backend/.venv/bin/python -I backend/scripts/review_image_reference_oriented_crop_export.py comparison.json earlier.png submitted.png
+```
 
 A production-path replay regenerated all 384 held resized PNG and JPEG75 comparisons. Both selection journals matched the earlier frozen hashes. The replay verified 85 overlays and 170 exact native crops across 74 comparisons with selected regions. The other 310 comparisons contained no overlay. [Frozen replay receipt](evaluation-panels/image-reference-overlay-audit-2026-11-11.json) · [Replay runner](../backend/scripts/review_image_reference_overlays.py)
 

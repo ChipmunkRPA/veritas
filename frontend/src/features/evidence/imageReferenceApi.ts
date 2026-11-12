@@ -49,11 +49,21 @@ export interface ImageReferenceRecord {
     matched_tiles: [number, number][]
     rgb_sha256: string
   }
+  exact_oriented_crop?: {
+    transform: keyof typeof orientationLabels
+    native_crop: NativeImageArea
+    projected_crop: NativeImageArea
+    matched_pixels: number
+    matched_tiles: [number, number][]
+    projected_rgb_sha256: string
+    difference_mask_sha256: string
+  }
   additional_regions?: number
 }
 
 export const exactPngCropResizeSchema = 'chipmunk.image-reference-comparison/5'
 export const exactPngOrientationSchema = 'chipmunk.image-reference-comparison/6'
+export const exactOrientedCropSchema = 'chipmunk.image-reference-comparison/7'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
   rotate_180: '180-degree rotation',
@@ -89,6 +99,11 @@ export async function comparisonAvailability(analysisId: string, signal: AbortSi
   return result?.available === true
 }
 
+function validArea(area?: NativeImageArea): area is NativeImageArea {
+  return !!area && [area.x, area.y, area.w, area.h].every(Number.isSafeInteger)
+    && area.x >= 0 && area.y >= 0 && area.w > 0 && area.h > 0
+}
+
 export async function compareWithEarlierImage(analysisId: string, file: File, signal: AbortSignal): Promise<ImageReferenceResult> {
   const form = new FormData()
   form.append('reference', file)
@@ -113,6 +128,16 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       || !Object.prototype.hasOwnProperty.call(orientationLabels, orientation.transform)
       || !Number.isSafeInteger(orientation.matched_pixels) || !Array.isArray(orientation.matched_tiles))) {
     throw new Error('The server returned an incomplete orientation comparison.')
+  }
+  const orientedCrop = comparison.exact_oriented_crop
+  if (comparison.schema === exactOrientedCropSchema && (comparison.status !== 'comparable' || !orientedCrop
+      || !Object.prototype.hasOwnProperty.call(orientationLabels, orientedCrop.transform)
+      || !validArea(orientedCrop.native_crop) || !validArea(orientedCrop.projected_crop)
+      || orientedCrop.projected_crop.w !== comparison.submitted.width || orientedCrop.projected_crop.h !== comparison.submitted.height
+      || orientedCrop.native_crop.x + orientedCrop.native_crop.w > comparison.reference.width
+      || orientedCrop.native_crop.y + orientedCrop.native_crop.h > comparison.reference.height
+      || !Number.isSafeInteger(orientedCrop.matched_pixels) || !Array.isArray(orientedCrop.matched_tiles))) {
+    throw new Error('The server returned an incomplete oriented crop comparison.')
   }
   return result
 }

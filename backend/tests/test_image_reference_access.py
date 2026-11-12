@@ -24,6 +24,7 @@ from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
 from scripts.review_image_reference_export import review
+from scripts.review_image_reference_oriented_crop_export import review as review_oriented_crop
 
 
 def _png(pixels):
@@ -173,6 +174,49 @@ def test_rotated_png_with_two_exact_alignments_abstains():
     rotated = np.rot90(symmetric, -1)
     with Image.open(io.BytesIO(_png(rotated))) as carrier:
         assert reference_png_orientation.compare(symmetric, rotated, carrier) == (None, None)
+
+
+def test_rotated_native_crop_survives_both_exports(reference_http, tmp_path):
+    f = reference_http
+    earlier = f.reference_pixels
+    projected = np.rot90(earlier, -1)[29:341, 17:235].copy()
+    submitted = projected.copy()
+    submitted[80:126, 73:122] ^= 63
+    content = _png(submitted)
+    stored = f.store.put_bytes(content)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+
+    reply = f.client.post(_url(), files=_upload(f.reference), headers=f.viewer, data={"include_pdf": "true"})
+    assert reply.status_code == 200 and reply.headers["Cache-Control"] == "no-store"
+    payload = reply.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/7"
+    proof = comparison["exact_oriented_crop"]
+    assert proof["transform"] == "rotate_90_clockwise"
+    assert proof["projected_crop"] == {"x": 17, "y": 29, "w": 218, "h": 312}
+    assert proof["native_crop"] == {"x": 29, "y": 21, "w": 312, "h": 218}
+    assert proof["matched_pixels"] == 218 * 312 - 49 * 46
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {"x": 109, "y": 117, "w": 46, "h": 49}
+    with Image.open(io.BytesIO(_asset_bytes(payload, region["reference_crop"]))) as image:
+        np.testing.assert_array_equal(np.asarray(image), earlier[117:166, 109:155])
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert "Earlier copy overlap: x 29, y 21, 312 x 218 px" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+
+    export, original, analyzed = (tmp_path / name for name in ("crop.json", "earlier.png", "submitted.png"))
+    export.write_text(json.dumps(payload))
+    original.write_bytes(f.reference)
+    analyzed.write_bytes(content)
+    result = review_oriented_crop(export, original, analyzed)
+    assert result["mask_pixels_counted"] == 49 * 46 and result["crops_verified"] == 2
+    proof["projected_crop"]["x"] += 1
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Exact oriented crop measurements differ"):
+        review_oriented_crop(export, original, analyzed)
 
 
 def test_gate_requires_opt_in_completed_image_and_retained_original(reference_http, monkeypatch):

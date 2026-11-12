@@ -705,6 +705,17 @@ python -I scripts/review_image_reference_export.py \
   chipmunk-verify-image-comparison.json earlier.png submitted.jpg
 ```
 
+For a crop taken after a right-angle rotation or reflection, use the additive
+oriented crop reviewer. It also opens the earlier comparison schemas. It
+independently verifies the unique crop placement, both native coordinate
+mappings, all retained mask pixels and the exact crop and overlay bytes.
+[Oriented crop evaluation](image-reference-oriented-crop-2026-11-12.md)
+
+```sh
+.venv/bin/python -I scripts/review_image_reference_oriented_crop_export.py \
+  chipmunk-verify-image-comparison.json earlier.png submitted.png
+```
+
 The reviewer checks both file SHA-256 commitments and native dimensions after
 orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks

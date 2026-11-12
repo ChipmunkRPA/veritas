@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
-  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactPngCropResizeSchema, exactPngOrientationSchema,
+  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactPngCropResizeSchema, exactPngOrientationSchema,
   imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
@@ -65,7 +65,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const { reference, submitted, regions, mask, alignment } = comparison
   const comparable = comparison.status === 'comparable'
   const exact = comparison.schema === exactPngCropResizeSchema ? comparison.exact_projection : undefined
-  const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : undefined
+  const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : undefined
+  const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
@@ -112,10 +113,15 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {' '}Matching pixels cover {exact.matched_tiles.length} textured tiles using {kernels} resizing.
     </p>}
     {comparable && orientation && <p className="mt-2 mb-0 text-small text-text-muted">
-      The earlier copy aligned by {orientationLabels[orientation.transform]}.
+      {orientedCrop ? `An earlier crop aligned using ${orientationLabels[orientation.transform]}.`
+        : `The earlier copy aligned by ${orientationLabels[orientation.transform]}.`}
       {' '}{completeMatch ? 'Every submitted pixel matches after alignment.'
         : `${orientation.matched_pixels.toLocaleString('en-US')} submitted pixels match exactly after alignment.`}
       {' '}Each crop keeps its source orientation.
+    </p>}
+    {comparable && orientedCrop && <p className="mt-2 mb-0 text-small text-text-muted">
+      Earlier copy overlap <NativeArea area={orientedCrop.native_crop} />.
+      {' '}Pixels outside this earlier area were unassessed.
     </p>}
     {resized && !cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison found matching framing at different pixel dimensions. Differences were measured on the submitted image after resizing the earlier copy. The crops show pixels from each original file.

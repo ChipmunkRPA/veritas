@@ -157,7 +157,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
 
     artifacts = workspace / "evidence"
     try:
-        comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True)
+        comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True, allow_oriented_crop=True)
     except (*_image_errors, OpenCVError):
         raise ProblemError(422, "Image comparison could not finish", "The comparison could not read or compare the two images.") from None
     if comparison["submitted"]["sha256"] != sha256:

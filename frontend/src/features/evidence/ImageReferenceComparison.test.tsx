@@ -167,6 +167,29 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
   })
 
+  it('shows the earlier-image overlap for a cropped reflection and exports its proof', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/7'
+    result.comparison.exact_oriented_crop = {
+      transform: 'mirror_horizontal', matched_pixels: 75_000, matched_tiles: [[1, 1]],
+      native_crop: { x: 16, y: 10, w: 356, h: 230 }, projected_crop: { x: 12, y: 10, w: 356, h: 230 },
+      projected_rgb_sha256: hash, difference_mask_sha256: hash,
+    }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/An earlier crop aligned using left-to-right reflection/)).toBeTruthy()
+    expect(screen.getByText('x 16, y 10 · 356 × 230 px')).toBeTruthy()
+    expect(screen.getByText(/Pixels outside this earlier area were unassessed/)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('explains resize comparison and preserves both native coordinates in the JSON download', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/3'

@@ -17,6 +17,7 @@ from app.detectors.image import (
     reference_crop_resize,
     reference_png_exact_resize,
     reference_png_orientation,
+    reference_png_oriented_crop,
     reference_resize,
 )
 
@@ -91,7 +92,8 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
 
 
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
-            allow_integer_alignment: bool = False, allow_proportional_resize: bool = False) -> dict:
+            allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
+            allow_oriented_crop: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -101,7 +103,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             reference = np.array(oriented_before.convert("RGB"))
             submitted = np.array(oriented_after.convert("RGB"))
         schema = None
-        if (allow_integer_alignment or allow_proportional_resize) and not np.array_equal(reference, submitted):
+        if (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop) and not np.array_equal(reference, submitted):
             result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
                             if allow_proportional_resize else (None, None))
             if result is not None:
@@ -120,6 +122,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                     exact, selection = reference_png_exact_resize.compare(reference, submitted, questioned)
                     if exact is not None:
                         result, mask, schema = exact, selection, EXACT_PNG_CROP_RESIZE_SCHEMA
+            if allow_oriented_crop and result["status"] != "comparable":
+                oriented_crop, selection = reference_png_oriented_crop.compare(reference, submitted, questioned)
+                if oriented_crop is not None:
+                    result, mask, schema = oriented_crop, selection, reference_png_oriented_crop.SCHEMA
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
     aligned = "alignment" in result

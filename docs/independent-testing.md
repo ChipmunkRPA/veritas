@@ -197,6 +197,9 @@ fixed sentence ranker and its combination with the current check.
 The [multi-paragraph writing transfer](writing-multiparagraph-localization-transfer-2026-11-12.md)
 replays native article passages and constructed email equivalents, including
 unrelated paragraphs and quoted text.
+The [public-archive writing comparison](writing-archive-source-evidence-2026-11-12.md)
+replays exact archive matching and source offsets, including a publisher
+correction, missing-source controls, and quoted text that must be ignored.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -225,6 +228,9 @@ ordinary controls, native mouth crops, and PCM slices.
 The [mouth-pose comparison](video-mouth-pose-recurrence-2026-11-12.md)
 tests short neural redraws and independently reopens the seven pairs with
 source-compatible mouth motion, including their native pictures and PCM.
+The [six-picture face-swap comparison](video-face-six-picture-transfer-2026-11-12.md)
+re-creates the authored H.264 swaps and hard cuts and compares denser sampling
+with the additional consecutive support rule.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

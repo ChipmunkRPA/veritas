@@ -1,0 +1,1924 @@
+{
+  "schema": "chipmunk.writing-archive-source-evidence-public/1",
+  "evidence_type": "text_difference_from_registered_archive",
+  "authorship_confidence_contribution": 0,
+  "recommendation": "bounded_source_evidence_candidate",
+  "source_freeze": {
+    "schema": "chipmunk.writing-reference-archive-transfer/1",
+    "method": {
+      "rights": "Use four pinned U.S. State Department archival TEI volumes under the repository's public-domain and CC0 dedication. Include direct body paragraphs only from U.S. official sender headings and omit embedded quoted, foreign and editorial material.",
+      "source_sampling": "Hash order within each volume. Register up to 72 six-paragraph source windows per volume. Split up to four distinct official sender groups per volume into in-index evaluation and three into open-set holdout. Keep publisher corrections in a separate source group stratum.",
+      "text_retrieval": "Index case-folded eight-word fingerprints with source positions. Suppress grams common to more than four archive documents. Require at least 20 supported words and 55% lexical support per paragraph, three strictly ordered body paragraphs and 65% whole-body support. Refuse competing source matches within 10 percentage points. Require 60 total supported words.",
+      "alignment": "Retain strongly matched paragraphs and a single anchored gap between consecutive known anchors. Equal gaps can bind one changed paragraph. Unequal single gaps can identify an inserted or deleted paragraph. Leave exterior and longer ambiguous gaps unaligned.",
+      "differences": "Use the existing exact word-and-punctuation comparison on each aligned paragraph. Report original decoded Unicode ranges and precise changed tokens. Combine each paragraph's changed-token runs into an envelope for overlap measurement, retaining the exact separate runs.",
+      "controls": "Unchanged archive excerpts, exact same-source human sentence swaps, pre-correction publisher excerpts, a missing-source condition, quotes from a registered work inside unrelated genuine body text, and exact duplicate-source ambiguity. Generation adds no authorship label to the archive method.",
+      "publisher_probe": "Separately include one identified three-paragraph excerpt around an actual U.S. archive typo correction, d585 in frus1964-68v24. Keep the six-paragraph pre-correction intake and its observed dispositions.",
+      "current": "Measure first six incumbent native context windows at a raw response at least .5 on registered English original, ordinary sentence swap and generated files only. This is a location comparator.",
+      "metric": "Useful query mismatch range requires .30 nonwhitespace character IoU and .50 recall with known replacement. Publisher corrections use independently measured exact query and reference character edit coordinates. Source availability and attribution, ordinary differences and false mismatches are distinct outcomes.",
+      "interpretation": "This is a bounded public-source comparison. The result describes actual text matching or difference with the cited archive version. It contributes zero AI-origin or authorship confidence."
+    },
+    "volume_pins": {
+      "frus1961-63v09": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "819bc3ee6f6478bb8e20ad8499e9a9eaf1d06e39",
+        "xml_sha256": [
+          "e2f31e6d66b76f4d81c9311661a48ad3679aaf8dbaaddd9a48e2d9f2cae65d31",
+          "d5d210386f9882e9c8beb49be6d6309b6a869f5dc233cbd31c05b665701b07d5"
+        ]
+      },
+      "frus1964-68v08": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "819bc3ee6f6478bb8e20ad8499e9a9eaf1d06e39",
+        "xml_sha256": [
+          "2b11b34daf9ba996254ce33b5dfe68518216e45beeab0199417e519f01e04c86",
+          "014189190aa483b2e5601288c8f2a89bf5074a064e84c488fec1beb858c1e4cb"
+        ]
+      },
+      "frus1964-68v15": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+        "xml_sha256": [
+          "b0925e5f64418901b75f0a3a749c70cf239719cd59a8a90d503787e6313bea5a",
+          "570f2a0bfdcd9e6099c492f9ae1cca6948e34427354cfa2e93157496c1fe7bd9"
+        ]
+      },
+      "frus1964-68v24": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+        "xml_sha256": [
+          "c0fd378ef1ef3ffc33b28a67a33730672cbd725ca83bb4f2920f60e7be4820a9",
+          "99eda4695ad73d86b73000636fde4296f4923acafc216b4173e8314f441cfe08"
+        ]
+      }
+    },
+    "license_sha256": "832ba2061e56721ec56f349dac4fa2bc27683c1e937a768088050f302cd73ca4",
+    "publisher_probe": {
+      "volume": "frus1964-68v24",
+      "doc_id": "d585",
+      "commit": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+      "prior_commit": "c860bd1cdf5d5b206f2b63e92a1bd1ae24b4c66f",
+      "prior_xml_sha256": "d2ecaf45c4ec63e1636eae07da27a4de7a774b33de27d302644ec4c431d70ceb"
+    },
+    "code_sha256": "749e2a6563fdc038141a4972463a587dacded25678feeb90117c65d122205e5c"
+  },
+  "source_intake": {
+    "counts": {
+      "frus1961-63v09": {
+        "official_docs": 135,
+        "eligible_windows": 28,
+        "known": 4,
+        "unknown": 3,
+        "distractors": 21
+      },
+      "frus1964-68v08": {
+        "official_docs": 144,
+        "eligible_windows": 33,
+        "known": 4,
+        "unknown": 3,
+        "distractors": 26
+      },
+      "frus1964-68v15": {
+        "official_docs": 144,
+        "eligible_windows": 21,
+        "known": 4,
+        "distractors": 17
+      },
+      "frus1964-68v24": {
+        "official_docs": 293,
+        "eligible_windows": 44,
+        "known": 4,
+        "unknown": 3,
+        "targeted_genuine_probe": 1,
+        "distractors": 37
+      }
+    },
+    "prior_source_exposure": [
+      {
+        "packet": "previous-agreement",
+        "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+        "text_entries": 100,
+        "matched_sources": 0
+      },
+      {
+        "packet": "llmtrace",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v301",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v286",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v272",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5,
+        "matched_sources": 0
+      },
+      {
+        "packet": "opai-v257",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60,
+        "matched_sources": 0
+      },
+      {
+        "packet": "f1000-previous",
+        "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+        "text_entries": 18,
+        "matched_sources": 0
+      },
+      {
+        "packet": "publisher-abstract-pilot",
+        "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+        "text_entries": 4,
+        "matched_sources": 0
+      },
+      {
+        "packet": "wellcome-gates",
+        "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+        "text_entries": 42,
+        "matched_sources": 0
+      },
+      {
+        "packet": "pep",
+        "source_sha256": "e1c793216ed6ec9b83279646a09a54e063abf093db478d4a7f58590b45875506",
+        "text_entries": 10,
+        "matched_sources": 0
+      }
+    ],
+    "source_freeze_sha256": "d701e6850bd7f898126cce223409874450675e5d4babbe91f606f88732f6640f",
+    "volume_pins": {
+      "frus1961-63v09": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "819bc3ee6f6478bb8e20ad8499e9a9eaf1d06e39",
+        "xml_sha256": [
+          "e2f31e6d66b76f4d81c9311661a48ad3679aaf8dbaaddd9a48e2d9f2cae65d31",
+          "d5d210386f9882e9c8beb49be6d6309b6a869f5dc233cbd31c05b665701b07d5"
+        ]
+      },
+      "frus1964-68v08": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "819bc3ee6f6478bb8e20ad8499e9a9eaf1d06e39",
+        "xml_sha256": [
+          "2b11b34daf9ba996254ce33b5dfe68518216e45beeab0199417e519f01e04c86",
+          "014189190aa483b2e5601288c8f2a89bf5074a064e84c488fec1beb858c1e4cb"
+        ]
+      },
+      "frus1964-68v15": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+        "xml_sha256": [
+          "b0925e5f64418901b75f0a3a749c70cf239719cd59a8a90d503787e6313bea5a",
+          "570f2a0bfdcd9e6099c492f9ae1cca6948e34427354cfa2e93157496c1fe7bd9"
+        ]
+      },
+      "frus1964-68v24": {
+        "current": "216cdb7649a8e29504377d4f2858351dc46331a8",
+        "earlier": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+        "xml_sha256": [
+          "c0fd378ef1ef3ffc33b28a67a33730672cbd725ca83bb4f2920f60e7be4820a9",
+          "99eda4695ad73d86b73000636fde4296f4923acafc216b4173e8314f441cfe08"
+        ]
+      }
+    },
+    "publisher_probe": {
+      "volume": "frus1964-68v24",
+      "doc_id": "d585",
+      "commit": "41eae325d63e2f1513c8d56b56dde6a6a7e8b7bd",
+      "prior_commit": "c860bd1cdf5d5b206f2b63e92a1bd1ae24b4c66f",
+      "prior_xml_sha256": "d2ecaf45c4ec63e1636eae07da27a4de7a774b33de27d302644ec4c431d70ceb"
+    },
+    "rights": "U.S. public domain and CC0 1.0"
+  },
+  "six_paragraph_publisher_revisions_qualified": 0,
+  "initial_source_freeze": {
+    "sha256": "2430e79f3d4b81ec3241f579c9192b91be48baa615dcb72e0d8bccb2f2ce9f37",
+    "code_sha256": "2721fe0b240725fdf4b7a30d5bcff34b3f17ace6573c7b1f8f6768e07df93487"
+  },
+  "index_documents": [
+    "frus1961-63v09/d120",
+    "frus1961-63v09/d138",
+    "frus1961-63v09/d163",
+    "frus1961-63v09/d208",
+    "frus1961-63v09/d224",
+    "frus1961-63v09/d230",
+    "frus1961-63v09/d237",
+    "frus1961-63v09/d241",
+    "frus1961-63v09/d249",
+    "frus1961-63v09/d26",
+    "frus1961-63v09/d262",
+    "frus1961-63v09/d272",
+    "frus1961-63v09/d274",
+    "frus1961-63v09/d277",
+    "frus1961-63v09/d290",
+    "frus1961-63v09/d309",
+    "frus1961-63v09/d34",
+    "frus1961-63v09/d39",
+    "frus1961-63v09/d48",
+    "frus1961-63v09/d50",
+    "frus1961-63v09/d63",
+    "frus1961-63v09/d66",
+    "frus1961-63v09/d68",
+    "frus1961-63v09/d69",
+    "frus1961-63v09/d95",
+    "frus1964-68v08/d1",
+    "frus1964-68v08/d11",
+    "frus1964-68v08/d116",
+    "frus1964-68v08/d119",
+    "frus1964-68v08/d124",
+    "frus1964-68v08/d126",
+    "frus1964-68v08/d140",
+    "frus1964-68v08/d147",
+    "frus1964-68v08/d150",
+    "frus1964-68v08/d168",
+    "frus1964-68v08/d175",
+    "frus1964-68v08/d178",
+    "frus1964-68v08/d180",
+    "frus1964-68v08/d198",
+    "frus1964-68v08/d199",
+    "frus1964-68v08/d204",
+    "frus1964-68v08/d214",
+    "frus1964-68v08/d217",
+    "frus1964-68v08/d25",
+    "frus1964-68v08/d28",
+    "frus1964-68v08/d3",
+    "frus1964-68v08/d372",
+    "frus1964-68v08/d48",
+    "frus1964-68v08/d54",
+    "frus1964-68v08/d56",
+    "frus1964-68v08/d64",
+    "frus1964-68v08/d76",
+    "frus1964-68v08/d90",
+    "frus1964-68v08/d94",
+    "frus1964-68v08/d98",
+    "frus1964-68v15/d121",
+    "frus1964-68v15/d122",
+    "frus1964-68v15/d124",
+    "frus1964-68v15/d136",
+    "frus1964-68v15/d189",
+    "frus1964-68v15/d213",
+    "frus1964-68v15/d25",
+    "frus1964-68v15/d268",
+    "frus1964-68v15/d27",
+    "frus1964-68v15/d298",
+    "frus1964-68v15/d35",
+    "frus1964-68v15/d39",
+    "frus1964-68v15/d45",
+    "frus1964-68v15/d60",
+    "frus1964-68v15/d62",
+    "frus1964-68v15/d66",
+    "frus1964-68v15/d68",
+    "frus1964-68v15/d72",
+    "frus1964-68v15/d82",
+    "frus1964-68v15/d83",
+    "frus1964-68v15/d87",
+    "frus1964-68v24/d10",
+    "frus1964-68v24/d125",
+    "frus1964-68v24/d126",
+    "frus1964-68v24/d131",
+    "frus1964-68v24/d133",
+    "frus1964-68v24/d17",
+    "frus1964-68v24/d172",
+    "frus1964-68v24/d188",
+    "frus1964-68v24/d201",
+    "frus1964-68v24/d202",
+    "frus1964-68v24/d208",
+    "frus1964-68v24/d244",
+    "frus1964-68v24/d246",
+    "frus1964-68v24/d247",
+    "frus1964-68v24/d249",
+    "frus1964-68v24/d252",
+    "frus1964-68v24/d269",
+    "frus1964-68v24/d270",
+    "frus1964-68v24/d305",
+    "frus1964-68v24/d319",
+    "frus1964-68v24/d32",
+    "frus1964-68v24/d324",
+    "frus1964-68v24/d326",
+    "frus1964-68v24/d337",
+    "frus1964-68v24/d392",
+    "frus1964-68v24/d395",
+    "frus1964-68v24/d414",
+    "frus1964-68v24/d417",
+    "frus1964-68v24/d426",
+    "frus1964-68v24/d435",
+    "frus1964-68v24/d469",
+    "frus1964-68v24/d478",
+    "frus1964-68v24/d500",
+    "frus1964-68v24/d537",
+    "frus1964-68v24/d544",
+    "frus1964-68v24/d549",
+    "frus1964-68v24/d585",
+    "frus1964-68v24/d605",
+    "frus1964-68v24/d651",
+    "frus1964-68v24/d74",
+    "frus1964-68v24/d9",
+    "frus1964-68v24/d96"
+  ],
+  "aggregate": {
+    "indexed_sources": 118,
+    "generation_admission": {
+      "qwen": {
+        "attempted": 16,
+        "admitted": 13
+      },
+      "smol2": {
+        "attempted": 16,
+        "admitted": 8
+      }
+    },
+    "outcomes": {
+      "original": {
+        "files": 16,
+        "correct_source_or_abstention": 16,
+        "bound_source": 16,
+        "ambiguous_reference": 0,
+        "any_difference": 0,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 13,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "human_swap": {
+        "files": 16,
+        "correct_source_or_abstention": 16,
+        "bound_source": 16,
+        "ambiguous_reference": 0,
+        "any_difference": 16,
+        "archive_useful": 16,
+        "current_useful": 2,
+        "current_flag": 12,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "qwen": {
+        "files": 13,
+        "correct_source_or_abstention": 13,
+        "bound_source": 13,
+        "ambiguous_reference": 0,
+        "any_difference": 13,
+        "archive_useful": 13,
+        "current_useful": 1,
+        "current_flag": 11,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "smol2": {
+        "files": 8,
+        "correct_source_or_abstention": 8,
+        "bound_source": 8,
+        "ambiguous_reference": 0,
+        "any_difference": 8,
+        "archive_useful": 8,
+        "current_useful": 1,
+        "current_flag": 6,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "earlier_publisher": {
+        "files": 1,
+        "correct_source_or_abstention": 1,
+        "bound_source": 1,
+        "ambiguous_reference": 0,
+        "any_difference": 1,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 0,
+        "publisher_all_change_coordinates_touched": 1,
+        "unrelated_difference_paragraphs": 0
+      },
+      "publisher_current_control": {
+        "files": 1,
+        "correct_source_or_abstention": 1,
+        "bound_source": 1,
+        "ambiguous_reference": 0,
+        "any_difference": 0,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 0,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "unknown": {
+        "files": 9,
+        "correct_source_or_abstention": 9,
+        "bound_source": 0,
+        "ambiguous_reference": 0,
+        "any_difference": 0,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 0,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "quote_only": {
+        "files": 9,
+        "correct_source_or_abstention": 9,
+        "bound_source": 0,
+        "ambiguous_reference": 0,
+        "any_difference": 0,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 0,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      },
+      "duplicate_ambiguity": {
+        "files": 4,
+        "correct_source_or_abstention": 4,
+        "bound_source": 0,
+        "ambiguous_reference": 4,
+        "any_difference": 0,
+        "archive_useful": 0,
+        "current_useful": 0,
+        "current_flag": 0,
+        "publisher_all_change_coordinates_touched": 0,
+        "unrelated_difference_paragraphs": 0
+      }
+    },
+    "authorship_confidence_contribution": 0
+  },
+  "audit": {
+    "schema": "chipmunk.writing-reference-archive-audit/1",
+    "verified": true,
+    "fixtures": 77,
+    "verified_archive_paragraphs": 705,
+    "exact_edited_token_offsets": 1124,
+    "native_window_span_bindings": 1102,
+    "independent_source_attributions": 77,
+    "boundary_probes": {
+      "human_paragraph_insertion/files": 4,
+      "human_paragraph_insertion/expected": 4,
+      "human_paragraph_deletion/files": 4,
+      "human_paragraph_deletion/expected": 4,
+      "human_paragraph_replacement/files": 4,
+      "human_paragraph_replacement/expected": 4,
+      "first_three_paragraphs_only/files": 4,
+      "first_three_paragraphs_only/expected": 4,
+      "reversed_paragraph_order/files": 4,
+      "reversed_paragraph_order/expected": 4
+    },
+    "commitments": {
+      "source-freeze.json": "d701e6850bd7f898126cce223409874450675e5d4babbe91f606f88732f6640f",
+      "source-receipt.json": "43ad506c79f81264c13b27e2be0d2aaae008ee5420b1787da0baf9c66428cb0b",
+      "freeze.json": "d577d8e64f55e34ba63ef3c03970f8cc60a64cf8ce184ce423178badf7297f04",
+      "index.json": "29c3e843f74bcaa244ee15af6f5cebd572091051614d554823bebab46b7ca24e",
+      "input-lock.json": "9a54420d2d3ef3d943c4103a22113aea7a221eab499df9f3c9a3e0d73eb912b4",
+      "primary.json": "68be7554c66421a0a77c23298979d7a5b9200f834eba23171bec025c7573c549",
+      "outcomes.json": "e89c25697df4759042f00cb2fbabcced9fa1ee94502fdf9a9b055c5125afa399",
+      "aggregate.json": "d7fbe16d2df758833d64b7ed04e1637aa75f85f2f4a665cbb114801a7f08bad1"
+    }
+  },
+  "audit_sha256": "912ea9973f7ea11b3ee6b68d7319e76d59948e72c6ecc8704d2657def598c493",
+  "tampered_token_offset_rejected": true,
+  "actual_publisher_correction": {
+    "source": "frus1964-68v24/d585",
+    "known_changed_character_ranges": [
+      {
+        "paragraph": 0,
+        "reference": [
+          836,
+          836
+        ],
+        "query": [
+          836,
+          838
+        ]
+      }
+    ],
+    "reported_difference": [
+      {
+        "query_paragraph": 0,
+        "source_paragraph": 0,
+        "source_ordinal": 3,
+        "relation": "fingerprint_anchor",
+        "changes": [
+          {
+            "earlier": [
+              834,
+              842
+            ],
+            "later": [
+              834,
+              844
+            ],
+            "earlier_changed_tokens": [
+              [
+                834,
+                842
+              ]
+            ],
+            "later_changed_tokens": [
+              [
+                834,
+                836
+              ],
+              [
+                836,
+                837
+              ],
+              [
+                838,
+                844
+              ]
+            ]
+          }
+        ],
+        "query_envelope": [
+          834,
+          844
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "group": "frus1961-63v09/d208",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d208",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d208",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d208",
+      "known_query_range": [
+        310,
+        538
+      ],
+      "difference_query_ranges": [
+        [
+          310,
+          537
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d262",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d262",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d262",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d262",
+      "known_query_range": [
+        849,
+        1048
+      ],
+      "difference_query_ranges": [
+        [
+          849,
+          1047
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d262",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d262",
+      "known_query_range": [
+        849,
+        967
+      ],
+      "difference_query_ranges": [
+        [
+          849,
+          948
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d120",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d120",
+      "known_query_range": [
+        1334,
+        1401
+      ],
+      "difference_query_ranges": [
+        [
+          1334,
+          1400
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d120",
+      "known_query_range": [
+        1334,
+        1414
+      ],
+      "difference_query_ranges": [
+        [
+          1334,
+          1399
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d120",
+      "known_query_range": [
+        1334,
+        1441
+      ],
+      "difference_query_ranges": [
+        [
+          1334,
+          1440
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d138",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d138",
+      "known_query_range": [
+        370,
+        477
+      ],
+      "difference_query_ranges": [
+        [
+          370,
+          476
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d138",
+      "known_query_range": [
+        370,
+        490
+      ],
+      "difference_query_ranges": [
+        [
+          370,
+          489
+        ]
+      ]
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1961-63v09/d138",
+      "known_query_range": [
+        370,
+        497
+      ],
+      "difference_query_ranges": [
+        [
+          370,
+          496
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d180",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d180",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d180",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d180",
+      "known_query_range": [
+        921,
+        1003
+      ],
+      "difference_query_ranges": [
+        [
+          921,
+          1002
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d180",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": true,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d180",
+      "known_query_range": [
+        921,
+        1019
+      ],
+      "difference_query_ranges": [
+        [
+          921,
+          1018
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d124",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d124",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d124",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": true,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d124",
+      "known_query_range": [
+        1091,
+        1253
+      ],
+      "difference_query_ranges": [
+        [
+          1091,
+          1252
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d124",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d124",
+      "known_query_range": [
+        1091,
+        1224
+      ],
+      "difference_query_ranges": [
+        [
+          1096,
+          1210
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d64",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d64",
+      "known_query_range": [
+        2345,
+        2475
+      ],
+      "difference_query_ranges": [
+        [
+          2345,
+          2474
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d64",
+      "known_query_range": [
+        2345,
+        2475
+      ],
+      "difference_query_ranges": [
+        [
+          2345,
+          2474
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d64",
+      "known_query_range": [
+        2345,
+        2485
+      ],
+      "difference_query_ranges": [
+        [
+          2380,
+          2484
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v08/d147",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d147",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d147",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v08/d147",
+      "known_query_range": [
+        1152,
+        1261
+      ],
+      "difference_query_ranges": [
+        [
+          1152,
+          1260
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d72",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d72",
+      "known_query_range": [
+        3815,
+        3999
+      ],
+      "difference_query_ranges": [
+        [
+          3815,
+          3998
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d72",
+      "known_query_range": [
+        3815,
+        3934
+      ],
+      "difference_query_ranges": [
+        [
+          3821,
+          3933
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d72",
+      "known_query_range": [
+        3815,
+        3948
+      ],
+      "difference_query_ranges": [
+        [
+          3820,
+          3947
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d122",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d122",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v15/d122",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d122",
+      "known_query_range": [
+        1974,
+        2141
+      ],
+      "difference_query_ranges": [
+        [
+          1974,
+          2140
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d122",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d122",
+      "known_query_range": [
+        1974,
+        2123
+      ],
+      "difference_query_ranges": [
+        [
+          1985,
+          2122
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d268",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d268",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v15/d268",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d268",
+      "known_query_range": [
+        989,
+        1087
+      ],
+      "difference_query_ranges": [
+        [
+          989,
+          1086
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d268",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d268",
+      "known_query_range": [
+        989,
+        1066
+      ],
+      "difference_query_ranges": [
+        [
+          989,
+          1045
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d39",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": true,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d39",
+      "known_query_range": [
+        225,
+        392
+      ],
+      "difference_query_ranges": [
+        [
+          225,
+          391
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d39",
+      "known_query_range": [
+        225,
+        326
+      ],
+      "difference_query_ranges": [
+        [
+          225,
+          325
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v15/d39",
+      "known_query_range": [
+        225,
+        345
+      ],
+      "difference_query_ranges": [
+        [
+          233,
+          344
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d208",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d208",
+      "known_query_range": [
+        897,
+        1002
+      ],
+      "difference_query_ranges": [
+        [
+          897,
+          1001
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": true,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d208",
+      "known_query_range": [
+        897,
+        1025
+      ],
+      "difference_query_ranges": [
+        [
+          915,
+          1024
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d208",
+      "known_query_range": [
+        897,
+        1011
+      ],
+      "difference_query_ranges": [
+        [
+          915,
+          1010
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d247",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d247",
+      "known_query_range": [
+        1938,
+        2103
+      ],
+      "difference_query_ranges": [
+        [
+          1938,
+          2102
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d247",
+      "known_query_range": [
+        1938,
+        2096
+      ],
+      "difference_query_ranges": [
+        [
+          1950,
+          2095
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "kind": "smol2",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d247",
+      "known_query_range": [
+        1938,
+        2108
+      ],
+      "difference_query_ranges": [
+        [
+          1950,
+          2082
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d395",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d395",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d395",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d395",
+      "known_query_range": [
+        2450,
+        2578
+      ],
+      "difference_query_ranges": [
+        [
+          2450,
+          2577
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d395",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d395",
+      "known_query_range": [
+        2450,
+        2548
+      ],
+      "difference_query_ranges": [
+        [
+          2453,
+          2547
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d188",
+      "kind": "original",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d188",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d188",
+      "kind": "human_swap",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d188",
+      "known_query_range": [
+        1270,
+        1359
+      ],
+      "difference_query_ranges": [
+        [
+          1270,
+          1358
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d188",
+      "kind": "qwen",
+      "source_correct": true,
+      "current_flag": true,
+      "current_useful": false,
+      "archive_useful": true,
+      "unrelated_difference_paragraphs": 0,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d188",
+      "known_query_range": [
+        1270,
+        1386
+      ],
+      "difference_query_ranges": [
+        [
+          1270,
+          1385
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d585",
+      "kind": "earlier_publisher",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": true,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d585",
+      "known_query_range": null,
+      "difference_query_ranges": [
+        [
+          834,
+          844
+        ]
+      ]
+    },
+    {
+      "group": "frus1964-68v24/d585",
+      "kind": "publisher_current_control",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "reference_bound",
+      "matched_archive_source": "frus1964-68v24/d585",
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d298",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d298",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d18",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d18",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d101",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d101",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d216",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d216",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d206",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d206",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d163",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v08/d163",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d516",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d516",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d581",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d581",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d70",
+      "kind": "unknown",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1964-68v24/d70",
+      "kind": "quote_only",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "no_qualified_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d208",
+      "kind": "duplicate_ambiguity",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "ambiguous_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d262",
+      "kind": "duplicate_ambiguity",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "ambiguous_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "kind": "duplicate_ambiguity",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "ambiguous_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "kind": "duplicate_ambiguity",
+      "source_correct": true,
+      "current_flag": false,
+      "current_useful": false,
+      "archive_useful": false,
+      "unrelated_difference_paragraphs": null,
+      "publisher_all_change_coordinates_touched": null,
+      "status": "ambiguous_reference",
+      "matched_archive_source": null,
+      "known_query_range": null,
+      "difference_query_ranges": []
+    }
+  ]
+}

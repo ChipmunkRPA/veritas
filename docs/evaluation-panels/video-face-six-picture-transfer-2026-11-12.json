@@ -1,0 +1,430 @@
+{
+  "development": {
+    "decisions": {
+      "consecutive": {
+        "added_groups": 2,
+        "advance": false,
+        "criteria": {
+          "coverage": true,
+          "cuts": true,
+          "groups": false,
+          "more_locations": true,
+          "ordinary": true
+        }
+      },
+      "dense_rank": {
+        "added_groups": 2,
+        "advance": false,
+        "criteria": {
+          "coverage": true,
+          "cuts": true,
+          "groups": false,
+          "more_locations": true,
+          "ordinary": true
+        }
+      }
+    },
+    "frames": 1980,
+    "single_face_frames": 1980,
+    "strata": {
+      "coarse": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 2,
+          "correct": 0,
+          "flagged": 0,
+          "views": 2,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 10,
+          "correct": 0,
+          "flagged": 1,
+          "views": 10,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 0,
+          "assessed": 8,
+          "correct": 0,
+          "flagged": 0,
+          "views": 8,
+          "wrong_range": 0
+        }
+      },
+      "consecutive": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 2,
+          "correct": 0,
+          "flagged": 0,
+          "views": 2,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 10,
+          "correct": 0,
+          "flagged": 0,
+          "views": 10,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 8,
+          "assessed": 8,
+          "correct": 8,
+          "flagged": 8,
+          "views": 8,
+          "wrong_range": 0
+        }
+      },
+      "current_combined": {
+        "hard_cut": {
+          "assessed": 2,
+          "correct": 0,
+          "flagged": 0,
+          "views": 2
+        },
+        "ordinary": {
+          "assessed": 10,
+          "correct": 0,
+          "flagged": 1,
+          "views": 10
+        },
+        "swap": {
+          "assessed": 8,
+          "correct": 0,
+          "flagged": 0,
+          "views": 8
+        }
+      },
+      "dense_rank": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 2,
+          "correct": 0,
+          "flagged": 0,
+          "views": 2,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 10,
+          "correct": 0,
+          "flagged": 0,
+          "views": 10,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 8,
+          "assessed": 8,
+          "correct": 8,
+          "flagged": 8,
+          "views": 8,
+          "wrong_range": 0
+        }
+      },
+      "eight_hz": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 2,
+          "correct": 0,
+          "flagged": 0,
+          "views": 2,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 10,
+          "correct": 0,
+          "flagged": 0,
+          "views": 10,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 0,
+          "assessed": 8,
+          "correct": 0,
+          "flagged": 0,
+          "views": 8,
+          "wrong_range": 0
+        }
+      }
+    }
+  },
+  "freeze_sha256": "87f99f10929647153252136ddc446486b79286c70aeb8ed88a679fe1db4fe6aa",
+  "held": {
+    "decisions": {
+      "consecutive": {
+        "added_groups": 4,
+        "advance": true,
+        "criteria": {
+          "coverage": true,
+          "cuts": true,
+          "groups": true,
+          "more_locations": true,
+          "ordinary": true
+        }
+      },
+      "dense_rank": {
+        "added_groups": 4,
+        "advance": true,
+        "criteria": {
+          "coverage": true,
+          "cuts": true,
+          "groups": true,
+          "more_locations": true,
+          "ordinary": true
+        }
+      }
+    },
+    "frames": 3960,
+    "single_face_frames": 3960,
+    "strata": {
+      "coarse": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 4,
+          "correct": 0,
+          "flagged": 1,
+          "views": 4,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 20,
+          "correct": 0,
+          "flagged": 0,
+          "views": 20,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 0,
+          "assessed": 16,
+          "correct": 0,
+          "flagged": 3,
+          "views": 16,
+          "wrong_range": 3
+        }
+      },
+      "consecutive": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 4,
+          "correct": 0,
+          "flagged": 0,
+          "views": 4,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 20,
+          "correct": 0,
+          "flagged": 0,
+          "views": 20,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 16,
+          "assessed": 16,
+          "correct": 16,
+          "flagged": 16,
+          "views": 16,
+          "wrong_range": 0
+        }
+      },
+      "current_combined": {
+        "hard_cut": {
+          "assessed": 4,
+          "correct": 0,
+          "flagged": 1,
+          "views": 4
+        },
+        "ordinary": {
+          "assessed": 20,
+          "correct": 0,
+          "flagged": 0,
+          "views": 20
+        },
+        "swap": {
+          "assessed": 16,
+          "correct": 0,
+          "flagged": 3,
+          "views": 16
+        }
+      },
+      "dense_rank": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 4,
+          "correct": 0,
+          "flagged": 0,
+          "views": 4,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 20,
+          "correct": 0,
+          "flagged": 0,
+          "views": 20,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 16,
+          "assessed": 16,
+          "correct": 16,
+          "flagged": 16,
+          "views": 16,
+          "wrong_range": 0
+        }
+      },
+      "eight_hz": {
+        "hard_cut": {
+          "adds_correct": 0,
+          "assessed": 4,
+          "correct": 0,
+          "flagged": 0,
+          "views": 4,
+          "wrong_range": 0
+        },
+        "ordinary": {
+          "adds_correct": 0,
+          "assessed": 20,
+          "correct": 0,
+          "flagged": 0,
+          "views": 20,
+          "wrong_range": 0
+        },
+        "swap": {
+          "adds_correct": 0,
+          "assessed": 16,
+          "correct": 0,
+          "flagged": 0,
+          "views": 16,
+          "wrong_range": 0
+        }
+      }
+    }
+  },
+  "held_endpoint_readout": {
+    "dense_rank_positive_margin_bounds": [
+      0.3392663564008973,
+      0.6791250901073311
+    ],
+    "exact_edit_ranges": 8,
+    "identical_ranges_between_experimental_arms": 16,
+    "max_absolute_endpoint_error_ms": 40,
+    "maximum_dense_rank_ordinary_margin": 0.009509122883290755,
+    "median_iou": "6/7",
+    "minimum_iou": "5/7"
+  },
+  "independent_replay": {
+    "actual_decoded_held_pictures": 4800,
+    "actual_h264_held_files": 40,
+    "aggregate_sha256": "a3fa011f8ca6c0082f634a42e4bb93acba788ff3fc216b6223911d4964fb1cdf",
+    "authored_swapped_native_pictures": 96,
+    "exact_encoded_source_reconstructions": 20,
+    "examples": {
+      "consecutive": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "iou": "1",
+        "known_extent_s": [
+          "54/25",
+          "12/5"
+        ],
+        "selected_extent_s": [
+          "54/25",
+          "12/5"
+        ]
+      },
+      "dense_rank": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "iou": "1",
+        "known_extent_s": [
+          "54/25",
+          "12/5"
+        ],
+        "selected_extent_s": [
+          "54/25",
+          "12/5"
+        ]
+      }
+    },
+    "native_source_pictures_reopened_for_authoring": 576,
+    "recomputed_arm_decisions": 160,
+    "replayed_selected_crops": 96,
+    "status": "verified"
+  },
+  "preflight_continuation": {
+    "change": "Hash noncontiguous native crop bytes in C order.",
+    "current_freeze_sha256": "87f99f10929647153252136ddc446486b79286c70aeb8ed88a679fe1db4fe6aa",
+    "exact_prepared_files": 60,
+    "prior_freeze_sha256": "54279b046e87c067dbeb8a4768f7192f116e0f526b6c86304551eba6dcf3f316",
+    "prior_manifest_sha256": "8a4c4d98f3e42d4ac4bca6f1bb1538c21209a5461da3ee2508752f8d0d03187a",
+    "prior_score_rows": 0,
+    "prior_worker_sha256": "d5408b3e473165de692170b0f9ae49f7f1d768dd829c23309aaa29aec0591960"
+  },
+  "runtime": {
+    "elapsed_s": 107.19872641600159,
+    "journal_sha256": "292e41bed328259d2c42735c7a4d2a9bc36bd486405028a53cc4be917717aa02",
+    "media_sha256": "a79b68a0943eb1c99b7e4dd954c8d0635f27907e901bc4c38aa867a37210055d",
+    "peak_rss_bytes": 275955712
+  },
+  "schema": "chipmunk.video-face-six-picture-result/1",
+  "serving_change_in_study": false,
+  "source_scope": {
+    "development_groups": 2,
+    "held_groups": 4,
+    "older_localization_groups_excluded": 25,
+    "prior_project_exposure": true,
+    "source_rights": "RTFS pinned CC BY-SA 4.0 publisher assets; see rights review.",
+    "split_by_known_source_and_donor_keys": true
+  },
+  "spec": {
+    "clip_frames": 120,
+    "density_period_frames": 2,
+    "fps": 25,
+    "gate": {
+      "maximum_new_cut_ranges": 0,
+      "maximum_new_ordinary_ranges": 2,
+      "minimum_added": 6,
+      "minimum_coverage": 0.9,
+      "minimum_held_groups": 3
+    },
+    "known_swap_intervals_frames": [
+      [
+        54,
+        60
+      ],
+      [
+        67,
+        73
+      ]
+    ],
+    "method": "Compare current coarse plus 8 Hz with a 12.5 Hz version of the same rank scan and a 12.5 Hz short-window scan. The latter requires each observed center to clear the same within-clip separation point. Both require measured scene continuity at the edges, keep both existing results and suppress overlapping supplemental ranges.",
+    "ordinary_recompression_crf": 36,
+    "point": 0.1,
+    "primary_crf": 23,
+    "reference_period_frames": "25/8",
+    "schema": "chipmunk.video-face-six-picture-transfer/1",
+    "short_core_samples": [
+      3,
+      4
+    ],
+    "short_flank_samples": 4,
+    "size": [
+      640,
+      360
+    ]
+  }
+}

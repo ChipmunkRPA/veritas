@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html import escape
 
-from app.evidence.document_archive import STATUS
+from app.evidence.document_archive import RECOVERED_BOUNDARIES, STATUS
 from app.reports.document_revision_pdf import STYLE, _side
 from app.reports.engine import load_weasyprint
 
@@ -12,16 +12,20 @@ from app.reports.engine import load_weasyprint
 def render(comparison: dict) -> bytes:
     library, reference, coverage = (comparison[key] for key in ("library", "reference", "coverage"))
     source = ""
+    joined = comparison.get("layout") == RECOVERED_BOUNDARIES
     if reference:
         source = (f'<p><a href="{escape(reference["url"])}">{escape(reference["id"])}</a> · '
                   f'<a href="{escape(reference["version_url"])}">Pinned source version</a></p>'
                   f'<p>{coverage["matched_words"]} of {coverage["body_words"]} body words support the source match.</p>')
+        if joined:
+            source += "<p>The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>"
     changes = []
     for change in comparison["changes"]:
         a = change["archive_paragraph"]
         b = change["submitted_paragraph"]
         label = f"Archive body paragraph {a}" if a is not None else "Archive version"
-        changes.append(f'<section><h2>Submitted paragraph {b}</h2>'
+        submitted_label = f"Passage in submitted paragraph {b}" if joined else f"Submitted paragraph {b}"
+        changes.append(f'<section><h2>{submitted_label}</h2>'
                        f'{_side(label, change["archive"])}{_side("Submitted text", change["submitted"])}</section>')
     if reference and not changes:
         changes.append("<p>No word or punctuation differences in the compared passages.</p>")

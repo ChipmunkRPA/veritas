@@ -4806,6 +4806,14 @@
             "title": "Interpretation",
             "type": "string"
           },
+          "layout": {
+            "enum": [
+              "submitted_paragraphs",
+              "recovered_archive_boundaries"
+            ],
+            "title": "Layout",
+            "type": "string"
+          },
           "library": {
             "$ref": "#/components/schemas/DocumentArchiveLibrary"
           },
@@ -4847,6 +4855,7 @@
           "schema",
           "status",
           "coordinate_space",
+          "layout",
           "scope",
           "interpretation",
           "authorship_confidence_contribution",

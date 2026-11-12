@@ -33,6 +33,7 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | 
 function ArchiveResult({ result }: { result: ArchiveComparison }) {
   const { comparison, pdf } = result
   const { library, reference, coverage, changes } = comparison
+  const joined = comparison.layout === 'recovered_archive_boundaries'
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-archive-comparison.json')
   const downloadPdf = (body: string) => {
@@ -59,13 +60,14 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
       <p className="mt-2 mb-0 text-small text-text-muted">
         {coverage.matched_words} of {coverage.body_words} body words support the source match.
       </p>
+      {joined && <p className="mt-2 mb-0 text-small text-text-muted">The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>}
       {changes.length === 0 && <p className="mt-2 mb-0 text-small">No word or punctuation differences in the compared passages.</p>}
     </>}
     {changes.length > 0 && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Submitted positions count Unicode code points in the extracted text. Archive positions start within the cited paragraph. Range ends are excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {changes.map((change, i) => <li key={i} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">Submitted paragraph {change.submitted_paragraph}</h3>
+          <h3 className="m-0 text-small font-medium">{joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} {change.submitted_paragraph}</h3>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <Excerpt label={change.archive_paragraph == null ? 'Archive version' : `Archive body paragraph ${change.archive_paragraph}`}
               excerpt={change.archive} />

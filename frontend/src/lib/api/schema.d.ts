@@ -3319,6 +3319,11 @@ export interface components {
             extracted_text_sha256: string;
             /** Interpretation */
             interpretation: string;
+            /**
+             * Layout
+             * @enum {string}
+             */
+            layout: "submitted_paragraphs" | "recovered_archive_boundaries";
             library: components["schemas"]["DocumentArchiveLibrary"];
             reference: components["schemas"]["DocumentArchiveReference"] | null;
             /**

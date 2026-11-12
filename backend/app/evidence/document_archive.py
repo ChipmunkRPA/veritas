@@ -11,6 +11,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app.detectors.text.extract import Document, text_hash
+from app.evidence import document_archive_layout
 from app.evidence.document_revision import MAX_CHARS, MAX_TOKENS, differences, tokens
 
 SCHEMA = "chipmunk.document-archive-comparison/1"
@@ -22,6 +23,8 @@ ARCHIVE_TITLE = "Foreign Relations of the United States"
 ARCHIVE_PUBLISHER = "Office of the Historian, U.S. Department of State"
 ARCHIVE_NOTICE = f"https://github.com/HistoryAtState/frus/blob/{ARCHIVE_COMMIT}/LICENSE.md"
 ARCHIVE_LIBRARY = "https://history.state.gov/historicaldocuments"
+SUBMITTED_PARAGRAPHS = "submitted_paragraphs"
+RECOVERED_BOUNDARIES = "recovered_archive_boundaries"
 SCOPE = ("Compares wording and punctuation in aligned passages from 118 selected English-language archive excerpts. "
          "Unaligned passages are outside the comparison.")
 INTERPRETATION = ("A match identifies wording shared with a cited archive version. Differences may reflect ordinary edits, "
@@ -65,6 +68,11 @@ def library():
     except (OSError, ValueError) as error:
         raise ArchiveUnavailable("The local archive pack is unavailable.") from error
     return catalog, build_index(catalog)
+
+
+@lru_cache(maxsize=1)
+def _library_edges():
+    return document_archive_layout.index_edges(library()[0])
 
 
 def _anchors(text, body, index):
@@ -156,7 +164,7 @@ def compare(doc: Document, upload_sha256: str, catalog=None, index=None):
             if row.get("quote_role", "body") == "body" and not doc.text[slice(*span)].lstrip().startswith(">")]
     output = {
         "schema": SCHEMA, "status": "out_of_scope", "scope": SCOPE, "interpretation": INTERPRETATION,
-        "coordinate_space": "extracted_text_unicode_codepoint",
+        "coordinate_space": "extracted_text_unicode_codepoint", "layout": SUBMITTED_PARAGRAPHS,
         "authorship_confidence_contribution": 0, "submitted_sha256": upload_sha256,
         "extracted_text_sha256": text_hash(doc.text),
         "library": {"title": ARCHIVE_TITLE, "publisher": ARCHIVE_PUBLISHER, "url": ARCHIVE_LIBRARY,
@@ -166,11 +174,24 @@ def compare(doc: Document, upload_sha256: str, catalog=None, index=None):
         "reference": None, "aligned_paragraphs": [], "changes": [],
     }
     spans = [span for _, span in body]
-    if len(doc.text) > MAX_CHARS or not 3 <= len(body) <= 24 or len(tokens(doc.text, spans)) > MAX_TOKENS:
+    joined = len(body) == len(doc.paragraphs) == 1 and doc.source_map[0].get("kind") == "text" and ">" not in doc.text
+    if len(doc.text) > MAX_CHARS or not (joined or 3 <= len(body) <= 24) or len(tokens(doc.text, spans)) > MAX_TOKENS:
         return output
-    if catalog is None or index is None:
+    installed_library = catalog is None or index is None
+    if installed_library:
         catalog, index = library()
+    if joined:
+        edges = _library_edges() if installed_library else document_archive_layout.index_edges(catalog)
+        recovered = document_archive_layout.joined_spans(doc.text, spans[0], edges)
+        if recovered is None:
+            return output
+        candidate_source, first, spans = recovered
+        body = [(1, span) for span in spans]
     status, coverage, total, source, pairs = _anchors(doc.text, spans, index)
+    if joined:
+        if source != candidate_source or pairs != [(i, first + i) for i in range(len(spans))]:
+            return output
+        output["layout"] = RECOVERED_BOUNDARIES
     output["status"] = status
     output["coverage"].update(body_words=total, matched_words=coverage)
     if source is None:

@@ -78,6 +78,7 @@ def test_local_archive_uses_unchanged_and_no_match_without_exposing_a_reference(
         assert known.status_code == 200, known.text
         result = known.json()["comparison"]
         assert result["status"] == "reference_bound" and result["changes"] == []
+        assert result["layout"] == "submitted_paragraphs"
         assert result["reference"]["id"] == SOURCE
         assert len(result["aligned_paragraphs"]) == 3
         other = client.post(_url("unknown"), headers=fixture.headers).json()["comparison"]
@@ -206,3 +207,31 @@ def test_archive_preserves_boundaries_for_partial_or_reordered_excerpts():
     for selected, status in ((original[:3], "reference_bound"), (original[::-1], "no_qualified_reference")):
         result = document_archive.compare(from_string("\n\n".join(selected)), "a" * 64, catalog, index)
         assert result["status"] == status and result["changes"] == []
+
+
+def test_archive_recovers_collapsed_boundaries_and_exact_export_positions(billing, monkeypatch):
+    monkeypatch.setattr(settings, "billing_mode", "disabled")
+    source = _body()
+    edited = source.replace("October 11 resolution", "October 12 resolution", 1).replace("\n\n", " ")
+    offset = edited.index("October 12 resolution") + len("October ")
+    _seed(billing, "collapsed", edited)
+    _seed(billing, "collapsed-intro", "Unrelated introduction. " + edited)
+    with _install(billing, monkeypatch) as client:
+        response = client.post(_url("collapsed") + "?include_pdf=true", headers=billing.headers)
+        assert response.status_code == 200, response.text
+        body = response.json()
+        report = body["comparison"]
+        assert report["status"] == "reference_bound" and report["layout"] == "recovered_archive_boundaries"
+        assert report["reference"]["id"] == SOURCE
+        assert report["coverage"]["body_paragraphs"] == 1
+        assert [row["submitted_paragraph"] for row in report["aligned_paragraphs"]] == [1, 1, 1]
+        (change,) = report["changes"]
+        assert change["submitted"]["changed_tokens"] == [[offset, offset + 2]]
+        assert change["submitted"]["text"] == edited[offset:offset + 2] == "12"
+        assert change["archive"]["text"] == "11"
+        with pymupdf.open(stream=base64.b64decode(body["pdf"], validate=True), filetype="pdf") as pdf:
+            text = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert "recovered their boundaries from the archive" in text
+            assert "Passage in submitted paragraph 1" in text and f"[{offset}, {offset + 2})" in text
+        other = client.post(_url("collapsed-intro"), headers=billing.headers).json()["comparison"]
+        assert other["reference"] is None and other["changes"] == []

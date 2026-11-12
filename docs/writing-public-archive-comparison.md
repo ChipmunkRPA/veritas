@@ -4,6 +4,8 @@ Set `VERITAS_DOCUMENT_ARCHIVE_COMPARISON_ENABLED=true` in the local development 
 
 A match includes the official citation, pinned archive version, word coverage and the exact changed wording on both sides. The comparison only describes aligned passages. An unmatched or ambiguous result leaves the source open. Differences may reflect ordinary edits or transcription. This evidence carries zero AI-assessment weight.
 
+If a plain-text copy joins several consecutive archive paragraphs into one, the app can recover their boundaries from exact source wording and compare each recovered passage. PDF and JSON preserve positions in the submitted text. An isolated paid-flow replay on one joined generated rewrite recovered all ten saved changed-token positions and the expected citation. [Held layout comparison](writing-archive-joined-layout-2026-11-12.md)
+
 The action uses the retained original and the bundled local index. It requires the authenticated owner and an active completed analysis. Test and live billing modes also require the existing fulfilled payment receipt for that exact analysis. The action starts zero new jobs or checkouts and sends zero submitted text to an external service.
 
 The JSON and PDF are standalone downloads from the comparison card. Submitted offsets count code points in the app's normalized extracted text. Archive offsets are paragraph-relative code points in the normalized reference. The JSON and PDF identify the submitted file hash, extracted text hash, pinned archive hash and archive citation. Keep downloads with the intended reviewers because they contain changed excerpts from the submitted document.

@@ -92,6 +92,7 @@ class DocumentArchiveComparison(BaseModel):
     schema_name: Literal["chipmunk.document-archive-comparison/1"] = Field(alias="schema")
     status: ArchiveStatus
     coordinate_space: Literal["extracted_text_unicode_codepoint"]
+    layout: Literal["submitted_paragraphs", "recovered_archive_boundaries"]
     scope: str
     interpretation: str
     authorship_confidence_contribution: Literal[0]

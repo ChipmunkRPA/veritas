@@ -16,6 +16,7 @@ const edited: ArchiveComparison = {
     schema: 'chipmunk.document-archive-comparison/1',
     status: 'reference_bound',
     coordinate_space: 'extracted_text_unicode_codepoint',
+    layout: 'recovered_archive_boundaries',
     scope: 'Compares aligned archive passages.',
     interpretation: 'This comparison carries zero AI-assessment weight.',
     authorship_confidence_contribution: 0,
@@ -71,6 +72,8 @@ describe('Public archive comparison', () => {
     expect(screen.getByRole('link', { name: 'Source frus1964-68v24/d585' })).toHaveAttribute('href', edited.comparison.reference!.url)
     expect(screen.getByText('café').tagName).toBe('MARK')
     expect(screen.getByText('[10, 16)')).toBeVisible()
+    expect(screen.getByText(/recovered their boundaries from the archive/)).toBeVisible()
+    expect(screen.getByRole('heading', { name: 'Passage in submitted paragraph 1' })).toBeVisible()
     fireEvent.click(screen.getByRole('button', { name: 'Download archive JSON' }))
     fireEvent.click(screen.getByRole('button', { name: 'Download archive PDF' }))
     expect(saveBlob).toHaveBeenNthCalledWith(1, expect.any(Blob), 'chipmunk-verify-archive-comparison.json')
@@ -86,7 +89,7 @@ describe('Public archive comparison', () => {
     show()
     fireEvent.click(await screen.findByRole('button', { name: 'Compare with public archive' }))
     expect(await screen.findByText('No matching passage in this archive library')).toBeVisible()
-    expect(screen.queryByText('Submitted paragraph 1')).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: /submitted paragraph 1/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /Source frus/ })).not.toBeInTheDocument()
   })
 

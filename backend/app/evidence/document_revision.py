@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import hashlib
 import re
+from bisect import bisect_right
 from difflib import SequenceMatcher
 from email import policy
 from email.parser import BytesParser
+from html import unescape
 from io import BytesIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -14,9 +16,12 @@ from zipfile import BadZipFile, ZipFile
 
 from app.detectors.text.extract import _normalise, extract, text_hash
 from app.evidence import document_revision_pdf
+from app.evidence.document_scope import email_agreement_body_spans, mapped_email_html
 from app.storage.files import check_docx_safe
 
 SCHEMA = "chipmunk.document-revision-comparison/1"
+HTML_SCHEMA = "chipmunk.document-revision-comparison/2"
+HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
 MAX_BYTES = 1024 * 1024
 MAX_CHARS = 30_000
@@ -26,6 +31,8 @@ ROLES = ("body", "quoted", "signature")
 FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".pdf": "pdf"}
 SUPPORTED_DRAFTS = "matching .eml, .txt, .docx or .pdf files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
+HTML_SCOPE = ("Compares visible words and punctuation in the reply body. Quoted text, attachments, headers and "
+              "formatting are outside this comparison.")
 DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revision markup are outside this comparison.")
 DOCX_PART = "word/document.xml"
@@ -130,6 +137,50 @@ def _docx_source(data):
     return decoded, {"body": body_tokens, "quoted": [], "signature": []}, _source_record(data, decoded), anchors
 
 
+def _html_source(data, decoded, doc, mime_part):
+    email = doc.meta["email"]
+    spans = email_agreement_body_spans(doc.source_map, email, len(doc.text)) if mapped_email_html(email) else None
+    if spans is None:
+        raise ValueError("Use HTML-only replies with 2, 3, 5 or 6 simple body paragraphs followed by a blockquote.")
+    body = tokens(doc.text, [(span["start"], span["end"]) for span in spans])
+    if len(body) > MAX_TOKENS:
+        raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} body words and punctuation tokens.")
+    mapping = [row for block in doc.source_map[:len(spans)] for row in block["source_ranges"]]
+    record = _source_record(data, doc.text, mime_part) | {
+        "decoded_html_sha256": text_hash(decoded), "decoded_html_characters": len(decoded),
+    }
+    return doc.text, {"body": body, "quoted": [], "signature": []}, record, (decoded, mapping)
+
+
+def _html_token_sources(text, layout, changed_tokens):
+    decoded, mapping = layout
+    located = []
+    for start, end in changed_tokens:
+        spans = []
+        cursor = start
+        first = bisect_right(mapping, start, key=lambda row: row[1])
+        for index in range(first, len(mapping)):
+            a, b, lo, hi = mapping[index]
+            if a >= end:
+                break
+            begin, stop = max(a, start), min(b, end)
+            if b - a == hi - lo:
+                lo, hi = lo + begin - a, lo + stop - a
+            piece = decoded[lo:hi]
+            if (cursor != begin or not 0 <= lo < hi <= len(decoded)
+                    or (piece != text[begin:stop] and unescape(piece) != text[begin:stop])):
+                break
+            if spans and spans[-1][1] == lo:
+                spans[-1][1] = hi
+            else:
+                spans.append([lo, hi])
+            cursor = stop
+        if cursor != end:
+            raise ValueError("A changed token could not be mapped to the decoded HTML reply.")
+        located.append({"start": start, "end": end, "source_ranges": spans})
+    return located
+
+
 def _source(path: Path, data: bytes, extension: str):
     if extension == ".docx":
         return _docx_source(data)
@@ -144,12 +195,12 @@ def _source(path: Path, data: bytes, extension: str):
     if extension == ".eml":
         message = BytesParser(policy=policy.default).parsebytes(data)
         if not any(field in message for field in ("From", "To", "Subject", "Date", "Message-ID", "Content-Type", "MIME-Version")):
-            raise ValueError("Choose an .eml file with email headers and a plain-text body.")
+            raise ValueError("Choose an .eml file with email headers and a readable message body.")
         body = message.get_body(preferencelist=("plain", "html"))
-        if body is None or body.get_content_type() != "text/plain":
-            raise ValueError("Choose an email with a readable plain-text body.")
+        if body is None:
+            raise ValueError("Choose an email with a readable plain-text or HTML body.")
         if body.get_filename() is not None or body.get_content_disposition() == "attachment":
-            raise ValueError("The selected plain-text part is an attachment. A plain-text message body is required.")
+            raise ValueError("The selected text part is an attachment. A message body is required.")
         mime_part = _part_id(message, body)
         decoded = body.get_content()
     else:
@@ -165,6 +216,8 @@ def _source(path: Path, data: bytes, extension: str):
         raise ValueError("The source text could not be decoded without replacement characters.")
     if len(decoded) > MAX_CHARS or not doc.source_map:
         raise ValueError(f"Each version needs readable text and at most {MAX_CHARS:,} decoded characters.")
+    if extension == ".eml" and body.get_content_type() == "text/html":
+        return _html_source(data, decoded, doc, mime_part)
     offsets = {role: [] for role in ROLES}
     previous = None
     for block in doc.source_map:
@@ -197,6 +250,8 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
             for paragraph, index, a, b in layout
             if max(start, a) < min(end, b) or start == end and a <= start <= b
         ]
+    elif extension == ".eml" and layout is not None:
+        result["html_tokens"] = _html_token_sources(text, layout, changed_tokens)
     return result
 
 
@@ -212,12 +267,18 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str) -> tuple[dic
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     changes = []
+    schema = SCHEMA
     scope, coordinates = SCOPE, "decoded_source_unicode_codepoint"
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{extension}", directory / f"later{extension}"
         old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, extension)
         new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension)
+        if extension == ".eml":
+            if (old_layout is None) != (new_layout is None):
+                raise ValueError("Use two email drafts with the same body type. Both must use plain text or supported HTML.")
+            if old_layout is not None:
+                schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
         for role in ROLES:
             for change in differences(old_tokens[role], new_tokens[role]):
                 before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, extension)
@@ -228,7 +289,7 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str) -> tuple[dic
             scope, coordinates = document_revision_pdf.SCOPE, document_revision_pdf.COORDINATES
     if extension == ".docx":
         scope, coordinates = DOCX_SCOPE, "docx_body_unicode_codepoint"
-    result = {"schema": SCHEMA, "format": FORMATS[extension],
+    result = {"schema": schema, "format": FORMATS[extension],
             "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}

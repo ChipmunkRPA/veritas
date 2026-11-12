@@ -2,14 +2,22 @@
 
 from __future__ import annotations
 
+import json
+from functools import partial
 from pathlib import Path
 
-from app.evidence.audio_reference import compare
+from app.evidence.audio_reference import SCHEMA, compare
 from scripts.compare_video_references import main, replay
 
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
-    return replay(compare, earlier, submitted, output, verify=verify)
+    compare_source = compare
+    if verify:
+        exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
+        record = exported.get("comparison", exported) if isinstance(exported, dict) else None
+        if isinstance(record, dict) and record.get("schema") == SCHEMA:
+            compare_source = partial(compare, include_level_adjustment=False)
+    return replay(compare_source, earlier, submitted, output, verify=verify)
 
 
 if __name__ == "__main__":

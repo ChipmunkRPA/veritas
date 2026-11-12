@@ -26,7 +26,9 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
   signal.throwIfAborted()
   const result = await unwrap(Promise.resolve({ response, data: response.ok ? data as DocumentRevisionResponse : undefined,
     error: response.ok ? undefined : data }))
-  if (result?.comparison?.schema !== 'chipmunk.document-revision-comparison/1' || !Array.isArray(result.comparison.changes)) {
+  const schema = result?.comparison?.schema
+  if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2')
+      || !Array.isArray(result.comparison.changes)) {
     throw new Error('The server returned an incomplete draft comparison.')
   }
   return result

@@ -43,6 +43,12 @@ type AudioRange = Extent & {
   difference?: { peak: number; rms: number }
   preview?: { end_s: number; waveforms: Record<Side, Waveform>; assets: Record<Side, Asset>; difference_waveform?: Waveform }
 }
+type LevelAdjustedAudio = {
+  gain_db: number
+  changed_samples: number
+  interpretation: string
+  ranges: AudioRange[]
+}
 type Comparison = {
   status: string
   interpretation: string
@@ -53,10 +59,12 @@ type Comparison = {
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
+  level_adjusted?: never
 } | {
-  schema: 'chipmunk.audio-reference-comparison/1'
+  schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2'
   picture?: never
   timing?: never
+  level_adjusted?: LevelAdjustedAudio
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean }
@@ -102,9 +110,12 @@ function interval(span: Extent) {
 }
 
 function ClipWaveform({ wave, maximum, name }: { wave: Waveform; maximum: number; name: string }) {
+  const step = 300 / wave.low.length
   const lines = wave.low.map((value, i) => {
-    const x = (i + .5) / wave.low.length * 300
-    return 'M' + x + ',' + (30 - wave.high[i] / maximum * 27) + 'V' + (30 - value / maximum * 27)
+    const y = 30 - value / maximum * 27
+    if (value === wave.high[i]) return `M${i * step},${y}h${step}`
+    const x = (i + .5) * step
+    return `M${x},${30 - wave.high[i] / maximum * 27}V${y}`
   }).join('')
   return <svg viewBox="0 0 300 60" className="w-full max-w-80 rounded border border-border bg-surface-2" role="img"
     aria-label={name + ' waveform'}>
@@ -156,7 +167,9 @@ function PictureEvidence({ span, assets, dimensions }: { span: PictureRange | Lo
   </details>
 }
 
-function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['assets'] }) {
+function SoundEvidence({ span, assets, levelAdjusted = false }: {
+  span: AudioRange; assets: Result['assets']; levelAdjusted?: boolean
+}) {
   const preview = span.preview
   const residual = preview?.difference_waveform
   const waves = preview ? Object.values(preview.waveforms) : []
@@ -164,24 +177,41 @@ function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['ass
   const residualScale = residual ? Math.max(1 / 32768, ...[...residual.low, ...residual.high].map(Math.abs)) : 1
   return <details open={!!preview} className="border-t border-border pt-3">
     <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}</summary>
-    <p className="mt-2 mb-0 text-small text-text-muted">{span.changed_samples.toLocaleString()} differing samples in this range.</p>
-    {span.difference && <p className="mt-2 mb-0 text-caption text-text-muted">Full range difference: peak {span.difference.peak.toFixed(6)}, RMS {span.difference.rms.toFixed(6)} of full scale.</p>}
+    <p className="mt-2 mb-0 text-small text-text-muted">{span.changed_samples.toLocaleString()} {levelAdjusted
+      ? 'samples in this range cannot be explained by the measured volume adjustment.' : 'differing samples in this range.'}</p>
+    {span.difference && <p className="mt-2 mb-0 text-caption text-text-muted">{levelAdjusted ? 'Adjusted difference' : 'Full range difference'}: peak {span.difference.peak.toFixed(6)}, RMS {span.difference.rms.toFixed(6)} of full scale.</p>}
     {preview && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Waveforms and playback cover {span.start_s.toFixed(3)}–{preview.end_s.toFixed(3)} s.</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         {sides.map(side => <div key={side} className="min-w-0">
           <p className="mt-0 mb-1 text-small font-medium">{names[side]}</p>
-          <ClipWaveform wave={preview.waveforms[side]} maximum={peak} name={names[side]} />
-          <Playback body={assetBody(assets, preview.assets[side], 'audio/wav')} name={'Play ' + names[side].toLowerCase()} />
+          <ClipWaveform wave={preview.waveforms[side]} maximum={peak} name={names[side] + (levelAdjusted ? ' at adjusted difference' : '')} />
+          <Playback body={assetBody(assets, preview.assets[side], 'audio/wav')}
+            name={'Play ' + names[side].toLowerCase() + (levelAdjusted ? ' at adjusted difference' : '')} />
         </div>)}
       </div>
       {residual && <div className="mt-3">
-        <p className="mt-0 mb-1 text-small font-medium">Difference waveform</p>
-        <ClipWaveform wave={residual} maximum={residualScale} name="Difference" />
-        <p className="mt-1 mb-0 text-caption text-text-muted">Analyzed minus earlier samples. This plot uses a separate scale of ±{residualScale.toFixed(6)}.</p>
+        <p className="mt-0 mb-1 text-small font-medium">{levelAdjusted ? 'Volume-adjusted difference waveform' : 'Difference waveform'}</p>
+        <ClipWaveform wave={residual} maximum={residualScale} name={levelAdjusted ? 'Volume-adjusted difference' : 'Difference'} />
+        <p className="mt-1 mb-0 text-caption text-text-muted">{levelAdjusted
+          ? 'Analyzed minus volume-adjusted earlier samples.' : 'Analyzed minus earlier samples.'} This plot uses a separate scale of ±{residualScale.toFixed(6)}.</p>
       </div>}
     </>}
   </details>
+}
+
+function LevelAdjustedEvidence({ result, assets }: { result: LevelAdjustedAudio; assets: Result['assets'] }) {
+  const magnitude = Math.abs(result.gain_db)
+  const gain = magnitude.toFixed(magnitude < .0005 ? 6 : 3)
+  return <section className="space-y-2" aria-label="Differences after a volume adjustment">
+    <h3 className="m-0 text-small font-medium">Differences after a volume adjustment</h3>
+    <p className="m-0 text-small">The analyzed recording is {gain} dB {result.gain_db < 0 ? 'quieter' : 'louder'}
+      {' '}in the matching sections at both ends.</p>
+    <p className="m-0 text-small">{result.changed_samples === 0 ? 'The same volume adjustment explains the entire recording.'
+      : `${result.changed_samples.toLocaleString()} samples remain different after accounting for the volume adjustment.`}</p>
+    <p className="m-0 text-caption text-text-muted">{result.interpretation}</p>
+    {result.ranges.map(span => <SoundEvidence key={span.id} span={span} assets={assets} levelAdjusted />)}
+  </section>
 }
 
 function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: Result['assets'] }) {
@@ -221,7 +251,7 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
-  const isAudio = comparison.schema === 'chipmunk.audio-reference-comparison/1'
+  const isAudio = comparison.schema === 'chipmunk.audio-reference-comparison/1' || comparison.schema === 'chipmunk.audio-reference-comparison/2'
   const downloadName = 'chipmunk-verify-' + (isAudio ? 'audio' : 'video') + '-comparison'
   const notes = isAudio ? audioUnassessed : unassessed
   const firstAudioRange = audio?.ranges?.[0]
@@ -237,6 +267,7 @@ function ResultView({ result }: { result: Result }) {
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
+    {comparison.level_adjusted && <LevelAdjustedEvidence result={comparison.level_adjusted} assets={assets} />}
     {!isAudio && picture && <>
       <h3 className="m-0 text-small font-medium">Pictures</h3>
       <p className="m-0 text-small">{picture.matching_frames} exact matches and {picture.changed_frames} changed decoded pictures.</p>
@@ -291,9 +322,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const videoExtensions = ['chipmunk.video-reference-comparison/2', 'chipmunk.video-reference-comparison/3', 'chipmunk.video-reference-comparison/4']
-      if (schema !== 'chipmunk.' + kind + '-reference-comparison/1' &&
-        !(kind === 'video' && videoExtensions.some(value => value === schema))) {
+      const accepted = kind === 'audio' ? [1, 2] : [1, 2, 3, 4]
+      if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
       if (!controller.signal.aborted) setResult(response)
@@ -312,6 +342,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     <p className="mt-2 mb-0 text-small text-text-muted">{kind === 'audio'
       ? 'Choose an earlier recording with the same start time and sample count. Each file can have up to 30 seconds of decoded audio and 48 MiB.'
       : 'Choose an earlier copy with matching picture dimensions and timing. Each clip can have up to 12 seconds of picture timestamps, 360 frames, and 48 MiB.'}</p>
+    {kind === 'audio' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      For matching lossless 16 kHz mono recordings, the comparison can also account for a constant volume change.
+    </p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier {kind}</label>

@@ -45,6 +45,8 @@ class DraftSource(BaseModel):
     decoded_text_sha256: str
     decoded_characters: int
     mime_part: str | None
+    decoded_html_sha256: str | None = None
+    decoded_html_characters: int | None = None
 
 
 class DraftParagraph(BaseModel):
@@ -79,6 +81,12 @@ class DraftPdfPage(BaseModel):
     preview: DraftPdfPreview | None = None
 
 
+class DraftHtmlToken(BaseModel):
+    start: int
+    end: int
+    source_ranges: list[tuple[int, int]]
+
+
 class DraftExcerpt(BaseModel):
     start: int
     end: int
@@ -86,6 +94,7 @@ class DraftExcerpt(BaseModel):
     changed_tokens: list[tuple[int, int]]
     paragraphs: list[DraftParagraph] | None = None
     pdf_pages: list[DraftPdfPage] | None = None
+    html_tokens: list[DraftHtmlToken] | None = None
 
 
 class DraftChange(BaseModel):
@@ -121,9 +130,10 @@ class DraftPairedCheck(BaseModel):
 
 
 class DraftComparison(BaseModel):
-    schema_name: Literal["chipmunk.document-revision-comparison/1"] = Field(alias="schema")
+    schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf"]
-    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "pdf_native_text_unicode_codepoint"]
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
+                              "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]

@@ -8,7 +8,13 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from app.evidence.document_revision import FORMATS, MAX_BYTES, SUPPORTED_DRAFTS, compare_with_text
+from app.evidence.document_revision import (
+    FORMATS,
+    HTML_COORDINATES,
+    MAX_BYTES,
+    SUPPORTED_DRAFTS,
+    compare_with_text,
+)
 
 MAX_EXPORT = 2 * 1024 * 1024
 MAX_PDF_EXPORT = 4 * 1024 * 1024
@@ -52,6 +58,10 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         pages = [page for excerpt in excerpts for page in excerpt["pdf_pages"]]
         result["pdf_word_regions_verified"] = sum(len(page["word_regions"]) for page in pages)
         result["pdf_previews_verified"] = sum("preview" in page for page in pages)
+    if expected["coordinate_space"] == HTML_COORDINATES:
+        result["decoded_html_ranges_verified"] = sum(
+            len(token["source_ranges"]) for excerpt in excerpts for token in excerpt["html_tokens"]
+        )
     if paired is not None:
         from app.evidence.document_revision_writing import verify
 

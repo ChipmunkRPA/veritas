@@ -5212,7 +5212,8 @@
             "enum": [
               "decoded_source_unicode_codepoint",
               "docx_body_unicode_codepoint",
-              "pdf_native_text_unicode_codepoint"
+              "pdf_native_text_unicode_codepoint",
+              "email_html_extracted_text_unicode_codepoint"
             ],
             "title": "Coordinate Space",
             "type": "string"
@@ -5248,7 +5249,10 @@
             ]
           },
           "schema": {
-            "const": "chipmunk.document-revision-comparison/1",
+            "enum": [
+              "chipmunk.document-revision-comparison/1",
+              "chipmunk.document-revision-comparison/2"
+            ],
             "title": "Schema",
             "type": "string"
           },
@@ -5292,6 +5296,20 @@
           "end": {
             "title": "End",
             "type": "integer"
+          },
+          "html_tokens": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftHtmlToken"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Html Tokens"
           },
           "paragraphs": {
             "anyOf": [
@@ -5337,6 +5355,42 @@
           "changed_tokens"
         ],
         "title": "DraftExcerpt",
+        "type": "object"
+      },
+      "DraftHtmlToken": {
+        "properties": {
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "source_ranges": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Source Ranges",
+            "type": "array"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "source_ranges"
+        ],
+        "title": "DraftHtmlToken",
         "type": "object"
       },
       "DraftPairedCheck": {
@@ -5625,6 +5679,28 @@
           "decoded_characters": {
             "title": "Decoded Characters",
             "type": "integer"
+          },
+          "decoded_html_characters": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decoded Html Characters"
+          },
+          "decoded_html_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decoded Html Sha256"
           },
           "decoded_text_sha256": {
             "title": "Decoded Text Sha256",

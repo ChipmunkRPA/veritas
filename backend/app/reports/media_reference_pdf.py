@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pymupdf
 
-from app.evidence.audio_reference import AUDIO_RATE, MAX_SECONDS
+from app.evidence.audio_reference import AUDIO_RATE, MAX_SECONDS, SCHEMA_WITH_LEVEL_ADJUSTMENT
 from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
 from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
 
@@ -105,6 +105,23 @@ def _audio_summary(document, record):
     _text(page, MARGIN, 482, "The JSON export includes aligned playable excerpts and their checksums.", color=MUTED)
 
 
+def _level_adjusted_summary(document, result):
+    page = _page(document, "Differences after a volume adjustment")
+    db = result["gain_db"]
+    direction = "quieter" if db < 0 else "louder"
+    precision = 6 if abs(db) < .0005 else 3
+    _text(page, MARGIN, 131, f"The analyzed recording is {abs(db):.{precision}f} dB {direction} in the matching sections at both ends.")
+    count = result["changed_samples"]
+    if count == 0:
+        note = "The same volume adjustment explains the entire recording."
+    else:
+        note = f"{count:,} samples remain different after accounting for the volume adjustment."
+    _text(page, MARGIN, 158, note, font="hebo")
+    page.insert_textbox((MARGIN, 179, RIGHT, 280), result["interpretation"], fontsize=11, fontname="helv", color=INK)
+    _text(page, MARGIN, 303, "Times start at the first decoded sample. Waveform excerpts use the original levels.", color=MUTED)
+    _text(page, MARGIN, 324, "The JSON export includes the supporting sample ranges and playable excerpts.", color=MUTED)
+
+
 def _picture_page(document, span, assets, source):
     local = "tile" in span
     title = "Local picture difference" if local else "Picture differences"
@@ -149,9 +166,15 @@ def _picture_page(document, span, assets, source):
 def _draw_waveform(page, wave, y, maximum, duration):
     page.draw_line((MARGIN, y), (RIGHT, y), color=RULE)
     shape = page.new_shape()
+    width = RIGHT - MARGIN
+    half_bin = wave["bin_s"] / 2 / duration * width
     for tick, low, high in zip(wave["t"], wave["low"], wave["high"], strict=True):
-        x = MARGIN + min(1, tick / duration) * (RIGHT - MARGIN)
-        shape.draw_line((x, y - high / maximum * 44), (x, y - low / maximum * 44))
+        x = MARGIN + min(1, tick / duration) * width
+        high_y, low_y = y - high / maximum * 44, y - low / maximum * 44
+        if low == high:
+            shape.draw_line((max(MARGIN, x - half_bin), high_y), (min(RIGHT, x + half_bin), low_y))
+        else:
+            shape.draw_line((x, high_y), (x, low_y))
     shape.finish(color=(.18, .39, .31), width=.7)
     shape.commit()
 
@@ -183,12 +206,17 @@ def _timing_page(document, timing, assets):
     _text(page, MARGIN, 721, "Waveforms share one scale. The JSON includes both playable speech excerpts.", size=9, color=MUTED)
 
 
-def _sound_page(document, span):
+def _sound_page(document, span, *, level_adjusted=False):
     difference = span.get("difference")
-    title = "Audio differences" if difference is not None else "Soundtrack differences"
+    if level_adjusted:
+        title = "Volume-adjusted difference"
+        count_note = "samples cannot be explained by the measured volume adjustment."
+    else:
+        title = "Audio differences" if difference is not None else "Soundtrack differences"
+        count_note = "differing samples in the selected range."
     page = _page(document, f"{span['id']}  {title}")
     _text(page, MARGIN, 126, _range(span), color=MUTED)
-    _text(page, MARGIN, 149, f"{span['changed_samples']:,} differing samples in the selected range.")
+    _text(page, MARGIN, 149, f"{span['changed_samples']:,} {count_note}")
     preview = span["preview"]
     _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
     waveforms = preview["waveforms"]
@@ -202,19 +230,41 @@ def _sound_page(document, span):
         pts = span["source_ranges"][side]["start_pts"]
         _text(page, MARGIN, y + 58, f"Source ticks [{pts}, {pts + count}) at 16 kHz.", size=9, color=MUTED)
     if residual is not None:
-        _text(page, MARGIN, 517, "Difference waveform", font="hebo")
+        label = "Volume-adjusted difference waveform" if level_adjusted else "Difference waveform"
+        _text(page, MARGIN, 517, label, font="hebo")
         residual_scale = max(1 / 32768, *(abs(level) for field in ("low", "high") for level in residual[field]))
         _draw_waveform(page, residual, 576, residual_scale, duration)
-        _text(page, MARGIN, 632, f"Analyzed minus earlier samples. This plot uses a separate scale of +/-{residual_scale:.6f}.",
+        earlier = "volume-adjusted earlier samples" if level_adjusted else "earlier samples"
+        _text(page, MARGIN, 632, f"Analyzed minus {earlier}. This plot uses a separate scale of +/-{residual_scale:.6f}.",
               size=9, color=MUTED)
-        _text(page, MARGIN, 650, f"Full range difference: peak {difference['peak']:.6f}, RMS {difference['rms']:.6f} of full scale.",
-              size=9, color=MUTED)
+        note = "Adjusted difference" if level_adjusted else "Full range difference"
+        _text(page, MARGIN, 650, f"{note}: peak {difference['peak']:.6f}, RMS {difference['rms']:.6f} of full scale.", size=9, color=MUTED)
+
+
+def _remaining_ranges(document, remaining, title="Additional measured ranges"):
+    for start in range(0, len(remaining), 30):
+        page = _page(document, title)
+        for i, (label, value) in enumerate(remaining[start:start + 30]):
+            _text(page, MARGIN, 137 + i * 18, f"{label}  {value}")
+
+
+def _level_adjusted_pages(document, result):
+    _level_adjusted_summary(document, result)
+    remaining = []
+    for span in result["ranges"]:
+        if span.get("preview"):
+            _sound_page(document, span, level_adjusted=True)
+        else:
+            remaining.append((span["id"], f"{_range(span)} - {span['changed_samples']:,} differing samples"))
+    _remaining_ranges(document, remaining, "Additional volume-adjusted ranges")
 
 
 def render(record, assets):
     with pymupdf.open() as document:
-        is_audio = record["schema"] == AUDIO_SCHEMA
+        is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
+        if adjusted := record.get("level_adjusted"):
+            _level_adjusted_pages(document, adjusted)
         (_audio_summary if is_audio else _summary)(document, record)
         remaining = []
         local = record.get("picture", {}).get("local_comparison", {})
@@ -231,10 +281,7 @@ def render(record, assets):
             else:
                 note = f" - {span['changed_samples']:,} differing samples" if is_audio else ""
                 remaining.append((span["id"], _range(span) + note))
-        for start in range(0, len(remaining), 30):
-            page = _page(document, "Additional measured ranges")
-            for i, (label, value) in enumerate(remaining[start:start + 30]):
-                _text(page, MARGIN, 137 + i * 18, f"{label}  {value}")
+        _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)
         return document.tobytes(deflate=True, garbage=4)

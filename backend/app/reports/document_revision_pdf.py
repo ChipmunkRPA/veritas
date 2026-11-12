@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from html import escape
 
+from app.evidence.document_revision import HTML_COORDINATES
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
 STYLE = """
@@ -58,8 +59,13 @@ def _side(label, excerpt):
     anchors = " · ".join(f'Paragraph {item["paragraph"]} [{item["start"]}, {item["end"]})'
                          for item in excerpt.get("paragraphs") or ())
     paragraph_ranges = f'<p class="coordinates">{anchors}</p>' if anchors else ""
+    html_positions = []
+    for token in excerpt.get("html_tokens") or ():
+        ranges = ", ".join(f"[{a}, {b})" for a, b in token["source_ranges"])
+        html_positions.append(f'[{token["start"]}, {token["end"]}) → {ranges}')
+    html_ranges = f'<p class="coordinates">Decoded HTML positions · {" · ".join(html_positions)}</p>' if html_positions else ""
     return (f'<div class="side"><p class="coordinates">{label} [{start}, {end})</p>'
-            f'{paragraph_ranges}<p class="excerpt">{value}</p>{_page_previews(excerpt)}</div>')
+            f'{paragraph_ranges}<p class="excerpt">{value}</p>{html_ranges}{_page_previews(excerpt)}</div>')
 
 
 def _paired(review: dict | None) -> str:
@@ -83,6 +89,7 @@ def _paired(review: dict | None) -> str:
 def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
+    html_reply = comparison["coordinate_space"] == HTML_COORDINATES
     format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
@@ -99,13 +106,17 @@ def render(comparison: dict) -> bytes:
     if comparison["format"] == "pdf":
         positions = ("Ranges use Unicode code points in the extracted text. Source boxes use unrotated PDF page points. "
                      "Previews show selected source regions.")
+    if html_reply:
+        positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
+                     "in the decoded HTML MIME part. Both count Unicode code points.")
+    no_changes = "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found."
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
 <div class="sources">{''.join(sources)}</div>{_paired(comparison.get('paired_check'))}
-{''.join(changes) or '<p>No word or punctuation changes found.</p>'}
+{''.join(changes) or f'<p>{no_changes}</p>'}
 </body></html>'''
 
     return load_weasyprint().HTML(string=content, url_fetcher=_restricted_fetcher(())).write_pdf()

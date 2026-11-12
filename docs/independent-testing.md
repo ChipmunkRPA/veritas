@@ -877,7 +877,11 @@ decoded text positions, and the exact changed-token ranges locally.
 
 Use matching `.eml`, `.txt`, `.docx` or `.pdf` files. The output gives the verified range
 counts by role. Word replay also checks the top-level body paragraph numbers,
-XML body-child positions and paragraph-local character ranges. PDF replay also
+XML body-child positions and paragraph-local character ranges. HTML-only email
+replay checks the original MIME part and the decoded HTML positions of changed
+words. Both HTML drafts need two, three, five or six simple body paragraphs
+followed by an explicit blockquote. The comparison measures wording in the
+reply body and carries zero authorship confidence weight. PDF replay also
 checks the changed words against both sources' page positions, original crops
 and highlighted crops. Each PDF must be unlocked, at most 1 MiB and 12 pages,
 and have mapped native text on every page. The browser shows the recorded
@@ -885,6 +889,14 @@ original and highlighted crops. The downloadable PDF shows the highlighted
 crops. The JSON preserves both crops for the selected previews and page
 coordinates for every changed token. The comparison locates differences and
 leaves revision order and authorship to other evidence.
+
+In an authored panel of 28 HTML draft pairs, the comparison located all 16
+wording and punctuation changes. It returned no reply-body changes on 12
+quote, attachment, and formatting controls. Separate MIME and XML readback
+verified 24 changed-token positions and 48 decoded HTML ranges. In a local
+browser test after a simulated checkout, the highlighted words matched the PDF
+and the replayed JSON. The comparison created no second job or order.
+
 When a plain-text export includes the experimental paired check, replay also
 verifies the exact source spans, both input hashes and the arithmetic of the
 saved responses. This offline replay verifies saved values against the stated

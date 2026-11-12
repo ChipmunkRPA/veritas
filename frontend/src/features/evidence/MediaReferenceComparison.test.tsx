@@ -90,6 +90,37 @@ it('shows and exports the standalone audio difference waveform on the recording 
   ])
 })
 
+it('shows the localized audio difference after volume adjustment alongside the raw comparison', async () => {
+  const waveform = { low: [-0.4], high: [0.2] }
+  const clip = { file: 'earlier-volume.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/2', status: 'measured', interpretation: 'Decoded audio differences.',
+    audio: { status: 'measured', changed_samples: 31200, submitted: { samples: 32000 }, ranges: [{
+      id: 'A01', start_s: 0, end_s: 2, start_sample: 0, end_sample: 32000, changed_samples: 31200,
+    }] },
+    level_adjusted: { gain_db: -6.021, changed_samples: 2700, interpretation: 'Both end sections support the volume adjustment.', ranges: [{
+      id: 'V01', start_s: .76, end_s: .94, changed_samples: 2700, difference: { peak: .25, rms: .1 },
+      preview: { end_s: .94, waveforms: { earlier: waveform, submitted: waveform },
+        difference_waveform: waveform, assets: { earlier: clip, submitted: clip } },
+    }] },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' })))
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  expect(await screen.findByRole('region', { name: 'Differences after a volume adjustment' })).toBeTruthy()
+  expect(screen.getByText('The analyzed recording is 6.021 dB quieter in the matching sections at both ends.')).toBeTruthy()
+  expect(screen.getByText('V01 · 0.760–0.940 s')).toBeTruthy()
+  expect(screen.getByRole('img', { name: 'Volume-adjusted difference waveform' })).toBeTruthy()
+  expect(screen.getByText('A01 · 0.000–2.000 s')).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', { name: 'Download JSON evidence' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Download PDF' }))
+  expect(vi.mocked(saveBlob).mock.calls.map(([, name]) => name)).toEqual([
+    'chipmunk-verify-audio-comparison.json', 'chipmunk-verify-audio-comparison.pdf',
+  ])
+})
+
 it('accepts the scoped video comparison and shows native crops linked to the review interval', async () => {
   const picture = { file: 'picture.png', media_type: 'image/png', sha256: 'c'.repeat(64) }
   const crop = { file: 'crop.png', media_type: 'image/png', sha256: 'd'.repeat(64) }

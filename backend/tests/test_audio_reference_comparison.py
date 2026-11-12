@@ -4,6 +4,7 @@ import json
 import shutil
 import subprocess
 from contextlib import contextmanager
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
@@ -165,6 +166,102 @@ def test_offline_replay_rejects_changed_audio_media_or_manifest(tmp_path, aligne
     downloaded.write_text(json.dumps(wrapper))
     with pytest.raises(ValueError, match="exported JSON or media differs"):
         run(earlier, analyzed, downloaded, verify=True)
+
+
+@pytest.fixture
+def adjusted_audio_pair(tmp_path):
+    original = np.random.default_rng(2309).integers(-8192, 8193, 35591, dtype=np.int16)
+    adjusted = np.rint(original * 0.625).astype(np.int16)
+    altered = adjusted.copy()
+    altered[9602:12521] += 502
+    paths = [save(tmp_path, name, samples.astype(np.float32) / 32768)
+             for name, samples in (("volume-original", original), ("volume-adjusted", adjusted),
+                                   ("volume-altered", altered))]
+    return paths, original, adjusted, altered
+
+
+def test_volume_adjustment_proves_exact_changed_samples_and_preserves_raw(tmp_path, adjusted_audio_pair):
+    (earlier, adjusted, altered), original, _, edited_pcm = adjusted_audio_pair
+    clean, _ = audio_reference.compare(earlier, adjusted)
+    assert clean["schema"] == audio_reference.SCHEMA_WITH_LEVEL_ADJUSTMENT
+    assert clean["audio"]["changed_samples"] > 35000
+    assert clean["level_adjusted"]["changed_samples"] == 0 and clean["level_adjusted"]["ranges"] == []
+
+    record, assets = audio_reference.compare(earlier, altered)
+    raw, raw_assets = audio_reference.compare(earlier, altered, include_level_adjustment=False)
+    assert record["audio"] == raw["audio"]
+    assert all(assets[name] == content for name, content in raw_assets.items())
+    assert record["schema"] == audio_reference.SCHEMA_WITH_LEVEL_ADJUSTMENT
+    assert record["affects_overall_confidence"] is False
+    measured = record["level_adjusted"]
+    assert measured["gain_db"] == pytest.approx(-4.082, abs=0.001)
+
+    def bounds(start, end):
+        admissible = [tuple(sorted((Fraction(2 * int(y) - 1, 2 * int(x)), Fraction(2 * int(y) + 1, 2 * int(x)))))
+                      for x, y in zip(original[start:end], edited_pcm[start:end], strict=True) if x != 0]
+        return max(interval[0] for interval in admissible), min(interval[1] for interval in admissible)
+
+    support_ranges = ((0, 8000), (len(original) - 8000, len(original)))
+    support = measured["support"]
+    assert len(support) == 2
+    for (start, end), anchor in zip(support_ranges, support, strict=True):
+        assert (anchor["start_sample"], anchor["end_sample"]) == (start, end)
+        assert tuple(Fraction(anchor["gain_bounds"][key]) for key in ("lower", "upper")) == bounds(start, end)
+        assert anchor["pcm_sha256"] == {
+            side: hashlib.sha256(samples[start:end].astype("<i2").tobytes()).hexdigest()
+            for side, samples in (("earlier", original), ("submitted", edited_pcm))
+        }
+    first, last = (bounds(*interval) for interval in support_ranges)
+    lower, upper = max(first[0], last[0]), min(first[1], last[1])
+    assert measured["gain_bounds"] == {"lower": str(lower), "upper": str(upper)}
+
+    def confirmed(x, y):
+        predicted = sorted((int(x) * lower, int(x) * upper))
+        return int(y) - Fraction(1, 2) > predicted[1] or int(y) + Fraction(1, 2) < predicted[0]
+
+    mask = [confirmed(x, y) for x, y in zip(original, edited_pcm, strict=True)]
+    assert measured["bin_counts_sha256"] == canonical_hash(
+        [sum(mask[i:i + 320]) for i in range(0, len(mask), 320)])
+    assert measured["changed_samples"] == sum(mask) == 2919
+    [span] = measured["ranges"]
+    assert (span["id"], span["start_sample"], span["end_sample"]) == ("V01", 9600, 12800)
+    assert span["source_ranges"] == {side: {"start_pts": 9600, "end_exclusive_pts": 12800}
+                                     for side in ("earlier", "submitted")}
+    for side, samples in (("earlier", original), ("submitted", edited_pcm)):
+        asset = span["preview"]["assets"][side]
+        np.testing.assert_array_equal(read_wav(assets[asset["file"]]) * 32768, samples[9600:12800])
+    residual = [int(y) - round(int(x) * (lower + upper) / 2)
+                for x, y in zip(original[9600:12800], edited_pcm[9600:12800], strict=True)]
+    assert span["difference"]["peak"] == max(map(abs, residual)) / 32768
+
+    downloaded = tmp_path / "adjusted-export.json"
+    downloaded.write_text(json.dumps({"comparison": record,
+                                     "assets": {name: base64.b64encode(body).decode() for name, body in assets.items()}}))
+    assert run(earlier, altered, downloaded, verify=True) == record
+    tampered = json.loads(downloaded.read_bytes())
+    tampered["comparison"]["level_adjusted"]["changed_samples"] += 1
+    downloaded.write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="exported JSON or media differs"):
+        run(earlier, altered, downloaded, verify=True)
+    downloaded.write_text(json.dumps({"comparison": raw,
+                                     "assets": {name: base64.b64encode(body).decode() for name, body in raw_assets.items()}}))
+    assert run(earlier, altered, downloaded, verify=True) == raw
+
+
+def test_volume_adjustment_abstains_without_matching_support_or_native_samples(tmp_path, adjusted_audio_pair):
+    (earlier, adjusted, _), _, gain_only, _ = adjusted_audio_pair
+    clipped, changed_anchor = gain_only.copy(), gain_only.copy()
+    clipped[9600] = 32767
+    changed_anchor[3122] += 400
+    incompatible = [save(tmp_path, name, samples.astype(np.float32) / 32768)
+                    for name, samples in (("clipped", clipped), ("changed-anchor", changed_anchor))]
+    stereo = tmp_path / "gain-stereo.wav"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(adjusted), "-ac", "2", str(stereo)],
+                   capture_output=True, check=True, timeout=20)
+    for variant in (*incompatible, stereo):
+        record, _ = audio_reference.compare(earlier, variant)
+        assert record["schema"] == audio_reference.SCHEMA and record["status"] == "measured"
+        assert "level_adjusted" not in record and record["audio"]["changed_samples"] > 0
 
 
 def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(

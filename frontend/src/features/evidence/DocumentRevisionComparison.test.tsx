@@ -121,6 +121,29 @@ it('offers Word uploads and shows the server paragraph and body offsets', async 
   expect(screen.getByText('café').tagName).toBe('MARK')
 })
 
+it('links highlighted HTML reply words to their decoded MIME positions', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 400, decoded_text_sha256: '1'.repeat(64), decoded_characters: 80,
+    decoded_html_sha256: '2'.repeat(64), decoded_html_characters: 140, mime_part: '1.1' }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/2', format: 'email', coordinate_space: 'email_html_extracted_text_unicode_codepoint',
+    earlier: source, later: source, scope: 'Checks the reply body.', interpretation: 'Shows wording changes.',
+    changes: [{ id: 'C01', role: 'body', earlier: null, later: {
+      start: 12, end: 16, text: 'café', changed_tokens: [[12, 16]],
+      html_tokens: [{ start: 12, end: 16, source_ranges: [[29, 31], [37, 38], [45, 51]] }],
+    } }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.eml', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.eml')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  expect((await screen.findByText('café')).tagName).toBe('MARK')
+  expect(screen.getByText('Earlier MIME part 1.1 · Analyzed MIME part 1.1')).toBeTruthy()
+  fireEvent.click(screen.getByText('Decoded HTML positions'))
+  expect(screen.getByText('[12, 16) → [29, 31), [37, 38), [45, 51)')).toBeTruthy()
+})
+
 it('opts in to the separate paired response and shows the linked sentence locations', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
   const comparison: DraftComparison = {

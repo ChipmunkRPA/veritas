@@ -3454,7 +3454,7 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
@@ -3467,9 +3467,9 @@ export interface components {
             paired_check?: components["schemas"]["DraftPairedCheck"] | null;
             /**
              * Schema
-             * @constant
+             * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2";
             /** Scope */
             scope: string;
         };
@@ -3482,6 +3482,8 @@ export interface components {
             ][];
             /** End */
             end: number;
+            /** Html Tokens */
+            html_tokens?: components["schemas"]["DraftHtmlToken"][] | null;
             /** Paragraphs */
             paragraphs?: components["schemas"]["DraftParagraph"][] | null;
             /** Pdf Pages */
@@ -3490,6 +3492,18 @@ export interface components {
             start: number;
             /** Text */
             text: string;
+        };
+        /** DraftHtmlToken */
+        DraftHtmlToken: {
+            /** End */
+            end: number;
+            /** Source Ranges */
+            source_ranges: [
+                number,
+                number
+            ][];
+            /** Start */
+            start: number;
         };
         /** DraftPairedCheck */
         DraftPairedCheck: {
@@ -3591,6 +3605,10 @@ export interface components {
             bytes: number;
             /** Decoded Characters */
             decoded_characters: number;
+            /** Decoded Html Characters */
+            decoded_html_characters?: number | null;
+            /** Decoded Html Sha256 */
+            decoded_html_sha256?: string | null;
             /** Decoded Text Sha256 */
             decoded_text_sha256: string;
             /** Mime Part */

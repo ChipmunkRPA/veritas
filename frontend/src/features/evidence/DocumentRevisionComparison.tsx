@@ -28,6 +28,14 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: DraftExcerpt | nu
     </p>)}
     {excerpt?.text ? <pre className="mt-2 mb-0 whitespace-pre-wrap break-words font-sans text-small"><MarkedExcerpt excerpt={excerpt} /></pre>
       : <p className="mt-2 mb-0 text-small text-text-muted">{excerpt ? 'No text at this location.' : 'No corresponding section.'}</p>}
+    {!!excerpt?.html_tokens?.length && <details className="mt-1 text-caption text-text-muted">
+      <summary className="cursor-pointer">Decoded HTML positions</summary>
+      <ul className="mt-1 mb-0 list-none p-0 font-mono">
+        {excerpt.html_tokens.map(token => <li key={token.start}>
+          [{token.start}, {token.end}) → {token.source_ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}
+        </li>)}
+      </ul>
+    </details>}
     {excerpt?.pdf_pages?.map(page => <div key={page.page} className="mt-3">
       <p className="m-0 text-caption text-text-muted">Page {page.page}{page.preview ? ' · highlighted source crop' : ''}</p>
       {page.preview && <>
@@ -49,6 +57,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const paired = comparison.paired_check
   const docx = comparison.format === 'docx'
   const pdfText = comparison.format === 'pdf'
+  const html = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
   const formatLabel = docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-draft-comparison.json')
@@ -59,7 +68,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   return <div className="mt-4 border-t border-border pt-4">
     <div className="flex flex-wrap items-baseline justify-between gap-3">
       <p className="m-0 text-small font-medium" role="status">
-        {comparison.changes.length === 0 ? 'No word or punctuation changes found'
+        {comparison.changes.length === 0 ? `No word or punctuation changes found${html ? ' in the reply body' : ''}`
           : `${comparison.changes.length} ${comparison.changes.length === 1 ? 'change' : 'changes'} found`}
       </p>
       <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -68,6 +77,9 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       </div>
     </div>
     <p className="mt-2 mb-0 text-small text-text-muted">{comparison.scope} {comparison.interpretation}</p>
+    {html && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Earlier MIME part {comparison.earlier.mime_part} · Analyzed MIME part {comparison.later.mime_part}
+    </p>}
     {paired && <section aria-label="Experimental paired writing check" className="mt-4 rounded-md border border-border p-3">
       <h3 className="m-0 text-small font-medium">Experimental paired writing check</h3>
       <p className="mt-2 mb-0 text-small">{paired.summary}</p>
@@ -98,6 +110,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
+        : html ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
         : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
         : 'Offsets count decoded Unicode code points.'} The end of each range is excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
@@ -151,6 +164,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {extension} file, up to 1 MiB, to see where the wording changed.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
+    {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">

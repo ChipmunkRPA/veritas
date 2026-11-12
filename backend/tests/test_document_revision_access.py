@@ -5,7 +5,10 @@ import hashlib
 import json
 from contextlib import contextmanager
 from datetime import UTC, datetime
+from email import policy
 from email.message import EmailMessage
+from email.parser import BytesParser
+from html import unescape
 from io import BytesIO
 from tempfile import TemporaryDirectory
 
@@ -33,6 +36,15 @@ def _email(text):
     message.set_content(text, cte="quoted-printable")
     message.add_alternative("<p>Excluded HTML body</p>", subtype="html")
     message.add_attachment(b"Excluded attachment body", maintype="application", subtype="octet-stream", filename="fixture.bin")
+    return message.as_bytes()
+
+
+def _html_email(body, *, quote="Previous scheduling discussion.", cte="quoted-printable"):
+    markup = f"<html><body>{body}<blockquote><p>{quote}</p></blockquote></body></html>"
+    message = EmailMessage()
+    message["From"] = "fixture@example.invalid"
+    message.set_content(markup, subtype="html", cte=cte)
+    message.add_attachment(b"Private reference sheet", maintype="application", subtype="octet-stream", filename="notes.bin")
     return message.as_bytes()
 
 
@@ -327,6 +339,75 @@ def test_email_comparison_preserves_roles_and_exact_original_excerpts_in_json_an
 
     mislabeled = f.client.post(_url("email-draft"), headers=f.viewer, files=_upload(b"This is plain text with no email headers."))
     assert mislabeled.status_code == 422 and not list(staged.iterdir())
+
+
+def test_html_reply_comparison_preserves_split_words_and_mime_positions(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    earlier = _html_email("<p>📎 Bring the ca<strong>f</strong>&#233; order.</p><p>Meet at noon.</p>")
+    later = _html_email("<p>📎 Bring the bi<em>st</em>ro order.</p><p>Meet at noon.</p>",
+                        quote="Confidential quote change.", cte="base64")
+    _saved(f, "html-reply", ".eml", later)
+    response = f.client.post(_url("html-reply"), headers=f.viewer, files=_upload(earlier), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    comparison = result["comparison"]
+    assert comparison["schema"] == "chipmunk.document-revision-comparison/2"
+    assert comparison["coordinate_space"] == document_revision.HTML_COORDINATES
+    (change,) = comparison["changes"]
+    assert change["role"] == "body"
+    assert "Confidential quote change" not in response.text and "Private reference sheet" not in response.text
+    for side, data, expected, pieces in (("earlier", earlier, "café", ["ca", "f", "&#233;"]),
+                                         ("later", later, "bistro", ["bi", "st", "ro"])):
+        part, _ = BytesParser(policy=policy.default).parsebytes(data).iter_parts()
+        raw = part.get_content()
+        assert comparison[side]["mime_part"] == "1.1"
+        assert comparison[side]["decoded_html_sha256"] == hashlib.sha256(raw.encode()).hexdigest()
+        assert comparison[side]["decoded_html_characters"] == len(raw)
+        excerpt = change[side]
+        assert excerpt["text"] == expected and excerpt["start"] == len("📎 Bring the ")
+        (token,) = excerpt["html_tokens"]
+        assert [[token["start"], token["end"]]] == excerpt["changed_tokens"]
+        assert [raw[a:b] for a, b in token["source_ranges"]] == pieces
+        assert "".join(unescape(piece) for piece in pieces) == expected
+    with pymupdf.open(stream=base64.b64decode(result["pdf"], validate=True), filetype="pdf") as pdf:
+        body = " ".join(" ".join(page.get_text().split()) for page in pdf)
+        assert "Decoded HTML positions" in body and "MIME part 1.1" in body
+        assert all(word in body for word in ("café", "bistro")) and "Confidential quote change" not in body
+        for side in ("earlier", "later"):
+            assert all(f"[{a}, {b})" in body for a, b in change[side]["html_tokens"][0]["source_ranges"])
+
+    old_path, new_path, export = (tmp_path / name for name in ("earlier.eml", "later.eml", "report.json"))
+    old_path.write_bytes(earlier)
+    new_path.write_bytes(later)
+    export.write_text(json.dumps(comparison))
+    assert review(export, old_path, new_path)["decoded_html_ranges_verified"] == 6
+    change["later"]["html_tokens"][0]["source_ranges"][0][0] += 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old_path, new_path)
+
+
+@pytest.mark.parametrize("paragraphs", [2, 3, 5, 6])
+def test_html_reply_comparison_ignores_quote_and_format_changes(paragraphs):
+    tail = "".join(f"<p>Agenda item {i} is unchanged.</p>" for i in range(1, paragraphs))
+    earlier = _html_email("<p>Crème &amp; tea.</p>" + tail)
+    same = _html_email("<p><strong>Cr&#232;me</strong> &#38; tea.</p>" + tail, quote="Unrelated new quote.", cte="base64")
+    deleted = _html_email("<p>Crème.</p>" + tail)
+    assert document_revision.compare(earlier, same, ".eml")["changes"] == []
+    (change,) = document_revision.compare(earlier, deleted, ".eml")["changes"]
+    assert change["role"] == "body" and change["earlier"]["text"] == "& tea"
+    assert len(change["earlier"]["html_tokens"]) == 2 and change["later"]["html_tokens"] == []
+
+
+def test_html_reply_comparison_refuses_ambiguous_or_mixed_body_formats():
+    valid = _html_email("<p>First paragraph.</p><p>Next paragraph.</p>")
+    for body in ('<p style="display:none">Hidden text.</p><p>Next paragraph.</p>',
+                 "<p>First paragraph.</p><blockquote><p>Interleaved quote.</p></blockquote><p>Next paragraph.</p>",
+                 "<p>First paragraph.</p><p>--\nSignature inside body.</p>"):
+        with pytest.raises(ValueError, match="Use HTML-only replies"):
+            document_revision.compare(_html_email(body), valid, ".eml")
+    with pytest.raises(ValueError, match="same body type"):
+        document_revision.compare(_email("Two paragraphs.\n\nThis is the second."), valid, ".eml")
 
 
 def test_auth_scope_format_mismatch_and_retained_later_integrity(reference_http, monkeypatch):

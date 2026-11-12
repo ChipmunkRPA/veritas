@@ -32,6 +32,7 @@ from app.evidence import (
     face_lighting_context,
     face_return_binding,
     picture_hold_binding,
+    picture_sequence,
     whole_face_binding,
 )
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
@@ -464,6 +465,46 @@ def _picture_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, se
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
+def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
+                             source: dict, pair: dict, decoded: dict) -> dict:
+    packet_id = picture_sequence.PACKET_ID
+    frames, images, labels, assets = [], [], [], {}
+    for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
+        if index not in decoded or hashlib.sha256(decoded[index]).hexdigest() != digest:
+            raise PacketIntegrityError("Repeated sequence endpoint differs from its decoded source picture")
+        image = Image.fromarray(decoded[index])
+        ref = f"{role}_picture"
+        if ref not in assets:
+            assets[ref] = _packet_image(db, store, analysis, set_id, image)
+        images.append(image)
+        labels.append(f"{occurrence.title()} {role} | frame {index}")
+        stream_s = pair[occurrence][f"{role}_stream_s"]
+        origin = source["timeline_origin_s"]
+        frames.append({"id": f"{packet_id}.{number}", "anchor": {"frame_index": index, "pts": pts,
+            "time_base": source["time_base"], "decoded_rgb_sha256": digest, "original_sha256": source["sha256"],
+            "width": source["width"], "height": source["height"], "stream_selector": source["stream_selector"],
+            "coordinate_space": source["coordinate_space"], "stream_time_s": stream_s,
+            "playback_time_s": None if origin is None else stream_s - origin},
+            "score": None, "is_peak": False, "context_region": None, "region_meaning": "whole_frame_context",
+            "artifact_refs": {"original": ref, "context": ref}})
+    first, second = (_contact(images[i:i + 2], labels[i:i + 2]) for i in (0, 2))
+    sheet = Image.new("RGB", (first.width, first.height + second.height))
+    sheet.paste(first, (0, 0))
+    sheet.paste(second, (0, first.height))
+    assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
+    return {"id": packet_id, "title": "Same moving pictures at two source ranges", "evidence_type": "anomaly",
+            "claim_scope": "paired_frame_sequences", "semantics": picture_sequence.SCHEMA,
+            "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
+            "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
+            "interpretation": picture_sequence.CONTEXT,
+            "limitations": ["The comparison requires exact decoded pixels and matching frame spacing within the scanned range."],
+            "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"},
+                             {"label": "First-to-last source timestamp span", "value": pair["span_s"], "unit": "seconds"}],
+            "artifacts": assets, "clip": {"status": "unavailable", "reason": "Use the original video to play either occurrence."},
+            "derivation": {"version": VERSION, "selection": "longest_pair_of_exact_moving_sequences",
+                           "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
+
+
 def _channel_coverage(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> dict:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     has_audio = probe[0].get("info", {}).get("has_audio") if probe else None
@@ -532,10 +573,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
+    pair = document.get("picture_hold", {}).get("sequence_review", {}).get("pair")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
+    if pair is not None:
+        endpoints.update(row[2] for row in picture_sequence.endpoints(pair))
     selected = sorted(wanted | endpoints)
     decoded = {}
     if selected:
@@ -544,7 +588,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 if frame.index in exact_indices and (not frame.pts_verified or frame.pts != anchors[frame.index]["pts"]):
                     raise PacketIntegrityError("Face evidence image lacks a verified decoded timestamp")
                 if frame.index in endpoints and not frame.pts_verified:
-                    raise PacketIntegrityError("Picture hold endpoint lacks a verified decoded timestamp")
+                    raise PacketIntegrityError("Repeated picture endpoint lacks a verified decoded timestamp")
                 decoded[frame.index] = frame.rgb
     for i in wanted:
         if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:
@@ -759,6 +803,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(packet)
     if match is not None:
         document["packets"].append(_picture_hold_packet(db, store, analysis, set_id, source, match, decoded))
+    if pair is not None:
+        document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, pair, decoded))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -802,7 +848,8 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     ids = set()
     for packet in document["packets"]:
         if (packet["id"] in ids or (packet.get("evidence_type"), packet.get("claim_scope"))
-                not in {("statistical", "sampled_frames"), ("anomaly", "sampled_window"), ("anomaly", "consecutive_frames")}):
+                not in {("statistical", "sampled_frames"), ("anomaly", "sampled_window"), ("anomaly", "consecutive_frames"),
+                        ("anomaly", "paired_frame_sequences")}):
             raise PacketIntegrityError("Video evidence has duplicate or misrepresented observations")
         ids.add(packet["id"])
         artifacts = packet["artifacts"]

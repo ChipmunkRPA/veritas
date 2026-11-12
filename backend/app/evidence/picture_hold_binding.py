@@ -7,6 +7,7 @@ from collections.abc import Callable, Sequence
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence import picture_sequence
 from app.evidence.video_packet_versions import PICTURE_HOLD_VERSIONS
 
 METHOD = "exact-native-picture-hold/1"
@@ -136,6 +137,7 @@ def _match(packet: dict, cover: dict, source: dict, tb: Fraction) -> None:
 
 def validate(document: dict) -> None:
     """Validate signed evidence structure without media, models or application services."""
+    picture_sequence.validate(document.get("picture_hold") or {}, document)
     packets = [p for p in document["packets"] if p.get("id") == PACKET_ID or "picture_hold" in p
                or p.get("claim_scope") == "consecutive_frames" or p.get("semantics") == METHOD]
     source = document["source"]
@@ -159,15 +161,18 @@ def validate(document: dict) -> None:
         return
     native_limit = frame_limit(source["frame_count"], source["width"], source["height"])
     _require(_digest(commitment), "Picture hold check omits its recorded commitment")
-    expanded = "scan_scope" in cover
+    scope = cover.get("scan_scope")
+    _require((scope == picture_sequence.SCAN_SCOPE) == ("sequence_review" in cover),
+             "Repeated sequence scope differs from its recorded review")
+    expanded = "continuity_breaks" in cover
     if expanded:
         breaks = cover.get("continuity_breaks")
-        _require(cover["scan_scope"] == EXTENDED_SCOPE and native_limit < limit <= _extended_frame_cap(
+        _require(scope in {EXTENDED_SCOPE, picture_sequence.SCAN_SCOPE} and native_limit < limit <= _extended_frame_cap(
             source["frame_count"], source["width"], source["height"]) and scanned == limit
             and _integer(breaks) and 0 <= breaks < scanned,
             "Picture hold check differs from its extended native budget")
     else:
-        _require(limit == native_limit and "continuity_breaks" not in cover,
+        _require(limit == native_limit and scope in {None, picture_sequence.SCAN_SCOPE},
                  "Picture hold check differs from its recorded native budget")
     if status == "matched":
         _require(scanned == limit and cover["reason"] == MATCH and cover["packet_id"] == PACKET_ID and len(packets) == 1
@@ -203,7 +208,8 @@ def validate_record(document: dict, record: dict | None, *, table_pts: Sequence[
 def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated: Sequence[int]) -> None:
     """Check that covered source indices, clocks and declared gaps match the original frame table."""
     cover = document["picture_hold"]
-    if cover.get("scan_scope") == EXTENDED_SCOPE:
+    picture_sequence.validate_clock(cover.get("sequence_review"), table_pts, interpolated)
+    if "continuity_breaks" in cover:
         source = document["source"]
         tb = Fraction(source["time_base"])
         expected = extended_frame_limit(table_pts, tb, source["width"], source["height"])

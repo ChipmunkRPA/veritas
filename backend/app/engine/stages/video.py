@@ -1030,7 +1030,8 @@ def render(ctx: StageContext) -> dict[str, Any]:
                                                               limit=limit), "match": None}
         else:
             hold = picture_hold.inspect(frame_store.path, table, origin=ctx.outputs["probe"]["info"].get("timeline_origin_s"),
-                                        check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining())
+                                        check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
+                                        sequence_review=True)
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")

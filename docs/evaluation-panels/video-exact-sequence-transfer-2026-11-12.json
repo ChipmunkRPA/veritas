@@ -1,0 +1,541 @@
+{
+  "groups": 6,
+  "independent_frame_hashes": 6480,
+  "isolated_app": {
+    "chrome": {
+      "exact_endpoint_pictures": 4,
+      "page_errors": 0,
+      "plain_view": true,
+      "playback_seek_seconds": 20,
+      "scanned_frames": 601,
+      "unchecked_tail_frames": 39
+    },
+    "exact_source_pngs_checked": 4,
+    "frames_per_range": 24,
+    "pdf_and_json_same_evidence": true,
+    "signed_source_replayed": true,
+    "simulated_checkout": true,
+    "source_ranges_s": [
+      [
+        5,
+        6.15
+      ],
+      [
+        20,
+        21.15
+      ]
+    ]
+  },
+  "matches": {
+    "exact_copy": 6
+  },
+  "outcomes": [
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "h264",
+      "group": 1,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1297
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "h264",
+      "group": 1,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1461
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "h264",
+      "group": 1,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.1186
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "h264",
+      "group": 1,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.1189
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "h264",
+      "group": 1,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1135
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 1,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0775
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "vp9",
+      "group": 2,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.3513
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "vp9",
+      "group": 2,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.3492
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "vp9",
+      "group": 2,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.3302
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "vp9",
+      "group": 2,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.348
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "vp9",
+      "group": 2,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.342
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 2,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0675
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "h264",
+      "group": 3,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1037
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "h264",
+      "group": 3,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1128
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "h264",
+      "group": 3,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.104
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "h264",
+      "group": 3,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.1027
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "h264",
+      "group": 3,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1037
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 3,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0655
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "vp9",
+      "group": 4,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.24
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "vp9",
+      "group": 4,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.227
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "vp9",
+      "group": 4,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.222
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "vp9",
+      "group": 4,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.31
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "vp9",
+      "group": 4,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.2276
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 4,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0627
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "h264",
+      "group": 5,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1062
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "h264",
+      "group": 5,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1054
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "h264",
+      "group": 5,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.1016
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "h264",
+      "group": 5,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.1061
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "h264",
+      "group": 5,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.1062
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 5,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0637
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "original",
+      "encoding": "vp9",
+      "group": 6,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.2739
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "ordinary_cut",
+      "encoding": "vp9",
+      "group": 6,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.2754
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "static_hold",
+      "encoding": "vp9",
+      "group": 6,
+      "held_picture": true,
+      "matched_frames": null,
+      "seconds": 0.2624
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "exact_copy",
+      "encoding": "vp9",
+      "group": 6,
+      "held_picture": false,
+      "matched_frames": [
+        20,
+        41,
+        130,
+        151
+      ],
+      "seconds": 0.2755
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "different_spacing",
+      "encoding": "vp9",
+      "group": 6,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.3015
+    },
+    {
+      "checked_frames": 180,
+      "clock": "1/1000",
+      "delivery": "lossy_copy",
+      "encoding": "lossy",
+      "group": 6,
+      "held_picture": false,
+      "matched_frames": null,
+      "seconds": 0.0802
+    }
+  ],
+  "public_synthetic_replay": {
+    "groups": 1,
+    "independent_frame_hashes": 1080,
+    "matches": {
+      "exact_copy": 1
+    },
+    "outcomes": [
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "original",
+        "encoding": "h264",
+        "group": 1,
+        "held_picture": false,
+        "matched_frames": null,
+        "seconds": 0.0949
+      },
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "ordinary_cut",
+        "encoding": "h264",
+        "group": 1,
+        "held_picture": false,
+        "matched_frames": null,
+        "seconds": 0.0903
+      },
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "static_hold",
+        "encoding": "h264",
+        "group": 1,
+        "held_picture": true,
+        "matched_frames": null,
+        "seconds": 0.0874
+      },
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "exact_copy",
+        "encoding": "h264",
+        "group": 1,
+        "held_picture": false,
+        "matched_frames": [
+          20,
+          41,
+          130,
+          151
+        ],
+        "seconds": 0.0916
+      },
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "different_spacing",
+        "encoding": "h264",
+        "group": 1,
+        "held_picture": false,
+        "matched_frames": null,
+        "seconds": 0.0885
+      },
+      {
+        "checked_frames": 180,
+        "clock": "1/1000",
+        "delivery": "lossy_copy",
+        "encoding": "lossy",
+        "group": 1,
+        "held_picture": false,
+        "matched_frames": null,
+        "seconds": 0.0725
+      }
+    ],
+    "schema": "chipmunk.video-exact-sequence-transfer/1",
+    "source_rgb_commitments": [
+      {
+        "encoding": "h264",
+        "group": 1,
+        "source_rgb_sha256": "925628df51c7a779cdcab914e201af0be84b9bca065d6ba7c171863147c7f401"
+      }
+    ],
+    "webcam_groups": 0
+  },
+  "schema": "chipmunk.video-exact-sequence-transfer/1",
+  "source_rgb_commitments": [
+    {
+      "encoding": "h264",
+      "group": 1,
+      "source_rgb_sha256": "261093036d234927618b9d7bed163018f0342b8bb239b289a7b04dc914c2d4c4"
+    },
+    {
+      "encoding": "vp9",
+      "group": 2,
+      "source_rgb_sha256": "4c6478ce764daf6889f2a43392affc3e72df265a932649a69d7fbba085589b5b"
+    },
+    {
+      "encoding": "h264",
+      "group": 3,
+      "source_rgb_sha256": "da519a8709e6e26298fd869b8adaa21a0745be70ee3005da690c011eaaedaab6"
+    },
+    {
+      "encoding": "vp9",
+      "group": 4,
+      "source_rgb_sha256": "588f9309acd378c5b8f108d0a458e3c6d33efb66eb516f30cc618966eaa786d8"
+    },
+    {
+      "encoding": "h264",
+      "group": 5,
+      "source_rgb_sha256": "547142713350cf63050bb84ce07f9eb2ff040490acdbf978ad571e12ab0f3ebe"
+    },
+    {
+      "encoding": "vp9",
+      "group": 6,
+      "source_rgb_sha256": "4da4253cdddf84ae1d25701ac9dc30660159292f3377bc6c2f0a61d4b1aa44cf"
+    }
+  ],
+  "webcam_groups": 6
+}

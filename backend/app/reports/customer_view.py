@@ -109,6 +109,8 @@ def _packet_inference(packet: dict) -> str:
             return "The paired response supplied no additional face-swap clue at the sampled positions."
         if packet.get("picture_hold"):
             return "The cause of the picture hold remains undetermined."
+        if packet.get("picture_sequence"):
+            return "The cause of the repeated sequence remains undetermined."
         measures = {m.get("label"): _number(m.get("value")) for m in packet.get("measurements") or []}
         boundary = measures.get("Recorded decision boundary")
         response = next((v for k, v in measures.items() if k in {"Frame detection score", "Window detection score"} and v is not None), None)

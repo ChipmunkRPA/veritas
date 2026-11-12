@@ -21,7 +21,7 @@ from app.detectors.video import face_return, face_return_fine_scene
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
-from app.evidence import picture_hold_binding
+from app.evidence import picture_hold_binding, picture_sequence
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_CODEC_METHOD
 from app.evidence.face_return_binding import validate_packet as validate_face_return
@@ -196,8 +196,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     picture_hold_binding.validate(evidence)
     hold = evidence.get("picture_hold") or {}
+    sequence = hold.get("sequence_review")
+    extended = "continuity_breaks" in hold
     hold_frames = 0
-    if hold.get("scan_scope") == picture_hold_binding.EXTENDED_SCOPE:
+    if extended or sequence is not None:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
@@ -268,8 +270,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
-    if hold_frames:
+    if extended:
         _verify_picture_hold(evidence, table, hold_observations)
+    if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb)) != canonical_hash(sequence):
+        raise ValueError("The original video does not reproduce its repeated moving-picture sequences")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
@@ -277,4 +281,5 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
-            + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else ""))
+            + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
+            + (" Recomputed the exact moving-sequence comparison." if sequence is not None else ""))

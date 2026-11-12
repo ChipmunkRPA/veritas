@@ -8,6 +8,12 @@
 {% endif %}
 {% if hold.get('continuity_breaks') %}<p class="caption">The scan found {{ hold.continuity_breaks }} gaps or unverifiable transitions in the frame sequence.</p>{% endif %}
 <p class="caption">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold</span>.</p>
+{% if hold.get('sequence_review') %}
+<h3>Repeated moving sequences</h3>
+{% if hold.sequence_review.status == 'matched' %}<p><a href="#multimedia-evidence-VPR01">Inspect both matching source ranges</a>.</p>
+{% elif hold.sequence_review.status == 'no_match' %}<p>No exact moving sequence repeated within the checked frames.</p>
+{% else %}<p>The checked footage did not contain two usable ranges of at least half a second.</p>{% endif %}
+{% endif %}
 {% endif %}
 {% for context, similar in [(evidence.get('repetition_context'), false), (evidence.get('similarity_context'), true)] if context %}
 {% set waveform = context.schema == 'chipmunk.audio-repeat-similarity/2' %}

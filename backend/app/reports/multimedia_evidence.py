@@ -234,13 +234,14 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             if end < len(table) and clip["last_frame_duration"]["ticks"] != (table.pts[end] - table.pts[end - 1]) * table.tb.numerator:
                 raise ObjectIntegrityError("Video context final duration differs from the next source frame")
         brightness_inputs = {}
+        repetition = "picture_hold" in packet or "picture_sequence" in packet
         coarse_frames = len(packet["frames"])
         for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
             refined = position >= coarse_frames
             anchor = frame["anchor"]
             recorded = by_index.get(anchor["frame_index"])
             if (table.pts[anchor["frame_index"]] != anchor["pts"]
-                    or ("picture_hold" not in packet and (not recorded or any(anchor.get(key) != value for key, value in recorded.items())))):
+                    or (not repetition and (not recorded or any(anchor.get(key) != value for key, value in recorded.items())))):
                 raise ObjectIntegrityError("Displayed video frame differs from its recorded inference input")
             artifact = packet["artifacts"][frame["artifact_refs"]["original"]]
             with Image.open(io.BytesIO(assets[artifact["sha256"]])) as image:
@@ -653,8 +654,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if packet_kind in {"video", "av"}:
             hold = packet.get("picture_hold")
             row["picture_hold"] = copy.deepcopy(hold)
+            repeated_sequence = packet.get("picture_sequence")
+            row["picture_sequence"] = copy.deepcopy(repeated_sequence)
             if sheet := packet["artifacts"].get("contact_sheet"):
-                row["images"] = [plate("contact_sheet", sheet, "Endpoints of the verified hold" if hold else "Sampled frames (not continuous playback)")]
+                caption = ("Endpoints of both repeated ranges" if repeated_sequence else "Endpoints of the verified hold"
+                           if hold else "Sampled frames (not continuous playback)")
+                row["images"] = [plate("contact_sheet", sheet, caption)]
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
@@ -669,9 +674,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
                                       "interval_role": frame.get("interval_role"), "refined": position >= coarse_count,
                                       "first_refined": position == coarse_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold else "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence else "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
-                                                 if role in frame["artifact_refs"] and (not hold or role == "original")]})
+                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence) or role == "original")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -777,6 +782,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             label = "Identical frames" if row["picture_hold"] else "Sampled face positions" if row["whole_face_review"] else "Face review range"
             row["locator"] = (f"{label} {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s" if interval else
                               "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))
+            if repeat := row["picture_sequence"]:
+                row["locator"] = "Repeated ranges " + " and ".join(
+                    f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))
         else:
             locations = []
             for anchor in packet["anchors"]:

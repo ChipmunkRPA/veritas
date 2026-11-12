@@ -227,6 +227,8 @@ with separate counts for originals, ordinary edits, and two generators.
 The [eight-word insert comparison](writing-phrase-context-stability-2026-11-12.md)
 replays exact phrase locations across two source contexts and compares their
 responses with unchanged articles and ordinary substitutions.
+The [Python PEP replication](writing-pep-phrase-replication-2026-11-12.md)
+replays the same frozen checks on a separate set of English technical prose.
 The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md) applies
 the same frozen rule to a new genre and counts ordinary human replacements.
 The [practical DOCX comparison](writing-practical-notice-transfer-2026-11-11.md)
@@ -383,6 +385,9 @@ exact and approximate picture holds on the same lossy and lossless deliveries.
 The [extended repeated-picture check](video-extended-picture-hold-2026-11-12.md)
 includes test clips that FFmpeg generates locally and a replay of every
 inspected frame when the original video accompanies the signed export.
+The [repeated sequence comparison](video-exact-sequence-transfer-2026-11-12.md)
+replays matching decoded frames in two separate ranges, with static holds,
+different timing, and lossy copies as separate controls.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.
@@ -440,6 +445,9 @@ comparing the outcomes under two additional background recordings.
 The [simulated call-processing comparison](audio-communication-transfer-2026-11-12.md)
 verifies the exact original and processed windows and reconstructs the decision
 counts with a standard-library reviewer.
+The [fresh call-processing replication](audio-communication-replication-2026-11-12.md)
+uses separate foreground groups and meeting participants and verifies the
+retained locations and all false-alarm group counts.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

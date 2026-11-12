@@ -31,7 +31,7 @@ def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
 
 
 @pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET, 'veritas-report-2.0.r87', 'veritas-report-2.0.r88', 'veritas-report-2.0.r89',
-                                     'veritas-report-2.0.r90', 'veritas-report-2.0.r91', 'veritas-report-2.0.r92', 'veritas-report-2.0.r94'])
+                                     'veritas-report-2.0.r90', 'veritas-report-2.0.r91', 'veritas-report-2.0.r92', 'veritas-report-2.0.r94', 'veritas-report-2.0.r95'])
 def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     row = SimpleNamespace(status='done', artefact_id='new', template_set=template,
                           analysis_id='analysis', display_id='report')

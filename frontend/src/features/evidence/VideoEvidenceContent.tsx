@@ -65,13 +65,15 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
+      const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
+        ? 'First occurrence' : 'Second occurrence')
       return <div key={frame.id} className="rounded-md border border-border p-3">
-        <p className="m-0 mb-3 text-small font-medium">{frame.interval_role && <span className="capitalize">{frame.interval_role} {refined ? 'refined' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {refined ? 'refined' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
             <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
-          {!packet.picture_hold && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
+          {!packet.picture_hold && !packet.picture_sequence && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
         </div>
@@ -91,6 +93,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!!hold.continuity_breaks && <p className="mt-2 mb-0 text-caption text-text-muted">The scan found {hold.continuity_breaks} gaps or unverifiable transitions in the frame sequence.</p>}
       {hold.status !== 'unavailable' && laterFrames > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">{laterFrames} later {laterFrames === 1 ? 'frame was' : 'frames were'} outside this check.</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight.</p>
+    </section>}
+    {hold?.sequence_review && <section aria-labelledby="video-picture-sequence-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-picture-sequence-heading" className="m-0 text-body font-medium">Repeated moving sequences</h3>
+      <p className="mt-2 mb-0 text-small">{hold.sequence_review.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR01">Inspect both matching source ranges</a>
+        : hold.sequence_review.status === 'no_match' ? 'No exact moving sequence repeated within the checked frames.'
+        : 'The checked footage did not contain two usable ranges of at least half a second.'}</p>
     </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
@@ -122,6 +131,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
       <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
+        : packet.picture_sequence
+        ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · Second occurrence <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
         : packet.whole_face_review
         ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
@@ -137,7 +148,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
         <p className="mt-2 mb-0">{packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.' : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
-      {!packet.picture_hold && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_boundary && packet.face_boundary_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Refined boundary estimate</h4>
         <p className="mt-2 mb-0 text-small text-text-muted"><strong>{seconds(packet.face_boundary.start_stream_s)}–{seconds(packet.face_boundary.end_stream_s)}</strong> on the source clock.

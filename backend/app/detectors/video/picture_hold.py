@@ -9,12 +9,13 @@ from subprocess import TimeoutExpired
 
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
 from app.evidence import picture_hold_binding as binding
+from app.evidence import picture_sequence
 
 DECODE_TIMEOUT_S = 8.0
 
 
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
-            remaining_s: float | None = None) -> dict:
+            remaining_s: float | None = None, sequence_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -24,6 +25,7 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     continuous_start, equal_start, longest, breaks = 0, 0, 0, 0
     opening = None
     best = None
+    observed = []
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
         return {"coverage": binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit), "match": None}
@@ -38,6 +40,7 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     continuous_start, previous_digest = frame.index, None
                     breaks += int(frame.index > 0)
                 last_pts = point
+                digest = None
                 if point is not None:
                     longest = max(longest, point - table.pts[continuous_start])
                     digest = hashlib.sha256(frame.rgb).hexdigest()
@@ -46,13 +49,21 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     elapsed = point - table.pts[equal_start]
                     if elapsed * tb >= binding.MIN_SPAN and (best is None or elapsed > best[1] - table.pts[best[0]]):
                         best = equal_start, point, frame.index, digest
+                if sequence_review:
+                    observed.append((point, digest))
                 if scanned == opening_limit and limit > opening_limit:
                     opening = _result(table, origin, opening_limit, scanned, last_pts, longest, best)
     except (DecodeError, TimeoutExpired):
         pass  # An auxiliary evidence check has no authority to fail the main video analysis.
     if scanned < limit:
-        return opening if opening is not None else _result(table, origin, opening_limit, scanned, last_pts, longest, best)
-    return _result(table, origin, limit, scanned, last_pts, longest, best, breaks=breaks if limit > opening_limit else None)
+        result = opening if opening is not None else _result(table, origin, opening_limit, scanned, last_pts, longest, best)
+    else:
+        result = _result(table, origin, limit, scanned, last_pts, longest, best, breaks=breaks if limit > opening_limit else None)
+    cover = result["coverage"]
+    if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
+        cover["scan_scope"] = picture_sequence.SCAN_SCOPE
+        cover["sequence_review"] = picture_sequence.scan(observed[:cover["frames_scanned"]], tb)
+    return result
 
 
 def _result(table, origin, limit, scanned, last_pts, longest, best, *, breaks=None):

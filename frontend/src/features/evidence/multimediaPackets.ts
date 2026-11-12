@@ -27,10 +27,11 @@ export interface VideoEvidenceFrame {
   context_region: { x: number; y: number; w: number; h: number } | null
 }
 export interface VideoEvidencePacket extends PacketBase {
-  claim_scope: 'sampled_frames' | 'sampled_window' | 'consecutive_frames'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
+  claim_scope: 'sampled_frames' | 'sampled_window' | 'consecutive_frames' | 'paired_frame_sequences'; measurements: EvidenceMeasure[]; frames: VideoEvidenceFrame[]
   picture_hold?: { start_frame_index: number; end_frame_index: number; start_pts: number; end_pts: number; time_base: string;
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
+  picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
@@ -50,12 +51,14 @@ export interface VideoEvidencePacket extends PacketBase {
   window?: { frame_indices: number[]; start_pts: number; end_pts: number; time_base: string;
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null }
 }
+type PictureSequenceSpan = { start_frame_index: number; end_frame_index: number; start_stream_s: number; end_stream_s: number }
 export interface VideoEvidenceSet extends SetBase {
   schema: 'chipmunk.video-evidence/1'; packets: VideoEvidencePacket[]; omitted_candidates: number
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }
   picture_hold?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; frame_limit: number;
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
-    reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1'; continuity_breaks?: number }
+    reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
+    sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' } }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
     decoded_frame_indices: number[]; table_truncated: boolean; unmapped_observations: number;
     face_detail_repeat?: { status: 'withheld' | 'retained' | 'unassessed'; observation: string;

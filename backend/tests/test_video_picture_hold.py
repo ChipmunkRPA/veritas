@@ -4,6 +4,7 @@ import copy
 import hashlib
 import io
 import subprocess
+from fractions import Fraction
 from types import SimpleNamespace
 
 import numpy as np
@@ -18,7 +19,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video import picture_hold
 from app.detectors.video.decode import DecodedFrame, FrameTable, probe_frames
 from app.evidence import picture_hold_binding as binding
-from app.evidence import service, video_packets
+from app.evidence import picture_sequence, service, video_packets
 from app.reports import engine, multimedia_evidence
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -26,34 +27,45 @@ from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
 
 
-def _source(path, *, held=False, late=False):
+def _source(path, *, held=False, late=False, repeated=False):
     y, x = np.mgrid[:48, :80]
     frames = [np.stack(((x + 13*i) % 256, (y * 5 + i) % 256, (x + y + i) % 256), axis=-1).astype(np.uint8)
               for i in range(190 if late else 40)]
     if held:
         start = 145 if late else 10
         frames[start:start + 16] = [frames[start]] * 16
+    if repeated:
+        frames[145:165] = frames[24:44]
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", "80x48",
                     "-framerate", "20", "-i", "pipe:0", "-c:v", "libx264rgb", "-crf", "0", "-output_ts_offset", "5", str(path)],
                    input=b"".join(frame.tobytes() for frame in frames), check=True, timeout=30)
     return frames
 
 
-@pytest.mark.parametrize("late", [False, True])
-def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkeypatch, late):
+@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence"])
+def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case):
+    repeated, late = case == "moving_sequence", case != "opening_hold"
     path = tmp_path / "exact-hold.mkv"
-    frames = _source(path, held=True, late=late)
+    frames = _source(path, held=not repeated, late=late, repeated=repeated)
     table = probe_frames(path)
     store = ObjectStore(tmp_path / "objects")
     original = store.put_file(path)
-    scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=5.)
-    match = scan["match"]
-    start, end = (145, 160) if late else (10, 25)
+    scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=5., sequence_review=repeated)
     assert scan["coverage"]["frames_scanned"] == len(frames)
-    assert scan["coverage"].get("scan_scope") == (binding.EXTENDED_SCOPE if late else None)
-    assert (match["start_frame_index"], match["end_frame_index"], match["frame_count"]) == (start, end, 16)
-    assert (match["start_playback_s"], match["end_playback_s"], match["span_s"]) == (start / 20, end / 20, .75)
-    assert match["decoded_rgb_sha256"] == hashlib.sha256(frames[start]).hexdigest()
+    if repeated:
+        assert scan["match"] is None and scan["coverage"]["scan_scope"] == picture_sequence.SCAN_SCOPE
+        match = scan["coverage"]["sequence_review"]["pair"]
+        indices = [24, 43, 145, 164]
+        assert match["frame_count"] == match["unique_pictures"] == 20
+        assert match["span_s"] == .95 and [r[2] for r in picture_sequence.endpoints(match)] == indices
+    else:
+        match = scan["match"]
+        start, end = (145, 160) if late else (10, 25)
+        indices = [start, end]
+        assert scan["coverage"].get("scan_scope") == (binding.EXTENDED_SCOPE if late else None)
+        assert (match["start_frame_index"], match["end_frame_index"], match["frame_count"]) == (start, end, 16)
+        assert (match["start_playback_s"], match["end_playback_s"], match["span_s"]) == (start / 20, end / 20, .75)
+        assert match["decoded_rgb_sha256"] == hashlib.sha256(frames[start]).hexdigest()
 
     database = create_engine("sqlite://")
     Base.metadata.create_all(database)
@@ -85,21 +97,28 @@ def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkey
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
         [packet] = document["packets"]
-        assert packet["id"] == binding.PACKET_ID
-        assert packet["picture_hold"] == match
-        assert [f["anchor"]["frame_index"] for f in packet["frames"]] == [start, end]
-        asset = service.asset_refs(document)[packet["artifacts"]["held_picture"]["sha256"]]
-        with Image.open(io.BytesIO(store.read_bytes(asset["sha256"]))) as saved:
-            np.testing.assert_array_equal(np.asarray(saved), frames[start])
+        assert packet["id"] == (picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
+        assert packet["picture_sequence" if repeated else "picture_hold"] == match
+        assert [f["anchor"]["frame_index"] for f in packet["frames"]] == indices
+        for frame in packet["frames"]:
+            ref = packet["artifacts"][frame["artifact_refs"]["original"]]
+            asset = service.asset_refs(document)[ref["sha256"]]
+            with Image.open(io.BytesIO(store.read_bytes(asset["sha256"]))) as saved:
+                np.testing.assert_array_equal(np.asarray(saved), frames[frame["anchor"]["frame_index"]])
         changed = copy.deepcopy(document)
         changed["picture_hold"]["last_pts"] += 1
         changed["picture_hold"]["last_stream_time_s"] += .001
         with pytest.raises(ValueError, match="recorded native inspection"):
             binding.validate(changed)
         changed = copy.deepcopy(document)
-        changed["packets"][0]["picture_hold"]["pts"][1] = match["start_pts"]
-        with pytest.raises(ValueError, match="discontinuous timestamp"):
-            binding.validate(changed)
+        if repeated:
+            changed["packets"][0]["frames"][2]["anchor"]["frame_index"] += 1
+            with pytest.raises(ValueError, match="endpoint differs"):
+                binding.validate(changed)
+        else:
+            changed["packets"][0]["picture_hold"]["pts"][1] = match["start_pts"]
+            with pytest.raises(ValueError, match="discontinuous timestamp"):
+                binding.validate(changed)
         frozen = frozen.model_copy(update={"result": result, "evidence": document,
             "analysis": frozen.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
             "media": frozen.media.model_copy(update={"sha256": original.sha256, "size_bytes": original.size_bytes,
@@ -108,10 +127,29 @@ def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkey
         pdf = engine.render_pdf(frozen)
         with pymupdf.open(stream=pdf.pdf, filetype="pdf") as rendered_pdf:
             text = " ".join(" ".join(page.get_text() for page in rendered_pdf).split())
-            assert "Repeated picture across consecutive frames" in text and "VPH01" in text
-            assert "16 consecutive decoded frames" in text and "0.750 seconds apart" in text
+            if repeated:
+                assert "Repeated moving sequences" in text and "VPR01" in text
+                assert "Repeated ranges 6.200-7.150 s and 12.250-13.200 s" in text
+            else:
+                assert "Repeated picture across consecutive frames" in text and "VPH01" in text
+                assert "16 consecutive decoded frames" in text and "0.750 seconds apart" in text
         _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=frozen, document=document),
                           tmp_path, monkeypatch, pdf.pdf, source_video=path if late else None)
+
+
+def test_repeated_sequence_requires_distinct_pixels_and_equal_verified_spacing():
+    pts = list(range(0, 2000, 50))
+    moving = [str(i) for i in range(20)] * 2
+    measured = picture_sequence.scan(list(zip(pts, moving, strict=True)), Fraction(1, 1000))
+    assert measured["pair"]["frame_count"] == 20
+    assert measured["pair"]["first"]["end_frame_index"] == 19
+    assert measured["pair"]["second"]["start_frame_index"] == 20
+    pts[30] += 10
+    result = picture_sequence.scan(list(zip(pts, moving, strict=True)), Fraction(1, 1000))
+    assert result["status"] == "no_match"
+    pts[30] = None
+    assert picture_sequence.scan(list(zip(pts, moving, strict=True)), Fraction(1, 1000))["status"] == "no_match"
+    assert picture_sequence.scan([(i * 50, "static") for i in range(40)], Fraction(1, 1000))["status"] == "no_match"
 
 
 def test_completed_opening_is_preserved_when_extended_decoder_stops(monkeypatch, tmp_path):

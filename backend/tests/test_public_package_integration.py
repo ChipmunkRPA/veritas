@@ -387,7 +387,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding',
-                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.sound_event_binding',
+                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence', 'app.evidence.sound_event_binding',
                         'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',

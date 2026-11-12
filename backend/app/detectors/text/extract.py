@@ -16,6 +16,7 @@ import subprocess
 import tempfile
 import time
 from dataclasses import dataclass, field
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -38,6 +39,7 @@ OCR_MAX_PIXELS = 4_000_000
 OCR_MAX_RASTER_BYTES = 24 * 1024 * 1024
 OCR_BUDGET_SECONDS = 70.0
 NATIVE_COMPARISON_MAX_PAGES = 12
+EMAIL_HTML_COORDINATES = "decoded-html-codepoint"
 
 
 def text_hash(text: str) -> str:
@@ -79,17 +81,19 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) ->
             continue
         if texts:
             pos += 2
-        entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words"}}
+        entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words", "html_origins"}}
         entry.update(start=pos, end=pos + len(text), offset_unit="unicode_codepoint")
         if source.get("kind") in {"text", "email", "docx"}:
             # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
             # its entire source range. These are decoded codepoints, not bytes.
             ranges: list[list[int]] = []
             base = source.get("source_start", 0)
+            html_origins = source.get("html_origins")
             previous_direct = False
             for i, (a, b) in enumerate(origins):
-                row = [pos + i, pos + i + 1, base + a, base + b]
-                direct = b - a == 1 and raw[a:b] == text[i]
+                lo, hi = (html_origins[a][0], html_origins[b - 1][1]) if html_origins is not None else (base + a, base + b)
+                row = [pos + i, pos + i + 1, lo, hi]
+                direct = b - a == hi - lo == 1 and raw[a:b] == text[i]
                 if ranges and previous_direct and direct and ranges[-1][1] == row[0] and ranges[-1][3] == row[2]:
                     ranges[-1][1], ranges[-1][3] = row[1], row[3]
                 else:
@@ -606,6 +610,90 @@ class _HTMLText(HTMLParser):
             self.parts.append(data)
 
 
+class _MappedEmailHTML(HTMLParser):
+    """Locate text inside simple HTML paragraphs in the decoded MIME part."""
+
+    INLINE = frozenset({"b", "em", "i", "span", "strong"})
+    PARENTS = {"html": {None}, "body": {"html"}, "blockquote": {None, "body"},
+               "p": {None, "body", "blockquote"}}
+
+    def __init__(self, raw):
+        super().__init__(convert_charrefs=False)
+        self.raw = raw
+        self.lines = [0, *(match.end() for match in re.finditer("\n", raw))]
+        self.stack: list[str] = []
+        self.parts: list[tuple[str, dict]] = []
+        self.words: list[str] = []
+        self.ranges: list[tuple[int, int]] = []
+
+    def _offset(self):
+        line, col = self.getpos()
+        return self.lines[line - 1] + col
+
+    def handle_starttag(self, tag, attrs):
+        parent = self.stack[-1] if self.stack else None
+        if attrs or not (parent in self.PARENTS.get(tag, ()) or tag in self.INLINE and "p" in self.stack):
+            raise ValueError("Unsupported email HTML structure")
+        self.stack.append(tag)
+
+    def handle_endtag(self, tag):
+        if not self.stack or self.stack.pop() != tag:
+            raise ValueError("Unbalanced email HTML")
+        if tag == "p":
+            role = "quoted" if "blockquote" in self.stack else "body"
+            text = "".join(self.words)
+            if role == "body" and any(re.match(r"\s*(?:>|--\s*$|-----Original Message-----|On .{1,300} wrote:\s*$)", line, re.I)
+                                      for line in text.splitlines()):
+                raise ValueError("Unmarked quotation or signature in email HTML")
+            self.parts.append((text, {"kind": "email", "quote_role": role, "html_origins": self.ranges}))
+            self.words, self.ranges = [], []
+
+    def handle_data(self, data):
+        if "p" not in self.stack:
+            if data.strip():
+                raise ValueError("Email HTML text must appear in a paragraph")
+            return
+        start = self._offset()
+        self.words.append(data)
+        self.ranges.extend((start + i, start + i + 1) for i in range(len(data)))
+
+    def _entity(self, token):
+        start = self._offset()
+        value = unescape(token)
+        if "p" not in self.stack or self.raw[start:start + len(token)] != token or len(value) != 1 or value == "\ufffd":
+            raise ValueError("Unsupported email HTML entity")
+        self.words.append(value)
+        self.ranges.append((start, start + len(token)))
+
+    def handle_entityref(self, name):
+        self._entity(f"&{name};")
+
+    def handle_charref(self, name):
+        self._entity(f"&#{name};")
+
+    def handle_decl(self, decl):
+        if decl.lower() != "doctype html":
+            raise ValueError("Unsupported email HTML declaration")
+
+    def handle_pi(self, data):
+        raise ValueError("Unsupported email HTML instruction")
+
+
+def _mapped_email_html(raw, mime_part, text):
+    if len(raw) > 64 * 1024 or "\ufffd" in raw:
+        return None
+    parser = _MappedEmailHTML(raw)
+    try:
+        parser.feed(raw)
+        parser.close()
+    except (ValueError, AssertionError):
+        return None
+    if parser.stack:
+        return None
+    candidate = _join_mapped([(value, {**source, "mime_part": mime_part}) for value, source in parser.parts])
+    return candidate if candidate.text == text and candidate.source_map else None
+
+
 def extract_text_like(path: Path, ext: str) -> Document:
     data = path.read_bytes()
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
@@ -696,11 +784,20 @@ def extract_eml(path: Path) -> Document:
             parts.append(("".join(accumulated), {"kind": "email", "source_start": start,
                                                 "mime_part": mime_part, "quote_role": previous_role}))
     document = _join_mapped(parts)
+    mapped = _mapped_email_html(raw, mime_part, document.text) if is_html else None
+    if mapped is not None:
+        document = mapped
     attachments = [{"mime_part": part_id, "filename": part.get_filename(), "content_type": part.get_content_type()}
                    for part_id, part in indexed if part.get_content_disposition() == "attachment" or part.get_filename()]
     document.meta = {"method": "email", "email": {"body_part": mime_part, "body_content_type": body.get_content_type(),
                      "quote_detection": "heuristic", "headers_authenticated": False, "attachments": attachments},
                      "coverage_warning": "The extracted email text comes from one selected message part. Quote and signature labels are inferred from that text. Attachments and sender authenticity are outside the analysis scope."}
+    if mapped is not None:
+        document.meta["email"].update(body_coordinates=EMAIL_HTML_COORDINATES, quote_detection="html-blockquote")
+        document.meta["coverage_warning"] = (
+            "The extracted email text maps to decoded HTML in one selected message part. Quote labels follow explicit blockquotes. "
+            "Attachments and sender authenticity are outside the analysis scope."
+        )
     return document
 
 

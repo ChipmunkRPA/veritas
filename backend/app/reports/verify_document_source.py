@@ -82,8 +82,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
         doc = extract(original, extension, allow_ocr=False)
-    if extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain":
-        raise ValueError("Original-document replay requires a plain-text EML body. HTML positions refer to converted text.")
+    if extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain" and not (
+        document_scope.mapped_email_html(doc.meta["email"])
+    ):
+        raise ValueError("Original-document replay requires a plain-text or source-mapped HTML EML body.")
     text, mapping = doc.text, doc.source_map
     if (doc.meta["original_sha256"] != source["sha256"] or len(text) != source["chars"]
             or doc.meta.get("method") != source["method"] or text_hash(text) != source["extracted_text_sha256"]

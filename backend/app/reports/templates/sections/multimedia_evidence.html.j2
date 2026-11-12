@@ -33,6 +33,7 @@
 <h3>Second writing check</h3>
 <p class="caption">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
 {% if evidence.writing_agreement.email_reply_body %}<p class="caption">This check covers contexts wholly inside the reply body. Text marked as a quote or signature and contexts that cross those boundaries are outside this check.</p>{% endif %}
+{% if evidence.writing_agreement.mapped_html_body %}<p class="caption">The JSON includes exact positions in the decoded HTML body of the selected email part.</p>{% endif %}
 {% if evidence.writing_agreement.ranges %}
 <table class="multimedia-locator"><thead><tr><th>Passage focus</th><th>First-check context</th><th>Second check</th></tr></thead><tbody>
 {% for row in evidence.writing_agreement.ranges %}

@@ -1,10 +1,12 @@
 from copy import deepcopy
+from email.message import EmailMessage
+from html import unescape
 from unittest.mock import Mock
 
 import pytest
 
 from app.detectors.text.adapters import agreement
-from app.detectors.text.extract import text_hash
+from app.detectors.text.extract import extract, text_hash
 from app.engine.boundary import Cancelled, Deadline
 from app.engine.detector import Profile
 from app.engine.runner import StageContext
@@ -85,6 +87,43 @@ def test_reply_scope_replays_the_exact_body_and_rejects_quoted_context():
     altered_range["coverage"][agreement.KEY]["ranges"][0]["spans"][1] = {"start": body_end + 2, "end": len(text)}
     with pytest.raises(ValueError, match="Invalid second-check source coordinates"):
         document_scope.validate_checkpoint_agreement(altered_range)
+
+
+def test_html_reply_preserves_mime_entities_and_explicit_quote_boundary(tmp_path):
+    raw = "<p><strong>&#70;irst</strong> &amp; second.</p>\n<p>Next paragraph.</p><blockquote><p>Earlier reply.</p></blockquote>"
+    email = EmailMessage()
+    email.set_content(raw, subtype="html", cte="base64")
+    path = tmp_path / "reply.eml"
+    path.write_bytes(email.as_bytes())
+    doc = extract(path, ".eml")
+    assert doc.text == "First & second.\n\nNext paragraph.\n\nEarlier reply."
+    metadata = doc.meta["email"]
+    assert document_scope.mapped_email_html(metadata) and metadata["body_part"] == "1"
+    assert [block["quote_role"] for block in doc.source_map] == ["body", "body", "quoted"]
+    assert all(unescape(raw[start:stop]) == doc.text[a:b] for a, b, start, stop in doc.source_map[0]["source_ranges"])
+    scope = document_scope.email_agreement_body_spans(doc.source_map, metadata, len(doc.text))
+    assert scope == [{"start": a, "end": b} for a, b in doc.paragraphs[:2]]
+    record = {"schema": document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMA, "body_spans": scope,
+              "authorship_confidence_contribution": 0, "ranges": []}
+    evidence = {"source": {"method": "email", "chars": len(doc.text)}, "coverage": {"email": metadata, agreement.KEY: record}}
+    document_scope.validate_checkpoint_agreement(evidence, doc.text, mapping=doc.source_map)
+    record["schema"] = document_scope.CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA
+    with pytest.raises(ValueError, match="source format"):
+        document_scope.validate_checkpoint_agreement(evidence, doc.text, mapping=doc.source_map)
+
+
+@pytest.mark.parametrize("markup", [
+    '<p><strong style="display:none">Hidden.</strong></p><p>Second.</p><blockquote><p>Quote.</p></blockquote>',
+    '<p>First.</p><blockquote><p>Quote.</p></blockquote><p>Second.</p>',
+    '<p>First.</p><p>On Friday someone wrote:</p><blockquote><p>Quote.</p></blockquote>',
+])
+def test_unverified_html_scope_does_not_select_reply_text(tmp_path, markup):
+    email = EmailMessage()
+    email.set_content(markup, subtype="html")
+    path = tmp_path / "unverified.eml"
+    path.write_bytes(email.as_bytes())
+    doc = extract(path, ".eml")
+    assert document_scope.email_agreement_body_spans(doc.source_map, doc.meta["email"], len(doc.text)) is None
 
 
 @pytest.mark.parametrize("paragraphs", [2, 3, 5, 6])

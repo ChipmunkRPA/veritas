@@ -25,6 +25,8 @@ The same passage check now covers the four additional layouts in supported repli
 
 Seven local analyses exercised the paid worker with simulated payment. Four known-generated layouts reproduced two corroborated passages each. The known-human control reproduced its previously observed corroborated passage. Both excluded controls stayed outside the check. The verified MIME offsets matched the PDF, API, and JSON. Chrome opened both passage links in the three-paragraph report. The signed bundle verified against the original email, rejected a different original and a changed scope, and remained compatible with an archived version 2 bundle. [Local verification receipt](evaluation-panels/writing-reply-layout-app-2026-11-12.json)
 
+A later release extends this scope to supported HTML-only replies with exact source positions. [HTML email source replay](writing-html-reply-transfer-2026-11-12.md)
+
 ## Replay
 
 Use the retained evaluation source root as `panels` and the earlier completed layout run as `prior`. The two checkpoint directories contain the exact pinned assets. Set `initial` and `native` to new local directories.

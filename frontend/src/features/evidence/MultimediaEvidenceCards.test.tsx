@@ -59,7 +59,7 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
   })
 
-  it.each(['document-writing-second-check/2', 'document-writing-second-check/3'] as const)(
+  it.each(['document-writing-second-check/2', 'document-writing-second-check/3', 'document-writing-second-check/4'] as const)(
     'labels the second check on an email reply as body-only for %s', (schema) => {
     const set = structuredClone(document)
     set.coverage!.writing_second_check = {
@@ -69,6 +69,7 @@ describe('ordinary multimedia evidence', () => {
     show(set)
     expect(screen.getByText(/This check covers contexts wholly inside the reply body/)).toBeTruthy()
     expect(screen.getByText(/Text marked as a quote or signature and contexts that cross those boundaries are outside this check/)).toBeTruthy()
+    expect(Boolean(screen.queryByText(/decoded HTML body of the selected email part/))).toBe(schema === 'document-writing-second-check/4')
   })
 
   it('shows a source-clock gap and its affected voice window in ordinary audio evidence', () => {

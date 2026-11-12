@@ -1,0 +1,62 @@
+{
+  "by_layout": {
+    "2": {
+      "corroborated": 48,
+      "exact_contexts": 592,
+      "human_flags": 13,
+      "replies": 100,
+      "second_inputs": 79,
+      "useful": 14
+    },
+    "3": {
+      "corroborated": 48,
+      "exact_contexts": 591,
+      "human_flags": 13,
+      "replies": 100,
+      "second_inputs": 79,
+      "useful": 14
+    },
+    "5": {
+      "corroborated": 42,
+      "exact_contexts": 456,
+      "human_flags": 10,
+      "replies": 55,
+      "second_inputs": 73,
+      "useful": 12
+    },
+    "6": {
+      "corroborated": 42,
+      "exact_contexts": 440,
+      "human_flags": 10,
+      "replies": 53,
+      "second_inputs": 73,
+      "useful": 12
+    }
+  },
+  "controls": {
+    "interleaved": 6,
+    "no_quote": 6,
+    "other_markup": 6,
+    "styled": 6,
+    "unbalanced": 6,
+    "unmarked": 6
+  },
+  "design": {
+    "advance": "Preserve every useful known-edit location and human flag count. Verify every selected context against original decoded HTML ranges. Zero authorship confidence weight.",
+    "controls": "Six held controls per unsupported structure: no quote, interleaved quote, styled text, unmarked quote, malformed nesting and unsupported markup. The second check must abstain on every control.",
+    "formats": "Re-encode 308 earlier measured plain replies with 2, 3, 5, or 6 body paragraphs as HTML-only MIME. Use explicit trailing blockquote, inline emphasis, and alternate base64/quoted-printable transfer encoding. Keep decoded text exactly the same.",
+    "measure": "Replay only identical ordered primary contexts and complete per-reply second-check requests. Any source, text, request, or selected location mismatch fails."
+  },
+  "exact_request_replay_without_new_model_calls": true,
+  "freeze_sha256": "983f40eae1a096ceea29febb8ae6628b68dfce5230832da0d17ef8a936f06f9d",
+  "independent": {
+    "base64": 154,
+    "excluded_deliveries": 36,
+    "quoted-printable": 154,
+    "verified_context_ranges": 852,
+    "verified_contexts": 304,
+    "verified_deliveries": 308,
+    "verified_mime_ranges": 6915
+  },
+  "schema": "chipmunk.writing-html-reply-transfer/1"
+}

@@ -6,6 +6,8 @@ import hashlib
 import re
 from collections import Counter
 
+from app.detectors.text.extract import EMAIL_HTML_COORDINATES
+
 VERSION = "document-evidence-5"
 MATCHED_VERSION = "document-evidence-6"
 PARAGRAPH_PRIORITY_VERSION = "document-evidence-7"
@@ -22,9 +24,11 @@ CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
 CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
 CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA = "document-writing-second-check/3"
+CHECKPOINT_AGREEMENT_HTML_SCHEMA = "document-writing-second-check/4"
 CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS = {
     CHECKPOINT_AGREEMENT_EMAIL_SCHEMA: frozenset({1, 4}),
     CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA: frozenset({2, 3, 5, 6}),
+    CHECKPOINT_AGREEMENT_HTML_SCHEMA: frozenset({2, 3, 5, 6}),
 }
 REPLY_BODY_PARAGRAPHS = frozenset().union(*CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS.values())
 CHECKPOINT_AGREEMENT_MAX = 6
@@ -42,10 +46,15 @@ def check_range(span: dict, size: int) -> tuple[int, int]:
     return start, end
 
 
+def mapped_email_html(email: dict) -> bool:
+    return email.get("body_content_type") == "text/html" and email.get("body_coordinates") == EMAIL_HTML_COORDINATES
+
+
 def email_agreement_body_spans(mapping: list[dict], email: dict, size: int) -> list[dict] | None:
     """Identify the one mapped reply body before a trailing quotation or signature."""
     part = email.get("body_part")
-    if email.get("body_content_type") != "text/plain" or not part or not mapping:
+    html = mapped_email_html(email)
+    if (email.get("body_content_type") != "text/plain" and not html) or not part or not mapping:
         return None
     body = []
     previous = 0
@@ -63,7 +72,8 @@ def email_agreement_body_spans(mapping: list[dict], email: dict, size: int) -> l
         else:
             return None
         previous = end
-    return body if excluded and len(body) in REPLY_BODY_PARAGRAPHS and previous == size else None
+    counts = CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS[CHECKPOINT_AGREEMENT_HTML_SCHEMA] if html else REPLY_BODY_PARAGRAPHS
+    return body if excluded and len(body) in counts and previous == size else None
 
 
 def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> bool:
@@ -90,10 +100,12 @@ def validate_checkpoint_agreement(
             body_spans = record.get("body_spans")
             email = coverage.get("email")
             if (document["source"].get("method") != "email" or not isinstance(email, dict)
-                    or email.get("body_content_type") != "text/plain"
                     or not isinstance(email.get("body_part"), str) or not email["body_part"]
                     or not isinstance(body_spans, list) or len(body_spans) not in reply_paragraphs):
                 raise ValueError("Invalid second-check email body scope")
+            if not (mapped_email_html(email) if schema == CHECKPOINT_AGREEMENT_HTML_SCHEMA
+                    else email.get("body_content_type") == "text/plain"):
+                raise ValueError("Invalid second-check email source format")
             boundaries = [check_range(block, size) for block in body_spans]
             if (any(set(block) != {"start", "end"} for block in body_spans) or boundaries[0][0] != 0
                     or any(left[1] + 2 != right[0] for left, right in zip(boundaries, boundaries[1:]))

@@ -81,6 +81,9 @@ positions, and records when reformatting changes sentence segmentation.
 The [exact per-email replay](writing-reply-native-batches-2026-11-12.md)
 repeats the second check in source order and follows the resulting locations
 through the local paid worker, public exports, and source-bound evidence bundle.
+The [HTML email source replay](writing-html-reply-transfer-2026-11-12.md)
+reopens the decoded HTML part and verifies exact passage locations while
+keeping trailing quoted replies out of the second check.
 The [archive boundary comparison](writing-archive-changed-edge-2026-11-12.md)
 reconstructs exact submitted and reference coordinates after a word changes
 next to a lost paragraph break and checks open-set and ambiguous controls.
@@ -118,6 +121,9 @@ false-group counts without separating the soundtrack.
 The [variable-duration audio transfer](audio-variable-boundary-transfer-2026-11-12.md)
 compares four span durations on new expressive inserts and paired genuine
 edits in two rooms with competing speech.
+The [short native-response transfer](audio-short-native-response-transfer-2026-11-12.md)
+runs short windows on held room recordings and compares the locations at
+fixed and matched false-alarm counts.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

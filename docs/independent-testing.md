@@ -212,6 +212,9 @@ The [separate whole-image panel](image-whole-fresh-holdout-2026-11-12.md)
 compares the current Full result and a positive supplementary cue on 34
 generated and ordinary source groups in two delivery formats. Its reviewer
 replays the outcome counts and records unavailable Full results separately.
+The [native PNG and screenshot studies](image-whole-png-transfer-2026-11-12.md)
+replay the separate camera, generated-image and screenshot results and check
+whether existing image-geometry rules distinguish photo-rich screenshots.
 The [whole-image view replay](#verify-the-inspected-views-from-a-jpeg)
 checks the actual exported crop pixels and their bounds against the submitted JPEG.
 The [embedded-preview footprint study](image-thumbnail-extent-transfer-2026-11-12.md)

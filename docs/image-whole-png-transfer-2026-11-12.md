@@ -19,6 +19,18 @@ The inherited point was sealed before scoring. Admission required at least 12 ge
 
 The CPU process completed all 36 cases in 87.6 seconds with 3.82 GB peak sampled RSS. The independent native readback rebuilt all 108 exact input crops and source coordinates. The source freeze is `ad3fbcde18e10efa7dbacc41ba3b681af8fd68dfb59dc46d0c541169c2373e2c`. Photos and generated pixels stay local.
 
+## Existing coverage rules on photo-rich layouts
+
+All eight simple browser captures in the first panel exceed the app’s existing flat-block limit. A separate CPU probe challenged that result with 12 new browser captures and 12 matched photo PNGs. Six layout groups used 1,366 × 768 and 1,408 × 768 viewports. Four layouts displayed a large ordinary photo with controls, text or map graphics. A dense chart and a flat calendar supplied two graphics-only controls. Six differently credited photos supply the exact source-matched controls. The existing rules needed to exclude at least five screenshot groups at both sizes while excluding at most one photo group. [Exact scope probe](evaluation-panels/image-whole-png-scope-probe-2026-11-12.json)
+
+| Coverage rule | Screens excluded /12 | Photo views excluded /12 | Screenshot groups excluded at both sizes /6 |
+| --- | ---: | ---: | ---: |
+| Existing flat-block limit or its minimum floor | 2 | 0 | 1 |
+| Existing screen-size rule | 6 | 6 | 0 |
+| Flat-block rule or screen-size rule | 7 | 6 | 1 |
+
+The flat-block rule excluded the calendar in both sizes. The screen-size rule excluded 1,366 × 768 views in both groups, including one view of every ordinary photo. No rule passed. The native repeat reproduced all 24 PNG hashes, exact flat-block shares, and 120 rule decisions. The probe used the app’s existing content measurements and ran no model inference. PNG remains outside this supplementary check’s serving scope.
+
 ## Replay
 
 ```sh
@@ -32,4 +44,14 @@ backend/.venv/bin/python -B -m scripts.image_whole_png_transfer freeze "$run"
 tmp/image-smaug-v7-env/bin/python -B -m scripts.image_whole_png_transfer candidate "$run"
 backend/.venv/bin/python -B backend/scripts/review_image_whole_png_transfer.py \
   "$run/result.json" --native "$run"
+```
+
+```sh
+python3 -I -S backend/scripts/image_whole_png_scope_controls.py review \
+  docs/evaluation-panels/image-whole-png-scope-probe-2026-11-12.json
+
+backend/.venv/bin/python -B -m scripts.image_whole_png_scope_controls prepare "$scope_run"
+node backend/scripts/capture_image_whole_png_scope_controls.cjs "$scope_run"
+backend/.venv/bin/python -B -m scripts.image_whole_png_scope_controls freeze "$scope_run"
+backend/.venv/bin/python -B -m scripts.image_whole_png_scope_controls measure "$scope_run"
 ```

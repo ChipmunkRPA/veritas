@@ -1,0 +1,213 @@
+{
+  "acoustic_phoneme_intervals_independently_verified": 0,
+  "examples": [
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "9/25",
+        "13/25",
+        "26/25"
+      ],
+      "authored_interval_s": [
+        "2/5",
+        "26/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 0,
+        "observed_native_frame": 13,
+        "observed_seconds": "13/25",
+        "shape_error": 0.002141171207595884,
+        "timing": "source_time_compatible"
+      },
+      "closure_status": "source_time_compatible",
+      "original_closure_s": "13/25",
+      "published_word_source_seconds": [
+        "511/1000",
+        "731/1000"
+      ],
+      "role": "source_time_neural",
+      "source": "reserve-group-1"
+    },
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "9/25",
+        "21/25",
+        "26/25"
+      ],
+      "authored_interval_s": [
+        "2/5",
+        "26/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 8,
+        "observed_native_frame": 21,
+        "observed_seconds": "21/25",
+        "shape_error": 0.003435012200508642,
+        "timing": "earlier_driver_compatible"
+      },
+      "closure_status": "earlier_driver_compatible",
+      "original_closure_s": "13/25",
+      "published_word_source_seconds": [
+        "511/1000",
+        "731/1000"
+      ],
+      "role": "earlier_drive_neural",
+      "source": "reserve-group-1"
+    },
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "9/25",
+        "21/25",
+        "26/25"
+      ],
+      "authored_interval_s": [
+        "2/5",
+        "26/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 8,
+        "observed_native_frame": 21,
+        "observed_seconds": "21/25",
+        "shape_error": 0.005780593207515077,
+        "timing": "earlier_driver_compatible"
+      },
+      "closure_status": "earlier_driver_compatible",
+      "original_closure_s": "13/25",
+      "published_word_source_seconds": [
+        "511/1000",
+        "731/1000"
+      ],
+      "role": "earlier_pixels_ordinary",
+      "source": "reserve-group-1"
+    },
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "16/25",
+        "4/5",
+        "33/25"
+      ],
+      "authored_interval_s": [
+        "17/25",
+        "33/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 0,
+        "observed_native_frame": 20,
+        "observed_seconds": "4/5",
+        "shape_error": 0.001150320243014687,
+        "timing": "source_time_compatible"
+      },
+      "closure_status": "source_time_compatible",
+      "original_closure_s": "4/5",
+      "published_word_source_seconds": [
+        "12497/16000",
+        "16977/16000"
+      ],
+      "role": "source_time_neural",
+      "source": "reserve-group-2"
+    },
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "16/25",
+        "28/25",
+        "33/25"
+      ],
+      "authored_interval_s": [
+        "17/25",
+        "33/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 8,
+        "observed_native_frame": 28,
+        "observed_seconds": "28/25",
+        "shape_error": 0.021106090284475958,
+        "timing": "earlier_driver_compatible"
+      },
+      "closure_status": "earlier_driver_compatible",
+      "original_closure_s": "4/5",
+      "published_word_source_seconds": [
+        "12497/16000",
+        "16977/16000"
+      ],
+      "role": "earlier_drive_neural",
+      "source": "reserve-group-2"
+    },
+    {
+      "aligned_pcm_samples": 10240,
+      "anchors_s": [
+        "16/25",
+        "28/25",
+        "33/25"
+      ],
+      "authored_interval_s": [
+        "17/25",
+        "33/25"
+      ],
+      "closure": {
+        "difference_from_source_frames": 8,
+        "observed_native_frame": 28,
+        "observed_seconds": "28/25",
+        "shape_error": 0.01767664932002189,
+        "timing": "earlier_driver_compatible"
+      },
+      "closure_status": "earlier_driver_compatible",
+      "original_closure_s": "4/5",
+      "published_word_source_seconds": [
+        "12497/16000",
+        "16977/16000"
+      ],
+      "role": "earlier_pixels_ordinary",
+      "source": "reserve-group-2"
+    }
+  ],
+  "freeze_sha256": "8395c6545d1fe4000b5a54049cbdde43d3181ff2a0e402303a07a24a196e8dd2",
+  "independent_replay": {
+    "construction_sha256": "dbe702f9adacacccaed817a54af9d1314b121acd8dea7d20e1d4dd849a1bfa1e",
+    "exact_changed_masks": 96,
+    "native_pictures": 450,
+    "status": "verified",
+    "unchanged_pcm_samples": 285888
+  },
+  "metadata_only_replay": {
+    "corrected_private_replay_sha256": "e2c7f04dbd33ebf7c6d1201d3475044f79797df1a5751c9f2a2c83fec4d0b48e",
+    "published_reviewer_sha256": "e40a55e469eebb3e9dac586231a76f0af731c7046a378e87cfee9a57435d4a93",
+    "status": "replayed_same_observations"
+  },
+  "method_sha256": {
+    "backend/scripts/build_grid_word_timed_controls.py": "1b8a71f2ead38b988ab9def5144db0c8e39550d0db78f463c7ef815151c08766",
+    "backend/scripts/grid_mouth_observer_v157.py": "c520a4a3bb14ca31301813633e00b696c483bbfc857a58ccd1efa02de74d3b39",
+    "backend/scripts/grid_portrait_frames_v146.py": "3d7dfa4d519610ddc8c102a9d0fb573fdd125a3fc72a0b9ad8523f5992747c4c",
+    "backend/scripts/grid_portrait_geometry_v144.py": "c6937a86d8db9105232d762d1e6cbce28536d673030f139b0f7e58c3b0da8fff",
+    "backend/scripts/grid_reserve_neural_mouth.py": "7e4da72e4ffb49d2e3087b1e20894f1157a24178c3f065ee95007e4b3a22ed18",
+    "backend/scripts/grid_reserve_word_clocks.py": "63474f2628f33b77e8f190882ba2f76f4c5c91586741baa08b98b0485ab424ba",
+    "backend/scripts/liveportrait_mouth_benchmark.py": "72e9319c70d1c6da62493cc859d2e2e73c87ecf2ed826e6cd1e954e9c076ce04",
+    "backend/scripts/portrait_expression_drive_v138.py": "60ef3d342210531cc33b00d2d3e5f891259aa59300d590fff4dc54f353ea28a0",
+    "backend/scripts/spatial_conv_install_v141.py": "5b15fbdbe25846c020732530b76675686ae6a7549d4daefe8b13b40582fad081"
+  },
+  "neural_cases": 4,
+  "new_neural_frames": 64,
+  "ordinary_cases": 2,
+  "peak_rss_bytes": 2698084352,
+  "renderer_root_forwards": {
+    "appearance_feature_extractor": 64,
+    "motion_extractor": 128,
+    "spade_generator": 64,
+    "warping_module": 64
+  },
+  "renderer_strict_exact_loads": 5,
+  "review_freeze_sha256": "4ff66f4a043b3796cbc7862b2f2ff4e87f51a3b4f6a1496a0f386017c9f92c28",
+  "runtime_s": 223.39058920800016,
+  "schema": "chipmunk.grid-reserve-neural-mouth-public/1",
+  "serving_changed": false,
+  "source_groups": 2,
+  "timing_by_role": {
+    "earlier_drive_neural/earlier_driver_compatible": 2,
+    "earlier_pixels_ordinary/earlier_driver_compatible": 2,
+    "source_time_neural/source_time_compatible": 2
+  },
+  "timing_method_sha256": "1405b192b340f81bcd7e8171520f8b03bc957b1b6cd5bb389bf20dc7c8472357"
+}

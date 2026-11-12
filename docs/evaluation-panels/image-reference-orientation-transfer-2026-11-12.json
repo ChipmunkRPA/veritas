@@ -1,0 +1,305 @@
+{
+  "app_verification": {
+    "crop_pixels": "Two exact native crops and the overlay matched the rendered PDF and JSON.",
+    "offline_verifier": {
+      "crops_verified": 2,
+      "mask_pixels_counted": 8891,
+      "reported_status": "comparable",
+      "source_hashes_verified": 2
+    },
+    "payment": "Simulated USD 9.99. No analysis before confirmation. One completed image analysis using the recompression check."
+  },
+  "audit": {
+    "reconstructed_orientation_proofs": 54,
+    "result_sha256": "160568ca35767ceff72e9624b35f55e1ec5e3b31e5eddc8128e831104b04c64f",
+    "verified_source_files": 38,
+    "verified_views": 228
+  },
+  "previous_comparator": {
+    "descriptive_subset": true,
+    "new_useful": 7,
+    "prior": {
+      "integer_alignment_unresolved": 3,
+      "unsupported_resize_geometry": 4,
+      "useful": 0
+    },
+    "prior_commit": "17f216a0279c49f7f6e0527a3fd2a335074fda9b",
+    "replay_cases": 7
+  },
+  "protocol": {
+    "code": {
+      "image_reference_orientation_transfer.py": "0bfb53b00a13bcab4a3fa08991156f6fa29f3b7e4053d0463e543d34b17c8b98",
+      "reference_png_orientation.py": "c313da865bc17edfd771ecc860996c96fb7b1d62ed6c3c8dcbe8e93e29c63678",
+      "review_image_reference_export.py": "595098f645ce42f384091fb9e9cddb257c49d7b02e75eed95546bb6d51718240"
+    },
+    "design": {
+      "criteria": "At least 23 of 38 usable unchanged pairs and local edits, at least one correct edit per orientation, zero wrong orientation proofs, and zero orientation proofs on controls.",
+      "earlier_format": [
+        "PNG",
+        "JPEG90"
+      ],
+      "earlier_long_edge": [
+        768,
+        1536
+      ],
+      "orientations": [
+        "rotate_90_clockwise",
+        "rotate_180",
+        "rotate_90_counterclockwise",
+        "mirror_horizontal",
+        "mirror_vertical",
+        "reflect_main_diagonal",
+        "reflect_other_diagonal"
+      ],
+      "roles": [
+        "unchanged",
+        "local_edit",
+        "small_angle",
+        "whole_image_tone",
+        "unrelated",
+        "jpeg_delivery"
+      ]
+    },
+    "public_source_receipt": "e30981fd296d9cf2cd9ba417a24b5aec58b917697dbc8239f5a8f29ed0efe7d3",
+    "schema": "chipmunk.image-reference-orientation-transfer/1",
+    "sources": [
+      {
+        "file": "source-00.jpg",
+        "sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+        "slot": 0
+      },
+      {
+        "file": "source-01.jpg",
+        "sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+        "slot": 1
+      },
+      {
+        "file": "source-02.jpg",
+        "sha256": "dc545220b3df10c0e8a08e76cb2833e5da99ea6dc8696d8feadace8f72b678d0",
+        "slot": 2
+      },
+      {
+        "file": "source-03.jpg",
+        "sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+        "slot": 3
+      },
+      {
+        "file": "source-04.jpg",
+        "sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+        "slot": 4
+      },
+      {
+        "file": "source-05.jpg",
+        "sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+        "slot": 5
+      },
+      {
+        "file": "source-06.jpg",
+        "sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+        "slot": 6
+      },
+      {
+        "file": "source-07.jpg",
+        "sha256": "93e0d083b70f0f14867435120664d0e2f8876bb19305fce75842b9ed08d60491",
+        "slot": 7
+      },
+      {
+        "file": "source-08.jpg",
+        "sha256": "70b3fede67290fda1d7f898606d6c6b60c282135f8506abefc2439093d50d739",
+        "slot": 8
+      },
+      {
+        "file": "source-09.jpg",
+        "sha256": "abc5db188ddac368d5e657027532600d19419e15bd81a1f13506fe5d07ce7d8e",
+        "slot": 9
+      },
+      {
+        "file": "source-10.jpg",
+        "sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+        "slot": 10
+      },
+      {
+        "file": "source-11.jpg",
+        "sha256": "994f2718ebb0b049c468e69892b8c589a891aa7b33ddefdf04a31cd6927a4da2",
+        "slot": 11
+      },
+      {
+        "file": "source-12.jpg",
+        "sha256": "96b4f7042affc3d915311b903bb489dce44a15c808771491499eefccb5e63716",
+        "slot": 12
+      },
+      {
+        "file": "source-13.jpg",
+        "sha256": "ce353670743463870011db93ced993336f8f8250de61d85ee3a82ab976dc7a59",
+        "slot": 13
+      },
+      {
+        "file": "source-14.jpg",
+        "sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+        "slot": 14
+      },
+      {
+        "file": "source-15.jpg",
+        "sha256": "f82bf4c4e26c41543993ec9a57e1feac1d755aad3e21b8abbee03aaa3f7282aa",
+        "slot": 15
+      },
+      {
+        "file": "source-16.jpg",
+        "sha256": "5a3a1a9c7b4417c1fc493ca66da7fc47632340ba6c7cd486a4276d4854f8d5a7",
+        "slot": 16
+      },
+      {
+        "file": "source-17.jpg",
+        "sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+        "slot": 17
+      },
+      {
+        "file": "source-18.jpg",
+        "sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+        "slot": 18
+      },
+      {
+        "file": "source-19.jpg",
+        "sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+        "slot": 19
+      },
+      {
+        "file": "source-20.jpg",
+        "sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+        "slot": 20
+      },
+      {
+        "file": "source-21.jpg",
+        "sha256": "ec6e2866a09ade7bde5887df473ab2d988fb06a30ce6eedb43d878b78123ae07",
+        "slot": 21
+      },
+      {
+        "file": "source-22.jpg",
+        "sha256": "e236099428576bde46029eec6dafce1c1cbfb8f33770f55559a1a9f3aa7e4022",
+        "slot": 22
+      },
+      {
+        "file": "source-23.jpg",
+        "sha256": "410da23f941c1e93d220f74991d21c375d9ac7fe081a02bebe3081eae9c7c062",
+        "slot": 23
+      },
+      {
+        "file": "source-24.jpg",
+        "sha256": "640a25d931b8ed7fed17e1892085981c0dfdf4a1b0b8b4eb7a8667647cc25b3d",
+        "slot": 24
+      },
+      {
+        "file": "source-25.jpg",
+        "sha256": "7b135668a29a123dfa24040a85a9956c53dbb2e0d33fd9b3c279e483488bf4e3",
+        "slot": 25
+      },
+      {
+        "file": "source-26.jpg",
+        "sha256": "572943fca536d09bdf7bb2c04f3067ae4762a2dc1319561d1f5bcb16b5b00a2c",
+        "slot": 26
+      },
+      {
+        "file": "source-27.jpg",
+        "sha256": "c97f085c580f7b6892bd9523a628ed467a172b3ce522e050e611f4a4b7ab7666",
+        "slot": 27
+      },
+      {
+        "file": "source-28.jpg",
+        "sha256": "7609dbd0c0ff20752ba9cbfc644810198645c8c3fb05e168b6f6e593bd5a15c6",
+        "slot": 28
+      },
+      {
+        "file": "source-29.jpg",
+        "sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+        "slot": 29
+      },
+      {
+        "file": "source-30.jpg",
+        "sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+        "slot": 30
+      },
+      {
+        "file": "source-31.jpg",
+        "sha256": "4d73f1888bc8bb8223bfc1814aaeede0be96dc59a81f5a4ad490860fb4adb337",
+        "slot": 31
+      },
+      {
+        "file": "source-32.jpg",
+        "sha256": "538fa8e5fbda450452cad18d9439dcadc044ee98bdff844a0ace32151eb69879",
+        "slot": 32
+      },
+      {
+        "file": "source-33.jpg",
+        "sha256": "9006d345cfada77a8087cc989d9e51541d8b1a3720e29b8a7bd1806d8b7cd9d9",
+        "slot": 33
+      },
+      {
+        "file": "source-34.jpg",
+        "sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+        "slot": 34
+      },
+      {
+        "file": "source-35.jpg",
+        "sha256": "41c81a095e0fa756e6ea3175c9198e404802ad69ce155a833ee58c7b303c7c25",
+        "slot": 35
+      },
+      {
+        "file": "source-36.jpg",
+        "sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+        "slot": 36
+      },
+      {
+        "file": "source-37.jpg",
+        "sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+        "slot": 37
+      }
+    ]
+  },
+  "result": {
+    "advances": true,
+    "correct_local_edits_by_orientation": {
+      "mirror_horizontal": 4,
+      "mirror_vertical": 3,
+      "reflect_main_diagonal": 3,
+      "reflect_other_diagonal": 4,
+      "rotate_180": 4,
+      "rotate_90_clockwise": 4,
+      "rotate_90_counterclockwise": 5
+    },
+    "freeze_sha256": "fed8d379018737b2b7707a8f2159dc366eb99950449897603fe8a4bdf46d49d6",
+    "incorrect_proofs": 0,
+    "outcomes": {
+      "jpeg_delivery": {
+        "accepted": 0,
+        "correct": 0,
+        "planned": 38
+      },
+      "local_edit": {
+        "accepted": 27,
+        "correct": 27,
+        "planned": 38
+      },
+      "small_angle": {
+        "accepted": 0,
+        "correct": 0,
+        "planned": 38
+      },
+      "unchanged": {
+        "accepted": 27,
+        "correct": 27,
+        "planned": 38
+      },
+      "unrelated": {
+        "accepted": 0,
+        "correct": 0,
+        "planned": 38
+      },
+      "whole_image_tone": {
+        "accepted": 0,
+        "correct": 0,
+        "planned": 38
+      }
+    },
+    "schema": "chipmunk.image-reference-orientation-transfer/1"
+  }
+}

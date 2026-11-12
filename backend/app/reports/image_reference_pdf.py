@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pymupdf
 
+from app.detectors.image import reference_png_orientation
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 
 PAGE_WIDTH = 612
@@ -70,6 +71,13 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 318, f"Submitted image overlap: {_area(alignment['submitted_overlap'])}", size=10)
         _text(page, MARGIN, 334, "Areas outside these bounds were unassessed.", size=10, color=MUTED)
     schema = comparison["schema"]
+    if schema == reference_png_orientation.SCHEMA:
+        proof = comparison["exact_orientation"]
+        label = reference_png_orientation.LABELS[proof["transform"]]
+        _text(page, MARGIN, 302, f"Earlier copy aligned by {label}.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"Exact match on {proof['matched_pixels']:,} pixels and {len(proof['matched_tiles'])} textured tiles.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 334, "Each crop shows the pixels and orientation in its own source.", size=10, color=MUTED)
     if schema in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA) and comparison["status"] == "comparable":
         crop = comparison.get("reference_crop_bounds")
         if crop:

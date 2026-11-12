@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.api import auth, security, v2_image_reference
 from app.core.config import settings
+from app.detectors.image import reference_png_orientation
 from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
@@ -119,6 +120,59 @@ def _assert_pdf_assets(pdf, page, assets, payload):
             else:
                 assert pixmap.samples == png.tobytes()
         assert asset["sha256"] in page.get_text()
+
+
+def test_rotated_png_keeps_exact_native_pixels_in_both_exports(reference_http, tmp_path):
+    f = reference_http
+    earlier = f.reference_pixels
+    projected = np.rot90(earlier, -1).copy()
+    submitted = projected.copy()
+    submitted[77:137, 84:124] ^= 63
+    content = _png(submitted)
+    stored = f.store.put_bytes(content)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+
+    reply = f.client.post(_url(), files=_upload(f.reference), headers=f.viewer, data={"include_pdf": "true"})
+    assert reply.status_code == 200 and reply.headers["Cache-Control"] == "no-store"
+    payload = reply.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/6"
+    proof = comparison["exact_orientation"]
+    assert proof["transform"] == "rotate_90_clockwise"
+    assert proof["matched_pixels"] == submitted.shape[0] * submitted.shape[1] - 60 * 40
+    assert proof["rgb_sha256"] == hashlib.sha256(projected.tobytes()).hexdigest()
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {"x": 77, "y": 132, "w": 60, "h": 40}
+    with Image.open(io.BytesIO(_asset_bytes(payload, region["reference_crop"]))) as image:
+        np.testing.assert_array_equal(np.asarray(image), earlier[132:172, 77:137])
+    with Image.open(io.BytesIO(_asset_bytes(payload, region["submitted_overlay"]))) as image:
+        assert image.getchannel("A").histogram()[144] == 60 * 40
+
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert "90-degree clockwise rotation" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+
+    export, original, analyzed = (tmp_path / name for name in ("export.json", "original.png", "submitted.png"))
+    export.write_text(json.dumps(payload))
+    original.write_bytes(f.reference)
+    analyzed.write_bytes(content)
+    assert review(export, original, analyzed)["mask_pixels_counted"] == 60 * 40
+    proof["transform"] = "mirror_horizontal"
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Exact orientation or textured match differs"):
+        review(export, original, analyzed)
+
+
+def test_rotated_png_with_two_exact_alignments_abstains():
+    rng = np.random.default_rng(63)
+    half = rng.integers(0, 256, (240, 180, 3), dtype=np.uint8)
+    symmetric = np.concatenate((half, half[:, ::-1]), axis=1)
+    rotated = np.rot90(symmetric, -1)
+    with Image.open(io.BytesIO(_png(rotated))) as carrier:
+        assert reference_png_orientation.compare(symmetric, rotated, carrier) == (None, None)
 
 
 def test_gate_requires_opt_in_completed_image_and_retained_original(reference_http, monkeypatch):

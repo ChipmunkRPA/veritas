@@ -26,6 +26,10 @@ The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reprod
 provides a licensed roster, exact source commitments, and a separate reader
 for the PNG and JPEG localization and ordinary-control results.
 
+The [earlier-image orientation comparison](image-reference-orientation-transfer-2026-11-12.md)
+reconstructs right-angle rotations and reflections. Its Pillow-only reader
+checks the original sources, native crops, and submitted difference mask.
+
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
 before/during/after previews, and exact soundtrack excerpts. On supported

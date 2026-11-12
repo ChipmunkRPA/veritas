@@ -24,7 +24,17 @@ MAX_REGIONS = 5
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
+ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA}
+ORIENTATIONS = {
+    "rotate_90_clockwise": Image.Transpose.ROTATE_270,
+    "rotate_180": Image.Transpose.ROTATE_180,
+    "rotate_90_counterclockwise": Image.Transpose.ROTATE_90,
+    "mirror_horizontal": Image.Transpose.FLIP_LEFT_RIGHT,
+    "mirror_vertical": Image.Transpose.FLIP_TOP_BOTTOM,
+    "reflect_main_diagonal": Image.Transpose.TRANSPOSE,
+    "reflect_other_diagonal": Image.Transpose.TRANSVERSE,
+}
 
 
 def _require(condition, reason):
@@ -203,6 +213,74 @@ def _resize_bounds(box, reference, submitted, crop=None):
     return x + floor(left * x_scale), y + floor(top * y_scale), x + ceil(right * x_scale), y + ceil(bottom * y_scale)
 
 
+def _textured_boxes(image):
+    def step(left, right):
+        return any(abs(a - b) >= 6 for a, b in zip(left, right, strict=True))
+
+    for row in range(5):
+        for column in range(5):
+            x = round((column + .5) / 5 * image.width)
+            y = round((row + .5) / 5 * image.height)
+            bounds = (x - 10, y - 10, x + 10, y + 10)
+            with image.crop(bounds) as patch:
+                data = patch.tobytes()
+            colors = list(zip(data[::3], data[1::3], data[2::3], strict=True))
+            edges = sum(step(colors[i], colors[i + 1]) for i in range(400) if i % 20 != 19)
+            edges += sum(step(colors[i], colors[i + 20]) for i in range(380))
+            if edges * 100 >= 12 * 760:
+                yield row, column, bounds
+
+
+def _orientation_replay(comparison, ref, sub, carrier):
+    _require(comparison["status"] == "comparable" and comparison["coordinate_space"] == "exif-oriented-submitted"
+             and "alignment" not in comparison and carrier.format == "PNG" and carrier.mode == "RGB"
+             and min(sub.size) >= 160, "Unsupported exact orientation scope")
+    textured = list(_textured_boxes(sub))
+    proof = comparison["exact_orientation"]
+    candidates = []
+    for key, operation in ((None, None), *ORIENTATIONS.items()):
+        with ref.copy() if operation is None else ref.transpose(operation) as projection:
+            if projection.size != sub.size:
+                continue
+            matches = []
+            for row, column, bounds in textured:
+                with projection.crop(bounds) as a, sub.crop(bounds) as b:
+                    if _same_pixels(a, b):
+                        matches.append([row, column])
+            quadrants = {(row > 2, col > 2) for row, col in matches if row != 2 and col != 2}
+            if (len(matches) < 12 or len({row for row, _ in matches}) < 4 or len({col for _, col in matches}) < 4
+                    or len(quadrants) != 4):
+                continue
+            with ImageChops.difference(projection, sub) as difference:
+                r, g, b = difference.split()
+                with r, g, b, ImageChops.lighter(r, g) as rg, ImageChops.lighter(rg, b) as maximum:
+                    mismatch = maximum.point([0] + [255] * 255)
+            matched = mismatch.histogram()[0]
+            box = mismatch.getbbox()
+            area = sub.width * sub.height
+            if 100 * matched >= 65 * area and (box is None or 5 * (box[2] - box[0]) * (box[3] - box[1]) <= 2 * area):
+                candidates.append(({"transform": key, "matched_pixels": matched, "matched_tiles": matches,
+                                    "rgb_sha256": _hash(projection.tobytes())}, mismatch))
+            else:
+                mismatch.close()
+    with ExitStack() as stack:
+        for _, mismatch in candidates:
+            stack.enter_context(mismatch)
+        _require(len(candidates) == 1 and proof == candidates[0][0] and proof["transform"] in ORIENTATIONS,
+                 "Exact orientation or textured match differs from the sources")
+        op = ORIENTATIONS[proof["transform"]]
+        inverse = {Image.Transpose.ROTATE_90: Image.Transpose.ROTATE_270,
+                   Image.Transpose.ROTATE_270: Image.Transpose.ROTATE_90}.get(op, op)
+        return candidates[0][1].copy(), inverse
+
+
+def _orientation_bounds(box, submitted_size, inverse):
+    with Image.new("1", submitted_size) as indicator:
+        indicator.paste(1, box)
+        with indicator.transpose(inverse) as source:
+            return source.getbbox()
+
+
 def _image(stack, blobs, asset, filename, mode, dimensions):
     _require(asset["file"] == filename and filename in blobs, "A named evidence PNG is missing or inconsistent")
     source = blobs.pop(filename)
@@ -216,7 +294,7 @@ def _image(stack, blobs, asset, filename, mode, dimensions):
 
 
 def review(export, earlier, submitted):
-    """Check exact source and crop bytes, reported mask geometry and v3 scoring."""
+    """Check source and crop bytes, mask geometry and the supported comparison proofs."""
     document = json.loads(_read(export, MAX_JSON_BYTES), object_pairs_hook=_record)
     _require(type(document) is dict and set(document) == {"comparison", "pngs"}, "Expected the browser comparison JSON")
     comparison, assets = document["comparison"], document["pngs"]
@@ -234,10 +312,16 @@ def review(export, earlier, submitted):
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
+        oriented = comparison["schema"] == ORIENTATION_SCHEMA
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
             expected_mask = _resize_replay(comparison, ref, sub, carrier)
+            overlap = (0, 0, sub.width, sub.height)
+        elif oriented:
+            carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
+            mismatch, inverse = _orientation_replay(comparison, ref, sub, carrier)
+            stack.enter_context(mismatch)
             overlap = (0, 0, sub.width, sub.height)
         else:
             dx, dy, overlap = _geometry(comparison, ref, sub)
@@ -250,6 +334,9 @@ def review(export, earlier, submitted):
         if resized:
             _require(expected_mask is not None and mask.tobytes() == (expected_mask.astype("uint8") * 255).tobytes(),
                      "Difference mask pixels differ from the recomputed resize comparison")
+        if oriented:
+            with ImageChops.subtract(mask, mismatch) as unsupported:
+                _require(not unsupported.getbbox(), "Difference mask marks a pixel that matches the oriented source")
         covered = stack.enter_context(Image.new("L", sub.size))
         drawn = ImageDraw.Draw(covered)
         retained = 0
@@ -257,7 +344,12 @@ def review(export, earlier, submitted):
             box = _bounds(region, sub.size)
             _require(_contains(overlap, box), "Region extends outside the recorded overlap")
             earlier_box = _bounds(region.get("reference_region", region), ref.size)
-            expected_box = _resize_bounds(box, ref, sub, crop) if resized else _translation(box, dx, dy)
+            if resized:
+                expected_box = _resize_bounds(box, ref, sub, crop)
+            elif oriented:
+                expected_box = _orientation_bounds(box, sub.size, inverse)
+            else:
+                expected_box = _translation(box, dx, dy)
             _require(earlier_box == expected_box, "Region coordinates conflict with the source mapping")
             width, height = box[2] - box[0], box[3] - box[1]
             count = region["selected_pixels"]

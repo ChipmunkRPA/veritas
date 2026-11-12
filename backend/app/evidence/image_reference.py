@@ -16,6 +16,7 @@ from app.detectors.image import (
     reference_compare,
     reference_crop_resize,
     reference_png_exact_resize,
+    reference_png_orientation,
     reference_resize,
 )
 
@@ -99,26 +100,31 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
         with ImageOps.exif_transpose(original) as oriented_before, ImageOps.exif_transpose(questioned) as oriented_after:
             reference = np.array(oriented_before.convert("RGB"))
             submitted = np.array(oriented_after.convert("RGB"))
-        resize_schema = None
+        schema = None
         if (allow_integer_alignment or allow_proportional_resize) and not np.array_equal(reference, submitted):
-            result, mask = reference_alignment.compare(reference, submitted, questioned)
+            result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
+                            if allow_proportional_resize else (None, None))
+            if result is not None:
+                schema = reference_png_orientation.SCHEMA
+            else:
+                result, mask = reference_alignment.compare(reference, submitted, questioned)
             if allow_proportional_resize and result["status"] == "integer_alignment_unresolved":
                 if reference.shape != submitted.shape:
                     result, mask = reference_resize.compare(reference, submitted, questioned)
-                    resize_schema = RESIZE_SCHEMA
+                    schema = RESIZE_SCHEMA
                 if result["status"] != "comparable" and supported_crop_resize(questioned, reference.shape[1::-1]):
                     candidate, selection = reference_crop_resize.compare(reference, submitted, questioned)
                     if accepted_crop_resize(candidate, submitted.shape[1::-1]):
-                        result, mask, resize_schema = candidate, selection, CROP_RESIZE_SCHEMA
+                        result, mask, schema = candidate, selection, CROP_RESIZE_SCHEMA
                 if result["status"] != "comparable":
                     exact, selection = reference_png_exact_resize.compare(reference, submitted, questioned)
                     if exact is not None:
-                        result, mask, resize_schema = exact, selection, EXACT_PNG_CROP_RESIZE_SCHEMA
+                        result, mask, schema = exact, selection, EXACT_PNG_CROP_RESIZE_SCHEMA
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
     aligned = "alignment" in result
-    output = {"schema": resize_schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
-              "coordinate_space": "exif-oriented-submitted" if aligned or resize_schema else "exif-oriented-original",
+    output = {"schema": schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
+              "coordinate_space": "exif-oriented-submitted" if aligned or schema else "exif-oriented-original",
               "reference": {"sha256": hashlib.sha256(before).hexdigest(), "width": reference.shape[1], "height": reference.shape[0]},
               "submitted": {"sha256": hashlib.sha256(after).hexdigest(), "width": submitted.shape[1], "height": submitted.shape[0]},
               **result, "interpretation": "Regions show differences that survived the comparison settings. Ordinary processing can produce differences. The earlier file's authenticity and the cause of changes require separate evidence."}

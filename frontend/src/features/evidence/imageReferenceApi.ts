@@ -43,10 +43,26 @@ export interface ImageReferenceRecord {
     matched_tiles: [number, number][]
     rgb_sha256: string
   }
+  exact_orientation?: {
+    transform: keyof typeof orientationLabels
+    matched_pixels: number
+    matched_tiles: [number, number][]
+    rgb_sha256: string
+  }
   additional_regions?: number
 }
 
 export const exactPngCropResizeSchema = 'chipmunk.image-reference-comparison/5'
+export const exactPngOrientationSchema = 'chipmunk.image-reference-comparison/6'
+export const orientationLabels = {
+  rotate_90_clockwise: '90-degree clockwise rotation',
+  rotate_180: '180-degree rotation',
+  rotate_90_counterclockwise: '90-degree counterclockwise rotation',
+  mirror_horizontal: 'left-to-right reflection',
+  mirror_vertical: 'top-to-bottom reflection',
+  reflect_main_diagonal: 'main-diagonal reflection',
+  reflect_other_diagonal: 'opposite-diagonal reflection',
+} as const
 
 export interface ImageReferenceResult {
   comparison: ImageReferenceRecord
@@ -91,6 +107,12 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       || !Array.isArray(comparison.supported_resize_kernels)
       || !comparison.supported_resize_kernels.every(kernel => typeof kernel === 'string'))) {
     throw new Error('The server returned an incomplete exact resize comparison.')
+  }
+  const orientation = comparison.exact_orientation
+  if (comparison.schema === exactPngOrientationSchema && (comparison.status !== 'comparable' || !orientation
+      || !Object.prototype.hasOwnProperty.call(orientationLabels, orientation.transform)
+      || !Number.isSafeInteger(orientation.matched_pixels) || !Array.isArray(orientation.matched_tiles))) {
+    throw new Error('The server returned an incomplete orientation comparison.')
   }
   return result
 }

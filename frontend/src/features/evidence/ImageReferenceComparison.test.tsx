@@ -146,6 +146,27 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByText('The copies could not be aligned reliably.')).toBeTruthy()
   })
 
+  it('explains a proved orientation and keeps the earlier crop in its own source coordinates', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/6'
+    result.comparison.exact_orientation = {
+      transform: 'rotate_90_clockwise', matched_pixels: 75_000, matched_tiles: [[1, 1]], rgb_sha256: hash,
+    }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/90-degree clockwise rotation/)).toBeTruthy()
+    expect(screen.getByText(/75,000 submitted pixels match exactly/)).toBeTruthy()
+    expect(screen.getByText('x 134, y 76 · 90 × 70 px')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('explains resize comparison and preserves both native coordinates in the JSON download', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/3'

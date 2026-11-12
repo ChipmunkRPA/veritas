@@ -388,7 +388,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             document_passage_coverage.verify_source(document, text, mapping, result=frozen)
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
-            document_scope.validate_checkpoint_agreement(document, text, result=frozen)
+            document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
@@ -569,7 +569,8 @@ def _writing_agreement_view(coverage: dict) -> dict | None:
     record = coverage.get(document_scope.CHECKPOINT_AGREEMENT_KEY)
     if record is None:
         return None
-    return {"ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
+    return {"email_reply_body": record["schema"] == document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA,
+            "ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
 
 
 def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None) -> dict:

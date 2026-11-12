@@ -97,7 +97,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_matched_context.verify_source(evidence, text, mapping)
     document_paragraph_priority.verify_source(evidence, text, mapping)
     document_passage_coverage.verify_source(evidence, text, mapping)
-    document_scope.validate_checkpoint_agreement(evidence, text)
+    document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
     packet_count = window_count = images = 0

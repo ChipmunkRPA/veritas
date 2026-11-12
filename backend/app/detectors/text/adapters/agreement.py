@@ -61,14 +61,31 @@ def _supported_source(decoded: dict) -> bool:
     return False
 
 
+def _email_reply_body(decoded: dict) -> list[dict] | None:
+    meta = decoded.get("meta") or {}
+    if meta.get("method") != "email":
+        return None
+    return document_scope.email_agreement_body_spans(
+        decoded.get("source_map") or [], meta.get("email") or {}, len(decoded["text"]),
+    )
+
+
 def candidates(decoded: dict, primary: dict) -> list[dict] | None:
     from app.detectors.text.extract import _ocr_language
 
     text = decoded["text"]
-    if (len(decoded["paragraphs"]) not in {1, 4}
-            or not 68 <= len(text.split(None, 420)) <= 420
-            or len(decoded["paragraphs"]) == 1 and len(decoded["sentences"]) != 4
-            or not _supported_source(decoded)):
+    body_spans = _email_reply_body(decoded)
+    if body_spans is None:
+        if not _supported_source(decoded):
+            return None
+        paragraphs, sentences = len(decoded["paragraphs"]), len(decoded["sentences"])
+    else:
+        end = body_spans[-1]["end"]
+        text = text[:end]
+        paragraphs = len(body_spans)
+        sentences = sum(sentence["end"] <= end for sentence in decoded["sentences"])
+    if (paragraphs not in {1, 4} or not 68 <= len(text.split(None, 420)) <= 420
+            or paragraphs == 1 and sentences != 4):
         return None
     language = _ocr_language(text)
     if language.get("code") != "en" or language.get("status") != "supported":
@@ -76,7 +93,8 @@ def candidates(decoded: dict, primary: dict) -> list[dict] | None:
     if not document_matched_context.matches(primary["detector_id"], primary["version"], primary["model_revisions"]):
         return None
     source = primary["details"]["text_evidence"]
-    windows = [window for window in source["windows"] if window["score"] >= .5]
+    windows = [window for window in source["windows"] if document_scope.checkpoint_window_in_scope(window, body_spans)
+               and window["score"] >= .5]
     return windows[:document_scope.CHECKPOINT_AGREEMENT_MAX]
 
 
@@ -116,7 +134,12 @@ def record(ctx, detected: dict, decoded: dict) -> None:
     value = {"schema": document_scope.CHECKPOINT_AGREEMENT_SCHEMA, "ranges": recorded,
              "authorship_confidence_contribution": 0}
     document = {"coverage": {KEY: value}, "source": {"chars": len(text)}}
-    document_scope.validate_checkpoint_agreement(document, text)
+    if (body_spans := _email_reply_body(decoded)) is not None:
+        value.update(schema=document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA, body_spans=body_spans)
+        document["source"]["method"] = "email"
+        document["coverage"]["email"] = decoded["meta"]["email"]
+    mapping = decoded.get("source_map") if body_spans is not None else None
+    document_scope.validate_checkpoint_agreement(document, text, mapping=mapping)
     eligible = [window for window in windows if document_matched_context.one_complete_window(window["token_coverage"])]
     responses = _review(ctx, text, eligible)
     if responses:
@@ -130,7 +153,7 @@ def record(ctx, detected: dict, decoded: dict) -> None:
                            "state": "corroborated" if score >= .5 else "different"}
                 measured.append(row)
             value["ranges"] = measured
-            document_scope.validate_checkpoint_agreement(document, text)
+            document_scope.validate_checkpoint_agreement(document, text, mapping=mapping)
         except (AttributeError, KeyError, TypeError, ValueError, OverflowError) as error:
             value["ranges"] = recorded
             ctx.log.warning("writing_review.invalid_response", error_type=type(error).__name__)

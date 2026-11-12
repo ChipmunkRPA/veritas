@@ -29,7 +29,7 @@ One held generated-edit excerpt ran through the signed test checkout and the rea
 
 ## Reproduce
 
-Use the existing pinned agreement and parent panel directories as `$panels`. The fixture renderer uses the locally installed DejaVu Sans file whose SHA-256 is in the receipt. Set `$run` to a new private directory. The generated files and source prose remain local.
+Use the original code version for this replay and the existing pinned agreement and parent panel directories as `$panels`. The fixture renderer uses the locally installed DejaVu Sans file whose SHA-256 is in the receipt. Set `$run` to a new private directory. The generated files and source prose remain local. [Original code version](https://github.com/ChipmunkRPA/veritas/tree/668855b6257d82cc7559c0d62401a449607539f8)
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1

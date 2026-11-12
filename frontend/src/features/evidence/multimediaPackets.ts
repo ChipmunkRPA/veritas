@@ -260,7 +260,8 @@ export interface DocumentEvidenceSet extends SetBase {
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     local_passage_coverage?: DocumentPassageCoverage;
-    writing_second_check?: { schema: 'document-writing-second-check/1'; authorship_confidence_contribution: 0;
+    writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2'; authorship_confidence_contribution: 0;
+      body_spans?: { start: number; end: number }[];
       ranges: { start: number; end: number; spans: { start: number; end: number }[];
         state: 'corroborated' | 'different' | 'unavailable' }[] };
     matched_context_review?: DocumentMatchedContextReview & { eligible_sentences: number; selected_sentences: number };

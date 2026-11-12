@@ -446,15 +446,19 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             groups.setdefault((a, b), []).append(output_window)
     candidates = [key for key, values in groups.items() if any(document_scope.supports_inspection(w) for w in values)]
     matched = sorted(key for key in candidates if document_matched_context.packet_record(groups[key]) is not None)
+    reply_review = bool(checkpoint_review and checkpoint_review["schema"] == document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA)
+    priority = (sorted({(row["start"], row["end"]) for row in checkpoint_review["ranges"]}.intersection(candidates))
+                if reply_review else matched)
     # Ratios and classifier outputs are not commensurate. Reserve half the
     # bounded display for disagreement so selecting corroborated passages does
     # not systematically hide real opposing observations elsewhere in the file.
-    remaining = set(candidates).difference(matched)
+    remaining = set(candidates).difference(priority)
     conflicts = sorted(key for key in remaining if any(document_scope.inspection_direction(w) is False for w in groups[key]))
     agreed = sorted(remaining.difference(conflicts))
-    selected = matched + conflicts[:MAX_PACKETS // 2]
+    reserved = min(MAX_PACKETS // 2, MAX_PACKETS - len(priority))
+    selected = priority + conflicts[:reserved]
     selected += agreed[:MAX_PACKETS - len(selected)]
-    selected += conflicts[MAX_PACKETS // 2:MAX_PACKETS // 2 + MAX_PACKETS - len(selected)]
+    selected += conflicts[reserved:reserved + MAX_PACKETS - len(selected)]
     selected.sort()
     opposing_total = sum(document_scope.inspection_direction(w) is False for values in groups.values() for w in values)
     opposing_shown = sum(document_scope.inspection_direction(w) is False for key in selected for w in groups[key])
@@ -475,7 +479,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if checkpoint_review is not None:
         document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
-        document_scope.validate_checkpoint_agreement(document, text, result=result)
+        document_scope.validate_checkpoint_agreement(document, text, result=result, mapping=mapping)
+        if reply_review:
+            document["coverage"]["selection_policy"] = (
+                "Passages revisited by the second reply-body check are prioritized for inclusion. Remaining passages use the standard "
+                "disagreement and source-order policy."
+            )
     if matched_review is not None:
         document["coverage"][document_matched_context.KEY] = matched_review
         document["coverage"]["selection_policy"] = (
@@ -616,7 +625,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"], result=result)
-            document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result)
+            document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)

@@ -114,6 +114,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {writingAgreement && <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 text-body font-medium text-text">Second writing check</h3>
       <p className="mt-2 mb-0">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
+      {writingAgreement.schema === 'document-writing-second-check/2' && <p className="mt-2 mb-0">
+        This check covers contexts wholly inside the reply body. Text marked as a quote or signature and contexts that cross those boundaries are outside this check.
+      </p>}
       {writingAgreement.ranges.length === 0 ? <p className="mt-2 mb-0">The first check supplied no AI-like contexts for this review.</p>
         : <ul className="mb-0 pl-4 list-disc">{writingAgreement.ranges.map((row) => {
           const packet = set.packets.find((item) => item.focus.start === row.start && item.focus.end === row.end)

@@ -55,6 +55,38 @@ def test_second_check_excludes_unsupported_source_geometry(method, anchor, meta)
     assert not agreement._supported_source(decoded)
 
 
+def test_reply_scope_replays_the_exact_body_and_rejects_quoted_context():
+    text, window, _, _ = source()
+    body_end = len(text)
+    text += "\n\n> A previous message."
+    email = {"body_content_type": "text/plain", "body_part": "1.1"}
+    mapping = [
+        {"start": 0, "end": body_end, "kind": "email", "mime_part": "1.1", "quote_role": "body",
+         "source_ranges": [[0, body_end, 0, body_end]]},
+        {"start": body_end + 2, "end": len(text), "kind": "email", "mime_part": "1.1", "quote_role": "quoted",
+         "source_ranges": [[body_end + 2, len(text), body_end + 2, len(text)]]},
+    ]
+    scope = document_scope.email_agreement_body_spans(mapping, email, len(text))
+    assert scope == [{"start": 0, "end": body_end}]
+    included = {**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"], "state": "unavailable"}
+    record = {"schema": document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA, "body_spans": scope,
+              "authorship_confidence_contribution": 0, "ranges": [included]}
+    document = {"source": {"chars": len(text), "method": "email"}, "coverage": {"email": email, agreement.KEY: record}}
+    document_scope.validate_checkpoint_agreement(document, text, mapping=mapping)
+    wrong_source = deepcopy(document)
+    wrong_source["source"]["method"] = "pymupdf"
+    with pytest.raises(ValueError, match="Invalid second-check email body scope"):
+        document_scope.validate_checkpoint_agreement(wrong_source)
+    altered_scope = deepcopy(document)
+    altered_scope["coverage"][agreement.KEY]["body_spans"][0]["end"] -= 1
+    with pytest.raises(ValueError, match="scope differs from the mapped reply body"):
+        document_scope.validate_checkpoint_agreement(altered_scope, text, mapping=mapping)
+    altered_range = deepcopy(document)
+    altered_range["coverage"][agreement.KEY]["ranges"][0]["spans"][1] = {"start": body_end + 2, "end": len(text)}
+    with pytest.raises(ValueError, match="Invalid second-check source coordinates"):
+        document_scope.validate_checkpoint_agreement(altered_range)
+
+
 def test_review_timeout_preserves_a_parent_budget_and_primary_response(monkeypatch):
     text, window, evidence, detected = source()
     monkeypatch.setattr(agreement, "candidates", lambda *_: [window])

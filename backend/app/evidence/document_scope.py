@@ -20,6 +20,7 @@ PASSAGE_COVERAGE_MAX_RANGES = 256
 PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
 CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
 CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
+CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
 CHECKPOINT_AGREEMENT_MAX = 6
 CHECKPOINT_AGREEMENT_LABELS = {
     "corroborated": "Both checks gave an AI-like response",
@@ -35,8 +36,69 @@ def check_range(span: dict, size: int) -> tuple[int, int]:
     return start, end
 
 
-def validate_checkpoint_agreement(document: dict, text: str | None = None, *, result: dict | None = None) -> None:
-    record = (document.get("coverage") or {}).get(CHECKPOINT_AGREEMENT_KEY)
+def email_agreement_body_spans(mapping: list[dict], email: dict, size: int) -> list[dict] | None:
+    """Identify the one mapped reply body before a trailing quotation or signature."""
+    part = email.get("body_part")
+    if email.get("body_content_type") != "text/plain" or not part or not mapping:
+        return None
+    body = []
+    previous = 0
+    excluded = False
+    for block in mapping:
+        start, end = check_range(block, size)
+        role = block.get("quote_role")
+        if (start != (previous + 2 if previous else 0) or block.get("kind") != "email"
+                or block.get("mime_part") != part or not block.get("source_ranges")):
+            return None
+        if role == "body" and not excluded:
+            body.append({"start": start, "end": end})
+        elif role in {"quoted", "signature"}:
+            excluded = True
+        else:
+            return None
+        previous = end
+    return body if excluded and len(body) in {1, 4} and previous == size else None
+
+
+def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> bool:
+    return body_spans is None or all(
+        any(block["start"] <= span["start"] < span["end"] <= block["end"] for block in body_spans)
+        for span in [window["focus"], *window["spans"]]
+    )
+
+
+def validate_checkpoint_agreement(
+    document: dict, text: str | None = None, *, result: dict | None = None, mapping: list[dict] | None = None,
+) -> None:
+    coverage = document.get("coverage") or {}
+    record = coverage.get(CHECKPOINT_AGREEMENT_KEY)
+    body_spans = None
+    if record is not None:
+        fields = {"schema", "ranges", "authorship_confidence_contribution"}
+        size = document["source"]["chars"]
+        if record.get("schema") == CHECKPOINT_AGREEMENT_EMAIL_SCHEMA:
+            fields.add("body_spans")
+            body_spans = record.get("body_spans")
+            email = coverage.get("email")
+            if (document["source"].get("method") != "email" or not isinstance(email, dict)
+                    or email.get("body_content_type") != "text/plain"
+                    or not isinstance(email.get("body_part"), str) or not email["body_part"]
+                    or not isinstance(body_spans, list) or len(body_spans) not in {1, 4}):
+                raise ValueError("Invalid second-check email body scope")
+            boundaries = [check_range(block, size) for block in body_spans]
+            if (any(set(block) != {"start", "end"} for block in body_spans) or boundaries[0][0] != 0
+                    or any(left[1] + 2 != right[0] for left, right in zip(boundaries, boundaries[1:]))
+                    or boundaries[-1][1] + 2 >= size
+                    or mapping is not None and email_agreement_body_spans(mapping, email, size) != body_spans):
+                raise ValueError("Second-check email scope differs from the mapped reply body")
+        elif record.get("schema") != CHECKPOINT_AGREEMENT_SCHEMA:
+            raise ValueError("Unknown second writing check schema")
+        ranges = record["ranges"]
+        if (set(record) != fields or type(record["authorship_confidence_contribution"]) is not int
+                or record["authorship_confidence_contribution"] != 0
+                or not isinstance(ranges, list) or len(ranges) > CHECKPOINT_AGREEMENT_MAX
+                or text is not None and len(text) != size):
+            raise ValueError("Invalid second writing check")
     if result is not None:
         for signal in result.get("signals", []):
             evidence = (signal.get("details") or {}).get("text_evidence") or {}
@@ -47,6 +109,7 @@ def validate_checkpoint_agreement(document: dict, text: str | None = None, *, re
             expected = [
                 {**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"]}
                 for window in evidence["windows"] if float.fromhex(window["score_exact_hex"]) >= .5
+                and checkpoint_window_in_scope(window, body_spans)
             ][:CHECKPOINT_AGREEMENT_MAX]
             if expected != [
                 {key: row[key] for key in ("start", "end", "spans", "input_sha256")} for row in record["ranges"]
@@ -58,15 +121,6 @@ def validate_checkpoint_agreement(document: dict, text: str | None = None, *, re
                 raise ValueError("Second writing check is missing from the frozen result")
     if record is None:
         return
-    size = document["source"]["chars"]
-    ranges = record["ranges"]
-    if (set(record) != {"schema", "ranges", "authorship_confidence_contribution"}
-            or record["schema"] != CHECKPOINT_AGREEMENT_SCHEMA
-            or type(record["authorship_confidence_contribution"]) is not int
-            or record["authorship_confidence_contribution"] != 0
-            or not isinstance(ranges, list) or len(ranges) > CHECKPOINT_AGREEMENT_MAX
-            or text is not None and len(text) != size):
-        raise ValueError("Invalid second writing check")
     previous = 0
     for row in ranges:
         focus = check_range(row, size)
@@ -76,7 +130,8 @@ def validate_checkpoint_agreement(document: dict, text: str | None = None, *, re
         if (focus[0] < previous or len(spans) not in {2, 3} or focus not in spans
                 or any(a[1] > b[0] for a, b in zip(spans, spans[1:]))
                 or not re.fullmatch(r"[0-9a-f]{64}", row["input_sha256"])
-                or state not in CHECKPOINT_AGREEMENT_LABELS):
+                or state not in CHECKPOINT_AGREEMENT_LABELS
+                or not checkpoint_window_in_scope({"focus": row, "spans": row["spans"]}, body_spans)):
             raise ValueError("Invalid second-check source coordinates")
         if state != "unavailable":
             fields |= {"response_exact_hex", "tokens"}
